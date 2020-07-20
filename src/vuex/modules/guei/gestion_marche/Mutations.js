@@ -503,7 +503,11 @@ export const AJOUTER_HISTORIQUE_ENTREPRISE = (state, nouvel_objet) => {
     // state.titres = [...nouvel_objet, ...state.titres]
 
 }
+export const SUPPRIME_TOUT_HISTORIQUE_ENTREPRISE = (state, nouvel_objet) => {
+    state.historiqueEntreprise.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
 
+}
 
 export const SUPPRIMER_HISTORIQUE_ENTREPRISE = (state, id) => {
     state.historiqueEntreprise = state.historiqueEntreprise.filter(titre => titre.id != id)

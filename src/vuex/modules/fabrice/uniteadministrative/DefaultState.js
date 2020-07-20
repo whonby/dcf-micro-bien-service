@@ -1,7 +1,7 @@
 const defaultState = {
-  typeTextes: [],
+  // typeTextes: [],
   uniteAdministratives: [],
-  archivageDocuments: [],
+  // archivageDocuments: [],
   budgetGeneral: [],
   historiquebudgetGeneral: [],
   uniteZones: [],

@@ -1116,3 +1116,26 @@ export function supprimerHistoriqueEntreprise({ commit }, id) {
         })
 
 }
+
+export function supprimerToutHistoriqueEntreprise({ commit }, objetAjoute) {
+    this.$app.$loading(true)
+    axios.post('/deleteToutHistoEntreprise', objetAjoute).then(res => {
+        if (res.status == 201) {
+            this.$app.$notify({
+                title: 'success',
+                text: 'Enregistrement effectuer',
+                type: "success"
+            });
+            commit('SUPPRIME_TOUT_HISTORIQUE_ENTREPRISE', res.data)
+            this.$app.$loading(false)
+        }
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(false)
+        this.$app.$notify({
+            title: 'Success',
+            text: "Enregistrement effectué avec success",
+            type: "success"
+        });
+    })
+}

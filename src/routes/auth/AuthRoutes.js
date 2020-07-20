@@ -3,9 +3,17 @@ import Login from '../../pages/auth/Login.vue'
 import Logout from '../../pages/auth/Logout.vue'
 import GestionCF from "../../pages/gestionCF/GestionCF";
 import DetailCF from "../../pages/gestionCF/DetailCF";
-
+import photoProfil from "../../pages/auth/modifierPhotoProfil/photoProfil";
 
 const AuthRoutes = [
+
+
+    {
+        path: '/photo-Profil',
+        name: "photoProfil",
+
+        component: photoProfil
+    },
     {
         path: '/connexion',
        name:"Login",

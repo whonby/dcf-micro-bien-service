@@ -43,7 +43,7 @@ export const getterpermissionConge = state => state.permissionConge;
 export const classificationGradeFonction = state => state.classificationGradeFonction;
 
 export const contrat_resilie = state => state.contrat_resilie
-
+export const sauvegardePhoto = state => state.sauvegardePhoto.sort((a, b) => (a.id > b.id ? 1 : -1));
 export const fonctionBudgetaire = state =>
     state.fonctionBudgetaire.sort((a, b) => (a.id > b.id ? 1 : -1));
 

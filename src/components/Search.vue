@@ -3,13 +3,13 @@
    
                          
 
-  <!-- <div id="search">
+  <div id="search">
    
 
        <div class="btn-group">
               <button data-toggle="dropdown"
                 style="color: white;"
-              class="tip-bottom btn dropdown-toggle">{{afficheNomUtilisateur}} <span class="caret"></span></button>
+              class="tip-bottom btn dropdown-toggle">MON PROFIL <span class="caret"></span></button>
               <ul class="dropdown-menu">
                 
  <li >
@@ -33,7 +33,7 @@
 
 
             </div>
-            </div> -->
+            </div>
                 <!--<input type="text" style="background-color: black;" readonly />-->
 
 

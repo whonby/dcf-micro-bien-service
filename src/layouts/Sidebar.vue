@@ -30,8 +30,8 @@
        </li> -->
        <li>
   <center>
-      <router-link tag="a" :to="{ name: 'Profil' }">
-        <img src="../../public/lien/img/imgUser/photoDefo.png" name="aboutme" width="100" height="20" class="img-circle">
+      <router-link tag="a" :to="{ name: 'photoProfil' }">
+        <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" width="100" height="20" class="img-circle">
         </router-link>
       <h6 style="color:orange;font-size:14px">{{afficheNomUtilisateur}}   <span style="color:#ffffff">({{afficheRoleUtilisateur}})</span></h6>
 
@@ -131,7 +131,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
+import {mapGetters, mapState, mapMutations, mapActions } from "vuex";
 import {admin,dcf} from "../Repositories/Auth"
 
 export default {
@@ -140,10 +140,27 @@ export default {
     // console.log(this.$store.state);
   },
 
+
   computed: {
       ...mapState('parametrageMenu', {
      active_el: state => state.active_el
   }),
+  ...mapGetters('personnelUA', ['sauvegardePhoto']),
+
+
+
+  AffichePhoto() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sauvegardePhoto.find(qtreel => qtreel.user_id == id);
+
+      if (qtereel) {
+        return qtereel.fichier;
+      }
+      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/1_!1595119277.jpg "
+        }
+      };
+    },
   afficheNomUtilisateur(){
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
@@ -154,6 +171,12 @@ afficheRoleUtilisateur(){
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
 return objJson.user_role.role.libelle
+
+},
+  afficheIdUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.id
 
 },
   },

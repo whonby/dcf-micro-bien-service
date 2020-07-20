@@ -653,7 +653,8 @@ normeDuService() {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.getterplanOrganisationUa;
-    doc.text(98,10,"Liste Plan Organigramme Ua")
+    doc.setFontSize(8)
+    doc.text(78,10,"LISTE DES PLANS ORGANIGRAMMES DES UA")
   doc.autoTable(this.getColumns(),data)
 doc.save('PlanOrganigrammeUa.pdf')
 return 0
