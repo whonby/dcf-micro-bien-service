@@ -9,7 +9,8 @@
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                             <h5>Ajouter un groupe</h5>
 
-
+                            <a @click.prevent="ajouterGroupe" class="btn btn-primary"
+                               href="#">Valider</a>
                         </div>
                         <div class="widget-content nopadding">
                      <div class="row-fluid">
@@ -1814,7 +1815,74 @@
                                                     <h5>MISSIONS</h5>
                                                 </div>
                                                 <div class="widget-content">
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Fonctions</th>
+                                                            <th>Ajouter</th>
+                                                            <th>Mofications</th>
+                                                            <th>Consulter</th>
+                                                            <th>Imprimer</th>
+                                                            <th>Suppimer</th>
+                                                            <th>Exporter</th>
+                                                            <th>Importer</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr class="odd gradeX">
+                                                            <td>Categories Missions </td>
+                                                            <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="categories_mission.ajouter" >
+                                                                <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
+                                                                <label slot="off-label"></label>
+                                                            </p-check></td>
+                                                            <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%); "    v-model="categories_mission.modifier" >
+                                                                <label slot="off-label"></label>
+                                                            </p-check></td>
+                                                            <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%); "  v-model="categories_mission.consulter" >
+                                                                <label slot="off-label"></label>
+                                                            </p-check></td>
+                                                            <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%); "  v-model="categories_mission.imprimer" >
+                                                                <label slot="off-label"></label>
+                                                            </p-check></td>
+                                                            <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%); " v-model="categories_mission.supprimer" >
+                                                                <label slot="off-label"></label>
+                                                            </p-check></td>
+                                                            <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%); " v-model="categories_mission.exporter" >
+                                                                <label slot="off-label"></label>
+                                                            </p-check></td>
+                                                            <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%); "  v-model="categories_mission.importer" >
+                                                                <label slot="off-label"></label>
+                                                            </p-check></td>
+                                                        </tr>
+                                                        <tr class="even gradeC">
+                                                            <td>Norme Mission</td>
+                                                            <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="norme_mission.ajouter" >
+                                                                <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
+                                                                <label slot="off-label"></label>
+                                                            </p-check></td>
+                                                            <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%); "    v-model="norme_mission.modifier" >
+                                                                <label slot="off-label"></label>
+                                                            </p-check></td>
+                                                            <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%); "  v-model="norme_mission.consulter" >
+                                                                <label slot="off-label"></label>
+                                                            </p-check></td>
+                                                            <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%); "  v-model="norme_mission.imprimer" >
+                                                                <label slot="off-label"></label>
+                                                            </p-check></td>
+                                                            <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%); " v-model="norme_mission.supprimer" >
+                                                                <label slot="off-label"></label>
+                                                            </p-check></td>
+                                                            <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%); " v-model="norme_mission.exporter" >
+                                                                <label slot="off-label"></label>
+                                                            </p-check></td>
+                                                            <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%); "  v-model="norme_mission.importer" >
+                                                                <label slot="off-label"></label>
+                                                            </p-check></td>
+                                                        </tr>
 
+
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
@@ -2540,6 +2608,16 @@
                     exporter:false,
                     importer:false,
                 },
+                categories_mission:{
+                    code: "CATEGORIES_MISSIONS",
+                    ajouter:false,
+                    modifier:false,
+                    consulter:false,
+                    imprimer:false,
+                    supprimer:false,
+                    exporter:false,
+                    importer:false,
+                },
 
 
               tableGroupe:[]
@@ -2557,6 +2635,89 @@
         methods: {
             // methode pour notre action
             ...mapActions('personnelUA', ['getTypeSalarie',"ajouterTypeSalarie","supprimerTypeSalarie","modifieTypeSalaire"]),
+            ajouterGroupe(){
+                this.tableGroupe.push(this.exercice)
+                this.tableGroupe.push(this.nature_section)
+                this.tableGroupe.push(this.sections)
+                this.tableGroupe.push(this.grand_nature_depense)
+                this.tableGroupe.push(this.type_unite_administrative)
+                this.tableGroupe.push(this.gestion_cf)
+                this.tableGroupe.push(this.type_finnancements)
+                this.tableGroupe.push(this.source_finnancement)
+                this.tableGroupe.push(this.structure_fonctionnelle)
+                this.tableGroupe.push(this.structure_programme)
+                this.tableGroupe.push(this.structure_geographique)
+                this.tableGroupe.push(this.structure_programmatique)
+                this.tableGroupe.push(this.structure_administrative)
+                this.tableGroupe.push(this.structure_economique)
+                this.tableGroupe.push(this.structure_decisionnelle)
+                this.tableGroupe.push(this.structure_acte)
+                this.tableGroupe.push(this.plan_fonctionnel)
+                this.tableGroupe.push(this.plan_programme)
+                this.tableGroupe.push(this.plan_programmatique)
+                this.tableGroupe.push(this.service_gestionnairee_credit)
+                this.tableGroupe.push(this.localisation_geographique)
+                this.tableGroupe.push(this.plan_economique)
+                this.tableGroupe.push(this.plan_decisionnel)
+                this.tableGroupe.push(this.plan_acte)
+                this.tableGroupe.push(this.pays)
+                this.tableGroupe.push(this.ville)
+
+                this.tableGroupe.push(this.commune)
+                this.tableGroupe.push(this.type_candidat)
+                this.tableGroupe.push(this.type_facture)
+                this.tableGroupe.push(this.ligne_exempte)
+                this.tableGroupe.push(this.type_analyse)
+                this.tableGroupe.push(this.banques)
+                this.tableGroupe.push(this.agence_banque)
+                this.tableGroupe.push(this.secteur_activite)
+                this.tableGroupe.push(this.entreprise)
+                this.tableGroupe.push(this.mode_paiement)
+                this.tableGroupe.push(this.type_marche)
+                this.tableGroupe.push(this.fammille_procedure)
+                this.tableGroupe.push(this.procedure_passation)
+                this.tableGroupe.push(this.role_membre_cojo)
+                this.tableGroupe.push(this.situation_matrimoniale)
+                this.tableGroupe.push(this.categorie_grade)
+                this.tableGroupe.push(this.grades)
+                this.tableGroupe.push(this.services)
+                this.tableGroupe.push(this.fonction_budgetaire)
+                this.tableGroupe.push(this.fonction_administrative)
+                this.tableGroupe.push(this.famille_emploi)
+                this.tableGroupe.push(this.classification_grade_emploi)
+                this.tableGroupe.push(this.type_acte)
+                this.tableGroupe.push(this.type_conges)
+                this.tableGroupe.push(this.niveau_etude)
+                this.tableGroupe.push(this.type_salarie)
+                this.tableGroupe.push(this.type_contrat)
+                this.tableGroupe.push(this.nature_entree)
+                this.tableGroupe.push(this.cause_inactivite)
+                this.tableGroupe.push(this.etat_immobilisation)
+                this.tableGroupe.push(this.groupe_equipement)
+                this.tableGroupe.push(this.famille_equipement)
+                this.tableGroupe.push(this.reference_prix)
+                this.tableGroupe.push(this.taux)
+                this.tableGroupe.push(this.equipement_type)
+                this.tableGroupe.push(this.norme_mission)
+                this.tableGroupe.push(this.categories_mission)
+                console.log(this.tableGroupe)
+               /* this.tableGroupe.push(this.reference_prix)
+                this.tableGroupe.push(this.reference_prix)
+                this.tableGroupe.push(this.reference_prix)
+                this.tableGroupe.push(this.reference_prix)
+                this.tableGroupe.push(this.reference_prix)
+                this.tableGroupe.push(this.reference_prix)
+                this.tableGroupe.push(this.reference_prix)
+                this.tableGroupe.push(this.reference_prix)
+                this.tableGroupe.push(this.reference_prix)
+                this.tableGroupe.push(this.reference_prix)*/
+
+
+
+
+
+
+            }
 
         }
     };
