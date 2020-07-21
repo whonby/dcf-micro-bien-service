@@ -1,4 +1,5 @@
-import axios from "../../../../request/immobilisation";
+// import axios from "../../../../request/immobilisation";
+import axios from '../../fabrice/SuiviImmobilisation/urls/api'
 import { asyncLoading } from 'vuejs-loading-plugin'
 var housecall = require("housecall");
 var queue = housecall({ concurrency: 2, cooldown: 1000 });

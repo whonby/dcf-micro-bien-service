@@ -1,4 +1,7 @@
-import axios from '../../../../request/parametreGeneraux'
+// import axios from '../../../../request/parametreGeneraux'
+
+import axios from '../../../../../urls/api_parametrage/api'
+
 import { asyncLoading } from 'vuejs-loading-plugin'
 
 

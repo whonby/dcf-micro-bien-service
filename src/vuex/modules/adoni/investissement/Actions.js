@@ -1,4 +1,5 @@
 import axios from '../../fabrice/bienService/urls/api'
+//import axios from '../../../../request/bienService'
 import { asyncLoading } from 'vuejs-loading-plugin'
 
 var housecall= require('housecall')
