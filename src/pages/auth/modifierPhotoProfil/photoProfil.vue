@@ -20,7 +20,7 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">Information utilisateur</a>
+                        <a data-toggle="tab" href="#tab1">Information utilisateur{{AfficheRecupereIdUser(afficheidUtilisateur)}}</a>
                       </li>
                        
                      

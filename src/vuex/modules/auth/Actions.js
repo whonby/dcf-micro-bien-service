@@ -1,6 +1,6 @@
-import apiGuest from './urls/urlGuest'
+import apiGuest from '../../../request/login'
 import router from '../../../routes/index'
-import axios from '../../../../urls/api_parametrage/api'
+import axios from '../../../request/parametreGeneraux'
 var housecall = require('housecall');
 var queue = housecall({ concurrency: 2, cooldown: 1000 });
 import { asyncLoading } from 'vuejs-loading-plugin'

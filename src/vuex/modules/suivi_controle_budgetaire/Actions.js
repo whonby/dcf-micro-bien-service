@@ -1,4 +1,4 @@
-import axios from './api_suivi_mission/api'
+import axios from '../../../request/mission'
 import { asyncLoading } from 'vuejs-loading-plugin'
 
 
