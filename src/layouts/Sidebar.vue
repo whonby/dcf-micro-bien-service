@@ -33,8 +33,8 @@
       <router-link tag="a" :to="{ name: 'photoProfil' }">
         <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" width="100" height="20" class="img-circle">
         </router-link>
-      <h6 style="color:orange;font-size:14px">{{afficheNomUtilisateur}}   <span style="color:#ffffff">({{afficheRoleUtilisateur}})</span></h6>
-
+      <h6 style="color:orange;font-size:14px">{{afficheNomUtilisateur}}</h6>
+      <span style="color:#ffffff;font-size:14px">({{afficheRoleUtilisateur}})</span>
 		</center>
        </li>
        

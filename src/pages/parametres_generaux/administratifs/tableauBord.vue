@@ -1,10 +1,6 @@
   
 <template>
 
-
-
-
-   
 <!--breadcrumbs-->
   
 <!--End-breadcrumbs-->
@@ -13,16 +9,7 @@
   <div class="container-fluid">
     <div class="quick-actions_homepage">
       <h4 style="text-align: center;color:red;font-weight:bold;font-size:15px">TABLEAU DE BORD</h4>
- <!-- <div class="flex">
-    <div class="square S" ><p>TA</p></div>
-    <div class="square I"><p>BL</p></div>
-    <div class="square D"><p>EAU</p></div>
-    <div class="square"><p></p></div>
-    <div class="square C"><p>DE</p></div>
-    <div class="square F"><p></p></div>
-    <div class="square F"><p>BO</p></div>
-    <div class="square F"><p>RD</p></div>
-  </div> -->
+ 
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
                                  <li class="active"><a data-toggle="tab" href="#tab4">BIENS & SERVICES</a></li>

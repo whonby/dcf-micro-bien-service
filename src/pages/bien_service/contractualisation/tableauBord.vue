@@ -157,9 +157,8 @@ export default {
             //     );
             // }); 
         }
-else{
+
 return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && element.type_marche_id == 6 || element.attribue == 0 && element.type_marche_id == 1)
-}
         
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
@@ -210,13 +209,8 @@ return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && el
             return colect 
           
         }
-else{
-return this.getActeEffetFinancierPersonnaliser45
-}
-        
-           
-        
 
+return this.getActeEffetFinancierPersonnaliser45
     },
 
 
@@ -236,10 +230,10 @@ return this.getActeEffetFinancierPersonnaliser45
             return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 4 ) 
             
         }
-else{
+
 return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 4 )
           
-}
+
                  
 
     },
@@ -260,10 +254,10 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficher
             return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 5);
            
         }
-else{
+
   return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5);
           
-}
+
        
         
 
@@ -373,26 +367,26 @@ budgetConsommerBienService() {
 
 
 
-afficheMarcheSuspendu(){
-return this.afficherLaListeDesMarche.filter(element => element.attribue == 7)
-},
-nombreDeMarchesuspendu(){
-  return this.afficheMarcheSuspendu.length;
-},
+// afficheMarcheSuspendu(){
+// return this.afficherLaListeDesMarche.filter(element => element.attribue == 7)
+// },
+// nombreDeMarchesuspendu(){
+//   return this.afficheMarcheSuspendu.length;
+// },
 
 
 
 
 
-  afficheMarcheEnCoursContratualisation(){
-return this.afficherLaListeDesMarche.filter(element => element.attribue == 1 )
-},
+//   afficheMarcheEnCoursContratualisation(){
+// return this.afficherLaListeDesMarche.filter(element => element.attribue == 1 )
+// },
 afficheMarcheEnPlanification(){
 return this.afficherLaListeDesMarche.filter(element => element.attribue == 0)
 },
-afficherLaListeDesMarche(){
-return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
-},
+// afficherLaListeDesMarche(){
+// return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
+// },
 nombreDeMarche(){
   return this.filtre_unite_admin.length;
 },
@@ -478,5 +472,5 @@ montantEnSolde(){
 </script>
 
 
-budgetConsommerBienService
+
 

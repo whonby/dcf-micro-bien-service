@@ -1,5 +1,4 @@
-// import axios from "../../../../request/gestionMarche"
-import axios from '../../guei/gestion_marche/url/api'
+import axios from "../../../../request/gestionMarche"
 var housecall = require('housecall');
 var queue = housecall({ concurrency: 2, cooldown: 1000 });
 import { asyncLoading } from 'vuejs-loading-plugin'
