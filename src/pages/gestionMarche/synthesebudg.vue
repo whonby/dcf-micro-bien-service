@@ -225,9 +225,9 @@
    <th style="width:10%;font-size:14px;font-weight: bold;">TOTAL</th>
    <td style="width:12%"> CONTREPARTIE </td>
     <td style="width:12%">ETAT</td>
-    <td width="12%" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresor))+parseFloat(parseFloat(AfficheMontantTresorBienEtService))+parseFloat(parseFloat(AfficheMontantTresorTransfert)))}}</td>
-   <td width="12%" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantTresorConsommerTransfert)))}}</td>
-     <td width="12%" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorBienEtService)-parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantTresor)-parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantTresorTransfert)-parseFloat(AfficheMontantTresorConsommerTransfert)))}}</td>
+    <td width="12%" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresor))+parseFloat(parseFloat(AfficheMontantTresorBienEtService))+parseFloat(parseFloat(AfficheMontantTresorTransfert))+(parseFloat(AfficheMontantTresorIvestissement)))}}</td>
+   <td width="12%" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantTresorConsommerTransfert))+parseFloat(AfficheMontantTresorConsommerInvestissement))}}</td>
+     <td width="12%" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorBienEtService)-parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantTresor)-parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantTresorTransfert)-parseFloat(AfficheMontantTresorConsommerTransfert))+(parseFloat(AfficheMontantTresorIvestissement)-parseFloat(AfficheMontantTresorConsommerInvestissement)))}}</td>
      <!-- <td style="width:12%">0231</td>
      <th style="width:12%">7895</th> -->
 </tr>
@@ -235,20 +235,20 @@
    <th height="20px"></th>
    <td height="20px">DON  </td>
     <td height="20px"></td>
-    <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantDon))+parseFloat(parseFloat(AfficheMontantDonBienEtService))+parseFloat(parseFloat(AfficheMontantDonTransfert)))}}</td>
-    <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantDonConsommer))+parseFloat(parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonConsommerTransfert)))}}</td>
-     <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantDon)-parseFloat(AfficheMontantDonConsommer))+parseFloat(parseFloat(AfficheMontantDonBienEtService)-parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonTransfert)-parseFloat(AfficheMontantDonConsommerTransfert)))}}</td>
+    <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantDon))+parseFloat(parseFloat(AfficheMontantDonBienEtService))+parseFloat(parseFloat(AfficheMontantDonTransfert))+parseFloat(AfficheMontantDonIvestissement))}}</td>
+    <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantDonConsommer))+parseFloat(parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonConsommerTransfert))+parseFloat(parseFloat(AfficheMontantDonConsommerInvestissement)))}}</td>
+     <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantDon)-parseFloat(AfficheMontantDonConsommer))+parseFloat(parseFloat(AfficheMontantDonBienEtService)-parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonIvestissement)-parseFloat(AfficheMontantDonConsommerInvestissement))+parseFloat(parseFloat(AfficheMontantDonTransfert)-parseFloat(AfficheMontantDonConsommerTransfert)))}}</td>
   
      <!-- <td height="20px">1233</td>
-     <th height="20px"></th> -->
+     <th height="20px"></th> --> 
 </tr>
                    <tr>
    <th height="20px"></th>
    <td height="20px">EMPRUNT  </td> 
     <td height="20px"></td>
-     <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantEmprunt))+parseFloat(parseFloat(AfficheMontantEmpruntBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntTransfert)))}}</td>
-   <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantEmpruntConsommer))+parseFloat(parseFloat(AfficheMontantEmpruntConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntConsommerTransfert)))}}</td>
-     <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantEmpruntBienEtService)-parseFloat(AfficheMontantEmpruntConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntTransfert)-parseFloat(AfficheMontantEmpruntConsommerTransfert))+parseFloat(parseFloat(AfficheMontantEmprunt)-parseFloat(AfficheMontantEmpruntConsommer)))}}</td>
+     <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantEmprunt))+parseFloat(parseFloat(AfficheMontantEmpruntBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntTransfert))+parseFloat(parseFloat(AfficheMontantEmpruntIvestissement)))}}</td>
+   <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantEmpruntConsommer))+parseFloat(parseFloat(AfficheMontantEmpruntConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntConsommerTransfert))+parseFloat(parseFloat(AfficheMontantEmpruntConsommerInvestissement)))}}</td>
+     <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantEmpruntBienEtService)-parseFloat(AfficheMontantEmpruntConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntTransfert)-parseFloat(AfficheMontantEmpruntConsommerTransfert))+parseFloat(parseFloat(AfficheMontantEmprunt)-parseFloat(AfficheMontantEmpruntConsommer))+parseFloat(parseFloat(AfficheMontantEmpruntIvestissement)-parseFloat(AfficheMontantEmpruntConsommerInvestissement)))}}</td>
   
  
     <!-- <td height="20px">000055</td>
@@ -267,9 +267,9 @@
    <th height="20px" colspan="2" style="color: #000000;font-size:14px">TOTAL GENERAL </th>
    
     <td height="20px"></td>
-    <td height="20px" style="text-align:center;background-color: green;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(parseFloat(AfficheMontantTresor))+parseFloat(parseFloat(AfficheMontantTresorBienEtService))+parseFloat(parseFloat(AfficheMontantTresorTransfert)))+parseFloat(parseFloat(parseFloat(AfficheMontantDon))+parseFloat(parseFloat(AfficheMontantDonBienEtService))+parseFloat(parseFloat(AfficheMontantDonTransfert)))+parseFloat(parseFloat(parseFloat(AfficheMontantEmprunt))+parseFloat(parseFloat(AfficheMontantEmpruntBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntTransfert))))}}</td>
-    <td height="20px" style="text-align:center;background-color: green;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantDonConsommer))+parseFloat(parseFloat(AfficheMontantEmpruntConsommer)))+parseFloat(parseFloat(parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntConsommerBienEtService)))+parseFloat(parseFloat(parseFloat(AfficheMontantEmpruntConsommerTransfert))+parseFloat(parseFloat(AfficheMontantTresorConsommerTransfert))+parseFloat(parseFloat(AfficheMontantDonConsommerTransfert))))}}</td>
-     <td height="20px" style="text-align:center;background-color: green;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(parseFloat(AfficheMontantTresor)-parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantDon)-parseFloat(AfficheMontantDonConsommer))+parseFloat(parseFloat(AfficheMontantEmprunt)-parseFloat(AfficheMontantEmpruntConsommer)))+parseFloat(parseFloat(parseFloat(AfficheMontantTresorBienEtService)-parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonBienEtService)-parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntBienEtService)-parseFloat(AfficheMontantEmpruntConsommerBienEtService)))+parseFloat(parseFloat(parseFloat(AfficheMontantTresorTransfert)-parseFloat(AfficheMontantTresorConsommerTransfert))+parseFloat(parseFloat(AfficheMontantDonTransfert)-parseFloat(AfficheMontantDonConsommerTransfert))+parseFloat(parseFloat(AfficheMontantEmpruntTransfert)-parseFloat(AfficheMontantEmpruntConsommerTransfert))))}}</td>
+    <td height="20px" style="text-align:center;background-color: green;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(parseFloat(AfficheMontantTresor))+parseFloat(parseFloat(AfficheMontantTresorBienEtService))+parseFloat(parseFloat(AfficheMontantTresorTransfert))+parseFloat(parseFloat(AfficheMontantTresorIvestissement)))+parseFloat(parseFloat(parseFloat(AfficheMontantDon))+parseFloat(parseFloat(AfficheMontantDonBienEtService))+parseFloat(parseFloat(AfficheMontantDonTransfert))+parseFloat(parseFloat(AfficheMontantDonIvestissement)))+parseFloat(parseFloat(parseFloat(AfficheMontantEmprunt))+parseFloat(parseFloat(AfficheMontantEmpruntBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntTransfert))+parseFloat(parseFloat(AfficheMontantEmpruntIvestissement))))}}</td>
+    <td height="20px" style="text-align:center;background-color: green;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantDonConsommer))+parseFloat(parseFloat(AfficheMontantEmpruntConsommer)))+parseFloat(parseFloat(parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntConsommerBienEtService)))+parseFloat(parseFloat(parseFloat(AfficheMontantEmpruntConsommerTransfert))+parseFloat(parseFloat(AfficheMontantTresorConsommerTransfert))+parseFloat(parseFloat(AfficheMontantDonConsommerTransfert)))+parseFloat(parseFloat(AfficheMontantTresorConsommerInvestissement)+parseFloat(AfficheMontantDonConsommerInvestissement)+parseFloat(AfficheMontantEmpruntConsommerInvestissement)))}}</td>
+     <td height="20px" style="text-align:center;background-color: green;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(parseFloat(AfficheMontantTresor)-parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantDon)-parseFloat(AfficheMontantDonConsommer))+parseFloat(parseFloat(AfficheMontantEmprunt)-parseFloat(AfficheMontantEmpruntConsommer)))+parseFloat(parseFloat(parseFloat(AfficheMontantTresorBienEtService)-parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonBienEtService)-parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntBienEtService)-parseFloat(AfficheMontantEmpruntConsommerBienEtService)))+parseFloat(parseFloat(parseFloat(AfficheMontantTresorTransfert)-parseFloat(AfficheMontantTresorConsommerTransfert))+parseFloat(parseFloat(AfficheMontantDonTransfert)-parseFloat(AfficheMontantDonConsommerTransfert))+parseFloat(parseFloat(AfficheMontantEmpruntTransfert)-parseFloat(AfficheMontantEmpruntConsommerTransfert)))+parseFloat(parseFloat(parseFloat(AfficheMontantTresorIvestissement)-parseFloat(AfficheMontantTresorConsommerInvestissement))+parseFloat(parseFloat(AfficheMontantDonIvestissement)-parseFloat(AfficheMontantDonConsommerInvestissement))+parseFloat(parseFloat(AfficheMontantEmpruntIvestissement)-parseFloat(AfficheMontantEmpruntConsommerInvestissement))))}}</td>
      <!-- <td height="20px">986</td>
      <th height="20px">78452</th> -->
 </tr>                                       
@@ -341,7 +341,7 @@ export default {
  "derniereNivoPlanBudgetaire",
  "getPersonnaliseBudgetGeneralParPersonnel",
  "budgetGeneral",
- "afficheTransfertValider"
+ "getPersonnaliseTransfert"
    
    
    ]),
@@ -557,7 +557,7 @@ AfficheMontantEmpruntBienEtService(){
 
 AfficheMontantTresorConsommerTransfert(){
     {
-    var montant = this.afficheTransfertValider.filter(element => element.typefinancement_id == 14 && element.exerciceencours == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(2); 
+    var montant = this.getPersonnaliseTransfert.filter(element => element.typefinancement_id == 14 && element.exerciceencours == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(2); 
       if(isNaN(montant)) return null
       return montant
      }
@@ -572,14 +572,14 @@ AfficheMontantTresorConsommerTransfert(){
 
 AfficheMontantDonConsommerTransfert(){
     {
-   var montant = this.afficheTransfertValider.filter(element => element.typefinancement_id == 13 && element.exerciceencours == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(2); 
+   var montant = this.getPersonnaliseTransfert.filter(element => element.typefinancement_id == 13 && element.exerciceencours == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(2); 
       if(isNaN(montant)) return null
       return montant
      }
 }, 
 AfficheMontantEmpruntConsommerTransfert(){
     {
-    var montant = this.afficheTransfertValider.filter(element => element.typefinancement_id == 15 && element.exerciceencours == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(2); 
+    var montant = this.getPersonnaliseTransfert.filter(element => element.typefinancement_id == 15 && element.exerciceencours == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(2); 
       if(isNaN(montant)) return null
       return montant
 
