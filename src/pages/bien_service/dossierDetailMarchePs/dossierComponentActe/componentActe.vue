@@ -1,8 +1,13 @@
-afficherBanqueDynamique
+
 <template>
+<<<<<<< HEAD
+    <div>
+            	      
+=======
     <div class="container-fluid">
 
                   
+>>>>>>> a94b1fc6cff92232193e01ef4484d24ac2c5b019
                     <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="listeAvisAnoBailleur(macheid)">Ajouter</a>

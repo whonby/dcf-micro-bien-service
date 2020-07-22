@@ -533,6 +533,7 @@ export default {
 
     },
 
+
     modification1(index) {
       this.edite_analyse_dossier = this.listeAnalyseDossier(this.macheid)[
         index

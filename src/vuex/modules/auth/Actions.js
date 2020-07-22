@@ -164,9 +164,6 @@ export  function  getRoles({commit}) {
 
 
 
-
-
-
 export  function  getAffectation({commit}) {
 
     queue.push(() =>  apiGuest.get('/affectations').then(response => {

@@ -1141,6 +1141,7 @@ export default {
             // });
         }
 
+
         return 0;
         //return this.uniteAdministratives
             // return (
@@ -1576,4 +1577,5 @@ formaterDate(date) {
   }
 };
 </script>
+
 

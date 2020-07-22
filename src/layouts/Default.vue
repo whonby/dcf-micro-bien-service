@@ -25,6 +25,7 @@ export default {
     Navbar,
     Sidebar
   },
+  
 
  beforeCreate () {
      if (!this.$store.state.Utilisateurs.isLoggedIn) {
