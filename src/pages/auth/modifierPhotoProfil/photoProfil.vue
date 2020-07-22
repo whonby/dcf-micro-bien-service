@@ -10,7 +10,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5> Profil </h5>
+              <h5> CHANGE PHOTO PROFIL </h5>
              
             </div>
 
@@ -20,7 +20,7 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">Information utilisateur</a>
+                        <a data-toggle="tab" href="#tab1">CHANGE PHOTO PROFIL</a>
                       </li>
                        
                      

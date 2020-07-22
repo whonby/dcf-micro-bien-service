@@ -15,21 +15,21 @@
         </td>
          <td>
             <ul class="quick-actions" style="margin: 0px !important;"> 
-               <li class="bg_lb span"> <a href="#" style="color:#FFFFFF;"><h4>MONTANT </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(affichierMontantAvenant(macheid)))}}</span><h4>AVENANT</h4></a> </li>
+               <li class="bg_lg span"> <a href="#" style="color:#FFFFFF;"><h4>MONTANT </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(affichierMontantAvenant(macheid)))}}</span><h4>AVENANT</h4></a> </li>
 
             </ul>
 
         </td>
          <td>
             <ul class="quick-actions" style="margin: 0px !important;"> 
-              <li class="bg_lb span"> <a href="#" style="color:#FFFFFF;"><h4>MONTANT MARCHE </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(montantMarcheAvecAvenant))}}</span><h4>AVEC AVENANT</h4></a> </li>
+              <li class="bg_lr span"> <a href="#" style="color:#FFFFFF;"><h4>MONTANT MARCHE </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(montantMarcheAvecAvenant))}}</span><h4>AVEC AVENANT</h4></a> </li>
                 
             </ul>
 
         </td>
          <td>
             <ul class="quick-actions" style="margin: 0px !important;"> 
-               <li class="bg_lb span"> <a href="#" style="color:#FFFFFF;"><h4>MONTANT EXECUTE </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(sommeEngagementTableau(macheid)))}}</span><h4> MARCHE</h4></a> </li>
+               <li class="bg_lo span"> <a href="#" style="color:#FFFFFF;"><h4>MONTANT EXECUTE </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(sommeEngagementTableau(macheid)))}}</span><h4> MARCHE</h4></a> </li>
                  
             </ul>
 
@@ -38,7 +38,7 @@
      <tr>
         <td>
             <ul class="quick-actions" style="margin: 0px !important;"> 
-               <li class="bg_lb span"> <a href="#" style="color:#FFFFFF;"><h4>DISPONIBLE </h4> <i class="icon-list-ol"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(restePayeMarche))}}</span><h4>MARCHE</h4></a> </li>
+               <li class="bg_ly span"> <a href="#" style="color:#FFFFFF;"><h4>DISPONIBLE </h4> <i class="icon-list-ol"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(restePayeMarche))}}</span><h4>MARCHE</h4></a> </li>
               
                 
             </ul>
@@ -52,13 +52,13 @@
         </td>
          <td>
             <ul class="quick-actions" style="margin: 0px !important;"> 
-                 <li class="bg_lb span"> <a href="#" style="color:#FFFFFF;"><h4>CUMUL </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(sommeEgagementLigneTableau(macheid)))}}</span><h4>ENGAGEMENT</h4></a> </li>
+                 <li class="bg_lg span"> <a href="#" style="color:#FFFFFF;"><h4>CUMUL </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(sommeEgagementLigneTableau(macheid)))}}</span><h4>ENGAGEMENT</h4></a> </li>
             </ul>
 
         </td>
          <td>
             <ul class="quick-actions" style="margin: 0px !important;"> 
-            <li class="bg_lb span"> <a href="#" style="color:#FFFFFF;"><h4>DISPONIBLE </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherMontantBudgetaireInitial(afficherInputationBudgetaire(macheid)) - sommeEgagementLigneTableau(macheid)))}}</span><h4>BUDGETAIRE</h4></a> </li>
+            <li class="bg_lr span"> <a href="#" style="color:#FFFFFF;"><h4>DISPONIBLE </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherMontantBudgetaireInitial(afficherInputationBudgetaire(macheid)) - sommeEgagementLigneTableau(macheid)))}}</span><h4>BUDGETAIRE</h4></a> </li>
             </ul>
 
         </td>
@@ -66,19 +66,19 @@
      <tr>
         <td>
             <ul class="quick-actions" style="margin: 0px !important;"> 
-                 <li class="bg_lb span"> <a href="#" style="color:#FFFFFF;"><h4>TAUX </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{ratioAvenantMarche}}%</span><h4>RATIO AVENANT/MARCHE</h4></a> </li>
+                 <li class="bg_lo span"> <a href="#" style="color:#FFFFFF;"><h4>TAUX </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{ratioAvenantMarche}}%</span><h4>RATIO AVENANT/MARCHE</h4></a> </li>
             </ul>
 
         </td>
          <td>
             <ul class="quick-actions" style="margin: 0px !important;"> 
-                 <li class="bg_lb span"> <a href="#" style="color:#FFFFFF;"><h4>NOMBRE </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{affichierNombreAvenant(this.macheid)}}</span><h4>AVENANT</h4></a> </li>
+                 <li class="bg_ls span"> <a href="#" style="color:#FFFFFF;"><h4>NOMBRE </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{affichierNombreAvenant(this.macheid)}}</span><h4>AVENANT</h4></a> </li>
             </ul>
 
         </td>
          <td>
             <ul class="quick-actions" style="margin: 0px !important;"> 
-                 <li class="bg_lb span"> <a href="#" style="color:#FFFFFF;"><h4>TAUX</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{tauxFacturation}}%</span><h4>FACTURE</h4></a> </li>
+                 <li class="bg_ly span"> <a href="#" style="color:#FFFFFF;"><h4>TAUX</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{tauxFacturation}}%</span><h4>FACTURE</h4></a> </li>
             </ul>
 
         </td>

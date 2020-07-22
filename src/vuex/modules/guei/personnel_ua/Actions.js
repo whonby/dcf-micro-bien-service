@@ -1,4 +1,4 @@
-import axios from "./url/api_personnel_ua/api"
+import axios from "../../../../request/personnel"
 var housecall = require('housecall');
 var queue = housecall({ concurrency: 2, cooldown: 1000 });
 import { asyncLoading } from "vuejs-loading-plugin";
@@ -2060,21 +2060,15 @@ export function supprimerSauvegardePhoto({ commit }, id) {
         })
 }
 
+
 export function modifieSauvegardePhoto({ commit, dispatch }, formData, config) {
-    this.$app.$loading(true)
+    // this.$app.$loading(true)
     axios.put('/affichePhoto', formData, config).then(response => {
         commit('MODIFIER_SAUVEGARDE_PHOTO', response.data)
         dispatch("getSauvegardePhoto");
         dispatch("getSauvegardePhoto");
-        this.$app.$loading(false)
-    }).catch(error => {
-        console.log(error)
-        this.$app.$loading(true)
-        this.$app.$notify({
-            title: 'Erreur',
-            text: "Erreur c'est produit lors de l'enregistrement",
-            type: "error"
-        });
+        // this.$app.$loading(false)
     })
+    //     
 
 }

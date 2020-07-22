@@ -60,10 +60,15 @@ export const pool=()=>{
 
 
 export const noDCfNoAdmin=()=>{
-    if(!admin()){
-        if(!dcf()){
+    if (!admin()){
+        if (!dcf()) {
             return true
-        }
+       }
+           
+        
     }
-    return false
+    
+        return false
+    
+    
 }

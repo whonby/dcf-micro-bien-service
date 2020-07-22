@@ -673,12 +673,12 @@ reference_marche
                       <span v-else>PPM</span>
                     </td>
                 <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1 || marche.type_marche_id == 5"> 
-                     <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                     <router-link :to="{ name: 'historiqueContualisation', params: { id: marche.id }}"
                 class="btn btn-default " title="historique la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link>
                     
-             <router-link :to="{ name: 'detailExecution', params: { id: marche.id }}"
+             <router-link :to="{ name: 'HistoriqueDetailExecution', params: { id: marche.id }}"
                 class="btn btn-default " title="historique execution Marche">
                   <span class=""><i class="  icon-zoom-out"></i></span>
                    </router-link> 

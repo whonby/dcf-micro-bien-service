@@ -1,4 +1,5 @@
-import axios from '../../../../../urls/api_parametrage/api'
+// import axios from '../../../../../urls/api_parametrage/api'
+import axios from '../../../../request/parametreGeneraux'
 import { asyncLoading } from 'vuejs-loading-plugin'
 
  var housecall= require('housecall')

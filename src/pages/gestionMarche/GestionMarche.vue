@@ -28,11 +28,11 @@
                         <a data-toggle="tab" href="#tab00007">Importation ppm <span class="badge badge-important"></span></a>
                       </li>
                      <li class="">
-                        <a data-toggle="tab" href="#tab00008">Listes des marchés <span class="badge badge-info">{{nombreDeMarche}}</span></a>
+                        <a data-toggle="tab" href="#tab00008">Listes des marchés <span class="badge badge-info"></span></a>
                       </li>
                        
                      <li class="">
-                        <a data-toggle="tab" href="#marchehppm">Listes des Marchés Hors PPM   <span class="badge badge-warning">{{afficherNombreMarcheHorsPPM}}</span></a>
+                        <a data-toggle="tab" href="#marchehppm">Listes des Marchés Hors PPM   <span class="badge badge-warning"></span></a>
                       </li>
                        <li class="">
                         <a data-toggle="tab" href="#marcheEntreprise">Marche par entreprise  <span class="badge badge-warning"></span></a>

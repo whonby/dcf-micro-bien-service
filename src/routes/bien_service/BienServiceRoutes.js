@@ -73,6 +73,8 @@ import AjouterMandatbon from "../../pages/bien_service/contractualisation/Dossie
 import AjouterEngagementFactureProf from "../../pages/bien_service/contractualisation/DossierExecution/dossierEngagement/AjouterEngagement.vue";
 import modifierEngagement from "../../pages/bien_service/contractualisation/DossierExecution/dossierEngagement/modifierEngagement.vue";
 import modifierMandat from "../../pages/bien_service/contractualisation/DossierExecution/dossierMandat/modifierMandat.vue";
+import HistoriqueDetailExecution from '../../pages/gestionMarche/historisqueExecutionMarche.vue';
+import historiqueContualisation from '../../pages/gestionMarche/historiqueContualisation.vue';
 const BienServiceRoutes = [
    /* {
 
@@ -81,6 +83,16 @@ const BienServiceRoutes = [
         component: executionMarcheInvestissement
 detailExecution
     },*/
+    {
+        path: '/historiqueContualisation/:id',
+        name: "historiqueContualisation",
+        component: historiqueContualisation
+    },
+    {
+        path: '/HistoriqueDetailExecution/:id',
+        name: "HistoriqueDetailExecution",
+        component: HistoriqueDetailExecution
+    },
     {
         path: "/Modifier_Mandat/:id",
         name: "modifierMandat",
