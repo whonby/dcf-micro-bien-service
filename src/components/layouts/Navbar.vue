@@ -13,6 +13,7 @@
     <MenuOperationRapport v-if="active_el ==7"></MenuOperationRapport>
     <MenuOpRisque v-if="active_el ==8"></MenuOpRisque>
      <MenuDefaut v-if="active_el ==0"></MenuDefaut>
+    <MenuGestionAccess v-if="active_el ==21"></MenuGestionAccess>
     <Search></Search>
     
     
@@ -37,7 +38,7 @@ import MenuOperationRapport from "../components/navs/MenuOperationRapport.vue";
 import MenuOpRisque from "../components/navs/MenuOpRisque.vue";
 import MenuDefaut from "../components/navs/MenuDefaut.vue";
 import Search from "../components/Search";
-
+import MenuGestionAccess from "../components/navs/MenuGestionAccess"
 import { mapState, mapActions} from "vuex";
 export default {
   components: {
@@ -52,8 +53,8 @@ export default {
    MenuOperationRapport,
    MenuOpRisque,
    MenuDefaut,
-    Search
-    
+    Search,
+    MenuGestionAccess,
   },
 
   computed: {

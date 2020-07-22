@@ -17,7 +17,7 @@ export const getterUtilisateur= state =>state.utilisateur
 export const getterRoles= state =>state.roles
 export const getterAffectation =state =>state.affectation
 export const getterUniteAdministrativeByUser=state=>state.uniteAdministrativeByUser
-
+export const getterGroupe =state =>state.groupe
 
 
   

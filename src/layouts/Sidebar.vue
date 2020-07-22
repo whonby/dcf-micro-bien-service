@@ -116,6 +116,11 @@
             <span class="label label-important"></span>
           </a>
         </li> -->
+          <li @click.prevent="navigateGestionUser" :class="{active: active_el ==21}">
+              <a href="#">
+              <i class="icon icon-key"></i> <span>UTILISATEURS && ACCES</span>
+          </a>
+          </li>
           <li @click.prevent="logoutUser()" >
           <a title="DECONNEXION" href="#">
             <i class="icon icon-off"></i>
@@ -261,8 +266,14 @@ navigateToGestionMarche(){
         this.$router.push({
           name: 'tableauBord'
         })
+      },
+      navigateGestionUser(){
+          this.activate(21)
+          this.$router.push({
+              name: 'Groupe'
+          })
       }
-    
+
 
 
   }
