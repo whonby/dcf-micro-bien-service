@@ -1,4 +1,4 @@
-source_financement
+affichertypeMarcheID
 <template>
     <div class="container-fluid">
     
@@ -1156,14 +1156,15 @@ source_financement
                           
                       </td>
                      
-                      <td>
-                          
-                      </td>
+                      
                        <td style="font-weight:bold;"> Total Marché
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
                            {{formatageSomme(parseFloat(montantEnPlanification))}}
                            
+                      </td>
+                      <td>
+                          
                       </td>
                        <td>
                           

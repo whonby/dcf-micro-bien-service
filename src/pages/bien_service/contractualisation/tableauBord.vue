@@ -1,4 +1,4 @@
-
+nombreDeMarchesuspendu
 <template>
   <div class="container-fluid">
       <!-- <h3 style="text-align:center">TABLEAU DE BORD : BIEN ET SERVICE</h3> -->
@@ -6,26 +6,38 @@
 
                       <ul class="quick-actions" style="margin: 0px !important;"> 
 
-<li class="bg_lb span3"> <a href="#" style="color:black;"><h4>TOTAL </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{nombreDeMarche}}</span><h4>MARCHE</h4></a> </li>
-
-        <li class="bg_lg span3"> <a href="#" style="color:black;"><h4>MARCHE </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{nombreMarcheEnplanification}}</span><h4> EN PLANIFICATION</h4>  </a> </li>
-
-        <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>MARCHE</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{nombreDeMarcheEnContratualisation}}</span> <h4>EN CONTRACTUALISATION</h4></a> </li>
-          <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>MARCHE</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{nbreMarcheExecuter}}</span> <h4>EN EXECUTION</h4></a> </li>
-                <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>MARCHE</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{afficheNombreMarcheResilier}}</span><h4> RESILIE</h4></a> </li>
-
-        <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>MARCHE</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{nombreDeMarchesuspendu}}</span> <h4> SUSPENDU</h4></a> </li>
-
-        <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>MARCHE</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{nombreAfficheMarcheSolde}}</span> <h4> TERMINE</h4></a> </li>
+<li class="bg_lb span3"> 
   
-<li class="bg_lb span3"> <a href="#" style="color:black;"><h4>MONTANT </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(montantMarchePrevu))}}</span><h4>MARCHE PREVU</h4></a> </li>
+    <router-link tag="a" :to="{ name: 'listeTotalMarcheBienService' }" style="color:black;">
+    <h4>TOTAL </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{nombreDeMarche}}</span><h4>MARCHE</h4>
+    
+    </router-link> 
+    
+    </li>
 
-        <li class="bg_lg span3"> <a href="#" style="color:black;"><h4>MONTANT MARCHE </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{formatageSomme(parseFloat(montantMarcheAvecAvenant))}}</span><h4> EN EXECUTION</h4>  </a> </li>
+        <li class="bg_lg span3"> 
+          <router-link tag="a" :to="{ name: 'listeDesMarcheEnPlanificationBS' }" style="color:black;">
+          <h4>MARCHE </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{nombreMarcheEnplanification}}</span><h4> EN PLANIFICATION</h4>  
+          
+            </router-link>  </li>
 
-        <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>MONTANT MARCHE</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(budgetConsommerBienService))}}</span> <h4>CONSOMME</h4></a> </li>
-          <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>MONTANT MARCHE</h4> <i class="icon-info-sign"></i><span class="label label-important" style="font-size:15px">{{formatageSomme(-(montantMarcheAvecAvenant - budgetConsommerBienService))}}</span> <h4>RESTANT</h4></a> </li>
-                <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>TAUX MARCHE</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{((parseFloat(budgetConsommerBienService)/parseFloat(montantMarcheAvecAvenant))*100).toFixed(2)}}%</span><h4> EN EXECUTION</h4></a> </li>
+        <li class="bg_ly span3"> <router-link tag="a" :to="{ name: 'listeDesMarcheEnContratualisationBS' }" style="color:black;"><h4>MARCHE</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{nombreDeMarcheEnContratualisation}}</span> <h4>EN CONTRACTUALISATION</h4></router-link> </li>
+          <li class="bg_ly span3"> <router-link tag="a" :to="{ name: 'listeDesMarcheEnExecutionBS' }" style="color:black;"><h4>MARCHE</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{nbreMarcheExecuter}}</span> <h4>EN EXECUTION</h4></router-link> </li>
+                <li class="bg_lo span3"> <router-link tag="a" :to="{ name: 'listeDesMarcheResilieBS' }" style="color:black;"><h4>MARCHE</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{afficheNombreMarcheResilier}}</span><h4> RESILIE</h4></router-link> </li>
 
+        <li class="bg_ly span3"> <router-link tag="a" :to="{ name: 'listeDesMarcheSuspenduBS' }" style="color:black;"><h4>MARCHE</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{nombreDeMarchesuspendu}}</span> <h4> SUSPENDU</h4></router-link> </li>
+
+        <li class="bg_ly span3"> <router-link tag="a" :to="{ name: 'listeDesMarcheTermineBS' }" style="color:black;"><h4>MARCHE</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{nombreAfficheMarcheSolde}}</span> <h4> TERMINE</h4></router-link> </li>
+  
+<li class="bg_lb span3"> <router-link tag="a" :to="{ name: '' }" style="color:black;"><h4>MONTANT </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(montantMarchePrevu))}}</span><h4>PREVU DES MARCHES </h4></router-link> </li>
+<li class="bg_lb span3"> <router-link tag="a" :to="{ name: '' }" style="color:black;"><h4>MONTANT </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(MontantReelDesMarches))}}</span><h4>REEL DES MARCHES</h4></router-link> </li>
+<li class="bg_lb span3"> <router-link tag="a" :to="{ name: '' }" style="color:black;"><h4>MONTANT DES MARCHES </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(MontantDesMarcheEnCoursExecution))}}</span><h4>EN COURS D'EXECUTION</h4></router-link> </li>
+<li class="bg_lb span3"> <router-link tag="a" :to="{ name: '' }" style="color:black;"><h4>MONTANT</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(MontantDesAvenants))}}</span><h4>DES AVENANTS</h4></router-link> </li>
+        <li class="bg_lg span3"> <router-link tag="a" :to="{ name: '' }" style="color:black;"><h4>MONTANT REEL </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{formatageSomme(parseFloat(montantMarcheAvecAvenant))}}</span><h4> DES MARCHES + AVENANTS</h4>  </router-link> </li>
+
+        <li class="bg_ly span3"> <router-link tag="a" :to="{ name: '' }" style="color:black;"><h4>MONTANT MARCHE</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(budgetConsommerBienService))}}</span> <h4>CONSOMME</h4></router-link> </li>
+          <li class="bg_ly span3"> <router-link tag="a" :to="{ name: '' }" style="color:black;"><h4>MONTANT MARCHE</h4> <i class="icon-info-sign"></i><span class="label label-important" style="font-size:15px">{{formatageSomme(-(montantMarcheAvecAvenant - budgetConsommerBienService))}}</span> <h4>RESTANT</h4></router-link> </li>
+                <li class="bg_lo span3"> <router-link tag="a" :to="{ name: '' }" style="color:black;"><h4>TAUX MARCHE</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{((parseFloat(budgetConsommerBienService)/parseFloat(montantMarcheAvecAvenant))*100).toFixed(2)}}%</span><h4> EN EXECUTION</h4></router-link> </li>
 
 
              
@@ -101,6 +113,53 @@ export default {
    dcf:dcf,
    noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+
+MontantReelDesMarches() {
+       // const st = this.search.toLowerCase();
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.getActeEffetFinancierPersonnaliser45.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(recuper =>  this.affichertypeMarche(this.recupererIdTypeMarche(recuper.marche_id)) == 4 && recuper.difference_personnel_bienService == 2 ||  this.affichertypeMarche(this.recupererIdTypeMarche(recuper.marche_id)) == 1 && recuper.difference_personnel_bienService == 2).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+           
+        }
+
+        return this.getActeEffetFinancierPersonnaliser45.filter(recuper =>  this.affichertypeMarche(this.recupererIdTypeMarche(recuper.marche_id)) == 4 && recuper.difference_personnel_bienService == 2 ||  this.affichertypeMarche(this.recupererIdTypeMarche(recuper.marche_id)) == 1 && recuper.difference_personnel_bienService == 2).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+            
+    },
+
+
+MontantDesMarcheEnCoursExecution() {
+       // const st = this.search.toLowerCase();
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.getActeEffetFinancierPersonnaliser45.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(this.recupererIdTypeMarche(recuper.marche_id)) == 4 && recuper.difference_personnel_bienService == 2 || this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(this.recupererIdTypeMarche(recuper.marche_id)) == 1 && recuper.difference_personnel_bienService == 2).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+           
+        }
+
+        return this.getActeEffetFinancierPersonnaliser45.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(this.recupererIdTypeMarche(recuper.marche_id)) == 4 && recuper.difference_personnel_bienService == 2 || this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(this.recupererIdTypeMarche(recuper.marche_id)) == 1 && recuper.difference_personnel_bienService == 2).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+            
+    },
+MontantDesAvenants(){
+  return this.avenants.filter(recuper =>  this.affichertypeMarche(this.recupererIdTypeMarche(recuper.marche_id)) == 4 ||  this.affichertypeMarche(this.recupererIdTypeMarche(recuper.marche_id)) == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_avenant), 0)
+},
+
+
+
+
 
  filtre_unite_admin() {
        // const st = this.search.toLowerCase();
@@ -264,37 +323,29 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficher
     },
 
 
-    
-    //  afficherMandatDroitAccess() {
-    //    // const st = this.search.toLowerCase();
-    //     if (this.noDCfNoAdmin){
-    //         let colect=[];
-    //         this.getMandatPersonnaliserVise.filter(item=>{
-    //             let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-    //             if (val!=undefined){
-    //                 colect.push(item)
-    //                 return item
-    //             }
-    //         })
-    //         return colect
-    //         // return colect.filter(items => {
-    //         //     return (
-    //         //         items.secti.nom_section.toLowerCase().includes(st) ||
-    //         //         items.libelle.toLowerCase().includes(st)
-    //         //     );
-    //         // });
-    //     }
 
-    //     return this.getMandatPersonnaliserVise
-    //         // return (
-    //         //     items.secti.nom_section.toLowerCase().includes(st) ||
-    //         //     items.libelle.toLowerCase().includes(st)
-    //         // );
+afficherSuppenduDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.getActeEffetFinancierPersonnaliser45.filter(item=>{
+                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 7);
+           
+        }
+
+  return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 7);
+          
+
+       
         
 
-    // },
-
-
+    },
    afficherAttributMarche() {
       return id => {
         if (id != null && id != "") {
@@ -311,25 +362,6 @@ montantMarcheAvecAvenant() {
       const val = parseFloat(this.affichierMontantAvenant) + parseFloat(this.montantMarcheExecuter);
       return parseFloat(val).toFixed(0);
     },
-
-
-
-// recuperation de l'ID de UA 
-
-// afficherIdUAdansMarche(){
-//   return id =>{
-//     if(id!=null && id!=""){
-//       let objetID = this.marches.find(item => item.id==id)
-//        if(objetID){
-//          ret
-//        }
-//     }
-//   }
-// },
-
-
-
-
 
     affichierMontantAvenant(){
  
@@ -370,9 +402,9 @@ budgetConsommerBienService() {
 // afficheMarcheSuspendu(){
 // return this.afficherLaListeDesMarche.filter(element => element.attribue == 7)
 // },
-// nombreDeMarchesuspendu(){
-//   return this.afficheMarcheSuspendu.length;
-// },
+ nombreDeMarchesuspendu(){
+  return this.afficherSuppenduDroitAccess.length;
+},
 
 
 
@@ -387,6 +419,34 @@ return this.afficherLaListeDesMarche.filter(element => element.attribue == 0)
 // afficherLaListeDesMarche(){
 // return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
 // },
+
+recupererIdTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_marche_id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+affichertypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code_type_marche;
+      }
+      return 0
+        }
+      };
+    },
 nombreDeMarche(){
   return this.filtre_unite_admin.length;
 },
