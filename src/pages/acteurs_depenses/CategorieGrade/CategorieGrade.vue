@@ -33,7 +33,7 @@
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                             <h5>Liste des Catégories de Grades</h5>
                             <div align="right">
-                                Search: <input type="text">
+                                Recherche: <input type="text">
 
                             </div>
 
@@ -44,7 +44,7 @@
                                 <thead>
                                 <tr>
                                     
-                                    <th style="width:90%">Libelle</th>
+                                    <th style="width:90%">Libellé</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>

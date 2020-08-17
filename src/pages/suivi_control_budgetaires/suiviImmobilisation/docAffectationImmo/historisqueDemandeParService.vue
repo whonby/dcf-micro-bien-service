@@ -38,12 +38,12 @@
                      <!-- <th>Type UA</th> -->
                    <th>Année de l'affectation</th>
                   
-                     <th>Unite administrative</th>
+                     <th>Unité administrative</th>
                    
                     <th>Service</th>
                       <th>Article</th>
                     <th>Quantité</th>
-                    <th>Duree de vie</th>
+                    <th>Durée de vie</th>
                     <!-- <th>Etat Immobilisation</th> -->
                     <th>Date mise en service</th>
                       <th>Montant</th>
@@ -124,12 +124,12 @@
                      <!-- <th>Type UA</th> -->
                    <th>Année de l'affectation</th>
                   
-                     <th>Unite administrative</th>
+                     <th>Unité administrative</th>
                    
                     <th>Service</th>
                       <th>Article</th>
                     <th>Quantité</th>
-                    <th>Duree de vie</th>
+                    <th>Durée de vie</th>
                     <!-- <th>Etat Immobilisation</th> -->
                     <th>Date mise en service</th>
                       <th>Montant</th>

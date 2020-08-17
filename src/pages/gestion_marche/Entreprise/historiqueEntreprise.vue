@@ -49,7 +49,7 @@
                                   
                                    
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Toutes les entreprises non sanctionner</h5>
+                                        <h5>Toutes les entreprises non sanctionnées</h5>
                                         <div align="right">
                                             Recherche: <input type="text" v-model="search">
                                         </div>

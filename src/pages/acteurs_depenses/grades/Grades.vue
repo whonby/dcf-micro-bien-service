@@ -12,7 +12,7 @@
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                             <h5>Liste des grades</h5>
                             <div align="right">
-                                Search: <input type="text">
+                                Recherche: <input type="text">
 
                             </div>
 
@@ -134,7 +134,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Libelle:</label>
+                        <label class="control-label">Libellé:</label>
                         <div class="controls">
                             <input type="text" v-model="editGrade.libelle" class="span" placeholder="" />
                         </div>

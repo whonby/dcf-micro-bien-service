@@ -31,7 +31,7 @@
                                      </div> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des structures geographiques</h5>
+            <h5>Liste des structures géographiques</h5>
              <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -55,7 +55,7 @@
               <thead>
                 <tr>
                   <th>Niveau</th>
-                  <th>libelle</th>      
+                  <th>libellé</th>      
                    <th>Action</th>
                 </tr>
               </thead>

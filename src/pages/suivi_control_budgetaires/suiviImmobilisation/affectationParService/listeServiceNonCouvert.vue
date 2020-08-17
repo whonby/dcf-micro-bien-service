@@ -1,5 +1,4 @@
-afficheNombreQteACouvert
-afficheQteACouvert
+
 <template>
 
 <div>
@@ -17,7 +16,7 @@ afficheQteACouvert
                     <thead>
                     <tr>
 
-                        <th style="width:20%">Uninte administrative</th>
+                        <th style="width:20%">Unité administrative</th>
                         <th style="width:20%">Service</th>
                         <th >Qte requise</th>
                      <th >Qte couverte</th>

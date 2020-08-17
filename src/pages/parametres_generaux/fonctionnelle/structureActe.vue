@@ -32,7 +32,7 @@
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des structures des Actes</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search"  placeholder="Searche...">
+        Rechercher: <input type="text" v-model="search"  >
 
           </div> 
           </div>

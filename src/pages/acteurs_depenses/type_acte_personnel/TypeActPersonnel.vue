@@ -47,7 +47,7 @@
                 </div>
                             <div class="span6">
                                 <div align="right">
-                                    Search: <input type="text" v-model="search">
+                                    Recherche: <input type="text" v-model="search">
 
                                 </div>
                             </div>

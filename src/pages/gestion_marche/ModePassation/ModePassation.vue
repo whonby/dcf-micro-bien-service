@@ -12,9 +12,9 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Liste des mode passation</h5>
+                            <h5>Liste des modes passations</h5>
                             <div align="right">
-                                Search: <input type="text" v-model="search">
+                                Recherche: <input type="text" v-model="search">
 
                             </div>
 
@@ -25,7 +25,7 @@
                                 <thead>
                                 <tr>
                                     <th>Code </th>
-                                    <th>Libelle</th>
+                                    <th>Libellé</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>

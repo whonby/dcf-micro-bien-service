@@ -8,7 +8,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                    <h5>Liste des plan de passation des marches</h5>
+                    <h5>Liste des plans de passation des marchés</h5>
                    <!-- <div align="right">
                         Recherche:
                         <input type="search" placeholder v-model="search" />
@@ -20,7 +20,7 @@
                         <thead>
                         <tr>
                             <th>Code</th>
-                            <th>Libelle</th>
+                            <th>Libellé</th>
                             <th>Date d'importation</th>
                             <th>Exercice</th>
                             <th>Action</th>

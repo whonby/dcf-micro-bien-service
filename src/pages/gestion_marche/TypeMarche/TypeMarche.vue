@@ -14,7 +14,7 @@
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                             <h5>Liste des types marchés</h5>
                             <div align="right">
-                                Search: <input type="text" v-model="search">
+                                Recherche: <input type="text" v-model="search">
 
                             </div>
 

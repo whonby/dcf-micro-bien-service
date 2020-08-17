@@ -425,7 +425,7 @@
             <td>
             
              
-                <label class="control-label">Activite</label>
+                <label class="control-label">Activité</label>
                 <div class="controls">
                   <select v-model="editpaiementPersonnel.activite_id" class="span" :readOnly="activerActivite">
                     <option
@@ -479,7 +479,7 @@
             <td>
              
               <div class="control-group">
-                 <label class="control-label">Mode de paiemnt</label>
+                 <label class="control-label">Mode de paiement</label>
                  <div class="controls">
                    <select v-model="editpaiementPersonnel.modepaiement_id" class="span">
                      <option
@@ -632,7 +632,7 @@
             <div class="widget-title">
               <div align="right">
                 Recherche:
-                <input type="search" placeholder="Saisie section ou libelle" v-model="search" />
+                <input type="search"  v-model="search" />
 
                 <!-- <div class="span3">
                   <model-list-select
@@ -660,13 +660,13 @@
                 <thead>
                   <tr>
                     <th>Exercice en cours</th>
-                    <th title="unite administrative"> ua</th>
+                    <th title="unite administrative"> Ua</th>
                     <!-- <th>programme</th>
                     <th>action</th>
                     <th>activité</th> -->
-                    <th>ligne</th>
+                    <th>Ligne</th>
                     <!-- <th>Code Fichier</th> -->
-                    <th>Objet Depense</th>
+                    <th>Objet Dépense</th>
                     <th>Mois de Paiement</th>
                     <!-- <th>Montant des Salaires</th> -->
                     <th>Fichier Joint</th>

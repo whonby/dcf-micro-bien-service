@@ -52,7 +52,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Libelle</th>
+                    <th>Libellé</th>
                      <th style="width:10%">Action</th>
                   </tr>
                 </thead>

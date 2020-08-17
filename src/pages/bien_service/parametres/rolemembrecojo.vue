@@ -33,7 +33,7 @@
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des rôles des membres de la Cojo</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search"  placeholder="Searche...">
+        Rechercher: <input type="text" v-model="search" >
 
           </div>
              
@@ -56,7 +56,7 @@
               <thead>
                 <tr>
                   <th>Code</th>
-                  <th>Libelle</th>
+                  <th>Libellé</th>
                    <th>Action</th>
                 </tr>     
               </thead>
@@ -107,7 +107,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter role membrecojo</h3>
+                <h3>Ajouter rôle membre cojo</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -118,7 +118,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
               </div>
@@ -142,7 +142,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier role membrecojo</h3>
+                <h3>Modifier rôle membre cojo</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -153,7 +153,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="editRole.libelle" class="span" placeholder="" />
               </div>

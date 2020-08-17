@@ -28,9 +28,9 @@
                                      </div> <br>
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Listes des Familles d' emplois </h5>
+                            <h5>Listes des Familles d'emplois </h5>
                              <div align="right">
-                                Search: <input type="text" v-model="search">
+                                Recherche: <input type="text" v-model="search">
                             </div>
 
                         </div>
@@ -52,7 +52,7 @@
                                 <thead>
                                 <tr>
                                     
-                                    <th style="width:90%">Libelle</th>
+                                    <th style="width:90%">Libellé</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>

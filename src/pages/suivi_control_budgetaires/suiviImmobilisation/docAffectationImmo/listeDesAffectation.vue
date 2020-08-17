@@ -166,7 +166,7 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab8969">NOUVELLE PERSONNES   </a>
+                        <a data-toggle="tab" href="#tab8969">NOUVELLE PERSONNE   </a>
                       </li>
                        <li>
                         <a data-toggle="tab" href="#tab7458">AFFECTATION DES DEMANDES DU PERSONNEL   </a>
@@ -316,15 +316,15 @@
                   
                     
                     <th>Nom et prénoms</th>
-                    <th>Unite d'administrative</th>
-                     <th>Unite de zone</th>
+                    <th>Unité d'administrative</th>
+                     <th>Unité de zone</th>
                     <th>Fonction</th>
                     <th>Article</th>
-                    <th>Quantite</th>
+                    <th>Quantité</th>
                     <th>Cause inactivite</th>
                     <th>Cause de la demande</th>
                     <th >Date demande</th>
-                     <th>duré vie</th>
+                     <th>durée vie</th>
                      <th>Motif chef sce</th>
                      <th>Date motif</th>
                   </tr>
@@ -420,15 +420,15 @@
                   
                     
                     <th>Nom et prénoms</th>
-                    <th>Unite d'administrative</th>
-                     <th>Unite de zone</th>
+                    <th>Unité d'administrative</th>
+                     <th>Unité de zone</th>
                     <th>Fonction</th>
                     <th>Article</th>
-                    <th>Quantite</th>
-                    <th>Cause inactivite</th>
+                    <th>Quantité</th>
+                    <th>Cause inactivité</th>
                     <th>Cause de la demande</th>
                     <th >Date demande</th>
-                     <th>duré vie</th>
+                     <th>durée vie</th>
                      <th>Décision Directeur</th>
                      <th>Date motif</th>
                      <th>Affectation</th>
@@ -532,20 +532,20 @@
                   <tr>
                 
                     <th>Nom et prénoms</th>
-                    <th>Unite d'administrative</th>
-                     <th>Unite de zone</th>
+                    <th>Unité d'administrative</th>
+                     <th>Unité de zone</th>
                     <th>Fonction</th>
                     <th>Article</th>
-                    <th>Quantite</th>
-                    <th>Cause inactivite</th>
+                    <th>Quantité</th>
+                    <th>Cause inactivité</th>
                     <th>Cause de la demande</th>
                     <th >Date demande</th>
                      <!-- <th>duré vie</th> -->
                      <th>Date motif sce</th>
-                     <th >Duré traitement sce</th>
+                     <th >Durée traitement sce</th>
                      <th>Décision chef sce</th>
                      <th>Date motif Directeur</th>
-                     <th >Duré traitement Directeur</th>
+                     <th >Durée traitement Directeur</th>
                       <th>Décision Directeur</th>
                      <th>Attribuer</th>
                   </tr>
@@ -719,19 +719,19 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab11">Listes du personnel   <span class="badge badge-inverse">{{afficheNombreToutPersonne}}</span></a>
+                        <a data-toggle="tab" href="#tab11">Liste du personnel   <span class="badge badge-inverse">{{afficheNombreToutPersonne}}</span></a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab13">Listes des personnes non Equipé  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab13">Liste des personnes non Equipé  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
                       </li>
                       <li class="">
                         <a data-toggle="tab" href="#tab45">Equipements Non Couverts   <span class="badge badge-warning">{{AfficheTotalQteNonCouvert}}</span></a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab12">Listes des personnes Equipé     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab12">Liste des personnes Equipés     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
                       </li>
                       <li class="">
-                        <a data-toggle="tab" href="#tab1296">Taux equipement par agent</a>
+                        <a data-toggle="tab" href="#tab1296">Taux équipement par agent</a>
                       </li>
                       
                       <!-- <li>
@@ -756,15 +756,15 @@
                     <!-- <th>Type Unite d'administrative</th> -->
                     
                      
-                    <th>Matricule && Nom && prenoms</th>
-                    <th>Unite administrative</th>
-                    <th>Unite de zone</th>
+                    <th>Matricule && Nom && prénoms</th>
+                    <th>Unité administrative</th>
+                    <th>Unité de zone</th>
                     <th>Service</th>
                     <th>Fonction</th>
                   
-                    <th>Besoin Reel</th>
+                    <th>Besoin Réel</th>
                     <th>Besoin Non couvert</th>
-                    <th >Besoin Recu</th>
+                    <th >Besoin Reçu</th>
                     <th>Taux</th>
                   </tr>
                 </thead>
@@ -831,8 +831,8 @@
                   <tr>
                      
                     <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
-                     <th>Unite de zone</th>
+                    <th>Unité d'administrative</th>
+                     <th>Unité de zone</th>
                     <th>Service</th>
                     <th>Fonction</th>
                     <th>Nom et prénoms</th>
@@ -909,9 +909,9 @@
                   <tr>
                      
                     <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
+                    <th>Unité d'administrative</th>
                     
-                     <th>Unite de zone</th>
+                     <th>Unité de zone</th>
                     
                     <th>Service</th>
                     <th>Fonction</th>
@@ -975,9 +975,9 @@
                   <tr>
                      
                     <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
+                    <th>Unité d'administrative</th>
                     
-                     <th>Unite de zone</th>
+                     <th>Unité de zone</th>
                     
                     <th>Service</th>
                     <th>Fonction</th>
@@ -1049,9 +1049,9 @@
                   <tr>
                      
                     <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
+                    <th>Unité d'administrative</th>
                     
-                     <th>Unite de zone</th>
+                     <th>Unité de zone</th>
                     
                     <th>Service</th>
                     <th>Fonction</th>
@@ -1166,19 +1166,19 @@
                     <div id="tab189" class="tab-pane active">
                       <tr>
                         <td>
-                          <label class="control-label">Exercice Budgetaire</label>
+                          <label class="control-label">Exercice Budgétaire</label>
                           
                               <input    type="text"   class="span3" readonly  :value="exerciceBudgetaireEnCours" />                
                              
                         </td>
                         <td>
-                          <label class="control-label">Unite d'administrative</label>
+                          <label class="control-label">Unité d'administrative</label>
                           
                               <input    type="text"   class="span3" readonly  :value="afficherUniteAdministrative(formData.unite_administrative_id)" />                              
                              
                         </td>
                         <td>
-                          <label class="control-label">Unite de Zone</label>
+                          <label class="control-label">Unité de Zone</label>
                           
                               <input    type="text"   class="span4" readonly  :value="afficheUniteZone(formData.uniteZone_id)" />                
                              
@@ -1206,7 +1206,7 @@
                                               
                         </td>
                         <td>
-                          <label class="control-label">Besoin</label>
+                          <label class="control-label">Bésoin</label>
                           
                               <select  v-model="formData2.famillearticle_id" class="span4"  >
                       <option value = ""></option>
@@ -1217,7 +1217,7 @@
                        
                         </td>
                         <td>
-                          <label class="control-label">Quantite en stock</label>
+                          <label class="control-label">Quantité en stock</label>
                           
                               <input    type="text"   class="span3" readonly  :value="afficherQuantiteEnStock(formData2.famillearticle_id)" />                
                              
@@ -1226,13 +1226,13 @@
                       </tr>
                       <tr>
                         <td>
-                          <label class="control-label">Quantite requise</label>
+                          <label class="control-label">Quantité requise</label>
                           
                               <input    type="text"   class="span3" readonly  :value="afficherQuantiteEnRequise(formData2.famillearticle_id)" />                
                              
                         </td>
                           <td>
-                          <label class="control-label">Quantite affecté</label>
+                          <label class="control-label">Quantité affecté</label>
                           
                               <input    type="text"   class="span3"  :max="afficherQuantiteEnRequise(formData2.famillearticle_id)" v-model="formData2.qte_affecte" />                
                              
@@ -1286,7 +1286,7 @@
                              
                         </td>
                           <td>
-                          <label class="control-label">Numero identification</label>
+                          <label class="control-label">Numéro identification</label>
                           
                               <input    type="text"   class="span3"   v-model="formData2.identification" />                
                              
@@ -1341,7 +1341,7 @@
                         </td> -->
                         
                          <td>
-                          <label class="control-label">Duree de vie</label>
+                          <label class="control-label">Durée de vie</label>
                           
                              <input    type="text"   class="span4" readonly  :value="afficherDureeVieFamille(formData2.famillearticle_id)" />                
                              

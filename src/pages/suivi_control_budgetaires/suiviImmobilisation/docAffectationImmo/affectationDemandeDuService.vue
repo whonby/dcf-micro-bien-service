@@ -100,11 +100,11 @@
                   <tr>
                 
                    
-                    <th>Unite d'administrative</th>
+                    <th>Unité d'administrative</th>
                     <th>Service</th>
                     <th>Article</th>
-                    <th>Quantite</th>
-                    <th>Cause inactivite</th>
+                    <th>Quantité</th>
+                    <th>Cause inactivité</th>
                     <th>Cause de la demande</th>
                     <th >Date demande</th>
                      <!-- <th>duré vie</th> -->
@@ -216,11 +216,11 @@
                   <tr>
                 
                    
-                    <th>Unite d'administrative</th>
+                    <th>Unité d'administrative</th>
                     <th>Service</th>
                     <th>Article</th>
-                    <th>Quantite</th>
-                    <th>Cause inactivite</th>
+                    <th>Quantité</th>
+                    <th>Cause inactivité</th>
                     <th>Cause de la demande</th>
                     <th >Date demande</th>
                      <!-- <th>duré vie</th> -->

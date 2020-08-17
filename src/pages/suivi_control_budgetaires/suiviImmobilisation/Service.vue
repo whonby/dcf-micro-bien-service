@@ -11,7 +11,7 @@
       <table class="table table-bordered table-striped">
           
           <div class="control-group">
-            <label class="control-label">Libelle:</label>
+            <label class="control-label">Libellé</label>
             <div class="controls">
               <input
                 type="text"
@@ -46,7 +46,7 @@
      <table class="table table-bordered table-striped">
          
           <div class="control-group">
-            <label class="control-label">Libelle:</label>
+            <label class="control-label">Libellé</label>
             <div class="controls">
               <input
                 type="text"
@@ -107,7 +107,7 @@
               </span>
               <h5>Liste des Services</h5>
               <div align="right">
-                Search:
+                Recherche:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>

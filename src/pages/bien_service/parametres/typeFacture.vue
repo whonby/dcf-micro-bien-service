@@ -98,9 +98,9 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des type de factures</h5>
+              <h5>Liste des types de factures</h5>
               <div align="right">
-                Search:
+                Recherche:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>

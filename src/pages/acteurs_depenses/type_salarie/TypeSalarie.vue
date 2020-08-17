@@ -28,9 +28,9 @@
                                      </div> <br>
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Liste des types salariés</h5>
+                            <h5>Liste des types de salariés</h5>
                             <div align="right">
-                                Search: <input type="text" v-model="search">
+                                Recherche: <input type="text" v-model="search">
                             </div>
 
                         </div>

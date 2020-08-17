@@ -5,7 +5,7 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">Ã—</button>
-        <h3>Ajouter Etat Immobilisation</h3>
+        <h3>Ajouter Etat d'Immobilisation</h3>
       </div>
       <div class="modal-body">
            <table class="table table-bordered table-striped">
@@ -13,7 +13,7 @@
             <tr>
                <td>
                 <div class="control-group">
-                  <label class="control-label">Libelle</label>
+                  <label class="control-label">Libellé</label>
                   <div class="controls">
                     <input
                 type="text"
@@ -45,7 +45,7 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">Ã—</button>
-        <h3>Modifier Etat Immobilisation</h3>
+        <h3>Modifier Etat d'Immobilisation</h3>
       </div>
       <div class="modal-body">
            <table class="table table-bordered table-striped">
@@ -53,7 +53,7 @@
             <tr>
                <td>
                 <div class="control-group">
-                  <label class="control-label">Libelle</label>
+                  <label class="control-label">Libellé</label>
                   <div class="controls">
                     <input
                 type="text"
@@ -105,9 +105,9 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Etats des Immobilisations</h5>
+              <h5>Liste des Etats d'Immobilisations</h5>
               <div align="right">
-                Search:
+                Recherche:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
@@ -128,7 +128,7 @@
                 <thead>
                   <tr>
                    
-                    <th style="width:90%">Libelle</th>
+                    <th style="width:90%">Libellé</th>
                     <th>Action</th>
                   </tr>
                 </thead>
