@@ -98,7 +98,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des types de factures</h5>
+              <h5>Liste des type de factures</h5>
               <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -125,7 +125,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th width="90%">libelle</th>
+                    <th width="90%">libellé</th>
                     <th>Action</th>
                   </tr>
                 </thead>

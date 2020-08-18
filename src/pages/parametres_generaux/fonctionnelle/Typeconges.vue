@@ -31,9 +31,9 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Type conges</h5>
+            <h5>Listes des Types de congés</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search"  placeholder="Searche...">
+        Recherche: <input type="text" v-model="search"  placeholder="  ">
 
           </div>
              

@@ -78,11 +78,11 @@
                                             <th>Raison social </th>
                                             <th>Compte contribuable</th>
                                             <th>Registe commerce </th>
-                                            <th>Secteur activité</th>
+                                            <th>Secteur activite</th>
                                             <th>Pays </th>
                                             <th>Ville</th>
                                             <th>Email </th>
-                                            <th>Téléphone</th>
+                                            <th>Telephone</th>
                                             <th>Statut</th>
                                             <th>Action</th>
                                         </tr>

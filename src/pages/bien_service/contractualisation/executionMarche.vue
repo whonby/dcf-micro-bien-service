@@ -260,9 +260,9 @@ ImputationBudgetModifier
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des marchés attribués </h5>
+              <h5>Liste des marches attribués </h5>
               <div align="right">
-                Recherche:
+                Search:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
@@ -275,9 +275,9 @@ ImputationBudgetModifier
                     <th>Type marché</th>
                     <th>Activité</th>
                     <th>Imputation</th>
-                    <th>Ligne Budgétaire</th>
+                    <th>Ligne Budgetaire</th>
                     <th>Objet marché</th>
-                    <th>Référence marché</th>
+                    <th>Reference marché</th>
                    
                     <th>Montant Réel</th>
                     <th>Action</th>
@@ -359,7 +359,7 @@ ImputationBudgetModifier
                       <td>
                           
                       </td>
-                       <td style="font-weight:bold;"> Total Marché en execution
+                       <td style="font-weight:bold;"> Total Marche en execution
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
                            {{formatageSomme(parseFloat(montantMarcheExecuter))}}

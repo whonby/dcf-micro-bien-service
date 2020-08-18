@@ -12,9 +12,9 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Suivie des congés</h5>
+                            <h5>Suivie des conges</h5>
                             <div align="right">
-                                Recherche: <input type="text">
+                                Search: <input type="text">
                             </div>
 
                         </div>
@@ -24,14 +24,14 @@
                                 <thead>
                                 <tr>
                                     <th>Code</th>
-                                    <th>Type congés</th>
+                                    <th>Type conges</th>
                                     <th>Nom acteur</th>
-                                    <th>Prénoms acteur</th>
+                                    <th>Prenom acteur</th>
                                     <th>Unite admin</th>
-                                    <th>Date début</th>
+                                    <th>Date debut</th>
                                     <th>Date fin</th>
                                     <th>Temps restant</th>
-                                    <th>Année</th>
+                                    <th>Annee</th>
 
                                     <th>Action</th>
                                 </tr>
@@ -77,7 +77,7 @@
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="control-group">
-                        <label class="control-label">Code congé :</label>
+                        <label class="control-label">Code conge :</label>
                         <div class="controls">
                             <input type="text" v-model="conge.code" placeholder="Entre le code congé">
                         </div>
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Date début</label>
+                        <label class="control-label">Date debut</label>
                         <div class="controls">
                             <input type="date"  placeholder="Enter date" v-model="conge.date_debut">
                         </div>
@@ -131,7 +131,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Libellé:</label>
+                        <label class="control-label">Libelle:</label>
                         <div class="controls">
                             <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
                         </div>

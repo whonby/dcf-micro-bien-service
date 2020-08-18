@@ -22,7 +22,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des marchés</h5>
+              <h5>Listes des marches</h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -44,8 +44,8 @@
                      <th>Statut</th>
                     <th>Montant prévu</th>
                     <th>Etat en cours</th>
-                    <th title="mouvement du marché">Mouvement marché</th>
-                    <th style="width:10%">Suivi-marchés</th>
+                    <th title="mouvement du marché">Mvt marché</th>
+                    <th style="width:10%">Suivi-marche</th>
                    <th>Cycle de vie</th>
                   </tr>
                 </thead>

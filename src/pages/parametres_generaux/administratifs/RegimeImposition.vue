@@ -32,7 +32,7 @@
               </span>
               <h5>Listes des Regimes Impositions</h5>
               <div align="right">
-                Rechercher:
+                Recherche:
                 <input type="text" v-model="search" />
               </div>
             </div>
@@ -52,7 +52,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Libellé</th>
+                    <th>LibellÃ©</th>
                      <th style="width:10%">Action</th>
                   </tr>
                 </thead>

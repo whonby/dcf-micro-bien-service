@@ -99,7 +99,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste type candidat</h5>
+              <h5>Liste des types de candidats</h5>
 
               <div align="right">
                 Recherche:

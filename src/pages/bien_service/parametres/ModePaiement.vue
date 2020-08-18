@@ -10,7 +10,7 @@
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">libellé</label>
+            <label class="control-label">libelle</label>
             <div class="controls">
               <input
                 type="text"
@@ -46,7 +46,7 @@
       <div class="modal-body">
          <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">libellé</label>
+            <label class="control-label">libelle</label>
             <div class="controls">
               <input
                 type="text"
@@ -100,7 +100,7 @@
               </span>
               <h5>Liste des Modes paiements </h5>
               <div align="right">
-                Recherche:
+                Search:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
@@ -120,7 +120,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th width="90%">libellé</th>
+                    <th width="90%">libelle</th>
                    
                     <th>Action</th>
                   </tr>

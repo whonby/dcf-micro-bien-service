@@ -17,7 +17,7 @@
                         <div class="widget-title">
                             <div class="span6">
                                 <span class="icon"> <i class="icon-th"></i> </span>
-                                <h5>Liste des contrôleurs financiers</h5>
+                                <h5>Liste des Contrôleurs Financiers</h5>
                             </div>
                             <div class="span6">
                                 <div align="right">
@@ -47,9 +47,9 @@
 
 
                                     <th>Matricule</th>
-                                    <th>Nom et prenom</th>
+                                    <th>Nom et prénom</th>
                                     <th>Email</th>
-                                    <th>Role</th>
+                                    <th>Rôle</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>

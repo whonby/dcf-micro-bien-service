@@ -140,7 +140,7 @@
               </span>
               <h5>Liste des Types de Groupe d'Equipement </h5>
                <div align="right">
-               Recherche:
+                Search:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
@@ -162,7 +162,7 @@
                 <thead>
                   <tr>
                     <th>Classe</th>
-                    <th>Libellé</th>
+                    <th>Libelle</th>
                     <th>Action</th>
                   </tr>
                 </thead>

@@ -33,10 +33,10 @@
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                             <h5>Liste des situations matrimoniales</h5>
-                            <!-- <div align="right">
-                                Search: <input type="text" v-model="search">
+                            <div align="right">
+                                Recherche: <input type="text" v-model="search">
 
-                            </div> -->
+                            </div>
 
                         </div>
 

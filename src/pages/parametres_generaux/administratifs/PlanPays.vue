@@ -30,7 +30,7 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des plans pays</h5>
+            <h5>Liste des plans des pays</h5>
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -44,7 +44,7 @@
                 <tr>
 
                   <th>Code</th>
-                  <th>Libelle</th>
+                  <th>Libellé</th>
                   <th>Structure pays</th>
                    <th>Action</th>
                 </tr>

@@ -32,7 +32,7 @@
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des structures fonctionnelles</h5>
              <div align="right">
-        Recherche: <input type="text" v-model="search"  placeholder="">
+        Recherche: <input type="text" v-model="search"  placeholder=" ">
 
           </div>  
           </div>
@@ -54,7 +54,7 @@
               <thead>
                 <tr>
                   <th>Niveau</th>
-                  <th>Libelle</th>
+                  <th>Libellé</th>
                    <th>Action</th>
                 </tr>     
               </thead>

@@ -238,8 +238,8 @@
                        <table class="table table-bordered table-striped">
                           <thead>
                           <tr>
-                   <th>Exercice budgétaires</th>
-                  <th> Catégorie mission</th>
+                   <th>Exercice budgetaires</th>
+                  <th> Categorie mission</th>
                   <th>Imputation </th>
                    <th>Objet</th>
                   <th> Type de mission</th>

@@ -34,7 +34,7 @@
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des sources de financements</h5>
              <div align="right">
-        Recherche: <input type="text" v-model="search" placeholder="">
+        Rechercher: <input type="text" v-model="search" placeholder=" ">
 
           </div>
              
@@ -57,7 +57,7 @@
               <thead>
                 <tr>
                   <th>Code</th>
-                  <th>Libelle</th>
+                  <th>Libellé</th>
                   <th>Sigle</th>
                    <th>Action</th>
                 </tr>

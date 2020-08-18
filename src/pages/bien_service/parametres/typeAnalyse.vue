@@ -10,7 +10,7 @@
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">libellé</label>
+            <label class="control-label">libelle</label>
             <div class="controls">
               <input
                 type="text"
@@ -47,7 +47,7 @@
       <div class="modal-body">
         <form class="form-horizontal">
             <div class="control-group">
-            <label class="control-label">libellé</label>
+            <label class="control-label">libelle</label>
             <div class="controls">
               <input
                 type="text"
@@ -99,7 +99,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des types analyses</h5>
+              <h5>Liste des types des analyses</h5>
               <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -123,7 +123,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>libelle</th>
+                    <th>libellÃ©</th>
                     <th>Action</th>
                   </tr>
                 </thead>

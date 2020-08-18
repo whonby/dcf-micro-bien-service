@@ -55,7 +55,7 @@
               <thead>
                 <tr>
                   <th>Niveau</th>
-                  <th>Libellé</th>
+                  <th>Libelle</th>
                    <th style="width:10%">Action</th>
                 </tr>
               </thead>
@@ -126,7 +126,7 @@
                           <tr>
                             <td>
 <div class="control-group">
-              <label class="control-label">Libellé:</label>
+              <label class="control-label">Libelle:</label>
               <div class="controls">
                 <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libelle" />
               </div>
@@ -169,7 +169,7 @@
            <tr>
              <td>
                 <div class="control-group">
-              <label class="control-label">Libellé:</label>
+              <label class="control-label">Libelle:</label>
               <div class="controls">
                 <input type="text" v-model="editOrganigrammeUa.libelle" class="span5" placeholder="" />
               </div>

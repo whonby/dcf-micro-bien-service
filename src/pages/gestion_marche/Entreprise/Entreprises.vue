@@ -85,7 +85,7 @@ getSecteurActivite
             <div class="widget-box">
                 <div class="widget-title">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tab1">LISTE DE TOUTES LES ENTREPRISES  <span class="badge badge-inverse">{{nbreEntreprise}}</span></a></li>
+                        <li class="active"><a data-toggle="tab" href="#tab1">LISTE DE TOUTE LES ENTREPRISES  <span class="badge badge-inverse">{{nbreEntreprise}}</span></a></li>
                         <li><a data-toggle="tab" href="#tab2">ENTREPRISE NON SANCTIONNEE  <span class="badge badge-inverse">{{nbreEntrepriseNonSanctionner}}</span></a></li>
                         <li><a data-toggle="tab" href="#tab3">ENTREPRISE SANCTIONNEE  <span class="badge badge-inverse">{{nbreEntrepriseSanctionner}}</span></a></li>
                         <li><a data-toggle="tab" href="#tab378">CHANGE IMPOSITION OU JURIDIQUES  <span class="badge badge-inverse"></span></a></li>
@@ -149,9 +149,9 @@ getSecteurActivite
                                    
                                 </div>
 <div  align="right">
-     <span style="color:#FF0000;text-align:center;font-size:14px;font-weight: bold;">ES:Entreprise Sanctionnée</span> 
+     <span style="color:#FF0000;text-align:center;font-size:14px;font-weight: bold;">ES:Entreprise Sanctionné</span> 
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span style="color:#006400;text-align:center;font-size:14px;font-weight: bold;">ENS:Entreprise Non Sanctionnée</span> 
+                                    <span style="color:#006400;text-align:center;font-size:14px;font-weight: bold;">ENS:Entreprise Non Sanctionné</span> 
 &nbsp;&nbsp;&nbsp;
 </div>
                                     <div class="widget-content nopadding">
@@ -242,9 +242,9 @@ getSecteurActivite
                                      </div>
                                 <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Toutes les entreprises non sanctionnées</h5>
+                                        <h5>Toute les entreprises non sanctionner</h5>
                                         <div align="right">
-                                            Recherche: <input type="text" v-model="search1">
+                                            Search: <input type="text" v-model="search1">
                                         </div>
 
                                     </div>
@@ -340,9 +340,9 @@ getSecteurActivite
                                      </div>
                                 <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Toute les entreprises sanctionnée</h5>
+                                        <h5>Toute les entreprises sanctionner</h5>
                                         <div align="right">
-                                            Recherche: <input type="text" v-model="search2">
+                                            Search: <input type="text" v-model="search2">
                                         </div>
 
                                     </div>

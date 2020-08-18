@@ -345,10 +345,10 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab2078"> Tous les contrats<span class="badge badge-inverse" >{{nombreDeContrat}}</span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab2078"> Toutes les contrats<span class="badge badge-inverse" >{{nombreDeContrat}}</span></a></li>
                                
                                <li ><a data-toggle="tab" href="#tab100">  Contrat Planifiés <span class="badge badge-important" >   {{nombreContratEnPlanification}}</span></a></li>
-                                <li ><a data-toggle="tab" href="#tab10">    Contrat en cours Contractualisation  <span class="badge badge-success" >{{nombreContratEnContratualisation}}</span></a></li>
+                                <li ><a data-toggle="tab" href="#tab10">    Contrat en cours Contratualisation  <span class="badge badge-success" >{{nombreContratEnContratualisation}}</span></a></li>
                                 <!-- <li><a data-toggle="tab" href="#tab20">  Contrat signé<span class="badge badge-warning" >   {{0}}   </span></a></li> -->
                                  <!-- <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{afficheNombreMarcheResilier}}</span></a></li>
                                   <li><a data-toggle="tab" href="#tab208">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li> -->
@@ -362,7 +362,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des contrats En cours de Contractualisation</h5>
+              <h5>Liste des contrats En cours de Contratualisation</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -373,7 +373,7 @@
                   <tr>
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type march&eacute;</th>
+                      <th>Type marche</th>
                    
                     <th>Activit&eacute;</th>
                     <th>Imputation</th>
@@ -448,7 +448,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Contrats</h5>
+              <h5>Liste des Contrat&eacute;s</h5>
               
             </div>
               <table class="table table-bordered table-striped">
@@ -695,7 +695,7 @@
                  <tr>
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marché</th>
+                      <th>Type marche</th>
                    
                     <th>Activit&eacute;</th>
                     <th>Imputation</th>

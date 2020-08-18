@@ -13,7 +13,7 @@
             <tr>
                <td>
                 <div class="control-group">
-                  <label class="control-label">Libellé</label>
+                  <label class="control-label">Libelle</label>
                   <div class="controls">
                     <input
                 type="text"
@@ -52,7 +52,7 @@
             <tr>
                <td>
                 <div class="control-group">
-                  <label class="control-label">Libellé</label>
+                  <label class="control-label">Libelle</label>
                   <div class="controls">
                     <input
                 type="text"

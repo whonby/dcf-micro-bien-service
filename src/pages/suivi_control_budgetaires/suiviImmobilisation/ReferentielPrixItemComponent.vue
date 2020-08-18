@@ -19,7 +19,7 @@
                 <thead>
                   <tr>
                     <!-- <th>Famille</th> -->
-                    <th>D?signation</th>
+                    <th>Designation</th>
                      <th>Prix HT</th>
                       <th>Taux</th>
                       <th>TVA</th>

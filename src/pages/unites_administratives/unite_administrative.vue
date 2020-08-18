@@ -388,7 +388,7 @@
                 <thead>
                   <tr>
                     <th title="type unite administrative">Type ua</th>
-                    <th>Nature Section</th>
+                    <th>nature Section</th>
                     <th>Section</th>
                     <th title="service gestionnaire">Service gest</th>
                      <th title="localisation geographique">Localisation geo</th>

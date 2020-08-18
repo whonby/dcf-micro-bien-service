@@ -157,7 +157,7 @@
      <div class="control-group">
                                     <label class="control-label">Matricule</label>
                                     <div class="controls">
-                                        <input type="text" :value="afficheMatriculeUtilisateur"  placeholder="Saisir le matricule" class="span12" readonly/>
+                                        <input type="text" v-model="formData.matricule"  placeholder="Saisir le matricule" class="span12"/>
                                     </div>
                                 </div>
 </td>

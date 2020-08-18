@@ -4,7 +4,7 @@
       <div id="exampleModal" class="modal hide taillemodal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">Ã—</button>
-        <h3>Ajouter Référentiel des prix</h3>
+        <h3>Ajouter Referentiel des prix</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">

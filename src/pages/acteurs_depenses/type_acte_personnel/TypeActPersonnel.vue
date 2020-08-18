@@ -43,7 +43,7 @@
                         <div class="widget-title">
                 <div class="span6">
                     <span class="icon"> <i class="icon-th"></i> </span>
-                 <h5>Liste  type acte  personnel</h5>
+                 <h5>Listes des types des actes du personnel</h5>
                 </div>
                             <div class="span6">
                                 <div align="right">

@@ -12,7 +12,7 @@
                     <thead>
                     <tr>
 
-                        <th>Unité administrative</th>
+                        <th>Uninte administrative</th>
                         <th>Service</th>
                         <th>EquipÃ©</th>
                     </tr>

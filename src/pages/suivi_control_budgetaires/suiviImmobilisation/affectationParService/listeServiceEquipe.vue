@@ -13,7 +13,7 @@
                     <thead>
                     <tr>
 
-                        <th style="width:40%">Unité administrative</th>
+                        <th style="width:40%">Uninte administrative</th>
                         <th style="width:40%">Service</th>
                         <th >EquipÃ©</th>
                     

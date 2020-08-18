@@ -40,12 +40,12 @@
                     <th>Matricule</th>
                     <th>Nom & Prénoms</th>
                     
-                     <th>Unité administrative</th>
-                    <th>Unité de zone</th>
+                     <th>Unite administrative</th>
+                    <th>Unite de zone</th>
                     <th>Fonction</th>
                       <th>Article</th>
                     <th>Quantité</th>
-                    <th>Durée de vie</th>
+                    <th>Duree de vie</th>
                     <!-- <th>Etat Immobilisation</th> -->
                     <th>Date mise en service</th>
                       <th>Montant</th>
@@ -134,12 +134,12 @@
                     <th>Matricule</th>
                     <th>Nom & Prénoms</th>
                     
-                     <th>Unité administrative</th>
-                    <th>Unité de zone</th>
+                     <th>Unite administrative</th>
+                    <th>Unite de zone</th>
                     <th>Fonction</th>
                       <th>Article</th>
                     <th>Quantité</th>
-                    <th>Durée de vie</th>
+                    <th>Duree de vie</th>
                     <th>Etat Immobilisation</th>
                     <th>Date mise en service</th>
                       <th>Montant</th>
