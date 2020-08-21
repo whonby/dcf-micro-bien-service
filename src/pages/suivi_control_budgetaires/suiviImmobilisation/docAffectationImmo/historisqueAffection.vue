@@ -29,7 +29,7 @@
                     <div id="tab1" class="tab-pane active">
   <div class="widget-content nopadding" >
      <div align="right">
-                Search:
+                Recherche:
                 <input type="search" placeholder v-model="search"/>
               </div>
               <table class="table table-bordered table-striped">
@@ -123,7 +123,7 @@
                             <div id="tab2" class="tab-pane ">
   <div class="widget-content nopadding" >
      <div align="right">
-                Search:
+                Recherche:
                 <input type="search" placeholder v-model="search1"/>
               </div>
               <table class="table table-bordered table-striped">
