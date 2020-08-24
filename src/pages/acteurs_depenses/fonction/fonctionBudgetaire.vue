@@ -30,7 +30,7 @@
 
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Liste des fonctions Budgétaires</h5>
+                            <h5>Liste des Fonctions Budgétaires</h5>
                             <div align="right">
                                 Recherche: <input type="text" v-model="search">
 

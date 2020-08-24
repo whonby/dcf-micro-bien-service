@@ -500,7 +500,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des normes</h5>
+              <h5>Liste des normes</h5>
              
             </div>
 

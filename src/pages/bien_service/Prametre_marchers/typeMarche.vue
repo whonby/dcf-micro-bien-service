@@ -126,7 +126,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>libelle</th>
+                    <th>Libellé</th>
                     <th>Action</th>
                   </tr>
                 </thead>

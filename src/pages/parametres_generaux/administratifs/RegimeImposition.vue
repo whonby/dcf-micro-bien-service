@@ -30,7 +30,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des Regimes Impositions</h5>
+              <h5>Liste des Regimes d'impositions</h5>
               <div align="right">
                 Recherche:
                 <input type="text" v-model="search" />

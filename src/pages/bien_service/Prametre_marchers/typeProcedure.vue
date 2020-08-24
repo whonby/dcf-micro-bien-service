@@ -109,7 +109,7 @@
               </span>
               <h5>Familles de procédure </h5>
               <div align="right">
-                Search:
+                Recherche:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
@@ -128,7 +128,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th width="95%">libelle</th>
+                    <th width="95%">Libellé</th>
                     <th>Action</th>
                   </tr>
                 </thead>

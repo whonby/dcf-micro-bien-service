@@ -99,7 +99,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des types des analyses</h5>
+              <h5>Liste des types d'analyses</h5>
               <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -123,7 +123,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>libellé</th>
+                    <th>Libellé</th>
                     <th>Action</th>
                   </tr>
                 </thead>

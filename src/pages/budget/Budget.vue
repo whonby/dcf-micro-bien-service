@@ -11,7 +11,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                    <h5>Liste des budget importer </h5>
+                    <h5>Liste des budgets importés </h5>
                     <!-- <div align="right">
                          Recherche:
                          <input type="search" placeholder v-model="search" />
@@ -22,7 +22,7 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab1">Budget importer</a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab1">Budget importé</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2">Importation du budget</a></li>
 
                             </ul>
@@ -34,8 +34,8 @@
                                         <thead>
                                         <tr>
                                             <th>Code budget</th>
-                                            <th>Exercice budget</th>
-                                            <th>Status</th>
+                                            <th>Exercice budgétaire</th>
+                                            <th>Statut</th>
                                             <th>Montant Global</th>
                                             <th>Action</th>
                                         </tr>

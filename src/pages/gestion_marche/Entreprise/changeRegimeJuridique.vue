@@ -75,14 +75,14 @@
                                         <thead>
                                         <tr>
                                             <th>IDU</th>
-                                            <th>Raison social </th>
-                                            <th>Compte contribuable</th>
-                                            <th>Registe commerce </th>
-                                            <th>Secteur activite</th>
+                                            <th>Raison Sociale </th>
+                                            <th>Compte Contribuable</th>
+                                            <th>Registre de commerce </th>
+                                            <th>Secteur d'activité</th>
                                             <th>Pays </th>
                                             <th>Ville</th>
                                             <th>Email </th>
-                                            <th>Telephone</th>
+                                            <th>Téléphone</th>
                                             <th>Statut</th>
                                             <th>Action</th>
                                         </tr>

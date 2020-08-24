@@ -19,7 +19,7 @@
                 type="text"
                 v-model="formData.libelle"
                 class="span5"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libellé"
               />
                   </div>
                 </div>

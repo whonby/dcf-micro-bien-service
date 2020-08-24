@@ -47,7 +47,7 @@
 
 
                                     <th>Matricule</th>
-                                    <th>Nom et prénom</th>
+                                    <th>Nom et prénoms</th>
                                     <th>Email</th>
                                     <th>Rôle</th>
                                     <th>Action</th>

@@ -18,7 +18,7 @@
               </td>
             </tr>
           </table>-->
-     <h3 style="text-align:center">Synthese budgetaire :<span style="color: red;">{{anneeAmort}}</span></h3>
+     <h3 style="text-align:center">Synthèse budgétaire :<span style="color: red;">{{anneeAmort}}</span></h3>
            
               <table class="table table-bordered table-striped" id="titre">
                 <thead>
@@ -35,7 +35,7 @@
  </thead>
  <tbody>
                     <tr>
-    <td height="10px" rowspan="3" style="text-align:center;">PERSONNEL</td>
+    <td height="10px" rowspan="3" style="text-align:center;">PERSONNELS</td>
     <td height="10px">CONTREPARTIE  </td>
      <td style="width:12%">ETAT</td>
      <td height="10px" style="text-align:center;font-size:12px">{{formatageSomme(parseFloat(AfficheMontantTresor))}}</td>
@@ -66,7 +66,7 @@
       <th height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">11</th> -->
  </tr>
                     <tr>
-    <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS TOTAL PERSONNEL">S/T PERSONNEL</th>
+    <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS-TOTAL PERSONNELS">S/T PERSONNELS</th>
     
      <td height="10px"></td>
      <td height="10px" style="text-align:center;background-color: orange;color: #000000;font-size:12px">{{formatageSomme(parseFloat(AfficheMontantTresor)+parseFloat(AfficheMontantDon)+parseFloat(AfficheMontantEmprunt))}}</td>
@@ -76,7 +76,7 @@
       <th height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">01</th> -->
  </tr>                
    <tr>
-   <td   rowspan="3" style="text-align:center;width:12%">B.SERVICES</td>
+   <td   rowspan="3" style="text-align:center;width:12%">BIENS ET SERVICES</td>
    <td style="width:12%" > CONTREPARTIE </td>
     <td style="width:12%" >ETAT</td>
     <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService))}}</td>
@@ -110,7 +110,7 @@
      <th height="20px">78</th> -->
 </tr>
                    <tr>
-   <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="S.T.BIENS ET SERVICES">S/T B.SERVICES</th>
+   <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS-TOTAL BIENS ET SERVICES">S/T BIENS ET SERVICES</th>
    
     <td height="20px"></td>
     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService)+parseFloat(AfficheMontantDonBienEtService)+parseFloat(AfficheMontantEmpruntBienEtService))}}</td>
@@ -118,7 +118,7 @@
      <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorBienEtService)-parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonBienEtService)-parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntBienEtService)-parseFloat(AfficheMontantEmpruntConsommerBienEtService)))}}</td>
                    </tr>   
                    <tr>
-   <td  rowspan="3" style="text-align:center;width:10%">TRANSFERT </td>
+   <td  rowspan="3" style="text-align:center;width:10%">TRANSFERTS </td>
    <td style="width:12%"> CONTREPARTIE </td>
     <td style="width:12%">ETAT</td>
   
@@ -154,7 +154,7 @@
 
 
                    <tr>
-   <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS-TOTAL TRANSFERT">S/T TRANSFERT  </th>
+   <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS-TOTAL TRANSFERTS">S/T TRANSFERTS  </th>
    
     <td height="20px"></td>
    <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresorTransfert)+parseFloat(AfficheMontantDonTransfert)+parseFloat(AfficheMontantEmpruntTransfert))}}</td>
@@ -202,7 +202,7 @@
 
 
                    <tr>
-   <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS-TOTAL TRANSFERT">S/T INVESTISSEMENTS  </th>
+   <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS-TOTAL INVESTISSEMENTS">S/T INVESTISSEMENTS  </th>
    
     <td height="20px"></td>
    <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresorIvestissement)+parseFloat(AfficheMontantDonIvestissement)+parseFloat(AfficheMontantEmpruntIvestissement))}}</td>
