@@ -30,9 +30,9 @@
                                      </div> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des structures Organigramme Ua</h5>
+            <h5>Liste des Structures Organigramme Ua</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search">
+        Recherche: <input type="text" v-model="search">
 
           </div>
              
@@ -55,7 +55,7 @@
               <thead>
                 <tr>
                   <th>Niveau</th>
-                  <th>Libelle</th>
+                  <th>Libellé</th>
                    <th style="width:10%">Action</th>
                 </tr>
               </thead>

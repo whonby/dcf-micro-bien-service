@@ -117,7 +117,7 @@
                 <thead>
                   <tr>
                    
-                    <th>Libelle</th>
+                    <th>Libellé</th>
                     <th>Action</th>
                   </tr>
                 </thead>

@@ -92,7 +92,7 @@
                           </td>
                             <td>
                         <div class="control-group">
-                            <label>Code de la  agence</label>
+                            <label>Code de l'agence</label>
                             <div class="controls">
                                 <select v-model="formData.numero_agence" class="span4" :readOnly="verroCodeAgence">
                                                             <option></option>
@@ -108,7 +108,7 @@
 
                         <div class="control-group">
                             <div class="controls">
-                                <label>Nom de la Agence</label>
+                                <label>Nom de l'Agence</label>
                                 <input type="text" class="span4" placeholder="Saisir l'agence" :value="AffichierNomAgence" readonly>
                             </div>
                         </div>
@@ -116,7 +116,7 @@
                           <td>
 
                         <div class="control-group">
-                            <label>Telephone agence</label>
+                            <label>Téléphone agence</label>
                             <div class="controls">
                                 <input type="text"  readonly   class="span4" placeholder="saisir le teleophone agence" :value="AffichierNumeroAgence">
                             </div>
@@ -130,7 +130,7 @@
                           <td>
                      
                         <div class="control-group">
-                            <label>Situation geographique</label>
+                            <label>Situation géographique</label>
                             <div class="controls">
                                 <input type="text" class="span4"  readonly  placeholder="sitaution geographique" :value="AffichierSituationGeoAgence">
                             </div>
@@ -330,7 +330,7 @@
                           </td>
                             <td>
                         <div class="control-group">
-                            <label>Code de la  agence</label>
+                            <label>Code de l'agence</label>
                             <div class="controls">
                                 <select v-model="editBanqueUa.numero_agence" class="span4" :readOnly="verroCodeAgence">
                                                             <option></option>
@@ -345,7 +345,7 @@
 
                         <div class="control-group">
                             <div class="controls">
-                                <label>Nom de la Agence</label>
+                                <label>Nom de l'Agence</label>
                                 <input type="text" class="span4" placeholder="Saisir l'agence" :value="AffichierNomAgenceModifier" readonly>
                             </div>
                         </div>
@@ -353,7 +353,7 @@
                           <td>
 
                         <div class="control-group">
-                            <label>Telephone agence</label>
+                            <label>Téléphone agence</label>
                             <div class="controls">
                                 <input type="text"  readonly   class="span4" placeholder="saisir le teleophone agence" :value="AffichierNumeroAgenceModifier">
                             </div>
@@ -368,7 +368,7 @@
                           <td>
                      
                         <div class="control-group">
-                            <label>Situation geographique</label>
+                            <label>Situation géographique</label>
                             <div class="controls">
                                 <input type="text" class="span4"  readonly  placeholder="sitaution geographique" :value="AffichierSituationGeoAgenceModifier">
                             </div>
@@ -501,7 +501,7 @@
         <div class="widget-title">
           <div align="right">
             Recherche:
-            <input type="search" placeholder="Saisie section ou libelle" v-model="search" />
+            <input type="search" placeholder="" v-model="search" />
           </div>
           <span class="icon">
             <i class="icon-th"></i>
@@ -516,7 +516,7 @@
             <thead>
               <tr>
                 
-                 <th title="unite administrative"> ua</th>
+                 <th title="unite administrative"> Ua</th>
  
  
  

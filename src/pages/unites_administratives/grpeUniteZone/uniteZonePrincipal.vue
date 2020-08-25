@@ -62,7 +62,7 @@
                <td>
               
                <div class="control-group">
-                  <label class="control-label">longitude</label>
+                  <label class="control-label">Longitude</label>
                   <div class="controls">
                        <input
                       type="number"
@@ -78,7 +78,7 @@
                 <td>
               
                <div class="control-group">
-                  <label class="control-label">latitude</label>
+                  <label class="control-label">Latitude</label>
                   <div class="controls">
                        <input
                       type="number"
@@ -255,6 +255,7 @@
                      
                       
                     />
+                    
                    
                   </div>
                 </div>

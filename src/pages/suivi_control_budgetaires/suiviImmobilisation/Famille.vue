@@ -28,24 +28,24 @@
                           </div>
                          
           <div class="control-group">
-            <label class="control-label">Nom famille acticles</label>
+            <label class="control-label">Nom famille d'article</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
                 class="span"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>
              <div class="control-group">
-            <label class="control-label">Dure de vie</label>
+            <label class="control-label">Durée de vie</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.dureVie"
                 class="span"
-                placeholder="Saisir la dure de vie"
+                placeholder="Saisir la durée de vie"
               />
             </div>
           </div>
@@ -92,18 +92,18 @@
                 type="text"
                 v-model="editFamille.libelle"
                 class="span"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>
            <div class="control-group">
-            <label class="control-label">Duree de vie</label>
+            <label class="control-label">Durée de vie</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editFamille.dureVie"
                 class="span"
-                placeholder="Saisir la dure de vie"
+                placeholder="Saisir la durée de vie"
               />
             </div>
           </div>
@@ -147,7 +147,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste Familles Articles</h5>
+              <h5>Liste des Familles d'Articles</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />

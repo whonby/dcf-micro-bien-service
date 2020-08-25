@@ -49,7 +49,7 @@
                                   
                                    
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Toutes les entreprises non sanctionner</h5>
+                                        <h5>Toutes les entreprises non sanctionnées</h5>
                                         <div align="right">
                                             Recherche: <input type="text" v-model="search">
                                         </div>
@@ -86,13 +86,13 @@
               
             </th> -->
                                             <th>IDU</th>
-                                            <th>Raison social</th>
-                                            <th>Compte contribuable</th>
-                                            <th>Registe commerce </th>
-                                            <th>Secteur activite</th>
-                                            <th>Date de creation</th>
-                                            <th>Date Activite</th>
-                                            <th>Regime Impossition</th>
+                                            <th>Raison Sociale</th>
+                                            <th>Compte Contribuable</th>
+                                            <th>Registre de commerce </th>
+                                            <th>Secteur d'activité</th>
+                                            <th>Date de création</th>
+                                            <th>Date d'activité</th>
+                                            <th>Régime d'impossition</th>
                                             <th>Forme Juridique</th>
                                             <th>Statut</th>
                                             <th>Action</th>

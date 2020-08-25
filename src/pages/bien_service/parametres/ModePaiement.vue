@@ -98,9 +98,9 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Modes paiements </h5>
+              <h5>Liste des Modes de paiements </h5>
               <div align="right">
-                Search:
+                Recherche:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
@@ -120,7 +120,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th width="90%">libelle</th>
+                    <th width="90%">Libellé</th>
                    
                     <th>Action</th>
                   </tr>

@@ -85,7 +85,7 @@ getSecteurActivite
             <div class="widget-box">
                 <div class="widget-title">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tab1">LISTE DE TOUTE LES ENTREPRISES  <span class="badge badge-inverse">{{nbreEntreprise}}</span></a></li>
+                        <li class="active"><a data-toggle="tab" href="#tab1">LISTE DE TOUTES LES ENTREPRISES  <span class="badge badge-inverse">{{nbreEntreprise}}</span></a></li>
                         <li><a data-toggle="tab" href="#tab2">ENTREPRISE NON SANCTIONNEE  <span class="badge badge-inverse">{{nbreEntrepriseNonSanctionner}}</span></a></li>
                         <li><a data-toggle="tab" href="#tab3">ENTREPRISE SANCTIONNEE  <span class="badge badge-inverse">{{nbreEntrepriseSanctionner}}</span></a></li>
                         <li><a data-toggle="tab" href="#tab378">CHANGE IMPOSITION OU JURIDIQUES  <span class="badge badge-inverse"></span></a></li>
@@ -159,14 +159,14 @@ getSecteurActivite
                                             <thead>
                                             <tr>
                                                 <th>IDU</th>
-                                                <th>Raison social </th>
-                                                <th>Compte contribuable</th>
-                                                <th>Registe commerce </th>
-                                                <th>Secteur activite</th>
+                                                <th>Raison Sociale </th>
+                                                <th>Compte Contribuable</th>
+                                                <th>Registre de Commerce </th>
+                                                <th>Secteur d'activité</th>
                                                 <th>Pays </th>
                                                 <th>Ville</th>
                                                 <th>Email </th>
-                                                <th>Telephone</th>
+                                                <th>Téléphone</th>
                                                 <th>Statut</th>
                                                 <th>Action</th>
                                             </tr>
@@ -242,9 +242,9 @@ getSecteurActivite
                                      </div>
                                 <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Toute les entreprises non sanctionner</h5>
+                                        <h5>Toutes les entreprises non sanctionnées</h5>
                                         <div align="right">
-                                            Search: <input type="text" v-model="search1">
+                                            Recherche: <input type="text" v-model="search1">
                                         </div>
 
                                     </div>
@@ -263,14 +263,14 @@ getSecteurActivite
                                         <thead>
                                         <tr>
                                             <th>IDU</th>
-                                            <th>Raison social </th>
-                                            <th>Compte contribuable</th>
-                                            <th>Registe commerce </th>
-                                            <th>Secteur activite</th>
+                                            <th>Raison Sociale </th>
+                                            <th>Compte Contribuable</th>
+                                            <th>Registred e commerce </th>
+                                            <th>Secteur d'activité</th>
                                             <th>Pays </th>
                                             <th>Ville</th>
                                             <th>Email </th>
-                                            <th>Telephone</th>
+                                            <th>Téléphone</th>
                                             <th>Statut</th>
                                             <th>Action</th>
                                         </tr>
@@ -340,9 +340,9 @@ getSecteurActivite
                                      </div>
                                 <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Toute les entreprises sanctionner</h5>
+                                        <h5>Toutes les entreprises sanctionnées</h5>
                                         <div align="right">
-                                            Search: <input type="text" v-model="search2">
+                                            Recherche: <input type="text" v-model="search2">
                                         </div>
 
                                     </div>
@@ -362,14 +362,14 @@ getSecteurActivite
                                             <thead>
                                             <tr>
                                                 <th>IDU</th>
-                                                <th>Raison sociale </th>
-                                                <th>Compte contribuable</th>
-                                                <th>Registe commerce </th>
-                                                <th>Secteur activite</th>
+                                                <th>Raison Sociale </th>
+                                                <th>Compte Contribuable</th>
+                                                <th>Registre de commerce </th>
+                                                <th>Secteur d'activité</th>
                                                 <th>Pays </th>
                                                 <th>Ville</th>
                                                 <th>Email </th>
-                                                <th>Telephone</th>
+                                                <th>Téléphone</th>
                                                <th>Statut</th>
                                                 <th colspan="3">Action</th>
                                             </tr>

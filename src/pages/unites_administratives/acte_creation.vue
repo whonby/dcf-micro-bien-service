@@ -132,7 +132,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des acte de création</h5>
+              <h5>Liste des actes de création</h5>
               <div align="right">
                 Search:
                 <input
@@ -148,7 +148,7 @@
                 <thead>
                   <tr>
                     <th>Code</th>
-                    <th>Libelle</th>
+                    <th>Libellé</th>
                     <th>Type texte</th>
                     <th>Unité Administrative</th>
                     <th>Action</th>

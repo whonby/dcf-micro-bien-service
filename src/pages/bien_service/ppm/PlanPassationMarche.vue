@@ -8,8 +8,8 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                    <h5>Liste des plan de passation des marches</h5>
-                   <!-- <div align="right">
+                    <h5>Liste des plans de passation des marchés</h5>
+                   <!-- <div align="right"
                         Recherche:
                         <input type="search" placeholder v-model="search" />
                     </div>-->
@@ -20,7 +20,7 @@
                         <thead>
                         <tr>
                             <th>Code</th>
-                            <th>Libelle</th>
+                            <th>Libellé</th>
                             <th>Date d'importation</th>
                             <th>Exercice</th>
                             <th>Action</th>
@@ -50,13 +50,13 @@
         <div id="exampleModal" class="modal hide taillemodal">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter le plan de passation des marches</h3>
+                <h3>Ajouter le plan de passation des marchés</h3>
             </div>
             <div class="modal-body">
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>Importation de PMP</th>
+                        <th>Importation de PPM</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -64,7 +64,7 @@
 
                     <tr>
                         <td>
-                        Unite administrative
+                        Unité administrative
                     </td>
                         <td>
                             <model-list-select style="background-color: rgb(255,255,255);"
@@ -81,7 +81,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Exercice budgetaire</td>
+                        <td>Exercice Budgétaire</td>
                         <td> <input
                                 type="text"
                                 class="span"

@@ -5,43 +5,43 @@
         <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel))}}</span> B.PERSONNEL
+            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel))}}</span> PERSONNELS
           </a>
         </li>
         <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModuleBienService))}}</span>B.BIENS ET SERVICES
+            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModuleBienService))}}</span>BIENS ET SERVICES
           </a>
         </li>
          <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModuleTransfert))}}</span>B.TRANSFERTS
+            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModuleTransfert))}}</span>TRANSFERTS
           </a>
         </li>
          <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModuleInvestissement))}}</span>B.INVESTISSEMEENT
+            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModuleInvestissement))}}</span>INVESTISSEMENTS
           </a>
         </li>
          <li class="bg_ls">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-info">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) }}</span> B.TOTAL
+            <span class="label label-info">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) }}</span> TOTAL
           </a>
         </li>
         <li class="bg_lg">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme((parseFloat(budgetConsommerPersonnelGlobal) +parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)))}}</span>B.CONSOMME
+            <span class="label label-success">{{formatageSomme((parseFloat(budgetConsommerPersonnelGlobal) +parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)))}}</span>CONSOMMES
           </a>
         </li>
          <li class="bg_lr">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-important">{{formatageSomme((parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) - (parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)+parseFloat(budgetConsommerPersonnelGlobal)) )}}</span>B.DISPONIBLE
+            <span class="label label-important">{{formatageSomme((parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) - (parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)+parseFloat(budgetConsommerPersonnelGlobal)) )}}</span>DISPONIBLES
           </a>
         </li>
          <li class="bg_lb">
@@ -181,16 +181,16 @@
           <table class="table table-bordered table-striped">
             <thead>
               <tr style="">
-                <th style="font-size:15px;">Unite administrative</th>
-                <th style="font-size:15px;" title="Budget du personnel">B.Personnel</th>
+                <th style="font-size:15px;">Unité administrative</th>
+                <th style="font-size:15px;" title="Budget du personnel">Personnels</th>
 
-                <th style="font-size:15px;" title="Budget de bien et service">B.Bien et Service</th>
-                <th style="font-size:15px;" title="Budget en inverstisement">B.Inverstisement</th>
-                <th style="font-size:15px;" title="Budget en transfert">B.transfert</th>
+                <th style="font-size:15px;" title="Budget de bien et service">Biens et Services</th>
+                <th style="font-size:15px;" title="Budget en inverstisement">Inverstisements</th>
+                <th style="font-size:15px;" title="Budget en transfert">Transferts</th>
 
                 <th style="font-size:15px;background: blue; color:#fff">Total</th>
-                <th style="font-size:15px;background: forestgreen; color:#fff">Consommé</th>
-                <th style="font-size:15px;background: red;color:#fff">Disponible</th>
+                <th style="font-size:15px;background: forestgreen; color:#fff">Consommés</th>
+                <th style="font-size:15px;background: red;color:#fff">Disponibles</th>
                 <th style="font-size:15px;background:deepskyblue;color:#fff">Taux Exécution (%)</th>
                   <th style="font-size:15px;background: default;color:#fff">Action</th>
               </tr>

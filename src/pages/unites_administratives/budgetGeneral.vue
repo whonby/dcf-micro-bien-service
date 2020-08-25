@@ -42,7 +42,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Budget General</h5>
+              <h5>Budget Géneral</h5>
               <!-- <h5>Budget General par Ua</h5> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -65,14 +65,14 @@
                   <tr>
                        <!-- <th>Exercice</th>
                     <th title="">Code Budget</th> -->
-                     <th title="unite administrative">ua</th>
+                     <th title="unite administrative">Ua</th>
                     <th>Section</th>
                     <th title="grande nature depense">Gde nature</th>
                       <th>Programme</th>
                     <th>Action</th> 
-                    <th>Activite</th> 
-                     <th title="classification fonctionnel">Clsse Fontionnel</th>
-                     <th title="classification Economique">Clsse Economique</th>
+                    <th>Activité</th> 
+                     <th title="classification fonctionnel">Classe Fontionnel</th>
+                     <th title="classification Economique">Classe Economique</th>
                     <th>Dotation Initial</th>
                     <!-- <th>Version</th>
                     

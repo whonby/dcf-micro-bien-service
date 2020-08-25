@@ -43,7 +43,7 @@
                         <div class="widget-title">
                 <div class="span6">
                     <span class="icon"> <i class="icon-th"></i> </span>
-                 <h5>Listes des types des actes du personnel</h5>
+                 <h5>Liste des types des actes du personnel</h5>
                 </div>
                             <div class="span6">
                                 <div align="right">
@@ -132,7 +132,7 @@
                     <div class="control-group">
                         <label class="control-label">Libellé:</label>
                         <div class="controls">
-                            <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                            <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
                         </div>
                     </div>
 

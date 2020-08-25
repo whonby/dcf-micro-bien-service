@@ -31,7 +31,7 @@
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des banques</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search">
+        Recherche: <input type="text" v-model="search">
 
           </div>
              
@@ -54,9 +54,9 @@
                 <tr>
                   <th>Code banque</th>
                      <!-- <th>Numero banque</th> -->
-                    <th>Libelle</th>
-                  <th>Telephone</th>
-                  <th>Situation geographique</th>
+                    <th>Libellé</th>
+                  <th>Téléphone</th>
+                  <th>Situation géographique</th>
                    <th>Action</th>
                 </tr>
               </thead>

@@ -29,7 +29,7 @@
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des plans budgetaires 4</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search">
+        Recherche: <input type="text" v-model="search">
 
           </div>
              
@@ -40,7 +40,7 @@
               <thead>
                 <tr>
                  <th>Code</th>
-                  <th>Libelle</th>
+                  <th>Libellé</th>
                   <th>Structure budgétaire</th>
                    <th>Action</th>
                 </tr>
