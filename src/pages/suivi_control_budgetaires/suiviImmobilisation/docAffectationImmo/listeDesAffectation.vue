@@ -166,7 +166,7 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab8969">NOUVELLE PERSONNES   </a>
+                        <a data-toggle="tab" href="#tab8969">NOUVELLE PERSONNE  </a>
                       </li>
                        <li>
                         <a data-toggle="tab" href="#tab7458">AFFECTATION DES DEMANDES DU PERSONNEL   </a>
@@ -194,11 +194,11 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab456">Listes des services   </a>
+                        <a data-toggle="tab" href="#tab456">Liste des services   </a>
                         <!-- <span class="badge badge-inverse">{{NombreDeService}}</span> -->
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab46">Listes des services non Equipé  </a>
+                        <a data-toggle="tab" href="#tab46">Liste des services non Equipés  </a>
                         <!-- <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span> -->
                       </li>
                       <li class="">
@@ -206,11 +206,11 @@
                         <!-- <span class="badge badge-warning">{{affichenbreEquipementNonCouvert}}</span> -->
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab63">Listes des services Equipé     </a>
+                        <a data-toggle="tab" href="#tab63">Liste des services Equipés     </a>
                         <!-- <span class="badge badge-info">{{NombreafficheEquipementCouvertService}}</span> -->
                       </li>
                       <li class="">
-                        <a data-toggle="tab" href="#tab6396">Taux equipement des services  </a>
+                        <a data-toggle="tab" href="#tab6396">Taux équipement des services  </a>
                       </li>
                  
                     </ul>
@@ -277,14 +277,14 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                        <a data-toggle="tab" href="#tab129">Listes des Demande    <span class="badge badge-info">{{nombreDemande}}</span></a>
+                        <a data-toggle="tab" href="#tab129">Liste des Demandes    <span class="badge badge-info">{{nombreDemande}}</span></a>
                       </li>
                       <li class="">
                         
-                        <a data-toggle="tab" href="#tab112">Validation Chef service  <span class="badge badge-inverse">{{nombreValidationEnAttenteChefService}}</span></a>
+                        <a data-toggle="tab" href="#tab112">Validation du Chef de Service  <span class="badge badge-inverse">{{nombreValidationEnAttenteChefService}}</span></a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab132">Validation Directeur  <span class="badge badge-important">{{nombreValidationEnAttenteDirecteur}}</span></a>
+                        <a data-toggle="tab" href="#tab132">Validation du Directeur  <span class="badge badge-important">{{nombreValidationEnAttenteDirecteur}}</span></a>
                       </li>
                     
                      
@@ -315,17 +315,17 @@
                      
                   
                     
-                    <th>Nom et prénoms</th>
-                    <th>Unite d'administrative</th>
-                     <th>Unite de zone</th>
+                    <th>Nom et Prénoms</th>
+                    <th>Unité administrative</th>
+                     <th>Unité de zone</th>
                     <th>Fonction</th>
                     <th>Article</th>
-                    <th>Quantite</th>
-                    <th>Cause inactivite</th>
+                    <th>Quantité</th>
+                    <th>Cause d'inactivité</th>
                     <th>Cause de la demande</th>
                     <th >Date demande</th>
-                     <th>duré vie</th>
-                     <th>Motif chef sce</th>
+                     <th>Durée de vie</th>
+                     <th>Motif du chef de service</th>
                      <th>Date motif</th>
                   </tr>
                 </thead>
@@ -420,16 +420,16 @@
                   
                     
                     <th>Nom et prénoms</th>
-                    <th>Unite d'administrative</th>
-                     <th>Unite de zone</th>
+                    <th>Unité administrative</th>
+                     <th>Unité de zone</th>
                     <th>Fonction</th>
                     <th>Article</th>
-                    <th>Quantite</th>
-                    <th>Cause inactivite</th>
+                    <th>Quantité</th>
+                    <th>Cause d'inactivité</th>
                     <th>Cause de la demande</th>
                     <th >Date demande</th>
-                     <th>duré vie</th>
-                     <th>Décision Directeur</th>
+                     <th>Durée de vie</th>
+                     <th>Décision du Directeur</th>
                      <th>Date motif</th>
                      <th>Affectation</th>
                   </tr>
@@ -531,22 +531,22 @@
                 <thead>
                   <tr>
                 
-                    <th>Nom et prénoms</th>
-                    <th>Unite d'administrative</th>
-                     <th>Unite de zone</th>
+                    <th>Nom et Prénoms</th>
+                    <th>Unité administrative</th>
+                     <th>Unité de zone</th>
                     <th>Fonction</th>
                     <th>Article</th>
-                    <th>Quantite</th>
-                    <th>Cause inactivite</th>
+                    <th>Quantité</th>
+                    <th>Cause d'inactivité</th>
                     <th>Cause de la demande</th>
-                    <th >Date demande</th>
+                    <th >Date de la demande</th>
                      <!-- <th>duré vie</th> -->
-                     <th>Date motif sce</th>
-                     <th >Duré traitement sce</th>
-                     <th>Décision chef sce</th>
+                     <th>Date motif service</th>
+                     <th >Durée traitement service</th>
+                     <th>Décision du chef de service</th>
                      <th>Date motif Directeur</th>
-                     <th >Duré traitement Directeur</th>
-                      <th>Décision Directeur</th>
+                     <th >Durée traitement Directeur</th>
+                      <th>Décision du Directeur</th>
                      <th>Attribuer</th>
                   </tr>
                 </thead>
@@ -719,19 +719,19 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab11">Listes du personnel   <span class="badge badge-inverse">{{afficheNombreToutPersonne}}</span></a>
+                        <a data-toggle="tab" href="#tab11">Liste du Personnel   <span class="badge badge-inverse">{{afficheNombreToutPersonne}}</span></a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab13">Listes des personnes non Equipé  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab13">Liste des Personnes non Equipées  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
                       </li>
                       <li class="">
                         <a data-toggle="tab" href="#tab45">Equipements Non Couverts   <span class="badge badge-warning">{{AfficheTotalQteNonCouvert}}</span></a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab12">Listes des personnes Equipé     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab12">Liste des Personnes Equipées     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
                       </li>
                       <li class="">
-                        <a data-toggle="tab" href="#tab1296">Taux equipement par agent</a>
+                        <a data-toggle="tab" href="#tab1296">Taux équipement par agent</a>
                       </li>
                       
                       <!-- <li>
@@ -756,15 +756,15 @@
                     <!-- <th>Type Unite d'administrative</th> -->
                     
                      
-                    <th>Matricule && Nom && prenoms</th>
-                    <th>Unite administrative</th>
-                    <th>Unite de zone</th>
+                    <th>Matricule && Nom && Prénoms</th>
+                    <th>Unité administrative</th>
+                    <th>Unité de zone</th>
                     <th>Service</th>
                     <th>Fonction</th>
                   
-                    <th>Besoin Reel</th>
-                    <th>Besoin Non couvert</th>
-                    <th >Besoin Recu</th>
+                    <th>Besoin Réel</th>
+                    <th>Besoin Non Couvert</th>
+                    <th >Besoin Reçu</th>
                     <th>Taux</th>
                   </tr>
                 </thead>
@@ -831,15 +831,15 @@
                   <tr>
                      
                     <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
-                     <th>Unite de zone</th>
+                    <th>Unité administrative</th>
+                     <th>Unité de zone</th>
                     <th>Service</th>
                     <th>Fonction</th>
                     <th>Nom et prénoms</th>
                     <!-- <th >Article</th> -->
-                     <th >Qte requise</th>
-                     <th >Qte couverte</th>
-                     <th >Qte non couverte</th>
+                     <th >Quantité requise</th>
+                     <th >Quantité couverte</th>
+                     <th >Quantité non couverte</th>
                      <!-- <th >Prix unitaire(coût moyen)</th> -->
                        <th >Total</th>
                   </tr>
@@ -909,9 +909,9 @@
                   <tr>
                      
                     <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
+                    <th>Unité administrative</th>
                     
-                     <th>Unite de zone</th>
+                     <th>Unité de zone</th>
                     
                     <th>Service</th>
                     <th>Fonction</th>
@@ -975,9 +975,9 @@
                   <tr>
                      
                     <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
+                    <th>Unité administrative</th>
                     
-                     <th>Unite de zone</th>
+                     <th>Unité de zone</th>
                     
                     <th>Service</th>
                     <th>Fonction</th>
