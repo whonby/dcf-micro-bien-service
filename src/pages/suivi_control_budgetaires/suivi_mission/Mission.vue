@@ -192,7 +192,7 @@
                                             
                                         <div align="right">
                                 
-                                            Rechercher: <input type="text" v-model="search">
+                                            Recherche: <input type="text" v-model="search">
                                            
                                         </div>
                                         
@@ -239,7 +239,7 @@
                           <thead>
                           <tr>
                    <th>Exercice budgetaires</th>
-                  <th> Categorie mission</th>
+                  <th> Catégorie mission</th>
                   <th>Imputation </th>
                    <th>Objet</th>
                   <th> Type de mission</th>

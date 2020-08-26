@@ -7,9 +7,9 @@
 
              <div class="widget-title">
             <ul class="nav nav-tabs">
-              <li class="active"><a data-toggle="tab" href="#tab1" title=""> Tableau de bord global de recrutement personnel</a></li>
+              <li class="active"><a data-toggle="tab" href="#tab1" title=""> Tableau de bord global de recrutement du personnel</a></li>
                
-               <li class=""><a data-toggle="tab" href="#tab2" title=""> Tableau de bord global acteur de depense</a></li>
+               <li class=""><a data-toggle="tab" href="#tab2" title=""> Tableau de bord global acteur de dépense</a></li>
                <li><a data-toggle="tab" href="#tab3" title="">Tableau de bord global de missions</a></li> 
              
                 
@@ -25,13 +25,13 @@
                    <div class="container-fluid">
 
                <ul class="quick-actions" style="margin: 0px !important;">
-<li class="bg_lb span4"> <a href="#" style="color:black;"><h4>NOMBRE DE</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{afficherLaListeDesContratsDuPersonnel}}</span><h4>CONTRAT</h4></a> </li>
+<li class="bg_lb span4"> <a href="#" style="color:black;"><h4>NOMBRE DE</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{afficherLaListeDesContratsDuPersonnel}}</span><h4>CONTRATS</h4></a> </li>
 
-        <li class="bg_lg span4"> <a href="#" style="color:black;"><h4>NOMBRE DE </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{afficherContratPlanifier}}</span><h4> CONTRAT PLANIFIER </h4>  </a> </li>
+        <li class="bg_lg span4"> <a href="#" style="color:black;"><h4>NOMBRE DE </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{afficherContratPlanifier}}</span><h4> CONTRATS PLANIFIES </h4>  </a> </li>
 
-        <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>NOMBRE DE CONTRAT EN</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{afficherNombreDeContratContratualisation}}</span> <h4>CONTRATUALISATION</h4></a> </li>
+        <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>NOMBRE DE CONTRATS EN</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{afficherNombreDeContratContratualisation}}</span> <h4>CONTRATUALISATION</h4></a> </li>
   
-                <li class="bg_lo span4"> <a href="#" style="color:black;"><h4>NOMBRE DE CONTRAT</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{nbreMarcheContrat}}</span><h4> EXECUTE</h4></a> </li>
+                <li class="bg_lo span4"> <a href="#" style="color:black;"><h4>NOMBRE DE CONTRATS</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{nbreMarcheContrat}}</span><h4> EXECUTES</h4></a> </li>
 
         
 
@@ -83,12 +83,12 @@
         <li class="bg_lg span4"> <a href="#" style="color:black;"><h4>DUREE MOYENNE </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{dureeMoyenneDeTouteLesMissions}}</span><h4> DE MISSION </h4>  </a> </li>
 
         <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>MONTANT TOTAL</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(coutTotalDemission))}}</span> <h4>DES MISSIONS</h4></a> </li>
-          <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>COUT MOYEN DES BILLETS</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(coutMoyenDeBilletAvionDeMissions))}}</span> <h4>D'AVION GLOBALE DE MISSION</h4></a> </li>
+          <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>COÛT MOYEN DES BILLETS</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(coutMoyenDeBilletAvionDeMissions))}}</span> <h4>D'AVION GLOBAUX DE MISSION</h4></a> </li>
                 <li class="bg_lo span4"> <a href="#" style="color:black;"><h4>TAUX DE DOSSIERS</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px" v-if="tauxActeurAccredite!='NaN'">{{tauxDossierRejetMissions}}%</span><h4> DE MISSIONS REJETES</h4></a> </li>
 
         
 
-        <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>COUT MOYEN</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px" v-if="tauxActeurNonAccredite!='NaN'">{{formatageSomme(parseFloat(coutMoyenDeMission))}}</span> <h4> DE MISSION</h4></a> </li>
+        <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>COÛT MOYEN</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px" v-if="tauxActeurNonAccredite!='NaN'">{{formatageSomme(parseFloat(coutMoyenDeMission))}}</span> <h4> DE MISSION</h4></a> </li>
   
 
 

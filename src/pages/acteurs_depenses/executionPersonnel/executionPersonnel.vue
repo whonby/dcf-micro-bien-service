@@ -12,14 +12,14 @@
             <div class="widget-title">
               <div align="right">
                 Recherche:
-                <input type="search" placeholder="Saisie section ou libelle" v-model="search" />
+                <input type="search" placeholder="Saisie section ou libellé" v-model="search" />
 
                
               </div>
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste du paiement personnel</h5>
+              <h5>Liste de paiement du personnel</h5>
             </div>
 
             <div
@@ -30,13 +30,13 @@
                 <thead>
                   <tr>
                     <th>Exercice en cours</th>
-                    <th title="unite administrative"> ua</th>
+                    <th title="unite administrative"> UA</th>
                     <!-- <th>programme</th>
                     <th>action</th>
                     <th>activité</th> -->
-                    <th>ligne</th>
+                    <th>Ligne</th>
                     <!-- <th>Code Fichier</th> -->
-                    <th>Objet Depense</th>
+                    <th>Objet de Dépense</th>
                     <th>Mois de Paiement</th>
                     <!-- <th>Montant des Salaires</th> -->
                     <th>Fichier Joint</th>

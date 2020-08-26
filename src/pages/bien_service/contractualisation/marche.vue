@@ -65,7 +65,7 @@ affichertypeMarcheID
             
               <td>
                  <div class="control-group">
-            <label class="control-label">Fichier join</label>
+            <label class="control-label">Fichier joint</label>
             <div class="controls">
               <input
                 type="file"
@@ -386,14 +386,14 @@ affichertypeMarcheID
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab2078">Toutes les marches    <span class="badge badge" >{{nombreDeMarche}}</span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab2078">Tous les marchés    <span class="badge badge" >{{nombreDeMarche}}</span></a></li>
                                
-                               <li ><a data-toggle="tab" href="#tab100"> Planifications        <span class="badge badge-important" >    {{nombreMarcheEnplanification}}</span></a></li>
-                                <li ><a data-toggle="tab" href="#tab10"> Contratualisations        <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
-                                <li><a data-toggle="tab" href="#tab20"> Exécutions      <span class="badge badge-warning" >     {{nbreMarcheExecuter}}</span></a></li>
+                               <li ><a data-toggle="tab" href="#tab100"> Planification        <span class="badge badge-important" >    {{nombreMarcheEnplanification}}</span></a></li>
+                                <li ><a data-toggle="tab" href="#tab10"> Contratualisation        <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
+                                <li><a data-toggle="tab" href="#tab20"> Exécution      <span class="badge badge-warning" >     {{nbreMarcheExecuter}}</span></a></li>
                                 <!-- <li><a data-toggle="tab" href="#tab208">Marchés Terminés      <span class="badge badge" >     {{0}}</span></a></li> -->
                                  <li><a data-toggle="tab" href="#tab20002">Résiliés    <span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
-                                    <li><a data-toggle="tab" href="#tab20789">Suspendu   <span class="badge badge" >     {{nombreDeMarcheSuspendu}}</span></a></li>
+                                    <li><a data-toggle="tab" href="#tab20789">Suspendus   <span class="badge badge" >     {{nombreDeMarcheSuspendu}}</span></a></li>
                                   <li><a data-toggle="tab" href="#tab2000256"> Terminé    <span class="badge badge-inverse" >     {{nombreAfficheMarcheSolde}}</span></a></li>
                                  
                                
@@ -405,7 +405,7 @@ affichertypeMarcheID
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marches Suspendu</h5>
+              <h5>Liste des Marchés Suspendus</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -416,13 +416,13 @@ affichertypeMarcheID
                   <tr>
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type de marché</th>
                    
                     <th>Activit&eacute;</th>
                     <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
+                       <th>Objet du marché</th>
                         <!-- <th>Reference march&eacute;</th>  -->
-                                    <th>Montant prevue</th>
+                                    <th>Montant prévu</th>
                                 <th>Etat du marché</th>
                                <th>Action</th>
                 </tr>
@@ -514,7 +514,7 @@ affichertypeMarcheID
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des Marches Terminés</h5>
+              <h5>Liste des Marchés Terminés</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -526,11 +526,11 @@ affichertypeMarcheID
                
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type de marché</th>
                    
                     <!-- <th>Activit&eacute;</th> -->
                     <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
+                       <th>Objet du marché</th>
                         <!-- <th>Reference march&eacute;</th>  -->   
                                     <th>Montant réel</th>
                                 <th>Etat du marché</th> 
@@ -598,7 +598,7 @@ affichertypeMarcheID
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marches En cours de Contratualisation</h5>
+              <h5>Liste des Marchés en cours de Contratualisation</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -609,13 +609,13 @@ affichertypeMarcheID
                   <tr>
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type de marché</th>
                    
                     <th>Activit&eacute;</th>
                     <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
+                       <th>Objet du marché</th>
                         <!-- <th>Reference march&eacute;</th>  -->
-                                    <th>Montant prevue</th>
+                                    <th>Montant prévu</th>
                                 <th>Etat du marché</th>
                                 <th colspan="4">Action</th>
                 </tr>
@@ -744,12 +744,12 @@ affichertypeMarcheID
                     <th>Imputation</th>
                     <!-- <th>Ligne Budgetaire</th> -->
                     <th>Objet marché</th>
-                    <th>Reference marché</th>
+                    <th>Référence marché</th>
                      <th>Statut</th>
                     <th>Montant prévu</th>
                     <th>Montant réel</th>
-                    <th title="mouvement du marché">Mvt marché</th>
-                    <th>Etat En cours</th>
+                    <th title="mouvement du marché">Mouvement marché</th>
+                    <th>Etat en cours</th>
                     <th>Cycle de vie</th>
                    <th colspan="3">Action</th>
                   </tr>
@@ -936,7 +936,7 @@ affichertypeMarcheID
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des marchés en executions</h5>
+              <h5>Liste des marchés en exécution</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -948,11 +948,11 @@ affichertypeMarcheID
                   <tr>
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type de marché</th>
                    
                     <!-- <th>Activit&eacute;</th> -->
                     <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
+                       <th>Objet du marché</th>
                         <!-- <th>Reference march&eacute;</th>  -->
                                     <th>Montant réel</th>
                                 <th>Etat du marché</th>
@@ -1049,7 +1049,7 @@ affichertypeMarcheID
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marches en Planifications</h5>
+              <h5>Liste des Marchés en Planification</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -1060,14 +1060,14 @@ affichertypeMarcheID
                  <tr>
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type de marché</th>
                    
                     <th>Activit&eacute;</th>
                     <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
-                        <th>Reference march&eacute;</th> 
+                       <th>Objet du marché</th>
+                        <th>Référence du marché</th> 
                         <th>Statut</th>
-                                    <th>Montant prevue</th>
+                                    <th>Montant prévu</th>
                                 <th>Etat du marché</th>
                                 <th colspan="2">Action</th>
                 </tr>
@@ -1185,7 +1185,7 @@ affichertypeMarcheID
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marchés résiliés</h5>
+              <h5>Liste des Marchés Résiliés</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -1195,14 +1195,14 @@ affichertypeMarcheID
                 <thead>
                   <tr>
                 <th>Ann&eacute;e</th>
-                <th>Unite administrative</th>
-                 <th title="unite administrative">Numero march&eacute;</th>
-                      <th>Objet march&eacute;</th>
+                <th>Unité administrative</th>
+                 <th title="unite administrative">Numéro du marché</th>
+                      <th>Objet du marché</th>
                    
                     <th>Entreprise</th>
-                    <th>Cause R&eacute;siliation</th>
-                       <th>Date r&eacute;siliation</th>
-                         <th>Montant march&eacute;</th>
+                    <th>Cause de résiliation</th>
+                       <th>Date de résiliation</th>
+                         <th>Montant du marché</th>
                                <th>Action</th> 
                 </tr>
                 </thead>

@@ -11,7 +11,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des marches en planifications</h5>
+              <h5>Liste des marchés en planification</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -24,14 +24,14 @@
                    <tr>
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type de marché</th>
                    
-                    <th>Activit&eacute;</th>
+                    <th>Activité</th>
                     <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
-                        <th>Reference march&eacute;</th> 
+                       <th>Objet du marché</th>
+                        <th>Référence du marché</th> 
                         <th>Statut</th>
-                                    <th>Montant prevue</th>
+                                    <th>Montant prévu</th>
                                 <th>Etat du marché</th>
                                 <th colspan="2">Action</th>
                 </tr>
