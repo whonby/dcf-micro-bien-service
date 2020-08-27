@@ -6,7 +6,7 @@
             <li title="Stock">
                 <router-link :to="{name:'StockArticles'}" tag="a">
                     <!-- <i class="icon-list"></i> -->
-                    <span class="text">GESTIONS DE STOCK</span>
+                    <span class="text">GESTION DES STOCKS</span>
 
                 </router-link>
             </li>

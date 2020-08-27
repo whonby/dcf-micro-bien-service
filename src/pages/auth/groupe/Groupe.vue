@@ -28,9 +28,9 @@
                     </div>--> <br>
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Liste Groupe</h5>
+                            <h5>Liste de Groupe</h5>
                             <div align="right">
-                                Search: <input type="text" v-model="search">
+                                Recherche: <input type="text" v-model="search">
                             </div>
 
                         </div>
@@ -72,7 +72,7 @@
                                     </td>
                                 </tr>
                                 <tr v-if="titreFiltres.length==0" align="right">
-                                    <h6>Pas de donnée disponible</h6>
+                                    <h6>Pas de données disponibles</h6>
                                 </tr>
                                 </tbody>
                             </table>

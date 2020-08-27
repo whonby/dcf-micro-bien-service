@@ -6,7 +6,7 @@
      <div id="exampleModalStock" class="modal hide ">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter quantite Entrant</h3>
+        <h3>Ajouter quantité Entrant</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
@@ -65,7 +65,7 @@
           <tr>
               <td>
               <div class="control-group">
-                <label class="control-label">Type Unite administrative:</label>
+                <label class="control-label">Type Unité administrative:</label>
                 <div class="controls">
                   <select v-model="formData.typeua_id" class="span5">
                     <option value>Sélectionner</option>
@@ -81,7 +81,7 @@
             <td>
               
               <div class="control-group">
-                <label class="control-label">Unite administrative:</label>
+                <label class="control-label">Unité administrative</label>
                 <div class="controls">
                   <select v-model="formData.uAdministrative_id" :readOnly="veiftypeuaExist" class="span5">
                     <option value>Sélectionner</option>
@@ -116,7 +116,7 @@
             
              <td>
               <div class="control-group">
-                <label class="control-label">Famille:</label>
+                <label class="control-label">Famille</label>
                 <div class="controls">
                   <select  v-model="formData.famill_id" class="span5">
                     <option value>Sélectionner</option>
@@ -146,7 +146,7 @@
             </td> -->
             <td>
               <div class="control-group">
-                <label class="control-label">Quantite en entrant</label>
+                <label class="control-label">Quantité en entrant</label>
                 <div class="controls">
                   <input
                     type="number"
@@ -160,7 +160,7 @@
             </td>
              <td>
               <div class="control-group">
-                <label class="control-label">Date d'entrée :</label>
+                <label class="control-label">Date d'entrée</label>
                 <div class="controls">
                   <input
                     type="date"
@@ -442,16 +442,16 @@
                 <thead>
                   <tr>
                      <!-- <th>Type Unite administrative</th>  -->
-                    <th title="unite administrative">Ua</th>
+                    <th title="unite administrative">UA</th>
                      <!-- <th>Equipement Type</th>  -->
                      <th>Famille</th>
                     <!-- <th>Article</th> -->
                     <!-- <th>Durée de vie</th> -->
-                    <th title="quantite en stock">Qté en stock</th>
+                    <th title="quantite en stock">Quantité en stock</th>
                      <th>Date d'entrée</th>
-                    <th title="quantite entrant">Qté entrée</th>
+                    <th title="quantite entrant">Quantité entrée</th>
                     <th>Date de sortie</th>
-                    <th title="quantite sortant">Qté sortie</th>
+                    <th title="quantite sortant">Quantité sortie</th>
                      
                     <!-- <th>Duree de vie</th> -->
                    
@@ -532,7 +532,7 @@
                      
                   
                      <td ></td>
-                    <td style="font-weight:bold;" title="total quantite sortant">Total qte sortie</td>
+                    <td style="font-weight:bold;" title="total quantite sortant">Total quantité sortie</td>
                     <td style="text-align: center;color:red;font-weight:bold;">{{ nombreDeQuantiteSortiEnStock || 0 }}</td>
                     
                    <td></td>

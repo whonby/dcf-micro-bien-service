@@ -5,11 +5,11 @@
             <div class="quick-actions_homepage">
                 <ul class="quick-actions" v-if="idzone=='' && iduniteadmin==''">
                     <li class="bg_lb"> <a href="#">
-                        {{formatageSomme(budgetGeneral)}}<br> Budget general</a> </li>
+                        {{formatageSomme(budgetGeneral)}}<br> Budget général</a> </li>
                     <li class="bg_lg "> <a href="#">
-                        {{formatageSomme(budgetGeneralExcecute)}}<br> budget execute </a> </li>
+                        {{formatageSomme(budgetGeneralExcecute)}}<br> Budget exécuté </a> </li>
                     <li class="bg_ly"> <a href="#">  {{formatageSomme(bugdetGeneralRestant)}}<br> Budget restant </a> </li>
-                    <li class="bg_lo"> <a href="#">{{tauxExecutionBudgetGeneral}} %<br> Taux d'execution</a> </li>
+                    <li class="bg_lo"> <a href="#">{{tauxExecutionBudgetGeneral}} %<br> Taux d'exécution</a> </li>
                 </ul>
 
                 <ul class="quick-actions" v-if="zone_geographique!='' && iduniteadmin==''">
@@ -19,7 +19,7 @@
                     <li class="bg_lg "> <a href="#">
                         {{formatageSomme(budgetZoneExcecute)}}<br> budget execute zone </a> </li>
                     <li class="bg_ly"> <a href="#">  {{formatageSomme(bugdetZoneRestant)}}<br> Budget restant zone</a> </li>
-                    <li class="bg_lo"> <a href="#">{{tauxExecutionBudgetZone}} %<br> Taux d'execution zone </a> </li>
+                    <li class="bg_lo"> <a href="#">{{tauxExecutionBudgetZone}} %<br> Taux d'exécution zone </a> </li>
                 </ul>
 
                 <ul class="quick-actions" v-if="iduniteadmin">
@@ -27,7 +27,7 @@
                     <li class="bg_lb"> <a href="#">
                         {{formatageSomme(budgetByUniteAdmin(iduniteadmin))}}<br> Budget total UA</a> </li>
                     <li class="bg_lg "> <a href="#">
-                        {{formatageSomme(budgetExecuteUniteAdmin)}}<br> budget execute zone </a> </li>
+                        {{formatageSomme(budgetExecuteUniteAdmin)}}<br> Budget exécuté zone </a> </li>
                     <li class="bg_ly"> <a href="#">  {{formatageSomme(budgetRestUniteAdmin)}}<br> Budget restant UA</a> </li>
                     <li class="bg_lo"> <a href="#">{{tauxExecutionUniteAdmin}} %<br> Taux d'execution UA </a> </li>
                 </ul>
@@ -63,9 +63,9 @@
                                     <b>{{l.ville}}</b> <br>
                                     <div >
                                         Budget: <span style="color: #003900; "><b>{{formatageSomme(l.budget)}}</b></span> <br>
-                                        Budget execute:<span style="color: #00d700; "><b>{{formatageSomme(l.budgetExecute)}}</b></span><br>
+                                        Budget exécuté:<span style="color: #00d700; "><b>{{formatageSomme(l.budgetExecute)}}</b></span><br>
                                         Budget restant:<span style="color: darkred; "><b>{{formatageSomme(l.budgetReste)}}</b></span><br>
-                                        Taux d'execution:<span style="color: #e36706; "><b>{{l.tauxBudget}} %</b></span>
+                                        Taux d'exécution:<span style="color: #e36706; "><b>{{l.tauxBudget}} %</b></span>
                                     </div>
                                 </l-popup>
 
@@ -89,21 +89,21 @@
                                  <td style="width: 20px;height:20px;background: red" ></td>
                                  <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Pas de budget</td>
                                  <td style="width: 20px;height:20px;background: #0c2061" ></td>
-                                 <td style="text-align: center; border-right: 5px solid #fff" colspan="3"> Taux execution est de 0 %</td>
+                                 <td style="text-align: center; border-right: 5px solid #fff" colspan="3"> Taux d'exécution de 0 %</td>
                                  <td style="width: 20px;height:20px;background: #fffb13" ></td>
-                                 <td style="text-align: center; border-right: 5px solid #fff " colspan="3">Taux execution est compris entre 1 à 30 %</td>
+                                 <td style="text-align: center; border-right: 5px solid #fff " colspan="3">Taux d'exécution compris entre 1 et 30 %</td>
                                  <td style="width: 20px;height:20px;background: #8f1db7" ></td>
-                                 <td style="text-align: center; border-right: 5px solid #fff" colspan="3"> Taux execution est compris entre 31 à 50 %</td>
+                                 <td style="text-align: center; border-right: 5px solid #fff" colspan="3"> Taux d'exécution compris entre 31 et 50 %</td>
                              </tr>
                          </table>
                             <table>
                                 <tr>
                                     <td style="width: 20px;height:20px;background: #1285ff" ></td>
-                                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux execution est compris entre 51 à 80 %</td>
+                                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux d'exécution compris entre 51 et 80 %</td>
                                     <td style="width: 20px;height:20px;background: #9dfd80" ></td>
-                                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux execution est compris entre 51 à 80 %</td>
+                                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux d'exécution compris entre 51 et 80 %</td>
                                     <td style="width: 20px;height:20px;background: #209503" ></td>
-                                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux execution est 100%</td>
+                                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux d'exécution de 100%</td>
                                 </tr>
                             </table>
                         </div>
@@ -125,7 +125,7 @@
 
                     </div>
                     <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-                        <h5 align="center">Liste des unite administrative
+                        <h5 align="center">Liste des unités administratives
                         </h5>
                     </div>
 

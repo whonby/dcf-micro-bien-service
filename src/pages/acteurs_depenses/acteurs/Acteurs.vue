@@ -15,12 +15,12 @@ Type de Recrutement
                 </li> -->
                 <li class="bg_ly">
                     <a href="#">
-                        <i class="icon-inbox"></i><span class="label label-important">{{nombreTotalActeurAcredite}}</span> Total acteur accredité
+                        <i class="icon-inbox"></i><span class="label label-important">{{nombreTotalActeurAcredite}}</span> Total acteur accrédité
                     </a>
                 </li>
-                <li class="bg_lb"> <a href="#"> <i class="icon-th"></i> <span class="label label-important">{{nombretotalActeurNonAccredite}}</span> Total acteur non accredité</a> </li>
+                <li class="bg_lb"> <a href="#"> <i class="icon-th"></i> <span class="label label-important">{{nombretotalActeurNonAccredite}}</span> Total acteur non accrédité</a> </li>
                 <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> <span class="label label-important" v-if="tauxActeurAccredite!='NaN'">{{totalTaux || '0' }} %</span>
-                    Taux acteur accredité
+                    Taux acteur accrédité
                 </a> </li>
             </ul>
         </div>
@@ -33,9 +33,9 @@ Type de Recrutement
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab10">Liste personnel     <span class="badge badge-inverse">{{nombreActeurActivite}}</span></a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab78">Contrat Récrutement Direct </a></li>
-                                <li class=""><a data-toggle="tab" href="#tab19">Listes des acteurs de dépenses   <span class="badge badge-success">{{NombrePersonnelRecuActeNorm}}</span></a> </li>
+                                <li class="active"><a data-toggle="tab" href="#tab10">Liste du personnel     <span class="badge badge-inverse">{{nombreActeurActivite}}</span></a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab78">Contrat Recrutement Direct </a></li>
+                                <li class=""><a data-toggle="tab" href="#tab19">Liste des acteurs de dépenses   <span class="badge badge-success">{{NombrePersonnelRecuActeNorm}}</span></a> </li>
                                 <li class=""><a data-toggle="tab" href="#tab30">Acteurs non actifs</a></li>
                                   <!-- <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{0}}</span></a></li>
                                    <li><a data-toggle="tab" href="#tab301">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li>  -->
@@ -49,23 +49,23 @@ Type de Recrutement
                          <div id="tab78" class="tab-pane">
                            <div class="widget-box">
                              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <!-- <h5>Listes des contrats</h5>
+                                        <h5>Liste des contrats</h5>
                                         <div align="right">
-                                            Search: <input type="text" v-model="search">
-                                        </div> -->
+                                            Recherche: <input type="text" v-model="search">
+                                        </div>
                                     </div>
                              <div class="widget-content nopadding">
                                              <table class="table table-bordered table-striped">
                                                <thead>
                     <tr>
 
-                        <th>Reference acte </th>
-                        <th>Date Debut </th>
+                        <th>Référence Acte </th>
+                        <th>Date Début </th>
                         <th>Date Fin </th>
-                        <th>Duree </th>
-                        <th>Autorite Approbation </th>
+                        <th>Durée </th>
+                        <th>Autorité d'Approbation </th>
                         <th>Date Attributaire </th>
-                        <th>Montant acte</th>
+                        <th>Montant Acte</th>
                        
                         <th>Action</th>
                     </tr>
@@ -114,9 +114,9 @@ Type de Recrutement
                             <div id="tab10" class="tab-pane active">
                                 <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Listes personnel</h5>
+                                        <h5>Liste du personnel</h5>
                                         <div align="right">
-                                            Search: <input type="text" v-model="search">
+                                            Recherche: <input type="text" v-model="search">
                                         </div>
                                     </div>
                                     <div class="widget-content nopadding">
@@ -126,10 +126,10 @@ Type de Recrutement
                                                 <!-- <th>Situation matrimoniale </th> -->
                                                 <th>Matricule </th>
                                                 <th>Nom</th>
-                                                <th>Prenom</th>
+                                                <th>Prénom</th>
                                                 <th>Date de naissance</th>
-                                                <th >Unite administrative</th>
-                                                <th >Unite Zone</th>
+                                                <th >Unité administrative</th>
+                                                <th >Unité Zone</th>
                                                 <th >Service</th>
                                                 <th >Fonction Administrative</th>
                                                 <th style="width:10px">Action</th>
@@ -167,7 +167,7 @@ Type de Recrutement
                                        <div id="tab19" class="tab-pane">
                                 <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Acteur de depense en activité</h5>
+                                        <h5>Acteur de dépense en activité</h5>
                                         <!-- <div align="right">
                                             Search: <input type="text" v-model="search">
                                         </div> -->
@@ -179,11 +179,11 @@ Type de Recrutement
                                               
                                                 <th>Matricule </th>
                                                 <th>Nom</th>
-                                                <th>Prenoms</th>
-                                                <th>Unite administrative</th>
-                                                <th>Fonction budgetaire</th>
-                                                <th>Date debut normination</th>
-                                                <th>Date fin normination</th>
+                                                <th>Prénom</th>
+                                                <th>Unité administrative</th>
+                                                <th>Fonction budgétaire</th>
+                                                <th>Date début nomination</th>
+                                                <th>Date fin nomination</th>
                                                 <!-- <th>Action</th> -->
                                             </tr>
                                             </thead>
@@ -219,7 +219,7 @@ Type de Recrutement
                             <div id="tab30" class="tab-pane">
                                 <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Acteur de depense non actif</h5> 
+                                        <h5>Acteur de dépense non actif</h5> 
                                         <div align="right">
                                             Recherche: <input type="text" v-model="search1">
                                         </div>
@@ -230,9 +230,9 @@ Type de Recrutement
                                             <tr>
                                                 <th>Matricule </th>
                                                 <th>Nom</th>
-                                                <th>Prenom</th>
+                                                <th>Prénom</th>
                                                 <th>Date de naissance</th>
-                                                <th>Unite administrative</th>
+                                                <th>Unité administrative</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>

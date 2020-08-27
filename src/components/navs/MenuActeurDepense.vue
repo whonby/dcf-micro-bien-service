@@ -150,7 +150,7 @@
       <!--Tableau de bord acteur de depense-->
        <li >
          <router-link :to="{name: 'TableauBordActeurDepense'}" tag="a">
-          <span class="text">TABLEAU DE BOARD </span>
+          <span class="text">TABLEAU DE BORD </span>
          </router-link>
       
       </li>

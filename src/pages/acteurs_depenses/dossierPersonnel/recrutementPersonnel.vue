@@ -71,7 +71,7 @@
             
               <td>
                  <div class="control-group">
-            <label class="control-label">Fichier join</label>
+            <label class="control-label">Fichier joint</label>
             <div class="controls">
               <input
                 type="file"
@@ -85,7 +85,7 @@
               </td>
                <td>
                  <div class="control-group">
-            <label class="control-label">Date resiliation</label>
+            <label class="control-label">Date résiliation</label>
             <div class="controls">
               <input
                 type="date"
@@ -345,10 +345,10 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab2078"> Toutes les contrats<span class="badge badge-inverse" >{{nombreDeContrat}}</span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab2078"> Tous les contrats<span class="badge badge-inverse" >{{nombreDeContrat}}</span></a></li>
                                
-                               <li ><a data-toggle="tab" href="#tab100">  Contrat Planifiés <span class="badge badge-important" >   {{nombreContratEnPlanification}}</span></a></li>
-                                <li ><a data-toggle="tab" href="#tab10">    Contrat en cours Contratualisation  <span class="badge badge-success" >{{nombreContratEnContratualisation}}</span></a></li>
+                               <li ><a data-toggle="tab" href="#tab100">  Contrat Planifié <span class="badge badge-important" >   {{nombreContratEnPlanification}}</span></a></li>
+                                <li ><a data-toggle="tab" href="#tab10">    Contrat en cours de Contratualisation  <span class="badge badge-success" >{{nombreContratEnContratualisation}}</span></a></li>
                                 <!-- <li><a data-toggle="tab" href="#tab20">  Contrat signé<span class="badge badge-warning" >   {{0}}   </span></a></li> -->
                                  <!-- <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{afficheNombreMarcheResilier}}</span></a></li>
                                   <li><a data-toggle="tab" href="#tab208">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li> -->
@@ -362,7 +362,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des contrats En cours de Contratualisation</h5>
+              <h5>Liste des Contrats en cours de Contratualisation</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -371,16 +371,16 @@
                <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                <th>Ann&eacute;e</th>
+                <th>Année</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type marché</th>
                    
-                    <th>Activit&eacute;</th>
+                    <th>Activité;</th>
                     <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
-                        <th>Reference march&eacute;</th> 
+                       <th>Objet marché</th>
+                        <th>Référence marché;</th> 
                         <!-- <th>Montant prevue</th> -->
-                                <th>Status</th>
+                                <th>Statut</th>
                                 <th>Action</th>
                 </tr> 
                 </thead>
@@ -448,7 +448,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Contrat&eacute;s</h5>
+              <h5>Liste des Contrats</h5>
               
             </div>
               <table class="table table-bordered table-striped">
@@ -462,10 +462,10 @@
                     <th>Imputation</th>
                     <!-- <th>Ligne Budgetaire</th> -->
                     <th>Objet marché</th>
-                    <th>Reference Contrat</th>
+                    <th>Référence Contrat</th>
                      <!-- <th>Numero marché</th> -->
                     <!-- <th>Montant prévu</th> -->
-                    <th>Status</th>
+                    <th>Statut</th>
                     <!-- <th>Action</th> -->
                   </tr>
                 </thead>
@@ -612,7 +612,7 @@
                        <th>Objet march&eacute;</th>
                         <th>Reference march&eacute;</th> 
                             <!-- <th>Montant réel</th> -->
-                                <th>Status</th>
+                                <th>Statut</th>
                                 <th>Action</th>
                 </tr>
                 </thead>
@@ -684,7 +684,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Contrats en Planifications</h5>
+              <h5>Liste des Contrats en Planification</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -695,14 +695,14 @@
                  <tr>
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type marché</th>
                    
                     <th>Activit&eacute;</th>
                     <th>Imputation</th>
                        <th>Objet march&eacute;</th>
-                        <th>Reference march&eacute;</th> 
+                        <th>Référence march&eacute;</th> 
                           <!-- <th>Montant prevue</th> -->
-                                <th>Status</th>
+                                <th>Statut</th>
                                 <th>Action</th> 
                 </tr>
                 </thead>
@@ -824,7 +824,7 @@
                     <th>Candidat retenu</th>
                     <th>Cause R&eacute;siliation</th>
                        <th>Date r&eacute;siliation</th>
-                       <th>Status</th>
+                       <th>Statut</th>
                          <!-- <th>Montant march&eacute;</th> -->
                                 
                 </tr>

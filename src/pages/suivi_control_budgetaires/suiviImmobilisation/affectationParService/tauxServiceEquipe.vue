@@ -17,11 +17,11 @@
                     <thead>
                     <tr>
 
-                        <th style="width:20%">Uninte administrative</th>
+                        <th style="width:20%">Unité administrative</th>
                         <th style="width:20%">Service</th>
-                        <th >Qte requise</th>
-                     <th >Qte couverte</th>
-                     <th >Qte non couverte</th>
+                        <th >Quantité requise</th>
+                     <th >Quantité couverte</th>
+                     <th >Quantité non couverte</th>
                      <!-- <th >Prix unitaire(coût moyen)</th> -->
                        <th >Taux</th>
                          

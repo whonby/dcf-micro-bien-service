@@ -9,12 +9,12 @@
 
                    <tr>
 
-                                        <th>Reference avis </th>
+                                        <th>Référence avis </th>
                                            
-                                        <th>Numero du dossier</th>
+                                        <th>Numéro du dossier</th>
                                         <th>Nom</th>
-                                        <th>Prenom</th>
-                                        <th>Date de depot</th>
+                                        <th>Prénom</th>
+                                        <th>Date de dépôt</th>
                                         <th>fichier</th>
                                         <th>Action</th>
                                     </tr>
@@ -124,7 +124,7 @@
                             
                                  <td>
                         <div class="control-group">
-                            <label class="control-label">Date depot du dossier :</label>
+                            <label class="control-label">Date dépôt du dossier :</label>
                             <div class="controls">
                                 <input type="date" class="span" placeholder="" v-model="formDossier.date_depot">
                             </div>
@@ -172,7 +172,7 @@
                             <td>
                        
                      <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence offre</label>
                         <div class="controls">
                             <!-- <select v-model="formDataCojo.cotation_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -191,7 +191,7 @@
 
                               <td>
                         <div class="control-group">
-                            <label class="control-label">Numero du dossier <code>*</code> :</label>
+                            <label class="control-label">Numéro du dossier <code>*</code> :</label>
                             <div class="controls">
                                 <input type="text" class="span" v-model="editDossier.numero_dossier" placeholder="Type appel" >
                             </div>

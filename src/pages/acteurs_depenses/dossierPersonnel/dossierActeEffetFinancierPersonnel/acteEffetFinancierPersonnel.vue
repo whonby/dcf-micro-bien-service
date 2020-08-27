@@ -23,9 +23,9 @@
                     <thead>
                     <tr>
 
-                        <th>Reference acte </th>
+                        <th>Référence acte </th>
                         <th>Montant acte</th>
-                        <th>Objet marche.</th>
+                        <th>Objet marché</th>
                         <th>Imputation</th>
                         <th>Action</th>
                     </tr>

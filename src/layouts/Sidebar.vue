@@ -118,7 +118,7 @@
         </li> -->
           <li @click.prevent="navigateGestionUser" :class="{active: active_el ==21}">
               <a href="#">
-              <i class="icon icon-key"></i> <span>UTILISATEURS && ACCES</span>
+              <i class="icon icon-key"></i> <span>UTILISATEURS</span>
           </a>
           </li>
           <li @click.prevent="logoutUser()" >

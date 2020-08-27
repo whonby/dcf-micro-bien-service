@@ -13,7 +13,7 @@ ua_id
                     <thead>
                     <tr>
 
-                        <th style="width:40%">Uninte administrative</th>
+                        <th style="width:40%">Unité administrative</th>
                         <th style="width:40%">Service</th>
                         <th style="width:10%">Equipé</th>
                         <th style="width:10%">Affectation</th>

@@ -258,9 +258,9 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des marches attribués</h5>
+              <h5>Liste des marchés attribués</h5>
               <div align="right">
-                Search:
+                Recherche:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
@@ -270,12 +270,12 @@
                 <thead>
                   <tr>
                      <th>UA</th>
-                    <th>Type marché</th>
+                    <th>Type de marché</th>
                     <th>Activité</th>
                     <th>Imputation</th>
-                    <th>Ligne Budgetaire</th>
-                    <th>Objet marché</th>
-                    <th>Reference marché</th>
+                    <th>Ligne Budgétaire</th>
+                    <th>Objet du marché</th>
+                    <th>Référence marché</th>
                    
                     <th>Montant Réel</th>
                     <th>Action</th>

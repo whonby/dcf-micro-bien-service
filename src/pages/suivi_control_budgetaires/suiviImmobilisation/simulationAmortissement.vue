@@ -11,9 +11,9 @@
               <thead>
                 <tr>
                   <!-- <th>Code</th> -->
-                  <th>Valeur Origine</th>
+                  <th>Valeur d'Origine</th>
                 
-                  <th>Duree</th>
+                  <th>Durée</th>
                  
                   <th>Date de mise en service</th>
                  
@@ -25,14 +25,14 @@
                   <td> <div class="control-group">
            
             <div class="controls">
-              <input type="number" v-model="immobilisat.valeurorigine" class="span" placeholder="Saisir la Valeur Origine" />
+              <input type="number" v-model="immobilisat.valeurorigine" class="span" placeholder="Saisir la Valeur d'Origine" />
             </div>
           </div>
           </td> 
                   <td> <div class="control-group">
            
             <div class="controls">
-              <input type="number" v-model="immobilisat.duree"  class="span" placeholder="Saisir le Duree" />
+              <input type="number" v-model="immobilisat.duree"  class="span" placeholder="Saisir la Durée" />
             </div>
           </div></td>
                   <td><div class="control-group">

@@ -17,14 +17,14 @@
                          <div class="span4">
                              <div class="widget-box">
                                  <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-                                     <h5>Information groupe</h5>
+                                     <h5>Information du groupe</h5>
                                  </div>
                                  <div class="widget-content nopadding">
                                      <form action="#" method="get" class="form-horizontal">
                                          <div class="control-group">
-                                             <label class="control-label">Nom Groupe:</label>
+                                             <label class="control-label">Nom du Groupe:</label>
                                              <div class="controls">
-                                                 <input type="text" class="span11" placeholder="First name">
+                                                 <input type="text" class="span11" placeholder="">
                                              </div>
                                          </div>
 
@@ -43,12 +43,12 @@
                          <div class="span8">
                              <div class="widget-box">
                                  <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-                                     <h5>Transfere</h5>
+                                     <h5>Transférer</h5>
                                  </div>
                                  <div class="widget-content nopadding">
                                      <div class="widget-box">
                                          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-                                             <h5>Transfere</h5>
+                                             <h5>Transférer</h5>
                                          </div>
                                          <div class="widget-content">
 
@@ -78,10 +78,10 @@
                                                         <tr>
                                                             <th>Fonctions</th>
                                                             <th>Ajouter</th>
-                                                            <th>Mofications</th>
+                                                            <th>Modifications</th>
                                                             <th>Consulter</th>
                                                             <th>Imprimer</th>
-                                                            <th>Suppimer</th>
+                                                            <th>Supprimer</th>
                                                             <th>Exporter</th>
                                                             <th>Importer</th>
                                                         </tr>
@@ -113,7 +113,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Nature section</td>
+                                                            <td>Nature de section</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="nature_section.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -163,7 +163,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="odd gradeA">
-                                                            <td>Grandes natures  depense</td>
+                                                            <td>Grandes natures de dépenses</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="grand_nature_depense.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -213,7 +213,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeA">
-                                                            <td>Gestion Des CF</td>
+                                                            <td>Gestion des Contrôleurs Financiers</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="gestion_cf.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -251,17 +251,17 @@
                                                         <tr>
                                                             <th>Fonctions</th>
                                                             <th>Ajouter</th>
-                                                            <th>Mofications</th>
+                                                            <th>Modifications</th>
                                                             <th>Consulter</th>
                                                             <th>Imprimer</th>
-                                                            <th>Suppimer</th>
+                                                            <th>Supprimer</th>
                                                             <th>Exporter</th>
                                                             <th>Importer</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
                                                         <tr class="odd gradeX">
-                                                            <td>Type Financement </td>
+                                                            <td>Type de Financement </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="type_finnancements.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -286,7 +286,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Source Finnancement</td>
+                                                            <td>Source de Financement</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="source_finnancement.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -326,17 +326,17 @@
                                                         <tr>
                                                             <th>Fonctions</th>
                                                             <th>Ajouter</th>
-                                                            <th>Mofications</th>
+                                                            <th>Modifications</th>
                                                             <th>Consulter</th>
                                                             <th>Imprimer</th>
-                                                            <th>Suppimer</th>
+                                                            <th>Supprimer</th>
                                                             <th>Exporter</th>
                                                             <th>Importer</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
                                                         <tr class="odd gradeX">
-                                                            <td>Structure fonctionnelle </td>
+                                                            <td>Structure Fonctionnelle </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="structure_fonctionnelle.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -361,7 +361,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Structure Programmes</td>
+                                                            <td>Structure Programme</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="structure_programme.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -436,7 +436,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="odd gradeX">
-                                                            <td>Structure Geographique </td>
+                                                            <td>Structure Géographique </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="structure_geographique.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -486,7 +486,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="odd gradeX">
-                                                            <td>Structure decissionnelles </td>
+                                                            <td>Structure Décissionnelle </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="structure_decisionnelle.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -511,7 +511,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Structure des actes</td>
+                                                            <td>Structure des Actes</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="structure_acte.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -549,17 +549,17 @@
                                                         <tr>
                                                             <th>Fonctions</th>
                                                             <th>Ajouter</th>
-                                                            <th>Mofications</th>
+                                                            <th>Modifications</th>
                                                             <th>Consulter</th>
                                                             <th>Imprimer</th>
-                                                            <th>Suppimer</th>
+                                                            <th>Supprimer</th>
                                                             <th>Exporter</th>
                                                             <th>Importer</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
                                                         <tr class="odd gradeX">
-                                                            <td>Plan fonctionnel </td>
+                                                            <td>Plan Fonctionnel </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="plan_fonctionnel.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -584,7 +584,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Plan programme</td>
+                                                            <td>Plan Programme</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="plan_programme.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -634,7 +634,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="odd gradeX">
-                                                            <td>Service Gestion Crédit </td>
+                                                            <td>Service Gestion de Crédit </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="service_gestionnairee_credit.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -659,7 +659,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="odd gradeX">
-                                                            <td>Localisation Geographique </td>
+                                                            <td>Localisation Géographique </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="localisation_geographique.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -709,7 +709,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="odd gradeX">
-                                                            <td>Plan decissionnelles </td>
+                                                            <td>Plan Décisionnel </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="plan_decisionnel.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -734,7 +734,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Plan des actes</td>
+                                                            <td>Plan des Actes</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="plan_acte.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -772,10 +772,10 @@
                                                         <tr>
                                                             <th>Fonctions</th>
                                                             <th>Ajouter</th>
-                                                            <th>Mofications</th>
+                                                            <th>Modifications</th>
                                                             <th>Consulter</th>
                                                             <th>Imprimer</th>
-                                                            <th>Suppimer</th>
+                                                            <th>Supprimer</th>
                                                             <th>Exporter</th>
                                                             <th>Importer</th>
                                                         </tr>
@@ -857,7 +857,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="odd gradeX">
-                                                            <td>Type candidat </td>
+                                                            <td>Type de candidat </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="type_candidat.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -970,10 +970,10 @@
                                                         <tr>
                                                             <th>Fonctions</th>
                                                             <th>Ajouter</th>
-                                                            <th>Mofications</th>
+                                                            <th>Modifications</th>
                                                             <th>Consulter</th>
                                                             <th>Imprimer</th>
-                                                            <th>Suppimer</th>
+                                                            <th>Supprimer</th>
                                                             <th>Exporter</th>
                                                             <th>Importer</th>
                                                         </tr>
@@ -1005,7 +1005,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Agence Banque</td>
+                                                            <td>Agence Bancaire</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="agence_banque.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1031,7 +1031,7 @@
                                                         </tr>
 
                                                         <tr class="odd gradeX">
-                                                            <td>Secteur Activite </td>
+                                                            <td>Secteur d'Activité </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="secteur_activite.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1056,7 +1056,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Entreprises</td>
+                                                            <td>Entreprise</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="entreprise.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1120,17 +1120,17 @@
                                                         <tr>
                                                             <th>Fonctions</th>
                                                             <th>Ajouter</th>
-                                                            <th>Mofications</th>
+                                                            <th>Modifications</th>
                                                             <th>Consulter</th>
                                                             <th>Imprimer</th>
-                                                            <th>Suppimer</th>
+                                                            <th>Supprimer</th>
                                                             <th>Exporter</th>
                                                             <th>Importer</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
                                                         <tr class="odd gradeX">
-                                                            <td>Type Marché </td>
+                                                            <td>Type de Marché </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="type_marche.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1155,7 +1155,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Famille Procedure</td>
+                                                            <td>Famille de Procédure</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="fammille_procedure.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1181,7 +1181,7 @@
                                                         </tr>
 
                                                         <tr class="odd gradeX">
-                                                            <td>Procedure Passation </td>
+                                                            <td>Procédure de Passation </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="procedure_passation.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1206,7 +1206,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Role Membre Cojo</td>
+                                                            <td>Rôle des Membres du Cojo</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="role_membre_cojo.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1246,10 +1246,10 @@
                                                         <tr>
                                                             <th>Fonctions</th>
                                                             <th>Ajouter</th>
-                                                            <th>Mofications</th>
+                                                            <th>Modifications</th>
                                                             <th>Consulter</th>
                                                             <th>Imprimer</th>
-                                                            <th>Suppimer</th>
+                                                            <th>Supprimer</th>
                                                             <th>Exporter</th>
                                                             <th>Importer</th>
                                                         </tr>
@@ -1281,7 +1281,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Categorie Grade</td>
+                                                            <td>Catégorie de Grade</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="categorie_grade.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1356,7 +1356,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="odd gradeX">
-                                                            <td>Fonction Budgetaire </td>
+                                                            <td>Fonction Budgétaire </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="fonction_budgetaire.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1456,7 +1456,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Type Acte</td>
+                                                            <td>Type d'Acte</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="type_acte.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1481,7 +1481,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="odd gradeX">
-                                                            <td>Type conges </td>
+                                                            <td>Type de Congés </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="type_conges.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1506,7 +1506,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Niveau d'etude</td>
+                                                            <td>Niveau d'étude</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="niveau_etude.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1531,7 +1531,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Type de salarie</td>
+                                                            <td>Type de salarié</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="type_salarie.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1595,17 +1595,17 @@
                                                         <tr>
                                                             <th>Fonctions</th>
                                                             <th>Ajouter</th>
-                                                            <th>Mofications</th>
+                                                            <th>Modifications</th>
                                                             <th>Consulter</th>
                                                             <th>Imprimer</th>
-                                                            <th>Suppimer</th>
+                                                            <th>Supprimer</th>
                                                             <th>Exporter</th>
                                                             <th>Importer</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
                                                         <tr class="odd gradeX">
-                                                            <td>Nature Entree </td>
+                                                            <td>Nature d'entrée </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="nature_entree.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1630,7 +1630,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Cause Inactivite</td>
+                                                            <td>Cause d'Inactivité</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="cause_inactivite.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1655,7 +1655,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="odd gradeX">
-                                                            <td>Etat Immobilisation </td>
+                                                            <td>Etat d'Immobilisation </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="etat_immobilisation.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1680,7 +1680,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="odd gradeX">
-                                                            <td>Groupe Equipement </td>
+                                                            <td>Groupe d'Equipement </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="groupe_equipement.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1705,7 +1705,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="odd gradeX">
-                                                            <td>Famille equipement </td>
+                                                            <td>Famille d'équipement </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="famille_equipement.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1730,7 +1730,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Rederentiel des prix</td>
+                                                            <td>Référentiel des prix</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="reference_prix.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1780,7 +1780,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Equipement type</td>
+                                                            <td>Type d'Equipement </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="equipement_type.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1820,17 +1820,17 @@
                                                         <tr>
                                                             <th>Fonctions</th>
                                                             <th>Ajouter</th>
-                                                            <th>Mofications</th>
+                                                            <th>Modifications</th>
                                                             <th>Consulter</th>
                                                             <th>Imprimer</th>
-                                                            <th>Suppimer</th>
+                                                            <th>Supprimer</th>
                                                             <th>Exporter</th>
                                                             <th>Importer</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
                                                         <tr class="odd gradeX">
-                                                            <td>Categories Missions </td>
+                                                            <td>Catégorie de Missions </td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="categories_mission.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1855,7 +1855,7 @@
                                                             </p-check></td>
                                                         </tr>
                                                         <tr class="even gradeC">
-                                                            <td>Norme Mission</td>
+                                                            <td>Norme de Mission</td>
                                                             <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="danger" toggle style="transform: scale(0.9) translate(-10%, -95%);  "  v-model="norme_mission.ajouter" >
                                                                 <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
                                                                 <label slot="off-label"></label>
@@ -1891,12 +1891,12 @@
                                 <div class="span6">
                                     <div class="widget-box">
                                         <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-                                            <h5>Transfere</h5>
+                                            <h5>Transférer</h5>
                                         </div>
                                         <div class="widget-content nopadding">
                                             <div class="widget-box">
                                                 <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-                                                    <h5>Transfere</h5>
+                                                    <h5>Transférer</h5>
                                                 </div>
                                                 <div class="widget-content">
 
