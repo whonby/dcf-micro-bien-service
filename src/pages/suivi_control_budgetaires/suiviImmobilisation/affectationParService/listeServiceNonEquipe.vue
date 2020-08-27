@@ -1,4 +1,4 @@
-
+ua_id
 <template>
 
 <div>
@@ -109,7 +109,7 @@
                         <td colspan="2">
                           <label class="control-label">Unite d'administrative</label>
                           
-                              <input    type="text"  class="span12"  readonly  :value="afficherUniteAdministrative(formData.s_ua_id)" />                              
+                              <input    type="text"  class="span12"  readonly  :value="afficherUniteAdministrative(formData.ua_id)" />                              
                              
                         </td>
                         <!-- <td>
@@ -401,6 +401,8 @@ search:""
       "demandeMateriel"
    
    ]),
+    ...mapGetters('parametreGenerauxAdministratif', [ 'getterstructuresOrganisationUa',
+    'getterplanOrganisationUa']) ,
     //   filtreServiceUniteAdministrative() {
     //   const st = this.search.toLowerCase();
     //   return this.servicesua.filter(type => {
@@ -424,10 +426,10 @@ listeDesServiceNonEquipeDeUa() {
                     return item
                 }
             })
-          return colect.filter(element => element.normeequipement != 0 && element.serviceua_id != null)
+          return colect.filter(element => element.normeequipement != 0 && element.normeequipement != null)
         }
 
-       return this.getterplanOrganisationUa.filter(element => element.normeequipement != 0 && element.serviceua_id != null)
+       return this.getterplanOrganisationUa.filter(element => element.normeequipement != 0 && element.normeequipement != null)
 
     },
         afficherQuantiteSortir() {
@@ -774,6 +776,17 @@ afficheIdFonction() {
       }
       return 0
     },
+    afficherIdPlanOrganigramme() {
+      const qtereel = this.getterplanOrganisationUa.find(
+        qtreel => qtreel.serviceua_id == this.formData.serviceua_id,
+       
+      );
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
       },
 
       methods:{ 
@@ -785,8 +798,6 @@ afficheIdFonction() {
       "ajouterService",
       "modifierService",
       "supprimerService",
-     
-      // "ajouterHistoriqueBudgetGeneral"
     ]),
 ...mapActions("SuiviImmobilisation", [
        "ajouterImmobilisation",
@@ -794,9 +805,10 @@ afficheIdFonction() {
        "modifierStock",
        "ajouterHistotorisqueAffectionService",
        "modifierDemandeMateriel"
-      
-     
     ]),
+    ...mapActions('parametreGenerauxAdministratif', ['getPlanPays', 
+   'ajouterPlanOrganigrammeUa','modifierPlanOrganigrammeUa','supprimerPlanOrganigrammeUa']), 
+   
               fenetreAjouterAffectation(index) {
       this.$("#nonEquiper").modal({
         backdrop: "static",
@@ -820,7 +832,7 @@ else if(this.afficherQuantiteEnRequise(this.formData2.famillearticle_id) < this.
   alert("Vérifiez la quantité affecté")
 }
 
-else if (this.formData.serviceua_id == this.afficherAffectationParFonction  && this.formData.s_ua_id == this.afficherAffectationParUniteZone && this.formData.serviceua_id == this.afficherAffectationParService && this.formData2.famillearticle_id == this.afficherAffectationParBesoin){
+else if (this.formData.serviceua_id == this.afficherAffectationParFonction  && this.formData.ua_id == this.afficherAffectationParUniteZone && this.formData.serviceua_id == this.afficherAffectationParService && this.formData2.famillearticle_id == this.afficherAffectationParBesoin){
 
 var nouvelobjet8 ={
   ...this.formData,
@@ -843,7 +855,7 @@ var nouvelobjet2 ={
         exercice_budgetaire:this.exerciceBudgetaireEnCours,
       duree:this.afficherDureeVieFamille(this.formData2.famillearticle_id),
       // acteurdepense_id : this.formData.acteur_depense_id,
-     	uniteadministrative_id:this.formData.s_ua_id,
+     	uniteadministrative_id:this.formData.ua_id,
       	service_id:this.formData.serviceua_id,
     //   fonction_id:this.formData.fonction_id,
       anneamortiss:this.anneeAmortissement,
@@ -860,7 +872,7 @@ var nouvelobjet2 ={
         ...this.formData,
         ...this.formData2,
 //  acteur_id:this.formData.acteur_depense_id,
- ua_id:this.formData.s_ua_id,
+ ua_id:this.formData.ua_id,
 //  unitezone_id:this.formData.uniteZone_id,
 //  fonction_id:this.formData.fonction_id,
  article_id:this.formData2.famillearticle_id,
@@ -878,7 +890,7 @@ var nouvelobjet2 ={
 
 this.ajouterHistotorisqueAffectionService(nouveauObjetDemande)
       this.modifierStock(nouvelobjet8)
-this.modifierService(nouvelobjet2)
+this.modifierPlanOrganigrammeUa(nouvelobjet2)
 
   
     this.getAllServiceua()
@@ -887,7 +899,7 @@ this.modifierService(nouvelobjet2)
 
      this.$("#nonEquiper").modal('hide');
       this.formData={
-s_ua_id: "",
+ua_id: "",
        
         libelle:"",
         
@@ -926,7 +938,7 @@ var nouvelobjet4 ={
         exercice_budgetaire:this.exerciceBudgetaireEnCours,
       duree:this.afficherDureeVieFamille(this.formData2.famillearticle_id),
       // acteurdepense_id : this.formData.acteur_depense_id,
-     	uniteadministrative_id:this.formData.s_ua_id,
+     	uniteadministrative_id:this.formData.ua_id,
       service_id:this.formData.serviceua_id,
       // fonction_id:this.formData.fonction_id,
       anneamortiss:this.anneeAmortissement,
@@ -942,7 +954,7 @@ var nouvelobjet4 ={
        ...this.formData,
        ...this.formData2,
 //  acteur_id:this.formData.acteur_depense_id,
- ua_id:this.formData.s_ua_id,
+ ua_id:this.formData.ua_id,
  service_id:this.formData.serviceua_id,
 //  unitezone_id:this.formData.uniteZone_id,
 //  fonction_id:this.formData.fonction_id,
@@ -968,7 +980,7 @@ this.modifierService(nouvelobjet4)
 this.$("#nonEquiper").modal('hide');
      
      this.formData={
-s_ua_id: "",
+ua_id: "",
        
         serviceua_id:"",
       

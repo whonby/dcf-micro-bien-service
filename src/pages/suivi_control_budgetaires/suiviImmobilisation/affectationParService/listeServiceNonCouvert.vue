@@ -1,5 +1,4 @@
-afficheNombreQteACouvert
-afficheQteACouvert
+
 <template>
 
 <div>

@@ -134,10 +134,10 @@ listeDesServiceDeUa() {
                     return item
                 }
             })
-          return colect.filter(items=>items.serviceua_id !=null);
+          return colect.filter(items=>items.normeequipement !=null);
         }
 
-       return this.getterplanOrganisationUa.filter(items=>items.serviceua_id !=null);
+       return this.getterplanOrganisationUa.filter(items=>items.normeequipement !=null);
 
     },
 
