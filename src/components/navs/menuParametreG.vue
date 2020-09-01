@@ -502,7 +502,7 @@
           <li>
             <router-link :to="{name: 'CategorieGrade'}" tag="a">
               <i class="icon-user"></i>
-              Catégorie grade
+              Catégorie de grade
             </router-link>
           </li>
           <li class="divider"></li>
@@ -535,7 +535,7 @@
            <li class="divider"></li>
           <li>
             <router-link :to="{name: 'familleEmploie'}" tag="a">
-              <i class="icon-key"></i> Familles d'emplois            </router-link>
+              <i class="icon-key"></i> Familles d'emploi            </router-link>
           </li>
           <li class="divider"></li>
           <li>
@@ -555,7 +555,7 @@
           <li>
             <router-link :to="{name: 'Typeconges'}" tag="a">
               <i class="icon-user"></i>
-              Type congés
+              Type de congé
             </router-link>
           </li>
          
@@ -610,14 +610,14 @@
           <li>
             <router-link :to="{name: 'natureEntre'}" tag="a">
               <i class="icon-check"></i>
-             Nature Entrée
+             Nature des entrées
             </router-link>
           </li>
             <li class="divider"></li>
           <li>
             <router-link :to="{name: 'CauseInactivite'}" tag="a">
               <i class="icon-check"></i>
-             Cause Inactivite
+             Cause d'inactivité
             </router-link>
           </li>
             <li class="divider"></li>
@@ -631,7 +631,7 @@
           <li>
             <router-link :to="{name: 'listeEquipement'}" tag="a">
               <i class="icon-check"></i>
-            Groupe équipement
+            Groupe d'équipement
             </router-link>
           </li>
           <li class="divider"></li>

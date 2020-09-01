@@ -15,7 +15,7 @@
                    <tr>
                      <td>
                            <div class="control-group">
-              <label class="control-label">Famille Emplois</label>
+              <label class="control-label">Famille d'Emploi</label>
               <div class="controls">
                 <select  v-model="formData.famille_fonction_id" class="span5">
             <option v-for="resultat in familleFonction" :key="resultat.id" 
@@ -26,7 +26,7 @@
                      </td>
                      <td>
                             <div class="control-group">
-              <label class="control-label">Emplois</label>
+              <label class="control-label">Emploi</label>
               <div class="controls">
                 <select  v-model="formData.fonction_id" class="span5">
             <option v-for="resultat in fonctions" :key="resultat.id" 
@@ -94,7 +94,7 @@
                    <tr>
                      <td>
                            <div class="control-group">
-              <label class="control-label">Famille Emplois</label>
+              <label class="control-label">Famille d'Emploi</label>
               <div class="controls">
                 <select  v-model="editSection.famille_fonction_id" class="span5">
             <option v-for="resultat in familleFonction" :key="resultat.id" 
@@ -105,7 +105,7 @@
                      </td>
                      <td>
                             <div class="control-group">
-              <label class="control-label">Emplois</label>
+              <label class="control-label">Emploi</label>
               <div class="controls">
                 <select  v-model="editSection.fonction_id" class="span5">
             <option v-for="resultat in fonctions" :key="resultat.id" 

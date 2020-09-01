@@ -42,7 +42,7 @@
           data-target="#menuBUDGET"
           class="dropdown-toggle"
         >
-          <span class="text">UNITES ADMINISTRATIVES</span>
+          <span class="text">UNITE ADMINISTRATIVE</span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">

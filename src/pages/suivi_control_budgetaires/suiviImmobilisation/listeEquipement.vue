@@ -5,7 +5,7 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Type Groupe d'Equipement </h3>
+        <h3>Ajouter le type de groupe d'équipement </h3>
       </div>
       <div class="modal-body">
        <table class="table table-bordered table-striped">
@@ -29,7 +29,7 @@
          <tr>
            <td>
                   <div class="control-group">
-            <label class="control-label">Libelle:</label>
+            <label class="control-label">Libellé:</label>
             <div class="controls">
               
               <input
@@ -62,7 +62,7 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Type Groupe d'Equipement </h3>
+        <h3>Modifier le type de groupe d'équipement </h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -84,7 +84,7 @@
           <tr>
            <td>
                   <div class="control-group">
-            <label class="control-label">Libelle:</label>
+            <label class="control-label">Libellé:</label>
             <div class="controls">
               
               <input
@@ -138,7 +138,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Types de Groupe d'Equipement </h5>
+              <h5>Liste des types de groupe d'équipement </h5>
                <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />

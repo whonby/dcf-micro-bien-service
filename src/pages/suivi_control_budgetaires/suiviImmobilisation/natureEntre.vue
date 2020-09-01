@@ -5,7 +5,7 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Nature d'entrée</h3>
+        <h3>Ajouter la Nature d'entrée</h3>
       </div>
       <div class="modal-body">
        <table class="table table-bordered table-striped">
@@ -13,7 +13,7 @@
             <tr>
                <td>
                 <div class="control-group">
-                  <label class="control-label">Libelle</label>
+                  <label class="control-label">Libellé</label>
                   <div class="controls">
                     <input
                 type="text"
