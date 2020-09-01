@@ -126,9 +126,9 @@
                           <tr>
                             <td>
 <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span4" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span4" placeholder="Saisir le libellé" />
               </div>
             </div>
                             </td>
@@ -169,7 +169,7 @@
            <tr>
              <td>
                 <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="editpays.libelle" class="span4" placeholder="" />
               </div>

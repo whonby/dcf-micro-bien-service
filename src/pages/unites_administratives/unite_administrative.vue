@@ -80,7 +80,7 @@
               </td>
               <td>
                  <div class="control-group">
-                  <label class="control-label">Localisation Géographique</label>
+                  <label class="control-label">Localisation géographique</label>
                   <div class="controls">
                     <select v-model="formData.localisationgeo_id" class="span5">
                       <option
@@ -263,7 +263,7 @@
             <tr>
                <td>
                 <div class="control-group">
-                  <label class="control-label">Code Unite administrative:</label>
+                  <label class="control-label">Code d'unité administrative:</label>
                   <div class="controls">
                     <input
                       type="text"
@@ -277,13 +277,13 @@
               </td>
               <td>
                <div class="control-group">
-                  <label class="control-label">Nom unite administrative:</label>
+                  <label class="control-label">Nom de l'unité administrative:</label>
                   <div class="controls">
                     <input
                       type="text"
                       v-model="editUniteAdministrative.libelle"
                       class="span5"
-                      placeholder="Saisir le Nom unite administrative"
+                      placeholder="Saisir le Nom de l'unité administrative"
                      
                     />
                   </div>

@@ -21,9 +21,9 @@
              
              <td>
                  <div class="control-group">
-                             <label class="control-label" title="">Numero d'identifiant unique </label>
+                             <label class="control-label" title="">Numéro d'identifiant unique </label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Numero IDU" v-model="formData.numero_idu">
+                                                        <input type="text" class="span11" placeholder="Numéro IDU" v-model="formData.numero_idu">
                                                     </div>
                                                 </div>
                  
@@ -31,9 +31,9 @@
 
                  <td>
                  <div class="control-group">
-                             <label class="control-label">Numero compte contribuable </label>
+                             <label class="control-label">Numéro du compte contribuable </label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Numero compte contribuable" v-model="formData.numero_cc">
+                                                        <input type="text" class="span11" placeholder="Numéro du compte contribuable" v-model="formData.numero_cc">
                                                     </div>
                                                 </div>
                  
@@ -48,7 +48,7 @@
              </td>
              <td>
                     <div class="control-group">
-                                                    <label class="control-label">Secteur activite</label>
+                                                    <label class="control-label">Secteur d'activité</label>
                                                     <div class="controls">
                                                         <select v-model="formData.secteur_activite_id" class="span11">
                                                             <option></option>
@@ -68,7 +68,7 @@
                   <div class="control-group">
      <label class="control-label">Raison sociale :</label>
             <div class="controls">
-         <input type="text" class="span11" placeholder="Raison social" v-model="formData.raison_sociale">
+         <input type="text" class="span11" placeholder="Raison sociale" v-model="formData.raison_sociale">
                      </div>
                  </div>
              </td>
@@ -84,17 +84,17 @@
          <tr>
                <td>
                   <div class="control-group">
-                                                    <label class="control-label">Numero de registe de commerce:</label>
+                                                    <label class="control-label">Numéro du registre de commerce:</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Numero de registe de commerce" v-model="formData.numero_rc">
+                                                        <input type="text" class="span11" placeholder="Numéro de registe de commerce" v-model="formData.numero_rc">
                                                     </div>
                                                 </div>
              </td>
              <td>
                   <div class="control-group">
-                                                    <label class="control-label">Capitale social:</label>
+                                                    <label class="control-label">Capital social:</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Capitale social" v-model="formData.capitale_sociale">
+                                                        <input type="text" class="span11" placeholder="Capital social" v-model="formData.capitale_sociale">
                                                     </div>
                                                 </div>
              </td>
@@ -109,9 +109,9 @@
              </td> -->
              <td>
                   <div class="control-group">
-                                                    <label class="control-label">Telephone:</label>
+                                                    <label class="control-label">Téléphone:</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Telephone" v-model="formData.telephone">
+                                                        <input type="text" class="span11" placeholder="Téléphone" v-model="formData.telephone">
                                                     </div>
                                                 </div>
              </td>
@@ -183,7 +183,7 @@
                   <div class="control-group">
                                                     <label class="control-label">Centre d'imposition :</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Centre imposition" v-model="formData.centre_impot">
+                                                        <input type="text" class="span11" placeholder="Centre d'imposition" v-model="formData.centre_impot">
                                                     </div>
                                                 </div>
              </td>
@@ -198,7 +198,7 @@
               <td>
 
                      <div class="control-group">
-                                                    <label class="control-label">Regime d'imposition</label>
+                                                    <label class="control-label">Régime d'imposition</label>
                                                     <div class="controls">
                                                         <select v-model="formData.regime_impossition" class="span11">
                                                              <option></option>
@@ -211,9 +211,9 @@
              </td>
                <td>
                   <div class="control-group">
-                                                    <label class="control-label">Imatriculation CNPS:</label>
+                                                    <label class="control-label">Immatriculation CNPS:</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Imatriculation CNPS" v-model="formData.immatriculation_cnps">
+                                                        <input type="text" class="span11" placeholder="Immatriculation CNPS" v-model="formData.immatriculation_cnps">
                                                     </div>
                                                 </div>
              </td>
@@ -222,33 +222,33 @@
             
              <td>
                    <div class="control-group">
-                                                    <label class="control-label">Date enregistrement CNPS :</label>
+                                                    <label class="control-label">Date d'enregistrement CNPS :</label>
                                                     <div class="controls">
-                                                        <input type="date" class="span11" placeholder="Date enregistrement CNPS" v-model="formData.date_enregistrement_cnps">
+                                                        <input type="date" class="span11" placeholder="Date d'enregistrement CNPS" v-model="formData.date_enregistrement_cnps">
                                                     </div>
                                                 </div>
              </td>
              <td>
                    <div class="control-group">
-                                                    <label class="control-label">Nombre travailleur Permanent :</label>
+                                                    <label class="control-label">Nombre de travailleur permanent :</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Nombre travailleur Permanant" v-model="formData.nbre_travailleur_permanent">
+                                                        <input type="text" class="span11" placeholder="Nombre de travailleur permanant" v-model="formData.nbre_travailleur_permanent">
                                                     </div>
                                                 </div>
              </td>
              <td>
                   <div class="control-group">
-                                                    <label class="control-label">Nombre travailleur horaire :</label>
+                                                    <label class="control-label">Nombre de travailleur horaire :</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Nombre travailleur horaire" v-model="formData.nbre_travailleur_horaire">
+                                                        <input type="text" class="span11" placeholder="Nombre de travailleur horaire" v-model="formData.nbre_travailleur_horaire">
                                                     </div>
                                                 </div>
              </td>
               <td>
                   <div class="control-group">
-                                                    <label class="control-label">Nombre travailleur journalier :</label>
+                                                    <label class="control-label">Nombre de travailleur journalier :</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Nombre travailleur journalier" v-model="formData.nbre_travailleur_journalier">
+                                                        <input type="text" class="span11" placeholder="Nombre de travailleur journalier" v-model="formData.nbre_travailleur_journalier">
                                                     </div>
                                                 </div>
              </td>
@@ -257,7 +257,7 @@
             
              <td>
                    <div class="control-group">
-                                                    <label class="control-label">Date Creation</label>
+                                                    <label class="control-label">Date de création</label>
                                                     <div class="controls">
                                                         <input type="date" class="span11"  v-model="formData.datecreation">
                                                     </div>
@@ -265,7 +265,7 @@
              </td>
              <td>
                    <div class="control-group">
-                                                    <label class="control-label">Date debut activite</label>
+                                                    <label class="control-label">Date de début d'activité</label>
                                                     <div class="controls">
                                                         <input type="date" class="span11"  v-model="formData.dateactivite">
                                                     </div>

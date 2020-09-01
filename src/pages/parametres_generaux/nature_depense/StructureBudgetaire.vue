@@ -109,13 +109,13 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter structure economique</h3>
+                <h3>Ajouter structure économique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
 
                    <div class="control-group">
-              <label class="control-label">niveau:</label>
+              <label class="control-label">Niveau:</label>
               <div class="controls">
                 <input type="number" v-model="formData.niveau" class="span" placeholder="Saisir le niveau" />
               </div>
@@ -128,9 +128,9 @@
             </div> -->
              
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
              

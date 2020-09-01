@@ -75,7 +75,7 @@
            
                    <td>
                      <div class="control-group">
-                                                    <label class="control-label">Nom et Prenom:</label>
+                                                    <label class="control-label">Nom et Prénoms:</label>
                                                     <div class="controls">
                                                         <input type="text" :value="afficheNomUtilisateur"  placeholder="Saisir nom et prenom" class="span12"/>
                                                     </div>
@@ -110,7 +110,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Mot de passe:</label>
                                                     <div class="controls">
-                                                        <input type="text" :value="afficheMotPasseUtilisateur"  placeholder="Saisir mot de passe" class="span12"/>
+                                                        <input type="text" :value="afficheMotPasseUtilisateur"  placeholder="Saisir le mot de passe" class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
@@ -174,7 +174,7 @@
         
                 <td>
                   <div class="control-group">
-                                                 <label class="control-label">Nom et Prenom:</label>
+                                                 <label class="control-label">Nom et Prénoms:</label>
                                                  <div class="controls">
                                                      <input type="text" :value="afficheNomUtilisateur"  placeholder="Saisir nom et prenom" class="span12"/>
                                                  </div>
@@ -223,7 +223,7 @@
                 <div class="control-group">
                                                     <label class="control-label">Nouveau mot de passe:</label>
                                                     <div class="controls">
-                                                         <input type="text" v-model="formData.mot_passe"  placeholder="Saisir mot de passe" class="span12"/>
+                                                         <input type="text" v-model="formData.mot_passe"  placeholder="Saisir le mot de passe" class="span12"/>
                                     </div>
 
                                                 </div>

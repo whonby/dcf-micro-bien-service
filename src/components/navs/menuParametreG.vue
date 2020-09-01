@@ -47,13 +47,13 @@
           <li class="divider"></li>
           <li>
             <router-link :to="{name: 'GrandeNature'}" tag="a">
-              <i class="icon-user"></i> Grandes natures de depense
+              <i class="icon-user"></i> Grandes natures de dépense
             </router-link>
           </li>
           <li class="divider"></li>
             <li>
             <router-link :to="{name: 'typeUniteAdministrative'}" tag="a">
-              <i class="icon-user"></i> Type unite d'administrative
+              <i class="icon-user"></i> Type d'unité administrative
             </router-link>
           </li>
             <li class="divider"></li>
@@ -115,7 +115,7 @@
           
           <li>
             <router-link :to="{name:'StructureProgramme'}" tag="a">
-              <i class=" icon-star"></i> Structures programmes
+              <i class=" icon-star"></i> Structure programme
             </router-link>
           </li>
           <li class="divider"></li>
@@ -142,7 +142,7 @@
            <li class="divider"></li>
           <li>
             <router-link :to="{name: 'SrtuctureGeographique'}" tag="a">
-              <i class="icon-plane"></i> Structure geographique
+              <i class="icon-plane"></i> Structure géographique
             </router-link>
           </li>
 
@@ -158,7 +158,7 @@
           
           <li>
             <router-link :to="{name: 'structureDecision'}" tag="a">
-              <i class="icon-key"></i> Structures décisionnelles
+              <i class="icon-key"></i> Structure décisionnelle
             </router-link>
           </li>
           <li class="divider"></li>
@@ -166,7 +166,7 @@
           
           <li>
             <router-link :to="{name: 'structureActe'}" tag="a">
-              <i class="icon-key"></i> Structures des actes
+              <i class="icon-key"></i> Structure des actes
             </router-link>
           </li>
           <li class="divider"></li>
@@ -340,7 +340,7 @@
           <li>
             <router-link :to="{name: 'typeAnalyse'}" tag="a">
               <i class="icon-bar-chart"></i>
-           Type analyse
+           Type d'analyse
             </router-link>
           </li>
          
@@ -425,7 +425,7 @@
           <li>
             <router-link :to="{name: 'RegimeImposition'}" tag="a">
               <i class="icon-check"></i>
-            Regime imposition
+            Régime d'imposition
             </router-link>
           </li>
           <li class="divider"></li>
@@ -463,21 +463,21 @@
            <li>
             <router-link :to="{name: 'typeProcedure'}" tag="a">
               <i class="icon-bar-chart"></i>
-           Famille de procedure
+           Famille de procédure
             </router-link>
           </li>
           <li class="divider"></li>
            <li>
             <router-link :to="{name: 'procedurePassation'}" tag="a">
               <i class="icon-bar-chart"></i>
-           Procedure de passation
+           Procédure de passation
             </router-link>
           </li>
           <li class="divider"></li>
            <li>
             <router-link :to="{name: 'rolemembrecojo'}" tag="a">
               <i class="icon-bar-chart"></i>
-             Role membre Cojo
+             Rôle membre Cojo
             </router-link>
           </li>
            <li class="divider"></li>

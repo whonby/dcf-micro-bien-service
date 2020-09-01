@@ -22,7 +22,7 @@
                                             <div class="widget-content nopadding">
 
                                                 <div class="control-group">
-                                                    <label class="control-label">Numero IDU:</label>
+                                                    <label class="control-label">Numéro IDU:</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="" v-model="formData.numero_idu">
                                                     </div>
@@ -30,7 +30,7 @@
 
 
                                                 <div class="control-group">
-                                                    <label class="control-label">Raison social :</label>
+                                                    <label class="control-label">Raison sociale :</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Raison social" v-model="formData.raison_sociale">
                                                     </div>
@@ -42,7 +42,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">Secteur activite</label>
+                                                    <label class="control-label">Secteur d'activité</label>
                                                     <div class="controls">
                                                         <select v-model="formData.secteur_activite_id" class="span11">
                                                             <option></option>
@@ -54,13 +54,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">Numero compte contribuable :</label>
+                                                    <label class="control-label">Numéro compte contribuable :</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Numero compte contribuable" v-model="formData.numero_cc">
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">Numero de registe de commerce:</label>
+                                                    <label class="control-label">Numéro de registre de commerce:</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Numero de registe de commerce" v-model="formData.numero_rc">
                                                     </div>
@@ -78,7 +78,7 @@
                                                     </div>
                                                 </div> -->
                                                 <div class="control-group">
-                                                    <label class="control-label">Telephone:</label>
+                                                    <label class="control-label">Téléphone:</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Telephone" v-model="formData.telephone">
                                                     </div>
@@ -140,7 +140,7 @@
                                         <div class="widget-box">
                                             <div class="widget-content nopadding">
                                                 <div class="control-group">
-                                                    <label class="control-label">Form juridique:</label>
+                                                    <label class="control-label">Forme juridique:</label>
                                                     <div class="controls">
                                                         <select v-model="formData.forme_juridique" class="span11" disabled>
                                                            <option></option>
@@ -220,7 +220,7 @@
                                                     </div>
                                                 </div>
                                                  <div class="control-group">
-                                                    <label class="control-label">Date debut activité</label>
+                                                    <label class="control-label">Date début activité</label>
                                                     <div class="controls">
                                                         <input type="date" class="span11"  v-model="formData.dateactivite">
                                                     </div>

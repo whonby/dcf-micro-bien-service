@@ -5,12 +5,12 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter procedure de passation</h3>
+        <h3>Ajouter la procédure de passation</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
              <div class="control-group">
-            <label class="control-label">Type de procedure</label>
+            <label class="control-label">Type de procédure</label>
             <div class="controls">
                 <select v-model="formData.type_procedure_id" class="span">
                <option v-for="varText in typeTypeProcedures" :key="varText.id" 
@@ -30,7 +30,7 @@
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">Libellé</label>
             <div class="controls">
               <input
                 type="text"
@@ -70,7 +70,7 @@
         <form class="form-horizontal">
 
              <div class="control-group">
-            <label class="control-label">Type de procedure</label>
+            <label class="control-label">Type de procédure</label>
             <div class="controls">
                 <select v-model="editProcedure.type_procedure_id" class="span">
                <option v-for="varText in typeTypeProcedures" :key="varText.id" 
@@ -89,7 +89,7 @@
               />
             </div>
             <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">Libellé</label>
             <div class="controls">
               <input
                 type="text"
@@ -138,7 +138,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste procedure de passation</h5>
+              <h5>Liste procédure de passation</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />

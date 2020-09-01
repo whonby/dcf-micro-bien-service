@@ -24,7 +24,7 @@
             </div>
 
             <div class="control-group">
-              <label class="control-label">Numero d'ordre de section:</label>
+              <label class="control-label">Numéro d'ordre de section:</label>
               <div class="controls">
                 <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
               </div>

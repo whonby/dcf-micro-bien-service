@@ -83,7 +83,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucun plan décisionnel enregistré ! </h6>
+                <h6 style="color:red;">Aucun plan décisionnel enregistré </h6>
               </div>
             </div>
           </div>
@@ -119,9 +119,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
            

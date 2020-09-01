@@ -83,7 +83,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucun plan fonctionnel enregistré ! </h6>
+                <h6 style="color:red;">Aucun plan fonctionnel enregistré </h6>
               </div>
             </div>
           </div>
@@ -104,7 +104,7 @@
               <div class="modal-body">
                 <form class="form-horizontal">
                    <div class="control-group">
-              <label class="control-label">Structure foNctionnelle:</label>
+              <label class="control-label">Structure fonctionnelle:</label>
               <div class="controls">
                 <select  v-model="formData.structure_fonctionnelle_id">
             <option v-for="plan in structures_fonctionnelles" :key="plan.id" 
@@ -119,9 +119,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
            
@@ -159,14 +159,14 @@
             </div>
 
              <div class="control-group">
-              <label class="control-label">Libéllé parent:</label>
+              <label class="control-label">Libellé parent:</label>
               <div class="controls">
                 <input type="text" readonly :value="parentDossier.libelle" class="span"  />
               </div>
             </div>
 
                <div class="control-group">
-              <label class="control-label">Structure fonctionnel:</label>
+              <label class="control-label">Structure fonctionnelle:</label>
               
               <div class="controls">
               <select v-model="nouvelElementEnfant.structure_fonctionnelle_id" >
@@ -184,9 +184,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
            

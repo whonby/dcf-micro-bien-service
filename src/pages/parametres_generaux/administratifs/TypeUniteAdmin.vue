@@ -107,13 +107,13 @@
       <div class="modal-body">
         <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">Libelle:</label>
+            <label class="control-label">Libellé:</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
                 class="span"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>

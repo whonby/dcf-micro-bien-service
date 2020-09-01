@@ -6,7 +6,7 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Actualiser le regime et forme juridique</h5>
+                                        <h5>Actualiser le régime et forme juridique</h5>
                                     </div>
                         
                         <div class="modal-body">
@@ -14,7 +14,7 @@
         <tr>
             <td colspan="2">
               <div class="control-group">
-                            <label class="control-label">Raison Social</label>
+                            <label class="control-label">Raison Sociale</label>
                             <div class="controls">
                              <input type="text" class="span"  v-model="formData.raison_sociale" readonly/>
                            
