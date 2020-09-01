@@ -79,11 +79,11 @@
 
 
                     <template v-else>
-                         <td >
+                         <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
                     {{exercice_budgetaire.annee || 'Non renseigné'}}</td>
-                  <td >
+                  <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
                     {{formaterDate(exercice_budgetaire.date_debut) || 'Non renseigné'}}</td>
-                  <td >
+                  <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
                     {{formaterDate(exercice_budgetaire.date_fin) || 'Non renseigné'}}</td>
                   <!-- <td>{{exercice_budgetaire.encours ? 'Oui' : 'Non'}}</td> -->
                   
@@ -94,7 +94,7 @@
                 <span >Oui</span>
        
                 </button>
-                   <button v-else @click.prevent="EncoursExerciceLocal(exercice_budgetaire.id)" class="btn  btn-danger">
+                   <button v-else @click.prevent="EncoursExerciceLocal(exercice_budgetaire.id) " class="btn  btn-danger" >
               
                 <span >Non</span>
                 </button>
@@ -104,7 +104,7 @@
                     
                     
               
-              <button v-if="!exercice_budgetaire.encours" @click.prevent="supprimerExerciceBudgetaire(exercice_budgetaire.id)"  class="btn btn-danger ">
+              <button v-if="exercice_budgetaire.encours!=1" @click.prevent="supprimerExerciceBudgetaire(exercice_budgetaire.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
 
@@ -280,6 +280,7 @@
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
 import {partition} from '../../../../src/Repositories/Repository'
+import {admin,dcf} from '../../../../src/Repositories/Auth';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import moment from "moment";
@@ -369,7 +370,8 @@ export default {
    ...mapActions('parametreGenerauxAdministratif', [ 'ajouterExerciceBudgetaire',
     'supprimerExerciceBudgetaire', 'modifierExerciceBudgetaire',"EncoursExerciceBudgetaire"]),   
 
-
+ admin:admin,
+     dcf:dcf,
 
 partition:partition,
 
