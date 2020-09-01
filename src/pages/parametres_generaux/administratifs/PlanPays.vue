@@ -100,7 +100,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter plan pays</h3>
+                <h3>Ajouter plan pays{{LibelleNiveau(this.formData.structurepays_id)}}</h3>
               </div>
               <div class="modal-body">
                 <table class="table table-bordered table-striped">
@@ -347,8 +347,20 @@ export default {
 
    lesPlansParents(){
      return this.getterplan_pays.filter(plan => plan.parent == null)
-   }
+   },
 
+LibelleNiveau() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterstructures_pays.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau;
+      }
+      return 10
+        }
+      };
+    },
   },
   methods: {
     // methode pour notre action
@@ -385,7 +397,12 @@ getColumns() {
     },
    // fonction pour vider l'input
     ajouetpaysLocal () {
-      this.ajouterPlanPays(this.formData)
+      var nouveauObjet={
+        ...this.formData,
+        
+        niveau_structure:this.LibelleNiveau(this.formData.structurepays_id)
+      }
+      this.ajouterPlanPays(nouveauObjet)
 this.$("#exampleModal").modal('hide');
         this.formData = {
                 code: "",
@@ -398,7 +415,8 @@ this.$("#exampleModal").modal('hide');
       // console.log(this.nouvelElementEnfant)
       var nouveauObjet={
         ...this.nouvelElementEnfant,
-        code:this.parentDossier.code
+        code:this.parentDossier.code,
+        niveau_structure:this.LibelleNiveau(this.nouvelElementEnfant.structurepays_id)
       }
       this.ajouterPlanPays(nouveauObjet)
 this.$("#modalAjouterElementEnfant").modal('hide');

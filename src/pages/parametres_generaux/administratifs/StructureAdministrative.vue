@@ -256,7 +256,11 @@ return this.structures_administratives.filter((item) => {
 
    }
 )
-   }
+   },
+   tailleTableauStructureTache(){
+		return this.structures_administratives.length + 1
+	}
+
   },
   methods: {
     // methode pour notre action

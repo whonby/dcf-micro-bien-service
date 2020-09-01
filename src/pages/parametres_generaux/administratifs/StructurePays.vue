@@ -118,10 +118,11 @@
 <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="formData.niveau" class="span4" placeholder="Saisir le niveau" />
+                <input type="number" :value="tailleTableauStructureTache" class="span4" placeholder="Saisir le niveau" readonly/>
               </div>
             </div>
                             </td>
+
                           </tr>
                           <tr>
                             <td>
@@ -137,7 +138,7 @@
                              
           </div>
            <div class="modal-footer"> 
-             <button v-show="formData.niveau.length && formData.libelle.length"
+             <button v-show="formData.libelle.length"
               @click.prevent="ajouetpaysLocal" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" >Fermer</a> </div>
@@ -161,7 +162,7 @@
                 <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="editpays.niveau" class="span4" placeholder="" />
+                <input type="number" v-model="editpays.niveau" class="span4" placeholder="" readonly/>
               </div>
             </div>
              </td>
@@ -271,8 +272,10 @@ return this.getterstructures_pays.filter((item) => {
 
    }
 )
-   }
-
+   },
+tailleTableauStructureTache(){
+		return this.getterstructures_pays.length + 1
+	}
   },
   methods: {
     // methode pour l'action
@@ -324,7 +327,12 @@ getColumns() {
     },
    // fonction pour vider l'input
     ajouetpaysLocal () {
-      this.ajouterStructurePays(this.formData)
+     
+      var nouvelObjet = {
+			...this.formData,
+			niveau:this.tailleTableauStructureTache
+		}
+      this.ajouterStructurePays(nouvelObjet)
 
         this.formData = {
                 niveau: "",
