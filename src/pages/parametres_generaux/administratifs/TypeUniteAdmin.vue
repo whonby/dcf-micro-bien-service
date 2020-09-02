@@ -32,7 +32,7 @@
               </span>
               <h5>Liste des types d'unité administrative</h5>
               <div align="right">
-                Rechercher:
+                Recherche:
                 <input type="text" v-model="search" />
               </div>
             </div>
@@ -52,7 +52,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Libelle</th>
+                    <th>Libellé</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -107,13 +107,13 @@
       <div class="modal-body">
         <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">Libelle:</label>
+            <label class="control-label">Libellé:</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
                 class="span"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>

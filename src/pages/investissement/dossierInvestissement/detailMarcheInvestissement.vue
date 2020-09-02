@@ -17,7 +17,7 @@ CodeExempte
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
-                                <th>Exercice Budgetaire</th>
+                                <th>Exercice Budgétaire</th>
                                 <th>Procedure de passation</th>
                                 <th>Objet marché</th>
                                 <th>Reference marché</th>

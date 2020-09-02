@@ -10,13 +10,13 @@
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">libellé</label>
+            <label class="control-label">Libellé</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
                 class="span"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>
@@ -46,13 +46,13 @@
       <div class="modal-body">
          <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">libellé</label>
+            <label class="control-label">Libellé</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editTypeAppel.libelle"
                 class="span"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>
@@ -99,10 +99,10 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste type candidat</h5>
+              <h5>Liste des types de candidats</h5>
 
               <div align="right">
-                Search:
+                Recherche:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
@@ -128,7 +128,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th width="90%">libellé</th>
+                    <th width="90%">Libellé</th>
                    
                     <th>Action</th>
                   </tr>

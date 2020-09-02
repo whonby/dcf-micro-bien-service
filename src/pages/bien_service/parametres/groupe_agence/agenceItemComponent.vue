@@ -18,13 +18,13 @@
                 <thead>
                   <tr>
                   
-                    <th width="20%">Code agence</th>
-                      <th width="20%">Nom agence</th>
-                        <th width="20%">tel agence</th>
-                          <th width="20%">pays</th>
-                            <th width="20%">ville</th>
+                    <th width="20%">Code de l'agence</th>
+                      <th width="20%">Nom de l'agence</th>
+                        <th width="20%">Téléphone de l'agence</th>
+                          <th width="20%">Pays</th>
+                            <th width="20%">Ville</th>
                     <th width="20%">Commune</th>
-                    <th width="20%">situation geographique</th>
+                    <th width="20%">Situation géographique</th>
                     <th>Action</th>
                   </tr>
                 </thead>

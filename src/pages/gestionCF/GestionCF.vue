@@ -17,11 +17,11 @@
                         <div class="widget-title">
                             <div class="span6">
                                 <span class="icon"> <i class="icon-th"></i> </span>
-                                <h5>Liste des contrôleurs financiers</h5>
+                                <h5>Liste des Contrôleurs Financiers</h5>
                             </div>
                             <div class="span6">
                                 <div align="right">
-                                    Search: <input type="text" v-model="search">
+                                    Recherche: <input type="text" v-model="search">
 
                                 </div>
                             </div>
@@ -47,9 +47,9 @@
 
 
                                     <th>Matricule</th>
-                                    <th>Nom et prenom</th>
+                                    <th>Nom et prénoms</th>
                                     <th>Email</th>
-                                    <th>Role</th>
+                                    <th>Rôle</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -103,7 +103,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>AJOUTER UN NOUVEAU CF</h3>
+                <h3>AJOUTER UN NOUVEAU CONTROLEUR FINANCIER</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">

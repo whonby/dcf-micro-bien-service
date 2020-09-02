@@ -30,9 +30,9 @@
                                      </div> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des structures pays</h5>
+            <h5>Liste des structures des pays</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search">
+        Recherche: <input type="text" v-model="search">
 
           </div>
              
@@ -55,7 +55,7 @@
               <thead>
                 <tr>
                   <th>Niveau</th>
-                  <th>Libelle</th>
+                  <th>Libellé</th>
                    <th style="width:10%">Action</th>
                 </tr>
               </thead>
@@ -126,9 +126,9 @@
                           <tr>
                             <td>
 <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span4" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span4" placeholder="Saisir le libellé" />
               </div>
             </div>
                             </td>
@@ -169,7 +169,7 @@
            <tr>
              <td>
                 <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="editpays.libelle" class="span4" placeholder="" />
               </div>

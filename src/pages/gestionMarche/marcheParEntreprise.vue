@@ -14,7 +14,7 @@ reference_marche
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Marche par Entreprise</h5>
+              <h5>Marché par Entreprise</h5>
              
             </div>
             <div class="widget-content nopadding">
@@ -22,11 +22,11 @@ reference_marche
                 <thead>
                   <tr>
                                             
-                                            <th>Raison social </th>
+                                            <th>Raison Sociale </th>
                                            
-                                            <th>Secteur activite</th>
+                                            <th>Secteur d'activité</th>
                                            
-                                            <th>Regime Impossition</th>
+                                            <th>Regime d'Imposition</th>
                                             <th>Forme Juridique</th>
                                             
                                             <th>Action</th>

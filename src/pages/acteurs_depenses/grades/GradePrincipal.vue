@@ -8,12 +8,12 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Grade</h3>
+                <h3>Ajouter le Grade</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
                   <div class="control-group">
-              <label class="control-label">Categorie Grade</label>
+              <label class="control-label">Catégorie Grade</label>
               <div class="controls">
                 <select  v-model="formData.categoriegrade_id">
             <option v-for="resultat in categorieGrade" :key="resultat.id" 
@@ -24,9 +24,9 @@
            
 
             <div class="control-group">
-              <label class="control-label">Libelle</label>
+              <label class="control-label">Libellé</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le code" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
             
@@ -56,7 +56,7 @@
               <div class="modal-body">
                 <form class="form-horizontal">
     <div class="control-group">
-              <label class="control-label">Categorie Grade</label>
+              <label class="control-label">Catégorie de Grade</label>
               <div class="controls">
                 <select  v-model="editSection.categoriegrade_id">
             <option v-for="resultat in categorieGrade" :key="resultat.id" 

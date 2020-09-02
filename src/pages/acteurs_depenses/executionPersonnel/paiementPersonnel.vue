@@ -120,7 +120,7 @@
               <td>
               
                
-                  <label class="control-label">Activite</label>
+                  <label class="control-label">Activité</label>
                   <div class="controls">
                     <select v-model="formData.activite_id" class="span" :readOnly="activerActivite">
                       <option
@@ -134,7 +134,7 @@
               </td>
                <td>
     
-      <label class="control-label">Numero Matricule</label>
+      <label class="control-label">Numéro Matricule</label>
       <div class="controls">
         <input
          type="text"
@@ -148,7 +148,7 @@
   </td>
    <td>
     
-      <label class="control-label">References Bancaires</label>
+      <label class="control-label">Références Bancaires</label>
       <div class="controls">
         <input
          type="text"
@@ -173,7 +173,7 @@
              <td>
               
                <div class="control-group">
-                  <label class="control-label">Mode de paiemnt</label>
+                  <label class="control-label">Mode de paiement</label>
                   <div class="controls">
                     <select v-model="formData.modepaiement_id" class="span">
                       <option
@@ -203,7 +203,7 @@
               </td>
                 <td>
                 <div class="control-group">
-                <label class="control-label">Compte de disponibilite affecte</label>
+                <label class="control-label">Compte de disponibilité affecté</label>
                  <div class="controls">
                 <input
                  type="text"
@@ -217,12 +217,12 @@
             </td>
                <td>
                 <div class="control-group" >
-                  <label class="control-label">Mois de Paiement:</label>
+                  <label class="control-label">Mois de Paiement</label>
       
  
                   <div class="form-group" >
                   <select v-model="formData.moisdepaiement" class="span">
-                     <option value="" >Selectionner</option>
+                     <option value="" >Sélectionner</option>
                      <option value="Janvier" >Janvier</option>
                      <option value="Février">Février</option>
                      <option value="Mars">Mars</option>
@@ -249,7 +249,7 @@
             
                <td>
                 <div class="control-group">
-                  <label class="control-label">Objet de la depense</label>
+                  <label class="control-label">Objet de la dépense</label>
       
  
                   <div class="controls">
@@ -266,7 +266,7 @@
             
                          <td>
     <div class="control-group">
-      <label class="control-label">Pieces Justificative</label>
+      <label class="control-label">Pièces Justificatives</label>
     
       <div class="controls">
         <input
@@ -632,7 +632,7 @@
             <div class="widget-title">
               <div align="right">
                 Recherche:
-                <input type="search" placeholder="Saisie section ou libelle" v-model="search" />
+                <input type="search" placeholder="Saisir section ou libellé" v-model="search" />
 
                 <!-- <div class="span3">
                   <model-list-select
@@ -649,7 +649,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste du paiement personnel</h5>
+              <h5>Liste de paiement du personnel</h5>
             </div>
 
             <div
@@ -660,13 +660,13 @@
                 <thead>
                   <tr>
                     <th>Exercice en cours</th>
-                    <th title="unite administrative"> ua</th>
+                    <th title="unite administrative"> UA</th>
                     <!-- <th>programme</th>
                     <th>action</th>
                     <th>activité</th> -->
-                    <th>ligne</th>
+                    <th>Ligne</th>
                     <!-- <th>Code Fichier</th> -->
-                    <th>Objet Depense</th>
+                    <th>Objet de Dépense</th>
                     <th>Mois de Paiement</th>
                     <!-- <th>Montant des Salaires</th> -->
                     <th>Fichier Joint</th>

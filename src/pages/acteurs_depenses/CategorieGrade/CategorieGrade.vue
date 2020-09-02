@@ -33,7 +33,7 @@
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                             <h5>Liste des Catégories de Grades</h5>
                             <div align="right">
-                                Search: <input type="text">
+                                Recherche: <input type="text">
 
                             </div>
 
@@ -44,7 +44,7 @@
                                 <thead>
                                 <tr>
                                     
-                                    <th style="width:90%">Libelle</th>
+                                    <th style="width:90%">Libellé</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -94,7 +94,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Catégories de Grades</h3>
+                <h3>Ajouter la Catégorie de Grade</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -102,7 +102,7 @@
                     <div class="control-group">
                         <label class="control-label">Libellé:</label>
                         <div class="controls">
-                            <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                            <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
                         </div>
                     </div>
                    
@@ -124,7 +124,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier Catégories de Grades</h3>
+                <h3>Modifier la Catégorie de Grade</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">

@@ -43,7 +43,7 @@ sommeQuantiteGlobal
 
 <li class="bg_lb span3"> <a href="#" style="color:black;"><h4>QUANTITES </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{sommeQuantiteGlobal}}</span><h4>GLOBALES</h4></a> </li>
 
-        <li class="bg_lg span3"> <a href="#" style="color:black;"><h4>QUANTITES </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteGlobalNonCouvert)}}</span><h4>COUVERTS</h4>  </a> </li>
+        <li class="bg_lg span3"> <a href="#" style="color:black;"><h4>QUANTITES </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteGlobalNonCouvert)}}</span><h4>COUVERTES</h4>  </a> </li>
 
         <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{sommeQuantiteGlobalNonCouvert}}</span> <h4>NON COUVERTES</h4></a> </li>
           <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{(((parseFloat(sommeQuantiteGlobalNonCouvert))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span> <h4>NON COUVERTES</h4></a> </li>

@@ -29,9 +29,9 @@
                                      </div> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des plans décisionnelles</h5>
+            <h5>Liste des plans décisionnels</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search">
+        Recherche: <input type="text" v-model="search">
 
           </div>
              
@@ -83,7 +83,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucun plan décisionnel enregistré ! </h6>
+                <h6 style="color:red;">Aucun plan décisionnel enregistré </h6>
               </div>
             </div>
           </div>
@@ -119,9 +119,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
            

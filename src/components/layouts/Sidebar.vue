@@ -61,7 +61,7 @@
        <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
           <a title="COMPTABILITE DES MATIERE" href="#">
             <i class="icon icon-pencil"></i>
-            <span>COMPTA DES MATIERES</span>
+            <span>COMPTABILITE DES MATIERES</span>
           </a>
         </li>
 

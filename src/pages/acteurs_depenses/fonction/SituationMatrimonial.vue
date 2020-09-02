@@ -33,10 +33,10 @@
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                             <h5>Liste des situations matrimoniales</h5>
-                            <!-- <div align="right">
-                                Search: <input type="text" v-model="search">
+                            <div align="right">
+                                Recherche: <input type="text" v-model="search">
 
-                            </div> -->
+                            </div>
 
                         </div>
 
@@ -99,7 +99,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter situation matrimonial</h3>
+                <h3>Ajouter situation matrimoniale</h3>
             </div>
             <div class="modal-body">
                 <table class="table table-bordered table-striped">
@@ -132,7 +132,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier situation matrimonial</h3>
+                <h3>Modifier situation matrimoniale</h3>
             </div>
             <div class="modal-body">
                <table class="table table-bordered table-striped">

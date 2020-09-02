@@ -36,18 +36,18 @@
                 <thead>
                   <tr>
                      <!-- <th>Type UA</th> -->
-                   <th>Année de l'affectation</th>
+                   <th>Année d'affectation</th>
                     <th>Matricule</th>
                     <th>Nom & Prénoms</th>
                     
-                     <th>Unite administrative</th>
-                    <th>Unite de zone</th>
+                     <th>Unité administrative</th>
+                    <th>Unité de zone</th>
                     <th>Fonction</th>
                       <th>Article</th>
                     <th>Quantité</th>
-                    <th>Duree de vie</th>
+                    <th>Durée de vie</th>
                     <!-- <th>Etat Immobilisation</th> -->
-                    <th>Date mise en service</th>
+                    <th>Date de mise en service</th>
                       <th>Montant</th>
                      <!-- <th>Année de l'amortissement</th> -->
                     <th colspan="2">Action</th>
@@ -130,18 +130,18 @@
                 <thead>
                  <tr>
                      <!-- <th>Type UA</th> -->
-                   <th>Année de l'affectation</th>
+                   <th>Année d'affectation</th>
                     <th>Matricule</th>
                     <th>Nom & Prénoms</th>
                     
-                     <th>Unite administrative</th>
-                    <th>Unite de zone</th>
+                     <th>Unité administrative</th>
+                    <th>Unité de zone</th>
                     <th>Fonction</th>
                       <th>Article</th>
                     <th>Quantité</th>
-                    <th>Duree de vie</th>
+                    <th>Durée de vie</th>
                     <th>Etat Immobilisation</th>
-                    <th>Date mise en service</th>
+                    <th>Date de mise en service</th>
                       <th>Montant</th>
                      <!-- <th>Année de l'amortissement</th> -->
                     <th colspan="2">Action</th>

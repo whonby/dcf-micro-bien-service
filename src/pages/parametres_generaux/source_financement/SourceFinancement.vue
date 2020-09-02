@@ -34,7 +34,7 @@
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des sources de financements</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search" placeholder="searh...">
+        Recherche: <input type="text" v-model="search" placeholder=" ">
 
           </div>
              
@@ -57,7 +57,7 @@
               <thead>
                 <tr>
                   <th>Code</th>
-                  <th>Libelle</th>
+                  <th>Libellé</th>
                   <th>Sigle</th>
                    <th>Action</th>
                 </tr>
@@ -131,9 +131,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
             <div class="controls-group">

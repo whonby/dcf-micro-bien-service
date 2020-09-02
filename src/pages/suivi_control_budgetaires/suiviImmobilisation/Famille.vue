@@ -14,7 +14,7 @@
       <div class="modal-body">
       <form class="form-horizontal">
               <div class="control-group">
-                            <label class="control-label">Type Equipement:</label>
+                            <label class="control-label">Type d'équipement:</label>
                             <div class="controls">
                               <select v-model="formData.equipemt_id">
                                 <option value>Selectionner</option>
@@ -28,24 +28,24 @@
                           </div>
                          
           <div class="control-group">
-            <label class="control-label">Nom famille acticles</label>
+            <label class="control-label">Nom famille d'article</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
                 class="span"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>
              <div class="control-group">
-            <label class="control-label">Dure de vie</label>
+            <label class="control-label">Durée de vie</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.dureVie"
                 class="span"
-                placeholder="Saisir la dure de vie"
+                placeholder="Saisir la durée de vie"
               />
             </div>
           </div>
@@ -73,7 +73,7 @@
       <div class="modal-body">
         <form class="form-horizontal">
           <div class="control-group">
-                            <label class="control-label">Type Equipement:</label>
+                            <label class="control-label">Type d'équipement:</label>
                             <div class="controls">
                               <select v-model="editFamille.equipemt_id">
                                 <option value>Sélectionner</option>
@@ -92,18 +92,18 @@
                 type="text"
                 v-model="editFamille.libelle"
                 class="span"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>
            <div class="control-group">
-            <label class="control-label">Duree de vie</label>
+            <label class="control-label">Durée de vie</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editFamille.dureVie"
                 class="span"
-                placeholder="Saisir la dure de vie"
+                placeholder="Saisir la durée de vie"
               />
             </div>
           </div>
@@ -147,7 +147,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste Familles Articles</h5>
+              <h5>Liste des Familles d'Articles</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />

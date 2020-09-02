@@ -30,9 +30,9 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Chaîne programmatique</h5>
+            <h5>Plan programmatique</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search">
+        Recherche: <input type="text" v-model="search">
 
           </div>
              
@@ -84,7 +84,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucun Chaîne programmatique enregistré ! </h6>
+                <h6 style="color:red;">Aucun plan programmatique enregistré ! </h6>
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Chaîne programmatique</h3>
+                <h3>Ajouter plan programmatique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -126,9 +126,9 @@
                   </div>
                 </div>
                 <div class="control-group">
-              <label class="control-label">Numero d'ordre</label>
+              <label class="control-label">Numéro d'ordre</label>
               <div class="controls">
-                <input type="text" v-model="formData.numero_ordre" class="span" placeholder="Saisir le numero_ordre" />
+                <input type="text" v-model="formData.numero_ordre" class="span" placeholder="Saisir le numéro d'ordre" />
               </div>
             </div>
             <div class="control-group">
@@ -138,9 +138,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
            
@@ -165,7 +165,7 @@
  <div id="modalAjouterElementEnfant" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Chaîne programmatique</h3>
+                <h3>Ajouter plan programmatique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -178,7 +178,7 @@
             </div>
 
              <div class="control-group">
-              <label class="control-label">Libelle parent:</label>
+              <label class="control-label">Libellé parent:</label>
               <div class="controls">
                 <input type="text" readonly :value="parentDossier.libelle" class="span"  />
               </div>
@@ -203,9 +203,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
            

@@ -31,9 +31,9 @@
                                      </div> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des structures geographiques</h5>
+            <h5>Liste des structures géographiques</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search">
+        Recherche: <input type="text" v-model="search">
 
           </div>
              
@@ -55,7 +55,7 @@
               <thead>
                 <tr>
                   <th>Niveau</th>
-                  <th>libelle</th>      
+                  <th>Libellé</th>      
                    <th>Action</th>
                 </tr>
               </thead>
@@ -86,7 +86,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucune structure géographique enregistrée! </h6>
+                <h6 style="color:red;">Aucune structure géographique enregistrée </h6>
               </div>
             </div>
           </div>
@@ -124,7 +124,7 @@
             <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
            

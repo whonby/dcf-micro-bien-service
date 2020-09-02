@@ -83,11 +83,11 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                        <a data-toggle="tab" href="#tab00001">Listes des Demande service    <span class="badge badge-info">{{nombreDemande}}</span></a>
+                        <a data-toggle="tab" href="#tab00001">Liste des demandes de service    <span class="badge badge-info">{{nombreDemande}}</span></a>
                       </li>
                     
                        <li class="">
-                        <a data-toggle="tab" href="#tab00007">Validation Directeur  <span class="badge badge-important">{{nombreValidationEnAttenteDirecteur}}</span></a>
+                        <a data-toggle="tab" href="#tab00007">Validation du Directeur  <span class="badge badge-important">{{nombreValidationEnAttenteDirecteur}}</span></a>
                       </li>
                      
                     </ul>
@@ -100,18 +100,18 @@
                   <tr>
                 
                    
-                    <th>Unite d'administrative</th>
+                    <th>Unité administrative</th>
                     <th>Service</th>
                     <th>Article</th>
-                    <th>Quantite</th>
-                    <th>Cause inactivite</th>
+                    <th>Quantité</th>
+                    <th>Cause d'inactivité</th>
                     <th>Cause de la demande</th>
-                    <th >Date demande</th>
+                    <th >Date de la demande</th>
                      <!-- <th>duré vie</th> -->
                     
-                     <th>Date motif Directeur</th>
+                     <th>Date de motif du Directeur</th>
                      <!-- <th >Duré traitement Directeur</th> -->
-                      <th>Décision Directeur</th>
+                      <th>Décision du Directeur</th>
                      
                   </tr>
                 </thead>
@@ -216,18 +216,18 @@
                   <tr>
                 
                    
-                    <th>Unite d'administrative</th>
+                    <th>Unité administrative</th>
                     <th>Service</th>
                     <th>Article</th>
-                    <th>Quantite</th>
-                    <th>Cause inactivite</th>
+                    <th>Quantité</th>
+                    <th>Cause d'inactivité</th>
                     <th>Cause de la demande</th>
-                    <th >Date demande</th>
+                    <th >Date de la demande</th>
                      <!-- <th>duré vie</th> -->
                     
-                     <th>Date motif Directeur</th>
+                     <th>Date de motif du Directeur</th>
                      <!-- <th >Duré traitement Directeur</th> -->
-                      <th>Décision Directeur</th>
+                      <th>Décision du Directeur</th>
                      <th>Attribuer</th>
                   </tr>
                 </thead>

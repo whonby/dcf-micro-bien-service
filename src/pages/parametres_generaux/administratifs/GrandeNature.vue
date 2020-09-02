@@ -28,9 +28,9 @@
                                      </div> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des grandes natures</h5>
+            <h5>Liste des grandes natures de dépenses</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search">
+        Recherche: <input type="text" v-model="search">
 
           </div>
              
@@ -118,7 +118,7 @@
             <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
             

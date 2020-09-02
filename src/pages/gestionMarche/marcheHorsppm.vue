@@ -11,7 +11,7 @@ reference_marche
           <tr>
             <td>
                   <div class="control-group">
-                                <label class="control-label">Année Budgetaire</label>
+                                <label class="control-label">Année Budgétaire</label>
                                 <div class="controls ">
                             
                              <input
@@ -25,7 +25,7 @@ reference_marche
               </td>
                <td>
                  <div class="control-group">
-            <label class="control-label">Refencence marché</label>
+            <label class="control-label">Référence marché</label>
             <div class="controls">
               <input
                 type="text"
@@ -82,7 +82,7 @@ reference_marche
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Grand Nature</label>
+                  <label class="control-label">Grande Nature</label>
                   <div class="controls">
                     <!-- <select v-model="editMarche.gdenature_id" :readOnly="deverouGrandNature" class="span4">
                       <option
@@ -125,7 +125,7 @@ reference_marche
                <td>
               
                <div class="control-group">
-                  <label class="control-label">Activite</label>
+                  <label class="control-label">Activité</label>
                   <div class="controls">
                     <select v-model="editMarche.activite_id" :readOnly="deverouactivite" class="span4">
                      <option
@@ -154,7 +154,7 @@ reference_marche
             <tr>
                <td>
                  <div class="control-group">
-            <label class="control-label">Imputation Budgetaire</label>
+            <label class="control-label">Imputation Budgétaire</label>
             <div class="controls">
               <input
                 type="text"
@@ -311,7 +311,7 @@ reference_marche
             <tr>
             <td>
                   <div class="control-group">
-                     <label class="control-label">Année Budgetaire</label>
+                     <label class="control-label">Année Budgétaire</label>
                     <div class="controls ">
                             
                      <input
@@ -325,13 +325,13 @@ reference_marche
               </td>
                <td>
                  <div class="control-group">
-            <label class="control-label">Refencence marché</label>
+            <label class="control-label">Référence marché</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.reference_marche"
                 class="span4"
-                placeholder="Saisir la reference du marché"
+                placeholder="Saisir la référence du marché"
               />
             </div>
           </div>
@@ -358,7 +358,7 @@ reference_marche
                
                 v-model="formData.objet"
                 class="span4" rows="2"
-                placeholder="Saisir le text"
+                placeholder="Saisir le texte"
               ></textarea>
             </div>
           </div>
@@ -378,7 +378,7 @@ reference_marche
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Grand Nature</label>
+                  <label class="control-label">Grande Nature</label>
                   <div class="controls">
                     <!-- <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="sapn5">
                       <option
@@ -416,7 +416,7 @@ reference_marche
                <td>
               
                <div class="control-group">
-                  <label class="control-label">Activite</label>
+                  <label class="control-label">Activité</label>
                   <div class="controls">
                     <select v-model="formData.activite_id" :readOnly="deverouactivite" class="span4">
                      <option
@@ -437,7 +437,7 @@ reference_marche
              <tr>
           <td>
             <div class="control-group">
-       <label class="control-label">Imputation Budgetaire</label>
+       <label class="control-label">Imputation Budgétaire</label>
        <div class="controls">
          <input
            type="text"
@@ -491,7 +491,7 @@ reference_marche
            <td colspan="">
               
                <div class="control-group">
-            <label class="control-label">procedure passation</label>
+            <label class="control-label">Procédure Passation</label>
             <div class="controls">
             
                <select v-model="formData.procedure_passation_id" class="span4" >
@@ -580,7 +580,7 @@ reference_marche
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des marches hors ppm</h5>
+              <h5>Liste des marchés hors PPM</h5>
              
             </div>
             <div class="widget-content nopadding">
@@ -595,12 +595,12 @@ reference_marche
                     <th>Imputation</th>
                     <!-- <th>Ligne Budgetaire</th> -->
                     <th>Objet marché</th>
-                    <th>Reference marché</th>
+                    <th>Référence marché</th>
                      <th>Statut</th>
                     <th>Montant prévu</th>
                     <th>Etat en cours</th>
-                    <th title="mouvement du marché">Mvt marché</th>
-                    <th style="width:10%">Suivi-marche</th>
+                    <th title="mouvement du marché">Mouvement marché</th>
+                    <th style="width:10%">Suivi marché</th>
                    
                   </tr>
                 </thead>

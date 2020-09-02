@@ -33,7 +33,7 @@
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des rôles des membres de la Cojo</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search"  placeholder="Searche...">
+        Recherche: <input type="text" v-model="search"  placeholder=" ">
 
           </div>
              
@@ -56,7 +56,7 @@
               <thead>
                 <tr>
                   <th>Code</th>
-                  <th>Libelle</th>
+                  <th>Libellé</th>
                    <th>Action</th>
                 </tr>     
               </thead>
@@ -107,7 +107,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter role membrecojo</h3>
+                <h3>Ajouter le rôle du membre de la Cojo</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -118,9 +118,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
               

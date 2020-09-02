@@ -42,14 +42,14 @@
           data-target="#menuBUDGET"
           class="dropdown-toggle"
         >
-          <span class="text">UNITES ADMINISTRATIVES</span>
+          <span class="text">UNITE ADMINISTRATIVE</span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
           <li>
             <router-link :to="{name: 'uniteadministrative'}" tag="a">
               <i class="icon-user"></i>
-            Unite administrative
+            Unité administrative
             </router-link>
           </li>
 
@@ -61,7 +61,7 @@
           </li> -->
             <li>
             <router-link :to="{name: 'uniteZone'}" tag="a">
-              <i class="icon-key"></i>Unite zone
+              <i class="icon-key"></i>Unité de zone
             </router-link>
           </li>
            <li class="divider"></li>
@@ -119,7 +119,7 @@
 
            <li>
             <router-link :to="{name: 'BudgetParUa'}" tag="a">
-              DETAIL DE BUDGET PAR UA
+              DETAIL DU BUDGET PAR UA
             </router-link>
           </li>
           <li class="divider"></li>

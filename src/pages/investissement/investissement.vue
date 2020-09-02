@@ -387,10 +387,10 @@ type_financement
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#tab2078"> Marchés <span class="badge badge" > {{nombreDeMarcheI}}</span></a></li>
                                
-                               <li ><a data-toggle="tab" href="#tab100" title="marché planifié en investissement">Planifications  <span class="badge badge-important" >    {{nombreMarcheEnplanification}}</span></a></li>
+                               <li ><a data-toggle="tab" href="#tab100" title="marché planifié en investissement">Planification <span class="badge badge-important" >    {{nombreMarcheEnplanification}}</span></a></li>
                                 <li ><a data-toggle="tab" href="#tab10" title="marché en contratualisation d'investissement">Contratualisation  <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
-                                <li><a data-toggle="tab" href="#tab20" title="marché en execution d'investiisement">Execution <span class="badge badge-warning" >{{afficheNombreMarchExecuter}}</span></a></li>
-                                 <li><a data-toggle="tab" href="#tab20002" title="marché resilié d'investissement">Resilié <span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
+                                <li><a data-toggle="tab" href="#tab20" title="marché en exécution d'investiisement">Exécution <span class="badge badge-warning" >{{afficheNombreMarchExecuter}}</span></a></li>
+                                 <li><a data-toggle="tab" href="#tab20002" title="marché résilié d'investissement">Résilié <span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
                                   <li><a data-toggle="tab" href="#tab2000256"  title="marché terminé d'investissement">Terminé<span class="badge badge-inverse" >     {{nombreAfficheMarcheSolde}}</span></a></li>
 
                             </ul>
@@ -402,7 +402,7 @@ type_financement
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des Marches Terminés</h5>
+              <h5>Liste des Marchés Terminés</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -414,11 +414,11 @@ type_financement
                
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type de marché</th>
                    
                     <!-- <th>Activit&eacute;</th> -->
                     <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
+                       <th>Objet du marché</th>
                         <!-- <th>Reference march&eacute;</th>  -->
                                     <th>Montant réel</th>
                                 <th>Etat du marché</th>
@@ -485,7 +485,7 @@ type_financement
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marchés En cours de Contratualisation</h5>
+              <h5>Liste des Marchés en cours de Contratualisation</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -496,13 +496,13 @@ type_financement
                   <tr>
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type de marché</th>
                    
                     <th>Activit&eacute;</th>
                     <th>Imputation</th>
-                       <th>Objet march&eacute;</th> 
+                       <th>Objet du marché</th> 
                         <!-- <th>Reference march&eacute;</th>  -->    
-                                    <th>Montant prévue</th>
+                                    <th>Montant prévu</th>
                                 <th>Etat du marché</th>
                                 <th colspan="2">Action</th>
                 </tr>
@@ -610,13 +610,13 @@ type_financement
                 <tr>
                     <th>Année</th>
                       <th>UA</th>
-                    <th>Type marché</th>
+                    <th>Type de marché</th>
                     <th>Mode de passation</th>
                     <th>Activité</th>
                     <th>Imputation</th>
                     <!-- <th>Ligne Budgetaire</th> -->
-                    <th>Objet marché</th>
-                    <th>Reference marché</th>
+                    <th>Objet du marché</th>
+                    <th>Référence du marché</th>
                      <!-- <th>Numero marché</th> -->
                     <th>Montant prévu</th>
                     <th>Etat du marché</th>
@@ -744,7 +744,7 @@ type_financement
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des marchés en executions</h5>
+              <h5>Liste des marchés en exécutions</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -756,14 +756,14 @@ type_financement
                   <tr>
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type de marché</th>
                    
                     <!-- <th>Activit&eacute;</th> -->
                     <th>Imputation</th>
                        <th>Objet march&eacute;</th>
                         <!-- <th>Reference march&eacute;</th>  -->
                                     <th>Montant réel</th>  
-                                <th>Status</th>
+                                <th>Statut</th>
                                 <th colspan="2">Action</th>
                 </tr>
                 </thead>
@@ -845,7 +845,7 @@ type_financement
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marches en Planifications</h5>
+              <h5>Liste des Marchés en Planifications</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -856,13 +856,13 @@ type_financement
                  <tr>
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type de marché</th>
                    
                     <th>Activit&eacute;</th>
                     <th>Imputation</th>
                        <th>Objet march&eacute;</th>
-                        <th>Reference march&eacute;</th> 
-                                    <th>Montant prevue</th>
+                        <th>Référence march&eacute;</th> 
+                                    <th>Montant prévu</th>
                                 <th>Etat du marché</th>
                                 <th>Action</th>
                 </tr>    
@@ -980,14 +980,14 @@ type_financement
                 <thead>
                   <tr>
                 <th>Ann&eacute;e</th>
-                <th>Unite administrative</th>
-                 <th title="unite administrative">Numero march&eacute;</th>
-                      <th>Objet march&eacute;</th>
+                <th>UA</th>
+                 <th title="unite administrative">Numéro du marché</th>
+                      <th>Objet du marché</th>
                    
                     <th>Entreprise</th>
-                    <th>Cause R&eacute;siliation</th>
-                       <th>Date r&eacute;siliation</th>
-                         <th>Montant march&eacute;</th>
+                    <th>Cause de résiliation</th>
+                       <th>Date de résiliation</th>
+                         <th>Montant du marché</th>
                                 
                 </tr> 
                 </thead>

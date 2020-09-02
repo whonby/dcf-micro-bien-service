@@ -13,7 +13,7 @@
             <tr>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Type Unite d'administrative</label>
+                  <label class="control-label">Type Unité d'administrative</label>
                   <div class="controls">
                     <select v-model="formData.type_ua_id" class="span5">
                       <option
@@ -80,7 +80,7 @@
               </td>
               <td>
                  <div class="control-group">
-                  <label class="control-label">Localisation Geographique</label>
+                  <label class="control-label">Localisation géographique</label>
                   <div class="controls">
                     <select v-model="formData.localisationgeo_id" class="span5">
                       <option
@@ -94,7 +94,7 @@
               </td>
                <td>
                   <div class="control-group">
-                  <label class="control-label">Date création:</label>
+                  <label class="control-label">Date de création:</label>
                   <div class="controls">
                     <input type="date" v-model="formData.date_creation" class="span5" />
                   </div>
@@ -263,7 +263,7 @@
             <tr>
                <td>
                 <div class="control-group">
-                  <label class="control-label">Code Unite administrative:</label>
+                  <label class="control-label">Code d'unité administrative:</label>
                   <div class="controls">
                     <input
                       type="text"
@@ -277,13 +277,13 @@
               </td>
               <td>
                <div class="control-group">
-                  <label class="control-label">Nom unite administrative:</label>
+                  <label class="control-label">Nom de l'unité administrative:</label>
                   <div class="controls">
                     <input
                       type="text"
                       v-model="editUniteAdministrative.libelle"
                       class="span5"
-                      placeholder="Saisir le Nom unite administrative"
+                      placeholder="Saisir le Nom de l'unité administrative"
                      
                     />
                   </div>
@@ -351,7 +351,7 @@
                 <div class="span6">
                     <div align="right">
                         Recherche:
-                        <input type="search" placeholder="Saisie section ou libelle" v-model="search" />
+                        <input type="search" placeholder="" v-model="search" />
 
                         <!-- <div class="span3">
                           <model-list-select
@@ -387,11 +387,11 @@
               <table class="table table-bordered table-striped" id="Nature_section">
                 <thead>
                   <tr>
-                    <th title="type unite administrative">Type ua</th>
-                    <th>nature Section</th>
+                    <th title="type unite administrative">Type Ua</th>
+                    <th>Nature Section</th>
                     <th>Section</th>
-                    <th title="service gestionnaire">Service gest</th>
-                     <th title="localisation geographique">Localisation geo</th>
+                    <th title="service gestionnaire">Service Gestionnaire</th>
+                     <th title="localisation geographique">Localisation géographique</th>
                     <th>Code</th>
                     <th title="unite administrative">UA</th>
                     <th>Date création</th>

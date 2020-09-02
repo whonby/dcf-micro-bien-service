@@ -18,7 +18,7 @@
             <tr>
                    <td>
                 <div class="control-group">
-                  <label class="control-label">Unite d'administrative</label>
+                  <label class="control-label">Unité administrative</label>
                   <div class="controls">
                     <select v-model="formData.id_unite_administrative">
                       <option
@@ -32,7 +32,7 @@
               </td>
               <td>
                  <div class="control-group">
-                  <label class="control-label">Localisation Geographique</label>
+                  <label class="control-label">Localisation Géographique</label>
                   <div class="controls">
                     <select v-model="formData.id_zone_geographique">
                       <option
@@ -62,7 +62,7 @@
                <td>
               
                <div class="control-group">
-                  <label class="control-label">longitude</label>
+                  <label class="control-label">Longitude</label>
                   <div class="controls">
                        <input
                       type="number"
@@ -78,7 +78,7 @@
                 <td>
               
                <div class="control-group">
-                  <label class="control-label">latitude</label>
+                  <label class="control-label">Latitude</label>
                   <div class="controls">
                        <input
                       type="number"
@@ -96,7 +96,7 @@
                <td>
               
                <div class="control-group">
-                  <label class="control-label">	Telephone cel</label>
+                  <label class="control-label">	Téléphone cel</label>
                   <div class="controls">
                        <input
                       type="number"
@@ -128,7 +128,7 @@
               <td>
               
                <div class="control-group">
-                  <label class="control-label">Telephone fixe</label>
+                  <label class="control-label">Téléphone fixe</label>
                   <div class="controls">
                        <input
                       type="number"
@@ -202,7 +202,7 @@
             <tr>
                    <td>
                 <div class="control-group">
-                  <label class="control-label">Unite d'administrative</label>
+                  <label class="control-label">Unité administrative</label>
                   <div class="controls">
                     <select v-model="editUniteZone.id_unite_administrative">
                       <option
@@ -216,7 +216,7 @@
               </td>
               <td>
                  <div class="control-group">
-                  <label class="control-label">Localisation Geographique</label>
+                  <label class="control-label">Localisation Géographique</label>
                   <div class="controls">
                     <select v-model="editUniteZone.id_zone_geographique">
                       <option
@@ -255,6 +255,7 @@
                      
                       
                     />
+                    
                    
                   </div>
                 </div>
@@ -412,7 +413,7 @@
           <div class="widget-box" id="natures_sections">
             <div class="widget-title">
               <span class="icon">
-                <i class="icon-th"></i>
+                <i class="icon-th"></i>     
               </span>
               <h5>Liste des unités de zones</h5>
               <!-- <div align="right">

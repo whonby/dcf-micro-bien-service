@@ -30,9 +30,9 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des Regimes Impositions</h5>
+              <h5>Liste des Regimes d'impositions</h5>
               <div align="right">
-                Rechercher:
+                Recherche:
                 <input type="text" v-model="search" />
               </div>
             </div>
@@ -52,7 +52,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Libelle</th>
+                    <th>Libellé</th>
                      <th style="width:10%">Action</th>
                   </tr>
                 </thead>
@@ -110,13 +110,13 @@
             <tr>
               <td>
                   <div class="control-group">
-            <label class="control-label">Libelle:</label>
+            <label class="control-label">Libellé:</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
                 class="span5"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>

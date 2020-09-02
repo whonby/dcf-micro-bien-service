@@ -75,7 +75,49 @@ import modifierEngagement from "../../pages/bien_service/contractualisation/Doss
 import modifierMandat from "../../pages/bien_service/contractualisation/DossierExecution/dossierMandat/modifierMandat.vue";
 import HistoriqueDetailExecution from '../../pages/gestionMarche/historisqueExecutionMarche.vue';
 import historiqueContualisation from '../../pages/gestionMarche/historiqueContualisation.vue';
+import listeTotalMarcheBienService from '../../pages/bien_service/listeDesMarcheTableauBord/listeTotalMarcheBienService.vue';
+import listeDesMarcheEnPlanificationBS from '../../pages/bien_service/listeDesMarcheTableauBord/listeDesMarcheEnPlanificationBS.vue';
+import listeDesMarcheEnContratualisationBS from '../../pages/bien_service/listeDesMarcheTableauBord/listeDesMarcheEnContratualisationBS.vue';
+import listeDesMarcheEnExecutionBS from '../../pages/bien_service/listeDesMarcheTableauBord/listeDesMarcheEnExecutionBS.vue';
+import listeDesMarcheResilieBS from '../../pages/bien_service/listeDesMarcheTableauBord/listeDesMarcheResilieBS.vue';
+import listeDesMarcheSuspenduBS from '../../pages/bien_service/listeDesMarcheTableauBord/listeDesMarcheSuspenduBS.vue';
+import listeDesMarcheTermineBS from '../../pages/bien_service/listeDesMarcheTableauBord/listeDesMarcheTermineBS.vue';
 const BienServiceRoutes = [
+    {
+        path: "/liste-Des-Marche-Termine-Bien-Service",
+        name: "listeDesMarcheTermineBS",
+        component: listeDesMarcheTermineBS
+    },
+    {
+        path: "/liste-Des-Marche-Suspendu-Bien-Service",
+        name: "listeDesMarcheSuspenduBS",
+        component: listeDesMarcheSuspenduBS
+    },
+    {
+        path: "/liste-Des-Marche-Resilie-Bien-Service",
+        name: "listeDesMarcheResilieBS",
+        component: listeDesMarcheResilieBS
+    },
+    {
+        path: "/liste-Des-Marche-En-Execution-Bien-Service",
+        name: "listeDesMarcheEnExecutionBS",
+        component: listeDesMarcheEnExecutionBS
+    },
+    {
+        path: "/liste-Des-Marche-En-ContratualisationBien-Service",
+        name: "listeDesMarcheEnContratualisationBS",
+        component: listeDesMarcheEnContratualisationBS
+    },
+    {
+        path: "/liste-Marche-planification-Bien-Service",
+        name: "listeDesMarcheEnPlanificationBS",
+        component: listeDesMarcheEnPlanificationBS
+    },
+    {
+        path: "/liste-Total-Marche-Bien-Service",
+        name: "listeTotalMarcheBienService",
+        component: listeTotalMarcheBienService
+    },
    /* {
 
         path: "/creation-execution-marche-investissement",

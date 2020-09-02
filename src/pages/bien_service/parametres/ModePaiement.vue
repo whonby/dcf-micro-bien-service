@@ -5,18 +5,18 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">x</button>
-        <h3>Ajouter Mode paiement</h3>
+        <h3>Ajouter un mode paiement</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">Libellé</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
                 class="span"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>
@@ -46,13 +46,13 @@
       <div class="modal-body">
          <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">Libellé</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editTypeAppel.libelle"
                 class="span"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>
@@ -98,9 +98,9 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Modes paiements </h5>
+              <h5>Liste des modes de paiements </h5>
               <div align="right">
-                Search:
+                Recherche:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
@@ -120,7 +120,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th width="90%">libelle</th>
+                    <th width="90%">Libellé</th>
                    
                     <th>Action</th>
                   </tr>

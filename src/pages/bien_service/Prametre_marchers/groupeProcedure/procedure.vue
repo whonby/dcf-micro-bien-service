@@ -8,7 +8,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Procedure</h3>
+                <h3>Ajouter Procédure</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -133,7 +133,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5 width="90%">Procedure passation 4</h5>
+              <h5 width="90%">Procédure de passation </h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />

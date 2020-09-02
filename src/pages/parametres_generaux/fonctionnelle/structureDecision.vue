@@ -33,7 +33,7 @@
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des structures décisionnelles</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search"  placeholder="Searche...">
+        Recherche: <input type="text" v-model="search"  placeholder=" ">
 
           </div> 
           </div>
@@ -54,7 +54,7 @@
               <thead>
                 <tr>
                   <th>Niveau</th>
-                  <th>Libelle</th>
+                  <th>Libellé</th>
                    <th>Action</th>
                 </tr>     
               </thead>
@@ -122,9 +122,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
               

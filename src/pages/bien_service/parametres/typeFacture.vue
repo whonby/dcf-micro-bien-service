@@ -10,13 +10,13 @@
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">type facture</label>
+            <label class="control-label">Type de facture</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir le type de facture"
               />
             </div>
           </div>
@@ -53,7 +53,7 @@
                 type="text"
                 v-model="editTypefacture.libelle"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir le type de facture"
               />
             </div>
           </div>
@@ -98,9 +98,9 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des type de factures</h5>
+              <h5>Liste des types de factures</h5>
               <div align="right">
-                Search:
+                Recherche:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
@@ -125,7 +125,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th width="90%">libelle</th>
+                    <th width="90%">Libellé</th>
                     <th>Action</th>
                   </tr>
                 </thead>

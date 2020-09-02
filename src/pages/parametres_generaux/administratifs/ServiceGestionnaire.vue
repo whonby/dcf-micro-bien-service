@@ -29,7 +29,7 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste service gestionnaire</h5>
+            <h5>Liste des services gestionnaires</h5>
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -82,7 +82,7 @@
             </div>
             <div v-else>
               <div align="center">
-              <h6 style="color:red;">Aucun service gestionnaire enregistré ! </h6>
+              <h6 style="color:red;">Aucun service gestionnaire enregistré </h6>
               </div>
           </div>
            </div>
@@ -99,13 +99,13 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter service gestionnaires</h3>
+                <h3>Ajouter service gestionnaire</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
 
                    <div class="control-group">
-              <label class="control-label">structure administrative:</label>
+              <label class="control-label">Structure administrative:</label>
               <div class="controls">
                 <select  v-model="formData.structure_administrative_id">
             <option v-for="administrative in structures_administratives" :key="administrative.id" 
@@ -127,9 +127,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
             

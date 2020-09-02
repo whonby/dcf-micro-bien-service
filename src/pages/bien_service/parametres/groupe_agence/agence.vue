@@ -30,7 +30,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Code agence</label>
+                  <label class="control-label">Code de l'agence</label>
                   <div class="controls">
                      <input type="text" v-model="formData.code_agence" class="span" />
                   </div>
@@ -39,7 +39,7 @@
                <td>
               
                <div class="control-group">
-                  <label class="control-label">Nom agence</label>
+                  <label class="control-label">Nom de l'agence</label>
                   <div class="controls">
                       <input type="text" v-model="formData.nom_agence" class="span" />
                   </div>
@@ -49,7 +49,7 @@
                <td>
               
                <div class="control-group">
-                  <label class="control-label">Telephone agence</label>
+                  <label class="control-label">Téléphone de l'agence</label>
                   <div class="controls">
                     <input type="number" v-model="formData.tel_agence" class="span" />
                   </div>
@@ -104,7 +104,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Situation geographique</label>
+                  <label class="control-label">Situation géographique</label>
                     
                
                   <div class="controls">
@@ -161,7 +161,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Code agence</label>
+                  <label class="control-label">Code de l'agence</label>
                   <div class="controls">
                      <input type="text" v-model="editAgence.code_agence" class="span" />
                   </div>
@@ -170,7 +170,7 @@
                <td>
               
                <div class="control-group">
-                  <label class="control-label">Nom agence</label>
+                  <label class="control-label">Nom de l'agence</label>
                   <div class="controls">
                       <input type="text" v-model="editAgence.nom_agence" class="span" />
                   </div>
@@ -180,7 +180,7 @@
                <td>
               
                <div class="control-group">
-                  <label class="control-label">Telephone agence</label>
+                  <label class="control-label">Téléphone de l'agence</label>
                   <div class="controls">
                     <input type="number" v-model="editAgence.tel_agence" class="span" />
                   </div>
@@ -233,7 +233,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Situation geographique</label>
+                  <label class="control-label">Situation géographique</label>
                     
                
                   <div class="controls">

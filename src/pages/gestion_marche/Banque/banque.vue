@@ -31,7 +31,7 @@
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des banques</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search">
+        Recherche: <input type="text" v-model="search">
 
           </div>
              
@@ -54,9 +54,9 @@
                 <tr>
                   <th>Code banque</th>
                      <!-- <th>Numero banque</th> -->
-                    <th>Libelle</th>
-                  <th>Telephone</th>
-                  <th>Situation geographique</th>
+                    <th>Libellé</th>
+                  <th>Téléphone</th>
+                  <th>Situation géographique</th>
                    <th>Action</th>
                 </tr>
               </thead>
@@ -128,7 +128,7 @@
                   <div class="control-group">
               <label class="control-label">Code banque:</label>
               <div class="controls">
-                <input type="text" v-model="formData.code_banque	" class="span" placeholder="Saisir le numero " />
+                <input type="text" v-model="formData.code_banque	" class="span" placeholder="Saisir le numéro " />
               </div>
             </div>
 
@@ -140,9 +140,9 @@
             </div> -->
 
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                  <input type="text" v-model="formData.libelle" class="span" placeholder="saisir la banque">
+                  <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir la banque">
                      
                 
                 
@@ -150,13 +150,13 @@
             </div>
 
             <div class="control-group">
-              <label class="control-label">Telephone:</label>
+              <label class="control-label">Téléphone:</label>
               <div class="controls">
                 <input type="number" v-model="formData.telephone" class="span" placeholder="" />
               </div>
             </div>
              <div class="control-group">
-              <label class="control-label">Situation geographique:</label>
+              <label class="control-label">Situation géographique:</label>
               <div class="controls">
                 <input type="text" v-model="formData.situation_geographique" class="span" placeholder="" />
               </div>
@@ -188,7 +188,7 @@
                    <div class="control-group">
               <label class="control-label">Code banque:</label>
               <div class="controls">
-                <input type="text" v-model="editBanque.code_banque	" class="span" placeholder="Saisir le numero " />
+                <input type="text" v-model="editBanque.code_banque	" class="span" placeholder="Saisir le numéro " />
               </div>
             </div>
 
@@ -202,7 +202,7 @@
 
             
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="editBanque.libelle" class="span" />
                       
@@ -211,13 +211,13 @@
               </div>
 
               <div class="control-group">
-              <label class="control-label">Telephone:</label>
+              <label class="control-label">Téléphone:</label>
               <div class="controls">
                 <input type="number" v-model="editBanque.telephone" class="span" placeholder="" />
               </div>
             </div>
              <div class="control-group">
-              <label class="control-label">Situation geographique:</label>
+              <label class="control-label">Situation géographique:</label>
               <div class="controls">
                 <input type="text" v-model="editBanque.situation_geographique" class="span" placeholder="" />
               </div>

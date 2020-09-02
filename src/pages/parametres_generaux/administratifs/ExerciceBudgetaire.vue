@@ -31,11 +31,11 @@
         <div class="widget-box">
           
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste exercice budgétaire</h5>
-             <!-- <div align="right">
-        Rechercher: <input type="text" v-model="search">
+            <h5>Liste des exercices des budgétaires</h5>
+              <div align="right">
+        Recherche: <input type="text" v-model="search">
 
-          </div> -->
+          </div> 
              
           </div>
            <div class="span4">
