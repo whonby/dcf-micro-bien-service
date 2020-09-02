@@ -73,7 +73,7 @@
 
 
                     <template v-else>
-                         <td >
+                         <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
                     {{tau.libelle || 'Non renseigné'}}%</td>
                 
                   
@@ -93,7 +93,7 @@
                     
                     
               
-              <button v-if="!tau.encours" @click.prevent="supprimerExerciceBudgetaire(tau.id)"  class="btn btn-danger ">
+              <button v-if="tau.encours!=1" @click.prevent="supprimerExerciceBudgetaire(tau.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
 
@@ -126,16 +126,17 @@
                 <h3>Ajouter Taux</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
+               <table class="table table-bordered table-striped">
             <div class="control-group">
+               
               <label class="control-label">Taux</label>
               <div class="controls">
-                <input type="number" v-model="formData.libelle" class="span" placeholder="" />
+                <input type="number" v-model="formData.libelle" class="span4" placeholder="" />
                 <input type="hidden" :value="afficheTaux" class="span" placeholder="" />
               </div>
             </div>
           
-          </form>              
+          </table>              
           </div>
            <div class="modal-footer"> 
              <button 

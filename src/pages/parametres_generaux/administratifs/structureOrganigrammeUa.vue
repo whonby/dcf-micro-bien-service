@@ -56,7 +56,7 @@
                 <tr>
                   <th>Niveau</th>
                   <th>Libellé</th>
-                   <th style="width:10%">Action</th>
+                   <th style="width:5%">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -118,7 +118,7 @@
 <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="formData.niveau" class="span5" placeholder="Saisir le niveau" />
+                <input type="number" :value="tailleTableauStructureTache" class="span5" placeholder="Saisir le niveau" readonly/>
               </div>
             </div>
                             </td>
@@ -137,7 +137,7 @@
                              
           </div>
            <div class="modal-footer"> 
-             <button v-show="formData.niveau.length && formData.libelle.length"
+             <button v-show="formData.libelle.length"
               @click.prevent="ajouetpaysLocal" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" >Fermer</a> </div>
@@ -161,7 +161,7 @@
                 <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="editOrganigrammeUa.niveau" class="span5" placeholder="" />
+                <input type="number" v-model="editOrganigrammeUa.niveau" class="span5" placeholder="" readonly/>
               </div>
             </div>
              </td>
@@ -271,7 +271,10 @@ return this.getterstructuresOrganisationUa.filter((item) => {
 
    }
 )
-   }
+   },
+    tailleTableauStructureTache(){
+		return this.getterstructuresOrganisationUa.length + 1
+	}
 
   },
   methods: {
@@ -324,7 +327,11 @@ getColumns() {
     },
    // fonction pour vider l'input
     ajouetpaysLocal () {
-      this.ajouterStructureOrganigrammeUa(this.formData)
+       var nouvelObjet = {
+			...this.formData,
+			niveau:this.tailleTableauStructureTache
+		}
+      this.ajouterStructureOrganigrammeUa(nouvelObjet)
 
         this.formData = {
                 niveau: "",

@@ -55,7 +55,7 @@
                 <tr>
                   <th>Niveau</th>
                   <th>Libellé</th>
-                   <th>Action</th>
+                   <th style="width:5%">Action</th>
                 </tr>     
               </thead>
               <tbody>
@@ -114,13 +114,17 @@
                 <h3>Ajouter structure décisionnelle</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
+                <table class="table table-bordered table-striped">
+           <tr>
+             <td>
+                <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="formData.niveau" class="span" placeholder="Saisir le niveau" />
+                <input type="number"  :value="tailleTableauStructureTache" class="span5" readonly placeholder="Saisir le niveau" />
               </div>
             </div>
+             </td>
+           </tr>
             <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
@@ -128,10 +132,10 @@
               </div>
             </div>
               
-          </form>              
+          </table>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="formData.niveau.length && formData.libelle.length" 
+             <button v-show="formData.libelle.length" 
              @click.prevent="ajouterTypeLocal" class="btn btn-primary"
               href="#">Valider</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
@@ -259,7 +263,10 @@ return this.structuresDecision.filter((item) => {
 
    }
 )
-   }
+   },
+     tailleTableauStructureTache(){
+		return this.structuresDecision.length + 1
+	}
 
   },
   methods: {
@@ -310,7 +317,11 @@ getColumns() {
     },
    // fonction pour vider l'input
     ajouterTypeLocal () {
-      this.ajouterStructureDecision(this.formData)
+       var nouvelObjet = {
+			...this.formData,
+			niveau:this.tailleTableauStructureTache
+		}
+      this.ajouterStructureDecision(nouvelObjet)
 
         this.formData = {
                 niveau: "",

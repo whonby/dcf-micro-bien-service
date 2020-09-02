@@ -70,7 +70,7 @@
                   <div class="controls">
                     <select v-model="formData.servicegest_id" class="span5">
                       <option
-                        v-for="servicegest in afficheServiceGestionnaireNiveau4"
+                        v-for="servicegest in recupererDernierNiveauServiceGestionnaire(calculerTaillerStructureAdministrative)"
                         :key="servicegest.id"
                         :value="servicegest.id"
                       >{{servicegest.code}}-{{servicegest.libelle}}</option>
@@ -542,6 +542,7 @@ created() {
       "sections",
       "type_Unite_admins",
       "services_gestionnaires",
+      "structures_administratives",
       "localisations_geographiques",
       "afficheServiceGestionnaireNiveau4",
       "afficheLocalisationGeoNiveau5",
@@ -556,7 +557,35 @@ created() {
         cf:cf,
         noDCfNoAdmin:noDCfNoAdmin,
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-    libelleLocalGeographie() {
+   
+   recupererDernierNiveauServiceGestionnaire() {
+      return id => {
+        if (id != null && id != "") {
+           return this.services_gestionnaires.filter(qtreel => this.RecupererNiveauStructureAdministrative(qtreel.structure_administrative_id) == id);
+      
+        }
+      };
+    },
+   
+   RecupererNiveauStructureAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_administratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau;
+      }
+      return 0
+        }
+      };
+    },
+   
+   calculerTaillerStructureAdministrative(){
+     return this.structures_administratives.length
+   },
+   
+   
+   libelleLocalGeographie() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.localisations_geographiques.find(qtreel => qtreel.id == id);

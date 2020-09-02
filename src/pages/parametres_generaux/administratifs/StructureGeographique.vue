@@ -114,26 +114,35 @@
                 <h3>Ajouter structure géographique</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
+                <table class="table table-bordered table-striped">
+                  <tr>
+                    <td>
+ <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="formData.niveau" class="span" placeholder="Saisir le niveau" />
+                <input type="number" :value="tailleTableauStructureTache" class="span5" placeholder="Saisir le niveau" readonly/>
               </div>
             </div>
-            <div class="control-group">
+                    </td>
+                  </tr>
+           
+            <tr>
+              <td>
+                <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libelle" />
               </div>
             </div>
+              </td>
+            </tr>
            
             
 
-          </form>              
+                </table>              
           </div>
            <div class="modal-footer"> 
-             <button  v-show="formData.niveau.length && formData.libelle.length" 
+             <button  v-show="formData.libelle.length" 
               @click.prevent="ajouterTitreLocal" class="btn btn-primary"
               >Valider</button>
               <button data-dismiss="modal" class="btn">Fermer</button> </div>
@@ -151,21 +160,29 @@
                 <h3>Modifier structure géographique</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
-              <label class="control-label">Niveau:</label>
+             <table class="table table-bordered table-striped">
+            <tr>
+              <td>
+                <div class="control-group">
+              <label class="control-label">Niveau</label>
               <div class="controls">
-                <input type="number" v-model="editStructure.niveau" class="span" placeholder="" />
+                <input type="number" v-model="editStructure.niveau" class="span5" placeholder="" readonly/>
               </div>
             </div>
-            <div class="control-group">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="editStructure.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editStructure.libelle" class="span5" placeholder="" />
               </div>
             </div>
+              </td>
+            </tr>
           
-          </form>              
+             </table>              
           </div>
            <div class="modal-footer"> 
              <button  
@@ -262,8 +279,10 @@ return this.structures_geographiques.filter((item) => {
 
    }
 )
-   }
-
+   },
+ tailleTableauStructureTache(){
+		return this.structures_geographiques.length + 1
+	}
   },
   methods: {
     // methode pour notre action
@@ -317,7 +336,11 @@ getColumns() {
     },
    // fonction pour vider l'input
     ajouterTitreLocal () {
-      this.ajouterStructureGeographique(this.formData)
+        var nouvelObjet = {
+			...this.formData,
+			niveau:this.tailleTableauStructureTache
+		}
+      this.ajouterStructureGeographique(nouvelObjet)
 
         this.formData = {
                 niveau: "",

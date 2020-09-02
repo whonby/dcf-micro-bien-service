@@ -56,7 +56,7 @@
                 <tr>
                   <th>Niveau</th>
                   <th>Libellé</th>
-                   <th>Action</th>
+                   <th style="width:5%">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -112,25 +112,33 @@
                 <h3>Ajouter structure programme</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
+                <table class="table table-bordered table-striped">
+            <tr>
+              <td>
+                <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="formData.niveau" class="span" placeholder="Saisir le niveau" />
+                <input type="number" :value="tailleTableauStructureTache" class="span5" placeholder="Saisir le niveau" readonly/>
               </div>
             </div>
-            <div class="control-group">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libelle" />
               </div>
             </div>
+              </td>
+            </tr>
             
 
-          </form>              
+          </table>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="formData.niveau.length && formData.libelle.length"
+             <button v-show="formData.libelle.length"
               @click.prevent="ajouetProgrammeLocal" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" >Fermer</a> </div>
@@ -148,22 +156,30 @@
                 <h3>Modifier structure programme</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
+  <table class="table table-bordered table-striped">
+           <tr>
+             <td>
+                <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="editProgramme.niveau" class="span" placeholder="" />
+                <input type="number" v-model="editProgramme.niveau" class="span5" placeholder="" readonly/>
               </div>
             </div>
-            <div class="control-group">
+             </td>
+           </tr>
+           
+            <tr>
+              <td>
+                 <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="editProgramme.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editProgramme.libelle" class="span5" placeholder="" />
               </div>
             </div>
-            
+              </td>
+            </tr>
 
-          </form>              
+          </table>              
           </div>
            <div class="modal-footer"> 
              <button
@@ -256,7 +272,10 @@ return this.structures_programmes.filter((item) => {
 
    }
 )
-   }
+   },
+    tailleTableauStructureTache(){
+		return this.structures_programmes.length + 1
+	}
 
   },
   methods: {
@@ -309,7 +328,11 @@ getColumns() {
     },
    // fonction pour vider l'input
     ajouetProgrammeLocal () {
-      this.ajouterStructureProgramme(this.formData)
+       var nouvelObjet = {
+			...this.formData,
+			niveau:this.tailleTableauStructureTache
+		}
+      this.ajouterStructureProgramme(nouvelObjet)
 
         this.formData = {
                 niveau: "",
