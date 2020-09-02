@@ -105,6 +105,7 @@
 <!----- ajouter modal   ---->
 
 
+
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
@@ -115,7 +116,7 @@
             <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="formData.niveau" class="span" placeholder="Saisir le niveau" />
+                <input type="number" :value="tailleTableauStructureTache"  class="span" placeholder="Saisir le niveau" readonly/>
               </div>
             </div>
             <div class="control-group">
@@ -129,7 +130,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="formData.niveau.length && formData.libelle.length" 
+             <button v-show="formData.libelle.length" 
               @click.prevent="ajouterAdministrativeLocal" class="btn btn-primary"
               >Valider</button>
               <button data-dismiss="modal" class="btn">Fermer</button> </div>
@@ -151,7 +152,7 @@
             <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="editStructureAdministrative.niveau" class="span" placeholder="" />
+                <input type="number" v-model="editStructureAdministrative.niveau" class="span" placeholder="" readonly/>
               </div>
             </div>
             <div class="control-group">
@@ -316,7 +317,11 @@ getColumns() {
     },
    // fonction pour vider l'input
     ajouterAdministrativeLocal () {
-      this.ajouterStructureAdministrative(this.formData)
+       var nouvelObjet = {
+			...this.formData,
+			niveau:this.tailleTableauStructureTache
+		}
+      this.ajouterStructureAdministrative(nouvelObjet)
 
         this.formData = {
                 niveau: "",

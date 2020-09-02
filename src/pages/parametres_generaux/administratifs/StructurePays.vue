@@ -115,6 +115,7 @@
                         <table class="table table-bordered table-striped">
                           <tr>
                             <td>
+                              
 <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
