@@ -81,7 +81,7 @@
       <div class="widget-title">
                             <ul class="nav nav-tabs">
                                  <li class="active"><a data-toggle="tab" href="#tab0145"> UA Emettrice</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab2"> UA receptrice</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab2"> UA Réceptrice</a></li>
                                
                                 
                                 
@@ -95,7 +95,7 @@
            <tr>
              <td>
                <div class="control-group">
-                  <label class="control-label">Numero transfert</label>
+                  <label class="control-label">Numéro de transfert</label>
                   <div class="controls">
                        <input
                       type="text"
@@ -116,7 +116,7 @@
              </td>
              <td>
                 <div class="control-group">
-                  <label class="control-label">Unite d'administrative</label>
+                  <label class="control-label">Unité administrative</label>
                   <div class="controls">
                      <select v-model="formData.ua_id" class="span">
                                                             <option></option>
@@ -131,7 +131,7 @@
              </td>
              <td >
                 <div class="control-group">
-                  <label class="control-label">Ligne budgetaire</label>
+                  <label class="control-label">Ligne budgétaire</label>
                   <div class="controls">
                         <select v-model="formData.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire"
                          class="span3">
@@ -166,7 +166,7 @@
               <td>
               
                <div class="control-group">
-                  <label class="control-label">Cumul dotation transferé</label>
+                  <label class="control-label">Cumul dotation transféré</label>
                   <div class="controls">
                        <input
                       type="number"
@@ -233,7 +233,7 @@
               <td colspan="2">
               
                <div class="control-group">
-                  <label class="control-label">grande nature</label>
+                  <label class="control-label">Grande nature de dépense </label>
                   <div class="controls">
                        <input
                       type="text"
@@ -268,7 +268,7 @@
               <td>
               
                <div class="control-group">
-                  <label class="control-label">Acteur depense</label>
+                  <label class="control-label">Acteur de depense</label>
                   <div class="controls">
                        <input
                       type="text"
@@ -354,7 +354,7 @@
 
               <td colspan="">
                 <div class="control-group">
-                  <label class="control-label">Date reception</label>
+                  <label class="control-label">Date de réception</label>
                   <div class="controls">
                        <input
                       type="date"
@@ -372,7 +372,7 @@
    <tr>
        <td colspan="">
                 <div class="control-group">
-                  <label class="control-label">Grande nature </label>
+                  <label class="control-label">Grande nature de dépense </label>
                   <div class="controls">
                         <select v-model="formData.grande_natrue_id" class="span4">
                       <option
@@ -388,7 +388,7 @@
               <td colspan="2">
               
                <div class="control-group">
-                  <label class="control-label">Montant transferé</label>
+                  <label class="control-label">Montant transféré</label>
                   <div class="controls">
                        <input
                       type="number"
@@ -475,7 +475,7 @@
        
                <td colspan="2">
                 <div class="control-group">
-                  <label class="control-label">Ligne budgetaire</label>
+                  <label class="control-label">Ligne budgétaire</label>
                   <div class="controls">
                         <select v-model="editTransfert.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire" class="span">
                       <option
@@ -721,7 +721,7 @@
               <td colspan="2">
               
                <div class="control-group">
-                  <label class="control-label">Montant transferé</label>
+                  <label class="control-label">Montant transféré</label>
                   <div class="controls">
                        <input
                       type="number"
@@ -780,7 +780,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des transferts</h5>
+              <h5>Liste des transferts</h5>
              
             </div>
 
@@ -788,12 +788,12 @@
                                     <thead>
                                     <tr>
                                       <th>Année</th>
-                                        <th>Numero T.</th>
+                                        <th>Numéro de Transfert</th>
                                         <th>UA emettrice</th>
                                         <th>Montant transféré</th>
-                                         <th>Ligne budgetaire </th>
+                                         <th>Ligne budgétaire </th>
                                         
-                                         <th>UA receptrice</th>
+                                         <th>UA réceptrice</th>
                                          		
                                         <th>Action</th>
                                     </tr>

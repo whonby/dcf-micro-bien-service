@@ -207,7 +207,7 @@ reference_marche
                <td colspan="">
               
                <div class="control-group">
-            <label class="control-label">procedure passation</label>
+            <label class="control-label">procédure passation</label>
             <div class="controls">
             <!-- <input
                 type="text"

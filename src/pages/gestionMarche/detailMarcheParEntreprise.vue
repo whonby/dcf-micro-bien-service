@@ -53,7 +53,7 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">LISTES DES MARCHES</a>
+                        <a data-toggle="tab" href="#tab1">LISTE DES MARCHES</a>
                       </li>
                        <li>
                         <a data-toggle="tab" href="#tab2">MARCHES EN EXECUTIONS</a>

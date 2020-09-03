@@ -27,16 +27,16 @@
                     <th title="">Code Budget</th>
                      <!-- <th title="unite administrative">ua</th> -->
                     <th>Section</th>
-                    <th title="grande nature depense">G.Nature</th>
+                    <th title="grande nature de dépense">Grande nature de dépense</th>
                       <th>Programme</th>
                     <!--<th>Action</th> -->
-                    <th title="type de financement">Type financ</th>
+                    <th title="type de financement">Type de financement</th>
                      
-                     <th title="classification fonctionnel">C.Fontionnel</th>
-                     <th title="type procedure">Procedure de marché</th>
+                     <th title="classification fonctionnelle">Classification fontionnelle</th>
+                     <th title="type procedure">Procédure de marché</th>
                      <th title="Statut">Statut</th>
-                     <th title="classification Economique">C.Economique</th>
-                    <th>D.Initial</th>
+                     <th title="classification Economique">Classification économique</th>
+                    <th>Dotation initiale</th>
                     <th>Version</th>
                     
 

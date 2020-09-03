@@ -10,7 +10,7 @@
     <div id="exampleModal" class="modal hide tailgrand12">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Unité de zone</h3>
+        <h3>Ajouter une unité de zone</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -32,7 +32,7 @@
               </td>
               <td>
                  <div class="control-group">
-                  <label class="control-label">Localisation Géographique</label>
+                  <label class="control-label">Localisation géographique</label>
                   <div class="controls">
                     <select v-model="formData.id_zone_geographique">
                       <option
@@ -96,7 +96,7 @@
                <td>
               
                <div class="control-group">
-                  <label class="control-label">	Téléphone cel</label>
+                  <label class="control-label">	Téléphone mobile</label>
                   <div class="controls">
                        <input
                       type="number"

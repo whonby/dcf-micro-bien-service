@@ -30,7 +30,7 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Organigramme De l'Unité d'Administrative</h5>
+            <h5>Organigramme de l'Unité Administrative</h5>
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -100,13 +100,13 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter plan Organigramme Ua</h3>
+                <h3>Ajouter un plan organigramme UA</h3>
               </div>
               <div class="modal-body">
                 <table class="table table-bordered table-striped">
 
                <div class="control-group">
-              <label class="control-label">Structure Organigramme Ua:</label>
+              <label class="control-label">Structure organigramme UA:</label>
               <div class="controls">
               <select v-model="formData.structure_organigramme_ua_id" class="span5">
                 <option v-for="structure in getterstructuresOrganisationUa " :key="structure.id" 
@@ -122,7 +122,7 @@
               </div>
             </div> -->
              <div class="control-group">
-                  <label class="control-label">Unite d'administrative</label>
+                  <label class="control-label">Unité Administrative</label>
                   <div class="controls">
                      <select v-model="formData.libelle" class="span5">
                                                             <option></option>
@@ -159,7 +159,7 @@
  <div id="modalAjouterElementEnfant" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter plan Organigramme Ua</h3>
+                <h3>Ajouter un plan organigramme UA</h3>
               </div>
               <div class="modal-body">
                 <table class="table table-bordered table-striped">
@@ -179,7 +179,7 @@
             </div>
 
                <div class="control-group">
-              <label class="control-label">Structure Organigramme Ua</label>
+              <label class="control-label">Structure organigramme UA</label>
               
               <div class="controls">
               <select v-model="nouvelElementEnfant.structure_organigramme_ua_id" class="span5">
@@ -254,7 +254,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier plan Organigramme Ua</h3>
+                <h3>Modifier le plan organigramme UA</h3>
               </div>
               <div class="modal-body">
                   <table class="table table-bordered table-striped">
@@ -274,7 +274,7 @@
             </div> -->
 
                <div class="control-group">
-              <label class="control-label">Structure Organigramme Ua</label>
+              <label class="control-label">Structure organigramme UA</label>
               
               <div class="controls">
               <select v-model="editPlanOrganigrammeUa.structure_organigramme_ua_id" class="span5">
@@ -293,7 +293,7 @@
               </div>
             </div>
            <div class="control-group" v-if="editPlanOrganigrammeUa.structure_organigramme_ua_id == 1">
-              <label class="control-label">Libelle</label>
+              <label class="control-label">Libellé</label>
               <div class="controls">
                  <select v-model="editPlanOrganigrammeUa.libelle" class="span5">
                                                             <option></option>
