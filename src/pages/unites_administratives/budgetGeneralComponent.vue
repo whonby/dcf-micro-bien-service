@@ -10,7 +10,7 @@ RecupererNiveauStructureProgramme
     <div id="exampleModal" class="modal hide tailgrand12">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Budget par unité d'administrative</h3>
+        <h3>Ajouter Budget par Unité Administrative</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -18,7 +18,7 @@ RecupererNiveauStructureProgramme
             <tr>
                  <td>
                 <div class="control-group">
-                  <label class="control-label">Exercice budgetaire</label>
+                  <label class="control-label">Exercice budgétaire</label>
                 
                   <div class="controls">
                      <input
@@ -38,7 +38,7 @@ RecupererNiveauStructureProgramme
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Grande nature depense</label>
+                  <label class="control-label">Grande nature de dépense</label>
                   <div class="controls">
                     <select v-model="formData.gdenature_id" class="span4">
                       <option
@@ -67,7 +67,7 @@ RecupererNiveauStructureProgramme
                <td>
               
                <div class="control-group">
-                  <label class="control-label">Unite administrative</label>
+                  <label class="control-label">Unité administrative</label>
                   <div class="controls">
                     <select v-model="formData.ua_id" class="span4">
                         <option value>Sélectionner</option>
@@ -87,7 +87,7 @@ RecupererNiveauStructureProgramme
                  <td>
               
                <div class="control-group">
-                   <label class="control-label">Type Unite administrative</label>
+                   <label class="control-label">Type d'Unité Administrative</label>
                   <div class="controls">
                     <select v-model="formData.typeua_id" class="span4">
                       <option
@@ -116,7 +116,7 @@ RecupererNiveauStructureProgramme
               </td>
              <td>
                  <div class="control-group">
-                  <label class="control-label">Classification Fonctionnel</label>
+                  <label class="control-label">Classification Fonctionnelle</label>
                   <div class="controls">
                     <select v-model="formData.fonctionnel_id" class="span4">
                       <option
@@ -163,7 +163,7 @@ RecupererNiveauStructureProgramme
               </td>
             <td>
                  <div class="control-group">
-                  <label class="control-label">Activite</label>
+                  <label class="control-label">Activité</label>
                   <div class="controls">
                     <select v-model="formData.activite_id" class="span4">
                       <option
@@ -209,13 +209,13 @@ RecupererNiveauStructureProgramme
           <tr>
              <td colspan="2">
                 <div class="control-group">
-                  <label class="control-label">Code Budget general</label>
+                  <label class="control-label">Code Budget général</label>
                   <div class="controls">
                     <input
                       type="text"
                      :value="codeBudgetGeneral"
                       class="span8"
-                      placeholder="Saisir le code"
+                      placeholder="Saisir le code du budget"
                       readonly
                     />
                   </div>
@@ -223,7 +223,7 @@ RecupererNiveauStructureProgramme
               </td>
                <td colspan="">
                 <div class="control-group">
-                  <label class="control-label">Type procedure</label>
+                  <label class="control-label">Type de procédure</label>
                   <div class="controls">
                     <input
                       type="text"

@@ -84,7 +84,7 @@
             </div>
             <div v-else>
               <div align="center">
-              <h4 style="color:red;">Aucune structure Organigramme Ua trouvée</h4>
+              <h4 style="color:red;">Aucune structure organigramme UA trouvée</h4>
               </div>
           </div>
            </div>
@@ -109,7 +109,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter structure Organigramme Ua</h3>
+                <h3>Ajouter une structure organigramme UA</h3>
               </div>
               <div class="modal-body">
                         <table class="table table-bordered table-striped">
@@ -126,9 +126,9 @@
                           <tr>
                             <td>
 <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libellé" />
               </div>
             </div>
                             </td>
@@ -152,7 +152,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier structure Organigramme Ua</h3>
+                <h3>Modifier structure organigramme UA</h3>
               </div>
               <div class="modal-body">
                 <table class="table table-bordered table-striped">
@@ -169,7 +169,7 @@
            <tr>
              <td>
                 <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="editOrganigrammeUa.libelle" class="span5" placeholder="" />
               </div>

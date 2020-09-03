@@ -13,7 +13,7 @@
             <tr>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Type Unité d'administrative</label>
+                  <label class="control-label">Type d'unité administrative</label>
                   <div class="controls">
                     <select v-model="formData.type_ua_id" class="span5">
                       <option
@@ -27,7 +27,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Nature section</label>
+                  <label class="control-label">Nature de section</label>
                   <div class="controls">
                     <select v-model="formData.nature_section_id" class="span5">
                       <option
@@ -106,7 +106,7 @@
              
               <td>
                 <div class="control-group">
-                  <label class="control-label">Code Unité administrative:</label>
+                  <label class="control-label">Code de l'unité administrative:</label>
                 
                   <div class="controls">
                     <input
@@ -121,7 +121,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Nom unité administrative:</label>
+                  <label class="control-label">Nom de l'unité administrative:</label>
                     
                
                   <div class="controls">
@@ -129,7 +129,7 @@
                       type="text"
                       v-model="formData.libelle"
                       class="span5"
-                      placeholder="Saisir le Nom unite administrative"
+                      placeholder="Saisir le nom de l'unité administrative"
                      
                     />
                </div>
@@ -177,7 +177,7 @@
             <tr>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Type Unite d'administrative</label>
+                  <label class="control-label">Type l'unité administrative</label>
                   <div class="controls">
                     <select v-model="editUniteAdministrative.type_ua_id" class="span5">
                       <option
@@ -191,7 +191,7 @@
               </td>
                <td>
                 <div class="control-group">
-                  <label class="control-label">Nature section</label>
+                  <label class="control-label">Nature de section</label>
                   <div class="controls">
                     <select v-model="editUniteAdministrative.nature_section_id" class="span5">
                       <option
@@ -283,7 +283,7 @@
                       type="text"
                       v-model="editUniteAdministrative.libelle"
                       class="span5"
-                      placeholder="Saisir le Nom de l'unité administrative"
+                      placeholder="Saisir le nom de l'unité administrative"
                      
                     />
                   </div>
@@ -387,7 +387,7 @@
               <table class="table table-bordered table-striped" id="Nature_section">
                 <thead>
                   <tr>
-                    <th title="type unite administrative">Type Ua</th>
+                    <th title="type unite administrative">Type UA</th>
                     <th>Nature Section</th>
                     <th>Section</th>
                     <th title="service gestionnaire">Service Gestionnaire</th>

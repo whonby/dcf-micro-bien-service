@@ -65,15 +65,15 @@
                   <tr>
                        <!-- <th>Exercice</th>
                     <th title="">Code Budget</th> -->
-                     <th title="unite administrative">Ua</th>
+                     <th title="unite administrative">UA</th>
                     <th>Section</th>
-                    <th title="grande nature depense">Gde nature</th>
+                    <th title="grande nature depense">Grande nature</th>
                       <th>Programme</th>
                     <th>Action</th> 
                     <th>Activité</th> 
-                     <th title="classification fonctionnel">Classe Fontionnel</th>
+                     <th title="classification fonctionnel">Classe Fontionnelle</th>
                      <th title="classification Economique">Classe Economique</th>
-                    <th>Dotation Initial</th>
+                    <th>Dotation Initiale</th>
                     <!-- <th>Version</th>
                     
 

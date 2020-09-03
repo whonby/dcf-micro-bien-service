@@ -7,7 +7,7 @@
             <div id="myAlert" class="modal hide tailModal"  >
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter compte bancaire</h3>
+                <h3>Ajouter un compte bancaire</h3>
             </div>
             <div class="modal-body">
                
@@ -15,7 +15,7 @@
                       <tr>
                          <td>
                         <div class="control-group">
-                        <label class="control-label">Unite Administrative</label>
+                        <label class="control-label">Unité Administrative</label>
                         <div class="controls">
                         <select v-model="formData.ua_id" class="span4">
                         <option
@@ -59,7 +59,7 @@
                         
 <td>
                               <div class="control-group">
-                                                    <label class="control-label">Communes</label>
+                                                    <label class="control-label">Commune</label>
                                                     <div class="controls">
                                                         <select v-model="formData.commune_id" class="span4" :readOnly="verroCommune">
                                                             <option
@@ -108,7 +108,7 @@
 
                         <div class="control-group">
                             <div class="controls">
-                                <label>Nom de l'Agence</label>
+                                <label>Nom de l'agence</label>
                                 <input type="text" class="span4" placeholder="Saisir l'agence" :value="AffichierNomAgence" readonly>
                             </div>
                         </div>
@@ -116,9 +116,9 @@
                           <td>
 
                         <div class="control-group">
-                            <label>Téléphone agence</label>
+                            <label>Téléphone de l'agence</label>
                             <div class="controls">
-                                <input type="text"  readonly   class="span4" placeholder="saisir le teleophone agence" :value="AffichierNumeroAgence">
+                                <input type="text"  readonly   class="span4" placeholder="Saisir le téléphone de l'agence" :value="AffichierNumeroAgence">
                             </div>
                         </div>
                           </td>
@@ -132,7 +132,7 @@
                         <div class="control-group">
                             <label>Situation géographique</label>
                             <div class="controls">
-                                <input type="text" class="span4"  readonly  placeholder="sitaution geographique" :value="AffichierSituationGeoAgence">
+                                <input type="text" class="span4"  readonly  placeholder="Situation géographique" :value="AffichierSituationGeoAgence">
                             </div>
                         </div>
                           </td>
@@ -153,7 +153,7 @@
                              <td>
                        <div class="control-group">
                            
-                             <label>Numero compte/cléRib</label>
+                             <label>Numéro de compte/cléRib</label>
                             <div class="controls">
                               
                             <!-- <select v-model="formData.entrepse_id" class="span">
@@ -189,7 +189,7 @@
                         <div class="control-group">
                           <label>Signature</label>
                             <div class="controls">
-                                <input type="text" class="span4" placeholder="saisir le signataire compte" v-model="formData.signataire_compte">
+                                <input type="text" class="span4" placeholder="Saisir le signataire du compte" v-model="formData.signataire_compte">
                             </div>
                         </div>
                           </td>
@@ -250,7 +250,7 @@
                       <tr>
                             <td>
                            <div class="control-group">
-                            <label class="control-label">Unite Administrative</label>
+                            <label class="control-label">Unité Administrative</label>
                             <div class="controls">
                           <select v-model="editBanqueUa.ua_id" class="span4">
                            <option
@@ -296,7 +296,7 @@
                         
                          <td>
                               <div class="control-group">
-                                                    <label class="control-label">Communes</label>
+                                                    <label class="control-label">Commune</label>
                                                     <div class="controls">
                                                         <select v-model="editBanqueUa.commune_id" class="span4" :readOnly="verroCommune">
                                                             <option></option>
@@ -345,7 +345,7 @@
 
                         <div class="control-group">
                             <div class="controls">
-                                <label>Nom de l'Agence</label>
+                                <label>Nom de l'agence</label>
                                 <input type="text" class="span4" placeholder="Saisir l'agence" :value="AffichierNomAgenceModifier" readonly>
                             </div>
                         </div>
@@ -353,9 +353,9 @@
                           <td>
 
                         <div class="control-group">
-                            <label>Téléphone agence</label>
+                            <label>Téléphone de l'agence</label>
                             <div class="controls">
-                                <input type="text"  readonly   class="span4" placeholder="saisir le teleophone agence" :value="AffichierNumeroAgenceModifier">
+                                <input type="text"  readonly   class="span4" placeholder="Saisir le téléphone agence" :value="AffichierNumeroAgenceModifier">
                             </div>
                         </div>
                           </td>
@@ -391,7 +391,7 @@
                            <td>
                        <div class="control-group">
                            
-                             <label>Numero compte/cléRib</label>
+                             <label>Numéro de compte/cléRib</label>
                             <div class="controls">
                               
                             <!-- <select v-model="formData.entrepse_id" class="span">
@@ -516,7 +516,7 @@
             <thead>
               <tr>
                 
-                 <th title="unite administrative"> Ua</th>
+                 <th title="unite administrative"> UA</th>
  
  
  
