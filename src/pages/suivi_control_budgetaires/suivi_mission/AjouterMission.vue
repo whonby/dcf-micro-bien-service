@@ -38,9 +38,9 @@
                    
                       <td colspan="2" width="150" > 
         <div class="control-group">
-          <label class="control-label"> Objet de mission:<span style="color:red;">*</span></label>
+          <label class="control-label"> Objet de mission<span style="color:red;">*</span></label>
             <div class="controls">
-              <textarea  v-model="formData.objet"  class="textarea_editor span" rows="3" placeholder="Enter text ..."></textarea>
+              <textarea  v-model="formData.objet"  class="textarea_editor span" rows="3" placeholder=""></textarea>
             </div>
           
         </div>
@@ -52,7 +52,7 @@
 
                     <td>           
                <div class="control-group">
-              <label class="control-label">Type de mission:<span style="color:red;">*</span></label>
+              <label class="control-label">Type de mission<span style="color:red;">*</span></label>
               <div class="controls">
                 <select v-model="formData.type_mission" class="span">
        
@@ -70,7 +70,7 @@
 
                               <td width="250"> 
             <div class="control-group">
-              <label class="control-label" title="categorie de mission">Catégorie de mission:<span style="color:red;">*</span></label>
+              <label class="control-label" title="categorie de mission">Catégorie de mission<span style="color:red;">*</span></label>
               <div class="controls">
            <select v-model="formData.categorie_missions_id" class="span">
                <option v-for="budget in categories_missions" :key="budget.id" 
@@ -84,7 +84,7 @@
                         
                        <td width="250">           
                <div class="control-group">
-              <label class="control-label">Date de mission:<span style="color:red;">*</span></label>
+              <label class="control-label">Date de mission<span style="color:red;">*</span></label>
               <div class="controls">
                 <input type="date" v-model="formData.date_mission" class="span"/>
               </div>
@@ -96,7 +96,7 @@
                        <td width="250">         
                   
                <div class="control-group">
-              <label class="control-label" title="numero autorisation">N° autorisation:<span style="color:red;">*</span></label>
+              <label class="control-label" title="numero autorisation">N° autorisation<span style="color:red;">*</span></label>
               <div class="controls">
                 <input type="text" v-model="formData.numero_autorisation" 
                 class="span"  />
@@ -109,7 +109,7 @@
 
                             <td colspan="2"> 
             <div class="control-group">
-              <label class="control-label">N°ccm:<span style="color:red;">*</span></label>
+              <label class="control-label">N°CCM<span style="color:red;">*</span></label>
               <div class="controls">
      <input type="text" v-model="formData.numero_ccm" class="span" 
      placeholder="Saisir le numero" />
@@ -121,7 +121,7 @@
                   <tr>
                      <td width="250">
                         <div class="control-group">
-              <label class="control-label">Unité administrative:<span style="color:red;">*</span></label>
+              <label class="control-label">Unité administrative<span style="color:red;">*</span></label>
               <div class="controls">
            <select v-model="formData.ua_id" class="span">
                <option v-for="plans in afficherMissionParUAEnfonctiondesRole" :key="plans.id" 
@@ -132,7 +132,7 @@
                     </td>
                      <td width="250">
                          <div class="control-group">
-              <label class="control-label">Acteur de dépense:</label>
+              <label class="control-label">Acteur de dépense</label>
               <div class="controls">
            <select v-model="formData.acte_personnel_id" class="span" :readOnly="veifEquipementExist">
                <option v-for="depense in acteurDepenseDynamiques(formData.ua_id )" :key="depense.id" 
@@ -144,7 +144,7 @@
                     <td width="250">
                           
                <div class="control-group">
-              <label class="control-label">Nom Prenom:</label>
+              <label class="control-label">Nom et Prénoms</label>
               <div class="controls">
             
             <input type="text"  class="span" :value="afficherNomPrenomActeurDepense(formData.acte_personnel_id)" readonly />
@@ -157,7 +157,7 @@
                     </td>
                      <td  width="250">
                        <div class="control-group">
-                      <label class="control-label" title="">Source de financement:<span style="color:red;">*</span></label>
+                      <label class="control-label" title="">Source de financement<span style="color:red;">*</span></label>
                       <div class="controls">
                     <select v-model="formData.source_financement_id" class="span">
                           <option v-for="sourceFinancement in sources_financements" :key="sourceFinancement.id" 
@@ -171,7 +171,7 @@
                   <tr>
                        <td colspan="2" width="250">
                       <div class="control-group">
-              <label class="control-label">Fonction:</label>
+              <label class="control-label">Fonction</label>
               <div class="controls " >
             <input type="text"  class="span" :value="afficherLibelleFonction(afficherLaFonctionDActeurDepenseDynamique(formData.acte_personnel_id))" readonly >
       
@@ -197,7 +197,7 @@
                     
                     <td colspan="2" width="250">
                       <div class="control-group">
-              <label class="control-label">Imputation budgétaire:</label>
+              <label class="control-label">Imputation budgétaire</label>
               <div class="controls " >
             <input
                 type="text"
@@ -236,7 +236,7 @@
                         <td>         
                   
                 <div class="control-group">
-              <label class="control-label">Moyen de transport:<span style="color:red;">*</span></label>
+              <label class="control-label">Moyen de transport<span style="color:red;">*</span></label>
               <div class="controls">
                 <select v-model="formData.moyen_transport" class="span">
         
@@ -265,7 +265,7 @@
                    
                           <td>           
                <div class="control-group">
-              <label class="control-label">Itinéraire retenu:</label>
+              <label class="control-label">Itinéraire retenu</label>
               <div class="controls">
                 <input type="text" v-model="formData.itineraire_retenu" 
                 class="span"/>
@@ -276,7 +276,7 @@
                  <td>         
                   
                <div class="control-group">
-              <label class="control-label">Classe voyage:</label>
+              <label class="control-label">Classe voyage</label>
               <div class="controls">
                 <input type="text" v-model="formData.classe_voyage" :readonly="affichageDeLaClasseVoyageEtCoutBilletAvionEnFonctionDuMoyenneDeTransport "
                 
@@ -291,7 +291,7 @@
                               <td>         
                   
                <div class="control-group"> 
-              <label class="control-label">Frais de perdiem:</label>
+              <label class="control-label">Frais de perdiem</label>
               <div class="controls">
            <input type="text"  :value="afficherFraisDeplacementDynamique(formData.source_financement_id)" readonly  class="span"  />
                 </div>
@@ -302,7 +302,7 @@
                                              
                          <td >           
                <div class="control-group">
-              <label class="control-label">frais d'hébergement:</label>
+              <label class="control-label">Frais d'hébergement</label>
               <div class="controls">
                 <input type="number" v-model="formData.frais_hebergement" 
                 class="span"/>
@@ -313,7 +313,7 @@
                               <td>         
                   
                <div class="control-group">
-              <label class="control-label" title="frais de restauration">Frais de  restauration:</label>
+              <label class="control-label" title="frais de restauration">Frais de  restauration</label>
               <div class="controls">
                 <input type="number" v-model="formData.frais_restauration" 
                 class="span"  />
@@ -323,7 +323,7 @@
                                     
                                 <td >           
                <div class="control-group">
-              <label class="control-label">Autre frais:</label>
+              <label class="control-label">Autre frais</label>
               <div class="controls">
                 <input type="number" v-model="formData.autre_frais" 
                 class="span"/>
@@ -339,7 +339,7 @@
                  
                  <td >           
                <div class="control-group">
-              <label class="control-label" title="cout total de la mission">Cout total de  mission:</label>
+              <label class="control-label" title="cout total de la mission">Cout total de la mission</label>
               <div class="controls">
                 <input type="text" readonly :value="calculDuCoutTotal" 
                 class="span"/>
@@ -350,12 +350,12 @@
                 
                        <td> 
             <div class="control-group">
-              <label class="control-label">Coût du billet d'avion:</label>
+              <label class="control-label">Coût du billet d'avion</label>
               <div class="controls">
      <input type="number" v-model="formData.cout_billet_avion"
      :readonly="affichageDeLaClasseVoyageEtCoutBilletAvionEnFonctionDuMoyenneDeTransport" 
  
-     placeholder="Saisir la cout du billet avion" />
+     placeholder="Saisir le coût du billet avion" />
               </div>
             </div>
                      </td>
@@ -364,7 +364,7 @@
                        <td>         
                   
                 <div class="control-group">
-              <label class="control-label">Mode de paiement:</label>
+              <label class="control-label">Mode de paiement</label>
               <div class="controls">
 
                  <select v-model="formData.mode_paiement_id" class="span">
@@ -377,7 +377,7 @@
 
                        <td>
                              <div class="control-group">
-              <label class="control-label"> Signataire:</label>
+              <label class="control-label"> Signataire</label>
               <div class="controls">
      <input type="text" v-model="formData.signataire" class="span" 
      placeholder="Saisir le nom du signataire" />
@@ -393,7 +393,7 @@
                     
                         <td >           
                <div class="control-group">
-              <label class="control-label">Date depart:<span style="color:red;">*</span></label>
+              <label class="control-label">Date de départ<span style="color:red;">*</span></label>
               <div class="controls">
                 <input type="date" v-model="formData.date_depart" class="span"/>
               </div>
@@ -403,7 +403,7 @@
                               <td>         
                   
                <div class="control-group">
-              <label class="control-label">Date retour:</label>
+              <label class="control-label">Date de retour</label>
               <div class="controls">
                 <input type="date" :min="formData.date_depart" :readonly="getDateRetourValue" v-model="formData.date_retour" 
                 class="span"  />
@@ -414,7 +414,7 @@
                         
                      <td> 
             <div class="control-group">
-              <label class="control-label">Durée en jours:</label>
+              <label class="control-label">Durée en jours</label>
               <div class="controls">
      <input type="text" readonly :value="nombreJourCalucle" class="span" 
      placeholder="Saisir la durée" />

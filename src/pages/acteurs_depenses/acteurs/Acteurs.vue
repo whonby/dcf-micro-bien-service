@@ -34,7 +34,7 @@ Type de Recrutement
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab10">Liste du personnel     <span class="badge badge-inverse">{{nombreActeurActivite}}</span></a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab78">Contrat Recrutement Direct </a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab78">Contrat de Recrutement Direct </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab19">Liste des acteurs de dépenses   <span class="badge badge-success">{{NombrePersonnelRecuActeNorm}}</span></a> </li>
                                 <li class=""><a data-toggle="tab" href="#tab30">Acteurs non actifs</a></li>
                                   <!-- <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{0}}</span></a></li>
@@ -60,11 +60,11 @@ Type de Recrutement
                     <tr>
 
                         <th>Référence Acte </th>
-                        <th>Date Début </th>
-                        <th>Date Fin </th>
+                        <th>Date de Début </th>
+                        <th>Date de Fin </th>
                         <th>Durée </th>
                         <th>Autorité d'Approbation </th>
-                        <th>Date Attributaire </th>
+                        <th>Date d'Attribution </th>
                         <th>Montant Acte</th>
                        
                         <th>Action</th>
@@ -129,7 +129,7 @@ Type de Recrutement
                                                 <th>Prénom</th>
                                                 <th>Date de naissance</th>
                                                 <th >Unité administrative</th>
-                                                <th >Unité Zone</th>
+                                                <th >Unité de Zone</th>
                                                 <th >Service</th>
                                                 <th >Fonction Administrative</th>
                                                 <th style="width:10px">Action</th>
@@ -182,8 +182,8 @@ Type de Recrutement
                                                 <th>Prénom</th>
                                                 <th>Unité administrative</th>
                                                 <th>Fonction budgétaire</th>
-                                                <th>Date début nomination</th>
-                                                <th>Date fin nomination</th>
+                                                <th>Date de début nomination</th>
+                                                <th>Date de fin nomination</th>
                                                 <!-- <th>Action</th> -->
                                             </tr>
                                             </thead>

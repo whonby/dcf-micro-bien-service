@@ -47,7 +47,7 @@
             <tr>
               <td>
                 
-                 <label class="control-label">Exercice en Cours:</label>
+                 <label class="control-label">Exercice en Cours</label>
                  <div class="controls">
                    <input
                      type="text"
@@ -61,7 +61,7 @@
               </td>
               <td>
                
-                  <label class="control-label">Unite Administrative</label>
+                  <label class="control-label">Unité Administrative</label>
                   <div class="controls">
                     <select v-model="formData.ua_id" class="span">
                       <option
@@ -479,7 +479,7 @@
             <td>
              
               <div class="control-group">
-                 <label class="control-label">Mode de paiemnt</label>
+                 <label class="control-label">Mode de paiement</label>
                  <div class="controls">
                    <select v-model="editpaiementPersonnel.modepaiement_id" class="span">
                      <option
@@ -632,7 +632,7 @@
             <div class="widget-title">
               <div align="right">
                 Recherche:
-                <input type="search" placeholder="Saisir section ou libellé" v-model="search" />
+                <input type="search" placeholder="" v-model="search" />
 
                 <!-- <div class="span3">
                   <model-list-select

@@ -325,7 +325,7 @@ reference_marche
               </td>
                <td>
                  <div class="control-group">
-            <label class="control-label">Référence marché</label>
+            <label class="control-label">Référence du marché</label>
             <div class="controls">
               <input
                 type="text"
@@ -340,7 +340,7 @@ reference_marche
                 <td>
               
                <div class="control-group">
-            <label class="control-label">Type marché </label>
+            <label class="control-label">Type de marché </label>
             <div class="controls">
             <select v-model="formData.type_marche_id" class="span4">
                <option v-for="plans in typeMarches" :key="plans.id" 
@@ -589,18 +589,18 @@ reference_marche
                  <tr>
                     <th>Année</th>
                       <th>UA</th>
-                    <th>Type marché</th>
+                    <th>Type de marché</th>
                     <th>Mode de passation</th>
                     <th>Activité</th>
                     <th>Imputation</th>
                     <!-- <th>Ligne Budgetaire</th> -->
-                    <th>Objet marché</th>
+                    <th>Objet du marché</th>
                     <th>Référence marché</th>
                      <th>Statut</th>
                     <th>Montant prévu</th>
                     <th>Etat en cours</th>
-                    <th title="mouvement du marché">Mouvement marché</th>
-                    <th style="width:10%">Suivi marché</th>
+                    <th title="mouvement du marché">Mouvement du marché</th>
+                    <th style="width:10%">Suivi du marché</th>
                    
                   </tr>
                 </thead>

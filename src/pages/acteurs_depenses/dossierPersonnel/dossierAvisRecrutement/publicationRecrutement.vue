@@ -71,7 +71,7 @@
                             </td>
                             <td>
                         <div class="control-group">
-                            <label class="control-label">Reference  avis de recrutement <code>*</code> :</label>
+                            <label class="control-label">Référence  avis de recrutement <code>*</code> :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Reference d'appel" v-model="formData.ref_appel">
                             </div>
@@ -151,7 +151,7 @@
                  <tr>
                        <td>
                         <div class="control-group">
-                            <label class="control-label">Type de procedure  :</label>
+                            <label class="control-label">Type de procédure  :</label>
                             <div class="controls">
                                 <input type="text" class="span" disabled :value="typeProcedureLibelle(edite_appel_offre.type_appel)">
                             </div>
@@ -159,7 +159,7 @@
                             </td>
                                 <td >
                         <div class="control-group">
-                            <label class="control-label">Reference  avis  :</label>
+                            <label class="control-label">Référence  avis  :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Reference d'appel" v-model="edite_appel_offre.ref_appel">
                             </div>

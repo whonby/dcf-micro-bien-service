@@ -65,7 +65,7 @@
           <tr>
               <td>
               <div class="control-group">
-                <label class="control-label">Type Unité administrative:</label>
+                <label class="control-label">Type d'Unité Administrative:</label>
                 <div class="controls">
                   <select v-model="formData.typeua_id" class="span5">
                     <option value>Sélectionner</option>

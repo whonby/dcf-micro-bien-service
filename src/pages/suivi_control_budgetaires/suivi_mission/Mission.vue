@@ -238,13 +238,13 @@
                        <table class="table table-bordered table-striped">
                           <thead>
                           <tr>
-                   <th>Exercice budgetaires</th>
-                  <th> Catégorie mission</th>
+                   <th>Exercice budgétaire</th>
+                  <th> Catégorie de mission</th>
                   <th>Imputation </th>
                    <th>Objet</th>
                   <th> Type de mission</th>
                   <th>Date de mission</th>
-                  <th>Status</th>
+                  <th>Statut</th>
                   <th>Unité administrative</th>
                   <th>Acte personnel</th>
                    <th>Action</th>
@@ -376,7 +376,7 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                    <th>Type operation</th>
+                    <th>Type d'opération</th>
                      <th>Date de mission</th>
                      <th>Objet de mission</th>
                      <th>Type de mission</th>

@@ -760,7 +760,7 @@ type_financement
                    
                     <!-- <th>Activit&eacute;</th> -->
                     <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
+                       <th>Objet du marché</th>
                         <!-- <th>Reference march&eacute;</th>  -->
                                     <th>Montant réel</th>  
                                 <th>Statut</th>
@@ -860,8 +860,8 @@ type_financement
                    
                     <th>Activit&eacute;</th>
                     <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
-                        <th>Référence march&eacute;</th> 
+                       <th>Objet du  marché</th>
+                        <th>Référence du marché</th> 
                                     <th>Montant prévu</th>
                                 <th>Etat du marché</th>
                                 <th>Action</th>
@@ -1183,7 +1183,7 @@ type_financement
         
         <td>
        <div class="control-group">
-        <label class="control-label">Activite</label>
+        <label class="control-label">Activité</label>
          <div class="controls">
       <select v-model="formData.activite_id" :readOnly="deverouactivite">
        <option
@@ -1256,7 +1256,7 @@ type_financement
           <td colspan="">
   
          <div class="control-group">
-          <label class="control-label">procedure passation</label>
+          <label class="control-label">Procédure de passation</label>
          <div class="controls">
  
          <select v-model="formData.procedure_passation_id" class="span" :readOnly="deverouPassation">

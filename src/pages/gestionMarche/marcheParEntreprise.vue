@@ -26,7 +26,7 @@ reference_marche
                                            
                                             <th>Secteur d'activité</th>
                                            
-                                            <th>Regime d'Imposition</th>
+                                            <th>Régime d'Imposition</th>
                                             <th>Forme Juridique</th>
                                             
                                             <th>Action</th>
