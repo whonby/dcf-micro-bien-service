@@ -28,14 +28,14 @@
                         <a data-toggle="tab" href="#tab00007">Importation PPM <span class="badge badge-important"></span></a>
                       </li>
                      <li class="">
-                        <a data-toggle="tab" href="#tab00008">Listes des marchés <span class="badge badge-info"></span></a>
+                        <a data-toggle="tab" href="#tab00008">Liste des marchés <span class="badge badge-info"></span></a>
                       </li>
                        
                      <li class="">
-                        <a data-toggle="tab" href="#marchehppm">Listes des Marchés Hors PPM   <span class="badge badge-warning"></span></a>
+                        <a data-toggle="tab" href="#marchehppm">Liste des Marchés Hors PPM   <span class="badge badge-warning"></span></a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#marcheEntreprise">Marche par entreprise  <span class="badge badge-warning"></span></a>
+                        <a data-toggle="tab" href="#marcheEntreprise">Marché par entreprise  <span class="badge badge-warning"></span></a>
                       </li>
                             <!-- <li class="">
                         <a data-toggle="tab" href="#tab00214">Liste des Marchés de Bien&Service et Fourniture   <span class="badge badge-warning">{{nombreMarcheBienServiceEtFourniture}}</span></a>
