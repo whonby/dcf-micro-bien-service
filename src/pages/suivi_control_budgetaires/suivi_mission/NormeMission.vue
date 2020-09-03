@@ -128,7 +128,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter norme de mission</h3>
+                <h3>Ajouter la norme de mission</h3>
               </div>
             
 
@@ -161,9 +161,9 @@
               <div class="controls">
                 <select v-model="formData.zone" class="span">
               
-                  <option value="0">Cote d'ivoire</option>
+                  <option value="0">Côte d'ivoire</option>
                   <option value="1">Afrique</option>
-                   <option value="2">hors Afrique</option>
+                   <option value="2">Hors Afrique</option>
                 </select>
               </div>
             </div>

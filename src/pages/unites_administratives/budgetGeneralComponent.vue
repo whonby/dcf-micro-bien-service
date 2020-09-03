@@ -1,5 +1,5 @@
 
-
+RecupererNiveauStructureProgramme
 <template>
   <div>
    
@@ -56,7 +56,7 @@
                   <div class="controls">
                     <select v-model="formData.program_id" class="span4">
                       <option
-                        v-for="natsection in afficheNiveauPlanProg"
+                        v-for="natsection in recupererDernierNiveauPlanProgramme(calculerTaillerStructureProgramme)"
                         :key="natsection.id"
                         :value="natsection.id"
                       >{{natsection.code}}-{{natsection.libelle}}</option>
@@ -120,7 +120,7 @@
                   <div class="controls">
                     <select v-model="formData.fonctionnel_id" class="span4">
                       <option
-                        v-for="planfonct in afficheNiveauPlanFonctionnel"
+                        v-for="planfonct in recupererDernierNiveauPlanFonctionnelle(calculerTaillerStructureFonctionnelle)"
                         :key="planfonct.id"
                         :value="planfonct.id"
                       >{{planfonct.code}}-{{planfonct.libelle}}</option>
@@ -135,7 +135,7 @@
                     
                     <select v-model="formData.economique_id" class="span4">
                       <option
-                        v-for="Bgeneral in derniereNivoPlanBudgetaire"
+                        v-for="Bgeneral in recupererDernierNiveauPlanEconomique(calculerTaillerStructureEconomique)"
                         :key="Bgeneral.id"
                         :value="Bgeneral.id"
                       >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
@@ -153,7 +153,7 @@
                   <div class="controls">
                     <select v-model="formData.action_id" class="span4">
                       <option
-                        v-for="planfonct in afficheNiveauAction"
+                        v-for="planfonct in recupererDernierNiveauPlanActiviteAction(calculerTaillerStructureActivite)"
                         :key="planfonct.id"
                         :value="planfonct.id"
                       >{{planfonct.code}}-{{planfonct.libelle}}</option>
@@ -323,7 +323,7 @@
                   <div class="controls">
                     <select v-model="editBudgetGeneral.program_id" class="span4">
                       <option
-                        v-for="natsection in afficheNiveauPlanProg"
+                        v-for="natsection in recupererDernierNiveauPlanProgramme(calculerTaillerStructureProgramme)"
                         :key="natsection.id"
                         :value="natsection.id"
                       >{{natsection.code}}-{{natsection.libelle}}</option>
@@ -386,7 +386,7 @@
                   <div class="controls">
                     <select v-model="editBudgetGeneral.fonctionnel_id" class="span4">
                      <option
-                        v-for="planfonct in afficheNiveauPlanFonctionnel"
+                        v-for="planfonct in recupererDernierNiveauPlanFonctionnelle(calculerTaillerStructureFonctionnelle)"
                         :key="planfonct.id"
                         :value="planfonct.id"
                       >{{planfonct.code}}-{{planfonct.libelle}}</option>
@@ -401,7 +401,7 @@
                   <div class="controls">
                     <select v-model="editBudgetGeneral.economique_id" class="span4">
                       <option
-                        v-for="Bgeneral in derniereNivoPlanBudgetaire"
+                        v-for="Bgeneral in recupererDernierNiveauPlanEconomique(calculerTaillerStructureEconomique)"
                         :key="Bgeneral.id"
                         :value="Bgeneral.id"
                       >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
@@ -682,6 +682,7 @@ export default {
       "sections",
       "type_Unite_admins",
       "plans_programmes",
+      "structures_programmes",
       "natures_sections",
       "grandes_natures",
       "afficheNiveauPlanProg",
@@ -689,13 +690,14 @@ export default {
     ]),
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "plans_fonctionnels",
-      "afficheNiveauPlanFonctionnel"
+      "afficheNiveauPlanFonctionnel",
+      "structures_fonctionnelles"
      
     ]),
     ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
-    ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+    ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire","structures_budgetaires"]),
  ...mapGetters("uniteadministrative", [
                 "acteCreations",
                 "typeTextes",
@@ -711,8 +713,125 @@ export default {
 
 
 
+recupererDernierNiveauPlanActiviteAction() {
+      return id => {
+        if (id != null && id != "") {
+           return this.plans_activites.filter(qtreel => this.RecupererNiveauStructureActivite(qtreel.structure_activites_id) == id);
+      
+        }
+      };
+    },
+   
+   RecupererNiveauStructureActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_activites.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau;
+      }
+      return 0
+        }
+      };
+    },
+   
+   calculerTaillerStructureActivite(){
+     return this.structures_activites.length - 1
+   },
 
 
+
+
+
+
+
+
+recupererDernierNiveauPlanEconomique() {
+      return id => {
+        if (id != null && id != "") {
+           return this.plans_budgetaires.filter(qtreel => this.RecupererNiveauStructureEconomique(qtreel.structure_budgetaire_id) == id);
+      
+        }
+      };
+    },
+   
+   RecupererNiveauStructureEconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau;
+      }
+      return 0
+        }
+      };
+    },
+   
+   calculerTaillerStructureEconomique(){
+     return this.structures_budgetaires.length
+   },
+
+
+
+
+
+
+
+
+recupererDernierNiveauPlanProgramme() {
+      return id => {
+        if (id != null && id != "") {
+           return this.plans_programmes.filter(qtreel => this.RecupererNiveauStructureProgramme(qtreel.structure_programme_id) == id);
+      
+        }
+      };
+    },
+   
+   RecupererNiveauStructureProgramme() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_programmes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau;
+      }
+      return 0
+        }
+      };
+    },
+   
+   calculerTaillerStructureProgramme(){
+     return this.structures_programmes.length
+   },
+   
+
+recupererDernierNiveauPlanFonctionnelle() {
+      return id => {
+        if (id != null && id != "") {
+           return this.plans_fonctionnels.filter(qtreel => this.RecupererNiveauStructureFonctionnelle(qtreel.structure_fonctionnelle_id) == id);
+      
+        }
+      };
+    },
+   
+   RecupererNiveauStructureFonctionnelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_fonctionnelles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau;
+      }
+      return 0
+        }
+      };
+    },
+   
+   calculerTaillerStructureFonctionnelle(){
+     return this.structures_fonctionnelles.length
+   },
+   
 
 
 

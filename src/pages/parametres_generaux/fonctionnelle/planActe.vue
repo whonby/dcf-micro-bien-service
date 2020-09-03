@@ -30,7 +30,7 @@
                                      </div> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des plans des Actes</h5>
+            <h5>Liste des plans des actes</h5>
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -84,7 +84,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucun plan des Actes enregistré ! </h6>
+                <h6 style="color:red;">Aucun plan des actes enregistré </h6>
               </div>
             </div>
           </div>
@@ -100,12 +100,12 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter plan des Actes</h3>
+                <h3>Ajouter plan des actes</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
                    <div class="control-group">
-              <label class="control-label">Structure des Actes:</label>
+              <label class="control-label">Structure des actes:</label>
               <div class="controls">
                 <select  v-model="formData.structure_Acte_id">
             <option v-for="plan in structureActe" :key="plan.id" 
@@ -120,9 +120,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
            
@@ -147,7 +147,7 @@
  <div id="modalAjouterElementEnfant" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter plan des Actes</h3>
+                <h3>Ajouter plan des actes</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -167,7 +167,7 @@
             </div>
 
                <div class="control-group">
-              <label class="control-label">Structure des Actes:</label>
+              <label class="control-label">Structure des actes:</label>
               
               <div class="controls">
               <select v-model="nouvelElementEnfant.structure_Acte_id" >
@@ -185,9 +185,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
            

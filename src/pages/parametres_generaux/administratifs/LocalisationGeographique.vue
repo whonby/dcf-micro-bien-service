@@ -77,7 +77,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucune localisattion géographique enregistrée</h6>
+                <h6 style="color:red;">Aucune localisation géographique enregistrée</h6>
               </div>
             </div>
           </div>
@@ -94,7 +94,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter localisation géographique</h3>
+                <h3>Ajouter la localisation géographique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -117,7 +117,7 @@
             <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
      
@@ -125,13 +125,13 @@
 <div class="control-group">
               <label class="control-label">Longitude</label>
               <div class="controls">
-                <input type="number" v-model="formData.longitude" class="span" placeholder="Saisir le longitude" />
+                <input type="number" v-model="formData.longitude" class="span" placeholder="Saisir la longitude" />
               </div>
             </div>
               <div class="control-group">
               <label class="control-label">Latitude</label>
               <div class="controls">
-                <input type="number" v-model="formData.latitude" class="span" placeholder="Saisir le Latitude" />
+                <input type="number" v-model="formData.latitude" class="span" placeholder="Saisir la Latitude" />
               </div>
             </div>
 
@@ -154,7 +154,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier localisation géographique</h3>
+                <h3>Modifier la localisation géographique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">

@@ -10,13 +10,13 @@
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">type facture</label>
+            <label class="control-label">Type de facture</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir le type de facture"
               />
             </div>
           </div>
@@ -53,7 +53,7 @@
                 type="text"
                 v-model="editTypefacture.libelle"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir le type de facture"
               />
             </div>
           </div>

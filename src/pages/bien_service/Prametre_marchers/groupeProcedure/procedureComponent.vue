@@ -19,7 +19,7 @@
                   <tr>
                   
                     <th width="40%">Code</th>
-                   <th width="50%">Libelle</th>
+                   <th width="50%">Libellé</th>
                     <th>Action</th>
                   </tr>
                 </thead>

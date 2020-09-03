@@ -55,7 +55,7 @@
                 <tr>
                   <th>Niveau</th>
                   <th>Libellé</th>
-                   <th>Action</th>
+                   <th width="5%">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -109,35 +109,38 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter structure economique</h3>
+                <h3>Ajouter structure économique</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
+                 <table class="table table-bordered table-striped">
 
-                   <div class="control-group">
-              <label class="control-label">niveau:</label>
+              
+           <tr>
+             <td>
+                    <div class="control-group">
+              <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="formData.niveau" class="span" placeholder="Saisir le niveau" />
+                <input type="number" :value="tailleTableauStructureTache" class="span5" placeholder="Saisir le niveau" />
               </div>
             </div>
-            <!-- <div class="control-group">
-              <label class="control-label">Code:</label>
+             </td>
+           </tr>
+             <tr>
+               <td>
+                 <div class="control-group">
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
-              </div>
-            </div> -->
-             
-            <div class="control-group">
-              <label class="control-label">Libelle:</label>
-              <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libellé" />
               </div>
             </div>
+               </td>
+             </tr>
+            
              
-          </form>              
+          </table>              
           </div>
            <div class="modal-footer"> 
-             <button v-show=" formData.niveau.length  && formData.libelle.length"
+             <button v-show="formData.libelle.length"
               @click.prevent="ajouterBudgetaireLocal" class="btn btn-primary"
               >Valider</button>
               <button data-dismiss="modal" class="btn">Fermer</button> </div>
@@ -156,28 +159,31 @@
                 <h3>Modifier structure economique</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-                  <div class="control-group">
+                <table class="table table-bordered table-striped">
+                
+           <tr>
+             <td>
+                 <div class="control-group">
               <label class="control-label">niveau:</label>
               <div class="controls">
-                <input type="number" v-model="editBudgetaire.niveau" class="span" placeholder="" />
+                <input type="number" v-model="editBudgetaire.niveau" class="span5" placeholder="" />
               </div>
             </div>
-            <!-- <div class="control-group">
-              <label class="control-label">Code:</label>
-              <div class="controls">
-                <input type="text" v-model="editBudgetaire.code" class="span" placeholder="" />
-              </div>
-            </div> -->
-              
-            <div class="control-group">
+             </td>
+           </tr>
+              <tr>
+                <td>
+                  <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="editBudgetaire.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editBudgetaire.libelle" class="span5" placeholder="" />
               </div>
             </div>
+                </td>
+              </tr>
+            
         
-          </form>              
+                </table>              
           </div>
            <div class="modal-footer"> 
              <button 
@@ -276,7 +282,10 @@ return this.structures_budgetaires.filter((item) => {
 
    }
 )
-   }
+   },
+     tailleTableauStructureTache(){
+		return this.structures_budgetaires.length + 1
+	}
 
 
   },
@@ -329,7 +338,11 @@ getColumns() {
     },
    // fonction pour vider l'input
     ajouterBudgetaireLocal () {
-      this.ajouterStructureBudgetaire(this.formData)
+      var nouvelObjet = {
+			...this.formData,
+			niveau:this.tailleTableauStructureTache
+		}
+      this.ajouterStructureBudgetaire(nouvelObjet)
 
         this.formData = {
               code:"",

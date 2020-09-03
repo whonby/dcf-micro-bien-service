@@ -14,7 +14,7 @@
       <div class="modal-body">
       <form class="form-horizontal">
               <div class="control-group">
-                            <label class="control-label">Type Equipement:</label>
+                            <label class="control-label">Type d'équipement:</label>
                             <div class="controls">
                               <select v-model="formData.equipemt_id">
                                 <option value>Selectionner</option>
@@ -73,7 +73,7 @@
       <div class="modal-body">
         <form class="form-horizontal">
           <div class="control-group">
-                            <label class="control-label">Type Equipement:</label>
+                            <label class="control-label">Type d'équipement:</label>
                             <div class="controls">
                               <select v-model="editFamille.equipemt_id">
                                 <option value>Sélectionner</option>

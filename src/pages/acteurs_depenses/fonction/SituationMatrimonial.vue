@@ -99,7 +99,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter situation matrimonial</h3>
+                <h3>Ajouter situation matrimoniale</h3>
             </div>
             <div class="modal-body">
                 <table class="table table-bordered table-striped">
@@ -132,7 +132,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier situation matrimonial</h3>
+                <h3>Modifier situation matrimoniale</h3>
             </div>
             <div class="modal-body">
                <table class="table table-bordered table-striped">

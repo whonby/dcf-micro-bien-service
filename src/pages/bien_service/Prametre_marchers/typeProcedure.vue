@@ -5,18 +5,18 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter type de procedure</h3>
+        <h3>Ajouter le type de procédure</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">Libellé</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir le libellé "
               />
             </div>
           </div>
@@ -43,7 +43,7 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Type procedure</h3>
+        <h3>Modifier le Type de procédure</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
@@ -107,7 +107,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Familles de procédure </h5>
+              <h5>Famille de procédure </h5>
               <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />

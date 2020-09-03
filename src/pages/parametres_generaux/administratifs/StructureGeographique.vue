@@ -86,7 +86,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucune structure géographique enregistrée! </h6>
+                <h6 style="color:red;">Aucune structure géographique enregistrée </h6>
               </div>
             </div>
           </div>

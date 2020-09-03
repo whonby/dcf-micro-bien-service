@@ -97,7 +97,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter niveau d'étude</h3>
+                <h3>Ajouter le niveau d'étude</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">

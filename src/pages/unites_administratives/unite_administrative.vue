@@ -80,11 +80,11 @@
               </td>
               <td>
                  <div class="control-group">
-                  <label class="control-label">Localisation Géographique</label>
+                  <label class="control-label">Localisation géographique</label>
                   <div class="controls">
                     <select v-model="formData.localisationgeo_id" class="span5">
                       <option
-                        v-for="localgeo in afficheLocalisationGeoNiveau5"
+                        v-for="localgeo in recupererDernierLocalisationGeographique(calculerTaillerStructureLocalisation)"
                         :key="localgeo.id"
                         :value="localgeo.id"
                       >{{localgeo.code}}-{{localgeo.libelle}}</option>
@@ -227,7 +227,7 @@
                   <div class="controls">
                     <select v-model="editUniteAdministrative.servicegest_id" class="span5">
                       <option
-                        v-for="servicegest in services_gestionnaires"
+                        v-for="servicegest in recupererDernierNiveauServiceGestionnaire(calculerTaillerStructureAdministrative)"
                         :key="servicegest.id"
                         :value="servicegest.id"
                       >{{servicegest.code}}-{{servicegest.libelle}}</option>
@@ -242,7 +242,7 @@
                   <div class="controls">
                     <select v-model="editUniteAdministrative.localisationgeo_id" class="span5">
                       <option
-                        v-for="localgeo in afficheLocalisationGeoNiveau5"
+                        v-for="localgeo in recupererDernierLocalisationGeographique(calculerTaillerStructureLocalisation)"
                         :key="localgeo.id"
                         :value="localgeo.id"
                       >{{localgeo.code}}-{{localgeo.libelle}}</option>
@@ -263,7 +263,7 @@
             <tr>
                <td>
                 <div class="control-group">
-                  <label class="control-label">Code Unite administrative:</label>
+                  <label class="control-label">Code d'unité administrative:</label>
                   <div class="controls">
                     <input
                       type="text"
@@ -277,13 +277,13 @@
               </td>
               <td>
                <div class="control-group">
-                  <label class="control-label">Nom unite administrative:</label>
+                  <label class="control-label">Nom de l'unité administrative:</label>
                   <div class="controls">
                     <input
                       type="text"
                       v-model="editUniteAdministrative.libelle"
                       class="span5"
-                      placeholder="Saisir le Nom unite administrative"
+                      placeholder="Saisir le Nom de l'unité administrative"
                      
                     />
                   </div>
@@ -546,7 +546,8 @@ created() {
       "localisations_geographiques",
       "afficheServiceGestionnaireNiveau4",
       "afficheLocalisationGeoNiveau5",
-      "natures_sections"
+      "natures_sections",
+      "structures_geographiques"
     ]),
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "plans_fonctionnels"
@@ -582,6 +583,32 @@ created() {
    
    calculerTaillerStructureAdministrative(){
      return this.structures_administratives.length
+   },
+   
+   recupererDernierLocalisationGeographique() {
+      return id => {
+        if (id != null && id != "") {
+           return this.localisations_geographiques.filter(qtreel => this.RecupererNiveauStructureLocalisation(qtreel.structure_localisation_geographique_id) == id);
+      
+        }
+      };
+    },
+   
+   RecupererNiveauStructureLocalisation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_geographiques.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau;
+      }
+      return 0
+        }
+      };
+    },
+   
+   calculerTaillerStructureLocalisation(){
+     return this.structures_geographiques.length
    },
    
    

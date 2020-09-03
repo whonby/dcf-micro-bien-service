@@ -5,18 +5,18 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Type analyse</h3>
+        <h3>Ajouter Type d'analyse</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">Libellé</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir le type d'analyse"
               />
             </div>
           </div>
@@ -42,18 +42,18 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Type analyse</h3>
+        <h3>Modifier Type d'analyse</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
             <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">libellé</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editTypeAnalyse.libelle"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir le type d'analyse"
               />
             </div>
           </div>

@@ -18,7 +18,7 @@
                 <thead>
                   <tr>
                     
-                    <th style="width:90%">Libelle</th>
+                    <th style="width:90%">Libellé</th>
                    
                     <th>Action</th>
                   </tr>

@@ -88,7 +88,7 @@ getSecteurActivite
                         <li class="active"><a data-toggle="tab" href="#tab1">LISTE DE TOUTES LES ENTREPRISES  <span class="badge badge-inverse">{{nbreEntreprise}}</span></a></li>
                         <li><a data-toggle="tab" href="#tab2">ENTREPRISE NON SANCTIONNEE  <span class="badge badge-inverse">{{nbreEntrepriseNonSanctionner}}</span></a></li>
                         <li><a data-toggle="tab" href="#tab3">ENTREPRISE SANCTIONNEE  <span class="badge badge-inverse">{{nbreEntrepriseSanctionner}}</span></a></li>
-                        <li><a data-toggle="tab" href="#tab378">CHANGE IMPOSITION OU JURIDIQUES  <span class="badge badge-inverse"></span></a></li>
+                        <li><a data-toggle="tab" href="#tab378">ACTUALISATION DU REGIME  <span class="badge badge-inverse"></span></a></li>
                         <li><a data-toggle="tab" href="#tab39865">HISTORIQUE D'ENTREPRISE  <span class="badge badge-inverse"></span></a></li>
                     </ul>
                 </div>
@@ -149,9 +149,9 @@ getSecteurActivite
                                    
                                 </div>
 <div  align="right">
-     <span style="color:#FF0000;text-align:center;font-size:14px;font-weight: bold;">ES:Entreprise Sanctionné</span> 
+     <span style="color:#FF0000;text-align:center;font-size:14px;font-weight: bold;">ES:Entreprise Sanctionnée</span> 
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span style="color:#006400;text-align:center;font-size:14px;font-weight: bold;">ENS:Entreprise Non Sanctionné</span> 
+                                    <span style="color:#006400;text-align:center;font-size:14px;font-weight: bold;">ENS:Entreprise Non Sanctionnée</span> 
 &nbsp;&nbsp;&nbsp;
 </div>
                                     <div class="widget-content nopadding">
@@ -265,7 +265,7 @@ getSecteurActivite
                                             <th>IDU</th>
                                             <th>Raison Sociale </th>
                                             <th>Compte Contribuable</th>
-                                            <th>Registred e commerce </th>
+                                            <th>Registre de commerce </th>
                                             <th>Secteur d'activité</th>
                                             <th>Pays </th>
                                             <th>Ville</th>
