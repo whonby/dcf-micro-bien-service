@@ -128,7 +128,7 @@
             <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libellé" />
               </div>
             </div>
               
@@ -153,22 +153,30 @@
                 <h3>Modifier structure décisionnelle</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
+                 <table class="table table-bordered table-striped">
+            <tr>
+              <td>
+                <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="editFonctionnelle.niveau" class="span" placeholder="" />
+                <input type="number" v-model="editFonctionnelle.niveau" class="span5" placeholder="" readonly/>
               </div>
             </div>
-            <div class="control-group">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="editFonctionnelle.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editFonctionnelle.libelle" class="span5" placeholder="" />
               </div>
             </div>
+              </td>
+            </tr>
             
             
-          </form>              
+          </table>              
           </div>
            <div class="modal-footer"> 
              <button 
