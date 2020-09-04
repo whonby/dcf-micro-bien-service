@@ -206,7 +206,7 @@
              <td colspan="2">
               
                <div class="control-group">
-            <label class="control-label">procedure passation</label>
+            <label class="control-label">Procédure de passation</label>
             <div class="controls">
            
                <select v-model="editMarche.procedure_passation_id" class="span4" :readOnly="deverouPassationModi">
@@ -275,7 +275,7 @@
                     <th>Imputation</th>
                     <th>Ligne Budgétaire</th>
                     <th>Objet du marché</th>
-                    <th>Référence marché</th>
+                    <th>Référence du marché</th>
                    
                     <th>Montant Réel</th>
                     <th>Action</th>

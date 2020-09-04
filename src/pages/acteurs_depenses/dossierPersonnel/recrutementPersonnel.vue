@@ -375,10 +375,10 @@
                  <th title="unite administrative">UA</th>
                       <th>Type marché</th>
                    
-                    <th>Activité;</th>
+                    <th>Activité</th>
                     <th>Imputation</th>
-                       <th>Objet marché</th>
-                        <th>Référence marché;</th> 
+                       <th>Objet du marché</th>
+                        <th>Référence du marché</th> 
                         <!-- <th>Montant prevue</th> -->
                                 <th>Statut</th>
                                 <th>Action</th>
@@ -456,13 +456,13 @@
                 <tr>
                     <th>Année</th>
                       <th>UA</th>
-                    <th>Type marché</th>
+                    <th>Type de marché</th>
                     <th>Mode de passation</th>
                     <th>Activité</th>
                     <th>Imputation</th>
                     <!-- <th>Ligne Budgetaire</th> -->
-                    <th>Objet marché</th>
-                    <th>Référence Contrat</th>
+                    <th>Objet du marché</th>
+                    <th>Référence du contrat</th>
                      <!-- <th>Numero marché</th> -->
                     <!-- <th>Montant prévu</th> -->
                     <th>Statut</th>
@@ -605,12 +605,12 @@
                   <tr>
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type du marché</th>
                    
-                    <th>Activit&eacute;</th>
+                    <th>Activité</th>
                     <th>Imputation</th>
                        <th>Objet march&eacute;</th>
-                        <th>Reference march&eacute;</th> 
+                        <th>Référence du marcché</th> 
                             <!-- <th>Montant réel</th> -->
                                 <th>Statut</th>
                                 <th>Action</th>
@@ -695,12 +695,12 @@
                  <tr>
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marché</th>
+                      <th>Type de marché</th>
                    
-                    <th>Activit&eacute;</th>
+                    <th>Activité</th>
                     <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
-                        <th>Référence march&eacute;</th> 
+                       <th>Objet du marché</th>
+                        <th>Référence du  marché</th> 
                           <!-- <th>Montant prevue</th> -->
                                 <th>Statut</th>
                                 <th>Action</th> 
@@ -815,11 +815,11 @@
                 <thead>
                   <tr>
                 <th>Ann&eacute;e</th>
-                <th>Unite administrative</th>
-                 <th>Numero march&eacute;</th>
+                <th>Unité administrative</th>
+                 <th>Numéro du marché</th>
 
                  <th>Imputation</th>
-                   <th>Objet march&eacute;</th>
+                   <th>Objet du marché</th>
                    
                     <th>Candidat retenu</th>
                     <th>Cause R&eacute;siliation</th>
@@ -904,9 +904,9 @@
                
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type de marché</th>
                     <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
+                       <th>Objet du marché</th>
                          <th>Montant réel</th>
                          <th>Status</th>
                                 

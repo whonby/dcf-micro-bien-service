@@ -9,7 +9,7 @@
             <ul class="nav nav-tabs">
               <li class="active"><a data-toggle="tab" href="#tab1" title=""> Tableau de bord global de recrutement du personnel</a></li>
                
-               <li class=""><a data-toggle="tab" href="#tab2" title=""> Tableau de bord global acteur de dépense</a></li>
+               <li class=""><a data-toggle="tab" href="#tab2" title=""> Tableau de bord global des acteurs de dépense</a></li>
                <li><a data-toggle="tab" href="#tab3" title="">Tableau de bord global de missions</a></li> 
              
                 

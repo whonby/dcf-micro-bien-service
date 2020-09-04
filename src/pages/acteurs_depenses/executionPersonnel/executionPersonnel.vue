@@ -12,7 +12,7 @@
             <div class="widget-title">
               <div align="right">
                 Recherche:
-                <input type="search" placeholder="Saisie section ou libellé" v-model="search" />
+                <input type="search" placeholder="" v-model="search" />
 
                
               </div>
@@ -36,7 +36,7 @@
                     <th>activité</th> -->
                     <th>Ligne</th>
                     <!-- <th>Code Fichier</th> -->
-                    <th>Objet de Dépense</th>
+                    <th>Objet de la Dépense</th>
                     <th>Mois de Paiement</th>
                     <!-- <th>Montant des Salaires</th> -->
                     <th>Fichier Joint</th>
