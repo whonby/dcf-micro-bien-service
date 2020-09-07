@@ -198,31 +198,31 @@
             <tbody>
               <tr v-for="(unite,index) in partition(uniteAdmin,size)[page]" :key="unite.id">
                 
-                <td style="font-weight:bold;font-size:12px;text-align:center">{{unite.libelle}}</td>
+                <td style="font-weight:bold;font-size:12px;">{{unite.libelle}}</td>
                 <td
-                  style="font-weight:bold;font-size:12px;text-align:center"
+                  style="font-weight:bold;font-size:12px;"
                 >{{formatageSomme(parseFloat(budgetPersonnel(unite.id)))}}</td>
                 <td
-                  style="font-weight:bold;font-size:12px;text-align:center"
+                  style="font-weight:bold;font-size:12px;"
                 >{{formatageSomme(parseFloat(budgetBienService(unite.id)))}}</td>
                 <td
-                  style="font-weight:bold;font-size:12px;text-align:center"
+                  style="font-weight:bold;font-size:12px;"
                 >{{formatageSomme(parseFloat(budgetInverstisement(unite.id)))}}</td>
                 <td
-                  style="font-weight:bold;font-size:12px;text-align:center"
+                  style="font-weight:bold;font-size:12px;"
                 >{{formatageSomme(parseFloat(budgetTranfert(unite.id)))}}</td>
 
                 <td
-                  style="font-weight:bold;font-size:12px;text-align:center"
+                  style="font-weight:bold;font-size:12px;"
                 >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id)))}}</td>
-                <td style="font-weight:bold;font-size:12px;text-align:center"
+                <td style="font-weight:bold;font-size:12px;"
                 >{{formatageSomme(parseFloat(budgetConsommerTransfert(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerInvestissement(unite.id))+parseFloat(budgetConsommerPersonnelle(unite.id)))}}</td>
                 <td
-                  style="font-weight:bold;font-size:12px;text-align:center"
+                  style="font-weight:bold;font-size:12px;"
             
                 >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id)) - ((parseFloat(budgetConsommerTransfert(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerInvestissement(unite.id)) +  parseFloat(budgetConsommerPersonnelle(unite.id)))) )}}</td>
                 
-                <td style="font-weight:bold;font-size:12px;text-align:center">{{(((parseFloat(budgetConsommerPersonnelle(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))) / (parseFloat(MontantTotalPargdeNature(unite.id)+0.01))) * 1000).toFixed(2)|| 0}}%</td>
+                <td style="font-weight:bold;font-size:12px;">{{(((parseFloat(budgetConsommerPersonnelle(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))) / (parseFloat(MontantTotalPargdeNature(unite.id)+0.01))) * 1000).toFixed(2)|| 0}}%</td>
           
              <td>
                

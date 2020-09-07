@@ -67,11 +67,7 @@
                           class="btn btn-primary" 
                            @click.prevent="modifierPhotoProfil()"
                         >Valider</a>
-                        <a
-                         
-                          class="btn"
-                          href="#"
-                        >Fermer</a>
+                        
                       </div>
                     </div>
                   </div>
