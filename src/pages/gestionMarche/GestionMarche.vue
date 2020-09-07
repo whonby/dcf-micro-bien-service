@@ -32,7 +32,7 @@
                       </li>
                        
                      <li class="">
-                        <a data-toggle="tab" href="#marchehppm">Liste des Marchés Hors PPM   <span class="badge badge-warning"></span></a>
+                        <a data-toggle="tab" href="#marchehppm">Liste des marchés Hors PPM   <span class="badge badge-warning"></span></a>
                       </li>
                        <li class="">
                         <a data-toggle="tab" href="#marcheEntreprise">Marché par entreprise  <span class="badge badge-warning"></span></a>

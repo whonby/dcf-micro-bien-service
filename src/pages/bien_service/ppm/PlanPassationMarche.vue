@@ -74,7 +74,7 @@
                                                option-value="id"
                                                option-text="libelle"
 
-                                               placeholder="Unite administrative"
+                                               placeholder="Unité administrative"
                             >
 
                             </model-list-select>

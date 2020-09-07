@@ -34,18 +34,18 @@
                  <tr>
                     <th>Année</th>
                       <th>UA</th>
-                    <th>Type marché</th>
+                    <th>Type de marché</th>
                     <th>Mode de passation</th>
                     <th>Activité</th>
                     <th>Imputation</th>
                     <!-- <th>Ligne Budgetaire</th> -->
-                    <th>Objet marché</th>
-                    <th>Reference marché</th>
+                    <th>Objet du marché</th>
+                    <th>Référence du marché</th>
                      <th>Statut</th>
                     <th>Montant prévu</th>
                     <th>Etat en cours</th>
-                    <th title="mouvement du marché">Mvt marché</th>
-                    <th style="width:10%">Suivi-marche</th>
+                    <th title="mouvement du marché">Mouvement du marché</th>
+                    <th style="width:10%">Suivi marché</th>
                    <th>Cycle de vie</th>
                   </tr>
                 </thead>
