@@ -18,7 +18,7 @@
                 <div class="control-group">
                   <label class="control-label">Banque</label>
                   <div class="controls">
-                    <select v-model="formData.banque_id">
+                    <select v-model="formData.banque_id" class="span4">
                       <option
                         v-for="typeUniteA in banques"
                         :key="typeUniteA.id"
@@ -32,7 +32,7 @@
                 <div class="control-group">
                   <label class="control-label">Code de l'agence</label>
                   <div class="controls">
-                     <input type="text" v-model="formData.code_agence" class="span" />
+                     <input type="text" v-model="formData.code_agence" class="span4" />
                   </div>
                 </div>
               </td>
@@ -41,7 +41,7 @@
                <div class="control-group">
                   <label class="control-label">Nom de l'agence</label>
                   <div class="controls">
-                      <input type="text" v-model="formData.nom_agence" class="span" />
+                      <input type="text" v-model="formData.nom_agence" class="span4" />
                   </div>
                    
                 </div>
@@ -51,7 +51,7 @@
                <div class="control-group">
                   <label class="control-label">Téléphone de l'agence</label>
                   <div class="controls">
-                    <input type="number" v-model="formData.tel_agence" class="span" />
+                    <input type="number" v-model="formData.tel_agence" class="span4" />
                   </div>
                 </div>
               </td>
@@ -64,7 +64,7 @@
                   <label class="control-label">Pays</label>
                   <div class="controls">
                     
-                    <select v-model="formData.pays_id" class="span">
+                    <select v-model="formData.pays_id" class="span4">
                                                             <option></option>
                                                             <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -78,7 +78,7 @@
                   <div class="control-group">
                   <label class="control-label">Ville</label>
                   <div class="controls">
-                    <select v-model="formData.ville_id" :readOnly="verroPays">
+                    <select v-model="formData.ville_id" :readOnly="verroPays" class="span4">
                      <option></option>
                                                             <option v-for="item in villeDynamiques(formData.pays_id)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -92,7 +92,7 @@
                   <label class="control-label">Commune</label>
                 
                   <div class="controls">
-                   <select v-model="formData.commune_id" :readOnly="verroVille">
+                   <select v-model="formData.commune_id" :readOnly="verroVille" class="span4">
                       <option
                         v-for="localgeo in CommuneDynamiques(formData.ville_id)"
                         :key="localgeo.id"
@@ -111,7 +111,7 @@
                     <input
                       type="text"
                       v-model="formData.situation_geo"
-                      class="span"
+                      class="span4"
                     
                      
                     />
@@ -149,7 +149,7 @@
                 <div class="control-group">
                   <label class="control-label">Banque</label>
                   <div class="controls">
-                    <select v-model="editAgence.banque_id">
+                    <select v-model="editAgence.banque_id" class="span4">
                       <option
                         v-for="typeUniteA in banques"
                         :key="typeUniteA.id"
@@ -163,7 +163,7 @@
                 <div class="control-group">
                   <label class="control-label">Code de l'agence</label>
                   <div class="controls">
-                     <input type="text" v-model="editAgence.code_agence" class="span" />
+                     <input type="text" v-model="editAgence.code_agence" class="span4" />
                   </div>
                 </div>
               </td>
@@ -172,7 +172,7 @@
                <div class="control-group">
                   <label class="control-label">Nom de l'agence</label>
                   <div class="controls">
-                      <input type="text" v-model="editAgence.nom_agence" class="span" />
+                      <input type="text" v-model="editAgence.nom_agence" class="span4" />
                   </div>
                    
                 </div>
@@ -182,7 +182,7 @@
                <div class="control-group">
                   <label class="control-label">Téléphone de l'agence</label>
                   <div class="controls">
-                    <input type="number" v-model="editAgence.tel_agence" class="span" />
+                    <input type="number" v-model="editAgence.tel_agence" class="span4" />
                   </div>
                 </div>
               </td>
@@ -194,7 +194,7 @@
                  <div class="control-group">
                   <label class="control-label">Pays</label>
                   <div class="controls">
-                    <select v-model="editAgence.pays_id">
+                    <select v-model="editAgence.pays_id" class="span4">
                      <option></option>
                                                             <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -207,9 +207,9 @@
                   <div class="control-group">
                   <label class="control-label">Ville</label>
                   <div class="controls">
-                    <select v-model="editAgence.ville_id" :readOnly="verroPays">
+                    <select v-model="editAgence.ville_id"  class="span4">
                       <option></option>
-                                                            <option v-for="item in villeDynamiques(formData.pays)" :key="item.id" :value="item.id">
+                                                            <option v-for="item in villeDynamiques(editAgence.pays_id)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
                     </select>
@@ -221,7 +221,7 @@
                   <label class="control-label">Commune</label>
                 
                   <div class="controls">
-                   <select v-model="editAgence.commune_id" :readOnly="verroVille">
+                   <select v-model="editAgence.commune_id"  class="span4">
                       <option
                         v-for="localgeo in CommuneDynamiques(editAgence.ville_id)"
                         :key="localgeo.id"
@@ -240,7 +240,7 @@
                     <input
                       type="text"
                       v-model="editAgence.situation_geo"
-                      class="span"
+                      class="span4"
                     
                      
                     />
@@ -526,8 +526,8 @@ modifierSectionLocal(){
 
 .gdeModalAgence {
 
- width: 1000px;
-  margin: 0 -25%;
+ width: 1600px;
+  margin: 0 -47%;
 
 }
 </style>

@@ -107,7 +107,10 @@
                     
 
                   </tr>
-                 
+                 <!-- <fab :actions="fabActions" @cache="afficherModalAjouterService" main-icon="apps" bg-color="green"></fab>
+     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterService()">Open</button>
+      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+<notifications  /> -->
                 </tbody>
               </table>
             </div>
@@ -415,10 +418,9 @@
     <!-- Default Light Table -->
  
 
-    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterDmdImmobilisation" main-icon="apps" bg-color="green"></fab> -->
+    <fab :actions="fabActions" @cache="afficherModalAjouterDmdImmobilisation" main-icon="apps" bg-color="green"></fab>
     <notifications  />
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterDmdImmobilisation()">Open</button>
+     
   </div>
 </template>
   

@@ -13,7 +13,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>AFFECTATION D'EQUIPEMENT </h5>
+              <h5>DEMANDE D'EQUIPEMENT </h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />

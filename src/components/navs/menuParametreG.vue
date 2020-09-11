@@ -77,8 +77,7 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <li class="divider"></li>
-
+          
            <li>
             <router-link :to="{name:'TypeFinancement'}" tag="a">
               <i class="icon-key"></i> Type de financement
@@ -92,7 +91,7 @@
               <i class="icon-check"></i> Source de financement
             </router-link>
           </li>
-         
+         <li class="divider"></li>
         </ul>
       </li>
       <!-- fonctionnelle
@@ -103,7 +102,7 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <li class="divider"></li>
+          
           <li>
             <router-link :to="{name: 'StructureFonctionnelle'}" tag="a">
               <i class="icon-check"></i>
@@ -163,7 +162,6 @@
           </li>
           <li class="divider"></li>
           
-          
           <li>
             <router-link :to="{name: 'structureActe'}" tag="a">
               <i class="icon-key"></i> Structure des actes
@@ -180,7 +178,7 @@
         </a>
         <ul class="dropdown-menu">
          
-          <li class="divider"></li>
+       
           <li>
             <router-link :to="{name: 'PlanFonctionnel'}" tag="a">
               <i class="icon-key"></i> Plan fonctionnel
@@ -207,8 +205,6 @@
               <i class="icon-key"></i> Service gestionnaire de crédit
             </router-link>
           </li>
-
-          
 
            <li class="divider"></li>
           <li>
@@ -238,6 +234,7 @@
               <i class="icon-key"></i> Plan des actes
             </router-link>
           </li>
+          <li class="divider"></li>
         </ul>
       </li>
       <li class="dropdown" id="Depense">
@@ -253,13 +250,14 @@
            Structure Pays
             </router-link>
           </li>
+          <li class="divider"></li>
            <li>
             <router-link :to="{name: 'PlanPays'}" tag="a">
               <i class="icon-bar-chart"></i>
            Plan Pays
             </router-link>
           </li>
-
+<li class="divider"></li>
 
 
 
@@ -287,6 +285,7 @@
            Type Candidat
             </router-link>
           </li>
+          <li class="divider"></li>
            <!-- <li>
             <router-link :to="{name: 'typeAppel'}" tag="a">
               <i class="icon-bar-chart"></i>
@@ -299,7 +298,7 @@
            Type de Facture
             </router-link>
           </li>
-           
+           <li class="divider"></li>
            <!-- <li>
             <router-link :to="{name: 'typeTextJuridique'}" tag="a">
               <i class="icon-bar-chart"></i>
@@ -324,6 +323,7 @@
                     Ligne Exemptée
                 </router-link>
             </li>
+            <li class="divider"></li>
           <!-- <li>
             <router-link :to="{name: 'motifDecision'}" tag="a">
               <i class="icon-bar-chart"></i>
@@ -452,7 +452,7 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-            <li class="divider"></li>
+            
           <li>
             <router-link :to="{name: 'typeMarche'}" tag="a">
               <i class="icon-check"></i>
@@ -480,10 +480,7 @@
              Rôle membre Cojo
             </router-link>
           </li>
-           <li class="divider"></li>
            
-              
-
         </ul>
       </li>
       <li class="dropdown" id="personnelPara">
@@ -535,7 +532,8 @@
            <li class="divider"></li>
           <li>
             <router-link :to="{name: 'familleEmploie'}" tag="a">
-              <i class="icon-key"></i> Familles d'emploi            </router-link>
+              <i class="icon-key"></i> Familles d'emploi           
+               </router-link>
           </li>
           <li class="divider"></li>
           <li>
@@ -560,26 +558,7 @@
           </li>
          
           <li class="divider"></li>
-          <!-- <li>
-            <router-link :to="{name: 'Classe'}" tag="a">
-              <i class="icon-key"></i> Classe
-            </router-link>
-          </li>
-
-           <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'Echelons'}" tag="a">
-              <i class="icon-check"></i>
-              Echelons
-            </router-link>
-          </li> -->
-          <!-- <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'Grades'}" tag="a">
-              <i class="icon-key"></i> Grades
-            </router-link>
-          </li> -->
-           <li class="divider"></li>
+          
           <li>
             <router-link :to="{name: 'NiveauEtude'}" tag="a">
               <i class="icon-check"></i>
