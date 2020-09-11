@@ -129,7 +129,7 @@
   
 
 
-  <li class="bg_lb span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherBudgetInitialB))}}</span><h4>BIEN & SERVICE</h4></a> </li>
+  <li class="bg_lb span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherBudgetInitialB))}}</span><h4>BIENS & SERVICES</h4></a> </li>
   <li class="bg_lg span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherBudgetExcuterBienService))}}</span><h4>EXECUTE</h4></a> </li>
     <li class="bg_lo span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(affichierBudgetDisponibleBienService))}}</span><h4>DISPONIBLE</h4></a> </li>
     <li class="bg_ly span5"> <a href="#" style="color:black;"><h4>TAUX </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{affichierTauxExecutionBienService}}%</span><h4>EXECUTION</h4></a> </li>

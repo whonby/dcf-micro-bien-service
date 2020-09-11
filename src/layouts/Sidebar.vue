@@ -34,7 +34,7 @@
         <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" width="100" height="20" class="img-circle">
         </router-link>
       <h6 style="color:orange;font-size:14px">{{afficheNomUtilisateur}}</h6>
-      <span style="color:#ffffff;font-size:14px">({{afficheRoleUtilisateur}})</span>
+      <span class="user-level" style="color:#ffffff;font-size:14px">({{afficheRoleUtilisateur}})</span>
 		</center>
        </li>
        
