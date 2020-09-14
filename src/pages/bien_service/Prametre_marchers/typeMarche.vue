@@ -131,10 +131,10 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(typeProcedure, index) in 
+                  <tr class="odd gradeX" v-for="typeProcedure in 
                 partition (typeProcedureFiltre,size)[page]"
                  :key="typeProcedure.id">
-                 <td @dblclick="afficherModalModifiertextJuridique(index)">
+                 <td @dblclick="afficherModalModifiertextJuridique(typeProcedure.id)">
                    {{typeProcedure.libelle || 'Non renseigné'}}</td>
                   
                   
@@ -298,13 +298,13 @@ this.formData = {
     },
     
     // afficher modal de modification
-    afficherModalModifiertextJuridique(index) {
+    afficherModalModifiertextJuridique(id) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editTypeProcedure = this.typeMarches[index];
+      this.editTypeProcedure = this.typeMarches.find(item => item==id);
     },
     // fonction pour vider l'input modification
     modifierModalTypeAnalyseLocal(){

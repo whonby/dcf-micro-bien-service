@@ -59,12 +59,12 @@
                 </tr>     
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(structure_fonctionnelle, index) in
+                <tr class="odd gradeX" v-for="structure_fonctionnelle in
                 partition  (localisationsFiltre, size)[page]"
                  :key="structure_fonctionnelle.id">
-                  <td @dblclick="afficherModalModifierType(index)">
+                  <td @dblclick="afficherModalModifierType(structure_fonctionnelle.id)">
                     {{structure_fonctionnelle.niveau || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierType(index)">
+                  <td @dblclick="afficherModalModifierType(structure_fonctionnelle.id)">
                     {{structure_fonctionnelle.libelle || 'Non renseigné'}}</td>
                  
                   <td>
@@ -346,14 +346,14 @@ getColumns() {
         }
     },
 // afficher modal
-afficherModalModifierType(index){
+afficherModalModifierType(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editFonctionnelle = this.structures_fonctionnelles[index];
+        this.editFonctionnelle = this.structures_fonctionnelles.find(item =>item.id==id);
 
 
         

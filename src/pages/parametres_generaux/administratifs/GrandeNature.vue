@@ -56,9 +56,9 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(grande_nature, index) in partition(titreFiltres,size)[page]" :key="grande_nature.id">
-                  <td @dblclick="afficherModalModifierGrande(index)">{{grande_nature.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierGrande(index)">{{grande_nature.libelle || 'Non renseigné'}}</td>
+                <tr class="odd gradeX" v-for="grande_nature in partition(titreFiltres,size)[page]" :key="grande_nature.id">
+                  <td @dblclick="afficherModalModifierGrande(grande_nature.id)">{{grande_nature.code || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierGrande(grande_nature.id)">{{grande_nature.libelle || 'Non renseigné'}}</td>
                   <td>
 
 
@@ -321,14 +321,14 @@ getColumns() {
         }
     },
 // afficher modal
-afficherModalModifierGrande(index){
+afficherModalModifierGrande(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editTitre = this.grandes_natures[index];
+        this.editTitre = this.grandes_natures.find(item=>item.id==id);
 
 
         

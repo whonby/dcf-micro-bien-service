@@ -377,16 +377,13 @@ typeProcedureLibelle() {
       
        type_appel: this.typeProcedure_id(this.procedurePassation_id(this.macheid)),
           marche_id: this.macheid,
-          objet_appel:this.affichierObjetMarche(this.macheid)
+          objet_appel:this.affichierObjetMarche(this.marche_id)
          };
         //  this.formData.marche_id=this.macheid
     //this.formEffetFinancier.entreprise_id=entreprisePremier.id
     // this.ajouterActeEffetFinancier(this.formEffetFinancier)
      this.ajouterAppelOffre(nouvelObjet);
-    let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
-    marcheObjet.attribue=1
-      //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
-     this.modifierMarche(marcheObjet)
+     console.log(nouvelObjet)
       this.formData = {
                     ref_appel:"",
                     type_appel:"",
@@ -398,6 +395,11 @@ typeProcedureLibelle() {
                     imputation:"",
                     marche_id:"",
                 }
+    let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
+    marcheObjet.attribue=1
+      //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
+     this.modifierMarche(marcheObjet)
+     
             },     
 
            

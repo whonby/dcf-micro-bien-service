@@ -57,9 +57,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="odd gradeX" v-for="(item, index) in partition(familleFiltre,size)[page]" :key="item.id">
+                                <tr class="odd gradeX" v-for="item in partition(familleFiltre,size)[page]" :key="item.id">
                                    
-                                    <td @dblclick="afficherModalModifierTitre(index)">{{item.libelle || 'Non renseigné'}}</td>
+                                    <td @dblclick="afficherModalModifierTitre(item.id)">{{item.libelle || 'Non renseigné'}}</td>
                                     <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerFamilleFonction(item.id)"  class="btn btn-danger ">
@@ -294,13 +294,13 @@ getColumns() {
                 }
             },
 // afficher modal
-            afficherModalModifierTitre(index){
+            afficherModalModifierTitre(id){
 
                 this.$('#modifierModal').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editCategorieGrade = this.familleFonction[index];
+                this.editCategorieGrade = this.familleFonction.find(item => item.id==id);
 
             },
 

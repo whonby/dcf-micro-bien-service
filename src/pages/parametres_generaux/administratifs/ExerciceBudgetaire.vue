@@ -64,14 +64,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(exercice_budgetaire, index) 
+                <tr class="odd gradeX" v-for="exercice_budgetaire
                 in partition (exercices_budgetaires,size)[page]" :key="exercice_budgetaire.id">
                   <template v-if="!exercice_budgetaire.encours">
-                         <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
+                         <td @dblclick="afficherModalModifierExerciceBudgetaire(exercice_budgetaire.id)">
                     {{exercice_budgetaire.annee || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
+                  <td @dblclick="afficherModalModifierExerciceBudgetaire(exercice_budgetaire.id)">
                     {{formaterDate(exercice_budgetaire.date_debut) || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
+                  <td @dblclick="afficherModalModifierExerciceBudgetaire(exercice_budgetaire.id)">
                     {{formaterDate(exercice_budgetaire.date_fin) || 'Non renseigné'}}</td>
 
                   </template>
@@ -79,11 +79,11 @@
 
 
                     <template v-else>
-                         <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
+                         <td @dblclick="afficherModalModifierExerciceBudgetaire(exercice_budgetaire.id)">
                     {{exercice_budgetaire.annee || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
+                  <td @dblclick="afficherModalModifierExerciceBudgetaire(exercice_budgetaire.id)">
                     {{formaterDate(exercice_budgetaire.date_debut) || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
+                  <td @dblclick="afficherModalModifierExerciceBudgetaire(exercice_budgetaire.id)">
                     {{formaterDate(exercice_budgetaire.date_fin) || 'Non renseigné'}}</td>
                   <!-- <td>{{exercice_budgetaire.encours ? 'Oui' : 'Non'}}</td> -->
                   
@@ -441,14 +441,14 @@ getColumns() {
         }
     },
 // afficher modal
-afficherModalModifierExerciceBudgetaire(index){
+afficherModalModifierExerciceBudgetaire(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editExerciceBudgetaire = this.exercices_budgetaires[index];
+        this.editExerciceBudgetaire = this.exercices_budgetaires.find(item =>item.id==id);
 
 
         

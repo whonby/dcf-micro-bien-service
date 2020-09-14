@@ -59,11 +59,11 @@
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="(titre, index) in  partition (tableRegimesImpositions,size)[page]"
+                    v-for="titre in  partition (tableRegimesImpositions,size)[page]"
                     :key="titre.id"
                   >
                     <td
-                      @dblclick="afficherModalModifierTitre(index)"
+                      @dblclick="afficherModalModifierTitre(titre.id)"
                     >{{titre.libelle || 'Non renseigné'}}</td>
                     <td>
                       <div class="btn-group">
@@ -307,13 +307,13 @@ getColspan(){
       };
     },
     // afficher modal
-    afficherModalModifierTitre(index) {
+    afficherModalModifierTitre(id) {
       this.$("#modifierModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editregimeImpositions = this.getterregimeImpositions[index];
+      this.editregimeImpositions = this.getterregimeImpositions.find(item =>item.id==id);
     },
     // vider l'input modifier
 

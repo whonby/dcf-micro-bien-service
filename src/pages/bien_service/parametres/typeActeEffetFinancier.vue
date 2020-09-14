@@ -131,9 +131,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(typeActeEffet, index) in partition (typeActeEffetFinanciers,size)[page]" :key="typeActeEffet.id">
+                  <tr class="odd gradeX" v-for="typeActeEffet in partition (typeActeEffetFinanciers,size)[page]" :key="typeActeEffet.id">
                 
-                 <td @dblclick="afficherModalModifierTypeActeEffetFinancier(index)">
+                 <td @dblclick="afficherModalModifierTypeActeEffetFinancier(typeActeEffet.id)">
                    {{typeActeEffet.libelle || 'Non renseigné'}}</td>
                   
 
@@ -294,13 +294,13 @@ this.formData = {
     },
     
     // afficher modal de modification
-    afficherModalModifierTypeActeEffetFinancier(index) {
+    afficherModalModifierTypeActeEffetFinancier(id) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editTypefacture = this.typeActeEffetFinanciers[index];
+      this.editTypefacture = this.typeActeEffetFinanciers.find(item => item.id==id);
     },
     // fonction pour vider l'input modification
     modifierMoadlTypeActeEffetfinancierLocal(){

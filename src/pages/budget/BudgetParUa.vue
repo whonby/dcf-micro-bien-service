@@ -196,7 +196,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(unite,index) in partition(uniteAdmin,size)[page]" :key="unite.id">
+              <tr v-for="unite in partition(uniteAdmin,size)[page]" :key="unite.id">
                 
                 <td style="font-weight:bold;font-size:12px;">{{unite.libelle}}</td>
                 <td
@@ -228,7 +228,7 @@
                
                 <button
                         class="btn btn-info"
-                        @click="afficherModalModifierUniteAdministrative(index)"
+                        @click="afficherModalModifierUniteAdministrative(unite.id)"
                       >
                         <span>
                           <i class="icon-share-alt"></i>
@@ -1266,13 +1266,13 @@ getDataPaginate(index){
           this.page ++
       },
 
- afficherModalModifierUniteAdministrative(index) {
+ afficherModalModifierUniteAdministrative(id) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editUniteAdministrative = this.uniteAdministratives[index];
+      this.editUniteAdministrative = this.uniteAdministratives.find(item => item.id==id);
     },
 
 

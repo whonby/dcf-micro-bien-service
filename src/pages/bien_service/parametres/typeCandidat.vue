@@ -134,9 +134,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(typeappel, index) in partition (typeCandidatFiltre,size)[page]" :key="typeappel.id">
+                  <tr class="odd gradeX" v-for="typeappel in partition (typeCandidatFiltre,size)[page]" :key="typeappel.id">
 
-                 <td @dblclick="afficherModalAjoutertypecandiadt(index)">
+                 <td @dblclick="afficherModalAjoutertypecandiadt(typeappel.id)">
                       {{typeappel.libelle || 'Non renseigné'}}</td>
                  
                    
@@ -293,13 +293,13 @@ partition:partition,
     //fonction pour vider l'input ajouter
     
     //afficher modal de modification
-    afficherModalAjoutertypecandiadt(index) {
+    afficherModalAjoutertypecandiadt(id) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editTypeAppel = this.typeCandidat[index];
+      this.editTypeAppel = this.typeCandidat.find(item => item.id==id);
     },
     // fonction pour vider l'input modification
     

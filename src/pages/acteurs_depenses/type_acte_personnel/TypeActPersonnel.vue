@@ -76,9 +76,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="odd gradeX" v-for="(titre, index) in partition(titreFiltres,size)[page] " :key="titre.id">
-                                    <td  @dblclick="afficherModalModifierTitre(index)">{{titre.code || 'Non renseigné'}}</td>
-                                    <td @dblclick="afficherModalModifierTitre(index)">{{titre.libelle || 'Non renseigné'}}</td>
+                                <tr class="odd gradeX" v-for="titre in partition(titreFiltres,size)[page] " :key="titre.id">
+                                    <td  @dblclick="afficherModalModifierTitre(titre.id)">{{titre.code || 'Non renseigné'}}</td>
+                                    <td @dblclick="afficherModalModifierTitre(titre.id)">{{titre.libelle || 'Non renseigné'}}</td>
                                     <td>
 
                                         <div class="btn-group">
@@ -327,13 +327,13 @@ getColumns() {
                 this.page ++
             },
 // afficher modal
-            afficherModalModifierTitre(index){
+            afficherModalModifierTitre(id){
 
                 this.$('#modifierModal').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editTitre = this.type_acte_personnels[index];
+                this.editTitre = this.type_acte_personnels.find(item => item.id==id);
 
             },
            modifier(){

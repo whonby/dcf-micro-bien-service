@@ -60,11 +60,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(structure_pays, index) in 
+                <tr class="odd gradeX" v-for="structure_pays in 
               partition (localisationsFiltre,size)[page]" :key="structure_pays.id">
-                  <td @dblclick="afficherModalModifierStructure(index)">
+                  <td @dblclick="afficherModalModifierStructure(structure_pays.id)">
                     {{structure_pays.niveau || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierStructure(index)">
+                  <td @dblclick="afficherModalModifierStructure(structure_pays.id)">
                     {{structure_pays.libelle || 'Non renseigné'}}</td>
                   <td>
 
@@ -339,14 +339,14 @@ getColumns() {
         }
     },
 // afficher modal
-afficherModalModifierStructure(index){
+afficherModalModifierStructure(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editOrganigrammeUa = this.getterstructuresOrganisationUa[index];
+        this.editOrganigrammeUa = this.getterstructuresOrganisationUa.find(item =>item.id==id);
 
 
         

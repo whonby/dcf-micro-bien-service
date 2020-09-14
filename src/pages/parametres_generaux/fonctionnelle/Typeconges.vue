@@ -311,7 +311,7 @@ afficherModalModifierType(id){
          keyboard: false
         });
 
-        this.editType = this.Typeconges[id];
+        this.editType = this.Typeconges.find(item =>item.id==id);
 
 
         

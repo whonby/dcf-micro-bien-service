@@ -46,14 +46,14 @@
                 </tr>
               </thead>
               <tbody> 
-                <tr class="odd gradeX" v-for="(plans, index) 
+                <tr class="odd gradeX" v-for="plans 
                 in localisationsFiltre" :key="plans.id">
-                  <td @dblclick="afficherMoadlModifierLocalisation(index)">
+                  <td @dblclick="afficherMoadlModifierLocalisation(plans.id)">
                     {{plans.code || 'Non renseigné'}}</td>
-                   <td @dblclick="afficherMoadlModifierLocalisation(index)">
+                   <td @dblclick="afficherMoadlModifierLocalisation(plans.id)">
                     {{plans.libelle || 'Non renseigné'}}</td>
 
-                   <td @dblclick="afficherMoadlModifierLocalisation(index)">
+                   <td @dblclick="afficherMoadlModifierLocalisation(plans.id)">
                   {{(plans.structure_budgetaire.libelle) || 'Non renseigné'}}</td>
                   <td>
 
@@ -284,14 +284,14 @@ return this.plans_budgetaires.filter((item) => {
         }
     },
 // afficher modal
-afficherMoadlModifierLocalisation(index){
+afficherMoadlModifierLocalisation(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editTitre = this.plans_budgetaires[index];
+        this.editTitre = this.plans_budgetaires.find(item =>item.id==id);
 
 
         

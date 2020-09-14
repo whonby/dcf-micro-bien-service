@@ -56,9 +56,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="odd gradeX" v-for="(item, index) in partition(niveauEtudeFiltre,size)[page]" :key="item.id">
-                                    <td @dblclick="afficherModalModifierTitre(index)">{{item.code || 'Non renseigné'}}</td>
-                                    <td @dblclick="afficherModalModifierTitre(index)">{{item.libelle || 'Non renseigné'}}</td>
+                                <tr class="odd gradeX" v-for="item in partition(niveauEtudeFiltre,size)[page]" :key="item.id">
+                                    <td @dblclick="afficherModalModifierTitre(item.id)">{{item.code || 'Non renseigné'}}</td>
+                                    <td @dblclick="afficherModalModifierTitre(item.id)">{{item.libelle || 'Non renseigné'}}</td>
                                     <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerNiveauEtude(item.id)"  class="btn btn-danger ">
@@ -297,13 +297,13 @@ getColumns() {
                 }
             },
 // afficher modal
-            afficherModalModifierTitre(index){
+            afficherModalModifierTitre(id){
 
                 this.$('#modifierModal').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editTitre = this.niveau_etudes[index];
+                this.editTitre = this.niveau_etudes.find(item => item.id==id);
 
             }
             ,

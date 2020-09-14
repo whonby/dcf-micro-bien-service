@@ -60,11 +60,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(structure_geographique, index) 
+                <tr class="odd gradeX" v-for="structure_geographique
                 in partition (localisationsFiltre, size)[page]" :key="structure_geographique.id">
-                  <td @dblclick="afficherModalModifierService(index)">
+                  <td @dblclick="afficherModalModifierService(structure_geographique.id)">
                     {{structure_geographique.niveau || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierService(index)">
+                  <td @dblclick="afficherModalModifierService(structure_geographique.id)">
                     {{structure_geographique.libelle || 'Non renseigné'}}</td>
                      
                        
@@ -349,14 +349,14 @@ getColumns() {
         }
     },
 // afficher modal
-afficherModalModifierService(index){
+afficherModalModifierService(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editStructure = this.structures_geographiques[index];
+        this.editStructure = this.structures_geographiques.find(item =>item.id==id);
 
 
         

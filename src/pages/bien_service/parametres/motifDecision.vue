@@ -129,9 +129,9 @@
                   </tr>
                 </thead>
                 <tbody>
-      <tr class="odd gradeX" v-for="(motifDecision, index)  in partition (motifDecisionFiltre,size)[page]" :key="motifDecision.id"> 
+      <tr class="odd gradeX" v-for="motifDecision  in partition (motifDecisionFiltre,size)[page]" :key="motifDecision.id"> 
                 
-                 <td @dblclick="afficherModalMotifDecision(index)">
+                 <td @dblclick="afficherModalMotifDecision(motifDecision.id)">
                    {{motifDecision.libelle || 'Non renseigné'}}</td>
                   
 
@@ -296,13 +296,13 @@ this.formData = {
       this.$('#modificationModal').modal('hide');
     },
    // afficher modal de modification
-    afficherModalMotifDecision(index) {
+    afficherModalMotifDecision(id) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editMotifDecision = this.motifDecisions[index];
+      this.editMotifDecision = this.motifDecisions.find(item => item.id==id);
     },
     //fonction pour vider l'input modification
     

@@ -62,19 +62,19 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(banque, index) in 
+                <tr class="odd gradeX" v-for="banque in 
                partition (banquesFiltre,size)[page]"
                  :key="banque.id">
 
-                  <td @dblclick="afficherModalModifierBanque(index)">
+                  <td @dblclick="afficherModalModifierBanque(banque.id)">
                       {{banque.code_banque || 'Non renseigné'}}</td>
-                 <!-- <td @dblclick="afficherModalModifierBanque(index)">
+                 <!-- <td @dblclick="afficherModalModifierBanque(banque.id)">
                       {{banque.numero_banque || 'Non renseigné'}}</td> -->
-                  <td @dblclick="afficherModalModifierBanque(index)">
+                  <td @dblclick="afficherModalModifierBanque(banque.id)">
                       {{banque.libelle || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierBanque(index)">
+                  <td @dblclick="afficherModalModifierBanque(banque.id)">
                       {{banque.telephone || 'Non renseigné'}}</td>
-                       <td @dblclick="afficherModalModifierBanque(index)">
+                       <td @dblclick="afficherModalModifierBanque(banque.id)">
                       {{banque.situation_geographique || 'Non renseigné'}}</td>
                    
                   <td>
@@ -395,14 +395,14 @@ getColumns() {
          }
      },
 // afficher modal
-afficherModalModifierBanque(index){
+afficherModalModifierBanque(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editBanque = this.banques[index];
+        this.editBanque = this.banques.find(item => item.id==id);
 
 
         

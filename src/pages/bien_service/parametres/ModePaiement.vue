@@ -126,11 +126,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(typeappel, index) in 
+                  <tr class="odd gradeX" v-for="typeappel in 
                 partition (filtre_equipement,size)[page]"
                  :key="typeappel.id">
 
-                 <td @dblclick="afficherModalModifierFamille(index)">
+                 <td @dblclick="afficherModalModifierFamille(typeappel.id)">
                       {{typeappel.libelle || 'Non renseigné'}}</td>
                  
                    
@@ -292,13 +292,13 @@ getColumns() {
     //fonction pour vider l'input ajouter
     
     //afficher modal de modification
-    afficherModalModifierFamille(index) {
+    afficherModalModifierFamille(id) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editTypeAppel = this.modepaiements[index];
+      this.editTypeAppel = this.modepaiements.find(item => item.id==id);
     },
     // fonction pour vider l'input modification
     

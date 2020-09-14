@@ -59,11 +59,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(budgetaire, index) in  partition(localisationsFiltre,size)[page]"
+                <tr class="odd gradeX" v-for="budgetaire in  partition(localisationsFiltre,size)[page]"
                  :key="budgetaire.id">
                   <!-- <td @dblclick="afficherModalModifierBudgetaire(index)">{{budgetaire.code || 'Non renseigné'}}</td> -->
-                  <td @dblclick="afficherModalModifierBudgetaire(index)">{{budgetaire.niveau || 'Non renseigné'}}</td>
-                   <td @dblclick="afficherModalModifierBudgetaire(index)">{{budgetaire.libelle || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierBudgetaire(budgetaire.id)">{{budgetaire.niveau || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierBudgetaire(budgetaire.id)">{{budgetaire.libelle || 'Non renseigné'}}</td>
                   <td>
 
 
@@ -352,14 +352,14 @@ getColumns() {
         }
     },
 // afficher modal
-afficherModalModifierBudgetaire(index){
+afficherModalModifierBudgetaire(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editBudgetaire = this.structures_budgetaires[index];
+        this.editBudgetaire = this.structures_budgetaires.find(item => item.id==id);
 
 
         

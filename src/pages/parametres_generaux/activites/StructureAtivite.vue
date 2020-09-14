@@ -60,11 +60,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(activites, index) in partition (localisationsFiltre,size)[page]"
+                <tr class="odd gradeX" v-for="activites in partition (localisationsFiltre,size)[page]"
                  :key="activites.id">
-                  <td @dblclick="afficherModalModifierBudgetaire(index)">
+                  <td @dblclick="afficherModalModifierBudgetaire(activites.id)">
                       {{activites.niveau || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierBudgetaire(index)">
+                  <td @dblclick="afficherModalModifierBudgetaire(activites.id)">
                       {{activites.libelle || 'Non renseigné'}}</td>
                    
                   <td>
@@ -347,14 +347,14 @@ getColumns() {
         }
     },
 // afficher modal
-afficherModalModifierBudgetaire(index){
+afficherModalModifierBudgetaire(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editBudgetaire = this.structures_activites[index];
+        this.editBudgetaire = this.structures_activites.find(item => item.id==id);
 
 
         

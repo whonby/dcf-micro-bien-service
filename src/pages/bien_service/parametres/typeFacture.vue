@@ -130,9 +130,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(typeFacture, index) in partition (typeFacturesFiltre,size)[page]" :key="typeFacture.id">
+                  <tr class="odd gradeX" v-for="typeFacture in partition (typeFacturesFiltre,size)[page]" :key="typeFacture.id">
                 
-                 <td @dblclick="afficherModalModifierTypefactiure(index)">
+                 <td @dblclick="afficherModalModifierTypefactiure(typeFacture.id)">
                    {{typeFacture.libelle || 'Non renseigné'}}</td>
                   
 
@@ -294,13 +294,13 @@ this.formData = {
     },
     
     // afficher modal de modification
-    afficherModalModifierTypefactiure(index) {
+    afficherModalModifierTypefactiure(id) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editTypefacture = this.typeFactures[index];
+      this.editTypefacture = this.typeFactures.find(item => item.id==id);
     },
     // fonction pour vider l'input modification
     modifierModalTypeFactureLocal(){

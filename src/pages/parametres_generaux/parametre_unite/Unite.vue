@@ -44,11 +44,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(unite, index) 
+                <tr class="odd gradeX" v-for="unite 
                 in localisationsFiltre" :key="unite.id">
-                  <td @dblclick="afficherModalModifierunite(index)">
+                  <td @dblclick="afficherModalModifierunite(unite.id)">
                     {{unite.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierunite(index)">
+                  <td @dblclick="afficherModalModifierunite(unite.id)">
                     {{unite.libelle || 'Non renseigné'}}</td>
                    
                        
@@ -253,14 +253,14 @@ return this.unites.filter((item) => {
         }
     },
 // afficher modal
-afficherModalModifierunite(index){
+afficherModalModifierunite(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editTitre = this.unites[index];
+        this.editTitre = this.unites.find(item =>item.id==id);
 
 
         

@@ -128,9 +128,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(typeActe, index)  in partition (typeActeDepenseFiltre,size)[page]" :key="typeActe.id">
+                  <tr class="odd gradeX" v-for="typeActe  in partition (typeActeDepenseFiltre,size)[page]" :key="typeActe.id">
                 
-                 <td @dblclick="afficherModalModifierTpeActeDepense(index)">
+                 <td @dblclick="afficherModalModifierTpeActeDepense(typeActe.id)">
                    {{typeActe.libelle || 'Non renseigné'}}</td>
                   
 
@@ -286,13 +286,13 @@ partition:partition,
     },
     
     // afficher modal de modification
-    afficherModalModifierTpeActeDepense(index) {
+    afficherModalModifierTpeActeDepense(id) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editTypeActeDepense = this.typeActeDepenses[index];
+      this.editTypeActeDepense = this.typeActeDepenses.find(item => item.id==id);
     },
     // fonction pour vider l'input modification
 

@@ -61,12 +61,12 @@
                 </tr>     
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(role, index) in
+                <tr class="odd gradeX" v-for="role in
                  partition(roleFiltre,size)[page]"
                  :key="role.id">
-                  <td @dblclick="afficherModalModifierType(index)">
+                  <td @dblclick="afficherModalModifierType(role.id)">
                     {{role.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierType(index)">
+                  <td @dblclick="afficherModalModifierType(role.id)">
                     {{role.libelle || 'Non renseigné'}}</td>
                  
                   <td>
@@ -317,14 +317,14 @@ getColumns() {
         }
     },
 // afficher modal                                      
-afficherModalModifierType(index){
+afficherModalModifierType(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editRole = this.role_membrecojo[index];
+        this.editRole = this.role_membrecojo.find(item => item.id==id);
 
 
         

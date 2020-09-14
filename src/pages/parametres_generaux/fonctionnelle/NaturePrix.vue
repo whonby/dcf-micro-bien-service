@@ -45,12 +45,12 @@
                 </tr>     
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(type, index) in
+                <tr class="odd gradeX" v-for="type in
                  typeFiltre"
                  :key="type.id">
-                  <td @dblclick="afficherModalModifierNature(index)">
+                  <td @dblclick="afficherModalModifierNature(type.id)">
                  {{type.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierNature(index)">
+                  <td @dblclick="afficherModalModifierNature(type.id)">
                     {{type.libelle || 'Non renseigné'}}</td>
                  
                   <td>
@@ -253,14 +253,14 @@ return this.Nature_des_prix.filter((item) => {
         }
     },
 // afficher modal                                      
-afficherModalModifierNature(index){
+afficherModalModifierNature(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editNature = this.Nature_des_prix[index];
+        this.editNature = this.Nature_des_prix.find(item =>item.id==id);
 
 
         

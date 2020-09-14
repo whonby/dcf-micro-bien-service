@@ -101,7 +101,7 @@
                                     <td style="width: 20px;height:20px;background: #1285ff" ></td>
                                     <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux d'exécution compris entre 51 et 80 %</td>
                                     <td style="width: 20px;height:20px;background: #9dfd80" ></td>
-                                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux d'exécution compris entre 51 et 80 %</td>
+                                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux d'exécution compris entre 81 et 99 %</td>
                                     <td style="width: 20px;height:20px;background: #209503" ></td>
                                     <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux d'exécution de 100%</td>
                                 </tr>

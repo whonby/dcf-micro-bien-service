@@ -128,9 +128,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(typeAnalyse, index) in partition (typeAnalyseFiltre,size)[page]" :key="typeAnalyse.id">
+                  <tr class="odd gradeX" v-for="typeAnalyse in partition (typeAnalyseFiltre,size)[page]" :key="typeAnalyse.id">
                  
-                 <td @dblclick="afficherModalModifierTypeAnalyse(index)">
+                 <td @dblclick="afficherModalModifierTypeAnalyse(typeAnalyse.id)">
                    {{typeAnalyse.libelle || 'Non renseigné'}}</td>
                   
 
@@ -290,13 +290,13 @@ this.formData = {
     },
     
     // afficher modal de modification
-    afficherModalModifierTypeAnalyse(index) {
+    afficherModalModifierTypeAnalyse(id) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editTypeAnalyse = this.typeAnalyses[index];
+      this.editTypeAnalyse = this.typeAnalyses.find(item => item.id==id);
     },
     // fonction pour vider l'input modification
     modifierModalTypeAnalyseLocal(){

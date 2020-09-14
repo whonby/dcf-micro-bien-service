@@ -62,11 +62,11 @@
                 
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(types, index) 
+                <tr class="odd gradeX" v-for="types 
                 in  partition (localisationsFiltre, size)[page]" :key="types.id">
-                  <td @dblclick="afficherModalModifierTypefinancement(index)">
+                  <td @dblclick="afficherModalModifierTypefinancement(types.id)">
                     {{types.code || 'Non renseigné'}}</td>
-                   <td @dblclick="afficherModalModifierTypefinancement(index)">
+                   <td @dblclick="afficherModalModifierTypefinancement(types.id)">
                     {{types.libelle || 'Non renseigné'}}</td>
                     
                    <!-- <td @dblclick="afficherModalModifierTypefinancement(index)">
@@ -355,14 +355,14 @@ getColspan(){
     },
 
 // afficher modal
-afficherModalModifierTypefinancement(index){
+afficherModalModifierTypefinancement(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editTitre = this.types_financements[index];
+        this.editTitre = this.types_financements.find(item => item.id==id);
 
 
         
