@@ -3,7 +3,7 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 var housecall = require("housecall");
 var queue = housecall({ concurrency: 2, cooldown: 1000 });
 
-
+ajouterImmobilisation
 //////////////////////////*debut action famille */////////////////////////////
 
 // afficher liste famille

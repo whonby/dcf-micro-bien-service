@@ -48,7 +48,7 @@ sommeQuantiteGlobal
         <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)}}</span> <h4>NON COUVERTES</h4></a> </li>
           <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span> <h4>NON COUVERTES</h4></a> </li>
                 <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{((parseFloat(sommeQuantiteCouvert)/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span><h4> COUVERTES</h4></a> </li>
-<li class="bg_lo span3"> <a href="#" style="color:black;"><h4>DE 0% A 25 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{2}}</span><h4> NOMBRES UA</h4></a> </li>
+<li class="bg_lo span3"> <a href="#" style="color:black;"><h4>DE 0% A 25 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{TauxEquipementDe0a25}}</span><h4> NOMBRES UA</h4></a> </li>
     <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>DE 25% A 50 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{89}}</span><h4> NOMBRES UA</h4></a> </li>
     <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>DE 50% A 75 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{20}}</span><h4> NOMBRES UA</h4></a> </li>
     <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>DE 75% A 100 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{45}}</span><h4> NOMBRES UA</h4></a> </li>  
@@ -158,11 +158,10 @@ export default {
                     return item
                 }
             })
-          return colect.filter(items=>this.RecupereQteAffecter(items.id)).length;
+          return colect.filter(items=>this.RecupereQteAffecter(items.id)==1).length;
         }
 
-       return this.uniteAdministratives.filter(items=>items.id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
-
+       return this.uniteAdministratives.filter(items=>this.RecupereQteAffecter(items.id)==1).length;
     },
 
 RecupereQteAffecter() {
@@ -173,7 +172,22 @@ RecupereQteAffecter() {
         }
       };
     },
-
+RecupereQteGlobalPerso() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseActeurDepense.filter(qtreel =>qtreel.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+      
+        }
+      };
+    },
+    RecupereQteGlobalService() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseActeurDepense.filter(qtreel =>qtreel.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+      
+        }
+      };
+    },
  
   
 // quantiteTotalDemande() {

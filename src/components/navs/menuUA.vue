@@ -110,6 +110,11 @@
         
         </ul>
       </li>
+      <li v-if="admin() || dcf()">
+            <router-link :to="{name: 'ImportBudget'}" tag="a">
+              IMPORTATION DU BUDGET
+            </router-link>
+          </li>
         <li>
             <router-link :to="{name: 'budgetGenerals'}" tag="a">
               BUDGET PAR UA
@@ -128,11 +133,7 @@
               DETAIL DE BUDGET PAR UA new
             </router-link>
           </li> -->
-           <li v-if="admin() || dcf()">
-            <router-link :to="{name: 'ImportBudget'}" tag="a">
-              IMPORTATION DU BUDGET
-            </router-link>
-          </li>
+           
           <li class="divider"></li>
            <li v-if="admin() || dcf()">
             <router-link :to="{name: 'Synthesebudg'}" tag="a">

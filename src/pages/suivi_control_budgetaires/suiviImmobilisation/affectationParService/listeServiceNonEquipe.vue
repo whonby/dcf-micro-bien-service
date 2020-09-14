@@ -121,7 +121,7 @@ ua_id
                         <td colspan="2">
                           <label class="control-label">Service</label>
                           
-                              <input    type="text" class="span12"   readonly  :value="afficherLibelleService(formData.serviceua_id)" />                
+                              <input    type="text" class="span12"   readonly  :value="formData.serviceua_id" />                
                              
                         </td>
                 
@@ -503,7 +503,7 @@ afficherLibelleService() {
 
 
 afficheServiceNonEquipe(){
-return this.servicesua.filter(element => element.normeequipement != 0)
+return this.getterplanOrganisationUa.filter(element => element.normeequipement != 0)
 },
       
       exerciceBudgetaireEnCours() {
@@ -815,7 +815,7 @@ afficheIdFonction() {
         keyboard: false
       });
 
-      this.formData = this.afficheServiceNonEquipe[index];
+      this.formData = this.getterplanOrganisationUa[index];
     },
 
     ajouterImmobilisationLocal() {

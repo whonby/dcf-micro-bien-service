@@ -63,9 +63,9 @@
               </thead>
               
               <tbody>
-                <tr class="odd gradeX" v-for="(nature_section, index) in partition (localisationsFiltre,size)[page]" :key="nature_section.id">
-                  <td @dblclick="afficherModalModifierTitre(index)">{{nature_section.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierTitre(index)">{{nature_section.libelle || 'Non renseigné'}}</td>
+                <tr class="odd gradeX" v-for="nature_section in partition (localisationsFiltre,size)[page]" :key="nature_section.id">
+                  <td @dblclick="afficherModalModifierTitre(nature_section.id)">{{nature_section.code || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierTitre(nature_section.id)">{{nature_section.libelle || 'Non renseigné'}}</td>
                   <td>
 
 
@@ -337,14 +337,14 @@ modifiernatureSectionLocal(){
         }
     },
 // afficher modal
-afficherModalModifierTitre(index){
+afficherModalModifierTitre(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editTitre = this.natures_sections[index];
+        this.editTitre = this.natures_sections.find(items=>items.id==id);
 
 
         

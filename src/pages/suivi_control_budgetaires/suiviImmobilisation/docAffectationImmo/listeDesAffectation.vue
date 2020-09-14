@@ -1,4 +1,4 @@
-
+Ajouter Affectation
 <template>
   
    
@@ -1172,6 +1172,7 @@
                              
                         </td>
                         <td>
+                          
                           <label class="control-label">Unite d'administrative</label>
                           
                               <input    type="text"   class="span3" readonly  :value="afficherUniteAdministrative(formData.unite_administrative_id)" />                              
