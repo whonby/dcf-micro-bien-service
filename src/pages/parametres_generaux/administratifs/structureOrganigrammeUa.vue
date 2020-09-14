@@ -346,7 +346,7 @@ afficherModalModifierStructure(id){
          keyboard: false
         });
 
-        this.editOrganigrammeUa = this.getterstructuresOrganisationUa.find(item =>item.id==id);
+        this.editOrganigrammeUa = this.getterstructuresOrganisationUa.find(items=>items.id==id);
 
 
         

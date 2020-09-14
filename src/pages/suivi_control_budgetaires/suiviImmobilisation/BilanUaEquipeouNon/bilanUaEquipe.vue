@@ -58,8 +58,8 @@
                       <th>Affecté</th>
                        <th>Non affecté</th>
                         
-                         <th>Taux équipement</th>
-                          <!-- <th>Variation</th> -->
+                         <th>Taux</th>
+                          <th>Variation</th>
                     
                   </tr>
                 </thead>
@@ -70,6 +70,7 @@
                     :key="service.id"
                   >
                    
+                  <template>
                     <td>{{service.libelle || 'Non renseigné'}}</td>
                       
                       <td style="text-align:center">{{TotalEnStock(service.id) || 0}}</td>
@@ -78,8 +79,30 @@
                       <td style="text-align:center">{{parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)) || 0}}</td>
                       <td style="text-align:center">{{parseFloat((parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))))-parseFloat((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id))))}}</td>
                       <td style="text-align:center">{{(((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100).toFixed(2)|| 0}}%</td>
-                     <!-- <td style="text-align:center">{{service.id || 0}}</td> -->
-
+                    
+                  </template>
+<td>
+                     <button  
+                      v-if="((((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100)) <= 25"  class="btn  btn-danger">
+                <span >0%-25%</span>
+       
+                </button>
+                 <button  
+                      v-else-if="((((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100)) <= 50"  class="btn  btn-info">
+                <span >26%-50%</span>
+       
+                </button>
+                <button  
+                      v-else-if="((((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100)) <=75"  class="btn  btn-warning">
+                <span >51%-75%</span>
+       
+                </button>
+                
+                   <button v-else  class="btn  btn-success" >
+              
+                <span >76%-100%</span>
+                </button>
+                   </td>
                     
                   </tr>
                 </tbody>

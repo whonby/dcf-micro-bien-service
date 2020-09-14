@@ -50,35 +50,35 @@
                   </tr>
                 </thead>
                 <tbody>
-                   <tr class="odd gradeX" v-for="(marche, index) in 
+                   <tr class="odd gradeX" v-for="marche in 
                 afficherlisteMarcheParDroitAccess"
                  :key="marche.id">
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  <td >
                    {{marche.exo_id || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                 <td >
                    {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                 <td >
                    {{ELibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
+                 <td  style="text-align: center">
                    {{ afficherCodeProcedure(marche.procedure_passation_id) || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  <td >
                    {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <td >
                    {{marche.imputation || 'Non renseigné'}}</td>
-                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <!-- <td >
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <td >
                    {{marche.objet || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <td >
                    {{marche.reference_marche || 'Non renseigné'}}</td>
                     <td>
 
                          <span v-if="marche.economique_id == CodeExempte(marche.economique_id) ">Exemptée procedure</span>
                          <span v-else>Ligne à marché</span>
                        </td>
-                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   <!-- <td >
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
+                     <td  style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
                    
                   
@@ -112,7 +112,7 @@
                 </button>
 
                    </td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <td >
                       <span v-if="marche.mvtmarche == 1">Hors PPM</span>
                       <span v-else>PPM</span>
                     </td>
