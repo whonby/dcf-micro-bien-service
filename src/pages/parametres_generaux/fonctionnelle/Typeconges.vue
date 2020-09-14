@@ -49,17 +49,14 @@
                 </tr>     
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(type, index) in
-                 typeFiltre"
+                <tr class="odd gradeX" v-for="type in partition (typeFiltre,size)[page]"
                  :key="type.id">
-                  <td @dblclick="afficherModalModifierType(index)">
+                  <td @dblclick="afficherModalModifierType(type.id)">
                     {{type.libelle || 'Non renseigné'}}</td>
                  
-                  <td @dblclick="afficherModalModifierType(index)">
+                  <td @dblclick="afficherModalModifierType(type.id)">
                     {{type.dure || 'Non renseigné'}}</td>
                   <td>
-
-
 
               <div class="btn-group">
               <button @click.prevent="supprimerTypeconges(type.id)"  class="btn btn-danger ">
@@ -307,14 +304,14 @@ getColumns() {
         }
     },
 // afficher modal                                      
-afficherModalModifierType(index){
+afficherModalModifierType(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editType = this.Typeconges[index];
+        this.editType = this.Typeconges[id];
 
 
         

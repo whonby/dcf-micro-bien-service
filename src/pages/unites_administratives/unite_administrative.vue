@@ -402,19 +402,19 @@
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="(uniteadministrative, index) in partition(filtre_unite_admin,size)[page]"
+                    v-for="uniteadministrative in partition(filtre_unite_admin,size)[page]"
                     :key="uniteadministrative.id"
                   >
                    
                    <!-- <template v-if="uniteadministrative.type_ua_id = type_Unite_admins.id"> -->
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{libelleUa(uniteadministrative.type_ua_id)}}</td>
-                      <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{libelleNatureSection(uniteadministrative.nature_section_id) }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{libelleSection(uniteadministrative.section_id)}}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{libelleServiceGestionnaire(uniteadministrative.servicegest_id) }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{libelleLocalGeographie(uniteadministrative.localisationgeo_id) }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.code }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.libelle }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{ formaterDate(uniteadministrative.date_creation) }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{libelleUa(uniteadministrative.type_ua_id)}}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{libelleNatureSection(uniteadministrative.nature_section_id) }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{libelleSection(uniteadministrative.section_id)}}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{libelleServiceGestionnaire(uniteadministrative.servicegest_id) }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{libelleLocalGeographie(uniteadministrative.localisationgeo_id) }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{uniteadministrative.code }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{uniteadministrative.libelle }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{ formaterDate(uniteadministrative.date_creation) }}</td>
                   
                   <!-- </template> -->
                    <!-- <template v-else>
@@ -838,13 +838,13 @@ this.$("#modificationModal").modal('hide');
       // };
     },
     // afficher modal de modification
-    afficherModalModifierUniteAdministrative(index) {
+    afficherModalModifierUniteAdministrative(id) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editUniteAdministrative = this.jointureUaChapitreSection[index];
+      this.editUniteAdministrative = this.jointureUaChapitreSection.find(items=>items.id==id);
     },
     alert() {
       console.log("ok");

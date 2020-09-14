@@ -43,13 +43,15 @@ sommeQuantiteGlobal
 
 <li class="bg_lb span3"> <a href="#" style="color:black;"><h4>QUANTITES </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{sommeQuantiteGlobal}}</span><h4>GLOBALES</h4></a> </li>
 
-        <li class="bg_lg span3"> <a href="#" style="color:black;"><h4>QUANTITES </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteGlobalNonCouvert)}}</span><h4>COUVERTES</h4>  </a> </li>
+        <li class="bg_lg span3"> <a href="#" style="color:black;"><h4>QUANTITES </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{sommeQuantiteCouvert}}</span><h4>COUVERTES</h4>  </a> </li>
 
-        <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{sommeQuantiteGlobalNonCouvert}}</span> <h4>NON COUVERTES</h4></a> </li>
-          <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{(((parseFloat(sommeQuantiteGlobalNonCouvert))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span> <h4>NON COUVERTES</h4></a> </li>
-                <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteGlobalNonCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span><h4> COUVERTES</h4></a> </li>
-
-      
+        <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)}}</span> <h4>NON COUVERTES</h4></a> </li>
+          <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span> <h4>NON COUVERTES</h4></a> </li>
+                <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{((parseFloat(sommeQuantiteCouvert)/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span><h4> COUVERTES</h4></a> </li>
+<li class="bg_lo span3"> <a href="#" style="color:black;"><h4>DE 0% A 25 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{2}}</span><h4> NOMBRES UA</h4></a> </li>
+    <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>DE 25% A 50 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{89}}</span><h4> NOMBRES UA</h4></a> </li>
+    <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>DE 50% A 75 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{20}}</span><h4> NOMBRES UA</h4></a> </li>
+    <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>DE 75% A 100 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{45}}</span><h4> NOMBRES UA</h4></a> </li>  
                             </ul>
       
       
@@ -136,6 +138,7 @@ export default {
 
       // "nbreArchivageNotes"
     ]),
+     ...mapGetters('parametreGenerauxAdministratif', ['getterplanOrganisationUa']) ,
     admin:admin,
       dcf:dcf,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
@@ -144,25 +147,54 @@ export default {
 
  ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
   
-quantiteTotalDemande() {
-      
-
-
+  TauxEquipementDe0a25() {
+   
         if (!this.admin || !this.dcf){
             let colect=[];
-            this.demandeMateriel.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+            this.uniteAdministratives.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+          return colect.filter(items=>this.RecupereQteAffecter(items.id)).length;
         }
 
-       return this.demandeMateriel.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+       return this.uniteAdministratives.filter(items=>items.id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
 
     },
+
+RecupereQteAffecter() {
+      return id => {
+        if (id != null && id != "") {
+           return this.immobilisations.filter(qtreel =>qtreel.uniteadministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0);
+      
+        }
+      };
+    },
+
+ 
+  
+// quantiteTotalDemande() {
+      
+
+
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.demandeMateriel.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+//             })
+//           return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+//         }
+
+//        return this.demandeMateriel.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+
+//     },
 quantiteTotalPersonnel() {
       
 
@@ -189,8 +221,8 @@ quantiteTotalPersonnel() {
 
         if (!this.admin || !this.dcf){
             let colect=[];
-            this.servicesua.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+            this.getterplanOrganisationUa.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -200,7 +232,7 @@ quantiteTotalPersonnel() {
           
         }
 
-       return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
+       return this.getterplanOrganisationUa.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
           
     },
       nombreDupersonne(){
@@ -245,7 +277,7 @@ quantiteEnStock() {
 // },
 
 sommeQuantiteGlobal(){
-  const val = parseInt(this.quantiteTotalDemande) + parseInt(this.quantiteTotalPersonnel) + parseInt(this.quantiteTotalService);
+  const val = parseInt(this.quantiteTotalPersonnel) + parseInt(this.quantiteTotalService);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -254,49 +286,49 @@ sommeQuantiteGlobal(){
       return 0
 },
 
-quantiteTotalDemandeNonCouvertPersonnel() {
+// quantiteTotalDemandeNonCouvertPersonnel() {
       
 
 
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.demandeMateriel.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-                item.motif != 10
-            })
-          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
-        }
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.demandeMateriel.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+//                 item.motif != 10
+//             })
+//           return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+//         }
 
-       return this.demandeMateriel.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+//        return this.demandeMateriel.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
 
-    },
-// quantiteTotalDemandeNonCouvertPersonnel(){
-//     return this.demandeMateriel.filter(element => element.motif != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
-// },
-quantiteTotalDemandeNonCouvertService() {
+//     },
+// // quantiteTotalDemandeNonCouvertPersonnel(){
+// //     return this.demandeMateriel.filter(element => element.motif != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+// // },
+// quantiteTotalDemandeNonCouvertService() {
       
 
 
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.demandeMateriel.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.demandeMateriel.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
                 
-            })
-          return colect.filter(items=>items.motif_directeur_sce != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
-        }
+//             })
+//           return colect.filter(items=>items.motif_directeur_sce != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+//         }
 
-       return this.demandeMateriel.filter(items=>items.motif_directeur_sce != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+//        return this.demandeMateriel.filter(items=>items.motif_directeur_sce != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
 
-    },
+//     },
 // quantiteTotalDemandeNonCouvertService(){
 //     return this.demandeMateriel.filter(element => element.motif_directeur_sce != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
 // },
@@ -309,20 +341,49 @@ quantiteTotalCouvertPersonnel() {
 
         if (!this.admin || !this.dcf){
             let colect=[];
-            this.acte_personnels.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+            this.immobilisations.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
                 
             })
-            return colect.filter(items=>items.normeequipement == 0).length;
+            return colect.filter(items=>items.fonction_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0);
         }
 
-       return this.acte_personnels.length;
+       return 0;
 
     },
+    quantiteTotalCouvertService() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.immobilisations.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+          return colect.filter(items=>items.fonction_id == null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0);
+        }
+
+       return this.immobilisations.filter(items=>items.fonction_id == null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0);
+
+    },
+    sommeQuantiteCouvert(){
+  const val =  parseInt(this.quantiteTotalCouvertPersonnel)+ parseInt(this.quantiteTotalCouvertService);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+},
 // quantiteTotalCouvertPersonnel(){
 //     return this.acte_personnels.filter(element => element.normeequipement == 0).length;
 // },
@@ -352,28 +413,9 @@ quantiteTotalNonCouvertPersonnel() {
 //  quantiteTotalNonCouvertService(){
 //     return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0); 
 // },
-quantiteTotalNonCouvertService() {
-      
 
-
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.servicesua.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-                
-            })
-          return colect.filter(items=>items.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
-        }
-
-       return this.servicesua.filter(items=>items.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
-
-    },
 sommeQuantiteGlobalNonCouvert(){
-  const val = parseInt(this.quantiteTotalDemandeNonCouvertPersonnel) + parseInt(this.quantiteTotalDemandeNonCouvertService) + parseInt(this.quantiteTotalNonCouvertPersonnel)+ parseInt(this.quantiteTotalNonCouvertService);
+  const val =  parseInt(this.quantiteTotalNonCouvertPersonnel)+ parseInt(this.quantiteTotalNonCouvertService);
       
        if (val) {
         return parseInt(val).toFixed(0);

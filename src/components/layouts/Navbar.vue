@@ -8,13 +8,14 @@
     <MenuActeurDepense v-if="active_el == 2"></MenuActeurDepense>
     <MenuPlanification v-if="active_el ==3"></MenuPlanification>
     <MenuSuivi v-if="active_el == 4"></MenuSuivi>
-    <MenuCatographie v-if="active_el ==5"></MenuCatographie>
+    <MenuComptaMatieres v-if="active_el ==5"></MenuComptaMatieres>
     <MenuControlAxe v-if="active_el ==6"></MenuControlAxe>
     <MenuOperationRapport v-if="active_el ==7"></MenuOperationRapport>
-    <MenuOpRisque v-if="active_el ==8"></MenuOpRisque>
+    <MenuCatographie v-if="active_el ==8"></MenuCatographie>
      <MenuDefaut v-if="active_el ==0"></MenuDefaut>
     <MenuGestionAccess v-if="active_el ==21"></MenuGestionAccess>
     <Search></Search>
+    
     
     
     <!--close-top-serch-->
@@ -32,10 +33,10 @@ import MenuUA from "../components/navs/menuUA";
 import MenuActeurDepense from "../components/navs/MenuActeurDepense";
 import MenuPlanification from "../components/navs/MenuPlanification";
 import MenuSuivi from "../components/navs/MenuSuivi";
-import MenuCatographie from "../components/navs/MenuCatographie";
+import MenuComptaMatieres from "../navs/MenuComptaMatieres";
 import MenuControlAxe from "../components/navs/MenuControlAxe";
 import MenuOperationRapport from "../components/navs/MenuOperationRapport.vue";
-import MenuOpRisque from "../components/navs/MenuOpRisque.vue";
+import MenuCatographie from "../components/navs/MenuCatographie.vue";
 import MenuDefaut from "../components/navs/MenuDefaut.vue";
 import Search from "../components/Search";
 import MenuGestionAccess from "../components/navs/MenuGestionAccess"
@@ -48,10 +49,10 @@ export default {
     MenuActeurDepense,
     MenuPlanification,
     MenuSuivi,
-    MenuCatographie,
+    MenuComptaMatieres,
    MenuControlAxe,
    MenuOperationRapport,
-   MenuOpRisque,
+   MenuCatographie,
    MenuDefaut,
     Search,
     MenuGestionAccess,

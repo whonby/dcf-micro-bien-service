@@ -1,4 +1,5 @@
 import Famille from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Famille.vue";
+import bilanUaEquipeNonEquipe from "../../pages/suivi_control_budgetaires/suiviImmobilisation/BilanUaEquipeouNon/bilanUaEquipe.vue";
 import Service from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Service.vue";
 import Amortissement from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Amortissement.vue";
 import AmortissementService from "../../pages/suivi_control_budgetaires/suiviImmobilisation/AmortissementService.vue";
@@ -37,7 +38,11 @@ import natureEntre from '../../pages/suivi_control_budgetaires/suiviImmobilisati
 import NormeImmo from '../../pages/suivi_control_budgetaires/suiviImmobilisation/GrpeNorme/NormeImmoPrincipal.vue'
 import historisqueAffection from '../../pages/suivi_control_budgetaires/suiviImmobilisation/docAffectationImmo/ficheDemandeEquipement.vue'
 const suiviImmobilisationRoutes = [
-
+  {
+    path: "/bilan-Ua-Equipe-NonEquipe",
+    name: "bilanUaEquipeNonEquipe",
+    component: bilanUaEquipeNonEquipe
+  },
   {
     path: "/AmortissementService/:id",
     name: "AmortissementService",

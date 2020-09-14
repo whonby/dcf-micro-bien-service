@@ -6,12 +6,13 @@ const defaultstate = {
     Panification: 3,
     SuivieControBudget: 4,
     BudgetControl:13,
-    CatograpOpBudget: 5,
+    ComptaMatieres: 5,
     ControlPerfor: 6,
     OpRaportAct: 7,
-    OpDispoContrInter: 8,
+    Catographie: 8,
     rapport:20,
     active_el: 11
 };
+
 
  export default defaultstate

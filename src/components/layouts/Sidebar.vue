@@ -66,6 +66,7 @@
         </li>
 
 
+
         <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==4}">
           <a title="INVESTISSEMENT" href="#">
             <i class="icon icon-th-list"></i>
