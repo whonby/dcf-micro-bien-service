@@ -14,28 +14,30 @@
               <div class="span3">
 
               </div>
-               <div class="span6">
-    dd
+               <div class="span6" align="center">
+                 <img v-bind:src="AffichePhoto(infoUser.id)" name="aboutme" class="avatar2">
+                 <br>
               </div>
                <div class="span3">
 
               </div>
             </div>
+            <br>
            <table class="table table-bordered table-striped">
               <tbody>
                 <tr class="odd gradeX">
                   <td>Nom et prenom</td>
-                  <td>{{detail.name}}</td>
+                  <td>{{infoUser.name}}</td>
                   
                 </tr>
                 <tr class="even gradeC">
                   <td>Email</td>
-                  <td>{{detail.email}}</td>
+                  <td>{{infoUser.email}}</td>
                  
                 </tr>
                 <tr class="odd gradeA">
                   <td>Matricule</td>
-                  <td>{{detail.matricule}}</td>
+                  <td>{{infoUser.matricule}}</td>
         
                 </tr>
             
@@ -55,11 +57,55 @@
 
           <div class="widget-content tab-content"> 
               <div id="tab1" class="tab-pane active">
-              <p>44444 And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment.</p>
+
+                <div class="control-group">
+                  <label class="control-label">Matricule:</label>
+                  <div class="controls">
+                    <input type="text" v-model="editTitre.matricule" class="span" placeholder="" />
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">Nom et prénom:</label>
+                  <div class="controls">
+                    <input type="text" v-model="editTitre.name" class="span" placeholder="" />
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">Email:</label>
+                  <div class="controls">
+                    <input type="text" v-model="editTitre.email" class="span" placeholder="" />
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <a @click.prevent="modifier()" class="btn btn-primary"
+                     href="#">Modifier</a>
+                  </div>
              </div>
-            <div id="tab2" class="tab-pane"> 
-              
-              <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment.</p>
+            <div id="tab2" class="tab-pane">
+
+              <div class="control-group">
+                <label class="control-label">Ancien Password:</label>
+                <div class="controls">
+                  <input type="password" @blur="passwordCrypte" v-model="password_crypte.ancien_password" class="span" placeholder="" />
+                </div>
+                <code v-if="verificationPassword">Le mot de passe entre ne correspond pas</code>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Nouveau Password:</label>
+                <div class="controls">
+                  <input type="password" v-model="changePassword.password" class="span" placeholder="" />
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Comfirme:</label>
+                <div class="controls">
+                  <input type="password" v-model="comfirme_password" class="span" placeholder="" />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <a @click.prevent="modifier()" class="btn btn-primary"
+                   href="#">Changé mot de password</a>
+              </div>
             </div>
             </div>
         </div>
@@ -118,6 +164,14 @@
                 ],
                 liste:[],
                 detail:'',
+              password_crypte:{
+                ancien_password:"",
+              },
+              comfirme_password:"",
+              changePassword:{
+                id:"",
+                password:""
+              },
                 formData : {
                     matricule: "",
                     nom: "",
@@ -147,10 +201,7 @@
                     reference_acte:""
                 },
 
-                editTitre: {
-                    code: "",
-                    libelle: ""
-                }
+                editTitre:''
 
             };
         },
@@ -161,12 +212,12 @@
             let objLinea = localStorage.getItem("Users");
 this.detail = JSON.parse(objLinea);
 console.log(this.detail)
-            //    this.getActeur()
-            //  console.log(this.fonctions)
-            // console.log(this.getFonction)
+          this.editTitre=this.getterUtilisateur.find(item=>item.id==this.detail.id)
+          this.changePassword.id=this.detail.id;
+
         },
         computed: {
- ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser","getterPasswordCrypte"]),
 
 // methode pour maper notre guetter
             ...mapGetters('personnelUA', ["sauvegardePhoto","dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
@@ -188,7 +239,9 @@ console.log(this.detail)
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
- 
+     infoUser(){
+        return this.getterUtilisateur.find(item=>item.id==this.detail.id)
+     },
  AffichePhoto() {
       return id => {
         if (id != null && id != "") {
@@ -213,8 +266,25 @@ afficheNomUtilisateur(){
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
 return objJson.name
-
 },
+ verificationPassword(){
+   if(this.getterPasswordCrypte.length>0){
+     console.log("password saisie")
+     console.log(this.getterPasswordCrypte[0])
+     console.log("password user")
+     console.log(this.editTitre)
+     console.log(this.editTitre.password)
+      if(this.getterPasswordCrypte[0]==this.editTitre.password){
+        console.log("password is true")
+        return false
+      }
+      else{
+        console.log("password is false")
+        return true
+      }
+   }
+   return false;
+ },
 afficheRoleUtilisateur(){
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
@@ -227,18 +297,7 @@ let objJson = JSON.parse(objLinea);
 return objJson.password
 
 },
-afficheMatriculeUtilisateur(){
-  let objLinea = localStorage.getItem("Users");
-let objJson = JSON.parse(objLinea);
-return objJson.matricule
 
-},
-afficheEmailUtilisateur(){
-  let objLinea = localStorage.getItem("Users");
-let objJson = JSON.parse(objLinea);
-return objJson.email
-
-},
  recupererCandidatSel() {
       return id => {
         if (id != null && id != "") {
@@ -250,8 +309,6 @@ return objJson.email
     },
 
     uniteAdmin() {
-      
-
 
         if (!this.admin || !this.dcf){
             let colect=[];
@@ -295,20 +352,20 @@ return objJson.email
     },
        afficheSalairePersonnel() {
       const val = parseFloat(this.afficheMontantActe(this.formData.reference_acte)) / this.NombreMois;
-      
+
        if (val) {
         return parseFloat(val).toFixed(0);
       }
-      
+
       return 0
     },
      NombreMois() {
       const val = parseFloat(this.afficheDure(this.formData.reference_acte)) * parseFloat(0.032854884084021);
-      
+
        if (val) {
         return Math.round(val);
       }
-      
+
       return 0
     },
      afficheDure() {
@@ -364,11 +421,11 @@ afficheIdCandidat() {
         if (id != null && id != "") {
            return this.marches.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.type_marche_id == 4);
 
-     
+
         }
       };
 
-      
+
     },
 
 recupererReferenceActe() {
@@ -442,7 +499,7 @@ afficheFonction() {
     },
 
 exoEnCours() {
-      
+
       const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
 
       if (norme) {
@@ -451,7 +508,7 @@ exoEnCours() {
       return 0
     },
     afficheIdExerciceEnCours() {
-      
+
       const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.annee == this.exoEnCours);
 
       if (norme) {
@@ -511,7 +568,8 @@ exoEnCours() {
             ...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux","allActeurDepense"]),
             ...mapActions('bienService',['supprimerActeEffetFinancier',
           'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
-           
+          ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",
+            "modifierUtilisateur","supprimerUtilisateur","ajouterUtilisateur","modifierChangeProfile","encienPasswordSaisi"]),
            afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
@@ -551,6 +609,15 @@ exoEnCours() {
                 this.$router.push({ name: 'Acteur' })
             },
 // afficher
+          modifier(){
+              let objet={
+                id:this.editTitre.id,
+               name: this.editTitre.name,
+                email: this.editTitre.email,
+                matricule: this.editTitre.matricule,
+              }
+         this.modifierChangeProfile(objet)
+          },
             suprimer(id){
                 this.supprimerActeurs(id)
                 this.allActeurDepense()
@@ -567,8 +634,24 @@ exoEnCours() {
 
             },
 
+          passwordCrypte(){
+              console.log(this.password_crypte)
+            this.encienPasswordSaisi(this.password_crypte)
+          },
+
+
+
 
         }
     };
 </script>
 
+<style>
+.avatar2 {
+  vertical-align: middle;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  box-shadow: 10px 10px 150px #262626;
+}
+</style>

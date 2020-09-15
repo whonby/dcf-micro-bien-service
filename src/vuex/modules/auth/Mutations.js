@@ -219,3 +219,8 @@ export const MODIFIER_EQUIPE_CF= (state, objetModifie) => {
         return type
     })
 }
+
+export const ANCIEN_PASSWORD= (state, nouvel_objet) => {
+    state.ancien_password=[]
+    state.ancien_password.unshift(nouvel_objet)
+}

@@ -13,7 +13,8 @@ const defaultstate = {
     affectation:[],
     uniteAdministrativeByUser:[],
     groupe:[],
-    equipe_cf:[]
+    equipe_cf:[],
+    ancien_password:[],
 
 };
 

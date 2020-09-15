@@ -314,3 +314,18 @@ export function modifierEquipeCF({commit}, formData){
     })
 
 }
+
+
+export function modifierChangeProfile({commit}, formData){
+    apiGuest.put('/update_profile' ,formData).then(response => {
+        commit('MODIFIER_UTILISATEUR', response.data)
+    })
+}
+
+
+export function encienPasswordSaisi({commit}, formData){
+    apiGuest.put('/password_crypte' ,formData).then(response => {
+        commit('ANCIEN_PASSWORD', response.data)
+    })
+
+}

@@ -20,6 +20,7 @@ export const getterUniteAdministrativeByUser=state=>state.uniteAdministrativeByU
 export const getterGroupe =state =>state.groupe
 
 export const getterEquipeCF=state=>state.equipe_cf
+export const getterPasswordCrypte=state=>state.ancien_password
 
 
 
