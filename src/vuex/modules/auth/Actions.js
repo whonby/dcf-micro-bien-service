@@ -324,8 +324,18 @@ export function modifierChangeProfile({commit}, formData){
 
 
 export function encienPasswordSaisi({commit}, formData){
-    apiGuest.put('/password_crypte' ,formData).then(response => {
-        commit('ANCIEN_PASSWORD', response.data)
-    })
+
+
+    apiGuest.post('/login', formData).then(response => {
+        console.log(response)
+        commit('ANCIEN_PASSWORD', false)
+
+
+    }).catch((error) => {
+
+        commit('ANCIEN_PASSWORD', true)
+        console.log(error)
+
+    });
 
 }

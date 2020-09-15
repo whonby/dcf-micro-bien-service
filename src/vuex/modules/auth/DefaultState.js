@@ -14,7 +14,7 @@ const defaultstate = {
     uniteAdministrativeByUser:[],
     groupe:[],
     equipe_cf:[],
-    ancien_password:[],
+    ancien_password:false,
 
 };
 

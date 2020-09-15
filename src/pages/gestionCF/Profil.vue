@@ -86,9 +86,9 @@
               <div class="control-group">
                 <label class="control-label">Ancien Password:</label>
                 <div class="controls">
-                  <input type="password" @blur="passwordCrypte" v-model="password_crypte.ancien_password" class="span" placeholder="" />
+                  <input type="password" @blur="passwordCrypte" v-model="password_crypte.password" class="span" placeholder="" />
                 </div>
-                <code v-if="verificationPassword">Le mot de passe entre ne correspond pas</code>
+                <code v-if="getterPasswordCrypte">Le mot de passe entre ne correspond pas</code>
               </div>
               <div class="control-group">
                 <label class="control-label">Nouveau Password:</label>
@@ -165,7 +165,8 @@
                 liste:[],
                 detail:'',
               password_crypte:{
-                ancien_password:"",
+                  email:"",
+                password:"",
               },
               comfirme_password:"",
               changePassword:{
@@ -214,7 +215,7 @@ this.detail = JSON.parse(objLinea);
 console.log(this.detail)
           this.editTitre=this.getterUtilisateur.find(item=>item.id==this.detail.id)
           this.changePassword.id=this.detail.id;
-
+          this.password_crypte.email=this.detail.email;
         },
         computed: {
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser","getterPasswordCrypte"]),
@@ -267,24 +268,7 @@ afficheNomUtilisateur(){
 let objJson = JSON.parse(objLinea);
 return objJson.name
 },
- verificationPassword(){
-   if(this.getterPasswordCrypte.length>0){
-     console.log("password saisie")
-     console.log(this.getterPasswordCrypte[0])
-     console.log("password user")
-     console.log(this.editTitre)
-     console.log(this.editTitre.password)
-      if(this.getterPasswordCrypte[0]==this.editTitre.password){
-        console.log("password is true")
-        return false
-      }
-      else{
-        console.log("password is false")
-        return true
-      }
-   }
-   return false;
- },
+
 afficheRoleUtilisateur(){
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
@@ -295,7 +279,6 @@ afficheMotPasseUtilisateur(){
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
 return objJson.password
-
 },
 
  recupererCandidatSel() {
@@ -635,7 +618,7 @@ exoEnCours() {
             },
 
           passwordCrypte(){
-              console.log(this.password_crypte)
+              //console.log(this.password_crypte)
             this.encienPasswordSaisi(this.password_crypte)
           },
 
