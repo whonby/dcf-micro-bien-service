@@ -12,7 +12,8 @@ const defaultstate = {
     roles:[],
     affectation:[],
     uniteAdministrativeByUser:[],
-    groupe:[]
+    groupe:[],
+    equipe_cf:[]
 
 };
 

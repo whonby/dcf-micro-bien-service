@@ -2,286 +2,70 @@
 <template>
 
 <div class="container-fluid">
-      <hr />
-      <div class="row-fluid">
-        <div class="span12">
-          <div class="widget-box">
-            <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5> Profil </h5>
-              <!-- <div align="right">
-                Search:
-                <input type="search" placeholder />
-              </div>-->
+    <div class="row-fluid">
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>INFORMATION UTILISATEUR</h5>
+          </div>
+          <div class="widget-content"> 
+
+            <div class="row-fluid">
+              <div class="span3">
+
+              </div>
+               <div class="span6">
+    dd
+              </div>
+               <div class="span3">
+
+              </div>
             </div>
- <div  style="text-align:center">
+           <table class="table table-bordered table-striped">
+              <tbody>
+                <tr class="odd gradeX">
+                  <td>Nom et prenom</td>
+                  <td>{{detail.name}}</td>
+                  
+                </tr>
+                <tr class="even gradeC">
+                  <td>Email</td>
+                  <td>{{detail.email}}</td>
                  
-                  
-                      <img v-bind:src="AffichePhoto(afficheidUtilisateur)" name="aboutme" width="100" height="20" class="img-circle">
-                  
-                </div>
-            <div class="table-responsive text-nowrap">
-              <table class="table table-bordered table-striped">
-                <div class="widget-box">
-                  <div class="widget-title">
-                    <ul class="nav nav-tabs">
-                      <li class="active">
-                        <a data-toggle="tab" href="#tab1">Information utilisateur</a>
-                      </li>
-                       
-                      <li>
-                        <a data-toggle="tab" href="#tab2">Modification</a>
-                      </li>
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab3">Descriptif3</a>
-                      </li> -->
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab3">Autres Information</a>
-                      </li> -->
-                     
-                    </ul>
-                  </div>
-                  <div class="widget-content tab-content">
-                    <!--ongle identification-->
-                    <div id="tab1" class="tab-pane active">
-                      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-     
-            <tr>
-              
-              
-              
-              
-                <td>
-        <div class="control-group">
-                                       <label class="control-label">Matricule</label>
-                                       <div class="controls">
-                                           <input type="text" :value="afficheMatriculeUtilisateur"  placeholder="Saisir le matricule" class="span12"/>
-                                       </div>
-                                   </div>
-   </td>
-              
-              
-                       
-                                                      
-                                                                                                                                                                                     
-              
-              
-                
-               
-           
-           
-                   <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Nom et Prenom:</label>
-                                                    <div class="controls">
-                                                        <input type="text" :value="afficheNomUtilisateur"  placeholder="Saisir nom et prenom" class="span12"/>
-                                                    </div>
-                                                </div>
-                </td>
-             </tr>
-            <tr>
-              <td>
-                     <div class="control-group">
-                                                    <label class="control-label">E-mail:</label>
-                                                    <div class="controls">
-                                                        <input type="text" :value="afficheEmailUtilisateur"  placeholder="Saisir Email" class="span12"/>
-                                                    </div>
-                                                </div>
-                </td>
-          
-          
-                <td>
-                    <div class="control-group">
-                                                    <label class="control-label">Rôle:</label>
-                                                    <div class="controls">
-                                                        <input type="text" :value="afficheRoleUtilisateur"  placeholder="Saisir le rôle" class="span12"/>
-                                                    </div>
-                                                </div>
-                </td>
-               
-                
-                        
-            </tr>
-            <tr>
-               <td colspan="2">
-                     <div class="control-group">
-                                                    <label class="control-label">Mot de passe:</label>
-                                                    <div class="controls">
-                                                        <input type="text" :value="afficheMotPasseUtilisateur"  placeholder="Saisir mot de passe" class="span12"/>
-                                                    </div>
-                                                </div>
-                </td>
-                </tr> 
-               <!-- <td> -->
-                     <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Nom de la mere:</label> -->
-                                                    <!-- <div class="controls"> -->
-                                                        <!-- <input type="text" v-model="formData.nom_mere"  placeholder="Saisir le nom de la mere" class="span12"/> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-                <!-- <td> -->
-                     <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Situation matrimoniale</label> -->
-                                                    <!-- <div class="controls"> -->
-                                                        <!-- <select v-model="formData.situation_matrimonial" class="span12" > -->
-<!--                                                             -->
-<!--                                                             -->
-                                                            <!-- <option v-for="situation in situation_matrimonial" :key="situation.id" :value="situation.id">{{situation.libelle}}</option> -->
-<!--                                                             -->
-                                                        <!-- </select> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-            <!-- </tr> -->
-            </table>
-          </div>
-          
-                    </div>
-                    <!--ongle descriptif-->
-                    <div id="tab2" class="tab-pane">
-                      
-  <div class="modal-body">
-        <table class="table table-bordered table-striped">
-            
-
-              <tr>
-           
-           
-           
-           
-             <td>
-     <div class="control-group">
-                                    <label class="control-label">Matricule</label>
-                                    <div class="controls">
-                                        <input type="text" v-model="formData.matricule"  placeholder="Saisir le matricule" class="span12"/>
-                                    </div>
-                                </div>
-</td>
-           
-           
-                    
-                                                   
-                                                                                                                                                                                  
-           
-           
-             
-            
+                </tr>
+                <tr class="odd gradeA">
+                  <td>Matricule</td>
+                  <td>{{detail.matricule}}</td>
         
-        
-                <td>
-                  <div class="control-group">
-                                                 <label class="control-label">Nom et Prenom:</label>
-                                                 <div class="controls">
-                                                     <input type="text" :value="afficheNomUtilisateur"  placeholder="Saisir nom et prenom" class="span12"/>
-                                                 </div>
-                                             </div>
-             </td>
-          </tr>
-         <tr>
-           <td>
-                  <div class="control-group">
-                                                 <label class="control-label">E-mail:</label>
-                                                 <div class="controls">
-                                                     <input type="text" :value="afficheEmailUtilisateur"  placeholder="Saisir Email" class="span12"/>
-                                                 </div>
-                                             </div>
-             </td>
-       
-       
-             <td>
-                 <div class="control-group">
-                                                 <label class="control-label">Rôle:</label>
-                                                 <div class="controls">
-                                                     <input type="text" :value="afficheRoleUtilisateur"  placeholder="Saisir le rôle" class="span12"/>
-                                                 </div>
-                                             </div>
-             </td>
+                </tr>
             
-             
-                     
-         </tr>
-         <tr>
-            <td colspan="2">
-                  <div class="control-group">
-                                                 <label class="control-label">Ancien mot de passe:</label>
-                                                 <div class="controls">
-                                                     <input type="text" v-model="formData.mot_passe"  placeholder="Saisir mot de passe" class="span12"/>
-                                                 </div>
-                                             </div>
-             </td>
-             </tr> 
-
-
-
-            <tr>
-               
-              <td colspan="2">
-                <div class="control-group">
-                                                    <label class="control-label">Nouveau mot de passe:</label>
-                                                    <div class="controls">
-                                                         <input type="text" v-model="formData.mot_passe"  placeholder="Saisir mot de passe" class="span12"/>
-                                    </div>
-
-                                                </div>
-              </td>
-                
-                    
-
-            </tr>
-             <tr>
-    
-   <td colspan="2">
-     <div class="control-group">
-                                         <label class="control-label">Confirmer nouveau mot de passe:</label>
-                                         <div class="controls">
-                                              <input type="text" v-model="formData.mot_passe"  placeholder="Saisir mot de passe" class="span12"/>
-                         </div>
-                                     </div>
-   </td>
-     
-         
- </tr>
-        </table>
-  </div>
-                    </div>
-                     <!-- <div id="tab3" class="tab-pane">
-                      
-
-                    </div> -->
-                    <!--ongle 3 -->
-                    <!-- <div id="tab3" class="tab-pane">
-                    
-                      
-                    </div> -->
-                  </div>
-                  <br />
-                  <div align="right">
-                    <div class="controls">
-                      <div data-toggle="buttons-checkbox" class="btn-group">
-                        <!-- <a -->
-                          <!-- class="btn btn-primary" -->
-                          <!-- @click.prevent="ajouterTitreLocal" -->
-                        <!-- >Valider</a> -->
-                        <a
-                          @click.prevent="afficherModalListePersonnel()"
-                          class="btn"
-                          href="#"
-                        >Fermer</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </table>
-            </div>
-          </div>
+              </tbody>
+            </table> </div>
         </div>
       </div>
-      <notifications/>
+      <div class="span8">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>MODIFICATION PROFILE</h5>
+          </div>
+           <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" href="#tab1">Modifier mes informations</a></li>
+              <li><a data-toggle="tab" href="#tab2">Change mon mot de passe</a></li>
+            </ul>
+
+          <div class="widget-content tab-content"> 
+              <div id="tab1" class="tab-pane active">
+              <p>44444 And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment.</p>
+             </div>
+            <div id="tab2" class="tab-pane"> 
+              
+              <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment.</p>
+            </div>
+            </div>
+        </div>
+      </div>
     </div>
+</div>
 
 
 
@@ -333,6 +117,7 @@
 
                 ],
                 liste:[],
+                detail:'',
                 formData : {
                     matricule: "",
                     nom: "",
@@ -372,6 +157,10 @@
 
         created() {
             this.allActeurDepense();
+
+            let objLinea = localStorage.getItem("Users");
+this.detail = JSON.parse(objLinea);
+console.log(this.detail)
             //    this.getActeur()
             //  console.log(this.fonctions)
             // console.log(this.getFonction)
@@ -783,4 +572,3 @@ exoEnCours() {
     };
 </script>
 
-verrouilleService

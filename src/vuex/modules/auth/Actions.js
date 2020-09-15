@@ -240,31 +240,6 @@ export function getUniteAdminUser({commit}, objet){
 }
 
 
-
-// export function modifierPhotoProfilUser({ commit, dispatch }, objetModifie, config) {
-//     this.$app.$loading(true)
-//     axios.post('/add_act_nomination', objetModifie, config).then(res => {
-//         this.$app.$notify({
-//             title: 'success',
-//             text: 'Modification effectuer',
-//             type: "success"
-//         });
-//         commit('MODIFIER_PHOTO_PROFIL_USER', res.data)
-//         dispatch('getActeur')
-//         dispatch('getActPersonnel')
-//         dispatch('allActeurDepense')
-//         this.$app.$loading(false)
-//     }).catch(error => {
-//         console.log(error)
-//         this.$app.$loading(false)
-//         this.$app.$notify({
-//             title: 'Erreur',
-//             text: "Erreur c'est produit lors de l'enregistrement",
-//             type: "error"
-//         });
-//     })
-// }logoutUser
-// ajouter type acte personnel
 export function ajouterSauvegardePhoto({ commit}, objetAjoute, config) {
     this.$app.$loading(true)
     axios.post('/users', objetAjoute, config).then(res => {
@@ -287,4 +262,55 @@ export function ajouterSauvegardePhoto({ commit}, objetAjoute, config) {
             type: "error"
         });
     })
+}
+
+
+
+/**
+ * Action equipe cf
+ * **/
+
+export  function  getEquipeCF({commit}) {
+
+    queue.push(() =>  apiGuest.get('/equipe_cf').then(response => {
+            // console.log(response.data)
+            commit('GET_EQUIPE_CF', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+
+export  function ajouterEquipeCF({commit,dispatch}, objetAjoute){
+    asyncLoading(apiGuest.post('/equipe_cf', objetAjoute )).then(res => {
+        if(res.status == 201){
+            dispatch("getUtilisateurs")
+            dispatch("getEquipeCF")
+            commit('AJOUTER_EQUIPE_CF', res.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+
+export function supprimerEquipeCF({commit}, id){
+  this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_EQUIPE_CF', id)
+            apiGuest.delete('/equipe_cf/' + id).then(() => dialog.close() )
+
+        })
+}
+
+export function modifierEquipeCF({commit}, formData){
+    apiGuest.put('/equipe_cf' ,formData).then(response => {
+        commit('MODIFIER_EQUIPE_CF', response.data)
+    })
+
 }

@@ -188,3 +188,34 @@ export const MODIFIER_PHOTO_PROFIL_USER = (state, objetModifie) => {
         return acte_personnel
     })
 }
+
+
+
+/**
+ * Equipe CF
+ * **/
+
+
+export const GET_EQUIPE_CF = (state, tab_type_uas) => {
+    state.equipe_cf = tab_type_uas
+}
+
+
+export const AJOUTER_EQUIPE_CF= (state, nouvel_objet) => {
+    state.equipe_cf.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+
+}
+
+export const SUPPRIMER_EQUIPE_CF= (state, id) => {
+    state.equipe_cf = state.equipe_cf.filter(type => type.id != id)
+}
+
+export const MODIFIER_EQUIPE_CF= (state, objetModifie) => {
+    state.equipe_cf = state.equipe_cf.map(type => {
+        if(type.id == objetModifie.id){
+            type = {...objetModifie}
+        }
+        return type
+    })
+}
