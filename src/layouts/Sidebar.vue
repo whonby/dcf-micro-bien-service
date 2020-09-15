@@ -236,13 +236,13 @@ navigateToGestionMarche(){
  navigateToTableauBord(){
         this.activate(11)
         this.$router.push({
-          name: 'ExerciceBudgetaire'
+          name: 'tableauBordGeneral'
         })
       },
        navigateToParametreGeneraux(){
         this.activate(17)
         this.$router.push({
-          name: 'ExerciceBudgetaire'
+          name: 'tableauBordGeneral'
         })
       },
       

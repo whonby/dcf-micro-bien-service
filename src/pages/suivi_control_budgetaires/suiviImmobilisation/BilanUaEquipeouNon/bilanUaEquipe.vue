@@ -70,7 +70,7 @@
                     :key="service.id"
                   >
                    
-                  <template>
+               
                     <td>{{service.libelle || 'Non renseigné'}}</td>
                       
                       <td style="text-align:center">{{TotalEnStock(service.id) || 0}}</td>
@@ -80,7 +80,7 @@
                       <td style="text-align:center">{{parseFloat((parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))))-parseFloat((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id))))}}</td>
                       <td style="text-align:center">{{(((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100).toFixed(2)|| 0}}%</td>
                     
-                  </template>
+                  
 <td>
                      <button  
                       v-if="((((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100)) <= 25"  class="btn  btn-danger">
