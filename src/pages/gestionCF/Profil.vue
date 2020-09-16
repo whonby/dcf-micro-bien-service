@@ -103,7 +103,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button @click.prevent="modifier()" :disabled="passwordComfirm"  class="btn btn-primary"
+                <button @click.prevent="changePasswordUtilisateur()" :disabled="passwordComfirm"  class="btn btn-primary"
                   >Changé mot de password</button>
               </div>
             </div>
@@ -237,7 +237,10 @@ this.detail = JSON.parse(objLinea);
             ...mapActions('bienService',['supprimerActeEffetFinancier',
           'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
           ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",
-            "modifierUtilisateur","supprimerUtilisateur","ajouterUtilisateur","modifierChangeProfile","encienPasswordSaisi"]),
+            "modifierUtilisateur","supprimerUtilisateur",
+            "ajouterUtilisateur",
+            "modifierChangeProfile",
+            "encienPasswordSaisi","changePasswordUsers"]),
            afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
@@ -293,7 +296,6 @@ this.detail = JSON.parse(objLinea);
                 this.getNbrActeurAcrediteTaux();
             },
             afficherModalModifierTitre(index){
-
                 this.$('#modifierModal').modal({
                     backdrop: 'static',
                     keyboard: false
@@ -307,7 +309,15 @@ this.detail = JSON.parse(objLinea);
             this.encienPasswordSaisi(this.password_crypte)
           },
 
+        changePasswordUtilisateur(){
+          this.changePasswordUsers(this.changePassword)
 
+          this.comfirme_password="",
+              this.changePassword={
+            id:"",
+                password:""
+          }
+        }
 
 
         }

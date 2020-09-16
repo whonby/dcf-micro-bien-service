@@ -322,10 +322,13 @@ export function modifierChangeProfile({commit}, formData){
     })
 }
 
+export function changePasswordUsers({commit}, formData){
+    apiGuest.put('/changer_password' ,formData).then(response => {
+        commit('MODIFIER_UTILISATEUR', response.data)
+    })
+}
 
 export function encienPasswordSaisi({commit}, formData){
-
-
     apiGuest.post('/login', formData).then(response => {
         console.log(response)
         commit('ANCIEN_PASSWORD', false)
