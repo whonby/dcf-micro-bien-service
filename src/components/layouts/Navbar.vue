@@ -1,7 +1,7 @@
  
 <template>
   <div>
-    <!--start-top-serch-->
+  
     <MenuTableau v-if="active_el == 11"></MenuTableau>
     <MenuParamG v-if="active_el == 17"></MenuParamG>
     <MenuUA v-if="active_el == 1"></MenuUA>
@@ -18,7 +18,10 @@
     
     
     
+<<<<<<< HEAD
     <!--close-top-serch-->
+=======
+>>>>>>> 97c5cc717266b7587d63ab068a398b3bf41ddea3
   </div>
 </template>
 

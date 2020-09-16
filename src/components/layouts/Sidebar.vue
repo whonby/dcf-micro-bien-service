@@ -12,20 +12,22 @@
       <!-- <a title=" Dashboard" href="#" class="visible-phone">
         <i class="icon icon-home"></i>Dashboard
       </a> -->
-      <ul style=" background:#1f262d; height: 1000px">
-        <!-- <li :class="{active: active_el == 0 }" @click.prevent="activate(0)">
+      <ul style="background:#1f262d; height: 1000px">
+        <!-- 
+          <li :class="{active: active_el == 0 }" @click.prevent="activate(0)">
           <a href="index.html">
             <i class="icon icon-home"></i>
             <span>Dashboard</span>
           </a>
-        </li> -->
-          <!-- <li class="submenu"> <a href="#">
+        </li>
+         -->
+          <!-- 
+            <li class="submenu"> <a href="#">
             <i class="icon icon-key"></i> <span>UTILISATEURS && ACCES</span>
              </a>
           <ul>
             <li><a href="index2.html">UTILISATEURS</a></li>
             <li><a href="gallery.html">ACCES</a></li>
-          
           </ul>
        </li> -->
         <!-- <li :class="{active: active_el == 11 }" @click.prevent="navigateToTableauBord">
@@ -33,7 +35,8 @@
             <i class="icon icon-signal"></i>
             <span>TABLEAU DE BORD</span>
           </a>
-        </li> -->
+        </li> 
+        -->
         <li :class="{active: active_el == 17 }" @click.prevent="navigateToParametreGeneraux">
           <a title="PARAMETRES GENERAUX" href="#">
             <i class="icon icon-signal"></i>

@@ -13,25 +13,11 @@
         <i class="icon icon-home"></i>Dashboard
       </a> -->
       <ul style=" background:#1f262d; height: 1000px">
-        <!-- <li :class="{active: active_el == 0 }" @click.prevent="activate(0)">
-          <a href="index.html">
-            <i class="icon icon-home"></i>
-            <span>Dashboard</span>
-          </a>
-        </li> -->
-          <!-- <li class="submenu"> <a href="#">
-            <i class="icon icon-key"></i> <span>UTILISATEURS && ACCES</span>
-             </a>
-          <ul>
-            <li><a href="index2.html">UTILISATEURS</a></li>
-            <li><a href="gallery.html">ACCES</a></li>
-          
-          </ul>
-       </li> -->
+
        <li>
   <center>
       <router-link tag="a" :to="{ name: 'photoProfil' }">
-        <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" width="100" height="20" class="img-circle">
+        <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">
         </router-link>
       <h6 style="color:orange;font-size:14px">{{afficheNomUtilisateur}}</h6>
       <span class="user-level" style="color:#ffffff;font-size:14px">({{afficheRoleUtilisateur}})</span>
@@ -109,14 +95,11 @@
             <span class="label label-important"></span>
           </a>
         </li>
-          <!-- <li @click.prevent="navigateToRapport" :class="{active: active_el ==20}">
-          <a title="CARTOGRAPHIE" href="#">
-            <i class=" icon-globe"></i>
-            <span>RAPPORT</span>
-            <span class="label label-important"></span>
+        <li v-if="cf() || dcf()" @click.prevent="navigateGestionEquipe" :class="{active: active_el ==21}">
+          <a href="#">
+            <i class="icon icon-user"></i> <span>MON EQUIPE</span>
           </a>
-        </li> -->
-          <!-- <li @click.prevent="navigateGestionUser" :class="{active: active_el ==21}">
+          <li v-if="admin() || dcf()" @click.prevent="navigateGestionUser" :class="{active: active_el ==21}">
               <a href="#">
               <i class="icon icon-key"></i> <span>UTILISATEURS</span>
           </a>
@@ -137,7 +120,7 @@
 
 <script>
 import {mapGetters, mapState, mapMutations, mapActions } from "vuex";
-import {admin,dcf} from "../Repositories/Auth"
+import {admin,dcf,cf} from "../Repositories/Auth"
 
 export default {
    
@@ -192,6 +175,7 @@ return objJson.id
       ...mapActions('Utilisateurs', ['logoutUser']),
     admin:admin,
     dcf:dcf,
+    cf:cf,
  navigateToCatographieBudgetaire(){
         this.activate(8)
         this.$router.push({
@@ -272,11 +256,25 @@ navigateToGestionMarche(){
           this.$router.push({
               name: 'Groupe'
           })
-      }
+      },
+
+    navigateGestionEquipe(){
+      this.activate(30)
+      this.$router.push({
+        name: 'MonEquipe'
+      })
+    },
 
 
 
   }
 };
 </script>
-
+<style>
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+</style>

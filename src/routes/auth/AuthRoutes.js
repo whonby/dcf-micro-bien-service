@@ -6,6 +6,8 @@ import DetailCF from "../../pages/gestionCF/DetailCF";
 import photoProfil from "../../pages/auth/modifierPhotoProfil/photoProfil";
 import Groupe from  "../../pages/auth/groupe/Groupe.vue"
 import AddGroupe from "../../pages/auth/groupe/AddGroupe.vue"
+
+import MonEquipe from "../../pages/gestionCF/MonEquipe";
 const AuthRoutes = [
     {
         path: '/ajouter-groupe',
@@ -17,7 +19,11 @@ const AuthRoutes = [
         name: "Groupe",
         component: Groupe
     },
-
+    {
+        path: '/mon-equipe',
+        name: "MonEquipe",
+        component: MonEquipe
+    },
     {
         path: '/photo-Profil',
         name: "photoProfil",

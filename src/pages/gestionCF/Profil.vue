@@ -2,279 +2,117 @@
 <template>
 
 <div class="container-fluid">
-      <hr />
-      <div class="row-fluid">
-        <div class="span12">
-          <div class="widget-box">
-            <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5> Profil </h5>
-              <!-- <div align="right">
-                Search:
-                <input type="search" placeholder />
-              </div>-->
+    <div class="row-fluid">
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>INFORMATION UTILISATEUR</h5>
+          </div>
+          <div class="widget-content"> 
+
+            <div class="row-fluid">
+              <div class="span3">
+
+              </div>
+               <div class="span6" align="center">
+                 <img v-bind:src="AffichePhoto(infoUser.id)" name="aboutme" class="avatar2">
+                 <br>
+              </div>
+               <div class="span3">
+
+              </div>
             </div>
- <div  style="text-align:center">
+            <br>
+           <table class="table table-bordered table-striped">
+              <tbody>
+                <tr class="odd gradeX">
+                  <td>Nom et prenom</td>
+                  <td>{{infoUser.name}}</td>
+                  
+                </tr>
+                <tr class="even gradeC">
+                  <td>Email</td>
+                  <td>{{infoUser.email}}</td>
                  
-                  
-                      <img v-bind:src="AffichePhoto(afficheidUtilisateur)" name="aboutme" width="100" height="20" class="img-circle">
-                  
-                </div>
-            <div class="table-responsive text-nowrap">
-              <table class="table table-bordered table-striped">
-                <div class="widget-box">
-                  <div class="widget-title">
-                    <ul class="nav nav-tabs">
-                      <li class="active">
-                        <a data-toggle="tab" href="#tab1">Information utilisateur</a>
-                      </li>
-                       
-                      <li>
-                        <a data-toggle="tab" href="#tab2">Modification</a>
-                      </li>
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab3">Descriptif3</a>
-                      </li> -->
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab3">Autres Information</a>
-                      </li> -->
-                     
-                    </ul>
-                  </div>
-                  <div class="widget-content tab-content">
-                    <!--ongle identification-->
-                    <div id="tab1" class="tab-pane active">
-                      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-     
-            <tr>
-              
-              
-              
-              
-                <td>
-        <div class="control-group">
-                                       <label class="control-label">Matricule</label>
-                                       <div class="controls">
-                                           <input type="text" :value="afficheMatriculeUtilisateur"  placeholder="Saisir le matricule" class="span12" readonly/>
-                                       </div>
-                                   </div>
-   </td>
-
-                   <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Nom et Prénoms:</label>
-                                                    <div class="controls">
-                                                        <input type="text" :value="afficheNomUtilisateur"  placeholder="Saisir nom et prenom" class="span12" readonly/>
-                                                    </div>
-                                                </div>
-                </td>
-             </tr>
-            <tr>
-              <td>
-                     <div class="control-group">
-                                                    <label class="control-label">E-mail:</label>
-                                                    <div class="controls">
-                                                        <input type="text" :value="afficheEmailUtilisateur"  placeholder="Saisir Email" class="span12" readonly/>
-                                                    </div>
-                                                </div>
-                </td>
-          
-          
-                <td>
-                    <div class="control-group">
-                                                    <label class="control-label">Rôle:</label>
-                                                    <div class="controls">
-                                                        <input type="text" :value="afficheRoleUtilisateur"  placeholder="Saisir le rôle" class="span12" readonly/>
-                                                    </div>
-                                                </div>
-                </td>
-               
-                
-                        
-            </tr>
-            <!-- <tr>
-               <td colspan="2">
-                     <div class="control-group">
-                                                    <label class="control-label">Mot de passe:</label>
-                                                    <div class="controls">
-                                                        <input type="text" :value="afficheMotPasseUtilisateur"  placeholder="Saisir le mot de passe" class="span12"/>
-                                                    </div>
-                                                </div>
-                </td>
-                </tr>  -->
-               <!-- <td> -->
-                     <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Nom de la mere:</label> -->
-                                                    <!-- <div class="controls"> -->
-                                                        <!-- <input type="text" v-model="formData.nom_mere"  placeholder="Saisir le nom de la mere" class="span12"/> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-                <!-- <td> -->
-                     <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Situation matrimoniale</label> -->
-                                                    <!-- <div class="controls"> -->
-                                                        <!-- <select v-model="formData.situation_matrimonial" class="span12" > -->
-<!--                                                             -->
-<!--                                                             -->
-                                                            <!-- <option v-for="situation in situation_matrimonial" :key="situation.id" :value="situation.id">{{situation.libelle}}</option> -->
-<!--                                                             -->
-                                                        <!-- </select> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-            <!-- </tr> -->
-            </table>
-          </div>
-          
-                    </div>
-                    <!--ongle descriptif-->
-                    <div id="tab2" class="tab-pane">
-                      
-  <div class="modal-body">
-        <table class="table table-bordered table-striped">
-            
-
-              <tr>
-           
-           
-           
-           
-             <td>
-     <div class="control-group">
-                                    <label class="control-label">Matricule</label>
-                                    <div class="controls">
-                                        <input type="text" :value="afficheMatriculeUtilisateur"  placeholder="Saisir le matricule" class="span12"/>
-                                    </div>
-                                </div>
-</td>
-           
-           
-                    
-                                                   
-                                                                                                                                                                                  
-           
-           
-             
-            
+                </tr>
+                <tr class="odd gradeA">
+                  <td>Matricule</td>
+                  <td>{{infoUser.matricule}}</td>
         
-        
-                <td>
-                  <div class="control-group">
-                                                 <label class="control-label">Nom et Prénoms:</label>
-                                                 <div class="controls">
-                                                     <input type="text" :value="afficheNomUtilisateur"  placeholder="Saisir nom et prenom" class="span12"/>
-                                                 </div>
-                                             </div>
-             </td>
-          </tr>
-         <tr>
-           <td>
-                  <div class="control-group">
-                                                 <label class="control-label">E-mail:</label>
-                                                 <div class="controls">
-                                                     <input type="text" :value="afficheEmailUtilisateur"  placeholder="Saisir Email" class="span12"/>
-                                                 </div>
-                                             </div>
-             </td>
-       
-       
-             <td>
-                 <div class="control-group">
-                                                 <label class="control-label">Rôle:</label>
-                                                 <div class="controls">
-                                                     <input type="text" :value="afficheRoleUtilisateur"  placeholder="Saisir le rôle" class="span12"/>
-                                                 </div>
-                                             </div>
-             </td>
+                </tr>
             
-             
-                     
-         </tr>
-         <tr>
-            <td colspan="">
-                  <div class="control-group">
-                                                 <label class="control-label">Ancien mot de passe:</label>
-                                                <div class="controls">
-                                                    <input type="text" v-model="formData.ancien"  placeholder="Saisir mot de passe" class="span12"/>
-                                                 </div>
-                                            </div>
-             </td>
-             <td colspan="">
-                  <div class="control-group">
-                                                 <label class="control-label">Récuperation Ancien mot de passe:</label>
-                                                <div class="controls">
-                                                    <input type="text" v-model="formData.recuperer"  placeholder="Saisir mot de passe" class="span12"/>
-                                                 </div>
-                                            </div>
-             </td>
-             </tr> 
-
-
-
-            <tr>
-               
-              <td colspan="" v-show="formData.recuperer == formData.ancien ">
-                <div class="control-group">
-                                                    <label class="control-label">Nouveau mot de passe:</label>
-                                                    <div class="controls">
-                                                         <input type="text" v-model="formData.nouveau"  placeholder="Saisir le mot de passe" class="span12"/>
-                                    </div>
-
-                                                </div>
-              </td>
-                
-                   <td v-show="formData.nouveau !=''">
-     <div class="control-group">
-                                         <label class="control-label">Confirmer nouveau mot de passe:</label>
-                                         <div class="controls">
-                                              <input type="text" v-model="formData.password"  placeholder="Saisir mot de passe" class="span12"/>
-                         </div>
-                                     </div>
-   </td>  
-
-            </tr>
-          
-        </table>
-  </div>
-                    </div>
-                     <!-- <div id="tab3" class="tab-pane">
-                      
-
-                    </div> -->
-                    <!--ongle 3 -->
-                    <!-- <div id="tab3" class="tab-pane">
-                    
-                      
-                    </div> -->
-                  </div>
-                  <br />
-                  <div align="right">
-                    <div class="controls">
-                      <div data-toggle="buttons-checkbox" class="btn-group">
-                        <a 
-                          class="btn btn-primary"
-                          @click.prevent="modificationUtilisateur"
-                        >Valider</a>
-                        <a
-                          @click.prevent="afficherModalListePersonnel()"
-                          class="btn"
-                          href="#"
-                        >Fermer</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </table>
-            </div>
-          </div>
+              </tbody>
+            </table> </div>
         </div>
       </div>
-      <notifications/>
+      <div class="span8">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>MODIFICATION PROFILE</h5>
+          </div>
+           <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" href="#tab1">Modifier mes informations</a></li>
+              <li><a data-toggle="tab" href="#tab2">Change mon mot de passe</a></li>
+            </ul>
+
+          <div class="widget-content tab-content"> 
+              <div id="tab1" class="tab-pane active">
+
+                <div class="control-group">
+                  <label class="control-label">Matricule:</label>
+                  <div class="controls">
+                    <input type="text" v-model="editTitre.matricule" class="span" placeholder="" />
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">Nom et prénom:</label>
+                  <div class="controls">
+                    <input type="text" v-model="editTitre.name" class="span" placeholder="" />
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">Email:</label>
+                  <div class="controls">
+                    <input type="text" v-model="editTitre.email" class="span" placeholder="" />
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <a @click.prevent="modifier()" class="btn btn-primary"
+                     href="#">Modifier</a>
+                  </div>
+             </div>
+            <div id="tab2" class="tab-pane">
+
+              <div class="control-group">
+                <label class="control-label">Ancien Password:</label>
+                <div class="controls">
+                  <input type="password" @blur="passwordCrypte" v-model="password_crypte.password" class="span" placeholder="" />
+                </div>
+                <code v-if="getterPasswordCrypte">Le mot de passe entre ne correspond pas</code>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Nouveau Password:</label>
+                <div class="controls">
+                  <input type="password" v-model="changePassword.password" class="span" placeholder="" />
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Comfirme:</label>
+                <div class="controls">
+                  <input type="password" v-model="comfirme_password" class="span" placeholder="" />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button @click.prevent="changePasswordUtilisateur()" :disabled="passwordComfirm"  class="btn btn-primary"
+                  >Changé mot de password</button>
+              </div>
+            </div>
+            </div>
+        </div>
+      </div>
     </div>
+  <div style="color: #fff !important;">{{passwordComfirm}}</div>
+</div>
 
 
 
@@ -326,48 +164,42 @@
 
                 ],
                 liste:[],
-                formData : {
-                   
-                },
+                detail:'',
+              password_crypte:{
+                  email:"",
+                password:"",
+              },
+              comfirme_password:"",
+              changePassword:{
+                id:"",
+                password:""
+              },
 
-                editTitre: {
-                    code: "",
-                    libelle: ""
-                }
+
+                editTitre:''
 
             };
         },
 
         created() {
             this.allActeurDepense();
-            //    this.getActeur()
-            //  console.log(this.fonctions)
-            // console.log(this.getFonction)
+
+            let objLinea = localStorage.getItem("Users");
+this.detail = JSON.parse(objLinea);
+
+          this.editTitre=this.getterUtilisateur.find(item=>item.id==this.detail.id)
+          this.changePassword.id=this.detail.id;
+          this.password_crypte.email=this.detail.email;
         },
         computed: {
- ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation"
+   ,"getterUniteAdministrativeByUser","getterPasswordCrypte"]),
 
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ["sauvegardePhoto","dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
-                "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
-                "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
-            ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
-            ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
-            ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
- ...mapGetters("SuiviImmobilisation", [
-      "services",
-      "normeImmo"
-      
-      
-    ]),
- ...mapGetters("bienService", ["getActeEffetFinancierPersonnaliserContrat","selectionner_candidats","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
-                "modePassations", "procedurePassations","getterDossierCandidats","marches",
-                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
-                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
-                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
-                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
-                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
- 
+            ...mapGetters('personnelUA', ["sauvegardePhoto"]),
+     infoUser(){
+        return this.getterUtilisateur.find(item=>item.id==this.detail.id)
+     },
  AffichePhoto() {
       return id => {
         if (id != null && id != "") {
@@ -380,51 +212,35 @@
         }
       };
     },
-    
- 
-                afficheidUtilisateur(){
-  let objLinea = localStorage.getItem("Users");
-let objJson = JSON.parse(objLinea);
-return objJson.id
 
-},
-afficheNomUtilisateur(){
-  let objLinea = localStorage.getItem("Users");
-let objJson = JSON.parse(objLinea);
-return objJson.name
+          passwordComfirm(){
+  // console.log(this.getterPasswordCrypte)
+      if(!this.getterPasswordCrypte && this.comfirme_password!="" && this.changePassword.password!=""){
+      // console.log("False")
+           if (this.comfirme_password==this.changePassword.password){
+             return false
+           }
+           return true
+      }else {
+        console.log("true")
+        return true
+      }
+          }
 
-},
-afficheRoleUtilisateur(){
-  let objLinea = localStorage.getItem("Users");
-let objJson = JSON.parse(objLinea);
-return objJson.user_role.role.libelle
 
-},
-afficheMotPasseUtilisateur(){
-  let objLinea = localStorage.getItem("Users");
-let objJson = JSON.parse(objLinea);
-return objJson.password
-
-},
-afficheMatriculeUtilisateur(){
-  let objLinea = localStorage.getItem("Users");
-let objJson = JSON.parse(objLinea);
-return objJson.matricule
-
-},
-afficheEmailUtilisateur(){
-  let objLinea = localStorage.getItem("Users");
-let objJson = JSON.parse(objLinea);
-return objJson.email
-
-},
 
 
         },
         methods: {
             // methode pour notre action
-            ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","modifierUtilisateur","supprimerUtilisateur","ajouterUtilisateur"]),
-           
+            ...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux","allActeurDepense"]),
+            ...mapActions('bienService',['supprimerActeEffetFinancier',
+          'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
+          ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",
+            "modifierUtilisateur","supprimerUtilisateur",
+            "ajouterUtilisateur",
+            "modifierChangeProfile",
+            "encienPasswordSaisi","changePasswordUsers"]),
            afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
@@ -434,14 +250,92 @@ return objJson.email
              afficherModalListePersonnel(){
                 this.$router.push({ name: 'Acteur' })
             },
+
            modificationUtilisateur(){
       this.ajouterUtilisateur(this.formData)
      
     },
 
+            // fonction pour vider l'input
+            ajouterTitreLocal () {
+              var nouveauObjet={
+                ...this.formData,
+                exercice_budgetaire_id:this.afficheIdExerciceEnCours,
+                grade_id:this.afficheGrade(this.formData.fonction_id),
+                normeequipement:this.nombreDeFonction(this.formData.fonction_id),
+                historiquenormequipement:this.nombreDeFonction(this.formData.fonction_id),
+                montantequipement:this.montantPourEtreEquipe(this.formData.fonction_id),
+                  nom : this.afficheNomCandidat(this.afficheIdCandidat(this.afficheIdActeurDepense(this.formData.reference_acte))),
+                  prenom :this.affichePreNomCandidat(this.afficheIdCandidat(this.afficheIdActeurDepense(this.formData.reference_acte))),
+                  
+                  salaires:this.afficheSalairePersonnel
+               
+              }
+               let modifierActive=this.acteEffetFinanciers.find(marche=>marche.candidat_personnel_id == this.afficheIdActeurDepense(this.formData.reference_acte))
+    modifierActive.activationD = 1
+    
+   
+    this.modifierActeEffetFinancier(modifierActive)
+                console.log(this.formData)
+                this.ajouterActeur(nouveauObjet)
+                this.getActeur()
+                this.formData = {
+                    code: "",
+                    libelle: ""
+                }
+                this.$router.push({ name: 'Acteur' })
+            },
+// afficher
+          modifier(){
+              let objet={
+                id:this.editTitre.id,
+               name: this.editTitre.name,
+                email: this.editTitre.email,
+                matricule: this.editTitre.matricule,
+              }
+         this.modifierChangeProfile(objet)
+          },
+            suprimer(id){
+                this.supprimerActeurs(id)
+                this.allActeurDepense()
+                this.getActeur()
+                this.getNbrActeurAcrediteTaux();
+            },
+            afficherModalModifierTitre(index){
+                this.$('#modifierModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.editTitre = this.titres[index];
+
+            },
+
+          passwordCrypte(){
+              //console.log(this.password_crypte)
+            this.encienPasswordSaisi(this.password_crypte)
+          },
+
+        changePasswordUtilisateur(){
+          this.changePasswordUsers(this.changePassword)
+
+          this.comfirme_password="",
+              this.changePassword={
+            id:"",
+                password:""
+          }
+        }
 
 
         }
-    };
+    }
 </script>
 
+<style>
+.avatar2 {
+  vertical-align: middle;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  box-shadow: 10px 10px 150px #262626;
+}
+</style>
