@@ -43,15 +43,20 @@ sommeQuantiteGlobal
 
 <li class="bg_lb span3"> <a href="#" style="color:black;"><h4>QUANTITES </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{sommeQuantiteGlobal}}</span><h4>GLOBALES</h4></a> </li>
 
-        <li class="bg_lg span3"> <a href="#" style="color:black;"><h4>QUANTITES </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{sommeQuantiteCouvert}}</span><h4>COUVERTES</h4>  </a> </li>
+        <li class="bg_lb span3"> <a href="#" style="color:black;"><h4>QUANTITES </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{sommeQuantiteCouvert}} / {{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)}}</span><h4>COUVERTES / NON COUVERTES</h4>  </a> </li>
 
-        <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)}}</span> <h4>NON COUVERTES</h4></a> </li>
-          <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span> <h4>NON COUVERTES</h4></a> </li>
-                <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{((parseFloat(sommeQuantiteCouvert)/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span><h4> COUVERTES</h4></a> </li>
-<li class="bg_lo span3"> <a href="#" style="color:black;"><h4>DE 0% A 25 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{TauxEquipementDe0a25}}</span><h4> NOMBRES UA</h4></a> </li>
-    <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>DE 25% A 50 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{TauxEquipementDe25a50}}</span><h4> NOMBRES UA</h4></a> </li>
-    <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>DE 50% A 75 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{20}}</span><h4> NOMBRES UA</h4></a> </li>
-    <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>DE 75% A 100 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{45}}</span><h4> NOMBRES UA</h4></a> </li>  
+        <!-- <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)}}</span> <h4>NON COUVERTES</h4></a> </li> -->
+          <!-- <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span> <h4>NON COUVERTES</h4></a> </li> -->
+                <li class="bg_lb span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{((parseFloat(sommeQuantiteCouvert)/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}% / {{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span><h4> COUVERTES / NON COUVERTES</h4></a> </li>
+<li class="bg_lo span3"> 
+  <router-link :to="{name: 'ListeUaTauxEquipement25'}" tag="a"  style="color:black;">
+  <h4>DE 0% A 25 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{TauxEquipementDe0a25}}</span><h4> NOMBRES UA</h4>
+  </router-link>
+  </li>
+  
+    <li class="bg_lr span3"> <router-link :to="{name: 'ListeUaTauxEquipement50'}" tag="a"  style="color:black;"><h4>DE 25% A 50 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{TauxEquipementDe25a50}}</span><h4> NOMBRES UA</h4>  </router-link> </li>
+    <li class="bg_ly span3"> <router-link :to="{name: 'ListeUaTauxEquipement75'}" tag="a"  style="color:black;"><h4>DE 50% A 75 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{TauxEquipementDe50a75}}</span><h4> NOMBRES UA</h4>  </router-link> </li>
+    <li class="bg_lg span3"> <router-link :to="{name: 'ListeUaTauxEquipement100'}" tag="a"  style="color:black;"><h4>DE 75% A 100 %</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{TauxEquipementDe75a100}}</span><h4> NOMBRES UA</h4>  </router-link> </li>  
                             </ul>
       
       
@@ -93,50 +98,9 @@ export default {
   computed: {
     ...mapGetters("SuiviImmobilisation", [
     
-      "tauxbesoinimmoUa",
-      "SommeEquipementPrevue",
-      "SommeEquipementActuel",
-      
-      "nombreTotalEquipement",
-      "SommeEquipementRealise",
-      "tauxEquipementPrevue",
-      "tauxEquipementRealise",
-      "tauxEquipementPrevue",
-      "SommeTotalBesoin",
-      "trieUaImmobilisation",
-      "equipements",
-      "familles",
-      "articles",
-      "SommeQuantiteNonCouvert",
-      "getAfficheArticle",
-      "getPersoStock",
-      "stockageArticles",
-      "groupUatypeNorme",
-      "groupUaNorme",
-      "groupUaNormeFamille",
-      "normeEquipements",
-      "groupUaNormeEquipe",
-      "groupUaNormeFonction",
-      "getPersoNormeArticle",
-      "services",
-      "besoinEquipement",
-      "afficherDirection",
-      "afficherService",
-      "afficherFonction",
-      "type_Unite_admins",
-      "getPersoListeDesNorme",
-      "normeImmo",
-      "getPersonnaliseNormeEquipement",
-      "afficherDemandeParService",
-      "natureEntres",
-      "EtatImmobilisations",
-      "causeInactivite",
       "immobilisations",
-      "afficheRegroupeEquipementCouvert",
-      "demandeMateriel"
-      // "tauxGlobalEquipement"
-
-      // "nbreArchivageNotes"
+     
+      
     ]),
      ...mapGetters('parametreGenerauxAdministratif', ['getterplanOrganisationUa']) ,
     admin:admin,
@@ -160,11 +124,12 @@ export default {
                     return item
                 }
             })
-          return colect.filter(items=>((((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100)) <= 25).length;
+          return colect.filter(items=>((((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100)<=25)).length;
         }
 
-       return this.uniteAdministratives.filter(items=>((((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100)) <= 25).length;
+       return this.uniteAdministratives.filter(items=>((((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100)<=25)).length;
     },
+   
     TauxEquipementDe25a50() {
    
         if (this.cf){
@@ -176,10 +141,43 @@ export default {
                     return item
                 }
             })
-          return colect.filter(items=>25<((parseFloat((this.QteAffecteCotePersonnel(items.id)+this.QteAffecteCoteService(items.id)))/parseFloat((this.QteRequiseCotePersonnel(items.id)+this.QteRequiseCoteService(items.id))+0.01))*100)<=50).length;
+          return colect.filter(items=>(25<=(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100))).length;
         }
 
-       return this.uniteAdministratives.filter(items=>25<((parseFloat((this.QteAffecteCotePersonnel(items.id)+this.QteAffecteCoteService(items.id)))/parseFloat((this.QteRequiseCotePersonnel(items.id)+this.QteRequiseCoteService(items.id))+0.01))*100)<=50).length;
+       return this.uniteAdministratives.filter(items=>(25<=(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100))).length;
+    },
+    
+    TauxEquipementDe50a75() {
+   
+        if (this.cf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.filter(items=>(50<=(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100))).length;
+        }
+
+       return this.uniteAdministratives.filter(items=>(50<=(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100))).length;
+    },
+    TauxEquipementDe75a100() {
+   
+        if (this.cf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.filter(items=>(75<=(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100))).length;
+        }
+
+       return this.uniteAdministratives.filter(items=>(75<=(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100))).length;
     },
      QteRequiseCoteService() {
       return id => {
