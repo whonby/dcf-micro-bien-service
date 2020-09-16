@@ -18,10 +18,6 @@
     
     
     
-<<<<<<< HEAD
-    <!--close-top-serch-->
-=======
->>>>>>> 97c5cc717266b7587d63ab068a398b3bf41ddea3
   </div>
 </template>
 

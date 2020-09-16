@@ -103,7 +103,7 @@
               <a href="#">
               <i class="icon icon-key"></i> <span>UTILISATEURS</span>
           </a>
-          </li> -->
+          </li> 
           <li @click.prevent="logoutUser()" >
           <a title="DECONNEXION" href="#">
             <i class="icon icon-off"></i>

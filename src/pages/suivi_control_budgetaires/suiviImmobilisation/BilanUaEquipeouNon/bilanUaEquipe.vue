@@ -51,7 +51,7 @@
                 <thead>
                   <tr>
                    
-                    <th>Libellé</th>
+                    <th>Unité Administrative</th>
                     <th>Total Stock</th>
                      <th>Restant en Stock</th>
                       <th>Qté Réquise</th>

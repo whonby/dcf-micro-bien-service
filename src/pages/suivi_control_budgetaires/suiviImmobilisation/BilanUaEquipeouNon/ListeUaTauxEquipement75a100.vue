@@ -26,11 +26,11 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Services</h5>
-              <div align="right">
+              <h5>TAUX EQUIPEMENT COMPRIS ENTRE 75% ET 100%</h5>
+              <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
-              </div>
+              </div> -->
             </div>
 
             <div class="widget-content nopadding">
@@ -53,12 +53,13 @@
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="service in ListeTauxEquipementDe50a75"
+                    v-for="service in filtre_unite_admin"
                     :key="service.id"
                   >
                    
                
-                    <td>{{service.libelle || 'Non renseigné'}}</td>
+                   <template v-if="75<((((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100))">
+                      <td>{{service.libelle || 'Non renseigné'}}</td>
                       
                       <td style="text-align:center">{{TotalEnStock(service.id) || 0}}</td>
                       <td style="text-align:center">{{RestantEnStock(service.id) || 0}}</td>
@@ -66,17 +67,14 @@
                       <td style="text-align:center">{{parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)) || 0}}</td>
                       <td style="text-align:center">{{parseFloat((parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))))-parseFloat((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id))))}}</td>
                       <td style="text-align:center">{{(((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100).toFixed(2)|| 0}}%</td>
-                    
-                  
 <td>
-                     <button  
-                        class="btn  btn-danger">
-                <span >?</span>
-       
-                </button>
-                 
+                      <router-link :to="{ name: 'detailTauxEquipement', params: { id: service.id }}"
+                class="btn btn-default " title="detail taux equipement">
+                  <span class=""><i class=" icon-folder-open"></i></span>
+                    </router-link>
+                
                    </td>
-                    
+                   </template>
                   </tr>
                 </tbody>
               </table>
@@ -167,21 +165,22 @@ json_fields: {
       "modifierService",
       "supprimerService"
     ]),
-    ListeTauxEquipementDe75a100() {
-   
-        if (this.cf){
+    filtre_unite_admin() {
+        
+        if(this.noDCfNoAdmin){
             let colect=[];
+            
             this.uniteAdministratives.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-          return colect.filter(items=>(75<(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100)));
+            return colect
         }
+        return this.uniteAdministratives
 
-       return this.uniteAdministratives.filter(items=>(75<(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100)));
     },
      QteRequiseCoteService() {
       return id => {

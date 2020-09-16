@@ -1,13 +1,26 @@
 
 <template>
   <div>
+
+    <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
+    <!-- End Page Header -->
+    <!-- Default Light Table -->
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          
-                                    <!-- <div>
-                                 <download-excel
+           <!-- <download-excel -->
+            <!-- class="btn btn-default pull-right" -->
+            <!-- style="cursor:pointer;" -->
+            <!-- :fields="json_fields" -->
+            <!-- title="Liste des services" -->
+            <!-- :data="filtre_service" -->
+            <!-- name="Liste des services" -->
+          <!-- > -->
+            <!-- <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i> -->
+          <!-- </download-excel> -->
+                                    <div>
+                                 <!-- <download-excel
                                      class="btn btn-success pull-right"
                                      style="cursor:pointer;"
                                        :fields = "json_fields"
@@ -16,21 +29,21 @@
                                        worksheet = "entreprise non sanctionner"
                                      :data="filtre_service">
              <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
-                                          </download-excel> 
-                <div  align="right" style="cursor:pointer;">
+                                          </download-excel>  -->
+                <!-- <div  align="right" style="cursor:pointer;">
     <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
-        </div> 
-                              </div> -->
+        </div>  -->
+                              </div>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Services</h5>
-              <div align="right">
+              <h5>TAUX EQUIPEMENT COMPRIS ENTRE 25% ET 50%</h5>
+              <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
-              </div>
+              </div> -->
             </div>
 
             <div class="widget-content nopadding">
@@ -53,12 +66,13 @@
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="service in ListeTauxEquipementDe25a50"
+                    v-for="service in filtre_unite_admin"
                     :key="service.id"
                   >
                    
                
-                    <td>{{service.libelle || 'Non renseigné'}}</td>
+                   <template v-if="25<((((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100))">
+                      <td>{{service.libelle || 'Non renseigné'}}</td>
                       
                       <td style="text-align:center">{{TotalEnStock(service.id) || 0}}</td>
                       <td style="text-align:center">{{RestantEnStock(service.id) || 0}}</td>
@@ -66,16 +80,15 @@
                       <td style="text-align:center">{{parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)) || 0}}</td>
                       <td style="text-align:center">{{parseFloat((parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))))-parseFloat((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id))))}}</td>
                       <td style="text-align:center">{{(((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100).toFixed(2)|| 0}}%</td>
-                    
-                  
 <td>
-                     <button  
-                        class="btn  btn-danger">
-                <span >?</span>
-       
-                </button>
-                 
+                      <router-link :to="{ name: 'detailTauxEquipement', params: { id: service.id }}"
+                class="btn btn-default " title="detail taux equipement">
+                  <span class=""><i class=" icon-folder-open"></i></span>
+                    </router-link>
+                
                    </td>
+                   </template>
+                    
                     
                   </tr>
                 </tbody>
@@ -101,19 +114,14 @@
       </div>
     </div>
 
-    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterService" main-icon="apps" bg-color="green"></fab>
-     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterService()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-<notifications  /> -->
  </div>
 </template>
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import {admin,dcf,cf} from "../../../../Repositories/Auth"
+import {admin,dcf,cf,noDCfNoAdmin} from "../../../../Repositories/Auth"
 //   import {partition} from '../../../../src/Repositories/Repository'
-// import jsPDF from 'jspdf'
-// import 'jspdf-autotable'
+
 export default {
   name:'service',
   data() {
@@ -147,54 +155,36 @@ json_fields: {
   },
 
   computed: {
-   ...mapGetters("SuiviImmobilisation", ["immobilisations","getPersoStock"]),
+    ...mapGetters("SuiviImmobilisation", ["services"]),
+   ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
+     ...mapGetters('personnelUA', ["personnaliseActeurDepense"]),
+    
      ...mapGetters('parametreGenerauxAdministratif', ['getterplanOrganisationUa']) ,
-    admin:admin,
+     ...mapGetters("SuiviImmobilisation", ["immobilisations","getPersoStock"]),
+     admin:admin,
       dcf:dcf,
-      cf:cf,
- ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-
-    ...mapGetters("personnelUA", ["personnaliseActeurDepense","acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
-
- ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
-  
-
-  },
-  methods: {
-    ...mapActions("SuiviImmobilisation", [
-      "getAllService",
-      "ajouterService",
-      "modifierService",
-      "supprimerService"
-    ]),
-    ListeTauxEquipementDe25a50() {
+        cf:cf,
+        noDCfNoAdmin:noDCfNoAdmin,
+      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
    
-        if (this.cf){
+     filtre_unite_admin() {
+        
+        if(this.noDCfNoAdmin){
             let colect=[];
+            
             this.uniteAdministratives.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-          return colect.filter(items=>(25<(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100)));
+            return colect
         }
+        return this.uniteAdministratives
 
-       return this.uniteAdministratives.filter(items=>(25<(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100)));
     },
-     QteRequiseCoteService() {
-      return id => {
-    if(id !=""){
-  
-        
-    return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.serviceua_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0); 
-      
-    }
-    return 0
-  }
-    },
-
+    
      RestantEnStock() {
       return id => {
     if(id !=""){
@@ -250,21 +240,28 @@ json_fields: {
     return 0
   }
     },
-  //   QteRequiseCoteService() {
-  //     return id => {
-  //   if(id !=""){
+    QteRequiseCoteService() {
+      return id => {
+    if(id !=""){
   
         
-  //   return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.serviceua_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0); 
+    return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.serviceua_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0); 
       
-  //   }
-  //   return 0
-  // }
-  //   },
-   
-    ExporterEnExel(){
-      this.$refs.excel.click()
     }
+    return 0
+  }
+    },
+  },
+  methods: {
+    ...mapActions("SuiviImmobilisation", [
+      "getAllService",
+      "ajouterService",
+      "modifierService",
+      "supprimerService"
+    ]),
+
+ 
+
   },
 
   created(){
