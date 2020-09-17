@@ -46,6 +46,7 @@
                        <th>Non affecté</th>
                         
                          <th>Taux</th>
+                         <th>Montant A Couvert</th>
                           <th>Detail</th>
                     
                   </tr>
@@ -58,14 +59,15 @@
                   >
                    
               <template v-if="50<((((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100))">
-                      <td>{{service.libelle || 'Non renseigné'}}</td>
+                      <td style="font-size:14px;font-weight:bold;">{{service.libelle || 'Non renseigné'}}</td>
                       
-                      <td style="text-align:center">{{TotalEnStock(service.id) || 0}}</td>
-                      <td style="text-align:center">{{RestantEnStock(service.id) || 0}}</td>
-                      <td style="text-align:center">{{parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id)) || 0}}</td>
-                      <td style="text-align:center">{{parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)) || 0}}</td>
-                      <td style="text-align:center">{{parseFloat((parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))))-parseFloat((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id))))}}</td>
-                      <td style="text-align:center">{{(((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100).toFixed(2)|| 0}}%</td>
+                      <td style="text-align: center;font-size:14px;font-weight:bold;">{{TotalEnStock(service.id) || 0}}</td>
+                      <td style="text-align: center;font-size:14px;font-weight:bold;">{{RestantEnStock(service.id) || 0}}</td>
+                      <td style="text-align: center;font-size:14px;font-weight:bold;">{{parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id)) || 0}}</td>
+                      <td style="text-align: center;font-size:14px;font-weight:bold;">{{parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)) || 0}}</td>
+                      <td style="text-align: center;font-size:14px;font-weight:bold;">{{parseFloat((parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))))-parseFloat((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id))))}}</td>
+                      <td style="text-align: center;font-size:14px;font-weight:bold;">{{(((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100).toFixed(2)|| 0}}%</td>
+<td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(parseFloat(MONTANTACouvertCotePersonnel(service.id))+parseFloat(MONTANTACouvertCoteService(service.id)))) || 0}}</td>
 <td>
                       <router-link :to="{ name: 'detailTauxEquipement', params: { id: service.id }}"
                 class="btn btn-default " title="detail taux equipement">
@@ -109,7 +111,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import {admin,dcf,cf} from "../../../../Repositories/Auth"
-//   import {partition} from '../../../../src/Repositories/Repository'
+import {formatageSomme} from '../../../../../src/Repositories/Repository'
 // import jsPDF from 'jspdf'
 // import 'jspdf-autotable'
 export default {
@@ -156,16 +158,7 @@ json_fields: {
 
  ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
   
-
-  },
-  methods: {
-    ...mapActions("SuiviImmobilisation", [
-      "getAllService",
-      "ajouterService",
-      "modifierService",
-      "supprimerService"
-    ]),
-    filtre_unite_admin() {
+filtre_unite_admin() {
         
         if(this.noDCfNoAdmin){
             let colect=[];
@@ -227,12 +220,34 @@ json_fields: {
     return 0
   }
     },
-    QteAffecteCotePersonnel() {
+    MONTANTACouvertCoteService() {
       return id => {
     if(id !=""){
   
         
-    return this.immobilisations.filter(element => element.uniteadministrative_id == id && element.fonction_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0); 
+    return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.serviceua_id != null && element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0); 
+      
+    }
+    return 0
+  }
+    },
+    MONTANTACouvertCotePersonnel() {
+      return id => {
+    if(id !=""){
+  
+        
+    return this.personnaliseActeurDepense.filter(element => element.unite_administrative_id == id && element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0); 
+      
+    }
+    return 0
+  }
+    },
+     QteAffecteCotePersonnel() {
+      return id => {
+    if(id !=""){
+  
+        
+    return this.personnaliseActeurDepense.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0); 
       
     }
     return 0
@@ -243,12 +258,22 @@ json_fields: {
     if(id !=""){
   
         
-    return this.immobilisations.filter(element => element.uniteadministrative_id == id && element.fonction_id == null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0); 
+    return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.serviceua_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0); 
       
     }
     return 0
   }
     },
+  },
+  methods: {
+    ...mapActions("SuiviImmobilisation", [
+      "getAllService",
+      "ajouterService",
+      "modifierService",
+      "supprimerService"
+    ]),
+    formatageSomme:formatageSomme,
+    
   //   QteRequiseCoteService() {
   //     return id => {
   //   if(id !=""){
@@ -268,7 +293,8 @@ json_fields: {
 
   created(){
     console.log(this.$refs)
-  }
+  },
+
 };
 </script>
 

@@ -13,7 +13,7 @@
                       <th>Qté Réquise</th>
                       <th>Affecté</th>
                        <th>Non affecté</th>
-                        
+                        <th>Montant a Couvert</th>
                          <th>Taux</th>
                           
                     
@@ -26,14 +26,15 @@
                   >
                    
                
-                    <td>{{service.libelle || 'Non renseigné'}}</td>
+                    <td style="font-size:14px;font-weight:bold;">{{service.libelle || 'Non renseigné'}}</td>
                       
-                      <td style="text-align:center">{{TotalEnStock(service.id) || 0}}</td>
-                      <td style="text-align:center">{{RestantEnStock(service.id) || 0}}</td>
-                      <td style="text-align:center">{{parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id)) || 0}}</td>
-                      <td style="text-align:center">{{parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)) || 0}}</td>
-                      <td style="text-align:center">{{parseFloat((parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))))-parseFloat((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id))))}}</td>
-                      <td style="text-align:center">{{(((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100).toFixed(2)|| 0}}%</td>
+                      <td style="text-align: center;font-size:14px;font-weight:bold;">{{TotalEnStock(service.id) || 0}}</td>
+                      <td style="text-align: center;font-size:14px;font-weight:bold;">{{RestantEnStock(service.id) || 0}}</td>
+                      <td style="text-align: center;font-size:14px;font-weight:bold;">{{parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id)) || 0}}</td>
+                      <td style="text-align: center;font-size:14px;font-weight:bold;">{{parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)) || 0}}</td>
+                      <td style="text-align: center;font-size:14px;font-weight:bold;">{{parseFloat((parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))))-parseFloat((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id))))}}</td>
+                      <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(parseFloat(MONTANTACouvertCotePersonnel(service.id))+parseFloat(MONTANTACouvertCoteService(service.id)))) || 0}}</td>
+                      <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{(((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100).toFixed(2)|| 0}}%</td>
                     
                   
 
@@ -77,6 +78,7 @@
                     <th >Quantité requise</th>
                      <th >Quantité couverte</th>
                      <th >Quantité non couverte</th>
+                     <th >Montant A Paye</th>
                     <th>Taux</th>
                   </tr>
                 </thead>
@@ -90,34 +92,36 @@
    
                     
                     <td
-                      
+                      style="font-size:14px;font-weight:bold;"
                     >{{afficherActeurDepense(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td> 
                     <td
-                      
+                      style="font-size:12px;font-weight:bold;"
                     >{{afficherUniteAdministrative(BesoinImmo.unite_administrative_id) || 'Non renseigné'}}</td> 
                      <td
-                       
+                       style="font-size:12px;font-weight:bold;"
                     >{{afficheUniteZone(BesoinImmo.uniteZone_id)  || 'Non renseigné'}}</td> 
                     <td
-                      
+                      style="font-size:12px;font-weight:bold;"
                     >{{afficheServiceLibelle(afficheService(BesoinImmo.service_id)) || 'Non renseigné'}}</td>
                   
-                      <td 
+                      <td style="font-size:12px;font-weight:bold;"
                       
                     >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
-                      <td style="text-align: center;"
+                      <td style="text-align: center;font-size:14px;font-weight:bold;"
                       
                     >{{BesoinImmo.historiquenormequipement || 0}}</td>
                     <td 
-                      style="text-align: center;"
+                      style="text-align: center;font-size:14px;font-weight:bold;"
                     >{{BesoinImmo.normeequipement || 0}}</td>
                    
                      <td 
-                      style="text-align: center;"
+                     style="text-align: center;font-size:14px;font-weight:bold;"
                     >{{(BesoinImmo.historiquenormequipement) - (BesoinImmo.normeequipement) || 0}}</td>
-                   
+                   <td 
+                      style="text-align: center;font-size:14px;font-weight:bold;"
+                    >{{formatageSomme(parseFloat(BesoinImmo.montantequipement)) || 0}}</td>
                       <td
-                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                      style="text-align: center;font-size:14px;font-weight:bold;"
                     >{{((((BesoinImmo.historiquenormequipement) - (BesoinImmo.normeequipement))/(BesoinImmo.historiquenormequipement))*100).toFixed(2) || 0 }}%</td> 
                     
                      
@@ -125,7 +129,18 @@
                     
 
                   </tr>
-                 
+                 <tr>
+                   <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td style="text-align: center;font-size:14px;font-weight:bold;"></td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;"></td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;"></td>
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">Total</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(MontantResteAPayeCotePersonnel(service.id)))}}</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;"></td>
+                 </tr>
                  
                 </tbody>
               </table>
@@ -146,7 +161,7 @@
                         <th >Quantité requise</th>
                      <th >Quantité couverte</th>
                      <th >Quantité non couverte</th>
-                     <!-- <th >Prix unitaire(coût moyen)</th> -->
+                     <th >Montant A Paye</th>
                        <th >Taux</th>
                          
                     </tr>
@@ -155,25 +170,37 @@
                     <tr class="odd gradeX" v-for="affectService in tauxServiceEquipe(service.id)"
                         :key="affectService.id">
                         
-                              <td >
+                              <td style="font-size:12px;font-weight:bold;">
                             {{afficherUniteAdministrative(affectService.ua_id) || 'Non renseigné'}}</td>
-                            <td >
+                            <td style="font-size:12px;font-weight:bold;">
                             {{afficherLibelleService(affectService.serviceua_id) || 'Non renseigné'}}</td>
                      
-                      <td style="text-align: center;" >
+                      <td style="text-align: center;font-size:14px;font-weight:bold;" >
                             {{affectService.historiqueequipement || 0 }}</td>
                              
                             <td 
-                      style="text-align: center;"
+                      style="text-align: center;font-size:14px;font-weight:bold;"
                     >{{(affectService.historiqueequipement) - (affectService.normeequipement) || 0}}</td> 
                             <td 
-                      style="text-align: center;"
+                      style="text-align: center;font-size:14px;font-weight:bold;"
                     >{{affectService.normeequipement || 0}}</td>
+                     <td 
+                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                    >{{formatageSomme(parseFloat(affectService.montantequipement)) || 0}}</td>
                     <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
                     >{{((((affectService.historiqueequipement) - (affectService.normeequipement))/(affectService.historiqueequipement))*100).toFixed(2) || 0 }}%</td> 
                     </tr>
-                   
+                   <tr>
+                   <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                 
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">Total</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(MontantResteAPayeCoteService(service.id)))}}</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;"></td>
+                 </tr>
                  
                     </tbody>
                 </table>
@@ -195,6 +222,7 @@
 <script>
 import { mapGetters } from "vuex";
 import moment from "moment";
+import {formatageSomme} from '../../../../../src/Repositories/Repository'
 // import { formatageSomme } from "../../../../Repositories/Repository";
 // import {admin,dcf,noDCfNoAdmin} from "../../../../Repositories/Auth"
 
@@ -224,6 +252,50 @@ created() {
      ...mapGetters("SuiviImmobilisation", ["immobilisations","getPersoStock"]),
     
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+  MONTANTACouvertCoteService() {
+      return id => {
+    if(id !=""){
+  
+        
+    return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.serviceua_id != null && element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0); 
+      
+    }
+    return 0
+  }
+    },
+    MONTANTACouvertCotePersonnel() {
+      return id => {
+    if(id !=""){
+  
+        
+    return this.personnaliseActeurDepense.filter(element => element.unite_administrative_id == id && element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0); 
+      
+    }
+    return 0
+  }
+    },
+    MontantResteAPayeCotePersonnel() {
+      return id => {
+    if(id !=""){
+  
+        
+    return this.personnaliseActeurDepense.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0); 
+      
+    }
+    return 0
+  }
+    },
+    MontantResteAPayeCoteService() {
+      return id => {
+    if(id !=""){
+  
+        
+    return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.serviceua_id != null && element.fonction_id == null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0); 
+      
+    }
+    return 0
+  }
+    },
   afficherLibelleService() {
       return id => {
         if (id != null && id != "") {
@@ -326,7 +398,7 @@ tauxServiceEquipe() {
     if(id !=""){
   
         
-    return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.normeequipement != null); 
+    return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.serviceua_id != null && element.fonction_id == null); 
       
     }
     return 0
@@ -372,12 +444,12 @@ tauxServiceEquipe() {
     return 0
   }
     },
-    QteAffecteCotePersonnel() {
+     QteAffecteCotePersonnel() {
       return id => {
     if(id !=""){
   
         
-    return this.immobilisations.filter(element => element.uniteadministrative_id == id && element.fonction_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0); 
+    return this.acte_personnels.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0); 
       
     }
     return 0
@@ -388,7 +460,7 @@ tauxServiceEquipe() {
     if(id !=""){
   
         
-    return this.immobilisations.filter(element => element.uniteadministrative_id == id && element.fonction_id == null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0); 
+    return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.serviceua_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0); 
       
     }
     return 0
@@ -415,7 +487,7 @@ tauxServiceEquipe() {
       service => service.id == this.$route.params.id
     );
     },
-    
+    formatageSomme:formatageSomme,
     formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
     },

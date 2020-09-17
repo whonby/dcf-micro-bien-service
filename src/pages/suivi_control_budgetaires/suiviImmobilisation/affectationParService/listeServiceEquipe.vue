@@ -185,11 +185,11 @@ search:""
                 }
                   
             })
-          return colect.filter(items=>items.normeequipement == 0);
+          return colect.filter(items=>items.normeequipement == 0 && items.serviceua_id != null && items.fonction_id == null);
           
         }
 
-       return this.getterplanOrganisationUa.filter(element=>element.normeequipement == 0);
+       return this.getterplanOrganisationUa.filter(items=>items.normeequipement == 0 && items.serviceua_id != null && items.fonction_id == null);
 
     },
 //        ServiceEquipe (){

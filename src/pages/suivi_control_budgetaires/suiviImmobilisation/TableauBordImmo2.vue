@@ -201,12 +201,12 @@ QteRequiseCotePersonnel() {
     return 0
   }
     },
-QteAffecteCotePersonnel() {
+ QteAffecteCotePersonnel() {
       return id => {
     if(id !=""){
   
         
-    return this.immobilisations.filter(element => element.uniteadministrative_id == id && element.fonction_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0); 
+    return this.acte_personnels.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0); 
       
     }
     return 0
@@ -217,13 +217,12 @@ QteAffecteCotePersonnel() {
     if(id !=""){
   
         
-    return this.immobilisations.filter(element => element.uniteadministrative_id == id && element.fonction_id == null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0); 
+    return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.serviceua_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0); 
       
     }
     return 0
   }
     },
-
  
   
 // quantiteTotalDemande() {
