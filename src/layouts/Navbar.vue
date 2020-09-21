@@ -87,7 +87,7 @@ export default {
 
     ...mapActions('parametreGenerauxAdministratif',
      ['getExercicesBudgetaires', 'getTitres', 'getTaux',
-    'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 'getStructurePays', 'getPlanPays','getPlanOrganigrammeUa','getStructureOrganigrammeUa', 
+    'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 'getStructurePays', 'getPlanPays','getPlanOrganigrammeUa',
     'getStructureAdministrative', 'getServiceGestionnaire', 'getStructureGeographique',
     'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions"]),
 
@@ -95,7 +95,7 @@ export default {
       // "getAllTypeTextes",
       "getAllUniteAdministrative",
       // "getAllArchivageDocument",
-      // "getAllDirection",
+      "getAllDirection",
       "getAllServiceua",
       "getAllBanqueUa",
       "getAllFonction",
@@ -108,7 +108,7 @@ export default {
      "getBudgeChager",
      "getAllRealiteServiceFait",
      "getAllLiquidation",
-     "getOrganigrammeUa",
+     "getStructureOrganigrammeUa",
      "getAllBanqueUa",
      "getAllDecompteFacture"
     ]),
@@ -190,6 +190,7 @@ this.getRegimeImpositions()
    this.getPlanProgramme()
     this.getStructurePays()
    this.getPlanPays()
+   this.getPlanOrganigrammeUa()
    this.getStructureAdministrative()
    this.getServiceGestionnaire()
    this.getStructureGeographique()
@@ -251,13 +252,13 @@ this.getTypeAppel()
     
       // this.getAllTypeTextes();
     this.getAllUniteAdministrative();
-     this.getOrganigrammeUa()
+     
      this.getAllBanqueUa()
      this.getAllDecompteFacture()
        this.getStructureOrganigrammeUa()
-   this.getPlanOrganigrammeUa()
+ 
     // this.getAllArchivageDocument();
-// this.getAllDirection()
+this.getAllDirection()
 this.getAllServiceua()
 this.getAllFonction()
 this.getAllBanqueUa()

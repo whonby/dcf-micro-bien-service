@@ -54,11 +54,12 @@
           </li>
 
           <li class="divider"></li>
-          <!-- <li>
+          <li>
             <router-link :to="{name: 'DirectionPrincipal'}" tag="a">
               <i class="icon-key"></i>Direction UA
             </router-link>
-          </li> -->
+          </li>
+          <li class="divider"></li>
             <li>
             <router-link :to="{name: 'uniteZone'}" tag="a">
               <i class="icon-key"></i>Unité de zone
@@ -66,7 +67,7 @@
           </li>
            <li class="divider"></li>
             <li>
-            <router-link :to="{name: 'structureOrganigrammeUa'}" tag="a">
+            <router-link :to="{name: 'StructureOrganigramme'}" tag="a">
               <i class="icon-key"></i>Structure Organigramme 
             </router-link>
           </li>
@@ -88,7 +89,7 @@
               <i class="icon-key"></i>Fonction UA
             </router-link>
           </li> -->
-            <li class="divider"></li>
+            <!-- <li class="divider"></li> -->
         <!-- <li>
             <router-link :to="{name: 'banqueUa'}" tag="a">
               <i class="icon-key"></i>Banque UA

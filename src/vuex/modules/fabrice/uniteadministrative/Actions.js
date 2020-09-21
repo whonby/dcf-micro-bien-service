@@ -1082,35 +1082,65 @@ export function supprimerLiquidation({ commit }, id) {
 
 
 
-export function getOrganigrammeUa({ commit }) {
-  queue.push(() => axios.get('/listeOrganigrammeUa').then(tony => {
-    commit('GET_ALL_ORGANIGRAMME_UA', tony.data)
+export function getStructureOrganigrammeUa({ commit }) {
+  queue.push(() => axios.get('/listeStructureOrganigramme').then(tony => {
+    commit('GET_ALL_STRUCTURE_ORGANIGRAMME_UA', tony.data)
   }).catch(error => console.log(error)))
 
 }
 
 // ajouter plan fonctionnelle
-export function ajouterOrganigrammeUa({ commit, dispatch }, objetAjout) {
-  asyncLoading(axios.post('/ajouterOrganigrammeUa', objetAjout)).then(res => {
-    commit('AJOUTER_ORGANIGRAMME_UA', res.data)
-    dispatch('getOrganigrammeUa')
-    this.$app.$notify({
-      title: 'success ',
-      text: 'Enregistrement effectué avec success !',
-      type: "success"
-    })
-  }).catch(error => console.log(error))
+// export function ajouterStructureOrganigrammeUa({ commit, dispatch }, objetAjout) {
+//   asyncLoading(axios.post('/ajouterStructureOrganigramme', objetAjout)).then(res => {
+//     commit('AJOUTER_STRUCTURE_ORGANIGRAMME_UA', res.data)
+//     dispatch('getStructureOrganigrammeUa')
+//     dispatch('getStructureOrganigrammeUa')
+//     dispatch('getStructureOrganigrammeUa')
+//     dispatch('getStructureOrganigrammeUa')
+//     this.$app.$notify({
+//       title: 'success ',
+//       text: 'Enregistrement effectué avec success !',
+//       type: "success"
+//     })
+//   }).catch(error => console.log(error))
+// }
+
+
+export function ajouterStructureOrganigrammeUa({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterStructureOrganigramme", {
+      ua_id: nouveau.ua_id,
+      niveau: nouveau.niveau,
+      libelle: nouveau.libelle,
+      
+      
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_STRUCTURE_ORGANIGRAMME_UA", response.data);
+        dispatch('getStructureOrganigrammeUa')
+        dispatch('getAllUniteAdministrative')
+       
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
 }
 // modifier plan fonctionnelle
 
-export function modifierOrganigrammeUa({ commit, dispatch }, plan_fonctionnel) {
-  asyncLoading(axios.put('/modifierOrganigrammeUa/' + plan_fonctionnel.id, {
-    uniteua_id: plan_fonctionnel.uniteua_id,
+export function modifierStructureOrganigrammeUa({ commit, dispatch }, plan_fonctionnel) {
+  asyncLoading(axios.put('/modifierStructureOrganigramme/' + plan_fonctionnel.id, {
+    ua_id: plan_fonctionnel.ua_id,
     libelle: plan_fonctionnel.libelle,
-   
+   niveau:plan_fonctionnel.niveau
   })).then(res => {
-    commit('MODIFIER_ORGANIGRAMME_UA', res.data)
-    dispatch('getOrganigrammeUa')
+    commit('MODIFIER_STRUCTURE_ORGANIGRAMME_UA', res.data)
+    dispatch('getStructureOrganigrammeUa')
+        dispatch('getAllUniteAdministrative')
     this.$app.$notify({
       title: 'success ',
       text: 'Modification effectué avec success !',
@@ -1119,16 +1149,16 @@ export function modifierOrganigrammeUa({ commit, dispatch }, plan_fonctionnel) {
   }).catch(error => console.log(error))
 }
 // supprimer plan fonctionnelle
-export function supprimerOrganigrammeUa({ commit, dispatch }, id) {
+export function supprimerStructureOrganigrammeUa({ commit, dispatch }, id) {
 
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
-      commit('SUPPRIMER_ORGANIGRAMME_UA', id)
-      dispatch('getOrganigrammeUa')
-
+      commit('SUPPRIMER_STRUCTURE_ORGANIGRAMME_UA', id)
+      dispatch('getStructureOrganigrammeUa')
+        dispatch('getAllUniteAdministrative')
       // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete('/supprimerOrganigrammeUa/' + id).then(() => dialog.close())
+      axios.delete('/supprimerStructureOrganigramme/' + id).then(() => dialog.close())
     })
 }
 

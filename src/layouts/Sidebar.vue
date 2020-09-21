@@ -99,11 +99,11 @@
           <a href="#">
             <i class="icon icon-user"></i> <span>MON EQUIPE</span>
           </a>
-          <li v-if="admin() || dcf()" @click.prevent="navigateGestionUser" :class="{active: active_el ==21}">
+          <!-- <li v-if="admin() || dcf()" @click.prevent="navigateGestionUser" :class="{active: active_el ==21}">
               <a href="#">
               <i class="icon icon-key"></i> <span>UTILISATEURS</span>
           </a>
-          </li> 
+          </li>  -->
           <li @click.prevent="logoutUser()" >
           <a title="DECONNEXION" href="#">
             <i class="icon icon-off"></i>

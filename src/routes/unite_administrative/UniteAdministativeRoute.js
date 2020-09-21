@@ -27,7 +27,7 @@ import Budget from "../../pages/budget/Budget";
 import BudgetParUa from "../../pages/budget/BudgetParUa";
 import DetailBudgetImporte from "../../pages/budget/DetailBudgetImporte.vue";
 import LigneExempte from "../../pages/unites_administratives/LigneExempte";
-import Organigramme from "../../pages/unites_administratives/organigrammeUa.vue";
+import StructureOrganigramme from "../../pages/parametres_generaux/administratifs/grpeStructureOrganigramme/structureOrganigrammePrincipal.vue";
 import Synthesebudg from "../../pages/gestionMarche/synthesebudg.vue";
 import decompte from "../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte.vue";
 const UniteAdministativeRoutes = [
@@ -53,9 +53,9 @@ const UniteAdministativeRoutes = [
   },
   {
 
-    path: '/Organigramme-ua',
-    name: "Organigramme",
-    component: Organigramme
+    path: '/Structure-Organigramme-ua',
+    name: "StructureOrganigramme",
+    component: StructureOrganigramme
   },
 
   {

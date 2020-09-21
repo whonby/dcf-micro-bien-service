@@ -17,6 +17,7 @@
                <div class="span6" align="center">
                  <img v-bind:src="AffichePhoto(infoUser.id)" name="aboutme" class="avatar2">
                  <br>
+                 <!-- <input type="file" @change="OnchangeImage"  class="span4 form-control" > -->
               </div>
                <div class="span3">
 

@@ -3,7 +3,7 @@ import { groupBy } from "../../../../Repositories/Repository";
 
 // const typeTextes = state =>
 //   state.typeTextes.sort((a, b) => (a.code > b.code ? 1 : -1));
-export const organigrammeUa = state => state.organigrammeUa;
+export const StructureOrganigrammeUa = state => state.StructureOrganigrammeUa;
 export const servicesua = state => state.servicesua;
 export const directions = state => state.directions;
 export const fonctionsua = state => state.fonctionsua;
@@ -743,3 +743,7 @@ export const groupePlanEconomique = (state, getters) => {
 export const getterBudgeCharge = state => state.budgeCharge;
 export const getterligneExempter = state => state.ligneExempter;
 
+export const groupeNiveau1Ua = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.StructureOrganigrammeUa, "niveau");
+};

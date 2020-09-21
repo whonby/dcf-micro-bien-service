@@ -3,6 +3,7 @@
   <div>
   
        
+       
     
       <!-- End Page Header -->
             <!-- Default Light Table -->
@@ -10,7 +11,7 @@
         <hr>
     <div class="row-fluid">
       <div class="span12">
-         <div>
+         <!-- <div>
 
 
                                         <download-excel
@@ -27,7 +28,7 @@
                                                         <div  align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div> 
-                                     </div> <br>
+                                     </div> <br> -->
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Organigramme de l'Unité Administrative</h5>
@@ -73,11 +74,11 @@
               </tbody>
             </table> -->
                  <ul id="demo">
-            <Tree class="item" v-for="plan in lesPlansParents"
+            <TreeOrganigramme class="item" v-for="plan in lesPlansParents"
             :key="plan.id" :item="plan"   
               @ajouterElementEnfant="ajouterElementEnfant" 
               @supprimer="supprimerPlanOrganigrammeUaLocal"
-              @modifier="afficherModalmodifierPlanOrganigrammeUa"></Tree>
+              @modifier="afficherModalmodifierPlanOrganigrammeUa"></TreeOrganigramme>
           </ul>
             <div v-if="lesPlansParents.length">
             </div>
@@ -104,40 +105,36 @@
               </div>
               <div class="modal-body">
                 <table class="table table-bordered table-striped">
-
-               <div class="control-group">
-              <label class="control-label">Structure organigramme UA:</label>
+                   <div class="control-group">
+              <label class="control-label">Structure organigramme UA</label>
               <div class="controls">
-              <select v-model="formData.structure_organigramme_ua_id" class="span5">
-                <option v-for="structure in getterstructuresOrganisationUa " :key="structure.id" 
-                 :value="structure.id">{{structure.libelle}} </option>
+              <select v-model="formData.structure_organigramme_ua_id" class="span5" >
+                <option v-for="structure in afficheStructureNiveau1 " :key="structure[0].id" 
+                 :value="structure[0].id">{{structure[0].libelle}} </option>
               </select>
             </div>
             </div>
-
-<!-- <div class="control-group">
-              <label class="control-label">Libelle:</label>
-              <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libelle" />
-              </div>
-            </div> -->
-             <div class="control-group">
+<div class="control-group">
                   <label class="control-label">Unité Administrative</label>
                   <div class="controls">
-                     <select v-model="formData.libelle" class="span5">
+                     <select v-model="formData.ua_id" class="span5" :readOnly="veifuaExist">
                                                             <option></option>
-                                                            <option v-for="item in afficherUAParDroitAccess" :key="item.id" :value="item.libelle">
-                                                                {{item.libelle}}
+                                                            <option v-for="item in afficheUaNiveau1" :key="item.id" :value="item.ua_id">
+                                                                {{libelleUA(item.ua_id)}}
                                                             </option>
 
                                                         </select>
                   
                   </div>
                 </div>
+              
+
+
+             
             <div class="control-group">
               <label class="control-label">Code</label>
               <div class="controls">
-                <input type="text" :value="afficherCodeUa(formData.libelle)" class="span5" placeholder="" readonly/>
+                <input type="text" :value="afficherCodeUa(formData.ua_id)" class="span5" placeholder="" readonly/>
               </div>
             </div>
             
@@ -164,17 +161,17 @@
               <div class="modal-body">
                 <table class="table table-bordered table-striped">
 
-                   <div class="control-group">
+                   <!-- <div class="control-group">
               <label class="control-label">Code parent:</label>
               <div class="controls">
                 <input type="text" readonly :value="parentDossier.code" class="span5"  />
               </div>
-            </div>
+            </div> -->
 
              <div class="control-group">
-              <label class="control-label">Libéllé parent:</label>
+              <label class="control-label">Libéllé parent</label>
               <div class="controls">
-                <input type="text" readonly :value="parentDossier.libelle" class="span5"  />
+                <input type="text" readonly :value="afficherLibelleUniteAdministrative(parentDossier.libelle)" class="span5"  />
               </div>
             </div>
 
@@ -183,7 +180,7 @@
               
               <div class="controls">
               <select v-model="nouvelElementEnfant.structure_organigramme_ua_id" class="span5">
-                <option v-for="structure in getterstructuresOrganisationUa " :key="structure.id" 
+                <option v-for="structure in NivauStructureParUa(parentDossier.ua_id) " :key="structure.id" 
                  :value="structure.id">{{structure.libelle}} </option>
               </select>
             </div>
@@ -202,7 +199,7 @@
                 <input type="text" v-model="nouvelElementEnfant.libelle" class="span5" placeholder="Saisir le libelle" />
               </div>
             </div> -->
-            <template v-if="afficherIdStructureOrganigramme(nouvelElementEnfant.structure_organigramme_ua_id) == 2">
+            <template v-if="afficherIdStructureOrganigramme(nouvelElementEnfant.structure_organigramme_ua_id) == afficherTailleStuctureService(parentDossier.ua_id)">
                 <div class="control-group" >
                   <label class="control-label">Service</label>
                   <div class="controls">
@@ -210,13 +207,13 @@
                       <option
                         v-for="typeUniteA in groupeServiceNorme"
                         :key="typeUniteA[0].id"
-                        :value="typeUniteA[0].libelle"
+                        :value="typeUniteA[0].service_id"
                       >{{afficheServiceLibelle(typeUniteA[0].service_id)}}</option>
                     </select>
                   </div>
                 </div>
             </template>
-            <template v-else-if="afficherIdStructureOrganigramme(nouvelElementEnfant.structure_organigramme_ua_id) == 3">
+            <template v-else-if="afficherIdStructureOrganigramme(nouvelElementEnfant.structure_organigramme_ua_id) == afficherTailleStuctureFonction(parentDossier.ua_id)">
  <div class="control-group" >
                   <label class="control-label">Fonction</label>
                   <div class="controls">
@@ -224,8 +221,22 @@
                       <option
                         v-for="typeUniteA in groupeFonctionNormeEquipe"
                         :key="typeUniteA[0].id"
-                        :value="typeUniteA[0].libelle"
+                        :value="typeUniteA[0].fonction_id"
                       >{{afficheFonctionLibelle(typeUniteA[0].fonction_id)}}</option>
+                    </select>
+                  </div>
+                </div>
+            </template>
+            <template v-else-if="afficherIdStructureOrganigramme(nouvelElementEnfant.structure_organigramme_ua_id) == afficherTailleStuctureDirection(parentDossier.ua_id)">
+                <div class="control-group" >
+                  <label class="control-label">Direction</label>
+                  <div class="controls">
+                    <select v-model="nouvelElementEnfant.libelle" class="span5" >
+                      <option
+                        v-for="typeUniteA in libelleDirectionUa(parentDossier.libelle)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
                     </select>
                   </div>
                 </div>
@@ -254,7 +265,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier le plan organigramme UA</h3>
+                <h3>Modifier le plan organigramme UA </h3>
               </div>
               <div class="modal-body">
                   <table class="table table-bordered table-striped">
@@ -277,28 +288,28 @@
               <label class="control-label">Structure organigramme UA</label>
               
               <div class="controls">
-              <select v-model="editPlanOrganigrammeUa.structure_organigramme_ua_id" class="span5">
-                <option v-for="structure in getterstructuresOrganisationUa " :key="structure.id" 
-                 :value="structure.id">{{structure.libelle}} </option>
+             <select v-model="editPlanOrganigrammeUa.structure_organigramme_ua_id" class="span5">
+                <option v-for="structure in afficheStructureNiveau1 " :key="structure[0].id" 
+                 :value="structure[0].id">{{structure[0].libelle}} </option>
               </select>
             </div>
             </div>
 
 
-            <div class="control-group" v-if="editPlanOrganigrammeUa.structure_organigramme_ua_id == 1">
+            <div class="control-group">
               <label class="control-label">Code</label>
               <div class="controls">
                 
                 <input type="text"  :value="afficherCodeUa(editPlanOrganigrammeUa.libelle)" class="span5" placeholder="Saisir le code" readonly/>
               </div>
             </div>
-           <div class="control-group" v-if="editPlanOrganigrammeUa.structure_organigramme_ua_id == 1">
+           <div class="control-group">
               <label class="control-label">Libellé</label>
               <div class="controls">
-                 <select v-model="editPlanOrganigrammeUa.libelle" class="span5">
+                <select v-model="editPlanOrganigrammeUa.ua_id" class="span5">
                                                             <option></option>
-                                                            <option v-for="item in afficherUAParDroitAccess" :key="item.id" :value="item.libelle">
-                                                                {{item.libelle}}
+                                                            <option v-for="item in afficheUaNiveau1" :key="item.id" :value="item.ua_id">
+                                                                {{libelleUA(item.ua_id)}}
                                                             </option>
 
                                                         </select>
@@ -306,7 +317,8 @@
               </div>
             </div>
            
-            <template v-if="afficherIdStructureOrganigramme(editPlanOrganigrammeUa.structure_organigramme_ua_id) == 2">
+           
+              <template v-if="afficherIdStructureOrganigramme(editPlanOrganigrammeUa.structure_organigramme_ua_id) == afficherTailleStuctureService(parentDossier.ua_id)">
                <div class="control-group">
               <label class="control-label">Code</label>
               <div class="controls">
@@ -327,7 +339,8 @@
                   </div>
                 </div>
             </template>
-            <template v-else-if="afficherIdStructureOrganigramme(editPlanOrganigrammeUa.structure_organigramme_ua_id) == 3">
+           
+  <template v-else-if="afficherIdStructureOrganigramme(editPlanOrganigrammeUa.structure_organigramme_ua_id) == afficherTailleStuctureFonction(parentDossier.ua_id)">
  <div class="control-group">
               <label class="control-label">Code</label>
               <div class="controls">
@@ -345,6 +358,20 @@
                         :key="typeUniteA[0].id"
                         :value="typeUniteA[0].libelle"
                       >{{afficheFonctionLibelle(typeUniteA[0].fonction_id)}}</option>
+                    </select>
+                  </div>
+                </div>
+            </template>
+           <template v-else-if="afficherIdStructureOrganigramme(editPlanOrganigrammeUa.structure_organigramme_ua_id) == afficherTailleStuctureDirection(parentDossier.ua_id)">
+                <div class="control-group" >
+                  <label class="control-label">Direction</label>
+                  <div class="controls">
+                    <select v-model="editPlanOrganigrammeUa.libelle" class="span5" >
+                      <option
+                        v-for="typeUniteA in libelleDirectionUa(parentDossier.libelle)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
                     </select>
                   </div>
                 </div>
@@ -392,10 +419,10 @@ import {mapGetters, mapActions} from 'vuex'
 import {admin,dcf,cf,noDCfNoAdmin} from '../../../Repositories/Auth';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import Tree from './Tree'
+import TreeOrganigramme from './TreeOrganigramme'
 export default {
   components: {
-    Tree
+    TreeOrganigramme
   },
   data() {
     return { 
@@ -446,16 +473,11 @@ export default {
   },
   computed: {
        ...mapGetters("uniteadministrative", [
-      "jointureUaChapitreSection",
+     
       "uniteAdministratives",
-      "budgetGeneral",
-      "getPersonnaliseBudgetGeneral",
-      "montantBudgetGeneral",
-      "uniteZones",
-      "getPersonnaliseBudgetGeneralParTransfert",
-      "transferts",
-      "afficheTransfertValider",
-      "getPersonnaliseTransfert"
+     "StructureOrganigrammeUa",
+     "groupeNiveau1Ua",
+     "directions"
       
     ]),
     ...mapGetters("SuiviImmobilisation", [
@@ -477,6 +499,25 @@ admin:admin,
 noDCfNoAdmin:noDCfNoAdmin,
 ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
+veifuaExist() {
+      return this.formData.structure_organigramme_ua_id == "";
+    },
+NivauStructureParUa() {
+      return id => {
+        if (id != null && id != "") {
+          return this.StructureOrganigrammeUa.filter(element => element.ua_id == id && element.niveau != 1);
+        }
+        return 15
+      };
+    },
+    
+    libelleDirectionUa() {
+      return id => {
+        if (id != null && id != "") {
+          return this.directions.filter(element => element.d_ua_id == id);
+        }
+      };
+    },
  afficherUAParDroitAccess() {
        // const st = this.search.toLowerCase();
         if (this.cf){
@@ -497,6 +538,72 @@ noDCfNoAdmin:noDCfNoAdmin,
         
 
     },
+    afficheStructureNiveau1(){
+  
+          return this.groupeNiveau1Ua.filter(item =>item[0].niveau == 1)
+         
+      
+},
+    afficheUaNiveau1(){
+  
+          return this.StructureOrganigrammeUa.filter(item => item.niveau == 1)
+         
+       
+},
+
+ afficherIdStructure(){
+  return id =>{
+        if(id!=null && id!=""){
+          const objet = this.StructureOrganigrammeUa.find(item => item.ua_id==id)
+          if(objet) 
+          return objet.id
+        }
+        return null
+      }
+},
+libelleUA(){
+  return id =>{
+        if(id!=null && id!=""){
+          const objet = this.uniteAdministratives.find(item => item.ua_id==id)
+          if(objet) 
+          return objet.libelle
+        }
+        return null
+      }
+},
+// libelleUA() {
+//        // const st = this.search.toLowerCase();
+//         if (this.noDCfNoAdmin){
+//             let colect=[];
+//             this.uniteAdministratives.filter(item=>{
+//                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+//             })
+//             return id =>{
+//         if(id!=null && id!=""){
+//           const objet = this.colect.find(item => item.id==id)
+//           if(objet) 
+//           return objet.libelle
+//         }
+//         return null
+//       }
+             
+            
+//         }
+// return id =>{
+//         if(id!=null && id!=""){
+//           const objet = this.uniteAdministratives.find(item => item.id==id)
+//           if(objet) 
+//           return objet.libelle
+//         }
+//         return null
+//       }
+            
+
+//     },
 //        localisationsFiltre(){
 
 //      const searchTerm = this.search.toLowerCase();
@@ -536,6 +643,35 @@ lesPlansParents() {
 
     },
 
+
+  afficherLibelleUniteAdministrative(){
+  return id =>{
+        if(id!=null && id!=""){
+          const objet = this.uniteAdministratives.find(item => item.id==id)
+          if(objet) 
+          return objet.libelle
+        }
+         if(id!=null && id!=""){
+          const objet = this.directions.find(item => item.id==id)
+          if(objet) 
+          return objet.libelle
+        }
+        if(id!=null && id!=""){
+          const objet = this.services.find(item => item.id==id)
+          if(objet) 
+          return objet.libelle
+        }
+         if(id!=null && id!=""){
+          const objet = this.fonctions.find(item => item.id==id)
+          if(objet) 
+          return objet.libelle
+        }
+      }
+},
+
+
+
+
    afficherIdUaparDossierParent(){
   return id =>{
         if(id!=null && id!=""){
@@ -547,9 +683,9 @@ lesPlansParents() {
       }
 },
 afficherCodeUa(){
-  return id =>{
-        if(id!=null && id!=""){
-          const objet = this.uniteAdministratives.find(item => item.libelle==id)
+  return id1 =>{
+        if(id1!=null && id1!=""){
+          const objet = this.uniteAdministratives.find(item => item.id==id1)
           if(objet) 
           return objet.code
         }
@@ -557,13 +693,40 @@ afficherCodeUa(){
       }
 },
 afficherIdStructureOrganigramme(){
-  return id =>{
-        if(id!=null && id!=""){
-          const objet = this.getterstructuresOrganisationUa.find(item => item.id==id)
+  return id1 =>{
+        if(id1!=null && id1!=""){
+          const objet = this.StructureOrganigrammeUa.find(item => item.id==id1)
           if(objet) 
           return objet.niveau
         }
         return null
+      }
+},
+afficherTailleStuctureService(){
+  return id =>{
+        if(id!=null && id!=""){
+          return this.StructureOrganigrammeUa.filter(item => item.ua_id==id).length - 1;
+         
+        }
+       
+      }
+},
+afficherTailleStuctureDirection(){
+  return id =>{
+        if(id!=null && id!=""){
+          return this.StructureOrganigrammeUa.filter(item => item.ua_id==id).length - 2;
+         
+        }
+       
+      }
+},
+afficherTailleStuctureFonction(){
+  return id =>{
+        if(id!=null && id!=""){
+          return this.StructureOrganigrammeUa.filter(item => item.ua_id==id).length;
+         
+        }
+       
       }
 },
 afficheServiceLibelle() {
@@ -581,7 +744,7 @@ afficheServiceLibelle() {
     afficheidServiceLibelle() {
       return id1 => {
         if (id1 != null && id1 != "") {
-           const qtereel = this.services.find(qtreel => qtreel.libelle == id1);
+           const qtereel = this.services.find(qtreel => qtreel.id == id1);
 
       if (qtereel) {
         return qtereel.id;
@@ -606,7 +769,7 @@ afficheServiceLibelle() {
     afficheIdFonctionLibelle() {
       return id1 => {
         if (id1 != null && id1 != "") {
-           const qtereel = this.fonctions.find(qtreel => qtreel.libelle == id1);
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id1);
 
       if (qtereel) {
         return qtereel.id;
@@ -618,7 +781,7 @@ afficheServiceLibelle() {
     afficherIdUniteAdministrative(){
   return id =>{
         if(id!=null && id!=""){
-          const objet = this.uniteAdministratives.find(item => item.libelle==id)
+          const objet = this.uniteAdministratives.find(item => item.id==id)
           if(objet) 
           return objet.id
         }
@@ -679,8 +842,10 @@ getColumns() {
     ajouetpaysLocal () {
          var nouvelObjet = {
         ...this.formData,
-        code: this.afficherCodeUa(this.formData.libelle),
-        ua_id:this.afficherIdUniteAdministrative(this.formData.libelle)
+        code: this.afficherCodeUa(this.formData.ua_id),
+        structure_organigramme_ua_id:this.afficherIdStructure(this.formData.ua_id),
+        libelle: this.formData.ua_id,
+        
         
        
       };
@@ -695,15 +860,16 @@ this.$("#exampleModal").modal('hide');
 
      ajouterpaysLocalEnfant () {
       
-       if(this.afficherIdStructureOrganigramme(this.nouvelElementEnfant.structure_organigramme_ua_id) == 2){
+       if(this.afficherIdStructureOrganigramme(this.nouvelElementEnfant.structure_organigramme_ua_id) == this.afficherTailleStuctureService(this.parentDossier.ua_id)){
  var nouvelObjet = {
         ...this.nouvelElementEnfant,
-       normeequipement:this.normeDuService(this.afficheidServiceLibelle(this.nouvelElementEnfant.libelle)),
-       historiqueequipement:this.normeDuService(this.afficheidServiceLibelle(this.nouvelElementEnfant.libelle)),
-       montantequipement:this.montantPourEtreEquipe(this.afficheidServiceLibelle(this.nouvelElementEnfant.libelle)),
-      serviceua_id:this.afficheidServiceLibelle(this.nouvelElementEnfant.libelle),
-       ua_id:this.afficherIdUniteAdministrative(this.parentDossier.libelle),
-       code:this.parentDossier.code
+       normeequipement:this.normeDuService(this.nouvelElementEnfant.libelle),
+       historiqueequipement:this.normeDuService(this.nouvelElementEnfant.libelle),
+       montantequipement:this.montantPourEtreEquipe(this.nouvelElementEnfant.libelle),
+      serviceua_id:this.nouvelElementEnfant.libelle,
+       ua_id:this.afficherIdUniteAdministrative(this.parentDossier.ua_id),
+       code:this.parentDossier.code,
+       libelle:this.nouvelElementEnfant.libelle
       };
        this.ajouterPlanOrganigrammeUa(nouvelObjet)
 this.$("#modalAjouterElementEnfant").modal('hide');
@@ -720,8 +886,8 @@ this.$("#modalAjouterElementEnfant").modal('hide');
         ...this.nouvelElementEnfant,
       
       fonction_id:this.afficheIdFonctionLibelle(this.nouvelElementEnfant.libelle),
-       serviceua_id:this.afficheidServiceLibelle(this.parentDossier.libelle),
-       ua_id:this.afficherIdUaparDossierParent(this.parentDossier.libelle),
+       serviceua_id:this.nouvelElementEnfant.libelle,
+       ua_id:this.afficherIdUaparDossierParent(this.parentDossier.ua_id),
          code:this.parentDossier.code
       };
        this.ajouterPlanOrganigrammeUa(nouvelObjet2)

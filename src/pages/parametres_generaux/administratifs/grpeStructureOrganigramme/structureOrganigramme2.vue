@@ -9,7 +9,7 @@
                   <span class="icon"><i :class="iconClasses"></i></span>
                 <h5>{{groupe.libelle }}</h5>
                  <!-- <span class="badge badge-info" >{{getNombreArticle}}</span>&nbsp;&nbsp; -->
-                 <span class="badge badge-inverse" >{{getNombreArticle}}</span>
+                 <!-- <span class="badge badge-inverse" >{{getNombreArticle}}</span> -->
 
                 </a> 
 
@@ -20,31 +20,24 @@
                  <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                       <!-- <th>Exercice</th> -->
-                    <!-- <th title="">Code Budget</th> -->
-                     <th >Destinataire</th>
-                    <!-- <th>Section</th> -->
-                    <th title="grande nature depense">Zone geographique</th>
-                      <th>Longitude</th>
-                    <th>Latitude</th> 
-                    <th>Telephone cel</th> 
-                     <th >Adresse Postale</th>
-                     <th>Telephone Fixe</th>
-                    <th>description localisation</th>
-                    <th>Quartier</th>
+                      
+                     <th >Niveau</th>
+                    
+                    <th style="width:90%">Libelle</th>
+                     
                      <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                   <uniteZoneItem
+                   <structureOrganigramme1
                         class="item"
-                        v-for="groupeElement in groupe.unite_zone_ua"
+                        v-for="groupeElement in groupe.structure_organigramme_ua"
                         :key="groupeElement.id"
                         :article="groupeElement"
                      @modification="$emit('modification', $event)"
                         @suppression="$emit('suppression', $event)"
 
-                    ></uniteZoneItem>
+                    ></structureOrganigramme1>
                       
                 </tbody>
               </table>
@@ -62,15 +55,15 @@
 
 <script>
 import { mapGetters} from "vuex";
-import uniteZoneItem from './uniteZoneItem'
-import { formatageSomme } from "../../../Repositories/Repository";
+import structureOrganigramme1 from './structureOrganigramme1'
+// import { formatageSomme } from "../../../Repositories/Repository";
 export default {
     name: 'uniteZoneComponent',
      props: {
     groupe: Object,
   },
   components: {
-      uniteZoneItem
+      structureOrganigramme1
   },
   data: function () {
     return {
@@ -147,26 +140,26 @@ export default {
       };
     },
 getNombreArticle(){
-        var nombre = this.groupe.unite_zone_ua.length
+        var nombre = this.groupe.structure_organigramme_ua.length
         if(nombre) return nombre
         return '0' 
     },
     isFolder: function () {
-      return this.groupe.unite_zone_ua &&
-        this.groupe.unite_zone_ua.length
+      return this.groupe.structure_organigramme_ua &&
+        this.groupe.structure_organigramme_ua.length
     },
 
     // getNombreArticle(){
-    //     var nombre = this.groupe.unite_zone_ua.length
+    //     var nombre = this.groupe.structure_organigramme_ua.length
     //     if(nombre) return nombre
     //     return 'Aucun' 
     // },
     iconClasses() {
       return {
-        'icon-plus': !this.isOpen && this.groupe.unite_zone_ua.length,
-        'icon-minus': this.isOpen && this.groupe.unite_zone_ua.length
-        //    'icon-folder-close': !this.isOpen && this.groupe.unite_zone_ua.length,
-        // 'icon-folder-open': this.isOpen && this.groupe.unite_zone_ua.length
+        'icon-plus': !this.isOpen && this.groupe.structure_organigramme_ua.length,
+        'icon-minus': this.isOpen && this.groupe.structure_organigramme_ua.length
+        //    'icon-folder-close': !this.isOpen && this.groupe.structure_organigramme_ua.length,
+        // 'icon-folder-open': this.isOpen && this.groupe.structure_organigramme_ua.length
       }
     },
 
@@ -192,7 +185,7 @@ getNombreArticle(){
         
       }
     },
-formatageSomme:formatageSomme
+// formatageSomme:formatageSomme
   }
 }
 </script>

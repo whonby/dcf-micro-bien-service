@@ -206,7 +206,7 @@ QteRequiseCotePersonnel() {
     if(id !=""){
   
         
-    return this.acte_personnels.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0); 
+    return this.acte_personnels.filter(element => element.unite_administrative_id == id && element.normeequipement ==0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0); 
       
     }
     return 0
@@ -217,7 +217,7 @@ QteRequiseCotePersonnel() {
     if(id !=""){
   
         
-    return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.serviceua_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0); 
+    return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.serviceua_id != null && element.normeequipement != element.historiqueequipement).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0); 
       
     }
     return 0

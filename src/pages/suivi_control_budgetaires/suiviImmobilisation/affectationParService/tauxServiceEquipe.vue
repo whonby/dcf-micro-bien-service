@@ -187,11 +187,11 @@ search:""
                 }
                   
             })
-          return colect.filter(elment=>elment.normeequipement != null)
+          return colect.filter(elment=>elment.normeequipement != 0)
           
         }
 
-       return this.getterplanOrganisationUa.filter(elment=>elment.normeequipement != null)
+       return this.getterplanOrganisationUa.filter(elment=>elment.normeequipement != 0)
 
     },
 
