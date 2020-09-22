@@ -23,7 +23,7 @@
                   <div class="controls">
                     <select v-model="formData.d_ua_id" class="span6">
                       <option
-                        v-for="typeUniteA in uniteAdministratives"
+                        v-for="typeUniteA in filtre_unite_admin"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -87,7 +87,7 @@
                   <div class="controls">
                     <select v-model="editTransfert.d_ua_id" class="span6">
                       <option
-                        v-for="typeUniteA in uniteAdministratives"
+                        v-for="typeUniteA in filtre_unite_admin"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -164,8 +164,8 @@
              
             </div>
 
-            <div class="widget-content nopadding" v-if="uniteAdministratives.length" >
-              <DirectionComponent v-for="equipement in uniteAdministratives"
+            <div class="widget-content nopadding" v-if="filtre_unite_admin.length" >
+              <DirectionComponent v-for="equipement in filtre_unite_admin"
                :key="equipement.id"
                 :groupe="equipement"
                 @modification="afficherModalModifierUniteAdministrative"
@@ -200,6 +200,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import DirectionComponent from './DirectionComponent'
+import {admin,dcf,cf,noDCfNoAdmin} from "../../../Repositories/Auth"
 // import { formatageSomme } from "../../../../src/Repositories/Repository";
 export default {
   name: 'transfert',
@@ -254,7 +255,8 @@ export default {
       "montantBudgetGeneral",
       "uniteZones",
       "getPersonnaliseBudgetGeneralParTransfert",
-      "uniteAdministratives"
+      "uniteAdministratives",
+      "jointureUaChapitreSection"
       // "chapitres",
       // "sections"
     ]),
@@ -288,12 +290,37 @@ export default {
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  
  ...mapGetters('personnelUA', ['all_acteur_depense']),
-
+ admin:admin,
+      dcf:dcf,
+        cf:cf,
+        noDCfNoAdmin:noDCfNoAdmin,
+      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+   
 
  verroDirection() {
       return this.formData.d_ua_id == "";
     },
+
+
+    filtre_unite_admin() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.jointureUaChapitreSection.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect
+        }
+        return this.jointureUaChapitreSection
+
+    },
   },
+
 
 
   

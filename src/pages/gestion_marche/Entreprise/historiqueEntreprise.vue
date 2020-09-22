@@ -25,7 +25,7 @@
                        <!-- <div  align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div>  -->
-                                             <download-excel
+                                             <!-- <download-excel
                                   class="btn btn-success pull-right"
                                   style="cursor:pointer;"
                                     :fields = "json_fields"
@@ -34,7 +34,7 @@
                                     worksheet = "entreprise non sanctionner"
                                   :data="filtre_type_teste">
           <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
-                                       </download-excel> 
+                                       </download-excel>  -->
              <div  align="right" style="cursor:pointer;">
  <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
      </div> 

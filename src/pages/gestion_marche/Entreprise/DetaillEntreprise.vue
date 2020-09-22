@@ -233,8 +233,8 @@
                             <div class="controls">
                               
                             <select v-model="formData.banq_id" class="span4" :readOnly="verroBanque">
-                                <option v-for="varText in banqueDynamiques(formData.commune_id)" :key="varText.afficheBanque.id"
-                              :value="varText.afficheBanque.id">{{varText.afficheBanque.libelle}}</option>
+                                <option v-for="varText in banqueDynamiques(formData.commune_id)" :key="varText.banque_id"
+                              :value="varText.banque_id">{{getLibelleBanque(varText.banque_id)}}</option>
                             </select>
                                 
                             </div>
@@ -465,8 +465,8 @@
                             <div class="controls">
                               
                             <select v-model="editCompte.banq_id" class="span4" :readOnly="verroBanque">
-                                <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText.afficheBanque.id"
-                              :value="varText.afficheBanque.id">{{varText.afficheBanque.libelle}}</option>
+                                <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText.banque_id"
+                              :value="varText.banque_id">{{varText.getLibelleBanque(varText.banque_id)}}</option>
                             </select>
                                 
                             </div>
@@ -739,7 +739,7 @@ afficherCodeRibEditCompte(){
       return this.formData.banq_id == "";
     },
      verroBanque() {
-      return this.formData.commune_id == "";
+      return this.formData.commune_id1 == "";
     },
               compteFiltre(){
                   const st = this.search.toLowerCase();
@@ -771,13 +771,24 @@ afficherCodeRibEditCompte(){
                  banqueDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseAgence.filter(
-            element => element.afficheCommune.id == id
+          return this.agenceBanques.filter(
+            element => element.commune_id == id
           );
         }
       };
     },
+getLibelleBanque() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.banques.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return ""
+        }
+      };
+    },
     
 
 
