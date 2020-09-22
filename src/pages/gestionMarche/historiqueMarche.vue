@@ -136,13 +136,13 @@
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link> 
                        </td>
-                    <td v-if="marche.type_marche_id == 6 && marche.attribue == 2 ||marche.type_marche_id == 1 && marche.attribue == 2|| marche.type_marche_id == 5 && marche.attribue == 2">
+                    <td >
                        <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
                  class="btn btn-inverse " title="Cycle de vie du marche">
         <span class=""><i class=" icon-calendar"></i></span>
     </router-link>
                     </td>
-                    <td v-else></td>
+                    
                    <!-- <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1"> 
                      <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
                                     class="btn btn-inverse " title="Cycle de vie du marche">

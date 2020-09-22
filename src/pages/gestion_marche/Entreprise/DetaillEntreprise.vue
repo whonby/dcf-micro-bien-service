@@ -413,7 +413,7 @@
                                                     <div class="controls">
                                                         <select v-model="editCompte.pays_id" class="span4" >
                                                             <option></option>
-                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -739,7 +739,7 @@ afficherCodeRibEditCompte(){
       return this.formData.banq_id == "";
     },
      verroBanque() {
-      return this.formData.commune_id1 == "";
+      return this.formData.commune_id == "";
     },
               compteFiltre(){
                   const st = this.search.toLowerCase();
@@ -851,7 +851,7 @@ return element;
         return dureVie1.nom_agence;
       }
       // console.log(dureVie1)
-      return ""
+      return "pas de lieu"
     },
     AffichierNumeroAgence() {
       
