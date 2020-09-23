@@ -8,10 +8,6 @@
                 <i class="icon-th"></i>
               </span>
                     <h5 v-if="ppm">Calendrie de planification des marches du PPM : {{ppm.libelle}}</h5>
-                    <!-- <div align="right">
-                         Recherche:
-                         <input type="search" placeholder v-model="search" />
-                     </div>-->
                 </div>
 
                 <div class="widget-content nopadding" >
@@ -70,9 +66,11 @@
         },
         created() {
          this.ppm=this.getterPlanPassationMarche.find(item=>item.code== this.$route.params.id)
+        
             var self = this;
             if(this.ppm!=""){
                 this.ppm.marche.forEach(function (value) {
+                      console.log(value)
                     let objetMarche={"id":value.id,"title":value.objet,"children":[]}
                     let evenMarcher={
                         resourceId:value.id,

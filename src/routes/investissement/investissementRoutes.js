@@ -5,7 +5,7 @@ import tableauBordInvestissement from '../../pages/investissement/tableauBordInv
 const investissementRoutes =[
   
     {
-        path:"/creation-investissement",
+        path:"/investissement",
         name:"investissement",
         component:investissement
     },

@@ -1,6 +1,6 @@
 <template>
   <!--top-Header-menu-->
-  <div id="user-nav" class="navbar navbar-inverse">
+  <div id="user-nav" style="position: fixed;">
     <ul class="nav">
       <!--Paramètres administratifs-->
 
