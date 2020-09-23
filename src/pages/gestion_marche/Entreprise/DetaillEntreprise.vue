@@ -118,8 +118,8 @@
                                             {{formaterDate(appelOffre.date_ouverture_compte) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.signataire_compte || 'Non renseigné'}}</td>
-                                         <td v-if="appelOffre.nature_compte == 0" >Compte courant</td>
-                                         <td v-else >Non renseigné</td>
+                                         <td @dblclick="afficherModalModifierActeDepense(index)" v-if="appelOffre.nature_compte == 0" >Compte courant</td>
+                                         <td @dblclick="afficherModalModifierActeDepense(index)" v-else >Non renseigné</td>
                                             
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.swift|| 'Non renseigné'}}</td>
