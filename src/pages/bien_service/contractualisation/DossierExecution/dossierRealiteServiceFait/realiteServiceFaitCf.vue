@@ -409,14 +409,34 @@ afficheDateFacture() {
         }
       };
     },
-   AffichierElementParent() {
+    AffichierElementParent() {
       
       // return id => {
       //   if (id != null && id != "") {
-          return this.plans_Decision.filter(element => element.code == 11 || element.code == 12 || element.code == 13 || element.code == 14 || element.code == 15 || element.code == 16 || element.code == 17 || element.code == 18 || element.code == 19 || element.code == 20);
+          return this.plans_Decision.filter(element => this.RecupererNiveau3StructureDecision(element.structure_motif_decission_id) == 3);
       //   }
       // };
     },
+    RecupererNiveau3StructureDecision() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structuresDecision.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau;
+      }
+      return 0
+        }
+      };
+    },
+  //  AffichierElementParent() {
+      
+  //     // return id => {
+  //     //   if (id != null && id != "") {
+  //         return this.plans_Decision.filter(element => element.code == 11 || element.code == 12 || element.code == 13 || element.code == 14 || element.code == 15 || element.code == 16 || element.code == 17 || element.code == 18 || element.code == 19 || element.code == 20);
+  //     //   }
+  //     // };
+  //   },
 AffichierElementEnfant() {
       
       return id => {

@@ -32,7 +32,7 @@
             </td>
             <td>
                     <div class="control-group">
-                            <label class="control-label">Motif CF </label>
+                            <label class="control-label">Famille Motif</label>
                             <div class="controls">
                                <select v-model="editEngagement.motifcf" class="span">
                                 <option value=""></option>
@@ -48,7 +48,7 @@
                <tr>
                  <td>
                     <div class="control-group">
-                            <label class="control-label">Libelle motif </label>
+                            <label class="control-label">Motif </label>
                             <div class="controls">
                                <select v-model="editEngagement.motif" class="span">
                                <option value=""></option>
@@ -283,7 +283,7 @@ search:""
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections","plans_programmes"]),
     ...mapGetters("parametreGenerauxProgrammeUnite", ["unites"]),
     ...mapGetters("personnelUA", ["all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
-    
+   
    
   ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
@@ -347,9 +347,21 @@ AffichierElementParent() {
       
       // return id => {
       //   if (id != null && id != "") {
-          return this.plans_Decision.filter(element => element.code == 11 || element.code == 12 || element.code == 13 || element.code == 14 || element.code == 15 || element.code == 16 || element.code == 17 || element.code == 18 || element.code == 19 || element.code == 20);
+          return this.plans_Decision.filter(element => this.RecupererNiveau3StructureDecision(element.structure_motif_decission_id) == 3);
       //   }
       // };
+    },
+    RecupererNiveau3StructureDecision() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structuresDecision.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau;
+      }
+      return 0
+        }
+      };
     },
 AffichierElementEnfant() {
       
@@ -359,6 +371,13 @@ AffichierElementEnfant() {
         }
       };
     },
+
+ 
+
+
+
+
+
     CodeSection() {
       return id => {
         if (id != null && id != "") {

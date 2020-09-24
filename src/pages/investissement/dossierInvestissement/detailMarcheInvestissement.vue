@@ -44,10 +44,10 @@ CodeExempte
                                     {{formatageSomme(parseFloat(budgetDisponible))}}
                                 </td>
                                 <td class="taskOptions">
-                                    {{detail_marche.type_marche.libelle}}
+                                    {{afficherTypeMarcheLibelle(detail_marche.type_marche_id)}}
                                 </td>
                                 <td class="taskOptions">
-                                    {{detail_marche.objetUniteAdministrative.libelle}}
+                                    {{afficherUniteAdministrative(detail_marche.unite_administrative_id)}}
                                 </td>
                                <!-- <td>{{budgetDisponible}}</td> -->
                             </tr>
@@ -1018,7 +1018,7 @@ created() {
 },
         computed: {
 
-            ...mapGetters("bienService", ["getterCojos","mandate","getMandatPersonnaliserVise", "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
+            ...mapGetters("bienService", ["typeMarches","getterCojos","mandate","getMandatPersonnaliserVise", "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
                "getterDossierCandidats","marches","gettersOuverturePersonnaliser","getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser"
                ,"getterAnoDMPBailleur"
                
@@ -1048,7 +1048,30 @@ created() {
       // "chapitres",
       // "sections"
     ]),
-    
+    afficherUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     afficherTypeMarcheLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 afficheLeNomDesProcedure(){
     if( this.budgetDisponible < 10000000){
         return "Procédure Simplifiée de demande de Cotation(PSC Sans comité)"

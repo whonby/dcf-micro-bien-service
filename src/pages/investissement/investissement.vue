@@ -631,13 +631,13 @@ type_financement
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
+                   {{afficherUniteAdministrative(marche.unite_administrative_id) || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficherTypeMarcheLibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
                    {{marche.procedure_passation.code || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
+                   {{afficheractivite(marche.activite_id) || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.imputation || 'Non renseigné'}}</td>
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
