@@ -937,8 +937,38 @@ listeOffreTechniqueLotCandidat(){
       this.editer= this.gettersOffreTechniques.find(item=>item.id==index);
     },
     editeOffreT(){
-      this.modifierOffreTechnique(this.edit_offre_technique_recupere)
-      this.$('#modificationOffreT').modal('hide');
+      let objet={
+        id:this.editer.id,
+         numero_lot:this.editer.numero_lot,
+        accord_groupe:this.editer.accord_groupe,
+        cautionnement_prov:this.editer.cautionnement_prov,
+        pouv_habil_signataire:this.editer.pouv_habil_signataire,
+        peice_admin:this.editer.pouv_habil_signataire,
+        reg_com:this.editer.reg_com,
+        attest_banc:this.editer.attest_banc,
+        formil_propo_tech:this.editer.formil_propo_tech,
+        fiche_rsgnt_mbre_groupe:this.editer.fiche_rsgnt_mbre_groupe,
+        atcdent_marche_non_exe:this.editer.atcdent_marche_non_exe,
+        org_travau_site:this.editer.org_travau_site,
+        meth_real_travau:this.editer.meth_real_travau,
+        prog_mobilisation:this.editer.prog_mobilisation,
+        capacite_financiere:this.editer.capacite_financiere,
+        caa_moyen_ac_entre:this.editer.caa_moyen_ac_entre,
+        capacite_techn_exp:this.editer.capacite_techn_exp,
+        dossier_candidat_id:this.editer.dossier_candidat_id,
+        experience_generale:this.editer.experience_generale,
+        personnel:this.editer.personnel,
+        materiel:this.editer.materiel,
+        observation:this.editer.observation,
+        lettre_soumission_pouvoir_signature:this.editer.lettre_soumission_pouvoir_signature,
+        garantie_soumission:this.editer.garantie_soumission,
+        delai_execution:this.editer.delai_execution,
+        validation:this.editer.validation,
+        marche_id:this.editer.marche_id,
+        appel_offre_id:this.editer.appel_offre_id
+      }
+      this.modifierOffreTechnique(objet)
+      this.$('#edit_offre_technique').modal('hide');
     },
   }
 }

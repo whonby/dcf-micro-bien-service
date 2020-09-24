@@ -8,7 +8,7 @@
       <h5>L'OFFRE FINANCIERE </h5>
     </div>
   </div>-->
-  {{dossier_candidature.marche_id}}
+
   <div align="right">
     <a href="#ajouter_offre_fin" data-toggle="modal" class="btn btn-primary">Ajouter</a>
   </div>
