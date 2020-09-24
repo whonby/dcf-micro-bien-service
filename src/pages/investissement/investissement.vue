@@ -2295,11 +2295,13 @@ afficherTypeMarche() {
       };
     },
       afficherTypeMarcheLibelle() {
+       console.log("afficherTypeMarcheLibelle")
       return id => {
         if (id != null && id != "") {
            const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
+      if (qtereel!=undefined) {
+        console.log("afficherTypeMarcheLibelle 1")
         return qtereel.libelle;
       }
       return 0
@@ -2307,11 +2309,13 @@ afficherTypeMarche() {
       };
     },
     afficherImputationMarche() {
+      console.log("afficherImputationMarche")
       return id => {
         if (id != null && id != "") {
            const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
+      if (qtereel!=undefined) {
+        console.log("afficherImputationMarche 2")
         return qtereel.imputation;
       }
       return 0
@@ -2423,11 +2427,13 @@ afficherTypeMarche() {
     //   };
     // },
      afficherIdactivite() {
+       console.log("afficherIdactivite")
       return id => {
         if (id != null && id != "") {
            const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
+      if (qtereel!=undefined) {
+        console.log("afficherIdactivite 3")
         return qtereel.activite_id;
       }
       return 0
@@ -2479,11 +2485,13 @@ afficherEntreprise() {
 
    
      afficherUniteAdministrative() {
+       console.log("afficherUniteAdministrative")
       return id => {
         if (id != null && id != "") {
            const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
+      if (qtereel!=undefined) {
+        console.log("afficherUniteAdministrative 4")
         return qtereel.libelle;
       }
       return 0
@@ -2491,11 +2499,14 @@ afficherEntreprise() {
       };
     },
       afficheractivite() {
+
       return id => {
+        console.log("afficheractivite")
         if (id != null && id != "") {
            const qtereel = this.afficheNiveauActivite.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
+      if (qtereel!=undefined) {
+        console.log("afficheractivite 5")
         return qtereel.libelle;
       }
       return 0
@@ -2535,12 +2546,15 @@ anneeAmort() {
       };
     },
           afficheractiviteBienService() {
+           // console.log("afficheractiviteBienService")
       return id => {
         if (id != null && id != "") {
            const qtereel = this.getPersonnaliseBudgetGeneralParInvestissement.find(qtreel => qtreel.afficheUA.id == id);
-
-      if (qtereel) {
-        return qtereel.afficheActivite.code.concat('  ', qtereel.afficheActivite.libelle);
+          console.log("afficheractiviteBienService")
+      if (qtereel!=undefined) {
+        console.log("afficheractiviteBienService 6")
+        //return qtereel.afficheActivite.code.concat('  ', qtereel.afficheActivite.libelle);
+        return  null
       }
       return 0
         }
@@ -2548,11 +2562,13 @@ anneeAmort() {
     },
 
  afficherPlanEconomiqueBienService() {
+   console.log("afficherPlanEconomiqueBienService ")
       return id => {
         if (id != null && id != "") {
            const qtereel = this.getPersonnaliseBudgetGeneralParInvestissement.find(qtreel => qtreel.afficheUA.id == id);
 
-      if (qtereel) {
+      if (qtereel!=undefined) {
+        console.log("afficherPlanEconomiqueBienService 7")
         return qtereel.afficheEconomique.code.concat('  ', qtereel.afficheEconomique.libelle);
       }
       return 0
