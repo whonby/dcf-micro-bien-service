@@ -86,23 +86,18 @@ CodeExempte
         </template>
 
         <template v-else>
-<h4 style="text-align:center;font-size:30px">{{afficheLeNomDesProcedure}}</h4>
- <div class="row-fluid">
-                <div class="span3">
+<h4 style="text-align:center;">{{afficheLeNomDesProcedure}}</h4>
 
-                </div>
-            </div>
-            
             <div class="row-fluid">
                 <div class="span12">
                      <template v-if="this.budgetDisponible < 10000000 ">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                 <li class="active"><a data-toggle="tab" href="#tab0145">Publication de l'offre</a></li>
-                              <li class=""><a data-toggle="tab" href="#lot1">Lot</a></li>
+                                 <li class="active"><a data-toggle="tab" href="#tab0145">l'offre</a></li>
+                              <li class=""><a data-toggle="tab" href="#lot1">Lots</a></li>
 
-                                <li class=""><a data-toggle="tab" href="#tab01">Reception de l'offre</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab01">Reception</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab17">Attribution</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2">Bailleur</a></li>
@@ -137,7 +132,7 @@ CodeExempte
                       <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>
                            <div id="lot1">
-                             LOT
+                             <lot-marche :macheid="detail_marche.id"></lot-marche>
                            </div>
 
                         <div id="tab17" class="tab-pane">
@@ -188,14 +183,14 @@ CodeExempte
 <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab01">Publication de l'offre</a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab01">l'offre</a></li>
 
                               <li class=""><a data-toggle="tab" href="#lot2">Lots</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab478">Reception des offre</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab478">Reception</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab498">Ouverture</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab41180">Rapport d'ouverture</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab41180">PV d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab78932">Jugement</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab4110">Rapport Jugement</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab4110">PV Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab178">Attribution</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0142">bailleur</a></li>
 
@@ -216,7 +211,7 @@ CodeExempte
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
                          </div>
                            <div id="lot2" class="tab-pane">
-                             Lot
+                             <lot-marche :macheid="detail_marche.id"></lot-marche>
                            </div>
                         <div id="tab478" class="tab-pane">
                 <div class="span4"></div>
@@ -320,13 +315,13 @@ CodeExempte
                                 <li ><a data-toggle="tab" href="#tab5896">Lot</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab78458">Lettre d'invitation CF</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab21230">Le mandaté</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab1235">Reception des offres</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab78477">Ouverture des offres</a></li>
-                                  <li class=""><a data-toggle="tab" href="#tab1041">Rapport d'ouverture</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab7845">D.Candidats</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab9563"> Jugement des offres </a></li>
-                                <li class=""><a data-toggle="tab" href="#tab06125">Rapport d'évaluation</a></li>
-                               <li class=""><a data-toggle="tab" href="#tab067458">Attribution de l'Offre</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab1235">Reception</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab78477">Ouverture</a></li>
+                                  <li class=""><a data-toggle="tab" href="#tab1041">PV d'ouverture</a></li>
+                                <!--<li class=""><a data-toggle="tab" href="#tab7845">D.Candidats</a></li>-->
+                                <li class=""><a data-toggle="tab" href="#tab9563"> Jugement </a></li>
+                                <li class=""><a data-toggle="tab" href="#tab06125">PV Jugement</a></li>
+                               <li class=""><a data-toggle="tab" href="#tab067458">Attribution</a></li>
                                <li class=""><a data-toggle="tab" href="#tab0143723">bailleur</a></li>
                                 
                             </ul>
@@ -345,13 +340,10 @@ CodeExempte
                          </div>
 
                     <div id="tab5896" class="tab-pane">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#addLot" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
-                                <!-- <h4>Publication de l'offre</h4> -->
 
-                      <add-Lot :macheid="detail_marche.id"></add-Lot>
+
+                      <lot-marche :macheid="detail_marche.id"></lot-marche>
+                      <!--<add-Lot :macheid="detail_marche.id"></add-Lot>-->
                          </div>
 
 
@@ -479,14 +471,14 @@ CodeExempte
                                 <li class="active"><a data-toggle="tab" href="#tab001">Offre</a></li>
                                 <li ><a data-toggle="tab" href="#tab0015">Lot</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab041">Lettre d'invitation CF</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab04">Le mandaté</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab051">Reception des offres</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab784">Ouverture des offres</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab17041">Rapport d'ouverture</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab04">Mandaté</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab051">Reception</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab784">Ouverture</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab17041">PV d'ouverture</a></li>
+                              <!--  <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>-->
                                 <li class=""><a data-toggle="tab" href="#tab5498"> Jugement des offres </a></li>
-                                <li class=""><a data-toggle="tab" href="#tab0612">Rapport d'évaluation</a></li>
-                               <li class=""><a data-toggle="tab" href="#tab06745">Attribution de l'Offre</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab0612">PV Jugement</a></li>
+                               <li class=""><a data-toggle="tab" href="#tab06745">Attribution</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab01432">bailleur</a></li>
                                 
                             </ul>
@@ -505,13 +497,9 @@ CodeExempte
                          </div>
 
                     <div id="tab0015" class="tab-pane">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#addLot" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
-                                <!-- <h4>Publication de l'offre</h4> -->
 
-                      <add-Lot :macheid="detail_marche.id"></add-Lot>
+                      <lot-marche :macheid="detail_marche.id"></lot-marche>
+                     <!-- <add-Lot :macheid="detail_marche.id"></add-Lot>-->
                          </div>
 
 
@@ -654,7 +642,7 @@ CodeExempte
                                 <li class=""><a data-toggle="tab" href="#tab04" title="">Mandaté</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab02">Reception de l'offre</a></li> -->
-                                <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
+                                <li class=""><a data-toggle="tab" href="#ouverture">Ouverture</a></li>
                                 
                                 <!--<li class=""><a data-toggle="tab" href="#tab5">Dossier Candidat</a></li>-->
                                 <li class=""><a data-toggle="tab" href="#tab45" title="rapport ouverture">PV Ouverture</a></li>
@@ -761,21 +749,16 @@ CodeExempte
 
 
                          
-                   <div id="tab4" class="tab-pane">
-                <div align="right">
-                   
-
-
-                </div>
+                   <div id="ouverture" class="tab-pane">
+                     <ouverture-offre :macheid="detail_marche.id"></ouverture-offre>
                
-                  <component-ouverture :macheid="detail_marche.id"></component-ouverture>
-                  <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
+                  <!--<component-ouverture :macheid="detail_marche.id"></component-ouverture>-->
+
+                 <!-- <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>-->
                 </div>
                       
 
-                 <div id="tab5" class="tab-pane">  
-                 
-               
+                 <div id="tab5" class="tab-pane">
                    <dossierCandidat :macheid="detail_marche.id"></dossierCandidat>
                 </div>
 
@@ -949,11 +932,12 @@ CodeExempte
      import componentOuverture from '../dossierDetailMarchePs/dossierComponentOuverture/componentOuverture';  
    import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
     import publicationOffre from '../DossierPso/publicationOffre/publicationOffre';
-    import addLot from '../dossierLot/addLot';
+   // import addLot from '../dossierLot/addLot';
         import invitationCf from '../DossierPso/lettreInvitation/invitationCf';
  import mandateBs from '../DossierPso/mandaté/mandateBs';
  import componentOuverture1 from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
-import dossierCandidat from '../DossierPso/dossierCandidat/dossierCandidat'
+//import dossierCandidat from '../DossierPso/dossierCandidat/dossierCandidat'
+    import dossierCandidat from "@/pages/bien_service/DossierPso/dossierCandidat/dossierCandidat";
     import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
     import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
      import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
@@ -968,19 +952,20 @@ import rapportOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComit
          import componentAvisBailleurCf from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
 
 import LotMarche from "@/pages/bien_service/component/LotMarche";
+import OuvertureOffre from "@/pages/bien_service/component/OuvertureOffre/OuvertureOffre";
     import 'vue-search-select/dist/VueSearchSelect.css'
 import { formatageSomme } from "../../../../src/Repositories/Repository";
     export default {
        
         components:{
-
+          OuvertureOffre,
             componentCotation,
           LotMarche,
             componentOuverture,
             componentActe,
             publicationOffre,
             rapportOuverture,
-addLot,
+//addLot,
 invitationCf,
 mandateBs,
 dossierCandidat,

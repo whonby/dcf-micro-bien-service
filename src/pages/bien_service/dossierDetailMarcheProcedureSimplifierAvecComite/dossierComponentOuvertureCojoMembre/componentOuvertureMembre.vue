@@ -2,7 +2,7 @@
     <div>
                   <div class="">
                       <div class="span9" >
-                         <h4>Liste des membres de la Cojo</h4>
+                         <h4>Liste des membres 000de la Cojo</h4>
                       </div>
                       <div class="span3" align="right">
                           <a href="#ajouter_membre_cojo" data-toggle="modal" class="btn btn-warning" >Ajouter un autre membre </a>

@@ -380,6 +380,7 @@ name: "LotMarche",
   },
   modification(){
       let objet={
+        id:this.editor.id,
         objet:this.editor.objet,
         montant_marche:this.editor.montant_marche,
       }

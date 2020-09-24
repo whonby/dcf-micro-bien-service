@@ -1,6 +1,4 @@
 
-
-entreprise_id
 <template>
     <div>
 
@@ -9,10 +7,7 @@ entreprise_id
                     <div class="widget-content">
                         <a href="" @click="isFormulaireDossierCand" v-if="isButtunAddDossierCandidat" data-toggle="modal" class="btn btn-success" >Ajouter</a>
                         <!-- <button class="btn btn-warning" title="veillez terminer le proccessuss de receptions des offres" disabled v-else /> -->
-                   
-                   
                     </div>
-
 
                 </div>
         

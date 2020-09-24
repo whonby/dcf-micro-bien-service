@@ -271,12 +271,6 @@ export default {
         return{
            
             formDataCojo:{
-                //   lettre_invitation_id:"",
-                //         condition_id:'',
-                //         controleur_finnancier:"",
-                //         dmp:"",
-                //         autorite_contractante:"",
-                      // entreprise_id:"",
                         date_ouverture:"",
                         date_composition:"",
                         num_dossier_appel_offre:"",
