@@ -499,17 +499,21 @@ listeOffreTechniqueLotCandidat(){
       return (marche_id,candidat_id)=>{
         if(marche_id!=""){
           let seft=this;
-          console.log(marche_id)
+console.log("okokokokokok")
           let lot_marche=this.getMarchePersonnaliser.filter(item=>item.parent_id==marche_id)
           let collection=[];
+          console.log(lot_marche)
           if (lot_marche.length>0){
+         //   console.log(lot_marche)
             lot_marche.forEach(function (value) {
               let objet=seft.gettersOffreTechniques.find(item=>{
-                if(item.id==value.id && item.dossier_candidat_id==candidat_id){
+                if(item.marche_id==value.id && item.dossier_candidat_id==candidat_id){
                   return item
                 }
               })
-
+              console.log("OG")
+            console.log(objet)
+              console.log("000000")
               if(objet==undefined){
                 collection.push(value)
               }
