@@ -1882,10 +1882,10 @@ export default {
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3)
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null)
            
         }
-           return  this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3)
+           return  this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null)
        
     },
 
@@ -2124,7 +2124,7 @@ recupererCodeTypeMarche() {
 // afficher la liste des marche
 
 afficherLaListeDesMarcheDinvestissement(){
-return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 3)
+return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 3 && element.parent_id == null)
 },
 
 
