@@ -2785,6 +2785,23 @@ export function ajouterMarche({commit}, elementAjout){
   }).catch(error => console.log(error))
 }
 
+
+
+export function ajouterSousMarcheLot({commit}, elementAjout){
+    asyncLoading(axios.post('/sous_marche',elementAjout)).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_MARCHE', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
 // action pour modifier le type text juridique
 
 

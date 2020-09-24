@@ -1214,7 +1214,8 @@ affichertypeMarcheID
                  :key="marche.id">
                  
                  <td>
-                   {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}</td>
+                   {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}
+                 </td>
                    <td>
                    {{afficherUniteAdministrative(afficherIdUniteAdministrative(marche.marche_id)) || 'Non renseigné'}}</td>
                     <td>

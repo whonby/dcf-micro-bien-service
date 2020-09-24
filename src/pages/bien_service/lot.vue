@@ -119,16 +119,7 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <!-- <download-excel
-            class="btn btn-default pull-right"
-            style="cursor:pointer;"
-            :fields="json_fields"
-            title="Liste Types équipements"
-            :data="filtre_equipement"
-            name="Liste des types équipements"
-          >
-            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel> -->
+
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">

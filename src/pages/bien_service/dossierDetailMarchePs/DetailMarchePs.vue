@@ -6,9 +6,7 @@ CodeExempte
 <div>
         <div class="container-fluid">
             
-            <!-- <h4 v-if="marcheDetail(marcheid)" >Detail Marche en procedure simplifiée : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
-                <button class="btn btn-success btn-large" v-else>Marché attribué</button></h4>
-            <hr /> -->
+
 
             <div class="widget-box">
               
@@ -102,6 +100,8 @@ CodeExempte
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                  <li class="active"><a data-toggle="tab" href="#tab0145">Publication de l'offre</a></li>
+                              <li class=""><a data-toggle="tab" href="#lot1">Lot</a></li>
+
                                 <li class=""><a data-toggle="tab" href="#tab01">Reception de l'offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab17">Attribution</a></li>
@@ -136,6 +136,9 @@ CodeExempte
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>
+                           <div id="lot1">
+                             LOT
+                           </div>
 
                         <div id="tab17" class="tab-pane">
                 <div align="right">
@@ -165,13 +168,7 @@ CodeExempte
 
 
                    <div id="tab4" class="tab-pane">
-                <!-- <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterOuverture" data-toggle="modal" class="btn btn-success">Ajouter</a>
-                    </div>
 
-
-                </div> -->
                
                    <component-ouverture :macheid="detail_marche.id"></component-ouverture>
                 </div>
@@ -192,6 +189,8 @@ CodeExempte
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab01">Publication de l'offre</a></li>
+
+                              <li class=""><a data-toggle="tab" href="#lot2">Lots</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab478">Reception des offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab498">Ouverture</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab41180">Rapport d'ouverture</a></li>
@@ -216,7 +215,9 @@ CodeExempte
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
                          </div>
-
+                           <div id="lot2" class="tab-pane">
+                             Lot
+                           </div>
                         <div id="tab478" class="tab-pane">
                 <div class="span4"></div>
                                 <div class="span4"></div>
@@ -643,20 +644,22 @@ CodeExempte
      <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                   <li class="active"><a data-toggle="tab" href="#tab001" title="tansmission du DAO a la DMP">Transmission</a></li>
+                                   <!--<li class="active"><a data-toggle="tab" href="#tab001" title="tansmission du DAO a la DMP">Transmission</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab010">ANO DMP DAO</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab020">ANO Bailleur DAO</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab4569" title="publication des offres">Publication</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre I</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab04" title="">mandaté</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab020">ANO Bailleur DAO</a></li>-->
+                                 <li class="active"><a data-toggle="tab" href="#tab4569" title="L'offres">L'Offre</a></li>
+                              <li class=""><a data-toggle="tab" href="#lot3" title="Lot">Lots</a></li>
+
+                              <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre I</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab04" title="">Mandaté</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab02">Reception de l'offre</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
                                 
-                                <li class=""><a data-toggle="tab" href="#tab5">Dossier Candidat</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab45" title="rapport ouverture">Rapport O</a></li>
+                                <!--<li class=""><a data-toggle="tab" href="#tab5">Dossier Candidat</a></li>-->
+                                <li class=""><a data-toggle="tab" href="#tab45" title="rapport ouverture">PV Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Jugement</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">Rapport</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">PV Jugement</a></li>
 
                                  <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP">D.DMP</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab028" title="ANO/DMP attribution">A.ANO</a></li> -->
@@ -674,12 +677,12 @@ CodeExempte
                         
                          <div class="widget-content tab-content">
                             
-                             <div id="tab001" class="tab-pane active">
+                             <!--<div id="tab001" class="tab-pane ">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
                                     <a href="#ajouterT" data-toggle="modal" class="btn btn-primary" align="rigth">Ajouter</a></div>
-                                <!-- <h4>Publication de l'offre</h4> -->
+                                <h4>Publication de l'offre</h4>
 
                                 <componentTransmissionDao :macheid="detail_marche.id"></componentTransmissionDao>
                          </div>
@@ -688,9 +691,9 @@ CodeExempte
                           <div id="tab010" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <!-- <div class="span4" align="right">
-                                    <a href="#ajouterDemandeAno" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
-                                <!-- <h4>Publication de l'offre</h4> -->
+                                <div class="span4" align="right">
+                                    <a href="#ajouterDemandeAno" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <h4>Publication de l'offre</h4>
 
                             <componentAvis :macheid="detail_marche.id"></componentAvis>
 
@@ -700,24 +703,25 @@ CodeExempte
                           <div id="tab020" class="tab-pane ">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <!-- <div class="span4" align="right">
-                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-primary" align="rigth">Ajouter</a></div> -->
-                                <!-- <h4>Publication de l'offre</h4> -->
                                  <componentAvisBailleurSurTransmision :macheid="detail_marche.id"></componentAvisBailleurSurTransmision>
                      
-                         </div>
+                         </div>-->
 
 
-                       <div id="tab4569" class="tab-pane ">
+                       <div id="tab4569" class="tab-pane active ">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
                                     <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
-                                <!-- <h4>Publication de l'offre</h4> -->
+
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
                          </div>
 
+                           <div id="lot3" class="tab-pane ">
+
+                             <lot-marche :macheid="detail_marche.id"></lot-marche>
+                           </div>
 
                               <div id="tab0001" class="tab-pane">
                                 <div class="span4"></div>
@@ -956,33 +960,14 @@ import dossierCandidat from '../DossierPso/dossierCandidat/dossierCandidat'
 import rapportOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
      
    import componentBailleur from '../dossierDetailMarchePs/dossierBailleur/componentBailleur';
-//      import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
-//       import componentOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
-//       import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
-    
-    //  import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
-    //   import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
-    //  import invitationCf from '../DossierPso/lettreInvitation/invitationCf';
-    //  import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
 
-     import componentTransmissionDao from '../dossierDetailMarcheAOI_AON/dossierTransmission/componentTransmissionD';
-      import componentAvis from '../dossierDetailMarcheAOI_AON/dossierDemandeAno/componentAvis';
       import executionLigneExempte from '../executionLigneExempte/executionLigneExempte';
-///////////////////////////////////////////////
 
-     
-        // import publicationOffre from '../DossierPso/publicationOffre/publicationOffre';
         import componentDemandeAno from '../dossierDetailMarcheAOI_AON/dossierDemande_ano_cf/componentDemandeAno'; 
-         import componentAvisBailleurSurTransmision from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurSurTransmission/componentAvisBailleurSurTransmision';
         import componentAvisAnoCf from '../dossierDetailMarcheAOI_AON/dossierAvisAnoCf/componentAvisAnoCf';
          import componentAvisBailleurCf from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
 
-  //import bailleurAjouter from '../dossierComponent/bailleurAjouter';
-
-   // import bailleurAjouter from '../dossierComponent/bailleurAjouter'
-
-    //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
-    //import {  ModelListSelect } from 'vue-search-select'
+import LotMarche from "@/pages/bien_service/component/LotMarche";
     import 'vue-search-select/dist/VueSearchSelect.css'
 import { formatageSomme } from "../../../../src/Repositories/Repository";
     export default {
@@ -990,7 +975,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
         components:{
 
             componentCotation,
-            //componentEtat,
+          LotMarche,
             componentOuverture,
             componentActe,
             publicationOffre,
@@ -1010,23 +995,13 @@ componentPv,
             
        
          
-          ///////
-         componentTransmissionDao,
-              componentAvis,  
-            
-           
-            
+
             componentDemandeAno,
-            componentAvisBailleurSurTransmision,
+
             componentAvisAnoCf,
             componentAvisBailleurCf,
             executionLigneExempte
-        // bailleurAjouter,
 
-           // bailleurAjouter,
-
-            
-           // ModelListSelect,
 
         },
         data() {
