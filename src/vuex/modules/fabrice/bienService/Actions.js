@@ -2818,6 +2818,21 @@ export function modifierMarche({ commit, dispatch}, element_modifie) {
        })
    }).catch(error => console.log(error))
 }
+
+
+export function modifierSousMarche({ commit, dispatch}, element_modifie) {
+    asyncLoading( axios.put('/sous_marche',element_modifie)).then(response => {
+        commit('MODIFIER_MARCHE', response.data)
+        dispatch('getMarche')
+        dispatch('getActeEffetFinancier')
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
 //supprimer le type text juridique
 
 export function supprimerMarche({commit}, id) {

@@ -4,7 +4,6 @@
 
 
   <div class="container-fluid">
-    <hr />
     <div class="row-fluid">
       <div class="span4"></div>
       <div class="span4"></div>
@@ -19,15 +18,12 @@
                 <i class="icon-th"></i>
               </span>
             <h5>Liste des Lots</h5>
-          <!--  <div align="right">
-              Search:
-              <input type="search" placeholder v-model="search" />
-            </div>-->
           </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
               <thead>
               <tr>
+                <th>N°</th>
                 <th>Intitule du lot</th>
                 <th>Montant estimatif en FCFA TTC</th>
 
@@ -37,11 +33,13 @@
               <tbody>
               <tr class="odd gradeX" v-for="marche in getLotMarche"
                   :key="marche.id">
-
-                <td>
+                <td @dblclick="editeMarcheLot(marche.id)">
+                  {{marche.numero_lot || 'Non renseigné'}}
+                </td>
+                <td @dblclick="editeMarcheLot(marche.id)">
                   {{marche.objet || 'Non renseigné'}}
                 </td>
-                <td>
+                <td @dblclick="editeMarcheLot(marche.id)">
                   {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}
                 </td>
                 <td>
@@ -68,7 +66,7 @@
     <div class="modal-body">
       <form class="form-horizontal">
         <div class="control-group">
-          <label class="control-label">numero_lot</label>
+          <label class="control-label">Intitule du lot</label>
           <div class="controls">
             <input
                 type="text"
@@ -89,20 +87,89 @@
                 placeholder="Saisir le montant_lot"
             />
           </div>
+          <code v-if="sommeMontant(formData.montant_marche)>detail_marche.montant_marche">
+           Impossible d'effectuer l'engistrement</code>
+          <code v-if="sommeMontant(formData.montant_marche)>detail_marche.montant_marche">
+            Car le montant total des lots est supperieur  </code>
+          <code v-if="sommeMontant(formData.montant_marche)>detail_marche.montant_marche">
+            au montant du marché  </code>
+          <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>Montant marché</th>
+              <th>Total montant lot</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{formatageSomme(parseFloat(detail_marche.montant_marche))}}</td>
+              <td>{{formatageSomme(parseFloat(sommeMontant(formData.montant_marche)))}}</td>
+            </tr>
+            </tbody>
+       </table>
+        </div>
+
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a v-if="sommeMontant(formData.montant_marche)<=detail_marche.montant_marche"
+          @click.prevent="ajouter()"
+          class="btn btn-primary"
+          href="#"
+      >Valider</a>
+      <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+    </div>
+  </div>
+
+
+
+  <!--Edition de lot-->
+
+  <div id="editBailleuMarche" class="modal hide" aria-hidden="true" style="display: none;">
+    <div class="modal-header">
+      <button data-dismiss="modal" class="close" type="button">×</button>
+      <h3>Modification </h3>
+    </div>
+    <div class="modal-body">
+      <form class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label">Intitule du lot</label>
+          <div class="controls">
+            <input
+                type="text"
+                v-model="editor.objet"
+                class="span"
+                placeholder="Intitule du lot"
+            />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">montant_lot</label>
+          <div class="controls">
+            <input
+                type="text"
+                v-model="editor.montant_marche"
+                class="span"
+                placeholder="Saisir le montant_lot"
+            />
+          </div>
+
         </div>
 
       </form>
     </div>
     <div class="modal-footer">
       <a
-          @click.prevent="ajouter()"
-          class="btn btn-primary"
-          href="#"
-
-      >Valider</a>
+         @click.prevent="modification()"
+         class="btn btn-primary"
+         href="#"
+      >Modification</a>
       <a data-dismiss="modal" class="btn" href="#">Fermer</a>
     </div>
   </div>
+
+
 </div>
 </template>
 
@@ -122,7 +189,7 @@ name: "LotMarche",
       ],
       formData: {
         objet:"",
-        montant_marche:"",
+        montant_marche:0,
         type_marche_id:"",
         unite_administrative_id:"",
         activite_id:"",
@@ -165,7 +232,7 @@ name: "LotMarche",
         parent_id:"",
         numero_lot:"",
       },
-      edit_bailleur_marche:"",
+      editor:"",
       lot:"",
       search: "",
       detail_marche:"",
@@ -177,23 +244,40 @@ name: "LotMarche",
   created() {
     this.lot=this.getMarchePersonnaliser.filter(item=>item.parent_id==this.macheid)
     this.detail_marche=this.getMarchePersonnaliser.find(item=>item.id==this.macheid)
-  console.log(this.lot)
+  //console.log(this.lot)
   },
   computed:{
     ...mapGetters('bienService',['personnaliseGetterMarcheBailleur',"getMarchePersonnaliser"]),
     getLotMarche(){
       return this.getMarchePersonnaliser.filter(item=>item.parent_id==this.macheid);
+    },
+    sommeMontant(){
+     return montant_saisi=>{
+       //console.log(montant_saisi)
+       let initialValue = 0;
+       let ObjetMontant =this.lot.reduce(function (total, currentValue) {
+         return total + parseFloat(currentValue.montant_marche) ;
+       }, initialValue);
+        console.log(ObjetMontant)
+       if(montant_saisi==0){
+         return ObjetMontant
+       }
+
+       let montant=parseFloat(ObjetMontant) + parseFloat(montant_saisi)
+       return parseFloat(montant);
+     }
+
     }
   },
   methods:{
     ...mapActions("bienService", ['ajouterSousMarcheLot','modifierMarche','modifierMarcheBascule',
-      'supprimerMarche','modifierActeEffetFinancier',"getMarche","getActeEffetFinancier"]),
+      'supprimerMarche','modifierActeEffetFinancier',"getMarche","getActeEffetFinancier","modifierSousMarche"]),
     formatageSomme:formatageSomme,
     ajouter(){
       let nbrlot=this.lot.length +1
-     // let intitule=this.detail_marche.objet+" / "+this.formData.objet
+     let intitule=this.detail_marche.objet+" / "+this.formData.objet
       this.formData={
-        objet:this.formData.objet,
+        objet:intitule,
             montant_marche:this.formData.montant_marche,
             type_marche_id:this.detail_marche.type_marche_id,
             unite_administrative_id:this.detail_marche.unite_administrative_id,
@@ -286,7 +370,21 @@ name: "LotMarche",
             parent_id:"",
             numero_lot:"",
       }
-    }
+    },
+  editeMarcheLot(index){
+    this.$('#editBailleuMarche').modal({
+      backdrop: 'static',
+      keyboard: false
+    });
+    this.editor = this.getMarchePersonnaliser.find(item=>item.id==index)
+  },
+  modification(){
+      let objet={
+        objet:this.editor.objet,
+        montant_marche:this.editor.montant_marche,
+      }
+      this.modifierSousMarche(objet)
+  }
   }
 }
 </script>

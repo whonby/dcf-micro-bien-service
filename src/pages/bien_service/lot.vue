@@ -78,7 +78,7 @@
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label">libelle_lot</label>
+            <label class="control-label">libelle lot</label>
             <div class="controls">
               <input
                 type="text"
@@ -89,7 +89,7 @@
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label">montant_lot</label>
+            <label class="control-label">montant lot</label>
             <div class="controls">
               <input
                 type="text"
