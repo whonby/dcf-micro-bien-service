@@ -163,8 +163,6 @@ CodeExempte
 
 
                    <div id="tab4" class="tab-pane">
-
-               
                    <component-ouverture :macheid="detail_marche.id"></component-ouverture>
                 </div>
 
@@ -230,17 +228,10 @@ CodeExempte
 
 
                    <div id="tab498" class="tab-pane">
-                <div align="right">
-                   
- <div class="widget-content">
-                        <a href="#ajouterOuverture" data-toggle="modal" class="btn btn-success">Ajouter</a>
-                    </div>
 
-
-                </div>
-               
-                  <component-ouverture :macheid="detail_marche.id"></component-ouverture>
-                  <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
+                     <ouverture-offre :macheid="detail_marche.id"></ouverture-offre>
+<!--                  <component-ouverture :macheid="detail_marche.id"></component-ouverture>-->
+<!--                  <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>-->
                 </div>
 
                         <div id="tab41180" class="tab-pane">
@@ -391,9 +382,9 @@ CodeExempte
 
 
                 </div> -->
-               
-                  <component-ouverture1 :macheid="detail_marche.id"></component-ouverture1>
-                  <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
+                            <ouverture-offre :macheid="detail_marche.id"></ouverture-offre>
+                  <!--<component-ouverture1 :macheid="detail_marche.id"></component-ouverture1>
+                  <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>-->
                 </div>
 
                 <div id="tab1041" class="tab-pane">
@@ -540,16 +531,10 @@ CodeExempte
                       <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>
                           <div id="tab784" class="tab-pane">
-                <!-- <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterOuverture" data-toggle="modal" class="btn btn-success">Ajouter</a>
-                    </div>
+                            <ouverture-offre :macheid="detail_marche.id"></ouverture-offre>
 
-
-                </div> -->
-               
-                  <component-ouverture1 :macheid="detail_marche.id"></component-ouverture1>
-                  <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
+                  <!--<component-ouverture1 :macheid="detail_marche.id"></component-ouverture1>
+                  <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>-->
                 </div>
                 
 
@@ -892,11 +877,11 @@ CodeExempte
                 </div>
 
 
-                
 
-               
 
-                
+
+
+
 
                          </div>
 
@@ -935,10 +920,10 @@ CodeExempte
    // import addLot from '../dossierLot/addLot';
         import invitationCf from '../DossierPso/lettreInvitation/invitationCf';
  import mandateBs from '../DossierPso/mandaté/mandateBs';
- import componentOuverture1 from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
+ //import componentOuverture1 from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
 //import dossierCandidat from '../DossierPso/dossierCandidat/dossierCandidat'
     import dossierCandidat from "@/pages/bien_service/DossierPso/dossierCandidat/dossierCandidat";
-    import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
+   // import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
     import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
      import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
 import rapportOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
@@ -969,8 +954,8 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
 invitationCf,
 mandateBs,
 dossierCandidat,
- componentOuverture1,
-            componentOuvertureMembre,
+ //componentOuverture1,
+           // componentOuvertureMembre,
             componentAnalyse,
 componentPv,
  
