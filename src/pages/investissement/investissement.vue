@@ -2627,7 +2627,7 @@ anneeAmort() {
      ImputationBudget() {
 
       
-      const norme = this.getPersonnaliseBudgetGeneralParInvestissement.find(normeEquipe => normeEquipe.afficheEconomique.id == this.formData.economique_id);
+      const norme = this.getPersonnaliseBudgetGeneralParInvestissement.find(normeEquipe => normeEquipe.economique_id == this.formData.economique_id);
 
       if (norme) {
         return norme.codebudget;
@@ -2636,7 +2636,7 @@ anneeAmort() {
     },
      ImputationBudgetModifier() {
       
-      const norme = this.getPersonnaliseBudgetGeneralParInvestissement.find(normeEquipe => normeEquipe.afficheEconomique.id == this.editMarche.economique_id);
+      const norme = this.getPersonnaliseBudgetGeneralParInvestissement.find(normeEquipe => normeEquipe.economique_id == this.editMarche.economique_id);
 
       if (norme) {
         return norme.codebudget;

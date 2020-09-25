@@ -912,11 +912,11 @@ CodeExempte
         </template>
 
            
-              <div class="modal-footer">
+              <!-- <div class="modal-footer">
         
         <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListeEntreprise" href="#">Voir Tableau Marché</a>
        
-      </div>
+      </div> -->
         </div>
           
 

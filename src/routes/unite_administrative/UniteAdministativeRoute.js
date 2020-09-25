@@ -30,7 +30,17 @@ import LigneExempte from "../../pages/unites_administratives/LigneExempte";
 import StructureOrganigramme from "../../pages/parametres_generaux/administratifs/grpeStructureOrganigramme/structureOrganigrammePrincipal.vue";
 import Synthesebudg from "../../pages/gestionMarche/synthesebudg.vue";
 import decompte from "../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte.vue";
+import listeBudgetIntialParUa from "../../pages/unites_administratives/filtreDesBudgetSurTableauBord/listeBudgetIntialParUa.vue";
 const UniteAdministativeRoutes = [
+ 
+  {
+    path: "/listeBudgetIntialParUa/:id",
+    name: "listeBudgetIntialParUa",
+    component: listeBudgetIntialParUa
+}
+,
+ 
+ 
   {
     path: "/decompte",
     name: "decompte",
