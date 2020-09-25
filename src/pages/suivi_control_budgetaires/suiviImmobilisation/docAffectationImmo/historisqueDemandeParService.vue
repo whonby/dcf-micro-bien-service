@@ -511,8 +511,6 @@ created() {
     this.formData = this.historiqueAffectationService.find(
       DmdImmo => DmdImmo.id == this.$route.params.id
     );
-
-    //console.log(this.$router);
   },
   computed: {
      admin:admin,

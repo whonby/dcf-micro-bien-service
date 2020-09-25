@@ -22,6 +22,7 @@ import executionPersonnel from "../../pages/acteurs_depenses/executionPersonnel/
 import detailExecutionPersonnel from "../../pages/acteurs_depenses/executionPersonnel/detailExecutionPersonnel.vue"
 import recrutementPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/recrutementPersonnel.vue";
 import detailPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/detailPersonnel";
+import AjouterContratPersonnel from "../../pages/acteurs_depenses/acteurs/AjouterContratPersonnel.vue";
 import cycledeVie from "../../pages/acteurs_depenses/Cycledevie/cycledeVie.vue";
 import RapportDepense from "../../pages/cycle_de_vie/RapportDepense.vue";
 import LivreSpecial from "../../pages/cycle_de_vie/RapportDepense1.vue";
@@ -130,6 +131,11 @@ const ActeurDepenseRoutes = [
   },
 
   // la route du detail personne
+  {
+    path:"/Ajouter-Contrat-Personnel/:id",
+    name:"AjouterContratPersonnel",
+    component:AjouterContratPersonnel
+  },
   {
     path:"/detail-personnel/:id",
     name:"detailPersonnel",

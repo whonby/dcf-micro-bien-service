@@ -1,384 +1,10 @@
-Type de Recrutement
+formEffetFinancier
 <template>
-    <div id="">
-        <notifications />
-        <!-- <div class="quick-actions_homepage span12"  >
-            <ul class="quick-actions" style="margin: 0px !important;">
-                
-                <li class="bg_ly">
-                    <a href="#">
-                        <i class="icon-inbox"></i><span class="label label-important">{{nombreTotalActeurAcredite}}</span> Total acteur accrédité
-                    </a>
-                </li>
-                <li class="bg_lb"> <a href="#"> <i class="icon-th"></i> <span class="label label-important">{{nombretotalActeurNonAccredite}}</span> Total acteur non accrédité</a> </li>
-                <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> <span class="label label-important" v-if="tauxActeurAccredite!='NaN'">{{totalTaux || '0' }} %</span>
-                    Taux acteur accrédité
-                </a> </li>
-            </ul>
-        </div> -->
-
-        <div class="container-fluid" style="heigth:100%">
-
-            <hr>
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="widget-box">
-                        <div class="widget-title">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab10">Liste du personnel     <span class="badge badge-inverse">{{nombreActeurActivite}}</span></a></li>
-                                 <li class=""><a data-toggle="tab" href="#AjouterPersonnelAvecContrat">Ajouter Personnel Avec Contrat </a></li>
-                                 <li class=""><a data-toggle="tab" href="#AjouterPersonnelSansContrat">Ajouter Personnel Sans Contrat </a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab78">Contrat de Recrutement Direct </a></li>
-                                <li class=""><a data-toggle="tab" href="#tab19">Liste des acteurs de dépenses   <span class="badge badge-success">{{NombrePersonnelRecuActeNorm}}</span></a> </li>
-                                <li class=""><a data-toggle="tab" href="#tab30">Acteurs non actifs</a></li>
-                                  <!-- <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{0}}</span></a></li>
-                                   <li><a data-toggle="tab" href="#tab301">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li>  -->
-                                   
-                                  
-                            </ul>
-                        </div>
-                        <div class="widget-content tab-content">
-                 <div id="AjouterPersonnelAvecContrat" class="tab-pane">
-                           <div class="widget-box">
-<AjoutPersonnelAvecContrat></AjoutPersonnelAvecContrat>
-                           </div>
-                 </div>
-                         <div id="AjouterPersonnelSansContrat" class="tab-pane">
-                           <div class="widget-box">
-<AjoutPersonnelSansContrat></AjoutPersonnelSansContrat>
-                           </div>
-                 </div>
-                         <div id="tab78" class="tab-pane">
-                           <div class="widget-box">
-                             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Liste des contrats</h5>
-                                        <div align="right">
-                                            Recherche: <input type="text" v-model="search">
-                                        </div>
-                                    </div>
-                             <div class="widget-content nopadding">
-                                             <table class="table table-bordered table-striped">
-                                               <thead>
-                    <tr>
-
-                        <th>Référence Acte </th>
-                        <th>Date de Début </th>
-                        <th>Date de Fin </th>
-                        <th>Durée </th>
-                        <th>Autorité d'Approbation </th>
-                        <th>Date d'Attribution </th>
-                        <th>Montant Acte</th>
-                       
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="odd gradeX" v-for=" (effetFinancier,index) in listeActeEffectFinnancier"
-                        :key="effetFinancier.id">
-                        
-                              <td @dblclick="afficherModalModifierRecrutementDrect(index)">
-                            {{effetFinancier.reference_act || 'Non renseigné'}}</td>
-                            <td @dblclick="afficherModalModifierRecrutementDrect(index)">
-                            {{formaterDate(effetFinancier.date_odre_service) || 'Non renseigné'}}</td>
-                             <td @dblclick="afficherModalModifierRecrutementDrect(index)">
-                            {{formaterDate(effetFinancier.date_fin_exe) || 'Non renseigné'}}</td>
-                             <td @dblclick="afficherModalModifierRecrutementDrect(index)">
-                            {{effetFinancier.duree || 'Non renseigné'}}</td>
-                             <td @dblclick="afficherModalModifierRecrutementDrect(index)">
-                            {{effetFinancier.autorite_approbation || 'Non renseigné'}}</td>
-                             <td @dblclick="afficherModalModifierRecrutementDrect(index)">
-                            {{formaterDate(effetFinancier.date_approbation) || 'Non renseigné'}}</td>
-                             <td @dblclick="afficherModalModifierRecrutementDrect(index)">
-                            {{formatageSomme(parseFloat(effetFinancier.montant_act ))|| 'Non renseigné'}}</td>
-                                               <td >
-  <span v-if="effetFinancier.activationD != 1">
-   <router-link :to="{ name: 'AjouterPersoRecrutementDirect', params: { id: effetFinancier.id }}" class="btn btn-default " title="Ajouter personnel recrutement direct">
-                                                            <span class=""><i class="icon-folder-open"></i></span>
-                                                        </router-link>
-  </span>
-  <span v-else></span>
-</td>
-                             
-<td>
-      <div class="btn-group">
-                            <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span>
-                            </button>
-                        </div>
-</td>
-                    </tr>
-                    </tbody>
-                                             </table>
-                             </div>
-                         </div>
-                         </div>
-                         
-                            <div id="tab10" class="tab-pane active">
-                                <div class="widget-box">
-                                    <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Liste du personnel</h5>
-                                        <div align="right">
-                                            Recherche: <input type="text" v-model="search">
-                                        </div>
-                                    </div>
-                                    <div class="widget-content nopadding">
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                            <tr>
-                                                <!-- <th>Situation matrimoniale </th> -->
-                                                <th>Matricule </th>
-                                                <th>Nom</th>
-                                                <th>Prénom</th>
-                                                <th>Date de naissance</th>
-                                                <th >Unité administrative</th>
-                                                
-                                                <th >Service</th>
-                                                <th >Fonction Administrative</th>
-                                                <th >Contrat</th>
-                                                <th style="width:10px">Action</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr class="odd gradeX" v-for="item in acteurActivite" :key="item.id">
-  
-                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}{{item.id}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_naissance) }}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheAdministrative(item.unite_administrative_id) || 'Non renseigné'}}</td>
-                                                
-                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(item.service_id)|| 'Non renseigné'}}</td>
-                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheLibelleFonction(item.fonction_id) || 'Non renseigné'}}</td>
-                                                
-                                                <td>
-                     <button  @dblclick="afficherModalModifierTitre(item.id)"
-                     
-                      v-if="item.reference_acte != null"  class="btn  btn-success">
-                <span >Oui</span>
-       
-                </button>
-                  
-                   
-                   
-                    <router-link :to="{ name: '', params: { id: item.id }}" class="btn btn-danger " v-else >
-                                                           <span >Non</span>
-                                                        </router-link>
-                    
-              
-   
-                   </td>
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <router-link :to="{ name: 'ActeurDetail', params: { id: item.id }}" class="btn btn-default ">
-                                                            <span class=""><i class="icon-folder-open"></i></span>
-                                                        </router-link>
-
-                                                        <button @click.prevent="suprimer(item.id)"  class="btn btn-danger ">
-                                                            <span class=""><i class="icon-trash"></i></span></button>
-
-                                                    </div>
-
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                                       <div id="tab19" class="tab-pane">
-                                <div class="widget-box">
-                                    <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Acteur de dépense en activité</h5>
-                                        <!-- <div align="right">
-                                            Search: <input type="text" v-model="search">
-                                        </div> -->
-                                    </div>
-                                    <div class="widget-content nopadding">
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                            <tr>
-                                              
-                                                <th>Matricule </th>
-                                                <th>Nom</th>
-                                                <th>Prénom</th>
-                                                <th>Unité administrative</th>
-                                                <th>Fonction budgétaire</th>
-                                                <th>Date de début nomination</th>
-                                                <th>Date de fin nomination</th>
-                                                <!-- <th>Action</th> -->
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr class="odd gradeX" v-for="item in afficheActeNorminationPerso" :key="item.id">
-                                                 
-                                                <td >{{afficheMatriculePersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
-                                                <td >{{afficheNomPersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
-                                                <td >{{affichePrenomsPersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
-                                                <td >{{afficheUniteAdministrative(item.unite_administrative_id) || 'Non renseigné'}}</td>
-                                                 <td >{{afficheFonctionBudgetaire(item.fonction_budgetaire_id) || 'Non renseigné'}}</td>
-                                                <td >{{formaterDate(item.date_debut_fonct_budget) }}</td>
-                                                <td >{{formaterDate(item.date_fin_fonct_budget) }}</td>
-                                               
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <!-- <router-link :to="{ name: 'ActeurDetail', params: { id: item.id }}" class="btn btn-default ">
-                                                            <span class=""><i class="icon-folder-open"></i></span>
-                                                        </router-link> -->
-
-                                                        <button @click.prevent="suprimer(item.id)"  class="btn btn-danger ">
-                                                            <span class=""><i class="icon-trash"></i></span></button> 
-
-                                                    </div>
-
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="tab30" class="tab-pane">
-                                <div class="widget-box">
-                                    <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Acteur de dépense non actif</h5> 
-                                        <div align="right">
-                                            Recherche: <input type="text" v-model="search1">
-                                        </div>
-                                    </div>
-                                    <div class="widget-content nopadding">
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                            <tr>
-                                                <th>Matricule </th>
-                                                <th>Nom</th>
-                                                <th>Prénom</th>
-                                                <th>Date de naissance</th>
-                                                <th>Unité administrative</th>
-                                                <th>Action</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr class="odd gradeX" v-for="item in acteurNonActivite" :key="item.id">
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.matricule || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.nom || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_naissance) }}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.uniteAdmin.libelle || 'Non renseigné'}}</td>
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <router-link :to="{ name: 'ActeurDetail', params: { id: item.id }}" class="btn btn-default ">
-                                                            <span class=""><i class="icon-folder-open"></i></span>
-                                                        </router-link>
-
-                                                        <button @click.prevent="suprimer(item.id)"  class="btn btn-danger ">
-                                                            <span class=""><i class="icon-trash"></i></span></button>
-
-                                                    </div>
-
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-
-                         
-
-                        
-
-                          
-
-                
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- <fab :actions="fabActions"
-             main-icon="apps"
-             @cache="afficherModalTypeRecretement"
-             bg-color="green"
-
-        ></fab> -->
-
-    
-
-        <div id="modifierModal" class="modal hide">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier un fonctions</h3>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <div class="control-group">
-                        <label class="control-label">Code:</label>
-                        <div class="controls">
-                            <input type="text" v-model="editTitre.code" class="span" placeholder="" />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Libelle:</label>
-                        <div class="controls">
-                            <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <a @click.prevent="modifierTitre(editTitre)" class="btn btn-primary"
-                   href="#">Modifier</a>
-                <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
-        </div>
-
-
-   <div id="exampleModal" class="modal hide tailleModalRecrutement">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Type de Recrutement</h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-    <tr>
-      <td>
-       <div class="control-group">
-            <label class="control-label">Type de Recrutement</label>
-            <div class="controls">
-               <select v-model="formRecrutement.recrutement" class="span5">
-                      <option></option>               
-                      <option value="1">Recrtement Direct</option> 
-                       <option value="2">Recrutement Indirect</option> 
-                    </select>
-            </div>
-          </div>
-      </td>
-    </tr>
-         
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="ajouterTypeTexteLocal"
-          class="btn btn-primary"
-          href="#"
-          v-show="formRecrutement.recrutement"
-        >Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-  
 
 <div id="ajouterActeEffetFinancierP" class="modal hide grdirModalActeEffet">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter acte effet financier</h3>
+                <h3>Ajouter acte effet financier{{item.id}}</h3>
             </div>
             <div class="modal-body">
 
@@ -396,7 +22,7 @@ Type de Recrutement
 
                                                         </select> -->
 
-        <input type="text" v-model="formEffetFinancier.unite_administrative_id"
+        <input type="text" 
                                     class="span4"
                                     placeholder="refence acte"
                             />
@@ -408,10 +34,10 @@ Type de Recrutement
                         <div class="control-group">
                         <label class="control-label">Type acte effet financier.</label>
                         <div class="controls">
-                          <select v-model="formEffetFinancier.type_act_effet_id" class="span4">
+                          <!-- <select v-model="formEffetFinancier.type_act_effet_id" class="span4">
                                 <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
-                            </select>
+                            </select> -->
                         
                         </div>
                     </div>
@@ -423,10 +49,10 @@ Type de Recrutement
                     <div class="control-group">
                         <label class="control-label">Reference acte</label>
                         <div class="controls">
-                            <input type="text" v-model="formEffetFinancier.reference_act"
+                            <!-- <input type="text" v-model="formEffetFinancier.reference_act"
                                     class="span4"
                                     placeholder="refence acte"
-                            />
+                            /> -->
                         </div>
                     </div>
                             </td>
@@ -438,12 +64,12 @@ Type de Recrutement
                     <div class="control-group">
                         <label class="control-label">Autorité approbatrice</label>
                         <div class="controls">
-                            <input
+                            <!-- <input
                                     type="text"
                                     v-model="formEffetFinancier.autorite_approbation"
                                     class="span4"
                                     placeholder=" "
-                            />
+                            /> -->
                             
                         </div>
                     </div>
@@ -459,12 +85,12 @@ Type de Recrutement
                     <div class="control-group">
                         <label class="control-label"> date d'approbation</label>
                         <div class="controls">
-                            <input
+                            <!-- <input
                                     type="date"
                                     v-model="formEffetFinancier.date_approbation"
                                     class="span4"
                                     placeholder=""
-                            />
+                            /> -->
                         </div>
                     </div>
 
@@ -473,10 +99,10 @@ Type de Recrutement
                      <div class="control-group">
                         <label class="control-label">Incidence financière</label>
                         <div class="controls">
-                            <select  v-model="formEffetFinancier.incidence_financiere" class="span4">
+                            <!-- <select  v-model="formEffetFinancier.incidence_financiere" class="span4">
                                <option value="0">Oui</option>
                                <option value="1">Non</option>
-                            </select>
+                            </select> -->
                                     
                                   
                             
@@ -488,10 +114,10 @@ Type de Recrutement
                      <div class="control-group">
                         <label class="control-label">Montant Contrat</label>
                         <div class="controls">
-                            <input type="text" v-model="formEffetFinancier.montant_act"
+                            <!-- <input type="text" v-model="formEffetFinancier.montant_act"
                                     class="span4"
                                     placeholder="Saisir le montant "
-                            />
+                            /> -->
                         </div>
                     </div>
                             </td>
@@ -500,10 +126,10 @@ Type de Recrutement
                             <div class="control-group">
                         <label class="control-label" >Date de signature attributaire</label>
                         <div class="controls">
-                            <input type="date" v-model="formEffetFinancier.date_attributaire"
+                            <!-- <input type="date" v-model="formEffetFinancier.date_attributaire"
                                     class="span4"
                                     placeholder=""
-                            />
+                            /> -->
                         </div>
                     </div>
                             </td>
@@ -515,10 +141,10 @@ Type de Recrutement
                      <div class="control-group">
                         <label class="control-label">Date ordre de service demarrage</label>
                         <div class="controls">
-                            <input type="date" v-model="formEffetFinancier.date_odre_service"
+                            <!-- <input type="date" v-model="formEffetFinancier.date_odre_service"
                                     class="span4"
                                     placeholder=""
-                            />
+                            /> -->
                         </div>
                     </div>
                             </td>
@@ -528,10 +154,10 @@ Type de Recrutement
                      <div class="control-group">
                         <label class="control-label" title=" ">Date fin exécution</label>
                         <div class="controls">
-                            <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
+                            <!-- <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
                                     class="span4"
                                     placeholder=""
-                            />
+                            /> -->
                         </div>
                     </div>
                             </td>
@@ -542,10 +168,10 @@ Type de Recrutement
                      <div class="control-group">
                         <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
                         <div class="controls">
-                            <input type="text"  readonly  :value="nombreDejourCalcule"
+                            <!-- <input type="text"  readonly  :value="nombreDejourCalcule"
                                     class="span4"
                                    
-                            />
+                            /> -->
                         </div>
                     </div>
                             </td>
@@ -555,12 +181,12 @@ Type de Recrutement
                      <div class="control-group">
                         <label class="control-label" title=" ">Date de reception definitive</label>
                         <div class="controls">
-                            <input type="date" v-model="formEffetFinancier.date_reception"
+                            <!-- <input type="date" v-model="formEffetFinancier.date_reception"
                                     class="span4"
                                     placeholder=""
                             />
-                            <input type="hidden" v-model="formEffetFinancier.difference_personnel_bienService"/>
-                        </div>
+                            <input type="hidden" v-model="formEffetFinancier.difference_personnel_bienService"/>-->
+                        </div> 
                     </div>
                             </td>
 
@@ -590,200 +216,6 @@ Type de Recrutement
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a>
             </div> -->
         </div>
-  <div id="editEffetFinancier" class="modal hide grdirModalActeEffet">                                                                 
-         <div class="modal-header">
-     <button data-dismiss="modal" class="close" type="button">×</button>            
-     <h3>Modifier acte effet financier</h3>                                 
- </div>
- <div class="modal-body">
-         <table class="table table-bordered table-striped">
-             <tr>
-                    <td>
-                    <div class="control-group">
-                        <label class="control-label">Unite administrative</label>
-                        <div class="controls">
-                           <select v-model="editEffetFinancier.ua_id" class="span4">
-                                                            <option></option>
-                                                            <option v-for="item in afficherUAParDroitAccess" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                        </div>
-                    </div>
-
-                            </td>
-               <td colspan="">
-             <div class="control-group">
-             <label class="control-label">Type acte effet financier.</label>
-             <div class="controls">
-               <select v-model="editEffetFinancier.type_act_effet_id" class="span4">
-                     <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
-                             :value="varText.id">{{varText.libelle}}</option>
-                 </select>
-             
-             </div>
-         </div>
-                 </td>
-                <td>
-         <div class="control-group">
-             <label class="control-label">Reference acte</label>
-             <div class="controls">
-                 <input type="text" v-model="editEffetFinancier.reference_act"
-                         class="span4"
-                         placeholder="refence acte"
-                 />
-             </div>
-         </div>
-                 </td>
-                      
-                
-            
-               
-                        <td colspan="">
-         <div class="control-group">
-             <label class="control-label">Autorité approbatrice</label>
-             <div class="controls">
-                 <input
-                         type="text"
-                         v-model="editEffetFinancier.autorite_approbation"
-                         class="span4"
-                         placeholder=" "
-                 />
-                 
-             </div>
-         </div>
-                 </td>
-                                
-             </tr>
-            
-     
-             <tr>
-                        <td>
-         <div class="control-group">
-             <label class="control-label"> date d'approbation</label>
-             <div class="controls">
-                 <input
-                         type="date"
-                         v-model="editEffetFinancier.date_approbation"
-                         class="span4"
-                         placeholder=""
-                 />
-             </div>
-         </div>
-                 </td>
-                 <td>
-          <div class="control-group">
-             <label class="control-label">Incidence financière</label>
-             <div class="controls">
-                 <select  v-model="editEffetFinancier.incidence_financiere" class="span4">
-                    <option value="0">Oui</option>
-                    <option value="1">Non</option>
-                 </select>
-                         
-                       
-                 
-             </div>
-         </div>
-                 </td>
-                 <td colspan="">
-          <div class="control-group">
-             <label class="control-label">Montant Contrat</label>
-             <div class="controls">
-                 <input type="text" v-model="editEffetFinancier.montant_act"
-                         class="span4"
-                         placeholder="Saisir le montant "
-                 />
-             </div>
-         </div>
-                 </td>
-                 <td>
-                 <div class="control-group">
-             <label class="control-label" >Date de signature attributaire</label>
-             <div class="controls">
-                 <input type="date" v-model="editEffetFinancier.date_attributaire"
-                         class="span4"
-                         placeholder=""
-                 />
-             </div>
-         </div>
-                 </td>
-             </tr>
-             <tr>
-         
-          <td>
-          <div class="control-group">
-             <label class="control-label">Date ordre de service demarrage</label>
-             <div class="controls">
-                 <input type="date" v-model="editEffetFinancier.date_odre_service"
-                         class="span4"
-                         placeholder=""
-                 />
-             </div>
-         </div>
-                 </td>
-                              <td>
-          <div class="control-group">
-             <label class="control-label" title=" ">Date fin exécution</label>
-             <div class="controls">
-                 <input type="date" :min="editEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="editEffetFinancier.date_fin_exe"
-                         class="span4"
-                         placeholder=""
-                 />
-             </div>
-         </div>
-                 </td>
-             
-             
-                                <td>
-          <div class="control-group">
-             <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
-             <div class="controls">
-                 <input type="text"  readonly  :value="nombreDejourCalcule"
-                         class="span4"
-                        
-                 />
-             </div>
-         </div>
-                 </td>
-                                  <td>
-          <div class="control-group">
-             <label class="control-label" title=" ">Date de reception definitive</label>
-             <div class="controls">
-                 <input type="date" v-model="editEffetFinancier.date_reception"
-                         class="span4"
-                         placeholder=""
-                 />
-                 <input type="hidden" v-model="editEffetFinancier.difference_personnel_bienService"/>
-             </div>
-         </div>
-                 </td>
-                 
-             </tr>
-            
-         </table>  
-        
-     
- </div>
- 
-  <div class="modal-footer">
-     <a  @click.prevent="afficherModalRecrutementDirect"
-             class="btn btn-primary"
-             href="#"
-     >Valider</a>
-     <a data-dismiss="modal" class="btn" href="#">Fermer</a>
- </div>
- 
- 
- 
- 
- 
- 
- 
- 
-</div>
-
-    </div>
 
 </template>
 
@@ -792,12 +224,10 @@ Type de Recrutement
     import {mapGetters, mapActions} from 'vuex';
     import moment from "moment";
     import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth";
-    import AjoutPersonnelAvecContrat from "./AjoutPersonnelAvecContrat";
-    import AjoutPersonnelSansContrat from "./AjoutPersonnelSansContrat";
+   
     export default {
 components:{
-    AjoutPersonnelAvecContrat,
-    AjoutPersonnelSansContrat
+   
 },
         data() {
             return {
@@ -932,24 +362,21 @@ recrutement:""
         },
 
         created() {
-            this.allActeurDepense();
-            this.getActeurFinContratAndActivite()
-            this.getListeSalaireActuelAll()
-            //    this.getActeur()
-            //  console.log(this.fonctions)
-            // console.log(this.getFonction)
-            this.formData = this.personnaliseActeurDepense.find(
-      item => item.id == this.$route.params.id
-    );
+
+           
+          this.getDetail()
         },
+        watch: {
+    '$route' : 'getDetail'
+  },
         computed: {
            admin:admin,
       dcf:dcf,
       noDCfNoAdmin:noDCfNoAdmin,
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-            ...mapGetters('personnelUA', ["personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
+            ...mapGetters('personnelUA', ["personnaliseActeurDepense","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
-                "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
+                "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","affichePersonnelRecuActeNormination"]),
              ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
@@ -1523,8 +950,11 @@ acteurNonActivite() {
           ...mapActions('bienService',['supprimerActeEffetFinancier',
           'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
 
-         
-
+         getDetail(){
+        this.item = this.personnaliseActeurDepense.find(
+      item => item.id == this.$route.params.id
+    )
+         },
 
               ajouterModalActeEffetFinancierLocal(){
         var nouveauObjet = {
@@ -1668,33 +1098,14 @@ afficherModalTypeRecretement() {
           this.$('#modifierActeEF').modal('hide');
           },
 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
             formatageSomme:formatageSomme,
         }
     };
-</script>
-
-<style scoped>
-.taillePersonnel{
-  width: 1600px;
-  margin: 0 -45%;
-  height: 500px;
-}
-
-  .tailModal
-    {
-
- width: 1590px;
- margin: 0 -790px;
- height: 500px;
-
-    }
- .tailleModalRecrutement{
-   width: 30%;
- }
- .grdirModalActeEffet{
-     width: 93%;
- margin: 0 -800px;
- 
-
-}
-</style>
