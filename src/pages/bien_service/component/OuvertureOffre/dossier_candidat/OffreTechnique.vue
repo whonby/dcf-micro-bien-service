@@ -38,7 +38,7 @@
           <td @click="afficheEdite(offre.id)" v-if="offre.observation" style="background: green;color: #fff">CONFORME</td>
           <td @click="afficheEdite(offre.id)" v-if="!offre.observation" style="background: red;color: #fff">NON CONFORME</td>
           <td>
-            <button @click.prevent="supprimerchnique(marche.id)"  class="btn btn-danger ">
+            <button @click.prevent="supprimerchnique(offre.id)"  class="btn btn-danger ">
               <span class=""><i class="icon-trash"></i></span></button>
           </td>
         </tr>
@@ -246,9 +246,9 @@
           <tr>
             <td>
               <div class="control-group">
-                <label class="control-label">CAA moyen :</label>
+                <label class="control-label">CAA moyen TTC :</label>
                 <div class="controls">
-                 <input type="text" class="span" placeholder="Caa moyen ac"
+                 <input type="number" class="span" placeholder="Caa moyen ac"
                         v-model="formchnique.caa_moyen_ac_entre">
 
                 </div>
@@ -785,6 +785,7 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import {formatageSomme} from "@/Repositories/Repository";
 
 export default {
 name: "OffreTechnique",
@@ -873,18 +874,15 @@ listeOffreTechniqueLotCandidat(){
 
           let lot_marche=this.getMarchePersonnaliser.filter(item=>item.parent_id==marche_id)
           let collection=[];
-          console.log(lot_marche)
+
           if (lot_marche.length>0){
-         //   console.log(lot_marche)
+
             lot_marche.forEach(function (value) {
               let objet=seft.gettersOffreTechniques.find(item=>{
                 if(item.marche_id==value.id && item.dossier_candidat_id==candidat_id){
                   return item
                 }
               })
-              console.log("OG")
-            console.log(objet)
-              console.log("000000")
               if(objet==undefined){
                 collection.push(value)
               }
@@ -903,11 +901,13 @@ listeOffreTechniqueLotCandidat(){
       "ajouterLettreInvitation",
 
     ]),
+    formatageSomme:formatageSomme,
     ajouterOffreT(){
       let lot_marche=this.getMarchePersonnaliser.find(item=>item.id==this.formchnique.marche_id)
       this.formchnique.numero_lot=lot_marche.numero_lot
       this.formchnique.dossier_candidat_id=this.dossier_candidature.id
       this.ajouterOffreTechnique(this.formchnique)
+      this.$('#ajouter_offre_fin').modal('hide');
       this.formchnique={
         numero_lot:"",
         accord_groupe:"",

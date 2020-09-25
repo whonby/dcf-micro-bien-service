@@ -926,7 +926,7 @@
         </div>
         <div id="offre_fin" class="tab-pane ">
           <!--Offre financiere-->
-          <OffreFinanciere dossier_candidature="detail_dossier_candidature"></OffreFinanciere>
+          <OffreFinanciere :dossier_candidature="detail_dossier_candidature"></OffreFinanciere>
         </div>
 
       </div>

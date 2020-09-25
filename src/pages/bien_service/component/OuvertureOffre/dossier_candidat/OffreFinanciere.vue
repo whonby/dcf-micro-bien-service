@@ -10,7 +10,7 @@
   </div>-->
 
   <div align="right">
-    <a href="#ajouter_offre_fin" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+    <a href="#addd10" data-toggle="modal" class="btn btn-primary">Ajouter</a>
   </div>
   <div class="widget-box" >
 
@@ -19,28 +19,256 @@
         <thead>
         <tr>
           <!-- <th>Ref</th> -->
-          <th>Quantite</th>
-          <th>Prix unitaire</th>
-          <th>Montant total ht </th>
+          <th>N°Lot</th>
           <th>Montant total ttc </th>
           <th>Action </th>
         </tr>
         </thead>
-
-        <tr >
-
+        <tbody>
+        <tr v-for="offre in listeOffreFinLotCandidat(dossier_candidature.id)" :key="offre.id">
+          <td @click="afficheEdite(offre.id)">N°{{offre.numero_lot}}</td>
+          <td @click="afficheEdite(offre.id)">
+            {{formatageSomme(parseFloat(offre.montant_total_ttc)) || 'Non renseigné'}}
+            </td>
+          <td>
+            <button @click.prevent="supprimerOffreFinancier(offre.id)"  class="btn btn-danger ">
+              <span class=""><i class="icon-trash"></i></span></button>
+          </td>
         </tr>
-
-
+        </tbody>
       </table>
     </div>
   </div>
 
+
+  <!--Ajout offre fin-->
+
+  <div id="addd10" class="modal hide modaloffreFin" style="width: 1000px !important; left: 550px; ">
+    <div class="modal-header">
+      <button data-dismiss="modal" class="close" type="button">×</button>
+      <h3>Ajouter l'offre financière</h3>
+    </div>
+    <div class="modal-body">
+      <table class="table table-bordered table-striped">
+        <tr>
+          <td>
+            <div class="control-group">
+              <label>Offre</label>
+              <div class="controls">
+                <input v-if="listeAppelOffre(dossier_candidature.marche_id)" type="text" class="span" placeholder="Offre"
+                       v-model="listeAppelOffre(dossier_candidature.marche_id).ref_appel" disabled>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="control-group">
+              <label>Lot</label>
+              <div class="controls">
+                <select v-model="formOffreFinanciere.marche_id" class="span" >
+                  <option v-for="varText in lotTechniqueOffre(dossier_candidature.id)" :key="varText.id"
+                          :value="varText.id">LOT N°{{varText.numero_lot}} {{varText.objet}}</option>
+                </select>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <table class="table table-bordered table-striped">
+        <tr>
+
+
+          <td>
+
+            <div class="control-group">
+              <label class="control-label">Montant TTC :</label>
+              <div class="controls">
+                <input type="number" class="span" placeholder="Montant TTC" v-model="formOffreFinanciere.montant_total_ttc">
+              </div>
+            </div>
+
+          </td>
+          <td>
+
+<!--            <div class="control-group">-->
+<!--              <label class="control-label">Prix unitaire :</label>-->
+<!--              <div class="controls">-->
+<!--                <input type="number" class="span" placeholder="prix unitaire" v-model="formOffreFinanciere.prix_unitaire">-->
+<!--              </div>-->
+<!--            </div>-->
+          </td>
+        </tr>
+        <tr>
+
+<!--          <td>-->
+<!--            <div class="control-group">-->
+<!--              <label class="control-label">Taux</label>-->
+<!--              <div class="controls">-->
+<!--                <input type="text" readonly  class="span" :value="affcherTauxEnCours">-->
+<!--                <input-->
+<!--                    type="hidden"-->
+<!--                    :value="tauxArrondit"-->
+
+<!--                    class="span3"-->
+
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </td>-->
+
+          <td>
+<!--            <div class="control-group">-->
+<!--              <label class="control-label">Tva</label>-->
+<!--              <div class="controls">-->
+<!--                <input type="number" readonly :value="montantTva" class="span" />-->
+<!--              </div>-->
+<!--            </div>-->
+          </td>
+          <td>
+<!--            <div class="control-group">-->
+<!--              <label class="control-label">Montant total ht :</label>-->
+<!--              <div class="controls">-->
+<!--                <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHT">-->
+<!--              </div>-->
+<!--            </div>-->
+          </td>
+        </tr>
+        <tr>
+
+          <td>
+<!--            <div class="control-group">-->
+<!--              <label class="control-label">Montant totat ttc :</label>-->
+<!--              <div class="controls">-->
+<!--                <input type="text"  readonly  class="span" placeholder="Montant total ttc" :value="montantHTt">-->
+<!--              </div>-->
+<!--            </div>-->
+          </td>
+
+        </tr>
+
+      </table>
+
+    </div>
+    <div class="modal-footer">
+      <button @click.prevent="ajouterOffreF()" class="btn btn-primary">Ajouer</button>
+      <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
+      <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+  </div>
+
+
+  <div id="edite100" class="modal hide modaloffreFin" style="width: 1000px !important; left: 550px; ">
+    <div class="modal-header">
+      <button data-dismiss="modal" class="close" type="button">×</button>
+      <h3>Modification</h3>
+    </div>
+    <div class="modal-body">
+      <table class="table table-bordered table-striped">
+        <tr>
+          <td>
+            <div class="control-group">
+              <label>Offre</label>
+              <div class="controls">
+                <input v-if="listeAppelOffre(dossier_candidature.marche_id)" type="text" class="span" placeholder="Offre"
+                       v-model="listeAppelOffre(dossier_candidature.marche_id).ref_appel" disabled>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="control-group">
+              <label>Lot</label>
+              <div class="controls">
+                <select v-model="editer.marche_id" class="span" >
+                  <option v-for="varText in lotTechniqueFOffre(dossier_candidature.id)" :key="varText.id"
+                          :value="varText.id">LOT N°{{varText.numero_lot}} {{varText.objet}}</option>
+                </select>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <table class="table table-bordered table-striped">
+        <tr>
+          <td>
+
+            <div class="control-group">
+              <label class="control-label">Montant TTC :</label>
+              <div class="controls">
+                <input type="number" class="span" placeholder="Montant TTC" v-model="editer.montant_total_ttc">
+              </div>
+            </div>
+
+          </td>
+          <td>
+
+            <!--            <div class="control-group">-->
+            <!--              <label class="control-label">Prix unitaire :</label>-->
+            <!--              <div class="controls">-->
+            <!--                <input type="number" class="span" placeholder="prix unitaire" v-model="formOffreFinanciere.prix_unitaire">-->
+            <!--              </div>-->
+            <!--            </div>-->
+          </td>
+        </tr>
+        <tr>
+
+          <!--          <td>-->
+          <!--            <div class="control-group">-->
+          <!--              <label class="control-label">Taux</label>-->
+          <!--              <div class="controls">-->
+          <!--                <input type="text" readonly  class="span" :value="affcherTauxEnCours">-->
+          <!--                <input-->
+          <!--                    type="hidden"-->
+          <!--                    :value="tauxArrondit"-->
+
+          <!--                    class="span3"-->
+
+          <!--                />-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </td>-->
+
+          <td>
+            <!--            <div class="control-group">-->
+            <!--              <label class="control-label">Tva</label>-->
+            <!--              <div class="controls">-->
+            <!--                <input type="number" readonly :value="montantTva" class="span" />-->
+            <!--              </div>-->
+            <!--            </div>-->
+          </td>
+          <td>
+            <!--            <div class="control-group">-->
+            <!--              <label class="control-label">Montant total ht :</label>-->
+            <!--              <div class="controls">-->
+            <!--                <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHT">-->
+            <!--              </div>-->
+            <!--            </div>-->
+          </td>
+        </tr>
+        <tr>
+
+          <td>
+            <!--            <div class="control-group">-->
+            <!--              <label class="control-label">Montant totat ttc :</label>-->
+            <!--              <div class="controls">-->
+            <!--                <input type="text"  readonly  class="span" placeholder="Montant total ttc" :value="montantHTt">-->
+            <!--              </div>-->
+            <!--            </div>-->
+          </td>
+
+        </tr>
+
+      </table>
+
+    </div>
+    <div class="modal-footer">
+      <button @click.prevent="editeOffreF()" class="btn btn-primary">Modification</button>
+      <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
+      <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+  </div>
 </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import {mapActions, mapGetters} from "vuex";
+import {formatageSomme} from "@/Repositories/Repository";
 
 export default {
 name: "OffreFinanciere",
@@ -53,388 +281,21 @@ name: "OffreFinanciere",
           icon: "add"
         }
       ],
-      demande:{},
-      acteEffetActive:"",
-      formFournisseur : {
-        numero_cc: "",
-        numero_rc: "",
-        raison_sociale: "",
-        telephone:"",
-        email:"",
-        adresse:"",
-      },
-      formAnalyseDMP:{
-        //document_procedure_id:"",
-        demande_ano_id:"",
-        observation:"",
-        avis_bail:"",
-        ref_dmp:"",
-        date_avis_bail:""
-      },
-      edite_analyse_dossier:"",
-      edite_cojo:"",
-      editer_mandater:"",
-      edite_lettre_invitation:"",
-      detail_dossier_candidature:"",
-      detail_offre_technique:"",
-      detail_offre_finnancier:"",
-      detail_marche:"",
-      marcheid:"",
-      appel_offre_marche:"",
-      edite_demande_dao:"",
-      edite_analyse_dpm:"",
-      formLot:{
-        numero_lot:"",
-        libelle_lot:"",
-        montant_lot:"",
-        marche_id:"",
-        appel_offre_id:"",
-        // mode_passation_id:""
-      }
-      ,
-      formBailleur:{
-        type_finnancement_id:"",
-        montant:0,
-        marche_id:"",
-        bailleur_id:"",
-      },
-      edit_bailleur_marche:""
-      ,formMandater:{
-        lettre_invitation_id:"",
-        date_id:"",
-        fichier_joint:"",
-        nom_mandat:"",
-        prenom_nom:"",
-        matricule_m:""
-      },
-      edite_pv:"",
-      formAnalyseDossier:{
-        date_analyse:"",
-        appel_offre_id:"",
-        note_analyse:"",
-        rang_analyse:"",
-        // decision:"",
-        dossier_candidat_id:"",
-        type_analyse_id: "",
-        cojo_id:"",
-        // motif:""
-      },
-      affiche_bouton_ajouter_cojo:false,
-      idcojo:"",
-      formDataCojo:{
-        lettre_invitation_id:"",
-        condition_id:'',
-        controleur_finnancier:"",
-        dmp:"",
-        autorite_contractante:"",
-        date_invitation:"",
-        date_composition:"",
-        num_dossier_appel_offre:"",
-        nbr_participant:"",
-        matricule:""
-      },
-      modification_offre_finnancier_recupere:{
-        id:"",
-        numero_lot:"",
-        designation:"",
-        unite:"",
-        prix_unitaire:"",
-        montant_total_ht:"",
-        montant_total_ttc:"",
-        taux:"",
-        tva:"",
-        dossier_candidat_id:"",
-        quantite:""
-      },
-      isFormulaireDossierCandidature:false,
-      isDetailDossierCandidature:false,
-      isButtunAddDossierCandidat:true,
-      formDossierCadidature:{
-        secteur_activite_id:"",
-        type_candidat_id:"",
-        numero_cc:"",
-        type_candidat:"",
-        nom_cand:"",
-        prenom_cand:"",
-        marche_id:"",
-        date_nais_cand:"",
-        telephone_cand:"",
-        adresse_post:"",
-        situation_geo:"",
-        email_cand:"",
-        procedure_passation_id:"",
-        appel_offre_id:"",
-        accord_group:"",
-        cautionnement_prov:"",
-        pouv_habil_signataire:"",
-        piece_admin:"",
-        reg_com:"",
-        attest_banc:"",
-        formul_propo_tech:"",
-        fiche_rsgnt_cand:"",
-        fiche_rsgnt_mbre_group:"",
-        atcdent_marche_non_exe:"",
-        org_travau_site:"",
-        meth_real_travau:"",
-        prog_mobilisation:"",
-        capacite_financiere:"",
-        caa_moyen_ac_entre:"",
-        capacite_tech_exp:"",
-        mt_offre_financiere:"",
-        numero_dossier:"",
-        entreprise_id:"",
-        capacite_financement:"",
-      },
-      editDossierCadidature:{
-        secteur_activite_id:"",
-        type_candidat_id:"",
-        numero_cc:"",
-        type_candidat:"",
-        nom_cand:"",
-        prenom_cand:"",
-        date_nais_cand:"",
-        telephone_cand:"",
-        adresse_post:"",
-        situation_geo:"",
-        email_cand:"",
-        procedure_passation_id:"",
-        appel_offre_id:"",
-        accord_group:"",
-        cautionnement_prov:"",
-        pouv_habil_signataire:"",
-        piece_admin:"",
-        reg_com:"",
-        attest_banc:"",
-        formul_propo_tech:"",
-        fiche_rsgnt_cand:"",
-        fiche_rsgnt_mbre_group:"",
-        atcdent_marche_non_exe:"",
-        org_travau_site:"",
-        meth_real_travau:"",
-        prog_mobilisation:"",
-        capacite_financiere:"",
-        caa_moyen_ac_entre:"",
-        capacite_tech_exp:"",
-        mt_offre_financiere:"",
-        numero_dossier:"",
-        marche_id:"",
-        capacite_financement:"",
-      },
-      formchnique:{
-        numero_lot:"",
-        accord_groupe:"",
-        cautionnement_prov:"",
-        pouv_habil_signataire:"",
-        peice_admin:"",
-        reg_com:"",
-        attest_banc:"",
-        formil_propo_tech:"",
-        fiche_rsgnt_mbre_groupe:"",
-        atcdent_marche_non_exe:"",
-        org_travau_site:"",
-        meth_real_travau:"",
-        prog_mobilisation:"",
-        capacite_financiere:"",
-        caa_moyen_ac_entre:"",
-        capacite_techn_exp:"",
-        dossier_candidat_id:"",
-      },
-      formEffetFinancier:{
-        code_act:"",
-        libelle_act:"",
-        reference_act:"",
-        objet_act:"",
-        incidence_financiere:"",
-        montant_act:"",
-        date_attributaire:"",
-        date_reception:"",
-        duree:"",
-        date_fin_exe:"",
-        date_odre_service:"",
-        autorite_approbation:"",
-        date_approbation:"",
-        livrable_id:"",
-        text_juridique_id:"",
-        type_act_effet_id:"",
-        analyse_dossier_id:"",
-        entreprise_id:"",
-        marche_id:"",
-        numero_marche:"",
-        ano_bailleur_id:""
-      },
-      formDataFacture:{
-        prix_propose_ttc:"",
-        prix_propose_ht:"",
-        prix_unitaire:"",
-        montant_facture:"",
-        ligne_budgetaire:"",
-        objet_facture:"",
-        id_type_facture:"",
-        code_acte_depense:"",
-        numero_facture:"",
-      },
-      editActeEffetFinancier:{
-        code_act:"",
-        libelle_act:"",
-        reference_act:"",
-        objet_act:"",
-        incidence_financiere:"",
-        montant_act:"",
-        date_attributaire:"",
-        date_reception:"",
-        duree:"",
-        date_fin_exe:"",
-        date_odre_service:"",
-        autorite_approbation:"",
-        date_approbation:"",
-        livrable_id:"",
-        text_juridique_id:"",
-        type_act_effet_id:"",
-        analyse_dossier_id:"",
-        entreprise_id:"",
-        marche_id:"",
-        numero_marche:"",
-        ano_bailleur_id:""
-      },
+      editer:"",
       formOffreFinanciere:{
         numero_lot:"",
-        designation:"",
-        unite:"",
-        quantite:"",
-        prix_unitaire:"",
-        montant_total_ht:"",
         montant_total_ttc:"",
         dossier_candidat_id:"",
+        marche_id:""
       },
-      formDemande:{
-        date_demande:"",
-        ref_marche:"",
-        num_courrier:"",
-        analyse_dossier_id:"",
-        proce_verbal_jugement_offre_id:""
-      },
-      editMarche: {
-        id:"",
-        attribue:"",
-        numero_marche:""
-      },
-      editDemandeAno:{
-        date_demande:"",
-        ref_marche:"",
-        num_courrier:""
-      },
-      formObservation:{
-        date_avis_baill:"",
-        avis_bail:"",
-        observations_bailleur:"",
-        ano_dmp_bailleur_id:"",
-        document_procedure_id:""
-      },
-      editObservation1:{
-        date_avis_baill:"",
-        avis_bail:"",
-        observations_bailleur:"",
-        ano_dmp_bailleur_id:"",
-        document_procedure_id:""
-      },
-      edite_membre_cojo:"",
-      formAno:{
-        date_ano_dmp:"",
-        observations_bailleur:"",
-        avis_bail:"",
-        ref_ano_dmp:"",
-        numero_courie:"",
-        appel_offre_id:"",
-        analyse_dmp_id:""
-      },
-      avis_dmp:"",
-      editAno:{
-        date_ano_dmp:"",
-        ref_ano_dmp:"",
-        numero_courie:""
-      },
-      editDemamnde:{
-        date_demande:"",
-        ref_marche:"",
-        num_courrier:""
-      },
-      formPv:{
-        ref_pv:"",
-        fichier_joint_pv:"",
-      },
-      editDossier:{
-        type_candidat:"",
-        nom_cand:"",
-        prenom_cand:"",
-        date_nais_cand:"",
-        telephone_cand:"",
-        adresse_post:"",
-        situation_geo:"",
-        email_cand:"",
-        procedure_passation_id:"",
-        appel_offre_id:"",
-      },
-      edite_ano_bailleur_dmp:"",
-      edite_offre_technique:"",
-      edite_offre_financiere:"",
-      formData: {
-        ref_appel:"",
-        type_appel:"",
-        financement:"",
-        nom_bailleurs:"",
-        date_emission:"",
-        date_limite:"",
-        objet_appel:"",
-        imputation:"",
-        marche_id:"",
-      },
-      formDataMembreCojo: {
-        matricule:"",
-        type_appel:"",
-        nom_prenom:"",
-        role:"",
-        cojo_id:"",
-      },
-      edit_offre_technique_recupere:"",
-      formLettre: {
-        appel_offre_id:"",
-        objet_lettre:"",
-        date_lettre:"",
-        ref_lettre:"",
-        destination:"",
-        date_cojo:""
-      },
-      edite_appel_offre: "",
-      search: "",
-      edite_lot:{
-        numero_lot:"",
-        libelle_lot:"",
-        montant_lot:"",
-        marche_id:"",
-        appel_offre_id:"",
-        //mode_passation_id:""
-      },
-      message_mandater:'',
-      ischniqueFinancier:false,
-      namePDF: "",
-      fichierPDF: "",
-      imagePDF:"",
-      selectedFile:"",
-      resultaAnalysePv:[],
-      resultaFinalCandidat:[],
-      entreprise_vainqueur:"",
-      registrecc_vainqueur:"",
-      identreprise_vainqueur:"",
-      message_setion_vainqueur:"",
-      info_avis_bailleur:"",
-      namePDFDemandeAno: "",
-      fichierPDFDemandeAno: "",
-      imagePDFDemandeAno:"",
-      selectedFileDemandeAno:"",
+
+
     };
   },
   created() {
-    console.log(this.dossier_candidature)
+
+   // console.log(this.dossier_candidature)
+
   },
   computed:{
     ...mapGetters("bienService", ["gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
@@ -444,10 +305,132 @@ name: "OffreFinanciere",
       "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
       "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
       "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+    listeAppelOffre(){
+      return  marche_id=>{
+        if (marche_id!="") {
+        //  console.log(marche_id)
+          return this.appelOffres.find( idmarche => idmarche.marche_id == marche_id)
+        }
+      }
+    },
+    lotTechniqueOffre(){
+      return dossier_candidat=>{
+        let offre_technique=this.gettersOffreTechniques.filter(item=>item.dossier_candidat_id==dossier_candidat)
+        let seft=this;
+        console.log(offre_technique)
+        if (offre_technique.length>0){
+          let collection_marche=[];
+          offre_technique.forEach(function (value) {
 
+            let lot_marche=seft.getMarchePersonnaliser.find(item=>item.id==value.marche_id)
+
+            collection_marche.push(lot_marche)
+
+          })
+
+          let collection=[];
+
+
+          if (collection_marche.length>0){
+
+            collection_marche.forEach(function (value) {
+              let objet=seft.getterOffreFinanciers.find(item=>{
+                if(item.marche_id==value.id && item.dossier_candidat_id==dossier_candidat){
+                  return item
+                }
+              })
+              if(objet==undefined){
+                collection.push(value)
+              }
+            })
+
+            return collection
+          }
+
+
+        return null
+
+        }
+        return null
+      }
+    },
+
+    lotTechniqueFOffre(){
+      return dossier_candidat=>{
+        let offre_technique=this.gettersOffreTechniques.filter(item=>item.dossier_candidat_id==dossier_candidat)
+        let seft=this;
+
+        if (offre_technique.length>0){
+          let collection_marche=[];
+          offre_technique.forEach(function (value) {
+
+            let lot_marche=seft.getMarchePersonnaliser.find(item=>item.id==value.marche_id)
+
+            collection_marche.push(lot_marche)
+
+          })
+
+          return collection_marche
+
+        }
+        return null
+      }
+    },
+    listeOffreFinLotCandidat(){
+      return id=>{
+        if(id!=""){
+          return this.getterOffreFinanciers.filter(item=>item.dossier_candidat_id==id)
+        }
+      }
+    }
   },
   methods:{
+    ...mapActions("bienService", [
+      "supprimerDossierCandidat","ajouterOffreTechnique","modifierOffreTechnique",
+      "supprimerchnique","ajouterOffreFinancier","modifierOffreFinancier","supprimerOffreFinancier",
+      "ajouterLettreInvitation",
 
+    ]),
+    formatageSomme:formatageSomme,
+    ajouterOffreF(){
+
+
+      let lot_marche=this.getMarchePersonnaliser.find(item=>item.id==this.formOffreFinanciere.marche_id)
+      this.formOffreFinanciere.numero_lot=lot_marche.numero_lot
+      this.formOffreFinanciere.dossier_candidat_id=this.dossier_candidature.id
+
+
+      this.ajouterOffreFinancier(this.formOffreFinanciere)
+      this.$('#addd10').modal('hide');
+      this.formOffreFinanciere={
+        numero_lot:"",
+        designation:"",
+        unite:"",
+        quantite:"",
+        prix_unitaire:"",
+        montant_total_ht:"",
+        montant_total_ttc:"",
+      }
+    },
+    afficheEdite(index){
+      this.$('#edite100').modal({
+        backdrop: 'static',
+        keyboard: false
+      });
+      this.editer= this.getterOffreFinanciers.find(item=>item.id==index);
+    },
+
+    editeOffreF(){
+      let objet={
+        id:this.editer.id,
+        numero_lot:this.editer.numero_lot,
+        montant_total_ttc:this.editer.montant_total_ttc,
+        dossier_candidat_id:this.editer.dossier_candidat_id,
+        marche_id:this.editer.marche_id,
+      }
+      this.modifierOffreFinancier(objet)
+      this.$('#edit_offre_technique').modal('hide');
+    }
   }
 }
 </script>
