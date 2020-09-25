@@ -43,7 +43,7 @@
             {{appelOffre.appel_offre.objet_appel || 'Non renseigné'}}</td>
           <td @click="afficheBouttonTechFin(index)">
             {{appelOffre.procdure_passation.libelle || 'Non renseigné'}}</td>
-          <td @click="afficheBouttonTechFin(index)" style="background: green" v-if="etatEnregistreOffreTechnique(appelOffre.id)">
+          <td @click="afficheBouttonTechFin(index)" style="background: green;color:#fff" v-if="etatEnregistreOffreTechnique(appelOffre.id)">
            Dossier Complet
             </td>
           <td @click.prevent="isDetailDossierCandi(appelOffre.id)" style="background: red;color:#fff" v-if="!etatEnregistreOffreTechnique(appelOffre.id)">

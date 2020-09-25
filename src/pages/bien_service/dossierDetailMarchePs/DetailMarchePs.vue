@@ -123,11 +123,6 @@ CodeExempte
                                 <div class="span4" align="right">
                                 
                                     <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
-                               
-                                        <!-- <component-etat :macheid="detail_marche.id"></component-etat> -->
-                                        
-                               
-                                <!-- <h4>Liste des receptions de cotation</h4> -->
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>
@@ -761,14 +756,9 @@ CodeExempte
 
 
                    <div id="tab6" class="tab-pane">
-               <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                    </div>
 
-
-                </div>
-                <component-analyse :macheid="detail_marche.id"></component-analyse>
+<jugement :macheid="detail_marche.id"></jugement>
+<!--                <component-analyse :macheid="detail_marche.id"></component-analyse>-->
 
                 </div>
 
@@ -940,9 +930,11 @@ import LotMarche from "@/pages/bien_service/component/LotMarche";
 import OuvertureOffre from "@/pages/bien_service/component/OuvertureOffre/OuvertureOffre";
     import 'vue-search-select/dist/VueSearchSelect.css'
 import { formatageSomme } from "../../../../src/Repositories/Repository";
+  import Jugement from "@/pages/bien_service/component/Jugement/Jugement";
     export default {
        
         components:{
+          Jugement,
           OuvertureOffre,
             componentCotation,
           LotMarche,
