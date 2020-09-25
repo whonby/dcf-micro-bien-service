@@ -978,11 +978,11 @@ export  function  getAnalyseDossier({commit}) {
 }
 
 // action pour ajouter analyse dossier
-export function ajouterAnalyseDossier({commit}, elementAjout){
-  asyncLoading(axios.post('/analyse_dossier',elementAjout)).then(response =>{
+export function ajouterAnalyseDossierMultiple({commit,dispatch}, elementAjout){
+  asyncLoading(axios.post('/analyse_dossier_multiple',elementAjout)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_ANALYSE_DOSSIER', response.data)
-
+          dispatch("getAnalyseDossier")
           this.$app.$notify({
             title: 'success ',
             text: 'Enregistrement effectué !',
@@ -992,6 +992,27 @@ export function ajouterAnalyseDossier({commit}, elementAjout){
 
   }).catch(error => console.log(error))
 }
+
+export function supprimerAnalyseDossierMultiple({dispatch}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+
+            axios.delete('/delete_mutipleAnalyse/' + id).then(() =>{
+                dispatch("getAnalyseDossier")
+                dialog.close()
+
+            }  )
+
+        })
+
+}
+
+/***
+ * A
+ * @param commit
+ * @param element_modifie
+ */
 
 // action pour modifier analyse dossier
 
