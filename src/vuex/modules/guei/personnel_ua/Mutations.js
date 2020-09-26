@@ -3,7 +3,7 @@
  * Mutation echelons
  */
 /**
- *
+ *salairesActeur
  * @param state
  * @param data
  * @constructor
@@ -917,7 +917,14 @@ export const MODIFIER_SALAIRE = (state, objetModifie) => {
 export const GET_SALAIRE = (state, data) => {
     state.salairesActeur = data
 }
-
+export const MODIFIER_NUMERO_CONTRAT = (state, objetModifie) => {
+    state.acte_personnels = state.acte_personnels.map(fonction => {
+        if (fonction.id == objetModifie.id) {
+            fonction = { ...objetModifie }
+        }
+        return fonction
+    })
+}
 
 /**
  * Mutation fonctions

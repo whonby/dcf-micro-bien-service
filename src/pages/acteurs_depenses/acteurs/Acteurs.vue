@@ -28,7 +28,7 @@ Type de Recrutement
                                 <li class="active"><a data-toggle="tab" href="#tab10">Liste du personnel     <span class="badge badge-inverse">{{nombreActeurActivite}}</span></a></li>
                                  <li class=""><a data-toggle="tab" href="#AjouterPersonnelAvecContrat">Ajouter Personnel Avec Contrat </a></li>
                                  <li class=""><a data-toggle="tab" href="#AjouterPersonnelSansContrat">Ajouter Personnel Sans Contrat </a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab78">Contrat de Recrutement Direct </a></li>
+                                 <!-- <li class=""><a data-toggle="tab" href="#tab78">Contrat de Recrutement Direct </a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab19">Liste des acteurs de dépenses   <span class="badge badge-success">{{NombrePersonnelRecuActeNorm}}</span></a> </li>
                                 <li class=""><a data-toggle="tab" href="#tab30">Acteurs non actifs</a></li>
                                   <!-- <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{0}}</span></a></li>
@@ -151,18 +151,21 @@ Type de Recrutement
                                                    <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheLibelleFonction(item.fonction_id) || 'Non renseigné'}}</td>
                                                 
                                                 <td>
-                     <button  @dblclick="afficherModalModifierTitre(item.id)"
+                     <button 
                      
-                      v-if="item.reference_acte != null"  class="btn  btn-success">
+                      v-if="item.reference_acte != 0"  class="btn  btn-success">
                 <span >Oui</span>
        
                 </button>
-                  
+                   <button  @click.prevent="afficherModalModifier(item.id)"
+                     
+                      v-else  class="btn  btn-danger">
+                <span >Non</span>
+       
+                </button>
                    
                    
-                    <router-link :to="{ name: '', params: { id: item.id }}" class="btn btn-danger " v-else >
-                                                           <span >Non</span>
-                                                        </router-link>
+                   
                     
               
    
@@ -1606,6 +1609,12 @@ this.$router.push({ name: 'AjouterPersoRecrutementDirect' })
 
       this.$router.push({
         path: "/edit-acteur-depense/" + id
+      });
+    },
+    afficherModalModifier(id) {
+
+      this.$router.push({
+        path: "/Ajouter-Contrat-Personnel/" + id
       });
     },
 afficherModalTypeRecretement() {

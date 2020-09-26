@@ -434,9 +434,7 @@
 
         created() {
             this.allActeurDepense();
-            //    this.getActeur()
-            //  console.log(this.fonctions)
-            // console.log(this.getFonction)
+            
         },
         computed: {
            admin:admin,
@@ -770,7 +768,7 @@ exoEnCours() {
                     code: "",
                     libelle: ""
                 }
-                this.$router.push({ name: 'Acteur' })
+                // this.$router.push({ name: 'Acteur' })
             },
 // afficher
             suprimer(id){

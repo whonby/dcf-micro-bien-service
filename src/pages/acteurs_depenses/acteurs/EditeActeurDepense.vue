@@ -103,7 +103,7 @@
                                                             </option>
 
                                                         </select> -->
-                                                         <input type="text"  v-model="detail.reference_acte"  placeholder="Saisir le matricule" class="span12"/>
+                                                         <input type="text"    placeholder="Saisir le matricule" class="span12"/>
                                                     </div>
                                                 </div>
                                                 
