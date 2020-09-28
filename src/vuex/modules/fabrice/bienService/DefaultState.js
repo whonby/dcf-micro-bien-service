@@ -91,7 +91,8 @@ const defaultState = {
     selectionner_candidats:[],
 
 
-    echeances:[]
+    echeances:[],
+    loading_marche:true,
   
 
 }

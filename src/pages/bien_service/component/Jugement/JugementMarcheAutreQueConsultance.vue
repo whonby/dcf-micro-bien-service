@@ -44,14 +44,14 @@
 
 
 
-      <td v-if="appelOffre.rang_analyse==1" style="background: green;color: white" @click="afficheAnnalyseDossier(appelOffre.id)">
+      <td v-if="appelOffre.rang_analyse==1" style="background: green;color: white" >
         {{afficherNumeroDossierCandidat1(appelOffre.dossier_candidat_id) || 'Non renseigné'}}
       </td>
       <td v-if="appelOffre.rang_analyse!=1"  >
         {{afficherNumeroDossierCandidat1(appelOffre.dossier_candidat_id) || 'Non renseigné'}}
       </td>
 
-      <td v-if="appelOffre.rang_analyse==1" style="background: green;color: white" @click="afficheAnnalyseDossier(appelOffre.id)">
+      <td v-if="appelOffre.rang_analyse==1" style="background: green;color: white" >
         {{formatageSomme(parseFloat(afficherListeMontant(afficherOffrefID(appelOffre.dossier_candidat_id)))) || 'Non renseigné'}}
       </td>
       <td v-if="appelOffre.rang_analyse!=1"  >
@@ -115,11 +115,7 @@
               </div>
             </div>
           </td>
-
-
-
         </tr>
-
         <tr>
           <td colspan="">
             <div class="control-group">
@@ -296,7 +292,7 @@ export default {
         // appel_offre_id:"",
         rang_analyse:"",
         appel_offre_id:"",
-
+        marche_parent_id:"",
         note_analyse:"",
         dossier_candidat_id:"",
         type_analyse_id: 2,
@@ -347,7 +343,7 @@ export default {
             let ob={
               ...value,
               retenu:0,
-              rang_analyse:index+1,
+               rang_analyse:index+1,
               note_analyse:note-index,
               type_analyse_id:2,
             }
@@ -563,9 +559,12 @@ export default {
     ajouterJugementOffre(id){
       console.log(this.getSoumissionaireByLot(id))
       let objet={
-        analyse:this.getSoumissionaireByLot(id)
+          analyse:this.getSoumissionaireByLot(id),
+          marche_parent_id:this.macheid,
+          appel_offre_id :this.affichierAppelOffreid(this.macheid),
       }
       this.ajouterAnalyseDossierMultiple(objet)
+      this.marche_id=""
       this.$('#ajouterMP').modal('hide');
     }
   }

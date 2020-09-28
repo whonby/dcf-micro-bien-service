@@ -2785,6 +2785,7 @@ export function supprimerTypeProcedure({ commit, dispatch}, id) {
 export  function  getMarche({commit}) {
   queue.push(() => axios.get('/marches').then((response) => {
     commit('GET_MARCHE', response.data.data)
+      commit("LOADING_MARCHE",false)
     
 }).catch(error => console.log(error)))
 }

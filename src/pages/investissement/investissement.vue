@@ -1,7 +1,7 @@
-type_financement
+
 <template>
     <div class="container-fluid">
-    
+
       <div id="exampleModal" class="modal hide taillModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -56,7 +56,6 @@ type_financement
                 type="text"
                 :value="afficherEntreprise(editActeEffetFinancier.entreprise_id)"
                 class="span4"
- readonly
                
               />
             </div>
@@ -369,17 +368,6 @@ type_financement
 
 
 
-<!---fin de modification  -->
-
-
-
-
-<!---debut de modification de acte effet financier   --->
-
-
-
-
-    <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
          <div class="row-fluid">
                 <div class="span12">
                     <div class="widget-box">
@@ -605,7 +593,9 @@ type_financement
                 <input type="search"  v-model="search" />
               </div> -->
             </div>
-              <table class="table table-bordered table-striped">
+
+
+              <table class="table table-bordered table-striped" v-if="afficherMarcheInvestissementParDroitAccess.length>0">
                 <thead>
                 <tr>
                     <th>Année</th>
@@ -735,8 +725,14 @@ type_financement
                     </tr>
                 </tbody>
               </table>
-          
 
+                           <div class="row-fluid vld-parent"  align="center" style="margin:10px ">
+                             <loading :active="true"
+                                      :can-cancel="false"
+                                      :is-full-page="fullPage"></loading>
+<!--                             <clip-loader :loading="getterLoadinMarche" :color="color" :size="size_pul"></clip-loader>-->
+<!--                             <pulse-loader :loading="getterLoadinMarche" :color="color" :size="size_pul"></pulse-loader>-->
+                           </div>
 
                         </div>
                          <div id="tab20" class="tab-pane">
@@ -1748,13 +1744,23 @@ type_financement
 </template>
 
 <script>
+//import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+//import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../src/Repositories/Repository";
   import {admin,dcf,noDCfNoAdmin} from "../../../src/Repositories/Auth";
+
 export default {
   name:'type facture',
+  components: {
+    //PulseLoader,
+   // ClipLoader,
+
+  },
   data() {
     return {
+      isLoading: false,
+      fullPage: false,
       fabActions: [
         {
           name: "cache",
@@ -1767,6 +1773,12 @@ export default {
         //   class: ""
         // }
       ],
+      color: '#3AB982',
+      height: '35px',
+      width: '4px',
+      margin: '2px',
+      radius: '2px',
+      size_pul:"20px",
     //   json_fields: {
     //     CODE: "code",
     //     libelle: "libelle"
@@ -1847,15 +1859,13 @@ export default {
      admin:admin,
       dcf:dcf,
       noDCfNoAdmin:noDCfNoAdmin,
-
      ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
      'nombremarchesExecute',
      'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
       "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
-     "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
-
-
+     "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser",
+       "typeActeEffetFinanciers","getterLoadinMarche"]),
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNatureInvestissement","getPersonnaliseBudgetGeneralParInvestissement",
       "montantBudgetGeneral", ]),
@@ -1869,7 +1879,12 @@ export default {
 
   ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
-
+loading(){
+  if(this.afficherMarcheInvestissementParDroitAccess.length>0){
+    return false
+  }
+  return true
+},
 // pour tous les marches en investissement
    afficherMarcheInvestissementParDroitAccess() {
        // const st = this.search.toLowerCase();
