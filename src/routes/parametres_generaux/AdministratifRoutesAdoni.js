@@ -1,7 +1,7 @@
-import tableauBordGeneral from "../../pages/parametres_generaux/administratifs/tableauBord.vue";
-
+// import tableauBordGeneral from "../../pages/parametres_generaux/administratifs/tableauBord.vue";
+import tableauBordGeneralOriginal from "../../pages/parametres_generaux/administratifs/tableauBordGeneralOriginal.vue";
 import ExerciceBudgetaire from "../../pages/parametres_generaux/administratifs/ExerciceBudgetaire.vue";
-import Titre from "../../pages/parametres_generaux/administratifs/tableauBord.vue";
+// import Titre from "../../pages/parametres_generaux/administratifs/tableauBord.vue";
 import NatureSection from "../../pages/parametres_generaux/administratifs/NatureSection.vue";
 import Section from "../../pages/parametres_generaux/administratifs/Section.vue";
 import StructureProgramme from "../../pages/parametres_generaux/administratifs/StructureProgramme.vue";
@@ -24,7 +24,11 @@ import PlanOrganigrammeUa from "../../pages/parametres_generaux/administratifs/P
 const AdministratifRoutesAdoni = [
   // route type unite administrative
 
-
+  {
+    path: "/tableau-Bord-General",
+    name: "tableauBordGeneralOriginal",
+    component: tableauBordGeneralOriginal
+  },
   {
     path: "/structure-Organigramme-Ua",
     name: "structureOrganigrammeUa",
@@ -68,11 +72,11 @@ const AdministratifRoutesAdoni = [
 
 
 
-  {
-    path: "/tableauBordGeneral",
-    name: "tableauBordGeneral",
-    component: tableauBordGeneral
-  },
+  // {
+  //   path: "/tableauBordGeneral",
+  //   name: "tableauBordGeneral",
+  //   component: tableauBordGeneral
+  // },
   {
     path: "/taux",
     name: "taux",
@@ -83,12 +87,12 @@ const AdministratifRoutesAdoni = [
     name: "typeUniteAdministrative",
     component: TypeUniteAdmin
   },
-    {
-      // route pour le titre
-      path:"/tableauBordGeneral",
-       name:"Titre",
-       component: Titre
-     },
+    // {
+    //   // route pour le titre
+    //   path:"/tableauBordGeneralOriginal",
+    //    name:"Titre",
+    //    component: Titre
+    //  },
      // chemin de la structure programme
      {
        path:"/structure-programme",

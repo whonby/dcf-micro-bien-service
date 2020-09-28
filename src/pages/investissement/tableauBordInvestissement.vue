@@ -126,7 +126,7 @@ afficheMarcheEnPlanification(){
 return this.afficherLaListeDesMarche.filter(element => element.attribue == 0)
 },
 afficherLaListeDesMarche(){
-return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 3)
+return this.printMarcheNonAttribue.filter(element => this.afficheCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null)
 },
 nombreDeMarche(){
   return this.afficherLaListeDesMarche.length;

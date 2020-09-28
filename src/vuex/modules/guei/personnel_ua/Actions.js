@@ -268,7 +268,27 @@ export function getSalaire({ commit }) {
 }
 
 
+export function modifierNumeroContrat({ commit }, formData) {
+    this.$app.$loading(true)
+    axios.put('/update_Numero_Contrat', formData).then(response => {
+        // this.$app.$notify({
+        //     title: 'success',
+        //     text: 'Modification effectuer',
+        //     type: "success"
+        // });
+        commit('MODIFIER_NUMERO_CONTRAT', response.data)
+        // this.$app.$loading(false)
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
 
+}
 export async function  getTypeActPersonnel({commit}) {
 
     queue.push(() =>  axios.get('/liste_type_acte_personnel').then(response => {

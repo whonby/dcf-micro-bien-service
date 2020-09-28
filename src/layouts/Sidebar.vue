@@ -220,13 +220,13 @@ navigateToGestionMarche(){
  navigateToTableauBord(){
         this.activate(11)
         this.$router.push({
-          name: 'tableauBordGeneral'
+          name: 'tableauBordGeneralOriginal'
         })
       },
        navigateToParametreGeneraux(){
         this.activate(17)
         this.$router.push({
-          name: 'tableauBordGeneral'
+          name: 'tableauBordGeneralOriginal'
         })
       },
       

@@ -2,17 +2,9 @@ Type de Recrutement
 <template>
     <div id="">
         <notifications />
-        <div class="quick-actions_homepage span12"  >
+        <!-- <div class="quick-actions_homepage span12"  >
             <ul class="quick-actions" style="margin: 0px !important;">
-                <!-- <li class="bg_lb">
-                    <a href="#">
-                        <i class="icon-dashboard"></i> <span class="label label-important">{{totalActeurDepense}}</span> TOTAL DU PERSONNEL
-                    </a>
-                </li> -->
-                <!-- <li class="bg_lg">
-                    <a href="#"> <i class="icon-signal"></i> <span class="label label-important">{{totalActeurEnctivite}}</span> TOTAL ACTEUR DEPENSE EN ACTIVITE 
-                    </a>
-                </li> -->
+                
                 <li class="bg_ly">
                     <a href="#">
                         <i class="icon-inbox"></i><span class="label label-important">{{nombreTotalActeurAcredite}}</span> Total acteur accrédité
@@ -23,7 +15,7 @@ Type de Recrutement
                     Taux acteur accrédité
                 </a> </li>
             </ul>
-        </div>
+        </div> -->
 
         <div class="container-fluid" style="heigth:100%">
 
@@ -34,7 +26,9 @@ Type de Recrutement
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab10">Liste du personnel     <span class="badge badge-inverse">{{nombreActeurActivite}}</span></a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab78">Contrat de Recrutement Direct </a></li>
+                                 <li class=""><a data-toggle="tab" href="#AjouterPersonnelAvecContrat">Ajouter Personnel Avec Contrat </a></li>
+                                 <li class=""><a data-toggle="tab" href="#AjouterPersonnelSansContrat">Ajouter Personnel Sans Contrat </a></li>
+                                 <!-- <li class=""><a data-toggle="tab" href="#tab78">Contrat de Recrutement Direct </a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab19">Liste des acteurs de dépenses   <span class="badge badge-success">{{NombrePersonnelRecuActeNorm}}</span></a> </li>
                                 <li class=""><a data-toggle="tab" href="#tab30">Acteurs non actifs</a></li>
                                   <!-- <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{0}}</span></a></li>
@@ -44,8 +38,16 @@ Type de Recrutement
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
-                
-                         
+                 <div id="AjouterPersonnelAvecContrat" class="tab-pane">
+                           <div class="widget-box">
+<AjoutPersonnelAvecContrat></AjoutPersonnelAvecContrat>
+                           </div>
+                 </div>
+                         <div id="AjouterPersonnelSansContrat" class="tab-pane">
+                           <div class="widget-box">
+<AjoutPersonnelSansContrat></AjoutPersonnelSansContrat>
+                           </div>
+                 </div>
                          <div id="tab78" class="tab-pane">
                            <div class="widget-box">
                              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
@@ -129,23 +131,45 @@ Type de Recrutement
                                                 <th>Prénom</th>
                                                 <th>Date de naissance</th>
                                                 <th >Unité administrative</th>
-                                                <th >Unité de Zone</th>
+                                                
                                                 <th >Service</th>
                                                 <th >Fonction Administrative</th>
+                                                <th >Contrat</th>
                                                 <th style="width:10px">Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr class="odd gradeX" v-for="item in acteurActivite" :key="item.id">
   
-                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}{{item.id}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_naissance) }}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheAdministrative(item.unite_administrative_id) || 'Non renseigné'}}</td>
-                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheUniteZone(item.uniteZone_id) || 'Non renseigné'}}</td>
-                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(afficheService(item.service_id))|| 'Non renseigné'}}</td>
+                                                
+                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(item.service_id)|| 'Non renseigné'}}</td>
                                                    <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheLibelleFonction(item.fonction_id) || 'Non renseigné'}}</td>
+                                                
+                                                <td>
+                     <button 
+                     
+                      v-if="item.reference_acte != 0"  class="btn  btn-success">
+                <span >Oui</span>
+       
+                </button>
+                   <button  @click.prevent="afficherModalModifier(item.id)"
+                     
+                      v-else  class="btn  btn-danger">
+                <span >Non</span>
+       
+                </button>
+                   
+                   
+                   
+                    
+              
+   
+                   </td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <router-link :to="{ name: 'ActeurDetail', params: { id: item.id }}" class="btn btn-default ">
@@ -281,12 +305,12 @@ Type de Recrutement
             </div>
         </div>
 
-        <fab :actions="fabActions"
+        <!-- <fab :actions="fabActions"
              main-icon="apps"
              @cache="afficherModalTypeRecretement"
              bg-color="green"
 
-        ></fab>
+        ></fab> -->
 
     
 
@@ -367,13 +391,18 @@ Type de Recrutement
                     <div class="control-group">
                         <label class="control-label">Unite administrative</label>
                         <div class="controls">
-                             <select v-model="formEffetFinancier.ua_id" class="span4">
+                             <!-- <select v-model="formEffetFinancier.unite_administrative_id" class="span4">
                                                             <option></option>
                                                             <option v-for="item in afficherUAParDroitAccess" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
-                                                        </select>
+                                                        </select> -->
+
+        <input type="text" v-model="formEffetFinancier.unite_administrative_id"
+                                    class="span4"
+                                    placeholder="refence acte"
+                            />
                         </div>
                     </div>
 
@@ -763,11 +792,16 @@ Type de Recrutement
 
 <script>
     import {formatageSomme} from "../../../vuex/modules/guei/Repositories/Repository"
-    import {mapGetters, mapActions} from 'vuex'
+    import {mapGetters, mapActions} from 'vuex';
     import moment from "moment";
-    import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth"
+    import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth";
+    import AjoutPersonnelAvecContrat from "./AjoutPersonnelAvecContrat";
+    import AjoutPersonnelSansContrat from "./AjoutPersonnelSansContrat";
     export default {
-
+components:{
+    AjoutPersonnelAvecContrat,
+    AjoutPersonnelSansContrat
+},
         data() {
             return {
                 fabActions: [
@@ -907,6 +941,9 @@ recrutement:""
             //    this.getActeur()
             //  console.log(this.fonctions)
             // console.log(this.getFonction)
+            this.formData = this.personnaliseActeurDepense.find(
+      item => item.id == this.$route.params.id
+    );
         },
         computed: {
            admin:admin,
@@ -1574,27 +1611,42 @@ this.$router.push({ name: 'AjouterPersoRecrutementDirect' })
         path: "/edit-acteur-depense/" + id
       });
     },
+    afficherModalModifier(id) {
+
+      this.$router.push({
+        path: "/Ajouter-Contrat-Personnel/" + id
+      });
+    },
 afficherModalTypeRecretement() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
-ajouterTypeTexteLocal() {
-      if(this.formRecrutement.recrutement==1){
-        this.$("#exampleModal").modal('hide');
+// ajouterTypeTexteLocal() {
+//       if(this.formRecrutement.recrutement==1){
+//         this.$("#exampleModal").modal('hide');
        
-       this.$('#ajouterActeEffetFinancierP').modal({
-        backdrop: 'static',
-        keyboard: false
+//        this.$('#ajouterActeEffetFinancierP').modal({
+//         backdrop: 'static',
+//         keyboard: false
         
-    });
-      }
-      else if(this.formRecrutement.recrutement==2){
-         this.$("#exampleModal").modal('hide');
-        this.$router.push({ name: 'AjouterActeur' })
+//     });
+//       }
+//       else if(this.formRecrutement.recrutement==2){
+//          this.$("#exampleModal").modal('hide');
+//         this.$router.push({ name: 'AjouterActeur' })
        
-      }
+//       }
+//     },
+    afficherModalModifierTypeTexte(index) {
+      this.$("#ajouterActeEffetFinancierP").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+     
+      this.formEffetFinancier = this.acteurActivite[index];
     },
             formaterDate(date) {
                 return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
@@ -1624,14 +1676,6 @@ ajouterTypeTexteLocal() {
          this.modifierActeEffetFinancier(nouvelObjet2)
           this.$('#modifierActeEF').modal('hide');
           },
-
- 
- 
- 
- 
- 
- 
-
 
             formatageSomme:formatageSomme,
         }
