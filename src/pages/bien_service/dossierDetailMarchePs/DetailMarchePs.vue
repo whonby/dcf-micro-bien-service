@@ -242,15 +242,9 @@ CodeExempte
                 </div>
 
                    <div id="tab78932" class="tab-pane">
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                    </div>
-
-
-                </div>
+                     <jugement :macheid="detail_marche.id"></jugement>
                
-                   <component-analyse :macheid="detail_marche.id"></component-analyse>
+<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
 
                 <div id="tab4110" class="tab-pane">
@@ -400,15 +394,9 @@ CodeExempte
                    <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
                 </div>
                   <div id="tab9563" class="tab-pane">
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                    </div>
-
-
-                </div>
+                    <jugement :macheid="detail_marche.id"></jugement>
                
-                   <component-analyse :macheid="detail_marche.id"></component-analyse>
+<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
                  <div id="tab06125" class="tab-pane">
                  <div align="right">
@@ -462,7 +450,7 @@ CodeExempte
                                 <li class=""><a data-toggle="tab" href="#tab784">Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab17041">PV d'ouverture</a></li>
                               <!--  <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>-->
-                                <li class=""><a data-toggle="tab" href="#tab5498"> Jugement des offres </a></li>
+                                <li class=""><a data-toggle="tab" href="#tab5498"> Jugement </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0612">PV Jugement</a></li>
                                <li class=""><a data-toggle="tab" href="#tab06745">Attribution</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab01432">bailleur</a></li>
@@ -552,17 +540,10 @@ CodeExempte
                    <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
                 </div>
                   <div id="tab5498" class="tab-pane">
-                      
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary" >Ajouter</a>
-                        <!-- <button class="btn btn-warning" title="veillez terminer le proccessuss de dossier de candidat avant de passer à autre etape !" disabled v-else > Ajouter</button> -->
-                    </div>
 
-
-                </div>
+                    <jugement :macheid="detail_marche.id"></jugement>
                
-                   <component-analyse :macheid="detail_marche.id"></component-analyse>
+<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
                  <div id="tab0612" class="tab-pane">
                  <div align="right">
@@ -763,14 +744,12 @@ CodeExempte
                 </div>
 
                   <div id="tab7" class="tab-pane">
-               <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                    </div>
 
 
-                </div>
-               <component-pv :macheid="detail_marche.id"></component-pv>
+
+                    <PvJugement  :macheid="detail_marche.id"></PvJugement>
+<!--               <componentPv :macheid="detail_marche.id"></componentPv>-->
+
 
                 </div>
 
@@ -914,7 +893,7 @@ CodeExempte
 //import dossierCandidat from '../DossierPso/dossierCandidat/dossierCandidat'
     import dossierCandidat from "@/pages/bien_service/DossierPso/dossierCandidat/dossierCandidat";
    // import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
-    import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
+   // import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
      import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
 import rapportOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
      
@@ -928,12 +907,14 @@ import rapportOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComit
 
 import LotMarche from "@/pages/bien_service/component/LotMarche";
 import OuvertureOffre from "@/pages/bien_service/component/OuvertureOffre/OuvertureOffre";
+import PvJugement from "@/pages/bien_service/component/Jugement/pv/PvJugement";
     import 'vue-search-select/dist/VueSearchSelect.css'
 import { formatageSomme } from "../../../../src/Repositories/Repository";
   import Jugement from "@/pages/bien_service/component/Jugement/Jugement";
     export default {
        
         components:{
+          PvJugement,
           Jugement,
           OuvertureOffre,
             componentCotation,
@@ -948,7 +929,7 @@ mandateBs,
 dossierCandidat,
  //componentOuverture1,
            // componentOuvertureMembre,
-            componentAnalyse,
+          //  componentAnalyse,
 componentPv,
  
            
