@@ -4321,6 +4321,20 @@ export function modificationProceVerbalOffre({commit}, element_modifie,config) {
 }
 
 
+export function modificationProceVerbalOffre2({commit}, element_modifie,config) {
+    asyncLoading( axios.post('/update_pv' ,element_modifie,config)).then(response => {
+        console.log(response)
+        commit('MODIFIER_PV', response)
+        //commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+
+
 
 
 

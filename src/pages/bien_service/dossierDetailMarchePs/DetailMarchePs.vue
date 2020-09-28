@@ -782,14 +782,9 @@ CodeExempte
 
 
                   <div id="tab27" class="tab-pane">
-               <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterD" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                    </div>
 
-
-                </div>
-                 <componentDemandeAno :macheid="detail_marche.id"> </componentDemandeAno>
+                    <AnoDMP :macheid="detail_marche.id"></AnoDMP>
+<!--                 <componentDemandeAno :macheid="detail_marche.id"> </componentDemandeAno>-->
 
                 </div>
 
@@ -901,7 +896,7 @@ import rapportOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComit
 
       import executionLigneExempte from '../executionLigneExempte/executionLigneExempte';
 
-        import componentDemandeAno from '../dossierDetailMarcheAOI_AON/dossierDemande_ano_cf/componentDemandeAno'; 
+    //    import componentDemandeAno from '../dossierDetailMarcheAOI_AON/dossierDemande_ano_cf/componentDemandeAno';
         import componentAvisAnoCf from '../dossierDetailMarcheAOI_AON/dossierAvisAnoCf/componentAvisAnoCf';
          import componentAvisBailleurCf from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
 
@@ -911,9 +906,11 @@ import PvJugement from "@/pages/bien_service/component/Jugement/pv/PvJugement";
     import 'vue-search-select/dist/VueSearchSelect.css'
 import { formatageSomme } from "../../../../src/Repositories/Repository";
   import Jugement from "@/pages/bien_service/component/Jugement/Jugement";
+  import AnoDMP from "@/pages/bien_service/component/AnoDMP/AnoDMP";
     export default {
        
         components:{
+          AnoDMP,
           PvJugement,
           Jugement,
           OuvertureOffre,
@@ -939,7 +936,7 @@ componentPv,
        
          
 
-            componentDemandeAno,
+         //   componentDemandeAno,
 
             componentAvisAnoCf,
             componentAvisBailleurCf,

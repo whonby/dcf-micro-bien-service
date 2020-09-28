@@ -7,8 +7,6 @@
                     <thead>
                     <tr>
                         <th>Numéro courrier</th>
-                        <!-- <th>Reférence d'offre </th> -->
-                        <!-- <th>Reference PV</th> -->
                         <th>Date demande</th>
                         <th>Fichier</th>
                          <th>Avis</th>
