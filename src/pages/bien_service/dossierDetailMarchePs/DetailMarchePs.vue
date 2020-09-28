@@ -789,13 +789,14 @@ CodeExempte
                 </div>
 
                   <div id="tab028" class="tab-pane">
-               <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterD" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                    </div>
+
+<!--               <div align="right">-->
+<!--                    <div class="widget-content">-->
+<!--                        <a href="#ajouterD" data-toggle="modal" class="btn btn-primary">Ajouter</a>-->
+<!--                    </div>-->
 
 
-                </div>
+<!--                </div>-->
                  <componentAvisAnoCf :macheid="detail_marche.id"> </componentAvisAnoCf>
 
                 </div>
@@ -804,17 +805,20 @@ CodeExempte
 
 
                   <div id="tab28" class="tab-pane">
-                       <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="listeAvisAnoBailleur(macheid)">Ajouter</a>
-                          <button class="btn btn-primary"  title="veillez recommencer le jugement , car l'Avis Bailleur est Objection" disabled v-else  >Ajouter</button>
-                   
-                    </div>
+<!--                    44444-->
+<!--                       <div align="right">-->
+<!--                    <div class="widget-content">-->
+<!--                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="listeAvisAnoBailleur(macheid)">Ajouter</a>-->
+<!--                          <button class="btn btn-primary"  title="veillez recommencer le jugement , car l'Avis Bailleur est Objection" disabled v-else  >Ajouter</button>-->
+<!--                   -->
+<!--                    </div>-->
 
 
-                </div>
+<!--                </div>-->
+
+                    <AnoBailleur :macheid="detail_marche.id"></AnoBailleur>
               
-                 <componentAvisBailleurCf :macheid="detail_marche.id"> </componentAvisBailleurCf>
+<!--                 <componentAvisBailleurCf :macheid="detail_marche.id"> </componentAvisBailleurCf>-->
 
                 </div>
 
@@ -898,7 +902,7 @@ import rapportOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComit
 
     //    import componentDemandeAno from '../dossierDetailMarcheAOI_AON/dossierDemande_ano_cf/componentDemandeAno';
         import componentAvisAnoCf from '../dossierDetailMarcheAOI_AON/dossierAvisAnoCf/componentAvisAnoCf';
-         import componentAvisBailleurCf from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
+     //    import componentAvisBailleurCf from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
 
 import LotMarche from "@/pages/bien_service/component/LotMarche";
 import OuvertureOffre from "@/pages/bien_service/component/OuvertureOffre/OuvertureOffre";
@@ -907,9 +911,11 @@ import PvJugement from "@/pages/bien_service/component/Jugement/pv/PvJugement";
 import { formatageSomme } from "../../../../src/Repositories/Repository";
   import Jugement from "@/pages/bien_service/component/Jugement/Jugement";
   import AnoDMP from "@/pages/bien_service/component/AnoDMP/AnoDMP";
+  import AnoBailleur from "@/pages/bien_service/component/AnoBailleur/AnoBailleur";
     export default {
        
         components:{
+          AnoBailleur,
           AnoDMP,
           PvJugement,
           Jugement,
@@ -939,7 +945,7 @@ componentPv,
          //   componentDemandeAno,
 
             componentAvisAnoCf,
-            componentAvisBailleurCf,
+        //    componentAvisBailleurCf,
             executionLigneExempte
 
 
