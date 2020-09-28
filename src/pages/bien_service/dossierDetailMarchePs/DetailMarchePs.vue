@@ -823,9 +823,8 @@ CodeExempte
                 </div>
 
                         <div id="tab10" class="tab-pane">
-
-
-                <component-acte :macheid="detail_marche.id"></component-acte>
+                    <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
+<!--                <componentActe :macheid="detail_marche.id"></componentActe>-->
 
                 </div>
 
@@ -912,9 +911,11 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
   import Jugement from "@/pages/bien_service/component/Jugement/Jugement";
   import AnoDMP from "@/pages/bien_service/component/AnoDMP/AnoDMP";
   import AnoBailleur from "@/pages/bien_service/component/AnoBailleur/AnoBailleur";
+    import ActEffeFinanciere from "@/pages/bien_service/component/ActEffetFinancier/ActEffeFinanciere";
     export default {
        
         components:{
+          ActEffeFinanciere,
           AnoBailleur,
           AnoDMP,
           PvJugement,

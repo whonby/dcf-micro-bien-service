@@ -1,23 +1,9 @@
 
 <template>
     <div class="container-fluid">
-
-                  
-                    <!-- <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="listeAvisAnoBailleur(macheid)">Ajouter</a>
-                          <button class="btn btn-warning"  title="veillez recommencer le jugement , car l'Avis Bailleur est Objection" disabled v-else  >Ajouter</button>
-                   
-                    </div>
-
-
-                </div> -->
-                
-                <h4> Liste acte effet financier </h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
-
                         <th>Reference acte</th>
                         <th>Entreprise</th>
                         <th>Montant acte</th>
@@ -26,10 +12,8 @@
                          <th>Montant cautionnement</th>
                         <th>Type acte</th>
                         <th>Objet marche.</th>
-                        
                         <th>Imputation</th>
                         <th>Durée du marché</th>
-                       
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -607,14 +591,6 @@
             
                   
           </tr>
-
-
-
-
-
-
-
-
 
                         </table>
                            
@@ -1307,12 +1283,6 @@ affichierIdBanque() {
     },
 
 
-
-
-
-
-
-
 affichierLibelleTypeMarche() {
       return id => {
         if (id != null && id != "") {
@@ -1339,11 +1309,6 @@ affichierIdTypeMarche() {
       };
     },
 
-
-
-///
-
-
 afficherNomCandidat(){
   return id =>{
       if(id!=null && id!=""){
@@ -1354,9 +1319,6 @@ afficherNomCandidat(){
       }
   }  
 },
-// recuperation de l'ID  de UA dans la table marché
-
-
 
 afficherIDUA() { 
       return id => {
@@ -1384,7 +1346,6 @@ afficherIDUA() {
       };
     },
 
-
      afficherOffrefID() {
       return id => {
         if (id != null && id != "") {
@@ -1397,7 +1358,6 @@ afficherIDUA() {
         }
       };
     },
-
 
     afficherListeMontant(){
      return id => {
