@@ -56,18 +56,18 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Code </th>
+                                    <!-- <th>Code </th> -->
                                     <th>Libellé</th>
-                                    <th>Action</th>
+                                    <th style="width:10%">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="odd gradeX" v-for="item in  partition(titreFiltres,size)[page]" :key="item.id">
-                                    <td @dblclick="afficherModalModifierTitre(item.id)">{{item.code || 'Non renseigné'}}</td>
-                                    <td @dblclick="afficherModalModifierTitre(item.id)">{{item.libelle || 'Non renseigné'}}</td>
+                                <tr class="odd gradeX" v-for="fonctAdm in  partition(titreFiltres,size)[page]" :key="fonctAdm.id">
+                                    <!-- <td @dblclick="afficherModalModifierTitre(fonctAdm.id)">{{fonctAdm.code || 'Non renseigné'}}</td> -->
+                                    <td @dblclick="afficherModalModifierTitre(fonctAdm.id)">{{fonctAdm.libelle || 'Non renseigné'}}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <button @click.prevent="supprimerFonction(item.id)"  class="btn btn-danger ">
+                                            <button @click.prevent="supprimerFonction(fonctAdm.id)"  class="btn btn-danger ">
                                                 <span class=""><i class="icon-trash"></i></span></button>
 
                                         </div>
@@ -112,22 +112,39 @@
                 <h3>Ajouter la fonction administrative</h3>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+                 <table class="table table-bordered table-striped">
+                     <tr>
+                         <td>
+                             <div class="control-group">
+                        <label class="control-label">Code</label>
+                        <div class="controls">
+                            <input type="text" v-model="formData.code" class="span5" placeholder="Saisir le code" />
+                        </div>
+                    </div>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>
+                             <div class="control-group">
+                        <label class="control-label">Libellé</label>
+                        <div class="controls">
+                            <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libellé" />
+                        </div>
+                    </div>
+                         </td>
+                     </tr>
+                 </table>
+                <!-- <form class="form-horizontal">
                     <div class="control-group">
                         <label class="control-label">Code:</label>
                         <div class="controls">
                             <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label">Libellé:</label>
-                        <div class="controls">
-                            <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
-                        </div>
-                    </div>
+                    
 
 
-                </form>
+                </form> -->
             </div>
             <div class="modal-footer">
                 <a @click.prevent="ajouterTitreLocal" class="btn btn-primary"
@@ -146,7 +163,29 @@
                 <h3>Modifier la fonction administrative</h3>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+                 <table class="table table-bordered table-striped">
+                      <tr>
+                         <td>
+                             <div class="control-group">
+                        <label class="control-label">Code</label>
+                        <div class="controls">
+                            <input type="text" v-model="editTitre.code" class="span5"  />
+                        </div>
+                    </div>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>
+                             <div class="control-group">
+                        <label class="control-label">Libellé</label>
+                        <div class="controls">
+                            <input type="text" v-model="editTitre.libelle" class="span5"  />
+                        </div>
+                    </div>
+                         </td>
+                     </tr>
+                 </table>
+                <!-- <form class="form-horizontal">
                     <div class="control-group">
                         <label class="control-label">Code:</label>
                         <div class="controls">
@@ -161,7 +200,7 @@
                     </div>
 
 
-                </form>
+                </form> -->
             </div>
             <div class="modal-footer">
                 <a @click.prevent="modifier()" class="btn btn-primary"
@@ -307,17 +346,22 @@
                 }
             },
 // afficher modal
-            afficherModalModifierTitre(index){
+            
+            afficherModalModifierTitre(id){
 
-                this.$('#modifierModal').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-                this.editTitre = this.fonctions[index];
+ this.$('#modifierModal').modal({
+         backdrop: 'static',
+         keyboard: false
+        });
 
-            },
+        this.editTitre = this.fonctions.find(items=>items.id==id);
+
+
+        
+ },
         modifier(){
             this.modifierFonction(this.editTitre)
+            this.$("#modifierModal").modal('hide');
             //this.getFonctions()
         }
         }

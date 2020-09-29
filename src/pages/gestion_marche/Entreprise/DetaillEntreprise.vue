@@ -128,6 +128,7 @@
                                             {{appelOffre.iban || 'Non renseigné'}}</td>
                                              <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.rib || 'Non renseigné'}}</td>
+                                            
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerCompte(appelOffre.id)"  class="btn btn-danger ">
                                                 <span class=""><i class="icon-trash"></i></span></button>
@@ -233,8 +234,8 @@
                             <div class="controls">
                               
                             <select v-model="formData.banq_id" class="span4" :readOnly="verroBanque">
-                                <option v-for="varText in banqueDynamiques(formData.commune_id)" :key="varText.banque_id"
-                              :value="varText.banque_id">{{getLibelleBanque(varText.banque_id)}}</option>
+                                <option v-for="varText in banqueDynamiques(formData.commune_id)" :key="varText[0].banque_id"
+                              :value="varText[0].banque_id">{{getLibelleBanque(varText[0].banque_id)}}</option>
                             </select>
                                 
                             </div>
@@ -425,12 +426,12 @@
                               <div class="control-group">
                                                     <label class="control-label">Ville:</label>
                                                     <div class="controls">
-                                                        <select v-model="editCompte.ville_id" class="span4" :readOnly="verroVille">
+                                                        <select v-model="editCompte.ville_id" class="span4" >
                                                             <option></option>
-                                                            <option v-for="item in VilleDynamiques(editCompte.pays_id)" 
+                                                            <option v-for="item in villesdynaModifier(editCompte.pays_id)" 
                                                             :key="item.id" 
                                                             :value="item.id">
-                                                                {{item.libelle}}
+                                                                {{LibelledeLaVille(item.ville_id)}}
                                                             </option>
 
                                                         </select>
@@ -440,9 +441,9 @@
                         
  <td>
                               <div class="control-group">
-                                                    <label class="control-label">Communes</label>
+                                                    <label class="control-label">Communes{{editCompte.ville_id}}</label>
                                                     <div class="controls">
-                                                        <select v-model="editCompte.commune_id" class="span4" :readOnly="verroCommune">
+                                                        <select v-model="editCompte.commune_id" class="span4" >
                                                            <option v-for="item in communeDynamiques(editCompte.ville_id)" 
                                                             :key="item.id" 
                                                             :value="item.id">
@@ -464,9 +465,9 @@
                              <label>Banque</label>
                             <div class="controls">
                               
-                            <select v-model="editCompte.banq_id" class="span4" :readOnly="verroBanque">
-                                <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText.banque_id"
-                              :value="varText.banque_id">{{varText.getLibelleBanque(varText.banque_id)}}</option>
+                            <select v-model="editCompte.banq_id" class="span4" >
+                                <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText[0].banque_id"
+                              :value="varText[0].banque_id">{{varText[0].getLibelleBanque(varText[0].banque_id)}}</option>
                             </select>
                                 
                             </div>
@@ -698,7 +699,7 @@ created() {
         computed: {
             ...mapGetters("bienService", [ "getMarchePersonnaliser","appelOffres","villes","communes","pays" ]),
 
-                ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
+                ...mapGetters("gestionMarche", ["groupeAgenceBanque",'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
 ...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays"]),
 afficherCodeRib(){
       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
@@ -771,8 +772,8 @@ afficherCodeRibEditCompte(){
                  banqueDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.agenceBanques.filter(
-            element => element.commune_id == id
+          return this.groupeAgenceBanque.filter(
+            element => element[0].commune_id == id
           );
         }
       };
@@ -844,14 +845,19 @@ return element;
 
 
      AffichierNomAgence() {
-      
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData.numero_agence);
+      if(this.formData.numero_agence==""){
+        return "Pas de donnee"
+      }
+      else{
+           const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData.numero_agence);
 
       if (dureVie1) {
         return dureVie1.nom_agence;
       }
+      }
+     return ""
       // console.log(dureVie1)
-      return "pas de lieu"
+      
     },
     AffichierNumeroAgence() {
       
@@ -1003,6 +1009,27 @@ villesdyna() {
         }
       };
     },
+    villesdynaModifier() {
+     return id => {
+        if (id != null && id != "") {
+          return this.agenceBanques.filter(
+            element => element.pays_id == id
+          );
+        }
+      };
+    },
+    LibelledeLaVille() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterplan_pays.find(qtreel => qtreel.parent == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return ""
+        }
+      };
+    },
     affichePays(){
         return this.getterplan_pays.filter(items=>items.parent == null );
     },
@@ -1077,6 +1104,7 @@ villesdyna() {
       
        };
                 this.ajouterCompte(nouvelObjet)
+                this.$('#myAlert').modal('hide');
                 this.formData = {
                     date_ouverture_compte:"",
                     signataire_compte:"",

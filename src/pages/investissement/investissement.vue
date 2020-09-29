@@ -595,6 +595,7 @@
             </div>
 
 
+
               <table class="table table-bordered table-striped" v-if="afficherMarcheInvestissementParDroitAccess.length>0">
                 <thead>
                 <tr>
@@ -610,6 +611,7 @@
                      <!-- <th>Numero marché</th> -->
                     <th>Montant prévu</th>
                     <th>Etat du marché</th>
+                    <th>Cycle de vie</th>
                    <th>Action</th>
                   </tr>
                 </thead>
@@ -666,6 +668,12 @@
                 <span title="MARCHE EN PLANIFICATION">PL</span>
                 </button>
 
+                   </td>
+                   <td >
+                        <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                 class="btn btn-inverse " title="Cycle de vie du marche">
+        <span class=""><i class=" icon-calendar"></i></span>
+    </router-link>
                    </td>
                    <td>
                      <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
@@ -860,6 +868,7 @@
                         <th>Référence du marché</th> 
                                     <th>Montant prévu</th>
                                 <th>Etat du marché</th>
+                                <th>Cycle de vie</th>
                                 <th>Action</th>
                 </tr>    
                 </thead>
@@ -897,7 +906,12 @@
                 </button>
                  
                    </td>
-
+<td >
+                        <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                 class="btn btn-inverse " title="Cycle de vie du marche">
+        <span class=""><i class=" icon-calendar"></i></span>
+    </router-link>
+                   </td>
 <td>
     <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail marche">

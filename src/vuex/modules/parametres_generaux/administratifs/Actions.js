@@ -467,17 +467,43 @@ export function supprimerStructureAdministrative({commit}, id){
 
 }
 // ajouter  service gestionnaire
-export  function ajouterServiceGestionnaire({commit, dispatch}, nouveauObjet){
-asyncLoading( axios.post('/ajouter_service_gestionnaire', nouveauObjet)).then(response =>{
-     commit('AJOUTER_SERVICE_GESTIONNAIRE', response.data)
-    dispatch('getServiceGestionnaire')
-     this.$app.$notify({
-        title: 'success ',
-        text: 'Enregistrement effectué avec success !',
-        type:"success"
-      })
- }).catch(error => console.log(error))
+// export  function ajouterServiceGestionnaire({commit, dispatch}, nouveauObjet){
+// asyncLoading( axios.post('/ajouter_service_gestionnaire', nouveauObjet)).then(response =>{
+//      commit('AJOUTER_SERVICE_GESTIONNAIRE', response.data)
+//     dispatch('getServiceGestionnaire')
+//      this.$app.$notify({
+//         title: 'success ',
+//         text: 'Enregistrement effectué avec success !',
+//         type:"success"
+//       })
+//  }).catch(error => console.log(error))
+// }
+EncoursExerciceBudgetaire
+export  function ajouterServiceGestionnaire({commit,dispatch}, nouveauObjet){
+    this.$app.$loading(true)
+    axios.post('/ajouter_service_gestionnaire', nouveauObjet ).then(res => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Enregistrement effectuer',
+            type:"success"
+        });
+        commit('AJOUTER_SERVICE_GESTIONNAIRE', res.data)
+        dispatch('getServiceGestionnaire')
+        dispatch('getServiceGestionnaire')
+        dispatch('getServiceGestionnaire')
+        this.$app.$loading(false)
+    }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(false)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Ce code existe déja",
+            type:"error"
+        });
+    })
 }
+
+
 // modifier service gestionnaire
 export function modifierServiceGestionnaire({ commit, dispatch}, nouveauObjet){
  asyncLoading(axios.put('/modifier_service_gestionnaire/'+ nouveauObjet.id,{
@@ -488,6 +514,9 @@ export function modifierServiceGestionnaire({ commit, dispatch}, nouveauObjet){
 })).then( resultat =>{
      commit('MODIFIER_SERVICE_GESTIONNAIRE',resultat.data)
     dispatch('getServiceGestionnaire')
+    dispatch('getServiceGestionnaire')
+        dispatch('getServiceGestionnaire')
+        dispatch('getServiceGestionnaire')
      this.$app.$notify({
         title: 'success ',
         text: 'Modification effectué avec success !',
@@ -503,6 +532,9 @@ export function supprimerServiceGestionnaire({commit, dispatch}, id){
     .then(dialog => {
        commit('SUPPRIMER_SERVICE_GESTIONNAIRE', id)
        dispatch('getServiceGestionnaire')
+    dispatch('getServiceGestionnaire')
+        dispatch('getServiceGestionnaire')
+        dispatch('getServiceGestionnaire')
 
       // // dialog.loading(false) // stops the proceed button's loader
         axios.delete('/supprimer_service_gestionnaire/' + id).then(() => dialog.close() )   

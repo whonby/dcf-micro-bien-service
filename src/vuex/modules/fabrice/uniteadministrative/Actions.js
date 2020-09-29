@@ -199,31 +199,63 @@ export function getAllUniteAdministrative({ commit }) {
   });
 }
 // ajouter Unite administrative
-export function ajouterUniteAdministrative({ commit, dispatch}, nouveau) {
-  asyncLoading(axios
-    .post("/ajouter_unite_administrative", {
-      type_ua_id: nouveau.type_ua_id,
-      section_id: nouveau.section_id,
-      nature_section_id: nouveau.nature_section_id,
-      servicegest_id: nouveau.servicegest_id,
-      localisationgeo_id: nouveau.localisationgeo_id,
-      code: nouveau.code,
-      libelle: nouveau.libelle,
-      date_creation: nouveau.date_creation,
-      code_ua: nouveau.code_ua
-    }))
-    .then(response => {
-      if (response.status == 201) {
-        commit("AJOUTER_UNITE_ADMINISTRATIVE", response.data);
-        dispatch('getAllUniteAdministrative')
-        this.$app.$notify({
-          title: 'Success',
-          text: 'Enregistrement Effectué avec Succès!',
-          type: "success"
-        })
-      }
-    });
+// export function ajouterUniteAdministrative({ commit, dispatch}, nouveau) {
+//   asyncLoading(axios
+//     .post("/ajouter_unite_administrative", {
+//       type_ua_id: nouveau.type_ua_id,
+//       section_id: nouveau.section_id,
+//       nature_section_id: nouveau.nature_section_id,
+//       servicegest_id: nouveau.servicegest_id,
+//       localisationgeo_id: nouveau.localisationgeo_id,
+//       code: nouveau.code,
+//       libelle: nouveau.libelle,
+//       date_creation: nouveau.date_creation,
+//       code_ua: nouveau.code_ua
+//     }))
+//     .then(response => {
+//       if (response.status == 201) {
+//         commit("AJOUTER_UNITE_ADMINISTRATIVE", response.data);
+//         dispatch('getAllUniteAdministrative')
+//         this.$app.$notify({
+//           title: 'Success',
+//           text: 'Enregistrement Effectué avec Succès!',
+//           type: "success"
+//         })
+//       }
+//     });
+// }
+
+export  function ajouterUniteAdministrative({commit,dispatch}, nouveauObjet){
+  this.$app.$loading(true)
+  axios.post('/ajouter_unite_administrative', nouveauObjet ).then(res => {
+      this.$app.$notify({
+          title: 'success',
+          text: 'Enregistrement effectuer',
+          type:"success"
+      });
+      commit('AJOUTER_UNITE_ADMINISTRATIVE', res.data)
+      dispatch('getAllUniteAdministrative')
+      dispatch('getAllUniteAdministrative')
+      dispatch('getAllUniteAdministrative')
+      this.$app.$loading(false)
+  }).catch(error =>{
+      console.log(error)
+      this.$app.$loading(false)
+      this.$app.$notify({
+          title: 'Erreur',
+          text: "Ce code existe déja",
+          type:"error"
+      });
+  })
 }
+
+
+
+
+
+
+
+
 // modifier Unite administrative
 export function modifierUniteAdministrative({ commit, dispatch }, nouveau) {
   asyncLoading(

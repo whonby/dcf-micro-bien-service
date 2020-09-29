@@ -56,13 +56,13 @@
                   <td >
                    {{marche.exo_id || 'Non renseigné'}}</td>
                  <td >
-                   {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
+                   {{afficherUniteAdministrative(marche.unite_administrative_id) || 'Non renseigné'}}</td>
                  <td >
                    {{ELibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
                  <td  style="text-align: center">
                    {{ afficherCodeProcedure(marche.procedure_passation_id) || 'Non renseigné'}}</td>
                   <td >
-                   {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
+                   {{afficheractivite(marche.activite_id) || 'Non renseigné'}}</td>
                     <td >
                    {{marche.imputation || 'Non renseigné'}}</td>
                     <!-- <td >
@@ -382,7 +382,7 @@ afficherlisteMarcheParDroitAccess() {
                     return item
                 }
             })
-            return colect
+            return colect.filter(element =>element.parent_id == null);
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -391,7 +391,7 @@ afficherlisteMarcheParDroitAccess() {
             // });
         }
 else{
-return this.printMarcheNonAttribue
+return this.printMarcheNonAttribue.filter(element =>element.parent_id == null);
 }
         
             // return (

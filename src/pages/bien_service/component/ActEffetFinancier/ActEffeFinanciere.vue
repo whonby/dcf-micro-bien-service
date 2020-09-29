@@ -106,7 +106,7 @@
 
   <!--Integration ACt-->
 
-  <div id="ajouterAct" class="modal hide grdirModalActeEffet" style="width: 1000px !important; left: 550px; ">
+  <div id="ajouterAct" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Information sur l'attribution de l'acte : Lot N° {{infoLot.numero_lot}} {{infoLot.objet}}</h3>
@@ -139,7 +139,7 @@
             <td>
 
               <div class="control-group">
-                <label class="control-label">Entreprise  </label>
+                <label class="control-label">Entreprise</label>
                 <div class="controls" >
                   <!-- <select v-model="formEffetFinancier.entreprise_id" class="span">
                         <option v-for="varText in affichierNomEntreprise(macheid)" :key="varText.id"
@@ -157,10 +157,10 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label">Banque.</label>
+                <label class="control-label">Banque</label>
                 <div class="controls" v-if="affichierNomEntreprise">
                   <select v-model="formEffetFinancier.banq_id" class="span" >
-                    <option v-for="varText in afficherBanqueDynamiqueId(dossier_candidat_id)" :key="varText.id"
+                    <option v-for="varText in afficherBanqueDynamiqueId(affichierIdEntrepriseSelectionner(nom_candidata))" :key="varText.id"
                             :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                   </select>
 
@@ -1332,7 +1332,18 @@ name: "ActEffeFinanciere",
 //            return null
 //        }
 //    },
+affichierIdEntrepriseSelectionner() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.entreprises.find(qtreel => qtreel.raison_sociale == id);
 
+          if (qtereel) {
+            return qtereel.id;
+          }
+          return 0
+        }
+      };
+    },
 
     afficherBanqueDynamiqueId(){
       return id =>{
@@ -1514,7 +1525,7 @@ name: "ActEffeFinanciere",
         montant_act:this.montantHTt,
         avance_demarrage_ttc:this.avanceDemarrage,
         tva_avance_demarage:this.avanceDemarrageMontantTva,
-        entreprise_id:this.dossier_candidat_id,
+        entreprise_id:this.affichierIdEntrepriseSelectionner(this.nom_candidata),
         difference_personnel_bienService:this.afficheMarcheType,
         marche_id:this.marche_lot,
         // ua_id:this.ua_id,
@@ -1560,5 +1571,10 @@ name: "ActEffeFinanciere",
 </script>
 
 <style scoped>
+
+.grdirModalActeEffet{
+  width: 88%;
+  margin: 0 -42%;
+}
 
 </style>

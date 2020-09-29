@@ -335,20 +335,40 @@ export  function  getCompte({commit}) {
   }
   
   // action pour ajouter compte
-  export function ajouterCompte({commit}, elementAjout){
-    asyncLoading(axios.post('/comptes',elementAjout)).then(response =>{
-        if(response.status == 201){
-            commit('AJOUTER_COMPTE', response.data)
+//   export function ajouterCompte({commit}, elementAjout){
+//     asyncLoading(axios.post('/comptes',elementAjout)).then(response =>{
+//         if(response.status == 201){
+//             commit('AJOUTER_COMPTE', response.data)
   
-            this.$app.$notify({
-              title: 'success ',
-              text: 'Enregistrement effectué !',
-              type:"success"
-            })
-        }
+//             this.$app.$notify({
+//               title: 'success ',
+//               text: 'Enregistrement effectué !',
+//               type:"success"
+//             })
+//         }
   
-    }).catch(error => console.log(error))
-  }
+//     }).catch(error => console.log(error))
+//   }
+  export  function ajouterCompte({commit}, objetAjoute){
+    this.$app.$loading(true)
+    axios.post('/comptes', objetAjoute ).then(res => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Enregistrement effectuer',
+            type:"success"
+        });
+        commit('AJOUTER_COMPTE', res.data)
+        this.$app.$loading(false)
+    }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(false)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Ce code ou libelle existe déja",
+            type:"error"
+        });
+    })
+}
   
   // action pour modifier banque
   

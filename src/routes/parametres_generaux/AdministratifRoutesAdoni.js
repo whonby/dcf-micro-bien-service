@@ -1,4 +1,4 @@
-// import tableauBordGeneral from "../../pages/parametres_generaux/administratifs/tableauBord.vue";
+import tableauBordGeneral from "../../pages/parametres_generaux/administratifs/tableauBord.vue";
 import tableauBordGeneralOriginal from "../../pages/parametres_generaux/administratifs/tableauBordGeneralOriginal.vue";
 import ExerciceBudgetaire from "../../pages/parametres_generaux/administratifs/ExerciceBudgetaire.vue";
 // import Titre from "../../pages/parametres_generaux/administratifs/tableauBord.vue";
@@ -72,11 +72,11 @@ const AdministratifRoutesAdoni = [
 
 
 
-  // {
-  //   path: "/tableauBordGeneral",
-  //   name: "tableauBordGeneral",
-  //   component: tableauBordGeneral
-  // },
+  {
+    path: "/tableauBordGeneral",
+    name: "tableauBordGeneral",
+    component: tableauBordGeneral
+  },
   {
     path: "/taux",
     name: "taux",

@@ -49,7 +49,7 @@
   </div>
 
 <!--Ajouter offre technique-->
-  <div id="ajouter_offre_fin" class="modal hide" style="width: 1000px !important; left: 550px; ">
+  <div id="ajouter_offre_fin" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Ajouter l'offre technique</h3>
@@ -975,5 +975,10 @@ listeOffreTechniqueLotCandidat(){
 </script>
 
 <style scoped>
+
+.grdirModalActeEffet{
+  width: 88%;
+  margin: 0 -42%;
+}
 
 </style>
