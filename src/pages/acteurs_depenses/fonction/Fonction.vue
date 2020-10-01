@@ -307,13 +307,13 @@
                 }
             },
 // afficher modal
-            afficherModalModifierTitre(index){
+            afficherModalModifierTitre(id){
 
                 this.$('#modifierModal').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editTitre = this.fonctions[index];
+                this.editTitre = this.fonctions.find(item => item.id==id);
 
             },
         modifier(){

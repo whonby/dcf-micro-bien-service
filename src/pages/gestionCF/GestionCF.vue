@@ -371,13 +371,13 @@
                 this.ajouterUtilisateur(this.formData)
                 this.$('#exampleModal').modal('hide');
             },
-            afficherModalModifierTitre(index){
+            afficherModalModifierTitre(id){
 
                 this.$('#modifierModal').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editTitre = this.getterUtilisateur.find(item=>item.id==index);
+                this.editTitre = this.getterUtilisateur.find(item=>item.id==id);
 
             },
             partition:partition,

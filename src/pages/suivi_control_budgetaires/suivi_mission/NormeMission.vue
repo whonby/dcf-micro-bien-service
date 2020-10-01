@@ -61,18 +61,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(norme_mission, index) in partition(getNormeMissionPersonnaliser,size)[page]"
+                <tr class="odd gradeX" v-for="norme_mission in partition(getNormeMissionPersonnaliser,size)[page]"
                  :key="norme_mission.id">
-                  <td @dblclick="afficherModalModifierNormeMission(index)">
+                  <td @dblclick="afficherModalModifierNormeMission(norme_mission.id)">
                       {{norme_mission.varObjetSourceFinancement.libelle|| 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierNormeMission(index)">
+                  <td @dblclick="afficherModalModifierNormeMission(norme_mission.id)">
                       {{norme_mission.varObjetFonction.libelle || 'Non renseigné'}}</td>
                    
-                    <td @dblclick="afficherModalModifierNormeMission(index)">
+                    <td @dblclick="afficherModalModifierNormeMission(norme_mission.id)">
                       {{formatageSomme(parseFloat(norme_mission.perdiem)) || 'Non renseigné'}}</td>
 
                
-                        <td  @dblclick="afficherModalModifierNormeMission(index)">
+                        <td  @dblclick="afficherModalModifierNormeMission(norme_mission.id)">
                             <span 
                              v-if="norme_mission.zone == 0"> Côte d'ivoire</span>
                               <span v-else-if="norme_mission.zone == 1" > Afrique</span>
@@ -502,14 +502,14 @@ partition:partition,
          }
      },
 // afficher modal
-afficherModalModifierNormeMission(index){
+afficherModalModifierNormeMission(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editNormeMission = this.getNormeMissionPersonnaliser[index];
+        this.editNormeMission = this.getNormeMissionPersonnaliser.find(item => item.id==id);
 
 
         

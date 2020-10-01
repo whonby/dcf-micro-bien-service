@@ -59,11 +59,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(activites, index)  in partition (categorieMissionFiltre,size)[page]"
+                <tr class="odd gradeX" v-for="activites  in partition (categorieMissionFiltre,size)[page]"
                  :key="activites.id">
-                  <td @dblclick="afficherModalModifierBudgetaire(index)">
+                  <td @dblclick="afficherModalModifierBudgetaire(activites.id)">
                       {{activites.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierBudgetaire(index)">
+                  <td @dblclick="afficherModalModifierBudgetaire(activites.id)">
                       {{activites.libelle || 'Non renseigné'}}</td>
                    
                   <td>
@@ -351,14 +351,14 @@ partition:partition,
          }
      },
 // afficher modal
-afficherModalModifierBudgetaire(index){
+afficherModalModifierBudgetaire(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editBudgetaire = this.categories_missions[index];
+        this.editBudgetaire = this.categories_missions.find(item => item.id==id);
 
 
         
