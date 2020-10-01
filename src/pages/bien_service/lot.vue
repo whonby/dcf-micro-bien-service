@@ -78,7 +78,7 @@
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label">libelle_lot</label>
+            <label class="control-label">libelle lot</label>
             <div class="controls">
               <input
                 type="text"
@@ -89,7 +89,7 @@
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label">montant_lot</label>
+            <label class="control-label">montant lot</label>
             <div class="controls">
               <input
                 type="text"
@@ -119,16 +119,7 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <!-- <download-excel
-            class="btn btn-default pull-right"
-            style="cursor:pointer;"
-            :fields="json_fields"
-            title="Liste Types équipements"
-            :data="filtre_equipement"
-            name="Liste des types équipements"
-          >
-            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel> -->
+
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">

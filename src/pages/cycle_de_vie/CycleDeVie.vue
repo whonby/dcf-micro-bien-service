@@ -1,4 +1,4 @@
-
+montant_act_ht
 <template>
     <div >
 
@@ -138,8 +138,8 @@
                  <tr>
                      <th  style="width:5%">MONTANT TOTAL DE  BASE DU MARCHE / CONTRAT FCFA(HT,TTC)</th>
 
-                     <td style="width:15%" colspan="1" >  {{formatageSomme(parseFloat(detail.acte_effet_financiare[0].montant_act_ht)) || 'Non renseigné'}}  HT </td>
-                     <td style="width:15%" colspan="1" >{{formatageSomme(parseFloat(detail.acte_effet_financiare[0].montant_act)) || 'Non renseigné'}}   TTC </td>
+                     <td style="width:15%" colspan="1" >  {{formatageSomme(parseFloat(AfficheMontantHt(detail.id))) || 'Non renseigné'}}  HT </td>
+                     <td style="width:15%" colspan="1" >{{formatageSomme(parseFloat(AfficheMontant_act(detail.id))) || 'Non renseigné'}}   TTC </td>
                  </tr>
                  <tr>
                      <th  style="width:5%">AGENT CF DE SUIVI </th>
@@ -925,8 +925,31 @@
 
                     }
                 )
-            }
+            },
+AfficheMontantHt() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
 
+                        if (qtereel) {
+                            return qtereel.montant_act_ht;
+                        }
+                        return 0
+                    }
+                };
+            },
+            AfficheMontant_act() {
+                return id => {
+                    if (id != null && id != "") {
+                        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+                        if (qtereel) {
+                            return qtereel.montant_act;
+                        }
+                        return 0
+                    }
+                };
+            },
         },
         methods: {
             ...mapActions("personnelUA", [

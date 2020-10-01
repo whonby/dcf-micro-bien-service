@@ -829,13 +829,13 @@ affichertypeMarcheID
                            <span class=""><i class=" icon-calendar"></i></span>
                        </router-link>
                    </td> -->
-                   <td v-if="marche.attribue == 2 || marche.attribue == 5">
+                   <td >
                         <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
                  class="btn btn-inverse " title="Cycle de vie du marche">
         <span class=""><i class=" icon-calendar"></i></span>
     </router-link>
                    </td>
-                   <td v-else></td>
+                   
                    <td>
                     
                       <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
@@ -1214,7 +1214,8 @@ affichertypeMarcheID
                  :key="marche.id">
                  
                  <td>
-                   {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}</td>
+                   {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}
+                 </td>
                    <td>
                    {{afficherUniteAdministrative(afficherIdUniteAdministrative(marche.marche_id)) || 'Non renseigné'}}</td>
                     <td>
@@ -1814,7 +1815,7 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 || this.recupererCodeTypeMarche(element.type_marche_id) == 1)
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1823,7 +1824,7 @@ getDateFinExécutionValue(){
             // });
         }
 
- return this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 1 || this.recupererCodeTypeMarche(element.type_marche_id) == 4)
+ return this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 1 || this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null)
        
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1846,7 +1847,7 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1)
+            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1855,7 +1856,7 @@ getDateFinExécutionValue(){
             // }); 
         }
 
-        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1)
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1879,11 +1880,11 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1)
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null)
             
         }
 
-        return this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1)
+        return this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null)
            
         
 

@@ -330,6 +330,7 @@ affichierTauxExecution() {
       
       return 0
     },
+    
 // afficherBudgetInitialTranferst(){
     
 //       return this.budgetGeneral.filter(item =>item.gdenature_id==6).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0)

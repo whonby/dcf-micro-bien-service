@@ -2,7 +2,7 @@
     <div>
                   <div class="">
                       <div class="span9" >
-                         <h4>Liste des membres de la cojo</h4>
+                         <h4>Liste des membres 000de la Cojo</h4>
                       </div>
                       <div class="span3" align="right">
                           <a href="#ajouter_membre_cojo" data-toggle="modal" class="btn btn-warning" >Ajouter un autre membre </a>
@@ -40,10 +40,10 @@
 
 
                       
-             <div id="ajouter_membre_cojo" class="modal hide" aria-hidden="true" style="display: none;">
+             <div id="ajouter_membre_cojo" class="modal hide tailgrand" aria-hidden="true" style="display: none;">
         <div class="modal-header">
             <button data-dismiss="modal" class="close" type="button">×</button>
-            <h3>Ajouter un autre membre de la cojo </h3>
+            <h3>Ajouter un autre membre de la Cojo </h3>
         </div>
         <div class="modal-body">
             <div class="widget-box">
@@ -75,8 +75,46 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>
+                                <div class="control-group">
+                                    <label>Structure d'origine</label>
+                                    <div class="controls">
+                                        <input type="text" class="span" placeholder="Matricule " v-model="formDataMembreCojo.matricule" v-on:keyup="rechercheMembreCojo()" >
+                                        <code v-if="message_mandater">{{message_mandater}}</code>
+                                    </div>
+                                </div>
+                            </td>
 
-                            <td colspan="2">
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label class="control-label">Fonction <code>*</code> :</label>
+                                    <div class="control-group">
+                                        <input type="text" class="span" placeholder="Numero lo" v-model="formDataMembreCojo.nom_prenom">
+
+
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td colspan="">
+
+                                <div class="control-group">
+
+                                    <label class="control-label span5">Conctacts <code>*</code> :</label>
+
+                                   <div class="control-group">
+                                        <input type="text" class="span" placeholder="Numero lo" v-model="formDataMembreCojo.nom_prenom">
+
+
+                                    </div>
+                                </div>
+                            </td>
+                            <td colspan="">
 
                                 <div class="control-group">
 
@@ -262,6 +300,7 @@ export default {
                     if (objetMandater.length==1){
                         let acteur= this.acteur_depenses.find(item=>item.acteur_depense.matricule==this.formDataMembreCojo.matricule)
                         this.formDataMembreCojo.nom_prenom=acteur.acteur_depense.nom +" "+acteur.acteur_depense.prenom
+                        
                         this.message_mandater=" "
 
                     }
@@ -286,3 +325,9 @@ export default {
     }
 }
 </script>
+<style scoped>
+.tailgrand{
+  width: 88%;
+  margin: 0 -42%;
+}
+</style>

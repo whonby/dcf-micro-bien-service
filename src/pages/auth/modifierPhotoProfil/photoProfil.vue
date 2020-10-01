@@ -24,6 +24,7 @@
                       </li>
                        
                      
+
                      
                     </ul>
                   </div>
@@ -37,7 +38,7 @@
                 <div class="control-group">
                  
                   <div class="controls">
-                     <img v-bind:src="AffichePhoto(afficheidUtilisateur)" name="aboutme" width="100" height="20" class="img-circle">
+                     <img v-bind:src="AffichePhoto(afficheidUtilisateur)"  name="aboutme" width="100" height="20" class="img-circle" >
                   </div>
                 </div>
               </td>
@@ -47,7 +48,7 @@
                   <div class="control-group">
                  
                   <div class="controls">
-                  <input type="file" @change="OnchangeImage"  class="span11 form-control" >
+                  <input type="file" @change="OnchangeImage()"  class="span11 form-control" >
                   <code v-if="info_img">Le fichier doit etre une image (.png,.jpg,jpeg,gif)</code>
                   </div>
                 </div>

@@ -56,6 +56,21 @@ isButtunAddDossierCandidat
             </div>
             <div class="row-fluid">
                 <div class="span12">
+
+    <form-wizard @on-complete="onComplete">
+     <tab-content title="Personal details"
+                  icon="ti-user">
+       My first tab content
+     </tab-content>
+     <tab-content title="Additional Info"
+                  icon="ti-settings">
+       My second tab content
+     </tab-content>
+     <tab-content title="Last step"
+                  icon="ti-check">
+       Yuhuuu! This seems pretty damn simple
+     </tab-content>
+ </form-wizard>
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">

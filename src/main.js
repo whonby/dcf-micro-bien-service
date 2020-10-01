@@ -43,7 +43,14 @@ import PrettyCheckbox from 'pretty-checkbox-vue'
 // Vue.component('p-input', PrettyInput);
 // Vue.component('p-check', PrettyCheck);
 // Vue.component('p-radio', PrettyRadio);
-
+import VueFormWizard from 'vue-form-wizard'
+import 'vue-form-wizard/dist/vue-form-wizard.min.css'
+import Loading from 'vue-loading-overlay';
+// Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
+// Init plugin
+Vue.use(Loading);
+Vue.use(VueFormWizard)
 Vue.component('v-marker-cluster', Vue2LeafletMarkerCluster)
 Vue.component('downloadExcel', JsonExcel)
 //Vue.component(Balloon)

@@ -2361,3 +2361,10 @@ export const MODIFIER_ECHEANCES = (state, elementModif)=>{
 export const DELETE_ECHEANCES = (state, id)=> {
     state.echeances = state.echeances.filter(prest => prest.id !=id)
 }
+
+
+
+/**Loading marche**/
+export const LOADING_MARCHE = (state, value)=> {
+    state.loading_marche = value
+}

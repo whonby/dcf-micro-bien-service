@@ -354,7 +354,8 @@
 
         },
         methods: {
-            ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","modifierUtilisateur","supprimerUtilisateur","ajouterUtilisateur"]),
+            ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",
+              "modifierUtilisateur","supprimerUtilisateur","ajouterUtilisateur","modifierChangeProfile"]),
             ...mapActions("bienService", [
                 "getEcheances",
                 "ajouterEcheances",

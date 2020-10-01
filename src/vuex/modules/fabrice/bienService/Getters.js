@@ -1,5 +1,5 @@
 import { groupBy } from "../../../../Repositories/Repository";
-
+getActeEffetFinancierPersonnaliser45
 export const role_membrecojo = state => state.role_membrecojo
 
 export const modepaiements = state => state.modepaiements
@@ -1080,3 +1080,8 @@ export const groupeEntreprise = (state) => {
   
     return groupBy(state.acteEffetFinanciers, "entreprise_id");
 };
+
+
+
+/**GetterLoadinMarche**/
+export const getterLoadinMarche=state => state.loading_marche

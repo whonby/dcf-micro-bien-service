@@ -1,4 +1,4 @@
-
+personnaliseActeurDepense
 const type_acte_personnels = state => state.type_acte_personnels;
 const fonctions  = state => state.fonctions;
 const paiementPersonnel  = state => state.paiementPersonnel;

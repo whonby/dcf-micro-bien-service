@@ -978,11 +978,11 @@ export  function  getAnalyseDossier({commit}) {
 }
 
 // action pour ajouter analyse dossier
-export function ajouterAnalyseDossier({commit}, elementAjout){
-  asyncLoading(axios.post('/analyse_dossier',elementAjout)).then(response =>{
+export function ajouterAnalyseDossierMultiple({commit,dispatch}, elementAjout){
+  asyncLoading(axios.post('/analyse_dossier_multiple',elementAjout)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_ANALYSE_DOSSIER', response.data)
-
+          dispatch("getAnalyseDossier")
           this.$app.$notify({
             title: 'success ',
             text: 'Enregistrement effectué !',
@@ -992,6 +992,27 @@ export function ajouterAnalyseDossier({commit}, elementAjout){
 
   }).catch(error => console.log(error))
 }
+
+export function supprimerAnalyseDossierMultiple({dispatch}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+
+            axios.delete('/delete_mutipleAnalyse/' + id).then(() =>{
+                dispatch("getAnalyseDossier")
+                dialog.close()
+
+            }  )
+
+        })
+
+}
+
+/***
+ * A
+ * @param commit
+ * @param element_modifie
+ */
 
 // action pour modifier analyse dossier
 
@@ -2764,6 +2785,7 @@ export function supprimerTypeProcedure({ commit, dispatch}, id) {
 export  function  getMarche({commit}) {
   queue.push(() => axios.get('/marches').then((response) => {
     commit('GET_MARCHE', response.data.data)
+      commit("LOADING_MARCHE",false)
     
 }).catch(error => console.log(error)))
 }
@@ -2785,6 +2807,23 @@ export function ajouterMarche({commit}, elementAjout){
   }).catch(error => console.log(error))
 }
 
+
+
+export function ajouterSousMarcheLot({commit}, elementAjout){
+    asyncLoading(axios.post('/sous_marche',elementAjout)).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_MARCHE', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
 // action pour modifier le type text juridique
 
 
@@ -2800,6 +2839,21 @@ export function modifierMarche({ commit, dispatch}, element_modifie) {
          type:"success"
        })
    }).catch(error => console.log(error))
+}
+
+
+export function modifierSousMarche({ commit, dispatch}, element_modifie) {
+    asyncLoading( axios.put('/sous_marche',element_modifie)).then(response => {
+        commit('MODIFIER_MARCHE', response.data)
+        dispatch('getMarche')
+        dispatch('getActeEffetFinancier')
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
 }
 //supprimer le type text juridique
 
@@ -4255,6 +4309,20 @@ export function supprimerProceVerbal({commit}, id) {
 }  
 export function modificationProceVerbalOffre({commit}, element_modifie,config) {
     asyncLoading( axios.post('/update_proceVerbalJugementOffres' ,element_modifie,config)).then(response => {
+        console.log(response)
+        commit('MODIFIER_PV', response)
+        //commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+
+
+export function modificationProceVerbalOffre2({commit}, element_modifie,config) {
+    asyncLoading( axios.post('/update_pv' ,element_modifie,config)).then(response => {
         console.log(response)
         commit('MODIFIER_PV', response)
         //commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)

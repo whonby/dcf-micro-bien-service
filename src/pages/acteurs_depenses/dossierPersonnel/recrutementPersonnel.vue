@@ -393,13 +393,13 @@
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
+                   {{afficherUniteAdministrative(marche.unite_administrative_id) || 'Non renseigné'}}</td>
                    <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.type_marche.libelle || 'Non renseigné'}}</td>
+                   {{afficherTypeMarcheLibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
                  <!-- <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
                    {{marche.procedure_passation.code || 'Non renseigné'}}</td> -->
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
+                   {{afficheractivite(marche.activite_id) || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.imputation || 'Non renseigné'}}</td>
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -477,13 +477,13 @@
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
+                   {{afficherUniteAdministrative(marche.unite_administrative_id) || 'Non renseigné'}}</td>
                    <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.type_marche.libelle || 'Non renseigné'}}</td>
+                   {{afficherTypeMarcheLibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
                    {{marche.procedure_passation.code || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
+                   {{afficheractivite(marche.activite_id) || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.imputation || 'Non renseigné'}}</td>
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -1778,19 +1778,30 @@ admin:admin,
 dcf:dcf,
 ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
+CodeTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.code_type_marche;
+      }
+      return 0
+        }
+      };
+    },
  afficherContratParDroitAccess() {
        // const st = this.search.toLowerCase();
         if (!this.admin || !this.dcf){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.type_marche.code_type_marche == 2)
+            return colect.filter(element => this.CodeTypeMarche(element.type_marche_id) == 2)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1799,7 +1810,7 @@ dcf:dcf,
             // });
         }
 
-        return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 2)
+        return this.printMarcheNonAttribue.filter(element => this.CodeTypeMarche(element.type_marche_id) == 2)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1811,13 +1822,13 @@ dcf:dcf,
         if (!this.admin || !this.dcf){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 2)
+            return colect.filter(element => element.attribue == 0 && this.CodeTypeMarche(element.type_marche_id) == 2)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1826,7 +1837,7 @@ dcf:dcf,
             // });
         }
 
-        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 2)
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && this.CodeTypeMarche(element.type_marche_id) == 2)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1840,13 +1851,13 @@ dcf:dcf,
         if (!this.admin || !this.dcf){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 1)
+            return colect.filter(element => element.attribue == 1 && this.CodeTypeMarche(element.type_marche_id) == 2)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1855,7 +1866,7 @@ dcf:dcf,
             // });
         }
 
-        return this.printMarcheNonAttribue.filter(element => element.attribue == 1)
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 1 && this.CodeTypeMarche(element.type_marche_id) == 2)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1896,7 +1907,7 @@ getDateFinExécutionValue(){
 // afficher la liste des contrats du personnel
 
 afficherLaListeDesContratsDuPersonnel(){
-return this.afficherContratParDroitAccess.filter(element => element.type_marche.code_type_marche == 2)
+return this.afficherContratParDroitAccess.filter(element => this.CodeTypeMarche(element.type_marche_id) == 2)
 },
 
 
@@ -2236,6 +2247,7 @@ afficherEntreprise() {
         }
       };
     },
+
 exoEnCours(){
 return this.exercices_budgetaires.filter(element => element.encours == 1)
 },

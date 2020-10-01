@@ -118,8 +118,8 @@
                                             {{formaterDate(appelOffre.date_ouverture_compte) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.signataire_compte || 'Non renseigné'}}</td>
-                                         <td v-if="appelOffre.nature_compte == 0" >Compte courant</td>
-                                         <td v-else >Non renseigné</td>
+                                         <td @dblclick="afficherModalModifierActeDepense(index)" v-if="appelOffre.nature_compte == 0" >Compte courant</td>
+                                         <td @dblclick="afficherModalModifierActeDepense(index)" v-else >Non renseigné</td>
                                             
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.swift|| 'Non renseigné'}}</td>
@@ -233,8 +233,8 @@
                             <div class="controls">
                               
                             <select v-model="formData.banq_id" class="span4" :readOnly="verroBanque">
-                                <option v-for="varText in banqueDynamiques(formData.commune_id)" :key="varText.afficheBanque.id"
-                              :value="varText.afficheBanque.id">{{varText.afficheBanque.libelle}}</option>
+                                <option v-for="varText in banqueDynamiques(formData.commune_id)" :key="varText.banque_id"
+                              :value="varText.banque_id">{{getLibelleBanque(varText.banque_id)}}</option>
                             </select>
                                 
                             </div>
@@ -413,7 +413,7 @@
                                                     <div class="controls">
                                                         <select v-model="editCompte.pays_id" class="span4" >
                                                             <option></option>
-                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -465,8 +465,8 @@
                             <div class="controls">
                               
                             <select v-model="editCompte.banq_id" class="span4" :readOnly="verroBanque">
-                                <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText.afficheBanque.id"
-                              :value="varText.afficheBanque.id">{{varText.afficheBanque.libelle}}</option>
+                                <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText.banque_id"
+                              :value="varText.banque_id">{{varText.getLibelleBanque(varText.banque_id)}}</option>
                             </select>
                                 
                             </div>
@@ -771,13 +771,24 @@ afficherCodeRibEditCompte(){
                  banqueDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseAgence.filter(
-            element => element.afficheCommune.id == id
+          return this.agenceBanques.filter(
+            element => element.commune_id == id
           );
         }
       };
     },
+getLibelleBanque() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.banques.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return ""
+        }
+      };
+    },
     
 
 
@@ -840,7 +851,7 @@ return element;
         return dureVie1.nom_agence;
       }
       // console.log(dureVie1)
-      return ""
+      return "pas de lieu"
     },
     AffichierNumeroAgence() {
       

@@ -10,23 +10,23 @@
                                  <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
                                             <tr>
-                                              <th>Reference Pv</th>  
-                                         <th>Date rapport jugement</th> 
+                                              <th>Reference Pv</th>
+                                         <th>Date rapport jugement</th>
                                                 <th>Fichier</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
-                           
+
                                             <tbody>
                          <tr class="odd gradeX" v-for="(rapport,index) in listePV(macheid)"
                         :key="rapport.id">
 
                             <td @click="afficherModalRapportJugement(index)">
-                            {{rapport.reference|| 'Non renseigné'}}</td> 
+                            {{rapport.reference|| 'Non renseigné'}}</td>
 
                          <td @click="afficherModalRapportJugement(index)">
                             {{formaterDate(rapport.date_rapport_jugement)|| 'Non renseigné'}}</td>
-                      
+
                         <td @click="afficherModalRapportJugement(index)">
                             <a v-if="rapport.fichier" :href="rapport.fichier" class="btn btn-default" target="_blank">
                                 <span class=""><i class="icon-book"></i>
@@ -42,11 +42,11 @@
                             <button @click.prevent="supprimerProceVerbal(rapport.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
                              </td>
-                           
+
                         </div>
-                       
-                       
-                        
+
+
+
                     </tr>
                                             </tbody>
                                         </table>
@@ -151,8 +151,7 @@
 
              <div id="modifierRapportJugements" class="modal hide " aria-hidden="true" style="display: none;">
 
-
-                         <div class="modal-header">
+               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modifier le rapport de jugement </h3>
             </div>

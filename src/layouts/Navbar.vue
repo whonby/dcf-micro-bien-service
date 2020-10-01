@@ -15,6 +15,7 @@
     <MenuMilieu v-if="active_el ==20"></MenuMilieu>
      <MenuDefaut v-if="active_el ==0"></MenuDefaut>
     <MenuGestionAccess v-if="active_el ==21"></MenuGestionAccess>
+    <MenuMonEquipe v-if="active_el ==30"></MenuMonEquipe>
     <Search></Search>
     
     
@@ -39,6 +40,7 @@ import MenuOperationRapport from "../components/navs/MenuOperationRapport.vue";
 import MenuCatographie from "../components/navs/MenuCatographie.vue";
 import MenuDefaut from "../components/navs/MenuDefaut.vue";
 import MenuMilieu from "../components/navs/MenuMilieu.vue";
+import MenuMonEquipe from "../components/navs/MenuMonEquipe.vue";
 import Search from "../components/Search";
 import MenuGestionAccess from "../components/navs/MenuGestionAccess"
 import { mapState, mapActions} from "vuex";
@@ -57,7 +59,8 @@ export default {
    MenuDefaut,
    MenuMilieu,
     Search,
-      MenuGestionAccess
+      MenuGestionAccess,
+    MenuMonEquipe
     
   },
 
@@ -70,7 +73,7 @@ export default {
 
   methods: {
 
-    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser"]),
+    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser","getEquipeCF"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 
@@ -84,7 +87,7 @@ export default {
 
     ...mapActions('parametreGenerauxAdministratif',
      ['getExercicesBudgetaires', 'getTitres', 'getTaux',
-    'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 'getStructurePays', 'getPlanPays','getPlanOrganigrammeUa','getStructureOrganigrammeUa', 
+    'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 'getStructurePays', 'getPlanPays','getPlanOrganigrammeUa',
     'getStructureAdministrative', 'getServiceGestionnaire', 'getStructureGeographique',
     'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions"]),
 
@@ -92,7 +95,7 @@ export default {
       // "getAllTypeTextes",
       "getAllUniteAdministrative",
       // "getAllArchivageDocument",
-      // "getAllDirection",
+      "getAllDirection",
       "getAllServiceua",
       "getAllBanqueUa",
       "getAllFonction",
@@ -105,7 +108,7 @@ export default {
      "getBudgeChager",
      "getAllRealiteServiceFait",
      "getAllLiquidation",
-     "getOrganigrammeUa",
+     "getStructureOrganigrammeUa",
      "getAllBanqueUa",
      "getAllDecompteFacture"
     ]),
@@ -172,6 +175,7 @@ this.getFormeJuridiques()
 this.getRegimeImpositions()
     this.getRoles()
     this.getUtilisateurs()
+    this.getEquipeCF()
     this.getPlanPassationMarche()
     this.getRapport()
       this.getBudgeChager()
@@ -186,6 +190,7 @@ this.getRegimeImpositions()
    this.getPlanProgramme()
     this.getStructurePays()
    this.getPlanPays()
+   this.getPlanOrganigrammeUa()
    this.getStructureAdministrative()
    this.getServiceGestionnaire()
    this.getStructureGeographique()
@@ -247,13 +252,13 @@ this.getTypeAppel()
     
       // this.getAllTypeTextes();
     this.getAllUniteAdministrative();
-     this.getOrganigrammeUa()
+     
      this.getAllBanqueUa()
      this.getAllDecompteFacture()
        this.getStructureOrganigrammeUa()
-   this.getPlanOrganigrammeUa()
+ 
     // this.getAllArchivageDocument();
-// this.getAllDirection()
+this.getAllDirection()
 this.getAllServiceua()
 this.getAllFonction()
 this.getAllBanqueUa()

@@ -17,7 +17,7 @@
         </a>
         <ul class="dropdown-menu">
           <li>
-            <router-link :to="{name: 'ExerciceBudgetaire1'}" tag="a">
+            <router-link :to="{name: 'ExerciceBudgetaire'}" tag="a">
               <i class="icon-user"></i>
               Exercises budgétaires
             </router-link>

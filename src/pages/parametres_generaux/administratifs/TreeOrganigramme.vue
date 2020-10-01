@@ -6,9 +6,9 @@
       @dblclick="$emit('modifier', item)">
     <span v-if="isFolder" @click="toggle"> <i :class="iconClasses"></i></span>
 
-     <span style="font-size: 1.5em;" :title="item.libelle"> <code > {{item.code}}</code>  {{ item.libelle |subStr(100) }} </span>
+     <span style="font-size: 1.5em;" :title="item.libelle"> <code > {{item.code}}</code>  {{ afficherLibelle(item.libelle) |subStr(100) }} </span>
      <span style="cursor: pointer;"  class="add" @click="$emit('ajouterElementEnfant', item)"><i class="icon-plus-sign"></i></span>
-     <span style="cursor: pointer;"  class="add" @click="$emit('modifier', item)"><i class="icon-pencil"></i></span>
+     <!-- <span style="cursor: pointer;"  class="add" @click="$emit('modifier', item)"><i class="icon-pencil"></i></span> -->
      <span style="cursor: pointer;" class="add" @click="$emit('supprimer', item)"><i class="icon-trash"></i></span>
 
     </div>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-
+import {mapGetters} from 'vuex'
 export default {
     name: 'Tree',
      props: {
@@ -41,11 +41,56 @@ export default {
     }
   },
   computed: {
-
+  ...mapGetters("uniteadministrative", [
+     
+      "uniteAdministratives",
+     "StructureOrganigrammeUa",
+     "groupeNiveau1Ua",
+     "directions"
+      
+    ]),
+    ...mapGetters("SuiviImmobilisation", [
+      
+      "normeImmo",
+      "groupeServiceNorme",
+      "groupeFonctionNormeEquipe",
+      "services",
+      
+      
+      ]),
+// methode pour maper notre guetter
+...mapGetters('personnelUA', ['all_acteur_depense','fonctions']),
+   ...mapGetters('parametreGenerauxAdministratif', [ 'getterstructuresOrganisationUa',
+    'getterplanOrganisationUa']) ,
     isFolder: function () {
       return this.item.children &&
         this.item.children.length
     },
+    afficherLibelle(){
+  return id1 =>{
+        if(id1!=null && id1!=""){
+          const objet = this.uniteAdministratives.find(item => item.id==id1)
+          if(objet) 
+          return objet.libelle
+        }
+        if(id1!=null && id1!=""){
+          const objet = this.services.find(item => item.id==id1)
+          if(objet) 
+          return objet.libelle
+        }
+        if(id1!=null && id1!=""){
+          const objet = this.fonctions.find(item => item.id==id1)
+          if(objet) 
+          return objet.libelle
+        }
+        if(id1!=null && id1!=""){
+          const objet = this.directions.find(item => item.id==id1)
+          if(objet) 
+          return objet.libelle
+        }
+      }
+      
+},
     iconClasses() {
       return {
         'icon-chevron-right': !this.isOpen && this.item.children.length,

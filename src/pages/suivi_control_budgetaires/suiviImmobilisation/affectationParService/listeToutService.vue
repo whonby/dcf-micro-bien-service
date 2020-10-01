@@ -107,7 +107,8 @@ admin:admin,
       "montantBudgetGeneral",
       "uniteZones",
       "getPersonnaliseBudgetGeneralParTransfert",
-      "uniteAdministratives"
+      "uniteAdministratives",
+      "StructureOrganigrammeUa"
       // "chapitres",
       // "sections"
     ]),
@@ -134,15 +135,26 @@ listeDesServiceDeUa() {
                     return item
                 }
             })
-          return colect.filter(items=>items.normeequipement !=null);
+          return colect.filter(items=>items.serviceua_id != null && items.fonction_id == null );
         }
 
-       return this.getterplanOrganisationUa.filter(items=>items.normeequipement !=null);
+       return this.getterplanOrganisationUa.filter(items=>items.serviceua_id != null && items.fonction_id == null);
 
     },
 
 
+afficheRecupperationNiveau() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.StructureOrganigrammeUa.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.niveau;
+      }
+      return 0
+        }
+      };
+    },
  afficheToutUA() {
       return id => {
         if (id != null && id != "") {

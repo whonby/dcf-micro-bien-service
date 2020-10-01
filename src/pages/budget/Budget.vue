@@ -37,6 +37,7 @@
                                             <th>Exercice budgétaire</th>
                                             <th>Statut</th>
                                             <th>Montant Global</th>
+                                            <th>Variation</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
@@ -68,6 +69,10 @@
                                             <td v-else-if="passation.actived == 0 && passation.status=='actu'"  >{{formatageSomme(montantGlobale(passation.id))}}</td>
 
 
+<td v-if="passation.status=='init'" style="background-color: red; color:#fff">{{formatageSomme(varition_bugetaire(passation.id))}} </td>
+                                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff">{{formatageSomme(varition_bugetaire(passation.id))}}</td>
+                                            <td v-else-if="passation.actived == 0 && passation.status=='actu'"  >{{formatageSomme(varition_bugetaire(passation.id))}}</td>
+
                                             <td v-if="passation.status=='init'" style="background-color: red; color:#fff"> <router-link :to="{ name: 'DetailBudgetImporte', params: { id: passation.id }}"
                                                                                                                                         class="btn btn-default " title="Detail marches">
                                                 <span class=""><i class="icon-folder-open"></i></span>
@@ -77,7 +82,8 @@
                                                              class="btn btn-default " title="Detail marches">
                                                     <span class=""><i class="icon-folder-open"></i></span>
                                                 </router-link></td>
-                                            <td v-else-if="passation.actived == 0 && passation.status=='actu'" > <router-link :to="{ name: 'DetailBudgetImporte', params: { id: passation.id }}"
+                                            <td v-else-if="passation.actived == 0 && passation.status=='actu'" > 
+                                                <router-link :to="{ name: 'DetailBudgetImporte', params: { id: passation.id }}"
                                                                                                                               class="btn btn-default " title="Detail marches">
                                                 <span class=""><i class="icon-folder-open"></i></span>
                                             </router-link></td>
@@ -281,6 +287,31 @@
                     return norme.annee;
                 }
                 return 0
+            },
+            varition_bugetaire(){
+               return id=>{
+                   if(id!=""){
+                     let objet =this.getterBudgeCharge.find(item=>item.id==id)
+                     
+                     if(objet!="undefined"){
+                          if(objet.status=="init"){
+                              return 0;
+                          }
+                         if(objet.status=="actu"){
+                           let ancien_version=objet.version - 1;
+                          let encien_budjet=this.getterBudgeCharge.find(item=>item.version==ancien_version)
+                            let montant_ancien_budget=this.montantGlobale(encien_budjet.id)
+                            let montant_budget_actuel=this.montantGlobale(objet.id)
+
+                            let variation=montant_budget_actuel-montant_ancien_budget;
+                           // console.log(variation)
+                              return variation;
+                          }
+                          
+                     }
+
+                   }
+               }
             },
             montantGlobale(){
                 return id =>{

@@ -207,7 +207,7 @@
                                                 <td @dblclick="afficherModaleModifier(index)">
                                                     {{lot_marche.libelle_lot || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModaleModifier(index)">
-                                                    {{lot_marche.montant_lot || 0}}</td>
+                                                    {{formatageSomme(parseFloat(lot_marche.montant_lot)) || 0}}</td>
                                              
                                                 <td @dblclick="afficherModaleModifier(index)">
                                                     {{listeAppelOffreLibelle(lot_marche.appel_offre_id) || 'Non renseigné'}}
@@ -228,10 +228,12 @@
 
 <script>
   import { mapGetters, mapActions } from "vuex";
+   import { formatageSomme } from "../../../../src/Repositories/Repository";
 export default {
     props:["macheid"],
     data(){
         return{
+
 
            
                  formLot:{
@@ -346,7 +348,7 @@ export default {
     },
     methods:{
         ...mapActions("bienService", [ "ajouterLot","modifierLot","supprimerLot"]),
-
+formatageSomme:formatageSomme,
          ajouterL(){
                 this.formLot.marche_id=this.macheid
                 this.formLot.appel_offre_id=this.listeAppelOffreId(this.macheid)

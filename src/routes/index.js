@@ -92,7 +92,7 @@ router.beforeEach((to, from, next) => {
 
   // if logged in redirect to dashboard
   if(to.path === '/' && store.state.Utilisateurs.isLoggedIn) {
-     next({ name: 'ExerciceBudgetaire' })
+    next({ name: 'tableauBordGeneralOriginal' })
       return
   }
 

@@ -1,6 +1,6 @@
 <template>
   <!--top-Header-menu-->
-  <div id="user-nav" class="navbar navbar-inverse">
+  <div id="user-nav" style="position: fixed;">
     <ul class="nav">
       <!--Paramètres administratifs-->
 
@@ -148,12 +148,12 @@
 
 
       <!--Tableau de bord acteur de depense-->
-       <li >
+       <!-- <li >
          <router-link :to="{name: 'TableauBordActeurDepense'}" tag="a">
           <span class="text">TABLEAU DE BORD </span>
          </router-link>
       
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>

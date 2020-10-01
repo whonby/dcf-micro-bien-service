@@ -224,6 +224,10 @@ export const groupeCommune = (state, getters) => {
     //delete getters.trieUaImmobilisation.
     return groupBy(getters.getPersonnaliseAgence, "commune_id");
 };
+export const groupeAgenceBanque = (state, getters) => {
+    //delete getters.trieUaImmobilisation.
+      return groupBy(getters.agenceBanques,"banque_id");
+  };
 
 export {
     getPersonnaliseAgence,

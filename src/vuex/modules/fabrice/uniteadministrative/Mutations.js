@@ -501,19 +501,19 @@ const SUPPRIMER_LIQUIDATION = (state, id) => {
 };
 
 
-const GET_ALL_ORGANIGRAMME_UA = (state, tableauBudgetGeneral) => {
-  state.organigrammeUa = tableauBudgetGeneral;
+const GET_ALL_STRUCTURE_ORGANIGRAMME_UA = (state, tableauBudgetGeneral) => {
+  state.StructureOrganigrammeUa = tableauBudgetGeneral;
 };
 
 // ajouter type_textes
-const AJOUTER_ORGANIGRAMME_UA = (state, nouveau_budgetGeneral) => {
+const AJOUTER_STRUCTURE_ORGANIGRAMME_UA = (state, nouveau_budgetGeneral) => {
   // state.typeTextes = [...nouveau_type, ...state.typeTextes]
-  state.organigrammeUa.unshift(nouveau_budgetGeneral);
+  state.StructureOrganigrammeUa.unshift(nouveau_budgetGeneral);
 };
 
 // modifier type_textes
-const MODIFIER_ORGANIGRAMME_UA = (state, objetModifie) => {
-  state.organigrammeUa = state.organigrammeUa.map(type => {
+const MODIFIER_STRUCTURE_ORGANIGRAMME_UA = (state, objetModifie) => {
+  state.StructureOrganigrammeUa = state.StructureOrganigrammeUa.map(type => {
     if (type.id == objetModifie.id) {
       type = { ...objetModifie };
     }
@@ -523,8 +523,8 @@ const MODIFIER_ORGANIGRAMME_UA = (state, objetModifie) => {
 };
 
 // supprimer type_texte
-const SUPPRIMER_ORGANIGRAMME_UA = (state, id) => {
-  state.organigrammeUa = state.organigrammeUa.filter(type => type.id != id);
+const SUPPRIMER_STRUCTURE_ORGANIGRAMME_UA = (state, id) => {
+  state.StructureOrganigrammeUa = state.StructureOrganigrammeUa.filter(type => type.id != id);
 };
 
 // export const GET_ALL_BANQUE_UA = (state, tableauBanqueUa) => {
@@ -560,10 +560,10 @@ export {
 
   
 
-  GET_ALL_ORGANIGRAMME_UA,
-  AJOUTER_ORGANIGRAMME_UA,
-  MODIFIER_ORGANIGRAMME_UA,
-  SUPPRIMER_ORGANIGRAMME_UA,
+  GET_ALL_STRUCTURE_ORGANIGRAMME_UA,
+  AJOUTER_STRUCTURE_ORGANIGRAMME_UA,
+  MODIFIER_STRUCTURE_ORGANIGRAMME_UA,
+  SUPPRIMER_STRUCTURE_ORGANIGRAMME_UA,
 
   GET_ALL_LIQUIDATION,
   AJOUTER_LIQUIDATION,

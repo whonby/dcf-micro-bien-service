@@ -37,7 +37,38 @@ import CauseInactivite from '../../pages/suivi_control_budgetaires/suiviImmobili
 import natureEntre from '../../pages/suivi_control_budgetaires/suiviImmobilisation/natureEntre.vue'
 import NormeImmo from '../../pages/suivi_control_budgetaires/suiviImmobilisation/GrpeNorme/NormeImmoPrincipal.vue'
 import historisqueAffection from '../../pages/suivi_control_budgetaires/suiviImmobilisation/docAffectationImmo/ficheDemandeEquipement.vue'
+import ListeUaTauxEquipement25 from '../../pages/suivi_control_budgetaires/suiviImmobilisation/BilanUaEquipeouNon/ListeUaTauxEquipement0a25.vue'
+import ListeUaTauxEquipement50 from '../../pages/suivi_control_budgetaires/suiviImmobilisation/BilanUaEquipeouNon/ListeUaTauxEquipement25a50.vue'
+import ListeUaTauxEquipement75 from '../../pages/suivi_control_budgetaires/suiviImmobilisation/BilanUaEquipeouNon/ListeUaTauxEquipement50a75.vue'
+import ListeUaTauxEquipement100 from '../../pages/suivi_control_budgetaires/suiviImmobilisation/BilanUaEquipeouNon/ListeUaTauxEquipement75a100.vue'
+import detailTauxEquipement from '../../pages/suivi_control_budgetaires/suiviImmobilisation/BilanUaEquipeouNon/detailTauxEquipement.vue'
+
 const suiviImmobilisationRoutes = [
+  {
+    path: "/detailTauxEquipement/:id",
+    name: "detailTauxEquipement",
+    component: detailTauxEquipement
+  },
+  {
+    path: "/TauxEquipementparUa25",
+    name: "ListeUaTauxEquipement25",
+    component: ListeUaTauxEquipement25
+  },
+  {
+    path: "/TauxEquipementparUa50",
+    name: "ListeUaTauxEquipement50",
+    component: ListeUaTauxEquipement50
+  },
+  {
+    path: "/TauxEquipementparUa75",
+    name: "ListeUaTauxEquipement75",
+    component: ListeUaTauxEquipement75
+  },
+  {
+    path: "/TauxEquipementparUa100",
+    name: "ListeUaTauxEquipement100",
+    component: ListeUaTauxEquipement100
+  },
   {
     path: "/bilan-Ua-Equipe-NonEquipe",
     name: "bilanUaEquipeNonEquipe",
