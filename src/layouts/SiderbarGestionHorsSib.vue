@@ -57,6 +57,12 @@
             <span class="label label-important"></span>
           </a>
         </li>
+         <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==19}">
+          <a href="#">
+            <i class="icon-truck"></i>
+            <span>GESTION DES MARCHES</span>
+          </a>
+        </li>
         <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
           <a href="#">
             <i class="icon-group"></i>
@@ -68,6 +74,7 @@
             <i class="icon-truck"></i>
             <span>BIENS ET SERVICES</span>
           </a>
+        </li>
 
        <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
           <a title="COMPTABILITE DES MATIERE" href="#">
@@ -234,12 +241,11 @@ return objJson.id
         })
       },
 navigateToGestionMarche(){
-        this.activate(7)
+        this.activate(19)
         this.$router.push({
-          name: 'GestionMarche'
+          name: 'GestionMarcheHorSib'
         })
       },
-
 
 
       navigateToActeurDepense(){
