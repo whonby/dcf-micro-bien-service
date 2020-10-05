@@ -3,28 +3,19 @@
         <div class="container-fluid">
 
 
-
-
-
             <div class="widget-box">
                 <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                    <h5>Liste des budgets importés </h5>
-                    <!-- <div align="right">
-                         Recherche:
-                         <input type="search" placeholder v-model="search" />
-                     </div>-->
+                    <h5>Liste des budgets importés</h5>
                 </div>
-
                 <div class="">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab1">Budget importé</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2">Importation du budget</a></li>
-
                             </ul>
                         </div>
                         <div class="widget-content tab-content">

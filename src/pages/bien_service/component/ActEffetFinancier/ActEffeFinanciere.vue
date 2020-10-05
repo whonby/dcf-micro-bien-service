@@ -109,7 +109,7 @@
   <div id="ajouterAct" class="modal hide grdirModalActeEffet" style="width: 1000px !important; left: 550px; ">
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
-      <h3>Information sur l'attribution de l'acte : Lot N° {{infoLot.numero_lot}} {{infoLot.objet}}</h3>
+      <h3>Information sur l'attribution de l'acte : Lot N° {{infoLot.numero_lot}} {{infoLot.obje}}</h3>
     </div>
 
     <div class="widget-title">
