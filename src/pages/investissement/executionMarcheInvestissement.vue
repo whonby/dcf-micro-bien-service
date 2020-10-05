@@ -1,7 +1,9 @@
+ImputationBudgetModifier
 
 <template>
   <div>
-  
+
+
     <div id="modificationModal" class="modal hide taillModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -12,7 +14,7 @@
           <tr>
             <td>
                   <div class="control-group">
-                                <label class="control-label">Année Budgétaire</label>
+                                <label class="control-label">Année Budgetaire</label>
                                 <div class="controls ">
                             
                              <input
@@ -122,7 +124,7 @@
             <div class="controls">
               <input
                 type="text"
-                :value="ImputationBudgetModifier"
+                
                 class="span5"
                 placeholder="Saisir le Imputation"
                 readonly
@@ -206,7 +208,7 @@
              <td colspan="2">
               
                <div class="control-group">
-            <label class="control-label">Procédure de passation</label>
+            <label class="control-label">procedure passation</label>
             <div class="controls">
            
                <select v-model="editMarche.procedure_passation_id" class="span4" :readOnly="deverouPassationModi">
@@ -258,9 +260,9 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des marchés attribués</h5>
+              <h5>Liste des marches attribués </h5>
               <div align="right">
-                Recherche:
+                Search:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
@@ -270,12 +272,12 @@
                 <thead>
                   <tr>
                      <th>UA</th>
-                    <th>Type de marché</th>
+                    <th>Type marché</th>
                     <th>Activité</th>
                     <th>Imputation</th>
-                    <th>Ligne Budgétaire</th>
-                    <th>Objet du marché</th>
-                    <th>Référence du marché</th>
+                    <th>Ligne Budgetaire</th>
+                    <th>Objet marché</th>
+                    <th>Reference marché</th>
                    
                     <th>Montant Réel</th>
                     <th>Action</th>
@@ -283,13 +285,13 @@
                 </thead>
                 <tbody >
                   <tr class="odd gradeX" v-for="(marche, index) in 
-                  marcherAttribuerFiltre"
+                  afficherlisteMarcheExecutionParDroitAccess"
                  :key="marche.id">
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
+                   {{afficherlibelleUa(marche.unite_administrative_id) || 'Non renseigné'}}</td>
 
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.type_marche.libelle || 'Non renseigné'}}</td>
+                   {{affichertypeMarche(marche.type_marche_id) || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -300,9 +302,11 @@
                    {{marche.objet || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.reference_marche || 'Non renseigné'}}</td>
+                  
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(afficheMontantReelMarche(marche.id))) || 'Non renseigné'}}</td>
                  
+
 
 
 
@@ -312,11 +316,14 @@
                 class="btn btn-default " title="formulation de demamnde d'engagement">
                   <span class=""><i class="icon-folder-open"></i></span>
                    </router-link>  -->
- <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
+ <!-- <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail execution">
                   <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link>  -->
+<router-link :to="{ name: 'detailExecution', params: { id: marche.id }}"
+                class="btn btn-default " title="Detail execution Marche">
+                  <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
-
 
             <!-- <router-link :to="{ name: 'DetailLivrable', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail livrable">
@@ -374,8 +381,8 @@
     </div>
 
     <!-- <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab> -->
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjoutTypaPrestation()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+ <!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjoutTypaPrestation()">Open</button>
+      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
   </div>
@@ -383,9 +390,10 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
- import { formatageSomme } from "../../../Repositories/Repository";
+import { formatageSomme } from "../../../src/Repositories/Repository";
+  import {admin,dcf,noDCfNoAdmin} from "../../../src/Repositories/Auth";
 export default {
-  
+  name:'type facture',
   data() {
     return {
       fabActions: [
@@ -433,6 +441,69 @@ export default {
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
+   ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+  admin:admin,
+  dcf:dcf,
+  noDCfNoAdmin:noDCfNoAdmin,
+
+
+afficherlisteMarcheExecutionParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.getMarchePersonnaliser.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(recuper => recuper.attribue == 2 && this.affichertypeMarche(recuper.type_marche_id) == 3 && recuper.parent !=null )
+            // return colect.filter(items => {    
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 2 && this.affichertypeMarche(recuper.type_marche_id) == 3 && recuper.parent !=null)
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
+
+
+
+
+afficherMontantExecutionParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.getActeEffetFinancierPersonnaliser45.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect
+            // return colect.filter(items => {    
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.getActeEffetFinancierPersonnaliser45
+           
+    },
+    
+
+
  afficherAttributMarche() {
       return id => {
         if (id != null && id != "") {
@@ -517,15 +588,26 @@ return this. marcherAttribuer.filter((item) => {
         }
       };
     },
+afficherlibelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
     marcherAttribuer(){
-      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 2 && recuper.type_marche.code_type_marche == 3 )
+      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 2 && recuper.type_marche.code_type_marche == 4 || recuper.attribue == 2 && recuper.type_marche.code_type_marche == 1)
       
     },
 
     
     montantMarcheExecuter(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 3 && recuper.difference_personnel_bienService == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+  return this.afficherMontantExecutionParDroitAccess.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(recuper.type_marche_id) == 3 && recuper.difference_personnel_bienService == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
 },
     // MontatantImputationBudget() {
       
@@ -627,6 +709,14 @@ anneeAmort() {
       return 0
     },
   },
+  created() {
+            this.marcheid=this.$route.params.id
+   this.detail_marche = this.getMarchePersonnaliser.find(
+       idmarche => idmarche.id == this.$route.params.id
+   )
+  /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
+    console.log(this.appel_offre_marche)*/
+},
   methods: {
     ...mapActions("bienService", ['ajouterMarche','modifierMarche',
     'supprimerMarche'

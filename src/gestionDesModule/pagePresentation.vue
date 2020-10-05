@@ -1,79 +1,90 @@
- 
 <template>
-  <div>
-    <!--start-top-serch-->
-    <MenuTableau v-if="active_el == 11"></MenuTableau>
-    <MenuParamG v-if="active_el == 17"></MenuParamG>
-    <MenuUA v-if="active_el == 1"></MenuUA>
-    <MenuActeurDepense v-if="active_el == 2"></MenuActeurDepense>
-    <MenuPlanification v-if="active_el ==3"></MenuPlanification>
-    <MenuInvestissement v-if="active_el == 4"></MenuInvestissement>
-    <MenuComptaMatieres v-if="active_el ==5"></MenuComptaMatieres>
-    <MenuControlAxe v-if="active_el ==6"></MenuControlAxe>
-    <MenuOperationRapport v-if="active_el ==7"></MenuOperationRapport>
-    <MenuCatographie v-if="active_el ==8"></MenuCatographie>
-    <MenuMilieu v-if="active_el ==20"></MenuMilieu>
-     <MenuDefaut v-if="active_el ==0"></MenuDefaut>
-    <MenuGestionAccess v-if="active_el ==21"></MenuGestionAccess>
-    <MenuMonEquipe v-if="active_el ==30"></MenuMonEquipe>
-    <Search></Search>
-    
-    
-    <!--close-top-serch-->
-  </div>
+
+    <div>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+        <!-- <h3 style="text-align:center;color:#ffffff;">TABLEAU DE BORD GENERAL</h3> -->
+        <div class="row-fluid">
+      <div class="span16">
+        <div class="quick-actions_homepage">
+          <!-- <center>
+      <router-link tag="a" :to="{ name: 'photoProfil' }">
+        <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">
+        </router-link>
+      <h6 style="color:orange;font-size:14px">{{afficheNomUtilisateur}}</h6>
+      <span class="user-level" style="color:#ffffff;font-size:14px">({{afficheRoleUtilisateur}})</span>
+		</center> -->
+          <table class="table table-bordered table-striped" style="background-color: #ffffff;">
+            <tr>
+              <td style="width:85%;text-align: center;font-size:14px">
+                <h5 >MENU GENERAL DU SID-CF</h5>
+              </td>
+             
+              <td >
+                 <router-link :to="{ name: 'Login'}" tag="a" style="text-align: right;color:red;">
+                <h5 >Se Déconnecté</h5>
+                
+                </router-link>
+              </td>
+            </tr>
+          </table>
+          
+          <div >
+            <ul class="quick-actions" >
+                <li class="bg_lg span3" > 
+                     <router-link :to="{ name: 'TableauDeBordG', params: {id:1}}" tag="a"  style="color:black;">
+                <h4>MODULE</h4> <i class="icon-cogs"></i><h4>PARAMETRES GENERAUX</h4>
+                
+                </router-link> 
+                </li>
+  <li class="bg_lg span3" > 
+     <router-link :to="{ name: 'TableauDeBordG', params: {id:2}}" tag="a"  style="color:black;">
+      <h4>MODULE </h4> <i class="icon-home"></i> <h4>UNITE D'ADMINISTRATIVE</h4>      </router-link> </li>
+      <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:3}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4> SIB</h4></router-link> </li>
+            </ul>
+            <br>
+<br>
+
+            <ul class="quick-actions" >
+               
+    <li class="bg_ly span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:4}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4>HORS SIB</h4></router-link> </li>
+  <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>MODULE </h4> <i class="icon-globe"></i><h4>CATOGRAPHIES</h4></router-link> </li>
+           <li class="bg_ly span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:6}}" tag="a"  style="color:black;"><h4>MODULE </h4> <i class="icon-group"></i><h4>MON EQUIPE</h4></router-link> </li>
+            </ul>
+           
+          </div>
+        </div>
+      </div>
+      
+    </div>
+   
+      
+    </div>
+
+
 </template>
 
+
 <script>
+import { mapGetters,mapActions} from "vuex";
 
-// var housecall = require('housecall');
 
-// var queue = housecall({ concurrency: 2, cooldown: 1000 });
-import MenuTableau from "../components/navs/menuTableauBord";
-import MenuParamG from "../components/navs/menuParametreG";
-import MenuUA from "../components/navs/menuUA";
-import MenuActeurDepense from "../components/navs/MenuActeurDepense";
-import MenuPlanification from "../components/navs/MenuPlanification";
-import MenuInvestissement from "../components/navs/MenuInvestissement";
-import MenuComptaMatieres from "../components/navs/MenuComptaMatieres";
-import MenuControlAxe from "../components/navs/MenuControlAxe";
-import MenuOperationRapport from "../components/navs/MenuOperationRapport.vue";
-import MenuCatographie from "../components/navs/MenuCatographie.vue";
-import MenuDefaut from "../components/navs/MenuDefaut.vue";
-import MenuMilieu from "../components/navs/MenuMilieu.vue";
-import MenuMonEquipe from "../components/navs/MenuMonEquipe.vue";
-import Search from "../components/Search";
-import MenuGestionAccess from "../components/navs/MenuGestionAccess"
-import { mapState, mapActions} from "vuex";
+// import {admin,dcf,cf,noDCfNoAdmin} from "../Repositories/Auth"
 export default {
-  components: {
-    MenuTableau,
-    MenuParamG,
-    MenuUA,
-    MenuActeurDepense,
-    MenuPlanification,
-    MenuInvestissement,
-    MenuComptaMatieres,
-   MenuControlAxe,
-   MenuOperationRapport,
-   MenuCatographie,
-   MenuDefaut,
-   MenuMilieu,
-    Search,
-      MenuGestionAccess,
-    MenuMonEquipe
-    
-  },
 
-  computed: {
+  data(){
+    return{
 
-       ...mapState('parametrageMenu', {
-     active_el: state => state.active_el
-  })
+      budgetGeneralCharge:""
+
+    }
   },
- created(){
-    let objet=localStorage.getItem('Users');
-    let user=JSON.parse (objet)
-    this.getGestionModules()
+created(){
+          this.getGestionModules()
     this.getAffectation()
 this.getFormeJuridiques()
 this.getRegimeImpositions()
@@ -145,7 +156,7 @@ this.getAllRealiteServiceFait()
 
 
 
-    this.getUniteAdminUser(user.id)
+    
 
 this.getTypeCandidat();
 this.getTypeAppel()
@@ -301,13 +312,93 @@ this.getLettreInvitation()
 this.getMembreCojo()
     this.getProceVerbal()
       this.getEcheances()
-      /**
-       * fin missions
-       */
-  },
-  methods: {
+        },
+//   created() {
+//             this.marcheid=this.$route.params.id
+//    this.detail_marche = this.getMarchePersonnaliser.find(
+//        idmarche => idmarche.id == this.$route.params.id
+//    )
+  
+// },
+  computed:{
+ ...mapGetters("uniteadministrative", [
+                "acteCreations",
+                "typeTextes",
+                "uniteAdministratives",
+                "getterBudgeCharge",
+                "budgetGeneral",
+                "afficheTransfertValider",
+                "transferts"
 
-    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser","getEquipeCF"]),
+            ]),
+            ...mapGetters('personnelUA', ['sauvegardePhoto']),
+    ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel","mandats"]),
+
+       ...mapGetters("parametreGenerauxAdministratif", [
+             
+                "gestionModules"
+            ]),
+            
+      
+      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+
+afficherModule1() {
+      return id1 => {
+        if (id1 != null && id1 != "") {
+           const qtereel = this.gestionModules.find(qtreel => qtreel.id == id1);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 0
+        }
+      };
+    },
+
+
+  AffichePhoto() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sauvegardePhoto.find(qtreel => qtreel.user_id == id);
+
+      if (qtereel) {
+        return qtereel.fichier;
+      }
+      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/1_!1595119277.jpg "
+        }
+      };
+    },
+  afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
+afficheRoleUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.user_role.role.libelle
+
+},
+  afficheIdUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.id
+
+},
+
+
+
+
+
+
+
+  },
+
+  methods:{
+
+   ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser","getEquipeCF"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 
@@ -398,9 +489,29 @@ this.getMembreCojo()
           "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances"])
 
 
-  },
-
  
-
-};
+  }
+}
 </script>
+<style>
+.flex{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  position: relative;
+}
+.square{
+  width: 20px;
+  height: 20px;
+ 
+  color: #FAFAFA;
+  text-align: center;
+  margin-right: 5px;
+  cursor: pointer;
+  line-height: 50px;
+}
+.square:hover{
+  opacity: 0.8;
+}
+
+</style>

@@ -42,7 +42,7 @@ import Engagement from '../../pages/bien_service/contractualisation/engagement.v
 import detailExecution from '../../pages/bien_service/contractualisation/DossierExecution/dossierPrincipal/detailExecution.vue';
 import AjouterEngagement from '../../pages/bien_service/contractualisation/AjouterEngagement.vue';
 import executionMarche from '../../pages/bien_service/contractualisation/executionMarche.vue';
-import executionMarcheInvestissement from '../../pages/bien_service/contractualisation/executionMarcheInvestissement.vue';
+
 import actesEffet from '../../pages/bien_service/contractualisation/actesEffet.vue';
 import tableauBord from '../../pages/bien_service/contractualisation/tableauBord.vue';
 import typeAppel from '../../pages/bien_service/parametres/type_appel.vue';
@@ -165,13 +165,7 @@ detailExecution
         name: "historiqueMarche",
         component: historiqueMarche
     },
-    {
-
-        path: "/creation-execution-marche-investissement",
-        name: "executionMarcheInvestissement",
-        component: executionMarcheInvestissement
-
-    },
+   
     {
         path: "/role-membrecojo",
         name: "rolemembrecojo",

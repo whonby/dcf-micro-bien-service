@@ -585,7 +585,7 @@ affichierTauxExecutionInvestissement() {
   }
 }
 </script>
-<style>
+<style scoped>
 .flex{
   display: flex;
   flex-flow: row nowrap;

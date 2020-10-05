@@ -133,7 +133,7 @@ const AdministratifRoutesAdoni = [
      },
      // route service gestionnaire
      {
-    path:"/srevice-gestionnaire",
+    path:"/service-gestionnaire",
     name:"ServiceGestionnaire",
     component:ServiceGestionnaire
      },

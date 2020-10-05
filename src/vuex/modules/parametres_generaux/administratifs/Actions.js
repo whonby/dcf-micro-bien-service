@@ -6,6 +6,15 @@ var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
 
+export  function  getGestionModules({commit}) {
+    queue.push(() =>  axios.get('/gestionModule').then((response) => {
+      commit('GET_GESTION_MODULE', response.data)
+      
+  }).catch(error => console.log(error)))
+  }
+
+
+
 // get all titres
 export  function  getTitres({commit}) {
   queue.push(() =>  axios.get('/liste_titre').then((response) => {
@@ -490,7 +499,7 @@ export  function ajouterServiceGestionnaire({commit,dispatch}, nouveauObjet){
         commit('AJOUTER_SERVICE_GESTIONNAIRE', res.data)
         dispatch('getServiceGestionnaire')
         dispatch('getServiceGestionnaire')
-        dispatch('getServiceGestionnaire')
+        
         this.$app.$loading(false)
     }).catch(error =>{
         console.log(error)

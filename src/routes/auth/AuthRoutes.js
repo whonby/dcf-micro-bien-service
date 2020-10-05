@@ -6,10 +6,23 @@ import DetailCF from "@/pages/gestionCF/DetailCF";
 import photoProfil from "@/pages/auth/modifierPhotoProfil/photoProfil";
 import Groupe from  "@/pages/auth/groupe/Groupe.vue"
 import AddGroupe from "@/pages/auth/groupe/AddGroupe.vue"
-
+import TableauDeBordG from "@/pages/auth/TableauDeBordG"
 import Chat from "@/pages/chat/Chat"
 import MonEquipe from "@/pages/gestionCF/MonEquipe";
+import pagePresentation from "@/gestionDesModule/pagePresentation";
 const AuthRoutes = [
+    
+    {
+        path: '/Menu-Sid-cf',
+       name:"pagePresentation",
+       meta: {layout: "no-sidebar"},
+       component: pagePresentation
+    },
+    {
+        path: '/TableauDeBordG/:id',
+        name: "TableauDeBordG",
+        component: TableauDeBordG
+    },
     {
         path: '/chat',
         name: "Chat",

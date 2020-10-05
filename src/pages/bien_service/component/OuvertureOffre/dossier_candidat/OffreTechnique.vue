@@ -415,7 +415,7 @@
   </div>
 
 
-  <div id="edit_offre_technique" class="modal hide" style="width: 1000px !important; left: 550px; ">
+  <div id="edit_offre_technique" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Modification l'offre technique</h3>
@@ -892,6 +892,15 @@ listeOffreTechniqueLotCandidat(){
           return null
         }
       }
+    },
+    afficherNumeroDuLot(){
+      return id =>{
+        if(id!=null && id!=""){
+          let varObjetListeMembrecojo = this.getMarchePersonnaliser.find(idmache =>idmache.id==id)
+          return varObjetListeMembrecojo.numero_lot
+        }
+        return null
+      }
     }
   },
   methods:{
@@ -939,7 +948,7 @@ listeOffreTechniqueLotCandidat(){
     editeOffreT(){
       let objet={
         id:this.editer.id,
-         numero_lot:this.editer.numero_lot,
+         numero_lot:this.afficherNumeroDuLot(this.editer.marche_id),
         accord_groupe:this.editer.accord_groupe,
         cautionnement_prov:this.editer.cautionnement_prov,
         pouv_habil_signataire:this.editer.pouv_habil_signataire,

@@ -1,6 +1,33 @@
 
 
 // get all titres
+export const GET_GESTION_MODULE = (state, tableau_titres) => {
+    state.gestionModules = tableau_titres
+}
+
+// ajouter un titre 
+export const AJOUTER_GESTION_MODULE = (state, nouvel_objet) => {
+    state.gestionModules.unshift(nouvel_objet)
+   // state.titres = [...nouvel_objet, ...state.titres]
+
+}
+
+// supprimer titre
+export const SUPPRIMER_GESTION_MODULE = (state, id) => {
+    state.gestionModules = state.gestionModules.filter(titre => titre.id != id)
+}
+
+// modifier titre
+export const MODIFIER_GESTION_MODULE = (state, objetModifie) => 
+{state.gestionModules = state.gestionModules.map(titre => {
+
+        if(titre.id == objetModifie.id){
+            titre = {...objetModifie}
+        }
+        return titre
+    })
+}
+// get all titres
 const GET_TITRES = (state, tableau_titres) => {
     state.titres = tableau_titres
 }

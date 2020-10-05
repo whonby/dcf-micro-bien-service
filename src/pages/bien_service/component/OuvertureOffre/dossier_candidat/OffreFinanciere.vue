@@ -382,6 +382,15 @@ name: "OffreFinanciere",
           return this.getterOffreFinanciers.filter(item=>item.dossier_candidat_id==id)
         }
       }
+    },
+     afficherNumeroDuLot(){
+      return id =>{
+        if(id!=null && id!=""){
+          let varObjetListeMembrecojo = this.getMarchePersonnaliser.find(idmache =>idmache.id==id)
+          return varObjetListeMembrecojo.numero_lot
+        }
+        return null
+      }
     }
   },
   methods:{
@@ -423,7 +432,8 @@ name: "OffreFinanciere",
     editeOffreF(){
       let objet={
         id:this.editer.id,
-        numero_lot:this.editer.numero_lot,
+        // numero_lot:this.editer.numero_lot,
+         numero_lot:this.afficherNumeroDuLot(this.editer.marche_id),
         montant_total_ttc:this.editer.montant_total_ttc,
         dossier_candidat_id:this.editer.dossier_candidat_id,
         marche_id:this.editer.marche_id,

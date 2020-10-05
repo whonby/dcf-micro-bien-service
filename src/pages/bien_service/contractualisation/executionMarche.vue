@@ -288,7 +288,7 @@ ImputationBudgetModifier
                   afficherlisteMarcheExecutionParDroitAccess"
                  :key="marche.id">
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
+                   {{afficherlibelleUa(marche.unite_administrative_id) || 'Non renseigné'}}</td>
 
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.type_marche.libelle || 'Non renseigné'}}</td>
@@ -474,7 +474,18 @@ afficherlisteMarcheExecutionParDroitAccess() {
             //     items.libelle.toLowerCase().includes(st)
             // );
     },
+afficherlibelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 
 
 

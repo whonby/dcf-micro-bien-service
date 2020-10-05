@@ -56,14 +56,14 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <!-- <th>Code </th> -->
+                                    <th>Code </th>
                                     <th>Libellé</th>
                                     <th style="width:10%">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr class="odd gradeX" v-for="fonctAdm in  partition(titreFiltres,size)[page]" :key="fonctAdm.id">
-                                    <!-- <td @dblclick="afficherModalModifierTitre(fonctAdm.id)">{{fonctAdm.code || 'Non renseigné'}}</td> -->
+                                    <td @dblclick="afficherModalModifierTitre(fonctAdm.id)">{{fonctAdm.code || 'Non renseigné'}}</td>
                                     <td @dblclick="afficherModalModifierTitre(fonctAdm.id)">{{fonctAdm.libelle || 'Non renseigné'}}</td>
                                     <td>
                                         <div class="btn-group">

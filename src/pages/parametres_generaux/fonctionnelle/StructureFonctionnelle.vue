@@ -163,7 +163,7 @@
                 <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="editFonctionnelle.niveau" class="span" placeholder="" readonly/>
+                <input type="number" v-model="editFonctionnelle.niveau" class="span5" placeholder="" readonly/>
               </div>
             </div>
               </td>
@@ -173,7 +173,7 @@
                 <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="editFonctionnelle.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editFonctionnelle.libelle" class="span5" placeholder="" />
               </div>
             </div>
               </td>
