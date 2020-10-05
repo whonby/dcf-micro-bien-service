@@ -18,7 +18,7 @@
 
           <td >
             <router-link :to="{ name: 'Login'}" tag="a" style="text-align: right;color:red;">
-              <h5 >Se Déconnecté</h5>
+              <h5 >Se déconnecter</h5>
 
             </router-link>
           </td>
@@ -39,13 +39,13 @@
             <ul class="quick-actions" >
                 <li class="bg_lg span3" > 
                      <router-link :to="{ name: 'TableauDeBordG', params: {id:1}}" tag="a"  style="color:black;">
-                <h4>MODULE</h4> <i class="icon-cogs"></i><h4>PARAMETRES GENERAUX</h4>
+                <h4>PARAMETRES</h4> <i class="icon-cogs"></i><h4> GENERAUX</h4>
                 
                 </router-link> 
                 </li>
   <li class="bg_lg span3" > 
      <router-link :to="{ name: 'TableauDeBordG', params: {id:2}}" tag="a"  style="color:black;">
-      <h4>MODULE </h4> <i class="icon-home"></i> <h4>UNITE D'ADMINISTRATIVE</h4>      </router-link> </li>
+      <h4>UNITES </h4> <i class="icon-home"></i> <h4> D'ADMINISTRATIVES</h4>      </router-link> </li>
       <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:3}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4> SIB</h4></router-link> </li>
             </ul>
             <br>
@@ -54,8 +54,8 @@
             <ul class="quick-actions" >
                
     <li class="bg_ly span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:4}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4>HORS SIB</h4></router-link> </li>
-  <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>MODULE </h4> <i class="icon-globe"></i><h4>CATOGRAPHIES</h4></router-link> </li>
-           <li class="bg_ly span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:6}}" tag="a"  style="color:black;"><h4>MODULE </h4> <i class="icon-group"></i><h4>MON EQUIPE</h4></router-link> </li>
+  <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>CATOGRAPHIES </h4> <i class="icon-globe"></i><h4>BUDGETAIRES</h4></router-link> </li>
+           <li class="bg_ly span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:6}}" tag="a"  style="color:black;"><h4>MON </h4> <i class="icon-group"></i><h4> EQUIPE</h4></router-link> </li>
             </ul>
            
           </div>
