@@ -2368,3 +2368,11 @@ export const DELETE_ECHEANCES = (state, id)=> {
 export const LOADING_MARCHE = (state, value)=> {
     state.loading_marche = value
 }
+
+
+
+
+
+
+
+

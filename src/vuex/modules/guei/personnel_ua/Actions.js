@@ -454,10 +454,10 @@ export  function ajouterFonction({commit}, objetAjoute){
         this.$app.$loading(false)
     }).catch(error =>{
         console.log(error)
-        this.$app.$loading(true)
+        this.$app.$loading(false)
         this.$app.$notify({
             title: 'Erreur',
-            text: "Erreur c'est produit lors de l'enregistrement",
+            text: "Ce code ou libelle existe déja",
             type:"error"
         });
     })
@@ -471,7 +471,7 @@ export function supprimerFonction({commit}, id){
         this.$app.$notify({
             title: 'Suppression',
             text: 'Suppression effectuer',
-            type:"error"
+            type:"success"
         });
         commit('SUPPRIMER_FONCTIONS', id)
         axios.delete('/delete_fonction/' + id).then(() => dialog.close() )

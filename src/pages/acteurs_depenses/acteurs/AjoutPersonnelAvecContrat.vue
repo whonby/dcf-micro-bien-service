@@ -381,11 +381,11 @@
                           class="btn btn-primary"
                           @click.prevent="ajouterTitreLocal"
                         >Valider</a>
-                        <a
+                        <!-- <a
                           @click.prevent="afficherModalListePersonnel()"
                           class="btn"
                           href="#"
-                        >Fermer</a>
+                        >Fermer</a> -->
                       </div>
                     </div>
                   </div>

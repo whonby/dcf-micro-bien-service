@@ -595,6 +595,7 @@
             </div>
 
 
+
               <table class="table table-bordered table-striped" v-if="afficherMarcheInvestissementParDroitAccess.length>0">
                 <thead>
                 <tr>
@@ -610,11 +611,13 @@
                      <!-- <th>Numero marché</th> -->
                     <th>Montant prévu</th>
                     <th>Etat du marché</th>
-                   <th>Action</th>
+                    <th>Cycle de vie</th>
+                   <th colspan="3">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                  
+
                         <tr class="odd gradeX" v-for="(marche, index) in 
                 afficherMarcheInvestissementParDroitAccess"
                  :key="marche.id">
@@ -667,7 +670,20 @@
                 </button>
 
                    </td>
+                   <td >
+                        <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                 class="btn btn-inverse " title="Cycle de vie du marche">
+        <span class=""><i class=" icon-calendar"></i></span>
+    </router-link>
+                   </td>
                    <td>
+                     
+                    
+                      <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                class="btn btn-default " title="historique la contratualisation">
+                  <span class=""><i class=" icon-folder-open"></i></span>
+                    </router-link>
+                   
                      <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
                    </td>
@@ -756,6 +772,7 @@
                    
                     <!-- <th>Activit&eacute;</th> -->
                     <th>Imputation</th>
+                    <th>Numéro Lot</th>
                        <th>Objet du marché</th>
                         <!-- <th>Reference march&eacute;</th>  -->
                                     <th>Montant réel</th>  
@@ -781,6 +798,8 @@
                    {{afficherImputationMarche(marche.marche_id)|| 'Non renseigné'}}</td>
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   Lot : {{afficherNumeroLot(marche.marche_id) || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficherObjetMarche(marche.marche_id) || 'Non renseigné'}}</td>
                      <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -860,6 +879,7 @@
                         <th>Référence du marché</th> 
                                     <th>Montant prévu</th>
                                 <th>Etat du marché</th>
+                                <th>Cycle de vie</th>
                                 <th>Action</th>
                 </tr>    
                 </thead>
@@ -897,7 +917,12 @@
                 </button>
                  
                    </td>
-
+<td >
+                        <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                 class="btn btn-inverse " title="Cycle de vie du marche">
+        <span class=""><i class=" icon-calendar"></i></span>
+    </router-link>
+                   </td>
 <td>
     <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail marche">
@@ -2192,7 +2217,7 @@ return this.afficheMarchExecuter.length
     },
 
 afficheMarcheTerminer(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 3 && element.difference_personnel_bienService == 1)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 3 && element.difference_personnel_bienService == 1 )
 },
 // afficheMarcheTerminer(){
 // return this.afficheMarcheSolde.filter(element => element.indicateur_resilie != 1)
@@ -2236,7 +2261,7 @@ return this.afficheMarcheResilier.length
 // afficher la liste de marche en contratualisation
 
 afficheMarcheEnCoursContratualisation(){
-return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 1 && element.type_marche.code_type_marche == 3)
+return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 1 && element.type_marche.code_type_marche == 3 && element.parent_id == null)
 },
 
 
@@ -2257,7 +2282,7 @@ montantEnContratualisation(){
 
 // afficher la liste des marche en planification
 afficheMarcheEnPlanification(){
-return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 3)
+return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 3 && element.parent_id == null)
 },
 
 
@@ -2349,6 +2374,18 @@ afficherTypeMarche() {
         }
       };
     },
+    afficherMarcheParent() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.parent_id;
+      }
+      return 0
+        }
+      };
+    },
      afficherAttributMarche() {
       return id => {
         if (id != null && id != "") {
@@ -2373,18 +2410,18 @@ afficherTypeMarche() {
         }
       };
     },
-//  afficherObjetMarche() {
-//       return id => {
-//         if (id != null && id != "") {
-//            const qtereel = this.marches.find(qtreel => qtreel.id == id);
+ afficherNumeroLot() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
-//       if (qtereel) {
-//         return qtereel.objet;
-//       }
-//       return 0
-//         }
-//       };
-//     },
+      if (qtereel) {
+        return qtereel.numero_lot;
+      }
+      return 0
+        }
+      };
+    },
     // afficherNumeroMarche() {
     //   return id => {
     //     if (id != null && id != "") {
@@ -2809,6 +2846,7 @@ return element;
 // })
 
 // }
+
 
 
 

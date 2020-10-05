@@ -1,4 +1,4 @@
-nombreDeMarchesuspendu
+
 <template>
   <div class="container-fluid">
       <!-- <h3 style="text-align:center">TABLEAU DE BORD : BIEN ET SERVICE</h3> -->

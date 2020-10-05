@@ -4578,3 +4578,11 @@ export function supprimerEcheances({ commit }, id) {
 
 }
 
+
+
+export function getGestionModules({ commit }) {
+  queue.push(() => axios.get('/gestionModule').then((response) => {
+      commit('GET_GESTION_MODULE', response.data.data)
+
+}).catch(error => console.log(error)))
+}

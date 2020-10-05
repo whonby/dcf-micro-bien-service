@@ -1,3 +1,4 @@
+affichierCodeTypeMarche
 <template>
 <div>
   <div v-for="item in lot" :key="item.id" class="widget-content">
@@ -54,14 +55,16 @@
     <table class="table table-bordered table-striped" v-if="macheid">
       <thead>
       <tr>
-        <th>Reference acte</th>
-        <th>Montant acte</th>
-        <th>Montant Avance Demarrage</th>
+        <th>Réference du Contrat</th>
+        <th>Objet marché</th>
+         <th>Imputation</th>
+        <th>Montant de l'offre(en FCFA TTC)</th>
+        <!-- <th>Montant Avance Demarrage</th>
         <th>Montant retenue garantie</th>
-        <th>Montant cautionnement</th>
-        <th>Type acte</th>
-        <th>Objet marche.</th>
-        <th>Imputation</th>
+        <th>Montant cautionnement</th> -->
+        <!-- <th>Type acte</th> -->
+        
+       
         <th>Durée du marché</th>
         <th>Action</th>
       </tr>
@@ -72,24 +75,26 @@
 
         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
           {{effetFinancier.reference_act || 'Non renseigné'}}</td>
+          <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+          {{effetFinancier.marche.objet || 'Non renseigné'}}</td>
+          <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+          {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
           {{formatageSomme(parseFloat(effetFinancier.montant_act ))|| 'Non renseigné'}}</td>
-        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+        <!-- <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
           {{formatageSomme(parseFloat(effetFinancier.avance_demarrage_ttc )) || 'Non renseigné'}}</td>
 
         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
           {{formatageSomme(parseFloat(effetFinancier.montant_ttc_retenue_garantie )) || 'Non renseigné'}}</td>
 
         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-          {{formatageSomme(parseFloat(effetFinancier.montant_ttc_cautionnement )) || 'Non renseigné'}}</td>
+          {{formatageSomme(parseFloat(effetFinancier.montant_ttc_cautionnement )) || 'Non renseigné'}}</td> -->
 
-        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+        <!-- <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
           {{affichierLibelleTypeActeFinancier(effetFinancier.type_act_effet_id) || 'Non renseigné'}}</td>
-        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-          {{effetFinancier.marche.objet || 'Non renseigné'}}</td>
+         -->
 
-        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-          {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
+        
         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
           {{effetFinancier.duree || 'Non renseigné'}} jrs</td>
         <td>
@@ -106,7 +111,7 @@
 
   <!--Integration ACt-->
 
-  <div id="ajouterAct" class="modal hide grdirModalActeEffet" style="width: 1000px !important; left: 550px; ">
+  <div id="ajouterAct" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Information sur l'attribution de l'acte : Lot N° {{infoLot.numero_lot}} {{infoLot.obje}}</h3>
@@ -126,7 +131,7 @@
           <tr>
             <td>
               <div class="control-group">
-                <label class="control-label">Type acte effet financier.</label>
+                <label class="control-label">Type acte effet financier</label>
                 <div class="controls">
                   <select v-model="formEffetFinancier.type_act_effet_id" class="span">
                     <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
@@ -139,7 +144,7 @@
             <td>
 
               <div class="control-group">
-                <label class="control-label">Entreprise  </label>
+                <label class="control-label">Entreprise</label>
                 <div class="controls" >
                   <!-- <select v-model="formEffetFinancier.entreprise_id" class="span">
                         <option v-for="varText in affichierNomEntreprise(macheid)" :key="varText.id"
@@ -157,10 +162,10 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label">Banque.</label>
-                <div class="controls" v-if="affichierNomEntreprise">
+                <label class="control-label">Banque</label>
+                <div class="controls" >
                   <select v-model="formEffetFinancier.banq_id" class="span" >
-                    <option v-for="varText in afficherBanqueDynamiqueId(dossier_candidat_id)" :key="varText.id"
+                    <option v-for="varText in afficherBanqueDynamiqueId(affichierIdEntrepriseSelectionner(nom_candidata))" :key="varText.id"
                             :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                   </select>
 
@@ -170,7 +175,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label">Compte: {{afficherIdCompte(formEffetFinancier.banq_id)}}</label>
+                <label class="control-label">Compte</label>
                 <div class="controls " >
                   <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
 
@@ -487,7 +492,7 @@
                       :value="montantHTt" style="text-align:left;color:red"
 
                       class="span"
-                      readonly
+                      
                   />
 
                 </div>
@@ -678,7 +683,7 @@ name: "ActEffeFinanciere",
         tva:"",
         taux:"",
         ua_id:"",
-        avance_demarrage_ht:"",
+        avance_demarrage_ht:0,
         avance_demarrage_ttc:"",
         tva_avance_demarage:"",
         libelle_act:"",
@@ -714,7 +719,7 @@ name: "ActEffeFinanciere",
 
   },
   computed:{
-    ...mapGetters("bienService", [ "gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+    ...mapGetters("bienService", [ "typeMarches","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
       "modePassations", "procedurePassations","getterDossierCandidats","marches",
       "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
       "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -731,6 +736,31 @@ name: "ActEffeFinanciere",
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe',
       'planActe']),
+
+affichieridMarcheGlobal() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.parent_id;
+          }
+          return 0
+        }
+      };
+    },
+    //   affichierReferenceAppelOffre() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //       const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
+
+    //       if (qtereel) {
+    //         return qtereel.ref_appel;
+    //       }
+    //       return 0
+    //     }
+    //   };
+    // },
     analyseByLot(){
       return id=>{
         return this.getterAnalyseDossiers.filter(item=>{
@@ -754,7 +784,7 @@ name: "ActEffeFinanciere",
     },
 
     afficheMarcheType(){
-      if(this.affichierLibelleTypeMarche(this.affichierIdTypeMarche(this.macheid)) == "Travaux"){
+      if(this.affichierCodeTypeMarche(this.affichierIdTypeMarche(this.infoLot.id)) == 3){
         return 1
       }
       else{
@@ -776,13 +806,13 @@ name: "ActEffeFinanciere",
     },
 
 
-    affichierLibelleTypeMarche() {
-      return id => {
-        if (id != null && id != "") {
-          const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+    affichierCodeTypeMarche() {
+      return id1 => {
+        if (id1 != null && id1 != "") {
+          const qtereel = this.typeMarches.find(qtreel => qtreel.id == id1);
 
           if (qtereel) {
-            return qtereel.libelle;
+            return qtereel.code_type_marche;
           }
           return 0
         }
@@ -1188,6 +1218,7 @@ name: "ActEffeFinanciere",
 
 
     montantHTt() {
+      
       const val = parseFloat(this.formEffetFinancier.montant_act_ht) + parseFloat(this.montantTva);
 
       if (val) {
@@ -1332,7 +1363,18 @@ name: "ActEffeFinanciere",
 //            return null
 //        }
 //    },
+affichierIdEntrepriseSelectionner() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.entreprises.find(qtreel => qtreel.raison_sociale == id);
 
+          if (qtereel) {
+            return qtereel.id;
+          }
+          return 0
+        }
+      };
+    },
 
     afficherBanqueDynamiqueId(){
       return id =>{
@@ -1514,9 +1556,10 @@ name: "ActEffeFinanciere",
         montant_act:this.montantHTt,
         avance_demarrage_ttc:this.avanceDemarrage,
         tva_avance_demarage:this.avanceDemarrageMontantTva,
-        entreprise_id:this.dossier_candidat_id,
+        entreprise_id:this.affichierIdEntrepriseSelectionner(this.nom_candidata),
         difference_personnel_bienService:this.afficheMarcheType,
         marche_id:this.marche_lot,
+        marchegeneral_id:this.affichieridMarcheGlobal(this.marche_lot),
         // ua_id:this.ua_id,
         banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
         compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
@@ -1526,11 +1569,15 @@ name: "ActEffeFinanciere",
 
       //this.formEffetFinancier.entreprise_id=entreprisePremier.id
       this.ajouterActeEffetFinancier(nouvelObjet)
-      let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
+      this.$("#modificationModal").modal('hide');
+      let marcheObjet=this.marches.find(marche=>marche.id==this.marche_lot)
       marcheObjet.attribue = 2
+      let marcheObjet12=this.marches.find(marche=>marche.id==this.macheid)
+      marcheObjet12.attribue = 2
       marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
       // console.log(marcheObjet)
       this.modifierMarche(marcheObjet)
+      this.modifierMarche(marcheObjet12)
       this.formEffetFinancier = {
         code_act:"",
         libelle_act:"",
@@ -1560,5 +1607,10 @@ name: "ActEffeFinanciere",
 </script>
 
 <style scoped>
+
+.grdirModalActeEffet{
+  width: 88%;
+  margin: 0 -42%;
+}
 
 </style>

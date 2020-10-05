@@ -38,39 +38,7 @@
           </div>
          
            <div class="widget-content ">
-            <!-- <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                 <th>Code</th>
-                  <th>Libelle</th>
-                  <th>Structure fonctionnelles</th>
-                   <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd gradeX" v-for="(plan_fonctionnel, index) 
-                in localisationsFiltre" :key="plan_fonctionnel.id">
-                  <td @dblclick="afficherMoadlModifierLocalisation(index)">
-                    {{plan_fonctionnel.code || 'Non renseigné'}}</td>
-                   <td @dblclick="afficherMoadlModifierLocalisation(index)">
-                    {{plan_fonctionnel.libelle || 'Non renseigné'}}</td>
-                    
-                   <td @dblclick="afficherMoadlModifierLocalisation(index)">
-                      {{plan_fonctionnel.structure_fonctionnelle.libelle || 'Non renseigné'}}</td>
-                  <td>
-
-
-
-              <div class="btn-group">
-              <button @click.prevent="supprimerPlanFonctionnel(plan_fonctionnel.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-             
-            </div>
-
-                  </td>
-                </tr>
-              </tbody>
-            </table> -->
+           
 
                    <ul id="demo">
             <Tree class="item" v-for="plan in lesPlansParents"
@@ -102,32 +70,41 @@
                 <h3>Ajouter plan fonctionnel</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-                   <div class="control-group">
+                <table class="table table-bordered table-striped">
+                  <tr>
+                    <td>
+<div class="control-group">
               <label class="control-label">Structure fonctionnelle:</label>
               <div class="controls">
-                <select  v-model="formData.structure_fonctionnelle_id">
+                <select  v-model="formData.structure_fonctionnelle_id" class="span5">
             <option v-for="plan in structures_fonctionnelles" :key="plan.id" 
             :value="plan.id">{{plan.libelle}}</option>
                 </select>
               </div>
             </div>
-            <div class="control-group">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
+                <input type="text" v-model="formData.code" class="span5" placeholder="Saisir le code" />
               </div>
             </div>
-            <div class="control-group">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libellé" />
               </div>
             </div>
-           
-            
-
-          </form>              
+                    </td>
+                  </tr>
+                </table>            
           </div>
            <div class="modal-footer"> 
              <button v-show="formData.structure_fonctionnelle_id && 
@@ -143,54 +120,67 @@
 <!----- ajouter modal ajouter element enfant   ---->
 
 
- <div id="modalAjouterElementEnfant" class="modal hide">
+ <div id="modalAjouterElementEnfant" class="modal hide tailgrand">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter plan fonctionnel</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-
-                   <div class="control-group">
+                <table class="table table-bordered table-striped">
+                  <tr>
+                    <td>
+                        <div class="control-group">
               <label class="control-label">Code parent:</label>
               <div class="controls">
-                <input type="text" readonly :value="parentDossier.code" class="span"  />
+                <input type="text" readonly :value="parentDossier.code" class="span5"  />
               </div>
             </div>
-
-             <div class="control-group">
+                    </td>
+                    <td>
+                      <div class="control-group">
               <label class="control-label">Libellé parent:</label>
               <div class="controls">
-                <input type="text" readonly :value="parentDossier.libelle" class="span"  />
+                <input type="text" readonly :value="parentDossier.libelle" class="span5"  />
               </div>
             </div>
-
-               <div class="control-group">
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td>
+                      <div class="control-group">
               <label class="control-label">Structure fonctionnelle:</label>
               
               <div class="controls">
-              <select v-model="nouvelElementEnfant.structure_fonctionnelle_id" >
+              <select v-model="nouvelElementEnfant.structure_fonctionnelle_id" class="span5">
                 <option v-for="structure in structures_fonctionnelles " :key="structure.id" 
                  :value="structure.id">{{structure.libelle}} </option>
               </select>
             </div>
             </div>
-
-
-            <div class="control-group">
+                    </td>
+                    <td>
+                      <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.code" class="span" placeholder="Saisir le code" />
+                <input type="text" v-model="nouvelElementEnfant.code" class="span5" placeholder="Saisir le code" />
               </div>
             </div>
-            <div class="control-group">
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td colspan="2">
+                        <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libellé" />
+                <input type="text" v-model="nouvelElementEnfant.libelle" class="span10" placeholder="Saisir le libellé" />
               </div>
             </div>
-           
-          </form>              
+                    </td>
+                  </tr>
+                </table>
+                            
           </div>
            <div class="modal-footer"> 
              <button v-show="nouvelElementEnfant.code.length && nouvelElementEnfant.libelle.length && 
@@ -212,31 +202,42 @@
                 <h3>Modifier plan fonctionnel</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-                   <div class="control-group">
+                 <table class="table table-bordered table-striped">
+                   <tr>
+                     <td>
+                        <div class="control-group">
               <label class="control-label">Structure fonctionnel:</label>
               <div class="controls">
-                <select  v-model="editTitre.structure_fonctionnelle_id">
+                <select  v-model="editTitre.structure_fonctionnelle_id" class="span5">
             <option v-for="plan in structures_fonctionnelles" :key="plan.id" 
             :value="plan.id">{{plan.libelle}}</option>
                 </select>
               </div>
             </div>
-            <div class="control-group">
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>
+                       <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="editTitre.code" class="span" placeholder="" />
+                <input type="text" v-model="editTitre.code" class="span5" placeholder="" />
               </div>
             </div>
-            <div class="control-group">
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>
+                       <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editTitre.libelle" class="span5" placeholder="" />
               </div>
             </div>
-            
-
-          </form>              
+                     </td>
+                   </tr>
+                 </table>
+                             
           </div>
            <div class="modal-footer"> 
              <button v-show="editTitre.structure_fonctionnelle_id && editTitre.code.length && 
@@ -451,4 +452,10 @@ modifierLocalisationLocal(){
   }
 };
 </script>
-
+<style scoped>
+.tailgrand{
+  width: 60%;
+  margin: 0 -30%;
+  
+}
+</style>

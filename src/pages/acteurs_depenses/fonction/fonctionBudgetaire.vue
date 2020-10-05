@@ -177,6 +177,13 @@
 
         data() {
             return {
+                 page:0,
+               size:10,
+             active_el:0,
+             json_fields:{
+             'code':'code',
+           'libelle':'libelle'
+         },
                 fabActions: [
                     {
                         name: 'cache',
