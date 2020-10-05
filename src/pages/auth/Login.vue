@@ -5,7 +5,8 @@
 
         <form id="loginform" :class="{'is-waiting': loader}" class="form-vertical">
             <div class="control-group normal_text">
-                <h3><img src="/lien/img/typo.png" alt="Logo" /></h3></div>
+                <h3><img src="/lien/img/typo.png" alt="Logo" /></h3>
+            </div>
             <div class="control-group">
                 <div class="controls">
                     <div class="main_input_box">
@@ -413,40 +414,6 @@ this.getMembreCojo()
     }
 </script>
 
-<style  lang="scss" type="text/scss">
-    /*
-    .bg-login-image{
-    background: url("../assets/logoA.jpg");
-    }
-    */
-    .is-waiting{
-        position:relative;
-        transition-duration: .3s;
-        > * {
-            opacity: .25;
-        }
-        &:before{
-            content:'';
-            height: 100%;
-            left: 0;
-            position: absolute;
-            top: 0;
-            width: 100%;
-            z-index: 9;
-        }
-        &:after{
-            content: '';
-            height: 64px;
-            left: 50%;
-            position: absolute;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 64px;
-        }
-
-    }
-
-</style>
 
 
 <style  scoped>
