@@ -1,37 +1,39 @@
 <template>
 
     <div>
-<br>
-<br>
-<br>
-<br>
-<br>
+<!--      <div class="row-fluid" style="background: #fff">-->
+<!--        <div class="span10" align="center">   <h5 >MENU GENERAL DU SID-CF</h5></div>-->
+<!--        <div class="span2" align="right">  <router-link :to="{ name: 'Login'}" tag="a" style="text-align: right;color:red;">-->
+<!--          <h5 >Se Déconnecté</h5>-->
+
+<!--        </router-link>-->
+<!--        </div>-->
+<!--      </div>-->
+
+      <table class="table table-bordered table-striped" style="background-color: #ffffff;">
+        <tr>
+          <td style="width:85%;text-align: center;font-size:14px">
+            <h5 >MENU GENERAL DU SID-CF</h5>
+          </td>
+
+          <td >
+            <router-link :to="{ name: 'Login'}" tag="a" style="text-align: right;color:red;">
+              <h5 >Se Déconnecté</h5>
+
+            </router-link>
+          </td>
+        </tr>
+      </table>
+      <div id="loginbox" class="spinner-border text-primary">
+
+
 
         <!-- <h3 style="text-align:center;color:#ffffff;">TABLEAU DE BORD GENERAL</h3> -->
-        <div class="row-fluid">
+        <div class="row-fluid form">
       <div class="span16">
         <div class="quick-actions_homepage">
-          <!-- <center>
-      <router-link tag="a" :to="{ name: 'photoProfil' }">
-        <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">
-        </router-link>
-      <h6 style="color:orange;font-size:14px">{{afficheNomUtilisateur}}</h6>
-      <span class="user-level" style="color:#ffffff;font-size:14px">({{afficheRoleUtilisateur}})</span>
-		</center> -->
-          <table class="table table-bordered table-striped" style="background-color: #ffffff;">
-            <tr>
-              <td style="width:85%;text-align: center;font-size:14px">
-                <h5 >MENU GENERAL DU SID-CF</h5>
-              </td>
-             
-              <td >
-                 <router-link :to="{ name: 'Login'}" tag="a" style="text-align: right;color:red;">
-                <h5 >Se Déconnecté</h5>
-                
-                </router-link>
-              </td>
-            </tr>
-          </table>
+
+
           
           <div >
             <ul class="quick-actions" >
@@ -61,8 +63,9 @@
       </div>
       
     </div>
-   
-      
+
+
+      </div>
     </div>
 
 
@@ -493,7 +496,7 @@ return objJson.id
   }
 }
 </script>
-<style>
+<style scoped>
 .flex{
   display: flex;
   flex-flow: row nowrap;
@@ -512,6 +515,78 @@ return objJson.id
 }
 .square:hover{
   opacity: 0.8;
+}
+
+
+
+
+.dropdown-menu .divider{ margin:4px 0px;}
+.dropdown-menu{ min-width:180px;}
+.dropdown-menu > li > a{ padding:3px 10px; color:#666; font-size:12px;}
+.dropdown-menu > li > a i{ padding-right:3px;}
+.userphoto img{ width:19px; height:19px;}
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input, .label, .dropdown-menu, .btn, .well, .progress, .table-bordered, .btn-group > .btn:first-child, .btn-group > .btn:last-child, .btn-group > .btn:last-child, .btn-group > .dropdown-toggle, .alert{ border-radius:0px;}
+.btn, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{ box-shadow:none;}
+.progress, .progress-success .bar, .progress .bar-success, .progress-warning .bar, .progress .bar-warning, .progress-danger .bar, .progress .bar-danger, .progress-info .bar, .progress .bar-info, .btn, .btn-primary{background-image:none;}
+.accordion-heading h5{ width:70%; }
+.form-horizontal .form-actions{ padding-left:20px; }
+#footer{ padding:10px; text-align:center;}
+hr{ border-top-color:#dadada;}
+.carousel{ margin-bottom:0px;}
+.fl { float:left}
+.fr {float:right}
+.label-important, .badge-important{ background:#f74d4d;}
+
+/*Metro Background color class*/
+.bg_lb{ background:#27a9e3;}
+.bg_db{ background:#2295c9;}
+.bg_lg{ background:#28b779;}
+.bg_dg{ background:#28b779;}
+.bg_ly{ background:#ffb848;}
+.bg_dy{ background:#da9628;}
+.bg_ls{ background:#2255a4;}
+.bg_lo{ background:#da542e;}
+.bg_lr{ background:#f74d4d;}
+.bg_lv{ background:#603bbc;}
+.bg_lh{ background:#b6b3b3;}
+
+
+#logo, #loginbox {    width: 100%;    margin-left: auto;    margin-right: auto;    position: relative;}
+#logo img {  margin: 0 auto;    display: block;}
+#loginbox { overflow: hidden !important;
+  width: 75%;
+  text-align: left;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: -4px 10px 10px -6px rgba(0,0,0,0.75);
+  -moz-box-shadow: -4px 10px 10px -6px rgba(0,0,0,0.75);
+  box-shadow: -4px 10px 10px -6px rgba(0,0,0,0.75);
+  background:#ffffff;
+
+}
+#loginbox .form{ width:100%; background:#ffffff; position:relative; top:0; left:0; }
+#loginbox .form-actions { padding: 14px 20px 15px;}
+#loginbox .form-actions .pull-left { margin-top:0px;}
+#loginbox form#loginform { z-index: 200; display:block;}
+#loginbox form#recoverform { z-index: 100;     display:none;}
+#loginbox form#recoverform .form-actions {    margin-top: 10px;}
+#loginbox .main_input_box { margin:0 auto; text-align:center; font-size:13px;}
+#loginbox .main_input_box .add-on{  padding:9px 9px; *line-height:31px; vertical-align:top; color:#fff;  width:30px; display:inline-block;}
+#loginbox .main_input_box input{ height:30px; vertical-align:top; border:0px; display:inline-block; width:75%; line-height:22px;  margin-bottom:3px;}
+#loginbox .controls{ padding:0 20px;}
+#loginbox .control-group{ padding:20px 0; margin-bottom:0px;}
+.form-vertical, .form-actions {  margin-bottom: 0; background:none; border-top:1px solid #3f4954; }
+#loginbox .normal_text{ padding:15px 10px; text-align:center; font-size:14px; line-height:20px; background:#2E363F; color:#fff; }
+@media (max-width:1024px){
+  #logo { width: 60%; }
+  #loginbox{ width:80%}
+}
+@media (max-width: 480px){
+  #logo { width: 40%; }
+  #loginbox{ width:90%}
+  #loginbox .control-group{ padding:8px 0; margin-bottom:0px;}
 }
 
 </style>

@@ -24,7 +24,6 @@
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab1">Budget importé</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2">Importation du budget</a></li>
-
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
