@@ -131,15 +131,15 @@ CodeExempte
                            </div>
 
                         <div id="tab17" class="tab-pane">
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
-                    </div>
+<!--                <div align="right">-->
+<!--                    <div class="widget-content">-->
+<!--                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>-->
+<!--                    </div>-->
 
 
-                </div>
-                <component-acte :macheid="detail_marche.id"></component-acte>
-
+<!--                </div>-->
+<!--                <component-acte :macheid="detail_marche.id"></component-acte>-->
+                          <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
                 </div>
 
 
@@ -248,26 +248,20 @@ CodeExempte
                 </div>
 
                 <div id="tab4110" class="tab-pane">
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                    </div>
+<!--                <div align="right">-->
+<!--                    <div class="widget-content">-->
+<!--                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>-->
+<!--                    </div>-->
 
 
-                </div>
-               <component-pv :macheid="detail_marche.id"></component-pv>
+<!--                </div>-->
+<!--               <component-pv :macheid="detail_marche.id"></component-pv>-->
 
                 </div>
                  <div id="tab178" class="tab-pane">
-               <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
-                    </div>
 
-
-                </div>
-                <component-acte :macheid="detail_marche.id"></component-acte>
-
+<!--                <component-acte :macheid="detail_marche.id"></component-acte>-->
+                   <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
                 </div>
                    <div id="tab0142" class="tab-pane">
                 <div align="right">
@@ -399,26 +393,26 @@ CodeExempte
 <!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
                  <div id="tab06125" class="tab-pane">
-                 <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                    </div>
+<!--                 <div align="right">-->
+<!--                    <div class="widget-content">-->
+<!--                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>-->
+<!--                    </div>-->
 
 
-                </div>
-               <component-pv :macheid="detail_marche.id"></component-pv>
-
+<!--                </div>-->
+<!--               <component-pv :macheid="detail_marche.id"></component-pv>-->
+                   <PvJugement  :macheid="detail_marche.id"></PvJugement>
                 </div>
                  <div id="tab067458" class="tab-pane">
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
-                    </div>
+<!--                <div align="right">-->
+<!--                    <div class="widget-content">-->
+<!--                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>-->
+<!--                    </div>-->
 
 
-                </div>
-                <component-acte :macheid="detail_marche.id"></component-acte>
-
+<!--                </div>-->
+<!--                <component-acte :macheid="detail_marche.id"></component-acte>-->
+                   <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
                 </div>
 
                   <div id="tab0143723" class="tab-pane">
@@ -546,29 +540,29 @@ CodeExempte
 <!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
                  <div id="tab0612" class="tab-pane">
-                 <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                    </div>
+<!--                 <div align="right">-->
+<!--                    <div class="widget-content">-->
+<!--                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>-->
+<!--                    </div>-->
 
 
-                </div>
-               <component-pv :macheid="detail_marche.id"></component-pv>
-
+<!--                </div>-->
+<!--               <component-pv :macheid="detail_marche.id"></component-pv>-->
+                   <PvJugement  :macheid="detail_marche.id"></PvJugement>
                 </div>
                  <div id="tab06745" class="tab-pane">
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" >Ajouter</a>
-                        <!-- <button class="btn btn-primary" title="veillez terminer le proccessuss de jugement des offres avant  de passer à autre etape !" disabled v-else > Ajouter</button> -->
-                   
-                   
-                    </div>
+<!--                <div align="right">-->
+<!--                    <div class="widget-content">-->
+<!--                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" >Ajouter</a>-->
+<!--                        &lt;!&ndash; <button class="btn btn-primary" title="veillez terminer le proccessuss de jugement des offres avant  de passer à autre etape !" disabled v-else > Ajouter</button> &ndash;&gt;-->
+<!--                   -->
+<!--                   -->
+<!--                    </div>-->
 
 
-                </div>
-                <component-acte :macheid="detail_marche.id"></component-acte>
-
+<!--                </div>-->
+<!--                <component-acte :macheid="detail_marche.id"></component-acte>-->
+                   <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
                 </div>
 
                    <div id="tab01432" class="tab-pane">
@@ -824,7 +818,7 @@ CodeExempte
 
                         <div id="tab10" class="tab-pane">
                     <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
-<!--                <componentActe :macheid="detail_marche.id"></componentActe>-->
+<!--                <component-acte :macheid="detail_marche.id"></componentActe>-->
 
                 </div>
 
@@ -882,7 +876,7 @@ CodeExempte
     import componentCotation from '../dossierDetailMarchePs/dossierComponentPs/componentCotation';
      //import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
      import componentOuverture from '../dossierDetailMarchePs/dossierComponentOuverture/componentOuverture';  
-   import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
+ //  import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
     import publicationOffre from '../DossierPso/publicationOffre/publicationOffre';
    // import addLot from '../dossierLot/addLot';
         import invitationCf from '../DossierPso/lettreInvitation/invitationCf';
@@ -892,7 +886,7 @@ CodeExempte
     import dossierCandidat from "@/pages/bien_service/DossierPso/dossierCandidat/dossierCandidat";
    // import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
    // import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
-     import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
+   //  import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
 import rapportOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
      
    import componentBailleur from '../dossierDetailMarchePs/dossierBailleur/componentBailleur';
@@ -924,7 +918,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
             componentCotation,
           LotMarche,
             componentOuverture,
-            componentActe,
+           // componentActe,
             publicationOffre,
             rapportOuverture,
 //addLot,
@@ -934,7 +928,7 @@ dossierCandidat,
  //componentOuverture1,
            // componentOuvertureMembre,
           //  componentAnalyse,
-componentPv,
+//componentPv,
  
            
      componentBailleur,     
