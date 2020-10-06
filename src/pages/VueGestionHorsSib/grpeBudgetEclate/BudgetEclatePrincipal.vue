@@ -206,7 +206,7 @@
             </div>
 
             <div class="widget-content nopadding" >
-              <BudgetEclateComponent v-for="equipement in filtre_unite_admin"
+              <BudgetEclateComponent v-for="equipement in UniteAdministrative"
                :key="equipement.id"
                 :groupe="equipement"
                 @modification="afficherModalModifierUniteAdministrative"

@@ -7,7 +7,7 @@
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
-                <h5>{{groupe.unitezone_id }}</h5>
+                <h5>{{groupe.libelle }}</h5>
                  <!-- <span class="badge badge-info" >{{getNombreArticle}}</span>&nbsp;&nbsp; -->
                  <span class="badge badge-inverse" >{{0}}</span>
 
@@ -32,7 +32,7 @@
                 <tbody>
                    <BudgetEclateItem
                         class="item" 
-                        v-for="groupeElement in groupe.transfert_ua"
+                        v-for="groupeElement in groupe.budgeteclateua"
                         :key="groupeElement.id"
                         :article="groupeElement"
                      @modification="$emit('modification', $event)"
@@ -132,26 +132,26 @@ export default {
 
 
 getNombreArticle(){
-        var nombre = this.groupe.transfert_ua.length
+        var nombre = this.groupe.budgeteclateua.length
         if(nombre) return nombre
         return '0' 
     },
     isFolder: function () {
-      return this.groupe.transfert_ua &&
-        this.groupe.transfert_ua.length
+      return this.groupe.budgeteclateua &&
+        this.groupe.budgeteclateua.length
     },
 
     // getNombreArticle(){
-    //     var nombre = this.groupe.transfert_ua.length
+    //     var nombre = this.groupe.budgeteclateua.length
     //     if(nombre) return nombre
     //     return 'Aucun' 
     // },
     iconClasses() {
       return {
-        'icon-plus': !this.isOpen && this.groupe.transfert_ua.length,
-        'icon-minus': this.isOpen && this.groupe.transfert_ua.length
-        //    'icon-folder-close': !this.isOpen && this.groupe.transfert_ua.length,
-        // 'icon-folder-open': this.isOpen && this.groupe.transfert_ua.length
+        'icon-plus': !this.isOpen && this.groupe.budgeteclateua.length,
+        'icon-minus': this.isOpen && this.groupe.budgeteclateua.length
+        //    'icon-folder-close': !this.isOpen && this.groupe.budgeteclateua.length,
+        // 'icon-folder-open': this.isOpen && this.groupe.budgeteclateua.length
       }
     },
 

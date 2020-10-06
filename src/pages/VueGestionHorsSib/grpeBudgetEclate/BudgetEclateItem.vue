@@ -5,10 +5,10 @@
   
                   <tr class="odd gradeX" v-if="article" @dblclick="$emit('modification', article)">
                    
-                     <td style="width:95%">{{article.unitezone_id|| 'Non renseigné'}}</td>
-                     <td style="width:95%">{{article.unitezone_id|| 'Non renseigné'}}</td>
-                     <td style="width:95%">{{article.unitezone_id|| 'Non renseigné'}}</td>
-                     <td style="width:95%">{{article.unitezone_id|| 'Non renseigné'}}</td>
+                     <td style="width:95%">{{article.annebudgetaire|| 'Non renseigné'}}</td>
+                     <td style="width:95%">{{article.ligneeconomique_id|| 'Non renseigné'}}</td>
+                     <td style="width:95%">{{article.grandenature_id|| 'Non renseigné'}}</td>
+                     <td style="width:95%">{{article.dotation|| 'Non renseigné'}}</td>
                      
                     
                  
