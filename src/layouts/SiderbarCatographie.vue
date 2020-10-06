@@ -89,7 +89,7 @@
 
 
 
-        <li @click.prevent="navigateToCatographieBudgetaire" :class="{active: active_el ==8}">
+        <li @click.prevent="navigateToCatographieBudgetaire" >
           <a title="CARTOGRAPHIE" href="#">
             <i class=" icon-globe"></i>
             <span>CARTOGRAPHIE</span>
