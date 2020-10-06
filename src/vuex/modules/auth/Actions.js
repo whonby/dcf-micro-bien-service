@@ -342,3 +342,9 @@ export function encienPasswordSaisi({commit}, formData){
     });
 
 }
+
+
+
+export  function activeMenuModuleSidcf({commit}, objetAjoute){
+    commit('MENU_MODULE_SIDCF', objetAjoute)
+}

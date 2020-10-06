@@ -52,7 +52,7 @@
           
           <div >
             <ul class="quick-actions" >
-                <li class="bg_lg span3" > 
+                <li class="bg_lg span3" >
                      <router-link :to="{ name: 'TableauDeBordG', params: {id:1}}" tag="a"  style="color:black;">
                 <h4>PARAMETRES</h4> <i class="icon-cogs"></i><h4> GENERAUX</h4>
                 
@@ -331,13 +331,7 @@ this.getMembreCojo()
     this.getProceVerbal()
       this.getEcheances()
         },
-//   created() {
-//             this.marcheid=this.$route.params.id
-//    this.detail_marche = this.getMarchePersonnaliser.find(
-//        idmarche => idmarche.id == this.$route.params.id
-//    )
-  
-// },
+
   computed:{
  ...mapGetters("uniteadministrative", [
                 "acteCreations",
@@ -416,7 +410,7 @@ return objJson.id
 
   methods:{
 
-   ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser","getEquipeCF"]),
+    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 
@@ -505,7 +499,44 @@ return objJson.id
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
 
-          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances"])
+          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances"]),
+
+    activeMenuModuleParamGeneral(){
+      this.activeMenuModuleSidcf(1)
+      this.$router.push({
+        name: 'TableauDeBordG'
+      })
+    },
+    activeMenuModuleUniteAdministrative(){
+      this.activeMenuModuleSidcf(2)
+      this.$router.push({
+        name: 'TableauDeBordG'
+      })
+    },
+    activeMenuModuleGestionSIB(){
+      this.activeMenuModuleSidcf(3)
+      this.$router.push({
+        name: 'TableauDeBordG'
+      })
+    },
+    activeMenuModuleGestionHorSIB(){
+      this.activeMenuModuleSidcf(4)
+      this.$router.push({
+        name: 'TableauDeBordG'
+      })
+    },
+    activeMenuModuleCartographie(){
+      this.activeMenuModuleSidcf(5)
+      this.$router.push({
+        name: 'TableauDeBordG'
+      })
+    },
+    activeMenuModuleMonEquipe(){
+      this.activeMenuModuleSidcf(6)
+      this.$router.push({
+        name: 'TableauDeBordG'
+      })
+    },
 
 
  
