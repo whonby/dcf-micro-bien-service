@@ -12,18 +12,33 @@
 
       <table class="table table-bordered table-striped" style="background-color: #ffffff;">
         <tr>
-          <td style="width:85%;text-align: center;font-size:14px">
-            <h5 >MENU GENERAL DU SID-CF</h5>
-          </td>
-
-          <td >
-            <router-link :to="{ name: 'Login'}" tag="a" style="text-align: right;color:red;">
+          <td>
+            <center>
+      <router-link tag="a" :to="{ name: 'photoProfil' }">
+        <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">
+        </router-link>
+      <h6 style="color:orange;font-size:14px;text-align:center;">{{afficheNomUtilisateur}}</h6>
+  
+		</center>
+           
+       <router-link :to="{ name: 'Login'}" tag="a" style="color:red;width:20%;text-align:center;">
               <h5 >Se déconnecter</h5>
 
             </router-link>
           </td>
+          <td style="width:88%;text-align: center;font-size:30px;padding:50px 50px">
+            <P>MENU GENERAL DU SID-CF</P>
+          </td>
+
+          <!-- <td style="width:15%">
+            <router-link :to="{ name: 'Login'}" tag="a" style="text-align: right;color:red;width:20%;">
+              <h5 >Se déconnecter</h5>
+
+            </router-link>
+          </td> -->
         </tr>
       </table>
+      
       <div id="loginbox" class="spinner-border text-primary">
 
 
@@ -54,7 +69,7 @@
             <ul class="quick-actions" >
                
     <li class="bg_ly span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:4}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4>HORS SIB</h4></router-link> </li>
-  <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>CATOGRAPHIES </h4> <i class="icon-globe"></i><h4>BUDGETAIRES</h4></router-link> </li>
+  <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>CARTOGRAPHIES </h4> <i class="icon-globe"></i><h4>BUDGETAIRES</h4></router-link> </li>
            <li class="bg_ly span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:6}}" tag="a"  style="color:black;"><h4>MON </h4> <i class="icon-group"></i><h4> EQUIPE</h4></router-link> </li>
             </ul>
            
@@ -175,7 +190,7 @@ this.getTypeAppel()
      this.getAllBanqueUa()
      this.getAllDecompteFacture()
        this.getStructureOrganigrammeUa()
- 
+ this.getAllBudgetEclate()
     // this.getAllArchivageDocument();
 this.getAllDirection()
 this.getAllServiceua()
@@ -438,7 +453,8 @@ return objJson.id
      "getAllLiquidation",
      "getStructureOrganigrammeUa",
      "getAllBanqueUa",
-     "getAllDecompteFacture"
+     "getAllDecompteFacture",
+     "getAllBudgetEclate"
     ]),
             ...mapActions('personnelUA', ["getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",

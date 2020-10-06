@@ -5,7 +5,7 @@
     <SiderbarUniteAdministrative v-else-if="detail_marche.code == 2"></SiderbarUniteAdministrative>
     <SideBarGestionSib v-else-if="detail_marche.code == 3"></SideBarGestionSib>
      <SiderbarGestionHorsSib v-else-if="detail_marche.code == 4"></SiderbarGestionHorsSib>
-    <SidebarMonEquipe v-else-if="detail_marche.code == 5"></SidebarMonEquipe>
+    <SidebarMonEquipe v-else-if="detail_marche.code == 6"></SidebarMonEquipe>
     
     <SiderbarCatographie v-else></SiderbarCatographie>
    

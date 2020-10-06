@@ -17,7 +17,8 @@ const defaultState = {
   liquidation: [],
   decomptefactures: [],
   // banqueUa: [],
-  StructureOrganigrammeUa:[]
+  StructureOrganigrammeUa:[],
+  budgetEclate:[]
   // listeDocUniteAdministratives: [],
 
   // nbreUniteAdministratives: [],

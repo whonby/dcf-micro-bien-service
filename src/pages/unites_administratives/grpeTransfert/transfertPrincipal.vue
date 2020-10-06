@@ -2,74 +2,7 @@
 
 <template>
   <div>
-      <!-- <div id="exampleModalMotifMandat" class="modal hide">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">�</button>
-        <h3>Validation CF</h3>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" >
-          <div class="control-group">
-                            <label class="control-label">D&eacute;cision CF </label>
-                            <div class="controls">
-                              <select v-model="editTransfert.decision_cf">
-                               <option value="0">Attente</option>
-                              <option value="1">Vis&eacute;</option>
-                             <option value="2">Diff&eacute;r&eacute;</option>
-                             <option value="3">R&eacute;jet&eacute;</option>
-                            
-    
-    </select>
-                           
-                            </div>
-                          </div>
-                            <div class="control-group">
-                            <label class="control-label">Motif CF </label>
-                            <div class="controls">
-                              <select v-model="editTransfert.motif">
-                             
-                                 <option
-                                  v-for="gpeua in motifDecisions"
-                                  :key="gpeua.id"
-                                  :value="gpeua.id"
-                                >{{gpeua.libelle}}</option>
-                               
-                               
-                              </select>
-                           
-                            </div>
-                          </div>
-                          <div class="control-group">
-                            <label class="control-label">Observation CF</label>
-                            <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editTransfert.observation">
-                              </textarea>
-                            </div>
-                          </div>
-                           <div class="control-group">
-                            <label class="control-label">Date Decision CF :</label>
-                            <div class="controls">
-                              <input type="date" class="span"  v-model="editTransfert.date_motif"/>
-                              
-                                
-                            </div>
-                          </div>
-                           
-         
-        </form>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="modifierUniteAdministrativeLocal(editTransfert)"
-          class="btn btn-primary"
-          href="#"
-         
-        >Modifier</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div> -->
-<!----- ajouter modal   ---->
-
+   
 
 <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
     <div id="exampleModal" class="modal hide tailgrand12">
@@ -100,7 +33,7 @@
                        <input
                       type="text"
                  v-model="formData.num_transfert"
-                      class="span"
+                      class="span4"
                      
                       
                     />
@@ -118,7 +51,7 @@
                 <div class="control-group">
                   <label class="control-label">Unité administrative</label>
                   <div class="controls">
-                     <select v-model="formData.ua_id" class="span">
+                     <select v-model="formData.ua_id" class="span4">
                                                             <option></option>
                                                             <option v-for="item in afficherUAParDroitAccess" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -134,7 +67,7 @@
                   <label class="control-label">Ligne budgétaire</label>
                   <div class="controls">
                         <select v-model="formData.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire"
-                         class="span3">
+                         class="span5">
                       <option
                         v-for="localgeo in ligneBudgetaireDynamiques(formData.ua_id)"
                         :key="localgeo.id"
@@ -155,7 +88,7 @@
                        <input
                       type="number"
                    :value="afficheMontantTransfere(formData.ligne_budgetaire_id)"
-                      class="span"
+                      class="span4"
                      readonly
                       
                     />
@@ -171,7 +104,7 @@
                        <input
                       type="number"
                    :value="montantCumul(formData.ligne_budgetaire_id)"
-                      class="span"
+                      class="span4"
                      readonly
                       
                     />
@@ -205,7 +138,7 @@
                        <input
                       type="number"
                     v-model="formData.montant_total_contrat"
-                      class="span"
+                      class="span4"
                      :max="dotationDisponible"
                       
                     />
@@ -222,7 +155,7 @@
                        <input
                       type="number"
                    :value="soldeDisponible"
-                      class="span"
+                      class="span4"
                      readonly
                       
                     />
@@ -254,7 +187,7 @@
                <div class="control-group">
                   <label class="control-label">Fonction</label>
                   <div class="controls">
-                    <select v-model="formData.fonction_id" :readOnly="verrouDestinataire" class="span">
+                    <select v-model="formData.fonction_id" :readOnly="verrouDestinataire" class="span4">
                       <option
                         v-for="localgeo in fonctionDynamiques(formData.ua_id)"
                         :key="localgeo.id"
@@ -273,7 +206,7 @@
                        <input
                       type="text"
                   :value="afficheActeurDepense(formData.fonction_id)"
-                      class="span"
+                      class="span4"
                      readonly
                       
                     />
@@ -282,7 +215,7 @@
                 </div>
               </td>
           
-         <td>
+         <td rowspan="2">
               
                <div class="control-group">
                   <label class="control-label">Date du transfert</label>
@@ -296,11 +229,6 @@
                     />
                    
                   </div>
-                </div>
-              </td>
-              <td>
-              
-               <div class="control-group">
                   <label class="control-label">Fichier joint</label>
                   <div class="controls">
                        <input
@@ -313,7 +241,9 @@
                    
                   </div>
                 </div>
+                
               </td>
+              
        </tr>
         </table>
     </div>
@@ -325,13 +255,14 @@
                  <div class="control-group">
                   <label class="control-label">UA bénéficiaire</label>
                   <div class="controls">
-                    <select v-model="formData.unitezone_id" :readOnly="verrouDestinataire" class="span3">
-                      <option
-                        v-for="localgeo in destinationDynamiques(formData.ua_id)"
-                        :key="localgeo.id"
-                        :value="localgeo.id"
-                      >{{localgeo.libelle}}</option>
-                    </select>
+                    
+                     <select v-model="formData.unitezone_id" class="span4">
+                                                            <option></option>
+                                                            <option v-for="item in afficherUAParDroitAccess" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
                   </div>
                 </div>
              </td>
@@ -340,7 +271,7 @@
                 <div class="control-group">
                   <label class="control-label">Ligne budgétaire</label>
                   <div class="controls">
-                        <select v-model="formData.inputation_id" class="span3">
+                        <select v-model="formData.inputation_id" class="span4">
                       <option
                         v-for="localgeo in derniereNivoPlanBudgetaire"
                         :key="localgeo.id"
@@ -385,7 +316,7 @@
                   </div>
                 </div>
              </td>
-              <td colspan="2">
+              <td colspan="">
               
                <div class="control-group">
                   <label class="control-label">Montant transféré</label>
@@ -423,7 +354,7 @@
 
 <!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
 
-    <div id="modificationModal" class="modal hide tailgrand121">
+    <div id="modificationModal" class="modal hide tailgrand12">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Information sur la modification  du Transfert</h3>
@@ -450,7 +381,7 @@
                        <input
                       type="text"
                        v-model="editTransfert.num_transfert"
-                      class="span"
+                      class="span4"
                      
                       
                     />
@@ -462,7 +393,7 @@
                 <div class="control-group">
                   <label class="control-label">Unite d'administrative</label>
                   <div class="controls">
-                    <select v-model="editTransfert.ua_id" class="span">
+                    <select v-model="editTransfert.ua_id" class="span4">
                       <option
                         v-for="typeUniteA in afficherUAParDroitAccess"
                         :key="typeUniteA.id"
@@ -477,7 +408,7 @@
                 <div class="control-group">
                   <label class="control-label">Ligne budgétaire</label>
                   <div class="controls">
-                        <select v-model="editTransfert.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire" class="span">
+                        <select v-model="editTransfert.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire" class="span5">
                       <option
                         v-for="localgeo in ligneBudgetaireDynamiquesModifier(editTransfert.ua_id)"
                         :key="localgeo.id"
@@ -521,7 +452,7 @@
                        <input
                       type="number"
                    :value="montantCumulModifier(editTransfert.ligne_budgetaire_id)"
-                      class="span"
+                      class="span4"
                      readonly
                       
                     />
@@ -537,7 +468,7 @@
                        <input
                       type="number"
                    :value="dotationDisponibleModifier"
-                      class="span"
+                      class="span5"
                      readonly
                       
                     />
@@ -556,7 +487,7 @@
                        <input
                       type="number"
                     v-model="editTransfert.montant_total_contrat"
-                      class="span"
+                      class="span4"
                      :max="dotationDisponibleModifier"
                       
                     />
@@ -573,7 +504,7 @@
                        <input
                       type="number"
                    :value="disponibleBudgetaireModifier"
-                      class="span3"
+                      class="span4"
                      readonly
                       
                     />
@@ -589,7 +520,7 @@
                        <input
                       type="text"
                   :value="GnDynamiquesModifier(afficheGrandeNatureModifier(editTransfert.ligne_budgetaire_id))"
-                      class="span3"
+                      class="span4"
                      readonly
                       
                     />
@@ -604,7 +535,7 @@
                <div class="control-group">
                   <label class="control-label">Fonction</label>
                   <div class="controls">
-                    <select v-model="editTransfert.fonction_id" :readOnly="verrouDestinataireMod" class="span3">
+                    <select v-model="editTransfert.fonction_id" :readOnly="verrouDestinataireMod" class="span4">
                       <option
                         v-for="localgeo in fonctionDynamiquesModifier(editTransfert.ua_id)"
                         :key="localgeo.id"
@@ -659,11 +590,10 @@
                   <label class="control-label">Destinataire</label>
                   <div class="controls">
                     <select v-model="editTransfert.unitezone_id" :readOnly="verrouDestinataire" class="span">
-                      <option
-                        v-for="localgeo in destinationDynamiquesModifier(editTransfert.ua_id)"
-                        :key="localgeo.id"
-                        :value="localgeo.id"
-                      >{{localgeo.libelle}}</option>
+                      <option></option>
+                                                            <option v-for="item in afficherUAParDroitAccess" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
                     </select>
                   </div>
                 </div>
@@ -799,25 +729,25 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="odd gradeX" v-for="appelOffre in afficherlisteTransfertParDroitAccess"
+                                    <tr class="odd gradeX" v-for="(appelOffre,index) in afficherlisteTransfertParDroitAccess"
                                         :key="appelOffre.id">
-                                        <td @dblclick="afficherModalTransfert(appelOffre.id)">
+                                        <td @dblclick="afficherModalTransfert(index)">
                                             {{appelOffre.exerciceencours || 'Non renseigné'}}</td>
 
-                                             <td @dblclick="afficherModalTransfert(appelOffre.id)">
+                                             <td @dblclick="afficherModalTransfert(index)">
                                             {{appelOffre.num_transfert || 'Non renseigné'}}</td>
 
-                                        <td @dblclick="afficherModalTransfert(appelOffre.id)">
+                                        <td @dblclick="afficherModalTransfert(index)">
                                             {{afficherLibelleUa(appelOffre.ua_id) || 'Non renseigné'}}</td>
 
-                                            <td @dblclick="afficherModalTransfert(appelOffre.id)">
-                                            {{appelOffre.montant_total_contrat || 'Non renseigné'}}</td>
+                                            <td @dblclick="afficherModalTransfert(index)">
+                                            {{formatageSomme(parseFloat(appelOffre.montant_total_contrat)) || 'Non renseigné'}}</td>
 
-                                             <td @dblclick="afficherModalTransfert(appelOffre.id)">
+                                             <td @dblclick="afficherModalTransfert(index)">
                                             {{afficherImputation(appelOffre.ligne_budgetaire_id)|| 'Non renseigné'}} </td>
 
-                                            <td @dblclick="afficherModalTransfert(appelOffre.id)">
-                                            {{afficherUniteDeZone(appelOffre.unitezone_id )|| 'Non renseigné'}}</td>
+                                            <td @dblclick="afficherModalTransfert(index)">
+                                            {{afficherLibelleUa(appelOffre.unitezone_id )|| 'Non renseigné'}}</td>
                                       
                                            <td>
                                         <div class="btn-group">
@@ -1055,7 +985,7 @@ montantCumul: function () {
                 return id => {
                     if (id != "") {
                   
-                        return  this.afficheTransfertValider.filter(normeEquipe => normeEquipe.ligne_budgetaire_id == this.formData.ligne_budgetaire_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
+                        return  this.transferts.filter(normeEquipe => normeEquipe.ligne_budgetaire_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
                     }
                     return 0
                 }
@@ -1065,7 +995,7 @@ montantCumulModifier: function () {
                 return id => {
                     if (id != "") {
                   
-                        return  this.afficheTransfertValider.filter(normeEquipe => normeEquipe.ligne_budgetaire_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
+                        return  this.transferts.filter(normeEquipe => normeEquipe.ligne_budgetaire_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
                     }
                     return 0
                 }
@@ -1571,8 +1501,8 @@ this.$("#exampleModalMotifMandat").modal('hide');
 <style scoped>
 
 .tailgrand12{
-  width: 1000px;
-  margin: 0 -30%;
+  width: 80%;
+  margin: 0 -40%;
  
 }
 .tailgrand121{

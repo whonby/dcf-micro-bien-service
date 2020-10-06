@@ -199,7 +199,7 @@ return objJson.id
  navigateToTransfert(){
         this.activate(6)
         this.$router.push({
-          name: 'tableaubordTransfert'
+          name: 'transfert'
         })
       },
 navigateToGestionMarche(){

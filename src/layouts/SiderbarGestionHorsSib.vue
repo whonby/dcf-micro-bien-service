@@ -43,14 +43,14 @@
             <span>UNITE ADMINISTRATIVE</span>
           </a>
         </li> -->
-         <li @click.prevent="navigateToTransfert" :class="{active: active_el ==6}">
+         <!-- <li @click.prevent="navigateToTransfert" :class="{active: active_el ==6}">
           <a title="TRANSFERT" href="#">
             <i class="icon-money"></i>
             <span>BUDGET</span>
             <span class="label label-important"></span>
           </a>
-        </li>
-         <li @click.prevent="navigateToTransfert" :class="{active: active_el ==6}">
+        </li> -->
+         <li @click.prevent="navigateToTransfert" >
           <a title="TRANSFERT" href="#">
             <i class="icon-money"></i>
             <span>BUDGET ECLATE</span>
@@ -228,9 +228,9 @@ return objJson.id
       },
       
  navigateToTransfert(){
-        this.activate(6)
+        
         this.$router.push({
-          name: 'tableaubordTransfert'
+          name: 'BudgetEclatePrincipal'
         })
       },
 navigateToGestionMarche(){

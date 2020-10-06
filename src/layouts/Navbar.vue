@@ -136,6 +136,7 @@ this.getOuverture()
 this.getSanction()
 this.getAllRealiteServiceFait()
      this.getAllLiquidation()
+     this.getAllBudgetEclate()
 // this.getTypeProcedure()
 
 
@@ -344,7 +345,8 @@ this.getMembreCojo()
      "getAllLiquidation",
      "getStructureOrganigrammeUa",
      "getAllBanqueUa",
-     "getAllDecompteFacture"
+     "getAllDecompteFacture",
+     "getAllBudgetEclate"
     ]),
             ...mapActions('personnelUA', ["getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
