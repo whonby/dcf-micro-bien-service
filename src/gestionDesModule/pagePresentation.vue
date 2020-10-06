@@ -37,11 +37,11 @@
           
           <div >
             <ul class="quick-actions" >
-                <li class="bg_lg span3" > 
+                <li class="bg_lg span3" >
                      <router-link :to="{ name: 'TableauDeBordG', params: {id:1}}" tag="a"  style="color:black;">
                 <h4>MODULE</h4> <i class="icon-cogs"></i><h4>PARAMETRES GENERAUX</h4>
-                
-                </router-link> 
+
+                </router-link>
                 </li>
   <li class="bg_lg span3" > 
      <router-link :to="{ name: 'TableauDeBordG', params: {id:2}}" tag="a"  style="color:black;">
@@ -54,8 +54,8 @@
             <ul class="quick-actions" >
                
     <li class="bg_ly span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:4}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4>HORS SIB</h4></router-link> </li>
-  <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>MODULE </h4> <i class="icon-globe"></i><h4>CATOGRAPHIES</h4></router-link> </li>
-           <li class="bg_ly span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:6}}" tag="a"  style="color:black;"><h4>MODULE </h4> <i class="icon-group"></i><h4>MON EQUIPE</h4></router-link> </li>
+  <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:6}}" tag="a"  style="color:black;"><h4>MODULE </h4> <i class="icon-globe"></i><h4>CATOGRAPHIES</h4></router-link> </li>
+           <li class="bg_ly span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>MODULE </h4> <i class="icon-group"></i><h4>MON EQUIPE</h4></router-link> </li>
             </ul>
            
           </div>
@@ -316,13 +316,7 @@ this.getMembreCojo()
     this.getProceVerbal()
       this.getEcheances()
         },
-//   created() {
-//             this.marcheid=this.$route.params.id
-//    this.detail_marche = this.getMarchePersonnaliser.find(
-//        idmarche => idmarche.id == this.$route.params.id
-//    )
-  
-// },
+
   computed:{
  ...mapGetters("uniteadministrative", [
                 "acteCreations",
@@ -401,7 +395,7 @@ return objJson.id
 
   methods:{
 
-   ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser","getEquipeCF"]),
+    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 
@@ -489,7 +483,44 @@ return objJson.id
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
 
-          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances"])
+          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances"]),
+
+    activeMenuModuleParamGeneral(){
+      this.activeMenuModuleSidcf(1)
+      this.$router.push({
+        name: 'TableauDeBordG'
+      })
+    },
+    activeMenuModuleUniteAdministrative(){
+      this.activeMenuModuleSidcf(2)
+      this.$router.push({
+        name: 'TableauDeBordG'
+      })
+    },
+    activeMenuModuleGestionSIB(){
+      this.activeMenuModuleSidcf(3)
+      this.$router.push({
+        name: 'TableauDeBordG'
+      })
+    },
+    activeMenuModuleGestionHorSIB(){
+      this.activeMenuModuleSidcf(4)
+      this.$router.push({
+        name: 'TableauDeBordG'
+      })
+    },
+    activeMenuModuleCartographie(){
+      this.activeMenuModuleSidcf(5)
+      this.$router.push({
+        name: 'TableauDeBordG'
+      })
+    },
+    activeMenuModuleMonEquipe(){
+      this.activeMenuModuleSidcf(6)
+      this.$router.push({
+        name: 'TableauDeBordG'
+      })
+    },
 
 
  

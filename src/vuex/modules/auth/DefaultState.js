@@ -15,6 +15,7 @@ const defaultstate = {
     groupe:[],
     equipe_cf:[],
     ancien_password:false,
+    menuModuleSidcf:"",
 
 };
 

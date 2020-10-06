@@ -49,7 +49,8 @@ components: {
                 "transferts"
 
             ]),
-            
+    ...mapGetters('Utilisateurs', ['getterMenuModuleSidcf']),
+
     ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel","mandats"]),
 
        ...mapGetters("parametreGenerauxAdministratif", [
@@ -71,6 +72,7 @@ components: {
   },
 created() {
             this.marcheid=this.$route.params.id
+  console.log(this.gestionModules)
    this.detail_marche = this.gestionModules.find(
        idmarche => idmarche.id == this.$route.params.id
    )

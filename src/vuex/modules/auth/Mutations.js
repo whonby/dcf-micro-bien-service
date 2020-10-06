@@ -224,3 +224,9 @@ export const ANCIEN_PASSWORD= (state, nouvel_objet) => {
     state.ancien_password=nouvel_objet
   //  state.ancien_password.unshift(nouvel_objet)
 }
+
+
+
+export const MENU_MODULE_SIDCF = (state, menuModuleSidcf) => {
+    state.menuModuleSidcf = menuModuleSidcf
+}
