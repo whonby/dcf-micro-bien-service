@@ -48,6 +48,11 @@ import investissementRoutes from './investissement/investissementRoutes';
 import AuthRoutes from './auth/AuthRoutes' 
 
 
+// les differentes rouetes de marches hors sib
+
+import marcheHorSibRoutes from './routesHorSib/marcheHorSibRoutes'
+
+
 Vue.use(VueRouter);
 
 
@@ -70,7 +75,14 @@ const regroupementDesRoutes = [
 planificationBudgetaireRoutes,
 BienServiceRoutes,
 investissementRoutes,
-  CartographieRoute
+  CartographieRoute,
+
+
+
+  // rouetes des marches hors sib
+
+  marcheHorSibRoutes
+
 
 ];
 const routes = [].concat(...regroupementDesRoutes);

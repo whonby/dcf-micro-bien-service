@@ -4,7 +4,6 @@
 
 <!--  -->
 
-
         <div id="addLot" class="modal hide" aria-hidden="true" style="display: none;">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
