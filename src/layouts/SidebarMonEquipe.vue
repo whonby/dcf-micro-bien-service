@@ -27,12 +27,12 @@
         </li>
 
 
-        <li :class="{active: active_el == 11 }" @click.prevent="navigateToTableauBord">
+        <!-- <li :class="{active: active_el == 11 }" @click.prevent="navigateToTableauBord">
           <a title="TABLEAU DE BORD" href="#">
             <i class="icon-dashboard"></i>
             <span>TABLEAU DE BORD</span>
           </a>
-        </li>
+        </li> -->
 
         <li  @click.prevent="navigateGestionEquipe" :class="{active: active_el ==21}">
           <a href="#">

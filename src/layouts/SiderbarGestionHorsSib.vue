@@ -50,8 +50,8 @@
             <span class="label label-important"></span>
           </a>
         </li> -->
-         <li @click.prevent="navigateToTransfert" >
-          <a title="TRANSFERT" href="#">
+         <li @click.prevent="navigateToTransfert">
+          <a title="BUDGET ECLATE" href="#">
             <i class="icon-money"></i>
             <span>BUDGET ECLATE</span>
             <span class="label label-important"></span>

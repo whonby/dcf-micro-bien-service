@@ -733,5 +733,5 @@ export const groupeNiveau1Ua = (state, getters) => {
 
 export const GroupeUaReceptrice = (state, getters) => {
   //delete getters.trieUaImmobilisation.
-  return groupBy(getters.transferts, "	unitezone_id");
+  return groupBy(getters.transferts, "unitezone_id");
 };

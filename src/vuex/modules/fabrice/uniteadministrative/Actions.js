@@ -397,8 +397,8 @@ export function ajouterTransfert({ commit, dispatch }, nouveau) {
     .post("/ajouterTransfert", {
       	num_transfert: nouveau.num_transfert,
       acteurdepense_id: nouveau.acteurdepense_id,
-      grande_natrue_id:nouveau.grande_natrue_id,
-      inputation_id:nouveau.inputation_id,
+      // grande_natrue_id:nouveau.grande_natrue_id,
+      // inputation_id:nouveau.inputation_id,
       unitezone_id: nouveau.unitezone_id,
       montant_total_contrat: nouveau.montant_total_contrat,
       montant_transfert: nouveau.montant_transfert,

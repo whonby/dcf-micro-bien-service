@@ -9,6 +9,8 @@
 <!--        </router-link>-->
 <!--        </div>-->
 <!--      </div>-->
+<br>
+<br>
 
       <table class="table table-bordered table-striped" style="background-color: #ffffff;">
         <tr>
@@ -26,8 +28,9 @@
 
             </router-link>
           </td>
-          <td style="width:88%;text-align: center;font-size:30px;padding:50px 50px">
-            <P>MENU GENERAL DU SID-CF</P>
+          <td style="width:88%;text-align: center;font-size:25px;padding:50px 50px;font-weight:bold;">
+            <P>SYSTEME D'INFORMATION DECISIONNELLE DU CONTRÖLEUR FINANCIER  </P>
+            <P>(SID-CF)</P>
           </td>
 
           <!-- <td style="width:15%">
