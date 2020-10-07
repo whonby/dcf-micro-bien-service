@@ -165,7 +165,7 @@ this.getTypeAppel()
      this.getAllBanqueUa()
      this.getAllDecompteFacture()
        this.getStructureOrganigrammeUa()
- 
+ this.getAllBudgetEclate()
     // this.getAllArchivageDocument();
 this.getAllDirection()
 this.getAllServiceua()
@@ -357,7 +357,8 @@ this.getMembreCojo()
      "getAllLiquidation",
      "getStructureOrganigrammeUa",
      "getAllBanqueUa",
-     "getAllDecompteFacture"
+     "getAllDecompteFacture",
+     "getAllBudgetEclate"
     ]),
             ...mapActions('personnelUA', ["getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",

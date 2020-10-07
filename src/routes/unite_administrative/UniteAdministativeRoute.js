@@ -31,7 +31,15 @@ import StructureOrganigramme from "../../pages/parametres_generaux/administratif
 import Synthesebudg from "../../pages/gestionMarche/synthesebudg.vue";
 import decompte from "../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte.vue";
 import listeBudgetIntialParUa from "../../pages/unites_administratives/filtreDesBudgetSurTableauBord/listeBudgetIntialParUa.vue";
+import BudgetEclatePrincipal from "../../pages/VueGestionHorsSib/grpeBudgetEclate/BudgetEclatePrincipal.vue"
 const UniteAdministativeRoutes = [
+ 
+  {
+    path: "/Budget-Eclate",
+    name: "BudgetEclatePrincipal",
+    component: BudgetEclatePrincipal
+}
+,
  
   {
     path: "/listeBudgetIntialParUa/:id",

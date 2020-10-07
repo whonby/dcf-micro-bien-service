@@ -1,5 +1,5 @@
 import { groupBy } from "../../../../Repositories/Repository";
-
+export const budgetEclate = state => state.budgetEclate;
 
 // const typeTextes = state =>
 //   state.typeTextes.sort((a, b) => (a.code > b.code ? 1 : -1));
@@ -13,21 +13,7 @@ export const realiteServiceFait = state => state.realiteServiceFait;
 export const liquidation = state => state.liquidation;
 const uniteAdministratives = state =>
   state.uniteAdministratives.sort((a, b) => (a.code > b.code ? 1 : -1));
-// const archivageDocuments = state =>
-//   state.archivageDocuments.sort((a, b) => (a.reference > b.reference ? 1 : -1));
-// export const directions = state =>
-//   state.directions.sort((a, b) => (a.id > b.id ? 1 : -1));
-// export const servicesua = state =>
-//   state.servicesua.sort((a, b) => (a.id > b.id ? 1 : -1));
-// export const fonctionsua = state =>
-//   state.fonctionsua.sort((a, b) => (a.id > b.id ? 1 : -1));
 
-
-// export const afficheBudgetActive = state =>
-//   state.budgetGeneral.filter(
-//     affichenaturedep => affichenaturedep.affichenaturedep.actived==1
-//   );
-//export const banqueUa = state => state.banqueUa;
 export const nombreUniteAdministratives = state =>
   state.uniteAdministratives.length;
 // export const nombreArchivageDocument = state => state.archivageDocuments.length;
@@ -39,14 +25,10 @@ const historiquebudgetGeneral = state =>
   state.historiquebudgetGeneral.sort((a, b) => (a.code > b.code ? 1 : -1));
 export const uniteZones = state =>
   state.uniteZones.sort((a, b) => (a.code > b.code ? 1 : -1));
-export const transferts = state =>
-  state.transferts.sort((a, b) => (a.num_transfert > b.num_transfert ? 1 : -1));
+export const transferts = state =>state.transferts.sort((a, b) => (a.num_transfert > b.num_transfert ? 1 : -1));
 export const historiquetransferts = state =>
   state.historiquetransferts.sort((a, b) => (a.date_jours > b.date_jours ? 1 : -1));
-// const listeDocUniteAdministratives = state =>
-//   state.listeDocUniteAdministratives;
-// const nbreUniteAdministratives = state => state.nbreUniteAdministratives;
-// const nbreTypeTextes = state => state.nbreTypeTextes;
+
 
 export const historiquemontantBudgetGeneral = (state, getters) =>
   getters.historiquebudgetGeneral.reduce(
@@ -746,4 +728,10 @@ export const getterligneExempter = state => state.ligneExempter;
 export const groupeNiveau1Ua = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.StructureOrganigrammeUa, "niveau");
+};
+
+
+export const GroupeUaReceptrice = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.transferts, "unitezone_id");
 };

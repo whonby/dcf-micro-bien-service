@@ -23,6 +23,9 @@ export const getterEquipeCF=state=>state.equipe_cf
 export const getterPasswordCrypte=state=>state.ancien_password
 
 
+export const getterMenuModuleSidcf=state=>state.menuModuleSidcf
+
+
 
   
 

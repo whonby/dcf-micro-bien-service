@@ -397,8 +397,8 @@ export function ajouterTransfert({ commit, dispatch }, nouveau) {
     .post("/ajouterTransfert", {
       	num_transfert: nouveau.num_transfert,
       acteurdepense_id: nouveau.acteurdepense_id,
-      grande_natrue_id:nouveau.grande_natrue_id,
-      inputation_id:nouveau.inputation_id,
+      // grande_natrue_id:nouveau.grande_natrue_id,
+      // inputation_id:nouveau.inputation_id,
       unitezone_id: nouveau.unitezone_id,
       montant_total_contrat: nouveau.montant_total_contrat,
       montant_transfert: nouveau.montant_transfert,
@@ -1286,5 +1286,81 @@ export function supprimerBanqueUa({ commit }, id) {
       commit("SUPPRIMER_BANQUE_UA", id);
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete("/supprimerBanqueUa/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+export function getAllBudgetEclate({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/budgetEclate")
+      .then(response => {
+        commit("GET_ALL_BUDGET_ECLATE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterBudgetEclate({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/budgetEclate", {
+      annebudgetaire: nouveau.annebudgetaire,
+      uniteadministrative_id: nouveau.	uniteadministrative_id,
+      ligneeconomique_id: nouveau.ligneeconomique_id,
+      grandenature_id: nouveau.grandenature_id,
+      dotation: nouveau.dotation,
+      
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_BUDGET_ECLATE", response.data);
+        dispatch('getAllBudgetEclate')
+        dispatch('getAllUniteAdministrative')
+        dispatch('getAllHistoriqueBudgetEclate')
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+// modifier
+export function modifierBudgetEclate({ commit, dispatch}, nouveau) {
+  asyncLoading(axios
+    .put("/budgetEclate/" + nouveau.id, {
+      annebudgetaire: nouveau.annebudgetaire,
+      uniteadministrative_id: nouveau.	uniteadministrative_id,
+      ligneeconomique_id: nouveau.ligneeconomique_id,
+      grandenature_id: nouveau.grandenature_id,
+      dotation: nouveau.dotation,
+    }))
+    .then(response => {
+      commit("MODIFIER_BUDGET_ECLATE", response.data);
+      dispatch('getAllBudgetEclate')
+      dispatch('getAllUniteAdministrative')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerBudgetEclate({ commit, dispatch}, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_BUDGET_ECLATE", id);
+      dispatch('getAllBudgetEclate')
+      dispatch('getAllUniteAdministrative')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/budgetEclate/" + id).then(() => dialog.close());
     });
 }

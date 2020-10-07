@@ -11,43 +11,49 @@ import Chat from "@/pages/chat/Chat"
 import MonEquipe from "@/pages/gestionCF/MonEquipe";
 import pagePresentation from "@/gestionDesModule/pagePresentation";
 const AuthRoutes = [
-    
-    {
-        path: '/Menu-Sid-cf',
+
+{
+        path: '/sidcf',
        name:"pagePresentation",
-       meta: {layout: "no-sidebar"},
+       meta: {layout: "no-sidebar",
+           requiresAuth: true},
        component: pagePresentation
     },
     {
         path: '/TableauDeBordG/:id',
         name: "TableauDeBordG",
-        component: TableauDeBordG
+        component: TableauDeBordG,
+        meta: { requiresAuth: true }
     },
     {
         path: '/chat',
         name: "Chat",
-        component: Chat
+        component: Chat,
+        meta: { requiresAuth: true }
     },
     {
         path: '/ajouter-groupe',
         name: "AjouteGroupe",
-        component: AddGroupe
+        component: AddGroupe,
+        meta: { requiresAuth: true }
     },
     {
         path: '/groupe',
         name: "Groupe",
-        component: Groupe
+        component: Groupe,
+        meta: { requiresAuth: true }
     },
     {
         path: '/mon-equipe',
         name: "MonEquipe",
-        component: MonEquipe
+        component: MonEquipe,
+        meta: { requiresAuth: true }
     },
     {
         path: '/photo-Profil',
         name: "photoProfil",
-
-        component: photoProfil
+        component: photoProfil,
+        meta: { requiresAuth: true }
     },
     {
         path: '/connexion',
@@ -66,14 +72,14 @@ const AuthRoutes = [
     {
         path: '/gestion-cf',
         name:"GestionCF",
-
+        meta: { requiresAuth: true },
         component: GestionCF
     },
     {
         path: '/detail-cf/:id',
         name:"DetailCF",
-
-        component: DetailCF
+        component: DetailCF,
+        meta: { requiresAuth: true }
     },
    
 ]

@@ -527,6 +527,33 @@ const SUPPRIMER_STRUCTURE_ORGANIGRAMME_UA = (state, id) => {
   state.StructureOrganigrammeUa = state.StructureOrganigrammeUa.filter(type => type.id != id);
 };
 
+
+
+export const GET_ALL_BUDGET_ECLATE = (state, tableauBudgetGeneral) => {
+  state.budgetEclate = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+export const AJOUTER_BUDGET_ECLATE = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.budgetEclate.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+export const MODIFIER_BUDGET_ECLATE = (state, objetModifie) => {
+  state.budgetEclate = state.budgetEclate.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+export const SUPPRIMER_BUDGET_ECLATE = (state, id) => {
+  state.budgetEclate = state.budgetEclate.filter(type => type.id != id);
+};
 // export const GET_ALL_BANQUE_UA = (state, tableauBanqueUa) => {
 //   state.banqueUa = tableauBanqueUa;
 // };
