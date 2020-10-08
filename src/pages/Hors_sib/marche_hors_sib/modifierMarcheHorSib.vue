@@ -3,7 +3,7 @@
 
    <div>
       <div align="center" style="margin-">
-        <h3> Marché/Contrat</h3>
+        <h3> Marché / Contrat</h3>
       </div>
     <div class="">
         <table class="table table-bordered table-striped">
@@ -15,7 +15,7 @@
                             
                      <input
                 type="text"
-                :value="anneeBugetaire"
+                :value="anneeBugetaireModifier"
                 class="span4"
                readonly
               />
@@ -42,7 +42,7 @@
                <div class="control-group">
             <label class="control-label" title="unite administrative">UA</label>
             <div class="controls">
-            <select v-model="formData.unite_administrative_id" class="span8">
+            <select v-model="editMarcheHorSib.unite_administrative_id" class="span8">
                <option v-for="plans in budgetEclate" :key="plans.id" 
                :value="plans.uniteadministrative_id">{{afficherLibelleUniteAdministrative(plans.uniteadministrative_id)}}</option>
            </select>
@@ -56,7 +56,7 @@
             <div class="controls">
               <input
                 type="text"
-                v-model="formData.reference_marche"
+                v-model="editMarcheHorSib.reference_marche"
                 class="span4"
                 placeholder="Saisir la référence du marché"
               />
@@ -69,7 +69,7 @@
                 <div class="control-group">
             <label class="control-label">Type de marché </label>
             <div class="controls">
-            <select v-model="formData.type_marche_id" class="span4">
+            <select v-model="editMarcheHorSib.type_marche_id" class="span4">
                <option v-for="plans in typeMarches" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -83,7 +83,7 @@
             <div class="controls">
               <textarea
                
-                v-model="formData.objet"
+                v-model="editMarcheHorSib.objet"
                 class="span8" rows="3"
                 placeholder="Saisir le texte"
               ></textarea>
@@ -96,9 +96,9 @@
                   <label class="control-label">Classification Economique</label>
                   <div class="controls">
                    
-                      <select v-model="formData.economique_id" :readOnly="deveroueconomiq" class="span4">
+                      <select v-model="editMarcheHorSib.economique_id" :readOnly="deveroueconomiq" class="span4">
                     <option
-                        v-for="eco in ligneBudgeteyuy(formData.unite_administrative_id)"
+                        v-for="eco in ligneBudgeteyuy(editMarcheHorSib.unite_administrative_id)"
                         :key="eco.ligneeconomique_id"
                         :value="eco.ligneeconomique_id"
                       >{{afficherPlanEconomique(eco.ligneeconomique_id)}}</option>
@@ -138,12 +138,12 @@
        <div class="controls">
          <!-- <input
            type="text"
-           v-model="formData.type_financement"
+           v-model="editMarcheHorSib.type_financement"
            class="span4"
           
            readonly
          /> -->
-       <select v-model="formData.type_financement" class="span4">
+       <select v-model="editMarcheHorSib.type_financement" class="span4">
           <option v-for="plans in types_financements" :key="plans.id" 
           :value="plans.id">{{plans.libelle}}</option>
       </select>
@@ -157,12 +157,12 @@
        <div class="controls">
          <!-- <input
            type="text"
-           v-model="formData.source_financement"
+           v-model="editMarcheHorSib.source_financement"
            class="span4"
            
            readonly
          /> -->
-       <select v-model="formData.source_financement" class="span4">
+       <select v-model="editMarcheHorSib.source_financement" class="span4">
           <option v-for="plans in sources_financements" :key="plans.id" 
           :value="plans.id">{{plans.libelle}}</option>
       </select>
@@ -176,7 +176,7 @@
             <label class="control-label">Procédure Passation</label>
             <div class="controls">
             
-               <select v-model="formData.procedure_passation_id" class="span4" >
+               <select v-model="editMarcheHorSib.procedure_passation_id" class="span4" >
                <option v-for="plans in procedurePassations" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -192,7 +192,7 @@
        <div class="controls">
          <input
            type="text"
-           v-model="formData.montant_marche"
+           v-model="editMarcheHorSib.montant_marche"
            class="span4" />
        </div>
      </div>
@@ -204,7 +204,7 @@
       <div class="controls">
      <input
        type="text"
-       v-model="formData.livrable"
+       v-model="editMarcheHorSib.livrable"
        class="span4"
        placeholder="Saisir le livrable"
      />
@@ -217,7 +217,7 @@
         <div class="controls">
        <input
          type="text"
-         v-model="formData.nature_prix"
+         v-model="editMarcheHorSib.nature_prix"
          class="span4"
        />
      </div>
@@ -230,7 +230,7 @@
        <div class="controls">
          <input
            type="text"
-           v-model="formData.beneficiaire"
+           v-model="editMarcheHorSib.beneficiaire"
            class="span4"
            placeholder="Saisir Bénéficiaire"
          />
@@ -246,16 +246,16 @@
        <div class="controls">
          <!-- <input
            type="text"
-           v-model="formData.source_financement"
+           v-model="editMarcheHorSib.source_financement"
            class="span4"
            
            readonly
          /> -->
-         <!-- <select v-model="formData.localisation_geographie_id" class="span4">
+         <!-- <select v-model="editMarcheHorSib.localisation_geographie_id" class="span4">
                                 <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
               </select> -->
-               <select v-model="formData.localisation_geographie_id" class="span8" >
+               <select v-model="editMarcheHorSib.localisation_geographie_id" class="span6" >
                <option v-for="plans in afficherCodeStructureLibelle(recupererLataille)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -269,7 +269,7 @@
        <div class="controls">
          <input
            type="text"
-           v-model="formData.longitude"
+           v-model="editMarcheHorSib.longitude"
            class="span4" />
        </div>
      </div>
@@ -281,7 +281,7 @@
       <div class="controls">
      <input
        type="text"
-       v-model="formData.latitude"
+       v-model="editMarcheHorSib.latitude"
        class="span4"
        placeholder=""
      />
@@ -299,8 +299,8 @@
                         
                         class="btn btn-primary"
                         href="#"
-                        @click.prevent="ajouterMarcheHorSibLocal"
-                >Enregistrer</a>
+                        @click.prevent="modifierMarcheHorSibLocal"
+                >Modifier</a>
                 <a data-dismiss="modal" class="btn" @click.prevent="allerPageMarcheHorsib" href="#">Fermer</a>
             </div>
  </div>
@@ -348,58 +348,33 @@ export default {
     //     libelle: "libelle"
     //   },
 
-    formData: {
-      latitude:"",
-      longitude:"",
-      localisation_geographie_id:"",
-      libelle_procedure:"",
-        type_financement:"",
-        source_financement:"",
-            objet:"",
-            economique_id:"",
-            procedure_passation_id:"",
-            beneficiaire:"",
-            livrable:"",
-            reference_marche:"",
-            montant_marche:"",
-                type_marche_id:"",
-                unite_administrative_id:"",
-               // gdenature_id:"",
-               // activite_id:"",
-               // typeappel_id:"",
-                exo_id:"",
-                sib:1
+    editMarcheHorSib: {
+    //   latitude:"",
+    //   longitude:"",
+    //   localisation_geographie_id:"",
+    //   libelle_procedure:"",
+    //     type_financement:"",
+    //     source_financement:"",
+    //         objet:"",
+    //         economique_id:"",
+    //         procedure_passation_id:"",
+    //         beneficiaire:"",
+    //         livrable:"",
+    //         reference_marche:"",
+    //         montant_marche:"",
+    //             type_marche_id:"",
+    //             unite_administrative_id:"",
+    //            // gdenature_id:"",
+    //            // activite_id:"",
+    //            // typeappel_id:"",
+    //             exo_id:"",
+    //             sib:1
         
       },
         formDossierCadidature:{
           libelle:""
         },
        
-
-      editMarche: {
-           objet:"",
-           livrable:"",
-            reference_marche:"",
-            montant_marche:"",
-                type_marche_id:"",
-                unite_administrative_id:"",
-                imputation:"",
-                 activite_id:"",
-                 exo_id:"",
-                 libelle_procedure:"",
-        type_financement:"",
-        source_financement:"",
-            
-            economique_id:"",
-            procedure_passation_id:"",
-            beneficiaire:"",
-          
-               // gdenature_id:"",
-                
-               // typeappel_id:"",
-               
-                sib:1
-      },
       
 //       editActeEffetFinancier:{
 // cause_resiliation:"",
@@ -409,8 +384,15 @@ export default {
       search: ""
     };
   },
+   created(){
+        //this.getDetail()
+      this.editMarcheHorSib = this.gettersMarcheHorsib.find(
+   item => item.id == this.$route.params.id
+ )
+},
 
   computed: {
+      ...mapGetters("horSib", ["gettersMarcheHorsib"]),
      ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
      'nombremarchesExecute',
@@ -462,7 +444,7 @@ export default {
 
     },
  deveroueconomiq() {
-      return this.formData.unite_administrative_id =="";
+      return this.editMarcheHorSib.unite_administrative_id =="";
     },
      afficherPlanEconomique() {
       return id => {
@@ -488,7 +470,7 @@ export default {
 
     ImputationBudget() {
 
-      const norme = this.budgetEclate.find(normeEquipe => normeEquipe.ligneeconomique_id == this.formData.ligneeconomique_id );
+      const norme = this.budgetEclate.find(normeEquipe => normeEquipe.ligneeconomique_id == this.editMarcheHorSib.ligneeconomique_id );
      
 
       if (norme) {
@@ -540,7 +522,7 @@ afficherCodeStructure(){
     
 
  //reucperation annee budgetaire dynamique
-   anneeBugetaire(){
+   anneeBugetaireModifier(){
      const anneBudget = this.exercices_budgetaires.find(anneBudg =>anneBudg.encours == 1 );
      if(anneBudget){
        return anneBudget.annee;
@@ -551,9 +533,7 @@ afficherCodeStructure(){
 
   },
   methods: {
-    ...mapActions("horSib", ['ajouterMarcheHorSib','modifierMarcheHorSib','supprimerMarcheHorSib',
-     
-    ]),
+    ...mapActions("horSib", ['modifierMarcheHorSib']),
     allerPageMarcheHorsib(){
        this.$router.push({
           name:'GestionMarcheHorSib'  
@@ -575,21 +555,21 @@ afficherCodeStructure(){
 
             // ajouter marche hors sib
 
-            ajouterMarcheHorSibLocal(){
+            modifierMarcheHorSibLocal(){
                this.$router.push({
                  name:'GestionMarcheHorSib'  
                })
               var nouvelObjet = {
-                ...this.formData,
-               exo_id:this.anneeBugetaire,
+                ...this.editMarcheHorSib,
+               exo_id:this.anneeBugetaireModifier,
                imputation:this.ImputationBudget
               }
-             this.ajouterMarcheHorSib(nouvelObjet) 
-              this.formData ={
+             this.modifierMarcheHorSib(nouvelObjet) 
+              this.editMarcheHorSib ={
             latitude:"",
       longitude:"",
       localisation_geographie_id:"",
-      libelle_procedure:"",
+     /// libelle_procedure:"",
         type_financement:"",
         source_financement:"",
             objet:"",
@@ -632,3 +612,5 @@ afficherCodeStructure(){
 
 }
 </style>
+
+

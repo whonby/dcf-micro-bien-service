@@ -139,6 +139,10 @@ this.getAllRealiteServiceFait()
      this.getAllBudgetEclate()
 // this.getTypeProcedure()
 
+// les get des marches hors sib
+
+this.getMarcheHorSib()
+
 
 
 
@@ -397,7 +401,9 @@ this.getMembreCojo()
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
 
-          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances"])
+          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances"]),
+
+          ...mapActions('horSib',['getMarcheHorSib'])
 
 
   },

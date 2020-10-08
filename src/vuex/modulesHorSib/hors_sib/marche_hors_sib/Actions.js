@@ -6,7 +6,7 @@ var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
 export  function  getMarcheHorSib({commit}) {
-    queue.push(() => axios.get('/url').then((response) => {
+    queue.push(() => axios.get('/marche_hors_sib').then((response) => {
       
       commit('GET_ALL_MARCHE_HORS_SIB', response.data) 
       
@@ -16,7 +16,7 @@ export  function  getMarcheHorSib({commit}) {
 
    // 
    export function ajouterMarcheHorSib({commit},formData){
-    asyncLoading( axios.post('/url',formData)).then(response => {
+    asyncLoading( axios.post('/marche_hors_sib',formData)).then(response => {
          commit('AJOUTER_MARCHE_HORS_SIB', response.data)
          this.$app.$notify({
            title: 'success ',
@@ -28,7 +28,7 @@ export  function  getMarcheHorSib({commit}) {
  }
 
  export function modifierMarcheHorSib({commit}, element_modifie){
-    asyncLoading( axios.put('/url/'+ element_modifie.id, element_modifie))
+    asyncLoading( axios.put('/marche_hors_sib/'+ element_modifie.id, element_modifie))
      .then(response => {
           commit('MODIFIER_MARCHE_HORS_SIB',response.data)
  
@@ -49,6 +49,6 @@ export  function  getMarcheHorSib({commit}) {
     .then(dialog => {
        commit('SUPPRIMER_MARCHE_HORS_SIB', id)
       // // dialog.loading(false) // stops the proceed button's loader
-        axios.delete('/url/' + id).then(() => dialog.close() )   
+        axios.delete('/marche_hors_sib/' + id).then(() => dialog.close() )   
     })
 }

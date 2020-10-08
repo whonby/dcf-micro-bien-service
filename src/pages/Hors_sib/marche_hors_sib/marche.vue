@@ -34,9 +34,9 @@
         <div class="widget-box">
          
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des catégories de missions</h5>
+            <h5>Liste des marchés hors sib</h5>
              <div align="right">
-        Recherche: <input type="text" >
+        Recherche: <input type="text" v-model="search">
 
           </div>
              
@@ -57,25 +57,49 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                    <th>Code</th>
-                  <th>Libellé</th>
+                  <th>Année</th>
+                  <th>UA</th>
+                  <th>Reférence marché</th>
+                  <th>Objet marché</th>
+                  <th>Type de marché</th>
+                   <th>Procedure de passation</th>
+                  <th>Imputation</th>
+                  <th>Localisation géographie</th>
+                   <th>Montant prevu</th>
                    <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="activites  in  gettersMarcheHorsib"
+                <tr class="odd gradeX" v-for="activites  in  marcheHorSibFiltre"
                  :key="activites.id">
-                  <td @dblclick="afficherModalModifierBudgetaire(activites.id)">
-                      {{activites.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierBudgetaire(activites.id)">
-                      {{activites.libelle || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{activites.exo_id || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{afficherLibelleUa(activites.unite_administrative_id) || 'Non renseigné'}}</td>
+                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{activites.reference_marche || 'Non renseigné'}}</td>
+                       <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{activites.objet || 'Non renseigné'}}</td>
+                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{afficherLibelleTypeMarche(activites.type_marche_id) || 'Non renseigné'}}</td>
+
+                    <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{afficherLibelleProcedurePassation(activites.procedure_passation_id) || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{activites.imputation || 'Non renseigné'}}</td>
+                                     <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{afficherLibelleLocalisationGeographie(activites.localisation_geographie_id) || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{formatageSomme(parseFloat(activites.montant_marche)) || 'Non renseigné'}}</td>
+                 
+
                    
                   <td>
 
 
 
               <div class="btn-group">
-              <button @click.prevent="supprimerCategorieMission(activites.id)"  class="btn btn-danger ">
+              <button @click.prevent="supprimerMarcheHorSib(activites.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
@@ -127,9 +151,11 @@
 
 <script>
 import {mapGetters, mapActions} from "vuex"
+import {formatageSomme} from "../../../Repositories/Repository"
 export default {
   data(){
     return{
+      search:""
 
     }
   },
@@ -137,10 +163,95 @@ export default {
 
   },
   computed:{
- ...mapGetters("horSib", ["gettersMarcheHorsib"])
+    
+ ...mapGetters("horSib", ["gettersMarcheHorsib"]),
+  ...mapGetters("uniteadministrative",['getterligneExempter','uniteAdministratives',"budgetGeneral",
+      "getPersonnaliseBudgetGeneral","groupUa", "budgetEclate","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
+      "montantBudgetGeneral", ]),
+
+      ...mapGetters("bienService", ["procedurePassations","typeMarches"]),
+      ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires',"grandes_natures",
+ 'structures_geographiques','localisations_geographiques']),
+
+     marcheHorSibFiltre(){
+
+     const searchTerm = this.search.toLowerCase();
+
+return this.afficherListeMarcheHorSib.filter((item) => {
+  
+     return item.objet.toLowerCase().includes(searchTerm) ||
+            item.reference_marche.toLowerCase().includes(searchTerm) 
+           //|| item.uabudget_eclate.libelle.toLowerCase().includes(searchTerm) 
+   }
+)
+   },
+
+ // afficher la liste des marchés hors sib
+
+ afficherListeMarcheHorSib(){
+
+       return this.gettersMarcheHorsib.filter(item =>item.plan_passation_marche_id==null && item.sib==1)
+   
+  
+ },
+
+ //afficher llibelle type de marché
+ afficherLibelleTypeMarche(){
+ return id =>{
+     if(id!=null && id!=""){
+       let response = this.typeMarches.find(item => item.id==id)
+       if(response){
+         return response.libelle
+       }
+     }
+   }
+ },
+ // afficher libelle unité administrative
+
+ afficherLibelleUa(){
+   return id =>{
+     if(id!=null && id!=""){
+       let response = this.uniteAdministratives.find(item => item.id==id)
+       if(response){
+         return response.libelle
+       }
+     }
+   }
+ },
+
+ // afficher procedure passation
+ afficherLibelleProcedurePassation(){
+   return id =>{
+     if(id!=null && id!=""){
+       let response = this.procedurePassations.find(item => item.id==id)
+       if(response){
+         return response.libelle
+       }
+     }
+   }
+ },
+ // afficher le libelle de localisation geographie
+
+  afficherLibelleLocalisationGeographie(){
+   return id =>{
+     if(id!=null && id!=""){
+       let response = this.localisations_geographiques.find(item => item.id==id)
+       if(response){
+         return response.libelle
+       }
+     }
+   }
+ },
   },
   methods:{
-...mapActions("horSib",[""])
+...mapActions("horSib",["supprimerMarcheHorSib"]),
+formatageSomme:formatageSomme,
+
+afficherModifierMarcheHorSib(id){
+		this.$router.push({
+			path:"/modifier-marche-hors-sib/" + id
+		});
+	},
 
   }
   
