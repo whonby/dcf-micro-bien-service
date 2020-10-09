@@ -9,8 +9,8 @@ afficherCodeProcedurePassation
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#tab0000">Tous les marchés    <span class="badge badge" ></span></a></li>
                                
-                               <!-- <li ><a data-toggle="tab" href="#tab100"> Planification        <span class="badge badge-important" > </span></a></li>
-                                <li ><a data-toggle="tab" href="#tab10"> Contratualisation        <span class="badge badge-success" ></span></a></li>
+                               <li ><a data-toggle="tab" href="#tab1000"> Planification        <span class="badge badge-important" > </span></a></li>
+                                <!-- <li ><a data-toggle="tab" href="#tab10"> Contratualisation        <span class="badge badge-success" ></span></a></li>
                                 <li><a data-toggle="tab" href="#tab20"> Exécution      <span class="badge badge-warning" ></span></a></li>
                                
                                  <li><a data-toggle="tab" href="#tab20002">Résiliés    <span class="badge badge-info" > </span></a></li>
@@ -42,21 +42,20 @@ afficherCodeProcedurePassation
                <table class="table table-bordered table-striped" >
                 <thead>
                 <tr>
-                    <th>Année</th>
-                      <th>UA</th>
-                    <th>Type marché</th>
-                    <th>Mode de passation</th>
-                    <th>Activité</th>
-                    <th>Imputation</th>
-                    <!-- <th>Ligne Budgetaire</th> -->
-                    <th>Objet marché</th>
-                    <th>Référence marché</th>
-                     <th>Statut</th>
-                    <th>Montant prévu</th>
-                    <th>Montant réel</th>
+                   <th>Année</th>
+                  <th>UA</th>
+                  <th>Reférence marché</th>
+                  <th>Objet marché</th>
+                  <th>Type de marché</th>
+                   <th>Procedure de passation</th>
+                  <th>Imputation</th>
+                  <th>Localisation géographie</th>
+                   <th>Montant prevu</th>
                     <th title="mouvement du marché">Mouvement marché</th>
-                    <th>Etat en cours</th>
+                     <th>Statut</th>
+                    
                     <th>Cycle de vie</th>
+                    <th>Etat en cours</th>
                    <th colspan="3">Action</th>
                   </tr>
                 </thead>
@@ -67,36 +66,32 @@ afficherCodeProcedurePassation
                  :key="activites.id">
                   <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{activites.exo_id || 'Non renseigné'}}</td>
-
                    <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{afficherLibelleUa(activites.unite_administrative_id) || 'Non renseigné'}}</td>
-
                       <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{activites.reference_marche || 'Non renseigné'}}</td>
-
                  <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{activites.objet || 'Non renseigné'}}</td>
-                  
                       <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{afficherLibelleTypeMarche(activites.type_marche_id) || 'Non renseigné'}}</td>
-
                       <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{afficherCodeProcedurePassation(activites.procedure_passation_id) || 'Non renseigné'}}</td>
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(marche.id)">
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{activites.imputation || 'Non renseigné'}}</td>
-
                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{afficherLibelleLocalisationGeographie(activites.localisation_geographie_id) || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{formatageSomme(parseFloat(activites.montant_marche)) || 'Non renseigné'}}</td>
+                   
                     <td>
 
                          <span v-if="activites.economique_id == CodeExempte(activites.economique_id) ">Exemptée procedure</span>
                          <span v-else>Ligne à marché</span>
                        </td>
                         
-                        <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{formatageSomme(parseFloat(activites.montant_marche)) || 'Non renseigné'}}</td>
+                      
            <td>
                      <button 
                       v-if="activites.attribue == 2"  class="btn  btn-warning">
@@ -196,14 +191,15 @@ afficherCodeProcedurePassation
                       <td>
                           
                       </td>
-                      <td>
-                          
+                     <td style="font-weight:bold;"> Total Marché
                       </td>
                       
-                       <td style="font-weight:bold;"> Total Marché
-                      </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
-                           {{formatageSomme(parseFloat(0))}}
+                           {{formatageSomme(parseFloat(montantMarche))}}
+                           
+                      </td>
+                       <td>
+                         
                            
                       </td>
                        <td>
@@ -232,6 +228,10 @@ afficherCodeProcedurePassation
                 </tbody>
               </table>
                         </div>
+
+             
+
+
 
 
 
@@ -387,6 +387,10 @@ return this.afficherListeMarcheHorSib.filter((item) => {
    }
 )
    },
+
+   montantMarche(){
+  return this.afficherListeMarcheHorSib.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+},
 
  // afficher la liste des marchés hors sib
 

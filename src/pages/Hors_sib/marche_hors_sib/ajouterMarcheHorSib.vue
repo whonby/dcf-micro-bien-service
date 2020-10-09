@@ -4,7 +4,7 @@
    <div>
       <div align="center" style="margin-">
         <h3> Marchés /Contrats</h3>
-      </div>
+      </div><br>
     <div class="">
         <table class="table table-bordered table-striped">
             <tr>
@@ -178,7 +178,7 @@
             
                <select v-model="formData.procedure_passation_id" class="span4" >
                <option v-for="plans in procedurePassations" :key="plans.id" 
-               :value="plans.id">{{plans.code}}</option>
+               :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
           </div>
