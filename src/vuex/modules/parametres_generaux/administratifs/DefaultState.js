@@ -22,7 +22,8 @@ const defaultstate = {
   plan_pays:[],
 structureOrganigrammeUa: [],
 planOrganigrammeUa:[],
-gestionModules:[]
+gestionModules:[],
+  localisation_geographique_all:[]
 };
 
  export default defaultstate

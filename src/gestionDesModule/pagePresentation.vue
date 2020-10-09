@@ -12,7 +12,7 @@
 <br>
 <br>
 
-      <table class="table table-bordered table-striped" style="background-color: #ffffff;">
+      <table class="table " style="background-color: #2E363F;">
         <tr>
           <td>
             <center>
@@ -28,7 +28,7 @@
 
             </router-link>
           </td>
-          <td style="width:88%;text-align: center;font-size:25px;padding:50px 50px;font-weight:bold;">
+          <td style="width:88%;text-align: center;font-size:20px;padding:50px 50px;font-weight:bold; color: #fff">
             <P>SYSTEME D'INFORMATION DECISIONNELLE DU CONTRÖLEUR FINANCIER  </P>
             <P>(SID-CF)</P>
           </td>

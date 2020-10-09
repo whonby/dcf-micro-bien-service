@@ -6,8 +6,8 @@ import Vue from 'vue'
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:8000/api';
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-
+import "leaflet-sidebar-v2/css/leaflet-sidebar.min.css";
+import ViewUI from 'view-design';
 import Default from '../src/layouts/Default.vue'
 import NoSidebar from '../src/layouts/NoSidebar.vue'
 import VuejsDialog from 'vuejs-dialog';
@@ -39,7 +39,11 @@ import PrettyCheckbox from 'pretty-checkbox-vue'
 // import PrettyInput from 'pretty-checkbox-vue/input';
 // import PrettyCheck from 'pretty-checkbox-vue/check';
 // import PrettyRadio from 'pretty-checkbox-vue/radio';
-
+import VueTelInput from 'vue-tel-input'
+import LDrawToolbar from 'vue2-leaflet-draw-toolbar';
+// ...
+Vue.component('l-draw-toolbar', LDrawToolbar);
+Vue.use(VueTelInput)
 // Vue.component('p-input', PrettyInput);
 // Vue.component('p-check', PrettyCheck);
 // Vue.component('p-radio', PrettyRadio);
@@ -50,6 +54,7 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 // Init plugin
 Vue.use(Loading);
+Vue.use(ViewUI);
 Vue.use(VueFormWizard)
 Vue.component('v-marker-cluster', Vue2LeafletMarkerCluster)
 Vue.component('downloadExcel', JsonExcel)

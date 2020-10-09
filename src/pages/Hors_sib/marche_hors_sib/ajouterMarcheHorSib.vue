@@ -3,7 +3,7 @@
 
    <div>
       <div align="center" style="margin-">
-        <h3> Marché/Contrat</h3>
+        <h3> Marchés /Contrats</h3>
       </div>
     <div class="">
         <table class="table table-bordered table-striped">
@@ -178,7 +178,7 @@
             
                <select v-model="formData.procedure_passation_id" class="span4" >
                <option v-for="plans in procedurePassations" :key="plans.id" 
-               :value="plans.id">{{plans.libelle}}</option>
+               :value="plans.id">{{plans.code}}</option>
            </select>
             </div>
           </div>
@@ -512,14 +512,14 @@ export default {
 
 // recuperer la tailler du getter structure localisation
 recupererLataille(){
-  return this.structures_geographiques.length
+  return this.structures_geographiques.length-2
 },
 
 // 
 afficherCodeStructure(){
       return id =>{
         if(id!=null && id!=""){
-          let objet = this.structures_geographiques.find(item => item.id==id)
+          let objet = this.structures_geographiques.find(item => item.id==id )
           if(objet){
             return objet.niveau
           }

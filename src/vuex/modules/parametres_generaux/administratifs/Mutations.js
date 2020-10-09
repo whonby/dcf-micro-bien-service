@@ -646,6 +646,11 @@ export const SUPPRIMER_PLAN_ORGANIGRAMME_UA = (state, id) => {
     )
 }
 
+
+export const GET_LOCALISATION_GEO_ALL = (state, tableau_titres) => {
+    state.localisation_geographique_all = tableau_titres
+}
+
 export {
     
     GET_PLAN_PAYS,

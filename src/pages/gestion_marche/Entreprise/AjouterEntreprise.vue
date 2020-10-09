@@ -112,6 +112,8 @@
                                                     <label class="control-label">Téléphone:</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Téléphone" v-model="formData.telephone">
+<!--                                                      <vue-tel-input v-model="formData.telephone"></vue-tel-input>-->
+<!--                                                      {{formData.telephone}}-->
                                                     </div>
                                                 </div>
              </td>
@@ -313,10 +315,12 @@
 </template>
 
 <script>
-
+//import VueTelInput from 'vue-tel-input';
     import {mapGetters, mapActions} from 'vuex'
     export default {
-
+      // components:{
+      //   VueTelInput
+      // },
         data() {
             return {
                 fabActions: [
