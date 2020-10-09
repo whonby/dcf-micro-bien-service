@@ -2,24 +2,20 @@ afficherCodeProcedurePassation
 <template>
     <div class="container-fluid">
     
-       
-
-
-    <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
          <div class="row-fluid">
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab2078">Tous les marchés    <span class="badge badge" ></span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab0000">Tous les marchés    <span class="badge badge" ></span></a></li>
                                
-                               <li ><a data-toggle="tab" href="#tab100"> Planification        <span class="badge badge-important" > </span></a></li>
+                               <!-- <li ><a data-toggle="tab" href="#tab100"> Planification        <span class="badge badge-important" > </span></a></li>
                                 <li ><a data-toggle="tab" href="#tab10"> Contratualisation        <span class="badge badge-success" ></span></a></li>
                                 <li><a data-toggle="tab" href="#tab20"> Exécution      <span class="badge badge-warning" ></span></a></li>
-                                <!-- <li><a data-toggle="tab" href="#tab208">Marchés Terminés      <span class="badge badge" >     {{0}}</span></a></li> -->
+                               
                                  <li><a data-toggle="tab" href="#tab20002">Résiliés    <span class="badge badge-info" > </span></a></li>
                                     <li><a data-toggle="tab" href="#tab20789">Suspendus   <span class="badge badge" > </span></a></li>
-                                  <li><a data-toggle="tab" href="#tab2000256"> Terminé    <span class="badge badge-inverse" ></span></a></li>
+                                  <li><a data-toggle="tab" href="#tab2000256"> Terminé    <span class="badge badge-inverse" ></span></a></li> -->
                                  
                                
                             </ul>
@@ -32,30 +28,33 @@ afficherCodeProcedurePassation
                    </router-link> 
 
                    </div><br>
-                         <div id="tab2078" class="tab-pane active">
-                             <div class="widget-title">
+                    <div id="tab0000" class="tab-pane active">
+                    <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des March&eacute;s</h5>
+              <h5>Liste des March&eacute;s hors sib</h5>
               <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
               </div>
             </div>
-              <table class="table table-bordered table-striped" >
+               <table class="table table-bordered table-striped" >
                 <thead>
                 <tr>
                     <th>Année</th>
-                  <th>UA</th>
-                  <th>Reférence marché</th>
-                  <th>Objet marché</th>
-                  <th>Type de marché</th>
-                   <th>Procedure de passation</th>
-                  <th>Imputation</th>
-                  <th>Localisation géographie</th>
-                   <th>Montant prevu</th>
-                  <!-- <th title="mouvement du marché">Mouvement marché</th> -->
+                      <th>UA</th>
+                    <th>Type marché</th>
+                    <th>Mode de passation</th>
+                    <th>Activité</th>
+                    <th>Imputation</th>
+                    <!-- <th>Ligne Budgetaire</th> -->
+                    <th>Objet marché</th>
+                    <th>Référence marché</th>
+                     <th>Statut</th>
+                    <th>Montant prévu</th>
+                    <th>Montant réel</th>
+                    <th title="mouvement du marché">Mouvement marché</th>
                     <th>Etat en cours</th>
                     <th>Cycle de vie</th>
                    <th colspan="3">Action</th>
@@ -63,35 +62,77 @@ afficherCodeProcedurePassation
                 </thead>
                 <tbody>
                  
-                        <tr class="odd gradeX" v-for="activites in 
+                  <tr class="odd gradeX" v-for="activites in 
                 marcheHorSibFiltre"
                  :key="activites.id">
-                 <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{activites.exo_id || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{activites.exo_id || 'Non renseigné'}}</td>
+
+                   <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{afficherLibelleUa(activites.unite_administrative_id) || 'Non renseigné'}}</td>
+
                       <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{activites.reference_marche || 'Non renseigné'}}</td>
-                       <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+
+                 <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{activites.objet || 'Non renseigné'}}</td>
+                  
                       <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{afficherLibelleTypeMarche(activites.type_marche_id) || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{afficherCodeProcedurePassation(activites.procedure_passation_id) || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{activites.imputation || 'Non renseigné'}}</td>
-                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{afficherLibelleLocalisationGeographie(activites.localisation_geographie_id) || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{formatageSomme(parseFloat(activites.montant_marche)) || 'Non renseigné'}}</td>
 
-                      <td>
-                    
-                      <router-link :to="{ name: 'DetailMarchePs', params: { id: activites.id }}"
-                class="btn btn-default " title="historique la contratualisation">
-                  <span class=""><i class=" icon-folder-open"></i></span>
-                    </router-link>
+                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{afficherCodeProcedurePassation(activites.procedure_passation_id) || 'Non renseigné'}}</td>
+                    <!-- <td @dblclick="afficherModalModifierTypePrestation(marche.id)">
+                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{activites.imputation || 'Non renseigné'}}</td>
+
+                     <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{afficherLibelleLocalisationGeographie(activites.localisation_geographie_id) || 'Non renseigné'}}</td>
+                    <td>
+
+                         <span v-if="activites.economique_id == CodeExempte(activites.economique_id) ">Exemptée procedure</span>
+                         <span v-else>Ligne à marché</span>
+                       </td>
+                        
+                        <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{formatageSomme(parseFloat(activites.montant_marche)) || 'Non renseigné'}}</td>
+           <td>
+                     <button 
+                      v-if="activites.attribue == 2"  class="btn  btn-warning">
+                <span title="MARCHE EN EXERCUTER" style="">EX</span>
+       
+                </button>
+                <button 
+                      v-else-if="activites.attribue == 1"  class="btn  btn-success">
+                <span title=" MARCHE EN COURS DE CONTRATUALISATION">CT</span>
+       
+                </button>
+                 <button 
+                      v-else-if="activites.attribue == 3"  class="btn  btn-info">
+                <span title="MARCHE RESILIE" >RE</span>
+       
+                </button>
+                 <button v-else-if="activites.attribue == 5" class="btn  btn-inverse">
+              
+                <span title="MARCHE EN TERMINE">TE</span>
+                </button>
+                   <button v-else-if="activites.attribue == 7" class="btn  btn">
+              
+                <span title="MARCHE SUSPENDU">SU</span>
+                </button>
+ <button v-else class="btn  btn-danger">
+              
+                <span title="MARCHE EN PLANIFICATION">PL</span>
+                </button>
                    </td>
+  
+                   <!-- <td>
+                      <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                                    class="btn btn-inverse " title="Cycle de vie du marche">
+                           <span class=""><i class=" icon-calendar"></i></span>
+                       </router-link>
+                   </td> -->
                    <td >
                         <router-link :to="{ name: 'CycleDeVie', params: { id: activites.id }}"
                  class="btn btn-inverse " title="Cycle de vie du marche">
@@ -99,6 +140,13 @@ afficherCodeProcedurePassation
     </router-link>
                    </td>
                    
+                   <td>
+                    
+                      <router-link :to="{ name: 'DetailMarchePs', params: { id: activites.id }}"
+                class="btn btn-default " title="historique la contratualisation">
+                  <span class=""><i class=" icon-folder-open"></i></span>
+                    </router-link>
+                   </td>
                    <td>
                      <router-link :to="{ name: 'detailExecution', params: { id: activites.id }}"
                 class="btn btn-default " title="historique execution Marche">
@@ -111,6 +159,16 @@ afficherCodeProcedurePassation
                 <span class=""><i class="icon-trash"></i></span></button>
                    </td>
                    
+ 
+<!-- <td>
+    <div class="btn-group">
+
+                    
+              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+</td> -->
                    
 
                        </tr>
@@ -144,10 +202,10 @@ afficherCodeProcedurePassation
                       
                        <td style="font-weight:bold;"> Total Marché
                       </td>
-                       <!-- <td  style="text-align: center;color:red;font-weight:bold;">
-                           {{formatageSomme(parseFloat(montantMarche))}}
+                       <td  style="text-align: center;color:red;font-weight:bold;">
+                           {{formatageSomme(parseFloat(0))}}
                            
-                      </td> -->
+                      </td>
                        <td>
                           
                       </td>
@@ -173,40 +231,17 @@ afficherCodeProcedurePassation
                     </tr>
                 </tbody>
               </table>
-          
-
-
                         </div>
 
 
 
                     </div>
 
-<!--   
-<div class="modal-footer">
-        
-        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="" href="#">Voir Tableau</a>
-       
-      </div> -->
-
                 </div>
             </div>
         </div>
 
-         <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-    
-    <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
 
-
- <!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
-
-    <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
-
-    <!-- <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjoutTypaPrestation()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
-<!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
-<notifications  />
     </div>
 </template>
 
