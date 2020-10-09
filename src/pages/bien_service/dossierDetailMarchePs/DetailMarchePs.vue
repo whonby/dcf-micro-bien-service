@@ -185,7 +185,7 @@ CodeExempte
                                 <li class=""><a data-toggle="tab" href="#tab78932">Jugement</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab4110">PV Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab178">Attribution</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab0142">bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab0142">Bailleur</a></li>
 
                             
                                 
@@ -296,7 +296,7 @@ CodeExempte
                                 <li class=""><a data-toggle="tab" href="#tab9563"> Jugement </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab06125">PV Jugement</a></li>
                                <li class=""><a data-toggle="tab" href="#tab067458">Attribution</a></li>
-                               <li class=""><a data-toggle="tab" href="#tab0143723">bailleur</a></li>
+                               <li class=""><a data-toggle="tab" href="#tab0143723">Bailleur</a></li>
                                 
                             </ul>
                         </div>
@@ -447,7 +447,7 @@ CodeExempte
                                 <li class=""><a data-toggle="tab" href="#tab5498"> Jugement </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0612">PV Jugement</a></li>
                                <li class=""><a data-toggle="tab" href="#tab06745">Attribution</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab01432">bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab01432">Bailleur</a></li>
                                 
                             </ul>
                         </div>
@@ -612,7 +612,7 @@ CodeExempte
 
                                 <li class=""><a data-toggle="tab" href="#tab10">Attribution</a></li>
 
-                                <li class=""><a data-toggle="tab" href="#tab0143720">bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab0143720">Bailleur</a></li>
                                
                                 
                             </ul>
@@ -889,7 +889,7 @@ CodeExempte
    //  import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
 import rapportOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
      
-   import componentBailleur from '../dossierDetailMarchePs/dossierBailleur/componentBailleur';
+   import componentBailleur from '../../bien_service/component/bailleurMarche';
 
       import executionLigneExempte from '../executionLigneExempte/executionLigneExempte';
 

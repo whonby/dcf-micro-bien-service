@@ -50,12 +50,20 @@
             <span class="label label-important"></span>
           </a>
         </li> -->
-         <li @click.prevent="navigateToTransfert">
+         <!-- <li @click.prevent="navigateToTransfert">
           <a title="BUDGET ECLATE" href="#">
             <i class="icon-money"></i>
             <span>BUDGET ECLATE</span>
             <span class="label label-important"></span>
           </a>
+        </li> -->
+        <li >
+           <router-link :to="{ name: 'BudgetEclatePrincipal'}" tag="a"  >
+         
+            <i class="icon-arrow-left"></i>
+            <span>BUDGET ECLATE</span>
+           
+          </router-link>
         </li>
          <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==19}">
           <a href="#">

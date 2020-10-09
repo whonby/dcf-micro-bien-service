@@ -5,7 +5,7 @@ import typetext from "../../pages/unites_administratives/type_texte.vue";
 import archivagedocument from "../../pages/unites_administratives/archivage_document.vue";
 import listeuniteadministrative from "../../pages/unites_administratives/liste_unite_administrative.vue";
 import listetypetexte from "../../pages/unites_administratives/liste_type_texte.vue";
-import ordonnedocua from "../../pages/unites_administratives/ordonne_doc_ua.vue";
+// import ordonnedocua from "../../pages/unites_administratives/ordonne_doc_ua.vue";
 import budgetGenerals from "../../pages/unites_administratives/budgetGeneralComponent.vue";
 import DetailbudgetGeneralsNew from "../../pages/unites_administratives/detailBudgetParUa/budgetGeneralComponent.vue";
 import budgetGeneralParUa from "../../pages/unites_administratives/budgetGeneral.vue"
@@ -31,9 +31,16 @@ import StructureOrganigramme from "../../pages/parametres_generaux/administratif
 import Synthesebudg from "../../pages/gestionMarche/synthesebudg.vue";
 import decompte from "../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte.vue";
 import listeBudgetIntialParUa from "../../pages/unites_administratives/filtreDesBudgetSurTableauBord/listeBudgetIntialParUa.vue";
-import BudgetEclatePrincipal from "../../pages/VueGestionHorsSib/grpeBudgetEclate/BudgetEclatePrincipal.vue"
+import BudgetEclatePrincipal from "../../pages/Hors_sib/grpeBudgetEclate/BudgetEclateProjet.vue"
+
+import ListeBudgeteclate from "../../pages/Hors_sib/grpeBudgetEclate/ListeBudgetEclate.vue"
 const UniteAdministativeRoutes = [
- 
+  {
+    path: "/ListeBudgeteclate/:id",
+    name: "ListeBudgeteclate",
+    component: ListeBudgeteclate
+}
+,
   {
     path: "/Budget-Eclate",
     name: "BudgetEclatePrincipal",
@@ -165,11 +172,11 @@ const UniteAdministativeRoutes = [
     name: "uniteadministrative",
     component: uniteadministrative
   },
-  {
-    path: "/ordonne_doc_ua",
-    name: "ordonnedocua",
-    component: ordonnedocua
-  },
+  // {
+  //   path: "/ordonne_doc_ua",
+  //   name: "ordonnedocua",
+  //   component: ordonnedocua
+  // },
   {
     path: "/liste-unite-administrative",
         name: "listeuniteadministrative",

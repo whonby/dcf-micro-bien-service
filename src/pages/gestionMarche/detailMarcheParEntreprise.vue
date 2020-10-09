@@ -164,6 +164,7 @@
             };
            
         },
+        
 created() {
             this.marcheid=this.$route.params.id
    this.detail_Entreprise = this.acteEffetFinanciers.find(

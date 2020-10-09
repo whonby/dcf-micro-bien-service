@@ -12,6 +12,7 @@
          
             <tr>
               <td>
+                
                 <div class="control-group">
                   <label class="control-label">Type d'unité administrative</label>
                   <div class="controls">
@@ -149,6 +150,17 @@
                     />
                   </div>
                   </div>
+                   <!-- <model-list-select style="background-color: rgb(255,255,255);"
+                                           class="wide"
+                                           :list="budgetEclate"
+                                           v-model="formData.ua_id"
+                                           option-value="id"
+                                           option-text= "test(uniteadministrative_id)"
+                                           placeholder="Selectionner l'entreprise"
+                                           
+                        >
+
+                        </model-list-select> -->
               </td>
             </tr>
           
@@ -533,7 +545,9 @@ created() {
     computed: {
     ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
-      "uniteAdministratives"
+      "uniteAdministratives",
+      "budgetEclate",
+      
       // "chapitres",
       // "sections"
     ]),
@@ -580,7 +594,18 @@ created() {
         }
       };
     },
-   
+   test() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
    calculerTaillerStructureAdministrative(){
      return this.structures_administratives.length
    },
