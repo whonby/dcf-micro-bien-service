@@ -106,13 +106,18 @@
               </table>
 
               <div v-if="nomRegion">
-                <div class="span2" style="font-size: 15px">Region</div>
-             <div class="span10" style="color: red;font-size: 15px"><h6>{{nomRegion}}</h6></div>
+                <div class="span4" style="font-size: 15px">Budget Region</div>
+             <div class="span8" style="color: red;font-size: 15px">{{nomRegion}}</div>
               </div>
               <div v-if="nomUniteAdministrative">
-                <div class="span2" style="font-size: 15px ; font-size: 15px">UA</div>
-                <div class="span10" style="color: #002aff; font-size: 15px">{{nomUniteAdministrative}}</div>
+                <div class="span3" style="font-size: 15px ; font-size: 15px">Budget UA</div>
+                <div class="span9" style="color: #002aff; font-size: 15px">{{nomUniteAdministrative}}</div>
               </div>
+
+              <div v-if="nomUniteAdministrative">
+              </div>
+              <div v-else-if="nomRegion"></div>
+              <div v-else> <div class="span12" style="font-size: 15px ; font-size: 15px">Budget Général</div></div>
 
               <div class="row-fluid" >
                 <div class="span5" v-if="montantBudegtPasUniteAdminOuRegion">
@@ -202,7 +207,7 @@
           <div class="">
             <div class="" style="height: 550px; width: 100%; border-bottom: none">
 
-              <l-map ref="map" class="sidebar-map" :zoom=6 :center="initialLocation" >
+              <l-map ref="map" class="sidebar-map" :zoom="zoom" :center="initialLocation" >
 
                 <l-icon-default></l-icon-default>
                 <l-control-layers position="topright"  ></l-control-layers>
@@ -466,7 +471,7 @@ export default {
       libelle_unite_admin:"",
       icon: customicon,
       clusterOptions: {},
-      zoom: 3,
+      zoom: 6,
       idzone:"",
       activeUa:false,
       zone_geographique:"",
@@ -956,6 +961,7 @@ console.log(vM.donutDataUniteOuRegions)
     },
     videRegions(){
       this.region=""
+      this.zoom=6
     },
     infoMarche(id){
       console.log(id)
