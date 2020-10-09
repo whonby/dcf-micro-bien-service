@@ -26,12 +26,12 @@
         </li>
 
 
-        <li :class="{active: active_el == 11 }" @click.prevent="navigateToTableauBord">
+        <!-- <li :class="{active: active_el == 11 }" @click.prevent="navigateToTableauBord">
           <a title="TABLEAU DE BORD" href="#">
             <i class="icon-dashboard"></i>
             <span>TABLEAU DE BORD</span>
           </a>
-        </li>
+        </li> -->
         <!-- <li v-if="admin() || dcf()" :class="{active: active_el == 17 }" @click.prevent="navigateToParametreGeneraux">
           <a title="PARAMETRES GENERAUX" href="#">
             <i class="icon-cogs"></i>
@@ -89,13 +89,13 @@
 
 
 
-        <li @click.prevent="navigateToCatographieBudgetaire" >
+        <!-- <li @click.prevent="navigateToCatographieBudgetaire" >
           <a title="CARTOGRAPHIE" href="#">
             <i class=" icon-globe"></i>
             <span>CARTOGRAPHIE</span>
             <span class="label label-important"></span>
           </a>
-        </li>
+        </li> -->
         <li >
           <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
 

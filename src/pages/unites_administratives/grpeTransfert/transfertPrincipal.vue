@@ -66,13 +66,13 @@
                 <div class="control-group">
                   <label class="control-label">Ligne budgétaire</label>
                   <div class="controls">
-                        <select v-model="formData.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire"
+                        <select v-model="formData.imputationbudget" :readOnly="verrouLigneBudgetaire"
                          class="span5">
                       <option
-                        v-for="localgeo in ligneBudgetaireDynamiques(formData.ua_id)"
+                        v-for="localgeo in ligneBudgetaireTransfertDynamiques(formData.ua_id)"
                         :key="localgeo.id"
-                        :value="localgeo.afficheEconomique.id"
-                      >{{localgeo.afficheEconomique.code}}-{{localgeo.afficheEconomique.libelle}}</option>
+                        :value="localgeo.codebudget"
+                      >{{localgeo.codebudget}}</option>
                     </select>
                    
                   </div>
@@ -87,7 +87,7 @@
                   <div class="controls">
                        <input
                       type="number"
-                   :value="afficheMontantTransfere(formData.ligne_budgetaire_id)"
+                   :value="afficheMontantTransfere(formData.imputationbudget)"
                       class="span4"
                      readonly
                       
@@ -103,7 +103,7 @@
                   <div class="controls">
                        <input
                       type="number"
-                   :value="montantCumul(formData.ligne_budgetaire_id)"
+                   :value="montantCumul(formData.imputationbudget)"
                       class="span4"
                      readonly
                       
@@ -170,7 +170,7 @@
                   <div class="controls">
                        <input
                       type="text"
-                  :value="GnDynamiques(afficheGrandeNature(formData.ligne_budgetaire_id))"
+                  :value="GnDynamiques(afficheGrandeNature(formData.imputationbudget))"
                       class="span5"
                      readonly
                       
@@ -408,12 +408,12 @@
                 <div class="control-group">
                   <label class="control-label">Ligne budgétaire</label>
                   <div class="controls">
-                        <select v-model="editTransfert.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire" class="span5">
+                        <select v-model="editTransfert.imputationbudget" :readOnly="verrouLigneBudgetaire" class="span5">
                       <option
-                        v-for="localgeo in ligneBudgetaireDynamiquesModifier(editTransfert.ua_id)"
+                        v-for="localgeo in ligneBudgetaireTransfertDynamiques(editTransfert.ua_id)"
                         :key="localgeo.id"
-                        :value="localgeo.afficheEconomique.id"
-                      >{{localgeo.afficheEconomique.code}}-{{localgeo.afficheEconomique.libelle}}</option>
+                        :value="localgeo.codebudget"
+                      >{{localgeo.codebudget}}</option>
                     </select>
                    
                   </div>
@@ -429,14 +429,14 @@
                   <div class="controls">
                        <input
                       type="number"
-                   :value="afficheMontantTransfereModifier(editTransfert.ligne_budgetaire_id)"
+                   :value="afficheMontantTransfereModifier(editTransfert.imputationbudget)"
                       class="span3"
                      readonly
                       
                     />
                      <input
                       type="hidden"
-                 :value="typeFinancement(editTransfert.ligne_budgetaire_id)"
+                 :value="typeFinancement(editTransfert.imputationbudget)"
                       class="span"
                    
                       
@@ -451,7 +451,7 @@
                   <div class="controls">
                        <input
                       type="number"
-                   :value="montantCumulModifier(editTransfert.ligne_budgetaire_id)"
+                   :value="montantCumulModifier(editTransfert.imputationbudget)"
                       class="span4"
                      readonly
                       
@@ -924,7 +924,30 @@ admin:admin,
 dcf:dcf,
 cf:cf,
 ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+affichereconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     Codeeconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 0
+        }
+      };
+    },
  afficherUAParDroitAccess() {
        // const st = this.search.toLowerCase();
         if (this.cf){
@@ -985,7 +1008,7 @@ montantCumul: function () {
                 return id => {
                     if (id != "") {
                   
-                        return  this.transferts.filter(normeEquipe => normeEquipe.ligne_budgetaire_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
+                        return  this.transferts.filter(normeEquipe => normeEquipe.imputationbudget == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
                     }
                     return 0
                 }
@@ -995,13 +1018,13 @@ montantCumulModifier: function () {
                 return id => {
                     if (id != "") {
                   
-                        return  this.transferts.filter(normeEquipe => normeEquipe.ligne_budgetaire_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
+                        return  this.transferts.filter(normeEquipe => normeEquipe.imputationbudget == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
                     }
                     return 0
                 }
             },
 dotationDisponible() {
-      const val = parseInt(this.afficheMontantTransfere(this.formData.ligne_budgetaire_id)) - parseInt(this.montantCumul(this.formData.ligne_budgetaire_id));
+      const val = parseInt(this.afficheMontantTransfere(this.formData.imputationbudget)) - parseInt(this.montantCumul(this.formData.imputationbudget));
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -1010,7 +1033,7 @@ dotationDisponible() {
       return 0
     },
 dotationDisponibleModifier() {
-      const val = parseInt(this.afficheMontantTransfereModifier(this.editTransfert.ligne_budgetaire_id)) - parseInt(this.montantCumulModifier(this.editTransfert.ligne_budgetaire_id));
+      const val = parseInt(this.afficheMontantTransfereModifier(this.editTransfert.imputationbudget)) - parseInt(this.montantCumulModifier(this.editTransfert.imputationbudget));
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -1096,10 +1119,22 @@ destinationDynamiquesModifier() {
     afficheMontantTransfereModifier() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == id);
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.codebudget == id);
 
       if (qtereel) {
         return qtereel.Dotation_Initiale;
+      }
+      return 0
+        }
+      };
+    },
+    afficheIdLigneEconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.codebudget == id);
+
+      if (qtereel) {
+        return qtereel.economique_id;
       }
       return 0
         }
@@ -1218,9 +1253,21 @@ return this.getPersonnaliseTransfert
             // );
     },
 
+ligneBudgetaireTransfertDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.budgetGeneral.filter(element => element.ua_id == id && element.actived == 1 && element.gdenature_id == 6);
+        }
+      };
+    },
 
-
-
+//  affichebudgetActive(){
+  
+//     var activeBudget= this.groupe.ua_budget_general.filter(element => element.actived == 1); 
+     
+//       return activeBudget
+  
+// },
 
 
 
@@ -1246,7 +1293,7 @@ return this.getPersonnaliseTransfert
     afficheMontantTransfere() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == id);
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.codebudget == id);
 
       if (qtereel) {
         return qtereel.Dotation_Initiale;
@@ -1268,10 +1315,10 @@ return this.getPersonnaliseTransfert
 typeFinancement() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetGeneral.find(element => element.economique_id == id);
+           const qtereel = this.budgetGeneral.find(element => element.codebudget == id);
 
       if (qtereel) {
-        return qtereel.typefinancement_id
+        return qtereel.fonctionnel_id
       }
       return 0
         }
@@ -1287,7 +1334,7 @@ typeFinancement() {
      afficheGrandeNature() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == id);
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.codebudget == id);
 
       if (qtereel) {
         return qtereel.gdenature_id;
@@ -1312,10 +1359,10 @@ typeFinancement() {
     afficheGrandeNatureid() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == id);
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.codebudget == id);
 
       if (qtereel) {
-        return qtereel.afficheGdeNature.id;
+        return qtereel.gdenature_id;
       }
       return 0
         }
@@ -1324,10 +1371,10 @@ typeFinancement() {
     afficheGrandeNatureidModifier() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == id);
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.codebudget == id);
 
       if (qtereel) {
-        return qtereel.afficheGdeNature.id;
+        return qtereel.gdenature_id;
       }
       return 0
         }
@@ -1411,12 +1458,13 @@ typeFinancement() {
       else{
   var nouvelObjet = {
         ...this.formData,
-        montant_transfert: this.afficheMontantTransfere(this.formData.ligne_budgetaire_id),
+        montant_transfert: this.afficheMontantTransfere(this.formData.imputationbudget),
          montant_restant: this.disponibleBudgetaire,
        acteurdepense_id:this.afficheActeurDepense1(this.formData.fonction_id),
-       grandnatire_id:this.afficheGrandeNatureid(this.formData.ligne_budgetaire_id),
-       typefinancement_id:this.typeFinancement(this.formData.ligne_budgetaire_id),
-       exerciceencours:this.anneeAmort
+       grandnatire_id:this.afficheGrandeNatureid(this.formData.imputationbudget),
+       typefinancement_id:this.typeFinancement(this.formData.imputationbudget),
+       exerciceencours:this.anneeAmort,
+       ligne_budgetaire_id:this.afficheIdLigneEconomique(this.formData.imputationbudget)
        
       };
       this.ajouterTransfert(nouvelObjet);
@@ -1455,14 +1503,15 @@ this.ajouterHistoriqueTransfert(nouvelObjet)
       else{
   var nouvelObjet = {
         ...this.editTransfert,...this.editTransfert1,
-        montant_transfert: this.afficheMontantTransfereModifier(this.editTransfert.ligne_budgetaire_id),
+        montant_transfert: this.afficheMontantTransfereModifier(this.editTransfert.imputationbudget),
          montant_restant: this.disponibleBudgetaireModifier,
        acteurdepense_id:this.afficheActeurDepenseIdModifier(this.editTransfert.fonction_id),
-       grandnatire_id:this.afficheGrandeNatureidModifier(this.editTransfert.ligne_budgetaire_id),
+       grandnatire_id:this.afficheGrandeNatureidModifier(this.editTransfert.imputationbudget),
      delaitraitement:this.nombreJourTraitementCalucle,
-    typefinancement_id:this.typeFinancement(this.editTransfert.ligne_budgetaire_id),
-    exerciceencours:this.anneeAmort
-
+    typefinancement_id:this.typeFinancement(this.editTransfert.imputationbudget),
+    exerciceencours:this.anneeAmort,
+    ligne_budgetaire_id:this.afficheIdLigneEconomique(this.editTransfert.imputationbudget),
+imputationbudget:this.imputationbudget
      
      
      };
