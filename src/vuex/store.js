@@ -25,7 +25,7 @@ import ModuleSuiviMission from './modules/suivi_controle_budgetaire/index'
 import ModulePlanificationBudgetaire from './modules/fabrice/planification_budgetaire/index'
 // bien et service
 import ModuleBienService from './modules/fabrice/bienService/index';
-
+import ModuleHorSib from './modulesHorSib/hors_sib/marche_hors_sib/index';
 
 
 
@@ -48,7 +48,13 @@ export default new Vuex.Store({
       suivi_controle_budgetaire : ModuleSuiviMission,
     planification_budgetaire: ModulePlanificationBudgetaire,
     bienService: ModuleBienService,
-    investissement:Moduleinvestissement
+    investissement:Moduleinvestissement,
+
+
+    // les differents modules de marcher hors sib
+
+
+    horSib:ModuleHorSib
 
 
       

@@ -1,0 +1,1 @@
+export const gettersMarcheHorsib = state => state.marcheHorsib

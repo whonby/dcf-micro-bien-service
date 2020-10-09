@@ -24,7 +24,7 @@
                        <input
                       type="text"
                     :value="anneeAmort"
-                      class="span4"
+                      class="span5"
                      readonly
                       
                     />
@@ -32,7 +32,7 @@
                   </div>
                 </div>
               </td>
-               <td>
+               <!-- <td colspan="2">
                 <div class="control-group">
                   <label class="control-label">UA Emettrice</label>
                   <div class="controls">
@@ -42,29 +42,42 @@
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
+                    </select> -->
+
+
+                    <!-- <model-list-select style="background-color: rgb(255,255,255);"
+                                           class="wide"
+                                           :list="uniteAdministratives"
+                                           v-model="formData.ua_id"
+                                           option-value="id"
+                                           option-text="libelle"
+                                           placeholder="Selectionner l'entreprise"
+                                           
+                        >
+
+                        </model-list-select> -->
+                  <!-- </div>
                 </div>
-              </td>
+              </td> -->
                <td>
                 <div class="control-group">
                   <label class="control-label">UA Réceptrice</label>
                   <div class="controls">
-                      <select v-model="formData.uniteadministrative_id" class="span4" :readOnly="verroBanque">
-                                <option v-for="varText in uAReceptriceDynamiques(formData.ua_id)" :key="varText[0].unitezone_id"
+                      <select v-model="formData.uniteadministrative_id" class="span5" >
+                                <option v-for="varText in GroupeUaReceptrice" :key="varText[0].unitezone_id"
                               :value="varText[0].unitezone_id">{{libelleUAdministrative(varText[0].unitezone_id)}}</option>
                             </select>
                   </div>
                 </div>
               </td>
-              <td colspan="2">
+               <td colspan="">
                 <div class="control-group">
                   <label class="control-label">Total disponible</label>
                   <div class="controls">
                        <input
                       type="text"
                    :value="RestantMontantTransferer"
-                      class="span4"
+                      class="span5"
                      readonly
                       
                     />
@@ -74,17 +87,20 @@
               </td>
              </tr>
               <tr>
+               
                <td>
                 <div class="control-group">
                   <label class="control-label">Ligne Economique</label>
                   <div class="controls">
-                    <select v-model="formData.d_ua_id" class="span4">
-                      <option
-                        v-for="typeUniteA in filtre_unite_admin"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
+                    <select v-model="formData.ligneeconomique_id" class="span5">
+                     <option
+                        v-for="Bgeneral in recupererDernierNiveauPlanEconomique(calculerTaillerStructureEconomique)"
+                        :key="Bgeneral.id"
+                        :value="Bgeneral.id"
+                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
                     </select>
+
+                    
                   </div>
                 </div>
               </td>
@@ -92,12 +108,12 @@
                 <div class="control-group">
                   <label class="control-label">Grande Nature</label>
                   <div class="controls">
-                    <select v-model="formData.d_ua_id" class="span4">
-                      <option
-                        v-for="typeUniteA in filtre_unite_admin"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
+                    <select v-model="formData.grandenature_id" class="span5">
+                       <option
+                        v-for="gdenature in grandes_natures"
+                        :key="gdenature.id"
+                        :value="gdenature.id"
+                      >{{gdenature.code}} - {{gdenature.libelle}}</option>
                     </select>
                   </div>
                 </div>
@@ -109,29 +125,15 @@
                        <input
                       type="text"
                    
-                      class="span4"
-                     
+                      class="span5"
+                     v-model="formData.dotation"
                       
                     />
                    
                   </div>
                 </div>
               </td>
-              <td colspan="">
-                <div class="control-group">
-                  <label class="control-label">Dotation Restante</label>
-                  <div class="controls">
-                       <input
-                      type="text"
-                   
-                      class="span4"
-                     
-                      
-                    />
-                   
-                  </div>
-                </div>
-              </td>
+              
              </tr>
             
               <tr>
@@ -161,11 +163,150 @@
         <h3>Modifier Direction</h3>
       </div>
       <div class="modal-body">
+         <table class="table table-bordered table-striped">
          
+            <tr>
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Exercice budgetaire</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                    :value="anneeAmort"
+                      class="span4"
+                     readonly
+                      
+                    />
+                   
+                  </div>
+                </div>
+              </td>
+               <!-- <td colspan="2">
+                <div class="control-group">
+                  <label class="control-label">UA Emettrice</label>
+                  <div class="controls"> -->
+                    <!-- <select v-model="formData.ua_id" class="span4">
+                      <option
+                        v-for="typeUniteA in UniteAdministrative"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select> -->
+
+
+                    <!-- <model-list-select style="background-color: rgb(255,255,255);"
+                                           class="wide"
+                                           :list="uniteAdministratives"
+                                           v-model="editBudgetEclate.ua_id"
+                                           option-value="id"
+                                           option-text="libelle"
+                                           placeholder="Selectionner l'entreprise"
+                                           
+                        >
+
+                        </model-list-select> -->
+                  <!-- </div>
+                </div>
+              </td> -->
+               <td>
+                <div class="control-group">
+                  <label class="control-label">UA Réceptrice</label>
+                  <div class="controls">
+                      <select v-model="editBudgetEclate.uniteadministrative_id" class="span4" :readOnly="verroBanque">
+                                <option v-for="varText in uAReceptriceDynamiques(editBudgetEclate.ua_id)" :key="varText[0].unitezone_id"
+                              :value="varText[0].unitezone_id">{{libelleUAdministrative(varText[0].unitezone_id)}}</option>
+                            </select>
+                      <!-- <model-list-select style="background-color: rgb(255,255,255);"
+                                           class="wide"
+                                           :list="uniteAdministratives"
+                                           v-model="editBudgetEclate.ua_id"
+                                           option-value="id"
+                                           option-text="libelle"
+                                           placeholder="Selectionner l'entreprise"
+                                           
+                        >
+
+                        </model-list-select> -->
+
+                  </div>
+                </div>
+              </td>
+              
+             </tr>
+              <tr>
+                <td colspan="">
+                <div class="control-group">
+                  <label class="control-label">Total disponible</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                   :value="RestantMontantTransferer"
+                      class="span4"
+                     readonly
+                      
+                    />
+                   
+                  </div>
+                </div>
+              </td>
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Ligne Economique</label>
+                  <div class="controls">
+                    <select v-model="editBudgetEclate.ligneeconomique_id" class="span4">
+                     <option
+                        v-for="Bgeneral in recupererDernierNiveauPlanEconomique(calculerTaillerStructureEconomique)"
+                        :key="Bgeneral.id"
+                        :value="Bgeneral.id"
+                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
+                    </select>
+
+                    
+                  </div>
+                </div>
+              </td>
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Grande Nature</label>
+                  <div class="controls">
+                    <select v-model="editBudgetEclate.grandenature_id" class="span4">
+                       <option
+                        v-for="gdenature in grandes_natures"
+                        :key="gdenature.id"
+                        :value="gdenature.id"
+                      >{{gdenature.code}} - {{gdenature.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+              <td colspan="">
+                <div class="control-group">
+                  <label class="control-label">Dotation</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                   
+                      class="span4"
+                     v-model="editBudgetEclate.dotation"
+                      
+                    />
+                   
+                  </div>
+                </div>
+              </td>
+              
+             </tr>
+            
+              <tr>
+                 
+              </tr>
+             
+      
+        </table>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierUniteAdministrativeLocal(editTransfert)"
+          @click.prevent="modifierUniteAdministrativeLocal(editBudgetEclate)"
           class="btn btn-primary"
           href="#"
          
@@ -242,11 +383,14 @@
 import { mapGetters, mapActions } from "vuex";
 import BudgetEclateComponent from './BudgetEclateComponent'
 import {admin,dcf,cf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
+  // import {  ModelListSelect } from 'vue-search-select'
+  //   import 'vue-search-select/dist/VueSearchSelect.css'
 // import { formatageSomme } from "../../../../src/Repositories/Repository";
 export default {
   name: 'transfert',
  components: {
-      BudgetEclateComponent
+      BudgetEclateComponent,
+      // ModelListSelect
   },
   data() {
     return {
@@ -270,15 +414,11 @@ export default {
           ],
      
       formData: {
-      	d_ua_id:"",
-      libelle: "",
+      	
      
       },
-      editTransfert: {
-     	d_ua_id:"",
-      libelle: "",
-      
-      
+      editBudgetEclate: {
+    
       },
      
        search:"",
@@ -331,7 +471,7 @@ export default {
     ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
-    ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+    ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire","structures_budgetaires"]),
  
  ...mapGetters('personnelUA', ['all_acteur_depense']),
  admin:admin,
@@ -340,6 +480,37 @@ export default {
         noDCfNoAdmin:noDCfNoAdmin,
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
    
+
+recupererDernierNiveauPlanEconomique() {
+      return id => {
+        if (id != null && id != "") {
+           return this.plans_budgetaires.filter(qtreel => this.RecupererNiveauStructureEconomique(qtreel.structure_budgetaire_id) == id);
+      
+        }
+      };
+    },
+   
+   RecupererNiveauStructureEconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structures_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau;
+      }
+      return 0
+        }
+      };
+    },
+   
+   calculerTaillerStructureEconomique(){
+     return this.structures_budgetaires.length
+   },
+
+
+
+
+
 
 
 
@@ -358,7 +529,7 @@ sommeTotalConsomme() {
         if (id != null && id != "") {
           return this.budgetEclate.filter(
             element => element.uniteadministrative_id == id
-          ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0);
+          ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
         }
          return 0
       };
@@ -450,9 +621,9 @@ UniteAdministrative() {
   methods: {
     ...mapActions("uniteadministrative", [
      
-      "ajouterDirection",
-      "modifierDirection",
-      "supprimerDirection",
+      "ajouterBudgetEclate",
+      "modifierBudgetEclate",
+      "supprimerBudgetEclate",
      
       // "ajouterHistoriqueBudgetGeneral"
     ]),
@@ -469,23 +640,37 @@ UniteAdministrative() {
     // fonction pour vider l'input ajouter
     ajouterUniteAdministrativeLocal() {
      
-      this.ajouterDirection(this.formData);
+      if(this.RestantMontantTransferer == 0){
+        alert("Pas de montant disponible")
+      }
+      else{
+        var nouvelObjet = {
+        ...this.formData,
+        	annebudgetaire: this.anneeAmort,
+         
+      };
+        this.ajouterBudgetEclate(nouvelObjet);
 
       this.formData = {
-       	d_ua_id:"",
-      libelle: "",
+       	uniteadministrative_id:"",
+      ligneeconomique_id: "",
+      	grandenature_id:"",
+      dotation: "",
       };
+      }
+
+      
       },
       
       // }
      
      supprimerBudget(id){
-      this.supprimerDirection(id)
+      this.supprimerBudgetEclate(id)
     },
     // fonction pour vider l'input modifier
     modifierUniteAdministrativeLocal() {
      
-      this.modifierDirection(this.editTransfert);
+      this.modifierBudgetEclate(this.editBudgetEclate);
    
 this.$("#modificationModal").modal('hide');
 
@@ -498,7 +683,7 @@ this.$("#modificationModal").modal('hide');
         keyboard: false
       });
 
-      this.editTransfert = articles;
+      this.editBudgetEclate = articles;
       
     },
      alert() {
@@ -523,8 +708,8 @@ this.$("#modificationModal").modal('hide');
 <style scoped>
 
 .tailgrand12{
-  width: 95%;
-  margin: 0 -48%;
+  width: 90%;
+  margin: 0 -45%;
  
 }
 

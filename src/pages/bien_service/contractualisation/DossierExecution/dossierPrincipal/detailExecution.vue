@@ -212,12 +212,12 @@ decision_cf
                            
                        
                         </div>
-  
+<!--   
 <div class="modal-footer">
         
         <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListeEntreprise" href="#">Voir Tableau</a>
        
-      </div>
+      </div> -->
   
                 </div>
             </div>

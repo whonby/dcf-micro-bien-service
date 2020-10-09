@@ -7,9 +7,9 @@
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
-                <h5>{{groupe.libelle }}</h5>
+                <h5>{{libelleUAdministrative(RecupererTransfertUa(groupe.id))}}</h5>
                  <!-- <span class="badge badge-info" >{{getNombreArticle}}</span>&nbsp;&nbsp; -->
-                 <span class="badge badge-inverse" >{{0}}</span>
+                 <!-- <span class="badge badge-inverse" >{{0}}</span> -->
 
                 </a> 
 
@@ -21,10 +21,10 @@
                 <thead>
                   <tr>
                     
-                     <th >Exercice Budgétaire</th>
-                    <th >Ligne économique</th>
-                     <th >Grande Nature</th>
-                      <th >Dotation </th>
+                     <th style="width:10%;" >Exercice Budgétaire</th>
+                    <th style="width:60%;">Ligne économique</th>
+                     <th style="width:12%;" >Grande Nature</th>
+                      <th style="width:15%;">Dotation </th>
                   
                      <th>Action</th>
                   </tr>
@@ -40,7 +40,26 @@
                         @suppression="$emit('suppression', $event)"
 
                     ></BudgetEclateItem>
-                      
+                        <tr>
+                     
+                       <td>
+                           
+                      </td>
+                       
+                        <td>
+                          
+                      </td>
+                       <td style="font-weight:bold;">  <h6>TOTAL Disponible  {{anneeAmort}}</h6>
+                      </td>
+                       <td  style="text-align: center;color:red;font-weight:bold;font-size:16px">
+                           {{formatageSomme(parseFloat(MontantDisponible))}}
+                           
+                      </td>
+                       <td>
+                           
+                      </td>
+                     
+                    </tr>
                 </tbody>
               </table>
               </div>
@@ -57,7 +76,7 @@
 <script>
 import { mapGetters} from "vuex";
 import BudgetEclateItem from './BudgetEclateItem'
-// import { formatageSomme } from "../../../Repositories/Repository";
+import { formatageSomme } from "../../../Repositories/Repository";
 export default {
     name: '',
      props: {
@@ -85,7 +104,8 @@ export default {
       "montantBudgetGeneral",
       "uniteZones",
       "getPersonnaliseBudgetGeneralParTransfert",
-      "uniteAdministratives"
+      "uniteAdministratives",
+      "transferts"
       // "chapitres",
       // "sections"
     ]),
@@ -127,7 +147,51 @@ export default {
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
 
 
+libelleUAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+RecupererTransfertUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.transferts.find(qtreel => qtreel.unitezone_id == id);
+
+      if (qtereel) {
+        return qtereel.unitezone_id;
+      }
+      return 
+        }
+      };
+    },
+anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
+
+MontantDisponible(){
+  
+    
+    var montant = this.groupe.budgeteclateua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(2); 
+      if(isNaN(montant)) return null
+      return montant
+
+   
+  
+}, 
 
 
 
@@ -177,7 +241,7 @@ getNombreArticle(){
         
       }
     },
-// formatageSomme:formatageSomme
+formatageSomme:formatageSomme
   }
 }
 </script>

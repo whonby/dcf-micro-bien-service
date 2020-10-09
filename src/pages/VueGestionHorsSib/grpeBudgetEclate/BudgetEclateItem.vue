@@ -5,10 +5,10 @@
   
                   <tr class="odd gradeX" v-if="article" @dblclick="$emit('modification', article)">
                    
-                     <td style="width:95%">{{article.annebudgetaire|| 'Non renseigné'}}</td>
-                     <td style="width:95%">{{article.ligneeconomique_id|| 'Non renseigné'}}</td>
-                     <td style="width:95%">{{article.grandenature_id|| 'Non renseigné'}}</td>
-                     <td style="width:95%">{{article.dotation|| 'Non renseigné'}}</td>
+                     <td>{{article.annebudgetaire|| 'Non renseigné'}}</td>
+                     <td>{{Codeeconomique(article.ligneeconomique_id)|| 'Non renseigné'}}</td>
+                     <td>{{afficherGdeNatureDep(article.grandenature_id)|| 'Non renseigné'}}</td>
+                     <td style="text-align : center">{{formatageSomme(parseFloat(article.dotation))|| 'Non renseigné'}}</td>
                      
                     
                  
@@ -32,7 +32,7 @@
 
 <script>
 import { mapGetters} from "vuex";
-// import { formatageSomme } from "../../../../src/Repositories/Repository";
+import { formatageSomme } from "../../../Repositories/Repository";
 export default {
     name: 'DirectionItem',
      props: {
@@ -51,8 +51,45 @@ export default {
       // "chapitres",
       // "sections"
     ]),
-  
+    ...mapGetters("parametreGenerauxAdministratif", [
+      
+      "sections",
+      "type_Unite_admins",
+      "plans_programmes",
+      "natures_sections",
+      "grandes_natures",
+      "afficheNiveauPlanProg",
+      "exercices_budgetaires"
+    ]),
+    ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+  afficherGdeNatureDep() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.grandes_natures.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    Codeeconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      }
+    }
   },
+  
+     
+    
   methods: {
     toggle: function () {
       if (this.isFolder) {
@@ -60,7 +97,7 @@ export default {
         
       }
     },
-    // formatageSomme:formatageSomme,
+    formatageSomme:formatageSomme,
      show(){
         return this.isOver = true
     },

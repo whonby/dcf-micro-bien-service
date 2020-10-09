@@ -9,48 +9,28 @@
 <!--        </router-link>-->
 <!--        </div>-->
 <!--      </div>-->
+<br>
+<br>
 
       <table class="table table-bordered table-striped" style="background-color: #ffffff;">
         <tr>
-          <td style="text-align: center">
+          <td>
+            <center>
       <router-link tag="a" :to="{ name: 'photoProfil' }">
-        <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar2" >
+        <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">
         </router-link>
-<!--      <h6 style="text-align:center;">{{afficheNomUtilisateur}}</h6>-->
-
-
-            <div  class="btn-group" style="width: 200px;">
-              <button data-toggle="dropdown" style="background: orange;width: 100%"
-
-                      class="tip-bottom btn dropdown-toggle">{{afficheNomUtilisateur}} <span class="caret"></span></button>
-              <ul class="dropdown-menu">
-
-                <li style="text-align: left !important;">
-                  <router-link tag="a" :to="{ name: 'Profil' }">
-                    <i class="fa fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Profil
-                  </router-link>
-                </li>
-                <li style="text-align: left !important;">
-              <a href="#" @click.prevent="logoutUser()">
-                <i class="fa fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                Déconnexion
-              </a>
-
-                </li>
-
-              </ul>
-
-            </div>
-
-
+      <h6 style="color:orange;font-size:14px;text-align:center;">{{afficheNomUtilisateur}}</h6>
+  
+		</center>
            
-<!--       <router-link :to="{ name: 'Login'}" tag="a" style="color:red;width:20%;text-align:center;">-->
-<!--              <h5 >Se déconnecter</h5>-->
+       <router-link :to="{ name: 'Login'}" tag="a" style="color:red;width:20%;text-align:center;">
+              <h5 >Se déconnecter</h5>
 
-<!--            </router-link>-->
+            </router-link>
           </td>
-          <td style="width:100%; padding: 10px 250px; !important;">
-            <h3>MENU GENERAL DU SID-CF</h3>
+          <td style="width:88%;text-align: center;font-size:25px;padding:50px 50px;font-weight:bold;">
+            <P>SYSTEME D'INFORMATION DECISIONNELLE DU CONTRÖLEUR FINANCIER  </P>
+            <P>(SID-CF)</P>
           </td>
 
           <!-- <td style="width:15%">
@@ -433,7 +413,7 @@ return objJson.id
 
   methods:{
 
-    ...mapActions('Utilisateurs', ['getUtilisateurs',"logoutUser","getRoles","getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf"]),
+    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 
@@ -650,12 +630,4 @@ hr{ border-top-color:#dadada;}
   #loginbox .control-group{ padding:8px 0; margin-bottom:0px;}
 }
 
-
-.avatar2 {
-  vertical-align: middle;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  box-shadow: 10px 10px 150px #262626;
-}
 </style>

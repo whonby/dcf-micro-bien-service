@@ -2,7 +2,7 @@ formLot
 tauxArrondit
 Liste des bailleurs du marché
 offreF
-ajouterOffreT
+ligneBudgeteyuy
 <template>
     
 <div>
@@ -6547,3 +6547,4 @@ width: 850px;
  margin: 0 -690px;
     }
 </style>
+
