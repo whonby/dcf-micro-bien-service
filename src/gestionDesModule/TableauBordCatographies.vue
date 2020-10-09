@@ -113,19 +113,21 @@
                 </tbody>
               </table>
 
-              <div v-if="nomRegion">
-                <div class="span4" style="font-size: 15px">Budget Region</div>
-             <div class="span8" style="color: red;font-size: 15px">{{nomRegion}}</div>
+              <div v-if="caseAffichageMessageUniteAdminSituationMarche">
+                <div class="span12" style="font-size: 15px">Situation des marchés de UA
+                  <b><font color="red">{{nomUniteAdministrative}}</font></b></div>
               </div>
-              <div v-if="nomUniteAdministrative">
-                <div class="span3" style="font-size: 15px ; font-size: 15px">Budget UA</div>
-                <div class="span9" style="color: #002aff; font-size: 15px">{{nomUniteAdministrative}}</div>
+              <div v-if="caseAffichageMessageRegionsSituationMarche">
+                <div class="span12" style="font-size: 15px"> Situation des marchés  dans la
+                  <b><font color="red">{{nomRegion}}</font></b>
+                </div>
               </div>
-
-              <div v-if="nomUniteAdministrative">
+              <div v-if="caseAffichageMessageUniteAdminRegionSituationMarche">
+                <div class="span12" style="font-size: 15px">Situation des marchés dans la <b><font color="red">{{nomRegion}}</font></b>
+                 de UA <b><font color="red">{{nomUniteAdministrative}}</font></b> </div>
               </div>
-              <div v-else-if="nomRegion"></div>
-              <div v-else> <div class="span12" style="font-size: 15px ; font-size: 15px">Budget Général</div></div>
+              <div v-if="caseAffichageMessageGeneralSituationMarche">
+                <div class="span12" style="font-size: 15px ; font-size: 15px">Situation Général des marchés</div></div>
 
               <div class="row-fluid" >
                 <div class="span5" v-if="montantBudegtPasUniteAdminOuRegion">
@@ -138,7 +140,7 @@
                       resize="true" v-if="montantBudegtPasUniteAdminOuRegion.budget">
                   </donut-chart>
                   <div style="text-align: center" v-else>
-                    <h3>Aucun budget</h3>
+                    <h3>Aucun montant</h3>
                   </div>
                 </div>
                 <div class="span7"><br>
@@ -745,12 +747,12 @@ console.log(budgetReste)
      // console.log(value) donutDataUniteOuRegions
 
       let execute={
-        label: 'Budget Excécute',
+        label: 'Montant Excécute',
         value:montant_engagement_marche
       }
 
       let reste={
-        label: 'Budget Restant',
+        label: 'Montant Restant',
         value:budgetReste
       }
 
@@ -793,6 +795,34 @@ console.log(vM.donutDataUniteOuRegions)
       return objet
     },
 
+    caseAffichageMessageRegionsSituationMarche(){
+      let vM=this;
+      if(vM.region!="" && vM.unite_administrative_id==""){
+         return true
+      }
+      return false
+    },
+    caseAffichageMessageUniteAdminSituationMarche(){
+      let vM=this;
+      if(vM.region=="" && vM.unite_administrative_id!=""){
+        return true
+      }
+      return false
+    },
+    caseAffichageMessageUniteAdminRegionSituationMarche(){
+      let vM=this;
+      if(vM.region!="" && vM.unite_administrative_id!=""){
+        return true
+      }
+      return false
+    },
+    caseAffichageMessageGeneralSituationMarche(){
+      let vM=this;
+      if(vM.region=="" && vM.unite_administrative_id==""){
+        return true
+      }
+      return false
+    },
     nomUniteAdministrative(){
       let vM=this;
       if(vM.unite_administrative_id!=""){
