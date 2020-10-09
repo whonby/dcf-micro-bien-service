@@ -84,7 +84,8 @@ this.getRegimeImpositions()
     this.getRapport()
       this.getBudgeChager()
       this.getLigneExempter()
-      
+
+   this.getLocalisationGeographiqueAll()
       this.getExercicesBudgetaires()
       this.getTaux()
       this.getModePaiement()
@@ -324,7 +325,7 @@ this.getMembreCojo()
      ['getGestionModules','getExercicesBudgetaires', 'getTitres', 'getTaux',
     'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 'getStructurePays', 'getPlanPays','getPlanOrganigrammeUa',
     'getStructureAdministrative', 'getServiceGestionnaire', 'getStructureGeographique',
-    'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions"]),
+    'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions","getLocalisationGeographiqueAll"]),
 
  ...mapActions("uniteadministrative", [
       // "getAllTypeTextes",
@@ -350,7 +351,7 @@ this.getMembreCojo()
     ]),
             ...mapActions('personnelUA', ["getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
-            "getClasses","getEchelons","getpaiementPersonnel","getActeur","getGrades","getNbrActeurAcrediteTaux",
+            "getClasses","getpaiementPersonnel","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
 "getFamilleFonction","getFonctionBudgetaire", "getDossierCandidatPersonnel",
 "getClassificationGradeFonction","getSituationMatrimonial", "getContratResilie"]),

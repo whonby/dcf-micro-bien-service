@@ -1319,3 +1319,13 @@ export function supprimerPlanOrganigrammeUa({ commit, dispatch }, id) {
            
         })
 }
+
+
+
+
+export  function  getLocalisationGeographiqueAll({commit}) {
+    queue.push(() =>  axios.get('/localisation_geographique').then((response) => {
+        commit('GET_LOCALISATION_GEO_ALL', response.data)
+
+    }).catch(error => console.log(error)))
+}

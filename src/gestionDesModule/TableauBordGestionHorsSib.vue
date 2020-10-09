@@ -80,6 +80,7 @@
 
 
 <script>
+
 import { mapGetters, mapActions } from "vuex";
 import {formatageSomme} from '../../src/Repositories/Repository';
 import {noDCfNoAdmin} from '../../src/Repositories/Auth';

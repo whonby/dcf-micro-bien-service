@@ -78,6 +78,7 @@
                                     &lt;!&ndash;&ndash;&gt;
                                 </l-marker>-->
                             </v-marker-cluster>
+                          <v-geosearch :options="geosearchOptions" ></v-geosearch>
                         </l-map>
                     </div>
                 </div>
@@ -154,6 +155,8 @@
 </template>
 
 <script>
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
+import VGeosearch from 'vue2-leaflet-geosearch';
     import {mapGetters} from 'vuex'
     import { latLng, Icon, icon } from 'leaflet'
     import { LMap, LTileLayer, LIconDefault,LControlLayers,LPopup,LCircleMarker } from "vue2-leaflet";
@@ -165,7 +168,7 @@
         components: {
             LMap,
             LTileLayer,
-
+          VGeosearch,
             LPopup,
            // LTooltip,
             LIconDefault,
@@ -180,6 +183,9 @@
                 {iconUrl, shadowUrl}
             ))
             return {
+              geosearchOptions: { // Important part Here
+                provider: new OpenStreetMapProvider(),
+              },
                 active_el:0,
                 search:"",
                 budgetGeneralExcecute:0,

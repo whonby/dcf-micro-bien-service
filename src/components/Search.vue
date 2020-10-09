@@ -24,16 +24,9 @@
                 </li>
  
               </ul>
-             
-
-
-
-
-
-
 
             </div>
-            </div>
+  </div>
                 <!--<input type="text" style="background-color: black;" readonly />-->
 
 

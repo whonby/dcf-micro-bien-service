@@ -12,22 +12,45 @@
 
       <table class="table table-bordered table-striped" style="background-color: #ffffff;">
         <tr>
-          <td>
-            <center>
+          <td style="text-align: center">
       <router-link tag="a" :to="{ name: 'photoProfil' }">
-        <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">
+        <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar2" >
         </router-link>
-      <h6 style="color:orange;font-size:14px;text-align:center;">{{afficheNomUtilisateur}}</h6>
-  
-		</center>
-           
-       <router-link :to="{ name: 'Login'}" tag="a" style="color:red;width:20%;text-align:center;">
-              <h5 >Se déconnecter</h5>
+<!--      <h6 style="text-align:center;">{{afficheNomUtilisateur}}</h6>-->
 
-            </router-link>
+
+            <div  class="btn-group" style="width: 200px;">
+              <button data-toggle="dropdown" style="background: orange;width: 100%"
+
+                      class="tip-bottom btn dropdown-toggle">{{afficheNomUtilisateur}} <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+
+                <li style="text-align: left !important;">
+                  <router-link tag="a" :to="{ name: 'Profil' }">
+                    <i class="fa fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Profil
+                  </router-link>
+                </li>
+                <li style="text-align: left !important;">
+              <a href="#" @click.prevent="logoutUser()">
+                <i class="fa fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                Déconnexion
+              </a>
+
+                </li>
+
+              </ul>
+
+            </div>
+
+
+           
+<!--       <router-link :to="{ name: 'Login'}" tag="a" style="color:red;width:20%;text-align:center;">-->
+<!--              <h5 >Se déconnecter</h5>-->
+
+<!--            </router-link>-->
           </td>
-          <td style="width:88%;text-align: center;font-size:30px;padding:50px 50px">
-            <P>MENU GENERAL DU SID-CF</P>
+          <td style="width:100%; padding: 10px 250px; !important;">
+            <h3>MENU GENERAL DU SID-CF</h3>
           </td>
 
           <!-- <td style="width:15%">
@@ -410,7 +433,7 @@ return objJson.id
 
   methods:{
 
-    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf"]),
+    ...mapActions('Utilisateurs', ['getUtilisateurs',"logoutUser","getRoles","getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 
@@ -627,4 +650,12 @@ hr{ border-top-color:#dadada;}
   #loginbox .control-group{ padding:8px 0; margin-bottom:0px;}
 }
 
+
+.avatar2 {
+  vertical-align: middle;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  box-shadow: 10px 10px 150px #262626;
+}
 </style>
