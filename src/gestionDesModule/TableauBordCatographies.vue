@@ -105,51 +105,39 @@
                 </tbody>
               </table>
 
+              <div v-if="nomRegion">
+                <div class="span2" style="font-size: 15px">Region</div>
+             <div class="span10" style="color: red;font-size: 15px"><h6>{{nomRegion}}</h6></div>
+              </div>
+              <div v-if="nomUniteAdministrative">
+                <div class="span2" style="font-size: 15px ; font-size: 15px">UA</div>
+                <div class="span10" style="color: #002aff; font-size: 15px">{{nomUniteAdministrative}}</div>
+              </div>
+
               <div class="row-fluid" >
-                <div class="span5" v-if="objetUnite">
+                <div class="span5" v-if="montantBudegtPasUniteAdminOuRegion">
 
                   <donut-chart
                       style="width: 120px;height: 120px"
                       id="donut01"
-                      :data="objetUnite.donutData"
+                      :data="montantBudegtPasUniteAdminOuRegion.donutData"
                       colors='[ "#FF6384", "#36A2EB"]'
-                      resize="true" v-if="objetUnite.budget">
+                      resize="true" v-if="montantBudegtPasUniteAdminOuRegion.budget">
                   </donut-chart>
                   <div style="text-align: center" v-else>
-                    <h3>Aucun montant</h3>
+                    <h3>Aucun budget</h3>
                   </div>
                 </div>
                 <div class="span7"><br>
 
-                  <div v-if="objetUnite">
-                    Montant de base: <span style="color: #003900; "><b>{{formatageSomme(objetUnite.budget)}}</b></span> <br>
-                    Montant exécuté:<span style="color: #00d700; "><b>{{formatageSomme(objetUnite.budgetExecute)}}</b></span><br>
-                    Montant restant:<span style="color: darkred; "><b>{{formatageSomme(objetUnite.budgetReste)}}</b></span><br>
-                    Taux d'exécution:<span style="color: #e36706; "><b>{{objetUnite.tauxBudget}} %</b></span>
+                  <div v-if="montantBudegtPasUniteAdminOuRegion">
+                    Budget : <span style="color: #003900; "><b>{{formatageSomme(montantBudegtPasUniteAdminOuRegion.budget)}}</b></span> <br>
+                    Budget exécuté:<span style="color: #00d700; "><b>{{formatageSomme(montantBudegtPasUniteAdminOuRegion.budgetExecute)}}</b></span><br>
+                    Montant restant:<span style="color: darkred; "><b>{{formatageSomme(montantBudegtPasUniteAdminOuRegion.budgetReste)}}</b></span><br>
+                    Taux d'exécution:<span style="color: #e36706; "><b>{{montantBudegtPasUniteAdminOuRegion.tauxBudget}} %</b></span>
                   </div>
                 </div>
-<!--                <div class="span6">-->
-<!--                  <table class="table table-bordered table-striped" v-if="objetUnite">-->
-<!--                    <tbody>-->
-<!--                    <tr>-->
-<!--                      <td>Montant de base</td>-->
-<!--                      <td>{{formatageSomme(objetUnite.budget)}}</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                      <td>Montant restant</td>-->
-<!--                      <td>{{formatageSomme(objetUnite.budgetReste)}}</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                      <td>Montant exécution</td>-->
-<!--                      <td>{{formatageSomme(objetUnite.budgetExecute)}}</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                      <td>Taux exécution</td>-->
-<!--                      <td>{{objetUnite.tauxBudget}}</td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                  </table>-->
-<!--                </div>-->
+
               </div>
 <hr>
               <p align="center" style="size: 1.5em"><b>{{objetUnite.ville}}</b></p>
@@ -620,13 +608,19 @@ created() {
            * Recuperation des unite administrative de la zone geographique
            * @type {*[]}
            */
-          let budgetZone=parseFloat(value.montant_marche);
+          let budget=parseFloat(value.montant_marche);
           let color="";
           let colorFill=""
-          let montant_engagement_zone=0;
+          let montant_engagement_marche=0;
+         // let budget=0;
+/**Calcule des marches**/
+          let initeVal = 0;
+          let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==value.id).reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.total_general) ;
+          }, initeVal);
+          montant_engagement_marche=montant_engagement_marche + montantEngament
 
-           let montantRest=budgetZone - montant_engagement_zone
-          let taux=0;
+        //  let taux=0;
 
           if(value.attribue==0){
             color="#ff0000"
@@ -652,11 +646,12 @@ created() {
             color="#ccc"
             colorFill="#ccc"
           }
-
+          let montantRest=budget - montant_engagement_marche;
+          let tauxExecution=(montant_engagement_marche/budget)*100
 
           let budgetExecute={
             label: 'Montant Excecute',
-            value:montant_engagement_zone
+            value:montant_engagement_marche
           }
 
           let budgetReste={
@@ -671,10 +666,10 @@ created() {
             id:value.id,
             ville:value.objet,
             latlng:coordonne,
-            budget:budgetZone,
+            budget:budget,
             budgetReste:montantRest,
-            budgetExecute:montant_engagement_zone,
-            tauxBudget:taux.toFixed(2),
+            budgetExecute:montant_engagement_marche,
+            tauxBudget:tauxExecution.toFixed(2),
             color:color,
             colorFill:colorFill,
             region_id:value.localisation_geographie_id,
@@ -739,7 +734,7 @@ console.log(budgetReste)
 
       vM.donutDataUniteOuRegions.push(execute)
       vM.donutDataUniteOuRegions.push(reste)
-
+console.log(vM.donutDataUniteOuRegions)
       let objetAlocalise={
         budget:budget,
         budgetReste:budgetReste,
@@ -747,11 +742,15 @@ console.log(budgetReste)
         tauxBudget:tauxExecution.toFixed(2),
         donutData:vM.donutDataUniteOuRegions
       }
+      vM.donutDataUniteOuRegions=[]
       return objetAlocalise;
     },
     objetMarchePasUniteOuRegion(){
       let vM=this;
       let objet=this.marches
+
+
+
       if(vM.region!="" && vM.unite_administrative_id==""){
         objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region)
 
@@ -762,6 +761,7 @@ console.log(budgetReste)
       }
 
       if(vM.unite_administrative_id!="" && vM.region!=""){
+
         objet =this.marches.filter(item=>{
           if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region){
             return item
@@ -770,6 +770,25 @@ console.log(budgetReste)
       }
       return objet
     },
+
+    nomUniteAdministrative(){
+      let vM=this;
+      if(vM.unite_administrative_id!=""){
+        let objet=this.uniteAdministratives.find(item=>item.id==vM.unite_administrative_id)
+        return objet.libelle
+      }
+    return null
+    },
+
+    nomRegion(){
+      let vM=this;
+      if(vM.region!=""){
+        let objet=this.regions.find(item=>item.id==vM.region)
+        return objet.libelle
+      }
+      return null
+    },
+
     budgetGeneral(){
       let budget_general=0;
       let montant_engagement=0;
