@@ -15,6 +15,9 @@ const grandes_natures = state => state.grandes_natures.sort((a,b)=>(a.code>b.cod
 const structures_geographiques = state => state.structures_geographiques.sort((a,b)=>(a.niveau>b.niveau)? 1:-1)
 const localisations_geographiques = state => state.localisations_geographiques.sort((a,b)=>(a.code>b.code)? 1:-1)
 const type_Unite_admins = state => state.type_Unite_admins
+
+export const getterLocalisationGeoAll = state => state.localisation_geographique_all
+
 // const organigrammeUa = state => state.organigrammeUa
 export const getterformeJuridique = state => state.formejuridiques
 export const getterregimeImpositions = state => state.regimeImpositions
