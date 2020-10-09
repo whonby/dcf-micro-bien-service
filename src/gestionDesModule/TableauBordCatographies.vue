@@ -415,12 +415,12 @@ export default {
           visible: false,
           attribution:
               '',
-          url: 'http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png',
+          url: 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png',
         },
         {
           name: 'Plan 2',
           visible: false,
-          url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+          url: 'https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png',
           attribution: '',
         },
         {
@@ -461,7 +461,7 @@ export default {
   },
 created() {
     console.log('apppp0000')
-    console.log(this.marches)
+    //console.log(this.getterLocalisationGeoAll)
 },
   computed: {
 // methode pour maper notre guetter
@@ -510,9 +510,28 @@ created() {
     },
     localisation(){
       let localisation=[]
-      // console.log(this.getMandatPersonnaliserVise)
       let vM=this;
-      this.marches.forEach(function (value){
+      let objet=this.marches
+      if(vM.region!="" && vM.unite_administrative_id==""){
+        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region)
+
+      }
+
+      if(vM.unite_administrative_id!="" && vM.region==""){
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id)
+      }
+
+      if(vM.unite_administrative_id!="" && vM.region!=""){
+        objet =this.marches.filter(item=>{
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region){
+            return item
+          }
+        })
+      }
+      // console.log(this.getMandatPersonnaliserVise)
+      console.log(objet)
+      // console.log(vM.region)
+      objet.forEach(function (value){
         if(value.longitude!=null && value.latitude!=null){
           let coordonne=[]
           coordonne.push(value.latitude)
@@ -521,12 +540,12 @@ created() {
            * Recuperation des unite administrative de la zone geographique
            * @type {*[]}
            */
-          let budgetZone=0;
+          let budgetZone=parseFloat(value.montant_marche);
           let color="";
           let colorFill=""
           let montant_engagement_zone=0;
 
-
+           let montantRest=budgetZone - montant_engagement_zone
           let taux=0;
 
           if(budgetZone==0){
@@ -565,13 +584,13 @@ created() {
           }
 
           let budgetExecute={
-            label: 'Montant Exucute',
+            label: 'Montant Excecute',
             value:montant_engagement_zone
           }
 
           let budgetReste={
             label: 'Montant Restant',
-            value:0
+            value:montantRest
           }
 
           vM.donutData.push(budgetExecute)
@@ -582,7 +601,7 @@ created() {
             ville:value.objet,
             latlng:coordonne,
             budget:budgetZone,
-            budgetReste:0,
+            budgetReste:montantRest,
             budgetExecute:montant_engagement_zone,
             tauxBudget:taux.toFixed(2),
             color:color,
