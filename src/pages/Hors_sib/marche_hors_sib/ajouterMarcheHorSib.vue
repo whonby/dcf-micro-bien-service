@@ -263,19 +263,7 @@
        </div>
      </div>
          </td>
-           <td>
-            <div class="control-group">
-       <label class="control-label">Longitude</label>
-       <div class="controls">
-         <input
-           type="text"
-           v-model="formData.longitude"
-           class="span4" />
-       </div>
-     </div>
-         </td>
-
-           <td>
+              <td>
      <div class="control-group">
       <label class="control-label">Latitude</label>
       <div class="controls">
@@ -288,6 +276,19 @@
    </div>
    </div>
      </td>
+           <td>
+            <div class="control-group">
+       <label class="control-label">Longitude</label>
+       <div class="controls">
+         <input
+           type="text"
+           v-model="formData.longitude"
+           class="span4" />
+       </div>
+     </div>
+         </td>
+
+      
        
       
               </tr>
