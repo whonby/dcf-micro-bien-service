@@ -13,7 +13,15 @@
 <!--        </l-choropleth-layer>-->
 <!--      </l-map>-->
 <!--      <Button @click="value3 = true" type="primary">Create</Button>-->
-
+<!--      <div class="row-fluid">-->
+<!--        <div class="">-->
+<!--          <div class="widget-box">-->
+<!--            <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>-->
+<!--              <h5>Cartographie des marchés</h5>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
       <div class="row-fluid" style="position: absolute !important;">
         <div id="map10" class="sidebar leaflet-sidebar collapsed">
@@ -263,23 +271,27 @@
                 <table>
                   <tr style="border-bottom: 2px solid #fff">
                     <td style="width: 20px;height:20px;background: red" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Pas de budget</td>
-                    <td style="width: 20px;height:20px;background: #0c2061" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3"> Taux d'exécution de 0 %</td>
-                    <td style="width: 20px;height:20px;background: #fffb13" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff " colspan="3">Taux d'exécution compris entre 1 et 30 %</td>
-                    <td style="width: 20px;height:20px;background: #8f1db7" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3"> Taux d'exécution compris entre 31 et 50 %</td>
+                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Marché planifié</td>
+
+                    <td style="width: 20px;height:20px;background: #209503" ></td>
+                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Marché en contractualisation </td>
+                    <td style="width: 20px;height:20px;background: orange" ></td>
+                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Marché en exécution</td>
+                    <td style="width: 20px;height:20px;background: blue" ></td>
+                    <td style="text-align: center; border-right: 5px solid #fff " colspan="3">
+                      Marché résilie</td>
+                    <td style="width: 20px;height:20px;background: #ab0cd7" ></td>
+                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">
+                      Marché terminé</td>
+                    <td style="width: 20px;height:20px;background: #ccc" ></td>
+                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">
+                      Marché suspendu</td>
                   </tr>
                 </table>
                 <table>
                   <tr>
-                    <td style="width: 20px;height:20px;background: #1285ff" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux d'exécution compris entre 51 et 80 %</td>
-                    <td style="width: 20px;height:20px;background: #9dfd80" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux d'exécution compris entre 81 et 99 %</td>
-                    <td style="width: 20px;height:20px;background: #209503" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux d'exécution de 100%</td>
+
+
                   </tr>
                 </table>
               </div>
@@ -471,7 +483,7 @@ export default {
       libelle_unite_admin:"",
       icon: customicon,
       clusterOptions: {},
-      zoom: 6,
+      zoom: 5,
       idzone:"",
       activeUa:false,
       zone_geographique:"",
@@ -642,9 +654,14 @@ created() {
             colorFill="#e8640c"
           }
 
-          if(value.attribue==5){
+          if(value.attribue==3){
             color="#0c66d7"
             colorFill="#0c66d7"
+          }
+
+          if(value.attribue==5){
+            color="#ab0cd7"
+            colorFill="#ab0cd7"
           }
 
           if(value.attribue==7){
