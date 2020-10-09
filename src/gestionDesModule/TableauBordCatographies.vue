@@ -13,7 +13,15 @@
 <!--        </l-choropleth-layer>-->
 <!--      </l-map>-->
 <!--      <Button @click="value3 = true" type="primary">Create</Button>-->
-
+<!--      <div class="row-fluid">-->
+<!--        <div class="">-->
+<!--          <div class="widget-box">-->
+<!--            <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>-->
+<!--              <h5>Cartographie des marchés</h5>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
       <div class="row-fluid" style="position: absolute !important;">
         <div id="map10" class="sidebar leaflet-sidebar collapsed">
@@ -105,15 +113,31 @@
                 </tbody>
               </table>
 
+              <div v-if="caseAffichageMessageUniteAdminSituationMarche">
+                <div class="span12" style="font-size: 15px">Situation des marchés de UA
+                  <b><font color="red">{{nomUniteAdministrative}}</font></b></div>
+              </div>
+              <div v-if="caseAffichageMessageRegionsSituationMarche">
+                <div class="span12" style="font-size: 15px"> Situation des marchés  dans la
+                  <b><font color="red">{{nomRegion}}</font></b>
+                </div>
+              </div>
+              <div v-if="caseAffichageMessageUniteAdminRegionSituationMarche">
+                <div class="span12" style="font-size: 15px">Situation des marchés dans la <b><font color="red">{{nomRegion}}</font></b>
+                 de UA <b><font color="red">{{nomUniteAdministrative}}</font></b> </div>
+              </div>
+              <div v-if="caseAffichageMessageGeneralSituationMarche">
+                <div class="span12" style="font-size: 15px ; font-size: 15px">Situation Général des marchés</div></div>
+
               <div class="row-fluid" >
-                <div class="span5" v-if="objetUnite">
+                <div class="span5" v-if="montantBudegtPasUniteAdminOuRegion">
 
                   <donut-chart
                       style="width: 120px;height: 120px"
                       id="donut01"
-                      :data="objetUnite.donutData"
+                      :data="montantBudegtPasUniteAdminOuRegion.donutData"
                       colors='[ "#FF6384", "#36A2EB"]'
-                      resize="true" v-if="objetUnite.budget">
+                      resize="true" v-if="montantBudegtPasUniteAdminOuRegion.budget">
                   </donut-chart>
                   <div style="text-align: center" v-else>
                     <h3>Aucun montant</h3>
@@ -121,35 +145,14 @@
                 </div>
                 <div class="span7"><br>
 
-                  <div v-if="objetUnite">
-                    Montant de base: <span style="color: #003900; "><b>{{formatageSomme(objetUnite.budget)}}</b></span> <br>
-                    Montant exécuté:<span style="color: #00d700; "><b>{{formatageSomme(objetUnite.budgetExecute)}}</b></span><br>
-                    Montant restant:<span style="color: darkred; "><b>{{formatageSomme(objetUnite.budgetReste)}}</b></span><br>
-                    Taux d'exécution:<span style="color: #e36706; "><b>{{objetUnite.tauxBudget}} %</b></span>
+                  <div v-if="montantBudegtPasUniteAdminOuRegion">
+                    Budget : <span style="color: #003900; "><b>{{formatageSomme(montantBudegtPasUniteAdminOuRegion.budget)}}</b></span> <br>
+                    Budget exécuté:<span style="color: #00d700; "><b>{{formatageSomme(montantBudegtPasUniteAdminOuRegion.budgetExecute)}}</b></span><br>
+                    Montant restant:<span style="color: darkred; "><b>{{formatageSomme(montantBudegtPasUniteAdminOuRegion.budgetReste)}}</b></span><br>
+                    Taux d'exécution:<span style="color: #e36706; "><b>{{montantBudegtPasUniteAdminOuRegion.tauxBudget}} %</b></span>
                   </div>
                 </div>
-<!--                <div class="span6">-->
-<!--                  <table class="table table-bordered table-striped" v-if="objetUnite">-->
-<!--                    <tbody>-->
-<!--                    <tr>-->
-<!--                      <td>Montant de base</td>-->
-<!--                      <td>{{formatageSomme(objetUnite.budget)}}</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                      <td>Montant restant</td>-->
-<!--                      <td>{{formatageSomme(objetUnite.budgetReste)}}</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                      <td>Montant exécution</td>-->
-<!--                      <td>{{formatageSomme(objetUnite.budgetExecute)}}</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                      <td>Taux exécution</td>-->
-<!--                      <td>{{objetUnite.tauxBudget}}</td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                  </table>-->
-<!--                </div>-->
+
               </div>
 <hr>
               <p align="center" style="size: 1.5em"><b>{{objetUnite.ville}}</b></p>
@@ -214,7 +217,7 @@
           <div class="">
             <div class="" style="height: 550px; width: 100%; border-bottom: none">
 
-              <l-map ref="map" class="sidebar-map" :zoom=6 :center="initialLocation" >
+              <l-map ref="map" class="sidebar-map" :zoom="zoom" :center="initialLocation" >
 
                 <l-icon-default></l-icon-default>
                 <l-control-layers position="topright"  ></l-control-layers>
@@ -270,23 +273,27 @@
                 <table>
                   <tr style="border-bottom: 2px solid #fff">
                     <td style="width: 20px;height:20px;background: red" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Pas de budget</td>
-                    <td style="width: 20px;height:20px;background: #0c2061" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3"> Taux d'exécution de 0 %</td>
-                    <td style="width: 20px;height:20px;background: #fffb13" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff " colspan="3">Taux d'exécution compris entre 1 et 30 %</td>
-                    <td style="width: 20px;height:20px;background: #8f1db7" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3"> Taux d'exécution compris entre 31 et 50 %</td>
+                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Marché planifié</td>
+
+                    <td style="width: 20px;height:20px;background: #209503" ></td>
+                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Marché en contractualisation </td>
+                    <td style="width: 20px;height:20px;background: orange" ></td>
+                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Marché en exécution</td>
+                    <td style="width: 20px;height:20px;background: blue" ></td>
+                    <td style="text-align: center; border-right: 5px solid #fff " colspan="3">
+                      Marché résilie</td>
+                    <td style="width: 20px;height:20px;background: #ab0cd7" ></td>
+                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">
+                      Marché terminé</td>
+                    <td style="width: 20px;height:20px;background: #ccc" ></td>
+                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">
+                      Marché suspendu</td>
                   </tr>
                 </table>
                 <table>
                   <tr>
-                    <td style="width: 20px;height:20px;background: #1285ff" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux d'exécution compris entre 51 et 80 %</td>
-                    <td style="width: 20px;height:20px;background: #9dfd80" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux d'exécution compris entre 81 et 99 %</td>
-                    <td style="width: 20px;height:20px;background: #209503" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux d'exécution de 100%</td>
+
+
                   </tr>
                 </table>
               </div>
@@ -478,7 +485,7 @@ export default {
       libelle_unite_admin:"",
       icon: customicon,
       clusterOptions: {},
-      zoom: 3,
+      zoom: 5,
       idzone:"",
       activeUa:false,
       zone_geographique:"",
@@ -620,13 +627,19 @@ created() {
            * Recuperation des unite administrative de la zone geographique
            * @type {*[]}
            */
-          let budgetZone=parseFloat(value.montant_marche);
+          let budget=parseFloat(value.montant_marche);
           let color="";
           let colorFill=""
-          let montant_engagement_zone=0;
+          let montant_engagement_marche=0;
+         // let budget=0;
+/**Calcule des marches**/
+          let initeVal = 0;
+          let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==value.id).reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.total_general) ;
+          }, initeVal);
+          montant_engagement_marche=montant_engagement_marche + montantEngament
 
-           let montantRest=budgetZone - montant_engagement_zone
-          let taux=0;
+        //  let taux=0;
 
           if(value.attribue==0){
             color="#ff0000"
@@ -643,20 +656,26 @@ created() {
             colorFill="#e8640c"
           }
 
-          if(value.attribue==5){
+          if(value.attribue==3){
             color="#0c66d7"
             colorFill="#0c66d7"
+          }
+
+          if(value.attribue==5){
+            color="#ab0cd7"
+            colorFill="#ab0cd7"
           }
 
           if(value.attribue==7){
             color="#ccc"
             colorFill="#ccc"
           }
-
+          let montantRest=budget - montant_engagement_marche;
+          let tauxExecution=(montant_engagement_marche/budget)*100
 
           let budgetExecute={
             label: 'Montant Excecute',
-            value:montant_engagement_zone
+            value:montant_engagement_marche
           }
 
           let budgetReste={
@@ -671,10 +690,10 @@ created() {
             id:value.id,
             ville:value.objet,
             latlng:coordonne,
-            budget:budgetZone,
+            budget:budget,
             budgetReste:montantRest,
-            budgetExecute:montant_engagement_zone,
-            tauxBudget:taux.toFixed(2),
+            budgetExecute:montant_engagement_marche,
+            tauxBudget:tauxExecution.toFixed(2),
             color:color,
             colorFill:colorFill,
             region_id:value.localisation_geographie_id,
@@ -728,18 +747,18 @@ console.log(budgetReste)
      // console.log(value) donutDataUniteOuRegions
 
       let execute={
-        label: 'Budget Excécute',
+        label: 'Montant Excécute',
         value:montant_engagement_marche
       }
 
       let reste={
-        label: 'Budget Restant',
+        label: 'Montant Restant',
         value:budgetReste
       }
 
       vM.donutDataUniteOuRegions.push(execute)
       vM.donutDataUniteOuRegions.push(reste)
-
+console.log(vM.donutDataUniteOuRegions)
       let objetAlocalise={
         budget:budget,
         budgetReste:budgetReste,
@@ -747,11 +766,15 @@ console.log(budgetReste)
         tauxBudget:tauxExecution.toFixed(2),
         donutData:vM.donutDataUniteOuRegions
       }
+      vM.donutDataUniteOuRegions=[]
       return objetAlocalise;
     },
     objetMarchePasUniteOuRegion(){
       let vM=this;
       let objet=this.marches
+
+
+
       if(vM.region!="" && vM.unite_administrative_id==""){
         objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region)
 
@@ -762,6 +785,7 @@ console.log(budgetReste)
       }
 
       if(vM.unite_administrative_id!="" && vM.region!=""){
+
         objet =this.marches.filter(item=>{
           if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region){
             return item
@@ -770,6 +794,53 @@ console.log(budgetReste)
       }
       return objet
     },
+
+    caseAffichageMessageRegionsSituationMarche(){
+      let vM=this;
+      if(vM.region!="" && vM.unite_administrative_id==""){
+         return true
+      }
+      return false
+    },
+    caseAffichageMessageUniteAdminSituationMarche(){
+      let vM=this;
+      if(vM.region=="" && vM.unite_administrative_id!=""){
+        return true
+      }
+      return false
+    },
+    caseAffichageMessageUniteAdminRegionSituationMarche(){
+      let vM=this;
+      if(vM.region!="" && vM.unite_administrative_id!=""){
+        return true
+      }
+      return false
+    },
+    caseAffichageMessageGeneralSituationMarche(){
+      let vM=this;
+      if(vM.region=="" && vM.unite_administrative_id==""){
+        return true
+      }
+      return false
+    },
+    nomUniteAdministrative(){
+      let vM=this;
+      if(vM.unite_administrative_id!=""){
+        let objet=this.uniteAdministratives.find(item=>item.id==vM.unite_administrative_id)
+        return objet.libelle
+      }
+    return null
+    },
+
+    nomRegion(){
+      let vM=this;
+      if(vM.region!=""){
+        let objet=this.regions.find(item=>item.id==vM.region)
+        return objet.libelle
+      }
+      return null
+    },
+
     budgetGeneral(){
       let budget_general=0;
       let montant_engagement=0;
@@ -937,6 +1008,7 @@ console.log(budgetReste)
     },
     videRegions(){
       this.region=""
+      this.zoom=6
     },
     infoMarche(id){
       console.log(id)
