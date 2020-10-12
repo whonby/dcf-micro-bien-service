@@ -3,11 +3,11 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 
 var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
-ajouterMarcherBailleur
+
 
 // export function getDecompte({ commit }) {
 //   queue.push(() => axios.get('/Listedecompte').then((response) => {
-//     commit('GET_ALL_DECOMPTE', response.data.data)
+//     commit('GET_ALL_DECOMPTE', response.data)
 
 //   }).catch(error => console.log(error)))
 // }
@@ -79,7 +79,7 @@ ajouterMarcherBailleur
 
 export  function  getCandidatSelectionner({commit}) {
   queue.push(() => axios.get('/liste_candidat_select').then((response) => {
-    commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.data)
+    commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -236,7 +236,7 @@ export function modifierRolemembreCojo({commit}, elementModifie){
 
 export  function  getBailleur({commit}) {
     queue.push(() => axios.get('/bailleurs').then((response) => {
-      commit('GET_ALL_BAILLEUR', response.data.data)
+      commit('GET_ALL_BAILLEUR', response.data)
       
   }).catch(error => console.log(error)))
   }
@@ -294,7 +294,7 @@ export function supprimerBailleur({commit}, id) {
 
 export  function  getExecutionMarche({commit}) {
   queue.push(() => axios.get('/bailleurs').then((response) => {
-    commit('GET_EXECUTION_MARCHE', response.data.data)
+    commit('GET_EXECUTION_MARCHE', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -352,7 +352,7 @@ export function supprimerExecutionMarche({commit}, id) {
 
 export  function  getMotifDecision({commit}) {
   queue.push(() => axios.get('/motif_dessions').then((response) => {
-    commit('GET_MOTIF_DECISION', response.data.data)
+    commit('GET_MOTIF_DECISION', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -406,7 +406,7 @@ export function supprimerMotifDecision({commit}, id) {
 
 export  function  getDocumentProcedure({commit}) {
   queue.push(() => axios.get('/document_procedures').then((response) => {
-    commit('GET_DOCUMENT_PROCEDURE', response.data.data)
+    commit('GET_DOCUMENT_PROCEDURE', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -466,7 +466,7 @@ export function supprimerDocumentProcedure({commit}, id) {
 
 export  function  getActeEffetFinancier({commit}) {
   queue.push(() => axios.get('/acte_effet_finnanciers').then((response) => {
-    commit('GET_ALL_ACTE_EFFET_FINANCIER', response.data.data)
+    commit('GET_ALL_ACTE_EFFET_FINANCIER', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -611,8 +611,8 @@ export function supprimerActeEffetFinancier({commit}, id) {
 
 export  function getTypeActeDepense({commit}) {
   queue.push(() => axios.get('/type_acte_depenses').then((response) => {
-   // console.log(response.data.data)
-    commit('GET_ALL_TYPE_ACTE_DEPENSE', response.data.data)
+   // console.log(response.data)
+    commit('GET_ALL_TYPE_ACTE_DEPENSE', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -663,7 +663,7 @@ export function supprimerTypeActeDepense({commit}, id) {
 
 export  function  getTypeFacture({commit}) {
   queue.push(() => axios.get('/type_factures').then((response) => {
-    commit('GET_TYPE_FACTURE', response.data.data)
+    commit('GET_TYPE_FACTURE', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -714,7 +714,7 @@ export function supprimerTypeFacture({commit}, id) {
 
 export  function  getTypePrestation({commit}) {
   queue.push(() => axios.get('/type_prestations').then((response) => {
-    commit('GET_ALL_TYPE_PRESTATION', response.data.data)
+    commit('GET_ALL_TYPE_PRESTATION', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -917,7 +917,7 @@ export function supprimerTypePrestation({commit}, id) {
 
 export  function  getLot({commit}) {
   queue.push(() => axios.get('/lots').then((response) => {
-    commit('GET_ALL_LOT', response.data.data)
+    commit('GET_ALL_LOT', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -972,7 +972,7 @@ export function supprimerLot({commit}, id) {
 
 export  function  getAnalyseDossier({commit}) {
   queue.push(() => axios.get('/analyse_dossier').then((response) => {
-    commit('GET_ALL_ANALYSE_DOSSIER', response.data.data)
+    commit('GET_ALL_ANALYSE_DOSSIER', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -1047,7 +1047,7 @@ export function supprimerAnalyseDossier({commit}, id) {
 
 export  function  getCojo({commit}) {
   queue.push(() => axios.get('/cojo').then((response) => {
-    commit('GET_ALL_COJO', response.data.data)
+    commit('GET_ALL_COJO', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -1101,7 +1101,7 @@ export function supprimerCojo({commit}, id) {
 
 export  function  getRapport({commit}) {
   queue.push(() => axios.get('/liste_rapport').then((response) => {
-    commit('GET_ALL_RAPPORT', response.data.data)
+    commit('GET_ALL_RAPPORT', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -1151,7 +1151,7 @@ export function supprimerRapport({commit}, id) {
 
 export  function  getObservationBailleur({commit}) {
   queue.push(() => axios.get('/observation_bailleurs').then((response) => {
-    commit('GET_OBSERVATION_BAILLEUR', response.data.data)
+    commit('GET_OBSERVATION_BAILLEUR', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -1212,7 +1212,7 @@ export function supprimerObseravtionBailleur({commit}, id) {
 
 export  function  getCondition({commit}) {
   queue.push(() => axios.get('/conditions').then((response) => {
-    commit('GET_ALL_CONDITION', response.data.data)
+    commit('GET_ALL_CONDITION', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -1270,7 +1270,7 @@ export function supprimerCondition({commit}, id) {
 
 export  function  getTextJuridique({commit}) {
   queue.push(() => axios.get('/text_juridicuques').then((response) => {
-    commit('GET_TEXTJURIDIQUE', response.data.data)
+    commit('GET_TEXTJURIDIQUE', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -1527,7 +1527,7 @@ export  function  getFonctionOccuppe({commit}) {
 
 export  function  getTypeActeEffetFinancier({commit}) {
   queue.push(() => axios.get('/type_act_effets').then((response) => {
-    commit('GET_ALL_TYPE_ACTE_EFFET_FINANCIER', response.data.data)
+    commit('GET_ALL_TYPE_ACTE_EFFET_FINANCIER', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -1583,7 +1583,7 @@ export function supprimerTypeActeEffetFinancier({commit}, id) {
 
 export  function  getTypeAnalyse({commit}) {
   queue.push(() => axios.get('/type_analyses').then((response) => {
-    commit('GET_TYPE_ANALYSE', response.data.data)
+    commit('GET_TYPE_ANALYSE', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -1931,7 +1931,7 @@ export function supprimertypeAnalyse({commit}, id) {
 
 export  function  getDossierCandidat({commit}) {
   queue.push(() => axios.get('/dossier_candidats').then((response) => {
-    commit('GET_DOSSIER_CANDIDAT', response.data.data)
+    commit('GET_DOSSIER_CANDIDAT', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -1990,7 +1990,7 @@ export function supprimerDossierCandidat({commit}, id) {
 
 export  function  getOffreTechnique({commit}) {
     queue.push(() => axios.get('/offre_techniques').then((response) => {
-        commit('GET_ALL_OFFRE_TECHNIQUE', response.data.data)
+        commit('GET_ALL_OFFRE_TECHNIQUE', response.data)
 
     }).catch(error => console.log(error)))
 }
@@ -2049,7 +2049,7 @@ export function supprimerOffreTechnique({commit}, id) {
 
 export  function  getOffreFinancier({commit}) {
     queue.push(() => axios.get('/offre_financieres').then((response) => {
-        commit('GET_ALL_OFFRE_FINANCIER', response.data.data)
+        commit('GET_ALL_OFFRE_FINANCIER', response.data)
 
     }).catch(error => console.log(error)))
 }
@@ -2194,7 +2194,7 @@ export function supprimerOffreFinancier({commit}, id) {
 
 export  function  getAutreTextJuridique({commit}) {
   queue.push(() => axios.get('/autre_textes_juridiques').then((response) => {
-    commit('GET_AUTRE_TEXT_JURIDIQUE', response.data.data)
+    commit('GET_AUTRE_TEXT_JURIDIQUE', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -2327,7 +2327,7 @@ export function supprimerAutreTextjuridique({commit}, id) {
 
 export function getTypeTextJuridique({commit}) {
   queue.push(() => axios.get('/type_text_juridiques').then((response) => {
-    commit('GET_ALL_TYPE_TEXT_JURIDIQUE', response.data.data)
+    commit('GET_ALL_TYPE_TEXT_JURIDIQUE', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -2727,7 +2727,7 @@ export function supprimerOuverture({commit}, id) {
 
 export  function  getTypeProcedures({commit}) {
   queue.push(() => axios.get('/type_procedures').then((response) => {
-    commit('GET_TYPE_PROCEDURE', response.data.data)
+    commit('GET_TYPE_PROCEDURE', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -2877,7 +2877,7 @@ export function supprimerMarche({commit}, id) {
 
 export  function  getTypeMarches({commit}) {
   queue.push(() => axios.get('/type_marches').then((response) => {
-    commit('GET_TYPE_MARCHE', response.data.data)
+    commit('GET_TYPE_MARCHE', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -2934,7 +2934,7 @@ export function supprimerTypeMarche({commit}, id) {
 
 export  function  getModePassations({commit}) {
   queue.push(() => axios.get('/mode_passations').then((response) => {
-    commit('GET_MODE_PASSATION', response.data.data)
+    commit('GET_MODE_PASSATION', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -2992,7 +2992,7 @@ export function supprimerModePassation({commit}, id) {
 
 export  function  getAppelOffre({commit}) {
   queue.push(() => axios.get('/appel_offres').then((response) => {
-    commit('GET_APPEL_OFFRE', response.data.data)
+    commit('GET_APPEL_OFFRE', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -3048,7 +3048,7 @@ export function supprimerAppelOffre({commit}, id) {
 
 export  function  getProcedurePassation({commit}) {
   queue.push(() => axios.get('/procedure_passations').then((response) => {
-    commit('GET_PROCEDURE_PASSATION', response.data.data)
+    commit('GET_PROCEDURE_PASSATION', response.data)
     
 }).catch(error => console.log(error)))
 }
@@ -3178,7 +3178,7 @@ export function supprimerProcedurePassation({ commit, dispatch}, id) {
 
 export  function  getLettreInvitation({commit}) {
     queue.push(() => axios.get('/lettre_invitations').then((response) => {
-        commit('GET_LETTRE_INVITATION', response.data.data)
+        commit('GET_LETTRE_INVITATION', response.data)
 
     }).catch(error => console.log(error)))
 }
@@ -3235,7 +3235,7 @@ export function supprimerLettreInvitation({ commit, dispatch}, id) {
 
 export  function  getMandater({commit}) {
     queue.push(() => axios.get('/mondates').then((response) => {
-        commit('GET_MANDATER', response.data.data)
+        commit('GET_MANDATER', response.data)
 
     }).catch(error => console.log(error)))
 }
@@ -3300,7 +3300,7 @@ export function supprimerMandater({commit}, id) {
 
 export  function  getDocument({commit}) {
   queue.push(() => axios.get('/list_document').then((response) => {
-      commit('GET_ALL_DOCUMENT', response.data.data)
+      commit('GET_ALL_DOCUMENT', response.data)
 
   }).catch(error => console.log(error)))
 }
@@ -3358,7 +3358,7 @@ export function supprimerDocument({commit}, id) {
 
 export  function  getRapportJugement({commit}) {
   queue.push(() => axios.get('/liste_rapport_iugement').then((response) => {
-      commit('GET_ALL_RAPPORTJUGEMENT', response.data.data)
+      commit('GET_ALL_RAPPORTJUGEMENT', response.data)
 
   }).catch(error => console.log(error)))
 }
@@ -3408,8 +3408,8 @@ export function supprimerRapportJugement({commit}, id) {
          
           // // dialog.loading(false) // stops the proceed button's loader
           axios.delete('/delete_rapport_jugement/' + id).then(response =>{
-            commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.data)
-            commit('GET_ALL_ANALYSE_DOSSIER', response.data.data)
+            commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data)
+            commit('GET_ALL_ANALYSE_DOSSIER', response.data)
             dialog.close()
         }  )
 
@@ -3438,8 +3438,8 @@ export function supprimerRapportJugement({commit}, id) {
 
 export  function  getDemandeAno({commit}) {
     queue.push(() => axios.get('/rdemande_ano').then((response) => {
-        // console.log(response.data.data)
-        commit('GET_DEMANDE_ANO', response.data.data)
+        // console.log(response.data)
+        commit('GET_DEMANDE_ANO', response.data)
 
     }).catch(error => console.log(error)))
 }
@@ -3505,7 +3505,7 @@ export function supprimerDemandeAno({commit}, id) {
 
 export  function  getAnalyseDMP({commit}) {
     queue.push(() => axios.get('/analyse_dmp').then((response) => {
-        commit('GET_ANALYSE_DMP', response.data.data)
+        commit('GET_ANALYSE_DMP', response.data)
 
     }).catch(error => console.log(error)))
 }
@@ -3560,7 +3560,7 @@ export function supprimerAnalyseDMP({commit}, id) {
 
 export function getEngagement({ commit }) {
   queue.push(() => axios.get('/engagement').then((response) => {
-    commit('GET_ENGAGEMENT', response.data.data)
+    commit('GET_ENGAGEMENT', response.data)
 
   }).catch(error => console.log(error)))
 }
@@ -3619,7 +3619,7 @@ export function supprimerEngagement({ commit ,dispatch}, id) {
 
 export function getMandat({ commit }) {
   queue.push(() => axios.get('/mandat').then((response) => {
-    commit('GET_MANDAT', response.data.data)
+    commit('GET_MANDAT', response.data)
 
   }).catch(error => console.log(error)))
 }
@@ -3741,7 +3741,7 @@ export function modifierEngagement_val({ commit, dispatch }, objet) {
 
 export  function  getAnoDMPBailleur({commit}) {
     queue.push(() => axios.get('/ano_dmp_bailleurs').then((response) => {
-        commit('GET_ANO_DMP_BAILLEUR', response.data.data)
+        commit('GET_ANO_DMP_BAILLEUR', response.data)
 
     }).catch(error => console.log(error)))
 }
@@ -3816,7 +3816,7 @@ export function modifierMontantBudgetaire({ commit, dispatch }, objet) {
 
 export function getTypeAppel({ commit }) {
   queue.push(() => axios.get('/typeAppel').then((response) => {
-    commit('GET_ALL_TYPE_APPEL', response.data.data)
+    commit('GET_ALL_TYPE_APPEL', response.data)
 
   }).catch(error => console.log(error)))
 }
@@ -3874,7 +3874,7 @@ export function supprimerTypeAppel({ commit }, id) {
 
 export function getTypeCandidat({ commit }) {
   queue.push(() => axios.get('/typeCandidat').then((response) => {
-    commit('GET_ALL_TYPE_CANDADIT', response.data.data)
+    commit('GET_ALL_TYPE_CANDADIT', response.data)
 
   }).catch(error => console.log(error)))
 }
@@ -3928,7 +3928,7 @@ export function supprimerTypeCandidat({ commit }, id) {
 
 export function getPays({ commit }) {
   queue.push(() => axios.get('/pays').then((response) => {
-    commit('GET_ALL_PAYS', response.data.data)
+    commit('GET_ALL_PAYS', response.data)
 
   }).catch(error => console.log(error)))
 }
@@ -3981,7 +3981,7 @@ export function supprimerPays({ commit }, id) {
 
 export function getVille({ commit }) {
   queue.push(() => axios.get('/ville').then((response) => {
-    commit('GET_ALL_VILLE', response.data.data)
+    commit('GET_ALL_VILLE', response.data)
 
   }).catch(error => console.log(error)))
 }
@@ -4040,7 +4040,7 @@ export function supprimerVille({ commit, dispatch }, id) {
 
 export function getCommune({ commit }) {
   queue.push(() => axios.get('/commune').then((response) => {
-    commit('GET_ALL_COMMUNES', response.data.data)
+    commit('GET_ALL_COMMUNES', response.data)
 
   }).catch(error => console.log(error)))
 }
@@ -4094,7 +4094,7 @@ export function supprimerCommune({ commit, dispatch}, id) {
 
 export  function  getMarcheBailleur({commit}) {
     queue.push(() => axios.get('/marcheBailleurs').then((response) => {
-        commit('GET_ALL_BAILLEUR_MARCHE', response.data.data)
+        commit('GET_ALL_BAILLEUR_MARCHE', response.data)
 
     }).catch(error => console.log(error)))
 }
@@ -4143,7 +4143,7 @@ export function supprimerMarcheBailleur({commit}, id) {
 
 export function getFacture({ commit }) {
   queue.push(() => axios.get('/factures').then((response) => {
-    commit('GET_ALL_FACTURE', response.data.data)
+    commit('GET_ALL_FACTURE', response.data)
 
   }).catch(error => console.log(error)))
 }
@@ -4209,7 +4209,7 @@ export function ajouterChoixProcedure({ commit }, elementAjout) {
 }
 export function getChoixProcedure({ commit }) {
   queue.push(() => axios.get('/ChoixProcedure').then((response) => {
-    commit('GET_ALL_CHOIX_PROCEDURE', response.data.data)
+    commit('GET_ALL_CHOIX_PROCEDURE', response.data)
 
   }).catch(error => console.log(error)))
 }
@@ -4220,7 +4220,7 @@ export function getChoixProcedure({ commit }) {
 
 export  function  getMembreCojo({commit}) {
     queue.push(() => axios.get('/membre_cojo').then((response) => {
-        commit('GET_MEMBRE_COJO', response.data.data)
+        commit('GET_MEMBRE_COJO', response.data)
 
     }).catch(error => console.log(error)))
 }
@@ -4269,7 +4269,7 @@ export function supprimerMembreCojo({commit}, id) {
 
 export  function  getProceVerbal({commit}) {
     queue.push(() => axios.get('/proceVerbalJugementOffres').then((response) => {
-        commit('GET_PV', response.data.data)
+        commit('GET_PV', response.data)
 
     }).catch(error => console.log(error)))
 }
@@ -4301,7 +4301,7 @@ export function supprimerProceVerbal({commit}, id) {
             commit('SUPPRIMER_PV', id)
             // // dialog.loading(false) // stops the proceed button's loader
             axios.delete('/suppri_proceVerbalJugementOffres/' + id).then(response =>{
-                commit('GET_ALL_ANALYSE_DOSSIER', response.data.data)
+                commit('GET_ALL_ANALYSE_DOSSIER', response.data)
                 dialog.close()
             }  )
         })
@@ -4355,7 +4355,7 @@ export function modificationProceVerbalOffre2({commit}, element_modifie,config) 
 
 export function getAvenant({ commit }) {
   queue.push(() => axios.get('/avenant').then((response) => {
-    commit('GET_ALL_AVENANT', response.data.data)
+    commit('GET_ALL_AVENANT', response.data)
 
   }).catch(error => console.log(error)))
 }
@@ -4408,7 +4408,7 @@ export function supprimerAvenant({ commit }, id) {
 
 export function getModePaiement({ commit }) {
   queue.push(() => axios.get('/modepaiement').then((response) => {
-    commit('GET_ALL_MODE_PAIEMNT', response.data.data)
+    commit('GET_ALL_MODE_PAIEMNT', response.data)
 
   }).catch(error => console.log(error)))
 }
@@ -4486,7 +4486,7 @@ export function supprimerPlanPassationMarche({commit}, id) {
             commit('DELETE_PLAN_PASSATION_MARCHE', id)
             // // dialog.loading(false) // stops the proceed button's loader
             axios.delete('/plan_passation_marche/' + id).then(response =>{
-                commit('GET_ALL_ANALYSE_DOSSIER', response.data.data)
+                commit('GET_ALL_ANALYSE_DOSSIER', response.data)
                 dialog.close()
             }  )
         })
@@ -4531,7 +4531,7 @@ export function modifierMarcheBascule({ commit, dispatch }, element_modifie) {
 
 export function getEcheances({ commit }) {
     queue.push(() => axios.get('/echeances').then((response) => {
-        commit('GET_ECHEANCES', response.data.data)
+        commit('GET_ECHEANCES', response.data)
 
 }).catch(error => console.log(error)))
 }
@@ -4582,7 +4582,7 @@ export function supprimerEcheances({ commit }, id) {
 
 export function getGestionModules({ commit }) {
   queue.push(() => axios.get('/gestionModule').then((response) => {
-      commit('GET_GESTION_MODULE', response.data.data)
+      commit('GET_GESTION_MODULE', response.data)
 
 }).catch(error => console.log(error)))
 }

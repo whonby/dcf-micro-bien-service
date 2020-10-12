@@ -89,13 +89,13 @@
 
 
 
-        <!-- <li @click.prevent="navigateToCatographieBudgetaire" >
+        <li @click.prevent="navigateToCatographieBudgetaire" >
           <a title="CARTOGRAPHIE" href="#">
             <i class=" icon-globe"></i>
             <span>CARTOGRAPHIE</span>
             <span class="label label-important"></span>
           </a>
-        </li> -->
+        </li>
         <li >
           <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
 

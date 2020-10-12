@@ -826,13 +826,13 @@ CodeExempte
 
 
                    <div id="tab0143720" class="tab-pane">
-                <div align="right">
+                <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
 
 
-                </div>
+                </div> -->
                 <componentBailleur :macheid="detail_marche.id"></componentBailleur>
 
                 </div>

@@ -44,6 +44,7 @@ import LDrawToolbar from 'vue2-leaflet-draw-toolbar';
 // ...
 Vue.component('l-draw-toolbar', LDrawToolbar);
 Vue.use(VueTelInput)
+
 // Vue.component('p-input', PrettyInput);
 // Vue.component('p-check', PrettyCheck);
 // Vue.component('p-radio', PrettyRadio);
