@@ -229,14 +229,14 @@ CodeExempte
            </ul>
         </div>
                         </div>
-<!-- 
+
                           <div id="tab10000" class="tab-pane">
                      <planification></planification>
                      </div>
                        <div id="tab109" class="tab-pane">
                      <contratualisation></contratualisation>
                      
-                     </div> -->
+                     </div>
                     
 
 
@@ -253,16 +253,16 @@ CodeExempte
 </template>
 
 <script>
-//  import planification from "../component/contratualisation"
-//  import contratualisation from "../component/contratualisation"
+  import planification from "../component/planification"
+  import contratualisation from "../component/contratualisation"
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
  import {admin,dcf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
  import {partition} from '../../../../src/Repositories/Repository'
 export default {
   components:{
-    //  planification,
-    //  contratualisation
+      planification,
+    contratualisation
   },
   name:'type facture',
   data() {

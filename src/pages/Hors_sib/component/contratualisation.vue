@@ -139,8 +139,8 @@
 </template>
 <script>
 import {mapGetters,mapActions} from "vuex";
-import {admin,dcf,noDCfNoAdmin} from "../../../../Repositories/Auth"
-import {formatageSomme} from "../../../../Repositories/Repository"
+import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth"
+import {formatageSomme} from "../../../Repositories/Repository"
 export default {
     data(){
         return{

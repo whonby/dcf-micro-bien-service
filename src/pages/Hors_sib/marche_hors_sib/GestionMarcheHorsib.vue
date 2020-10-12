@@ -30,12 +30,12 @@
                         <a data-toggle="tab" href="#tab00008">Liste des marchés <span class="badge badge-info"></span></a>
                       </li>
                        
-                     <li class="">
+                     <!-- <li class="">
                         <a data-toggle="tab" href="#marchehppm">Liste des marchés Hors PPM   <span class="badge badge-warning"></span></a>
-                      </li>
-                       <li class="">
+                      </li> -->
+                       <!-- <li class="">
                         <a data-toggle="tab" href="#marcheEntreprise">Marché par entreprise  <span class="badge badge-warning"></span></a>
-                      </li>
+                      </li> -->
                             <!-- <li class="">
                         <a data-toggle="tab" href="#tab00214">Liste des Marchés de Bien&Service et Fourniture   <span class="badge badge-warning">{{nombreMarcheBienServiceEtFourniture}}</span></a>
                       </li>

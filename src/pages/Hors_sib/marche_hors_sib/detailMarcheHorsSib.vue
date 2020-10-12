@@ -994,8 +994,8 @@ created() {
       "getPersonnaliseBudgetGeneral",
       "afficheTransfertValider",
       "afficheBudgetActive",
-      "getterligneExempter"
-      // "montantBudgetGeneral"
+      "getterligneExempter",
+       "budgetEclate"
       // "chapitres",
       // "sections"
     ]),
@@ -1124,14 +1124,13 @@ afficherLibelleTypeMarche(){
         }
       };
     },
-
      afficherLaDotationIntial() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.afficheBudgetActive.find(qtreel => qtreel.economique_id == id);
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id);
 
       if (qtereel) {
-        return qtereel.Dotation_Initiale;
+        return qtereel.dotation;
       }
       return 0
         }
@@ -1163,18 +1162,18 @@ budgetConsommerTransfert(){
     
   }
 },
-budgetConsommerDesModule() {
-      const val = parseInt(this.budgetConsommerBienService(this.detail_marche.economique_id)) + parseInt(this.budgetConsommerTransfert(this.detail_marche.economique_id));
+// budgetConsommerDesModule() {
+//       const val = parseInt(this.budgetConsommerBienService(this.detail_marche.economique_id)) + parseInt(this.budgetConsommerTransfert(this.detail_marche.economique_id));
       
-       if (val) {
-        return parseInt(val).toFixed(0);
-      }
+//        if (val) {
+//         return parseInt(val).toFixed(0);
+//       }
       
-      return 0
-    },
+//       return 0
+//     },
 
 budgetDisponible() {
-      const val = parseInt(this.afficherLaDotationIntial(this.detail_marche.economique_id)) - parseInt(this.budgetConsommerDesModule);
+      const val = parseInt(this.afficherLaDotationIntial(this.detail_marche.economique_id)) ;
       
        if (val) {
         return parseInt(val).toFixed(0);

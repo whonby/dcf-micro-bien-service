@@ -157,8 +157,8 @@ montantEnPlanification
 <script>
 import {mapGetters,mapActions} from "vuex";
  import {admin,dcf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
-import {formatageSomme} from "../../../../Repositories/Repository"
-import {partition} from "../../../../Repositories/Repository"
+import {formatageSomme} from "../../../Repositories/Repository"
+import {partition} from "../../../Repositories/Repository"
 export default {
     data(){
         return{
