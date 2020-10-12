@@ -108,7 +108,7 @@
                 Recherche
                 <div class="sidebar-close"><i class="fa fa-caret-left"></i></div>
               </h1>
-              <table class="table table-bordered table-striped">
+              <table class="table table-striped">
                 <tbody>
                 <tr>
                   <td>
@@ -126,40 +126,43 @@
                     <a href="#" @click.prevent="videUniteAdmin()" style="color: red" v-if="unite_administrative_id"><i class="fa fa-trash-o"></i></a>
                   </td>
                 </tr>
+                </tbody>
+              </table>
+              <table class="table table-striped">
+                <tbody>
                 <tr>
                   <td>
-                  <label>Régions</label>
-                  <model-list-select style="background-color: rgb(255,255,255);"
-                                     class="wide"
-                                     :list="regions"
-                                     v-model="region"
-                                     option-value="id"
-                                     option-text="libelle"
+                    <label>Infrastructure</label>
+                    <model-list-select style="background-color: rgb(255,255,255);"
+                                       class="wide"
+                                       :list="getterInfrastrucure"
+                                       v-model="infrastructure"
+                                       option-value="id"
+                                       option-text="libelle"
 
-                                     placeholder="Régions"
-                  >
+                                       placeholder="Infrastructure"
+                    >
 
-                  </model-list-select>
+                    </model-list-select>
+                    <a href="#" @click.prevent="videInfrastructure()" v-if="infrastructure" style="color: red"><i class="fa fa-trash-o"></i></a>
+
+                  </td>
+                  <td>
+                    <label>Régions</label>
+                    <model-list-select style="background-color: rgb(255,255,255);"
+                                       class="wide"
+                                       :list="regions"
+                                       v-model="region"
+                                       option-value="id"
+                                       option-text="libelle"
+
+                                       placeholder="Régions"
+                    >
+
+                    </model-list-select>
                     <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a>
                   </td>
                 </tr>
-<!--                <tr>-->
-<!--                  <td>-->
-<!--                    <label>Départements</label>-->
-<!--                    <model-list-select style="background-color: rgb(255,255,255);"-->
-<!--                                       class="wide"-->
-<!--                                       :list="departements(region)"-->
-<!--                                       v-model="departement"-->
-<!--                                       option-value="id"-->
-<!--                                       option-text="libelle"-->
-
-<!--                                       placeholder="Départements"-->
-<!--                    >-->
-
-<!--                    </model-list-select>-->
-
-<!--                  </td>-->
-<!--                </tr>-->
 <!--                <tr>-->
 <!--                  <td>-->
 <!--                    <label>Sous préfècture</label>-->
@@ -221,7 +224,12 @@
 
               </div>
 <hr>
-
+              <bar-chart
+                  id="bar" :data="barData" xkey="year" ykeys='[ "and", "ios", "win" ]' resize="true"
+                  labels='[ "Android", "iOS", "Windows" ]' bar-colorssss='[ "#FF6384", "#36A2EB", "#FFCE56" ]'
+                  :bar-colors="osColors"
+                  grid="true" grid-text-weight="bold">
+              </bar-chart>
             </div>
 
             <div class="sidebar-pane" id="messages">
@@ -431,7 +439,7 @@ import L from 'leaflet-sidebar-v2'
 import C from "leaflet-control-window"
 import Raphael from 'raphael/raphael'
 global.Raphael = Raphael
-import { DonutChart } from 'vue-morris'
+import { DonutChart ,BarChart} from 'vue-morris'
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import VGeosearch from 'vue2-leaflet-geosearch';
 import {mapGetters} from 'vuex'
@@ -450,6 +458,7 @@ export default {
   components: {
     LControlFullscreen,
     DonutChart,
+    BarChart,
     LMap,
     LTileLayer,
     VGeosearch,
@@ -475,6 +484,7 @@ export default {
       departement:"",
       sous_prefecture:'',
       region:"",
+      infrastructure:"",
       value3: false,
       styles: {
         height: 'calc(100% - 55px)',
@@ -484,6 +494,12 @@ export default {
       },
       objetUnite:"",
       donutData: [],
+      barData: [
+        { year: '2013', and: 10, ios: 5, win: 2 },
+        { year: '2014', and: 10, ios: 15, win: 3 },
+        { year: '2015', and: 20, ios: 25, win: 2 },
+        { year: '2016', and: 30, ios: 20, win: 1 },
+      ],
       donutDataUniteOuRegions: [],
       // pyDepartmentsData,
       // geojson,
@@ -589,18 +605,20 @@ export default {
     };
   },
 created() {
-//console.log(this.getterInfrastrucure)
+    console.log(".......................")
+console.log(this.getterInfrastrucure)
+  console.log(".......................")
 },
   computed: {
 // methode pour maper notre guetter
     ...mapGetters('parametreGenerauxAdministratif', ['structures_geographiques',
-      'localisations_geographiques',"getterLocalisationGeoAll"]),
+      'localisations_geographiques',"getterLocalisationGeoAll","getterInfrastrucure"]),
     ...mapGetters("uniteadministrative", [
       "acteCreations",
       "typeTextes",
       "uniteAdministratives",
       "getterBudgeCharge",
-        "getterInfrastrucure"
+
     ]),
     ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise"]),
     regions(){
@@ -798,24 +816,51 @@ created() {
 
 
 
-      if(vM.region!="" && vM.unite_administrative_id==""){
+      if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure==""){
         objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region)
 
       }
 
-      if(vM.unite_administrative_id!="" && vM.region==""){
+      if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
         objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id)
-
       }
 
-      if(vM.unite_administrative_id!="" && vM.region!=""){
+      if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region==""){
+        objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure)
+      }
 
+      if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure==""){
         objet =this.marches.filter(item=>{
           if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region){
             return item
           }
         })
       }
+
+      if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!=""){
+        objet =this.marches.filter(item=>{
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure){
+            return item
+          }
+        })
+      }
+
+      if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!=""){
+        objet =this.marches.filter(item=>{
+          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region){
+            return item
+          }
+        })
+      }
+
+      if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!=""){
+        objet =this.marches.filter(item=>{
+          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region){
+            return item
+          }
+        })
+      }
+
       return objet
     },
 
@@ -1029,14 +1074,21 @@ created() {
   methods: {
     videUniteAdmin(){
       this.unite_administrative_id=""
-      this.zoom=6
+      this.zoom=5
       this.objetUnite=""
       this.info_sidebar_marche.close()
       this.info_sidebar_marche.disablePanel('infomarche');
     },
     videRegions(){
       this.region=""
-      this.zoom=6;
+      this.zoom=5;
+      this.objetUnite=""
+      this.info_sidebar_marche.close()
+      this.info_sidebar_marche.disablePanel('infomarche');
+    },
+    videInfrastructure(){
+      this.infrastructure=""
+      this.zoom=5;
       this.objetUnite=""
       this.info_sidebar_marche.close()
       this.info_sidebar_marche.disablePanel('infomarche');
@@ -1065,6 +1117,7 @@ created() {
 this.objetUnite=objet
       this.unite_administrative_id=objet.unite_administrative_id
       this.region=objet.region_id
+      this.infrastructure=objet.infrastructure_id
      //  const mapComponent = this.$refs.map;
      // // console.log(mapComponent.mapObject)
      //  const map = mapComponent.mapObject;
@@ -1091,6 +1144,10 @@ console.log(C)
       this.zone_geographique=""
       this.iduniteadmin=""
       this.libelle_unite_admin=""
+    },
+    osColors () {
+      console.log('osColors')
+      return []
     },
     click: (e) => console.log("clusterclick", e),
     ready: (e) => console.log('ready', e),
