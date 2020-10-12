@@ -1,4 +1,5 @@
-
+isButtunAddDossierCandidat
+CodeExempte
 <template>
     
 
@@ -37,7 +38,7 @@
                                 <td class="taskOptions">
                                     {{formatageSomme(parseFloat(detail_marche.montant_marche))}}
                                 </td>
-                                 <td class="taskOptions"> 
+                                 <td class="taskOptions">
                                     {{formatageSomme(parseFloat(budgetDisponible))}}
                                 </td>
                                 <td class="taskOptions">
@@ -59,10 +60,32 @@
                     </div>
                 </div>
             </div> 
+        <template v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id) ">
+            <div class="widget-title">
+            <ul class="nav nav-tabs">
+             <li class="active"><a data-toggle="tab" href="#tab0074">Attribution</a></li>
+             <li class=""><a data-toggle="tab" href="#tab00214">Bailleur</a></li>
+        </ul>
+          </div>
+    <div class="widget-content tab-content">
+<div id="tab0074" class="tab-pane active">
+<executionLigneExempte :macheid="detail_marche.id"></executionLigneExempte>
+    </div>
 
-      
 
-        
+       <div id="tab00214" class="tab-pane">
+                <div align="right">
+             <div class="widget-content">
+                 <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+                </div>
+                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                </div>
+    </div>
+    
+        </template>
+
+        <template v-else>
 <h4 style="text-align:center;">{{afficheLeNomDesProcedure}}</h4>
 
             <div class="row-fluid">
@@ -832,7 +855,7 @@
                      </template>
                 </div>
             </div>
-       
+        </template>
 
            
               <!-- <div class="modal-footer">
@@ -850,29 +873,31 @@
 <script>
     import { mapGetters, mapActions } from "vuex";
     //import moment from 'moment';
-   // import componentCotation from '..//dossierDetailMarchePs/dossierComponentPs/componentCotation';
-      import componentCotation from '../../bien_service/dossierDetailMarchePs/dossierComponentPs/componentCotation';
-    
-    import componentOuverture from '../../bien_service/dossierDetailMarchePs/dossierComponentOuverture/componentOuverture';  
- 
+    import componentCotation from '../../bien_service/dossierDetailMarchePs/dossierComponentPs/componentCotation';
+     //import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
+     import componentOuverture from '../../bien_service/dossierDetailMarchePs/dossierComponentOuverture/componentOuverture';  
+ //  import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
     import publicationOffre from '../../bien_service/DossierPso/publicationOffre/publicationOffre';
-   
+   // import addLot from '../dossierLot/addLot';
         import invitationCf from '../../bien_service/DossierPso/lettreInvitation/invitationCf';
  import mandateBs from '../../bien_service/DossierPso/mandaté/mandateBs';
-
+ //import componentOuverture1 from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
+//import dossierCandidat from '../DossierPso/dossierCandidat/dossierCandidat'
     import dossierCandidat from "@/pages/bien_service/DossierPso/dossierCandidat/dossierCandidat";
-  
+   // import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
+   // import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
+   //  import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
 import rapportOuverture from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
      
    import componentBailleur from '../../bien_service/dossierDetailMarchePs/dossierBailleur/componentBailleur';
 
-     // import executionLigneExempte from '../../bien_service/executionLigneExempte/executionLigneExempte';
+      import executionLigneExempte from '../../bien_service/executionLigneExempte/executionLigneExempte';
 
-   
+    //    import componentDemandeAno from '../dossierDetailMarcheAOI_AON/dossierDemande_ano_cf/componentDemandeAno';
         import componentAvisAnoCf from '../../bien_service/dossierDetailMarcheAOI_AON/dossierAvisAnoCf/componentAvisAnoCf';
-    
+     //    import componentAvisBailleurCf from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
 
-import LotMarche from "@/pages/bien_service/component/LotMarche";
+//import LotMarche from "@/pages/bien_service/component/LotMarche";
 import OuvertureOffre from "@/pages/bien_service/component/OuvertureOffre/OuvertureOffre";
 import PvJugement from "@/pages/bien_service/component/Jugement/pv/PvJugement";
     import 'vue-search-select/dist/VueSearchSelect.css'
@@ -891,7 +916,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
           Jugement,
           OuvertureOffre,
             componentCotation,
-          LotMarche,
+          //LotMarche,
             componentOuverture,
            // componentActe,
             publicationOffre,
@@ -916,7 +941,7 @@ dossierCandidat,
 
             componentAvisAnoCf,
         //    componentAvisBailleurCf,
-            //executionLigneExempte
+            executionLigneExempte
 
 
         },
@@ -930,12 +955,12 @@ dossierCandidat,
 
                 ],
                     
-              macheid:""
+              marcheid:""
             };
         },
 created() {
             this.marcheid=this.$route.params.id
-   this.detail_marche = this.gettersMarcheHorsib.find(
+   this.detail_marche = this.getPersonnaliserMarchehorSib.find(
        idmarche => idmarche.id == this.$route.params.id
    )
   /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
@@ -945,11 +970,11 @@ created() {
 
             ...mapGetters("bienService", ["getterCojos","mandate","getMandatPersonnaliserVise", "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
                "getterDossierCandidats","marches","gettersOuverturePersonnaliser","getterAnalyseDossiers",
-               "getActeEffetFinancierPersonnaliser","typeMarches","gettersCotationPersonnaliser","getterAnoDMPBailleur"
+               "getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser","typeMarches","getterAnoDMPBailleur"
                
                
               ]),
-            ...mapGetters("horSib", ["gettersMarcheHorsib"]),
+ ...mapGetters("horSib", ["gettersMarcheHorsib","getPersonnaliserMarchehorSib"]),
                
               ...mapGetters('parametreGenerauxBudgetaire', ['structures_budgetaires', 
   'plans_budgetaires']),
@@ -969,13 +994,11 @@ created() {
       "getPersonnaliseBudgetGeneral",
       "afficheTransfertValider",
       "afficheBudgetActive",
-      "budgetEclate",
       "getterligneExempter"
       // "montantBudgetGeneral"
       // "chapitres",
       // "sections"
     ]),
-  
      CodeExempte() {
       return id => {
         if (id != null && id != "") {
@@ -1048,6 +1071,17 @@ listeAvisAnoBailleur(){
 //         return null
 //     }
 // },
+afficherLibelleTypeMarche(){
+ return id =>{
+     if(id!=null && id!=""){
+       let response = this.typeMarches.find(item => item.id==id)
+       if(response){
+         return response.libelle
+       }
+     }
+   }
+ },
+
  afficherLibelleUa(){
    return id =>{
      if(id!=null && id!=""){
@@ -1058,19 +1092,6 @@ listeAvisAnoBailleur(){
      }
    }
  },
-
-  afficherLibelleTypeMarche() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return 0
-        }
-      };
-    },
 
 
   afficherCodeTypeProcedure() {
@@ -1107,22 +1128,23 @@ listeAvisAnoBailleur(){
      afficherLaDotationIntial() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id);
+           const qtereel = this.afficheBudgetActive.find(qtreel => qtreel.economique_id == id);
 
       if (qtereel) {
-        return qtereel.dotation;
+        return qtereel.Dotation_Initiale;
       }
       return 0
         }
       };
     },
 
-// MontantTotal(){
-   
-//     var montant = this.groupe.ua_budget_general.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0); 
-//       if(isNaN(montant)) return null
-//       return montant
-// }, 
+MontantTotal(){
+  
+    
+    var montant = this.groupe.ua_budget_general.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0); 
+      if(isNaN(montant)) return null
+      return montant
+}, 
 budgetConsommerBienService(){
   return id => {
     if(id !=""){
@@ -1135,7 +1157,7 @@ budgetConsommerBienService(){
 budgetConsommerTransfert(){
   return id => {
     if(id !=""){
-    return this.afficheTransfertValider.filter(element => element.economique_id == this.detail_marche.economique_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
+    return this.afficheTransfertValider.filter(element => element.ligne_budgetaire_id == this.detail_marche.economique_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
       
     }
     
@@ -1152,7 +1174,7 @@ budgetConsommerDesModule() {
     },
 
 budgetDisponible() {
-      const val = parseInt(this.afficherLaDotationIntial(this.detail_marche.ligneeconomique_id)) - parseInt(this.budgetConsommerDesModule);
+      const val = parseInt(this.afficherLaDotationIntial(this.detail_marche.economique_id)) - parseInt(this.budgetConsommerDesModule);
       
        if (val) {
         return parseInt(val).toFixed(0);
