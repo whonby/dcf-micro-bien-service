@@ -434,7 +434,7 @@
 <script>
 import LControlFullscreen from 'vue2-leaflet-fullscreen';
 import L from 'leaflet-sidebar-v2'
-import C from "leaflet-control-window"
+//import C from "leaflet-control-window"
 import Raphael from 'raphael/raphael'
 global.Raphael = Raphael
 import { DonutChart ,/*BarChart*/} from 'vue-morris'
@@ -445,7 +445,7 @@ import { latLng, Icon, icon } from 'leaflet'
 import { LMap, LTileLayer, LIconDefault,LControlLayers,LPopup,LCircleMarker} from "vue2-leaflet";
 import iconUrl from 'leaflet/dist/images/marker-icon.png'
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
-ddimport { formatageSomme} from "@/Repositories/Repository";
+import { formatageSomme} from "@/Repositories/Repository";
 //import { InfoControl, ReferenceChart, ChoroplethLayer } from 'vue-choropleth'
 import {  ModelListSelect } from 'vue-search-select'
 import 'vue-search-select/dist/VueSearchSelect.css'
@@ -779,7 +779,7 @@ created() {
 
           vM.donutData.push(budgetExecute)
           vM.donutData.push(budgetReste)
-
+         //
           let objetAlocalise={
             id:value.id,
             ville:value.objet,
@@ -792,6 +792,7 @@ created() {
             colorFill:colorFill,
             region_id:value.localisation_geographie_id,
             unite_administrative_id:value.unite_administrative_id,
+            infrastructure_id:value.infrastructure_id,
             donutData:vM.donutData
           }
 
@@ -837,12 +838,23 @@ created() {
         }
 
         ObjetMontantPrevue.data.push(montant_prevue)
-        ObjetMontantRealise.data.push(0)
+        if(montant_prevue==0){
+          ObjetMontantRealise.data.push(0)
+        }else{
+          ObjetMontantRealise.data.push(vM.getRandomInt(1000000000))
+        }
+
       })
       dataArray.push(ObjetMontantPrevue)
       dataArray.push(ObjetMontantRealise)
       return dataArray
     },
+     getRandomInt() {
+      return max=>{
+        return Math.floor(Math.random() * Math.floor(max));
+      }
+
+},
     montantBudegtPasUniteAdminOuRegion(){
      // let localisation=[]
       let vM=this;
@@ -1200,22 +1212,16 @@ created() {
     uniteAdmin(objet){
       this.value3=true
       /*this.activeUa=false*/
-      //console.log(objet)
+      console.log(objet)
 this.objetUnite=objet
       this.unite_administrative_id=objet.unite_administrative_id
       this.region=objet.region_id
       this.infrastructure=objet.infrastructure_id
-     //  const mapComponent = this.$refs.map;
-     // // console.log(mapComponent.mapObject)
-     //  const map = mapComponent.mapObject;
-console.log(C)
-    // let LControl=window.L
-    //   LControl.control.window(map,{title:'Heading!',content:'First paragraph.',visible: true})
-    // console.log(LControl)
+
       this.info_sidebar_marche.enablePanel('infomarche');
 
       this.info_sidebar_marche.open('infomarche')
-     // this.info_sidebar_marche.show()
+
 
     },
     uniteAdministrativeSelect(id,libelle, $event){
