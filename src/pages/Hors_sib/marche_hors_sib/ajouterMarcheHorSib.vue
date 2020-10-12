@@ -43,8 +43,8 @@
             <label class="control-label" title="unite administrative">UA</label>
             <div class="controls">
             <select v-model="formData.unite_administrative_id" class="span8">
-               <option v-for="plans in budgetEclate" :key="plans.id" 
-               :value="plans.uniteadministrative_id">{{afficherLibelleUniteAdministrative(plans.uniteadministrative_id)}}</option>
+               <option v-for="plans in groupeUaPourMarheHorSib" :key="plans[0].id" 
+               :value="plans[0].uniteadministrative_id">{{afficherLibelleUniteAdministrative(plans[0].uniteadministrative_id)}}</option>
            </select>
             </div>
           </div>
@@ -292,7 +292,7 @@
               </tr>
 
               <tr>
-              <td colspan="2">
+              <td colspan="">
      <div class="control-group">
       <label class="control-label">Latitude</label>
       <div class="controls">
@@ -305,7 +305,7 @@
    </div>
    </div>
      </td>
-           <td colspan="2">
+           <td colspan="3">
             <div class="control-group">
        <label class="control-label">Longitude</label>
        <div class="controls">
@@ -474,7 +474,7 @@ export default {
 
 
      ...mapGetters("uniteadministrative",['getterligneExempter','uniteAdministratives',"budgetGeneral",
-      "getPersonnaliseBudgetGeneral","groupUa", "budgetEclate","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
+      "getPersonnaliseBudgetGeneral","groupUa","groupeUaPourMarheHorSib" ,"budgetEclate","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
       "montantBudgetGeneral", ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),

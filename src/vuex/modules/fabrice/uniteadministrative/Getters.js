@@ -706,6 +706,10 @@ export const groupBudgetGeneral = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.budgetGeneral, "ua_id");
 };
+export const groupeUaPourMarheHorSib = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetEclate, "unite_administrative_id");
+};
 export {
   // typeTextes,
   uniteAdministratives,
