@@ -42,10 +42,10 @@ CodeExempte
                                     {{formatageSomme(parseFloat(budgetDisponible))}}
                                 </td>
                                 <td class="taskOptions">
-                                    {{detail_marche.type_marche_id}}
+                                    {{afficherLibelleTypeMarche(detail_marche.type_marche_id)}}
                                 </td>
                                 <td class="taskOptions">
-                                    {{detail_marche.unite_administrative_id}}
+                                    {{afficherLibelleUa(detail_marche.unite_administrative_id)}}
                                 </td>
                                   <td>
 
@@ -970,7 +970,7 @@ created() {
 
             ...mapGetters("bienService", ["getterCojos","mandate","getMandatPersonnaliserVise", "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
                "getterDossierCandidats","marches","gettersOuverturePersonnaliser","getterAnalyseDossiers",
-               "getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser","getterAnoDMPBailleur"
+               "getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser","typeMarches","getterAnoDMPBailleur"
                
                
               ]),
@@ -1071,9 +1071,27 @@ listeAvisAnoBailleur(){
 //         return null
 //     }
 // },
+afficherLibelleTypeMarche(){
+ return id =>{
+     if(id!=null && id!=""){
+       let response = this.typeMarches.find(item => item.id==id)
+       if(response){
+         return response.libelle
+       }
+     }
+   }
+ },
 
-
-
+ afficherLibelleUa(){
+   return id =>{
+     if(id!=null && id!=""){
+       let response = this.uniteAdministratives.find(item => item.id==id)
+       if(response){
+         return response.libelle
+       }
+     }
+   }
+ },
 
 
   afficherCodeTypeProcedure() {

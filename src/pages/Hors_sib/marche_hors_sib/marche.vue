@@ -7,11 +7,11 @@ CodeExempte
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab0000">Tous les marchés    <span class="badge badge" ></span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab0000">Tous les marchés  <span class="badge badge" >{{nombreMarcheHorsSib}}</span></a></li>
                                
-                               <li ><a data-toggle="tab" href="#tab10000"> Planification        <span class="badge badge-important" > </span></a></li>
-                                <!-- <li ><a data-toggle="tab" href="#tab10"> Contratualisation        <span class="badge badge-success" ></span></a></li>
-                                <li><a data-toggle="tab" href="#tab20"> Exécution      <span class="badge badge-warning" ></span></a></li>
+                               <li ><a data-toggle="tab" href="#tab10000"> Planification <span class="badge badge-important" > {{0}} </span></a></li>
+                                <li ><a data-toggle="tab" href="#tab109"> Contratualisation   <span class="badge badge-success" ></span></a></li>
+                                <!-- <li><a data-toggle="tab" href="#tab20"> Exécution      <span class="badge badge-warning" ></span></a></li>
                                
                                  <li><a data-toggle="tab" href="#tab20002">Résiliés    <span class="badge badge-info" > </span></a></li>
                                     <li><a data-toggle="tab" href="#tab20789">Suspendus   <span class="badge badge" > </span></a></li>
@@ -32,12 +32,23 @@ CodeExempte
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des March&eacute;s hors sib</h5>
+              <h5>Liste des March&eacute;s</h5>
               <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
               </div>
             </div>
+            <div class="span4">
+            <br>
+          Afficher
+         <select name="pets" id="pet-select" v-model="size" class="span3">
+            <option value="10">10</option>
+            <option value="25">25</option>
+           <option value="50">50</option>
+       <option value="100">100</option>
+      </select>
+           Entrer
+        </div>
                <table class="table table-bordered table-striped" >
                 <thead>
                 <tr>
@@ -53,14 +64,14 @@ CodeExempte
                      <th>Statut</th>
                     
                     <th>Cycle de vie</th>
-                    <th>Etat en cours</th>
+                    <!-- <th>Etat en cours</th> -->
                    <th colspan="3">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                  
-                  <tr class="odd gradeX" v-for="activites in 
-                marcheHorSibFiltre"
+                  <tr class="odd gradeX" v-for="activites in partition(marcheHorSibFiltre, size)[page]
+                "
                  :key="activites.id">
                   <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{activites.exo_id || 'Non renseigné'}}</td>
@@ -131,7 +142,7 @@ CodeExempte
     </router-link>
                    </td>
                    
-                   <td>
+                   <!-- <td>
                     
                       <router-link :to="{ name: 'DetailMarchePs', params: { id: activites.id }}"
                 class="btn btn-default " title="historique la contratualisation">
@@ -143,23 +154,13 @@ CodeExempte
                 class="btn btn-default " title="historique execution Marche">
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
-                   </td>
+                   </td> -->
            <td>
           
                      <button @click.prevent="supprimerMarche(activites.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
                    </td>
-                   
- 
-<!-- <td>
-    <div class="btn-group">
-
-                    
-              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-             
-            </div>
-</td> -->
+                  
                    
 
                        </tr>
@@ -223,16 +224,32 @@ CodeExempte
                     </tr>
                 </tbody>
               </table>
+              
+                   <div class="pagination alternate">
+             <ul>
+           <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+           <li  v-for="(titre, index) in partition(marcheHorSibFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+           <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+            <li :class="{ disabled : page == partition(marcheHorSibFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+           </ul>
+        </div>
                         </div>
 
-                          <div id="tab10000" class="tab-pane active">
+                          <div id="tab10000" class="tab-pane">
                      <planification></planification>
                      </div>
+                       <div id="tab109" class="tab-pane">
+                     <contratualisation></contratualisation>
+                     
+                     </div>
+                    
 
 
                     </div>
 
                 </div>
+
+            
             </div>
         </div>
 
@@ -242,16 +259,22 @@ CodeExempte
 
 <script>
 import planification from "./component/planification"
+import contratualisation from "./component/contratualisation"
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
  import {admin,dcf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
+ import {partition} from '../../../../src/Repositories/Repository'
 export default {
   components:{
-    planification
+    planification,
+    contratualisation
   },
   name:'type facture',
   data() {
     return {
+       page:0,
+       size:10,
+       active_el:0,
       fabActions: [
         {
           name: "cache",
@@ -400,6 +423,16 @@ return this.afficherListeMarcheHorSib.filter((item) => {
   
  },
 
+ 
+ 
+
+ // afficher le nommbre demareche hors sib
+
+ nombreMarcheHorsSib(){
+   return this.afficherListeMarcheHorSib.length
+ },
+ 
+
       CodeExempte() {
       return id => {
         if (id != null && id != "") {
@@ -540,18 +573,20 @@ afficherModifierMarcheHorSib(id){
     // },
     // fonction pour vider l'input modification
    
-    
+    partition:partition,
 
-
-
-
-
-
-
- 
-   
-   
-   
+  getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
    
    
 

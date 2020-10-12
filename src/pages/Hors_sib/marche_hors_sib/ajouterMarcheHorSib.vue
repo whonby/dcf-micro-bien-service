@@ -240,7 +240,7 @@
               </tr>
               
               <tr>
-                <td colspan="2">
+                <td>
                   <div class="control-group">
        <label class="control-label">localisation géographique</label>
        <div class="controls">
@@ -255,7 +255,7 @@
                                 <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
               </select> -->
-               <select v-model="formData.localisation_geographie_id" class="span8" >
+               <select v-model="formData.localisation_geographie_id" class="span5" >
                <option v-for="plans in afficherCodeStructureLibelle(recupererLataille)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -263,7 +263,36 @@
        </div>
      </div>
          </td>
-              <td>
+                <td>
+                  <div class="control-group">
+       <label class="control-label">Departement</label>
+       <div class="controls">
+        
+               <select v-model="formData.departement_id" class="span4" :readOnly="deveroiullage">
+               <option v-for="plans in recupererParentId(formData.localisation_geographie_id)" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+           </select>
+      
+       </div>
+     </div>
+         </td>
+                <td colspan="2">
+                  <div class="control-group">
+       <label class="control-label">Sous-prefecture</label>
+       <div class="controls">
+       
+               <select v-model="formData.sous_prefecture_id" class="span6" :readOnly="deveroiullageSousprefecture">
+               <option v-for="plans in recupererParentId(formData.departement_id)" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+           </select>
+      
+       </div>
+     </div>
+         </td>
+              </tr>
+
+              <tr>
+              <td colspan="2">
      <div class="control-group">
       <label class="control-label">Latitude</label>
       <div class="controls">
@@ -276,17 +305,39 @@
    </div>
    </div>
      </td>
-           <td>
+           <td colspan="2">
             <div class="control-group">
        <label class="control-label">Longitude</label>
        <div class="controls">
          <input
            type="text"
            v-model="formData.longitude"
-           class="span4" />
+           class="span" />
        </div>
      </div>
          </td>
+          <!-- <td >
+            <div class="control-group">
+       <label class="control-label">Longitude</label>
+       <div class="controls">
+         <input
+           type="text"
+           v-model="formData.longitude"
+           class="span" />
+       </div>
+     </div>
+         </td> -->
+          <!-- <td >
+            <div class="control-group">
+       <label class="control-label">Longitude</label>
+       <div class="controls">
+         <input
+           type="text"
+           v-model="formData.longitude"
+           class="span" />
+       </div>
+     </div>
+         </td> -->
 
       
        
@@ -351,6 +402,8 @@ export default {
 
     formData: {
       latitude:"",
+      departement_id:"",
+      sous_prefecture_id:"",
       longitude:"",
       localisation_geographie_id:"",
       libelle_procedure:"",
@@ -528,6 +581,14 @@ afficherCodeStructure(){
         }
       }
     },
+// recuperation parent id
+recupererParentId(){
+  return id =>{
+    if(id!=null && id!=""){
+      return this.localisations_geographiques.filter(item => item.parent==id)
+    }
+  }
+}, 
 
     afficherCodeStructureLibelle(){
       return id =>{
@@ -538,6 +599,19 @@ afficherCodeStructure(){
         }
       }
     },
+    deveroiullage(){
+      return this.formData.localisation_geographie_id=="";
+    },
+    deveroiullageSousprefecture(){
+      return this.formData.departement_id=="";
+    },
+    recupererLatailleDepartement(){
+  return this.structures_geographiques.length-1
+},
+
+   recupererLatailleSousPrefecture(){
+  return this.structures_geographiques.length
+},
     
 
  //reucperation annee budgetaire dynamique
