@@ -34,7 +34,14 @@ import listeBudgetIntialParUa from "../../pages/unites_administratives/filtreDes
 import BudgetEclatePrincipal from "../../pages/Hors_sib/grpeBudgetEclate/BudgetEclateProjet.vue"
 
 import ListeBudgeteclate from "../../pages/Hors_sib/grpeBudgetEclate/ListeBudgetEclate.vue"
+import AjouterBudgetEclate from "../../pages/Hors_sib/grpeBudgetEclate/AjouterBudgetEclate.vue"
 const UniteAdministativeRoutes = [
+  {
+    path: "/AjouterBudgetEclate/:id",
+    name: "AjouterBudgetEclate",
+    component: AjouterBudgetEclate
+}
+,
   {
     path: "/ListeBudgeteclate/:id",
     name: "ListeBudgeteclate",

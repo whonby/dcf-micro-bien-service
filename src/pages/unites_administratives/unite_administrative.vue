@@ -594,18 +594,18 @@ created() {
         }
       };
     },
-   test() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+  //  test() {
+  //     return id => {
+  //       if (id != null && id != "") {
+  //          const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return 0
-        }
-      };
-    },
+  //     if (qtereel) {
+  //       return qtereel.libelle;
+  //     }
+  //     return 0
+  //       }
+  //     };
+  //   },
    calculerTaillerStructureAdministrative(){
      return this.structures_administratives.length
    },

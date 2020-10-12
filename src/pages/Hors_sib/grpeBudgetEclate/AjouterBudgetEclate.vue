@@ -1,13 +1,14 @@
 
 <template>
-  <div>
-    <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-  <div id="exampleModal" class="modal hide tailgrand12">
-      <div class="modal-header">
+
+<div>
+    
+    
+       <div class="modal-header" >
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Eclatement du Budget{{detail_Ua}}</h3>
+        <h3>Eclatement du Budget</h3>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" :value="fonctionTest()">
         
         <table class="table table-bordered table-striped">
          
@@ -18,7 +19,7 @@
                   <div class="controls">
                        <input
                       type="text"
-                    :value="anneeEnCours"
+                    :value="anneeAmort"
                       class="span5"
                      readonly
                       
@@ -30,12 +31,12 @@
               
                <td>
                 <div class="control-group">
-                  <label class="control-label">UA Réceptrice{{formData.unitezone_id}}</label>
+                  <label class="control-label">UA Réceptrice</label>
                   <div class="controls">
                      
                             <input
                       type="text"
-                   :value="libelleUAdministrative(formData.unitezone_id)"
+                   :value="libelleUAdministrative(detail_Ua.unitezone_id)"
                       class="span5"
                      readonly
                       
@@ -45,7 +46,7 @@
               </td>
                <td colspan="">
                 <div class="control-group">
-                  <label class="control-label">Total disponible</label>
+                  <label class="control-label">Budget Restant</label>
                   <div class="controls">
                        <input
                       type="text"
@@ -121,95 +122,15 @@
           @click.prevent="ajouterUniteAdministrativeLocal(formData)"
           class="btn btn-primary"
           href="#"
-         
+         v-if="RestantMontantTransferer!=0"
         >Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+       <a
+                          @click.prevent="afficherModalListePersonnel()"
+                          class="btn"
+                          href="#"
+                        >Fermer</a>
       </div>
-    </div>
-    <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
-
-    <!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
-
-   
-    <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
-    <!-- End Page Header -->
-    <!-- Default Light Table -->
-    <div class="container-fluid">
-      <hr />
-      <div class="row-fluid">
-        <div class="span12">
-          <!-- <download-excel
-            class="btn btn-default pull-right"
-            style="cursor:pointer;"
-            :fields="json_fields"
-            title="Liste type texte"
-            :data="BudgetEchateParUa"
-            name="Liste type texte"
-            worksheet="Liste type texte"
-          >
-            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel> -->
-          <div class="widget-box">
-            <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-                            <h5>Listes Budgets Eclates</h5>
-              <!-- <div align="right">
-                Recherche:
-                <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
-              </div> -->
-            </div>
-
-            <div class="widget-content nopadding">
-              <table class="table table-bordered table-striped">
-                <thead>
-                 <tr>
-                   <th style="width:10%;font-size:12px" >Exercice</th>
-                     <th style="width:20%;font-size:12px" >Code UA</th>
-                    <th style="width:50%;font-size:12px" >Unité d'Administrative</th>
-                    <th style="width:20%;font-size:12px" >Montant Reçu</th>
-                    <th style="width:10%;" colspan="2" >Action</th>
-                   
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="odd gradeX" v-for="type in UaRecuTransfert" :key="type[0].id">
-                   <td style="font-size:14px">{{type[0].exerciceencours|| 'Non renseigné'}}</td>
-                     <td style="font-size:14px">{{CodeeUniteAdministrative(type[0].unitezone_id)|| 'Non renseigné'}}</td>
-                     <td style="font-size:14px">{{LibelleUniteAdministrative(type[0].unitezone_id)|| 'Non renseigné'}}</td>
-                      <td style="font-size:14px;text-align:center;color:red">{{formatageSomme(parseFloat(sommeBudgetTransfertParUa(type[0].unitezone_id)))|| 'Non renseigné'}}</td>
-                     <td>
-                    <router-link :to="{ name: 'AjouterBudgetEclate', params: { id: type[0].unitezone_id }}"
-                class="btn btn-default " title="Liste des budget eclate par Ua">
-                  <span class="">B.ECLATE</span>
-                    </router-link>
-               
-                   </td>
-                   <td>
-                    <router-link :to="{ name: 'ListeBudgeteclate', params: { id: type[0].unitezone_id }}"
-                class="btn btn-default " title="Liste des budget eclate par Ua">
-                  <span class=""><i class=" icon-folder-open"></i></span>
-                    </router-link>
-               
-                   </td>
-                  </tr>
-                  
-                </tbody>
-              </table>
-             
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
-    <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
-<button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
-<notifications  />
-    <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
-  </div>
+</div>
 </template>
   
 <script>
@@ -312,15 +233,6 @@ export default {
     //   });
     // },
 
-    
-    sommeBudgetTransfertParUa() {
-      return id => {
-        if (id != null && id != "") {
-           return this.transferts.filter(qtreel => qtreel.unitezone_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(2);
-      
-        }
-      };
-    },
     UaRecuTransfert() {
         
         if(this.noDCfNoAdmin){
@@ -333,10 +245,10 @@ export default {
                     return item
                 }
             })
-            return colect.filter(qtreel => qtreel[0].exerciceencours == this.anneeEnCours)
+            return colect
           
         }
-        return this.GroupeUaReceptrice.filter(qtreel => qtreel[0].exerciceencours == this.anneeEnCours)
+        return this.GroupeUaReceptrice
 
     },
 
@@ -445,13 +357,6 @@ recupererDernierNiveauPlanEconomique() {
      return this.structures_budgetaires.length
    },
 
-
-
-
-
-
-
-
 sommeTotalDisponible() {
      return id => {
         if (id != null && id != "") {
@@ -475,7 +380,7 @@ sommeTotalConsomme() {
     },
 
 RestantMontantTransferer() {
-      const val = parseFloat(this.sommeTotalDisponible(this.formData.unitezone_id)) - parseFloat(this.sommeTotalConsomme(this.formData.unitezone_id));
+      const val = parseFloat(this.sommeTotalDisponible(this.detail_Ua.unitezone_id)) - parseFloat(this.sommeTotalConsomme(this.detail_Ua.unitezone_id));
       return parseFloat(val).toFixed(0);
     },
 
@@ -520,7 +425,7 @@ UniteAdministrative() {
         return this.transferts
 
     },
-    anneeEnCours() {
+    anneeAmort() {
       
       const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
 
@@ -550,6 +455,8 @@ UniteAdministrative() {
         }
       };
     },
+    
+    
   },
   created() {
             this.marcheid=this.$route.params.id
@@ -567,6 +474,13 @@ UniteAdministrative() {
      
       // "ajouterHistoriqueBudgetGeneral"
     ]),
+    fonctionTest(){
+      if(this.RestantMontantTransferer==0){
+        alert("Montant A Eclaté est egal a 0")
+        
+      }
+     
+    },
     afficherModalModifierExerciceBudgetaire(id){
 
  this.$('#exampleModal').modal({
@@ -579,6 +493,9 @@ UniteAdministrative() {
 
         
  },
+ test () {
+      alert('On a cliqué !');
+    },
     //afiicher modal ajouter
     afficherModalAjouterTitre() {
       this.$("#exampleModal").modal({
@@ -595,7 +512,8 @@ UniteAdministrative() {
       else{
         var nouvelObjet = {
         ...this.formData,
-        	annebudgetaire: this.anneeEnCours,
+            annebudgetaire: this.anneeAmort,
+            uniteadministrative_id:this.detail_Ua.unitezone_id
          
       };
         this.ajouterBudgetEclate(nouvelObjet);
@@ -633,6 +551,9 @@ this.$("#modificationModal").modal('hide');
     supprimerBudget(id){
       this.supprimerBudgetEclate(id)
     },
+     afficherModalListePersonnel(){
+                this.$router.push({ name: 'BudgetEclatePrincipal' })
+            },
     alert() {
       console.log("ok");
     },
