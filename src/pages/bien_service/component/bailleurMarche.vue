@@ -78,7 +78,7 @@ afficherNumeroDossierCandidat1
 
       <div id="tab8888" class="tab-pane active">
 
-        <table class="table table-bordered table-striped" :value="verifierMontantBailleur()">
+        <table class="table table-bordered table-striped">
           <tr>
             <td>
               <div class="control-group">
@@ -796,7 +796,7 @@ if(this.PayeDesBailleur < this.afficherMontantTTCMarche(this.infoLot.id)){
 }
 },
 afficherModalModifierActeEffetFinancier(index){
-      this.$('#modifierActeEF').modal({
+      this.$('#ModalModification').modal({
         backdrop: 'static',
         keyboard: false
       });
