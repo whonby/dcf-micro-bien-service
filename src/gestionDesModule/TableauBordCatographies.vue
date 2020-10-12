@@ -23,18 +23,84 @@
 <!--        </div>-->
 <!--      </div>-->
 
-      <div class="row-fluid" style="position: absolute !important;">
+      <div class="row-fluid"  style="position: absolute !important;">
+        <div id="sidebarinfo"  class="sidebar leaflet-sidebar collapsed">
+          <div class="sidebar-tabs">
+            <ul role="tablist"> <!-- top aligned tabs -->
+              <li><a href="#infomarche" role="tab"><i class="fa fa-bars"></i></a></li>
+<!--              <li><a href="#sta" role="tab"><i class="fa fa-bar-chart-o"></i></a></li>-->
+            </ul>
+          </div>
+          <div class="sidebar-content">
+            <div class="sidebar-pane" id="infomarche">
+              <h1 class="sidebar-header">
+               Information du marché
+                <div class="sidebar-close"><i class="fa fa-caret-left"></i></div>
+              </h1>
+<h6 align="center"> {{objetUnite.ville}}</h6>
+
+              <div class="row-fluid" >
+                <div class="span5" v-if="objetUnite">
+
+                  <donut-chart
+                      style="width: 120px;height: 120px"
+                      id="donut1"
+                      :data="objetUnite.donutData"
+                      colors='[ "#FF6384", "#36A2EB"]'
+                      resize="true" v-if="objetUnite.budget">
+                  </donut-chart>
+                  <div style="text-align: center" v-else>
+                    <h3>Aucun montant</h3>
+                  </div>
+                </div>
+                <div class="span7"><br>
+
+                  <div v-if="objetUnite">
+                    Montant de base: <span style="color: #003900; "><b>{{formatageSomme(objetUnite.budget)}}</b></span> <br>
+                    Montant exécuté:<span style="color: #00d700; "><b>{{formatageSomme(objetUnite.budgetExecute)}}</b></span><br>
+                    Montant restant:<span style="color: darkred; "><b>{{formatageSomme(objetUnite.budgetReste)}}</b></span><br>
+                    Taux d'exécution:<span style="color: #e36706; "><b>{{objetUnite.tauxBudget}} %</b></span>
+                  </div>
+                  <!--                  <table class="table table-bordered table-striped" v-if="objetUnite">-->
+                  <!--                    <tbody>-->
+                  <!--                    <tr>-->
+                  <!--                      <td>Montant de base</td>-->
+                  <!--                      <td>{{formatageSomme(objetUnite.budget)}}</td>-->
+                  <!--                    </tr>-->
+                  <!--                    <tr>-->
+                  <!--                      <td>Montant restant</td>-->
+                  <!--                      <td>{{formatageSomme(objetUnite.budgetReste)}}</td>-->
+                  <!--                    </tr>-->
+                  <!--                    <tr>-->
+                  <!--                      <td>Montant exécution</td>-->
+                  <!--                      <td>{{formatageSomme(objetUnite.budgetExecute)}}</td>-->
+                  <!--                    </tr>-->
+                  <!--                    <tr>-->
+                  <!--                      <td>Taux exécution</td>-->
+                  <!--                      <td>{{objetUnite.tauxBudget}}</td>-->
+                  <!--                    </tr>-->
+                  <!--                    </tbody>-->
+                  <!--                  </table>-->
+                </div>
+              </div>
+            </div>
+            <div class="sidebar-pane" id="sta">
+              <h1 class="sidebar-header">
+                ok
+                <div class="sidebar-close"><i class="fa fa-caret-left"></i></div>
+              </h1>
+            </div>
+
+          </div>
+        </div>
+
+
         <div id="map10" class="sidebar leaflet-sidebar collapsed">
           <div class="sidebar-tabs">
             <ul role="tablist"> <!-- top aligned tabs -->
               <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
-<!--              <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>-->
               <li><a href="#profile" role="tab"><i class="fa fa-bar-chart-o"></i></a></li>
             </ul>
-
-<!--            <ul role="tablist"> &lt;!&ndash; bottom aligned tabs &ndash;&gt;-->
-<!--              <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>-->
-<!--            </ul>-->
           </div>
           <div class="sidebar-content">
             <div class="sidebar-pane" id="home">
@@ -155,51 +221,7 @@
 
               </div>
 <hr>
-              <p align="center" style="size: 1.5em"><b>{{objetUnite.ville}}</b></p>
-              <div class="row-fluid" >
-                <div class="span5" v-if="objetUnite">
 
-                  <donut-chart
-                      style="width: 120px;height: 120px"
-                      id="donut1"
-                      :data="objetUnite.donutData"
-                      colors='[ "#FF6384", "#36A2EB"]'
-                      resize="true" v-if="objetUnite.budget">
-                  </donut-chart>
-                  <div style="text-align: center" v-else>
-                    <h3>Aucun montant</h3>
-                  </div>
-                </div>
-                <div class="span7"><br>
-
-                  <div v-if="objetUnite">
-                    Montant de base: <span style="color: #003900; "><b>{{formatageSomme(objetUnite.budget)}}</b></span> <br>
-                    Montant exécuté:<span style="color: #00d700; "><b>{{formatageSomme(objetUnite.budgetExecute)}}</b></span><br>
-                    Montant restant:<span style="color: darkred; "><b>{{formatageSomme(objetUnite.budgetReste)}}</b></span><br>
-                    Taux d'exécution:<span style="color: #e36706; "><b>{{objetUnite.tauxBudget}} %</b></span>
-                  </div>
-<!--                  <table class="table table-bordered table-striped" v-if="objetUnite">-->
-<!--                    <tbody>-->
-<!--                    <tr>-->
-<!--                      <td>Montant de base</td>-->
-<!--                      <td>{{formatageSomme(objetUnite.budget)}}</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                      <td>Montant restant</td>-->
-<!--                      <td>{{formatageSomme(objetUnite.budgetReste)}}</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                      <td>Montant exécution</td>-->
-<!--                      <td>{{formatageSomme(objetUnite.budgetExecute)}}</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                      <td>Taux exécution</td>-->
-<!--                      <td>{{objetUnite.tauxBudget}}</td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                  </table>-->
-                </div>
-              </div>
             </div>
 
             <div class="sidebar-pane" id="messages">
@@ -246,12 +268,12 @@
                   >
                     <l-popup>
                       <b>{{l.ville}}</b> <br>
-                      <div >
-                        Montant de base: <span style="color: #003900; "><b>{{formatageSomme(l.budget)}}</b></span> <br>
-                        Montant exécuté:<span style="color: #00d700; "><b>{{formatageSomme(l.budgetExecute)}}</b></span><br>
-                        Montant restant:<span style="color: darkred; "><b>{{formatageSomme(l.budgetReste)}}</b></span><br>
-                        Taux d'exécution:<span style="color: #e36706; "><b>{{l.tauxBudget}} %</b></span>
-                      </div>
+<!--                      <div >-->
+<!--                        Montant de base: <span style="color: #003900; "><b>{{formatageSomme(l.budget)}}</b></span> <br>-->
+<!--                        Montant exécuté:<span style="color: #00d700; "><b>{{formatageSomme(l.budgetExecute)}}</b></span><br>-->
+<!--                        Montant restant:<span style="color: darkred; "><b>{{formatageSomme(l.budgetReste)}}</b></span><br>-->
+<!--                        Taux d'exécution:<span style="color: #e36706; "><b>{{l.tauxBudget}} %</b></span>-->
+<!--                      </div>-->
                     </l-popup>
 
                   </l-circle-marker>
@@ -406,7 +428,7 @@
 <script>
 import LControlFullscreen from 'vue2-leaflet-fullscreen';
 import L from 'leaflet-sidebar-v2'
-
+import C from "leaflet-control-window"
 import Raphael from 'raphael/raphael'
 global.Raphael = Raphael
 import { DonutChart } from 'vue-morris'
@@ -448,6 +470,7 @@ export default {
         {iconUrl, shadowUrl}
     ))
     return {
+      info_sidebar_marche:"",
       unite_administrative_id:"",
       departement:"",
       sous_prefecture:'',
@@ -521,7 +544,7 @@ export default {
           visible: false,
           attribution:
               '',
-          url: 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png',
+          url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
         },
         {
           name: 'Plan 2',
@@ -562,12 +585,11 @@ export default {
       mapOptions1: {
         attributionControl: false
       },
-      currentStrokeColor: '3d3213'
+      curren8tStrokeColor: '3d3213'
     };
   },
 created() {
-    console.log('apppp0000')
-    //console.log(this.getterLocalisationGeoAll)
+//console.log(this.getterInfrastrucure)
 },
   computed: {
 // methode pour maper notre guetter
@@ -577,7 +599,8 @@ created() {
       "acteCreations",
       "typeTextes",
       "uniteAdministratives",
-      "getterBudgeCharge"
+      "getterBudgeCharge",
+        "getterInfrastrucure"
     ]),
     ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise"]),
     regions(){
@@ -719,7 +742,7 @@ created() {
      // let localisation=[]
       let vM=this;
       // console.log(this.getMandatPersonnaliserVise)
-      console.log(this.objetMarchePasUniteOuRegion)
+     // console.log(this.objetMarchePasUniteOuRegion)
       let budget=0;
      //let budgetReste=0;
      // let budgetExecute=0;
@@ -742,7 +765,7 @@ created() {
 
      let budgetReste=budget - montant_engagement_marche;
      let tauxExecution=(montant_engagement_marche/budget)*100
-console.log(budgetReste)
+//console.log(budgetReste)
      // console.log(tauxExecution)
      // console.log(value) donutDataUniteOuRegions
 
@@ -758,7 +781,7 @@ console.log(budgetReste)
 
       vM.donutDataUniteOuRegions.push(execute)
       vM.donutDataUniteOuRegions.push(reste)
-console.log(vM.donutDataUniteOuRegions)
+//console.log(vM.donutDataUniteOuRegions)
       let objetAlocalise={
         budget:budget,
         budgetReste:budgetReste,
@@ -782,6 +805,7 @@ console.log(vM.donutDataUniteOuRegions)
 
       if(vM.unite_administrative_id!="" && vM.region==""){
         objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id)
+
       }
 
       if(vM.unite_administrative_id!="" && vM.region!=""){
@@ -1005,10 +1029,17 @@ console.log(vM.donutDataUniteOuRegions)
   methods: {
     videUniteAdmin(){
       this.unite_administrative_id=""
+      this.zoom=6
+      this.objetUnite=""
+      this.info_sidebar_marche.close()
+      this.info_sidebar_marche.disablePanel('infomarche');
     },
     videRegions(){
       this.region=""
-      this.zoom=6
+      this.zoom=6;
+      this.objetUnite=""
+      this.info_sidebar_marche.close()
+      this.info_sidebar_marche.disablePanel('infomarche');
     },
     infoMarche(id){
       console.log(id)
@@ -1028,12 +1059,23 @@ console.log(vM.donutDataUniteOuRegions)
       alert("Click!");
     },
     uniteAdmin(objet){
+      this.value3=true
       /*this.activeUa=false*/
-      console.log(objet)
+      //console.log(objet)
 this.objetUnite=objet
       this.unite_administrative_id=objet.unite_administrative_id
       this.region=objet.region_id
-    // this.value3=true
+     //  const mapComponent = this.$refs.map;
+     // // console.log(mapComponent.mapObject)
+     //  const map = mapComponent.mapObject;
+console.log(C)
+    // let LControl=window.L
+    //   LControl.control.window(map,{title:'Heading!',content:'First paragraph.',visible: true})
+    // console.log(LControl)
+      this.info_sidebar_marche.enablePanel('infomarche');
+
+      this.info_sidebar_marche.open('infomarche')
+     // this.info_sidebar_marche.show()
 
     },
     uniteAdministrativeSelect(id,libelle, $event){
@@ -1055,16 +1097,16 @@ this.objetUnite=objet
   },
   mounted() {
     setTimeout(() => {
-      console.log('done4444444')
+    //  console.log('done4444444')
       this.$nextTick(() =>{
         this.clusterOptions = { disableClusteringAtZoom: 11 }
       });
     }, 5000);
 
     const mapComponent = this.$refs.map;
-    console.log(mapComponent.mapObject)
+
     const map = mapComponent.mapObject;
-    console.log(window.L)
+  //  console.log(window.L)
     let sid=window.L
     console.log(L)
     let panel_options = {
@@ -1074,18 +1116,22 @@ this.objetUnite=objet
     };
     var sidebar = sid.control.sidebar('map10', panel_options).addTo(map);
 
-    /****/
+    this.info_sidebar_marche = sid.control.sidebar('sidebarinfo', {
+      position: 'right',
+      closeButton: true,
+    }).addTo(map);
+
+
 
     var panelContent = {
       id: 'userinfo',                     // UID, used to access the panel
-      tab: '#',  // content can be passed as HTML string,
+      tab: '',  // content can be passed as HTML string,
       // DOM elements can be passed, too
       title: 'Your Profile',              // an optional pane header
       position: 'bottom'                  // optional vertical alignment, defaults to 'top'
     };
     sidebar.addPanel(panelContent);
 
-    /* add an external link */
     sidebar.addPanel({
       id: 'ghlink',
       tab: '',
@@ -1099,12 +1145,12 @@ this.objetUnite=objet
       button: function (event) { console.log(event); }
     });
 
-    /* remove a panel */
-    sidebar.removePanel('userinfo');
 
-    /* en- / disable a panel */
-    sidebar.disablePanel('userinfo');
-    sidebar.enablePanel('userinfo');
+    this.info_sidebar_marche.disablePanel('infomarche');
+
+
+
+
   }
 };
 </script>
@@ -1172,7 +1218,7 @@ this.objetUnite=objet
   background-color: #eee; }
 .sidebar-tabs > li.active, .sidebar-tabs > ul > li.active {
   color: #fff;
-  background-color: #0074d9; }
+  background-color: green; }
 .sidebar-tabs > li.disabled, .sidebar-tabs > ul > li.disabled {
   color: rgba(51, 51, 51, 0.4); }
 .sidebar-tabs > li.disabled:hover, .sidebar-tabs > ul > li.disabled:hover {
@@ -1231,7 +1277,7 @@ this.objetUnite=objet
   line-height: 40px;
   font-size: 14.4pt;
   color: #fff;
-  background-color: #0074d9; }
+  background-color: green; }
 .sidebar-right .sidebar-header {
   padding-left: 40px; }
 

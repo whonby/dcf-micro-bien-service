@@ -17,7 +17,7 @@ const localisations_geographiques = state => state.localisations_geographiques.s
 const type_Unite_admins = state => state.type_Unite_admins
 
 export const getterLocalisationGeoAll = state => state.localisation_geographique_all
-
+export const getterInfrastrucure = state => state.infrastructure
 // const organigrammeUa = state => state.organigrammeUa
 export const getterformeJuridique = state => state.formejuridiques
 export const getterregimeImpositions = state => state.regimeImpositions

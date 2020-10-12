@@ -1316,7 +1316,6 @@ export function supprimerPlanOrganigrammeUa({ commit, dispatch }, id) {
             // // dialog.loading(false) // stops the proceed button's loader
             axios.delete('/supprimer_Plan_OrganigrammeUa/' + id).then(() => dialog.close())
 
-           
         })
 }
 
@@ -1329,3 +1328,64 @@ export  function  getLocalisationGeographiqueAll({commit}) {
 
     }).catch(error => console.log(error)))
 }
+
+
+
+/**
+ * Action infrastructure
+ * **/
+
+// get all titres
+export  function  getInfrastructure({commit}) {
+    queue.push(() =>  axios.get('/infrastructure').then((response) => {
+        commit('GET_INFRASTUCTURE', response.data)
+
+    }).catch(error => console.log(error)))
+}
+
+
+// ajouter titre
+export  function ajouterInfrastructure({commit}, objetAjoute){
+    asyncLoading( axios.post('/infrastructure', objetAjoute )).then(res => {
+        if(res.status == 201){
+            commit('AJOUTER_INFRASTUCTURE', res.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué avec success !',
+                type:"success"
+            })
+
+        }
+    }).catch(error => console.log(error))
+}
+
+// supprimer titre
+export function supprimerInfrastructure({commit}, id){
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_INFRASTUCTURE', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/infrastructure/' + id).then(() => dialog.close() )
+        })
+}
+
+// modifier titre
+export function modifierInfrastructure({commit}, objet){
+    asyncLoading( axios.put('/infrastructure', objet)).then(response => {
+        commit('MODIFIER_INFRASTUCTURE', response.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+
+}
+
+
+/***
+ * Fin
+ */
+

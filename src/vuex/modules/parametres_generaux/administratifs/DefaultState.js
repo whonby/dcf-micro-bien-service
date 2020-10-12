@@ -23,7 +23,8 @@ const defaultstate = {
 structureOrganigrammeUa: [],
 planOrganigrammeUa:[],
 gestionModules:[],
-  localisation_geographique_all:[]
+  localisation_geographique_all:[],
+  infrastructure:[],
 };
 
  export default defaultstate

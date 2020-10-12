@@ -84,7 +84,7 @@ this.getRegimeImpositions()
     this.getRapport()
       this.getBudgeChager()
       this.getLigneExempter()
-
+this.getInfrastructure()
    this.getLocalisationGeographiqueAll()
       this.getExercicesBudgetaires()
       this.getTaux()
@@ -329,7 +329,7 @@ this.getMembreCojo()
      ['getGestionModules','getExercicesBudgetaires', 'getTitres', 'getTaux',
     'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 'getStructurePays', 'getPlanPays','getPlanOrganigrammeUa',
     'getStructureAdministrative', 'getServiceGestionnaire', 'getStructureGeographique',
-    'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions","getLocalisationGeographiqueAll"]),
+    'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions","getLocalisationGeographiqueAll","getInfrastructure"]),
 
  ...mapActions("uniteadministrative", [
       // "getAllTypeTextes",
