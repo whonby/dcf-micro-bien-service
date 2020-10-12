@@ -1204,7 +1204,7 @@ created() {
 this.objetUnite=objet
       this.unite_administrative_id=objet.unite_administrative_id
       this.region=objet.region_id
-      this.infrastructure=objet.infrastructure_id
+     // this.infrastructure=objet.infrastructure_id
      //  const mapComponent = this.$refs.map;
      // // console.log(mapComponent.mapObject)
      //  const map = mapComponent.mapObject;
