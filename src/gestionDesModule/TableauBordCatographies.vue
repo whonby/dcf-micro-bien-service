@@ -4,6 +4,9 @@
 
 
     <div class="container-fluid">
+
+
+
 <!--      <l-map :center="[-23.752961, -57.854357]" :zoom="6" style="height: 500px;" :options="mapOptions1">-->
 <!--        <l-choropleth-layer :data="pyDepartmentsData" titleKey="department_name" idKey="department_id" :value="value" :extraValues="extraValues" geojsonIdKey="dpto" :geojson="geojson" :colorScale="colorScale">-->
 <!--          <template slot-scope="props">-->
@@ -224,12 +227,7 @@
 
               </div>
 <hr>
-              <bar-chart
-                  id="bar" :data="barData" xkey="year" ykeys='[ "and", "ios", "win" ]' resize="true"
-                  labels='[ "Android", "iOS", "Windows" ]' bar-colorssss='[ "#FF6384", "#36A2EB", "#FFCE56" ]'
-                  :bar-colors="osColors"
-                  grid="true" grid-text-weight="bold">
-              </bar-chart>
+              <apexchart type="bar" width="350" height="350"  :options="chartOptions" :series="dataBar"></apexchart>
             </div>
 
             <div class="sidebar-pane" id="messages">
@@ -453,6 +451,7 @@ import {  ModelListSelect } from 'vue-search-select'
 import 'vue-search-select/dist/VueSearchSelect.css'
 //import {pyDepartmentsData} from "@/data/py-departments-data"
 //import {geojson} from "@/data/py-departments-geojson"
+import VueApexCharts from 'vue-apexcharts'
 export default {
   name: "Example",
   components: {
@@ -465,6 +464,7 @@ export default {
     LPopup,
     ModelListSelect,
     // LTooltip,
+    apexchart: VueApexCharts,
     LIconDefault,
     LControlLayers,
     LCircleMarker,
@@ -494,6 +494,58 @@ export default {
       },
       objetUnite:"",
       donutData: [],
+      series: [{
+        name: 'Net Profit',
+        data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+      }, {
+        name: 'Revenue',
+        data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+      }, {
+        name: 'Free Cash Flow',
+        data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+      }],
+      chartOptions: {
+        chart: {
+          type: 'bar',
+          height: 350,
+          width: 200
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: '55%',
+            endingShape: 'rounded'
+          },
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ['transparent']
+        },
+        xaxis: {
+          categories: [],
+        },
+        yaxis: {
+          title: {
+            text: '$ (Infrastructure)'
+          }
+        },
+        fill: {
+          opacity: 1
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return "F " + val + " Infrastructure"
+            }
+          }
+        }
+      },
+
+
       barData: [
         { year: '2013', and: 10, ios: 5, win: 2 },
         { year: '2014', and: 10, ios: 15, win: 3 },
@@ -605,9 +657,10 @@ export default {
     };
   },
 created() {
-    console.log(".......................")
-console.log(this.getterInfrastrucure)
-  console.log(".......................")
+//     console.log(".......................")
+// console.log(this.getterInfrastrucure)
+//   console.log(".......................")
+  console.log(this.dataBar)
 },
   computed: {
 // methode pour maper notre guetter
@@ -756,6 +809,40 @@ console.log(this.getterInfrastrucure)
       return localisation;
     },
 
+    dataBar(){
+      let vM=this
+      let ObjetMontantPrevue={
+        name: 'Montant prevue',
+        data: []
+      }
+
+      let ObjetMontantRealise={
+        name: 'Montant réalisé',
+        data: []
+      }
+      let dataArray=[]
+      let tailleInfrastructure=vM.getterInfrastrucure.length
+      vM.getterInfrastrucure.forEach(function (value) {
+        let marche=vM.objetMarchePasUniteOuRegion.filter(item=>item.infrastructure_id==value.id)
+        // let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==value.id).reduce(function (total, currentValue) {
+        //   return total + parseFloat(currentValue.total_general) ;
+        // }, initeVal);
+      let taille_categorie=  vM.chartOptions.xaxis.categories.length
+        let initeVal = 0;
+        let montant_prevue=  marche.reduce(function (total, currentValue) {
+          return total + parseFloat(currentValue.montant_marche) ;
+        }, initeVal);
+        if(taille_categorie<=tailleInfrastructure-1){
+          vM.chartOptions.xaxis.categories.push(value.libelle)
+        }
+
+        ObjetMontantPrevue.data.push(montant_prevue)
+        ObjetMontantRealise.data.push(0)
+      })
+      dataArray.push(ObjetMontantPrevue)
+      dataArray.push(ObjetMontantRealise)
+      return dataArray
+    },
     montantBudegtPasUniteAdminOuRegion(){
      // let localisation=[]
       let vM=this;
@@ -1205,7 +1292,9 @@ console.log(C)
 
     this.info_sidebar_marche.disablePanel('infomarche');
 
+    this.getterInfrastrucure.forEach(function (value) {
 
+    })
 
 
   }
