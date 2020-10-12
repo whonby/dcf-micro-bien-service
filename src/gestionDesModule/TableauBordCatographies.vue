@@ -437,7 +437,7 @@ import L from 'leaflet-sidebar-v2'
 import C from "leaflet-control-window"
 import Raphael from 'raphael/raphael'
 global.Raphael = Raphael
-import { DonutChart ,BarChart} from 'vue-morris'
+import { DonutChart ,/*BarChart*/} from 'vue-morris'
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import VGeosearch from 'vue2-leaflet-geosearch';
 import {mapGetters} from 'vuex'
@@ -445,7 +445,7 @@ import { latLng, Icon, icon } from 'leaflet'
 import { LMap, LTileLayer, LIconDefault,LControlLayers,LPopup,LCircleMarker} from "vue2-leaflet";
 import iconUrl from 'leaflet/dist/images/marker-icon.png'
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
-import { formatageSomme} from "@/Repositories/Repository";
+ddimport { formatageSomme} from "@/Repositories/Repository";
 //import { InfoControl, ReferenceChart, ChoroplethLayer } from 'vue-choropleth'
 import {  ModelListSelect } from 'vue-search-select'
 import 'vue-search-select/dist/VueSearchSelect.css'
@@ -457,7 +457,7 @@ export default {
   components: {
     LControlFullscreen,
     DonutChart,
-    BarChart,
+ //   BarChart,
     LMap,
     LTileLayer,
     VGeosearch,
@@ -1204,7 +1204,7 @@ created() {
 this.objetUnite=objet
       this.unite_administrative_id=objet.unite_administrative_id
       this.region=objet.region_id
-     // this.infrastructure=objet.infrastructure_id
+      this.infrastructure=objet.infrastructure_id
      //  const mapComponent = this.$refs.map;
      // // console.log(mapComponent.mapObject)
      //  const map = mapComponent.mapObject;
@@ -1292,9 +1292,9 @@ console.log(C)
 
     this.info_sidebar_marche.disablePanel('infomarche');
 
-    this.getterInfrastrucure.forEach(function (value) {
-
-    })
+    // this.getterInfrastrucure.forEach(function (value) {
+    //
+    // })
 
 
   }
