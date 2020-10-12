@@ -612,7 +612,7 @@
                     <th>Montant prévu</th>
                     <th>Etat du marché</th>
                     <th>Cycle de vie</th>
-                   <th colspan="3">Action</th>
+                   <th colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -677,12 +677,12 @@
     </router-link>
                    </td>
                    <td>
-                     
-                    
-                      <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                       <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
                 class="btn btn-default " title="historique la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link>
+                   </td>
+                   <td>
                    
                      <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
@@ -702,7 +702,9 @@
 
                        </tr>
                         <tr>
-                     
+                     <td>
+                          
+                      </td>
                        <td>
                           
                       </td>
@@ -947,9 +949,7 @@
                        </tr>
                         <tr>
                      
-                       <td>
-                          
-                      </td>
+                      
                       <td>
                           
                       </td>
@@ -978,7 +978,9 @@
                         <td>
                           
                       </td>
-                     
+                      <td>
+                          
+                      </td>
                     </tr>
                 </tbody>
               </table>

@@ -14,7 +14,7 @@
         <th>Rang d'analyse</th>
         <th>Note</th>
         <th>Numero dossier Candidat</th>
-        <th> Montant Offre financiere</th>
+        <th> Montant Offre financiere TTC (Fcfa)</th>
         <th>Type d'analyse</th>
 
 
