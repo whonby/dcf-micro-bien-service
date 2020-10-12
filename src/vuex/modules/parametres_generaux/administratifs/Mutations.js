@@ -651,6 +651,41 @@ export const GET_LOCALISATION_GEO_ALL = (state, tableau_titres) => {
     state.localisation_geographique_all = tableau_titres
 }
 
+
+/**
+ * Infrastructures
+ */
+
+// get all plan programme
+export const GET_INFRASTUCTURE = (state, tableau_plan_programme) => {
+
+    state.infrastructure = tableau_plan_programme
+}
+
+// ajouter plan programme
+export const AJOUTER_INFRASTUCTURE = (state, objetAjout) => {
+    state.infrastructure.unshift(objetAjout)
+}
+// modifier plan programme
+export const MODIFIER_INFRASTUCTURE = (state, nouveau_objet) => {
+    state.infrastructure = state.infrastructure.map(plan_programme => {
+        if (plan_programme.id == nouveau_objet.id) {
+            plan_programme = { ...nouveau_objet }
+        }
+        return plan_programme
+    })
+}
+
+// supprimer plan programme
+export const SUPPRIMER_INFRASTUCTURE = (state, id) => {
+    state.infrastructure = state.infrastructure.filter(plan_proramme =>
+        plan_proramme.id != id
+    )
+}
+
+/**
+ * Fin infrastructures
+ */
 export {
     
     GET_PLAN_PAYS,

@@ -32,6 +32,7 @@
     "jw-vue-pagination": "^1.0.3",
     "laravel-vue-pagination": "^2.3.1",
     "leaflet": "^1.7.1",
+    "leaflet-control-window": "^1.0.0",
     "leaflet-geosearch": "^3.0.6",
     "leaflet-sidebar": "^0.2.0",
     "leaflet-sidebar-v2": "^2.0.0",
