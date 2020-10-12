@@ -251,10 +251,11 @@ return objJson.id
 navigateToGestionMarche(){
         this.activate(19)
         this.$router.push({
-          name: 'GestionMarcheHorSib'
+          name: 'gestion_marche'
         })
       },
 
+//GestionMarcheHorSib
 
       navigateToActeurDepense(){
         this.activate(2)
@@ -296,13 +297,13 @@ navigateToGestionMarche(){
           name:'tableauBordInvestissement'
         })
       },
-
  navigateToBienEtService(){
-        this.activate(3)
+        this.activate(7)
         this.$router.push({
-          name: 'tableauBord'
+          name: 'tableau_de_bord_hors'
         })
       },
+      // suivi_marhe
       navigateGestionUser(){
           this.activate(21)
           this.$router.push({

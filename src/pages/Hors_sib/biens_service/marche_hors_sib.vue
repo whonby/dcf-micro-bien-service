@@ -1,20 +1,28 @@
 CodeExempte
-
 <template>
     <div class="container-fluid">
-      
-  
     
-         
-                <div class="">
-                    <div class="widget-box"> <br>
-                       
-                       <div class="" align="right">
-                   <router-link :to="{name:'ajouter_hors_sib'}" tag="a" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter
-
-                   </router-link> 
-
-                   </div><br>
+         <div class="row-fluid">
+                <div class="span12">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#tab0000">Tous les marchés  <span class="badge badge" >{{nombreMarcheHorsSib}}</span></a></li>
+                               
+                               <li ><a data-toggle="tab" href="#tab10000"> Planification <span class="badge badge-important" > {{0}} </span></a></li>
+                                <li ><a data-toggle="tab" href="#tab109"> Contratualisation   <span class="badge badge-success" ></span></a></li>
+                                <!-- <li><a data-toggle="tab" href="#tab20"> Exécution      <span class="badge badge-warning" ></span></a></li>
+                               
+                                 <li><a data-toggle="tab" href="#tab20002">Résiliés    <span class="badge badge-info" > </span></a></li>
+                                    <li><a data-toggle="tab" href="#tab20789">Suspendus   <span class="badge badge" > </span></a></li>
+                                  <li><a data-toggle="tab" href="#tab2000256"> Terminé    <span class="badge badge-inverse" ></span></a></li> -->
+                                 
+                               
+                            </ul>
+                        </div>
+                        <div class="widget-content tab-content">
+                    <div id="tab0000" class="tab-pane active">
+                   
                     <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
@@ -129,7 +137,7 @@ CodeExempte
     </router-link>
                    </td>
                    
-                   <td>
+                   <!-- <td>
                     
                       <router-link :to="{ name: 'DetailMarchePs', params: { id: activites.id }}"
                 class="btn btn-default " title="historique la contratualisation">
@@ -141,7 +149,7 @@ CodeExempte
                 class="btn btn-default " title="historique execution Marche">
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
-                   </td>
+                   </td> -->
            <td>
           
                      <button @click.prevent="supprimerMarche(activites.id)"  class="btn btn-danger ">
@@ -220,7 +228,7 @@ CodeExempte
             <li :class="{ disabled : page == partition(marcheHorSibFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
            </ul>
         </div>
-                       
+                        </div>
 <!-- 
                           <div id="tab10000" class="tab-pane">
                      <planification></planification>
@@ -232,9 +240,9 @@ CodeExempte
                     
 
 
-                   
+                    </div>
 
-            
+                </div>
 
             
             </div>
@@ -245,16 +253,16 @@ CodeExempte
 </template>
 
 <script>
-// import planification from "./component/planification"
-// import contratualisation from "./component/contratualisation"
+//  import planification from "../component/contratualisation"
+//  import contratualisation from "../component/contratualisation"
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
  import {admin,dcf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
  import {partition} from '../../../../src/Repositories/Repository'
 export default {
   components:{
-    // planification,
-    // contratualisation
+    //  planification,
+    //  contratualisation
   },
   name:'type facture',
   data() {
@@ -405,7 +413,7 @@ return this.afficherListeMarcheHorSib.filter((item) => {
 
  afficherListeMarcheHorSib(){
 
-   return this.gettersMarcheHorsib.filter(item =>item.plan_passation_marche_id==null && item.sib==1)
+       return this.gettersMarcheHorsib.filter(item =>item.plan_passation_marche_id==null && item.sib==1)
    
   
  },

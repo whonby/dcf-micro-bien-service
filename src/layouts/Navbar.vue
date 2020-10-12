@@ -10,7 +10,7 @@
     <MenuInvestissement v-if="active_el == 4"></MenuInvestissement>
     <MenuComptaMatieres v-if="active_el ==5"></MenuComptaMatieres>
     <MenuControlAxe v-if="active_el ==6"></MenuControlAxe>
-    <MenuOperationRapport v-if="active_el ==7"></MenuOperationRapport>
+    <MenuPlanificationHorSib v-if="active_el ==7"></MenuPlanificationHorSib>
     <MenuCatographie v-if="active_el ==8"></MenuCatographie>
     <MenuMilieu v-if="active_el ==20"></MenuMilieu>
      <MenuDefaut v-if="active_el ==0"></MenuDefaut>
@@ -18,8 +18,7 @@
     <MenuMonEquipe v-if="active_el ==30"></MenuMonEquipe>
     <Search></Search>
     
-    
-    <!--close-top-serch-->
+    <!--close-top-serch MenuPlanificationHorSib-->
   </div>
 </template>
 
@@ -36,7 +35,7 @@ import MenuPlanification from "../components/navs/MenuPlanification";
 import MenuInvestissement from "../components/navs/MenuInvestissement";
 import MenuComptaMatieres from "../components/navs/MenuComptaMatieres";
 import MenuControlAxe from "../components/navs/MenuControlAxe";
-import MenuOperationRapport from "../components/navs/MenuOperationRapport.vue";
+import MenuPlanificationHorSib from "../components/navs/MenuPlanificationHorSib.vue";
 import MenuCatographie from "../components/navs/MenuCatographie.vue";
 import MenuDefaut from "../components/navs/MenuDefaut.vue";
 import MenuMilieu from "../components/navs/MenuMilieu.vue";
@@ -54,7 +53,7 @@ export default {
     MenuInvestissement,
     MenuComptaMatieres,
    MenuControlAxe,
-   MenuOperationRapport,
+   MenuPlanificationHorSib,
    MenuCatographie,
    MenuDefaut,
    MenuMilieu,

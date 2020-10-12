@@ -6,7 +6,7 @@ montantEnPlanification
               <span class="icon">
             <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marchés en Planification {{nombreMarchePlanifierHorSib}} </h5>
+              <h5>Liste des Marchés en Planification </h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -156,7 +156,7 @@ montantEnPlanification
 </template>
 <script>
 import {mapGetters,mapActions} from "vuex";
-import {admin,dcf,noDCfNoAdmin} from "../../../../Repositories/Auth"
+ import {admin,dcf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
 import {formatageSomme} from "../../../../Repositories/Repository"
 import {partition} from "../../../../Repositories/Repository"
 export default {
