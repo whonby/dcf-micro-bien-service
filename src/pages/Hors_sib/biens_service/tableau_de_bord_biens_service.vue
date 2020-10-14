@@ -113,7 +113,7 @@ export default {
    dcf:dcf,
    noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-
+  ...mapGetters("horSib", ["gettersMarcheHorsib"]),
 
 MontantReelDesMarches() {
        // const st = this.search.toLowerCase();
@@ -167,14 +167,14 @@ MontantDesAvenants(){
 
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.printMarcheNonAttribue.filter(item=>{
+            this.gettersMarcheHorsib.filter(item=>{
                 let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.type_marche_id == 6 || element.type_marche_id == 1)
+            return colect.filter(element => element.type_marche_id == 6 && element.sib==1 || element.type_marche_id == 1 && element.sib==1)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -183,7 +183,7 @@ MontantDesAvenants(){
             // });
         }
 
- return this.printMarcheNonAttribue.filter(element => element.type_marche_id == 6 || element.type_marche_id == 1)
+ return this.gettersMarcheHorsib.filter(element => element.type_marche_id == 6 && element.sib==1 || element.type_marche_id == 1 && element.sib==1)
 
        
             // return (
@@ -201,14 +201,14 @@ MontantDesAvenants(){
        // const st = this.search.toLowerCase();
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.printMarcheNonAttribue.filter(item=>{
+            this.gettersMarcheHorsib.filter(item=>{
                 let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && element.type_marche_id == 6 || element.attribue == 0 && element.type_marche_id == 1)
+            return colect.filter(element => element.attribue == 0 && element.type_marche_id == 6 && element.sib==1 || element.attribue == 0 && element.type_marche_id == 1 && element.sib==1)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -217,7 +217,7 @@ MontantDesAvenants(){
             // }); 
         }
 
-return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && element.type_marche_id == 6 || element.attribue == 0 && element.type_marche_id == 1)
+return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && element.type_marche_id == 6 && element.sib==1 || element.attribue == 0 && element.type_marche_id == 1 && element.sib==1)
         
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
@@ -235,18 +235,18 @@ return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && el
 
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.printMarcheNonAttribue.filter(item=>{
+            this.gettersMarcheHorsib.filter(item=>{
                 let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.type_marche_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.	type_marche_id == 6 && element.attribue == 1 || element.	type_marche_id == 1 && element.attribue == 1 )
+            return colect.filter(element => element.	type_marche_id == 6 && element.attribue == 1  && element.sib==1|| element.	type_marche_id == 1 && element.attribue == 1 && element.sib==1)
          
         }
 
-        return this.printMarcheNonAttribue.filter(element1 => element1.type_marche_id == 6 && element1.attribue == 1|| element1.	type_marche_id == 1 && element1.attribue == 1)
+        return this.gettersMarcheHorsib.filter(element1 => element1.type_marche_id == 6 && element1.attribue == 1 && element1.sib==1 || element1.	type_marche_id == 1 && element1.attribue == 1 && element1.sib==1)
            
     },
 

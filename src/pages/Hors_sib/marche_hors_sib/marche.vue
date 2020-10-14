@@ -131,7 +131,7 @@ CodeExempte
                    
                    <td>
                     
-                      <router-link :to="{ name: 'DetailMarchePs', params: { id: activites.id }}"
+                      <router-link :to="{ name: 'detail_hors_sib', params: { id: activites.id }}"
                 class="btn btn-default " title="historique la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link>
@@ -152,17 +152,6 @@ CodeExempte
 
                        </tr>
                         <tr>
-                     
-                      
-                       <td>
-                          
-                      </td>
-                      <td>
-                          
-                      </td>
-                      <td>
-                          
-                      </td>
                        <td>
                           
                       </td>
@@ -172,22 +161,20 @@ CodeExempte
                       <td>
                           
                       </td>
+                     <td> 
+                      </td>
                       <td>
                           
-                      </td>
-                     <td style="font-weight:bold;"> Total Marché
+                           
                       </td>
                       
+                       <td > 
+                      </td>
+                        <td style="font-weight:bold;"> Total Marché
+                      </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
                            {{formatageSomme(parseFloat(montantMarche))}}
                            
-                      </td>
-                       <td>
-                         
-                           
-                      </td>
-                       <td>
-                          
                       </td>
                         <td>
                           

@@ -108,15 +108,16 @@
                        <td>
                           
                       </td>
-                      <td>
-                          
+                      <td style="font-weight:bold;"> Total Marché
                       </td>
                      
                       
-                       <td style="font-weight:bold;"> Total Marché
-                      </td>
-                       <td  style="text-align: center;color:red;font-weight:bold;">
+                      <td  style="text-align: center;color:red;font-weight:bold;">
                            {{formatageSomme(parseFloat(0))}}
+                           
+                      </td>
+                       <td>
+                          
                            
                       </td>
                       <td>
@@ -180,18 +181,18 @@ export default {
     ...mapGetters("horSib", ["gettersMarcheHorsib"]),
      // afficher la liste des marchés hors sib
 
- afficherListeMarcheHorsSib(){
+//  afficherListeMarcheHorsSib(){
 
-       return this.gettersMarcheHorsib.filter(item =>item.plan_passation_marche_id==null && item.sib==1 && item.attribue==1)
- },
+//        return this.gettersMarcheHorsib.filter(item =>item.plan_passation_marche_id==null && item.sib==1 && item.attribue==1)
+//  },
  // afficher nombreMarcheEnPlanification
 
  nombreMarchePlanifierHorSib(){
-   return this.afficherPlanificationPA.length
+   return this.afficherContratualisationParUA.length
  },
 
      montantMarche(){
-  return this.afficherListeMarcheHorsSib.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+  return this.afficherContratualisationParUA.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
 },
 
  recupererCodeTypeMarche() {
@@ -213,18 +214,18 @@ export default {
 
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.afficherListeMarcheHorsSib.filter(item=>{
+            this.gettersMarcheHorsib.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1  && element.parent_id == null && element.sib==1|| element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
             
         }
 
-        return this.afficherListeMarcheHorsSib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+        return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 && element.parent_id == null && element.sib==1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
            
         
 

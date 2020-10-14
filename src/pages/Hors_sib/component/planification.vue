@@ -6,7 +6,7 @@ montantEnPlanification
               <span class="icon">
             <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marchés en Planification </h5>
+              <h5>Liste des Marchés en Planification {{afficherNombreMarchepalinificationHorsib}} </h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -116,15 +116,16 @@ montantEnPlanification
                        <td>
                           
                       </td>
-                      <td>
-                          
+                      <td style="font-weight:bold;"> Total Marché
                       </td>
                      
                       
-                       <td style="font-weight:bold;"> Total Marché
-                      </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
                            {{formatageSomme(parseFloat(montantMarchePlanfierHorSib))}}
+                           
+                      </td>
+                       <td>
+                           
                            
                       </td>
                       <td>
@@ -201,10 +202,10 @@ export default {
     ...mapGetters("horSib", ["gettersMarcheHorsib"]),
      // afficher la liste des marchés hors sib
 
- afficherListeMarcheHorsSib(){
+//  afficherListeMarcheHorsSib(){
 
-       return this.gettersMarcheHorsib.filter(item =>item.plan_passation_marche_id==null && item.sib==1 && item.attribue==0)
- },
+//        return this.gettersMarcheHorsib.filter(item =>item.plan_passation_marche_id==null && item.sib==1 && item.attribue==0)
+//  },
  // afficher nombreMarcheEnPlanification
 
  nombreMarchePlanifierHorSib(){
@@ -228,34 +229,38 @@ export default {
       };
     },
 
-    // afficherPlanificationPA() {
-    //    // const st = this.search.toLowerCase();
-    //     if (this.noDCfNoAdmin){
-    //         let colect=[];
-    //         this.afficherListeMarcheHorsSib.filter(item=>{
-    //             let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
-    //             if (val!=undefined){
-    //                 colect.push(item)
-    //                 return item
-    //             }
-    //         })
-    //         return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null)
-    //         // return colect.filter(items => {
-    //         //     return (
-    //         //         items.secti.nom_section.toLowerCase().includes(st) ||
-    //         //         items.libelle.toLowerCase().includes(st)
-    //         //     );
-    //         // }); 
-    //     }
+    afficherListeMarcheHorsSib() {
+       // const st = this.search.toLowerCase();
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==1 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // }); 
+        }
 
-    //     return this.afficherListeMarcheHorsSib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null )
-    //         // return (
-    //         //     items.secti.nom_section.toLowerCase().includes(st) ||
-    //         //     items.libelle.toLowerCase().includes(st)
-    //         // );
+        return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==1 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
         
 
-    // },
+    },
+
+    afficherNombreMarchepalinificationHorsib(){
+      return this.afficherListeMarcheHorsSib.length
+    },
 
     // afficher le nombre de marche hors sib
 

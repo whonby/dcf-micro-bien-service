@@ -3,7 +3,7 @@
 
    <div>
       <div align="center" style="margin-">
-        <h3> Marché / Contrat</h3>
+        <h3> Marchés/ Contrats</h3>
       </div>
     <div class="">
         <table class="table table-bordered table-striped">
@@ -76,6 +76,25 @@
             </div>
           </div>
               </td>
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Grande Nature</label>
+                  <div class="controls">
+                    <!-- <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="sapn5">
+                      <option
+                        v-for="gdeNature in groupgranNature"
+                        :key="gdeNature[0].id"
+                        :value="gdeNature[0].afficheGdeNature.id"
+                      >{{gdeNature[0].afficheGdeNature.libelle}}</option>
+                    </select> -->
+
+                     <select v-model="editMarcheHorSib.gdenature_id"  class="sapn4">
+               <option v-for="plans in grandes_natures" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+               </select>
+                  </div>
+                </div>
+              </td>
 
                <td colspan="2">
                <div class="control-group">
@@ -84,13 +103,18 @@
               <textarea
                
                 v-model="editMarcheHorSib.objet"
-                class="span8" rows="3"
+                class="span9" rows="3"
                 placeholder="Saisir le texte"
               ></textarea>
             </div>
           </div>
               </td>
-              <td>
+            </tr>
+            <tr>
+            </tr>
+
+             <tr>
+                <td>
               
                <div class="control-group">
                   <label class="control-label">Classification Economique</label>
@@ -107,16 +131,23 @@
                    
                 </div>
               </td>
-            </tr>
-            <tr>
+               <td>
               
-              
-              
-
-              
-            </tr>
-
-             <tr>
+               <div class="control-group">
+                  <label class="control-label">Activité</label>
+                  <div class="controls">
+                    <select v-model="editMarcheHorSib.activite_id"  class="span4">
+                     <option
+                        v-for="activite in activiteDynamiques(editMarcheHorSib.economique_id)"
+                        :key="activite.activite_id"
+                        :value="activite.activite_id"
+                      >{{afficherLesActivite(activite.activite_id)}}</option>
+                    </select>
+                    
+                  </div>
+                   
+                </div>
+              </td>
           <td>
             <div class="control-group">
        <label class="control-label">Imputation Budgétaire</label>
@@ -124,7 +155,7 @@
          <input
            type="text"
            :value="ImputationBudget"
-           class="span4"
+           class="span5"
            placeholder="Saisir le Imputation"
            readonly
          />
@@ -143,14 +174,18 @@
           
            readonly
          /> -->
-       <select v-model="editMarcheHorSib.type_financement" class="span4">
+       <select v-model="editMarcheHorSib.type_financement" class="span3">
           <option v-for="plans in types_financements" :key="plans.id" 
           :value="plans.id">{{plans.libelle}}</option>
       </select>
        </div>
      </div>
          </td>
-         <td colspan="">
+         
+             </tr>
+
+              <tr>
+                <td colspan="">
          
           <div class="control-group">
        <label class="control-label">Source de financement</label>
@@ -183,9 +218,6 @@
             </div>
           </div>
               </td>
-             </tr>
-
-              <tr>
            <td>
             <div class="control-group">
        <label class="control-label">Montant prévu</label>
@@ -193,7 +225,7 @@
          <input
            type="text"
            v-model="editMarcheHorSib.montant_marche"
-           class="span4" />
+           class="span5" />
        </div>
      </div>
          </td>
@@ -211,6 +243,9 @@
    </div>
    </div>
      </td>
+              </tr>
+
+              <tr>
             <td>
       <div class="control-group">
         <label class="control-label">Nature des prix</label>
@@ -237,10 +272,7 @@
        </div>
      </div>
          </td>
-              </tr>
-              
-              <tr>
-                <td colspan="2">
+           <td colspan="">
                   <div class="control-group">
        <label class="control-label">localisation géographique</label>
        <div class="controls">
@@ -263,6 +295,36 @@
        </div>
      </div>
          </td>
+          <td>
+                  <div class="control-group">
+       <label class="control-label">Departement</label>
+       <div class="controls">
+        
+               <select v-model="editMarcheHorSib.departement_id" class="span4" >
+               <option v-for="plans in recupererParentId(editMarcheHorSib.localisation_geographie_id)" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+           </select>
+      
+       </div>
+     </div>
+         </td>
+              </tr>
+              
+              <tr>
+                 <td colspan="">
+                  <div class="control-group">
+       <label class="control-label">Sous-prefecture</label>
+       <div class="controls">
+       
+               <select v-model="editMarcheHorSib.sous_prefecture_id" class="span4" >
+               <option v-for="plans in recupererParentId(editMarcheHorSib.departement_id)" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+           </select>
+      
+       </div>
+     </div>
+         </td>
+              
                <td>
      <div class="control-group">
       <label class="control-label">Latitude</label>
@@ -283,11 +345,23 @@
          <input
            type="text"
            v-model="editMarcheHorSib.longitude"
-           class="span4" />
+           class="span5" />
        </div>
      </div>
          </td>
-
+              <td colspan="">
+                <div class="control-group">
+       <label class="control-label">Infrastructure</label>
+       <div class="controls">
+       
+               <select v-model="editMarcheHorSib.infrastructure_id" class="span4" >
+               <option v-for="plans in getterInfrastrucure" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+           </select>
+      
+       </div>
+     </div>
+            </td>
      
        
       
@@ -337,7 +411,6 @@ export default {
           name: "cache",
           icon: "add"
         },
-
         // {
         //   name: "alertMe",
         //   icon: "add_alert",
@@ -409,7 +482,7 @@ export default {
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires',"grandes_natures",
- 'structures_geographiques','localisations_geographiques']),
+ 'structures_geographiques','localisations_geographiques','getterInfrastrucure']),
    ...mapGetters("gestionMarche", ['entreprises']),
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
@@ -439,10 +512,28 @@ export default {
         else{
  return this.uniteAdministratives
         }
-       
-          
-        
+    },
 
+     activiteDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.budgetEclate.filter(
+            element => element.ligneeconomique_id == id && element.uniteadministrative_id == this.editMarcheHorSib.unite_administrative_id
+          );
+        }
+      };
+    },
+     afficherLesActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_activites.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
     },
  deveroueconomiq() {
       return this.editMarcheHorSib.unite_administrative_id =="";
@@ -520,6 +611,14 @@ afficherCodeStructure(){
         }
       }
     },
+    // recuperation parent id
+recupererParentId(){
+  return id =>{
+    if(id!=null && id!=""){
+      return this.localisations_geographiques.filter(item => item.parent==id)
+    }
+  }
+}, 
     
 
  //reucperation annee budgetaire dynamique
@@ -570,7 +669,9 @@ afficherCodeStructure(){
             latitude:"",
       longitude:"",
       localisation_geographie_id:"",
-     /// libelle_procedure:"",
+      departement_id:"",
+      sous_prefecture_id:"",
+      infrastructure_id:"",
         type_financement:"",
         source_financement:"",
             objet:"",
@@ -582,8 +683,8 @@ afficherCodeStructure(){
             montant_marche:"",
                 type_marche_id:"",
                 unite_administrative_id:"",
-               // gdenature_id:"",
-               // activite_id:"",
+                gdenature_id:"",
+                activite_id:"",
                // typeappel_id:"",
                 exo_id:"",
                 sib:1
@@ -611,7 +712,7 @@ afficherCodeStructure(){
  margin: 0 -530px;
  height: 550px;
 
-}
+} 
 </style>
 
 

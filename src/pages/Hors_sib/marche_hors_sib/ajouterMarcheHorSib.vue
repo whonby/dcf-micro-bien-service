@@ -95,7 +95,6 @@ afficherLesActivite
                   </div>
                 </div>
               </td>
-
                <td colspan="2">
                <div class="control-group">
             <label class="control-label">Objet marché / contrat</label>
@@ -138,12 +137,12 @@ afficherLesActivite
                <div class="control-group">
                   <label class="control-label">Activité</label>
                   <div class="controls">
-                    <select v-model="formData.activite_id" :readOnly="deverouactivite" class="span4">
-                     <option
-                        v-for="activite in activiteDynamiques(formData.economique_id)"
+                    <select v-model="formData.activite_id"  class="span4">
+                     <!-- <option
+                        v-for="activite in activiteDynamiques(formData.economique_id) :readOnly="deverouactivite""
                         :key="activite.activite_id"
                         :value="activite.activite_id"
-                      >{{afficherLesActivite(activite.activite_id)}}</option>
+                      >{{afficherLesActivite(activite.activite_id)}}</option> -->
                     </select>
                     
                   </div>
@@ -156,7 +155,7 @@ afficherLesActivite
        <div class="controls">
          <input
            type="text"
-           :value="ImputationBudget"
+           :value="ImputationBudget(formData.economique_id)"
            class="span4"
            placeholder="Saisir le Imputation"
            readonly
@@ -587,16 +586,30 @@ export default {
       };
     },
 
-    ImputationBudget() {
+ImputationBudget() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
 
-      const norme = this.budgetEclate.find(normeEquipe => normeEquipe.ligneeconomique_id == this.formData.ligneeconomique_id );
-     
-
-      if (norme) {
-        return norme.code;
+      if (qtereel) {
+        return qtereel.code;
       }
       return 0
+        }
+      };
     },
+   
+    // ImputationBudget() {
+
+    //   const norme = this.plans_budgetaires.find(normeEquipe => normeEquipe.id == this.formData.ligneeconomique_id );
+     
+
+    //   if (norme) {
+    //     return norme.code;
+    //   }
+    //   return 0
+    // },
+    
     // afficherLibelle unite administrative
 
     afficherLibelleUniteAdministrative(){
@@ -681,7 +694,6 @@ recupererParentId(){
           name:'gestion_marche'  
            })
     },
-
      recherche() {
               // console.log(this.search)
                 let entre=this.budgetEclate.find(item=>item.id==this.search);

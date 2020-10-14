@@ -50,18 +50,18 @@
                   </div>
                   <div class="widget-content tab-content">
 
-                    <div id="tab00007" class="tab-pane">
+                    <!-- <div id="tab00007" class="tab-pane">
                 <table class="table table-bordered table-striped">
     
-                 <!-- <PlanPassationMarche></PlanPassationMarche> -->
+                 <PlanPassationMarche></PlanPassationMarche>
               </table>
-                  </div>
+                  </div> -->
 
 
                    <div id="tab00001" class="tab-pane active">
                      <table class="table table-bordered table-striped">
                
-                <tableauBord></tableauBord>
+                <tableauDeBordGestion></tableauDeBordGestion>
               </table>
                    </div>
        <div id="tab00008" class="tab-pane ">
@@ -70,18 +70,8 @@
                 <marche></marche>
               
                    </div>
-                   <div id="marcheEntreprise" class="tab-pane">
-                     <table class="table table-bordered table-striped">
-                    
-               
-              </table>
-                   </div>
-                    <div id="marchehppm" class="tab-pane">
-                     <table class="table table-bordered table-striped">
-                    
-                
-              </table>
-                   </div>
+                  
+                   
                   </div>
                   <br />
               
@@ -91,11 +81,13 @@
     </div>
 </template>
 <script>
+import tableauDeBordGestion from "./tableauDeBordGestion"
 import marche from "./marche"
 import {mapGetters} from "vuex"
 export default {
     components:{
-        marche
+        marche,
+      tableauDeBordGestion
     },
     data(){
         return{
