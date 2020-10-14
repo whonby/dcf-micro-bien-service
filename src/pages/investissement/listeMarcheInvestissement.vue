@@ -82,23 +82,7 @@
         <span class=""><i class=" icon-fast-forward"></i></span>
     </router-link>
                    </td>
-                   <!-- <td>
-                     <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-                   </td> -->
-                   
- 
-<!-- <td>
-    <div class="btn-group">
-
-                    
-              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-             
-            </div>
-</td> -->
-                   
-
+               
                        </tr>
                         <tr>
                      

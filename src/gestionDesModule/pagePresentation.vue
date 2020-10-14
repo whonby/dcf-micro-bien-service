@@ -66,7 +66,7 @@
       <h4>UNITES </h4> <i class="icon-home"></i> <h4> D'ADMINISTRATIVES</h4>      </router-link> </li>
       <li class="bg_lg span3" > 
      <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;">
-      <h4>GESTION DU </h4> <i class="icon-home"></i> <h4> PERSONNEL</h4>      </router-link> </li>
+      <h4>GESTION DU </h4> <i class="icon-group"></i> <h4> PERSONNEL</h4>      </router-link> </li>
       
             </ul>
             <br>
