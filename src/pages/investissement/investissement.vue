@@ -705,9 +705,7 @@
                      <td>
                           
                       </td>
-                       <td>
-                          
-                      </td>
+                      
                       <td>
                           
                       </td>
@@ -738,7 +736,9 @@
                         <td>
                           
                       </td>
-                      
+                      <td colspan="2">
+                          
+                      </td>
                       
                     </tr>
                 </tbody>
@@ -966,12 +966,17 @@
                       <td>
                           
                       </td>
+                      <td>
+                          
+                      </td>
+                      
                        <td style="font-weight:bold;"> Total Marché
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
                            {{formatageSomme(parseFloat(montantEnPlanification))}}
                            
                       </td>
+                      
                        <td>
                           
                       </td>

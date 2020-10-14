@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <!--Header-part-->
@@ -25,7 +26,7 @@
        </li>
        
        
-        <li :class="{active: active_el == 11 }" @click.prevent="navigateToTableauBord">
+        <li :class="{active: active_el == 2 }" @click.prevent="navigateToActeurDepense">
           <a title="TABLEAU DE BORD" href="#">
             <i class="icon-dashboard"></i>
             <span>TABLEAU DE BORD</span>
@@ -46,81 +47,24 @@
          <!-- <li @click.prevent="navigateToTransfert" :class="{active: active_el ==6}">
           <a title="TRANSFERT" href="#">
             <i class="icon-money"></i>
-            <span>BUDGET</span>
+            <span>TRANSFERT</span>
             <span class="label label-important"></span>
           </a>
-        </li> -->
-         <!-- <li @click.prevent="navigateToTransfert">
-          <a title="BUDGET ECLATE" href="#">
-            <i class="icon-money"></i>
-            <span>BUDGET ECLATE</span>
-            <span class="label label-important"></span>
-          </a>
-        </li> -->
-        <li >
-           <router-link :to="{ name: 'BudgetEclatePrincipal'}" tag="a"  >
-         
-            <i class="icon-arrow-left"></i>
-            <span>BUDGET ECLATE</span>
-           
-          </router-link>
         </li>
-         <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==19}">
-          <a href="#">
-            <i class="icon-truck"></i>
-            <span>GESTION DES MARCHES</span>
-          </a>
-        </li>
-        <!-- <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
-          <a href="#">
-            <i class="icon-group"></i>
-            <span>PERSONNEL</span>
-          </a>
-        </li> -->
-        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
-          <a href="#">
-            <i class="icon-truck"></i>
-            <span>BIENS ET SERVICES</span>
-          </a>
-        </li>
-
-       <!-- <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
-          <a title="COMPTABILITE DES MATIERE" href="#">
-            <i class=" icon-camera"></i>
-            <span>COMPTA DES MATIERES</span>
-          </a>
-        </li> -->
-
-
-        <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==4}">
-          <a title="INVESTISSEMENT" href="#">
-            <i class="icon-truck"></i>
-            <span>INVESTISSEMENT</span>
-           
-          </a>
-        </li>
-         <li >
-           <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
-         
-            <i class="icon-arrow-left"></i>
-            <span>RETOUR AU MENU</span>
-           
-          </router-link>
-        </li>
-         <!-- <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==7}">
+         <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==7}">
           <a title="GESTION MARCHE" href="#">
             <i class="icon-shopping-cart"></i>
             <span>GESTION MARCHE</span>
             <span class="label label-important"></span>
           </a>
-        </li>
+        </li> -->
         <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
           <a href="#">
             <i class="icon-group"></i>
             <span>PERSONNEL</span>
           </a>
         </li>
-        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
+        <!-- <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
           <a href="#">
             <i class="icon-truck"></i>
             <span>BIENS ET SERVICES</span>
@@ -140,23 +84,34 @@
             <span>INVESTISSEMENT</span>
            
           </a>
+        </li> -->
+        <li >
+           <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
+         
+            <i class="icon-arrow-left"></i>
+            <span>RETOUR AU MENU</span>
+           
+          </router-link>
         </li>
-        
         
        
      
-          <li @click.prevent="navigateToCatographieBudgetaire" :class="{active: active_el ==8}">
+          <!-- <li @click.prevent="navigateToCatographieBudgetaire" :class="{active: active_el ==8}">
           <a title="CARTOGRAPHIE" href="#">
             <i class=" icon-globe"></i>
             <span>CARTOGRAPHIE</span>
             <span class="label label-important"></span>
           </a>
-        </li>
-        <li v-if="cf() || dcf()" @click.prevent="navigateGestionEquipe" :class="{active: active_el ==21}">
+        </li> -->
+        <!-- <li v-if="cf() || dcf()" @click.prevent="navigateGestionEquipe" :class="{active: active_el ==21}">
           <a href="#">
             <i class="icon icon-user"></i> <span>MON EQUIPE</span>
+          </a> -->
+          <!-- <li v-if="admin() || dcf()" @click.prevent="navigateGestionUser" :class="{active: active_el ==21}">
+              <a href="#">
+              <i class="icon icon-key"></i> <span>UTILISATEURS</span>
           </a>
-          </li> -->
+          </li>  -->
           <li @click.prevent="logoutUser()" >
           <a title="DECONNEXION" href="#">
             <i class="icon icon-off"></i>
@@ -243,19 +198,19 @@ return objJson.id
       },
       
  navigateToTransfert(){
-        
+        this.activate(6)
         this.$router.push({
-          name: 'BudgetEclatePrincipal'
+          name: 'transfert'
         })
       },
 navigateToGestionMarche(){
-        this.activate(19)
+        this.activate(7)
         this.$router.push({
-          name: 'gestion_marche'
+          name: 'GestionMarche'
         })
       },
 
-//GestionMarcheHorSib
+
 
       navigateToActeurDepense(){
         this.activate(2)
@@ -297,13 +252,13 @@ navigateToGestionMarche(){
           name:'tableauBordInvestissement'
         })
       },
+
  navigateToBienEtService(){
-        this.activate(7)
+        this.activate(3)
         this.$router.push({
-          name: 'tableau_de_bord_hors'
+          name: 'tableauBord'
         })
       },
-      // suivi_marhe
       navigateGestionUser(){
           this.activate(21)
           this.$router.push({
