@@ -382,7 +382,7 @@ afficherlisteMarcheParDroitAccess() {
                     return item
                 }
             })
-            return colect.filter(element =>element.parent_id == null);
+            return colect.filter(element =>element.parent_id == null && element.sib==0);
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -391,7 +391,7 @@ afficherlisteMarcheParDroitAccess() {
             // });
         }
 else{
-return this.printMarcheNonAttribue.filter(element =>element.parent_id == null);
+return this.printMarcheNonAttribue.filter(element =>element.parent_id == null && element.sib==0);
 }
         
             // return (

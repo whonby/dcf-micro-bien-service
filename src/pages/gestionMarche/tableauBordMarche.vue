@@ -93,31 +93,31 @@ budgetConsommerBienService(){
 },
 
    nombreDeMarcheSuspendu(){
-return this.marches.filter(element => element.attribue == 7 ).length
+return this.marches.filter(element => element.attribue == 7 && element.sib==0 ).length
 },
 
 
 
   nombreDeMarcheEnContratualisation(){
-return this.marches.filter(element => element.attribue == 1 ).length
+return this.marches.filter(element => element.attribue == 1 && element.sib==0).length
 },
 nombreMarcheEnplanification(){
-return this.marches.filter(element => element.attribue == 0).length
+return this.marches.filter(element => element.attribue == 0 && element.sib==0).length
 },
 afficheNombreMarcheResilier(){
-return this.marches.filter(element => element.attribue == 3).length
+return this.marches.filter(element => element.attribue == 3 && element.sib==0).length
 },
 nbreMarcheExecuter(){
-return this.marches.filter(element => element.attribue == 2).length
+return this.marches.filter(element => element.attribue == 2 && element.sib==0).length
 },
 nombreAfficheMarcheSolde(){
-return this.marches.filter(element => element.attribue == 5).length
+return this.marches.filter(element => element.attribue == 5 && element.sib==0).length
 },
 // marches(){
 // return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
 // },
 nombreDeMarche(){
-  return this.marches.length;
+  return this.marches.filter(item => item.sib==0).length;
 },
 // nombreMarcheEnplanification(){
 //   return this.afficheMarcheEnPlanification.length;
