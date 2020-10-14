@@ -2268,7 +2268,7 @@ return this.afficheMarcheResilier.length
 // afficher la liste de marche en contratualisation
 
 afficheMarcheEnCoursContratualisation(){
-return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 1 && element.type_marche.code_type_marche == 3 && element.parent_id == null)
+return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 1 && element.type_marche.code_type_marche == 3 && element.parent_id == null && element.sib==1)
 },
 
 

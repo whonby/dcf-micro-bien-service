@@ -27,7 +27,7 @@ afficherLesActivite
                         Selectionner UA:
                         <model-list-select style="background-color: rgb(255,255,255);"
                           class="wide"
-                          :list="budgetEclate"
+                          :list="groupeUaPourMarheHorSib"
                           v-model="search"
                           option-value="id"
                           option-text="uniteadministrative_id"
@@ -41,7 +41,7 @@ afficherLesActivite
                     </div> -->
                <div class="control-group">
             <label class="control-label" title="unite administrative">UA</label>
-            <div class="controls">
+            <div class="controls" style="background-color: rgb(255,255,255);">
             <select v-model="formData.unite_administrative_id" class="span8">
                <option v-for="plans in groupeUaPourMarheHorSib" :key="plans[0].id" 
                :value="plans[0].uniteadministrative_id">{{afficherLibelleUniteAdministrative(plans[0].uniteadministrative_id)}}</option>
@@ -88,7 +88,7 @@ afficherLesActivite
                       >{{gdeNature[0].afficheGdeNature.libelle}}</option>
                     </select> -->
 
-                     <select v-model="formData.gdenature_id"  class="sapn4">
+                     <select v-model="formData.gdenature_id"  class="span4">
                <option v-for="plans in grandes_natures" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
                </select>
@@ -393,15 +393,15 @@ afficherLesActivite
  import { mapGetters, mapActions } from "vuex";
  //import { formatageSomme } from "../../../src/Repositories/Repository";
  import {admin,dcf,noDCfNoAdmin} from '../../../Repositories/Auth';
-//import {  ModelListSelect } from 'vue-search-select'
-//import 'vue-search-select/dist/VueSearchSelect.css'
+// import {  ModelListSelect } from 'vue-search-select'
+// import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
   name:'type facture',
 
   components:{
             // bailleurAjouter,
             
-          //  ModelListSelect,
+            //ModelListSelect,
         },
   data() {
     return {

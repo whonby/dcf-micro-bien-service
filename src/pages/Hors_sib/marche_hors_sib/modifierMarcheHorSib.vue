@@ -88,7 +88,7 @@
                       >{{gdeNature[0].afficheGdeNature.libelle}}</option>
                     </select> -->
 
-                     <select v-model="editMarcheHorSib.gdenature_id"  class="sapn4">
+                     <select v-model="editMarcheHorSib.gdenature_id"  class="span4">
                <option v-for="plans in grandes_natures" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
                </select>
@@ -287,7 +287,7 @@
                                 <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
               </select> -->
-               <select v-model="editMarcheHorSib.localisation_geographie_id" class="span6" >
+               <select v-model="editMarcheHorSib.localisation_geographie_id" class="span5" >
                <option v-for="plans in afficherCodeStructureLibelle(recupererLataille)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>

@@ -534,81 +534,6 @@ export function supprimerActeEffetFinancier({commit}, id) {
 
 
 
-// actions pour acteur depense
-
-
-// export  function  getActeurDepense({commit}) {
-//   queue.push(() => axios.get('/url').then((response) => {
-//     commit('GET_ALL_ACTEUR_DEPENSE', response.data)
-    
-// }).catch(error => console.log(error)))
-// }
-
-// action pour ajouter acteur depense
-// export function ajouterActeurDepense({commit}, elementAjout){
-//   asyncLoading(axios.post('/urls',{
-//      id_fonction:elementAjout.id_fonction,
-//      nom:elementAjout.nom,
-//      prenom:elementAjout.prenom,
-//      date_naissance:elementAjout.date_naissance,
-//      grade:elementAjout.grade,
-//      emploi:elementAjout.emploi,
-//      situation_matrimoniale:elementAjout.situation_matrimoniale,
-//      date_premier_service:elementAjout.date_premier_service
-// })).then(response =>{
-//       if(response.status == 201){
-//           commit('AJOUTER_ACTEUR_DEPENSE', response.data)
-
-//           this.$app.$notify({
-//             title: 'success ',
-//             text: 'Enregistrement effectué !',
-//             type:"success"
-//           })
-//       }
-
-//   }).catch(error => console.log(error))
-// }
-
-// action pour modifier acteur depense
-
-
-// export function modifierActeurDepense({commit}, element_modifie) {
-//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-//     id_fonction:element_modifie.id_fonction,
-//     nom:element_modifie.nom,
-//     prenom:element_modifie.prenom,
-//     date_naissance:element_modifie.date_naissance,
-//     grade:element_modifie.grade,
-//     emploi:element_modifie.emploi,
-//     situation_matrimoniale:element_modifie.situation_matrimoniale,
-//     date_premier_service:element_modifie.date_premier_service
-      
-
-//  })).then(response => {
-//        commit('MODIFIER_ACTEUR_DEPENSE', response.data)
-
-//        this.$app.$notify({
-//          title: 'success ',
-//          text: 'Modification effectué !',
-//          type:"success"
-//        })
-//    }).catch(error => console.log(error))
-// }
-// supprimer categorie mision
-// export function supprimerActeurDepense({commit}, id) {
-//  this.$app.$dialog
-//  .confirm("Voulez vouz vraiment supprimer ?.")
-//  .then(dialog => {
-//     commit('SUPPRIMER_ACTEUR_DEPENSE', id)
-   
-//      axios.delete('/urls/' + id).then(() => dialog.close() )   
-//  })
-
-// }
-
-
-
-
 export  function getTypeActeDepense({commit}) {
   queue.push(() => axios.get('/type_acte_depenses').then((response) => {
    // console.log(response.data)
@@ -763,152 +688,6 @@ export function supprimerTypePrestation({commit}, id) {
 }
 
 
-
-
-
-// action pour code fonction && type de prestation
-
-// export  function  getCodeFonction({commit}) {
-//   queue.push(() => axios.get('/url').then((response) => {
-//     commit('GET_CODE_FONCTION', response.data)
-    
-// }).catch(error => console.log(error)))
-// }
-
-// action pour ajouter code fonction 
-// export function ajouterCodeFonction({commit}, elementAjout){
-//   asyncLoading(axios.post('/urls',{
-//     numero_code_fonction:elementAjout.numero_code_fonction,
-//     entite_concernee:elementAjout.entite_concernee,
-//     debut_validite:elementAjout.debut_validite,
-//     fin_validite:elementAjout.fin_validite
-// })).then(response =>{
-//       if(response.status == 201){
-//           commit('AJOUTER_CODE_FONCTION', response.data)
-
-//           this.$app.$notify({
-//             title: 'success ',
-//             text: 'Enregistrement effectué !',
-//             type:"success"
-//           })
-//       }
-
-//   }).catch(error => console.log(error))
-// }
-
-// action pour modifier code fonction
-
-
-// export function modifierCodeFonction({commit}, element_modifie) {
-//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-//     numero_code_fonction:element_modifie.numero_code_fonction,
-//     entite_concernee:element_modifie.entite_concernee,
-//     debut_validite:element_modifie.debut_validite,
-//     fin_validite:element_modifie.fin_validite
-    
-//  })).then(response => {
-//        commit('MODIFIER_CODE_FONCTION', response.data)
-       
-
-//        this.$app.$notify({
-//          title: 'success ',
-//          text: 'Modification effectué !',
-//          type:"success"
-//        })
-//    }).catch(error => console.log(error))
-// }
-// supprimer code fonction
-// export function supprimerCodeFonction({commit}, id) {
-//  this.$app.$dialog
-//  .confirm("Voulez vouz vraiment supprimer ?.")
-//  .then(dialog => {
-//     commit('SUPPRIMER_CODE_FONCTION', id)
- 
-//      axios.delete('/urls/' + id).then(() => dialog.close() )   
-//  })
-
-// }
-
-
-
-// action pour  compte
-
-// export  function  getCompte({commit}) {
-//   queue.push(() => axios.get('/url').then((response) => {
-//     commit('GET_ALL_COMPTE', response.data)
-    
-// }).catch(error => console.log(error)))
-// }
-
-// action pour ajouter compte
-// export function ajouterCompte({commit}, elementAjout){
-//   asyncLoading(axios.post('/urls',{
-//     numero_compte:elementAjout.numero_compte,
-//     id_fournisseur:elementAjout.id_fournisseur,
-//     id_banque:elementAjout.id_banque,
-//     date_ouverture_compte:elementAjout.date_ouverture_compte,
-//     signataire_compte:elementAjout.signataire_compte,
-//     nature_compte:elementAjout.nature_compte,
-//     agence:elementAjout.agence,
-//     numero_agence:elementAjout.numero_agence,
-//     numero_telephone:elementAjout.numero_telephone
-
-    
-// })).then(response =>{
-//       if(response.status == 201){
-//           commit('AJOUTER_COMPTE', response.data)
-
-//           this.$app.$notify({
-//             title: 'success ',
-//             text: 'Enregistrement effectué !',
-//             type:"success"
-//           })
-//       }
-
-//   }).catch(error => console.log(error))
-// }
-
-// action pour modifier compte
-
-
-// export function modifierCompte({commit}, element_modifie) {
-//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-//     numero_compte:element_modifie.numero_compte,
-//     id_fournisseur:element_modifie.id_fournisseur,
-//     id_banque:element_modifie.id_banque,
-//     date_ouverture_compte:element_modifie.date_ouverture_compte,
-//     signataire_compte:element_modifie.signataire_compte,
-//     nature_compte:element_modifie.nature_compte,
-//     agence:element_modifie.agence,
-//     numero_agence:element_modifie.numero_agence,
-//     numero_telephone:element_modifie.numero_telephone
-//  })).then(response => {
-//        commit('MODIFIER_COMPTE', response.data)
-       
-
-//        this.$app.$notify({
-//          title: 'success ',
-//          text: 'Modification effectué !',
-//          type:"success"
-//        })
-//    }).catch(error => console.log(error))
-// }
-// supprimer compte
-
-// export function supprimerCompte({commit}, id) {
-//  this.$app.$dialog
-//  .confirm("Voulez vouz vraiment supprimer ?.")
-//  .then(dialog => {
-//     commit('SUPPRIMER_COMPTE', id)
-   
-//      axios.delete('/urls/' + id).then(() => dialog.close() )   
-//  })
-
-// }
-
-
-
-/////////////// action pour les //////////////
 
 
 
@@ -1323,12 +1102,12 @@ export function supprimerTextJuridique({commit}, id) {
 
 // action pour  fonction occuppee
 
-export  function  getFonctionOccuppe({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_FONCTION_OCCUPPE', response.data)
+// export  function  getFonctionOccuppe({commit}) {
+//   queue.push(() => axios.get('/url').then((response) => {
+//     commit('GET_ALL_FONCTION_OCCUPPE', response.data)
     
-}).catch(error => console.log(error)))
-}
+// }).catch(error => console.log(error)))
+// }
 
 // action pour ajouter la fonction occuppee
 // export function ajouterFonctionOccuppe({commit}, elementAjout){
