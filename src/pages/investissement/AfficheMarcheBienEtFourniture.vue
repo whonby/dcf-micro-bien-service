@@ -243,20 +243,62 @@ loading(){
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==0 && element.attribue==2)
+           return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==0 && element.attribue==2|| this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==0 && element.attribue==2)
            
         }
-           return  this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==0 && element.attribue==2)
+           return this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==0 && element.attribue==2 || this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==0 && element.attribue==2)
        
     },
 
 
 
+afficherMarcheInvestissementParPlanificationDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.afficheMarcheEnPlanification.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficheMarcheEnPlanification
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
 
 
 
 
+/// afficher marche en constratualisation pour investissement
+afficherMarcheInvestissementParEnContratualistationDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.afficheMarcheEnCoursContratualisation.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect;
+        }
 
+        return this.afficheMarcheEnCoursContratualisation
+           
+    },
 
 
     afficherMarcheInvestissementParExecutionDroitAccess() {

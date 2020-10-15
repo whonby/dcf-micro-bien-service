@@ -75,9 +75,8 @@
             </router-link>
           </li>
      <!-- <li> 
-            <router-link :to="{name: 'indicateurBienService'}" tag="a">
-              SUIVI DES MARCHES
-            </router-link>
+            <router-link :to="{name: 'AjouteFacture'}" tag="a">
+FACTURE            </router-link>
           </li> -->
     </ul>
   </div>

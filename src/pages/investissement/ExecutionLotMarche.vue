@@ -6,7 +6,14 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <afficheMarcheGeneral></afficheMarcheGeneral> 
+          <template v-if="affichertypeMarcheEx(detail_marche.type_marche_id)==3">
+             <afficheMarcheGeneral ></afficheMarcheGeneral> 
+          </template>
+          <template v-if="affichertypeMarcheEx(detail_marche.type_marche_id)==1 ||affichertypeMarcheEx(detail_marche.type_marche_id)==4">
+            <AfficheMarcheBienEtFourniture ></AfficheMarcheBienEtFourniture>
+          </template>
+         
+          
           <div class="widget-box">
             
             <div class="widget-title">
@@ -99,10 +106,12 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import afficheMarcheGeneral from "./afficheMarcheGeneral"
+import AfficheMarcheBienEtFourniture from "./AfficheMarcheBienEtFourniture"
 import { formatageSomme } from "../../../src/Repositories/Repository";
 export default {
   components:{
-    afficheMarcheGeneral
+    afficheMarcheGeneral,
+    AfficheMarcheBienEtFourniture
   },
   name:'typetext',
   data() {
@@ -140,6 +149,18 @@ export default {
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
    ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
+affichertypeMarcheEx() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code_type_marche;
+      }
+      return 0
+        }
+      };
+    },
     afficheMontantReelMarche() {
       return id => {
         if (id != null && id != "") {

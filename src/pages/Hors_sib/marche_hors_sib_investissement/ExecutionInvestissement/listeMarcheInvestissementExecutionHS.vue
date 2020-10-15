@@ -1,10 +1,20 @@
 
 <template>
-    
+    <div class="container-fluid">
 
-         
+         <div class="row-fluid">
+                <div class="span12">
                     <div class="widget-box">
-                     
+                        <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#marcheExecution"> Marchés en Executions <span class="badge badge" ></span></a></li>
+ 
+                            </ul>
+                        </div>
+                        <div class="widget-content tab-content">
+
+
+                         <div id="marcheExecution" class="tab-pane active">
                              <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
@@ -18,7 +28,7 @@
 
 
 
-              <table class="table table-bordered table-striped" v-if="afficherMarcheInvestissementParDroitAccess.length>0">
+              <table class="table table-bordered table-striped" >
                 <thead>
                 <tr>
                     <th>Année</th>
@@ -33,9 +43,11 @@
                      <!-- <th>Numero marché</th> -->
                     <th>Montant prévu</th>
                     
+                    
+                   <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="afficherMarcheInvestissementParDroitAccess.length>0">
                  
                         <tr class="odd gradeX" v-for="(marche, index) in 
                 afficherMarcheInvestissementParDroitAccess"
@@ -64,37 +76,81 @@
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
                   
            
-                   
-
+                   <td >
+                        <router-link :to="{ name: 'ExecutionLotInvestissement', params: { id: marche.id }}"
+                 class="btn btn-inverse " title="Execution du marche">
+        <span class=""><i class=" icon-fast-forward"></i></span>
+    </router-link>
+                   </td>
+               
                        </tr>
+                        <tr>
+                     
+                      <td>
+                          
+                      </td>
                       
+                       <td>
+                          
+                      </td>
+                      <td>
+                          
+                      </td>
+                      <td>
+                          
+                      </td>
+                      <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                       <td style="font-weight:bold;"> Total Marché
+                      </td>
+                       <td  style="text-align: center;color:red;font-weight:bold;">
+                           {{formatageSomme(parseFloat(montantMarcheInvestissement))}}
+                           
+                      </td>
+                      
+                       
+                      <td>
+                          
+                      </td>
+                      
+                    </tr>
                 </tbody>
               </table>
 
-                           <!-- <div class="row-fluid vld-parent"  align="center" style="margin:10px "> -->
-                             <!-- <loading :active="true"
+                           <!-- <div class="row-fluid vld-parent"  align="center" style="margin:10px ">
+                             <loading :active="true"
                                       :can-cancel="false"
                                       :is-full-page="fullPage"></loading> -->
 <!--                             <clip-loader :loading="getterLoadinMarche" :color="color" :size="size_pul"></clip-loader>-->
 <!--                             <pulse-loader :loading="getterLoadinMarche" :color="color" :size="size_pul"></pulse-loader>-->
                            <!-- </div> -->
 
-                       
+                        </div>
  
-                   
                     </div>
+
+                </div>
+            </div>
+        </div>
 
    
 
-    
+    </div>
 </template>
 
 <script>
 //import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 //import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
  import { mapGetters, mapActions } from "vuex";
- import { formatageSomme } from "../../../src/Repositories/Repository";
-  import {admin,dcf,noDCfNoAdmin} from "../../../src/Repositories/Auth";
+ import {admin,dcf,noDCfNoAdmin} from "../../../../Repositories/Auth"
+import {formatageSomme} from "../../../../Repositories/Repository"
 
 export default {
   name:'type facture',
@@ -243,20 +299,62 @@ loading(){
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==0 && element.attribue==2)
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && element.attribue==2)
            
         }
-           return  this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==0 && element.attribue==2)
+           return  this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && element.attribue==2)
        
     },
 
 
 
+afficherMarcheInvestissementParPlanificationDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.afficheMarcheEnPlanification.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficheMarcheEnPlanification
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
 
 
 
 
+/// afficher marche en constratualisation pour investissement
+afficherMarcheInvestissementParEnContratualistationDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.afficheMarcheEnCoursContratualisation.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect;
+        }
 
+        return this.afficheMarcheEnCoursContratualisation
+           
+    },
 
 
     afficherMarcheInvestissementParExecutionDroitAccess() {

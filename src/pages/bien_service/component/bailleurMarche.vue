@@ -1,5 +1,4 @@
-analyseByLot
-afficherNumeroDossierCandidat1
+
 <template>
 <div>
   <div v-for="item in lot" :key="item.id" class="widget-content">

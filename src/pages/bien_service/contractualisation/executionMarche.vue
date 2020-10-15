@@ -1,409 +1,186 @@
-ImputationBudgetModifier
 
 <template>
-  <div>
-
-
-    <div id="modificationModal" class="modal hide taillModal">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier marché</h3>
-      </div>
-      <div class="modal-body">
-       <table class="table table-bordered table-striped">
-          <tr>
-            <td>
-                  <div class="control-group">
-                                <label class="control-label">Année Budgetaire</label>
-                                <div class="controls ">
-                            
-                             <input
-                type="text"
-              :value="anneeAmort"
-                class="span"
-               readonly
-              />
-                                </div>
-                                </div>
-              </td>
-               <td>
-                 <div class="control-group">
-            <label class="control-label">Refencence marché</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="editMarche.reference_marche"
-                class="span"
-                placeholder="Saisir le libelle_type"
-              />
-            </div>
-          </div>
-              </td>
-             <td colspan="2">
-               <div class="control-group">
-            <label class="control-label">Objet marché</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="editMarche.objet"
-                class="span4"
-                placeholder="Saisir le libelle_type"
-              />
-            </div>
-          </div>
-              </td>
-              
-         </tr>
-            <tr>
-             <td>
-               <div class="control-group">
-            <label class="control-label" title="unite administrative">UA</label>
-            <div class="controls">
-            <select v-model="editMarche.unite_administrative_id" class="span">
-               <option v-for="plans in groupUa" 
-               :key="plans[0].id" 
-               :value="plans[0].afficheUA.id">{{plans[0].afficheUA.libelle}}</option>
-           </select>
-            </div>
-          </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Grand Nature</label>
-                  <div class="controls">
-                    <select v-model="editMarche.gdenature_id" :readOnly="deverouGrandNature">
-                      <option
-                        v-for="gdeNature in grandeNatureDynamiques(editMarche.unite_administrative_id)"
-                        :key="gdeNature.id"
-                        :value="gdeNature.afficheGdeNature.id"
-                      >{{gdeNature.afficheGdeNature.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-               <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Activite</label>
-                  <div class="controls">
-                    <select v-model="editMarche.activite_id" >
-                     <option
-                        v-for="activite in activiteDynamiques(editMarche.unite_administrative_id)"
-                        :key="activite.id"
-                        :value="activite.afficheActivite.id"
-                      >{{activite.afficheActivite.code}} - {{activite.afficheActivite.libelle}}</option>
-                    </select>
-                    
-                  </div>
-                   
-                </div>
-              </td>
-               <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Classification Economique</label>
-                  <div class="controls">
-                    <select v-model="editMarche.economique_id" :readOnly="deveroueconomiq">
-                    <option
-                        v-for="eco in economiqueDynamiques(editMarche.unite_administrative_id)"
-                        :key="eco.id"
-                        :value="eco.afficheEconomique.id"
-                      >{{eco.afficheEconomique.code}} - {{eco.afficheEconomique.libelle}}</option>
-                    </select>
-                  </div>
-                   
-                </div>
-              </td>
-               
-             
-            </tr>
-            <tr>
-               <td colspan=2>
-                 <div class="control-group">
-            <label class="control-label">Imputation Budgetaire</label>
-            <div class="controls">
-              <input
-                type="text"
-                
-                class="span5"
-                placeholder="Saisir le Imputation"
-                readonly
-              />
-            </div>
-          </div>
-              </td>
-              
-              <!-- <td>
-                 <div class="control-group">
-            <label class="control-label">Montant Imputations</label>
-            <div class="controls">
-              <input
-                type="text"
-                :value="MontatantImputationBudget"
-                class="span"
-                
-               readonly
-              />
-            </div>
-          </div>
-              </td> -->
-                
-           
-             <td>
-              
-               <div class="control-group">
-            <label class="control-label">Type marché</label>
-            <div class="controls">
-            <select v-model="editMarche.type_marche_id" class="span">
-               <option v-for="plans in typeMarches" :key="plans.id" 
-               :value="plans.id">{{plans.libelle}}</option>
-           </select>
-            </div>
-          </div>
-              </td>
-                <td>
-                 <div class="control-group">
-            <label class="control-label">Montant prévu</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="editMarche.montant_marche"
-                class="span"
-                placeholder="Saisir le libelle_type"
-               
-              />
-            </div>
-          </div>
-              </td>
-            </tr>
-            <tr>
-               
-             
-            
-             <!-- <td>
-               <div class="control-group">
-            <label class="control-label">Numero marché</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="editMarche.numero_marche"
-                class="span"
-                placeholder="Saisir le libelle_type"
-              />
-            </div>
-          </div>
-              </td> -->
-               <td colspan="2">
-              
-               <div class="control-group">
-            <label class="control-label">Type Appel Offre</label>
-            <div class="controls">
-            <select v-model="editMarche.typeappel_id" class="span4">
-               <option v-for="plans in typeTypeProcedures" :key="plans.id" 
-               :value="plans.id">{{plans.libelle}}</option>
-           </select>
-            </div>
-          </div>
-              </td>
-             <td colspan="2">
-              
-               <div class="control-group">
-            <label class="control-label">procedure passation</label>
-            <div class="controls">
-           
-               <select v-model="editMarche.procedure_passation_id" class="span4" :readOnly="deverouPassationModi">
-               <option v-for="plans in procedurePassationDynamiques(editMarche.typeappel_id)" :key="plans.id" 
-               :value="plans.id">{{plans.libelle}}</option>
-           </select>
-            </div>
-          </div>
-              </td>
-            </tr>
-          
-            
-          
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="modifierModalTypeprestationLocal(editMarche)"
-          class="btn btn-primary"
-          href="#"
-         
-        >Modifier</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-    <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
-    <!-- End Page Header -->
-    <!-- Default Light Table -->
     <div class="container-fluid">
-       <!-- <h4 v-if="marcheDetail(marcheid)" >Detail Marche : {{marcheDetail(marcheid).objet}} 
-          <button class="btn btn-success btn-large" v-if="marcheDetail(marcheid).attribue==1">Marché attribué</button>
-       </h4> -->
-           
-      <hr />
-      <div class="row-fluid">
-        <div class="span12">
-          <!-- <download-excel
-            class="btn btn-default pull-right"
-            style="cursor:pointer;"
-            :fields="json_fields"
-            title="Liste Types équipements"
-            :data="filtre_equipement"
-            name="Liste des types équipements"
-          >
-            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel> -->
-          <div class="widget-box">
-            <div class="widget-title">
+
+         <div class="row-fluid">
+                <div class="span12">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#marcheExecution"> Marchés en Executions <span class="badge badge" ></span></a></li>
+ 
+                            </ul>
+                        </div>
+                        <div class="widget-content tab-content">
+
+
+                         <div id="marcheExecution" class="tab-pane active">
+                             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des marches attribués </h5>
-              <div align="right">
-                Search:
-                <input type="search" placeholder v-model="search" />
-              </div>
+              <h5>March&eacute;s Biens et Fournitures en Exécution</h5>
+              <!-- <div align="right">
+                Recherche:
+                <input type="search"  v-model="search" />
+              </div> -->
             </div>
 
-            <div class="widget-content nopadding">
-              <table class="table table-bordered table-striped">
+
+
+              <table class="table table-bordered table-striped" >
                 <thead>
-                  <tr>
-                     <th>UA</th>
-                    <th>Type marché</th>
+                <tr>
+                    <th>Année</th>
+                      <th>UA</th>
+                    <th>Type de marché</th>
+                    <th>Mode de passation</th>
                     <th>Activité</th>
                     <th>Imputation</th>
-                    <th>Ligne Budgetaire</th>
-                    <th>Objet marché</th>
-                    <th>Reference marché</th>
-                   
-                    <th>Montant Réel</th>
-                    <th>Action</th>
+                    <!-- <th>Ligne Budgetaire</th> -->
+                    <th>Objet du marché</th>
+                    <th>Référence du marché</th>
+                     <!-- <th>Numero marché</th> -->
+                    <th>Montant prévu</th>
+                    
+                    
+                   <th>Action</th>
                   </tr>
                 </thead>
-                <tbody >
-                  <tr class="odd gradeX" v-for="(marche, index) in 
-                  afficherlisteMarcheExecutionParDroitAccess"
+                <tbody v-if="MarcheExecutionBienEtFourniture.length>0">
+                 
+                        <tr class="odd gradeX" v-for="(marche, index) in 
+                MarcheExecutionBienEtFourniture"
                  :key="marche.id">
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.exo_id || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherlibelleUa(marche.unite_administrative_id) || 'Non renseigné'}}</td>
-
+                   {{afficherUniteAdministrative(marche.unite_administrative_id) || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.type_marche.libelle || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
+                   {{afficherTypeMarcheLibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
+                   {{marche.procedure_passation.code || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficheractivite(marche.activite_id) || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.imputation || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
-                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td>
+                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.objet || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.reference_marche || 'Non renseigné'}}</td>
-                  
+                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.numero_marche || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
-                   {{formatageSomme(parseFloat(afficheMontantReelMarche(marche.id))) || 'Non renseigné'}}</td>
-                 
-
-
-
-
-                     <div class="btn-group">
-
-                   <!-- <router-link :to="{ name: 'DetaillMarche', params: { id: marche.id }}"
-                class="btn btn-default " title="formulation de demamnde d'engagement">
-                  <span class=""><i class="icon-folder-open"></i></span>
-                   </router-link>  -->
- <!-- <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail execution">
-                  <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link>  -->
-<router-link :to="{ name: 'detailExecution', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail execution Marche">
-                  <span class=""><i class="  icon-random"></i></span>
-                   </router-link> 
-
-            <!-- <router-link :to="{ name: 'DetailLivrable', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail livrable">
-                  <span class=""><i class=" icon-plus"></i></span>
-                   </router-link> -->
-
-
-              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-             
-            </div>
-
+                   {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
+                  
+           
+                   <td >
+                        <router-link :to="{ name: 'ExecutionLotInvestissement', params: { id: marche.id }}"
+                 class="btn btn-inverse " title="Execution du marche">
+        <span class=""><i class=" icon-fast-forward"></i></span>
+    </router-link>
+                   </td>
+               
                        </tr>
                         <tr>
                      
+                      <td>
+                          
+                      </td>
                       
-                      <td>
+                       <td>
                           
                       </td>
                       <td>
                           
                       </td>
-                       
                       <td>
                           
                       </td>
                       <td>
                           
-                      </td>
-                        <td>
-                          
-                      </td>
-                      <td>
-                          
-                      </td>
-                       <td style="font-weight:bold;"> Total Marche en execution
-                      </td>
-                       <td  style="text-align: center;color:red;font-weight:bold;">
-                           {{formatageSomme(parseFloat(montantMarcheExecuter))}}
-                           
                       </td>
                        <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                       <td style="font-weight:bold;"> Total Marché
+                      </td>
+                       <td  style="text-align: center;color:red;font-weight:bold;">
+                           {{formatageSomme(parseFloat(montantMarcheInvestissement))}}
                            
                       </td>
+                      
                        
-                     
+                      <td>
+                          
+                      </td>
+                      
                     </tr>
                 </tbody>
               </table>
-              
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab> -->
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjoutTypaPrestation()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-<!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
-<notifications  />
-  </div>
+                           <!-- <div class="row-fluid vld-parent"  align="center" style="margin:10px ">
+                             <loading :active="true"
+                                      :can-cancel="false"
+                                      :is-full-page="fullPage"></loading> -->
+<!--                             <clip-loader :loading="getterLoadinMarche" :color="color" :size="size_pul"></clip-loader>-->
+<!--                             <pulse-loader :loading="getterLoadinMarche" :color="color" :size="size_pul"></pulse-loader>-->
+                           <!-- </div> -->
+
+                        </div>
+ 
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+   
+
+    </div>
 </template>
-  
+
 <script>
+//import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+//import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
  import { mapGetters, mapActions } from "vuex";
- import { formatageSomme } from "../../../../src/Repositories/Repository";
+import { formatageSomme } from "../../../../src/Repositories/Repository";
  import {admin,dcf,noDCfNoAdmin} from '../../../../src/Repositories/Auth';
+
 export default {
   name:'type facture',
+  components: {
+    //PulseLoader,
+   // ClipLoader,
+
+  },
   data() {
     return {
+      isLoading: false,
+      fullPage: false,
       fabActions: [
         {
-          // name: "cache",
-          // icon: "add"
+          name: "cache",
+          icon: "add"
         }
 
-      
+        // {
+        //   name: "alertMe",
+        //   icon: "add_alert",
+        //   class: ""
+        // }
       ],
+      color: '#3AB982',
+      height: '35px',
+      width: '4px',
+      margin: '2px',
+      radius: '2px',
+      size_pul:"20px",
     //   json_fields: {
     //     CODE: "code",
     //     libelle: "libelle"
@@ -411,211 +188,168 @@ export default {
 
       formData: {
             objet:"",
+            livrable:"",
             reference_marche:"",
             montant_marche:"",
                 type_marche_id:"",
+                type_financement:"",
+                source_financement:"",
+                Bénéficiaire:"",
+                Nature_des_prix:"",
                 unite_administrative_id:"",
-                grdnature_id:"",
-                activite_id:""
+                gdenature_id:"",
+                activite_id:"",
+                typeappel_id:"",
+                exo_id:"",
         
       },
+        editActeEffetFinancier:{
+          date_odre_service:"",
+          date_fin_exe:""
+        },
+        formEffetFinancier:{
+             code_act:"",
+             libelle_act:"",
+             reference_act:"",
+             objet_act:"",
+             incidence_financiere:"",
+             montant_act:"",
+              date_attributaire:"",
+             date_reception:"",
+             duree:"",
+             date_fin_exe:"",
+             date_odre_service:"",
+             livrable_id:"",
+        autorite_approbation:"",
+        date_approbation:"",
+             text_juridique_id:"",
+             type_act_effet_id:"",
+             analyse_dossier_id:"",
+             entreprise_id:"",
+             //marche_id:"",
+             numero_marche:""
+        },
+
       editMarche: {
-        	 objet:"",
+           objet:"",
+           livrable:"",
             reference_marche:"",
             montant_marche:"",
                 type_marche_id:"",
-                unite_administrative_id:""
+                type_financement:"",
+                source_financement:"",
+                Bénéficiaire:"",
+                Nature_des_prix:"",
+                unite_administrative_id:"",
+                imputation:"",
+                 activite_id:"",
+                 exo_id:""
+                 
       },
+      
+//       editActeEffetFinancier:{
+// cause_resiliation:"",
+// date_resiliation:""
+//       },
+      indicateur_test:1,
       search: ""
     };
   },
 
   computed: {
-      ...mapGetters("bienService", ["getActeEffetFinancierPersonnaliser45",'acteEffetFinanciers','marches','typeMarches', 'getMarchePersonnaliser',
-     "montantMarche", "printMarcheNonAttribue","procedurePassations","typeTypeProcedures","montantMarcheReel"]),
 
+     admin:admin,
+      dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
+     ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
+     'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
+     'nombremarchesExecute',
+     'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
+      "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
+     "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser",
+       "typeActeEffetFinanciers","getterLoadinMarche"]),
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
-      "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
+      "getPersonnaliseBudgetGeneral","groupUa","groupgranNatureInvestissement","getPersonnaliseBudgetGeneralParInvestissement",
       "montantBudgetGeneral", ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
-   ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+   ...mapGetters("gestionMarche", ['entreprises']),
+   ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
+  'types_financements']) ,
 
-  admin:admin,
-  dcf:dcf,
-  noDCfNoAdmin:noDCfNoAdmin,
+  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
-
-afficherlisteMarcheExecutionParDroitAccess() {
+loading(){
+  if(this.MarcheExecutionBienEtFourniture.length>0){
+    return false
+  }
+  return true
+},
+// pour tous les marches en investissement
+   MarcheExecutionBienEtFourniture() {
        // const st = this.search.toLowerCase();
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.getMarchePersonnaliser.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect.filter(recuper => recuper.attribue == 2 && recuper.type_marche.code_type_marche == 4 || recuper.attribue == 2 && recuper.type_marche.code_type_marche == 1)
-            // return colect.filter(items => {    
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
-        }
-
-        return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 2 && recuper.type_marche.code_type_marche == 4 || recuper.attribue == 2 && recuper.type_marche.code_type_marche == 1)
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
-    },
-afficherlibelleUa() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return 0
-        }
-      };
-    },
-
-
-
-afficherMontantExecutionParDroitAccess() {
-       // const st = this.search.toLowerCase();
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.getActeEffetFinancierPersonnaliser45.filter(item=>{
+            this.printMarcheNonAttribue.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect
-            // return colect.filter(items => {    
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==0 && element.attribue==2|| this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==0 && element.attribue==2)
+           
         }
-
-        return this.getActeEffetFinancierPersonnaliser45
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+           return  this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==0 && element.attribue==2 || this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==0 && element.attribue==2)
+       
     },
-    // afficherMontantParDroitAccess() {
-    //    // const st = this.search.toLowerCase();
-    //     if (this.noDCfNoAdmin){
-    //         let colect=[];
-    //         this.montantMarcheExecuter.filter(item=>{
-    //             let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-    //             if (val!=undefined){
-    //                 colect.push(item)
-    //                 return item
-    //             }
-    //         })
-    //         return colect
-    //         // return colect.filter(items => {
-    //         //     return (
-    //         //         items.secti.nom_section.toLowerCase().includes(st) ||
-    //         //         items.libelle.toLowerCase().includes(st)
-    //         //     );
-    //         // });
-    //     }
-
-    //     return this.montantMarcheExecuter
-    //         // return (
-    //         //     items.secti.nom_section.toLowerCase().includes(st) ||
-    //         //     items.libelle.toLowerCase().includes(st)
-    //         // );
-    // },
 
 
- afficherAttributMarche() {
+
+afficherMontantImputation() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.codebudget == id);
 
       if (qtereel) {
-        return qtereel.attribue;
+        return qtereel.Dotation_Initiale;
       }
       return 0
         }
       };
     },
-
-afficheMontantReelMarche() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.montant_act;
-      }
-      return 0
-        }
-      };
-    },
-
-  afficheExercution(){
-return this.getActeEffetFinancierPersonnaliser.filter(element => element.date_odre_service <= this.nombreJourTraitementCalucle)
-},
-afficheMarchExecuter(){
-return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
-},
+//  afficheIdTypeMarche() {
+//     return this.printMarcheNonAttribue.filter(element => element.type_marche.libelle == "Prestations Intellectuelles")
+//     },
 
 
+nombreDejourCalcule(){
+                let vM=this;
+    const acteAffet = vM.editActeEffetFinancier
+    if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
+     if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
 
+       var dateF = new Date(acteAffet.date_fin_exe).getTime()
+        var dateO = new Date(acteAffet.date_odre_service).getTime()
+           var resultat = dateF - dateO
 
+             var diffJour =  resultat / (1000 * 3600 * 24)
 
-    marcherAttribuerFiltre()  {
-     
-        const searchTerm = this.search.toLowerCase();
+               if(isNaN(diffJour)) return null
 
-return this. marcherAttribuer.filter((item) => {
-  
-     return item.objet.toLowerCase().includes(searchTerm) 
-     
-    
-
-  
-  
-
-
-   }
-)
-    },
-  
-    
-    deverouGrandNature() {
-      return this.formData.unite_administrative_id == "";
-    }, 
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    vM.editActeEffetFinancier.duree=diffJour
+                  return  diffJour;
    
-     deveroueconomiq() {
-      return this.formData.activite_id == "";
-    },
-     economiqueDynamiques() {
-     return id => {
-        if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
-            element => element.ua_id == id
-          );
-        }
-      };
-    },
-     affichertypeMarche() {
+},
+
+getDateFinExécutionValue(){
+    return this.editActeEffetFinancier.date_odre_service !=""
+},
+
+recupererCodeTypeMarche() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
@@ -628,26 +362,435 @@ return this. marcherAttribuer.filter((item) => {
       };
     },
 
-    marcherAttribuer(){
-      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 2 && recuper.type_marche.code_type_marche == 4 || recuper.attribue == 2 && recuper.type_marche.code_type_marche == 1)
-      
+//  affichierNomEntreprise() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+//       if (qtereel) {
+//         return qtereel.raison_sociale;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+
+
+    // afficherEntrepriseRecep () {
+    //             return id => {
+    //                 if (id != "") {
+    //                     // console.log("Marche lettre inviation marche")
+    //                     return this.gettersOuverturePersonnaliser.filter(idmarche => idmarche.marche_id == id)
+    //                  }
+    //          }
+    //         },
+
+  
+//   typePrestationFiltre()  {
+     
+//    const searchTerm = this.search.toLowerCase();
+
+// return this.printMarcheNonAttribue.filter((item) => {
+  
+//   return item.objet.toLowerCase().includes(searchTerm) 
+
+//    }
+// )
+//     },
+
+
+// afficher la liste des marche
+
+afficherLaListeDesMarcheDinvestissement(){
+return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 3 && element.parent_id == null)
+},
+
+
+
+// afficher le nombre du marché
+
+nombreDeMarcheI(){
+  return this.afficherLaListeDesMarcheDinvestissement.length;
+},
+
+// afficher le montant de tout les marche
+
+montantMarcheInvestissement(){
+  return this.MarcheExecutionBienEtFourniture.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+},
+
+
+
+
+
+
+
+   afficheMarchExecuter(){
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 3 && element.difference_personnel_bienService == 1)
+},
+
+// afficheMarchExecuter(){
+// return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
+// },
+
+afficheNombreMarchExecuter(){
+
+  
+return this.afficheMarchExecuter.length
+},
+
+
+
+ affichertypeMarcheEx() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code_type_marche;
+      }
+      return 0
+        }
+      };
     },
 
-    
-    montantMarcheExecuter(){
-  return this.afficherMontantExecutionParDroitAccess.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 4 && recuper.difference_personnel_bienService == 2 || this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 1 && recuper.difference_personnel_bienService == 2).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+afficheMarcheTerminer(){
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 3 && element.difference_personnel_bienService == 1)
 },
-    // MontatantImputationBudget() {
-      
-    //   const norme = this.getPersonnaliseBudgetGeneral.find(normeEquipe => normeEquipe.economique_id == this.formData.Economique);
+// afficheMarcheTerminer(){
+// return this.afficheMarcheSolde.filter(element => element.indicateur_resilie != 1)
+// },
+nombreAfficheMarcheSolde(){
+return this.afficheMarcheTerminer.length
+},
+montantEnSolde(){
+  return this.afficheMarcheTerminer.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+},
 
-    //   if (norme) {
-    //     return norme.Dotation_Initiale;
+
+
+
+
+// afficheParMarcheEnExecution(){
+// return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
+// },
+
+
+
+
+  afficheMarcheResilier(){
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 &&  element.difference_personnel_bienService == 1)
+},
+
+
+
+// afficheMarcheResilier(){
+// return this.afficheResilier.filter(element => element.indicateur_resilie == 1)
+// },
+
+
+
+
+
+afficheNombreMarcheResilier(){
+return this.afficheMarcheResilier.length
+},
+
+// afficher la liste de marche en contratualisation
+
+afficheMarcheEnCoursContratualisation(){
+return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 1 && element.type_marche.code_type_marche == 3)
+},
+
+
+
+
+// afficher le nombre de marche en contratualisation
+ nombreDeMarcheEnContratualisation(){
+   return this.afficheMarcheEnCoursContratualisation.length;
+
+ },
+
+// afficher le montant de marche en contratualisation
+montantEnContratualisation(){
+  return this.afficheMarcheEnCoursContratualisation.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+},
+
+
+
+// afficher la liste des marche en planification
+afficheMarcheEnPlanification(){
+return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 3)
+},
+
+
+// afficher le nombre des marches en planifications
+
+nombreMarcheEnplanification(){
+  return this.afficheMarcheEnPlanification.length;
+},
+
+
+// afficher le montant en planification
+
+montantEnPlanification(){
+  return this.afficheMarcheEnPlanification.reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche), 0)
+},
+
+
+
+
+
+
+
+
+
+
+
+
+    afficherAnneeBudget() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.exo_id;
+      }
+      return 0
+        }
+      };
+    },
+afficherTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+       if (qtereel) {
+        return qtereel.type_marche_id;
+      }
+      return 0
+        }
+      };
+    },
+      afficherTypeMarcheLibelle() {
+       console.log("afficherTypeMarcheLibelle")
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+
+      if (qtereel!=undefined) {
+        console.log("afficherTypeMarcheLibelle 1")
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    afficherImputationMarche() {
+      console.log("afficherImputationMarche")
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel!=undefined) {
+        console.log("afficherImputationMarche 2")
+        return qtereel.imputation;
+      }
+      return 0
+        }
+      };
+    },
+ afficherReferenceMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.reference_marche;
+      }
+      return 0
+        }
+      };
+    },
+     afficherAttributMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.attribue;
+      }
+      return 0
+        }
+      };
+    },
+     afficherMontantMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_marche;
+      }
+      return 0
+        }
+      };
+    },
+//  afficherObjetMarche() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+//       if (qtereel) {
+//         return qtereel.objet;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+    // afficherNumeroMarche() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+    //   if (qtereel) {
+    //     return qtereel.numero_marche;
     //   }
     //   return 0
+    //     }
+    //   };
     // },
-  
+// afficherEntreprise() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+//       if (qtereel) {
+//         return qtereel.raison_sociale;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+
+
+
+
+
+
+
+ afficherIdUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.unite_administrative_id;
+      }
+      return 0
+        }
+      };
+    },
    
+    //  afficherUniteAdministrative() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+    //   if (qtereel) {
+    //     return qtereel.libelle;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
+     afficherIdactivite() {
+       console.log("afficherIdactivite")
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel!=undefined) {
+        console.log("afficherIdactivite 3")
+        return qtereel.activite_id;
+      }
+      return 0
+        }
+      };
+    },
+      
+ afficherObjetMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objet;
+      }
+      return 0
+        }
+      };
+    },
+    afficherNumeroMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_marche;
+      }
+      return 0
+        }
+      };
+    },
+afficherEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.raison_sociale;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
+   
+     afficherUniteAdministrative() {
+       console.log("afficherUniteAdministrative")
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel!=undefined) {
+        console.log("afficherUniteAdministrative 4")
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+      afficheractivite() {
+
+      return id => {
+        console.log("afficheractivite")
+        if (id != null && id != "") {
+           const qtereel = this.afficheNiveauActivite.find(qtreel => qtreel.id == id);
+
+      if (qtereel!=undefined) {
+        console.log("afficheractivite 5")
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 exoEnCours(){
 return this.exercices_budgetaires.filter(element => element.encours == 1)
 },
@@ -674,25 +817,76 @@ anneeAmort() {
      activiteDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
-            element => element.ua_id == id
+          return this.getPersonnaliseBudgetGeneralParInvestissement.filter(
+            element => element.afficheUA.id == id
           );
         }
       };
     },
+          afficheractiviteBienService() {
+           // console.log("afficheractiviteBienService")
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getPersonnaliseBudgetGeneralParInvestissement.find(qtreel => qtreel.afficheUA.id == id);
+          console.log("afficheractiviteBienService")
+      if (qtereel!=undefined) {
+        console.log("afficheractiviteBienService 6")
+        //return qtereel.afficheActivite.code.concat('  ', qtereel.afficheActivite.libelle);
+        return  null
+      }
+      return 0
+        }
+      };
+    },
+
+ afficherPlanEconomiqueBienService() {
+   console.log("afficherPlanEconomiqueBienService ")
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getPersonnaliseBudgetGeneralParInvestissement.find(qtreel => qtreel.afficheUA.id == id);
+
+      if (qtereel!=undefined) {
+        console.log("afficherPlanEconomiqueBienService 7")
+        return qtereel.afficheEconomique.code.concat('  ', qtereel.afficheEconomique.libelle);
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
     deverouPassation() {
       return this.formData.typeappel_id == "";
     }, 
      deverouPassationModi() {
       return this.editMarche.typeappel_id == "";
     }, 
-  
-    
+    deverouGrandNature() {
+      return this.formData.unite_administrative_id == "";
+    }, 
+    deverouactivite() {
+      return this.formData.gdenature_id == "";
+    },
+     deveroueconomiq() {
+      return this.formData.activite_id == "";
+    },
+     economiqueDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.getPersonnaliseBudgetGeneralParInvestissement.filter(
+            element => element.ua_id == id
+          );
+        }
+      };
+    },
 
   grandeNatureDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
+          return this.getPersonnaliseBudgetGeneralParInvestissement.filter(
             element => element.ua_id == id
           );
         }
@@ -708,19 +902,77 @@ anneeAmort() {
 
 
 
-  
-     ImputationBudgetModifier() {
+     ImputationBudget() {
+
       
-      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.afficheEconomique.id == this.editMarche.economique_id);
+      const norme = this.getPersonnaliseBudgetGeneralParInvestissement.find(normeEquipe => normeEquipe.economique_id == this.formData.economique_id);
 
       if (norme) {
         return norme.codebudget;
       }
       return 0
     },
+     ImputationBudgetModifier() {
+      
+      const norme = this.getPersonnaliseBudgetGeneralParInvestissement.find(normeEquipe => normeEquipe.economique_id == this.editMarche.economique_id);
+
+      if (norme) {
+        return norme.codebudget;
+      }
+      return 0
+    },
+    nombreJourTraitementCalucle(){
+   let date = new Date();
+        let aaaa = date.getFullYear();
+        let gg = date.getDate();
+        let mm = (date.getMonth() + 1);
+        let moi;
+        let jour;
+        if (gg < 10)
+        {
+            jour = "0" + gg;
+        }else{
+            jour = gg
+        }
+
+
+        if (mm < 10)
+        {
+            moi = "0" + mm;
+        }else{
+            moi=mm;
+        }
+
+
+        let cur_day = aaaa + "-" + moi + "-" + jour;
+
+        return cur_day
+
+
+    
+    // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
+   },
+
+
+
+
+
+
+
+
+//  afficheContrat(){
+// return this.getActeEffetFinancierPersonnaliser45.filter(element => element.date_odre_service > this.nombreJourTraitementCalucle)
+// },
+
+// NombreafficheContrat(){
+// return this.marches.filter(element => element.attribue == 1).length
+// },
+// NombreExecute(){
+// return this.getActeEffetFinancierPersonnaliser45.filter(element => element.date_odre_service == this.nombreJourTraitementCalucle).length
+// },
     // ImputationBudgetModif() {
       
-    //   const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.economique_id == this.editMarche.Economique);
+    //   const norme = this.getPersonnaliseBudgetGeneralParInvestissement.find(normeEquipe => normeEquipe.economique_id == this.editMarche.Economique);
 
     //   if (norme) {
     //     return norme.codebudget;
@@ -736,15 +988,141 @@ anneeAmort() {
       }
       return 0
     },
+
+
+
+
+
+sommeMarcheParMandat: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.getMandatPersonnaliserVise.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.total_general)
+                        },valInite);
+                    }
+                }
+            },
+
+
+recupererMontantReel() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.montant_act;
+      }
+      return 0
+        }
+      };
+    },
+comparerMontantReelEtMandat(){
+return this.marches.filter(element => {
+  if(this.recupererMontantReel(element.id) == this.sommeMarcheParMandat(element.id)){
+
+return element;
+
+
+}
+})
+
+},
+
+
+
+
+
+// sommeMarcheParMandat: function () {
+//                 return id => {
+//                     if (id != "") {
+//                       let valInite=0;
+//                         return  this.getMandatPersonnaliserVise.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
+//                            return total + parseFloat(currentVal.total_general)
+//                         },valInite);
+//                     }
+//                 }
+//             },
+
+
+// recupererMontantReel() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.getActeEffetFinancierPersonnaliser45.find(qtreel => qtreel.marche_id == id);
+
+//       if (qtereel) {
+//         return qtereel.montant_act;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+    
+// comparerMontantReelEtMandat(){
+// return this.getActeEffetFinancierPersonnaliser45.filter(element => {
+//   if(this.recupererMontantReel(element.id) == this.sommeMarcheParMandat(element.id)){
+
+// return element;
+
+
+// }
+// else{
+//   return ""
+// }
+// })
+
+// }
+
+
+
+
+
+
+
+
+
+
   },
+  
   methods: {
-    ...mapActions("bienService", ['ajouterMarche','modifierMarche',
-    'supprimerMarche'
+    ...mapActions("bienService", ['ajouterMarche','modifierMarche','modifierMarcheBascule',
+    'supprimerMarche','modifierActeEffetFinancier',"getMarche","getActeEffetFinancier"
      
     ]),
+      modifierModalResiliation(){
+      var nouvelObjet1 = {
+      ...this.editActeEffetFinancier,
+      indicateur_resilie :this.indicateur_test,
+        date_resiliation:this.editActeEffetFinancier.date_resiliation,
+        	cause_resiliation:this.editActeEffetFinancier.cause_resiliation
+       };
+       
+      let marcheObjet = this.marches.find(marche=>marche.id==this.editActeEffetFinancier.marche_id)
+         marcheObjet.attribue = 3
+
+    this.modifierMarche(marcheObjet)
+     this.modifierActeEffetFinancier(nouvelObjet1)
+      this.getMarche()
+      this.getActeEffetFinancier()
+    //   let marcheObjet=this.marches.find(marche=>marche.id==this.editActeEffetFinancier.marche_id)
+    // marcheObjet.attribue = 3
+    //   //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
+    //  this.modifierMarche(marcheObjet)
+
+      
+      this.$('#exampleModal').modal('hide');
+    },
+      afficherModalMarcheResilier(index) {
+      this.$("#exampleModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+      this.editActeEffetFinancier = this.afficheMarchExecuter[index];
+    },
     //afiicher modal ajouter
     afficherModalAjoutTypaPrestation() {
-      this.$("#exampleModal").modal({
+      this.$("#exampleModal1").modal({
         backdrop: "static",
         keyboard: false
       });
@@ -754,14 +1132,20 @@ anneeAmort() {
       
        var nouvelObjet = {
       ...this.formData,
-      imputation :this.ImputationBudget
+      imputation :this.ImputationBudget,
+      exo_id : this.anneeAmort
        };
 this.ajouterMarche(nouvelObjet)
 this.formData = {
-	          objet:"",
+            objet:"",
+            livrable:"",
             reference_marche:"",
             montant_marche:"",
                 type_marche_id:"",
+                type_financement:"",
+                source_financement:"",
+                Bénéficiaire:"",
+                Nature_des_prix:"",
                 unite_administrative_id:"",
                 imputation:"",
                 	activite_id:""
@@ -776,14 +1160,66 @@ this.formData = {
         keyboard: false
       });
 
-      this.editMarche = this.marcherAttribuerFiltre[index];
+      this.editMarche = this.marches[index];
     },
     // fonction pour vider l'input modification
     modifierModalTypeprestationLocal(){
-      this.modifierMarche(this.editMarche)
+       var nouvelObjet = {
+      ...this.editMarche,
+      imputation :this.ImputationBudgetModifier,
+      exo_id : this.anneeAmort,
+      activite_id:this.editMarche.activite_id,
+      economique_id:this.editMarche.economique_id
+       };
+      this.modifierMarche(nouvelObjet)
       this.$('#modificationModal').modal('hide');
     },
     
+
+
+    // afficher modification de l'acte a effet financier
+
+        afficherModalModifierActeEffetFinancier(index){
+    this.$('#modifierActeEF').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+    this.editActeEffetFinancier = this.afficheMarchExecuter[index]
+}, 
+
+modifierModalActeEffetFinancierLocal(index){
+    
+    if ( confirm( "Voulez-vous basculer en Contractualisation ?") ) {
+   
+     this.editActeEffetFinancier = this.afficheMarchExecuter[index]
+    
+      let marcheObjet = this.marches.find(marche=>marche.id==this.editActeEffetFinancier.marche_id)
+         marcheObjet.attribue = 1
+
+    this.modifierMarcheBascule(marcheObjet)
+} else {
+    // Code à éxécuter si l'utilisateur clique sur "Annuler" 
+}
+    
+     
+    
+},
+
+  modifierModalActeEffetFinancierLocal2(index){
+    if ( confirm( "Voulez-vous basculer en Execution ?") ) {
+   
+     this.editActeEffetFinancier = this.afficheMarcheEnCoursContratualisation[index]
+    
+      let marcheObjet = this.marches.find(marche=>marche.id==this.editActeEffetFinancier.id)
+         marcheObjet.attribue = 2
+
+    this.modifierMarcheBascule(marcheObjet)
+} else {
+    // Code à éxécuter si l'utilisateur clique sur "Annuler" 
+}
+   
+   
+},
     // alert() {
     //   console.log("ok");
     // },
@@ -791,12 +1227,25 @@ this.formData = {
       this.$refs.excel.click()
     }
   }
+
 };
 </script>
 
 <style scoped>
 .taillModal{
-  width: 980px;
+  width: 1080px;
    margin: 0 -25%;
+   
+}
+.taillMarche{
+  width: 96%;
+   margin: 0 -48%;
+   
+}
+.grdirModalActeEffet{
+     width: 1200px;
+ margin: 0 -530px;
+ height: 550px;
+
 }
 </style>
