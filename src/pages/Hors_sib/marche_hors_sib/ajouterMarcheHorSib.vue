@@ -1,4 +1,4 @@
-
+afficherLesActivite
 <template>
 
    <div>
@@ -27,7 +27,7 @@
                         Selectionner UA:
                         <model-list-select style="background-color: rgb(255,255,255);"
                           class="wide"
-                          :list="budgetEclate"
+                          :list="groupeUaPourMarheHorSib"
                           v-model="search"
                           option-value="id"
                           option-text="uniteadministrative_id"
@@ -41,10 +41,10 @@
                     </div> -->
                <div class="control-group">
             <label class="control-label" title="unite administrative">UA</label>
-            <div class="controls">
+            <div class="controls" style="background-color: rgb(255,255,255);">
             <select v-model="formData.unite_administrative_id" class="span8">
-               <option v-for="plans in budgetEclate" :key="plans.id" 
-               :value="plans.uniteadministrative_id">{{afficherLibelleUniteAdministrative(plans.uniteadministrative_id)}}</option>
+               <option v-for="plans in groupeUaPourMarheHorSib" :key="plans[0].id" 
+               :value="plans[0].uniteadministrative_id">{{afficherLibelleUniteAdministrative(plans[0].uniteadministrative_id)}}</option>
            </select>
             </div>
           </div>
@@ -69,14 +69,32 @@
                 <div class="control-group">
             <label class="control-label">Type de marché </label>
             <div class="controls">
-            <select v-model="formData.type_marche_id" class="span4">
+            <select v-model="formData.type_marche_id" class="span6">
                <option v-for="plans in typeMarches" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
           </div>
               </td>
+              <td>
+                <div class="control-group">
+                  <label class="control-label">Grande Nature</label>
+                  <div class="controls">
+                    <!-- <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="sapn5">
+                      <option
+                        v-for="gdeNature in groupgranNature"
+                        :key="gdeNature[0].id"
+                        :value="gdeNature[0].afficheGdeNature.id"
+                      >{{gdeNature[0].afficheGdeNature.libelle}}</option>
+                    </select> -->
 
+                     <select v-model="formData.gdenature_id"  class="span4">
+               <option v-for="plans in grandes_natures" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+               </select>
+                  </div>
+                </div>
+              </td>
                <td colspan="2">
                <div class="control-group">
             <label class="control-label">Objet marché / contrat</label>
@@ -90,13 +108,20 @@
             </div>
           </div>
               </td>
-              <td>
+              
+            </tr>
+            <tr>
+                 
+            </tr>
+
+             <tr>
+               <td>
               
                <div class="control-group">
                   <label class="control-label">Classification Economique</label>
                   <div class="controls">
                    
-                      <select v-model="formData.economique_id" :readOnly="deveroueconomiq" class="span4">
+                      <select v-model="formData.economique_id" :readOnly="deveroueconomiq" class="span6">
                     <option
                         v-for="eco in ligneBudgeteyuy(formData.unite_administrative_id)"
                         :key="eco.ligneeconomique_id"
@@ -107,23 +132,30 @@
                    
                 </div>
               </td>
-            </tr>
-            <tr>
+               <td>
               
-              
-              
-
-              
-            </tr>
-
-             <tr>
+               <div class="control-group">
+                  <label class="control-label">Activité</label>
+                  <div class="controls">
+                    <select v-model="formData.activite_id"  class="span4">
+                     <!-- <option
+                        v-for="activite in activiteDynamiques(formData.economique_id) :readOnly="deverouactivite""
+                        :key="activite.activite_id"
+                        :value="activite.activite_id"
+                      >{{afficherLesActivite(activite.activite_id)}}</option> -->
+                    </select>
+                    
+                  </div>
+                   
+                </div>
+              </td>
           <td>
             <div class="control-group">
        <label class="control-label">Imputation Budgétaire</label>
        <div class="controls">
          <input
            type="text"
-           :value="ImputationBudget"
+           :value="ImputationBudget(formData.economique_id)"
            class="span4"
            placeholder="Saisir le Imputation"
            readonly
@@ -150,7 +182,10 @@
        </div>
      </div>
          </td>
-         <td colspan="">
+        
+             </tr>
+             <tr>
+                <td colspan="">
          
           <div class="control-group">
        <label class="control-label">Source de financement</label>
@@ -162,7 +197,7 @@
            
            readonly
          /> -->
-       <select v-model="formData.source_financement" class="span4">
+       <select v-model="formData.source_financement" class="span6">
           <option v-for="plans in sources_financements" :key="plans.id" 
           :value="plans.id">{{plans.libelle}}</option>
       </select>
@@ -183,10 +218,7 @@
             </div>
           </div>
               </td>
-             </tr>
-
-              <tr>
-           <td>
+              <td>
             <div class="control-group">
        <label class="control-label">Montant prévu</label>
        <div class="controls">
@@ -211,6 +243,10 @@
    </div>
    </div>
      </td>
+             </tr>
+
+              <tr>
+           
             <td>
       <div class="control-group">
         <label class="control-label">Nature des prix</label>
@@ -218,7 +254,7 @@
        <input
          type="text"
          v-model="formData.nature_prix"
-         class="span4"
+         class="span6"
        />
      </div>
      </div>
@@ -237,10 +273,7 @@
        </div>
      </div>
          </td>
-              </tr>
-              
-              <tr>
-                <td>
+          <td>
                   <div class="control-group">
        <label class="control-label">localisation géographique</label>
        <div class="controls">
@@ -255,7 +288,7 @@
                                 <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
               </select> -->
-               <select v-model="formData.localisation_geographie_id" class="span5" >
+               <select v-model="formData.localisation_geographie_id" class="span4" >
                <option v-for="plans in afficherCodeStructureLibelle(recupererLataille)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -276,7 +309,11 @@
        </div>
      </div>
          </td>
-                <td colspan="2">
+              </tr>
+              
+              <tr>
+               
+                <td colspan="">
                   <div class="control-group">
        <label class="control-label">Sous-prefecture</label>
        <div class="controls">
@@ -289,10 +326,7 @@
        </div>
      </div>
          </td>
-              </tr>
-
-              <tr>
-              <td colspan="2">
+              <td colspan="">
      <div class="control-group">
       <label class="control-label">Latitude</label>
       <div class="controls">
@@ -305,43 +339,31 @@
    </div>
    </div>
      </td>
-           <td colspan="2">
+           <td colspan="">
             <div class="control-group">
        <label class="control-label">Longitude</label>
        <div class="controls">
          <input
            type="text"
            v-model="formData.longitude"
-           class="span" />
+           class="span4" />
        </div>
      </div>
          </td>
-          <!-- <td >
-            <div class="control-group">
-       <label class="control-label">Longitude</label>
+          
+            <td colspan="">
+                  <div class="control-group">
+       <label class="control-label">Infrastructure</label>
        <div class="controls">
-         <input
-           type="text"
-           v-model="formData.longitude"
-           class="span" />
-       </div>
-     </div>
-         </td> -->
-          <!-- <td >
-            <div class="control-group">
-       <label class="control-label">Longitude</label>
-       <div class="controls">
-         <input
-           type="text"
-           v-model="formData.longitude"
-           class="span" />
-       </div>
-     </div>
-         </td> -->
-
-      
        
+               <select v-model="formData.infrastructure_id" class="span4" >
+               <option v-for="plans in getterInfrastrucure" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+           </select>
       
+       </div>
+     </div>
+            </td>
               </tr>
 
               
@@ -371,15 +393,15 @@
  import { mapGetters, mapActions } from "vuex";
  //import { formatageSomme } from "../../../src/Repositories/Repository";
  import {admin,dcf,noDCfNoAdmin} from '../../../Repositories/Auth';
-//import {  ModelListSelect } from 'vue-search-select'
-//import 'vue-search-select/dist/VueSearchSelect.css'
+// import {  ModelListSelect } from 'vue-search-select'
+// import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
   name:'type facture',
 
   components:{
             // bailleurAjouter,
             
-          //  ModelListSelect,
+            //ModelListSelect,
         },
   data() {
     return {
@@ -418,7 +440,7 @@ export default {
             montant_marche:"",
                 type_marche_id:"",
                 unite_administrative_id:"",
-               // gdenature_id:"",
+                gdenature_id:"",
                // activite_id:"",
                // typeappel_id:"",
                 exo_id:"",
@@ -448,7 +470,7 @@ export default {
             procedure_passation_id:"",
             beneficiaire:"",
           
-               // gdenature_id:"",
+                gdenature_id:"",
                 
                // typeappel_id:"",
                
@@ -474,13 +496,13 @@ export default {
 
 
      ...mapGetters("uniteadministrative",['getterligneExempter','uniteAdministratives',"budgetGeneral",
-      "getPersonnaliseBudgetGeneral","groupUa", "budgetEclate","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
+      "getPersonnaliseBudgetGeneral","groupUa","groupeUaPourMarheHorSib" ,"budgetEclate","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
       "montantBudgetGeneral", ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires',"grandes_natures",
- 'structures_geographiques','localisations_geographiques']),
+ 'structures_geographiques','localisations_geographiques','getterInfrastrucure']),
    ...mapGetters("gestionMarche", ['entreprises']),
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
@@ -518,6 +540,9 @@ export default {
  deveroueconomiq() {
       return this.formData.unite_administrative_id =="";
     },
+    deverouactivite(){
+      return this.formData.economique_id=="";
+    },
      afficherPlanEconomique() {
       return id => {
         if (id != null && id != "") {
@@ -539,17 +564,52 @@ export default {
         }
       };
     },
+     activiteDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.budgetEclate.filter(
+            element => element.ligneeconomique_id == id && element.uniteadministrative_id == this.formData.unite_administrative_id
+          );
+        }
+      };
+    },
+     afficherLesActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_activites.find(qtreel => qtreel.id == id);
 
-    ImputationBudget() {
-
-      const norme = this.budgetEclate.find(normeEquipe => normeEquipe.ligneeconomique_id == this.formData.ligneeconomique_id );
-     
-
-      if (norme) {
-        return norme.code;
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
       }
       return 0
+        }
+      };
     },
+
+ImputationBudget() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 0
+        }
+      };
+    },
+   
+    // ImputationBudget() {
+
+    //   const norme = this.plans_budgetaires.find(normeEquipe => normeEquipe.id == this.formData.ligneeconomique_id );
+     
+
+    //   if (norme) {
+    //     return norme.code;
+    //   }
+    //   return 0
+    // },
+    
     // afficherLibelle unite administrative
 
     afficherLibelleUniteAdministrative(){
@@ -631,10 +691,9 @@ recupererParentId(){
     ]),
     allerPageMarcheHorsib(){
        this.$router.push({
-          name:'GestionMarcheHorSib'  
+          name:'gestion_marche'  
            })
     },
-
      recherche() {
               // console.log(this.search)
                 let entre=this.budgetEclate.find(item=>item.id==this.search);
@@ -652,7 +711,7 @@ recupererParentId(){
 
             ajouterMarcheHorSibLocal(){
                this.$router.push({
-                 name:'GestionMarcheHorSib'  
+                 name:'gestion_marche'  
                })
               var nouvelObjet = {
                 ...this.formData,

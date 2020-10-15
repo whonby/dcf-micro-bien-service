@@ -612,7 +612,7 @@
                     <th>Montant prévu</th>
                     <th>Etat du marché</th>
                     <th>Cycle de vie</th>
-                   <th colspan="3">Action</th>
+                   <th colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -677,12 +677,12 @@
     </router-link>
                    </td>
                    <td>
-                     
-                    
-                      <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                       <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
                 class="btn btn-default " title="historique la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link>
+                   </td>
+                   <td>
                    
                      <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
@@ -702,10 +702,10 @@
 
                        </tr>
                         <tr>
-                     
-                       <td>
+                     <td>
                           
                       </td>
+                      
                       <td>
                           
                       </td>
@@ -736,7 +736,9 @@
                         <td>
                           
                       </td>
-                      
+                      <td colspan="2">
+                          
+                      </td>
                       
                     </tr>
                 </tbody>
@@ -947,9 +949,7 @@
                        </tr>
                         <tr>
                      
-                       <td>
-                          
-                      </td>
+                      
                       <td>
                           
                       </td>
@@ -966,19 +966,26 @@
                       <td>
                           
                       </td>
+                      <td>
+                          
+                      </td>
+                      
                        <td style="font-weight:bold;"> Total Marché
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
                            {{formatageSomme(parseFloat(montantEnPlanification))}}
                            
                       </td>
+                      
                        <td>
                           
                       </td>
                         <td>
                           
                       </td>
-                     
+                      <td>
+                          
+                      </td>
                     </tr>
                 </tbody>
               </table>
@@ -2261,7 +2268,7 @@ return this.afficheMarcheResilier.length
 // afficher la liste de marche en contratualisation
 
 afficheMarcheEnCoursContratualisation(){
-return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 1 && element.type_marche.code_type_marche == 3 && element.parent_id == null)
+return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 1 && element.type_marche.code_type_marche == 3 && element.parent_id == null && element.sib==1)
 },
 
 

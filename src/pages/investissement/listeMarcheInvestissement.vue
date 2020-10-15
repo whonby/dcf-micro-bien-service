@@ -82,23 +82,7 @@
         <span class=""><i class=" icon-fast-forward"></i></span>
     </router-link>
                    </td>
-                   <!-- <td>
-                     <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-                   </td> -->
-                   
- 
-<!-- <td>
-    <div class="btn-group">
-
-                    
-              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-             
-            </div>
-</td> -->
-                   
-
+               
                        </tr>
                         <tr>
                      
@@ -315,10 +299,10 @@ loading(){
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null)
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==0)
            
         }
-           return  this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null)
+           return  this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==0)
        
     },
 

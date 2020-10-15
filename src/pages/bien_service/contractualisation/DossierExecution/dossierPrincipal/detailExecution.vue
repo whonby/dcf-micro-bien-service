@@ -18,7 +18,7 @@ decision_cf
    <div class="widget-box">
                 <div class="widget-content">
                     <div class="widget-content nopadding">
-                       <h4 v-if="detail_marche" style="text-align: center;font-size:20px;font-weight:bold;">Detail Marche : {{detail_marche.objet}} </h4>
+                       <h4 v-if="detail_marche" style="text-align: center;font-size:20px;font-weight:bold;">Lot{{NumeroDuLot(detail_marche.id)}} : {{detail_marche.objet}} </h4>
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
@@ -394,7 +394,18 @@ created() {
    
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+NumeroDuLot() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.numero_lot;
+      }
+      return 0
+        }
+      };
+    },
 
 
 

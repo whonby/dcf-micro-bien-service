@@ -11,7 +11,6 @@
 <!--      </div>-->
 <br>
 <br>
-
       <table class="table " style="background-color: #2E363F;">
         <tr>
           <td>
@@ -64,16 +63,19 @@
   <li class="bg_lg span3" > 
      <router-link :to="{ name: 'TableauDeBordG', params: {id:2}}" tag="a"  style="color:black;">
       <h4>UNITES </h4> <i class="icon-home"></i> <h4> D'ADMINISTRATIVES</h4>      </router-link> </li>
-      <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:3}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4> SIB</h4></router-link> </li>
+      <li class="bg_lg span3" > 
+     <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;">
+      <h4>GESTION DU </h4> <i class="icon-group"></i> <h4> PERSONNEL</h4>      </router-link> </li>
+      
             </ul>
             <br>
 <br>
 
             <ul class="quick-actions" >
-               
-    <li class="bg_ly span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:4}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4>HORS SIB</h4></router-link> </li>
+               <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:3}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4> SIB</h4></router-link> </li>
+    <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:4}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4>HORS SIB</h4></router-link> </li>
   <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>CARTOGRAPHIES </h4> <i class="icon-globe"></i><h4>BUDGETAIRES</h4></router-link> </li>
-           <li class="bg_ly span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:6}}" tag="a"  style="color:black;"><h4>MON </h4> <i class="icon-group"></i><h4> EQUIPE</h4></router-link> </li>
+           <!-- <li class="bg_ly span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:6}}" tag="a"  style="color:black;"><h4>MON </h4> <i class="icon-group"></i><h4> EQUIPE</h4></router-link> </li> -->
             </ul>
            
           </div>

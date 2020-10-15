@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <!--Header-part-->
@@ -25,7 +26,7 @@
        </li>
        
        
-        <li :class="{active: active_el == 11 }" @click.prevent="navigateToTableauBord">
+        <li :class="{active: active_el == 2 }" @click.prevent="navigateToActeurDepense">
           <a title="TABLEAU DE BORD" href="#">
             <i class="icon-dashboard"></i>
             <span>TABLEAU DE BORD</span>
@@ -43,7 +44,7 @@
             <span>UNITE ADMINISTRATIVE</span>
           </a>
         </li> -->
-         <li @click.prevent="navigateToTransfert" :class="{active: active_el ==6}">
+         <!-- <li @click.prevent="navigateToTransfert" :class="{active: active_el ==6}">
           <a title="TRANSFERT" href="#">
             <i class="icon-money"></i>
             <span>TRANSFERT</span>
@@ -56,14 +57,14 @@
             <span>GESTION MARCHE</span>
             <span class="label label-important"></span>
           </a>
-        </li>
-        <!-- <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
+        </li> -->
+        <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
           <a href="#">
             <i class="icon-group"></i>
             <span>PERSONNEL</span>
           </a>
-        </li> -->
-        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
+        </li>
+        <!-- <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
           <a href="#">
             <i class="icon-truck"></i>
             <span>BIENS ET SERVICES</span>
@@ -83,7 +84,7 @@
             <span>INVESTISSEMENT</span>
            
           </a>
-        </li>
+        </li> -->
         <li >
            <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
          

@@ -47,7 +47,7 @@
 <script>
 import { mapGetters } from "vuex";
 
-import { formatageSomme } from "../../Repositories/Repository";
+import { formatageSomme } from "../../../Repositories/Repository";
 
 export default {
   name:'tableaudebord',

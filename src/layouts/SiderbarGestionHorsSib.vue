@@ -71,12 +71,12 @@
             <span>GESTION DES MARCHES</span>
           </a>
         </li>
-        <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
+        <!-- <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
           <a href="#">
             <i class="icon-group"></i>
             <span>PERSONNEL</span>
           </a>
-        </li>
+        </li> -->
         <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
           <a href="#">
             <i class="icon-truck"></i>
@@ -84,12 +84,12 @@
           </a>
         </li>
 
-       <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
+       <!-- <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
           <a title="COMPTABILITE DES MATIERE" href="#">
             <i class=" icon-camera"></i>
             <span>COMPTA DES MATIERES</span>
           </a>
-        </li>
+        </li> -->
 
 
         <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==4}">
@@ -251,10 +251,11 @@ return objJson.id
 navigateToGestionMarche(){
         this.activate(19)
         this.$router.push({
-          name: 'GestionMarcheHorSib'
+          name: 'gestion_marche'
         })
       },
 
+//GestionMarcheHorSib
 
       navigateToActeurDepense(){
         this.activate(2)
@@ -289,20 +290,19 @@ navigateToGestionMarche(){
         })
       },
 
-
       navigateToInvestissement(){
-        this.activate(4)
+        this.activate(20)
         this.$router.push({
-          name:'tableauBordInvestissement'
+          name:'tableau_de_bors_sib_investissement'
         })
       },
-
  navigateToBienEtService(){
-        this.activate(3)
+        this.activate(7)
         this.$router.push({
-          name: 'tableauBord'
+          name: 'tableau_de_bord_hors'
         })
       },
+      // suivi_marhe
       navigateGestionUser(){
           this.activate(21)
           this.$router.push({

@@ -78,7 +78,7 @@ afficherNumeroDossierCandidat1
 
       <div id="tab8888" class="tab-pane active">
 
-        <table class="table table-bordered table-striped" :value="verifierMontantBailleur()">
+        <table class="table table-bordered table-striped">
           <tr>
             <td>
               <div class="control-group">
@@ -256,7 +256,7 @@ afficherNumeroDossierCandidat1
             </td>
              <td >
               <div class="control-group">
-                <label class="control-label" >Payé Des Bailleurs</label>
+                <label class="control-label" >Cumul Montant</label>
                
               </div>
             
@@ -283,7 +283,7 @@ afficherNumeroDossierCandidat1
     </div>
 
     <div class="modal-footer">
-      <a  @click.prevent="ajouterBailleur" v-if="this.PayeDesBailleur < this.afficherMontantTTCMarche(this.infoLot.id)"
+      <a  @click.prevent="ajouterBailleur" v-if="PayeDesBailleur < afficherMontantTTCMarche(infoLot.id)"
           class="btn btn-primary"
           href="#"
       >Valider</a>
@@ -310,7 +310,7 @@ afficherNumeroDossierCandidat1
 
       <div id="tab8888" class="tab-pane active">
 
-        <table class="table table-bordered table-striped" :value="verifierMontantBailleur()">
+        <table class="table table-bordered table-striped" >
           <tr>
             <td>
               <div class="control-group">
@@ -676,7 +676,7 @@ sommeTotalDesBailleur() {
     montantHTtBailleur() {
       if(this.montantTvaActuel == 0){
 
-        const val = (parseFloat(this.afficherMontantHtMarche(this.infoLot.id)))/(parseFloat(this.formBailleur.tauxBailler)/100);
+        const val = (((parseFloat(this.afficherMontantHtMarche(this.infoLot.id)))*(parseFloat(this.formBailleur.tauxBailler)))/100);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -796,7 +796,7 @@ if(this.PayeDesBailleur < this.afficherMontantTTCMarche(this.infoLot.id)){
 }
 },
 afficherModalModifierActeEffetFinancier(index){
-      this.$('#modifierActeEF').modal({
+      this.$('#ModalModification').modal({
         backdrop: 'static',
         keyboard: false
       });

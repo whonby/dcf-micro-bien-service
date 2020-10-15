@@ -1,29 +1,37 @@
 CodeExempte
-
 <template>
     <div class="container-fluid">
-      
-  
     
-         
-                <div class="">
-                    <div class="widget-box"> <br>
-                       
-                       <div class="" align="right">
-                   <router-link :to="{name:'ajouter_hors_sib'}" tag="a" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter
-
-                   </router-link> 
-
-                   </div><br>
+         <div class="row-fluid">
+                <div class="span12">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#tab0000">Tous les marchés  <span class="badge badge" >{{nombreMarcheHorsSib}}</span></a></li>
+                              
+                               <li ><a data-toggle="tab" href="#tab10000"> Planification <span class="badge badge-important" > {{afficherNombreMarchepalinificationHorsib}} </span></a></li>
+                                <li ><a data-toggle="tab" href="#tab109"> Contratualisation   <span class="badge badge-success" > {{nombreMarcheContratualisationHorSib}} </span></a></li>
+                                <!-- <li><a data-toggle="tab" href="#tab20"> Exécution      <span class="badge badge-warning" ></span></a></li>
+                               
+                                 <li><a data-toggle="tab" href="#tab20002">Résiliés    <span class="badge badge-info" > </span></a></li>
+                                    <li><a data-toggle="tab" href="#tab20789">Suspendus   <span class="badge badge" > </span></a></li>
+                                  <li><a data-toggle="tab" href="#tab2000256"> Terminé    <span class="badge badge-inverse" ></span></a></li> -->
+                                 
+                               
+                            </ul>
+                        </div>
+                        <div class="widget-content tab-content">
+                    <div id="tab0000" class="tab-pane active">
+                   
                     <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
               <h5>Liste des March&eacute;s</h5>
-              <div align="right">
+              <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
-              </div>
+              </div> -->
             </div>
             <div class="span4">
             <br>
@@ -36,7 +44,7 @@ CodeExempte
       </select>
            Entrer
         </div>
-               <table class="table table-bordered table-striped" >
+             <table class="table table-bordered table-striped" >
                 <thead>
                 <tr>
                    <th>Année</th>
@@ -52,7 +60,7 @@ CodeExempte
                     
                     <th>Cycle de vie</th>
                     <!-- <th>Etat en cours</th> -->
-                   <th colspan="3">Action</th>
+                   <th colspan="6">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -152,6 +160,7 @@ CodeExempte
 
                        </tr>
                         <tr>
+                      
                        <td>
                           
                       </td>
@@ -161,18 +170,20 @@ CodeExempte
                       <td>
                           
                       </td>
-                     <td> 
+                      <td > 
                       </td>
-                      <td>
+                    <td >
                           
                            
                       </td>
                       
-                       <td > 
+                       <td>
+                           
+                           
                       </td>
-                        <td style="font-weight:bold;"> Total Marché
+                       <td style="font-weight:bold;"> Total Marché
                       </td>
-                       <td  style="text-align: center;color:red;font-weight:bold;">
+                    <td  style="text-align: center;color:red;font-weight:bold;">
                            {{formatageSomme(parseFloat(montantMarche))}}
                            
                       </td>
@@ -207,21 +218,18 @@ CodeExempte
             <li :class="{ disabled : page == partition(marcheHorSibFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
            </ul>
         </div>
-                       
-<!-- 
-                          <div id="tab10000" class="tab-pane">
+                        </div>
+
+                      <div id="tab10000" class="tab-pane">
                      <planification></planification>
                      </div>
                        <div id="tab109" class="tab-pane">
                      <contratualisation></contratualisation>
                      
-                     </div> -->
-                    
+                     </div>
+                    </div>
 
-
-                   
-
-            
+                </div>
 
             
             </div>
@@ -232,16 +240,16 @@ CodeExempte
 </template>
 
 <script>
-// import planification from "./component/planification"
-// import contratualisation from "./component/contratualisation"
+   import planification from "./component/planification"
+   import contratualisation from "./component/contratualisation"
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
  import {admin,dcf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
  import {partition} from '../../../../src/Repositories/Repository'
 export default {
   components:{
-    // planification,
-    // contratualisation
+  planification,
+  contratualisation
   },
   name:'type facture',
   data() {
@@ -371,40 +379,147 @@ export default {
  'structures_geographiques','localisations_geographiques']),
 
     ...mapGetters("horSib", ["gettersMarcheHorsib"]),
-    marcheHorSibFiltre(){
 
-     const searchTerm = this.search.toLowerCase();
+//     marcheHorSibFiltre(){
 
-return this.afficherListeMarcheHorSib.filter((item) => {
+//      const searchTerm = this.search.toLowerCase();
+
+// return this.afficherListeMarcheHorSib.filter((item) => {
   
-     return item.objet.toLowerCase().includes(searchTerm) ||
-            item.reference_marche.toLowerCase().includes(searchTerm) 
-           //|| item.uabudget_eclate.libelle.toLowerCase().includes(searchTerm) 
-   }
-)
-   },
+//      return item.objet.toLowerCase().includes(searchTerm) ||
+//             item.reference_marche.toLowerCase().includes(searchTerm) 
+//            //|| item.uabudget_eclate.libelle.toLowerCase().includes(searchTerm) 
+//    }
+// )
+//    },
+
+    marcheHorSibFiltre() {
+       // const st = this.search.toLowerCase();
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null)
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+ return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null  )
+       
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
+
+    recupererCodeTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code_type_marche;
+      }
+      return 0
+        }
+      };
+    },
 
    montantMarche(){
-  return this.afficherListeMarcheHorSib.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+  return this.marcheHorSibFiltre.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
 },
 
  // afficher la liste des marchés hors sib
 
  afficherListeMarcheHorSib(){
 
-   return this.gettersMarcheHorsib.filter(item =>item.plan_passation_marche_id==null && item.sib==1)
+       return this.gettersMarcheHorsib.filter(item =>item.plan_passation_marche_id==null && item.sib==1)
    
   
  },
 
- 
+
  
 
  // afficher le nommbre demareche hors sib
 
  nombreMarcheHorsSib(){
-   return this.afficherListeMarcheHorSib.length
+   return this.marcheHorSibFiltre.length
  },
+
+
+  afficherListeMarcheHorsSib() {
+       // const st = this.search.toLowerCase();
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 )
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // }); 
+        }
+
+        return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 )
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
+
+    afficherNombreMarchepalinificationHorsib(){
+      return this.afficherListeMarcheHorsSib.length
+    },
+
+
+    nombreMarcheContratualisationHorSib(){
+   return this.afficherContratualisationParUA.length
+ },
+
+  afficherContratualisationParUA() {
+       // const st = this.search.toLowerCase();
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.attribue == 1  && element.parent_id == null && element.sib==1)
+            
+        }
+
+        return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.attribue == 1 && element.parent_id == null && element.sib==1 )
+           
+        
+
+    },
  
 
       CodeExempte() {
@@ -539,11 +654,11 @@ afficherLibelleTypeMarche(){
     ]),
    
     formatageSomme:formatageSomme,
-afficherModifierMarcheHorSib(id){
-		this.$router.push({
-			path:"/modifier-marche-hors-sib/" + id
-		});
-	},
+// afficherModifierMarcheHorSib(id){
+// 		this.$router.push({
+// 			path:"/modifier-marche-hors-sib/" + id
+// 		});
+// 	},
     // },
     // fonction pour vider l'input modification
    

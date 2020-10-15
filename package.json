@@ -39,6 +39,7 @@
     "leaflet-sidebar-v2": "^2.0.0",
     "popper.js": "^1.15.0",
     "pretty-checkbox-vue": "^1.1.9",
+    "save": "^2.4.0",
     "view-design": "^4.3.2",
     "vue": "^2.6.10",
     "vue-advanced-chat": "^0.4.6",

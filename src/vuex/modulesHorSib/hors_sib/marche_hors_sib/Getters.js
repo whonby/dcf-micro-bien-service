@@ -1,3 +1,4 @@
+//import { groupBy } from "../../../../Repositories/Repository";
 export const gettersMarcheHorsib = state => state.marcheHorsib
 
 export  const getPersonnaliserMarchehorSib = (state, getters,rootState, rootGetters) =>
@@ -20,3 +21,5 @@ state.marcheHorsib.map(element => {
     }
     return element;
 })
+
+
