@@ -78,7 +78,7 @@
 
 <td>
     <router-link :to="{ name: 'detail_hors_sib', params: { id: activites.id }}"
-                class="btn btn-default " title="Detail marche">
+                class="btn btn-default " title="Detail marche hors sib">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link>
 </td>

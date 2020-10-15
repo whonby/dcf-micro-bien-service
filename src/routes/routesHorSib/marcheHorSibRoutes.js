@@ -15,7 +15,7 @@ const marcheHorSibRoutes =[
         component:marche
     },
     {
-        path:"/creation-marche-hors-sib-investissemnet",
+        path:"/creation-marche-hors-sib-investissement",
         name:"marche_hors_sib_investissement",
         component:marcheHorSibInvestissement
     },

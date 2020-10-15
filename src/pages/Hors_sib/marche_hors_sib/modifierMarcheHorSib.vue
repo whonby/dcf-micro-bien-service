@@ -57,7 +57,7 @@
               <input
                 type="text"
                 v-model="editMarcheHorSib.reference_marche"
-                class="span4"
+                class="span3"
                 placeholder="Saisir la référence du marché"
               />
             </div>
@@ -103,7 +103,7 @@
               <textarea
                
                 v-model="editMarcheHorSib.objet"
-                class="span9" rows="3"
+                class="span7" rows="2"
                 placeholder="Saisir le texte"
               ></textarea>
             </div>
@@ -155,7 +155,7 @@
          <input
            type="text"
            :value="ImputationBudget"
-           class="span5"
+           class="span4"
            placeholder="Saisir le Imputation"
            readonly
          />
@@ -225,7 +225,7 @@
          <input
            type="text"
            v-model="editMarcheHorSib.montant_marche"
-           class="span5" />
+           class="span4" />
        </div>
      </div>
          </td>
@@ -237,7 +237,7 @@
      <input
        type="text"
        v-model="editMarcheHorSib.livrable"
-       class="span4"
+       class="span3"
        placeholder="Saisir le livrable"
      />
    </div>
@@ -287,7 +287,7 @@
                                 <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
               </select> -->
-               <select v-model="editMarcheHorSib.localisation_geographie_id" class="span5" >
+               <select v-model="editMarcheHorSib.localisation_geographie_id" class="span4" >
                <option v-for="plans in afficherCodeStructureLibelle(recupererLataille)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -300,7 +300,7 @@
        <label class="control-label">Departement</label>
        <div class="controls">
         
-               <select v-model="editMarcheHorSib.departement_id" class="span4" >
+               <select v-model="editMarcheHorSib.departement_id" class="span3" >
                <option v-for="plans in recupererParentId(editMarcheHorSib.localisation_geographie_id)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -345,7 +345,7 @@
          <input
            type="text"
            v-model="editMarcheHorSib.longitude"
-           class="span5" />
+           class="span4" />
        </div>
      </div>
          </td>
@@ -354,7 +354,7 @@
        <label class="control-label">Infrastructure</label>
        <div class="controls">
        
-               <select v-model="editMarcheHorSib.infrastructure_id" class="span4" >
+               <select v-model="editMarcheHorSib.infrastructure_id" class="span3" >
                <option v-for="plans in getterInfrastrucure" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
