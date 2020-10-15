@@ -223,8 +223,6 @@ return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && eleme
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
             // );
-        
-
     },
 
 

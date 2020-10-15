@@ -1,4 +1,4 @@
-montantEnPlanification
+
 <template>
     <div>
 <div id="tab100" class="tab-pane ">
@@ -6,9 +6,9 @@ montantEnPlanification
               <span class="icon">
             <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marchés en Planification  </h5>
+              <h5>Liste des Marchés en Planification 89</h5>
               <!-- <div align="right">
-              Recherche:
+                Recherche:
                 <input type="search"  v-model="search" />
               </div> -->
             </div>
@@ -157,9 +157,9 @@ montantEnPlanification
 </template>
 <script>
 import {mapGetters,mapActions} from "vuex";
- import {admin,dcf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
-import {formatageSomme} from "../../../Repositories/Repository"
-import {partition} from "../../../Repositories/Repository"
+ import {admin,dcf,noDCfNoAdmin} from "../../../../Repositories/Auth"
+import {formatageSomme} from "../../../../Repositories/Repository"
+import {partition} from "../../../../Repositories/Repository"
 export default {
     data(){
         return{
@@ -211,7 +211,6 @@ export default {
  nombreMarchePlanifierHorSib(){
    return this.afficherListeMarcheHorsSib.length
  },
-
      montantMarchePlanfierHorSib(){
   return this.afficherListeMarcheHorsSib.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
 },
@@ -228,9 +227,9 @@ export default {
         }
       };
     },
-
-    afficherListeMarcheHorsSib() {
+       afficherListeMarcheHorsSib() {
        // const st = this.search.toLowerCase();
+
         if (this.noDCfNoAdmin){
             let colect=[];
             this.gettersMarcheHorsib.filter(item=>{
@@ -240,23 +239,24 @@ export default {
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==1 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && element.attribue == 0)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
             //         items.libelle.toLowerCase().includes(st)
             //     );
-            // }); 
+            // });
         }
 
-        return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==1 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+ return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && element.attribue == 0)
+       
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
             // );
-        
-
     },
+
+   
 
     afficherNombreMarchepalinificationHorsib(){
       return this.afficherListeMarcheHorsSib.length

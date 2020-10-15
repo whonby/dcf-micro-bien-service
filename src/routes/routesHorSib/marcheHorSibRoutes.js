@@ -5,6 +5,8 @@ import detailMarcheHorsSib from "../../pages/Hors_sib/marche_hors_sib/detailMarc
 import marche_hors_sib from "../../pages/Hors_sib/biens_service/marche_hors_sib.vue";
 import tableau_de_bord_biens_service from "../../pages/Hors_sib/biens_service/tableau_de_bord_biens_service.vue";
 import GestionMarcheHorsib from "../../pages/Hors_sib/marche_hors_sib/GestionMarcheHorsib.vue"
+import marcheHorSibInvestissement from "../../pages/Hors_sib/marche_hors_sib_investissement/marcheHorSibInvestissement.vue"
+import tableauDeBorde from "../../pages/Hors_sib/marche_hors_sib_investissement/tableauDeBorde.vue";
 const marcheHorSibRoutes =[
   
     {
@@ -12,6 +14,17 @@ const marcheHorSibRoutes =[
         name:"GestionMarcheHorSib",
         component:marche
     },
+    {
+        path:"/creation-marche-hors-sib-investissemnet",
+        name:"marche_hors_sib_investissement",
+        component:marcheHorSibInvestissement
+    },
+    {
+        path:"/tableau-marche-hors-sib-investissement",
+        name:"tableau_de_bors_sib_investissement",
+        component:tableauDeBorde
+    },
+    
     {
         path:"/cerstion-marche-hors-sib",
         name:"gestion_marche",

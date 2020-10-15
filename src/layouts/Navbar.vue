@@ -12,7 +12,7 @@
     <MenuControlAxe v-if="active_el ==6"></MenuControlAxe>
     <MenuPlanificationHorSib v-if="active_el ==7"></MenuPlanificationHorSib>
     <MenuCatographie v-if="active_el ==8"></MenuCatographie>
-    <MenuMilieu v-if="active_el ==20"></MenuMilieu>
+    <MenuInvestissementHorSib v-if="active_el ==20"></MenuInvestissementHorSib>
      <MenuDefaut v-if="active_el ==0"></MenuDefaut>
     <MenuGestionAccess v-if="active_el ==21"></MenuGestionAccess>
     <MenuMonEquipe v-if="active_el ==30"></MenuMonEquipe>
@@ -23,7 +23,6 @@
 </template>
 
 <script>
-
 // var housecall = require('housecall');
 
 // var queue = housecall({ concurrency: 2, cooldown: 1000 });
@@ -38,7 +37,7 @@ import MenuControlAxe from "../components/navs/MenuControlAxe";
 import MenuPlanificationHorSib from "../components/navs/MenuPlanificationHorSib.vue";
 import MenuCatographie from "../components/navs/MenuCatographie.vue";
 import MenuDefaut from "../components/navs/MenuDefaut.vue";
-import MenuMilieu from "../components/navs/MenuMilieu.vue";
+import MenuInvestissementHorSib from "../components/navs/MenuInvestissementHorSib.vue";
 import MenuMonEquipe from "../components/navs/MenuMonEquipe.vue";
 import Search from "../components/Search";
 import MenuGestionAccess from "../components/navs/MenuGestionAccess"
@@ -56,7 +55,7 @@ export default {
    MenuPlanificationHorSib,
    MenuCatographie,
    MenuDefaut,
-   MenuMilieu,
+   MenuInvestissementHorSib,
     Search,
       MenuGestionAccess,
     MenuMonEquipe

@@ -167,6 +167,7 @@ import {noDCfNoAdmin,admin,dcf} from '../../src/Repositories/Auth';
     ]),
       admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
   ...mapGetters('personnelUA', ['totalActeurNonAccredite','acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions",

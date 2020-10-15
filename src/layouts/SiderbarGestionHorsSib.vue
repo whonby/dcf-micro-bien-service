@@ -290,11 +290,10 @@ navigateToGestionMarche(){
         })
       },
 
-
       navigateToInvestissement(){
-        this.activate(4)
+        this.activate(20)
         this.$router.push({
-          name:'tableauBordInvestissement'
+          name:'tableau_de_bors_sib_investissement'
         })
       },
  navigateToBienEtService(){
