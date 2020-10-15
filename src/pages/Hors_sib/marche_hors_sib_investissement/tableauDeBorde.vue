@@ -82,6 +82,9 @@ export default {
    ...mapGetters("gestionMarche", ['entreprises']),
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
+  ...mapGetters("horSib", ["gettersMarcheHorsib"]),
+
+
  afficherAttributMarche() {
       return id => {
         if (id != null && id != "") {
@@ -120,13 +123,13 @@ budgetConsommerBienService(){
 
 
   afficheMarcheEnCoursContratualisation(){
-return this.afficherLaListeDesMarche.filter(element => element.attribue == 1 )
+return this.afficherLaListeDesMarche.filter(element => element.attribue == 1 && element.sib==1)
 },
 afficheMarcheEnPlanification(){
-return this.afficherLaListeDesMarche.filter(element => element.attribue == 0)
+return this.afficherLaListeDesMarche.filter(element => element.attribue == 0 && element.sib==1)
 },
 afficherLaListeDesMarche(){
-return this.printMarcheNonAttribue.filter(element => this.afficheCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==0)
+return this.gettersMarcheHorsib.filter(element => this.afficheCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1)
 },
 nombreDeMarche(){
   return this.afficherLaListeDesMarche.length;
@@ -140,10 +143,10 @@ nombreDeMarcheEnContratualisation(){
  },
  
   afficheMarcheResilier(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 3)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 3 && element.sib==1)
 },
     nbreMarcheExecuter(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.afficheCodeTypeMarche(recuper.marche.type_marche_id) == 3).length
+  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.afficheCodeTypeMarche(recuper.marche.type_marche_id) == 3 && recuper.sib==1).length
 },
 afficheNombreMarcheResilier(){
 return this.afficheMarcheResilier.length
@@ -151,17 +154,11 @@ return this.afficheMarcheResilier.length
 nombreAfficheMarcheSolde(){
 return this.afficheMarcheTerminer.length
 },
-//     nbreMarcheExecuter(){
-//   return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.afficheCodeTypeMarche(recuper.marche.type_marche_id) == 4).length
-// },
 
-montantEnPlanification(){
-  return this.afficheMarcheEnPlanification.reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche), 0)
-},
 
 
 montantMarchePrevu(){
-  return this.marches.filter(element => element.type_marche_id == 5 && element.parent_id == null).reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche), 0)
+  return this.gettersMarcheHorsib.filter(element => element.type_marche_id == 5 && element.parent_id == null && element.sib==1).reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche), 0)
 },
 
  afficheIdCodeMarche() {
@@ -197,9 +194,6 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficher
 },
 
 
-montantEnSolde(){
-  return this.afficheMarcheTerminer.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
-},
 
   },
   methods: {

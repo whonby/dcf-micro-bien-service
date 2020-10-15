@@ -41,7 +41,7 @@ afficherLesActivite
                     </div> -->
                <div class="control-group">
             <label class="control-label" title="unite administrative">UA</label>
-            <div class="controls" style="background-color: rgb(255,255,255);">
+            <div class="controls" >
             <select v-model="formData.unite_administrative_id" class="span8">
                <option v-for="plans in groupeUaPourMarheHorSib" :key="plans[0].id" 
                :value="plans[0].uniteadministrative_id">{{afficherLibelleUniteAdministrative(plans[0].uniteadministrative_id)}}</option>
@@ -49,7 +49,6 @@ afficherLesActivite
             </div>
           </div>
               </td>
-
                <td colspan="">
                  <div class="control-group">
             <label class="control-label">Référence du marché</label>
@@ -57,7 +56,7 @@ afficherLesActivite
               <input
                 type="text"
                 v-model="formData.reference_marche"
-                class="span4"
+                class="span3"
                 placeholder="Saisir la référence du marché"
               />
             </div>
@@ -69,7 +68,7 @@ afficherLesActivite
                 <div class="control-group">
             <label class="control-label">Type de marché </label>
             <div class="controls">
-            <select v-model="formData.type_marche_id" class="span6">
+            <select v-model="formData.type_marche_id" class="span4">
                <option v-for="plans in typeMarches" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -102,7 +101,7 @@ afficherLesActivite
               <textarea
                
                 v-model="formData.objet"
-                class="span8" rows="3"
+                class="span7" rows="2"
                 placeholder="Saisir le texte"
               ></textarea>
             </div>
@@ -121,7 +120,7 @@ afficherLesActivite
                   <label class="control-label">Classification Economique</label>
                   <div class="controls">
                    
-                      <select v-model="formData.economique_id" :readOnly="deveroueconomiq" class="span6">
+                      <select v-model="formData.economique_id" :readOnly="deveroueconomiq" class="span4">
                     <option
                         v-for="eco in ligneBudgeteyuy(formData.unite_administrative_id)"
                         :key="eco.ligneeconomique_id"
@@ -175,7 +174,7 @@ afficherLesActivite
           
            readonly
          /> -->
-       <select v-model="formData.type_financement" class="span4">
+       <select v-model="formData.type_financement" class="span3">
           <option v-for="plans in types_financements" :key="plans.id" 
           :value="plans.id">{{plans.libelle}}</option>
       </select>
@@ -197,7 +196,7 @@ afficherLesActivite
            
            readonly
          /> -->
-       <select v-model="formData.source_financement" class="span6">
+       <select v-model="formData.source_financement" class="span4">
           <option v-for="plans in sources_financements" :key="plans.id" 
           :value="plans.id">{{plans.libelle}}</option>
       </select>
@@ -237,7 +236,7 @@ afficherLesActivite
      <input
        type="text"
        v-model="formData.livrable"
-       class="span4"
+       class="span3"
        placeholder="Saisir le livrable"
      />
    </div>
@@ -254,7 +253,7 @@ afficherLesActivite
        <input
          type="text"
          v-model="formData.nature_prix"
-         class="span6"
+         class="span4"
        />
      </div>
      </div>
@@ -301,7 +300,7 @@ afficherLesActivite
        <label class="control-label">Departement</label>
        <div class="controls">
         
-               <select v-model="formData.departement_id" class="span4" :readOnly="deveroiullage">
+               <select v-model="formData.departement_id" class="span3" :readOnly="deveroiullage">
                <option v-for="plans in recupererParentId(formData.localisation_geographie_id)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -318,7 +317,7 @@ afficherLesActivite
        <label class="control-label">Sous-prefecture</label>
        <div class="controls">
        
-               <select v-model="formData.sous_prefecture_id" class="span6" :readOnly="deveroiullageSousprefecture">
+               <select v-model="formData.sous_prefecture_id" class="span4" :readOnly="deveroiullageSousprefecture">
                <option v-for="plans in recupererParentId(formData.departement_id)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -356,7 +355,7 @@ afficherLesActivite
        <label class="control-label">Infrastructure</label>
        <div class="controls">
        
-               <select v-model="formData.infrastructure_id" class="span4" >
+               <select v-model="formData.infrastructure_id" class="span3" >
                <option v-for="plans in getterInfrastrucure" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
