@@ -28,10 +28,10 @@ CodeExempte
                 <i class="icon-th"></i>
               </span>
               <h5>Liste des March&eacute;s</h5>
-              <div align="right">
+              <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
-              </div>
+              </div> -->
             </div>
             <div class="span4">
             <br>
