@@ -636,7 +636,7 @@ recupererParentId(){
     ...mapActions("horSib", ['modifierMarcheHorSib']),
     allerPageMarcheHorsib(){
        this.$router.push({
-          name:'GestionMarcheHorSib'  
+          name:'gestion_marche'  
            })
     },
 
@@ -657,7 +657,7 @@ recupererParentId(){
 
             modifierMarcheHorSibLocal(){
                this.$router.push({
-                 name:'GestionMarcheHorSib'  
+                 name:'gestion_marche'  
                })
               var nouvelObjet = {
                 ...this.editMarcheHorSib,
