@@ -164,6 +164,7 @@
 
                     </model-list-select>
                     <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a>
+
                   </td>
                 </tr>
 <!--                <tr>-->
@@ -671,7 +672,6 @@ created() {
       "typeTextes",
       "uniteAdministratives",
       "getterBudgeCharge",
-
     ]),
     ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise"]),
     regions(){

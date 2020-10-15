@@ -87,16 +87,22 @@
         </li>-->
 
 
-
+        <li @click.prevent="navigateInfrastructureRegion" >
+          <a title="Carte des infrastructure pas regison" href="#">
+            <i class=" icon-globe"></i>
+            <span>CARTE INFRASTRUCTURE REGIONS</span>
+            <span class="label label-important"></span>
+          </a>
+        </li>
 
         <li @click.prevent="navigateToCatographieBudgetaire" >
           <a title="CARTOGRAPHIE" href="#">
             <i class=" icon-globe"></i>
-            <span>CARTOGRAPHIE</span>
+            <span>CARTOGRAPHIE EXECUTION BUDGET</span>
             <span class="label label-important"></span>
           </a>
         </li>
-        <li >
+        <li>
           <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
 
             <i class="icon-arrow-left"></i>
@@ -273,7 +279,12 @@ export default {
         name: 'MonEquipe'
       })
     },
-
+    navigateInfrastructureRegion(){
+      this.activate(31)
+      this.$router.push({
+        name: 'CarteInfrastructureCIPasRegions'
+      })
+    }
 
 
   }
