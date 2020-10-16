@@ -385,7 +385,7 @@ return this.afficherListeMarcheHorSib.filter((item) => {
    },
 
    montantMarche(){
-  return this.marches.filter(item=>item.sib==1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+  return this.gettersMarcheHorsib.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),0)
 },
 
  // afficher la liste des marchés hors sib
