@@ -674,7 +674,7 @@ recupererParentId(){
               var nouvelObjet = {
                 ...this.editMarcheHorSib,
                exo_id:this.anneeBugetaireModifier,
-               imputation:this.ImputationBudget
+               imputation:this.ImputationBudget(this.editMarcheHorSib.economique_id)
               }
              this.modifierMarcheHorSib(nouvelObjet) 
               this.editMarcheHorSib ={
