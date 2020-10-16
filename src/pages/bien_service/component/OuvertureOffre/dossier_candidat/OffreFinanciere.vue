@@ -28,7 +28,7 @@
         <tr v-for="offre in listeOffreFinLotCandidat(dossier_candidature.id)" :key="offre.id">
           <td @click="afficheEdite(offre.id)">N°{{offre.numero_lot}}</td>
           <td @click="afficheEdite(offre.id)">
-            {{formatageSomme(parseFloat(offre.montant_total_ttc)) || 'Non renseigné'}}
+            {{formatageSomme(parseFloat(offre.hist_montant_ttc)) || 'Non renseigné'}}
             </td>
           <td>
             <button @click.prevent="supprimerOffreFinancier(offre.id)"  class="btn btn-danger ">
@@ -407,7 +407,7 @@ name: "OffreFinanciere",
       let lot_marche=this.getMarchePersonnaliser.find(item=>item.id==this.formOffreFinanciere.marche_id)
       this.formOffreFinanciere.numero_lot=lot_marche.numero_lot
       this.formOffreFinanciere.dossier_candidat_id=this.dossier_candidature.id
-
+        this.formOffreFinanciere.hist_montant_ttc=this.formOffreFinanciere.montant_total_ttc
 
       this.ajouterOffreFinancier(this.formOffreFinanciere)
       this.$('#addd10').modal('hide');
@@ -437,6 +437,7 @@ name: "OffreFinanciere",
         montant_total_ttc:this.editer.montant_total_ttc,
         dossier_candidat_id:this.editer.dossier_candidat_id,
         marche_id:this.editer.marche_id,
+        hist_montant_ttc:this.editer.montant_total_ttc
       }
       this.modifierOffreFinancier(objet)
       this.$('#edit_offre_technique').modal('hide');

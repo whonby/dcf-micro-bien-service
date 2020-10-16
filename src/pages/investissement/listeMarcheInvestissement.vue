@@ -28,7 +28,7 @@
 
 
 
-              <table class="table table-bordered table-striped" v-if="afficherMarcheInvestissementParDroitAccess.length>0">
+              <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
                     <th>Année</th>
@@ -47,7 +47,7 @@
                    <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="afficherMarcheInvestissementParDroitAccess.length>0">
                  
                         <tr class="odd gradeX" v-for="(marche, index) in 
                 afficherMarcheInvestissementParDroitAccess"
@@ -299,10 +299,10 @@ loading(){
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==0)
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==0 && element.attribue==2)
            
         }
-           return  this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==0)
+           return  this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==0 && element.attribue==2)
        
     },
 

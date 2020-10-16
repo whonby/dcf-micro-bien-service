@@ -23,6 +23,7 @@ affichierAppelOffreid
       <th>Date demande</th>
       <th>Fichier</th>
       <th>Avis</th>
+      <th>Observation</th>
       <th>Date de l'avis</th>
       <th>Action</th>
     </tr>
@@ -49,7 +50,8 @@ affichierAppelOffreid
         <span v-else-if="demande.avis== 1" class=" btn label label-important"> objection </span>
         <span v-else class=" btn label label-info"> En attent</span>
       </td>
-
+<td @click="afficheDemandeDAO(demande.id)">
+        {{LibelleDecision(demande.plan_motif_decision_id) || 'Non renseigné'}}</td>
       <td @click="afficheDemandeDAO(demande.id)">
         {{formaterDate(demande.date_avis) || 'Non renseigné'}}</td>
 
@@ -417,6 +419,18 @@ affichierNiveauDecission() {
           return item;
         }
       })
+    },
+    LibelleDecision() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_Decision.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
     },
 affichierPvMarche() {
       return id => {

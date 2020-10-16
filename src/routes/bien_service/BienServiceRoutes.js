@@ -10,6 +10,7 @@ import cojo from '../../pages/bien_service/cojo.vue';
 import compte from '../../pages/bien_service/compte.vue';
 import condition from '../../pages/bien_service/condition.vue';
 import facture from '../../pages/bien_service/facture.vue';
+import AjouteFacture from '../../pages/bien_service/contractualisation/DossierExecution/dossierFacture/AjouteFacture';
 import fonctionOccupee from '../../pages/bien_service/fonctionOccupee.vue';
 // import lot from '../../pages/bien_service/lot.vue';creation-execution-marche
 import natureFonction from '../../pages/bien_service/natureFonction.vue';
@@ -83,6 +84,11 @@ import listeDesMarcheResilieBS from '../../pages/bien_service/listeDesMarcheTabl
 import listeDesMarcheSuspenduBS from '../../pages/bien_service/listeDesMarcheTableauBord/listeDesMarcheSuspenduBS.vue';
 import listeDesMarcheTermineBS from '../../pages/bien_service/listeDesMarcheTableauBord/listeDesMarcheTermineBS.vue';
 const BienServiceRoutes = [
+    {
+        path: "/AjouteFacture",
+        name: "AjouteFacture",
+        component: AjouteFacture
+    },
     {
         path: "/liste-Des-Marche-Termine-Bien-Service",
         name: "listeDesMarcheTermineBS",

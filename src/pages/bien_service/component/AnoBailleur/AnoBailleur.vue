@@ -40,6 +40,7 @@ marche_id
         <th>Date ANO bailleur</th>
         <th>Fichier</th>
         <th>Avis</th>
+        <th>Observation</th>
         <th>Date de l'avis</th>
         <th>Action</th>
       </tr>
@@ -64,7 +65,8 @@ marche_id
           <span v-else-if="anoBailleur.avis_bail== 1" class=" btn label label-important"> objection </span>
           <span v-else class=" btn label label-info"> En attent</span>
         </td>
-
+<td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+          {{LibelleDecision(anoBailleur.plan_motif_decision_id) || 'Non renseigné'}}</td>
         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
           {{formaterDate(anoBailleur.date_avis) || 'Non renseigné'}}</td>
 
@@ -382,7 +384,18 @@ name: "ActEffeFinanciere",
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe','planActe',"plans_Decision"]),
      
+LibelleDecision() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_Decision.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 
  listeAnoDMPBailleur: function () {
       return macheid => {
