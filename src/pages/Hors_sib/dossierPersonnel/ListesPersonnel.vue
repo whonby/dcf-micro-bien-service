@@ -1056,10 +1056,10 @@ nombretotalActeurNonAccredite() {
                 }
                 
             })
-            return colect.filter(acteur_depense=>acteur_depense.type_acte_id!='4' && acteur_depense.date_fin_contrat==null && acteur_depense.sib==1).length;
+            return colect.filter(acteur_depense=>acteur_depense.type_acte_id!='4' && acteur_depense.date_fin_contrat==null ).length;
         }
 
-       return this.acte_personnels.filter(acteur_depense=>acteur_depense.type_acte_id!='4' && acteur_depense.date_fin_contrat==null && acteur_depense.sib==1).length;
+       return this.acte_personnels.filter(acteur_depense=>acteur_depense.type_acte_id!='4' && acteur_depense.date_fin_contrat==null ).length;
 
     },
 
@@ -1097,13 +1097,17 @@ afficheActeNorminationPerso() {
                 }
                 
             })
-            return colect.filter(items=>items.fonction_budgetaire_id != null && items.sib==1);
+            return colect.filter(items=>items.fonction_budgetaire_id != null);
         }
 
-       return this.acte_personnels.filter(items=>items.fonction_budgetaire_id != null && items.sib==1);
+       return this.acte_personnels.filter(items=>items.fonction_budgetaire_id != null);
 
     },
-       
+        //  listeActeEffectFinnancier: function () {
+               
+        //                 return this.getActeEffetFinancierPersonnaliserContrat.filter(idmarche => idmarche.difference_personnel_bienService == 4)
+                 
+        //     },
 afficheActeFinancierRecrutementD(){
     return this.acteEffetFinanciers.filter(items2=>items2.difference_personnel_bienService == 4);
 },
@@ -1296,6 +1300,20 @@ AffichierElementParent() {
       };
     },
 
+            // acteurActivite() {
+            //     const searchTerm = this.search.toLowerCase();
+            //    // let ObjetModepassation=this.document_pyba_ppm_personnalise.filter((idm)=>idm.exerciceBudgetaire.encours===1);
+            //     return this.personnaliseActeurDepense.filter((item) => {
+            //             return item.matricule.toLowerCase().includes(searchTerm)
+            //             || item.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+            //             || item.prenom.toLowerCase().includes(searchTerm)
+            //             || item.nom.toLowerCase().includes(searchTerm)
+
+            //         }
+            //     )
+
+            // },
+           
   acteurActivite() {
         const searchTerm = this.search.toLowerCase();
 
@@ -1303,7 +1321,7 @@ AffichierElementParent() {
         if (this.noDCfNoAdmin){
             let colect=[];
             this.personnaliseActeurDepense.filter(item=>{
-                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -1316,7 +1334,7 @@ AffichierElementParent() {
                         || items.prenom.toLowerCase().includes(searchTerm)
                         || items.nom.toLowerCase().includes(searchTerm)
                 ) && items.sib==1;
-            } );
+            });
             
         }
 
@@ -1344,13 +1362,42 @@ AffichierElementParent() {
                     return item
                 }
             })
-            return colect.filter(items=>items.sib==1).length;
+            return colect.filter(items => {
+                return (
+                    items.matricule.toLowerCase().includes(searchTerm)
+                        || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+                        || items.prenom.toLowerCase().includes(searchTerm)
+                        || items.nom.toLowerCase().includes(searchTerm)
+                ) && items.sib==1;
+            }).length;
             
         }
 
-        return this.personnaliseActeurDepense.filter(items=>items.sib==1).length;
+        return this.personnaliseActeurDepense.filter(items => {
+            return (
+                items.matricule.toLowerCase().includes(searchTerm)
+                        || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+                        || items.prenom.toLowerCase().includes(searchTerm)
+                        || items.nom.toLowerCase().includes(searchTerm)
+            ) && items.sib==1;
+        }).length;
 
     },
+
+
+
+            // acteurNonActivite() {
+            //     const searchTerm = this.search.toLowerCase();
+            //     return this.personnaliseActeurFinContrat.filter((item) => {
+            //             return item.matricule.toLowerCase().includes(searchTerm)
+            //                 || item.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+            //                 || item.prenom.toLowerCase().includes(searchTerm)
+            //                 || item.nom.toLowerCase().includes(searchTerm)
+
+            //         }
+            //     )
+
+            // },
 
 acteurNonActivite() {
         const searchTerm = this.search.toLowerCase();
@@ -1365,10 +1412,24 @@ acteurNonActivite() {
                     return item
                 }
             })
-            return colect.filter(items=>items.sib==1);
+            return colect.filter(items => {
+                return (
+                    items.matricule.toLowerCase().includes(searchTerm)
+                            || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+                            || items.prenom.toLowerCase().includes(searchTerm)
+                            || items.nom.toLowerCase().includes(searchTerm)
+                ) && items.sib==1;
+            });
         }
 
-        return this.personnaliseActeurFinContrat.filter(items=>items.sib==1);
+        return this.personnaliseActeurFinContrat.filter(items => {
+            return (
+                items.matricule.toLowerCase().includes(searchTerm)
+                            || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+                            || items.prenom.toLowerCase().includes(searchTerm)
+                            || items.nom.toLowerCase().includes(searchTerm)
+            ) && items.sib==1;
+        });
 
     },
 
