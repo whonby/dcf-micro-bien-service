@@ -9,7 +9,20 @@ import marcheHorSibInvestissement from "../../pages/Hors_sib/marche_hors_sib_inv
 import tableauDeBorde from "../../pages/Hors_sib/marche_hors_sib_investissement/tableauDeBorde.vue";
 import listeMarcheInvestissementHS from "../../pages/Hors_sib/marche_hors_sib_investissement/ExecutionInvestissement/listeMarcheInvestissementExecutionHS.vue";
 import listeMarcheBienEtServiceHS from "../../pages/Hors_sib/marche_hors_sib_investissement/ExecutionInvestissement/listeMarcheBienEtServiceExecutionHS.vue";
+import recrutementPersonnelHorsSib from "../../pages/Hors_sib/dossierPersonnel/recrutementPersonnel.vue";
+import ListesPersonnel from "../../pages/Hors_sib/dossierPersonnel/ListesPersonnel.vue";
+
 const marcheHorSibRoutes =[
+    {
+        path:"/ListesPersonnel",
+        name:"ListesPersonnel",
+        component:ListesPersonnel
+    },
+    {
+        path:"/recrutementPersonnelHorsSib",
+        name:"recrutementPersonnelHorsSib",
+        component:recrutementPersonnelHorsSib
+    },
     {
         path:"/listeMarcheBienEtServiceHS",
         name:"listeMarcheBienEtServiceHS",
@@ -37,7 +50,7 @@ const marcheHorSibRoutes =[
     },
     
     {
-        path:"/cerstion-marche-hors-sib",
+        path:"/gestion-marche-hors-sib",
         name:"gestion_marche",
         component:GestionMarcheHorsib
     },

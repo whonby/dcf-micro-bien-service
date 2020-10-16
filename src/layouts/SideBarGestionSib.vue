@@ -57,12 +57,12 @@
             <span class="label label-important"></span>
           </a>
         </li>
-        <!-- <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
+        <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
           <a href="#">
             <i class="icon-group"></i>
             <span>PERSONNEL</span>
           </a>
-        </li> -->
+        </li>
         <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
           <a href="#">
             <i class="icon-truck"></i>

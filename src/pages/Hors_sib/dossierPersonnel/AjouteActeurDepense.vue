@@ -1,18 +1,25 @@
 
 <template>
 
-<div>
+<div class="container-fluid">
+      <hr />
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="widget-box">
+            <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>Ajouter personnel</h5>
+              <!-- <div align="right">
+                Search:
+                <input type="search" placeholder />
+              </div>-->
+            </div>
 
             <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">
                 <div class="widget-box">
-                    <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5>Ajout Personnel Avec Contrat</h5>
-              
-            </div>
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
@@ -22,7 +29,12 @@
                       <li>
                         <a data-toggle="tab" href="#tab2">Affectation</a>
                       </li>
-                      
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab3">Descriptif3</a>
+                      </li> -->
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab3">Autres Information</a>
+                      </li> -->
                      
                     </ul>
                   </div>
@@ -221,7 +233,7 @@
                
                 <td>
                      <div class="control-group">
-                                                    <label class="control-label">Service</label>
+                                                    <label class="control-label">Service{{formData.service_id}}</label>
                                                     <div class="controls">
                                                         <select v-model="formData.service_id" :disabled="verrouilleService" class="span12">
                                                             <option></option>
@@ -381,21 +393,55 @@
                           class="btn btn-primary"
                           @click.prevent="ajouterTitreLocal"
                         >Valider</a>
-                        <!-- <a
+                        <a
                           @click.prevent="afficherModalListePersonnel()"
                           class="btn"
                           href="#"
-                        >Fermer</a> -->
+                        >Fermer</a>
                       </div>
                     </div>
                   </div>
                 </div>
               </table>
             </div>
-         
-        
-      
+          </div>
+        </div>
+      </div>
+      <notifications/>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </template>
 <script>
@@ -630,7 +676,7 @@ recupererReferenceActe() {
       return this.formData.unite_administrative_id == "";
     },
     verrouilleService() {
-      return this.formData.unite_administrative_id == "";
+      return this.formData.uniteZone_id == "";
     },
     verrouilleFonction() {
       return this.formData.service_id == "";
@@ -816,3 +862,4 @@ exoEnCours() {
     };
 </script>
 
+verrouilleService

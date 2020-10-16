@@ -10,17 +10,17 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Ajout Personnel Avec Contrat</h5>
+              <h5>Ajout Personnel Sans Contrat</h5>
               
             </div>
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">Identification</a>
+                        <a data-toggle="tab" href="#SansContratIdent">Identification</a>
                       </li>
                        
                       <li>
-                        <a data-toggle="tab" href="#tab2">Affectation</a>
+                        <a data-toggle="tab" href="#SansContratAffect">Affectation</a>
                       </li>
                       
                      
@@ -28,7 +28,7 @@
                   </div>
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
-                    <div id="tab1" class="tab-pane active">
+                    <div id="SansContratIdent" class="tab-pane active">
                       <div class="modal-body">
         <table class="table table-bordered table-striped">
             <tr>
@@ -44,7 +44,7 @@
                                                     </div>
                                                 </div>
                 </td>
-                <td colspan="2">
+                <!-- <td colspan="2">
                      <div class="control-group">
                                                     <label class="control-label">L'unite administrative:</label>
                                                     <div class="controls">
@@ -57,8 +57,8 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                </td>
-                <td colspan="2">
+                </td> -->
+                <!-- <td colspan="2">
                      <div class="control-group">
                                                     <label class="control-label">Marché</label>
                                                     <div class="controls">
@@ -71,30 +71,9 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                </td>
+                </td> -->
                 
                       
-                
-               
-              
-                
-            </tr>
-            <tr>
-               <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Reference Acte</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.reference_acte"  class="span12">
-                                                            <option></option>
-                                                            <option v-for="item in recupererReferenceActe(formData.marche_id)" :key="item.id" :value="item.reference_act">
-                                                                {{item.reference_act}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                
-                </td>
                 <td>
  
                                                     <label class="control-label">Matricule:</label>
@@ -105,23 +84,25 @@
                 </td>
                <td>
                     <div class="control-group">
-                                                    <label class="control-label">Nom:</label>
+                                                    <label class="control-label">Nom</label>
                                                     <div class="controls">
-                                                        <input type="text" readonly  :value="afficheNomCandidat(afficheIdCandidat(afficheIdActeurDepense(formData.reference_acte)))"  placeholder="Saisir le nom" class="span12" />
+                                                        <input type="text"   v-model="formData.nom"  placeholder="Saisir le nom" class="span12" />
                                                     </div>
                                                 </div>
                 </td>
                 <td colspan="2">
                      <div class="control-group">
-                                                    <label class="control-label">Prenom:</label>
+                                                    <label class="control-label">Prénoms</label>
                                                     <div class="controls">
-                                                        <input type="text" readonly :value="affichePreNomCandidat(afficheIdCandidat(afficheIdActeurDepense(formData.reference_acte)))"  placeholder="Saisir le prenom" class="span12"/>
+                                                        <input type="text" v-model="formData.prenom"  placeholder="Saisir le prenom" class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
-                
                
+              
+                
             </tr>
+            
             <tr>
                <td>
                      <div class="control-group">
@@ -199,26 +180,26 @@
           
                     </div>
                     <!--ongle descriptif-->
-                    <div id="tab2" class="tab-pane">
+                    <div id="SansContratAffect" class="tab-pane">
                       
   <div class="modal-body">
         <table class="table table-bordered table-striped">
             <tr>
                            <td>
                      <div class="control-group">
-                                                    <label class="control-label">Unite de Zone</label>
+                                                    <label class="control-label">L'unite administrative</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.uniteZone_id" :disabled="verrouilleUniteZone" class="span12">
+                                                         <select v-model="formData.unite_administrative_id" class="span12">
                                                             <option></option>
-                                                            <option v-for="item in afficheUniteZone(formData.unite_administrative_id)" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
+                                                              <option v-for="plans in groupeUaPourMarheHorSib" :key="plans[0].id" 
+               :value="plans[0].uniteadministrative_id">{{LibelleUniteAdministrative(plans[0].uniteadministrative_id)}}</option>
+                                                            >
 
                                                         </select>
                                                     </div>
                                                 </div>
                 </td>
-               
+              
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Service</label>
@@ -341,7 +322,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Salaire:</label>
                                                     <div class="controls">
-                                                        <input type="number" readonly :value="afficheSalairePersonnel"  placeholder="Saisir le salaire" class="span12"/>
+                                                        <input type="number"  v-model="formData.salaires"  placeholder="Saisir le salaire" class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
@@ -453,9 +434,7 @@
 
         created() {
             this.allActeurDepense();
-            //    this.getActeur()
-            //  console.log(this.fonctions)
-            // console.log(this.getFonction)
+            
         },
         computed: {
            admin:admin,
@@ -467,7 +446,7 @@
             ...mapGetters('personnelUA', ["dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
-            ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
+            ...mapGetters("uniteadministrative", ["groupeUaPourMarheHorSib","getPersonnaliseTransfert","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             ...mapGetters("parametreGenerauxAdministratif", ["groupeService","getterplanOrganisationUa","exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", [
@@ -492,15 +471,26 @@
         }
       };
     },
+LibelleUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return "Non renseigné"
+        }
+      };
+    },
     uniteAdmin() {
       
 
 
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.uniteAdministratives.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+            this.getPersonnaliseTransfert.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -510,7 +500,7 @@
             return colect
         }
 
-       return this.uniteAdministratives
+       return this.getPersonnaliseTransfert
 
     },
   afficheIdActeurDepense() {
@@ -774,25 +764,22 @@ exoEnCours() {
                 normeequipement:this.nombreDeFonction(this.formData.fonction_id),
                 historiquenormequipement:this.nombreDeFonction(this.formData.fonction_id),
                 montantequipement:this.montantPourEtreEquipe(this.formData.fonction_id),
-                  nom : this.afficheNomCandidat(this.afficheIdCandidat(this.afficheIdActeurDepense(this.formData.reference_acte))),
-                  prenom :this.affichePreNomCandidat(this.afficheIdCandidat(this.afficheIdActeurDepense(this.formData.reference_acte))),
-                  
-                  salaires:this.afficheSalairePersonnel
+                 sib:1
+                 
                
               }
-               let modifierActive=this.acteEffetFinanciers.find(marche=>marche.candidat_personnel_id == this.afficheIdActeurDepense(this.formData.reference_acte))
-    modifierActive.activationD = 1
+              
     
    
-    this.modifierActeEffetFinancier(modifierActive)
-                console.log(this.formData)
+    
+                
                 this.ajouterActeur(nouveauObjet)
                 this.getActeur()
                 this.formData = {
                     code: "",
                     libelle: ""
                 }
-                this.$router.push({ name: 'Acteur' })
+                // this.$router.push({ name: 'Acteur' })
             },
 // afficher
             suprimer(id){

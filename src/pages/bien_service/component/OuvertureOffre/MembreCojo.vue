@@ -286,7 +286,7 @@ name: "MembreCojo",
     listeMembreCojo: function (){
       let vM=this;
       if( vM.idcojo!=""){
-        return this.getterMembreCojo.filter(idmem=>idmem.cojo_id==vM.idcojo);
+        return this.getterMembreCojo.filter(idmem=>idmem.marche_id==vM.idcojo);
       }
       return null;
     },

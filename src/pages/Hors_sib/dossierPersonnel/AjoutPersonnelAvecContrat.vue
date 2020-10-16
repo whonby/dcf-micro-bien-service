@@ -50,9 +50,9 @@
                                                     <div class="controls">
                                                         <select v-model="formData.unite_administrative_id" class="span12">
                                                             <option></option>
-                                                            <option v-for="item in uniteAdmin" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
+                                                            <option v-for="plans in groupeUaPourMarheHorSib" :key="plans[0].id" 
+               :value="plans[0].uniteadministrative_id">{{LibelleUniteAdministrative(plans[0].uniteadministrative_id)}}</option>
+                                                            
 
                                                         </select>
                                                     </div>
@@ -467,7 +467,7 @@
             ...mapGetters('personnelUA', ["dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
-            ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
+            ...mapGetters("uniteadministrative", ["groupeUaPourMarheHorSib","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel","getPersonnaliseTransfert"]),
             ...mapGetters("parametreGenerauxAdministratif", ["groupeService","getterplanOrganisationUa","exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", [
@@ -483,6 +483,20 @@
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+ 
+ LibelleUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return "Non renseigné"
+        }
+      };
+    },
+ 
  recupererCandidatSel() {
       return id => {
         if (id != null && id != "") {
@@ -499,8 +513,8 @@
 
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.uniteAdministratives.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+            this.getPersonnaliseTransfert.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -510,7 +524,7 @@
             return colect
         }
 
-       return this.uniteAdministratives
+       return this.getPersonnaliseTransfert
 
     },
   afficheIdActeurDepense() {
@@ -776,8 +790,8 @@ exoEnCours() {
                 montantequipement:this.montantPourEtreEquipe(this.formData.fonction_id),
                   nom : this.afficheNomCandidat(this.afficheIdCandidat(this.afficheIdActeurDepense(this.formData.reference_acte))),
                   prenom :this.affichePreNomCandidat(this.afficheIdCandidat(this.afficheIdActeurDepense(this.formData.reference_acte))),
-                  
-                  salaires:this.afficheSalairePersonnel
+                  salaires:this.afficheSalairePersonnel,
+                  sib:1
                
               }
                let modifierActive=this.acteEffetFinanciers.find(marche=>marche.candidat_personnel_id == this.afficheIdActeurDepense(this.formData.reference_acte))

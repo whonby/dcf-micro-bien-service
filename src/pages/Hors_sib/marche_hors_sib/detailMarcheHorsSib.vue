@@ -143,14 +143,14 @@
 
 
                      <div id="tab2" class="tab-pane">
-                <div align="right">
+                <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
 
 
-                </div>
-                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                </div> -->
+                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
 
                 </div>
 
@@ -263,14 +263,14 @@
                    <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
                 </div>
                    <div id="tab0142" class="tab-pane">
-                <div align="right">
+                <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
 
 
-                </div>
-                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                </div> -->
+                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
 
                 </div>
                          </div>
@@ -415,12 +415,12 @@
                 </div>
 
                   <div id="tab0143723" class="tab-pane">
-                <div align="right">
+                <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
-                </div>
-                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                </div> -->
+                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
 
                 </div>
                          </div>
@@ -565,14 +565,14 @@
                 </div>
 
                    <div id="tab01432" class="tab-pane">
-                <div align="right">
+                <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
 
 
-                </div>
-                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                </div> -->
+                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
 
                 </div>
                          </div>
@@ -825,14 +825,14 @@
 
 
                    <div id="tab0143720" class="tab-pane">
-                <div align="right">
+                <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
 
 
-                </div>
-                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                </div> -->
+                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
 
                 </div>
 
@@ -888,6 +888,7 @@
    //  import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
 import rapportOuverture from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
      
+     import componentBailleur1 from '../../bien_service/component/bailleurMarche';
    import componentBailleur from '../../bien_service/dossierDetailMarchePs/dossierBailleur/componentBailleur';
 
       import executionLigneExempte from '../../bien_service/executionLigneExempte/executionLigneExempte';
@@ -916,6 +917,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
           OuvertureOffre,
             componentCotation,
           LotMarche,
+          componentBailleur1,
             componentOuverture,
            // componentActe,
             publicationOffre,
