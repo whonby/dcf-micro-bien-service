@@ -1,5 +1,4 @@
-isButtunAddDossierCandidat
-CodeExempte
+
 <template>
     
 
@@ -897,7 +896,7 @@ import rapportOuverture from '../../bien_service/dossierDetailMarcheProcedureSim
         import componentAvisAnoCf from '../../bien_service/dossierDetailMarcheAOI_AON/dossierAvisAnoCf/componentAvisAnoCf';
      //    import componentAvisBailleurCf from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
 
-//import LotMarche from "@/pages/bien_service/component/LotMarche";
+import LotMarche from "@/pages/bien_service/component/LotMarche";
 import OuvertureOffre from "@/pages/bien_service/component/OuvertureOffre/OuvertureOffre";
 import PvJugement from "@/pages/bien_service/component/Jugement/pv/PvJugement";
     import 'vue-search-select/dist/VueSearchSelect.css'
@@ -916,7 +915,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
           Jugement,
           OuvertureOffre,
             componentCotation,
-          //LotMarche,
+          LotMarche,
             componentOuverture,
            // componentActe,
             publicationOffre,
