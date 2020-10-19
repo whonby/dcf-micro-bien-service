@@ -645,7 +645,7 @@ affichierMontantTVA() {
       return id => {
         if (id != null && id != "") {
           return this.avenants.filter(
-            element => element.marche_id == id && this.afficherStatusSib(element.marche_id)==0
+            element => element.marche_id == id && this.afficherStatusSib(element.marche_id)==1
           );
         }
       };

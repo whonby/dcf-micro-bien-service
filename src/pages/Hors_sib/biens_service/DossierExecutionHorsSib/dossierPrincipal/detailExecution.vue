@@ -133,12 +133,13 @@ decision_cf
                                <li ><a data-toggle="tab" href="#tab1003">Facture</a></li>
                                
                                 <li ><a data-toggle="tab" href="#tab104" v-if="afficherTypeProcedure(detail_marche.id) == 2">Ordre de Paiement Provisoire</a></li>
-                                <li ><a data-toggle="tab" href="#RealiteService" v-if="afficherTypeProcedure(detail_marche.id) == 2">Réalité service fait</a></li>
+                                <li ><a data-toggle="tab" href="#tab155508" v-if="afficherTypeProcedure(detail_marche.id) == 2">Réalité service fait</a></li>
                                 <li ><a data-toggle="tab" href="#tab1201209" v-if="afficherTypeProcedure(detail_marche.id) == 2 || afficherTypeProcedure(detail_marche.id) == 1">Liquidation</a></li>
                                 <li><a data-toggle="tab" href="#tab208" v-if="afficherTypeProcedure(detail_marche.id) == 2  || afficherTypeProcedure(detail_marche.id) == 1">Ordre de Paiement Définitif</a></li>
                                <li ><a data-toggle="tab" href="#tab457851" >Decompte</a></li>
                               <li ><a data-toggle="tab" href="#Financement1" >Financement</a></li>
-                               
+                                <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li> -->
                             </ul>
                           </templete>
                             
@@ -194,7 +195,7 @@ decision_cf
                        
                         
                          
-                         <div id="tab155508" class="tab-pane">
+                         <div id="tab15550" class="tab-pane">
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#tab789654">Service Bénéficiaire</a></li>
@@ -226,82 +227,7 @@ decision_cf
                           </templete>
                          <template v-else>
                            <div class="widget-content tab-content">
-                             <div id="Financement" class="tab-pane "><financementHs :macheid="detail_marche.id"></financementHs></div> 
-<div id="tab20782" class="tab-pane active "><avenantHs :macheid="detail_marche.id"></avenantHs></div>             
-<div id="tab1003" class="tab-pane  "><factureHs :macheid="detail_marche.id"></factureHs></div> 
-<div id="tab45785" class="tab-pane  "><decompteHs :macheid="detail_marche.id"></decompteHs></div>
-                       
- <div id="tab20" class="tab-pane  ">
-                        
-                         
-                         <div id="tab9563" class="tab-pane active">
-                           <div class="widget-title">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab9326">Decision Emetteur</a></li>
-                                <li ><a data-toggle="tab" href="#tab03215">Decision Controleur financier</a></li>                 
-                            </ul>
-                        </div>
-                         <div class="widget-content tab-content">
-                           
-                         <div id="tab9326" class="tab-pane active "><mandatFactureDefinitiveEmetteurHs :macheid="detail_marche.id"></mandatFactureDefinitiveEmetteurHs></div>
-                            <div id="tab03215" class="tab-pane  "><mandatFactureDefinitiveCfHs :macheid="detail_marche.id"></mandatFactureDefinitiveCfHs></div>
-                        
-                         </div>
-                         </div>
-          
-                           
-                       </div>
-
-
-                       <div id="tab10" class="tab-pane  ">
-                        
-                         
-                         <div id="tab104" class="tab-pane active">
-                           <div class="widget-title">
-                            <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab9326">Decision Controlleur Financier</a></li>
-                                                  
-                            </ul>
-                        </div>
-                         <div class="widget-content tab-content">
-                           <div id="tab104" class="tab-pane active "><OrdreDePaiementProfisoireCfHs :macheid="detail_marche.id"></OrdreDePaiementProfisoireCfHs></div>
-                           
-                         </div>
-                         </div>
-          
-                           
-                       </div>
-                       
-                        
-                         
-                         <div id="RealiteService" class="tab-pane">
-                           <div class="widget-title">
-                            <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#realiteServiceFaitSB">Service Bénéficiaire</a></li>
-                                  <li class=""><a data-toggle="tab" href="#realiteServiceFaitCf">Controlleur Financier</a></li>
-                                                  
-                            </ul>
-                        </div>
-                         <div class="widget-content tab-content">
-                           <div id="realiteServiceFaitSB" class="tab-pane active "><realiteServiceFaitServiceBHs :macheid="detail_marche.id"></realiteServiceFaitServiceBHs></div>
-                           <div id="realiteServiceFaitCf" class="tab-pane"><realiteServiceFaitCfHs :macheid="detail_marche.id"></realiteServiceFaitCfHs></div>
-                         </div>
-                         </div>
-                         <div id="tab1201209" class="tab-pane">
-                           <div class="widget-title">
-                            <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab0002353">Emetteur</a></li>
-                                  <li class=""><a data-toggle="tab" href="#tab897522414" >Controlleur Financier</a></li>
-                                  <li class=""><a data-toggle="tab" href="#tab4521232" >Ordonnateur</a></li>
-                                                  
-                            </ul>
-                        </div>
-                         <div class="widget-content tab-content">
-                           <div id="tab0002353" class="tab-pane active "><liquidationEmetteurHs :macheid="detail_marche.id"></liquidationEmetteurHs></div>
-                           <div id="tab897522414" class="tab-pane"><liquidationCfHs :macheid="detail_marche.id"></liquidationCfHs></div>
-                          <div id="tab4521232" class="tab-pane"><liquidationOrdonnateurHs :macheid="detail_marche.id"></liquidationOrdonnateurHs></div>
-                         </div>
-                         </div>
+                             fffff
                            </div>
                          </template>
                           
@@ -389,26 +315,6 @@ import decompte from "../../../../bien_service/contractualisation/DossierExecuti
                   import financement from "../../../../bien_service/contractualisation/DossierExecution/dossierFinancement/financement";
                    import tableauBordExecution from "../../../../bien_service/contractualisation/DossierExecution/tableauBordExecution/tableauBordExecution";
   import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
-
-
-
-
-
-import avenantHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierAvenant/avenantHs";
-import factureHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierFacture/factureHs";
-import decompteHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierDecompte/decompteHs";
-    // import mandatFactureProformaEmetteur from "../../../../bien_service/contractualisation/DossierExecution/dossierMandat/mandatFactureProformaEmetteur";
-    //  import mandatFactureProformaCf from "../../../../bien_service/contractualisation/DossierExecution/dossierMandat/mandatFactureProformaCf";
-    import mandatFactureDefinitiveEmetteurHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierMandat/mandatFactureDefinitiveEmetteurHs";
-     import mandatFactureDefinitiveCfHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierMandat/mandatFactureDefinitiveCfHs";
-      import OrdreDePaiementProfisoireCfHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierEngagement/OrdreDePaiementProfisoireCfHs.vue";
-      import realiteServiceFaitServiceBHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierRealiteServiceFait/realiteServiceFaitServiceBHs";
-      import realiteServiceFaitCfHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierRealiteServiceFait/realiteServiceFaitCfHs";
-       import liquidationEmetteurHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierLiquidation/liquidationEmetteurHs";
-        import liquidationCfHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierLiquidation/liquidationCfHs";
-         import liquidationOrdonnateurHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierLiquidation/liquidationOrdonnateurHs";
-                  import financementHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierFinancement/financementHs";
-
   export default {
         name: 'compte',
         components:{
@@ -427,25 +333,9 @@ import decompteHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsS
             liquidationOrdonnateur,
             financement,
             tableauBordExecution,
-            EcheanceMarche,
+            EcheanceMarche
 
 
-
-
-avenantHs,
-            factureHs,
-            decompteHs,
-            // mandatFactureProformaEmetteur,
-            // mandatFactureProformaCf,
-            mandatFactureDefinitiveEmetteurHs,
-            mandatFactureDefinitiveCfHs,
-            OrdreDePaiementProfisoireCfHs,
-            realiteServiceFaitServiceBHs,
-            realiteServiceFaitCfHs,
-            liquidationEmetteurHs,
-            liquidationCfHs,
-            liquidationOrdonnateurHs,
-            financementHs,
         },
         data() {
             return {

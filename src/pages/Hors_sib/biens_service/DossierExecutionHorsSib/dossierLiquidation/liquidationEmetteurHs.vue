@@ -1,92 +1,81 @@
+afficheIdActeurDepense
 
 <template>
 
-<div >
+<div>
 
-     <div id="DECISIONcF" class="modal hide tailgrand">
+           <div id="exampleModalMotifLiquidationEmetteur" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Decision CF</h3>
+        <h3>Décision Emetteur</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
           <tr>
-            <td>
-              <div class="control-group">
-                            <label class="control-label">Décision CF </label>
+            <!-- <td colspan="2">
+               <div class="control-group">
+                            <label class="control-label">Décision Emetteur </label>
                             <div class="controls">
-                              <select v-model="editLiquidation.decision_controleur_financier" class="span">
-                                <option value=""></option>
+                              <select v-model="editLiquidation.decision_emetteur" class="span">
+                                <option value="0">Attente</option>
                               <option value="1">Visé</option>
-                              <option value="9">Visé avec Observation</option>
                              <option value="2">Différé</option>
                              <option value="3">Réjeté</option>
-                            <option value="0">Attente</option>
+                            
     
     </select>
                            
                             </div>
                           </div>
             </td>
-            <td>
+             
+          </tr> -->
+        
+               <tr>
+                <td >
                     <div class="control-group">
-                            <label class="control-label">Motif CF </label>
+                            <label class="control-label">Observation Emetteur</label>
                             <div class="controls">
-                               <select v-model="editLiquidation.motifcf" class="span">
-                                 <option value=""></option>
-                                <option v-for="varText in AffichierElementParent" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
-                            </select>
-                            
+                              <textarea  class="span" row = "2" v-model="editLiquidation.observation_emetteur">
+                              </textarea>
                             </div>
                           </div>
                  </td>
-          </tr>
-                
-                  <tr>
-                 <td>
-                    <div class="control-group">
-                            <label class="control-label">Libelle motif </label>
+                 <td >
+                       <div class="control-group">
+                            <label class="control-label">Date Observation:</label>
                             <div class="controls">
-                               <select v-model="editLiquidation.motif_controleur_f" class="span">
-                                 <option value=""></option>
-                                <option v-for="varText in AffichierElementEnfant(editLiquidation.motifcf)" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
-                            </select>
-                            
+                              <input type="date" class="span"  v-model="editLiquidation.date_emetteur"/>
+                             
+                            </div>
+                          </div>
+                       </td>
+                 
+                 </tr>            
+                  
+                       <tr>
+                 <td >
+                    <div class="control-group">
+                            <label class="control-label">Nom et prenoms </label>
+                            <div class="controls">
+                              <select v-model="editLiquidation.nom_emetteur" class="span">
+                                <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.editLiquidation.marche_id))"  :key="acteur.id"
+                        :value="acteur.id">{{afficherNomActeurDepense(acteur.acteur_depense_id)}}</option>
+                               </select>
+                           
                             </div>
                           </div>
                  </td>
-                 <td>
-                               <div class="control-group">
-                            <label class="control-label">Date Decision CF :</label>
+                  <td>
+                                  <div class="control-group">
+                            <label class="control-label">Fonction</label>
                             <div class="controls">
-                              <input type="date" class="span"  v-model="editLiquidation.date_controleur_financier"/>
-                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
-                              
+                              <input type="text" class="span" readonly :value=" afficherLibelleFoctionBudgetaire(afficherIdFoctionBudgetaire(editLiquidation.nom_emetteur))"/>
+                             
                             </div>
                           </div>
                            </td>
                  </tr>             
-                   <tr>
-                     <td colspan="">
-                        <div class="control-group">
-                            <label class="control-label">Observation CF</label>
-                            <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editLiquidation.observation_controleur_financier">
-                              </textarea>
-                            </div>
-                          </div>
-                       </td>
-                       <td colspan="">
-                        <div class="control-group">
-                            <label class="control-label">Nom du CF</label>
-                            <div class="controls">
-                              <input type="text" class="span"  :value="afficheNomUtilisateur" readonly/>
-                            </div>
-                          </div>
-                       </td>
-                       </tr>      
                         
                            
          
@@ -120,9 +109,8 @@
                                   <th>Imputation</th>
                                 
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th>Date validation Emmetteur</th>
-                                <th>Date validation CF</th>
-                                <th>Controleur financier</th>
+                                <th >Date validation Emmetteur</th>
+                                
                                
                                 <th>Action</th>
                                     </tr>
@@ -130,7 +118,7 @@
                                     <tbody>
                                      <tr
                     class="odd gradeX"
-                    v-for="liquida in afficheLiquidationCf(macheid)"
+                    v-for="liquida in afficheLiquidationEmetteur(macheid)"
                     :key="liquida.id"
                   >
        <td >{{liquida.exo_id || 'Non renseigné'}}</td>
@@ -141,28 +129,28 @@
                      
                      
                     <td >{{liquida.imputation_budgetaire || 'Non renseigné'}}</td>
-                   
+                   <td >{{(formaterDate(liquida.date_emetteur)) || 'Non renseigné'}}</td>
                      <!-- <td>
-                        <button v-if="liquida.decision_emetteur == 1"  class="btn  btn-success"  >                        
+                        <button v-if="liquida.decision_emetteur == 1"  class="btn  btn-success" @click="afficherModalObservationEmetteurLiquidation(liquida.id)" >                        
                      
                       <span    >Visé</span>
                       
                       </button>
-                       <button v-else-if="liquida.decision_emetteur == 2" class="btn  btn-warning"  >                        
+                       <button v-else-if="liquida.decision_emetteur == 2" class="btn  btn-warning" @click="afficherModalObservationEmetteurLiquidation(liquida.id)" >                        
                      
                       
                        <span  >Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="liquida.decision_emetteur == 3" class="btn  btn-danger"  >                        
+                        <button v-else-if="liquida.decision_emetteur == 3" class="btn  btn-danger" @click="afficherModalObservationEmetteurLiquidation(liquida.id)" >                        
                      
                       
                        <span  >Réjeté</span>
                       
                     
                       </button>
-                     <button v-else class="btn  btn-info"  >                        
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationEmetteurLiquidation(liquida.id)" >                        
                      
                       
                        <span  >Attente</span>
@@ -170,42 +158,17 @@
                     
                       </button>
                     </td> -->
-                     <td >{{(formaterDate(liquida.date_emetteur)) || 'Non renseigné'}}</td>
-                    <td >{{(formaterDate(liquida.date_controleur_financier)) || 'Non renseigné'}}</td>
-                     <td >
-                        <button v-if="liquida.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationDCFLiquidation(liquida.id)" >                        
-                     
-                    <span    >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="liquida.decision_controleur_financier == 9"  class="btn  btn-success" @click="afficherModalObservationDCFLiquidation(liquida.id)" >                        
-                     
-                    <span    >Visé avec Observation</span>
-                      
-                      </button>
-                       <button v-else-if="liquida.decision_controleur_financier == 2" class="btn  btn-warning"  @click="afficherModalObservationDCFLiquidation(liquida.id)">                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="liquida.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationDCFLiquidation(liquida.id)" >                        
-                     
-                      <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalObservationDCFLiquidation(liquida.id)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                      
-                    </td>
                     <td>
+                       <button v-if="liquida.decision_emetteur == 0" class="btn  btn-danger" @click="afficherModalObservationEmetteurLiquidation(liquida.id)">
+                        <span>
+                          <i class="icon icon-ok"></i>
+                        </span>
+                      </button>
+                       <button v-else class="btn  btn-success" @click="afficherModalObservationEmetteurLiquidation(liquida.id)">
+                        <span>
+                          <i class="icon icon-ok"></i>
+                        </span>
+                      </button>
                          <button class="btn btn-danger"  @click="supprimerLiquidation(liquida.id)">
                         <span>
                           <i class="icon icon-trash"></i>
@@ -231,7 +194,7 @@
 
 
 
-<notifications  />
+
     </div>
 </template>
 
@@ -304,35 +267,6 @@ search:""
       // "sections"
        
     ]),
-     ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
-  'plans_Decision']),
-
-  afficheNomUtilisateur(){
-  let objLinea = localStorage.getItem("Users");
-let objJson = JSON.parse(objLinea);
-return objJson.name
-
-},
-    affichierIdPlanDecission() {
-      const qtereel = this.plans_Decision.find(
-        qtreel => qtreel.code == "11",
-       
-      );
-
-      if (qtereel) {
-        return qtereel.id;
-      }
-      return 0
-    },
-
-// AffichierElementParent() {
-      
-//       return id => {
-//         if (id != null && id != "") {
-//           return this.plans_Decision.filter(element => element.parent == id);
-//         }
-//       };
-//     },
     afficherIdFoctionBudgetaire() {
       return id => {
         if (id != null && id != "") {
@@ -464,24 +398,12 @@ afficheDateFacture() {
         }
       };
     },
-       afficheLiquidationCf() {
+       afficheLiquidationEmetteur() {
       return id => {
         if (id != null && id != "") {
           return this.liquidation.filter(
-            element => element.marche_id == id  && this.afficherStatusSib(element.marche_id)==0
+            element => element.marche_id == id  
           );
-        }
-      };
-    },
-    afficherStatusSib() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.sib;
-      }
-      return 0
         }
       };
     },
@@ -627,42 +549,6 @@ afficheDateFacture() {
         }
       };
     },
-    AffichierElementParent() {
-      
-      // return id => {
-      //   if (id != null && id != "") {
-          return this.plans_Decision.filter(element => this.RecupererNiveau3StructureDecision(element.structure_motif_decission_id) == 3);
-      //   }
-      // };
-    },
-    RecupererNiveau3StructureDecision() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.structuresDecision.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.niveau;
-      }
-      return 0
-        }
-      };
-    },
-    // AffichierElementParent() {
-      
-    //   // return id => {
-    //   //   if (id != null && id != "") {
-    //       return this.plans_Decision.filter(element => element.code == 11 || element.code == 12 || element.code == 13 || element.code == 14 || element.code == 15 || element.code == 16 || element.code == 17 || element.code == 18 || element.code == 19 || element.code == 20);
-    //   //   }
-    //   // };
-    // },
-AffichierElementEnfant() {
-      
-      return id => {
-        if (id != null && id != "") {
-          return this.plans_Decision.filter(element => element.parent == id);
-        }
-      };
-    },
       },
  
       methods:{ 
@@ -720,11 +606,12 @@ AffichierElementEnfant() {
         mode_paiement_id:this.afficheIdModePaiement(this.editLiquidation.marche_id),
 fournisseur_id:this.afficheIdFournisseur(this.editLiquidation.marche_id),
 egagement_id:this.afficheIdEngagement(this.editLiquidation.marche_id),
-marchetype:this.editLiquidation.marchetype
+marchetype:this.editLiquidation.marchetype,
+	decision_emetteur:1
  
        };
  this.modifierLiquidation(nouvelObjet);
-this.$("#DECISIONcF").modal('hide');
+this.$("#exampleModalMotifLiquidationEmetteur").modal('hide');
 
           this.editLiquidation={
                   numero_bon_manuel:"",
@@ -749,8 +636,8 @@ numero_demande:"",
       
        
     },
-afficherModalObservationDCFLiquidation(id) {
-      this.$("#DECISIONcF").modal({
+afficherModalObservationEmetteurLiquidation(id) {
+      this.$("#exampleModalMotifLiquidationEmetteur").modal({
         backdrop: "static",
         keyboard: false
       });
@@ -776,8 +663,8 @@ formatageSomme:formatageSomme,
 
 }
 .tailgrand{
-  width: 50%;
-  margin: 0 -25%;
+  width: 77%;
+  margin: 0 -38%;
 }
 .tailAvenant{
   width: 75%;

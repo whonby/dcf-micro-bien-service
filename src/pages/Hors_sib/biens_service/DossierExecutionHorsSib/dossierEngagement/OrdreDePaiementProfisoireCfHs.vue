@@ -443,7 +443,7 @@ afficheTypeProcedure() {
       return id => {
         if (id != null && id != "") {
           return this.engagements.filter(
-            element => element.marche_id == id  &&  this.afficheTypeProcedure(element.facture_id) == 2 && this.afficherStatusSib(element.marche_id)==0
+            element => element.marche_id == id  &&  this.afficheTypeProcedure(element.facture_id) == 2 && this.afficherStatusSib(element.marche_id)==1
           );
         }
       };

@@ -1,9 +1,9 @@
 
+
 <template>
 
-<div >
-
-     <div id="DECISIONcF" class="modal hide tailgrand">
+<div>
+<div id="decisionServiceRealite" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Decision CF</h3>
@@ -15,7 +15,7 @@
               <div class="control-group">
                             <label class="control-label">Décision CF </label>
                             <div class="controls">
-                              <select v-model="editLiquidation.decision_controleur_financier" class="span">
+                              <select v-model="editServiceRealite.decision_controleur_financier" class="span">
                                 <option value=""></option>
                               <option value="1">Visé</option>
                               <option value="9">Visé avec Observation</option>
@@ -28,11 +28,11 @@
                             </div>
                           </div>
             </td>
-            <td>
+             <td>
                     <div class="control-group">
                             <label class="control-label">Motif CF </label>
                             <div class="controls">
-                               <select v-model="editLiquidation.motifcf" class="span">
+                               <select v-model="editServiceRealite.motifcf" class="span">
                                  <option value=""></option>
                                 <option v-for="varText in AffichierElementParent" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
@@ -42,43 +42,42 @@
                           </div>
                  </td>
           </tr>
-                
-                  <tr>
+               <tr>
                  <td>
                     <div class="control-group">
                             <label class="control-label">Libelle motif </label>
                             <div class="controls">
-                               <select v-model="editLiquidation.motif_controleur_f" class="span">
+                               <select v-model="editServiceRealite.motif_controleur" class="span">
                                  <option value=""></option>
-                                <option v-for="varText in AffichierElementEnfant(editLiquidation.motifcf)" :key="varText.id"
+                                <option v-for="varText in AffichierElementEnfant(editServiceRealite.motifcf)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
                             
                             </div>
                           </div>
                  </td>
-                 <td>
+                  <td>
                                <div class="control-group">
                             <label class="control-label">Date Decision CF :</label>
                             <div class="controls">
-                              <input type="date" class="span"  v-model="editLiquidation.date_controleur_financier"/>
+                              <input type="date" class="span"  v-model="editServiceRealite.date_controleur_financier"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
                               
                             </div>
                           </div>
                            </td>
-                 </tr>             
+                 </tr>            
                    <tr>
                      <td colspan="">
                         <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editLiquidation.observation_controleur_financier">
+                              <textarea  class="span" row = "6" v-model="editServiceRealite.observation_controleur_financier">
                               </textarea>
                             </div>
                           </div>
                        </td>
-                       <td colspan="">
+                        <td colspan="">
                         <div class="control-group">
                             <label class="control-label">Nom du CF</label>
                             <div class="controls">
@@ -87,14 +86,14 @@
                           </div>
                        </td>
                        </tr>      
-                        
+                         
                            
          
         </table>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="fonctionModifierLiquidation(editLiquidation)"
+          @click.prevent="FonctionDeModificationServiceRealite(editServiceRealite)"
           class="btn btn-primary"
           href="#"
          
@@ -102,60 +101,54 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div> 
-
+    
                      <table class="table table-bordered table-striped" v-if="macheid">
                                     <thead>
-                                    <tr>
+                                   <tr>
 
                                         <th>Année</th>
-                                          <th title="">N°bon manuel</th>
-                                <th title="">N°demande</th>
-                           
-                                <!-- <th title="">Adresse fournisseur</th> -->
-                               
-                                <th title="">Montant Autorisé</th>
-                                
-                                  <th title="">Disponible</th>
-                                  <!-- <th>Date paiement</th> -->
-                                  <th>Imputation</th>
-                                
+                                         <th title="">Section</th>
+                              
+                                 <th title="">Fournisseur</th>
+                                <th title="">N°facture</th>
+                                 <th>Date facture</th>
+                                  <!-- <th>Imputation</th> -->
+                                <th>Montant</th>
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th>Date validation Emmetteur</th>
-                                <th>Date validation CF</th>
-                                <th>Controleur financier</th>
-                               
+                                <th title="Date validation du service beneficiaire">Date validation S-B</th>
+                                <th title="Date validation du CF">Date validation CF</th>
+                                <th title="Observation Controleur financier">Observation CF</th>
                                 <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                      <tr
                     class="odd gradeX"
-                    v-for="liquida in afficheLiquidationCf(macheid)"
-                    :key="liquida.id"
+                    v-for="realiteService in afficheServiceRealiteFait(macheid)"
+                    :key="realiteService.id"
                   >
-       <td >{{liquida.exo_id || 'Non renseigné'}}</td>
-                    <td >{{liquida.numero_bon_manuel || 'Non renseigné'}}</td>
-                    <td >{{liquida.numero_demande || 'Non renseigné'}}</td>
-                    <td >{{formatageSomme(parseFloat(afficheMontantAutorise(liquida.marche_id))) || 0}}</td>
-                     <td >{{formatageSomme(parseFloat(sommeEgagementLigne(liquida.marche_id))) || 0 }}</td> 
+        <td >{{realiteService.exercice_budget || 'Non renseigné'}}</td>
+                    <td >{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
+                    <td >{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
+                    <td >{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
+                     <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
                      
-                     
-                    <td >{{liquida.imputation_budgetaire || 'Non renseigné'}}</td>
-                   
+                    <!-- <td >{{detail_marche.imputation  || 'Non renseigné'}}</td> -->
+                     <td >{{formatageSomme(parseFloat(realiteService.montant)) || 'Non renseigné'}}</td>
                      <!-- <td>
-                        <button v-if="liquida.decision_emetteur == 1"  class="btn  btn-success"  >                        
+                        <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success"  >                        
                      
                       <span    >Visé</span>
                       
                       </button>
-                       <button v-else-if="liquida.decision_emetteur == 2" class="btn  btn-warning"  >                        
+                       <button v-else-if="realiteService.decision_service_beneficiaire == 2" class="btn  btn-warning"  >                        
                      
                       
                        <span  >Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="liquida.decision_emetteur == 3" class="btn  btn-danger"  >                        
+                        <button v-else-if="realiteService.decision_service_beneficiaire == 3" class="btn  btn-danger"  >                        
                      
                       
                        <span  >Réjeté</span>
@@ -170,33 +163,29 @@
                     
                       </button>
                     </td> -->
-                     <td >{{(formaterDate(liquida.date_emetteur)) || 'Non renseigné'}}</td>
-                    <td >{{(formaterDate(liquida.date_controleur_financier)) || 'Non renseigné'}}</td>
-                     <td >
-                        <button v-if="liquida.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationDCFLiquidation(liquida.id)" >                        
+                     <td >{{(formaterDate(realiteService.date_service_beneficiaire)) || 'Non renseigné'}}</td>
+                      <td >{{(formaterDate(realiteService.date_controleur_financier)) || 'Non renseigné'}}</td>
+                    <td >
+                        <button v-if="realiteService.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancier(realiteService.id)" >                        
                      
-                    <span    >Visé</span>
+                      <span    >Visé</span>
                       
                       </button>
-                       <button v-else-if="liquida.decision_controleur_financier == 9"  class="btn  btn-success" @click="afficherModalObservationDCFLiquidation(liquida.id)" >                        
-                     
-                    <span    >Visé avec Observation</span>
-                      
-                      </button>
-                       <button v-else-if="liquida.decision_controleur_financier == 2" class="btn  btn-warning"  @click="afficherModalObservationDCFLiquidation(liquida.id)">                        
+                       <button v-else-if="realiteService.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancier(realiteService.id)" >                        
                      
                       
                        <span  >Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="liquida.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationDCFLiquidation(liquida.id)" >                        
+                        <button v-else-if="realiteService.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancier(realiteService.id)" >                        
                      
-                      <span  >Réjeté</span>
+                      
+                       <span  >Réjeté</span>
                       
                     
                       </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalObservationDCFLiquidation(liquida.id)" >                        
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancier(realiteService.id)" >                        
                      
                       
                        <span  >Attente</span>
@@ -206,13 +195,17 @@
                       
                     </td>
                     <td>
-                         <button class="btn btn-danger"  @click="supprimerLiquidation(liquida.id)">
+                        <router-link :to="{ name: 'detailRealiteServiceFait', params: {id_detailRealiteServiceFait:realiteService.id}}"
+                class="btn btn-default " title="Detail Realite service fait">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link> 
+                   
+                      <button  class="btn btn-danger" @click="supprimerRealiteServiceFait(realiteService.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
                       </button>
                     </td>
-                    
                                      </tr>
                
                  
@@ -231,7 +224,7 @@
 
 
 
-<notifications  />
+
     </div>
 </template>
 
@@ -249,8 +242,8 @@ export default {
           icon: "add"
         }
       ],
-   
-       editLiquidation: {},
+    
+       editServiceRealite: {},
 search:""
         }
     },
@@ -288,7 +281,7 @@ search:""
   ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections","plans_programmes"]),
     ...mapGetters("parametreGenerauxProgrammeUnite", ["unites"]),
-    ...mapGetters("personnelUA", ["fonctionBudgetaire","personnaFonction","all_acteur_depense","personnaliseActeurDepense","acteur_depenses","acte_personnels"]),
+    ...mapGetters("personnelUA", ["all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
     
    
   ...mapGetters("uniteadministrative", [
@@ -304,10 +297,9 @@ search:""
       // "sections"
        
     ]),
-     ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
+         ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
   'plans_Decision']),
-
-  afficheNomUtilisateur(){
+     afficheNomUtilisateur(){
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
 return objJson.name
@@ -333,62 +325,6 @@ return objJson.name
 //         }
 //       };
 //     },
-    afficherIdFoctionBudgetaire() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.acte_personnels.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.fonction_budgetaire_id;
-      }
-      return 'Non renseigné'
-        }
-      };
-    },
-     afficherLibelleFoctionBudgetaire() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.fonctionBudgetaire.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return 'Non renseigné'
-        }
-      };
-    },
-    afficherNomActeurDepense() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
-
-      if (qtereel) {
-        return qtereel.acteur_depense.matricule.concat('    ', qtereel.acteur_depense.nom,'     ',qtereel.acteur_depense.prenom);
-      }
-      return 'Non renseigné'
-        }
-      };
-    },
-      afficheIdActeurDepense() {
-      return id => {
-        if (id != null && id != "") {
-           return this.acte_personnels.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.fonction_budgetaire_id != null);
-
-        }
-      };
-    },
-    afficheNomActeurDepense() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.acte_personnels.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.fonction_budgetaire_id != null);
-
-      if (qtereel) {
-        return qtereel.acteur_depense_id;
-      }
-      return 0
-        }
-      };
-    },
     afficheMontantEngagementServiceRealiteEtLiquidation() {
       return id => {
         if (id != null && id != "") {
@@ -464,164 +400,22 @@ afficheDateFacture() {
         }
       };
     },
-       afficheLiquidationCf() {
+       afficheServiceRealiteFait() {
       return id => {
         if (id != null && id != "") {
-          return this.liquidation.filter(
-            element => element.marche_id == id  && this.afficherStatusSib(element.marche_id)==0
+          return this.realiteServiceFait.filter(
+            element => element.marche_id == id  && this.afficherStatusSib(element.marche_id)==1
           );
         }
       };
     },
-    afficherStatusSib() {
+       afficherStatusSib() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.sib;
-      }
-      return 0
-        }
-      };
-    },
-    sommeEgagementLigne: function () {
-                return id => {
-                    if (id != "") {
-                      let valInite=0;
-                        return  this.mandats.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
-                           return total + parseFloat(currentVal.total_general)
-                        },valInite);
-                    }
-                }
-            },
-   afficheMontantAutorise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.total_general;
-      }
-      return 0
-        }
-      };
-    },
-    afficheProgrammeId() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.programme_id;
-      }
-      return 0
-        }
-      };
-    },
-    afficheActionId() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.action_id;
-      }
-      return 0
-        }
-      };
-    },
-    afficheActiviteId() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.activite_id;
-      }
-      return 0
-        }
-      };
-    },
-    afficheUAId() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.ua_id;
-      }
-      return 0
-        }
-      };
-    },
-    afficheGrandNatureId() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.gdenature_id;
-      }
-      return 0
-        }
-      };
-    },
-    afficheImputationBudget() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.imputation;
-      }
-      return 0
-        }
-      };
-    },
- affichePlanEconomiqueId() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id );
-
-      if (qtereel) {
-        return qtereel.economique_id;
-      }
-      return 0
-        }
-      };
-    },
-    afficheIdModePaiement() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.mod_paiement_engage;
-      }
-      return 0
-        }
-      };
-    },
-    afficheIdFournisseur() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.fournisseur_id;
-      }
-      return 0
-        }
-      };
-    },
-    afficheIdEngagement() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.id;
       }
       return 0
         }
@@ -647,14 +441,14 @@ afficheDateFacture() {
         }
       };
     },
-    // AffichierElementParent() {
+  //  AffichierElementParent() {
       
-    //   // return id => {
-    //   //   if (id != null && id != "") {
-    //       return this.plans_Decision.filter(element => element.code == 11 || element.code == 12 || element.code == 13 || element.code == 14 || element.code == 15 || element.code == 16 || element.code == 17 || element.code == 18 || element.code == 19 || element.code == 20);
-    //   //   }
-    //   // };
-    // },
+  //     // return id => {
+  //     //   if (id != null && id != "") {
+  //         return this.plans_Decision.filter(element => element.code == 11 || element.code == 12 || element.code == 13 || element.code == 14 || element.code == 15 || element.code == 16 || element.code == 17 || element.code == 18 || element.code == 19 || element.code == 20);
+  //     //   }
+  //     // };
+  //   },
 AffichierElementEnfant() {
       
       return id => {
@@ -675,8 +469,7 @@ AffichierElementEnfant() {
       "ajouterService",
       "modifierService",
       "supprimerService",
-      "modifierLiquidation",
-                "supprimerLiquidation"
+     
       // "ajouterHistoriqueBudgetGeneral"
     ]),
 ...mapActions("SuiviImmobilisation", [
@@ -688,43 +481,39 @@ AffichierElementEnfant() {
       
      
     ]),
-
-
-             fonctionModifierLiquidation() {
+     ...mapActions("uniteadministrative", [              
+                "modifierMontantBudgetaire",
+                "ajouterRealiteServiceFait",
+                "modifierRealiteServiceFait",
+                "ajouterLiquidation",
+                "modifierLiquidation",
+                "supprimerLiquidation",
+                "supprimerRealiteServiceFait"
+            ]),
+   FonctionDeModificationServiceRealite() {
      
 
-//                   if (this.editLiquidation.numero_bon_manuel ==""){
-// alert("Veuillez saisir le numrero du Bon")
-//       }
-//       else if (this.editLiquidation.numero_demande =="")
-//       {
-//         alert("Veuillez saisir le numrero de la demande")
-//       }
-    
-//       else
-//       {
  var nouvelObjet = {
-      ...this.editLiquidation,
-      exo_id :this.editLiquidation.exo_id,
-       	imputation_budgetaire :this.afficheImputationBudget(this.editLiquidation.marche_id),
-        	section_id :this.editLiquidation.section_id,
-         programme_id :this.afficheProgrammeId(this.editLiquidation.marche_id),
-        
-         action_id :this.afficheActionId(this.editLiquidation.marche_id),
-         activite_id : this.afficheActiviteId(this.editLiquidation.marche_id),
-         ua_id: this.afficheUAId(this.editLiquidation.marche_id),
-         nature_depense_id:this.afficheGrandNatureId(this.editLiquidation.marche_id),
-       plan_budgetaire_id:this.affichePlanEconomiqueId(this.editLiquidation.marche_id),
-     
-        marche_id:this.editLiquidation.marche_id,
-        mode_paiement_id:this.afficheIdModePaiement(this.editLiquidation.marche_id),
-fournisseur_id:this.afficheIdFournisseur(this.editLiquidation.marche_id),
-egagement_id:this.afficheIdEngagement(this.editLiquidation.marche_id),
-marchetype:this.editLiquidation.marchetype
- 
+      ...this.editServiceRealite,
+     exercice_budget :this.editServiceRealite.exercice_budget,
+       
+         marche_id : this.editServiceRealite.marche_id,
+       
+      	
+        facture_id:this.editServiceRealite.facture_id,
+       
+ montant :this.editServiceRealite.montant,
+
+  ua_id:this.editServiceRealite.ua_id,
+  
+
+section_id:this.afficherSectId,
+// id:this.afficherIdRealiteServiceFait(this.editServiceRealite.marche_id),
+  engagement_id:this.editServiceRealite.id,
+  marchetype:this.editServiceRealite.marchetype
        };
- this.modifierLiquidation(nouvelObjet);
-this.$("#DECISIONcF").modal('hide');
+ this.modifierRealiteServiceFait(nouvelObjet);
+this.$("#decisionServiceRealite").modal('hide');
 
           this.editLiquidation={
                   numero_bon_manuel:"",
@@ -749,16 +538,55 @@ numero_demande:"",
       
        
     },
-afficherModalObservationDCFLiquidation(id) {
-      this.$("#DECISIONcF").modal({
+afficherModalObservationControlleurFinancier(id) {
+      this.$("#decisionServiceRealite").modal({
         backdrop: "static",
         keyboard: false
       });
 
-       this.editLiquidation = this.liquidation.find(item=>item.id==id);
+       this.editServiceRealite = this.realiteServiceFait.find(item=>item.id==id);
     },
 
-  
+     afficherModalAjouterTitre() {
+      this.$("#exampleModalAvenant").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+    },
+       ajouterTypeTexteLocal() {
+      var nouvelObjet = {
+      ...this.formData,
+      marche_id :this.macheid,
+   
+       };
+      this.ajouterAvenant(nouvelObjet);
+this.$("#exampleModalAvenant").modal('hide');
+     
+    },
+afficherModalModifierTypeTexte(index) {
+
+      this.$("#modificationModalAvenant").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+     
+      this.editAvenant = this.afficheMarcheAvenant(this.macheid)[index];
+    },
+    modifierTypeTexteLocal() {
+      var nouvelObjet = {
+      ...this.editAvenant,
+      marche_id :this.macheid,
+   
+       };
+      this.modifierAvenant(nouvelObjet);
+this.$("#modificationModalAvenant").modal('hide');
+      // this.editTypeTexte = {
+      //   code: "",
+      //   libelle: ""
+      // };
+       
+    },
 formatageSomme:formatageSomme,
 
  formaterDate(date) {

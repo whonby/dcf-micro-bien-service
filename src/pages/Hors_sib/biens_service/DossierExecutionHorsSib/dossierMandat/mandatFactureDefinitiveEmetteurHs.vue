@@ -1,94 +1,60 @@
 
-
 <template>
 
 <div>
-<div id="validaDecisionCF" class="modal hide tailgrand">
+  <div id="exampleModalMotifMandatEmetteur" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Decision CF</h3>
+        <h3>ObServation Emetteur</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
-          <tr>
-            <td>
-              <div class="control-group">
-                            <label class="control-label">Décision CF </label>
-                            <div class="controls">
-                              <select v-model="editMandat.decision_cf" class="span">
-                                <option value=""></option>
-                              <option value="8">Visé</option>
-                              <option value="9">Visé avec Observation</option>
-                             <option value="2">Différé</option>
-                             <option value="3">Réjeté</option>
-                            <option value="0">Attente</option>
-    
-    </select>
-                           
-                            </div>
-                          </div>
-            </td>
-              <td>
+         
+               <tr>
+                 <td colspan="2">
                     <div class="control-group">
-                            <label class="control-label">Motif CF </label>
+                            <label class="control-label">Observation Emetteur</label>
                             <div class="controls">
-                               <select v-model="editMandat.motifcf" class="span">
-                                 <option value=""></option>
-                                <option v-for="varText in AffichierElementParent" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
-                            </select>
-                            
+                              <textarea  class="span" row = "6" v-model="editMandat.observation_emetteur">
+                              </textarea>
                             </div>
                           </div>
                  </td>
-          </tr>
-               <tr>
+                 </tr>            
+                   <tr>
+                     <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Date Decision Emetteur :</label>
+                            <div class="controls">
+                              <input type="date" class="span"  v-model="editMandat.date_decision_emetteur"/>
+                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                            </div>
+                          </div>
+                       </td></tr>      
+                       
+                                <tr>
                  <td>
                     <div class="control-group">
-                            <label class="control-label">Libelle motif </label>
+                            <label class="control-label">Nom et prenoms </label>
                             <div class="controls">
-                               <select v-model="editMandat.motif" class="span">
-                                 <option value=""></option>
-                                <option v-for="varText in AffichierElementEnfant(editMandat.motifcf)" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
-                            </select>
-                            
+                              <select v-model="editMandat.nom_emetteur" class="span">
+                                <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.editMandat.marche_id))"  :key="acteur.id"
+                        :value="acteur.id">{{afficherNomActeurDepense(acteur.acteur_depense_id)}}</option>
+                               </select>
+                           
                             </div>
                           </div>
                  </td>
                   <td>
-                               <div class="control-group">
-                            <label class="control-label">Date Decision CF :</label>
+                                  <div class="control-group">
+                            <label class="control-label">Fonction</label>
                             <div class="controls">
-                              <input type="date" class="span"  v-model="editMandat.date_motif"/>
-                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
-                              
+                              <input type="text" class="span" readonly :value=" afficherLibelleFoctionBudgetaire(afficherIdFoctionBudgetaire(editMandat.nom_emetteur))"/>
+                             
                             </div>
                           </div>
                            </td>
-                 </tr>             
-                   <tr>
-                     <td>
-                        <div class="control-group">
-                            <label class="control-label">Observation CF</label>
-                            <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editMandat.observation">
-                              </textarea>
-                            </div>
-                          </div>
-                       </td>
-                        <td colspan="">
-                        <div class="control-group">
-                            <label class="control-label">Nom du CF</label>
-                            <div class="controls">
-                              <input type="text" class="span"  :value="afficheNomUtilisateur" readonly/>
-                            </div>
-                          </div>
-                       </td>
-                       
-                       </tr>      
-                        
-                           
+                 </tr>  
          
         </table>
       </div>
@@ -102,64 +68,73 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div> 
+                
+                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <!-- <div class="span4" align="right">
+                                   
+                                      <button class="btn btn-success" @click="afficherModalProcedureFacture" >Ajouter Facture</button>
 
-                     <table class="table table-bordered table-striped" v-if="macheid">
+                              </div> -->
+                 
+                      <table class="table table-bordered table-striped" v-if="macheid">
+              
                                     <thead>
-                                   <tr>
-                                        <th>N° du marche</th>
+                                    <tr>
+
+                                         
+                      <th>N° du marche</th>
                                          <th>N° du mandat</th>
                                         <th>N° bordereau mandat</th>
                                         <th>N° demande engagement</th>
                                           <th>N° engagement</th>
-                                       
-                                   
+                                        <!-- <th>Type procedure</th> -->
+                                                    
                                 <th>Montant Mandat</th>
                                  <!-- <th >Emetteur</th> -->
                                 <th title="Date validation Emetteur">Date Emetteur</th>
-                                <th title="Date validation Cf">Date validation CF</th>
-                                <th>Décision CF</th>
-                                
-
-                                <th>Action</th>
+                                <th colspan="2">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                     <tr
+                                            
+                 <tr
                     class="odd gradeX"
-                    v-for="Manda in afficheFactureDefinitiveCf(macheid)"
-                    :key="Manda.id"
+                    v-for="factu in afficheFactureDefinitiveEmetteur(macheid)"
+                    :key="factu.id"
                   >
-        <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficheNumeroMarche(Manda.marche_id) || 'Non renseigné'}}</td>
-                   <td @dblclick="afficheModalModificationMandat(Manda.id)">{{Manda.numero_mandat || 'Non renseigné'}}</td>
-                  <td @dblclick="afficheModalModificationMandat(Manda.id)">{{Manda.numero_bordereau || 'Non renseigné'}}</td>
-                    <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroDemandeEngagemnt(Manda.engagement_id) || 'pas numero demande'}}</td>
-                     <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroEngagemnt(Manda.engagement_id) || 'pas numero engage'}}</td>
-                     
-            <!-- <td >{{uaMandat(Manda.ua_id) || 'Non renseigné'}}</td>
+                   
+                                     <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficheNumeroMarche(factu.marche_id) || 'Non renseigné'}}</td>
+                   <td @dblclick="afficheModalModificationMandat(Manda.id)">{{factu.numero_mandat || 'Non renseigné'}}</td>
+                   <td @dblclick="afficheModalModificationMandat(Manda.id)">{{factu.numero_bordereau || 'Non renseigné'}}</td>
+                    <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroDemandeEngagemnt(factu.engagement_id)|| 'pas numero demande'}}</td>
+                     <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroEngagemnt(factu.engagement_id) || 'pas numero engage'}}</td>
+                     <!-- <td>{{factu.type_procedure_id || 'Non renseigné'}}</td> -->
+            <!-- <td>{{uafactut(factu.ua_id) || 'Non renseigné'}}</td>
                                     -->
-                    <td @dblclick="afficheModalModificationMandat(Manda.id)">{{formatageSomme(parseFloat(Manda.total_general))|| 'Non renseigné'}}</td>
+                    <td @dblclick="afficheModalModificationMandat(Manda.id)">{{formatageSomme(parseFloat(factu.total_general))|| 'Non renseigné'}}</td>
                     
                     <!-- <td>
-                        <button v-if="Manda.decision_emetteur == 1"  class="btn  btn-success"  >                        
+                        <button v-if="factu.decision_emetteur == 1"  class="btn  btn-success" @click="afficheDecisionEmetteur(factu.id)" >                        
                      
                       <span    >Visé</span>
                       
                       </button>
-                       <button v-else-if="Manda.decision_emetteur == 2" class="btn  btn-warning"  >                        
+                       <button v-else-if="factu.decision_emetteur == 2" class="btn  btn-warning" @click="afficheDecisionEmetteur(factu.id)" >                        
                      
                       
                        <span  >Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="Manda.decision_emetteur == 3" class="btn  btn-danger"  >                        
+                        <button v-else-if="factu.decision_emetteur == 3" class="btn  btn-danger" @click="afficheDecisionEmetteur(factu.id)" >                        
                      
                       
                        <span  >Réjeté</span>
                       
                     
                       </button>
-                     <button v-else class="btn  btn-info"  >                        
+                     <button v-else class="btn  btn-info"  @click="afficheDecisionEmetteur(factu.id)">                        
                      
                       
                        <span  >Attente</span>
@@ -168,59 +143,34 @@
                       </button>
                     </td> -->
                     
-                    <td >{{formaterDate(Manda.date_decision_emetteur) || 'Non renseigné'}}</td>
-                        <td >{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
-              <td >
-                        <button v-if="Manda.decision_cf == 8"  class="btn  btn-success" @click="afficheDecisionCf(Manda.id)" >                        
+                    <td>{{formaterDate(factu.date_decision_emetteur) || 'Non renseigné'}}</td>
+                   
                      
-                      <span    >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="Manda.decision_cf == 2" class="btn  btn-warning" @click="afficheDecisionCf(Manda.id)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="Manda.decision_cf == 3" class="btn  btn-danger" @click="afficheDecisionCf(Manda.id)" >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                       <button v-else-if="Manda.decision_cf == 9"  class="btn  btn-success" @click="afficheDecisionCf(Manda.id)" >                        
-                     
-                      <span>Visé avec observation</span>
-                      
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficheDecisionCf(Manda.id)" >                        
-                     
-                      
-                       <span>Attente</span>
-                      
-                    
-                      </button>
-                    </td>
-                     
-                  
                        <td>
-                       
-                       <router-link :to="{ name: 'DetailMandat', params: {id_detail_mandat:Manda.id}}"
+                       <button v-if="factu.decision_emetteur == 0" class="btn  btn-danger" @click="afficheDecisionEmetteur(factu.id)">
+                        <span>
+                          <i class="icon icon-ok"></i>
+                        </span>
+                      </button>
+                       <button v-else class="btn  btn-success" @click="afficheDecisionEmetteur(factu.id)">
+                        <span>
+                          <i class="icon icon-ok"></i>
+                        </span>
+                      </button>
+                       <router-link :to="{ name: 'DetailMandat', params: {id_detail_mandat:factu.id}}"
                 class="btn btn-default " title="Detail Mandat">
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
-                      <button class="btn btn-danger" @click="supprimerMandat(Manda.id)">
+                      <button class="btn btn-danger" @click="supprimerMandat(factu.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
                       </button>
                     </td>
-                                     </tr>
-               
-                 
+                   
+                  </tr>
                                     </tbody>
+                                
                                 </table>
 
               
@@ -234,8 +184,6 @@
 
 
 
-
-<notifications  />
     </div>
 </template>
 
@@ -244,34 +192,26 @@ import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from './../../../../../Repositories/Repository';
 import moment from 'moment';
 export default {
-   
+  
     data(){
         return{
-           fabActions: [
-        {
-          name: "cache",
-          icon: "add"
-        }
-      ],
-      
-       editMandat: {
-         decision_cf:"",
-         motif:"",
-         observation:"",
-         date_motif:""
+         editMandat: {
+        
+         observation_emetteur:"",
+         date_decision_emetteur:"",
+         nom_emetteur:""
 
 
        },
-search:""
         }
     },
     props:["macheid"],
-    // created(){
+    //  created(){
     //   this.editMandat=this.mandats.find(item=>item.marche_id==this.$route.params.id)
     // },
 
               computed: {
-            ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+            ...mapGetters("bienService", ['decomptes','modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -301,9 +241,9 @@ search:""
   ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections","plans_programmes"]),
     ...mapGetters("parametreGenerauxProgrammeUnite", ["unites"]),
-    ...mapGetters("personnelUA", ["all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
-     ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
-  'plans_Decision']),
+    
+     ...mapGetters("personnelUA", ["fonctionBudgetaire","personnaFonction","all_acteur_depense","personnaliseActeurDepense","acteur_depenses","acte_personnels"]),
+    
    
   ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
@@ -318,105 +258,76 @@ search:""
       // "sections"
        
     ]),
-     afficheNomUtilisateur(){
-  let objLinea = localStorage.getItem("Users");
-let objJson = JSON.parse(objLinea);
-return objJson.name
-
-},
-      afficherMontantTTCfacture() {
+    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+    afficheUAId() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
 
       if (qtereel) {
-        return qtereel.prix_propose_ttc;
-      }
-      return ""
-        }
-      };
-    },
-    afficherNumerofacture() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.numero_facture;
-      }
-      return ""
-        }
-      };
-    },
-afficheIdActivite() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.activite_id;
+        return qtereel.ua_id;
       }
       return 0
         }
       };
     },
-affichierIdPlanDecission() {
-      const qtereel = this.plans_Decision.find(
-        qtreel => qtreel.code == "11",
-       
-      );
-
-      if (qtereel) {
-        return qtereel.id;
-      }
-      return 0
-    },
-    AffichierElementParent() {
-      
-      // return id => {
-      //   if (id != null && id != "") {
-          return this.plans_Decision.filter(element => this.RecupererNiveau3StructureDecision(element.structure_motif_decission_id) == 3);
-      //   }
-      // };
-    },
-    RecupererNiveau3StructureDecision() {
+    afficherNomActeurDepense() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.structuresDecision.find(qtreel => qtreel.id == id);
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
 
       if (qtereel) {
-        return qtereel.niveau;
+        return qtereel.acteur_depense.matricule.concat('    ', qtereel.acteur_depense.nom,'     ',qtereel.acteur_depense.prenom);
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+      afficheIdActeurDepense() {
+      return id => {
+        if (id != null && id != "") {
+           return this.acte_personnels.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.fonction_budgetaire_id != null);
+
+        }
+      };
+    },
+      afficheNomActeurDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acte_personnels.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.fonction_budgetaire_id != null);
+
+      if (qtereel) {
+        return qtereel.acteur_depense_id;
       }
       return 0
         }
       };
     },
-  //  AffichierElementParent() {
-      
-  //     // return id => {
-  //     //   if (id != null && id != "") {
-  //         return this.plans_Decision.filter(element => element.code == 11 || element.code == 12 || element.code == 13 || element.code == 14 || element.code == 15 || element.code == 16 || element.code == 17 || element.code == 18 || element.code == 19 || element.code == 20);
-  //     //   }
-  //     // };
-  //   },
-AffichierElementEnfant() {
-      
+    afficherIdFoctionBudgetaire() {
       return id => {
         if (id != null && id != "") {
-          return this.plans_Decision.filter(element => element.parent == id);
+           const qtereel = this.acte_personnels.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.fonction_budgetaire_id;
+      }
+      return 'Non renseigné'
         }
       };
     },
-// AffichierElementParent() {
-      
-//       return id => {
-//         if (id != null && id != "") {
-//           return this.plans_Decision.filter(element => element.parent == id);
-//         }
-//       };
-//     },
+     afficherLibelleFoctionBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.fonctionBudgetaire.find(qtreel => qtreel.id == id);
 
-afficheNumeroMarche() {
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+    afficheNumeroMarche() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.getterActeEffetFinanciers.find(qtreel => qtreel.marche_id == id);
@@ -428,45 +339,17 @@ afficheNumeroMarche() {
         }
       };
     },
-
-
-
-  
-afficherTypeFacture() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.typfacture_id;
-      }
-      return 0
-        }
-      };
-    },
- 
-       afficheFactureDefinitiveCf() {
+   
+     afficheFactureDefinitiveEmetteur() {
       return id => {
         if (id != null && id != "") {
           return this.getMandatPersonnaliser.filter(
-            element => element.marche_id == id  && this.afficherStatusSib(element.marche_id)==0
+            element => element.marche_id == id  
           );
         }
       };
     },
-    afficherStatusSib() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.sib;
-      }
-      return 0
-        }
-      };
-    },
-    afficherNumeroDemandeEngagemnt() {
+afficherNumeroDemandeEngagemnt() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.engagements.find(qtreel => qtreel.id == id);
@@ -490,6 +373,71 @@ afficherNumeroEngagemnt() {
         }
       };
     },
+
+afficherTypeFacture() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.typfacture_id;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheIdActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.activite_id;
+      }
+      return 0
+        }
+      };
+    },
+affichierIdPlanDecission() {
+      const qtereel = this.plans_Decision.find(
+        qtreel => qtreel.code == "11",
+       
+      );
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+
+AffichierElementParent() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
+
+
+
+
+
+    
+
+ 
+       afficheFactureDefinitiveCf() {
+      return id => {
+        if (id != null && id != "") {
+          return this.getMandatPersonnaliser.filter(
+            element => element.marche_id == id  &&  this.afficherTypeFacture(element.facture_id) == 1
+          );
+        }
+      };
+    },
+   
+
     afficherMontantFacture() {
       return id => {
         if (id != null && id != "") {
@@ -663,64 +611,24 @@ afficherIdSection() {
       return parseFloat(val).toFixed(2);
       
     },
-    anneeAmort() {
-      
-      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
 
-      if (norme) {
-        return norme.annee;
-      }
-      return 0
-    },
-
-     afficherProgDot() {
-    
-       const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.ua_id == this.afficheUa_id(this.afficherIdMarche(this.editMandat.facture_id)));
-
-      if (norme) {
-       
-       return norme.afficheProgramme.code.concat('  ', norme.afficheProgramme.libelle)
-      }
-      return ""
-    },
-    afficherProgDotId() {
-    
-       const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.ua_id == this.afficheUa_id(this.afficherIdMarche(this.editMandat.facture_id)));
-
-      if (norme) {
-       return norme.afficheProgramme.id;
-      }
-      return ""
-    },
-    afficheUa_id() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.unite_administrative_id;
-      }
-      return 0
-        }
-      };
-    },
       },
  
       methods:{ 
 
-          ...mapActions('bienService',[  "ajouterAvenant",
+         ...mapActions('bienService',[  "ajouterAvenant",
       "modifierAvenant",
       "supprimerAvenant",
       "supprimerMandat",
-      "ajouterChoixProcedure",
       "modifierMandat",
+      "ajouterChoixProcedure",
       "modifierMarche","getMarche","getActeEffetFinancier"]),
  ...mapActions("uniteadministrative", [
      "getAllServiceua",
       "ajouterService",
       "modifierService",
       "supprimerService",
-     
+      "ajouterChoixProcedure",
       // "ajouterHistoriqueBudgetGeneral"
     ]),
 ...mapActions("SuiviImmobilisation", [
@@ -732,24 +640,20 @@ afficherIdSection() {
       
      
     ]),
-
-
-       afficheModalModificationMandat(id) {
+      afficheModalModificationMandat(id) {
       this.$router.push({
         path: "/Modifier_Mandat/" + id
       });
     },
-
-afficheDecisionCf(id) {
-      this.$("#validaDecisionCF").modal({
+    afficheDecisionEmetteur(id) {
+      this.$("#exampleModalMotifMandatEmetteur").modal({
         backdrop: "static",
         keyboard: false
       });
 
        this.editMandat = this.mandats.find(item=>item.id==id);
     },
-         
-modifierModalMandatDecisionCF(){
+  modifierModalMandatDecisionCF(){
     
      
    if (this.afficherMontantFacture(this.editMandat.facture_id) > this.montantGeneralMandatModifier)
@@ -764,9 +668,18 @@ modifierModalMandatDecisionCF(){
   
        else if (parseFloat(this.montantMarcheAvecAvenant) == parseFloat(this.sommeEgagementLigneTableau(this.macheid)))
       {
-        
-
-      var nouvelObjet = {
+        let marcheObjet=this.marches.find(marche=>marche.id == this.macheid)
+    marcheObjet.attribue = 5
+      //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
+     this.modifierMarche(marcheObjet)
+      this.getMarche()
+      this.getActeEffetFinancier()
+      
+      }
+    
+      else
+      {
+ var nouvelObjet = {
       ...this.editMandat,
        exercice_budget :this.anneeAmort,
     
@@ -789,19 +702,14 @@ section_id:this.afficherIdSection(this.afficherIdUa(this.afficherIdMarche(this.e
   total_general:this.montantGeneralMandatModifier,
    	entreprise_id:this.editMandat.fournisseur_id,
     	
- marchetype:this.afficheMarcheType
+ marchetype:this.afficheMarcheType,
+ decision_emetteur:1
 
        };
-       let marcheObjet=this.marches.find(marche=>marche.id == this.macheid)
-    marcheObjet.attribue = 5
-      //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
-     this.modifierMarche(marcheObjet)
-      this.getMarche()
-      this.getActeEffetFinancier()
   this.modifierMandat(nouvelObjet)
       // this.$('#ModifierModalMandat').modal('hide');
-      this.$('#validaDecisionCF').modal('hide');
       this.$('#exampleModalMotifMandatEmetteur').modal('hide');
+     
       
 this.formData= {
 
@@ -856,18 +764,11 @@ val:0,
 };
 
       }
-      else
-      {
- return 
-      }
     
     
   //  }
       
     },
-
-
-
 formatageSomme:formatageSomme,
 
  formaterDate(date) {
@@ -885,11 +786,20 @@ formatageSomme:formatageSomme,
 
 }
 .tailgrand{
-  width: 50%;
-  margin: 0 -25%;
+  width: 77%;
+  margin: 0 -38%;
 }
-.tailAvenant{
-  width: 75%;
-   margin: 0 -40%;
-}
+.taillemodal45 {
+        width: 1500px;
+        margin: 0 -750px;
+      
+    }
+       .taillemodal6 {
+        width: 1600px;
+        margin: 0 -780px;
+    }
+    .taillemodal61 {
+        width: 1500px;
+        
+    }
 </style>

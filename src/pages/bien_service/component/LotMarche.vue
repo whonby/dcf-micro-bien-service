@@ -247,7 +247,7 @@ name: "LotMarche",
   //console.log(this.lot)
   },
   computed:{
-    ...mapGetters('bienService',['personnaliseGetterMarcheBailleur',"getMarchePersonnaliser"]),
+    ...mapGetters('bienService',['personnaliseGetterMarcheBailleur',"getMarchePersonnaliser","marches"]),
     getLotMarche(){
       return this.getMarchePersonnaliser.filter(item=>item.parent_id==this.macheid);
     },
@@ -267,6 +267,27 @@ name: "LotMarche",
        return parseFloat(montant);
      }
 
+    },
+    afficherStatusSib() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.sib;
+      }
+      return 
+        }
+      };
+    },
+    AjouteMarcheSiBetHorsSib(){
+      if(this.afficherStatusSib(this.macheid)==0)
+      {
+        return 0
+      }
+      else{
+        return 1
+      }
     }
   },
   methods:{
@@ -319,6 +340,7 @@ name: "LotMarche",
             libelle_procedure:this.detail_marche.libelle_procedure,
             parent_id:this.detail_marche.id,
             numero_lot:nbrlot,
+            sib:this.AjouteMarcheSiBetHorsSib
       }
     //  console.log(this.formData)
       this.ajouterSousMarcheLot(this.formData)
