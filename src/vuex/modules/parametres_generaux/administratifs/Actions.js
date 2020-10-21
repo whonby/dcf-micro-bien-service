@@ -6,6 +6,7 @@ var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
 
+
 export  function  getGestionModules({commit}) {
     queue.push(() =>  axios.get('/gestionModule').then((response) => {
       commit('GET_GESTION_MODULE', response.data)
@@ -1373,7 +1374,7 @@ export function supprimerInfrastructure({commit}, id){
 
 // modifier titre
 export function modifierInfrastructure({commit}, objet){
-    asyncLoading( axios.put('/infrastructure', objet)).then(response => {
+    asyncLoading( axios.put('/infrastructure/' + objet.id,objet)).then(response => {
         commit('MODIFIER_INFRASTUCTURE', response.data)
         this.$app.$notify({
             title: 'success ',

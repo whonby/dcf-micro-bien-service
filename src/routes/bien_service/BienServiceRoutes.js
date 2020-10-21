@@ -83,7 +83,13 @@ import listeDesMarcheEnExecutionBS from '../../pages/bien_service/listeDesMarche
 import listeDesMarcheResilieBS from '../../pages/bien_service/listeDesMarcheTableauBord/listeDesMarcheResilieBS.vue';
 import listeDesMarcheSuspenduBS from '../../pages/bien_service/listeDesMarcheTableauBord/listeDesMarcheSuspenduBS.vue';
 import listeDesMarcheTermineBS from '../../pages/bien_service/listeDesMarcheTableauBord/listeDesMarcheTermineBS.vue';
+import imageMarche from "../../pages/bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche.vue"
 const BienServiceRoutes = [
+    {
+        path:"/image-marche",
+        name:"image_marche",
+        component:imageMarche
+    },
     {
         path: "/AjouteFacture",
         name: "AjouteFacture",
