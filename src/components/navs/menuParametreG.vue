@@ -480,7 +480,12 @@
              Rôle membre Cojo
             </router-link>
           </li>
-           
+           <li>
+            <router-link :to="{name: 'Infrastructures'}" tag="a">
+              <i class="icon-bar-chart"></i>
+             Infrastructures
+            </router-link>
+          </li>
         </ul>
       </li>
       <li class="dropdown" id="personnelPara">

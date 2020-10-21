@@ -1,4 +1,5 @@
 // import { groupBy } from "../../../../Repositories/Repository";
+
 const titres = state => state.titres.sort((a, b) => (a.code > b.code) ? 1 : -1)
 export const gestionModules = state => state.gestionModules
 const exercices_budgetaires = state => state.exercices_budgetaires.sort((a,b)=>(a.annee>b.annee)? 1:-1)
@@ -17,7 +18,7 @@ const localisations_geographiques = state => state.localisations_geographiques.s
 const type_Unite_admins = state => state.type_Unite_admins
 
 export const getterLocalisationGeoAll = state => state.localisation_geographique_all
-export const getterInfrastrucure = state => state.infrastructure
+export const getterInfrastrucure = state => state.infrastructure.sort((a,b)=>(a.code>b.code)? 1:-1)
 // const organigrammeUa = state => state.organigrammeUa
 export const getterformeJuridique = state => state.formejuridiques
 export const getterregimeImpositions = state => state.regimeImpositions
