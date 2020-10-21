@@ -234,7 +234,7 @@
         <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
     </div>
     <!-- end modifier cojo -->
-
+<notifications/>
   </div>
 
 </template>

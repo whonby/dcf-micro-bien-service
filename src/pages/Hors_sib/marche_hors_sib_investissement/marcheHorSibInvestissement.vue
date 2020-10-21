@@ -824,6 +824,24 @@ InfastructureCodeNiveau1() {
  return this.gettersMarcheHorsib.filter(element =>element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==1).length
       
     },
+    NombrePlanifInfastructureNiveau1() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element =>element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==1).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element =>element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==1).length
+      
+    },
 
 NombrePlanifInfastructureNiveau2() {
       

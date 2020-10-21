@@ -377,7 +377,7 @@ typeProcedureLibelle() {
       
        type_appel: this.typeProcedure_id(this.procedurePassation_id(this.macheid)),
           marche_id: this.macheid,
-          objet_appel:this.affichierObjetMarche(this.marche_id)
+          objet_appel:this.affichierObjetMarche(this.macheid)
          };
         //  this.formData.marche_id=this.macheid
     //this.formEffetFinancier.entreprise_id=entreprisePremier.id

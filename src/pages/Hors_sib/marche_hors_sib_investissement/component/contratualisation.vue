@@ -113,7 +113,7 @@
                      
                       
                       <td  style="text-align: center;color:red;font-weight:bold;">
-                           {{formatageSomme(parseFloat(0))}}
+                           {{formatageSomme(parseFloat(montantMarche))}}
                            
                       </td>
                        <td>

@@ -94,9 +94,9 @@ decision_cf
                         <li>
                         <a data-toggle="tab" href="#tab22">PARAMETRAGE ECHEANCIER</a>
                       </li>
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
-                      </li> --> 
+                      <li>
+                        <a data-toggle="tab" href="#tab03">IMAGES DES MARCHES</a>
+                      </li> 
                      
                     </ul>
                   </div>
@@ -324,6 +324,10 @@ decision_cf
                       <div id="tab22" class="tab-pane ">
                           <echeance-marche :marche="detail_marche"></echeance-marche>
                       </div>
+
+                       <div id="tab03" class="tab-pane ">
+                         <imageMarche :marche="detail_marche"></imageMarche>
+                      </div>
       </div>
        </div>
       
@@ -389,6 +393,7 @@ import decompte from "../../../../bien_service/contractualisation/DossierExecuti
                   import financement from "../../../../bien_service/contractualisation/DossierExecution/dossierFinancement/financement";
                    import tableauBordExecution from "../../../../bien_service/contractualisation/DossierExecution/tableauBordExecution/tableauBordExecution";
   import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
+  import imageMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche";
 
 
 
@@ -415,7 +420,7 @@ import decompteHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsS
             avenant,
             facture,
             decompte,
-            // mandatFactureProformaEmetteur,
+             imageMarche,
             // mandatFactureProformaCf,
             mandatFactureDefinitiveEmetteur,
             mandatFactureDefinitiveCf,
