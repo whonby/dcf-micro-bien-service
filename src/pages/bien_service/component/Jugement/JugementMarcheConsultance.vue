@@ -6,7 +6,7 @@
 
     <!-- debut de liste analyse  -->
     <h4>Liste des dossiers analyses</h4>
-    <table class="table table-bordered table-striped" v-if="macheid">
+    <table class="table table-bordered table-striped" >
       <thead>
       <tr>
         <th>Ref offre</th>
@@ -21,7 +21,7 @@
         <th>Action</th>
       </tr>
       </thead>
-      <tbody>
+      <tbody v-if="macheid">
       <tr class="odd gradeX" v-for="(appelOffre, index) in listeAnalyseDossier(macheid)"
           :key="appelOffre.id">
 

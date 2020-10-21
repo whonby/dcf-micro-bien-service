@@ -25,11 +25,11 @@ Type de Recrutement
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab10">Liste du personnel     <span class="badge badge-inverse">{{nombreActeurActivite}}</span></a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab10">Liste du personnel </a></li>
                                  <li class=""><a data-toggle="tab" href="#AjouterPersonnelAvecContrat">Ajouter Personnel Avec Contrat </a></li>
                                  <li class=""><a data-toggle="tab" href="#AjouterPersonnelSansContrat">Ajouter Personnel Sans Contrat </a></li>
                                  <!-- <li class=""><a data-toggle="tab" href="#tab78">Contrat de Recrutement Direct </a></li> -->
-                                <li class=""><a data-toggle="tab" href="#tab19">Liste des acteurs de dépenses   <span class="badge badge-success">{{NombrePersonnelRecuActeNorm}}</span></a> </li>
+                                <li class=""><a data-toggle="tab" href="#tab19">Liste des acteurs de dépenses   </a> </li>
                                 <li class=""><a data-toggle="tab" href="#tab30">Acteurs non actifs</a></li>
                                   <!-- <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{0}}</span></a></li>
                                    <li><a data-toggle="tab" href="#tab301">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li>  -->
@@ -1097,10 +1097,10 @@ afficheActeNorminationPerso() {
                 }
                 
             })
-            return colect.filter(items=>items.fonction_budgetaire_id != null);
+            return colect.filter(items=>items.fonction_budgetaire_id != null && items.sib==0);
         }
 
-       return this.acte_personnels.filter(items=>items.fonction_budgetaire_id != null);
+       return this.acte_personnels.filter(items=>items.fonction_budgetaire_id != null && items.sib==0);
 
     },
         //  listeActeEffectFinnancier: function () {
@@ -1333,7 +1333,7 @@ AffichierElementParent() {
                         || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
                         || items.prenom.toLowerCase().includes(searchTerm)
                         || items.nom.toLowerCase().includes(searchTerm)
-                );
+                ) && items.sib==0;
             });
             
         }
@@ -1344,7 +1344,7 @@ AffichierElementParent() {
                         || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
                         || items.prenom.toLowerCase().includes(searchTerm)
                         || items.nom.toLowerCase().includes(searchTerm)
-            );
+            ) && items.sib==0;
         });
 
     },
@@ -1418,7 +1418,7 @@ acteurNonActivite() {
                             || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
                             || items.prenom.toLowerCase().includes(searchTerm)
                             || items.nom.toLowerCase().includes(searchTerm)
-                );
+                ) && items.sib==0;
             });
         }
 
@@ -1428,7 +1428,7 @@ acteurNonActivite() {
                             || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
                             || items.prenom.toLowerCase().includes(searchTerm)
                             || items.nom.toLowerCase().includes(searchTerm)
-            );
+            ) && items.sib==0;
         });
 
     },

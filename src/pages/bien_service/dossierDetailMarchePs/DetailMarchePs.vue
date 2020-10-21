@@ -174,7 +174,7 @@
                                 <li class=""><a data-toggle="tab" href="#tab478">Reception</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab498">Ouverture</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab41180">PV d'ouverture</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab78932">Jugement</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab78932">Analyse et Jugement</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab4110">PV Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab178">Attribution</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0142">Bailleur</a></li>
@@ -285,7 +285,7 @@
                                 <li class=""><a data-toggle="tab" href="#tab78477">Ouverture</a></li>
                                   <li class=""><a data-toggle="tab" href="#tab1041">PV d'ouverture</a></li>
                                 <!--<li class=""><a data-toggle="tab" href="#tab7845">D.Candidats</a></li>-->
-                                <li class=""><a data-toggle="tab" href="#tab9563"> Jugement </a></li>
+                                <li class=""><a data-toggle="tab" href="#tab9563"> Analyse et Jugement </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab06125">PV Jugement</a></li>
                                <li class=""><a data-toggle="tab" href="#tab067458">Attribution</a></li>
                                <li class=""><a data-toggle="tab" href="#tab0143723">Bailleur</a></li>

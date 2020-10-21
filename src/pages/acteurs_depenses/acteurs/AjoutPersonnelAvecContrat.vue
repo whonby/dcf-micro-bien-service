@@ -221,7 +221,7 @@
                
                 <td>
                      <div class="control-group">
-                                                    <label class="control-label">Service{{formData.service_id}}</label>
+                                                    <label class="control-label">Service</label>
                                                     <div class="controls">
                                                         <select v-model="formData.service_id" :disabled="verrouilleService" class="span12">
                                                             <option></option>
@@ -630,7 +630,7 @@ recupererReferenceActe() {
       return this.formData.unite_administrative_id == "";
     },
     verrouilleService() {
-      return this.formData.uniteZone_id == "";
+      return this.formData.unite_administrative_id == "";
     },
     verrouilleFonction() {
       return this.formData.service_id == "";

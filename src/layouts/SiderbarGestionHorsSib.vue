@@ -71,12 +71,12 @@
             <span>GESTION DES MARCHES</span>
           </a>
         </li>
-        <!-- <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
+        <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
           <a href="#">
             <i class="icon-group"></i>
             <span>PERSONNEL</span>
           </a>
-        </li> -->
+        </li>
         <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
           <a href="#">
             <i class="icon-truck"></i>
@@ -258,7 +258,7 @@ navigateToGestionMarche(){
 //GestionMarcheHorSib
 
       navigateToActeurDepense(){
-        this.activate(2)
+        this.activate(31)
         this.$router.push({
           name: 'TableauBordActeurDepense'
         })

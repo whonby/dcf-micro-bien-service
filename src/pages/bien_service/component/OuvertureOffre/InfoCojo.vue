@@ -17,7 +17,7 @@
 
       </thead>
       <tbody>
-      <tr class="odd gradeX" v-for="(appelOffre, index) in listeCojo(macheid.id)"
+      <tr class="odd gradeX" v-for="(appelOffre, index) in listeCojo(macheid)"
           :key="appelOffre.id">
 
         <!-- <td @click="afficheBouttonTechCojo(index)">
@@ -263,6 +263,7 @@ name: "InfoCojo",
   },
   created(){
   },
+
   computed:{
     ...mapGetters('bienService',['getterCojos',"gettersOuverturePersonnaliser",
       'gettersCotations','appelOffres',

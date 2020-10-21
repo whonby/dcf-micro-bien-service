@@ -154,7 +154,7 @@
        <div class="controls">
          <input
            type="text"
-           :value="ImputationBudget"
+           :value="ImputationBudget(editMarcheHorSib.economique_id)"
            class="span4"
            placeholder="Saisir le Imputation"
            readonly
@@ -560,16 +560,28 @@ export default {
       };
     },
 
-    ImputationBudget() {
+ImputationBudget() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
 
-      const norme = this.budgetEclate.find(normeEquipe => normeEquipe.ligneeconomique_id == this.editMarcheHorSib.ligneeconomique_id );
-     
-
-      if (norme) {
-        return norme.code;
+      if (qtereel) {
+        return qtereel.code;
       }
       return 0
+        }
+      };
     },
+    // ImputationBudget() {
+
+    //   const norme = this.budgetEclate.find(normeEquipe => normeEquipe.ligneeconomique_id == this.editMarcheHorSib.ligneeconomique_id );
+     
+
+    //   if (norme) {
+    //     return norme.code;
+    //   }
+    //   return 0
+    // },
     // afficherLibelle unite administrative
 
     afficherLibelleUniteAdministrative(){
@@ -636,7 +648,7 @@ recupererParentId(){
     ...mapActions("horSib", ['modifierMarcheHorSib']),
     allerPageMarcheHorsib(){
        this.$router.push({
-          name:'GestionMarcheHorSib'  
+          name:'gestion_marche'  
            })
     },
 
@@ -657,12 +669,12 @@ recupererParentId(){
 
             modifierMarcheHorSibLocal(){
                this.$router.push({
-                 name:'GestionMarcheHorSib'  
+                 name:'gestion_marche'  
                })
               var nouvelObjet = {
                 ...this.editMarcheHorSib,
                exo_id:this.anneeBugetaireModifier,
-               imputation:this.ImputationBudget
+               imputation:this.ImputationBudget(this.editMarcheHorSib.economique_id)
               }
              this.modifierMarcheHorSib(nouvelObjet) 
               this.editMarcheHorSib ={

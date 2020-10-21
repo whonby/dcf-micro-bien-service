@@ -16,6 +16,7 @@
      <MenuDefaut v-if="active_el ==0"></MenuDefaut>
     <MenuGestionAccess v-if="active_el ==21"></MenuGestionAccess>
     <MenuMonEquipe v-if="active_el ==30"></MenuMonEquipe>
+    <MenuActeurDepenseHS v-if="active_el ==31"></MenuActeurDepenseHS>
     <Search></Search>
     
     <!--close-top-serch MenuPlanificationHorSib-->
@@ -41,6 +42,7 @@ import MenuInvestissementHorSib from "../components/navs/MenuInvestissementHorSi
 import MenuMonEquipe from "../components/navs/MenuMonEquipe.vue";
 import Search from "../components/Search";
 import MenuGestionAccess from "../components/navs/MenuGestionAccess"
+import MenuActeurDepenseHS from "../components/navs/MenuActeurDepenseHS"
 import { mapState, mapActions} from "vuex";
 export default {
   components: {
@@ -58,7 +60,8 @@ export default {
    MenuInvestissementHorSib,
     Search,
       MenuGestionAccess,
-    MenuMonEquipe
+    MenuMonEquipe,
+    MenuActeurDepenseHS
     
   },
 

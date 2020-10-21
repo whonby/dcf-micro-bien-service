@@ -69,7 +69,7 @@
 
 
   
-
+<notifications  />
     </div>
 </template>
 
@@ -267,8 +267,20 @@ search:""
       return id => {
         if (id != null && id != "") {
           return this.decomptefactures.filter(
-            element => element.marche_id == id
+            element => element.marche_id == id && this.afficherStatusSib(element.marche_id)==0
           );
+        }
+      };
+    },
+     afficherStatusSib() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.sib;
+      }
+      return 0
         }
       };
     },

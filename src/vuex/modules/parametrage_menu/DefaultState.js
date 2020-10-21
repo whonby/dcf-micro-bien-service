@@ -11,6 +11,7 @@ const defaultstate = {
     OpRaportAct: 7,
     Catographie: 8,
     rapport:20,
+    ActeurdepenseHS:31,
     active_el: 11
 };
 

@@ -1,5 +1,4 @@
-isButtunAddDossierCandidat
-CodeExempte
+
 <template>
     
 
@@ -144,14 +143,14 @@ CodeExempte
 
 
                      <div id="tab2" class="tab-pane">
-                <div align="right">
+                <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
 
 
-                </div>
-                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                </div> -->
+                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
 
                 </div>
 
@@ -264,14 +263,14 @@ CodeExempte
                    <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
                 </div>
                    <div id="tab0142" class="tab-pane">
-                <div align="right">
+                <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
 
 
-                </div>
-                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                </div> -->
+                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
 
                 </div>
                          </div>
@@ -416,12 +415,12 @@ CodeExempte
                 </div>
 
                   <div id="tab0143723" class="tab-pane">
-                <div align="right">
+                <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
-                </div>
-                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                </div> -->
+                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
 
                 </div>
                          </div>
@@ -566,14 +565,14 @@ CodeExempte
                 </div>
 
                    <div id="tab01432" class="tab-pane">
-                <div align="right">
+                <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
 
 
-                </div>
-                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                </div> -->
+                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
 
                 </div>
                          </div>
@@ -826,14 +825,14 @@ CodeExempte
 
 
                    <div id="tab0143720" class="tab-pane">
-                <div align="right">
+                <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
 
 
-                </div>
-                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                </div> -->
+                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
 
                 </div>
 
@@ -889,6 +888,7 @@ CodeExempte
    //  import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
 import rapportOuverture from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
      
+     import componentBailleur1 from '../../bien_service/component/bailleurMarche';
    import componentBailleur from '../../bien_service/dossierDetailMarchePs/dossierBailleur/componentBailleur';
 
       import executionLigneExempte from '../../bien_service/executionLigneExempte/executionLigneExempte';
@@ -897,7 +897,7 @@ import rapportOuverture from '../../bien_service/dossierDetailMarcheProcedureSim
         import componentAvisAnoCf from '../../bien_service/dossierDetailMarcheAOI_AON/dossierAvisAnoCf/componentAvisAnoCf';
      //    import componentAvisBailleurCf from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
 
-//import LotMarche from "@/pages/bien_service/component/LotMarche";
+import LotMarche from "@/pages/bien_service/component/LotMarche";
 import OuvertureOffre from "@/pages/bien_service/component/OuvertureOffre/OuvertureOffre";
 import PvJugement from "@/pages/bien_service/component/Jugement/pv/PvJugement";
     import 'vue-search-select/dist/VueSearchSelect.css'
@@ -916,7 +916,8 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
           Jugement,
           OuvertureOffre,
             componentCotation,
-          //LotMarche,
+          LotMarche,
+          componentBailleur1,
             componentOuverture,
            // componentActe,
             publicationOffre,
