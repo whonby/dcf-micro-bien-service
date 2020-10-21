@@ -273,13 +273,13 @@ navigateToGestionMarche(){
  navigateToTableauBord(){
         this.activate(11)
         this.$router.push({
-          name: 'TableauDeBordG'
+          name: 'TableauBordGestionHorsSibSimple'
         })
       },
        navigateToParametreGeneraux(){
         this.activate(17)
         this.$router.push({
-          name: 'TableauDeBordG'
+          name: 'TableauBordGestionSibSimple'
         })
       },
       

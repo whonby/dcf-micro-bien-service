@@ -405,7 +405,7 @@ name: "InfoCojo",
     ajouterCojoMarche(){
       var nouvelObjet ={
         ...this.formDataCojo,
-        marche_id:this.macheid.id,
+        marche_id:this.macheid,
         appel_offre_id :this.affichierAppelOffreid(this.macheid)
 
       }

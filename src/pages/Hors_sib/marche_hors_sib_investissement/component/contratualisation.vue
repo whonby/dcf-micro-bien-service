@@ -59,7 +59,7 @@
                   
 <td>
                      <button 
-                      v-if="activites.attribue == 1"  class="btn  btn-danger">
+                      v-if="activites.attribue == 1"  class="btn  btn-success">
                 <span >CT</span>
        
                 </button>
