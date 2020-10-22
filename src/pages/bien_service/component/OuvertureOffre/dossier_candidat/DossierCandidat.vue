@@ -1,6 +1,6 @@
 <template>
   <div>
-
+Modification dossier candidat
 
     <div align="right">
       <div class="widget-content">
@@ -315,7 +315,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Cautionnement prov :</label>
+                  <label class="control-label">Cautionnement provisoire :</label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Cautionnement prov" v-model="formchnique.cautionnement_prov">
                   </div>
@@ -463,7 +463,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Cautionnement prov :</label>
+                  <label class="control-label">Cautionnement provisoire :</label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Cautionnement prov" v-model="edit_offre_technique_recupere.cautionnement_prov">
                   </div>
@@ -691,7 +691,7 @@
           </td>
           <td>
             <div class="control-group">
-              <label class="control-label">Accord groupe</label>
+              <label class="control-label">Accord de groupement</label>
               <div class="controls">
                 <input type="text" class="span" placeholder="Accord Groupe" v-model="formDossierCadidature.accord_group">
               </div>
@@ -699,7 +699,7 @@
           </td>
           <td>
             <div class="control-group">
-              <label class="control-label">Cautionnement prov</label>
+              <label class="control-label">Cautionnement provisoire</label>
               <div class="controls">
                 <input type="text" class="span" placeholder="Cautionnement" v-model="formDossierCadidature.cautionnement_prov">
               </div>
@@ -708,7 +708,7 @@
 
           <td>
             <div class="control-group">
-              <label class="control-label">Pouv habil signataire</label>
+              <label class="control-label">Pouvoir de signature</label>
               <div class="controls">
                 <input type="text" class="span" placeholder="Pouv Hile Signature" v-model="formDossierCadidature.pouv_habil_signataire">
               </div>
@@ -935,7 +935,7 @@
 
     </div>
 
-    <div id="modificationDossierCandidatModal" class="modal hide tlDossierCandidat">
+    <div id="modificationDossierCandidatModal" class="modal hide grdirModalActeEffet">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Modification dossier candidat</h3>
@@ -992,7 +992,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Address </label>
+                <label class="control-label">Adresse </label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Adresse" :value="afficherAdressEntreprise(editDossierCadidature.entreprise_id)">
                 </div>
@@ -1048,7 +1048,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Cautionnement prov</label>
+                <label class="control-label">Cautionnement provisoire</label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Cautionnement" v-model="editDossierCadidature.cautionnement_prov">
                 </div>
@@ -1057,7 +1057,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label">Pouv habil signataire</label>
+                <label class="control-label">Pouvoir de signature</label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Pouv Hile Signature" v-model="editDossierCadidature.pouv_habil_signataire">
                 </div>
@@ -3250,7 +3250,10 @@ name: "DossierCandidat",
   }
 }
 </script>
-
 <style scoped>
+.grdirModalActeEffet{
+  width: 88%;
+  margin: 0 -42%;
+}
 
 </style>

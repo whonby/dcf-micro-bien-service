@@ -26,7 +26,9 @@
 //         select.id !=id)
 // }
 
-
+export const GET_ALL_IMAGE_MARCHE = (state, tableau_candidat_selectionner) =>{
+    state.imageMarche = tableau_candidat_selectionner
+}
 
 export const GET_ALL_SELECTIONNER_CANDIDAT = (state, tableau_candidat_selectionner) =>{
     state.selectionner_candidats = tableau_candidat_selectionner

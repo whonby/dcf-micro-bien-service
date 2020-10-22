@@ -47,6 +47,12 @@
                     <span class=""><i class="icon-trash"></i></span></button>
                 </td>
                </tr>
+               <tr>
+                 <td></td>
+                 <td style="font-weight:bold;">Total</td>
+                 <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesLots(macheid)))}}</td>
+                 <td></td>
+               </tr>
               </tbody>
             </table>
 
@@ -58,42 +64,58 @@
 
   <!--Formulaire d'ajout de lot-->
 
-  <div id="exampleModal" class="modal hide">
+  <div id="exampleModal" class="modal hide grdirModalActeEffet">
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Ajouter Lot</h3>
     </div>
     <div class="modal-body">
-      <form class="form-horizontal">
-        <div class="control-group">
-          <label class="control-label">Intitule du lot</label>
-          <div class="controls">
-            <input
-                type="text"
-                v-model="formData.objet"
-                class="span"
-                placeholder="Intitule du lot"
-            />
-          </div>
-        </div>
+      <table class="table table-bordered table-striped">
+        <tr>
+<td><div class="control-group">
+                        <label class="control-label">Numero du lot</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    :value="recupererNumeroDeLot"
+                                    class="span"
+                                   readonly
+                            />
+                        </div>
+                        </div></td>
+<td colspan="2">
+  <div class="control-group">
+                        <label class="control-label">Objet du lot</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formData.objet"
+                                    class="span"
+                                   
+                            />
+                        </div>
+                        </div>
+</td>
 
-        <div class="control-group">
-          <label class="control-label">montant_lot</label>
-          <div class="controls">
-            <input
-                type="text"
-                v-model="formData.montant_marche"
-                class="span"
-                placeholder="Saisir le montant_lot"
-            />
-          </div>
-          <code v-if="sommeMontant(formData.montant_marche)>detail_marche.montant_marche">
+        </tr>
+        <tr>
+           <td><div class="control-group">
+                        <label class="control-label">Montant du Lot</label>
+                        <div class="controls">
+                            <input
+                                    type="number"
+                                    v-model="formData.montant_marche"
+                                    class="span"
+                                   
+                            />
+                        </div>
+                         <code v-if="sommeMontant(formData.montant_marche)>detail_marche.montant_marche">
            Impossible d'effectuer l'engistrement</code>
           <code v-if="sommeMontant(formData.montant_marche)>detail_marche.montant_marche">
             Car le montant total des lots est supperieur  </code>
           <code v-if="sommeMontant(formData.montant_marche)>detail_marche.montant_marche">
             au montant du marché  </code>
-          <table class="table table-bordered table-striped">
+          <table class="table table-bordered table-striped" v-if="formData.montant_marche !=0">
             <thead>
             <tr>
               <th>Montant marché</th>
@@ -107,9 +129,68 @@
             </tr>
             </tbody>
        </table>
-        </div>
-
-      </form>
+                        </div></td>
+                        <td><div class="control-group">
+                        <label class="control-label">Région</label>
+                         <div class="controls">
+         
+               <select v-model="formData.localisation_geographie_id" class="span" >
+               <option v-for="plans in afficherCodeStructureLibelle(recupererLataille)" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+           </select>
+      
+       </div>
+                        </div></td>
+                        <td><div class="control-group">
+                        <label class="control-label">Départment</label>
+                         <div class="controls">
+        
+               <select v-model="formData.departement_id" class="span" :readOnly="deveroiullage">
+               <option v-for="plans in recupererParentId(formData.localisation_geographie_id)" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+           </select>
+      
+       </div>
+                        </div></td>
+        </tr>
+        <tr>
+          
+                        
+                        <td><div class="control-group">
+                        <label class="control-label">Sous/Préfecture</label>
+                         <div class="controls">
+       
+               <select v-model="formData.sous_prefecture_id" class="span" :readOnly="deveroiullageSousprefecture">
+               <option v-for="plans in recupererParentId(formData.departement_id)" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+           </select>
+      
+       </div>
+                        </div></td>
+                        <td><div class="control-group">
+                        <label class="control-label">Latitude</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formData.latitude"
+                                    class="span"
+                                   
+                            />
+                        </div>
+                        </div></td>
+                        <td><div class="control-group">
+                        <label class="control-label">Longitude</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                       v-model="formData.longitude"
+                                    class="span"
+                                   
+                            />
+                        </div>
+                        </div></td>
+        </tr>
+      </table>
     </div>
     <div class="modal-footer">
       <a v-if="sommeMontant(formData.montant_marche)<=detail_marche.montant_marche"
@@ -125,39 +206,114 @@
 
   <!--Edition de lot-->
 
-  <div id="editBailleuMarche" class="modal hide" aria-hidden="true" style="display: none;">
+  <div id="editBailleuMarche" class="modal hide grdirModalActeEffet" aria-hidden="true" style="display: none;">
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Modification </h3>
     </div>
     <div class="modal-body">
-      <form class="form-horizontal">
-        <div class="control-group">
-          <label class="control-label">Intitule du lot</label>
-          <div class="controls">
-            <input
-                type="text"
-                v-model="editor.objet"
-                class="span"
-                placeholder="Intitule du lot"
-            />
-          </div>
-        </div>
+       <table class="table table-bordered table-striped">
+        <tr>
+<td><div class="control-group">
+                        <label class="control-label">Numero du lot</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    :value="editor.numero_lot"
+                                    class="span"
+                                   readonly
+                            />
+                        </div>
+                        </div></td>
+<td colspan="2">
+  <div class="control-group">
+                        <label class="control-label">Objet du lot</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="editor.objet"
+                                    class="span"
+                                   
+                            />
+                        </div>
+                        </div>
+</td>
 
-        <div class="control-group">
-          <label class="control-label">montant_lot</label>
-          <div class="controls">
-            <input
-                type="text"
-                v-model="editor.montant_marche"
-                class="span"
-                placeholder="Saisir le montant_lot"
-            />
-          </div>
-
-        </div>
-
-      </form>
+        </tr>
+        <tr>
+           <td><div class="control-group">
+                        <label class="control-label">Montant du Lot</label>
+                        <div class="controls">
+                            <input
+                                    type="number"
+                                    v-model="editor.montant_marche"
+                                    class="span"
+                                   
+                            />
+                        </div>
+                        
+                        </div></td>
+                        <td><div class="control-group">
+                        <label class="control-label">Région</label>
+                         <div class="controls">
+         
+               <select v-model="editor.localisation_geographie_id" class="span" >
+               <option v-for="plans in afficherCodeStructureLibelle(recupererLataille)" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+           </select>
+      
+       </div>
+                        </div></td>
+                        <td><div class="control-group">
+                        <label class="control-label">Départment</label>
+                         <div class="controls">
+        
+               <select v-model="editor.departement_id" class="span" :readOnly="deveroiullage">
+               <option v-for="plans in recupererParentId(editor.localisation_geographie_id)" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+           </select>
+      
+       </div>
+                        </div></td>
+        </tr>
+        <tr>
+          
+                        
+                        <td><div class="control-group">
+                        <label class="control-label">Sous/Préfecture</label>
+                         <div class="controls">
+       
+               <select v-model="editor.sous_prefecture_id" class="span" :readOnly="deveroiullageSousprefecture">
+               <option v-for="plans in recupererParentId(editor.departement_id)" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+           </select>
+      
+       </div>
+                        </div></td>
+                        <td><div class="control-group">
+                        <label class="control-label">Latitude</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="editor.latitude"
+                                    class="span"
+                                   
+                            />
+                        </div>
+                        </div></td>
+                        <td><div class="control-group">
+                        <label class="control-label">Longitude</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                       v-model="editor.longitude"
+                                    class="span"
+                                   
+                            />
+                        </div>
+                        </div></td>
+        </tr>
+      </table>
     </div>
     <div class="modal-footer">
       <a
@@ -248,9 +404,105 @@ name: "LotMarche",
   },
   computed:{
     ...mapGetters('bienService',['personnaliseGetterMarcheBailleur',"getMarchePersonnaliser","marches"]),
+    ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
+     'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
+     'nombremarchesExecute',
+     'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
+      "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
+     "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
+
+
+     ...mapGetters("uniteadministrative",['getterligneExempter','uniteAdministratives',"budgetGeneral",
+      "getPersonnaliseBudgetGeneral","groupUa","groupeUaPourMarheHorSib" ,"budgetEclate","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
+      "montantBudgetGeneral", ]),
+       ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
+  'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
+...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+ ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires',"grandes_natures",
+ 'structures_geographiques','localisations_geographiques','getterInfrastrucure']),
+   ...mapGetters("gestionMarche", ['entreprises']),
+   ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
+  'types_financements']) ,
+    
+    
+    recupererNumeroDeLot(){
+  return this.getLotMarche.length + 1
+},
+    
     getLotMarche(){
       return this.getMarchePersonnaliser.filter(item=>item.parent_id==this.macheid);
     },
+
+recupererLataille(){
+  return this.structures_geographiques.length-2
+},
+
+// 
+afficherCodeStructure(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objet = this.structures_geographiques.find(item => item.id==id )
+          if(objet){
+            return objet.niveau
+          }
+          return null
+        }
+      }
+    },
+// recuperation parent id
+recupererParentId(){
+  return id =>{
+    if(id!=null && id!=""){
+      return this.localisations_geographiques.filter(item => item.parent==id)
+    }
+  }
+}, 
+SommeDesLots(){
+  return id =>{
+    if(id!=null && id!=""){
+      return this.getMarchePersonnaliser.filter(item => item.parent_id==id).reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche), 0)
+    }
+  }
+},
+    afficherCodeStructureLibelle(){
+      return id =>{
+        if(id!=null && id!=""){
+          return this.localisations_geographiques.filter(item => this.afficherCodeStructure(item.structure_localisation_geographique_id)==id && item.parent!=1)
+          
+          
+        }
+      }
+    },
+
+  deveroiullage(){
+      return this.formData.localisation_geographie_id=="";
+    },
+    deveroiullageSousprefecture(){
+      return this.formData.departement_id=="";
+    },
+    recupererLatailleDepartement(){
+  return this.structures_geographiques.length-1
+},
+
+   recupererLatailleSousPrefecture(){
+  return this.structures_geographiques.length
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     sommeMontant(){
      return montant_saisi=>{
        //console.log(montant_saisi)
@@ -295,10 +547,15 @@ name: "LotMarche",
       'supprimerMarche','modifierActeEffetFinancier',"getMarche","getActeEffetFinancier","modifierSousMarche"]),
     formatageSomme:formatageSomme,
     ajouter(){
-      let nbrlot=this.lot.length +1
+      
      let intitule=this.detail_marche.objet+" / "+this.formData.objet
       this.formData={
         objet:intitule,
+       localisation_geographie_id:this.formData.localisation_geographie_id,
+        departement_id:this.formData.departement_id,
+        sous_prefecture_id:this.formData.sous_prefecture_id,
+        latitude:this.formData.latitude,
+        longitude:this.formData.longitude,
             montant_marche:this.formData.montant_marche,
             type_marche_id:this.detail_marche.type_marche_id,
             unite_administrative_id:this.detail_marche.unite_administrative_id,
@@ -339,7 +596,7 @@ name: "LotMarche",
             nature_prix:this.detail_marche.nature_prix,
             libelle_procedure:this.detail_marche.libelle_procedure,
             parent_id:this.detail_marche.id,
-            numero_lot:nbrlot,
+            numero_lot:this.recupererNumeroDeLot,
             sib:this.AjouteMarcheSiBetHorsSib
       }
     //  console.log(this.formData)
@@ -405,7 +662,16 @@ name: "LotMarche",
         id:this.editor.id,
         objet:this.editor.objet,
         montant_marche:this.editor.montant_marche,
+        localisation_geographie_id:this.editor.localisation_geographie_id,
+        departement_id:this.editor.departement_id,
+        sous_prefecture_id:this.editor.sous_prefecture_id,
+        latitude:this.editor.latitude,
+        longitude:this.editor.longitude,
+        sib:this.editor.sib,
+        numero_lot:this.editor.numero_lot
       }
+
+      
       this.modifierSousMarche(objet)
   }
   }
@@ -413,5 +679,9 @@ name: "LotMarche",
 </script>
 
 <style scoped>
+.grdirModalActeEffet{
+  width: 88%;
+  margin: 0 -42%;
+}
 
 </style>

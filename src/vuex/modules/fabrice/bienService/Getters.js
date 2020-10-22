@@ -1,5 +1,5 @@
 import { groupBy } from "../../../../Repositories/Repository";
-
+export const imageMarche = state => state.imageMarche.sort((a, b) => (a.id > b.id) ? 1 : -1)
 export const role_membrecojo = state => state.role_membrecojo
 export const gestionModules = state => state.gestionModules
 export const modepaiements = state => state.modepaiements

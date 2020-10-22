@@ -66,7 +66,7 @@
                  
                    </td>
 <td>
-    <router-link :to="{ name: 'DetailMarchePs', params: { id: activites.id }}"
+    <router-link :to="{ name: 'detail_hors_sib', params: { id: activites.id }}"
                 class="btn btn-default " title="continue la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link>

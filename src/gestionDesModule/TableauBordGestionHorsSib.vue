@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <h3 style="text-align:center">TABLEAU DE BORD GENERAL</h3>
+        <h3 style="text-align:center">TABLEAU DE BORD GESTION HORS SIB</h3>
         <div class="row-fluid">
       <div class="span6">
         <div class="quick-actions_homepage">
@@ -102,7 +102,8 @@ export default {
                 "getterBudgeCharge",
                 "budgetGeneral",
                 "afficheTransfertValider",
-                "transferts"
+                "transferts",
+                "budgetEclate"
 
             ]),
             
@@ -246,19 +247,20 @@ afficherBudgetInitialPersonnel() {
 // },
 afficherBudgetInitialB() {
         
+
         if(this.noDCfNoAdmin){
             let colect=[];
             
-            this.budgetGeneral.filter(item=>{
-                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+            this.budgetEclate.filter(item=>{
+                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(item =>item.gdenature_id==5).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
+            return colect.filter(item =>item.grandenature_id==5).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.dotation),0)
         }
-        return this.budgetGeneral.filter(item =>item.gdenature_id==5).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
+        return this.budgetEclate.filter(item =>item.grandenature_id==5).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.dotation),0)
 
     },
 //calcule du budget executer pour bien service
@@ -279,12 +281,23 @@ afficherBudgetExcuterBienService() {
                     return item
                 }
             })
-            return colect.filter(item => item.marchetype==2 && item.decision_cf==8).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
+            return colect.filter(item => item.marchetype==2 && item.decision_cf==8 && this.RecupererMarcheId(item.marche_id) ==1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
         }
-        return this.mandats.filter(item => item.marchetype==2 && item.decision_cf==8).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
+        return this.mandats.filter(item => item.marchetype==2 && item.decision_cf==8 && this.RecupererMarcheId(item.marche_id) ==1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
 
     },
+RecupererMarcheId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.sib;
+      }
+      return 0
+        }
+      }
+    },
 
 
 affichierBudgetDisponibleBienService() {

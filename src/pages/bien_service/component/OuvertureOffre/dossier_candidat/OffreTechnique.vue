@@ -12,11 +12,11 @@
           <th>N°LOT</th>
           <th>Programme mobilisation</th>
           <th>Capacite financiere </th>
-          <th>CAA Moyenn</th>
-          <th>Capacite technique exper </th>
-          <th>Meth reat traveau</th>
+          <th>CAA Moyenne</th>
+          <th>Capacite téchnique </th>
+          <th title="methodologie de realisation de travaux">Methode real.trvx </th>
           <th>Accord groupe</th>
-          <th>Pauv habil signataire</th>
+          <th title="Pouvoir de signature">P.Signature</th>
           <th>Caution</th>
           <th>Registe de commerce</th>
           <th>Observation</th>
