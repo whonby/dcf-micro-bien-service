@@ -714,7 +714,7 @@ CodeExempte
                                         <!-- <component-etat :macheid="detail_marche.id"></component-etat> -->
                                         
                                
-                                <h4>Liste des receptions de cotation</h4>
+                                <h4>Liste des receptions des plis</h4>
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>

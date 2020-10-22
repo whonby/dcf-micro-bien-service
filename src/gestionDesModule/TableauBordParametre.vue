@@ -1,80 +1,129 @@
 <template>
-    <div>
-
-        <h3 style="text-align:center">TABLEAU DE BORD GENERAL</h3>
-        <div class="row-fluid">
-      <div class="span6">
-        <div class="quick-actions_homepage">
-          <div class="widget-title"> <span class="icon"> <i class="icon-signal"></i> </span>
-            <h5>BIENS SERVICES</h5>
+ 
+     <div>
+       <h4 style="text-align:center">Module Paramétre Généraux</h4>
+       <br>
+       <br>
+       <br>
+       <br>
+       <div class="row-fluid">
+       
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>ANNEE EN COURS</h5>
           </div>
-          <div >
-            <ul class="quick-actions" >
-                <li class="bg_lb span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherBudgetInitialB))}}</span><h4>BIENS & SERVICES</h4></a> </li>
-  <li class="bg_lg span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherBudgetExcuterBienService))}}</span><h4>EXECUTE</h4></a> </li>
-    
-            </ul>
-            <ul class="quick-actions" >
-                <li class="bg_lo span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(affichierBudgetDisponibleBienService))}}</span><h4>DISPONIBLE</h4></a> </li>
-    <li class="bg_ly span5"> <a href="#" style="color:black;"><h4>TAUX </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{affichierTauxExecutionBienService}}%</span><h4>EXECUTION</h4></a> </li>
-            </ul>
-          </div>
+          <div class="widget-content"> 
+            <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{ExerciceEnCours}}</h1>
+            
+            </div>
         </div>
       </div>
-      <div class="span6">
-        <div class="quick-actions_homepage">
-          <div class="widget-title"> <span class="icon"> <i class="icon-signal"></i> </span>
-            <h5>PERSONNEL</h5>
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>EXERCICES BUDGETAIRES </h5>
           </div>
-          <ul class="quick-actions" >
-                <li class="bg_lb span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherBudgetInitialPersonnel))}}</span><h4>PERSONNEL</h4></a> </li>
-  <li class="bg_lg span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(budgetConsommerPersonnel))}}</span><h4>EXECUTE</h4></a> </li>
-   
-            </ul>
-            <ul class="quick-actions" >
-                <li class="bg_lo span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(affichierBudgetDisponiblePersonnel))}}</span><h4>DISPONIBLE</h4></a> </li>
-    <li class="bg_ly span5"> <a href="#" style="color:black;"><h4>TAUX </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{affichierTauxExecutionPersonnel}}%</span><h4>EXECUTION</h4></a> </li>
+          <div class="widget-content"> 
+             <table class="table table-bordered table-striped" id="exercice_budgetaire">
+              <thead>
+                <tr>
+                  <th>Année</th>
+                  <th>Date début</th>
+                  <th>Date fin</th>
+                  
+                  <th>En cours</th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd gradeX" v-for="exercice_budgetaire in exercices_budgetaires" :key="exercice_budgetaire.id">
+                  <template v-if="!exercice_budgetaire.encours">
+                         <td>
+                    {{exercice_budgetaire.annee || 'Non renseigné'}}</td>
+                  <td>
+                    {{formaterDate(exercice_budgetaire.date_debut) || 'Non renseigné'}}</td>
+                  <td>
+                    {{formaterDate(exercice_budgetaire.date_fin) || 'Non renseigné'}}</td>
 
-            </ul>
+                  </template>
+
+
+
+                    <template v-else>
+                         <td>
+                    {{exercice_budgetaire.annee || 'Non renseigné'}}</td>
+                  <td>
+                    {{formaterDate(exercice_budgetaire.date_debut) || 'Non renseigné'}}</td>
+                  <td>
+                    {{formaterDate(exercice_budgetaire.date_fin) || 'Non renseigné'}}</td>
+                  <!-- <td>{{exercice_budgetaire.encours ? 'Oui' : 'Non'}}</td> -->
+                  
+                  </template>
+                   <td>
+                     <button  @click.prevent="EncoursExerciceLocal(exercice_budgetaire.id)"
+                      v-if="exercice_budgetaire.encours == 1"  class="btn  btn-success">
+                <span >Oui</span>
+       
+                </button>
+                   <button v-else @click.prevent="EncoursExerciceLocal(exercice_budgetaire.id) " class="btn  btn-danger" >
+              
+                <span >Non</span>
+                </button>
+                   </td>
+                  
+                </tr>
+              </tbody>
+            </table>
+            </div>
+        </div>
+      </div>
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>ENTREPRISES ENREGISTREES</h5>
+          </div>
+           <div class="widget-content"> 
+            <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{nbreEntreprise}}</h1>
+            
+            </div>
         </div>
       </div>
     </div>
+    
     <div class="row-fluid">
-      <div class="span6">
-        <div class="quick-actions_homepage">
-          <div class="widget-title"> <span class="icon"> <i class="icon-signal"></i> </span>
-            <h5>INVESTISSEMENT</h5>
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>ENTREPRISE NON SANCTIONNEE</h5>
           </div>
-          <ul class="quick-actions" >
-                <li class="bg_lb span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherBudgetInitialInvetissement))}}</span><h4>INVESTISSEMENT</h4></a> </li>
-  <li class="bg_lg span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherBudgetExecutéInvestissement))}}</span><h4>EXECUTE</h4></a> </li>
-    
-            </ul>
-            <ul class="quick-actions" >
-                <li class="bg_lo span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(affichierBudgetDisponibleInvestissement))}}</span><h4>DISPONIBLE</h4></a> </li>
-    <li class="bg_ly span5"> <a href="#" style="color:black;"><h4>TAUX </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{affichierTauxExecutionInvestissement}}%</span><h4>EXECUTION</h4></a> </li>
-            </ul>
+          <div class="widget-content"> 
+               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{EntrepriseNonSantionner}}</h1>
+            
+          </div>
         </div>
       </div>
-      <div class="span6">
-        <div class="quick-actions_homepage">
-          <div class="widget-title"> <span class="icon"> <i class="icon-signal"></i> </span>
-            <h5>TRANSFERT</h5>
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>ENTREPRISE SANCTIONNEE</h5>
           </div>
-          <ul class="quick-actions" >
-                <li class="bg_lb span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherBudgetInitialTranferst))}}</span><h4>TRANSFERT</h4></a> </li>
-  <li class="bg_lg span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(budgetConsommerTransfert))}}</span><h4>EXECUTE</h4></a> </li>
-   
-            </ul>
-            <ul class="quick-actions" >
-                <li class="bg_lo span5"> <a href="#" style="color:black;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(affichierBudgetDisponibleTransfert))}}</span><h4>DISPONIBLE</h4></a> </li>
-    <li class="bg_ly span5"> <a href="#" style="color:black;"><h4>TAUX </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{affichierTauxExecution}}%</span><h4>EXECUTION</h4></a> </li>
-
-            </ul>
+          <div class="widget-content"> 
+               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{EntrepriseSantionner}}</h1>
+            
+          </div>
         </div>
       </div>
+      <!-- <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>One third width <code>class=Span4</code></h5>
+          </div>
+          <div class="widget-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </div>
+        </div>
+      </div> -->
     </div>
-    </div>
+     </div>
 
 </template>
 
@@ -83,6 +132,7 @@
 import { mapGetters, mapActions } from "vuex";
 import {formatageSomme} from '../../src/Repositories/Repository';
 import {noDCfNoAdmin} from '../../src/Repositories/Auth';
+import moment from "moment";
 export default {
   data(){
     return{
@@ -120,297 +170,30 @@ export default {
             
         noDCfNoAdmin:noDCfNoAdmin,
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-budgetConsommerPersonnel(){
- 
-    return this.getMandatPersonnaliserPersonnel.filter(element => element.marchetype == "perso" ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+...mapGetters('gestionMarche', ['entreprises',"secteur_activites","sanctions"]),
+
+ExerciceEnCours() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return "EXERCICE NON ACTIVE"
+    },
+nbreEntreprise(){
+return this.entreprises.length;
 },
-affichierBudgetDisponiblePersonnel() {
-      const val = parseFloat(this.afficherBudgetInitialPersonnel) - parseFloat(this.budgetConsommerPersonnel);
-      
-       if (val) {
-        return parseFloat(val).toFixed(2);
-      }
-      
-      return 0
-    },
-affichierTauxExecutionPersonnel() {
-      const val = (parseFloat(this.budgetConsommerPersonnel) / parseFloat(this.afficherBudgetInitialPersonnel))*100;
-      
-       if (val) {
-        return parseFloat(val).toFixed(2);
-      }
-      
-      return 0
-    },
+EntrepriseNonSantionner() {
+              
+                return this.entreprises.filter(idm=>idm.active===1).length
 
-
-
-
-
-affichierBudgetDisponibleTransfert() {
-      const val = parseFloat(this.afficherBudgetInitialTranferst) - parseFloat(this.budgetConsommerTransfert);
-      
-       if (val) {
-        return parseFloat(val).toFixed(2);
-      }
-      
-      return 0
-    },
-
-affichierTauxExecution() {
-      const val = (parseFloat(this.budgetConsommerTransfert) / parseFloat(this.afficherBudgetInitialTranferst))*100;
-      
-       if (val) {
-        return parseFloat(val).toFixed(2);
-      }
-      
-      return 0
-    },
-    
-// afficherBudgetInitialTranferst(){
-    
-//       return this.budgetGeneral.filter(item =>item.gdenature_id==6).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0)
-// },
-
-
-afficherBudgetInitialTranferst() {
-        
-        if(this.noDCfNoAdmin){
-            let colect=[];
-            
-            this.budgetGeneral.filter(item=>{
-                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect.filter(item =>item.gdenature_id==6).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0)
-        }
-        return this.budgetGeneral.filter(item =>item.gdenature_id==6).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0)
-
-    },
-
-
-
-
-
-// budgetConsommerTransfert(){
- 
-//     return this.afficheTransfertValider.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
-// },
-
-budgetConsommerTransfert() {
-        
-        if(this.noDCfNoAdmin){
-            let colect=[];
-            
-            this.transferts.filter(item=>{
-                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0);
-        }
-        return this.transferts.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0);
-
-    },
-
-// afficherBudgetInitialPersonnel(){
-//  return this.budgetGeneral.filter(item =>item.gdenature_id==2).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
-// },
-afficherBudgetInitialPersonnel() {
-        
-        if(this.noDCfNoAdmin){
-            let colect=[];
-            
-            this.budgetGeneral.filter(item=>{
-                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect.filter(item =>item.gdenature_id==2).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
-        }
-        return this.budgetGeneral.filter(item =>item.gdenature_id==2).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
-
-    },
-
-// afficherBudgetInitialB(){
-//  return this.budgetGeneral.filter(item => item.gdenature_id==5).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0) 
-
-// },
-afficherBudgetInitialB() {
-        
-        if(this.noDCfNoAdmin){
-            let colect=[];
-            
-            this.budgetGeneral.filter(item=>{
-                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect.filter(item =>item.gdenature_id==5).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
-        }
-        return this.budgetGeneral.filter(item =>item.gdenature_id==5).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
-
-    },
-//calcule du budget executer pour bien service
-
-// afficherBudgetExcuterBienService(){
-//   return this.getMandatPersonnaliserVise.filter(item => item.marchetype==2).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
-// },
-
-afficherBudgetExcuterBienService() {
-        
-        if(this.noDCfNoAdmin){
-            let colect=[];
-            
-            this.mandats.filter(item=>{
-                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect.filter(item => item.marchetype==2 && item.decision_cf==8).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
-        }
-        return this.mandats.filter(item => item.marchetype==2 && item.decision_cf==8).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
-
-    },
-
-
-
-affichierBudgetDisponibleBienService() {
-      const val = parseFloat(this.afficherBudgetInitialB) - parseFloat(this.afficherBudgetExcuterBienService);
-      
-       if (val) {
-        return parseFloat(val).toFixed(2);
-      }
-      
-      return 0
-    },
-affichierTauxExecutionBienService() {
-      const val = (parseFloat(this.afficherBudgetExcuterBienService) / parseFloat(this.afficherBudgetInitialB))*100;
-      
-       if (val) {
-        return parseFloat(val).toFixed(2);
-      }
-      
-      return 0
-    },
-
-// afficher le montant du budget initial 
-
-// afficherBudgetInitialInvetissement(){
-//   return this.budgetGeneral.filter(item => item.gdenature_id==7).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale) , 0)
-// },
-afficherBudgetInitialInvetissement() {
-        
-        if(this.noDCfNoAdmin){
-            let colect=[];
-            
-            this.budgetGeneral.filter(item=>{
-                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect.filter(item =>item.gdenature_id==7).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
-        }
-        return this.budgetGeneral.filter(item =>item.gdenature_id==7).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
-
-    },
-afficherBudgetExecutéInvestissement() {
-        
-        if(this.noDCfNoAdmin){
-            let colect=[];
-            
-            this.mandats.filter(item=>{
-                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect.filter(item => item.marchetype==1 &&  item.decision_cf==8).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
-        }
-        return this.mandats.filter(item => item.marchetype==1 && item.decision_cf==8).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
-
-    },
-// calcule du budget executé d'investissement
-
-
-// afficherBudgetExecutéInvestissement(){
-//   return this.getMandatPersonnaliserVise.filter(item => item.marchetype==1).reduce((prec, cur)=>parseFloat(prec) + parseFloat(cur.total_general), 0)
-// },
-
-
-affichierBudgetDisponibleInvestissement() {
-      const val = parseFloat(this.afficherBudgetInitialInvetissement) - parseFloat(this.afficherBudgetExecutéInvestissement);
-      
-       if (val) {
-        return parseFloat(val).toFixed(2);
-      }
-      
-      return 0
-    },
-affichierTauxExecutionInvestissement() {
-      const val = (parseFloat(this.afficherBudgetExecutéInvestissement) / parseFloat(this.afficherBudgetInitialInvetissement))*100;
-      
-       if (val) {
-        return parseFloat(val).toFixed(2);
-      }
-      
-      return 0
-    },
-// afficher budget Personnel
-
-
-// afficherCodeGrandNature(){
-  
-//  return id =>{
-//    if(id!=null && id!=""){
-//    let resultat = this.grandes_natures.filter(item => item.id==id)
-
-//     if(resultat){
-//       return resultat.code
-//     }
-//    }
-//  }
-// },
-
-
-
-
- budgetPersonnel(){
-                return unite_id=>{
-                    let vM=this;
-                    if(unite_id!='' && vM.budgetGeneralCharge!=""){
-
-                        let budget=vM.budgetGeneralCharge.find(item=>{
-                            if(item.gdenature_id==2  && item.ua_id==unite_id ){
-                                return item
-                            }
-                        })
-
-                        if(budget!=undefined){
-
-                            return parseFloat(budget.Dotation_Initiale);
-                        }
-                        return 0
-                    }
-                    return 0
-                }
             },
+            EntrepriseSantionner() {
+                
+                return this.entreprises.filter(idm=>idm.active===0).length
 
-
+            },
   },
 created() {
             this.marcheid=this.$route.params.id
@@ -420,52 +203,22 @@ created() {
   
 },
   methods:{
-...mapActions("bienService", ['ajouterMarche','modifierMarche','modifierMarcheBascule',
-    'supprimerMarche','modifierActeEffetFinancier',"getMarche","getActeEffetFinancier"
+...mapActions('parametreGenerauxAdministratif', [ 'ajouterExerciceBudgetaire',
+    'supprimerExerciceBudgetaire', 'modifierExerciceBudgetaire',"EncoursExerciceBudgetaire"]),   
+
      
-    ]),
+    formaterDate(date) {
+      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    },
 
+EncoursExerciceLocal (id) {
+      this.EncoursExerciceBudgetaire(id)
 
+    },
  formatageSomme:formatageSomme
   }
 }
 </script>
 <style>
-.flex{
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  position: relative;
-}
-.square{
-  width: 50px;
-  height: 50px;
- 
-  color: #FAFAFA;
-  text-align: center;
-  margin-right: 5px;
-  cursor: pointer;
-  line-height: 50px;
-}
-.square:hover{
-  opacity: 0.8;
-}
-.S{
-  background-color:orange;
-}
-.I{
-  background-color:orange;
-}
-.D{
-  background-color:white;
-  color: black;
-}
-.C{
-  background-color:green;
-  color: white;
-}
-.F{
- background-color:green;
-  color: white;
-}
+
 </style>

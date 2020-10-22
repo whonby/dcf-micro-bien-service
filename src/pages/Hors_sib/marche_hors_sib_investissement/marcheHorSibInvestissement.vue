@@ -1,4 +1,4 @@
-CodeExempte
+NombrePlanifInfastructureNiveau1
 <template>
     <div class="container-fluid">
     
@@ -21,211 +21,101 @@ CodeExempte
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
-                    <div id="tab0000" class="tab-pane active">
-                   
-                    <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5>Liste des March&eacute;s</h5>
-              <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
-            </div>
-            <div class="span4">
-            <br>
-          Afficher
-         <select name="pets" id="pet-select" v-model="size" class="span3">
-            <option value="10">10</option>
-            <option value="25">25</option>
-           <option value="50">50</option>
-       <option value="100">100</option>
-      </select>
-           Entrer
-        </div>
-             <table class="table table-bordered table-striped" >
-                <thead>
-                <tr>
-                   <th>Année</th>
-                  <th>UA</th>
-                  <th>Reférence marché</th>
-                  <th>Objet marché</th>
-                  <th>Type de marché</th>
-                   <th>Procedure de passation</th>
-                  <th>Localisation géographie</th>
-                   <th>Montant prevu</th>
-                    <th title="mouvement du marché">Mouvement marché</th>
-                     <th>Statut</th>
-                    
-                    <th>Cycle de vie</th>
-                    <!-- <th>Etat en cours</th> -->
-                   <th colspan="6">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                 
-                  <tr class="odd gradeX" v-for="activites in partition(marcheHorSibFiltre, size)[page]
-                "
-                 :key="activites.id">
-                  <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{activites.exo_id || 'Non renseigné'}}</td>
-                   <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{afficherLibelleUa(activites.unite_administrative_id) || 'Non renseigné'}}</td>
-                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{activites.reference_marche || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{activites.objet || 'Non renseigné'}}</td>
-                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{afficherLibelleTypeMarche(activites.type_marche_id) || 'Non renseigné'}}</td>
-                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{afficherCodeProcedurePassation(activites.procedure_passation_id) || 'Non renseigné'}}</td>
-                    <!-- <td @dblclick="afficherModalModifierTypePrestation(marche.id)">
-                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{afficherLibelleLocalisationGeographie(activites.localisation_geographie_id) || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{formatageSomme(parseFloat(activites.montant_marche)) || 'Non renseigné'}}</td>
-                   
-                    <td>
-
-                         <span v-if="activites.economique_id == CodeExempte(activites.economique_id) ">Exemptée procedure</span>
-                         <span v-else>Ligne à marché</span>
-                       </td>
-                        
-                      
-           <td>
-                     <button 
-                      v-if="activites.attribue == 2"  class="btn  btn-warning">
-                <span title="MARCHE EN EXERCUTER" style="">EX</span>
-       
-                </button>
-                <button 
-                      v-else-if="activites.attribue == 1"  class="btn  btn-success">
-                <span title=" MARCHE EN COURS DE CONTRATUALISATION">CT</span>
-       
-                </button>
-                 <button 
-                      v-else-if="activites.attribue == 3"  class="btn  btn-info">
-                <span title="MARCHE RESILIE" >RE</span>
-       
-                </button>
-                 <button v-else-if="activites.attribue == 5" class="btn  btn-inverse">
-              
-                <span title="MARCHE EN TERMINE">TE</span>
-                </button>
-                   <button v-else-if="activites.attribue == 7" class="btn  btn">
-              
-                <span title="MARCHE SUSPENDU">SU</span>
-                </button>
- <button v-else class="btn  btn-danger">
-              
-                <span title="MARCHE EN PLANIFICATION">PL</span>
-                </button>
-                   </td>
-  
-                   <!-- <td>
-                      <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
-                                    class="btn btn-inverse " title="Cycle de vie du marche">
-                           <span class=""><i class=" icon-calendar"></i></span>
-                       </router-link>
-                   </td> -->
-                   <td >
-                        <router-link :to="{ name: 'CycleDeVie', params: { id: activites.id }}"
-                 class="btn btn-inverse " title="Cycle de vie du marche">
-        <span class=""><i class=" icon-calendar"></i></span>
-    </router-link>
-                   </td>
-                   
-                   <td>
-                    
-                      <router-link :to="{ name: 'detail_hors_sib', params: { id: activites.id }}"
-                class="btn btn-default " title="historique la contratualisation">
-                  <span class=""><i class=" icon-folder-open"></i></span>
-                    </router-link>
-                   </td>
-                   <td>
-                     <router-link :to="{ name: 'detailExecution', params: { id: activites.id }}"
-                class="btn btn-default " title="historique execution Marche">
-                  <span class=""><i class="  icon-random"></i></span>
-                   </router-link> 
-                   </td>
-           <td>
-          
-                     <button @click.prevent="supprimerMarche(activites.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-                   </td>
-                  
-                   
-
-                       </tr>
-                        <tr>
-                      
-                       <td>
-                          
-                      </td>
-                       <td>
-                          
-                      </td>
-                      <td>
-                          
-                      </td>
-                      <td > 
-                      </td>
-                    <td >
-                          
-                           
-                      </td>
-                      
-                       <td>
-                           
-                           
-                      </td>
-                       <td style="font-weight:bold;"> Total Marché
-                      </td>
-                    <td  style="text-align: center;color:red;font-weight:bold;">
-                           {{formatageSomme(parseFloat(montantMarche))}}
-                           
-                      </td>
-                        <td>
-                          
-                      </td>
-                      
-                      <td>
-                          
-                      </td>
-                      <td>
-                          
-                      </td>
-                       <td>
-                          
-                      </td>
-                       <td>
-                          
-                      </td>
-                       <td>
-                          
-                      </td>
-                    </tr>
-                </tbody>
-              </table>
-              
-                   <div class="pagination alternate">
-             <ul>
-           <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-           <li  v-for="(titre, index) in partition(marcheHorSibFiltre,size).length" :key="index" :class="{ active : active_el == index }">
-           <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-            <li :class="{ disabled : page == partition(marcheHorSibFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
-           </ul>
-        </div>
+                        <div id="tab0000" class="tab-pane active">
+                   <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#NIVEAU1" v-if="InfastructureCodeNiveau1==1">{{InfastructureLibelleNiveau1}}   <span class="badge badge" >{{NombreInfastructureNiveau1}}</span></a></li>
+                              
+                               <li ><a data-toggle="tab" href="#NIVEAU2" v-if="InfastructureCodeNiveau2==2"> {{InfastructureLibelleNiveau2}}   <span class="badge badge-important" > {{NombreInfastructureNiveau2}} </span></a></li>
+                                <li ><a data-toggle="tab" href="#NIVEAU3" v-if="InfastructureCodeNiveau3==3"> {{InfastructureLibelleNiveau3}}   <span class="badge badge-success" > {{NombreInfastructureNiveau3}} </span></a></li>
+                               <li ><a data-toggle="tab" href="#NIVEAU4" v-if="InfastructureCodeNiveau4==4"> {{InfastructureLibelleNiveau4}}   <span class="badge badge-success" > {{NombreInfastructureNiveau4}} </span></a></li>
+                               <li ><a data-toggle="tab" href="#NIVEAU5" v-if="InfastructureCodeNiveau5==5"> {{InfastructureLibelleNiveau5}}   <span class="badge badge-important" > {{NombreInfastructureNiveau5}} </span></a></li>
+                                <li ><a data-toggle="tab" href="#NIVEAU6" v-if="InfastructureCodeNiveau6==6"> {{InfastructureLibelleNiveau6}}   <span class="badge badge-success" > {{NombreInfastructureNiveau6}} </span></a></li>
+                               
+                            </ul>
+                        </div>
+                        <div class="widget-content tab-content">
+                        <div id="NIVEAU1" class="tab-pane active">
+                          <infrastructureNiveau1></infrastructureNiveau1>
+                        </div>
+                        <div id="NIVEAU2" class="tab-pane">
+                          <infrastructureNiveau2></infrastructureNiveau2>
+                        </div>
+                        <div id="NIVEAU3" class="tab-pane">
+                           <infrastructureNiveau3></infrastructureNiveau3>
+                        </div>
+                        <div id="NIVEAU4" class="tab-pane">
+                           <infrastructureNiveau4></infrastructureNiveau4>
+                        </div>
+                        <div id="NIVEAU5" class="tab-pane">
+                           <infrastructureNiveau5></infrastructureNiveau5>
+                        </div>
+                        <div id="NIVEAU6" class="tab-pane">
+                           <infrastructureNiveau6></infrastructureNiveau6>
+                        </div>
+                        </div>
                         </div>
 
                       <div id="tab10000" class="tab-pane">
-                     <planification></planification>
+                     <!-- <planification></planification> -->
+                     <div class="widget-title">
+                           <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#NIVEAU7" v-if="InfastructureCodeNiveau1==1">{{InfastructureLibelleNiveau1}}   <span class="badge badge" >{{NombrePlanInfastructureNiveau1}}</span></a></li>
+                              
+                               <li ><a data-toggle="tab" href="#NIVEAU8" v-if="InfastructureCodeNiveau2==2"> {{InfastructureLibelleNiveau2}}   <span class="badge badge-important" > {{NombrePlanifInfastructureNiveau2}} </span></a></li>
+                                <li ><a data-toggle="tab" href="#NIVEAU9" v-if="InfastructureCodeNiveau3==3"> {{InfastructureLibelleNiveau3}}   <span class="badge badge-success" > {{NombrePlanifInfastructureNiveau3}} </span></a></li>
+                               <li ><a data-toggle="tab" href="#NIVEAU10" v-if="InfastructureCodeNiveau4==4"> {{InfastructureLibelleNiveau4}}   <span class="badge badge-success" > {{NombrePlanifInfastructureNiveau4}} </span></a></li>
+                               <li ><a data-toggle="tab" href="#NIVEAU11" v-if="InfastructureCodeNiveau5==5"> {{InfastructureLibelleNiveau5}}   <span class="badge badge-important" > {{NombrePlanifInfastructureNiveau5}} </span></a></li>
+                                <li ><a data-toggle="tab" href="#NIVEAU12" v-if="InfastructureCodeNiveau6==6"> {{InfastructureLibelleNiveau6}}   <span class="badge badge-success" > {{NombrePlanifInfastructureNiveau6}} </span></a></li>
+                               
+                            </ul>
+                        </div>
+                        <div class="widget-content tab-content">
+                        <div id="NIVEAU7" class="tab-pane active">
+                          <PlanInfrastructureNiveau1></PlanInfrastructureNiveau1>
+                        </div>
+                        <div id="NIVEAU8" class="tab-pane">
+                          <PlanInfrastructureNiveau2></PlanInfrastructureNiveau2>
+                        </div>
+                        <div id="NIVEAU9" class="tab-pane">
+                          <PlanInfrastructureNiveau3></PlanInfrastructureNiveau3>
+                        </div>
+                        <div id="NIVEAU10" class="tab-pane">
+                          <PlanInfrastructureNiveau4></PlanInfrastructureNiveau4>
+                        </div>
+                        <div id="NIVEAU11" class="tab-pane">
+                          <PlanInfrastructureNiveau5></PlanInfrastructureNiveau5>
+                        </div>
+                        <div id="NIVEAU12" class="tab-pane">
+                          <PlanInfrastructureNiveau6></PlanInfrastructureNiveau6>
+                        </div>
+                        </div>
                      </div>
                        <div id="tab109" class="tab-pane">
                      <contratualisation></contratualisation>
-                     
+                     <!-- <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#SANITAIRES">INFRASTRUCTURES SANITAIRES   <span class="badge badge" >{{NombreInfasSanitaire}}</span></a></li>
+                              
+                               <li ><a data-toggle="tab" href="#SCOLAIRES"> INFRASTRUCTURES SCOLAIRES   <span class="badge badge-important" > {{NombreInfasScolaire}} </span></a></li>
+                                <li ><a data-toggle="tab" href="#COMMUNAUTAIRES"> INFRASTRUCTURES COMMUNAUTAIRES   <span class="badge badge-success" > {{NombreInfasCommunautaires}} </span></a></li>
+                               <li ><a data-toggle="tab" href="#DIVERS"> DIVERS   <span class="badge badge-success" > {{NombreInfasDivers}} </span></a></li>
+                            </ul>
+                        </div>
+                        <div class="widget-content tab-content">
+                        <div id="SANITAIRES" class="tab-pane active">
+                          <Sanitaire></Sanitaire>
+                        </div>
+                        <div id="SCOLAIRES" class="tab-pane">
+                          
+                        </div>
+                        <div id="COMMUNAUTAIRES" class="tab-pane">
+                          
+                        </div>
+                        <div id="DIVERS" class="tab-pane">
+                          
+                        </div>
+                        </div> -->
                      </div>
                     </div>
 
@@ -240,7 +130,19 @@ CodeExempte
 </template>
 
 <script>
-   import planification from "./component/planification"
+   import infrastructureNiveau1 from "./NiveauInfastructureToutMarche/infrastructureNiveau1"
+   import infrastructureNiveau2 from "./NiveauInfastructureToutMarche/infrastructureNiveau2"
+   import infrastructureNiveau3 from "./NiveauInfastructureToutMarche/infrastructureNiveau3"
+   import infrastructureNiveau4 from "./NiveauInfastructureToutMarche/infrastructureNiveau4"
+   import infrastructureNiveau5 from "./NiveauInfastructureToutMarche/infrastructureNiveau5"
+   import infrastructureNiveau6 from "./NiveauInfastructureToutMarche/infrastructureNiveau6"
+  import PlanInfrastructureNiveau1 from "../component/NiveauInfastructurePlanification/PlanInfrastructureNiveau1"
+  import PlanInfrastructureNiveau2 from "../component/NiveauInfastructurePlanification/PlanInfrastructureNiveau2"
+  import PlanInfrastructureNiveau3 from "../component/NiveauInfastructurePlanification/PlanInfrastructureNiveau3"
+  import PlanInfrastructureNiveau4 from "../component/NiveauInfastructurePlanification/PlanInfrastructureNiveau4"
+  import PlanInfrastructureNiveau5 from "../component/NiveauInfastructurePlanification/PlanInfrastructureNiveau5"
+  import PlanInfrastructureNiveau6 from "../component/NiveauInfastructurePlanification/PlanInfrastructureNiveau6"
+    // import planification from "./component/planification"
    import contratualisation from "./component/contratualisation"
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
@@ -248,8 +150,19 @@ CodeExempte
  import {partition} from '../../../../src/Repositories/Repository'
 export default {
   components:{
-  planification,
-  contratualisation
+  infrastructureNiveau1,
+  infrastructureNiveau2,
+  infrastructureNiveau3,
+  infrastructureNiveau4,
+  infrastructureNiveau5,
+  infrastructureNiveau6,
+  contratualisation,
+  PlanInfrastructureNiveau1,
+  PlanInfrastructureNiveau2,
+  PlanInfrastructureNiveau3,
+  PlanInfrastructureNiveau4,
+  PlanInfrastructureNiveau5,
+  PlanInfrastructureNiveau6
   },
   name:'type facture',
   data() {
@@ -376,7 +289,7 @@ export default {
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
     ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires',"grandes_natures",
- 'structures_geographiques','localisations_geographiques']),
+ 'structures_geographiques','localisations_geographiques',"getterInfrastrucure"]),
 
     ...mapGetters("horSib", ["gettersMarcheHorsib"]),
 
@@ -392,7 +305,127 @@ export default {
 //    }
 // )
 //    },
+InfastructureNiveau1() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterInfrastrucure.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 0
+        }
+      };
+    },
+NombreInfastructureNiveau1() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==1).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==1).length
+      
+    },
+
+NombreInfastructureNiveau2() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==2).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==2).length
+      
+    },
+    NombreInfastructureNiveau3() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==3).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==3).length
+      
+    },
+    NombreInfastructureNiveau4() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==4).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==4).length
+      
+    },
+    NombreInfastructureNiveau5() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==5).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==5).length
+      
+    },
+    NombreInfastructureNiveau6() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==6).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==6).length
+      
+    },
     marcheHorSibFiltre() {
        // const st = this.search.toLowerCase();
 
@@ -645,7 +678,261 @@ afficherLibelleTypeMarche(){
       return 0
     },
      
+InfastructureCodeNiveau1() {
 
+      
+      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 1);
+
+      if (norme) {
+        return norme.code;
+      }
+      return 0
+    },
+    InfastructureLibelleNiveau1() {
+
+      
+      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 1);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+    InfastructureCodeNiveau2() {
+
+      
+      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 2);
+
+      if (norme) {
+        return norme.code;
+      }
+      return 0
+    },
+    InfastructureLibelleNiveau2() {
+
+      
+      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 2);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+    InfastructureCodeNiveau3() {
+
+      
+      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 3);
+
+      if (norme) {
+        return norme.code;
+      }
+      return 0
+    },
+    InfastructureLibelleNiveau3() {
+
+      
+      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 3);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+    InfastructureCodeNiveau4() {
+
+      
+      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 4);
+
+      if (norme) {
+        return norme.code;
+      }
+      return 0
+    },
+    InfastructureLibelleNiveau4() {
+
+      
+      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 4);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+    InfastructureCodeNiveau5() {
+
+      
+      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 5);
+
+      if (norme) {
+        return norme.code;
+      }
+      return 0
+    },
+    InfastructureLibelleNiveau5() {
+
+      
+      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 5);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+    InfastructureCodeNiveau6() {
+
+      
+      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 6);
+
+      if (norme) {
+        return norme.code;
+      }
+      return 0
+    },
+    InfastructureLibelleNiveau6() {
+
+      
+      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 6);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+
+
+
+
+
+
+
+
+    NombrePlanInfastructureNiveau1() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element =>element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==1).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element =>element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==1).length
+      
+    },
+    NombrePlanifInfastructureNiveau1() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element =>element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==1).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element =>element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==1).length
+      
+    },
+
+NombrePlanifInfastructureNiveau2() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element =>element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==2).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element =>element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==2).length
+      
+    },
+    NombrePlanifInfastructureNiveau3() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==3).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==3).length
+      
+    },
+    NombrePlanifInfastructureNiveau4() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element =>element.attribue == 0 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==4).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element =>element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==4).length
+      
+    },
+    NombrePlanifInfastructureNiveau5() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==5).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==5).length
+      
+    },
+    NombrePlanifInfastructureNiveau6() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==6).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==6).length
+      
+    },
   },
   methods: {
     ...mapActions("bienService", ['ajouterMarche','modifierMarche','modifierMarcheBascule',

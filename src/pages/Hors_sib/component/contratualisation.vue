@@ -59,15 +59,14 @@
                   
 <td>
                      <button 
-                      v-if="activites.attribue == 1"  class="btn  btn-danger">
+                      v-if="activites.attribue == 1"  class="btn  btn-success">
                 <span >CT</span>
        
                 </button>
                  
                    </td>
-
 <td>
-    <router-link :to="{ name: 'detail_hors_sib', params: { id: activites.id }}"
+    <router-link :to="{ name: 'DetailMarchePs', params: { id: activites.id }}"
                 class="btn btn-default " title="continue la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link>

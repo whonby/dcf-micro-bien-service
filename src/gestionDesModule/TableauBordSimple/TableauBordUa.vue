@@ -103,8 +103,8 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import {formatageSomme} from '../../src/Repositories/Repository';
-import {noDCfNoAdmin} from '../../src/Repositories/Auth';
+import {formatageSomme} from '../../Repositories/Repository';
+import {noDCfNoAdmin} from '../../Repositories/Auth';
 import moment from "moment";
 export default {
   data(){

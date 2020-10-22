@@ -18,12 +18,16 @@ import Formejuridique from "../../pages/parametres_generaux/administratifs/Forme
 import RegimeImposition from "../../pages/parametres_generaux/administratifs/RegimeImposition.vue";
 import StructurePays from "../../pages/parametres_generaux/administratifs/StructurePays.vue";
 import PlanPays from "../../pages/parametres_generaux/administratifs/PlanPays.vue";
-
+import Infrastructures from "../../pages/parametres_generaux/administratifs/Infrastructures.vue";
 import structureOrganigrammeUa from "../../pages/parametres_generaux/administratifs/structureOrganigrammeUa.vue";
 import PlanOrganigrammeUa from "../../pages/parametres_generaux/administratifs/PlanOrganigrammeUa.vue";
 const AdministratifRoutesAdoni = [
   // route type unite administrative
-
+  {
+    path: "/Infrastructures",
+    name: "Infrastructures",
+    component: Infrastructures
+  },
   {
     path: "/tableau-Bord-General",
     name: "tableauBordGeneralOriginal",

@@ -544,6 +544,7 @@ NivauStructureParUa() {
          
       
 },
+
     afficheUaNiveau1(){
   
           return this.StructureOrganigrammeUa.filter(item => item.niveau == 1)
@@ -564,7 +565,7 @@ NivauStructureParUa() {
 libelleUA(){
   return id =>{
         if(id!=null && id!=""){
-          const objet = this.uniteAdministratives.find(item => item.ua_id==id)
+          const objet = this.uniteAdministratives.find(item => item.id==id)
           if(objet) 
           return objet.libelle
         }
