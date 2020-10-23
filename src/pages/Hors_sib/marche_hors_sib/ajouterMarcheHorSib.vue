@@ -272,30 +272,20 @@ afficherLesActivite
        </div>
      </div>
          </td>
-          <td>
+          <td colspan="2">
                   <div class="control-group">
-       <label class="control-label">localisation géographique</label>
+       <label class="control-label">Infrastructure</label>
        <div class="controls">
-         <!-- <input
-           type="text"
-           v-model="formData.source_financement"
-           class="span4"
-           
-           readonly
-         /> -->
-         <!-- <select v-model="formData.localisation_geographie_id" class="span4">
-                                <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
-              </select> -->
-               <select v-model="formData.localisation_geographie_id" class="span4" >
-               <option v-for="plans in afficherCodeStructureLibelle(recupererLataille)" :key="plans.id" 
+       
+               <select v-model="formData.infrastructure_id" class="span6" >
+               <option v-for="plans in getterInfrastrucure" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
       
        </div>
      </div>
-         </td>
-                <td>
+            </td>
+                <!-- <td>
                   <div class="control-group">
        <label class="control-label">Departement</label>
        <div class="controls">
@@ -307,63 +297,10 @@ afficherLesActivite
       
        </div>
      </div>
-         </td>
+         </td> -->
               </tr>
               
-              <tr>
-               
-                <td colspan="">
-                  <div class="control-group">
-       <label class="control-label">Sous-prefecture</label>
-       <div class="controls">
-       
-               <select v-model="formData.sous_prefecture_id" class="span4" :readOnly="deveroiullageSousprefecture">
-               <option v-for="plans in recupererParentId(formData.departement_id)" :key="plans.id" 
-               :value="plans.id">{{plans.libelle}}</option>
-           </select>
-      
-       </div>
-     </div>
-         </td>
-              <td colspan="">
-     <div class="control-group">
-      <label class="control-label">Latitude</label>
-      <div class="controls">
-     <input
-       type="text"
-       v-model="formData.latitude"
-       class="span4"
-       placeholder=""
-     />
-   </div>
-   </div>
-     </td>
-           <td colspan="">
-            <div class="control-group">
-       <label class="control-label">Longitude</label>
-       <div class="controls">
-         <input
-           type="text"
-           v-model="formData.longitude"
-           class="span4" />
-       </div>
-     </div>
-         </td>
-          
-            <td colspan="">
-                  <div class="control-group">
-       <label class="control-label">Infrastructure</label>
-       <div class="controls">
-       
-               <select v-model="formData.infrastructure_id" class="span3" >
-               <option v-for="plans in getterInfrastrucure" :key="plans.id" 
-               :value="plans.id">{{plans.libelle}}</option>
-           </select>
-      
-       </div>
-     </div>
-            </td>
-              </tr>
+            
 
               
           </table>
@@ -422,11 +359,11 @@ export default {
     //   },
 
     formData: {
-      latitude:"",
-      departement_id:"",
-      sous_prefecture_id:"",
-      longitude:"",
-      localisation_geographie_id:"",
+      // latitude:"",
+      // departement_id:"",
+      // sous_prefecture_id:"",
+      // longitude:"",
+      // localisation_geographie_id:"",
       libelle_procedure:"",
         type_financement:"",
         source_financement:"",
@@ -451,30 +388,7 @@ export default {
         },
        
 
-      editMarche: {
-           objet:"",
-           livrable:"",
-            reference_marche:"",
-            montant_marche:"",
-                type_marche_id:"",
-                unite_administrative_id:"",
-                imputation:"",
-                 activite_id:"",
-                 exo_id:"",
-                 libelle_procedure:"",
-        type_financement:"",
-        source_financement:"",
-            
-            economique_id:"",
-            procedure_passation_id:"",
-            beneficiaire:"",
-          
-                gdenature_id:"",
-                
-               // typeappel_id:"",
-               
-                sib:1
-      },
+      
       
 //       editActeEffetFinancier:{
 // cause_resiliation:"",
@@ -719,9 +633,9 @@ recupererParentId(){
               }
              this.ajouterMarcheHorSib(nouvelObjet) 
               this.formData ={
-            latitude:"",
-      longitude:"",
-      localisation_geographie_id:"",
+      //       latitude:"",
+      // longitude:"",
+      // localisation_geographie_id:"",
       libelle_procedure:"",
         type_financement:"",
         source_financement:"",
