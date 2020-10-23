@@ -22,7 +22,7 @@ CodeExempte
               <h5>Liste des March&eacute;s</h5>
               <div align="right">
                 Recherche:
-                <input type="search"  v-model="search" />
+                <input type="search"  v-model="search"  placeholder=" saisir objet ou le montant"/>
               </div>
             </div>
             <div class="span4">
@@ -378,17 +378,18 @@ export default {
 return this.afficherListeMarcheHorsSib.filter((item) => {
   
      return item.objet.toLowerCase().includes(searchTerm) ||
-            item.reference_marche.toLowerCase().includes(searchTerm) 
+           item.montant_marche.toLowerCase().includes(searchTerm) 
            //|| item.uabudget_eclate.libelle.toLowerCase().includes(searchTerm) 
    }
 )
    },
 
    montantMarche(){
-  return this.afficherListeMarcheHorsSib.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),0)
-},
 
- //afficher la liste des marchés hors sib
+  return this.marcheHorSibFiltre.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),0)
+},
+ // afficher la liste des marchés hors sib
+
 
 //  afficherListeMarcheHorSib(){
 

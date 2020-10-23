@@ -109,6 +109,7 @@ export default {
   },
 created(){
           this.getGestionModules()
+          this.getInfrastructure()
     this.getAffectation()
 this.getFormeJuridiques()
 this.getRegimeImpositions()
@@ -429,7 +430,7 @@ return objJson.id
    ...mapActions('parametreGenerauxProgrammeUnite',['getUnite', 'getZone']),
 
     ...mapActions('parametreGenerauxAdministratif',
-     ['getGestionModules','getExercicesBudgetaires', 'getTitres', 'getTaux',
+     ['getGestionModules',"getInfrastructure",'getExercicesBudgetaires', 'getTitres', 'getTaux',
     'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 'getStructurePays', 'getPlanPays','getPlanOrganigrammeUa',
     'getStructureAdministrative', 'getServiceGestionnaire', 'getStructureGeographique',
     'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions"]),

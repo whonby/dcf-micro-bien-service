@@ -86,7 +86,7 @@ this.getRegimeImpositions()
     this.getRapport()
       this.getBudgeChager()
       this.getLigneExempter()
-this.getInfrastructure()
+
    this.getLocalisationGeographiqueAll()
       this.getExercicesBudgetaires()
       this.getTaux()
