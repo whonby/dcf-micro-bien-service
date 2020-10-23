@@ -375,7 +375,7 @@ export default {
 
      const searchTerm = this.search.toLowerCase();
 
-return this.afficherListeMarcheHorSib.filter((item) => {
+return this.afficherListeMarcheHorsSib.filter((item) => {
   
      return item.objet.toLowerCase().includes(searchTerm) ||
             item.reference_marche.toLowerCase().includes(searchTerm) 
@@ -385,19 +385,46 @@ return this.afficherListeMarcheHorSib.filter((item) => {
    },
 
    montantMarche(){
-  return this.afficherListeMarcheHorSib.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),0)
+  return this.afficherListeMarcheHorsSib.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),0)
 },
 
- // afficher la liste des marchés hors sib
+ //afficher la liste des marchés hors sib
 
- afficherListeMarcheHorSib(){
+//  afficherListeMarcheHorSib(){
 
-   return this.gettersMarcheHorsib.filter(item =>item.plan_passation_marche_id==null && item.sib==1)
+//    return this.gettersMarcheHorsib.filter(item =>item.plan_passation_marche_id==null && item.sib==1)
    
   
- },
+//  },
 
- 
+ afficherListeMarcheHorsSib() {
+       // const st = this.search.toLowerCase();
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element =>   element.parent_id == null && element.sib==1 )
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // }); 
+        }
+
+        return this.gettersMarcheHorsib.filter(element =>   element.parent_id == null && element.sib==1 )
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
  
 
  // afficher le nommbre demareche hors sib

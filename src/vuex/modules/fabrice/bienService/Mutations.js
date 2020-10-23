@@ -26,9 +26,9 @@
 //         select.id !=id)
 // }
 
-export const GET_ALL_IMAGE_MARCHE = (state, tableau_candidat_selectionner) =>{
-    state.imageMarche = tableau_candidat_selectionner
-}
+// export const GET_ALL_IMAGE_MARCHE = (state, tableau_candidat_selectionner) =>{
+//     state.imageMarche = tableau_candidat_selectionner
+// }
 
 export const GET_ALL_SELECTIONNER_CANDIDAT = (state, tableau_candidat_selectionner) =>{
     state.selectionner_candidats = tableau_candidat_selectionner
@@ -2373,8 +2373,38 @@ export const LOADING_MARCHE = (state, value)=> {
 
 
 
+/**
+ * Pusher image_marche
+ */
+
+export const PUSHER_IMAGE_MARCHE = (state, elementAjouter) => {
+    state.image_marche.unshift(elementAjouter)
+}
+
+export const GET_IMAGE_MARCHE = (state, tableau_prestation) =>{
+    state.image_marche = tableau_prestation
+}
+
+
+export const AJOUTER_IMAGE_MARCHE  = (state, elementAjouter) => {
+    state.image_marche.unshift(elementAjouter)
+}
+
+// update all prestation
+export const MODIFIER_IMAGE_MARCHE  = (state, elementModif)=>{
+    state.image_marche = state.image_marche.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
 
 
 
+// delete all prestation
 
+export const DELETE_IMAGE_MARCHE  = (state, id)=> {
+    state.image_marche = state.image_marche.filter(prest => prest.id !=id)
+}
 

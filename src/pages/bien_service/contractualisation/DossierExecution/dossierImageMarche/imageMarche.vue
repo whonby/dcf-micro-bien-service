@@ -1,6 +1,6 @@
 <template>
     <div>
-     
+     {{macheid}}
         <div class="row-fluid" >
       <div class="span4" v-for="item in afficheImageParMarche(macheid)" :key="item.id">
         <div class="widget-box">
@@ -39,7 +39,7 @@ search:""
     created(){},
 
               computed: {
-            ...mapGetters("bienService", ["imageMarche",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+            ...mapGetters("bienService", ["getterImageMarche",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -77,7 +77,7 @@ return objJson.name
 AffichePhoto() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.imageMarche.find(qtreel => qtreel.id == id);
+           const qtereel = this.getterImageMarche.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         
@@ -91,7 +91,7 @@ AffichePhoto() {
 afficheImageParMarche() {
       return id => {
         if (id != null && id != "") {
-          return this.imageMarche.filter(
+          return this.getterImageMarche.filter(
             element => element.marche_id == id 
           );
         }

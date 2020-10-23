@@ -7,25 +7,6 @@
 
 
 
-<!--      <l-map :center="[-23.752961, -57.854357]" :zoom="6" style="height: 500px;" :options="mapOptions1">-->
-<!--        <l-choropleth-layer :data="pyDepartmentsData" titleKey="department_name" idKey="department_id" :value="value" :extraValues="extraValues" geojsonIdKey="dpto" :geojson="geojson" :colorScale="colorScale">-->
-<!--          <template slot-scope="props">-->
-<!--            <l-info-control :item="props.currentItem" :unit="props.unit" title="Department" placeholder="Hover over a department"/>-->
-<!--            <l-reference-chart title="Girls school enrolment" :colorScale="colorScale" :min="props.min" :max="props.max" position="topright"/>-->
-<!--          </template>-->
-<!--        </l-choropleth-layer>-->
-<!--      </l-map>-->
-<!--      <Button @click="value3 = true" type="primary">Create</Button>-->
-<!--      <div class="row-fluid">-->
-<!--        <div class="">-->
-<!--          <div class="widget-box">-->
-<!--            <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>-->
-<!--              <h5>Cartographie des marchés</h5>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-
       <div class="row-fluid"  style="position: absolute !important;">
         <div id="sidebarinfo"  class="sidebar leaflet-sidebar collapsed">
           <div class="sidebar-tabs">
@@ -64,6 +45,8 @@
                     Montant restant:<span style="color: darkred; "><b>{{formatageSomme(objetUnite.budgetReste)}}</b></span><br>
                     Taux d'exécution:<span style="color: #e36706; "><b>{{objetUnite.tauxBudget}} %</b></span>
                   </div>
+
+                  
                   <!--                  <table class="table table-bordered table-striped" v-if="objetUnite">-->
                   <!--                    <tbody>-->
                   <!--                    <tr>-->
@@ -84,6 +67,20 @@
                   <!--                    </tr>-->
                   <!--                    </tbody>-->
                   <!--                  </table>-->
+                </div>
+                <div class="span12" v-if="objetUnite">
+                     <div class="row-fluid">
+                         <div class="span12" v-for="l in imageMarcheSelectionner(objetUnite.id)" :key="l.id">
+                           <div class="widget-box">
+                              <div class="widget-title"> 
+                                {{l.libelle}}
+                                </div>
+                                  <img v-bind:src="afficheImageMarche(l.fichier)" style="width:100%;height:150px;">
+                             </div>
+
+
+                        </div>
+                    </div>
                 </div>
               </div>
             </div>
@@ -164,6 +161,7 @@
 
                     </model-list-select>
                     <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a>
+
                   </td>
                 </tr>
 <!--                <tr>-->
@@ -479,6 +477,7 @@ export default {
         {iconUrl, shadowUrl}
     ))
     return {
+      url_bien_service:"",
       info_sidebar_marche:"",
       unite_administrative_id:"",
       departement:"",
@@ -660,7 +659,8 @@ created() {
 //     console.log(".......................")
 // console.log(this.getterInfrastrucure)
 //   console.log(".......................")
-  console.log(this.dataBar)
+this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
+  console.log(this.url_bien_service)
 },
   computed: {
 // methode pour maper notre guetter
@@ -671,9 +671,8 @@ created() {
       "typeTextes",
       "uniteAdministratives",
       "getterBudgeCharge",
-
     ]),
-    ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise"]),
+    ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise","getterImageMarche"]),
     regions(){
       return this.getterLocalisationGeoAll.filter(item=>item.structure_localisation_geographique.niveau==2);
     },
@@ -696,6 +695,21 @@ created() {
           }
         });
       }
+    },
+    imageMarcheSelectionner(){
+       return id=>{
+         if(id!=""){
+           console.log(this.getterImageMarche)
+           return this.getterImageMarche.filter(item=>item.marche_id==id)
+         }
+       }
+    },
+    afficheImageMarche(){
+    return id=>{
+         if(id!=""){
+           return this.url_bien_service+"/imagemarches/"+id
+         }
+       }
     },
     localisationsFiltre(){
       const searchTerm = this.search.toLowerCase();

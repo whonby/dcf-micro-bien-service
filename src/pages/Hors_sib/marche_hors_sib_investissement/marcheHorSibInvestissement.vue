@@ -24,13 +24,13 @@ NombrePlanifInfastructureNiveau1
                         <div id="tab0000" class="tab-pane active">
                    <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#NIVEAU1" v-if="InfastructureCodeNiveau1==1">{{InfastructureLibelleNiveau1}}   <span class="badge badge" >{{NombreInfastructureNiveau1}}</span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#NIVEAU1" v-if="InfastructureCodeNiveau1==1">{{InfastructureLibelleNiveau1}}   <span class="badge badge-success" >{{NombreInfastructureNiveau1}}</span></a></li>
                               
                                <li ><a data-toggle="tab" href="#NIVEAU2" v-if="InfastructureCodeNiveau2==2"> {{InfastructureLibelleNiveau2}}   <span class="badge badge-important" > {{NombreInfastructureNiveau2}} </span></a></li>
-                                <li ><a data-toggle="tab" href="#NIVEAU3" v-if="InfastructureCodeNiveau3==3"> {{InfastructureLibelleNiveau3}}   <span class="badge badge-success" > {{NombreInfastructureNiveau3}} </span></a></li>
-                               <li ><a data-toggle="tab" href="#NIVEAU4" v-if="InfastructureCodeNiveau4==4"> {{InfastructureLibelleNiveau4}}   <span class="badge badge-success" > {{NombreInfastructureNiveau4}} </span></a></li>
-                               <li ><a data-toggle="tab" href="#NIVEAU5" v-if="InfastructureCodeNiveau5==5"> {{InfastructureLibelleNiveau5}}   <span class="badge badge-important" > {{NombreInfastructureNiveau5}} </span></a></li>
-                                <li ><a data-toggle="tab" href="#NIVEAU6" v-if="InfastructureCodeNiveau6==6"> {{InfastructureLibelleNiveau6}}   <span class="badge badge-success" > {{NombreInfastructureNiveau6}} </span></a></li>
+                                <li ><a data-toggle="tab" href="#NIVEAU3" v-if="InfastructureCodeNiveau3==3"> {{InfastructureLibelleNiveau3}}   <span class="badge badge-info" > {{NombreInfastructureNiveau3}} </span></a></li>
+                               <li ><a data-toggle="tab" href="#NIVEAU4" v-if="InfastructureCodeNiveau4==4"> {{InfastructureLibelleNiveau4}}   <span class="badge badge-warning" > {{NombreInfastructureNiveau4}} </span></a></li>
+                               <li ><a data-toggle="tab" href="#NIVEAU5" v-if="InfastructureCodeNiveau5==5"> {{InfastructureLibelleNiveau5}}   <span class="badge badge-inverse" > {{NombreInfastructureNiveau5}} </span></a></li>
+                                <li ><a data-toggle="tab" href="#NIVEAU6" v-if="InfastructureCodeNiveau6==6"> {{InfastructureLibelleNiveau6}}   <span class="badge badge" > {{NombreInfastructureNiveau6}} </span></a></li>
                                
                             </ul>
                         </div>
@@ -60,13 +60,13 @@ NombrePlanifInfastructureNiveau1
                      <!-- <planification></planification> -->
                      <div class="widget-title">
                            <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#NIVEAU7" v-if="InfastructureCodeNiveau1==1">{{InfastructureLibelleNiveau1}}   <span class="badge badge" >{{NombrePlanInfastructureNiveau1}}</span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#NIVEAU7" v-if="InfastructureCodeNiveau1==1">{{InfastructureLibelleNiveau1}}   <span class="badge badge-success" >{{NombrePlanInfastructureNiveau1}}</span></a></li>
                               
                                <li ><a data-toggle="tab" href="#NIVEAU8" v-if="InfastructureCodeNiveau2==2"> {{InfastructureLibelleNiveau2}}   <span class="badge badge-important" > {{NombrePlanifInfastructureNiveau2}} </span></a></li>
-                                <li ><a data-toggle="tab" href="#NIVEAU9" v-if="InfastructureCodeNiveau3==3"> {{InfastructureLibelleNiveau3}}   <span class="badge badge-success" > {{NombrePlanifInfastructureNiveau3}} </span></a></li>
-                               <li ><a data-toggle="tab" href="#NIVEAU10" v-if="InfastructureCodeNiveau4==4"> {{InfastructureLibelleNiveau4}}   <span class="badge badge-success" > {{NombrePlanifInfastructureNiveau4}} </span></a></li>
-                               <li ><a data-toggle="tab" href="#NIVEAU11" v-if="InfastructureCodeNiveau5==5"> {{InfastructureLibelleNiveau5}}   <span class="badge badge-important" > {{NombrePlanifInfastructureNiveau5}} </span></a></li>
-                                <li ><a data-toggle="tab" href="#NIVEAU12" v-if="InfastructureCodeNiveau6==6"> {{InfastructureLibelleNiveau6}}   <span class="badge badge-success" > {{NombrePlanifInfastructureNiveau6}} </span></a></li>
+                                <li ><a data-toggle="tab" href="#NIVEAU9" v-if="InfastructureCodeNiveau3==3"> {{InfastructureLibelleNiveau3}}   <span class="badge badge-info" > {{NombrePlanifInfastructureNiveau3}} </span></a></li>
+                               <li ><a data-toggle="tab" href="#NIVEAU10" v-if="InfastructureCodeNiveau4==4"> {{InfastructureLibelleNiveau4}}   <span class="badge badge-warning" > {{NombrePlanifInfastructureNiveau4}} </span></a></li>
+                               <li ><a data-toggle="tab" href="#NIVEAU11" v-if="InfastructureCodeNiveau5==5"> {{InfastructureLibelleNiveau5}}   <span class="badge badge-inverse" > {{NombrePlanifInfastructureNiveau5}} </span></a></li>
+                                <li ><a data-toggle="tab" href="#NIVEAU12" v-if="InfastructureCodeNiveau6==6"> {{InfastructureLibelleNiveau6}}   <span class="badge badge" > {{NombrePlanifInfastructureNiveau6}} </span></a></li>
                                
                             </ul>
                         </div>
@@ -92,30 +92,39 @@ NombrePlanifInfastructureNiveau1
                         </div>
                      </div>
                        <div id="tab109" class="tab-pane">
-                     <contratualisation></contratualisation>
-                     <!-- <div class="widget-title">
+                     <!-- <contratualisation></contratualisation> -->
+                     <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#SANITAIRES">INFRASTRUCTURES SANITAIRES   <span class="badge badge" >{{NombreInfasSanitaire}}</span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#NIVEAU20" v-if="InfastructureCodeNiveau1==1">{{InfastructureLibelleNiveau1}}   <span class="badge badge-success" >{{NombreContratualisationInfastructureNiveau1}}</span></a></li>
                               
-                               <li ><a data-toggle="tab" href="#SCOLAIRES"> INFRASTRUCTURES SCOLAIRES   <span class="badge badge-important" > {{NombreInfasScolaire}} </span></a></li>
-                                <li ><a data-toggle="tab" href="#COMMUNAUTAIRES"> INFRASTRUCTURES COMMUNAUTAIRES   <span class="badge badge-success" > {{NombreInfasCommunautaires}} </span></a></li>
-                               <li ><a data-toggle="tab" href="#DIVERS"> DIVERS   <span class="badge badge-success" > {{NombreInfasDivers}} </span></a></li>
+                               <li ><a data-toggle="tab" href="#NIVEAU21" v-if="InfastructureCodeNiveau2==2"> {{InfastructureLibelleNiveau2}}   <span class="badge badge-important" > {{NombreContratualisationInfastructureNiveau2}} </span></a></li>
+                                <li ><a data-toggle="tab" href="#NIVEAU22" v-if="InfastructureCodeNiveau3==3"> {{InfastructureLibelleNiveau3}}   <span class="badge badge-info" > {{NombreContratualisationInfastructureNiveau3}} </span></a></li>
+                               <li ><a data-toggle="tab" href="#NIVEAU23" v-if="InfastructureCodeNiveau4==4"> {{InfastructureLibelleNiveau4}}   <span class="badge badge-warning" > {{NombreContratualisationInfastructureNiveau4}} </span></a></li>
+                               <li ><a data-toggle="tab" href="#NIVEAU24" v-if="InfastructureCodeNiveau5==5"> {{InfastructureLibelleNiveau5}}   <span class="badge badge-inverse" > {{NombreContratualisationInfastructureNiveau5}} </span></a></li>
+                                <li ><a data-toggle="tab" href="#NIVEAU25" v-if="InfastructureCodeNiveau6==6"> {{InfastructureLibelleNiveau6}}   <span class="badge badge"> {{NombreContratualisationInfastructureNiveau6}} </span></a></li>
+                               
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
-                        <div id="SANITAIRES" class="tab-pane active">
-                          <Sanitaire></Sanitaire>
+                        <div id="NIVEAU20" class="tab-pane active">
+                          <ContraInfrastructureNiveau1></ContraInfrastructureNiveau1>
                         </div>
-                        <div id="SCOLAIRES" class="tab-pane">
-                          
+                        <div id="NIVEAU21" class="tab-pane">
+                          <ContraInfrastructureNiveau2></ContraInfrastructureNiveau2>
                         </div>
-                        <div id="COMMUNAUTAIRES" class="tab-pane">
-                          
+                        <div id="NIVEAU22" class="tab-pane">
+                          <ContraInfrastructureNiveau3></ContraInfrastructureNiveau3>
                         </div>
-                        <div id="DIVERS" class="tab-pane">
-                          
+                        <div id="NIVEAU23" class="tab-pane">
+                          <ContraInfrastructureNiveau4></ContraInfrastructureNiveau4>
                         </div>
-                        </div> -->
+                         <div id="NIVEAU24" class="tab-pane">
+                          <ContraInfrastructureNiveau5></ContraInfrastructureNiveau5>
+                        </div>
+                         <div id="NIVEAU25" class="tab-pane">
+                          <ContraInfrastructureNiveau6></ContraInfrastructureNiveau6>
+                        </div>
+                        </div>
                      </div>
                     </div>
 
@@ -136,14 +145,21 @@ NombrePlanifInfastructureNiveau1
    import infrastructureNiveau4 from "./NiveauInfastructureToutMarche/infrastructureNiveau4"
    import infrastructureNiveau5 from "./NiveauInfastructureToutMarche/infrastructureNiveau5"
    import infrastructureNiveau6 from "./NiveauInfastructureToutMarche/infrastructureNiveau6"
-  import PlanInfrastructureNiveau1 from "../component/NiveauInfastructurePlanification/PlanInfrastructureNiveau1"
-  import PlanInfrastructureNiveau2 from "../component/NiveauInfastructurePlanification/PlanInfrastructureNiveau2"
-  import PlanInfrastructureNiveau3 from "../component/NiveauInfastructurePlanification/PlanInfrastructureNiveau3"
-  import PlanInfrastructureNiveau4 from "../component/NiveauInfastructurePlanification/PlanInfrastructureNiveau4"
-  import PlanInfrastructureNiveau5 from "../component/NiveauInfastructurePlanification/PlanInfrastructureNiveau5"
-  import PlanInfrastructureNiveau6 from "../component/NiveauInfastructurePlanification/PlanInfrastructureNiveau6"
+  import PlanInfrastructureNiveau1 from "./NiveauInfastructurePlanification/PlanInfrastructureNiveau1"
+  import PlanInfrastructureNiveau2 from "./NiveauInfastructurePlanification/PlanInfrastructureNiveau2"
+  import PlanInfrastructureNiveau3 from "./NiveauInfastructurePlanification/PlanInfrastructureNiveau3"
+  import PlanInfrastructureNiveau4 from "./NiveauInfastructurePlanification/PlanInfrastructureNiveau4"
+  import PlanInfrastructureNiveau5 from "./NiveauInfastructurePlanification/PlanInfrastructureNiveau5"
+  import PlanInfrastructureNiveau6 from "./NiveauInfastructurePlanification/PlanInfrastructureNiveau6"
+
+  import ContraInfrastructureNiveau1 from "./NiveauInfastructureContratualisation/ContraInfrastructureNiveau1"
+    import ContraInfrastructureNiveau2 from "./NiveauInfastructureContratualisation/ContraInfrastructureNiveau2"
+    import ContraInfrastructureNiveau3 from "./NiveauInfastructureContratualisation/ContraInfrastructureNiveau3"
+    import ContraInfrastructureNiveau4 from "./NiveauInfastructureContratualisation/ContraInfrastructureNiveau4"
+    import ContraInfrastructureNiveau5 from "./NiveauInfastructureContratualisation/ContraInfrastructureNiveau5"
+    import ContraInfrastructureNiveau6 from "./NiveauInfastructureContratualisation/ContraInfrastructureNiveau6"
     // import planification from "./component/planification"
-   import contratualisation from "./component/contratualisation"
+  //  import contratualisation from "./component/contratualisation"
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
  import {admin,dcf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
@@ -156,13 +172,20 @@ export default {
   infrastructureNiveau4,
   infrastructureNiveau5,
   infrastructureNiveau6,
-  contratualisation,
+  // contratualisation,
   PlanInfrastructureNiveau1,
   PlanInfrastructureNiveau2,
   PlanInfrastructureNiveau3,
   PlanInfrastructureNiveau4,
   PlanInfrastructureNiveau5,
-  PlanInfrastructureNiveau6
+  PlanInfrastructureNiveau6,
+ContraInfrastructureNiveau1,
+  ContraInfrastructureNiveau2,
+
+  ContraInfrastructureNiveau3,
+  ContraInfrastructureNiveau4,
+  ContraInfrastructureNiveau5,
+  ContraInfrastructureNiveau6
   },
   name:'type facture',
   data() {
@@ -824,24 +847,7 @@ InfastructureCodeNiveau1() {
  return this.gettersMarcheHorsib.filter(element =>element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==1).length
       
     },
-    NombrePlanifInfastructureNiveau1() {
-      
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.gettersMarcheHorsib.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect.filter(element =>element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==1).length
-            
-        }
-
- return this.gettersMarcheHorsib.filter(element =>element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==1).length
-      
-    },
+    
 
 NombrePlanifInfastructureNiveau2() {
       
@@ -933,6 +939,128 @@ NombrePlanifInfastructureNiveau2() {
  return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==6).length
       
     },
+
+
+
+
+
+
+
+
+
+
+    NombreContratualisationInfastructureNiveau1() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element =>element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==1).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element =>element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==1).length
+      
+    },
+    
+
+NombreContratualisationInfastructureNiveau2() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element =>element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==2).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element =>element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==2).length
+      
+    },
+    NombreContratualisationInfastructureNiveau3() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==3).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element => element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==3).length
+      
+    },
+    NombreContratualisationInfastructureNiveau4() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element =>element.attribue == 1 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==4).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element =>element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==4).length
+      
+    },
+    NombreContratualisationInfastructureNiveau5() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==5).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element => element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==5).length
+      
+    },
+    NombreContratualisationInfastructureNiveau6() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==6).length
+            
+        }
+
+ return this.gettersMarcheHorsib.filter(element => element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==6).length
+      
+    },
+
+
   },
   methods: {
     ...mapActions("bienService", ['ajouterMarche','modifierMarche','modifierMarcheBascule',

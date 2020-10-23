@@ -437,6 +437,7 @@ InfastructureLibelleNiveau1() {
         }
       };
     },
+    
 
    montantMarche(){
   return this.ListeInfrastructureSanitaire.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==2).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
