@@ -281,7 +281,7 @@
                                 <li ><a data-toggle="tab" href="#tab5896">Lot</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab78458">Lettre d'invitation CF</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab21230">Le mandaté</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab1235">Reception</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab1235">Réception des Plis</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab78477">Ouverture</a></li>
                                   <li class=""><a data-toggle="tab" href="#tab1041">PV d'ouverture</a></li>
                                 <!--<li class=""><a data-toggle="tab" href="#tab7845">D.Candidats</a></li>-->
@@ -432,7 +432,7 @@
                                 <li ><a data-toggle="tab" href="#tab0015">Lot</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab041">Lettre d'invitation CF</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab04">Mandaté</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab051">Reception</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab051">Réception</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab784">Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab17041">PV d'ouverture</a></li>
                               <!--  <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>-->
@@ -583,21 +583,21 @@
                                  <li class="active"><a data-toggle="tab" href="#tab4569" title="L'offres">L'Offre</a></li>
                               <li class=""><a data-toggle="tab" href="#lot3" title="Lot">Lots</a></li>
 
-                              <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre I</a></li>
+                              <li class=""><a data-toggle="tab" href="#tab0001" title="Lettre d'invitation">Lettre I</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab04" title="">Mandaté</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab0045" title="Réception des offres">Réception</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab02">Reception de l'offre</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#ouverture">Ouverture</a></li>
                                 
                                 <!--<li class=""><a data-toggle="tab" href="#tab5">Dossier Candidat</a></li>-->
-                                <li class=""><a data-toggle="tab" href="#tab45" title="rapport ouverture">PV Ouverture</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Jugement</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">PV Jugement</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab45" title="Rapport ouverture">PV Ouverture</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab6" title="Analyse et jugement des offres">Jugement</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab7" title="Rapport d'évaluation combiné">PV Jugement</a></li>
 
-                                 <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP">D.DMP</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab27" title="Demande ANO/DMP">D.DMP</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab028" title="ANO/DMP attribution">A.ANO</a></li> -->
                                       
-                                      <li class=""><a data-toggle="tab" href="#tab28" title="demande ANO Bailleur"> D.Bailleur </a></li>
+                                      <li class=""><a data-toggle="tab" href="#tab28" title="Demande ANO Bailleur"> D.Bailleur </a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab0008" title="ANO bailleur attribution">A.Bailleur </a></li> -->
 
                                 <li class=""><a data-toggle="tab" href="#tab10">Attribution</a></li>
@@ -656,7 +656,7 @@
                                         <!-- <component-etat :macheid="detail_marche.id"></component-etat> -->
                                         
                                
-                                <h4>Liste des receptions des plis</h4>
+                                <h4>Liste des réceptions des plis</h4>
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>

@@ -60,7 +60,7 @@ NombrePlanifInfastructureNiveau1
                      <!-- <planification></planification> -->
                      <div class="widget-title">
                            <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#NIVEAU7" v-if="InfastructureCodeNiveau1==1">{{InfastructureLibelleNiveau1}}   <span class="badge badge" >{{NombrePlanifInfastructureNiveau1}}</span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#NIVEAU7" v-if="InfastructureCodeNiveau1==1">{{InfastructureLibelleNiveau1}}   <span class="badge badge" >{{NombrePlanInfastructureNiveau1}}</span></a></li>
                               
                                <li ><a data-toggle="tab" href="#NIVEAU8" v-if="InfastructureCodeNiveau2==2"> {{InfastructureLibelleNiveau2}}   <span class="badge badge-important" > {{NombrePlanifInfastructureNiveau2}} </span></a></li>
                                 <li ><a data-toggle="tab" href="#NIVEAU9" v-if="InfastructureCodeNiveau3==3"> {{InfastructureLibelleNiveau3}}   <span class="badge badge-success" > {{NombrePlanifInfastructureNiveau3}} </span></a></li>

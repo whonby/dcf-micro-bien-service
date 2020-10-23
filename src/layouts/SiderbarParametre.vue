@@ -25,12 +25,12 @@
        </li>
        
        
-        <!-- <li :class="{active: active_el == 11 }" @click.prevent="navigateToTableauBord">
+        <li :class="{active: active_el == 11 }" @click.prevent="navigateToTableauBord">
           <a title="TABLEAU DE BORD" href="#">
             <i class="icon-dashboard"></i>
             <span>TABLEAU DE BORD</span>
           </a>
-        </li> -->
+        </li>
         <li  :class="{active: active_el == 17 }" @click.prevent="navigateToParametreGeneraux">
           <a title="PARAMETRES GENERAUX" href="#">
             <i class="icon-cogs"></i>
@@ -228,13 +228,13 @@ navigateToGestionMarche(){
  navigateToTableauBord(){
         this.activate(11)
         this.$router.push({
-          name: 'TableauDeBordG'
+          name: 'TableauBordParametreSimple'
         })
       },
        navigateToParametreGeneraux(){
         this.activate(17)
         this.$router.push({
-          name: 'TableauDeBordG'
+          name: 'TableauBordParametreSimple'
         })
       },
       

@@ -209,6 +209,7 @@
         <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
       </div>
     </div>
+    <notifications/>
   </div>
 </template>
 

@@ -1085,3 +1085,6 @@ export const groupeEntreprise = (state) => {
 
 /**GetterLoadinMarche**/
 export const getterLoadinMarche=state => state.loading_marche
+
+
+export const getterImageMarche=state => state.image_marche
