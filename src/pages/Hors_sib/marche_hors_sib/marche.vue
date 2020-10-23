@@ -376,9 +376,9 @@ export default {
      const searchTerm = this.search.toLowerCase();
 
 return this.afficherListeMarcheHorSib.filter((item) => {
-  
+        
      return item.objet.toLowerCase().includes(searchTerm) ||
-           item.montant_marche.toLowerCase().includes(searchTerm) 
+           item.reference_marche.toLowerCase().includes(searchTerm) 
            //|| item.uabudget_eclate.libelle.toLowerCase().includes(searchTerm) 
    }
 )
