@@ -1,6 +1,6 @@
 
 window._ = require('lodash');
-
+//import Echo from 'laravel-echo'
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -10,9 +10,12 @@ window._ = require('lodash');
 try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
-
+   // window.Pusher = require('pusher-js');
     require('bootstrap');
 } catch (e) {console.log(e)}
+
+
+window.Pusher = require('pusher-js')
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

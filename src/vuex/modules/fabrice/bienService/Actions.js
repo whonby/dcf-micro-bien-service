@@ -4365,3 +4365,44 @@ export function getGestionModules({ commit }) {
 
 }).catch(error => console.log(error)))
 }
+
+
+
+
+export function getImageMarche({ commit }) {
+  queue.push(() => axios.get('/liste_image_marche').then((response) => {
+      commit('GET_IMAGE_MARCHE', response.data)
+
+}).catch(error => console.log(error)))
+}
+
+export function ajouterImageMarche({ commit }, formData) {
+  asyncLoading(axios.post('/image_marche', formData)).then(response => {
+      if (response.status == 201) {
+      // console.log(response.data)
+      commit('AJOUTER_IMAGE_MARCHE', response.data)
+
+      this.$app.$notify({
+          title: 'success ',
+          text: 'Enregistrement effectué !',
+          type: "success"
+      })
+  }
+
+}).catch(error => console.log(error))
+}
+
+export function pusherImageMarche({ commit }, formData) {
+  commit('PUSHER_IMAGE_MARCHE', formData)
+}
+
+export function supprimerImageMarche({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+      commit('DELETE_IMAGE_MARCHE', id)
+  // // dialog.loading(false) // stops the proceed button's loader
+  axios.delete('/image_marche/' + id).then(() => dialog.close())
+})
+
+}

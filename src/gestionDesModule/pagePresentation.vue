@@ -95,7 +95,7 @@
 
 <script>
 import { mapGetters,mapActions} from "vuex";
-
+import Pusher from 'pusher-js';
 
 // import {admin,dcf,cf,noDCfNoAdmin} from "../Repositories/Auth"
 export default {
@@ -174,7 +174,7 @@ this.getAllRealiteServiceFait()
 // this.getTypeProcedure()
 
 
-
+this.getImageMarche()
 
 
 
@@ -504,8 +504,7 @@ return objJson.id
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
-
-          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances"]),
+          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances","pusherImageMarche","getImageMarche"]),
 
     activeMenuModuleParamGeneral(){
       this.activeMenuModuleSidcf(1)
@@ -546,6 +545,23 @@ return objJson.id
 
 
  
+  },
+  mounted() {
+    let pusher = new Pusher('44daa856e0753c75275a', {
+      cluster: 'eu',
+       encrypted: false
+    });
+let vm=this;
+    let channel = pusher.subscribe('channel-image-marche');
+    channel.bind('event-image-marche', function(data) {
+    //  app.messages.push(JSON.stringify(data));
+   // console.log(data)
+     // let donne=JSON.stringify(data)
+      //console.log(donne)
+      let infomarche=data
+    vm.pusherImageMarche(infomarche.data)
+    });
+
   }
 }
 </script>
