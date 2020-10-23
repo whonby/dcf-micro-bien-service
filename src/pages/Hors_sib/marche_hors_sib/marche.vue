@@ -22,7 +22,7 @@ CodeExempte
               <h5>Liste des March&eacute;s</h5>
               <div align="right">
                 Recherche:
-                <input type="search"  v-model="search" />
+                <input type="search"  v-model="search"  placeholder=" saisir objet ou le montant"/>
               </div>
             </div>
             <div class="span4">
