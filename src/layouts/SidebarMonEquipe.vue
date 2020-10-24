@@ -43,14 +43,21 @@
               <i class="icon icon-key"></i> <span>UTILISATEURS</span>
           </a>-->
         </li>
-        <li >
+        <li @click.prevent="navigateRetourAuMenu" >
+          <a title="Carte des infrastructure pas regison" href="#">
+            <i class=" icon-globe"></i>
+            <span>RETOUR AU MENU</span>
+            <span class="label label-important"></span>
+          </a>
+        </li>
+        <!-- <li >
           <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
 
             <i class="icon-arrow-left"></i>
             <span>RETOUR AU MENU</span>
 
           </router-link>
-        </li>
+        </li> -->
         <!-- <li @click.prevent="navigateToUniteAdministrative" :class="{active: active_el == 1 }">
           <a  title="" href="#">
             <i class="icon-home"></i>
@@ -271,7 +278,12 @@ export default {
       })
     },
 
-
+navigateRetourAuMenu(){
+      this.activate(11)
+      this.$router.push({
+        name: 'pagePresentation'
+      })
+    }
 
   }
 };

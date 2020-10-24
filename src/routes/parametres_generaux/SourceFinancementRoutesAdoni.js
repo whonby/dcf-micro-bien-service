@@ -5,7 +5,14 @@ import TableauBordParametreSimple  from "../../../src/gestionDesModule/TableauBo
 import TableauBordGestionHorsSibSimple  from "../../../src/gestionDesModule/TableauBordSimple/TableauBordGestionHorsSib.vue";
 import TableauBordGestionSibSimple  from "../../../src/gestionDesModule/TableauBordSimple/TableauBordGestionSib.vue";
 import TableauBordUaSimple  from "../../../src/gestionDesModule/TableauBordSimple/TableauBordUa.vue";
+import TableauBordCatographiesSimple  from "../../../src/gestionDesModule/TableauBordCa";
 const SourceFinancementRoutesAdoni = [
+   {
+      path:"/TableauBordCatographies",
+      name:"TableauBordCatographiesSimple",
+      component:TableauBordCatographiesSimple
+
+   },
    {
       path:"/TableauBordUa",
       name:"TableauBordUaSimple",

@@ -84,7 +84,14 @@
            
           </a>
         </li>
-        <li >
+        <li @click.prevent="navigateRetourAuMenu" >
+          <a title="Carte des infrastructure pas regison" href="#">
+            <i class=" icon-globe"></i>
+            <span>RETOUR AU MENU</span>
+            <span class="label label-important"></span>
+          </a>
+        </li>
+        <!-- <li >
            <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
          
             <i class="icon-arrow-left"></i>
@@ -92,7 +99,7 @@
            
           </router-link>
         </li>
-        
+         -->
        
      
           <!-- <li @click.prevent="navigateToCatographieBudgetaire" :class="{active: active_el ==8}">
@@ -272,7 +279,12 @@ navigateToGestionMarche(){
       })
     },
 
-
+navigateRetourAuMenu(){
+      this.activate(11)
+      this.$router.push({
+        name: 'pagePresentation'
+      })
+    }
 
   }
 };

@@ -37,14 +37,21 @@
             <span>PARAMETRES GENERAUX</span>
           </a>
         </li>
-        <li >
+         <li @click.prevent="navigateRetourAuMenu" >
+          <a title="Carte des infrastructure pas regison" href="#">
+            <i class=" icon-arrow-left"></i>
+            <span>RETOUR AU MENU</span>
+            <span class="label label-important"></span>
+          </a>
+        </li>
+        <!-- <li >
            <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
          
             <i class="icon-arrow-left"></i>
             <span>RETOUR AU MENU</span>
            
           </router-link>
-        </li>
+        </li> -->
         <!-- <li @click.prevent="navigateToUniteAdministrative" :class="{active: active_el == 1 }">
           <a  title="" href="#">
             <i class="icon-home"></i>
@@ -231,6 +238,12 @@ navigateToGestionMarche(){
           name: 'TableauBordParametreSimple'
         })
       },
+      navigateRetourAuMenu(){
+      this.activate(11)
+      this.$router.push({
+        name: 'pagePresentation'
+      })
+    },
        navigateToParametreGeneraux(){
         this.activate(17)
         this.$router.push({
