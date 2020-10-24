@@ -37,7 +37,7 @@
 
         {{affichierReferenceAppelOffre(macheid)|| 'Non renseigné'}}
       </td>
-      <td v-if="appelOffre.rang_analyse!=1"  >
+      <td v-if="appelOffre.rang_analyse!=1" style="background: darkred;color: white" >
 
         {{affichierReferenceAppelOffre(macheid)|| 'Non renseigné'}}
       </td>
@@ -47,15 +47,15 @@
       <td v-if="appelOffre.rang_analyse==1" style="background: green;color: white" >
         {{afficherNumeroDossierCandidat1(appelOffre.dossier_candidat_id) || 'Non renseigné'}}
       </td>
-      <td v-if="appelOffre.rang_analyse!=1"  >
+      <td v-if="appelOffre.rang_analyse!=1" style="background: darkred;color: white" >
         {{afficherNumeroDossierCandidat1(appelOffre.dossier_candidat_id) || 'Non renseigné'}}
       </td>
 
       <td v-if="appelOffre.rang_analyse==1" style="background: green;color: white" >
-        {{formatageSomme(parseFloat(afficherListeMontant(afficherOffrefID(appelOffre.dossier_candidat_id)))) || 'Non renseigné'}}
+        {{formatageSomme(parseFloat(appelOffre.montant_total_ttc)) || 'Non renseigné'}}
       </td>
-      <td v-if="appelOffre.rang_analyse!=1"  >
-        {{formatageSomme(parseFloat(afficherListeMontant(afficherOffrefID(appelOffre.dossier_candidat_id)))) || 'Non renseigné'}}
+      <td v-if="appelOffre.rang_analyse!=1" style="background: darkred;color: white" >
+        {{formatageSomme(parseFloat(appelOffre.montant_total_ttc)) || 'Non renseigné'}}
       </td>
 
 
@@ -63,7 +63,7 @@
            >
         {{appelOffre.type_analyse.libelle || 'Non renseigné'}}
       </td>
-      <td v-if="appelOffre.rang_analyse!=1"   >
+      <td v-if="appelOffre.rang_analyse!=1" style="background: darkred;color: white"  >
         {{appelOffre.type_analyse.libelle || 'Non renseigné'}}
       </td>
 

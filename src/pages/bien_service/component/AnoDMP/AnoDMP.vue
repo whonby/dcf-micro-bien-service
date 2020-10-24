@@ -559,6 +559,14 @@ pvTraitement(){
        }
      })
 },
+afficherPaiement(){
+  if(this.edite_demande_dao.avis== 0){
+    return 0
+  }
+  else{
+    return this.edite_demande_dao.plan_motif_decision_id
+  }
+}
   },
 
   methods:{
@@ -646,7 +654,7 @@ afficheDemandeDAO(index){
       formData.append('num_courrier', this.edite_demande_dao.num_courrier);
       formData.append('marche_id',this.edite_demande_dao.marche_id );
       formData.append('id', this.edite_demande_dao.id);
-      formData.append('plan_motif_decision_id',this.edite_demande_dao.plan_motif_decision_id);
+      formData.append('plan_motif_decision_id',this.afficherPaiement);
       formData.append('observations',this.edite_demande_dao.observations)
       formData.append('date_avis',this.edite_demande_dao.date_avis);
       formData.append('avis',this.edite_demande_dao.avis);
