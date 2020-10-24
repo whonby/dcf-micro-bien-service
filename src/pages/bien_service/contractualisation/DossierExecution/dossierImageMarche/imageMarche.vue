@@ -1,6 +1,6 @@
 <template>
     <div>
-     {{macheid}}
+     
         <div class="row-fluid" >
       <div class="span3" v-for="item in afficheImageParMarche(macheid)" :key="item.id">
         <div class="widget-box">
