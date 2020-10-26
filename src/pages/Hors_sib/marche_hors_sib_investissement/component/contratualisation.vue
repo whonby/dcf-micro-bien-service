@@ -58,12 +58,16 @@
                
                   
 <td>
-                     <button 
-                      v-if="activites.attribue == 1"  class="btn  btn-success">
+                     <button  v-if="activites.attribue == 1"  class="btn  btn-success">
+                     
                 <span >CT</span>
        
                 </button>
-                 
+                 <button 
+                      v-else  class="btn  btn-warning">
+                <span title="MARCHE EN EXERCUTER" style="">EX</span>
+       
+                </button>
                    </td>
 
 <td>
@@ -221,11 +225,11 @@ export default {
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.attribue == 1  && element.parent_id == null && element.sib==1)
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.attribue == 1  && element.parent_id == null && element.sib==1 || this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.attribue == 2  && element.parent_id == null && element.sib==1)
             
         }
 
-        return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.attribue == 1 && element.parent_id == null && element.sib==1 )
+        return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.attribue == 1 && element.parent_id == null && element.sib==1 || this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.attribue == 2  && element.parent_id == null && element.sib==1 )
            
         
 

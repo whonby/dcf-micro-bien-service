@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <h3 style="text-align:center">TABLEAU DE BORD GESTION HORS SIB</h3>
+        <h3 style="text-align:center">TABLEAU DE BORD : GESTION HORS SIB</h3>
         <div class="row-fluid">
       <div class="span6">
         <div class="quick-actions_homepage">
@@ -21,7 +21,7 @@
           </div>
         </div>
       </div>
-      <div class="span6">
+      <!-- <div class="span6">
         <div class="quick-actions_homepage">
           <div class="widget-title"> <span class="icon"> <i class="icon-signal"></i> </span>
             <h5>PERSONNEL</h5>
@@ -37,9 +37,8 @@
 
             </ul>
         </div>
-      </div>
-    </div>
-    <div class="row-fluid">
+      </div> -->
+<div class="row-fluid">
       <div class="span6">
         <div class="quick-actions_homepage">
           <div class="widget-title"> <span class="icon"> <i class="icon-signal"></i> </span>
@@ -56,7 +55,9 @@
             </ul>
         </div>
       </div>
-      <div class="span6">
+    </div>
+    
+      <!-- <div class="span6">
         <div class="quick-actions_homepage">
           <div class="widget-title"> <span class="icon"> <i class="icon-signal"></i> </span>
             <h5>TRANSFERT</h5>
@@ -72,7 +73,7 @@
 
             </ul>
         </div>
-      </div>
+      </div> -->
     </div>
     </div>
 
@@ -228,16 +229,16 @@ afficherBudgetInitialPersonnel() {
         if(this.noDCfNoAdmin){
             let colect=[];
             
-            this.budgetGeneral.filter(item=>{
+            this.budgetEclate.filter(item=>{
                 let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(item =>item.gdenature_id==2).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
+            return colect.filter(item =>item.grandenature_id==2).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
         }
-        return this.budgetGeneral.filter(item =>item.gdenature_id==2).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
+        return this.budgetEclate.filter(item =>item.grandenature_id==2).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
 
     },
 
@@ -324,21 +325,30 @@ affichierTauxExecutionBienService() {
 // afficherBudgetInitialInvetissement(){
 //   return this.budgetGeneral.filter(item => item.gdenature_id==7).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale) , 0)
 // },
+anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
 afficherBudgetInitialInvetissement() {
         
         if(this.noDCfNoAdmin){
             let colect=[];
             
-            this.budgetGeneral.filter(item=>{
+            this.budgetEclate.filter(item=>{
                 let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(item =>item.gdenature_id==7).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
+            return colect.filter(item =>item.grandenature_id==7).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.dotation),0)
         }
-        return this.budgetGeneral.filter(item =>item.gdenature_id==7).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
+        return this.budgetEclate.filter(item =>item.grandenature_id==7).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.dotation),0)
 
     },
 afficherBudgetExecutéInvestissement() {
@@ -353,9 +363,9 @@ afficherBudgetExecutéInvestissement() {
                     return item
                 }
             })
-            return colect.filter(item => item.marchetype==1 &&  item.decision_cf==8).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
+            return colect.filter(item => item.marchetype==1 &&  item.decision_cf==8 &&  this.RecupererMarcheId(item.marche_id)==1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
         }
-        return this.mandats.filter(item => item.marchetype==1 && item.decision_cf==8).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
+        return this.mandats.filter(item => item.marchetype==1 && item.decision_cf==8 &&  this.RecupererMarcheId(item.marche_id)==1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
 
     },
 // calcule du budget executé d'investissement
@@ -387,18 +397,7 @@ affichierTauxExecutionInvestissement() {
 // afficher budget Personnel
 
 
-// afficherCodeGrandNature(){
-  
-//  return id =>{
-//    if(id!=null && id!=""){
-//    let resultat = this.grandes_natures.filter(item => item.id==id)
 
-//     if(resultat){
-//       return resultat.code
-//     }
-//    }
-//  }
-// },
 
 
 

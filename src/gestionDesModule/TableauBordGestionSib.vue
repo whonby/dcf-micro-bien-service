@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <h3 style="text-align:center">TABLEAU DE BORD GENERAL</h3>
+        <h3 style="text-align:center">TABLEAU DE BORD : GESTION SIB</h3>
         <div class="row-fluid">
       <div class="span6">
         <div class="quick-actions_homepage">
