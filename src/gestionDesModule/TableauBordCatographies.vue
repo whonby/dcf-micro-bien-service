@@ -164,22 +164,7 @@
 
                   </td>
                 </tr>
-<!--                <tr>-->
-<!--                  <td>-->
-<!--                    <label>Sous préfècture</label>-->
-<!--                    <model-list-select style="background-color: rgb(255,255,255);"-->
-<!--                                       class="wide"-->
-<!--                                       :list="sousPrefecture(departement)"-->
-<!--                                       v-model="sous_prefecture"-->
-<!--                                       option-value="id"-->
-<!--                                       option-text="libelle"-->
 
-<!--                                       placeholder="Sous préfècture"-->
-<!--                    >-->
-
-<!--                    </model-list-select>-->
-<!--                  </td>-->
-<!--                </tr>-->
                 </tbody>
               </table>
 
@@ -224,7 +209,7 @@
                 </div>
 
               </div>
-<hr>
+            <hr>
               <apexchart type="bar" width="350" height="350"  :options="chartOptions" :series="dataBar"></apexchart>
             </div>
 
@@ -241,7 +226,7 @@
         </div>
         <div class="span11">
           <div class="">
-            <div class="" style="height: 550px; width: 100%; border-bottom: none">
+            <div class="" style="height: 700px; width: 100%; border-bottom: none">
 
               <l-map ref="map" class="sidebar-map" :zoom="zoom" :center="initialLocation" >
 
@@ -575,25 +560,25 @@ export default {
       libelle_unite_admin:"",
       icon: customicon,
       clusterOptions: {},
-      zoom: 5,
+      zoom: 7,
       idzone:"",
       activeUa:false,
       zone_geographique:"",
-      center: latLng(47.41322, -1.219482),
+      center: latLng(7.361517,-5.459421),
       url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
       attribution:
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      withPopup: latLng(47.41322, -1.219482),
-      withTooltip: latLng(47.41422, -1.250482),
+      withPopup: latLng(7.361517, -5.459421),
+      withTooltip: latLng(7.361517, -5.459421),
       currentZoom: 11.5,
-      currentCenter: latLng(47.41322, -1.219482),
+      currentCenter: latLng(7.361517,-5.459421),
       showParagraph: false,
       mapOptions: {
         zoomSnap: 0.5,
         attributionControl: false
       },
 
-      initialLocation: [6.8208393, -5.2895077],
+      initialLocation: [7.361517, -5.459421],
       showMap: true,
       isActive: false,
 
