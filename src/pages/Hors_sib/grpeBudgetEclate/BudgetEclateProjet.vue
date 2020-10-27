@@ -5,7 +5,7 @@
   <div id="exampleModal" class="modal hide tailgrand12">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Eclatement du Budget{{detail_Ua}}</h3>
+        <h3>Eclatement du Budget</h3>
       </div>
       <div class="modal-body">
         

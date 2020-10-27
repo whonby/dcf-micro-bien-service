@@ -85,7 +85,7 @@
                         <div class="controls">
                             <input
                                     type="text"
-                                    :value="afficherNumeroMarche(macheid)"
+                                    :value="afficherNumeroMarche(infoLot.id)"
                                     class="span"
                                    readonly
                             />
