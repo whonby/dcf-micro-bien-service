@@ -63,7 +63,7 @@
 
                     <label class="control-label">Nom et prenom <code>*</code> :</label>
                     <div class="control-group">
-                      <input type="text" class="span" placeholder="Numero lo" v-model="formDataMembreCojo.nom_prenom">
+                      <input type="text" class="span" placeholder="" v-model="formDataMembreCojo.nom_prenom">
 
 
                     </div>
@@ -76,8 +76,8 @@
                   <div class="control-group">
                     <label>Structure d'origine</label>
                     <div class="controls">
-                      <input type="text" class="span" placeholder="Matricule " v-model="formDataMembreCojo.matricule" v-on:keyup="rechercheMembreCojo()" >
-                      <code v-if="message_mandater">{{message_mandater}}</code>
+                      <input type="text" class="span" placeholder=" " v-model="formDataMembreCojo.service_id" readonly >
+                      
                     </div>
                   </div>
                 </td>
@@ -88,7 +88,7 @@
 
                     <label class="control-label">Fonction <code>*</code> :</label>
                     <div class="control-group">
-                      <input type="text" class="span" placeholder="Numero lo" v-model="formDataMembreCojo.nom_prenom">
+                      <input type="text" class="span" placeholder="" v-model="formDataMembreCojo.fonction_id" readonly>
 
 
                     </div>
@@ -105,7 +105,7 @@
                     <label class="control-label span5">Conctacts <code>*</code> :</label>
 
                     <div class="control-group">
-                      <input type="text" class="span" placeholder="Numero lo" v-model="formDataMembreCojo.nom_prenom">
+                      <input type="text" class="span" placeholder="Numero lo" v-model="formDataMembreCojo.telephone" >
 
 
                     </div>
@@ -242,7 +242,7 @@ name: "MembreCojo",
 
     ...mapGetters('bienService',['getterMembreCojo','getterCojos',"role_membrecojo"]),
 
-    ...mapGetters('personnelUA', ['acteur_depenses']),
+    ...mapGetters('personnelUA', ['acteur_depenses',"all_acteur_depense"]),
 
 
     // afficher la liste des roles membres
@@ -254,8 +254,31 @@ name: "MembreCojo",
         }
         return null
       }
-    }
+    },
+enregistreIdService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.acteur_depense_id == id);
 
+      if (qtereel) {
+        return qtereel.service_id;
+      }
+      return 0
+        }
+      };
+    },
+    enregistreIdFonction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.acteur_depense_id == id);
+
+      if (qtereel) {
+        return qtereel.fonction_id;
+      }
+      return 0
+        }
+      };
+    },
   },
   methods:{
 
@@ -271,7 +294,9 @@ name: "MembreCojo",
       var nouvelObjet ={
         ...this.formDataMembreCojo,
         marche_id :this.macheid,
-        cojo_id:this.cojo_id
+        cojo_id:this.cojo_id,
+        nom_prenom:this.formDataMembreCojo.nom_prenom,
+        matricule:this.formDataMembreCojo.matricule
       }
       //this.formDataMembreCojo.cojo_id=this.idcojo
       this.ajouterMembreCojo(nouvelObjet)
@@ -300,8 +325,9 @@ name: "MembreCojo",
       if(objetMandater!=undefined){
         if (objetMandater.length==1){
           let acteur= this.acteur_depenses.find(item=>item.acteur_depense.matricule==this.formDataMembreCojo.matricule)
-          this.formDataMembreCojo.nom_prenom=acteur.acteur_depense.nom +" "+acteur.acteur_depense.prenom
-
+          this.formDataMembreCojo.nom_prenom=acteur.acteur_depense.nom +" "+acteur.acteur_depense.prenom,
+          this.formDataMembreCojo.fonction_id=acteur.acteur_depense.id,
+          this.formDataMembreCojo.service_id=acteur.acteur_depense.id ,
           this.message_mandater=" "
 
         }

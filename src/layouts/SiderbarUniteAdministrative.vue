@@ -43,14 +43,21 @@
             <span>UNITE ADMINISTRATIVE</span>
           </a>
         </li>
-        <li >
+        <li @click.prevent="navigateRetourAuMenu" >
+          <a title="Carte des infrastructure pas regison" href="#">
+            <i class=" icon-arrow-left"></i>
+            <span>RETOUR AU MENU</span>
+            <span class="label label-important"></span>
+          </a>
+        </li>
+        <!-- <li >
            <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
          
             <i class="icon-arrow-left"></i>
             <span>RETOUR AU MENU</span>
            
           </router-link>
-        </li>
+        </li> -->
          <!-- <li @click.prevent="navigateToTransfert" :class="{active: active_el ==6}">
           <a title="TRANSFERT" href="#">
             <i class="icon-money"></i>
@@ -272,7 +279,12 @@ navigateToGestionMarche(){
         name: 'MonEquipe'
       })
     },
-
+navigateRetourAuMenu(){
+      this.activate(11)
+      this.$router.push({
+        name: 'pagePresentation'
+      })
+    },
 
 
   }

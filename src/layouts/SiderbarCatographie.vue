@@ -25,72 +25,19 @@
           </center>
         </li>
 
-
-        <!-- <li :class="{active: active_el == 11 }" @click.prevent="navigateToTableauBord">
-          <a title="TABLEAU DE BORD" href="#">
-            <i class="icon-dashboard"></i>
-            <span>TABLEAU DE BORD</span>
-          </a>
-        </li> -->
-        <!-- <li v-if="admin() || dcf()" :class="{active: active_el == 17 }" @click.prevent="navigateToParametreGeneraux">
-          <a title="PARAMETRES GENERAUX" href="#">
-            <i class="icon-cogs"></i>
-            <span>PARAMETRES GENERAUX</span>
-          </a>
-        </li> -->
-        <!-- <li @click.prevent="navigateToUniteAdministrative" :class="{active: active_el == 1 }">
-          <a  title="" href="#">
-            <i class="icon-home"></i>
-            <span>UNITE ADMINISTRATIVE</span>
-          </a>
-        </li>
-         <li @click.prevent="navigateToTransfert" :class="{active: active_el ==6}">
-          <a title="TRANSFERT" href="#">
-            <i class="icon-money"></i>
-            <span>TRANSFERT</span>
+        
+<li @click.prevent="navigatelocalisationDesMarche" >
+          <a title="Carte des infrastructure pas regison" href="#">
+            <i class=" icon-globe"></i>
+            <span>MARCHES</span>
             <span class="label label-important"></span>
           </a>
         </li>
-         <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==7}">
-          <a title="GESTION MARCHE" href="#">
-            <i class="icon-shopping-cart"></i>
-            <span>GESTION MARCHE</span>
-            <span class="label label-important"></span>
-          </a>
-        </li>
-        <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
-          <a href="#">
-            <i class="icon-group"></i>
-            <span>PERSONNEL</span>
-          </a>
-        </li>
-        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
-          <a href="#">
-            <i class="icon-truck"></i>
-            <span>BIENS ET SERVICES</span>
-          </a>
-
-       <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
-          <a title="COMPTABILITE DES MATIERE" href="#">
-            <i class=" icon-camera"></i>
-            <span>COMPTA DES MATIERES</span>
-          </a>
-        </li>
-
-
-        <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==4}">
-          <a title="INVESTISSEMENT" href="#">
-            <i class="icon-truck"></i>
-            <span>INVESTISSEMENT</span>
-
-          </a>
-        </li>-->
-
 
         <li @click.prevent="navigateInfrastructureRegion" >
           <a title="Carte des infrastructure pas regison" href="#">
             <i class=" icon-globe"></i>
-            <span>CARTE INFRASTRUCTURE REGIONS</span>
+            <span>INFRASTRUCTURES </span>
             <span class="label label-important"></span>
           </a>
         </li>
@@ -98,18 +45,25 @@
         <li @click.prevent="navigateToCatographieBudgetaire" >
           <a title="CARTOGRAPHIE" href="#">
             <i class=" icon-globe"></i>
-            <span>CARTOGRAPHIE EXECUTION BUDGET</span>
+            <span>BUDGET EXECUTE</span>
             <span class="label label-important"></span>
           </a>
         </li>
-        <li>
+        <li @click.prevent="navigateRetourAuMenu" >
+          <a title="Carte des infrastructure pas regison" href="#">
+            <i class=" icon-globe"></i>
+            <span>RETOUR AU MENU</span>
+            <span class="label label-important"></span>
+          </a>
+        </li>
+        <!-- <li>
           <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
 
             <i class="icon-arrow-left"></i>
             <span>RETOUR AU MENU</span>
 
           </router-link>
-        </li>
+        </li> -->
         <!-- <li v-if="cf() || dcf()" @click.prevent="navigateGestionEquipe" :class="{active: active_el ==21}">
           <a href="#">
             <i class="icon icon-user"></i> <span>MON EQUIPE</span>
@@ -192,7 +146,7 @@ export default {
     dcf:dcf,
     cf:cf,
     navigateToCatographieBudgetaire(){
-      this.activate(8)
+      this.activate(11)
       this.$router.push({
         name: 'CartographieBudget'
       })
@@ -280,13 +234,23 @@ export default {
       })
     },
     navigateInfrastructureRegion(){
-      this.activate(31)
+      this.activate(11)
       this.$router.push({
         name: 'CarteInfrastructureCIPasRegions'
       })
+    },
+ navigatelocalisationDesMarche(){
+      this.activate(11)
+      this.$router.push({
+        name: 'TableauBordCatographiesSimple'
+      })
+    },
+navigateRetourAuMenu(){
+      this.activate(11)
+      this.$router.push({
+        name: 'pagePresentation'
+      })
     }
-
-
   }
 };
 </script>

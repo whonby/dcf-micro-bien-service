@@ -611,7 +611,7 @@
 
                                 <li class=""><a data-toggle="tab" href="#tab10">Attribution</a></li>
 
-                                <li class=""><a data-toggle="tab" href="#tab0143720">bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab0143720">Bailleur</a></li>
                                
                                 
                             </ul>

@@ -1,8 +1,8 @@
 <template>
     <div>
-     {{macheid}}
+     
         <div class="row-fluid" >
-      <div class="span4" v-for="item in afficheImageParMarche(macheid)" :key="item.id">
+      <div class="span3" v-for="item in afficheImageParMarche(macheid)" :key="item.id">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
             <h5>{{item.observation}} <code>{{item.libelle}}</code></h5>
