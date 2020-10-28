@@ -18,7 +18,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>{{InfastructureLibelleNiveau4}}</h5>
+              <h5>{{InfastructureLibelleNiveau1}}</h5>
               <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -37,7 +37,7 @@
         </div>
              <table class="table table-bordered table-striped" >
                 <thead>
-                <tr>
+               <tr>
                 <th>Année</th>
                   <th>UA</th>
                   <th>Reférence marché</th>
@@ -55,7 +55,7 @@
                 <tbody>
                    <tr class="odd gradeX" v-for="activites in partition (ListeMarcheInfrastructureNiveau1, size)[page]"
                  :key="activites.id">
-                  <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                 <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{activites.exo_id || 'Non renseigné'}}</td>
                    <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{afficherLibelleUa(activites.unite_administrative_id) || 'Non renseigné'}}</td>
@@ -81,8 +81,8 @@
                   
 <td>
                      <button 
-                      v-if="activites.attribue == 0"  class="btn  btn-danger">
-                <span >PL</span>
+                      v-if="activites.attribue == 1"  class="btn  btn-success">
+                <span >CT</span>
        
                 </button>
                  
@@ -90,25 +90,27 @@
 
 <td>
     <router-link :to="{ name: 'detail_hors_sib', params: { id: activites.id }}"
-                class="btn btn-default " title="Detail marche hors sib">
+                class="btn btn-default " title="continue la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
-                   </router-link>
+                    </router-link>
 </td>
 <td>
-   <router-link :to="{ name: 'CycleDeVie', params: { id: activites.id }}"
+  <router-link :to="{ name: 'CycleDeVie', params: { id: activites.id }}"
                  class="btn btn-inverse " title="Cycle de vie du marche">
         <span class=""><i class=" icon-calendar"></i></span>
     </router-link>
 </td>
-                  <!-- <td>
-                     <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
-                                    class="btn btn-inverse " title="Cycle de vie du marche">
-                           <span class=""><i class=" icon-calendar"></i></span>
-                       </router-link>
-                  </td> -->
+<!-- <td>
+ <button @click.prevent="modifierModalActeEffetFinancierLocal2(index)"  class="btn btn-info"  title="Basculer en Execution">
+        <span class=""><i class="icon-undo" ></i></span></button>
+</td>
+<td>
+  <button @click.prevent="BoutonDeSuppensionMarche(index)"  class="btn btn-danger"  title="Suspendre le marché">
+        <span class=""><i class="icon-ban-circle" ></i></span></button>
+</td> -->
 
                        </tr>
-                        <tr>
+                         <tr>
                      
                        <td>
                           
@@ -132,12 +134,12 @@
                       </td>
                      
                       
-                       <td  style="text-align: center;color:red;font-weight:bold;">
-                           {{formatageSomme(parseFloat(montantMarchePlanfierHorSib))}}
+                      <td  style="text-align: center;color:red;font-weight:bold;">
+                           {{formatageSomme(parseFloat(montantMarcheContraHorSib1))}}
                            
                       </td>
                        <td>
-                           
+                          
                            
                       </td>
                       <td>
@@ -178,9 +180,9 @@
    
   
  import { mapGetters, mapActions } from "vuex";
- import { formatageSomme } from "../../../../Repositories/Repository";
- import {admin,dcf,noDCfNoAdmin} from "../../../../Repositories/Auth"
- import {partition} from '../../../../Repositories/Repository'
+ import { formatageSomme } from "@/Repositories/Repository";
+ import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
+ import {partition} from '@/Repositories/Repository'
 export default {
   components:{
   
@@ -314,7 +316,7 @@ export default {
 
     ...mapGetters("horSib", ["gettersMarcheHorsib"]),
 
-ListeMarcheInfrastructureNiveau1() {
+ ListeMarcheInfrastructureNiveau1() {
       const st = this.search.toLowerCase();
       return this.afficherListeMarcheHorsSib.filter(type => {
         return (
@@ -323,16 +325,13 @@ ListeMarcheInfrastructureNiveau1() {
         );
       });
     },
-  montantMarchePlanfierHorSib(){
-  return this.ListeMarcheInfrastructureNiveau1.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+  montantMarcheContraHorSib1(){
+  return this.ListeMarcheInfrastructureNiveau1.filter(element => element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
 },
-//   montantMarchePlanfierHorSib(){
-//   return this.afficherListeMarcheHorsSib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==4).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
-// },
-InfastructureLibelleNiveau4() {
+InfastructureLibelleNiveau1() {
 
       
-      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 4);
+      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 1);
 
       if (norme) {
         return norme.libelle;
@@ -472,7 +471,7 @@ afficherLibelleTypeMarche(){
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==4)
+            return colect.filter(element => element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==1)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -481,7 +480,7 @@ afficherLibelleTypeMarche(){
             // }); 
         }
 
-        return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==4)
+        return this.gettersMarcheHorsib.filter(element => element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==1)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)

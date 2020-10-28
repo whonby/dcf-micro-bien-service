@@ -31,7 +31,7 @@
           <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)" style="text-align:center;font-size:14px">
           {{formatageSommeSansFCFA(parseFloat(effetFinancier.hist_montant_ttc)) || 'Non renseigné'}}</td>
            <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)" style="text-align:center;font-size:14px">
-          {{formatageSommeSansFCFA(parseFloat(effetFinancier.Erreurs_sur_montant_ttc)) || 'Non renseigné'}}</td>
+          {{effetFinancier.Erreurs_sur_montant_ttc || 'Non renseigné'}}</td>
            <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)" style="text-align:center;font-size:14px">
           {{formatageSommeSansFCFA(parseFloat(effetFinancier.montant_total_ttc)) || 'Non renseigné'}}</td>
          
@@ -228,8 +228,10 @@ afficherModalModifierActeEffetFinancier(id){
 ModifierOfficeFinancier(){
 
 var nouvelObjet = {
-        ...this.EditOffreFinanciere,
+        
+        id:this.EditOffreFinanciere.id,
         Erreurs_sur_montant_ttc:this.Erreursdecalcul,
+        montant_total_ttc:this.EditOffreFinanciere.montant_total_ttc
         
       };
                

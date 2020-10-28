@@ -75,7 +75,7 @@
             <ul class="quick-actions" >
               
     <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:4}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4>HORS SIB</h4></router-link> </li>
-  <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>CARTOGRAPHIES </h4> <i class="icon-globe"></i><h4>BUDGETAIRES</h4></router-link> </li>
+  <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>CARTOGRAPHIES </h4> <i class="icon-globe"></i><h4>DES BUDGETS ET DES MARCHES</h4></router-link> </li>
            <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:6}}" tag="a"  style="color:black;"><h4>MON </h4> <i class="icon-group"></i><h4> EQUIPE</h4></router-link> </li>
             </ul>
            
@@ -109,6 +109,7 @@ export default {
   },
 created(){
           this.getGestionModules()
+          this.getInfrastructure()
     this.getAffectation()
 this.getFormeJuridiques()
 this.getRegimeImpositions()
@@ -174,7 +175,7 @@ this.getAllRealiteServiceFait()
 // this.getTypeProcedure()
 
 
-this.getImageMarche()
+
 
 
 
@@ -331,7 +332,7 @@ this.getLettreInvitation()
     this.getObservationBailleur()
 
    this.getAvenant()
-
+this.getImageMarche()
     this.getMarcheBailleur()
 this.getMembreCojo()
     this.getProceVerbal()
@@ -429,7 +430,7 @@ return objJson.id
    ...mapActions('parametreGenerauxProgrammeUnite',['getUnite', 'getZone']),
 
     ...mapActions('parametreGenerauxAdministratif',
-     ['getGestionModules','getExercicesBudgetaires', 'getTitres', 'getTaux',
+     ['getGestionModules',"getInfrastructure",'getExercicesBudgetaires', 'getTitres', 'getTaux',
     'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 'getStructurePays', 'getPlanPays','getPlanOrganigrammeUa',
     'getStructureAdministrative', 'getServiceGestionnaire', 'getStructureGeographique',
     'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions"]),
@@ -493,7 +494,7 @@ return objJson.id
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ['getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
+       ...mapActions('bienService', ["getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",

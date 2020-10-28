@@ -326,7 +326,7 @@ decision_cf
                       </div>
 
                        <div id="tab03" class="tab-pane ">
-                         <imageMarche :marche="detail_marche"></imageMarche>
+                         <imageMarche :macheid="detail_marche.id"></imageMarche>
                       </div>
       </div>
        </div>

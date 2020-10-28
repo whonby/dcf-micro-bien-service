@@ -18,7 +18,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>{{InfastructureLibelleNiveau3}}</h5>
+              <h5>{{InfastructureLibelleNiveau5}}</h5>
               <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -178,9 +178,9 @@
    
   
  import { mapGetters, mapActions } from "vuex";
- import { formatageSomme } from "../../../../Repositories/Repository";
- import {admin,dcf,noDCfNoAdmin} from "../../../../Repositories/Auth"
- import {partition} from '../../../../Repositories/Repository'
+ import { formatageSomme } from "@/Repositories/Repository";
+ import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
+ import {partition} from '@/Repositories/Repository'
 export default {
   components:{
   
@@ -314,6 +314,10 @@ export default {
 
     ...mapGetters("horSib", ["gettersMarcheHorsib"]),
 
+
+//   montantMarchePlanfierHorSib(){
+//   return this.afficherListeMarcheHorsSib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==5).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+// },
 ListeMarcheInfrastructureNiveau1() {
       const st = this.search.toLowerCase();
       return this.afficherListeMarcheHorsSib.filter(type => {
@@ -324,15 +328,12 @@ ListeMarcheInfrastructureNiveau1() {
       });
     },
   montantMarchePlanfierHorSib(){
-  return this.ListeMarcheInfrastructureNiveau1.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+  return this.ListeMarcheInfrastructureNiveau1.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==5).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
 },
-//   montantMarchePlanfierHorSib(){
-//   return this.afficherListeMarcheHorsSib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==3).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
-// },
-InfastructureLibelleNiveau3() {
+InfastructureLibelleNiveau5() {
 
       
-      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 3);
+      const norme = this.getterInfrastrucure.find(normeEquipe => normeEquipe.code == 5);
 
       if (norme) {
         return norme.libelle;
@@ -472,7 +473,7 @@ afficherLibelleTypeMarche(){
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==3)
+            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==5)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -481,7 +482,7 @@ afficherLibelleTypeMarche(){
             // }); 
         }
 
-        return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==3)
+        return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==5)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)

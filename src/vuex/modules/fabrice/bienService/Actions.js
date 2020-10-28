@@ -72,7 +72,12 @@ var queue = housecall({concurrency: 2, cooldown: 1000})
 
 
 
-
+// export  function  getImageMarche({commit}) {
+//   queue.push(() => axios.get('/image_marche').then((response) => {
+//     commit('GET_ALL_IMAGE_MARCHE', response.data)
+    
+// }).catch(error => console.log(error)))
+// }
 
 
 

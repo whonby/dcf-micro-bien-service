@@ -86,7 +86,7 @@ this.getRegimeImpositions()
     this.getRapport()
       this.getBudgeChager()
       this.getLigneExempter()
-this.getInfrastructure()
+
    this.getLocalisationGeographiqueAll()
       this.getExercicesBudgetaires()
       this.getTaux()
@@ -304,7 +304,7 @@ this.getLettreInvitation()
     this.getObservationBailleur()
 
    this.getAvenant()
-
+this.getImageMarche()
     this.getMarcheBailleur()
 this.getMembreCojo()
     this.getProceVerbal()
@@ -392,7 +392,7 @@ this.getMembreCojo()
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ['getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
+       ...mapActions('bienService', ["getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",

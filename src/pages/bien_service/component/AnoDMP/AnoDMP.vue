@@ -86,7 +86,7 @@ affichierAppelOffreid
       <div id="tab8888" class="tab-pane active">
 <form class="form-horizontal">
         <div class="control-group">
-          <label class="control-label">Reference</label>
+          <label class="control-label">Reference Pv</label>
           <div class="controls">
             <input
                 type="text"
