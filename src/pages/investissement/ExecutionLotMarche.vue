@@ -69,8 +69,7 @@
 
 
 
-
-                     <div class="btn-group">
+<div class="btn-group" v-if="afficherStatusSib(marche.id)==0">
 
                
 <router-link :to="{ name: 'detailExecution', params: { id: marche.id }}"
@@ -84,6 +83,22 @@
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
+<div class="btn-group" v-if="afficherStatusSib(marche.id)==1">
+
+               
+<router-link :to="{ name: 'detailExecutionHorsSib', params: { id: marche.id }}"
+                class="btn btn-default " title="Detail execution Marche Gestion Hors Sib">
+                  <span class=""><i class="  icon-random"></i></span>
+                   </router-link> 
+
+          
+
+              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+
+                     
 
                        </tr>
                 </tbody>
@@ -149,6 +164,18 @@ export default {
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
    ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
+afficherStatusSib() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.sib;
+      }
+      return 0
+        }
+      };
+    },
 affichertypeMarcheEx() {
       return id => {
         if (id != null && id != "") {

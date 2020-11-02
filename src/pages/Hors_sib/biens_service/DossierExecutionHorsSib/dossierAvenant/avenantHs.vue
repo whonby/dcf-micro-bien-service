@@ -60,7 +60,7 @@
          </td>
        </tr>
          <tr>
-           <td colspan="3">
+           <td colspan="2">
                 
             <div class="control-group">
             <label class="control-label">Objet</label>
@@ -72,7 +72,7 @@
             </div>
           </div>
            </td>
-           <!-- <td>
+           <td>
            <div class="control-group">
             <label class="control-label">Montant du marche</label>
             <div class="controls">
@@ -84,7 +84,7 @@
               />
             </div>
           </div>
-         </td> -->
+         </td>
          </tr>
          <tr>
           <td>
@@ -138,6 +138,8 @@
                 class="span"
                readonly
               />
+               <code v-if="parseFloat(this.quinzePourcentDuMarche) < parseFloat(this.affichierMontantAvenantTTC)">
+           Montant Avenant est supperieure au 30% du marche</code>
             </div>
           </div>
          </td>
@@ -173,6 +175,7 @@
       </div>
       <div class="modal-footer">
         <a
+        v-if="parseFloat(this.quinzePourcentDuMarche) > parseFloat(this.affichierMontantAvenantTTC)"
           @click.prevent="ajouterTypeTexteLocal"
           class="btn btn-primary"
           href="#"
@@ -507,7 +510,7 @@ search:""
   'planActe']),
 
 quinzePourcentDuMarche() {
-      const val = (parseFloat(this.afficheMontantMarcheReel(this.macheid)) * 0.15);
+      const val = (parseFloat(this.afficheMontantMarcheReel(this.macheid)) * 0.30);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -744,7 +747,7 @@ afficherLibelleService() {
     },
        ajouterTypeTexteLocal() {
          if(parseFloat(this.quinzePourcentDuMarche) < parseFloat(this.affichierMontantAvenantTTC)){
-alert("Montant Avenant est supperieure au 15% du marche")
+alert("Montant Avenant est supperieure au 30% du marche")
          }
 else
 {

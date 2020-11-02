@@ -75,6 +75,7 @@ export default {
     let objet=localStorage.getItem('Users');
     let user=JSON.parse (objet)
     this.getGestionModules()
+    this.getTypeOrdrePaiement()
     this.getInfrastructure()
     this.getAffectation()
 this.getFormeJuridiques()
@@ -145,7 +146,8 @@ this.getAllRealiteServiceFait()
 // les get des marches hors sib
 
 this.getMarcheHorSib()
-
+this.getOpProvisoire()
+this.getRealiteServiceHors()
 
 
 
@@ -392,7 +394,7 @@ this.getMembreCojo()
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ["getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
+       ...mapActions('bienService', ["getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",
@@ -406,7 +408,7 @@ this.getMembreCojo()
 
           "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances"]),
 
-          ...mapActions('horSib',['getMarcheHorSib'])
+          ...mapActions('horSib',['getMarcheHorSib',"getRealiteServiceHors","getOpProvisoire"])
 
 
   },

@@ -2408,3 +2408,24 @@ export const DELETE_IMAGE_MARCHE  = (state, id)=> {
     state.image_marche = state.image_marche.filter(prest => prest.id !=id)
 }
 
+
+export const GET_ALL_TYPE_ORDRE_PAIEMENT = (state, tableau_typeordre) =>{
+    state.typeOrdrePaiement = tableau_typeordre
+   }
+   
+   export const AJOUTER_TYPE_ORDRE_PAIEMENT = (state, elementAjout) =>{
+       state.typeOrdrePaiement.unshift(elementAjout)
+   }
+   
+   export const MODIFIER_TYPE_ORDRE_PAIEMENT = (state, elementModifie) =>{
+       state.typeOrdrePaiement = state.typeOrdrePaiement.map(item =>{
+           if(item.id == elementModifie.id){
+               item = {...elementModifie}
+           }
+           return item
+       })
+   }
+   
+   export const SUPPRIMER_TYPE_ORDRE_PAIEMENT = (state, id) =>{
+       state.typeOrdrePaiement = state.typeOrdrePaiement.filter(response => response.id!=id)
+   }

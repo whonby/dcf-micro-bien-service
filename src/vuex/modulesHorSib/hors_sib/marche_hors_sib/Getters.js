@@ -1,6 +1,7 @@
 //import { groupBy } from "../../../../Repositories/Repository";
 export const gettersMarcheHorsib = state => state.marcheHorsib
-
+export const gettersrealiteServiceFaitHorsSib = state => state.realiteServiceFaitHorsSib
+export const gettersopProvisoire = state => state.opProvisoire
 export  const getPersonnaliserMarchehorSib = (state, getters,rootState, rootGetters) =>
 state.marcheHorsib.map(element => {
     if (element.unite_administrative_id !== null && element.activite_id !== null && element.economique_id !== null ){

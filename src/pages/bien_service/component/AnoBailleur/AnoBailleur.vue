@@ -4,7 +4,7 @@ marche_id
   <div v-for="item in lot" :key="item.id" class="widget-content">
     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
 
-      <div class="span8"><h5>LOT N°{{ item.numero_lot }} / {{item.objet}}
+      <div class="span8" style="text-align:center"><h5>LOT N°{{ item.numero_lot }} / {{item.objet}}
       </h5></div>
       <div align="right">
       <!-- <div class="widget-content">

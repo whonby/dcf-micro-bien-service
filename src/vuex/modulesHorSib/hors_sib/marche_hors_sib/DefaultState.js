@@ -1,6 +1,8 @@
 const defaultstate = {
    
-marcheHorsib :[]
+marcheHorsib :[],
+realiteServiceFaitHorsSib:[],
+opProvisoire:[]
 };
 
  export default defaultstate

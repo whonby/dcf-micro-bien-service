@@ -3,7 +3,7 @@ AffichierElementParent
 <template>
 
 <div>
-<div id="decisionServiceRealite" class="modal hide tailgrand">
+<div id="decisionServiceRealiteopProvisoire" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Decision CF</h3>
@@ -175,13 +175,9 @@ AffichierElementParent
                       
                     </td>
                     <td>
-                        <!-- <router-link :to="{ name: 'detailRealiteServiceFait', params: {id_detailRealiteServiceFait:realiteService.id}}"
-                class="btn btn-default " title="Detail Realite service fait">
-                  <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link>  -->
-                   <router-link :to="{ name: 'OpDefinitifDirect', params: {id:realiteService.id}}"
+                   <router-link :to="{ name: 'AjouterOpProvDefinitif', params: {id:realiteService.id}}"
                 class="btn btn-inverse " title="Op Definitif" v-if="realiteService.decision_controleur_financier == 1 || realiteService.decision_controleur_financier == 9">
-                  <span class="" style="color:#fff">Saisie OP</span>
+                  <span class="" style="color:#fff">Saisie OP definitif</span>
                    </router-link> 
                       <button  class="btn btn-danger" @click="supprimerRealiteServiceHors(realiteService.id)">
                         <span>
@@ -395,7 +391,7 @@ afficheDateFacture() {
       return id => {
         if (id != null && id != "") {
           return this.gettersrealiteServiceFaitHorsSib.filter(
-            element => element.marche_id == id  && element.differentrealite==0
+            element => element.marche_id == id  && element.differentrealite==1
           );
         }
       };
@@ -482,7 +478,7 @@ section_id:this.afficherSectId,
   marchetype:this.editServiceRealite.marchetype
        };
  this.modifierRealiteServiceHors(nouvelObjet);
-this.$("#decisionServiceRealite").modal('hide');
+this.$("#decisionServiceRealiteopProvisoire").modal('hide');
 
           this.editLiquidation={
                 
@@ -492,7 +488,7 @@ this.$("#decisionServiceRealite").modal('hide');
        
     },
 afficherModalObservationControlleurFinancier(id) {
-      this.$("#decisionServiceRealite").modal({
+      this.$("#decisionServiceRealiteopProvisoire").modal({
         backdrop: "static",
         keyboard: false
       });
