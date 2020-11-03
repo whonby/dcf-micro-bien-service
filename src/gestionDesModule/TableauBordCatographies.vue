@@ -244,6 +244,7 @@
                     :url="tileProvider.url"
                     layer-type="base"/>
                 <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
+                
                 <v-marker-cluster >
                   <l-circle-marker v-for="l in localisation"
                                    :key="l.id"
@@ -269,7 +270,7 @@
                   <!--  <l-marker v-for="l in localisation"
                               :key="l.id"
                               :lat-lng="l.latlng">
-
+montantBudegtPasUniteAdminOuRegion
 
                         &lt;!&ndash;&ndash;&gt;
                     </l-marker>-->
@@ -435,6 +436,7 @@ import 'vue-search-select/dist/VueSearchSelect.css'
 //import {pyDepartmentsData} from "@/data/py-departments-data"
 //import {geojson} from "@/data/py-departments-geojson"
 import VueApexCharts from 'vue-apexcharts'
+import ad from "leaflet-html-legend"
 export default {
   name: "Example",
   components: {
@@ -1251,7 +1253,7 @@ this.objetUnite=objet
         this.clusterOptions = { disableClusteringAtZoom: 11 }
       });
     }, 5000);
-
+console.log(ad)
     const mapComponent = this.$refs.map;
 
     const map = mapComponent.mapObject;
@@ -1297,16 +1299,83 @@ this.objetUnite=objet
 
     this.info_sidebar_marche.disablePanel('infomarche');
 
-    // this.getterInfrastrucure.forEach(function (value) {
-    //
-    // })
+     var htmlLegend3 = sid.control.htmllegend({
+        position: 'bottomright',
+        legends: [{
+            name: 'Legend',
+            elements: [{
+                label: 'Marché planifié',
+                html: "<div class='marche_planifier'></div>"
+            },
+            {
+                label: 'Marché en contractualisation',
+                html: "<div class='marche_contratualisation'></div>"
+            },
+            {
+                label: 'Marché en exécution',
+                html: "<div class='marche_execution'></div>"
+            },
+            {
+                label: 'Marché résilie',
+                html: "<div class='marche_resilise'></div>"
+            },
+             {
+                label: 'Marché terminé',
+                html: "<div class='marche_termine'></div>"
+            },
+             {
+                label: 'Marché suspendu',
+                html: "<div class='marche_suspendue'></div>"
+            }]
+        }],
+        collapseSimple: true,
+        detectStretched: true,
+        visibleIcon: 'icon icon-eye',
+        hiddenIcon: 'icon icon-eye-slash'
+    })
+
+    map.addControl(htmlLegend3)
 
 
   }
 };
 </script>
+<!--
+
+    
+-->
 <style>
 /* sidebar css */
+.marche_planifier{
+   width: 20px;
+   height: 20px;
+   background: red;
+}
+.marche_contratualisation{
+   width: 20px;
+   height: 20px;
+   background: #209503;
+}
+.marche_execution{
+   width: 20px;
+   height: 20px;
+   background: orange;
+}
+.marche_resilise{
+   width: 20px;
+   height: 20px;
+   background: blue;
+}
+.marche_termine{
+   width: 20px;
+   height: 20px;
+   background: #ab0cd7;
+}
+.marche_suspendue{
+   width: 20px;
+   height: 20px;
+   background: #ccc;
+}
 .sidebar {
   position: absolute;
   top: 0;
