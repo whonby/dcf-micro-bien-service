@@ -142,7 +142,7 @@ AffichierElementParent
                      
                        <td >{{(formaterDate(Manda.date_decision_emetteur)) || 'Non renseigné'}}</td>
                    <td >{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
-                    <td >
+                    <td v-if="realiteService.decision_emetteur == 8 || realiteService.decision_emetteur == 9 ">
                         <button v-if="Manda.decision_cf == 8"  class="btn  btn-success" @click="afficheDecisionCf(Manda.id)" >                        
                      
                       <span    >Visé</span>

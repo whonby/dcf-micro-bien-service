@@ -85,9 +85,9 @@ decision_cf
                 <div class="widget-box">
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
-                      <!-- <li class="active">
+                      <li class="active">
                         <a data-toggle="tab" href="#tab1">TABLEAU DE BORD</a>
-                      </li> -->
+                      </li>
                        <li>
                         <a data-toggle="tab" href="#tab2">DETAIL EXECUTION</a>
                       </li>
@@ -108,9 +108,9 @@ decision_cf
                          <imageMarche :macheid="detail_marche.id"></imageMarche>
                       </div> -->
                     <!--ongle identification-->
-                    <!-- <div id="tab1" class="tab-pane active">
+                    <div id="tab1" class="tab-pane active">
   <tableauBordExecution :macheid="detail_marche.id"></tableauBordExecution>
-          </div> -->
+          </div>
                             <div id="tab2" class="tab-pane ">
   <div class="widget-content nopadding" >
 
@@ -122,10 +122,12 @@ decision_cf
                             <ul class="nav nav-tabs">
                               <li class="active"><a data-toggle="tab" href="#tab2078">Avenant</a></li>
                                <li ><a data-toggle="tab" href="#tab100">Facture</a></li>
-                              <template v-if="typeOrdrePaiementHs(detail_marche.id) == 1">
+                                <li ><a data-toggle="tab" href="#tab45785" >Décompte</a></li>
+                              <li ><a data-toggle="tab" href="#Financement" >Financement</a></li>
+                              <!-- <template v-if="typeOrdrePaiementHs(detail_marche.id) == 1">
                                 
                                 <li ><a data-toggle="tab" href="#tab15550" >Réalité service fait</a></li>
-                                <!-- <li ><a data-toggle="tab" href="#tab120120" >Liquidation</a></li> -->
+                                <li ><a data-toggle="tab" href="#tab120120" >Liquidation</a></li>
                                 <li><a data-toggle="tab" href="#tab20" >Ordre Paiement Définitive</a></li>
                                <li ><a data-toggle="tab" href="#tab45785" >Décompte</a></li>
                               <li ><a data-toggle="tab" href="#Financement" >Financement</a></li>
@@ -135,9 +137,8 @@ decision_cf
                                 <li ><a data-toggle="tab" href="#tab120120" >Ordre Paiement Annulation</a></li>
                                 <li ><a data-toggle="tab" href="#tab15550" >Réalité service fait</a></li>
                                 <li><a data-toggle="tab" href="#tab20" >Ordre Paiement Définitive</a></li>
-                               <li ><a data-toggle="tab" href="#tab45785" >Décompte</a></li>
-                              <li ><a data-toggle="tab" href="#Financement" >Financement</a></li>
-                              </template>
+                              
+                              </template> -->
                                
                              </ul>
                          
@@ -151,7 +152,7 @@ decision_cf
 <div id="tab100" class="tab-pane  "><facture :macheid="detail_marche.id"></facture></div> 
 <div id="tab45785" class="tab-pane  "><decompte :macheid="detail_marche.id"></decompte></div>
                        
- <div id="tab20" class="tab-pane  ">
+ <!-- <div id="tab20" class="tab-pane  ">
                         
                          
                          <div id="tab9563" class="tab-pane active">
@@ -174,10 +175,10 @@ decision_cf
                          </div>
           
                            
-                       </div>
+                       </div> -->
 
 
-                       <div id="tab10" class="tab-pane  ">
+                       <!-- <div id="tab10" class="tab-pane  ">
                         
                          
                          <div id="tab7896532" class="tab-pane active">
@@ -195,11 +196,11 @@ decision_cf
                          </div>
           
                            
-                       </div>
+                       </div> -->
                        
                         
                          
-                         <div id="tab15550" class="tab-pane">
+                         <!-- <div id="tab15550" class="tab-pane">
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
                                <li class="active" v-if="typeOrdrePaiementHs(detail_marche.id) == 1"><a data-toggle="tab" href="#ServiceRealiteFaitBS">Service Bénéficiaire</a></li>
@@ -215,20 +216,20 @@ decision_cf
                       <div id="ServiceRealiteFaitBSprov" class="tab-pane active " v-if="typeOrdrePaiementHs(detail_marche.id) == 2"><realiteServiceFaitServiceOpProvisoireBS :macheid="detail_marche.id"></realiteServiceFaitServiceOpProvisoireBS></div>
                            <div id="ServiceRealiteFaitCFprov" class="tab-pane" v-if="typeOrdrePaiementHs(detail_marche.id) == 2"><realiteServiceFaitServiceOpProvisoireCf :macheid="detail_marche.id"></realiteServiceFaitServiceOpProvisoireCf></div>
                          </div>
-                         </div> 
-                         <div id="tab120120" class="tab-pane">
+                         </div>  -->
+                         <!-- <div id="tab120120" class="tab-pane">
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#opAnnulationbs">Op Annulation</a></li>
-                                  <!-- <li class=""><a data-toggle="tab" href="#opProvisoirecf">Controlleur Financier</a></li>                                                   -->
+                               
                             </ul>
                         </div>
                          <div class="widget-content tab-content">
-                           <!-- <div id="tab000235" class="tab-pane active "><liquidationEmetteur :macheid="detail_marche.id"></liquidationEmetteur></div> -->
+                          
                            <div id="opAnnulationbs" class="tab-pane active"><listeOpAnnulation :macheid="detail_marche.id"></listeOpAnnulation></div>
                           
                          </div>
-                         </div>
+                         </div> -->
                           </div>
                          
                           
@@ -248,9 +249,9 @@ decision_cf
         </div>
           </div>
         </div>
-                      <!-- <div id="tab22" class="tab-pane ">
+                      <div id="tab22" class="tab-pane ">
                           <echeance-marche :marche="detail_marche"></echeance-marche>
-                      </div> -->
+                      </div>
 
                        <div id="tab03" class="tab-pane ">
                          <imageMarche :macheid="detail_marche.id"></imageMarche>
@@ -300,59 +301,56 @@ decision_cf
     import { mapGetters, mapActions } from "vuex";
     import moment from "moment";
     import { formatageSomme } from './../../../../../Repositories/Repository';
-    //  import { formatageSomme } from "../../../../src/Repositories/Repository";
-    //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
+   
 import avenant from "../dossierAvenant/avenantHs";
 import facture from "../dossierFacture/factureHs";
 import decompte from "../dossierDecompte/decompteHs";
-    // import mandatFactureProformaEmetteur from "../dossierMandat/mandatFactureProformaEmetteur";
-    //  import mandatFactureProformaCf from "../dossierMandat/mandatFactureProformaCf";
-    import listeOpDefinitiveBsDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveBsDirect.vue";
-    import listeOpDefinitiveCfDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveCfDirect.vue";
-    import listeOpProvisoireBs from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpProvisoireBs";
-     import listeOpProvisoireCf from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpProvisoireCf";
-      import listeOpAnnulation from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpAnnulation";
-    import listeOpDefinitiveBsprov from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpDefinitiveBsprov";    
-        import listeOpDefinitivecfprov from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpDefinitivecfprov";
-     // import engagementCf from "../dossierEngagement/OrdreDePaiementProfisoireCfHs";
-      import realiteServiceFaitServiceBHs from "../dossierRealiteServiceFait/realiteServiceFaitServiceBHs";
-      import realiteServiceFaitCf from "../dossierRealiteServiceFait/realiteServiceFaitCfHs";
-import realiteServiceFaitServiceOpProvisoireBS from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireBS";
-import realiteServiceFaitServiceOpProvisoireCf from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireCf";
-        // import liquidationCf from "../dossierLiquidation/liquidationCfHs";
-        //  import liquidationOrdonnateur from "../dossierLiquidation/liquidationOrdonnateurHs";
+    
+//     import listeOpDefinitiveBsDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveBsDirect.vue";
+//     import listeOpDefinitiveCfDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveCfDirect.vue";
+//     import listeOpProvisoireBs from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpProvisoireBs";
+//      import listeOpProvisoireCf from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpProvisoireCf";
+//       import listeOpAnnulation from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpAnnulation";
+//     import listeOpDefinitiveBsprov from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpDefinitiveBsprov";    
+//         import listeOpDefinitivecfprov from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpDefinitivecfprov";
+     
+//       import realiteServiceFaitServiceBHs from "../dossierRealiteServiceFait/realiteServiceFaitServiceBHs";
+//       import realiteServiceFaitCf from "../dossierRealiteServiceFait/realiteServiceFaitCfHs";
+// import realiteServiceFaitServiceOpProvisoireBS from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireBS";
+// import realiteServiceFaitServiceOpProvisoireCf from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireCf";
+       
                   import financement from "../dossierFinancement/financementHs";
                   import imageMarche from "../dossierImageMarche/imageMarche";
-                  //  import tableauBordExecution from "../../../../bien_service/contractualisation/DossierExecution/tableauBordExecution/tableauBordExecution";
-  // import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
+                import tableauBordExecution from "../tableauBordExecution/tableauBordExecution";
+  import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
   export default {
         name: 'compte',
         components:{
-          listeOpDefinitiveBsprov,
-          listeOpDefinitivecfprov,
-          realiteServiceFaitServiceOpProvisoireBS,
-          realiteServiceFaitServiceOpProvisoireCf,
+          // listeOpDefinitiveBsprov,
+          // listeOpDefinitivecfprov,
+          // realiteServiceFaitServiceOpProvisoireBS,
+          // realiteServiceFaitServiceOpProvisoireCf,
             avenant,
             facture,
             decompte,
-            listeOpAnnulation,
-            listeOpProvisoireCf,
-            listeOpProvisoireBs,
+          //   listeOpAnnulation,
+          //   listeOpProvisoireCf,
+          //   listeOpProvisoireBs,
             // mandatFactureProformaEmetteur,
             // mandatFactureProformaCf,
             // mandatFactureDefinitiveEmetteur,
             // mandatFactureDefinitiveCf,
             
-            realiteServiceFaitServiceBHs,
-            realiteServiceFaitCf,
+            // realiteServiceFaitServiceBHs,
+            // realiteServiceFaitCf,
             
             // liquidationCf,
             // liquidationOrdonnateur,
             financement,
-            listeOpDefinitiveBsDirect,
-            listeOpDefinitiveCfDirect,
-            // // tableauBordExecution,
-            //EcheanceMarche
+            // listeOpDefinitiveBsDirect,
+            // listeOpDefinitiveCfDirect,
+            tableauBordExecution,
+            EcheanceMarche,
 imageMarche
 
         },

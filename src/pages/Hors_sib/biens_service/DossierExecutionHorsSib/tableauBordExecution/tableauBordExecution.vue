@@ -9,7 +9,7 @@
     <tr>
          <td>
             <ul class="quick-actions" style="margin: 0px !important;"> 
-   <li class="bg_lb span"> <a href="#" style="color:#FFFFFF;"><h4>BUDGET</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherMontantBudgetaireInitial(afficherInputationBudgetaire(macheid))))}}</span><h4>INITIAL</h4></a> </li>
+   <li class="bg_lb span"> <a href="#" style="color:#FFFFFF;"><h4>BUDGET</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherMontantBudgetaireInitial(afficherIdLigneBudgetaire(afficherIdParent(macheid)))))}}</span><h4>INITIAL</h4></a> </li>
             </ul>
 
         </td>
@@ -69,7 +69,7 @@
         </td>
          <td>
             <ul class="quick-actions" style="margin: 0px !important;"> 
-            <li class="bg_lr span"> <a href="#" style="color:#FFFFFF;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherMontantBudgetaireInitial(afficherInputationBudgetaire(macheid)) - sommeEgagementLigneTableau(macheid)))}}</span><h4>DISPONIBLE</h4></a> </li>
+            <li class="bg_lr span"> <a href="#" style="color:#FFFFFF;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherMontantBudgetaireInitial(afficherIdLigneBudgetaire(afficherIdParent(macheid))) - sommeEgagementLigneTableau(macheid)))}}</span><h4>DISPONIBLE</h4></a> </li>
             </ul>
 
         </td>
@@ -159,7 +159,7 @@ export default {
 
      ...mapGetters("uniteadministrative",['getterligneExempter','uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
-      "montantBudgetGeneral", ]),
+      "montantBudgetGeneral","budgetEclate" ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
@@ -168,6 +168,45 @@ export default {
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
 
+ afficherIdParent() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+       
+           return qtereel.parent_id;
+      }
+      return ""
+        }
+      };
+    },
+    afficherIdLigneBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+       
+           return qtereel.economique_id;
+      }
+      return ""
+        }
+      };
+    },
+    afficherMontantBudgetaireInitial() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id);
+
+      if (qtereel) {
+       
+           return qtereel.dotation;
+      }
+      return ""
+        }
+      };
+    },
  montantCredite: function () {
                 return id => {
                     if (id != "") {
@@ -216,19 +255,19 @@ afficherInputationBudgetaire() {
         }
       };
     },
-    afficherMontantBudgetaireInitial() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.budgetGeneral.find(qtreel => qtreel.codebudget == id);
+    // afficherMontantBudgetaireInitial() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.budgetGeneral.find(qtreel => qtreel.codebudget == id);
 
-      if (qtereel) {
+    //   if (qtereel) {
        
-           return qtereel.Dotation_Initiale;
-      }
-      return ""
-        }
-      };
-    },
+    //        return qtereel.Dotation_Initiale;
+    //   }
+    //   return ""
+    //     }
+    //   };
+    // },
 
 
 
