@@ -76,7 +76,18 @@
 
                   </td>
                 </tr>
+            <tr>
+              <td>
+                <label for="pet-select">Changer chart:</label>
+<select v-model="type_minichart">  
+  <option value="bar">bar</option> 
+  <option value="pie">Pie charts</option> 
+  <option value="polar-radius">Polar radius</option> 
+<option value="polar-area">Polar area</option>
+ </select>
 
+              </td>
+            </tr>
                 </tbody>
               </table>
 
@@ -212,7 +223,7 @@ import ad from "leaflet-html-legend"
             return {
               objet_map:"",
               objet_leaflet:"",
-              type_minichart:"pie",
+              type_minichart:"bar",
               departement:"",
     sous_prefecture:'',
     region:"",
@@ -412,7 +423,7 @@ if(this.localisations_geographiques.length>0){
 
 getMontantMarcheRegionInfrastructure(){
        return (region,infrastructure)=>{
-          let marche=this.ListeMarchePasUA.filter(item=>{
+          let marche=this.objetMarchePasUniteOuRegion.filter(item=>{
             if( item.localisation_geographie_id==region && item.infrastructure_id==infrastructure)
            return item
             })
@@ -893,14 +904,17 @@ getMontantMarcheRegionInfrastructure(){
       // this.info_sidebar_marche.close()
       // this.info_sidebar_marche.disablePanel('infomarche');
     },
-    hide_charts(e) {
-      console.log(e)
-   e.eachLayer(
-      function(t) {
-         if (t._chart) { t._chart.remove(); }
-      }
-   );
-},
+
+    deleteLeafleMiniCharts(map) {
+
+        map.eachLayer(
+            function(t) {
+              if (t._chart) { t._chart.remove(); }
+            }
+        );
+
+   },
+
 formatageSomme:formatageSomme,
             zoomUpdate(zoom) {
                 this.currentZoom = zoom;
@@ -942,75 +956,73 @@ formatageSomme:formatageSomme,
 
 
 
-             integrationChartPasRegisonSurCarte(){
-    let vm=this
-    let arrayBar=[]
-    let arrayColor=[]
+  integrationChartPasRegisonSurCarte(){
+                let vm=this
+                let arrayBar=[]
+                let arrayColor=[]
 
-    if(vm.objet_map!="" && vm.objet_leaflet!=""){
-    //  let tail=this.localisation.length
-if(this.localisation.length>0){
-   
-      this.localisation.forEach(function (value){
-        let montantInfraParRegion=0
-    // #0000FF
-        vm.getInfrastructure(vm.infrastructure).forEach(function(val){
-        montantInfraParRegion=  vm.getMontantMarcheRegionInfrastructure(value.id,val.id)
-        if(val.code==1){
-          arrayColor.push("#6C0277")
-        }
-         if(val.code==2){
-          arrayColor.push("#F0C300")
-        }
-         if(val.code==3){
-          arrayColor.push("#E73E01")
-        }
-         if(val.code==4){
-          arrayColor.push("#22780F")
-        }
-          arrayBar.push(montantInfraParRegion)
-        })
-         
-   
-   
-    var myBarChart = vm.objet_leaflet.minichart(value.latlng,{
-      data: arrayBar,type:"pie",
-      colors:arrayColor,
-      /*labels:value.ville,
-      labelMinSize:15,
-      labelMaxSize:50,
-      labelPadding:100*/});
-  
- vm.objet_map.addLayer(myBarChart);
-  //myBarChart.setOptions({data: arrayBar,type:"bar",colors:arrayColor})
+       if(vm.objet_map!="" && vm.objet_leaflet!=""){
+                //  let tail=this.localisation.length
+            if(this.localisation.length>0){
+                      
+                  this.localisation.forEach(function (value){
+                  let montantInfraParRegion=0
+                              // #0000FF
+                     vm.getInfrastructure(vm.infrastructure).forEach(function(val){
+                           montantInfraParRegion=  vm.getMontantMarcheRegionInfrastructure(value.id,val.id)
+                             if(val.code==1){ arrayColor.push("#6C0277")}
 
-arrayBar=[]
-arrayColor=[]
+                             if(val.code==2){ arrayColor.push("#F0C300") }
 
-      })
+                             if(val.code==3){ arrayColor.push("#E73E01") }
+                                 
+                             if(val.code==4){ arrayColor.push("#22780F")}
+                              
+                              arrayBar.push(montantInfraParRegion)
+                           })
+                                  
+                            
+                            
+                              var myBarChart = vm.objet_leaflet.minichart(value.latlng,{
+                                data: arrayBar,type:vm.type_minichart,
+                                colors:arrayColor,
+                                });
+                            
+                          vm.objet_map.addLayer(myBarChart);
+                            
 
-    }
-      
-    
-    }
- 
-    }
+                          arrayBar=[]
+                          arrayColor=[]
+
+                                })
+
+                        }
+                  
+                
+                }
+            
+                }
         },
         watch: {
+          type_minichart: function (value) {
+                console.log(value);
+                this.deleteLeafleMiniCharts(this.objet_map)
+                this.integrationChartPasRegisonSurCarte()
+            },
             infrastructure: function (value) {
                 console.log(value);
-                this.hide_charts(this.objet_map)
+                this.deleteLeafleMiniCharts(this.objet_map)
                 this.integrationChartPasRegisonSurCarte()
             },
             region: function (value) {
                 console.log(value);  
-             this.hide_charts(this.objet_map)
+             this.deleteLeafleMiniCharts(this.objet_map)
                 this.integrationChartPasRegisonSurCarte()
             },
             unite_administrative_id: function (value) {
                 console.log(value);  
               //  this.objet_map.layers; 
-              this.hide_charts(this.objet_map)
+              this.deleteLeafleMiniCharts(this.objet_map)
              //  this.objet_map.on('overlayremove', this.hide_charts())
                 this.integrationChartPasRegisonSurCarte()
             }
@@ -1070,10 +1082,12 @@ var panelContent = {
     });
 
 
+  
 
-  var htmlLegend3 = sid.control.htmllegend({
+  let htmlLegend3 = sid.control.htmllegend({
         position: 'bottomright',
-        legends: [{
+        legends: [
+          {
             name: 'Legend',
             elements: [{
                 label: 'Sanitaires',
