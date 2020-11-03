@@ -167,7 +167,7 @@
 
 
 <!--Appel de la propriete-->
- {{integrationChartPasRegisonSurCarte}}
+ 
 
     </div>
 
@@ -365,39 +365,15 @@ removeMapChart(){
 let vm=this
 
     if(vm.objet_map!="" && vm.objet_leaflet!=""){
+       let arrayBar=[]
+    let arrayColor=[]
+
 if(this.localisations_geographiques.length>0){
       this.localisations_geographiques.forEach(function (value){
  if(value.structure_localisation_geographique_id==5){
                     if(value.longitude!=null && value.latitude!=null){
 
-         let bar=[Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()];  
-
-   console.log("Guei Roland")
-    var myBarChart = vm.objet_leaflet.minichart(value.latlng, {data: bar,type:vm.type_minichart});
- vm.objet_map.removeLayer(myBarChart);
-                    }}
-                   
-
-
-      })
- return null
-    }
-      
-       return null
-    }
-   return null
-},
-    integrationChartPasRegisonSurCarte(){
-    let vm=this
-    let arrayBar=[]
-    let arrayColor=[]
-
-    if(vm.objet_map!="" && vm.objet_leaflet!=""){
-    //  let tail=this.localisation.length
-if(this.localisation.length>0){
-   
-      this.localisation.forEach(function (value){
-        let montantInfraParRegion=0
+           let montantInfraParRegion=0
     // #0000FF
         vm.getInfrastructure(vm.infrastructure).forEach(function(val){
         montantInfraParRegion=  vm.getMontantMarcheRegionInfrastructure(value.id,val.id)
@@ -416,17 +392,13 @@ if(this.localisation.length>0){
           arrayBar.push(montantInfraParRegion)
         })
          
-    //  montantInfraParRegion=montantInfraParRegion+montantInfraParRegion
-
-     //  let bar=[Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()];  
-     
+   
    
     var myBarChart = vm.objet_leaflet.minichart(value.latlng, {data: arrayBar,type:"bar",colors:arrayColor});
-    
- vm.objet_map.addLayer(myBarChart);
+ vm.objet_map.remove(myBarChart);
+                    }}
+                   
 
-arrayBar=[]
-arrayColor=[]
 
       })
  return null
@@ -435,13 +407,12 @@ arrayColor=[]
        return null
     }
    return null
-    /**
-     * Fin afichage  */  
-    },
+},
+   
 
 getMontantMarcheRegionInfrastructure(){
        return (region,infrastructure)=>{
-          let marche=this.marches.filter(item=>{
+          let marche=this.ListeMarchePasUA.filter(item=>{
             if( item.localisation_geographie_id==region && item.infrastructure_id==infrastructure)
            return item
             })
@@ -462,6 +433,21 @@ getMontantMarcheRegionInfrastructure(){
           }
         });
       }
+    },
+
+
+   ListeMarchePasUA(){
+      let vM=this;
+      let objet=this.marches
+
+
+      if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id)
+      }
+
+      
+
+      return objet
     },
 
       objetMarchePasUniteOuRegion(){
@@ -684,7 +670,7 @@ getMontantMarcheRegionInfrastructure(){
         getLocalisation(){
             return id=>{
               if(id!=""){
-                this.removeMapChart
+             //   this.removeMapChart
                   return this.localisations_geographiques.filter(item=>item.id==id)
               }
               return this.localisations_geographiques
@@ -907,6 +893,14 @@ getMontantMarcheRegionInfrastructure(){
       // this.info_sidebar_marche.close()
       // this.info_sidebar_marche.disablePanel('infomarche');
     },
+    hide_charts(e) {
+      console.log(e)
+   e.eachLayer(
+      function(t) {
+         if (t._chart) { t._chart.remove(); }
+      }
+   );
+},
 formatageSomme:formatageSomme,
             zoomUpdate(zoom) {
                 this.currentZoom = zoom;
@@ -945,6 +939,81 @@ formatageSomme:formatageSomme,
             },
             click: (e) => console.log("clusterclick", e),
             ready: (e) => console.log('ready', e),
+
+
+
+             integrationChartPasRegisonSurCarte(){
+    let vm=this
+    let arrayBar=[]
+    let arrayColor=[]
+
+    if(vm.objet_map!="" && vm.objet_leaflet!=""){
+    //  let tail=this.localisation.length
+if(this.localisation.length>0){
+   
+      this.localisation.forEach(function (value){
+        let montantInfraParRegion=0
+    // #0000FF
+        vm.getInfrastructure(vm.infrastructure).forEach(function(val){
+        montantInfraParRegion=  vm.getMontantMarcheRegionInfrastructure(value.id,val.id)
+        if(val.code==1){
+          arrayColor.push("#6C0277")
+        }
+         if(val.code==2){
+          arrayColor.push("#F0C300")
+        }
+         if(val.code==3){
+          arrayColor.push("#E73E01")
+        }
+         if(val.code==4){
+          arrayColor.push("#22780F")
+        }
+          arrayBar.push(montantInfraParRegion)
+        })
+         
+   
+   
+    var myBarChart = vm.objet_leaflet.minichart(value.latlng,{
+      data: arrayBar,type:"pie",
+      colors:arrayColor,
+      /*labels:value.ville,
+      labelMinSize:15,
+      labelMaxSize:50,
+      labelPadding:100*/});
+  
+ vm.objet_map.addLayer(myBarChart);
+  //myBarChart.setOptions({data: arrayBar,type:"bar",colors:arrayColor})
+
+arrayBar=[]
+arrayColor=[]
+
+      })
+
+    }
+      
+    
+    }
+ 
+    }
+        },
+        watch: {
+            infrastructure: function (value) {
+                console.log(value);
+                this.hide_charts(this.objet_map)
+                this.integrationChartPasRegisonSurCarte()
+            },
+            region: function (value) {
+                console.log(value);  
+             this.hide_charts(this.objet_map)
+                this.integrationChartPasRegisonSurCarte()
+            },
+            unite_administrative_id: function (value) {
+                console.log(value);  
+              //  this.objet_map.layers; 
+              this.hide_charts(this.objet_map)
+             //  this.objet_map.on('overlayremove', this.hide_charts())
+                this.integrationChartPasRegisonSurCarte()
+            }
         },
         mounted() {
             setTimeout(() => {
@@ -1023,13 +1092,14 @@ var panelContent = {
                 html: "<div class='routier'></div>"
             }]
         }],
-        collapseSimple: true,
-        detectStretched: true,
+        collapseSimple: false,
+        detectStretched: false,
         visibleIcon: 'icon icon-eye',
         hiddenIcon: 'icon icon-eye-slash'
     })
 
     map.addControl(htmlLegend3)
+    this.integrationChartPasRegisonSurCarte()
 
 
 
