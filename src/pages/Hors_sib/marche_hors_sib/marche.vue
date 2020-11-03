@@ -559,6 +559,7 @@ afficherLibelleTypeMarche(){
     },
      
 
+
   },
   methods: {
     ...mapActions("bienService", ['ajouterMarche','modifierMarche','modifierMarcheBascule',

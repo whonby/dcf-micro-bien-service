@@ -1,5 +1,4 @@
-detail_marche
-Ajouter Facture
+
 <template>
 
 <div>
@@ -7,7 +6,7 @@ Ajouter Facture
    <div id="modalTypeEngagement" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Choisir le type de procedure</h3>
+        <h3>Type d'Ordre de Paiement</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -15,13 +14,13 @@ Ajouter Facture
                     <tr>
                       <td>
 <div class="control-group">
-                            <label class="control-label">Type de procedure</label>
+                            <label class="control-label">Type d'Ordre de Paiement</label>
                             <div class="controls">
                              
-                              <select v-model="formData.tprocedure" class="span12">
+                              <select v-model="formDataOrdre.code" class="span12">
                              
-                                 <option value= 1>Engagement Direct</option>
-                               <option value= 2>Engagement Bon de Commande</option>
+                                 <option value= 1>OP DIRECT( ORDINAIRE )</option>
+                               <option value= 2>OP PROVISOIRE =>DEFINITIVE</option>
                                
                               </select>
                            
@@ -36,7 +35,7 @@ Ajouter Facture
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterChoixProcLocal"
+          @click.prevent="ajoutTypeOrdrePaiement"
           class="btn btn-primary"
           href="#"
          
@@ -512,7 +511,7 @@ Ajouter Facture
             <tr>
                <td>
                 <div class="control-group">
-                  <label class="control-label">Type facture</label>
+                  <label class="control-label">Type facture{{typeOrdrePaiement(this.macheid)}}</label>
                   <div class="controls">
                       <select v-model="formData1.typfacture_id" class="span" >
                     
@@ -1467,15 +1466,15 @@ Ajouter Facture
                      <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 'Non renseigné'}}</td>
                       
                      
-                     <td v-if="factu.typeProcedure == 2">
-                       <router-link :to="{ name: 'AjouterEngagementFactureProf', params: { id: factu.id }}"
-                class="btn btn-default " title="Ajouter Engagement">
+                     <td v-if="factu.typeordrepaiement == 2">
+                       <router-link :to="{ name: 'detailExecutionOpInDirect', params: { id: factu.id }}"
+                class="btn btn-default " title="Ajouter Op Provisoire">
                   <span class=""><i class="   icon-legal"></i></span>
                    </router-link> 
                       </td>
                       <td v-else>
-                        <router-link :to="{ name: 'AjoutMandatDirect', params: { id: factu.id }}"
-                class="btn btn-default " title="Ajouter Mandat">
+                        <router-link :to="{ name: 'detailExecutionOpDirect', params: { id: factu.id }}"
+                class="btn btn-default " title="Realité Service Fait">
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
                    
@@ -1539,6 +1538,7 @@ s_ua_id:"",
 serviceua_id:"",
 
       },
+      formDataOrdre:{},
       formData1: {
 total:0,
 total2:0,
@@ -1644,7 +1644,7 @@ search:""
     created(){},
 
               computed: {
-            ...mapGetters("bienService", ['typeMarches','decomptes','modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+            ...mapGetters("bienService", ["gettersTypeOrdrePaiement",'typeMarches','decomptes','modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -1694,13 +1694,13 @@ search:""
 
 
 
-afficheProcedure() {
+typeOrdrePaiement() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.choixprocedure.find(qtreel => qtreel.marche_id == id);
+           const qtereel = this.gettersTypeOrdrePaiement.find(qtreel => qtreel.marche_id == id);
 
       if (qtereel) {
-        return qtereel.tprocedure;
+        return qtereel.code;
       }
       return 0
         }
@@ -2192,7 +2192,7 @@ else {
       return id => {
         if (id != null && id != "") {
           return this.getFacturePersonnaliser.filter(
-            element => element.marche_id == id && this.afficherStatusSib(element.marche_id)==0
+            element => element.marche_id == id && this.afficherStatusSib(element.marche_id)==1
           );
         }
       };
@@ -2397,7 +2397,9 @@ afficheridTypeMarche() {
        "ajouterFacture",
                 "modifierFacture",
                 "supprimerFacture",
+                "ajouterTypeOrdrePaiement"
       ]),
+      
  ...mapActions("uniteadministrative", [
      "getAllServiceua",
       "ajouterService",
@@ -2462,18 +2464,18 @@ else{
   //      this.formDataFacture = this.afficheFactureTableau(this.macheid).find(recupererObjet => recupererObjet.id == id)
   
   //  },
-  ajouterChoixProcLocal(){
+  ajoutTypeOrdrePaiement(){
 
-   if(this.formData.tprocedure == 2){
+   if(this.formDataOrdre.code == 2){
  var nouvelObjet = {
-      ...this.formData,
+      ...this.formDataOrdre,
       marche_id :this.macheid,
     
        };
       
-this.ajouterChoixProcedure(nouvelObjet)
-this.formData= {
-tprocedure :""
+this.ajouterTypeOrdrePaiement(nouvelObjet)
+this.formDataOrdre= {
+code :""
 }
  this.$("#modalTypeEngagement").modal('hide');
  this.$("#modalFactureAjouterProforma").modal({
@@ -2482,15 +2484,15 @@ tprocedure :""
       });
    }
        
-      else if(this.formData.tprocedure == 1){
+      else if(this.formDataOrdre.code == 1){
      var nouvelObjet1 = {
-      ...this.formData,
+      ...this.formDataOrdre,
       marche_id :this.macheid,
     
        };
-this.ajouterChoixProcedure(nouvelObjet1)
-this.formData= {
-tprocedure : ""
+this.ajouterTypeOrdrePaiement(nouvelObjet1)
+this.formDataOrdre= {
+code : ""
 }
        this.$("#modalTypeEngagement").modal('hide');
  this.$("#modatFactureAjouter").modal({
@@ -2517,13 +2519,13 @@ var nouvelObjet = {
           	ua :this.afficheUa_id(this.macheid),
     marche_id : this.macheid,
     objet_facture:this.afficheObjetMarche(this.macheid),
-      typeProcedure:this.afficheProcedure(this.macheid),
+      typeordrepaiement:this.typeOrdrePaiement(this.macheid),
       marchetype:this.afficheMarcheType
        };
       // var objetDecompte = {
       //   numero_decompte:this.numeroDecompte,
       //   marche_id : this.macheid,
-      //   typeProcedure:this.afficheProcedure(this.macheid)
+      //   typeProcedure:this.typeOrdrePaiement(this.macheid)
       // }
 this.ajouterFacture(nouvelObjet)
 
@@ -2633,7 +2635,7 @@ numero_facture:"",
           	ua :this.afficheUa_id(this.macheid),
     marche_id : this.macheid,
     objet_facture:this.afficheObjetMarche(this.macheid),
-      typeProcedure:this.afficheProcedure(this.macheid),
+      typeordrepaiement:this.typeOrdrePaiement(this.macheid),
       marchetype:this.afficheMarcheType
        };
       

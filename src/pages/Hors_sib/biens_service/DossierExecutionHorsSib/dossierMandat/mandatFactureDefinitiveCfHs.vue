@@ -207,10 +207,10 @@
                   
                        <td>
                        
-                       <router-link :to="{ name: 'DetailMandat', params: {id_detail_mandat:Manda.id}}"
+                       <!-- <router-link :to="{ name: 'DetailMandat', params: {id_detail_mandat:Manda.id}}"
                 class="btn btn-default " title="Detail Mandat">
                   <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link> 
+                   </router-link>  -->
                       <button class="btn btn-danger" @click="supprimerMandat(Manda.id)">
                         <span>
                           <i class="icon icon-trash"></i>

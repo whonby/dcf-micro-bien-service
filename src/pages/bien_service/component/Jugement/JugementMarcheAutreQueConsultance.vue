@@ -10,7 +10,7 @@
 <div v-for="item in lot" :key="item.id" class="widget-content">
   <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
 
-      <div class="span9"><h5>LOT N°{{ item.numero_lot }} / {{item.objet}}
+      <div class="span9" style="text-align:center"><h5>LOT N°{{ item.numero_lot }} / {{item.objet}}
       </h5></div>
 <!--    <div class="span1"><button @click.prevent="afficheAnnalyseDossier(item.id)"  class="btn btn-warning " title="Supprimer">-->
 <!--      <span class=""><i class="icon-edit"></i></span></button></div>-->

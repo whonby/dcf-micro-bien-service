@@ -1,25 +1,42 @@
-afficheIdActeurDepense
-detail_marche
+
 <template>
 
 <div>
 
   
-         <div id="DecisionService" class="modal hide">
+         <div id="DecisionServiceBeneficiaire" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Décision Chef de service</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
-          
+          <!-- <tr>
+            <td colspan="2">
+               <div class="control-group">
+                            <label class="control-label">Décision Chef de service </label>
+                            <div class="controls">
+                              <select v-model="editOpDefinitif.decision_service_beneficiaire" class="span">
+                                <option value="0">Attente</option>
+                              <option value="1">Visé</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
+                            
+    
+    </select>
+                           
+                            </div>
+                          </div>
+            </td>
+             
+          </tr> -->
         
                <tr>
                 <td >
                     <div class="control-group">
                             <label class="control-label">Observation Chef de service</label>
                             <div class="controls">
-                              <textarea  class="span" row = "2" v-model="EditServiceRealite.observation_service_beneficiaire">
+                              <textarea  class="span" row = "2" v-model="editOpDefinitif.observation_emetteur">
                               </textarea>
                             </div>
                           </div>
@@ -28,7 +45,7 @@ detail_marche
                        <div class="control-group">
                             <label class="control-label">Date Observation:</label>
                             <div class="controls">
-                              <input type="date" class="span"  v-model="EditServiceRealite.date_service_beneficiaire"/>
+                              <input type="date" class="span"  v-model="editOpDefinitif.date_decision_emetteur"/>
                              
                             </div>
                           </div>
@@ -41,8 +58,8 @@ detail_marche
                     <div class="control-group">
                             <label class="control-label">Nom et prenoms </label>
                             <div class="controls">
-                              <select v-model="EditServiceRealite.nom_service_beneficiaire" class="span">
-                                <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.EditServiceRealite.marche_id))"  :key="acteur.id"
+                              <select v-model="editOpDefinitif.nom_emetteur" class="span">
+                                <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.editOpDefinitif.marche_id))"  :key="acteur.id"
                         :value="acteur.id">{{afficherNomActeurDepense(acteur.acteur_depense_id)}}</option>
                                </select>
                            
@@ -53,7 +70,7 @@ detail_marche
                                   <div class="control-group">
                             <label class="control-label">Fonction</label>
                             <div class="controls">
-                              <input type="text" class="span" readonly :value=" afficherLibelleFoctionBudgetaire(afficherIdFoctionBudgetaire(EditServiceRealite.nom_service_beneficiaire))"/>
+                              <input type="text" class="span" readonly :value=" afficherLibelleFoctionBudgetaire(afficherIdFoctionBudgetaire(editOpDefinitif.nom_service_beneficiaire))"/>
                              
                             </div>
                           </div>
@@ -66,7 +83,7 @@ detail_marche
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="FonctionDeModificationServiceRealite(EditServiceRealite)"
+          @click.prevent="FonctionDeModificationServiceRealite(editOpDefinitif)"
           class="btn btn-primary"
           href="#"
          
@@ -80,6 +97,7 @@ detail_marche
                                    <tr>
 
                                         <th>Année</th>
+                                        <th>Num Op Definitif</th>
                                          <th title="">Section</th>
                               
                                  <th title="">Fournisseur</th>
@@ -88,7 +106,7 @@ detail_marche
                                   <!-- <th>Imputation</th> -->
                                 <th>Montant</th>
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th>Date validation</th>
+                                <th >Date validation</th>
                                 <!-- <th title="Observation Controleur financier">Observation CF</th> -->
                                 <th>Action</th>
                                     </tr>
@@ -96,22 +114,23 @@ detail_marche
                                     <tbody>
                                      <tr
                     class="odd gradeX"
-                    v-for="realiteService in afficheServiceRealiteFait(macheid)"
+                    v-for="realiteService in afficheOpDefinitiveBs(macheid)"
                     :key="realiteService.id"
                   >
         <td >{{realiteService.exercice_budget || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{formaterDate(afficheDateFacture(realiteService.facture_id)) || 'Non renseigné'}}</td> 
+         <td >{{realiteService.numero_op_definitif || 'Non renseigné'}}</td>
+                    <td >{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
+                    <td >{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
+                    <td >{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
+                     <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
                      
                     <!-- <td >{{detail_marche.imputation  || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{formatageSomme(parseFloat(realiteService.total_general)) || 'Non renseigné'}}</td>
+                     <td >{{formatageSomme(realiteService.total_general) || 'Non renseigné'}}</td>
                      
-                       <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{(formaterDate(realiteService.date_service_beneficiaire)) || 'Non renseigné'}}</td>
+                       <td >{{(formaterDate(realiteService.date_decision_emetteur)) || 'Non renseigné'}}</td>
                     
                     <td>
-                      <button  class="btn  btn-danger" v-if="realiteService.decision_service_beneficiaire == 0" @click="afficherModalObservationServiceBeneficiaire(realiteService.id)">
+                      <button  class="btn  btn-danger" v-if="realiteService.decision_emetteur == 0" @click="afficherModalObservationServiceBeneficiaire(realiteService.id)">
                         <span>
                           <i class="icon icon-ok"></i>
                         </span>
@@ -121,8 +140,8 @@ detail_marche
                           <i class="icon icon-ok"></i>
                         </span>
                       </button>
-                        
-                      <button  class="btn btn-danger" @click="supprimerRealiteServiceHors(realiteService.id)">
+                       
+                      <button  class="btn btn-danger" @click="supprimerMandat(realiteService.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
@@ -145,8 +164,8 @@ detail_marche
 
 
 
+<notifications/>
 
- <notifications/>
     </div>
 </template>
 
@@ -155,6 +174,8 @@ import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from './../../../../../Repositories/Repository';
 import moment from 'moment';
 export default {
+  watch: {
+  },
    
     data(){
         return{
@@ -165,8 +186,8 @@ export default {
         }
       ],
       
-       EditServiceRealite: {
-         decision_service_beneficiaire : 1
+       editOpDefinitif: {
+         decision_emetteur : 1
        },
 search:""
         }
@@ -175,7 +196,7 @@ search:""
     created(){},
 
               computed: {
-                ...mapGetters('horSib', ['gettersrealiteServiceFaitHorsSib']),
+                ...mapGetters('horSib', ['gettersopProvisoire']),
             ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
@@ -365,17 +386,31 @@ afficheDateFacture() {
         }
       };
     },
-       afficheServiceRealiteFait() {
+       afficheOpDefinitiveBs() {
       return id => {
         if (id != null && id != "") {
-          return this.gettersrealiteServiceFaitHorsSib.filter(
-            element => element.marche_id == id  && element.differentrealite == 0
+          return this.mandats.filter(
+            element => element.marche_id == id  && this.afficherMarcheHorsSIb(element.marche_id) && element.differentop ==0
           );
         }
       };
     },
+
+    afficherMarcheHorsSIb() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+         return qtereel.sib;
+       
+      }
+      return 0
+        }
+      };
+    },
     afficheMarcheType(){
-if(this.afficheIdTypeMarche(this.EditServiceRealite.marche_id) == 5){
+if(this.afficheIdTypeMarche(this.editOpDefinitif.marche_id) == 5){
 return 1
 }
 else{
@@ -386,20 +421,25 @@ else{
       },
  
       methods:{ 
-...mapActions("horSib", ['ajouterRealiteServiceHors','modifierRealiteServiceHors','supprimerRealiteServiceHors']),
-  
-       afficherModifierServiceRealite(id){
-		this.$router.push({
-			path:"/ModifierServiceRealiteHorsSib/" + id
-		});
-	},
+
+   ...mapActions("bienService", [
+                
+                "ajouterMandat",
+                "modifierMandat",
+                "supprimerMandat",
+               
+      
+     
+               
+            ]),
+       
 afficherModalObservationServiceBeneficiaire(id) {
-      this.$("#DecisionService").modal({
+      this.$("#DecisionServiceBeneficiaire").modal({
         backdrop: "static",
         keyboard: false
       });
 
-       this.EditServiceRealite = this.gettersrealiteServiceFaitHorsSib.find(item=>item.id==id);
+       this.editOpDefinitif = this.afficheOpDefinitiveBs(this.macheid).find(item=>item.id==id);
     },
 
      afficherModalAjouterTitre() {
@@ -444,30 +484,30 @@ formatageSomme:formatageSomme,
      
 
  var nouvelObjet = {
-      ...this.EditServiceRealite,
-     	exercice_budget :this.EditServiceRealite.exercice_budget,
+      ...this.editOpDefinitif,
+     	exercice_budget :this.editOpDefinitif.exercice_budget,
        
-         marche_id : this.EditServiceRealite.marche_id,
+         marche_id : this.editOpDefinitif.marche_id,
        
       	
-        facture_id:this.EditServiceRealite.facture_id,
+        facture_id:this.editOpDefinitif.facture_id,
        
- total_general :this.EditServiceRealite.total_general,
+ total_general :this.editOpDefinitif.total_general,
 
-  ua_id:this.EditServiceRealite.ua_id,
+  ua_id:this.editOpDefinitif.ua_id,
   
 
 
 section_id:this.afficherSectId,
-// id:this.afficherIdRealiteServiceFait(this.EditServiceRealite.marche_id),
-  // engagement_id:this.EditServiceRealite.id,
-  marchetype:this.EditServiceRealite.marchetype,
-  decision_service_beneficiaire:1
+// id:this.afficherIdRealiteServiceFait(this.editOpDefinitif.marche_id),
+  // engagement_id:this.editOpDefinitif.id,
+  marchetype:this.editOpDefinitif.marchetype,
+  decision_emetteur:1
        };
- this.modifierRealiteServiceHors(nouvelObjet);
-this.$("#DecisionService").modal('hide');
+ this.modifierMandat(nouvelObjet);
+this.$("#DecisionServiceBeneficiaire").modal('hide');
 
-          this.EditServiceRealite={
+          this.editOpDefinitif={
                   numero_bon_manuel:"",
 numero_demande:"",
 	exo_id:"",

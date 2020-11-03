@@ -472,7 +472,7 @@ export default {
      return id => {
         if (id != null && id != "") {
           return this.budgetEclate.filter(
-            element => element.uniteadministrative_id == id  
+            element => element.uniteadministrative_id == id  && element.annebudgetaire == this.anneeBugetaire
           );
         }
       };

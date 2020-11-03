@@ -94,6 +94,7 @@ const defaultState = {
     echeances:[],
     
     image_marche:[],
+    typeOrdrePaiement:[],
     loading_marche:true,
   
 

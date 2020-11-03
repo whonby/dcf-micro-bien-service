@@ -1,11 +1,10 @@
-afficheIdActeurDepense
-detail_marche
+
 <template>
 
 <div>
 
   
-         <div id="DecisionService" class="modal hide">
+         <div id="DecisionServiceopProvisoire" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Décision Chef de service</h3>
@@ -103,10 +102,10 @@ detail_marche
                     <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{formaterDate(afficheDateFacture(realiteService.facture_id)) || 'Non renseigné'}}</td> 
+                     <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
                      
                     <!-- <td >{{detail_marche.imputation  || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{formatageSomme(parseFloat(realiteService.total_general)) || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{formatageSomme(realiteService.total_general) || 'Non renseigné'}}</td>
                      
                        <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{(formaterDate(realiteService.date_service_beneficiaire)) || 'Non renseigné'}}</td>
                     
@@ -369,7 +368,7 @@ afficheDateFacture() {
       return id => {
         if (id != null && id != "") {
           return this.gettersrealiteServiceFaitHorsSib.filter(
-            element => element.marche_id == id  && element.differentrealite == 0
+            element => element.marche_id == id  && element.differentrealite==1
           );
         }
       };
@@ -394,7 +393,7 @@ else{
 		});
 	},
 afficherModalObservationServiceBeneficiaire(id) {
-      this.$("#DecisionService").modal({
+      this.$("#DecisionServiceopProvisoire").modal({
         backdrop: "static",
         keyboard: false
       });
@@ -465,7 +464,7 @@ section_id:this.afficherSectId,
   decision_service_beneficiaire:1
        };
  this.modifierRealiteServiceHors(nouvelObjet);
-this.$("#DecisionService").modal('hide');
+this.$("#DecisionServiceopProvisoire").modal('hide');
 
           this.EditServiceRealite={
                   numero_bon_manuel:"",

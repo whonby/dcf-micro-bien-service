@@ -22,13 +22,13 @@ decision_cf
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
-                               <th style="font-size:12px;font-weight:bold;">Reference marché</th>
+                               <!-- <th style="font-size:12px;font-weight:bold;">Reference marché</th> -->
                                <th style="font-size:12px;font-weight:bold;">Numéro marché</th>
                                 <th style="font-size:12px;font-weight:bold;">Objet marché</th>
                                 
                              
                                 <th style="font-size:12px;font-weight:bold;">Type de marché</th>
-                                <th style="font-size:12px;font-weight:bold;">Procédure de passation </th>
+                                <!-- <th style="font-size:12px;font-weight:bold;">Procédure de passation </th> -->
                                 <th style="font-size:12px;font-weight:bold;">Unite administrative</th>
                                 <th style="font-size:12px;font-weight:bold;">Activité</th>
                     <th style="font-size:12px;font-weight:bold;">Imputation</th>
@@ -39,29 +39,29 @@ decision_cf
                             </thead>
                             <tbody>
                             <tr>
-                                <td class="taskStatus" style="font-size:14px;font-weight:bold;">{{detail_marche.reference_marche}}</td>
+                                <!-- <td class="taskStatus" style="font-size:14px;font-weight:bold;">{{detail_marche.reference_marche}}</td> -->
                                 
                                 <td class="taskStatus" style="font-size:14px;font-weight:bold;">{{afficheNumeroMarche(detail_marche.id)}}</td>
                                  <td class="taskDesc" style="font-size:14px;font-weight:bold;">{{detail_marche.objet}}</td>
                                
                                 <td class="taskOptions" style="font-size:14px;font-weight:bold;">
-                                    {{detail_marche.type_marche.libelle}}
+                                    {{LibelleTypeMarche(detail_marche.type_marche_id)}}
                                 </td>
-                                <td class="taskOptions" style="font-size:14px;font-weight:bold;">
-                                    <!-- {{afficheModePassation(detail_marche.procedure_passation_id)}} -->
+                                <!--<td class="taskOptions" style="font-size:14px;font-weight:bold;">
+                                     {{afficheModePassation(detail_marche.procedure_passation_id)}} -->
                                    
-                               <span v-if="DisponibleBudgetaireApresLiquidation < 10000000 ">Procédure Simplifiée de demande de Cotation(PSC Sans comité)</span>
+                               <!-- <span v-if="DisponibleBudgetaireApresLiquidation < 10000000 ">Procédure Simplifiée de demande de Cotation(PSC Sans comité)</span>
                          <span v-else-if="DisponibleBudgetaireApresLiquidation < 30000000 ">Procédure Simplifiée de demande de Cotation(PSC Avec comité)</span>
                          <span v-else-if="DisponibleBudgetaireApresLiquidation < 60000000 ">Procédure Simplifiée à compétition Limitée(PSL)</span>
                          <span v-else-if="DisponibleBudgetaireApresLiquidation < 100000000 ">Procédure Simplifiée à compétition Ouverte(PSO)</span>
                          <span v-else-if="DisponibleBudgetaireApresLiquidation > 100000000 ">Appel d'Offre Ouvert(AON ou AOI)</span>
-                         <span v-else></span>
-                                </td>
+                         <span v-else></span> 
+                                </td>-->
                                 <td class="taskOptions" style="font-size:14px;font-weight:bold;">
-                                    {{detail_marche.objetUniteAdministrative.libelle}}
+                                    {{LibelleUniteAdministrative(detail_marche.unite_administrative_id)}}
                                 </td>
                                 <td @dblclick="afficherModalModifierTypePrestation(index)" style="font-size:14px;font-weight:bold;">
-                   {{detail_marche.afficheActivite.libelle || 'Non renseigné'}}</td>
+                   {{LibelleActivite(detail_marche.activite_id) || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="font-size:14px;font-weight:bold;">
                    {{detail_marche.imputation || 'Non renseigné'}}</td>
                     <td class="taskOptions" style="font-size:14px;font-weight:bold;color:red;">
@@ -96,11 +96,17 @@ decision_cf
                       </li>
                       <li>
                         <a data-toggle="tab" href="#tab03">IMAGES DES MARCHES</a>
-                      </li> 
+                      </li>
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
+                      </li> --> 
                      
                     </ul>
                   </div>
-                  <div class="widget-content tab-content">
+                         <div class="widget-content tab-content">
+                           <!-- <div id="tab03" class="tab-pane ">
+                         <imageMarche :macheid="detail_marche.id"></imageMarche>
+                      </div> -->
                     <!--ongle identification-->
                     <div id="tab1" class="tab-pane active">
   <tableauBordExecution :macheid="detail_marche.id"></tableauBordExecution>
@@ -114,196 +120,118 @@ decision_cf
                         <div class="widget-title">
                           
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab2078">Avenant</a></li>
+                              <li class="active"><a data-toggle="tab" href="#tab2078">Avenant</a></li>
                                <li ><a data-toggle="tab" href="#tab100">Facture</a></li>
-                               
-                                <li ><a data-toggle="tab" href="#tab10" v-if="afficherTypeProcedure(detail_marche.id) == 2">Engagement</a></li>
-                                <li ><a data-toggle="tab" href="#tab15550" v-if="afficherTypeProcedure(detail_marche.id) == 2">Réalité service fait</a></li>
-                                <li ><a data-toggle="tab" href="#tab120120" v-if="afficherTypeProcedure(detail_marche.id) == 2 || afficherTypeProcedure(detail_marche.id) == 1">Liquidation</a></li>
-                                <li><a data-toggle="tab" href="#tab20" v-if="afficherTypeProcedure(detail_marche.id) == 2  || afficherTypeProcedure(detail_marche.id) == 1">Mandat</a></li>
-                               <li ><a data-toggle="tab" href="#tab45785" >Decompte</a></li>
+                                <li ><a data-toggle="tab" href="#tab45785" >Décompte</a></li>
                               <li ><a data-toggle="tab" href="#Financement" >Financement</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li> -->
-                            </ul>
-      
-                          <!-- <templete v-else>
-                            <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab20782">Avenant</a></li>
-                               <li ><a data-toggle="tab" href="#tab1003">Facture</a></li>
+                              <!-- <template v-if="typeOrdrePaiementHs(detail_marche.id) == 1">
+                                
+                                <li ><a data-toggle="tab" href="#tab15550" >Réalité service fait</a></li>
+                                <li ><a data-toggle="tab" href="#tab120120" >Liquidation</a></li>
+                                <li><a data-toggle="tab" href="#tab20" >Ordre Paiement Définitive</a></li>
+                               <li ><a data-toggle="tab" href="#tab45785" >Décompte</a></li>
+                              <li ><a data-toggle="tab" href="#Financement" >Financement</a></li>
+                              </template>
+                               <template v-if="typeOrdrePaiementHs(detail_marche.id) == 2">
+                                <li ><a data-toggle="tab" href="#tab10" >Ordre Paiement Provisoire</a></li>
+                                <li ><a data-toggle="tab" href="#tab120120" >Ordre Paiement Annulation</a></li>
+                                <li ><a data-toggle="tab" href="#tab15550" >Réalité service fait</a></li>
+                                <li><a data-toggle="tab" href="#tab20" >Ordre Paiement Définitive</a></li>
+                              
+                              </template> -->
                                
-                                <li ><a data-toggle="tab" href="#tab104" v-if="afficherTypeProcedure(detail_marche.id) == 2">Ordre de Paiement Provisoire</a></li>
-                                <li ><a data-toggle="tab" href="#RealiteService" v-if="afficherTypeProcedure(detail_marche.id) == 2">Réalité service fait</a></li>
-                                <li ><a data-toggle="tab" href="#tab1201209" v-if="afficherTypeProcedure(detail_marche.id) == 2 || afficherTypeProcedure(detail_marche.id) == 1">Liquidation</a></li>
-                                <li><a data-toggle="tab" href="#tab208" v-if="afficherTypeProcedure(detail_marche.id) == 2  || afficherTypeProcedure(detail_marche.id) == 1">Ordre de Paiement Définitif</a></li>
-                               <li ><a data-toggle="tab" href="#tab457851" >Decompte</a></li>
-                              <li ><a data-toggle="tab" href="#Financement1" >Financement</a></li>
-                               
-                            </ul>
-                          </templete> -->
+                             </ul>
+                         
                             
                         </div>
                        
-                          <templete v-if="this.afficherStatusSib(detail_marche.id)==0">
+                          
                              <div class="widget-content tab-content">
                             <div id="Financement" class="tab-pane "><financement :macheid="detail_marche.id"></financement></div> 
 <div id="tab2078" class="tab-pane active "><avenant :macheid="detail_marche.id"></avenant></div>             
 <div id="tab100" class="tab-pane  "><facture :macheid="detail_marche.id"></facture></div> 
 <div id="tab45785" class="tab-pane  "><decompte :macheid="detail_marche.id"></decompte></div>
                        
- <div id="tab20" class="tab-pane  ">
+ <!-- <div id="tab20" class="tab-pane  ">
                         
                          
                          <div id="tab9563" class="tab-pane active">
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab9326">Decision Emetteur</a></li>
-                                <li ><a data-toggle="tab" href="#tab03215">Decision Controleur financier</a></li>                 
+                                 <li class="active" v-if="typeOrdrePaiementHs(detail_marche.id) == 1"><a data-toggle="tab" href="#tab789654">Service Bénéficiaire</a></li>
+                                  <li class="" v-if="typeOrdrePaiementHs(detail_marche.id) == 1"><a data-toggle="tab" href="#tab895632">Controlleur Financier</a></li> 
+                                   <li class="active" v-if="typeOrdrePaiementHs(detail_marche.id) == 2"><a data-toggle="tab" href="#opdefinitbs">Service Bénéficiaire</a></li>
+                                  <li class="" v-if="typeOrdrePaiementHs(detail_marche.id) == 2"><a data-toggle="tab" href="#opdefinitcf">Controlleur Financier</a></li>                                 
                             </ul>
                         </div>
                          <div class="widget-content tab-content">
                            
-                         <div id="tab9326" class="tab-pane active "><mandatFactureDefinitiveEmetteur :macheid="detail_marche.id"></mandatFactureDefinitiveEmetteur></div>
-                            <div id="tab03215" class="tab-pane  "><mandatFactureDefinitiveCf :macheid="detail_marche.id"></mandatFactureDefinitiveCf></div>
+                         <div id="tab789654" class="tab-pane active " v-if="typeOrdrePaiementHs(detail_marche.id) == 1"><listeOpDefinitiveBsDirect :macheid="detail_marche.id"></listeOpDefinitiveBsDirect></div>
+                            <div id="tab895632" class="tab-pane  " v-if="typeOrdrePaiementHs(detail_marche.id) == 1"><listeOpDefinitiveCfDirect :macheid="detail_marche.id"></listeOpDefinitiveCfDirect></div>
+                        <div id="opdefinitbs" class="tab-pane active " v-if="typeOrdrePaiementHs(detail_marche.id) == 2"><listeOpDefinitiveBsprov :macheid="detail_marche.id"></listeOpDefinitiveBsprov></div>
+                            <div id="opdefinitcf" class="tab-pane  " v-if="typeOrdrePaiementHs(detail_marche.id) == 2"><listeOpDefinitivecfprov :macheid="detail_marche.id"></listeOpDefinitivecfprov></div>
                         
                          </div>
                          </div>
           
                            
-                       </div>
+                       </div> -->
 
 
-                       <div id="tab10" class="tab-pane  ">
+                       <!-- <div id="tab10" class="tab-pane  ">
                         
                          
                          <div id="tab7896532" class="tab-pane active">
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab9326">Decision Controlleur Financier</a></li>
-                                                  
+                                <li class="active"><a data-toggle="tab" href="#opProvisoirebs">Service Bénéficiaire</a></li>
+                                  <li class=""><a data-toggle="tab" href="#opProvisoirecf">Controlleur Financier</a></li>                                    
                             </ul>
                         </div>
                          <div class="widget-content tab-content">
-                           <div id="tab7896532" class="tab-pane active "><engagementCf :macheid="detail_marche.id"></engagementCf></div>
+                           <div id="opProvisoirebs" class="tab-pane active "><listeOpProvisoireBs :macheid="detail_marche.id"></listeOpProvisoireBs></div>
+                            <div id="opProvisoirecf" class="tab-pane  "><listeOpProvisoireCf :macheid="detail_marche.id"></listeOpProvisoireCf></div>
                            
                          </div>
                          </div>
           
                            
-                       </div>
+                       </div> -->
                        
                         
                          
-                         <div id="tab155508" class="tab-pane">
+                         <!-- <div id="tab15550" class="tab-pane">
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab789654">Service Bénéficiaire</a></li>
-                                  <li class=""><a data-toggle="tab" href="#tab895632">Controlleur Financier</a></li>
+                               <li class="active" v-if="typeOrdrePaiementHs(detail_marche.id) == 1"><a data-toggle="tab" href="#ServiceRealiteFaitBS">Service Bénéficiaire</a></li>
+                                  <li class="" v-if="typeOrdrePaiementHs(detail_marche.id) == 1"><a data-toggle="tab" href="#ServiceRealiteFaitCF">Controlleur Financier</a></li>
+                                   <li class="active" v-if="typeOrdrePaiementHs(detail_marche.id) == 2"><a data-toggle="tab" href="#ServiceRealiteFaitBSprov">Service Bénéficiaire</a></li>
+                                  <li class="" v-if="typeOrdrePaiementHs(detail_marche.id) == 2"><a data-toggle="tab" href="#ServiceRealiteFaitCFprov">Controlleur Financier</a></li>
                                                   
                             </ul>
                         </div>
                          <div class="widget-content tab-content">
-                           <div id="tab789654" class="tab-pane active "><realiteServiceFaitServiceB :macheid="detail_marche.id"></realiteServiceFaitServiceB></div>
-                           <div id="tab895632" class="tab-pane"><realiteServiceFaitCf :macheid="detail_marche.id"></realiteServiceFaitCf></div>
+                           <div id="ServiceRealiteFaitBS" class="tab-pane active " v-if="typeOrdrePaiementHs(detail_marche.id) == 1"><realiteServiceFaitServiceBHs :macheid="detail_marche.id"></realiteServiceFaitServiceBHs></div>
+                           <div id="ServiceRealiteFaitCF" class="tab-pane" v-if="typeOrdrePaiementHs(detail_marche.id) == 1"><realiteServiceFaitCf :macheid="detail_marche.id"></realiteServiceFaitCf></div>
+                      <div id="ServiceRealiteFaitBSprov" class="tab-pane active " v-if="typeOrdrePaiementHs(detail_marche.id) == 2"><realiteServiceFaitServiceOpProvisoireBS :macheid="detail_marche.id"></realiteServiceFaitServiceOpProvisoireBS></div>
+                           <div id="ServiceRealiteFaitCFprov" class="tab-pane" v-if="typeOrdrePaiementHs(detail_marche.id) == 2"><realiteServiceFaitServiceOpProvisoireCf :macheid="detail_marche.id"></realiteServiceFaitServiceOpProvisoireCf></div>
                          </div>
-                         </div>
-                         <div id="tab120120" class="tab-pane">
+                         </div>  -->
+                         <!-- <div id="tab120120" class="tab-pane">
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab000235">Emetteur</a></li>
-                                  <li class=""><a data-toggle="tab" href="#tab89752241" >Controlleur Financier</a></li>
-                                  <li class=""><a data-toggle="tab" href="#tab452123" >Ordonnateur</a></li>
-                                                  
+                               <li class="active"><a data-toggle="tab" href="#opAnnulationbs">Op Annulation</a></li>
+                               
                             </ul>
                         </div>
                          <div class="widget-content tab-content">
-                           <div id="tab000235" class="tab-pane active "><liquidationEmetteur :macheid="detail_marche.id"></liquidationEmetteur></div>
-                           <div id="tab89752241" class="tab-pane"><liquidationCf :macheid="detail_marche.id"></liquidationCf></div>
-                          <div id="tab452123" class="tab-pane"><liquidationOrdonnateur :macheid="detail_marche.id"></liquidationOrdonnateur></div>
+                          
+                           <div id="opAnnulationbs" class="tab-pane active"><listeOpAnnulation :macheid="detail_marche.id"></listeOpAnnulation></div>
+                          
                          </div>
-                         </div>
+                         </div> -->
                           </div>
-                          </templete>
-                         <template v-else>
-                           <div class="widget-content tab-content">
-                             <div id="Financement" class="tab-pane "><financementHs :macheid="detail_marche.id"></financementHs></div> 
-<div id="tab20782" class="tab-pane active "><avenantHs :macheid="detail_marche.id"></avenantHs></div>             
-<div id="tab1003" class="tab-pane  "><factureHs :macheid="detail_marche.id"></factureHs></div> 
-<div id="tab45785" class="tab-pane  "><decompteHs :macheid="detail_marche.id"></decompteHs></div>
-                       
- <div id="tab20" class="tab-pane  ">
-                        
                          
-                         <div id="tab9563" class="tab-pane active">
-                           <div class="widget-title">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab9326">Decision Emetteur</a></li>
-                                <li ><a data-toggle="tab" href="#tab03215">Decision Controleur financier</a></li>                 
-                            </ul>
-                        </div>
-                         <div class="widget-content tab-content">
-                           
-                         <div id="tab9326" class="tab-pane active "><mandatFactureDefinitiveEmetteurHs :macheid="detail_marche.id"></mandatFactureDefinitiveEmetteurHs></div>
-                            <div id="tab03215" class="tab-pane  "><mandatFactureDefinitiveCfHs :macheid="detail_marche.id"></mandatFactureDefinitiveCfHs></div>
-                        
-                         </div>
-                         </div>
-          
-                           
-                       </div>
-
-
-                       <div id="tab10" class="tab-pane  ">
-                        
-                         
-                         <div id="tab104" class="tab-pane active">
-                           <div class="widget-title">
-                            <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab9326">Decision Controlleur Financier</a></li>
-                                                  
-                            </ul>
-                        </div>
-                         <div class="widget-content tab-content">
-                           <div id="tab104" class="tab-pane active "><OrdreDePaiementProfisoireCfHs :macheid="detail_marche.id"></OrdreDePaiementProfisoireCfHs></div>
-                           
-                         </div>
-                         </div>
-          
-                           
-                       </div>
-                       
-                        
-                         
-                         <div id="RealiteService" class="tab-pane">
-                           <div class="widget-title">
-                            <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#realiteServiceFaitSB">Service Bénéficiaire</a></li>
-                                  <li class=""><a data-toggle="tab" href="#realiteServiceFaitCf">Controlleur Financier</a></li>
-                                                  
-                            </ul>
-                        </div>
-                         <div class="widget-content tab-content">
-                           <div id="realiteServiceFaitSB" class="tab-pane active "><realiteServiceFaitServiceBHs :macheid="detail_marche.id"></realiteServiceFaitServiceBHs></div>
-                           <div id="realiteServiceFaitCf" class="tab-pane"><realiteServiceFaitCfHs :macheid="detail_marche.id"></realiteServiceFaitCfHs></div>
-                         </div>
-                         </div>
-                         <div id="tab1201209" class="tab-pane">
-                           <div class="widget-title">
-                            <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab0002353">Emetteur</a></li>
-                                  <li class=""><a data-toggle="tab" href="#tab897522414" >Controlleur Financier</a></li>
-                                  <li class=""><a data-toggle="tab" href="#tab4521232" >Ordonnateur</a></li>
-                                                  
-                            </ul>
-                        </div>
-                         <div class="widget-content tab-content">
-                           <div id="tab0002353" class="tab-pane active "><liquidationEmetteurHs :macheid="detail_marche.id"></liquidationEmetteurHs></div>
-                           <div id="tab897522414" class="tab-pane"><liquidationCfHs :macheid="detail_marche.id"></liquidationCfHs></div>
-                          <div id="tab4521232" class="tab-pane"><liquidationOrdonnateurHs :macheid="detail_marche.id"></liquidationOrdonnateurHs></div>
-                         </div>
-                         </div>
-                           </div>
-                         </template>
                           
           
                            
@@ -329,13 +257,11 @@ decision_cf
                          <imageMarche :macheid="detail_marche.id"></imageMarche>
                       </div>
       </div>
-       </div>
-      
+                </div>
               </table>
- 
-  </div>
+              
 
-
+</div>
     </div>
 </div>
 
@@ -375,81 +301,58 @@ decision_cf
     import { mapGetters, mapActions } from "vuex";
     import moment from "moment";
     import { formatageSomme } from './../../../../../Repositories/Repository';
-    //  import { formatageSomme } from "../../../../src/Repositories/Repository";
-    //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
-import avenant from "../../../../bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
-import facture from "../../../../bien_service/contractualisation/DossierExecution/dossierFacture/facture";
-import decompte from "../../../../bien_service/contractualisation/DossierExecution/dossierDecompte/decompte";
-    // import mandatFactureProformaEmetteur from "../../../../bien_service/contractualisation/DossierExecution/dossierMandat/mandatFactureProformaEmetteur";
-    //  import mandatFactureProformaCf from "../../../../bien_service/contractualisation/DossierExecution/dossierMandat/mandatFactureProformaCf";
-    import mandatFactureDefinitiveEmetteur from "../../../../bien_service/contractualisation/DossierExecution/dossierMandat/mandatFactureDefinitiveEmetteur";
-     import mandatFactureDefinitiveCf from "../../../../bien_service/contractualisation/DossierExecution/dossierMandat/mandatFactureDefinitiveCf";
-      import engagementCf from "../../../../bien_service/contractualisation/DossierExecution/dossierEngagement/engagementCf";
-      import realiteServiceFaitServiceB from "../../../../bien_service/contractualisation/DossierExecution/dossierRealiteServiceFait/realiteServiceFaitServiceB";
-      import realiteServiceFaitCf from "../../../../bien_service/contractualisation/DossierExecution/dossierRealiteServiceFait/realiteServiceFaitCf";
-       import liquidationEmetteur from "../../../../bien_service/contractualisation/DossierExecution/dossierLiquidation/liquidationEmetteur";
-        import liquidationCf from "../../../../bien_service/contractualisation/DossierExecution/dossierLiquidation/liquidationCf";
-         import liquidationOrdonnateur from "../../../../bien_service/contractualisation/DossierExecution/dossierLiquidation/liquidationOrdonnateur";
-                  import financement from "../../../../bien_service/contractualisation/DossierExecution/dossierFinancement/financement";
-                   import tableauBordExecution from "../../../../bien_service/contractualisation/DossierExecution/tableauBordExecution/tableauBordExecution";
+   
+import avenant from "../dossierAvenant/avenantHs";
+import facture from "../dossierFacture/factureHs";
+import decompte from "../dossierDecompte/decompteHs";
+    
+//     import listeOpDefinitiveBsDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveBsDirect.vue";
+//     import listeOpDefinitiveCfDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveCfDirect.vue";
+//     import listeOpProvisoireBs from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpProvisoireBs";
+//      import listeOpProvisoireCf from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpProvisoireCf";
+//       import listeOpAnnulation from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpAnnulation";
+//     import listeOpDefinitiveBsprov from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpDefinitiveBsprov";    
+//         import listeOpDefinitivecfprov from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpDefinitivecfprov";
+     
+//       import realiteServiceFaitServiceBHs from "../dossierRealiteServiceFait/realiteServiceFaitServiceBHs";
+//       import realiteServiceFaitCf from "../dossierRealiteServiceFait/realiteServiceFaitCfHs";
+// import realiteServiceFaitServiceOpProvisoireBS from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireBS";
+// import realiteServiceFaitServiceOpProvisoireCf from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireCf";
+       
+                  import financement from "../dossierFinancement/financementHs";
+                  import imageMarche from "../dossierImageMarche/imageMarche";
+                import tableauBordExecution from "../tableauBordExecution/tableauBordExecution";
   import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
-  import imageMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche";
-
-
-
-
-import avenantHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierAvenant/avenantHs";
-import factureHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierFacture/factureHs";
-import decompteHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierDecompte/decompteHs";
-    // import mandatFactureProformaEmetteur from "../../../../bien_service/contractualisation/DossierExecution/dossierMandat/mandatFactureProformaEmetteur";
-    //  import mandatFactureProformaCf from "../../../../bien_service/contractualisation/DossierExecution/dossierMandat/mandatFactureProformaCf";
-    import mandatFactureDefinitiveEmetteurHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierMandat/mandatFactureDefinitiveEmetteurHs";
-     import mandatFactureDefinitiveCfHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierMandat/mandatFactureDefinitiveCfHs";
-      import OrdreDePaiementProfisoireCfHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierEngagement/OrdreDePaiementProfisoireCfHs.vue";
-      import realiteServiceFaitServiceBHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierRealiteServiceFait/realiteServiceFaitServiceBHs";
-      import realiteServiceFaitCfHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierRealiteServiceFait/realiteServiceFaitCfHs";
-       import liquidationEmetteurHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierLiquidation/liquidationEmetteurHs";
-        import liquidationCfHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierLiquidation/liquidationCfHs";
-         import liquidationOrdonnateurHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierLiquidation/liquidationOrdonnateurHs";
-                  import financementHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierFinancement/financementHs";
-
   export default {
         name: 'compte',
         components:{
+          // listeOpDefinitiveBsprov,
+          // listeOpDefinitivecfprov,
+          // realiteServiceFaitServiceOpProvisoireBS,
+          // realiteServiceFaitServiceOpProvisoireCf,
             avenant,
             facture,
             decompte,
-             imageMarche,
-            // mandatFactureProformaCf,
-            mandatFactureDefinitiveEmetteur,
-            mandatFactureDefinitiveCf,
-            engagementCf,
-            realiteServiceFaitServiceB,
-            realiteServiceFaitCf,
-            liquidationEmetteur,
-            liquidationCf,
-            liquidationOrdonnateur,
-            financement,
-            tableauBordExecution,
-            EcheanceMarche,
-
-
-
-
-avenantHs,
-            factureHs,
-            decompteHs,
+          //   listeOpAnnulation,
+          //   listeOpProvisoireCf,
+          //   listeOpProvisoireBs,
             // mandatFactureProformaEmetteur,
             // mandatFactureProformaCf,
-            mandatFactureDefinitiveEmetteurHs,
-            mandatFactureDefinitiveCfHs,
-            OrdreDePaiementProfisoireCfHs,
-            realiteServiceFaitServiceBHs,
-            realiteServiceFaitCfHs,
-            liquidationEmetteurHs,
-            liquidationCfHs,
-            liquidationOrdonnateurHs,
-            financementHs,
+            // mandatFactureDefinitiveEmetteur,
+            // mandatFactureDefinitiveCf,
+            
+            // realiteServiceFaitServiceBHs,
+            // realiteServiceFaitCf,
+            
+            // liquidationCf,
+            // liquidationOrdonnateur,
+            financement,
+            // listeOpDefinitiveBsDirect,
+            // listeOpDefinitiveCfDirect,
+            tableauBordExecution,
+            EcheanceMarche,
+imageMarche
+
         },
         data() {
             return {
@@ -555,8 +458,42 @@ afficherStatusSib() {
         }
       };
     },
+LibelleTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+LibelleUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    LibelleActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_activites.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 afficheTabulationDecompte() {
       return id => {
         if (id != null && id != "") {
@@ -588,13 +525,13 @@ afficherTypeFacture() {
       };
     },
     
-afficherTypeProcedure() {
+typeOrdrePaiementHs() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.marche_id == id);
 
       if (qtereel) {
-        return qtereel.typeProcedure;
+        return qtereel.typeordrepaiement;
       }
       return 0
         }
@@ -781,12 +718,12 @@ afficheIdFacture() {
 
 
 
-DisponibleBudgetaireApresLiquidation() {
+// DisponibleBudgetaireApresLiquidation() {
   
-      const val = parseFloat(this.dotationInite(this.detail_marche.imputation).Dotation_Initiale) - parseFloat(this.sommeEgagementLigne(this.detail_marche.id));
-      return parseFloat(val).toFixed(0);
+//       const val = parseFloat(this.dotationInite(this.detail_marche.imputation).Dotation_Initiale) - parseFloat(this.sommeEgagementLigne(this.detail_marche.id));
+//       return parseFloat(val).toFixed(0);
       
-    },
+//     },
 
 
 

@@ -3429,17 +3429,24 @@ export function ajouterMandat({ commit, dispatch }, elementAjout) {
 
 
 
-export function modifierMandat({ commit, dispatch }, element_modifie) {
-  asyncLoading(axios.put('/mandat', element_modifie)).then(response => {
+
+
+
+export function modifierMandat({commit,dispatch}, element_modifie){
+  asyncLoading( axios.put('/mandat/'+ element_modifie.id, element_modifie))
+   .then(response => {
     commit('MODIFIER_MANDAT', response.data)
-    dispatch('getMandat')
-    this.$app.$notify({
-      title: 'success ',
-      text: 'Modification effectué !',
-      type: "success"
-    })
-  }).catch(error => console.log(error))
-}
+        dispatch('getMandat')
+         this.$app.$notify({
+           title: 'success ',
+           text: 'Modification effectué avec succès!',
+           type:"success"
+         })
+   }).catch(error => console.log(error))
+  // console.log(element_modifie)
+} 
+
+
 
 
 export function supprimerMandat({ commit, dispatch }, id) {
@@ -4410,4 +4417,44 @@ export function supprimerImageMarche({ commit }, id) {
   axios.delete('/image_marche/' + id).then(() => dialog.close())
 })
 
+}
+
+
+export  function  getTypeOrdrePaiement({commit}) {
+  queue.push(() => axios.get('/typeOrdrePaiement').then((response) => {
+    
+    commit('GET_ALL_TYPE_ORDRE_PAIEMENT', response.data) 
+    
+}).catch(error => console.log(error)))
+}
+
+
+ // 
+ export function ajouterTypeOrdrePaiement({commit},formData){
+  asyncLoading( axios.post('/typeOrdrePaiement',formData)).then(response => {
+       commit('AJOUTER_TYPE_ORDRE_PAIEMENT', response.data)
+       
+   }).catch(error => console.log(error))
+//  console.log(formData)
+}
+
+export function modifierTypeOrdrePaiement({commit}, element_modifie){
+  asyncLoading( axios.put('/typeOrdrePaiement/'+ element_modifie.id, element_modifie))
+   .then(response => {
+        commit('MODIFIER_TYPE_ORDRE_PAIEMENT',response.data)
+
+   }).catch(error => console.log(error))
+  // console.log(element_modifie)
+} 
+
+
+export function supprimerTypeOrdrePaiement({commit},id){
+  
+  this.$app.$dialog
+  .confirm("Voulez vouz vraiment supprimer ?.")
+  .then(dialog => {
+     commit('SUPPRIMER_TYPE_ORDRE_PAIEMENT', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/typeOrdrePaiement/' + id).then(() => dialog.close() )   
+  })
 }

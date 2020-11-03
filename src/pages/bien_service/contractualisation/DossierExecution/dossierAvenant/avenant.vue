@@ -97,6 +97,8 @@
                 class="span"
                
               />
+               <code v-if="parseFloat(this.quinzePourcentDuMarche) < parseFloat(this.affichierMontantAvenantTTC)">
+           Montant Avenant est supperieure au 30% du marche</code>
             </div>
           </div>
          </td>
@@ -507,7 +509,7 @@ search:""
   'planActe']),
 
 quinzePourcentDuMarche() {
-      const val = (parseFloat(this.afficheMontantMarcheReel(this.macheid)) * 0.15);
+      const val = (parseFloat(this.afficheMontantMarcheReel(this.macheid)) * 0.30);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -744,7 +746,7 @@ afficherLibelleService() {
     },
        ajouterTypeTexteLocal() {
          if(parseFloat(this.quinzePourcentDuMarche) < parseFloat(this.affichierMontantAvenantTTC)){
-alert("Montant Avenant est supperieure au 15% du marche")
+alert("Montant Avenant est supperieure au 30% du marche")
          }
 else
 {

@@ -11,18 +11,18 @@
 <!--      </div>-->
 <br>
 <br>
-      <table class="table " style="background-color: #2E363F;">
-        <tr>
-          <td>
+      <table class="table " style="background-color: #000000;">
+        <tr style="background-color: #000000;">
+          <td style="border: 3px solid #ffffff;">
             <center>
       <router-link tag="a" :to="{ name: 'photoProfil' }">
         <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">
         </router-link>
-      <h6 style="color:orange;font-size:14px;text-align:center;">{{afficheNomUtilisateur}}</h6>
+      <h6 style="color:#fff;font-size:14px;text-align:center;">{{afficheNomUtilisateur}}</h6>
   
 		</center>
            
-       <router-link :to="{ name: 'Login'}" tag="a" style="color:red;width:20%;text-align:center;">
+       <router-link :to="{ name: 'Login'}" tag="a" style="color:#fff;width:20%;text-align:center;">
               <h5 >Se déconnecter</h5>
 
             </router-link>
@@ -32,8 +32,16 @@
             <P>(SID-CF)</P>
           </td>
 
-          <!-- <td style="width:15%">
-            <router-link :to="{ name: 'Login'}" tag="a" style="text-align: right;color:red;width:20%;">
+         <!-- <td style="border: 2px solid;">
+            <center>
+      <router-link tag="a" :to="{ name: 'photoProfil' }">
+        <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">
+        </router-link>
+      <h6 style="color:#fff;font-size:14px;text-align:center;">{{afficheNomUtilisateur}}</h6>
+  
+		</center>
+           
+       <router-link :to="{ name: 'Login'}" tag="a" style="color:green;width:20%;text-align:center;">
               <h5 >Se déconnecter</h5>
 
             </router-link>
@@ -109,6 +117,7 @@ export default {
 created(){
           this.getGestionModules()
           this.getInfrastructure()
+          this.getTypeOrdrePaiement()
     this.getAffectation()
 this.getFormeJuridiques()
 this.getRegimeImpositions()
@@ -330,6 +339,10 @@ this.getLettreInvitation()
     this.getAnoDMPBailleur()
     this.getObservationBailleur()
 
+this.getMarcheHorSib()
+this.getOpProvisoire()
+this.getRealiteServiceHors()
+
    this.getAvenant()
 this.getImageMarche()
     this.getMarcheBailleur()
@@ -489,11 +502,12 @@ return objJson.id
       
       
     ]),
+ ...mapActions('horSib',['getMarcheHorSib',"getRealiteServiceHors","getOpProvisoire"]),
 
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ["getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
+       ...mapActions('bienService', ["getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",

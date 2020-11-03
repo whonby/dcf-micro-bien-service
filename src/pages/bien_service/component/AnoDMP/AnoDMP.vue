@@ -4,7 +4,7 @@ affichierAppelOffreid
   <div v-for="item in lot" :key="item.id" class="widget-content">
     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
 
-      <div class="span8"><h5>LOT N°{{ item.numero_lot }} / {{item.objet}}
+      <div class="span8" style="text-align:center"><h5>LOT N°{{ item.numero_lot }} / {{item.objet}}
       </h5></div>
       <div align="right">
         <div class="span3"><button @click.prevent="afficheModaleActe(item.id)"
@@ -559,7 +559,7 @@ pvTraitement(){
        }
      })
 },
-afficherPaiement(){
+afficherMotif(){
   if(this.edite_demande_dao.avis== 0){
     return 0
   }
@@ -654,7 +654,7 @@ afficheDemandeDAO(index){
       formData.append('num_courrier', this.edite_demande_dao.num_courrier);
       formData.append('marche_id',this.edite_demande_dao.marche_id );
       formData.append('id', this.edite_demande_dao.id);
-      formData.append('plan_motif_decision_id',this.afficherPaiement);
+      formData.append('plan_motif_decision_id',this.afficherMotif);
       formData.append('observations',this.edite_demande_dao.observations)
       formData.append('date_avis',this.edite_demande_dao.date_avis);
       formData.append('avis',this.edite_demande_dao.avis);

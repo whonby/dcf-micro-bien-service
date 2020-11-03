@@ -139,35 +139,6 @@
                                     -->
                     <td @dblclick="afficheModalModificationMandat(Manda.id)">{{formatageSomme(parseFloat(Manda.total_general))|| 'Non renseigné'}}</td>
                     
-                    <!-- <td>
-                        <button v-if="Manda.decision_emetteur == 1"  class="btn  btn-success"  >                        
-                     
-                      <span    >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="Manda.decision_emetteur == 2" class="btn  btn-warning"  >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="Manda.decision_emetteur == 3" class="btn  btn-danger"  >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info"  >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                    </td> -->
-                    
                     <td >{{formaterDate(Manda.date_decision_emetteur) || 'Non renseigné'}}</td>
                         <td >{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
               <td >

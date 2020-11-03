@@ -1,64 +1,92 @@
 afficheIdActeurDepense
-detail_marche
+AffichierElementParent
 <template>
 
 <div>
-
-  
-         <div id="DecisionService" class="modal hide">
+<div id="validationOpDefinitif" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Décision Chef de service</h3>
+        <h3>Decision CF</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
-          
-        
-               <tr>
-                <td >
-                    <div class="control-group">
-                            <label class="control-label">Observation Chef de service</label>
+          <tr>
+            <td>
+              <div class="control-group">
+                            <label class="control-label">Décision CF </label>
                             <div class="controls">
-                              <textarea  class="span" row = "2" v-model="EditServiceRealite.observation_service_beneficiaire">
-                              </textarea>
+                              <select v-model="editMandat.decision_cf" class="span">
+                                <option value=""></option>
+                              <option value="8">Visé</option>
+                              <option value="9">Visé avec Observation</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
+                            <option value="0">Attente</option>
+    
+    </select>
+                           
+                            </div>
+                          </div>
+            </td>
+              <td>
+                    <div class="control-group">
+                            <label class="control-label">Motif CF </label>
+                            <div class="controls">
+                               <select v-model="editMandat.motifcf" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementParent" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
                             </div>
                           </div>
                  </td>
-                 <td >
-                       <div class="control-group">
-                            <label class="control-label">Date Observation:</label>
-                            <div class="controls">
-                              <input type="date" class="span"  v-model="EditServiceRealite.date_service_beneficiaire"/>
-                             
-                            </div>
-                          </div>
-                       </td>
-                 
-                 </tr>            
-                  
-                       <tr>
-                 <td >
+          </tr>
+               <tr>
+                 <td>
                     <div class="control-group">
-                            <label class="control-label">Nom et prenoms </label>
+                            <label class="control-label">Libelle motif </label>
                             <div class="controls">
-                              <select v-model="EditServiceRealite.nom_service_beneficiaire" class="span">
-                                <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.EditServiceRealite.marche_id))"  :key="acteur.id"
-                        :value="acteur.id">{{afficherNomActeurDepense(acteur.acteur_depense_id)}}</option>
-                               </select>
-                           
+                               <select v-model="editMandat.motif" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementEnfant(editMandat.motifcf)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
                             </div>
                           </div>
                  </td>
                   <td>
-                                  <div class="control-group">
-                            <label class="control-label">Fonction</label>
+                               <div class="control-group">
+                            <label class="control-label">Date Decision CF :</label>
                             <div class="controls">
-                              <input type="text" class="span" readonly :value=" afficherLibelleFoctionBudgetaire(afficherIdFoctionBudgetaire(EditServiceRealite.nom_service_beneficiaire))"/>
-                             
+                              <input type="date" class="span"  v-model="editMandat.date_motif"/>
+                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                              
                             </div>
                           </div>
                            </td>
                  </tr>             
+                   <tr>
+                     <td>
+                        <div class="control-group">
+                            <label class="control-label">Observation CF</label>
+                            <div class="controls">
+                              <textarea  class="span" row = "6" v-model="editMandat.observation">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                        <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
+                            <div class="controls">
+                              <input type="text" class="span"  :value="afficheNomUtilisateur" readonly/>
+                            </div>
+                          </div>
+                       </td>
+                       
+                       </tr>      
                         
                            
          
@@ -66,7 +94,7 @@ detail_marche
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="FonctionDeModificationServiceRealite(EditServiceRealite)"
+          @click.prevent="validationOpVise(editMandat)"
           class="btn btn-primary"
           href="#"
          
@@ -80,6 +108,7 @@ detail_marche
                                    <tr>
 
                                         <th>Année</th>
+                                        <th>Num Op Definitif</th>
                                          <th title="">Section</th>
                               
                                  <th title="">Fournisseur</th>
@@ -88,7 +117,9 @@ detail_marche
                                   <!-- <th>Imputation</th> -->
                                 <th>Montant</th>
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th>Date validation</th>
+                                <th >Date béneficiaire</th>
+                                <th title="Date validation Cf">Date validation CF</th>
+                                <th>Décision CF</th>
                                 <!-- <th title="Observation Controleur financier">Observation CF</th> -->
                                 <th>Action</th>
                                     </tr>
@@ -96,33 +127,61 @@ detail_marche
                                     <tbody>
                                      <tr
                     class="odd gradeX"
-                    v-for="realiteService in afficheServiceRealiteFait(macheid)"
-                    :key="realiteService.id"
+                    v-for="Manda in afficheOpDefinitivecf(macheid)"
+                    :key="Manda.id"
                   >
-        <td >{{realiteService.exercice_budget || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{formaterDate(afficheDateFacture(realiteService.facture_id)) || 'Non renseigné'}}</td> 
+        <td >{{Manda.exercice_budget || 'Non renseigné'}}</td>
+         <td >{{Manda.numero_op_definitif || 'Non renseigné'}}</td>
+                    <td >{{afficherSection(Manda.section_id) || 'Non renseigné'}}</td>
+                    <td >{{afficheNomFournisseur(afficheidFournisseurFacture(Manda.facture_id)) || 'Non renseigné'}}</td>
+                    <td >{{afficheNumeroFacture(Manda.facture_id) || 'Non renseigné'}}</td>
+                     <td >{{afficheDateFacture(Manda.facture_id) || 'Non renseigné'}}</td> 
                      
                     <!-- <td >{{detail_marche.imputation  || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{formatageSomme(parseFloat(realiteService.total_general)) || 'Non renseigné'}}</td>
+                     <td >{{formatageSomme(Manda.total_general) || 'Non renseigné'}}</td>
                      
-                       <td @dblclick="afficherModifierServiceRealite(realiteService.id)">{{(formaterDate(realiteService.date_service_beneficiaire)) || 'Non renseigné'}}</td>
+                       <td >{{(formaterDate(Manda.date_decision_emetteur)) || 'Non renseigné'}}</td>
+                   <td >{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
+                    <td v-if="realiteService.decision_emetteur == 8 || realiteService.decision_emetteur == 9 ">
+                        <button v-if="Manda.decision_cf == 8"  class="btn  btn-success" @click="afficheDecisionCf(Manda.id)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="Manda.decision_cf == 2" class="btn  btn-warning" @click="afficheDecisionCf(Manda.id)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
                     
+                      </button>
+                        <button v-else-if="Manda.decision_cf == 3" class="btn  btn-danger" @click="afficheDecisionCf(Manda.id)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                       <button v-else-if="Manda.decision_cf == 9"  class="btn  btn-success" @click="afficheDecisionCf(Manda.id)" >                        
+                     
+                      <span title="Visé avec observation">Visé O</span>
+                      
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficheDecisionCf(Manda.id)" >                        
+                     
+                      
+                       <span>Attente</span>
+                      
+                    
+                      </button>
+                    </td>
                     <td>
-                      <button  class="btn  btn-danger" v-if="realiteService.decision_service_beneficiaire == 0" @click="afficherModalObservationServiceBeneficiaire(realiteService.id)">
-                        <span>
-                          <i class="icon icon-ok"></i>
-                        </span>
-                      </button>
-                      <button  v-else  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(realiteService.id)">
-                        <span>
-                          <i class="icon icon-ok"></i>
-                        </span>
-                      </button>
-                        
-                      <button  class="btn btn-danger" @click="supprimerRealiteServiceHors(realiteService.id)">
+                     <router-link :to="{ name: 'detailOpdefinitif', params: {id:Manda.id}}"
+                class="btn btn-inverse " title="Detail Op Definitif" >
+                  <span class="" style="color:#fff">Detail Op</span>
+                   </router-link>
+                       
+                      <button  class="btn btn-rr" @click="supprimerMandat(Manda.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
@@ -146,13 +205,13 @@ detail_marche
 
 
 
- <notifications/>
+<notifications/>
     </div>
 </template>
 
 <script>
 import {mapGetters, mapActions} from 'vuex';
-import { formatageSomme } from './../../../../../Repositories/Repository';
+import { formatageSomme } from '../../../../../../Repositories/Repository';
 import moment from 'moment';
 export default {
    
@@ -165,9 +224,10 @@ export default {
         }
       ],
       
-       EditServiceRealite: {
-         decision_service_beneficiaire : 1
+       editMandat: {
+        
        },
+
 search:""
         }
     },
@@ -175,7 +235,7 @@ search:""
     created(){},
 
               computed: {
-                ...mapGetters('horSib', ['gettersrealiteServiceFaitHorsSib']),
+                ...mapGetters('horSib', ['gettersopProvisoire']),
             ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
@@ -222,6 +282,42 @@ search:""
       // "sections"
        
     ]),
+     ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
+  'plans_Decision']),
+  afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
+     AffichierElementParent() {
+      
+      // return id => {
+      //   if (id != null && id != "") {
+          return this.plans_Decision.filter(element => this.RecupererNiveau3StructureDecision(element.structure_motif_decission_id) == 3);
+      //   }
+      // };
+    },
+    RecupererNiveau3StructureDecision() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structuresDecision.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau;
+      }
+      return 0
+        }
+      };
+    },
+    AffichierElementEnfant() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
     afficherIdFoctionBudgetaire() {
       return id => {
         if (id != null && id != "") {
@@ -365,12 +461,26 @@ afficheDateFacture() {
         }
       };
     },
-       afficheServiceRealiteFait() {
+       afficheOpDefinitivecf() {
       return id => {
         if (id != null && id != "") {
-          return this.gettersrealiteServiceFaitHorsSib.filter(
-            element => element.marche_id == id  && element.differentrealite == 0
+          return this.mandats.filter(
+            element => element.marche_id == id  && this.afficherMarcheHorsSIb(element.marche_id) && element.differentop == 1
           );
+        }
+      };
+    },
+
+    afficherMarcheHorsSIb() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+         return qtereel.sib;
+       
+      }
+      return 0
         }
       };
     },
@@ -387,20 +497,32 @@ else{
  
       methods:{ 
 ...mapActions("horSib", ['ajouterRealiteServiceHors','modifierRealiteServiceHors','supprimerRealiteServiceHors']),
-  
-       afficherModifierServiceRealite(id){
-		this.$router.push({
-			path:"/ModifierServiceRealiteHorsSib/" + id
-		});
-	},
-afficherModalObservationServiceBeneficiaire(id) {
-      this.$("#DecisionService").modal({
+   ...mapActions("bienService", [
+                
+                "ajouterMandat",
+                "modifierMandat",
+                "supprimerMandat",
+               
+      
+     
+               
+            ]),
+       afficheDecisionCf(id) {
+      this.$("#validationOpDefinitif").modal({
         backdrop: "static",
         keyboard: false
       });
 
-       this.EditServiceRealite = this.gettersrealiteServiceFaitHorsSib.find(item=>item.id==id);
+       this.editMandat = this.afficheOpDefinitivecf(this.macheid).find(item=>item.id==id);
     },
+// afficherModalObservationServiceBeneficiaire(id) {
+//       this.$("#DecisionServiceBeneficiaire").modal({
+//         backdrop: "static",
+//         keyboard: false
+//       });
+
+//        this.EditServiceRealite = this.gettersopProvisoire.find(item=>item.id==id);
+//     },
 
      afficherModalAjouterTitre() {
       this.$("#exampleModalAvenant").modal({
@@ -440,34 +562,31 @@ formatageSomme:formatageSomme,
             },
 
 
-              FonctionDeModificationServiceRealite() {
+              validationOpVise() {
      
 
  var nouvelObjet = {
-      ...this.EditServiceRealite,
-     	exercice_budget :this.EditServiceRealite.exercice_budget,
+      ...this.editMandat,
+     	exercice_budget :this.editMandat.exercice_budget,
        
-         marche_id : this.EditServiceRealite.marche_id,
+         marche_id : this.editMandat.marche_id,
        
       	
-        facture_id:this.EditServiceRealite.facture_id,
+        facture_id:this.editMandat.facture_id,
        
- total_general :this.EditServiceRealite.total_general,
+ total_general :this.editMandat.total_general,
 
-  ua_id:this.EditServiceRealite.ua_id,
-  
-
-
+  ua_id:this.editMandat.ua_id,
+ 
 section_id:this.afficherSectId,
-// id:this.afficherIdRealiteServiceFait(this.EditServiceRealite.marche_id),
-  // engagement_id:this.EditServiceRealite.id,
-  marchetype:this.EditServiceRealite.marchetype,
-  decision_service_beneficiaire:1
-       };
- this.modifierRealiteServiceHors(nouvelObjet);
-this.$("#DecisionService").modal('hide');
 
-          this.EditServiceRealite={
+  marchetype:this.editMandat.marchetype,
+ 
+       };
+ this.modifierMandat(nouvelObjet);
+this.$("#validationOpDefinitif").modal('hide');
+
+          this.editMandat={
                   numero_bon_manuel:"",
 numero_demande:"",
 	exo_id:"",
