@@ -12,6 +12,7 @@
     "@grapecity/spread-sheets": "12.0.10",
     "@grapecity/spread-sheets-vue": "12.0.10",
     "@handsontable/vue": "^4.1.1",
+    "@types/leaflet-label": "^0.2.35",
     "apexcharts": "^3.22.0",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",

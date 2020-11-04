@@ -118,7 +118,7 @@
                 <div class="">
 
                     <div  style="height: 750px; width: 100%; ">
-                        <l-map ref="map" :zoom=7.4 :center="initialLocation" >
+                        <l-map ref="map" :zoom=7.499 :center="initialLocation" >
                             <l-icon-default></l-icon-default>
                             <l-control-layers position="topright"  ></l-control-layers>
                             <l-control-fullscreen position="topleft"
@@ -199,6 +199,7 @@ import VueApexCharts from 'vue-apexcharts'
 import L from "leaflet.minichart"
 import ad from "leaflet-html-legend"
 import ad1 from "leaflet-easyprint"
+//import ad2 from "leaflet-easyprint"
     export default {
         name: "Example",
         components: {
@@ -989,8 +990,24 @@ formatageSomme:formatageSomme,
                                 });
                             
                           vm.objet_map.addLayer(myBarChart);
-                            
+                 
+               //  vm.objet_leaflet.marker(value.latlng).bindTooltip(value.ville, { permanent: true, offset: [0, 12] }).addTo(vm.objet_map);
+//vm.objet_leaflet.marker(value.latlng).bindLabel(value.ville).addTo(vm.objet_map);
 
+vm.objet_leaflet.circleMarker(value.latlng, {
+    radius: 1,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8,
+  
+}).bindTooltip("<div style='background:white; padding:1px 3px 1px 3px'><b>" + value.ville + "</b></div>", {permanent: true,
+direction: 'bottom',
+ sticky: true,
+    offset: [10, 0],
+    opacity: 0.75,
+    className: 'leaflet-tooltip' }).addTo(vm.objet_map);
                           arrayBar=[]
                           arrayColor=[]
 
@@ -1424,6 +1441,68 @@ sid.easyPrint({
   overflow-y: scroll !important;
 }
 
+.class-popup .leaflet-popup-content-wrapper {
+  background:#2980b9;
+  color:#fff;
+  font-size:10px;
+  line-height:10px;
+  }
 
+.class-popup .leaflet-popup-content-wrapper a {
+  color:#2980b9;
+  }
+.class-popup .leaflet-popup-tip-container {
+  width:40px;
+  height:20px;
+  }
+.class-popup .leaflet-popup-tip {
+  background:#2980b9;
+  }
 
+/* tooltip-class*/ 
+
+.class-tooltip{
+  background: green;
+  border: 2px solid cyan
+}
+.leaflet-tooltip-left.class-tooltip::before {
+  border-left-color: cyan;
+}
+.leaflet-tooltip-right.class-tooltip::before {
+  border-right-color: cyan;
+}
+
+.titreLable{
+  background: red;
+}
+
+.leaflet-tooltip {
+    /*position: absolute !important;
+    padding: 6px !important;
+    background-color: #000 !important;
+    border: 1px solid #fff !important;
+    border-radius: 3px !important;
+    color: #222 !important;
+    white-space: nowrap !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    pointer-events: none !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;*/
+      position: absolute !important;
+    padding: 4px !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    border: 0px solid #000 !important ;
+    color: #000 !important;
+    white-space: nowrap !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    pointer-events: none !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
+   
+    font-size: 9px !important;
+}
 </style>
