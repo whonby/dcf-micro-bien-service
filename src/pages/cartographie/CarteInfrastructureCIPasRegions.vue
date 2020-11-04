@@ -198,7 +198,7 @@ import VGeosearch from 'vue2-leaflet-geosearch';
 import VueApexCharts from 'vue-apexcharts'
 import L from "leaflet.minichart"
 import ad from "leaflet-html-legend"
-
+import ad1 from "leaflet-easyprint"
     export default {
         name: "Example",
         components: {
@@ -1028,14 +1028,16 @@ formatageSomme:formatageSomme,
             }
         },
         mounted() {
-            setTimeout(() => {
+         /*   setTimeout(() => {
                 console.log('done')
                 this.$nextTick(() =>{
                     this.clusterOptions = { disableClusteringAtZoom: 11 }
                 });
-            }, 5000);
+            }, 5000);*/
 console.log(L)
 console.log(ad)
+console.log(ad1)
+
 /**
  *  objet_map:"",
               objet_leaflet:"",
@@ -1081,7 +1083,12 @@ var panelContent = {
       button: function (event) { console.log(event); }
     });
 
-
+sid.easyPrint({
+	title: "Imprimer",
+	position: 'topleft',
+	sizeModes: ['A4Portrait', 'A4Landscape']
+}).addTo(map);
+  
   
 
   let htmlLegend3 = sid.control.htmllegend({
