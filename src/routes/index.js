@@ -51,7 +51,7 @@ import AuthRoutes from './auth/AuthRoutes'
 // les differentes rouetes de marches hors sib
 
 import marcheHorSibRoutes from './routesHorSib/marcheHorSibRoutes'
-
+import gestionrapport from './gestionRapport/gestionrapport'
 
 Vue.use(VueRouter);
 
@@ -76,7 +76,7 @@ planificationBudgetaireRoutes,
 BienServiceRoutes,
 investissementRoutes,
   CartographieRoute,
-
+  gestionrapport,
 
 
   // rouetes des marches hors sib

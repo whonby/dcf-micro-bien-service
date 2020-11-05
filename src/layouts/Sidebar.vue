@@ -6,7 +6,7 @@
     <SideBarGestionSib v-else-if="detail_marche.code == 3"></SideBarGestionSib>
      <SiderbarGestionHorsSib v-else-if="detail_marche.code == 4"></SiderbarGestionHorsSib>
     <SidebarMonEquipe v-else-if="detail_marche.code == 6"></SidebarMonEquipe>
-    <SiderbarPersonnel v-else-if="detail_marche.code == 7"></SiderbarPersonnel>
+    <SiderbarRapport v-else-if="detail_marche.code == 7"></SiderbarRapport>
     <SiderbarCatographie v-else></SiderbarCatographie>
    
   </div>
@@ -19,7 +19,7 @@ import SideBarGestionSib from "./SideBarGestionSib";
 import SidebarMonEquipe from "./SidebarMonEquipe";
 import SiderbarUniteAdministrative from "./SiderbarUniteAdministrative";
 import SiderbarGestionHorsSib from "./SiderbarGestionHorsSib";
-import SiderbarPersonnel from "./SiderbarPersonnel";
+import SiderbarRapport from "./SiderbarRapport";
  import SiderbarCatographie from "./SiderbarCatographie";
 export default {
   data(){
@@ -36,7 +36,7 @@ components: {
     SiderbarGestionHorsSib,
     SidebarMonEquipe,
     SiderbarUniteAdministrative,
-    SiderbarPersonnel
+    SiderbarRapport
   },
    
   computed:{

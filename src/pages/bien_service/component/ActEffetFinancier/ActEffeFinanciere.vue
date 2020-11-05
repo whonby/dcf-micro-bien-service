@@ -35,7 +35,7 @@ afficherNumeroDossierCandidat1
         </td>
 
         <td v-if="appelOffre.rang_analyse==1"  >
-          {{afficherNumeroDossierCandidat1(appelOffre.dossier_candidat_id) || 'Non renseigné'}}
+          {{afficheNomEntreprise(afficherNumeroDossierCandidat1(appelOffre.dossier_candidat_id)) || 'Non renseigné'}}
         </td>
 
 
@@ -863,13 +863,23 @@ affichieridMarcheGlobal() {
           const qtereel = this.getterDossierCandidats.find(qtreel => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.nom_cand;
+            return qtereel.entreprise_id;
           }
           return null
         }
       };
     },
-
+afficheNomEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+          if (qtereel) {
+            return qtereel.raison_sociale;
+          }
+          return 0
+        }
+      };
+    },
     afficherOffrefID() {
       return id => {
         if (id != null && id != "") {
@@ -981,7 +991,7 @@ affichieridMarcheGlobal() {
     afficherMontantRetenueGarantie(){
       const montantttcRetenueGarantie = (parseFloat(this.montantHTt) * (this.formEffetFinancier.taux_retenue_garantie)/100)
       if (montantttcRetenueGarantie) {
-        return parseInt(montantttcRetenueGarantie).toFixed(0);
+        return parseFloat(montantttcRetenueGarantie).toFixed(0);
       }
       return 0
     },
@@ -993,7 +1003,7 @@ affichieridMarcheGlobal() {
 //   const resultat = parseFloat (this.afficherMontantRetenueGarantie)/(1+ parseFloat(this.afficherTauxEnPourcentage))
 
 //   if(resultat){
-//     return parseInt( Math.round(resultat))
+//     return parseFloat( Math.round(resultat))
 //   }
 //   return 0
 // },
@@ -1004,7 +1014,7 @@ affichieridMarcheGlobal() {
       const val = parseFloat((this.afficherMontantHorsTaxeRetenuGarantie) * parseFloat(this.afficherEnorere)/100);
 
       if (val) {
-        return parseInt(val).toFixed(0);
+        return parseFloat(val).toFixed(0);
       }
 
       return 0
@@ -1020,7 +1030,7 @@ affichieridMarcheGlobal() {
       const anwser = parseFloat (this.afficherMontantRetenueGarantie)/(1+ parseFloat(this.afficherTauxEnPourcentage))
 
       if(anwser){
-        return parseInt( Math.round(anwser))
+        return parseFloat( Math.round(anwser))
       }
       return 0
     },
@@ -1031,7 +1041,7 @@ affichieridMarcheGlobal() {
     editAfficherMontantRetenueGarantie(){
       const response = (parseFloat(this.editMontantHTt) * (this.editActeEffetFinancier.taux_retenue_garantie)/100)
       if (response) {
-        return parseInt(response).toFixed(0);
+        return parseFloat(response).toFixed(0);
       }
       return 0
     },
@@ -1042,7 +1052,7 @@ affichieridMarcheGlobal() {
       const tonyData = parseFloat (this.editAfficherMontantRetenueGarantie)/(1+ parseFloat(this.afficherTauxEnPourcentage))
 
       if(tonyData){
-        return parseInt( Math.round(tonyData))
+        return parseFloat( Math.round(tonyData))
       }
       return 0
     },
@@ -1053,7 +1063,7 @@ affichieridMarcheGlobal() {
       const data = parseFloat((this.editAfficherMontantHorsTaxeRetenuGarantie) * parseFloat(this.editAfficherEnorere)/100);
 
       if (data) {
-        return parseInt(data).toFixed(0);
+        return parseFloat(data).toFixed(0);
       }
 
       return 0
@@ -1066,7 +1076,7 @@ affichieridMarcheGlobal() {
     afficherMontantTTCDuCautionnement(){
       const result = (parseFloat(this.montantHTt) * (this.formEffetFinancier.taux_cautionnemt)/100)
       if (result) {
-        return parseInt(result).toFixed(0);
+        return parseFloat(result).toFixed(0);
       }
 
       return 0
@@ -1080,7 +1090,7 @@ affichieridMarcheGlobal() {
       const val = parseFloat((this.afficheMontantHorsTaxeDuCautionnement) * parseFloat(this.afficherEnorere)/100);
 
       if (val) {
-        return parseInt(val).toFixed(0);
+        return parseFloat(val).toFixed(0);
       }
 
       return 0
@@ -1095,7 +1105,7 @@ affichieridMarcheGlobal() {
       const anwser = parseFloat (this.afficherMontantTTCDuCautionnement)/(1+ parseFloat(this.afficherTauxEnPourcentage))
 
       if(anwser){
-        return parseInt( Math.round(anwser))
+        return parseFloat( Math.round(anwser))
       }
       return 0
     },
@@ -1105,7 +1115,7 @@ affichieridMarcheGlobal() {
 
       const res = (parseFloat(this.editMontantHTt) * (this.editActeEffetFinancier.taux_cautionnemt)/100)
       if (res) {
-        return parseInt(res).toFixed(0);
+        return parseFloat(res).toFixed(0);
       }
 
       return 0
@@ -1120,7 +1130,7 @@ affichieridMarcheGlobal() {
       const resulVal = parseFloat (this.editAfficherMontantTTCDuCautionnement)/(1+ parseFloat(this.afficherTauxEnPourcentage))
 
       if(resulVal){
-        return parseInt( Math.round(resulVal))
+        return parseFloat( Math.round(resulVal))
       }
       return 0
     },
@@ -1130,7 +1140,7 @@ affichieridMarcheGlobal() {
       const val = parseFloat((this.editAfficheMontantHorsTaxeDuCautionnement) * parseFloat(this.editAfficherEnorere)/100);
 
       if (val) {
-        return parseInt(val).toFixed(0);
+        return parseFloat(val).toFixed(0);
       }
 
       return 0
@@ -1192,7 +1202,7 @@ affichieridMarcheGlobal() {
       const val = parseFloat((this.formEffetFinancier.montant_act_ht) * parseFloat(this.afficherEnorere)/100);
 
       if (val) {
-        return parseInt(val).toFixed(0);
+        return parseFloat(val).toFixed(0);
       }
 
       return 0
@@ -1201,7 +1211,7 @@ affichieridMarcheGlobal() {
     editMontantTva(){
       const resulta = parseFloat ((this.editActeEffetFinancier.montant_act_ht) * parseFloat(this.editAfficherEnorere)/100)
       if(resulta){
-        return parseInt(resulta).toFixed(0)
+        return parseFloat(resulta).toFixed(0)
       }
       return 0
     },
@@ -1210,7 +1220,7 @@ affichieridMarcheGlobal() {
     editMontantHTt(){
       let anwser = parseFloat(this.editActeEffetFinancier.montant_act_ht) + parseFloat(this.editMontantTva)
       if(anwser){
-        return parseInt(anwser).toFixed(0);
+        return parseFloat(anwser).toFixed(0);
       }
       return 0
     },
@@ -1223,7 +1233,7 @@ affichieridMarcheGlobal() {
       const val = parseFloat(this.formEffetFinancier.montant_act_ht) + parseFloat(this.montantTva);
 
       if (val) {
-        return parseInt(val).toFixed(0);
+        return parseFloat(val).toFixed(0);
       }
 
       return 0
@@ -1233,7 +1243,7 @@ affichieridMarcheGlobal() {
       const val = parseFloat(this.formEffetFinancier.avance_demarrage_ht) + parseFloat(this.avanceDemarrageMontantTva);
 
       if (val) {
-        return parseInt(val).toFixed(0);
+        return parseFloat(val).toFixed(0);
       }
 
       return 0
@@ -1243,7 +1253,7 @@ affichieridMarcheGlobal() {
       const val = parseFloat((this.formEffetFinancier.avance_demarrage_ht) * parseFloat(this.afficherEnorere)/100);
 
       if (val) {
-        return parseInt(val).toFixed(0);
+        return parseFloat(val).toFixed(0);
       }
 
       return 0
@@ -1254,7 +1264,7 @@ affichieridMarcheGlobal() {
       const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.editAfficherEnorere)/100);
 
       if (val) {
-        return parseInt(val).toFixed(0);
+        return parseFloat(val).toFixed(0);
       }
 
       return 0
@@ -1265,7 +1275,7 @@ affichieridMarcheGlobal() {
       const val = parseFloat(this.editActeEffetFinancier.avance_demarrage_ht) + parseFloat(this.editAvanceDemarrageMontantTva);
 
       if (val) {
-        return parseInt(val).toFixed(0);
+        return parseFloat(val).toFixed(0);
       }
 
       return 0
@@ -1513,7 +1523,7 @@ affichierIdEntrepriseSelectionner() {
         keyboard: false
       });
         if ( this.analyseByLot(index).length>0){
-          this.nom_candidata=this.afficherNumeroDossierCandidat1(this.analyseByLot(index)[0].dossier_candidat_id),
+          this.nom_candidata=this.afficheNomEntreprise(this.afficherNumeroDossierCandidat1(this.analyseByLot(index)[0].dossier_candidat_id)),
               this.dossier_candidat_id=this.analyseByLot(index)[0].dossier_candidat_id
         }
     this.marche_lot=index

@@ -58,10 +58,10 @@
             <span class="label label-important"></span>
           </a>
         </li> -->
-        <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
+        <li  @click.prevent="navigateToActeurDepense" >
           <a href="#">
             <i class="icon-group"></i>
-            <span>PERSONNEL</span>
+            <span>SUIVI ENTREPRISE</span>
           </a>
         </li>
         <!-- <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
@@ -213,9 +213,9 @@ navigateToGestionMarche(){
 
 
       navigateToActeurDepense(){
-        this.activate(2)
+        this.activate()
         this.$router.push({
-          name: 'TableauBordActeurDepense'
+          name: 'suiviDesEntreprise'
         })
       },
 

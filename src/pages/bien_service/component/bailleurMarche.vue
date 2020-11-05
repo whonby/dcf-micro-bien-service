@@ -81,7 +81,7 @@
           <tr>
             <td>
               <div class="control-group">
-                        <label class="control-label">N° marché</label>
+                        <label class="control-label">N° marché{{CalCulDuTaux}}</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -123,7 +123,43 @@
  
           </tr>
           <tr>
+                     <td>
+              <div class="control-group">
+                <label class="control-label" >Taux Tva (%)</label>
+               
+              </div>
             
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="afficherEnorere"
+                    class="span"
+                   readonly
+                  />
+                </div>
+              </div>
+            </td>
+             <td >
+              <div class="control-group">
+                <label class="control-label" >Montant TVA</label>
+               
+              </div>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    :value="montantTvaActuel"
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td>
               <td>
               <div class="control-group">
                         <label class="control-label">Montant TTC Marché</label>
@@ -137,7 +173,25 @@
                         </div>
                         </div>
             </td>
-            <td>
+           <td colspan="2">
+              
+                                 <div class="control-group">
+                                        <label class="control-label">Exonéré</label>
+                                        <div class="controls">
+                                        <select v-model="formBailleur.exonere" class="span">
+                                        
+                                            <option value="0">Oui</option>
+                                            <option value="1">Non</option>
+                                        </select>
+                                        
+                                        </div>
+                                    </div>
+                                    </td>
+                                           
+          </tr>
+          <tr>
+ 
+                                     <td>
               <div class="control-group">
                                             <label div class="control-label">Bailleur</label>
                                             <div class="controls">
@@ -160,42 +214,7 @@
                                             </div>
                                             </div>
                                            </td>
-                                           <td colspan="2">
-              
-                                 <div class="control-group">
-                                        <label class="control-label">Exonéré</label>
-                                        <div class="controls">
-                                        <select v-model="formBailleur.exonere" class="span">
-                                        
-                                            <option value="0">Oui</option>
-                                            <option value="1">Non</option>
-                                        </select>
-                                        
-                                        </div>
-                                    </div>
-                                    </td>
-          </tr>
-          <tr>
- 
-                                    <td>
-              <div class="control-group">
-                <label class="control-label" >Taux Tva (%)</label>
-               
-              </div>
-            
-              <div class="control-group">
-               
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-              :value="afficherEnorere"
-                    class="span"
-                   readonly
-                  />
-                </div>
-              </div>
-            </td>
+                           
             <td >
               <div class="control-group">
                 <label class="control-label" >Taux Bailleur (%)</label>
@@ -216,24 +235,7 @@
               </div>
             </td>
             
-            <td >
-              <div class="control-group">
-                <label class="control-label" >Montant TVA</label>
-               
-              </div>
-              <div class="control-group">
-               
-                <div class="controls">
-                  <input
-                    type="number"
-                    :value="montantTvaActuel"
-                    class="span"
-                   readonly
-                  />
-                  
-                </div>
-              </div>
-            </td>
+           
              <td >
               <div class="control-group">
                 <label class="control-label" >Montant TTC Bailleur</label>
@@ -648,13 +650,13 @@ sommeTotalDesBailleur() {
         }
       };
     },
-    // testTotal(){
-    //   return parseFloat(this.TauxParBailleur) + parseFloat(this.afficherEnorere)
-    // },
-    TauxBailleur() {
-      const val = (parseFloat(this.formBailleur.tauxBailler)/100) + (parseFloat(this.afficherEnorere)/100);
-      return parseFloat(val).toFixed(2);
+    CalCulDuTaux(){
+      return this.formBailleur.tauxBailler / 100
     },
+    // TauxBailleur() {
+    //   const val = (parseFloat(this.formBailleur.tauxBailler)/100) + (parseFloat(this.afficherEnorere)/100);
+    //   return parseFloat(val).toFixed(2);
+    // },
     montantTvaActuel() {
       if(this.formBailleur.exonere == 0){
 
@@ -662,10 +664,10 @@ sommeTotalDesBailleur() {
       
       }
       else {
-        const val = parseFloat(this.afficherMontantHtMarche(this.infoLot.id)) * parseFloat(this.TauxBailleur);
+        const val = parseFloat(this.afficherMontantHtMarche(this.infoLot.id)) * parseFloat(this.affcherTauxArrondi);
       
        if (val) {
-        return parseInt(val).toFixed(0);
+        return parseFloat(val).toFixed(0);
       }
       
       return 0
@@ -673,21 +675,21 @@ sommeTotalDesBailleur() {
       
     },
     montantHTtBailleur() {
-      if(this.montantTvaActuel == 0){
+      if(this.formBailleur.exonere == 0){
 
-        const val = (((parseFloat(this.afficherMontantHtMarche(this.infoLot.id)))*(parseFloat(this.formBailleur.tauxBailler)))/100);
+        const val = (parseFloat(this.afficherMontantHtMarche(this.infoLot.id)))*this.CalCulDuTaux;
       
        if (val) {
-        return parseInt(val).toFixed(0);
+        return parseFloat(val).toFixed(0);
       }
       
       return 0
       }
       else{
-        const val = parseFloat(this.afficherMontantHtMarche(this.infoLot.id)) + parseFloat(this.montantTvaActuel);
-      
+        
+       const val = (parseFloat(this.afficherMontantTTCMarche(this.infoLot.id)))*this.CalCulDuTaux;
        if (val) {
-        return parseInt(val).toFixed(0);
+        return parseFloat(val).toFixed(0);
       }
       
       return 0
@@ -707,6 +709,14 @@ affcherTauxEnCours() {
 
       if (norme) {
         return norme.libelle;
+      }
+      return 0
+    },
+    affcherTauxArrondi() {
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.arrondit;
       }
       return 0
     },
