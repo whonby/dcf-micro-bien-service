@@ -146,13 +146,14 @@ afficherNumeroDossierCandidat1
 
               <div class="control-group">
                 <label class="control-label">Entreprise</label>
-                <div class="controls" >
-                  <!-- <select v-model="formEffetFinancier.entreprise_id" class="span">
-                        <option v-for="varText in affichierNomEntreprise(macheid)" :key="varText.id"
-                                :value="varText.entreprise_id">{{varText.nom_cand}}</option>
-                    </select> -->
-                  <!-- <input type="text" :value="affichierNomEntreprise(macheid)"> -->
-                  {{nom_candidata}}
+                <div class="controls" style="font-size:20px">
+                  <input
+                      type="text"
+                      :value="nom_candidata"
+                      class="span"
+                      readonly
+                  />
+                  
                 </div>
 
 
@@ -185,36 +186,62 @@ afficherNumeroDossierCandidat1
 
             </td>
 
+          </tr>
+          <tr>
+             <td colspan="2" width="550">
+              <div class="control-group">
+                <label class="control-label">Objet offre :</label>
+                <div class="controls">
+                  <textarea  :value="affichierObjetMarche(marche_lot)"  class="textarea_editor span11" rows="3" placeholder="Entre le  text ..."></textarea>
+
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Incidence financière</label>
+                <div class="controls">
+                  <select  v-model="formEffetFinancier.incidence_financiere" class="span">
+                    <option value="0">Oui</option>
+                    <option value="1">Non</option>
+                  </select>
 
 
-            <!-- <td>
 
+                </div>
+              </div>
+            </td>
 
-        <div class="control-group">
-        <label class="control-label">Text juridique </label>
-        <div class="controls">
-           <select v-model="formEffetFinancier.text_juridique_id" class="span">
-                <option v-for="varText in text_juridiques" :key="varText.id"
-                        :value="varText.id">{{varText.objet_text}}</option>
-            </select>
-        </div>
-    </div>
-            </td> -->
+            <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Numero du marche/contract</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      v-model="formEffetFinancier.numero_marche"
+                      class="span"
+                      placeholder="Saisir le numero "
+                  />
+                </div>
+              </div>
 
-            <!-- <td>
-      <div class="control-group">
-      <label class="control-label">Ano bailleur dmp.</label>
-      <div class="controls">
-     <input :value="info_avis_bailleur" readonly>
-
-      </div>
-  </div>
-          </td> -->
-
+            </td>
+           
 
           </tr>
           <tr>
-            <td>
+ <td>
+              <div class="control-group">
+                <label class="control-label">Reference acte</label>
+                <div class="controls">
+                  <input type="text" v-model="formEffetFinancier.reference_act"
+                         class="span"
+                         placeholder="refence acte"
+                  />
+                </div>
+              </div>
+            </td>
+<td>
               <div class="control-group">
                 <label class="control-label">Autorité approbatrice</label>
                 <div class="controls">
@@ -245,60 +272,8 @@ afficherNumeroDossierCandidat1
               </div>
 
             </td>
-
-            <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Numero du marche/contract</label>
-                <div class="controls">
-                  <input
-                      type="text"
-                      v-model="formEffetFinancier.numero_marche"
-                      class="span"
-                      placeholder="Saisir le numero "
-                  />
-                </div>
-              </div>
-
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Reference acte</label>
-                <div class="controls">
-                  <input type="text" v-model="formEffetFinancier.reference_act"
-                         class="span"
-                         placeholder="refence acte"
-                  />
-                </div>
-              </div>
-            </td>
-
-          </tr>
-          <tr>
-
-
-            <td colspan="2" width="550">
-              <div class="control-group">
-                <label class="control-label">Objet offre :</label>
-                <div class="controls">
-                  <textarea  :value="affichierObjetMarche(marche_lot)"  class="textarea_editor span11" rows="3" placeholder="Entre le  text ..."></textarea>
-
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Incidence financière</label>
-                <div class="controls">
-                  <select  v-model="formEffetFinancier.incidence_financiere" class="span">
-                    <option value="0">Oui</option>
-                    <option value="1">Non</option>
-                  </select>
-
-
-
-                </div>
-              </div>
-            </td>
+           
+            
 
 
             <td>
@@ -373,19 +348,42 @@ afficherNumeroDossierCandidat1
       </div>
 
       <div id="financ" class="tab-pane">
-        <table class="table table-bordered table-striped">
-          <tr>
-            <td>
+  <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#MARCHE">MARCHE</a></li>
+        <li class=""><a data-toggle="tab" href="#DEMARRAGE">AVANCE DE DEMARRAGE</a></li>
+        <li class=""><a data-toggle="tab" href="#CAUTIONNEMENT">CAUTIONNEMENT</a></li>
+        <li class=""><a data-toggle="tab" href="#GARANTIE">RETENU DE GARANTIE</a></li>
+      </ul>
+      <div class="widget-content tab-content">
+
+      <div id="MARCHE" class="tab-pane active">
+         <table class="table table-bordered table-striped">
+           <tr>
+              <td>
+
               <div class="control-group">
-                <label class="control-label">Avance Demarrage Ht</label>
+                <label class="control-label">exonéré</label>
                 <div class="controls">
+                  <select v-model="formEffetFinancier.exonere" class="span">
 
+                    <option value="0">Oui</option>
+                    <option value="1">Non</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+           
+             <td >
+              <div class="control-group">
+                <label class="control-label" >Taux</label>
+                <div class="controls">
+                  <input
+                      type="number"
 
-                  <input type="text" v-model="formEffetFinancier.avance_demarrage_ht"
-                         class="span"
-                         placeholder="Saisir le montant "
+                      :value="afficherEnorere" style="text-align:left;color:red"
+                      class="span"
+                      readonly
                   />
-
                 </div>
               </div>
             </td>
@@ -401,74 +399,10 @@ afficherNumeroDossierCandidat1
                 </div>
               </div>
             </td>
-
-
-            <td >
-              <div class="control-group">
-                <label class="control-label">Taux % de retenue de garantie</label>
-                <div class="controls">
-                  <input
-                      type="number"  v-model="formEffetFinancier.taux_retenue_garantie"
-                      placeholder="saisir le taux de retenue de garantie"
-
-                      class="span"
-
-                  />
-
-                </div>
-              </div>
-            </td>
-
-
-            <td >
-              <div class="control-group">
-                <label class="control-label" >Taux % du cautionnement</label>
-                <div class="controls">
-                  <input
-                      type="number"  v-model="formEffetFinancier.taux_cautionnemt"
-
-                      placeholder="saisir le taux du cautionnement"
-                      class="span"
-
-                  />
-
-                </div>
-              </div>
-            </td>
-
-          </tr>
-          <tr>
-
-            <td>
-
-              <div class="control-group">
-                <label class="control-label">exonéré</label>
-                <div class="controls">
-                  <select v-model="formEffetFinancier.exonere" class="span">
-
-                    <option value="0">Oui</option>
-                    <option value="1">Non</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td >
-              <div class="control-group">
-                <label class="control-label" >Taux</label>
-                <div class="controls">
-                  <input
-                      type="number"
-
-                      :value="afficherEnorere" style="text-align:left;color:red"
-                      class="span"
-                      readonly
-                  />
-                </div>
-              </div>
-            </td>
-
-
-            <td >
+           </tr>
+            <tr>
+             
+             <td >
               <div class="control-group">
                 <label class="control-label" > Montant TVA du marché</label>
                 <div class="controls">
@@ -483,8 +417,7 @@ afficherNumeroDossierCandidat1
                 </div>
               </div>
             </td>
-
-            <td>
+             <td colspan="2">
               <div class="control-group">
                 <label class="control-label" >Montant TTC du marché</label>
                 <div class="controls">
@@ -493,17 +426,35 @@ afficherNumeroDossierCandidat1
                       :value="montantHTt" style="text-align:left;color:red"
 
                       class="span"
-                      
+                      readonly
                   />
 
                 </div>
               </div>
             </td>
-          </tr>
-
-          <tr>
-            <td >
+           </tr>
+         </table>
+        
+      </div>
+      <div id="DEMARRAGE" class="tab-pane">
+         <table class="table table-bordered table-striped">
+           <tr>
+              <td>
               <div class="control-group">
+                <label class="control-label">Avance Demarrage Ht</label>
+                <div class="controls">
+
+
+                  <input type="text" v-model="formEffetFinancier.avance_demarrage_ht"
+                         class="span"
+                         placeholder="Saisir le montant "
+                  />
+
+                </div>
+              </div>
+            </td>
+             <td>
+               <div class="control-group">
                 <label class="control-label" >TVA (Avance Demarrage)</label>
                 <div class="controls">
                   <input
@@ -516,8 +467,8 @@ afficherNumeroDossierCandidat1
 
                 </div>
               </div>
-            </td>
-            <td >
+             </td>
+             <td >
               <div class="control-group">
                 <label class="control-label" >Montant Avance Demarrage TTC</label>
                 <div class="controls">
@@ -532,64 +483,27 @@ afficherNumeroDossierCandidat1
                 </div>
               </div>
             </td>
-
-
-
-
-            <td >
+           </tr>
+         </table>
+      </div>
+       <div id="CAUTIONNEMENT" class="tab-pane">
+        <table class="table table-bordered table-striped">
+           <tr>
+             <td >
               <div class="control-group">
-                <label class="control-label" > Montant HT de retenue de garantie</label>
+                <label class="control-label" >Taux % du cautionnement</label>
                 <div class="controls">
                   <input
-                      type="text"  :value="afficherMontantHorsTaxeRetenuGarantie" style="text-align:left;color:red"
-                      placeholder="saisir le montant hors taxe du dispositif retenu"
+                      type="number"  v-model="formEffetFinancier.taux_cautionnemt"
 
+                      placeholder="saisir le taux du cautionnement"
                       class="span"
-                      readonly
+
                   />
 
                 </div>
               </div>
             </td>
-
-            <td>
-              <div class="control-group">
-                <label class="control-label" >Montant TVA de retenue de garantie</label>
-                <div class="controls">
-                  <input
-                      type="number"  :value="afficherMontantTvaTaxeRetenuGarantie" style="text-align:left;color:red"
-
-
-                      class="span"
-                      readonly
-                  />
-
-                </div>
-              </div>
-            </td>
-
-
-          </tr>
-
-          <tr>
-            <td >
-              <div class="control-group">
-                <label class="control-label" >Montant TTC retenue de garantie </label>
-                <div class="controls">
-                  <input
-                      type="number"  :value="afficherMontantRetenueGarantie" style="text-align:left;color:red"
-
-
-                      class="span"
-                      readonly
-                  />
-
-                </div>
-              </div>
-            </td>
-
-
-
             <td >
               <div class="control-group">
                 <label class="control-label" > Montant HT du cautionnement</label>
@@ -619,10 +533,7 @@ afficherNumeroDossierCandidat1
                 </div>
               </div>
             </td>
-
-
-
-            <td >
+             <td >
               <div class="control-group">
                 <label class="control-label" >Montant TTC du cautionnement </label>
                 <div class="controls">
@@ -637,14 +548,77 @@ afficherNumeroDossierCandidat1
                 </div>
               </div>
             </td>
-
-
-
-
-          </tr>
-
+           </tr>
         </table>
+      </div>
+       <div id="GARANTIE" class="tab-pane">
+      <table class="table table-bordered table-striped">
+        <tr>
+          <td >
+              <div class="control-group">
+                <label class="control-label">Taux % de retenue de garantie</label>
+                <div class="controls">
+                  <input
+                      type="number"  v-model="formEffetFinancier.taux_retenue_garantie"
+                      placeholder="saisir le taux de retenue de garantie"
 
+                      class="span"
+
+                  />
+
+                </div>
+              </div>
+            </td>
+            <td >
+              <div class="control-group">
+                <label class="control-label" > Montant HT de retenue de garantie</label>
+                <div class="controls">
+                  <input
+                      type="text"  :value="afficherMontantHorsTaxeRetenuGarantie" style="text-align:left;color:red"
+                      placeholder="saisir le montant hors taxe du dispositif retenu"
+
+                      class="span"
+                      readonly
+                  />
+
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label" >Montant TVA de retenue de garantie</label>
+                <div class="controls">
+                  <input
+                      type="number"  :value="afficherMontantTvaTaxeRetenuGarantie" style="text-align:left;color:red"
+
+
+                      class="span"
+                      readonly
+                  />
+
+                </div>
+              </div>
+            </td>
+             <td >
+              <div class="control-group">
+                <label class="control-label" >Montant TTC retenue de garantie </label>
+                <div class="controls">
+                  <input
+                      type="number"  :value="afficherMontantRetenueGarantie" style="text-align:left;color:red"
+
+
+                      class="span"
+                      readonly
+                  />
+
+                </div>
+              </div>
+            </td>
+        </tr>
+      </table>
+      </div>
+      
+      </div>
       </div>
 
 
