@@ -138,7 +138,7 @@ detail_marche
                     <ul class="nav nav-tabs">
                       
                        <li class="active">
-                        <a data-toggle="tab" href="#RealiteService">MARCHES <span class="badge badge-info" >     {{listeDesMarcheEnCoursExecution.length+listeDesMarcheTerminer.length+listeDesMarcheEnCoursExecution.length}}</span></a>
+                        <a data-toggle="tab" href="#RealiteService">MARCHES <span class="badge badge-info" >     {{listeDesMarcheEnCoursExecution.length+listeDesMarcheTerminer.length+listeDesMarcheSuppendu.length}}</span></a>
                       </li>
                         <!-- <li>
                         <a data-toggle="tab" href="#opdefinitif">MARCHE SIB</a>
