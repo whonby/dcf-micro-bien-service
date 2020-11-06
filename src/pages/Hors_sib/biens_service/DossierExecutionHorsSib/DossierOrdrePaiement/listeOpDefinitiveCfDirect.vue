@@ -1,5 +1,4 @@
-afficheIdActeurDepense
-AffichierElementParent
+
 <template>
 
 <div>
@@ -32,7 +31,7 @@ AffichierElementParent
                     <div class="control-group">
                             <label class="control-label">Motif CF </label>
                             <div class="controls">
-                               <select v-model="editMandat.motifcf" class="span">
+                               <select v-model="editMandat8.motifcf" class="span">
                                  <option value=""></option>
                                 <option v-for="varText in AffichierElementParent" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
@@ -49,7 +48,7 @@ AffichierElementParent
                             <div class="controls">
                                <select v-model="editMandat.motif" class="span">
                                  <option value=""></option>
-                                <option v-for="varText in AffichierElementEnfant(editMandat.motifcf)" :key="varText.id"
+                                <option v-for="varText in AffichierElementEnfant(editMandat8.motifcf)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
                             
@@ -227,6 +226,7 @@ export default {
        editMandat: {
         
        },
+       editMandat8:{},
 
 search:""
         }

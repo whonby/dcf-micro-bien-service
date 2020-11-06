@@ -120,13 +120,13 @@ afficherNumeroDossierCandidat1
 
     <div class="widget-title">
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#tab8888">Identification de L'acte</a></li>
-        <li class=""><a data-toggle="tab" href="#tab00050">Informations financières</a></li>
+        <li class="active"><a data-toggle="tab" href="#Identif">Identification de L'acte</a></li>
+        <li class=""><a data-toggle="tab" href="#financ">Informations financières</a></li>
       </ul>
     </div>
     <div class="widget-content tab-content">
 
-      <div id="tab8888" class="tab-pane active">
+      <div id="Identif" class="tab-pane active">
 
         <table class="table table-bordered table-striped">
           <tr>
@@ -372,7 +372,7 @@ afficherNumeroDossierCandidat1
         </table>
       </div>
 
-      <div id="tab00050" class="tab-pane">
+      <div id="financ" class="tab-pane">
         <table class="table table-bordered table-striped">
           <tr>
             <td>

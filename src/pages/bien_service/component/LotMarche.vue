@@ -103,7 +103,7 @@
                         <label class="control-label">Montant du Lot</label>
                         <div class="controls">
                             <input
-                                    type="number"
+                                    type="text"
                                     v-model="formData.montant_marche"
                                     class="span"
                                    
