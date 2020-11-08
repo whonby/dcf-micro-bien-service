@@ -3,7 +3,7 @@
   <div>
 
 
-    <div class="container-fluid">
+    <div class="">
 
 
 
@@ -224,9 +224,9 @@
           </div>
 
         </div>
-        <div class="span11">
+        <div class="span12">
           <div class="">
-            <div class="" style="height: 700px; width: 100%; border-bottom: none">
+            <div class="" style="height: 850px; width: 100%; border-bottom: none">
 
               <l-map ref="map" class="sidebar-map" :zoom="zoom" :center="initialLocation" >
 
@@ -280,36 +280,7 @@ montantBudegtPasUniteAdminOuRegion
             </div>
           </div>
           <div class="span12">
-            <div class="widget-box">
-              <div class="">
-                <table>
-                  <tr style="border-bottom: 2px solid #fff">
-                    <td style="width: 20px;height:20px;background: red" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Marché planifié</td>
-
-                    <td style="width: 20px;height:20px;background: #209503" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Marché en contractualisation </td>
-                    <td style="width: 20px;height:20px;background: orange" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Marché en exécution</td>
-                    <td style="width: 20px;height:20px;background: blue" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff " colspan="3">
-                      Marché résilie</td>
-                    <td style="width: 20px;height:20px;background: #ab0cd7" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">
-                      Marché terminé</td>
-                    <td style="width: 20px;height:20px;background: #ccc" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">
-                      Marché suspendu</td>
-                  </tr>
-                </table>
-                <table>
-                  <tr>
-
-
-                  </tr>
-                </table>
-              </div>
-            </div>
+           
           </div>
         </div>
         <div class="span3">
