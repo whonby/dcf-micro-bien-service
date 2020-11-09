@@ -1,7 +1,8 @@
 <template>
 
     <div>
-        <div class="container-fluid">
+       
+        <div class="">
             
         <div class="row-fluid">
           
@@ -57,7 +58,6 @@
 
                     </model-list-select>
                     <a href="#" @click.prevent="videInfrastructure()" v-if="infrastructure" style="color: red"><i class="fa fa-trash-o"></i></a>
-
                   </td>
                   <td>
                     <label>Régions</label>
@@ -117,8 +117,8 @@
             <div class="span12">
                 <div class="">
 
-                    <div  style="height: 750px; width: 100%; ">
-                        <l-map ref="map" :zoom=7.499 :center="initialLocation" >
+                    <div  style="height: 850px !important; width: 100%; ">
+                        <l-map ref="map" :zoom=7.4 :center="initialLocation" >
                             <l-icon-default></l-icon-default>
                             <l-control-layers position="topright"  ></l-control-layers>
                             <l-control-fullscreen position="topleft"
@@ -305,7 +305,7 @@ import ad1 from "leaflet-easyprint"
                 mapOptions: {
                     zoomSnap: 0.5
                 },
-                initialLocation: [7.361517, -5.459421],
+                 initialLocation: [7.361517, -5.459421],
                 showMap: true,
                 isActive: false,
                 tileProviders: [
@@ -340,7 +340,7 @@ import ad1 from "leaflet-easyprint"
                  {
                 name: 'Voyageur',
                     visible: false,
-                url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+                url: 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
                 attribution: '',
                 },
                 ],
