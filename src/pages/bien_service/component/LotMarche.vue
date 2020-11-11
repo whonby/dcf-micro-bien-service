@@ -1,8 +1,5 @@
 <template>
 <div>
-
-
-
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span4"></div>
@@ -25,6 +22,11 @@
               <tr>
                 <th>N°</th>
                 <th>Intitule du lot</th>
+                <th>Infrastructure</th>
+                <th>Région</th>
+                <th title="Sous Prefecture">S/P</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
                 <th>Montant estimatif en FCFA TTC</th>
 
                 <th>Action</th>
@@ -40,6 +42,21 @@
                   {{marche.objet || 'Non renseigné'}}
                 </td>
                 <td @dblclick="editeMarcheLot(marche.id)">
+                  {{LIBELLEInfas(marche.infrastructure_id) || 'Non renseigné'}}
+                </td>
+                 <td @dblclick="editeMarcheLot(marche.id)">
+                  {{afficherLibelleLocalisationGeographie(marche.localisation_geographie_id) || 'Non renseigné'}}
+                </td>
+                 <td @dblclick="editeMarcheLot(marche.id)">
+                  {{afficherLibelleLocalisationGeographie(marche.sous_prefecture_id) || 'Non renseigné'}}
+                </td>
+                <td @dblclick="editeMarcheLot(marche.id)">
+                  {{marche.latitude || 'Non renseigné'}}
+                </td>
+                <td @dblclick="editeMarcheLot(marche.id)">
+                  {{marche.longitude || 'Non renseigné'}}
+                </td>
+                <td @dblclick="editeMarcheLot(marche.id)" style="text-align: center;color:#000000;font-weight:bold;">
                   {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}
                 </td>
                 <td>
@@ -48,6 +65,11 @@
                 </td>
                </tr>
                <tr>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
                  <td></td>
                  <td style="font-weight:bold;">Total</td>
                  <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesLots(macheid)))}}</td>
@@ -423,8 +445,38 @@ name: "LotMarche",
    ...mapGetters("gestionMarche", ['entreprises']),
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
-    
-    
+    LIBELLEInfas(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objet = this.getterInfrastrucure.find(item => item.id==id )
+          if(objet){
+            return objet.libelle
+          }
+          return null
+        }
+      }
+    },
+    afficheIdInfrasture(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objet = this.marches.find(item => item.id==id )
+          if(objet){
+            return objet.infrastructure_id
+          }
+          return null
+        }
+      }
+    },
+     afficherLibelleLocalisationGeographie(){
+   return id =>{
+     if(id!=null && id!=""){
+       let response = this.localisations_geographiques.find(item => item.id==id)
+       if(response){
+         return response.libelle
+       }
+     }
+   }
+ },
     recupererNumeroDeLot(){
   return this.getLotMarche.length + 1
 },
@@ -597,7 +649,8 @@ SommeDesLots(){
             libelle_procedure:this.detail_marche.libelle_procedure,
             parent_id:this.detail_marche.id,
             numero_lot:this.recupererNumeroDeLot,
-            sib:this.AjouteMarcheSiBetHorsSib
+            sib:this.AjouteMarcheSiBetHorsSib,
+            infrastructure_id:this.afficheIdInfrasture(this.macheid)
       }
     //  console.log(this.formData)
       this.ajouterSousMarcheLot(this.formData)
@@ -668,7 +721,8 @@ SommeDesLots(){
         latitude:this.editor.latitude,
         longitude:this.editor.longitude,
         sib:this.editor.sib,
-        numero_lot:this.editor.numero_lot
+        numero_lot:this.editor.numero_lot,
+        infrastructure_id:this.afficheIdInfrasture(this.macheid)
       }
 
       

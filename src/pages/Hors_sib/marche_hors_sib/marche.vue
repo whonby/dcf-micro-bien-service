@@ -45,7 +45,7 @@ CodeExempte
                   <th>Objet marché</th>
                   <th>Type de marché</th>
                    <th>Procedure de passation</th>
-                  <th>Localisation géographie</th>
+                  <th>Région</th>
                    <th>Montant prevu</th>
                     <th title="mouvement du marché">Mouvement marché</th>
                      <th>Statut</th>

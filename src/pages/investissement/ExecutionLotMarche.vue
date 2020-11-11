@@ -67,7 +67,7 @@
                      <td>
                    {{marche.reference_marche || 'Non renseigné'}}</td>
                   
-                     <td style="text-align: center;">
+                     <td style="text-align: center;color:#000000;font-weight:bold;">
                    {{formatageSommeSansFCFA(parseFloat(afficheMontantReelMarche(marche.id))) || 'Non renseigné'}}</td>
                  
 
