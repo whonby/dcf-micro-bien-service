@@ -1,11 +1,25 @@
 <template>
 
     <div>
-       
+   
+<!--<div class="radio-group-control">
+  <label class="radio-group-label">
+    <input type="radio"  value="0" v-model="slection_carte">
+    <span class="radio-group-label__text">
+      <span class="radio-group-tick"></span> CARTE DES PREVISIONNELS INFRASTRUCTURES </span>
+  </label>
+  <label class="radio-group-label">
+    <input type="radio" value="1" v-model="slection_carte">
+    <span class="radio-group-label__text"><span class="radio-group-tick"></span>
+    CARTE DES EXECUTIONS INFRASTRUCTURES 
+    </span>
+  </label>
+</div>-->
+
+
         <div class="">
             
         <div class="row-fluid">
-          
        <div id="map10" class="sidebar leaflet-sidebar collapsed">
           <div class="sidebar-tabs">
             <ul role="tablist"> <!-- top aligned tabs -->
@@ -222,6 +236,7 @@ import ad1 from "leaflet-easyprint"
                 {iconUrl, shadowUrl}
             ))
             return {
+              slection_carte:0,
               objet_map:"",
               objet_leaflet:"",
               type_minichart:"bar",
@@ -357,7 +372,7 @@ import ad1 from "leaflet-easyprint"
             "uniteAdministratives",
             "getterBudgeCharge"
         ]),
-        ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise"]),
+        ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise","getActeEffetFinancierPersonnaliser45"]),
           regions(){
       return this.getterLocalisationGeoAll.filter(item=>item.structure_localisation_geographique.niveau==2);
     },
@@ -373,54 +388,6 @@ import ad1 from "leaflet-easyprint"
       }
     },
 
-removeMapChart(){
-let vm=this
-
-    if(vm.objet_map!="" && vm.objet_leaflet!=""){
-       let arrayBar=[]
-    let arrayColor=[]
-
-if(this.localisations_geographiques.length>0){
-      this.localisations_geographiques.forEach(function (value){
- if(value.structure_localisation_geographique_id==5){
-                    if(value.longitude!=null && value.latitude!=null){
-
-           let montantInfraParRegion=0
-    // #0000FF
-        vm.getInfrastructure(vm.infrastructure).forEach(function(val){
-        montantInfraParRegion=  vm.getMontantMarcheRegionInfrastructure(value.id,val.id)
-        if(val.code==1){
-          arrayColor.push("#6C0277")
-        }
-         if(val.code==2){
-          arrayColor.push("#F0C300")
-        }
-         if(val.code==3){
-          arrayColor.push("#E73E01")
-        }
-         if(val.code==4){
-          arrayColor.push("#22780F")
-        }
-          arrayBar.push(montantInfraParRegion)
-        })
-         
-   
-   
-    var myBarChart = vm.objet_leaflet.minichart(value.latlng, {data: arrayBar,type:"bar",colors:arrayColor});
- vm.objet_map.remove(myBarChart);
-                    }}
-                   
-
-
-      })
- return null
-    }
-      
-       return null
-    }
-   return null
-},
-   
 
 getMontantMarcheRegionInfrastructure(){
        return (region,infrastructure)=>{
@@ -435,6 +402,31 @@ getMontantMarcheRegionInfrastructure(){
             return total + parseFloat(currentValue.montant_marche) ;
           }, initeVal);
           return montant
+       }
+},
+getTotaleMontantMarcheParUnite(){
+   return (region,infrastructure)=>{
+     let vm=this;
+          let marche=this.objetMarchePasUniteOuRegion.filter(item=>{
+            if( item.localisation_geographie_id==region && item.infrastructure_id==infrastructure && item.attribue==2)
+           return item
+            })
+               let montant_reel_marche=0;
+            marche.forEach(function(value){
+                let objet_act=vm.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==value.id)
+                if(objet_act!=undefined){
+ montant_reel_marche=parseFloat(montant_reel_marche) +  parseFloat(objet_act.montant_act)
+                }else{
+montant_reel_marche =montant_reel_marche+ 0
+                }
+                
+            })
+
+               /*let initeVal = 0;
+          let montant=  marche.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);*/
+          return montant_reel_marche
        }
 },
     sousPrefecture(){
@@ -971,6 +963,9 @@ formatageSomme:formatageSomme,
                               // #0000FF
                      vm.getInfrastructure(vm.infrastructure).forEach(function(val){
                            montantInfraParRegion=  vm.getMontantMarcheRegionInfrastructure(value.id,val.id)
+                         console.log(".......getTotaleMontantMarcheParUnite....")
+                         console.log(vm.getTotaleMontantMarcheParUnite(value.id,val.id))
+                         console.log(".......getTotaleMontantMarcheParUnite.000000000000....")
                              if(val.code==1){ arrayColor.push("#6C0277")}
 
                              if(val.code==2){ arrayColor.push("#F0C300") }
@@ -1021,8 +1016,19 @@ direction: 'bottom',
                 }
         },
         watch: {
+          slection_carte:function(value){
+                 console.log(value)
+                 if(value==0){
+   this.deleteLeafleMiniCharts(this.objet_map)
+                this.integrationChartPasRegisonSurCarte()
+                 }else{
+                   this.deleteLeafleMiniCharts(this.objet_map)
+                //this.integrationChartPasRegisonSurCarte()
+                 }
+          },
           type_minichart: function (value) {
                 console.log(value);
+
                 this.deleteLeafleMiniCharts(this.objet_map)
                 this.integrationChartPasRegisonSurCarte()
             },
@@ -1054,7 +1060,8 @@ direction: 'bottom',
 console.log(L)
 console.log(ad)
 console.log(ad1)
-
+console.log(this.getActeEffetFinancierPersonnaliser45)
+//console.log()
 /**
  *  objet_map:"",
               objet_leaflet:"",
@@ -1504,5 +1511,157 @@ sid.easyPrint({
     box-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
    
     font-size: 9px !important;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+
+
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #F87DA9;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+
+
+.radio-group-control {
+  background: #f7f7f7;
+  border: 1px solid #c7c7c7;
+  border-radius: 3px;
+  font-size: 0;
+  text-align: center;
+  
+  -webkit-box-shadow: inset 3px 3px 0 2px #f0f0f0;
+  box-shadow: inset 3px 3px 0 2px #f0f0f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.radio-group-control * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.radio-group-control input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  font-size: 0;
+}
+
+.radio-group-control label .radio-group-label__text {
+  width: 50%;
+  display: inline-block;
+  font-size: 14px !important;
+  color: #333;
+  font-family: "HelveticaNeue-Light", helvetica, arial, sans-serif;
+  cursor: pointer;
+  margin-bottom: 0;
+  padding: 10px 0;
+  border-left: 1px solid #c7c7c7;
+}
+
+.radio-group-control label span.radio-group-tick {
+  position: relative;
+}
+
+.radio-group-control label.radio-group-label {
+display: inline;
+  position: relative;
+  color: #333;
+}
+
+.radio-group-control input[type="radio"]:checked + .radio-group-label__text {
+  background: #fff;
+  font-weight: 700;
+}
+
+.radio-group-control label:first-child .radio-group-label__text {
+  border-left: 0 !important;
+}
+
+.radio-group-control label span.radio-group-tick:before {
+  content: "";
+  position: absolute;
+  color: #c60d30;
+  left: -25px;
+  width: 20px;
+  height: 20px;
+  top: -2px;
+}
+
+.radio-group-control
+  input[type="radio"]:checked
+  + .radio-group-label__text
+  > span.radio-group-tick:before {
+  content: "✔";
+  position: absolute;
+  color: #c60d30;
+  left: -25px;
+  width: 20px;
+  height: 20px;
+  top: -2px;
+}
+
+
+@media screen and (max-width:767px)
+{
+  .radio-group-control label .radio-group-label__text
+  {
+    width:100%;
+    border-left:0px;
+    border-top:1px solid #c7c7c7;
+  }
+  .radio-group-control label:first-child .radio-group-label__text
+  {
+    border-top:0px
+  }
+  .radio-group-control label.radio-group-label
+  {
+    display:block;
+  }
 }
 </style>

@@ -2,9 +2,20 @@
     <div>
      
        <div class="container-fluid">
-
-         <div class="row-fluid gutters-sm">
-            <div class="span3 " v-for="marche_image in getterImageParMarche(macheid)" :key="marche_image.id">
+   
+    <div class="main-body">
+    
+          <!-- Breadcrumb -->
+          <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb" v-if="detail">
+              <li class="breadcrumb-item" v-if="detail">{{detail.objet}}</li>
+            
+            </ol>
+          </nav>
+          <!-- /Breadcrumb -->
+    
+          <div class="row-fluid gutters-sm">
+            <div class="span3 " v-for="marche_image in getterImageParMarche(detail.id)" :key="marche_image.id">
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
@@ -22,7 +33,7 @@
                       <h4>Nom de l'Agent : DCF</h4>
                       {{marche_image.latitude}} /  {{marche_image.longitude}}
                       <p class="text-secondary mb-1">Distance :
-                        {{distance(marche_image.latitude, marche_image.longitude,getMarche(marche_image.marche_id).latitude,getMarche(marche_image.marche_id).longitude, 'K')}}
+                        {{distance(marche_image.latitude, marche_image.longitude,detail.latitude,detail.longitude, 'K')}}
                       </p>
                     
                      
@@ -34,11 +45,11 @@
             
            
           </div>
-
-    
-</div>
-
+        </div>
     </div>
+        </div>
+
+  
 </template>
 
 <script>
@@ -57,11 +68,15 @@ export default {
       ],
    
        editLiquidation: {},
-search:""
+search:"",
+detail:""
+
         }
     },
     props:["macheid"],
-    created(){},
+    created(){
+this.detail=this.marches.find(item=>item.id==this.$route.params.id)
+    },
 
               computed: {
             ...mapGetters("bienService", ["getterImageMarche",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
@@ -99,6 +114,13 @@ let objJson = JSON.parse(objLinea);
 return objJson.name
 
 },
+getMarche(){
+return marche_id=>{
+  if(marche_id!=""){
+    return this.marches.find(item=>item.id==marche_id)
+  }
+}
+},
 AffichePhoto() {
       return fichier => {
         if (fichier != null && fichier != "") {
@@ -120,13 +142,6 @@ getterImageParMarche() {
         }
       };
     },
-    getMarche(){
-return marche_id=>{
-  if(marche_id!=""){
-    return this.marches.find(item=>item.id==marche_id)
-  }
-}
-}
       },
  
       methods:{ 
@@ -152,8 +167,7 @@ return marche_id=>{
       
      
     ]),
-
-     distance(lat1, lon1, lat2, lon2, unit) {
+  distance(lat1, lon1, lat2, lon2, unit) {
         if ((lat1 == lat2) && (lon1 == lon2)) {
             return 0;
         }
@@ -181,7 +195,6 @@ return marche_id=>{
 
         }
     }
-
       }
 }
 </script>
@@ -207,6 +220,7 @@ return marche_id=>{
   height: 50%;
   
 }
+
 
 
 

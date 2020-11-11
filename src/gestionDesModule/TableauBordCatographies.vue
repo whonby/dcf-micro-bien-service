@@ -47,39 +47,45 @@
                   </div>
 
                   
-                  <!--                  <table class="table table-bordered table-striped" v-if="objetUnite">-->
-                  <!--                    <tbody>-->
-                  <!--                    <tr>-->
-                  <!--                      <td>Montant de base</td>-->
-                  <!--                      <td>{{formatageSomme(objetUnite.budget)}}</td>-->
-                  <!--                    </tr>-->
-                  <!--                    <tr>-->
-                  <!--                      <td>Montant restant</td>-->
-                  <!--                      <td>{{formatageSomme(objetUnite.budgetReste)}}</td>-->
-                  <!--                    </tr>-->
-                  <!--                    <tr>-->
-                  <!--                      <td>Montant exécution</td>-->
-                  <!--                      <td>{{formatageSomme(objetUnite.budgetExecute)}}</td>-->
-                  <!--                    </tr>-->
-                  <!--                    <tr>-->
-                  <!--                      <td>Taux exécution</td>-->
-                  <!--                      <td>{{objetUnite.tauxBudget}}</td>-->
-                  <!--                    </tr>-->
-                  <!--                    </tbody>-->
-                  <!--                  </table>-->
+              
                 </div>
                 <div class="span12" v-if="objetUnite">
+
                      <div class="row-fluid">
-                         <div class="span12" v-for="l in imageMarcheSelectionner(objetUnite.id)" :key="l.id">
-                           <div class="widget-box">
-                              <div class="widget-title"> 
-                                {{l.libelle}}
-                                </div>
-                                  <img v-bind:src="afficheImageMarche(l.fichier)" style="width:100%;height:150px;">
-                             </div>
+             
 
 
-                        </div>
+    <div class="row-fluid gutters-sm">
+            <div class="span11" v-for="marche_image in imageMarcheSelectionner(objetUnite.id)" :key="marche_image.id">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <img class="center_image" :src="afficheImageMarche(marche_image.fichier)">
+                    <div class="mt-3">
+                      <h4>{{marche_image.libelle}}</h4>
+              <router-link class="btn btn-outline-primary" :to="{ name: 'DetailImageMarche', params: { id:marche_image.id }}" title="Detail Marche CF">
+                                         Consulter
+                                        </router-link>
+                      
+                    </div>
+                    
+                  </div>
+                  <div class="mt-3">
+                      <h4>Nom de l'Agent : DCF</h4>
+                      {{marche_image.latitude}} /  {{marche_image.longitude}}
+                      <p class="text-secondary mb-1">Distance :
+                        {{distance(marche_image.latitude, marche_image.longitude,objetUnite.latitude,objetUnite.longitude, 'K')}}
+                      </p>
+                    
+                     
+                    </div>
+                </div>
+              </div>
+              
+            </div>
+            
+           
+          </div>
                     </div>
                 </div>
               </div>
@@ -757,6 +763,8 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
             ville:value.objet,
             latlng:coordonne,
             budget:budget,
+            latitude:value.latitude,
+            longitude:value.longitude,
             budgetReste:montantRest,
             budgetExecute:montant_engagement_marche,
             tauxBudget:tauxExecution.toFixed(2),
@@ -1216,6 +1224,36 @@ this.objetUnite=objet
     },
     click: (e) => console.log("clusterclick", e),
     ready: (e) => console.log('ready', e),
+
+
+    distance(lat1, lon1, lat2, lon2, unit) {
+        if ((lat1 == lat2) && (lon1 == lon2)) {
+            return 0;
+        }
+        else {
+            let radlat1 = Math.PI * lat1/180;
+            let radlat2 = Math.PI * lat2/180;
+            let theta = lon1-lon2;
+            let radtheta = Math.PI * theta/180;
+            let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            if (dist > 1) {
+                dist = 1;
+            }
+            dist = Math.acos(dist);
+            dist = dist * 180/Math.PI;
+            dist = dist * 60 * 1.1515;
+            if (unit=="K") { dist = dist * 1.609344 }
+            if (unit=="N") { dist = dist * 0.8684 }
+
+            if (parseFloat(dist.toFixed(2))>=1){
+                return dist.toFixed(2) +" Km";
+            }else{
+              let metre=  dist * 1000;
+              return metre.toFixed(2) +" Mètre";
+            }
+
+        }
+    }
   },
   mounted() {
     setTimeout(() => {
@@ -1622,6 +1660,68 @@ console.log(ad)
   overflow-y: scroll !important;
 }
 
+
+
+
+
+
+
+.center_image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 250px;
+}
+
+
+.main-body {
+    padding: 15px;
+}
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
+
+.gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+}
+
+.gutters-sm>.col, .gutters-sm>[class*=col-] {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+.mb-3, .my-3 {
+    margin-bottom: 1rem!important;
+}
+
+.bg-gray-300 {
+    background-color: #e2e8f0;
+}
+.h-100 {
+    height: 100%!important;
+}
+.shadow-none {
+    box-shadow: none!important;
+}
 
 @import "../../node_modules/leaflet/dist/leaflet.css";
 
