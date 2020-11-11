@@ -31,7 +31,7 @@ decision_cf
                                 <!-- <th style="font-size:12px;font-weight:bold;">Procédure de passation </th> -->
                                 <th style="font-size:12px;font-weight:bold;">Unite administrative</th>
                                 <th style="font-size:12px;font-weight:bold;">Activité</th>
-                    <th style="font-size:12px;font-weight:bold;">Imputation</th>
+                    <!-- <th style="font-size:12px;font-weight:bold;">Imputation</th> -->
                        <th style="font-size:12px;font-weight:bold;">Montant de base</th>
                    
                             </tr>
@@ -40,19 +40,19 @@ decision_cf
                             <tr>
                                
                                 <td class="taskStatus" style="font-size:14px;font-weight:bold;">{{afficheNumeroMarche(detail_marche.marche_id)}}</td>
-                                 <td class="taskDesc" style="font-size:14px;font-weight:bold;">{{detail_marche.marche_id}}</td>
+                                 <td class="taskDesc" style="font-size:14px;font-weight:bold;">{{ObjetDumarche(detail_marche.marche_id)}}</td>
                                
                                 <td class="taskOptions" style="font-size:14px;font-weight:bold;">
-                                    {{detail_marche.marche_id}}
+                                    {{LibelleTypeMarche(typeIdMarche(detail_marche.marche_id))}}
                                 </td>
                                
                                 <td class="taskOptions" style="font-size:14px;font-weight:bold;">
-                                    {{detail_marche.marche_id}}
+                                    {{LibelleUniteAdministrative(idUniteAdministrative(detail_marche.marche_id))}}
                                 </td>
-                                <td @dblclick="afficherModalModifierTypePrestation(index)" style="font-size:14px;font-weight:bold;">
-                   {{detail_marche.marche_id || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)" style="font-size:14px;font-weight:bold;">
-                   {{detail_marche.imputation || 'Non renseigné'}}</td>
+                                <td  style="font-size:14px;font-weight:bold;">
+                   {{LibelleActivite(idActivite(detail_marche.marche_id)) || 'Non renseigné'}}</td>
+                    <!-- <td  style="font-size:14px;font-weight:bold;"> -->
+                   <!-- {{detail_marche.imputation || 'Non renseigné'}}</td> -->
                     <td class="taskOptions" style="font-size:14px;font-weight:bold;color:red;">
                                     {{formatageSomme(parseFloat(afficheMontantReelMarche(detail_marche.marche_id)))}}
                                 </td>
@@ -71,22 +71,68 @@ decision_cf
                     <ul class="nav nav-tabs">
                       
                        <li>
-                        <a data-toggle="tab" href="#tab2">DETAIL EXECUTION</a>
-                      </li>
-                        <li>
-                        <a data-toggle="tab" href="#tab22">PARAMETRAGE ECHEANCIER</a>
-                      </li>
-                      <li>
-                        <a data-toggle="tab" href="#tab03">IMAGES DES MARCHES</a>
+                        <a data-toggle="tab" href="#tab2">DETAIL FACTURE</a>
                       </li>
                       
-                     
                     </ul>
                   </div>
                          <div class="widget-content tab-content">
+                           <div  class="tab-pane active ">
+                               
+                             <table class="table table-bordered table-striped">
+              
+                                    <thead>
+                                    <tr>
+
+                                         
+                     <!-- <th>type_facture</th> -->
+                    <th>numero_facture</th>
+                    <th>objet_facture</th>
+                    
+                     <th>Ua</th>
+                    
+                    <th>prix_propose_ht</th>
+                    <th>Tva</th>
+                    
+                    <th>prix_propose_ttc</th>
+        
+                            <th>Action</th>  
+                                
+                                
+                               
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                            
+                 <tr
+                    class="odd gradeX"
+                    v-for="factu in afficheFactureTableau(detail_marche.id)"
+                    :key="factu.id"
+                  >
+                   
+                  
+                    <!-- <td>{{factu.objectTypefacture.libelle || 'Non renseigné'}}</td> -->
+                    <td>{{factu.numero_facture || 'Non renseigné'}}</td>
+                    <td>{{factu.objet_facture || 'Non renseigné'}}</td>
+                    <td>{{factu.objetUA.libelle || 'Non renseigné'}}</td>
+                       <td>{{formatageSomme(parseFloat(factu.prix_propose_ht))|| 0}}</td>
+                  
+                        <td>{{formatageSomme(parseFloat(factu.tva)) || 'Non renseigné'}}</td>
+                 
+                     
+                     <td>{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 'Non renseigné'}}</td>
+ <td>
+      <router-link :to="{ name: 'ajouterServiceRealiteHorsSib', params: { id: factu.id }}"
+                class="btn btn-success " title=" Ajouter Realité Service Fait">
+                  <span class="">Ajouter </span>
+                   </router-link>
+ </td>
+                  </tr>
+                                    </tbody>
+                                
+                                </table>
+                                   </div> 
                            
-                            <div id="tab2" class="tab-pane ">
-                            </div>
                          </div>
                 </div>
               </table>
@@ -99,21 +145,50 @@ decision_cf
                     <ul class="nav nav-tabs">
                       
                        <li>
-                        <a data-toggle="tab" href="#tab2">DETAIL EXECUTION</a>
+                        <a data-toggle="tab" href="#RealiteService">Réalité service fait</a>
                       </li>
                         <li>
-                        <a data-toggle="tab" href="#tab22">PARAMETRAGE ECHEANCIER</a>
+                        <a data-toggle="tab" href="#opdefinitif">Ordre Paiement Définitif</a>
                       </li>
-                      <li>
+                      <!-- <li>
                         <a data-toggle="tab" href="#tab03">IMAGES DES MARCHES</a>
-                      </li>
+                      </li> -->
                       
                      
                     </ul>
                   </div>
                          <div class="widget-content tab-content">
                            
-                            <div id="tab2" class="tab-pane ">
+                            <div id="RealiteService" class="tab-pane active">
+                                <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#ServiceRealiteFaitBS">Service Bénéficiaire</a></li>
+                                  <li class=""><a data-toggle="tab" href="#ServiceRealiteFaitCF">Controlleur Financier</a></li>
+                                   
+                                                  
+                            </ul>
+                        </div>
+                         <div class="widget-content tab-content">
+                           <div id="ServiceRealiteFaitBS" class="tab-pane active "><realiteServiceFaitServiceBHs :macheid="detail_marche.marche_id"></realiteServiceFaitServiceBHs></div>
+                           <div id="ServiceRealiteFaitCF" class="tab-pane"><realiteServiceFaitCf :macheid="detail_marche.marche_id"></realiteServiceFaitCf></div>
+                     
+                         </div>
+                            </div>
+
+                             <div id="opdefinitif" class="tab-pane ">
+                                <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#opdefinitifBS">Service Bénéficiaire</a></li>
+                                  <li class=""><a data-toggle="tab" href="#opdefinitifCF">Controlleur Financier</a></li>
+                                   
+                                                  
+                            </ul>
+                        </div>
+                         <div class="widget-content tab-content">
+                           <div id="opdefinitifBS" class="tab-pane active"><listeOpDefinitiveBsDirect :macheid="detail_marche.marche_id"></listeOpDefinitiveBsDirect></div>
+                           <div id="opdefinitifCF" class="tab-pane"><listeOpDefinitiveCfDirect :macheid="detail_marche.marche_id"></listeOpDefinitiveCfDirect></div>
+                     
+                         </div>
                             </div>
                          </div>
                 </div>
@@ -121,6 +196,12 @@ decision_cf
             </div>
           </div>
         </div>
+        <div align="right">
+
+                                 <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Retour</button>
+
+
+                            </div>
 </div>
   	</div>
       
@@ -164,16 +245,16 @@ decision_cf
 // import facture from "../dossierFacture/factureHs";
 // import decompte from "../dossierDecompte/decompteHs";
    
-//     import listeOpDefinitiveBsDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveBsDirect.vue";
-//     import listeOpDefinitiveCfDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveCfDirect.vue";
+    import listeOpDefinitiveBsDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveBsDirect.vue";
+    import listeOpDefinitiveCfDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveCfDirect.vue";
 //     import listeOpProvisoireBs from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpProvisoireBs";
 //      import listeOpProvisoireCf from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpProvisoireCf";
 //       import listeOpAnnulation from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpAnnulation";
 //     import listeOpDefinitiveBsprov from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpDefinitiveBsprov";    
 //         import listeOpDefinitivecfprov from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpDefinitivecfprov";
   
-//       import realiteServiceFaitServiceBHs from "../dossierRealiteServiceFait/realiteServiceFaitServiceBHs";
-//       import realiteServiceFaitCf from "../dossierRealiteServiceFait/realiteServiceFaitCfHs";
+      import realiteServiceFaitServiceBHs from "../dossierRealiteServiceFait/realiteServiceFaitServiceBHs";
+      import realiteServiceFaitCf from "../dossierRealiteServiceFait/realiteServiceFaitCfHs";
 // import realiteServiceFaitServiceOpProvisoireBS from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireBS";
 // import realiteServiceFaitServiceOpProvisoireCf from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireCf";
 
@@ -195,13 +276,13 @@ decision_cf
 //             listeOpProvisoireBs,
          
             
-//             realiteServiceFaitServiceBHs,
-//             realiteServiceFaitCf,
+            realiteServiceFaitServiceBHs,
+            realiteServiceFaitCf,
             
            
 //             financement,
-//             listeOpDefinitiveBsDirect,
-//             listeOpDefinitiveCfDirect,
+            listeOpDefinitiveBsDirect,
+            listeOpDefinitiveCfDirect,
            
 // imageMarche
 
@@ -322,6 +403,30 @@ LibelleTypeMarche() {
         }
       };
     },
+    typeIdMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_marche_id;
+      }
+      return 0
+        }
+      };
+    },
+    idUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.unite_administrative_id;
+      }
+      return 0
+        }
+      };
+    },
 LibelleUniteAdministrative() {
       return id => {
         if (id != null && id != "") {
@@ -341,6 +446,18 @@ LibelleUniteAdministrative() {
 
       if (qtereel) {
         return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    idActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.	activite_id;
       }
       return 0
         }
@@ -2075,7 +2192,7 @@ afficheFactureTableau() {
       return id => {
         if (id != null && id != "") {
           return this.getFacturePersonnaliser.filter(
-            element => element.marche_id == this.detail_marche.id
+            element => element.id == id
           );
         }
       };
@@ -2852,6 +2969,19 @@ afficheMandatMarcheTableau() {
         }
       };
     },
+    ObjetDumarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objet;
+      }
+      return 0
+        }
+      };
+    },
+
 uaMandat() {
       return id => {
         if (id != null && id != "") {
@@ -3115,7 +3245,9 @@ recupererActivite(){
 
 
 
-
+afficherModalListeExecution(){
+                window.history.back();
+            },
           
       formatageSomme:formatageSomme,
 

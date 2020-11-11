@@ -74,7 +74,7 @@ CodeExempte
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(marche.id)">
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{afficherLibelleLocalisationGeographie(activites.localisation_geographie_id) || 'Non renseigné'}}</td>
+                      {{afficherLibelleLocalisationGeographie(afficheLocalisation(activites.id)) || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{formatageSomme(parseFloat(activites.montant_marche)) || 'Non renseigné'}}</td>
                    
@@ -135,12 +135,12 @@ CodeExempte
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link>
                    </td>
-                   <td>
+                   <!-- <td>
                      <router-link :to="{ name: 'detailExecution', params: { id: activites.id }}"
                 class="btn btn-default " title="historique execution Marche">
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
-                   </td>
+                   </td> -->
            <td>
           
                      <button @click.prevent="supprimerMarche(activites.id)"  class="btn btn-danger ">
@@ -373,7 +373,18 @@ export default {
 //    }
 // )
 //    },
- 
+ afficheLocalisation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.parent_id == id);
+
+      if (qtereel) {
+        return qtereel.localisation_geographie_id;
+      }
+      return 0
+        }
+      };
+    },
 InfastructureLibelleNiveau1() {
 
       

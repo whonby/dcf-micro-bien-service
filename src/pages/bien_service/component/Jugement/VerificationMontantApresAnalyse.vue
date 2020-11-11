@@ -27,7 +27,7 @@
           :key="effetFinancier.id">
 
         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-          {{afficherNumeroDossierCandidat1(effetFinancier.dossier_candidat_id) || 'Non renseigné'}}</td>
+          {{afficheNomEntreprise(afficherNumeroDossierCandidat1(effetFinancier.dossier_candidat_id)) || 'Non renseigné'}}</td>
           <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)" style="text-align:center;font-size:14px">
           {{formatageSommeSansFCFA(parseFloat(effetFinancier.hist_montant_ttc)) || 'Non renseigné'}}</td>
            <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)" style="text-align:center;font-size:14px">
@@ -188,9 +188,20 @@ afficherNumeroDossierCandidat1() {
           const qtereel = this.getterDossierCandidats.find(qtreel => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.nom_cand;
+            return qtereel.entreprise_id;
           }
           return null
+        }
+      };
+    },
+    afficheNomEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+          if (qtereel) {
+            return qtereel.raison_sociale;
+          }
+          return 0
         }
       };
     },
@@ -244,7 +255,7 @@ var nouvelObjet = {
         keyboard: false
       });
         if ( this.analyseByLot(index).length>0){
-          this.nom_candidata=this.afficherNumeroDossierCandidat1(this.analyseByLot(index)[0].dossier_candidat_id),
+          this.nom_candidata=this.afficheNomEntreprise(this.afficherNumeroDossierCandidat1(this.analyseByLot(index)[0].dossier_candidat_id)),
               this.dossier_candidat_id=this.analyseByLot(index)[0].dossier_candidat_id
         }
     this.marche_lot=index

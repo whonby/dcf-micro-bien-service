@@ -125,7 +125,7 @@
                      <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
                      
                     <!-- <td >{{detail_marche.imputation  || 'Non renseigné'}}</td> -->
-                     <td >{{formatageSomme(realiteService.total_general) || 'Non renseigné'}}</td>
+                     <td >{{formatageSomme(parseFloat(realiteService.total_general)) || 'Non renseigné'}}</td>
                      
                        <td >{{(formaterDate(realiteService.date_decision_emetteur)) || 'Non renseigné'}}</td>
                     

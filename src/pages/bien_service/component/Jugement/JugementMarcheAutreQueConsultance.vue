@@ -313,6 +313,10 @@ export default {
       "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
       "getterMandate","getterCojos","getterAnalyseDossiers","typeAnalyses", "analyseDossiers","text_juridiques"
     ]),
+    
+    ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
+    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
+      'types_financements']) ,
    getSoumissionaireByLot(){
       return marche_id=>{
         let seft=this;
@@ -497,14 +501,24 @@ export default {
           const qtereel = this.getterDossierCandidats.find(qtreel => qtreel.id == id);
 
           if (qtereel) {
-            return qtereel.numero_dossier.concat( ' =>  ',    qtereel.nom_cand);
+            return qtereel.numero_dossier.concat( ' =>  ',    this.afficheNomEntreprise(qtereel.entreprise_id));
           }
           return null
         }
       };
     },
 
-
+afficheNomEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+          if (qtereel) {
+            return qtereel.raison_sociale;
+          }
+          return 0
+        }
+      };
+    },
   },
 
   methods:{

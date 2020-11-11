@@ -26,65 +26,20 @@
        </li>
        
        
-        <li :class="{active: active_el == 2 }" @click.prevent="navigateToActeurDepense">
-          <a title="TABLEAU DE BORD" href="#">
-            <i class="icon-dashboard"></i>
-            <span>TABLEAU DE BORD</span>
-          </a>
-        </li>
-        <!-- <li v-if="admin() || dcf()" :class="{active: active_el == 17 }" @click.prevent="navigateToParametreGeneraux">
-          <a title="PARAMETRES GENERAUX" href="#">
-            <i class="icon-cogs"></i>
-            <span>PARAMETRES GENERAUX</span>
-          </a>
-        </li> -->
-        <!-- <li @click.prevent="navigateToUniteAdministrative" :class="{active: active_el == 1 }">
-          <a  title="" href="#">
-            <i class="icon-home"></i>
-            <span>UNITE ADMINISTRATIVE</span>
-          </a>
-        </li> -->
-         <!-- <li @click.prevent="navigateToTransfert" :class="{active: active_el ==6}">
-          <a title="TRANSFERT" href="#">
-            <i class="icon-money"></i>
-            <span>TRANSFERT</span>
-            <span class="label label-important"></span>
-          </a>
-        </li>
-         <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==7}">
-          <a title="GESTION MARCHE" href="#">
-            <i class="icon-shopping-cart"></i>
-            <span>GESTION MARCHE</span>
-            <span class="label label-important"></span>
-          </a>
-        </li> -->
-        <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
+       
+        <li  @click.prevent="navigateToActeurDepense" >
           <a href="#">
             <i class="icon-group"></i>
-            <span>PERSONNEL</span>
+            <span>SUIVI ENTREPRISE</span>
           </a>
         </li>
-        <!-- <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
+         <li  @click.prevent="navigateToSuiviMarcheProjet" >
           <a href="#">
-            <i class="icon-truck"></i>
-            <span>BIENS ET SERVICES</span>
-          </a>
-
-       <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
-          <a title="COMPTABILITE DES MATIERE" href="#">
-            <i class=" icon-camera"></i>
-            <span>COMPTA DES MATIERES</span>
+            <i class="icon-group"></i>
+            <span>SUIVI MARCHE UA</span>
           </a>
         </li>
-
-
-        <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==4}">
-          <a title="INVESTISSEMENT" href="#">
-            <i class="icon-truck"></i>
-            <span>INVESTISSEMENT</span>
-           
-          </a>
-        </li> -->
+        
         <li >
            <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
          
@@ -96,22 +51,7 @@
         
        
      
-          <!-- <li @click.prevent="navigateToCatographieBudgetaire" :class="{active: active_el ==8}">
-          <a title="CARTOGRAPHIE" href="#">
-            <i class=" icon-globe"></i>
-            <span>CARTOGRAPHIE</span>
-            <span class="label label-important"></span>
-          </a>
-        </li> -->
-        <!-- <li v-if="cf() || dcf()" @click.prevent="navigateGestionEquipe" :class="{active: active_el ==21}">
-          <a href="#">
-            <i class="icon icon-user"></i> <span>MON EQUIPE</span>
-          </a> -->
-          <!-- <li v-if="admin() || dcf()" @click.prevent="navigateGestionUser" :class="{active: active_el ==21}">
-              <a href="#">
-              <i class="icon icon-key"></i> <span>UTILISATEURS</span>
-          </a>
-          </li>  -->
+        
           <li @click.prevent="logoutUser()" >
           <a title="DECONNEXION" href="#">
             <i class="icon icon-off"></i>
@@ -210,12 +150,17 @@ navigateToGestionMarche(){
         })
       },
 
-
+navigateToSuiviMarcheProjet(){
+        this.activate()
+        this.$router.push({
+          name: 'suiviMarcheDesProjets'
+        })
+      },
 
       navigateToActeurDepense(){
-        this.activate(2)
+        this.activate()
         this.$router.push({
-          name: 'TableauBordActeurDepense'
+          name: 'suiviDesEntreprise'
         })
       },
 

@@ -32,7 +32,7 @@ Modification dossier candidat
           <td @click="afficheBouttonTechFin(index)">
             {{afficheCandidat(appelOffre.type_candidat_id) || 'Non renseigné'}}</td>
           <td @click="afficheBouttonTechFin(index)">
-            {{appelOffre.nom_cand || 'Non renseigné'}}</td>
+            {{afficheNomEntreprise(appelOffre.entreprise_id) || 'Non renseigné'}}</td>
           <td @click="afficheBouttonTechFin(index)">
             {{appelOffre.telephone_cand || 'Non renseigné'}}</td>
           <td @click="afficheBouttonTechFin(index)">

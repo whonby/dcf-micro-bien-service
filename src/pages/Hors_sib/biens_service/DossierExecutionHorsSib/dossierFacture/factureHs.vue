@@ -1467,13 +1467,13 @@
                       
                      
                      <td v-if="factu.typeordrepaiement == 2">
-                       <router-link :to="{ name: 'ajouterOpProvisoire', params: { id: factu.id }}"
+                       <router-link :to="{ name: 'detailExecutionOpInDirect', params: { id: factu.id }}"
                 class="btn btn-default " title="Ajouter Op Provisoire">
                   <span class=""><i class="   icon-legal"></i></span>
                    </router-link> 
                       </td>
                       <td v-else>
-                        <router-link :to="{ name: 'ajouterServiceRealiteHorsSib', params: { id: factu.id }}"
+                        <router-link :to="{ name: 'detailExecutionOpDirect', params: { id: factu.id }}"
                 class="btn btn-default " title="Realité Service Fait">
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
