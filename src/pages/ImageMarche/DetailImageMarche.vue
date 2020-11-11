@@ -19,7 +19,9 @@
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
+                    <a href="#image1">
                     <img class="center_image" :src="AffichePhoto(detailMarche.fichier)">
+                    </a>
                     <div class="mt-3">
                        <h4>{{detailMarche.libelle}}</h4>
                         </div>
@@ -106,6 +108,11 @@
           </div>
         </div>
     </div>
+
+    <a href="#" class="JesterBox">
+  <div id="image1"><img :src="AffichePhoto(detailMarche.fichier)"></div>
+
+    </a>
         </div>
 
   
@@ -424,5 +431,53 @@ body{
 }
 .shadow-none {
     box-shadow: none!important;
+}
+
+
+.JesterBox div {
+  visibility: hidden;
+  position: fixed;
+  top: 5%;
+  right: 5%;
+  bottom: 5%;
+  left: 5%;
+  z-index: 75;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.JesterBox div:before {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 74;
+  background-color: rgba(0, 0, 0, 0);
+  transition: all 0.5s ease-out;
+}
+
+.JesterBox div img {
+  position: relative;
+  z-index: 77;
+  max-width: 100%;
+  max-height: 100%;
+  margin-left: -9999px;
+  opacity: 0;
+  transition-property: all, opacity;
+  transition-duration: 0.5s, 0.2s;
+  transition-timing-function: ease-in-out, ease-out;
+}
+
+.JesterBox div:target { visibility: visible; }
+
+.JesterBox div:target:before { background-color: rgba(0, 0, 0, 0.7); }
+
+.JesterBox div:target img {
+  margin-left: 0px;
+  opacity: 1;
 }
 </style>

@@ -85,11 +85,17 @@ import listeDesMarcheSuspenduBS from '../../pages/bien_service/listeDesMarcheTab
 import listeDesMarcheTermineBS from '../../pages/bien_service/listeDesMarcheTableauBord/listeDesMarcheTermineBS.vue';
 import imageMarche from "../../pages/bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche.vue"
 import DetailImageMarche from "../../pages/ImageMarche/DetailImageMarche"
+import ListeImageMarche from "../../pages/ImageMarche/ListeImageMarche"
 const BienServiceRoutes = [
     {
         path:"/detail_image_marche/:id",
         name:"DetailImageMarche",
         component:DetailImageMarche
+    },
+    {
+        path:"/liste_image_marche/:id",
+        name:"ListeImageMarche",
+        component:ListeImageMarche
     },
     {
         path:"/image-marche",

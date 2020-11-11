@@ -95,7 +95,11 @@
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
 
-          
+          <router-link :to="{ name: 'ListeImageMarche', params: { id: marche.id }}"
+                class="btn btn-default " title="Liste Image">
+                  <span class=""><i class="icon-folder-open"></i></span>
+                   </router-link> 
+
 
               <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
