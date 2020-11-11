@@ -255,6 +255,7 @@ decision_cf
                       </div>
 
                        <div id="tab03" class="tab-pane ">
+                      
                          <imageMarche :macheid="detail_marche.id"></imageMarche>
                       </div>
       </div>
@@ -319,9 +320,9 @@ import decompte from "../dossierDecompte/decompteHs";
 //       import realiteServiceFaitCf from "../dossierRealiteServiceFait/realiteServiceFaitCfHs";
 // import realiteServiceFaitServiceOpProvisoireBS from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireBS";
 // import realiteServiceFaitServiceOpProvisoireCf from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireCf";
-       
+       //bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche
                   import financement from "../dossierFinancement/financementHs";
-                  import imageMarche from "../dossierImageMarche/imageMarche";
+                  import imageMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche";
                 import tableauBordExecution from "../tableauBordExecution/tableauBordExecution";
   import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
   export default {

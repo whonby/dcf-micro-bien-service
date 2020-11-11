@@ -2,7 +2,7 @@
 
     <div>
    
-<div class="radio-group-control">
+<!--<div class="radio-group-control">
   <label class="radio-group-label">
     <input type="radio"  value="0" v-model="slection_carte">
     <span class="radio-group-label__text">
@@ -14,7 +14,7 @@
     CARTE DES EXECUTIONS INFRASTRUCTURES 
     </span>
   </label>
-</div>
+</div>-->
 
 
         <div class="">
