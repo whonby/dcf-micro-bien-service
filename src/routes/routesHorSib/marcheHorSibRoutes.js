@@ -29,7 +29,14 @@ import AjouterOpProvDefinitif from '../../pages/Hors_sib/biens_service/DossierEx
 import AjouterServiceRealiteOpProvisoire from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierRealiteServiceFait/AjouterServiceRealiteOpProvisoire';
 import detailExecutionOpDirect from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierPrincipal/detailExecutionOpDirect.vue';
 import detailExecutionOpInDirect from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierPrincipal/detailExecutionOpInDirect.vue';
+import detailMarcheParEntrepriseHors from '../../pages/Hors_sib/marcheParEntreprise/detailMarcheParEntreprise.vue';
+
 const marcheHorSibRoutes =[
+    {
+        path: '/detail-Marche-Par-Entreprise/:id',
+        name: "detailMarcheParEntrepriseHors",
+        component: detailMarcheParEntrepriseHors
+    },
     {
         path: "/detailExecutionOpInDirect/:id",
         name: "detailExecutionOpInDirect",

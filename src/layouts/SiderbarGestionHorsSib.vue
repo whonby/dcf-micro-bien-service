@@ -99,6 +99,12 @@
            
           </a>
         </li>
+         <!-- <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
+          <a title="COMPTABILITE DES MATIERE" href="#">
+            <i class=" icon-camera"></i>
+            <span>COMPTA DES MATIERES</span>
+          </a>
+        </li> -->
          <li @click.prevent="navigateRetourAuMenu" >
           <a title="Carte des infrastructure pas regison" href="#">
             <i class=" icon-globe"></i>

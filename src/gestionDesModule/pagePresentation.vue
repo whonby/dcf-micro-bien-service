@@ -69,7 +69,7 @@
                 </li>
   <li class="bg_lg span3" > 
      <router-link :to="{ name: 'TableauDeBordG', params: {id:2}}" tag="a"  style="color:black;">
-      <h4>UNITES </h4> <i class="icon-home"></i> <h4> D'ADMINISTRATIVES</h4>      </router-link> </li>
+      <h4>UNITES </h4> <i class="icon-home"></i> <h4> ADMINISTRATIVES</h4>      </router-link> </li>
        <li class="bg_lg span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:3}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4> SIB</h4></router-link> </li>
       <!-- <li class="bg_lg span3" > 
      <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;">

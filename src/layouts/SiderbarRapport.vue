@@ -33,6 +33,12 @@
             <span>SUIVI ENTREPRISE</span>
           </a>
         </li>
+         <li  @click.prevent="navigateToSuiviMarcheProjet" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span>SUIVI MARCHE UA</span>
+          </a>
+        </li>
         
         <li >
            <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
@@ -144,7 +150,12 @@ navigateToGestionMarche(){
         })
       },
 
-
+navigateToSuiviMarcheProjet(){
+        this.activate()
+        this.$router.push({
+          name: 'suiviMarcheDesProjets'
+        })
+      },
 
       navigateToActeurDepense(){
         this.activate()

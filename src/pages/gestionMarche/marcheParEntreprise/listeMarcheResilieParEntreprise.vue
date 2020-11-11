@@ -37,7 +37,7 @@ reference_marche
                    <td>{{afficheLibelleTypeMarche(afficheIdTypeMarche(entrep.marche_id)) || 'Non renseigné'}}</td>
                    <td>{{afficheNumeroMarche(entrep.marche_id) || 'Non renseigné'}}</td>
                    <td>{{afficheObjetMarche(entrep.marche_id) || 'Non renseigné'}}</td>
-                   <td style="color:red;font-size:14px;text-align:center">{{formatageSomme(afficheMontantReel(entrep.marche_id)) || 'Non renseigné'}}</td>
+                   <td style="color:red;font-size:14px;text-align:center">{{formatageSomme(parseFloat(afficheMontantReel(entrep.marche_id))) || 'Non renseigné'}}</td>
                           
                          
                    </tr>
@@ -47,7 +47,7 @@ reference_marche
                      <td></td>
                      <td></td>
                      <td style="color:red;font-size:14px;text-align:center">MONTANT TOTAL</td>
-                     <td style="color:red;font-size:14px;text-align:center">{{formatageSomme(montantToutMarcheResilieParEntrep(idEntreprise))}}</td>
+                     <td style="color:red;font-size:14px;text-align:center">{{formatageSomme(parseFloat(montantToutMarcheResilieParEntrep(idEntreprise)))}}</td>
                    </tr>
                 </tbody>
               </table>
@@ -109,7 +109,7 @@ props:["idEntreprise"],
                 return id => {
                     if (id != "") {
                       // console.log("Marche leste acte effect finnancier")
-                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort && idmarche.entreprise_id != null && this.afficheEtatMarche(idmarche.marche_id)== 3)
+                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort && idmarche.entreprise_id != null && this.afficheEtatMarche(idmarche.marche_id)== 3 && this.afficheMarcheGestionSib(idmarche.marche_id)== 0)
                     }
                 }
             },
@@ -117,7 +117,7 @@ props:["idEntreprise"],
                 return id => {
                     if (id != "") {
                       // console.log("Marche leste acte effect finnancier")
-                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort && idmarche.entreprise_id != null && this.afficheEtatMarche(idmarche.marche_id)== 3).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+                        return this.acteEffetFinanciers.filter(idmarche => idmarche.entreprise_id == id && this.afficheAnneeDuMarche(idmarche.marche_id)== this.anneeAmort && idmarche.entreprise_id != null && this.afficheEtatMarche(idmarche.marche_id)== 3 && this.afficheMarcheGestionSib(idmarche.marche_id)== 0).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
                     }
                 }
             },
@@ -137,6 +137,18 @@ props:["idEntreprise"],
 
       if (qtereel) {
         return qtereel.exo_id;
+      }
+      return 0
+        }
+      };
+    },
+    afficheMarcheGestionSib() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.sib;
       }
       return 0
         }

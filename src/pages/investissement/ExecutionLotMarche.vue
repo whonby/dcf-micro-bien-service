@@ -7,10 +7,12 @@
       <div class="row-fluid">
         <div class="span12">
           <template v-if="affichertypeMarcheEx(detail_marche.type_marche_id)==3">
-             <afficheMarcheGeneral ></afficheMarcheGeneral> 
+             <afficheMarcheGeneral v-if="afficherStatusSib(detail_marche.id)==0"></afficheMarcheGeneral> 
+             <afficheMarcheGeneralHorsSib v-if="afficherStatusSib(detail_marche.id)==1"></afficheMarcheGeneralHorsSib> 
           </template>
           <template v-if="affichertypeMarcheEx(detail_marche.type_marche_id)==1 ||affichertypeMarcheEx(detail_marche.type_marche_id)==4">
-            <AfficheMarcheBienEtFourniture ></AfficheMarcheBienEtFourniture>
+            <AfficheMarcheBienEtFourniture v-if="afficherStatusSib(detail_marche.id)==0" ></AfficheMarcheBienEtFourniture>
+            <AfficheMarcheBienEtFournitureHorsSib v-if="afficherStatusSib(detail_marche.id)==1"></AfficheMarcheBienEtFournitureHorsSib>
           </template>
          
           
@@ -28,7 +30,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                  <tr>
-                     
+                     <th>N°Lot</th>
                      <th>Objet marché</th>
                      <th>UA</th>
                     <th>Type marché</th>
@@ -38,7 +40,7 @@
                     
                     <th>Reference marché</th>
                    
-                    <th>Montant Réel</th>
+                    <th>Montant Réel (FCFA)</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -46,6 +48,8 @@
                   <tr class="odd gradeX" v-for="marche in 
                   listeDesLotExecution(detail_marche.id)"
                  :key="marche.id">
+                  <td>
+                   {{marche.numero_lot || 'Non renseigné'}}</td>
                  <td>
                    {{marche.objet || 'Non renseigné'}}</td>
                  <td>
@@ -64,7 +68,7 @@
                    {{marche.reference_marche || 'Non renseigné'}}</td>
                   
                      <td style="text-align: center;">
-                   {{formatageSomme(parseFloat(afficheMontantReelMarche(marche.id))) || 'Non renseigné'}}</td>
+                   {{formatageSommeSansFCFA(parseFloat(afficheMontantReelMarche(marche.id))) || 'Non renseigné'}}</td>
                  
 
 
@@ -101,6 +105,19 @@
                      
 
                        </tr>
+                       <tr>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td style="font-weight:bold;">Total</td>
+                         <td style="text-align: center;color:red;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(afficherSommeMarcheExecution(detail_marche.id)))}}</td>
+                         <td></td>
+
+                       </tr>
                 </tbody>
               </table>
               
@@ -121,12 +138,16 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import afficheMarcheGeneral from "./afficheMarcheGeneral"
+import afficheMarcheGeneralHorsSib from "./afficheMarcheGeneralHorsSib"
 import AfficheMarcheBienEtFourniture from "./AfficheMarcheBienEtFourniture"
-import { formatageSomme } from "../../../src/Repositories/Repository";
+import AfficheMarcheBienEtFournitureHorsSib from "./AfficheMarcheBienEtFournitureHorsSib"
+import { formatageSommeSansFCFA } from "../../../src/Repositories/Repository";
 export default {
   components:{
     afficheMarcheGeneral,
-    AfficheMarcheBienEtFourniture
+    afficheMarcheGeneralHorsSib,
+    AfficheMarcheBienEtFourniture,
+    AfficheMarcheBienEtFournitureHorsSib
   },
   name:'typetext',
   data() {
@@ -164,6 +185,16 @@ export default {
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
    ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
+afficherSommeMarcheExecution() {
+      return id => {
+        if (id != null && id != "") {
+           return this.acteEffetFinanciers.filter(qtreel => qtreel.marchegeneral_id == id).reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_act), 0);
+
+      
+      
+        }
+      };
+    },
 afficherStatusSib() {
       return id => {
         if (id != null && id != "") {
@@ -304,7 +335,7 @@ afficherlibelleUa() {
       "modifierTypeTexte",
       "supprimerTypeTexte"
     ]),
-   formatageSomme:formatageSomme,
+   formatageSommeSansFCFA:formatageSommeSansFCFA,
     alert() {
       console.log("ok");
     },

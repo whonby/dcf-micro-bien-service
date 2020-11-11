@@ -137,7 +137,7 @@
                      <td >{{afficheDateFacture(Manda.facture_id) || 'Non renseigné'}}</td> 
                      
                     <!-- <td >{{detail_marche.imputation  || 'Non renseigné'}}</td> -->
-                     <td >{{formatageSomme(Manda.total_general) || 'Non renseigné'}}</td>
+                     <td >{{formatageSomme(parseFloat(Manda.total_general)) || 'Non renseigné'}}</td>
                      
                        <td >{{(formaterDate(Manda.date_decision_emetteur)) || 'Non renseigné'}}</td>
                    <td >{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
@@ -177,7 +177,7 @@
                     <td>
                      <router-link :to="{ name: 'detailOpdefinitif', params: {id:Manda.id}}"
                 class="btn btn-inverse " title="Detail Op Definitif" v-if="Manda.decision_cf == 8 || Manda.decision_cf == 9">
-                  <span class="" style="color:#fff">Op Ordinaire</span>
+                  <span class="" style="color:#fff">Voir Op</span>
                    </router-link>
                        
                       <button  class="btn btn-danger" @click="supprimerMandat(Manda.id)">
