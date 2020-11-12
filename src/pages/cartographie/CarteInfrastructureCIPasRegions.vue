@@ -1107,8 +1107,8 @@ formatageSomme:formatageSomme,
                               }*/
                                if(vm.infrastructure!=""){
                                 if(vm.type_minichart=="bar"){
-                                      
-                                  height=taux_region+60;
+                                       width=20;
+                                  height=taux_region+30;
                                     }else{
                                     width=taux_region+60;
                                     }
@@ -1118,7 +1118,7 @@ formatageSomme:formatageSomme,
                               if(vm.infrastructure==""){
                                 if(vm.type_minichart=="bar"){
                                       
-                                  height=taux+60;
+                                  height=taux+30;
                                     }else{
                                     width=taux+60;
                                     }
