@@ -392,7 +392,7 @@ import ad1 from "leaflet-easyprint"
 getMontantMarcheRegionInfrastructure(){
        return (region,infrastructure)=>{
           let marche=this.objetMarchePasUniteOuRegion.filter(item=>{
-            if( item.localisation_geographie_id==region && item.infrastructure_id==infrastructure)
+            if( item.localisation_geographie_id==region && item.infrastructure_id==infrastructure && item.parent_id!=null)
            return item
             })
 
@@ -446,12 +446,56 @@ montant_reel_marche =montant_reel_marche+ 0
 
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id)
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
       }
 
       
 
       return objet
+    },
+
+    totalMontantPrevisionnelPasMarche(){
+       let vM=this;
+      let objet=this.marches
+      
+           if(vM.unite_administrative_id!=""){
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
+        }
+
+           let initeVal = 0;
+          let montant=  objet.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);
+          return montant
+
+    },
+
+    totalMontantPrevisionnelPasRegion(){
+      return regions=>{
+          let vM=this;
+        if(regions!=""){
+              let objet;
+
+               if(vM.unite_administrative_id!=""){
+            objet =this.marches.filter(item=>{
+                    if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==regions && item.parent_id!=null){
+            return item
+               }
+            })
+             }else{
+                objet =this.marches.filter(item=>item.localisation_geographie_id==regions && item.parent_id!=null)
+             }
+
+           let initeVal = 0;
+            let montant=  objet.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);
+          return montant
+              
+           }
+
+      }
+
     },
 
       objetMarchePasUniteOuRegion(){
@@ -461,21 +505,21 @@ montant_reel_marche =montant_reel_marche+ 0
 
 
       if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region)
+        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region && item.parent_id!=null)
 
       }
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id)
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
       }
 
       if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region==""){
-        objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure)
+        objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!=null)
       }
 
       if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure==""){
         objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region){
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
             return item
           }
         })
@@ -483,7 +527,7 @@ montant_reel_marche =montant_reel_marche+ 0
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure){
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=null){
             return item
           }
         })
@@ -491,7 +535,7 @@ montant_reel_marche =montant_reel_marche+ 0
 
       if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region){
+          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=null){
             return item
           }
         })
@@ -499,7 +543,7 @@ montant_reel_marche =montant_reel_marche+ 0
 
       if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region){
+          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
             return item
           }
         })
@@ -959,13 +1003,19 @@ formatageSomme:formatageSomme,
             if(this.localisation.length>0){
                       
                   this.localisation.forEach(function (value){
+                    let taux=0;
+                    let width=60;
+                    let height=60;
                   let montantInfraParRegion=0
-                              // #0000FF
+                   taux=(vm.totalMontantPrevisionnelPasRegion(value.id)/vm.totalMontantPrevisionnelPasMarche)*100
+                  console.log(taux)
+                  //vm.totalMontantPrevisionnelPasMarche
+                              // totalMontantPrevisionnelPasRegion #0000FF
                      vm.getInfrastructure(vm.infrastructure).forEach(function(val){
                            montantInfraParRegion=  vm.getMontantMarcheRegionInfrastructure(value.id,val.id)
-                         console.log(".......getTotaleMontantMarcheParUnite....")
-                         console.log(vm.getTotaleMontantMarcheParUnite(value.id,val.id))
-                         console.log(".......getTotaleMontantMarcheParUnite.000000000000....")
+                        // console.log(".......getTotaleMontantMarcheParUnite....")
+                       //  console.log(vm.getTotaleMontantMarcheParUnite(value.id,val.id))
+                         
                              if(val.code==1){ arrayColor.push("#6C0277")}
 
                              if(val.code==2){ arrayColor.push("#F0C300") }
@@ -977,11 +1027,18 @@ formatageSomme:formatageSomme,
                               arrayBar.push(montantInfraParRegion)
                            })
                                   
-                            
-                            
+                              
+                            if(vm.type_minichart=="bar"){
+                              
+                          height=taux+60;
+                            }else{
+                            width=taux+60;
+                            }
                               var myBarChart = vm.objet_leaflet.minichart(value.latlng,{
                                 data: arrayBar,type:vm.type_minichart,
                                 colors:arrayColor,
+                               width:width,
+                               height:height
                                 });
                             
                           vm.objet_map.addLayer(myBarChart);

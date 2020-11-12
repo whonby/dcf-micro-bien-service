@@ -251,7 +251,7 @@
                     layer-type="base"/>
                 <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
                 
-                <v-marker-cluster >
+                <!-- <v-marker-cluster >-->
                   <l-circle-marker v-for="l in localisation"
                                    :key="l.id"
                                    :lat-lng="l.latlng"
@@ -280,7 +280,7 @@ montantBudegtPasUniteAdminOuRegion
 
                         &lt;!&ndash;&ndash;&gt;
                     </l-marker>-->
-                </v-marker-cluster>
+              <!--   </v-marker-cluster>-->
                 <v-geosearch :options="geosearchOptions" ></v-geosearch>
               </l-map>
             </div>
@@ -896,21 +896,21 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
 
 
       if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region)
+        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region && item.parent_id!=null)
 
       }
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id)
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
       }
 
       if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region==""){
-        objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure)
+        objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!=null)
       }
 
       if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure==""){
         objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region){
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
             return item
           }
         })
@@ -918,7 +918,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure){
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=null){
             return item
           }
         })
@@ -926,7 +926,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
 
       if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region){
+          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=null){
             return item
           }
         })
@@ -934,7 +934,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
 
       if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region){
+          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
             return item
           }
         })
