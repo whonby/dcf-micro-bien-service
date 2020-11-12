@@ -111,7 +111,7 @@
           <div class="sidebar-content">
             <div class="sidebar-pane" id="home">
               <h1 class="sidebar-header">
-                Recherche
+                Filtre
                 <div class="sidebar-close"><i class="fa fa-caret-left"></i></div>
               </h1>
               <table class="table table-striped">
@@ -131,28 +131,6 @@
                     </model-list-select>
                     <a href="#" @click.prevent="videUniteAdmin()" style="color: red" v-if="unite_administrative_id"><i class="fa fa-trash-o"></i></a>
                   </td>
-                </tr>
-                </tbody>
-              </table>
-              <table class="table table-striped">
-                <tbody>
-                <tr>
-                  <td>
-                    <label>Infrastructure</label>
-                    <model-list-select style="background-color: rgb(255,255,255);"
-                                       class="wide"
-                                       :list="getterInfrastrucure"
-                                       v-model="infrastructure"
-                                       option-value="id"
-                                       option-text="libelle"
-
-                                       placeholder="Infrastructure"
-                    >
-
-                    </model-list-select>
-                    <a href="#" @click.prevent="videInfrastructure()" v-if="infrastructure" style="color: red"><i class="fa fa-trash-o"></i></a>
-
-                  </td>
                   <td>
                     <label>Régions</label>
                     <model-list-select style="background-color: rgb(255,255,255);"
@@ -170,9 +148,46 @@
 
                   </td>
                 </tr>
-
                 </tbody>
               </table>
+
+<div class="span5">
+   <h6>Infrastructure</h6>
+  <label for="tous">
+      <input type="radio" v-model="infrastructure" value="" id="tous"> <span>Affiché tous  <b>({{marcheUniteRegion.length}})</b></span>
+    </label>
+    <label  v-for="item in getterInfrastrucure" :key="item.id" :for="item.id">
+      <input type="radio" v-model="infrastructure" :value="item.id" :id="item.id"> <span> {{item.libelle}} <b>({{nombreMarchePasInfrastructure(item.id)}})</b></span>
+    </label>
+    
+</div>
+
+<div class="span6">
+<h6>Statut des marchés</h6>
+ <label for="logiciel70">
+      <input type="radio" v-model="status_marche" value="" id="logiciel70"> <span>Affichés tous <b>({{marcheUniteRegion.length}})</b></span>
+    </label>
+     <label for="logiciel7">
+      <input type="radio" v-model="status_marche" id="logiciel7" value="0"> <span>Marché planifié <b>({{nombreMarcheParStatue("planifie")}})</b></span>
+    </label>
+    <label for="web6" >
+      <input type="radio" v-model="status_marche"  id="web6" value="1"> <span>Marché contractualisation <b>({{nombreMarcheParStatue(1)}})</b></span>
+    </label>
+    <label for="mobile5">
+      <input type="radio" v-model="status_marche" id="mobile5" value="2"> <span>Marché en exécution <b>({{nombreMarcheParStatue(2)}})</b></span>
+    </label>
+     <label for="mobile4">
+      <input type="radio" v-model="status_marche" id="mobile4" value="3"> <span>Marché résilie  <b>({{nombreMarcheParStatue(3)}})</b></span>
+    </label>
+     <label for="mobile3">
+      <input type="radio" v-model="status_marche" id="mobile3" value="5" > <span>Marché terminé  <b>({{nombreMarcheParStatue(5)}})</b></span>
+    </label>
+     <label for="mobile2">
+      <input type="radio" v-model="status_marche" id="mobile2" value="7"> <span>Marché suspendu <b>({{nombreMarcheParStatue(7)}})</b></span>
+    </label>
+</div>
+ 
+  
 
               <div v-if="caseAffichageMessageUniteAdminSituationMarche">
                 <div class="span12" style="font-size: 15px">Situation des marchés de UA
@@ -448,7 +463,9 @@ export default {
       sous_prefecture:'',
       region:"",
       infrastructure:"",
+      color:"",
       value3: false,
+      status_marche:"",
       styles: {
         height: 'calc(100% - 55px)',
         overflow: 'auto',
@@ -539,7 +556,7 @@ export default {
       libelle_unite_admin:"",
       icon: customicon,
       clusterOptions: {},
-      zoom: 7,
+      zoom: 7.49,
       idzone:"",
       activeUa:false,
       zone_geographique:"",
@@ -624,7 +641,7 @@ created() {
 // console.log(this.getterInfrastrucure)
 //   console.log(".......................")
 this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
-  console.log(this.url_bien_service)
+  console.log(this.getterInfrastrucure)
 },
   computed: {
 // methode pour maper notre guetter
@@ -677,7 +694,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     },
     localisationsFiltre(){
       const searchTerm = this.search.toLowerCase();
-      console.log(this.localisations_geographiques.filter(item=>item.parent!==null))
+      //console.log(this.localisations_geographiques.filter(item=>item.parent!==null))
       return this.localisations_geographiques.filter((item) => {
 
             return item.code.toLowerCase().includes(searchTerm)
@@ -686,11 +703,38 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           }
       )
     },
+    nombreMarchePasInfrastructure(){
+              return id=>{
+                if(id!=""){
+                   return this.marcheUniteRegion.filter(item=>item.infrastructure_id==id).length
+                }
+              }
+    },
+   
+    nombreMarcheParStatue(){
+           return status=>{
+             if(status!=""){
+               if(status=="planifie"){
+                 status=0;
+               }
+             if(this.infrastructure!=""){
+                  return this.marcheUniteRegion.filter(item=>{
+                    if(item.attribue==status && item.infrastructure_id==this.infrastructure){
+                      return item
+                    }
+                  }).length
+             }else{
+               return this.marcheUniteRegion.filter(item=>item.attribue==status).length
+             }
+
+             }
+           }
+    },
     localisation(){
       let localisation=[]
       let vM=this;
-
-      vM.objetMarchePasUniteOuRegion.forEach(function (value){
+//status_marche
+      vM.getMarcheStatus(vM.status_marche).forEach(function (value){
         if(value.longitude!=null && value.latitude!=null){
           let coordonne=[]
           coordonne.push(value.latitude)
@@ -719,13 +763,13 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           }
 
           if(value.attribue==1){
-            color="#2ec705"
-            colorFill="#2ec705"
+            color="#04874e"
+            colorFill="#04874e"
           }
 
           if(value.attribue==2){
-            color="#e8640c"
-            colorFill="#e8640c"
+            color="#e8d20c"
+            colorFill="#e8d20c"
           }
 
           if(value.attribue==3){
@@ -739,8 +783,8 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           }
 
           if(value.attribue==7){
-            color="#ccc"
-            colorFill="#ccc"
+            color="#3a373b"
+            colorFill="#3a373b"
           }
           let montantRest=budget - montant_engagement_marche;
           let tauxExecution=(montant_engagement_marche/budget)*100
@@ -804,7 +848,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       let dataArray=[]
       let tailleInfrastructure=vM.getterInfrastrucure.length
       vM.getterInfrastrucure.forEach(function (value) {
-        let marche=vM.objetMarchePasUniteOuRegion.filter(item=>item.infrastructure_id==value.id)
+        let marche=vM.getMarcheStatus(vM.status_marche).filter(item=>item.infrastructure_id==value.id)
         // let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==value.id).reduce(function (total, currentValue) {
         //   return total + parseFloat(currentValue.total_general) ;
         // }, initeVal);
@@ -838,14 +882,11 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     montantBudegtPasUniteAdminOuRegion(){
      // let localisation=[]
       let vM=this;
-      // console.log(this.getMandatPersonnaliserVise)
-     // console.log(this.objetMarchePasUniteOuRegion)
+     
       let budget=0;
-     //let budgetReste=0;
-     // let budgetExecute=0;
-     // let tauxExecution=0;
+    
       let montant_engagement_marche=0;
-      this.objetMarchePasUniteOuRegion.forEach(function (value) {
+      this.getMarcheStatus(vM.status_marche).forEach(function (value) {
         if(value.longitude!=null && value.latitude!=null){
           budget=budget + parseFloat(value.montant_marche)
 
@@ -889,10 +930,40 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       vM.donutDataUniteOuRegions=[]
       return objetAlocalise;
     },
+    getMarcheStatus(){
+         return status=>{
+              if(status!=""){
+                  return this.objetMarchePasUniteOuRegion.filter(item=>item.attribue==status)
+              }else{
+                return this.objetMarchePasUniteOuRegion
+
+              }
+         }
+    },
+    marcheUniteRegion(){
+     let vM=this;
+      let objet=this.marches
+      if(vM.region!="" && vM.unite_administrative_id==""){
+        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region && item.parent_id!=null)
+
+      }
+
+      if(vM.unite_administrative_id!="" && vM.region==""){
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
+      }
+
+       if(vM.unite_administrative_id!="" && vM.region!="" ){
+        objet =this.marches.filter(item=>{
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
+            return item
+          }
+        })
+      }
+      return objet 
+    },
     objetMarchePasUniteOuRegion(){
       let vM=this;
       let objet=this.marches
-
 
 
       if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure==""){
@@ -1153,21 +1224,21 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
   methods: {
     videUniteAdmin(){
       this.unite_administrative_id=""
-      this.zoom=5
+      this.zoom=7.49
       this.objetUnite=""
       this.info_sidebar_marche.close()
       this.info_sidebar_marche.disablePanel('infomarche');
     },
     videRegions(){
       this.region=""
-      this.zoom=5;
+      this.zoom=7.49;
       this.objetUnite=""
       this.info_sidebar_marche.close()
       this.info_sidebar_marche.disablePanel('infomarche');
     },
     videInfrastructure(){
       this.infrastructure=""
-      this.zoom=5;
+      this.zoom=7.49;
       this.objetUnite=""
       this.info_sidebar_marche.close()
       this.info_sidebar_marche.disablePanel('infomarche');
@@ -1275,7 +1346,7 @@ console.log(ad)
       autoPan: false
     };
     var sidebar = sid.control.sidebar('map10', panel_options).addTo(map);
-
+       sidebar.open("home")
     this.info_sidebar_marche = sid.control.sidebar('sidebarinfo', {
       position: 'right',
       closeButton: true,
@@ -1363,12 +1434,12 @@ console.log(ad)
 .marche_contratualisation{
    width: 20px;
    height: 20px;
-   background: #209503;
+   background: #04874e;
 }
 .marche_execution{
    width: 20px;
    height: 20px;
-   background: orange;
+   background: #e8d20c;
 }
 .marche_resilise{
    width: 20px;
@@ -1383,7 +1454,7 @@ console.log(ad)
 .marche_suspendue{
    width: 20px;
    height: 20px;
-   background: #ccc;
+   background: #3a373b;
 }
 .sidebar {
   position: absolute;
@@ -1391,7 +1462,8 @@ console.log(ad)
   bottom: 0;
   width: 100%;
   overflow: hidden;
-  z-index: 2000; }
+  z-index: 2000;
+   }
 .sidebar.collapsed {
   width: 40px; }
 @media (min-width: 768px) {
@@ -1457,7 +1529,7 @@ console.log(ad)
 .sidebar-tabs > li > a, .sidebar-tabs > ul > li > a {
   display: block;
   width: 100%;
-  height: 100%;
+  
   line-height: 40px;
   color: inherit;
   text-decoration: none;
@@ -1721,6 +1793,36 @@ console.log(ad)
 }
 .shadow-none {
     box-shadow: none!important;
+}
+
+label {
+  display: block;
+  cursor: pointer;
+  line-height: 2;
+  font-size: 1em;
+}
+[type="radio"] {
+  clip: rect(0 0 0 0); 
+  position: absolute; 
+}
+[type="radio"] + span {
+  display: block;
+}
+[type="radio"]:checked + span:before {
+  box-shadow: 0 0 0 0.2em #000;
+  background:  #8EB2FB;
+}
+[type="radio"] + span:before {
+  content: '';
+  width: 1em;
+  height: 1em;
+  border-radius: 1em;
+  display: inline-block;
+  border: 0.125em solid #fff;
+  transition: 0.5s ease all;
+  vertical-align: -0.25em;
+  box-shadow: 0 0 0 0.15em #000;
+  margin-right: 0.75em;
 }
 
 @import "../../node_modules/leaflet/dist/leaflet.css";
