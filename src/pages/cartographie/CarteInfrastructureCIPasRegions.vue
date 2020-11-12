@@ -498,9 +498,68 @@ montant_reel_marche =montant_reel_marche+ 0
 
     },
 
+  totalMontantInfrastructure(){
+    return unite_administrative_id=>{
+          let vM=this;
+          let objet;
+        if(unite_administrative_id!=""){
+                objet =this.marches.filter(item=>{
+                    if(item.unite_administrative_id==unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=null){
+            return item
+               }
+            })
+
+
+           let initeVal = 0;
+            let montant=  objet.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);
+          return montant
+              
+           }
+
+           if(vM.infrastructure!=""){
+                 objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!=null)
+          
+                let initeVal = 0;
+                  let montant=  objet.reduce(function (total, currentValue) {
+                  return total + parseFloat(currentValue.montant_marche) ;
+                }, initeVal);
+                return montant
+           }
+
+      }
+
+  },
+
+  totalMontantInfrastructurePasRegion(){
+        return regions=>{
+          let vM=this;
+        if(regions!=""){
+              let objet;
+
+              objet =this.marches.filter(item=>{
+                   if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==regions && item.parent_id!=null){
+                   return item
+                    }
+                 })
+
+           let initeVal = 0;
+            let montant=  objet.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);
+          return montant
+              
+           }
+
+      }
+  },
+
       objetMarchePasUniteOuRegion(){
       let vM=this;
       let objet=this.marches
+
+
 
 
 
@@ -997,7 +1056,7 @@ formatageSomme:formatageSomme,
                 let vm=this
                 let arrayBar=[]
                 let arrayColor=[]
-
+                let arrayLabele=[]
        if(vm.objet_map!="" && vm.objet_leaflet!=""){
                 //  let tail=this.localisation.length
             if(this.localisation.length>0){
@@ -1007,15 +1066,22 @@ formatageSomme:formatageSomme,
                     let width=60;
                     let height=60;
                   let montantInfraParRegion=0
-                   taux=(vm.totalMontantPrevisionnelPasRegion(value.id)/vm.totalMontantPrevisionnelPasMarche)*100
-                  console.log(taux)
-                  //vm.totalMontantPrevisionnelPasMarche
-                              // totalMontantPrevisionnelPasRegion #0000FF
+
+                  
+                  //console.log(taux)
+
+               if(vm.infrastructure!=""){
+              taux= (vm.totalMontantInfrastructurePasRegion(value.id) /vm.totalMontantInfrastructure(vm.unite_administrative_id))*100
+                            }else{
+              taux=(vm.totalMontantPrevisionnelPasRegion(value.id)/vm.totalMontantPrevisionnelPasMarche)*100
+                            }
+                
+                  
                      vm.getInfrastructure(vm.infrastructure).forEach(function(val){
                            montantInfraParRegion=  vm.getMontantMarcheRegionInfrastructure(value.id,val.id)
                         // console.log(".......getTotaleMontantMarcheParUnite....")
                        //  console.log(vm.getTotaleMontantMarcheParUnite(value.id,val.id))
-                         
+                         let taux_region=0;
                              if(val.code==1){ arrayColor.push("#6C0277")}
 
                              if(val.code==2){ arrayColor.push("#F0C300") }
@@ -1025,20 +1091,47 @@ formatageSomme:formatageSomme,
                              if(val.code==4){ arrayColor.push("#22780F")}
                               
                               arrayBar.push(montantInfraParRegion)
+                              arrayLabele
+
+                               if(vm.infrastructure!=""){
+              taux_region= (montantInfraParRegion /vm.totalMontantInfrastructure(vm.unite_administrative_id))*100
+                            }else{
+              taux_region=(montantInfraParRegion/vm.totalMontantPrevisionnelPasMarche)*100
+                            }
+                            
+                            arrayLabele.push(taux_region.toFixed(2)+ "%")
+                             /* if(vm.regions!=""){
+
+                              }else{
+
+                              }*/
+                               if(vm.infrastructure!=""){
+                                if(vm.type_minichart=="bar"){
+                                      
+                                  height=taux_region+60;
+                                    }else{
+                                    width=taux_region+60;
+                                    }
+                              }
                            })
                                   
-                              
-                            if(vm.type_minichart=="bar"){
-                              
-                          height=taux+60;
-                            }else{
-                            width=taux+60;
-                            }
+                              if(vm.infrastructure==""){
+                                if(vm.type_minichart=="bar"){
+                                      
+                                  height=taux+60;
+                                    }else{
+                                    width=taux+60;
+                                    }
+                              }
+                           
+
+                          
                               var myBarChart = vm.objet_leaflet.minichart(value.latlng,{
                                 data: arrayBar,type:vm.type_minichart,
                                 colors:arrayColor,
                                width:width,
-                               height:height
+                               height:height,
+                               labels:arrayLabele
                                 });
                             
                           vm.objet_map.addLayer(myBarChart);
@@ -1057,11 +1150,12 @@ vm.objet_leaflet.circleMarker(value.latlng, {
 }).bindTooltip("<div style='background:white; padding:1px 3px 1px 3px'><b>" + value.ville + "</b></div>", {permanent: true,
 direction: 'bottom',
  sticky: true,
-    offset: [10, 0],
+    offset: [0, 10],
     opacity: 0.75,
     className: 'leaflet-tooltip' }).addTo(vm.objet_map);
                           arrayBar=[]
                           arrayColor=[]
+                         arrayLabele=[]
 
                                 })
 
