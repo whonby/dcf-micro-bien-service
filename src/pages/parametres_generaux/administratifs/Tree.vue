@@ -2,7 +2,6 @@
      <li>
     <div 
       :class="{bold: isFolder}"
-      
       @dblclick="$emit('modifier', item)">
     <span v-if="isFolder" @click="toggle"> <i :class="iconClasses"></i></span>
 
