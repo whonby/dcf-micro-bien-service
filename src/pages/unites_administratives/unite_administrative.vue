@@ -362,8 +362,8 @@
                 </div>
                 <div class="span6">
                     <div align="right">
-                        Recherche:
-                        <input type="search" placeholder="" v-model="search" />
+                        <!-- Recherche:
+                        <input type="search" placeholder="" v-model="search" /> -->
 
                         <!-- <div class="span3">
                           <model-list-select
@@ -510,7 +510,7 @@ export default {
         localisationgeo_id: "",
         type_ua_id: "",
         date_creation: "",
-        test: "",
+       
         servicegest_id:"",
         nature_section_id:""
       },

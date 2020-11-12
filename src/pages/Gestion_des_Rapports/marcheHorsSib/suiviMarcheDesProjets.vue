@@ -5,7 +5,7 @@ detail_marche
          <div >
            <table class="table table-bordered table-striped">
                 <td colspan="4">
-                        <div align="center"> <h4> FICHE DE SUIVI DES MARCHES/CONTRATS - UNITE D'ADMINISTRATIVE</h4> </div>
+                        <div align="center"> <h4> FICHE DE SUIVI DES MARCHES/CONTRATS - UNITE ADMINISTRATIVE</h4> </div>
                       </td>
                 <tr>
                     <td>
@@ -72,73 +72,148 @@ detail_marche
                 </tr>
                 
               </table>
-      <h5 style="text-align:center;color:#000000;font-size:20px">MARCHES/CONTRATS ATTRIBUE ISSUS DE LA PROCEDURE NORMALE</h5>
-              <table class="table table-bordered table-striped" id="Nature_section" >
-                <thead>
-                  <tr>
+      
+             
+              <template v-if="formData.ua_id=='' || formData.typeua_id=='' || formData.exo==''">
+ <h5 style="text-align:center;color:red;font-size:20px" >VEUILLEZ SELECTIONNER L'UNITE ADMINISTRATIVE SVP</h5>
+              </template>
+                        <template v-if="formData.ua_id !='' && formData.typeua_id !='' && formData.exo !=''">
+ <h5 style="text-align:center;color:#000000;font-size:20px" >MARCHES/CONTRATS ATTRIBUE ISSUS DE LA PROCEDURE NORMALE</h5>
+              </template>
+              <div v-for="item in PROCEDURENORMALE(formData.ua_id)" :key="item.id" class="widget-content">
+ 
+    <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+
+      <div class="span12" style="text-align:center;color:#000000;font-size:20px"><h5>Marche : {{ afficherObjetMarche(item.marche_id) }}
+      </h5></div>
+      
+    </div>
+
+    <table class="table table-bordered table-striped" >
+      <thead>
+       <tr>
                     
                     <th>N° DU MARCHE</th>
-                    <th>LIBELLE DU MARCHE</th>
                     <th>MODE PASSATION</th>
-                     <!-- <th>LIGNE BUDGETAIRE</th> -->
-                    <th>MONTANT PREVU</th>
-                   <th>VOIR</th>
+                    <th>DATE D'APPROBATION</th>
+                    <th>DUREE D'EXECUTION</th>
+                    <th>DATE PREVISIONNELLE DE FIN</th>
+                    <th>ENTREPRISE ATTRIBUTAIRE</th>
+                    <th>MONTANT DE BASE</th>
+                    <th>TAUX AVENANTS</th>
+                    <th>MONTANT TOTAL AVENANT</th>
+                    <th>MONTANT GLOBAL DU MARCHE</th>
+                    <th>AVANCE DE DEMARRAGE PERCUE</th>
+                    <th>NIVEAU DE DECOMPTE</th>
+                    <th>PAYEMENT EXECUTE</th>
+                    <th>TAUX D'EXECUTION FINANCIERE</th>
+                    <!-- <th>TAUX D'EXECUTION PHYSIQUE</th> -->
+                   
+                   <!-- <th>VOIR</th> -->
                   </tr>
-                </thead>
-                <tbody>
-                    <tr class="odd gradeX" v-for="type in PROCEDURENORMALE(formData.ua_id)" :key="type.id">
+      </thead>
+      <tbody>
+     <tr class="odd gradeX" v-for="type in PROCEDURENORMALEMarche(item.marche_id)" :key="type.id">
                    
                     <td>{{type.numero_marche || 'Non renseigné'}}</td>
-                    <td>{{afficherObjetMarche(type.marche_id) || 'Non renseigné'}}</td>
-                      <td style="text-align: center">{{afficheLibellePassationMarche(afficheidPassationMarche(type.marche_id)) || 'Non renseigné'}}</td>
-                    <!-- <td>{{afficheLibelleEconomique(type.economique_id) || 'Non renseigné'}}</td> -->
-                     <td>{{formatageSomme(parseFloat(afficheMontant(type.marche_id))) || 'Non renseigné'}}</td>
-                  <td>
+                     <td style="text-align: center">{{afficheLibellePassationMarche(afficheidPassationMarche(type.marche_id)) || 'Non renseigné'}}</td>
+                      <td >{{formaterDate(type.date_approbation) || 'Non renseigné'}}</td>
+                    <td>{{type.duree || 'Non renseigné'}} Jours</td>
+                    <td>{{formaterDate(dateexecutionfinprevue(type.marche_id)) || 'Non renseigné'}}</td>
+                    <td>{{entreprise(type.entreprise_id) || 'Non renseigné'}}</td>
+                    <td>{{formatageSomme(parseFloat(type.montant_act)) || 'Non renseigné'}}</td>
+                    <td>{{afficheTauxAvenant(type.marche_id) || 0}}  %</td>
+
+                    <td >{{formatageSomme(parseFloat(afficheMontantAvenant(type.marche_id))) || 'Non renseigné'}}</td>
+                   
+                     <td>{{formatageSomme(parseFloat(type.montant_act) + parseFloat(afficheMontantAvenant(type.marche_id))) || 'Non renseigné'}}</td>
+                      <td>{{formatageSomme(parseFloat(type.avance_demarrage_ttc)) || 'Non renseigné'}}</td>
+                    <td>{{nombreDecompte(type.marche_id) }}</td>
+                    <td>{{formatageSomme(parseFloat(PayementExecuter(type.marche_id))) || 'Non renseigné'}}</td>
+                     <td>{{((parseFloat(PayementExecuter(type.marche_id))/(parseFloat(type.montant_act) + parseFloat(afficheMontantAvenant(type.marche_id))))*100).toFixed(0) || 0}}  %</td>
+                  <!-- <td>{{0 || 0}}%</td> -->
+                  <!-- <td>{{0 || 'Non renseigné'}}%</td> -->
+                  <!-- <td>
                     <router-link :to="{ name: '', params: { id: type.id }}"
                  class="btn btn-success ">
         <span class=""><i class="  icon-eye-open"></i></span>
     </router-link>
-                  </td>
+                  </td> -->
                      
                   </tr>
-                </tbody>
-               
-              </table>
-            
-               <h5 style="text-align:center;color:#000000;font-size:20px">MARCHES/CONTRATS ATTRIBUE ISSUS DE LA PROCEDURE SIMPLIFIEE</h5>
-              <table class="table table-bordered table-striped" id="Nature_section" >
-                <thead>
-                  <tr>
+      </tbody>
+    </table>
+    
+  </div>
+    <template v-if="formData.ua_id !='' && formData.typeua_id !='' && formData.exo !=''">
+ <h5 style="text-align:center;color:#000000;font-size:20px" >MARCHES/CONTRATS ATTRIBUE ISSUS DE LA PROCEDURE SIMPLIFIEE</h5>
+              </template>
+                <div v-for="item in PROCEDURESIMPLIFIEE(formData.ua_id)" :key="item.id" class="widget-content">
+ 
+    <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+
+      <div class="span12" style="text-align:center;color:#000000;font-size:20px"><h5>Marche : {{ afficherObjetMarche(item.marche_id) }}
+      </h5></div>
+      
+    </div>
+
+    <table class="table table-bordered table-striped" >
+      <thead>
+       <tr>
                     
                     <th>N° DU MARCHE</th>
-                    <th>LIBELLE DU MARCHE</th>
                     <th>MODE PASSATION</th>
-                     <!-- <th>LIGNE BUDGETAIRE</th> -->
-                    <th>MONTANT PREVU</th>
-                   <th>VOIR</th>
+                    <th>DATE D'APPROBATION</th>
+                    <th>DUREE D'EXECUTION</th>
+                    <th>DATE PREVISIONNELLE DE FIN</th>
+                    <th>ENTREPRISE ATTRIBUTAIRE</th>
+                    <th>MONTANT DE BASE</th>
+                    <th>TAUX AVENANTS</th>
+                    <th>MONTANT TOTAL AVENANT</th>
+                    <th>MONTANT GLOBAL DU MARCHE</th>
+                    <th>AVANCE DE DEMARRAGE PERCUE</th>
+                    <th>NIVEAU DE DECOMPTE</th>
+                    <th>PAYEMENT EXECUTE</th>
+                    <th>TAUX D'EXECUTION FINANCIERE</th>
+                    <!-- <th>TAUX D'EXECUTION PHYSIQUE</th> -->
+                   
+                   <!-- <th>VOIR</th> -->
                   </tr>
-                </thead>
-                <tbody>
-                    <tr class="odd gradeX" v-for="type in PROCEDURESIMPLIFIEE(formData.ua_id)" :key="type.id">
+      </thead>
+      <tbody>
+     <tr class="odd gradeX" v-for="type in PROCEDURESIMPLIFIEEMarche(item.marche_id)" :key="type.id">
                    
                     <td>{{type.numero_marche || 'Non renseigné'}}</td>
-                    <td>{{afficherObjetMarche(type.marche_id) || 'Non renseigné'}}</td>
-                      <td style="text-align: center">{{afficheLibellePassationMarche(afficheidPassationMarche(type.marche_id)) || 'Non renseigné'}}</td>
-                    <!-- <td>{{afficheLibelleEconomique(type.economique_id) || 'Non renseigné'}}</td> -->
-                     <td>{{formatageSomme(parseFloat(afficheMontant(type.marche_id))) || 'Non renseigné'}}</td>
-                  <td>
+                     <td style="text-align: center">{{afficheLibellePassationMarche(afficheidPassationMarche(type.marche_id)) || 'Non renseigné'}}</td>
+                      <td >{{formaterDate(type.date_approbation) || 'Non renseigné'}}</td>
+                    <td>{{type.duree || 'Non renseigné'}} Jours</td>
+                    <td>{{formaterDate(dateexecutionfinprevue(type.marche_id)) || 'Non renseigné'}}</td>
+                    <td>{{entreprise(type.entreprise_id) || 'Non renseigné'}}</td>
+                    <td>{{formatageSomme(parseFloat(type.montant_act)) || 'Non renseigné'}}</td>
+                    <td>{{afficheTauxAvenant(type.marche_id) || 0}}  %</td>
+
+                    <td >{{formatageSomme(parseFloat(afficheMontantAvenant(type.marche_id))) || 'Non renseigné'}}</td>
+                   
+                     <td>{{formatageSomme(parseFloat(type.montant_act) + parseFloat(afficheMontantAvenant(type.marche_id))) || 'Non renseigné'}}</td>
+                      <td>{{formatageSomme(parseFloat(type.avance_demarrage_ttc)) || 'Non renseigné'}}</td>
+                    <td>{{nombreDecompte(type.marche_id) }}</td>
+                    <td>{{formatageSomme(parseFloat(PayementExecuter(type.marche_id))) || 'Non renseigné'}}</td>
+                     <td>{{((parseFloat(PayementExecuter(type.marche_id))/(parseFloat(type.montant_act) + parseFloat(afficheMontantAvenant(type.marche_id))))*100).toFixed(0) || 0}}  %</td>
+                  <!-- <td>{{0 || 0}}%</td> -->
+                  <!-- <td>{{0 || 'Non renseigné'}}%</td> -->
+                  <!-- <td>
                     <router-link :to="{ name: '', params: { id: type.id }}"
                  class="btn btn-success ">
         <span class=""><i class="  icon-eye-open"></i></span>
     </router-link>
-                  </td>
+                  </td> -->
                      
-                     
-                  
                   </tr>
-                </tbody>
-               
-              </table>
+      </tbody>
+    </table>
+    
+  </div>
+              
              <hr>
            
          </div>
@@ -184,7 +259,9 @@ detail_marche
                         icon: "add"
                     }
                 ],
-                formData:{},
+                formData:{
+                  ua_id :""
+                },
                 search: "",
             
             };
@@ -209,8 +286,8 @@ detail_marche
                 "afficheNiveauActivite",
                 "derniereNivoPlanBudgetaire",
                 "getPersonnaliseBudgetGeneralParPersonnel",
-                "budgetEclate"
-
+                "budgetEclate",
+"decomptefactures"
 
             ]),
 
@@ -239,7 +316,44 @@ detail_marche
 ...mapGetters('gestionMarche', ['entreprises',"secteur_activites",'banques','comptes','getCompte',]),
   ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
-
+nombreDecompte(){
+      return id =>{
+        if(id!=null && id!=""){
+          return this.decomptefactures.filter(item => item.marche_id==id ).length
+         
+        }
+      }
+    },
+    PayementExecuter(){
+      return id =>{
+        if(id!=null && id!=""){
+          return this.mandats.filter(item => item.marche_id==id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+         
+        }
+      }
+    },
+afficheMontantAvenant(){
+      return id =>{
+        if(id!=null && id!=""){
+          let odj = this.avenants.find(item => item.marche_id==id )
+          if(odj){
+            return odj.montant_avenant
+          }
+          return 0
+        }
+      }
+    },
+    afficheTauxAvenant(){
+      return id =>{
+        if(id!=null && id!=""){
+          let odj = this.avenants.find(item => item.marche_id==id )
+          if(odj){
+            return odj.taux
+          }
+          return 0
+        }
+      }
+    },
 afficheNumeroMarche(){
       return id =>{
         if(id!=null && id!=""){
@@ -262,6 +376,14 @@ afficheNumeroMarche(){
         }
       }
     },
+    PROCEDURENORMALEMarche(){
+      return id =>{
+        if(id!=null && id!=""){
+          return  this.acteEffetFinanciers.filter(item => item.marche_id==id && item.ua_id==this.formData.ua_id && this.afficheCodePassationMarche(this.afficheidPassationMarche(item.marche_id))==9 && this.afficheExoBudgetaire(item.marche_id) == this.formData.exo || item.marche_id==id && item.ua_id==this.formData.ua_id && this.afficheCodePassationMarche(this.afficheidPassationMarche(item.marche_id))==7 && this.afficheExoBudgetaire(item.marche_id) == this.formData.exo)
+                  
+        }
+      }
+    },
 PROCEDURENORMALE(){
       return id =>{
         if(id!=null && id!=""){
@@ -274,6 +396,15 @@ PROCEDURENORMALE(){
       return id =>{
         if(id!=null && id!=""){
           return  this.acteEffetFinanciers.filter(item => item.ua_id==id && this.afficheCodePassationMarche(this.afficheidPassationMarche(item.marche_id))==8 && this.afficheExoBudgetaire(item.marche_id) == this.formData.exo || item.ua_id==id && this.afficheCodePassationMarche(this.afficheidPassationMarche(item.marche_id))==6 && this.afficheExoBudgetaire(item.marche_id) == this.formData.exo)
+                  
+        }
+      }
+    },
+    
+    PROCEDURESIMPLIFIEEMarche(){
+      return id =>{
+        if(id!=null && id!=""){
+          return  this.acteEffetFinanciers.filter(item => item.marche_id==id && item.ua_id==this.formData.ua_id && this.afficheCodePassationMarche(this.afficheidPassationMarche(item.marche_id))==8 && this.afficheExoBudgetaire(item.marche_id) == this.formData.exo || item.marche_id==id && item.ua_id==this.formData.ua_id && this.afficheCodePassationMarche(this.afficheidPassationMarche(item.marche_id))==6 && this.afficheExoBudgetaire(item.marche_id) == this.formData.exo)
                   
         }
       }
@@ -339,6 +470,28 @@ afficheLibellePassationMarche(){
           let odj = this.marches.find(item => item.id==id )
           if(odj){
             return odj.montant_marche
+          }
+          return null
+        }
+      }
+    },
+    dateexecutionfinprevue(){
+      return id =>{
+        if(id!=null && id!=""){
+          let odj = this.acteEffetFinanciers.find(item => item.marche_id==id )
+          if(odj){
+            return odj.date_execution_fin_prevue
+          }
+          return null
+        }
+      }
+    },
+    entreprise(){
+      return id =>{
+        if(id!=null && id!=""){
+          let odj = this.entreprises.find(item => item.id==id )
+          if(odj){
+            return odj.raison_sociale
           }
           return null
         }
@@ -498,39 +651,7 @@ afficherLibelleTypeMarche(){
       }
     },
 
-    COMPTECONTRIBUABLE(){
-      return id =>{
-        if(id!=null && id!=""){
-          let odj = this.entreprises.find(item => item.id==id )
-          if(odj){
-            return odj.numero_cc
-          }
-          return null
-        }
-      }
-    },
-    	impossition(){
-      return id =>{
-        if(id!=null && id!=""){
-          let odj = this.entreprises.find(item => item.id==id )
-          if(odj){
-            return odj.regime_impossition
-          }
-          return null
-        }
-      }
-    },
-    DateCreation(){
-      return id =>{
-        if(id!=null && id!=""){
-          let odj = this.entreprises.find(item => item.id==id )
-          if(odj){
-            return odj.datecreation
-          }
-          return null
-        }
-      }
-    },
+    	
         },
         created() {
             this.marcheid=this.$route.params.id
