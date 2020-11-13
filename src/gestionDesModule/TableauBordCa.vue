@@ -164,22 +164,7 @@
 
                   </td>
                 </tr>
-<!--                <tr>-->
-<!--                  <td>-->
-<!--                    <label>Sous préfècture</label>-->
-<!--                    <model-list-select style="background-color: rgb(255,255,255);"-->
-<!--                                       class="wide"-->
-<!--                                       :list="sousPrefecture(departement)"-->
-<!--                                       v-model="sous_prefecture"-->
-<!--                                       option-value="id"-->
-<!--                                       option-text="libelle"-->
 
-<!--                                       placeholder="Sous préfècture"-->
-<!--                    >-->
-
-<!--                    </model-list-select>-->
-<!--                  </td>-->
-<!--                </tr>-->
                 </tbody>
               </table>
 
@@ -224,7 +209,7 @@
                 </div>
 
               </div>
-<hr>
+            <hr>
               <apexchart type="bar" width="350" height="350"  :options="chartOptions" :series="dataBar"></apexchart>
             </div>
 
@@ -241,7 +226,7 @@
         </div>
         <div class="span11">
           <div class="">
-            <div class="" style="height: 550px; width: 100%; border-bottom: none">
+            <div class="" style="height: 700px; width: 100%; border-bottom: none">
 
               <l-map ref="map" class="sidebar-map" :zoom="zoom" :center="initialLocation" >
 
@@ -259,6 +244,7 @@
                     :url="tileProvider.url"
                     layer-type="base"/>
                 <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
+                
                 <v-marker-cluster >
                   <l-circle-marker v-for="l in localisation"
                                    :key="l.id"
@@ -284,7 +270,7 @@
                   <!--  <l-marker v-for="l in localisation"
                               :key="l.id"
                               :lat-lng="l.latlng">
-
+montantBudegtPasUniteAdminOuRegion
 
                         &lt;!&ndash;&ndash;&gt;
                     </l-marker>-->
@@ -450,6 +436,7 @@ import 'vue-search-select/dist/VueSearchSelect.css'
 //import {pyDepartmentsData} from "@/data/py-departments-data"
 //import {geojson} from "@/data/py-departments-geojson"
 import VueApexCharts from 'vue-apexcharts'
+import ad from "leaflet-html-legend"
 export default {
   name: "Example",
   components: {
@@ -575,25 +562,25 @@ export default {
       libelle_unite_admin:"",
       icon: customicon,
       clusterOptions: {},
-      zoom: 5,
+      zoom: 7,
       idzone:"",
       activeUa:false,
       zone_geographique:"",
-      center: latLng(47.41322, -1.219482),
+      center: latLng(7.361517,-5.459421),
       url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
       attribution:
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      withPopup: latLng(47.41322, -1.219482),
-      withTooltip: latLng(47.41422, -1.250482),
+      withPopup: latLng(7.361517, -5.459421),
+      withTooltip: latLng(7.361517, -5.459421),
       currentZoom: 11.5,
-      currentCenter: latLng(47.41322, -1.219482),
+      currentCenter: latLng(7.361517,-5.459421),
       showParagraph: false,
       mapOptions: {
         zoomSnap: 0.5,
         attributionControl: false
       },
 
-      initialLocation: [6.8208393, -5.2895077],
+      initialLocation: [7.361517, -5.459421],
       showMap: true,
       isActive: false,
 
@@ -1266,7 +1253,7 @@ this.objetUnite=objet
         this.clusterOptions = { disableClusteringAtZoom: 11 }
       });
     }, 5000);
-
+console.log(ad)
     const mapComponent = this.$refs.map;
 
     const map = mapComponent.mapObject;
@@ -1312,16 +1299,83 @@ this.objetUnite=objet
 
     this.info_sidebar_marche.disablePanel('infomarche');
 
-    // this.getterInfrastrucure.forEach(function (value) {
-    //
-    // })
+     var htmlLegend3 = sid.control.htmllegend({
+        position: 'bottomright',
+        legends: [{
+            name: 'Legend',
+            elements: [{
+                label: 'Marché planifié',
+                html: "<div class='marche_planifier'></div>"
+            },
+            {
+                label: 'Marché en contractualisation',
+                html: "<div class='marche_contratualisation'></div>"
+            },
+            {
+                label: 'Marché en exécution',
+                html: "<div class='marche_execution'></div>"
+            },
+            {
+                label: 'Marché résilie',
+                html: "<div class='marche_resilise'></div>"
+            },
+             {
+                label: 'Marché terminé',
+                html: "<div class='marche_termine'></div>"
+            },
+             {
+                label: 'Marché suspendu',
+                html: "<div class='marche_suspendue'></div>"
+            }]
+        }],
+        collapseSimple: true,
+        detectStretched: true,
+        visibleIcon: 'icon icon-eye',
+        hiddenIcon: 'icon icon-eye-slash'
+    })
+
+    map.addControl(htmlLegend3)
 
 
   }
 };
 </script>
+<!--
+
+    
+-->
 <style>
 /* sidebar css */
+.marche_planifier{
+   width: 20px;
+   height: 20px;
+   background: red;
+}
+.marche_contratualisation{
+   width: 20px;
+   height: 20px;
+   background: #209503;
+}
+.marche_execution{
+   width: 20px;
+   height: 20px;
+   background: orange;
+}
+.marche_resilise{
+   width: 20px;
+   height: 20px;
+   background: blue;
+}
+.marche_termine{
+   width: 20px;
+   height: 20px;
+   background: #ab0cd7;
+}
+.marche_suspendue{
+   width: 20px;
+   height: 20px;
+   background: #ccc;
+}
 .sidebar {
   position: absolute;
   top: 0;

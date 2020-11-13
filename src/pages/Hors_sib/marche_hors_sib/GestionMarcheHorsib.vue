@@ -29,7 +29,9 @@
                      <li class="">
                         <a data-toggle="tab" href="#tab00008">Liste des marchés <span class="badge badge-info"></span></a>
                       </li>
-                       
+                       <li class="">
+                        <a data-toggle="tab" href="#marcheparEntrep">Marché par Entreprise <span class="badge badge-info"></span></a>
+                      </li>
                      <!-- <li class="">
                         <a data-toggle="tab" href="#marchehppm">Liste des marchés Hors PPM   <span class="badge badge-warning"></span></a>
                       </li> -->
@@ -70,7 +72,12 @@
                 <marche></marche>
               
                    </div>
-                  
+                  <div id="marcheparEntrep" class="tab-pane ">
+        
+               
+                <marcheParEntreprise></marcheParEntreprise>
+              
+                   </div>
                    
                   </div>
                   <br />
@@ -83,11 +90,13 @@
 <script>
 import tableauDeBordGestion from "./tableauDeBordGestion"
 import marche from "./marche"
+import marcheParEntreprise  from "../marcheParEntreprise/marcheParEntreprise"
 import {mapGetters} from "vuex"
 export default {
     components:{
         marche,
-      tableauDeBordGestion
+      tableauDeBordGestion,
+      marcheParEntreprise
     },
     data(){
         return{

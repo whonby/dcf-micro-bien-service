@@ -242,7 +242,7 @@ export default {
  navigatelocalisationDesMarche(){
       this.activate(11)
       this.$router.push({
-        name: 'TableauBordCatographiesSimple'
+        name: 'TableauBordCartographie'
       })
     },
 navigateRetourAuMenu(){

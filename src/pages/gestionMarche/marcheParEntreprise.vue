@@ -126,9 +126,20 @@ export default {
       };
     },
 afficheEntrepriseAuMoinUnMarche(){
-    return this.groupeEntreprise.filter(items=> items[0].entreprise_id != null && this.afficheAnneeDuMarche(items[0].marche_id)== this.anneeAmort);
+    return this.groupeEntreprise.filter(items=> items[0].entreprise_id != null && this.afficheAnneeDuMarche(items[0].marche_id)== this.anneeAmort && this.afficheMarcheGestionSib(items[0].marche_id)==0);
 },
+afficheMarcheGestionSib() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.sib;
+      }
+      return 0
+        }
+      };
+    },
  afficheRaisonSocial() {
       return id => {
         if (id != null && id != "") {

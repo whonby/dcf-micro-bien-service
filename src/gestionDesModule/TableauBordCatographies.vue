@@ -3,7 +3,7 @@
   <div>
 
 
-    <div class="container-fluid">
+    <div class="">
 
 
 
@@ -47,39 +47,45 @@
                   </div>
 
                   
-                  <!--                  <table class="table table-bordered table-striped" v-if="objetUnite">-->
-                  <!--                    <tbody>-->
-                  <!--                    <tr>-->
-                  <!--                      <td>Montant de base</td>-->
-                  <!--                      <td>{{formatageSomme(objetUnite.budget)}}</td>-->
-                  <!--                    </tr>-->
-                  <!--                    <tr>-->
-                  <!--                      <td>Montant restant</td>-->
-                  <!--                      <td>{{formatageSomme(objetUnite.budgetReste)}}</td>-->
-                  <!--                    </tr>-->
-                  <!--                    <tr>-->
-                  <!--                      <td>Montant exécution</td>-->
-                  <!--                      <td>{{formatageSomme(objetUnite.budgetExecute)}}</td>-->
-                  <!--                    </tr>-->
-                  <!--                    <tr>-->
-                  <!--                      <td>Taux exécution</td>-->
-                  <!--                      <td>{{objetUnite.tauxBudget}}</td>-->
-                  <!--                    </tr>-->
-                  <!--                    </tbody>-->
-                  <!--                  </table>-->
+              
                 </div>
                 <div class="span12" v-if="objetUnite">
+
                      <div class="row-fluid">
-                         <div class="span12" v-for="l in imageMarcheSelectionner(objetUnite.id)" :key="l.id">
-                           <div class="widget-box">
-                              <div class="widget-title"> 
-                                {{l.libelle}}
-                                </div>
-                                  <img v-bind:src="afficheImageMarche(l.fichier)" style="width:100%;height:150px;">
-                             </div>
+             
 
 
-                        </div>
+    <div class="row-fluid gutters-sm">
+            <div class="span11" v-for="marche_image in imageMarcheSelectionner(objetUnite.id)" :key="marche_image.id">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <img class="center_image" :src="afficheImageMarche(marche_image.fichier)">
+                    <div class="mt-3">
+                      <h4>{{marche_image.libelle}}</h4>
+              <router-link class="btn btn-outline-primary" :to="{ name: 'DetailImageMarche', params: { id:marche_image.id }}" title="Detail Marche CF">
+                                         Consulter
+                                        </router-link>
+                      
+                    </div>
+                    
+                  </div>
+                  <div class="mt-3">
+                      <h4>Nom de l'Agent : DCF</h4>
+                      {{marche_image.latitude}} /  {{marche_image.longitude}}
+                      <p class="text-secondary mb-1">Distance :
+                        {{distance(marche_image.latitude, marche_image.longitude,objetUnite.latitude,objetUnite.longitude, 'K')}}
+                      </p>
+                    
+                     
+                    </div>
+                </div>
+              </div>
+              
+            </div>
+            
+           
+          </div>
                     </div>
                 </div>
               </div>
@@ -105,7 +111,7 @@
           <div class="sidebar-content">
             <div class="sidebar-pane" id="home">
               <h1 class="sidebar-header">
-                Recherche
+                Filtre
                 <div class="sidebar-close"><i class="fa fa-caret-left"></i></div>
               </h1>
               <table class="table table-striped">
@@ -125,28 +131,6 @@
                     </model-list-select>
                     <a href="#" @click.prevent="videUniteAdmin()" style="color: red" v-if="unite_administrative_id"><i class="fa fa-trash-o"></i></a>
                   </td>
-                </tr>
-                </tbody>
-              </table>
-              <table class="table table-striped">
-                <tbody>
-                <tr>
-                  <td>
-                    <label>Infrastructure</label>
-                    <model-list-select style="background-color: rgb(255,255,255);"
-                                       class="wide"
-                                       :list="getterInfrastrucure"
-                                       v-model="infrastructure"
-                                       option-value="id"
-                                       option-text="libelle"
-
-                                       placeholder="Infrastructure"
-                    >
-
-                    </model-list-select>
-                    <a href="#" @click.prevent="videInfrastructure()" v-if="infrastructure" style="color: red"><i class="fa fa-trash-o"></i></a>
-
-                  </td>
                   <td>
                     <label>Régions</label>
                     <model-list-select style="background-color: rgb(255,255,255);"
@@ -164,9 +148,46 @@
 
                   </td>
                 </tr>
-
                 </tbody>
               </table>
+
+<div class="span5">
+   <h6>Infrastructure</h6>
+  <label for="tous">
+      <input type="radio" v-model="infrastructure" value="" id="tous"> <span>Affiché tous  <b>({{marcheUniteRegion.length}})</b></span>
+    </label>
+    <label  v-for="item in getterInfrastrucure" :key="item.id" :for="item.id">
+      <input type="radio" v-model="infrastructure" :value="item.id" :id="item.id"> <span> {{item.libelle}} <b>({{nombreMarchePasInfrastructure(item.id)}})</b></span>
+    </label>
+    
+</div>
+
+<div class="span6">
+<h6>Statut des marchés</h6>
+ <label for="logiciel70">
+      <input type="radio" v-model="status_marche" value="" id="logiciel70"> <span>Affichés tous <b>({{marcheUniteRegion.length}})</b></span>
+    </label>
+     <label for="logiciel7">
+      <input type="radio" v-model="status_marche" id="logiciel7" value="0"> <span>Marché planifié <b>({{nombreMarcheParStatue("planifie")}})</b></span>
+    </label>
+    <label for="web6" >
+      <input type="radio" v-model="status_marche"  id="web6" value="1"> <span>Marché contractualisation <b>({{nombreMarcheParStatue(1)}})</b></span>
+    </label>
+    <label for="mobile5">
+      <input type="radio" v-model="status_marche" id="mobile5" value="2"> <span>Marché en exécution <b>({{nombreMarcheParStatue(2)}})</b></span>
+    </label>
+     <label for="mobile4">
+      <input type="radio" v-model="status_marche" id="mobile4" value="3"> <span>Marché résilie  <b>({{nombreMarcheParStatue(3)}})</b></span>
+    </label>
+     <label for="mobile3">
+      <input type="radio" v-model="status_marche" id="mobile3" value="5" > <span>Marché terminé  <b>({{nombreMarcheParStatue(5)}})</b></span>
+    </label>
+     <label for="mobile2">
+      <input type="radio" v-model="status_marche" id="mobile2" value="7"> <span>Marché suspendu <b>({{nombreMarcheParStatue(7)}})</b></span>
+    </label>
+</div>
+ 
+  
 
               <div v-if="caseAffichageMessageUniteAdminSituationMarche">
                 <div class="span12" style="font-size: 15px">Situation des marchés de UA
@@ -224,9 +245,9 @@
           </div>
 
         </div>
-        <div class="span11">
+        <div class="span12">
           <div class="">
-            <div class="" style="height: 700px; width: 100%; border-bottom: none">
+            <div class="" style="height: 850px; width: 100%; border-bottom: none">
 
               <l-map ref="map" class="sidebar-map" :zoom="zoom" :center="initialLocation" >
 
@@ -244,7 +265,8 @@
                     :url="tileProvider.url"
                     layer-type="base"/>
                 <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
-                <v-marker-cluster >
+                
+                <!-- <v-marker-cluster >-->
                   <l-circle-marker v-for="l in localisation"
                                    :key="l.id"
                                    :lat-lng="l.latlng"
@@ -269,46 +291,17 @@
                   <!--  <l-marker v-for="l in localisation"
                               :key="l.id"
                               :lat-lng="l.latlng">
-
+montantBudegtPasUniteAdminOuRegion
 
                         &lt;!&ndash;&ndash;&gt;
                     </l-marker>-->
-                </v-marker-cluster>
+              <!--   </v-marker-cluster>-->
                 <v-geosearch :options="geosearchOptions" ></v-geosearch>
               </l-map>
             </div>
           </div>
           <div class="span12">
-            <div class="widget-box">
-              <div class="">
-                <table>
-                  <tr style="border-bottom: 2px solid #fff">
-                    <td style="width: 20px;height:20px;background: red" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Marché planifié</td>
-
-                    <td style="width: 20px;height:20px;background: #209503" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Marché en contractualisation </td>
-                    <td style="width: 20px;height:20px;background: orange" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Marché en exécution</td>
-                    <td style="width: 20px;height:20px;background: blue" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff " colspan="3">
-                      Marché résilie</td>
-                    <td style="width: 20px;height:20px;background: #ab0cd7" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">
-                      Marché terminé</td>
-                    <td style="width: 20px;height:20px;background: #ccc" ></td>
-                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">
-                      Marché suspendu</td>
-                  </tr>
-                </table>
-                <table>
-                  <tr>
-
-
-                  </tr>
-                </table>
-              </div>
-            </div>
+           
           </div>
         </div>
         <div class="span3">
@@ -435,6 +428,7 @@ import 'vue-search-select/dist/VueSearchSelect.css'
 //import {pyDepartmentsData} from "@/data/py-departments-data"
 //import {geojson} from "@/data/py-departments-geojson"
 import VueApexCharts from 'vue-apexcharts'
+import ad from "leaflet-html-legend"
 export default {
   name: "Example",
   components: {
@@ -469,7 +463,9 @@ export default {
       sous_prefecture:'',
       region:"",
       infrastructure:"",
+      color:"",
       value3: false,
+      status_marche:"",
       styles: {
         height: 'calc(100% - 55px)',
         overflow: 'auto',
@@ -560,7 +556,7 @@ export default {
       libelle_unite_admin:"",
       icon: customicon,
       clusterOptions: {},
-      zoom: 7,
+      zoom: 7.49,
       idzone:"",
       activeUa:false,
       zone_geographique:"",
@@ -645,7 +641,7 @@ created() {
 // console.log(this.getterInfrastrucure)
 //   console.log(".......................")
 this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
-  console.log(this.url_bien_service)
+  console.log(this.getterInfrastrucure)
 },
   computed: {
 // methode pour maper notre guetter
@@ -698,7 +694,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     },
     localisationsFiltre(){
       const searchTerm = this.search.toLowerCase();
-      console.log(this.localisations_geographiques.filter(item=>item.parent!==null))
+      //console.log(this.localisations_geographiques.filter(item=>item.parent!==null))
       return this.localisations_geographiques.filter((item) => {
 
             return item.code.toLowerCase().includes(searchTerm)
@@ -707,11 +703,38 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           }
       )
     },
+    nombreMarchePasInfrastructure(){
+              return id=>{
+                if(id!=""){
+                   return this.marcheUniteRegion.filter(item=>item.infrastructure_id==id).length
+                }
+              }
+    },
+   
+    nombreMarcheParStatue(){
+           return status=>{
+             if(status!=""){
+               if(status=="planifie"){
+                 status=0;
+               }
+             if(this.infrastructure!=""){
+                  return this.marcheUniteRegion.filter(item=>{
+                    if(item.attribue==status && item.infrastructure_id==this.infrastructure){
+                      return item
+                    }
+                  }).length
+             }else{
+               return this.marcheUniteRegion.filter(item=>item.attribue==status).length
+             }
+
+             }
+           }
+    },
     localisation(){
       let localisation=[]
       let vM=this;
-
-      vM.objetMarchePasUniteOuRegion.forEach(function (value){
+//status_marche
+      vM.getMarcheStatus(vM.status_marche).forEach(function (value){
         if(value.longitude!=null && value.latitude!=null){
           let coordonne=[]
           coordonne.push(value.latitude)
@@ -740,13 +763,13 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           }
 
           if(value.attribue==1){
-            color="#2ec705"
-            colorFill="#2ec705"
+            color="#04874e"
+            colorFill="#04874e"
           }
 
           if(value.attribue==2){
-            color="#e8640c"
-            colorFill="#e8640c"
+            color="#e8d20c"
+            colorFill="#e8d20c"
           }
 
           if(value.attribue==3){
@@ -760,8 +783,8 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           }
 
           if(value.attribue==7){
-            color="#ccc"
-            colorFill="#ccc"
+            color="#3a373b"
+            colorFill="#3a373b"
           }
           let montantRest=budget - montant_engagement_marche;
           let tauxExecution=(montant_engagement_marche/budget)*100
@@ -784,6 +807,8 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
             ville:value.objet,
             latlng:coordonne,
             budget:budget,
+            latitude:value.latitude,
+            longitude:value.longitude,
             budgetReste:montantRest,
             budgetExecute:montant_engagement_marche,
             tauxBudget:tauxExecution.toFixed(2),
@@ -823,7 +848,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       let dataArray=[]
       let tailleInfrastructure=vM.getterInfrastrucure.length
       vM.getterInfrastrucure.forEach(function (value) {
-        let marche=vM.objetMarchePasUniteOuRegion.filter(item=>item.infrastructure_id==value.id)
+        let marche=vM.getMarcheStatus(vM.status_marche).filter(item=>item.infrastructure_id==value.id)
         // let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==value.id).reduce(function (total, currentValue) {
         //   return total + parseFloat(currentValue.total_general) ;
         // }, initeVal);
@@ -857,14 +882,11 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     montantBudegtPasUniteAdminOuRegion(){
      // let localisation=[]
       let vM=this;
-      // console.log(this.getMandatPersonnaliserVise)
-     // console.log(this.objetMarchePasUniteOuRegion)
+     
       let budget=0;
-     //let budgetReste=0;
-     // let budgetExecute=0;
-     // let tauxExecution=0;
+    
       let montant_engagement_marche=0;
-      this.objetMarchePasUniteOuRegion.forEach(function (value) {
+      this.getMarcheStatus(vM.status_marche).forEach(function (value) {
         if(value.longitude!=null && value.latitude!=null){
           budget=budget + parseFloat(value.montant_marche)
 
@@ -908,28 +930,58 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       vM.donutDataUniteOuRegions=[]
       return objetAlocalise;
     },
+    getMarcheStatus(){
+         return status=>{
+              if(status!=""){
+                  return this.objetMarchePasUniteOuRegion.filter(item=>item.attribue==status)
+              }else{
+                return this.objetMarchePasUniteOuRegion
+
+              }
+         }
+    },
+    marcheUniteRegion(){
+     let vM=this;
+      let objet=this.marches
+      if(vM.region!="" && vM.unite_administrative_id==""){
+        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region && item.parent_id!=null)
+
+      }
+
+      if(vM.unite_administrative_id!="" && vM.region==""){
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
+      }
+
+       if(vM.unite_administrative_id!="" && vM.region!="" ){
+        objet =this.marches.filter(item=>{
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
+            return item
+          }
+        })
+      }
+      return objet 
+    },
     objetMarchePasUniteOuRegion(){
       let vM=this;
       let objet=this.marches
 
 
-
       if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region)
+        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region && item.parent_id!=null)
 
       }
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id)
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
       }
 
       if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region==""){
-        objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure)
+        objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!=null)
       }
 
       if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure==""){
         objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region){
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
             return item
           }
         })
@@ -937,7 +989,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure){
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=null){
             return item
           }
         })
@@ -945,7 +997,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
 
       if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region){
+          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=null){
             return item
           }
         })
@@ -953,7 +1005,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
 
       if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region){
+          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
             return item
           }
         })
@@ -1172,21 +1224,21 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
   methods: {
     videUniteAdmin(){
       this.unite_administrative_id=""
-      this.zoom=5
+      this.zoom=7.49
       this.objetUnite=""
       this.info_sidebar_marche.close()
       this.info_sidebar_marche.disablePanel('infomarche');
     },
     videRegions(){
       this.region=""
-      this.zoom=5;
+      this.zoom=7.49;
       this.objetUnite=""
       this.info_sidebar_marche.close()
       this.info_sidebar_marche.disablePanel('infomarche');
     },
     videInfrastructure(){
       this.infrastructure=""
-      this.zoom=5;
+      this.zoom=7.49;
       this.objetUnite=""
       this.info_sidebar_marche.close()
       this.info_sidebar_marche.disablePanel('infomarche');
@@ -1243,6 +1295,36 @@ this.objetUnite=objet
     },
     click: (e) => console.log("clusterclick", e),
     ready: (e) => console.log('ready', e),
+
+
+    distance(lat1, lon1, lat2, lon2, unit) {
+        if ((lat1 == lat2) && (lon1 == lon2)) {
+            return 0;
+        }
+        else {
+            let radlat1 = Math.PI * lat1/180;
+            let radlat2 = Math.PI * lat2/180;
+            let theta = lon1-lon2;
+            let radtheta = Math.PI * theta/180;
+            let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            if (dist > 1) {
+                dist = 1;
+            }
+            dist = Math.acos(dist);
+            dist = dist * 180/Math.PI;
+            dist = dist * 60 * 1.1515;
+            if (unit=="K") { dist = dist * 1.609344 }
+            if (unit=="N") { dist = dist * 0.8684 }
+
+            if (parseFloat(dist.toFixed(2))>=1){
+                return dist.toFixed(2) +" Km";
+            }else{
+              let metre=  dist * 1000;
+              return metre.toFixed(2) +" Mètre";
+            }
+
+        }
+    }
   },
   mounted() {
     setTimeout(() => {
@@ -1251,7 +1333,7 @@ this.objetUnite=objet
         this.clusterOptions = { disableClusteringAtZoom: 11 }
       });
     }, 5000);
-
+console.log(ad)
     const mapComponent = this.$refs.map;
 
     const map = mapComponent.mapObject;
@@ -1264,7 +1346,7 @@ this.objetUnite=objet
       autoPan: false
     };
     var sidebar = sid.control.sidebar('map10', panel_options).addTo(map);
-
+       sidebar.open("home")
     this.info_sidebar_marche = sid.control.sidebar('sidebarinfo', {
       position: 'right',
       closeButton: true,
@@ -1297,23 +1379,91 @@ this.objetUnite=objet
 
     this.info_sidebar_marche.disablePanel('infomarche');
 
-    // this.getterInfrastrucure.forEach(function (value) {
-    //
-    // })
+     var htmlLegend3 = sid.control.htmllegend({
+        position: 'bottomright',
+        legends: [{
+            name: 'Legend',
+            elements: [{
+                label: 'Marché planifié',
+                html: "<div class='marche_planifier'></div>"
+            },
+            {
+                label: 'Marché en contractualisation',
+                html: "<div class='marche_contratualisation'></div>"
+            },
+            {
+                label: 'Marché en exécution',
+                html: "<div class='marche_execution'></div>"
+            },
+            {
+                label: 'Marché résilie',
+                html: "<div class='marche_resilise'></div>"
+            },
+             {
+                label: 'Marché terminé',
+                html: "<div class='marche_termine'></div>"
+            },
+             {
+                label: 'Marché suspendu',
+                html: "<div class='marche_suspendue'></div>"
+            }]
+        }],
+        collapseSimple: true,
+        detectStretched: true,
+        visibleIcon: 'icon icon-eye',
+        hiddenIcon: 'icon icon-eye-slash'
+    })
+
+    map.addControl(htmlLegend3)
 
 
   }
 };
 </script>
+<!--
+
+    
+-->
 <style>
 /* sidebar css */
+.marche_planifier{
+   width: 20px;
+   height: 20px;
+   background: red;
+}
+.marche_contratualisation{
+   width: 20px;
+   height: 20px;
+   background: #04874e;
+}
+.marche_execution{
+   width: 20px;
+   height: 20px;
+   background: #e8d20c;
+}
+.marche_resilise{
+   width: 20px;
+   height: 20px;
+   background: blue;
+}
+.marche_termine{
+   width: 20px;
+   height: 20px;
+   background: #ab0cd7;
+}
+.marche_suspendue{
+   width: 20px;
+   height: 20px;
+   background: #3a373b;
+}
 .sidebar {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 100%;
   overflow: hidden;
-  z-index: 2000; }
+  z-index: 2000;
+   }
 .sidebar.collapsed {
   width: 40px; }
 @media (min-width: 768px) {
@@ -1379,7 +1529,7 @@ this.objetUnite=objet
 .sidebar-tabs > li > a, .sidebar-tabs > ul > li > a {
   display: block;
   width: 100%;
-  height: 100%;
+  
   line-height: 40px;
   color: inherit;
   text-decoration: none;
@@ -1582,6 +1732,98 @@ this.objetUnite=objet
   overflow-y: scroll !important;
 }
 
+
+
+
+
+
+
+.center_image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 250px;
+}
+
+
+.main-body {
+    padding: 15px;
+}
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
+
+.gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+}
+
+.gutters-sm>.col, .gutters-sm>[class*=col-] {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+.mb-3, .my-3 {
+    margin-bottom: 1rem!important;
+}
+
+.bg-gray-300 {
+    background-color: #e2e8f0;
+}
+.h-100 {
+    height: 100%!important;
+}
+.shadow-none {
+    box-shadow: none!important;
+}
+
+label {
+  display: block;
+  cursor: pointer;
+  line-height: 2;
+  font-size: 1em;
+}
+[type="radio"] {
+  clip: rect(0 0 0 0); 
+  position: absolute; 
+}
+[type="radio"] + span {
+  display: block;
+}
+[type="radio"]:checked + span:before {
+  box-shadow: 0 0 0 0.2em #000;
+  background:  #8EB2FB;
+}
+[type="radio"] + span:before {
+  content: '';
+  width: 1em;
+  height: 1em;
+  border-radius: 1em;
+  display: inline-block;
+  border: 0.125em solid #fff;
+  transition: 0.5s ease all;
+  vertical-align: -0.25em;
+  box-shadow: 0 0 0 0.15em #000;
+  margin-right: 0.75em;
+}
 
 @import "../../node_modules/leaflet/dist/leaflet.css";
 

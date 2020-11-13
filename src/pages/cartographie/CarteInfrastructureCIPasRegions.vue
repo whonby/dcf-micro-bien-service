@@ -1,10 +1,25 @@
 <template>
 
     <div>
-        <div class="container-fluid">
+   
+<!--<div class="radio-group-control">
+  <label class="radio-group-label">
+    <input type="radio"  value="0" v-model="slection_carte">
+    <span class="radio-group-label__text">
+      <span class="radio-group-tick"></span> CARTE DES PREVISIONNELS INFRASTRUCTURES </span>
+  </label>
+  <label class="radio-group-label">
+    <input type="radio" value="1" v-model="slection_carte">
+    <span class="radio-group-label__text"><span class="radio-group-tick"></span>
+    CARTE DES EXECUTIONS INFRASTRUCTURES 
+    </span>
+  </label>
+</div>-->
+
+
+        <div class="">
             
         <div class="row-fluid">
-          
        <div id="map10" class="sidebar leaflet-sidebar collapsed">
           <div class="sidebar-tabs">
             <ul role="tablist"> <!-- top aligned tabs -->
@@ -18,6 +33,8 @@
                 Recherche
                 <div class="sidebar-close"><i class="fa fa-caret-left"></i></div>
               </h1>
+         
+
               <table class="table table-striped">
                 <tbody>
                 <tr>
@@ -55,7 +72,6 @@
 
                     </model-list-select>
                     <a href="#" @click.prevent="videInfrastructure()" v-if="infrastructure" style="color: red"><i class="fa fa-trash-o"></i></a>
-
                   </td>
                   <td>
                     <label>Régions</label>
@@ -74,51 +90,28 @@
 
                   </td>
                 </tr>
+            <tr>
+              <td>
+                <label for="pet-select">Changer chart:</label>
+<select v-model="type_minichart">  
+  <option value="bar">bar</option> 
+  <option value="pie">Pie charts</option> 
+  <option value="polar-radius">Polar radius</option> 
+<option value="polar-area">Polar area</option>
+ </select>
 
+              </td>
+            </tr>
                 </tbody>
               </table>
 
-              <div v-if="caseAffichageMessageUniteAdminSituationMarche">
-                <div class="span12" style="font-size: 15px">Situation des marchés de UA
-                  <b><font color="red">{{nomUniteAdministrative}}</font></b></div>
-              </div>
-              <div v-if="caseAffichageMessageRegionsSituationMarche">
-                <div class="span12" style="font-size: 15px"> Situation des marchés  dans la
-                  <b><font color="red">{{nomRegion}}</font></b>
-                </div>
-              </div>
-              <div v-if="caseAffichageMessageUniteAdminRegionSituationMarche">
-                <div class="span12" style="font-size: 15px">Situation des marchés dans la <b><font color="red">{{nomRegion}}</font></b>
-                 de UA <b><font color="red">{{nomUniteAdministrative}}</font></b> </div>
-              </div>
+             
+              
+              
               <div v-if="caseAffichageMessageGeneralSituationMarche">
-                <div class="span12" style="font-size: 15px ; font-size: 15px">Situation Général des marchés</div></div>
+                <div class="span12" style="font-size: 15px ; font-size: 15px">
+                  Situation Général des marchés</div></div>
 
-              <div class="row-fluid" >
-                <div class="span5" v-if="montantBudegtPasUniteAdminOuRegion">
-
-                  <donut-chart
-                      style="width: 120px;height: 120px"
-                      id="donut01"
-                      :data="montantBudegtPasUniteAdminOuRegion.donutData"
-                      colors='[ "#FF6384", "#36A2EB"]'
-                      resize="true" v-if="montantBudegtPasUniteAdminOuRegion.budget">
-                  </donut-chart>
-                  <div style="text-align: center" v-else>
-                    <h3>Aucun montant</h3>
-                  </div>
-                </div>
-                <div class="span7"><br>
-
-                  <div v-if="montantBudegtPasUniteAdminOuRegion">
-                    Budget : <span style="color: #003900; "><b>{{formatageSomme(montantBudegtPasUniteAdminOuRegion.budget)}}</b></span> <br>
-                    Budget exécuté:<span style="color: #00d700; "><b>{{formatageSomme(montantBudegtPasUniteAdminOuRegion.budgetExecute)}}</b></span><br>
-                    Montant restant:<span style="color: darkred; "><b>{{formatageSomme(montantBudegtPasUniteAdminOuRegion.budgetReste)}}</b></span><br>
-                    Taux d'exécution:<span style="color: #e36706; "><b>{{montantBudegtPasUniteAdminOuRegion.tauxBudget}} %</b></span>
-                  </div>
-                </div>
-
-              </div>
             <hr>
               <apexchart type="bar" width="350" height="350"  :options="chartOptions" :series="dataBar"></apexchart>
             </div>
@@ -128,8 +121,9 @@
             </div>
 
             <div class="sidebar-pane" id="profile">
-              <h1 class="sidebar-header">Statistique<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
-              Statistique
+              <h1 class="sidebar-header">Change graphique<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
+         
+            
             </div>
           </div>
 
@@ -137,8 +131,8 @@
             <div class="span12">
                 <div class="">
 
-                    <div  style="height: 720px; width: 100%; ">
-                        <l-map ref="map" :zoom=7.3 :center="initialLocation" >
+                    <div  style="height: 850px !important; width: 100%; ">
+                        <l-map ref="map" :zoom=7.4 :center="initialLocation" >
                             <l-icon-default></l-icon-default>
                             <l-control-layers position="topright"  ></l-control-layers>
                             <l-control-fullscreen position="topleft"
@@ -153,11 +147,11 @@
                                     layer-type="base"/>
                            <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
                           <!--   <v-marker-cluster >-->
-                             <!--  <l-circle-marker v-for="l in localisation"
+                              <l-circle-marker v-for="l in localisation"
                                                  :key="l.id"
                                                  :lat-lng="l.latlng"
                                                  @click="uniteAdmin(l.id,l.ville)"
-                                                 :radius="8"
+                                                 :radius="1"
                                                  :color="l.color"
                                                  :fillColor="l.colorFill"
                                                  :fillOpacity="2"
@@ -165,6 +159,7 @@
                                           
 
                                 >
+                                <l-tooltip>{{l.ville}}</l-tooltip>
                                     <l-popup>
                                     <b>{{l.ville}}</b> <br>
                                     <div >
@@ -175,7 +170,7 @@
                                     </div>
                                 </l-popup>
 
-                                </l-circle-marker>-->
+                                </l-circle-marker>
                               <!--  <l-marker v-for="l in localisation"
                                           :key="l.id"
                                           :lat-lng="l.latlng">
@@ -194,6 +189,11 @@
         </div>
 
         </div>
+
+
+<!--Appel de la propriete-->
+ 
+
     </div>
 
 </template>
@@ -204,24 +204,27 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import VGeosearch from 'vue2-leaflet-geosearch';
     import {mapGetters} from 'vuex'
     import { latLng, Icon, icon } from 'leaflet'
-    import { LMap, LTileLayer, LIconDefault,LControlLayers,/*LPopup,LCircleMarker*/ } from "vue2-leaflet";
+    import { LMap, LTileLayer, LIconDefault,LControlLayers,LPopup,LCircleMarker ,LTooltip} from "vue2-leaflet";
     import iconUrl from 'leaflet/dist/images/marker-icon.png'
     import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
     import { formatageSomme } from "../../../src/Repositories/Repository";
     import {ModelListSelect} from "vue-search-select";
 import VueApexCharts from 'vue-apexcharts'
 import L from "leaflet.minichart"
+import ad from "leaflet-html-legend"
+import ad1 from "leaflet-easyprint"
+//import ad2 from "leaflet-easyprint"
     export default {
         name: "Example",
         components: {
             LMap,
             LTileLayer,
            VGeosearch,
-        //LPopup,
-           // LTooltip,
+        LPopup,
+           LTooltip,
             LIconDefault,
             LControlLayers,
-          // LCircleMarker,
+        LCircleMarker,
            // LIcon
             ModelListSelect,
           apexchart: VueApexCharts,
@@ -233,6 +236,10 @@ import L from "leaflet.minichart"
                 {iconUrl, shadowUrl}
             ))
             return {
+              slection_carte:0,
+              objet_map:"",
+              objet_leaflet:"",
+              type_minichart:"bar",
               departement:"",
     sous_prefecture:'',
     region:"",
@@ -276,7 +283,7 @@ import L from "leaflet.minichart"
               return "F " + val + " Infrastructure"
             }
           }
-        }
+        } 
       },
               geosearchOptions: { // Important part Here
                 provider: new OpenStreetMapProvider(),
@@ -313,7 +320,7 @@ import L from "leaflet.minichart"
                 mapOptions: {
                     zoomSnap: 0.5
                 },
-                initialLocation: [7.361517, -5.459421],
+                 initialLocation: [7.361517, -5.459421],
                 showMap: true,
                 isActive: false,
                 tileProviders: [
@@ -327,8 +334,9 @@ import L from "leaflet.minichart"
                     {
                         name: 'Plan 2',
                         visible: false,
-                        url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+                        url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png',
                         attribution: '',
+                        
                     },
                     {
                         name: 'Satelite',
@@ -347,7 +355,7 @@ import L from "leaflet.minichart"
                  {
                 name: 'Voyageur',
                     visible: false,
-                url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+                url: 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
                 attribution: '',
                 },
                 ],
@@ -364,7 +372,7 @@ import L from "leaflet.minichart"
             "uniteAdministratives",
             "getterBudgeCharge"
         ]),
-        ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise"]),
+        ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise","getActeEffetFinancierPersonnaliser45"]),
           regions(){
       return this.getterLocalisationGeoAll.filter(item=>item.structure_localisation_geographique.niveau==2);
     },
@@ -379,6 +387,48 @@ import L from "leaflet.minichart"
         });
       }
     },
+
+
+getMontantMarcheRegionInfrastructure(){
+       return (region,infrastructure)=>{
+          let marche=this.objetMarchePasUniteOuRegion.filter(item=>{
+            if( item.localisation_geographie_id==region && item.infrastructure_id==infrastructure && item.parent_id!=null)
+           return item
+            })
+
+
+               let initeVal = 0;
+          let montant=  marche.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);
+          return montant
+       }
+},
+getTotaleMontantMarcheParUnite(){
+   return (region,infrastructure)=>{
+     let vm=this;
+          let marche=this.objetMarchePasUniteOuRegion.filter(item=>{
+            if( item.localisation_geographie_id==region && item.infrastructure_id==infrastructure && item.attribue==2)
+           return item
+            })
+               let montant_reel_marche=0;
+            marche.forEach(function(value){
+                let objet_act=vm.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==value.id)
+                if(objet_act!=undefined){
+ montant_reel_marche=parseFloat(montant_reel_marche) +  parseFloat(objet_act.montant_act)
+                }else{
+montant_reel_marche =montant_reel_marche+ 0
+                }
+                
+            })
+
+               /*let initeVal = 0;
+          let montant=  marche.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);*/
+          return montant_reel_marche
+       }
+},
     sousPrefecture(){
       return id=>{
         return this.getterLocalisationGeoAll.filter(item=>{
@@ -389,28 +439,146 @@ import L from "leaflet.minichart"
       }
     },
 
+
+   ListeMarchePasUA(){
+      let vM=this;
+      let objet=this.marches
+
+
+      if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
+      }
+
+      
+
+      return objet
+    },
+
+    totalMontantPrevisionnelPasMarche(){
+       let vM=this;
+      let objet=this.marches
+      
+           if(vM.unite_administrative_id!=""){
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
+        }
+
+           let initeVal = 0;
+          let montant=  objet.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);
+          return montant
+
+    },
+
+    totalMontantPrevisionnelPasRegion(){
+      return regions=>{
+          let vM=this;
+        if(regions!=""){
+              let objet;
+
+               if(vM.unite_administrative_id!=""){
+            objet =this.marches.filter(item=>{
+                    if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==regions && item.parent_id!=null){
+            return item
+               }
+            })
+             }else{
+                objet =this.marches.filter(item=>item.localisation_geographie_id==regions && item.parent_id!=null)
+             }
+
+           let initeVal = 0;
+            let montant=  objet.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);
+          return montant
+              
+           }
+
+      }
+
+    },
+
+  totalMontantInfrastructure(){
+    return unite_administrative_id=>{
+          let vM=this;
+          let objet;
+        if(unite_administrative_id!=""){
+                objet =this.marches.filter(item=>{
+                    if(item.unite_administrative_id==unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=null){
+            return item
+               }
+            })
+
+
+           let initeVal = 0;
+            let montant=  objet.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);
+          return montant
+              
+           }
+
+           if(vM.infrastructure!=""){
+                 objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!=null)
+          
+                let initeVal = 0;
+                  let montant=  objet.reduce(function (total, currentValue) {
+                  return total + parseFloat(currentValue.montant_marche) ;
+                }, initeVal);
+                return montant
+           }
+
+      }
+
+  },
+
+  totalMontantInfrastructurePasRegion(){
+        return regions=>{
+          let vM=this;
+        if(regions!=""){
+              let objet;
+
+              objet =this.marches.filter(item=>{
+                   if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==regions && item.parent_id!=null){
+                   return item
+                    }
+                 })
+
+           let initeVal = 0;
+            let montant=  objet.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);
+          return montant
+              
+           }
+
+      }
+  },
+
       objetMarchePasUniteOuRegion(){
       let vM=this;
       let objet=this.marches
 
 
 
+
+
       if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region)
+        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region && item.parent_id!=null)
 
       }
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id)
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
       }
 
       if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region==""){
-        objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure)
+        objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!=null)
       }
 
       if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure==""){
         objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region){
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
             return item
           }
         })
@@ -418,7 +586,7 @@ import L from "leaflet.minichart"
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure){
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=null){
             return item
           }
         })
@@ -426,7 +594,7 @@ import L from "leaflet.minichart"
 
       if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region){
+          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=null){
             return item
           }
         })
@@ -434,7 +602,7 @@ import L from "leaflet.minichart"
 
       if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region){
+          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
             return item
           }
         })
@@ -504,7 +672,7 @@ import L from "leaflet.minichart"
          // console.log(this.getMandatPersonnaliserVise)
             let vM=this;
         //    console.log(this.localisations_geographiques)
-            this.localisations_geographiques.forEach(function (value){
+            vM.getLocalisation(vM.region).forEach(function (value){
                 if(value.structure_localisation_geographique_id==5){
                     if(value.longitude!=null && value.latitude!=null){
                         let coordonne=[]
@@ -575,40 +743,8 @@ import L from "leaflet.minichart"
                             taux=(montant_engagement_zone/budgetZone)*100
 
                         }
-                         if(budgetZone==0){
-                             color="#ff0000"
-                             colorFill="#ff0000"
-                         }else{
-                             if(taux==0){
-                                 color="#0c2061"
-                                 colorFill="#0c2061"
-                             }
-
-                             if(1<=taux && taux<31){
-
-                                 color="#fffb13"
-                                 colorFill="#fffb13"
-                             }
-
-                             if(31<=taux && taux<51){
-                                 color="#8f1db7"
-                                 colorFill="#8f1db7"
-                             }
-
-                             if(51<=taux && taux<81){
-                                 color="#1285ff"
-                                 colorFill="#1285ff"
-                             }
-                             if(81<=taux && taux<100){
-                                 color="#9dfd80"
-                                 colorFill="#9dfd80"
-                             }
-                             if(taux==100){
-                                 color="#209503"
-                                 colorFill="#209503"
-                             }
-
-                         }
+                          color="#000000"
+                             colorFill="#000000"
                         let objetAlocalise={
                             id:value.id,
                             ville:value.libelle,
@@ -627,6 +763,60 @@ import L from "leaflet.minichart"
             })
         return localisation;
         },
+
+        getInfrastructure(){
+             return id=>{
+               if(id!=""){
+                
+                 return this.getterInfrastrucure.filter(item=>item.id==id)
+               }
+               return this.getterInfrastrucure
+             }
+        },
+
+        getLocalisation(){
+            return id=>{
+              if(id!=""){
+             //   this.removeMapChart
+                  return this.localisations_geographiques.filter(item=>item.id==id)
+              }
+              return this.localisations_geographiques
+            }
+        },
+        caseAffichageMessageRegionsSituationMarche(){
+      let vM=this;
+      if(vM.region!="" && vM.unite_administrative_id==""){
+         return true
+      }
+      return false
+    },
+
+    
+    caseAffichageMessageUniteAdminSituationMarche(){
+      let vM=this;
+      if(vM.region=="" && vM.unite_administrative_id!=""){
+        return true
+      }
+      return false
+    },
+    caseAffichageMessageUniteAdminRegionSituationMarche(){
+      let vM=this;
+      if(vM.region!="" && vM.unite_administrative_id!=""){
+        return true
+      }
+      return false
+    },
+    caseAffichageMessageGeneralSituationMarche(){
+      let vM=this;
+      if(vM.region=="" && vM.unite_administrative_id==""){
+        return true
+      }
+      return false
+    },
+    
+
+    
+    
         budgetGeneral(){
             let budget_general=0;
             let montant_engagement=0;
@@ -810,6 +1000,17 @@ import L from "leaflet.minichart"
       // this.info_sidebar_marche.close()
       // this.info_sidebar_marche.disablePanel('infomarche');
     },
+
+    deleteLeafleMiniCharts(map) {
+
+        map.eachLayer(
+            function(t) {
+              if (t._chart) { t._chart.remove(); }
+            }
+        );
+
+   },
+
 formatageSomme:formatageSomme,
             zoomUpdate(zoom) {
                 this.currentZoom = zoom;
@@ -848,25 +1049,196 @@ formatageSomme:formatageSomme,
             },
             click: (e) => console.log("clusterclick", e),
             ready: (e) => console.log('ready', e),
+
+
+
+  integrationChartPasRegisonSurCarte(){
+                let vm=this
+                let arrayBar=[]
+                let arrayColor=[]
+                let arrayLabele=[]
+       if(vm.objet_map!="" && vm.objet_leaflet!=""){
+                //  let tail=this.localisation.length
+            if(this.localisation.length>0){
+                      
+                  this.localisation.forEach(function (value){
+                    let taux=0;
+                    let width=60;
+                    let height=60;
+                  let montantInfraParRegion=0
+
+                  
+                  //console.log(taux)
+
+               if(vm.infrastructure!=""){
+              taux= (vm.totalMontantInfrastructurePasRegion(value.id) /vm.totalMontantInfrastructure(vm.unite_administrative_id))*100
+                            }else{
+              taux=(vm.totalMontantPrevisionnelPasRegion(value.id)/vm.totalMontantPrevisionnelPasMarche)*100
+                            }
+                
+                  
+                     vm.getInfrastructure(vm.infrastructure).forEach(function(val){
+                           montantInfraParRegion=  vm.getMontantMarcheRegionInfrastructure(value.id,val.id)
+                        // console.log(".......getTotaleMontantMarcheParUnite....")
+                       //  console.log(vm.getTotaleMontantMarcheParUnite(value.id,val.id))
+                         let taux_region=0;
+                             if(val.code==1){ arrayColor.push("#6C0277")}
+
+                             if(val.code==2){ arrayColor.push("#F0C300") }
+
+                             if(val.code==3){ arrayColor.push("#E73E01") }
+                                 
+                             if(val.code==4){ arrayColor.push("#22780F")}
+                              
+                              arrayBar.push(montantInfraParRegion)
+                              arrayLabele
+
+                               if(vm.infrastructure!=""){
+              taux_region= (montantInfraParRegion /vm.totalMontantInfrastructure(vm.unite_administrative_id))*100
+                            }else{
+              taux_region=(montantInfraParRegion/vm.totalMontantPrevisionnelPasMarche)*100
+                            }
+                            
+                            arrayLabele.push(taux_region.toFixed(2)+ "%")
+                             /* if(vm.regions!=""){
+
+                              }else{
+
+                              }*/
+                               if(vm.infrastructure!=""){
+                                if(vm.type_minichart=="bar"){
+                                       width=20;
+                                  height=taux_region+30;
+                                    }else{
+                                    width=taux_region+60;
+                                    }
+                              }
+                           })
+                                  
+                              if(vm.infrastructure==""){
+                                if(vm.type_minichart=="bar"){
+                                      
+                                  height=taux+30;
+                                    }else{
+                                    width=taux+60;
+                                    }
+                              }
+                           
+
+                          
+                              var myBarChart = vm.objet_leaflet.minichart(value.latlng,{
+                                data: arrayBar,type:vm.type_minichart,
+                                colors:arrayColor,
+                               width:width,
+                               height:height,
+                               labels:arrayLabele
+                                });
+                            
+                          vm.objet_map.addLayer(myBarChart);
+                 
+               //  vm.objet_leaflet.marker(value.latlng).bindTooltip(value.ville, { permanent: true, offset: [0, 12] }).addTo(vm.objet_map);
+//vm.objet_leaflet.marker(value.latlng).bindLabel(value.ville).addTo(vm.objet_map);
+
+vm.objet_leaflet.circleMarker(value.latlng, {
+    radius: 1,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8,
+  
+}).bindTooltip("<div style='background:white; padding:1px 3px 1px 3px'><b>" + value.ville + "</b></div>", {permanent: true,
+direction: 'bottom',
+ sticky: true,
+    offset: [0, 10],
+    opacity: 0.75,
+    className: 'leaflet-tooltip' }).addTo(vm.objet_map);
+                          arrayBar=[]
+                          arrayColor=[]
+                         arrayLabele=[]
+
+                                })
+
+                        }
+                  
+                
+                }
+            
+                }
+,
+                add(){
+console.log(".Bonjour guei")
+                }
+        },
+        watch: {
+          slection_carte:function(value){
+                 console.log(value)
+                 if(value==0){
+   this.deleteLeafleMiniCharts(this.objet_map)
+                this.integrationChartPasRegisonSurCarte()
+                 }else{
+                   this.deleteLeafleMiniCharts(this.objet_map)
+                //this.integrationChartPasRegisonSurCarte()
+                 }
+          },
+          type_minichart: function (value) {
+                console.log(value);
+
+                this.deleteLeafleMiniCharts(this.objet_map)
+                this.integrationChartPasRegisonSurCarte()
+            },
+            infrastructure: function (value) {
+                console.log(value);
+                this.deleteLeafleMiniCharts(this.objet_map)
+                this.integrationChartPasRegisonSurCarte()
+            },
+            region: function (value) {
+                console.log(value);  
+             this.deleteLeafleMiniCharts(this.objet_map)
+                this.integrationChartPasRegisonSurCarte()
+            },
+            unite_administrative_id: function (value) {
+                console.log(value);  
+              //  this.objet_map.layers; 
+              this.deleteLeafleMiniCharts(this.objet_map)
+             //  this.objet_map.on('overlayremove', this.hide_charts())
+                this.integrationChartPasRegisonSurCarte()
+            }
         },
         mounted() {
-            setTimeout(() => {
+         /*   setTimeout(() => {
                 console.log('done')
                 this.$nextTick(() =>{
                     this.clusterOptions = { disableClusteringAtZoom: 11 }
                 });
-            }, 5000);
+            }, 5000);*/
 console.log(L)
+console.log(ad)
+console.log(ad1)
+console.log(this.getActeEffetFinancierPersonnaliser45)
+//console.log()
+/**
+ *  objet_map:"",
+              objet_leaflet:"",
+ */
  const mapComponent = this.$refs.map;
 
     const map = mapComponent.mapObject;
-  console.log(map)
+  this.objet_map=mapComponent.mapObject;
+  this.objet_leaflet=window.L
     let sid=window.L
      let panel_options = {
       closeButton: true,
       position: 'left',
       autoPan: false
     };
+    console.log("interne")
+    console.log(sid)
+     console.log("..interne...")
+
+
+
+
     var sidebar = sid.control.sidebar('map10', panel_options).addTo(map);
 var panelContent = {
       id: 'userinfo',                     // UID, used to access the panel
@@ -890,27 +1262,90 @@ var panelContent = {
       button: function (event) { console.log(event); }
     });
 
-    /**Affichage des chat graphique sur la carte */
-   if(this.localisation.length>0){
-      this.localisation.forEach(function (value){
+sid.easyPrint({
+	title: "Imprimer",
+	position: 'topleft',
+	sizeModes: ['A4Portrait', 'A4Landscape']
+}).addTo(map);
+  
+  
 
 
- console.log("center")  
-       let bar=[Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()];  
-       console.log(value.latlng)
-   
-    var myBarChart = sid.minichart(value.latlng, {data: bar,type:"bar"});
-    
- map.addLayer(myBarChart);
-      })
+/*Legend specific*/
+var legend = sid.control({ position: "bottomright" });
 
-    }
-      
+legend.onAdd = function(map) {
+  var div = sid.DomUtil.create("div", "legend");
+  div.innerHTML += "<h4>Légende</h4>";
+  div.innerHTML += '<i style="background: #6C0277"></i><span>Sanitaires</span><br>';
+  div.innerHTML += '<i style="background: #F0C300"></i><span>Scolaires</span><br>';
+  div.innerHTML += '<i style="background: #E73E01"></i><span>Communautaires</span><br>';
+  div.innerHTML += '<i style="background: #22780F"></i><span>Routière</span><br>';
+  console.log(map)
+  
 
-        }
+  return div;
+};
+
+legend.addTo(map);
+
+  /*let htmlLegend3 = sid.control.htmllegend({
+        position: 'bottomright',
+        legends: [
+          {
+            name: 'Legend',
+            elements: [{
+                label: 'Sanitaires',
+                html: "<div class='sante'></div>"
+            },
+            {
+                label: 'Scolaires',
+                html: "<div class='scolaire'></div>"
+            },
+            {
+                label: 'Communautaires',
+                html: "<div class='communautaire'></div>"
+            },
+            {
+                label: 'Routière',
+                html: "<div class='routier'></div>"
+            }]
+        }],
+        collapseSimple: false,
+        detectStretched: false,
+        visibleIcon: 'icon icon-eye',
+        hiddenIcon: 'icon icon-eye-slash'
+    })
+
+    map.addControl(htmlLegend3)*/
+    this.integrationChartPasRegisonSurCarte()
+
+
+
+}
     };
 </script>
 <style>
+.sante{
+   width: 20px;
+   height: 20px;
+   background: #6C0277;
+}
+.scolaire{
+   width: 20px;
+   height: 20px;
+   background: #F0C300;
+}
+.communautaire{
+   width: 20px;
+   height: 20px;
+   background: #E73E01;
+}
+.routier{
+   width: 20px;
+   height: 20px;
+   background: #22780F;
+}
 /* sidebar css */
 .sidebar {
   position: absolute;
@@ -1187,6 +1622,107 @@ var panelContent = {
   overflow-y: scroll !important;
 }
 
+.class-popup .leaflet-popup-content-wrapper {
+  background:#2980b9;
+  color:#fff;
+  font-size:10px;
+  line-height:10px;
+  }
 
+.class-popup .leaflet-popup-content-wrapper a {
+  color:#2980b9;
+  }
+.class-popup .leaflet-popup-tip-container {
+  width:40px;
+  height:20px;
+  }
+.class-popup .leaflet-popup-tip {
+  background:#2980b9;
+  }
+
+/* tooltip-class*/ 
+
+.class-tooltip{
+  background: green;
+  border: 2px solid cyan
+}
+.leaflet-tooltip-left.class-tooltip::before {
+  border-left-color: cyan;
+}
+.leaflet-tooltip-right.class-tooltip::before {
+  border-right-color: cyan;
+}
+
+.titreLable{
+  background: red;
+}
+
+.leaflet-tooltip {
+    /*position: absolute !important;
+    padding: 6px !important;
+    background-color: #000 !important;
+    border: 1px solid #fff !important;
+    border-radius: 3px !important;
+    color: #222 !important;
+    white-space: nowrap !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    pointer-events: none !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;*/
+      position: absolute !important;
+    padding: 4px !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    border: 0px solid #000 !important ;
+    color: #000 !important;
+    white-space: nowrap !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    pointer-events: none !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
+   
+    font-size: 9px !important;
+}
+
+
+
+/*Legend specific*/
+.legend {
+  padding: 6px 8px;
+  font: 14px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+  /*border-radius: 5px;*/
+  line-height: 24px;
+  color: #555;
+}
+.legend h4 {
+  text-align: center;
+  font-size: 16px;
+  margin: 2px 12px 8px;
+  color: #777;
+}
+
+.legend span {
+  position: relative;
+  bottom: 3px;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin: 0 8px 0 0;
+  opacity: 0.7;
+}
+
+.legend i.icon {
+  background-size: 18px;
+  background-color: rgba(255, 255, 255, 1);
+}
 
 </style>

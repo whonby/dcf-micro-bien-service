@@ -222,7 +222,7 @@ afficherLesActivite
        <label class="control-label">Montant prévu</label>
        <div class="controls">
          <input
-           type="text"
+           type="number"
            v-model="formData.montant_marche"
            class="span4" />
        </div>

@@ -63,7 +63,7 @@ decision_cf
                                 <td @dblclick="afficherModalModifierTypePrestation(index)" style="font-size:14px;font-weight:bold;">
                    {{LibelleActivite(detail_marche.activite_id) || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="font-size:14px;font-weight:bold;">
-                   {{detail_marche.imputation || 'Non renseigné'}}</td>
+                   {{afficherInputationBudgetaire(afficherIdLigneBudgetaire(afficherIdParent(detail_marche.id)))|| 'Non renseigné'}}</td>
                     <td class="taskOptions" style="font-size:14px;font-weight:bold;color:red;">
                                     {{formatageSomme(parseFloat(afficheMontantReelMarche(detail_marche.id)))}}
                                 </td>
@@ -74,6 +74,7 @@ decision_cf
                                     Ok
                                 </td> -->
                             </tr>
+
 
                             </tbody>
                         </table>
@@ -254,6 +255,7 @@ decision_cf
                       </div>
 
                        <div id="tab03" class="tab-pane ">
+                      
                          <imageMarche :macheid="detail_marche.id"></imageMarche>
                       </div>
       </div>
@@ -318,9 +320,9 @@ import decompte from "../dossierDecompte/decompteHs";
 //       import realiteServiceFaitCf from "../dossierRealiteServiceFait/realiteServiceFaitCfHs";
 // import realiteServiceFaitServiceOpProvisoireBS from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireBS";
 // import realiteServiceFaitServiceOpProvisoireCf from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireCf";
-       
+       //bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche
                   import financement from "../dossierFinancement/financementHs";
-                  import imageMarche from "../dossierImageMarche/imageMarche";
+                  import imageMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche";
                 import tableauBordExecution from "../tableauBordExecution/tableauBordExecution";
   import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
   export default {
@@ -433,7 +435,45 @@ created() {
     ]),
    
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+afficherInputationBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+       
+           return qtereel.imputation;
+      }
+      return ""
+        }
+      };
+    },
+afficherIdParent() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+       
+           return qtereel.parent_id;
+      }
+      return ""
+        }
+      };
+    },
+ afficherIdLigneBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+       
+           return qtereel.economique_id;
+      }
+      return ""
+        }
+      };
+    },
 NumeroDuLot() {
       return id => {
         if (id != null && id != "") {
