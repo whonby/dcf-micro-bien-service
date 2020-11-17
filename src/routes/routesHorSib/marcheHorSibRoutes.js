@@ -30,8 +30,13 @@ import AjouterServiceRealiteOpProvisoire from '../../pages/Hors_sib/biens_servic
 import detailExecutionOpDirect from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierPrincipal/detailExecutionOpDirect.vue';
 import detailExecutionOpInDirect from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierPrincipal/detailExecutionOpInDirect.vue';
 import detailMarcheParEntrepriseHors from '../../pages/Hors_sib/marcheParEntreprise/detailMarcheParEntreprise.vue';
-
+import cycleDeChaqueLotEnExecution from '../../pages/Hors_sib/marche_hors_sib_investissement/AfficheExecutionDesMarches/cycleDeChaqueLotEnExecution';
 const marcheHorSibRoutes =[
+    {
+        path: '/Suivi-des-marches/:id',
+        name: "cycleDeChaqueLotEnExecution",
+        component: cycleDeChaqueLotEnExecution
+    },
     {
         path: '/detail-Marche-Par-Entreprise/:id',
         name: "detailMarcheParEntrepriseHors",
