@@ -1,4 +1,5 @@
-
+fanalyseByLot
+afficherNumeroDossierCandidat1
 <template>
 <div>
   <div v-for="item in lot" :key="item.id" class="widget-content">
@@ -55,7 +56,7 @@
     <table class="table table-bordered table-striped" v-if="macheid">
       <thead>
       <tr>
-        <th>Numero Marché</th>
+        <th>Réference du Contrat</th>
         <th>Objet marché</th>
          <th>Imputation</th>
         <th>Montant de l'offre(en FCFA TTC)</th>
@@ -74,7 +75,7 @@
           :key="effetFinancier.id">
 
         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-          {{effetFinancier.numero_marche || 'Non renseigné'}}</td>
+          {{effetFinancier.reference_act || 'Non renseigné'}}</td>
           <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
           {{effetFinancier.marche.objet || 'Non renseigné'}}</td>
           <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
@@ -341,17 +342,6 @@
                 </div>
               </div>
             </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label" title=" ">Date de reception definitive</label>
-                <div class="controls">
-                  <input type="date" v-model="formEffetFinancier.date_reception"
-                         class="span"
-                         placeholder=""
-                  />
-                </div>
-              </div>
-            </td>
           </tr>
         </table>
       </div>
@@ -381,6 +371,7 @@
                 </div>
               </div>
             </td>
+           
            
              <td >
               <div class="control-group">
@@ -585,7 +576,7 @@
                   <input
                       type="text"  :value="afficherMontantHorsTaxeRetenuGarantie" style="text-align:left;color:red"
                       placeholder="saisir le montant hors taxe du dispositif retenu"
-editAfficherMontantRetenueGarantie
+
                       class="span"
                       readonly
                   />
@@ -642,15 +633,6 @@ editAfficherMontantRetenueGarantie
     </div>
   </div>
   <!---->
-
-
-
-
-
-
-
-
-  
 </div>
 </template>
 
@@ -1250,15 +1232,7 @@ afficheNomEntreprise() {
 
       return 0
     },
-  avanceDemarrageMontantTvaModifier() {
-      const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.afficherEnorere)/100);
 
-      if (val) {
-        return parseFloat(val).toFixed(0);
-      }
-
-      return 0
-    },
 
     editAvanceDemarrageMontantTva(){
       const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.editAfficherEnorere)/100);
@@ -1445,25 +1419,7 @@ affichierIdEntrepriseSelectionner() {
       }
 
     },
-nombreDejourCalculeModifier(){
-      let vM=this;
-      const acteAffet = vM.editActeEffetFinancier
-      if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
-      if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
 
-      var dateF = new Date(acteAffet.date_fin_exe).getTime()
-      var dateO = new Date(acteAffet.date_odre_service).getTime()
-      var resultat = dateF - dateO
-
-      var diffJour =  resultat / (1000 * 3600 * 24)
-
-      if(isNaN(diffJour)) return null
-
-      if(parseFloat(diffJour) < 0 ) return "durée invalide"
-      vM.editActeEffetFinancier.duree=diffJour
-      return  diffJour;
-
-    },
     nombreDejourCalcule(){
       let vM=this;
       const acteAffet = vM.formEffetFinancier

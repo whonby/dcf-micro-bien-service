@@ -19,6 +19,7 @@ import familleEmploie from "../../pages/acteurs_depenses/fonction/familleEmploie
 import ClassificationEmploisGradePrincipal from "../../pages/acteurs_depenses/fonction/ClassificationEmploisGradePrincipal.vue";
 import paiementPersonnel from "../../pages/acteurs_depenses/executionPersonnel/paiementPersonnel.vue"
 import executionPersonnel from "../../pages/acteurs_depenses/executionPersonnel/executionPersonnel.vue"
+// import ficheSuivi from "../../pages/acteurs_depenses/executionPersonnel/FicheSuiviMarche.vue"
 import detailExecutionPersonnel from "../../pages/acteurs_depenses/executionPersonnel/detailExecutionPersonnel.vue"
 import recrutementPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/recrutementPersonnel.vue";
 import detailPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/detailPersonnel";
@@ -97,6 +98,11 @@ const ActeurDepenseRoutes = [
     name: "paiementPersonnel",
     component: paiementPersonnel
   },
+  // {
+  //   path: "/FicheSuivi",
+  //   name: "ficheSuivi",
+  //   component: ficheSuivi
+  // },
   
   
   {

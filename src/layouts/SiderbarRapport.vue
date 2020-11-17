@@ -25,7 +25,7 @@
 		</center>
        </li>
        
-       
+        
        
         <li  @click.prevent="navigateToActeurDepense" >
           <a href="#">
@@ -33,6 +33,19 @@
             <span>SUIVI ENTREPRISE</span>
           </a>
         </li>
+        <li  @click.prevent="navigateToSuivMarche" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span> SUIVI DES CONTRATS</span>
+          </a>
+        </li>
+        <li  @click.prevent="navigateToDecompte" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span> DECOMPTE PROVISOIRE</span>
+          </a>
+        </li>
+        
          <li  @click.prevent="navigateToSuiviMarcheProjet" >
           <a href="#">
             <i class="icon-group"></i>
@@ -160,6 +173,20 @@ navigateToGestionMarche(){
           name: 'GestionMarche'
         })
       },
+
+navigateToSuivMarche(){
+        this.activate()
+        this.$router.push({
+          name: 'ficheSuivi'
+        })
+      },
+    navigateToDecompte(){
+        this.activate()
+        this.$router.push({
+          name: 'decompteProvisoire'
+        })
+      },
+
 
 navigateToSuiviMarcheProjet(){
         this.activate()
