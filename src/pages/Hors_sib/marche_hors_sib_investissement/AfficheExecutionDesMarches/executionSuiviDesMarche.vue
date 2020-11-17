@@ -101,7 +101,7 @@
 <td>
   <router-link :to="{ name: 'cycleDeChaqueLotEnExecution', params: { id: activites.id }}"
                  class="btn btn-inverse " title="FICHE DE SUIVI DES MARCHES">
-        <span class=""><i class=" icône-table"></i></span>
+        <span class=""><i class=" icon-folder-open"></i></span>
     </router-link>
 </td>
 <!-- <td>
