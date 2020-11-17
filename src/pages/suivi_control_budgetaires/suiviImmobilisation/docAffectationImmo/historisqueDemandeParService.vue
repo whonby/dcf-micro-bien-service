@@ -607,25 +607,9 @@ afficheEquipementAmortie() {
 
 
     
-    // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
+    
    },
-    // afficheEquipementEnCoursUtilidation() {
-    //   const st = this.search.toLowerCase();
-    //   return this.afficheEquipementEnCoursUtilidation.filter(type => {
-    //     return (
-    //       type.matricule_auteur.toLowerCase().includes(st) 
-    //     );
-    //   });
-    // },
-
-// filtreMaterielAmortis() {
-//       const st = this.search1.toLowerCase();
-//       return this.afficheEquipementAmortie.filter(type => {
-//         return (
-//           type.matricule_auteur.toLowerCase().includes(st) 
-//         );
-//       });
-//     },
+    
     afficheNombreEquipementEnCoursUtilidation() {
    
     return this.afficheEquipementEnCoursUtilidation.length;     

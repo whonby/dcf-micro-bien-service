@@ -175,10 +175,10 @@
                       </button>
                     </td>
                     <td>
-                     <router-link :to="{ name: 'detailOpdefinitif', params: {id:Manda.id}}"
+                     <!-- <router-link :to="{ name: 'detailOpdefinitif', params: {id:Manda.id}}"
                 class="btn btn-inverse " title="Detail Op Definitif" v-if="Manda.decision_cf == 8 || Manda.decision_cf == 9">
                   <span class="" style="color:#fff">Voir Op</span>
-                   </router-link>
+                   </router-link> -->
                        
                       <button  class="btn btn-danger" @click="supprimerMandat(Manda.id)">
                         <span>
@@ -465,7 +465,7 @@ afficheDateFacture() {
       return id => {
         if (id != null && id != "") {
           return this.mandats.filter(
-            element => element.marche_id == id  && this.afficherMarcheHorsSIb(element.marche_id) && element.differentop ==0
+            element => element.marche_id == id 
           );
         }
       };

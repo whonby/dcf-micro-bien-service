@@ -1,81 +1,93 @@
-
+RecupererNiveau3StructureDecision
 <template>
 
 <div>
 
   
-         <div id="DecisionServiceBeneficiaire" class="modal hide">
+         <div id="ObservationCFRealiteService" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Décision Chef de service</h3>
+        <h3>DECISION CF</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
-          <!-- <tr>
-            <td colspan="2">
-               <div class="control-group">
-                            <label class="control-label">Décision Chef de service </label>
+          <tr>
+            <td>
+              <div class="control-group">
+                            <label class="control-label">Décision CF </label>
                             <div class="controls">
-                              <select v-model="editOpDefinitif.decision_service_beneficiaire" class="span">
-                                <option value="0">Attente</option>
-                              <option value="1">Visé</option>
+                              <select v-model="editObservationCfServiceFait.decision_cf_service_real" class="span">
+                                <option value=""></option>
+                              <option value="8">Visé</option>
+                              <option value="9">Visé avec Observation</option>
                              <option value="2">Différé</option>
                              <option value="3">Réjeté</option>
-                            
+                            <option value="0">Attente</option>
     
     </select>
                            
                             </div>
                           </div>
             </td>
-             
-          </tr> -->
-        
-               <tr>
-                <td >
+              <td>
                     <div class="control-group">
-                            <label class="control-label">Observation Chef de service</label>
+                            <label class="control-label">Motif CF </label>
                             <div class="controls">
-                              <textarea  class="span" row = "2" v-model="editOpDefinitif.observation_emetteur">
-                              </textarea>
+                               <select v-model="editObservationCfServiceFait2.motifcf" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementParent" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
                             </div>
                           </div>
                  </td>
-                 <td >
-                       <div class="control-group">
-                            <label class="control-label">Date Observation:</label>
-                            <div class="controls">
-                              <input type="date" class="span"  v-model="editOpDefinitif.date_decision_emetteur"/>
-                             
-                            </div>
-                          </div>
-                       </td>
-                 
-                 </tr>            
-                  
-                       <tr>
-                 <td >
+          </tr>
+               <tr>
+                 <td>
                     <div class="control-group">
-                            <label class="control-label">Nom et prenoms </label>
+                            <label class="control-label">Libelle motif </label>
                             <div class="controls">
-                              <select v-model="editOpDefinitif.nom_emetteur" class="span">
-                                <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.editOpDefinitif.marche_id))"  :key="acteur.id"
-                        :value="acteur.id">{{afficherNomActeurDepense(acteur.acteur_depense_id)}}</option>
-                               </select>
-                           
+                               <select v-model="editObservationCfServiceFait.motif_cf_serviceRealite" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementEnfant(editObservationCfServiceFait2.motifcf)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
                             </div>
                           </div>
                  </td>
                   <td>
-                                  <div class="control-group">
-                            <label class="control-label">Fonction</label>
+                               <div class="control-group">
+                            <label class="control-label">Date Decision CF :</label>
                             <div class="controls">
-                              <input type="text" class="span" readonly :value=" afficherLibelleFoctionBudgetaire(afficherIdFoctionBudgetaire(editOpDefinitif.nom_service_beneficiaire))"/>
-                             
+                              <input type="date" class="span"  v-model="editObservationCfServiceFait.date_cf_service_real"/>
+                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                              
                             </div>
                           </div>
                            </td>
                  </tr>             
+                   <tr>
+                     <td>
+                        <div class="control-group">
+                            <label class="control-label">Observation CF</label>
+                            <div class="controls">
+                              <textarea  class="span" row = "6" v-model="editObservationCfServiceFait.obsevationcf_service_real">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                        <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
+                            <div class="controls">
+                              <input type="text" class="span"  :value="afficheNomUtilisateur" readonly/>
+                            </div>
+                          </div>
+                       </td>
+                       
+                       </tr>      
                         
                            
          
@@ -83,7 +95,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="FonctionDeModificationServiceRealite(editOpDefinitif)"
+          @click.prevent="FonctionDeModificationServiceRealite(editObservationCfServiceFait)"
           class="btn btn-primary"
           href="#"
          
@@ -97,56 +109,75 @@
                                    <tr>
 
                                         <th>Année</th>
-                                        <th>Num Op Definitif</th>
-                                         <th title="">Section</th>
+                                        <th>UA</th>
+                                         <th title="">Objet depense</th>
                               
                                  <th title="">Fournisseur</th>
+                                 <!-- <th title="">Adresse</th> -->
                                 <th title="">N°facture</th>
                                  <th>Date facture</th>
                                   <!-- <th>Imputation</th> -->
                                 <th>Montant</th>
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th >Date validation</th>
-                                <!-- <th title="Observation Controleur financier">Observation CF</th> -->
+                                <th >Date validation SB</th>
+                                <th >Date validation CF</th>
+                                <!-- <th >Observation CF</th> -->
                                 <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                      <tr
                     class="odd gradeX"
-                    v-for="realiteService in afficheOpDefinitiveBs(macheid)"
+                    v-for="realiteService in afficheServiceReaiteFaitCf(macheid)"
                     :key="realiteService.id"
                   >
         <td >{{realiteService.exercice_budget || 'Non renseigné'}}</td>
-         <td >{{realiteService.numero_op_definitif || 'Non renseigné'}}</td>
-                    <td >{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
+         <td >{{LIBELLEUA(realiteService.ua_id) || 'Non renseigné'}}</td>
+                    <td >{{afficheObjetfacture(realiteService.facture_id) || 'Non renseigné'}}</td>
                     <td >{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
                     <td >{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
-                     <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
+                     <td >{{formaterDate(afficheDateFacture(realiteService.facture_id)) || 'Non renseigné'}}</td> 
                      
                     <!-- <td >{{detail_marche.imputation  || 'Non renseigné'}}</td> -->
                      <td >{{formatageSomme(parseFloat(realiteService.total_general)) || 'Non renseigné'}}</td>
                      
-                       <td >{{(formaterDate(realiteService.date_decision_emetteur)) || 'Non renseigné'}}</td>
+                       <td >{{(formaterDate(realiteService.date_sb_service_real)) || 'Non renseigné'}}</td>
+                    <td >{{formaterDate(realiteService.date_cf_service_real) || 'Non renseigné'}}</td>
+                    <!-- <td >{{realiteService.motif_cf_serviceRealite || 'Non renseigné'}}</td> -->
+                     <td>
+                        <button v-if="realiteService.decision_cf_service_real == 8"  class="btn  btn-success" @click="afficherModalObservationCF(realiteService.id)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="realiteService.decision_cf_service_real == 2" class="btn  btn-warning" @click="afficherModalObservationCF(realiteService.id)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
                     
-                    <td>
-                      <button  class="btn  btn-danger" v-if="realiteService.decision_emetteur == 0" @click="afficherModalObservationServiceBeneficiaire(realiteService.id)">
-                        <span>
-                          <i class="icon icon-ok"></i>
-                        </span>
                       </button>
-                      <button  v-else  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(realiteService.id)">
-                        <span>
-                          <i class="icon icon-ok"></i>
-                        </span>
+                        <button v-else-if="realiteService.decision_cf_service_real == 3" class="btn  btn-danger" @click="afficherModalObservationCF(realiteService.id)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
                       </button>
-                       
-                      <button  class="btn btn-danger" @click="supprimerMandat(realiteService.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
+                       <button v-else-if="realiteService.decision_cf_service_real == 9"  class="btn  btn-success" @click="afficherModalObservationCF(realiteService.id)" >                        
+                     
+                      <span title="Visé avec observation">Visé O</span>
+                      
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationCF(realiteService.id)" >                        
+                     
+                      
+                       <span>Attente</span>
+                      
+                    
                       </button>
                     </td>
+                   
                                      </tr>
                
                  
@@ -186,8 +217,11 @@ export default {
         }
       ],
       
-       editOpDefinitif: {
-         decision_emetteur : 1
+       editObservationCfServiceFait2: {
+         motifcf : ""
+       },
+        editObservationCfServiceFait: {
+         
        },
 search:""
         }
@@ -243,6 +277,39 @@ search:""
       // "sections"
        
     ]),
+      ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision','plans_Decision']),
+
+      afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
+RecupererNiveau3StructureDecision() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structuresDecision.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau;
+      }
+      return 0
+        }
+      };
+    },
+     AffichierElementParent() {
+      
+          return this.plans_Decision.filter(element => this.RecupererNiveau3StructureDecision(element.structure_motif_decission_id) == 3);
+     
+    },
+    AffichierElementEnfant() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
     afficherIdFoctionBudgetaire() {
       return id => {
         if (id != null && id != "") {
@@ -373,24 +440,36 @@ afficheDateFacture() {
         }
       };
     },
-   afficherSection() {
+    LIBELLEUA() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.sections.find(qtreel => qtreel.id == id);
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-         return qtereel.code_section.concat('  ', qtereel.nom_section);
+         return qtereel.libelle;
        
       }
       return 0
         }
       };
     },
-       afficheOpDefinitiveBs() {
+   afficheObjetfacture() {
       return id => {
         if (id != null && id != "") {
-          return this.mandats.filter(
-            element => element.marche_id == id 
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+         return qtereel.objet_facture;
+       
+      }
+      return 0
+        }
+      };
+    },
+       afficheServiceReaiteFaitCf() {
+      return id => {
+        if (id != null && id != "") {
+          return this.mandats.filter(element => element.marche_id == id
           );
         }
       };
@@ -410,7 +489,7 @@ afficheDateFacture() {
       };
     },
     afficheMarcheType(){
-if(this.afficheIdTypeMarche(this.editOpDefinitif.marche_id) == 5){
+if(this.afficheIdTypeMarche(this.editObservationCfServiceFait.marche_id) == 5){
 return 1
 }
 else{
@@ -433,13 +512,13 @@ else{
                
             ]),
        
-afficherModalObservationServiceBeneficiaire(id) {
-      this.$("#DecisionServiceBeneficiaire").modal({
+afficherModalObservationCF(id) {
+      this.$("#ObservationCFRealiteService").modal({
         backdrop: "static",
         keyboard: false
       });
 
-       this.editOpDefinitif = this.afficheOpDefinitiveBs(this.macheid).find(item=>item.id==id);
+       this.editObservationCfServiceFait = this.afficheServiceReaiteFaitCf(this.macheid).find(item=>item.id==id);
     },
 
      afficherModalAjouterTitre() {
@@ -484,30 +563,14 @@ formatageSomme:formatageSomme,
      
 
  var nouvelObjet = {
-      ...this.editOpDefinitif,
-     	exercice_budget :this.editOpDefinitif.exercice_budget,
-       
-         marche_id : this.editOpDefinitif.marche_id,
-       
-      	
-        facture_id:this.editOpDefinitif.facture_id,
-       
- total_general :this.editOpDefinitif.total_general,
-
-  ua_id:this.editOpDefinitif.ua_id,
-  
-
-
-section_id:this.afficherSectId,
-// id:this.afficherIdRealiteServiceFait(this.editOpDefinitif.marche_id),
-  // engagement_id:this.editOpDefinitif.id,
-  marchetype:this.editOpDefinitif.marchetype,
-  decision_emetteur:1
+      ...this.editObservationCfServiceFait,
+     	
+  	
        };
  this.modifierMandat(nouvelObjet);
-this.$("#DecisionServiceBeneficiaire").modal('hide');
+this.$("#ObservationCFRealiteService").modal('hide');
 
-          this.editOpDefinitif={
+          this.editObservationCfServiceFait={
                   numero_bon_manuel:"",
 numero_demande:"",
 	exo_id:"",

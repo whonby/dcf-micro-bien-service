@@ -8,7 +8,7 @@ detail_marche
          <div id="DecisionService" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Décision Chef de service</h3>
+        <h3>Décision Service Bénéficiaire</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -42,6 +42,7 @@ detail_marche
                             <label class="control-label">Nom et prenoms </label>
                             <div class="controls">
                               <select v-model="EditServiceRealite.nom_service_beneficiaire" class="span">
+                               <option></option>
                                 <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.EditServiceRealite.marche_id))"  :key="acteur.id"
                         :value="acteur.id">{{afficherNomActeurDepense(acteur.acteur_depense_id)}}</option>
                                </select>
@@ -59,7 +60,30 @@ detail_marche
                           </div>
                            </td>
                  </tr>             
-                        
+                  <tr v-if="EditServiceRealite.nom_service_beneficiaire ==''">
+                 <td >
+                    <div class="control-group">
+                            <label class="control-label">Nom et prenoms </label>
+                            <div class="controls">
+                              <select v-model="EditServiceRealite.nombsinterim" class="span">
+                               <option></option>
+                                <option v-for="acteur in afficheFonctionAdmActeurDepense(afficheUAId(this.EditServiceRealite.marche_id))"  :key="acteur.id"
+                        :value="acteur.id">{{afficherNomActeurDepense(acteur.acteur_depense_id)}}</option>
+                               </select>
+                           
+                            </div>
+                          </div>
+                 </td>
+                  <td>
+                                  <div class="control-group">
+                            <label class="control-label">Fonction</label>
+                            <div class="controls">
+                              <input type="text" class="span" readonly :value=" afficherIdFoctionAdministration(afficherLibelleFoctionAdministrative(EditServiceRealite.nombsinterim))"/>
+                             
+                            </div>
+                          </div>
+                           </td>
+                 </tr>        
                            
          
         </table>
@@ -206,7 +230,7 @@ search:""
   ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections","plans_programmes"]),
     ...mapGetters("parametreGenerauxProgrammeUnite", ["unites"]),
-    ...mapGetters("personnelUA", ["acte_personnels","fonctionBudgetaire","all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
+    ...mapGetters("personnelUA", ["fonctions","acte_personnels","fonctionBudgetaire","all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
     
    
   ...mapGetters("uniteadministrative", [
@@ -222,6 +246,30 @@ search:""
       // "sections"
        
     ]),
+    afficherIdFoctionAdministration() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acte_personnels.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.fonction_id;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+    afficherLibelleFoctionAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
     afficherIdFoctionBudgetaire() {
       return id => {
         if (id != null && id != "") {
@@ -255,6 +303,14 @@ search:""
         return qtereel.ua_id;
       }
       return 0
+        }
+      };
+    },
+    afficheFonctionAdmActeurDepense() {
+      return id => {
+        if (id != null && id != "") {
+           return this.acte_personnels.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.fonction_budgetaire_id == null);
+
         }
       };
     },

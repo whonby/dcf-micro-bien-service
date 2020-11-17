@@ -161,7 +161,7 @@ decision_cf
                                 <div class="widget-title">
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#OPPROVISOREBS">Service Bénéficiaire</a></li>
-                                  <li class=""><a data-toggle="tab" href="#OPPROVISORECF">Controlleur Financier</a></li>
+                                  <li class=""><a data-toggle="tab" href="#OPPROVISORECF">Contrôleur Financier</a></li>
                                    
                                                   
                             </ul>
