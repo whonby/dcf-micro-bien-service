@@ -2429,3 +2429,52 @@ export const GET_ALL_TYPE_ORDRE_PAIEMENT = (state, tableau_typeordre) =>{
    export const SUPPRIMER_TYPE_ORDRE_PAIEMENT = (state, id) =>{
        state.typeOrdrePaiement = state.typeOrdrePaiement.filter(response => response.id!=id)
    }
+
+
+   // mutation pour le reserve du cf
+
+   
+export const GET_ALL_RESERVE_CF = (state, tableau_reserve_cf) =>{
+    state.reserve_cf = tableau_reserve_cf
+   }
+   
+   export const AJOUTER_RESERVE_CF = (state, elementAjout) =>{
+       state.reserve_cf.unshift(elementAjout)
+   }
+   
+   export const MODIFIER_RESERVE_CF = (state, elementModifie) =>{
+       state.reserve_cf = state.reserve_cf.map(item =>{
+           if(item.id == elementModifie.id){
+               item = {...elementModifie}
+           }
+           return item
+       })
+   }
+   
+   export const SUPRIMER_RESERVE_CF = (state, id) =>{
+       state.reserve_cf = state.reserve_cf.filter(response => response.id!=id)
+   }
+
+
+   // mutation pour arnmp 
+
+   export const GET_ALL_ARNP = (state, tableau_arnmp) =>{
+    state.arnmps = tableau_arnmp
+   }
+   
+   export const AJOUTER_ARNMP = (state, elementAjout) =>{
+       state.arnmps.unshift(elementAjout)
+   }
+   
+   export const MODIFIER_ARNMP = (state, elementModifie) =>{
+       state.arnmps = state.arnmps.map(item =>{
+           if(item.id == elementModifie.id){
+               item = {...elementModifie}
+           }
+           return item
+       })
+   }
+   
+   export const SUPPRIMER_ARNMP = (state, id) =>{
+       state.arnmps = state.arnmps.filter(response => response.id!=id)
+   }

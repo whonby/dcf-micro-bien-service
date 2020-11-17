@@ -4458,3 +4458,87 @@ export function supprimerTypeOrdrePaiement({commit},id){
       axios.delete('/typeOrdrePaiement/' + id).then(() => dialog.close() )   
   })
 }
+
+
+// action pour le reserve cf
+
+export  function  getReserveCf({commit}) {
+  queue.push(() => axios.get('/reserve').then((response) => {
+    
+    commit('GET_ALL_RESERVE_CF', response.data) 
+    
+}).catch(error => console.log(error)))
+}
+
+
+ // 
+ export function ajouterReserveCf({commit},formData){
+  asyncLoading( axios.post('/reserve',formData)).then(response => {
+       commit('AJOUTER_RESERVE_CF', response.data)
+       
+   }).catch(error => console.log(error))
+//  console.log(formData)
+}
+
+export function modifierReserveCf({commit}, element_modifie){
+  asyncLoading( axios.put('/reserve/'+ element_modifie.id, element_modifie))
+   .then(response => {
+        commit('MODIFIER_RESERVE_CF',response.data)
+
+   }).catch(error => console.log(error))
+  // console.log(element_modifie)
+} 
+
+
+export function supprimerReserveCf({commit},id){
+  
+  this.$app.$dialog
+  .confirm("Voulez vouz vraiment supprimer ?.")
+  .then(dialog => {
+     commit('SUPRIMER_RESERVE_CF', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/reserve/' + id).then(() => dialog.close() )   
+  })
+}
+
+
+// action pour le ARNMP
+
+export  function  getArnmp({commit}) {
+  queue.push(() => axios.get('/arnmp').then((response) => {
+    
+    commit('GET_ALL_ARNP', response.data) 
+    
+}).catch(error => console.log(error)))
+}
+
+
+ // 
+ export function ajouterArnmp({commit},formData){
+  asyncLoading( axios.post('/arnmp',formData)).then(response => {
+       commit('AJOUTER_ARNMP', response.data)
+       
+   }).catch(error => console.log(error))
+//  console.log(formData)
+}
+
+export function modifierArnmp({commit}, element_modifie){
+  asyncLoading( axios.put('/arnmp/'+ element_modifie.id, element_modifie))
+   .then(response => {
+        commit('MODIFIER_ARNMP',response.data)
+
+   }).catch(error => console.log(error))
+  // console.log(element_modifie)
+} 
+
+
+export function supprimerArnmp({commit},id){
+  
+  this.$app.$dialog
+  .confirm("Voulez vouz vraiment supprimer ?.")
+  .then(dialog => {
+     commit('SUPPRIMER_ARNMP', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/arnmp/' + id).then(() => dialog.close() )   
+  })
+}

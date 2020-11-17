@@ -29,8 +29,8 @@ const defaultState = {
     DossierCandidats:[],
     livrables:[],
 
-    // documents:[],
-    // rapportJugements:[],
+     reserve_cf:[],
+     arnmps:[],
     // rapportOuverture1:[],
     // rapportOuverture2:[],
 

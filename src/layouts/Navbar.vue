@@ -311,6 +311,8 @@ this.getImageMarche()
 this.getMembreCojo()
     this.getProceVerbal()
       this.getEcheances()
+      this.getReserveCf()
+      this.getArnmp()
       /**
        * fin missions
        */
@@ -403,10 +405,10 @@ this.getMembreCojo()
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
           'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
-          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
+          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement",
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
 
-          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances"]),
+          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances","getReserveCf","getArnmp"]),
 
           ...mapActions('horSib',['getMarcheHorSib',"getRealiteServiceHors","getOpProvisoire"])
 

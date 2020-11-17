@@ -410,7 +410,7 @@ export default {
 
      ...mapGetters("uniteadministrative",['getterligneExempter','uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupeUaPourMarheHorSib" ,"budgetEclate","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
-      "montantBudgetGeneral", ]),
+      "montantBudgetGeneral","getPersonnaliseTransfert" ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
@@ -512,16 +512,20 @@ ImputationBudget() {
       };
     },
    
-    // ImputationBudget() {
+   /// recuperation de UA qui a au moins effectué un transfert
 
-    //   const norme = this.plans_budgetaires.find(normeEquipe => normeEquipe.id == this.formData.ligneeconomique_id );
-     
-
-    //   if (norme) {
-    //     return norme.code;
-    //   }
-    //   return 0
-    // },
+  listeTableuaUa(){
+    let UAItem=[];
+    this.UAItem.foreach(function(value){
+      let objet2=this.getPersonnaliseTransfert.find(item => item.UAItem==value.id)
+      if(objet2!=undefined){
+        UAItem.push(value)
+        console.log(UAItem)
+      }
+    })
+    return UAItem;
+  },
+  
     
     // afficherLibelle unite administrative
 

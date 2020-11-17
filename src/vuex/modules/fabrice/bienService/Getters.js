@@ -77,8 +77,8 @@ export const getterDemandeAno = state => state.stateDemandeAno
 export const getterAnalyseDMP = state => state.analyseDMP
 export const getterAnoDMPBailleur = state => state.stateAnoDmpBailleur
 export const getterObseravtionBailleurs = state => state.obseravtionBailleurs
-// export const nombremarches = state => state.marches.length;
-//export const gettersPsc = state =>state.gettersPsc
+ export const gettersArnmp = state => state.arnmps
+export const gettersReserveCf = state =>state.reserve_cf
 export const gettersCotations = state =>state.stateCotations 
  export const gettersTransmissions = state => state.stateTransmissions
 export const getterMarcheBailleur= state => state.bailleurMarche;
