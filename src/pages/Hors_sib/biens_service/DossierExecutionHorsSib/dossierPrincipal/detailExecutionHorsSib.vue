@@ -255,6 +255,7 @@ decision_cf
                       </div>
 
                        <div id="tab03" class="tab-pane ">
+                      
                          <imageMarche :macheid="detail_marche.id"></imageMarche>
                       </div>
       </div>
@@ -303,9 +304,12 @@ decision_cf
     import moment from "moment";
     import { formatageSomme } from './../../../../../Repositories/Repository';
    
-import avenant from "../dossierAvenant/avenantHs";
-import facture from "../dossierFacture/factureHs";
-import decompte from "../dossierDecompte/decompteHs";
+   import avenant from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
+   import facture from "../dossierFacture/factureHs";
+   import decompte from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte";
+// import avenant from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
+// import facture from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierFacture/facture";
+// import decompte from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte";
     
 //     import listeOpDefinitiveBsDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveBsDirect.vue";
 //     import listeOpDefinitiveCfDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveCfDirect.vue";
@@ -319,9 +323,9 @@ import decompte from "../dossierDecompte/decompteHs";
 //       import realiteServiceFaitCf from "../dossierRealiteServiceFait/realiteServiceFaitCfHs";
 // import realiteServiceFaitServiceOpProvisoireBS from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireBS";
 // import realiteServiceFaitServiceOpProvisoireCf from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireCf";
-       
+       //bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche
                   import financement from "../dossierFinancement/financementHs";
-                  import imageMarche from "../dossierImageMarche/imageMarche";
+                  import imageMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche";
                 import tableauBordExecution from "../tableauBordExecution/tableauBordExecution";
   import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
   export default {

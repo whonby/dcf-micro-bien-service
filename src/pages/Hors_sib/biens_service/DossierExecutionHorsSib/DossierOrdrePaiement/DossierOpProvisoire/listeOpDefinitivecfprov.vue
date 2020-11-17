@@ -178,7 +178,7 @@ AffichierElementParent
                     <td>
                      <router-link :to="{ name: 'detailOpdefinitif', params: {id:Manda.id}}"
                 class="btn btn-inverse " title="Detail Op Definitif" >
-                  <span class="" style="color:#fff">Detail Op</span>
+                  <span class="" style="color:#fff">Voir Op</span>
                    </router-link>
                        
                       <button  class="btn btn-rr" @click="supprimerMandat(Manda.id)">

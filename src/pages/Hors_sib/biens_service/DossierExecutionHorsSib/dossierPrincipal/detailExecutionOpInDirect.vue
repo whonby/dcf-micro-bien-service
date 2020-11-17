@@ -147,7 +147,7 @@ decision_cf
                        <li ><a data-toggle="tab" href="#OPPROVISORE" >Ordre Paiement Provisoire</a></li>
                                 <li ><a data-toggle="tab" href="#opAnnulation" >Ordre Paiement Annulation</a></li>
                                 <li ><a data-toggle="tab" href="#rsopindirecte" >Réalité service fait</a></li>
-                                <li><a data-toggle="tab" href="#OpDefinitifIndirect" >Ordre Paiement Définitive</a></li>
+                                <li><a data-toggle="tab" href="#OpDefinitifIndirect" >Ordre Paiement Définitif</a></li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab03">IMAGES DES MARCHES</a>
                       </li> -->
@@ -161,7 +161,7 @@ decision_cf
                                 <div class="widget-title">
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#OPPROVISOREBS">Service Bénéficiaire</a></li>
-                                  <li class=""><a data-toggle="tab" href="#OPPROVISORECF">Controlleur Financier</a></li>
+                                  <li class=""><a data-toggle="tab" href="#OPPROVISORECF">Contrôleur Financier</a></li>
                                    
                                                   
                             </ul>

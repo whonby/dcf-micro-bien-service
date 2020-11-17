@@ -44,7 +44,7 @@
                   <th>Objet marché</th>
                   <th>Type de marché</th>
                    <th>Procedure de passation</th>
-                  <th>Localisation géographie</th>
+                  <th>Région</th>
                   <th>Montant prévu</th>
                   <th title="mouvement du marché">Mouvement marché</th>
                    <th>Statut</th>             
@@ -69,7 +69,7 @@
                       {{afficherCodeProcedurePassation(activites.procedure_passation_id) || 'Non renseigné'}}</td>
                     
                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{afficherLibelleLocalisationGeographie(activites.localisation_geographie_id) || 'Non renseigné'}}</td>
+                      {{afficherLibelleLocalisationGeographie(afficheLocalisation(activites.id)) || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{formatageSomme(parseFloat(activites.montant_marche)) || 'Non renseigné'}}</td>
                     
@@ -313,7 +313,18 @@ export default {
  'structures_geographiques','localisations_geographiques','getterInfrastrucure']),
 
     ...mapGetters("horSib", ["gettersMarcheHorsib"]),
+afficheLocalisation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.parent_id == id);
 
+      if (qtereel) {
+        return qtereel.localisation_geographie_id;
+      }
+      return 0
+        }
+      };
+    },
 ListeMarcheInfrastructureNiveau1() {
       const st = this.search.toLowerCase();
       return this.afficherListeMarcheHorsSib.filter(type => {

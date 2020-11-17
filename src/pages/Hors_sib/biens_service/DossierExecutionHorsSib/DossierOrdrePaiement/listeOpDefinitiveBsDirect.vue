@@ -125,7 +125,7 @@
                      <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
                      
                     <!-- <td >{{detail_marche.imputation  || 'Non renseigné'}}</td> -->
-                     <td >{{formatageSomme(realiteService.total_general) || 'Non renseigné'}}</td>
+                     <td >{{formatageSomme(parseFloat(realiteService.total_general)) || 'Non renseigné'}}</td>
                      
                        <td >{{(formaterDate(realiteService.date_decision_emetteur)) || 'Non renseigné'}}</td>
                     
@@ -390,7 +390,7 @@ afficheDateFacture() {
       return id => {
         if (id != null && id != "") {
           return this.mandats.filter(
-            element => element.marche_id == id  && this.afficherMarcheHorsSIb(element.marche_id) && element.differentop ==0
+            element => element.marche_id == id 
           );
         }
       };

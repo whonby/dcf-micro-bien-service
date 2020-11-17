@@ -25,7 +25,7 @@ detail_marche
                     </td>
                     <td colspan="2">
                          <div class="control-group">
-            <label class="control-label">NOM COMMERCIAL </label>
+            <label class="control-label">FOURNISSEURS </label>
             <div class="controls">
              <select  class="span8" v-model="formData.entrep_id">
                       <option></option>
@@ -251,7 +251,7 @@ detail_marche
                     <th>Section</th>
                     <th title="Unité Administrative">UA</th>
                     <th title="Montant ( Montant de Base + Avenants)(TTC)">Montant(TTC)</th>
-                     <th title="Date d'Approbation">D.Approbation</th>
+                     <th title="Date d'Approbation">Approbation</th>
                      <!-- <th>Type marche</th>
                      <th>Etat Marche</th> -->
                     <th>Nature</th>

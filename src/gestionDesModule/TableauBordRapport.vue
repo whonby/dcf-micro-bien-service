@@ -25,7 +25,7 @@ detail_marche
                     </td>
                     <td colspan="2">
                          <div class="control-group">
-            <label class="control-label">NOM COMMERCIAL </label>
+            <label class="control-label">FOURNISSEUR </label>
             <div class="controls">
              <select  class="span8" v-model="formData.entrep_id">
                       <option></option>

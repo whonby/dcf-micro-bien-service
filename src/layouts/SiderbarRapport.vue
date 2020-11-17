@@ -46,6 +46,24 @@
           </a>
         </li>
         
+         <li  @click.prevent="navigateToSuiviMarcheProjet" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span>MARCHE UA</span>
+          </a>
+        </li>
+         <li  @click.prevent="navigateToSuiviMarcheProjetpARtYPEmArche" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span>MARCHE UA PAR TYPE</span>
+          </a>
+        </li>
+          <li  @click.prevent="etatRecapitulativeS" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span>ETAT RECAPITULATIF</span>
+          </a>
+        </li>
         <li >
            <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
          
@@ -170,6 +188,24 @@ navigateToSuivMarche(){
       },
 
 
+navigateToSuiviMarcheProjet(){
+        this.activate()
+        this.$router.push({
+          name: 'suiviMarcheDesProjets'
+        })
+      },
+navigateToSuiviMarcheProjetpARtYPEmArche(){
+        this.activate()
+        this.$router.push({
+          name: 'suiviMarcheDesProjetParTypeMarche'
+        })
+      },
+      etatRecapitulativeS(){
+        this.activate()
+        this.$router.push({
+          name: 'etatRecapitulative'
+        })
+      },
       navigateToActeurDepense(){
         this.activate()
         this.$router.push({

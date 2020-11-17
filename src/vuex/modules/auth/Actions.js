@@ -56,8 +56,7 @@ export function login({commit}, user){
       localStorage.removeItem('token')
       localStorage.removeItem('Users')
       commit('LOGOUT_USER')
-      router.push({ name: 'Login' })                   
-
+      router.push({ name: 'Login' })
     }
 
 

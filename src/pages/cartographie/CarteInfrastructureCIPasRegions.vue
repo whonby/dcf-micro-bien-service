@@ -1,11 +1,25 @@
 <template>
 
     <div>
-       
+   
+<!--<div class="radio-group-control">
+  <label class="radio-group-label">
+    <input type="radio"  value="0" v-model="slection_carte">
+    <span class="radio-group-label__text">
+      <span class="radio-group-tick"></span> CARTE DES PREVISIONNELS INFRASTRUCTURES </span>
+  </label>
+  <label class="radio-group-label">
+    <input type="radio" value="1" v-model="slection_carte">
+    <span class="radio-group-label__text"><span class="radio-group-tick"></span>
+    CARTE DES EXECUTIONS INFRASTRUCTURES 
+    </span>
+  </label>
+</div>-->
+
+
         <div class="">
             
         <div class="row-fluid">
-          
        <div id="map10" class="sidebar leaflet-sidebar collapsed">
           <div class="sidebar-tabs">
             <ul role="tablist"> <!-- top aligned tabs -->
@@ -222,6 +236,7 @@ import ad1 from "leaflet-easyprint"
                 {iconUrl, shadowUrl}
             ))
             return {
+              slection_carte:0,
               objet_map:"",
               objet_leaflet:"",
               type_minichart:"bar",
@@ -357,7 +372,7 @@ import ad1 from "leaflet-easyprint"
             "uniteAdministratives",
             "getterBudgeCharge"
         ]),
-        ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise"]),
+        ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise","getActeEffetFinancierPersonnaliser45"]),
           regions(){
       return this.getterLocalisationGeoAll.filter(item=>item.structure_localisation_geographique.niveau==2);
     },
@@ -373,59 +388,11 @@ import ad1 from "leaflet-easyprint"
       }
     },
 
-removeMapChart(){
-let vm=this
-
-    if(vm.objet_map!="" && vm.objet_leaflet!=""){
-       let arrayBar=[]
-    let arrayColor=[]
-
-if(this.localisations_geographiques.length>0){
-      this.localisations_geographiques.forEach(function (value){
- if(value.structure_localisation_geographique_id==5){
-                    if(value.longitude!=null && value.latitude!=null){
-
-           let montantInfraParRegion=0
-    // #0000FF
-        vm.getInfrastructure(vm.infrastructure).forEach(function(val){
-        montantInfraParRegion=  vm.getMontantMarcheRegionInfrastructure(value.id,val.id)
-        if(val.code==1){
-          arrayColor.push("#6C0277")
-        }
-         if(val.code==2){
-          arrayColor.push("#F0C300")
-        }
-         if(val.code==3){
-          arrayColor.push("#E73E01")
-        }
-         if(val.code==4){
-          arrayColor.push("#22780F")
-        }
-          arrayBar.push(montantInfraParRegion)
-        })
-         
-   
-   
-    var myBarChart = vm.objet_leaflet.minichart(value.latlng, {data: arrayBar,type:"bar",colors:arrayColor});
- vm.objet_map.remove(myBarChart);
-                    }}
-                   
-
-
-      })
- return null
-    }
-      
-       return null
-    }
-   return null
-},
-   
 
 getMontantMarcheRegionInfrastructure(){
        return (region,infrastructure)=>{
           let marche=this.objetMarchePasUniteOuRegion.filter(item=>{
-            if( item.localisation_geographie_id==region && item.infrastructure_id==infrastructure)
+            if( item.localisation_geographie_id==region && item.infrastructure_id==infrastructure && item.parent_id!=null)
            return item
             })
 
@@ -435,6 +402,31 @@ getMontantMarcheRegionInfrastructure(){
             return total + parseFloat(currentValue.montant_marche) ;
           }, initeVal);
           return montant
+       }
+},
+getTotaleMontantMarcheParUnite(){
+   return (region,infrastructure)=>{
+     let vm=this;
+          let marche=this.objetMarchePasUniteOuRegion.filter(item=>{
+            if( item.localisation_geographie_id==region && item.infrastructure_id==infrastructure && item.attribue==2)
+           return item
+            })
+               let montant_reel_marche=0;
+            marche.forEach(function(value){
+                let objet_act=vm.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==value.id)
+                if(objet_act!=undefined){
+ montant_reel_marche=parseFloat(montant_reel_marche) +  parseFloat(objet_act.montant_act)
+                }else{
+montant_reel_marche =montant_reel_marche+ 0
+                }
+                
+            })
+
+               /*let initeVal = 0;
+          let montant=  marche.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);*/
+          return montant_reel_marche
        }
 },
     sousPrefecture(){
@@ -454,7 +446,7 @@ getMontantMarcheRegionInfrastructure(){
 
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id)
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
       }
 
       
@@ -462,28 +454,131 @@ getMontantMarcheRegionInfrastructure(){
       return objet
     },
 
+    totalMontantPrevisionnelPasMarche(){
+       let vM=this;
+      let objet=this.marches
+      
+           if(vM.unite_administrative_id!=""){
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
+        }
+
+           let initeVal = 0;
+          let montant=  objet.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);
+          return montant
+
+    },
+
+    totalMontantPrevisionnelPasRegion(){
+      return regions=>{
+          let vM=this;
+        if(regions!=""){
+              let objet;
+
+               if(vM.unite_administrative_id!=""){
+            objet =this.marches.filter(item=>{
+                    if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==regions && item.parent_id!=null){
+            return item
+               }
+            })
+             }else{
+                objet =this.marches.filter(item=>item.localisation_geographie_id==regions && item.parent_id!=null)
+             }
+
+           let initeVal = 0;
+            let montant=  objet.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);
+          return montant
+              
+           }
+
+      }
+
+    },
+
+  totalMontantInfrastructure(){
+    return unite_administrative_id=>{
+          let vM=this;
+          let objet;
+        if(unite_administrative_id!=""){
+                objet =this.marches.filter(item=>{
+                    if(item.unite_administrative_id==unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=null){
+            return item
+               }
+            })
+
+
+           let initeVal = 0;
+            let montant=  objet.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);
+          return montant
+              
+           }
+
+           if(vM.infrastructure!=""){
+                 objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!=null)
+          
+                let initeVal = 0;
+                  let montant=  objet.reduce(function (total, currentValue) {
+                  return total + parseFloat(currentValue.montant_marche) ;
+                }, initeVal);
+                return montant
+           }
+
+      }
+
+  },
+
+  totalMontantInfrastructurePasRegion(){
+        return regions=>{
+          let vM=this;
+        if(regions!=""){
+              let objet;
+
+              objet =this.marches.filter(item=>{
+                   if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==regions && item.parent_id!=null){
+                   return item
+                    }
+                 })
+
+           let initeVal = 0;
+            let montant=  objet.reduce(function (total, currentValue) {
+            return total + parseFloat(currentValue.montant_marche) ;
+          }, initeVal);
+          return montant
+              
+           }
+
+      }
+  },
+
       objetMarchePasUniteOuRegion(){
       let vM=this;
       let objet=this.marches
 
 
 
+
+
       if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region)
+        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region && item.parent_id!=null)
 
       }
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id)
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
       }
 
       if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region==""){
-        objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure)
+        objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!=null)
       }
 
       if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure==""){
         objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region){
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
             return item
           }
         })
@@ -491,7 +586,7 @@ getMontantMarcheRegionInfrastructure(){
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure){
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=null){
             return item
           }
         })
@@ -499,7 +594,7 @@ getMontantMarcheRegionInfrastructure(){
 
       if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region){
+          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=null){
             return item
           }
         })
@@ -507,7 +602,7 @@ getMontantMarcheRegionInfrastructure(){
 
       if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region){
+          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
             return item
           }
         })
@@ -961,16 +1056,32 @@ formatageSomme:formatageSomme,
                 let vm=this
                 let arrayBar=[]
                 let arrayColor=[]
-
+                let arrayLabele=[]
        if(vm.objet_map!="" && vm.objet_leaflet!=""){
                 //  let tail=this.localisation.length
             if(this.localisation.length>0){
                       
                   this.localisation.forEach(function (value){
+                    let taux=0;
+                    let width=60;
+                    let height=60;
                   let montantInfraParRegion=0
-                              // #0000FF
+
+                  
+                  //console.log(taux)
+
+               if(vm.infrastructure!=""){
+              taux= (vm.totalMontantInfrastructurePasRegion(value.id) /vm.totalMontantInfrastructure(vm.unite_administrative_id))*100
+                            }else{
+              taux=(vm.totalMontantPrevisionnelPasRegion(value.id)/vm.totalMontantPrevisionnelPasMarche)*100
+                            }
+                
+                  
                      vm.getInfrastructure(vm.infrastructure).forEach(function(val){
                            montantInfraParRegion=  vm.getMontantMarcheRegionInfrastructure(value.id,val.id)
+                        // console.log(".......getTotaleMontantMarcheParUnite....")
+                       //  console.log(vm.getTotaleMontantMarcheParUnite(value.id,val.id))
+                         let taux_region=0;
                              if(val.code==1){ arrayColor.push("#6C0277")}
 
                              if(val.code==2){ arrayColor.push("#F0C300") }
@@ -980,13 +1091,47 @@ formatageSomme:formatageSomme,
                              if(val.code==4){ arrayColor.push("#22780F")}
                               
                               arrayBar.push(montantInfraParRegion)
+                              arrayLabele
+
+                               if(vm.infrastructure!=""){
+              taux_region= (montantInfraParRegion /vm.totalMontantInfrastructure(vm.unite_administrative_id))*100
+                            }else{
+              taux_region=(montantInfraParRegion/vm.totalMontantPrevisionnelPasMarche)*100
+                            }
+                            
+                            arrayLabele.push(taux_region.toFixed(2)+ "%")
+                             /* if(vm.regions!=""){
+
+                              }else{
+
+                              }*/
+                               if(vm.infrastructure!=""){
+                                if(vm.type_minichart=="bar"){
+                                       width=20;
+                                  height=taux_region+30;
+                                    }else{
+                                    width=taux_region+60;
+                                    }
+                              }
                            })
                                   
-                            
-                            
+                              if(vm.infrastructure==""){
+                                if(vm.type_minichart=="bar"){
+                                      
+                                  height=taux+30;
+                                    }else{
+                                    width=taux+60;
+                                    }
+                              }
+                           
+
+                          
                               var myBarChart = vm.objet_leaflet.minichart(value.latlng,{
                                 data: arrayBar,type:vm.type_minichart,
                                 colors:arrayColor,
+                               width:width,
+                               height:height,
+                               labels:arrayLabele
                                 });
                             
                           vm.objet_map.addLayer(myBarChart);
@@ -1005,11 +1150,12 @@ vm.objet_leaflet.circleMarker(value.latlng, {
 }).bindTooltip("<div style='background:white; padding:1px 3px 1px 3px'><b>" + value.ville + "</b></div>", {permanent: true,
 direction: 'bottom',
  sticky: true,
-    offset: [10, 0],
+    offset: [0, 10],
     opacity: 0.75,
     className: 'leaflet-tooltip' }).addTo(vm.objet_map);
                           arrayBar=[]
                           arrayColor=[]
+                         arrayLabele=[]
 
                                 })
 
@@ -1019,10 +1165,25 @@ direction: 'bottom',
                 }
             
                 }
+,
+                add(){
+console.log(".Bonjour guei")
+                }
         },
         watch: {
+          slection_carte:function(value){
+                 console.log(value)
+                 if(value==0){
+   this.deleteLeafleMiniCharts(this.objet_map)
+                this.integrationChartPasRegisonSurCarte()
+                 }else{
+                   this.deleteLeafleMiniCharts(this.objet_map)
+                //this.integrationChartPasRegisonSurCarte()
+                 }
+          },
           type_minichart: function (value) {
                 console.log(value);
+
                 this.deleteLeafleMiniCharts(this.objet_map)
                 this.integrationChartPasRegisonSurCarte()
             },
@@ -1054,7 +1215,8 @@ direction: 'bottom',
 console.log(L)
 console.log(ad)
 console.log(ad1)
-
+console.log(this.getActeEffetFinancierPersonnaliser45)
+//console.log()
 /**
  *  objet_map:"",
               objet_leaflet:"",
@@ -1108,7 +1270,26 @@ sid.easyPrint({
   
   
 
-  let htmlLegend3 = sid.control.htmllegend({
+
+/*Legend specific*/
+var legend = sid.control({ position: "bottomright" });
+
+legend.onAdd = function(map) {
+  var div = sid.DomUtil.create("div", "legend");
+  div.innerHTML += "<h4>Légende</h4>";
+  div.innerHTML += '<i style="background: #6C0277"></i><span>Sanitaires</span><br>';
+  div.innerHTML += '<i style="background: #F0C300"></i><span>Scolaires</span><br>';
+  div.innerHTML += '<i style="background: #E73E01"></i><span>Communautaires</span><br>';
+  div.innerHTML += '<i style="background: #22780F"></i><span>Routière</span><br>';
+  console.log(map)
+  
+
+  return div;
+};
+
+legend.addTo(map);
+
+  /*let htmlLegend3 = sid.control.htmllegend({
         position: 'bottomright',
         legends: [
           {
@@ -1136,7 +1317,7 @@ sid.easyPrint({
         hiddenIcon: 'icon icon-eye-slash'
     })
 
-    map.addControl(htmlLegend3)
+    map.addControl(htmlLegend3)*/
     this.integrationChartPasRegisonSurCarte()
 
 
@@ -1505,4 +1686,43 @@ sid.easyPrint({
    
     font-size: 9px !important;
 }
+
+
+
+/*Legend specific*/
+.legend {
+  padding: 6px 8px;
+  font: 14px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+  /*border-radius: 5px;*/
+  line-height: 24px;
+  color: #555;
+}
+.legend h4 {
+  text-align: center;
+  font-size: 16px;
+  margin: 2px 12px 8px;
+  color: #777;
+}
+
+.legend span {
+  position: relative;
+  bottom: 3px;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin: 0 8px 0 0;
+  opacity: 0.7;
+}
+
+.legend i.icon {
+  background-size: 18px;
+  background-color: rgba(255, 255, 255, 1);
+}
+
 </style>
