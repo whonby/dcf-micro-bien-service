@@ -15,6 +15,7 @@ import detailExecutionHorsSib from '../../pages/Hors_sib/biens_service/DossierEx
 import ajouterServiceRealiteHorsSib from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierRealiteServiceFait/ajouterServiceRealiteHorsSib.vue';
 import OpDefinitifDirect from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/AjouterOpDefinitif.vue';
 import ajouterOpProvisoire from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/DossierOpProvisoire/ajouterOpProvisoire.vue';
+import decompteProvisoire from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierDecompte/decomptePro.vue';
 
 import detailOpdefinitif from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DetailOrdrePaiement/detailOpdefinitif.vue';
 
@@ -30,6 +31,12 @@ import AjouterServiceRealiteOpProvisoire from '../../pages/Hors_sib/biens_servic
 import detailExecutionOpDirect from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierPrincipal/detailExecutionOpDirect.vue';
 import detailExecutionOpInDirect from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierPrincipal/detailExecutionOpInDirect.vue';
 const marcheHorSibRoutes =[
+
+    {
+        path: "/decompte_Provisoire",
+        name: "decompteProvisoire",
+        component: decompteProvisoire
+    },
     {
         path: "/detailExecutionOpInDirect/:id",
         name: "detailExecutionOpInDirect",
