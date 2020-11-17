@@ -2478,3 +2478,29 @@ export const GET_ALL_RESERVE_CF = (state, tableau_reserve_cf) =>{
    export const SUPPRIMER_ARNMP = (state, id) =>{
        state.arnmps = state.arnmps.filter(response => response.id!=id)
    }
+
+
+   ///
+
+
+   
+   export const GET_ALL_ORGANE_DECISION = (state, tableau_organe_decision) =>{
+    state.organes_decision = tableau_organe_decision
+   }
+   
+   export const AJOUTER_ORGANE_DECISION = (state, elementAjout) =>{
+       state.organes_decision.unshift(elementAjout)
+   }
+   
+   export const MODIFIER_ORGANE_DECISION = (state, elementModifie) =>{
+       state.organes_decision = state.organes_decision.map(item =>{
+           if(item.id == elementModifie.id){
+               item = {...elementModifie}
+           }
+           return item
+       })
+   }
+   
+   export const SUPPRIMER_ORGANE_DECISION = (state, id) =>{
+       state.organes_decision = state.organes_decision.filter(response => response.id!=id)
+   }

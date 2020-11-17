@@ -4542,3 +4542,45 @@ export function supprimerArnmp({commit},id){
       axios.delete('/arnmp/' + id).then(() => dialog.close() )   
   })
 }
+
+/// action pour l'organe de decision
+
+
+export  function  getOrganeDecision({commit}) {
+  queue.push(() => axios.get('/organe').then((response) => {
+    
+    commit('GET_ALL_ORGANE_DECISION', response.data) 
+    
+}).catch(error => console.log(error)))
+}
+
+
+ // 
+ export function ajouterOrganeDecision({commit},formData){
+  asyncLoading( axios.post('/organe',formData)).then(response => {
+       commit('AJOUTER_ORGANE_DECISION', response.data)
+       
+   }).catch(error => console.log(error))
+//  console.log(formData)
+}
+
+export function modifierOrganeDecision({commit}, element_modifie){
+  asyncLoading( axios.put('/organe/'+ element_modifie.id, element_modifie))
+   .then(response => {
+        commit('MODIFIER_ORGANE_DECISION',response.data)
+
+   }).catch(error => console.log(error))
+  // console.log(element_modifie)
+} 
+
+
+export function supprimerOrganeDecision({commit},id){
+  
+  this.$app.$dialog
+  .confirm("Voulez vouz vraiment supprimer ?.")
+  .then(dialog => {
+     commit('SUPPRIMER_ORGANE_DECISION', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/organe/' + id).then(() => dialog.close() )   
+  })
+}

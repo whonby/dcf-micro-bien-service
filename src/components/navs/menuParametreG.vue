@@ -486,6 +486,13 @@
              Infrastructures
             </router-link>
           </li>
+            <li>
+            <router-link :to="{name: 'organeDecision'}" tag="a">
+              <i class="icon-bar-chart"></i>
+             Organe de decision
+            </router-link>
+          </li>
+          
         </ul>
       </li>
       <li class="dropdown" id="personnelPara">

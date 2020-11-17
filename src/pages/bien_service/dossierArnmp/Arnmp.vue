@@ -30,7 +30,7 @@
           <td @click="afficherModificationReserveCf(index)">{{formaterDate(item.date_recour || 'Non renseigné')}}</td>
           <td @click="afficherModificationReserveCf(index)">{{afficherNumeroDossierCandidat1(item.entreprise_id) || 'Non renseigné'}}</td>
          <td @click="afficherModificationReserveCf(index)">{{formaterDate(item.date_resolution || 'Non renseigné')}}</td>
-         <td @click="afficherModificationReserveCf(index)">{{item.organe_resolution || 'Non renseigné'}}</td>
+         <td @click="afficherModificationReserveCf(index)">{{afficherLibelleOrganeDecision(item.organe_id) || 'Non renseigné'}}</td>
          <td @click="afficherModificationReserveCf(index)">{{item.decision_organe || 'Non renseigné'}}</td>
          <div class="btn-group">
           <button @click.prevent="supprimerArnmp(item.id)"  class="btn btn-danger " title="Supprimer">
@@ -134,10 +134,21 @@
                         </div>
                     </div>
                         </td> 
+                                   <td colspan="">
+            <div class="control-group">
+              <label> Organe de résolutions </label>
+              <div class="controls">
+                <select v-model="formeReserve.organe_id" class="span" >
+                  <option v-for="varText in gettersOrganeDecision" :key="varText.id"
+                          :value="varText.id">{{varText.libelle}}</option>
+                </select>
+              </div>
+            </div>
+          </td>
                              
-                           <td>
+                           <!-- <td>
                          <div class="control-group">
-                        <label class="control-label"> Organe de résolutions</label>
+                        <label class="control-label"> </label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -147,7 +158,7 @@
                             />
                         </div>
                     </div>
-                        </td>
+                        </td> -->
                         <td colspan="">
                         <div class="control-group">
                    <label class="control-label">Fichier joint:</label>
@@ -265,19 +276,17 @@
                              
                             </tr>
                             <tr>
-                                  <td>
-                         <div class="control-group">
-                        <label class="control-label">Date de résolution</label>
-                        <div class="controls">
-                            <input
-                                    type="date"
-                                    v-model="editReserve.date_resolution"
-                                    class="span"
-                                    placeholder=""
-                            />
-                        </div>
-                    </div>
-                        </td> 
+                                                <td colspan="">
+            <div class="control-group">
+              <label> Organe de résolutions </label>
+              <div class="controls">
+                <select v-model="editReserve.organe_id" class="span" >
+                  <option v-for="varText in gettersOrganeDecision" :key="varText.id"
+                          :value="varText.id">{{varText.libelle}}</option>
+                </select>
+              </div>
+            </div>
+          </td>
                              
                            <td>
                          <div class="control-group">
@@ -361,7 +370,7 @@ objet_recours:"",
     computed:{
   ...mapGetters("bienService", ["gettersArnmp","appelOffres","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
       "modePassations", "procedurePassations","getterDossierCandidats","marches", "gettersCotations",
-      "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
+      "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","gettersOrganeDecision",
       "getterMandate","getterCojos","getterAnalyseDossiers","typeAnalyses", "analyseDossiers","text_juridiques"
     
     ]),
@@ -410,16 +419,16 @@ objet_recours:"",
         }
       }
     },
-    // afficherListeLot(){
-    //   return id =>{
-    //     if(id!=null && id!=""){
-    //       const objetAnswer = this.getMarchePersonnaliser.find(item=>item.parent_id==this.macheid)
-    //       if(objetAnswer)   return objetAnswer.objet
+    afficherLibelleOrganeDecision(){
+      return id =>{
+        if(id!=null && id!=""){
+          const objetAnswer = this.gettersOrganeDecision.find(item=>item.id==id)
+          if(objetAnswer)   return objetAnswer.libelle
          
           
-    //     }
-    //   }
-    // },
+        }
+      }
+    },
     afficherListeNumeroLot(){
       return id =>{
         if(id!=null && id!=""){
