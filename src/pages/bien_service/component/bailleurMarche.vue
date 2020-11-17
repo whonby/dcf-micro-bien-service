@@ -81,7 +81,7 @@
           <tr>
             <td>
               <div class="control-group">
-                        <label class="control-label">N° marché{{CalCulDuTaux}}</label>
+                        <label class="control-label">N° marché</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -284,7 +284,7 @@
     </div>
 
     <div class="modal-footer">
-      <a  @click.prevent="ajouterBailleur" v-if="PayeDesBailleur < afficherMontantTTCMarche(infoLot.id)"
+      <a  @click.prevent="ajouterBailleur"
           class="btn btn-primary"
           href="#"
       >Valider</a>

@@ -4,48 +4,29 @@
 <div>
 
   
-         <div id="DecisionServiceBeneficiaire" class="modal hide">
+         <div id="ObservationAgentCf" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Décision Chef de service</h3>
+        <h3>OBSERVATION AGENT DU CF</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
-          <!-- <tr>
-            <td colspan="2">
-               <div class="control-group">
-                            <label class="control-label">Décision Chef de service </label>
-                            <div class="controls">
-                              <select v-model="editOpDefinitif.decision_service_beneficiaire" class="span">
-                                <option value="0">Attente</option>
-                              <option value="1">Visé</option>
-                             <option value="2">Différé</option>
-                             <option value="3">Réjeté</option>
-                            
-    
-    </select>
-                           
-                            </div>
-                          </div>
-            </td>
-             
-          </tr> -->
-        
+         
                <tr>
                 <td >
                     <div class="control-group">
-                            <label class="control-label">Observation Chef de service</label>
+                            <label class="control-label">Observation Agent cf</label>
                             <div class="controls">
-                              <textarea  class="span" row = "2" v-model="editOpDefinitif.observation_emetteur">
+                              <textarea  class="span" row = "2" v-model="editObservationAgentCf.observation_agent_cf">
                               </textarea>
                             </div>
                           </div>
                  </td>
                  <td >
                        <div class="control-group">
-                            <label class="control-label">Date Observation:</label>
+                            <label class="control-label">Date Observation Agent cf</label>
                             <div class="controls">
-                              <input type="date" class="span"  v-model="editOpDefinitif.date_decision_emetteur"/>
+                              <input type="date" class="span"  v-model="editObservationAgentCf.date_obtion_agtcf"/>
                              
                             </div>
                           </div>
@@ -58,8 +39,8 @@
                     <div class="control-group">
                             <label class="control-label">Nom et prenoms </label>
                             <div class="controls">
-                              <select v-model="editOpDefinitif.nom_emetteur" class="span">
-                                <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.editOpDefinitif.marche_id))"  :key="acteur.id"
+                              <select v-model="editObservationAgentCf.nom_agent_cf" class="span">
+                                <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.editObservationAgentCf.marche_id))"  :key="acteur.id"
                         :value="acteur.id">{{afficherNomActeurDepense(acteur.acteur_depense_id)}}</option>
                                </select>
                            
@@ -70,7 +51,7 @@
                                   <div class="control-group">
                             <label class="control-label">Fonction</label>
                             <div class="controls">
-                              <input type="text" class="span" readonly :value=" afficherLibelleFoctionBudgetaire(afficherIdFoctionBudgetaire(editOpDefinitif.nom_service_beneficiaire))"/>
+                              <input type="text" class="span" readonly :value=" afficherLibelleFoctionBudgetaire(afficherIdFoctionBudgetaire(editObservationAgentCf.nom_service_beneficiaire))"/>
                              
                             </div>
                           </div>
@@ -83,7 +64,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="FonctionDeModificationServiceRealite(editOpDefinitif)"
+          @click.prevent="FonctionDeModificationServiceRealite(editObservationAgentCf)"
           class="btn btn-primary"
           href="#"
          
@@ -97,17 +78,18 @@
                                    <tr>
 
                                         <th>Année</th>
-                                        <th>Num Op Definitif</th>
-                                         <th title="">Section</th>
+                                        <th>UA</th>
+                                         <th title="">Objet depense</th>
                               
                                  <th title="">Fournisseur</th>
+                                 <!-- <th title="">Adresse</th> -->
                                 <th title="">N°facture</th>
                                  <th>Date facture</th>
                                   <!-- <th>Imputation</th> -->
                                 <th>Montant</th>
                                 <!-- <th>Service béneficiaire</th> -->
                                 <th >Date validation</th>
-                                <!-- <th title="Observation Controleur financier">Observation CF</th> -->
+                                <th >Observation</th>
                                 <th>Action</th>
                                     </tr>
                                     </thead>
@@ -118,19 +100,19 @@
                     :key="realiteService.id"
                   >
         <td >{{realiteService.exercice_budget || 'Non renseigné'}}</td>
-         <td >{{realiteService.numero_op_definitif || 'Non renseigné'}}</td>
-                    <td >{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
+         <td >{{LIBELLEUA(realiteService.ua_id) || 'Non renseigné'}}</td>
+                    <td >{{afficheObjetfacture(realiteService.facture_id) || 'Non renseigné'}}</td>
                     <td >{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
                     <td >{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
-                     <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
+                     <td >{{formaterDate(afficheDateFacture(realiteService.facture_id)) || 'Non renseigné'}}</td> 
                      
                     <!-- <td >{{detail_marche.imputation  || 'Non renseigné'}}</td> -->
                      <td >{{formatageSomme(parseFloat(realiteService.total_general)) || 'Non renseigné'}}</td>
                      
-                       <td >{{(formaterDate(realiteService.date_decision_emetteur)) || 'Non renseigné'}}</td>
-                    
+                       <td >{{(formaterDate(realiteService.date_obtion_agtcf)) || 'Non renseigné'}}</td>
+                    <td >{{realiteService.observation_agent_cf || 'Non renseigné'}}</td>
                     <td>
-                      <button  class="btn  btn-danger" v-if="realiteService.decision_emetteur == 0" @click="afficherModalObservationServiceBeneficiaire(realiteService.id)">
+                      <button  class="btn  btn-danger" v-if="realiteService.motif_agent_cf == 0" @click="afficherModalObservationServiceBeneficiaire(realiteService.id)">
                         <span>
                           <i class="icon icon-ok"></i>
                         </span>
@@ -140,12 +122,15 @@
                           <i class="icon icon-ok"></i>
                         </span>
                       </button>
-                       
-                      <button  class="btn btn-danger" @click="supprimerMandat(realiteService.id)">
+                        <router-link :to="{ name: 'editerFicheRealiteServiceFait', params: { id: realiteService.id }}"
+                class="btn btn-default " title="Editer Fiche">
+                  <span class=""><i class=" icon-print"></i></span>
+                   </router-link>
+                      <!-- <button  class="btn btn-danger" @click="supprimerMandat(realiteService.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
-                      </button>
+                      </button> -->
                     </td>
                                      </tr>
                
@@ -186,7 +171,7 @@ export default {
         }
       ],
       
-       editOpDefinitif: {
+       editObservationAgentCf: {
          decision_emetteur : 1
        },
 search:""
@@ -373,13 +358,26 @@ afficheDateFacture() {
         }
       };
     },
-   afficherSection() {
+    LIBELLEUA() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.sections.find(qtreel => qtreel.id == id);
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-         return qtereel.code_section.concat('  ', qtereel.nom_section);
+         return qtereel.libelle;
+       
+      }
+      return 0
+        }
+      };
+    },
+   afficheObjetfacture() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+         return qtereel.objet_facture;
        
       }
       return 0
@@ -389,8 +387,7 @@ afficheDateFacture() {
        afficheOpDefinitiveBs() {
       return id => {
         if (id != null && id != "") {
-          return this.mandats.filter(
-            element => element.marche_id == id 
+          return this.mandats.filter(element => element.marche_id == id
           );
         }
       };
@@ -410,7 +407,7 @@ afficheDateFacture() {
       };
     },
     afficheMarcheType(){
-if(this.afficheIdTypeMarche(this.editOpDefinitif.marche_id) == 5){
+if(this.afficheIdTypeMarche(this.editObservationAgentCf.marche_id) == 5){
 return 1
 }
 else{
@@ -434,12 +431,12 @@ else{
             ]),
        
 afficherModalObservationServiceBeneficiaire(id) {
-      this.$("#DecisionServiceBeneficiaire").modal({
+      this.$("#ObservationAgentCf").modal({
         backdrop: "static",
         keyboard: false
       });
 
-       this.editOpDefinitif = this.afficheOpDefinitiveBs(this.macheid).find(item=>item.id==id);
+       this.editObservationAgentCf = this.afficheOpDefinitiveBs(this.macheid).find(item=>item.id==id);
     },
 
      afficherModalAjouterTitre() {
@@ -484,30 +481,14 @@ formatageSomme:formatageSomme,
      
 
  var nouvelObjet = {
-      ...this.editOpDefinitif,
-     	exercice_budget :this.editOpDefinitif.exercice_budget,
-       
-         marche_id : this.editOpDefinitif.marche_id,
-       
-      	
-        facture_id:this.editOpDefinitif.facture_id,
-       
- total_general :this.editOpDefinitif.total_general,
-
-  ua_id:this.editOpDefinitif.ua_id,
-  
-
-
-section_id:this.afficherSectId,
-// id:this.afficherIdRealiteServiceFait(this.editOpDefinitif.marche_id),
-  // engagement_id:this.editOpDefinitif.id,
-  marchetype:this.editOpDefinitif.marchetype,
-  decision_emetteur:1
+      ...this.editObservationAgentCf,
+     	
+  	motif_agent_cf:1
        };
  this.modifierMandat(nouvelObjet);
-this.$("#DecisionServiceBeneficiaire").modal('hide');
+this.$("#ObservationAgentCf").modal('hide');
 
-          this.editOpDefinitif={
+          this.editObservationAgentCf={
                   numero_bon_manuel:"",
 numero_demande:"",
 	exo_id:"",

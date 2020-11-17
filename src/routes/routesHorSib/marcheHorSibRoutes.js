@@ -15,6 +15,7 @@ import detailExecutionHorsSib from '../../pages/Hors_sib/biens_service/DossierEx
 import ajouterServiceRealiteHorsSib from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierRealiteServiceFait/ajouterServiceRealiteHorsSib.vue';
 import OpDefinitifDirect from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/AjouterOpDefinitif.vue';
 import ajouterOpProvisoire from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/DossierOpProvisoire/ajouterOpProvisoire.vue';
+import decompteProvisoire from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierDecompte/decomptePro.vue';
 
 import detailOpdefinitif from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DetailOrdrePaiement/detailOpdefinitif.vue';
 
@@ -32,6 +33,12 @@ import detailExecutionOpInDirect from '../../pages/Hors_sib/biens_service/Dossie
 import detailMarcheParEntrepriseHors from '../../pages/Hors_sib/marcheParEntreprise/detailMarcheParEntreprise.vue';
 
 const marcheHorSibRoutes =[
+
+    {
+        path: "/decompte_Provisoire",
+        name: "decompteProvisoire",
+        component: decompteProvisoire
+    },
     {
         path: '/detail-Marche-Par-Entreprise/:id',
         name: "detailMarcheParEntrepriseHors",

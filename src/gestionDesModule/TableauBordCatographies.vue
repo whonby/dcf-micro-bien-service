@@ -165,7 +165,7 @@
 <div class="span6">
 <h6>Statut des marchés</h6>
  <label for="logiciel70">
-      <input type="radio" v-model="status_marche" value="" id="logiciel70"> <span>Affichés tous <b>({{marcheUniteRegion.length}})</b></span>
+      <input type="radio" v-model="status_marche" value="" id="logiciel70"> <span>Affichés tous <b>({{nombreMarchePasInfrastructure(infrastructure)}})</b></span>
     </label>
      <label for="logiciel7">
       <input type="radio" v-model="status_marche" id="logiciel7" value="0"> <span>Marché planifié <b>({{nombreMarcheParStatue("planifie")}})</b></span>
@@ -222,10 +222,8 @@
                 <div class="span7"><br>
 
                   <div v-if="montantBudegtPasUniteAdminOuRegion">
-                    Budget : <span style="color: #003900; "><b>{{formatageSomme(montantBudegtPasUniteAdminOuRegion.budget)}}</b></span> <br>
-                    Budget exécuté:<span style="color: #00d700; "><b>{{formatageSomme(montantBudegtPasUniteAdminOuRegion.budgetExecute)}}</b></span><br>
-                    Montant restant:<span style="color: darkred; "><b>{{formatageSomme(montantBudegtPasUniteAdminOuRegion.budgetReste)}}</b></span><br>
-                    Taux d'exécution:<span style="color: #e36706; "><b>{{montantBudegtPasUniteAdminOuRegion.tauxBudget}} %</b></span>
+                    Previsionnel : <span style="color: #003900; "><b>{{formatageSomme(montantBudegtPasUniteAdminOuRegion.budget)}}</b></span> <br>
+                    Exécuté:<span style="color: #00d700; "><b>{{formatageSomme(montantBudegtPasUniteAdminOuRegion.budgetExecute)}}</b></span><br>
                   </div>
                 </div>
 
@@ -637,11 +635,9 @@ export default {
     };
   },
 created() {
-//     console.log(".......................")
-// console.log(this.getterInfrastrucure)
-//   console.log(".......................")
+
 this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
-  console.log(this.getterInfrastrucure)
+
 },
   computed: {
 // methode pour maper notre guetter
@@ -653,7 +649,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       "uniteAdministratives",
       "getterBudgeCharge",
     ]),
-    ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise","getterImageMarche"]),
+    ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise","getterImageMarche","acteEffetFinanciers"]),
     regions(){
       return this.getterLocalisationGeoAll.filter(item=>item.structure_localisation_geographique.niveau==2);
     },
@@ -707,6 +703,8 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
               return id=>{
                 if(id!=""){
                    return this.marcheUniteRegion.filter(item=>item.infrastructure_id==id).length
+                }else{
+                   return this.marcheUniteRegion.length
                 }
               }
     },
@@ -746,14 +744,24 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           let budget=parseFloat(value.montant_marche);
           let color="";
           let colorFill=""
-          let montant_engagement_marche=0;
+        //  let montant_engagement_marche=0;
          // let budget=0;
 /**Calcule des marches**/
-          let initeVal = 0;
-          let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==value.id).reduce(function (total, currentValue) {
-            return total + parseFloat(currentValue.total_general) ;
-          }, initeVal);
-          montant_engagement_marche=montant_engagement_marche + montantEngament
+         let montant_execute=0;
+
+
+         let objet_act=   vM.acteEffetFinanciers.find(item=>item.marche_id==value.id)
+          if(objet_act!=undefined){
+              montant_execute=montant_execute+parseFloat(objet_act.montant_act)
+          }else{
+              montant_execute=montant_execute+0
+          }
+
+//          let initeVal = 0;
+//          let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==value.id).reduce(function (total, currentValue) {
+//            return total + parseFloat(currentValue.total_general) ;
+//          }, initeVal);
+//          montant_engagement_marche=montant_engagement_marche + montantEngament
 
         //  let taux=0;
 
@@ -786,12 +794,12 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
             color="#3a373b"
             colorFill="#3a373b"
           }
-          let montantRest=budget - montant_engagement_marche;
-          let tauxExecution=(montant_engagement_marche/budget)*100
+          let montantRest=budget - montant_execute;
+          let tauxExecution=(montant_execute/budget)*100
 
           let budgetExecute={
             label: 'Montant Excecute',
-            value:montant_engagement_marche
+            value:montant_execute
           }
 
           let budgetReste={
@@ -810,7 +818,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
             latitude:value.latitude,
             longitude:value.longitude,
             budgetReste:montantRest,
-            budgetExecute:montant_engagement_marche,
+            budgetExecute:montant_execute,
             tauxBudget:tauxExecution.toFixed(2),
             color:color,
             colorFill:colorFill,
@@ -849,9 +857,20 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       let tailleInfrastructure=vM.getterInfrastrucure.length
       vM.getterInfrastrucure.forEach(function (value) {
         let marche=vM.getMarcheStatus(vM.status_marche).filter(item=>item.infrastructure_id==value.id)
-        // let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==value.id).reduce(function (total, currentValue) {
-        //   return total + parseFloat(currentValue.total_general) ;
-        // }, initeVal);
+
+
+
+        let montant_execute=0;
+        marche.forEach(function (val) {
+         let objet=vM.acteEffetFinanciers.find(row=>row.marche_id==val.id)
+         if(objet!=undefined){
+             montant_execute=montant_execute+parseFloat(objet.montant_act)
+         }else{
+             montant_execute=montant_execute+0
+         }
+        })
+          //console.log(montant_execute)
+       //   acteEffetFinanciers
       let taille_categorie=  vM.chartOptions.xaxis.categories.length
         let initeVal = 0;
         let montant_prevue=  marche.reduce(function (total, currentValue) {
@@ -865,7 +884,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
         if(montant_prevue==0){
           ObjetMontantRealise.data.push(0)
         }else{
-          ObjetMontantRealise.data.push(vM.getRandomInt(1000000000))
+          ObjetMontantRealise.data.push(montant_execute)
         }
 
       })
@@ -884,32 +903,32 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       let vM=this;
      
       let budget=0;
-    
-      let montant_engagement_marche=0;
+
+        let montant_execute=0;
       this.getMarcheStatus(vM.status_marche).forEach(function (value) {
         if(value.longitude!=null && value.latitude!=null){
           budget=budget + parseFloat(value.montant_marche)
+            let objet_act=   vM.acteEffetFinanciers.find(item=>item.marche_id==value.id)
+            if(objet_act!=undefined){
+                montant_execute=montant_execute+parseFloat(objet_act.montant_act)
+            }else{
+                montant_execute=montant_execute+0
+            }
 
-
-          let initeVal = 0;
-          let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==value.id).reduce(function (total, currentValue) {
-            return total + parseFloat(currentValue.total_general) ;
-          }, initeVal);
-          montant_engagement_marche=montant_engagement_marche + montantEngament
 
         }
 
       })
 
-     let budgetReste=budget - montant_engagement_marche;
-     let tauxExecution=(montant_engagement_marche/budget)*100
+     let budgetReste=budget - montant_execute;
+     let tauxExecution=(montant_execute/budget)*100
 //console.log(budgetReste)
      // console.log(tauxExecution)
      // console.log(value) donutDataUniteOuRegions
 
       let execute={
         label: 'Montant Excécute',
-        value:montant_engagement_marche
+        value:montant_execute
       }
 
       let reste={
@@ -923,7 +942,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       let objetAlocalise={
         budget:budget,
         budgetReste:budgetReste,
-        budgetExecute:montant_engagement_marche,
+        budgetExecute:montant_execute,
         tauxBudget:tauxExecution.toFixed(2),
         donutData:vM.donutDataUniteOuRegions
       }
@@ -944,12 +963,20 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
      let vM=this;
       let objet=this.marches
       if(vM.region!="" && vM.unite_administrative_id==""){
-        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region && item.parent_id!=null)
+        objet =this.marches.filter(item=>{
+            if(item.localisation_geographie_id==vM.region && item.parent_id!=null){
+                return item
+            }
+        })
 
       }
 
       if(vM.unite_administrative_id!="" && vM.region==""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
+        objet =this.marches.filter(item=>{
+            if(item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null){
+                return item
+            }
+        })
       }
 
        if(vM.unite_administrative_id!="" && vM.region!="" ){

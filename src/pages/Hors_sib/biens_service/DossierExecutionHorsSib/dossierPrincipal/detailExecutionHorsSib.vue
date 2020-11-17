@@ -304,9 +304,12 @@ decision_cf
     import moment from "moment";
     import { formatageSomme } from './../../../../../Repositories/Repository';
    
-import avenant from "../dossierAvenant/avenantHs";
-import facture from "../dossierFacture/factureHs";
-import decompte from "../dossierDecompte/decompteHs";
+   import avenant from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
+   import facture from "../dossierFacture/factureHs";
+   import decompte from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte";
+// import avenant from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
+// import facture from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierFacture/facture";
+// import decompte from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte";
     
 //     import listeOpDefinitiveBsDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveBsDirect.vue";
 //     import listeOpDefinitiveCfDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveCfDirect.vue";

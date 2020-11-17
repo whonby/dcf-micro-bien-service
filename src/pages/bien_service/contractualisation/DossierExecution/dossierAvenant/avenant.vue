@@ -31,7 +31,7 @@
             <div class="controls">
                <input
                 type="text"
-                :value="affichierLibelleTypeActeFinancier(afficheIdTypeActeAffet(macheid))"
+                :value="afficheLibelletypeAffectAvenant(4)"
                 class="span"
                readonly
               />
@@ -215,7 +215,7 @@
                <!-- <div class="controls"> -->
               <input
                 type="text"
-                 :value="affichierLibelleTypeActeFinancier(afficheIdTypeActeAffet(macheid))"
+                 :value="afficheLibelletypeAffectAvenant()"
                 class="span"
                readonly
               />
@@ -557,6 +557,18 @@ affichierLibelleTypeActeFinancier() {
         }
       };
     },
+    afficheLibelletypeAffectAvenant() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeActeEffetFinanciers.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return ""
+        }
+      };
+    },
     affcherTauxEnCours() {
       
       
@@ -753,7 +765,7 @@ else
   var nouvelObjet = {
       ...this.formData,
       marche_id :this.macheid,
-   type_acte_financier:this.afficheIdTypeActeAffet(this.macheid),
+   type_acte_financier:4,
    montant_avenant:this.affichierMontantAvenantTTC
        };
       this.ajouterAvenant(nouvelObjet);
@@ -781,7 +793,7 @@ else
   var nouvelObjet = {
       ...this.editAvenant,
       marche_id :this.macheid,
-   type_acte_financier:this.afficheIdTypeActeAffet(this.macheid),
+   type_acte_financier:4,
    montant_avenant:this.affichierMontantAvenantTTCModifier
        };
       this.modifierAvenant(nouvelObjet);

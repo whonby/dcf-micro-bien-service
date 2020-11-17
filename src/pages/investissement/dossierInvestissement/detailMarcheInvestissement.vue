@@ -1,6 +1,4 @@
 
-CodeExempte 
-
 <template>
     
 

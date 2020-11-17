@@ -25,7 +25,7 @@
 		</center>
        </li>
        
-       
+        
        
         <li  @click.prevent="navigateToActeurDepense" >
           <a href="#">
@@ -33,13 +33,37 @@
             <span>SUIVI ENTREPRISE</span>
           </a>
         </li>
-         <li  @click.prevent="navigateToSuiviMarcheProjet" >
+        <li  @click.prevent="navigateToSuivMarche" >
           <a href="#">
             <i class="icon-group"></i>
-            <span>SUIVI MARCHE UA</span>
+            <span> SUIVI DES CONTRATS</span>
+          </a>
+        </li>
+        <li  @click.prevent="navigateToDecompte" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span> DECOMPTE PROVISOIRE</span>
           </a>
         </li>
         
+         <li  @click.prevent="navigateToSuiviMarcheProjet" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span>MARCHE UA</span>
+          </a>
+        </li>
+         <li  @click.prevent="navigateToSuiviMarcheProjetpARtYPEmArche" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span>MARCHE UA PAR TYPE</span>
+          </a>
+        </li>
+          <li  @click.prevent="etatRecapitulativeS" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span>ETAT RECAPITULATIF</span>
+          </a>
+        </li>
         <li >
            <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
          
@@ -150,13 +174,38 @@ navigateToGestionMarche(){
         })
       },
 
+navigateToSuivMarche(){
+        this.activate()
+        this.$router.push({
+          name: 'ficheSuivi'
+        })
+      },
+    navigateToDecompte(){
+        this.activate()
+        this.$router.push({
+          name: 'decompteProvisoire'
+        })
+      },
+
+
 navigateToSuiviMarcheProjet(){
         this.activate()
         this.$router.push({
           name: 'suiviMarcheDesProjets'
         })
       },
-
+navigateToSuiviMarcheProjetpARtYPEmArche(){
+        this.activate()
+        this.$router.push({
+          name: 'suiviMarcheDesProjetParTypeMarche'
+        })
+      },
+      etatRecapitulativeS(){
+        this.activate()
+        this.$router.push({
+          name: 'etatRecapitulative'
+        })
+      },
       navigateToActeurDepense(){
         this.activate()
         this.$router.push({
