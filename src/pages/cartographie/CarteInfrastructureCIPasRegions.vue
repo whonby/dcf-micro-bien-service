@@ -1107,8 +1107,8 @@ formatageSomme:formatageSomme,
                               }*/
                                if(vm.infrastructure!=""){
                                 if(vm.type_minichart=="bar"){
-                                      
-                                  height=taux_region+60;
+                                       width=20;
+                                  height=taux_region+30;
                                     }else{
                                     width=taux_region+60;
                                     }
@@ -1118,7 +1118,7 @@ formatageSomme:formatageSomme,
                               if(vm.infrastructure==""){
                                 if(vm.type_minichart=="bar"){
                                       
-                                  height=taux+60;
+                                  height=taux+30;
                                     }else{
                                     width=taux+60;
                                     }
@@ -1164,6 +1164,10 @@ direction: 'bottom',
                 
                 }
             
+                }
+,
+                add(){
+console.log(".Bonjour guei")
                 }
         },
         watch: {
@@ -1266,7 +1270,26 @@ sid.easyPrint({
   
   
 
-  let htmlLegend3 = sid.control.htmllegend({
+
+/*Legend specific*/
+var legend = sid.control({ position: "bottomright" });
+
+legend.onAdd = function(map) {
+  var div = sid.DomUtil.create("div", "legend");
+  div.innerHTML += "<h4>Légende</h4>";
+  div.innerHTML += '<i style="background: #6C0277"></i><span>Sanitaires</span><br>';
+  div.innerHTML += '<i style="background: #F0C300"></i><span>Scolaires</span><br>';
+  div.innerHTML += '<i style="background: #E73E01"></i><span>Communautaires</span><br>';
+  div.innerHTML += '<i style="background: #22780F"></i><span>Routière</span><br>';
+  console.log(map)
+  
+
+  return div;
+};
+
+legend.addTo(map);
+
+  /*let htmlLegend3 = sid.control.htmllegend({
         position: 'bottomright',
         legends: [
           {
@@ -1294,7 +1317,7 @@ sid.easyPrint({
         hiddenIcon: 'icon icon-eye-slash'
     })
 
-    map.addControl(htmlLegend3)
+    map.addControl(htmlLegend3)*/
     this.integrationChartPasRegisonSurCarte()
 
 
@@ -1664,155 +1687,42 @@ sid.easyPrint({
     font-size: 9px !important;
 }
 
-[type="radio"]:checked,
-[type="radio"]:not(:checked) {
-    position: absolute;
-    left: -9999px;
-}
-[type="radio"]:checked + label,
-[type="radio"]:not(:checked) + label
-{
-    position: relative;
-    padding-left: 28px;
-    cursor: pointer;
-    line-height: 20px;
-    display: inline-block;
-    color: #666;
-}
-[type="radio"]:checked + label:before,
-[type="radio"]:not(:checked) + label:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 18px;
-    height: 18px;
-    border: 1px solid #ddd;
-    border-radius: 100%;
-    background: #fff;
-}
 
 
-[type="radio"]:checked + label:after,
-[type="radio"]:not(:checked) + label:after {
-    content: '';
-    width: 12px;
-    height: 12px;
-    background: #F87DA9;
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    border-radius: 100%;
-    -webkit-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+/*Legend specific*/
+.legend {
+  padding: 6px 8px;
+  font: 14px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+  /*border-radius: 5px;*/
+  line-height: 24px;
+  color: #555;
 }
-[type="radio"]:not(:checked) + label:after {
-    opacity: 0;
-    -webkit-transform: scale(0);
-    transform: scale(0);
-}
-[type="radio"]:checked + label:after {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-}
-
-
-
-.radio-group-control {
-  background: #f7f7f7;
-  border: 1px solid #c7c7c7;
-  border-radius: 3px;
-  font-size: 0;
+.legend h4 {
   text-align: center;
-  
-  -webkit-box-shadow: inset 3px 3px 0 2px #f0f0f0;
-  box-shadow: inset 3px 3px 0 2px #f0f0f0;
+  font-size: 16px;
+  margin: 2px 12px 8px;
+  color: #777;
+}
+
+.legend span {
   position: relative;
-  overflow: hidden;
+  bottom: 3px;
 }
 
-.radio-group-control * {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin: 0 8px 0 0;
+  opacity: 0.7;
 }
 
-.radio-group-control input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  font-size: 0;
+.legend i.icon {
+  background-size: 18px;
+  background-color: rgba(255, 255, 255, 1);
 }
 
-.radio-group-control label .radio-group-label__text {
-  width: 50%;
-  display: inline-block;
-  font-size: 14px !important;
-  color: #333;
-  font-family: "HelveticaNeue-Light", helvetica, arial, sans-serif;
-  cursor: pointer;
-  margin-bottom: 0;
-  padding: 10px 0;
-  border-left: 1px solid #c7c7c7;
-}
-
-.radio-group-control label span.radio-group-tick {
-  position: relative;
-}
-
-.radio-group-control label.radio-group-label {
-display: inline;
-  position: relative;
-  color: #333;
-}
-
-.radio-group-control input[type="radio"]:checked + .radio-group-label__text {
-  background: #fff;
-  font-weight: 700;
-}
-
-.radio-group-control label:first-child .radio-group-label__text {
-  border-left: 0 !important;
-}
-
-.radio-group-control label span.radio-group-tick:before {
-  content: "";
-  position: absolute;
-  color: #c60d30;
-  left: -25px;
-  width: 20px;
-  height: 20px;
-  top: -2px;
-}
-
-.radio-group-control
-  input[type="radio"]:checked
-  + .radio-group-label__text
-  > span.radio-group-tick:before {
-  content: "✔";
-  position: absolute;
-  color: #c60d30;
-  left: -25px;
-  width: 20px;
-  height: 20px;
-  top: -2px;
-}
-
-
-@media screen and (max-width:767px)
-{
-  .radio-group-control label .radio-group-label__text
-  {
-    width:100%;
-    border-left:0px;
-    border-top:1px solid #c7c7c7;
-  }
-  .radio-group-control label:first-child .radio-group-label__text
-  {
-    border-top:0px
-  }
-  .radio-group-control label.radio-group-label
-  {
-    display:block;
-  }
-}
 </style>
