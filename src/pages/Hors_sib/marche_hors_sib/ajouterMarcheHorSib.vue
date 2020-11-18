@@ -217,7 +217,7 @@ afficherLesActivite
             </div>
           </div>
               </td>
-              <td>
+              <td colspan="2">
             <div class="control-group">
        <label class="control-label">Montant prévu</label>
        <div class="controls">
@@ -229,7 +229,7 @@ afficherLesActivite
      </div>
          </td>
 
-           <td>
+           <!-- <td>
      <div class="control-group">
       <label class="control-label">Livrable</label>
       <div class="controls">
@@ -241,37 +241,38 @@ afficherLesActivite
      />
    </div>
    </div>
-     </td>
+     </td> -->
              </tr>
 
               <tr>
            
-            <td>
-      <div class="control-group">
-        <label class="control-label">Nature des prix</label>
-        <div class="controls">
-       <input
-         type="text"
-         v-model="formData.nature_prix"
-         class="span4"
-       />
-     </div>
-     </div>
-      </td>   
+            <td colspan="">
+              
+               <div class="control-group">
+            <label class="control-label">Nature des prix</label>
+            <div class="controls">
+            
+               <select v-model="formData.nature_prix_id" class="span4" >
+               <option v-for="plans in gettesrNaturePrix" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+           </select>
+            </div>
+          </div>
+              </td>  
        
-           <td>
-          <div class="control-group">
-       <label class="control-label">Bénéficiaire</label>
-       <div class="controls">
-         <input
-           type="text"
-           v-model="formData.beneficiaire"
-           class="span4"
-           placeholder="Saisir Bénéficiaire"
-         />
-       </div>
-     </div>
-         </td>
+         <td colspan="">
+              
+               <div class="control-group">
+            <label class="control-label">Motif de passation</label>
+            <div class="controls">
+            
+               <select v-model="formData.motif_passation_id" class="span4" >
+               <option v-for="plans in gettersMotifPassations" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+           </select>
+            </div>
+          </div>
+              </td>  
           <td colspan="2">
                   <div class="control-group">
        <label class="control-label">Infrastructure</label>
@@ -402,7 +403,7 @@ export default {
   computed: {
      ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
-     'nombremarchesExecute',
+     'nombremarchesExecute',"gettesrNaturePrix","gettersMotifPassations",
      'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
       "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),

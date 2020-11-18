@@ -2504,3 +2504,52 @@ export const GET_ALL_RESERVE_CF = (state, tableau_reserve_cf) =>{
    export const SUPPRIMER_ORGANE_DECISION = (state, id) =>{
        state.organes_decision = state.organes_decision.filter(response => response.id!=id)
    }
+
+
+
+   
+   
+   export const GET_ALL_NATURE_PRIX = (state, tableau_nature_prix) =>{
+    state.nature_prix = tableau_nature_prix
+   }
+   
+   export const AJOUTER_NATURE_PRIX = (state, elementAjout) =>{
+       state.nature_prix.unshift(elementAjout)
+   }
+   
+   export const MODIFIER_NATURE_PRIX = (state, elementModifie) =>{
+       state.nature_prix = state.nature_prix.map(item =>{
+           if(item.id == elementModifie.id){
+               item = {...elementModifie}
+           }
+           return item
+       })
+   }
+   
+   export const SUPPRIMER_NATURE_PRIX = (state, id) =>{
+       state.nature_prix = state.nature_prix.filter(response => response.id!=id)
+   }
+
+
+   
+   
+   export const GET_ALL_MOTIF_PASSATION = (state, tableau_motif_passation) =>{
+    state.motif_passations = tableau_motif_passation
+   }
+   
+   export const AJOUTER_MOTIF_PASSATION = (state, elementAjout) =>{
+       state.motif_passations.unshift(elementAjout)
+   }
+   
+   export const MODIFIER_MOTIF_PASSATION = (state, elementModifie) =>{
+       state.motif_passations = state.motif_passations.map(item =>{
+           if(item.id == elementModifie.id){
+               item = {...elementModifie}
+           }
+           return item
+       })
+   }
+   
+   export const SUPPRIMER_MOTIF_PASSATION = (state, id) =>{
+       state.motif_passations = state.motif_passations.filter(response => response.id!=id)
+   }
