@@ -486,6 +486,25 @@
              Infrastructures
             </router-link>
           </li>
+            <li>
+            <router-link :to="{name: 'organeDecision'}" tag="a">
+              <i class="icon-bar-chart"></i>
+             Organe de decision
+            </router-link>
+          </li>
+          <li>
+            <router-link :to="{name: 'naturePrix'}" tag="a">
+              <i class="icon-bar-chart"></i>
+             Nature des prix
+            </router-link>
+          </li>
+          <li>
+            <router-link :to="{name: 'motifPassation'}" tag="a">
+              <i class="icon-bar-chart"></i>
+             Motif de passations
+            </router-link>
+          </li>
+          
         </ul>
       </li>
       <li class="dropdown" id="personnelPara">

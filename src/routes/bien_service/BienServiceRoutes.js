@@ -1,5 +1,7 @@
 import acteDepense from '../../pages/bien_service/acteDepense.vue';
-
+import organeDecision from "../../pages/bien_service/parametres/organeDecision.vue";
+import naturePrix from "../../pages/bien_service/parametres/naturePrix.vue";
+import motifPassation from "../../pages/bien_service/parametres/motifPassation.vue";
 import rolemembrecojo from "../../pages/bien_service/parametres/rolemembrecojo.vue";
 import acteurDepense from '../../pages/bien_service/acteurDepense.vue';
 import analyseDossier from '../../pages/bien_service/analyseDossier';
@@ -188,6 +190,21 @@ detailExecution
         path: "/historique-Marche",
         name: "historiqueMarche",
         component: historiqueMarche
+    },
+    {
+        path: "/organe-decision",
+        name: "organeDecision",
+        component: organeDecision
+    },
+    {
+        path: "/nature-prix",
+        name: "naturePrix",
+        component: naturePrix
+    },
+    {
+        path: "/motif-passation",
+        name: "motifPassation",
+        component: motifPassation
     },
    
     {

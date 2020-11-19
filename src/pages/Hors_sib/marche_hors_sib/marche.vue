@@ -22,7 +22,7 @@ CodeExempte
               <h5>Liste des March&eacute;s</h5>
               <div align="right">
                 Recherche:
-                <input type="search"  v-model="search"  placeholder=" saisir objet ou le montant"/>
+                <input type="search"  v-model="search"  placeholder=" saisir objet"/>
               </div>
             </div>
             <div class="span4">
@@ -377,8 +377,8 @@ export default {
 
 return this.afficherListeMarcheHorsSib.filter((item) => {
   
-     return item.objet.toLowerCase().includes(searchTerm) ||
-           item.montant_marche.toLowerCase().includes(searchTerm) 
+     return item.objet.toLowerCase().includes(searchTerm) 
+           //item.reference_marche.toLowerCase().includes(searchTerm) 
            //|| item.uabudget_eclate.libelle.toLowerCase().includes(searchTerm) 
    }
 )

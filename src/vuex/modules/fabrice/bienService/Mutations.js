@@ -2429,3 +2429,127 @@ export const GET_ALL_TYPE_ORDRE_PAIEMENT = (state, tableau_typeordre) =>{
    export const SUPPRIMER_TYPE_ORDRE_PAIEMENT = (state, id) =>{
        state.typeOrdrePaiement = state.typeOrdrePaiement.filter(response => response.id!=id)
    }
+
+
+   // mutation pour le reserve du cf
+
+   
+export const GET_ALL_RESERVE_CF = (state, tableau_reserve_cf) =>{
+    state.reserve_cf = tableau_reserve_cf
+   }
+   
+   export const AJOUTER_RESERVE_CF = (state, elementAjout) =>{
+       state.reserve_cf.unshift(elementAjout)
+   }
+   
+   export const MODIFIER_RESERVE_CF = (state, elementModifie) =>{
+       state.reserve_cf = state.reserve_cf.map(item =>{
+           if(item.id == elementModifie.id){
+               item = {...elementModifie}
+           }
+           return item
+       })
+   }
+   
+   export const SUPRIMER_RESERVE_CF = (state, id) =>{
+       state.reserve_cf = state.reserve_cf.filter(response => response.id!=id)
+   }
+
+
+   // mutation pour arnmp 
+
+   export const GET_ALL_ARNP = (state, tableau_arnmp) =>{
+    state.arnmps = tableau_arnmp
+   }
+   
+   export const AJOUTER_ARNMP = (state, elementAjout) =>{
+       state.arnmps.unshift(elementAjout)
+   }
+   
+   export const MODIFIER_ARNMP = (state, elementModifie) =>{
+       state.arnmps = state.arnmps.map(item =>{
+           if(item.id == elementModifie.id){
+               item = {...elementModifie}
+           }
+           return item
+       })
+   }
+   
+   export const SUPPRIMER_ARNMP = (state, id) =>{
+       state.arnmps = state.arnmps.filter(response => response.id!=id)
+   }
+
+
+   ///
+
+
+   
+   export const GET_ALL_ORGANE_DECISION = (state, tableau_organe_decision) =>{
+    state.organes_decision = tableau_organe_decision
+   }
+   
+   export const AJOUTER_ORGANE_DECISION = (state, elementAjout) =>{
+       state.organes_decision.unshift(elementAjout)
+   }
+   
+   export const MODIFIER_ORGANE_DECISION = (state, elementModifie) =>{
+       state.organes_decision = state.organes_decision.map(item =>{
+           if(item.id == elementModifie.id){
+               item = {...elementModifie}
+           }
+           return item
+       })
+   }
+   
+   export const SUPPRIMER_ORGANE_DECISION = (state, id) =>{
+       state.organes_decision = state.organes_decision.filter(response => response.id!=id)
+   }
+
+
+
+   
+   
+   export const GET_ALL_NATURE_PRIX = (state, tableau_nature_prix) =>{
+    state.nature_prix = tableau_nature_prix
+   }
+   
+   export const AJOUTER_NATURE_PRIX = (state, elementAjout) =>{
+       state.nature_prix.unshift(elementAjout)
+   }
+   
+   export const MODIFIER_NATURE_PRIX = (state, elementModifie) =>{
+       state.nature_prix = state.nature_prix.map(item =>{
+           if(item.id == elementModifie.id){
+               item = {...elementModifie}
+           }
+           return item
+       })
+   }
+   
+   export const SUPPRIMER_NATURE_PRIX = (state, id) =>{
+       state.nature_prix = state.nature_prix.filter(response => response.id!=id)
+   }
+
+
+   
+   
+   export const GET_ALL_MOTIF_PASSATION = (state, tableau_motif_passation) =>{
+    state.motif_passations = tableau_motif_passation
+   }
+   
+   export const AJOUTER_MOTIF_PASSATION = (state, elementAjout) =>{
+       state.motif_passations.unshift(elementAjout)
+   }
+   
+   export const MODIFIER_MOTIF_PASSATION = (state, elementModifie) =>{
+       state.motif_passations = state.motif_passations.map(item =>{
+           if(item.id == elementModifie.id){
+               item = {...elementModifie}
+           }
+           return item
+       })
+   }
+   
+   export const SUPPRIMER_MOTIF_PASSATION = (state, id) =>{
+       state.motif_passations = state.motif_passations.filter(response => response.id!=id)
+   }

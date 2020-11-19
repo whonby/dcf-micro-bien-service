@@ -100,6 +100,7 @@
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab17">Attribution</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2">Bailleur</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab2025">ANRMP</a></li>
                                
                                 
                                 
@@ -154,6 +155,18 @@
 
                 </div>
 
+              <div id="tab2025" class="tab-pane">
+                <!-- <div align="right">
+                    <div class="widget-content">
+                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div> -->
+                <Arnmp :macheid="detail_marche.id"></Arnmp>
+
+                </div>
+
 
 
                    <div id="tab4" class="tab-pane">
@@ -182,9 +195,11 @@
                                 <li class=""><a data-toggle="tab" href="#tab498">Ouverture</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab41180">PV d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab78932">Jugement</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab7893204">Reserves CF</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab4110">PV Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab178">Attribution</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0142">bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab01420">ANRMP</a></li>
 
                             
                                 
@@ -245,6 +260,12 @@
                
 <!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
+                  <div id="tab7893204" class="tab-pane">
+
+                    <reserveCf :macheid="detail_marche.id"></reserveCf>
+               
+<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
+                </div>
 
                 <div id="tab4110" class="tab-pane">
 <!--                <div align="right">-->
@@ -273,6 +294,13 @@
                 <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
 
                 </div>
+                 <div id="tab01420" class="tab-pane">
+                
+               <Arnmp :macheid="detail_marche.id"></Arnmp>
+
+                </div>
+                
+                
                          </div>
 
                          
@@ -293,9 +321,13 @@
                                   <li class=""><a data-toggle="tab" href="#tab1041">PV d'ouverture</a></li>
                                 <!--<li class=""><a data-toggle="tab" href="#tab7845">D.Candidats</a></li>-->
                                 <li class=""><a data-toggle="tab" href="#tab9563"> Jugement </a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab25401010">Reserves CF</a></li>
+                                
                                 <li class=""><a data-toggle="tab" href="#tab06125">PV Jugement</a></li>
                                <li class=""><a data-toggle="tab" href="#tab067458">Attribution</a></li>
                                <li class=""><a data-toggle="tab" href="#tab0143723">bailleur</a></li>
+                               <li class=""><a data-toggle="tab" href="#tab014201">ANRMP</a></li>
+                               
                                 
                             </ul>
                         </div>
@@ -391,6 +423,12 @@
                
 <!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
+                       <div id="tab25401010" class="tab-pane">
+
+                    <reserveCf :macheid="detail_marche.id"></reserveCf>
+               
+<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
+                </div>
                  <div id="tab06125" class="tab-pane">
 <!--                 <div align="right">-->
 <!--                    <div class="widget-content">-->
@@ -423,6 +461,11 @@
                 <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
 
                 </div>
+                 <div id="tab014201" class="tab-pane">
+                
+               <Arnmp :macheid="detail_marche.id"></Arnmp>
+
+                </div>
                          </div>
 
                         
@@ -444,9 +487,12 @@
                                 <li class=""><a data-toggle="tab" href="#tab17041">PV d'ouverture</a></li>
                               <!--  <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>-->
                                 <li class=""><a data-toggle="tab" href="#tab5498"> Jugement </a></li>
+                                <li class=""><a data-toggle="tab" href="#tab2540101">Reserves CF</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0612">PV Jugement</a></li>
                                <li class=""><a data-toggle="tab" href="#tab06745">Attribution</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab01432">bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab0142010">ANRMP</a></li>
+                                
                                 
                             </ul>
                         </div>
@@ -538,6 +584,12 @@
                
 <!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
+                   <div id="tab2540101" class="tab-pane">
+
+                    <reserveCf :macheid="detail_marche.id"></reserveCf>
+               
+<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
+                </div>
                  <div id="tab0612" class="tab-pane">
 <!--                 <div align="right">-->
 <!--                    <div class="widget-content">-->
@@ -575,6 +627,11 @@
                 <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
 
                 </div>
+                 <div id="tab0142010" class="tab-pane">
+                
+               <Arnmp :macheid="detail_marche.id"></Arnmp>
+
+                </div>
                          </div>
 
                         
@@ -601,6 +658,8 @@
                                 <!--<li class=""><a data-toggle="tab" href="#tab5">Dossier Candidat</a></li>-->
                                 <li class=""><a data-toggle="tab" href="#tab45" title="rapport ouverture">PV Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Jugement</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab25401031" title="">Reserves CF</a></li>
+                               
                                 <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">PV Jugement</a></li>
 
                                  <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP">D.DMP</a></li>
@@ -612,6 +671,8 @@
                                 <li class=""><a data-toggle="tab" href="#tab10">Attribution</a></li>
 
                                 <li class=""><a data-toggle="tab" href="#tab0143720">Bailleur</a></li>
+
+                                <li class=""><a data-toggle="tab" href="#tab01437205">ANRMP</a></li>
                                
                                 
                             </ul>
@@ -648,7 +709,6 @@
                                  <componentAvisBailleurSurTransmision :macheid="detail_marche.id"></componentAvisBailleurSurTransmision>
                      
                          </div>-->
-
 
                        <div id="tab4569" class="tab-pane active ">
                                 <div class="span4"></div>
@@ -734,6 +794,12 @@
 <jugement :macheid="detail_marche.id"></jugement>
 <!--                <component-analyse :macheid="detail_marche.id"></component-analyse>-->
 
+                </div>
+                 <div id="tab25401031" class="tab-pane">
+
+                    <reserveCf :macheid="detail_marche.id"></reserveCf>
+               
+<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
 
                   <div id="tab7" class="tab-pane">
@@ -836,6 +902,13 @@
 
                 </div>
 
+                <div id="tab01437205" class="tab-pane">
+                
+               <Arnmp :macheid="detail_marche.id"></Arnmp>
+
+                </div>
+                
+
 
 
 
@@ -892,11 +965,11 @@ import rapportOuverture from '../../bien_service/dossierDetailMarcheProcedureSim
    import componentBailleur from '../../bien_service/dossierDetailMarchePs/dossierBailleur/componentBailleur';
 
       import executionLigneExempte from '../../bien_service/executionLigneExempte/executionLigneExempte';
-
+  import reserveCf from '../../bien_service/dossierReserveCF/reserveCf';
     //    import componentDemandeAno from '../dossierDetailMarcheAOI_AON/dossierDemande_ano_cf/componentDemandeAno';
         import componentAvisAnoCf from '../../bien_service/dossierDetailMarcheAOI_AON/dossierAvisAnoCf/componentAvisAnoCf';
      //    import componentAvisBailleurCf from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
-
+ import Arnmp from '../../bien_service/dossierArnmp/Arnmp';
 import LotMarche from "@/pages/bien_service/component/LotMarche";
 import OuvertureOffre from "@/pages/bien_service/component/OuvertureOffre/OuvertureOffre";
 import PvJugement from "@/pages/bien_service/component/Jugement/pv/PvJugement";
@@ -919,10 +992,10 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
           LotMarche,
           componentBailleur1,
             componentOuverture,
-           // componentActe,
+            reserveCf,
             publicationOffre,
             rapportOuverture,
-//addLot,
+Arnmp,
 invitationCf,
 mandateBs,
 dossierCandidat,
