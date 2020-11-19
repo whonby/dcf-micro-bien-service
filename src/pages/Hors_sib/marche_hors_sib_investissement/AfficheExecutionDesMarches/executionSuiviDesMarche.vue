@@ -46,9 +46,9 @@
                    <th>Procedure de passation</th>
                   <th>Région</th>
                   <th>Montant prévu</th>
-                  <th title="mouvement du marché">Mouvement marché120</th>
+                  <th title="mouvement du marché">Mouvement marché</th>
                    <th>Statut</th>             
-                     <th>Etat du marché</th>
+                     <th>Etat</th>
                 <th colspan="2">Action</th>
                 </tr>
                 </thead>
@@ -101,7 +101,7 @@
 <td>
   <router-link :to="{ name: 'cycleDeChaqueLotEnExecution', params: { id: activites.id }}"
                  class="btn btn-inverse " title="FICHE DE SUIVI DES MARCHES">
-        <span class=""><i class=" icon-folder-open"></i></span>
+        <span class=""><i class=" icon-arrow-right"></i></span>
     </router-link>
 </td>
 <!-- <td>

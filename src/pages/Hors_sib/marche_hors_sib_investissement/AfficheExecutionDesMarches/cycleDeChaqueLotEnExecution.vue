@@ -95,9 +95,9 @@
                   <span class=""><i class="icon-random"></i></span>
                    </router-link> 
 
-          <router-link :to="{ name: 'ListeImageMarche', params: { id: marche.id }}"
-                class="btn btn-default " title="Liste Image">
-                  <span class=""><i class="icon-camera"></i></span>
+          <router-link :to="{ name: 'ficheSuivi', params: { id: marche.id }}"
+                class="btn btn-default " title="">
+                  <span class=""><i class=" icon-th"></i></span>
                    </router-link> 
 
 

@@ -1,5 +1,4 @@
-afficheIdActeurDepense
-AffichierElementParent
+
 <template>
 
 <div>
@@ -178,7 +177,7 @@ AffichierElementParent
                     <td>
                     
                        
-                      <button  class="btn btn-danger" @click="supprimerMandat(Manda.id)">
+                      <button  class="btn btn-danger" @click="supprimerOpProvisoire(Manda.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
@@ -462,7 +461,7 @@ afficheDateFacture() {
       return id => {
         if (id != null && id != "") {
           return this.gettersopProvisoire.filter(
-            element => element.marche_id == id  && this.afficherMarcheHorsSIb(element.marche_id)
+            element => element.marche_id == id  
           );
         }
       };
@@ -493,7 +492,7 @@ else{
       },
  
       methods:{ 
-...mapActions("horSib", ['ajouterRealiteServiceHors','modifierOpProvisoire','supprimerRealiteServiceHors']),
+...mapActions("horSib", ['ajouterRealiteServiceHors','modifierOpProvisoire','supprimerOpProvisoire','supprimerRealiteServiceHors']),
    ...mapActions("bienService", [
                 
                 "ajouterMandat",

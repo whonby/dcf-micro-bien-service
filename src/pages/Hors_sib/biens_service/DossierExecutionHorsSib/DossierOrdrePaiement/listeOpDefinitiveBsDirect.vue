@@ -390,7 +390,7 @@ afficheDateFacture() {
       return id => {
         if (id != null && id != "") {
           return this.mandats.filter(
-            element => element.marche_id == id 
+            element => element.marche_id == id && element.etat_op_def == 0
           );
         }
       };

@@ -35,7 +35,7 @@ const gestionrapport =[
     },
 
     {
-        path: "/FicheSuivi",
+        path: "/FicheSuivi/:id",
         name: "ficheSuivi",
         component: ficheSuivi
       }

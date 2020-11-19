@@ -306,7 +306,7 @@ decision_cf
    
    import avenant from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
    import facture from "../dossierFacture/factureHs";
-   import decompte from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte";
+   import decompte from "../dossierDecompte/decomptePro";
 // import avenant from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
 // import facture from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierFacture/facture";
 // import decompte from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte";

@@ -1,7 +1,461 @@
-
+typeOrdrePaiement
 <template>
 
 <div>
+  <div id="modatFactureAjouteDefinitif" class="modal hide taillemodal45" >
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Facture</h3>
+      </div>
+      <div class="modal-body ">
+      <table class="table table-bordered table-striped">
+         
+            <tr>
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Type facture</label>
+                  <div class="controls">
+                      <select v-model="formData1.typfacture_id" class="span" >
+                    
+                     <option
+                        v-for="typeFact in afficherTypeFactureProforma"
+                        :key="typeFact.id"
+                        :value="typeFact.id"
+                      >{{typeFact.libelle}}</option>
+                  </select>
+                     
+                  </div>
+                </div>
+              </td>
+              
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Numero facture</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                   v-model="formData1.numero_facture"
+                    class="span"
+                    
+                  />
+                </div>
+                </div>
+              </td>
+              <td>
+                <div class="control-group">
+                 <label class="control-label">Date de la facture</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                    v-model="formData1.date_facture"
+                   
+                    class="span"
+                   
+                  />
+                </div>
+                </div>
+              </td>
+               <td colspan="">
+                <div class="control-group">
+                   <label class="control-label">Unite administrative</label>
+                <div class="controls">
+                 <input
+                    type="text"
+                    :value="afficheLibelleUa(afficheUa_id(macheid))"
+                   readonly
+                    class="span"
+                   
+                  />
+                </div>
+                </div>
+              </td>
+             </tr>
+               <tr>
+               <td colspan="2">
+                <div class="control-group">
+                  <label class="control-label">Objet de la facture</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                   :value="afficheObjetMarche(macheid)"
+                    class="span"
+                    
+                  />
+                </div>
+                </div>
+              </td>
+              
+               <td>
+                <div class="control-group">
+                <label class="control-label">exonéré</label>
+                <div class="controls">
+                  <select v-model="formData1.exonere" class="span">
+                  
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                
+                </div>
+              </div>
+              </td>
+              <td>
+                 <div class="control-group">
+                <label class="control-label">Fournisseur</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    :value="afficheNomFournisseur(AfficherFournisseur_id)"
+                
+                    class="span"
+                    readonly
+                  />
+                  
+                </div>
+              </div>
+              </td>
+               
+             </tr>
+              
+            <tr>
+               <td colspan="">
+                <div class="control-group">
+                  <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                   v-model="formData1.designation"
+                    class="span"
+                    
+                  />
+                  <input
+                    type="text"
+                    
+                   v-model="formData1.designation2"
+                    class="span"
+                    
+                  />
+                  <input
+                    type="text"
+                    
+                    v-model="formData1.designation3"
+                    class="span"
+                    
+                  />
+                  <input
+                    type="text"
+                    
+                   v-model="formData1.designation4"
+                    class="span"
+                    
+                  />
+                  <input
+                    type="text"
+                    
+                    v-model="formData1.designation5"
+                    class="span"
+                    
+                  />
+                  <input
+                    type="text"
+                    
+                    v-model="formData1.designation6"
+                    class="span"
+                    
+                  />
+                  <input
+                    type="text"
+                    
+                    v-model="formData1.designation7"
+                    class="span"
+                    
+                  />
+                  <input
+                    type="text"
+                    
+                    v-model="formData1.designation8"
+                    class="span"
+                    
+                  />
+                </div>
+                </div>
+              </td>
+              
+               <td>
+                <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire"
+                    class="span"
+                   
+                  />
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire2"
+                    class="span"
+                   
+                  />
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire3"
+                    class="span"
+                   
+                  />
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire4"
+                    class="span"
+                   
+                  />
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire5"
+                    class="span"
+                   
+                  />
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire6"
+                    class="span"
+                   
+                  />
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire7"
+                    class="span"
+                   
+                  />
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire8"
+                    class="span"
+                   
+                  />
+                 
+                </div>
+              </div>
+              </td>
+              <td>
+                <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite"
+                    class="span"
+                    
+                  />
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite2"
+                    class="span"
+                    
+                  />
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite3"
+                    class="span"
+                    
+                  />
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite4"
+                    class="span"
+                    
+                  />
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite5"
+                    class="span"
+                    
+                  />
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite6"
+                    class="span"
+                    
+                  />
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite7"
+                    class="span"
+                    
+                  />
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite8"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+              </td>
+               <td>
+                   <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                  :value="montantHT1"
+                 
+                    class="span"
+                    readonly
+                  />
+                   <input
+                    type="number"
+                  :value="montantHT2"
+                 
+                    class="span"
+                    readonly
+                  />
+                   <input
+                    type="number"
+                  :value="montantHT3"
+                 
+                    class="span"
+                    readonly
+                  />
+                   <input
+                    type="number"
+                  
+                 :value="montantHT4"
+                    class="span"
+                    readonly
+                  />
+                   <input
+                    type="number"
+                  :value="montantHT5"
+                 
+                    class="span"
+                    readonly
+                  />
+                   <input
+                    type="number"
+                  
+                 :value="montantHT6"
+                    class="span"
+                    readonly
+                  />
+                   <input
+                    type="number"
+                  
+                 :value="montantHT7"
+                    class="span"
+                    readonly
+                  />
+                   <input
+                    type="number"
+                  
+                 :value="montantHT8"
+                    class="span"
+                    readonly
+                  />
+                 
+                      
+                </div>
+              </div>
+               </td>
+             </tr>
+             <tr>
+               <td colspan="3" style="text-align:right;color:red">Montant HT</td>
+               <td>
+                  <div class="control-group">
+                
+                <div class="controls">
+                  <input
+                  :value="totalMontantHT"
+                    type="text"
+                    class="span"
+                    readonly
+                  />
+                  
+                </div>
+              </div>
+               </td>
+             </tr>
+             <tr>
+               <td colspan="3" style="text-align:right;color:red">Taux</td>
+               <td>
+                 <div class="control-group">
+                
+                <div class="controls">
+                  <input
+                    type="text"
+                    :value="afficherEnorere"
+                    class="span"
+                    readonly
+                  />
+                  
+                </div>
+              </div>
+               </td>
+             </tr>
+             <tr>
+               <td colspan="3" style="text-align:right;color:red">TVA</td>
+               <td>
+                 <div class="control-group">
+                
+                <div class="controls">
+                  <input
+                    type="text"
+                    :value="montantTva"
+                    class="span"
+                    readonly
+                  />
+                  
+                </div>
+              </div>
+               </td>
+             </tr>
+             <tr>
+               <td colspan="3" style="text-align:right;color:red">Montant TTC</td>
+               <td>
+                 <div class="control-group">
+                
+                <div class="controls">
+                  <input
+                    type="text"
+                    :value="montantHTt"
+                    class="span"
+                    readonly
+                  />
+                  
+                </div>
+              </div>
+               </td>
+             </tr>
+      </table>
+      </div >
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterFactureLocal(formData1)"
+          class="btn btn-primary"
+          href="#"
+           
+        >Valider</a> 
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
 <div id="etatOpAnnulation" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -72,7 +526,7 @@
                                 <th title="Date validation Cf">Date validation CF</th>
                                <th> Etat OP Provisoire</th>
                                 <!-- <th title="Observation Controleur financier">Observation CF</th> -->
-                                <th colspan="2">Action</th>
+                                <th colspan="">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody v-if="macheid">
@@ -109,7 +563,7 @@
                     
                       </button>
                    </td>
-                    <td>
+                    <!-- <td>
                           <router-link :to="{ name: 'detailOpProvisoire', params: {id:Manda.id}}"
                 class="btn btn-inverse " title="Detail Op Provisoire" >
                   <span class="" style="color:#fff">D.OP.Pro</span>
@@ -120,12 +574,17 @@
                    </router-link>
                      
                       
-                    </td>
+                    </td> -->
                     <td v-if="Manda.etat_op == 1">
-                       <router-link :to="{ name: 'AjouterServiceRealiteOpProvisoire', params: { id: Manda.id }} "
-                class="btn btn-default " title="Realité Service Fait">
+                       <!-- <router-link :to="{ name: 'AjouterServiceRealiteOpProvisoire', params: { id: Manda.id }} "
+                class="btn btn-default " title="Facture Definitif">
                   <span class=""><i class="  icon-random"></i></span>
-                   </router-link>
+                   </router-link> -->
+                    <button   class="btn  btn-success" @click="ModalFactureDefinitive(Manda.id)" title="Ajouter facture definitif">                        
+                     
+                      <span    >Ajouter Facture</span>
+                      
+                      </button>
                     </td>
                                      </tr>
                
@@ -163,7 +622,7 @@ export default {
           icon: "add"
         }
       ],
-      
+      formData1:{},
        editMandat: {
         
        },
@@ -176,7 +635,7 @@ search:""
 
               computed: {
                 ...mapGetters('horSib', ['gettersopProvisoire']),
-            ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+            ...mapGetters("bienService", ["typeMarches",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -230,6 +689,33 @@ let objJson = JSON.parse(objLinea);
 return objJson.name
 
 },
+   anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
+afficherEnorere(){
+if(this.formData1.exonere == 0){
+  return 0
+}
+else {
+  return this.affcherTauxEnCours
+  
+}
+},
+AfficherFournisseur_id() {
+      
+      const norme = this.acteEffetFinanciers.find(normeEquipe => normeEquipe.marche_id == this.macheid);
+
+      if (norme) {
+        return norme.entreprise_id;
+      }
+      return 0
+    },
      AffichierElementParent() {
       
       // return id => {
@@ -238,6 +724,45 @@ return objJson.name
       //   }
       // };
     },
+    afficheUa_id() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.unite_administrative_id;
+      }
+      return 0
+        }
+      };
+    },
+afficheLibelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    
+afficheObjetMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objet;
+      }
+      return 0
+        }
+      };
+    },
+
+   
     RecupererNiveau3StructureDecision() {
       return id => {
         if (id != null && id != "") {
@@ -424,15 +949,195 @@ afficheDateFacture() {
         }
       };
     },
-    afficheMarcheType(){
-if(this.afficheIdTypeMarche(this.EditServiceRealite.marche_id) == 5){
+//     afficheMarcheType(){
+// if(this.afficheIdTypeMarche(this.EditServiceRealite.marche_id) == 5){
+// return 1
+// }
+// else{
+//   return 2
+// }
+// },
+   montantHT1() {
+      const val =  parseFloat(this.formData1.prix_unitaire) * parseFloat(this.formData1.quantite);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+montantHT2() {
+      const val =  parseFloat(this.formData1.prix_unitaire2) * parseFloat(this.formData1.quantite2);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    montantHT3() {
+      const val =  parseFloat(this.formData1.prix_unitaire3) * parseFloat(this.formData1.quantite3);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    montantHT4() {
+      const val =  parseFloat(this.formData1.prix_unitaire4) * parseFloat(this.formData1.quantite4);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    montantHT5() {
+      const val =  parseFloat(this.formData1.prix_unitaire5) * parseFloat(this.formData1.quantite5);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    montantHT6() {
+      const val =  parseFloat(this.formData1.prix_unitaire6) * parseFloat(this.formData1.quantite6);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    montantHT7() {
+      const val =  parseFloat(this.formData1.prix_unitaire7) * parseFloat(this.formData1.quantite7);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    montantHT8() {
+      const val =  parseFloat(this.formData1.prix_unitaire8) * parseFloat(this.formData1.quantite8);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    montantHT9() {
+      const val =  parseFloat(this.formData1.prix_unitaire9) * parseFloat(this.formData1.quantite9);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    montantHT10() {
+      const val =  parseFloat(this.formData1.prix_unitaire10) * parseFloat(this.formData1.quantite10);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+ totalMontantHT() {
+      const val =  parseFloat(this.montantHT1) + parseFloat(this.montantHT2)+ parseFloat(this.montantHT3)+ parseFloat(this.montantHT4)+ parseFloat(this.montantHT5)+ parseFloat(this.montantHT6)+ parseFloat(this.montantHT7)+ parseFloat(this.montantHT8)+ parseFloat(this.montantHT9)+ parseFloat(this.montantHT10);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+
+affcherTauxEnCours() {
+      
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+tauxArrondit() {
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.arrondit;
+      }
+      return 0
+    },
+
+montantTva() {
+      const val =   parseFloat(this.totalMontantHT) * parseFloat(this.afficherEnorere);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+ montantHTt() {
+      const val =    parseFloat(this.totalMontantHT) + parseFloat(this.montantTva);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+afficheMarcheType(){
+if(this.afficherLibelleTypeMarche(this.afficheridTypeMarche(this.macheid)) == "Travaux"){
 return 1
 }
 else{
   return 2
 }
 },
-   
+afficheridTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_marche_id;
+      }
+      return ""
+        }
+      };
+    },
+    afficherLibelleTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return ""
+        }
+      };
+    },
+    afficherTypeFactureProforma() {
+               
+                        return  this.typeFactures.filter(normeEquipe => normeEquipe.code == 2);
+                       
+                 
+            },
       },
  
       methods:{ 
@@ -442,13 +1147,21 @@ else{
                 "ajouterMandat",
                 
                 "supprimerMandat",
-               
+               "ajouterFacture",
       
      
                
             ]),
        afficheDecisionCf(id) {
       this.$("#etatOpAnnulation").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+       this.editMandat = this.afficheOpProvisoirecf(this.macheid).find(item=>item.id==id);
+    },
+      ModalFactureDefinitive(id) {
+      this.$("#modatFactureAjouteDefinitif").modal({
         backdrop: "static",
         keyboard: false
       });
@@ -549,7 +1262,109 @@ numero_demande:"",
       
        
     },
+ajouterFactureLocal(){
 
+var nouvelObjet = {
+      ...this.formData1,
+    fournisseur_id: this.AfficherFournisseur_id,
+       	prix_propose_ht :this.totalMontantHT,
+        prix_propose_ttc :this.montantHTt,
+         taux :this.affcherTauxEnCours,
+         tva :this.montantTva,
+          	ua :this.afficheUa_id(this.macheid),
+    marche_id : this.macheid,
+    objet_facture:this.afficheObjetMarche(this.macheid),
+      // typeordrepaiement:this.typeOrdrePaiement(this.macheid),
+      marchetype:this.afficheMarcheType,
+      etat_type_facture:1
+       };
+      // var objetDecompte = {
+      //   numero_decompte:this.numeroDecompte,
+      //   marche_id : this.macheid,
+      //   typeProcedure:this.typeOrdrePaiement(this.macheid)
+      // }
+this.ajouterFacture(nouvelObjet)
+
+this.$("#modatFactureAjouter").modal('hide');
+this.formData1= {
+total:0,
+total2:0,
+total3:0,
+total4:0,
+total5:0,
+total6:0,
+total7:0,
+total8:0,
+total9:0,
+total10:0,
+       
+numero_facture:"",
+        objet_facture:"",
+       
+      
+        
+        typfacture_id:"",
+           prix_propose_ht:"",
+        prix_propose_ttc:"",
+         date_facture:"",
+         ua:"",
+           tva:"",
+           taux:"",
+
+            designation:"",
+
+ prix_unitaire:"",
+         quantite:"",
+           montantHT1:"",
+           designation2:"",
+            prix_unitaire2:"",
+             quantite2:"",
+         montantHT2:"",
+           designation3:"",
+           prix_unitaire3:"",
+            quantite3:"",
+             montantHT3:"",
+
+ designation4:"",
+           prix_unitaire4:"",
+            quantite4:"",
+             montantHT4:"",
+              designation5:"",
+           prix_unitaire5:"",
+            quantite5:"",
+             montantHT5:"",
+              designation6:"",
+           prix_unitaire6:"",
+            quantite6:"",
+             montantHT6:"",
+              designation7:"",
+           prix_unitaire7:"",
+            quantite7:"",
+             montantHT7:"",
+              designation8:"",
+           prix_unitaire8:"",
+            quantite8:"",
+             montantHT8:"",
+              designation9:"",
+           prix_unitaire9:"",
+            quantite9:"",
+             montantHT9:"",
+
+ designation10:"",
+           prix_unitaire10:"",
+            quantite10:"",
+             montantHT10:"",
+ fournisseur_id:"",
+ exonere:"",
+       
+
+        
+      
+};
+       
+       
+
+    },
 
       }
 }
@@ -570,4 +1385,9 @@ numero_demande:"",
   width: 75%;
    margin: 0 -40%;
 }
+.taillemodal45 {
+        width: 1500px;
+        margin: 0 -750px;
+      
+    }
 </style>

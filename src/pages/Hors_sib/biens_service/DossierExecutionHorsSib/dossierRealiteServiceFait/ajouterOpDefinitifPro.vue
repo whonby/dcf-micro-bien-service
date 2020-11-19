@@ -1,4 +1,4 @@
-type_engagement_id
+commparerMontantGleEtMontantFacture
 <template>
 
 <div class="container-fluid">
@@ -10,7 +10,7 @@ type_engagement_id
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>ORDRE DE PAIEMENT PROVISOIRE</h5>
+              <h5>ORDRE DE PAIEMENT ORDINAIRE</h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -37,7 +37,7 @@ type_engagement_id
                     </ul>
                   </div>
                   <div class="widget-content tab-content tabtailleFenetre" >
-                     <div id="tab157896" class="tab-pane">
+                         <div id="tab157896" class="tab-pane">
  <div class="modal-body">
         <table class="table table-bordered table-striped" v-if="detail_Facture">
            
@@ -55,7 +55,7 @@ type_engagement_id
                          <div class="control-group">
                             <label class="control-label">Trésor</label>
                             <div class="controls">
-                              <input type="number" class="span" v-model="formData.montant_tresor" />
+                              <input type="number" class="span" v-model="formData.montant_tresor" :readonly="formData.bailler_id!=6" />
                             </div>
                           </div>
                         </td>
@@ -63,7 +63,7 @@ type_engagement_id
                           <div class="control-group">
                             <label class="control-label">Don</label>
                             <div class="controls">
-                              <input type="number" class="span" v-model="formData.montant_don" />
+                              <input type="number" class="span" v-model="formData.montant_don" :readonly="formData.bailler_id==6"/>
                             </div>
                           </div>
                         </td>
@@ -71,7 +71,7 @@ type_engagement_id
                              <div class="control-group">
                             <label class="control-label">Emprunt</label>
                             <div class="controls">
-                              <input type="number" class="span" v-model="formData.montant_emprunt" />
+                              <input type="number" class="span" v-model="formData.montant_emprunt" :readonly="formData.bailler_id==6"/>
                             </div>
                           </div>
                         </td>
@@ -94,7 +94,7 @@ type_engagement_id
                         </td>
                         <td >
                           <div class="control-group">
-                            <label class="control-label">Imputation budgetaire</label>
+                            <label class="control-label">Imputation budgetaire{{detail_Facture.id}}</label>
                             <div class="controls">
                               <input type="text" class="span" :value="afficherInputationBudgetaire(afficherIdLigneBudgetaire(afficherIdParent(detail_Facture.marche_id)))" readonly/>
                             </div>
@@ -121,7 +121,7 @@ type_engagement_id
                       <tr>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation Iniatiale(crédits autorises)(A)</label>
+                            <label class="control-label">Dotation Initiale(crédits autorises)(A)</label>
                             <div class="controls">
                               <input type="text" class="span" :value="afficherMontantBudgetaireInitial(afficherIdLigneBudgetaire(afficherIdParent(detail_Facture.marche_id)))" readonly/>
                             </div>
@@ -183,8 +183,19 @@ type_engagement_id
                             </div>
                           </div>
                         </td>
-
+<td>
+                          <div class="control-group">
+                            <label class="control-label">Montant Bailleur par Marché</label>
+                            <div class="controls">
+                              <input type="text" class="span" :value="afficheMontantParBailler(detail_Facture.marche_id)" readonly/>
+                               <h5 v-if="afficheMontantParBailler(this.detail_Facture.marche_id) < afficheMontantBailleur(this.formData.bailler_id)" style="color:red">
+           La part du bailleur sature</h5>
+                              <input type="hidden" class="span" :value="afficheMontantBailleur(formData.bailler_id)" readonly/>
+                            </div>
+                          </div>
+                        </td>
                       </tr>
+                     
         </table>
  </div>
                     </div>
@@ -291,7 +302,7 @@ type_engagement_id
                           </td>
                           <td>
                              <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
+                            <label class="control-label">Unite Administrative</label>
                             <div class="controls">
                                <input
                                 type="text"
@@ -378,40 +389,14 @@ type_engagement_id
                     
                  
                   <tr>
-                    <td>
+                          <td>
                          <div class="control-group">
-                            <label class="control-label">Numero OP Provisoire</label>
+                            <label class="control-label">Numero OP Définitif</label>
                             <div class="controls">
-                              <input type="text" class="span" v-model="formData.numero_op_provisoire"/>
+                              <input type="text" class="span" v-model="formData.numero_op_definitif"/>
                             </div>
                           </div>
                         </td>
-                          <!-- <td>
-                         <div class="control-group">
-                            <label class="control-label">Numero mandat</label>
-                            <div class="controls">
-                              <input type="text" class="span" />
-                            </div>
-                          </div>
-                        </td>
-                        
-                        <td>
-                         <div class="control-group">
-                            <label class="control-label">Numero Bordereau</label>
-                            <div class="controls">
-                              <input type="text" class="span" />
-                            </div>
-                          </div>
-                        </td> -->
-                 
-                           <!-- <td>
-                         <div class="control-group">
-                            <label class="control-label">Date de reception dossier</label>
-                            <div class="controls">
-                              <input type="date" class="span" v-model="formData.date_reception_cf"/>
-                            </div>
-                          </div>
-                        </td> -->
                          
                       </tr>
                     
@@ -421,7 +406,7 @@ type_engagement_id
           
                     </div>
                     <!--ongle descriptif-->
-                    <div id="tab1569" class="tab-pane">
+                 <div id="tab1569" class="tab-pane">
                       
   <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -560,7 +545,7 @@ type_engagement_id
                           </td>
                          <td>
                             <div class="control-group">
-                              <label class="control-label">piece justificative</label>
+                              <label class="control-label">piece(s) justificative(s)</label>
                               <div class="controls">
                                 <input
                                   type="file"
@@ -575,11 +560,12 @@ type_engagement_id
                             <label class="control-label">Bailleur</label>
                             
                              <select v-model="formData.bailler_id" class="span">
+                               <option></option>
                                 <option
-                                  v-for="fam in sources_financements"
+                                  v-for="fam in afficheBailleurMarche(detail_Facture.marche_id)"
                                   :key="fam.id"
-                                  :value="fam.id"
-                                >{{fam.libelle}}</option>
+                                  :value="fam.bailleur_id"
+                                >{{afficheLibelleBailler(fam.bailleur_id)}}</option>
                               </select>
                           </div>
                         </td> 
@@ -613,9 +599,11 @@ type_engagement_id
                   <div align="right">
                     <div class="controls">
                       <div data-toggle="buttons-checkbox" class="btn-group">
+                        
                         <a
+ 
                           class="btn btn-primary"
-                          @click.prevent="ajouterOpProv" v-show="this.commparerMontantGleEtMontantFacture <= this.detail_Facture.prix_propose_ttc"
+                          @click.prevent="ajouterMandatFactureDefinitive" 
                         >Valider</a>
                          <a  @click.prevent="afficherModalListeExecution" class="btn">Fermer</a>
                         
@@ -673,8 +661,9 @@ ndepense:"Bien et service"
     console.log(this.appel_offre_marche)*/
 },
         computed: {
+          ...mapGetters('horSib', ['gettersrealiteServiceFaitHorsSib']),
 // methode pour maper notre guetter
-          ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+          ...mapGetters("bienService", ["personnaliseGetterMarcheBailleur",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -712,8 +701,8 @@ ndepense:"Bien et service"
       "uniteAdministratives",
       "budgetGeneral",
       "getPersonnaliseBudgetGeneral",
-      "budgetEclate",
       "groupUa",
+      "budgetEclate",
       "getPersonnaliseBudgetGeneralParBienService",
       "groupgranNature", "montantBudgetGeneral","realiteServiceFait","liquidation","decomptefactures"
       // "montantBudgetGeneral"
@@ -723,6 +712,58 @@ ndepense:"Bien et service"
     ]),
     ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+    afficheLibelleBailler() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sources_financements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    afficheCumulMontantParBailler() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.mandats.find(qtreel => qtreel.marche_id == id && qtreel.bailleur_id == this.formData.bailler_id);
+
+      if (qtereel) {
+        return qtereel.montant;
+      }
+      return 0
+        }
+      };
+    },
+    afficheMontantParBailler() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaliseGetterMarcheBailleur.find(qtreel => qtreel.marche_id == id && qtreel.bailleur_id == this.formData.bailler_id);
+
+      if (qtereel) {
+        return qtereel.montant;
+      }
+      return 0
+        }
+      };
+    },
+    afficheMontantBailleur() {
+      return id => {
+        if (id != null && id != "") {
+           return this.mandats.filter(qtreel => qtreel.bailler_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0)
+        }
+        }
+      },
+    
+afficheBailleurMarche() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id);
+      
+        }
+      };
+    },
 afficheDecompte() {
       return id => {
         if (id != null && id != "") {
@@ -787,7 +828,7 @@ afficheLibelleTypeMarche() {
 
 
 commparerMontantGleEtMontantFacture(){
-if(this.montantGeneralMandat > this.detail_Facture.prix_propose_ttc ){
+if( this.detail_Facture.prix_propose_ttc < this.montantGeneralMandat){
 alert("Montant demande est supperieur a la facture")
 }
 else{
@@ -1314,17 +1355,45 @@ afficheLibelleUa() {
         }
       };
     },
-    
         },
         methods: {
-           
-    ...mapActions("horSib", ['ajouterOpProvisoire']),
+            // methode pour notre action
+            ...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux","allActeurDepense"]),
+            ...mapActions('bienService',['supprimerActeEffetFinancier',
+          'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
+            ...mapActions("bienService", [
+                "getEngagement",
+                "supprimerEngagement",
+                "modifierEngagement",
+                "ajouterEngagement",
+                "ajouterMandat",
+                "modifierMandat",
+                "supprimerMandat",
+                "ajouterFacture",
+                "modifierFacture",
+                "supprimerFacture",
+                "ajouterChoixProcedure",
+                 "ajouterAvenant",
+      "modifierAvenant",
+      "supprimerAvenant",
+      "modifierMarche",
+      "getActeEffetFinancier",
+      "getMarche",
+     
+               
+            ]),
+             ...mapActions("uniteadministrative", [
+      "ajouterDecompteFacture"
+    ]),
+    ...mapActions("horSib", ['ajouterRealiteServiceHors']),
  afficherModalListeExecution(){
                 window.history.back();
             },
 
-ajouterOpProv(){
-       if (this.detail_Facture.prix_propose_ttc > this.commparerMontantGleEtMontantFacture)
+ajouterMandatFactureDefinitive(){
+      //  let datationdispo = parseFloat(this.montantMarcheAvecAvenant)
+      // let montant_contrat = parseFloat( this.afficheMontantReelMarche(this.detail_marche.id))
+      if (this.detail_Facture.prix_propose_ttc > this.commparerMontantGleEtMontantFacture)
       {
         alert("Le montant engagé est Inférieure au montant de la facture")
       }
@@ -1337,19 +1406,18 @@ ajouterOpProv(){
       {
         alert("Marché apuré")
       }
-     
-      else
+      else if(this.NombreDecompte == 1)
       {
- var nouvelObjet919 = {
+        var nouvelObjet919 = {
       ...this.formData,
-      
+      etat_srf:1,
+      etat_op_def:1,
        exercice_budget :this.anneeAmort,
-   
-         budget_general_id :this.afficherInputationBudgetaire(this.afficherIdParent(this.afficherIdMarche(this.detail_Facture.id))),
+   budget_general_id :this.afficherInputationBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id)),
          marche_id : this.detail_Facture.marche_id,
          montant_a_paye: this.restePayeMarche,
         //  montant_cumul:this.montantCumuler,
-       ligne_id:this.afficherIdLigneBudgetaire(this.afficherIdParent(this.afficherIdMarche(this.detail_Facture.id))),
+       ligne_id:this.afficherIdLigneBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id)),
      banque_id:this.afficheIdBanque(this.afficherIdEntreprise(this.detail_Facture.id)),
         facture_id:this.detail_Facture.id,
         type_procedure_id	:this.recupererTypeProcedure,
@@ -1357,20 +1425,87 @@ ajouterOpProv(){
 programme_id:this.enregistrerProgramme,
 action_id:this.enregistrerAction,
 activite_id:this.enregistrerActivite,
-  ua_id:this.afficherIdUa(this.afficherIdMarche(this.detail_Facture.id)),
-  grd_nature_id:this.afficherIdGrandeNature(this.afficherIdMarche(this.detail_Facture.id)),
+  ua_id:this.afficherIdUa(this.detail_Facture.marche_id),
+  grd_nature_id:this.afficherIdGrandeNature(this.detail_Facture.marche_id),
 	compte_id:this.afficheIdCompte(this.afficherIdEntreprise(this.detail_Facture.id)),
-section_id:this.afficherIdSection(this.afficherIdUa(this.afficherIdMarche(this.detail_Facture.id))),
+section_id:this.afficherIdSection(this.afficherIdUa(this.detail_Facture.marche_id)),
   total_general:this.commparerMontantGleEtMontantFacture,
+// montant_tresor:this.detail_Facture.montant_tresor,
+// montant_don:this.detail_Facture.montant_don,
+// montant_emprunt:this.detail_Facture.montant_emprunt,
+	entreprise_id:this.afficherIdEntreprise(this.detail_Facture.id),
+  //  bailler_id:this.detail_Facture.bailler_id,
+ marchetype:this.afficheMarcheType,
+ type_engagement_id:this.detail_Facture.type_engagement_id,
+ mod_paiement_engage:this.detail_Facture.mod_paiement_engage,
+  service_realite_id:this.detail_Facture.id,
+  differentop:0
+       };
 
-	entreprise_id:this.detail_Facture.fournisseur_id,
-   
- marchetype:this.afficheMarcheType
+        var objetDecompte1 = {
+       facture_id :this.detail_Facture.id,
+  marche_id :this.detail_Facture.marche_id,
+  numero_decompte :this.NombreDecompte,
+    montant_execute :this.commparerMontantGleEtMontantFacture,
+    montantmarche:this.montantMarcheAvecAvenant,
+    
+      dotationprevue:this.afficherMontantBudgetaireInitial(this.afficherIdLigneBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id))),
        };
       
-  this.ajouterOpProvisoire(nouvelObjet919)
-  //this.afficherModalListeExecution()
-this.formData= {
+this.ajouterMandat(nouvelObjet919)
+
+this.ajouterDecompteFacture(objetDecompte1)
+this.formDataMadat= {
+ 
+  montant_tresor: 0,
+                    montant_emprunt: 0,
+                    montant_don: 0,
+};
+      }
+      else
+      {
+ var nouvelObjet91 = {
+      ...this.formData,
+      etat_srf:1,
+      etat_op_def:1,
+       exercice_budget :this.anneeAmort,
+   budget_general_id :this.afficherInputationBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id)),
+         marche_id : this.detail_Facture.marche_id,
+         montant_a_paye: this.restePayeMarche,
+        //  montant_cumul:this.montantCumuler,
+       ligne_id:this.afficherIdLigneBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id)),
+     banque_id:this.afficheIdBanque(this.afficherIdEntreprise(this.detail_Facture.id)),
+        facture_id:this.detail_Facture.id,
+        type_procedure_id	:this.recupererTypeProcedure,
+// engagement_id:this.editLiquidation.egagement_id,
+programme_id:this.enregistrerProgramme,
+action_id:this.enregistrerAction,
+activite_id:this.enregistrerActivite,
+  ua_id:this.afficherIdUa(this.detail_Facture.marche_id),
+  grd_nature_id:this.afficherIdGrandeNature(this.detail_Facture.marche_id),
+	compte_id:this.afficheIdCompte(this.afficherIdEntreprise(this.detail_Facture.id)),
+section_id:this.afficherIdSection(this.afficherIdUa(this.detail_Facture.marche_id)),
+  total_general:this.commparerMontantGleEtMontantFacture,
+// montant_tresor:this.detail_Facture.montant_tresor,
+// montant_don:this.detail_Facture.montant_don,
+// montant_emprunt:this.detail_Facture.montant_emprunt,
+	entreprise_id:this.afficherIdEntreprise(this.detail_Facture.id),
+  //  bailler_id:this.detail_Facture.bailler_id,
+ marchetype:this.afficheMarcheType
+       };
+
+        var objetDecompte = {
+       facture_id :this.detail_Facture.id,
+  marche_id :this.detail_Facture.marche_id,
+  numero_decompte :this.NombreDecompte,
+     montant_execute :this.commparerMontantGleEtMontantFacture,
+      dotationprevue:this.dotationDisponibleAnterieure,
+      montantmarche:this.restePayeMarche,
+       };
+this.ajouterMandat(nouvelObjet91)
+this.ajouterDecompteFacture(objetDecompte)
+this.formDataMadat= {
+ numero_mandat:"",
  
   montant_tresor: 0,
                     montant_emprunt: 0,
@@ -1378,7 +1513,7 @@ this.formData= {
 };
 
       }
-    
+      
 
     },
 
