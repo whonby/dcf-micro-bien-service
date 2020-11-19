@@ -32,7 +32,9 @@ const defaultState = {
      reserve_cf:[],
      arnmps:[],
      organes_decision:[],
-    // rapportOuverture2:[],
+     nature_prix:[],
+     motif_passations:[],
+
 
     documentMedias:[],
     rapportDocuments:[],

@@ -4584,3 +4584,83 @@ export function supprimerOrganeDecision({commit},id){
       axios.delete('/organe/' + id).then(() => dialog.close() )   
   })
 }
+///
+
+export  function  getNaturePrix({commit}) {
+  queue.push(() => axios.get('/nature').then((response) => {
+    
+    commit('GET_ALL_NATURE_PRIX', response.data) 
+    
+}).catch(error => console.log(error)))
+}
+
+
+ // 
+ export function ajouterNaturePrix({commit},formData){
+  asyncLoading( axios.post('/nature',formData)).then(response => {
+       commit('AJOUTER_NATURE_PRIX', response.data)
+       
+   }).catch(error => console.log(error))
+//  console.log(formData)
+}
+
+export function modifierNaturePrix({commit}, element_modifie){
+  asyncLoading( axios.put('/nature/'+ element_modifie.id, element_modifie))
+   .then(response => {
+        commit('MODIFIER_NATURE_PRIX',response.data)
+
+   }).catch(error => console.log(error))
+  // console.log(element_modifie)
+} 
+
+
+export function supprimerNaturePrix({commit},id){
+  
+  this.$app.$dialog
+  .confirm("Voulez vouz vraiment supprimer ?.")
+  .then(dialog => {
+     commit('SUPPRIMER_NATURE_PRIX', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/nature/' + id).then(() => dialog.close() )   
+  })
+}
+
+
+export  function  getMotifPassation({commit}) {
+  queue.push(() => axios.get('/motif_passation').then((response) => {
+    
+    commit('GET_ALL_MOTIF_PASSATION', response.data) 
+    
+}).catch(error => console.log(error)))
+}
+
+
+ // 
+ export function ajouterMotifPassation({commit},formData){
+  asyncLoading( axios.post('/motif_passation',formData)).then(response => {
+       commit('AJOUTER_MOTIF_PASSATION', response.data)
+       
+   }).catch(error => console.log(error))
+//  console.log(formData)
+}
+
+export function modifierMotifPassation({commit}, element_modifie){
+  asyncLoading( axios.put('/motif_passation/'+ element_modifie.id, element_modifie))
+   .then(response => {
+        commit('MODIFIER_MOTIF_PASSATION',response.data)
+
+   }).catch(error => console.log(error))
+  // console.log(element_modifie)
+} 
+
+
+export function supprimerMotifPassation({commit},id){
+  
+  this.$app.$dialog
+  .confirm("Voulez vouz vraiment supprimer ?.")
+  .then(dialog => {
+     commit('SUPPRIMER_MOTIF_PASSATION', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/motif_passation/' + id).then(() => dialog.close() )   
+  })
+}

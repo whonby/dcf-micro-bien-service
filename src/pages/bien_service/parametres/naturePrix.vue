@@ -19,7 +19,7 @@
                                               title="Liste des Missions "
                                               name ="Liste des missions"
                                               worksheet = "Missions"
-                                            :data="organeDecisionFiltre">
+                                            :data="naturePrixFiltre">
                       <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
@@ -30,7 +30,7 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des organes de résolutions</h5>
+            <h5>Liste des natures des prix</h5>
              <div align="right">
         Recherche: <input type="text" v-model="search">
 
@@ -59,7 +59,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="activites  in partition (organeDecisionFiltre,size)[page]"
+                <tr class="odd gradeX" v-for="activites  in partition (naturePrixFiltre,size)[page]"
                  :key="activites.id">
                   <td @dblclick="afficherModalModifierOrganeDecision(activites.id)">
                       {{activites.code || 'Non renseigné'}}</td>
@@ -71,7 +71,7 @@
 
 
               <div class="btn-group">
-              <button @click.prevent="supprimerOrganeDecision(activites.id)"  class="btn btn-danger ">
+              <button @click.prevent="supprimerNaturePrix(activites.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
@@ -92,11 +92,11 @@
               </ul>
             </div> -->
            
-            <div v-if="organeDecisionFiltre.length">    
+            <div v-if="naturePrixFiltre.length">    
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucun organe de résolutions enregistrée </h6>
+                <h6 style="color:red;">Aucune nature des prix enregistrée </h6>
               </div>
             </div>
           </div>
@@ -105,9 +105,9 @@
          <div class="pagination alternate">
              <ul>
            <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-           <li  v-for="(titre, index) in partition(organeDecisionFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+           <li  v-for="(titre, index) in partition(naturePrixFiltre,size).length" :key="index" :class="{ active : active_el == index }">
            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-            <li :class="{ disabled : page == partition(organeDecisionFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+            <li :class="{ disabled : page == partition(naturePrixFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
            </ul>
         </div>
 
@@ -127,7 +127,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter organe de résolutions</h3>
+                <h3>Ajouter nature des prix</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -163,7 +163,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier organe de résolutions</h3>
+                <h3>Modifier nature des prix</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -268,14 +268,14 @@ export default {
   },
   computed: {
 // methode pour maper notre guetter
-   ...mapGetters('bienService', ['gettersOrganeDecision']) ,
+   ...mapGetters('bienService', ['gettesrNaturePrix']) ,
    
     // methode pour trier un item
-           organeDecisionFiltre(){
+           naturePrixFiltre(){
 
      const searchTerm = this.search.toLowerCase();
 
-return this.gettersOrganeDecision.filter((item) => {
+return this.gettesrNaturePrix.filter((item) => {
   
      return item.libelle.toLowerCase().includes(searchTerm) 
     
@@ -290,18 +290,18 @@ return this.gettersOrganeDecision.filter((item) => {
 
   methods: {
     // methode pour notre action
-   ...mapActions('bienService', [ 'ajouterOrganeDecision', 
-   'modifierOrganeDecision','supprimerOrganeDecision']),
+   ...mapActions('bienService', [ 'ajouterNaturePrix', 
+   'modifierNaturePrix','supprimerNaturePrix']),
 
                    genererEnPdf(){
          var doc = new jsPDF()
         // doc.autoTable({ html: this.natures_sections })
-        var data = this.organeDecisionFiltre;
+        var data = this.naturePrixFiltre;
          doc.setFontSize(8)
-        doc.text(75,10,"LISTE DES ORGANES DE DECISIONS")
+        doc.text(75,10,"LISTE DES NATURES DE PRIX")
         doc.autoTable(this.getColumns(),data)
        // doc.save('Type des actes de depenses.pdf')
-      doc.output('save','Liste des organes de decisions.pdf');
+      doc.output('save','Liste des natures des prix.pdf');
       doc.output('dataurlnewwindow');
      return 0
      },
@@ -342,7 +342,7 @@ partition:partition,
    // fonction pour vider l'input
 
      ajouterBudgetaireLocal () {
-     this.ajouterOrganeDecision(this.formData)
+     this.ajouterNaturePrix(this.formData)
 
         this.formData = {
              code:"",
@@ -358,14 +358,14 @@ afficherModalModifierOrganeDecision(id){
          keyboard: false
         });
 
-        this.editOrgane = this.gettersOrganeDecision.find(item => item.id==id);
+        this.editOrgane = this.gettesrNaturePrix.find(item => item.id==id);
 
 
         
  },
 // 
 modifierBudgetaireLocal(){
-  this.modifierOrganeDecision(this.editOrgane)
+  this.modifierNaturePrix(this.editOrgane)
   this.$('#modifierModal').modal('hide');
   // this.editOrgane = {
   //   code:"",

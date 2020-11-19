@@ -25,7 +25,7 @@
                    <table class="table table-bordered table-striped">
   <thead>
     <tr>
-        <th style="width:25%;text-align:center;">A L'ATTENTION DU CONTROLEUR  </th>
+        <th style="width:25%;text-align:center;font-size:16pxbackground-color: orange;">A L'ATTENTION DU CONTROLEUR  </th>
     </tr>
   </thead>
   <tbody>
@@ -40,15 +40,15 @@
                 <thead>
                   <tr>
                     <th style="width:10%">CODE</th> 
-                    <td> </td>
+                    <td>{{affichierCodeUa(detailMarche.ua_id)}} </td>
                   </tr>
                   <tr>
                     <th style="width:10%">LIBELLE </th>
-                    <td> </td>
+                    <td>{{affichierLibelleUa(detailMarche.ua_id)}} </td>
                   </tr>
                   <tr>
                     <th style="width:10%">TYPE DE MARCHE </th>
-                      <td> </td>
+                      <td>{{affichierLibelleTypeMarche(affichierIdTypeMarche(detailMarche.marche_id))}} </td>
                    </tr>
                   
                  
@@ -58,7 +58,7 @@
                                 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-        <th style="width:25%;text-align:center;">MARCHE - CONTRAT </th>
+        <th style="width:25%;text-align:center;font-size:16px;background-color: coral;">MARCHE - CONTRAT </th>
     </tr>
   </thead>
   <tbody>
@@ -70,49 +70,49 @@
      <thead>
        <tr>
          <th style="width:25%;">OBJET </th>
-          <td style="width:15%" colspan="5" > </td>
+          <td style="width:15%" colspan="5" >{{affichierObjetMarche(detailMarche.marche_id)}} </td>
        </tr>
        
        <tr>
           <th style="width:10%">TITULAIRE</th>
-           <td style="width:15%" colspan="5" > </td>
+           <td style="width:15%" colspan="5" >{{affichierNomEntreprise(detailMarche.entreprise_id)}} </td>
        </tr>
        <tr>
           <th  style="width:25%">MONTANT TOTAL</th>
-           <td style="width:15%"  colspan="1"> </td>
-           <td style="width:15%"  colspan="1">F CFA HT </td>
-           <td style="width:15%"  colspan="1"> </td>
-           <td style="width:15%"  colspan="1">F CFA HT  </td>
+           <td style="width:15%"  colspan="1">{{formatageSomme(parseFloat(detailMarche.montant_act_ht))}} </td>
+           <td style="width:15%"  colspan="1">MONTANT HT </td>
+           <td style="width:15%"  colspan="1">{{formatageSomme(parseFloat(detailMarche.montant_act))}} </td>
+           <td style="width:15%"  colspan="1">MONTANT TTC  </td>
            <td style="width:15%"  colspan="1"> </td>
        </tr>
       <tr>
        <th  style="width:25%">AVANCE DE DEMARRAGE </th>
-        <td style="width:15%"  colspan="1"> </td>
-       <td style="width:15%"  colspan="1">F CFA HT </td>
-       <td style="width:15%"  colspan="1"> </td>
-       <td style="width:15%"  colspan="1">F CFA HT </td>
-       <td style="width:15%"  colspan="1">0% </td>
+        <td style="width:15%"  colspan="1">{{formatageSomme(parseFloat(detailMarche.avance_demarrage_ht))}} </td>
+       <td style="width:15%"  colspan="1">MONTANT HT </td>
+       <td style="width:15%"  colspan="1">{{formatageSomme(parseFloat(detailMarche.avance_demarrage_ttc))}} </td>
+       <td style="width:15%"  colspan="1">MONTANT TTC</td>
+       <td style="width:15%"  colspan="1">{{detailMarche.taux_avance_demarrage}} % </td>
       
        </tr>
       <tr>
         <th  style="width:10%">NUMERO</th>
-        <td style="width:15%" colspan="5" > </td>
+        <td style="width:15%" colspan="5" > {{affichierNumeroMarche(detailMarche.marche_id)}}</td>
        </tr>
        <tr>
         <th  style="width:10%">DATE D'APPROBATION</th>
-        <td style="width:15%" colspan="5" > </td>
+        <td style="width:15%" colspan="5" >{{formaterDate(detailMarche.date_approbation)}} </td>
        </tr>
        <tr>
         <th  style="width:10%">DATE DE DEMARRAGE </th>
-        <td style="width:15%" colspan="5" > </td>
+        <td style="width:15%" colspan="5" >{{formaterDate(detailMarche.date_odre_service)}} </td>
        </tr>
-       <tr>
+       <tr>	
         <th  style="width:10%">DELAI PREVISIONNEL DE REALISATION  </th>
-        <td style="width:15%" colspan="5" > </td>
+        <td style="width:15%" colspan="5" >{{detailMarche.duree}} Jours</td>
        </tr>
        <tr>
         <th  style="width:10%">DATE DE FIN PREVISIONNELLE </th>
-        <td style="width:15%" colspan="5" > </td>
+        <td style="width:15%" colspan="5" > {{formaterDate(detailMarche.date_fin_exe)}}</td>
        </tr>
      
 
@@ -123,7 +123,7 @@
    <table class="table table-bordered table-striped">
   <thead>
     <tr>
-        <th style="width:25%;text-align:center;"> AVENANT </th>
+        <th style="width:25%;text-align:center;font-size:16px;background-color: #4bc302;"> AVENANT </th>
     </tr>
   </thead>
   <tbody>
@@ -134,19 +134,19 @@
       <thead>
         <tr>
           <th style="width:25%">OBJET</th>
-           <td style="width:15%" colspan="5" > </td> 
+           <td style="width:15%" colspan="5" > {{affichierObjetAvenant(detailMarche.marche_id)}}</td> 
         </tr>
          <tr>
           <th style="width:25%">NUMERO</th>
-          <td style="width:15%" colspan="5" > </td> 
+          <td style="width:15%" colspan="5" >{{affichierNumeroAvenant(detailMarche.marche_id)}} </td> 
         </tr>
          <tr>
            <th style="width:25%">MONTANT</th>
-           <td style="width:15%" colspan="1" >  </td> 
-           <td style="width:15%" colspan="1" >F CFA HT </td>
-           <td style="width:15%" colspan="1" > </td>
-           <td style="width:15%" colspan="1" >F CFA HT</td>
-           <td style="width:15%" colspan="1" > 0%</td>
+           <td style="width:15%" colspan="1" > {{formatageSomme(parseFloat(affichierMontantHTAvenant(detailMarche.marche_id)))}} </td> 
+           <td style="width:15%" colspan="1" >MONTANT HT </td>
+           <td style="width:15%" colspan="1" >{{formatageSomme(parseFloat(affichierMontantTTCAvenant(detailMarche.marche_id)))}} </td>
+           <td style="width:15%" colspan="1" >MONTANT TTC</td>
+           <td style="width:15%" colspan="1" > {{affichierTAUXAvenant(detailMarche.marche_id)}} %</td>
            
         </tr>
         
@@ -158,7 +158,7 @@
       <table class="table table-bordered table-striped">
   <thead>
     <tr>
-        <th style="width:25%;text-align:center;"> DECOMPTE  </th>
+        <th style="width:25%;text-align:center;font-size:16px"> DECOMPTE  </th>
     </tr>
   </thead>
   <tbody>
@@ -262,379 +262,239 @@
 </template>
   
 / <script>
-// import { mapGetters, mapActions } from "vuex";
-// // import moment from "moment";
-// // import { ModelListSelect } from "vue-search-select";
-// // import "vue-search-select/dist/VueSearchSelect.css";
-// export default {
-//   // components: {
-//   //   ModelListSelect
-//   // },
-//   data() {
-//     return {
-//       fabActions: [
-//         {
-//           name: "cache",
-//           icon: "add"
-//         }
-//       ],
-//       formData: {
-//         numeromatricule:"PERSONNEL",
-//         referencebancaire:"Liste du personnel",
-//         codefichier: "",
-//         activite_id: "",
-//         programme_id: "",
-//         action_id:"",
-//         ua_id: "",
-//         moisdepaiement: "",
-//         montantdessalaires: "",
-//         objetdepense:"",
-//         ligne_id:"",
-//         fichierjoint:""
-//       },
-//       editpaiementPersonnel: {
+import { mapGetters, mapActions } from "vuex";
+import moment from "moment";
+ import { formatageSomme } from "@/Repositories/Repository";
+// import { ModelListSelect } from "vue-search-select";
+// import "vue-search-select/dist/VueSearchSelect.css";
+export default {
+  // components: {
+  //   ModelListSelect
+  // },
+  data() {
+    return {
+      fabActions: [
+        {
+          name: "cache",
+          icon: "add"
+        }
+      ],
+      formData: {
+       
+      },
+      editpaiementPersonnel: {
         
-//          codefichier: "",
-//          activite_id: "",
-//          programme_id: "",
-//          action_id:"",
-//          ua_id: "",
-//          moisdepaiement: "",
-//          montantdessalaires: "",
-//          objetdepense:"",
-//          ligne_id:"",
-//          fichierjoint:""
+        
          
-//       },
-//       json_fields: {
-//         UNIT_ADMINISTRATIVE: "ua.libelle",
-//         // SECTION: "secti.nom_section",
-//         // SERVICE_GESTIONNAIRE: "servivegest.libelle",
-//         // LOCALISATION_GEO: "localgeo.libelle",
-//         // CODE: "code",
-//         // LIBELLE: "libelle",
-//         // DATE_CREATION: "date_creation"
-//       },
-//       search: ""
-//     };
-//   },
-
-//   computed: {
-//   ...mapGetters("bienService", ["modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
-//      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
-//      'nombremarchesExecute',
-//      'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
-//       "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
-//      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
-
-//    ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-   
-//    ...mapGetters('uniteadministrative',[
-//     "plans_programmes",
-//  "uniteAdministratives",
-//  "afficheNiveauAction",
-//  "afficheNiveauActivite",
-//  "derniereNivoPlanBudgetaire",
-//  "getPersonnaliseBudgetGeneralParPersonnel"
-   
-   
-//    ]),
-
-//    ...mapGetters('parametreGenerauxAdministratif',[
-
-//  "sections",
-//  "type_Unite_admins",
-//  "plans_programmes",
-//  "natures_sections",
-//  "grandes_natures",
-//  "afficheNiveauPlanProg",
-//  "exercices_budgetaires"
-//    ]),
-
-//    ...mapGetters('parametreGenerauxFonctionnelle',[
-
-//       "plans_fonctionnels",
-//  "afficheNiveauPlanFonctionnel"
-//    ]),
-
-// ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
-
-// ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
-
-
-// afficherListeSalaireEnExecution(){
-// return this.paiementPersonnel.filter(element => element.valisationvirement == 0)
-// },
-
-
-
-
-
-//  afficherUa() {
-//       return id => {
-//         if (id != null && id != "") {
-//            const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
-
-//       if (qtereel) {
-//         return qtereel.libelle;
-//       }
-//       return 0
-//         }
-//       };
-//     },
-// Codeeconomique() {
-//       return id => {
-//         if (id != null && id != "") {
-//            const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
-
-//       if (qtereel) {
-//         return qtereel.code.concat('  ', qtereel.libelle);
-//       }
-//       return 0
-//         }
-//       };
-//     },
-// activerLigneBudgetaire(){
-// return this.formData.ua_id ==""
-// },
-// activerProgramme(){
-// return this.formData.ligne_id ==""
-// },
-
-// activerAction(){
-// return this.formData.programme_id ==""
-// },
-
-// activerActivite(){
-// return this.formData.action_id ==""
-// },
-//   afficheActiviteParAction() {
-//       return id => {
-//         if (id != null && id != "") {
-//           return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.afficheAction.id == id);
-//         }
-//       };
-//     },
-//     afficheUaParLignePersonnel() {
-//     return id => {
-//       if (id != null && id != "") {
-//         return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.afficheUA.id == id);
-//       }
-//     };
-//   },
-//     anneeAmort() {
-     
-//      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
-//      if (norme) {
-//        return norme.annee;
-//      }
-//      return 0
-//    },
-//    afficheProgrammeParLigne() {
-//     return id => {
-//       if (id != null && id != "") {
-//         return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.afficheEconomique.id == id);
-//       }
-//     };
-//   },
-   
-// afficheActionParProgramme() {
-//     return id => {
-//       if (id != null && id != "") {
-//         return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.afficheProgramme.id == id);
-//       }
-//     };
-//   },
-
-   
-  
-
-   
-   
-    
-//     // filtre_unite_admin() {
-//       // const st = this.search.toLowerCase();
-//       // return this.jointureUaChapitreSection.filter(items => {
-//         // return (
-//           // items.secti.nom_section.toLowerCase().includes(st) ||
-//           // items.libelle.toLowerCase().includes(st)
-//         // );
-//       // });
-//     // },
-//   //  
-//     // sectionDynamiques() {
-//       // return id => {
-//         // if (id != null && id != "") {
-//           // return this.sections.filter(element => element.naturesection_id == id);
-//         // }
-//       // };
-//     // },
-
-
-// // codeSectionNature(){
-// //       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
-// //       const natsect = this.natures_sections.find(natsect => natsect.id == this.formData.natsection_id)
-// //      const secti = this.sections.find(sect => sect.id == this.formData.section_id)
-    
-// //      if(natsect && secti){
-// //        return natsect.code + secti.code 
-// //      }
-
-// //      return null
-// //    },
-
-
-// // codeuniteadministrative2(){
-// //       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
-    
-// //     const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.formData.servicegest_id)
-// //  const localisageo = this.localisations_geographiques.find(chap => chap.id == this.formData.localisationgeo_id)
-// //      if(servgest && localisageo){
-// //        return servgest.code + localisageo.code
-// //      }
-
-// //      return null
-// //    },
-
-// //  codeuniteadministrativeModifier2(){
-// //       // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
-    
-// //     const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.editUniteAdministrative.servicegest_id)
-// //  const localisageo = this.localisations_geographiques.find(chap => chap.id == this.editUniteAdministrative.localisationgeo_id)
-// //      if(servgest && localisageo){
-// //        return servgest.code + localisageo.code
-// //      }
-
-// //      return null
-// //    },
-
-// //     codeuniteadministrative(){
-// //       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
-// //       const natsect = this.natures_sections.find(natsect => natsect.id == this.formData.nature_section_id)
-// //      const secti = this.sections.find(sect => sect.id == this.formData.section_id)
-// //     const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.formData.servicegest_id)
-// //  const localisageo = this.localisations_geographiques.find(chap => chap.id == this.formData.localisationgeo_id)
-// //      if(natsect && secti && servgest && localisageo){
-// //        return natsect.code + secti.code + "-"+ servgest.code + "-"+ localisageo.code
-// //      }
-
-// //      return null
-// //    },
-// //    codeuniteadministrativeModifier(){
-// //       // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
-// //      const natsect = this.natures_sections.find(natsect => natsect.id == this.editUniteAdministrative.nature_section_id)
-// //      const secti = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
-// //     const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.editUniteAdministrative.servicegest_id)
-// //  const localisageo = this.localisations_geographiques.find(chap => chap.id == this.editUniteAdministrative.localisationgeo_id)
-// //      if(natsect && secti && servgest && localisageo){
-// //        return natsect.code  + secti.code + "-" + servgest.code + "-" + localisageo.code
-// //      }
-
-// //      return null
-// //    },
-// //   },
-//             typeFiltre(){
-
-//      const searchTerm = this.search.toLowerCase();
-
-// return this.paiementPersonnel.filter((item) => {
-  
-    
-//     return item.libelle.toLowerCase().includes(searchTerm) 
-   
-  
-
-//    }
-// )
-//    }
-                                    
-//   },
-//   methods: {
-//     ...mapActions("personnelUA", [
-//       "getpaiementPersonnel",
-//       "ajouterpaiementPersonnel",
-//       "modifierpaiementPersonnel",
-//       "supprimerpaiementPersonnel"
-//     ]),
-
-//     afficherModalAjouterpaiementPersonnel() {
-//       this.$("#exampleModal").modal({
-//         backdrop: "static",
-//         keyboard: false
-//       });
-//     },
-//     // fonction pour vider l'input ajouter
-//     ajouterUniteAdministrativeLocal() {
-//       var nouvelObjet = {
-//         ...this.formData,
-        
-//          exerciceencours: this.anneeAmort
+      },
+      json_fields: {
        
-//       };
-//       this.ajouterpaiementPersonnel(nouvelObjet);
+      },
+      search: ""
+    };
+  },
+props:["macheid"],
+      created() {
+            this.marcheid=this.$route.params.id
+   this.detailMarche = this.acteEffetFinanciers.find(
+       idmarche => idmarche.marche_id == this.$route.params.id 
+         )
+  
+},
+  computed: {
+  ...mapGetters("bienService", ["avenants","modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
+     'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
+     'nombremarchesExecute',
+     'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
+      "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
+     "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
-//       this.formData = {
-        
-//        codefichier: "",
-//         activite_id: "",
-//        programme_id: "",
-//        action_id:"",
-//        ua_id: "",
-//         moisdepaiement: "",
-//        montantdessalaires: "",
-//        objetdepense:"",
-//        ligne_id:"",
-//        fichierjoint:""
-       
-       
-//       }
-//     },
-//     // fonction pour vider l'input modifier
-//     modifierpaiementPersonnelLocal() {
-//         //  var nouvelObjet = {
-//         // ...this.editUniteAdministrative,
-//         // code: this.codeuniteadministrativeModifier,
-//         // code_ua: this.codeuniteadministrativeModifier2
-//       // };
-//       // this.modifierpaiementpersonnel(nouvelObjet);
-// this.$("#modificationModal").modal('hide');
-//       // this.editpaiementPersonnel = {
-//         //  exercice_en_cours: "",
-//         //  codefichier: "",
-//         //  activite_id: "",
-//         //  programme_id: "",
-//         //  action_id:"",
-//         //  ua_id: "",
-//         //  moispaiement: "",
-//         //  montantsalaire: "",
-//           // objetdepense:"",
-//           // ligne_id:"",
-//           // fichierjoint:""
+   ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
+   
+   ...mapGetters('uniteadministrative',[
+    "plans_programmes",
+ "uniteAdministratives",
+ "afficheNiveauAction",
+ "afficheNiveauActivite",
+ "derniereNivoPlanBudgetaire",
+ "getPersonnaliseBudgetGeneralParPersonnel"
+   
+   
+   ]),
 
-//         // 
-//       // };
-//     },
-//     // afficher modal de modification
-//     afficherModalModifierpaiementPersonnel(index) {
-//       this.$("#modificationModal").modal({
-//         backdrop: "static",
-//         keyboard: false
-//       });
+   ...mapGetters('parametreGenerauxAdministratif',[
 
-//       this.editpaiementPersonnel = this.paiementPersonnel[index];
-//     },
-//     alert() {
-//       console.log("ok");
-//     },
+ "sections",
+ "type_Unite_admins",
+ "plans_programmes",
+ "natures_sections",
+ "grandes_natures",
+ "afficheNiveauPlanProg",
+ "exercices_budgetaires"
+   ]),
 
-//     // formaterDate(date) {
-//       // return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
-//     // },
-//     ExporterEnExel(){
-//       this.$refs.excel.click()
-//     }
-//   }
-// };
+   ...mapGetters('parametreGenerauxFonctionnelle',[
+
+      "plans_fonctionnels",
+ "afficheNiveauPlanFonctionnel"
+   ]),
+...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
+...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
+
+...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+affichierObjetAvenant(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objetMarche = this.avenants.find(idMarche => idMarche.marche_id ==id);
+          if(objetMarche){
+            return objetMarche.objet_avenant
+          }
+          return 0
+        }
+      }
+    },
+    affichierNumeroAvenant(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objetMarche = this.avenants.find(idMarche => idMarche.marche_id ==id);
+          if(objetMarche){
+            return objetMarche.numero_avenant
+          }
+          return 0
+        }
+      }
+    },
+    affichierMontantTTCAvenant(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objetMarche = this.avenants.find(idMarche => idMarche.marche_id ==id);
+          if(objetMarche){
+            return objetMarche.montant_avenant
+          }
+          return 0
+        }
+      }
+    },
+    affichierMontantHTAvenant(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objetMarche = this.avenants.find(idMarche => idMarche.marche_id ==id);
+          if(objetMarche){
+            return objetMarche.montant_ht
+          }
+          return 0
+        }
+      }
+    },
+    affichierTAUXAvenant(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objetMarche = this.avenants.find(idMarche => idMarche.marche_id ==id);
+          if(objetMarche){
+            return objetMarche.taux
+          }
+          return 0
+        }
+      }
+    },
+affichierNumeroMarche(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objetMarche = this.marches.find(idMarche => idMarche.id ==id);
+          if(objetMarche){
+            return objetMarche.numero_marche
+          }
+          return 0
+        }
+      }
+    },
+ affichierObjetMarche(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objetMarche = this.marches.find(idMarche => idMarche.id ==id);
+          if(objetMarche){
+            return objetMarche.objet
+          }
+          return 0
+        }
+      }
+    },
+   affichierNomEntreprise(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objetMarche = this.entreprises.find(idMarche => idMarche.id ==id);
+          if(objetMarche){
+            return objetMarche.raison_sociale
+          }
+          return 0
+        }
+      }
+    },      
+       affichierLibelleUa(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objetMarche = this.uniteAdministratives.find(idMarche => idMarche.id ==id);
+          if(objetMarche){
+            return objetMarche.libelle
+          }
+          return 0
+        }
+      }
+    },  
+    affichierCodeUa(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objetMarche = this.uniteAdministratives.find(idMarche => idMarche.id ==id);
+          if(objetMarche){
+            return objetMarche.code
+          }
+          return 0
+        }
+      }
+    }, 
+    affichierIdTypeMarche(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objetMarche = this.marches.find(idMarche => idMarche.id ==id);
+          if(objetMarche){
+            return objetMarche.type_marche_id
+          }
+          return 0
+        }
+      }
+    },  
+    affichierLibelleTypeMarche(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objetMarche = this.typeMarches.find(idMarche => idMarche.id ==id);
+          if(objetMarche){
+            return objetMarche.libelle
+          }
+          return 0
+        }
+      }
+    },                             
+  },
+  methods: {
+    ...mapActions("personnelUA", [
+      "getpaiementPersonnel",
+      "ajouterpaiementPersonnel",
+      "modifierpaiementPersonnel",
+      "supprimerpaiementPersonnel"
+    ]),
+formatageSomme:formatageSomme,
+    alert() {
+      console.log("ok");
+    },
+
+    formaterDate(date) {
+      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    },
+    ExporterEnExel(){
+      this.$refs.excel.click()
+    }
+  }
+};
 </script>
 <style scoped>
 
@@ -646,5 +506,9 @@ margin: 0 -48%;
 }
 th{
   text-align:left;
+}
+td{
+  font-size:14px;
+  font-weight:bold;
 }
 </style>

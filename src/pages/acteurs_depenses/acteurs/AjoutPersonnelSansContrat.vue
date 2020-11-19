@@ -220,7 +220,7 @@
                                                     <div class="controls">
                                                         <select v-model="formData.fonction_id" :disabled="verrouilleFonction" class="span12">
                                                             <option></option>
-                                                            <option v-for="item in afficheFonction(formData.service_id)" :key="item.id" :value="item.fonction_id">
+                                                            <option v-for="item in afficheFonction(formData.unite_administrative_id)" :key="item.id" :value="item.fonction_id">
                                                                 {{afficheLibelleFonction(item.fonction_id)}}
                                                             </option>
 
@@ -640,7 +640,7 @@ nombreDeFonction() {
  afficheService() {
       return id => {
         if (id != null && id != "") {
-          return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.fonction_id != null);
+          return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.fonction_id == null);
         }
       };
     },
@@ -659,7 +659,7 @@ nombreDeFonction() {
 afficheFonction() {
       return id => {
         if (id != null && id != "") {
-          return this.getterplanOrganisationUa.filter(element => element.serviceua_id == id && element.fonction_id != null);
+           return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.fonction_id != null);
         }
       };
     },

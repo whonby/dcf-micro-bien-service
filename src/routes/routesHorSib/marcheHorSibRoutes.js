@@ -12,7 +12,8 @@ import listeMarcheBienEtServiceHS from "../../pages/Hors_sib/marche_hors_sib_inv
 import recrutementPersonnelHorsSib from "../../pages/Hors_sib/dossierPersonnel/recrutementPersonnel.vue";
 import ListesPersonnel from "../../pages/Hors_sib/dossierPersonnel/ListesPersonnel.vue";
 import detailExecutionHorsSib from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierPrincipal/detailExecutionHorsSib.vue';
-import ajouterServiceRealiteHorsSib from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierRealiteServiceFait/ajouterServiceRealiteHorsSib.vue';
+import ajouterOpDefinitif from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierRealiteServiceFait/ajouterServiceRealiteHorsSib.vue';
+import ajouterOpDefinitifPro from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierRealiteServiceFait/ajouterOpDefinitifPro.vue';
 import OpDefinitifDirect from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/AjouterOpDefinitif.vue';
 import ajouterOpProvisoire from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/DossierOpProvisoire/ajouterOpProvisoire.vue';
 import decompteProvisoire from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierDecompte/decomptePro.vue';
@@ -31,13 +32,18 @@ import AjouterServiceRealiteOpProvisoire from '../../pages/Hors_sib/biens_servic
 import detailExecutionOpDirect from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierPrincipal/detailExecutionOpDirect.vue';
 import detailExecutionOpInDirect from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierPrincipal/detailExecutionOpInDirect.vue';
 import detailMarcheParEntrepriseHors from '../../pages/Hors_sib/marcheParEntreprise/detailMarcheParEntreprise.vue';
-
+import cycleDeChaqueLotEnExecution from '../../pages/Hors_sib/marche_hors_sib_investissement/AfficheExecutionDesMarches/cycleDeChaqueLotEnExecution';
 const marcheHorSibRoutes =[
 
     {
         path: "/decompte_Provisoire",
         name: "decompteProvisoire",
         component: decompteProvisoire
+    },
+    {
+        path: '/Suivi-des-marches/:id',
+        name: "cycleDeChaqueLotEnExecution",
+        component: cycleDeChaqueLotEnExecution
     },
     {
         path: '/detail-Marche-Par-Entreprise/:id',
@@ -97,10 +103,16 @@ const marcheHorSibRoutes =[
         name: "OpDefinitifDirect",
         component: OpDefinitifDirect
     },
+    
     {
-        path: "/ajouterServiceRealiteHorsSib/:id",
-        name: "ajouterServiceRealiteHorsSib",
-        component: ajouterServiceRealiteHorsSib
+        path: "/ajouter-Op-Definitif/:id",
+        name: "ajouterOpDefinitifPro",
+        component: ajouterOpDefinitifPro
+    },
+    {
+        path: "/ajouter-Op-Definitif/:id",
+        name: "ajouterOpDefinitif",
+        component: ajouterOpDefinitif
     },
     {
         path: '/detailExecutionHorsSib/:id',

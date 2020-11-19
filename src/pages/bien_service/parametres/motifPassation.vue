@@ -30,7 +30,7 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des organes de résolutions</h5>
+            <h5>Liste des motifs de passations</h5>
              <div align="right">
         Recherche: <input type="text" v-model="search">
 
@@ -71,7 +71,7 @@
 
 
               <div class="btn-group">
-              <button @click.prevent="supprimerOrganeDecision(activites.id)"  class="btn btn-danger ">
+              <button @click.prevent="supprimerMotifPassation(activites.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
@@ -96,7 +96,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucun organe de résolutions enregistrée </h6>
+                <h6 style="color:red;">Aucun motif de passations enregistrée </h6>
               </div>
             </div>
           </div>
@@ -127,7 +127,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter organe de résolutions</h3>
+                <h3>Ajouter motif de passations</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -163,7 +163,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier organe de résolutions</h3>
+                <h3>Modifier motif de passations</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -268,14 +268,14 @@ export default {
   },
   computed: {
 // methode pour maper notre guetter
-   ...mapGetters('bienService', ['gettersOrganeDecision']) ,
+   ...mapGetters('bienService', ['gettersMotifPassations']) ,
    
     // methode pour trier un item
            organeDecisionFiltre(){
 
      const searchTerm = this.search.toLowerCase();
 
-return this.gettersOrganeDecision.filter((item) => {
+return this.gettersMotifPassations.filter((item) => {
   
      return item.libelle.toLowerCase().includes(searchTerm) 
     
@@ -290,18 +290,18 @@ return this.gettersOrganeDecision.filter((item) => {
 
   methods: {
     // methode pour notre action
-   ...mapActions('bienService', [ 'ajouterOrganeDecision', 
-   'modifierOrganeDecision','supprimerOrganeDecision']),
+   ...mapActions('bienService', [ 'ajouterMotifPassation', 
+   'modifierMotifPassation','supprimerMotifPassation']),
 
                    genererEnPdf(){
          var doc = new jsPDF()
         // doc.autoTable({ html: this.natures_sections })
         var data = this.organeDecisionFiltre;
          doc.setFontSize(8)
-        doc.text(75,10,"LISTE DES ORGANES DE DECISIONS")
+        doc.text(75,10,"LISTE DES MOTIFS DE PASSATIONS")
         doc.autoTable(this.getColumns(),data)
        // doc.save('Type des actes de depenses.pdf')
-      doc.output('save','Liste des organes de decisions.pdf');
+      doc.output('save','Liste des motifs de passations.pdf');
       doc.output('dataurlnewwindow');
      return 0
      },
@@ -342,7 +342,7 @@ partition:partition,
    // fonction pour vider l'input
 
      ajouterBudgetaireLocal () {
-     this.ajouterOrganeDecision(this.formData)
+     this.ajouterMotifPassation(this.formData)
 
         this.formData = {
              code:"",
@@ -358,14 +358,14 @@ afficherModalModifierOrganeDecision(id){
          keyboard: false
         });
 
-        this.editOrgane = this.gettersOrganeDecision.find(item => item.id==id);
+        this.editOrgane = this.gettersMotifPassations.find(item => item.id==id);
 
 
         
  },
 // 
 modifierBudgetaireLocal(){
-  this.modifierOrganeDecision(this.editOrgane)
+  this.modifierMotifPassation(this.editOrgane)
   this.$('#modifierModal').modal('hide');
   // this.editOrgane = {
   //   code:"",

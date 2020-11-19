@@ -122,7 +122,7 @@ decision_cf
                      
                      <td>{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 'Non renseigné'}}</td>
  <td>
-      <router-link :to="{ name: 'ajouterServiceRealiteHorsSib', params: { id: factu.id }}"
+      <router-link :to="{ name: 'ajouterOpDefinitif', params: { id: factu.id }}"
                 class="btn btn-success " title=" Ajouter OP Ordinaire">
                   <span class="">Ajouter OP</span>
                    </router-link>
@@ -137,6 +137,7 @@ decision_cf
                 </div>
               </table>
             </div>
+
 
              <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">

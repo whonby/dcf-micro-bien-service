@@ -33,12 +33,12 @@
             <span>SUIVI ENTREPRISE</span>
           </a>
         </li>
-        <li  @click.prevent="navigateToSuivMarche" >
+        <!-- <li  @click.prevent="navigateToSuivMarche" >
           <a href="#">
             <i class="icon-group"></i>
             <span> SUIVI DES CONTRATS</span>
           </a>
-        </li>
+        </li> -->
         <li  @click.prevent="navigateToDecompte" >
           <a href="#">
             <i class="icon-group"></i>

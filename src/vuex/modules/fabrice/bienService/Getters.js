@@ -79,6 +79,8 @@ export const getterAnoDMPBailleur = state => state.stateAnoDmpBailleur
 export const getterObseravtionBailleurs = state => state.obseravtionBailleurs
  export const gettersArnmp = state => state.arnmps
  export const gettersOrganeDecision = state =>state.organes_decision
+ export const gettesrNaturePrix = state =>state.nature_prix
+ export const gettersMotifPassations = state =>state.motif_passations
 export const gettersReserveCf = state =>state.reserve_cf
 export const gettersCotations = state =>state.stateCotations 
  export const gettersTransmissions = state => state.stateTransmissions
