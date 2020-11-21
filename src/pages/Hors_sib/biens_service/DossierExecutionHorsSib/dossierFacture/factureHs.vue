@@ -1441,7 +1441,7 @@ typeOrdrePaiement
                               
                                 
                                 
-                                <th colspan="2">Action</th>
+                                <th colspan="3">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -1470,14 +1470,18 @@ typeOrdrePaiement
                        <router-link :to="{ name: 'detailExecutionOpInDirect', params: { id: factu.id }}"
                 class="btn btn-default " title="Ajouter Op Provisoire">
                   <span class=""><i class="   icon-legal"></i></span>
-                   </router-link> 
+                   </router-link>
+                    
                       </td>
                       <td v-else>
                         <router-link :to="{ name: 'detailExecutionOpDirect', params: { id: factu.id }}"
                 class="btn btn-default " title="Realité Service Fait">
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
-                   
+                    <router-link :to="{ name: 'AjouterDecompte', params: { id: factu.id }}"
+                class="btn btn-default " title="Ajouter décompte">
+                  <span class=""><i class=" icon-sitemap"></i></span>
+                   </router-link> 
                        
                       </td>
                       <td>

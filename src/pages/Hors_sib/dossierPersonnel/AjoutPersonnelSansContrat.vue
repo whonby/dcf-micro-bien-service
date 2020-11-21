@@ -309,7 +309,7 @@
 
                                                         <select v-model="formData.plan_budgetaire_id" class="span">
                                                             <option v-for="item in afficheBudgetPersonnel(formData.unite_administrative_id)" :key="item.id" :value="item.economique_id">
-                                                               {{item.afficheEconomique.code}} - {{item.afficheEconomique.libelle}}
+                                                               {{ligneEconomiqueBudgetEclate(item.ligneeconomique_id)}}
                                                             </option>
 
                                                         </select>
@@ -446,7 +446,7 @@
             ...mapGetters('personnelUA', ["dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
-            ...mapGetters("uniteadministrative", ["groupeUaPourMarheHorSib","getPersonnaliseTransfert","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
+            ...mapGetters("uniteadministrative", ["budgetEclate","groupeUaPourMarheHorSib","getPersonnaliseTransfert","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             ...mapGetters("parametreGenerauxAdministratif", ["groupeService","getterplanOrganisationUa","exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", [
@@ -462,6 +462,21 @@
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+ 
+ ligneEconomiqueBudgetEclate() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat(' - ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    }, 
+ 
+ 
  recupererCandidatSel() {
       return id => {
         if (id != null && id != "") {
@@ -696,7 +711,7 @@ exoEnCours() {
     afficheBudgetPersonnel() {
       return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.ua_id == id && element.status=='actu');
+          return this.budgetEclate.filter(element => element.ua_id == id && element.grandenature_id == 2);
         }
       };
     },

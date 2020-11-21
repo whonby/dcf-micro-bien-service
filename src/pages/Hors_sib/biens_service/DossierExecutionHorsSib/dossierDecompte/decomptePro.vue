@@ -1,496 +1,117 @@
 
 <template>
   <div >
-    <div id="ModalDecompte" class="modal hide grdirModalActeEffet" >
-    <div class="modal-header">
-      <button data-dismiss="modal" class="close" type="button">×</button>
-      <h3>Information sur l'attribution de l'acte : Lot N° </h3>
-    </div>
-
-    <div class="widget-title">
-      <ul class="nav nav-tabs">
-       
-        <li class="active"><a data-toggle="tab" href="#financ">INFORMATION DECOMPTE</a></li>
-      </ul>
-    </div>
-    <div class="widget-content tab-content">
-
-      <div id="financ" class="tab-pane active">
-  <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#MARCHE">INFO ENTREPRISE</a></li>
-        <li class=""><a data-toggle="tab" href="#DEMARRAGE">INFO MARCHE</a></li>
-        <li class=""><a data-toggle="tab" href="#DECOMPTE">INFO DECOMPTE</a></li>
-      </ul>
-      <div class="widget-content tab-content">
-<div id="DECOMPTE" class="tab-pane">
-         <table class="table table-bordered table-striped">
-           <tr>
-              <td>
-
-              <div class="control-group">
-              <label class="control-label">N°décompte</label>
-                <div class="controls">
-                  <input
-                      type="number"
-                      
-                     
-                      class="span"
-                      
-                  />
-                </div>
-              </div>
-            </td>
-           
-             <td >
-              <div class="control-group">
-                <label class="control-label" >Date décompte</label>
-                <div class="controls">
-                  <input
-                      type="date"
-
-                      
-                      class="span"
-                      
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-
-              <div class="control-group">
-                <label class="control-label">Montant Acompte HTVA</label>
-                <div class="controls">
-                  <input type="text" 
-                         class="span"
-                         readonly
-                  />
-                </div>
-              </div>
-            </td>
-            
-             
-           </tr>
-            <tr>
-               <td >
-              <div class="control-group">
-                <label class="control-label" > Retenue d'avance</label>
-                <div class="controls">
-                  <input
-                      type="text"
-                       
-                    readonly
-                      class="span"
-                     
-                  />
-
-                </div>
-              </div>
-            </td>
-             <td >
-              <div class="control-group">
-                <label class="control-label" > Retenue de garantie</label>
-                <div class="controls">
-                  <input
-                      type="text"
-                      
-
-                      class="span"
-                      readonly
-                  />
-
-                </div>
-              </div>
-            </td>
-            
-             <td colspan="">
-              <div class="control-group">
-                <label class="control-label" >Retenue de pénalité</label>
-                <div class="controls">
-                  <input
-                      type="text"
-                       
-
-                      class="span12"
-                      readonly
-                  />
-
-                </div>
-              </div>
-            </td>
-           </tr>
-         </table>
-        
-      </div>
-      <div id="MARCHE" class="tab-pane active">
-         <table class="table table-bordered table-striped">
-           <tr>
-              <td>
-
-              <div class="control-group">
-                <label class="control-label">Nom de l'Entreprise</label>
-                <div class="controls">
-                  <input
-                      type="text"
-                      :value="NomEntreprise(IdEntreprise(macheid))"
-                      
-                      class="span"
-                      readonly
-                  />
-                </div>
-              </div>
-            </td>
-           
-             <td >
-              <div class="control-group">
-                <label class="control-label" >Adresse</label>
-                <div class="controls">
-                  <input
-                      type="text"
-                     :value="AdresseEmailEntreprise(IdEntreprise(macheid))"
-                      
-                      class="span"
-                      readonly
-                  />
-                </div>
-              </div>
-            </td>
-            <td >
-              <div class="control-group">
-                <label class="control-label" > N°de compte Contribuable</label>
-                <div class="controls">
-                  <input
-                      type="text"
-                       
-                      :value="ContribuableEntreprise(IdEntreprise(macheid))"
-                      class="span"
-                      readonly
-                  />
-
-                </div>
-              </div>
-            </td>
-             
-           </tr>
-            <tr>
-            
-            
-             <td colspan="3">
-              <div class="control-group">
-                <label class="control-label" >Objet</label>
-                <div class="controls">
-                  <input
-                      type="text"
-                       
-                      :value="libelleObjet(macheid)"
-                      class="span12"
-                      readonly
-                  />
-
-                </div>
-              </div>
-            </td>
-           </tr>
-         </table>
-        
-      </div>
-      <div id="DEMARRAGE" class="tab-pane">
-         <table class="table table-bordered table-striped">
-           <tr>
-             <td >
-              <div class="control-group">
-                <label class="control-label" >N°de Marché</label>
-                <div class="controls">
-                  <input
-                      type="text"  
-                      :value="NumeroMarche(macheid)"
-                      
-                      class="span"
-                      readonly
-                  />
-
-                </div>
-              </div>
-            </td>
-              <td>
-              <div class="control-group">
-                <label class="control-label">Date d'Approbation du marché</label>
-                <div class="controls">
-
-
-                  <input type="text" 
-                         class="span"
-                         :value="dateApprobation(macheid)"
-                         readonly
-                  />
-
-                </div>
-              </div>
-            </td>
-             <td>
-               <div class="control-group">
-                <label class="control-label" >Imputation Budgétaire</label>
-                <div class="controls">
-                  <input
-                      type="text"
-                      
-                      :value="Imputation(idParent(macheid))"
-                      class="span"
-                      readonly
-                  />
-
-                </div>
-              </div>
-             </td>
-             <td >
-              <div class="control-group">
-                <label class="control-label" >Montant initial du marché HT</label>
-                <div class="controls">
-                  <input
-                      type="number"
-                       :value="montantHtMarche(macheid)"
-
-                      class="span"
-                      readonly
-                  />
-
-                </div>
-              </div>
-            </td>
-           </tr>
-             <tr>
-             <td >
-              <div class="control-group">
-                <label class="control-label" >Montant total du marché TTC</label>
-                <div class="controls">
-                  <input
-                      type="text"  
-                        :value="montantTTCMarche(macheid)"
-                      step='100'
-                      class="span"
-                      readonly
-                  />
-
-                </div>
-              </div>
-            </td>
-              <td>
-              <div class="control-group">
-                <label class="control-label">PART Bailleur</label>
-                <div class="controls">
-
-
-                  <input type="text" 
-                         class="span"
-                         
-                  />
-
-                </div>
-              </div>
-            </td>
-             <td>
-               <div class="control-group">
-                <label class="control-label" >PART ETAT</label>
-                <div class="controls">
-                  <input
-                      type="text"
-                       style="text-align:left;color:red"
-
-                      class="span"
-                      readonly
-                  />
-
-                </div>
-              </div>
-             </td>
-             <!-- <td >
-              <div class="control-group">
-                <label class="control-label" >Montant initial du marché HT</label>
-                <div class="controls">
-                  <input
-                      type="number"
-                       style="text-align:left;color:red"
-
-                      class="span"
-                      readonly
-                  />
-
-                </div>
-              </div>
-            </td> -->
-           </tr>
-         </table>
-      </div>
-       
-      
-      </div>
-      </div>
-
-
-    </div>
-
-    <div class="modal-footer">
-      <a  @click.prevent="ajouterModalActeEffetFinancierLocal"
-          class="btn btn-primary"
-          href="#"
-      >Valider</a>
-      <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-    </div>
-  </div>
-    
-
-    <div class="container-fluid">
-      <hr />
-      <div class="row-fluid">
-        <div class="span12">
-         
-          <div class="widget-box">
-         
-            <!-- <div class="widget-title"> -->
-
-               
    <table class="table table-bordered table-striped" v-if="macheid">
-     <thead>
-          <tr> 
-         <th style="width:10%;">  </th>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <th style="width:30%" colspan="3" >Retenues </th>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" ></td>
-          <td style="width:10%" colspan="1" ></td>
-          <td style="width:10%" colspan="1" > </td>
-          </tr>
-       
-       <tr> 
-         <th style="width:10%;">DECOMPTE  </th>
-          <td style="width:10%" colspan="1" >Date </td>
-          <td style="width:10%" colspan="1" >Acompte HTVA </td>
-          <td style="width:10%" colspan="1" >d'Avance </td>
-          <td style="width:10%" colspan="1" >de Garantie </td>
-          <td style="width:10%" colspan="1" >de Penalités </td>
-          <td style="width:10%" colspan="1" >Net HTVA </td>
-          <td style="width:10%" colspan="1" > Net TTC</td>
-          <td style="width:10%" colspan="1" > Etat(TVA 18%)</td>
-          <td style="width:10%" colspan="1" >Bailleur(100% HTVA) </td>
-       </tr>
-       
-       <tr>
-          <th style="width:10%"></th>
-           <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-       </tr>
-          
-    
-       <tr>
-          <th  style="width:10%"></th>
-           <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-       
-           
-       </tr>
-      <tr>
-       <th  style="width:10%"> </th>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-      
-       </tr>
-      <tr>
-        <th  style="width:10%"></th>
-           <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-        
-       </tr>
-       <tr>
-        <th  style="width:10%"></th>
-           <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-        
-       </tr>
-       <tr>
-        <th  style="width:20%" colspan="2"> CUMULS </th>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-        
-       </tr>
-       <tr>
-        <th  style="width:20%" colspan="2">%CUMULS  </th>
-           
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-          <td style="width:10%" colspan="1" > </td>
-       
-       </tr>
-      
+                                    <thead>
+                                   <tr>
+                   
+          <th >Décompte  </th>
+          <!-- <th >Objet  </th> -->
+          <th>Date </th>
+          <th>Acompte HTVA </th>
+          <th>Avance </th>
+          <th>Garantie </th>
+          <th>Penalités </th>
+          <th>Net HTVA </th>
+          <th>Net TTC</th>
+          <th>Etat(TVA 18%)</th>
+          <th>Bailleur(100% HTVA) </th>
+          <th>Actions </th>
+                  </tr>
 
-     </thead>
-     
-   </table>
-   
+                  
+                                    </thead>
+                                    <tbody>
+                                    <tr class="odd gradeX" v-for="(type, index) in decomptefactures" :key="type.id">
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.numero_decompte || 'Non renseigné'}}</td>
+                    <!-- <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{afficheObjetMarche(type.marche_id) || 'Non renseigné'}}</td> -->
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formaterDate(type.date_decompte) || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(MontantFactureHT(type.facture_id))) || 'Non renseigné'}}</td>
+<td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.retenu_avance)) || 'Non renseigné'}}</td>
+
+<td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.retenu_garantie)) || 'Non renseigné'}}</td>
+
+<td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.retenu_penalite)) || 'Non renseigné'}}</td>
+<td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.nethtva)) || 'Non renseigné'}}</td>
+
+                    
+                      <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.netttc)) || 'Non renseigné'}}</td>
+
+                    
+                      <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.parts_etat)) || 'Non renseigné'}}</td>
+
+                    
+                      <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.parts_bailleur)) || 'Non renseigné'}}</td>
+
+                    <td>
+                      <button class="btn btn-danger" @click="supprimerDecompteFacture(type.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                   
+                   <td colspan="2" style="text-align:center;color;red">CUMULS</td>
+                   
+                   <td>{{formatageSomme(parseFloat(CumulMontantFacture(macheid)))}}</td>
+                   <td>{{formatageSomme(parseFloat(CumulAvance(macheid)))}}</td>
+                   <td>{{formatageSomme(parseFloat(CumulGArantie(macheid)))}}</td>
+                   <td>{{formatageSomme(parseFloat(CumulPenalite(macheid)))}}</td>
+                   <td>{{formatageSomme(parseFloat(CumulNetHtva(macheid)))}}</td>
+                   <td>{{formatageSomme(parseFloat(CumulNetTTC(macheid)))}}</td>
+                   <td>{{formatageSomme(parseFloat(CumulPartEtat(macheid)))}}</td>
+                   <td>{{formatageSomme(parseFloat(CumulPartBailler(macheid)))}}</td>
+                   <td></td>
+                  </tr>
+                  <!-- <tr>
  
-            <!-- <div v-else> -->
-              <!-- <p style="text-align:center;font-size:20px;color:red;">Aucune Unite Administrative</p> -->
-            <!-- </div> -->
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <fab :actions="fabActions" @cache="afficherModalAjouterpaiementPersonnel" main-icon="apps" bg-color="green"></fab>
-        <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterpaiementPersonnel()">Open</button>
-  <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+                  <td colspan="2">% CUMULS</td>
+                   <td>{{((parseFloat(CumulAvance(macheid))/parseFloat(MontantMarche(macheid)))/100).toFixed(2)}}</td>
+                   <td>12</td>
+                   <td>12</td>
+                   <td>12</td>
+                   <td>12</td>
+                   <td>12</td>
+                   <td>12</td>
+                   <td>12</td>
+                   <td>12</td>
+                  </tr> -->
+                </tbody>
+                                </table>
+ 
   <notifications  />
   </div>
 </template>
   
-/ <script>
+<script>
+
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
+import { formatageSomme } from './../../../../../Repositories/Repository';
 // // import { ModelListSelect } from "vue-search-select";
 // // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
@@ -511,7 +132,7 @@ export default {
   },
 props:["macheid"],
   computed: {
-  ...mapGetters("bienService", ["modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
+ ...mapGetters("bienService", ["getFacturePersonnaliser","personnaliseGetterMarcheBailleur","modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
      'nombremarchesExecute',
      'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
@@ -526,7 +147,8 @@ props:["macheid"],
  "afficheNiveauAction",
  "afficheNiveauActivite",
  "derniereNivoPlanBudgetaire",
- "getPersonnaliseBudgetGeneralParPersonnel"
+ "getPersonnaliseBudgetGeneralParPersonnel",
+ "decomptefactures"
    
    
    ]),
@@ -553,136 +175,104 @@ props:["macheid"],
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
     
-
-// separateur(){
-//  const euro = new Intl.NumberFormat('fr-FR', {
-//   style: 'currency',
-//   currency: 'EUR',
-//   minimumFractionDigits: 2
-// })
-// },
-   
-    idParent() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.parent_id;
-      }
-      return 0
-        }
-      };
-    },
-     Imputation() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.imputation;
-      }
-      return 0
-        }
-      };
-    },
-    montantHtMarche() {
+    MontantMarche() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.montant_act_ht;
-      }
-      return 0
-        }
-      };
-    },
-    montantTTCMarche() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
+if (qtereel) {
         return qtereel.montant_act;
       }
       return 0
         }
       };
     },
-    dateApprobation() {
+    CumulMontantFacture() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+           return this.getFacturePersonnaliser.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_propose_ht), 0).toFixed(0);
+
+        }
+      };
+    },
+    CumulAvance() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_avance), 0).toFixed(0);
+
+        }
+      };
+    },
+    CumulGArantie() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_garantie), 0).toFixed(0);
+
+        }
+      };
+    },
+    CumulPenalite() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.retenu_penalite), 0).toFixed(0);
+
+        }
+      };
+    },
+    CumulNetHtva() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.nethtva), 0).toFixed(0);
+
+        }
+      };
+    },
+    CumulNetTTC() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.netttc), 0).toFixed(0);
+
+        }
+      };
+    },
+    CumulPartEtat() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.parts_etat), 0).toFixed(0);
+
+        }
+      };
+    },
+    CumulPartBailler() {
+      return id => {
+        if (id != null && id != "") {
+           return this.decomptefactures.filter(qtreel => qtreel.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.parts_bailleur), 0).toFixed(0);
+
+        }
+      };
+    },
+    
+    MontantFactureHT() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return this.formaterDate(qtereel.date_approbation);
+        return qtereel.prix_propose_ht;
       }
       return 0
         }
       };
     },
-     NumeroMarche() {
+ afficheDecompteTableau() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.numero_marche;
-      }
-      return 0
+          return this.decomptefactures.filter(
+            element => element.marche_id == id 
+          );
         }
       };
     },
-     IdEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.entreprise_id;
-      }
-      return 0
-        }
-      };
-    },   
-    NomEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.raison_sociale;
-      }
-      return 0
-        }
-      };
-    },   
-    AdresseEmailEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.telephone.concat(' - ', qtereel.email);
-      }
-      return 0
-        }
-      };
-    },  
-    ContribuableEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.numero_cc;
-      }
-      return 0
-        }
-      };
-    },    
-    libelleObjet() {
+    afficheObjetMarche() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.marches.find(qtreel => qtreel.id == id);
@@ -693,15 +283,18 @@ props:["macheid"],
       return 0
         }
       };
-    },   
+    },
   },
   methods: {
-    ...mapActions("personnelUA", [
-      "getpaiementPersonnel",
-      "ajouterpaiementPersonnel",
-      "modifierpaiementPersonnel",
-      "supprimerpaiementPersonnel"
-    ]),
+    
+    ...mapActions('uniteadministrative',[
+    "ModifierDecompteFacture",
+ "ModifierDecompteFacture",
+ "supprimerDecompteFacture"
+   
+   
+   ]),
+    formatageSomme:formatageSomme,
  formaterDate(date) {
             return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },

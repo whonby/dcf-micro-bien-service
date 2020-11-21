@@ -146,7 +146,7 @@ decision_cf
                       
                        <li ><a data-toggle="tab" href="#OPPROVISORE" >Ordre Paiement Provisoire</a></li>
                                 <li ><a data-toggle="tab" href="#opAnnulation" >Ordre Paiement Annulation</a></li>
-                                <li ><a data-toggle="tab" href="#opFacture" >Facture Definitif</a></li>
+                                <li ><a data-toggle="tab" href="#opFacture" >Facture Definitive</a></li>
                                
                                 <li><a data-toggle="tab" href="#OpDefinitifIndirect" >Ordre Paiement Définitif</a></li>
                        <li ><a data-toggle="tab" href="#rsopindirecte" >Réalité service fait</a></li>
@@ -203,7 +203,7 @@ decision_cf
                             </ul>
                         </div>
                          <div class="widget-content tab-content">
-                           <div id="ServiceRfbs" class="tab-pane active"><ServiceRealiteFaitAgentCf :macheid="detail_marche.marche_id"></ServiceRealiteFaitAgentCf></div>
+                           <div id="ServiceRealiteFaitAGCF" class="tab-pane active"><ServiceRealiteFaitAgentCf :macheid="detail_marche.marche_id"></ServiceRealiteFaitAgentCf></div>
                            <div id="ServiceRfbs" class="tab-pane "><ServiceRealiteFaitSb :macheid="detail_marche.marche_id"></ServiceRealiteFaitSb></div>
                            <div id="ServiceRfcf" class="tab-pane"><ServiceRealiteFaitCf :macheid="detail_marche.marche_id"></ServiceRealiteFaitCf></div>
                      

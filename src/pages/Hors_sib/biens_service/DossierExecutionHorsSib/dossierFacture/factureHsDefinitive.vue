@@ -490,7 +490,7 @@
                               
                                 
                                 
-                                <th colspan="2">Action</th>
+                                <th colspan="3">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -529,7 +529,12 @@
                    
                        
                       </td>
+                      
                       <td>
+                        <router-link :to="{ name: 'AjouterDecompte', params: { id: factu.id }}"
+                class="btn btn-default " title="Ajouter décompte">
+                  <span class=""><i class=" icon-sitemap"></i></span>
+                   </router-link> 
                          <button class="btn btn-danger" @click="supprimerFacture(factu.id)">
                         <span>
                           <i class="icon icon-trash"></i>

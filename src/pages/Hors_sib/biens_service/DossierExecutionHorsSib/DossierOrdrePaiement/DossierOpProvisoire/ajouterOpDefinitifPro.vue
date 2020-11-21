@@ -316,7 +316,7 @@ commparerMontantGleEtMontantFacture
                           </div>
                           
                         </td>
-                          <td>
+                          <!-- <td>
                            <div class="control-group">
                             <label class="control-label">Type Ordre Paiement</label>
                             
@@ -331,11 +331,7 @@ commparerMontantGleEtMontantFacture
                         
                             </div>
                           </div>
-                        </td>
-                        </tr>
-                         
-                        <tr>
-             
+                        </td> -->
                         <td>
                           <div class="control-group">
                             <label class="control-label">Type d'engagement direct</label>
@@ -352,6 +348,11 @@ commparerMontantGleEtMontantFacture
                             </div>
                           </div>
                         </td>
+                        </tr>
+                         
+                        <tr>
+             
+                        
                        <td>
                             <div class="control-group">
                               <label class="control-label">Réf. Engagement  juridique</label>
@@ -376,7 +377,7 @@ commparerMontantGleEtMontantFacture
                               </div>
                             </div>
                           </td>
-                  <td >
+                  <td colspan="2">
                          <div class="control-group">
                             <label class="control-label">Autre type engagement</label>
                             <div class="controls">
@@ -389,9 +390,17 @@ commparerMontantGleEtMontantFacture
                     
                  
                   <tr>
+                    <td>
+                         <div class="control-group">
+                            <label class="control-label">N° OP d'annulation</label>
+                            <div class="controls">
+                              <input type="text" class="span" :value="afficherNumeroOpAnnulation(afficherIdOpAnnulation(detail_Facture.id))" readonly/>
+                            </div>
+                          </div>
+                        </td>
                           <td>
                          <div class="control-group">
-                            <label class="control-label">Numero OP Définitif</label>
+                            <label class="control-label">N° OP Définitif</label>
                             <div class="controls">
                               <input type="text" class="span" v-model="formData.numero_op_definitif"/>
                             </div>
@@ -526,7 +535,7 @@ commparerMontantGleEtMontantFacture
                           </td>
                          <td colspan="">
                             <div class="control-group">
-                              <label class="control-label">Numéro compte</label>
+                              <label class="control-label">N° compte</label>
                               <div class="controls">
                                <!-- <select v-model="formData.compte_id" class="span" >
                                 <option
@@ -654,14 +663,17 @@ ndepense:"Bien et service"
    this.detail_Facture = this.getFacturePersonnaliser.find(
        idmarche => idmarche.id == this.$route.params.id
          )
-         
+      //   this.detail_op = this.gettersopProvisoire.find(
+      //  idmarche => idmarche.id == this.$route.params.id
+      //    )  
   
   
   /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
     console.log(this.appel_offre_marche)*/
 },
         computed: {
-          ...mapGetters('horSib', ['gettersrealiteServiceFaitHorsSib']),
+          
+          ...mapGetters('horSib', ['gettersrealiteServiceFaitHorsSib',"gettersopProvisoire"]),
 // methode pour maper notre guetter
           ...mapGetters("bienService", ["personnaliseGetterMarcheBailleur",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
@@ -1186,6 +1198,30 @@ afficherInputationBudgetaire() {
         }
       };
     },
+     afficherIdOpAnnulation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.idopAnnulation;
+      }
+      return ""
+        }
+      };
+    },
+    afficherNumeroOpAnnulation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersopProvisoire.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_op_annulation;
+      }
+      return ""
+        }
+      };
+    },
     afficherNomEntreprise() {
       return id => {
         if (id != null && id != "") {
@@ -1410,8 +1446,8 @@ ajouterMandatFactureDefinitive(){
       {
         var nouvelObjet919 = {
       ...this.formData,
-      etat_srf:0,
-      etat_op_def:0,
+      etat_srf:1,
+      etat_op_def:1,
        exercice_budget :this.anneeAmort,
    budget_general_id :this.afficherInputationBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id)),
          marche_id : this.detail_Facture.marche_id,
@@ -1433,28 +1469,29 @@ section_id:this.afficherIdSection(this.afficherIdUa(this.detail_Facture.marche_i
 // montant_tresor:this.detail_Facture.montant_tresor,
 // montant_don:this.detail_Facture.montant_don,
 // montant_emprunt:this.detail_Facture.montant_emprunt,
-	entreprise_id:this.detail_Facture.entreprise_id,
+	entreprise_id:this.afficherIdEntreprise(this.detail_Facture.id),
   //  bailler_id:this.detail_Facture.bailler_id,
  marchetype:this.afficheMarcheType,
  type_engagement_id:this.detail_Facture.type_engagement_id,
  mod_paiement_engage:this.detail_Facture.mod_paiement_engage,
   service_realite_id:this.detail_Facture.id,
-  differentop:0
+  differentop:0,
+  idop:this.detail_op.id
        };
 
-        var objetDecompte1 = {
-       facture_id :this.detail_Facture.id,
-  marche_id :this.detail_Facture.marche_id,
-  numero_decompte :this.NombreDecompte,
-    montant_execute :this.commparerMontantGleEtMontantFacture,
-    montantmarche:this.montantMarcheAvecAvenant,
+  //       var objetDecompte1 = {
+  //      facture_id :this.detail_Facture.id,
+  // marche_id :this.detail_Facture.marche_id,
+  // numero_decompte :this.NombreDecompte,
+  //   montant_execute :this.commparerMontantGleEtMontantFacture,
+  //   montantmarche:this.montantMarcheAvecAvenant,
     
-      dotationprevue:this.afficherMontantBudgetaireInitial(this.afficherIdLigneBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id))),
-       };
+  //     dotationprevue:this.afficherMontantBudgetaireInitial(this.afficherIdLigneBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id))),
+  //      };
       
 this.ajouterMandat(nouvelObjet919)
 
-this.ajouterDecompteFacture(objetDecompte1)
+// this.ajouterDecompteFacture(objetDecompte1)
 this.formDataMadat= {
  
   montant_tresor: 0,
@@ -1466,8 +1503,8 @@ this.formDataMadat= {
       {
  var nouvelObjet91 = {
       ...this.formData,
-      etat_srf:0,
-      etat_op_def:0,
+      etat_srf:1,
+      etat_op_def:1,
        exercice_budget :this.anneeAmort,
    budget_general_id :this.afficherInputationBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id)),
          marche_id : this.detail_Facture.marche_id,
@@ -1489,21 +1526,22 @@ section_id:this.afficherIdSection(this.afficherIdUa(this.detail_Facture.marche_i
 // montant_tresor:this.detail_Facture.montant_tresor,
 // montant_don:this.detail_Facture.montant_don,
 // montant_emprunt:this.detail_Facture.montant_emprunt,
-	entreprise_id:this.detail_Facture.entreprise_id,
+	entreprise_id:this.afficherIdEntreprise(this.detail_Facture.id),
   //  bailler_id:this.detail_Facture.bailler_id,
- marchetype:this.afficheMarcheType
+ marchetype:this.afficheMarcheType,
+ idop:this.detail_op.id
        };
 
-        var objetDecompte = {
-       facture_id :this.detail_Facture.id,
-  marche_id :this.detail_Facture.marche_id,
-  numero_decompte :this.NombreDecompte,
-     montant_execute :this.commparerMontantGleEtMontantFacture,
-      dotationprevue:this.dotationDisponibleAnterieure,
-      montantmarche:this.restePayeMarche,
-       };
+  //       var objetDecompte = {
+  //      facture_id :this.detail_Facture.id,
+  // marche_id :this.detail_Facture.marche_id,
+  // numero_decompte :this.NombreDecompte,
+  //    montant_execute :this.commparerMontantGleEtMontantFacture,
+  //     dotationprevue:this.dotationDisponibleAnterieure,
+  //     montantmarche:this.restePayeMarche,
+  //      };
 this.ajouterMandat(nouvelObjet91)
-this.ajouterDecompteFacture(objetDecompte)
+// this.ajouterDecompteFacture(objetDecompte)
 this.formDataMadat= {
  numero_mandat:"",
  

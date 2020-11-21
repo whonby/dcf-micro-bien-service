@@ -930,7 +930,7 @@ afficheDateFacture() {
       return id => {
         if (id != null && id != "") {
           return this.gettersopProvisoire.filter(
-            element => element.marche_id == id  && this.afficherMarcheHorsSIb(element.marche_id)
+            element => element.marche_id == id  
           );
         }
       };
@@ -1188,6 +1188,7 @@ afficheridTypeMarche() {
       ...this.formData,
       marche_id :this.macheid,
    
+   
        };
       this.ajouterAvenant(nouvelObjet);
 this.$("#exampleModalAvenant").modal('hide');
@@ -1266,6 +1267,7 @@ ajouterFactureLocal(){
 
 var nouvelObjet = {
       ...this.formData1,
+      ...this.editMandat,
     fournisseur_id: this.AfficherFournisseur_id,
        	prix_propose_ht :this.totalMontantHT,
         prix_propose_ttc :this.montantHTt,
@@ -1276,7 +1278,8 @@ var nouvelObjet = {
     objet_facture:this.afficheObjetMarche(this.macheid),
       // typeordrepaiement:this.typeOrdrePaiement(this.macheid),
       marchetype:this.afficheMarcheType,
-      etat_type_facture:1
+      etat_type_facture:1,
+      idop:this.editMandat.id
        };
       // var objetDecompte = {
       //   numero_decompte:this.numeroDecompte,

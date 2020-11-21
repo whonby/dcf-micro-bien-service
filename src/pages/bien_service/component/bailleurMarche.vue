@@ -553,6 +553,7 @@ name: "ActEffeFinanciere",
     this.lot=this.getMarchePersonnaliser.filter(item=>item.parent_id==this.macheid)
 
 
+
   },
   computed:{
     ...mapGetters("bienService", [ "typeMarches","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
