@@ -329,6 +329,8 @@ decision_cf
                 import tableauBordExecution from "../tableauBordExecution/tableauBordExecution";
   import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
   export default {
+  watch: {
+  },
         name: 'compte',
         components:{
           // listeOpDefinitiveBsprov,

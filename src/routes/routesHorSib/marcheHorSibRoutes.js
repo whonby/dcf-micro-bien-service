@@ -17,6 +17,9 @@ import ajouterOpDefinitifPro from '../../pages/Hors_sib/biens_service/DossierExe
 import OpDefinitifDirect from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/AjouterOpDefinitif.vue';
 import ajouterOpProvisoire from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/DossierOpProvisoire/ajouterOpProvisoire.vue';
 // import decompteProvisoire from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierDecompte/decomptePro.vue';
+import ReceptionDesMarches from "../../pages/Hors_sib/marche_hors_sib_investissement/ReceptionDesMarche/ReceptionDesMarches.vue"
+import ReceptionDesLots from "../../pages/Hors_sib/marche_hors_sib_investissement/ReceptionDesMarche/ReceptionDesLots.vue"
+import listeDesReceptionDesLot from "../../pages/Hors_sib/marche_hors_sib_investissement/ReceptionDesMarche/listeDesReceptionDesLot.vue"
 
 import detailOpdefinitif from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DetailOrdrePaiement/detailOpdefinitif.vue';
 
@@ -36,6 +39,16 @@ import cycleDeChaqueLotEnExecution from '../../pages/Hors_sib/marche_hors_sib_in
 import AjouterDecompte from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierDecompte/AjouterDecompte.vue';
 import AjouterDecomptePro from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierDecompte/AjouterDecomptePro.vue';
 const marcheHorSibRoutes =[
+    {
+        path: "/liste-Reception-Des-Lots",
+        name: "listeDesReceptionDesLot",
+        component: listeDesReceptionDesLot
+    },
+    {
+        path: "/Reception-Des-Lots/:id",
+        name: "ReceptionDesLots",
+        component: ReceptionDesLots
+    },
     {
         path: "/Ajouter-Decompte/:id",
         name: "AjouterDecomptePro",
@@ -175,6 +188,12 @@ const marcheHorSibRoutes =[
         path:"/suivi-marche-hors-sib",
         name:"suivi_marhe",
         component:marche_hors_sib
+    },
+    
+    {
+        path:"/Reception-Des-Marches",
+        name:"ReceptionDesMarches",
+        component:ReceptionDesMarches
     },
     {
         path:"/ajouter-marche-hors-sib",

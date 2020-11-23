@@ -5,13 +5,19 @@
       <!-- administratifs-->
        <li>
          <router-link :to="{name:'marche_hors_sib_investissement'}" tag="a">
-          SUIVI DES MARCHES HORS SIB 
+          SUIVI DES MARCHES  
          </router-link>
 
        </li>
         <li>
          <router-link :to="{name:'listeMarcheInvestissementHS'}" tag="a">
-           EXECUTIONS DU MARCHES
+           EXECUTIONS DES MARCHES
+         </router-link>
+
+       </li>
+       <li>
+         <router-link :to="{name:'ReceptionDesMarches'}" tag="a">
+           RECEPTIONS DES MARCHES
          </router-link>
 
        </li>
