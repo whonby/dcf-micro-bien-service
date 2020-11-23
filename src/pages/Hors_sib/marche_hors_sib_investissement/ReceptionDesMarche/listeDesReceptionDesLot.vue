@@ -140,7 +140,7 @@
                 <div class="controls">
                   <input
                       type="text"
-                      :value="detail_marche.id"
+                      :value="afficherNumeroLot(detail_marche.id)"
                       class="span4"
                       
                   />
@@ -155,7 +155,7 @@
                 <div class="controls">
                   <input
                       type="text"
-                      
+                      :value="detail_marche.id"
                       class="span12"
                       
                   />
@@ -480,6 +480,31 @@ created() {
     ]),
    
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+afficheNumeroMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterActeEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.numero_marche;
+      }
+      return 0
+        }
+      };
+    },
+ afficherNumeroLot() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+       
+           return qtereel.numero_lot;
+      }
+      return ""
+        }
+      };
+    },
 afficherInputationBudgetaire() {
       return id => {
         if (id != null && id != "") {
