@@ -11,9 +11,9 @@ NombrePlanifInfastructureNiveau1
                               
                                <li ><a data-toggle="tab" href="#tab10000"> Planification <span class="badge badge-important" > {{afficherNombreMarchepalinificationHorsib}} </span></a></li>
                                 <li ><a data-toggle="tab" href="#tab109"> Contratualisation   <span class="badge badge-success" > {{nombreMarcheContratualisationHorSib}} </span></a></li>
-                                <!-- <li><a data-toggle="tab" href="#tab20"> Exécution      <span class="badge badge-warning" ></span></a></li>
+                                <li><a data-toggle="tab" href="#tab20"> Exécution      </a></li>
                                
-                                 <li><a data-toggle="tab" href="#tab20002">Résiliés    <span class="badge badge-info" > </span></a></li>
+                                <!--  <li><a data-toggle="tab" href="#tab20002">Résiliés    <span class="badge badge-info" > </span></a></li>
                                     <li><a data-toggle="tab" href="#tab20789">Suspendus   <span class="badge badge" > </span></a></li>
                                   <li><a data-toggle="tab" href="#tab2000256"> Terminé    <span class="badge badge-inverse" ></span></a></li> -->
                                  
@@ -126,6 +126,9 @@ NombrePlanifInfastructureNiveau1
                         </div>
                         </div>
                      </div>
+                      <div id="tab20" class="tab-pane">
+                        <executionSuiviDesMarche></executionSuiviDesMarche>
+                      </div>
                     </div>
 
                 </div>
@@ -158,6 +161,7 @@ NombrePlanifInfastructureNiveau1
     import ContraInfrastructureNiveau4 from "./NiveauInfastructureContratualisation/ContraInfrastructureNiveau4"
     import ContraInfrastructureNiveau5 from "./NiveauInfastructureContratualisation/ContraInfrastructureNiveau5"
     import ContraInfrastructureNiveau6 from "./NiveauInfastructureContratualisation/ContraInfrastructureNiveau6"
+     import executionSuiviDesMarche from "./AfficheExecutionDesMarches/executionSuiviDesMarche"
     // import planification from "./component/planification"
   //  import contratualisation from "./component/contratualisation"
  import { mapGetters, mapActions } from "vuex";
@@ -166,6 +170,7 @@ NombrePlanifInfastructureNiveau1
  import {partition} from '../../../../src/Repositories/Repository'
 export default {
   components:{
+    executionSuiviDesMarche,
   infrastructureNiveau1,
   infrastructureNiveau2,
   infrastructureNiveau3,

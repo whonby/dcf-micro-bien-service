@@ -1,4 +1,4 @@
-
+commparerMontantGleEtMontantFacture
 <template>
 
 <div class="container-fluid">
@@ -10,7 +10,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Ajouter Mandat</h5>
+              <h5>ORDRE DE PAIEMENT ORDINAIRE</h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -37,7 +37,7 @@
                     </ul>
                   </div>
                   <div class="widget-content tab-content tabtailleFenetre" >
-                     <div id="tab157896" class="tab-pane">
+                         <div id="tab157896" class="tab-pane">
  <div class="modal-body">
         <table class="table table-bordered table-striped" v-if="detail_Facture">
            
@@ -55,7 +55,7 @@
                          <div class="control-group">
                             <label class="control-label">Trésor</label>
                             <div class="controls">
-                              <input type="number" class="span" v-model="formData.montant_tresor" />
+                              <input type="number" class="span" v-model="formData.montant_tresor" :readonly="formData.bailler_id!=6" />
                             </div>
                           </div>
                         </td>
@@ -63,7 +63,7 @@
                           <div class="control-group">
                             <label class="control-label">Don</label>
                             <div class="controls">
-                              <input type="number" class="span" v-model="formData.montant_don" />
+                              <input type="number" class="span" v-model="formData.montant_don" :readonly="formData.bailler_id==6"/>
                             </div>
                           </div>
                         </td>
@@ -71,7 +71,7 @@
                              <div class="control-group">
                             <label class="control-label">Emprunt</label>
                             <div class="controls">
-                              <input type="number" class="span" v-model="formData.montant_emprunt" />
+                              <input type="number" class="span" v-model="formData.montant_emprunt" :readonly="formData.bailler_id==6"/>
                             </div>
                           </div>
                         </td>
@@ -87,16 +87,16 @@
                             <div class="controls">
                               
                                <div class="controls">
-                              <input type="text" class="span" :value="afficherLibelleLigneBudgetaire(afficherIdLigneBudgetaire(afficherIdMarche(detail_Facture.id)))"  readonly/>
+                              <input type="text" class="span" :value="afficherLibelleLigneBudgetaire(afficherIdLigneBudgetaire(afficherIdParent(detail_Facture.marche_id)))"  readonly/>
                             </div>
                             </div>
                           </div>
                         </td>
                         <td >
                           <div class="control-group">
-                            <label class="control-label">Imputation budgetaire</label>
+                            <label class="control-label">Imputation budgetaire{{detail_Facture.id}}</label>
                             <div class="controls">
-                              <input type="text" class="span" :value="afficherInputationBudgetaire(afficherIdMarche(detail_Facture.id))" readonly/>
+                              <input type="text" class="span" :value="afficherInputationBudgetaire(afficherIdLigneBudgetaire(afficherIdParent(detail_Facture.marche_id)))" readonly/>
                             </div>
                           </div>
                         </td>
@@ -121,15 +121,15 @@
                       <tr>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation Iniatiale(crédits autorises)</label>
+                            <label class="control-label">Dotation Initiale(crédits autorises)(A)</label>
                             <div class="controls">
-                              <input type="text" class="span" :value="afficherMontantBudgetaireInitial(afficherInputationBudgetaire(afficherIdMarche(detail_Facture.id)))" readonly/>
+                              <input type="text" class="span" :value="afficherMontantBudgetaireInitial(afficherIdLigneBudgetaire(afficherIdParent(detail_Facture.marche_id)))" readonly/>
                             </div>
                           </div>
                         </td>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Cumul engagements antérieurs </label>
+                            <label class="control-label">Cumul engagements antérieurs (B) </label>
                             <div class="controls">
                               <input type="text" class="span" :value="sommeEgagementLigne(detail_Facture.marche_id)" readonly/>
                             </div>
@@ -137,7 +137,7 @@
                         </td>
                            <td>
                           <div class="control-group">
-                            <label class="control-label">Engagement actuel</label>
+                            <label class="control-label">Engagement actuel (C)</label>
                             <div class="controls">
                               <input type="text" class="span" :value="montantGeneralMandat" readonly/>
                             </div>
@@ -146,7 +146,7 @@
                        
                         <td>
                                                     <div class="control-group">
-                            <label class="control-label">Cumul des demandes(y compris celle-ci) </label>
+                            <label class="control-label">Cumul des demandes(y compris celle-ci)(D=A+B) </label>
                             <div class="controls">
                               <input type="text" class="span" :value="montantCumulerMandatEngagement" readonly/>
                               <input type="hidden" class="span"  readonly/>
@@ -161,21 +161,12 @@
                         <tr>
                            <td >
                           <div class="control-group">
-                            <label class="control-label">Dotation disponible</label>
+                            <label class="control-label">Dotation disponible (E=A-D)</label>
                             <div class="controls">
                               <input type="text" class="span" :value="dotationDisponibleAnterieure"  readonly/>
                             </div> 
                           </div>
-                          
-                        <!-- </td>
-                                                 <td>
-                          <div class="control-group">
-                            <label class="control-label">Dotation disponible anterieure</label>
-                            <div class="controls">
-                              <input type="text" class="span"  readonly/>
-                            </div>
-                          </div>
-                        </td> -->
+                           </td>
                            <td>
                           <div class="control-group">
                             <label class="control-label">Montant marché</label>
@@ -192,17 +183,19 @@
                             </div>
                           </div>
                         </td>
-
-                         <!-- <td>
+<td>
                           <div class="control-group">
-                            <label class="control-label">Disponible</label>
+                            <label class="control-label">Montant Bailleur par Marché</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="montantDisponibleBudget" readonly/>
-                            </div> 
+                              <input type="text" class="span" :value="afficheMontantParBailler(detail_Facture.marche_id)" readonly/>
+                               <h5 v-if="afficheMontantParBailler(this.detail_Facture.marche_id) < afficheMontantBailleur(this.formData.bailler_id)" style="color:red">
+           La part du bailleur sature</h5>
+                              <input type="hidden" class="span" :value="afficheMontantBailleur(formData.bailler_id)" readonly/>
+                            </div>
                           </div>
-                        </td> -->
-                       
+                        </td>
                       </tr>
+                     
         </table>
  </div>
                     </div>
@@ -235,7 +228,7 @@
                                 type="text"
                                 class="span15"
                                readonly
-                            :value="afficherLibelleSection(afficherIdSection(afficherIdUa(afficherIdMarche(detail_Facture.id))))"
+                            :value="afficherLibelleSection(afficherIdSection(afficherIdUa(detail_Facture.marche_id)))"
                               
                               />
                             </div>
@@ -250,7 +243,7 @@
                                 type="text"
                                 class="span"
                                 readonly
-                             :value="afficherProgDot"
+                             :value="afficherProgDotId"
                               
                               />
                             </div>
@@ -265,7 +258,7 @@
                                 class="span"
                                 readonly
                             
-                             v-model="ndepense"
+                             :value="afficherlibelleGrandeNature(afficherIdGrandeNature(detail_Facture.marche_id))"
                               />
                           
                         
@@ -283,6 +276,7 @@
                                 type="text"
                                 class="span"
                                 readonly
+                                 
                           :value="afficherActi"
                               
                               />
@@ -308,7 +302,7 @@
                           </td>
                           <td>
                              <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
+                            <label class="control-label">Unite Administrative</label>
                             <div class="controls">
                                <input
                                 type="text"
@@ -322,9 +316,9 @@
                           </div>
                           
                         </td>
-                          <td>
+                          <!-- <td>
                            <div class="control-group">
-                            <label class="control-label">Type Procedure</label>
+                            <label class="control-label">Type Ordre Paiement</label>
                             
                                <div class="controls">
                               <input
@@ -337,11 +331,7 @@
                         
                             </div>
                           </div>
-                        </td>
-                        </tr>
-                         
-                        <tr>
-             
+                        </td> -->
                         <td>
                           <div class="control-group">
                             <label class="control-label">Type d'engagement direct</label>
@@ -358,6 +348,11 @@
                             </div>
                           </div>
                         </td>
+                        </tr>
+                         
+                        <tr>
+             
+                        
                        <td>
                             <div class="control-group">
                               <label class="control-label">Réf. Engagement  juridique</label>
@@ -382,7 +377,7 @@
                               </div>
                             </div>
                           </td>
-                  <td >
+                  <td colspan="2">
                          <div class="control-group">
                             <label class="control-label">Autre type engagement</label>
                             <div class="controls">
@@ -395,29 +390,19 @@
                     
                  
                   <tr>
+                    <td>
+                         <div class="control-group">
+                            <label class="control-label">N° OP d'annulation</label>
+                            <div class="controls">
+                              <input type="text" class="span" :value="afficherNumeroOpAnnulation(afficherIdOpAnnulation(detail_Facture.id))" readonly/>
+                            </div>
+                          </div>
+                        </td>
                           <td>
                          <div class="control-group">
-                            <label class="control-label">Numero mandat</label>
+                            <label class="control-label">N° OP Définitif</label>
                             <div class="controls">
-                              <input type="text" class="span" v-model="formData.numero_mandat"/>
-                            </div>
-                          </div>
-                        </td>
-                        
-                        <td>
-                         <div class="control-group">
-                            <label class="control-label">Numero Bordereau</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="formData.numero_bordereau"/>
-                            </div>
-                          </div>
-                        </td>
-                 
-                           <td>
-                         <div class="control-group">
-                            <label class="control-label">Date de reception dossier</label>
-                            <div class="controls">
-                              <input type="date" class="span" v-model="formData.date_reception_cf"/>
+                              <input type="text" class="span" v-model="formData.numero_op_definitif"/>
                             </div>
                           </div>
                         </td>
@@ -430,7 +415,7 @@
           
                     </div>
                     <!--ongle descriptif-->
-                    <div id="tab1569" class="tab-pane">
+                 <div id="tab1569" class="tab-pane">
                       
   <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -550,7 +535,7 @@
                           </td>
                          <td colspan="">
                             <div class="control-group">
-                              <label class="control-label">Numéro compte</label>
+                              <label class="control-label">N° compte</label>
                               <div class="controls">
                                <!-- <select v-model="formData.compte_id" class="span" >
                                 <option
@@ -569,7 +554,7 @@
                           </td>
                          <td>
                             <div class="control-group">
-                              <label class="control-label">piece justificative</label>
+                              <label class="control-label">piece(s) justificative(s)</label>
                               <div class="controls">
                                 <input
                                   type="file"
@@ -584,11 +569,12 @@
                             <label class="control-label">Bailleur</label>
                             
                              <select v-model="formData.bailler_id" class="span">
+                               <option></option>
                                 <option
-                                  v-for="fam in sources_financements"
+                                  v-for="fam in afficheBailleurMarche(detail_Facture.marche_id)"
                                   :key="fam.id"
-                                  :value="fam.id"
-                                >{{fam.libelle}}</option>
+                                  :value="fam.bailleur_id"
+                                >{{afficheLibelleBailler(fam.bailleur_id)}}</option>
                               </select>
                           </div>
                         </td> 
@@ -622,9 +608,11 @@
                   <div align="right">
                     <div class="controls">
                       <div data-toggle="buttons-checkbox" class="btn-group">
+                        
                         <a
+ 
                           class="btn btn-primary"
-                          @click.prevent="ajouterMandatFactureDefinitive" v-show="this.commparerMontantGleEtMontantFacture <= this.detail_Facture.prix_propose_ttc"
+                          @click.prevent="ajouterMandatFactureDefinitive" 
                         >Valider</a>
                          <a  @click.prevent="afficherModalListeExecution" class="btn">Fermer</a>
                         
@@ -659,7 +647,7 @@
                     montant_tresor: 0,
                     montant_emprunt: 0,
                     montant_don: 0,
-                    decompte:0,
+                    
                 },
 
                 editTitre: {
@@ -672,15 +660,22 @@ ndepense:"Bien et service"
  props:["macheid"],
        created() {
             this.marcheid=this.$route.params.id
-   this.detail_Facture = this.gettersrealiteServiceFaitHorsSib.find(
+   this.detail_Facture = this.getFacturePersonnaliser.find(
        idmarche => idmarche.id == this.$route.params.id
          )
+      //   this.detail_op = this.gettersopProvisoire.find(
+      //  idmarche => idmarche.id == this.$route.params.id
+      //    )  
   
+  
+  /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
+    console.log(this.appel_offre_marche)*/
 },
         computed: {
-          ...mapGetters('horSib', ['gettersrealiteServiceFaitHorsSib']),
+          
+          ...mapGetters('horSib', ['gettersrealiteServiceFaitHorsSib',"gettersopProvisoire"]),
 // methode pour maper notre guetter
-          ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+          ...mapGetters("bienService", ["personnaliseGetterMarcheBailleur",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -719,6 +714,7 @@ ndepense:"Bien et service"
       "budgetGeneral",
       "getPersonnaliseBudgetGeneral",
       "groupUa",
+      "budgetEclate",
       "getPersonnaliseBudgetGeneralParBienService",
       "groupgranNature", "montantBudgetGeneral","realiteServiceFait","liquidation","decomptefactures"
       // "montantBudgetGeneral"
@@ -728,6 +724,58 @@ ndepense:"Bien et service"
     ]),
     ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+    afficheLibelleBailler() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sources_financements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    afficheCumulMontantParBailler() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.mandats.find(qtreel => qtreel.marche_id == id && qtreel.bailleur_id == this.formData.bailler_id);
+
+      if (qtereel) {
+        return qtereel.montant;
+      }
+      return 0
+        }
+      };
+    },
+    afficheMontantParBailler() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaliseGetterMarcheBailleur.find(qtreel => qtreel.marche_id == id && qtreel.bailleur_id == this.formData.bailler_id);
+
+      if (qtereel) {
+        return qtereel.montant;
+      }
+      return 0
+        }
+      };
+    },
+    afficheMontantBailleur() {
+      return id => {
+        if (id != null && id != "") {
+           return this.mandats.filter(qtreel => qtreel.bailler_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0)
+        }
+        }
+      },
+    
+afficheBailleurMarche() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id);
+      
+        }
+      };
+    },
 afficheDecompte() {
       return id => {
         if (id != null && id != "") {
@@ -790,8 +838,9 @@ afficheLibelleTypeMarche() {
 
 
 
+
 commparerMontantGleEtMontantFacture(){
-if(this.montantGeneralMandat > this.detail_Facture.prix_propose_ttc ){
+if( this.detail_Facture.prix_propose_ttc < this.montantGeneralMandat){
 alert("Montant demande est supperieur a la facture")
 }
 else{
@@ -837,7 +886,7 @@ affichierMontantAvenant(){
   }
 },
     dotationDisponibleAnterieure() {
-      const val =  parseFloat(this.afficherMontantBudgetaireInitial(this.afficherInputationBudgetaire(this.afficherIdMarche(this.detail_Facture.id)))) - parseFloat(this.montantCumulerMandatEngagement);
+      const val =  parseFloat(this.afficherMontantBudgetaireInitial(this.afficherIdLigneBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id)))) - parseFloat(this.montantCumulerMandatEngagement);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -880,7 +929,7 @@ sommeEgagementLigne: function () {
 
  montantGeneralMandat() { 
       const val = parseFloat(this.formData.montant_tresor) + parseFloat(this.formData.montant_don) + parseFloat(this.formData.montant_emprunt);
-      return parseFloat(val).toFixed(2);
+      return parseFloat(val).toFixed(0);
       
     },
 afficheCompteEntreprise() {
@@ -956,6 +1005,23 @@ afficherActi() {
       }
       return ""
     },
+    
+    enregistrerActivite(){
+        if(this.afficherProgDotId==""){
+          return 0
+        }
+        else{
+          return this.afficheIdActivite(this.detail_Facture.marche_id)
+        }
+    },
+    enregistrerAction(){
+        if(this.afficherProgDotId==""){
+          return 0
+        }
+        else{
+          return this.afficherActid
+        }
+    },
     afficherActid() {
     
        const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.ua_id == this.afficheUa_id(this.afficherIdMarche(this.detail_Facture.id)));
@@ -990,6 +1056,7 @@ afficheIdActivite() {
         }
       };
     },
+    
   afficherObjetMarche() {
       return id => {
         if (id != null && id != "") {
@@ -998,6 +1065,19 @@ afficheIdActivite() {
       if (qtereel) {
        
            return qtereel.numero_marche.concat(' / ', qtereel.objet)
+      }
+      return ""
+        }
+      };
+    },
+    afficherIdParent() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+       
+           return qtereel.parent_id;
       }
       return ""
         }
@@ -1045,11 +1125,11 @@ afficherInputationBudgetaire() {
     afficherMontantBudgetaireInitial() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.budgetGeneral.find(qtreel => qtreel.codebudget == id);
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.ligneeconomique_id == id);
 
       if (qtereel) {
        
-           return qtereel.Dotation_Initiale;
+           return qtereel.dotation;
       }
       return ""
         }
@@ -1076,6 +1156,14 @@ afficherInputationBudgetaire() {
        return norme.afficheProgramme.code.concat('  ', norme.afficheProgramme.libelle)
       }
       return ""
+    },
+    enregistrerProgramme(){
+        if(this.afficherProgDotId==""){
+          return 0
+        }
+        else{
+          return this.afficherProgDotId
+        }
     },
     afficherProgDotId() {
     
@@ -1105,6 +1193,30 @@ afficherInputationBudgetaire() {
 
       if (qtereel) {
         return qtereel.fournisseur_id;
+      }
+      return ""
+        }
+      };
+    },
+     afficherIdOpAnnulation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.idopAnnulation;
+      }
+      return ""
+        }
+      };
+    },
+    afficherNumeroOpAnnulation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersopProvisoire.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_op_annulation;
       }
       return ""
         }
@@ -1154,6 +1266,18 @@ afficherInputationBudgetaire() {
 
       if (qtereel) {
         return qtereel.gdenature_id;
+      }
+      return ""
+        }
+      };
+    },
+    afficherlibelleGrandeNature() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.grandes_natures.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
       }
       return ""
         }
@@ -1246,11 +1370,11 @@ afficheLibelleUa() {
     AfficheTypeProcedure(){
       if(this.recupererIdTypeFacture(this.detail_Facture.id) == 1){
 
-      return "Engagement Direct" ;
+      return "ORDRE PAIEMENT DEFINITIF" ;
 
     }
     else{
-      return "Engagement Bon de Commande"
+      return "ORDRE PAIEMENT PROVISOIRE"
     }
     },
 
@@ -1261,7 +1385,7 @@ afficheLibelleUa() {
            const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.typfacture_id;
+        return qtereel.typeordrepaiement;
       }
       return 0
         }
@@ -1297,6 +1421,7 @@ afficheLibelleUa() {
              ...mapActions("uniteadministrative", [
       "ajouterDecompteFacture"
     ]),
+    ...mapActions("horSib", ['ajouterRealiteServiceHors']),
  afficherModalListeExecution(){
                 window.history.back();
             },
@@ -1321,41 +1446,37 @@ ajouterMandatFactureDefinitive(){
       {
         var nouvelObjet919 = {
       ...this.formData,
-      
+      etat_srf:1,
+      etat_op_def:1,
        exercice_budget :this.anneeAmort,
-    //   numero_bon_manuel:this.editLiquidation.numero_bon_manuel,
-    //   numero_demande_liquidation:this.editLiquidation.numero_demande,
-    //    numero_engage:this.afficheNumeroEngagement(this.editLiquidation.marche_id),
-    //    numero_demande:this.afficheDemandeEngagement(this.editLiquidation.marche_id),
-    //    Numero_bordereau_engagement:this.afficheNumeroBordeauEngagement(this.editLiquidation.marche_id),
-         budget_general_id :this.afficherInputationBudgetaire(this.afficherIdMarche(this.detail_Facture.id)),
+   budget_general_id :this.afficherInputationBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id)),
          marche_id : this.detail_Facture.marche_id,
          montant_a_paye: this.restePayeMarche,
         //  montant_cumul:this.montantCumuler,
-       ligne_id:this.afficherIdLigneBudgetaire(this.afficherIdMarche(this.detail_Facture.id)),
+       ligne_id:this.afficherIdLigneBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id)),
      banque_id:this.afficheIdBanque(this.afficherIdEntreprise(this.detail_Facture.id)),
         facture_id:this.detail_Facture.id,
         type_procedure_id	:this.recupererTypeProcedure,
 // engagement_id:this.editLiquidation.egagement_id,
-programme_id:this.afficherProgDotId,
-action_id:this.afficherActid,
-activite_id:this.afficheIdActivite(this.detail_Facture.marche_id),
-  ua_id:this.afficherIdUa(this.afficherIdMarche(this.detail_Facture.id)),
-  grd_nature_id:this.afficherIdGrandeNature(this.afficherIdMarche(this.detail_Facture.id)),
+programme_id:this.enregistrerProgramme,
+action_id:this.enregistrerAction,
+activite_id:this.enregistrerActivite,
+  ua_id:this.afficherIdUa(this.detail_Facture.marche_id),
+  grd_nature_id:this.afficherIdGrandeNature(this.detail_Facture.marche_id),
 	compte_id:this.afficheIdCompte(this.afficherIdEntreprise(this.detail_Facture.id)),
-section_id:this.afficherIdSection(this.afficherIdUa(this.afficherIdMarche(this.detail_Facture.id))),
+section_id:this.afficherIdSection(this.afficherIdUa(this.detail_Facture.marche_id)),
   total_general:this.commparerMontantGleEtMontantFacture,
-   
-//  bailler_id:this.afficheIdBailleur(this.editLiquidation.marche_id),
-//  mod_paiement_engage:this.afficheIdModePaiement(this.editLiquidation.marche_id),
-//  numero_bon_manuel:this.editLiquidation.numero_bon_manuel,
-//  numero_demande_liquidation:this.editLiquidation.numero_demande,
-//  numero_op:this.afficheNumeroOPATEngagement(this.editLiquidation.marche_id),
-	entreprise_id:this.detail_Facture.fournisseur_id,
-    	// montant_tresor:this.afficheMontantTresor(this.editLiquidation.marche_id),
-        // montant_don:this.afficheMontantDon(this.editLiquidation.marche_id),
-        // montant_emprunt:this.afficheMontantEmprunt(this.editLiquidation.marche_id),
- marchetype:this.afficheMarcheType
+// montant_tresor:this.detail_Facture.montant_tresor,
+// montant_don:this.detail_Facture.montant_don,
+// montant_emprunt:this.detail_Facture.montant_emprunt,
+	entreprise_id:this.afficherIdEntreprise(this.detail_Facture.id),
+  //  bailler_id:this.detail_Facture.bailler_id,
+ marchetype:this.afficheMarcheType,
+ type_engagement_id:this.detail_Facture.type_engagement_id,
+ mod_paiement_engage:this.detail_Facture.mod_paiement_engage,
+  service_realite_id:this.detail_Facture.id,
+  differentop:0,
+  idop:this.detail_op.id
        };
 
   //       var objetDecompte1 = {
@@ -1365,13 +1486,14 @@ section_id:this.afficherIdSection(this.afficherIdUa(this.afficherIdMarche(this.d
   //   montant_execute :this.commparerMontantGleEtMontantFacture,
   //   montantmarche:this.montantMarcheAvecAvenant,
     
-  //     dotationprevue:this.afficherMontantBudgetaireInitial(this.afficherInputationBudgetaire(this.afficherIdMarche(this.detail_Facture.id))),
+  //     dotationprevue:this.afficherMontantBudgetaireInitial(this.afficherIdLigneBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id))),
   //      };
+      
 this.ajouterMandat(nouvelObjet919)
+
 // this.ajouterDecompteFacture(objetDecompte1)
 this.formDataMadat= {
- numero_mandat:"",
- numero_bordereau:"",
+ 
   montant_tresor: 0,
                     montant_emprunt: 0,
                     montant_don: 0,
@@ -1381,41 +1503,33 @@ this.formDataMadat= {
       {
  var nouvelObjet91 = {
       ...this.formData,
-      
+      etat_srf:1,
+      etat_op_def:1,
        exercice_budget :this.anneeAmort,
-    //   numero_bon_manuel:this.editLiquidation.numero_bon_manuel,
-    //   numero_demande_liquidation:this.editLiquidation.numero_demande,
-    //    numero_engage:this.afficheNumeroEngagement(this.editLiquidation.marche_id),
-    //    numero_demande:this.afficheDemandeEngagement(this.editLiquidation.marche_id),
-    //    Numero_bordereau_engagement:this.afficheNumeroBordeauEngagement(this.editLiquidation.marche_id),
-         budget_general_id :this.afficherInputationBudgetaire(this.afficherIdMarche(this.detail_Facture.id)),
+   budget_general_id :this.afficherInputationBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id)),
          marche_id : this.detail_Facture.marche_id,
          montant_a_paye: this.restePayeMarche,
         //  montant_cumul:this.montantCumuler,
-       ligne_id:this.afficherIdLigneBudgetaire(this.afficherIdMarche(this.detail_Facture.id)),
+       ligne_id:this.afficherIdLigneBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id)),
      banque_id:this.afficheIdBanque(this.afficherIdEntreprise(this.detail_Facture.id)),
         facture_id:this.detail_Facture.id,
         type_procedure_id	:this.recupererTypeProcedure,
 // engagement_id:this.editLiquidation.egagement_id,
-programme_id:this.afficherProgDotId,
-action_id:this.afficherActid,
-activite_id:this.afficheIdActivite(this.detail_Facture.marche_id),
-  ua_id:this.afficherIdUa(this.afficherIdMarche(this.detail_Facture.id)),
-  grd_nature_id:this.afficherIdGrandeNature(this.afficherIdMarche(this.detail_Facture.id)),
+programme_id:this.enregistrerProgramme,
+action_id:this.enregistrerAction,
+activite_id:this.enregistrerActivite,
+  ua_id:this.afficherIdUa(this.detail_Facture.marche_id),
+  grd_nature_id:this.afficherIdGrandeNature(this.detail_Facture.marche_id),
 	compte_id:this.afficheIdCompte(this.afficherIdEntreprise(this.detail_Facture.id)),
-section_id:this.afficherIdSection(this.afficherIdUa(this.afficherIdMarche(this.detail_Facture.id))),
+section_id:this.afficherIdSection(this.afficherIdUa(this.detail_Facture.marche_id)),
   total_general:this.commparerMontantGleEtMontantFacture,
-   
-//  bailler_id:this.afficheIdBailleur(this.editLiquidation.marche_id),
-//  mod_paiement_engage:this.afficheIdModePaiement(this.editLiquidation.marche_id),
-//  numero_bon_manuel:this.editLiquidation.numero_bon_manuel,
-//  numero_demande_liquidation:this.editLiquidation.numero_demande,
-//  numero_op:this.afficheNumeroOPATEngagement(this.editLiquidation.marche_id),
-	entreprise_id:this.detail_Facture.fournisseur_id,
-    	// montant_tresor:this.afficheMontantTresor(this.editLiquidation.marche_id),
-        // montant_don:this.afficheMontantDon(this.editLiquidation.marche_id),
-        // montant_emprunt:this.afficheMontantEmprunt(this.editLiquidation.marche_id),
- marchetype:this.afficheMarcheType
+// montant_tresor:this.detail_Facture.montant_tresor,
+// montant_don:this.detail_Facture.montant_don,
+// montant_emprunt:this.detail_Facture.montant_emprunt,
+	entreprise_id:this.afficherIdEntreprise(this.detail_Facture.id),
+  //  bailler_id:this.detail_Facture.bailler_id,
+ marchetype:this.afficheMarcheType,
+ idop:this.detail_op.id
        };
 
   //       var objetDecompte = {
@@ -1430,7 +1544,7 @@ this.ajouterMandat(nouvelObjet91)
 // this.ajouterDecompteFacture(objetDecompte)
 this.formDataMadat= {
  numero_mandat:"",
- numero_bordereau:"",
+ 
   montant_tresor: 0,
                     montant_emprunt: 0,
                     montant_don: 0,

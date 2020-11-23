@@ -188,7 +188,7 @@ commparerMontantGleEtMontantFacture
                             <label class="control-label">Montant Bailleur par Marché</label>
                             <div class="controls">
                               <input type="text" class="span" :value="afficheMontantParBailler(detail_Facture.marche_id)" readonly/>
-                               <h5 v-if=" afficheMontantBailleur(this.formData.bailler_id) == afficheMontantParBailler(this.detail_Facture.marche_id)" style="color:red">
+                               <h5 v-if="afficheMontantParBailler(this.detail_Facture.marche_id) < afficheMontantBailleur(this.formData.bailler_id)" style="color:red">
            La part du bailleur sature</h5>
                               <input type="hidden" class="span" :value="afficheMontantBailleur(formData.bailler_id)" readonly/>
                             </div>
@@ -601,7 +601,7 @@ commparerMontantGleEtMontantFacture
                       <div data-toggle="buttons-checkbox" class="btn-group">
                         
                         <a
-                        v-if=" afficheMontantBailleur(this.formData.bailler_id) == afficheMontantParBailler(this.detail_Facture.marche_id)"
+ 
                           class="btn btn-primary"
                           @click.prevent="ajouterMandatFactureDefinitive" 
                         >Valider</a>
@@ -1410,7 +1410,8 @@ ajouterMandatFactureDefinitive(){
       {
         var nouvelObjet919 = {
       ...this.formData,
-      
+      etat_srf:0,
+      etat_op_def:0,
        exercice_budget :this.anneeAmort,
    budget_general_id :this.afficherInputationBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id)),
          marche_id : this.detail_Facture.marche_id,
@@ -1441,19 +1442,19 @@ section_id:this.afficherIdSection(this.afficherIdUa(this.detail_Facture.marche_i
   differentop:0
        };
 
-        var objetDecompte1 = {
-       facture_id :this.detail_Facture.id,
-  marche_id :this.detail_Facture.marche_id,
-  numero_decompte :this.NombreDecompte,
-    montant_execute :this.commparerMontantGleEtMontantFacture,
-    montantmarche:this.montantMarcheAvecAvenant,
+  //       var objetDecompte1 = {
+  //      facture_id :this.detail_Facture.id,
+  // marche_id :this.detail_Facture.marche_id,
+  // numero_decompte :this.NombreDecompte,
+  //   montant_execute :this.commparerMontantGleEtMontantFacture,
+  //   montantmarche:this.montantMarcheAvecAvenant,
     
-      dotationprevue:this.afficherMontantBudgetaireInitial(this.afficherIdLigneBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id))),
-       };
+  //     dotationprevue:this.afficherMontantBudgetaireInitial(this.afficherIdLigneBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id))),
+  //      };
       
 this.ajouterMandat(nouvelObjet919)
 
-this.ajouterDecompteFacture(objetDecompte1)
+// this.ajouterDecompteFacture(objetDecompte1)
 this.formDataMadat= {
  
   montant_tresor: 0,
@@ -1465,7 +1466,8 @@ this.formDataMadat= {
       {
  var nouvelObjet91 = {
       ...this.formData,
-      
+      etat_srf:0,
+      etat_op_def:0,
        exercice_budget :this.anneeAmort,
    budget_general_id :this.afficherInputationBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id)),
          marche_id : this.detail_Facture.marche_id,
@@ -1492,16 +1494,16 @@ section_id:this.afficherIdSection(this.afficherIdUa(this.detail_Facture.marche_i
  marchetype:this.afficheMarcheType
        };
 
-        var objetDecompte = {
-       facture_id :this.detail_Facture.id,
-  marche_id :this.detail_Facture.marche_id,
-  numero_decompte :this.NombreDecompte,
-     montant_execute :this.commparerMontantGleEtMontantFacture,
-      dotationprevue:this.dotationDisponibleAnterieure,
-      montantmarche:this.restePayeMarche,
-       };
+  //       var objetDecompte = {
+  //      facture_id :this.detail_Facture.id,
+  // marche_id :this.detail_Facture.marche_id,
+  // numero_decompte :this.NombreDecompte,
+  //    montant_execute :this.commparerMontantGleEtMontantFacture,
+  //     dotationprevue:this.dotationDisponibleAnterieure,
+  //     montantmarche:this.restePayeMarche,
+  //      };
 this.ajouterMandat(nouvelObjet91)
-this.ajouterDecompteFacture(objetDecompte)
+// this.ajouterDecompteFacture(objetDecompte)
 this.formDataMadat= {
  numero_mandat:"",
  

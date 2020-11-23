@@ -11,6 +11,21 @@ const AJOUTER_DECOMPTE_FACTURE = (state, nouveau_decomptes) => {
 };
 
 
+// modifier type_textes
+export const MODIFIER_DECOMPTE_FACTURE = (state, objetModifie) => {
+  state.decomptefactures = state.decomptefactures.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+export const SUPPRIMER_DECOMPTE_FACTURE = (state, id) => {
+  state.decomptefactures = state.decomptefactures.filter(type => type.id != id);
+};
 
 
 const GET_ALL_BANQUE_UA = (state, tableauBanqueUa) => {

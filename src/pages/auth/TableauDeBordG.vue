@@ -7,6 +7,7 @@
      <TableauBordGestionHorsSib v-else-if="detail_marche.code == 4"></TableauBordGestionHorsSib>
     <TableauBordMonEquipe v-else-if="detail_marche.code == 6"></TableauBordMonEquipe>
     <TableauBordRapport v-else-if="detail_marche.code == 7"></TableauBordRapport>
+    <TableauBordGestionVehicule v-else-if="detail_marche.code == 8"></TableauBordGestionVehicule>
     <TableauBordCatographies v-else></TableauBordCatographies>
    
   </div>
@@ -22,6 +23,7 @@ import TableauBordMonEquipe from "../../gestionDesModule/TableauBordMonEquipe";
 import TableauBordParametre from "../../gestionDesModule/TableauBordParametre";
 import TableauBordRapport from "../../gestionDesModule/TableauBordRapport.vue";
  import TableauBordUa from "../../gestionDesModule/TableauBordUa";
+ import TableauBordGestionVehicule from "../../gestionDesModule/TableauBordGestionVehicule";
 export default {
   data(){
     return{
@@ -37,7 +39,8 @@ components: {
     TableauBordParametre,
     TableauBordMonEquipe,
     TableauBordUa,
-    TableauBordRapport
+    TableauBordRapport,
+    TableauBordGestionVehicule
   },
    
   computed:{

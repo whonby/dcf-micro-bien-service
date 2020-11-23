@@ -124,7 +124,7 @@ decision_cf
  <td>
       <router-link :to="{ name: 'ajouterOpProvisoire', params: { id: factu.id }}"
                 class="btn btn-success " title=" Ajouter Op provisoire">
-                  <span class="">Ajouter </span>
+                  <span class="">Ajouter Op </span>
                    </router-link>
  </td>
                   </tr>
@@ -146,8 +146,10 @@ decision_cf
                       
                        <li ><a data-toggle="tab" href="#OPPROVISORE" >Ordre Paiement Provisoire</a></li>
                                 <li ><a data-toggle="tab" href="#opAnnulation" >Ordre Paiement Annulation</a></li>
-                                <li ><a data-toggle="tab" href="#rsopindirecte" >Réalité service fait</a></li>
+                                <li ><a data-toggle="tab" href="#opFacture" >Facture Definitive</a></li>
+                               
                                 <li><a data-toggle="tab" href="#OpDefinitifIndirect" >Ordre Paiement Définitif</a></li>
+                       <li ><a data-toggle="tab" href="#rsopindirecte" >Réalité service fait</a></li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab03">IMAGES DES MARCHES</a>
                       </li> -->
@@ -156,7 +158,9 @@ decision_cf
                     </ul>
                   </div>
                          <div class="widget-content tab-content">
-                           
+                           <div id="opFacture" class="tab-pane ">
+                              <factureHsDefinitive :macheid="detail_marche.marche_id"></factureHsDefinitive>
+                            </div>
                             <div id="OPPROVISORE" class="tab-pane active">
                                 <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -191,14 +195,17 @@ decision_cf
                             <div id="rsopindirecte" class="tab-pane ">
                                 <div class="widget-title">
                             <ul class="nav nav-tabs">
-                              <li class="active"><a data-toggle="tab" href="#ServiceRfbs">Service Bénéficiaire</a></li>
-                                  <li class=""><a data-toggle="tab" href="#ServiceRfcf">Controlleur Financier</a></li>
-                                                   
+
+                              
+                                       <li class="active"><a data-toggle="tab" href="#ServiceRealiteFaitAGCF">Agent CF</a></li>
+                               <li class=""><a data-toggle="tab" href="#ServiceRfbs">Service Bénéficiaire</a></li>
+                                  <li class=""><a data-toggle="tab" href="#ServiceRfcf">Contrôleur Financier</a></li>             
                             </ul>
                         </div>
                          <div class="widget-content tab-content">
-                           <div id="ServiceRfbs" class="tab-pane active"><realiteServiceFaitServiceOpProvisoireBS :macheid="detail_marche.marche_id"></realiteServiceFaitServiceOpProvisoireBS></div>
-                           <div id="ServiceRfcf" class="tab-pane"><realiteServiceFaitServiceOpProvisoireCf :macheid="detail_marche.marche_id"></realiteServiceFaitServiceOpProvisoireCf></div>
+                           <div id="ServiceRealiteFaitAGCF" class="tab-pane active"><ServiceRealiteFaitAgentCf :macheid="detail_marche.marche_id"></ServiceRealiteFaitAgentCf></div>
+                           <div id="ServiceRfbs" class="tab-pane "><ServiceRealiteFaitSb :macheid="detail_marche.marche_id"></ServiceRealiteFaitSb></div>
+                           <div id="ServiceRfcf" class="tab-pane"><ServiceRealiteFaitCf :macheid="detail_marche.marche_id"></ServiceRealiteFaitCf></div>
                      
                          </div>
                             </div>
@@ -276,13 +283,21 @@ decision_cf
     import listeOpProvisoireBs from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpProvisoireBs";
      import listeOpProvisoireCf from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpProvisoireCf";
 import listeOpAnnulation from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpAnnulation";
+import factureHsDefinitive from "../../DossierExecutionHorsSib/dossierFacture/factureHsDefinitive";
     import listeOpDefinitiveBsprov from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpDefinitiveBsprov";    
         import listeOpDefinitivecfprov from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpDefinitivecfprov";
   
+
+import ServiceRealiteFaitCf from "../DossierOrdrePaiement/DossierOpProvisoire/ServiceRealiteFaitCf";
+  import ServiceRealiteFaitAgentCf from "../DossierOrdrePaiement/DossierOpProvisoire/ServiceRealiteFaitAgentCf";
+  import ServiceRealiteFaitSb from "../DossierOrdrePaiement/DossierOpProvisoire/ServiceRealiteFaitSb";
+
+
+
     //   import realiteServiceFaitServiceBHs from "../dossierRealiteServiceFait/realiteServiceFaitServiceBHs";
     //   import realiteServiceFaitCf from "../dossierRealiteServiceFait/realiteServiceFaitCfHs";
-import realiteServiceFaitServiceOpProvisoireBS from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireBS";
-import realiteServiceFaitServiceOpProvisoireCf from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireCf";
+// import realiteServiceFaitServiceOpProvisoireBS from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireBS";
+// import realiteServiceFaitServiceOpProvisoireCf from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireCf";
 
 //                   import financement from "../dossierFinancement/financementHs";
 //                   import imageMarche from "../dossierImageMarche/imageMarche";
@@ -290,10 +305,12 @@ import realiteServiceFaitServiceOpProvisoireCf from "../dossierRealiteServiceFai
   export default {
         name: 'compte',
         components:{
+          factureHsDefinitive,
           listeOpDefinitiveBsprov,
           listeOpDefinitivecfprov,
-          realiteServiceFaitServiceOpProvisoireBS,
-          realiteServiceFaitServiceOpProvisoireCf,
+          ServiceRealiteFaitAgentCf,
+          ServiceRealiteFaitSb,
+          ServiceRealiteFaitCf,
 //             avenant,
 //             facture,
 //             decompte,

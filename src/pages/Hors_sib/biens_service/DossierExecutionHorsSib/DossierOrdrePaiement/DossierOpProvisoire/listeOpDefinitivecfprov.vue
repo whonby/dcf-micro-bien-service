@@ -1,5 +1,4 @@
-afficheIdActeurDepense
-AffichierElementParent
+
 <template>
 
 <div>
@@ -138,11 +137,11 @@ AffichierElementParent
                      <td >{{afficheDateFacture(Manda.facture_id) || 'Non renseigné'}}</td> 
                      
                     <!-- <td >{{detail_marche.imputation  || 'Non renseigné'}}</td> -->
-                     <td >{{formatageSomme(Manda.total_general) || 'Non renseigné'}}</td>
+                     <td >{{formatageSomme(parseFloat(Manda.total_general)) || 'Non renseigné'}}</td>
                      
                        <td >{{(formaterDate(Manda.date_decision_emetteur)) || 'Non renseigné'}}</td>
                    <td >{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
-                    <td v-if="realiteService.decision_emetteur == 8 || realiteService.decision_emetteur == 9 ">
+                    <td v-if="Manda.decision_emetteur == 1">
                         <button v-if="Manda.decision_cf == 8"  class="btn  btn-success" @click="afficheDecisionCf(Manda.id)" >                        
                      
                       <span    >Visé</span>
@@ -176,12 +175,12 @@ AffichierElementParent
                       </button>
                     </td>
                     <td>
-                     <router-link :to="{ name: 'detailOpdefinitif', params: {id:Manda.id}}"
-                class="btn btn-inverse " title="Detail Op Definitif" >
+                     <!-- <router-link :to="{ name: 'detailOpdefinitif', params: {id:Manda.id}}"
+                class="btn btn-inverse " title="Detail Op Definitif" v-if="Manda.decision_cf == 8 || Manda.decision_cf == 9">
                   <span class="" style="color:#fff">Voir Op</span>
-                   </router-link>
+                   </router-link> -->
                        
-                      <button  class="btn btn-rr" @click="supprimerMandat(Manda.id)">
+                      <button  class="btn btn-danger" @click="supprimerMandat(Manda.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
@@ -227,9 +226,8 @@ export default {
        editMandat: {
         
        },
-    editMandat8: {
-        
-       },
+       editMandat8:{},
+
 search:""
         }
     },
@@ -467,7 +465,7 @@ afficheDateFacture() {
       return id => {
         if (id != null && id != "") {
           return this.mandats.filter(
-            element => element.marche_id == id  && this.afficherMarcheHorsSIb(element.marche_id) && element.differentop == 1
+            element => element.marche_id == id && element.etat_op_def == 1
           );
         }
       };

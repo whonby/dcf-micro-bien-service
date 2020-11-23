@@ -43,9 +43,21 @@ import LDrawToolbar from 'vue2-leaflet-draw-toolbar';
 // ...
 Vue.component('l-draw-toolbar', LDrawToolbar);
 Vue.use(VueTelInput)
+const options = {
+    name: '_blank',
+    specs: [
+        'fullscreen=yes',
+        'titlebar=yes',
+        'scrollbars=yes'
+    ],
+    styles: [
+        'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+        'https://unpkg.com/kidlat-css/css/kidlat.css'
+    ]
+}
 Vue.use(VueHtmlToPaper, options);
 // or using the defaults with no stylesheet
-Vue.use(VueHtmlToPaper);
+//Vue.use(VueHtmlToPaper);
 // Vue.component('p-input', PrettyInput);
 // Vue.component('p-check', PrettyCheck);
 // Vue.component('p-radio', PrettyRadio);
@@ -111,18 +123,7 @@ Vue.component('fab', fab)
 
 import JwPagination from 'jw-vue-pagination';
 Vue.component('jw-pagination', JwPagination);
-const options = {
-  name: '_blank',
-  specs: [
-    'fullscreen=yes',
-    'titlebar=yes',
-    'scrollbars=yes'
-  ],
-  styles: [
-    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
-    'https://unpkg.com/kidlat-css/css/kidlat.css'
-  ]
-}
+
 // new Vue({
 //   router,
 //   store,
