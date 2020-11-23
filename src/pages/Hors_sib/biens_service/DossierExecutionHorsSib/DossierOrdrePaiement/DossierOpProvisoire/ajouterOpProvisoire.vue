@@ -876,7 +876,7 @@ sommeEgagementLigne: function () {
 
  montantGeneralMandat() { 
       const val = parseFloat(this.formData.montant_tresor) + parseFloat(this.formData.montant_don) + parseFloat(this.formData.montant_emprunt);
-      return parseFloat(val).toFixed(2);
+      return parseFloat(val).toFixed(0);
       
     },
 afficheCompteEntreprise() {

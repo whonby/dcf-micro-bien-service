@@ -1,12 +1,7 @@
 <template>
 
   <div>
-
-
     <div class="">
-
-
-
       <div class="row-fluid"  style="position: absolute !important;">
         <div id="sidebarinfo"  class="sidebar leaflet-sidebar collapsed">
           <div class="sidebar-tabs">
@@ -21,7 +16,7 @@
                Information du marché
                 <div class="sidebar-close"><i class="fa fa-caret-left"></i></div>
               </h1>
-<h6 align="center"> {{objetUnite.ville}}</h6>
+      <h6 align="center"> {{objetUnite.ville}}</h6>
 
               <div class="row-fluid" >
                 <div class="span5" v-if="objetUnite">
@@ -558,21 +553,21 @@ export default {
       idzone:"",
       activeUa:false,
       zone_geographique:"",
-      center: latLng(7.361517,-5.459421),
+      center: latLng(6.247273, -7.669441),
       url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
       attribution:
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      withPopup: latLng(7.361517, -5.459421),
-      withTooltip: latLng(7.361517, -5.459421),
+      withPopup: latLng(6.247273, -7.669441),
+      withTooltip: latLng(6.247273, -7.669441),
       currentZoom: 11.5,
-      currentCenter: latLng(7.361517,-5.459421),
+      currentCenter: latLng(6.247273, -7.669441),
       showParagraph: false,
       mapOptions: {
         zoomSnap: 0.5,
         attributionControl: false
       },
 
-      initialLocation: [7.361517, -5.459421],
+      initialLocation: [6.247273, -7.669441],
       showMap: true,
       isActive: false,
 
@@ -901,10 +896,8 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     montantBudegtPasUniteAdminOuRegion(){
      // let localisation=[]
       let vM=this;
-     
       let budget=0;
-
-        let montant_execute=0;
+      let montant_execute=0;
       this.getMarcheStatus(vM.status_marche).forEach(function (value) {
         if(value.longitude!=null && value.latitude!=null){
           budget=budget + parseFloat(value.montant_marche)
@@ -914,7 +907,6 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
             }else{
                 montant_execute=montant_execute+0
             }
-
 
         }
 

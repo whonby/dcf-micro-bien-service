@@ -33,79 +33,67 @@
                 Recherche
                 <div class="sidebar-close"><i class="fa fa-caret-left"></i></div>
               </h1>
-         
+                <div class="span5">
+                    <h6>Infrastructure</h6>
+                    <label for="tous">
+                        <input type="radio" v-model="infrastructure" value="" id="tous"> <span>Affiché tous  <b></b></span>
+                    </label>
+                    <label  v-for="item in getterInfrastrucure" :key="item.id" :for="item.id">
+                        <input type="radio" v-model="infrastructure" :value="item.id" :id="item.id"> <span> {{item.libelle}} <b></b></span>
+                    </label>
 
-              <table class="table table-striped">
-                <tbody>
-                <tr>
-                  <td>
-                    <label>Unite administrative</label>
-                    <model-list-select style="background-color: rgb(255,255,255);"
-                                       class="wide"
-                                       :list="uniteAdministratives"
-                                       v-model="unite_administrative_id"
-                                       option-value="id"
-                                       option-text="libelle"
-                                       placeholder="Unité administrative"
-                    >
+                </div>
+                <div class="span5">
 
-                    </model-list-select>
-                    <a href="#" @click.prevent="videUniteAdmin()" style="color: red" v-if="unite_administrative_id"><i class="fa fa-trash-o"></i></a>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-              <table class="table table-striped">
-                <tbody>
-                <tr>
-                  <td>
-                    <label>Infrastructure</label>
-                    <model-list-select style="background-color: rgb(255,255,255);"
-                                       class="wide"
-                                       :list="getterInfrastrucure"
-                                       v-model="infrastructure"
-                                       option-value="id"
-                                       option-text="libelle"
+                    <label for="pet-select">Changer chart:</label>
+                    <select v-model="type_minichart">
+                        <option value="bar">bar</option>
+                        <option value="pie">Pie charts</option>
+                        <option value="polar-radius">Polar radius</option>
+                        <option value="polar-area">Polar area</option>
+                    </select>
+                </div>
 
-                                       placeholder="Infrastructure"
-                    >
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <label>Unite administrative</label>
+                            <model-list-select style="background-color: rgb(255,255,255);"
+                                               class="wide"
+                                               :list="uniteAdministratives"
+                                               v-model="unite_administrative_id"
+                                               option-value="id"
+                                               option-text="libelle"
+                                               placeholder="Unité administrative"
+                            >
 
-                    </model-list-select>
-                    <a href="#" @click.prevent="videInfrastructure()" v-if="infrastructure" style="color: red"><i class="fa fa-trash-o"></i></a>
-                  </td>
-                  <td>
-                    <label>Régions</label>
-                    <model-list-select style="background-color: rgb(255,255,255);"
-                                       class="wide"
-                                       :list="regions"
-                                       v-model="region"
-                                       option-value="id"
-                                       option-text="libelle"
+                            </model-list-select>
+                            <a href="#" @click.prevent="videUniteAdmin()" style="color: red" v-if="unite_administrative_id"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                        <td>
+                            <label>Régions</label>
+                            <model-list-select style="background-color: rgb(255,255,255);"
+                                               class="wide"
+                                               :list="regions"
+                                               v-model="region"
+                                               option-value="id"
+                                               option-text="libelle"
 
-                                       placeholder="Régions"
-                    >
+                                               placeholder="Régions"
+                            >
 
-                    </model-list-select>
-                    <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a>
+                            </model-list-select>
+                            <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a>
 
-                  </td>
-                </tr>
-            <tr>
-              <td>
-                <label for="pet-select">Changer chart:</label>
-<select v-model="type_minichart">  
-  <option value="bar">bar</option> 
-  <option value="pie">Pie charts</option> 
-  <option value="polar-radius">Polar radius</option> 
-<option value="polar-area">Polar area</option>
- </select>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
-              </td>
-            </tr>
-                </tbody>
-              </table>
 
-             
+
+
               
               
               <div v-if="caseAffichageMessageGeneralSituationMarche">
@@ -145,6 +133,9 @@
                                     :visible="tileProvider.visible"
                                     :url="tileProvider.url"
                                     layer-type="base"/>
+
+
+
                            <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
                           <!--   <v-marker-cluster >-->
                               <l-circle-marker v-for="l in localisation"
@@ -239,7 +230,7 @@ import ad1 from "leaflet-easyprint"
               slection_carte:0,
               objet_map:"",
               objet_leaflet:"",
-              type_minichart:"bar",
+              type_minichart:"pie",
               departement:"",
     sous_prefecture:'',
     region:"",
@@ -308,19 +299,19 @@ import ad1 from "leaflet-easyprint"
                 idzone:"",
                 activeUa:false,
                 zone_geographique:"",
-               center: latLng(7.361517,-5.459421),
+               center: latLng(6.247273, -7.669441),
                 url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
                 attribution:
                     '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                 withPopup: latLng(7.361517, -5.459421),
-                  withTooltip: latLng(7.361517, -5.459421),
+                 withPopup: latLng(6.247273, -7.669441),
+                  withTooltip: latLng(6.247273, -7.669441),
                  currentZoom: 11.5,
-                currentCenter: latLng(7.361517,-5.459421),
+                currentCenter: latLng(6.247273, -7.669441),
                 showParagraph: false,
                 mapOptions: {
                     zoomSnap: 0.5
                 },
-                 initialLocation: [7.361517, -5.459421],
+                 initialLocation: [6.247273, -7.669441],
                 showMap: true,
                 isActive: false,
                 tileProviders: [
@@ -1110,7 +1101,29 @@ formatageSomme:formatageSomme,
                                        width=20;
                                   height=taux_region+30;
                                     }else{
-                                    width=taux_region+60;
+                                    if(taux_region<5){
+                                        width=taux_region+25;
+                                    }
+
+                                    if(5<taux_region && taux_region<10){
+                                        console.log(taux_region)
+                                        width=taux+30;
+                                    }
+
+                                    if(10<taux_region && taux_region<20){
+                                        width=taux_region+35;
+                                    }
+
+
+                                    if(20<taux_region && taux_region<50){
+                                        width=taux_region+40;
+                                    }
+
+                                    if(50<taux_region && taux_region<101){
+                                        width=taux_region+45;
+                                    }
+
+
                                     }
                               }
                            })
@@ -1120,7 +1133,28 @@ formatageSomme:formatageSomme,
                                       
                                   height=taux+30;
                                     }else{
-                                    width=taux+60;
+                                    if(taux<5){
+                                        width=taux+25;
+                                    }
+
+                                    if(5<taux && taux<10){
+                                        console.log(taux)
+                                        width=taux+30;
+                                    }
+
+                                    if(10<taux && taux<20){
+                                        width=taux+35;
+                                    }
+
+
+                                    if(20<taux && taux<50){
+                                        width=taux+40;
+                                    }
+
+                                    if(50<taux && taux<101){
+                                        width=taux+45;
+                                    }
+
                                     }
                               }
                            
@@ -1131,7 +1165,7 @@ formatageSomme:formatageSomme,
                                 colors:arrayColor,
                                width:width,
                                height:height,
-                               labels:arrayLabele
+                              // labels:arrayLabele
                                 });
                             
                           vm.objet_map.addLayer(myBarChart);
@@ -1240,6 +1274,7 @@ console.log(this.getActeEffetFinancierPersonnaliser45)
 
 
     var sidebar = sid.control.sidebar('map10', panel_options).addTo(map);
+            sidebar.open("home")
 var panelContent = {
       id: 'userinfo',                     // UID, used to access the panel
       tab: '',  // content can be passed as HTML string,

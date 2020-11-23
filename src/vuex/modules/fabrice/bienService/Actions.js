@@ -4458,3 +4458,209 @@ export function supprimerTypeOrdrePaiement({commit},id){
       axios.delete('/typeOrdrePaiement/' + id).then(() => dialog.close() )   
   })
 }
+
+
+// action pour le reserve cf
+
+export  function  getReserveCf({commit}) {
+  queue.push(() => axios.get('/reserve').then((response) => {
+    
+    commit('GET_ALL_RESERVE_CF', response.data) 
+    
+}).catch(error => console.log(error)))
+}
+
+
+ // 
+ export function ajouterReserveCf({commit},formData){
+  asyncLoading( axios.post('/reserve',formData)).then(response => {
+       commit('AJOUTER_RESERVE_CF', response.data)
+       
+   }).catch(error => console.log(error))
+//  console.log(formData)
+}
+
+export function modifierReserveCf({commit}, element_modifie){
+  asyncLoading( axios.put('/reserve/'+ element_modifie.id, element_modifie))
+   .then(response => {
+        commit('MODIFIER_RESERVE_CF',response.data)
+
+   }).catch(error => console.log(error))
+  // console.log(element_modifie)
+} 
+
+
+export function supprimerReserveCf({commit},id){
+  
+  this.$app.$dialog
+  .confirm("Voulez vouz vraiment supprimer ?.")
+  .then(dialog => {
+     commit('SUPRIMER_RESERVE_CF', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/reserve/' + id).then(() => dialog.close() )   
+  })
+}
+
+
+// action pour le ARNMP
+
+export  function  getArnmp({commit}) {
+  queue.push(() => axios.get('/arnmp').then((response) => {
+    
+    commit('GET_ALL_ARNP', response.data) 
+    
+}).catch(error => console.log(error)))
+}
+
+
+ // 
+ export function ajouterArnmp({commit},formData){
+  asyncLoading( axios.post('/arnmp',formData)).then(response => {
+       commit('AJOUTER_ARNMP', response.data)
+       
+   }).catch(error => console.log(error))
+//  console.log(formData)
+}
+
+export function modifierArnmp({commit}, element_modifie){
+  asyncLoading( axios.put('/arnmp/'+ element_modifie.id, element_modifie))
+   .then(response => {
+        commit('MODIFIER_ARNMP',response.data)
+
+   }).catch(error => console.log(error))
+  // console.log(element_modifie)
+} 
+
+
+export function supprimerArnmp({commit},id){
+  
+  this.$app.$dialog
+  .confirm("Voulez vouz vraiment supprimer ?.")
+  .then(dialog => {
+     commit('SUPPRIMER_ARNMP', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/arnmp/' + id).then(() => dialog.close() )   
+  })
+}
+
+/// action pour l'organe de decision
+
+
+export  function  getOrganeDecision({commit}) {
+  queue.push(() => axios.get('/organe').then((response) => {
+    
+    commit('GET_ALL_ORGANE_DECISION', response.data) 
+    
+}).catch(error => console.log(error)))
+}
+
+
+ // 
+ export function ajouterOrganeDecision({commit},formData){
+  asyncLoading( axios.post('/organe',formData)).then(response => {
+       commit('AJOUTER_ORGANE_DECISION', response.data)
+       
+   }).catch(error => console.log(error))
+//  console.log(formData)
+}
+
+export function modifierOrganeDecision({commit}, element_modifie){
+  asyncLoading( axios.put('/organe/'+ element_modifie.id, element_modifie))
+   .then(response => {
+        commit('MODIFIER_ORGANE_DECISION',response.data)
+
+   }).catch(error => console.log(error))
+  // console.log(element_modifie)
+} 
+
+
+export function supprimerOrganeDecision({commit},id){
+  
+  this.$app.$dialog
+  .confirm("Voulez vouz vraiment supprimer ?.")
+  .then(dialog => {
+     commit('SUPPRIMER_ORGANE_DECISION', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/organe/' + id).then(() => dialog.close() )   
+  })
+}
+///
+
+export  function  getNaturePrix({commit}) {
+  queue.push(() => axios.get('/nature').then((response) => {
+    
+    commit('GET_ALL_NATURE_PRIX', response.data) 
+    
+}).catch(error => console.log(error)))
+}
+
+
+ // 
+ export function ajouterNaturePrix({commit},formData){
+  asyncLoading( axios.post('/nature',formData)).then(response => {
+       commit('AJOUTER_NATURE_PRIX', response.data)
+       
+   }).catch(error => console.log(error))
+//  console.log(formData)
+}
+
+export function modifierNaturePrix({commit}, element_modifie){
+  asyncLoading( axios.put('/nature/'+ element_modifie.id, element_modifie))
+   .then(response => {
+        commit('MODIFIER_NATURE_PRIX',response.data)
+
+   }).catch(error => console.log(error))
+  // console.log(element_modifie)
+} 
+
+
+export function supprimerNaturePrix({commit},id){
+  
+  this.$app.$dialog
+  .confirm("Voulez vouz vraiment supprimer ?.")
+  .then(dialog => {
+     commit('SUPPRIMER_NATURE_PRIX', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/nature/' + id).then(() => dialog.close() )   
+  })
+}
+
+
+export  function  getMotifPassation({commit}) {
+  queue.push(() => axios.get('/motif_passation').then((response) => {
+    
+    commit('GET_ALL_MOTIF_PASSATION', response.data) 
+    
+}).catch(error => console.log(error)))
+}
+
+
+ // 
+ export function ajouterMotifPassation({commit},formData){
+  asyncLoading( axios.post('/motif_passation',formData)).then(response => {
+       commit('AJOUTER_MOTIF_PASSATION', response.data)
+       
+   }).catch(error => console.log(error))
+//  console.log(formData)
+}
+
+export function modifierMotifPassation({commit}, element_modifie){
+  asyncLoading( axios.put('/motif_passation/'+ element_modifie.id, element_modifie))
+   .then(response => {
+        commit('MODIFIER_MOTIF_PASSATION',response.data)
+
+   }).catch(error => console.log(error))
+  // console.log(element_modifie)
+} 
+
+
+export function supprimerMotifPassation({commit},id){
+  
+  this.$app.$dialog
+  .confirm("Voulez vouz vraiment supprimer ?.")
+  .then(dialog => {
+     commit('SUPPRIMER_MOTIF_PASSATION', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/motif_passation/' + id).then(() => dialog.close() )   
+  })
+}

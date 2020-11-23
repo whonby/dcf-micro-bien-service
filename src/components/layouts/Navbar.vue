@@ -1,7 +1,7 @@
  
 <template>
   <div>
-  
+
     <MenuTableau v-if="active_el == 11"></MenuTableau>
     <MenuParamG v-if="active_el == 17"></MenuParamG>
     <MenuUA v-if="active_el == 1"></MenuUA>
@@ -15,10 +15,8 @@
      <MenuDefaut v-if="active_el ==0"></MenuDefaut>
     <MenuGestionAccess v-if="active_el ==21"></MenuGestionAccess>
     <Search></Search>
-    
-    
-    
   </div>
+
 </template>
 
 <script>
@@ -220,7 +218,6 @@ this.getAllDecompteFacture()
 
 this.getTypeCandidat();
 this.getTypeAppel()
-
 
 
 

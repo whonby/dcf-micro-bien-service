@@ -162,6 +162,7 @@
                                  <li class=""><a data-toggle="tab" href="#tab411">Rapport d'ouverture</a></li>
                                   <li class=""><a data-toggle="tab" href="#tab7081845">D.Candidats</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab78932">Jugement</a></li>
+                                  <li class=""><a data-toggle="tab" href="#tab2540">ReserveCF</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab4110">Rapport Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#80178">Attribution</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab012">Bailleur</a></li>
@@ -242,6 +243,11 @@
                
                    <component-analyse :macheid="detail_marche.id"></component-analyse>
                 </div>
+                   <div id="tab2540" class="tab-pane">
+                     <reserveCf :macheid="detail_marche.id"></reserveCf>
+               
+<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
+                </div>
                 <div id="tab4110" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
@@ -296,6 +302,7 @@
                                  <li class=""><a data-toggle="tab" href="#tab41011">Rapport d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab701845">D.Candidats</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab9563"> Jugement des offres </a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab2540103">ReserveCF</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab06125">Rapport d'évaluation</a></li>
                                <li class=""><a data-toggle="tab" href="#tab067458">Attribution de l'Offre</a></li>
                                <li class=""><a data-toggle="tab" href="#tab005412">Bailleur</a></li> 
@@ -405,6 +412,10 @@
                
                    <component-analyse :macheid="detail_marche.id"></component-analyse>
                 </div>
+                 <div id="tab2540103" class="tab-pane">
+                    <reserveCf  :macheid="detail_marche.id"></reserveCf>
+<!--               <componentPv :macheid="detail_marche.id"></componentPv>-->
+                </div>
                  <div id="tab06125" class="tab-pane">
                  <div align="right">
                     <div class="widget-content">
@@ -460,6 +471,8 @@
                                 <li class=""><a data-toggle="tab" href="#tab410131">Rapport d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab70884">D.Candidats</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab5498"> Jugement des offres </a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab254010">Reserve CF </a></li>
+                                
                                 <li class=""><a data-toggle="tab" href="#tab0612">Rapport d'évaluation</a></li>
                                <li class=""><a data-toggle="tab" href="#tab06745">Attribution de l'Offre</a></li>
                                <li class=""><a data-toggle="tab" href="#tab003412">Bailleur</a></li> 
@@ -572,6 +585,12 @@
                
                    <component-analyse :macheid="detail_marche.id"></component-analyse>
                 </div>
+                    <div id="tab254010" class="tab-pane">
+
+                    <reserveCf :macheid="detail_marche.id"></reserveCf>
+               
+<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
+                </div>
                  <div id="tab0612" class="tab-pane">
                  <div align="right">
                     <div class="widget-content">
@@ -629,6 +648,7 @@
                                 <li class=""><a data-toggle="tab" href="#tab45" title="rapport d'ouverture">R. Ouverture</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab7884" title="dossier candidat">D.Candidat</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Jugement</a></li>
+                                  <li class=""><a data-toggle="tab" href="#tab25401031">ReserveCF</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">Rapport</a></li>
 
                                  <!-- <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP"> D.ANO</a></li> -->
@@ -761,6 +781,12 @@
                 </div>
                 <component-analyse :macheid="detail_marche.id"></component-analyse>
 
+                </div>
+                   <div id="tab25401031" class="tab-pane">
+
+                    <reserveCf :macheid="detail_marche.id"></reserveCf>
+               
+<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
                 </div>
 
                   <div id="tab7" class="tab-pane">
@@ -935,7 +961,7 @@ import dossierCandidat from '../../bien_service/DossierPso/dossierCandidat/dossi
       import componentAvis from '../../bien_service/dossierDetailMarcheAOI_AON/dossierDemandeAno/componentAvis';
 ///////////////////////////////////////////////
 
-     
+     import reserveCf from '../../bien_service/dossierReserveCF/reserveCf';
         // import publicationOffre from '../DossierPso/publicationOffre/publicationOffre';
         import componentDemandeAno from '../../bien_service/dossierDetailMarcheAOI_AON/dossierDemande_ano_cf/componentDemandeAno'; 
          import componentAvisBailleurSurTransmision from '../../bien_service/dossierDetailMarcheAOI_AON/dossierAvisBailleurSurTransmission/componentAvisBailleurSurTransmision';
@@ -955,7 +981,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
         components:{
 
             componentCotation,
-            // componentEtat,
+             reserveCf,
             componentOuverture,
             componentActe,
             publicationOffre,

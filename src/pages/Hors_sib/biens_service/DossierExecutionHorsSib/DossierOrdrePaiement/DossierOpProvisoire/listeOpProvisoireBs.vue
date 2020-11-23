@@ -372,7 +372,7 @@ afficheDateFacture() {
       return id => {
         if (id != null && id != "") {
           return this.gettersopProvisoire.filter(
-            element => element.marche_id == id  && this.afficherMarcheHorsSIb(element.marche_id)
+            element => element.marche_id == id  
           );
         }
       };

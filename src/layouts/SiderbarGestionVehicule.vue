@@ -30,7 +30,7 @@
         <li  @click.prevent="navigateToActeurDepense" >
           <a href="#">
             <i class="icon-group"></i>
-            <span>SUIVI ENTREPRISE</span>
+            <span>PARAMETRE</span>
           </a>
         </li>
         <!-- <li  @click.prevent="navigateToSuivMarche" >
@@ -39,31 +39,26 @@
             <span> SUIVI DES CONTRATS</span>
           </a>
         </li> -->
-        <!-- <li  @click.prevent="navigateToDecompte" >
+        <li  @click.prevent="navigateToDecompte" >
           <a href="#">
             <i class="icon-group"></i>
-            <span> DECOMPTE PROVISOIRE</span>
+            <span> SAISIE VEHICULE</span>
           </a>
-        </li> -->
+        </li>
         
          <li  @click.prevent="navigateToSuiviMarcheProjet" >
           <a href="#">
             <i class="icon-group"></i>
-            <span>MARCHE UA</span>
+            <span>EXPLOITATION</span>
           </a>
         </li>
          <li  @click.prevent="navigateToSuiviMarcheProjetpARtYPEmArche" >
           <a href="#">
             <i class="icon-group"></i>
-            <span>MARCHE UA PAR TYPE</span>
+            <span>ALERTE</span>
           </a>
         </li>
-          <li  @click.prevent="etatRecapitulativeS" >
-          <a href="#">
-            <i class="icon-group"></i>
-            <span>ETAT RECAPITULATIF</span>
-          </a>
-        </li>
+         
         <li >
            <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
          

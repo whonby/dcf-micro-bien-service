@@ -198,7 +198,7 @@
   
       
  </tr>
- <tr>
+ <!-- <tr>
     <td height="10px"  style="color:#000;font-size:16px;background-color: coral;font-weight:bold">TOTAUX GLOBAL</td>
     
      <td height="10px" style="text-align:center;font-size:14px;font-weight:bold;background-color: coral;color:#000;">{{parseFloat(NOMBREDEMARCHESPREVUSGLOBAL)}}</td>
@@ -227,7 +227,7 @@
 
   
       
- </tr>
+ </tr> -->
                 </tbody>
               </table>
             

@@ -7,6 +7,8 @@
      <SiderbarGestionHorsSib v-else-if="detail_marche.code == 4"></SiderbarGestionHorsSib>
     <SidebarMonEquipe v-else-if="detail_marche.code == 6"></SidebarMonEquipe>
     <SiderbarRapport v-else-if="detail_marche.code == 7"></SiderbarRapport>
+    <SiderbarGestionVehicule v-else-if="detail_marche.code == 8"></SiderbarGestionVehicule>
+    
     <SiderbarCatographie v-else></SiderbarCatographie>
    
   </div>
@@ -21,6 +23,7 @@ import SiderbarUniteAdministrative from "./SiderbarUniteAdministrative";
 import SiderbarGestionHorsSib from "./SiderbarGestionHorsSib";
 import SiderbarRapport from "./SiderbarRapport";
  import SiderbarCatographie from "./SiderbarCatographie";
+ import SiderbarGestionVehicule from "./SiderbarGestionVehicule";
 export default {
   data(){
     return{
@@ -36,7 +39,8 @@ components: {
     SiderbarGestionHorsSib,
     SidebarMonEquipe,
     SiderbarUniteAdministrative,
-    SiderbarRapport
+    SiderbarRapport,
+    SiderbarGestionVehicule
   },
    
   computed:{

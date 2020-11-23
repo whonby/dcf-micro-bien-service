@@ -469,7 +469,7 @@ afficheDateFacture() {
        afficheServiceReaiteFaitCf() {
       return id => {
         if (id != null && id != "") {
-          return this.mandats.filter(element => element.marche_id == id
+          return this.mandats.filter(element => element.marche_id == id && element.etat_srf == 0
           );
         }
       };

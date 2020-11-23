@@ -980,6 +980,21 @@ editAfficherMontantRetenueGarantie
       <div id="DEMARRAGE1" class="tab-pane">
          <table class="table table-bordered table-striped">
            <tr>
+             <td >
+              <div class="control-group">
+                <label class="control-label" >Taux Avance Demarrage</label>
+                <div class="controls">
+                  <input
+                      type="number"  v-model="formEffetFinancier.taux_avance_demarrage"
+
+                      placeholder="saisir le taux Avance Demarrage"
+                      class="span"
+
+                  />
+
+                </div>
+              </div>
+            </td>
               <td>
               <div class="control-group">
                 <label class="control-label">Avance Demarrage Ht</label>
@@ -1885,7 +1900,7 @@ afficheNomEntreprise() {
     },
 
     avanceDemarrageMontantTva() {
-      const val = parseFloat((this.formEffetFinancier.avance_demarrage_ht) * parseFloat(this.afficherEnorere)/100);
+      const val = parseFloat((this.formEffetFinancier.avance_demarrage_ht) * parseFloat(this.formEffetFinancier.taux_avance_demarrage)/100);
 
       if (val) {
         return parseFloat(val).toFixed(0);

@@ -936,22 +936,48 @@ export function getAllDecompteFacture({ commit }) {
 }
 
 
-// ajouter type texte
+
+
+
+
 export function ajouterDecompteFacture({ commit }, nouveau) {
   asyncLoading(axios
-    .post("/ajouterdecomptefacture", nouveau)).then(response => {
-      if (response.status == 201) {
-        commit("AJOUTER_DECOMPTE_FACTURE", response.data);
+      .post("/ajouterdecomptefacture", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_DECOMPTE_FACTURE", response.data);
 
-      }
-    }).catch(error => console.log(error))
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
 }
 
-
-
-
-
-
+export function ModifierDecompteFacture({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/modifierDecompte/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_DECOMPTE_FACTURE", response.data);
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerDecompteFacture({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_DECOMPTE_FACTURE", id);
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/supprimerdecompte/" + id).then(() => dialog.close());
+      });
+}
 
 
 
