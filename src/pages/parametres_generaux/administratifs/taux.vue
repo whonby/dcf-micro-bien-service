@@ -1,4 +1,4 @@
-
+localisationsFiltre
 <template>
   <div>
   
@@ -32,7 +32,7 @@
                                     title="Liste structure Organigramme Ua "
                                     name ="Liste structure Organigramme Ua"
                                     worksheet = "structure Organigramme Ua"
-                                  :data="localisationsFiltre">
+                                  :data="taux">
         <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
                                        </download-excel> 
              <div  align="right" style="cursor:pointer;">
@@ -214,14 +214,12 @@ export default {
     return {
 
       
-        //  json_fields: {
-        //     'Annee': 'annee',
-        //     'Date debut': 'date_debut',
-        //     'Date fin': 'date_fin',
-        //     'Encours': 'encours',
+         json_fields: {
+            'Libelle': 'libelle',
+            
            
            
-        // },
+        },
         fabActions: [
               {
                   name: 'cache',

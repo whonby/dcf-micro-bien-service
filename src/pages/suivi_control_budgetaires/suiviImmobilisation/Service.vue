@@ -124,7 +124,7 @@
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="(service, index) in filtre_service"
+                    v-for="(service, index) in partition(filtre_service, size)[page]"
                     :key="service.id"
                   >
                    
@@ -179,6 +179,9 @@ export default {
   name:'service',
   data() {
     return {
+       page:0,
+       size:10,
+      active_el:0,
       fabActions: [
         {
           name: "cache",

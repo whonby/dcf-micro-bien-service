@@ -29,6 +29,7 @@
                 <th>Longitude</th>
                 <th>Montant estimatif en FCFA TTC</th>
 
+
                 <th>Action</th>
               </tr>
               </thead>
@@ -212,6 +213,30 @@
                         </div>
                         </div></td>
         </tr>
+        <tr>
+          <td><div class="control-group">
+                        <label class="control-label">Beneficiaire</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                       v-model="formData.beneficiaire"
+                                    class="span"
+                                   
+                            />
+                        </div>
+                        </div></td>
+                        <td colspan="2"><div class="control-group">
+                        <label class="control-label">Livrable</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                       v-model="formData.livrable"
+                                    class="span8"
+                                   
+                            />
+                        </div>
+                        </div></td>
+        </tr>
       </table>
     </div>
     <div class="modal-footer">
@@ -223,7 +248,6 @@
       <a data-dismiss="modal" class="btn" href="#">Fermer</a>
     </div>
   </div>
-
 
 
   <!--Edition de lot-->
@@ -335,6 +359,30 @@
                         </div>
                         </div></td>
         </tr>
+         <tr>
+          <td><div class="control-group">
+                        <label class="control-label">Beneficiaire</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                       v-model="editor.beneficiaire"
+                                    class="span"
+                                   
+                            />
+                        </div>
+                        </div></td>
+                        <td colspan="2"><div class="control-group">
+                        <label class="control-label">Livrable</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                       v-model="editor.livrable"
+                                    class="span"
+                                   
+                            />
+                        </div>
+                        </div></td>
+        </tr>
       </table>
     </div>
     <div class="modal-footer">
@@ -385,6 +433,7 @@ name: "LotMarche",
         ligne_budgetaire:"",
         revue:"",
         beneficiaire:"",
+        livrable:"",
         date_transmission_dao_dmp_prevu:"",
         date_dmp_dao_prevu:"",
         date_bailleur_dmp_prevu:"",
@@ -608,6 +657,8 @@ SommeDesLots(){
         sous_prefecture_id:this.formData.sous_prefecture_id,
         latitude:this.formData.latitude,
         longitude:this.formData.longitude,
+        beneficiaire:this.formData.beneficiaire,
+        livrable:this.formData.livrable,
             montant_marche:this.formData.montant_marche,
             type_marche_id:this.detail_marche.type_marche_id,
             unite_administrative_id:this.detail_marche.unite_administrative_id,
@@ -624,7 +675,7 @@ SommeDesLots(){
             activite:this.detail_marche.activite,
             ligne_budgetaire:this.detail_marche.ligne_budgetaire,
             revue:this.detail_marche.revue,
-            beneficiaire:this.detail_marche.beneficiaire,
+           // beneficiaire:this.detail_marche.beneficiaire,
             date_transmission_dao_dmp_prevu:this.detail_marche.date_transmission_dao_dmp_prevu,
             date_dmp_dao_prevu:this.detail_marche.date_dmp_dao_prevu,
             date_bailleur_dmp_prevu:this.detail_marche.date_bailleur_dmp_prevu,
@@ -717,6 +768,8 @@ SommeDesLots(){
         montant_marche:this.editor.montant_marche,
         localisation_geographie_id:this.editor.localisation_geographie_id,
         departement_id:this.editor.departement_id,
+        livrable:this.editor.livrable,
+        beneficiaire:this.editor.beneficiaire,
         sous_prefecture_id:this.editor.sous_prefecture_id,
         latitude:this.editor.latitude,
         longitude:this.editor.longitude,
