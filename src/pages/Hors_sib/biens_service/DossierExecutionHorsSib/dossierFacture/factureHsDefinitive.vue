@@ -535,6 +535,9 @@
                 class="btn btn-default " title="Ajouter décompte">
                   <span class=""><i class=" icon-sitemap"></i></span>
                    </router-link> 
+                        
+                      </td>
+                      <td>
                          <button class="btn btn-danger" @click="supprimerFacture(factu.id)">
                         <span>
                           <i class="icon icon-trash"></i>
