@@ -1,7 +1,7 @@
 <template>
     <div>
         
-        <apexchart type="line"  height="350" :options="chartOptions" :series="afficherMontantExecuter"></apexchart>
+        <apexchart type="line"  height="350" :options="chartOptions" :series="series"></apexchart>
       
     </div>
 </template>
