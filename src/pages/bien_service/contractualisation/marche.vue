@@ -389,7 +389,7 @@ typeMarches
                                <li class="active"><a data-toggle="tab" href="#tab2078">Tous les marchés    <span class="badge badge" >{{nombreDeMarche}}</span></a></li>
                                
                                <li ><a data-toggle="tab" href="#tab100"> Planification        <span class="badge badge-important" >    {{nombreMarcheEnplanification}}</span></a></li>
-                                <li ><a data-toggle="tab" href="#tab10"> Contratualisation        <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
+                                <li ><a data-toggle="tab" href="#tab10"> Contractualisation        <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
                                 <li><a data-toggle="tab" href="#tab20"> Exécution      <span class="badge badge-warning" >     {{nbreMarcheExecuter}}</span></a></li>
                                 <!-- <li><a data-toggle="tab" href="#tab208">Marchés Terminés      <span class="badge badge" >     {{0}}</span></a></li> -->
                                  <li><a data-toggle="tab" href="#tab20002">Résiliés    <span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
@@ -796,12 +796,12 @@ typeMarches
            <td>
                      <button 
                       v-if="marche.attribue == 2"  class="btn  btn-warning">
-                <span title="MARCHE EN EXERCUTER" style="">EX</span>
+                <span title="MARCHE EN EXERCUTION" style="">EX</span>
        
                 </button>
                 <button 
                       v-else-if="marche.attribue == 1"  class="btn  btn-success">
-                <span title=" MARCHE EN COURS DE CONTRATUALISATION">CT</span>
+                <span title=" MARCHE EN COURS DE CONTRACTUALISATION">CT</span>
        
                 </button>
                  <button 
@@ -811,7 +811,7 @@ typeMarches
                 </button>
                  <button v-else-if="marche.attribue == 5" class="btn  btn-inverse">
               
-                <span title="MARCHE EN TERMINE">TE</span>
+                <span title="MARCHE TERMINE">TE</span>
                 </button>
                    <button v-else-if="marche.attribue == 7" class="btn  btn">
               
