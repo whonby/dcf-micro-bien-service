@@ -5,63 +5,64 @@
                                     <thead>
                                    <tr>
                    
-          <th >Décompte  </th>
+          <th style="text-align:center;font-size:12px">N°Décompte </th>
           <!-- <th >Objet  </th> -->
-          <th>Date </th>
-          <th>Acompte HTVA </th>
-          <th>Avance </th>
-          <th>Garantie </th>
-          <th>Penalités </th>
-          <th>Net HTVA </th>
-          <th>Net TTC</th>
-          <th>Etat(TVA 18%)</th>
-          <th>Bailleur(100% HTVA) </th>
-          <th>Actions </th>
+          <th style="text-align:center;font-size:12px">Date </th>
+          <th style="text-align:center;font-size:12px">Acompte HTVA </th>
+          <th style="text-align:center;font-size:12px">Avance </th>
+          <th style="text-align:center;font-size:12px">Garantie </th>
+          <th style="text-align:center;font-size:12px">Penalités </th>
+          <th style="text-align:center;font-size:12px">Net HTVA </th>
+          <th style="text-align:center;font-size:12px">Net TTC</th>
+          <th style="text-align:center;font-size:12px">Etat ({{recupereTauxEtat(macheid)}}% + (TVA 18%))</th>
+          <th style="text-align:center;font-size:12px">Bailleur({{recupereTauxBailleur(macheid)}}% HTVA) </th>
+          <th style="text-align:center;font-size:12px">Actions </th>
                   </tr>
+
 
                   
                                     </thead>
                                     <tbody>
                                     <tr class="odd gradeX" v-for="(type, index) in decomptefactures" :key="type.id">
-                    <td
+                    <td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.numero_decompte || 'Non renseigné'}}</td>
-                    <!-- <td
+                    <!-- <td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{afficheObjetMarche(type.marche_id) || 'Non renseigné'}}</td> -->
-                    <td
+                    <td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formaterDate(type.date_decompte) || 'Non renseigné'}}</td>
-                    <td
+                    <td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formatageSomme(parseFloat(MontantFactureHT(type.facture_id))) || 'Non renseigné'}}</td>
-<td
+<td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formatageSomme(parseFloat(type.retenu_avance)) || 'Non renseigné'}}</td>
 
-<td
+<td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formatageSomme(parseFloat(type.retenu_garantie)) || 'Non renseigné'}}</td>
 
-<td
+<td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formatageSomme(parseFloat(type.retenu_penalite)) || 'Non renseigné'}}</td>
-<td
+<td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formatageSomme(parseFloat(type.nethtva)) || 'Non renseigné'}}</td>
 
                     
-                      <td
+                      <td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formatageSomme(parseFloat(type.netttc)) || 'Non renseigné'}}</td>
 
                     
-                      <td
+                      <td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formatageSomme(parseFloat(type.parts_etat)) || 'Non renseigné'}}</td>
 
                     
-                      <td
+                      <td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formatageSomme(parseFloat(type.parts_bailleur)) || 'Non renseigné'}}</td>
 
@@ -75,31 +76,31 @@
                   </tr>
                   <tr>
                    
-                   <td colspan="2" style="text-align:center;color;red">CUMULS</td>
+                   <td colspan="2" style="text-align:center;color:red">CUMULS</td>
                    
-                   <td>{{formatageSomme(parseFloat(CumulMontantFacture(macheid)))}}</td>
-                   <td>{{formatageSomme(parseFloat(CumulAvance(macheid)))}}</td>
-                   <td>{{formatageSomme(parseFloat(CumulGArantie(macheid)))}}</td>
-                   <td>{{formatageSomme(parseFloat(CumulPenalite(macheid)))}}</td>
-                   <td>{{formatageSomme(parseFloat(CumulNetHtva(macheid)))}}</td>
-                   <td>{{formatageSomme(parseFloat(CumulNetTTC(macheid)))}}</td>
-                   <td>{{formatageSomme(parseFloat(CumulPartEtat(macheid)))}}</td>
-                   <td>{{formatageSomme(parseFloat(CumulPartBailler(macheid)))}}</td>
-                   <td></td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulMontantFacture(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulAvance(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulGArantie(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPenalite(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulNetHtva(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulNetTTC(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartEtat(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartBailler(macheid)))}}</td>
+                   <td style="text-align:center;"></td>
                   </tr>
-                  <!-- <tr>
+                  <tr>
  
-                  <td colspan="2">% CUMULS</td>
-                   <td>{{((parseFloat(CumulAvance(macheid))/parseFloat(MontantMarche(macheid)))/100).toFixed(2)}}</td>
-                   <td>12</td>
-                   <td>12</td>
-                   <td>12</td>
-                   <td>12</td>
-                   <td>12</td>
-                   <td>12</td>
-                   <td>12</td>
-                   <td>12</td>
-                  </tr> -->
+                  <td colspan="2" style="text-align:center;color:red">% CUMULS</td>
+                   <td style="text-align:center;">{{((parseFloat(CumulAvance(macheid))/parseFloat(MontantMarche(macheid)))/100).toFixed(2)}}</td>
+                   <td style="text-align:center;">{{PourcentageCumulAvanceDemarrage}}</td>
+                   <td style="text-align:center;">{{PourcentageCumulGarantie}}</td>
+                   <td style="text-align:center;"></td>
+                   <td style="text-align:center;"></td>
+                   <td style="text-align:center;"></td>
+                   <td style="text-align:center;"></td>
+                   <td style="text-align:center;"></td>
+                   <td style="text-align:center;"></td>
+                  </tr>
                 </tbody>
                                 </table>
  
@@ -175,6 +176,96 @@ props:["macheid"],
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
     
+ PourcentageCumulAvanceDemarrage(){
+      const val = ((parseFloat(this.CumulAvance(this.macheid)) * (parseFloat(this.TauxAvanceDemarrageHT1(this.macheid))/100))/parseFloat(this.MontantAvanceDemarrageHT(this.macheid)));
+      
+       if (val) {
+        return parseFloat(val).toFixed(2);
+      }
+      
+      return 0
+    },
+MontantAvanceDemarrageHT() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+if (qtereel) {
+        return qtereel.avance_demarrage_ht;
+      }
+      return 0
+        }
+      };
+    },
+
+TauxAvanceDemarrageHT1() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+if (qtereel) {
+        return qtereel.taux_avance_demarrage;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+PourcentageCumulGarantie(){
+      const val = ((parseFloat(this.CumulGArantie(this.macheid)) * (parseFloat(this.TauxGarantieHT1(this.macheid))/100))/parseFloat(this.MontantGarantieHT(this.macheid)));
+      
+       if (val) {
+        return parseFloat(val).toFixed(2);
+      }
+      
+      return 0
+    },
+MontantGarantieHT() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+if (qtereel) {
+        return qtereel.montant_ht_retenu_garantie;
+      }
+      return 0
+        }
+      };
+    },
+
+TauxGarantieHT1() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+if (qtereel) {
+        return qtereel.taux_retenue_garantie;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+recupereTauxBailleur() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id && qtreel.type_finnancement_id==13 ||qtreel.marche_id == id && qtreel.type_finnancement_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tauxbailleur), 0).toFixed(0);
+
+        }
+      };
+    },
+
+recupereTauxEtat() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id && qtreel.type_finnancement_id==14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tauxbailleur), 0).toFixed(0);
+
+        }
+      };
+    },
+
     MontantMarche() {
       return id => {
         if (id != null && id != "") {
