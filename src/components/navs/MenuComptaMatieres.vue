@@ -34,7 +34,7 @@
  <li>
                 <router-link :to="{name:'bilanUaEquipeNonEquipe'}" tag="a">
                     <!-- <i class="icon-table"></i> -->
-                    <span class="text">BILAN DES UA EQUIPE OU NON </span>
+                    <span class="text">BILAN DES UA EQUIPEES OU NON </span>
                 </router-link>
             </li>
         </ul>
