@@ -43,48 +43,53 @@
                     </label>
 
                 </div>
-                <div class="span5">
+                <div class="span6">
 
-                    <label for="pet-select">Changer chart:</label>
+                  <!--  <label for="pet-select">Changer chart:</label>
                     <select v-model="type_minichart">
                         <option value="bar">bar</option>
                         <option value="pie">Pie charts</option>
                         <option value="polar-radius">Polar radius</option>
                         <option value="polar-area">Polar area</option>
-                    </select>
+                    </select>-->
+                    <label>Unite administrative <a href="#" @click.prevent="videUniteAdmin()" style="color: red" v-if="unite_administrative_id"><i class="fa fa-trash-o"></i></a></label>
+                    <model-list-select style="background-color: rgb(255,255,255);"
+                                       class="wide"
+                                       :list="uniteAdministratives"
+                                       v-model="unite_administrative_id"
+                                       option-value="id"
+                                       option-text="libelle"
+                                       placeholder="Unité administrative"
+                    >
+
+                    </model-list-select>
+
+
+                    <label>Régions    <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a></label>
+                    <model-list-select style="background-color: rgb(255,255,255);"
+                                       class="wide"
+                                       :list="regions"
+                                       v-model="region"
+                                       option-value="id"
+                                       option-text="libelle"
+
+                                       placeholder="Régions"
+                    >
+
+                    </model-list-select>
+
+
+
                 </div>
 
                 <table class="table table-striped">
                     <tbody>
                     <tr>
                         <td>
-                            <label>Unite administrative</label>
-                            <model-list-select style="background-color: rgb(255,255,255);"
-                                               class="wide"
-                                               :list="uniteAdministratives"
-                                               v-model="unite_administrative_id"
-                                               option-value="id"
-                                               option-text="libelle"
-                                               placeholder="Unité administrative"
-                            >
 
-                            </model-list-select>
-                            <a href="#" @click.prevent="videUniteAdmin()" style="color: red" v-if="unite_administrative_id"><i class="fa fa-trash-o"></i></a>
                         </td>
                         <td>
-                            <label>Régions</label>
-                            <model-list-select style="background-color: rgb(255,255,255);"
-                                               class="wide"
-                                               :list="regions"
-                                               v-model="region"
-                                               option-value="id"
-                                               option-text="libelle"
 
-                                               placeholder="Régions"
-                            >
-
-                            </model-list-select>
-                            <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a>
 
                         </td>
                     </tr>
@@ -194,7 +199,7 @@ import LControlFullscreen from 'vue2-leaflet-fullscreen';
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import VGeosearch from 'vue2-leaflet-geosearch';
     import {mapGetters} from 'vuex'
-    import { latLng, Icon, icon } from 'leaflet'
+    import { /*latLng,*/ Icon, icon } from 'leaflet'
     import { LMap, LTileLayer, LIconDefault,LControlLayers,LPopup,LCircleMarker ,LTooltip} from "vue2-leaflet";
     import iconUrl from 'leaflet/dist/images/marker-icon.png'
     import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
@@ -299,14 +304,14 @@ import ad1 from "leaflet-easyprint"
                 idzone:"",
                 activeUa:false,
                 zone_geographique:"",
-               center: latLng(6.247273, -7.669441),
+              // center: latLng(6.247273, -7.669441),
                 url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
                 attribution:
                     '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                 withPopup: latLng(6.247273, -7.669441),
-                  withTooltip: latLng(6.247273, -7.669441),
+               //  withPopup: latLng(6.247273, -7.669441),
+                 /// withTooltip: latLng(6.247273, -7.669441),
                  currentZoom: 11.5,
-                currentCenter: latLng(6.247273, -7.669441),
+               // currentCenter: latLng(6.247273, -7.669441),
                 showParagraph: false,
                 mapOptions: {
                     zoomSnap: 0.5
@@ -383,7 +388,7 @@ import ad1 from "leaflet-easyprint"
 getMontantMarcheRegionInfrastructure(){
        return (region,infrastructure)=>{
           let marche=this.objetMarchePasUniteOuRegion.filter(item=>{
-            if( item.localisation_geographie_id==region && item.infrastructure_id==infrastructure && item.parent_id!=null)
+            if( item.localisation_geographie_id==region && item.infrastructure_id==infrastructure && item.parent_id!='')
            return item
             })
 
@@ -433,11 +438,11 @@ montant_reel_marche =montant_reel_marche+ 0
 
    ListeMarchePasUA(){
       let vM=this;
-      let objet=this.marches
+      let objet=this.marches.filter(item=>item.parent_id!='')
 
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!='')
       }
 
       
@@ -447,10 +452,10 @@ montant_reel_marche =montant_reel_marche+ 0
 
     totalMontantPrevisionnelPasMarche(){
        let vM=this;
-      let objet=this.marches
+      let objet=this.marches.filter(item=>item.parent_id!='')
       
            if(vM.unite_administrative_id!=""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!="")
         }
 
            let initeVal = 0;
@@ -469,12 +474,12 @@ montant_reel_marche =montant_reel_marche+ 0
 
                if(vM.unite_administrative_id!=""){
             objet =this.marches.filter(item=>{
-                    if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==regions && item.parent_id!=null){
+                    if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==regions && item.parent_id!=""){
             return item
                }
             })
              }else{
-                objet =this.marches.filter(item=>item.localisation_geographie_id==regions && item.parent_id!=null)
+                objet =this.marches.filter(item=>item.localisation_geographie_id==regions && item.parent_id!="")
              }
 
            let initeVal = 0;
@@ -495,7 +500,7 @@ montant_reel_marche =montant_reel_marche+ 0
           let objet;
         if(unite_administrative_id!=""){
                 objet =this.marches.filter(item=>{
-                    if(item.unite_administrative_id==unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=null){
+                    if(item.unite_administrative_id==unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
             return item
                }
             })
@@ -510,7 +515,7 @@ montant_reel_marche =montant_reel_marche+ 0
            }
 
            if(vM.infrastructure!=""){
-                 objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!=null)
+                 objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!="")
           
                 let initeVal = 0;
                   let montant=  objet.reduce(function (total, currentValue) {
@@ -530,7 +535,7 @@ montant_reel_marche =montant_reel_marche+ 0
               let objet;
 
               objet =this.marches.filter(item=>{
-                   if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==regions && item.parent_id!=null){
+                   if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==regions && item.parent_id!=""){
                    return item
                     }
                  })
@@ -548,28 +553,28 @@ montant_reel_marche =montant_reel_marche+ 0
 
       objetMarchePasUniteOuRegion(){
       let vM=this;
-      let objet=this.marches
+      let objet=this.marches.filter(item=>item.parent_id!="")
 
 
 
 
 
       if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region && item.parent_id!=null)
+        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region && item.parent_id!="")
 
       }
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
+        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!="")
       }
 
       if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region==""){
-        objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!=null)
+        objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!="")
       }
 
       if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure==""){
         objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
             return item
           }
         })
@@ -577,7 +582,7 @@ montant_reel_marche =montant_reel_marche+ 0
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=null){
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
             return item
           }
         })
@@ -585,7 +590,7 @@ montant_reel_marche =montant_reel_marche+ 0
 
       if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=null){
+          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=""){
             return item
           }
         })
@@ -593,7 +598,7 @@ montant_reel_marche =montant_reel_marche+ 0
 
       if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!=""){
         objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
+          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
             return item
           }
         })
@@ -1134,25 +1139,25 @@ formatageSomme:formatageSomme,
                                   height=taux+30;
                                     }else{
                                     if(taux<5){
-                                        width=taux+25;
+                                        width=taux+30;
                                     }
 
                                     if(5<taux && taux<10){
                                         console.log(taux)
-                                        width=taux+30;
+                                        width=taux+40;
                                     }
 
                                     if(10<taux && taux<20){
-                                        width=taux+35;
+                                        width=taux+50;
                                     }
 
 
                                     if(20<taux && taux<50){
-                                        width=taux+40;
+                                        width=taux+60;
                                     }
 
                                     if(50<taux && taux<101){
-                                        width=taux+45;
+                                        width=taux+75;
                                     }
 
                                     }
@@ -1200,9 +1205,13 @@ direction: 'bottom',
             
                 }
 ,
-                add(){
-console.log(".Bonjour guei")
+            getInfoLegende(id){
+       let objet=this.getterInfrastrucure.find(item=>item.code==id)
+                if(objet!=undefined){
+                    this.infrastructure=objet.id
                 }
+
+            },
         },
         watch: {
           slection_carte:function(value){
@@ -1237,7 +1246,8 @@ console.log(".Bonjour guei")
               this.deleteLeafleMiniCharts(this.objet_map)
              //  this.objet_map.on('overlayremove', this.hide_charts())
                 this.integrationChartPasRegisonSurCarte()
-            }
+            },
+
         },
         mounted() {
          /*   setTimeout(() => {
@@ -1307,42 +1317,42 @@ sid.easyPrint({
 
 
 /*Legend specific*/
-var legend = sid.control({ position: "bottomright" });
+//var legend = sid.control({ position: "bottomright" });
+//
+//legend.onAdd = function(map) {
+//  var div = sid.DomUtil.create("div", "legend");
+//  div.innerHTML += "<h4>Légende</h4>";
+//  div.innerHTML += '<i style="background: #6C0277"></i><span>Sanitaires</span><br>';
+//  div.innerHTML += '<i style="background: #F0C300"></i><span>Scolaires</span><br>';
+//  div.innerHTML += '<i style="background: #E73E01"></i><span>Communautaires</span><br>';
+//  div.innerHTML += '<i style="background: #22780F"></i><span>Routière</span><br>';
+//  console.log(map)
+//
+//
+//  return div;
+//};
 
-legend.onAdd = function(map) {
-  var div = sid.DomUtil.create("div", "legend");
-  div.innerHTML += "<h4>Légende</h4>";
-  div.innerHTML += '<i style="background: #6C0277"></i><span>Sanitaires</span><br>';
-  div.innerHTML += '<i style="background: #F0C300"></i><span>Scolaires</span><br>';
-  div.innerHTML += '<i style="background: #E73E01"></i><span>Communautaires</span><br>';
-  div.innerHTML += '<i style="background: #22780F"></i><span>Routière</span><br>';
-  console.log(map)
-  
+//legend.addTo(map);
 
-  return div;
-};
-
-legend.addTo(map);
-
-  /*let htmlLegend3 = sid.control.htmllegend({
+  let htmlLegend3 = sid.control.htmllegend({
         position: 'bottomright',
         legends: [
           {
-            name: 'Legend',
+            name: 'Legende',
             elements: [{
-                label: 'Sanitaires',
+                label: '<div id="sanitaire">Sanitaires</div>',
                 html: "<div class='sante'></div>"
             },
             {
-                label: 'Scolaires',
+                label: '<div id="scolaires">Scolaires</div>',
                 html: "<div class='scolaire'></div>"
             },
             {
-                label: 'Communautaires',
+                label: '<div id="communautaires">Communautaires</div>',
                 html: "<div class='communautaire'></div>"
             },
             {
-                label: 'Routière',
+                label: '<div id="routiere">Routière</div>',
                 html: "<div class='routier'></div>"
             }]
         }],
@@ -1351,9 +1361,41 @@ legend.addTo(map);
         visibleIcon: 'icon icon-eye',
         hiddenIcon: 'icon icon-eye-slash'
     })
+    map.addControl(htmlLegend3)
 
-    map.addControl(htmlLegend3)*/
-    this.integrationChartPasRegisonSurCarte()
+            let vMm=this;
+            //click legende sanitaire
+            const sanitaire = document.querySelector('#sanitaire');
+            sanitaire.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende(1)
+                // console.log("Guei est dans la place....... ")
+            })
+
+            //click legende routiere
+            const routiere = document.querySelector('#routiere');
+            routiere.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende(4)
+                // console.log("Guei est dans la place....... ")
+            })
+
+            //click legende scolaires
+            const scolaires = document.querySelector('#scolaires');
+            scolaires.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende(2)
+                // console.log("Guei est dans la place....... ")
+            })
+            //click legende communautaire
+            const communautaires = document.querySelector('#communautaires');
+            communautaires.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende(3)
+                // console.log("Guei est dans la place....... ")
+            })
+
+            this.integrationChartPasRegisonSurCarte()
 
 
 
