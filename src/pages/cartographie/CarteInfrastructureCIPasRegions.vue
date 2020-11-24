@@ -438,7 +438,7 @@ montant_reel_marche =montant_reel_marche+ 0
 
    ListeMarchePasUA(){
       let vM=this;
-      let objet=this.marches
+      let objet=this.marches.filter(item=>item.parent_id!='')
 
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
@@ -452,7 +452,7 @@ montant_reel_marche =montant_reel_marche+ 0
 
     totalMontantPrevisionnelPasMarche(){
        let vM=this;
-      let objet=this.marches
+      let objet=this.marches.filter(item=>item.parent_id!='')
       
            if(vM.unite_administrative_id!=""){
         objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!="")
@@ -553,7 +553,7 @@ montant_reel_marche =montant_reel_marche+ 0
 
       objetMarchePasUniteOuRegion(){
       let vM=this;
-      let objet=this.marches
+      let objet=this.marches.filter(item=>item.parent_id!="")
 
 
 
@@ -1139,25 +1139,25 @@ formatageSomme:formatageSomme,
                                   height=taux+30;
                                     }else{
                                     if(taux<5){
-                                        width=taux+25;
+                                        width=taux+30;
                                     }
 
                                     if(5<taux && taux<10){
                                         console.log(taux)
-                                        width=taux+30;
+                                        width=taux+40;
                                     }
 
                                     if(10<taux && taux<20){
-                                        width=taux+40;
+                                        width=taux+50;
                                     }
 
 
                                     if(20<taux && taux<50){
-                                        width=taux+55;
+                                        width=taux+60;
                                     }
 
                                     if(50<taux && taux<101){
-                                        width=taux+65;
+                                        width=taux+75;
                                     }
 
                                     }
@@ -1205,9 +1205,13 @@ direction: 'bottom',
             
                 }
 ,
-                add(){
-console.log(".Bonjour guei")
+            getInfoLegende(id){
+       let objet=this.getterInfrastrucure.find(item=>item.code==id)
+                if(objet!=undefined){
+                    this.infrastructure=objet.id
                 }
+
+            },
         },
         watch: {
           slection_carte:function(value){
@@ -1242,7 +1246,8 @@ console.log(".Bonjour guei")
               this.deleteLeafleMiniCharts(this.objet_map)
              //  this.objet_map.on('overlayremove', this.hide_charts())
                 this.integrationChartPasRegisonSurCarte()
-            }
+            },
+
         },
         mounted() {
          /*   setTimeout(() => {
@@ -1312,42 +1317,42 @@ sid.easyPrint({
 
 
 /*Legend specific*/
-var legend = sid.control({ position: "bottomright" });
+//var legend = sid.control({ position: "bottomright" });
+//
+//legend.onAdd = function(map) {
+//  var div = sid.DomUtil.create("div", "legend");
+//  div.innerHTML += "<h4>Légende</h4>";
+//  div.innerHTML += '<i style="background: #6C0277"></i><span>Sanitaires</span><br>';
+//  div.innerHTML += '<i style="background: #F0C300"></i><span>Scolaires</span><br>';
+//  div.innerHTML += '<i style="background: #E73E01"></i><span>Communautaires</span><br>';
+//  div.innerHTML += '<i style="background: #22780F"></i><span>Routière</span><br>';
+//  console.log(map)
+//
+//
+//  return div;
+//};
 
-legend.onAdd = function(map) {
-  var div = sid.DomUtil.create("div", "legend");
-  div.innerHTML += "<h4>Légende</h4>";
-  div.innerHTML += '<i style="background: #6C0277"></i><span>Sanitaires</span><br>';
-  div.innerHTML += '<i style="background: #F0C300"></i><span>Scolaires</span><br>';
-  div.innerHTML += '<i style="background: #E73E01"></i><span>Communautaires</span><br>';
-  div.innerHTML += '<i style="background: #22780F"></i><span>Routière</span><br>';
-  console.log(map)
-  
+//legend.addTo(map);
 
-  return div;
-};
-
-legend.addTo(map);
-
-  /*let htmlLegend3 = sid.control.htmllegend({
+  let htmlLegend3 = sid.control.htmllegend({
         position: 'bottomright',
         legends: [
           {
-            name: 'Legend',
+            name: 'Legende',
             elements: [{
-                label: 'Sanitaires',
+                label: '<div id="sanitaire">Sanitaires</div>',
                 html: "<div class='sante'></div>"
             },
             {
-                label: 'Scolaires',
+                label: '<div id="scolaires">Scolaires</div>',
                 html: "<div class='scolaire'></div>"
             },
             {
-                label: 'Communautaires',
+                label: '<div id="communautaires">Communautaires</div>',
                 html: "<div class='communautaire'></div>"
             },
             {
-                label: 'Routière',
+                label: '<div id="routiere">Routière</div>',
                 html: "<div class='routier'></div>"
             }]
         }],
@@ -1356,9 +1361,41 @@ legend.addTo(map);
         visibleIcon: 'icon icon-eye',
         hiddenIcon: 'icon icon-eye-slash'
     })
+    map.addControl(htmlLegend3)
 
-    map.addControl(htmlLegend3)*/
-    this.integrationChartPasRegisonSurCarte()
+            let vMm=this;
+            //click legende sanitaire
+            const sanitaire = document.querySelector('#sanitaire');
+            sanitaire.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende(1)
+                // console.log("Guei est dans la place....... ")
+            })
+
+            //click legende routiere
+            const routiere = document.querySelector('#routiere');
+            routiere.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende(4)
+                // console.log("Guei est dans la place....... ")
+            })
+
+            //click legende scolaires
+            const scolaires = document.querySelector('#scolaires');
+            scolaires.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende(2)
+                // console.log("Guei est dans la place....... ")
+            })
+            //click legende communautaire
+            const communautaires = document.querySelector('#communautaires');
+            communautaires.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende(3)
+                // console.log("Guei est dans la place....... ")
+            })
+
+            this.integrationChartPasRegisonSurCarte()
 
 
 

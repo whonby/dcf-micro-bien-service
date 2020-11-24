@@ -781,7 +781,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     imageMarcheSelectionner(){
        return id=>{
          if(id!=""){
-           console.log(this.getterImageMarche)
+
            return this.getterImageMarche.filter(item=>item.marche_id==id)
          }
        }
@@ -1071,7 +1071,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     },
     marcheUniteRegion(){
      let vM=this;
-      let objet=this.marches
+      let objet=this.marches.filter(item=>item.parent_id!="")
       if(vM.region!="" && vM.unite_administrative_id==""){
         objet =this.marches.filter(item=>{
             if(item.localisation_geographie_id==vM.region && item.parent_id!=""){
@@ -1100,7 +1100,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     },
     objetMarchePasUniteOuRegion(){
       let vM=this;
-      let objet=this.marches
+      let objet=this.marches.filter(item=>item.parent_id!="")
 
 
       if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure==""){
@@ -1427,11 +1427,7 @@ this.objetUnite=objet
       this.libelle_unite_admin=""
     },
       getInfoLegende(status){
-
-
           this.status_marche=status
-          console.log(status)
-          console.log("Guei est dans la place mercie")
       },
     osColors () {
       console.log('osColors')
@@ -1527,7 +1523,7 @@ console.log(ad)
      var htmlLegend3 = sid.control.htmllegend({
         position: 'bottomright',
         legends: [{
-            name: 'Legend',
+            name: 'Legende',
             elements: [{
                 label:document.querySelector('#MarchePlanification1').innerHTML,
                 html: document.querySelector('#MarchePlanification').innerHTML
