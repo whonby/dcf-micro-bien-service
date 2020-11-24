@@ -10,7 +10,7 @@ NombrePlanifInfastructureNiveau1
                                <li class="active"><a data-toggle="tab" href="#tab0000">Tous les marchés  <span class="badge badge" >{{nombreMarcheHorsSib}}</span></a></li>
                               
                                <li ><a data-toggle="tab" href="#tab10000"> Planification <span class="badge badge-important" > {{afficherNombreMarchepalinificationHorsib}} </span></a></li>
-                                <li ><a data-toggle="tab" href="#tab109"> Contratualisation   <span class="badge badge-success" > {{nombreMarcheContratualisationHorSib}} </span></a></li>
+                                <li ><a data-toggle="tab" href="#tab109"> Contractualisation   <span class="badge badge-success" > {{nombreMarcheContratualisationHorSib}} </span></a></li>
                                 <li><a data-toggle="tab" href="#tab20"> Exécution      </a></li>
                                
                                 <!--  <li><a data-toggle="tab" href="#tab20002">Résiliés    <span class="badge badge-info" > </span></a></li>
