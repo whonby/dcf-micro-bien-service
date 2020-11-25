@@ -4,7 +4,6 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
-
 // export function getDecompte({ commit }) {
 //   queue.push(() => axios.get('/Listedecompte').then((response) => {
 //     commit('GET_ALL_DECOMPTE', response.data)
@@ -4664,3 +4663,20 @@ export function supprimerMotifPassation({commit},id){
       axios.delete('/motif_passation/' + id).then(() => dialog.close() )   
   })
 }
+
+
+
+
+export function modifierActeEffet({commit}, element_modifie){
+  asyncLoading( axios.put('/acte_finnanciers/'+ element_modifie.id, element_modifie))
+   .then(response => {
+    commit('MODIFIER_ACTE', response.data)
+        // dispatch('getMandat')
+         this.$app.$notify({
+           title: 'success ',
+           text: 'Modification effectué avec succès!',
+           type:"success"
+         })
+   }).catch(error => console.log(error))
+  // console.log(element_modifie)
+} 

@@ -11,13 +11,13 @@
        </li>
         <li>
          <router-link :to="{name:'listeMarcheInvestissementHS'}" tag="a">
-           EXECUTIONS DES MARCHES
+           EXECUTION DES MARCHES
          </router-link>
 
        </li>
        <li>
          <router-link :to="{name:'ReceptionDesMarches'}" tag="a">
-           RECEPTIONS DES MARCHES
+           RECEPTION DES MARCHES
          </router-link>
 
        </li>

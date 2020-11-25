@@ -91,7 +91,7 @@
 
             <ul class="quick-actions" >
               
-   
+    <!-- <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:8}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class="icon-book"></i><h4> DES VEHICULES</h4></router-link> </li> -->
            <!-- <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;"><h4>GESTION DES </h4> <i class="icon-book"></i><h4> RAPPORTS</h4></router-link> </li> -->
             </ul>
           </div>

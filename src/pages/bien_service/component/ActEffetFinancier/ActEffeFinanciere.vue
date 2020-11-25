@@ -1,4 +1,4 @@
-
+text_juridique_id
 <template>
 <div>
   <div id="modifierActeEF" class="modal hide grdirModalActeEffet" >
@@ -279,7 +279,7 @@
                   <input
                      type="number"
 
-                     :value="editAfficherEnorere" style="text-align:left;color:red"
+                     :value="editAfficherEnorere" 
                      class="span"
                       readonly
                   />
@@ -289,7 +289,7 @@
             <td>
 
               <div class="control-group">
-                <label class="control-label">Montant acte/réel du marché (HT)</label>
+                <label class="control-label">Montant acte/réel du marché (HT){{editActeEffetFinancier.montant_act_ht}}</label>
                 <div class="controls">
                    <input type="text" v-model="editActeEffetFinancier.montant_act_ht"
                           class="span"
@@ -307,7 +307,7 @@
                 <div class="controls">
                    <input
                        type="number"
-                       :value="editMontantTva" style="text-align:left;color:red"
+                       :value="editMontantTva" 
 
                        class="span"
                        readonly
@@ -321,8 +321,8 @@
                 <label class="control-label" >Montant TTC du marché</label>
                 <div class="controls">
                   <input
-                       type="number"
-                       :value="editMontantHTt" style="text-align:left;color:red"
+                       type="text"
+                       v-model="editActeEffetFinancier.montant_act"
 
                        class="span"
                        readonly
@@ -373,7 +373,7 @@
                 <div class="controls">
                    <input
                        type="number"
-                       :value="avanceDemarrageMontantTvaModifier" style="text-align:left;color:red"
+                       :value="avanceDemarrageMontantTvaModifier" 
 
                        class="span"
                        readonly
@@ -388,7 +388,7 @@
                 <div class="controls">
                    <input
                        type="number"
-                       :value="editAvanceDemarrage" style="text-align:left;color:red"
+                       :value="editAvanceDemarrage" 
 
                        class="span"
                        readonly
@@ -422,7 +422,7 @@
               <div class="control-group">
                 <label class="control-label" > Montant HT du cautionnement</label>
                 <div class="controls">
-                   <input type="text"  :value="editAfficheMontantHorsTaxeDuCautionnement" style="text-align:left;color:red"
+                   <input type="text"  :value="editAfficheMontantHorsTaxeDuCautionnement" 
 
 
                           class="span"
@@ -437,7 +437,7 @@
                 <label class="control-label" >Montant TVA du cautionnement</label>
                 <div class="controls">
                    <input
-                       type="number"  :value="editAfficherMontantTvaDuCautionnement" style="text-align:left;color:red"
+                       type="number"  :value="editAfficherMontantTvaDuCautionnement" 
 
 
                        class="span"
@@ -454,7 +454,7 @@
                    <input
                        type="number"
 
-                       :value="editAfficherMontantTTCDuCautionnement" style="text-align:left;color:red"
+                       :value="editAfficherMontantTTCDuCautionnement" 
                        class="span"
                        readonly
                    />
@@ -488,7 +488,7 @@
                 <label class="control-label" > Montant HT de retenue de garantie</label>
                 <div class="controls">
                    <input
-                       type="text"  :value="editAfficherMontantHorsTaxeRetenuGarantie" style="text-align:left;color:red"
+                       type="text"  :value="editAfficherMontantHorsTaxeRetenuGarantie" 
                        placeholder="saisir le montant hors taxe du dispositif retenu"
 
                        class="span"
@@ -503,7 +503,7 @@
                 <label class="control-label" >Montant TVA de retenue de garantie</label>
                 <div class="controls">
                    <input
-                       type="number"  :value="editAfficherMontantTvaTaxeRetenuGarantie" style="text-align:left;color:red"
+                       type="number"  :value="editAfficherMontantTvaTaxeRetenuGarantie" 
 
 
                        class="span"
@@ -518,7 +518,7 @@
                 <label class="control-label" >Montant TTC retenue de garantie </label>
                 <div class="controls">
                    <input
-                       type="number"  :value="editAfficherMontantRetenueGarantie" style="text-align:left;color:red"
+                       type="number"  :value="editAfficherMontantRetenueGarantie" 
 
 
                        class="span"
@@ -934,7 +934,7 @@
                   <input
                       type="number"
 
-                      :value="afficherEnorere" style="text-align:left;color:red"
+                      :value="afficherEnorere" 
                       class="span"
                       readonly
                   />
@@ -962,7 +962,7 @@
                 <div class="controls">
                   <input
                       type="number"
-                      :value="montantTva" style="text-align:left;color:red"
+                      :value="montantTva" 
 
                       class="span"
                       readonly
@@ -977,7 +977,7 @@
                 <div class="controls">
                   <input
                       type="number"
-                      :value="montantHTt" style="text-align:left;color:red"
+                      :value="montantHTt" 
 
                       class="span"
                       readonly
@@ -1028,7 +1028,7 @@
                 <div class="controls">
                   <input
                       type="number"
-                      :value="avanceDemarrageMontantTva" style="text-align:left;color:red"
+                      :value="avanceDemarrageMontantTva" 
 
                       class="span"
                       readonly
@@ -1043,7 +1043,7 @@
                 <div class="controls">
                   <input
                       type="number"
-                      :value="avanceDemarrage" style="text-align:left;color:red"
+                      :value="avanceDemarrage" 
 
                       class="span"
                       readonly
@@ -1077,7 +1077,7 @@
               <div class="control-group">
                 <label class="control-label" > Montant HT du cautionnement</label>
                 <div class="controls">
-                  <input type="text"  :value="afficheMontantHorsTaxeDuCautionnement" style="text-align:left;color:red"
+                  <input type="text"  :value="afficheMontantHorsTaxeDuCautionnement" 
 
 
                          class="span"
@@ -1092,7 +1092,7 @@
                 <label class="control-label" >Montant TVA du cautionnement</label>
                 <div class="controls">
                   <input
-                      type="number"  :value="afficherMontantTvaDuCautionnement" style="text-align:left;color:red"
+                      type="number"  :value="afficherMontantTvaDuCautionnement" 
 
 
                       class="span"
@@ -1109,7 +1109,7 @@
                   <input
                       type="number"
 
-                      :value="afficherMontantTTCDuCautionnement" style="text-align:left;color:red"
+                      :value="afficherMontantTTCDuCautionnement" 
                       class="span"
                       readonly
                   />
@@ -1143,7 +1143,7 @@
                 <label class="control-label" > Montant HT de retenue de garantie</label>
                 <div class="controls">
                   <input
-                      type="text"  :value="afficherMontantHorsTaxeRetenuGarantie" style="text-align:left;color:red"
+                      type="text"  :value="afficherMontantHorsTaxeRetenuGarantie" 
                       placeholder="saisir le montant hors taxe du dispositif retenu"
 
                       class="span"
@@ -1158,7 +1158,7 @@
                 <label class="control-label" >Montant TVA de retenue de garantie</label>
                 <div class="controls">
                   <input
-                      type="number"  :value="afficherMontantTvaTaxeRetenuGarantie" style="text-align:left;color:red"
+                      type="number"  :value="afficherMontantTvaTaxeRetenuGarantie" 
 
 
                       class="span"
@@ -1173,7 +1173,7 @@
                 <label class="control-label" >Montant TTC retenue de garantie </label>
                 <div class="controls">
                   <input
-                      type="number"  :value="afficherMontantRetenueGarantie" style="text-align:left;color:red"
+                      type="number"  :value="afficherMontantRetenueGarantie" 
 
 
                       class="span"
@@ -2132,9 +2132,9 @@ nombreDejourCalculeModifier(){
 
       // this.editActeEffetFinancier.entreprise_id=entreprise_id
 
-var nouvelObjet = {
-        ...this.editformEffetFinancier,
-        duree: this.nombreDejourCalcule,
+var nouvelObjet1 = {
+        ...this.editActeEffetFinancier,
+        duree: this.nombreDejourCalculeModifier,
         ua_id:this.afficherIDUA(this.macheid),
         taux:this.editafficherEnorere,
         tva_cautionnement:this.editafficherMontantTvaDuCautionnement,
@@ -2151,12 +2151,10 @@ var nouvelObjet = {
         difference_personnel_bienService:this.afficheMarcheType,
         marche_id:this.marche_lot,
         marchegeneral_id:this.affichieridMarcheGlobal(this.marche_lot),
-        // ua_id:this.ua_id,
-       // banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.editformEffetFinancier.banq_id)),
-        //compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.editformEffetFinancier.banq_id))
+    
       }
 
-      this.modifierActeEffetFinancier(nouvelObjet)
+      this.modifierActeEffet(nouvelObjet1)
       this.$('#modifierActeEF').modal('hide');
     },
 
