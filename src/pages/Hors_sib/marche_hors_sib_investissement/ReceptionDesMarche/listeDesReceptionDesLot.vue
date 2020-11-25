@@ -155,7 +155,7 @@
                 <div class="controls">
                   <input
                       type="text"
-                      :value="detail_marche.id"
+                      :value="afficherObjet(detail_marche.id)"
                       class="span12"
                       
                   />
@@ -191,7 +191,7 @@
                 <div class="controls">
                   <input
                       type="date"
-                      
+                      :value="afficherDatedebutex(detail_marche.id)"
                       class="span4"
                       
                   />
@@ -206,7 +206,7 @@
                 <div class="controls">
                   <input
                       type="date"
-                      
+                      :value="afficherDatereception(detail_marche.id)"
                       class="span4"
                       
                   />
@@ -217,11 +217,11 @@
             <td>
 
               <div class="control-group">
-                <label class="control-label">Date de reception définitive prévisionnelle</label>
+                <label class="control-label">Date de reception définitive prévisionnelle{{detail_marche.id}}</label>
                 <div class="controls">
                   <input
                       type="date"
-                      
+                      :value="afficherDatereceptiondefinitive(detail_marche.id)"
                       class="span4"
                       
                   />
@@ -500,6 +500,58 @@ afficheNumeroMarche() {
       if (qtereel) {
        
            return qtereel.numero_lot;
+      }
+      return ""
+        }
+      };
+    },
+     afficherObjet() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+       
+           return qtereel.objet;
+      }
+      return ""
+        }
+      };
+    },
+     afficherDatedebutex() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+       
+           return qtereel.date_execution_marche_debut_prevue;
+      }
+      return ""
+        }
+      };
+    },
+     afficherDatereception() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+       
+           return qtereel.date_reception_offre_prevu;
+      }
+      return ""
+        }
+      };
+    },
+     afficherDatereceptiondefinitive() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+       
+           return qtereel.date_reception_offre_prevu;
       }
       return ""
         }
