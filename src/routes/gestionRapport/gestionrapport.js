@@ -6,6 +6,7 @@ import editerFicheRealiteServiceFait from "../../pages/Gestion_des_Rapports/edit
 import suiviMarcheDesProjets from "../../pages/Gestion_des_Rapports/marcheHorsSib/suiviMarcheDesProjets.vue";
 import suiviMarcheDesProjetParTypeMarche from "../../pages/Gestion_des_Rapports/marcheHorsSib/suiviMarcheDesProjetParTypeMarche";
 import etatRecapitulative from "../../pages/Gestion_des_Rapports/marcheHorsSib/etatRecapitulative.vue";
+import FicheAnnexeDeControle from "../../pages/Gestion_des_Rapports/FicheAnnexeDeControle";
 
 const gestionrapport =[
     {
@@ -17,6 +18,11 @@ const gestionrapport =[
         path:"/Suivi-Marche",
         name:"suiviMarcheDesProjetParTypeMarche",
         component:suiviMarcheDesProjetParTypeMarche
+    },
+    {
+        path:"/FicheAnnexeDeControle/:id",
+        name:"FicheAnnexeDeControle",
+        component:FicheAnnexeDeControle
     },
     {
         path:"/editerFicheRealiteServiceFait/:id",

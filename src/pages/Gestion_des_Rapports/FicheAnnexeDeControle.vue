@@ -9,8 +9,8 @@
                             </div>
                              <div id="printMe">
 <table class="table table-bordered table-striped html2pdf__page-break" id="app1"  >
-   <tr style="border: 2px double #000">
-                                 <td colspan="2" style="text-align:center">
+   <tr>
+                                 <td colspan="2" style="text-align:center;border: 2px double #000">
  <span>MINISTRE AUPRES DU PREMIER MINISTRE </span>
       <span>CHARGE DU BUDGET ET DU PORTEFEUILLE DE L'ETAT</span>
                                  </td>
@@ -23,7 +23,7 @@
       <P>Union-Discipline-Travail</P>
                                  </td>
                                </tr>
-   <tr style="border: 2px double #000">
+   <tr>
                                  <td style="text-align:center">
                                    <img  :src="AfficheAmoirie">
  
@@ -40,117 +40,60 @@
 </table>
 <br/>
       <br/>
-    <div style="border: 2px double #000;text-align:center">
-      <p>FICHE DE CONTRÖLE DE LA REALITE DU SERVICE FAIT </p>
-      <P>INSTITUEE PAR L'ARRETE N° 638 MEF/CAB/YKM DU 20 JUILLET 2009</P>
+    <div style="border: 2px double #000;text-align:center;font-size:25px;width:100%;height:100px;">
+      <p>FICHE ANNEXE DE CONTRÖLE</p>
+      <p>DE LA REALITE DU SERVICE FAIT</p>
+      <!-- <P>INSTITUEE PAR L'ARRETE N° 638 MEF/CAB/YKM DU 20 JUILLET 2009</P> -->
     </div>
 
- <br/>
       <br/>
-      
+      <br/>
+      <br/>
+      <br/>
 
       <tr>
-        <th style="width:25% ">EXERCICE BUDGETAIRE :</th>
-                     <td style="font-size:14px"> {{detailOp.exercice_budget}} </td>
+        <th style="width:25%;font-size:25px ">EXERCICE BUDGETAIRE :</th>
+                     <td style="font-size:25px"> {{detailOp.exercice_budget}} </td>
                     
       </tr>
       <br/>
       <br/>
-    
+     <br/>
+      <br/>
           <tr>
-                     <th style="width:25% ">PROJET OU ORGANISME :</th>
-                     <td style="font-size:14px"> {{infoLibelleUa(detailOp.ua_id)}} </td>
+                     <th style="width:25%;font-size:25px ">PROJET OU ORGANISME :</th>
+                     <td style="font-size:25px"> {{infoLibelleUa(detailOp.ua_id)}} </td>
                     
                  </tr>
                  <br/>
-      <br/>
+                 <br/>
+                 <br/>
+                <br/>
                   <tr>
                     <!-- <th rowspan="5" style="margin:0 auto">IMPUTATION BUDGETAIRE</th> -->
-                     <th style="width:25% ">OBJET DE LA DEPENSE :</th>
-                     <td style="text-align:center;font-size:14px"> {{infoObjetFacture(detailOp.facture_id)}} </td>
+                     <th style="width:25%;font-size:25px ">OBJET DE LA DEPENSE :</th>
+                     <td style="text-align:center;font-size:25px"> {{infoObjetFacture(detailOp.facture_id)}} </td>
                  </tr>
                   <br/>
       <br/>
+       <br/>
+      <br/>
+       <br/>
+      <br/>
+       
+      <h5 style="text-align:center;font-size:25px">OBSERVATION</h5>
+<div style="width:100%;height:600px;border:2px solid #000">
+
+</div>
    <tr>
-                   
-                     <th style="width:25% ">FOURNISSEUR : </th>
-                     <td style="font-size:14px"> {{afficherNomEntreprise(detailOp.entreprise_id)}} </td>
-                 </tr>
-                  <br/>
-      <br/>
-                 <tr>
-                   
-                     <th style="width:25% ">ADRESSE DU FOURNISSEUR :</th>
-                     <td style="font-size:14px"> {{afficherAdresseEntreprise(detailOp.entreprise_id)}} </td>
-                 </tr>
-                  <br/>
-      <br/>
-                 <tr>
-                   
-                     <th style="width:25% ">N° ET DATE DE LA FACTURE :</th>
-                     <td style="font-size:14px"> {{infoFacture(detailOp.facture_id)}} </td>
-                 </tr>
-                  <br/>
-      <br/>
-                 <tr>
-                   
-                     <th style="width:25% ">IMPUTATION BUDGETAIRE :</th>
-                     <td style="font-size:14px"> {{detailOp.budget_general_id}} </td>
-                 </tr>
-                  <br/>
-      <br/>
-                 <tr>
-                   
-                     <th style="width:25% ">ORDRE DE PAIEMENT N° :</th>
-                     <td style="font-size:14px"> {{detailOp.numero_op_definitif}} </td>
-                 </tr>
-                  <br/>
-      <br/>
-                 <tr>
-                   
-                     <th style="width:25% ">MONTANT :</th>
-                     <td style="font-size:14px"> {{formatageSomme(parseFloat(detailOp.total_general))}} </td>
-                 </tr>
-                  <br/>
-      <br/>
-                 <tr>
-                   
-                     <th style="width:25% ">SERVICE BENEFICIAIRE :</th>
-                     <td style="font-size:14px"> {{infoLibelleUa(detailOp.ua_id)}} </td>
-                 </tr>
+       <td >
+
+       </td>
+   </tr>
                  <br/>
       <br/>
       
-                     <p style="text-align:center;text-decoration: underline;font-size:14px;">OBSERVATION </p>
-                  
-    <table class="table table-bordered table-striped html2pdf__page-break" id="app1"  >
-      <tr>
-                    <td style="width:50%;border: 2px double #000 ">
-                      
-                      
-<h4 style="text-align:center;text-decoration: underline;">SERVICE BENEFICIAIRE :</h4>
-<br/>
-Date : {{formaterDate(detailOp.date_sb_service_real)}}  <br/>
-<br/>
-Nom et Prénoms:  <br/>
-<br/>
-Signature et Cachet
-                   </td>
-                   <td></td>
-                   <td style="width:50% ;border: 2px double #000">
                     
-<h4 style="text-align:center;text-decoration: underline;">CONTRÔLEUR FINANCIER :</h4>
-<br/>
-Date : {{formaterDate(detailOp.date_cf_service_real)}}  <br/>
-<br/>
-Nom et Prénoms:  <br/>
-<br/>
-Signature et Cachet  
-
-
-                   </td>
-                 </tr>
-    </table>
      
                              </div>
 </div>

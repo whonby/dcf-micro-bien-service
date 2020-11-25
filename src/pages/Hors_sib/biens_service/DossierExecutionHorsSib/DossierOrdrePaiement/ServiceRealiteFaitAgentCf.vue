@@ -90,7 +90,7 @@
                                 <!-- <th>Service béneficiaire</th> -->
                                 <th >Date validation</th>
                                 <th >Observation</th>
-                                <th>Action</th>
+                                <th colspan="3">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -122,15 +122,24 @@
                           <i class="icon icon-ok"></i>
                         </span>
                       </button>
-                        <router-link :to="{ name: 'editerFicheRealiteServiceFait', params: { id: realiteService.id }}"
-                class="btn btn-default " title="Editer Fiche">
-                  <span class=""><i class=" icon-print"></i></span>
-                   </router-link>
+
                       <!-- <button  class="btn btn-danger" @click="supprimerMandat(realiteService.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
                       </button> -->
+                    </td>
+                    <td>
+                                              <router-link :to="{ name: 'editerFicheRealiteServiceFait', params: { id: realiteService.id }}"
+                class="btn btn-success " title="Editer Fiche">
+                  <span class=""><i class=" icon-print"></i></span>
+                   </router-link>
+                    </td>
+                    <td>
+                                              <router-link :to="{ name: 'FicheAnnexeDeControle', params: { id: realiteService.id }}"
+                class="btn btn-danger" title="Editer Fiche de controle">
+                  <span class=""><i class=" icon-print"></i></span>
+                   </router-link>
                     </td>
                                      </tr>
                

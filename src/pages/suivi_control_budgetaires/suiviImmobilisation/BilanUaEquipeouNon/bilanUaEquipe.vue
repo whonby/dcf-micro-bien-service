@@ -41,7 +41,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Bilan des UA Equipé ou Non Equipe</h5>
+              <h5>Bilan des UA équipées ou non équipées</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -52,13 +52,13 @@
                <table>
                              <tr style="border-bottom: 2px solid #fff;font-size:16px;font-weight: bold">
                                  <td style="width: 20px;height:20px;background: red" ></td>
-                                 <td style="text-align: center; border-right: 5px solid #fff" colspan="3">UNITE D'ADMINISTRATIVE NON EQUIPE</td>
+                                 <td style="text-align: center; border-right: 5px solid #fff" colspan="3">UNITE ADMINISTRATIVE NON EQUIPEE</td>
                                  <td style="width: 20px;height:20px;background: #2f96b4" ></td>
-                                 <td style="text-align: center; border-right: 5px solid #fff" colspan="3"> UNITE D'ADMINISTRATIVE MOIN EQUIPE</td>
+                                 <td style="text-align: center; border-right: 5px solid #fff" colspan="3"> UNITE ADMINISTRATIVE MOIN EQUIPEE</td>
                                  <td style="width: 20px;height:20px;background: #f89406" ></td>
-                                 <td style="text-align: center; border-right: 5px solid #fff " colspan="3">UNITE D'ADMINISTRATIVE SOUS EQUIPE</td>
+                                 <td style="text-align: center; border-right: 5px solid #fff " colspan="3">UNITE ADMINISTRATIVE SOUS EQUIPEE</td>
                                  <td style="width: 20px;height:20px;background: green" ></td>
-                                 <td style="text-align: center; border-right: 5px solid #fff" colspan="3"> UNITE D'ADMINISTRATIVE PLUS EQUIPE</td>
+                                 <td style="text-align: center; border-right: 5px solid #fff" colspan="3"> UNITE ADMINISTRATIVE PLUS EQUIPEE</td>
                              </tr>
                          </table>
               <table class="table table-bordered table-striped">
@@ -68,7 +68,7 @@
                     <th>Unité Administrative</th>
                     <th>Total Stock</th>
                      <th>Restant en Stock</th>
-                      <th>Qté Réquise</th>
+                      <th>Quantité Réquise</th>
                       <th>Affecté</th>
                        <th>Non affecté</th>
                         

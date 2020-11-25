@@ -97,6 +97,9 @@ decision_cf
                       <li>
                         <a data-toggle="tab" href="#tab03">IMAGES DES MARCHES</a>
                       </li> 
+                      <li>
+                        <a data-toggle="tab" href="#tab040">Evolution du marché</a>
+                      </li> 
                      
                     </ul>
                   </div>
@@ -328,6 +331,10 @@ decision_cf
                        <div id="tab03" class="tab-pane ">
                          <imageMarche :macheid="detail_marche.id"></imageMarche>
                       </div>
+
+                      <div id="tab040" class="tab-pane ">
+                         <graphiqueExecutionMarche :macheid="detail_marche.id"></graphiqueExecutionMarche>
+                      </div>
       </div>
        </div>
       
@@ -394,7 +401,7 @@ import decompte from "../../../../bien_service/contractualisation/DossierExecuti
                    import tableauBordExecution from "../../../../bien_service/contractualisation/DossierExecution/tableauBordExecution/tableauBordExecution";
   import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
   import imageMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche";
-
+import graphiqueExecutionMarche from "../../../../bien_service/contractualisation/DossierExecution/DossierGraphiqueExecutionMarche/graphiqueExecutionMarche";
 
 
 
@@ -432,7 +439,7 @@ import decompteHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsS
             financement,
             tableauBordExecution,
             EcheanceMarche,
-
+graphiqueExecutionMarche,
 
 
 
