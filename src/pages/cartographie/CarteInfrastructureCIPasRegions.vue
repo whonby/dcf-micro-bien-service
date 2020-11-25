@@ -209,6 +209,7 @@ import VueApexCharts from 'vue-apexcharts'
 import L from "leaflet.minichart"
 import ad from "leaflet-html-legend"
 import ad1 from "leaflet-easyprint"
+import moda from "leaflet-modal"
 //import ad2 from "leaflet-easyprint"
     export default {
         name: "Example",
@@ -1259,6 +1260,8 @@ direction: 'bottom',
 console.log(L)
 console.log(ad)
 console.log(ad1)
+            console.log(moda)
+
 console.log(this.getActeEffetFinancierPersonnaliser45)
 //console.log()
 /**
