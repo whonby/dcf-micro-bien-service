@@ -107,19 +107,7 @@
                 Filtre
                 <div class="sidebar-close"><i class="fa fa-caret-left"></i></div>
               </h1>
-              <!--<table class="table table-striped">-->
-                <!--<tbody>-->
-                <!--<tr>-->
-                  <!--<td>-->
 
-                  <!--</td>-->
-                  <!--<td>-->
-
-
-                  <!--</td>-->
-                <!--</tr>-->
-                <!--</tbody>-->
-              <!--</table>-->
 
 <div class="span5">
    <h6>Infrastructure</h6>
@@ -879,14 +867,14 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
                if(status=="planifie"){
                  status=0;
                }
-             if(this.infrastructure!="" && this.type_marche==""){
+
+               if(this.infrastructure!="" && this.type_marche==""){
                   return this.marcheUniteRegion.filter(item=>{
                     if(item.attribue==status && item.infrastructure_id==this.infrastructure){
                       return item
                     }
                   }).length
-             }
-
+               }
 
                  if(this.infrastructure=="" && this.type_marche!=""){
                      return this.marcheUniteRegion.filter(item=>{
