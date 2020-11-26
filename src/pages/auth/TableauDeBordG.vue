@@ -75,6 +75,7 @@ components: {
 
   },
 created() {
+      console.log(this.getterUniteAdministrativeByUser)
             this.marcheid=this.$route.params.id
    this.detail_marche = this.gestionModules.find(
        idmarche => idmarche.id == this.$route.params.id

@@ -114,16 +114,16 @@
   <label for="tous">
       <input type="radio" v-model="infrastructure" value="" id="tous"> <span>Affiché tous  <b>({{marcheUniteRegion.length}})</b></span>
     </label>
-    <label  v-for="item in getterInfrastrucure" :key="item.id" :for="item.id">
-      <input type="radio" v-model="infrastructure" :value="item.id" :id="item.id"> <span> {{item.libelle}} <b>({{nombreMarchePasInfrastructure(item.id)}})</b></span>
+    <label  v-for="item in getterInfrastrucure" :key="item.id" :for="'IN'+item.id">
+      <input type="radio" v-model="infrastructure" :value="item.id" :id="'IN'+item.id"> <span> {{item.libelle}} <b>({{nombreMarchePasInfrastructure(item.id)}})</b></span>
     </label>
 
     <h6>Type Marches</h6>
     <label for="all_type">
         <input type="radio" v-model="type_marche" value="" id="all_type"> <span>Affiché tous  <b></b></span>
     </label>
-    <label  v-for="item in typeMarches" :key="item.id" :for="'T'+item.id">
-        <input type="radio" v-model="type_marche" :value="item.id" :id="'T'+item.id"> <span> {{item.libelle}} <b>({{nombreMarchePasTypeMarche(item.id)}})</b></span>
+    <label  v-for="item in typeMarches" :key="item.id" :for="'TQ'+item.id">
+        <input type="radio" v-model="type_marche" :value="item.id" :id="'TQ'+item.id"> <span> {{item.libelle}} <b>({{nombreMarchePasTypeMarche(item.id)}})</b></span>
     </label>
 
 </div>
@@ -133,7 +133,7 @@
         <i class="fa fa-trash-o"></i></a></label>
     <model-list-select style="background-color: rgb(255,255,255);"
                        class="wide"
-                       :list="uniteAdministratives"
+                       :list="filtre_unite_admin"
                        v-model="unite_administrative_id"
                        option-value="id"
                        option-text="libelle"
@@ -477,6 +477,7 @@ import 'vue-search-select/dist/VueSearchSelect.css'
 import VueApexCharts from 'vue-apexcharts'
 import ad from "leaflet-html-legend"
 import moda from "leaflet-modal"
+import {noDCfNoAdmin} from "../Repositories/Auth"
 export default {
   name: "Example",
   components: {
@@ -742,11 +743,13 @@ export default {
 created() {
 //console.log(this.typeMarches)
 this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
-
+    console.log("INTEGER...........")
+console.log(this.getterUniteAdministrativeByUser)
+    console.log("INTEGER...........")
 },
   computed: {
 // methode pour maper notre guetter
-
+      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
     ...mapGetters('parametreGenerauxAdministratif', ['structures_geographiques',
       'localisations_geographiques',"getterLocalisationGeoAll","getterInfrastrucure"]),
     ...mapGetters("uniteadministrative", [
@@ -756,6 +759,43 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       "getterBudgeCharge",
     ]),
     ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise","getterImageMarche","acteEffetFinanciers","typeMarches"]),
+
+      noDCfNoAdmin:noDCfNoAdmin,
+      filtre_unite_admin() {
+          if(this.noDCfNoAdmin){
+              let colect=[];
+              let vM=this
+              this.uniteAdministratives.filter(item=>{
+                  console.log("OK bonjour GUE")
+                  if(vM.getterUniteAdministrativeByUser.length>0){
+                      let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                      if (val!=undefined){
+                          colect.push(item)
+                          return item
+                      }
+                  }
+
+              })
+              return colect
+          }
+          return this.uniteAdministratives
+      },
+      listeMarcheUniteAdmin(){
+
+          let colect=[]
+          let vM=this;
+          this.filtre_unite_admin.forEach(function (value) {
+              let objet=vM.marches.filter(item=>item.unite_administrative_id==value.id)
+              if(objet!=undefined){
+                  objet.forEach(function (val) {
+                      colect.push(val)
+                  })
+              }
+
+
+          })
+          return colect
+      },
     regions(){
       return this.getterLocalisationGeoAll.filter(item=>item.structure_localisation_geographique.niveau==2);
     },
@@ -1136,7 +1176,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     },
     marcheUniteRegion(){
      let vM=this;
-      let objet=this.marches.filter(item=>item.parent_id!="")
+      let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!="")
       if(vM.region!="" && vM.unite_administrative_id==""){
         objet =this.marches.filter(item=>{
             if(item.localisation_geographie_id==vM.region && item.parent_id!=""){
@@ -1147,7 +1187,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       }
 
       if(vM.unite_administrative_id!="" && vM.region==""){
-        objet =this.marches.filter(item=>{
+        objet =this.listeMarcheUniteAdmin.filter(item=>{
             if(item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
                 return item
             }
@@ -1155,7 +1195,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       }
 
        if(vM.unite_administrative_id!="" && vM.region!="" ){
-        objet =this.marches.filter(item=>{
+        objet =this.listeMarcheUniteAdmin.filter(item=>{
           if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
             return item
           }
@@ -1165,7 +1205,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     },
     objetMarchePasUniteOuRegion(){
       let vM=this;
-      let objet=this.marches.filter(item=>item.parent_id!="")
+      let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!="")
 
          //retourne les marches d'une region selectionner
       if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure=="" && vM.type_marche==""){
@@ -1378,7 +1418,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           budget_general=budget_general+budgetByUnite
         }
 
-        let  objetMarche=vM.marches.filter(item=>{
+        let  objetMarche=vM.listeMarcheUniteAdmin.filter(item=>{
           if(item.unite_administrative_id==row.id ){
 
             return item
@@ -1478,7 +1518,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           budgetUniteAdmin=budgetByUnite
 
           //Recuperation des marche
-          let  objetMarche=vM.marches.filter(item=>{
+          let  objetMarche=vM.listeMarcheUniteAdmin.filter(item=>{
             if(item.unite_administrative_id==uniteId ){
 
               return item

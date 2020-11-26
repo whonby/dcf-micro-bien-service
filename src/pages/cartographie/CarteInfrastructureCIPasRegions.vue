@@ -67,7 +67,7 @@
                     <label>Unite administrative <a href="#" @click.prevent="videUniteAdmin()" style="color: red" v-if="unite_administrative_id"><i class="fa fa-trash-o"></i></a></label>
                     <model-list-select style="background-color: rgb(255,255,255);"
                                        class="wide"
-                                       :list="uniteAdministratives"
+                                       :list="filtre_unite_admin"
                                        v-model="unite_administrative_id"
                                        option-value="id"
                                        option-text="libelle"
@@ -255,7 +255,7 @@
 import LControlFullscreen from 'vue2-leaflet-fullscreen';
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import VGeosearch from 'vue2-leaflet-geosearch';
-    import {mapGetters} from 'vuex'
+    import {mapGetters,mapActions} from 'vuex'
     import { /*latLng,*/ Icon, icon } from 'leaflet'
     import { LMap, LTileLayer, LIconDefault,LControlLayers,LPopup,LCircleMarker ,LTooltip} from "vue2-leaflet";
     import iconUrl from 'leaflet/dist/images/marker-icon.png'
@@ -267,6 +267,7 @@ import L from "leaflet.minichart"
 import ad from "leaflet-html-legend"
 import ad1 from "leaflet-easyprint"
 import moda from "leaflet-modal"
+import {noDCfNoAdmin} from "../../Repositories/Auth"
 //import ad2 from "leaflet-easyprint"
     export default {
         name: "Example",
@@ -418,6 +419,36 @@ import moda from "leaflet-modal"
                 ],
             };
         },
+        created(){
+
+            if(this.getterInformationCarteInfrastructure){
+                if(this.getterInformationCarteInfrastructure.infrastructure!=""){
+                    this.infrastructure=this.getterInformationCarteInfrastructure.infrastructure
+                }
+                if(this.getterInformationCarteInfrastructure.region_select_vmodel!=""){
+                    this.region=this.getterInformationCarteInfrastructure.region_select_vmodel
+                }
+                if(this.getterInformationCarteInfrastructure.type_marche!=""){
+                    this.type_marche=this.getterInformationCarteInfrastructure.type_marche
+                }
+                if(this.getterInformationCarteInfrastructure.unite_administrative!=""){
+                    this.unite_administrative_id=this.getterInformationCarteInfrastructure.unite_administrative
+                }
+//
+//                let objet={
+//                    region:"",
+//                    infrastructure:"",
+//                    unite_administrative:"",
+//                    type_marche:"",
+//                    region_select_vmodel:""
+//                }
+
+                this.supprmieMarcheFiltreCarteInfrastructure()
+            }
+
+
+          //console.log(this.listeMarcheUniteAdmin)
+        },
 
     computed: {
 // methode pour maper notre guetter
@@ -429,11 +460,45 @@ import moda from "leaflet-modal"
             "uniteAdministratives",
             "getterBudgeCharge"
         ]),
-        ...mapGetters("bienService", ['marches',"typeMarches","engagements","getMandatPersonnaliserVise","getActeEffetFinancierPersonnaliser45"]),
+        ...mapGetters("bienService", ['marches',"typeMarches","engagements",
+            "getMandatPersonnaliserVise","getActeEffetFinancierPersonnaliser45",
+            "getterInformationCarteInfrastructure","getterFiltreCarteInfrastructure","supprmieMarcheFiltreCarteInfrastructure"]),
+        ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
           regions(){
       return this.getterLocalisationGeoAll.filter(item=>item.structure_localisation_geographique.niveau==2);
       },
+        noDCfNoAdmin:noDCfNoAdmin,
+        filtre_unite_admin() {
+            if(this.noDCfNoAdmin){
+                let colect=[];
+                this.uniteAdministratives.filter(item=>{
+                    let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                    if (val!=undefined){
+                        colect.push(item)
+                        return item
+                    }
+                })
+                return colect
+            }
+            return this.uniteAdministratives
 
+        },
+
+        listeMarcheUniteAdmin(){
+             let colect=[]
+            let vM=this;
+             this.filtre_unite_admin.forEach(function (value) {
+                 let objet=vM.marches.filter(item=>item.unite_administrative_id==value.id)
+                   if(objet!=undefined){
+                       objet.forEach(function (val) {
+                           colect.push(val)
+                       })
+                   }
+
+
+             })
+            return colect
+        },
         /**Traitement afficharche et statique marche en fonction des region
          *
          *
@@ -540,11 +605,11 @@ montant_reel_marche =montant_reel_marche+ 0
 
    ListeMarchePasUA(){
       let vM=this;
-      let objet=this.marches.filter(item=>item.parent_id!='')
+      let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!='')
 
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!='')
+        objet =this.listeMarcheUniteAdmin.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!='')
       }
 
       
@@ -554,10 +619,10 @@ montant_reel_marche =montant_reel_marche+ 0
 
     totalMontantPrevisionnelPasMarche(){
        let vM=this;
-      let objet=this.marches.filter(item=>item.parent_id!='')
+      let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!='')
       
            if(vM.unite_administrative_id!=""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!="")
+        objet =this.listeMarcheUniteAdmin.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!="")
         }
 
            let initeVal = 0;
@@ -575,13 +640,13 @@ montant_reel_marche =montant_reel_marche+ 0
               let objet;
 
                if(vM.unite_administrative_id!=""){
-            objet =this.marches.filter(item=>{
+            objet =this.listeMarcheUniteAdmin.filter(item=>{
                     if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==regions && item.parent_id!=""){
             return item
                }
             })
              }else{
-                objet =this.marches.filter(item=>item.localisation_geographie_id==regions && item.parent_id!="")
+                objet =this.listeMarcheUniteAdmin.filter(item=>item.localisation_geographie_id==regions && item.parent_id!="")
              }
 
            let initeVal = 0;
@@ -601,7 +666,7 @@ montant_reel_marche =montant_reel_marche+ 0
           let vM=this;
           let objet;
         if(unite_administrative_id!=""){
-                objet =this.marches.filter(item=>{
+                objet =this.listeMarcheUniteAdmin.filter(item=>{
                     if(item.unite_administrative_id==unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
             return item
                }
@@ -617,7 +682,7 @@ montant_reel_marche =montant_reel_marche+ 0
            }
 
            if(vM.infrastructure!=""){
-                 objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!="")
+                 objet =this.listeMarcheUniteAdmin.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!="")
           
                 let initeVal = 0;
                   let montant=  objet.reduce(function (total, currentValue) {
@@ -636,7 +701,7 @@ montant_reel_marche =montant_reel_marche+ 0
         if(regions!=""){
               let objet;
 
-              objet =this.marches.filter(item=>{
+              objet =this.listeMarcheUniteAdmin.filter(item=>{
                    if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==regions && item.parent_id!=""){
                    return item
                     }
@@ -654,8 +719,8 @@ montant_reel_marche =montant_reel_marche+ 0
   },
         objetMarchePasUniteOuRegion(){
             let vM=this;
-            let objet=this.marches.filter(item=>item.parent_id!="")
-console.log(vM.type_marche)
+            let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!="")
+
             //retourne les marches d'une region selectionner
             if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure=="" && vM.type_marche==""){
                 objet =objet.filter(item=>{
@@ -801,7 +866,7 @@ console.log(vM.type_marche)
                     }
                 })
             }
-            console.log(objet)
+         //   console.log(objet)
             return objet
         },
 
@@ -1173,6 +1238,9 @@ console.log(vM.type_marche)
 
     },
         methods: {
+            ...mapActions('bienService',["ajouterListeMarcheFiltreCarteInfrastructure",
+                "ajouterInfoFiltreCarteInfrastructure",
+                ]),
            videUniteAdmin(){
       this.unite_administrative_id=""
       // this.zoom=5
@@ -1189,12 +1257,12 @@ console.log(vM.type_marche)
     },
     videInfrastructure(){
       this.infrastructure=""
-      // this.zoom=5;
-      // this.objetUnite=""
-      // this.info_sidebar_marche.close()
-      // this.info_sidebar_marche.disablePanel('infomarche');
     },
 
+            /**
+             * Fonction qui supprimer les minichart
+             * @param map
+             */
             deleteLeafleMiniCharts(map) {
 
                 map.eachLayer(
@@ -1245,12 +1313,33 @@ console.log(vM.type_marche)
             ready: (e) => console.log('ready', e),
 
 
+            /***
+             * Fonction qui navigue ver la vue *
+             * */
   selctionRegion(id){
 
-      this.info_region= this.localisations_geographiques.find(item=>item.id==id)
-      // info_region console.log(this.infortion_sidbar_filter)
-      this.infortion_sidbar_filter.enablePanel('infoRegion');
-      this.infortion_sidbar_filter.open('infoRegion');
+      let objet={
+          region:id,
+          infrastructure:this.infrastructure,
+          unite_administrative:this.unite_administrative_id,
+          type_marche:this.type_marche,
+          region_select_vmodel:this.region
+      }
+     // console.log(this.objetMarchePasUniteOuRegion)
+
+      let objetMarche=this.objetMarchePasUniteOuRegion.filter(item=>item.localisation_geographie_id==id)
+      this.ajouterListeMarcheFiltreCarteInfrastructure(objetMarche)
+      this.ajouterInfoFiltreCarteInfrastructure(objet)
+
+      this.$router.push({
+          name: 'DetailCarteMarche',
+          params: { id: id }
+      })
+      //vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!=""
+//      this.info_region= this.localisations_geographiques.find(item=>item.id==id)
+//      // info_region console.log(this.infortion_sidbar_filter)
+//      this.infortion_sidbar_filter.enablePanel('infoRegion');
+//      this.infortion_sidbar_filter.open('infoRegion');
   },
   integrationChartPasRegisonSurCarte(){
                 let vm=this
@@ -1420,6 +1509,8 @@ direction: 'bottom',
 
             },
         },
+
+
         watch: {
             type_marche:function (value) {
                 console.log(value);

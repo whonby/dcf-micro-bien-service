@@ -35,6 +35,7 @@ import typeMarche from '../../pages/bien_service/Prametre_marchers/typeMarche.vu
 import modePassation from '../../pages/bien_service/Prametre_marchers/modePassation.vue';
 import typeTextJuridique from '../../pages/bien_service/parametres/typeTextJuridique.vue';
 // import typeTextJuridique from '../../pages/bien_service/typeTextJuridique.vue';
+
 import marche from '../../pages/bien_service/contractualisation/marche.vue';
 import historiqueMarche from '../../pages/gestionMarche/historiqueMarche.vue';
 import DetaillMarche from '../../pages/bien_service/contractualisation/DetaillMarche.vue';
@@ -89,7 +90,10 @@ import listeDesMarcheTermineBS from '../../pages/bien_service/listeDesMarcheTabl
 import imageMarche from "../../pages/bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche.vue"
 import DetailImageMarche from "../../pages/ImageMarche/DetailImageMarche"
 import ListeImageMarche from "../../pages/ImageMarche/ListeImageMarche"
+
+
 const BienServiceRoutes = [
+
     {
         path:"/detail_image_marche/:id",
         name:"DetailImageMarche",
