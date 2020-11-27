@@ -26,7 +26,7 @@
                             <td>{{formatageSomme(parseFloat(montantPrevisionnel))}}</td>
                         </tr>
                         <tr>
-                            <td>Montant Approuve</td>
+                            <td>Montant de base</td>
                             <td>{{formatageSomme(parseFloat(montantApprouveMarche))}}</td>
                         </tr>
                         <tr>
@@ -70,12 +70,31 @@
                 <!--</table>-->
 
                 <div class="row gutters-sm">
+                    <!--<div class="span11">-->
+                        <!--<h6>Infrastructure</h6>-->
+                        <!--<table class="table table-bordered table-striped">-->
+                            <!--<thead>-->
+                            <!--<tr>-->
+                                <!--<th></th>-->
+                                <!--<th>Montant previsionnel</th>-->
+                            <!--<th>Montant previsionnel</th>-->
+                            <!--<th>Montant Approuve</th>-->
+                            <!--<th>Montant execute</th>-->
+                            <!--<th>Taux execution</th>-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                        <!--</table>-->
+
+                    <!--</div>-->
+
+                    <div class="span11">
+                        <h6>Type service</h6>
+
+
+
+                    </div>
 
                     <div class="row-fluid">
-
-                        <div class="span11">
-44444
-                        </div>
 
                         <div class="span11">
 
@@ -125,9 +144,8 @@
                                         <th>Objet </th>
                                         <th>Infrastructure</th>
                                         <th>Type Marche</th>
-
                                         <th>Montant Prevue</th>
-                                        <th>Montant Approve</th>
+                                        <th>Montant Base</th>
                                         <th>Montant Execute</th>
                                         <th>Taux</th>
                                         <th>Status</th>

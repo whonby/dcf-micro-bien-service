@@ -803,7 +803,12 @@ console.log(this.getterUniteAdministrativeByUser)
           return colect
       },
     regions(){
-      return this.getterLocalisationGeoAll.filter(item=>item.structure_localisation_geographique.niveau==2);
+      // console.log(this.localisations_geographiques.filter(item=>item.structure_localisation_geographique.niveau==2))
+      return this.localisations_geographiques.filter(item=>{
+          if(item.longitude!=null && item.structure_localisation_geographique.niveau==2 ){
+              return item
+          }
+      });
     },
 
     departements(){
