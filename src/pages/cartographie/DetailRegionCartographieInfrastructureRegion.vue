@@ -30,7 +30,7 @@
                         <div class="span11">
 
                             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                <h5>Liste des marchés (<b v-if="getterFiltreCarteInfrastructure"> {{getterFiltreCarteInfrastructure.length}}</b>)</h5>
+                                <h5>Liste des marchés (<b v-if="getterFiltreCarteInfrastructure"> {{getterFiltreCarteInfrastructure.length}}</b>) <a @click.prevent="afficheTous()" href="">Afficher tous</a> </h5>
                                 <!--<div align="right">-->
                                 <!--Recherche: <input type="text" v-model="search">-->
                                 <!--</div>-->
@@ -39,13 +39,13 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Planifié </th>
-                                    <th>En contractualisation</th>
-                                    <th>En exécution</th>
-                                    <th>Terminé</th>
-                                    <th>Résilie</th>
+                                    <th ><a @click.prevent="getStatusMarche(0)" href="#">Planifié</a>  </th>
+                                    <th><a @click.prevent="getStatusMarche(1)" href="#">En contractualisation</a> </th>
+                                    <th ><a @click.prevent="getStatusMarche(2)" href="#">En exécution</a> </th>
+                                    <th ><a @click.prevent="getStatusMarche(5)" href="#">Terminé</a> </th>
+                                    <th><a @click.prevent="getStatusMarche(3)" href="#">Résilie</a> </th>
 
-                                    <th>Suspendu</th>
+                                    <th><a @click.prevent="getStatusMarche(7)" href="#">Suspendu</a> </th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -85,7 +85,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="odd gradeX" v-for="item in partition (getterFiltreCarteInfrastructure,size)[page]" :key="item.id">
+                                    <tr class="odd gradeX" v-for="item in partition (getListeMarcheParRegion,size)[page]" :key="item.id">
                                         <td>{{item.objet}} </td>
                                         <td>{{nomInfrastructure(item.infrastructure_id)}}</td>
                                         <td> {{nomTypeMarche(item.type_marche_id)}}</td>
@@ -103,12 +103,12 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <div class="pagination alternate" v-if="getterFiltreCarteInfrastructure">
+                                <div class="pagination alternate" v-if="getListeMarcheParRegion">
                                     <ul>
                                         <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-                                        <li  v-for="(titre, index) in partition(getterFiltreCarteInfrastructure,size).length" :key="index" :class="{ active : active_el == index }">
+                                        <li  v-for="(titre, index) in partition(getListeMarcheParRegion,size).length" :key="index" :class="{ active : active_el == index }">
                                             <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-                                        <li :class="{ disabled : page == partition(getterFiltreCarteInfrastructure,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+                                        <li :class="{ disabled : page == partition(getListeMarcheParRegion,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
 
                                     </ul>
                                 </div>
@@ -136,6 +136,7 @@
         data(){
 
             return{
+                status:"",
               info_region:"",
               info_type_marche:'',
               info_infrastructure:'',
@@ -149,7 +150,7 @@
         props:["macheid"],
         created(){
 //            this.detailMarche=this.getterImageMarche.find(item=>item.id==this.$route.params.id)
-           console.log(this.getterFiltreCarteInfrastructure)
+        //   console.log(this.getterFiltreCarteInfrastructure)
 //            console.log(this.getterInformationCarteInfrastructure)
             if(this.getterInformationCarteInfrastructure){
                 if(this.getterInformationCarteInfrastructure.infrastructure!=""){
@@ -205,6 +206,13 @@
 
             //return name type Infra
 
+            getListeMarcheParRegion(){
+                if(this.status!=""){
+                    return this.getterFiltreCarteInfrastructure.filter(item=>item.attribue==this.status)
+                }else{
+                    return this.getterFiltreCarteInfrastructure
+                }
+            },
             nomInfrastructure(){
                 return id=>{
                     let objet=this.getterInfrastrucure.find(item=>item.id==id)
@@ -214,6 +222,7 @@
                     return null
                 }
             },
+
             nomTypeMarche(){
                 return id=>{
                     let objet=this.typeMarches.find(item=>item.id==id)
@@ -239,6 +248,17 @@
                     }
                 }
             },
+
+            /**
+             * Integration de filtre pour statu
+             */
+//            filtreStatusMarche(){
+//                return id=>{
+//                    if(id!=""){
+//
+//                    }
+//                }
+//            }
 
 
         },
@@ -285,6 +305,12 @@
                 this.$router.push({
                     name: 'CarteInfrastructureCIPasRegions'
                 })
+            },
+            getStatusMarche(id){
+                this.status=id;
+            },
+            afficheTous(){
+                this.status=""
             },
             distance(lat1, lon1, lat2, lon2, unit) {
                 if ((lat1 == lat2) && (lon1 == lon2)) {
