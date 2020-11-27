@@ -19,26 +19,55 @@
                     </ol>
                 </nav>
 
-                <table class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th ><a href="#">Montant previsionnel</a>  </th>
-                        <th><a href="#">Montant Approuve</a> </th>
-                        <th ><a  href="#">Montant execute</a> </th>
-                        <th ><a href="#">Taux execution</a> </th>
+                <div class="span6">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>Montant previsionnel</td>
+                            <td>{{formatageSomme(parseFloat(montantPrevisionnel))}}</td>
+                        </tr>
+                        <tr>
+                            <td>Montant Approuve</td>
+                            <td>{{formatageSomme(parseFloat(montantApprouveMarche))}}</td>
+                        </tr>
+                        <tr>
+                            <td>Montant execute</td>
+                            <td>{{formatageSomme(parseFloat(montantExecute))}}</td>
+                        </tr>
+                        <tr>
+                            <td>Montant restant</td>
+                            <td>{{formatageSomme(parseFloat(montantRestant))}}</td>
+                        </tr>
+                        <tr>
+                            <td>Taux execution</td>
+                            <td>{{tauxExecution}} %</td>
+                        </tr>
+                    </table>
 
-                    </tr>
-                    </thead>
+                </div>
+                <div class="span5">
+                    <apexchart type="bar" width="325" height="250" :options="chartOptions" :series="dataDiagrame"></apexchart>
+                </div>
 
-                    <tbody>
-                    <tr>
-                        <td>{{formatageSomme(parseFloat(montantPrevisionnel))}}  </td>
-                        <td >{{formatageSomme(parseFloat(montantApprouveMarche))}}  </td>
-                        <td>100</td>
-                        <td>444</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <!---->
+                <!--<table class="table table-bordered table-striped">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<th><a href="#">Montant previsionnel</a>  </th>-->
+                        <!--<th><a href="#">Montant Approuve</a> </th>-->
+                        <!--<th><a  href="#">Montant execute</a> </th>-->
+                        <!--<th><a href="#">Taux execution</a> </th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+
+                    <!--<tbody>-->
+                    <!--<tr>-->
+                        <!--<td> </td>-->
+                        <!--<td > </td>-->
+                        <!--<td>100</td>-->
+                        <!--<td>444</td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
 
                 <div class="row gutters-sm">
 
@@ -60,7 +89,7 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th ><a @click.prevent="getStatusMarche(0)" href="#">Planifié</a>  </th>
+                                    <th ><a @click.prevent="getStatusMarche('p')" href="#">Planifié</a>  </th>
                                     <th><a @click.prevent="getStatusMarche(1)" href="#">En contractualisation</a> </th>
                                     <th ><a @click.prevent="getStatusMarche(2)" href="#">En exécution</a> </th>
                                     <th ><a @click.prevent="getStatusMarche(5)" href="#">Terminé</a> </th>
@@ -148,10 +177,11 @@
 <script>
     import {mapGetters, mapActions} from 'vuex';
     import {partition,formatageSomme} from '../../Repositories/Repository'
+    import VueApexCharts from 'vue-apexcharts'
    // import { formatageSomme } from "../../../src/Repositories/Repository";
     export default {
         components: {
-
+            apexchart: VueApexCharts,
 
         },
         data(){
@@ -165,6 +195,39 @@
                 page:0,
                 size:10,
                 active_el:0,
+
+
+                series: [],
+
+                chartOptions: {
+                    chart: {
+                        type: 'bar',
+                        height: 350,
+                        stacked: true,
+                        stackType: '100%'
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            legend: {
+                                position: 'bottom',
+                                offsetX: -10,
+                                offsetY: 0
+                            }
+                        }
+                    }],
+                    xaxis: {
+                        categories: ['Situation Actuelle'],
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    legend: {
+                        position: 'right',
+                        offsetX: 0,
+                        offsetY: 50
+                    },
+                },
 
             }
         },
@@ -216,7 +279,7 @@
                 "getPersonnaliseBudgetGeneral",
                 "groupUa",
                 "getPersonnaliseBudgetGeneralParBienService",
-                "groupgranNature", "montantBudgetGeneral","realiteServiceFait","liquidation"
+                "groupgranNature", "montantBudgetGeneral","realiteServiceFait","liquidation","decomptefactures"
                 // "montantBudgetGeneral"
                 // "chapitres",
                 // "sections"
@@ -229,7 +292,11 @@
 
             getListeMarcheParRegion(){
                 if(this.status!=""){
+                    if(this.status=="p"){
+                        return this.getterFiltreCarteInfrastructure.filter(item=>item.attribue==0)
+                    }
                     return this.getterFiltreCarteInfrastructure.filter(item=>item.attribue==this.status)
+
                 }else{
                     return this.getterFiltreCarteInfrastructure
                 }
@@ -273,31 +340,83 @@
             montantPrevisionnel(){
                 if(this.getterFiltreCarteInfrastructure.length>0){
                     let initeVal = 0;
-                    let montant_prevue=  this.getterFiltreCarteInfrastructure.reduce(function (total, currentValue) {
+                    let montant_prevue =  this.getListeMarcheParRegion.reduce(function (total, currentValue) {
                         return total + parseFloat(currentValue.montant_marche) ;
                     }, initeVal);
                     return montant_prevue
                 }
                return 0;
             },
+            montantExecute(){
+                if(this.getterFiltreCarteInfrastructure.length>0){
+                    let montant_execute=0;
+                    let vm=this;
 
+                    this.getterFiltreCarteInfrastructure.forEach(function (val) {
+                        let initeVal = 0;
+                        let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                       return total + parseFloat(currentValue.montantmarche) ;
+                       }, initeVal);
+                        montant_execute=parseFloat(montant_execute) + parseFloat(montant)
+                    })
+
+
+
+             return montant_execute
+                }
+                return 0;
+            },
             montantApprouveMarche(){
-         if(this.getterFiltreCarteInfrastructure.length>0){
+         if(this.getListeMarcheParRegion.length>0){
              //acteEffetFinanciers
              let vm=this;
              let montantTotal=0;
-             this.getterFiltreCarteInfrastructure.forEach(function (val) {
+             this.getListeMarcheParRegion.forEach(function (val) {
                  let objetAct=vm.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==val.id)
-
+                 let montant_avenant=0;
+                 let objetAvenant=vm.avenants.filter(item=>item.marche_id==val.id)
+                 if(objetAvenant!=undefined){
+                     let initeVal = 0;
+                     montant_avenant=objetAvenant.reduce(function (total, currentValue) {
+                         return total + parseFloat(currentValue.montant_avenant) ;
+                     }, initeVal);
+                 }
                  if(objetAct!=undefined){
-                     console.log(objetAct)
-                     montantTotal=parseFloat(montantTotal)+ parseFloat(objetAct.montant_act)
+                   //  console.log(objetAct)
+                     montantTotal=parseFloat(montantTotal)+ parseFloat(objetAct.montant_act)+parseFloat(montant_avenant)
                  }
              })
              return montantTotal
           }
         return 0;
-            }
+            },
+            montantRestant(){
+                return this.montantApprouveMarche - this.montantExecute;
+            },
+            tauxExecution(){
+              let taux=(this.montantExecute * 100)/ this.montantApprouveMarche
+                if(taux==0){
+                  console.log(taux)
+                  return 0
+                }
+                return taux.toFixed(2)
+            },
+            dataDiagrame(){
+                let array=[]
+
+              let tauxReste=(this.montantRestant * 100)/this.montantApprouveMarche
+              let objetEx={
+                  name: 'Montant Execute',
+                  data: [this.tauxExecution]
+              }
+                let objetApprouve={
+                    name: 'Montant Restant',
+                    data: [tauxReste.toFixed(2)]
+                }
+                array.push(objetApprouve)
+                array.push(objetEx)
+                return array
+            },
             /**
              * Integration de filtre pour statu
              */
