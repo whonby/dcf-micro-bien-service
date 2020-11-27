@@ -11,7 +11,7 @@
        </li>
         <li>
          <router-link :to="{name:'listeMarcheInvestissement'}" tag="a">
-           EXECUTIONS DU MARCHES
+           EXECUTION DES MARCHES
          </router-link>
 
        </li>

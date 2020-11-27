@@ -37,7 +37,75 @@ import ListeUaTauxEquipement75 from '../../pages/suivi_control_budgetaires/suivi
 import ListeUaTauxEquipement100 from '../../pages/suivi_control_budgetaires/suiviImmobilisation/BilanUaEquipeouNon/ListeUaTauxEquipement75a100.vue'
 import detailTauxEquipement from '../../pages/suivi_control_budgetaires/suiviImmobilisation/BilanUaEquipeouNon/detailTauxEquipement.vue'
 
+
+
+
+import marqueVehicules from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/marqueVehicules.vue'
+import ModeleVehicules from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeModel/ModeleVehicules.vue'
+import TypeEnergie from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/TypeEnergie.vue'
+import TypeEntretien from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/TypeEntretien.vue'
+import TypeVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/TypeVehicule.vue'
+import TypeReparation from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/TypeReparation.vue'
+import AjouterFicheVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeVehicule/AjouterFicheVehicule.vue'
+import ModifierFicheVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeVehicule/ModifierFicheVehicule.vue'
+import affectationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeAffectation/affectationVehicule.vue'
 const suiviImmobilisationRoutes = [
+  {
+    path: "/affectationVehicule",
+    name: "affectationVehicule",
+    component: affectationVehicule
+  },
+  {
+    path: "/ModifierFicheVehicule/:id",
+    name: "ModifierFicheVehicule",
+    component: ModifierFicheVehicule
+  },
+  {
+    path: "/AjouterFicheVehicule",
+    name: "AjouterFicheVehicule",
+    component: AjouterFicheVehicule
+  },
+  {
+    path: "/TypeReparation",
+    name: "TypeReparation",
+    component: TypeReparation
+  },
+  {
+    path: "/marqueVehicules",
+    name: "marqueVehicules",
+    component: marqueVehicules
+  },
+  {
+    path: "/ModeleVehicules",
+    name: "ModeleVehicules",
+    component: ModeleVehicules
+  },
+  {
+    path: "/TypeEnergie",
+    name: "TypeEnergie",
+    component: TypeEnergie
+  },
+  {
+    path: "/TypeEntretien",
+    name: "TypeEntretien",
+    component: TypeEntretien
+  },
+  {
+    path: "/TypeVehicule",
+    name: "TypeVehicule",
+    component: TypeVehicule
+  },
+
+
+
+
+
+
+
+
+
+
+
   {
     path: "/detailTauxEquipement/:id",
     name: "detailTauxEquipement",

@@ -630,6 +630,185 @@ const SUPPRIMER_HISTORIQUE_AFFECTATION_SERVICE = (state, id) => {
 
 
 
+
+
+
+
+export const GET_ALL_MARQUE_VEHICULE = (state, tableauFamille) => {
+  state.marqueVehicules = tableauFamille;
+};
+
+// ajouter FAMILLE
+export const AJOUTER_MARQUE_VEHICULE = (state, nouveau_famille) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.marqueVehicules.unshift(nouveau_famille);
+};
+
+// modifier FAMILLE
+export const MODIFIER_MARQUE_VEHICULE = (state, objetModifie) => {
+  state.marqueVehicules = state.marqueVehicules.map(famille => {
+    if (famille.id == objetModifie.id) {
+      famille = { ...objetModifie };
+    }
+
+    return famille;
+  });
+};
+
+
+// supprimer FAMILLE
+export const SUPPRIMER_MARQUE_VEHICULE = (state, id) => {
+  state.marqueVehicules = state.marqueVehicules.filter(famille => famille.id != id);
+};
+
+
+export const GET_ALL_MODELE_VEHICULE = (state, tableauFamille) => {
+  state.ModeleVehicules = tableauFamille;
+};
+
+// ajouter FAMILLE
+export const AJOUTER_MODELE_VEHICULE = (state, nouveau_famille) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.ModeleVehicules.unshift(nouveau_famille);
+};
+
+// modifier FAMILLE
+export const MODIFIER_MODELE_VEHICULE = (state, objetModifie) => {
+  state.ModeleVehicules = state.ModeleVehicules.map(famille => {
+    if (famille.id == objetModifie.id) {
+      famille = { ...objetModifie };
+    }
+
+    return famille;
+  });
+};
+
+
+// supprimer FAMILLE
+export const SUPPRIMER_MODELE_VEHICULE = (state, id) => {
+  state.ModeleVehicules = state.ModeleVehicules.filter(famille => famille.id != id);
+};
+
+
+
+
+export const GET_ALL_TYPE_ENTRETIEN = (state, tableauFamille) => {
+  state.TypeEntretien = tableauFamille;
+};
+
+// ajouter FAMILLE
+export const AJOUTER_TYPE_ENTRETIEN = (state, nouveau_famille) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.TypeEntretien.unshift(nouveau_famille);
+};
+
+// modifier FAMILLE
+export const MODIFIER_TYPE_ENTRETIEN = (state, objetModifie) => {
+  state.TypeEntretien = state.TypeEntretien.map(famille => {
+    if (famille.id == objetModifie.id) {
+      famille = { ...objetModifie };
+    }
+
+    return famille;
+  });
+};
+
+
+// supprimer FAMILLE
+export const SUPPRIMER_TYPE_ENTRETIEN = (state, id) => {
+  state.TypeEntretien = state.TypeEntretien.filter(famille => famille.id != id);
+};
+
+
+
+
+export const GET_ALL_TYPE_VEHICULE = (state, tableauFamille) => {
+  state.TypeVehicule = tableauFamille;
+};
+
+// ajouter FAMILLE
+export const AJOUTER_TYPE_VEHICULE = (state, nouveau_famille) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.TypeVehicule.unshift(nouveau_famille);
+};
+
+// modifier FAMILLE
+export const MODIFIER_TYPE_VEHICULE = (state, objetModifie) => {
+  state.TypeVehicule = state.TypeVehicule.map(famille => {
+    if (famille.id == objetModifie.id) {
+      famille = { ...objetModifie };
+    }
+
+    return famille;
+  });
+};
+
+
+// supprimer FAMILLE
+export const SUPPRIMER_TYPE_VEHICULE = (state, id) => {
+  state.TypeVehicule = state.TypeVehicule.filter(famille => famille.id != id);
+};
+
+
+
+
+export const GET_ALL_TYPE_ENERGIE = (state, tableauFamille) => {
+  state.TypeEnergie = tableauFamille;
+};
+
+// ajouter FAMILLE
+export const AJOUTER_TYPE_ENERGIE = (state, nouveau_famille) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.TypeEnergie.unshift(nouveau_famille);
+};
+
+// modifier FAMILLE
+export const MODIFIER_TYPE_ENERGIE = (state, objetModifie) => {
+  state.TypeEnergie = state.TypeEnergie.map(famille => {
+    if (famille.id == objetModifie.id) {
+      famille = { ...objetModifie };
+    }
+
+    return famille;
+  });
+};
+
+
+// supprimer FAMILLE
+export const SUPPRIMER_TYPE_ENERGIE = (state, id) => {
+  state.TypeEnergie = state.TypeEnergie.filter(famille => famille.id != id);
+};
+
+
+
+
+
+export const GET_ALL_TYPE_REPARATION = (state, tableauFamille) => {
+  state.TypeReparation = tableauFamille;
+};
+
+// ajouter FAMILLE
+export const AJOUTER_TYPE_REPARATION = (state, nouveau_famille) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.TypeReparation.unshift(nouveau_famille);
+};
+
+// modifier FAMILLE
+export const MODIFIER_TYPE_REPARATION = (state, objetModifie) => {
+  state.TypeReparation = state.TypeReparation.map(famille => {
+    if (famille.id == objetModifie.id) {
+      famille = { ...objetModifie };
+    }
+
+    return famille;
+  });
+};
+
+
+// supprimer FAMILLE
+export const SUPPRIMER_TYPE_REPARATION = (state, id) => {
+  state.TypeReparation = state.TypeReparation.filter(famille => famille.id != id);
+};
 export {
   
 

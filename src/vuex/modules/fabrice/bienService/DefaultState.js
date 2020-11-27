@@ -98,7 +98,8 @@ const defaultState = {
     image_marche:[],
     typeOrdrePaiement:[],
     loading_marche:true,
-  
+    marcheFiltreCarteInfrastructure:"",
+    informationFiltreCarteInfrastructure:""
 
 }
 

@@ -181,9 +181,11 @@ export  function  getAffectation({commit}) {
                         return item
                     }
                 })
+                console.log(affectationUsers)
+                console.log("..........getAffectation...........")
+                commit('GET_UNITEADMIN_BY_USER', affectationUsers)
             }
-          //  console.log(affectationUsers)
-            commit('GET_UNITEADMIN_BY_USER', affectationUsers)
+
         }else {
             commit('GET_UNITEADMIN_BY_USER', objetData)
         }

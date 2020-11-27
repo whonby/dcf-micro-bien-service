@@ -538,9 +538,7 @@ export default {
   },
   
 created() {
-      console.log("INB")
-      console.log(this.getterUniteAdministrativeByUser)
-    console.log("INB14500")
+
 },
     computed: {
     ...mapGetters("uniteadministrative", [

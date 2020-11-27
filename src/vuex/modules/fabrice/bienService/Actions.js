@@ -4,7 +4,6 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
-
 // export function getDecompte({ commit }) {
 //   queue.push(() => axios.get('/Listedecompte').then((response) => {
 //     commit('GET_ALL_DECOMPTE', response.data)
@@ -4655,12 +4654,46 @@ export function modifierMotifPassation({commit}, element_modifie){
 
 
 export function supprimerMotifPassation({commit},id){
-  
   this.$app.$dialog
   .confirm("Voulez vouz vraiment supprimer ?.")
   .then(dialog => {
      commit('SUPPRIMER_MOTIF_PASSATION', id)
-    // // dialog.loading(false) // stops the proceed button's loader
       axios.delete('/motif_passation/' + id).then(() => dialog.close() )   
   })
+}
+
+
+
+
+export function modifierActeEffet({commit}, element_modifie){
+  asyncLoading( axios.put('/acte_finnanciers/'+ element_modifie.id, element_modifie))
+   .then(response => {
+    commit('MODIFIER_ACTE', response.data)
+        // dispatch('getMandat')
+         this.$app.$notify({
+           title: 'success ',
+           text: 'Modification effectué avec succès!',
+           type:"success"
+         })
+   }).catch(error => console.log(error))
+  // console.log(element_modifie)
+} 
+/**
+ * Information carte
+ */
+
+export function ajouterListeMarcheFiltreCarteInfrastructure({commit},formData){
+    commit('GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE', formData)
+}
+
+export function ajouterInfoFiltreCarteInfrastructure({commit},formData){
+    commit('GET_INFORMATION_FILTRE_CARTE', formData)
+}
+
+export function supprmieMarcheFiltreCarteInfrastructure({commit},formData){
+    commit('GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE',formData)
+}
+
+export function supprmiInfoFiltreCarteInfrastructure({commit},formData){
+    commit('GET_INFORMATION_FILTRE_CARTE',formData)
 }

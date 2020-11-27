@@ -1,4 +1,5 @@
 import { groupBy } from "../../../../Repositories/Repository";
+
 export const gettersTypeOrdrePaiement = state => state.typeOrdrePaiement
 export const role_membrecojo = state => state.role_membrecojo
 export const gestionModules = state => state.gestionModules
@@ -1091,3 +1092,8 @@ export const getterLoadinMarche=state => state.loading_marche
 
 
 export const getterImageMarche=state => state.image_marche.sort((a, b) => (a.id > b.id) ? 1 : -1)
+
+
+
+export const getterFiltreCarteInfrastructure=state => state.marcheFiltreCarteInfrastructure
+export const getterInformationCarteInfrastructure=state => state.informationFiltreCarteInfrastructure

@@ -3,7 +3,7 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 var housecall = require("housecall");
 var queue = housecall({ concurrency: 2, cooldown: 1000 });
 
-ajouterImmobilisation
+
 //////////////////////////*debut action famille */////////////////////////////
 
 // afficher liste famille
@@ -1476,4 +1476,380 @@ export function supprimerDemandeMateriel({ commit }, id) {
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete("/supprimerDmdMateriel/" + id).then(() => dialog.close());
     });
+}
+
+
+
+
+export function getMarqueVehicule({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/marqueVehicule")
+          .then(response => {
+              commit("GET_ALL_MARQUE_VEHICULE", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterMarqueVehicule({ commit ,dispatch}, nouveau) {
+  asyncLoading(axios
+      .post("/marqueVehicule", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_MARQUE_VEHICULE", response.data);
+              dispatch('getMarqueVehicule')
+              dispatch('getMarqueVehicule')
+              dispatch('getMarqueVehicule')
+              dispatch('getMarqueVehicule')
+              dispatch('getMarqueVehicule')
+              dispatch('getMarqueVehicule')
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierMarqueVehicule({ commit ,dispatch}, nouveau) {
+  asyncLoading(axios
+      .put("/marqueVehicule/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_MARQUE_VEHICULE", response.data);
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerMarqueVehicule({ commit ,dispatch}, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_MARQUE_VEHICULE", id);
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/marqueVehicule/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+
+
+
+export function getModeleVehicule({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/ModeleVehicule")
+          .then(response => {
+              commit("GET_ALL_MODELE_VEHICULE", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterModeleVehicule({ commit ,dispatch}, nouveau) {
+  asyncLoading(axios
+      .post("/ModeleVehicule", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_MODELE_VEHICULE", response.data);
+              dispatch('getModeleVehicule')
+              dispatch('getModeleVehicule')
+              dispatch('getModeleVehicule')
+              dispatch('getMarqueVehicule')
+              dispatch('getMarqueVehicule')
+              dispatch('getMarqueVehicule')
+              dispatch('getMarqueVehicule')
+              dispatch('getModeleVehicule')
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierModeleVehicule({ commit,dispatch }, nouveau) {
+  asyncLoading(axios
+      .put("/ModeleVehicule/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_MODELE_VEHICULE", response.data);
+          dispatch('getModeleVehicule')
+          dispatch('getModeleVehicule')
+          dispatch('getModeleVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getModeleVehicule')
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerModeleVehicule({ commit,dispatch }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_MODELE_VEHICULE", id);
+          dispatch('getModeleVehicule')
+          dispatch('getModeleVehicule')
+          dispatch('getModeleVehicule')
+          dispatch('getModeleVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getMarqueVehicule')
+          dispatch('getModeleVehicule')
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/ModeleVehicule/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+
+
+
+export function getTypeEntretien({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/TypeEntretien")
+          .then(response => {
+              commit("GET_ALL_TYPE_ENTRETIEN", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterTypeEntretien({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/TypeEntretien", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_TYPE_ENTRETIEN", response.data);
+
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierTypeEntretien({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/TypeEntretien/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_TYPE_ENTRETIEN", response.data);
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerTypeEntretien({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_TYPE_ENTRETIEN", id);
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/TypeEntretien/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+
+
+export function getTypeVehicule({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/TypeVehicule")
+          .then(response => {
+              commit("GET_ALL_TYPE_VEHICULE", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterTypeVehicule({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/TypeVehicule", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_TYPE_VEHICULE", response.data);
+
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierTypeVehicule({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/TypeVehicule/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_TYPE_VEHICULE", response.data);
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerTypeVehicule({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_TYPE_VEHICULE", id);
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/TypeVehicule/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+export function getTypeEnergie({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/TypeEnergie")
+          .then(response => {
+              commit("GET_ALL_TYPE_ENERGIE", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterTypeEnergie({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/TypeEnergie", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_TYPE_ENERGIE", response.data);
+
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierTypeEnergie({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/TypeEnergie/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_TYPE_ENERGIE", response.data);
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerTypeEnergie({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_TYPE_ENERGIE", id);
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/TypeEnergie/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+
+
+export function getTypeReparation({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/TypeReparation")
+          .then(response => {
+              commit("GET_ALL_TYPE_REPARATION", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterTypeReparation({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/TypeReparation", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_TYPE_REPARATION", response.data);
+
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierTypeReparation({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/TypeReparation/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_TYPE_REPARATION", response.data);
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerTypeReparation({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_TYPE_REPARATION", id);
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/TypeReparation/" + id).then(() => dialog.close());
+      });
 }
