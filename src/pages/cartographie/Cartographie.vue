@@ -366,7 +366,6 @@ import VGeosearch from 'vue2-leaflet-geosearch';
                              }
 
                              if(1<=taux && taux<31){
-
                                  color="#fffb13"
                                  colorFill="#fffb13"
                              }

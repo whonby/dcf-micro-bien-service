@@ -2563,3 +2563,14 @@ export const GET_ALL_RESERVE_CF = (state, tableau_reserve_cf) =>{
         return response
     })
 }
+
+export const GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE = (state,objet) =>{
+    state.marcheFiltreCarteInfrastructure = objet
+}
+
+
+
+export const GET_INFORMATION_FILTRE_CARTE = (state, objet) =>{
+    state.informationFiltreCarteInfrastructure = objet
+}
+

@@ -122,6 +122,9 @@ export default {
     }
   },
 created(){
+    let objet=localStorage.getItem('Users');
+    let user=JSON.parse (objet)
+    this.getUniteAdminUser(user.id)
           this.getGestionModules()
           this.getInfrastructure()
           this.getTypeOrdrePaiement()

@@ -1092,3 +1092,8 @@ export const getterLoadinMarche=state => state.loading_marche
 
 
 export const getterImageMarche=state => state.image_marche.sort((a, b) => (a.id > b.id) ? 1 : -1)
+
+
+
+export const getterFiltreCarteInfrastructure=state => state.marcheFiltreCarteInfrastructure
+export const getterInformationCarteInfrastructure=state => state.informationFiltreCarteInfrastructure

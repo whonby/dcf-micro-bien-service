@@ -4654,12 +4654,10 @@ export function modifierMotifPassation({commit}, element_modifie){
 
 
 export function supprimerMotifPassation({commit},id){
-  
   this.$app.$dialog
   .confirm("Voulez vouz vraiment supprimer ?.")
   .then(dialog => {
      commit('SUPPRIMER_MOTIF_PASSATION', id)
-    // // dialog.loading(false) // stops the proceed button's loader
       axios.delete('/motif_passation/' + id).then(() => dialog.close() )   
   })
 }
@@ -4680,3 +4678,22 @@ export function modifierActeEffet({commit}, element_modifie){
    }).catch(error => console.log(error))
   // console.log(element_modifie)
 } 
+/**
+ * Information carte
+ */
+
+export function ajouterListeMarcheFiltreCarteInfrastructure({commit},formData){
+    commit('GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE', formData)
+}
+
+export function ajouterInfoFiltreCarteInfrastructure({commit},formData){
+    commit('GET_INFORMATION_FILTRE_CARTE', formData)
+}
+
+export function supprmieMarcheFiltreCarteInfrastructure({commit},formData){
+    commit('GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE',formData)
+}
+
+export function supprmiInfoFiltreCarteInfrastructure({commit},formData){
+    commit('GET_INFORMATION_FILTRE_CARTE',formData)
+}
