@@ -82,7 +82,7 @@
                <div class="control-group">
             <label class="control-label">Personnel</label>
             <div class="controls">
-                              <select  v-model="formData.marque_id" class="span5">
+                              <select   class="span5">
             <option v-for="resultat in affichePersonnel(editAffectation.uniteadministrative)" :key="resultat.id" 
             :value="resultat.id">{{resultat.acteur_depense_id}}</option>
                 </select>
