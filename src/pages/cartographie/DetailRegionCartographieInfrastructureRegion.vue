@@ -19,6 +19,27 @@
                     </ol>
                 </nav>
 
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th ><a href="#">Montant previsionnel</a>  </th>
+                        <th><a href="#">Montant Approuve</a> </th>
+                        <th ><a  href="#">Montant execute</a> </th>
+                        <th ><a href="#">Taux execution</a> </th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>{{formatageSomme(parseFloat(montantPrevisionnel))}}  </td>
+                        <td >{{formatageSomme(parseFloat(montantApprouveMarche))}}  </td>
+                        <td>100</td>
+                        <td>444</td>
+                    </tr>
+                    </tbody>
+                </table>
+
                 <div class="row gutters-sm">
 
                     <div class="row-fluid">
@@ -249,6 +270,34 @@
                 }
             },
 
+            montantPrevisionnel(){
+                if(this.getterFiltreCarteInfrastructure.length>0){
+                    let initeVal = 0;
+                    let montant_prevue=  this.getterFiltreCarteInfrastructure.reduce(function (total, currentValue) {
+                        return total + parseFloat(currentValue.montant_marche) ;
+                    }, initeVal);
+                    return montant_prevue
+                }
+               return 0;
+            },
+
+            montantApprouveMarche(){
+         if(this.getterFiltreCarteInfrastructure.length>0){
+             //acteEffetFinanciers
+             let vm=this;
+             let montantTotal=0;
+             this.getterFiltreCarteInfrastructure.forEach(function (val) {
+                 let objetAct=vm.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==val.id)
+
+                 if(objetAct!=undefined){
+                     console.log(objetAct)
+                     montantTotal=parseFloat(montantTotal)+ parseFloat(objetAct.montant_act)
+                 }
+             })
+             return montantTotal
+          }
+        return 0;
+            }
             /**
              * Integration de filtre pour statu
              */
