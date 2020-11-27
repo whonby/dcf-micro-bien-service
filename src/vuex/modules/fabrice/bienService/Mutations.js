@@ -2557,8 +2557,8 @@ export const GET_ALL_RESERVE_CF = (state, tableau_reserve_cf) =>{
 
 
 
-export const GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE = (state) =>{
-    state.marcheFiltreCarteInfrastructure = ""
+export const GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE = (state,objet) =>{
+    state.marcheFiltreCarteInfrastructure = objet
 }
 
 

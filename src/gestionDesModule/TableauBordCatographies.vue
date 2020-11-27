@@ -780,12 +780,18 @@ console.log(this.getterUniteAdministrativeByUser)
           }
           return this.uniteAdministratives
       },
-      listeMarcheUniteAdmin(){
 
+      listeMarcheUniteAdmin(){
           let colect=[]
           let vM=this;
           this.filtre_unite_admin.forEach(function (value) {
-              let objet=vM.marches.filter(item=>item.unite_administrative_id==value.id)
+              let objet=vM.marches.filter(item=>{
+                      if(item.parent_id!=null && item.unite_administrative_id==value.id){
+                        //  console.log(item.parent_id)
+                          return item
+                      }
+                  }
+              )
               if(objet!=undefined){
                   objet.forEach(function (val) {
                       colect.push(val)

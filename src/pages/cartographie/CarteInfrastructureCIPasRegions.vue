@@ -434,7 +434,11 @@ import {noDCfNoAdmin} from "../../Repositories/Auth"
                 if(this.getterInformationCarteInfrastructure.unite_administrative!=""){
                     this.unite_administrative_id=this.getterInformationCarteInfrastructure.unite_administrative
                 }
-//
+
+                this.getterInformationCarteInfrastructure.infrastructure=''
+                this.getterInformationCarteInfrastructure.region_select_vmodel=""
+                this.getterInformationCarteInfrastructure.type_marche=""
+                this.getterInformationCarteInfrastructure.unite_administrative=""
 //                let objet={
 //                    region:"",
 //                    infrastructure:"",
@@ -442,8 +446,10 @@ import {noDCfNoAdmin} from "../../Repositories/Auth"
 //                    type_marche:"",
 //                    region_select_vmodel:""
 //                }
-
-                this.supprmieMarcheFiltreCarteInfrastructure()
+//                let objet2=""
+//
+//                this.supprmieMarcheFiltreCarteInfrastructure(objet2)
+//                this.supprmiInfoFiltreCarteInfrastructure(objet)
             }
 
 
@@ -462,7 +468,9 @@ import {noDCfNoAdmin} from "../../Repositories/Auth"
         ]),
         ...mapGetters("bienService", ['marches',"typeMarches","engagements",
             "getMandatPersonnaliserVise","getActeEffetFinancierPersonnaliser45",
-            "getterInformationCarteInfrastructure","getterFiltreCarteInfrastructure","supprmieMarcheFiltreCarteInfrastructure"]),
+            "getterInformationCarteInfrastructure","getterFiltreCarteInfrastructure",
+            "supprmieMarcheFiltreCarteInfrastructure","supprmiInfoFiltreCarteInfrastructure"]),
+
         ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
           regions(){
       return this.getterLocalisationGeoAll.filter(item=>item.structure_localisation_geographique.niveau==2);
@@ -488,7 +496,13 @@ import {noDCfNoAdmin} from "../../Repositories/Auth"
              let colect=[]
             let vM=this;
              this.filtre_unite_admin.forEach(function (value) {
-                 let objet=vM.marches.filter(item=>item.unite_administrative_id==value.id)
+                 let objet=vM.marches.filter(item=>{
+                     if(item.parent_id!=null && item.unite_administrative_id==value.id){
+                       //  console.log(item.parent_id)
+                         return item
+                     }
+                 }
+                     )
                    if(objet!=undefined){
                        objet.forEach(function (val) {
                            colect.push(val)

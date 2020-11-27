@@ -74,7 +74,7 @@
                             </table>
                         </div>
                     </div>
-                       <div class="pagination alternate">
+                    <div class="pagination alternate">
                     <ul>
                 <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
                    <li  v-for="(titre, index) in partition(titreFiltres,size).length" :key="index" :class="{ active : active_el == index }">

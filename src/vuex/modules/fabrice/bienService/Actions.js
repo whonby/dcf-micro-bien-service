@@ -4676,6 +4676,10 @@ export function ajouterInfoFiltreCarteInfrastructure({commit},formData){
     commit('GET_INFORMATION_FILTRE_CARTE', formData)
 }
 
-export function supprmieMarcheFiltreCarteInfrastructure({commit}){
-    commit('GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE')
+export function supprmieMarcheFiltreCarteInfrastructure({commit},formData){
+    commit('GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE',formData)
+}
+
+export function supprmiInfoFiltreCarteInfrastructure({commit},formData){
+    commit('GET_INFORMATION_FILTRE_CARTE',formData)
 }
