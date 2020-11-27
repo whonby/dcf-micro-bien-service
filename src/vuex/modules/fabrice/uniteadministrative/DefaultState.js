@@ -18,7 +18,7 @@ const defaultState = {
   decomptefactures: [],
   // banqueUa: [],
   StructureOrganigrammeUa:[],
-  budgetEclate:[]
+  budgetEclate:[],
   // listeDocUniteAdministratives: [],
 
   // nbreUniteAdministratives: [],
@@ -26,6 +26,7 @@ const defaultState = {
   // nbreTypeTextes: [],
 
   // nbreArchivageDocuments: []
+  vehicules:[]
 };
 
 export default defaultState;

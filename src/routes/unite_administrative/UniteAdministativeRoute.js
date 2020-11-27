@@ -35,7 +35,15 @@ import BudgetEclatePrincipal from "../../pages/Hors_sib/grpeBudgetEclate/BudgetE
 
 import ListeBudgeteclate from "../../pages/Hors_sib/grpeBudgetEclate/ListeBudgetEclate.vue"
 import AjouterBudgetEclate from "../../pages/Hors_sib/grpeBudgetEclate/AjouterBudgetEclate.vue"
+
+import ListeVehicules from "../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeVehicule/ListeVehicules.vue"
 const UniteAdministativeRoutes = [
+  {
+    path: "/ListeVehicules",
+    name: "ListeVehicules",
+    component: ListeVehicules
+}
+,
   {
     path: "/AjouterBudgetEclate/:id",
     name: "AjouterBudgetEclate",

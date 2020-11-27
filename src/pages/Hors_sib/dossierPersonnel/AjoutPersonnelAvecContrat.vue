@@ -327,10 +327,10 @@
                                                     <div class="controls">
 
                                                         <select v-model="formData.plan_budgetaire_id" class="span">
-                                                            <option v-for="item in afficheBudgetPersonnel(formData.unite_administrative_id)" :key="item.id" :value="item.economique_id">
-                                                               {{item.afficheEconomique.code}} - {{item.afficheEconomique.libelle}}
+                                                           
+                                                         <option v-for="item in afficheBudgetPersonnel(formData.unite_administrative_id)" :key="item.id" :value="item.ligneeconomique_id">
+                                                               {{ligneEconomiqueBudgetEclate(item.ligneeconomique_id)}}
                                                             </option>
-
                                                         </select>
                                                     </div>
                                                 </div>
@@ -467,7 +467,7 @@
             ...mapGetters('personnelUA', ["dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
-            ...mapGetters("uniteadministrative", ["groupeUaPourMarheHorSib","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel","getPersonnaliseTransfert"]),
+            ...mapGetters("uniteadministrative", ["groupeUaPourMarheHorSib","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel","getPersonnaliseBudgetGeneralParPersonnelHORSSIB","getPersonnaliseTransfert"]),
             ...mapGetters("parametreGenerauxAdministratif", ["groupeService","getterplanOrganisationUa","exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", [
@@ -476,7 +476,7 @@
       
       
     ]),
- ...mapGetters("bienService", ["getActeEffetFinancierPersonnaliserContrat","selectionner_candidats","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+ ...mapGetters("bienService", ["budgetEclate","getActeEffetFinancierPersonnaliserContrat","selectionner_candidats","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -720,12 +720,23 @@ exoEnCours() {
     afficheBudgetPersonnel() {
       return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.ua_id == id && element.status=='actu');
+          return this.budgetEclate.filter(element => element.uniteadministrative_id == id && element.grandenature_id == 2);
         }
       };
     },
     
-        
+        ligneEconomiqueBudgetEclate() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat(' - ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    }, 
 
         afficheGrade() {
       return id => {
