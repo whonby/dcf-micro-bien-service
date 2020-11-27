@@ -98,10 +98,10 @@ afficheNumeroMarche
                       <li>
                         <a data-toggle="tab" href="#tab03">IMAGES DES MARCHES</a>
                       </li>
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
-                      </li> --> 
-                     
+                      <li>
+                        <a data-toggle="tab" href="#tab040">Evolution du marché</a>
+                      </li> 
+                    
                     </ul>
                   </div>
                          <div class="widget-content tab-content">
@@ -258,6 +258,10 @@ afficheNumeroMarche
                       
                          <imageMarche :macheid="detail_marche.id"></imageMarche>
                       </div>
+
+                      <div id="tab040" class="tab-pane ">
+                         <graphiqueExecutionMarche :macheid="detail_marche.id"></graphiqueExecutionMarche>
+                      </div>
       </div>
                 </div>
               </table>
@@ -307,6 +311,7 @@ afficheNumeroMarche
    import avenant from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
    import facture from "../dossierFacture/factureHs";
    import decompte from "../dossierDecompte/decomptePro";
+   import graphiqueExecutionMarche from "../../../../bien_service/contractualisation/DossierExecution/DossierGraphiqueExecutionMarche/graphiqueExecutionMarche";
 // import avenant from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
 // import facture from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierFacture/facture";
 // import decompte from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte";
@@ -340,6 +345,7 @@ afficheNumeroMarche
             avenant,
             facture,
             decompte,
+            graphiqueExecutionMarche,
           //   listeOpAnnulation,
           //   listeOpProvisoireCf,
           //   listeOpProvisoireBs,
