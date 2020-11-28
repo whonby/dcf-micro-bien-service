@@ -6,11 +6,9 @@
 
 
 
-        <div class="container-fluid" style="height: 150em">
+        <div class="container-fluid" style="height: 200em">
 
             <div class="">
-
-                <!-- Breadcrumb -->
 
                 <h3 v-if="info_unite_admin">Situation {{info_unite_admin.libelle}} , Nombre de marchés <font color="red">({{getterFiltreCarteInfrastructure.length}})</font></h3>
                 <h3 v-if="!info_unite_admin">Situation génerale ,Nombre de marchés <font color="red">({{getterFiltreCarteInfrastructure.length}})</font></h3>
@@ -306,8 +304,8 @@
                                         <td> {{nomTypeMarche(item.type_marche_id)}}</td>
                                         <td>{{formatageSomme(parseFloat(item.montant_marche))}}</td>
                                         <td>{{formatageSomme(parseFloat(montantApprouve(item.id)))}}</td>
-                                        <td>Montant Execute</td>
-                                        <td>Taux</td>
+                                        <td>{{formatageSomme(montantExecutParMarche(item.id))}}</td>
+                                        <td>{{tauxExecutionMarche(item.id)}} %</td>
                                         <td v-if="item.attribue==0" style="background: #ff0000;color: #fff">Planification</td>
                                         <td v-if="item.attribue==1" style="background: #04874e;color: #fff">Contratualisation</td>
                                         <td v-if="item.attribue==2" style="background: #e8d20c;color: #fff">Execution</td>
@@ -597,7 +595,7 @@
             classementMontantBaseInfrastructure(){
                 return id=>{
                     let vm=this;
-                    console.log(id)
+                 //   console.log(id)
                    let arrayMontant=[]
                     this.getterInfrastrucure.forEach(function (val) {
                         arrayMontant.push(vm.montantBaseInfrastructure(val.id))
@@ -721,12 +719,12 @@
                         arrayMontant.push(vm.montantBaseTypeMarche(val.id))
                     })
                     arrayMontant.sort(vm.sortDesc)
-                    console.log(arrayMontant)
+                   // console.log(arrayMontant)
                     if(arrayMontant[0] == 0){
                         return false
                     }
                     if(arrayMontant[0] ==vm.montantBaseTypeMarche(id)){
-                        console.log(true)
+                      //  console.log(true)
                         return true
                     }else{
                         return false
@@ -835,6 +833,35 @@
             /**
              * Integration de filtre pour statu
              */
+
+            montantExecutParMarche(){
+                return id=>{
+                    let vm=this;
+                    let initeVal = 0;
+                    let montant=vm.decomptefactures.filter(item=>item.marche_id==id).reduce(function (total, currentValue) {
+                        return total + parseFloat(currentValue.montantmarche) ;
+                    }, initeVal);
+                    if(montant!=undefined){
+                        return montant
+                    }
+                    console.log("....decompte")
+                    console.log(montant)
+                        return 0
+                }
+
+            },
+            tauxExecutionMarche(){
+              return id=>{
+               //   let reste=this.montantApprouve(id) - this.montantExecutParMarche(id)
+
+
+                  if(this.montantApprouve(id)>0){
+                      let taux=  (this.montantExecutParMarche(id) * 100)/this.montantApprouve(id)
+                      return taux.toFixed(2)
+                  }
+                 return 0
+              }
+            },
 //            filtreStatusMarche(){
 //                return id=>{
 //                    if(id!=""){
