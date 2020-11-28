@@ -473,7 +473,11 @@ import {noDCfNoAdmin} from "../../Repositories/Auth"
 
         ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
           regions(){
-      return this.getterLocalisationGeoAll.filter(item=>item.structure_localisation_geographique.niveau==2);
+              return this.localisations_geographiques.filter(item=>{
+                  if(item.longitude!=null && item.structure_localisation_geographique.niveau==2 ){
+                      return item
+                  }
+              });
       },
         noDCfNoAdmin:noDCfNoAdmin,
         filtre_unite_admin() {
