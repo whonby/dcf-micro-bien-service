@@ -3,6 +3,7 @@
     <div class="container-fluid" style="height: 200em">
 
         <div class="" style="margin-top: -30px">
+
             <div id="footer" class="" v-if="affiche_filtre">
                 <div class="span2">
 
@@ -91,6 +92,18 @@
 
                 </div>
             </div>
+            <!--<DraggableDiv class="col-11">-->
+                <!--&lt;!&ndash;<template slot="header">&ndash;&gt;-->
+                   <!--&lt;!&ndash;<div>GUEIEI ROLAND</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</template>&ndash;&gt;-->
+                <!--<template slot="main" >-->
+                   <!---->
+                <!--</template>-->
+                <!--&lt;!&ndash;<template slot="footer">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div>GUEIEI 5555555</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</template>&ndash;&gt;-->
+            <!--</DraggableDiv>-->
+
 <div  class="row-fluid">
     <div class="span7"><h4>Tableau de bord gestion marche, Exercice {{anneeAmort}}</h4></div>
     <div class="span4" align="right"><h4>Nombre de marché (<font color="blue" size="5">{{nombreTotalMarche}}</font>)</h4></div>
@@ -188,34 +201,34 @@
             <div class="">
                 <div class="row-fluid" style="margin-top: -20px">
                     <div class="span3">
-                        <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 60px !important;">
+                        <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 60px !important; cursor: grab !important; ">
                             <div class="inner">
-                                <h3> {{nombreMarcheParStatue(8)}} </h3>
+                                <h3> {{nombreMarcheParStatue("planifie")}} </h3>
                                 <p> En attente de contratualisation hors alert </p>
                             </div>
 
-                            <div class="icon2">
-                                {{pourcentageMarchePasStatus(8)}}%
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="span3">
-                        <div class="card-box bg-attente-contratualisation-avec-alert" style="height: 60px !important;">
-                            <div class="inner">
-                                <h3>  {{nombreMarcheParStatue("planifie")}}  </h3>
-                                <p> En attente de contratualisation avec alert
-                                </p>
-                            </div>
                             <div class="icon2">
                                 {{pourcentageMarchePasStatus("planifie")}}%
                             </div>
 
                         </div>
                     </div>
+
+                    <div class="span3">
+                        <div class="card-box bg-attente-contratualisation-avec-alert" style="height: 60px !important; cursor: grab !important;">
+                            <div class="inner">
+                                <h3>  {{nombreMarcheParStatue(8)}}  </h3>
+                                <p> En attente de contratualisation avec alert
+                                </p>
+                            </div>
+                            <div class="icon2">
+                                {{pourcentageMarchePasStatus(8)}}%
+                            </div>
+
+                        </div>
+                    </div>
                     <div class="span2">
-                        <div class="card-box bg-en-contratualisation" style="height: 60px !important;">
+                        <div class="card-box bg-en-contratualisation" style="height: 60px !important; cursor: grab !important;">
                             <div class="inner">
                                 <h3> {{nombreMarcheParStatue(1)}} </h3>
                                 <p> En contratualisation  </p>
@@ -228,7 +241,7 @@
                         </div>
                     </div>
                     <div class="span2">
-                        <div class="card-box bg-en-execution" style="height: 60px !important;">
+                        <div class="card-box bg-en-execution" style="height: 60px !important; cursor: grab !important;">
                             <div class="inner">
                                 <h3> {{nombreMarcheParStatue(2)}} </h3>
                                 <p> En execution
@@ -241,7 +254,7 @@
                         </div>
                     </div>
                     <div class="span2">
-                        <div class="card-box bg-en-souffrance" style="height: 60px !important;">
+                        <div class="card-box bg-en-souffrance" style="height: 60px !important; cursor: grab !important;">
                             <div class="inner">
                                 <h3> {{parseFloat(nombreMarcheParStatue(7)) + parseFloat(nombreMarcheParStatue(3))}} </h3>
                                 <p> En souffrance </p>
@@ -257,10 +270,10 @@
 
                 <div class="row-fluid">
                     <div class="span4" style="border: 1px dotted #EEEEEE;">
-                        <apexchart type="pie" width="280" :options="chartOptions" :series="series"></apexchart>
+                        <apexchart type="pie" width="350" :options="chartOptions" :series="dataPourcentage"></apexchart>
                     </div>
                     <div class="span8" >
-                        <table class="table my_table table-bordered table-striped" >
+                        <table class="table   table-bordered table-striped" >
                             <thead>
                             <tr>
                                 <th>Unite Administrative </th>
@@ -272,8 +285,8 @@
                                 <th>Action</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
+                            <tbody >
+                            <tr >
                                 <td>Column 1</td>
                                 <td>Column 2</td>
                                 <td>Column 3</td>
@@ -310,6 +323,8 @@
          @cache="filter"
 
     ></fab>
+
+    {{dataArrayPourcentage}}
 </div>
 </template>
 
@@ -320,12 +335,13 @@
     import {formatageSomme} from '../../Repositories/Repository'
     import {  ModelListSelect } from 'vue-search-select'
     import 'vue-search-select/dist/VueSearchSelect.css'
+   // import DraggableDiv from '../../components/DraggableDiv/DraggableDiv'
     export default {
         name: "TableauBordGestionMarche",
         components: {
             apexchart: VueApexCharts,
             ModelListSelect,
-
+          //  DraggableDiv
         },
         data() {
            return{
@@ -344,13 +360,14 @@
                        icon: 'cached'
                    }
                ],
-               series: [44, 55, 13, 43, 22],
+               dataPourcentage: [],
                chartOptions: {
                    chart: {
                        width: 380,
                        type: 'pie',
                    },
-                   labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+                   labels: ['A.C.H.A', 'A.C.A.A', 'En Cont.', 'En Execution', 'En Souffrance.'],
+                   colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"],
                    responsive: [{
                        breakpoint: 480,
                        options: {
@@ -785,6 +802,20 @@
                 return 0
 
             },
+            dataArrayPourcentage(){
+let vm=this
+                //console.log(parseFloat(this.pourcentageMarchePasStatus("planifie")))
+
+                if(vm.dataPourcentage.length>0){
+                  vm.dataPourcentage=[]
+                }
+                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus("planifie")))
+                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(8)))
+                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(1)))
+                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(2)))
+                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(7)))
+                return ""
+            },
 
             nombreTotalMarche(){
                 return this.objetMarchePasUniteOuRegion.length
@@ -1040,20 +1071,20 @@
 
     .bg-attente-contratualisation-hors-alert {
 
-        background-color: rgba(29, 41, 57, 0.97) !important;
+        background-color: #410041 !important;
     }
     .bg-attente-contratualisation-avec-alert {
-        background-color: #800080 !important;
+        background-color: #e81776 !important;
     }
     .bg-en-contratualisation {
         background-color: #FF00FF !important;
     }
 
     .bg-en-execution {
-        background-color: #ffb506 !important;
+        background-color: #008000 !important;
     }
     .bg-en-souffrance {
-        background-color: #b5160e !important;
+        background-color: darkred !important;
     }
 
 
@@ -1140,31 +1171,12 @@
     }
 
 
-    table {
-        border-collapse: collapse;
-    }
-    th {
-        background: #3498db;
-        color: white;
-    }
 
-    th, td {
-
-    }
-
-    tr:nth-child(even) {
-        background: #1d2939
-    }
-
-    tr:hover {
-        background: #d1d1d1;
-    }
 
 
     #footer {
         position:relative;
-
-        height:30px;
+        height:20px;
         width:100%;
         background:transparent;
 
@@ -1196,5 +1208,8 @@
     .card-5 {
         box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     }
+
+
+
 
 </style>
