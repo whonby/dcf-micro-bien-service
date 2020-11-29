@@ -6,11 +6,9 @@
 
 
 
-        <div class="container-fluid" style="height: 150em">
+        <div class="container-fluid" style="height: 200em">
 
-            <div class="main-body">
-
-                <!-- Breadcrumb -->
+            <div class="">
 
                 <h3 v-if="info_unite_admin">Situation {{info_unite_admin.libelle}} , Nombre de marchés <font color="red">({{getterFiltreCarteInfrastructure.length}})</font></h3>
                 <h3 v-if="!info_unite_admin">Situation génerale ,Nombre de marchés <font color="red">({{getterFiltreCarteInfrastructure.length}})</font></h3>
@@ -24,6 +22,7 @@
 
                     </ol>
                 </nav>
+                <a @click.prevent="afficheTous()" href="">Afficher tous</a>
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -67,7 +66,7 @@
                             <div class="card-box bg-base">
                                 <div class="inner">
                                     <h3> {{formatageSomme(parseFloat(montantApprouveMarche))}} </h3>
-                                    <p>Montant de base </p>
+                                    <p>Montant de base + avenant </p>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-money" aria-hidden="true"></i>
@@ -183,20 +182,92 @@
                         <!--</table>-->
 
                     <!--</div>-->
+                    <div class="row-fluid">
+                        <div class="span11"> <h5>Infrastucture</h5></div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span3" v-for="item in getterInfrastrucure" :key="item.id" style="border: 1px dotted #e1e1e8" :class="{ red : classementMontantBaseInfrastructure(item.id) }">
+                            <h6>{{item.libelle}} (<font color="red">{{nombreMarchePasInfrastructure(item.id)}}</font>)</h6>
+                            <table class="table" :class="{ red : classementMontantBaseInfrastructure(item.id) == item.id }">
+                           <tbody>
+                           <tr>
+                               <td>Montant previsionnel</td>
+                               <td>
+                                   {{formatageSomme(montantPrevisionnelInfrastructure(item.id))}}
 
-                    <div class="span11">
-                        <h6>Type service</h6>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td>Montant Base</td>
+                               <td> {{formatageSomme(montantBaseInfrastructure(item.id))}}</td>
+                           </tr>
+                           <tr>
+                               <td>Montant Execute</td>
+                               <td>{{formatageSomme(montantExecutePasInfrastructure(item.id))}}</td>
+                           </tr>
+                           <tr>
+                               <td>Montant Restant</td>
+                               <td>{{formatageSomme(montantRestantInfrastructure(item.id))}}</td>
+                           </tr>
+                           <tr>
+                               <td>Taux</td>
+                               <td>{{tauxExecutionInfrastructure(item.id)}} %</td>
+                           </tr>
+                           </tbody>
+                            </table>
 
 
+                        </div>
 
                     </div>
 
+                    <hr>
+                    <div class="row-fluid">
+                        <div class="span12"><h5>Type de marché</h5></div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span3" v-for="item in typeMarches" :key="item.id" style="border: 1px dotted #e1e1e8" :class="{ red_type_marche : classementMontantTypeMarche(item.id) }">
+                            <h6>{{item.libelle}} (<font color="red">{{nombreMarchePasTypeMarche(item.id)}}</font>)</h6>
+
+                            <table class="table" :class="{ red_type_marche : classementMontantTypeMarche(item.id) == item.id }">
+                                <tbody>
+                                <tr>
+                                    <td>Montant previsionnel</td>
+                                    <td>
+                                        {{formatageSomme(montantPrevisionnelTypeMarche(item.id))}}
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Montant Base</td>
+                                    <td> {{formatageSomme(montantBaseTypeMarche(item.id))}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Montant Execute</td>
+                                    <td>{{formatageSomme(montantExecutePasTypeMarche(item.id))}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Montant Restant</td>
+                                    <td>{{formatageSomme(montantRestantTypeMarche(item.id))}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Taux</td>
+                                    <td>{{tauxExecutionTypeMarche(item.id)}} %</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <hr>
                     <div class="row-fluid">
 
-                        <div class="span11">
+                        <div class="span12">
 
                             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                <h5>Liste des marchés (<b v-if="getterFiltreCarteInfrastructure"> {{getterFiltreCarteInfrastructure.length}}</b>) <a @click.prevent="afficheTous()" href="">Afficher tous</a> </h5>
+                                <h5>Liste des marchés (<b v-if="getterFiltreCarteInfrastructure"> {{getterFiltreCarteInfrastructure.length}}</b>) </h5>
                                 <!--<div align="right">-->
                                 <!--Recherche: <input type="text" v-model="search">-->
                                 <!--</div>-->
@@ -233,8 +304,8 @@
                                         <td> {{nomTypeMarche(item.type_marche_id)}}</td>
                                         <td>{{formatageSomme(parseFloat(item.montant_marche))}}</td>
                                         <td>{{formatageSomme(parseFloat(montantApprouve(item.id)))}}</td>
-                                        <td>Montant Execute</td>
-                                        <td>Taux</td>
+                                        <td>{{formatageSomme(montantExecutParMarche(item.id))}}</td>
+                                        <td>{{tauxExecutionMarche(item.id)}} %</td>
                                         <td v-if="item.attribue==0" style="background: #ff0000;color: #fff">Planification</td>
                                         <td v-if="item.attribue==1" style="background: #04874e;color: #fff">Contratualisation</td>
                                         <td v-if="item.attribue==2" style="background: #e8d20c;color: #fff">Execution</td>
@@ -277,7 +348,7 @@
 
         },
         data(){
-
+         //   const sortDesc =
             return{
                 status:"",
               info_region:"",
@@ -286,9 +357,9 @@
               info_unite_admin:'',
                 page:0,
                 size:10,
-                active_el:0,
-
-
+                active_el:false,
+                tableau_montant:[],
+                sortDesc:(a, b) => b - a,
                 series: [],
 
                 chartOptions: {
@@ -361,9 +432,6 @@
 
             ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises',"comptes","banques"]),
 
-
-
-
             ...mapGetters("uniteadministrative", [
                 "jointureUaChapitreSection",
                 "uniteAdministratives",
@@ -380,8 +448,18 @@
             ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
                 'plans_Decision']),
 
-            //return name type Infra
-
+            //return  Infrastructure
+             nombreMarchePasInfrastructure(){
+                return id=>{
+                    return this.getListeMarcheParRegion.filter(item=>item.infrastructure_id==id).length
+                }
+             },
+            //return TypeMarche
+            nombreMarchePasTypeMarche(){
+                return id=>{
+                    return this.getListeMarcheParRegion.filter(item=>item.type_marche_id==id).length
+                }
+            },
             getListeMarcheParRegion(){
                 if(this.status!=""){
                     if(this.status=="p"){
@@ -421,6 +499,244 @@
                     return 0
                 }
             },
+
+            /**
+             * Cacule des montants en fonction des infrastructure
+             * **/
+            //Calcule de montant prevusionnel
+            montantPrevisionnelInfrastructure(){
+                return id=>{
+                    let objet=this.getListeMarcheParRegion.filter(item=>item.infrastructure_id==id)
+                    if(objet!=undefined){
+                        let initeVal = 0;
+                        let montant_prevue = objet.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montant_marche) ;
+                        }, initeVal);
+                        return montant_prevue
+                    }
+                    return 0;
+                }
+            },
+            //Calcule de montant de base
+            montantBaseInfrastructure(){
+                return id=>{
+                    if(this.getListeMarcheParRegion.length>0){
+                        //acteEffetFinanciers
+                        let vm=this;
+                        let montantTotal=0;
+                        this.getListeMarcheParRegion.filter(item=>item.infrastructure_id==id).forEach(function (val) {
+                            let objetAct=vm.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==val.id)
+                            let montant_avenant=0;
+                            let objetAvenant=vm.avenants.filter(item=>item.marche_id==val.id)
+                            if(objetAvenant!=undefined){
+                                let initeVal = 0;
+                                montant_avenant=objetAvenant.reduce(function (total, currentValue) {
+                                    return total + parseFloat(currentValue.montant_avenant) ;
+                                }, initeVal);
+                            }
+                            if(objetAct!=undefined){
+                                //  console.log(objetAct)
+                                montantTotal=parseFloat(montantTotal)+ parseFloat(objetAct.montant_act)+parseFloat(montant_avenant)
+                            }
+                        })
+                        return montantTotal
+                    }
+                    return 0;
+
+                }
+            },
+            //Calculte de montant Excute
+
+            montantExecutePasInfrastructure(){
+                 return id=>{
+                     if(this.getterFiltreCarteInfrastructure.length>0){
+                         let montant_execute=0;
+                         let vm=this;
+
+                         this.getterFiltreCarteInfrastructure.filter(item=>item.infrastructure_id==id).forEach(function (val) {
+                             let initeVal = 0;
+                             let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                                 return total + parseFloat(currentValue.montantmarche) ;
+                             }, initeVal);
+                             montant_execute=parseFloat(montant_execute) + parseFloat(montant)
+                         })
+
+
+
+                         return montant_execute
+                     }
+                     return 0;
+                 }
+            },
+
+            //Reste montant Infrastructure
+
+            montantRestantInfrastructure(){
+              return id=>{
+                  return this.montantBaseInfrastructure(id) - this.montantExecutePasInfrastructure(id)
+              }
+            },
+
+            //Calcule Taux Infrastrucre
+
+            tauxExecutionInfrastructure(){
+              return id=>{
+                  if(this.montantExecutePasInfrastructure(id)){
+                      let taux=(this.montantExecutePasInfrastructure(id) * 100)/ this.montantBaseInfrastructure(id)
+                      if(taux==Infinity){
+                          return 0
+                      }
+                      return taux.toFixed(2)
+                  }
+                  return 0
+              }
+            },
+
+            classementMontantBaseInfrastructure(){
+                return id=>{
+                    let vm=this;
+                 //   console.log(id)
+                   let arrayMontant=[]
+                    this.getterInfrastrucure.forEach(function (val) {
+                        arrayMontant.push(vm.montantBaseInfrastructure(val.id))
+                    })
+                    arrayMontant.sort(vm.sortDesc)
+                    if(arrayMontant[0] == 0){
+                        return false
+                    }
+                    if(arrayMontant[0] ==vm.montantBaseInfrastructure(id)){
+                        return true
+                    }else{
+                        return false
+                    }
+
+
+                }
+            },
+            /**
+             * Fin des calcules selon infra*
+             * */
+
+
+            /**
+             * Cacule des montants en fonction type
+             * **/
+            //Calcule de montant prevusionnel
+            montantPrevisionnelTypeMarche(){
+                return id=>{
+                    let objet=this.getListeMarcheParRegion.filter(item=>item.type_marche_id==id)
+                    if(objet!=undefined){
+                        let initeVal = 0;
+                        let montant_prevue = objet.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montant_marche) ;
+                        }, initeVal);
+                        return montant_prevue
+                    }
+                    return 0;
+                }
+            },
+            //Calcule de montant de base
+            montantBaseTypeMarche(){
+                return id=>{
+                    if(this.getListeMarcheParRegion.length>0){
+                        //acteEffetFinanciers
+                        let vm=this;
+                        let montantTotal=0;
+                        this.getListeMarcheParRegion.filter(item=>item.type_marche_id==id).forEach(function (val) {
+                            let objetAct=vm.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==val.id)
+                            let montant_avenant=0;
+                            let objetAvenant=vm.avenants.filter(item=>item.marche_id==val.id)
+                            if(objetAvenant!=undefined){
+                                let initeVal = 0;
+                                montant_avenant=objetAvenant.reduce(function (total, currentValue) {
+                                    return total + parseFloat(currentValue.montant_avenant) ;
+                                }, initeVal);
+                            }
+                            if(objetAct!=undefined){
+                                //  console.log(objetAct)
+                                montantTotal=parseFloat(montantTotal)+ parseFloat(objetAct.montant_act)+parseFloat(montant_avenant)
+                            }
+                        })
+                        return montantTotal
+                    }
+                    return 0;
+
+                }
+            },
+            //Calculte de montant Excute
+
+            montantExecutePasTypeMarche(){
+                return id=>{
+                    if(this.getterFiltreCarteInfrastructure.length>0){
+                        let montant_execute=0;
+                        let vm=this;
+
+                        this.getterFiltreCarteInfrastructure.filter(item=>item.type_marche_id==id).forEach(function (val) {
+                            let initeVal = 0;
+                            let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                                return total + parseFloat(currentValue.montantmarche) ;
+                            }, initeVal);
+                            montant_execute=parseFloat(montant_execute) + parseFloat(montant)
+                        })
+
+
+
+                        return montant_execute
+                    }
+                    return 0;
+                }
+            },
+
+            //Reste montant Infrastructure
+
+            montantRestantTypeMarche(){
+                return id=>{
+                    return this.montantBaseTypeMarche(id) - this.montantExecutePasTypeMarche(id)
+                }
+            },
+
+            //Calcule Taux Infrastrucre
+
+            tauxExecutionTypeMarche(){
+                return id=>{
+                    if(this.montantExecutePasTypeMarche(id)){
+                        let taux=(this.montantExecutePasTypeMarche(id) * 100)/ this.montantBaseTypeMarche(id)
+                        if(taux==Infinity){
+                            return 0
+                        }
+                        return taux.toFixed(2)
+                    }
+                    return 0
+                }
+            },
+
+            classementMontantTypeMarche(){
+                return id=>{
+                    let vm=this;
+                   // console.log(id)
+                    let arrayMontant=[]
+                    this.typeMarches.forEach(function (val) {
+                        arrayMontant.push(vm.montantBaseTypeMarche(val.id))
+                    })
+                    arrayMontant.sort(vm.sortDesc)
+                   // console.log(arrayMontant)
+                    if(arrayMontant[0] == 0){
+                        return false
+                    }
+                    if(arrayMontant[0] ==vm.montantBaseTypeMarche(id)){
+                      //  console.log(true)
+                        return true
+                    }else{
+                        return false
+                    }
+
+
+                }
+            },
+            /**
+             * Fin des calcules selon type marche*
+             * */
+
             nombreMarcheFonctionStatu(){
                 return status=>{
                     if(this.getterFiltreCarteInfrastructure){
@@ -517,6 +833,35 @@
             /**
              * Integration de filtre pour statu
              */
+
+            montantExecutParMarche(){
+                return id=>{
+                    let vm=this;
+                    let initeVal = 0;
+                    let montant=vm.decomptefactures.filter(item=>item.marche_id==id).reduce(function (total, currentValue) {
+                        return total + parseFloat(currentValue.montantmarche) ;
+                    }, initeVal);
+                    if(montant!=undefined){
+                        return montant
+                    }
+                    console.log("....decompte")
+                    console.log(montant)
+                        return 0
+                }
+
+            },
+            tauxExecutionMarche(){
+              return id=>{
+               //   let reste=this.montantApprouve(id) - this.montantExecutParMarche(id)
+
+
+                  if(this.montantApprouve(id)>0){
+                      let taux=  (this.montantExecutParMarche(id) * 100)/this.montantApprouve(id)
+                      return taux.toFixed(2)
+                  }
+                 return 0
+              }
+            },
 //            filtreStatusMarche(){
 //                return id=>{
 //                    if(id!=""){
@@ -815,6 +1160,14 @@
     .bg-restant {
         background-color: #154282 !important;
     }
+    .red {
+        color: #fff !important;
+        background-color: #892e6a !important;
+    }
 
+    .red_type_marche {
+        color: #fff !important;
+        background-color: #892e6a !important;
+    }
 
 </style>
