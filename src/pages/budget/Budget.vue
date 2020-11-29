@@ -259,7 +259,6 @@
                 "getterBudgeCharge"
             ]),
             ...mapGetters("parametreGenerauxAdministratif", [
-
                 "sections",
                 "type_Unite_admins",
                 "plans_programmes",

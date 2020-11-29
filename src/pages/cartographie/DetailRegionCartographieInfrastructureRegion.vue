@@ -8,7 +8,7 @@
 
         <div class="container-fluid" style="height: 200em">
 
-            <div class="">
+            <div class="" style="margin-top: -20px">
 
                 <h3 v-if="info_unite_admin">Situation {{info_unite_admin.libelle}} , Nombre de marchés <font color="red">({{getterFiltreCarteInfrastructure.length}})</font></h3>
                 <h3 v-if="!info_unite_admin">Situation génerale ,Nombre de marchés <font color="red">({{getterFiltreCarteInfrastructure.length}})</font></h3>
@@ -1099,11 +1099,7 @@
         text-decoration: none;
         color: #f1f1f1;
     }
-    .card-box:hover .icon i {
-        font-size: 100px;
-        transition: 1s;
-        -webkit-transition: 1s;
-    }
+
     .card-box .inner {
         padding: 5px 10px 0 10px;
     }
@@ -1116,7 +1112,7 @@
         text-align: left;
     }
     .card-box p {
-        font-size: 16px;
+        font-size: 14px;
     }
     .card-box .icon {
         position: absolute;

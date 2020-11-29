@@ -90,10 +90,14 @@ import listeDesMarcheTermineBS from '../../pages/bien_service/listeDesMarcheTabl
 import imageMarche from "../../pages/bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche.vue"
 import DetailImageMarche from "../../pages/ImageMarche/DetailImageMarche"
 import ListeImageMarche from "../../pages/ImageMarche/ListeImageMarche"
-
+import TableauBordGestionMarche from "../../pages/TableauBord/TableauBordGestionMarche.vue"
 
 const BienServiceRoutes = [
-
+    {
+        path:"/table_bord_gestion_marche_hors_sib",
+        name:"TableauBordGestionMarche",
+        component:TableauBordGestionMarche
+    },
     {
         path:"/detail_image_marche/:id",
         name:"DetailImageMarche",
