@@ -51,10 +51,16 @@
         <li  @click.prevent="navigateToGestionParc" >
           <a href="#">
             <i class="icon-group"></i>
-            <span> GESTION DU PARC</span>
+            <span> SAISIE & AFFECTATION</span>
           </a>
         </li>
-         <li  @click.prevent="navigateToSuiviMarcheProjet" >
+        <li  @click.prevent="navigateToReparation" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span> REPARATION</span>
+          </a>
+        </li>
+         <!-- <li  @click.prevent="navigateToSuiviMarcheProjet" >
           <a href="#">
             <i class="icon-group"></i>
             <span>EXPLOITATION</span>
@@ -65,7 +71,7 @@
             <i class="icon-group"></i>
             <span>ALERTE</span>
           </a>
-        </li>
+        </li> -->
          
         <li >
            <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
@@ -162,14 +168,19 @@ return objJson.id
 navigateToGestionParc(){
         this.activate(43)
         this.$router.push({
-          name: 'TableauBordImmo2'
+          name: 'TableauBordGestionVehicule'
         })
       },
-
+navigateToReparation(){
+        this.activate(49)
+        this.$router.push({
+          name: 'TableauBordGestionVehicule'
+        })
+      },
       navigateToParametreVehicule(){
         this.activate(42)
         this.$router.push({
-          name: 'TableauBordImmo2'
+          name: 'TableauBordGestionVehicule'
         })
       },
 

@@ -124,7 +124,7 @@ afficheNumeroMarche
                               <li class="active"><a data-toggle="tab" href="#tab2078">Avenant</a></li>
                                <li ><a data-toggle="tab" href="#tab100">Facture</a></li>
                                 <li ><a data-toggle="tab" href="#tab45785" >Décompte</a></li>
-                              <li ><a data-toggle="tab" href="#Financement" >Financement</a></li>
+                              <!-- <li ><a data-toggle="tab" href="#Financement" >Financement</a></li> -->
                               <!-- <template v-if="typeOrdrePaiementHs(detail_marche.id) == 1">
                                 
                                 <li ><a data-toggle="tab" href="#tab15550" >Réalité service fait</a></li>
@@ -148,7 +148,7 @@ afficheNumeroMarche
                        
                           
                              <div class="widget-content tab-content">
-                            <div id="Financement" class="tab-pane "><financement :macheid="detail_marche.id"></financement></div> 
+                            <!-- <div id="Financement" class="tab-pane "><financement :macheid="detail_marche.id"></financement></div>  -->
 <div id="tab2078" class="tab-pane active "><avenant :macheid="detail_marche.id"></avenant></div>             
 <div id="tab100" class="tab-pane  "><facture :macheid="detail_marche.id"></facture></div> 
 <div id="tab45785" class="tab-pane  "><decompte :macheid="detail_marche.id"></decompte></div>
@@ -324,7 +324,7 @@ afficheNumeroMarche
 // import realiteServiceFaitServiceOpProvisoireBS from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireBS";
 // import realiteServiceFaitServiceOpProvisoireCf from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireCf";
        //bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche
-                  import financement from "../dossierFinancement/financementHs";
+                  // import financement from "../dossierFinancement/financementHs";
                   import imageMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche";
                 import tableauBordExecution from "../tableauBordExecution/tableauBordExecution";
   import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
@@ -353,7 +353,7 @@ afficheNumeroMarche
             
             // liquidationCf,
             // liquidationOrdonnateur,
-            financement,
+           // financement,
             // listeOpDefinitiveBsDirect,
             // listeOpDefinitiveCfDirect,
             tableauBordExecution,

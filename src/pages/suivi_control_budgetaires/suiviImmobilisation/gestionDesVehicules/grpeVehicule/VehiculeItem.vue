@@ -14,7 +14,7 @@
                     <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.numchassis || 'Non renseigné'}}</td>
                     <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.numserie || 'Non renseigné'}}</td>
                     <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.couleur || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.transmission || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{libelleTransmission(article.transmission) || 'Non renseigné'}}</td>
                     <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.nombreportes || 'Non renseigné'}}</td>
                     <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.nombreplace || 'Non renseigné'}}</td>
                     <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.puissance || 'Non renseigné'}}</td>
@@ -26,6 +26,15 @@
                           <i class="icon icon-trash"></i>
                         </span>
                       </button>
+                    </td>
+                     <td>
+                        <button  @click.prevent="detailVehicule1(article.id)" class="btn  btn-default" >
+              
+                        <span>
+                          <i class="icon-folder-open"></i>
+                        </span>
+                </button>
+             
                     </td>
                   </tr>
 
@@ -57,7 +66,7 @@ export default {
   
   },
    computed: {
-     ...mapGetters("SuiviImmobilisation", ["EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),  
+     ...mapGetters("SuiviImmobilisation", ["Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),  
        
   ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
@@ -65,6 +74,18 @@ export default {
       "budgetEclate",
   
     ]),
+    libelleTransmission() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.Transmissions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
      libelleEtatImmobilisations() {
       return id => {
         if (id != null && id != "") {
@@ -140,10 +161,10 @@ export default {
   },
   methods: {
 
-    afficherModalModifierTitre(id) {
+    detailVehicule1(id) {
 
       this.$router.push({
-        path: "/ModifierFicheVehicule/" + id
+        path: "/DetailVehicule/" + id
       });
     },
     toggle: function () {

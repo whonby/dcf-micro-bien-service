@@ -602,6 +602,41 @@ export const MODIFIER_VEHICULE = (state, objetModifie) => {
 export const SUPPRIMER_VEHICULE = (state, id) => {
   state.vehicules = state.vehicules.filter(famille => famille.id != id);
 };
+
+
+
+
+
+
+
+
+
+export const GET_ALL_REPARATION_VEHICULE = (state, tableauFamille) => {
+  state.ReparationVehicules = tableauFamille;
+};
+
+// ajouter FAMILLE
+export const AJOUTER_REPARATION_VEHICULE = (state, nouveau_famille) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.ReparationVehicules.unshift(nouveau_famille);
+};
+
+// modifier FAMILLE
+export const MODIFIER_REPARATION_VEHICULE = (state, objetModifie) => {
+  state.ReparationVehicules = state.ReparationVehicules.map(famille => {
+    if (famille.id == objetModifie.id) {
+      famille = { ...objetModifie };
+    }
+
+    return famille;
+  });
+};
+
+
+// supprimer FAMILLE
+export const SUPPRIMER_REPARATION_VEHICULE = (state, id) => {
+  state.ReparationVehicules = state.ReparationVehicules.filter(famille => famille.id != id);
+};
 // export const GET_ALL_BANQUE_UA = (state, tableauBanqueUa) => {
 //   state.banqueUa = tableauBanqueUa;
 // };

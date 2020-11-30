@@ -19,6 +19,7 @@
     <MenuActeurDepenseHS v-if="active_el ==31"></MenuActeurDepenseHS>
    <MenuParametreVehicule v-if="active_el == 42"></MenuParametreVehicule>
    <MenuGestionParc v-if="active_el == 43"></MenuGestionParc>
+   <MenuReparation v-if="active_el == 49"></MenuReparation>
     <Search></Search>
     
     <!--close-top-serch MenuPlanificationHorSib-->
@@ -47,9 +48,11 @@ import MenuGestionAccess from "../components/navs/MenuGestionAccess"
 import MenuActeurDepenseHS from "../components/navs/MenuActeurDepenseHS"
 import MenuParametreVehicule from "../components/navs/MenuParametreVehicule"
 import MenuGestionParc from "../components/navs/MenuGestionParc"
+import MenuReparation from "../components/navs/MenuReparation"
 import { mapState, mapActions} from "vuex";
 export default {
   components: {
+    MenuReparation,
     MenuGestionParc,
     MenuParametreVehicule,
     MenuTableau,
@@ -404,7 +407,9 @@ export default {
       "getTypeEntretien",
       "getTypeVehicule",
       "getTypeEnergie",
-      "getTypeReparation"
+      "getTypeReparation",
+      "getAffectationVehicule",
+      "getTransmissionVeh"
       
       
     ]),

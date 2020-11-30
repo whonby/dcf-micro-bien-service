@@ -2,7 +2,7 @@
 <template>
    
       <div class="accordion" >
-          <div class="accordion-group widget-box" v-if="groupe.vehiculeua.length > 0 ">
+          <div class="accordion-group widget-box" v-if="groupe.reparation_vehicule.length > 0 ">
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
@@ -17,37 +17,33 @@
                  <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>N°identification</th>
+                    
                     <th>N°immatriculation</th>
-                     <th>Immobilisation</th>
-                     <th>Type véhicule</th>
                      <th>Marque</th>
                     <th>Modèle</th>
-                     <th>Energie</th>
-                     <th>N°chassis</th>
-                     <th>N°serie</th>
                     <th>Couleur</th>
-                     <th>Transmission</th>
-                     <th>Nombre portes</th>
-                     <th>Nombre place</th>
-                    <th>Puissance</th>
-                     <th>Etat vehicule</th>
-                    
+                     <th>Panne Signale</th>
+                     <th>Date Signal</th>
+                     <th>Date Envoi</th>
+                    <th>Entreprise</th>
+                     <th>Date Retour</th>
+                    <th>Coût Réparation</th>
+                    <th>Appréciation</th>
                     
                     <th colspan="2">Action</th>
                      
                   </tr>
                 </thead>
                 <tbody>
-                   <affectationItem
+                   <reparationvehItem
                         class="item"
-                        v-for="groupeElement in groupe.vehiculeua"
+                        v-for="groupeElement in groupe.reparation_vehicule"
                         :key="groupeElement.id"
                         :article="groupeElement"
                         @modification="$emit('modification', $event)"
                         @suppression="$emit('suppression', $event)"
 
-                    ></affectationItem>
+                    ></reparationvehItem>
                 </tbody>
               </table>
               </div>
@@ -62,15 +58,15 @@
 
 
 <script>
-import affectationItem from './affectationItem'
+import reparationvehItem from './reparationvehItem'
 
 export default {
-    name: 'affectationItemComponent',
+    name: 'reparationvehItemComponent',
      props: {
     groupe: Object,
   },
   components: {
-      affectationItem
+      reparationvehItem
   },
   data: function () {
     return {
@@ -85,21 +81,21 @@ export default {
   computed: {
   
     isFolder: function () {
-      return this.groupe.vehiculeua &&
-        this.groupe.vehiculeua.length
+      return this.groupe.reparation_vehicule &&
+        this.groupe.reparation_vehicule.length
     },
 
     getNombreArticle(){
-        var nombre = this.groupe.vehiculeua.length
+        var nombre = this.groupe.reparation_vehicule.length
         if(nombre) return nombre
         return '0' 
     },
     iconClasses() {
       return {
-        'icon-plus': !this.isOpen && this.groupe.vehiculeua.length,
-        'icon-minus': this.isOpen && this.groupe.vehiculeua.length
-        //    'icon-folder-close': !this.isOpen && this.groupe.vehiculeua.length,
-        // 'icon-folder-open': this.isOpen && this.groupe.vehiculeua.length
+        'icon-plus': !this.isOpen && this.groupe.reparation_vehicule.length,
+        'icon-minus': this.isOpen && this.groupe.reparation_vehicule.length
+        //    'icon-folder-close': !this.isOpen && this.groupe.reparation_vehicule.length,
+        // 'icon-folder-open': this.isOpen && this.groupe.reparation_vehicule.length
       }
     },
 

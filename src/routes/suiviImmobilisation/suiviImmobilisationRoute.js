@@ -48,8 +48,50 @@ import TypeVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisat
 import TypeReparation from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/TypeReparation.vue'
 import AjouterFicheVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeVehicule/AjouterFicheVehicule.vue'
 import ModifierFicheVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeVehicule/ModifierFicheVehicule.vue'
+import DetailVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeVehicule/DetailVehicule.vue'
 import affectationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeAffectation/affectationVehicule.vue'
+import DetaiAffectationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeAffectation/DetaiAffectationVehicule.vue'
+import Transmission from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/Transmission.vue'
+import Appreciation from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/Appreciation.vue'
+import AjouterReparationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/AjouterReparationVehicule.vue'
+import ModifierReparationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/ModifierReparationVehicule.vue'
+import TableauBordGestionVehicule from '../../gestionDesModule/TableauBordGestionVehicule.vue'
 const suiviImmobilisationRoutes = [
+  {
+    path: "/DetailVehicule",
+    name: "DetailVehicule",
+    component: DetailVehicule
+  },
+  {
+    path: "/TableauBordGestionVehicule",
+    name: "TableauBordGestionVehicule",
+    component: TableauBordGestionVehicule
+  },
+  {
+    path: "/ModifierReparationVehicule/:id",
+    name: "ModifierReparationVehicule",
+    component: ModifierReparationVehicule
+  },
+  {
+    path: "/Appreciation",
+    name: "Appreciation",
+    component: Appreciation
+  },
+  {
+    path: "/AjouterReparationVehicule",
+    name: "AjouterReparationVehicule",
+    component: AjouterReparationVehicule
+  },
+  {
+    path: "/Transmission",
+    name: "Transmission",
+    component: Transmission
+  },
+  {
+    path: "/DetaiAffectationVehicule/:id",
+    name: "DetaiAffectationVehicule",
+    component: DetaiAffectationVehicule
+  },
   {
     path: "/affectationVehicule",
     name: "affectationVehicule",

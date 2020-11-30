@@ -45,7 +45,7 @@
                        <td>
                          <div class="control-group">
                             <label class="control-label">Total général</label>
-                            <div class ="controls">
+                            <div class="controls">
                               <input type="number" class="span" :value="commparerMontantGleEtMontantFacture" readonly/>
                             </div>
                           </div>
@@ -264,7 +264,8 @@
                                 type="text"
                                 class="span"
                                 readonly
-                            v-model="ndepense"
+                            
+                             v-model="ndepense"
                               />
                           
                         
@@ -665,23 +666,19 @@
                     code: "",
                     libelle: ""
                 },
-                ndepense:"Bien et service"
-
+ndepense:"Bien et service"
             };
         },
  props:["macheid"],
        created() {
             this.marcheid=this.$route.params.id
-   this.detail_Facture = this.getFacturePersonnaliser.find(
+   this.detail_Facture = this.gettersrealiteServiceFaitHorsSib.find(
        idmarche => idmarche.id == this.$route.params.id
          )
-         
   
-  
-  /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
-    console.log(this.appel_offre_marche)*/
 },
         computed: {
+          ...mapGetters('horSib', ['gettersrealiteServiceFaitHorsSib']),
 // methode pour maper notre guetter
           ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
@@ -723,37 +720,14 @@
       "getPersonnaliseBudgetGeneral",
       "groupUa",
       "getPersonnaliseBudgetGeneralParBienService",
-      "groupgranNature", "montantBudgetGeneral","realiteServiceFait","liquidation",'decomptefactures',
+      "groupgranNature", "montantBudgetGeneral","realiteServiceFait","liquidation","decomptefactures"
       // "montantBudgetGeneral"
       // "chapitres",
       // "sections"
        
     ]),
     ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
- AfficheTypeProcedure(){
-      if(this.recupererIdTypeFacture(this.detail_Facture.id) == 1){
 
-      return "Engagement Direct" ;
-
-    }
-    else{
-      return "Engagement Bon de Commande"
-    }
-    },
-
-      recupererIdTypeFacture() {
-      
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.typfacture_id;
-      }
-      return 0
-        }
-      };
-    },
 afficheDecompte() {
       return id => {
         if (id != null && id != "") {
@@ -1068,7 +1042,6 @@ afficherInputationBudgetaire() {
         }
       };
     },
-    
     afficherMontantBudgetaireInitial() {
       return id => {
         if (id != null && id != "") {
@@ -1267,12 +1240,39 @@ afficheLibelleUa() {
         return norme.tprocedure;
       }
       return ""
+
+    
+    },
+    AfficheTypeProcedure(){
+      if(this.recupererIdTypeFacture(this.detail_Facture.id) == 1){
+
+      return "Engagement Direct" ;
+
+    }
+    else{
+      return "Engagement Bon de Commande"
+    }
+    },
+
+      recupererIdTypeFacture() {
+      
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.typfacture_id;
+      }
+      return 0
+        }
+      };
     },
         },
         methods: {
             // methode pour notre action
             ...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux","allActeurDepense"]),
-            
+            ...mapActions('bienService',['supprimerActeEffetFinancier',
+          'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
             ...mapActions("bienService", [
                 "getEngagement",
                 "supprimerEngagement",
@@ -1292,11 +1292,9 @@ afficheLibelleUa() {
       "getActeEffetFinancier",
       "getMarche",
      
-      'supprimerActeEffetFinancier',
-          'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche',
                
             ]),
-            ...mapActions("uniteadministrative", [
+             ...mapActions("uniteadministrative", [
       "ajouterDecompteFacture"
     ]),
  afficherModalListeExecution(){
@@ -1319,10 +1317,9 @@ ajouterMandatFactureDefinitive(){
       {
         alert("Marché apuré")
       }
-      else if(this.NombreDecompte == 1){
-
-
- var nouvelObjet912 = {
+      else if(this.NombreDecompte == 1)
+      {
+        var nouvelObjet919 = {
       ...this.formData,
       
        exercice_budget :this.anneeAmort,
@@ -1361,17 +1358,17 @@ section_id:this.afficherIdSection(this.afficherIdUa(this.afficherIdMarche(this.d
  marchetype:this.afficheMarcheType
        };
 
-  //       var objetDecompte = {
+  //       var objetDecompte1 = {
   //      facture_id :this.detail_Facture.id,
   // marche_id :this.detail_Facture.marche_id,
   // numero_decompte :this.NombreDecompte,
-  //    montant_execute :this.commparerMontantGleEtMontantFacture,
-  //    montantmarche:this.montantMarcheAvecAvenant,
+  //   montant_execute :this.commparerMontantGleEtMontantFacture,
+  //   montantmarche:this.montantMarcheAvecAvenant,
+    
   //     dotationprevue:this.afficherMontantBudgetaireInitial(this.afficherInputationBudgetaire(this.afficherIdMarche(this.detail_Facture.id))),
   //      };
-this.ajouterMandat(nouvelObjet912)
-// this.ajouterDecompteFacture(objetDecompte)
-this.afficherModalListeExecution()
+this.ajouterMandat(nouvelObjet919)
+// this.ajouterDecompteFacture(objetDecompte1)
 this.formDataMadat= {
  numero_mandat:"",
  numero_bordereau:"",
@@ -1421,7 +1418,7 @@ section_id:this.afficherIdSection(this.afficherIdUa(this.afficherIdMarche(this.d
  marchetype:this.afficheMarcheType
        };
 
-  //       var objetDecompte2 = {
+  //       var objetDecompte = {
   //      facture_id :this.detail_Facture.id,
   // marche_id :this.detail_Facture.marche_id,
   // numero_decompte :this.NombreDecompte,
@@ -1430,8 +1427,7 @@ section_id:this.afficherIdSection(this.afficherIdUa(this.afficherIdMarche(this.d
   //     montantmarche:this.restePayeMarche,
   //      };
 this.ajouterMandat(nouvelObjet91)
-// this.ajouterDecompteFacture(objetDecompte2)
-this.afficherModalListeExecution()
+// this.ajouterDecompteFacture(objetDecompte)
 this.formDataMadat= {
  numero_mandat:"",
  numero_bordereau:"",
