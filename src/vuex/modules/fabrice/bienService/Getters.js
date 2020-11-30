@@ -1096,3 +1096,11 @@ export const getterImageMarche=state => state.image_marche.sort((a, b) => (a.id 
 
 export const getterFiltreCarteInfrastructure=state => state.marcheFiltreCarteInfrastructure
 export const getterInformationCarteInfrastructure=state => state.informationFiltreCarteInfrastructure
+
+/****
+ *  tableauBordFilter:"",
+ infoFiltreTableauBord:""
+ */
+
+export const getterListeMarcheTableauBordFiltre=state => state.tableauBordFilter
+export const getterInfoTableauBordFiltre=state => state.infoFiltreTableauBord

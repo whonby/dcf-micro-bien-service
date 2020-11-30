@@ -2562,8 +2562,24 @@ export const GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE = (state,objet) =>{
 }
 
 
-
 export const GET_INFORMATION_FILTRE_CARTE = (state, objet) =>{
     state.informationFiltreCarteInfrastructure = objet
 }
+/**
+ *    tableauBordFilter:"",
+ infoFiltreTableauBord:""
+ * @param state
+ * @param objet
+ * @constructor
+ */
+
+
+export const GET_TABLEAU_BORD_FILTRE = (state, objet) =>{
+    state.tableauBordFilter = objet
+}
+
+export const GET_INFO_TABLEAU_BORD= (state, objet) =>{
+    state.infoFiltreTableauBord = objet
+}
+
 
