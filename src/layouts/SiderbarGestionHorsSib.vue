@@ -262,9 +262,9 @@ return objJson.id
         })
       },
 navigateToGestionMarche(){
-        this.activate(19)
+        this.activate(190)
         this.$router.push({
-          name: 'gestion_marche'
+          name: 'TableauBordGestionMarche'
         })
       },
 

@@ -483,13 +483,16 @@ import {noDCfNoAdmin} from "../../Repositories/Auth"
         filtre_unite_admin() {
             if(this.noDCfNoAdmin){
                 let colect=[];
-                this.uniteAdministratives.filter(item=>{
-                    let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
-                    if (val!=undefined){
-                        colect.push(item)
-                        return item
-                    }
-                })
+                if(this.getterUniteAdministrativeByUser.length>0){
+                    this.uniteAdministratives.filter(item=>{
+                        let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                        if (val!=undefined){
+                            colect.push(item)
+                            return item
+                        }
+                    })
+                }
+
                 return colect
             }
             return this.uniteAdministratives
