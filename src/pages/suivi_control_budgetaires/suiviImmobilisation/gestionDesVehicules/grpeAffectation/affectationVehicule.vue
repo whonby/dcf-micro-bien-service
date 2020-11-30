@@ -10,8 +10,21 @@
       </div>
       <div class="modal-body">
       <table class="table table-bordered table-striped">
-          <tr>
-            <td>
+      <tr>
+        <td colspan="2">
+           <div class="control-group">
+            <label class="control-label">Unite administrative</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="libelleUa(editAffectation.uniteadministrative)"
+                class="span8"
+                readonly
+              />
+            </div>
+          </div>
+        </td>
+         <td>
                <div class="control-group">
             <label class="control-label">Immatriculation</label>
             <div class="controls">
@@ -20,10 +33,14 @@
                 v-model="editAffectation.numimmatriculation"
                 class="span4"
                 readonly
+                style="color:red;font-size:14px"
               />
             </div>
           </div>
             </td>
+      </tr>
+          <tr>
+           
              <td>
                <div class="control-group">
             <label class="control-label">Marque</label>
@@ -71,9 +88,8 @@
             <div class="controls">
               <input
                 type="date"
-              
+                v-model="formData.date_affectation"
                 class="span4"
-                
                 
               />
             </div>
@@ -81,29 +97,29 @@
             </td>
              <td>
                <div class="control-group">
-            <label class="control-label">Personnel</label>
+            <label class="control-label">Détenteur</label>
             <div class="controls">
-                              <select   class="span5">
+                              <select   class="span4" v-model="formData.personnel_id">
+                                <option></option>
             <option v-for="resultat in affichePersonnel(editAffectation.uniteadministrative)" :key="resultat.id" 
-            :value="resultat.id">{{resultat.acteur_depense_id}}</option>
+            :value="resultat.acteur_depense_id">{{NomPersonnel(resultat.acteur_depense_id)}}</option>
                 </select>
             </div>
           </div>
             </td>
              <td>
                <div class="control-group">
-            <label class="control-label">Modele</label>
+            <label class="control-label">Chauffeur</label>
             <div class="controls">
-              <input
-                type="text"
-                :value="libelleModeleVehicules(editAffectation.modele)"
-                class="span4"
-                readonly
-              />
+               <select   class="span4" v-model="formData.chauffeur_id">
+                 <option></option>
+            <option v-for="resultat in afficheNomChauffeur(editAffectation.uniteadministrative)" :key="resultat.id" 
+            :value="resultat.acteur_depense_id">{{NomPersonnel(resultat.acteur_depense_id)}}</option>
+                </select>
             </div>
           </div>
             </td>
-             <td>
+             <!-- <td>
                <div class="control-group">
             <label class="control-label">N°Chassis</label>
             <div class="controls">
@@ -115,7 +131,7 @@
               />
             </div>
           </div>
-            </td>
+            </td> -->
           </tr>
       </table>
       </div>
@@ -124,7 +140,7 @@
           
           class="btn btn-primary"
           href="#"
-          
+          @click.prevent="ajouterTitreLocal(formData)"
         >Affecter</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
@@ -245,16 +261,13 @@ export default {
               //     icon: 'add_alert'
               // }
           ],
-     
+     formData:{},
         editAffectation : {
                 
               
         },
 
-        editSection: {
-            libelle:"",
-             marque_id:""
-        },
+        
        search:""
     };
   },
@@ -268,11 +281,26 @@ export default {
       "budgetEclate",
   
     ]),
-     ...mapGetters('personnelUA', ["personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
-                "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
+     ...mapGetters('personnelUA', ["acteur_depenses","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
+                "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat","personnaliseActeurDepense",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
     ...mapGetters("SuiviImmobilisation", ["EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),  
      
+
+
+
+     libelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
      affichePersonnel() {
       return id => {
         if (id != null && id != "") {
@@ -281,8 +309,26 @@ export default {
         }
       };
     },
-     
-     
+     afficheNomChauffeur() {
+      return id => {
+        if (id != null && id != "") {
+           return this.acte_personnels.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.fonction_id == 456);
+      
+        }
+      };
+    },
+     NomPersonnel() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaliseActeurDepense.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.nom.concat("  ", qtereel.prenom);
+      }
+      return 0
+        }
+      };
+    },
      
      libelleModeleVehicules() {
       return id => {
@@ -316,9 +362,12 @@ export default {
   
   methods: {
    ...mapActions('SuiviImmobilisation', [ 
-    'ajouterModeleVehicule', 
-   'supprimerModeleVehicule', 'modifierModeleVehicule']),  
-
+    'ajouterAffectationVehicule', 
+   'modifierAffectationVehicule', 'supprimerAffectationVehicule','modifierModeleVehicule']),  
+...mapActions("uniteadministrative", [
+      "ajouterNouveauVehicule",
+      "modifierVehicule"
+      ]),
 
 afficherModalModifierService(articles) {
       this.$("#exampleModal").modal({
@@ -376,12 +425,25 @@ getColumns() {
     },
      // fonction pour vider l'input
     ajouterTitreLocal () {
-      
-      this.ajouterModeleVehicule(this.formData)
-
+      var nouveauObjet ={
+        ...this.formData,
+        
+        uniteadministrative_id:this.editAffectation.uniteadministrative,
+        vehicule_id:this.editAffectation.id,
+        etat_veh:1
+      }
+      var nouveauObjet1 ={
+        
+        id:this.editAffectation.id,
+        situationvehicule:1
+        
+      }
+      this.ajouterAffectationVehicule(nouveauObjet)
+      this.modifierVehicule(nouveauObjet1)
+ this.$("#exampleModal").modal('hide');
         this.formData = {
               
-            marque_id:""
+            
         }
     },
     // afficher modal de modification
@@ -418,8 +480,8 @@ modifierModeleVehiculeLocal(){
 <style>
 
 .tailgrand{
-  width: 88%;
-  margin: 0 -42%;
+  width: 70%;
+  margin: 0 -38%;
 }
 
 label{

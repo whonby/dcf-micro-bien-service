@@ -37,7 +37,7 @@
                     <select  class="span" v-model="detail.uniteadministrative ">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in uniteAdministratives"
+                        v-for="typeUniteA in afficherUAParDroitAccess"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -87,6 +87,21 @@
                       >{{typeUniteA.code}}-{{typeUniteA.libelle}}</option>
                     </select>
                   </div>
+                </div>
+                      </td>
+                      <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Duré de vie</label>
+                  <div class="controls">
+                   <div class="controls">
+                    <input
+                      type="text"
+                    v-model="detail.durevie"
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
                 </div>
                       </td>
                   </tr>
@@ -222,12 +237,19 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Transmission</label>
                   <div class="controls">
-                    <select  class="span" v-model="detail.transmission">
-                      <option></option>  
-                      <option value="0">Manuelle</option> 
-                      <option value="1">Automatique</option>                    
+                    
                       
-                    </select>
+                      <select  class="span" v-model="detail.transmission">
+                      <option></option>  
+                                          
+                       <option
+                        v-for="typeUniteA in Transmissions"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>                    
+                      
+                   
                   </div>
                 </div>
                       </td>
@@ -522,7 +544,7 @@
 
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
-
+import {admin,dcf,cf} from '../../../../../Repositories/Auth';
 // // import { ModelListSelect } from "vue-search-select";
 // // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
@@ -559,7 +581,7 @@ props:["macheid"],
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
    ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-   ...mapGetters("SuiviImmobilisation", ["EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
+   ...mapGetters("SuiviImmobilisation", ["EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation","Transmissions"]),
    ...mapGetters('uniteadministrative',[
     "plans_programmes",
  "uniteAdministratives",
@@ -595,6 +617,43 @@ props:["macheid"],
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
    
+admin:admin,
+dcf:dcf,
+cf:cf,
+...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+     anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
+   afficherUAParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (this.cf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+             return colect;
+          
+        }
+
+        return this.uniteAdministratives;
+        //return this.uniteAdministratives
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
              lesClassDe3() { 
 const isClassDe3 = (code) => code.charAt(0) == "2"; 
 return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
@@ -621,9 +680,31 @@ return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
                 window.history.back();
             },
      AjouterVehicule() {
+      var NouvelObjet =  {
+
+        ...this.detail,
+        uniteadministrative:this.detail.uniteadministrative,
+        numidentification:this.detail.numidentification,
+        numimmatriculation:this.detail.numimmatriculation,
+        immobilisation:this.detail.immobilisation,
+        typevehicule:this.detail.typevehicule,
+        marque:this.detail.marque,
+        modele:this.detail.modele,
+        energie:this.detail.energie,
+        numchassis:this.detail.numchassis,
+        numserie:this.detail.numserie,
+        couleur:this.detail.couleur,
+        transmission:this.detail.transmission,
+        nombreportes:this.detail.nombreportes,
+        nombreplace:this.detail.nombreplace,
+        puissance:this.detail.puissance,
+        etatvehicule:this.detail.etatvehicule,
+        votreassuranceexpirere:this.detail.votreassuranceexpirere,
+        anneebudgetaire:this.anneeAmort,
+        durevie:this.detail.durevie
+      };
       
-      
-      this.modifierVehicule(this.detail);
+      this.modifierVehicule(NouvelObjet);
     this.$router.push({ name: 'ListeVehicules' })
      
     },

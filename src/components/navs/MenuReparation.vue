@@ -3,19 +3,18 @@
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
        <li>
-            <router-link :to="{name: 'ListeVehicules'}" tag="a">
-              SAISIE VEHICULE
+            <router-link :to="{name: 'ReparationVehicule'}" tag="a">
+             REPARATION VEHICULES
             </router-link>
           </li>
-     <li>
-   <li>
+   <!-- <li>
             <router-link :to="{name: 'affectationVehicule'}" tag ="a">
-              AFFECTATION VEHICULE
+              REPARATION MOBILIERS & MATERIELS
             </router-link>
-          </li>
+          </li> -->
            <!-- <li>
             <router-link :to="{name: 'listeMarcheBienEtServiceHS'}" tag ="a">
-              REPARATION VEHICULE
+              Réparation véhicule
             </router-link>
           </li> -->
      <!-- <li> 

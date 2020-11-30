@@ -112,7 +112,7 @@
 <div class="span5">
    <h6>Infrastructure</h6>
   <label for="tous">
-      <input type="radio" v-model="infrastructure" value="" id="tous"> <span>Affiché tous  <b>({{marcheUniteRegion.length}})</b></span>
+      <input type="radio" v-model="infrastructure" value="" id="tous"> <span>Affiché tous  <b>({{objetMarchePasUniteOuRegion.length}})</b></span>
     </label>
     <label  v-for="item in getterInfrastrucure" :key="item.id" :for="'IN'+item.id">
       <input type="radio" v-model="infrastructure" :value="item.id" :id="'IN'+item.id"> <span> {{item.libelle}} <b>({{nombreMarchePasInfrastructure(item.id)}})</b></span>
@@ -803,7 +803,12 @@ console.log(this.getterUniteAdministrativeByUser)
           return colect
       },
     regions(){
-      return this.getterLocalisationGeoAll.filter(item=>item.structure_localisation_geographique.niveau==2);
+      // console.log(this.localisations_geographiques.filter(item=>item.structure_localisation_geographique.niveau==2))
+      return this.localisations_geographiques.filter(item=>{
+          if(item.longitude!=null && item.structure_localisation_geographique.niveau==2 ){
+              return item
+          }
+      });
     },
 
     departements(){
@@ -855,7 +860,7 @@ console.log(this.getterUniteAdministrativeByUser)
               return id=>{
                 if(id!=""){
                     if(this.type_marche!=""){
-                        return this.marcheUniteRegion.filter(item=>{
+                        return this.objetMarchePasUniteOuRegion.filter(item=>{
                             if(item.infrastructure_id==id && item.type_marche_id==this.type_marche){
                                 return item
                             }
@@ -874,9 +879,9 @@ console.log(this.getterUniteAdministrativeByUser)
                         }).length
                     }
 
-                   return this.marcheUniteRegion.filter(item=>item.infrastructure_id==id).length
+                   return this.objetMarchePasUniteOuRegion.filter(item=>item.infrastructure_id==id).length
                 }
-                  return this.marcheUniteRegion.length
+                  return this.objetMarchePasUniteOuRegion.length
               }
     },
 
@@ -884,7 +889,7 @@ console.log(this.getterUniteAdministrativeByUser)
           return id=>{
               if(id!=""){
                   if(this.infrastructure!="" && this.status_marche==""){
-                      return this.marcheUniteRegion.filter(item=>{
+                      return this.objetMarchePasUniteOuRegion.filter(item=>{
                           if(item.infrastructure_id==this.infrastructure && item.type_marche_id==id){
                               return item
                           }
@@ -902,9 +907,9 @@ console.log(this.getterUniteAdministrativeByUser)
                       }).length
                   }
 
-                  return this.marcheUniteRegion.filter(item=>item.type_marche_id==id).length
+                  return this.objetMarchePasUniteOuRegion.filter(item=>item.type_marche_id==id).length
               }
-              return this.marcheUniteRegion.length
+              return this.objetMarchePasUniteOuRegion.length
           }
       },
     nombreMarcheParStatue(){
@@ -915,7 +920,7 @@ console.log(this.getterUniteAdministrativeByUser)
                }
 
                if(this.infrastructure!="" && this.type_marche==""){
-                  return this.marcheUniteRegion.filter(item=>{
+                  return this.objetMarchePasUniteOuRegion.filter(item=>{
                     if(item.attribue==status && item.infrastructure_id==this.infrastructure){
                       return item
                     }
@@ -923,7 +928,7 @@ console.log(this.getterUniteAdministrativeByUser)
                }
 
                  if(this.infrastructure=="" && this.type_marche!=""){
-                     return this.marcheUniteRegion.filter(item=>{
+                     return this.objetMarchePasUniteOuRegion.filter(item=>{
                          if(item.attribue==status && item.type_marche_id==this.type_marche){
                              return item
                          }
@@ -931,14 +936,14 @@ console.log(this.getterUniteAdministrativeByUser)
                  }
 
                  if(this.infrastructure!="" && this.type_marche!=""){
-                     return this.marcheUniteRegion.filter(item=>{
+                     return this.objetMarchePasUniteOuRegion.filter(item=>{
                          if(item.attribue==status && item.type_marche_id==this.type_marche  && item.infrastructure_id==this.infrastructure){
                              return item
                          }
                      }).length
                  }
 
-               return this.marcheUniteRegion.filter(item=>item.attribue==status).length
+               return this.objetMarchePasUniteOuRegion.filter(item=>item.attribue==status).length
 
 
              }

@@ -75,7 +75,8 @@ CodeExempte
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(marche.id)">
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
-                      {{afficherLibelleLocalisationGeographie(activites.localisation_geographie_id) || 'Non renseigné'}}</td>
+                       
+                      {{afficherLibelleLocalisationGeographie(afficheLocalisation(activites.id)) || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
                       {{formatageSomme(parseFloat(activites.montant_marche)) || 'Non renseigné'}}</td>
                    
@@ -388,6 +389,20 @@ return this.afficherListeMarcheHorsSib.filter((item) => {
 
   return this.marcheHorSibFiltre.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),0)
 },
+
+ afficheLocalisation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.parent_id == id);
+
+      if (qtereel) {
+        return qtereel.localisation_geographie_id;
+      }
+      return 0
+        }
+      };
+    },
+
  // afficher la liste des marchés hors sib
 
 

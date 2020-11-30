@@ -412,6 +412,7 @@ afficherLibelleTypeMarche(){
      }
    }
  },
+ 
  afficheLocalisation() {
       return id => {
         if (id != null && id != "") {

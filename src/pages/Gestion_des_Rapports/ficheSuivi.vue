@@ -16,12 +16,21 @@
 
                
               </div> -->
+              <div align="right">
+
+      <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+
+
+                            </div>
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
               <h5 style="width:25%;text-align:center;">FICHE DE SUIVI DES MARCHES- CONTRATS</h5>
             </div>
             <!-- <div class="widget-title"> -->
+              <div id="printMe">
+
+              
                    <table class="table table-bordered table-striped">
   <thead>
     <tr>
@@ -244,6 +253,7 @@
   <tbody>
   </tbody>
 </table>
+</div>
      <hr>
  
             <!-- <div v-else> -->
@@ -482,6 +492,9 @@ affichierNumeroMarche(){
       "modifierpaiementPersonnel",
       "supprimerpaiementPersonnel"
     ]),
+    genererEnPdf(){
+  this.$htmlToPaper('printMe');
+},
 formatageSomme:formatageSomme,
     alert() {
       console.log("ok");

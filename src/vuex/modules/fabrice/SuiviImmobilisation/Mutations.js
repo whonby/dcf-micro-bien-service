@@ -809,6 +809,101 @@ export const MODIFIER_TYPE_REPARATION = (state, objetModifie) => {
 export const SUPPRIMER_TYPE_REPARATION = (state, id) => {
   state.TypeReparation = state.TypeReparation.filter(famille => famille.id != id);
 };
+
+
+
+
+
+
+
+export const GET_ALL_AFFECTATION_VEHICULE = (state, tableauFamille) => {
+  state.AffectationVehicules = tableauFamille;
+};
+
+// ajouter FAMILLE
+export const AJOUTER_AFFECTATION_VEHICULE = (state, nouveau_famille) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.AffectationVehicules.unshift(nouveau_famille);
+};
+
+// modifier FAMILLE
+export const MODIFIER_AFFECTATION_VEHICULE = (state, objetModifie) => {
+  state.AffectationVehicules = state.AffectationVehicules.map(famille => {
+    if (famille.id == objetModifie.id) {
+      famille = { ...objetModifie };
+    }
+
+    return famille;
+  });
+};
+
+
+// supprimer FAMILLE
+export const SUPPRIMER_AFFECTATION_VEHICULE = (state, id) => {
+  state.AffectationVehicules = state.AffectationVehicules.filter(famille => famille.id != id);
+};
+
+
+
+
+
+
+export const GET_ALL_TRANSMISSION = (state, tableauFamille) => {
+  state.Transmissions = tableauFamille;
+};
+
+// ajouter FAMILLE
+export const AJOUTER_TRANSMISSION = (state, nouveau_famille) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.Transmissions.unshift(nouveau_famille);
+};
+
+// modifier FAMILLE
+export const MODIFIER_TRANSMISSION = (state, objetModifie) => {
+  state.Transmissions = state.Transmissions.map(famille => {
+    if (famille.id == objetModifie.id) {
+      famille = { ...objetModifie };
+    }
+
+    return famille;
+  });
+};
+
+
+// supprimer FAMILLE
+export const SUPPRIMER_TRANSMISSION = (state, id) => {
+  state.Transmissions = state.Transmissions.filter(famille => famille.id != id);
+};
+
+
+
+
+export const GET_ALL_APPRECIATION = (state, tableauFamille) => {
+  state.Appreciations = tableauFamille;
+};
+
+// ajouter FAMILLE
+export const AJOUTER_APPRECIATION = (state, nouveau_famille) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.Appreciations.unshift(nouveau_famille);
+};
+
+// modifier FAMILLE
+export const MODIFIER_APPRECIATION = (state, objetModifie) => {
+  state.Appreciations = state.Appreciations.map(famille => {
+    if (famille.id == objetModifie.id) {
+      famille = { ...objetModifie };
+    }
+
+    return famille;
+  });
+};
+
+
+// supprimer FAMILLE
+export const SUPPRIMER_APPRECIATION = (state, id) => {
+  state.Appreciations = state.Appreciations.filter(famille => famille.id != id);
+};
 export {
   
 

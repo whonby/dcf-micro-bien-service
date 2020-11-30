@@ -2,7 +2,58 @@
 <template>
   <div>
  
-
+<div id="exampleModal1" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Appréciation</h3>
+      </div>
+      <div class="modal-body">
+      <table class="table table-bordered table-striped">
+          
+         <tr>
+           <td>
+                    <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Appréciation</label>
+                  <div class="controls">
+                    <select  class="span5" v-model="editReparation.appreciation_id ">
+                      <option></option>                     
+                      <option
+                        v-for="typeUniteA in Appreciations"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+                 </td>
+         </tr>
+         <tr>
+           <td>
+               <div class="control-group">
+            <label class="control-label">Date du Retour</label>
+            <div class="controls">
+              <input
+                type="date"
+               v-model="editReparation.date_retour"
+                class="span5"
+                
+              />
+            </div>
+          </div>
+            </td>
+         </tr>
+      </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterTitreLocal()"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
 
 <!----- fin modifier modal  ---->
     <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
@@ -35,7 +86,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des Véhicules</h5>
+              <h5>SUIVI DES REPARATIONS DES VEHICULES </h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -45,13 +96,13 @@
 
 
             <div class="widget-content nopadding"  >
-              <VehiculeItemComponent v-for="equipement in uniteAdministratives"
+              <reparationvehItemComponent v-for="equipement in uniteAdministratives"
                :key="equipement.id"
                 :groupe="equipement"
-                @modification="afficherModalmodifierModeleVehicule" 
+                @modification="afficherModalModifierService" 
                 @suppression="supprimerSect"
                 >
-              </VehiculeItemComponent>
+              </reparationvehItemComponent>
 
               <!-- <div v-if="filtre_famille.length"></div>
               <div v-else>
@@ -87,13 +138,13 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import VehiculeItemComponent from './VehiculeItemComponent'
+import reparationvehItemComponent from './reparationvehItemComponent'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 export default {
   name: 'Famille',
  components: {
-      VehiculeItemComponent
+      reparationvehItemComponent
   },
   data() {
     return {
@@ -126,17 +177,20 @@ export default {
             libelle:"",
              marque_id:""
         },
+        editReparation:{},
        search:""
     };
   },
 
   computed: {
        
-       
+        ...mapGetters("SuiviImmobilisation", ["Appreciations","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation","Transmissions"]),  
+    
   ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
       "uniteAdministratives",
       "budgetEclate",
+      
   
     ]),
   
@@ -147,9 +201,10 @@ export default {
 
   
   methods: {
-   ...mapActions('SuiviImmobilisation', [ 
-    'ajouterModeleVehicule', 
-   'supprimerModeleVehicule', 'modifierModeleVehicule']),  
+   ...mapActions("uniteadministrative", [
+      "ajouterReparationVehicule",
+      "modifierReparationVehicule"
+      ]),
 
 afficherModalModifierTitre(id) {
 
@@ -158,7 +213,7 @@ afficherModalModifierTitre(id) {
       });
     },
 afficherModalListePersonnel(){
-                this.$router.push({ name: 'AjouterFicheVehicule' })
+                this.$router.push({ name: 'AjouterReparationVehicule' })
             },
    // exportation en pdf
 
@@ -196,12 +251,9 @@ getColumns() {
      // fonction pour vider l'input
     ajouterTitreLocal () {
       
-      this.ajouterModeleVehicule(this.formData)
-
-        this.formData = {
-              
-            marque_id:""
-        }
+      this.modifierReparationVehicule(this.editReparation)
+this.$("#exampleModal").modal('hide');
+       
     },
     // afficher modal de modification
     afficherModalmodifierModeleVehicule(article) {
@@ -212,17 +264,15 @@ getColumns() {
 
       this.editSection = article;
     },
+afficherModalModifierService(articles) {
+      this.$("#exampleModal1").modal({
+        backdrop: "static",
+        keyboard: false
+      });
 
-modifierModeleVehiculeLocal(){
- 
-  this.modifierModeleVehicule(this.editSection);
-  this.$("#modifierModal").modal('hide');
-  this.editSection = {
-                code: "",
-             nom_section: "",
-             marque_id:""
-  }
-},
+      this.editReparation = articles;
+    },
+
     alert() {
       console.log("ok");
     },

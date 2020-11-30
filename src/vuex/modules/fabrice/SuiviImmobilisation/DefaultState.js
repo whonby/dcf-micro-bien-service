@@ -26,7 +26,10 @@ const defaultState = {
   TypeEntretien:[],
   TypeVehicule:[],
   TypeEnergie:[],
-  TypeReparation:[]
+  TypeReparation:[],
+  AffectationVehicules:[],
+  Transmissions:[],
+  Appreciations:[]
 
 };
 

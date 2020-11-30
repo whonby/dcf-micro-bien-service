@@ -473,19 +473,26 @@ import {noDCfNoAdmin} from "../../Repositories/Auth"
 
         ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
           regions(){
-      return this.getterLocalisationGeoAll.filter(item=>item.structure_localisation_geographique.niveau==2);
+              return this.localisations_geographiques.filter(item=>{
+                  if(item.longitude!=null && item.structure_localisation_geographique.niveau==2 ){
+                      return item
+                  }
+              });
       },
         noDCfNoAdmin:noDCfNoAdmin,
         filtre_unite_admin() {
             if(this.noDCfNoAdmin){
                 let colect=[];
-                this.uniteAdministratives.filter(item=>{
-                    let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
-                    if (val!=undefined){
-                        colect.push(item)
-                        return item
-                    }
-                })
+                if(this.getterUniteAdministrativeByUser.length>0){
+                    this.uniteAdministratives.filter(item=>{
+                        let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                        if (val!=undefined){
+                            colect.push(item)
+                            return item
+                        }
+                    })
+                }
+
                 return colect
             }
             return this.uniteAdministratives

@@ -139,35 +139,6 @@
                                     -->
                     <td @dblclick="afficheModalModificationMandat(Manda.id)">{{formatageSomme(parseFloat(Manda.total_general))|| 'Non renseigné'}}</td>
                     
-                    <!-- <td>
-                        <button v-if="Manda.decision_emetteur == 1"  class="btn  btn-success"  >                        
-                     
-                      <span    >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="Manda.decision_emetteur == 2" class="btn  btn-warning"  >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="Manda.decision_emetteur == 3" class="btn  btn-danger"  >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info"  >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                    </td> -->
-                    
                     <td >{{formaterDate(Manda.date_decision_emetteur) || 'Non renseigné'}}</td>
                         <td >{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
               <td >
@@ -207,10 +178,10 @@
                   
                        <td>
                        
-                       <!-- <router-link :to="{ name: 'DetailMandat', params: {id_detail_mandat:Manda.id}}"
+                       <router-link :to="{ name: 'DetailMandat', params: {id_detail_mandat:Manda.id}}"
                 class="btn btn-default " title="Detail Mandat">
                   <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link>  -->
+                   </router-link> 
                       <button class="btn btn-danger" @click="supprimerMandat(Manda.id)">
                         <span>
                           <i class="icon icon-trash"></i>
@@ -449,7 +420,7 @@ afficherTypeFacture() {
       return id => {
         if (id != null && id != "") {
           return this.getMandatPersonnaliser.filter(
-            element => element.marche_id == id  && this.afficherStatusSib(element.marche_id)==1
+            element => element.marche_id == id  && this.afficherStatusSib(element.marche_id)==0
           );
         }
       };

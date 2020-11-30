@@ -1853,3 +1853,173 @@ export function supprimerTypeReparation({ commit }, id) {
           axios.delete("/TypeReparation/" + id).then(() => dialog.close());
       });
 }
+
+
+
+
+
+export function getAffectationVehicule({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/AffectationVehicule")
+          .then(response => {
+              commit("GET_ALL_AFFECTATION_VEHICULE", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterAffectationVehicule({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/AffectationVehicule", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_AFFECTATION_VEHICULE", response.data);
+
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierAffectationVehicule({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/AffectationVehicule/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_AFFECTATION_VEHICULE", response.data);
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerAffectationVehicule({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_AFFECTATION_VEHICULE", id);
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/AffectationVehicule/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+
+
+
+export function getTransmissionVeh({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/Transmission")
+          .then(response => {
+              commit("GET_ALL_TRANSMISSION", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterTransmission({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/Transmission", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_TRANSMISSION", response.data);
+
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierTransmission({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/Transmission/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_TRANSMISSION", response.data);
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerTransmission({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_TRANSMISSION", id);
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/Transmission/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+
+
+
+export function getAppreciation({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/Appreciation")
+          .then(response => {
+              commit("GET_ALL_APPRECIATION", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterAppreciation({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/Appreciation", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_APPRECIATION", response.data);
+
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierAppreciation({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/Appreciation/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_APPRECIATION", response.data);
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerAppreciation({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_APPRECIATION", id);
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/Appreciation/" + id).then(() => dialog.close());
+      });
+}

@@ -37,7 +37,7 @@
                     <select  class="span" v-model="formData.uniteadministrative ">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in uniteAdministratives"
+                        v-for="typeUniteA in afficherUAParDroitAccess"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -87,6 +87,21 @@
                       >{{typeUniteA.code}}-{{typeUniteA.libelle}}</option>
                     </select>
                   </div>
+                </div>
+                      </td>
+                      <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Duré de vie</label>
+                  <div class="controls">
+                   <div class="controls">
+                    <input
+                      type="text"
+                    v-model="formData.durevie"
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
                 </div>
                       </td>
                   </tr>
@@ -224,9 +239,12 @@
                   <div class="controls">
                     <select  class="span" v-model="formData.transmission">
                       <option></option>  
-                      <option value="0">Manuelle</option> 
-                      <option value="1">Automatique</option>                    
-                      
+                                          
+                       <option
+                        v-for="typeUniteA in Transmissions"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
                     </select>
                   </div>
                 </div>
@@ -522,7 +540,7 @@
 
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
-
+import {admin,dcf,cf} from '../../../../../Repositories/Auth';
 // // import { ModelListSelect } from "vue-search-select";
 // // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
@@ -560,7 +578,7 @@ props:["macheid"],
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
    ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-   ...mapGetters("SuiviImmobilisation", ["EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
+   ...mapGetters("SuiviImmobilisation", ["Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
    ...mapGetters('uniteadministrative',[
     "plans_programmes",
  "uniteAdministratives",
@@ -589,12 +607,40 @@ props:["macheid"],
       "plans_fonctionnels",
  "afficheNiveauPlanFonctionnel"
    ]),
-
+ 
 ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
-   
+   admin:admin,
+dcf:dcf,
+cf:cf,
+...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+     
+   afficherUAParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (this.cf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+             return colect;
+          
+        }
+
+        return this.uniteAdministratives;
+        //return this.uniteAdministratives
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
              lesClassDe3() { 
 const isClassDe3 = (code) => code.charAt(0) == "2"; 
 return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
@@ -606,6 +652,17 @@ return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
       
         }
       };
+    },
+    
+
+ anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
     },
   },
   methods: {
@@ -622,7 +679,11 @@ return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
      AjouterVehicule() {
       
       
-      this.ajouterNouveauVehicule(this.formData);
+      var objetNew ={
+        ...this.formData,
+        anneebudgetaire:this.anneeAmort
+      }
+      this.ajouterNouveauVehicule(objetNew);
     
       this.formData = {
         uniteadministrative:"",

@@ -154,7 +154,17 @@
             </router-link>
           </li>
           <li class="divider"></li>
-          
+          <li>
+            <router-link :to="{name: 'Transmission'}" tag="a">
+              <i class="icon-user"></i> Transmission
+            </router-link>
+          </li>
+          <li class="divider"></li>
+           <li>
+            <router-link :to="{name: 'Appreciation'}" tag="a">
+              <i class="icon-user"></i> Appreciation
+            </router-link>
+          </li>
         </ul>
       </li>
   

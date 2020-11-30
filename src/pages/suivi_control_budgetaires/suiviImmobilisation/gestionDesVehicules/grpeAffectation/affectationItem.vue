@@ -4,30 +4,46 @@
   
                   <tr class="odd gradeX" v-if="article" >
                  
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.numidentification || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.numimmatriculation || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.immobilisation || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{libelleTypeVehicule(article.typevehicule) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{libellemarqueVehicules(article.marque) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{libelleModeleVehicules(article.modele) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{libelleTypeEnergie(article.energie) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.numchassis || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.numserie || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.couleur || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.transmission || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.nombreportes || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.nombreplace || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.puissance || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{libelleEtatImmobilisations(article.etatvehicule) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{article.numidentification || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{article.numimmatriculation || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{article.immobilisation || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{libelleTypeVehicule(article.typevehicule) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{libellemarqueVehicules(article.marque) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{libelleModeleVehicules(article.modele) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{libelleTypeEnergie(article.energie) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{article.numchassis || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{article.numserie || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{article.couleur || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{libelleTransmission(article.transmission) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{article.nombreportes || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{article.nombreplace || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{article.puissance || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{libelleEtatImmobilisations(article.etatvehicule) || 'Non renseigné'}}</td>
                     
                     <td>
-                      <button class="btn btn-danger" @click.prevent="$emit('modification', article)">
+                      <button class="btn  btn-success" @click.prevent="$emit('modification', article)" v-if="article.situationvehicule == 1" :disabled="article.situationvehicule == 1" title="Vehicule déja affecté">
                         <span>
-                          <i class="icon-truck"></i>
+                          <i class="icon-thumbs-up"></i>
                         </span>
                       </button>
+                      <button v-else @click.prevent="$emit('modification', article)" class="btn  btn-danger" >
+              
+                        <span>
+                          <i class=" icon-thumbs-down"></i>
+                        </span>
+                </button>
+                    </td>
+                    <td>
+                        <button  @click.prevent="afficherModalModifierTitre(article.id)" class="btn  btn-default" >
+              
+                        <span>
+                          <i class="icon-folder-open"></i>
+                        </span>
+                </button>
+             
                     </td>
                   </tr>
+
 
 
 
@@ -39,6 +55,10 @@
 
 import { mapGetters} from "vuex";
 export default {
+  data () {
+    return {
+    }
+  },
     name: 'ModelItem',
      props: {
     article: Object,
@@ -57,7 +77,7 @@ export default {
   
   },
    computed: {
-     ...mapGetters("SuiviImmobilisation", ["EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),  
+     ...mapGetters("SuiviImmobilisation", ["EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation","Transmissions"]),  
        
   ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
@@ -125,6 +145,18 @@ export default {
         }
       };
     },
+    libelleTransmission() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.Transmissions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
   libelleTypeEnergie() {
       return id => {
         if (id != null && id != "") {
@@ -143,7 +175,7 @@ export default {
     afficherModalModifierTitre(id) {
 
       this.$router.push({
-        path: "/ModifierFicheVehicule/" + id
+        path: "/DetaiAffectationVehicule/" + id
       });
     },
     toggle: function () {
