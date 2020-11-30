@@ -1,6 +1,551 @@
 
 <template>
 <div>
+  <div id="modifierActeEF" class="modal hide grdirModalActeEffet" >
+    <div class="modal-header">
+      <button data-dismiss="modal" class="close" type="button">×</button>
+      <h3>Information sur l'attribution de l'acte : {{affichierObjetMarche(editActeEffetFinancier.marche_id)}}</h3>
+    </div>
+
+    <div class="widget-title">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#Identif1">Identification de L'acte</a></li>
+        <li class=""><a data-toggle="tab" href="#financ1">Informations financières</a></li>
+      </ul>
+    </div>
+    <div class="widget-content tab-content">
+
+      <div id="Identif1" class="tab-pane active">
+
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Type acte effet financier</label>
+                <div class="controls">
+                  <select v-model="editActeEffetFinancier.type_act_effet_id" class="span">
+                    <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
+                            :value="varText.id">{{varText.libelle}}</option>
+                </select>
+
+                </div>
+              </div>
+            </td>
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">Entreprise</label>
+                <div class="controls" style="font-size:20px">
+                  <input
+                      type="text"
+                      :value="afficherEntrepriseNom(editActeEffetFinancier.entreprise_id)"
+                      class="span"
+                      readonly
+                  />
+                  
+                </div>
+
+
+              </div>
+
+
+            </td>
+
+            <td>
+              <div class="control-group">
+                <label class="control-label">Banque</label>
+                <div class="controls" >
+                 <select v-model="editActeEffetFinancier.banq_id" class="span" >
+                    <option v-for="varText in afficherBanqueDynamiqueId(editActeEffetFinancier.entreprise_id)" :key="varText.id"
+                            :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                  </select>
+
+                </div>
+              </div>
+            </td>
+
+            <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Compte</label>
+                <div class="controls " >
+                <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(editActeEffetFinancier.banq_id)" readonly >
+
+                </div>
+              </div>
+
+            </td>
+
+          </tr>
+          <tr>
+             <td colspan="2" width="550">
+              <div class="control-group">
+                <label class="control-label">Objet offre :</label>
+                <div class="controls">
+                <textarea  :value="affichierObjetMarche(editActeEffetFinancier.marche_id)"  class="textarea_editor span11" rows="3" placeholder="Entre le  text ..."></textarea>
+
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Incidence financière</label>
+                <div class="controls">
+                  <select  v-model="editActeEffetFinancier.incidence_financiere" class="span">
+                    <option value="0">Oui</option>
+                  <option value="1">Non</option>
+                </select>
+
+
+
+                </div>
+              </div>
+            </td>
+
+            <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Numéro du marche/contrat</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                    v-model="editActeEffetFinancier.numero_marche"
+                     class="span"
+                     placeholder="Saisir le numero "
+                 />
+                </div>
+              </div>
+
+            </td>
+           
+
+          </tr>
+          <tr>
+  <td>
+
+              <div class="control-group">
+                <label class="control-label" >Date de signature attributaire</label>
+                <div class="controls">
+                  <input type="date" v-model="editActeEffetFinancier.date_attributaire"
+                        class="span"
+                         placeholder=""
+                  />
+                </div>
+              </div>
+            </td>
+              <td>
+              <div class="control-group">
+                <label class="control-label">Date signature autorité contractante </label>
+                <div class="controls">
+                  <input type="text" v-model="editActeEffetFinancier.reference_act"
+                         class="span"
+                         placeholder="refence acte"
+                  />
+                </div>
+              </div>
+            </td>
+
+
+
+            <td>
+              <div class="control-group">
+                <label class="control-label"> date d'approbation</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                     v-model="editActeEffetFinancier.date_approbation"
+                     class="span"
+                     placeholder=""
+                  />
+                </div>
+              </div>
+
+            </td>
+           
+          
+          <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Autorité approbatrice</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      v-model="editActeEffetFinancier.autorite_approbation"
+                      class="span"
+                      placeholder=" "
+                  />
+                  <input type="hidden" v-model="editActeEffetFinancier.ua_id" />
+                </div>
+              </div>
+
+            </td>
+
+           
+          </tr>
+          <tr>
+              <td>
+              <div class="control-group">
+                <label class="control-label">Date de debut d'execution prévisionnelle</label>
+                <div class="controls">
+                  <input type="date" v-model="editActeEffetFinancier.date_odre_service"
+                         class="span"
+                         placeholder=""
+                  />
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div class="control-group">
+                <label class="control-label" title=" ">Date de reception provisoire prévisionnelle </label>
+                <div class="controls">
+                  <input type="date" v-model="editActeEffetFinancier.date_reception"
+                         class="span"
+                         placeholder=""
+                  />
+                </div>
+              </div>
+            </td>
+
+
+          
+            <td>
+              <div class="control-group">
+                <label class="control-label" title=" ">Date fin d'exécution prévisionnelle</label>
+                <div class="controls">
+                   <input type="date" :min="editActeEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="editActeEffetFinancier.date_fin_exe"
+                          class="span"
+                          placeholder=""
+                   /> 
+                </div>
+              </div>
+            </td>
+
+
+
+            <td>
+              <div class="control-group">
+                <label class="control-label" title=" ">Durée d'exécution contractuelle(jrs)</label>
+                <div class="controls">
+                 <input type="text"  readonly :value="nombreDejourCalculeModifier"
+                        class="span"
+
+                 />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label" title=" ">Date de reception definitive</label>
+                <div class="controls">
+                  <input type="date" v-model="editActeEffetFinancier.date_reception"
+                        class="span"
+                        placeholder=""
+                 />
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="financ1" class="tab-pane">
+  <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#MARCHE">MARCHE</a></li>
+        <li class=""><a data-toggle="tab" href="#DEMARRAGE">AVANCE DE DEMARRAGE</a></li>
+        <li class=""><a data-toggle="tab" href="#CAUTIONNEMENT">CAUTIONNEMENT</a></li>
+        <li class=""><a data-toggle="tab" href="#GARANTIE">RETENU DE GARANTIE</a></li>
+      </ul>
+      <div class="widget-content tab-content">
+
+      <div id="MARCHE" class="tab-pane active">
+         <table class="table table-bordered table-striped">
+           <tr>
+              <td>
+
+              <div class="control-group">
+                <label class="control-label">exonéré</label>
+                <div class="controls">
+                  <select v-model="editActeEffetFinancier.exonere" class="span">
+
+                   <option value="0">Oui</option>
+                   <option value="1">Non</option>
+                 </select>
+                </div>
+              </div>
+            </td>
+           
+             <td >
+              <div class="control-group">
+                <label class="control-label" >Taux</label>
+                <div class="controls">
+                  <input
+                     type="number"
+
+                     :value="editAfficherEnorere" 
+                     class="span"
+                      readonly
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">Montant acte/réel du marché (HT){{editActeEffetFinancier.montant_act_ht}}</label>
+                <div class="controls">
+                   <input type="text" v-model="editActeEffetFinancier.montant_act_ht"
+                          class="span"
+                          placeholder="Saisir le montant "
+                   />
+                </div>
+              </div>
+            </td>
+           </tr>
+            <tr>
+             
+             <td >
+              <div class="control-group">
+                <label class="control-label" > Montant TVA du marché</label>
+                <div class="controls">
+                   <input
+                       type="number"
+                       :value="editMontantTva" 
+
+                       class="span"
+                       readonly
+                   />
+
+                </div>
+              </div>
+            </td>
+             <td colspan="2">
+              <div class="control-group">
+                <label class="control-label" >Montant TTC du marché</label>
+                <div class="controls">
+                  <input
+                       type="text"
+                       v-model="editActeEffetFinancier.montant_act"
+
+                       class="span"
+                       readonly
+                   /> 
+
+                </div>
+              </div>
+            </td>
+           </tr>
+         </table>
+        
+      </div>
+      <div id="DEMARRAGE" class="tab-pane">
+         <table class="table table-bordered table-striped">
+           <tr>
+             <td >
+              <div class="control-group">
+                <label class="control-label" >Taux Avance Demarrage</label>
+                <div class="controls">
+                 <input
+                    type="number"  v-model="editActeEffetFinancier.taux_avance_demarrage"
+
+                    placeholder="saisir le taux Avance Demarrage"
+                     class="span"
+
+               />
+
+                </div>
+              </div>
+            </td>
+              <td>
+              <div class="control-group">
+                <label class="control-label">Avance Demarrage Ht</label>
+                <div class="controls">
+
+
+                  <input type="text" v-model="editActeEffetFinancier.avance_demarrage_ht"
+                         class="span"
+                         placeholder="Saisir le montant "
+                  />
+
+                </div>
+              </div>
+            </td>
+             <td>
+               <div class="control-group">
+                <label class="control-label" >TVA (Avance Demarrage)</label>
+                <div class="controls">
+                   <input
+                       type="number"
+                       :value="avanceDemarrageMontantTvaModifier" 
+
+                       class="span"
+                       readonly
+                   />
+
+                </div>
+              </div>
+             </td>
+             <td >
+              <div class="control-group">
+                <label class="control-label" >Montant Avance Demarrage TTC</label>
+                <div class="controls">
+                   <input
+                       type="number"
+                       :value="editAvanceDemarrage" 
+
+                       class="span"
+                       readonly
+                   />
+
+                </div>
+              </div>
+            </td>
+           </tr>
+         </table>
+      </div>
+       <div id="CAUTIONNEMENT" class="tab-pane">
+        <table class="table table-bordered table-striped">
+           <tr>
+             <td >
+              <div class="control-group">
+                <label class="control-label" >Taux % du cautionnement</label>
+                <div class="controls">
+                   <input
+                       type="number"  v-model="editActeEffetFinancier.taux_cautionnemt"
+
+                       placeholder="saisir le taux du cautionnement"
+                       class="span"
+
+                   />
+
+                </div>
+              </div>
+            </td>
+            <td >
+              <div class="control-group">
+                <label class="control-label" > Montant HT du cautionnement</label>
+                <div class="controls">
+                   <input type="text"  :value="editAfficheMontantHorsTaxeDuCautionnement" 
+
+
+                          class="span"
+                          readOnly
+                   />
+
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label" >Montant TVA du cautionnement</label>
+                <div class="controls">
+                   <input
+                       type="number"  :value="editAfficherMontantTvaDuCautionnement" 
+
+
+                       class="span"
+                       readonly
+                   />
+
+                </div>
+              </div>
+            </td>
+             <td >
+              <div class="control-group">
+                <label class="control-label" >Montant TTC du cautionnement </label>
+                <div class="controls">
+                   <input
+                       type="number"
+
+                       :value="editAfficherMontantTTCDuCautionnement" 
+                       class="span"
+                       readonly
+                   />
+
+                </div>
+              </div>
+            </td>
+           </tr>
+        </table>
+      </div>
+       <div id="GARANTIE" class="tab-pane">
+      <table class="table table-bordered table-striped">
+        <tr>
+          <td >
+              <div class="control-group">
+                <label class="control-label">Taux % de retenue de garantie</label>
+                <div class="controls">
+                   <input
+                       type="number"  v-model="editActeEffetFinancier.taux_retenue_garantie"
+                       placeholder="saisir le taux de retenue de garantie"
+
+                       class="span"
+
+                   />
+
+                </div>
+              </div>
+            </td>
+            <td >
+              <div class="control-group">
+                <label class="control-label" > Montant HT de retenue de garantie</label>
+                <div class="controls">
+                   <input
+                       type="text"  :value="editAfficherMontantHorsTaxeRetenuGarantie" 
+                       placeholder="saisir le montant hors taxe du dispositif retenu"
+
+                       class="span"
+                       readonly
+                   />
+
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label" >Montant TVA de retenue de garantie</label>
+                <div class="controls">
+                   <input
+                       type="number"  :value="editAfficherMontantTvaTaxeRetenuGarantie" 
+
+
+                       class="span"
+                       readonly
+                   />
+
+                </div>
+              </div>
+            </td>
+             <td >
+              <div class="control-group">
+                <label class="control-label" >Montant TTC retenue de garantie </label>
+                <div class="controls">
+                   <input
+                       type="number"  :value="editAfficherMontantRetenueGarantie" 
+
+
+                       class="span"
+                       readonly
+                   />
+
+                </div>
+              </div>
+            </td>
+        </tr>
+      </table>
+      </div>
+      
+      </div>
+      </div>
+
+
+    </div>
+
+    <div class="modal-footer">
+      <a  @click.prevent="modifierModalActeEffetFinancierLocal"
+          class="btn btn-primary"
+          href="#"
+      >Modifier</a>
+      <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+    </div>
+  </div>
   <div v-for="item in lot" :key="item.id" class="widget-content">
     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
 
@@ -641,7 +1186,7 @@ editAfficherMontantRetenueGarantie
   </div>
   <!---->
 
-
+ afficherEnorere
 
  <div id="modifierActeEF" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
@@ -920,7 +1465,7 @@ editAfficherMontantRetenueGarantie
                   <input
                       type="number"
 
-                      :value="afficherEnorereModifier" style="text-align:left;color:red"
+                      :value="afficherEnorereModifier" 
                       class="span"
                       readonly
                   />
@@ -949,7 +1494,7 @@ editAfficherMontantRetenueGarantie
                  <div class="controls">
                   <input
                       type="number"
-                      :value="montantTvaModifier" style="text-align:left;color:red"
+                      :value="montantTva" 
 
                       class="span"
                       readonly
@@ -964,7 +1509,7 @@ editAfficherMontantRetenueGarantie
                  <div class="controls">
                   <input
                       type="number"
-                      :value="montantHTtModifier" style="text-align:left;color:red"
+                      :value="montantHTt" 
 
                       class="span"
                       readonly
@@ -1016,7 +1561,7 @@ editAfficherMontantRetenueGarantie
                  <div class="controls">
                   <input
                       type="number"
-                      :value="avanceDemarrageMontantTvaModifier" style="text-align:left;color:red"
+                      :value="avanceDemarrageMontantTva" 
 
                       class="span"
                       readonly
@@ -1031,7 +1576,7 @@ editAfficherMontantRetenueGarantie
                  <div class="controls">
                   <input
                       type="number"
-                      :value="avanceDemarrageModifier" style="text-align:left;color:red"
+                      :value="avanceDemarrage" 
 
                       class="span"
                       readonly
@@ -1065,8 +1610,8 @@ editAfficherMontantRetenueGarantie
             <td >
               <div class="control-group">
                 <label class="control-label" > Montant HT du cautionnement</label>
-                 <div class="controls">
-                  <input type="text"  :value="afficheMontantHorsTaxeDuCautionnementModifier" style="text-align:left;color:red"
+                <div class="controls">
+                  <input type="text"  :value="afficheMontantHorsTaxeDuCautionnement" 
 
 
                          class="span"
@@ -1082,7 +1627,7 @@ editAfficherMontantRetenueGarantie
                 <label class="control-label" >Montant TVA du cautionnement</label>
                  <div class="controls">
                   <input
-                      type="number"  :value="afficherMontantTvaDuCautionnementModifier" style="text-align:left;color:red"
+                      type="number"  :value="afficherMontantTvaDuCautionnement" 
 
 
                       class="span"
@@ -1100,7 +1645,7 @@ editAfficherMontantRetenueGarantie
                   <input
                       type="number"
 
-                      :value="afficherMontantTTCDuCautionnementModifier" style="text-align:left;color:red"
+                      :value="afficherMontantTTCDuCautionnement" 
                       class="span"
                       readonly
                   />
@@ -1136,7 +1681,7 @@ editAfficherMontantRetenueGarantie
                 <label class="control-label" > Montant HT de retenue de garantie</label>
                  <div class="controls">
                   <input
-                      type="text"  :value="afficherMontantHorsTaxeRetenuGarantieModifier" style="text-align:left;color:red"
+                      type="text"  :value="afficherMontantHorsTaxeRetenuGarantie" 
                       placeholder="saisir le montant hors taxe du dispositif retenu"
 
                       class="span"
@@ -1152,7 +1697,8 @@ editAfficherMontantRetenueGarantie
                 <label class="control-label" >Montant TVA de retenue de garantie</label>
                 <div class="controls">
                   <input
-                      type="number"  :value="afficherMontantTvaTaxeRetenuGarantieModifier" style="text-align:left;color:red"
+                      type="number"  :value="afficherMontantTvaTaxeRetenuGarantie" 
+                      
 
 
                       class="span"
@@ -1168,7 +1714,7 @@ editAfficherMontantRetenueGarantie
                 <label class="control-label" >Montant TTC retenue de garantie </label>
                  <div class="controls">
                   <input
-                      type="number"  :value="afficherMontantRetenueGarantieModifier" style="text-align:left;color:red"
+                      type="number"  :value="afficherMontantRetenueGarantie" 
 
 
                       class="span"
@@ -1293,7 +1839,17 @@ name: "ActEffeFinanciere",
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe',
       'planActe']),
+afficherEntrepriseNom(){
+      return id =>{
+        if(id != null && id !=""){
+          let ObjetId =this.entreprises.find(element => element.id== id)
+          if(ObjetId){
+            return ObjetId.raison_sociale
+          }
 
+        }
+      }
+    },
 affichieridMarcheGlobal() {
       return id => {
         if (id != null && id != "") {
@@ -1761,7 +2317,7 @@ afficheNomEntreprise() {
 
 // calcule du montant ttc
 
-    Modifier(){
+    afficherEnorere(){
       if(this.formEffetFinancier.exonere == 0){
         return 0
       }
@@ -2041,6 +2597,7 @@ afficheNomEntreprise() {
 //            return null
 //        }
 //    },
+
 affichierIdEntrepriseSelectionner() {
       return id => {
         if (id != null && id != "") {
@@ -2250,10 +2807,33 @@ nombreDejourCalculeModifier(){
 
       // this.editActeEffetFinancier.entreprise_id=entreprise_id
 
+var nouvelObjet1 = {
+        ...this.editActeEffetFinancier,
+        duree: this.nombreDejourCalculeModifier,
+        ua_id:this.afficherIDUA(this.macheid),
+        taux:this.editafficherEnorere,
+        tva_cautionnement:this.editafficherMontantTvaDuCautionnement,
+        montant_ttc_cautionnement:this.editafficherMontantTTCDuCautionnement,
+        montant_ht_cautionnement:this.editafficheMontantHorsTaxeDuCautionnement,
+        montant_ht_retenu_garantie:this.editafficherMontantHorsTaxeRetenuGarantie,
+        montant_tva_retenu_garanti:this.editafficherMontantTvaTaxeRetenuGarantie,
+        montant_ttc_retenue_garantie:this.editafficherMontantRetenueGarantie,
+        tva:this.editmontantTva,
+        montant_act:this.editmontantHTt,
+        avance_demarrage_ttc:this.editavanceDemarrage,
+        tva_avance_demarage:this.editavanceDemarrageMontantTva,
+        entreprise_id:this.affichierIdEntrepriseSelectionner(this.afficherEntrepriseNom(this.editActeEffetFinancier.entreprise_id)),
+        difference_personnel_bienService:this.afficheMarcheType,
+        marche_id:this.marche_lot,
+        marchegeneral_id:this.affichieridMarcheGlobal(this.marche_lot),
+    
+      }
 
-
-      this.modifierActeEffetFinancier(this.editActeEffetFinancier)
+      this.modifierActeEffetFinancier(nouvelObjet1)
       this.$('#modifierActeEF').modal('hide');
+      this.editActeEffetFinancier = {
+
+      };
     },
 
     formatageSomme:formatageSomme,

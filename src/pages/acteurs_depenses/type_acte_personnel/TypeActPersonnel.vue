@@ -211,7 +211,15 @@
                     //     name: 'alertMe',
                     //     icon: 'add_alert'
                     // }
+                    
                 ],
+                  json_fields: {
+            'Code': 'code',
+            'Libelle': 'libelle',
+           
+           
+           
+        },
 
                 search:"",
                 liste:[],

@@ -652,6 +652,9 @@
                     }
 
                 ],
+                json_fields:{
+                  
+                },
                 
                 detail_marche:{
                    numero_cc: "",

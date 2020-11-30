@@ -2,7 +2,7 @@
     <div>
      
        <div class="container-fluid">
-   
+  
     <div class="main-body">
     
           <!-- Breadcrumb -->
@@ -95,7 +95,7 @@
                   </l-circle-marker>
                  
   
-                <v-geosearch :options="geosearchOptions" ></v-geosearch>
+                <v-geosearch  ></v-geosearch>
               </l-map>
 
 

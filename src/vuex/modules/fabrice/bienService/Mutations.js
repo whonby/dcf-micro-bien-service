@@ -1,8 +1,7 @@
 // export const GET_ALL_DECOMPTE = (state, tableau_decompte) =>{
 //     state.decomptes = tableau_decompte
 // }
-
-
+MODIFIER_MANDAT
 // // add candidat selectionner
 
 // export const AJOUTER_DECOMPTE = (state, elementAjouter) => {
@@ -2553,3 +2552,14 @@ export const GET_ALL_RESERVE_CF = (state, tableau_reserve_cf) =>{
    export const SUPPRIMER_MOTIF_PASSATION = (state, id) =>{
        state.motif_passations = state.motif_passations.filter(response => response.id!=id)
    }
+
+
+
+   export const MODIFIER_ACTE = (state, elementModif) => {
+    state.acteEffetFinanciers = state.acteEffetFinanciers.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}

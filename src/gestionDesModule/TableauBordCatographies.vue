@@ -20,7 +20,6 @@
 
               <div class="row-fluid" >
                 <div class="span5" v-if="objetUnite">
-
                   <donut-chart
                       style="width: 120px;height: 120px"
                       id="donut1"
@@ -48,7 +47,6 @@
 
                      <div class="row-fluid">
              
-
 
     <div class="row-fluid gutters-sm">
             <div class="span11" v-for="marche_image in imageMarcheSelectionner(objetUnite.id)" :key="marche_image.id">
@@ -109,42 +107,19 @@
                 Filtre
                 <div class="sidebar-close"><i class="fa fa-caret-left"></i></div>
               </h1>
-              <table class="table table-striped">
-                <tbody>
-                <tr>
-                  <td>
-                    <label>Unite administrative</label>
-                    <model-list-select style="background-color: rgb(255,255,255);"
-                                       class="wide"
-                                       :list="uniteAdministratives"
-                                       v-model="unite_administrative_id"
-                                       option-value="id"
-                                       option-text="libelle"
-                                       placeholder="Unité administrative"
-                    >
+              <!--<table class="table table-striped">-->
+                <!--<tbody>-->
+                <!--<tr>-->
+                  <!--<td>-->
 
-                    </model-list-select>
-                    <a href="#" @click.prevent="videUniteAdmin()" style="color: red" v-if="unite_administrative_id"><i class="fa fa-trash-o"></i></a>
-                  </td>
-                  <td>
-                    <label>Régions</label>
-                    <model-list-select style="background-color: rgb(255,255,255);"
-                                       class="wide"
-                                       :list="regions"
-                                       v-model="region"
-                                       option-value="id"
-                                       option-text="libelle"
+                  <!--</td>-->
+                  <!--<td>-->
 
-                                       placeholder="Régions"
-                    >
 
-                    </model-list-select>
-                    <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a>
-
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+                  <!--</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+              <!--</table>-->
 
 <div class="span5">
    <h6>Infrastructure</h6>
@@ -154,32 +129,69 @@
     <label  v-for="item in getterInfrastrucure" :key="item.id" :for="item.id">
       <input type="radio" v-model="infrastructure" :value="item.id" :id="item.id"> <span> {{item.libelle}} <b>({{nombreMarchePasInfrastructure(item.id)}})</b></span>
     </label>
-    
+
+    <h6>Type Marches</h6>
+    <label for="all_type">
+        <input type="radio" v-model="type_marche" value="" id="all_type"> <span>Affiché tous  <b></b></span>
+    </label>
+    <label  v-for="item in typeMarches" :key="item.id" :for="'T'+item.id">
+        <input type="radio" v-model="type_marche" :value="item.id" :id="'T'+item.id"> <span> {{item.libelle}} <b>({{nombreMarchePasTypeMarche(item.id)}})</b></span>
+    </label>
+
 </div>
 
 <div class="span6">
+    <label>Unite administrative<a href="#" @click.prevent="videUniteAdmin()" style="color: red" v-if="unite_administrative_id">
+        <i class="fa fa-trash-o"></i></a></label>
+    <model-list-select style="background-color: rgb(255,255,255);"
+                       class="wide"
+                       :list="uniteAdministratives"
+                       v-model="unite_administrative_id"
+                       option-value="id"
+                       option-text="libelle"
+                       placeholder="Unité administrative"
+    >
+
+    </model-list-select>
+
+
+    <label>Régions  <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a></label>
+    <model-list-select style="background-color: rgb(255,255,255);"
+                       class="wide"
+                       :list="regions"
+                       v-model="region"
+                       option-value="id"
+                       option-text="libelle"
+
+                       placeholder="Régions"
+    >
+
+    </model-list-select>
+
 <h6>Statut des marchés</h6>
  <label for="logiciel70">
-      <input type="radio" v-model="status_marche" value="" id="logiciel70"> <span>Affichés tous <b>({{nombreMarchePasInfrastructure(infrastructure)}})</b></span>
+      <input type="radio" v-model="status_marche" value="" id="logiciel70"> <span >Affichés tous <b>({{nombreMarchePasInfrastructure(infrastructure)}})</b></span>
     </label>
      <label for="logiciel7">
-      <input type="radio" v-model="status_marche" id="logiciel7" value="0"> <span>Marché planifié <b>({{nombreMarcheParStatue("planifie")}})</b></span>
+      <input type="radio" v-model="status_marche" id="logiciel7" value="planifie"> <span class="mpl">Marché planifié <b>({{nombreMarcheParStatue("planifie")}})</b></span>
     </label>
     <label for="web6" >
-      <input type="radio" v-model="status_marche"  id="web6" value="1"> <span>Marché contractualisation <b>({{nombreMarcheParStatue(1)}})</b></span>
+      <input type="radio" v-model="status_marche"  id="web6" value="1"> <span class="mpc">Marché contractualisation <b>({{nombreMarcheParStatue(1)}})</b></span>
     </label>
     <label for="mobile5">
-      <input type="radio" v-model="status_marche" id="mobile5" value="2"> <span>Marché en exécution <b>({{nombreMarcheParStatue(2)}})</b></span>
+      <input type="radio" v-model="status_marche" id="mobile5" value="2"> <span class="mexusion">Marché en exécution <b>({{nombreMarcheParStatue(2)}})</b></span>
     </label>
      <label for="mobile4">
-      <input type="radio" v-model="status_marche" id="mobile4" value="3"> <span>Marché résilie  <b>({{nombreMarcheParStatue(3)}})</b></span>
+      <input type="radio" v-model="status_marche" id="mobile4" value="3"> <span class="mresilise">Marché résilie  <b>({{nombreMarcheParStatue(3)}})</b></span>
     </label>
      <label for="mobile3">
-      <input type="radio" v-model="status_marche" id="mobile3" value="5" > <span>Marché terminé  <b>({{nombreMarcheParStatue(5)}})</b></span>
+      <input type="radio" v-model="status_marche" id="mobile3" value="5" > <span class="mtermine">Marché terminé  <b>({{nombreMarcheParStatue(5)}})</b></span>
     </label>
      <label for="mobile2">
       <input type="radio" v-model="status_marche" id="mobile2" value="7"> <span>Marché suspendu <b>({{nombreMarcheParStatue(7)}})</b></span>
     </label>
+
+
 </div>
  
   
@@ -224,7 +236,7 @@
 
               </div>
             <hr>
-              <apexchart type="bar" width="350" height="350"  :options="chartOptions" :series="dataBar"></apexchart>
+              <apexchart type="bar"  height="350"  :options="chartOptions" :series="dataBar"></apexchart>
             </div>
 
             <div class="sidebar-pane" id="messages">
@@ -258,21 +270,21 @@
                     :url="tileProvider.url"
                     layer-type="base"/>
                 <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
-                
-                <!-- <v-marker-cluster >-->
-                  <l-circle-marker v-for="l in localisation"
-                                   :key="l.id"
-                                   :lat-lng="l.latlng"
-                                   @click="uniteAdmin(l)"
-                                   :radius="8"
-                                   :color="l.color"
-                                   :fillColor="l.colorFill"
-                                   :fillOpacity="2"
 
-                  >
-                    <l-popup>
-                      <b>{{l.ville}}</b> <br>
-<!--                      <div >-->
+                  <!-- <v-marker-cluster >-->
+                    <l-circle-marker v-for="l in localisation"
+                                     :key="l.id"
+                                     :lat-lng="l.latlng"
+                                     @click="uniteAdmin(l)"
+                                     :radius="8"
+                                     :color="l.color"
+                                     :fillColor="l.colorFill"
+                                     :fillOpacity="2"
+
+                    >
+                      <l-popup>
+                        <b>{{l.ville}}</b> <br>
+  <!--                      <div >-->
 <!--                        Montant de base: <span style="color: #003900; "><b>{{formatageSomme(l.budget)}}</b></span> <br>-->
 <!--                        Montant exécuté:<span style="color: #00d700; "><b>{{formatageSomme(l.budgetExecute)}}</b></span><br>-->
 <!--                        Montant restant:<span style="color: darkred; "><b>{{formatageSomme(l.budgetReste)}}</b></span><br>-->
@@ -288,7 +300,7 @@ montantBudegtPasUniteAdminOuRegion
 
                         &lt;!&ndash;&ndash;&gt;
                     </l-marker>-->
-              <!--   </v-marker-cluster>-->
+                  <!--       </v-marker-cluster>-->
                 <v-geosearch :options="geosearchOptions" ></v-geosearch>
               </l-map>
             </div>
@@ -302,41 +314,41 @@ montantBudegtPasUniteAdminOuRegion
 
         </div>
 
-<!--        <div class="span4">-->
-<!--          <div class="widget-box">-->
-<!--            <div class="widget-title" align="center" v-if="zone_geographique"> <span class="icon"> <i class="icon-book"></i> </span>-->
-<!--              <h5>{{zone_geographique}}</h5>-->
-<!--              <button v-if="zone_geographique" @click.prevent="afficher()"  class="btn btn-mini">-->
-<!--                <i class="icon-folder-open"></i>Afficher tout</button>-->
+        <!--<div class="span4">-->
+          <!--<div class="widget-box">-->
+            <!--<div class="widget-title" align="center" v-if="zone_geographique"> <span class="icon"> <i class="icon-book"></i> </span>-->
+              <!--<h5>{{zone_geographique}}</h5>-->
+              <!--<button v-if="zone_geographique" @click.prevent="afficher()"  class="btn btn-mini">-->
+                <!--<i class="icon-folder-open"></i>Afficher tout</button>-->
 
-<!--            </div>-->
-<!--            <div class="widget-title" align="center" v-if="libelle_unite_admin"> <span class="icon"> <i class="icon-book"></i> </span>-->
-<!--              <h5>{{libelle_unite_admin}}</h5>-->
-<!--              <button v-if="libelle_unite_admin" @click.prevent="afficher()"  class="btn btn-mini">-->
-<!--                <i class="icon-folder-open"></i>Afficher tout</button>-->
+            <!--</div>-->
+            <!--<div class="widget-title" align="center" v-if="libelle_unite_admin"> <span class="icon"> <i class="icon-book"></i> </span>-->
+              <!--<h5>{{libelle_unite_admin}}</h5>-->
+              <!--<button v-if="libelle_unite_admin" @click.prevent="afficher()"  class="btn btn-mini">-->
+                <!--<i class="icon-folder-open"></i>Afficher tout</button>-->
 
-<!--            </div>-->
-<!--            <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>-->
-<!--              <h5 align="center">Liste des unités administratives-->
-<!--              </h5>-->
-<!--            </div>-->
+            <!--</div>-->
+            <!--<div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>-->
+              <!--<h5 align="center">Liste des unités administratives-->
+              <!--</h5>-->
+            <!--</div>-->
 
-<!--            <div class="widget-content widget-content1" >-->
+            <!--<div class="widget-content widget-content1" >-->
 
-<!--              <table class="table table-bordered table-striped" >-->
-<!--                <tr>-->
-<!--                  <th>Nom UA </th>-->
-<!--                </tr>-->
-<!--                <tbody style="height: 100px;">-->
-<!--                <tr class="odd gradeX " v-for="ua in administratif(idzone)"-->
-<!--                    :key="ua.id">-->
-<!--                  <td  class="blah " @click="uniteAdministrativeSelect(ua.id,ua.libelle, $event)" :class="{ red : active_el == ua.id }">{{ua.libelle}}</td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--              </table>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+              <!--<table class="table table-bordered table-striped" >-->
+                <!--<tr>-->
+                  <!--<th>Nom UA </th>-->
+                <!--</tr>-->
+                <!--<tbody style="height: 100px;">-->
+                <!--<tr class="odd gradeX " v-for="ua in administratif(idzone)"-->
+                    <!--:key="ua.id">-->
+                  <!--<td  class="blah " @click="uniteAdministrativeSelect(ua.id,ua.libelle, $event)" :class="{ red : active_el == ua.id }">{{ua.libelle}}</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+              <!--</table>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
 
       </div>
 
@@ -391,11 +403,65 @@ montantBudegtPasUniteAdminOuRegion
       </div>
 
 
+
 <!--      <div class="demo-drawer-footer">-->
 <!--        <Button style="margin-right: 8px" @click="value3 = false">Cancel</Button>-->
 <!--        <Button type="primary" @click="value3 = false">Submit</Button>-->
 <!--      </div>-->
     </Drawer>
+
+
+
+      <div id="Pentagon" style="display: none">
+          <svg viewBox="0 0 12.071004 11.879879"
+               height="3.3527658mm"
+               width="3.4067056mm">
+              <g transform="translate(-178.44332,-260.41101)">
+                  <path d="m 179.93895,268.87298 c -0.81429,-1.87985 -1.48727,-3.43568 -1.49552,-3.4574 -0.0109,-0.0288 0.74744,-0.71211 2.8028,-2.52538 1.54978,-1.36724 2.82584,-2.48287 2.83568,-2.47918 0.0352,0.0132 6.38478,3.76865 6.42481,3.79994 0.037,0.0289 -0.0368,0.37955 -0.77648,3.69055 -0.44954,2.01224 -0.82089,3.66216 -0.82522,3.6665 -0.004,0.004 -1.63277,0.16196 -3.61875,0.35028 -1.98598,0.18831 -3.66845,0.34919 -3.73883,0.3575 l -0.12797,0.0151 -1.48052,-3.41791 z"
+                        style="fill:#ffa500;fill-opacity:1"></path>
+              </g>
+          </svg>
+
+      </div>
+      <div id="MarcheContratualisation">
+          <div class='marche_contratualisation' @click="innerClick()"></div>
+      </div>
+      <div id="MarchePlanification">
+          <div class='marche_planifier'></div>
+      </div>
+      <div id="MarcheExecution">
+          <div class='marche_execution'></div>
+      </div>
+      <div id="MarcheResilie">
+          <div class='marche_resilise'></div>
+      </div>
+      <div id="MarcheTerminer">
+          <div class='marche_termine'></div>
+      </div>
+      <div id="MarcheSuppension">
+          <div class='marche_suspendue'></div>
+      </div>
+
+
+
+      <div id="MarcheContratualisation1">
+          <div id="contratualisation">Marché en contractualisation </div>
+      </div>
+      <div id="MarchePlanification1">
+          <div id="planifier">Marché planifié</div>
+      </div>
+      <div id="MarcheExecution1">
+          <div id="execution">Marché en exécution</div>
+      </div>
+      <div id="MarcheResilie1">
+          <div id="resilier">Marché résilie</div>
+      </div>
+      <div id="MarcheTerminer1">
+          <div id="termine">Marché terminé</div>
+      </div>
+      <div id="MarcheSuppension1">
+          <div id="suppension">Marché suspendu</div>
+      </div>
   </div>
 
 </template>
@@ -410,7 +476,7 @@ import { DonutChart ,/*BarChart*/} from 'vue-morris'
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import VGeosearch from 'vue2-leaflet-geosearch';
 import {mapGetters} from 'vuex'
-import { latLng, Icon, icon } from 'leaflet'
+import { /*latLng,*/ Icon, icon } from 'leaflet'
 import { LMap, LTileLayer, LIconDefault,LControlLayers,LPopup,LCircleMarker} from "vue2-leaflet";
 import iconUrl from 'leaflet/dist/images/marker-icon.png'
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
@@ -422,6 +488,7 @@ import 'vue-search-select/dist/VueSearchSelect.css'
 //import {geojson} from "@/data/py-departments-geojson"
 import VueApexCharts from 'vue-apexcharts'
 import ad from "leaflet-html-legend"
+import moda from "leaflet-modal"
 export default {
   name: "Example",
   components: {
@@ -449,7 +516,71 @@ export default {
         {iconUrl, shadowUrl}
     ))
     return {
-      url_bien_service:"",
+
+        type_marche:"",
+
+        series: [{
+            name: 'PRODUCT A',
+            data: [44, 55, 41, 67, 22, 43]
+        }, {
+            name: 'PRODUCT B',
+            data: [13, 23, 20, 8, 13, 27]
+        }, {
+            name: 'PRODUCT C',
+            data: [11, 17, 15, 15, 21, 14]
+        }, {
+            name: 'PRODUCT D',
+            data: [21, 7, 25, 13, 22, 8]
+        }],
+        chartOptions: {
+            chart: {
+                type: 'bar',
+                height: 350,
+
+                stacked: true,
+                toolbar: {
+                    show: true
+                },
+                zoom: {
+                    enabled: true
+                }
+            },
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    legend: {
+                        position: 'bottom',
+                        offsetX: -10,
+                        offsetY: 0
+                    }
+                }
+            }],
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                },
+            },
+            xaxis: {
+                labels: {
+                    rotate: -90
+                },
+                categories: [],
+                tickPlacement: 'on'
+            },
+            legend: {
+                position: 'right',
+                offsetY: 40
+            },
+            fill: {
+                opacity: 1
+            }
+        },
+
+
+
+
+        url_bien_service:"",
       info_sidebar_marche:"",
       unite_administrative_id:"",
       departement:"",
@@ -467,17 +598,8 @@ export default {
       },
       objetUnite:"",
       donutData: [],
-      series: [{
-        name: 'Net Profit',
-        data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-      }, {
-        name: 'Revenue',
-        data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-      }, {
-        name: 'Free Cash Flow',
-        data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
-      }],
-      chartOptions: {
+
+      chartOptions2: {
         chart: {
           type: 'bar',
           height: 350,
@@ -553,14 +675,14 @@ export default {
       idzone:"",
       activeUa:false,
       zone_geographique:"",
-      center: latLng(6.247273, -7.669441),
+    //  center: latLng(6.247273, -7.669441),
       url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
       attribution:
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      withPopup: latLng(6.247273, -7.669441),
-      withTooltip: latLng(6.247273, -7.669441),
+    //  withPopup: latLng(6.247273, -7.669441),
+    //  withTooltip: latLng(6.247273, -7.669441),
       currentZoom: 11.5,
-      currentCenter: latLng(6.247273, -7.669441),
+     // currentCenter: latLng(6.247273, -7.669441),
       showParagraph: false,
       mapOptions: {
         zoomSnap: 0.5,
@@ -590,7 +712,7 @@ export default {
         {
           name: 'Plan 2',
           visible: false,
-          url: 'https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png',
+          url: 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
           attribution: '',
         },
         {
@@ -630,12 +752,13 @@ export default {
     };
   },
 created() {
-
+//console.log(this.typeMarches)
 this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
 
 },
   computed: {
 // methode pour maper notre guetter
+
     ...mapGetters('parametreGenerauxAdministratif', ['structures_geographiques',
       'localisations_geographiques',"getterLocalisationGeoAll","getterInfrastrucure"]),
     ...mapGetters("uniteadministrative", [
@@ -644,7 +767,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       "uniteAdministratives",
       "getterBudgeCharge",
     ]),
-    ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise","getterImageMarche","acteEffetFinanciers"]),
+    ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise","getterImageMarche","acteEffetFinanciers","typeMarches"]),
     regions(){
       return this.getterLocalisationGeoAll.filter(item=>item.structure_localisation_geographique.niveau==2);
     },
@@ -671,7 +794,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     imageMarcheSelectionner(){
        return id=>{
          if(id!=""){
-           console.log(this.getterImageMarche)
+
            return this.getterImageMarche.filter(item=>item.marche_id==id)
          }
        }
@@ -697,28 +820,92 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     nombreMarchePasInfrastructure(){
               return id=>{
                 if(id!=""){
+                    if(this.type_marche!=""){
+                        return this.marcheUniteRegion.filter(item=>{
+                            if(item.infrastructure_id==id && item.type_marche_id==this.type_marche){
+                                return item
+                            }
+                        }).length
+                    }
+
+                    if(this.status_marche!="" && this.type_marche==""){
+                        return this.getMarcheStatus(this.status_marche).filter(item=>item.infrastructure_id==id).length
+                    }
+
+                    if(this.status_marche!="" && this.type_marche!=""){
+                        return this.getMarcheStatus(this.status_marche).filter(item=>{
+                            if(item.type_marche_id==this.type_marche && item.infrastructure_id==id){
+                                return item
+                            }
+                        }).length
+                    }
+
                    return this.marcheUniteRegion.filter(item=>item.infrastructure_id==id).length
-                }else{
-                   return this.marcheUniteRegion.length
                 }
+                  return this.marcheUniteRegion.length
               }
     },
-   
+
+      nombreMarchePasTypeMarche(){
+          return id=>{
+              if(id!=""){
+                  if(this.infrastructure!="" && this.status_marche==""){
+                      return this.marcheUniteRegion.filter(item=>{
+                          if(item.infrastructure_id==this.infrastructure && item.type_marche_id==id){
+                              return item
+                          }
+                      }).length
+                  }
+                  if(this.status_marche!="" && this.infrastructure==""){
+                      return this.getMarcheStatus(this.status_marche).filter(item=>item.type_marche_id==id).length
+                  }
+
+                  if(this.status_marche!="" && this.infrastructure!=""){
+                      return this.getMarcheStatus(this.status_marche).filter(item=>{
+                          if(item.infrastructure_id==this.infrastructure && item.type_marche_id==id){
+                              return item
+                          }
+                      }).length
+                  }
+
+                  return this.marcheUniteRegion.filter(item=>item.type_marche_id==id).length
+              }
+              return this.marcheUniteRegion.length
+          }
+      },
     nombreMarcheParStatue(){
            return status=>{
              if(status!=""){
                if(status=="planifie"){
                  status=0;
                }
-             if(this.infrastructure!=""){
+             if(this.infrastructure!="" && this.type_marche==""){
                   return this.marcheUniteRegion.filter(item=>{
                     if(item.attribue==status && item.infrastructure_id==this.infrastructure){
                       return item
                     }
                   }).length
-             }else{
-               return this.marcheUniteRegion.filter(item=>item.attribue==status).length
              }
+
+
+                 if(this.infrastructure=="" && this.type_marche!=""){
+                     return this.marcheUniteRegion.filter(item=>{
+                         if(item.attribue==status && item.type_marche_id==this.type_marche){
+                             return item
+                         }
+                     }).length
+                 }
+
+                 if(this.infrastructure!="" && this.type_marche!=""){
+                     return this.marcheUniteRegion.filter(item=>{
+                         if(item.attribue==status && item.type_marche_id==this.type_marche  && item.infrastructure_id==this.infrastructure){
+                             return item
+                         }
+                     }).length
+                 }
+
+               return this.marcheUniteRegion.filter(item=>item.attribue==status).length
+
 
              }
            }
@@ -943,8 +1130,16 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     },
     getMarcheStatus(){
          return status=>{
+             if(status=="planifie"){
+                 status=0;
+                 return this.objetMarchePasUniteOuRegion.filter(item=>item.attribue==0)
+             }
+
+
               if(status!=""){
+
                   return this.objetMarchePasUniteOuRegion.filter(item=>item.attribue==status)
+
               }else{
                 return this.objetMarchePasUniteOuRegion
 
@@ -953,10 +1148,10 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     },
     marcheUniteRegion(){
      let vM=this;
-      let objet=this.marches
+      let objet=this.marches.filter(item=>item.parent_id!="")
       if(vM.region!="" && vM.unite_administrative_id==""){
         objet =this.marches.filter(item=>{
-            if(item.localisation_geographie_id==vM.region && item.parent_id!=null){
+            if(item.localisation_geographie_id==vM.region && item.parent_id!=""){
                 return item
             }
         })
@@ -965,7 +1160,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
 
       if(vM.unite_administrative_id!="" && vM.region==""){
         objet =this.marches.filter(item=>{
-            if(item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null){
+            if(item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
                 return item
             }
         })
@@ -973,7 +1168,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
 
        if(vM.unite_administrative_id!="" && vM.region!="" ){
         objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
             return item
           }
         })
@@ -982,53 +1177,153 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     },
     objetMarchePasUniteOuRegion(){
       let vM=this;
-      let objet=this.marches
+      let objet=this.marches.filter(item=>item.parent_id!="")
 
-
-      if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region && item.parent_id!=null)
+         //retourne les marches d'une region selectionner
+      if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure=="" && vM.type_marche==""){
+        objet =objet.filter(item=>{
+            if(item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                return item
+            }
+        })
 
       }
 
-      if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=null)
+        //retourne les marches d'une unite administrative selectionner
+      if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure=="" && vM.type_marche==""){
+        objet =objet.filter(item=>{
+            if(item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
+                return item
+            }
+        })
       }
 
-      if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region==""){
-        objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!=null)
+        //retourne les marches d'une une infrastucture selectionner
+      if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche==""){
+        objet =objet.filter(item=>{
+            if(item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                return item
+            }
+        })
       }
 
-      if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
+
+        //retourne les marches d'un type de marché selectionner
+        if (vM.infrastructure=="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche!=""){
+            objet =objet.filter(item=>{
+                if(item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                    return item
+                }
+            })
+        }
+
+
+        //retourne les marches de region et unite adminstrative selectionner
+      if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche==""){
+        objet =objet.filter(item=>{
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
             return item
           }
         })
       }
 
-      if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!=""){
-        objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=null){
+
+        //retourne les marches d'une infrastructure et unite adminstrative selectionner
+
+      if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche==""){
+        objet =objet.filter(item=>{
+          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
             return item
           }
         })
       }
 
-      if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!=""){
-        objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=null){
+
+        //retourne les marches d'un type marche et unite adminstrative selectionner
+
+        if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
+            objet =objet.filter(item=>{
+                if(item.unite_administrative_id==vM.unite_administrative_id && item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                    return item
+                }
+            })
+        }
+
+
+        //retourne les marches d'une region et infrastructure selectionner
+        if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" &&  vM.type_marche==""){
+        objet =objet.filter(item=>{
+          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=""){
             return item
           }
         })
       }
 
-      if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!=""){
-        objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=null){
+        //retourne les marches d'une infrasture et type marche selectionner
+        if(vM.unite_administrative_id=="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
+            objet =objet.filter(item=>{
+                if(item.infrastructure_id==vM.infrastructure && item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                    return item
+                }
+            })
+        }
+
+
+        //retourne les marches d'un type marche et regions selectionner
+        if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!=""){
+            objet =objet.filter(item=>{
+                if(item.localisation_geographie_id==vM.region && item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                    return item
+                }
+            })
+        }
+
+        //retourn les marches d'une UA, REGION et INFRASTRUCTURE
+
+      if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche=="" ){
+        objet =objet.filter(item=>{
+          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
             return item
           }
         })
       }
+
+
+        //retourn les marches d'une UA, REGION et TYPE MARCHE
+        if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!="" ){
+            objet =objet.filter(item=>{
+                if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                    return item
+                }
+            })
+        }
+
+        //retourn les marches d'une UA, INFRA et TYPE MARCHE
+        if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!="" ){
+            objet =objet.filter(item=>{
+                if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                    return item
+                }
+            })
+        }
+
+       //retourn les marche INFRA, REGIONS,TYPE MARCHE
+        if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
+            objet =objet.filter(item=>{
+                if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                    return item
+                }
+            })
+        }
+
+        //retourn les marche INFRA, REGIONS,TYPE MARCHE,UA
+        if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
+            objet =objet.filter(item=>{
+                if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
+                    return item
+                }
+            })
+        }
 
       return objet
     },
@@ -1277,7 +1572,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       this.showParagraph = !this.showParagraph;
     },
     innerClick() {
-      alert("Click!");
+      console.log("Guei est dans la place")
     },
     uniteAdmin(objet){
       this.value3=true
@@ -1308,6 +1603,9 @@ this.objetUnite=objet
       this.iduniteadmin=""
       this.libelle_unite_admin=""
     },
+      getInfoLegende(status){
+          this.status_marche=status
+      },
     osColors () {
       console.log('osColors')
       return []
@@ -1352,7 +1650,8 @@ this.objetUnite=objet
         this.clusterOptions = { disableClusteringAtZoom: 11 }
       });
     }, 5000);
-console.log(ad)
+   console.log(ad)
+      console.log(moda)
     const mapComponent = this.$refs.map;
 
     const map = mapComponent.mapObject;
@@ -1371,7 +1670,7 @@ console.log(ad)
       closeButton: true,
     }).addTo(map);
 
-
+      console.log(sid)
 
     var panelContent = {
       id: 'userinfo',                     // UID, used to access the panel
@@ -1401,31 +1700,32 @@ console.log(ad)
      var htmlLegend3 = sid.control.htmllegend({
         position: 'bottomright',
         legends: [{
-            name: 'Legend',
+            name: 'Legende',
             elements: [{
-                label: 'Marché planifié',
-                html: "<div class='marche_planifier'></div>"
+                label:document.querySelector('#MarchePlanification1').innerHTML,
+                html: document.querySelector('#MarchePlanification').innerHTML
             },
             {
-                label: 'Marché en contractualisation',
-                html: "<div class='marche_contratualisation'></div>"
+                label: document.querySelector('#MarcheContratualisation1').innerHTML,
+                html:document.querySelector('#MarcheContratualisation').innerHTML
             },
             {
-                label: 'Marché en exécution',
-                html: "<div class='marche_execution'></div>"
+                label: document.querySelector('#MarcheExecution1').innerHTML,
+                html: document.querySelector('#MarcheExecution').innerHTML
             },
             {
-                label: 'Marché résilie',
-                html: "<div class='marche_resilise'></div>"
+                label: document.querySelector('#MarcheResilie1').innerHTML,
+                html: document.querySelector('#MarcheResilie').innerHTML
             },
              {
-                label: 'Marché terminé',
-                html: "<div class='marche_termine'></div>"
+                label: document.querySelector('#MarcheTerminer1').innerHTML,
+                html: document.querySelector('#MarcheTerminer').innerHTML
             },
              {
-                label: 'Marché suspendu',
-                html: "<div class='marche_suspendue'></div>"
-            }]
+                label: document.querySelector('#MarcheSuppension1').innerHTML,
+                html: document.querySelector('#MarcheSuppension').innerHTML
+            },
+              ]
         }],
         collapseSimple: true,
         detectStretched: true,
@@ -1434,22 +1734,87 @@ console.log(ad)
     })
 
     map.addControl(htmlLegend3)
+      let vMm=this;
 
+     //click legende planifie
+      const marche_planifier = document.querySelector('#planifier');
+      marche_planifier.addEventListener('click', function (event) {
+          console.log(event)
+          vMm.getInfoLegende("planifie")
+         // console.log("Guei est dans la place....... ")
+      })
 
+      //Click legende contratualise
+
+      const marche_contratualise = document.querySelector('#contratualisation');
+      marche_contratualise.addEventListener('click', function (event) {
+          console.log(event)
+          vMm.getInfoLegende(1)
+          // console.log("Guei est dans la place....... ")
+      })
+
+      //Click legende execute
+
+      const marche_execute = document.querySelector('#execution');
+      marche_execute.addEventListener('click', function (event) {
+          console.log(event)
+          vMm.getInfoLegende(2)
+          // console.log("Guei est dans la place....... ")
+      })
+
+      //Click legende resilise
+      const marche_resilise = document.querySelector('#resilier');
+      marche_resilise.addEventListener('click', function (event) {
+          console.log(event)
+          vMm.getInfoLegende(3)
+      })
+
+      //Click legende termine
+      const marche_termine = document.querySelector('#termine');
+      marche_termine.addEventListener('click', function (event) {
+          console.log(event)
+          vMm.getInfoLegende(5)
+
+      })
+
+      //Click legende suppension
+      const marche_suppendu = document.querySelector('#suppension');
+      marche_suppendu.addEventListener('click', function (event) {
+          console.log(event)
+          vMm.getInfoLegende(7)
+
+      })
   }
 };
 </script>
-<!--
+
 
     
 -->
 <style>
 /* sidebar css */
+.mpl{
+    color:red ;
+}
+.mpc{
+    color: #04874e ;
+}
+.mexusion{
+   color:#e8d20c ;
+}
+.mresilise{
+    color:blue ;
+}
+.mtermine{
+    color:#ab0cd7 ;
+}
+
 .marche_planifier{
    width: 20px;
    height: 20px;
    background: red;
 }
+
 .marche_contratualisation{
    width: 20px;
    height: 20px;
@@ -1818,7 +2183,7 @@ label {
   display: block;
   cursor: pointer;
   line-height: 2;
-  font-size: 1em;
+  font-size: 0.9em;
 }
 [type="radio"] {
   clip: rect(0 0 0 0); 
@@ -1833,9 +2198,9 @@ label {
 }
 [type="radio"] + span:before {
   content: '';
-  width: 1em;
-  height: 1em;
-  border-radius: 1em;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 0.5em;
   display: inline-block;
   border: 0.125em solid #fff;
   transition: 0.5s ease all;
@@ -1844,6 +2209,39 @@ label {
   margin-right: 0.75em;
 }
 
+
+.marker-cluster-small {
+    background-color: #FF9633;
+    color: #0e0e0e;
+    font-size: 1em;
+
+}
+.marker-cluster-small div {
+    background-color: #FF9633;
+    color: #0e0e0e;
+    font-size: 1em;
+}
+.marker-cluster-medium {
+    background-color:#FF9633;
+    color: #0e0e0e;
+    font-size: 1em;
+}
+.marker-cluster-medium div {
+    background-color:#FF9633;
+    color: #0e0e0e;
+    font-size: 1em;
+}
+
+.marker-cluster-large {
+    background-color:#FF9633;
+    color: #0e0e0e;
+    font-size: 1em;
+}
+.marker-cluster-large div {
+    background-color:#FF9633;
+    color: #0e0e0e;
+    font-size: 1em;
+}
 @import "../../node_modules/leaflet/dist/leaflet.css";
 
 </style>

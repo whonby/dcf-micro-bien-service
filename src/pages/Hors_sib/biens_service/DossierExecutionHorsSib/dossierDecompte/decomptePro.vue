@@ -1,13 +1,13 @@
-L
+
 <template>
   <div >
-    <div id="exampleModal" class="modal hide">
+    <div id="exampleModal" class="modal hide grdirModalActeEffet">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Modifier decompte</h3>
       </div>
           <table class="table table-bordered table-striped">
-                <div class="widget-box">
+                <div class="widget-box">  
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                      <li class="active"><a data-toggle="tab" href="#MARCHE">INFO ENTREPRISE</a></li>
@@ -60,7 +60,7 @@ L
                   <input type="text" 
                          class="span"
                          readonly
-                         :value="MontantFacture(editDecompte.Facture_id)"
+                         v-model="editDecompte.facture_id"
                   />
                 </div>
               </div>
@@ -105,8 +105,8 @@ L
                 <label class="control-label" >Retenue de pénalité</label>
                 <div class="controls">
                   <input
-                      type="text"
-                       
+                      type="number"
+                       v-model="editDecompte.retenu_penalite" 
 
                       class="span"
                       readonly
@@ -128,7 +128,7 @@ L
                       class="span"
                      
                   />
-<code v-if="this.MontantRetenuAvance(this.editDecompte.marche_id) < this.CumulRetenuAvanceNouveauModifier ">Restant a paye  :{{retenuAvanceResteApayesModifier}}</code>
+
                 </div>
               </div>
             </td>
@@ -143,7 +143,7 @@ L
                       class="span"
                       
                   />
-            <code v-if="this.MontantRetenuGarantie(this.detail_Facture.marche_id) < this.CumulRetenuGarantieNouveau">Restant a paye   :{{retenuGarantieResteApayes}}</code>
+           
                 </div>
               </div>
             </td>
@@ -215,11 +215,11 @@ L
            <tr>
              <td >
               <div class="control-group">
-                <!-- <label class="control-label" >Part Bailleur </label> -->
+              
                 <div class="controls">
                   <input
                       type="hidden"  
-                        :value="ModifierMarche(editDecompte.marche_id)"
+                          :value="montantTTCMarche(macheid)"
                       step='100'
                       class="span"
                       readonly
@@ -230,7 +230,7 @@ L
             </td>
               <td>
               <div class="control-group">
-                <!-- <label class="control-label">Taux Bailleur(HT)</label> -->
+                <!-- <label class="control-label">Taux Bailleur(HT)</label>  -->
                 <div class="controls">
 
 
@@ -245,11 +245,11 @@ L
             </td>
              <td>
                <div class="control-group">
-                <!-- <label class="control-label" >Montant HT Bailleur</label> -->
+                 <!-- <label class="control-label" >Montant HT Bailleur</label>  -->
                 <div class="controls">
                   <input
                       type="hidden"
-                      :value="MontantHTBailleurModifier"
+                      :value="ModifierModifier"
 
                       class="span"
                       readonly
@@ -263,11 +263,11 @@ L
             <tr>
              <td >
               <div class="control-group">
-                <!-- <label class="control-label" >Part Etat </label> -->
+                 <!-- <label class="control-label" >Part Etat </label>  -->
                 <div class="controls">
                   <input
                       type="hidden"  
-                        :value="ModifierMarche(editDecompte.marche_id)"
+                          :value="montantTTCMarche(macheid)"
                       step='100'
                       class="span"
                       readonly
@@ -278,7 +278,7 @@ L
             </td>
               <td>
               <div class="control-group">
-                <!-- <label class="control-label">Taux Etat(HT+TVA)</label> -->
+                 <!-- <label class="control-label">Taux Etat(HT+TVA)</label>  -->
                 <div class="controls">
 
 
@@ -293,11 +293,11 @@ L
             </td>
              <td>
                <div class="control-group">
-                <!-- <label class="control-label" >Montant TTC Etat</label> -->
+                 <!-- <label class="control-label" >Montant TTC Etat</label>  -->
                 <div class="controls">
                   <input
                       type="hidden"
-                      :value=" MontantHTEtatModifier"
+                      :value="ModifierModifier"
 
                       class="span"
                       readonly
@@ -321,7 +321,7 @@ L
                 <div class="controls">
                   <input
                       type="text"
-                      :value="NomEntreprise(editDecompte.fournisseur_id)"
+                       :value="NomEntrepriseModifier(editDecompte.marche_id)"
                       
                       class="span"
                       readonly
@@ -336,7 +336,7 @@ L
                 <div class="controls">
                   <input
                       type="text"
-                     :value="AdresseEmailEntreprise(editDecompte.fournisseur_id)"
+                     :value="AdresseEmailEntreprise(NomEntrepriseModifier(editDecompte.marche_id))"
                       
                       class="span"
                       readonly
@@ -351,7 +351,7 @@ L
                   <input
                       type="text"
                        
-                      :value="ContribuableEntreprise(editDecompte.fournisseur_id)"
+                      :value="ContribuableEntreprise(NomEntrepriseModifier(editDecompte.marche_id))"
                       class="span"
                       readonly
                   />
@@ -392,7 +392,7 @@ L
                 <div class="controls">
                   <input
                       type="text"  
-                      :value="NumeroMarche(editDecompte.marche_id)"
+                       :value="NumeroMarche(editDecompte.marche_id)"
                       
                       class="span"
                       readonly
@@ -422,8 +422,8 @@ L
                 <div class="controls">
                   <input
                       type="text"
-                      
                       :value="Imputation(idParent(editDecompte.marche_id))"
+                      
                       class="span"
                       readonly
                   />
@@ -437,7 +437,7 @@ L
                 <div class="controls">
                   <input
                       type="number"
-                       :value="montantHtMarche(editDecompte.marche_id)"
+                           :value="montantHtMarche(editDecompte.marche_id)"
 
                       class="span"
                       readonly
@@ -454,7 +454,7 @@ L
                 <div class="controls">
                   <input
                       type="text"  
-                        :value="montantHtMarche(editDecompte.marche_id)"
+                         :value="montantTTCMarche(editDecompte.marche_id)"
                       step='100'
                       class="span"
                       readonly
@@ -465,7 +465,7 @@ L
             </td>
               <td>
               <div class="control-group">
-                <label class="control-label">PART Bailleur</label>
+                 <label class="control-label">PART Bailleur</label> 
                 <div class="controls">
 
 
@@ -484,7 +484,8 @@ L
                 <div class="controls">
                   <input
                       type="text"
-                      :value="MontantEtatCoteIvoire(editDecompte.marche_id)"
+                       :value="MontantEtatCoteIvoire(editDecompte.marche_id)"
+
 
                       class="span"
                       readonly
@@ -522,11 +523,11 @@ L
       
        <div class="modal-footer">
         <a
-          @click.prevent="ajouterTypeTexteLocal(formData)"
+          @click.prevent="modifierDecompteLocal()"
           class="btn btn-primary"
           href="#"
           
-        >Valider</a>
+        >Modifier</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
        </div>
     </div> 
@@ -534,64 +535,65 @@ L
                                     <thead>
                                    <tr>
                    
-          <th >Décompte  </th>
+          <th style="text-align:center;font-size:12px">N°Décompte </th>
           <!-- <th >Objet  </th> -->
-          <th>Date </th>
-          <th>Acompte HTVA </th>
-          <th>Avance </th>
-          <th>Garantie </th>
-          <th>Penalités </th>
-          <th>Net HTVA </th>
-          <th>Net TTC</th>
-          <th>Etat(TVA 18%)</th>
-          <th>Bailleur(100% HTVA) </th>
-          <th>Actions </th>
+          <th style="text-align:center;font-size:12px">Date </th>
+          <th style="text-align:center;font-size:12px">Acompte HTVA </th>
+          <th style="text-align:center;font-size:12px">Avance </th>
+          <th style="text-align:center;font-size:12px">Garantie </th>
+          <th style="text-align:center;font-size:12px">Penalités </th>
+          <th style="text-align:center;font-size:12px">Net HTVA </th>
+          <th style="text-align:center;font-size:12px">Net TTC</th>
+          <th style="text-align:center;font-size:12px">Etat ({{recupereTauxEtat(macheid)}}% + (TVA 18%))</th>
+          <th style="text-align:center;font-size:12px">Bailleur({{recupereTauxBailleur(macheid)}}% HTVA) </th>
+          <th style="text-align:center;font-size:12px">Actions </th>
                   </tr>
+
 
                   
                                     </thead>
                                     <tbody>
-                                    <tr class="odd gradeX" v-for="(type, index) in decomptefactures" :key="type.id">
-                    <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+                                    <tr class="odd gradeX" v-for="type in decomptefactures" :key="type.id">
+                    <td style="text-align:center;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_decompte || 'Non renseigné'}}</td>
-                    <!-- <td
+                    <!-- <td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{afficheObjetMarche(type.marche_id) || 'Non renseigné'}}</td> -->
-                    <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    <td style="text-align:center;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{formaterDate(type.date_decompte) || 'Non renseigné'}}</td>
-                    <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    <td style="text-align:center;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{formatageSomme(parseFloat(MontantFactureHT(type.facture_id))) || 'Non renseigné'}}</td>
-<td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+<td style="text-align:center;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{formatageSomme(parseFloat(type.retenu_avance)) || 'Non renseigné'}}</td>
 
-<td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+<td style="text-align:center;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{formatageSomme(parseFloat(type.retenu_garantie)) || 'Non renseigné'}}</td>
 
-<td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+<td style="text-align:center;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{formatageSomme(parseFloat(type.retenu_penalite)) || 'Non renseigné'}}</td>
-<td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+<td style="text-align:center;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{formatageSomme(parseFloat(type.nethtva)) || 'Non renseigné'}}</td>
 
                     
-                      <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+                      <td style="text-align:center;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{formatageSomme(parseFloat(type.netttc)) || 'Non renseigné'}}</td>
 
                     
-                      <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+                      <td style="text-align:center;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{formatageSomme(parseFloat(type.parts_etat)) || 'Non renseigné'}}</td>
 
                     
-                      <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
+                      <td style="text-align:center;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{formatageSomme(parseFloat(type.parts_bailleur)) || 'Non renseigné'}}</td>
 
                     <td>
@@ -604,31 +606,31 @@ L
                   </tr>
                   <tr>
                    
-                   <td colspan="2" style="text-align:center;color;red">CUMULS</td>
+                   <td colspan="2" style="text-align:center;color:red">CUMULS</td>
                    
-                   <td>{{formatageSomme(parseFloat(CumulMontantFacture(macheid)))}}</td>
-                   <td>{{formatageSomme(parseFloat(CumulAvance(macheid)))}}</td>
-                   <td>{{formatageSomme(parseFloat(CumulGArantie(macheid)))}}</td>
-                   <td>{{formatageSomme(parseFloat(CumulPenalite(macheid)))}}</td>
-                   <td>{{formatageSomme(parseFloat(CumulNetHtva(macheid)))}}</td>
-                   <td>{{formatageSomme(parseFloat(CumulNetTTC(macheid)))}}</td>
-                   <td>{{formatageSomme(parseFloat(CumulPartEtat(macheid)))}}</td>
-                   <td>{{formatageSomme(parseFloat(CumulPartBailler(macheid)))}}</td>
-                   <td></td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulMontantFacture(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulAvance(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulGArantie(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPenalite(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulNetHtva(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulNetTTC(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartEtat(macheid)))}}</td>
+                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartBailler(macheid)))}}</td>
+                   <td style="text-align:center;"></td>
                   </tr>
-                  <!-- <tr>
+                  <tr>
  
-                  <td colspan="2">% CUMULS</td>
-                   <td>{{((parseFloat(CumulAvance(macheid))/parseFloat(MontantMarche(macheid)))/100).toFixed(2)}}</td>
-                   <td>12</td>
-                   <td>12</td>
-                   <td>12</td>
-                   <td>12</td>
-                   <td>12</td>
-                   <td>12</td>
-                   <td>12</td>
-                   <td>12</td>
-                  </tr> -->
+                  <td colspan="2" style="text-align:center;color:red">% CUMULS</td>
+                   <td style="text-align:center;">{{((parseFloat(CumulAvance(macheid))/parseFloat(MontantMarche(macheid)))/100).toFixed(2)}}</td>
+                   <td style="text-align:center;">{{PourcentageCumulAvanceDemarrage}}</td>
+                   <td style="text-align:center;">{{PourcentageCumulGarantie}}</td>
+                   <td style="text-align:center;"></td>
+                   <td style="text-align:center;"></td>
+                   <td style="text-align:center;"></td>
+                   <td style="text-align:center;"></td>
+                   <td style="text-align:center;"></td>
+                   <td style="text-align:center;"></td>
+                  </tr>
                 </tbody>
                                 </table>
  
@@ -649,8 +651,7 @@ export default {
   // }, 
   data() {  
     return {
-     editDecompte:{
-     },
+     editDecompte:{},
       fabActions: [
         {
           name: "cache",
@@ -713,6 +714,96 @@ props:["macheid"],
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
     
+ PourcentageCumulAvanceDemarrage(){
+      const val = ((parseFloat(this.CumulAvance(this.macheid)) * (parseFloat(this.TauxAvanceDemarrageHT1(this.macheid))/100))/parseFloat(this.MontantAvanceDemarrageHT(this.macheid)));
+      
+       if (val) {
+        return parseFloat(val).toFixed(2);
+      }
+      
+      return 0
+    },
+MontantAvanceDemarrageHT() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+if (qtereel) {
+        return qtereel.avance_demarrage_ht;
+      }
+      return 0
+        }
+      };
+    },
+
+TauxAvanceDemarrageHT1() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+if (qtereel) {
+        return qtereel.taux_avance_demarrage;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+PourcentageCumulGarantie(){
+      const val = ((parseFloat(this.CumulGArantie(this.macheid)) * (parseFloat(this.TauxGarantieHT1(this.macheid))/100))/parseFloat(this.MontantGarantieHT(this.macheid)));
+      
+       if (val) {
+        return parseFloat(val).toFixed(2);
+      }
+      
+      return 0
+    },
+MontantGarantieHT() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+if (qtereel) {
+        return qtereel.montant_ht_retenu_garantie;
+      }
+      return 0
+        }
+      };
+    },
+
+TauxGarantieHT1() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+if (qtereel) {
+        return qtereel.taux_retenue_garantie;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+recupereTauxBailleur() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id && qtreel.type_finnancement_id==13 ||qtreel.marche_id == id && qtreel.type_finnancement_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tauxbailleur), 0).toFixed(0);
+
+        }
+      };
+    },
+
+recupereTauxEtat() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id && qtreel.type_finnancement_id==14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tauxbailleur), 0).toFixed(0);
+
+        }
+      };
+    },
+
     MontantMarche() {
       return id => {
         if (id != null && id != "") {
@@ -923,6 +1014,25 @@ if (qtereel) {
       
       return 0
     },
+    TauxBailleurEmprunt() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id && qtreel.type_finnancement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tauxbailleur), 0).toFixed(0);
+
+     
+        }
+      };
+    }, 
+    
+    TauxBailleurDon() {
+      return id => {
+        if (id != null && id != "") {
+           return this.personnaliseGetterMarcheBailleur.filter(qtreel => qtreel.marche_id == id && qtreel.type_finnancement_id == 13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tauxbailleur), 0).toFixed(0);
+
+     
+        }
+      };
+    },
     //   MontantHTBailleur(){
     //   const val =  parseFloat(this.Montantapresretenues)*(parseFloat(this.TauxBailleurDuMarche)/100);
       
@@ -932,7 +1042,7 @@ if (qtereel) {
       
     //   return 0
     // },
-       MontantHTBailleurModifierModifier(){
+       MontantHTBailleurModifier(){
       const val =  parseFloat(this.MontantapresretenuesModifier)*(parseFloat(this.TauxBailleurDuMarcheModifier)/100);
       
        if (val) {
@@ -950,7 +1060,7 @@ if (qtereel) {
         }
       };
     },
-     MontantHTEtatModifier(){
+     ModifierModifier(){
       const val =  parseFloat(this.MontantTTCModifier)*(parseFloat(this.TauxBailleurTresor(this.editDecompte.marche_id))/100);
       
        if (val) {
@@ -966,6 +1076,18 @@ if (qtereel) {
 
       if (qtereel) {
         return qtereel.raison_sociale;
+      }
+      return 0
+        }
+      };
+    }, 
+         NomEntrepriseModifier() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.entreprise_id;
       }
       return 0
         }
@@ -1153,12 +1275,29 @@ if (qtereel) {
   methods: { 
     
     ...mapActions('uniteadministrative',[
-    "ModifierDecompteFacture",
+
  "ModifierDecompteFacture",
  "supprimerDecompteFacture"
    
    
    ]),
+     modifierDecompteLocal() {
+         var nouvelObjet = {
+        ...this.editDecompte,
+           marche_id:this.editDecompte.marche_id,
+        facture_id:this.editDecompte.facture_id,
+      // nethtva:this.MontantTVAFacture(editDecompte.facture_id),
+      netttc:this.MontantapresretenuesModifier,
+      parts_etat:this.MontantHTEtatModifier,
+      parts_bailleur:this.MontantHTBailleurModifier,
+      montantmarche:this.MontantapresretenuesModifier
+      };
+      this.ModifierDecompteFacture(nouvelObjet);
+     this.$("#exampleModal").modal('hide');
+       this.editDecompte = {
+      
+      };
+       },
     formatageSomme:formatageSomme,
  formaterDate(date) {
             return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
@@ -1170,12 +1309,12 @@ if (qtereel) {
       });
     },
    
-        afficherModalModifierTypeTexte(index){
+        afficherModalModifierTypeTexte(id){
       this.$('#exampleModal').modal({
         backdrop: 'static',
         keyboard: false
       });
-      this.editDecompte = this.decomptefactures.find(item=>item.id==index)
+      this.editDecompte = this.decomptefactures.find(item=>item.id==id)
     },
   }
 };
@@ -1183,10 +1322,7 @@ if (qtereel) {
 <style scoped>
 
 .grdirModalActeEffet{
-  width: 92%;
-  margin: 0 -43%;
-}
-th{
-  text-align:left;
+  width: 88%;
+  margin: 0 -42%;
 }
 </style>

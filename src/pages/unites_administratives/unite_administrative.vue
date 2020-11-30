@@ -538,9 +538,7 @@ export default {
   },
   
 created() {
-      console.log("INB")
-      console.log(this.getterUniteAdministrativeByUser)
-    console.log("INB14500")
+
 },
     computed: {
     ...mapGetters("uniteadministrative", [
@@ -853,6 +851,7 @@ return 0
         ...this.editUniteAdministrative,
         code: this.codeuniteadministrativeModifier,
         code_ua: this.codeuniteadministrativeModifier2
+        
       };
       this.modifierUniteAdministrative(nouvelObjet);
 this.$("#modificationModal").modal('hide');
