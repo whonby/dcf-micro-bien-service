@@ -99,7 +99,10 @@ afficheNumeroMarche
                         <a data-toggle="tab" href="#tab03">IMAGES DES MARCHES</a>
                       </li>
                       <li>
-                        <a data-toggle="tab" href="#tab040">Evolution du marché</a>
+                        <a data-toggle="tab" href="#tab040">EVOLUTION DES MARCHES</a>
+                      </li> 
+                      <li>
+                        <a data-toggle="tab" href="#tab041">SITUATION DES MARCHE</a>
                       </li> 
                     
                     </ul>
@@ -262,6 +265,10 @@ afficheNumeroMarche
                       <div id="tab040" class="tab-pane ">
                          <graphiqueExecutionMarche :macheid="detail_marche.id"></graphiqueExecutionMarche>
                       </div>
+
+                      <div id="tab041" class="tab-pane ">
+                         <graphiqueSituationMarche :macheid="detail_marche.id"></graphiqueSituationMarche>
+                      </div>
       </div>
                 </div>
               </table>
@@ -312,6 +319,7 @@ afficheNumeroMarche
    import facture from "../dossierFacture/factureHs";
    import decompte from "../dossierDecompte/decomptePro";
    import graphiqueExecutionMarche from "../../../../bien_service/contractualisation/DossierExecution/DossierGraphiqueExecutionMarche/graphiqueExecutionMarche";
+   import graphiqueSituationMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierSituationMarche/graphiqueSituationMarche";
 // import avenant from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
 // import facture from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierFacture/facture";
 // import decompte from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte";
@@ -346,7 +354,7 @@ afficheNumeroMarche
             facture,
             decompte,
             graphiqueExecutionMarche,
-          //   listeOpAnnulation,
+             graphiqueSituationMarche,
           //   listeOpProvisoireCf,
           //   listeOpProvisoireBs,
             // mandatFactureProformaEmetteur,
