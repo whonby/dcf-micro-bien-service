@@ -92,7 +92,15 @@ import DetailImageMarche from "../../pages/ImageMarche/DetailImageMarche"
 import ListeImageMarche from "../../pages/ImageMarche/ListeImageMarche"
 import TableauBordGestionMarche from "../../pages/TableauBord/TableauBordGestionMarche.vue"
 
+
+
+import DetailInforTableBordUniteAd from "../../pages/TableauBord/DetailInforTableBordUniteAd"
 const BienServiceRoutes = [
+    {
+        path:"/table_bord_gestion_marche_hors_sib/:id",
+        name:"DetailInforTableBordUniteAd",
+        component:DetailInforTableBordUniteAd
+    },
     {
         path:"/table_bord_gestion_marche_hors_sib",
         name:"TableauBordGestionMarche",
