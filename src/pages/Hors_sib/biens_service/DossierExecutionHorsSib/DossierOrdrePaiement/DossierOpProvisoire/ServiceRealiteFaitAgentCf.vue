@@ -88,7 +88,7 @@
                                   <!-- <th>Imputation</th> -->
                                 <th>Montant</th>
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th >Date validation</th>
+                                <th >Date Observation</th>
                                 <th >Observation</th>
                                 <th>Action</th>
                                     </tr>

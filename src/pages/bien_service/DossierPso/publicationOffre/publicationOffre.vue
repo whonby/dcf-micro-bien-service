@@ -8,10 +8,8 @@
                     <thead>
                    <tr>
 
-                                        <th>Reference appel</th>
+                                        <th>Reference appel - DAO</th>
                                         <th> Type procedure</th>
-
-                                      
                                         <th>Date emmission</th>
                                         <th>Date limite</th>
                                         <th>Objet appel</th>
@@ -108,6 +106,7 @@
                             </div>
                         </div>
                         </td>
+
                         <!-- <td >
                         <div class="control-group">
                             <label class="control-label">Imputation :</label>
@@ -116,6 +115,16 @@
                             </div>
                         </div>
                         </td> -->
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Fichier DAO:</label>
+                                    <div class="controls">
+                                        <input type="file"   @change="OnchangeFichier" />
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     </table>  
 
@@ -230,7 +239,10 @@ export default {
     
     data(){
         return{
-        
+            imagePDF :"",
+        namePDF :"",
+        fichierPDF :"",
+            selectedFile:"",
         formData:{
               ref_appel:"",
                     type_appel:"",
@@ -370,6 +382,24 @@ typeProcedureLibelle() {
                 this.edite_appel_offre = this.listeAppelOffre(this.macheid)[index];
             },
 
+
+
+          OnchangeFichier(e) {
+              const files = e.target.files;
+              this.selectedFile = event.target.files[0];
+              console.log(this.selectedFile)
+              Array.from(files).forEach(file => this.addFichierPDF(file));
+          },
+          addFichierPDF(file) {
+              let reader = new FileReader();
+              let vm = this;
+              reader.onload = e => {
+                  vm.imagePDF = "pdf.png";
+                  vm.namePDF = file.name;
+                  vm.fichierPDF = e.target.result;
+              };
+              reader.readAsDataURL(file);
+          },
 
              ajouter(){
      var nouvelObjet = {

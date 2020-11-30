@@ -2,20 +2,6 @@
 <template>
     <div class="container-fluid">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             
         <hr>
     <div class="row-fluid">     
@@ -295,8 +281,8 @@ export default {
      },
      editMission:{},
      missionAChangerLaDecision: {},
-          
 
+        selectedFile:"",
     search:"",
     
     historique:""

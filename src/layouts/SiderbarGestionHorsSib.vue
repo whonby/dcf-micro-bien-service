@@ -1,3 +1,4 @@
+<script src="../routes/bien_service/BienServiceRoutes.js"></script>
 <template>
   <div>
     <!--Header-part-->
@@ -65,19 +66,25 @@
            
           </router-link>
         </li>
+          <li @click.prevent="navigateTableBordBord" :class="{active: active_el ==190}">
+              <a href="#">
+                  <i class="icon-truck"></i>
+                  <span>TABLEAU DE BORD DE MARCHE</span>
+              </a>
+          </li>
          <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==19}">
           <a href="#">
             <i class="icon-truck"></i>
             <span>GESTION DES MARCHES</span>
           </a>
         </li>
-        <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
+        <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 20 }">
           <a href="#">
             <i class="icon-group"></i>
             <span>PERSONNEL</span>
           </a>
         </li>
-        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
+        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==30}">
           <a href="#">
             <i class="icon-truck"></i>
             <span>BIENS ET SERVICES</span>
@@ -92,7 +99,7 @@
         </li> -->
 
 
-        <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==4}">
+        <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==40}">
           <a title="INVESTISSEMENT" href="#">
             <i class="icon-truck"></i>
             <span>INVESTISSEMENT</span>
@@ -262,12 +269,17 @@ return objJson.id
         })
       },
 navigateToGestionMarche(){
-        this.activate(190)
-        this.$router.push({
-          name: 'TableauBordGestionMarche'
-        })
+    this.activate(19)
+    this.$router.push({
+        name: 'gestion_marche'
+    })
       },
-
+      navigateTableBordBord(){
+          this.activate(190)
+          this.$router.push({
+              name: 'TableauBordGestionMarche'
+          })
+      },
 //GestionMarcheHorSib
 
       navigateToActeurDepense(){

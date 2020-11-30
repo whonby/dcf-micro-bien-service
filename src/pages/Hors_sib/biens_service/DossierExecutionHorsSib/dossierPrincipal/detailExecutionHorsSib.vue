@@ -24,7 +24,7 @@ afficheNumeroMarche
                             <tr>
                                <!-- <th style="font-size:12px;font-weight:bold;">Reference marché</th> -->
                                <th style="font-size:12px;font-weight:bold;">Numéro marché</th>
-                                <th style="font-size:12px;font-weight:bold;">Objet marché</th>
+                                <!--<th style="font-size:12px;font-weight:bold;">Objet marché</th>-->
                                 
                              
                                 <th style="font-size:12px;font-weight:bold;">Type de marché</th>
@@ -42,7 +42,7 @@ afficheNumeroMarche
                                 <!-- <td class="taskStatus" style="font-size:14px;font-weight:bold;">{{detail_marche.reference_marche}}</td> -->
                                 
                                 <td class="taskStatus" style="font-size:14px;font-weight:bold;">{{afficheNumeroMarche(detail_marche.id)}}</td>
-                                 <td class="taskDesc" style="font-size:14px;font-weight:bold;">{{detail_marche.objet}}</td>
+                                 <!--<td class="taskDesc" style="font-size:14px;font-weight:bold;">{{detail_marche.objet}}</td>-->
                                
                                 <td class="taskOptions" style="font-size:14px;font-weight:bold;">
                                     {{LibelleTypeMarche(detail_marche.type_marche_id)}}
