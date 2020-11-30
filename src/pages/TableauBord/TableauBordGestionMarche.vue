@@ -8,7 +8,7 @@
                 <div class="span1">
 
                 </div>
-                <div class="span10 card-1" >
+                <div class="span10 card-3" >
                     <table class="table table-striped">
                         <tbody>
                         <tr>
