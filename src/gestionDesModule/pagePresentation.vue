@@ -58,40 +58,38 @@
         <div class="quick-actions_homepage">
 
 
+
           
           <div >
             <ul class="quick-actions" >
-                <li class="bg_lg span3" >
+                <li class="bg_lg span3" v-if="admin() || dcf()">
                      <router-link :to="{ name: 'TableauDeBordG', params: {id:1}}" tag="a"  style="color:black;">
                 <h4>PARAMETRES</h4> <i class="icon-cogs"></i><h4> GENERAUX</h4>
                 
                 </router-link> 
                 </li>
-  <li class="bg_lg span3" > 
+               
+   <li class="bg_lg span3" > 
      <router-link :to="{ name: 'TableauDeBordG', params: {id:2}}" tag="a"  style="color:black;">
       <h4>UNITES </h4> <i class="icon-home"></i> <h4> ADMINISTRATIVES</h4>      </router-link> </li>
        <li class="bg_lg span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:3}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4> SIB</h4></router-link> </li>
-      <!-- <li class="bg_lg span3" > 
-     <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;">
-      <h4>GESTION DU </h4> <i class="icon-group"></i> <h4> PERSONNEL</h4>      </router-link> </li> -->
-      
-            </ul>
-            <br>
-<br>
-
-            <ul class="quick-actions" >
-              
-    <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:4}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4>HORS SIB</h4></router-link> </li>
-  <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>CARTOGRAPHIES </h4> <i class="icon-globe"></i><h4>DES BUDGETS ET DES MARCHES</h4></router-link> </li>
-           <!-- <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:8}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class="icon-book"></i><h4> DES VEHICULES</h4></router-link> </li> -->
-           <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;"><h4>GESTION DES </h4> <i class="icon-book"></i><h4> RAPPORTS</h4></router-link> </li>
-            </ul>
-            <br>
-<br>
-
-            <ul class="quick-actions" >
-              
    
+            </ul>
+            
+
+            <ul class="quick-actions" >
+               <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:4}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4>HORS SIB</h4></router-link> </li>
+    
+  <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>CARTOGRAPHIES </h4> <i class="icon-globe"></i><h4>DES BUDGETS ET DES MARCHES</h4></router-link> </li>
+           <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:8}}" tag="a"  style="color:black;"><h4>COMPTABILITE </h4> <i class="icon-book"></i><h4> DES MATIERES</h4></router-link> </li>
+       
+         
+            </ul>
+            <br>
+<br>
+
+            <ul class="quick-actions" >
+               <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;"><h4>GESTION DES </h4> <i class="icon-book"></i><h4> RAPPORTS</h4></router-link> </li>
            <!-- <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;"><h4>GESTION DES </h4> <i class="icon-book"></i><h4> RAPPORTS</h4></router-link> </li> -->
             </ul>
           </div>
@@ -110,6 +108,7 @@
 
 <script>
 import { mapGetters,mapActions} from "vuex";
+import {admin,dcf} from '../../src/Repositories/Auth';
 import Pusher from 'pusher-js';
 
 // import {admin,dcf,cf,noDCfNoAdmin} from "../Repositories/Auth"
@@ -217,6 +216,8 @@ this.getTypeAppel()
      this.getAllDecompteFacture()
        this.getStructureOrganigrammeUa()
  this.getAllBudgetEclate()
+ this.getVehicule()
+ this.getReparationVehicule()
     // this.getAllArchivageDocument();
 this.getAllDirection()
 this.getAllServiceua()
@@ -285,7 +286,15 @@ this.getAllHistoriqueBudgetGeneral()
     this.getAllHistoAffectation();
     this.getAllDemandeMateriel();
     this.getAllHistoAffectationService();
-    
+     this.getMarqueVehicule();
+      this.getModeleVehicule();
+      this.getTypeEntretien();
+      this.getTypeVehicule();
+      this.getTypeEnergie();
+      this.getTypeReparation();
+      this.getAffectationVehicule();
+      this.getTransmissionVeh();
+      this.getAppreciation();
     //this.getAllAmortissement();
       /**
        * this.
@@ -439,7 +448,8 @@ return objJson.id
   },
 
   methods:{
-
+ admin:admin,
+     dcf:dcf,
     ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
@@ -478,7 +488,9 @@ return objJson.id
      "getStructureOrganigrammeUa",
      "getAllBanqueUa",
      "getAllDecompteFacture",
-     "getAllBudgetEclate"
+     "getAllBudgetEclate",
+     "getVehicule",
+     "getReparationVehicule"
     ]),
             ...mapActions('personnelUA', ["getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -510,7 +522,15 @@ return objJson.id
       "getAllHistoAffectation",
       "getAllDemandeMateriel",
       "getAllHistoAffectationService",
-      
+      "getMarqueVehicule",
+      "getModeleVehicule",
+      "getTypeEntretien",
+      "getTypeVehicule",
+      "getTypeEnergie",
+      "getTypeReparation",
+      "getAffectationVehicule",
+      "getTransmissionVeh",
+      "getAppreciation"
       
     ]),
  ...mapActions('horSib',['getMarcheHorSib',"getRealiteServiceHors","getOpProvisoire"]),

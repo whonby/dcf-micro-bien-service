@@ -1,8 +1,7 @@
 // export const GET_ALL_DECOMPTE = (state, tableau_decompte) =>{
 //     state.decomptes = tableau_decompte
 // }
-
-
+MODIFIER_MANDAT
 // // add candidat selectionner
 
 // export const AJOUTER_DECOMPTE = (state, elementAjouter) => {
@@ -2556,6 +2555,14 @@ export const GET_ALL_RESERVE_CF = (state, tableau_reserve_cf) =>{
 
 
 
+   export const MODIFIER_ACTE = (state, elementModif) => {
+    state.acteEffetFinanciers = state.acteEffetFinanciers.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
 
 export const GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE = (state,objet) =>{
     state.marcheFiltreCarteInfrastructure = objet

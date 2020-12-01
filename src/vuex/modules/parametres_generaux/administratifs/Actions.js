@@ -163,6 +163,7 @@ export  function getNatureSection({commit}) {
    
 }
 
+
 // ajouter nature de section
 export function ajouterNatureSection({ commit, dispatch},objetAjout){
    asyncLoading( axios.post('/ajouter_nature_section',{

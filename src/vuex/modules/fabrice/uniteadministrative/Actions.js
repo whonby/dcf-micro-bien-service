@@ -1390,3 +1390,125 @@ export function supprimerBudgetEclate({ commit, dispatch}, id) {
       axios.delete("/budgetEclate/" + id).then(() => dialog.close());
     });
 }
+
+
+
+
+
+
+export function getVehicule({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/Vehicule")
+          .then(response => {
+              commit("GET_ALL_VEHICULE", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterNouveauVehicule({ commit,dispatch }, nouveau) {
+  asyncLoading(axios
+      .post("/Vehicule", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_VEHICULE", response.data);
+              dispatch('getVehicule')
+              dispatch('getAllUniteAdministrative')
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierVehicule({ commit ,dispatch}, nouveau) {
+  asyncLoading(axios
+      .put("/Vehicule/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_VEHICULE", response.data);
+          dispatch('getVehicule')
+              dispatch('getAllUniteAdministrative')
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerVehicule({ commit,dispatch }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_VEHICULE", id);
+          dispatch('getVehicule')
+              dispatch('getAllUniteAdministrative')
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/Vehicule/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+
+export function getReparationVehicule({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/ReparationVehicule")
+          .then(response => {
+              commit("GET_ALL_REPARATION_VEHICULE", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterReparationVehicule({ commit,dispatch }, nouveau) {
+  asyncLoading(axios
+      .post("/ReparationVehicule", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_REPARATION_VEHICULE", response.data);
+              dispatch('getReparationVehicule')
+              dispatch('getAllUniteAdministrative')
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierReparationVehicule({ commit ,dispatch}, nouveau) {
+  asyncLoading(axios
+      .put("/ReparationVehicule/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_REPARATION_VEHICULE", response.data);
+          dispatch('getReparationVehicule')
+              dispatch('getAllUniteAdministrative')
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerReparationVehicule({ commit,dispatch }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_REPARATION_VEHICULE", id);
+          dispatch('getReparationVehicule')
+              dispatch('getAllUniteAdministrative')
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/ReparationVehicule/" + id).then(() => dialog.close());
+      });
+}

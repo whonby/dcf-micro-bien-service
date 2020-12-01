@@ -17,6 +17,9 @@
     <MenuGestionAccess v-if="active_el ==21"></MenuGestionAccess>
     <MenuMonEquipe v-if="active_el ==30"></MenuMonEquipe>
     <MenuActeurDepenseHS v-if="active_el ==31"></MenuActeurDepenseHS>
+   <MenuParametreVehicule v-if="active_el == 42"></MenuParametreVehicule>
+   <MenuGestionParc v-if="active_el == 43"></MenuGestionParc>
+   <MenuReparation v-if="active_el == 49"></MenuReparation>
     <Search></Search>
     
     <!--close-top-serch MenuPlanificationHorSib-->
@@ -43,9 +46,15 @@ import MenuMonEquipe from "../components/navs/MenuMonEquipe.vue";
 import Search from "../components/Search";
 import MenuGestionAccess from "../components/navs/MenuGestionAccess"
 import MenuActeurDepenseHS from "../components/navs/MenuActeurDepenseHS"
+import MenuParametreVehicule from "../components/navs/MenuParametreVehicule"
+import MenuGestionParc from "../components/navs/MenuGestionParc"
+import MenuReparation from "../components/navs/MenuReparation"
 import { mapState, mapActions} from "vuex";
 export default {
   components: {
+    MenuReparation,
+    MenuGestionParc,
+    MenuParametreVehicule,
     MenuTableau,
     MenuParamG,
     MenuUA,
@@ -360,7 +369,8 @@ export default {
      "getStructureOrganigrammeUa",
      "getAllBanqueUa",
      "getAllDecompteFacture",
-     "getAllBudgetEclate"
+     "getAllBudgetEclate",
+     "getVehicule"
     ]),
             ...mapActions('personnelUA', ["getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -392,6 +402,14 @@ export default {
       "getAllHistoAffectation",
       "getAllDemandeMateriel",
       "getAllHistoAffectationService",
+      "getMarqueVehicule",
+      "getModeleVehicule",
+      "getTypeEntretien",
+      "getTypeVehicule",
+      "getTypeEnergie",
+      "getTypeReparation",
+      "getAffectationVehicule",
+      "getTransmissionVeh"
       
       
     ]),

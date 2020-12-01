@@ -82,7 +82,8 @@
                                     <i class="fa fa-money" aria-hidden="true"></i>
                                 </div>
 
-                            </div>
+                        <div class="span11">
+
                         </div>
 
                         <div class="span5">
@@ -328,7 +329,8 @@
         </div>
 
     </div>
-
+        </div>
+    </div>
 
 </template>
 

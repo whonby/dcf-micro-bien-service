@@ -1361,16 +1361,16 @@ section_id:this.afficherIdSection(this.afficherIdUa(this.afficherIdMarche(this.d
  marchetype:this.afficheMarcheType
        };
 
-        var objetDecompte = {
-       facture_id :this.detail_Facture.id,
-  marche_id :this.detail_Facture.marche_id,
-  numero_decompte :this.NombreDecompte,
-     montant_execute :this.commparerMontantGleEtMontantFacture,
-     montantmarche:this.montantMarcheAvecAvenant,
-      dotationprevue:this.afficherMontantBudgetaireInitial(this.afficherInputationBudgetaire(this.afficherIdMarche(this.detail_Facture.id))),
-       };
+  //       var objetDecompte = {
+  //      facture_id :this.detail_Facture.id,
+  // marche_id :this.detail_Facture.marche_id,
+  // numero_decompte :this.NombreDecompte,
+  //    montant_execute :this.commparerMontantGleEtMontantFacture,
+  //    montantmarche:this.montantMarcheAvecAvenant,
+  //     dotationprevue:this.afficherMontantBudgetaireInitial(this.afficherInputationBudgetaire(this.afficherIdMarche(this.detail_Facture.id))),
+  //      };
 this.ajouterMandat(nouvelObjet912)
-this.ajouterDecompteFacture(objetDecompte)
+// this.ajouterDecompteFacture(objetDecompte)
 this.afficherModalListeExecution()
 this.formDataMadat= {
  numero_mandat:"",
@@ -1421,16 +1421,16 @@ section_id:this.afficherIdSection(this.afficherIdUa(this.afficherIdMarche(this.d
  marchetype:this.afficheMarcheType
        };
 
-        var objetDecompte2 = {
-       facture_id :this.detail_Facture.id,
-  marche_id :this.detail_Facture.marche_id,
-  numero_decompte :this.NombreDecompte,
-     montant_execute :this.commparerMontantGleEtMontantFacture,
-      dotationprevue:this.dotationDisponibleAnterieure,
-      montantmarche:this.restePayeMarche,
-       };
+  //       var objetDecompte2 = {
+  //      facture_id :this.detail_Facture.id,
+  // marche_id :this.detail_Facture.marche_id,
+  // numero_decompte :this.NombreDecompte,
+  //    montant_execute :this.commparerMontantGleEtMontantFacture,
+  //     dotationprevue:this.dotationDisponibleAnterieure,
+  //     montantmarche:this.restePayeMarche,
+  //      };
 this.ajouterMandat(nouvelObjet91)
-this.ajouterDecompteFacture(objetDecompte2)
+// this.ajouterDecompteFacture(objetDecompte2)
 this.afficherModalListeExecution()
 this.formDataMadat= {
  numero_mandat:"",

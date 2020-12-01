@@ -20,7 +20,17 @@ const defaultState = {
   historiqueAffectation:[],
   demandeMateriel:[],
   historiqueAffectationService:[],
-  demandeService:[]
+  demandeService:[],
+  marqueVehicules:[],
+  ModeleVehicules:[],
+  TypeEntretien:[],
+  TypeVehicule:[],
+  TypeEnergie:[],
+  TypeReparation:[],
+  AffectationVehicules:[],
+  Transmissions:[],
+  Appreciations:[]
+
 };
 
 export default defaultState;

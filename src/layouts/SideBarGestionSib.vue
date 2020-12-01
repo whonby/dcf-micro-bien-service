@@ -69,12 +69,12 @@
             <span>BIENS ET SERVICES</span>
           </a>
 
-       <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
+       <!-- <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
           <a title="COMPTABILITE DES MATIERE" href="#">
             <i class=" icon-camera"></i>
             <span>COMPTA DES MATIERES</span>
           </a>
-        </li>
+        </li> -->
 
 
         <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==4}">

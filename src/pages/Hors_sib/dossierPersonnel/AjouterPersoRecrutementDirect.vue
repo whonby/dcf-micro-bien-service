@@ -330,7 +330,7 @@
                                                     <label class="control-label">Ligne budgetaires</label>
                                                     <div class="controls">
                                                         <select v-model="formData.plan_budgetaire_id" class="span">
-                                                            <option v-for="item in afficheBudgetPersonnel(DetailRecrutement.ua_id)" :key="item.id" :value="item.economique_id">
+                                                            <option v-for="item in afficheBudgetPersonnel(DetailRecrutement.ua_id)" :key="item.id" :value="item.ligneeconomique_id">
                                                                {{item.afficheEconomique.code}} - {{item.afficheEconomique.libelle}}
                                                             </option>
 
@@ -501,7 +501,7 @@
             ...mapGetters('personnelUA', ["dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
-            ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
+            ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnelHORSSIB"]),
             ...mapGetters("parametreGenerauxAdministratif", ["getterplanOrganisationUa","exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", [
@@ -768,7 +768,7 @@ exoEnCours() {
     afficheBudgetPersonnel() {
       return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.ua_id == id  && element.status=='actu');
+          return this.getPersonnaliseBudgetGeneralParPersonnelHORSSIB.filter(element => element.uniteadministrative_id == id);
         }
       };
     },
