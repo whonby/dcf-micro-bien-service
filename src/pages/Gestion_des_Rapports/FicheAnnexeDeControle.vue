@@ -10,14 +10,19 @@
                              <div id="printMe">
 <table class="table table-bordered table-striped html2pdf__page-break" id="app1"  >
    <tr>
-                                 <td colspan="2" style="text-align:center;border: 2px double #000">
- <span>MINISTRE AUPRES DU PREMIER MINISTRE </span>
-      <span>CHARGE DU BUDGET ET DU PORTEFEUILLE DE L'ETAT</span>
+                                              <td colspan="" style="text-align:center">
+ <p>MINISTRE AUPRES DU PREMIER MINISTRE </p>
+      <p>CHARGE DU BUDGET ET DU PORTEFEUILLE DE L'ETAT</p>
+      <p> DE L'ETAT</p>
                                  </td>
                                  <!-- <td style="text-align:center">
                                     <img  :src="AffichePhoto">
                                    <p>DIRECTION DU CONTRÖLE FINANCIER</p>
                                  </td> -->
+                                  <td style="text-align:center">
+                                   <img  :src="AfficheAmoirie">
+ 
+                                 </td>
                                  <td style="text-align:center">
                                    <p>REPUBLIQUE DE CÖTE D'IVOIRE </p>
       <P>Union-Discipline-Travail</P>
@@ -25,15 +30,14 @@
                                </tr>
    <tr>
                                  <td style="text-align:center">
-                                   <img  :src="AfficheAmoirie">
- 
+                                   <img  :src="AfficheLogODCF">
+                                   <p>DIRECTION DU CONTRÖLE FINANCIER</p>
                                  </td>
                                  <td style="text-align:center">
                                    
                                  </td>
                                  <td style="text-align:center">
-                                   <img  :src="AfficheLogODCF">
-                                   <p>DIRECTION DU CONTRÖLE FINANCIER</p>
+                                  
                                  </td>
                                </tr>
                               
