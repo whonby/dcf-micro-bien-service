@@ -803,6 +803,9 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
                 this.status_marche=7
             }
 
+            if(this.getterInfoTableauBordFiltre.status_marche==8){
+                this.status_marche=8
+            }
            this.getterInfoTableauBordFiltre.status_marche=""
         }
     }
