@@ -35,7 +35,7 @@
               </h1>
                 <div class="span5">
                     <label>Régions    <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a></label>
-                    <model-list-select style="background-color: rgb(255,255,255);"
+                    <model-list-select style="background-color: rgb(233,233,233);"
                                        class="wide"
                                        :list="regions"
                                        v-model="region"
@@ -65,7 +65,7 @@
                         <option value="polar-area">Polar area</option>
                     </select>-->
                     <label>Unite administrative <a href="#" @click.prevent="videUniteAdmin()" style="color: red" v-if="unite_administrative_id"><i class="fa fa-trash-o"></i></a></label>
-                    <model-list-select style="background-color: rgb(255,255,255);"
+                    <model-list-select style="background-color: rgb(233,233,233);"
                                        class="wide"
                                        :list="filtre_unite_admin"
                                        v-model="unite_administrative_id"
