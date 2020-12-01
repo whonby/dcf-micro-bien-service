@@ -1,9 +1,9 @@
 <template>
     <div>
-      <div class="span3">
+      
          <apexchart type="bar" height="350" :options="chartOptions" :series="series"></apexchart>
-         <!-- {{recupererMontantAvenant(this.macheid)}} -->
-      </div>
+         <!-- {{calculDuMontantExecution(this.macheid)}} -->
+      
     </div>
 </template>
 <script>
@@ -102,12 +102,44 @@ export default {
      }
   
    },
+  // afficher ID acte Affect financier
+  IdActeFin(){
+    return id =>{
+      if(id!=null && id!=""){
+        const Id=this.getterActeEffetFinanciers.find(item => item.marche_id==id)
+        //console.log(this.marche_id)
+        if(Id) return Id.marche_id;
+      }
+      return null
+    }
+  },
 
+   IdAvenant(){
+    return id =>{
+      if(id!=null && id!=""){
+        const Id=this.avenants.find(item => item.marche_id==id)
+        //console.log(this.marche_id)
+        if(Id) return Id.marche_id;
+      }
+      return null
+    }
+  },
+
+   IdMandatVise(){
+    return id =>{
+      if(id!=null && id!=""){
+        const Id=this.getMandatPersonnaliserVise.find(item => item.marche_id==id)
+        //console.log(this.marche_id)
+        if(Id) return Id.marche_id;
+      }
+      return null
+    }
+  },
 
   recupererLeMontantDeBase(){
     return id =>{
       if(id!=null && id!=""){
-        let answer = this.getterActeEffetFinanciers.find(item => item.marche_id==id && this.afficherMontantDeBaseDuMarcheParRegion(item.macheid)==id)
+        let answer = this.getterActeEffetFinanciers.find(item => item.marche_id==id && this.afficherMontantDeBaseDuMarcheParRegion(this.macheid)== this.afficherMontantDeBaseDuMarcheParRegion(this.IdActeFin(this.macheid)))
         if(answer) return answer.montant_act
       }
       return 0
@@ -117,7 +149,7 @@ export default {
   recupererMontantAvenant(){
     return id =>{
       if(id!=null && id!=""){
-        let objet = this.avenants.filter(res => res.marche_id==id && this.afficherMontantDeBaseDuMarcheParRegion(res.macheid)==id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_avenant), 0)
+        let objet = this.avenants.filter(res => res.marche_id==id && this.afficherMontantDeBaseDuMarcheParRegion(res.macheid)==this.afficherMontantDeBaseDuMarcheParRegion(this.IdAvenant(this.macheid))).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_avenant), 0)
         if(objet) return objet.montant_avenant
       }
       return 0
@@ -126,22 +158,21 @@ export default {
 
 
     // calcul du montant reel
-    //  calculDuMontantReel(){
+     calculDuMontantReel(){
       
-    // const resultat = parseFloat(this.recupererLeMontantDeBase(this.macheid)) + parseFloat(this.recupererMontantAvenant(this.macheid))
+    const resultat = parseFloat(this.recupererLeMontantDeBase(this.macheid)) + parseFloat(this.recupererMontantAvenant(this.macheid))
 
-    // if(resultat){
-    //   return parseInt(resultat).toFixed(2)
-    // } 
-    // return 0
-    //  },
+    if(resultat){
+      return parseInt(resultat).toFixed(2)
+    } 
+    return 0
+     },
      // printe all sum montant execution
      calculDuMontantExecution(){
        return id =>{
          
-            return this.getMandatPersonnaliserVise.filter(item =>item.marche_id==id).reduce((prec,cur) => parseFloat(prec)
-             + parseFloat(cur.prix_propose_ht), 0) / (parseFloat(this.recupererLeMontantDeBase(this.macheid)) + parseFloat(this.recupererMontantAvenant(this.macheid)))*100
-             .toFixed(2) 
+            return this.getMandatPersonnaliserVise.filter(item =>item.marche_id==id && this.afficherMontantDeBaseDuMarcheParRegion(this.IdMandatVise(this.macheid))).reduce((prec,cur) => parseFloat(prec)
+             + parseFloat(cur.prix_propose_ht), 0) / parseFloat(this.calculDuMontantReel)*100 .toFixed(2) 
        
        }
      },
@@ -149,17 +180,18 @@ export default {
 
      // calcul du reste des montants de marché
 
-     calculMontantReste(){
-       const response = 100 - parseFloat(this.calculDuMontantExecution(this.macheid))
+    //  calculMontantReste(){
+    //    const response = 100 - parseFloat(this.calculDuMontantExecution(this.macheid))
       
-         return parseInt(response).toFixed(2)
-     }
+    //      return parseInt(response).toFixed(2)
+    //  }
     
 
 
     },
     methods:{
 formatageSomme,
+
  testRegion(){
    let  objet= this.localisations_geographiques.filter(item=>{
      if(item.structure_localisation_geographique.niveau==2 && item.longitude!=null){
