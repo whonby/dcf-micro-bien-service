@@ -743,9 +743,69 @@ export default {
 created() {
 //console.log(this.typeMarches)
 this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
-    console.log("INTEGER...........")
-console.log(this.getterUniteAdministrativeByUser)
-    console.log("INTEGER...........")
+
+
+    if(this.getterInfoTableauBordFiltre){
+//    console.log("...............AAAAA..............")
+//console.log(this.getterInfoTableauBordFiltre)
+//        console.log("..........454788...................")
+        if(this.getterInfoTableauBordFiltre.infrastructure!=""){
+            this.infrastructure=this.getterInfoTableauBordFiltre.infrastructure
+               // this.getterInfrastrucure.find(item=>item.id==this.getterInfoTableauBordFiltre.infrastructure)
+            this.getterInfoTableauBordFiltre.infrastructure=""
+        }
+
+        if(this.getterInfoTableauBordFiltre.type_marche!=""){
+            this.type_marche=this.getterInfoTableauBordFiltre.type_marche
+                //this.typeMarches.find(item=>item.id==this.getterInfoTableauBordFiltre.type_marche)
+            this.getterInfoTableauBordFiltre.type_marche=""
+        }
+        if(this.getterInfoTableauBordFiltre.unite_administrative!=""){
+            this.unite_administrative=this.getterInfoTableauBordFiltre.unite_administrative
+                this.uniteAdministratives.find(item=>item.id==this.getterInfoTableauBordFiltre.unite_administrative)
+            this.getterInfoTableauBordFiltre.unite_administrative=""
+        }
+        if(this.getterInfoTableauBordFiltre.region!=""){
+            this.region=this.getterInfoTableauBordFiltre.region
+                //this.localisations_geographiques.find(item=>item.id==this.getterInfoTableauBordFiltre.region)
+            this.getterInfoTableauBordFiltre.region=""
+
+        }
+        if(this.getterInfoTableauBordFiltre.status_marche!=""){
+
+//            if(this.getterInfoTableauBordFiltre.status_marche==8){
+//                console.log(this.getterInfoTableauBordFiltre.status_marche)
+//                this.status_marche="planifie"
+//            }
+            if(this.getterInfoTableauBordFiltre.status_marche=="planifier"){
+                console.log("OK C'est la contratualisation")
+                this.getterInfoTableauBordFiltre.status_marche=""
+                this.status_marche="planifie"
+            }
+
+            if(this.getterInfoTableauBordFiltre.status_marche==1){
+                this.status_marche=1
+            }
+
+            if(this.getterInfoTableauBordFiltre.status_marche==2){
+                this.status_marche=2
+            }
+
+            if(this.getterInfoTableauBordFiltre.status_marche==3){
+                this.status_marche=3
+            }
+
+            if(this.getterInfoTableauBordFiltre.status_marche==5){
+                this.status_marche=5
+            }
+
+            if(this.getterInfoTableauBordFiltre.status_marche==7){
+                this.status_marche=7
+            }
+
+           this.getterInfoTableauBordFiltre.status_marche=""
+        }
+    }
 },
   computed: {
 // methode pour maper notre guetter
@@ -758,7 +818,8 @@ console.log(this.getterUniteAdministrativeByUser)
       "uniteAdministratives",
       "getterBudgeCharge",
     ]),
-    ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise","getterImageMarche","acteEffetFinanciers","typeMarches"]),
+    ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise",
+        "getterImageMarche","acteEffetFinanciers","typeMarches","getterInfoTableauBordFiltre"]),
 
       noDCfNoAdmin:noDCfNoAdmin,
       filtre_unite_admin() {
@@ -786,8 +847,8 @@ console.log(this.getterUniteAdministrativeByUser)
           let vM=this;
           this.filtre_unite_admin.forEach(function (value) {
               let objet=vM.marches.filter(item=>{
-                      if(item.parent_id!=null && item.unite_administrative_id==value.id){
-                        //  console.log(item.parent_id)
+                      if(item.parent_id!=null && item.unite_administrative_id==value.id && item.sib==1 ){
+                          //  console.log(item.parent_id)
                           return item
                       }
                   }
@@ -949,12 +1010,12 @@ console.log(this.getterUniteAdministrativeByUser)
              }
            }
     },
-      afficheNombreMarcheStautInLegend(){
-
-          const nbr_planifier = document.querySelector("#score");
-          h3.innerHtml = nombreMarcheParStatue("");
-
-      },
+//      afficheNombreMarcheStautInLegend(){
+//
+//          const nbr_planifier = document.querySelector("#score");
+//          h3.innerHtml = nombreMarcheParStatue("");
+//
+//      },
     localisation(){
       let localisation=[]
       let vM=this;
@@ -993,18 +1054,18 @@ console.log(this.getterUniteAdministrativeByUser)
         //  let taux=0;
 
           if(value.attribue==0){
-            color="#ff0000"
-            colorFill="#ff0000"
+            color="#0000f3"
+            colorFill="#0000f3"
           }
 
           if(value.attribue==1){
-            color="#04874e"
-            colorFill="#04874e"
+            color="#FF00FF"
+            colorFill="#FF00FF"
           }
 
           if(value.attribue==2){
-            color="#e8d20c"
-            colorFill="#e8d20c"
+            color="#008000"
+            colorFill="#008000"
           }
 
           if(value.attribue==3){
@@ -1013,13 +1074,13 @@ console.log(this.getterUniteAdministrativeByUser)
           }
 
           if(value.attribue==5){
-            color="#ab0cd7"
-            colorFill="#ab0cd7"
+            color="#d73538"
+            colorFill="#d73538"
           }
 
           if(value.attribue==7){
-            color="#3a373b"
-            colorFill="#3a373b"
+            color="#ff0000"
+            colorFill="#ff0000"
           }
           let montantRest=budget - montant_execute;
           let tauxExecution=(montant_execute/budget)*100
@@ -1834,6 +1895,11 @@ this.objetUnite=objet
 </script>
 
 
+
+
+
+
+
     
 -->
 <style>
@@ -1857,33 +1923,33 @@ this.objetUnite=objet
 .marche_planifier{
    width: 20px;
    height: 20px;
-   background: red;
+   background: #0000f3 !important;
 }
 
 .marche_contratualisation{
    width: 20px;
    height: 20px;
-   background: #04874e;
+   background: #FF00FF !important;
 }
 .marche_execution{
    width: 20px;
    height: 20px;
-   background: #e8d20c;
+   background: #008000 !important;
 }
 .marche_resilise{
    width: 20px;
    height: 20px;
-   background: blue;
+   background: #6d0000 !important;
 }
 .marche_termine{
    width: 20px;
    height: 20px;
-   background: #ab0cd7;
+   background: #ab0cd7 !important;
 }
 .marche_suspendue{
    width: 20px;
    height: 20px;
-   background: #3a373b;
+   background: #FF0000 !important;
 }
 .sidebar {
   position: absolute;

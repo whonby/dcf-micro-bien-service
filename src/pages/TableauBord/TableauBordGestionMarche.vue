@@ -4,7 +4,7 @@
 
         <div class="" >
 
-            <div  class="" v-if="affiche_filtre">
+            <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
                 <div class="span1">
 
                 </div>
@@ -89,29 +89,23 @@
 
                 </div>
 
-            </div>
-            <!--<DraggableDiv class="col-11">-->
-                <!--&lt;!&ndash;<template slot="header">&ndash;&gt;-->
-                   <!--&lt;!&ndash;<div>GUEIEI ROLAND</div>&ndash;&gt;-->
-                <!--&lt;!&ndash;</template>&ndash;&gt;-->
-                <!--<template slot="main" >-->
-                   <!---->
-                <!--</template>-->
-                <!--&lt;!&ndash;<template slot="footer">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<div>GUEIEI 5555555</div>&ndash;&gt;-->
-                <!--&lt;!&ndash;</template>&ndash;&gt;-->
-            <!--</DraggableDiv>-->
 
-<div  class="row-fluid">
+            </div>
+
+<hr v-if="affiche_filtre">
+<div  class="row-fluid" >
     <div class="span5"><h4>MARCHES PLANIFIES - EXERCICE {{anneeAmort}}</h4></div>
     <div class="span1" align="">
         <h4><font  size="5">{{nombreTotalMarche}}</font></h4>
     </div>
     <div class="span3" align="right">
-        <button class="btn btn-info">Situation Géographique</button>
+        <button class="btn btn-info" @click="click_cartographie()">Situation Géographique</button>
     </div>
-    <div class="span3">
+    <div class="span2">
         <button class="btn btn-info">Voir PPM</button>
+    </div>
+    <div class="span1">
+        <button class="btn btn-default"><i class="icon-print"></i></button>
     </div>
 </div>
 
@@ -125,6 +119,7 @@
 
                     <li class="breadcrumb-item" v-if="type_marche"> Type Marche {{nomTypeMarche(type_marche)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
                     <li class="breadcrumb-item" v-if="info_status_marche" v-html="info_status_marche">  </li>
+                    <!--<li class="breadcrumb-item"> <button class="btn btn-info" @click="print"><i class="icon-print"></i></button></li>-->
                 </ol>
             </nav>
 
@@ -211,7 +206,7 @@
 
 
             <div class="">
-                <div class="row-fluid" style="">
+                <div class="row-fluid" style="" id="printMe">
                     <div class="span2" style="width: 170px">
                         <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 90px !important; cursor: grab !important;" @click="listeMarcheStatus('planifie')">
                             <div class="inner">
@@ -220,7 +215,6 @@
 
                             </div>
                             <div class="icon3">
-
                                 {{nombreMarcheParStatue("planifie")}} Marché(s)
                             </div>
                             <div class="icon2">
@@ -257,7 +251,6 @@
 
                             </div>
                             <div class="icon3">
-
                                 {{nombreMarcheParStatue(1)}} Marché(s)
                             </div>
                             <div class="icon2">
@@ -322,8 +315,6 @@
                 </div>
 
 
-
-
                 <div class="row-fluid" style="margin: 55px 2px 100px 4px">
                     <div class="span4" style="border: 1px dotted #EEEEEE;">
                         <apexchart type="pie" width="350" :options="chartOptions" :series="dataPourcentage"></apexchart>
@@ -342,7 +333,6 @@
                                 <th>UA </th>
                                 <th>Nombre Marchés</th>
                                 <th>Montant total</th>
-                                <!--<th v-if="status_marches==2">Montant base</th>-->
                                 <th>Taux %</th>
                                 <th>Action</th>
                             </tr>
@@ -352,7 +342,6 @@
                                 <td>{{unite.libelle}}</td>
                                 <td style="text-align: center !important;">{{nbrTotalMarchePasUA(unite.id)}} </td>
                                 <td style="text-align: center !important;">{{formatageSomme(montantPrevuePasUA(unite.id))}}</td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
                                 <td style="text-align: center !important;">{{tauxStatusMarchePasUniteAdministrative(unite.id)}}</td>
                                 <td> <a href="#" @click="selectionUnite(unite.id)" class="btn btn-default " title="Detail marches">
                                     <span class=""><i class="icon-folder-open"></i></span>
@@ -1186,15 +1175,18 @@
             ...mapActions("bienService", ["ajouterTableauBordFiltre","ajouterInfoTableauBordFiltre"]),
             selectionUnite(id){
 
+                let stat="pl"
                 if(this.status_marches=="planifie"){
                     this.status_marches=0
+                    stat="planifier"
                 }
                 let objet={
                     status_marche:this.status_marches,
                     infrastructure:this.infrastructure,
                     unite_administrative:id,
                     type_marche:this.type_marche,
-                    region:this.region
+                    region:this.region,
+                    stat:stat
                 }
                 // console.log(this.objetMarchePasUniteOuRegion)
 
@@ -1409,27 +1401,87 @@
                     keyboard: false
                 });
             },
+            print () {
+                // Pass the element id here
+                this.$htmlToPaper('printMe');
+            },
+    click_cartographie(){
+
+        let stat="pl"
+
+        if(this.info_status_marche!=""){
+            if(this.status_marches=="planifie"){
+
+                this.status_marches=0
+                stat="planifier"
+            }
+
+            if(this.status_marches==0){
+
+                this.status_marches="planifier"
+                stat="planifier"
+            }
+        }else{
+            this.status_marches=""
+        }
+
+
+
+        let objet={
+            status_marche:this.status_marches,
+            infrastructure:this.infrastructure,
+            unite_administrative:this.unite_administrative_id,
+            type_marche:this.type_marche,
+            region:this.region,
+            statut:stat
+        }
+
+        console.log(objet)
+        // console.log(this.objetMarchePasUniteOuRegion)
+
+//        let objetMarche=this.objetMarchePasUniteOuRegion.filter(item=>{
+//            if(item.unite_administrative_id==id && item.attribue==this.status_marches){
+//                return item
+//            }
+//
+//        })
+//        this.ajouterTableauBordFiltre(objetMarche)
+        this.ajouterInfoTableauBordFiltre(objet)
+
+        this.$router.push({
+            name: 'TableauBordCartographie'
+        })
+    }
 
 
         },
         watch: {
             type_marche:function (value) {
                 console.log(value);
-                this.listeMarcheStatus(this.status_marches)
+                if(this.info_status_marche!=""){
+                    this.listeMarcheStatus(this.status_marches)
+                }
+
 
             },
 
             infrastructure: function (value) {
                 console.log(value);
-                this.listeMarcheStatus(this.status_marches)
+                if(this.info_status_marche!=""){
+                    this.listeMarcheStatus(this.status_marches)
+                }
             },
             region: function (value) {
                 console.log(value);
-                this.listeMarcheStatus(this.status_marches)
+                if(this.info_status_marche!=""){
+                    this.listeMarcheStatus(this.status_marches)
+                }
             },
             unite_administrative_id: function (value) {
                 console.log(value);
-                this.listeMarcheStatus(this.status_marches)
+                if(this.info_status_marche!=""){
+                    this.listeMarcheStatus(this.status_marches)
+                }
             },
 
         },
