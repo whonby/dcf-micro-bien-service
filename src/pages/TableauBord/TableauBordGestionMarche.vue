@@ -104,8 +104,15 @@
 
 <div  class="row-fluid">
     <div class="span5"><h4>MARCHES PLANIFIES - EXERCICE {{anneeAmort}}</h4></div>
-    <div class="span1" align=""><h4>
-         <font  size="5">{{nombreTotalMarche}}</font></h4></div>
+    <div class="span1" align="">
+        <h4><font  size="5">{{nombreTotalMarche}}</font></h4>
+    </div>
+    <div class="span3" align="right">
+        <button class="btn btn-info">Situation Géographique</button>
+    </div>
+    <div class="span3">
+        <button class="btn btn-info">Voir PPM</button>
+    </div>
 </div>
 
 
@@ -208,7 +215,7 @@
                     <div class="span2" style="width: 170px">
                         <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 90px !important; cursor: grab !important;" @click="listeMarcheStatus('planifie')">
                             <div class="inner">
-                                <p> En attente de contratualisation hors alert </p>
+                                <p> En attente de contractualisation hors alert </p>
                                 <h3>  </h3>
 
                             </div>
@@ -227,7 +234,7 @@
                     <div class="span2" style="width: 170px">
                         <div @click="listeMarcheStatus(8)" class="card-box bg-attente-contratualisation-avec-alert" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
-                                <p> En attente de contratualisation avec alert</p>
+                                <p> En attente de contractualisation avec alert</p>
 
                             </div>
 
@@ -246,7 +253,7 @@
                     <div class="span2" style="width: 170px">
                         <div @click="listeMarcheStatus(1)" class="card-box bg-en-contratualisation" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
-                                <p> En contratualisation  </p>
+                                <p> En contractualisation  </p>
 
                             </div>
                             <div class="icon3">
@@ -263,7 +270,7 @@
                     <div class="span2" style="width: 170px">
                         <div @click="listeMarcheStatus(2)" class="card-box bg-en-execution" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
-                                <p> En execution</p>
+                                <p> En exécution</p>
 
                             </div>
                             <div class="icon3">
@@ -317,7 +324,7 @@
 
 
 
-                <div class="row-fluid" style="margin: 85px 2px 100px 4px">
+                <div class="row-fluid" style="margin: 55px 2px 100px 4px">
                     <div class="span4" style="border: 1px dotted #EEEEEE;">
                         <apexchart type="pie" width="350" :options="chartOptions" :series="dataPourcentage"></apexchart>
                     </div>
@@ -415,7 +422,7 @@
                             <thead>
                             <tr>
                                 <th>UA </th>
-                                <th>Nombre Marche</th>
+                                <th>Nombre Marchés</th>
                                 <th>Montant total</th>
                                 <!--<th v-if="status_marches==2">Montant base</th>-->
                                 <th>Taux</th>
@@ -569,7 +576,7 @@
                        width: 380,
                        type: 'pie',
                    },
-                   labels: ['A.C.H.A', 'A.C.A.A', 'En Cont.', 'En Execution', 'En Souffrance.'],
+                   labels: ['A.C.H.A', 'A.C.A.A', 'En Cont.', 'En Execution', 'En Souffrance'],
                    colors:['#0000f3', '#e81776', '#FF00FF',"#008000","#FF0000"],
                    responsive: [{
                        breakpoint: 480,

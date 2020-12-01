@@ -2,7 +2,7 @@
 
   <div>
     <div class="">
-      <div class="row-fluid"  style="position: absolute !important;">
+      <div class="row-fluid" style="height: 200em">
         <div id="sidebarinfo"  class="sidebar leaflet-sidebar collapsed">
           <div class="sidebar-tabs">
             <ul role="tablist"> <!-- top aligned tabs -->
@@ -131,7 +131,7 @@
 <div class="span6">
     <label>Unite administrative<a href="#" @click.prevent="videUniteAdmin()" style="color: red" v-if="unite_administrative_id">
         <i class="fa fa-trash-o"></i></a></label>
-    <model-list-select style="background-color: rgb(255,255,255);"
+    <model-list-select style="background-color: rgb(233,233,233);"
                        class="wide"
                        :list="filtre_unite_admin"
                        v-model="unite_administrative_id"
@@ -144,7 +144,7 @@
 
 
     <label>Régions  <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a></label>
-    <model-list-select style="background-color: rgb(255,255,255);"
+    <model-list-select style="background-color: rgb(233,233,233);"
                        class="wide"
                        :list="regions"
                        v-model="region"
@@ -161,19 +161,19 @@
       <input type="radio" v-model="status_marche" value="" id="logiciel70"> <span >Affichés tous <b>({{nombreMarchePasInfrastructure(infrastructure)}})</b></span>
     </label>
      <label for="logiciel7">
-      <input type="radio" v-model="status_marche" id="logiciel7" value="planifie"> <span class="mpl">Marché planifié <b>({{nombreMarcheParStatue("planifie")}})</b></span>
+      <input type="radio" v-model="status_marche" id="logiciel7"> <span>Marché planifié <b>({{nombreMarcheParStatue("planifie")}})</b></span>
     </label>
     <label for="web6" >
-      <input type="radio" v-model="status_marche"  id="web6" value="1"> <span class="mpc">Marché contractualisation <b>({{nombreMarcheParStatue(1)}})</b></span>
+      <input type="radio" v-model="status_marche"  id="web6" value="1"> <span>Marché contractualisation <b>({{nombreMarcheParStatue(1)}})</b></span>
     </label>
     <label for="mobile5">
-      <input type="radio" v-model="status_marche" id="mobile5" value="2"> <span class="mexusion">Marché en exécution <b>({{nombreMarcheParStatue(2)}})</b></span>
+      <input type="radio" v-model="status_marche" id="mobile5" value="2"> <span>Marché en exécution <b>({{nombreMarcheParStatue(2)}})</b></span>
     </label>
      <label for="mobile4">
-      <input type="radio" v-model="status_marche" id="mobile4" value="3"> <span class="mresilise">Marché résilie  <b>({{nombreMarcheParStatue(3)}})</b></span>
+      <input type="radio" v-model="status_marche" id="mobile4" value="3"> <span>Marché résilie  <b>({{nombreMarcheParStatue(3)}})</b></span>
     </label>
      <label for="mobile3">
-      <input type="radio" v-model="status_marche" id="mobile3" value="5" > <span class="mtermine">Marché terminé  <b>({{nombreMarcheParStatue(5)}})</b></span>
+      <input type="radio" v-model="status_marche" id="mobile3" value="5" > <span>Marché terminé  <b>({{nombreMarcheParStatue(5)}})</b></span>
     </label>
      <label for="mobile2">
       <input type="radio" v-model="status_marche" id="mobile2" value="7"> <span>Marché suspendu <b>({{nombreMarcheParStatue(7)}})</b></span>
@@ -433,10 +433,10 @@ montantBudegtPasUniteAdminOuRegion
 
 
       <div id="MarcheContratualisation1">
-          <div id="contratualisation">Marché en contractualisation </div>
+          <div id="contratualisation">Marché en contractualisation</div>
       </div>
       <div id="MarchePlanification1">
-          <div id="planifier">Marché planifié</div>
+          <div id="planifier">Marché planifié </div>
       </div>
       <div id="MarcheExecution1">
           <div id="execution">Marché en exécution</div>
@@ -949,6 +949,12 @@ console.log(this.getterUniteAdministrativeByUser)
              }
            }
     },
+      afficheNombreMarcheStautInLegend(){
+
+          const nbr_planifier = document.querySelector("#score");
+          h3.innerHtml = nombreMarcheParStatue("");
+
+      },
     localisation(){
       let localisation=[]
       let vM=this;
