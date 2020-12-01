@@ -761,8 +761,8 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
             this.getterInfoTableauBordFiltre.type_marche=""
         }
         if(this.getterInfoTableauBordFiltre.unite_administrative!=""){
-            this.unite_administrative=this.getterInfoTableauBordFiltre.unite_administrative
-                this.uniteAdministratives.find(item=>item.id==this.getterInfoTableauBordFiltre.unite_administrative)
+            this.unite_administrative_id=this.getterInfoTableauBordFiltre.unite_administrative
+              //  this.uniteAdministratives.find(item=>item.id==this.getterInfoTableauBordFiltre.unite_administrative)
             this.getterInfoTableauBordFiltre.unite_administrative=""
         }
         if(this.getterInfoTableauBordFiltre.region!=""){
