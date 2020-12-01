@@ -176,7 +176,7 @@ export default {
        
        }
      },
-     
+    
 
      // calcul du reste des montants de marché
 
@@ -186,7 +186,6 @@ export default {
     //      return parseInt(response).toFixed(2)
     //  }
     
-
 
     },
     methods:{
