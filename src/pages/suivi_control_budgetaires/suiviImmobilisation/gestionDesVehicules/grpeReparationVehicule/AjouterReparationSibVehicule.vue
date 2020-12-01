@@ -37,17 +37,21 @@
                <tr>
                
                  <td>
-                    
+                    <div class="control-group">
+                  <label class="control-label" style="font-size:14px">unité administrative</label>
+                  <div class="controls">
+                    <model-list-select style="background-color: rgb(233,233,233);"
+                                                   class="wide"
+                                                   :list="afficherUAParDroitAccess"
+                                                   v-model="formData.ua_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder="Unité administrative"
+                                >
 
-                 <div class="control-group">
-            <label class="control-label" title="unite administrative">UA</label>
-            <div class="controls" >
-            <select v-model="formData.ua_id" class="span">
-               <option v-for="plans in groupeUaPourMarheHorSib" :key="plans[0].id" 
-               :value="plans[0].uniteadministrative_id">{{afficherLibelleUniteAdministrative(plans[0].uniteadministrative_id)}}</option>
-           </select>
-            </div>
-          </div>
+                                </model-list-select>
+                  </div>
+                </div>
                  </td>
                  <td>
                     <div class="control-group">
@@ -221,12 +225,12 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import {admin,dcf,cf} from '../../../../../Repositories/Auth';
-// import { ModelListSelect } from "vue-search-select";
-// import "vue-search-select/dist/VueSearchSelect.css";
+import { ModelListSelect } from "vue-search-select";
+import "vue-search-select/dist/VueSearchSelect.css";
 export default {
-  // components: {
-  //   ModelListSelect
-  // },
+  components: {
+    ModelListSelect
+  },
   data() {
     return {
       fabActions: [
@@ -263,7 +267,6 @@ props:["macheid"],
    ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
    ...mapGetters("SuiviImmobilisation", ["AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
    ...mapGetters('uniteadministrative',[
-     "groupeUaPourMarheHorSib",
     "plans_programmes",
  "uniteAdministratives",
  "afficheNiveauAction",
@@ -304,17 +307,7 @@ cf:cf,
       ...mapGetters('personnelUA', ["acteur_depenses","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat","personnaliseActeurDepense",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
-      afficherLibelleUniteAdministrative(){
-      return id =>{
-        if(id!=null && id!=""){
-          let objet = this.uniteAdministratives.find(item => item.id==id)
-          if(objet){
-            return objet.libelle
-          }
-          return null
-        }
-      }
-    },
+     
                lesClassDe3() { 
 const isClassDe3 = (code) => code.charAt(0)== "6" && code.charAt(1)== "1" && code.charAt(2)== "4"; 
 return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));

@@ -63,7 +63,7 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <div>
+          <!-- <div> -->
 
                                         <!-- <download-excel
                                             class="btn btn-success pull-right"
@@ -76,10 +76,10 @@
                     <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel>  -->
-                      <div align="right" style="cursor:pointer;">
+                      <!-- <div align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
           </div> 
-                                     </div>
+                                     </div> -->
                                      
           <div class="widget-box">
             <div class="widget-title">
@@ -124,6 +124,7 @@
  <fab :actions="fabActions"
                 main-icon="apps"
           @cache="afficherModalListePersonnel"
+          @alertMe="afficherModalAjoutReparationSib"
         bg-color="green"
 
   ></fab>
@@ -161,10 +162,10 @@ export default {
                   name: 'cache',
                   icon: 'add'
               },
-              // {
-              //     name: 'alertMe',
-              //     icon: 'add_alert'
-              // }
+              {
+                  name: 'alertMe',
+                  icon: 'airport_shuttle'
+              }
           ],
      
         formData : {
@@ -214,6 +215,9 @@ afficherModalModifierTitre(id) {
     },
 afficherModalListePersonnel(){
                 this.$router.push({ name: 'AjouterReparationVehicule' })
+            },
+            afficherModalAjoutReparationSib(){
+                this.$router.push({ name: 'AjouterReparationSibVehicule' })
             },
    // exportation en pdf
 

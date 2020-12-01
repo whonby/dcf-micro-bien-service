@@ -54,9 +54,15 @@ import DetaiAffectationVehicule from '../../pages/suivi_control_budgetaires/suiv
 import Transmission from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/Transmission.vue'
 import Appreciation from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/Appreciation.vue'
 import AjouterReparationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/AjouterReparationVehicule.vue'
+import AjouterReparationSibVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/AjouterReparationSibVehicule.vue'
 import ModifierReparationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/ModifierReparationVehicule.vue'
 import TableauBordGestionVehicule from '../../gestionDesModule/TableauBordGestionVehicule.vue'
 const suiviImmobilisationRoutes = [
+  {
+    path: "/AjouterReparationSibVehicule",
+    name: "AjouterReparationSibVehicule",
+    component: AjouterReparationSibVehicule
+  },
   {
     path: "/DetailVehicule",
     name: "DetailVehicule",
