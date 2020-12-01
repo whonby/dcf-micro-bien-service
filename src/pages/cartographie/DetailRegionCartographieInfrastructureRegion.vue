@@ -1,11 +1,6 @@
 <template>
     <div>
 
-
-
-
-
-
         <div class="container-fluid" style="height: 200em">
 
             <div class="" style="margin-top: -20px">
@@ -188,7 +183,7 @@
                     </div>
                     <div class="row-fluid">
                         <div class="span3" v-for="item in getterInfrastrucure" :key="item.id" style="border: 1px dotted #e1e1e8" :class="{ red : classementMontantBaseInfrastructure(item.id) }">
-                            <h6>{{item.libelle}} (<font color="red">{{nombreMarchePasInfrastructure(item.id)}}</font>)</h6>
+                            <h6>{{item.libelle}} (<font color="black">{{nombreMarchePasInfrastructure(item.id)}}</font>)</h6>
                             <table class="table" :class="{ red : classementMontantBaseInfrastructure(item.id) == item.id }">
                            <tbody>
                            <tr>
@@ -203,7 +198,7 @@
                                <td> {{formatageSomme(montantBaseInfrastructure(item.id))}}</td>
                            </tr>
                            <tr>
-                               <td>Montant Execute</td>
+                               <td>Montant Executé</td>
                                <td>{{formatageSomme(montantExecutePasInfrastructure(item.id))}}</td>
                            </tr>
                            <tr>
@@ -211,7 +206,7 @@
                                <td>{{formatageSomme(montantRestantInfrastructure(item.id))}}</td>
                            </tr>
                            <tr>
-                               <td>Taux</td>
+                               <td>Taux Exécuté Fin.</td>
                                <td>{{tauxExecutionInfrastructure(item.id)}} %</td>
                            </tr>
                            </tbody>
@@ -229,7 +224,7 @@
 
                     <div class="row-fluid">
                         <div class="span3" v-for="item in typeMarches" :key="item.id" style="border: 1px dotted #e1e1e8" :class="{ red_type_marche : classementMontantTypeMarche(item.id) }">
-                            <h6>{{item.libelle}} (<font color="red">{{nombreMarchePasTypeMarche(item.id)}}</font>)</h6>
+                            <h6>{{item.libelle}} (<font color="black">{{nombreMarchePasTypeMarche(item.id)}}</font>)</h6>
 
                             <table class="table" :class="{ red_type_marche : classementMontantTypeMarche(item.id) == item.id }">
                                 <tbody>
@@ -268,7 +263,7 @@
                         <div class="span12">
 
                             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                <h5>Liste des marchés (<b v-if="getterFiltreCarteInfrastructure"> {{getterFiltreCarteInfrastructure.length}}</b>) </h5>
+                                <h5>Liste des marchés (<b v-if="getterFiltreCarteInfrastructure"> {{getterFiltreCarteInfrastructure.length}}</b>) <a href="#"></a> </h5>
                                 <!--<div align="right">-->
                                 <!--Recherche: <input type="text" v-model="search">-->
                                 <!--</div>-->
@@ -289,12 +284,12 @@
                                     <tr>
                                         <th>Objet </th>
                                         <th>Infrastructure</th>
-                                        <th>Type Marche</th>
-                                        <th>Montant Prevue</th>
+                                        <th>Type Marché</th>
+                                        <th>Montant Prévu</th>
                                         <th>Montant Base</th>
-                                        <th>Montant Execute</th>
-                                        <th>Taux</th>
-                                        <th>Status</th>
+                                        <th>Montant Exécuté</th>
+                                        <th>Taux Exécution Fin.</th>
+                                        <th>Statut</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -877,6 +872,12 @@
 
         methods:{
             // pagination
+            afficherModalAjouterTitre(){
+                this.$('#exampleModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            },
             partition:partition,
             getDataPaginate(index){
                 this.active_el = index;
@@ -1159,12 +1160,12 @@
         background-color: #154282 !important;
     }
     .red {
-        color: #fff !important;
+        color: black !important;
         background-color: #892e6a !important;
     }
 
     .red_type_marche {
-        color: #fff !important;
+        color: black !important;
         background-color: #892e6a !important;
     }
 

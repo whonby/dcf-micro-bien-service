@@ -120,7 +120,7 @@ RecupererNiveau3StructureDecision
                                 <th>Montant</th>
                                 <!-- <th>Service béneficiaire</th> -->
                                 <th >Date validation SB</th>
-                                <th >Date validation CF</th>
+                                <th >Date décision CF</th>
                                 <!-- <th >Observation CF</th> -->
                                 <th>Action</th>
                                     </tr>

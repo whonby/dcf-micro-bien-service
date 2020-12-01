@@ -4697,3 +4697,23 @@ export function supprmieMarcheFiltreCarteInfrastructure({commit},formData){
 export function supprmiInfoFiltreCarteInfrastructure({commit},formData){
     commit('GET_INFORMATION_FILTRE_CARTE',formData)
 }
+
+
+/**
+ *
+ export const GET_TABLEAU_BORD_FILTRE = (state, objet) =>{
+    state.tableauBordFilter = objet
+}
+
+ export const GET_INFO_TABLEAU_BORD= (state, objet) =>{
+    state.infoFiltreTableauBord = objet
+}
+ */
+
+export function ajouterTableauBordFiltre({commit},formData){
+    commit('GET_TABLEAU_BORD_FILTRE', formData)
+}
+
+export function ajouterInfoTableauBordFiltre({commit},formData){
+    commit('GET_INFO_TABLEAU_BORD', formData)
+}

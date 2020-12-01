@@ -1,6 +1,13 @@
 
 <template>
   <div >
+      <div align="right">
+
+          <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+
+
+      </div>
+      <div id="printMe">
    <table class="table table-bordered table-striped" v-if="macheid">
                                     <thead>
                                    <tr>
@@ -14,7 +21,7 @@
           <th style="text-align:center;font-size:12px">Penalités </th>
           <th style="text-align:center;font-size:12px">Net HTVA </th>
           <th style="text-align:center;font-size:12px">Net TTC</th>
-          <th style="text-align:center;font-size:12px">Etat ({{recupereTauxEtat(macheid)}}% + (TVA 18%))</th>
+          <th style="text-align:center;font-size:12px">Etat ({{recupereTauxEtat(macheid)- 18}}% (HT) + (TVA 18%))</th>
           <th style="text-align:center;font-size:12px">Bailleur({{recupereTauxBailleur(macheid)}}% HTVA) </th>
           <th style="text-align:center;font-size:12px">Actions </th>
                   </tr>
@@ -103,7 +110,7 @@
                   </tr>
                 </tbody>
                                 </table>
- 
+      </div>
   <notifications  />
   </div>
 </template>
@@ -385,6 +392,9 @@ if (qtereel) {
    
    
    ]),
+      genererEnPdf(){
+          this.$htmlToPaper('printMe');
+      },
     formatageSomme:formatageSomme,
  formaterDate(date) {
             return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");

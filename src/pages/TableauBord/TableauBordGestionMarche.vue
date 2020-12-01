@@ -1,19 +1,19 @@
 <template>
 <div>
-    <div class="container-fluid" style="height: 200em">
+    <div class="container-fluid" style="height: 100em">
 
-        <div class="" style="margin-top: -30px">
+        <div class="" >
 
             <div  class="" v-if="affiche_filtre">
                 <div class="span1">
 
                 </div>
-                <div class="span10 card-3" >
+                <div class="span10 card-1" >
                     <table class="table table-striped">
                         <tbody>
                         <tr>
                             <td>
-                                <label>UA <a href="#" @click.prevent="videUniteAdmin()" v-if="unite_administrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
+                                <label>UA<a href="#" @click.prevent="videUniteAdmin()" v-if="unite_administrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
                                 </label>
                                 <model-list-select style="background-color: rgb(233,233,233);"
                                                    class="wide"
@@ -68,20 +68,20 @@
 
                                 </model-list-select>
                             </td>
-                            <!--<td>-->
-                            <!--<label>CF-->
-                            <!--</label>-->
-                            <!--<model-list-select style="background-color: rgb(255,255,255);"-->
-                            <!--class="wide"-->
-                            <!--:list="filtre_unite_admin"-->
-                            <!--v-model="unite_administrative_id"-->
-                            <!--option-value="id"-->
-                            <!--option-text="libelle"-->
-                            <!--placeholder="Unité administrative"-->
-                            <!--&gt;-->
+                            <td>
+                            <label>CF
+                            </label>
+                            <model-list-select style="background-color: rgb(233,233,233);"
+                            class="wide"
+                            :list="filtre_unite_admin"
+                            v-model="unite_administrative_id"
+                            option-value="id"
+                            option-text="libelle"
+                            placeholder="CF"
+                            >
 
-                            <!--</model-list-select>-->
-                            <!--</td>-->
+                            </model-list-select>
+                            </td>
                         </tr>
 
                         </tbody>
@@ -103,91 +103,98 @@
             <!--</DraggableDiv>-->
 
 <div  class="row-fluid">
-    <div class="span7"><h4>Tableau de bord gestion marche, Exercice {{anneeAmort}}</h4></div>
-    <div class="span4" align="right"><h4>Nombre de marché (<font color="blue" size="5">{{nombreTotalMarche}}</font>)</h4></div>
+    <div class="span5"><h4>MARCHES PLANIFIES - EXERCICE {{anneeAmort}}</h4></div>
+    <div class="span1" align=""><h4>
+         <font  size="5">{{nombreTotalMarche}}</font></h4></div>
 </div>
 
 
             <nav aria-label="breadcrumb" class="main-breadcrumb">
                 <ol class="breadcrumb" >
-                    <li class="breadcrumb-item"> Situation General des marchés </li>
+                    <!--<li class="breadcrumb-item" v-if="!unite_administrative_id"> Situation General des marchés &nbsp;&nbsp;&nbsp;&nbsp; /</li>-->
+                    <li class="breadcrumb-item" v-if="unite_administrative_id"> Situation {{nomUniteAdmin(unite_administrative_id)}} des marchés &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+                    <li class="breadcrumb-item" v-if="region"> Région {{nomRegions(region)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+                    <li class="breadcrumb-item" v-if="infrastructure"> Infrastructutre {{nomInfrastructure(infrastructure)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+
+                    <li class="breadcrumb-item" v-if="type_marche"> Type Marche {{nomTypeMarche(type_marche)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+                    <li class="breadcrumb-item" v-if="info_status_marche" v-html="info_status_marche">  </li>
                 </ol>
             </nav>
 
 <!-----------------TABLEAU DE BORD MONTANT MARCHE------------------------>
-            <div class="">
-                <div class="row-fluid" style="margin-top: -20px">
-                    <div class="span3">
-                        <div class="card-box bg-prevision">
-                            <div class="inner">
-                                <h3> {{formatageSomme(montantPrevue)}} </h3>
-                                <p> Montant previsionnel </p>
-                            </div>
+            <!--<div class="">-->
+                <!--<div class="row-fluid" style="margin-top: -20px">-->
+                    <!--<div class="span3">-->
+                        <!--<div class="card-box bg-prevision">-->
+                            <!--<div class="inner">-->
+                                <!--<h3> {{formatageSomme(montantPrevue)}} </h3>-->
+                                <!--<p> Montant previsionnel </p>-->
+                            <!--</div>-->
 
-                            <div class="icon">
+                            <!--<div class="icon">-->
 
-                                <i class="fa fa-money" aria-hidden="true"></i>
-                            </div>
+                                <!--<i class="fa fa-money" aria-hidden="true"></i>-->
+                            <!--</div>-->
 
-                        </div>
-                    </div>
+                        <!--</div>-->
+                    <!--</div>-->
 
-                    <div class="span3">
-                        <div class="card-box bg-base">
-                            <div class="inner">
-                                <h3> {{formatageSomme(montantApprouveMarche)}}  </h3>
-                                <p> Montant de base + avenant
-                                </p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-money" aria-hidden="true"></i>
-                            </div>
+                    <!--<div class="span3">-->
+                        <!--<div class="card-box bg-base">-->
+                            <!--<div class="inner">-->
+                                <!--<h3> {{formatageSomme(montantApprouveMarche)}}  </h3>-->
+                                <!--<p> Montant de base + avenant-->
+                                <!--</p>-->
+                            <!--</div>-->
+                            <!--<div class="icon">-->
+                                <!--<i class="fa fa-money" aria-hidden="true"></i>-->
+                            <!--</div>-->
 
-                        </div>
-                    </div>
-                    <div class="span2">
-                        <div class="card-box bg-green">
-                            <div class="inner">
-                                <h3> {{formatageSomme(montantExecute)}} </h3>
-                                <p> Montant execute </p>
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="span2">-->
+                        <!--<div class="card-box bg-green">-->
+                            <!--<div class="inner">-->
+                                <!--<h3> {{formatageSomme(montantExecute)}} </h3>-->
+                                <!--<p> Montant execute </p>-->
 
-                            </div>
+                            <!--</div>-->
 
-                            <div class="icon">
+                            <!--<div class="icon">-->
 
-                                <i class="fa fa-money" aria-hidden="true"></i>
-                            </div>
+                                <!--<i class="fa fa-money" aria-hidden="true"></i>-->
+                            <!--</div>-->
 
-                        </div>
-                    </div>
-                    <div class="span2">
-                        <div class="card-box bg-restant">
-                            <div class="inner">
-                                <h3> {{formatageSomme(montantRestant)}} </h3>
-                                <p> Montant restant
-                                </p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-money" aria-hidden="true"></i>
-                            </div>
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="span2">-->
+                        <!--<div class="card-box bg-restant">-->
+                            <!--<div class="inner">-->
+                                <!--<h3> {{formatageSomme(montantRestant)}} </h3>-->
+                                <!--<p> Montant restant-->
+                                <!--</p>-->
+                            <!--</div>-->
+                            <!--<div class="icon">-->
+                                <!--<i class="fa fa-money" aria-hidden="true"></i>-->
+                            <!--</div>-->
 
-                        </div>
-                    </div>
-                    <div class="span2">
-                        <div class="card-box bg-taux">
-                            <div class="inner">
-                                <h3> {{tauxExecution}} % </h3>
-                                <p> Taux execution </p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-money" aria-hidden="true"></i>
-                            </div>
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="span2">-->
+                        <!--<div class="card-box bg-taux">-->
+                            <!--<div class="inner">-->
+                                <!--<h3> {{tauxExecution}} % </h3>-->
+                                <!--<p> Taux execution </p>-->
+                            <!--</div>-->
+                            <!--<div class="icon">-->
+                                <!--<i class="fa fa-money" aria-hidden="true"></i>-->
+                            <!--</div>-->
 
-                        </div>
-                    </div>
-                </div>
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
 
-            </div>
+            <!--</div>-->
 
 <!--------------------FIN TABLEAU DE BORD FIN MARCHE---------------------->
 
@@ -197,39 +204,54 @@
 
 
             <div class="">
-                <div class="row-fluid" style="margin-top: -20px">
-                    <div class="span3">
-                        <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 60px !important; cursor: grab !important;" @click="listeMarcheStatus('planifie')">
+                <div class="row-fluid" style="">
+                    <div class="span2" style="width: 170px">
+                        <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 90px !important; cursor: grab !important;" @click="listeMarcheStatus('planifie')">
                             <div class="inner">
-                                <h3> {{nombreMarcheParStatue("planifie")}} </h3>
                                 <p> En attente de contratualisation hors alert </p>
-                            </div>
+                                <h3>  </h3>
 
+                            </div>
+                            <div class="icon3">
+
+                                {{nombreMarcheParStatue("planifie")}} Marché(s)
+                            </div>
                             <div class="icon2">
+
                                 {{pourcentageMarchePasStatus("planifie")}}%
                             </div>
 
                         </div>
                     </div>
 
-                    <div class="span3">
-                        <div @click="listeMarcheStatus(8)" class="card-box bg-attente-contratualisation-avec-alert" style="height: 60px !important; cursor: grab !important;">
+                    <div class="span2" style="width: 170px">
+                        <div @click="listeMarcheStatus(8)" class="card-box bg-attente-contratualisation-avec-alert" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
-                                <h3>  {{nombreMarcheParStatue(8)}}  </h3>
-                                <p> En attente de contratualisation avec alert
-                                </p>
+                                <p> En attente de contratualisation avec alert</p>
+
+                            </div>
+
+                            <div class="icon3">
+
+                                {{nombreMarcheParStatue(8)}} Marché(s)
                             </div>
                             <div class="icon2">
+
                                 {{pourcentageMarchePasStatus(8)}}%
                             </div>
 
+
                         </div>
                     </div>
-                    <div class="span2">
-                        <div @click="listeMarcheStatus(1)" class="card-box bg-en-contratualisation" style="height: 60px !important; cursor: grab !important;">
+                    <div class="span2" style="width: 170px">
+                        <div @click="listeMarcheStatus(1)" class="card-box bg-en-contratualisation" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
-                                <h3> {{nombreMarcheParStatue(1)}} </h3>
                                 <p> En contratualisation  </p>
+
+                            </div>
+                            <div class="icon3">
+
+                                {{nombreMarcheParStatue(1)}} Marché(s)
                             </div>
                             <div class="icon2">
 
@@ -238,68 +260,246 @@
 
                         </div>
                     </div>
-                    <div class="span2">
-                        <div @click="listeMarcheStatus(2)" class="card-box bg-en-execution" style="height: 60px !important; cursor: grab !important;">
+                    <div class="span2" style="width: 170px">
+                        <div @click="listeMarcheStatus(2)" class="card-box bg-en-execution" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
-                                <h3> {{nombreMarcheParStatue(2)}} </h3>
-                                <p> En execution
-                                </p>
+                                <p> En execution</p>
+
+                            </div>
+                            <div class="icon3">
+
+                                {{nombreMarcheParStatue(2)}} Marché(s)
                             </div>
                             <div class="icon2">
+
                                 {{pourcentageMarchePasStatus(2)}}%
                             </div>
 
                         </div>
                     </div>
-                    <div class="span2">
-                        <div @click="listeMarcheStatus(7)" class="card-box bg-en-souffrance" style="height: 60px !important; cursor: grab !important;">
+                    <div class="span2" style="width: 170px">
+                        <div @click="listeMarcheStatus(7)" class="card-box bg-en-souffrance" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
-                                <h3> {{parseFloat(nombreMarcheParStatue(7)) + parseFloat(nombreMarcheParStatue(3))}} </h3>
                                 <p> En souffrance </p>
+
+                            </div>
+                            <div class="icon3">
+
+                                {{nombreMarcheParStatue(7)}} Marché(s)
                             </div>
                             <div class="icon2">
-                               {{pourcentageMarchePasStatus(7)}}%
+
+                                {{pourcentageMarchePasStatus(4)}}%
                             </div>
 
                         </div>
                     </div>
+                    <div class="span2" style="width: 170px">
+                        <div @click="listeMarcheStatus(7)" class="card-box bg-horts-ppm" style="height: 90px !important; cursor: grab !important;">
+                            <div class="inner">
+                                <p> Hors PPM </p>
+
+                            </div>
+                            <div class="icon3">
+
+                                {{nombreMarcheParStatue(7)}} Marché(s)
+                            </div>
+                            <div class="icon2">
+
+                                {{pourcentageMarchePasStatus(4)}}%
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
 
 
-                <div class="row-fluid">
+
+
+                <div class="row-fluid" style="margin: 85px 2px 100px 4px">
                     <div class="span4" style="border: 1px dotted #EEEEEE;">
                         <apexchart type="pie" width="350" :options="chartOptions" :series="dataPourcentage"></apexchart>
                     </div>
                     <div class="span8" >
-                        <table class="table   table-bordered table-striped" >
+                        <nav aria-label="breadcrumb" class="main-breadcrumb" v-if="info_status_marche">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"  v-html="info_status_marche">  </li>
+                                <li class="breadcrumb-item" > <a href="#" @click.prevent="afficherModalAjouterTitre()">Carte</a>  </li>
+
+                            </ol>
+                        </nav>
+                        <table class="table   table-bordered table-striped" v-if="info_status_marche">
                             <thead>
                             <tr>
                                 <th>UA </th>
-                                <th>Nombre Marche</th>
-                                <th>Montant prevue</th>
-                                <th v-if="status_marches==2">Montant base</th>
-                                <th>Taux</th>
+                                <th>Nombre Marchés</th>
+                                <th>Montant total</th>
+                                <!--<th v-if="status_marches==2">Montant base</th>-->
+                                <th>Taux %</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody >
                             <tr v-for="unite in listeUniteAdministrative" :key="unite.id">
                                 <td>{{unite.libelle}}</td>
-                                <td>{{nbrTotalMarchePasUA(unite.id)}} </td>
-                                <td>{{formatageSomme(montantPrevuePasUA(unite.id))}}</td>
-                                <td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>
-                                <td>{{tauxStatusMarchePasUniteAdministrative(unite.id)}} %</td>
-                                <td> <router-link :to="{ name: 'DetailInforTableBordUniteAd', params: { id: unite.id }}"
-                                                  class="btn btn-default " title="Detail marches">
+                                <td style="text-align: center !important;">{{nbrTotalMarchePasUA(unite.id)}} </td>
+                                <td style="text-align: center !important;">{{formatageSomme(montantPrevuePasUA(unite.id))}}</td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td style="text-align: center !important;">{{tauxStatusMarchePasUniteAdministrative(unite.id)}}</td>
+                                <td> <a href="#" @click="selectionUnite(unite.id)" class="btn btn-default " title="Detail marches">
                                     <span class=""><i class="icon-folder-open"></i></span>
-                                </router-link></td>
+                                </a></td>
                             </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                            </tr> <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                            </tr> <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                            </tr> <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                            </tr> <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                            </tr> <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+
+
+
+                            </tbody>
+                        </table>
+
+
+
+                        <table class="table   table-bordered table-striped" v-if="!info_status_marche">
+                            <thead>
+                            <tr>
+                                <th>UA </th>
+                                <th>Nombre Marche</th>
+                                <th>Montant total</th>
+                                <!--<th v-if="status_marches==2">Montant base</th>-->
+                                <th>Taux</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody >
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                            </tr> <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                            </tr> <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                            </tr> <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                            </tr> <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+
+
+
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
             <!--------------------FIN TABLEAU BORD FIN ETAT MARCHE--------------->
+
+            <div id="exampleModal" class="modal hide">
+                <div class="modal-header">
+                    <button data-dismiss="modal" class="close" type="button">×</button>
+                    <h3> Cartographie des marchés   <p class="breadcrumb-item" v-if="info_status_marche" v-html="info_status_marche">  </p></h3>
+                </div>
+                <div class="modal-body">
+
+
+                </div>
+                <div class="modal-footer">
+
+                    <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+                </div>
+            </div>
 
         </div>
 </div>
@@ -329,7 +529,7 @@
 
 <script>
     import VueApexCharts from 'vue-apexcharts'
-    import { mapGetters } from "vuex";
+    import { mapGetters,mapActions } from "vuex";
     import {noDCfNoAdmin} from "../../Repositories/Auth"
     import {formatageSomme} from '../../Repositories/Repository'
     import {  ModelListSelect } from 'vue-search-select'
@@ -349,6 +549,7 @@
                infrastructure:"",
                type_marche:"",
                region:"",
+               info_status_marche:"",
                tableMarcheStatue:"",
                listeDesMarchePasStatus:'',
                affiche_filtre:false,
@@ -369,7 +570,7 @@
                        type: 'pie',
                    },
                    labels: ['A.C.H.A', 'A.C.A.A', 'En Cont.', 'En Execution', 'En Souffrance.'],
-                   colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"],
+                   colors:['#0000f3', '#e81776', '#FF00FF',"#008000","#FF0000"],
                    responsive: [{
                        breakpoint: 480,
                        options: {
@@ -395,26 +596,16 @@
                 "getterBudgeCharge",
                 "decomptefactures"
             ]),
-            ...mapGetters("parametreGenerauxAdministratif", [
-                "sections",
+            ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+            ...mapGetters('parametreGenerauxAdministratif', ['structures_geographiques',
+                'localisations_geographiques',"getterLocalisationGeoAll","getterInfrastrucure","exercices_budgetaires","sections",
                 "type_Unite_admins",
                 "plans_programmes",
                 "natures_sections",
-                "grandes_natures",
-                "afficheNiveauPlanProg",
-                "exercices_budgetaires"
-            ]),
-            ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-            ...mapGetters('parametreGenerauxAdministratif', ['structures_geographiques',
-                'localisations_geographiques',"getterLocalisationGeoAll","getterInfrastrucure"]),
-            ...mapGetters("uniteadministrative", [
-                "acteCreations",
-                "typeTextes",
-                "uniteAdministratives",
-                "getterBudgeCharge",
-            ]),
+                "grandes_natures"]),
+
             ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise",
-                "getterImageMarche","acteEffetFinanciers","getActeEffetFinancierPersonnaliser45","typeMarches","avenants"]),
+                "getterImageMarche","acteEffetFinanciers","getActeEffetFinancierPersonnaliser45","typeMarches","avenants",]),
             noDCfNoAdmin:noDCfNoAdmin,
             regions(){
                 // console.log(this.localisations_geographiques.filter(item=>item.structure_localisation_geographique.niveau==2))
@@ -918,10 +1109,102 @@
                     }
                     return 0;
                 }
-            }
+            },
+            nomUniteAdmin(){
+                return id=>{
+                    if(id!=""){
+                        let objet=this.uniteAdministratives.find(item=>item.id==id)
+                        return objet.libelle
+                    }
+                    return ""
+                }
+            },
+            nomTypeMarche(){
+                 return id=>{
+                    if(id!=""){
+                        let objet=this.typeMarches.find(item=>item.id==id)
+                        return objet.libelle
+                    }
+                    return ""
+                }
+            },
+            nomInfrastructure(){
+                return id=>{
+                    if(id!=""){
+                        let objet=this.getterInfrastrucure.find(item=>item.id==id)
+                        return objet.libelle
+                    }
+                    return ""
+                }
+            },
+            nomRegions(){
+                return id=>{
+                    if(id!=""){
+                        let objet=this.localisations_geographiques.find(item=>item.id==id)
+                          return objet.libelle
+                    }
+                    return ""
+                }
+            },
+            infoEtatMarche(){
+                return status=>{
+                    if(status==0){
+                      //  colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"]
+                        return "<font color='#410041'>En attente de contratualisation hors alert</font>"
+                    }
+                    if(status==8){
+                        return "<font color='#e81776'>En attente de contratualisation avec alert</font>"
+                    }
+                    if(status==1){
+                        return "<font color='#FF00FF'>En contratualisation</font>"
+                    }
+
+                    if(status==2){
+                        return "<font color='#008000'>En execution</font>"
+                    }
+
+                    if(status==7){
+                        return "<font color='#b5160e'>En suffrance</font>"
+                    }
+                    return null
+                }
+            },
+
+
+
+
         }
         ,
         methods:{
+            ...mapActions("bienService", ["ajouterTableauBordFiltre","ajouterInfoTableauBordFiltre"]),
+            selectionUnite(id){
+
+                if(this.status_marches=="planifie"){
+                    this.status_marches=0
+                }
+                let objet={
+                    status_marche:this.status_marches,
+                    infrastructure:this.infrastructure,
+                    unite_administrative:id,
+                    type_marche:this.type_marche,
+                    region:this.region
+                }
+                // console.log(this.objetMarchePasUniteOuRegion)
+
+                let objetMarche=this.objetMarchePasUniteOuRegion.filter(item=>{
+                    if(item.unite_administrative_id==id && item.attribue==this.status_marches){
+                        return item
+                    }
+
+                })
+                this.ajouterTableauBordFiltre(objetMarche)
+                this.ajouterInfoTableauBordFiltre(objet)
+
+                this.$router.push({
+                    name: 'DetailInforTableBordUniteAd',
+                    params: { id: id }
+                })
+            },
             videUniteAdmin(){
                 this.unite_administrative_id=""
             },
@@ -944,174 +1227,205 @@
                 this.videTypeMarche()
             },
             formatageSomme:formatageSomme,
-
             listeMarcheStatus(status){
-                if(status=="planifie"){
-                    status=0
-                }
-                this.tableMarcheStatue=""
 
-                let vM=this;
-                let objet=this.objetListeMarcheInfoUnite.filter(item=>{
-                    if(item.parent_id!="" && item.attribue==status){
-                        return item
+
+
+                    if(status=="planifie"){
+                        status=0
                     }
-                })
+                    this.tableMarcheStatue=""
 
-                //retourne les marches d'une region selectionner
-                if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure=="" && vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                    this.info_status_marche=this.infoEtatMarche(status)
+                    let vM=this;
+                    let objet=this.objetListeMarcheInfoUnite.filter(item=>{
+                        if(item.parent_id!="" && item.attribue==status){
                             return item
                         }
                     })
 
-                }
+                    //retourne les marches d'une region selectionner
+                    if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure=="" && vM.type_marche==""){
+                        objet =objet.filter(item=>{
+                            if(item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                                return item
+                            }
+                        })
 
-                //retourne les marches d'une unite administrative selectionner
-                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure=="" && vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
+                    }
 
-                //retourne les marches d'une une infrastucture selectionner
-                if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
+                    //retourne les marches d'une unite administrative selectionner
+                    if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure=="" && vM.type_marche==""){
+                        objet =objet.filter(item=>{
+                            if(item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
+                                return item
+                            }
+                        })
+                    }
 
-
-                //retourne les marches d'un type de marché selectionner
-                if (vM.infrastructure=="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche!=""){
-                    objet =objet.filter(item=>{
-                        if(item.type_marche_id==vM.type_marche && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
+                    //retourne les marches d'une une infrastucture selectionner
+                    if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche==""){
+                        objet =objet.filter(item=>{
+                            if(item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                                return item
+                            }
+                        })
+                    }
 
 
-                //retourne les marches de region et unite adminstrative selectionner
-                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
+                    //retourne les marches d'un type de marché selectionner
+                    if (vM.infrastructure=="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche!=""){
+                        objet =objet.filter(item=>{
+                            if(item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                                return item
+                            }
+                        })
+                    }
 
 
-                //retourne les marches d'une infrastructure et unite adminstrative selectionner
-
-                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-
-
-                //retourne les marches d'un type marche et unite adminstrative selectionner
-
-                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
-                    objet =objet.filter(item=>{
-                        if(item.unite_administrative_id==vM.unite_administrative_id && item.type_marche_id==vM.type_marche && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
+                    //retourne les marches de region et unite adminstrative selectionner
+                    if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche==""){
+                        objet =objet.filter(item=>{
+                            if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                                return item
+                            }
+                        })
+                    }
 
 
-                //retourne les marches d'une region et infrastructure selectionner
-                if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" &&  vM.type_marche==""){
-                    objet =objet.filter(item=>{
-                        if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
+                    //retourne les marches d'une infrastructure et unite adminstrative selectionner
 
-                //retourne les marches d'une infrasture et type marche selectionner
-                if(vM.unite_administrative_id=="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
-                    objet =objet.filter(item=>{
-                        if(item.infrastructure_id==vM.infrastructure && item.type_marche_id==vM.type_marche && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
+                    if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche==""){
+                        objet =objet.filter(item=>{
+                            if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                                return item
+                            }
+                        })
+                    }
 
 
-                //retourne les marches d'un type marche et regions selectionner
-                if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!=""){
-                    objet =objet.filter(item=>{
-                        if(item.localisation_geographie_id==vM.region && item.type_marche_id==vM.type_marche && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
+                    //retourne les marches d'un type marche et unite adminstrative selectionner
 
-                //retourn les marches d'une UA, REGION et INFRASTRUCTURE
-
-                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche=="" ){
-                    objet =objet.filter(item=>{
-                        if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
+                    if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
+                        objet =objet.filter(item=>{
+                            if(item.unite_administrative_id==vM.unite_administrative_id && item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                                return item
+                            }
+                        })
+                    }
 
 
-                //retourn les marches d'une UA, REGION et TYPE MARCHE
-                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!="" ){
-                    objet =objet.filter(item=>{
-                        if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
+                    //retourne les marches d'une region et infrastructure selectionner
+                    if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" &&  vM.type_marche==""){
+                        objet =objet.filter(item=>{
+                            if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                                return item
+                            }
+                        })
+                    }
 
-                //retourn les marches d'une UA, INFRA et TYPE MARCHE
-                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!="" ){
-                    objet =objet.filter(item=>{
-                        if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
+                    //retourne les marches d'une infrasture et type marche selectionner
+                    if(vM.unite_administrative_id=="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
+                        objet =objet.filter(item=>{
+                            if(item.infrastructure_id==vM.infrastructure && item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                                return item
+                            }
+                        })
+                    }
 
-                //retourn les marche INFRA, REGIONS,TYPE MARCHE
-                if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
-                    objet =objet.filter(item=>{
-                        if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
 
-                //retourn les marche INFRA, REGIONS,TYPE MARCHE,UA
-                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
-                    objet =objet.filter(item=>{
-                        if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
-                            return item
-                        }
-                    })
-                }
-                this.status_marches=status;
-this.listeDesMarchePasStatus=objet
-                let distinct=[...new Set(objet.map(item=>item.unite_administrative_id))]
-         this.tableMarcheStatue=distinct
+                    //retourne les marches d'un type marche et regions selectionner
+                    if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!=""){
+                        objet =objet.filter(item=>{
+                            if(item.localisation_geographie_id==vM.region && item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                                return item
+                            }
+                        })
+                    }
 
-                   //console.log(this.tableMarcheStatue)
+                    //retourn les marches d'une UA, REGION et INFRASTRUCTURE
 
-            }
-        }
+                    if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche=="" ){
+                        objet =objet.filter(item=>{
+                            if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                                return item
+                            }
+                        })
+                    }
+
+
+                    //retourn les marches d'une UA, REGION et TYPE MARCHE
+                    if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!="" ){
+                        objet =objet.filter(item=>{
+                            if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                                return item
+                            }
+                        })
+                    }
+
+                    //retourn les marches d'une UA, INFRA et TYPE MARCHE
+                    if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!="" ){
+                        objet =objet.filter(item=>{
+                            if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                                return item
+                            }
+                        })
+                    }
+
+                    //retourn les marche INFRA, REGIONS,TYPE MARCHE
+                    if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
+                        objet =objet.filter(item=>{
+                            if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                                return item
+                            }
+                        })
+                    }
+
+                    //retourn les marche INFRA, REGIONS,TYPE MARCHE,UA
+                    if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
+                        objet =objet.filter(item=>{
+                            if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
+                                return item
+                            }
+                        })
+                    }
+                    this.status_marches=status;
+                    this.listeDesMarchePasStatus=objet
+                    let distinct=[...new Set(objet.map(item=>item.unite_administrative_id))]
+                    this.tableMarcheStatue=distinct
+
+
+            },
+            afficherModalAjouterTitre(){
+                this.$('#exampleModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            },
+
+
+        },
+        watch: {
+            type_marche:function (value) {
+                console.log(value);
+                this.listeMarcheStatus(this.status_marches)
+
+            },
+
+            infrastructure: function (value) {
+                console.log(value);
+                this.listeMarcheStatus(this.status_marches)
+            },
+            region: function (value) {
+                console.log(value);
+                this.listeMarcheStatus(this.status_marches)
+            },
+            unite_administrative_id: function (value) {
+                console.log(value);
+                this.listeMarcheStatus(this.status_marches)
+            },
+
+        },
     }
 </script>
 
@@ -1253,7 +1567,7 @@ this.listeDesMarchePasStatus=objet
         color: #fff;
         padding: 10px 10px 30px;
         margin: 10px 0px;
-        height: 45px;
+        height: 55px !important;
     }
     .card-box:hover {
         text-decoration: none;
@@ -1283,14 +1597,23 @@ this.listeDesMarchePasStatus=objet
         font-size: 50px;
         color: rgba(0, 0, 0, 0.15);
     }
+    .card-box .icon3 {
+        position: absolute;
+        top: auto;
+        bottom: 30px;
+        right: 3px;
+        z-index: 0;
+        font-size: 20px;
+        color: #f2f2f2;
+    }
 
     .card-box .icon2 {
         position: absolute;
         top: auto;
-        bottom: 45px;
+        bottom: 5px;
         right: 3px;
         z-index: 0;
-        font-size: 20px;
+        font-size: 15px;
         color: #f2f2f2;
     }
 
@@ -1337,7 +1660,7 @@ this.listeDesMarchePasStatus=objet
 
     .bg-attente-contratualisation-hors-alert {
 
-        background-color: #410041 !important;
+        background-color: #0000f3 !important;
     }
     .bg-attente-contratualisation-avec-alert {
         background-color: #e81776 !important;
@@ -1350,9 +1673,11 @@ this.listeDesMarchePasStatus=objet
         background-color: #008000 !important;
     }
     .bg-en-souffrance {
-        background-color: darkred !important;
+        background-color: red !important;
     }
-
+    .bg-horts-ppm{
+        background-color: #ffb62f !important;
+    }
 
     .red {
         color: #fff !important;

@@ -147,11 +147,11 @@
                         </td>
                         <td >
                         <div class="control-group">
-                   <label class="control-label">Fichier joint:</label>
-                    <div class="controls">
-                     <input type="file"   @change="OnchangeFichier" />
-              </div>
-            </div>
+                               <label class="control-label">Fichier joint:</label>
+                                <div class="controls">
+                                 <input type="file"   @change="OnchangeFichier" />
+                      </div>
+                    </div>
                         </td>
                         </tr>
                     </table>  

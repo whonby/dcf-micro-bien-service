@@ -99,7 +99,12 @@ const defaultState = {
     typeOrdrePaiement:[],
     loading_marche:true,
     marcheFiltreCarteInfrastructure:"",
-    informationFiltreCarteInfrastructure:""
+    informationFiltreCarteInfrastructure:"",
+
+
+
+    tableauBordFilter:"",
+    infoFiltreTableauBord:""
 
 }
 

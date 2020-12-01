@@ -96,6 +96,7 @@ import TableauBordGestionMarche from "../../pages/TableauBord/TableauBordGestion
 
 import DetailInforTableBordUniteAd from "../../pages/TableauBord/DetailInforTableBordUniteAd"
 const BienServiceRoutes = [
+
     {
         path:"/table_bord_gestion_marche_hors_sib/:id",
         name:"DetailInforTableBordUniteAd",
