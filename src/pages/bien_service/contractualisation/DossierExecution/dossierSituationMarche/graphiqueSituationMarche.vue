@@ -1,8 +1,9 @@
 <template>
     <div>
+      <div class="span3">
          <apexchart type="bar" height="350" :options="chartOptions" :series="series"></apexchart>
          <!-- {{recupererMontantAvenant(this.macheid)}} -->
-        
+      </div>
     </div>
 </template>
 <script>
@@ -175,8 +176,8 @@ formatageSomme,
 
             let pour_centage_rest=montanRestant
             let pour_execu=vm.calculDuMontantExecution
-              vm.series[0].data.push(pour_centage_rest.toFixed(2))
-              vm.series[1].data.push(pour_execu.toFixed(2))
+              vm.series[0].data.push(pour_centage_rest).toFixed(2)
+              vm.series[1].data.push(pour_execu).toFixed(2)
               vm.chartOptions.xaxis.categories.push(value.libelle)
        })
       
