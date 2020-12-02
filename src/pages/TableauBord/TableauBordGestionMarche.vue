@@ -13,6 +13,20 @@
                         <tbody>
                         <tr>
                             <td>
+                                <label>CF
+                                </label>
+                                <model-list-select style="background-color: rgb(233,233,233);"
+                                                   class="wide"
+                                                   :list="filtre_unite_admin"
+                                                   v-model="unite_administrative_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder="CF"
+                                >
+
+                                </model-list-select>
+                            </td>
+                            <td>
                                 <label>UA<a href="#" @click.prevent="videUniteAdmin()" v-if="unite_administrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
                                 </label>
                                 <model-list-select style="background-color: rgb(233,233,233);"
@@ -68,20 +82,7 @@
 
                                 </model-list-select>
                             </td>
-                            <td>
-                            <label>CF
-                            </label>
-                            <model-list-select style="background-color: rgb(233,233,233);"
-                            class="wide"
-                            :list="filtre_unite_admin"
-                            v-model="unite_administrative_id"
-                            option-value="id"
-                            option-text="libelle"
-                            placeholder="CF"
-                            >
 
-                            </model-list-select>
-                            </td>
                         </tr>
 
                         </tbody>
@@ -105,7 +106,7 @@
         <button class="btn btn-info">Voir PPM</button>
     </div>
     <div class="span1">
-        <button class="btn btn-default"><i class="icon-print"></i></button>
+        <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button>
     </div>
 </div>
 
@@ -206,11 +207,16 @@
 
 
             <div class="">
+
+
+
+
                 <div class="row-fluid" style="" id="printMe">
-                    <div class="span2" style="width: 170px">
+                    <div class="span2" style="width: 170px;margin-left: -3px !important;border-right: 10px solid #fff">
                         <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 90px !important; cursor: grab !important;" @click="listeMarcheStatus('planifie')">
                             <div class="inner">
-                                <p> En attente de contractualisation hors alert </p>
+                                <p> <b> En attente de contractualisation hors alert
+                                </b></p>
                                 <h3>  </h3>
 
                             </div>
@@ -225,10 +231,10 @@
                         </div>
                     </div>
 
-                    <div class="span2" style="width: 170px">
+                    <div class="span2" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #fff">
                         <div @click="listeMarcheStatus(8)" class="card-box bg-attente-contratualisation-avec-alert" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
-                                <p> En attente de contractualisation avec alert</p>
+                                <p><b>En attente de contractualisation avec alert</b> </p>
 
                             </div>
 
@@ -244,10 +250,10 @@
 
                         </div>
                     </div>
-                    <div class="span2" style="width: 170px">
+                    <div class="span2" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #fff">
                         <div @click="listeMarcheStatus(1)" class="card-box bg-en-contratualisation" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
-                                <p> En contractualisation  </p>
+                                <p><b>En contractualisation</b>   </p>
 
                             </div>
                             <div class="icon3">
@@ -260,10 +266,10 @@
 
                         </div>
                     </div>
-                    <div class="span2" style="width: 170px">
+                    <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff">
                         <div @click="listeMarcheStatus(2)" class="card-box bg-en-execution" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
-                                <p> En exécution</p>
+                                <p><b>En exécution</b> </p>
 
                             </div>
                             <div class="icon3">
@@ -277,7 +283,7 @@
 
                         </div>
                     </div>
-                    <div class="span2" style="width: 170px">
+                    <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff ">
                         <div @click="listeMarcheStatus(7)" class="card-box bg-en-souffrance" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
                                 <p> En souffrance </p>
@@ -294,7 +300,7 @@
 
                         </div>
                     </div>
-                    <div class="span2" style="width: 170px">
+                    <div class="span2" style="width: 170px ;margin-left: -0.9px !important;border-right: 10px solid #fff">
                         <div @click="listeMarcheStatus(7)" class="card-box bg-horts-ppm" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
                                 <p> Hors PPM </p>
@@ -479,6 +485,10 @@
                         </table>
                     </div>
                 </div>
+
+
+
+
             </div>
             <!--------------------FIN TABLEAU BORD FIN ETAT MARCHE--------------->
 
@@ -518,6 +528,327 @@
          @cache="filter"
 
     ></fab>
+
+
+
+    <vue-html2pdf
+            :show-layout="false"
+            :float-layout="true"
+            :enable-download="true"
+            :preview-modal="true"
+            :paginate-elements-by-height="1400"
+            filename="DCF"
+            :pdf-quality="2"
+            :manual-pagination="false"
+            pdf-format="a4"
+            pdf-orientation="landscape"
+            pdf-content-width="1000px"
+
+            @progress="onProgress($event)"
+            @hasStartedGeneration="hasStartedGeneration()"
+            @hasGenerated="hasGenerated($event)"
+            ref="html2Pdf"
+    >
+        <section slot="pdf-content">
+
+            <div  class="row-fluid" >
+                <div class="span5"><h4>MARCHES PLANIFIES - EXERCICE {{anneeAmort}}</h4></div>
+                <div class="span1" align="">
+                    <h4><font  size="5">{{nombreTotalMarche}}</font></h4>
+                </div>
+            </div>
+
+
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb" >
+                    <!--<li class="breadcrumb-item" v-if="!unite_administrative_id"> Situation General des marchés &nbsp;&nbsp;&nbsp;&nbsp; /</li>-->
+                    <li class="breadcrumb-item" v-if="unite_administrative_id"> Situation {{nomUniteAdmin(unite_administrative_id)}} des marchés &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+                    <li class="breadcrumb-item" v-if="region"> Région {{nomRegions(region)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+                    <li class="breadcrumb-item" v-if="infrastructure"> Infrastructutre {{nomInfrastructure(infrastructure)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+
+                    <li class="breadcrumb-item" v-if="type_marche"> Type Marche {{nomTypeMarche(type_marche)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+                    <li class="breadcrumb-item" v-if="info_status_marche" v-html="info_status_marche">  </li>
+                    <!--<li class="breadcrumb-item"> <button class="btn btn-info" @click="print"><i class="icon-print"></i></button></li>-->
+                </ol>
+            </nav>
+
+            <div class="row-fluid" style="" >
+                <div class="span2" style="width: 150px;margin-left: -3px !important;border-right: 10px solid #fff">
+                    <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 90px !important; cursor: grab !important;" @click="listeMarcheStatus('planifie')">
+                        <div class="inner">
+                            <p> <b> En attente de contractualisation hors alert
+                            </b></p>
+                            <h3>  </h3>
+
+                        </div>
+                        <div class="icon3">
+                            {{nombreMarcheParStatue("planifie")}} Marché(s)
+                        </div>
+                        <div class="icon2">
+
+                            {{pourcentageMarchePasStatus("planifie")}}%
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="span2" style="width: 150px;margin-left: -0.9px !important;border-right: 10px solid #fff">
+                    <div @click="listeMarcheStatus(8)" class="card-box bg-attente-contratualisation-avec-alert" style="height: 90px !important; cursor: grab !important;">
+                        <div class="inner">
+                            <p><b>En attente de contractualisation avec alert</b> </p>
+
+                        </div>
+
+                      ù8  <div class="icon3">
+
+                            {{nombreMarcheParStatue(8)}} Marché(s)
+                        </div>
+                        <div class="icon2">
+
+                            {{pourcentageMarchePasStatus(8)}}%
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="span2" style="width: 150px;margin-left: -0.9px !important;border-right: 10px solid #fff">
+                    <div @click="listeMarcheStatus(1)" class="card-box bg-en-contratualisation" style="height: 90px !important; cursor: grab !important;">
+                        <div class="inner">
+                            <p><b>En contractualisation</b>   </p>
+
+                        </div>
+                        <div class="icon3">
+                            {{nombreMarcheParStatue(1)}} Marché(s)
+                        </div>
+                        <div class="icon2">
+
+                            {{pourcentageMarchePasStatus(1)}}%
+                        </div>
+
+                    </div>
+                </div>
+                <div class="span2" style="width: 150px; margin-left: -0.9px !important;border-right: 10px solid #fff">
+                    <div @click="listeMarcheStatus(2)" class="card-box bg-en-execution" style="height: 90px !important; cursor: grab !important;">
+                        <div class="inner">
+                            <p><b>En exécution</b> </p>
+
+                        </div>
+                        <div class="icon3">
+
+                            {{nombreMarcheParStatue(2)}} Marché(s)
+                        </div>
+                        <div class="icon2">
+
+                            {{pourcentageMarchePasStatus(2)}}%
+                        </div>
+
+                    </div>
+                </div>
+                <div class="span2" style="width: 150px; margin-left: -0.9px !important;border-right: 10px solid #fff ">
+                    <div @click="listeMarcheStatus(7)" class="card-box bg-en-souffrance" style="height: 90px !important; cursor: grab !important;">
+                        <div class="inner">
+                            <p> En souffrance </p>
+
+                        </div>
+                        <div class="icon3">
+
+                            {{nombreMarcheParStatue(7)}} Marché(s)
+                        </div>
+                        <div class="icon2">
+
+                            {{pourcentageMarchePasStatus(4)}}%
+                        </div>
+
+                    </div>
+                </div>
+                <div class="span2" style="width: 150px ;margin-left: -0.9px !important;border-right: 10px solid #fff">
+                    <div @click="listeMarcheStatus(7)" class="card-box bg-horts-ppm" style="height: 90px !important; cursor: grab !important;">
+                        <div class="inner">
+                            <p> Hors PPM </p>
+
+                        </div>
+                        <div class="icon3">
+
+                            {{nombreMarcheParStatue(7)}} Marché(s)
+                        </div>
+                        <div class="icon2">
+
+                            {{pourcentageMarchePasStatus(4)}}%
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row-fluid" style="margin: 55px 2px 100px 4px">
+                <div class="span4" style="border: 1px dotted #EEEEEE; margin-left: -1px">
+                    <apexchart type="pie" width="300" :options="chartOptions" :series="dataPourcentage"></apexchart>
+                </div>
+                <div class="span8" style="margin-right: -1px">
+                    <!--<nav aria-label="breadcrumb" class="main-breadcrumb" v-if="info_status_marche">-->
+                        <!--<ol class="breadcrumb">-->
+                            <!--<li class="breadcrumb-item"  v-html="info_status_marche">  </li>-->
+                            <!--<li class="breadcrumb-item" > <a href="#" @click.prevent="afficherModalAjouterTitre()">Carte</a>  </li>-->
+
+                        <!--</ol>-->
+                    <!--</nav>-->
+                    <table class="table   table-bordered table-striped" v-if="info_status_marche">
+                        <thead>
+                        <tr>
+                            <th>UA </th>
+                            <th>Nombre Marchés</th>
+                            <th>Montant total</th>
+                            <th>Taux %</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody >
+                        <tr v-for="unite in listeUniteAdministrative" :key="unite.id">
+                            <td>{{unite.libelle}}</td>
+                            <td style="text-align: center !important;">{{nbrTotalMarchePasUA(unite.id)}} </td>
+                            <td style="text-align: center !important;">{{formatageSomme(montantPrevuePasUA(unite.id))}}</td>
+                            <td style="text-align: center !important;">{{tauxStatusMarchePasUniteAdministrative(unite.id)}}</td>
+                            <td> <a href="#" @click="selectionUnite(unite.id)" class="btn btn-default " title="Detail marches">
+                                <span class=""><i class="icon-folder-open"></i></span>
+                            </a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+                            <td></td>
+                        </tr> <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+                            <td></td>
+                        </tr> <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+                            <td></td>
+                        </tr> <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+                            <td></td>
+                        </tr> <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+                            <td></td>
+                        </tr> <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+
+                    <table class="table   table-bordered table-striped" v-if="!info_status_marche">
+                        <thead>
+                        <tr>
+                            <th>UA </th>
+                            <th>Nombre Marchés</th>
+                            <th>Montant total</th>
+                            <!--<th v-if="status_marches==2">Montant base</th>-->
+                            <th>Taux</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody >
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+                            <td></td>
+                        </tr> <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+                            <td></td>
+                        </tr> <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+                            <td></td>
+                        </tr> <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+                            <td></td>
+                        </tr> <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+    </vue-html2pdf>
 
     {{dataArrayPourcentage}}
 </div>
@@ -1451,7 +1782,11 @@
         this.$router.push({
             name: 'TableauBordCartographie'
         })
-    }
+    },
+            generateReport () {
+                this.$refs.html2Pdf.generatePdf()
+            },
+
 
 
         },
@@ -1659,7 +1994,7 @@
     .card-box .icon3 {
         position: absolute;
         top: auto;
-        bottom: 30px;
+        bottom: 35px;
         right: 3px;
         z-index: 0;
         font-size: 20px;
