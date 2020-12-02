@@ -330,6 +330,7 @@
                         stacked: true,
                         stackType: '100%'
                     },
+                    colors:['#00a65a','#154282'],
                     responsive: [{
                         breakpoint: 480,
                         options: {
@@ -779,16 +780,18 @@
                 let array=[]
 
               let tauxReste=(this.montantRestant * 100)/this.montantApprouveMarche
-              let objetEx={
-                  name: 'Montant Execute',
-                  data: [this.tauxExecution]
-              }
+
                 let objetApprouve={
                     name: 'Montant Restant',
                     data: [tauxReste.toFixed(2)]
                 }
-                array.push(objetApprouve)
+                let objetEx={
+                    name: 'Montant Execute',
+                    data: [this.tauxExecution]
+                }
+
                 array.push(objetEx)
+                array.push(objetApprouve)
                 return array
             },
             /**
