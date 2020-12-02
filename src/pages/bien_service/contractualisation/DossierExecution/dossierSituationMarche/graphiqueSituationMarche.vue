@@ -172,7 +172,7 @@ export default {
        return id =>{
          
             return this.getMandatPersonnaliserVise.filter(item =>item.marche_id==id && this.afficherMontantDeBaseDuMarcheParRegion(this.IdMandatVise(this.macheid))).reduce((prec,cur) => parseFloat(prec)
-             + parseFloat(cur.prix_propose_ht), 0) / parseFloat(this.calculDuMontantReel)*100 .toFixed(2) 
+             + parseFloat(cur.total_general), 0) / parseFloat(this.calculDuMontantReel)*100 .toFixed(2) 
        
        }
      },
@@ -207,8 +207,8 @@ formatageSomme,
 
             let pour_centage_rest=montanRestant
             let pour_execu=vm.calculDuMontantExecution
-              vm.series[0].data.push(pour_centage_rest).toFixed(2)
-              vm.series[1].data.push(pour_execu).toFixed(2)
+              vm.series[0].data.push(pour_centage_rest .toFixed(2))
+              vm.series[1].data.push(pour_execu ).toFixed(2)
               vm.chartOptions.xaxis.categories.push(value.libelle)
        })
       

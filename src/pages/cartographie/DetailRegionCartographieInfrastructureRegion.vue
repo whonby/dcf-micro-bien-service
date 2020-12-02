@@ -42,140 +42,106 @@
                     </tbody>
 
                 </table>
-                <div class="span6">
-                    <div class="row-fluid">
-                        <div class="span6">
-                            <div class="card-box bg-prevision">
-                                <div class="inner">
-                                    <h3> {{formatageSomme(parseFloat(montantPrevisionnel))}} </h3>
-                                    <p>Montant previsionnel </p>
+                <div class="row-fluid">
+                    <div class="span8">
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <div class="card-box bg-prevision">
+                                    <div class="inner">
+                                        <h3> {{formatageSomme(parseFloat(montantPrevisionnel))}} </h3>
+                                        <p>Montant previsionnel </p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-money" aria-hidden="true"></i>
+                                    </div>
+
                                 </div>
-                                <div class="icon">
-                                    <i class="fa fa-money" aria-hidden="true"></i>
+                            </div>
+
+                            <div class="span6">
+                                <div class="card-box bg-base">
+                                    <div class="inner">
+                                        <h3> {{formatageSomme(parseFloat(montantApprouveMarche))}} </h3>
+                                        <p>Montant de base + avenant </p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-money" aria-hidden="true"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span5">
+                                <div class="card-box bg-green">
+                                    <div class="inner">
+                                        <h3> {{formatageSomme(parseFloat(montantExecute))}} </h3>
+                                        <p> Montant execute </p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-money" aria-hidden="true"></i>
+                                    </div>
+
                                 </div>
 
                             </div>
-                        </div>
 
-                        <div class="span6">
-                            <div class="card-box bg-base">
-                                <div class="inner">
-                                    <h3> {{formatageSomme(parseFloat(montantApprouveMarche))}} </h3>
-                                    <p>Montant de base + avenant </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                </div>
 
+                            <div class="span4">
+                                <div class="card-box bg-restant">
+                                    <div class="inner">
+                                        <h3> {{formatageSomme(parseFloat(montantRestant))}} </h3>
+                                        <p> Montant restant </p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-money" aria-hidden="true"></i>
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>
+                            <div class="span3">
+                                <div class="card-box bg-taux ">
+                                    <div class="inner">
+                                        <h3> {{tauxExecution}} % </h3>
+                                        <p> Taux Execution</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-money" aria-hidden="true"></i>
+                                    </div>
 
+                                </div>
+                            </div>
+
+
+
+                        </div>
                     </div>
-                    <div class="row-fluid">
-                        <div class="span5">
-                            <div class="card-box bg-green">
-                                <div class="inner">
-                                    <h3> {{formatageSomme(parseFloat(montantExecute))}} </h3>
-                                    <p> Montant execute </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                </div>
-
-                        <div class="span11">
-
-                        </div>
-
-                        <div class="span5">
-                            <div class="card-box bg-restant">
-                                <div class="inner">
-                                    <h3> {{formatageSomme(parseFloat(montantRestant))}} </h3>
-                                    <p> Montant restant </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="span2">
-                            <div class="card-box bg-taux ">
-                                <div class="inner">
-                                    <h3> {{tauxExecution}} % </h3>
-                                    <p> Taux </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                </div>
-
-                            </div>
-                        </div>
-
+                    <div class="span4">
+                        <apexchart type="bar" width="325" height="250" :options="chartOptions" :series="dataDiagrame"></apexchart>
                     </div>
-                    <!--<table class="table table-bordered table-striped">-->
-                        <!--<tr>-->
-                            <!--<td>Montant previsionnel</td>-->
-                            <!--<td></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Montant de base</td>-->
-                            <!--<td></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Montant execute</td>-->
-                            <!--<td></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Montant restant</td>-->
-                            <!--<td></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Taux execution</td>-->
-                            <!--<td></td>-->
-                        <!--</tr>-->
-                    <!--</table>-->
 
                 </div>
-                <div class="span4">
-                    <apexchart type="bar" width="325" height="250" :options="chartOptions" :series="dataDiagrame"></apexchart>
-                </div>
 
-                <!---->
-                <!--<table class="table table-bordered table-striped">-->
-                    <!--<thead>-->
-                    <!--<tr>-->
-                        <!--<th><a href="#">Montant previsionnel</a>  </th>-->
-                        <!--<th><a href="#">Montant Approuve</a> </th>-->
-                        <!--<th><a  href="#">Montant execute</a> </th>-->
-                        <!--<th><a href="#">Taux execution</a> </th>-->
-                    <!--</tr>-->
-                    <!--</thead>-->
 
-                    <!--<tbody>-->
-                    <!--<tr>-->
-                        <!--<td> </td>-->
-                        <!--<td > </td>-->
-                        <!--<td>100</td>-->
-                        <!--<td>444</td>-->
-                    <!--</tr>-->
-                    <!--</tbody>-->
-                <!--</table>-->
+
+
 
                 <div class="row gutters-sm">
                     <!--<div class="span11">-->
-                        <!--<h6>Infrastructure</h6>-->
-                        <!--<table class="table table-bordered table-striped">-->
-                            <!--<thead>-->
-                            <!--<tr>-->
-                                <!--<th></th>-->
-                                <!--<th>Montant previsionnel</th>-->
-                            <!--<th>Montant previsionnel</th>-->
-                            <!--<th>Montant Approuve</th>-->
-                            <!--<th>Montant execute</th>-->
-                            <!--<th>Taux execution</th>-->
-                            <!--</tr>-->
-                            <!--</thead>-->
-                        <!--</table>-->
+                    <!--<h6>Infrastructure</h6>-->
+                    <!--<table class="table table-bordered table-striped">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                    <!--<th></th>-->
+                    <!--<th>Montant previsionnel</th>-->
+                    <!--<th>Montant previsionnel</th>-->
+                    <!--<th>Montant Approuve</th>-->
+                    <!--<th>Montant execute</th>-->
+                    <!--<th>Taux execution</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--</table>-->
 
                     <!--</div>-->
                     <div class="row-fluid">
@@ -185,31 +151,31 @@
                         <div class="span3" v-for="item in getterInfrastrucure" :key="item.id" style="border: 1px dotted #e1e1e8" :class="{ red : classementMontantBaseInfrastructure(item.id) }">
                             <h6>{{item.libelle}} (<font color="black">{{nombreMarchePasInfrastructure(item.id)}}</font>)</h6>
                             <table class="table" :class="{ red : classementMontantBaseInfrastructure(item.id) == item.id }">
-                           <tbody>
-                           <tr>
-                               <td>Montant previsionnel</td>
-                               <td>
-                                   {{formatageSomme(montantPrevisionnelInfrastructure(item.id))}}
+                                <tbody>
+                                <tr>
+                                    <td>Montant previsionnel</td>
+                                    <td>
+                                        {{formatageSomme(montantPrevisionnelInfrastructure(item.id))}}
 
-                               </td>
-                           </tr>
-                           <tr>
-                               <td>Montant Base</td>
-                               <td> {{formatageSomme(montantBaseInfrastructure(item.id))}}</td>
-                           </tr>
-                           <tr>
-                               <td>Montant Executé</td>
-                               <td>{{formatageSomme(montantExecutePasInfrastructure(item.id))}}</td>
-                           </tr>
-                           <tr>
-                               <td>Montant Restant</td>
-                               <td>{{formatageSomme(montantRestantInfrastructure(item.id))}}</td>
-                           </tr>
-                           <tr>
-                               <td>Taux Exécuté Fin.</td>
-                               <td>{{tauxExecutionInfrastructure(item.id)}} %</td>
-                           </tr>
-                           </tbody>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Montant Base</td>
+                                    <td> {{formatageSomme(montantBaseInfrastructure(item.id))}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Montant Executé</td>
+                                    <td>{{formatageSomme(montantExecutePasInfrastructure(item.id))}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Montant Restant</td>
+                                    <td>{{formatageSomme(montantRestantInfrastructure(item.id))}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Taux Exécuté Fin.</td>
+                                    <td>{{tauxExecutionInfrastructure(item.id)}} %</td>
+                                </tr>
+                                </tbody>
                             </table>
 
 
@@ -325,8 +291,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
     </div>
         </div>

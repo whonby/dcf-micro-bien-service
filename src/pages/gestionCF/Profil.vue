@@ -89,7 +89,7 @@
                 <div class="controls">
                   <input type="password" @blur="passwordCrypte" v-model="password_crypte.password" class="span" placeholder="" />
                 </div>
-                <code v-if="getterPasswordCrypte">Le mot de passe entre ne correspond pas</code>
+                <code v-if="getterPasswordCrypte">Le mot de passe entré ne correspond pas</code>
               </div>
               <div class="control-group">
                 <label class="control-label">Nouveau Password:</label>
