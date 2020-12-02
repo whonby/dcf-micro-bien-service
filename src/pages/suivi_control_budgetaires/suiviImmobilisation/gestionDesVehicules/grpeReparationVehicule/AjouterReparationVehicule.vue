@@ -106,10 +106,10 @@
                               <select   class="span" v-model="formData.lignebudgetaire_id">
                                 <option></option>
             <option
-                        v-for="typeUniteA in lesClassDe3"
+                        v-for="typeUniteA in afficheLigneReparation(formData.ua_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
-                      >{{typeUniteA.code}}-{{typeUniteA.libelle}}</option>
+                      >{{Codeeconomique(typeUniteA.ligneeconomique_id)}}</option>
                 </select>
             </div>
           </div>
@@ -271,7 +271,9 @@ props:["macheid"],
  "derniereNivoPlanBudgetaire",
  "getPersonnaliseBudgetGeneralParPersonnel",
    "decomptefactures",
-   "getvehicules"
+   "getvehicules",
+   "budgetEclate"
+   
    
    ]),
 
@@ -317,9 +319,28 @@ cf:cf,
     },
                lesClassDe3() { 
 const isClassDe3 = (code) => code.charAt(0)== "6" && code.charAt(1)== "1" && code.charAt(2)== "4"; 
-return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
+return this.afficheLigneReparation(formData.ua_id).filter(x => isClassDe3(x.code));
  },
-     
+ Codeeconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      }
+    },
+     afficheLigneReparation() {
+      return id => {
+        if (id != null && id != "") {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id);
+      
+        }
+      };
+    },
      affichePersonnel() {
       return id => {
         if (id != null && id != "") {

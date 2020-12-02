@@ -57,7 +57,7 @@
         <li  @click.prevent="navigateToReparation" >
           <a href="#">
             <i class="icon-group"></i>
-            <span> REPARATION</span>
+            <span> REPARATION VEHICULE</span>
           </a>
         </li>
          <!-- <li  @click.prevent="navigateToSuiviMarcheProjet" >
@@ -172,9 +172,9 @@ navigateToGestionParc(){
         })
       },
 navigateToReparation(){
-        this.activate(49)
+        
         this.$router.push({
-          name: 'TableauBordGestionVehicule'
+          name: 'ReparationVehicule'
         })
       },
       navigateToParametreVehicule(){

@@ -21,7 +21,7 @@ import TableauBordGestionHorsSib from "../../gestionDesModule/TableauBordGestion
 import TableauBordGestionSib from "../../gestionDesModule/TableauBordGestionSib";
 import TableauBordMonEquipe from "../../gestionDesModule/TableauBordMonEquipe";
 import TableauBordParametre from "../../gestionDesModule/TableauBordParametre";
-import TableauBordRapport from "../../gestionDesModule/TableauBordRapport.vue";
+import TableauBordRapport from "../../../src/pages/Gestion_des_Rapports/suiviDesEntreprise";
  import TableauBordUa from "../../gestionDesModule/TableauBordUa";
  import TableauBordGestionVehicule from "../../gestionDesModule/TableauBordGestionVehicule";
 export default {

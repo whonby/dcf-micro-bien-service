@@ -375,7 +375,7 @@ libelleTypeVehicule() {
       };
     },
    afficherUAParDroitAccess() {
-       // const st = this.search.toLowerCase();
+    
         if (this.cf){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
@@ -390,15 +390,19 @@ libelleTypeVehicule() {
         }
 
         return this.uniteAdministratives;
-        //return this.uniteAdministratives
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
-        
-
+       
     },
  
+
+
+
+
+
+
+
+
+
+
  fonctionModele() {
       return id => {
         if (id != null && id != "") {

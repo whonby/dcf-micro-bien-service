@@ -160,7 +160,7 @@ export default {
      fabActions: [
               {
                   name: 'cache',
-                  icon: 'add'
+                  icon: 'directions_bus'
               },
               {
                   name: 'alertMe',

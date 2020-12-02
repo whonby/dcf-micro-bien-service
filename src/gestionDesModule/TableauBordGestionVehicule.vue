@@ -1,7 +1,7 @@
 <template>
  
      <div>
-       <h4 style="text-align:center">GESTION DES VEHICULES</h4>
+       <!-- <h4 style="text-align:center">GESTION DES VEHICULES</h4>
        <br>
        <br>
        <table class="table table-bordered table-striped">
@@ -90,29 +90,19 @@
             <h5>COÛT DES VEHICULES REPARES</h5>
           </div>
           <div class="widget-content"> 
-               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{EntrepriseNonSantionner}}</h1>
+               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{0}}</h1>
             
           </div>
         </div>
       </div>
+      
       <div class="span4">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-            <h5>COÛT DES VEHICULES EN COURS DE REPARES</h5>
+            <h5>COÛT DES VEHICULES EN COURS DE REPARATION</h5>
           </div>
           <div class="widget-content"> 
-               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{EntrepriseSantionner}}</h1>
-            
-          </div>
-        </div>
-      </div>
-      <div class="span4">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-            <h5>COÛT DES VEHICULES EN COURS DE REPARES</h5>
-          </div>
-          <div class="widget-content"> 
-               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{EntrepriseSantionner}}</h1>
+               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{0}}</h1>
             
           </div>
         </div>
@@ -123,10 +113,10 @@
       <div class="span4">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-            <h5>NOMBRES DE VEHICULE EN REPARATION</h5>
+            <h5>NOMBRE DE VEHICULE EN REPARATION</h5>
           </div>
           <div class="widget-content"> 
-               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{EntrepriseNonSantionner}}</h1>
+               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{0}}</h1>
             
           </div>
         </div>
@@ -134,7 +124,7 @@
       <div class="span4">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-            <h5>NOMBRES DE VEHICULE AMORTI</h5>
+            <h5>NOMBRE DE VEHICULE AMORTI</h5>
           </div>
           <div class="widget-content"> 
                <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{EntrepriseSantionner}}</h1>
@@ -145,16 +135,16 @@
       <div class="span4">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-            <h5>NOMBRES DE VEHICULE EN REPARATION</h5>
+            <h5>NOMBRE DE VEHICULE EN REPARATION</h5>
           </div>
           <div class="widget-content"> 
                <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{EntrepriseSantionner}}</h1>
             
           </div>
         </div>
-      </div>
+      </div> 
      
-    </div>
+    </div> -->
     
      </div>
 
