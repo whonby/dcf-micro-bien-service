@@ -1,4 +1,4 @@
-detail_marche
+
 <template>
   
      
@@ -321,7 +321,7 @@ detail_marche
 
     export default {
         components: {
-          
+
         },
         data() {
             return {
