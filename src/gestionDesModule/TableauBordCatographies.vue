@@ -34,10 +34,11 @@
                 <div class="span7"><br>
 
                   <div v-if="objetUnite">
-                    Montant de base: <span style="color: #003900; "><b>{{formatageSomme(objetUnite.budget)}}</b></span> <br>
-                    Montant exécuté:<span style="color: #00d700; "><b>{{formatageSomme(objetUnite.budgetExecute)}}</b></span><br>
-                    Montant restant:<span style="color: darkred; "><b>{{formatageSomme(objetUnite.budgetReste)}}</b></span><br>
-                    Taux d'exécution:<span style="color: #e36706; "><b>{{objetUnite.tauxBudget}} %</b></span>
+                    Montant previsionnel: <span style="color: #003900; "><b>{{formatageSomme(objetUnite.budget)}}</b></span> <br>
+                    Montant de base + avenant:<span style="color: #00d700; "><b>{{formatageSomme(objetUnite.budgetExecute)}}</b></span><br>
+                    Montant executé:<span style="color: darkred; "><b>{{formatageSomme(objetUnite.budgetReste)}}</b></span><br>
+                      Montant restant:<span style="color: #e36706; "><b>{{objetUnite.tauxBudget}} %</b></span>
+                     Taux d'exécution:<span style="color: #e36706; "><b>{{objetUnite.tauxBudget}} %</b></span>
                   </div>
 
                   
@@ -822,7 +823,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       "getterBudgeCharge",
     ]),
     ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise",
-        "getterImageMarche","acteEffetFinanciers","typeMarches","getterInfoTableauBordFiltre"]),
+        "getterImageMarche","acteEffetFinanciers","typeMarches","getterInfoTableauBordFiltre","getActeEffetFinancierPersonnaliser45"]),
 
       noDCfNoAdmin:noDCfNoAdmin,
       filtre_unite_admin() {
@@ -1041,7 +1042,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
          let montant_execute=0;
 
 
-         let objet_act=   vM.acteEffetFinanciers.find(item=>item.marche_id==value.id)
+         let objet_act=   vM.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==value.id)
           if(objet_act!=undefined){
               montant_execute=montant_execute+parseFloat(objet_act.montant_act)
           }else{

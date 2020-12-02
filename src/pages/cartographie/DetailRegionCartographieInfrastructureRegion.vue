@@ -1125,12 +1125,12 @@
     }
     .red {
         color: black !important;
-        background-color: #892e6a !important;
+        background-color: #09f7ff !important;
     }
 
     .red_type_marche {
         color: black !important;
-        background-color: #892e6a !important;
+        background-color: #09f7ff !important;
     }
 
 </style>
