@@ -138,7 +138,7 @@ getterImageParMarche() {
         if (id != null && id != "") {
           return this.getterImageMarche.filter(
             element => element.marche_id == id 
-          );
+          ).reverse();
         }
       };
     },
