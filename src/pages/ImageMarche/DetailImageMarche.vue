@@ -28,6 +28,7 @@
                   </div>
                   <div class="mt-3">
                       <h4>Nom de l'Agent : DCF</h4>
+                      Date:  {{conversionDateVariable(detailMarche.date_enregistrement)}}
                       <p class="text-secondary mb-1">Distance :
 
                         {{distance(detailMarche.latitude, detailMarche.longitude, getMarche(detailMarche.marche_id).latitude, getMarche(detailMarche.marche_id).longitude, 'K')}}
@@ -249,6 +250,14 @@ this.detailMarche=this.getterImageMarche.find(item=>item.id==this.$route.params.
     ]),
      ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
   'plans_Decision']),
+                  conversionDateVariable(){
+                      return date=>{
+                          let da=new Date(date)
+                          let  options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                          return da.toLocaleDateString("fr-FR", options)
+                      }
+
+                  },
 
 AffichePhoto() {
       return fichier => {

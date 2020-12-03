@@ -31,7 +31,7 @@
                   </div>
                   <div class="mt-3">
                       <h4>Nom de l'Agent : DCF</h4>
-                      {{marche_image.latitude}} /  {{marche_image.longitude}}
+                      Date:  {{conversionDateVariable(marche_image.date_enregistrement)}}
                       <p class="text-secondary mb-1">Distance :
                         {{distance(marche_image.latitude, marche_image.longitude,detail.latitude,detail.longitude, 'K')}}
                       </p>
@@ -107,12 +107,18 @@ this.detail=this.marches.find(item=>item.id==this.$route.params.id)
     ]),
      ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
   'plans_Decision']),
+                  conversionDateVariable(){
+                      return date=>{
+                          let da=new Date(date)
+                          let  options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                          return da.toLocaleDateString("fr-FR", options)
+                      }
 
+                  },
   afficheNomUtilisateur(){
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
 return objJson.name
-
 },
 getMarche(){
 return marche_id=>{
@@ -138,7 +144,7 @@ getterImageParMarche() {
         if (id != null && id != "") {
           return this.getterImageMarche.filter(
             element => element.marche_id == id 
-          );
+          ).reverse();
         }
       };
     },
