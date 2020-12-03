@@ -329,7 +329,9 @@
                         <nav aria-label="breadcrumb" class="main-breadcrumb" v-if="info_status_marche">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"  v-html="info_status_marche">  </li>
-                                <li class="breadcrumb-item" > <a href="#" @click.prevent="afficherModalAjouterTitre()">Carte</a>  </li>
+                                <li class="breadcrumb-item" >
+                                    <!--<a href="#" @click.prevent="afficherModalAjouterTitre()">Carte</a> -->
+                                </li>
 
                             </ol>
                         </nav>
@@ -686,14 +688,7 @@
                 <div class="span4" style="border: 1px dotted #EEEEEE; margin-left: -1px">
                     <apexchart type="pie" width="300" :options="chartOptions" :series="dataPourcentage"></apexchart>
                 </div>
-                <div class="span8" style="margin-right: -1px">
-                    <!--<nav aria-label="breadcrumb" class="main-breadcrumb" v-if="info_status_marche">-->
-                        <!--<ol class="breadcrumb">-->
-                            <!--<li class="breadcrumb-item"  v-html="info_status_marche">  </li>-->
-                            <!--<li class="breadcrumb-item" > <a href="#" @click.prevent="afficherModalAjouterTitre()">Carte</a>  </li>-->
-
-                        <!--</ol>-->
-                    <!--</nav>-->
+                <div class="span8" style="margin-right: -1px;">
                     <table class="table   table-bordered table-striped" v-if="info_status_marche">
                         <thead>
                         <tr>
@@ -701,7 +696,6 @@
                             <th>Nombre Marchés</th>
                             <th>Montant total</th>
                             <th>Taux %</th>
-                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody >
@@ -710,9 +704,7 @@
                             <td style="text-align: center !important;">{{nbrTotalMarchePasUA(unite.id)}} </td>
                             <td style="text-align: center !important;">{{formatageSomme(montantPrevuePasUA(unite.id))}}</td>
                             <td style="text-align: center !important;">{{tauxStatusMarchePasUniteAdministrative(unite.id)}}</td>
-                            <td> <a href="#" @click="selectionUnite(unite.id)" class="btn btn-default " title="Detail marches">
-                                <span class=""><i class="icon-folder-open"></i></span>
-                            </a></td>
+
                         </tr>
                         <tr>
                             <td></td>
@@ -720,7 +712,7 @@
                             <td></td>
                             <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
                             <td></td>
-                            <td></td>
+
                         </tr>
                         <tr>
                             <td></td>
@@ -728,7 +720,28 @@
                             <td></td>
                             <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
                             <td></td>
+
+                        </tr> <tr>
                             <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+
+                        </tr> <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+
+                        </tr> <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+
                         </tr> <tr>
                             <td></td>
                             <td></td>
@@ -742,28 +755,7 @@
                             <td></td>
                             <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
                             <td></td>
-                            <td></td>
-                        </tr> <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                            <td></td>
-                            <td></td>
-                        </tr> <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                            <td></td>
-                            <td></td>
-                        </tr> <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                            <td></td>
-                            <td></td>
+
                         </tr>
 
 
@@ -782,7 +774,7 @@
                             <th>Montant total</th>
                             <!--<th v-if="status_marches==2">Montant base</th>-->
                             <th>Taux</th>
-                            <th>Action</th>
+
                         </tr>
                         </thead>
                         <tbody >
@@ -792,7 +784,22 @@
                             <td></td>
                             <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
                             <td></td>
+
+                        </tr>
+                        <tr>
                             <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+
+                        </tr> <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                            <td></td>
+
                         </tr>
                         <tr>
                             <td></td>
@@ -807,35 +814,19 @@
                             <td></td>
                             <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
                             <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                            <td></td>
-                            <td></td>
+
                         </tr> <tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
                             <td></td>
-                            <td></td>
+
                         </tr> <tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                            <td></td>
-                            <td></td>
-                        </tr> <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                            <td></td>
                             <td></td>
                         </tr>
 
@@ -1997,7 +1988,7 @@
         bottom: 35px;
         right: 3px;
         z-index: 0;
-        font-size: 20px;
+        font-size: 17px;
         color: #f2f2f2;
     }
 

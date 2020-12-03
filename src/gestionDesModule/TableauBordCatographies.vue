@@ -2,6 +2,7 @@
 
   <div>
     <div class="">
+
       <div class="row-fluid" style="height: 200em">
         <div id="sidebarinfo"  class="sidebar leaflet-sidebar collapsed">
           <div class="sidebar-tabs">
@@ -19,7 +20,7 @@
       <h6 align="center"> {{objetUnite.ville}}</h6>
 
               <div class="row-fluid" >
-                <div class="span5" v-if="objetUnite">
+                <div class="span4" v-if="objetUnite">
                   <donut-chart
                       style="width: 120px;height: 120px"
                       id="donut1"
@@ -34,10 +35,12 @@
                 <div class="span7"><br>
 
                   <div v-if="objetUnite">
-                    Montant de base: <span style="color: #003900; "><b>{{formatageSomme(objetUnite.budget)}}</b></span> <br>
-                    Montant exécuté:<span style="color: #00d700; "><b>{{formatageSomme(objetUnite.budgetExecute)}}</b></span><br>
-                    Montant restant:<span style="color: darkred; "><b>{{formatageSomme(objetUnite.budgetReste)}}</b></span><br>
-                    Taux d'exécution:<span style="color: #e36706; "><b>{{objetUnite.tauxBudget}} %</b></span>
+                    Montant previsionnel: <span style="color: #003900; "><b>{{formatageSomme(objetUnite.budget)}}</b></span> <br>
+                    Montant de base:<span style="color: #00d700; "><b>{{formatageSomme(parseFloat(objetUnite.montant_approuve))}}</b></span><br>
+                    Montant executé:<span style="color: darkred; "><b>{{formatageSomme(objetUnite.budgetExecute)}}</b></span><br>
+                      Montant restant:<span style="color: #e36706; "><b>
+                      {{formatageSomme(objetUnite.budgetReste)}}</b></span><br>
+                     Taux d'exécution:<span style="color: #e36706; "><b>{{objetUnite.tauxBudget}} %</b></span>
                   </div>
 
                   
@@ -65,7 +68,7 @@
                   </div>
                   <div class="mt-3">
                       <h4>Nom de l'Agent : DCF</h4>
-                      {{marche_image.latitude}} /  {{marche_image.longitude}}
+                       Date:  {{conversionDateVariable(marche_image.date_enregistrement)}}
                       <p class="text-secondary mb-1">Distance :
                         {{distance(marche_image.latitude, marche_image.longitude,objetUnite.latitude,objetUnite.longitude, 'K')}}
                       </p>
@@ -820,11 +823,25 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       "typeTextes",
       "uniteAdministratives",
       "getterBudgeCharge",
+        "decomptefactures",
     ]),
     ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise",
-        "getterImageMarche","acteEffetFinanciers","typeMarches","getterInfoTableauBordFiltre"]),
+        "getterImageMarche","acteEffetFinanciers","typeMarches","getterInfoTableauBordFiltre","getActeEffetFinancierPersonnaliser45","avenants"]),
 
       noDCfNoAdmin:noDCfNoAdmin,
+      conversionDate(){
+          let da=new Date()
+          let  options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+          return da.toLocaleDateString("fr-FR", options)
+      },
+      conversionDateVariable(){
+          return date=>{
+              let da=new Date(date)
+              let  options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+              return da.toLocaleDateString("fr-FR", options)
+          }
+
+      },
       filtre_unite_admin() {
           if(this.noDCfNoAdmin){
               let colect=[];
@@ -897,8 +914,8 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
     imageMarcheSelectionner(){
        return id=>{
          if(id!=""){
-
-           return this.getterImageMarche.filter(item=>item.marche_id==id)
+         // let objet=this.getterImageMarche.filter(item=>item.marche_id==id).reverse()
+           return this.getterImageMarche.filter(item=>item.marche_id==id).reverse()
          }
        }
     },
@@ -1019,6 +1036,48 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
 //          h3.innerHtml = nombreMarcheParStatue("");
 //
 //      },
+      montantApprouve(){
+          return id=>{
+              let objet=this.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==id)
+              if(objet!=undefined){
+                  return objet.montant_act
+              }
+              return 0
+          }
+      },
+      montantExecutParMarche(){
+          return id=>{
+              let vm=this;
+              let initeVal = 0;
+              let montant=vm.decomptefactures.filter(item=>item.marche_id==id).reduce(function (total, currentValue) {
+                  return total + parseFloat(currentValue.montantmarche) ;
+              }, initeVal);
+
+              if(montant!=undefined){
+                  return montant
+              }
+
+              return 0
+          }
+
+      },
+      montantRestantMarche(){
+          return id=>{
+              return this.montantApprouve(id) - this.montantExecutParMarche(id)
+          }
+      },
+      tauxExecutionMarche(){
+          return id=>{
+              //   let reste=this.montantApprouve(id) - this.montantExecutParMarche(id)
+
+
+              if(this.montantApprouve(id)>0){
+                  let taux=  (this.montantExecutParMarche(id) * 100)/this.montantApprouve(id)
+                  return taux.toFixed(2)
+              }
+              return 0
+          }
+      },
     localisation(){
       let localisation=[]
       let vM=this;
@@ -1032,29 +1091,23 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
            * Recuperation des unite administrative de la zone geographique
            * @type {*[]}
            */
-          let budget=parseFloat(value.montant_marche);
+
           let color="";
           let colorFill=""
         //  let montant_engagement_marche=0;
          // let budget=0;
 /**Calcule des marches**/
-         let montant_execute=0;
+       //  let montant_execute=0;
 
 
-         let objet_act=   vM.acteEffetFinanciers.find(item=>item.marche_id==value.id)
-          if(objet_act!=undefined){
-              montant_execute=montant_execute+parseFloat(objet_act.montant_act)
-          }else{
-              montant_execute=montant_execute+0
-          }
+//         let objet_act=   vM.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==value.id)
+//          if(objet_act!=undefined){
+//              montant_execute=montant_execute+parseFloat(objet_act.montant_act)
+//          }else{
+//              montant_execute=montant_execute+0
+//          }
 
-//          let initeVal = 0;
-//          let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==value.id).reduce(function (total, currentValue) {
-//            return total + parseFloat(currentValue.total_general) ;
-//          }, initeVal);
-//          montant_engagement_marche=montant_engagement_marche + montantEngament
 
-        //  let taux=0;
 
           if(value.attribue==0){
             color="#0000f3"
@@ -1085,17 +1138,22 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
             color="#ff0000"
             colorFill="#ff0000"
           }
-          let montantRest=budget - montant_execute;
-          let tauxExecution=(montant_execute/budget)*100
+            let prevue_montant=parseFloat(value.montant_marche);
+            let objet_act=vM.montantApprouve(value.id)
+            console.log(prevue_montant)
+            let montantExecuteObjetAct=vM.montantExecutParMarche(value.id)
 
+            let montant_restantObjet=vM.montantRestantMarche(value.id)
+            let tauxObjetMontant=vM.tauxExecutionMarche(value.id)
+            console.log(montantExecuteObjetAct)
           let budgetExecute={
             label: 'Montant Excecute',
-            value:montant_execute
+            value:montantExecuteObjetAct
           }
 
           let budgetReste={
             label: 'Montant Restant',
-            value:montantRest
+            value:montant_restantObjet
           }
 
           vM.donutData.push(budgetExecute)
@@ -1105,12 +1163,13 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
             id:value.id,
             ville:value.objet,
             latlng:coordonne,
-            budget:budget,
+            budget:prevue_montant,
             latitude:value.latitude,
             longitude:value.longitude,
-            budgetReste:montantRest,
-            budgetExecute:montant_execute,
-            tauxBudget:tauxExecution.toFixed(2),
+            budgetReste:montant_restantObjet,
+            budgetExecute:montantExecuteObjetAct,
+            montant_approuve:objet_act,
+            tauxBudget:tauxObjetMontant,
             color:color,
             colorFill:colorFill,
             region_id:value.localisation_geographie_id,
