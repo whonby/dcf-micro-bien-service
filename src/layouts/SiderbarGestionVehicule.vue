@@ -45,10 +45,22 @@
           
           <a href="#">
             <i class="icon-group"></i>
-            <span> MOBILIERS & MATERIELS</span>
+            <span style="text-align:center"> MOBILIERS & MATERIELS</span>
           </a>
         </li>
-        <li  @click.prevent="navigateToGestionParc" >
+         <li  @click.prevent="navigateToGestionParc">
+          <a href="#">
+            <i class="icon-group"></i>
+            <span  style="text-align:center"> GESTION DU PARC VEHICULE</span>
+          </a>
+        </li>
+        <li  @click.prevent="navigateToGestionParc">
+          <a href="#">
+            <i class="icon-group"></i>
+            <span style="text-align:center"> GESTION DU PARC IMMOBILIER</span>
+          </a>
+        </li>
+        <!-- <li  @click.prevent="navigateToGestionParc" >
           <a href="#">
             <i class="icon-group"></i>
             <span> SAISIE & AFFECTATION</span>
@@ -59,7 +71,8 @@
             <i class="icon-group"></i>
             <span> REPARATION VEHICULE</span>
           </a>
-        </li>
+        </li> -->
+        
          <!-- <li  @click.prevent="navigateToSuiviMarcheProjet" >
           <a href="#">
             <i class="icon-group"></i>

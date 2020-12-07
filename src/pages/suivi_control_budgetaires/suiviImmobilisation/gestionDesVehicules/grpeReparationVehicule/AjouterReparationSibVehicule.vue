@@ -83,9 +83,24 @@
                   </div>
                 </div>
                  </td>
+                 <td>
+                    <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Numéro Contrat</label>
+                  <div class="controls">
+                    <select  class="span" v-model="formData.acte_id ">
+                      <option></option>                     
+                      <option
+                        v-for="typeUniteA in NumeroContrat(formData.ua_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.reference_act}}</option>
+                    </select>
+                  </div>
+                </div>
+                 </td>
                </tr>
                <tr>
-                 <td colspan="3">
+                 <td colspan="4">
                    
    
       
@@ -93,7 +108,7 @@
         <div class="control-group">
            <label class="control-label">Panne(s) signalée(s)</label>
             <div class="controls">
-              <textarea class="span12" v-model="formData.panne_signale " rows="3" placeholder="Enter text ..."></textarea>
+              <textarea class="span12" :value="libelleMarche(MarcheActe_id(formData.acte_id))" rows="3" placeholder="Enter text ..."></textarea>
             </div>
           
         </div>
@@ -103,18 +118,16 @@
                  </td>
                </tr>
                <tr>
-                  <td>
+                  <td colspan="3">
                <div class="control-group">
             <label class="control-label">Ligne Budgétaire</label>
             <div class="controls">
-                              <select   class="span" v-model="formData.lignebudgetaire_id">
-                                <option></option>
-            <option
-                        v-for="typeUniteA in lesClassDe3"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.code}}-{{typeUniteA.libelle}}</option>
-                </select>
+                              <input
+                type="text"
+                :value="Codeeconomique(LigneBudgetaireAttrivue(MarcheActe_id(formData.acte_id)))"
+                class="span"
+                readonly
+              />
             </div>
           </div>
             </td>
@@ -150,11 +163,12 @@
                <div class="control-group">
             <label class="control-label">Garage</label>
             <div class="controls">
-                              <select   class="span" v-model="formData.entreprise_id">
-                                <option></option>
-            <!-- <option v-for="resultat in affichePersonnel(formData.ua_id)" :key="resultat.id" 
-            :value="resultat.acteur_depense_id">{{NomPersonnel(resultat.acteur_depense_id)}}</option> -->
-                </select>
+                               <input
+                type="text"
+                :value="RaisonSocialEntreprise(idEntreprise(formData.acte_id))"
+                class="span"
+                readonly
+              />
             </div>
           </div>
             </td>
@@ -179,7 +193,7 @@
             <div class="controls">
               <input
                 type="text"
-                v-model="formData.cout_reparation"
+                :value="MontantReparation(formData.acte_id)"
                 class="span"
                 
               />
@@ -307,7 +321,97 @@ cf:cf,
       ...mapGetters('personnelUA', ["acteur_depenses","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat","personnaliseActeurDepense",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
-     
+     Codeeconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      }
+    },
+      NumeroContrat() {
+      return id => {
+        if (id != null && id != "") {
+           return this.acteEffetFinanciers.filter(qtreel => qtreel.ua_id == id && qtreel.etatcontrat == 1);
+      
+        }
+      }
+    },
+    RaisonSocialEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.raison_sociale;
+      }
+      return 0
+        }
+      };
+    },
+    MontantReparation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_act;
+      }
+      return 0
+        }
+      };
+    },
+    idEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.entreprise_id;
+      }
+      return 0
+        }
+      };
+    },
+    libelleMarche(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objet1 = this.marches.find(item => item.id==id)
+          if(objet1){
+            return objet1.objet
+          }
+          return null
+        }
+      }
+    },
+    MarcheActe_id() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.marche_id;
+      }
+      return 0
+        }
+      };
+    },
+    LigneBudgetaireAttrivue() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.economique_id;
+      }
+      return 0
+        }
+      };
+    },
                lesClassDe3() { 
 const isClassDe3 = (code) => code.charAt(0)== "6" && code.charAt(1)== "1" && code.charAt(2)== "4"; 
 return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
@@ -411,6 +515,15 @@ libelleTypeVehicule() {
         }
       };
     },
+    anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
   },
   methods: {
     
@@ -424,9 +537,13 @@ libelleTypeVehicule() {
                 window.history.back();
             },
      AjouterVehicule() {
+
+      var nouvelObjet = {
+        ...this.formData,
+        anneebudgetaire:this.anneeAmort
+      }
       
-      
-      this.ajouterReparationVehicule(this.formData);
+      this.ajouterReparationVehicule(nouvelObjet);
     
       this.formData = {
         ua_id:"",

@@ -48,7 +48,7 @@
               <VehiculeItemComponent v-for="equipement in uniteAdministratives"
                :key="equipement.id"
                 :groupe="equipement"
-                @modification="afficherModalmodifierModeleVehicule" 
+                @modification="afficherModalModifierTitre" 
                 @suppression="supprimerSect"
                 >
               </VehiculeItemComponent>
@@ -150,7 +150,11 @@ export default {
    ...mapActions('SuiviImmobilisation', [ 
     'ajouterModeleVehicule', 
    'supprimerModeleVehicule', 'modifierModeleVehicule']),  
-
+ ...mapActions("uniteadministrative", [
+      "ajouterNouveauVehicule",
+      "modifierVehicule",
+      "supprimerVehicule"
+      ]),
 afficherModalModifierTitre(id) {
 
       this.$router.push({
@@ -183,7 +187,7 @@ getColumns() {
 },
 
     supprimerSect(id){
-      this.supprimerModeleVehicule(id)
+      this.supprimerVehicule(id)
     },
     
     //afiicher modal ajouter

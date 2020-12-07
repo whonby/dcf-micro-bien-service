@@ -96,7 +96,7 @@
                     <td style="width:20%" @dblclick="afficherModalModifierService(service.id)">{{NomPersonnel(service.personnel_id) || 'Non renseigné'}}</td>
                     <!-- <td style="" @dblclick="afficherModalModifierService(index)">{{service.chauffeur_id || 'Non renseigné'}}</td> -->
                      <td>
-                      <button class="btn  btn-success" @click="afficherModalModifierService(service.id)" v-if="service.etat_veh == 1"  title="Vehicule déja affecté">
+                      <button class="btn  btn-success" @click="afficherModalModifierService(service.id)" v-if="service.etat_veh == 1"  title="Rétirer Vehicule affecté">
                         <span>
                           <i class="icon-thumbs-up"></i>
                         </span>

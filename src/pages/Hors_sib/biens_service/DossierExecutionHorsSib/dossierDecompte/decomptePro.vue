@@ -30,7 +30,7 @@
                   
                                     </thead>
                                     <tbody>
-                                    <tr class="odd gradeX" v-for="(type, index) in decomptefactures" :key="type.id">
+                                    <tr class="odd gradeX" v-for="(type, index) in decompteListe(macheid)" :key="type.id">
                     <td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.numero_decompte || 'Non renseigné'}}</td>
@@ -183,6 +183,15 @@ props:["macheid"],
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
     
+    decompteListe() {
+      return id => {
+        if (id != null && id != "") {
+          return this.decomptefactures.filter(
+            element => element.marche_id == id 
+          );
+        }
+      };
+    },
  PourcentageCumulAvanceDemarrage(){
       const val = ((parseFloat(this.CumulAvance(this.macheid)) * (parseFloat(this.TauxAvanceDemarrageHT1(this.macheid))/100))/parseFloat(this.MontantAvanceDemarrageHT(this.macheid)));
       

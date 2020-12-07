@@ -32,7 +32,7 @@
             <tr>
                       <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">unité administrative</label>
+                  <label class="control-label" style="font-size:14px">Unité Administrative</label>
                   <div class="controls">
                     <select  class="span" v-model="formData.uniteadministrative ">
                       <option></option>                     

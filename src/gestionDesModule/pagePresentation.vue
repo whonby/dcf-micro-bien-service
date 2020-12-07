@@ -28,7 +28,7 @@
             </router-link>
           </td>
           <td style="width:88%;text-align: center;font-size:20px;padding:50px 50px;font-weight:bold; color: #fff">
-            <P>SYSTEME D'INFORMATION DECISIONNEL DU CONTRÖLEUR FINANCIER  </P>
+            <P>SYSTEME D'INFORMATION DECISIONNEL DU CONTRÔLEUR FINANCIER  </P>
             <P>(SID-CF)</P>
           </td>
 
@@ -218,6 +218,7 @@ this.getTypeAppel()
  this.getAllBudgetEclate()
  this.getVehicule()
  this.getReparationVehicule()
+ this.getStockArticleUa()
     // this.getAllArchivageDocument();
 this.getAllDirection()
 this.getAllServiceua()
@@ -490,7 +491,8 @@ return objJson.id
      "getAllDecompteFacture",
      "getAllBudgetEclate",
      "getVehicule",
-     "getReparationVehicule"
+     "getReparationVehicule",
+     "getStockArticleUa"
     ]),
             ...mapActions('personnelUA', ["getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -611,6 +613,9 @@ let vm=this;
 }
 </script>
 <style scoped>
+h4{
+  color:#ffffff
+}
 .flex{
   display: flex;
   flex-flow: row nowrap;

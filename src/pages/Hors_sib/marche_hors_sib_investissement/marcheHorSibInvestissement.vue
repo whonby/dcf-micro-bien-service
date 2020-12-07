@@ -31,13 +31,14 @@ NombrePlanifInfastructureNiveau1
                                <li ><a data-toggle="tab" href="#NIVEAU4" v-if="InfastructureCodeNiveau4==4"> {{InfastructureLibelleNiveau4}}   <span class="badge badge-warning" > {{NombreInfastructureNiveau4}} </span></a></li>
                                <li ><a data-toggle="tab" href="#NIVEAU5" v-if="InfastructureCodeNiveau5==5"> {{InfastructureLibelleNiveau5}}   <span class="badge badge-inverse" > {{NombreInfastructureNiveau5}} </span></a></li>
                                 <li ><a data-toggle="tab" href="#NIVEAU6" v-if="InfastructureCodeNiveau6==6"> {{InfastructureLibelleNiveau6}}   <span class="badge badge" > {{NombreInfastructureNiveau6}} </span></a></li>
-                               
+                              
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
                         <div id="NIVEAU1" class="tab-pane active">
                           <infrastructureNiveau1></infrastructureNiveau1>
                         </div>
+                        
                         <div id="NIVEAU2" class="tab-pane">
                           <infrastructureNiveau2></infrastructureNiveau2>
                         </div>
@@ -71,6 +72,7 @@ NombrePlanifInfastructureNiveau1
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
+  
                         <div id="NIVEAU7" class="tab-pane active">
                           <PlanInfrastructureNiveau1></PlanInfrastructureNiveau1>
                         </div>
@@ -106,6 +108,7 @@ NombrePlanifInfastructureNiveau1
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
+                         
                         <div id="NIVEAU20" class="tab-pane active">
                           <ContraInfrastructureNiveau1></ContraInfrastructureNiveau1>
                         </div>
@@ -142,18 +145,23 @@ NombrePlanifInfastructureNiveau1
 </template>
 
 <script>
+
+
    import infrastructureNiveau1 from "./NiveauInfastructureToutMarche/infrastructureNiveau1"
    import infrastructureNiveau2 from "./NiveauInfastructureToutMarche/infrastructureNiveau2"
    import infrastructureNiveau3 from "./NiveauInfastructureToutMarche/infrastructureNiveau3"
    import infrastructureNiveau4 from "./NiveauInfastructureToutMarche/infrastructureNiveau4"
    import infrastructureNiveau5 from "./NiveauInfastructureToutMarche/infrastructureNiveau5"
    import infrastructureNiveau6 from "./NiveauInfastructureToutMarche/infrastructureNiveau6"
+
+
   import PlanInfrastructureNiveau1 from "./NiveauInfastructurePlanification/PlanInfrastructureNiveau1"
   import PlanInfrastructureNiveau2 from "./NiveauInfastructurePlanification/PlanInfrastructureNiveau2"
   import PlanInfrastructureNiveau3 from "./NiveauInfastructurePlanification/PlanInfrastructureNiveau3"
   import PlanInfrastructureNiveau4 from "./NiveauInfastructurePlanification/PlanInfrastructureNiveau4"
   import PlanInfrastructureNiveau5 from "./NiveauInfastructurePlanification/PlanInfrastructureNiveau5"
   import PlanInfrastructureNiveau6 from "./NiveauInfastructurePlanification/PlanInfrastructureNiveau6"
+
 
   import ContraInfrastructureNiveau1 from "./NiveauInfastructureContratualisation/ContraInfrastructureNiveau1"
     import ContraInfrastructureNiveau2 from "./NiveauInfastructureContratualisation/ContraInfrastructureNiveau2"
@@ -170,6 +178,7 @@ NombrePlanifInfastructureNiveau1
  import {partition} from '../../../../src/Repositories/Repository'
 export default {
   components:{
+   
     executionSuiviDesMarche,
   infrastructureNiveau1,
   infrastructureNiveau2,

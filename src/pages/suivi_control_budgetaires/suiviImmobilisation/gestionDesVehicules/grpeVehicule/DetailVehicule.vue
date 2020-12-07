@@ -1,7 +1,38 @@
 
 <template>
   <div>
-      ffffffffffffffffffffffffffff
+     <table class="table table-bordered table-striped" id="app1" >
+       
+                 <thead style="border:5px">
+                   
+                   <tr >
+                      <td colspan="4">
+                        <div align="center"> <h4>CARTE D'IDENTITE DU VEHICULE</h4> </div>
+                      </td>
+                   </tr>
+                 <tr>
+                      <th style="width:16%">NUMERO OP</th>
+                     <td style="color:red;font-size:25px">  </td>
+                     <th style="width:16% ">IMMATRICULATION</th>
+                     <td>{{detail.numimmatriculation}} </td>
+                    
+                     <th style="width:16%">NUMERO OP</th>
+                     <td style="color:red;font-size:25px">  </td>
+                 </tr>
+                 <tr>
+                    <!-- <th rowspan="5" style="margin:0 auto">IMPUTATION BUDGETAIRE</th> -->
+                     <th style="width:16%">SECTION</th>
+                     <td colspan="3"> </td>
+                 </tr>
+                 <tr>
+                   
+                     <th style="width:16%">PROGRAMME/DOTATION</th>
+                     <td colspan="3"> </td>
+                 </tr>
+                 
+                 </thead>
+
+             </table>
   </div>
 </template>
 
@@ -127,8 +158,8 @@
         margin-top: 60px;
     }
     th{
-background:#1f262d;
-color:#fff;
+
+color:#1f262d;
 font-size: 12px;
 text-align: left;
     }

@@ -11,8 +11,8 @@
 <table class="table table-bordered table-striped html2pdf__page-break" id="app1"  >
    <tr >
                                  <td colspan="" style="text-align:center">
- <p>MINISTRE AUPRES DU PREMIER MINISTRE </p>
-      <p>CHARGE DU BUDGET ET DU PORTEFEUILLE DE L'ETAT</p>
+ 
+      <p>MINISTERE  DU BUDGET ET DU PORTEFEUILLE</p>
       <p> DE L'ETAT</p>
                                  </td>
                                   <td style="text-align:center">
@@ -20,14 +20,14 @@
  
                                  </td>
                                  <td style="text-align:center">
-                                   <p>REPUBLIQUE DE CÖTE D'IVOIRE </p>
+                                   <p>REPUBLIQUE DE CÔTE D'IVOIRE </p>
       <P>Union-Discipline-Travail</P>
                                  </td>
                                </tr>
    <tr >
       <td style="text-align:center">
                                    <!-- <img  :src="AfficheLogODCF"> -->
-                                   <p>DIRECTION DU CONTRÖLE FINANCIER</p>
+                                   <p>DIRECTION DU CONTRÔLE FINANCIER</p>
                                  </td>
                                  <!-- <td style="text-align:center">
                                    <img  :src="AfficheAmoirie">
@@ -38,7 +38,7 @@
                                  </td>
                                  <td style="text-align:center">
                                    <!-- <img  :src="AfficheLogODCF">
-                                   <p>DIRECTION DU CONTRÖLE FINANCIER</p> -->
+                                   <p>DIRECTION DU CONTRÔLE FINANCIER</p> -->
                                  </td>
                                </tr>
                               
@@ -46,7 +46,7 @@
 <br/>
       <br/>
     <div style="border: 2px double #000;text-align:center">
-      <p>FICHE DE CONTRÖLE DE LA REALITE DU SERVICE FAIT </p>
+      <p>FICHE DE CONTRÔLE DE LA REALITE DU SERVICE FAIT </p>
       <P>INSTITUEE PAR L'ARRETE N° 638 MEF/CAB/YKM DU 20 JUILLET 2009</P>
     </div>
 

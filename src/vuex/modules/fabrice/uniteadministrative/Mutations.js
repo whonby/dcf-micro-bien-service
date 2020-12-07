@@ -1,4 +1,29 @@
 
+export const GET_ALL_STOCKAGE = (state, tableauArticle) => {
+  state.stockageArticles = tableauArticle;
+};
+
+// ajouter stockageArticles
+export const AJOUTER_STOCKAGE = (state, nouveau_article) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.stockageArticles.unshift(nouveau_article);
+};
+
+// modifier stockageArticles
+export const MODIFIER_STOCKAGE = (state, objetModifie) => {
+  state.stockageArticles = state.stockageArticles.map(articl => {
+    if (articl.id == objetModifie.id) {
+      articl = { ...objetModifie };
+    }
+
+    return articl;
+  });
+};
+
+// supprimer stockageArticles
+export const SUPPRIMER_STOCKAGE = (state, id) => {
+  state.stockageArticles = state.stockageArticles.filter(articl => articl.id != id);
+};
 
 const GET_ALL_DECOMPTE_FACTURE = (state, tableaudecomptes) => {
   state.decomptefactures = tableaudecomptes;
