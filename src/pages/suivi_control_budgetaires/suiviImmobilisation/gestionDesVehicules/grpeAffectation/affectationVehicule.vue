@@ -13,7 +13,7 @@
       <tr>
         <td colspan="2">
            <div class="control-group">
-            <label class="control-label">Unite administrative</label>
+            <label class="control-label">Unite Administrative</label>
             <div class="controls">
               <input
                 type="text"
@@ -33,7 +33,7 @@
                 v-model="editAffectation.numimmatriculation"
                 class="span4"
                 readonly
-                style="color:red;font-size:14px"
+                style="color:red;font-size:30px"
               />
             </div>
           </div>
@@ -480,7 +480,7 @@ modifierModeleVehiculeLocal(){
 <style>
 
 .tailgrand{
-  width: 70%;
+  width: 73%;
   margin: 0 -38%;
 }
 

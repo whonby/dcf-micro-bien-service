@@ -1512,3 +1512,64 @@ export function supprimerReparationVehicule({ commit,dispatch }, id) {
           axios.delete("/ReparationVehicule/" + id).then(() => dialog.close());
       });
 }
+
+
+
+
+
+export function getStockArticleUa({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/StockArticle")
+          .then(response => {
+              commit("GET_ALL_STOCKAGE", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterStockArticle({ commit,dispatch }, nouveau) {
+  asyncLoading(axios
+      .post("/StockArticle", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_STOCKAGE", response.data);
+              dispatch('getStockArticle')
+              dispatch('getAllUniteAdministrative')
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierStockArticle({ commit ,dispatch}, nouveau) {
+  asyncLoading(axios
+      .put("/StockArticle/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_STOCKAGE", response.data);
+          dispatch('getStockArticle')
+              dispatch('getAllUniteAdministrative')
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerStockArticle({ commit,dispatch }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_STOCKAGE", id);
+          dispatch('getStockArticle')
+              dispatch('getAllUniteAdministrative')
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/StockArticle/" + id).then(() => dialog.close());
+      });
+}

@@ -36,10 +36,6 @@ import ListeUaTauxEquipement50 from '../../pages/suivi_control_budgetaires/suivi
 import ListeUaTauxEquipement75 from '../../pages/suivi_control_budgetaires/suiviImmobilisation/BilanUaEquipeouNon/ListeUaTauxEquipement50a75.vue'
 import ListeUaTauxEquipement100 from '../../pages/suivi_control_budgetaires/suiviImmobilisation/BilanUaEquipeouNon/ListeUaTauxEquipement75a100.vue'
 import detailTauxEquipement from '../../pages/suivi_control_budgetaires/suiviImmobilisation/BilanUaEquipeouNon/detailTauxEquipement.vue'
-
-
-
-
 import marqueVehicules from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/marqueVehicules.vue'
 import ModeleVehicules from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeModel/ModeleVehicules.vue'
 import TypeEnergie from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/TypeEnergie.vue'
@@ -54,11 +50,55 @@ import DetaiAffectationVehicule from '../../pages/suivi_control_budgetaires/suiv
 import Transmission from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/Transmission.vue'
 import Appreciation from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/Appreciation.vue'
 import AjouterReparationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/AjouterReparationVehicule.vue'
+import AjouterReparationSibVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/AjouterReparationSibVehicule.vue'
 import ModifierReparationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/ModifierReparationVehicule.vue'
 import TableauBordGestionVehicule from '../../gestionDesModule/TableauBordGestionVehicule.vue'
+import ExecutionReparationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/ExecutionReparation/ExecutReparationVehicule.vue'
+
+
+
+// ROUTE COMPTABILITE MATIERE A FAIRE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const suiviImmobilisationRoutes = [
   {
-    path: "/DetailVehicule",
+    path: "/ExecutionReparationVehicule",
+    name: "ExecutionReparationVehicule",
+    component: ExecutionReparationVehicule
+  },
+  {
+    path: "/AjouterReparationSibVehicule",
+    name: "AjouterReparationSibVehicule",
+    component: AjouterReparationSibVehicule
+  },
+  {
+    path: "/DetailVehicule/:id",
     name: "DetailVehicule",
     component: DetailVehicule
   },

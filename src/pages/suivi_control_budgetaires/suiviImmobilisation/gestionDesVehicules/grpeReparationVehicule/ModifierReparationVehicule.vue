@@ -36,7 +36,7 @@
                <tr>
                  <td>
                     <div class="control-group">
-                  <label class="control-label" style="font-size:14px">unité administrative</label>
+                  <label class="control-label" style="font-size:14px">Unité Administrative</label>
                   <div class="controls">
                     <select  class="span" v-model="detail.ua_id ">
                       <option></option>                     
@@ -79,9 +79,24 @@
                   </div>
                 </div>
                  </td>
+                 <td>
+                    <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Numéro Contrat</label>
+                  <div class="controls">
+                    <select  class="span" v-model="detail.acte_id ">
+                      <option></option>                     
+                      <option
+                        v-for="typeUniteA in NumeroContrat(detail.ua_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.reference_act}}</option>
+                    </select>
+                  </div>
+                </div>
+                 </td>
                </tr>
                <tr>
-                 <td colspan="3">
+                 <td colspan="4">
                    
    
       
@@ -89,7 +104,7 @@
         <div class="control-group">
           <form>
             <div class="controls">
-              <textarea class="textarea_editor span12" v-model="detail.panne_signale " rows="6" placeholder="Enter text ..."></textarea>
+              <textarea class="textarea_editor span14" :value="libelleMarche(MarcheActe_id(detail.acte_id))" rows="6" placeholder="Enter text ..."></textarea>
             </div>
           </form>
         </div>
@@ -99,6 +114,20 @@
                  </td>
                </tr>
                <tr>
+                 <td colspan="3">
+               <div class="control-group">
+            <label class="control-label">Ligne Budgétaire</label>
+            <div class="controls">
+               <input
+                type="text"
+                :value="Codeeconomique(LigneBudgetaireAttrivue(MarcheActe_id(formData.acte_id)))"
+                class="span"
+                readonly
+              />
+
+            </div>
+          </div>
+            </td>
                   <td>
                <div class="control-group">
             <label class="control-label">Détenteur</label>
@@ -111,7 +140,10 @@
             </div>
           </div>
             </td>
-             <td>
+             
+               </tr>
+                <tr>
+                  <td>
                <div class="control-group">
             <label class="control-label">Date du signal</label>
             <div class="controls">
@@ -124,7 +156,7 @@
             </div>
           </div>
             </td>
-            <td>
+                  <td>
                <div class="control-group">
             <label class="control-label">Date d'envoi</label>
             <div class="controls">
@@ -137,21 +169,20 @@
             </div>
           </div>
             </td>
-               </tr>
-                <tr>
                   <td>
                <div class="control-group">
             <label class="control-label">Garage</label>
             <div class="controls">
-                              <select   class="span" v-model="detail.entreprise_id">
-                                <option></option>
-            <!-- <option v-for="resultat in affichePersonnel(detail.ua_id)" :key="resultat.id" 
-            :value="resultat.acteur_depense_id">{{NomPersonnel(resultat.acteur_depense_id)}}</option> -->
-                </select>
+                              <input
+                type="text"
+                :value="RaisonSocialEntreprise(idEntreprise(detail.acte_id))"
+                class="span"
+                readonly
+              />
             </div>
           </div>
             </td>
-             <td>
+             <!-- <td>
                <div class="control-group">
             <label class="control-label">Date du Retour</label>
             <div class="controls">
@@ -163,16 +194,16 @@
               />
             </div>
           </div>
-            </td>
+            </td> -->
             <td>
                <div class="control-group">
             <label class="control-label">Coût de réparation</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="detail.cout_reparation"
+                :value="MontantReparation(detail.acte_id)"
                 class="span"
-                
+                readonly
               />
             </div>
           </div>
@@ -191,7 +222,7 @@
                         <a
                           class="btn btn-primary"
                           @click.prevent="AjouterVehicule"
-                        >Valider</a>
+                        >Modifier</a>
                         <a
                           @click.prevent="afficherModalListePersonnel()"
                           class="btn"
@@ -298,6 +329,98 @@ cf:cf,
       ...mapGetters('personnelUA', ["acteur_depenses","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat","personnaliseActeurDepense",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
+    
+    anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
+    libelleMarche(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objet1 = this.marches.find(item => item.id==id)
+          if(objet1){
+            return objet1.objet
+          }
+          return null
+        }
+      }
+    },
+    
+    NumeroContrat() {
+      return id => {
+        if (id != null && id != "") {
+           return this.acteEffetFinanciers.filter(qtreel => qtreel.ua_id == id && qtreel.etatcontrat == 1);
+      
+        }
+      }
+    },
+    RaisonSocialEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.raison_sociale;
+      }
+      return 0
+        }
+      };
+    },
+    MontantReparation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_act;
+      }
+      return 0
+        }
+      };
+    },
+    idEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.entreprise_id;
+      }
+      return 0
+        }
+      };
+    },
+    MarcheActe_id() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.marche_id;
+      }
+      return 0
+        }
+      };
+    },
+    LigneBudgetaireAttrivue() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.economique_id;
+      }
+      return 0
+        }
+      };
+    },
+   
+   
    affichePersonnel() {
       return id => {
         if (id != null && id != "") {
@@ -410,8 +533,11 @@ return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
             },
      AjouterVehicule() {
       
-      
-      this.modifierReparationVehicule(this.detail);
+       var nouvelObjet = {
+         ...this.detail,
+        anneebudgetaire:this.anneeAmort
+      }
+      this.modifierReparationVehicule(nouvelObjet);
     
       this.detail = {
         ua_id:"",

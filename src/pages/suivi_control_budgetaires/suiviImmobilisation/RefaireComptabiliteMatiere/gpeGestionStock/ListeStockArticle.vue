@@ -86,7 +86,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>SUIVI DES REPARATIONS DES VEHICULES </h5>
+              <h5>Listes des Articles par UA </h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -96,13 +96,13 @@
 
 
             <div class="widget-content nopadding"  >
-              <reparationvehItemComponent v-for="equipement in uniteAdministratives"
+              <StockComponent v-for="equipement in uniteAdministratives"
                :key="equipement.id"
                 :groupe="equipement"
                 @modification="afficherModalModifierService" 
                 @suppression="supprimerSect"
                 >
-              </reparationvehItemComponent>
+              </StockComponent>
 
               <!-- <div v-if="filtre_famille.length"></div>
               <div v-else>
@@ -139,13 +139,13 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import reparationvehItemComponent from './reparationvehItemComponent'
+import StockComponent from './StockComponent'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 export default {
   name: 'Famille',
  components: {
-      reparationvehItemComponent
+      StockComponent
   },
   data() {
     return {

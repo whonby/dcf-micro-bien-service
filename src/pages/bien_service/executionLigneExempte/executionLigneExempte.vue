@@ -247,18 +247,29 @@ afficherBanqueDynamique
                         <tr>
                    
                       
-                          <td colspan="2" width="550">
+                          <td colspan="">
                          <div class="control-group">
-                            <label class="control-label">Objet offre :</label>
+                            <label class="control-label">Objet offre</label>
                             <div class="controls">
-                            <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span8" rows="1" placeholder="Entre le  text ..."></textarea>
+                            <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span4" rows="1" placeholder="Entre le  text ..."></textarea>
                     
                             </div>
                         </div>
                             </td>
+                            <td>
+                     <div class="control-group">
+             
+              <div class="controls">
+                <label>
+                  <input type="checkbox"  value="1" v-model="formEffetFinancier.etatcontrat"/>
+                  Qu'est ce que c'est un contrat de réparation</label>
+                
+              </div>
+            </div>
+                            </td>
                                   <td>
                      <div class="control-group">
-                        <label class="control-label">Incidence financière</label>
+                        <label class="control-label">Incidence financière</label><code style="color:red">*</code>
                         <div class="controls">
                             <select  v-model="formEffetFinancier.incidence_financiere" class="span4">
                                <option value="0">Oui</option>
@@ -413,7 +424,7 @@ afficherBanqueDynamique
                               <td>
               
               <div class="control-group">
-                <label class="control-label">exonéré</label>
+                <label class="control-label">exonéré</label><code style="color:red">*</code>
                 <div class="controls">
                   <select v-model="formEffetFinancier.exonere" class="span4">
                   
@@ -796,7 +807,7 @@ afficherBanqueDynamique
 
                                 <td>
                      <div class="control-group">
-                        <label class="control-label">Incidence financière</label>
+                        <label class="control-label">Incidence financière</label><code style="color:red">*</code>
                         <div class="controls">
                             <select  v-model="editActeEffetFinancier.incidence_financiere" class="span4">
                                <option value="0">Oui</option>
@@ -944,7 +955,7 @@ afficherBanqueDynamique
                         <tr>
                                 <td>
               <div class="control-group">
-                <label class="control-label">exonéré</label>
+                <label class="control-label">exonéré</label><code style="color:red">*</code>
                 <div class="controls">
                   <select v-model="editActeEffetFinancier.exonere" class="span4">
                   
@@ -1206,7 +1217,7 @@ export default {
               tva:"",
               taux:"",
               ua_id:"",
-              avance_demarrage_ht:"",
+              avance_demarrage_ht:0,
               avance_demarrage_ttc:"",
               tva_avance_demarage:"",
              libelle_act:"",
@@ -1471,7 +1482,7 @@ AffichierElementParent() {
                 if(objetMarche){
                     return objetMarche.objet
                 }
-                 return 0
+                 return 
             }
         }
     },
@@ -2093,6 +2104,7 @@ listeActeEffectFinnancier() {
     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
     marcheObjet.attribue = 2
     marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
+    marcheObjet.parent_id=this.macheid
    // console.log(marcheObjet)
     this.modifierMarche(marcheObjet)
     this.formEffetFinancier = {

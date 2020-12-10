@@ -30,7 +30,7 @@
               
                <td>
                 <div class="control-group">
-                  <label class="control-label">UA Réceptrice{{formData.unitezone_id}}</label>
+                  <label class="control-label">UA Réceptrice</label>
                   <div class="controls">
                      
                             <input

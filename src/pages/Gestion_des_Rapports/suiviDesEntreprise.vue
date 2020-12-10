@@ -23,22 +23,24 @@
             </div>
           </div>
                     </td>
-                    <td colspan="2">
-                         <div class="control-group">
-            <label class="control-label">FOURNISSEURS </label>
-            <div class="controls">
-             <select  class="span8" v-model="formData.entrep_id">
-                      <option></option>
-                      <option
-                        v-for="typeUniteA in entreprises"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.raison_sociale}}</option>
-                    </select>
-            </div>
-          </div>
-                    </td>
-                   
+                    
+                   <td colspan="2">
+                    <div class="control-group">
+                  <label class="control-label" style="font-size:14px">FOURNISSEURS</label>
+                  <div class="controls">
+                    <model-list-select style="background-color: rgb(233,233,233);"
+                                                   class="wide"
+                                                   :list="entreprises"
+                                                   v-model="formData.entrep_id"
+                                                   option-value="id"
+                                                   option-text="raison_sociale"
+                                                   
+                                >
+
+                                </model-list-select>
+                  </div>
+                </div>
+                 </td>
                     <td>
                          <div class="control-group">
             <label class="control-label">TYPE DE MARCHE</label>
@@ -315,13 +317,13 @@
     // import * as JsPDF from 'jspdf'
     // import html2pdf from 'html2pdf.js'
     // import moment from "moment";
-    // import { ModelListSelect } from "vue-search-select";
-    // import "vue-search-select/dist/VueSearchSelect.css";
+    import { ModelListSelect } from "vue-search-select";
+    import "vue-search-select/dist/VueSearchSelect.css";
     import { formatageSomme } from "@/Repositories/Repository";
 
     export default {
         components: {
-
+ModelListSelect
         },
         data() {
             return {

@@ -4,36 +4,17 @@
   
                   <tr class="odd gradeX" v-if="article" >
                  
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{afficheImmatriculation(article.vehicule_id) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{libellemarqueVehicules(afficheIdMarque(article.vehicule_id)) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{libelleModeleVehicules(afficheIdModel(article.vehicule_id)) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{afficheCoulleur(article.vehicule_id) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{affichePanneSignaler(afficheIdMarche(article.acte_id)) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{formaterDate(article.date_signal) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{formaterDate(article.date_envoi) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{afficheNomEntreprise(afficheIdEntreprise(article.acte_id)) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{formaterDate(article.date_retour) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{formatageSomme(parseFloat(afficheMontantReparation(article.acte_id))) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{libelleAppreciations(article.appreciation_id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{libelleUniteAdministrative(article.uAdministrative_id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{libelleFamilleEquipement(article.famill_id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.quantitestock || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{formaterDate(article.date_entre) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.qteentrant || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{formaterDate(article.date_sortie) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.qtesortie || 'Non renseigné'}}</td>
                    
+
                     <td>
-                      <button class="btn  btn-warning" @click.prevent="$emit('modification', article)" v-if="article.appreciation_id == 0">
-                        <span>
-                          <i class=" icon-hand-up"></i>
-                        </span>
-                      </button>
-                      <button v-else-if="article.appreciation_id == 6" @click.prevent="$emit('modification', article)" class="btn  btn-danger" >
-              
-                        <span>
-                          <i class=" icon-thumbs-down"></i>
-                        </span>
-                </button>
-                 <button v-else @click.prevent="$emit('modification', article)" class="btn  btn-success" >
-              
-                        <span>
-                          <i class=" icon-thumbs-up"></i>
-                        </span>
-                </button>
+                    
                     </td>
                     <!-- <td>
                         <button  @click.prevent="afficherModalModifierTitre(article.id)" class="btn  btn-default" >
@@ -57,7 +38,7 @@
 
 import { mapGetters} from "vuex";
 import moment from "moment";
-import { formatageSomme } from "../../../../../Repositories/Repository";
+
 export default {
   data () {
     return {
@@ -90,69 +71,25 @@ export default {
       "getvehicules"
   
     ]),
-    ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
-     'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
-     'nombremarchesExecute',
-     'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
-      "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
-     "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser",
-       "typeActeEffetFinanciers","getterLoadinMarche"]),
-       ...mapGetters("gestionMarche", ['entreprises']),
-    afficheIdMarche() {
+    libelleFamilleEquipement() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getActeEffetFinancierPersonnaliser45.find(qtreel => qtreel.id == id);
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.marche_id;
+        return qtereel.libelle;
       }
       return 0
         }
       };
     },
-     afficheMontantReparation() {
+    libelleUniteAdministrative() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getActeEffetFinancierPersonnaliser45.find(qtreel => qtreel.id == id);
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.montant_act;
-      }
-      return 0
-        }
-      };
-    },
-    afficheIdEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getActeEffetFinancierPersonnaliser45.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.entreprise_id;
-      }
-      return 0
-        }
-      };
-    },
-    afficheNomEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.raison_sociale;
-      }
-      return 0
-        }
-      };
-    },
-     affichePanneSignaler() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.objet;
+        return qtereel.libelle;
       }
       return 0
         }
@@ -304,7 +241,7 @@ export default {
     },
   },
   methods: {
-formatageSomme:formatageSomme,
+//formatageSomme:formatageSomme,
 formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
     },

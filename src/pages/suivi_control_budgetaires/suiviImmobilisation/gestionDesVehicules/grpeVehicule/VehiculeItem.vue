@@ -6,7 +6,7 @@
                  
                     <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.numidentification || 'Non renseigné'}}</td>
                     <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.numimmatriculation || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.immobilisation || 'Non renseigné'}}</td>
+                    <!-- <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{article.immobilisation || 'Non renseigné'}}</td> -->
                     <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{libelleTypeVehicule(article.typevehicule) || 'Non renseigné'}}</td>
                     <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{libellemarqueVehicules(article.marque) || 'Non renseigné'}}</td>
                     <td style="font-size:14px" @dblclick="afficherModalModifierTitre(article.id)"> {{libelleModeleVehicules(article.modele) || 'Non renseigné'}}</td>
@@ -165,6 +165,12 @@ export default {
 
       this.$router.push({
         path: "/DetailVehicule/" + id
+      });
+    },
+    afficherModalModifierTitre(id) {
+
+      this.$router.push({
+        path: "/ModifierFicheVehicule/" + id
       });
     },
     toggle: function () {

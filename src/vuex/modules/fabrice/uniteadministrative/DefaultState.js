@@ -19,6 +19,7 @@ const defaultState = {
   // banqueUa: [],
   StructureOrganigrammeUa:[],
   budgetEclate:[],
+  stockageArticles: [],
   // listeDocUniteAdministratives: [],
 
   // nbreUniteAdministratives: [],

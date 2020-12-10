@@ -1,5 +1,6 @@
 /////////////////////////////////*debut mutation FAMILLE */////////////////////
 // afficher FAMILLE*
+
 const GET_ALL_NORME_EQUIPEMENTS = (state, tableauNormeArticle) => {
   state.normeEquipements = tableauNormeArticle;
 };

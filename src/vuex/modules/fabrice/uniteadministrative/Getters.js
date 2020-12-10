@@ -2,6 +2,7 @@ import { groupBy } from "../../../../Repositories/Repository";
 export const budgetEclate = state => state.budgetEclate;
 export const getvehicules =state =>state.vehicules;
 export const ReparationVehicules =state =>state.ReparationVehicules;
+export const GestionStockageArticles = state => state.stockageArticles;
 // const typeTextes = state =>
 //   state.typeTextes.sort((a, b) => (a.code > b.code ? 1 : -1));
 export const StructureOrganigrammeUa = state => state.StructureOrganigrammeUa;

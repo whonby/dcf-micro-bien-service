@@ -99,7 +99,7 @@ detail_marche
                     <th>DATE ORDRE DE SERVICE</th>
                     <th>DATE PREVISIONNELLE DE FIN</th>
                     <th>DUREE D'EXECUTION</th>
-                   
+                   <!-- <th>DUREE RESTANT A D'EXECUTION</th> -->
                     <th>ENTREPRISE ATTRIBUTAIRE</th>
                     <th>BAILLEUR</th>
                     <th>MONTANT DE BASE</th>
@@ -125,7 +125,7 @@ detail_marche
                     <td>{{formaterDate(type.date_odre_service) || 'Non renseigné'}}</td>
                     <td>{{formaterDate(type.date_fin_exe) || 'Non renseigné'}}</td>
                     <td>{{type.duree || 'Non renseigné'}} Jours</td>
-                   
+                   <!-- <td>{{nombreDejourCalculeModifier}} Jours</td> -->
                     <td>{{entreprise(type.entreprise_id) || 'Non renseigné'}}</td>
                     <td>{{LIBELLEBAILLEUR(idBAILLEUR(type.marche_id)) || 'Non renseigné'}}</td>
                     <td>{{formatageSomme(parseFloat(type.montant_act)) || 'Non renseigné'}}</td>
@@ -287,6 +287,61 @@ detail_marche
 ...mapGetters('gestionMarche', ['entreprises',"secteur_activites",'banques','comptes','getCompte',]),
   ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
+
+  afficherDateDuJour(){
+let date = new Date();
+        let aaaa = date.getFullYear();
+        let gg = date.getDate();
+        let mm = (date.getMonth() + 1);
+        let moi;
+        let jour;
+        if (gg < 10)
+        {
+            jour = "0" + gg;
+        }else{
+            jour = gg
+        }
+
+        if (mm < 10)
+        {
+            moi = "0" + mm;
+        }else{
+            moi=mm;
+        }
+
+
+        let cur_day =  aaaa + "-" + moi + "-" + jour;
+
+        return cur_day
+
+   },
+   nombreDejourCalculeModifier(){
+  
+
+      var dateF = new Date(this.afficherDateDuJour).getTime()
+      var dateO = new Date(this.afficheDateParType(this.formData.type_marche_id)).getTime()
+      var resultat = dateF - dateO
+
+      var diffJour =  resultat / (1000 * 3600 * 24)
+
+      if(isNaN(diffJour)) return null
+
+      if(parseFloat(diffJour) < 0 ) return "durée invalide"
+      
+      return  diffJour;
+
+    },
+    afficheDateParType(){
+      return id =>{
+        if(id!=null && id!=""){
+          let odj = this.acteEffetFinanciers.find(item => item.type_marche_id==id )
+          if(odj){
+            return odj.date_odre_service
+          }
+          return null
+        }
+      }
+    },
   EtatMarche(){
       return id =>{
         if(id!=null && id!=""){
@@ -389,6 +444,7 @@ afficheNumeroMarche(){
     //     );
     //   });
     // },
+    
     PROCEDURENORMALEMarche(){
       return id =>{
         if(id!=null && id!=""){

@@ -37,17 +37,21 @@
                <tr>
                
                  <td>
-                    
+                    <div class="control-group">
+                  <label class="control-label" style="font-size:14px">unité administrative</label>
+                  <div class="controls">
+                    <model-list-select style="background-color: rgb(233,233,233);"
+                                                   class="wide"
+                                                   :list="afficherUAParDroitAccess"
+                                                   v-model="formData.ua_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder="Unité administrative"
+                                >
 
-                 <div class="control-group">
-            <label class="control-label" title="unite administrative">UA</label>
-            <div class="controls" >
-            <select v-model="formData.ua_id" class="span">
-               <option v-for="plans in groupeUaPourMarheHorSib" :key="plans[0].id" 
-               :value="plans[0].uniteadministrative_id">{{afficherLibelleUniteAdministrative(plans[0].uniteadministrative_id)}}</option>
-           </select>
-            </div>
-          </div>
+                                </model-list-select>
+                  </div>
+                </div>
                  </td>
                  <td>
                     <div class="control-group">
@@ -98,10 +102,13 @@
                <tr>
                  <td colspan="4">
                    
+   
+      
+     
         <div class="control-group">
-           <label class="control-label">Panne(s) Signalée(s)</label>
+           <label class="control-label">Panne(s) signalée(s)</label>
             <div class="controls">
-              <textarea class="span14" :value="libelleMarche(MarcheActe_id(formData.acte_id))" rows="3" placeholder="Enter text ..."></textarea>
+              <textarea class="span12" :value="libelleMarche(MarcheActe_id(formData.acte_id))" rows="3" placeholder="Enter text ..."></textarea>
             </div>
           
         </div>
@@ -115,13 +122,12 @@
                <div class="control-group">
             <label class="control-label">Ligne Budgétaire</label>
             <div class="controls">
-               <input
+                              <input
                 type="text"
                 :value="Codeeconomique(LigneBudgetaireAttrivue(MarcheActe_id(formData.acte_id)))"
                 class="span"
                 readonly
               />
-
             </div>
           </div>
             </td>
@@ -137,11 +143,7 @@
             </div>
           </div>
             </td>
-            
-            
-               </tr>
-                <tr>
-                   <td>
+             <td>
                <div class="control-group">
             <label class="control-label">Date du signal</label>
             <div class="controls">
@@ -154,11 +156,14 @@
             </div>
           </div>
             </td>
+            
+               </tr>
+                <tr>
                   <td>
                <div class="control-group">
             <label class="control-label">Garage</label>
             <div class="controls">
-                             <input
+                               <input
                 type="text"
                 :value="RaisonSocialEntreprise(idEntreprise(formData.acte_id))"
                 class="span"
@@ -190,7 +195,7 @@
                 type="text"
                 :value="MontantReparation(formData.acte_id)"
                 class="span"
-                readonly
+                
               />
             </div>
           </div>
@@ -234,12 +239,12 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import {admin,dcf,cf} from '../../../../../Repositories/Auth';
-// import { ModelListSelect } from "vue-search-select";
-// import "vue-search-select/dist/VueSearchSelect.css";
+import { ModelListSelect } from "vue-search-select";
+import "vue-search-select/dist/VueSearchSelect.css";
 export default {
-  // components: {
-  //   ModelListSelect
-  // },
+  components: {
+    ModelListSelect
+  },
   data() {
     return {
       fabActions: [
@@ -276,7 +281,6 @@ props:["macheid"],
    ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
    ...mapGetters("SuiviImmobilisation", ["AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
    ...mapGetters('uniteadministrative',[
-     "groupeUaPourMarheHorSib",
     "plans_programmes",
  "uniteAdministratives",
  "afficheNiveauAction",
@@ -284,9 +288,7 @@ props:["macheid"],
  "derniereNivoPlanBudgetaire",
  "getPersonnaliseBudgetGeneralParPersonnel",
    "decomptefactures",
-   "getvehicules",
-   "budgetEclate"
-   
+   "getvehicules"
    
    ]),
 
@@ -319,35 +321,7 @@ cf:cf,
       ...mapGetters('personnelUA', ["acteur_depenses","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat","personnaliseActeurDepense",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
-     
-     libelleMarche(){
-      return id =>{
-        if(id!=null && id!=""){
-          let objet1 = this.marches.find(item => item.id==id)
-          if(objet1){
-            return objet1.objet
-          }
-          return null
-        }
-      }
-    },
-     
-     afficherLibelleUniteAdministrative(){
-      return id =>{
-        if(id!=null && id!=""){
-          let objet = this.uniteAdministratives.find(item => item.id==id)
-          if(objet){
-            return objet.libelle
-          }
-          return null
-        }
-      }
-    },
-//                lesClassDe3() { 
-// const isClassDe3 = (code) => code.charAt(0)== "6" && code.charAt(1)== "1" && code.charAt(2)== "4"; 
-// return this.afficheLigneReparation(formData.ua_id).filter(x => isClassDe3(x.code));
-//  },
- Codeeconomique() {
+     Codeeconomique() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
@@ -359,14 +333,90 @@ cf:cf,
         }
       }
     },
-     afficheLigneReparation() {
+      NumeroContrat() {
       return id => {
         if (id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id);
+           return this.acteEffetFinanciers.filter(qtreel => qtreel.ua_id == id && qtreel.etatcontrat == 1);
       
+        }
+      }
+    },
+    RaisonSocialEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.raison_sociale;
+      }
+      return 0
         }
       };
     },
+    MontantReparation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_act;
+      }
+      return 0
+        }
+      };
+    },
+    idEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.entreprise_id;
+      }
+      return 0
+        }
+      };
+    },
+    libelleMarche(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objet1 = this.marches.find(item => item.id==id)
+          if(objet1){
+            return objet1.objet
+          }
+          return null
+        }
+      }
+    },
+    MarcheActe_id() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.marche_id;
+      }
+      return 0
+        }
+      };
+    },
+    LigneBudgetaireAttrivue() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.economique_id;
+      }
+      return 0
+        }
+      };
+    },
+               lesClassDe3() { 
+const isClassDe3 = (code) => code.charAt(0)== "6" && code.charAt(1)== "1" && code.charAt(2)== "4"; 
+return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
+ },
+     
      affichePersonnel() {
       return id => {
         if (id != null && id != "") {
@@ -428,77 +478,8 @@ libelleTypeVehicule() {
         }
       };
     },
-    
-    NumeroContrat() {
-      return id => {
-        if (id != null && id != "") {
-           return this.acteEffetFinanciers.filter(qtreel => qtreel.ua_id == id && qtreel.etatcontrat == 1);
-      
-        }
-      }
-    },
-    RaisonSocialEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.raison_sociale;
-      }
-      return 0
-        }
-      };
-    },
-    MontantReparation() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.montant_act;
-      }
-      return 0
-        }
-      };
-    },
-    idEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.entreprise_id;
-      }
-      return 0
-        }
-      };
-    },
-    MarcheActe_id() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.marche_id;
-      }
-      return 0
-        }
-      };
-    },
-    LigneBudgetaireAttrivue() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.economique_id;
-      }
-      return 0
-        }
-      };
-    },
    afficherUAParDroitAccess() {
-       // const st = this.search.toLowerCase();
+    
         if (this.cf){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
@@ -513,15 +494,19 @@ libelleTypeVehicule() {
         }
 
         return this.uniteAdministratives;
-        //return this.uniteAdministratives
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
-        
-
+       
     },
  
+
+
+
+
+
+
+
+
+
+
  fonctionModele() {
       return id => {
         if (id != null && id != "") {
@@ -530,7 +515,7 @@ libelleTypeVehicule() {
         }
       };
     },
-     anneeAmort() {
+    anneeAmort() {
       
       const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
 
@@ -552,7 +537,7 @@ libelleTypeVehicule() {
                 window.history.back();
             },
      AjouterVehicule() {
-      
+
       var nouvelObjet = {
         ...this.formData,
         anneebudgetaire:this.anneeAmort
