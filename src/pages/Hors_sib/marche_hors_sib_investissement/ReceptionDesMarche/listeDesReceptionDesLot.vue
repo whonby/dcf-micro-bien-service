@@ -187,7 +187,7 @@
             <td>
 
               <div class="control-group">
-                <label class="control-label">Date de debut d'execution prévisionnelle</label>
+                <label class="control-label">Date de debut d'execution réelle</label>
                 <div class="controls">
                   <input
                       type="date"
@@ -202,7 +202,7 @@
             <td>
 
               <div class="control-group">
-                <label class="control-label">Date reception provisoire prévisionnelle</label>
+                <label class="control-label">Date reception provisoire réelle</label>
                 <div class="controls">
                   <input
                       type="date"
@@ -217,7 +217,7 @@
             <td>
 
               <div class="control-group">
-                <label class="control-label">Date de reception définitive prévisionnelle{{detail_marche.id}}</label>
+                <label class="control-label">Date de reception définitive réelle {{detail_marche.id}}</label>
                 <div class="controls">
                   <input
                       type="date"
@@ -534,7 +534,7 @@
              <td>
 
               <div class="control-group">
-                <label class="control-label">Date de debut d'execution réelle</label>
+                <label class="control-label">Date de début d'exécution réelle</label>
                 <div class="controls">
                   <input
                       type="date"
@@ -561,8 +561,10 @@
                 </div>
               </div>
             </td>
+             
+           </tr>
+           <tr>
              <td>
-
               <div class="control-group">
                 <label class="control-label">Date de reception définitive réelle</label>
                 <div class="controls">
@@ -576,9 +578,8 @@
                 </div>
               </div>
             </td>
-           </tr>
+           
 
-           <tr>
                 <td>
 
               <div class="control-group">
@@ -594,6 +595,23 @@
                 </div>
               </div>
             </td>
+                     <td>
+
+              <div class="control-group">
+                <label class="control-label">Ecart de demarrage</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      
+                      class="span4"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             </tr>
+              <tr>
              <td>
 
               <div class="control-group">
@@ -627,7 +645,7 @@
              <td>
 
               <div class="control-group">
-                <label class="control-label">Ecart d'execution</label>
+                <label class="control-label">Ecart d'exécution</label>
                 <div class="controls">
                   <input
                       type="text"
