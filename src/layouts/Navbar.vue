@@ -19,7 +19,9 @@
     <MenuActeurDepenseHS v-if="active_el ==31"></MenuActeurDepenseHS>
    <MenuParametreVehicule v-if="active_el == 42"></MenuParametreVehicule>
    <MenuGestionParc v-if="active_el == 43"></MenuGestionParc>
-   <MenuReparation v-if="active_el == 49"></MenuReparation>
+   <MenuRapportMarche v-if="active_el == 89"></MenuRapportMarche>
+   <MenuRapportVehicule v-if="active_el == 90"></MenuRapportVehicule>
+   <MenuTableauBordGestionMarche v-if="active_el == 45"></MenuTableauBordGestionMarche>
     <Search></Search>
     
     <!--close-top-serch MenuPlanificationHorSib-->
@@ -30,6 +32,7 @@
 // var housecall = require('housecall');
 
 // var queue = housecall({ concurrency: 2, cooldown: 1000 });
+import MenuTableauBordGestionMarche from "../components/navs/MenuTableauBordGestionMarche";
 import MenuTableau from "../components/navs/menuTableauBord";
 import MenuParamG from "../components/navs/menuParametreG";
 import MenuUA from "../components/navs/menuUA";
@@ -48,11 +51,14 @@ import MenuGestionAccess from "../components/navs/MenuGestionAccess"
 import MenuActeurDepenseHS from "../components/navs/MenuActeurDepenseHS"
 import MenuParametreVehicule from "../components/navs/MenuParametreVehicule"
 import MenuGestionParc from "../components/navs/MenuGestionParc"
-import MenuReparation from "../components/navs/MenuReparation"
+import MenuRapportMarche from "../components/navs/MenuRapportMarche"
+import MenuRapportVehicule from "../components/navs/MenuRapportVehicule"
 import { mapState, mapActions} from "vuex";
 export default {
   components: {
-    MenuReparation,
+    MenuTableauBordGestionMarche,
+    MenuRapportVehicule,
+    MenuRapportMarche,
     MenuGestionParc,
     MenuParametreVehicule,
     MenuTableau,

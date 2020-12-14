@@ -160,12 +160,12 @@ export default {
      fabActions: [
               {
                   name: 'cache',
-                  icon: 'directions_bus',
+                  icon: 'HS',
                   title:'Hors Sib'
               },
               {
                   name: 'alertMe',
-                  icon: 'airport_shuttle',
+                  icon: 'SB',
                   title:'Sib'
               }
           ],

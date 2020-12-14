@@ -207,13 +207,13 @@
 
 
             <div class="widget-content nopadding"  >
-              <StockComponent v-for="equipement in uniteAdministratives"
+              <StockComponentVehicule v-for="equipement in uniteAdministratives"
                :key="equipement.id"
                 :groupe="equipement"
                 @modification="afficherModalModifierService" 
                 @suppression="supprimerSect"
                 >
-              </StockComponent>
+              </StockComponentVehicule>
 
               <!-- <div v-if="filtre_famille.length"></div>
               <div v-else>
@@ -250,13 +250,13 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import StockComponent from './StockComponent'
+import StockComponentVehicule from './StockComponentVehicule'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 export default {
   name: 'Famille',
  components: {
-      StockComponent
+      StockComponentVehicule
   },
   data() {
     return {
@@ -695,11 +695,11 @@ afficherModalModifierService(articles) {
 afficherModalModifierTitre(id) {
 
       this.$router.push({
-        path: "/ModifierEntrePatrimoine/" + id
+        path: "/ModifierEntrePatrimoineVehicule/" + id
       });
     },
 ajouterEntreEnPatrimoine(){
-                this.$router.push({ name: 'AjouterEntrePatrimoine' })
+                this.$router.push({ name: 'AjouterEntrePatrimoineVehicule' })
             },
             
    // exportation en pdf

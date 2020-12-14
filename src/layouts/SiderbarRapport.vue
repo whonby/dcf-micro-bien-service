@@ -25,14 +25,25 @@
 		</center>
        </li>
        
-        
+        <li :class="{active: active_el == 89 }" @click.prevent="navigateToActeurDepense" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span>RAPPORT MARCHE</span>
+          </a>
+        </li>
+        <li :class="{active: active_el == 90 }" @click.prevent="navigateToRapportVehicule" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span>RAPPORT VEHICULE</span>
+          </a>
+        </li>
        
-        <li  @click.prevent="navigateToActeurDepense" >
+        <!-- <li  @click.prevent="navigateToActeurDepense" >
           <a href="#">
             <i class="icon-group"></i>
             <span>SUIVI ENTREPRISE</span>
           </a>
-        </li>
+        </li> -->
         <!-- <li  @click.prevent="navigateToSuivMarche" >
           <a href="#">
             <i class="icon-group"></i>
@@ -46,24 +57,24 @@
           </a>
         </li> -->
         
-         <li  @click.prevent="navigateToSuiviMarcheProjet" >
+         <!-- <li  @click.prevent="navigateToSuiviMarcheProjet" >
           <a href="#">
             <i class="icon-group"></i>
             <span>MARCHE UA</span>
           </a>
-        </li>
-         <li  @click.prevent="navigateToSuiviMarcheProjetpARtYPEmArche" >
+        </li> -->
+         <!-- <li  @click.prevent="navigateToSuiviMarcheProjetpARtYPEmArche" >
           <a href="#">
             <i class="icon-group"></i>
             <span>MARCHE UA PAR TYPE</span>
           </a>
-        </li>
-          <li  @click.prevent="etatRecapitulativeS" >
+        </li> -->
+          <!-- <li  @click.prevent="etatRecapitulativeS" >
           <a href="#">
             <i class="icon-group"></i>
             <span>ETAT RECAPITULATIF</span>
           </a>
-        </li>
+        </li> -->
         <li >
            <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
          
@@ -207,12 +218,17 @@ navigateToSuiviMarcheProjetpARtYPEmArche(){
         })
       },
       navigateToActeurDepense(){
-        this.activate()
+        this.activate(89)
         this.$router.push({
-          name: 'suiviDesEntreprise'
+          name: ''
         })
       },
-
+navigateToRapportVehicule(){
+        this.activate(90)
+        this.$router.push({
+          name: ''
+        })
+      },
        navigateToUniteAdministrative(){
         this.activate(1)
         this.$router.push({

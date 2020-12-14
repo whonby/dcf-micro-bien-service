@@ -166,17 +166,20 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab8969">NOUVELLE PERSONNE  </a>
+                        <a data-toggle="tab" href="#tab8969">AFFECTATION AUX PERSONNELS  </a>
                       </li>
-                       <li>
+                       <!-- <li>
                         <a data-toggle="tab" href="#tab7458">AFFECTATION DES DEMANDES DU PERSONNEL   </a>
-                      </li>
+                      </li> -->
                        <li class="">
-                        <a data-toggle="tab" href="#tab1005">NOUVEAU SERVICE  </a>
+                        <a data-toggle="tab" href="#tab1005">AFFECTATION AUX SERVICE  </a>
                       </li>
-                       <li>
-                        <a data-toggle="tab" href="#tab2005">AFFECTATION DES DEMANDES DU SERVICE  </a>
+                      <li>
+                        <a data-toggle="tab" href="#tab20051">AFFECTATION AUX UNITE ADMINISTRATIVE  </a>
                       </li>
+                       <!-- <li>
+                        <a data-toggle="tab" href="#1">AFFECTATION DES DEMANDES DU SERVICE  </a>
+                      </li> -->
                       <!-- <li>
                         <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
                       </li> --> 
@@ -243,7 +246,7 @@
 
 
 
- <div id="tab2005" class="tab-pane"><affectationDemandeDuService></affectationDemandeDuService></div>
+ <div id="1" class="tab-pane"><affectationDemandeDuService></affectationDemandeDuService></div>
 
 
 
@@ -722,13 +725,13 @@
                         <a data-toggle="tab" href="#tab11">Liste du Personnel   <span class="badge badge-inverse">{{afficheNombreToutPersonne}}</span></a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab13">Liste des Personnes non Equipées  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab13">Liste du Personnel non Equipées  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
                       </li>
                       <li class="">
                         <a data-toggle="tab" href="#tab45">Equipements Non Couverts   <span class="badge badge-warning">{{AfficheTotalQteNonCouvert}}</span></a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab12">Liste des Personnes Equipées     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab12">Liste du Personnel Equipées     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
                       </li>
                       <li class="">
                         <a data-toggle="tab" href="#tab1296">Taux équipement par agent</a>
@@ -756,10 +759,11 @@
                     <!-- <th>Type Unite d'administrative</th> -->
                     
                      
-                    <th>Matricule && Nom && Prénoms</th>
+                    <th>Matricule</th>
+                    <th>Nom && Prénoms</th>
                     <th>Unité administrative</th>
-                    <th>Unité de zone</th>
-                    <th>Service</th>
+                    <!-- <th>Unité de zone</th>
+                    <th>Service</th> -->
                     <th>Fonction</th>
                   
                     <th>Besoin Réel</th>
@@ -776,20 +780,22 @@
                     :key="BesoinImmo.id"
                   >
    
-                    
+                     <td
+                      
+                    >{{afficherMatriculeActeurDepense(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td> 
                     <td
                       
-                    >{{afficherActeurDepense(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td> 
+                    >{{afficherActeurDepense1(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td> 
                     <td
                       
                     >{{afficherUniteAdministrative(BesoinImmo.unite_administrative_id) || 'Non renseigné'}}</td> 
-                     <td
+                     <!-- <td
                        
                     >{{afficheUniteZone(BesoinImmo.uniteZone_id)  || 'Non renseigné'}}</td> 
                     <td
                       
                     >{{afficheServiceLibelle(afficheService(BesoinImmo.service_id)) || 'Non renseigné'}}</td>
-                  
+                   -->
                       <td 
                       
                     >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
@@ -832,8 +838,8 @@
                      
                     <!-- <th>Type Unite d'administrative</th> -->
                     <th>Unité administrative</th>
-                     <th>Unité de zone</th>
-                    <th>Service</th>
+                     <!-- <th>Unité de zone</th>
+                    <th>Service</th> -->
                     <th>Fonction</th>
                     <th>Nom et prénoms</th>
                     <!-- <th >Article</th> -->
@@ -853,12 +859,12 @@
                     <td
                       
                     >{{afficherUniteAdministrative(BesoinImmo.unite_administrative_id) || 'Non renseigné'}}</td> 
-                     <td
+                     <!-- <td
                        
                     >{{afficheUniteZone(BesoinImmo.uniteZone_id)  || 'Non renseigné'}}</td> 
                     <td
                       
-                    >{{afficheServiceLibelle(afficheService(BesoinImmo.service_id)) || 'Non renseigné'}}</td>
+                    >{{afficheServiceLibelle(afficheService(BesoinImmo.service_id)) || 'Non renseigné'}}</td> -->
                   
                       <td 
                       
@@ -884,8 +890,8 @@
                      
                   </tr>
                  <tr>
-                   <td></td>
-                  <td></td>
+                   <!-- <td></td>
+                  <td></td> -->
                   <td></td>
                   <td></td>
                   
@@ -911,9 +917,9 @@
                     <!-- <th>Type Unite d'administrative</th> -->
                     <th>Unité administrative</th>
                     
-                     <th>Unité de zone</th>
+                     <!-- <th>Unité de zone</th>
                     
-                    <th>Service</th>
+                    <th>Service</th> -->
                     <th>Fonction</th>
                     <th>Nom et prénoms</th>
                     <th >Equipé</th>
@@ -933,12 +939,12 @@
                     <td
                       @dblclick="afficherModalModifierDirection(index)"
                     >{{afficherUniteAdministrative(BesoinImmo.unite_administrative_id) || 'Non renseigné'}}</td> 
-                     <td
+                     <!-- <td
                       @dblclick="afficherModalModifierDirection(index)" 
                     >{{afficheUniteZone(BesoinImmo.uniteZone_id) || 'Non renseigné'}}</td> 
                     <td 
                       @dblclick="afficherModalModifierDirection(index)"
-                    >{{afficheServiceLibelle(afficheService(BesoinImmo.service_id)) || 'Non renseigné'}}</td>
+                    >{{afficheServiceLibelle(afficheService(BesoinImmo.service_id)) || 'Non renseigné'}}</td> -->
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierDirection(index)"
                     >{{afficheFonction(BesoinImmo.fonction_id)}}</td>
@@ -977,9 +983,9 @@
                     <!-- <th>Type Unite d'administrative</th> -->
                     <th>Unité administrative</th>
                     
-                     <th>Unité de zone</th>
+                     <!-- <th>Unité de zone</th>
                     
-                    <th>Service</th>
+                    <th>Service</th> -->
                     <th>Fonction</th>
                     <th>Nom et prénoms</th>
                     <th >Equipé</th>
@@ -999,12 +1005,12 @@
                     <td
                       @dblclick="afficherModalModifierDirection(index)"
                     >{{afficherUniteAdministrative(BesoinImmo.unite_administrative_id) || 'Non renseigné'}}</td> 
-                     <td
+                     <!-- <td
                       @dblclick="afficherModalModifierDirection(index)" 
                     >{{afficheUniteZone(BesoinImmo.uniteZone_id) || 'Non renseigné'}}</td> 
                     <td
                       @dblclick="afficherModalModifierDirection(index)"
-                    >{{afficheServiceLibelle(afficheService(BesoinImmo.service_id)) || 'Non renseigné'}}</td>
+                    >{{afficheServiceLibelle(afficheService(BesoinImmo.service_id)) || 'Non renseigné'}}</td> -->
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierDirection(index)"
                     >{{afficheFonction(BesoinImmo.fonction_id)}}</td>
@@ -1051,9 +1057,9 @@
                     <!-- <th>Type Unite d'administrative</th> -->
                     <th>Unite d'administrative</th>
                     
-                     <th>Unite de zone</th>
+                     <!-- <th>Unite de zone</th>
                     
-                    <th>Service</th>
+                    <th>Service</th> -->
                     <th>Fonction</th>
                     <th>Nom et prénoms</th>
                     <th >Equipé</th>
@@ -1073,12 +1079,12 @@
                     <td
                       @dblclick="afficherModalModifierDirection(index)"
                     >{{afficherUniteAdministrative(BesoinImmo.unite_administrative_id) || 'Non renseigné'}}</td> 
-                     <td
+                     <!-- <td
                       @dblclick="afficherModalModifierDirection(index)" 
                     >{{afficheUniteZone(BesoinImmo.uniteZone_id) || 'Non renseigné'}}</td> 
                     <td 
                       @dblclick="afficherModalModifierDirection(index)"
-                    >{{afficheServiceLibelle(afficheService(BesoinImmo.service_id)) || 'Non renseigné'}}</td>
+                    >{{afficheServiceLibelle(afficheService(BesoinImmo.service_id)) || 'Non renseigné'}}</td> -->
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierDirection(index)"
                     >{{afficheFonction(BesoinImmo.fonction_id)}}</td>
@@ -2438,7 +2444,30 @@ return this.exercices_budgetaires.filter(element => element.encours == 1)
       }
       return 0
     },
+afficherMatriculeActeurDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
 
+      if (qtereel) {
+        return qtereel.acteur_depense.matricule;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+    afficherActeurDepense1() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.nom.concat('    ',qtereel.acteur_depense.prenom);
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
 afficherActeurDepense() {
       return id => {
         if (id != null && id != "") {

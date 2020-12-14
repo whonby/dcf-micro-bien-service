@@ -1,16 +1,16 @@
 
-export const GET_ALL_STOCKAGE = (state, tableauArticle) => {
+export const GET_ALL_STOCK_ARTICLE = (state, tableauArticle) => {
   state.stockageArticles = tableauArticle;
 };
 
 // ajouter stockageArticles
-export const AJOUTER_STOCKAGE = (state, nouveau_article) => {
+export const AJOUTER_STOCK_ARTICLE = (state, nouveau_article) => {
   // state.typeTextes = [...nouveau_type, ...state.typeTextes]
   state.stockageArticles.unshift(nouveau_article);
 };
 
 // modifier stockageArticles
-export const MODIFIER_STOCKAGE = (state, objetModifie) => {
+export const MODIFIER_STOCK_ARTICLE = (state, objetModifie) => {
   state.stockageArticles = state.stockageArticles.map(articl => {
     if (articl.id == objetModifie.id) {
       articl = { ...objetModifie };
@@ -21,7 +21,7 @@ export const MODIFIER_STOCKAGE = (state, objetModifie) => {
 };
 
 // supprimer stockageArticles
-export const SUPPRIMER_STOCKAGE = (state, id) => {
+export const SUPPRIMER_STOCK_ARTICLE = (state, id) => {
   state.stockageArticles = state.stockageArticles.filter(articl => articl.id != id);
 };
 

@@ -2192,12 +2192,11 @@ var nouvelObjet1 = {
       this.$("#modificationModal").modal('hide');
       let marcheObjet=this.marches.find(marche=>marche.id==this.marche_lot)
       marcheObjet.attribue = 2
-      let marcheObjet12=this.marches.find(marche=>marche.id==this.macheid)
-      marcheObjet12.attribue = 2
+     
       marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
       // console.log(marcheObjet)
       this.modifierMarche(marcheObjet)
-      this.modifierMarche(marcheObjet12)
+   
       this.formEffetFinancier = {
         code_act:"",
         libelle_act:"",

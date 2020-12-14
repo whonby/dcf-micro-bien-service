@@ -2,7 +2,13 @@
   <!--top-Header-menu-->
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
+ <li title="Stock">
+                <router-link :to="{name:'ListeStockArticleVehicule'}" tag="a">
+                    <!-- <i class="icon-list"></i> -->
+                    <span class="text">GESTION DES STOCKS</span>
 
+                </router-link>
+            </li>
 <li class="dropdown" id="comptaMatiere">
         <a title="SAISIE & AFFECTATION" href="#" data-toggle="dropdown" data-target="#comptaMatiere" class="dropdown-toggle">
           <span class="text">SAISIE & AFFECTATION</span>
@@ -27,8 +33,13 @@
           
         </ul>
       </li>
-
-<li class="dropdown" id="comptaMatiere1">
+<li>
+                <router-link :to="{name:'ReparationVehicule'}" tag="a">
+                    <!-- <i class="icon-money"></!-->
+                    <span class="text">REPARATION VEHICULE</span>
+                </router-link>
+            </li>
+<!-- <li class="dropdown" id="comptaMatiere1">
         <a title="SAISIE & AFFECTATION" href="#" data-toggle="dropdown" data-target="#comptaMatiere1" class="dropdown-toggle">
           <span class="text">REPARATION</span>
           <b class="caret"></b>
@@ -52,7 +63,7 @@
             <li class="divider"></li>
           
         </ul>
-      </li>
+      </li> -->
 <li class="dropdown" id="comptaMatiere2">
         <a title="SAISIE & AFFECTATION" href="#" data-toggle="dropdown" data-target="#comptaMatiere2" class="dropdown-toggle">
           <span class="text">EXECUTION DES REPARATIONS</span>
@@ -67,13 +78,13 @@
             </router-link>
           </li>
             <li class="divider"></li>
-         <li>
+         <!-- <li>
             <router-link :to="{name: ''}" tag ="a">
               <i class="icon-check"></i>
               Mobiliers & Matériels
              
             </router-link>
-          </li>
+          </li> -->
             <li class="divider"></li>
           
         </ul>

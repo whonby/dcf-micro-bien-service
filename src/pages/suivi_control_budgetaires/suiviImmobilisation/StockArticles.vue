@@ -611,6 +611,8 @@ quantite: {
         articlestock_id: "",
         quantitestock: "",
         qteentrant1:"0",
+        
+        
       },
       search: ""
     };

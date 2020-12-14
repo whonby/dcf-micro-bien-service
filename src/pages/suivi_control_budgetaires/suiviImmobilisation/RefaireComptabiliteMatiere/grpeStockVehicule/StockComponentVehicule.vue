@@ -2,7 +2,7 @@
 <template>
    
       <div class="accordion" >
-          <div class="accordion-group widget-box" v-if="groupe.vehiculeua.length > 0 ">
+          <div class="accordion-group widget-box" v-if="AfficherParTypeStock.length > 0 ">
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
@@ -17,37 +17,30 @@
                  <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>N°identification</th>
-                    <th>N°immatriculation</th>
-                     <!-- <th>Immobilisation</th> -->
-                     <th>Type véhicule</th>
-                     <th>Marque</th>
-                    <th>Modèle</th>
-                     <th>Energie</th>
-                     <th>N°chassis</th>
-                     <th>N°serie</th>
-                    <th>Couleur</th>
-                     <th>Transmission</th>
-                     <th>Nombre portes</th>
-                     <th>Nombre place</th>
-                    <th>Puissance</th>
-                     <th>Etat vehicule</th>
                     
-                    
+                     
+                  
+                     <th>Famille</th>
+                   <th title="Initiale">Quantité Initiale</th>
+                    <th title="quantite en stock">Quantité Restant en stock</th>
+                     <th>Date d'entrée</th>
+                    <th title="quantite entrant">Quantité entrée</th>
+                    <th>Date de sortie</th>
+                    <th title="quantite sortant">Quantité sortie</th>
                     <th colspan="2">Action</th>
                      
                   </tr>
                 </thead>
                 <tbody>
-                   <VehiculeItem
+                   <StockItemVehicule
                         class="item"
-                        v-for="groupeElement in groupe.vehiculeua"
+                        v-for="groupeElement in AfficherParTypeStock"
                         :key="groupeElement.id"
                         :article="groupeElement"
-                      @modification="$emit('modification', $event)"
+                        @modification="$emit('modification', $event)"
                         @suppression="$emit('suppression', $event)"
 
-                    ></VehiculeItem>
+                    ></StockItemVehicule>
                 </tbody>
               </table>
               </div>
@@ -62,15 +55,15 @@
 
 
 <script>
-import VehiculeItem from './VehiculeItem'
+import StockItemVehicule from './StockItemVehicule'
 
 export default {
-    name: 'VehiculeItemComponent',
+    name: 'StockItemComponent',
      props: {
     groupe: Object,
   },
   components: {
-      VehiculeItem
+      StockItemVehicule
   },
   data: function () {
     return {
@@ -85,24 +78,27 @@ export default {
   computed: {
   
     isFolder: function () {
-      return this.groupe.vehiculeua &&
-        this.groupe.vehiculeua.length
+      return this.AfficherParTypeStock &&
+        this.AfficherParTypeStock.length
     },
 
     getNombreArticle(){
-        var nombre = this.groupe.vehiculeua.length
+        var nombre = this.AfficherParTypeStock.length
         if(nombre) return nombre
         return '0' 
     },
     iconClasses() {
       return {
-        'icon-plus': !this.isOpen && this.groupe.vehiculeua.length,
-        'icon-minus': this.isOpen && this.groupe.vehiculeua.length
-        //    'icon-folder-close': !this.isOpen && this.groupe.vehiculeua.length,
-        // 'icon-folder-open': this.isOpen && this.groupe.vehiculeua.length
+        'icon-plus': !this.isOpen && this.AfficherParTypeStock.length,
+        'icon-minus': this.isOpen && this.AfficherParTypeStock.length
+        //    'icon-folder-close': !this.isOpen && this.groupe.gestion_stock.length,
+        // 'icon-folder-open': this.isOpen && this.groupe.gestion_stock.length
       }
     },
 
+AfficherParTypeStock(){
+  return this.groupe.gestion_stock.filter(item=>item.typestockage == 1)
+}
    
   },
 

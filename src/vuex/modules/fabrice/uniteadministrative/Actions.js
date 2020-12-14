@@ -1522,7 +1522,7 @@ export function getStockArticleUa({ commit }) {
       axios
           .get("/StockArticle")
           .then(response => {
-              commit("GET_ALL_STOCKAGE", response.data);
+              commit("GET_ALL_STOCK_ARTICLE", response.data);
           })
           .catch(error => console.log(error));
   });
@@ -1534,7 +1534,7 @@ export function ajouterStockArticle({ commit,dispatch }, nouveau) {
       .post("/StockArticle", nouveau))
       .then(response => {
           if (response.status == 201) {
-              commit("AJOUTER_STOCKAGE", response.data);
+              commit("AJOUTER_STOCK_ARTICLE", response.data);
               dispatch('getStockArticle')
               dispatch('getAllUniteAdministrative')
               this.$app.$notify({
@@ -1551,7 +1551,7 @@ export function modifierStockArticle({ commit ,dispatch}, nouveau) {
   asyncLoading(axios
       .put("/StockArticle/" + nouveau.id,nouveau))
       .then(response => {
-          commit("MODIFIER_STOCKAGE", response.data);
+          commit("MODIFIER_STOCK_ARTICLE", response.data);
           dispatch('getStockArticle')
               dispatch('getAllUniteAdministrative')
           this.$app.$notify({
@@ -1566,7 +1566,7 @@ export function supprimerStockArticle({ commit,dispatch }, id) {
   this.$app.$dialog
       .confirm("Voulez vouz vraiment supprimer ?.")
       .then(dialog => {
-          commit("SUPPRIMER_STOCKAGE", id);
+          commit("SUPPRIMER_STOCK_ARTICLE", id);
           dispatch('getStockArticle')
               dispatch('getAllUniteAdministrative')
           // // dialog.loading(false) // stops the proceed button's loader
