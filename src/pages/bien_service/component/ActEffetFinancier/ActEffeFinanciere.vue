@@ -1530,7 +1530,7 @@ editAfficherMontantRetenueGarantie
                 <label class="control-label" >Taux Avance Demarrage</label>
                 <div class="controls">
                   <input
-                      type="number"  v-model="formEffetFinancier.taux_avance_demarrage"
+                      type="number"  v-model="editEffetFinancier.taux_avance_demarrage"
 
                       placeholder="saisir le taux Avance Demarrage"
                       class="span"
@@ -2028,7 +2028,7 @@ afficheNomEntreprise() {
           }
           return 0
         }
-      };
+      }; 
     },
 
     affichierIdActeFinancierDansActePlan() {

@@ -386,6 +386,279 @@
       <a data-dismiss="modal" class="btn" href="#">Fermer</a>
     </div>
   </div>
+
+
+    <div id="ajouterAct" class="modal hide grdirModalActeEffet" >
+    <div class="modal-header">
+      <button data-dismiss="modal" class="close" type="button">×</button>
+      <h3>Modifier Reception</h3>
+    </div>
+
+    <div class="widget-title">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#Identif">Info Marche</a></li>
+        <li class=""><a data-toggle="tab" href="#financ">Info Reception</a></li>
+      </ul>
+    </div>
+    <div class="widget-content tab-content">
+
+      <div id="Identif" class="tab-pane active">
+
+        <table class="table table-bordered table-striped">
+          <tr>
+              <td>
+
+              <div class="control-group">
+                <label class="control-label">N°Lot</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      :value="afficherNumeroLot(editreception.id)"
+                      class="span4"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            <td colspan="3">
+
+              <div class="control-group">
+                <label class="control-label">Objet</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      :value="afficherObjet(editreception.id)"
+                      class="span12"
+                      
+                  />
+                  
+                </div>
+
+
+              </div>
+
+
+            </td>
+          </tr>
+          <tr>
+              <td>
+
+              <div class="control-group">
+                <label class="control-label">Entreprise</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      
+                      class="span4"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">Date de debut d'execution prévisionnelle</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      :value="afficherDatedebutex(detail_marche.id)"
+                      class="span4"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">Date reception provisoire prévisionnelle</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      :value="afficherDatereception(detail_marche.id)"
+                      class="span4"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">Date de reception définitive prévisionnelle{{detail_marche.id}}</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      :value="afficherDatereceptiondefinitive(detail_marche.id)"
+                      class="span4"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="financ" class="tab-pane">
+  <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#MARCHE">MARCHE</a></li>
+        
+      </ul>
+      <div class="widget-content tab-content">
+
+      <div id="MARCHE" class="tab-pane active">
+         <table class="table table-bordered table-striped">
+           <tr>
+                <td>
+
+              <div class="control-group">
+                <label class="control-label">Période de garantie</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      
+                      class="span4"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">Date de debut d'execution réelle</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      
+                      class="span4"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">Date de reception provisoire réelle</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      
+                      class="span4"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">Date de reception définitive réelle</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      
+                      class="span4"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+           </tr>
+
+           <tr>
+                <td>
+
+              <div class="control-group">
+                <label class="control-label">Durée d'execution réel</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      
+                      class="span4"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">Ecart de réception provisoire</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      
+                      class="span4"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">Ecart de réception définitive</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      
+                      class="span4"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">Ecart d'execution</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      
+                      class="span4"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+           </tr>
+         </table>
+        
+      </div>
+      
+      
+      </div>
+      </div>
+
+
+    </div>
+
+    <div class="modal-footer">
+      <a  @click.prevent="modifierreceptionLocal"
+          class="btn btn-primary"
+          href="#"
+      >Valider</a>
+      <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+    </div>
+  </div>
         </div>
 </template>
 
@@ -710,38 +983,18 @@ afficherModalProcedureFacture() {
     
     },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-     
-
-    
+      modifierreceptionLocal() {
+          var nouvelObjet = {
+        ...this.editreception,
+        marche_id:this.editreception.marche_id,
  
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
+       };
+          this.ModifierReception(nouvelObjet);
+     this.$("#exampleModal").modal('hide');
+       this.editreception = {
+      
+      };
+      },
           
       formatageSomme:formatageSomme,
 

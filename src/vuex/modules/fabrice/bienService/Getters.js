@@ -7,6 +7,7 @@ export const avenants = state => state.avenants
 export const pays = state => state.pays
 export const choixprocedure = state => state.choixprocedure
 export const villes = state => state.villes
+export const receptionMarche = state => state.receptionMarche
 // export const decomptes = state => state.decomptes
 export const communes = state => state.communes
 export const typeCandidat = state => state.typeCandidat
@@ -1091,3 +1092,16 @@ export const getterLoadinMarche=state => state.loading_marche
 
 
 export const getterImageMarche=state => state.image_marche.sort((a, b) => (a.id > b.id) ? 1 : -1)
+
+
+
+export const getterFiltreCarteInfrastructure=state => state.marcheFiltreCarteInfrastructure
+export const getterInformationCarteInfrastructure=state => state.informationFiltreCarteInfrastructure
+
+/****
+ *  tableauBordFilter:"",
+ infoFiltreTableauBord:""
+ */
+
+export const getterListeMarcheTableauBordFiltre=state => state.tableauBordFilter
+export const getterInfoTableauBordFiltre=state => state.infoFiltreTableauBord

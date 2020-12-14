@@ -18,6 +18,37 @@ MODIFIER_MANDAT
 //     })
 // }
 
+ // get all document
+
+
+export const GET_ALL_RECEPTION= (state, tableau_document) =>{
+    state.receptionMarche = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_RECEPTION = (state, elementAjouter) => {
+    state.receptionMarche.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_RECEPTION = (state, elementModif)=>{
+    state.receptionMarche = state.receptionMarche.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+export const SUPPRIMER_RECEPTION = (state, id)=> {
+    state.receptionMarche = state.receptionMarche.filter(prest => prest.id !=id)
+}
+
+
+
 
 
 // export const SUPPRIMER_DECOMPTE = (state ,id) => {
@@ -2555,11 +2586,30 @@ export const GET_ALL_RESERVE_CF = (state, tableau_reserve_cf) =>{
 
 
 
-   export const MODIFIER_ACTE = (state, elementModif) => {
-    state.acteEffetFinanciers = state.acteEffetFinanciers.map(response => {
-        if (response.id == elementModif.id) {
-            response = { ...elementModif }
-        }
-        return response
-    })
+
+export const GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE = (state,objet) =>{
+    state.marcheFiltreCarteInfrastructure = objet
 }
+
+
+export const GET_INFORMATION_FILTRE_CARTE = (state, objet) =>{
+    state.informationFiltreCarteInfrastructure = objet
+}
+/**
+ *    tableauBordFilter:"",
+ infoFiltreTableauBord:""
+ * @param state
+ * @param objet
+ * @constructor
+ */
+
+
+export const GET_TABLEAU_BORD_FILTRE = (state, objet) =>{
+    state.tableauBordFilter = objet
+}
+
+export const GET_INFO_TABLEAU_BORD= (state, objet) =>{
+    state.infoFiltreTableauBord = objet
+}
+
+

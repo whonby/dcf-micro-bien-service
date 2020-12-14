@@ -24,7 +24,7 @@
           <div class="sidebar-tabs">
             <ul role="tablist"> <!-- top aligned tabs -->
               <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
-              <li><a href="#profile" role="tab"><i class="fa fa-bar-chart-o"></i></a></li>
+              <li><a href="#infoRegion" role="tab"><i class="fa fa-bar-chart-o"></i></a></li>
             </ul>
           </div>
           <div class="sidebar-content">
@@ -34,6 +34,18 @@
                 <div class="sidebar-close"><i class="fa fa-caret-left"></i></div>
               </h1>
                 <div class="span5">
+                    <label>Régions    <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a></label>
+                    <model-list-select style="background-color: rgb(255,255,255);"
+                                       class="wide"
+                                       :list="regions"
+                                       v-model="region"
+                                       option-value="id"
+                                       option-text="libelle"
+
+                                       placeholder="Régions"
+                    >
+
+                    </model-list-select>
                     <h6>Infrastructure</h6>
                     <label for="tous">
                         <input type="radio" v-model="infrastructure" value="" id="tous"> <span>Affiché tous  <b></b></span>
@@ -55,7 +67,7 @@
                     <label>Unite administrative <a href="#" @click.prevent="videUniteAdmin()" style="color: red" v-if="unite_administrative_id"><i class="fa fa-trash-o"></i></a></label>
                     <model-list-select style="background-color: rgb(255,255,255);"
                                        class="wide"
-                                       :list="uniteAdministratives"
+                                       :list="filtre_unite_admin"
                                        v-model="unite_administrative_id"
                                        option-value="id"
                                        option-text="libelle"
@@ -64,21 +76,13 @@
 
                     </model-list-select>
 
-
-                    <label>Régions    <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a></label>
-                    <model-list-select style="background-color: rgb(255,255,255);"
-                                       class="wide"
-                                       :list="regions"
-                                       v-model="region"
-                                       option-value="id"
-                                       option-text="libelle"
-
-                                       placeholder="Régions"
-                    >
-
-                    </model-list-select>
-
-
+                    <h6>Type Marches</h6>
+                    <label for="all_type">
+                        <input type="radio" v-model="type_marche" value="" id="all_type"> <span>Affiché tous  <b></b></span>
+                    </label>
+                    <label  v-for="item in typeMarches" :key="item.id" :for="'T'+item.id">
+                        <input type="radio" v-model="type_marche" :value="item.id" :id="'T'+item.id"> <span> {{item.libelle}} <b></b></span>
+                    </label>
 
                 </div>
 
@@ -113,10 +117,63 @@
               <h1 class="sidebar-header">Messages<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
             </div>
 
-            <div class="sidebar-pane" id="profile">
-              <h1 class="sidebar-header">Change graphique<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
-         
-            
+            <div class="sidebar-pane" id="infoRegion">
+              <h1 class="sidebar-header">{{nomUniteAdministrativeSelectionner}} - {{info_region.libelle}}<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
+                <div class="quick-actions_homepage">
+                    <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                    <td style="background: #00008b; color: #fff;">
+                        Montant Prevue
+                    </td>
+                    <td style="background: #733b8b; color: #fff;">
+                        Montant Approuve
+                    </td>
+                    </tr>
+                    <tr>
+                        <td style="background: #00008b; color: #fff;">
+                            {{formatageSomme(montantPrevuePasRegion(info_region.id))}}
+                        </td>
+                        <td style="background: #733b8b; color: #fff;">
+                            {{formatageSomme(4740000000)}}
+                        </td>
+                    </tr>
+                    </tbody>
+                        <tbody>
+                        <tr>
+                            <td style="background: #fc4d93; color: #fff;">
+                                Montant Execute
+                            </td>
+                            <td style="background: orangered; color: #fff;">
+                                Taux Execution
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background: #fc4d93; color: #fff;">
+                                {{formatageSomme(4110000000)}}
+                            </td>
+                            <td style="background: orangered; color: #fff;">
+                                {{formatageSomme(4740000000)}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                        <!--<ul class="quick-actions" >-->
+                    <!--<li class="bg_lb"> <a style="font-size: 10px" href="#">-->
+                        <!--{{formatageSomme(4110000000)}}<br> Montant Prevue</a> </li>-->
+                    <!--<li class="bg_lg " > <a href="#" style="font-size: 20px">-->
+                        <!--{{formatageSomme(54788885)}}<br> Montant Approuve </a> </li>-->
+                    <!--<li class="bg_ly" style="font-size: 10px"> <a href="#" style="font-size: 10px">  {{formatageSomme(54255411)}}<br> Montant Execute </a> </li>-->
+                    <!--<li class="bg_lo" > <a href="#" style="font-size: 10px">{{10}} %<br> Taux d'exécution</a> </li>-->
+                        <!--</ul>-->
+                </div>
+         <h6>Infrasctures</h6>
+<hr>
+                <h6>Type de Marche</h6>
+                <hr>
+
+                <h6>Liste des marches ({{getListeMarcheRegionsSelectionner(info_region.id).length}})</h6>
+                <hr>
             </div>
           </div>
 
@@ -146,7 +203,7 @@
                               <l-circle-marker v-for="l in localisation"
                                                  :key="l.id"
                                                  :lat-lng="l.latlng"
-                                                 @click="uniteAdmin(l.id,l.ville)"
+
                                                  :radius="1"
                                                  :color="l.color"
                                                  :fillColor="l.colorFill"
@@ -155,7 +212,7 @@
                                           
 
                                 >
-                                <l-tooltip>{{l.ville}}</l-tooltip>
+                                <l-tooltip  >{{l.ville}}</l-tooltip>
                                     <l-popup>
                                     <b>{{l.ville}}</b> <br>
                                     <div >
@@ -198,7 +255,7 @@
 import LControlFullscreen from 'vue2-leaflet-fullscreen';
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import VGeosearch from 'vue2-leaflet-geosearch';
-    import {mapGetters} from 'vuex'
+    import {mapGetters,mapActions} from 'vuex'
     import { /*latLng,*/ Icon, icon } from 'leaflet'
     import { LMap, LTileLayer, LIconDefault,LControlLayers,LPopup,LCircleMarker ,LTooltip} from "vue2-leaflet";
     import iconUrl from 'leaflet/dist/images/marker-icon.png'
@@ -210,6 +267,7 @@ import L from "leaflet.minichart"
 import ad from "leaflet-html-legend"
 import ad1 from "leaflet-easyprint"
 import moda from "leaflet-modal"
+import {noDCfNoAdmin} from "../../Repositories/Auth"
 //import ad2 from "leaflet-easyprint"
     export default {
         name: "Example",
@@ -233,6 +291,9 @@ import moda from "leaflet-modal"
                 {iconUrl, shadowUrl}
             ))
             return {
+                info_region:"",
+                infortion_sidbar_filter:"",
+                type_marche:"",
               slection_carte:0,
               objet_map:"",
               objet_leaflet:"",
@@ -358,6 +419,42 @@ import moda from "leaflet-modal"
                 ],
             };
         },
+        created(){
+
+            if(this.getterInformationCarteInfrastructure){
+                if(this.getterInformationCarteInfrastructure.infrastructure!=""){
+                    this.infrastructure=this.getterInformationCarteInfrastructure.infrastructure
+                }
+                if(this.getterInformationCarteInfrastructure.region_select_vmodel!=""){
+                    this.region=this.getterInformationCarteInfrastructure.region_select_vmodel
+                }
+                if(this.getterInformationCarteInfrastructure.type_marche!=""){
+                    this.type_marche=this.getterInformationCarteInfrastructure.type_marche
+                }
+                if(this.getterInformationCarteInfrastructure.unite_administrative!=""){
+                    this.unite_administrative_id=this.getterInformationCarteInfrastructure.unite_administrative
+                }
+
+                this.getterInformationCarteInfrastructure.infrastructure=''
+                this.getterInformationCarteInfrastructure.region_select_vmodel=""
+                this.getterInformationCarteInfrastructure.type_marche=""
+                this.getterInformationCarteInfrastructure.unite_administrative=""
+//                let objet={
+//                    region:"",
+//                    infrastructure:"",
+//                    unite_administrative:"",
+//                    type_marche:"",
+//                    region_select_vmodel:""
+//                }
+//                let objet2=""
+//
+//                this.supprmieMarcheFiltreCarteInfrastructure(objet2)
+//                this.supprmiInfoFiltreCarteInfrastructure(objet)
+            }
+
+
+          //console.log(this.listeMarcheUniteAdmin)
+        },
 
     computed: {
 // methode pour maper notre guetter
@@ -369,11 +466,101 @@ import moda from "leaflet-modal"
             "uniteAdministratives",
             "getterBudgeCharge"
         ]),
-        ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise","getActeEffetFinancierPersonnaliser45"]),
-          regions(){
-      return this.getterLocalisationGeoAll.filter(item=>item.structure_localisation_geographique.niveau==2);
-    },
+        ...mapGetters("bienService", ['marches',"typeMarches","engagements",
+            "getMandatPersonnaliserVise","getActeEffetFinancierPersonnaliser45",
+            "getterInformationCarteInfrastructure","getterFiltreCarteInfrastructure",
+            "supprmieMarcheFiltreCarteInfrastructure","supprmiInfoFiltreCarteInfrastructure"]),
 
+        ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+          regions(){
+              return this.localisations_geographiques.filter(item=>{
+                  if(item.longitude!=null && item.structure_localisation_geographique.niveau==2 ){
+                      return item
+                  }
+              });
+      },
+        noDCfNoAdmin:noDCfNoAdmin,
+        filtre_unite_admin() {
+            if(this.noDCfNoAdmin){
+                let colect=[];
+                if(this.getterUniteAdministrativeByUser.length>0){
+                    this.uniteAdministratives.filter(item=>{
+                        let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                        if (val!=undefined){
+                            colect.push(item)
+                            return item
+                        }
+                    })
+                }
+
+                return colect
+            }
+            return this.uniteAdministratives
+
+        },
+
+        listeMarcheUniteAdmin(){
+             let colect=[]
+            let vM=this;
+             this.filtre_unite_admin.forEach(function (value) {
+                 let objet=vM.marches.filter(item=>{
+                     if(item.parent_id!=null && item.unite_administrative_id==value.id){
+                       //  console.log(item.parent_id)
+                         return item
+                     }
+                 }
+                     )
+                   if(objet!=undefined){
+                       objet.forEach(function (val) {
+                           colect.push(val)
+                       })
+                   }
+
+
+             })
+            return colect
+        },
+        /**Traitement afficharche et statique marche en fonction des region
+         *
+         *
+         * @returns {function(*)}
+         */
+        getListeMarcheRegionsSelectionner(){
+            return region=>{
+                if(region!=""){
+                    return this.objetMarchePasUniteOuRegion.filter(item=>item.localisation_geographie_id==region)
+                }
+            }
+        },
+
+        montantPrevuePasRegion(){
+            return region=>{
+                if(region!=""){
+                    let initialValue = 0;
+                     let objet=this.getListeMarcheRegionsSelectionner(region)
+
+                    let montantPrevue = objet.reduce(function (total, currentValue) {
+                        return total + parseFloat(currentValue.montant_marche);
+                    }, initialValue);
+                     return montantPrevue
+                }
+            }
+        },
+
+
+
+        nomUniteAdministrativeSelectionner(){
+            let vM=this;
+            if(vM.unite_administrative_id!=""){
+                let objet=this.uniteAdministratives.find(item=>item.id==vM.unite_administrative_id)
+                return objet.libelle
+            }
+            return null
+        },
+        /**
+         *
+         * @returns {function(*)}
+         */
     departements(){
       return id=>{
 
@@ -439,11 +626,11 @@ montant_reel_marche =montant_reel_marche+ 0
 
    ListeMarchePasUA(){
       let vM=this;
-      let objet=this.marches.filter(item=>item.parent_id!='')
+      let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!='')
 
 
       if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!='')
+        objet =this.listeMarcheUniteAdmin.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!='')
       }
 
       
@@ -453,10 +640,10 @@ montant_reel_marche =montant_reel_marche+ 0
 
     totalMontantPrevisionnelPasMarche(){
        let vM=this;
-      let objet=this.marches.filter(item=>item.parent_id!='')
+      let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!='')
       
            if(vM.unite_administrative_id!=""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!="")
+        objet =this.listeMarcheUniteAdmin.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!="")
         }
 
            let initeVal = 0;
@@ -474,13 +661,13 @@ montant_reel_marche =montant_reel_marche+ 0
               let objet;
 
                if(vM.unite_administrative_id!=""){
-            objet =this.marches.filter(item=>{
+            objet =this.listeMarcheUniteAdmin.filter(item=>{
                     if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==regions && item.parent_id!=""){
             return item
                }
             })
              }else{
-                objet =this.marches.filter(item=>item.localisation_geographie_id==regions && item.parent_id!="")
+                objet =this.listeMarcheUniteAdmin.filter(item=>item.localisation_geographie_id==regions && item.parent_id!="")
              }
 
            let initeVal = 0;
@@ -500,7 +687,7 @@ montant_reel_marche =montant_reel_marche+ 0
           let vM=this;
           let objet;
         if(unite_administrative_id!=""){
-                objet =this.marches.filter(item=>{
+                objet =this.listeMarcheUniteAdmin.filter(item=>{
                     if(item.unite_administrative_id==unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
             return item
                }
@@ -516,7 +703,7 @@ montant_reel_marche =montant_reel_marche+ 0
            }
 
            if(vM.infrastructure!=""){
-                 objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!="")
+                 objet =this.listeMarcheUniteAdmin.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!="")
           
                 let initeVal = 0;
                   let montant=  objet.reduce(function (total, currentValue) {
@@ -535,7 +722,7 @@ montant_reel_marche =montant_reel_marche+ 0
         if(regions!=""){
               let objet;
 
-              objet =this.marches.filter(item=>{
+              objet =this.listeMarcheUniteAdmin.filter(item=>{
                    if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==regions && item.parent_id!=""){
                    return item
                     }
@@ -551,62 +738,158 @@ montant_reel_marche =montant_reel_marche+ 0
 
       }
   },
+        objetMarchePasUniteOuRegion(){
+            let vM=this;
+            let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!="")
 
-      objetMarchePasUniteOuRegion(){
-      let vM=this;
-      let objet=this.marches.filter(item=>item.parent_id!="")
+            //retourne les marches d'une region selectionner
+            if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure=="" && vM.type_marche==""){
+                objet =objet.filter(item=>{
+                    if(item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                        return item
+                    }
+                })
+
+            }
+
+            //retourne les marches d'une unite administrative selectionner
+            if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure=="" && vM.type_marche==""){
+                objet =objet.filter(item=>{
+                    if(item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
+                        return item
+                    }
+                })
+            }
+
+            //retourne les marches d'une une infrastucture selectionner
+            if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche==""){
+                objet =objet.filter(item=>{
+                    if(item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                        return item
+                    }
+                })
+            }
 
 
+            //retourne les marches d'un type de marché selectionner
+            if (vM.infrastructure=="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche!=""){
+                objet =objet.filter(item=>{
+                    if(item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                        return item
+                    }
+                })
+            }
 
 
+            //retourne les marches de region et unite adminstrative selectionner
+            if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche==""){
+                objet =objet.filter(item=>{
+                    if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                        return item
+                    }
+                })
+            }
 
-      if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.localisation_geographie_id==vM.region && item.parent_id!="")
 
-      }
+            //retourne les marches d'une infrastructure et unite adminstrative selectionner
 
-      if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!="")
-      }
+            if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche==""){
+                objet =objet.filter(item=>{
+                    if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                        return item
+                    }
+                })
+            }
 
-      if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region==""){
-        objet =this.marches.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!="")
-      }
 
-      if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure==""){
-        objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-            return item
-          }
-        })
-      }
+            //retourne les marches d'un type marche et unite adminstrative selectionner
 
-      if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!=""){
-        objet =this.marches.filter(item=>{
-          if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-            return item
-          }
-        })
-      }
+            if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
+                objet =objet.filter(item=>{
+                    if(item.unite_administrative_id==vM.unite_administrative_id && item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                        return item
+                    }
+                })
+            }
 
-      if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!=""){
-        objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-            return item
-          }
-        })
-      }
 
-      if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!=""){
-        objet =this.marches.filter(item=>{
-          if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-            return item
-          }
-        })
-      }
+            //retourne les marches d'une region et infrastructure selectionner
+            if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" &&  vM.type_marche==""){
+                objet =objet.filter(item=>{
+                    if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                        return item
+                    }
+                })
+            }
 
-      return objet
-    },
+            //retourne les marches d'une infrasture et type marche selectionner
+            if(vM.unite_administrative_id=="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
+                objet =objet.filter(item=>{
+                    if(item.infrastructure_id==vM.infrastructure && item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                        return item
+                    }
+                })
+            }
+
+
+            //retourne les marches d'un type marche et regions selectionner
+            if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!=""){
+                objet =objet.filter(item=>{
+                    if(item.localisation_geographie_id==vM.region && item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                        return item
+                    }
+                })
+            }
+
+            //retourn les marches d'une UA, REGION et INFRASTRUCTURE
+
+            if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche=="" ){
+                objet =objet.filter(item=>{
+                    if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                        return item
+                    }
+                })
+            }
+
+
+            //retourn les marches d'une UA, REGION et TYPE MARCHE
+            if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!="" ){
+                objet =objet.filter(item=>{
+                    if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                        return item
+                    }
+                })
+            }
+
+            //retourn les marches d'une UA, INFRA et TYPE MARCHE
+            if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!="" ){
+                objet =objet.filter(item=>{
+                    if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                        return item
+                    }
+                })
+            }
+
+            //retourn les marche INFRA, REGIONS,TYPE MARCHE
+            if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
+                objet =objet.filter(item=>{
+                    if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                        return item
+                    }
+                })
+            }
+
+            //retourn les marche INFRA, REGIONS,TYPE MARCHE,UA
+            if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
+                objet =objet.filter(item=>{
+                    if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
+                        return item
+                    }
+                })
+            }
+         //   console.log(objet)
+            return objet
+        },
 
     dataBar(){
       let vM=this
@@ -976,6 +1259,9 @@ montant_reel_marche =montant_reel_marche+ 0
 
     },
         methods: {
+            ...mapActions('bienService',["ajouterListeMarcheFiltreCarteInfrastructure",
+                "ajouterInfoFiltreCarteInfrastructure",
+                ]),
            videUniteAdmin(){
       this.unite_administrative_id=""
       // this.zoom=5
@@ -992,23 +1278,23 @@ montant_reel_marche =montant_reel_marche+ 0
     },
     videInfrastructure(){
       this.infrastructure=""
-      // this.zoom=5;
-      // this.objetUnite=""
-      // this.info_sidebar_marche.close()
-      // this.info_sidebar_marche.disablePanel('infomarche');
     },
 
-    deleteLeafleMiniCharts(map) {
+            /**
+             * Fonction qui supprimer les minichart
+             * @param map
+             */
+            deleteLeafleMiniCharts(map) {
 
-        map.eachLayer(
-            function(t) {
-              if (t._chart) { t._chart.remove(); }
-            }
-        );
+                map.eachLayer(
+                    function(t) {
+                      if (t._chart) { t._chart.remove(); }
+                    }
+                );
 
-   },
+           },
 
-formatageSomme:formatageSomme,
+            formatageSomme:formatageSomme,
             zoomUpdate(zoom) {
                 this.currentZoom = zoom;
             },
@@ -1048,7 +1334,34 @@ formatageSomme:formatageSomme,
             ready: (e) => console.log('ready', e),
 
 
+            /***
+             * Fonction qui navigue ver la vue *
+             * */
+  selctionRegion(id){
 
+      let objet={
+          region:id,
+          infrastructure:this.infrastructure,
+          unite_administrative:this.unite_administrative_id,
+          type_marche:this.type_marche,
+          region_select_vmodel:this.region
+      }
+     // console.log(this.objetMarchePasUniteOuRegion)
+
+      let objetMarche=this.objetMarchePasUniteOuRegion.filter(item=>item.localisation_geographie_id==id)
+      this.ajouterListeMarcheFiltreCarteInfrastructure(objetMarche)
+      this.ajouterInfoFiltreCarteInfrastructure(objet)
+
+      this.$router.push({
+          name: 'DetailCarteMarche',
+          params: { id: id }
+      })
+      //vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!=""
+//      this.info_region= this.localisations_geographiques.find(item=>item.id==id)
+//      // info_region console.log(this.infortion_sidbar_filter)
+//      this.infortion_sidbar_filter.enablePanel('infoRegion');
+//      this.infortion_sidbar_filter.open('infoRegion');
+  },
   integrationChartPasRegisonSurCarte(){
                 let vm=this
                 let arrayBar=[]
@@ -1172,9 +1485,12 @@ formatageSomme:formatageSomme,
                                width:width,
                                height:height,
                               // labels:arrayLabele
-                                });
+                                }).on("click",function (event) {
+                                  console.log(event)
+                                  vm.selctionRegion(value.id)
+                              });
                             
-                          vm.objet_map.addLayer(myBarChart);
+                          vm.objet_map.addLayer(myBarChart)
                  
                //  vm.objet_leaflet.marker(value.latlng).bindTooltip(value.ville, { permanent: true, offset: [0, 12] }).addTo(vm.objet_map);
 //vm.objet_leaflet.marker(value.latlng).bindLabel(value.ville).addTo(vm.objet_map);
@@ -1182,7 +1498,7 @@ formatageSomme:formatageSomme,
 vm.objet_leaflet.circleMarker(value.latlng, {
     radius: 1,
     fillColor: "#ff7800",
-    color: "#000",
+    color: "#ff7800",
     weight: 1,
     opacity: 1,
     fillOpacity: 0.8,
@@ -1192,7 +1508,7 @@ direction: 'bottom',
  sticky: true,
     offset: [0, 10],
     opacity: 0.75,
-    className: 'leaflet-tooltip' }).addTo(vm.objet_map);
+    className: 'leaflet-tooltip' }).addTo(vm.objet_map)
                           arrayBar=[]
                           arrayColor=[]
                          arrayLabele=[]
@@ -1214,7 +1530,18 @@ direction: 'bottom',
 
             },
         },
+
+
         watch: {
+            type_marche:function (value) {
+                console.log(value);
+
+                this.deleteLeafleMiniCharts(this.objet_map)
+                this.integrationChartPasRegisonSurCarte()
+//                this.infortion_sidbar_filter.close();
+//                this.infortion_sidbar_filter.disablePanel('infoRegion');
+//                this.infortion_sidbar_filter.open("home")
+            },
           slection_carte:function(value){
                  console.log(value)
                  if(value==0){
@@ -1223,6 +1550,7 @@ direction: 'bottom',
                  }else{
                    this.deleteLeafleMiniCharts(this.objet_map)
                 //this.integrationChartPasRegisonSurCarte()
+
                  }
           },
           type_minichart: function (value) {
@@ -1235,11 +1563,17 @@ direction: 'bottom',
                 console.log(value);
                 this.deleteLeafleMiniCharts(this.objet_map)
                 this.integrationChartPasRegisonSurCarte()
+//                this.infortion_sidbar_filter.close();
+//                this.infortion_sidbar_filter.disablePanel('infoRegion');
+//                this.infortion_sidbar_filter.open("home")
             },
             region: function (value) {
                 console.log(value);  
              this.deleteLeafleMiniCharts(this.objet_map)
                 this.integrationChartPasRegisonSurCarte()
+//                this.infortion_sidbar_filter.close();
+//                this.infortion_sidbar_filter.disablePanel('infoRegion');
+//                this.infortion_sidbar_filter.open("home")
             },
             unite_administrative_id: function (value) {
                 console.log(value);  
@@ -1247,6 +1581,9 @@ direction: 'bottom',
               this.deleteLeafleMiniCharts(this.objet_map)
              //  this.objet_map.on('overlayremove', this.hide_charts())
                 this.integrationChartPasRegisonSurCarte()
+//                this.infortion_sidbar_filter.close();
+//                this.infortion_sidbar_filter.disablePanel('infoRegion');
+//                this.infortion_sidbar_filter.open("home")
             },
 
         },
@@ -1288,6 +1625,8 @@ console.log(this.getActeEffetFinancierPersonnaliser45)
 
     var sidebar = sid.control.sidebar('map10', panel_options).addTo(map);
             sidebar.open("home")
+            this.infortion_sidbar_filter=sidebar
+            this.infortion_sidbar_filter.disablePanel('infoRegion');
 var panelContent = {
       id: 'userinfo',                     // UID, used to access the panel
       tab: '',  // content can be passed as HTML string,

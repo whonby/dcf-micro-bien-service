@@ -5,6 +5,7 @@ const defaultState = {
     banques:[],
     codesFonctions:[],
     comptes:[],
+    receptionMarche:[],
    
     lots:[],
     typePrestations:[],
@@ -98,7 +99,13 @@ const defaultState = {
     image_marche:[],
     typeOrdrePaiement:[],
     loading_marche:true,
-  
+    marcheFiltreCarteInfrastructure:"",
+    informationFiltreCarteInfrastructure:"",
+
+
+
+    tableauBordFilter:"",
+    infoFiltreTableauBord:""
 
 }
 

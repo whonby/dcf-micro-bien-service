@@ -49,11 +49,11 @@
         </tr>
       </table>
       
-      <div id="loginbox" class="spinner-border text-primary">
+      <div id="loginbox" class="spinner-border text-primary" >
 
 
         <!-- <h3 style="text-align:center;color:#ffffff;">TABLEAU DE BORD GENERAL</h3> -->
-        <div class="row-fluid form">
+        <div class="row-fluid form " >
       <div class="span16">
         <div class="quick-actions_homepage">
 
@@ -123,6 +123,9 @@ export default {
     }
   },
 created(){
+    let objet=localStorage.getItem('Users');
+    let user=JSON.parse (objet)
+    this.getUniteAdminUser(user.id)
           this.getGestionModules()
           this.getInfrastructure()
           this.getTypeOrdrePaiement()

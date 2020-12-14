@@ -161,6 +161,82 @@ export function ajouterCandidatSelectionner({commit}, formData){
 }
 
 
+export  function getReception({commit}){
+  queue.push(() => axios.get('/ReceptionMarche').then(tony => {
+      commit('GET_RECEPTION', tony.data)
+  }).catch(error => console.log(error)))
+}
+
+
+
+
+export function ajouterReception({commit}, formData){
+  asyncLoading(axios.post('/ajouter_ReceptionMarche',formData)).then(response =>{
+      if(response.status == 201){
+        console.log(response.data)
+          commit('AJOUTER_RECEPTION', response.data)
+          
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// ajouter role membrecojo
+// export function ajouterRolemembreCojo({commit}, objetAjout){
+// asyncLoading(axios.post('/ajouter_ListeRoleMembreCojo' ,{
+  // code:objetAjout.code,
+  // libelle:objetAjout.libelle,
+//  
+// })).then(tony => {
+  //  if(tony.status == 201){
+      //  commit('AJOUTER_ROLE_MEMBRECOJO', tony.data)
+// 
+      //  this.$app.$notify({
+          // title: 'success ',
+          // text: 'Enregistrement effectué avec success !',
+          // type:"success"
+        // })
+  //  }
+// }).catch(error => console.log(error))
+// }
+// supprimer role membrecojo
+export function supprimerReception({commit}, id){
+
+  this.$app.$dialog
+  .confirm("Voulez vouz vraiment supprimer ?.")
+  .then(dialog => {
+     commit('SUPPRIMER_RECEPTION', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/supprimer_ReceptionMarche/' + id).then(() => dialog.close() )   
+  })
+}
+//modifier role membrecojo
+export function modifierReception({commit}, elementModifie){
+
+ asyncLoading( axios.put('/modifier_ReceptionMarche/' + elementModifie.id ,{
+  code:elementModifie.code,
+  libelle:elementModifie.libelle,
+
+})).then(response => {
+      commit('MODIFIER_RECEPTION', response.data)
+
+      this.$app.$notify({
+          title: 'success ',
+          text: 'Modification effectué avec success !',
+          type:"success"
+        })
+  }).catch(error => console.log(error))
+ 
+}
+
+
+
+
 
  // liste role membrecojo
  export  function getRolemembreCojo({commit}){
@@ -4654,29 +4730,51 @@ export function modifierMotifPassation({commit}, element_modifie){
 
 
 export function supprimerMotifPassation({commit},id){
-  
   this.$app.$dialog
   .confirm("Voulez vouz vraiment supprimer ?.")
   .then(dialog => {
      commit('SUPPRIMER_MOTIF_PASSATION', id)
-    // // dialog.loading(false) // stops the proceed button's loader
       axios.delete('/motif_passation/' + id).then(() => dialog.close() )   
   })
 }
 
 
+/**
+ * Information carte
+ */
+
+export function ajouterListeMarcheFiltreCarteInfrastructure({commit},formData){
+    commit('GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE', formData)
+}
+
+export function ajouterInfoFiltreCarteInfrastructure({commit},formData){
+    commit('GET_INFORMATION_FILTRE_CARTE', formData)
+}
+
+export function supprmieMarcheFiltreCarteInfrastructure({commit},formData){
+    commit('GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE',formData)
+}
+
+export function supprmiInfoFiltreCarteInfrastructure({commit},formData){
+    commit('GET_INFORMATION_FILTRE_CARTE',formData)
+}
 
 
-export function modifierActeEffet({commit}, element_modifie){
-  asyncLoading( axios.put('/acte_finnanciers/'+ element_modifie.id, element_modifie))
-   .then(response => {
-    commit('MODIFIER_ACTE', response.data)
-        // dispatch('getMandat')
-         this.$app.$notify({
-           title: 'success ',
-           text: 'Modification effectué avec succès!',
-           type:"success"
-         })
-   }).catch(error => console.log(error))
-  // console.log(element_modifie)
-} 
+/**
+ *
+ export const GET_TABLEAU_BORD_FILTRE = (state, objet) =>{
+    state.tableauBordFilter = objet
+}
+
+ export const GET_INFO_TABLEAU_BORD= (state, objet) =>{
+    state.infoFiltreTableauBord = objet
+}
+ */
+
+export function ajouterTableauBordFiltre({commit},formData){
+    commit('GET_TABLEAU_BORD_FILTRE', formData)
+}
+
+export function ajouterInfoTableauBordFiltre({commit},formData){
+    commit('GET_INFO_TABLEAU_BORD', formData)
+}

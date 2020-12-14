@@ -72,250 +72,250 @@ export default {
   })
   },
  created(){
-    let objet=localStorage.getItem('Users');
-    let user=JSON.parse (objet)
-    this.getGestionModules()
-    this.getTypeOrdrePaiement()
-    this.getInfrastructure()
-    this.getAffectation()
-this.getFormeJuridiques()
-this.getRegimeImpositions()
-    this.getRoles()
-    this.getUtilisateurs()
-    this.getEquipeCF()
-    this.getPlanPassationMarche()
-    this.getRapport()
-      this.getBudgeChager()
-      this.getLigneExempter()
 
-   this.getLocalisationGeographiqueAll()
-      this.getExercicesBudgetaires()
-      this.getTaux()
-      this.getModePaiement()
-   this.getTitres()
-   this.getNatureSection()
-   this.getSection()
-   this.getStructureProgramme()
-   this.getPlanProgramme()
-    this.getStructurePays()
-   this.getPlanPays()
-   this.getPlanOrganigrammeUa()
-   this.getStructureAdministrative()
-   this.getServiceGestionnaire()
-   this.getStructureGeographique()
-   this.getLocalisationGeographique()
-   this.getChapitre()
-   this.getStructureFonctionnelle()
-   this.getPlanFonctionnelle()
-   this.getStructureDecision()
-   this.getPlanDecision()
-   this.getStructureActe()
-   this.getPlanActe()
-   this.getTypeconges()
-   this.getlisteNaturePrix()
-   this.getSourceFinancement()
-   this.getTypeFinancement()
-   this.getStructureBudgetaire()
-   this.getPlanBudgetaire()
-    this.getStructureActivite()
-    this.getPlanActivite()
-    this.getGrandeNature()
-    this.getTypeUniteAdministrative()
-    // this. getPlanActivite()
-    this.getAllUniteZone()
-    
-    this.getAllHistoriqueTransfert()
-    this.getUnite()
-    this.getZone()
-    this.getBanque()
-    this.getAgence()
-    this.getCompte()
-    this.getPays()
-this.getVille()
-this.getCommune()
-this.getChoixProcedure()
-this.getTransmission()
-this.getCotation()
-this.getOuverture()    
-this.getSanction()
-this.getAllRealiteServiceFait()
-     this.getAllLiquidation()
-     this.getAllBudgetEclate()
-// this.getTypeProcedure()
-
-// les get des marches hors sib
-
-this.getMarcheHorSib()
-this.getOpProvisoire()
-this.getRealiteServiceHors()
-
-
-
-
-
-
-
-    this.getUniteAdminUser(user.id)
-
-this.getTypeCandidat();
-this.getTypeAppel()
-
-
-
-
-
-    
-      // this.getAllTypeTextes();
-    this.getAllUniteAdministrative();
-     
-     this.getAllBanqueUa()
-     this.getAllDecompteFacture()
-       this.getStructureOrganigrammeUa()
- 
-    // this.getAllArchivageDocument();
-this.getAllDirection()
-this.getAllServiceua()
-this.getAllFonction()
-this.getAllBanqueUa()
-this.getFonctionBudgetaire()
-this.getDossierCandidatPersonnel()
-      this.getListeSalaireActuelAll()
-    this.getTypeSalarie()
-        this.getTypeActPersonnel()
-        this.getFonctions()
-       this.getCategorieGrade()
-this.getFamilleFonction()
-this.getSituationMatrimonial()
-this.getContratResilie()
-this.getClassificationGradeFonction()
-        this.getNiveauEtude()
-        this.getTypeContrat()
-        this.getClasses()
-        this.getEchelons()
-        this.getGrades()
-        this.getActeur()
-        this.getNbrActeurAcrediteTaux()
-        this.getActPersonnel()
-        this.getConges();
-        this.allActeurDepense()
-        this.getpaiementPersonnel()
-        
-         this.getActeurFinContratAndActivite()
-        this.getordrepaiement()
-        this.getSalaire()
-            /**Gestion des marche*/
-            this.getPermissionConge()
-      this.getTypeMarche()
-      // this.s()
-      this.getSauvegardePhoto()
-      this.getSecteurActivite()
-      this.getEntreprise()
-      this.getHistoriqueEntreprise()
-      this.getEtapeMarche()
-      this.getDocumentPTBAPPM()
-    this.getMarcheContrat()
-    this.getPresenceCF()
-    this.getDocumentPresence()
-    this.getNombreMarcheByProcedure()
-this.getMarcheContratExecution()
-
-    this.getSourceFinnancementByMarche()
-      /**Fin gestion des marche**/
-this.getAllHistoriqueBudgetGeneral()
-      /**
-       * suivi des immo
-       */
-       this.getAllNatureEntre();
-      this.getAllCauseInactivite();
-      this.getAllEtatImmo();
-    this.getAllService();
-    this.getAllEquipement();
-    this.getAllFamille();
-    this.getAllArticles();
-    this.getAllNormeImmob();
-    this.getAllNormeArticle();
-    this.getAllStock();
-    this.getAllBesoinImmo();
-    this.getAllImmobilisation();
-    this.getAllHistoAffectation();
-    this.getAllDemandeMateriel();
-    this.getAllHistoAffectationService();
-    
-    //this.getAllAmortissement();
-      /**
-       * this.
-       * fin suivi des immo
-       */
-
-      /**
-       * missions
-       */
-       this.getCategorieMission()
-     this.getNormeMission()
-   
-      this.getMission()
-       this.getHistoriqueMission() 
-this.getAllBudgetGeneral()
-this.getAllTransfert()
- // debut du module de bien && service
-
-this.getBailleur()
-this.getTypeFacture()
-this.getTypeActeDepense()
-this.getTypeActeEffetFinancier()
-this.getTypeAnalyse()
-this.getTypePrestation()
-this.getCondition()
-this.getTextJuridique()
-this.getAutreTextJuridique()
-this.getTypeTextJuridique()
-this.getMotifDecision()
-this.getDocumentProcedure()
-// this.getDecisionMarche()
-
-// this.getDecisionMarche()
-this.getActeEffetFinancier()
- this.getFacture()
-this.getTypeProcedures()
-this.getTypeMarches()
-this.getMarche()
-this.getModePassations()
-this.getProcedurePassation()
-this.getEngagement()
-this.getExecutionMarche()
-this.getMandat()
-this.getRapportJugement()
-this.getCandidatSelectionner()
-this.getDocument()
- this.getRolemembreCojo()
-
-    this.getAppelOffre()
-this.getMarche()
-    this.getLot()
-    this.getModePassations()
-    this.getDossierCandidat()
-    this.getOffreFinancier()
-    this.getOffreTechnique()
-this.getLettreInvitation()
-    this.getMandater()
-    this.getCojo()
-    this.getAnalyseDossier()
-    this.getDemandeAno()
-    this.getAnalyseDMP()
-    this.getAnoDMPBailleur()
-    this.getObservationBailleur()
-
-   this.getAvenant()
-this.getImageMarche()
-    this.getMarcheBailleur()
-this.getMembreCojo()
-    this.getProceVerbal()
-      this.getEcheances()
-      this.getReserveCf()
-      this.getArnmp()
-      this.getOrganeDecision()
-      this.getNaturePrix()
-      this.getMotifPassation()
+//    this.getGestionModules()
+//    this.getTypeOrdrePaiement()
+//    this.getInfrastructure()
+//    this.getAffectation()
+//this.getFormeJuridiques()
+//this.getRegimeImpositions()
+//    this.getRoles()
+//    this.getUtilisateurs()
+//    this.getEquipeCF()
+//    this.getPlanPassationMarche()
+//    this.getRapport()
+//      this.getBudgeChager()
+//      this.getLigneExempter()
+//
+//   this.getLocalisationGeographiqueAll()
+//      this.getExercicesBudgetaires()
+//      this.getTaux()
+//      this.getModePaiement()
+//   this.getTitres()
+//   this.getNatureSection()
+//   this.getSection()
+//   this.getStructureProgramme()
+//   this.getPlanProgramme()
+//    this.getStructurePays()
+//   this.getPlanPays()
+//   this.getPlanOrganigrammeUa()
+//   this.getStructureAdministrative()
+//   this.getServiceGestionnaire()
+//   this.getStructureGeographique()
+//   this.getLocalisationGeographique()
+//   this.getChapitre()
+//   this.getStructureFonctionnelle()
+//   this.getPlanFonctionnelle()
+//   this.getStructureDecision()
+//   this.getPlanDecision()
+//   this.getStructureActe()
+//   this.getPlanActe()
+//   this.getTypeconges()
+//   this.getlisteNaturePrix()
+//   this.getSourceFinancement()
+//   this.getTypeFinancement()
+//   this.getStructureBudgetaire()
+//   this.getPlanBudgetaire()
+//    this.getStructureActivite()
+//    this.getPlanActivite()
+//    this.getGrandeNature()
+//    this.getTypeUniteAdministrative()
+//    // this. getPlanActivite()
+//    this.getAllUniteZone()
+//
+//    this.getAllHistoriqueTransfert()
+//    this.getUnite()
+//    this.getZone()
+//    this.getBanque()
+//    this.getAgence()
+//    this.getCompte()
+//    this.getPays()
+//this.getVille()
+//this.getCommune()
+//this.getChoixProcedure()
+//this.getTransmission()
+//this.getCotation()
+//this.getOuverture()
+//this.getSanction()
+//this.getAllRealiteServiceFait()
+//     this.getAllLiquidation()
+//     this.getAllBudgetEclate()
+//// this.getTypeProcedure()
+//
+//// les get des marches hors sib
+//
+//this.getMarcheHorSib()
+//this.getOpProvisoire()
+//this.getRealiteServiceHors()
+//
+//
+//
+//
+//
+//
+//
+//
+    // this.getUniteAdminUser(user.id)
+//
+//this.getTypeCandidat();
+//this.getTypeAppel()
+//
+//
+//
+//
+//
+//
+//      // this.getAllTypeTextes();
+//    this.getAllUniteAdministrative();
+//
+//     this.getAllBanqueUa()
+//     this.getAllDecompteFacture()
+//       this.getStructureOrganigrammeUa()
+//
+//    // this.getAllArchivageDocument();
+//this.getAllDirection()
+//this.getAllServiceua()
+//this.getAllFonction()
+//this.getAllBanqueUa()
+//this.getFonctionBudgetaire()
+//this.getDossierCandidatPersonnel()
+//      this.getListeSalaireActuelAll()
+//    this.getTypeSalarie()
+//        this.getTypeActPersonnel()
+//        this.getFonctions()
+//       this.getCategorieGrade()
+//this.getFamilleFonction()
+//this.getSituationMatrimonial()
+//this.getContratResilie()
+//this.getClassificationGradeFonction()
+//        this.getNiveauEtude()
+//        this.getTypeContrat()
+//        this.getClasses()
+//        this.getEchelons()
+//        this.getGrades()
+//        this.getActeur()
+//        this.getNbrActeurAcrediteTaux()
+//        this.getActPersonnel()
+//        this.getConges();
+//        this.allActeurDepense()
+//        this.getpaiementPersonnel()
+//
+//         this.getActeurFinContratAndActivite()
+//        this.getordrepaiement()
+//        this.getSalaire()
+//            /**Gestion des marche*/
+//            this.getPermissionConge()
+//      this.getTypeMarche()
+//      // this.s()
+//      this.getSauvegardePhoto()
+//      this.getSecteurActivite()
+//      this.getEntreprise()
+//      this.getHistoriqueEntreprise()
+//      this.getEtapeMarche()
+//      this.getDocumentPTBAPPM()
+//    this.getMarcheContrat()
+//    this.getPresenceCF()
+//    this.getDocumentPresence()
+//    this.getNombreMarcheByProcedure()
+//this.getMarcheContratExecution()
+//
+//    this.getSourceFinnancementByMarche()
+//      /**Fin gestion des marche**/
+//this.getAllHistoriqueBudgetGeneral()
+//      /**
+//       * suivi des immo
+//       */
+//       this.getAllNatureEntre();
+//      this.getAllCauseInactivite();
+//      this.getAllEtatImmo();
+//    this.getAllService();
+//    this.getAllEquipement();
+//    this.getAllFamille();
+//    this.getAllArticles();
+//    this.getAllNormeImmob();
+//    this.getAllNormeArticle();
+//    this.getAllStock();
+//    this.getAllBesoinImmo();
+//    this.getAllImmobilisation();
+//    this.getAllHistoAffectation();
+//    this.getAllDemandeMateriel();
+//    this.getAllHistoAffectationService();
+//
+//    //this.getAllAmortissement();
+//      /**
+//       * this.
+//       * fin suivi des immo
+//       */
+//
+//      /**
+//       * missions
+//       */
+//       this.getCategorieMission()
+//     this.getNormeMission()
+//
+//      this.getMission()
+//       this.getHistoriqueMission()
+//this.getAllBudgetGeneral()
+//this.getAllTransfert()
+// // debut du module de bien && service
+//
+//this.getBailleur()
+//this.getTypeFacture()
+//this.getTypeActeDepense()
+//this.getTypeActeEffetFinancier()
+//this.getTypeAnalyse()
+//this.getTypePrestation()
+//this.getCondition()
+//this.getTextJuridique()
+//this.getAutreTextJuridique()
+//this.getTypeTextJuridique()
+//this.getMotifDecision()
+//this.getDocumentProcedure()
+//// this.getDecisionMarche()
+//
+//// this.getDecisionMarche()
+//this.getActeEffetFinancier()
+// this.getFacture()
+//this.getTypeProcedures()
+//this.getTypeMarches()
+//this.getMarche()
+//this.getModePassations()
+//this.getProcedurePassation()
+//this.getEngagement()
+//this.getExecutionMarche()
+//this.getMandat()
+//this.getRapportJugement()
+//this.getCandidatSelectionner()
+//this.getDocument()
+// this.getRolemembreCojo()
+//
+//    this.getAppelOffre()
+//this.getMarche()
+//    this.getLot()
+//    this.getModePassations()
+//    this.getDossierCandidat()
+//    this.getOffreFinancier()
+//    this.getOffreTechnique()
+//this.getLettreInvitation()
+//    this.getMandater()
+//    this.getCojo()
+//    this.getAnalyseDossier()
+//    this.getDemandeAno()
+//    this.getAnalyseDMP()
+//    this.getAnoDMPBailleur()
+//    this.getObservationBailleur()
+//
+//   this.getAvenant()
+//this.getImageMarche()
+//    this.getMarcheBailleur()
+//this.getMembreCojo()
+//    this.getProceVerbal()
+//      this.getEcheances()
+//      this.getReserveCf()
+//      this.getArnmp()
+//      this.getOrganeDecision()
+//      this.getNaturePrix()
+//      this.getMotifPassation()
       /**
        * fin missions
        */

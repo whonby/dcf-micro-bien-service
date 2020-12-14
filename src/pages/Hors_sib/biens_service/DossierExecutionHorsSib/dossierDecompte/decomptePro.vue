@@ -1286,6 +1286,7 @@ if (qtereel) {
         ...this.editDecompte,
            marche_id:this.editDecompte.marche_id,
         facture_id:this.editDecompte.facture_id,
+        
       // nethtva:this.MontantTVAFacture(editDecompte.facture_id),
       netttc:this.MontantapresretenuesModifier,
       parts_etat:this.MontantHTEtatModifier,
