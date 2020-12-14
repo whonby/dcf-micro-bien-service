@@ -1,6 +1,9 @@
 <template>
 <div>
-    <div class="container-fluid" style="height: 100em">
+
+
+
+    <div class="container-fluid" style="height: 100em;">
 
         <div class="" >
 
@@ -111,93 +114,93 @@
 </div>
 
 
-            <nav aria-label="breadcrumb" class="main-breadcrumb">
-                <ol class="breadcrumb" >
-                    <!--<li class="breadcrumb-item" v-if="!unite_administrative_id"> Situation General des marchés &nbsp;&nbsp;&nbsp;&nbsp; /</li>-->
-                    <li class="breadcrumb-item" v-if="unite_administrative_id"> Situation {{nomUniteAdmin(unite_administrative_id)}} des marchés &nbsp;&nbsp;&nbsp;&nbsp; /</li>
-                    <li class="breadcrumb-item" v-if="region"> Région {{nomRegions(region)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
-                    <li class="breadcrumb-item" v-if="infrastructure"> Infrastructutre {{nomInfrastructure(infrastructure)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+            <nav aria-label="breadcrumb" class="main-breadcrumb" style="background: #806000">
+                <ol class="breadcrumb" style="background: #806000 !important">
+                    <li class="breadcrumb-item" style="color: #fff !important;" > INFORMATIONS GENERALES - MARCHES/CONTRATS&nbsp;&nbsp;&nbsp;&nbsp; / </li>
+                    <li class="breadcrumb-item" style="color: #fff !important;" v-if="unite_administrative_id"> Situation {{nomUniteAdmin(unite_administrative_id)}} des marchés &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+                    <li class="breadcrumb-item"  style="color: #fff !important;" v-if="region"> Région {{nomRegions(region)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+                    <li class="breadcrumb-item"  style="color: #fff !important;" v-if="infrastructure"> Infrastructutre {{nomInfrastructure(infrastructure)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
 
-                    <li class="breadcrumb-item" v-if="type_marche"> Type Marche {{nomTypeMarche(type_marche)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
-                    <li class="breadcrumb-item" v-if="info_status_marche" v-html="info_status_marche">  </li>
+                    <li class="breadcrumb-item"  style="color: #fff !important;" v-if="type_marche"> Type Marche {{nomTypeMarche(type_marche)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+                    <li class="breadcrumb-item"  style="color: #fff !important;" v-if="info_status_marche" v-html="info_status_marche">  </li>
                     <!--<li class="breadcrumb-item"> <button class="btn btn-info" @click="print"><i class="icon-print"></i></button></li>-->
                 </ol>
             </nav>
 
 <!-----------------TABLEAU DE BORD MONTANT MARCHE------------------------>
-            <!--<div class="">-->
-                <!--<div class="row-fluid" style="margin-top: -20px">-->
-                    <!--<div class="span3">-->
-                        <!--<div class="card-box bg-prevision">-->
-                            <!--<div class="inner">-->
-                                <!--<h3> {{formatageSomme(montantPrevue)}} </h3>-->
-                                <!--<p> Montant previsionnel </p>-->
-                            <!--</div>-->
+<!--            <div class="">-->
+<!--                <div class="row-fluid" style="margin-top: -20px">-->
+<!--                    <div class="span3">-->
+<!--                        <div class="card-box bg-prevision">-->
+<!--                            <div class="inner">-->
+<!--                                <h3> {{formatageSomme(montantPrevue)}} </h3>-->
+<!--                                <p> Montant previsionnel </p>-->
+<!--                            </div>-->
 
-                            <!--<div class="icon">-->
+<!--                            <div class="icon">-->
 
-                                <!--<i class="fa fa-money" aria-hidden="true"></i>-->
-                            <!--</div>-->
+<!--                                <i class="fa fa-money" aria-hidden="true"></i>-->
+<!--                            </div>-->
 
-                        <!--</div>-->
-                    <!--</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <!--<div class="span3">-->
-                        <!--<div class="card-box bg-base">-->
-                            <!--<div class="inner">-->
-                                <!--<h3> {{formatageSomme(montantApprouveMarche)}}  </h3>-->
-                                <!--<p> Montant de base + avenant-->
-                                <!--</p>-->
-                            <!--</div>-->
-                            <!--<div class="icon">-->
-                                <!--<i class="fa fa-money" aria-hidden="true"></i>-->
-                            <!--</div>-->
+<!--                    <div class="span3">-->
+<!--                        <div class="card-box bg-base">-->
+<!--                            <div class="inner">-->
+<!--                                <h3> {{formatageSomme(montantApprouveMarche)}}  </h3>-->
+<!--                                <p> Montant de base + avenant-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                            <div class="icon">-->
+<!--                                <i class="fa fa-money" aria-hidden="true"></i>-->
+<!--                            </div>-->
 
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="span2">-->
-                        <!--<div class="card-box bg-green">-->
-                            <!--<div class="inner">-->
-                                <!--<h3> {{formatageSomme(montantExecute)}} </h3>-->
-                                <!--<p> Montant execute </p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="span2">-->
+<!--                        <div class="card-box bg-green">-->
+<!--                            <div class="inner">-->
+<!--                                <h3> {{formatageSomme(montantExecute)}} </h3>-->
+<!--                                <p> Montant execute </p>-->
 
-                            <!--</div>-->
+<!--                            </div>-->
 
-                            <!--<div class="icon">-->
+<!--                            <div class="icon">-->
 
-                                <!--<i class="fa fa-money" aria-hidden="true"></i>-->
-                            <!--</div>-->
+<!--                                <i class="fa fa-money" aria-hidden="true"></i>-->
+<!--                            </div>-->
 
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="span2">-->
-                        <!--<div class="card-box bg-restant">-->
-                            <!--<div class="inner">-->
-                                <!--<h3> {{formatageSomme(montantRestant)}} </h3>-->
-                                <!--<p> Montant restant-->
-                                <!--</p>-->
-                            <!--</div>-->
-                            <!--<div class="icon">-->
-                                <!--<i class="fa fa-money" aria-hidden="true"></i>-->
-                            <!--</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="span2">-->
+<!--                        <div class="card-box bg-restant">-->
+<!--                            <div class="inner">-->
+<!--                                <h3> {{formatageSomme(montantRestant)}} </h3>-->
+<!--                                <p> Montant restant-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                            <div class="icon">-->
+<!--                                <i class="fa fa-money" aria-hidden="true"></i>-->
+<!--                            </div>-->
 
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="span2">-->
-                        <!--<div class="card-box bg-taux">-->
-                            <!--<div class="inner">-->
-                                <!--<h3> {{tauxExecution}} % </h3>-->
-                                <!--<p> Taux execution </p>-->
-                            <!--</div>-->
-                            <!--<div class="icon">-->
-                                <!--<i class="fa fa-money" aria-hidden="true"></i>-->
-                            <!--</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="span2">-->
+<!--                        <div class="card-box bg-taux">-->
+<!--                            <div class="inner">-->
+<!--                                <h3> {{tauxExecution}} % </h3>-->
+<!--                                <p> Taux execution </p>-->
+<!--                            </div>-->
+<!--                            <div class="icon">-->
+<!--                                <i class="fa fa-money" aria-hidden="true"></i>-->
+<!--                            </div>-->
 
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-            <!--</div>-->
+<!--            </div>-->
 
 <!--------------------FIN TABLEAU DE BORD FIN MARCHE---------------------->
 
@@ -212,56 +215,75 @@
 
 
                 <div class="row-fluid" style="" id="printMe">
-                    <div class="span2" style="width: 170px;margin-left: -3px !important;border-right: 10px solid #fff">
+                    <div class="span2" style="width: 170px;margin-left: -3px !important;border-right: 10px solid #f9f9f9">
                         <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 90px !important; cursor: grab !important;" @click="listeMarcheStatus('planifie')">
                             <div class="inner">
-                                <p> <b> En attente de contractualisation hors alert
+                                <p> <b> En attente de contractualisation
                                 </b></p>
                                 <h3>  </h3>
 
                             </div>
                             <div class="icon3">
-                                {{nombreMarcheParStatue("planifie")}} Marché(s)
+                                {{nombreMarcheParStatue("planifie")}} Marché(s) / {{pourcentageMarchePasStatus("planifie")}}%
                             </div>
                             <div class="icon2">
 
-                                {{pourcentageMarchePasStatus("planifie")}}%
+                                {{formatageSomme(montantPasStatusContratPlanifie("planifie"))}} / {{pourcentageMontantPrevuePasSatus("planifie")}}%
                             </div>
 
                         </div>
                     </div>
 
-                    <div class="span2" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #fff">
+                    <div class="span2" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
                         <div @click="listeMarcheStatus(8)" class="card-box bg-attente-contratualisation-avec-alert" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
-                                <p><b>En attente de contractualisation avec alert</b> </p>
+                                <p><b>En attente de
+                                    contractualisation
+                                    Hors délai</b> </p>
 
                             </div>
 
                             <div class="icon3">
 
-                                {{nombreMarcheParStatue(8)}} Marché(s)
+                                {{nombreMarcheParStatue(8)}} Marché(s) / {{pourcentageMarchePasStatus(8)}}%
                             </div>
                             <div class="icon2">
 
-                                {{pourcentageMarchePasStatus(8)}}%
+                                {{formatageSomme(montantPasStatusContratPlanifie(8))}} / {{pourcentageMontantPrevuePasSatus(8)}}%
                             </div>
 
 
                         </div>
                     </div>
-                    <div class="span2" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #fff">
+                    <div class="span2" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
                         <div @click="listeMarcheStatus(1)" class="card-box bg-en-contratualisation" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
                                 <p><b>En contractualisation</b>   </p>
 
                             </div>
                             <div class="icon3">
-                                {{nombreMarcheParStatue(1)}} Marché(s)
+                                {{nombreMarcheParStatue(1)}} Marché(s) / {{pourcentageMarchePasStatus(1)}}%
+                            </div>
+                            <div class="icon2">
+                                                               {{formatageSomme(montantPasStatusContratPlanifie(1))}}/{{pourcentageMontantPrevuePasSatus(1)}}%
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
+                        <div @click="listeMarcheStatus(9)" class="card-box bg-en-contratualisation-hort-delais" style="height: 90px !important; cursor: grab !important;">
+                            <div class="inner">
+                                <p><b>En contractualisation
+                                    Hors délai</b> </p>
+
+                            </div>
+                            <div class="icon3">
+
+                                {{nombreMarcheParStatue(9)}} Marché(s) / {{pourcentageMarchePasStatus(9)}}%
                             </div>
                             <div class="icon2">
 
-                                {{pourcentageMarchePasStatus(1)}}%
+                                {{formatageSomme(montantPasStatusContratPlanifie(9))}} / {{pourcentageMontantPrevuePasSatus(9)}}%
                             </div>
 
                         </div>
@@ -274,11 +296,63 @@
                             </div>
                             <div class="icon3">
 
-                                {{nombreMarcheParStatue(2)}} Marché(s)
+                                {{nombreMarcheParStatue(2)}} Marché(s) / {{pourcentageMarchePasStatus(2)}}%
                             </div>
                             <div class="icon2">
 
-                                {{pourcentageMarchePasStatus(2)}}%
+                                {{formatageSomme(montantPasStatusExecutionAcheve(2))}} / {{pourcentageMontantExcuteAcheve(2)}}%
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff">
+                        <div @click="listeMarcheStatus(10)" class="card-box bg-en-execution-horts-delais" style="height: 90px !important; cursor: grab !important;">
+                            <div class="inner">
+                                <p><b>En Exécution Hors délai</b> </p>
+
+                            </div>
+                            <div class="icon3">
+
+                                {{nombreMarcheParStatue(10)}} Marché(s) / {{pourcentageMarchePasStatus(10)}}%
+                            </div>
+                            <div class="icon2">
+
+                                {{formatageSomme(montantPasStatusExecutionAcheve(10))}} / {{pourcentageMontantExcuteAcheve(10)}}%
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff">
+                        <div @click="listeMarcheStatus(11)" class="card-box bg-acheve-hors-delais" style="height: 90px !important; cursor: grab !important;">
+                            <div class="inner">
+                                <p><b>Achevés dans le délais</b> </p>
+
+                            </div>
+                            <div class="icon3">
+
+                                {{nombreMarcheParStatue(11)}} Marché(s) / {{pourcentageMarchePasStatus(11)}}%
+                            </div>
+                            <div class="icon2">
+                                {{formatageSomme(montantPasStatusExecutionAcheve(11))}} / {{pourcentageMontantExcuteAcheve(11)}}%
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="span2" style="width: 170px ;margin-left: -0.9px !important;border-right: 10px solid #fff">
+                        <div @click="listeMarcheStatus(12)" class="card-box bg-acheve-delais" style="height: 90px !important; cursor: grab !important;">
+                            <div class="inner">
+                                <p> Achevés Hors délai </p>
+
+                            </div>
+                            <div class="icon3">
+
+                                {{nombreMarcheParStatue(12)}} Marché(s) / {{pourcentageMarchePasStatus(12)}}%
+                            </div>
+                            <div class="icon2">
+
+                                {{formatageSomme(montantPasStatusExecutionAcheve(12))}} / {{pourcentageMontantExcuteAcheve(12)}}%
                             </div>
 
                         </div>
@@ -291,28 +365,11 @@
                             </div>
                             <div class="icon3">
 
-                                {{nombreMarcheParStatue(7)}} Marché(s)
+                                {{nombreMarcheParStatue(7)}} Marché(s) / {{pourcentageMarchePasStatus(7)}}%
                             </div>
                             <div class="icon2">
 
-                                {{pourcentageMarchePasStatus(4)}}%
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="span2" style="width: 170px ;margin-left: -0.9px !important;border-right: 10px solid #fff">
-                        <div @click="listeMarcheStatus(7)" class="card-box bg-horts-ppm" style="height: 90px !important; cursor: grab !important;">
-                            <div class="inner">
-                                <p> Hors PPM </p>
-
-                            </div>
-                            <div class="icon3">
-
-                                {{nombreMarcheParStatue(7)}} Marché(s)
-                            </div>
-                            <div class="icon2">
-
-                                {{pourcentageMarchePasStatus(4)}}%
+                                {{formatageSomme(montantPasStatusExecutionAcheve(7))}} / {{pourcentageMontantExcuteAcheve(7)}}%
                             </div>
 
                         </div>
@@ -322,12 +379,12 @@
 
 
                 <div class="row-fluid" style="margin: 55px 2px 100px 4px">
-                    <div class="span4" style="border: 1px dotted #EEEEEE;">
+                    <div class="span4" style="border: 2px dotted #ffffff;">
                         <apexchart type="pie" width="350" :options="chartOptions" :series="dataPourcentage"></apexchart>
                     </div>
                     <div class="span8" >
-                        <nav aria-label="breadcrumb" class="main-breadcrumb" v-if="info_status_marche">
-                            <ol class="breadcrumb">
+                        <nav aria-label="breadcrumb" style="background: #7030a0 !important;" class="main-breadcrumb" v-if="info_status_marche">
+                            <ol class="breadcrumb" style="background: #7030a0 !important;">
                                 <li class="breadcrumb-item"  v-html="info_status_marche">  </li>
                                 <li class="breadcrumb-item" >
                                     <!--<a href="#" @click.prevent="afficherModalAjouterTitre()">Carte</a> -->
@@ -494,23 +551,11 @@
             </div>
             <!--------------------FIN TABLEAU BORD FIN ETAT MARCHE--------------->
 
-            <div id="exampleModal" class="modal hide">
-                <div class="modal-header">
-                    <button data-dismiss="modal" class="close" type="button">×</button>
-                    <h3> Cartographie des marchés   <p class="breadcrumb-item" v-if="info_status_marche" v-html="info_status_marche">  </p></h3>
-                </div>
-                <div class="modal-body">
 
 
-                </div>
-                <div class="modal-footer">
-
-                    <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-                </div>
-            </div>
 
         </div>
-</div>
+     </div>
 
 
 
@@ -905,6 +950,9 @@
 
 
 
+        },
+        created(){
+console.log(this.listeMarchStatueExecuteAcheve)
         },
         computed: {
             ...mapGetters("uniteadministrative", [
@@ -1468,27 +1516,136 @@
                 return status=>{
                     if(status==0){
                       //  colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"]
-                        return "<font color='#410041'>En attente de contratualisation hors alert</font>"
+                        return "<font color='#fff'>En attente de contratualisation </font>"
                     }
                     if(status==8){
-                        return "<font color='#e81776'>En attente de contratualisation avec alert</font>"
+                        return "<font color='#fff'>En attente de contratualisation hors delait</font>"
                     }
                     if(status==1){
-                        return "<font color='#FF00FF'>En contratualisation</font>"
+                        return "<font color='#fff'>En contratualisation</font>"
+                    }
+                    if(status==9){
+                        return "<font color='#fff'>En contractualisation Hors délai</font>"
                     }
 
                     if(status==2){
-                        return "<font color='#008000'>En execution</font>"
+                        return "<font color='#fff'>En execution</font>"
+                    }
+                    if(status==10){
+                        return "<font color='#fff'>En execution Hors délai</font>"
+                    }
+
+                    if(status==11){
+                        return "<font color='#fff'>Acheve dans le delais</font>"
+                    }
+                    if(status==12){
+                        return "<font color='#fff'>Acheve hors delais</font>"
                     }
 
                     if(status==7){
-                        return "<font color='#b5160e'>En suffrance</font>"
+                        return "<font color='#fff'>En suffrance</font>"
                     }
                     return null
                 }
             },
 
+            montantPasStatusContratPlanifie(){
+                return status=>{
+                    if(status=="planifie"){
+                        status=0;
+                    }
+                    let initeVal = 0;
+                    let montant_prevue=  this.listeMarchStatuePlanifieContratualisation.filter(item=>item.attribue==status).reduce(function (total, currentValue) {
+                        return total + parseFloat(currentValue.montant_marche) ;
+                    }, initeVal);
+                    return montant_prevue
+                }
+            },
+            pourcentageMontantPrevuePasSatus(){
+                return status=>{
+                    let taux=(this.montantPasStatusContratPlanifie(status) * 100) / this.montantTotaleMarchePlanifieContratuel
+                    return taux.toFixed(2)
+                }
+            },
+            pourcentageMontantExcuteAcheve(){
+                return status=>{
+                    let taux=(this.montantPasStatusExecutionAcheve(status) * 100) / this.montantTotaleMarcheExecutionAcheve
+                    return taux.toFixed(2)
+                }
+            },
+            montantPasStatusExecutionAcheve(){
+                return status=>{
+                    if(this.listeMarchStatueExecuteAcheve.length>0){
+                        let montant_execute=0;
+                        let vm=this;
 
+                        this.listeMarchStatueExecuteAcheve.filter(item=>item.attribue==status).forEach(function (val) {
+                            let initeVal = 0;
+                            let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                                return total + parseFloat(currentValue.montantmarche) ;
+                            }, initeVal);
+                            montant_execute=parseFloat(montant_execute) + parseFloat(montant)
+                        })
+
+
+
+                        return montant_execute
+                    }
+                    return 0;
+                }
+            },
+
+
+           montantTotaleMarchePlanifieContratuel(){
+               let initeVal = 0;
+               let montant_prevue=  this.listeMarchStatuePlanifieContratualisation.reduce(function (total, currentValue) {
+                   return total + parseFloat(currentValue.montant_marche) ;
+               }, initeVal);
+               return montant_prevue
+           },
+
+            montantTotaleMarcheExecutionAcheve(){
+                if(this.listeMarchStatueExecuteAcheve.length>0){
+                    let montant_execute=0;
+                    let vm=this;
+
+                    this.listeMarchStatueExecuteAcheve.forEach(function (val) {
+                        let initeVal = 0;
+                        let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montantmarche) ;
+                        }, initeVal);
+                        montant_execute=parseFloat(montant_execute) + parseFloat(montant)
+                    })
+
+
+
+                    return montant_execute
+                }
+                return 0;
+            },
+
+            listeMarchStatuePlanifieContratualisation(){
+
+               let objet4=this.objetMarchePasUniteOuRegion.filter(item=>{
+                    if(item.attribue==9 || item.attribue==1 || item.attribue==8 || item.attribue==0){
+                        return item
+                    }
+                })
+
+               // console.log(objet4.length)
+                return objet4
+            },
+            listeMarchStatueExecuteAcheve(){
+
+                let objet4=this.objetMarchePasUniteOuRegion.filter(item=>{
+                    if(item.attribue==2 || item.attribue==11 || item.attribue==10 || item.attribue==11 || item.attribue==7 || item.attribue==3){
+                        return item
+                    }
+                })
+
+                console.log(objet4.length)
+                return objet4
+            },
 
 
         }
@@ -1953,6 +2110,7 @@
         padding: 10px 10px 30px;
         margin: 10px 0px;
         height: 55px !important;
+        font-size: 13px !important;
     }
     .card-box:hover {
         text-decoration: none;
@@ -1961,6 +2119,7 @@
 
     .card-box .inner {
         padding: 5px 10px 0 10px;
+        font-size: 5em !important;
     }
     .card-box h3 {
         font-size: 12px;
@@ -1988,7 +2147,7 @@
         bottom: 35px;
         right: 3px;
         z-index: 0;
-        font-size: 17px;
+        font-size: 13px;
         color: #f2f2f2;
     }
 
@@ -1998,7 +2157,7 @@
         bottom: 5px;
         right: 3px;
         z-index: 0;
-        font-size: 15px;
+        font-size: 10px;
         color: #f2f2f2;
     }
 
@@ -2045,20 +2204,35 @@
 
     .bg-attente-contratualisation-hors-alert {
 
-        background-color: #0000f3 !important;
+        background-color: #8ea9db !important;
     }
     .bg-attente-contratualisation-avec-alert {
-        background-color: #e81776 !important;
+        background-color: #f4b084 !important;
     }
     .bg-en-contratualisation {
-        background-color: #FF00FF !important;
+        background-color: #92d050 !important;
     }
 
-    .bg-en-execution {
-        background-color: #008000 !important;
+    .bg-en-contratualisation-hort-delais {
+        background-color: #652b92 !important;
     }
+    .bg-en-execution {
+        background-color: #d7b755 !important;
+    }
+
+    .bg-en-execution-horts-delais {
+        background-color: #d36f2b !important;
+    }
+
+    .bg-acheve-hors-delais {
+        background-color: #00b04f !important;
+    }
+
     .bg-en-souffrance {
         background-color: red !important;
+    }
+    .bg-acheve-delais {
+        background-color: #757171 !important;
     }
     .bg-horts-ppm{
         background-color: #ffb62f !important;
@@ -2188,4 +2362,80 @@
 
 
 
+
+
+    /*
+ CSS for the main interaction
+*/
+    .tabset1 > input[type="radio"] {
+        position: absolute;
+        left: -200vw;
+    }
+
+    .tabset1 .tab-panel {
+        display: none;
+    }
+
+    .tabset1 > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
+    .tabset1 > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
+    .tabset1 > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
+    .tabset1 > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
+    .tabset1 > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
+    .tabset1 > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+        display: block;
+    }
+
+
+
+    .tabset1 > label {
+        position: relative;
+        display: inline-block;
+        padding: 15px 15px 25px;
+        border: 1px solid transparent;
+        border-bottom: 0;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .tabset1 > label::after {
+        content: "";
+        position: absolute;
+        left: 15px;
+        bottom: 10px;
+        width: 22px;
+        height: 4px;
+        background: #8d8d8d;
+    }
+
+    .tabset1 > label:hover,
+    .tabset1 > input:focus + label {
+        color: #06c;
+    }
+
+    .tabset1 > label:hover::after,
+    .tabset1 > input:focus + label::after,
+    .tabset1 > input:checked + label::after {
+        background: #06c;
+    }
+
+    .tabset1 > input:checked + label {
+        border-color: #ccc;
+        border-bottom: 1px solid #fff;
+        margin-bottom: -1px;
+    }
+
+    .tab-panel {
+        padding: 30px 0;
+        border-top: 1px solid #ccc;
+    }
+
+
+
+    .tabset1 {
+        max-width: 65em;
+    }
+
+    body {
+        background: #f9f9f9 !important;
+    }
 </style>
