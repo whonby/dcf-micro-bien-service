@@ -39,8 +39,8 @@
                   <tr>
                    
                     <th>Libellé</th>
-                    <th>Total Stock</th>
-                     <th>Restant en Stock</th>
+                    <!-- <th>Total Stock</th>
+                     <th>Restant en Stock</th> -->
                       <th>Qté Réquise</th>
                       <th>Affecté</th>
                        <th>Non affecté</th>
@@ -61,8 +61,8 @@
               <template v-if="50<((((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)))/(parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))+0.01))*100))">
                       <td style="font-size:14px;font-weight:bold;">{{service.libelle || 'Non renseigné'}}</td>
                       
-                      <td style="text-align: center;font-size:14px;font-weight:bold;">{{TotalEnStock(service.id) || 0}}</td>
-                      <td style="text-align: center;font-size:14px;font-weight:bold;">{{RestantEnStock(service.id) || 0}}</td>
+                      <!-- <td style="text-align: center;font-size:14px;font-weight:bold;">{{TotalEnStock(service.id) || 0}}</td>
+                      <td style="text-align: center;font-size:14px;font-weight:bold;">{{RestantEnStock(service.id) || 0}}</td> -->
                       <td style="text-align: center;font-size:14px;font-weight:bold;">{{parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id)) || 0}}</td>
                       <td style="text-align: center;font-size:14px;font-weight:bold;">{{parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id)) || 0}}</td>
                       <td style="text-align: center;font-size:14px;font-weight:bold;">{{parseFloat((parseFloat(QteRequiseCotePersonnel(service.id))+parseFloat(QteRequiseCoteService(service.id))))-parseFloat((parseFloat(QteAffecteCotePersonnel(service.id))+parseFloat(QteAffecteCoteService(service.id))))}}</td>

@@ -267,7 +267,7 @@ formaterDate(date) {
     afficherModalModifierTitre(id) {
 
       this.$router.push({
-        path: "/ModifierReparationVehicule/" + id
+        path: "/ModifierEntrePatrimoineVehicule/" + id
       });
     },
     toggle: function () {

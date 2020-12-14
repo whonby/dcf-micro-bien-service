@@ -37,12 +37,18 @@
                     <span class="text">SIMULATION AMORTISSEMENT</span>
                 </router-link>
             </li> -->
- <li>
+ <!-- <li>
                 <router-link :to="{name:'bilanUaEquipeNonEquipe'}" tag="a">
-                    <!-- <i class="icon-table"></i> -->
+                    
                     <span class="text">BILAN DES UA EQUIPEES OU NON </span>
                 </router-link>
-            </li>
+            </li> -->
+            <!-- <li>
+                <router-link :to="{name:''}" tag="a">
+                    
+                    <span class="text">REPARATION MOBILIERS & MATERIEL </span>
+                </router-link>
+            </li> -->
         </ul>
     </div>
 </template>

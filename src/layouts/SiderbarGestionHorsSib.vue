@@ -66,7 +66,7 @@
            
           </router-link>
         </li>
-          <li @click.prevent="navigateTableBordBord" :class="{active: active_el ==190}">
+          <li @click.prevent="navigateTableBordBord" :class="{active: active_el ==45}">
               <a href="#">
                   <i class="icon-truck"></i>
                   <span>TABLEAU DE BORD DE MARCHE</span>
@@ -275,7 +275,7 @@ navigateToGestionMarche(){
     })
       },
       navigateTableBordBord(){
-          this.activate(190)
+          this.activate(45)
           this.$router.push({
               name: 'TableauBordGestionMarche'
           })

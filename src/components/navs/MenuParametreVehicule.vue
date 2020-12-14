@@ -40,7 +40,7 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-            <li class="divider"></li>
+            <!-- <li class="divider"></li>
           <li>
             <router-link :to="{name: 'natureEntre'}" tag="a">
               <i class="icon-check"></i>
@@ -54,14 +54,14 @@
              Cause d'inactivité
             </router-link>
           </li>
-            <li class="divider"></li>
-          <li>
+            <li class="divider"></li> -->
+          <!-- <li>
             <router-link :to="{name: 'EtatImmobilisation'}" tag="a">
               <i class="icon-check"></i>
             Etat Immobilisation
             </router-link>
           </li>
-            <li class="divider"></li>
+            <li class="divider"></li> -->
           <li>
             <router-link :to="{name: 'listeEquipement'}" tag="a">
               <i class="icon-check"></i>
@@ -72,7 +72,7 @@
            <li>
             <router-link :to="{name: 'famille'}" tag="a">
               <i class="icon-bar-chart"></i>
-           Famille équipement
+           Article
             </router-link>
           </li>
           <li class="divider"></li>
@@ -108,7 +108,7 @@
 
      <li class="dropdown" id="code">
         <a title="CODIFICATION VEHICULE" href="#" data-toggle="dropdown" data-target="#code" class="dropdown-toggle">
-          <span class="text">CODIFICATION VEHICULE</span>
+          <span class="text">VEHICULE</span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">

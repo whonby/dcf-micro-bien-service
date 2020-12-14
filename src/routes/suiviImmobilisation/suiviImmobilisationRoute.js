@@ -60,11 +60,22 @@ import ExecutionReparationVehicule from '../../pages/suivi_control_budgetaires/s
 
 // ROUTE COMPTABILITE MATIERE A FAIRE
 
+import AjouterEntrePatrimoine from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/gpeGestionStock/AjouterEntrePatrimoine.vue'
+
+
+import ficheReparationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/rapportVehicule/ficheReparationVehicule.vue'
+
+import ModifierEntrePatrimoine from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/gpeGestionStock/ModifierEntrePatrimoine.vue'
 
 
 
+import AjouterEntrePatrimoineVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/grpeStockVehicule/AjouterEntrePatrimoineVehicule.vue'
 
 
+import ModifierEntrePatrimoineVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/grpeStockVehicule/ModifierEntrePatrimoineVehicule.vue'
+
+
+import ListeStockArticleVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/grpeStockVehicule/ListeStockArticleVehicule.vue'
 
 
 
@@ -88,6 +99,42 @@ import ExecutionReparationVehicule from '../../pages/suivi_control_budgetaires/s
 
 
 const suiviImmobilisationRoutes = [
+  
+  {
+    path: "/ModifierEntrePatrimoineVehicule/:id",
+    name: "ModifierEntrePatrimoineVehicule",
+    component: ModifierEntrePatrimoineVehicule
+  },
+  {
+    path: "/AjouterEntrePatrimoineVehicule",
+    name: "AjouterEntrePatrimoineVehicule",
+    component: AjouterEntrePatrimoineVehicule
+  },
+  {
+    path: "/ListeStockArticleVehicule",
+    name: "ListeStockArticleVehicule",
+    component: ListeStockArticleVehicule
+  },
+
+
+
+
+
+  {
+    path: "/ModifierEntrePatrimoine/:id",
+    name: "ModifierEntrePatrimoine",
+    component: ModifierEntrePatrimoine
+  },
+  {
+    path: "/ficheReparationVehicule",
+    name: "ficheReparationVehicule",
+    component: ficheReparationVehicule
+  },
+  {
+    path: "/AjouterEntrePatrimoine",
+    name: "AjouterEntrePatrimoine",
+    component: AjouterEntrePatrimoine
+  },
   {
     path: "/ExecutionReparationVehicule",
     name: "ExecutionReparationVehicule",

@@ -2,7 +2,7 @@
 <template>
    
       <div class="accordion" >
-          <div class="accordion-group widget-box" v-if="groupe.gestion_stock.length > 0 ">
+          <div class="accordion-group widget-box" v-if="AfficherParTypeStock.length > 0 ">
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
@@ -18,11 +18,11 @@
                 <thead>
                   <tr>
                     
-                     <th title="unite administrative">UA</th>
+                     
                   
                      <th>Famille</th>
-                   
-                    <th title="quantite en stock">Quantité en stock</th>
+                   <th title="Initiale">Quantité Initiale</th>
+                    <th title="quantite en stock">Quantité Restant en stock</th>
                      <th>Date d'entrée</th>
                     <th title="quantite entrant">Quantité entrée</th>
                     <th>Date de sortie</th>
@@ -34,7 +34,7 @@
                 <tbody>
                    <StockItem
                         class="item"
-                        v-for="groupeElement in groupe.gestion_stock"
+                        v-for="groupeElement in AfficherParTypeStock"
                         :key="groupeElement.id"
                         :article="groupeElement"
                         @modification="$emit('modification', $event)"
@@ -78,24 +78,26 @@ export default {
   computed: {
   
     isFolder: function () {
-      return this.groupe.gestion_stock &&
-        this.groupe.gestion_stock.length
+      return this.AfficherParTypeStock &&
+        this.AfficherParTypeStock.length
     },
 
     getNombreArticle(){
-        var nombre = this.groupe.gestion_stock.length
+        var nombre = this.AfficherParTypeStock.length
         if(nombre) return nombre
         return '0' 
     },
     iconClasses() {
       return {
-        'icon-plus': !this.isOpen && this.groupe.gestion_stock.length,
-        'icon-minus': this.isOpen && this.groupe.gestion_stock.length
-        //    'icon-folder-close': !this.isOpen && this.groupe.gestion_stock.length,
-        // 'icon-folder-open': this.isOpen && this.groupe.gestion_stock.length
+        'icon-plus': !this.isOpen && this.AfficherParTypeStock.length,
+        'icon-minus': this.isOpen && this.AfficherParTypeStock.length
+        //    'icon-folder-close': !this.isOpen && this.AfficherParTypeStock.length,
+        // 'icon-folder-open': this.isOpen && this.AfficherParTypeStock.length
       }
     },
-
+AfficherParTypeStock(){
+  return this.groupe.gestion_stock.filter(item=>item.typestockage == null)
+}
    
   },
 
