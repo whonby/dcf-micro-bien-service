@@ -121,11 +121,7 @@ const BienServiceRoutes = [
         name:"image_marche",
         component:imageMarche
     },
-    {
-        path:"/ReceptionMarche",
-        name:"receptionmarche",
-        component:receptionmarche
-    },
+   
    
     {
         path: "/AjouteFacture",
