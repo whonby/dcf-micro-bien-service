@@ -905,6 +905,11 @@ export const MODIFIER_APPRECIATION = (state, objetModifie) => {
 export const SUPPRIMER_APPRECIATION = (state, id) => {
   state.Appreciations = state.Appreciations.filter(famille => famille.id != id);
 };
+
+export const AJOUTE_UA_IMO = (state, nouveau_normeArt) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.ua_idImo=nouveau_normeArt;
+};
 export {
   
 

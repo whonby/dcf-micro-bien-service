@@ -29,7 +29,8 @@ const defaultState = {
   TypeReparation:[],
   AffectationVehicules:[],
   Transmissions:[],
-  Appreciations:[]
+  Appreciations:[],
+  ua_idImo:"",
 
 };
 

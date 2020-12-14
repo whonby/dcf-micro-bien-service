@@ -2,7 +2,7 @@
  
      <div>
 
-       <h1> hhhhhhhhhhhhhh</h1>
+       
        <!-- <h4 style="text-align:center">GESTION DES VEHICULES</h4>
        <br>
        <br>
@@ -267,6 +267,7 @@ EntrepriseNonSantionner() {
   },
 created() {
             this.marcheid=this.$route.params.id
+            console.log(this.marcheid)
    this.detail_marche = this.gestionModules.find(
        idmarche => idmarche.id == this.$route.params.id
    )

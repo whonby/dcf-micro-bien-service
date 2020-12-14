@@ -2257,7 +2257,7 @@ this.objetUnite=objet
   margin-top: 1px;
 }
 
-/*Marker content instances*/
+/*Marker content instances
 .map-marker.exclamation div.icon:before{
   content: '!';
 }
@@ -2265,17 +2265,17 @@ this.objetUnite=objet
   content: 'A';
 }
 
-/*Marker color instances*/
+Marker color instances
 .map-marker.red div.icon{background: #ff2222;}
 
 .map-marker.green div.icon{background: #008800;color: #fff;}
 .map-marker.green {background: #000;}
 .map-marker.green div.arrow{border-top-color: #000;}
 
-/*Marker states*/
+Marker states
 .map-marker.inactive {
   opacity: 0.6;
-}
+}*/
 .red {
   color:#fff;
   background-color: red !important;
@@ -2383,38 +2383,38 @@ label {
 }
 
 
-.marker-cluster-small {
-    background-color: #FF9633;
-    color: #0e0e0e;
-    font-size: 1em;
+/*.marker-cluster-small {*/
+/*    background-color: #FF9633;*/
+/*    color: #0e0e0e;*/
+/*    font-size: 1em;*/
 
-}
-.marker-cluster-small div {
-    background-color: #FF9633;
-    color: #0e0e0e;
-    font-size: 1em;
-}
-.marker-cluster-medium {
-    background-color:#FF9633;
-    color: #0e0e0e;
-    font-size: 1em;
-}
-.marker-cluster-medium div {
-    background-color:#FF9633;
-    color: #0e0e0e;
-    font-size: 1em;
-}
+/*}*/
+/*.marker-cluster-small div {*/
+/*    background-color: #FF9633;*/
+/*    color: #0e0e0e;*/
+/*    font-size: 1em;*/
+/*}*/
+/*.marker-cluster-medium {*/
+/*    background-color:#FF9633;*/
+/*    color: #0e0e0e;*/
+/*    font-size: 1em;*/
+/*}*/
+/*.marker-cluster-medium div {*/
+/*    background-color:#FF9633;*/
+/*    color: #0e0e0e;*/
+/*    font-size: 1em;*/
+/*}*/
 
-.marker-cluster-large {
-    background-color:#FF9633;
-    color: #0e0e0e;
-    font-size: 1em;
-}
-.marker-cluster-large div {
-    background-color:#FF9633;
-    color: #0e0e0e;
-    font-size: 1em;
-}
-@import "../../node_modules/leaflet/dist/leaflet.css";
+/*.marker-cluster-large {*/
+/*    background-color:#FF9633;*/
+/*    color: #0e0e0e;*/
+/*    font-size: 1em;*/
+/*}*/
+/*.marker-cluster-large div {*/
+/*    background-color:#FF9633;*/
+/*    color: #0e0e0e;*/
+/*    font-size: 1em;*/
+/*}*/
+/*@import "../../node_modules/leaflet/dist/leaflet.css";*/
 
 </style>

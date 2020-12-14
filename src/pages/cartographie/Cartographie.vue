@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <div class="container-fluid">
             <div class="quick-actions_homepage">
@@ -663,7 +662,7 @@ formatageSomme:formatageSomme,
         margin-top: 1px;
     }
 
-    /*Marker content instances*/
+    /*Marker content instances
     .map-marker.exclamation div.icon:before{
         content: '!';
     }
@@ -671,17 +670,17 @@ formatageSomme:formatageSomme,
         content: 'A';
     }
 
-    /*Marker color instances*/
+    Marker color instances
     .map-marker.red div.icon{background: #ff2222;}
 
     .map-marker.green div.icon{background: #008800;color: #fff;}
     .map-marker.green {background: #000;}
     .map-marker.green div.arrow{border-top-color: #000;}
 
-    /*Marker states*/
+    Marker states
     .map-marker.inactive {
         opacity: 0.6;
-    }
+    }*/
     .red {
       color:#fff;
         background-color: red !important;

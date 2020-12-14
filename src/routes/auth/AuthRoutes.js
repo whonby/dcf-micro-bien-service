@@ -10,8 +10,14 @@ import TableauDeBordG from "@/pages/auth/TableauDeBordG"
 import Chat from "@/pages/chat/Chat"
 import MonEquipe from "@/pages/gestionCF/MonEquipe";
 import pagePresentation from "@/gestionDesModule/pagePresentation";
+import TableauBordGestionVehicule from "@/gestionDesModule/TableauBordGestionVehicule.vue";
 const AuthRoutes = [
-
+    {
+        path: '/TableauBordGestionVehicule/:id',
+       name:"TableauBordGestionVehicule",
+       
+       component: TableauBordGestionVehicule
+    },
 {
         path: '/sidcf',
        name:"pagePresentation",
