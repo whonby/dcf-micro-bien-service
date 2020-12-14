@@ -2023,3 +2023,8 @@ export function supprimerAppreciation({ commit }, id) {
           axios.delete("/Appreciation/" + id).then(() => dialog.close());
       });
 }
+
+
+export function ajouterUA_ID_IMO({ commit }, nouveau) {
+  commit("AJOUTE_UA_IMO", nouveau);
+}

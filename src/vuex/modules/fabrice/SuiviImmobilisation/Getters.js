@@ -45,7 +45,7 @@ const stockageArticles = state => state.stockageArticles;
 
 
 
-
+export const getterUa_idImo=state=>state.ua_idImo
 
 
 export const listeImmoRealise = state =>

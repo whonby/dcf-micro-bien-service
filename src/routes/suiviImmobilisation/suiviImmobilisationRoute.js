@@ -55,7 +55,8 @@ import ModifierReparationVehicule from '../../pages/suivi_control_budgetaires/su
 import TableauBordGestionVehicule from '../../gestionDesModule/TableauBordGestionVehicule.vue'
 import ExecutionReparationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/ExecutionReparation/ExecutReparationVehicule.vue'
 
-
+// import Login from '../../pages/auth/Login.vue'
+// import Logout from '../../pages/auth/Logout.vue'
 
 // ROUTE COMPTABILITE MATIERE A FAIRE
 
@@ -75,6 +76,9 @@ import ModifierEntrePatrimoineVehicule from '../../pages/suivi_control_budgetair
 
 
 import ListeStockArticleVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/grpeStockVehicule/ListeStockArticleVehicule.vue'
+
+import demarrage from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/DemarrageComptaMatiere/demarrage.vue'
+
 
 
 
@@ -98,6 +102,12 @@ import ListeStockArticleVehicule from '../../pages/suivi_control_budgetaires/sui
 
 
 const suiviImmobilisationRoutes = [
+  {
+    path: '/Comptabilite-Matieres',
+   name:"demarrage",
+   meta: {layout: "no-sidebar"},
+   component: demarrage
+},
   
   {
     path: "/ModifierEntrePatrimoineVehicule/:id",

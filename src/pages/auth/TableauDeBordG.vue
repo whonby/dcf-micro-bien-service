@@ -1,15 +1,21 @@
 <template>
   <div>
-     
+     <!-- <template v-if="detail_marche.code == ''"> -->
     <TableauBordParametre v-if="detail_marche.code == 1"></TableauBordParametre>
     <TableauBordUa v-else-if="detail_marche.code == 2"></TableauBordUa>
     <TableauBordGestionSib v-else-if="detail_marche.code == 3"></TableauBordGestionSib>
      <TableauBordGestionHorsSib v-else-if="detail_marche.code == 4"></TableauBordGestionHorsSib>
     <TableauBordMonEquipe v-else-if="detail_marche.code == 6"></TableauBordMonEquipe>
     <TableauBordRapport v-else-if="detail_marche.code == 7"></TableauBordRapport>
-    <TableauBordGestionVehicule v-else-if="detail_marche.code == 8"></TableauBordGestionVehicule>
-    <TableauBordCatographies v-else></TableauBordCatographies>
-   
+    
+    <TableauBordCatographies  v-else-if="detail_marche.code == 5"></TableauBordCatographies>
+    <TableauBordGestionVehicule v-else></TableauBordGestionVehicule>
+
+    <!-- </template> -->
+    <!-- <template v-else>
+     <TableauBordGestionVehicule ></TableauBordGestionVehicule>
+    </template> -->
+
   </div>
 
 </template>

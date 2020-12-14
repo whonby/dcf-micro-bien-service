@@ -22,7 +22,7 @@
    <MenuRapportMarche v-if="active_el == 89"></MenuRapportMarche>
    <MenuRapportVehicule v-if="active_el == 90"></MenuRapportVehicule>
    <MenuTableauBordGestionMarche v-if="active_el == 45"></MenuTableauBordGestionMarche>
-    <Search></Search>
+    <!-- <Search></Search> -->
     
     <!--close-top-serch MenuPlanificationHorSib-->
   </div>
@@ -46,7 +46,7 @@ import MenuCatographie from "../components/navs/MenuCatographie.vue";
 import MenuDefaut from "../components/navs/MenuDefaut.vue";
 import MenuInvestissementHorSib from "../components/navs/MenuInvestissementHorSib.vue";
 import MenuMonEquipe from "../components/navs/MenuMonEquipe.vue";
-import Search from "../components/Search";
+// import Search from "../components/Search";
 import MenuGestionAccess from "../components/navs/MenuGestionAccess"
 import MenuActeurDepenseHS from "../components/navs/MenuActeurDepenseHS"
 import MenuParametreVehicule from "../components/navs/MenuParametreVehicule"
@@ -73,7 +73,7 @@ export default {
    MenuCatographie,
    MenuDefaut,
    MenuInvestissementHorSib,
-    Search,
+    // Search,
       MenuGestionAccess,
     MenuMonEquipe,
     MenuActeurDepenseHS

@@ -1,15 +1,18 @@
 <template>
   <div>
-     
+    
+
     <SiderbarParametre v-if="detail_marche.code == 1"></SiderbarParametre>
     <SiderbarUniteAdministrative v-else-if="detail_marche.code == 2"></SiderbarUniteAdministrative>
     <SideBarGestionSib v-else-if="detail_marche.code == 3"></SideBarGestionSib>
      <SiderbarGestionHorsSib v-else-if="detail_marche.code == 4"></SiderbarGestionHorsSib>
     <SidebarMonEquipe v-else-if="detail_marche.code == 6"></SidebarMonEquipe>
     <SiderbarRapport v-else-if="detail_marche.code == 7"></SiderbarRapport>
-    <SiderbarGestionVehicule v-else-if="detail_marche.code == 8"></SiderbarGestionVehicule>
     
-    <SiderbarCatographie v-else></SiderbarCatographie>
+    <SiderbarGestionVehicule v-else-if="detail_marche.code == 8"></SiderbarGestionVehicule>
+    <SiderbarCatographie  v-else></SiderbarCatographie>
+     
+   
    
   </div>
 </template>
@@ -77,10 +80,11 @@ components: {
   },
 created() {
             this.marcheid=this.$route.params.id
-  console.log(this.gestionModules)
+  console.log("Guei est dans la place")
    this.detail_marche = this.gestionModules.find(
        idmarche => idmarche.id == this.$route.params.id
    )
+   console.log(this.detail_marche)
   
 },
   methods:{
