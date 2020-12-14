@@ -1,3 +1,4 @@
+import listeUaDeComptabiliteMatiere from "../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/dossierListeUaDeComptabilteMatier/listeUaDeComptabiliteMatiere.vue";
 import Famille from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Famille.vue";
 import bilanUaEquipeNonEquipe from "../../pages/suivi_control_budgetaires/suiviImmobilisation/BilanUaEquipeouNon/bilanUaEquipe.vue";
 import Service from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Service.vue";
@@ -356,6 +357,13 @@ const suiviImmobilisationRoutes = [
     path: "/famille",
     name: "famille",
     component: Famille
+  },
+  {
+  path:"/liste-ua-compta-matiere",
+  name:"liste_ua_compta",
+  meta: {layout: "no-sidebar",
+  },
+  component:listeUaDeComptabiliteMatiere
   },
 
   {
