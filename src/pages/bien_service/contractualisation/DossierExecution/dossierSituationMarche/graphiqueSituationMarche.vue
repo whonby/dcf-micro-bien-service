@@ -21,6 +21,7 @@ export default {
           marche_id:"",
              series: [{
             name: 'Taux restant',
+            
             data: []
             }, {
             name: "Taux Execution",
