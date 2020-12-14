@@ -106,8 +106,8 @@
                    <td>
                 
                       <router-link :to="{ name: 'TableauDeBordG', params:{id:8}}"
-                class="btn btn-default " title="voir le menu ">
-                  <span class=""><i class=" icon-hand-right"></i></span>
+                class="btn btn-primary " title="voir le menu ">
+                  <span class="" style=""><i class=" icon-hand-right"></i></span>
                     </router-link>
                    </td>
                     <!-- <td>
