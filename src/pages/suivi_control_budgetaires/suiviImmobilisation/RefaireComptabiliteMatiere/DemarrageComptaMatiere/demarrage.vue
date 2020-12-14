@@ -299,7 +299,7 @@ goToUAspace(id){
     console.log("BONJOUR M")
 this.$router.push({
         name: 'TableauDeBordG',
-        params:8
+        params:{id:8}
       })
 },
 genererEnPdf(){
