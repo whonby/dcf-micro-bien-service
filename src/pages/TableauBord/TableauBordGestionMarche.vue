@@ -11,28 +11,28 @@
                 <div class="span1">
 
                 </div>
-                <div class="span10 card-1" >
-                    <table class="table table-striped">
+                <div class="span10 " style="background: #f0c71d !important;">
+                    <table class="table table-striped"  style="background: #f0c71d !important;">
                         <tbody>
                         <tr>
-                            <td>
-                                <label>CF
-                                </label>
-                                <model-list-select style="background-color: rgb(233,233,233);"
+                            <td style="background: #f0c71d !important;">
+
+                                <label>CF<a href="#" @click.prevent="videTypeCF()" v-if="controlleur_fin" style="color: red"><i class="fa fa-trash-o"></i></a></label>
+                                <model-list-select style="background-color: #fff;"
                                                    class="wide"
-                                                   :list="filtre_unite_admin"
-                                                   v-model="unite_administrative_id"
+                                                   :list="listeCF"
+                                                   v-model="controlleur_fin"
                                                    option-value="id"
-                                                   option-text="libelle"
-                                                   placeholder="CF"
+                                                   option-text="name"
+                                                   placeholder="Controleur financier"
                                 >
 
                                 </model-list-select>
                             </td>
-                            <td>
+                            <td style="background: #f0c71d !important;">
                                 <label>UA<a href="#" @click.prevent="videUniteAdmin()" v-if="unite_administrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
                                 </label>
-                                <model-list-select style="background-color: rgb(233,233,233);"
+                                <model-list-select style="background-color: #fff;"
                                                    class="wide"
                                                    :list="filtre_unite_admin"
                                                    v-model="unite_administrative_id"
@@ -43,10 +43,10 @@
 
                                 </model-list-select>
                             </td>
-                            <td>
+                            <td style="background: #f0c71d !important;">
                                 <label>Regions <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a>
                                 </label>
-                                <model-list-select style="background-color: rgb(233,233,233);"
+                                <model-list-select style="background-color: #fff;"
                                                    class="wide"
                                                    :list="regions"
                                                    v-model="region"
@@ -57,10 +57,10 @@
 
                                 </model-list-select>
                             </td>
-                            <td>
+                            <td style="background: #f0c71d !important;">
                                 <label>Infrastructure <a href="#" @click.prevent="videInfrastructure()" v-if="infrastructure" style="color: red"><i class="fa fa-trash-o"></i></a>
                                 </label>
-                                <model-list-select style="background-color: rgb(233,233,233);"
+                                <model-list-select style="background-color: #fff;"
                                                    class="wide"
                                                    :list="getterInfrastrucure"
                                                    v-model="infrastructure"
@@ -71,10 +71,10 @@
 
                                 </model-list-select>
                             </td>
-                            <td>
+                            <td style="background: #f0c71d !important;">
                                 <label>Type Marché  <a href="#" @click.prevent="videTypeMarche()" v-if="type_marche" style="color: red"><i class="fa fa-trash-o"></i></a>
                                 </label>
-                                <model-list-select style="background-color: rgb(233,233,233);"
+                                <model-list-select style="background-color: #fff;"
                                                    class="wide"
                                                    :list="typeMarches"
                                                    v-model="type_marche"
@@ -97,21 +97,53 @@
             </div>
 
 <hr v-if="affiche_filtre">
-<div  class="row-fluid" >
-    <div class="span5"><h4>MARCHES PLANIFIES - EXERCICE {{anneeAmort}}</h4></div>
-    <div class="span1" align="">
-        <h4><font  size="5">{{nombreTotalMarche}}</font></h4>
-    </div>
-    <div class="span3" align="right">
-        <button class="btn btn-info" @click="click_cartographie()">Situation Géographique</button>
-    </div>
-    <div class="span2">
-        <button class="btn btn-info">Voir PPM</button>
-    </div>
-    <div class="span1">
-        <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button>
-    </div>
-</div>
+
+            <table class="table  table-striped" >
+                <tbody >
+                <tr>
+                    <td style="background: #b4c6e7;border: 5px solid #fff; font-size: 15px"><b>TOTAL MARCHES PLANIFIES - EXERCICE {{anneeAmort}}</b></td>
+                    <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>{{nombreTotalMarche}} Marchés</b></td>
+                    <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>{{formatageSomme(montantTotaleMarchePlanifieContratuel)}} TTC</b></td>
+                    <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;"><button class="btn btn-link" style="font-size: 15px;color: #000;"><b>VOIR PPM</b></button></td>
+                    <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;"><button class="btn btn-link" style="font-size: 15px;color: #000;" @click="click_cartographie()"><b>VOIR SITUATION GEOGRAPHIQUE</b></button></td>
+<!--                    <td> <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button></td>-->
+                </tr>
+                <tr>
+                    <td style="background: #b4c6e7;border: 5px solid #fff;font-size: 15px"><b>TOTAL MARCHES HORS PPM - EXERCICE {{anneeAmort}}</b></td>
+                    <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>0 Marché</b></td>
+                    <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>{{formatageSomme(0)}} TTC</b> </td>
+
+                    <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;"><button class="btn btn-link" style="font-size: 15px;color: #000;"><b>DETAIL</b></button></td>
+                    <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;"><button class="btn btn-link" style="font-size: 15px;color: #000;"><b>VOIR SITUATION GEOGRAPHIQUE</b></button></td>
+                </tr> <tr>
+                    <td style="background: #2f5396;border: 5px solid #fff;color: #fff;font-size: 15px"><b>TOTAL GENERAL MARCHES - EXERCICE {{anneeAmort}}</b></td>
+                    <td style="background: #2f5396;border: 5px solid #fff;color: #fff;text-align: center !important;font-size: 15px"><b>{{nombreTotalMarche}} Marchés</b></td>
+                    <td style="background: #2f5396;border: 5px solid #fff;color: #fff;text-align: center !important;font-size: 15px"><b>{{formatageSomme(montantTotaleMarchePlanifieContratuel)}} TTC</b></td>
+                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                    <td style="background: #fff;border: 5px solid #fff;color: #fff;text-align: center !important;"></td>
+                    <td style="background: #2f5396;border: 5px solid #fff;color: #fff;text-align: center !important;"><button style="font-size: 15px; color: #fff;" class="btn btn-link" @click="click_cartographie()"><b>VOIR SITUATION GEOGRAPHIQUE</b></button></td>
+                </tr>
+
+                </tbody>
+            </table>
+<!--<div  class="row-fluid" >-->
+<!--    <div class="span4"><h4>MARCHES PLANIFIES - EXERCICE {{anneeAmort}}</h4></div>-->
+<!--    <div class="span2" align="">-->
+<!--        <h4><font  size="4">{{nombreTotalMarche}} Marchés</font></h4>-->
+<!--    </div>-->
+<!--    <div class="span1" align="right">-->
+<!--        4444-->
+<!--    </div>-->
+<!--    <div class="span3" align="right">-->
+<!--        <button class="btn btn-info" @click="click_cartographie()">Situation Géographique</button>-->
+<!--    </div>-->
+<!--    <div class="span2">-->
+<!--        <button class="btn btn-info">Voir PPM</button>-->
+<!--    </div>-->
+<!--&lt;!&ndash;    <div class="span1">&ndash;&gt;-->
+<!--&lt;!&ndash;        <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--</div>-->
 
 
             <nav aria-label="breadcrumb" class="main-breadcrumb" style="background: #806000">
@@ -127,86 +159,7 @@
                 </ol>
             </nav>
 
-<!-----------------TABLEAU DE BORD MONTANT MARCHE------------------------>
-<!--            <div class="">-->
-<!--                <div class="row-fluid" style="margin-top: -20px">-->
-<!--                    <div class="span3">-->
-<!--                        <div class="card-box bg-prevision">-->
-<!--                            <div class="inner">-->
-<!--                                <h3> {{formatageSomme(montantPrevue)}} </h3>-->
-<!--                                <p> Montant previsionnel </p>-->
-<!--                            </div>-->
 
-<!--                            <div class="icon">-->
-
-<!--                                <i class="fa fa-money" aria-hidden="true"></i>-->
-<!--                            </div>-->
-
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="span3">-->
-<!--                        <div class="card-box bg-base">-->
-<!--                            <div class="inner">-->
-<!--                                <h3> {{formatageSomme(montantApprouveMarche)}}  </h3>-->
-<!--                                <p> Montant de base + avenant-->
-<!--                                </p>-->
-<!--                            </div>-->
-<!--                            <div class="icon">-->
-<!--                                <i class="fa fa-money" aria-hidden="true"></i>-->
-<!--                            </div>-->
-
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="span2">-->
-<!--                        <div class="card-box bg-green">-->
-<!--                            <div class="inner">-->
-<!--                                <h3> {{formatageSomme(montantExecute)}} </h3>-->
-<!--                                <p> Montant execute </p>-->
-
-<!--                            </div>-->
-
-<!--                            <div class="icon">-->
-
-<!--                                <i class="fa fa-money" aria-hidden="true"></i>-->
-<!--                            </div>-->
-
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="span2">-->
-<!--                        <div class="card-box bg-restant">-->
-<!--                            <div class="inner">-->
-<!--                                <h3> {{formatageSomme(montantRestant)}} </h3>-->
-<!--                                <p> Montant restant-->
-<!--                                </p>-->
-<!--                            </div>-->
-<!--                            <div class="icon">-->
-<!--                                <i class="fa fa-money" aria-hidden="true"></i>-->
-<!--                            </div>-->
-
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="span2">-->
-<!--                        <div class="card-box bg-taux">-->
-<!--                            <div class="inner">-->
-<!--                                <h3> {{tauxExecution}} % </h3>-->
-<!--                                <p> Taux execution </p>-->
-<!--                            </div>-->
-<!--                            <div class="icon">-->
-<!--                                <i class="fa fa-money" aria-hidden="true"></i>-->
-<!--                            </div>-->
-
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--            </div>-->
-
-<!--------------------FIN TABLEAU DE BORD FIN MARCHE---------------------->
-
-
-
-      <!---------------------TABLEAU DE BORD ETAT MARCHE--------------------->
 
 
             <div class="">
@@ -907,6 +860,7 @@
         },
         data() {
            return{
+               controlleur_fin:"",
                status_marches:"",
                unite_administrative_id:"",
                infrastructure:"",
@@ -932,8 +886,8 @@
                        width: 380,
                        type: 'pie',
                    },
-                   labels: ['A.C.H.A', 'A.C.A.A', 'En Cont.', 'En Execution', 'En Souffrance'],
-                   colors:['#0000f3', '#e81776', '#FF00FF',"#008000","#FF0000"],
+                   labels: ['A.Contra.', 'A.C.H.D', 'En Cont.', 'EN Contr.H.D', 'En Execution',"En Execution HD","Acheve Delais","Acheve H.D","En souffrance"],
+                   colors:['#8ea9db', '#f4b084', '#92d04f',"#632990","#d7b755","#d36f2a","#00b04f","#757171","#ff0000"],
                    responsive: [{
                        breakpoint: 480,
                        options: {
@@ -972,6 +926,16 @@ console.log(this.listeMarchStatueExecuteAcheve)
 
             ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise",
                 "getterImageMarche","acteEffetFinanciers","getActeEffetFinancierPersonnaliser45","typeMarches","avenants",]),
+            ...mapGetters("Utilisateurs", ["getterUtilisateur","getterRoles"]),
+            listeCF(){
+              return this.getterUtilisateur.filter(item=>{
+                  if(item.user_role){
+                      if (item.user_role.role.code_role=="DCF" || item.user_role.role.code_role=="CF"){
+                          return item
+                      }
+                  }
+              })
+            },
             noDCfNoAdmin:noDCfNoAdmin,
             regions(){
                 // console.log(this.localisations_geographiques.filter(item=>item.structure_localisation_geographique.niveau==2))
@@ -986,7 +950,6 @@ console.log(this.listeMarchStatueExecuteAcheve)
                     let colect=[];
                     let vM=this
                     this.uniteAdministratives.filter(item=>{
-                        console.log("OK bonjour GUE")
                         if(vM.getterUniteAdministrativeByUser.length>0){
                             let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
                             if (val!=undefined){
@@ -1401,7 +1364,11 @@ console.log(this.listeMarchStatueExecuteAcheve)
                 vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus("planifie")))
                 vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(8)))
                 vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(1)))
+                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(9)))
                 vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(2)))
+                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(10)))
+                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(11)))
+                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(12)))
                 vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(7)))
                 return ""
             },
@@ -1695,6 +1662,9 @@ console.log(this.listeMarchStatueExecuteAcheve)
             },
             videTypeMarche(){
                 this.type_marche=""
+            },
+            videTypeCF(){
+                this.controlleur_fin=""
             },
             filter(){
                 this.affiche_filtre=!this.affiche_filtre
