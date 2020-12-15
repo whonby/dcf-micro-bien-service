@@ -148,9 +148,11 @@ let objetMontantAprouve= {
             name: 'Montant approuvé',
             data: [objetActeFinancier.montant_act]
           }
+          
 
           this.diagramme.push(objetPrevision)
           this.diagramme.push(objetMontantAprouve)
+         
         //console.log("0k ok ok")
        }
         
@@ -169,28 +171,8 @@ let objetMontantAprouve= {
 //       return max=>{
 //         return Math.floor(Math.random() * Math.floor(max));
 //       }},
-// afficherIdFacture(){
-//   return id =>{
-//     if(id!=null && id!=""){
-//       let objetAnswer=this.decomptefactures.find(item => item.id==id)
-//       console.log(this.decomptefactures)
-//       if(objetAnswer) return objetAnswer.facture_id;
-//     }
-//     return null
-//   }
-// },
-// afficherMontantFacture(){
-//   return id =>{
-//     if(id!=null && id!=""){
-//       var reponse = this.getFacturePersonnaliser.find(item =>item.id==id)
-//      //console.log(this.getFacturePersonnaliser)
-//       if(reponse){
-//         return reponse.prix_propose_ht
-//       }
-//       return null
-//     }
-//   }
-// },
+
+
   afficherMontantExecuter(){
   let montantEx=0;
      let vM=this
@@ -200,18 +182,18 @@ let objetMontantAprouve= {
   vM.decomptefactures.filter(item=>item.marche_id==vM.macheid).forEach(function(value) {
  
    vM.series[0].data.push(value.montantmarche)
- console.log("............")
+ console.log(this.decomptefactures)
     montantEx=montantEx+value.montantmarche
 vM.chartOptions.xaxis.categories.push(value.numero_decompte)
 
   });
-console.log(montantEx)
+//console.log(montantEx)
    let objetExecute= { name: 'Montant Executé',
             data: [vM.montantEx]
           }
 
   vM.diagramme.push(objetExecute)
-  //console.log(this.diagramme)
+   console.log(this.diagramme)
      return null
   }
 

@@ -427,7 +427,7 @@
                     <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{uniteadministrative.code }}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{uniteadministrative.libelle }}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(uniteadministrative.id)">{{ formaterDate(uniteadministrative.date_creation) }}</td>
-                  
+                
                   <!-- </template> -->
                    <!-- <template v-else>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{'Non renseigné'}}</td>

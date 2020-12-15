@@ -2,7 +2,8 @@
     <div>
       
          <apexchart type="bar" height="350" :options="chartOptions" :series="series"></apexchart>
-         <!-- {{calculDuMontantExecution(this.macheid)}} -->
+         <!-- {{resultatT}} % -->
+
       
     </div>
 </template>
@@ -20,6 +21,7 @@ export default {
           marche_id:"",
              series: [{
             name: 'Taux restant',
+            
             data: []
             }, {
             name: "Taux Execution",
@@ -69,6 +71,10 @@ export default {
         }
     },
        created(){
+        //  let ObjetRegion=this.marches.find(item => item.id==id)
+        //   if(ObjetRegion){
+        //     return ObjetRegion.localisation_geographie_id
+        //   }
          this.testRegion()
 
         
@@ -172,10 +178,19 @@ export default {
        return id =>{
          
             return this.getMandatPersonnaliserVise.filter(item =>item.marche_id==id && this.afficherMontantDeBaseDuMarcheParRegion(this.IdMandatVise(this.macheid))).reduce((prec,cur) => parseFloat(prec)
-             + parseFloat(cur.total_general), 0) / parseFloat(this.calculDuMontantReel)*100 .toFixed(2) 
+             + parseFloat(cur.total_general), 0)  
        
        }
+       
      },
+     resultatT(){
+       const answer= (parseFloat(this.calculDuMontantExecution(this.macheid)) /parseFloat(this.calculDuMontantReel)*100)
+       if(answer){
+         return parseInt(answer).toFixed(2)
+       }
+       return 0
+     }
+
     
 
      // calcul du reste des montants de marché
@@ -193,7 +208,7 @@ formatageSomme,
 
  testRegion(){
    let  objet= this.localisations_geographiques.filter(item=>{
-     if(item.structure_localisation_geographique.niveau==2 && item.longitude!=null){
+     if(item.structure_localisation_geographique.niveau==2 && item.longitude!=null ){
        return item
      }
    })
@@ -202,13 +217,15 @@ formatageSomme,
        let vm=this;
        objet.forEach(function (value) {
           // let total=200;
-          let montantExecute=vm.calculDuMontantExecution;
+         // let affichageTauxParRegion=vm.afficherMontantDeBaseDuMarcheParRegion(this.macheid)
+          let montantExecute=vm.resultatT;
           let montanRestant=100 - montantExecute;
 
             let pour_centage_rest=montanRestant
-            let pour_execu=vm.calculDuMontantExecution
+            let pour_execu=vm.resultatT
               vm.series[0].data.push(pour_centage_rest .toFixed(2))
-              vm.series[1].data.push(pour_execu ).toFixed(2)
+             // console.log(this.pour_execu)
+              vm.series[1].data.push(pour_execu).toFixed(2)
               vm.chartOptions.xaxis.categories.push(value.libelle)
        })
       

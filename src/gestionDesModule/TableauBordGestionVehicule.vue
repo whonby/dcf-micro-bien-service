@@ -1,8 +1,153 @@
 <template>
  
      <div>
+
        
-      <h1 style="text-align:center">azerty</h1>
+       <!-- <h4 style="text-align:center">GESTION DES VEHICULES</h4>
+       <br>
+       <br>
+       <table class="table table-bordered table-striped">
+           <tr>
+                 <td>
+                    <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Année Budgétaire</label>
+                  <div class="controls">
+                    <select  class="span5" v-model="formData.ua_id ">
+                      <option></option>                     
+                      
+                    </select>
+                  </div>
+                </div>
+                 </td>
+                 <td>
+                    <div class="control-group">
+                  <label class="control-label" style="font-size:14px">unité administrative</label>
+                  <div class="controls">
+                    <select  class="span5" v-model="formData.uniteadministrative ">
+                      <option></option>                     
+                      <option
+                        v-for="typeUniteA in afficherUAParDroitAccess"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+                 </td>
+                 <td>
+                    <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Immatriculation</label>
+                  <div class="controls">
+                    <select  class="span5" v-model="formData.ua_id ">
+                      <option></option>                     
+                      
+                    </select>
+                  </div>
+                </div>
+                 </td>
+           </tr>
+       </table>
+       <div class="row-fluid">
+       
+       
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>VEHICULES ENREGISTREES</h5>
+          </div>
+           <div class="widget-content"> 
+            <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{nbreEntreprise}}</h1>
+            
+            </div>
+        </div>
+      </div>
+      
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>VEHICULES ENREGISTREES</h5>
+          </div>
+           <div class="widget-content"> 
+            <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{nbreEntreprise}}</h1>
+            
+            </div>
+        </div>
+      </div>
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>VEHICULES EN REPARATION</h5>
+          </div>
+           <div class="widget-content"> 
+            <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{nbreEntreprise}}</h1>
+            
+            </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>COÛT DES VEHICULES REPARES</h5>
+          </div>
+          <div class="widget-content"> 
+               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{0}}</h1>
+            
+          </div>
+        </div>
+      </div>
+      
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>COÛT DES VEHICULES EN COURS DE REPARATION</h5>
+          </div>
+          <div class="widget-content"> 
+               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{0}}</h1>
+            
+          </div>
+        </div>
+      </div>
+     
+    </div>
+    <div class="row-fluid">
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>NOMBRE DE VEHICULE EN REPARATION</h5>
+          </div>
+          <div class="widget-content"> 
+               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{0}}</h1>
+            
+          </div>
+        </div>
+      </div>
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>NOMBRE DE VEHICULE AMORTI</h5>
+          </div>
+          <div class="widget-content"> 
+               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{EntrepriseSantionner}}</h1>
+            
+          </div>
+        </div>
+      </div>
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5>NOMBRE DE VEHICULE EN REPARATION</h5>
+          </div>
+          <div class="widget-content"> 
+               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{EntrepriseSantionner}}</h1>
+            
+          </div>
+        </div>
+      </div> 
+     
+    </div> -->
     
      </div>
 
