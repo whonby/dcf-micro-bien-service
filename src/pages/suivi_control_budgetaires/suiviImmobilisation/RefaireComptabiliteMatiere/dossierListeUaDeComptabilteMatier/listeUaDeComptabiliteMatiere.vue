@@ -220,6 +220,7 @@ export default {
         }
         return this.jointureUaChapitreSection
 
+
     },
      libelleUa() {
       return id => {
