@@ -1,6 +1,7 @@
 <template>
   <div>
-     <!-- <template v-if="detail_marche.code == ''"> -->
+     
+
     <TableauBordParametre v-if="detail_marche.code == 1"></TableauBordParametre>
     <TableauBordUa v-else-if="detail_marche.code == 2"></TableauBordUa>
     <TableauBordGestionSib v-else-if="detail_marche.code == 3"></TableauBordGestionSib>
@@ -48,6 +49,15 @@ components: {
     TableauBordRapport,
     TableauBordGestionVehicule
   },
+
+  created() {
+      console.log(this.getterUniteAdministrativeByUser)
+            this.marcheid=this.$route.params.id
+   this.detail_marche = this.gestionModules.find(
+       idmarche => idmarche.id == this.$route.params.id
+   )
+  
+},
    
   computed:{
  ...mapGetters("uniteadministrative", [
@@ -80,14 +90,7 @@ components: {
 
 
   },
-created() {
-      console.log(this.getterUniteAdministrativeByUser)
-            this.marcheid=this.$route.params.id
-   this.detail_marche = this.gestionModules.find(
-       idmarche => idmarche.id == this.$route.params.id
-   )
-  
-},
+
   methods:{
 
 
