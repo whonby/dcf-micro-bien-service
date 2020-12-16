@@ -83,7 +83,7 @@ detail_marche
  <h5 style="text-align:center;color:red;font-size:20px" >VEUILLEZ SELECTIONNER L'UNITE ADMINISTRATIVE SVP</h5>
               </template>
                         <template v-if="formData.ua_id !='' && formData.typeua_id !='' && formData.exo !=''">
- <h5 style="text-align:center;color:#000000;font-size:20px" >MARCHES/CONTRATS ATTRIBUE ISSUS DE LA PROCEDURE NORMALE</h5>
+<!-- <h5 style="text-align:center;color:#000000;font-size:20px" >MARCHES/CONTRATS ATTRIBUE ISSUS DE LA PROCEDURE NORMALE</h5>-->
               </template>
               <div v-for="item in PROCEDURENORMALE(formData.ua_id)" :key="item.id" class="widget-content">
  
