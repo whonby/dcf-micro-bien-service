@@ -296,7 +296,7 @@ return this.filtre_unite_admin.filter((item) => {
     ]),
 goToUAspace(id){
     this.ajouterUA_ID_IMO(id)
-    console.log("BONJOUR M")
+    
 this.$router.push({
         name: 'TableauDeBordG',
         params:{id:8}

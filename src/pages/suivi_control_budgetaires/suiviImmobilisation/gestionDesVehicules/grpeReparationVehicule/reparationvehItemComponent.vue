@@ -2,7 +2,7 @@
 <template>
    
       <div class="accordion" >
-          <div class="accordion-group widget-box" v-if="groupe.reparation_vehicule.length > 0 ">
+          <div class="accordion-group widget-box" v-if="ListeDesAffectationVehiculeParUa(getterUa_idImo).length > 0 ">
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
@@ -37,7 +37,7 @@
                 <tbody>
                    <reparationvehItem
                         class="item"
-                        v-for="groupeElement in groupe.reparation_vehicule"
+                        v-for="groupeElement in ListeDesAffectationVehiculeParUa(getterUa_idImo)"
                         :key="groupeElement.id"
                         :article="groupeElement"
                         @modification="$emit('modification', $event)"
@@ -58,6 +58,7 @@
 
 
 <script>
+import { mapGetters} from "vuex";
 import reparationvehItem from './reparationvehItem'
 
 export default {
@@ -79,23 +80,78 @@ export default {
 
 
   computed: {
-  
+  ...mapGetters("SuiviImmobilisation", [
+    "getPersoStock",
+      "equipements",
+      "familles",
+      "articles",
+      "type_Unite_admins",
+      "totalQteEntrant",
+      "totalQteSortant",
+     "getterUa_idImo"
+    ]),
+    ...mapGetters("bienService", [ "typeMarches","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+      "modePassations", "procedurePassations","getterDossierCandidats","marches",
+      "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
+      "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+      "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
+      "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
+      "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+ListeDesAffectationVehiculeParUa() {
+      
+        if (this.noDCfNoAdmin ){
+            let colect=[];
+            this.groupe.reparation_vehicule.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.uniteadministrative == id && this.recupererEtatContrat(element.acte_id)==1);
+        }
+      };
+          }
+           return id => {
+        if (id != null && id != "") {
+          return this.groupe.reparation_vehicule.filter(element => element.uniteadministrative == id && this.recupererEtatContrat(element.acte_id)==1);
+        }
+      };
+         
+
+
+
+    },
+    recupererEtatContrat() {
+      const qtereel = this.getActeEffetFinancierPersonnaliser.find(
+        qtreel => qtreel.id == this.formData.id,
+       
+      );
+
+      if (qtereel) {
+        return qtereel.article_id;
+      }
+      return 0
+    },
     isFolder: function () {
-      return this.groupe.reparation_vehicule &&
-        this.groupe.reparation_vehicule.length
+      return this.ListeDesAffectationVehiculeParUa(this.getterUa_idImo) &&
+        this.ListeDesAffectationVehiculeParUa(this.getterUa_idImo).length
     },
 
     getNombreArticle(){
-        var nombre = this.groupe.reparation_vehicule.length
+        var nombre = this.ListeDesAffectationVehiculeParUa(this.getterUa_idImo).length
         if(nombre) return nombre
         return '0' 
     },
     iconClasses() {
       return {
-        'icon-plus': !this.isOpen && this.groupe.reparation_vehicule.length,
-        'icon-minus': this.isOpen && this.groupe.reparation_vehicule.length
-        //    'icon-folder-close': !this.isOpen && this.groupe.reparation_vehicule.length,
-        // 'icon-folder-open': this.isOpen && this.groupe.reparation_vehicule.length
+        'icon-plus': !this.isOpen && this.ListeDesAffectationVehiculeParUa(this.getterUa_idImo).length,
+        'icon-minus': this.isOpen && this.ListeDesAffectationVehiculeParUa(this.getterUa_idImo).length
+        //    'icon-folder-close': !this.isOpen && this.ListeDesAffectationVehiculeParUa(this.getterUa_idImo).length,
+        // 'icon-folder-open': this.isOpen && this.ListeDesAffectationVehiculeParUa(this.getterUa_idImo).length
       }
     },
 

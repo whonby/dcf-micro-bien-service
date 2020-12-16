@@ -18,7 +18,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for=" serv in listeDesServiceDeUa"
+                    <tr class="odd gradeX" v-for=" serv in listeDesServiceDeUa(getterUa_idImo)"
                         :key="serv.id">
                         
                               <td >
@@ -112,7 +112,7 @@ admin:admin,
       // "chapitres",
       // "sections"
     ]),
-   ...mapGetters("SuiviImmobilisation", ["services"]),
+   ...mapGetters("SuiviImmobilisation", ["services","getterUa_idImo"]),
    ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
     //   filtreServiceUniteAdministrative() {
     //   const st = this.search.toLowerCase();
@@ -135,11 +135,20 @@ listeDesServiceDeUa() {
                     return item
                 }
             })
-          return colect.filter(items=>items.serviceua_id != null && items.fonction_id == null );
+         // return colect.filter(items=>items.serviceua_id != null && items.fonction_id == null );
+          return id => {
+        if (id != null && id != "") {
+           return colect.filter(items=>items.ua_id == id && items.serviceua_id != null && items.fonction_id == null);
+        }
+      };
         }
 
-       return this.getterplanOrganisationUa.filter(items=>items.serviceua_id != null && items.fonction_id == null);
-
+       //return this.getterplanOrganisationUa.filter(items=>items.serviceua_id != null && items.fonction_id == null);
+   return id => {
+        if (id != null && id != "") {
+           return this.getterplanOrganisationUa.filter(items=>items.ua_id == id && items.serviceua_id != null && items.fonction_id == null);
+        }
+      };
     },
 
 

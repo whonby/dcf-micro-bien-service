@@ -441,12 +441,11 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                     <!-- <th>Type Unite administrative</th>  -->
+                     
                     <th title="unite administrative">UA</th>
-                     <!-- <th>Equipement Type</th>  -->
+                     
                      <th>Famille</th>
-                    <!-- <th>Article</th> -->
-                    <!-- <th>Durée de vie</th> -->
+                    <th>Quantité Initiale</th> 
                     <th title="quantite en stock">Quantité en stock</th>
                      <th>Date d'entrée</th>
                     <th title="quantite entrant">Quantité entrée</th>
@@ -461,7 +460,7 @@
                 <tbody>
                      <tr
                     class="odd gradeX"
-                    v-for="(stock, index) in listeDesStockParUa(getterUa_idImo)"
+                    v-for="stock in listeDesStockParUa"
                     :key="stock.id"
                   >
 
@@ -472,34 +471,34 @@
                       @dblclick="afficherModalModifierStock(index)"
                     >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
                     <td
-                      @dblclick="afficherModalModifierStock(index)"
+                      @dblclick="afficherModalModifierTitre(id)"
                     >{{libelleUniteAdministrative(stock.uAdministrative_id)	 || 'Non renseigné'}}</td>
                      <!-- <td
-                      @dblclick="afficherModalModifierStock(index)"
+                      @dblclick="afficherModalModifierTitre(id)"
                     >{{libelleTypeEquipement(stock.typeequipe_id) || 'Non renseigné'}}</td>  -->
                     <td
-                      @dblclick="afficherModalModifierStock(index)"
+                      @dblclick="afficherModalModifierTitre(id)"
                     >{{libelleFamilleEquipement(stock.famill_id) || 'Non renseigné'}}</td>
                      <!-- <td
-                      @dblclick="afficherModalModifierStock(index)"
+                      @dblclick="afficherModalModifierTitre(id)"
                     >{{stock.AfficheArticle.libelle || 'Non renseigné'}}</td> -->
-                     <!-- <td style="text-align: center;"
-                      @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.durevie || 'Non renseigné'}}</td> -->
+                     <td style="text-align: center;"
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.histo_qte || 'Non renseigné'}}</td>
                     <td style="text-align: center;"
-                      @dblclick="afficherModalModifierStock(index)"
+                      @dblclick="afficherModalModifierTitre(id)"
                     >{{stock.quantitestock || 'Non renseigné'}}</td>
                     <td style="text-align: center;"
-                      @dblclick="afficherModalModifierStock(index)"
+                      @dblclick="afficherModalModifierTitre(id)"
                     >{{formaterDate(stock.date_entre) || 'Non renseigné'}}</td>
                     <td style="text-align: center;"
-                      @dblclick="afficherModalModifierStock(index)"
+                      @dblclick="afficherModalModifierTitre(id)"
                     >{{stock.qteentrant || '0'}}</td>
                        <td style="text-align: center;"
-                      @dblclick="afficherModalModifierStock(index)"
+                      @dblclick="afficherModalModifierTitre(id)"
                     >{{formaterDate(stock.date_sortie) || 'Non renseigné'}}</td>
                     <td style="text-align: center;"
-                      @dblclick="afficherModalModifierStock(index)"
+                      @dblclick="afficherModalModifierTitre(id)"
                     >{{ stock.qtesortie ||'0' }}</td>
                   
                      <!-- <td
@@ -523,17 +522,17 @@
                    
                   >
                 
-                
+                <td></td>
                       <td></td>
                    <td style="font-weight:bold;" title="total quantite entrant">Total en stock</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(getterUa_idImo) || 0 }}</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock || 0 }}</td>
                     <td></td>
                    
                      
                   
                      <td ></td>
                     <td style="font-weight:bold;" title="total quantite sortant">Total quantité sortie</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{ nombreDeQuantiteSortiEnStock(getterUa_idImo) || 0 }}</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{ nombreDeQuantiteSortiEnStock || 0 }}</td>
                     
                    <td></td>
                      
@@ -565,8 +564,8 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
-import { formatageSomme } from "../../../Repositories/Repository";
-import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth"
+import { formatageSomme } from "../../../../../Repositories/Repository";
+import {admin,dcf,noDCfNoAdmin} from "../../../../../Repositories/Auth"
 export default {
   name: 'besionImmolisation',
   data() {
@@ -631,7 +630,7 @@ quantite: {
 // },
   computed: {
     ...mapGetters("SuiviImmobilisation", [
-    "getPersoStock",
+    
       "equipements",
       "familles",
       "articles",
@@ -643,7 +642,7 @@ quantite: {
      "getterUa_idImo"
     ]),
     
-    ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
+    ...mapGetters("uniteadministrative", ["uniteAdministratives","GestionStockageArticles"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 admin:admin,
       dcf:dcf,
@@ -651,7 +650,7 @@ admin:admin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
     //  filtre_Stock() {
     //   const st = this.search.toLowerCase();
-    //   return this.getPersoStock.filter(type => {
+    //   return this.GestionStockageArticles.filter(type => {
     //     return (
     //       type.typeUniteAdministrative.libelle.toLowerCase().includes(st) ||
     //       type.uniteAdministrative.libelle.toLowerCase().includes(st)
@@ -664,7 +663,7 @@ filtre_Stock() {
        
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.getPersoStock.filter(item=>{
+            this.GestionStockageArticles.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
                 if (val!=undefined){
                     colect.push(item)
@@ -674,7 +673,7 @@ filtre_Stock() {
             return colect;
         }
 
-        return this.getPersoStock;
+        return this.GestionStockageArticles;
 
     },
 
@@ -686,7 +685,7 @@ listeDesStockParUa() {
    
         if (this.noDCfNoAdmin ){
             let colect=[];
-            this.getPersoStock.filter(item=>{
+            this.GestionStockageArticles.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
                 if (val!=undefined){
                     colect.push(item)
@@ -694,17 +693,9 @@ listeDesStockParUa() {
                 }
                
             })
-            return id => {
-        if (id != null && id != "") {
-          return colect.filter(element => element.uAdministrative_id == id && element.typestockage == 1);
-        }
-      };
+           return colect
           }
-           return id => {
-        if (id != null && id != "") {
-          return this.getPersoStock.filter(element => element.uAdministrative_id == id && element.typestockage == 1);
-        }
-      };
+        return this.GestionStockageArticles
          
 
 
@@ -721,7 +712,7 @@ nombreDeQuantiteEnStock() {
 
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.getPersoStock.filter(item=>{
+            this.GestionStockageArticles.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
                 if (val!=undefined){
                     colect.push(item)
@@ -730,19 +721,13 @@ nombreDeQuantiteEnStock() {
             })
             //return colect
           
-              return id => {
-        if (id != null && id != "") {
-          return colect.filter(element => element.uAdministrative_id == id && element.typestockage == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
-        }
-      };
-        }
-//return this.getPersoStock.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+              
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
        
-           return id => {
-        if (id != null && id != "") {
-          return this.getPersoStock.filter(element => element.uAdministrative_id == id && element.typestockage == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
         }
-      };
+//return this.GestionStockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+       
+         return this.GestionStockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
 
     },
 nombreDeQuantiteSortiEnStock() {
@@ -751,7 +736,7 @@ nombreDeQuantiteSortiEnStock() {
 
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.getPersoStock.filter(item=>{
+            this.GestionStockageArticles.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
                 if (val!=undefined){
                     colect.push(item)
@@ -761,20 +746,12 @@ nombreDeQuantiteSortiEnStock() {
           
           
        
-         return id => {
-        if (id != null && id != "") {
-          return colect.filter(element => element.uAdministrative_id == id && element.typestockage == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
-        }
-      };
+         return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
        }
 
      
 
- return id => {
-        if (id != null && id != "") {
-          return this.getPersoStock.filter(element => element.uAdministrative_id == id && element.typestockage == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
-        }
-      };
+ return this.GestionStockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
     },
 
 
@@ -979,10 +956,11 @@ veifArticlesExist() {
       "modifierStock",
       "supprimerStock"
     ]),
-    formatageSomme: formatageSomme,
-ajouterEntreEnPatrimoine(){
-                this.$router.push({ name: 'AjouterEntrePatrimoineVehicule' })
+    ajouterEntreEnPatrimoine(){
+                this.$router.push({ name: 'AjouterEntrePatrimoine' })
             },
+    formatageSomme: formatageSomme,
+
             afficherModalModifierTitre(id) {
 
       this.$router.push({
@@ -1026,7 +1004,7 @@ ajouterEntreEnPatrimoine(){
         keyboard: false
       });
 
-      this.editStock = this.getPersoStock[index];
+      this.editStock = this.GestionStockageArticles[index];
     },
     afficherModalStock(index) {
       this.$("#exampleModalStock").modal({
@@ -1034,7 +1012,7 @@ ajouterEntreEnPatrimoine(){
         keyboard: false
       });
 
-      this.editStock = this.getPersoStock[index];
+      this.editStock = this.GestionStockageArticles[index];
     },
 
      modifierStockEntrant() {

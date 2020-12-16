@@ -42,10 +42,16 @@
                  <div class="control-group">
             <label class="control-label" title="unite administrative">UA</label>
             <div class="controls" >
-            <select v-model="formData.ua_id" class="span">
+            <!-- <select v-model="getterUa_idImo" class="span">
                <option v-for="plans in groupeUaPourMarheHorSib" :key="plans[0].id" 
                :value="plans[0].uniteadministrative_id">{{afficherLibelleUniteAdministrative(plans[0].uniteadministrative_id)}}</option>
-           </select>
+           </select> -->
+             <input
+                type="text"
+                :value="libelleUa(getterUa_idImo)"
+                class="span5"
+                readonly
+              />
             </div>
           </div>
                  </td>
@@ -56,7 +62,7 @@
                     <select  class="span" v-model="formData1.typeveh">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in typeVehiculeparUa(formData.ua_id)"
+                        v-for="typeUniteA in typeVehiculeparUa(getterUa_idImo)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.typevehicule"
                       >{{libelleTypeVehicule(typeUniteA.typevehicule)}}</option>
@@ -71,7 +77,7 @@
                     <select  class="span" v-model="formData.vehicule_id ">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in listeVehicule(formData.ua_id)"
+                        v-for="typeUniteA in listeVehicule(getterUa_idImo)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.numimmatriculation}}-{{libellemarqueVehicules(typeUniteA.marque)}}</option>
@@ -86,7 +92,7 @@
                     <select  class="span" v-model="formData.acte_id ">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in NumeroContrat(formData.ua_id)"
+                        v-for="typeUniteA in NumeroContrat(getterUa_idImo)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.reference_act}}</option>
@@ -274,7 +280,7 @@ props:["macheid"],
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
    ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-   ...mapGetters("SuiviImmobilisation", ["AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
+   ...mapGetters("SuiviImmobilisation", ["getterUa_idImo","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
    ...mapGetters('uniteadministrative',[
      "groupeUaPourMarheHorSib",
     "plans_programmes",
@@ -345,8 +351,20 @@ cf:cf,
     },
 //                lesClassDe3() { 
 // const isClassDe3 = (code) => code.charAt(0)== "6" && code.charAt(1)== "1" && code.charAt(2)== "4"; 
-// return this.afficheLigneReparation(formData.ua_id).filter(x => isClassDe3(x.code));
+// return this.afficheLigneReparation(getterUa_idImo).filter(x => isClassDe3(x.code));
 //  },
+libelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
  Codeeconomique() {
       return id => {
         if (id != null && id != "") {

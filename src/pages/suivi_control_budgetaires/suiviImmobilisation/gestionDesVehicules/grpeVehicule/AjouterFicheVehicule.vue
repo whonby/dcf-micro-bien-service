@@ -42,6 +42,12 @@
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
                     </select>
+                       <!-- <input
+                type="text"
+                :value="libelleUa(getterUa_idImo)"
+                class="span5"
+                readonly
+              /> -->
                   </div>
                 </div>
                       </td>
@@ -76,7 +82,7 @@
                       </td>
                       <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Immobilisation</label>
+                  <label class="control-label" style="font-size:14px">Imputation comptable</label>
                   <div class="controls">
                     <select  class="span" v-model="formData.immobilisation">
                       <option></option>                     
@@ -578,7 +584,8 @@ props:["macheid"],
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
    ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-   ...mapGetters("SuiviImmobilisation", ["Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
+   ...mapGetters("SuiviImmobilisation", ["getterUa_idImo","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
+    //...mapGetters("SuiviImmobilisation", ["getterUa_idImo","familles","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
    ...mapGetters('uniteadministrative',[
     "plans_programmes",
  "uniteAdministratives",
@@ -641,6 +648,18 @@ cf:cf,
         
 
     },
+    libelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
              lesClassDe3() { 
 const isClassDe3 = (code) => code.charAt(0) == "2"; 
 return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
@@ -681,7 +700,8 @@ return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
       
       var objetNew ={
         ...this.formData,
-        anneebudgetaire:this.anneeAmort
+        anneebudgetaire:this.anneeAmort,
+        uniteadministrative:this.getterUa_idImo
       }
       this.ajouterNouveauVehicule(objetNew);
     

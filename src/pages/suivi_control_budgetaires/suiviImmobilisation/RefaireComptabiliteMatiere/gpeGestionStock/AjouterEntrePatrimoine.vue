@@ -20,9 +20,9 @@
                   <div class="widget-title">
                       
                     <ul class="nav nav-tabs">
-                     <li class="active"><a data-toggle="tab" href="#Techniques">Informations</a></li>
-        <!-- <li class=""><a data-toggle="tab" href="#Informations">Autres Informations</a></li> -->
-        
+                     <li class="active"><a data-toggle="tab" href="#Techniques1">Informations</a></li>
+        <li class=""><a data-toggle="tab" href="#Informations2" v-show="formData.typestockage == 2">Information sur le véhicule</a></li>
+        <li class=""><a data-toggle="tab" href="#Informations1" v-show="formData.typestockage == 1">Information sur le materiel</a></li>
                       
                      
                      
@@ -30,8 +30,23 @@
                   </div>
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
-                  <div id="Techniques" class="tab-pane active">
+                   
+                  <div id="Techniques1" class="tab-pane active">
          <table class="table table-bordered table-striped">
+           <tr>
+             <td>
+                     <div class="control-group">
+             <label class="control-label">Type de bien corporel</label>
+              <div class="controls">
+                 <select  class="span5" v-model="formData.typestockage">
+                      <option></option>                     
+                     <option value="1">Matériel et mobilier</option> 
+                     <option value="2">Véhicule</option> 
+                    </select>
+              </div>
+            </div>
+                            </td>
+           </tr>
                <tr>
                
                  <td colspan="">
@@ -46,6 +61,12 @@
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
                     </select>
+                     <!-- <input
+                type="text"
+                :value="libelleUa(getterUa_idImo)"
+                class="span"
+                readonly
+              /> -->
                   </div>
                 </div>
                  </td>
@@ -179,6 +200,12 @@
                </tr>
         </table>
       </div>
+       <div id="Informations2" class="tab-pane">
+<AjouterFicheVehicule></AjouterFicheVehicule>
+                    </div>
+                    <div id="Informations1" class="tab-pane">
+<ficheMateriel></ficheMateriel>
+                    </div>
                   </div>  
 
                   
@@ -213,12 +240,15 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import {admin,dcf,cf} from '../../../../../Repositories/Auth';
+import AjouterFicheVehicule from '../../gestionDesVehicules/grpeVehicule/AjouterFicheVehicule'
+import ficheMateriel from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/FicheMateriel/ficheMateriel'
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
-  // components: {
-  //   ModelListSelect
-  // },
+  components: {
+    AjouterFicheVehicule,
+    ficheMateriel
+  },
   data() {
     return {
       fabActions: [
@@ -622,8 +652,14 @@ libelleUa() {
      ...mapActions("uniteadministrative", [
       "ajouterStockArticle"
       ]),
+      ...mapActions("SuiviImmobilisation", [
+      "getAllStock",
+      "ajouterStock",
+      "modifierStock",
+      "supprimerStock"
+    ]),
       afficherModalListePersonnel(){
-                this.$router.push({ name: 'ListeStockArticle' })
+                this.$router.push({ name: 'gestionStockCorporels' })
             },
       afficherModalListeExecution(){
                 window.history.back();

@@ -81,6 +81,12 @@ import demarrage from '../../pages/suivi_control_budgetaires/suiviImmobilisation
 
 
 
+//import AjouterReparationHorsSibMobilier from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/reparationMobilier/AjouterReparationHorsSibMobilier.vue'
+//import AjouterReparationSibMobilier from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/reparationMobilier/AjouterReparationSibMobilier.vue'
+//import listeDesReparationMobilier from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/reparationMobilier/listeDesReparationMobilier.vue'
+//import ModifierReparationMobilier from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/reparationMobilier/ModifierReparationMobilier.vue'
+
+import gestionStockCorporels from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/gestionStockCorporels.vue'
 
 
 
@@ -88,20 +94,55 @@ import demarrage from '../../pages/suivi_control_budgetaires/suiviImmobilisation
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+import listedesArticleparPerso from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/AffectationEquipementParUa/DossierAffectation/listedesArticleparPerso.vue'
+import listedesArticleParService from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/AffectationEquipementParUa/DossierAffectation/listedesArticleParService.vue'
 
 const suiviImmobilisationRoutes = [
+  {
+    path: "/listedesArticleParService/:id",
+    name: "listedesArticleParService",
+    component: listedesArticleParService
+  },
+  {
+    path: "/listedesArticleparPerso/:id",
+    name: "listedesArticleparPerso",
+    component: listedesArticleparPerso
+  },
+  {
+    path: '/gestion-Stock-Corporels',
+   name:"gestionStockCorporels",
+  
+   component: gestionStockCorporels
+},
+//   {
+//     path: '/Ajouter-Reparation-HorsSib-Mobilier',
+//    name:"AjouterReparationHorsSibMobilier",
+  
+//    component: AjouterReparationHorsSibMobilier
+// },
+// {
+//   path: '/Ajouter-Reparation-SibMobilier',
+//  name:"AjouterReparationSibMobilier",
+ 
+//  component: AjouterReparationSibMobilier
+// },
+//   {
+//     path: '/liste-Des-Reparation-Mobilier',
+//    name:"listeDesReparationMobilier",
+   
+//    component: listeDesReparationMobilier
+// },
+  
+  // {
+  //   path: "/ModifierReparationMobilier/:id",
+  //   name: "ModifierReparationMobilier",
+  //   component: ModifierReparationMobilier
+  // },
+
+
+
+
+
   {
     path: '/Comptabilite-Matieres',
    name:"demarrage",

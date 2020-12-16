@@ -2,7 +2,7 @@
 <template>
    
       <div class="accordion" >
-          <div class="accordion-group widget-box" v-if="AfficherParTypeStock.length > 0 ">
+          <div class="accordion-group widget-box" v-if="ListeDesAffectationVehiculeParUa.length > 0 ">
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
@@ -34,7 +34,7 @@
                 <tbody>
                    <StockItem
                         class="item"
-                        v-for="groupeElement in AfficherParTypeStock"
+                        v-for="groupeElement in ListeDesAffectationVehiculeParUa"
                         :key="groupeElement.id"
                         :article="groupeElement"
                         @modification="$emit('modification', $event)"
@@ -55,6 +55,7 @@
 
 
 <script>
+import { mapGetters} from "vuex";
 import StockItem from './StockItem'
 
 export default {
@@ -76,28 +77,64 @@ export default {
 
 
   computed: {
-  
+  ...mapGetters("SuiviImmobilisation", ["getterUa_idImo","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
     isFolder: function () {
-      return this.AfficherParTypeStock &&
-        this.AfficherParTypeStock.length
+      return this.ListeDesAffectationVehiculeParUa &&
+        this.ListeDesAffectationVehiculeParUa.length
     },
 
+
     getNombreArticle(){
-        var nombre = this.AfficherParTypeStock.length
+        var nombre = this.ListeDesAffectationVehiculeParUa.length
         if(nombre) return nombre
         return '0' 
     },
     iconClasses() {
       return {
-        'icon-plus': !this.isOpen && this.AfficherParTypeStock.length,
-        'icon-minus': this.isOpen && this.AfficherParTypeStock.length
-        //    'icon-folder-close': !this.isOpen && this.AfficherParTypeStock.length,
-        // 'icon-folder-open': this.isOpen && this.AfficherParTypeStock.length
+        'icon-plus': !this.isOpen && this.ListeDesAffectationVehiculeParUa.length,
+        'icon-minus': this.isOpen && this.ListeDesAffectationVehiculeParUa.length
+        //    'icon-folder-close': !this.isOpen && this.ListeDesAffectationVehiculeParUa(getterUa_idImo).length,
+        // 'icon-folder-open': this.isOpen && this.ListeDesAffectationVehiculeParUa(getterUa_idImo).length
       }
     },
-AfficherParTypeStock(){
-  return this.groupe.gestion_stock.filter(item=>item.typestockage == null)
-}
+    ListeDesAffectationVehiculeParUa() {
+      
+        if (this.noDCfNoAdmin ){
+            let colect=[];
+            this.groupe.gestion_stock.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element =>element.typestockage == null);
+        }
+      };
+          }
+           return id => {
+        if (id != null && id != "") {
+          return this.groupe.gestion_stock.filter(element =>element.typestockage == null);
+        }
+      };
+         
+
+
+
+    },
+
+listeDesStock() {
+      return id => {
+        if (id != null && id != "") {
+          return this.groupe.gestion_stock.filter(
+            element => element.articlestock_id == id && element.typestockage == null
+          );
+        }
+      };
+    },
    
   },
 

@@ -1,4 +1,4 @@
-
+AfficheTotalQteNonCouvert
 <template>
   
    
@@ -728,7 +728,7 @@
                         <a data-toggle="tab" href="#tab13">Liste du Personnel non Equipées  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
                       </li>
                       <li class="">
-                        <a data-toggle="tab" href="#tab45">Equipements Non Couverts   <span class="badge badge-warning">{{AfficheTotalQteNonCouvert}}</span></a>
+                        <a data-toggle="tab" href="#tab45">Equipements Non Couverts   <span class="badge badge-warning">{{AfficheTotalQteNonCouvert(getterUa_idImo)}}</span></a>
                       </li>
                        <li class="">
                         <a data-toggle="tab" href="#tab12">Liste du Personnel Equipées     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
@@ -776,7 +776,7 @@
                   
                   <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in listeDesEquipementParAgent"
+                    v-for="BesoinImmo in listeDesEquipementParAgent(getterUa_idImo)"
                     :key="BesoinImmo.id"
                   >
    
@@ -854,7 +854,7 @@
                  
                     <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in listeDesEquipementNonCouvert"
+                    v-for="BesoinImmo in listeDesEquipementNonCouvert(getterUa_idImo)"
                     :key="BesoinImmo.id">
                     <td
                       
@@ -898,10 +898,10 @@
                   
                   <!-- <td></td> -->
                   <td style="text-align: center;font-size:14px;font-weight:bold;">Total</td>
-                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{AfficheTotalQteACouvrir}}</td>
-                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{(AfficheTotalQteACouvrir)-(AfficheTotalQteNonCouvert)}}</td>
-                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{AfficheTotalQteNonCouvert}}</td>
-                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(afficheMontantTotalEquipementNonCouvert))}}</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{AfficheTotalQteACouvrir(getterUa_idImo)}}</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{(AfficheTotalQteACouvrir(getterUa_idImo))-(AfficheTotalQteNonCouvert(getterUa_idImo))}}</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{AfficheTotalQteNonCouvert(getterUa_idImo)}}</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(afficheMontantTotalEquipementNonCouvert(getterUa_idImo)))}}</td>
                  </tr>
                  
                 </tbody>
@@ -930,7 +930,7 @@
                   
                   <tr
                     class="odd gradeX"
-                    v-for="(BesoinImmo,index) in listePersonnelAffectete"
+                    v-for="(BesoinImmo,index) in listePersonnelAffectete(getterUa_idImo)"
                     :key="BesoinImmo.id"
                   >
                   <!-- <td
@@ -996,7 +996,7 @@
                   
                   <tr
                     class="odd gradeX"
-                    v-for="(BesoinImmo,index) in listePersonnelNonEquipee"
+                    v-for="(BesoinImmo,index) in listePersonnelNonEquipee(getterUa_idImo)"
                     :key="BesoinImmo.id"
                   >
                   <!-- <td
@@ -1070,7 +1070,7 @@
                   
                   <tr
                     class="odd gradeX"
-                    v-for="(BesoinImmo,index) in affichePersonneEquipe"
+                    v-for="(BesoinImmo,index) in listeDesPersonneEquipee(getterUa_idImo)"
                     :key="BesoinImmo.id"
                   >
                   <!-- <td
@@ -1184,7 +1184,7 @@
                               <input    type="text"   class="span3" readonly  :value="afficherUniteAdministrative(formData.unite_administrative_id)" />                              
                              
                         </td>
-                        <td>
+                        <!-- <td>
                           <label class="control-label">Unite de Zone</label>
                           
                               <input    type="text"   class="span4" readonly  :value="afficheUniteZone(formData.uniteZone_id)" />                
@@ -1195,11 +1195,8 @@
                           
                               <input    type="text"   class="span3" readonly  :value="afficherLibelleService(afficheService(formData.service_id))" />                
                              
-                        </td>
-                        
-                      </tr>
-                       <tr>
-                          <td>
+                        </td> -->
+                        <td>
                           <label class="control-label">Fonction</label>
                           
                               <input    type="text"   class="span3" readonly  :value="afficheFonction(formData.fonction_id)" />                
@@ -1212,6 +1209,9 @@
                              
                                               
                         </td>
+                      </tr>
+                       <tr>
+                          
                         <td>
                           <label class="control-label">Besoin</label>
                           
@@ -1229,9 +1229,6 @@
                               <input    type="text"   class="span3" readonly  :value="afficherQuantiteEnStock(formData2.famillearticle_id)" />                
                              
                         </td>
-                        
-                      </tr>
-                      <tr>
                         <td>
                           <label class="control-label">Quantite requise</label>
                           
@@ -1244,6 +1241,9 @@
                               <input    type="text"   class="span3"  :max="afficherQuantiteEnRequise(formData2.famillearticle_id)" v-model="formData2.qte_affecte" />                
                              
                         </td>
+                      </tr>
+                      <tr>
+                        
                         <td>
                           <label class="control-label">Prix unitaire</label>
                           
@@ -1521,7 +1521,8 @@ cause_directeur:""
       "causeInactivite",
       "immobilisations",
       "afficheRegroupeEquipementCouvert",
-      "demandeMateriel"
+      "demandeMateriel",
+      "getterUa_idImo"
       
       
       
@@ -1603,11 +1604,30 @@ afficheToutDemande() {
 
 
 
-listePersonnelAffectete() {
+
+// listePersonnelAffectete() {
       
 
 
-        if (this.noDCfNoAdmin){
+//         if (this.noDCfNoAdmin){
+//             let colect=[];
+//             this.acte_personnels.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+//             })
+//           return colect
+//         }
+
+//        return this.acte_personnels
+
+//     },
+
+listePersonnelAffectete() {
+      
+        if (this.noDCfNoAdmin ){
             let colect=[];
             this.acte_personnels.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
@@ -1615,14 +1635,24 @@ listePersonnelAffectete() {
                     colect.push(item)
                     return item
                 }
+               
             })
-          return colect
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id );
         }
+      };
+          }
+           return id => {
+        if (id != null && id != "") {
+          return this.acte_personnels.filter(element => element.unite_administrative_id == id);
+        }
+      };
+         
 
-       return this.acte_personnels
+
 
     },
-
 listePersonnelNonEquipee() {
       
 
@@ -1636,10 +1666,18 @@ listePersonnelNonEquipee() {
                     return item
                 }
             })
-          return colect
+           return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id);
+        }
+      };
         }
 
-       return this.affichePersonneNonEquipe
+        return id => {
+        if (id != null && id != "") {
+          return this.affichePersonneNonEquipe.filter(element => element.unite_administrative_id == id);
+        }
+      };
 
     },
 listeDesEquipementNonCouvert() {
@@ -1655,10 +1693,18 @@ listeDesEquipementNonCouvert() {
                     return item
                 }
             })
-          return colect
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id);
+        }
+      };
         }
 
-       return this.equipementNonCouvert
+          return id => {
+        if (id != null && id != "") {
+          return this.equipementNonCouvert.filter(element => element.unite_administrative_id == id);
+        }
+      };
 
     },
     listeDesEquipementParAgent() {
@@ -1674,10 +1720,18 @@ listeDesEquipementNonCouvert() {
                     return item
                 }
             })
-          return colect
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id);
+        }
+      };
         }
 
-       return this.tauxequipementParAgent
+          return id => {
+        if (id != null && id != "") {
+          return this.tauxequipementParAgent.filter(element => element.unite_administrative_id == id);
+        }
+      };
 
     },
     listeDesPersonneEquipee() {
@@ -1693,10 +1747,18 @@ listeDesEquipementNonCouvert() {
                     return item
                 }
             })
-          return colect
+              return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id);
+        }
+      };
         }
 
-       return this.affichePersonneEquipe
+           return id => {
+        if (id != null && id != "") {
+          return this.affichePersonneEquipe.filter(element => element.unite_administrative_id == id);
+        }
+      };
 
     },
 
@@ -1716,11 +1778,21 @@ AfficheTotalQteNonCouvert() {
                     return item
                 }
             })
-          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+          
+       
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
         }
+      };
+       }
 
-       return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
-
+  
+  return id => {
+        if (id != null && id != "") {
+          return this.acte_personnels.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        }
+      };
     },
 AfficheTotalQteACouvrir() {
       
@@ -1735,11 +1807,20 @@ AfficheTotalQteACouvrir() {
                     return item
                 }
             })
-          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+          //return colect
+        return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
         }
+      };
+      }
 
-       return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
-
+       //return this.acte_personnels
+return id => {
+        if (id != null && id != "") {
+          return this.acte_personnels.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        }
+      };
     },
 afficheMontantTotalEquipementNonCouvert() {
       
@@ -1754,11 +1835,20 @@ afficheMontantTotalEquipementNonCouvert() {
                     return item
                 }
             })
-          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+         // return colect
+       return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
         }
+      };
+       }
 
-       return this.afficheMontantTotalEquipementNonCouv.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
-
+      // return this.afficheMontantTotalEquipementNonCouv.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+return id => {
+        if (id != null && id != "") {
+          return this.afficheMontantTotalEquipementNonCouv.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+        }
+      };
     },
 
 
@@ -2415,20 +2505,20 @@ affichePersonneNonEquipe(){
 return this.acte_personnels.filter(element => element.normeequipement != 0)
 },
 NombreaffichePersonneEquipe(){
-return this.listeDesPersonneEquipee.length
+return this.listeDesPersonneEquipee(this.getterUa_idImo).length
 },
 affichePersonneEquipe(){
 return this.acte_personnels.filter(element => element.normeequipement == 0)
 },
 afficheNombrePersonneNonEquipe(){
-return this.listePersonnelNonEquipee.length
+return this.listePersonnelNonEquipee(this.getterUa_idImo).length
 },
 
 afficheNombrePersonneEquipe(){
 return this.acte_personnels.filter(element => element.normeequipement == 0).length
 },
 afficheNombreToutPersonne(){
-return this.listePersonnelAffectete.length
+return this.listePersonnelAffectete(this.getterUa_idImo).length
 },
 exoEnCours(){
 return this.exercices_budgetaires.filter(element => element.encours == 1)

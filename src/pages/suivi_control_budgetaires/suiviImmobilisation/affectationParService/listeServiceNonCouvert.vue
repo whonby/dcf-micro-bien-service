@@ -27,7 +27,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for="affectService in listeDesEquipementNonCouvertDeUa"
+                    <tr class="odd gradeX" v-for="affectService in listeDesEquipementNonCouvertDeUa(getterUa_idImo)"
                         :key="affectService.id">
                         
                               <td >
@@ -55,10 +55,10 @@
                   
                 
                   <td style="text-align: center;font-size:14px;font-weight:bold;">Total </td>
-                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{afficheQteACouvert}}</td>
-                   <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{(afficheQteACouvert)-(afficheQteNonCouvert)}}</td>
-                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{afficheQteNonCouvert}}</td>
-                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(afficheMontantTotalEquipementNonCouvert))}}</td> 
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{afficheQteACouvert(getterUa_idImo)}}</td>
+                   <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{(afficheQteACouvert(getterUa_idImo))-(afficheQteNonCouvert(getterUa_idImo))}}</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{afficheQteNonCouvert(getterUa_idImo)}}</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(afficheMontantTotalEquipementNonCouvert(getterUa_idImo)))}}</td> 
                  </tr>
                  
                     </tbody>
@@ -178,7 +178,8 @@ search:""
       "causeInactivite",
       "immobilisations",
       "afficheRegroupeEquipementCouvert",
-      "demandeMateriel"
+      "demandeMateriel",
+      "getterUa_idImo"
    
    ]),
     //  afficheQteACouvert() {
@@ -226,11 +227,21 @@ search:""
                 }
                 
             })
-          return colect.filter(items=>items.normeequipement != 0 && items.normeequipement != null);
+         // return colect.filter(items=>items.normeequipement != 0 && items.normeequipement != null);
+       
+          return id => {
+        if (id != null && id != "") {
+           return colect.filter(items=>items.ua_id == id && items.normeequipement != 0 && items.normeequipement != null);
         }
+      };
+       }
 
-       return this.getterplanOrganisationUa.filter(items1=>items1.normeequipement != 0 && items1.normeequipement != null);
-
+      // return this.getterplanOrganisationUa.filter(items1=>items1.normeequipement != 0 && items1.normeequipement != null);
+  return id => {
+        if (id != null && id != "") {
+           return this.getterplanOrganisationUa.filter(items1=>items1.ua_id == id && items1.normeequipement != 0 && items1.normeequipement != null);
+        }
+      };
     },
     afficheQteACouvert() {
       
@@ -246,11 +257,20 @@ search:""
                 }
                 
             })
-          return colect.filter(items=>items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
+          //return colect.filter(items=>items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
+         return id => {
+        if (id != null && id != "") {
+           return colect.filter(items=>items.ua_id == id && items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
+        }
+      };
         }
 
-       return this.getterplanOrganisationUa.filter(items=>items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
-
+      // return this.getterplanOrganisationUa.filter(items=>items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
+ return id => {
+        if (id != null && id != "") {
+           return this.getterplanOrganisationUa.filter(items=>items.ua_id == id && items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
+        }
+      };
     },
     afficheQteNonCouvert() {
       
@@ -266,11 +286,21 @@ search:""
                 }
                 
             })
-        return colect.filter(items=>items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        //return colect.filter(items=>items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        
+         return id => {
+        if (id != null && id != "") {
+           return colect.filter(items=>items.ua_id == id && items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        }
+      };
         }
 
-       return this.getterplanOrganisationUa.filter(items=>items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
-
+      // return this.getterplanOrganisationUa.filter(items=>items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+ return id => {
+        if (id != null && id != "") {
+           return this.getterplanOrganisationUa.filter(items=>items.ua_id == id && items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        }
+      };
     },
      afficheMontantTotalEquipementNonCouvert() {
       
@@ -286,11 +316,21 @@ search:""
                 }
                 
             })
-        return colect.filter(items=>items.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+        //return colect.filter(items=>items.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+       return id => {
+        if (id != null && id != "") {
+           return colect.filter(items=>items.ua_id == id && items.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
         }
+      };
+       
+       }
 
-       return this.getterplanOrganisationUa.filter(items1=>items1.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
-
+      // return this.getterplanOrganisationUa.filter(items1=>items1.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+ return id => {
+        if (id != null && id != "") {
+           return this.getterplanOrganisationUa.filter(items=>items.ua_id == id && items.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+        }
+      };
     },
 //         equipementNonCouvert(){
 // return this.getterplanOrganisationUa.filter(element => element.normeequipement != 0)

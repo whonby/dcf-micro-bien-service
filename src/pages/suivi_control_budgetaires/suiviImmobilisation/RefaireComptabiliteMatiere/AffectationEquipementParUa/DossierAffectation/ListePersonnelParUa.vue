@@ -2,45 +2,53 @@
 <template>
 
 <div>
-
-                
-               
-                 <!-- <div align="right"> -->
-                <!-- Search:
-                <input type="search" placeholder v-model="search" />
-              </div> -->
+<table class="table table-bordered table-striped">
+  <tr>
+    <td>
+       <select  class="span5" v-model="formData.uAdministrative_id">
+                      <option></option>                     
+                      <option
+                        v-for="typeUniteA in uniteAdministratives"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+    </td>
+  </tr>
+</table>
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
-
-                        <th style="width:40%">Unité administrative</th>
-                        <th style="width:40%">Service</th>
-                        <th >Equipé</th>
-                    
-                         
+                        <th style="width:40%">Matricule</th>
+                        <th style="width:40%">Nom</th>
+                        <th style="width:40%">Prénoms</th>
+                        <th style="width:40%">Fonction</th>
+                        
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for=" affectService in ServiceEquipe(getterUa_idImo)"
-                        :key="affectService.id">
-                        
-                              <td >
-                            {{afficherUniteAdministrative(affectService.ua_id) || 'Non renseigné'}}</td>
-                            <td >
-                            {{afficherLibelleService(affectService.serviceua_id) || 'Non renseigné'}}</td>
+                   <tr
+                    class="odd gradeX"
+                    v-for="BesoinImmo in listePersonnelAffectete(formData.uAdministrative_id)"
+                    :key="BesoinImmo.id"
+                  >
+                  <td style="text-align: center;"
+                   
+                    >{{afficherActeurDepenseMatricule(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td>
+                  
+                    <td style="text-align: center;"
+                   
+                    >{{afficherActeurDepenseNomPrenoms(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td>
+                     <td style="text-align: center;"
+                   
+                    >{{afficheFonction(BesoinImmo.fonction_id)}}</td>
                      
-                       <td style="text-align: center;">
-                      
-                       
-                          
-                         
-                     <span style="font-weight: 500;" v-if="affectService.normeequipement == 0"  class="btn btn-success" >Oui</span>
-                     <span  v-else  class="btn btn-danger" style="font-weight: 500;"> Non</span>
                      
-                        
                      
-                    </td>   
-                    </tr>
+                    
+                    
+                  </tr>
+                 
                  
                     </tbody>
                 </table>
@@ -63,8 +71,8 @@
 
 <script>
 import {mapGetters, mapActions} from 'vuex';
-import { formatageSomme } from '../../../../../src/Repositories/Repository';
-import {admin,dcf,noDCfNoAdmin} from "../../../../../src/Repositories/Auth"
+import { formatageSomme } from '../../../../../../Repositories/Repository';
+import {admin,dcf,noDCfNoAdmin} from "../../../../../../Repositories/Auth"
 //import moment from 'moment';
 export default {
     data(){
@@ -104,7 +112,7 @@ search:""
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
-            ...mapGetters('personnelUA', ['acteur_depenses']),
+            ...mapGetters("personnelUA", ["acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
 
 
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
@@ -162,6 +170,45 @@ search:""
    
    ]),
   
+afficheFonction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+ afficherActeurDepenseNomPrenoms() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.nom.concat('    ',qtereel.acteur_depense.prenom);
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+afficherActeurDepenseMatricule() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.matricule;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+
+
+
     //   filtreServiceUniteAdministrative() {
     //   const st = this.search.toLowerCase();
     //   return this.servicesua.filter(type => {
@@ -171,40 +218,34 @@ search:""
     //     );
     //   });
     // },
-
-    ServiceEquipe() {
+listePersonnelAffectete() {
       
-
-
-        if (this.noDCfNoAdmin){
+        if (this.noDCfNoAdmin ){
             let colect=[];
-            this.getterplanOrganisationUa.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
-                  
+               
             })
-         // return colect.filter(items=>items.unite_administrative_id == id && items.normeequipement == 0 && items.serviceua_id != null && items.fonction_id == null);
             return id => {
         if (id != null && id != "") {
-           return colect.filter(items=>items.ua_id == id && items.normeequipement == 0 && items.serviceua_id != null && items.fonction_id == null);
+          return colect.filter(element => element.unite_administrative_id == id );
         }
       };
-        }
-
-      // return this.getterplanOrganisationUa.filter(items=>items.normeequipement == 0 && items.serviceua_id != null && items.fonction_id == null);
-   return id => {
+          }
+           return id => {
         if (id != null && id != "") {
-           return this.getterplanOrganisationUa.filter(items=>items.ua_id == id && items.normeequipement == 0 && items.serviceua_id != null && items.fonction_id == null);
+          return this.acte_personnels.filter(element => element.unite_administrative_id == id);
         }
       };
-    },
-//        ServiceEquipe (){
-// return this.servicesua.filter(element => element.normeequipement == 0)
-// },
+         
 
+
+
+    },
 
 afficherUniteAdministrative() {
       return id => {
