@@ -51,6 +51,68 @@
 </div>
 
 
+                        <div class="">
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="card-box bg-prevision">
+                                        <div class="inner">
+                                            <h3> {{formatageSomme(parseFloat(budgetGeneral))}} </h3>
+                                            <p>Budget Total </p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="fa fa-money" aria-hidden="true"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="span6">
+                                    <div class="card-box bg-base">
+                                        <div class="inner">
+                                            <h3> {{formatageSomme(parseFloat(budgetGeneralExcecute))}} </h3>
+                                            <p>Budget Executé </p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="fa fa-money" aria-hidden="true"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="card-box bg-green">
+                                        <div class="inner">
+                                            <h3> {{formatageSomme(parseFloat(bugdetGeneralRestant))}} </h3>
+                                            <p> Budget Restant </p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="fa fa-money" aria-hidden="true"></i>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="span6">
+                                    <div class="card-box bg-taux ">
+                                        <div class="inner">
+                                            <h3> {{tauxExecutionBudgetGeneral}} % </h3>
+                                            <p> Taux Execution</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="fa fa-money" aria-hidden="true"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
 
 <!--                        <div class="quick-actions_homepage">-->
 <!--                            <ul class="quick-actions" v-if="idzone=='' && iduniteadmin==''">-->
@@ -350,7 +412,7 @@ import VGeosearch from 'vue2-leaflet-geosearch';
             };
         },
 created(){
-        console.log(this.listeLocalisationGeo)
+       // console.log(this.listeLocalisationGeo)
 },
     computed: {
 // methode pour maper notre guetter
@@ -581,39 +643,46 @@ created(){
         budgetGeneral(){
             let budget_general=0;
             let montant_engagement=0;
+            let montantEngagelocalite=0;
             let vM=this;
-            this.uniteAdministratives.forEach(function(row){
-                let montant_engagement_unite_admin=0;
-                let budgetActive=row.ua_budget_general.filter(item=>item.actived==1)
+            this.listeLocalisationGeo.forEach(function (value) {
+                let montant_engagement=0;
+                vM.uniteAdministratives.filter( item => item.localisationgeo_id ==value.id).forEach(function(row){
+                    let montant_engagement_unite_admin=0;
+                    let budgetActive=row.ua_budget_general.filter(item=>item.actived==1)
 
-                if (budgetActive!="") {
-                    let initialValue = 0;
-                    let budgetByUnite = budgetActive.reduce(function (total, currentValue) {
-                        return total + parseFloat(currentValue.Dotation_Initiale);
-                    }, initialValue);
-                    budget_general=budget_general+budgetByUnite
-                }
-
-                let  objetMarche=vM.marches.filter(item=>{
-                    if(item.unite_administrative_id==row.id ){
-
-                        return item
+                    if (budgetActive!="") {
+                        let initialValue = 0;
+                        let budgetByUnite = budgetActive.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.Dotation_Initiale);
+                        }, initialValue);
+                        budget_general=budget_general+budgetByUnite
                     }
-                })
-                if(objetMarche!=""){
-                    objetMarche.forEach(function (val) {
-                        let initeVal = 0;
-                        let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.total_general) ;
-                        }, initeVal);
-                        montant_engagement_unite_admin=montant_engagement_unite_admin + montantEngament
 
+                    let  objetMarche=vM.marches.filter(item=>{
+                        if(item.unite_administrative_id==row.id ){
+
+                            return item
+                        }
                     })
-                }
-                montant_engagement=montant_engagement + montant_engagement_unite_admin
+                    if(objetMarche!=""){
+                        objetMarche.forEach(function (val) {
+                            let initeVal = 0;
+                            let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                                return total + parseFloat(currentValue.total_general) ;
+                            }, initeVal);
+                            montant_engagement_unite_admin=montant_engagement_unite_admin + montantEngament
+
+                        })
+                    }
+                    montant_engagement=montant_engagement + montant_engagement_unite_admin
+                })
+
+                montantEngagelocalite=montantEngagelocalite+montant_engagement
             })
 
-            vM.budgetGeneralExcecute=montant_engagement
+
+            vM.budgetGeneralExcecute=montantEngagelocalite
             let tauxEx=(montant_engagement/budget_general)*100
             //console.log(tauxEx)
                 vM.tauxExecutionBudgetGeneral=tauxEx.toFixed(2)
@@ -936,5 +1005,83 @@ created(){
         height: 500px !important;
 
         overflow-y: scroll !important;
+    }
+
+    .card-box {
+        position: relative;
+        color: #fff;
+        padding: 10px 10px 30px;
+        margin: 10px 0px;
+        height: 45px;
+    }
+    .card-box:hover {
+        text-decoration: none;
+        color: #f1f1f1;
+    }
+
+    .card-box .inner {
+        padding: 5px 10px 0 10px;
+    }
+    .card-box h3 {
+        font-size: 12px;
+        font-weight: bold;
+        margin: 0 0 8px 0;
+        white-space: nowrap;
+        padding: 0;
+        text-align: left;
+    }
+    .card-box p {
+        font-size: 14px;
+    }
+    .card-box .icon {
+        position: absolute;
+        top: auto;
+        bottom: 5px;
+        right: 5px;
+        z-index: 0;
+        font-size: 72px;
+        color: rgba(0, 0, 0, 0.15);
+    }
+    .card-box .card-box-footer {
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+        text-align: center;
+        padding: 3px 0;
+        color: rgba(255, 255, 255, 0.8);
+        background: rgba(0, 0, 0, 0.1);
+        width: 100%;
+        text-decoration: none;
+    }
+    .card-box:hover .card-box-footer {
+        background: rgba(0, 0, 0, 0.3);
+    }
+    .bg-prevision{
+
+        background-color: #3a373b !important;
+    }
+    .bg-blue {
+        background-color: #00c0ef !important;
+    }
+    .bg-green {
+        background-color: #00a65a !important;
+    }
+    .bg-base {
+        background-color: #a62f59 !important;
+    }
+    .bg-taux {
+        background-color: #ba7024 !important;
+    }
+    .bg-restant {
+        background-color: #154282 !important;
+    }
+    .red {
+        color: black !important;
+        background-color: #09f7ff !important;
+    }
+
+    .red_type_marche {
+        color: black !important;
+        background-color: #09f7ff !important;
     }
 </style>
