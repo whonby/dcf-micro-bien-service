@@ -319,8 +319,8 @@
                         <apexchart type="pie" width="350" :options="chartOptions" :series="dataPourcentage"></apexchart>
                     </div>
                     <div class="span8" >
-                        <nav aria-label="breadcrumb" style="background: #7030a0 !important;" class="main-breadcrumb" v-if="info_status_marche">
-                            <ol class="breadcrumb" style="background: #7030a0 !important;">
+                        <nav aria-label="breadcrumb"  class="main-breadcrumb" v-if="info_status_marche">
+                            <ol class="breadcrumb" :style="{background: getColorByStatus(status_marches)}">
                                 <li class="breadcrumb-item"  v-html="info_status_marche">  </li>
                                 <li class="breadcrumb-item" >
                                     <!--<a href="#" @click.prevent="afficherModalAjouterTitre()">Carte</a> -->
@@ -331,17 +331,19 @@
                         <table class="table   table-bordered table-striped" v-if="info_status_marche">
                             <thead>
                             <tr>
-                                <th>UA </th>
-                                <th>Nombre Marchés</th>
-                                <th>Montant total</th>
-                                <th>Taux %</th>
-                                <th>Action</th>
+                                <th :style="{background: getColorByStatus(status_marches)}">UA </th>
+                                <th :style="{background: getColorByStatus(status_marches)}">Nombre Marchés</th>
+                                <th :style="{background: getColorByStatus(status_marches)}">Taux Marche %</th>
+                                <th :style="{background: getColorByStatus(status_marches)}">Montant total</th>
+                                <th :style="{background: getColorByStatus(status_marches)}">TAUX FINANCIER</th>
+                                <th :style="{background: getColorByStatus(status_marches)}">Action</th>
                             </tr>
                             </thead>
                             <tbody >
                             <tr v-for="unite in listeUniteAdministrative" :key="unite.id">
                                 <td>{{unite.libelle}}</td>
                                 <td style="text-align: center !important;">{{nbrTotalMarchePasUA(unite.id)}} </td>
+                                <td style="text-align: center !important;">{{tauxStatusMarchePasUniteAdministrative(unite.id)}}</td>
                                 <td style="text-align: center !important;">{{formatageSomme(montantPrevuePasUA(unite.id))}}</td>
                                 <td style="text-align: center !important;">{{tauxStatusMarchePasUniteAdministrative(unite.id)}}</td>
                                 <td> <a href="#" @click="selectionUnite(unite.id)" class="btn btn-default " title="Detail marches">
@@ -751,8 +753,8 @@
                     </div>
                     <hr>
                     <div class="span12" >
-                        <nav aria-label="breadcrumb" style="background: #7030a0 !important;" class="main-breadcrumb" v-if="info_status_marche">
-                            <ol class="breadcrumb" style="background: #7030a0 !important;">
+                        <nav aria-label="breadcrumb"  class="main-breadcrumb" v-if="info_status_marche">
+                            <ol class="breadcrumb" :style="{background: getColorByStatus(status_marches)}">
                                 <li class="breadcrumb-item"  v-html="info_status_marche">  </li>
                                 <li class="breadcrumb-item" >
                                     <!--<a href="#" @click.prevent="afficherModalAjouterTitre()">Carte</a> -->
@@ -1597,7 +1599,43 @@ console.log(this.listeMarchStatueExecuteAcheve)
                     return null
                 }
             },
+            getColorByStatus(){
+                return status=>{
 
+                    if(status==0){
+                        //  colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"]
+                        return "#8ea9db !important"
+                    }
+                    if(status==8){
+                        return "#f4b084 !important"
+                    }
+                    if(status==1){
+                        return "#92d04f !important"
+                    }
+                    if(status==9){
+                        return "#632990 !important"
+                    }
+
+                    if(status==2){
+                        return "#d7b755 !important"
+                    }
+                    if(status==10){
+                        return "#d36f2a !important"
+                    }
+
+                    if(status==11){
+                        return "#00b04f !important"
+                    }
+                    if(status==12){
+                        return "#757171 !important"
+                    }
+
+                    if(status==7){
+                        return "#ff0000 !important"
+                    }
+                    return null
+                }
+            },
             montantPasStatusContratPlanifie(){
                 return status=>{
                     if(status=="planifie"){
