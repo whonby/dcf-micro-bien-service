@@ -1,7 +1,7 @@
 <template>
- 
-     <div>
 
+     <div>
+           <h1> Ma page</h1>
        
        <!-- <h4 style="text-align:center">GESTION DES VEHICULES</h4>
        <br>

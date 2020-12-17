@@ -14,6 +14,7 @@ const defaultstate = {
     uniteAdministrativeByUser:[],
     groupe:[],
     equipe_cf:[],
+    menu:[],
     ancien_password:false,
     menuModuleSidcf:"",
 

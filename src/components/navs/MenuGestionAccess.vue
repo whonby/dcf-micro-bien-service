@@ -1,4 +1,5 @@
 <template>
+
     <!--top-Header-menu-->
     <div id="user-nav" class="navbar navbar-inverse">
         <ul class="nav">
@@ -11,22 +12,23 @@
                       <i class="icon icon-users"></i>
                       <span class="text">CATOGRAPHIE BUDGETAIRE </span>
                     </a>
-                  </li> -->
+                  </li> Groupe -->
+           
             <li>
-                <router-link :to="{name: 'GestionAccess'}" tag="a">
-                    GESTION ACCESS
-                </router-link>
-            </li>
-            <li>
-                <router-link :to="{name: 'Groupe'}" tag="a">
+                <router-link :to="{name: 'groupe'}" tag="a">
                    GROUPES
                 </router-link>
             </li>
             <li>
+                <router-link :to="{name: 'affectation'}" tag="a">
+                   AFFECTATION
+                </router-link>
+            </li>
+            <!-- <li>
                 <router-link :to="{name: 'MonEquipe'}" tag="a">
                     MON EQUIPE
                 </router-link>
-            </li>
+            </li> -->
             <!-- <li class="" id="out">
              <a title="Indicateur" href="#" class="">
                <i class="icon icon-users"></i>
@@ -61,7 +63,6 @@
 </template>
 
 <script>
-
 
     export default {
 

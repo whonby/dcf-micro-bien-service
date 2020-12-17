@@ -68,7 +68,7 @@ export default {
 
   methods: {
    
-
+...mapActions('Utilisateurs', ['getGroupe','getMenu']),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 
@@ -157,6 +157,8 @@ export default {
   },
 
   created(){
+    this.getGroupe()
+    this.getMenu()
     this.getPlanPassationMarche()
     this.getRapport()
       this.getBudgeChager()

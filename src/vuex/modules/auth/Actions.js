@@ -349,3 +349,64 @@ export function encienPasswordSaisi({commit}, formData){
 export  function activeMenuModuleSidcf({commit}, objetAjoute){
     commit('MENU_MODULE_SIDCF', objetAjoute)
 }
+
+
+// action menu
+export  function  getMenu({commit}) {
+
+    queue.push(() =>  apiGuest.get('/menu').then(response => {
+            // console.log(response.data)
+            commit('GET_MENU', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+// action pour le groupe
+
+
+export  function  getGroupe({commit}) {
+
+    queue.push(() =>  apiGuest.get('/groupe').then(response => {
+            // console.log(response.data)
+            commit('GET_GROUPE', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+
+export  function ajouterGroupe({commit,dispatch}, objetAjoute){
+    asyncLoading(apiGuest.post('/groupe', objetAjoute )).then(res => {
+        if(res.status == 201){
+           // dispatch("getUtilisateurs")
+            dispatch("getGroupe")
+            commit('AJOUTER_GROUPE', res.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+
+export function supprimerGroupe({commit}, id){
+  this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_GROUPE', id)
+            apiGuest.delete('/groupe/' + id).then(() => dialog.close() )
+
+        })
+}
+
+export function modifierGroupe({commit}, formData){
+    apiGuest.put('/groupe' ,formData).then(response => {
+        commit('MODIFIER_GROUPE', response.data)
+    })
+
+}
+

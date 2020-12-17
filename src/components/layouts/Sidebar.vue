@@ -43,6 +43,12 @@
             <span>PARAMETRES GENERAUX</span>
           </a>
         </li>
+         <li :class="{active: active_el == 21 }" @click.prevent="navigateToGestionAcces">
+          <a title="GESTION DES ACCES" href="#">
+            <i class="icon icon-signal"></i>
+            <span>GESTIONS DES ACCES</span>
+          </a>
+        </li>
         <li @click.prevent="navigateToUniteAdministrative" :class="{active: active_el == 1 }">
           <a  title="" href="#">
             <i class="icon icon-inbox"></i>
@@ -100,6 +106,7 @@
             <span class="label label-important"></span>
           </a>
         </li> -->
+        
           <li >
               <router-link :to="{name: 'CartographieBudget'}" title="Cartographie du budget" tag="a">
                   <i class="icon icon-heart"></i>
@@ -156,25 +163,31 @@ export default {
           name: 'TableauBordActeurDepense'
         })
       },
-
        navigateToUniteAdministrative(){
         this.activate(1)
         this.$router.push({
           name: 'tableaudebord'
         })
       },
- navigateToTableauBord(){
-        this.activate(11)
-        this.$router.push({
-          name: 'ExerciceBudgetaire'
-        })
-      },
+//  navigateToTableauBord(){
+//         this.activate(11)
+//         this.$router.push({
+//           name: 'ExerciceBudgetaire'
+//         })
+//       },
        navigateToParametreGeneraux(){
         this.activate(17)
         this.$router.push({
           name: 'ExerciceBudgetaire'
         })
       },
+       navigateToGestionAcces(){
+        this.activate(21)
+        this.$router.push({
+          name: 'gestion_acces'
+        })
+      },
+      
       
        navigateToComptaMatiere(){
         this.activate(5)

@@ -18,6 +18,7 @@ export const getterRoles= state =>state.roles
 export const getterAffectation =state =>state.affectation
 export const getterUniteAdministrativeByUser=state=>state.uniteAdministrativeByUser
 export const getterGroupe =state =>state.groupe
+export const gettersMenu = state => state.menu
 
 export const getterEquipeCF=state=>state.equipe_cf
 export const getterPasswordCrypte=state=>state.ancien_password
