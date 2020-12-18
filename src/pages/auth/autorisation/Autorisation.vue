@@ -17,25 +17,16 @@
 
                                                 </div>
                                                 <div class="widget-content">
-                                                    <div  v-for="listeM in getterGroupe" :key="listeM.id" >
-                                                           <div >
-                                                               <p-check class="pretty p-image p-plain "  checked   disabled style=" width: 100%; font-size: 20px !important;" >
-                                                                   <!-- <img slot="extra" class="image" src="../../assets/002.png"> -->
-                                                                  <p style="color: red">{{ listeM.libelle }}</p>
-                                                               </p-check>
-                                                           </div>
-                                                        <div >
-                                                            <p-check class="pretty p-image p-plain "  style=" width: 100%; font-size: 20px !important;"  >
-                                                                <!-- <img slot="extra" class="image" src="../../assets/004.png"> -->
-                                                                
-                                                            </p-check>
-                                                        </div>
-
-
-                                                    </div>
-                                                    
-                                                   </div>
-                                            </div>
+                                          <tr class="odd gradeX" v-for="item  in getterGroupe" :key="item.id">
+                 
+                    
+                     <td>{{item.nom_groupe || 'Non renseigné'}} </td>
+                        <input type="checkbox" id="jack"  v-model="attribue" :value="item.id">
+                      <label for="jack"></label>
+                                                       
+                </tr>                                  
+                 </div>
+             </div>
 
 
 
@@ -48,7 +39,7 @@
 
                                                     <div class="span7">
                                                         <span class="icon">
-                                                    <i class="icon-list"></i> </span> <h5>Unite administrative selectionné <code></code></h5>
+                                                    <i class="icon-list"></i> </span> <h5>USERS/CF <code>({{getterUtilisateur.length}})</code></h5>
                                                     </div>
                                                     <div class="span5" align="right" >
 
@@ -56,23 +47,24 @@
 
                                                 </div>
                                                 <div class="widget-content">
-                                                    <div   >
+                                          <tr class="odd gradeX" v-for="(item,index)  in getterUtilisateur" :key="index+458000000000000">
+                 
+                    
+                     <td>{{item.name || 'Non renseigné'}} </td>
+                        <input type="checkbox" id="jack"  v-model="attribue" :value="item.id">
+                      <label for="jack"></label>
+                                                       
+                </tr>                                  
+                 </div>
+                 <div v-if="!getterUtilisateur.length">
+                     pas de Controleur financier
+                 </div>
+                </div>
 
-                                                        <p-check class="pretty p-image p-plain"
-                                                                 style=" width: 100%; font-size: 20px !important;" >
-                                                            <!-- <img slot="extra" class="image" src="../../assets/003.png"> -->
-                                                          
-                                                        </p-check>
+            </div>
 
-                                                    </div>
-                                                    
-                                                     </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
+             </div>
+            </div>
     </div>
 </template>
 <script>
@@ -87,7 +79,7 @@ export default {
 
     },
     computed:{
-...mapGetters('Utilisateurs', ['getterGroupe','gettersMenu']),
+...mapGetters('Utilisateurs', ['getterGroupe','gettersMenu','getterUtilisateur']),
     },
     methods:{
 
