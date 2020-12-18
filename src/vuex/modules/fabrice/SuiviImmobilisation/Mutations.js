@@ -910,6 +910,40 @@ export const AJOUTE_UA_IMO = (state, nouveau_normeArt) => {
   // state.typeTextes = [...nouveau_type, ...state.typeTextes]
   state.ua_idImo=nouveau_normeArt;
 };
+
+
+
+export const GET_ALL_FICHE_ARTICLE = (state, tableauNormeArticle) => {
+  state.ficheArticle = tableauNormeArticle;
+};
+
+// ajouter NORME_EQUIPEMENTS
+export const AJOUTER_FICHE_ARTICLE = (state, nouveau_normeArt) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.ficheArticle.unshift(nouveau_normeArt);
+};
+
+
+// modifier FICHE_ARTICLE
+export const MODIFIER_FICHE_ARTICLE = (state, objetModifie) => {
+  state.ficheArticle = state.ficheArticle.map(norme => {
+    if (norme.id == objetModifie.id) {
+      norme = { ...objetModifie };
+    }
+
+    return norme;
+  });
+};
+
+// supprimer FICHE_ARTICLE
+export const SUPPRIMER_FICHE_ARTICLE = (state, id) => {
+  state.ficheArticle = state.ficheArticle.filter(norme => norme.id != id);
+};
+
+
+
+
+
 export {
   
 

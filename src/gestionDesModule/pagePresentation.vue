@@ -470,6 +470,7 @@ this.getAllHistoriqueBudgetGeneral()
       this.getAffectationVehicule();
       this.getTransmissionVeh();
       this.getAppreciation();
+      this.getFicheArticle()
     //this.getAllAmortissement();
       /**
        * this.
@@ -707,7 +708,8 @@ return objJson.id
       "getTypeReparation",
       "getAffectationVehicule",
       "getTransmissionVeh",
-      "getAppreciation"
+      "getAppreciation",
+      "getFicheArticle"
       
     ]),
  ...mapActions('horSib',['getMarcheHorSib',"getRealiteServiceHors","getOpProvisoire"]),

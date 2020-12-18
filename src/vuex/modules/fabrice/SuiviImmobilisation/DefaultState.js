@@ -30,6 +30,7 @@ const defaultState = {
   AffectationVehicules:[],
   Transmissions:[],
   Appreciations:[],
+  ficheArticle:[],
   ua_idImo:"",
 
 };

@@ -117,13 +117,16 @@ afficherIDUA(
               <div class="control-group">
                 <label class="control-label">Entreprise</label>
                 <div class="controls" style="font-size:20px">
-                  <input
+                  <!-- <input
                       type="text"
                       :value="nom_candidata"
                       class="span"
                       readonly
-                  />
-                  
+                  /> -->
+                   <select v-model="formEffetFinancier.entreprise_id" class="span">
+                    <option v-for="varText in entreprises" :key="varText.id"
+                            :value="varText.id">{{varText.raison_sociale}}</option>
+                  </select>
                 </div>
 
 
@@ -137,7 +140,7 @@ afficherIDUA(
                 <label class="control-label">Banque</label>
                 <div class="controls" >
                   <select v-model="formEffetFinancier.banq_id" class="span" >
-                    <option v-for="varText in afficherBanqueDynamiqueId(affichierIdEntrepriseSelectionner(nom_candidata))" :key="varText.id"
+                    <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
                             :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                   </select>
 
@@ -169,14 +172,15 @@ afficherIDUA(
             </td>
              <td>
                      <div class="control-group">
-             
+              <label class="control-label">Type de réparation</label>
               <div class="controls">
-                <label>
-                  <input type="checkbox"  value="1" v-model="formEffetFinancier.etatcontrat"/>
-                   Réparation ou Entrétien Véhicule</label>
-                 <label>
-                  <input type="checkbox"  value="2" v-model="formEffetFinancier.etatcontrat"/>
-                   Réparation ou Entrétien Mobilier & Matériel</label>
+              
+                  <select v-model="formEffetFinancier.etatcontrat" class="span">
+                   <option></option>
+                   <option value="1">Réparation ou Entrétien Véhicule</option>
+                   <option value="2">Réparation ou Entrétien Mobilier & Matériel</option>
+                  </select>
+                 
               </div>
             </div>
                             </td>
@@ -703,7 +707,7 @@ name: "ActEffeFinanciere",
       },
       nom_candidata:"",
       dossier_candidat_id:"",
-     marche_lot:"",
+     
       infoLot:""
     }
   },
@@ -1556,7 +1560,7 @@ nombreDejourCalculeModifier(){
           this.nom_candidata=this.afficheNomEntreprise(this.afficherNumeroDossierCandidat1(this.analyseByLot(index)[0].dossier_candidat_id)),
               this.dossier_candidat_id=this.analyseByLot(index)[0].dossier_candidat_id
         }
-    this.marche_lot=index
+    this.macheid=index
       this.infoLot=this.getMarchePersonnaliser.find(item=>item.id==index)
       //  this.edite_analyse_dossier = this.listeAnalyseDossier(this.macheid)[index];
     },
@@ -1590,8 +1594,8 @@ var nouvelObjet1 = {
         tva_avance_demarage:this.editavanceDemarrageMontantTva,
         entreprise_id:this.affichierIdEntrepriseSelectionner(this.afficherEntrepriseNom(this.editActeEffetFinancier.entreprise_id)),
         difference_personnel_bienService:this.afficheMarcheType,
-        marche_id:this.marche_lot,
-        marchegeneral_id:this.affichieridMarcheGlobal(this.marche_lot),
+        marche_id:this.macheid,
+        marchegeneral_id:this.affichieridMarcheGlobal(this.macheid),
     
       }
 
@@ -1617,10 +1621,10 @@ var nouvelObjet1 = {
         montant_act:this.montantHTt,
         avance_demarrage_ttc:this.avanceDemarrage,
         tva_avance_demarage:this.avanceDemarrageMontantTva,
-        entreprise_id:this.affichierIdEntrepriseSelectionner(this.nom_candidata),
+        // entreprise_id:this.affichierIdEntrepriseSelectionner(this.nom_candidata),
         difference_personnel_bienService:this.afficheMarcheType,
-        marche_id:this.marche_lot,
-        marchegeneral_id:this.affichieridMarcheGlobal(this.marche_lot),
+        marche_id:this.macheid,
+        marchegeneral_id:this.affichieridMarcheGlobal(this.macheid),
         // ua_id:this.ua_id,
         banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
         compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
@@ -1631,7 +1635,7 @@ var nouvelObjet1 = {
       //this.formEffetFinancier.entreprise_id=entreprisePremier.id
       this.ajouterActeEffetFinancier(nouvelObjet)
       this.$("#modificationModal").modal('hide');
-      let marcheObjet=this.marches.find(marche=>marche.id==this.marche_lot)
+      let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
       marcheObjet.attribue = 2
      
       marcheObjet.numero_marche=this.formEffetFinancier.numero_marche

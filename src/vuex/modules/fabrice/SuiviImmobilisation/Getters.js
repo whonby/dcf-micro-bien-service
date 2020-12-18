@@ -41,7 +41,7 @@ const articles = state => state.articles;
 const stockageArticles = state => state.stockageArticles;
 
 
-
+export const ficheArticle = state =>state.ficheArticle;
 
 
 
