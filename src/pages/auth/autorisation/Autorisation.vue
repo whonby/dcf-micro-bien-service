@@ -1,90 +1,74 @@
 <template>
     <div>
         <hr>
-      <div class="row-fluid" >
-      <div class="span4">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-eye-open"></i> </span>
-            <h5>Browesr statistics</h5>
-          </div>
-          <div class="widget-content nopadding">
-            <table class="table table-bordered" style="width: 100%">
-              <thead>
-                <tr>
-                  <th>Browser</th>
-                  <th>Visits</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Chrome</td>
-                  <td>8850</td>
-                </tr>
-                <tr>
-                  <td>Firefox</td>
-                  <td>5670</td>
-                </tr>
-                <tr>
-                  <td>Internet Explorer</td>
-                  <td>4130</td>
-                </tr>
-                <tr>
-                  <td>Opera</td>
-                  <td>1574</td>
-                </tr>
-                <tr>
-                  <td>Safari</td>
-                  <td>1044</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="span4">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-arrow-right"></i> </span>
-            <h5>Website statistics</h5>
-          </div>
-          <div class="widget-content nopadding">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Site</th>
-                  <th>Visits</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><a href="#">Themeforest.com</a></td>
-                  <td>12444</td>
-                </tr>
-                <tr>
-                  <td><a href="#">Themedesigner.in</a></td>
-                  <td>10455</td>
-                </tr>
-                <tr>
-                  <td><a href="#">Themedesigner.in</a></td>
-                  <td>8455</td>
-                </tr>
-                <tr>
-                  <td><a href="#">Themedesigner.in</a></td>
-                  <td>4456</td>
-                </tr>
-                <tr>
-                  <td><a href="#">Themedesigner.in</a></td>
-                  <td>2210</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      
-    </div>
+       <div id="tab2" class="tab-pane">
+
+                                    <div class="row-fluid">
+                                        <div class="span6" >
+
+
+                                            <div class="widget-box">
+                                                <div class="widget-title">
+                                                    <div class="span6">
+                                                        <span class="icon"> <i class="icon-list"></i> </span>
+                                                        <h5>liste des groupe</h5>
+                                                    </div>
+                  
+
+                                                </div>
+                                                <div class="widget-content">
+                                          <tr class="odd gradeX" v-for="item  in getterGroupe" :key="item.id">
+                 
+                    
+                     <td>{{item.nom_groupe || 'Non renseigné'}} </td>
+                        <input type="checkbox" id="jack"  v-model="attribue" :value="item.id">
+                      <label for="jack"></label>
+                                                       
+                </tr>                                  
+                 </div>
+             </div>
+
+
+
+
+
+                                        </div>
+                                        <div class="span6">
+                                            <div class="widget-box">
+                                                <div class="widget-title">
+
+                                                    <div class="span7">
+                                                        <span class="icon">
+                                                    <i class="icon-list"></i> </span> <h5>USERS/CF <code>({{getterUtilisateur.length}})</code></h5>
+                                                    </div>
+                                                    <div class="span5" align="right" >
+
+                                                        <a href="#myAlert" data-toggle="modal" class="btn btn-primary" >Valider</a></div>
+
+                                                </div>
+                                                <div class="widget-content">
+                                          <tr class="odd gradeX" v-for="(item,index)  in getterUtilisateur" :key="index+458000000000000">
+                 
+                    
+                     <td>{{item.name || 'Non renseigné'}} </td>
+                        <input type="checkbox" id="jack"  v-model="attribue" :value="item.id">
+                      <label for="jack"></label>
+                                                       
+                </tr>                                  
+                 </div>
+                 <div v-if="!getterUtilisateur.length">
+                     pas de Controleur financier
+                 </div>
+                </div>
+
+            </div>
+
+             </div>
+            </div>
     </div>
 </template>
 <script>
+import {mapGetters} from "vuex";
 export default {
     data(){
         return{
@@ -95,10 +79,16 @@ export default {
 
     },
     computed:{
-
+...mapGetters('Utilisateurs', ['getterGroupe','gettersMenu','getterUtilisateur']),
     },
     methods:{
 
     }
 }
 </script>
+<style scoped>
+.widget-content{
+    margin-left: auto; 
+     margin-right: auto;
+}
+</style>

@@ -298,7 +298,7 @@
                             <div class="inner">
                                 <p> En souffrance </p>
 
-                            </div>
+                            </div>l2
                             <div class="icon3">
 
                                 {{nombreMarcheParStatue(7)}} Marché(s) / {{pourcentageMarchePasStatus(7)}}%
@@ -331,12 +331,12 @@
                         <table class="table   table-bordered table-striped" v-if="info_status_marche">
                             <thead>
                             <tr>
-                                <th :style="{background: getColorByStatus(status_marches)}">UA </th>
-                                <th :style="{background: getColorByStatus(status_marches)}">Nombre Marchés</th>
-                                <th :style="{background: getColorByStatus(status_marches)}">Taux Marche %</th>
-                                <th :style="{background: getColorByStatus(status_marches)}">Montant total</th>
-                                <th :style="{background: getColorByStatus(status_marches)}">TAUX FINANCIER</th>
-                                <th :style="{background: getColorByStatus(status_marches)}">Action</th>
+                                <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">UA </th>
+                                <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">Nombre Marchés</th>
+                                <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">Taux Marche %</th>
+                                <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">Montant total</th>
+                                <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">TAUX FINANCIER</th>
+                                <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">Action</th>
                             </tr>
                             </thead>
                             <tbody >
@@ -345,10 +345,12 @@
                                 <td style="text-align: center !important;">{{nbrTotalMarchePasUA(unite.id)}} </td>
                                 <td style="text-align: center !important;">{{tauxStatusMarchePasUniteAdministrative(unite.id)}}</td>
                                 <td style="text-align: center !important;">{{formatageSomme(montantPrevuePasUA(unite.id))}}</td>
-                                <td style="text-align: center !important;">{{tauxStatusMarchePasUniteAdministrative(unite.id)}}</td>
-                                <td> <a href="#" @click="selectionUnite(unite.id)" class="btn btn-default " title="Detail marches">
+                                <td style="text-align: center !important;">{{tauxFinnancieStatusSelectionnerPasUA(unite.id,status_marches)}}</td>
+                                <td>
+                                    <a href="#" @click="selectionUnite(unite.id)" class="btn btn-default " title="Detail marches">
                                     <span class=""><i class="icon-folder-open"></i></span>
-                                </a></td>
+                                  </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -357,6 +359,7 @@
                                 <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
                                 <td></td>
                                 <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -365,12 +368,6 @@
                                 <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
                                 <td></td>
                                 <td></td>
-                            </tr> <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
                                 <td></td>
                             </tr> <tr>
                                 <td></td>
@@ -378,12 +375,6 @@
                                 <td></td>
                                 <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
                                 <td></td>
-                                <td></td>
-                            </tr> <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
                                 <td></td>
                                 <td></td>
                             </tr> <tr>
@@ -393,11 +384,29 @@
                                 <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
                                 <td></td>
                                 <td></td>
+                                <td></td>
                             </tr> <tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr> <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr> <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -1493,6 +1502,68 @@ console.log(this.listeMarchStatueExecuteAcheve)
                     }, initeVal);
 
                 }
+            },
+
+            /**
+             * Calcule de taux financier pas unite administrative en fonction des etats des marchés
+             * @returns {Function}
+             */
+            tauxFinnancieStatusSelectionnerPasUA(){
+              return (unite,status)=>{
+                  console.log(status)
+                  if (status==0){
+                      let taux=(this.montantPrevuePasUA(unite) *100)/ this.montantStatusSelectionnerPrevueTotal
+                      return taux.toFixed(2)
+                  }
+                  if(unite!="" && status!=""){
+                        if(status==0 || status==8 || status==1 || status==9 ){
+                            console.log(unite)
+                           let taux=(this.montantPrevuePasUA(unite) *100)/ this.montantStatusSelectionnerPrevueTotal
+                            return taux.toFixed(2)
+                        }
+
+
+                      if(status==2 || status==10 || status==11 || status==12 || status==12){
+                          let taux2=(this.montantApprouvePasUA(unite) *100)/ this.montantApprouveStatusSelectionneTotal
+                          return taux2.toFixed(2)
+                      }
+                  }
+              }
+            },
+            /**
+             * Calcule de montant prevue fonction des etats des marchés
+             * @returns {Function}
+             */
+            montantStatusSelectionnerPrevueTotal(){
+                let initeVal=0
+                let vm=this
+                return vm.listeDesMarchePasStatus.reduce(function (total, currentValue) {
+                    return total + parseFloat(currentValue.montant_marche) ;
+                }, initeVal);
+            },
+            /**
+             * Calcule de montant approuve fonction des etats des marchés
+             * @returns {Function}
+             */
+            montantApprouveStatusSelectionneTotal(){
+                let vm=this;
+                let montantTotal=0;
+                vm.listeDesMarchePasStatus.forEach(function (val) {
+                    let objetAct=vm.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==val.id)
+                    let montant_avenant=0;
+                    let objetAvenant=vm.avenants.filter(item=>item.marche_id==val.id)
+                    if(objetAvenant!=undefined){
+                        let initeVal = 0;
+                        montant_avenant=objetAvenant.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montant_avenant) ;
+                        }, initeVal);
+                    }
+                    if(objetAct!=undefined){
+                        //  console.log(objetAct)
+                        montantTotal=parseFloat(montantTotal)+ parseFloat(objetAct.montant_act)+parseFloat(montant_avenant)
+                    }
+                })
+                return montantTotal
             },
             montantApprouvePasUA(){
                 return unite=>{
