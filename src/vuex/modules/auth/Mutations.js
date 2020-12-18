@@ -235,6 +235,46 @@ export const MENU_MODULE_SIDCF = (state, menuModuleSidcf) => {
 export const GET_MENU = (state, tableau_menu) => {
     state.menu = tableau_menu
 }
+export const AJOUTER_MENU= (state, nouvel_objet) => {
+    state.menu.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+
+}
+
+export const SUPPRIMER_MENU= (state, id) => {
+    state.menu = state.menu.filter(type => type.id != id)
+}
+
+export const MODIFIER_MENU= (state, objetModifie) => {
+    state.menu = state.menu.map(type => {
+        if(type.id == objetModifie.id){
+            type = {...objetModifie}
+        }
+        return type
+    })
+}
+
+export const GET_MODULE = (state, tableau_module) => {
+    state.module = tableau_module
+}
+export const AJOUTER_MODULE= (state, nouvel_objet) => {
+    state.module.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+
+}
+
+export const SUPPRIMER_MODULE= (state, id) => {
+    state.module = state.module.filter(type => type.id != id)
+}
+
+export const MODIFIER_MODULE= (state, objetModifie) => {
+    state.module = state.module.map(type => {
+        if(type.id == objetModifie.id){
+            type = {...objetModifie}
+        }
+        return type
+    })
+}
 /// ajouter groupe
 
 export const GET_GROUPE = (state, tableau_groupe) => {

@@ -68,9 +68,11 @@ export default {
 
   methods: {
    
-...mapActions('Utilisateurs', ['getGroupe','getMenu']),
+   
+...mapActions('Utilisateurs', ['getGroupe','getMenu','getModule']),
       ...mapActions('parametreGenerauxFonctionnelle', 
-    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
+    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges',
+    'getlisteNaturePrix',"getMotifPassation"]),
 
     ...mapActions('parametreGenerauxSourceDeFinancement',['getSourceFinancement',
         'getTypeFinancement'
@@ -159,6 +161,7 @@ export default {
   created(){
     this.getGroupe()
     this.getMenu()
+    this.getModule()
     this.getPlanPassationMarche()
     this.getRapport()
       this.getBudgeChager()
@@ -184,6 +187,7 @@ export default {
    this.getPlanActe()
    this.getTypeconges()
    this.getlisteNaturePrix()
+   this.getMotifPassation()
    this.getSourceFinancement()
    this.getTypeFinancement()
    this.getStructureBudgetaire()

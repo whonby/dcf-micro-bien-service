@@ -1,3 +1,5 @@
+import menu from "@/pages/auth/Module_Menu/menu.vue"; 
+import moduleDuProjet from "@/pages/auth/Module_Menu/moduleDuProjet.vue"; 
 import Autorisation from "@/pages/auth/autorisation/Autorisation.vue";
 import groupe1 from "@/pages/auth/groupe/groupe1.vue"
 import Login from '@/pages/auth/Login.vue'
@@ -19,6 +21,18 @@ const AuthRoutes = [
        
        component: TableauBordGestionVehicule
     },
+    {
+    path:"/module",
+    name:"module",
+   
+    component:moduleDuProjet
+    },
+    {
+        path:"/menus",
+        name:"menus",
+       
+        component:menu
+        },
 {
         path: '/sidcf',
        name:"pagePresentation",
@@ -53,7 +67,7 @@ const AuthRoutes = [
         path:"/liste-groupe",
         name:"groupe",
         component:groupe1,
-        meta: { requiresAuth: true }
+      
     },
     {
         path:"/affectation-groupe",

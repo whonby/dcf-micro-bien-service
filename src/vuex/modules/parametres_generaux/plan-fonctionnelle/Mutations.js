@@ -32,6 +32,36 @@ const MODIFIER_NATUREPRIX = (state, objetModifie) => {
 }
 
 
+export const GET_MOTIF_PASSATION = (state, tableau_motif_passation) => {
+
+    state.motif_passation = tableau_motif_passation
+}
+
+// ajouter source de financement
+export const AJOUTER_MOTIF_PASSATION = (state , nouvel_objet) => {
+    state.motif_passation.unshift(nouvel_objet)
+}
+
+// suppression de source de financement
+export const SUPPRIMER_MOTIF_PASSATION = (state ,id) => {
+    state.motif_passation = state.motif_passation.filter(nature => 
+        nature.id !=id)
+}
+
+//modifier siource de financement
+export const MODIFIER_MOTIF_PASSATION = (state, objetModifie) => {
+   
+    state.motif_passation = state.motif_passation.map(nature => {
+
+        if(nature.id == objetModifie.id){
+            nature = {...objetModifie}
+
+        }
+        return nature
+    })
+}
+
+
 
 
 // get all plan fonctionnelle

@@ -2,7 +2,7 @@
 <template>
   <div>
   
-      
+       
     
       <!-- End Page Header -->
             <!-- Default Light Table -->
@@ -16,10 +16,10 @@
                                             class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
-                                              title="Liste des groupes"
-                                              name ="Liste des groupes"
-                                              worksheet = "Groupes"
-                                            :data="getterGroupe">
+                                              title="Liste des Missions "
+                                              name ="Liste des missions"
+                                              worksheet = "Missions"
+                                            :data="categorieMissionFiltre">
                       <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel>  -->
@@ -30,17 +30,17 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des groupes</h5>
-             <div align="right">
+            <h5>Liste des modules</h5>
+             <!-- <div align="right">
         Recherche: <input type="text" >
 
-          </div>
+          </div> -->
              
           </div>
                        <!-- <div class="span4">
             <br>
           Afficher
-         <select name="pets" id="pet-select" v-model="size" class="span3">
+         <select name="pets" id="pet-select"  class="span3">
             <option value="10">10</option>
             <option value="25">25</option>
            <option value="50">50</option>
@@ -53,28 +53,24 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                    <th>Code</th>
-                  <th>Nom du groupe</th>
-                  <th> Decription</th>
+            
+                  <th>Libellé</th>
                    <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="activites  in getterGroupe"
+                <tr class="odd gradeX" v-for="activites  in gettersModule"
                  :key="activites.id">
-                  <td @dblclick="afficherModalModifierGroupe(activites.id)">
-                      {{activites.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierGroupe(activites.id)">
-                      {{activites.nom_groupe || 'Non renseigné'}}</td>
-                      <td @dblclick="afficherModalModifierGroupe(activites.id)">
-                      {{activites.description || 'Non renseigné'}}</td>
+                  
+                  <td @dblclick="afficherModalModifierBudgetaire(activites.id)">
+                      {{activites.libelle || 'Non renseigné'}}</td>
                    
                   <td>
 
 
 
               <div class="btn-group">
-              <button @click.prevent="supprimerGroupe(activites.id)"  class="btn btn-danger ">
+              <button @click.prevent="supprimerModule(activites.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
@@ -95,11 +91,11 @@
               </ul>
             </div> -->
            
-            <!-- <div v-if="getterGroupe.length">    
+            <!-- <div v-if="categorieMissionFiltre.length">    
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucune categorie mission enregistrée </h6>
+                <h6 style="color:red;">Aucun module enregistré </h6>
               </div>
             </div> -->
           </div>
@@ -108,9 +104,9 @@
          <!-- <div class="pagination alternate">
              <ul>
            <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-           <li  v-for="(titre, index) in partition(groupeFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+           <li  v-for="(titre, index) in partition(categorieMissionFiltre,size).length" :key="index" :class="{ active : active_el == index }">
            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-            <li :class="{ disabled : page == partition(groupeFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+            <li :class="{ disabled : page == partition(categorieMissionFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
            </ul>
         </div> -->
 
@@ -127,60 +123,31 @@
 <!----- ajouter modal   ---->
 
 
- <div id="exampleModal" class="modal hide ">
+ <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter le groupe</h3>
+                <h3>Ajouter le module</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
-            <div class="control-group">
+            <!-- <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
                 <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
               </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">Nom du groupe:</label>
-              <div class="controls">
-                <input type="text" v-model="formData.nom_groupe" class="span" placeholder="Saisir le code" />
-              </div>
-            </div>
+            </div> -->
 
             <div class="control-group">
-              <label class="control-label">Decription:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <textarea type="text" v-model="formData.description" class="span" placeholder="Saisir" ></textarea>
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
-            Menu:
-            <table class="table table-bordered table-striped">
-              
-              <tbody>
-                <tr class="odd gradeX" v-for="item  in gettersMenu" :key="item.id">
-                 
-                    
-                     <td>{{item.libelle || 'Non renseigné'}} </td>
-                    <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="" toggle style="transform: scale(0.9) translate(-10%, -95%);  " v-model="attribue" :value="item.id" >
-                      <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
-                        <label for="exercice" slot="off-label"></label>
-                        </p-check></td>
-                
-
-                 
-                                                           
-                                                       
-                </tr>
-             
-              </tbody>
-              
-            </table>
-           
              
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button 
+             <button v-show=" formData.libelle.length"
               @click.prevent="ajouterBudgetaireLocal" class="btn btn-primary"
               href="#">Valider</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
@@ -195,60 +162,29 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier le groupe</h3>
+                <h3>Modifier le module</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
 
-            <div class="control-group">
+            <!-- <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
                 <input type="text" v-model="editBudgetaire.code" class="span" placeholder="" />
               </div>
-            </div>
-            
-            <div class="control-group">
-              <label class="control-label">nom du groupe:</label>
-              <div class="controls">
-                <input type="text" v-model="editBudgetaire.nom_groupe" class="span" placeholder="" />
-              </div>
-            </div>
+            </div> -->
           
             <div class="control-group">
-              <label class="control-label">Description:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <textarea type="text" v-model="editBudgetaire.description" class="span" placeholder="" ></textarea>
+                <input type="text" v-model="editBudgetaire.libelle" class="span" placeholder="" />
               </div>
             </div>
-             Menu:
-            <table class="table table-bordered table-striped">
-              
-              <tbody>
-                <tr class="odd gradeX" v-for="item  in gettersMenu" :key="item.id">
-                 
-                    
-                     <td>{{item.libelle || 'Non renseigné'}} </td>
-                    <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="" toggle style="transform: scale(0.9) translate(-10%, -95%);  " v-model="attribue" :value="item.id" >
-                      <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
-                        <label for="exercice" slot="off-label"></label>
-                        </p-check></td>
-                
-
-                
-                    
-                
-                                                           
-                                                       
-                </tr>
-             
-              </tbody>
-              
-            </table>
         
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button  
+             <button v-show=" editBudgetaire.libelle.length" 
              @click.prevent="modifierBudgetaireLocal(editBudgetaire)" class="btn btn-primary"
               href="#">Modifier</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
@@ -280,14 +216,13 @@
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex';
 import {partition} from '../../../../src/Repositories/Repository'
-  import jsPDF from 'jspdf'
-import 'jspdf-autotable'
+ // import jsPDF from 'jspdf'
+//import 'jspdf-autotable'
 
 export default {
   
   data() {
     return {
-      
        page:0,
        size:10,
        active_el:0,
@@ -309,22 +244,17 @@ export default {
               //     icon: 'add_alert'
               // }
           ],
-     groupe_id:"",
-     id:"",
+     
         formData : {
 
                 code:"",
-             description: "",
-             nom_groupe:"",
-            // attribue:""
-           
+             libelle: "",
+            
         },
-         attribue:[],
 
         editBudgetaire: {
-             code:"",
-             description: "",
-             nom_groupe:""
+            code:"",
+             libelle: "",
             
         },
             search:""
@@ -337,48 +267,20 @@ export default {
   },
   computed: {
 // methode pour maper notre guetter
- 
-
-           ...mapGetters('Utilisateurs', ['getterGroupe','gettersMenu']),
-
-        
+   //...mapGetters('suivi_controle_budgetaire', ['gettersModule']) ,
+    ...mapGetters('Utilisateurs', ['gettersModule','gettersMenu']),
    
     // methode pour trier un item
-//            groupeFiltre(){
+//            categorieMissionFiltre(){
 
 //      const searchTerm = this.search.toLowerCase();
 
-// return this.getterGroupe.filter((item) => {
+// return this.gettersModule.filter((item) => {
   
-//      return item.nom_groupe.toLowerCase().includes(searchTerm) 
-    verificationTacheExiste(){
-						return id => {
-						if(id){
-						let objet = this.gettersMenu.find(item =>{
-						if(item.module_id == id && item.parent_id==null){
-						return item
-						}
-						})
-						if(objet){
-						return true
-						}
-						return false	
-						}
-						}	
-						},
-
-  afficherCodeMenu(){
-   
-      
-        let answer = this.gettersMenu.find(item => item.module_id==1)
-       // console.log("ok kok")
-         if(answer) {
-             return answer.code 
-         } 
-         
-    return null
+//      return item.libelle.toLowerCase().includes(searchTerm) 
     
-  }
+
+  
   
 
 //    }
@@ -388,30 +290,30 @@ export default {
 
   methods: {
     // methode pour notre action
-   ...mapActions('Utilisateurs', [ 'ajouterGroupe', 
-   'modifierGroupe','supprimerGroupe']),
+   ...mapActions('Utilisateurs', [ 'ajouterModule', 
+   'modifierModule','supprimerModule']),
 
-                   genererEnPdf(){
-         var doc = new jsPDF()
-        // doc.autoTable({ html: this.natures_sections })
-        var data = this.getterGroupe;
-         doc.setFontSize(8)
-        doc.text(75,10,"LISTE DES GROUPES")
-        doc.autoTable(this.getColumns(),data)
-       // doc.save('Type des actes de depenses.pdf')
-      doc.output('save','Liste des groupes.pdf');
-      doc.output('dataurlnewwindow');
-     return 0
-     },
+    //                genererEnPdf(){
+    //      var doc = new jsPDF()
+    //     // doc.autoTable({ html: this.natures_sections })
+    //     var data = this.gettersModule;
+    //      doc.setFontSize(8)
+    //     doc.text(75,10,"LISTE DES CATEGORIES DE MISSIONS")
+    //     doc.autoTable(this.getColumns(),data)
+    //    // doc.save('Type des actes de depenses.pdf')
+    //   doc.output('save','Liste des Categories des missions.pdf');
+    //   doc.output('dataurlnewwindow');
+    //  return 0
+    //  },
 getColumns() {
     return [
        {    title: "CODE", dataKey: "code"},
-        {    title: "NOM_GROUPE", dataKey: "nom_groupe"},
-        {    title: "DESCRIPTION", dataKey: "description"}
+        {    title: "LIBELLE", dataKey: "libelle"},
        
     ];
 },
       // pagination
+
 partition:partition,
 
   getDataPaginate(index){
@@ -440,31 +342,30 @@ partition:partition,
    // fonction pour vider l'input
 
      ajouterBudgetaireLocal () {
-     this.ajouterGroupe(this.formData)
-        this.attribue=[];
+     this.ajouterModule(this.formData)
+
         this.formData = {
              code:"",
-            description: "",
-            nom_groupe:""
+            libelle: "",
             
          }
      },
 // afficher modal
-afficherModalModifierGroupe(id){
+afficherModalModifierBudgetaire(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editBudgetaire = this.getterGroupe.find(item => item.id==id);
+        this.editBudgetaire = this.gettersModule.find(item => item.id==id);
 
 
         
  },
 // 
 modifierBudgetaireLocal(){
-  this.modifierGroupe(this.editBudgetaire)
+  this.modifierModule(this.editBudgetaire)
   this.$('#modifierModal').modal('hide');
   // this.editBudgetaire = {
   //   code:"",
@@ -477,9 +378,3 @@ modifierBudgetaireLocal(){
 };
 </script>
 
-<style scoped>
-.grdirModalActeEffet{
-  width: 70%;
-  margin: 0 -42%;
-}
-</style>

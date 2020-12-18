@@ -1,4 +1,4 @@
-
+const motif_passation = state => state.motif_passation
 const Nature_des_prix = state => state.Nature_des_prix 
 const Typeconges = state => state.typeconges 
 const structures_fonctionnelles = state => state.structures_fonctionnelles 
@@ -21,7 +21,7 @@ export const afficheNiveauPlanFonctionnel = state =>
         affichenaturedep => affichenaturedep.code.length == 4
     );
 export {
-    
+    motif_passation,
     Nature_des_prix,
     Typeconges,
     structures_fonctionnelles,
