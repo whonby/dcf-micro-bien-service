@@ -9,8 +9,24 @@
       </div>
       <div class="modal-body">
       <table class="table table-bordered table-striped">
-          
-          <div class="control-group">
+          <tr>
+               <td>
+                     <div class="control-group">
+             <label class="control-label">Type de bien corporel</label>
+              <div class="controls">
+                 <select  class="span5" v-model="formData.typecorporel">
+                      <option></option>                     
+                     <option value="1">Matériel et mobilier</option> 
+                     <option value="2">Véhicule</option> 
+                    </select>
+              </div>
+            </div>
+                            </td>
+                      
+          </tr>
+          <tr>
+            <td>
+              <div class="control-group">
             <label class="control-label">Libellé</label>
             <div class="controls">
               <input
@@ -21,6 +37,8 @@
               />
             </div>
           </div>
+            </td>
+          </tr>
       </table>
       </div>
       <div class="modal-footer">
@@ -44,8 +62,23 @@
       </div>
       <div class="modal-body">
      <table class="table table-bordered table-striped">
-         
-          <div class="control-group">
+         <tr>
+            <td>
+                     <div class="control-group">
+             <label class="control-label">Type de bien corporel</label>
+              <div class="controls">
+                 <select  class="span5" v-model="editService.typecorporel">
+                      <option></option>                     
+                     <option value="1">Matériel et mobilier</option> 
+                     <option value="2">Véhicule</option> 
+                    </select>
+              </div>
+            </div>
+                            </td>
+         </tr>
+         <tr>
+           <td>
+              <div class="control-group">
             <label class="control-label">Libellé:</label>
             <div class="controls">
               <input
@@ -56,6 +89,8 @@
               />
             </div>
           </div>
+           </td>
+         </tr>
      </table>
       </div>
       <div class="modal-footer">

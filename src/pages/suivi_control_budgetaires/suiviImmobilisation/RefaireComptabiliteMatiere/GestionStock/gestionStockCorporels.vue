@@ -23,13 +23,13 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                      <li class="active">
-                        <a data-toggle="tab" href="#tab78965">Entrée dans le patrimoine</a>
+                        <a data-toggle="tab" href="#EntreeEnStock">Entrée dans le patrimoine</a>
                       </li>
                        <li>
-                        <a data-toggle="tab" href="#tab47581">Affectation</a>
+                        <a data-toggle="tab" href="#Affectation">Affectation</a>
                       </li>
                        <li>
-                        <a data-toggle="tab" href="#tab47582">Entretien et Réparation   </a>
+                        <a data-toggle="tab" href="#Reparation">Entretien et Réparation   </a>
                       </li>
                         <li>
                         <a data-toggle="tab" href="#tab47583">Sortie du patrimoine  </a>
@@ -52,8 +52,9 @@
                   <div class="widget-content tab-content">
 
 
-          <div id="tab78965" class="tab-pane active"><ListeDuStockparUa></ListeDuStockparUa> </div>
-          <div id="tab47581" class="tab-pane "><affectationEquipementParUa></affectationEquipementParUa> </div>
+          <div id="EntreeEnStock" class="tab-pane active"><ListeDuStockparUa></ListeDuStockparUa> </div>
+          <div id="Affectation" class="tab-pane "><affectationEquipementParUa></affectationEquipementParUa> </div>
+ <div id="Reparation" class="tab-pane "><ReparationEquipement></ReparationEquipement> </div>
 
  
         </div>
@@ -88,6 +89,7 @@ import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import ListeDuStockparUa from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/ListeDuStockparUa'
 import affectationEquipementParUa from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/AffectationEquipementParUa/affectationEquipementParUa'
+import ReparationEquipement from '../../../suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/ReparationEquipement'
 // import historisqueDemandeParService from '../docAffectationImmo/historisqueDemandeParService'
 // import { formatageSomme } from "../../../../Repositories/Repository";
 
@@ -96,7 +98,8 @@ export default {
   name: 'besionImmolisation',
   components: {
       ListeDuStockparUa,
-    affectationEquipementParUa
+    affectationEquipementParUa,
+    ReparationEquipement
      
   },
   data() {

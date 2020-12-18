@@ -98,7 +98,39 @@ import gestionStockCorporels from '../../pages/suivi_control_budgetaires/suiviIm
 import listedesArticleparPerso from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/AffectationEquipementParUa/DossierAffectation/listedesArticleparPerso.vue'
 import listedesArticleParService from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/AffectationEquipementParUa/DossierAffectation/listedesArticleParService.vue'
 
+
+import listeReparationParVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/listeReparationParVehicule'
+import ListeArticleParPersonne from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/ReparationMaterielMobilier/ListeArticleParPersonne'
+import AjouterReparationMateriel from '../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/ReparationMaterielMobilier/AjouterReparationMateriel'
+
+
+
+import principalExecution from '../../pages/suivi_control_budgetaires/suiviImmobilisation/dossierExecution/principalExecution.vue'
+
+
+
+
 const suiviImmobilisationRoutes = [
+  {
+    path: "/principalExecution",
+    name: "principalExecution",
+    component: principalExecution
+  },
+  {
+    path: "/AjouterReparationMateriel/:id",
+    name: "AjouterReparationMateriel",
+    component: AjouterReparationMateriel
+  },
+  {
+    path: "/ListeArticleParPersonne/:id",
+    name: "ListeArticleParPersonne",
+    component: ListeArticleParPersonne
+  },
+  {
+    path: "/listeReparationParVehicule/:id",
+    name: "listeReparationParVehicule",
+    component: listeReparationParVehicule
+  },
   {
     path: "/listedesArticleParService/:id",
     name: "listedesArticleParService",

@@ -1,38 +1,6 @@
-
+sommeQuantiteGlobal
 <template>
-
   <div class="container-fluid">
-    <h2 text-align="center">TABLEAU DE BORD</h2>
-     <table class="table table-bordered table-striped">
-                   <tr>
-                      <td colspan="">
-                            <div class="control-group">
-                            <label class="control-label">Exercice Budgétaire</label>
-                            <div class="controls">
-                              <select v-model="formData.exo_id" class="span8">
-                              <option value=""></option>
-    <option v-for="item in exercices_budgetaires" 
-    :key="item.id" :value="item.id">{{item.annee}}</option>
-                              </select>
-                              
-                            </div>
-                          </div>
-                        </td>
-                        <td colspan="">
-                            <div class="control-group">
-                            <label class="control-label">Unite Administrative</label>
-                            <div class="controls">
-                              <select v-model="formData.ua_id" class="span8">
-                              <option value=""></option>
-    <option v-for="item in uniteAdministratives" 
-    :key="item.id" :value="item.id">{{item.libelle}}</option>
-                              </select>
-                              
-                            </div>
-                          </div>
-                        </td>
-                   </tr>
-                </table>
      <!-- <h3 style="text-align:center">TABLEAU DE BORD : COMPTABILITES DES MATIERES</h3> -->
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
@@ -41,28 +9,22 @@
       
                             <ul class="quick-actions" style="margin: 0px !important;"> 
 
-<li class="bg_lb span2"> <a href="#" style="color:black;"><h4>VALEUR ACQUISITION</h4> <i class="icon-dashboard"></i> <h4>1000000000000000</h4></a> </li>
-<li class="bg_lb span2"> <a href="#" style="color:black;"><h4>VALEUR NETTE COMPTABLE</h4> <i class="icon-dashboard"></i> <h4>1000000000000000</h4></a> </li>
-<li class="bg_lb span2"> <a href="#" style="color:black;"><h4>TAUX <br/>D'USURE</h4> <i class="icon-dashboard"></i> <h4>1000000000000000</h4></a> </li>
-<li class="bg_lb span2"> <a href="#" style="color:black;"><h4>TAUX EQUIPEMENT</h4> <i class="icon-dashboard"></i> <h4>1000000000000000</h4></a> </li>
+<li class="bg_lb span3"> <a href="#" style="color:black;"><h4>QUANTITES </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{sommeQuantiteGlobal}}</span><h4>GLOBALES</h4></a> </li>
 
-<li class="bg_lb span2"> <a href="#" style="color:black;"><h4>TAUX REPARATION</h4> <i class="icon-dashboard"></i> <h4>1000000000000000</h4></a> </li>
-
-
-        <!-- <li class="bg_lb span3"> <a href="#" style="color:black;"><h4>VALEUR NETTE </h4> <span class="label label-success" style="font-size:12px">VALEUR NETTE COMPTABLE</span>  </a> </li> -->
+        <li class="bg_lb span3"> <a href="#" style="color:black;"><h4>QUANTITES </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{sommeQuantiteCouvert}} / {{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)}}</span><h4>COUVERTES / NON COUVERTES</h4>  </a> </li>
 
         <!-- <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)}}</span> <h4>NON COUVERTES</h4></a> </li> -->
           <!-- <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span> <h4>NON COUVERTES</h4></a> </li> -->
-                <!-- <li class="bg_lb span3"> <a href="#" style="color:black;"><h4>TAUX</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{((parseFloat(sommeQuantiteCouvert)/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}% / {{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span><h4>D'USURE</h4></a> </li> -->
-<!-- <li class="bg_lo span3"> 
+                <li class="bg_lb span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{((parseFloat(sommeQuantiteCouvert)/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}% / {{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span><h4> COUVERTES / NON COUVERTES</h4></a> </li>
+<li class="bg_lo span3"> 
   <router-link :to="{name: 'ListeUaTauxEquipement25'}" tag="a"  style="color:black;">
-  <h4>TAUX </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px"></span><h4>EQUIPEMENT </h4>
+  <h4>TAUX EQUIPEMENT COMPRIS </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">Nombre Ua : {{TauxEquipementDe0a25}}</span><h4>ENTRE 0% et 25% </h4>
   </router-link>
-  </li> -->
+  </li>
   
-    <!-- <li class="bg_lr span3"> <router-link :to="{name: 'ListeUaTauxEquipement50'}" tag="a"  style="color:black;"><h4>TAUX</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px"></span><h4> REPARATION</h4>  </router-link> </li> -->
-    <!-- <li class="bg_ly span3"> <router-link :to="{name: 'ListeUaTauxEquipement75'}" tag="a"  style="color:black;"><h4>TAUX EQUIPEMENT COMPRIS</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">Nombre Ua : {{TauxEquipementDe50a75}}</span><h4> ENTRE 50% et 75%</h4>  </router-link> </li>
-    <li class="bg_lg span3"> <router-link :to="{name: 'ListeUaTauxEquipement100'}" tag="a"  style="color:black;"><h4>TAUX EQUIPEMENT COMPRIS</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">Nombre Ua : {{TauxEquipementDe75a100}}</span><h4> ENTRE 75% et 100%</h4>  </router-link> </li>   -->
+    <li class="bg_lr span3"> <router-link :to="{name: 'ListeUaTauxEquipement50'}" tag="a"  style="color:black;"><h4>TAUX EQUIPEMENT COMPRIS</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">Nombre Ua : {{TauxEquipementDe25a50}}</span><h4> ENTRE 25% et 50%</h4>  </router-link> </li>
+    <li class="bg_ly span3"> <router-link :to="{name: 'ListeUaTauxEquipement75'}" tag="a"  style="color:black;"><h4>TAUX EQUIPEMENT COMPRIS</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">Nombre Ua : {{TauxEquipementDe50a75}}</span><h4> ENTRE 50% et 75%</h4>  </router-link> </li>
+    <li class="bg_lg span3"> <router-link :to="{name: 'ListeUaTauxEquipement100'}" tag="a"  style="color:black;"><h4>TAUX EQUIPEMENT COMPRIS</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">Nombre Ua : {{TauxEquipementDe75a100}}</span><h4> ENTRE 75% et 100%</h4>  </router-link> </li>  
                             </ul>
       
       
@@ -86,8 +48,9 @@
   
 <script>
 import { mapGetters } from "vuex";
-import { formatageSomme } from "../Repositories/Repository"
-import {admin,dcf,cf} from "../Repositories/Auth";
+
+import {formatageSomme} from '../../src/Repositories/Repository';
+import {admin,dcf,cf} from '../../src/Repositories/Auth';
 export default {
   name:'TableauBordImmo',
   data() {
@@ -97,9 +60,7 @@ export default {
           name: "cache",
           icon: "add"
         }
-      ],
-      
-      formData:{}
+      ]
     };
   },
 
@@ -114,59 +75,12 @@ export default {
     admin:admin,
       dcf:dcf,
       cf:cf,
-      ...mapGetters("bienService", ['typeMarches','decomptes','modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
-                "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
-                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
-                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
-                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
-                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
-                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
-
-       ...mapGetters("parametreGenerauxAdministratif", ["getterplanOrganisationUa","exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
     ...mapGetters("personnelUA", ["personnaliseActeurDepense","acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
 
  ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
   
-
-valeurAcquisition() {
-   
-        if (this.cf){
-            let colect=[];
-            this.getFacturePersonnaliser.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-             return id => {
-        if (id != null && id != "") {
-          return colect.filter(element => element.ua == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_propose_ttc), 0).toFixed(0);
-        }
-      };
-        }
-
-          return id => {
-        if (id != null && id != "") {
-          return getFacturePersonnaliser.filter(element => element.ua == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_propose_ttc), 0).toFixed(0);
-        }
-      };
-    },
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   TauxEquipementDe0a25() {
    

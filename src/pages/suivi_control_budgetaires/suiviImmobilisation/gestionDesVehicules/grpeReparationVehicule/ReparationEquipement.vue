@@ -1,11 +1,10 @@
-
+reparation
 <template>
 
 <div>
 <table class="table table-bordered table-striped">
   <tr>
     <td>
-      <label class="control-label">Unite Administrative</label>
        <select  class="span5" v-model="formData.uAdministrative_id">
                       <option></option>                     
                       <option
@@ -25,10 +24,10 @@
                     <ul class="nav nav-tabs">
                       
                        <li class="active">
-                        <a data-toggle="tab" href="#tab78965122">PERSONNEL</a>
+                        <a data-toggle="tab" href="#reparationmateriel">REPARATION MATERIEL ET MOBILIER</a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab475815">SERVICE </a>
+                        <a data-toggle="tab" href="#Reparationvehicule">REPARATION VEHICULE </a>
                       </li>
                       <!-- <li class="">
                         <a data-toggle="tab" href="#tab12">Liste du Personnel Equipées    </a>
@@ -39,7 +38,7 @@
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
-  <div id="tab475815" class="tab-pane">
+  <div id="Reparationvehicule" class="tab-pane">
     <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">
                 <div class="widget-box">
@@ -49,10 +48,10 @@
                         <a data-toggle="tab" href="#tab789651">Liste du Personnel</a>
                       </li> -->
                        <li class="active">
-                        <a data-toggle="tab" href="#tab475815">Listes des services</a>
+                        <a data-toggle="tab" href="#vehicule">Listes des Vehicules</a>
                       </li>
                       <!-- <li class="">
-                        <a data-toggle="tab" href="#tab475815">Equipements Non Couverts   </a>
+                        <a data-toggle="tab" href="#vehicule">Equipements Non Couverts   </a>
                       </li>
                        <li class="">
                         <a data-toggle="tab" href="#tab12">Liste du Personnel Equipées    </a>
@@ -64,54 +63,75 @@
                   </div>
                   <div class="widget-content tab-content">
 
-          <div id="tab475815" class="tab-pane active">
+          <div id="vehicule" class="tab-pane active">
             <table class="table table-bordered table-striped">
                 <thead>
-                   <tr>
-
-                        
-                        <th style="width:40%">Service</th>
-                        <th style="width:10%">Equipé</th>
-                        <th style="width:10%">Affectation</th>
-                         
-                    </tr>
+                     <tr>
+                    <th>N°identification</th>
+                    <th>N°immatriculation</th>
+                     <!-- <th>Immobilisation</th> -->
+                     <th>Type véhicule</th>
+                     <th>Marque</th>
+                    <th>Modèle</th>
+                     <th>Energie</th>
+                     <th>N°chassis</th>
+                     <th>N°serie</th>
+                    <th>Couleur</th>
+                     <th>Transmission</th>
+                     <th>Nombre portes</th>
+                     <th>Nombre place</th>
+                    <th>Puissance</th>
+                     <th>Etat vehicule</th>
+                    
+                    
+                    <th colspan="2">Action</th>
+                     
+                  </tr>
                 </thead>
                 <tbody>
-                    <tr class="odd gradeX" v-for=" affectService in listeDesServiceNonEquipeDeUa(formData.uAdministrative_id)"
-                        :key="affectService.id">
+                    <tr class="odd gradeX" v-for="reparation in listeDesVehiculeParUa(formData.uAdministrative_id)"
+                        :key="reparation.id">
                         
                              
-                            <td >
-                            {{afficherLibelleService(affectService.serviceua_id) || 'Non renseigné'}}</td>
-                             <td style="text-align: center;">
-                      
-                       
-                          
-                         
-                     <span style="font-weight: 500;" v-if="affectService.normeequipement == 0"  class="btn btn-success" >Oui</span>
-                     <span  v-else  class="btn btn-danger" style="font-weight: 500;"> Non</span>
-                     
-                        
-                     
-                    </td>
-                    <td>
-                       <router-link
-                        :to="{name : 'listedesArticleParService', params: {id:affectService.id}}"
-                        class="btn btn-default"
+                           
+                           <td style="font-size:14px"> {{reparation.numidentification || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{reparation.numimmatriculation || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{libelleTypeVehicule(reparation.typevehicule) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{libellemarqueVehicules(reparation.marque) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{libelleModeleVehicules(reparation.modele) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{libelleTypeEnergie(reparation.energie) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{reparation.numchassis || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{reparation.numserie || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{reparation.couleur || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{libelleTransmission(reparation.transmission) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{reparation.nombreportes || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{reparation.nombreplace || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{reparation.puissance || 'Non renseigné'}}</td>
+                    <td style="font-size:14px"> {{libelleEtatImmobilisations(reparation.etatvehicule) || 'Non renseigné'}}</td>
+                    <td >
+                         <router-link
+                        :to="{name : 'AjouterReparationVehicule', params: {id:reparation.id}}"
+                        class="btn btn-info"
                         title=""
                       >
                         <span>
-                          <i class="icon icon-folder-open"></i>
+                          <i class="icon  icon-plus"></i>
+                        </span>
+                      </router-link>
+                    </td>
+                    <td>
+                      
+                       <router-link
+                        :to="{name : 'listeReparationParVehicule', params: {id:reparation.id}}"
+                        class="btn btn-success"
+                        title=""
+                      >
+                        <span>
+                          <i class="icon icon-list-ol"></i>
                         </span>
                       </router-link>
                      </td>
-                      <!-- <td title="Affectation d'equipement" style="font-weight: 500;">
-                        <button class="btn btn-info" @click="fenetreAjouterAffectation(index)">
-                        <span>
-                          <i class="icon-hand-right"></i>
-                        </span>
-                      </button>
-                     </td> -->
+                     
                     </tr>
                     </tbody>
               </table>
@@ -125,7 +145,7 @@
  
   </div>
   </div>
-          <div id="tab78965122" class="tab-pane active">
+          <div id="reparationmateriel" class="tab-pane active">
             
             
 
@@ -140,15 +160,7 @@
                        <li class="active">
                         <a data-toggle="tab" href="#tab7896512">Listes du Personnel</a>
                       </li>
-                      <!-- <li class="">
-                        <a data-toggle="tab" href="#tab475815">Equipements Non Couverts   </a>
-                      </li>
-                       <li class="">
-                        <a data-toggle="tab" href="#tab12">Liste du Personnel Equipées    </a>
-                      </li>
-                      <li class="">
-                        <a data-toggle="tab" href="#tab1296">Taux équipement par agent</a>
-                      </li> -->
+                     
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
@@ -169,49 +181,45 @@
                 </thead>
                 <tbody>
                   
-                  <tr
+                 <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in listePersonnelNonEquipee(formData.uAdministrative_id)"
+                    v-for="BesoinImmo in listePersonnelAffectete(formData.uAdministrative_id)"
                     :key="BesoinImmo.id"
                   >
                   <td style="text-align: center;"
                    
                     >{{afficherActeurDepenseMatricule(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td>
                   
-                     <td style="text-align: center;"
+                    <td style="text-align: center;"
                    
                     >{{afficherActeurDepenseNomPrenoms(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td>
-                    <td style="text-align: center;"
-                      
+                     <td style="text-align: center;"
+                   
                     >{{afficheFonction(BesoinImmo.fonction_id)}}</td>
-                   
-                    <!-- <td style="text-align: center;">
-                      
-                       
-                          
-                         
-                     <span style="font-weight: 500;" v-if="BesoinImmo.normeequipement == 0"  class="btn btn-success" >Oui</span>
-                     <span  v-else  class="btn btn-danger" style="font-weight: 500;"> Non</span>
                      
-                        
-                     
-                    </td> -->
-                   
-                     
-                         
-                    
-                     <td>
-                       <router-link
-                        :to="{name : 'listedesArticleparPerso', params: {id:BesoinImmo.id}}"
-                        class="btn btn-default"
-                        title="Detail Immobilisation"
+                      <!-- <td>
+                         <router-link
+                        :to="{name : 'AjouterReparationVehicule', params: {id:BesoinImmo.id}}"
+                        class="btn btn-info"
+                        title=""
                       >
                         <span>
-                          <i class="icon icon-folder-open"></i>
+                          <i class="icon  icon-plus"></i>
+                        </span>
+                      </router-link>
+                    </td> -->
+                      <td>
+                      
+                       <router-link
+                        :to="{name : 'ListeArticleParPersonne', params: {id:BesoinImmo.id}}"
+                        class="btn btn-success"
+                        title=""
+                      >
+                        <span>
+                          <i class="icon icon-list-ol"></i>
                         </span>
                       </router-link>
                      </td>
-                     
                     
                     
                   </tr>
@@ -328,10 +336,13 @@ search:""
       "montantBudgetGeneral",
       "uniteZones",
       "getPersonnaliseBudgetGeneralParTransfert",
-      "uniteAdministratives"
+      "uniteAdministratives",
+      "getvehicules"
       // "chapitres",
       // "sections"
     ]),
+      ...mapGetters("SuiviImmobilisation", ["Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),  
+     
    ...mapGetters("SuiviImmobilisation", ["services",
     "trieUaImmobilisation",
       "equipements",
@@ -379,185 +390,7 @@ search:""
   //       }
   //     };
   //   },
-   listeDesServiceNonEquipeDeUa() {
-      
-
-
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.getterplanOrganisationUa.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-          //return colect.filter(element => element.normeequipement != 0 && element.normeequipement != null)
-        return id => {
-        if (id != null && id != "") {
-           return colect.filter(items=>items.ua_id == id && items.normeequipement != 0 && items.normeequipement != null);
-        }
-      };
-       }
-
-      // return this.getterplanOrganisationUa.filter(element => element.normeequipement != 0 && element.normeequipement != null)
- return id => {
-        if (id != null && id != "") {
-           return this.getterplanOrganisationUa.filter(items=>items.ua_id == id && items.normeequipement != 0 && items.normeequipement != null);
-        }
-      };
-    },
-AfficheTotalQteNonCouvert() {
-      
-
-
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.acte_personnels.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-          
-       
-            return id => {
-        if (id != null && id != "") {
-          return colect.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
-        }
-      };
-       }
-
-  
-  return id => {
-        if (id != null && id != "") {
-          return this.acte_personnels.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
-        }
-      };
-    },
-AfficheTotalQteACouvrir() {
-      
-
-
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.acte_personnels.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-          //return colect
-        return id => {
-        if (id != null && id != "") {
-          return colect.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
-        }
-      };
-      }
-
-       //return this.acte_personnels
-return id => {
-        if (id != null && id != "") {
-          return this.acte_personnels.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
-        }
-      };
-    },
-   
-    afficheMontantTotalEquipementNonCouv() {
-     
-         return this.acte_personnels.filter(element => element.normeequipement != 0);
-    },
-afficheMontantTotalEquipementNonCouvert() {
-      
-
-
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.afficheMontantTotalEquipementNonCouv.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-         // return colect
-       return id => {
-        if (id != null && id != "") {
-          return colect.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
-        }
-      };
-       }
-
-      // return this.afficheMontantTotalEquipementNonCouv.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
-return id => {
-        if (id != null && id != "") {
-          return this.afficheMontantTotalEquipementNonCouv.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
-        }
-      };
-    },
-    equipementNonCouvert(){
-return this.acte_personnels.filter(element => element.normeequipement != 0)
-},
-   listeDesEquipementNonCouvert() {
-      
-
-
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.equipementNonCouvert.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return id => {
-        if (id != null && id != "") {
-          return colect.filter(element => element.unite_administrative_id == id);
-        }
-      };
-        }
-
-          return id => {
-        if (id != null && id != "") {
-          return this.equipementNonCouvert.filter(element => element.unite_administrative_id == id);
-        }
-      };
-
-    },
-   affichePersonneNonEquipe(){
-return this.acte_personnels.filter(element => element.normeequipement != 0)
-},
-  listePersonnelNonEquipee() {
-      
-
-
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.affichePersonneNonEquipe.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-           return id => {
-        if (id != null && id != "") {
-          return colect.filter(element => element.unite_administrative_id == id);
-        }
-      };
-        }
-
-        return id => {
-        if (id != null && id != "") {
-          return this.affichePersonneNonEquipe.filter(element => element.unite_administrative_id == id);
-        }
-      };
-
-    },
-afficheFonction() {
+  afficheFonction() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
@@ -569,7 +402,7 @@ afficheFonction() {
         }
       };
     },
- afficherActeurDepenseNomPrenoms() {
+afficherActeurDepenseNomPrenoms() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
@@ -594,18 +427,7 @@ afficherActeurDepenseMatricule() {
       };
     },
 
-
-
-    //   filtreServiceUniteAdministrative() {
-    //   const st = this.search.toLowerCase();
-    //   return this.servicesua.filter(type => {
-    //     return (
-         
-    //       type.afficherLibelleService(this.libelle).toLowerCase().includes(st)
-    //     );
-    //   });
-    // },
-listePersonnelAffectete() {
+  listePersonnelAffectete() {
       
         if (this.noDCfNoAdmin ){
             let colect=[];
@@ -650,6 +472,118 @@ afficherLibelleService() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.services.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+   listeDesVehiculeParUa() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.getvehicules.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          //return colect.filter(element => element.normeequipement != 0 && element.normeequipement != null)
+        return id => {
+        if (id != null && id != "") {
+           return colect.filter(items=>items.uniteadministrative == id);
+        }
+      };
+       }
+
+      // return this.getterplanOrganisationUa.filter(element => element.normeequipement != 0 && element.normeequipement != null)
+ return id => {
+        if (id != null && id != "") {
+           return this.getvehicules.filter(items=>items.uniteadministrative == id);
+        }
+      };
+    },
+ libelleTransmission() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.Transmissions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     libelleEtatImmobilisations() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.EtatImmobilisations.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    libelleTypeVehicule() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.TypeVehicule.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    libelleTypeEntretien() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.TypeEntretien.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    libelleModeleVehicules() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.ModeleVehicules.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     libellemarqueVehicules() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marqueVehicules.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+  libelleTypeEnergie() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.TypeEnergie.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.libelle;

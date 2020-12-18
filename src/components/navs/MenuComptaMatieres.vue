@@ -18,9 +18,9 @@
                 </router-link>
             </li>
              <li title="Stock">
-                <router-link :to="{name:'ListeStockArticle'}" tag="a">
+                <router-link :to="{name:'principalExecution'}" tag="a">
                     <!-- <i class="icon-list"></i> -->
-                    <span class="text">EXECUTION DES REPARATIONS</span>
+                    <span class="text">EXECUTION</span>
 
                 </router-link>
             </li>

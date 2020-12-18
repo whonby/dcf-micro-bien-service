@@ -89,26 +89,6 @@
         <div class="row-fluid form " >
       <div class="span12">
 
-<<<<<<< HEAD
-            <ul class="quick-actions" >
-               <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:4}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4>HORS SIB</h4></router-link> </li>
-    
-  <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>CARTOGRAPHIES </h4> <i class="icon-globe"></i><h4>DES BUDGETS ET DES MARCHES</h4></router-link> </li>
-           <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:8}}" tag="a"  style="color:black;"><h4>COMPTABILITE </h4> <i class="icon-book"></i><h4> DES MATIERES</h4></router-link> </li>
-       
-         
-            </ul>
-            <br>
-<br>
-
-            <ul class="quick-actions" >
-               <li class="bg_lo span3"> 
-                 <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;"><h4>GESTION DES </h4> <i class="icon-book"></i><h4> RAPPORTS</h4></router-link> </li>
-           <!-- <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;"><h4>GESTION DES </h4> <i class="icon-book"></i><h4> RAPPORTS</h4></router-link> </li> -->
-            </ul>
-          </div>
-        </div>
-=======
 <!--        <div class="quick-actions_homepage">-->
 
 
@@ -222,7 +202,7 @@
                                               </div>
                                           </div>
                                       </div>
-                                      <div class="span4"  @click="goToModule(6)">
+                                      <div class="span4"  @click="goToModule(8)">
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
                                               <div class="timeline-text" style="margin-top: -18px">
@@ -281,7 +261,6 @@
                   </div>
               </div>
           </section>
->>>>>>> 24c75ab91800c21d6e21d91ec413907472fbbfd5
       </div>
 
     </div>

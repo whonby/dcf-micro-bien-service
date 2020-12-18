@@ -676,14 +676,14 @@
           <li>
             <router-link :to="{name: 'marqueVehicules'}" tag="a">
               <i class="icon-check"></i>
-             Marques Véhicule
+             Marques 
             </router-link>
           </li>
             <li class="divider"></li>
           <li>
             <router-link :to="{name: 'ModeleVehicules'}" tag="a">
               <i class="icon-check"></i>
-             Modèles Véhicule
+             Modèles
             </router-link>
           </li>
             <li class="divider"></li>

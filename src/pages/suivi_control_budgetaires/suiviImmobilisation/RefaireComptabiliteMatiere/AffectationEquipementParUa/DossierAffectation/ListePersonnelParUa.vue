@@ -20,8 +20,8 @@
                     <thead>
                     <tr>
                         <th style="width:40%">Matricule</th>
-                        <th style="width:40%">Nom</th>
-                        <th style="width:40%">Prénoms</th>
+                        <th style="width:40%">Nom && Prénoms</th>
+                        
                         <th style="width:40%">Fonction</th>
                         
                     </tr>

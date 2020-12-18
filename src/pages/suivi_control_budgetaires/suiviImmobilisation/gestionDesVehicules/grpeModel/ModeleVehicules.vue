@@ -12,14 +12,27 @@
               </div>
               <div class="modal-body">
               <table class="table table-bordered table-striped">
-                  
+                  <tr>
+                    <td>
+                     <div class="control-group">
+             <label class="control-label">Type de bien corporel</label>
+              <div class="controls">
+                 <select  class="span5" v-model="formData.typecorporel">
+                      <option></option>                     
+                     <option value="1">Matériel et mobilier</option> 
+                     <option value="2">Véhicule</option> 
+                    </select>
+              </div>
+            </div>
+                            </td>
+                  </tr>
              <tr>
                  <td>
                      <div class="control-group">
               <label class="control-label" style="font-size:14px">Marque</label>
               <div class="controls">
                 <select  v-model="formData.marque_id" class="span5">
-            <option v-for="resultat in marqueVehicules" :key="resultat.id" 
+            <option v-for="resultat in fitreMarqueParTypeCorporel(formData.typecorporel)" :key="resultat.id" 
             :value="resultat.id">{{resultat.libelle}}</option>
                 </select>
               </div>
@@ -63,14 +76,27 @@
               </div>
               <div class="modal-body">
               <table class="table table-bordered table-striped">
-
+<tr>
+   <td>
+                     <div class="control-group">
+             <label class="control-label">Type de bien corporel</label>
+              <div class="controls">
+                 <select  class="span5" v-model="editSection.typecorporel">
+                      <option></option>                     
+                     <option value="1">Matériel et mobilier</option> 
+                     <option value="2">Véhicule</option> 
+                    </select>
+              </div>
+            </div>
+                            </td>
+</tr>
                <tr>
                    <td>
                        <div class="control-group">
               <label class="control-label" style="font-size:14px">Marque</label>
               <div class="controls">
                <select  v-model="editSection.marque_id" class="span5">
-            <option v-for="resultat in marqueVehicules" :key="resultat.id" 
+            <option v-for="resultat in fitreMarqueParTypeCorporel(editSection.typecorporel)" :key="resultat.id" 
             :value="resultat.id">{{resultat.libelle}}</option>
                 </select>
               </div>
@@ -229,7 +255,16 @@ export default {
   computed: {
        ...mapGetters("SuiviImmobilisation", ["marqueVehicules","ModeleVehicules"]),
        
-  
+  fitreMarqueParTypeCorporel() {
+      return id => {
+        if (id != null && id != "") {
+           return this.marqueVehicules.filter(qtreel => qtreel.typecorporel == id);
+
+      
+      
+        }
+      };
+    },
   
   },
   
