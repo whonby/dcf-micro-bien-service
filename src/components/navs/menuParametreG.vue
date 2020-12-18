@@ -672,6 +672,59 @@
              
             </router-link>
           </li>
+           <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'marqueVehicules'}" tag="a">
+              <i class="icon-check"></i>
+             Marques 
+            </router-link>
+          </li>
+            <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'ModeleVehicules'}" tag="a">
+              <i class="icon-check"></i>
+             Modèles
+            </router-link>
+          </li>
+            <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'TypeEntretien'}" tag="a">
+              <i class="icon-check"></i>
+            Type d'entretien
+            </router-link>
+          </li>
+            <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'TypeVehicule'}" tag="a">
+              <i class="icon-check"></i>
+            Type de véhicule
+            </router-link>
+          </li>
+          <li class="divider"></li>
+           <li>
+            <router-link :to="{name: 'TypeEnergie'}" tag="a">
+              <i class="icon-bar-chart"></i>
+           Type d'énergie
+            </router-link>
+          </li>
+          <li class="divider"></li>
+           <li>
+            <router-link :to="{name: 'TypeReparation'}" tag="a">
+              <i class="icon-user"></i> Type de réparation
+            </router-link>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'Transmission'}" tag="a">
+              <i class="icon-user"></i> Transmission
+            </router-link>
+          </li>
+          <li class="divider"></li>
+           <li>
+            <router-link :to="{name: 'Appreciation'}" tag="a">
+              <i class="icon-user"></i> Appreciation
+            </router-link>
+          </li>
         </ul>
       </li>
 

@@ -2,7 +2,7 @@
 <template>
    
       <div class="accordion" >
-          <div class="accordion-group widget-box" v-if="AfficherParTypeStock.length > 0 ">
+          <div class="accordion-group widget-box" v-if="ListeDesAffectationVehiculeParUa(getterUa_idImo).length > 0 ">
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
@@ -32,15 +32,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                   <StockItemVehicule
+                   <StockItem
                         class="item"
-                        v-for="groupeElement in AfficherParTypeStock"
+                        v-for="groupeElement in ListeDesAffectationVehiculeParUa(getterUa_idImo)"
                         :key="groupeElement.id"
                         :article="groupeElement"
                         @modification="$emit('modification', $event)"
                         @suppression="$emit('suppression', $event)"
 
-                    ></StockItemVehicule>
+                    ></StockItem>
                 </tbody>
               </table>
               </div>
@@ -55,7 +55,8 @@
 
 
 <script>
-import StockItemVehicule from './StockItemVehicule'
+import { mapGetters} from "vuex";
+import StockItem from './StockItemVehicule'
 
 export default {
     name: 'StockItemComponent',
@@ -63,7 +64,7 @@ export default {
     groupe: Object,
   },
   components: {
-      StockItemVehicule
+      StockItem
   },
   data: function () {
     return {
@@ -76,29 +77,56 @@ export default {
 
 
   computed: {
-  
+  ...mapGetters("SuiviImmobilisation", ["getterUa_idImo","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
     isFolder: function () {
-      return this.AfficherParTypeStock &&
-        this.AfficherParTypeStock.length
+      return this.ListeDesAffectationVehiculeParUa(this.getterUa_idImo) &&
+        this.ListeDesAffectationVehiculeParUa(this.getterUa_idImo).length
     },
 
+
     getNombreArticle(){
-        var nombre = this.AfficherParTypeStock.length
+        var nombre = this.ListeDesAffectationVehiculeParUa(this.getterUa_idImo).length
         if(nombre) return nombre
         return '0' 
     },
     iconClasses() {
       return {
-        'icon-plus': !this.isOpen && this.AfficherParTypeStock.length,
-        'icon-minus': this.isOpen && this.AfficherParTypeStock.length
-        //    'icon-folder-close': !this.isOpen && this.groupe.gestion_stock.length,
-        // 'icon-folder-open': this.isOpen && this.groupe.gestion_stock.length
+        'icon-plus': !this.isOpen && this.ListeDesAffectationVehiculeParUa(this.getterUa_idImo).length,
+        'icon-minus': this.isOpen && this.ListeDesAffectationVehiculeParUa(this.getterUa_idImo).length
+        //    'icon-folder-close': !this.isOpen && this.ListeDesAffectationVehiculeParUa(getterUa_idImo).length,
+        // 'icon-folder-open': this.isOpen && this.ListeDesAffectationVehiculeParUa(getterUa_idImo).length
       }
     },
+    ListeDesAffectationVehiculeParUa() {
+      
+        if (this.noDCfNoAdmin ){
+            let colect=[];
+            this.groupe.gestion_stock.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.uAdministrative_id == id && element.typestockage == 1);
+        }
+      };
+          }
+           return id => {
+        if (id != null && id != "") {
+          return this.groupe.gestion_stock.filter(element => element.uAdministrative_id == id && element.typestockage == 1);
+        }
+      };
+         
 
-AfficherParTypeStock(){
-  return this.groupe.gestion_stock.filter(item=>item.typestockage == 1)
-}
+
+
+    },
+
+
    
   },
 

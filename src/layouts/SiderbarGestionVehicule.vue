@@ -29,12 +29,12 @@
         
        
         
-           <li @click.prevent="navigateToParametreVehicule">
+           <!-- <li @click.prevent="navigateToParametreVehicule">
           <a href="#">
             <i class="icon-group"></i>
             <span>PARAMETRES</span>
           </a>
-        </li>
+        </li> -->
         <!-- <li  @click.prevent="navigateToSuivMarche" >
           <a href="#">
             <i class="icon-group"></i>
@@ -45,10 +45,31 @@
           
           <a href="#">
             <i class="icon-group"></i>
+            <span style="text-align:center"> BIENS INCORPORELS</span>
+          </a>
+        </li>
+         <li  @click.prevent="navigateToGestionParc" :class="{active: active_el == 43}">
+          <a href="#">
+            <i class="icon-group"></i>
+            <span  style="text-align:center"> BIENS CORPORELS</span>
+          </a>
+        </li>
+        <!-- <li  @click.prevent="navigateToGestionParc">
+          <a href="#">
+            <i class="icon-group"></i>
+            <span style="text-align:center"> GESTION DU PARC IMMOBILIER</span>
+          </a>
+        </li> -->
+
+<!-- 
+ <li  @click.prevent="navigateToComptaMatiere" >
+          
+          <a href="#">
+            <i class="icon-group"></i>
             <span style="text-align:center"> MOBILIERS & MATERIELS</span>
           </a>
         </li>
-         <li  @click.prevent="navigateToGestionParc">
+         <li  @click.prevent="navigateToGestionParc" :class="{active: active_el == 43}">
           <a href="#">
             <i class="icon-group"></i>
             <span  style="text-align:center"> GESTION DU PARC VEHICULE</span>
@@ -59,7 +80,12 @@
             <i class="icon-group"></i>
             <span style="text-align:center"> GESTION DU PARC IMMOBILIER</span>
           </a>
-        </li>
+        </li> -->
+
+
+
+
+
         <!-- <li  @click.prevent="navigateToGestionParc" >
           <a href="#">
             <i class="icon-group"></i>
@@ -181,7 +207,7 @@ return objJson.id
 navigateToGestionParc(){
         this.activate(43)
         this.$router.push({
-          name: 'TableauBordGestionVehicule'
+          name: 'TableauBordImmo2'
         })
       },
 navigateToReparation(){

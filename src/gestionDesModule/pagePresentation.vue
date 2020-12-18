@@ -202,7 +202,7 @@
                                               </div>
                                           </div>
                                       </div>
-                                      <div class="span4"  @click="goToModule(6)">
+                                      <div class="span4"  @click="goToModule(8)">
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
                                               <div class="timeline-text" style="margin-top: -18px">
@@ -900,7 +900,7 @@ hr{ border-top-color:#dadada;}
   width: 75%;
   text-align: left;
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   -webkit-box-shadow: -4px 10px 10px -6px rgba(0,0,0,0.75);
@@ -913,15 +913,15 @@ hr{ border-top-color:#dadada;}
 #loginbox .form-actions { padding: 14px 20px 15px;}
 
 
-@media (max-width:6000px){
-  #logo { width: 60%; }
-  #loginbox{
-      width: 80%;
-      top: 75%;
-      left: 50%;
+/*@media (max-width:3000px){*/
+/*  #logo { width: 60%; }*/
+/*  #loginbox{*/
+/*      width: 80%;*/
+/*      top: 75%;*/
+/*      left: 50%;*/
 
-  }
-}
+/*  }*/
+/*}*/
 @media (max-width: 480px){
   #logo { width: 40%; }
   #loginbox{ width:90%}

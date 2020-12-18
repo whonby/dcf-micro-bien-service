@@ -48,39 +48,39 @@
            </select> -->
              <input
                 type="text"
-                :value="libelleUa(afficheIdUa(detail_vehicule.id))"
+                :value="afficherLibelleUniteAdministrative(afficheIdUa(detail_Immo.id))"
                 class="span"
                 readonly
               />
             </div>
           </div>
                  </td>
-                 <td>
+                 <td colspan="2">
                     <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Type véhicule</label>
+                  <label class="control-label" style="font-size:14px">Article</label>
                   <div class="controls">
                     <input
                 type="text"
-                :value="libelleTypeVehicule(Idtypevehicule(detail_vehicule.id))"
+                :value="afficheLibelleArticle(afficheIdArticle(detail_Immo.id))"
                 class="span"
                 readonly
               />
                   </div>
                 </div>
                  </td>
-                 <td>
+                 <!-- <td>
                     <div class="control-group">
                   <label class="control-label" style="font-size:14px">Immatriculation</label>
                   <div class="controls">
                     <input
                 type="text"
-                :value="ImmatriculationVehicule(detail_vehicule.id)"
+                
                 class="span"
                 readonly
               />
                   </div>
                 </div>
-                 </td>
+                 </td> -->
                  <td>
                     <div class="control-group">
                   <label class="control-label" style="font-size:14px">Numéro Contrat</label>
@@ -88,7 +88,7 @@
                     <select  class="span" v-model="formData.acte_id ">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in NumeroContrat(afficheIdUa(detail_vehicule.id))"
+                        v-for="typeUniteA in NumeroContrat(afficheIdUa(detail_Immo.id))"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.reference_act}}</option>
@@ -131,11 +131,18 @@
                <div class="control-group">
             <label class="control-label">Utilisateur</label>
             <div class="controls">
-                              <select   class="span" v-model="formData.personnel_id">
+                              <!-- <select   class="span" v-model="formData.personnel_id">
                                 <option></option>
             <option v-for="resultat in affichePersonnel(formData.vehicule_id)" :key="resultat.id" 
             :value="resultat.personnel_id">{{NomPersonnel(resultat.personnel_id)}}</option>
-                </select>
+                </select> -->
+                <input
+                type="text"
+                :value="afficherActeurDepenseNomPrenoms(afficheIdPersonnel(detail_Immo.id))"
+                class="span"
+                readonly
+              />
+                
             </div>
           </div>
             </td>
@@ -172,7 +179,7 @@
                    
                   <td>
                <div class="control-group">
-            <label class="control-label">Date de sorti</label>
+            <label class="control-label">Date de sortie</label>
             <div class="controls">
               <input
                 type="date"
@@ -262,7 +269,7 @@ formData1:{
 props:["macheid"],
  created() {
             this.marcheid=this.$route.params.id
-   this.detail_vehicule = this.getvehicules.find(
+   this.detail_Immo = this.immobilisations.find(
        idmarche => idmarche.id == this.$route.params.id
          )
       
@@ -276,7 +283,7 @@ props:["macheid"],
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
    ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-   ...mapGetters("SuiviImmobilisation", ["getterUa_idImo","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
+   ...mapGetters("SuiviImmobilisation", ["familles","immobilisations","getterUa_idImo","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
    ...mapGetters('uniteadministrative',[
      "groupeUaPourMarheHorSib",
     "plans_programmes",
@@ -321,13 +328,14 @@ cf:cf,
       ...mapGetters('personnelUA', ["acteur_depenses","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat","personnaliseActeurDepense",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
-     
-  afficheIdUa(){
+    
+    
+afficheLibelleArticle(){
       return id =>{
         if(id!=null && id!=""){
-          let objet1 = this.getvehicules.find(item => item.id==id)
+          let objet1 = this.familles.find(item => item.id==id)
           if(objet1){
-            return objet1.uniteadministrative
+            return objet1.libelle
           }
           return null
         }
@@ -335,6 +343,57 @@ cf:cf,
     },
 
 
+
+
+    afficheIdArticle(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objet1 = this.immobilisations.find(item => item.id==id)
+          if(objet1){
+            return objet1.famillearticle_id
+          }
+          return null
+        }
+      }
+    },
+    
+    
+    
+    afficherActeurDepenseNomPrenoms() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.nom.concat('    ',qtereel.acteur_depense.prenom);
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+  afficheIdUa(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objet1 = this.immobilisations.find(item => item.id==id)
+          if(objet1){
+            return objet1.uniteadministrative_id
+          }
+          return null
+        }
+      }
+    },
+
+afficheIdPersonnel(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objet1 = this.immobilisations.find(item => item.id==id)
+          if(objet1){
+            return objet1.acteurdepense_id
+          }
+          return null
+        }
+      }
+    },
 
 
 
@@ -366,18 +425,7 @@ cf:cf,
 // const isClassDe3 = (code) => code.charAt(0)== "6" && code.charAt(1)== "1" && code.charAt(2)== "4"; 
 // return this.afficheLigneReparation(getterUa_idImo).filter(x => isClassDe3(x.code));
 //  },
-libelleUa() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return 0
-        }
-      };
-    },
  Codeeconomique() {
       return id => {
         if (id != null && id != "") {
@@ -401,7 +449,7 @@ libelleUa() {
      affichePersonnel() {
       return id => {
         if (id != null && id != "") {
-           return this.AffectationVehicules.filter(qtreel => qtreel.vehicule_id == id && qtreel.etat_veh==1);
+           return this.acte_personnels.filter(qtreel => qtreel.vehicule_id == id && qtreel.etat_veh==1);
       
         }
       };
@@ -542,59 +590,7 @@ libelleUa() {
 
     },
  
- fonctionModele() {
-      return id => {
-        if (id != null && id != "") {
-           return this.ModeleVehicules.filter(qtreel => qtreel.marque_id == id);
-      
-        }
-      };
-    },
-     anneeAmort() {
-      
-      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
 
-      if (norme) {
-        return norme.annee;
-      }
-      return 0
-    },
-    libelleTypeVehicule() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.TypeVehicule.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return 0
-        }
-      };
-    },
-    Idtypevehicule() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getvehicules.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.typevehicule;
-      }
-      return 0
-        }
-      };
-    },
-    ImmatriculationVehicule() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getvehicules.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.numimmatriculation;
-      }
-      return 0
-        }
-      };
-    },
   },
   methods: {
     
@@ -612,7 +608,8 @@ libelleUa() {
       var nouvelObjet = {
         ...this.formData,
         anneebudgetaire:this.anneeAmort,
-        	ua_id:this.afficheIdUa(this.detail_vehicule.id)
+          ua_id:this.afficheIdUa(this.detail_Immo.id),
+          article_id:this.afficheIdArticle(this.detail_Immo.id)
       }
       
       this.ajouterReparationVehicule(nouvelObjet);

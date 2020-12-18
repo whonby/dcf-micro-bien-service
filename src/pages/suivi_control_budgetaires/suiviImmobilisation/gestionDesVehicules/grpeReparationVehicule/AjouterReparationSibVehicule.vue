@@ -40,16 +40,22 @@
                     <div class="control-group">
                   <label class="control-label" style="font-size:14px">unité administrative</label>
                   <div class="controls">
-                    <model-list-select style="background-color: rgb(233,233,233);"
+                    <!-- <model-list-select style="background-color: rgb(233,233,233);"
                                                    class="wide"
                                                    :list="afficherUAParDroitAccess"
-                                                   v-model="formData.ua_id"
+                                                   v-model="getterUa_idImo"
                                                    option-value="id"
                                                    option-text="libelle"
                                                    placeholder="Unité administrative"
                                 >
 
-                                </model-list-select>
+                                </model-list-select> -->
+                                  <input
+                type="text"
+                :value="libelleUa(getterUa_idImo)"
+                class="span"
+                readonly
+              />
                   </div>
                 </div>
                  </td>
@@ -60,7 +66,7 @@
                     <select  class="span" v-model="formData1.typeveh">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in typeVehiculeparUa(formData.ua_id)"
+                        v-for="typeUniteA in typeVehiculeparUa(getterUa_idImo)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.typevehicule"
                       >{{libelleTypeVehicule(typeUniteA.typevehicule)}}</option>
@@ -75,7 +81,7 @@
                     <select  class="span" v-model="formData.vehicule_id ">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in listeVehicule(formData.ua_id)"
+                        v-for="typeUniteA in listeVehicule(getterUa_idImo)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.numimmatriculation}}-{{libellemarqueVehicules(typeUniteA.marque)}}</option>
@@ -90,7 +96,7 @@
                     <select  class="span" v-model="formData.acte_id ">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in NumeroContrat(formData.ua_id)"
+                        v-for="typeUniteA in NumeroContrat(getterUa_idImo)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.reference_act}}</option>
@@ -239,11 +245,11 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import {admin,dcf,cf} from '../../../../../Repositories/Auth';
-import { ModelListSelect } from "vue-search-select";
-import "vue-search-select/dist/VueSearchSelect.css";
+// import { ModelListSelect } from "vue-search-select";
+// import "vue-search-select/dist/VueSearchSelect.css";
 export default {
   components: {
-    ModelListSelect
+   // ModelListSelect
   },
   data() {
     return {
@@ -279,7 +285,7 @@ props:["macheid"],
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
    ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-   ...mapGetters("SuiviImmobilisation", ["AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
+   ...mapGetters("SuiviImmobilisation", ["getterUa_idImo","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
    ...mapGetters('uniteadministrative',[
     "plans_programmes",
  "uniteAdministratives",
@@ -321,7 +327,18 @@ cf:cf,
       ...mapGetters('personnelUA', ["acteur_depenses","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat","personnaliseActeurDepense",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
-    
+    libelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
     Codeeconomique() {
       return id => {
         if (id != null && id != "") {
@@ -541,7 +558,8 @@ libelleTypeVehicule() {
 
       var nouvelObjet = {
         ...this.formData,
-        anneebudgetaire:this.anneeAmort
+        anneebudgetaire:this.anneeAmort,
+        ua_id:this.getterUa_idImo
       }
       
       this.ajouterReparationVehicule(nouvelObjet);

@@ -238,15 +238,16 @@ export  function ajouterUniteAdministrative({commit,dispatch}, nouveauObjet){
       dispatch('getAllUniteAdministrative')
       dispatch('getAllUniteAdministrative')
       this.$app.$loading(false)
-  }).catch(error =>{
-      console.log(error)
-      this.$app.$loading(false)
-      this.$app.$notify({
-          title: 'Erreur',
-          text: "Ce code existe déja",
-          type:"error"
-      });
   })
+  // .catch(error =>{
+  //     console.log(error)
+  //     this.$app.$loading(false)
+  //     this.$app.$notify({
+  //         title: 'Erreur',
+  //         text: "Ce code existe déja",
+  //         type:"error"
+  //     });
+  // })
 }
 
 

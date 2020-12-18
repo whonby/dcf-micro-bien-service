@@ -1,295 +1,460 @@
+sommeQuantiteGlobal
 <template>
+  <div class="container-fluid">
+     <!-- <h3 style="text-align:center">TABLEAU DE BORD : COMPTABILITES DES MATIERES</h3> -->
+    <div class="quick-actions_homepage">
+      <ul class="quick-actions">
 
-     <div>
-           <h1> Ma page</h1>
-       
-       <!-- <h4 style="text-align:center">GESTION DES VEHICULES</h4>
-       <br>
-       <br>
-       <table class="table table-bordered table-striped">
-           <tr>
-                 <td>
-                    <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Année Budgétaire</label>
-                  <div class="controls">
-                    <select  class="span5" v-model="formData.ua_id ">
-                      <option></option>                     
-                      
-                    </select>
-                  </div>
-                </div>
-                 </td>
-                 <td>
-                    <div class="control-group">
-                  <label class="control-label" style="font-size:14px">unité administrative</label>
-                  <div class="controls">
-                    <select  class="span5" v-model="formData.uniteadministrative ">
-                      <option></option>                     
-                      <option
-                        v-for="typeUniteA in afficherUAParDroitAccess"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-                 </td>
-                 <td>
-                    <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Immatriculation</label>
-                  <div class="controls">
-                    <select  class="span5" v-model="formData.ua_id ">
-                      <option></option>                     
-                      
-                    </select>
-                  </div>
-                </div>
-                 </td>
-           </tr>
-       </table>
-       <div class="row-fluid">
-       
-       
-      <div class="span4">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-            <h5>VEHICULES ENREGISTREES</h5>
-          </div>
-           <div class="widget-content"> 
-            <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{nbreEntreprise}}</h1>
-            
-            </div>
-        </div>
-      </div>
+        <div class="quick-actions_homepage">
       
-      <div class="span4">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-            <h5>VEHICULES ENREGISTREES</h5>
-          </div>
-           <div class="widget-content"> 
-            <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{nbreEntreprise}}</h1>
-            
-            </div>
-        </div>
-      </div>
-      <div class="span4">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-            <h5>VEHICULES EN REPARATION</h5>
-          </div>
-           <div class="widget-content"> 
-            <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{nbreEntreprise}}</h1>
-            
-            </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="row-fluid">
-      <div class="span4">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-            <h5>COÛT DES VEHICULES REPARES</h5>
-          </div>
-          <div class="widget-content"> 
-               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{0}}</h1>
-            
-          </div>
-        </div>
-      </div>
-      
-      <div class="span4">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-            <h5>COÛT DES VEHICULES EN COURS DE REPARATION</h5>
-          </div>
-          <div class="widget-content"> 
-               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{0}}</h1>
-            
-          </div>
-        </div>
-      </div>
-     
-    </div>
-    <div class="row-fluid">
-      <div class="span4">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-            <h5>NOMBRE DE VEHICULE EN REPARATION</h5>
-          </div>
-          <div class="widget-content"> 
-               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{0}}</h1>
-            
-          </div>
-        </div>
-      </div>
-      <div class="span4">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-            <h5>NOMBRE DE VEHICULE AMORTI</h5>
-          </div>
-          <div class="widget-content"> 
-               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{EntrepriseSantionner}}</h1>
-            
-          </div>
-        </div>
-      </div>
-      <div class="span4">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-            <h5>NOMBRE DE VEHICULE EN REPARATION</h5>
-          </div>
-          <div class="widget-content"> 
-               <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{EntrepriseSantionner}}</h1>
-            
-          </div>
-        </div>
-      </div> 
-     
-    </div> -->
-    
-     </div>
+                            <ul class="quick-actions" style="margin: 0px !important;"> 
 
+<li class="bg_lb span3"> <a href="#" style="color:black;"><h4>QUANTITES </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{sommeQuantiteGlobal}}</span><h4>GLOBALES</h4></a> </li>
+
+        <li class="bg_lb span3"> <a href="#" style="color:black;"><h4>QUANTITES </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{sommeQuantiteCouvert}} / {{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)}}</span><h4>COUVERTES / NON COUVERTES</h4>  </a> </li>
+
+        <!-- <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)}}</span> <h4>NON COUVERTES</h4></a> </li> -->
+          <!-- <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span> <h4>NON COUVERTES</h4></a> </li> -->
+                <li class="bg_lb span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{((parseFloat(sommeQuantiteCouvert)/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}% / {{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span><h4> COUVERTES / NON COUVERTES</h4></a> </li>
+<li class="bg_lo span3"> 
+  <router-link :to="{name: 'ListeUaTauxEquipement25'}" tag="a"  style="color:black;">
+  <h4>TAUX EQUIPEMENT COMPRIS </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">Nombre Ua : {{TauxEquipementDe0a25}}</span><h4>ENTRE 0% et 25% </h4>
+  </router-link>
+  </li>
+  
+    <li class="bg_lr span3"> <router-link :to="{name: 'ListeUaTauxEquipement50'}" tag="a"  style="color:black;"><h4>TAUX EQUIPEMENT COMPRIS</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">Nombre Ua : {{TauxEquipementDe25a50}}</span><h4> ENTRE 25% et 50%</h4>  </router-link> </li>
+    <li class="bg_ly span3"> <router-link :to="{name: 'ListeUaTauxEquipement75'}" tag="a"  style="color:black;"><h4>TAUX EQUIPEMENT COMPRIS</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">Nombre Ua : {{TauxEquipementDe50a75}}</span><h4> ENTRE 50% et 75%</h4>  </router-link> </li>
+    <li class="bg_lg span3"> <router-link :to="{name: 'ListeUaTauxEquipement100'}" tag="a"  style="color:black;"><h4>TAUX EQUIPEMENT COMPRIS</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">Nombre Ua : {{TauxEquipementDe75a100}}</span><h4> ENTRE 75% et 100%</h4>  </router-link> </li>  
+                            </ul>
+      
+      
+
+ 
+ 
+      
+    </div> 
+          <!-- <h1 style="text-align:center;margin:0 auto;color:red">EN COURS DE DEVELOPPEMENT TABLEAU DE BORD COMPTABILITE DES MATIERES</h1> -->
+      </ul>
+    </div>
+
+    <div class="quick-actions_homepage">
+      <ul class="quick-actions"></ul>
+    </div>
+    <div class="quick-actions_homepage">
+      <ul class="quick-actions"></ul>
+    </div>
+  </div>
 </template>
-
-
+  
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
+
 import {formatageSomme} from '../../src/Repositories/Repository';
 import {admin,dcf,cf} from '../../src/Repositories/Auth';
-import moment from "moment";
 export default {
-  data(){
-    return{
-
-      budgetGeneralCharge:"",
-      formData:{}
-
-    }
+  name:'TableauBordImmo',
+  data() {
+    return {
+      fabActions: [
+        {
+          name: "cache",
+          icon: "add"
+        }
+      ]
+    };
   },
 
-   
-  computed:{
- ...mapGetters("bienService", ["getFacturePersonnaliser","personnaliseGetterMarcheBailleur","modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
-     'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
-     'nombremarchesExecute',
-     'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
-      "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
-     "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
-
-   ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-   ...mapGetters("SuiviImmobilisation", ["Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
-   ...mapGetters('uniteadministrative',[
-    "plans_programmes",
- "uniteAdministratives",
- "afficheNiveauAction",
- "afficheNiveauActivite",
- "derniereNivoPlanBudgetaire",
- "getPersonnaliseBudgetGeneralParPersonnel",
-   "decomptefactures",
-   
-   ]),
-
-   ...mapGetters('parametreGenerauxAdministratif',[
-
- "sections",
- "type_Unite_admins",
- "plans_programmes",
- "natures_sections",
- "grandes_natures",
- "afficheNiveauPlanProg",
- "exercices_budgetaires",
- "taux"
-   ]),
-
-   ...mapGetters('parametreGenerauxFonctionnelle',[
-
-      "plans_fonctionnels",
- "afficheNiveauPlanFonctionnel"
-   ]),
- 
-...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
-
-...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
-...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
-   admin:admin,
-dcf:dcf,
-cf:cf,
-...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+  computed: {
+    ...mapGetters("SuiviImmobilisation", [
+    
+      "immobilisations",
      
-afficherUAParDroitAccess() {
-       // const st = this.search.toLowerCase();
+      
+    ]),
+     ...mapGetters('parametreGenerauxAdministratif', ['getterplanOrganisationUa']) ,
+    admin:admin,
+      dcf:dcf,
+      cf:cf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+    ...mapGetters("personnelUA", ["personnaliseActeurDepense","acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
+
+ ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
+  
+
+  TauxEquipementDe0a25() {
+   
         if (this.cf){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-             return colect;
-          
+          return colect.filter(items=>((((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100)<=25)).length;
         }
 
-        return this.uniteAdministratives;
-        //return this.uniteAdministratives
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
-        
-
+       return this.uniteAdministratives.filter(items=>((((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100)<=25)).length;
     },
-ExerciceEnCours() {
-      
-      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+   
+    TauxEquipementDe25a50() {
+   
+        if (this.cf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.filter(items=>(25<=(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100))).length;
+        }
 
-      if (norme) {
-        return norme.annee;
-      }
-      return "EXERCICE NON ACTIVE"
+       return this.uniteAdministratives.filter(items=>(25<=(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100))).length;
     },
-nbreEntreprise(){
-return this.entreprises.length;
-},
-EntrepriseNonSantionner() {
-              
-                return this.entreprises.filter(idm=>idm.active===1).length
+    
+    TauxEquipementDe50a75() {
+   
+        if (this.cf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.filter(items=>(50<=(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100))).length;
+        }
 
-            },
-            EntrepriseSantionner() {
-                
-                return this.entreprises.filter(idm=>idm.active===0).length
+       return this.uniteAdministratives.filter(items=>(50<=(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100))).length;
+    },
+    TauxEquipementDe75a100() {
+   
+        if (this.cf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.filter(items=>(75<=(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100))).length;
+        }
 
-            },
-  },
-created() {
-            this.marcheid=this.$route.params.id
-            console.log(this.marcheid)
-   this.detail_marche = this.gestionModules.find(
-       idmarche => idmarche.id == this.$route.params.id
-   )
+       return this.uniteAdministratives.filter(items=>(75<=(((parseFloat(this.QteAffecteCotePersonnel(items.id))+parseFloat(this.QteAffecteCoteService(items.id)))/(parseFloat(this.QteRequiseCotePersonnel(items.id))+parseFloat(this.QteRequiseCoteService(items.id))+0.01))*100))).length;
+    },
+     QteRequiseCoteService() {
+      return id => {
+    if(id !=""){
   
-},
-  methods:{
-...mapActions('parametreGenerauxAdministratif', [ 'ajouterExerciceBudgetaire',
-    'supprimerExerciceBudgetaire', 'modifierExerciceBudgetaire',"EncoursExerciceBudgetaire"]),   
-
-     
-    formaterDate(date) {
-      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
-    },
-
-EncoursExerciceLocal (id) {
-      this.EncoursExerciceBudgetaire(id)
-
-    },
- formatageSomme:formatageSomme
+        
+    return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.serviceua_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0); 
+      
+    }
+    return 0
   }
-}
-</script>
-<style>
+    },
+QteRequiseCotePersonnel() {
+      return id => {
+    if(id !=""){
+  
+        
+    return this.personnaliseActeurDepense.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0); 
+      
+    }
+    return 0
+  }
+    },
+ QteAffecteCotePersonnel() {
+      return id => {
+    if(id !=""){
+  
+        
+    return this.acte_personnels.filter(element => element.unite_administrative_id == id && element.normeequipement ==0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0); 
+      
+    }
+    return 0
+  }
+    },
+    QteAffecteCoteService() {
+      return id => {
+    if(id !=""){
+  
+        
+    return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.serviceua_id != null && element.normeequipement != element.historiqueequipement).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0); 
+      
+    }
+    return 0
+  }
+    },
+ 
+  
+// quantiteTotalDemande() {
+      
 
+
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.demandeMateriel.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+//             })
+//           return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+//         }
+
+//        return this.demandeMateriel.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+
+//     },
+quantiteTotalPersonnel() {
+      
+
+
+        // if (!this.admin || !this.dcf){
+        //     let colect=[];
+        //     this.acte_personnels.filter(item=>{
+        //         let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+        //         if (val!=undefined){
+        //             colect.push(item)
+        //             return item
+        //         }
+        //     })
+        //   return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+        // }
+
+       return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+        },
+
+    
+    quantiteTotalService() {
+      
+
+
+        // if (!this.admin || !this.dcf){
+        //     let colect=[];
+        //     this.getterplanOrganisationUa.filter(item=>{
+        //         let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+        //         if (val!=undefined){
+        //             colect.push(item)
+        //             return item
+        //         }
+        //     })
+        //     return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
+          
+        // }
+
+       return this.getterplanOrganisationUa.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
+          
+    },
+      nombreDupersonne(){
+    return this.acte_personnels.length;
+},
+//       quantiteEnStock(){
+//     return this.stockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+// },
+//     quantiteTotalDemande(){
+//     return this.demandeMateriel.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+// },
+
+
+quantiteEnStock() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.stockageArticles.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+        }
+
+       return this.stockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+
+    },
+
+
+
+
+//  quantiteTotalPersonnel(){
+//     return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+// },
+//  quantiteTotalService(){
+//     return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0); 
+// },
+
+sommeQuantiteGlobal(){
+  const val = parseInt(this.quantiteTotalPersonnel) + parseInt(this.quantiteTotalService);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+},
+
+// quantiteTotalDemandeNonCouvertPersonnel() {
+      
+
+
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.demandeMateriel.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+//                 item.motif != 10
+//             })
+//           return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+//         }
+
+//        return this.demandeMateriel.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+
+//     },
+// // quantiteTotalDemandeNonCouvertPersonnel(){
+// //     return this.demandeMateriel.filter(element => element.motif != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+// // },
+// quantiteTotalDemandeNonCouvertService() {
+      
+
+
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.demandeMateriel.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+                
+//             })
+//           return colect.filter(items=>items.motif_directeur_sce != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+//         }
+
+//        return this.demandeMateriel.filter(items=>items.motif_directeur_sce != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+
+//     },
+// quantiteTotalDemandeNonCouvertService(){
+//     return this.demandeMateriel.filter(element => element.motif_directeur_sce != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+// },
+// quantiteTotalCouvertPersonnel(){
+//     return this.acte_personnels.filter(element => element.normeequipement == 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+// },
+quantiteTotalCouvertPersonnel() {
+      
+
+
+        // if (!this.admin || !this.dcf){
+        //     let colect=[];
+        //     this.immobilisations.filter(item=>{
+        //         let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative_id)
+        //         if (val!=undefined){
+        //             colect.push(item)
+        //             return item
+        //         }
+                
+        //     })
+        //     return colect.filter(items=>items.fonction_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0);
+        // }
+
+       return this.immobilisations.filter(items=>items.fonction_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0);
+
+    },
+    quantiteTotalCouvertService() {
+      
+
+
+        // if (!this.admin || !this.dcf){
+        //     let colect=[];
+        //     this.immobilisations.filter(item=>{
+        //         let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative_id)
+        //         if (val!=undefined){
+        //             colect.push(item)
+        //             return item
+        //         }
+                
+        //     })
+        //   return colect.filter(items=>items.fonction_id == null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0);
+        // }
+
+       return this.immobilisations.filter(items=>items.fonction_id == null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0);
+
+    },
+    sommeQuantiteCouvert(){
+  const val =  parseInt(this.quantiteTotalCouvertPersonnel)+ parseInt(this.quantiteTotalCouvertService);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+},
+// quantiteTotalCouvertPersonnel(){
+//     return this.acte_personnels.filter(element => element.normeequipement == 0).length;
+// },
+quantiteTotalNonCouvertPersonnel() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect.filter(items=>items.normeequipement != 0).length;
+        }
+
+       return  this.acte_personnels.filter(items=>items.normeequipement != 0).length;
+
+    },
+//  quantiteTotalNonCouvertPersonnel(){
+//     return this.acte_personnels.filter(element => element.normeequipement != 0).length;
+// },
+//  quantiteTotalNonCouvertService(){
+//     return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0); 
+// },
+
+sommeQuantiteGlobalNonCouvert(){
+  const val =  parseInt(this.quantiteTotalNonCouvertPersonnel)+ parseInt(this.quantiteTotalNonCouvertService);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+}
+  },
+  methods: {
+    formatageSomme: formatageSomme,
+  }
+};
+</script>
+
+
+
+<style>
+.deplaceCar1 {
+  margin: 0 50px;
+}
+.deplaceCar {
+  margin: 0 120px;
+}
 </style>

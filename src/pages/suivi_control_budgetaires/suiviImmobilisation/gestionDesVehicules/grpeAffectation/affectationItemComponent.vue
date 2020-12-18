@@ -2,7 +2,7 @@
 <template>
    
       <div class="accordion" >
-          <div class="accordion-group widget-box" v-if="groupe.vehiculeua.length > 0 ">
+          <div class="accordion-group widget-box" v-if="ListeDesVehiculeParUa(this.getterUa_idImo).length > 0 ">
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
@@ -41,7 +41,7 @@
                 <tbody>
                    <affectationItem
                         class="item"
-                        v-for="groupeElement in groupe.vehiculeua"
+                        v-for="groupeElement in ListeDesVehiculeParUa(this.getterUa_idImo)"
                         :key="groupeElement.id"
                         :article="groupeElement"
                         @modification="$emit('modification', $event)"
@@ -62,6 +62,7 @@
 
 
 <script>
+import { mapGetters} from "vuex";
 import affectationItem from './affectationItem'
 
 export default {
@@ -84,22 +85,63 @@ export default {
 
   computed: {
   
+...mapGetters("SuiviImmobilisation", [
+    "getPersoStock",
+      "equipements",
+      "familles",
+      "articles",
+      "type_Unite_admins",
+      "totalQteEntrant",
+      "totalQteSortant",
+     "getterUa_idImo"
+    ]),
+
+
+
+  ListeDesVehiculeParUa() {
+      
+        if (this.noDCfNoAdmin ){
+            let colect=[];
+            this.groupe.vehiculeua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.uniteadministrative == id );
+        }
+      };
+          }
+           return id => {
+        if (id != null && id != "") {
+          return this.groupe.vehiculeua.filter(element => element.uniteadministrative == id );
+        }
+      };
+         
+
+
+
+    },
     isFolder: function () {
-      return this.groupe.vehiculeua &&
-        this.groupe.vehiculeua.length
+      return this.ListeDesVehiculeParUa(this.getterUa_idImo) &&
+        this.ListeDesVehiculeParUa(this.getterUa_idImo).length
     },
 
     getNombreArticle(){
-        var nombre = this.groupe.vehiculeua.length
+        var nombre = this.ListeDesVehiculeParUa(this.getterUa_idImo).length
         if(nombre) return nombre
         return '0' 
     },
     iconClasses() {
       return {
-        'icon-plus': !this.isOpen && this.groupe.vehiculeua.length,
-        'icon-minus': this.isOpen && this.groupe.vehiculeua.length
-        //    'icon-folder-close': !this.isOpen && this.groupe.vehiculeua.length,
-        // 'icon-folder-open': this.isOpen && this.groupe.vehiculeua.length
+        'icon-plus': !this.isOpen && this.ListeDesVehiculeParUa(this.getterUa_idImo).length,
+        'icon-minus': this.isOpen && this.ListeDesVehiculeParUa(this.getterUa_idImo).length
+        //    'icon-folder-close': !this.isOpen && this.ListeDesVehiculeParUa(this.getterUa_idImo).length,
+        // 'icon-folder-open': this.isOpen && this.ListeDesVehiculeParUa(this.getterUa_idImo).length
       }
     },
 

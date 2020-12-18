@@ -956,8 +956,6 @@ created() {
             ...mapGetters("bienService", ["getterCojos","mandate","getMandatPersonnaliserVise", "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
                "getterDossierCandidats","marches","gettersOuverturePersonnaliser","getterAnalyseDossiers",
                "getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser","getterAnoDMPBailleur"
-               
-               
               ]),
  
                

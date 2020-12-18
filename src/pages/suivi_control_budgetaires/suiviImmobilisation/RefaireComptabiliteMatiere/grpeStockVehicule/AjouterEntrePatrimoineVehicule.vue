@@ -38,14 +38,20 @@
                     <div class="control-group">
                   <label class="control-label">Unite Administrative</label>
                   <div class="controls">
-                    <select  class="span5" v-model="formData.uAdministrative_id">
+                    <!-- <select  class="span5" v-model="formData.uAdministrative_id">
                       <option></option>                     
                       <option
                         v-for="typeUniteA in uniteAdministratives"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
-                    </select>
+                    </select> -->
+                    <input
+                type="text"
+                :value="libelleUa(getterUa_idImo)"
+                class="span5"
+                readonly
+              />
                   </div>
                 </div>
                  </td>
@@ -56,7 +62,7 @@
                     <select  class="span5" v-model="formData.marche_id">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in marcheTypeFournitureParUa(formData.ua_id)"
+                        v-for="typeUniteA in marcheTypeFournitureParUa(getterUa_idImo)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.objet}}</option>
@@ -253,7 +259,7 @@ props:["macheid"],
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
    ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-   ...mapGetters("SuiviImmobilisation", ["familles","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
+   ...mapGetters("SuiviImmobilisation", ["getterUa_idImo","familles","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
    ...mapGetters('uniteadministrative',[
     "plans_programmes",
  "uniteAdministratives",
@@ -619,11 +625,15 @@ libelleUa() {
   },
   methods: {
     
-     ...mapActions("uniteadministrative", [
-      "ajouterStockArticle"
-      ]),
+     
+       ...mapActions("SuiviImmobilisation", [
+      "getAllStock",
+      "ajouterStock",
+      "modifierStock",
+      "supprimerStock"
+    ]),
       afficherModalListePersonnel(){
-                this.$router.push({ name: 'ListeStockArticle' })
+                this.$router.push({ name: 'StockArticles' })
             },
       afficherModalListeExecution(){
                 window.history.back();
@@ -633,10 +643,11 @@ libelleUa() {
       var nouveauObjet ={
         ...this.formData,
         quantitestock:this.quantiteRecuFacture(this.formData.famill_id),
-        typestockage:1
+        typestockage:1,
+        uAdministrative_id:this.getterUa_idImo
       }
       
-      this.ajouterStockArticle(nouveauObjet);
+      this.ajouterStock(nouveauObjet);
     
       this.formData = {
         uAdministrative_id:"",
