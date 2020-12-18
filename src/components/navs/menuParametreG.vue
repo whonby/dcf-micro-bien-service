@@ -493,13 +493,13 @@
             </router-link>
           </li>
           <li>
-            <router-link :to="{name: 'naturePrix'}" tag="a">
+            <router-link :to="{name: 'NaturePrix'}" tag="a">
               <i class="icon-bar-chart"></i>
              Nature des prix
             </router-link>
           </li>
           <li>
-            <router-link :to="{name: 'motifPassation'}" tag="a">
+            <router-link :to="{name: 'motif_passation'}" tag="a">
               <i class="icon-bar-chart"></i>
              Motif de passations
             </router-link>

@@ -208,7 +208,7 @@ formatageSomme,
 
  testRegion(){
    let  objet= this.localisations_geographiques.filter(item=>{
-     if(item.structure_localisation_geographique.niveau==2 && item.longitude!=null ){
+     if(item.structure_localisation_geographique.niveau==2 && item.longitude!=null){
        return item
      }
    })

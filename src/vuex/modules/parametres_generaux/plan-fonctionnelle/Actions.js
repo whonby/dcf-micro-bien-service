@@ -6,6 +6,59 @@ import { asyncLoading } from 'vuejs-loading-plugin'
  var queue = housecall({concurrency: 2, cooldown: 1000})
 
 // liste structure fonctionnelle
+export  function getMotifPassation({commit}){
+    queue.push(() => axios.get('/motif').then(tony => {
+        commit('GET_MOTIF_PASSATION', tony.data)
+    }).catch(error => console.log(error)))
+}
+
+// ajouter structure fonctionnelle
+export function ajouterMotifPassation({commit}, objetAjout){
+ asyncLoading(axios.post('/motif' ,{
+     code:objetAjout.code,
+     libelle:objetAjout.libelle,
+   
+})).then(tony => {
+     if(tony.status == 201){
+         commit('AJOUTER_MOTIF_PASSATION', tony.data)
+
+         this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué avec success !',
+            type:"success"
+          })
+     }
+ }).catch(error => console.log(error))
+}
+// supprimer structure fonctionnelle
+export function supprimerMotifPassation({commit}, id){
+  
+    this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+       commit('SUPPRIMER_MOTIF_PASSATION', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+        axios.delete('/motif/' + id).then(() => dialog.close() )   
+    })
+}
+//modifier structure fonctionnelle
+export function modifierMotifPassaition({commit},elementModifie){
+
+   asyncLoading( axios.put('/motif/' +elementModifie.id ,{
+       code:elementModifie.code,
+      libelle:elementModifie.libelle,
+
+})).then(response => {
+        commit('MODIFIER_MOTIF_PASSATION', response.data)
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type:"success"
+          })
+    }).catch(error => console.log(error))
+   
+}
 
 export  function getlisteNaturePrix({commit}){
     queue.push(() => axios.get('/listeNaturePrix').then(tony => {

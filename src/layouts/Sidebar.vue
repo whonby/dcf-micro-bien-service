@@ -3,6 +3,7 @@
     
 
     <SiderbarParametre v-if="detail_marche.code == 1"></SiderbarParametre>
+    <!-- <SideBarGestionAccess v-if="detail_marche.code == 21"></SideBarGestionAccess> -->
     <SiderbarUniteAdministrative v-else-if="detail_marche.code == 2"></SiderbarUniteAdministrative>
     <SideBarGestionSib v-else-if="detail_marche.code == 3"></SideBarGestionSib>
      <SiderbarGestionHorsSib v-else-if="detail_marche.code == 4"></SiderbarGestionHorsSib>
@@ -20,6 +21,7 @@
 <script>
 import { mapGetters} from "vuex";
 import SiderbarParametre from "./SiderbarParametre";
+//import SideBarGestionAccess from "./SideBarGestionAccess";
 import SideBarGestionSib from "./SideBarGestionSib";
 import SidebarMonEquipe from "./SidebarMonEquipe";
 import SiderbarUniteAdministrative from "./SiderbarUniteAdministrative";
@@ -37,6 +39,7 @@ export default {
   },
 components: {
     SideBarGestionSib,
+    //SideBarGestionAccess,
      SiderbarParametre,
     SiderbarCatographie,
     SiderbarGestionHorsSib,

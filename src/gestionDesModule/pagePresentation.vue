@@ -302,8 +302,11 @@ created(){
     this.getAffectation()
 this.getFormeJuridiques()
 this.getRegimeImpositions()
+ this.getGroupe()
     this.getRoles()
     this.getUtilisateurs()
+    this.getMenu()
+    this.getModule()
     this.getEquipeCF()
     this.getPlanPassationMarche()
     this.getRapport()
@@ -552,7 +555,6 @@ this.getMembreCojo()
                 "budgetGeneral",
                 "afficheTransfertValider",
                 "transferts"
-
             ]),
             ...mapGetters('personnelUA', ['sauvegardePhoto']),
     ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel","mandats"]),
@@ -563,7 +565,8 @@ this.getMembreCojo()
             ]),
             
       
-      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation",
+      "getterUniteAdministrativeByUser"]),
 
 
 afficherModule1() {
@@ -622,7 +625,8 @@ return objJson.id
   methods:{
  admin:admin,
      dcf:dcf,
-    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf"]),
+    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",'getGroupe',"getMenu","getModule",
+    "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 

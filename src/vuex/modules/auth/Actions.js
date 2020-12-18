@@ -349,3 +349,141 @@ export function encienPasswordSaisi({commit}, formData){
 export  function activeMenuModuleSidcf({commit}, objetAjoute){
     commit('MENU_MODULE_SIDCF', objetAjoute)
 }
+
+
+export  function  getModule({commit}) {
+
+    queue.push(() =>  apiGuest.get('/modules').then(response => {
+            // console.log(response.data)
+            commit('GET_MODULE', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+export  function ajouterModule({commit,dispatch}, objetAjoute){
+    asyncLoading(apiGuest.post('/modules', objetAjoute )).then(res => {
+        if(res.status == 201){
+           // dispatch("getUtilisateurs")
+            dispatch("getModule")
+            commit('AJOUTER_MODULE', res.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+
+export function supprimerModule({commit}, id){
+  this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_MODULE', id)
+            apiGuest.delete('/modules/' + id).then(() => dialog.close() )
+
+        })
+}
+
+export function modifierModule({commit}, formData){
+    apiGuest.put('/modules' ,formData).then(response => {
+        commit('MODIFIER_MODULE', response.data)
+    })
+
+}
+
+// action menu
+export  function  getMenu({commit}) {
+
+    queue.push(() =>  apiGuest.get('/menu').then(response => {
+            // console.log(response.data)
+            commit('GET_MENU', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+export  function ajouterMenu({commit,dispatch}, objetAjoute){
+    asyncLoading(apiGuest.post('/menu', objetAjoute )).then(res => {
+        if(res.status == 201){
+           // dispatch("getUtilisateurs")
+            dispatch("getMenu")
+            commit('AJOUTER_MENU', res.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+
+export function supprimerMenu({commit}, id){
+  this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_MENU', id)
+            apiGuest.delete('/menu/' + id).then(() => dialog.close() )
+
+        })
+}
+
+export function modifierMenu({commit}, formData){
+    apiGuest.put('/menu' ,formData).then(response => {
+        commit('MODIFIER_MENU', response.data)
+    })
+
+}
+// action pour le groupe
+
+
+export  function  getGroupe({commit}) {
+
+    queue.push(() =>  apiGuest.get('/liste_groupe').then(response => {
+            // console.log(response.data)
+            commit('GET_GROUPE', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+
+export  function ajouterGroupe({commit,dispatch}, objetAjoute){
+    asyncLoading(apiGuest.post('/liste_groupe', objetAjoute )).then(res => {
+        if(res.status == 201){
+           // dispatch("getUtilisateurs")
+            dispatch("getGroupe")
+            commit('AJOUTER_GROUPE', res.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+
+export function supprimerGroupe({commit}, id){
+  this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_GROUPE', id)
+            apiGuest.delete('/liste_groupe/' + id).then(() => dialog.close() )
+
+        })
+}
+
+export function modifierGroupe({commit}, formData){
+    apiGuest.put('/liste_groupe' ,formData).then(response => {
+        commit('MODIFIER_GROUPE', response.data)
+    })
+
+}
+

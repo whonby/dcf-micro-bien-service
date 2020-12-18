@@ -37,6 +37,12 @@
             <span>PARAMETRES GENERAUX</span>
           </a>
         </li>
+         <li :class="{active: active_el == 21 }" @click.prevent="navigateToGestionAcces">
+          <a title="GESTION DES ACCES" href="#">
+            <i class="icon icon-signal"></i>
+            <span>GESTIONS DES ACCES</span>
+          </a>
+        </li>
          <li @click.prevent="navigateRetourAuMenu" >
           <a title="Carte des infrastructure pas regison" href="#">
             <i class=" icon-arrow-left"></i>
@@ -248,6 +254,13 @@ navigateToGestionMarche(){
         this.activate(17)
         this.$router.push({
           name: 'TableauBordParametreSimple'
+        })
+      },
+
+      navigateToGestionAcces(){
+        this.activate(21)
+        this.$router.push({
+          name: 'getion_acces'
         })
       },
       

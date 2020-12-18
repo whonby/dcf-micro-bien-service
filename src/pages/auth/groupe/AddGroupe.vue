@@ -22,9 +22,15 @@
                                  <div class="widget-content nopadding">
                                      <form action="#" method="get" class="form-horizontal">
                                          <div class="control-group">
+                                             <label class="control-label">Code groupe:</label>
+                                             <div class="controls">
+                                                 <input type="text" v-model="formData.code" class="span11" placeholder="">
+                                             </div>
+                                         </div>
+                                         <div class="control-group">
                                              <label class="control-label">Nom du Groupe:</label>
                                              <div class="controls">
-                                                 <input type="text" class="span11" placeholder="">
+                                                 <input type="text" v-model="formData.nom_groupe" class="span11" placeholder="">
                                              </div>
                                          </div>
 
@@ -32,7 +38,7 @@
                                          <div class="control-group">
                                              <label class="control-label">Description</label>
                                              <div class="controls">
-                                                 <textarea class="span11"></textarea>
+                                                 <textarea v-model="formData.description" class="span11"></textarea>
                                              </div>
                                          </div>
 
@@ -1933,6 +1939,11 @@
 
         data() {
             return {
+                formData:{
+                    code:"",
+                    nom_groupe:"",
+                    description:"",
+                },
               exercice:{
                   code:"EXERCICES_BUDGETAIRES",
                   ajouter:false,
