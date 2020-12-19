@@ -42,13 +42,35 @@
 
         </model-list-select>
     </div>
-    <div class="span4">
-
-    </div>
-    <div class="span4">
-
-    </div>
 </div>
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <label>Departement <a href="#" @click.prevent="videDepartement()" style="color: red" v-if="departement"><i class="fa fa-trash-o"></i></a></label>
+                                <model-list-select style="background-color: rgb(233,233,233);"
+                                                   class="wide"
+                                                   :list="paysDepartement(region)"
+                                                   v-model="departement"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder="Departement"
+                                >
+
+                                </model-list-select>
+                            </div>
+                            <div class="span6">
+                                <label>Sous Prefectuer <a href="#" @click.prevent="videSousPrefectuer()" style="color: red" v-if="departement"><i class="fa fa-trash-o"></i></a></label>
+                                <model-list-select style="background-color: rgb(233,233,233);"
+                                                   class="wide"
+                                                   :list="paysSousPrefection(departement)"
+                                                   v-model="ville"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder="Sous Prefectuer"
+                                >
+
+                                </model-list-select>
+                            </div>
+                        </div>
 
 
                         <div class="">
@@ -336,6 +358,7 @@ import VGeosearch from 'vue2-leaflet-geosearch';
                 pays:"",
                 region:"",
                 ville:"",
+                departement:"",
               geosearchOptions: { // Important part Here
                 provider: new OpenStreetMapProvider(),
               },
@@ -452,13 +475,37 @@ created(){
                 }
             })
         },
-
+        paysDepartement(){
+            return region=>{
+                if(region!=""){
+                    return this.listeDepartement.filter(item=>{
+                        if(item.parent==region){
+                            return item
+                        }
+                    })
+                }
+                return  []
+            }
+        },
+        paysSousPrefection(){
+            return departement=>{
+                if(departement!=""){
+                    return this.listeSouprefecture.filter(item=>{
+                        if(item.parent==departement){
+                            return item
+                        }
+                    })
+                }
+                return  []
+            }
+        },
         listeLocalisationGeo(){
         let data_localisation=[]
             let vm=this;
         let objetZone=this.listeZone
          let objetRegion=vm.listeRegion
-
+       let objetDepartement=vm.listeDepartement;
+        let objetSousPrefectuer=vm.listeSouprefecture
             if(vm.zone!=""){
                 objetZone=objetZone.filter(item=>item.id==vm.zone)
             }
@@ -467,14 +514,20 @@ created(){
                 objetRegion=objetRegion.filter(item=>item.id==vm.region)
             }
 
+            if(vm.departement!=""){
+                objetDepartement=objetDepartement.filter(item=>item.id==vm.departement)
+            }
+            if(vm.ville!=""){
+                objetSousPrefectuer=objetSousPrefectuer.filter(item=>item.id=vm.ville)
+            }
           objetZone.forEach(function (value){
              let region= objetRegion.filter(item=>item.parent==value.id)
 
                 region.forEach(function (val){
-                      let departement=vm.listeDepartement.filter(item=>item.parent==val.id)
+                      let departement=objetDepartement.filter(item=>item.parent==val.id)
 
                     departement.forEach(function (row) {
-                      let sous_prefecture=vm.listeSouprefecture.filter(item=>item.parent==row.id)
+                      let sous_prefecture=objetSousPrefectuer.filter(item=>item.parent==row.id)
 
                         sous_prefecture.forEach(function (obj) {
                             data_localisation.push(obj)
@@ -812,9 +865,20 @@ created(){
             videZone(){
               this.zone=""
                 this.region=""
+                this.departement=""
+                this.ville=""
             },
             videRegions(){
               this.region=""
+                this.departement=""
+                this.ville=""
+            },
+            videDepartement(){
+              this.departement=""
+                this.ville=""
+            },
+            videSousPrefectuer(){
+               this.ville=""
             },
        formatageSomme:formatageSomme,
             zoomUpdate(zoom) {
