@@ -1,4 +1,4 @@
-
+afficheIdMarche
 <template>
 
 <div>
@@ -81,16 +81,16 @@
                    <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                    <tr
+                <!-- <tbody> -->
+                    <!-- <tr
                     class="odd gradeX"
                     v-for="equipement in listeReparationEnExecutionMateriel(formData.uAdministrative_id)"
                     :key="equipement.id"
                   >
                     <td style="font-size:14px">
-                   {{equipement.anneebudgetaire || 'Non renseigné'}}</td>
+                   {{equipement.anneebudgetaire || 'Non renseigné'}}</td> -->
                 
-                 <td style="font-size:14px">
+                 <!-- <td style="font-size:14px">
                    {{libelleFamille(equipement.article_id) || 'Non renseigné'}}</td>
                  <td style="font-size:14px" >
                    {{affichePanneSignaler(afficheIdMarche(equipement.acte_id)) || 'Non renseigné'}}</td>
@@ -103,16 +103,16 @@
                    {{afficheNomEntreprise(afficheIdEntreprise(equipement.acte_id)) || 'Non renseigné'}}</td>
                      <td style="font-size:14px">
                    {{formatageSomme(parseFloat(afficheMontantReparation(equipement.acte_id))) || 'Non renseigné'}}</td>
-                    
-                    <td>
+                     -->
+                    <!-- <td>
                      <router-link :to="{ name: 'detailExecutionHorsSib', params: { id: this.afficheIdMarche(equipement.acte_id) }}"
                  class="btn btn-inverse " title="Execution du marche">
         <span class=""><i class=" icon-fast-forward"></i></span>
     </router-link>
                       
-                    </td>
-                  </tr>
-                    </tbody>
+                    </td> -->
+                  <!-- </tr>
+                    </tbody> -->
               </table>
           </div>
 
@@ -176,7 +176,7 @@
                     <td style="font-size:14px">
                    {{equipement.anneebudgetaire || 'Non renseigné'}}</td>
                 
-                 <td style="font-size:14px">
+                 <!-- <td style="font-size:14px">
                    {{afficheImmatriculation(equipement.vehicule_id) || 'Non renseigné'}}</td>
                  <td style="font-size:14px" >
                    {{affichePanneSignaler(afficheIdMarche(equipement.acte_id)) || 'Non renseigné'}}</td>
@@ -189,14 +189,14 @@
                    {{afficheNomEntreprise(afficheIdEntreprise(equipement.acte_id)) || 'Non renseigné'}}</td>
                      <td style="font-size:14px">
                    {{formatageSomme(parseFloat(afficheMontantReparation(equipement.acte_id))) || 'Non renseigné'}}</td>
-                    
-                    <td>
+                     -->
+                    <!-- <td>
                      <router-link :to="{ name: 'detailExecutionHorsSib', params: { id: this.afficheIdMarche(equipement.acte_id) }}"
                  class="btn btn-inverse " title="Execution du marche">
         <span class=""><i class=" icon-fast-forward"></i></span>
     </router-link>
                       
-                    </td>
+                    </td> -->
                   </tr>
                 </tbody>
               </table>
@@ -246,7 +246,7 @@ import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from '../../../../Repositories/Repository';
 import {admin,dcf,noDCfNoAdmin} from "../../../../Repositories/Auth"
 //import ListePersonnelParUa from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/AffectationEquipementParUa/DossierAffectation/ListePersonnelParUa'
-//import moment from 'moment';
+import moment from 'moment';
 export default {
   // components: {
     
@@ -258,7 +258,7 @@ export default {
       formData :{
 ua_id:"",
 serviceua_id:"",
-
+uAdministrative_id:""
       },
        formData2:{
         famillearticle_id :"",
@@ -283,7 +283,7 @@ search:""
       dcf:dcf,
       noDCfNoAdmin:noDCfNoAdmin,
      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-            ...mapGetters("bienService", [ "gettersCotations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+            ...mapGetters("bienService", ["getActeEffetFinancierPersonnaliser45","gettersCotations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -308,7 +308,9 @@ search:""
       "montantBudgetGeneral",
       "uniteZones",
       "getPersonnaliseBudgetGeneralParTransfert",
-      "uniteAdministratives"
+      "uniteAdministratives",
+      "ReparationVehicules",
+      "getvehicules"
       // "chapitres",
       // "sections"
     ]),
@@ -362,7 +364,7 @@ search:""
    listeReparationEnExecutionMateriel() {
       return id => {
         if (id != null && id != "") {
-           return this.ReparationVehicules.filter(qtreel => qtreel.ua_id == id && qtreel.vehicule_id == null && qtreel.date_retour == null);
+           return this.ReparationVehicules.filter(qtreel => qtreel.ua_id == id && qtreel.vehicule_id == "" && qtreel.date_retour == "");
 
       
         }
@@ -371,7 +373,7 @@ search:""
 listeReparationEnExecution() {
       return id => {
         if (id != null && id != "") {
-           return this.ReparationVehicules.filter(qtreel => qtreel.ua_id == id && qtreel.article_id == null && qtreel.date_retour == null);
+           return this.ReparationVehicules.filter(qtreel => qtreel.ua_id == id);
 
       
         }
@@ -502,9 +504,9 @@ libelleFamille() {
 
 formatageSomme:formatageSomme,
 
-//  formaterDate(date) {
-//               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
-//             },
+ formaterDate(date) {
+              return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+            },
       }
 }
 </script>

@@ -10,7 +10,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Fiche Véhicule</h5>
+              <h5>Fiche d'Entrée</h5>
              
             </div>
 
@@ -129,8 +129,11 @@
               <div class="controls">
                  <select  class="span" v-model="formData.typestockage">
                       <option></option>                     
-                     <option value="1">Matériel et mobilier</option> 
+                     <option value="1">Matériel</option> 
                      <option value="2">Véhicule</option> 
+                     <option value="3">Mobilier</option>
+                     <option value="4">Immobilier</option> 
+                     <option value="5">Gros Travaux</option> 
                     </select>
               </div>
             </div>
@@ -149,15 +152,108 @@
                   <div class="widget-title">
                       
                     <ul class="nav nav-tabs">
-                     <li class=""><a data-toggle="tab" href="#Techniques2"  v-show="formData.typestockage == 1">Fiche Matériel && Mobilier</a></li>
+                     <li class=""><a data-toggle="tab" href="#Techniques2"  v-show="formData.typestockage == 1">Fiche Matériel</a></li>
         <li class=""><a data-toggle="tab" href="#Informations2"  v-show="formData.typestockage == 2">Fiche Véhicule</a></li>
-        
+         <li class=""><a data-toggle="tab" href="#Mobilier"  v-show="formData.typestockage == 3">Fiche Mobilier</a></li>
+        <li class=""><a data-toggle="tab" href="#Immobilier"  v-show="formData.typestockage == 4">Fiche Immobilier</a></li>
+        <li class=""><a data-toggle="tab" href="#Travaux"  v-show="formData.typestockage == 5">Fiche Gros Travaux</a></li>
                       
                      
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
+                    <div id="Mobilier" class="tab-pane ">
+                       <table class="table table-bordered table-striped" >
+               <tr>
+                     
+                      <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Désignation du bien</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                    
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td>
+                      <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Matiere</label>
+                  <div class="controls">
+                   <input
+                      type="text"
+                   
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td>
+                      <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Couleur</label>
+                  <div class="controls">
+                     <input
+                      type="text"
+                    
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td>
+                      
+                  </tr>
+                    <tr>
+                      <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Revêtement</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                   
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td>
+                       <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Dimension</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                   
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td>
+                      <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Prix Unitaire</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                    v-model="formData1.prix_unitaire"
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td> 
+                     
+                  </tr>
+            
+                      
+        </table>
+                    </div>
                   <div id="Techniques2" class="tab-pane ">
          <table class="table table-bordered table-striped" >
                <tr>
@@ -166,7 +262,7 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Marque Matériel</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData.marque_id">
+                    <select  class="span" v-model="formData1.marque_id">
                       <option></option>                     
                       <option
                         v-for="typeUniteA in AfficheModelMaterielMobilier"
@@ -181,10 +277,10 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Modele Matériel</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData.modele_id">
+                    <select  class="span" v-model="formData1.model_id">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in afficheModeleParMarque(formData.marque_id)"
+                        v-for="typeUniteA in afficheModeleParMarque(formData1.marque_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -198,7 +294,7 @@
                   <div class="controls">
                      <input
                       type="text"
-                    v-model="formData.numero_serie"
+                    v-model="formData1.numero_serie"
                       class="span"
                       
                     />
@@ -211,7 +307,7 @@
                   <div class="controls">
                     <input
                       type="text"
-                    v-model="formData.numero_matricule"
+                    v-model="formData1.numero_matricule"
                       class="span"
                       
                     />
@@ -225,7 +321,7 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Imputation comptable</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData.immobilisation">
+                    <select  class="span" v-model="formData1.immobilisation">
                       <option></option>                     
                        <option
                         v-for="typeUniteA in lesClassDe3"
@@ -242,7 +338,7 @@
                   <div class="controls">
                     <input
                       type="text"
-                    v-model="formData.prix_unitaire"
+                    v-model="formData1.prix_unitaire"
                       class="span"
                       
                     />
@@ -255,7 +351,7 @@
                   <div class="controls">
                     <input
                       type="text"
-                    v-model="formData.durevie"
+                    v-model="formData1.durevie"
                       class="span"
                       
                     />
@@ -268,7 +364,7 @@
                   <div class="controls">
                     <input
                       type="text"
-                    v-model="formData.autreinfo"
+                    v-model="formData1.autreinfo"
                       class="span"
                       
                     />
@@ -366,7 +462,7 @@
                    <div class="controls">
                     <input
                       type="text"
-                    v-model="formData.durevie"
+                    v-model="formData.prixunitaire"
                       class="span"
                       
                     />
@@ -999,8 +1095,20 @@ libelleUa() {
      marcheTypeFournitureParUa() {
       return id => {
         if (id != null && id != "") {
-           return this.marches.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.type_marche_id==1 && qtreel.attrubue==2);
+           return this.marches.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.type_marche_id==1 && this.validationMandatParcf(qtreel.id) == 8);
       
+        }
+      };
+    },
+    validationMandatParcf() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.mandats.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.decision_cf;
+      }
+      return 0
         }
       };
     },
@@ -1333,13 +1441,16 @@ prixUnitaire() {
   methods: {
     
      ...mapActions("uniteadministrative", [
-      "ajouterStockArticle"
+      "ajouterStockArticle",
+      "ajouterNouveauVehicule"
       ]),
       ...mapActions("SuiviImmobilisation", [
       "getAllStock",
       "ajouterStock",
       "modifierStock",
-      "supprimerStock"
+      "supprimerStock",
+      "ajouterFicheArticle",
+      
     ]),
       afficherModalListePersonnel(){
                 this.$router.push({ name: 'gestionStockCorporels' })
@@ -1349,21 +1460,66 @@ prixUnitaire() {
             },
      AjouterVehicule() {
       
-      var nouveauObjet ={
-        ...this.formData,
-        quantitestock:this.quantiteRecuFacture(this.formData.famill_id)
+
+if(this.formData.typestockage == 1){
+
+ var nouveauObjet ={
+        ...this.formData1,
+        ua_id:this.formData.uAdministrative_id,
+        marche_id:this.formData.marche_id
       }
       
-      this.ajouterStockArticle(nouveauObjet);
+      this.ajouterFicheArticle(nouveauObjet);
     
-      this.formData = {
-        uAdministrative_id:"",
-        famill_id:"",
-        
-        marche_id:"",
-        facture_id:"",
+      this.formData1 = {
+        ua_id:"",
+        article_id:"",
+        model_id:"",
+        numero_serie:"",
+        numero_matricule:"",
+        prix_unitaire:"",
+          durevie:"",
+          marque_id:"",
+          immobilisation:"",
+          autreinfo:""
        
       };
+}
+else{
+  
+      var objetNew ={
+        ...this.formData,
+        anneebudgetaire:this.anneeAmort,
+        uniteadministrative:this.formData.uAdministrative_id
+      }
+      this.ajouterNouveauVehicule(objetNew);
+    
+      this.formData = {
+        uniteadministrative:"",
+        numidentification:"",
+        numimmatriculation:"",
+        immobilisation:"",
+        typevehicule:"",
+        marque:"",
+        modele:"",
+        energie:"",
+        	numchassis:"",
+        numserie:"",
+        couleur:"",
+        transmission:"",
+        nombreportes:"",
+        nombreplace:"",
+        puissance:"",
+        etatvehicule:"",
+        votreassuranceexpirere:"",
+        
+      };
+}
+
+
+
+
+     
     },
    
  formaterDate(date) {

@@ -612,7 +612,8 @@ libelleUa() {
       var nouvelObjet = {
         ...this.formData,
         anneebudgetaire:this.anneeAmort,
-        	ua_id:this.afficheIdUa(this.detail_vehicule.id)
+          ua_id:this.afficheIdUa(this.detail_vehicule.id),
+          vehicule_id:this.detail_vehicule.id
       }
       
       this.ajouterReparationVehicule(nouvelObjet);

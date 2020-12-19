@@ -17,13 +17,13 @@
 
                 </router-link>
             </li>
-             <li title="Stock">
+             <!-- <li title="Stock">
                 <router-link :to="{name:'principalExecution'}" tag="a">
-                    <!-- <i class="icon-list"></i> -->
+                    
                     <span class="text">EXECUTION DES REPARATIONS</span>
 
                 </router-link>
-            </li>
+            </li> -->
             <!-- <li>
                 <router-link :to="{name:'immobilisation'}" tag="a">
                    

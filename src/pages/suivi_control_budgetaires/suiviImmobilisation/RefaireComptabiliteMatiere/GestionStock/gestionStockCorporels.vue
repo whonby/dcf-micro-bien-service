@@ -53,7 +53,11 @@
 
 
           <div id="EntreeEnStock" class="tab-pane active"><ListeDuStockparUa></ListeDuStockparUa> </div>
-          <div id="Affectation" class="tab-pane "><affectationEquipementParUa></affectationEquipementParUa> </div>
+          <div id="Affectation" class="tab-pane ">
+         
+            <affectationEquipementParUa></affectationEquipementParUa>
+           
+             </div>
  <div id="Reparation" class="tab-pane "><ReparationEquipement></ReparationEquipement> </div>
 
  

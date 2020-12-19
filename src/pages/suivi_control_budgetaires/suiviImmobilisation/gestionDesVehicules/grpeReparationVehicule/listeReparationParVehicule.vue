@@ -1,7 +1,58 @@
 
 <template>
   <div>
-
+<div id="exampleModal1" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Appréciation</h3>
+      </div>
+      <div class="modal-body">
+      <table class="table table-bordered table-striped">
+          
+         <tr>
+           <td>
+                    <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Appréciation</label>
+                  <div class="controls">
+                    <select  class="span5" v-model="editReparation.appreciation_id ">
+                      <option></option>                     
+                      <option
+                        v-for="typeUniteA in Appreciations"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+                 </td>
+         </tr>
+         <tr>
+           <td>
+               <div class="control-group">
+            <label class="control-label">Date du Retour</label>
+            <div class="controls">
+              <input
+                type="date"
+               v-model="editReparation.date_retour"
+                class="span5"
+                
+              />
+            </div>
+          </div>
+            </td>
+         </tr>
+      </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterTitreLocal()"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
     <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
     <!-- End Page Header -->
     <!-- Default Light Table -->
@@ -79,15 +130,39 @@
                     :key="equipement.id"
                   >
                 
-                    <td style="font-size:14px"> {{affichePanneSignaler(afficheIdMarche(equipement.acte_id)) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px"> {{formaterDate(equipement.date_signal) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px"> {{afficheNomEntreprise(afficheIdEntreprise(equipement.acte_id)) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px"> {{formaterDate(equipement.date_envoi) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" > {{affichePanneSignaler(afficheIdMarche(equipement.acte_id)) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" > {{formaterDate(equipement.date_signal) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" > {{afficheNomEntreprise(afficheIdEntreprise(equipement.acte_id)) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" > {{formaterDate(equipement.date_envoi) || 'Non renseigné'}}</td>
                     
-                    <td style="font-size:14px"> {{formaterDate(equipement.date_retour) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" > {{formaterDate(equipement.date_retour) || 'Non renseigné'}}</td>
                    
-                    <td style="font-size:14px"> {{libelleAppreciations(equipement.appreciation_id) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px"> {{formatageSomme(parseFloat(afficheMontantReparation(equipement.acte_id))) || 'Non renseigné'}}</td>
+                    <!-- <td style="font-size:14px"  @dblclick="afficherModalModifierService(equipement.id)"> 
+                      
+                      
+                      {{libelleAppreciations(equipement.appreciation_id) || 'Non renseigné'}}</td> -->
+                    <td>
+                      <button class="btn  btn-warning" @click.prevent="afficherModalModifierService(equipement.id)" v-if="equipement.appreciation_id == 7">
+                        <span>
+                          En attente
+                        </span>
+                      </button>
+                      <button v-else-if="equipement.appreciation_id == 6" @click.prevent="afficherModalModifierService(equipement.id)" class="btn  btn-danger" >
+              
+                        <span>
+                          Médiocre
+                        </span>
+                </button>
+                 <button v-else @click.prevent="afficherModalModifierService(equipement.id)" class="btn  btn-success" >
+              
+                        <span>
+                          Excellent
+                        </span>
+                </button>
+                    </td>
+                    
+                    
+                    <td style="font-size:14px;text-align:center;"> {{formatageSomme(parseFloat(afficheMontantReparation(equipement.acte_id))) || 'Non renseigné'}}</td>
                   </tr>
                   <tr>
                       
@@ -96,8 +171,8 @@
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td style="text-align:center;color:red">MONTANT DE REPARATION</td>
-                      <td style="text-align:center;color:red">{{formatageSomme(parseFloat(MontantDesReparationVehicule(detail_vehicule.id)))}}</td>
+                      <td style="text-align:center;font-size:14px;">MONTANT DE REPARATION</td>
+                      <td style="text-align:center;color:red;font-size:14px;">{{formatageSomme(parseFloat(MontantDesReparationVehicule(detail_vehicule.id)))}}</td>
                       
                   </tr>
                 </tbody>
@@ -119,12 +194,16 @@
   
 <script>
 
-import { mapGetters} from "vuex";
+import { mapGetters,mapActions} from "vuex";
 import moment from "moment";
 import { formatageSomme } from "../../../../../Repositories/Repository";
 export default {
   data () {
     return {
+      editReparation:{
+        appreciation_id:"",
+        date_retour:""
+      }
     }
   },
     name: 'ModelItem',
@@ -183,7 +262,7 @@ listeDesReparationVehicule() {
 MontantDesReparationVehicule() {
       return id => {
         if (id != null && id != "") {
-           return this.ReparationVehicules.filter(qtreel => qtreel.vehicule_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.MontantContrat(this.acte_id)), 0).toFixed(0);
+           return this.ReparationVehicules.filter(qtreel => qtreel.vehicule_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.cout_reparation), 0).toFixed(0);
 
         }
       };
@@ -411,6 +490,33 @@ MontantContrat() {
     },
   },
   methods: {
+...mapActions("uniteadministrative", [
+      "ajouterReparationVehicule",
+      "modifierReparationVehicule"
+      ]),
+ajouterTitreLocal () {
+      
+      this.modifierReparationVehicule(this.editReparation)
+this.$("#exampleModal1").modal('hide');
+       
+    },
+    afficherModalModifierService(id) {
+      this.$("#exampleModal1").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+      
+      this.editReparation = this.listeDesReparationVehicule(this.detail_vehicule.id).find(item=>item.id==id);
+    },
+    // afficherModalModifierService(index) {
+    //   this.$("#exampleModal1").modal({
+    //     backdrop: "static",
+    //     keyboard: false
+    //   });
+
+    //   this.editReparation = this.listeDesReparationVehicule(this.detail_vehicule.id)[index];
+    // },
 formatageSomme:formatageSomme,
 formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");

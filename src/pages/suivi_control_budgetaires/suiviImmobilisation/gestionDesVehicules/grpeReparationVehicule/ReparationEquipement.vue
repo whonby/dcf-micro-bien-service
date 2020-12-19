@@ -5,14 +5,25 @@ reparation
 <table class="table table-bordered table-striped">
   <tr>
     <td>
-       <select  class="span5" v-model="formData.uAdministrative_id">
+       <!-- <select  class="span5" v-model="formData.uAdministrative_id">
                       <option></option>                     
                       <option
                         v-for="typeUniteA in uniteAdministratives"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
-                    </select>
+                    </select> -->
+                    <label class="control-label">Unite Administrative</label>
+                     <model-list-select style="background-color: rgb(233,233,233);"
+                                                       class="wide"
+                                                       :list="filtre_unite_admin"
+                                                       v-model="formData.uAdministrative_id"
+                                                       option-value="id"
+                                                       option-text="libelle"
+                                                       placeholder="Unité administrative"
+                                    >
+
+                                    </model-list-select>
     </td>
   </tr>
 </table>
@@ -273,14 +284,16 @@ reparation
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from '../../../../../Repositories/Repository';
 import {admin,dcf,noDCfNoAdmin} from "../../../../../Repositories/Auth"
+import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
 //import ListePersonnelParUa from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/AffectationEquipementParUa/DossierAffectation/ListePersonnelParUa'
 //import moment from 'moment';
 export default {
-  // components: {
+  components: {
     
-  //   ListePersonnelParUa
+    ModelListSelect
      
-  // },
+  },
     data(){
         return{
       formData :{
@@ -378,6 +391,26 @@ search:""
       "getterUa_idImo"
    
    ]),
+   filtre_unite_admin() {
+                if(this.noDCfNoAdmin){
+                    let colect=[];
+                    let vM=this
+                    this.uniteAdministratives.filter(item=>{
+                        console.log("OK bonjour GUE")
+                        if(vM.getterUniteAdministrativeByUser.length>0){
+                            let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                            if (val!=undefined){
+                                colect.push(item)
+                                return item
+                            }
+                        }
+
+                    })
+                    return colect
+                }
+                return this.uniteAdministratives
+            },
+      
   //  afficherLibelleService() {
   //     return id => {
   //       if (id != null && id != "") {

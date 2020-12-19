@@ -2028,3 +2028,61 @@ export function supprimerAppreciation({ commit }, id) {
 export function ajouterUA_ID_IMO({ commit }, nouveau) {
   commit("AJOUTE_UA_IMO", nouveau);
 }
+
+
+
+
+
+
+
+export function getFicheArticle({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/FicheArticle")
+          .then(response => {
+              commit("GET_ALL_FICHE_ARTICLE", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterFicheArticle({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/FicheArticle", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_FICHE_ARTICLE", response.data);
+
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierFicheArticle({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/FicheArticle/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_FICHE_ARTICLE", response.data);
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerFicheArticle({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_FICHE_ARTICLE", id);
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/FicheArticle/" + id).then(() => dialog.close());
+      });
+}
