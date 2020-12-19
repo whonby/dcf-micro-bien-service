@@ -1,3 +1,5 @@
+
+import DetailGroupe1 from "@/pages/auth/groupe/DetailGroupe1.vue";
 import menu from "@/pages/auth/Module_Menu/menu.vue"; 
 import moduleDuProjet from "@/pages/auth/Module_Menu/moduleDuProjet.vue"; 
 import Autorisation from "@/pages/auth/autorisation/Autorisation.vue";
@@ -119,6 +121,13 @@ const AuthRoutes = [
         component: DetailCF,
         meta: { requiresAuth: true }
     },
+    {
+        path: '/detail-groupe/:id',
+        name:"Detail_groupe",
+        component: DetailGroupe1,
+        meta: { requiresAuth: true }
+    },
+    
    
 ]
 

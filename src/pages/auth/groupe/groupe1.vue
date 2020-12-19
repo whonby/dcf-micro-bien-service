@@ -70,7 +70,10 @@
                       {{activites.description || 'Non renseigné'}}</td>
                    
                   <td>
-
+                   <router-link :to="{ name: 'Detail_groupe', params: { id: activites.id }}"
+                     class="btn btn-default " title="Detail groupe">
+                      <span class=""><i class=" icon-folder-open"></i></span>
+                     </router-link>
 
 
               <div class="btn-group">
