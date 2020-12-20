@@ -1,4 +1,4 @@
-
+import addGroupe1 from "@/pages/auth/groupe/addGroupe1.vue";
 import DetailGroupe1 from "@/pages/auth/groupe/DetailGroupe1.vue";
 import menu from "@/pages/auth/Module_Menu/menu.vue"; 
 import moduleDuProjet from "@/pages/auth/Module_Menu/moduleDuProjet.vue"; 
@@ -125,6 +125,12 @@ const AuthRoutes = [
         path: '/detail-groupe/:id',
         name:"Detail_groupe",
         component: DetailGroupe1,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: 'add-groupe',
+        name:"add_groupe",
+        component: addGroupe1,
         meta: { requiresAuth: true }
     },
     

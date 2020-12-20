@@ -28,16 +28,62 @@
         </ul>
       </li>
            
-            <li>
+             <li class="dropdown" id="group">
+        <a title = "Gestion de groupe" href="#" data-toggle="dropdown" data-target="#group" class="dropdown-toggle">
+          <span class="text"> GESTION DES GROUPES </span>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          
+           <li>
+            <router-link :to="{name:'groupe'}" tag="a">
+              <i class="icon-key"></i>Groupe
+            </router-link>
+          </li>
+             <li class="divider"></li>
+
+          <li>
+           
+             <router-link :to="{name:'add_groupe'}" tag="a">
+              <i class="icon-check"></i> Attribuer des droits
+            </router-link>
+          </li>
+         <li class="divider"></li>
+        </ul>
+      </li>
+            <!-- <li>
                 <router-link :to="{name: 'groupe'}" tag="a">
                    GROUPES
                 </router-link>
-            </li>
-            <li>
+            </li> -->
+            <li class="dropdown" id="aff">
+        <a title = "Gestion de groupe" href="#" data-toggle="dropdown" data-target="#aff" class="dropdown-toggle">
+          <span class="text"> GESTION DES AFFECTATIONS </span>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          
+           <li>
+            <router-link :to="{name:'affectation'}" tag="a">
+              <i class="icon-key"></i>Affectations
+            </router-link>
+          </li>
+             <li class="divider"></li>
+
+          <li>
+           
+             <router-link :to="{name:'liste_affectation'}" tag="a">
+              <i class="icon-check"></i> Liste des affectations
+            </router-link>
+          </li>
+         <li class="divider"></li>
+        </ul>
+      </li>
+            <!-- <li>
                 <router-link :to="{name: 'affectation'}" tag="a">
                    AFFECTATION
                 </router-link>
-            </li>
+            </li> -->
             <!-- <li>
                 <router-link :to="{name: 'MonEquipe'}" tag="a">
                     MON EQUIPE

@@ -14,7 +14,6 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-
                                     <th>Code</th>
                                     <th>Nom du groupe</th>
                                     <th>Description</th>
@@ -28,6 +27,64 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <table class="table table-bordered table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Fonctions</th>
+                                                            <th>Ajouter</th>
+                                                            <th>Modifications</th>
+                                                            <th>Consulter</th>
+                                                            <th>Imprimer</th>
+                                                            <th>Supprimer</th>
+                                                            <th>Exporter</th>
+                                                            <th>Importer</th>
+                                                        </tr>
+                                                        </thead>
+                                                         <tbody>
+                <tr class="odd gradeX" v-for="item  in gettersMenu" :key="item.id">
+                 
+                    
+                     <td>{{item.libelle || 'Non renseigné'}} </td>
+                    <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="" toggle style="transform: scale(0.9) translate(-10%, -95%);  " v-model="attribue" :value="item.id" >
+                      <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
+                        <label for="exercice" slot="off-label"></label>
+                        </p-check></td>
+                        
+                    <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="" toggle style="transform: scale(0.9) translate(-10%, -95%);  " v-model="attribue" :value="item.id" >
+                      <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
+                        <label for="exercice" slot="off-label"></label>
+                        </p-check></td>
+                        <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="" toggle style="transform: scale(0.9) translate(-10%, -95%);  " v-model="attribue" :value="item.id" >
+                      <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
+                        <label for="exercice" slot="off-label"></label>
+                        </p-check></td>
+                        <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="" toggle style="transform: scale(0.9) translate(-10%, -95%);  " v-model="attribue" :value="item.id" >
+                      <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
+                        <label for="exercice" slot="off-label"></label>
+                        </p-check></td>
+                        <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="" toggle style="transform: scale(0.9) translate(-10%, -95%);  " v-model="attribue" :value="item.id" >
+                      <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
+                        <label for="exercice" slot="off-label"></label>
+                        </p-check></td>
+                        <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="" toggle style="transform: scale(0.9) translate(-10%, -95%);  " v-model="attribue" :value="item.id" >
+                      <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
+                        <label for="exercice" slot="off-label"></label>
+                        </p-check></td>
+                        <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="" toggle style="transform: scale(0.9) translate(-10%, -95%);  " v-model="attribue" :value="item.id" >
+                      <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
+                        <label for="exercice" slot="off-label"></label>
+                        </p-check></td>
+                        
+                       
+                
+
+                 
+                                                           
+                                                       
+                </tr>
+             
+              </tbody>
+                                                    </table>
 
 
                         </div>
@@ -59,6 +116,7 @@
         },
         data() {
             return {
+                attribue:true,
                 search:"",
                 fabActions: [
                     {
@@ -82,7 +140,7 @@
           //  console.log(this.detail)
         },
         computed: {
-            ...mapGetters("Utilisateurs", ["getterGroupe"]),
+            ...mapGetters("Utilisateurs", ["getterGroupe","gettersMenu"]),
            
         },
         methods: {
