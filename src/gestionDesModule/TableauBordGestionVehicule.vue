@@ -1,4 +1,4 @@
-
+valeurAcquisitionMateriel
 <template>
   <div class="container-fluid">
    <table class="table table-bordered table-striped">
@@ -34,13 +34,13 @@
       
                             <ul class="quick-actions" style="margin: 0px !important;"> 
 
-<li class="bg_lb span3"> <a href="#" style="color:black;"><h4>VALEUR </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{sommeQuantiteGlobal}}</span><h4>D'ACQUISITION</h4></a> </li>
+<li class="bg_lb span3"> <a href="#" style="color:black;"><h4>VALEUR </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(valeurAcquisitionMateriel(formData.uAdministrative_id))+parseFloat(valeurAcquisitionVehicule(formData.uAdministrative_id)))}}</span><h4>D'ACQUISITION</h4></a> </li>
 
-        <li class="bg_lb span3"> <a href="#" style="color:black;"><h4>VALEUR </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{sommeQuantiteCouvert}} / {{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)}}</span><h4>NETTE COMPTABLE</h4>  </a> </li>
-                <li class="bg_lb span3"> <a href="#" style="color:black;"><h4>TAUX</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{((parseFloat(sommeQuantiteCouvert)/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}% / {{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span><h4>D'USURE</h4></a> </li>
-<li class="bg_lb span3"> <a href="#" style="color:black;"><h4>TAUX</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{((parseFloat(sommeQuantiteCouvert)/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}% / {{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span><h4>EQUIPEMENT</h4></a> </li>
+        <li class="bg_lb span3"> <a href="#" style="color:black;"><h4>VALEUR </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{formatageSomme(parseFloat(valeurAcquisitionMateriel(formData.uAdministrative_id))+parseFloat(valeurAcquisitionVehicule(formData.uAdministrative_id)))}}</span><h4>NETTE COMPTABLE</h4>  </a> </li>
+                <li class="bg_lr span3"> <a href="#" style="color:black;"><h4>TAUX</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{((parseFloat(valeurAcquisitionMateriel(formData.uAdministrative_id))+parseFloat(valeurAcquisitionVehicule(formData.uAdministrative_id)))/(parseFloat(valeurAcquisitionMateriel(formData.uAdministrative_id))+parseFloat(valeurAcquisitionVehicule(formData.uAdministrative_id)))*100).toFixed(2)}}%</span><h4>D'USURE</h4></a> </li>
+<li class="bg_lr span3"> <a href="#" style="color:black;"><h4>TAUX</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">0%</span><h4>EQUIPEMENT</h4></a> </li>
   
-    <li class="bg_lr span3"> <router-link :to="{name: 'ListeUaTauxEquipement50'}" tag="a"  style="color:black;"><h4>TAUX</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">Nombre Ua : {{TauxEquipementDe25a50}}</span><h4> REPARATION</h4>  </router-link> </li>
+    <li class="bg_lr span3"> <router-link :to="{name: ''}" tag="a"  style="color:black;"><h4>TAUX</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">0%</span><h4> REPARATION</h4>  </router-link> </li>
     
                             </ul>
       
@@ -68,17 +68,26 @@ import { mapGetters } from "vuex";
 
 import {formatageSomme} from '../../src/Repositories/Repository';
 import {admin,dcf,cf,noDCfNoAdmin} from '../../src/Repositories/Auth';
+import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
+  components: {
+    
+    ModelListSelect,
+     
+  },
   name:'TableauBordImmo',
   data() {
-    return {
-      fabActions: [
-        {
-          name: "cache",
-          icon: "add"
+    return{
+      formData :{
+
+
+      },
+      
+       
+search:""
         }
-      ]
-    };
+     
   },
 
   computed: {
@@ -100,6 +109,25 @@ export default {
 
  ...mapGetters("uniteadministrative", ["getvehicules","uniteAdministratives","directions","servicesua","uniteZones"]),
   
+  filtre_unite_admin() {
+                if(this.noDCfNoAdmin){
+                    let colect=[];
+                    let vM=this
+                    this.uniteAdministratives.filter(item=>{
+                        
+                        if(vM.getterUniteAdministrativeByUser.length>0){
+                            let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                            if (val!=undefined){
+                                colect.push(item)
+                                return item
+                            }
+                        }
+
+                    })
+                    return colect
+                }
+                return this.uniteAdministratives
+            },
 valeurAcquisitionMateriel() {
       
         if (this.noDCfNoAdmin ){
@@ -116,11 +144,18 @@ valeurAcquisitionMateriel() {
         if (id != null && id != "") {
           return colect.filter(element => element.ua_id == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
         }
+        return 0
       };
+      
           }
          
-          return this.ficheArticle.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
-       
+         // return this.ficheArticle.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+          return id => {
+        if (id != null && id != "") {
+          return this.ficheArticle.filter(element => element.ua_id == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+        }
+        return 0
+      };
      
     },
     valeurAcquisitionVehicule() {
@@ -139,10 +174,16 @@ valeurAcquisitionMateriel() {
         if (id != null && id != "") {
           return colect.filter(element => element.ua_id == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
         }
+        return 0
       };
           }
-         
-          return this.getvehicules.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+             return id => {
+        if (id != null && id != "") {
+          return this.getvehicules.filter(element => element.ua_id == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+        }
+        return 0
+      };
+         // return this.getvehicules.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
        
      
     },

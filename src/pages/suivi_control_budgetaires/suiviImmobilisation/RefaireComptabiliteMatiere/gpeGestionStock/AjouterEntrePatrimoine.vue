@@ -162,6 +162,148 @@
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
+                    <div id="Immobilier" class="tab-pane ">
+                      <table class="table table-bordered table-striped" >
+                        <tr>
+                          <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">District</label>
+                  <div class="controls">
+                    <select  class="span" v-model="formData1.marque_id">
+                      <option></option>                     
+                     
+                    </select>
+                  </div>
+                </div>
+                      </td>
+                       <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Region</label>
+                  <div class="controls">
+                    <select  class="span" v-model="formData1.marque_id">
+                      <option></option>                     
+                     
+                    </select>
+                  </div>
+                </div>
+                      </td>
+                       <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Département</label>
+                  <div class="controls">
+                    <select  class="span" v-model="formData1.marque_id">
+                      <option></option>                     
+                     
+                    </select>
+                  </div>
+                </div>
+                      </td>
+                       <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Commune</label>
+                  <div class="controls">
+                    <select  class="span" v-model="formData1.marque_id">
+                      <option></option>                     
+                     
+                    </select>
+                  </div>
+                </div>
+                      </td>
+
+                        </tr>
+                        <tr>
+                           <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Quartier</label>
+                  <div class="controls">
+                    <select  class="span" v-model="formData1.marque_id">
+                      <option></option>                     
+                     
+                    </select>
+                  </div>
+                </div>
+                      </td>
+                      <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Lot</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                    
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td>
+                      <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Ilot</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                    
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td>
+                       <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Type foncier</label>
+                  <div class="controls">
+                    <select  class="span" v-model="formData1.marque_id">
+                      <option></option>                     
+                     
+                    </select>
+                  </div>
+                </div>
+                      </td>
+                       
+                        </tr>
+                        <tr>
+                          <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Surface du terrain</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                    
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td>
+                          
+                          <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Type Propriete</label>
+                  <div class="controls">
+                    <select  class="span" v-model="formData1.marque_id">
+                      <option></option>                     
+                     
+                    </select>
+                  </div>
+                </div>
+                      </td>
+                      <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Niveau</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                    
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td>
+                        </tr>
+                        </table>
+                      </div>
                     <!--ongle identification-->
                     <div id="Mobilier" class="tab-pane ">
                        <table class="table table-bordered table-striped" >
