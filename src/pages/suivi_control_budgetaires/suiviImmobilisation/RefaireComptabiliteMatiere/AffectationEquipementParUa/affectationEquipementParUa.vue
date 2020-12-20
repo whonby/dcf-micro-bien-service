@@ -325,7 +325,7 @@
                   <tr>
                      
                     
-                   <th>Matricule</th>
+                   <!-- <th>Matricule</th> -->
                        <th>N°identification</th>
                     <th>N°immatriculation</th>
                      <!-- <th>Immobilisation</th> -->
