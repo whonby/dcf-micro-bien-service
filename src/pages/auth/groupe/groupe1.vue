@@ -70,7 +70,10 @@
                       {{activites.description || 'Non renseigné'}}</td>
                    
                   <td>
-
+                   <router-link :to="{ name: 'Detail_groupe', params: { id: activites.id }}"
+                     class="btn btn-default " title="Detail groupe">
+                      <span class=""><i class=" icon-folder-open"></i></span>
+                     </router-link>
 
 
               <div class="btn-group">
@@ -127,71 +130,13 @@
 <!----- ajouter modal   ---->
 
 
- <div id="exampleModal" class="modal hide ">
-              <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter le groupe</h3>
-              </div>
-              <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
-              <label class="control-label">Code:</label>
-              <div class="controls">
-                <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">Nom du groupe:</label>
-              <div class="controls">
-                <input type="text" v-model="formData.nom_groupe" class="span" placeholder="Saisir le code" />
-              </div>
-            </div>
-
-            <div class="control-group">
-              <label class="control-label">Decription:</label>
-              <div class="controls">
-                <textarea type="text" v-model="formData.description" class="span" placeholder="Saisir" ></textarea>
-              </div>
-            </div>
-            Menu:
-            <table class="table table-bordered table-striped">
-              
-              <tbody>
-                <tr class="odd gradeX" v-for="item  in gettersMenu" :key="item.id">
-                 
-                    
-                     <td>{{item.libelle || 'Non renseigné'}} </td>
-                    <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="" toggle style="transform: scale(0.9) translate(-10%, -95%);  " v-model="attribue" :value="item.id" >
-                      <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
-                        <label for="exercice" slot="off-label"></label>
-                        </p-check></td>
-                
-
-                 
-                                                           
-                                                       
-                </tr>
-             
-              </tbody>
-              
-            </table>
-           
-             
-          </form>              
-          </div>
-           <div class="modal-footer"> 
-             <button 
-              @click.prevent="ajouterBudgetaireLocal" class="btn btn-primary"
-              href="#">Valider</button>
-              <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
-            </div>
 
 <!----- fin modal  ajouter  ---->
 
 
 
 <!----- modifier modal debut  ---->
-
+<!-- 
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
@@ -221,29 +166,7 @@
               </div>
             </div>
              Menu:
-            <table class="table table-bordered table-striped">
-              
-              <tbody>
-                <tr class="odd gradeX" v-for="item  in gettersMenu" :key="item.id">
-                 
-                    
-                     <td>{{item.libelle || 'Non renseigné'}} </td>
-                    <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="" toggle style="transform: scale(0.9) translate(-10%, -95%);  " v-model="attribue" :value="item.id" >
-                      <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
-                        <label for="exercice" slot="off-label"></label>
-                        </p-check></td>
-                
-
-                
-                    
-                
-                                                           
-                                                       
-                </tr>
-             
-              </tbody>
-              
-            </table>
+            
         
           </form>              
           </div>
@@ -252,14 +175,14 @@
              @click.prevent="modifierBudgetaireLocal(editBudgetaire)" class="btn btn-primary"
               href="#">Modifier</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
-            </div>
+            </div> -->
 
 
 <!----- fin modifier modal  ---->
 
 
 
-<button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+<!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="afficherModalAjouterCategorieMission()">Open</button>
 
  <fab :actions="fabActions"
@@ -267,9 +190,9 @@
           @cache="afficherModalAjouterCategorieMission"
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 
-<notifications />
+
 
 
   </div>
@@ -367,18 +290,7 @@ export default {
 						}	
 						},
 
-  afficherCodeMenu(){
-   
-      
-        let answer = this.gettersMenu.find(item => item.module_id==1)
-       // console.log("ok kok")
-         if(answer) {
-             return answer.code 
-         } 
-         
-    return null
-    
-  }
+
   
 
 //    }
@@ -388,7 +300,7 @@ export default {
 
   methods: {
     // methode pour notre action
-   ...mapActions('Utilisateurs', [ 'ajouterGroupe', 
+   ...mapActions('Utilisateurs', [
    'modifierGroupe','supprimerGroupe']),
 
                    genererEnPdf(){
@@ -439,16 +351,6 @@ partition:partition,
 //     },
    // fonction pour vider l'input
 
-     ajouterBudgetaireLocal () {
-     this.ajouterGroupe(this.formData)
-        this.attribue=[];
-        this.formData = {
-             code:"",
-            description: "",
-            nom_groupe:""
-            
-         }
-     },
 // afficher modal
 afficherModalModifierGroupe(id){
 

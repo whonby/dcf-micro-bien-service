@@ -128,7 +128,25 @@ export const GET_ROLES = (state, tab_type_uas) => {
 }
 
 
+///
+export const GET_AFFECTAION_GROUPE_USER =(state, tableau_groupe_user) =>{
+    state.affectationGroupeUser=tableau_groupe_user
+}
+export const AJOUTER_AFFECTATION_GROUPE_USER =(state, nouvel_objet) =>{
+    state.affectationGroupeUser.unshift(nouvel_objet)
+}
+export const MODIFIER_AFFECTATION_GROUPE_USER=(state, elementModif) =>{
+    state.affectationGroupeUser=state.affectationGroupeUser.map(res => {
+        if(res.id==elementModif.id){
+            res = {...elementModif}
+        }
+        return res
+    })
+}
 
+export const SUPPRIMER_AFFECTATION_GROUPE_USER =(state, id) =>{
+    state.affectationGroupeUser=state.affectationGroupeUser.filter(response =>response.id!=id)
+}
 
 
 
@@ -154,7 +172,7 @@ export const AJOUTER_AFFECTATION = (state, nouvel_objet) => {
  * @param id
  * @constructor
  */
-export const SUPPRIMER_AFFECTATION= (state, id) => {
+    export const SUPPRIMER_AFFECTATION= (state, id) => {
     state.affectation = state.affectation.filter(type => type.id != id)
 }
 
@@ -300,3 +318,14 @@ export const MODIFIER_GROUPE= (state, objetModifie) => {
         return type
     })
 }
+
+//
+
+export const ACTIVATION_GROUPE = (state, elementModif) =>{
+    state.groupe = state.groupe.map(userActif =>{
+        if(userActif.id == elementModif.id){
+            userActif = {...elementModif}
+        }
+        return userActif
+    }) 
+ }

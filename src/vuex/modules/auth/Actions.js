@@ -197,7 +197,7 @@ export  function  getAffectation({commit}) {
 
 }
 
-// ajouter type acte personnel
+// ajouter type acte personnel 
 export  function ajouterAffectation({commit}, objetAjoute){
    return  asyncLoading(apiGuest.post('/affectations', objetAjoute )).then(res => {
         if(res.status == 201){
@@ -210,6 +210,32 @@ export  function ajouterAffectation({commit}, objetAjoute){
         }
     }).catch(error => console.log(error))
 }
+
+ 
+
+export  function  getAffectationGroupeUser({commit}) {
+
+    queue.push(() =>  apiGuest.get('/liste_aff').then(response => {
+            // console.log(response.data)
+            commit('GET_AFFECTAION_GROUPE_USER', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+export  function ajouterAffectationMultiple({commit}, objetAjoute){
+    return  asyncLoading(apiGuest.post('/affectations_multiple', objetAjoute )).then(res => {
+         if(res.status == 201){
+             commit('AJOUTER_AFFECTATION_GROUPE_USER', res.data)
+             this.$app.$notify({
+                 title: 'success ',
+                 text: 'Enregistrement effectué !',
+                 type:"success"
+             })
+         }
+     }).catch(error => console.log(error))
+ }
 
 // supprimer type act
 export function supprimerAffectation({commit}, id){
@@ -486,4 +512,21 @@ export function modifierGroupe({commit}, formData){
     })
 
 }
+export function activationGroupe({commit, dispatch}, elementAjout){
+      apiGuest.post('/activedGroupe',{
+        id:elementAjout
+      }).then(varActivationUser =>{
+        commit('ACTIVATION_GROUPE', varActivationUser.data)
+        dispatch('getGroupe')
+        // this.$app.$notify({
+        //   title: 'success ',
+        //   text: 'utilisateur selectionner avec success!',
+        //   type:"success"
+        // })
+      }).catch(error => console.log(error))
+      //dialog.close()
+    //})
+   
+  }
+
 
