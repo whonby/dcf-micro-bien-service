@@ -199,7 +199,7 @@ return objJson.id
  
        
      navigateToComptaMatiere(){
-        this.activate(5)
+        this.activate()
         this.$router.push({
           name: 'TableauBordImmo2'
         })
