@@ -152,8 +152,8 @@
                   <div class="widget-title">
                       
                     <ul class="nav nav-tabs">
-                     <li class=""><a data-toggle="tab" href="#Techniques2"  v-show="formData.typestockage == 1">Fiche Matériel</a></li>
-        <li class=""><a data-toggle="tab" href="#Informations2"  v-show="formData.typestockage == 2">Fiche Véhicule</a></li>
+                     <li class=""><a data-toggle="tab" href="#materiel"  v-show="formData.typestockage == 1">Fiche Matériel</a></li>
+        <li class=""><a data-toggle="tab" href="#vehicule"  v-show="formData.typestockage == 2">Fiche Véhicule</a></li>
          <li class=""><a data-toggle="tab" href="#Mobilier"  v-show="formData.typestockage == 3">Fiche Mobilier</a></li>
         <li class=""><a data-toggle="tab" href="#Immobilier"  v-show="formData.typestockage == 4">Fiche Immobilier</a></li>
         <li class=""><a data-toggle="tab" href="#Travaux"  v-show="formData.typestockage == 5">Fiche Gros Travaux</a></li>
@@ -396,7 +396,7 @@
                       
         </table>
                     </div>
-                  <div id="Techniques2" class="tab-pane ">
+                  <div id="materiel" class="tab-pane ">
          <table class="table table-bordered table-striped" >
                <tr>
                      
@@ -518,7 +518,7 @@
                       
         </table>
       </div>
-                      <div id="Informations2" class="tab-pane ">
+                      <div id="vehicule" class="tab-pane ">
         
          <table class="table table-bordered table-striped">
             <tr>
@@ -655,7 +655,7 @@
                     <select  class="span" v-model="formData.marque">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in marqueVehicules"
+                        v-for="typeUniteA in AfficheModelMaterielVehicule"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -1144,6 +1144,12 @@ cf:cf,
       
        
     },
+    AfficheModelMaterielVehicule() {
+      
+           return this.marqueVehicules.filter(qtreel => qtreel.typecorporel == 2);
+      
+       
+    },
  afficheModeleParMarque() {
       return id => {
         if (id != null && id != "") {
@@ -1587,10 +1593,7 @@ prixUnitaire() {
       "ajouterNouveauVehicule"
       ]),
       ...mapActions("SuiviImmobilisation", [
-      "getAllStock",
-      "ajouterStock",
-      "modifierStock",
-      "supprimerStock",
+     
       "ajouterFicheArticle",
       
     ]),
