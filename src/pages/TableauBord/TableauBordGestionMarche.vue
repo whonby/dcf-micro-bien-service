@@ -298,7 +298,7 @@
                             <div class="inner">
                                 <p> En souffrance </p>
 
-                            </div>l2
+                            </div>
                             <div class="icon3">
 
                                 {{nombreMarcheParStatue(7)}} Marché(s) / {{pourcentageMarchePasStatus(7)}}%
