@@ -67,15 +67,18 @@
                      <th>Marque</th>
                     <th>Modèle</th>
                     <th>Couleur</th>
-                        
+                        <th>Valeur d'Acquisition</th>
+                        <th>Valeur Nette Comptable</th>
                     </tr>
                     </thead>
                     <tbody>
                   
-                  <td style="font-size:14px"> {{afficheImmatriculation(detail_vehicule.id) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px"> {{libellemarqueVehicules(afficheIdMarque(detail_vehicule.id)) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px"> {{libelleModeleVehicules(afficheIdModel(detail_vehicule.id)) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px"> {{afficheCoulleur(detail_vehicule.id) || 'Non renseigné'}}</td>
+                  <td style="font-size:14px;font-weight:bold;"> {{afficheImmatriculation(detail_vehicule.id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px;font-weight:bold;"> {{libellemarqueVehicules(afficheIdMarque(detail_vehicule.id)) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px;font-weight:bold;"> {{libelleModeleVehicules(afficheIdModel(detail_vehicule.id)) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px;font-weight:bold;"> {{afficheCoulleur(detail_vehicule.id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px;text-align:center;font-weight:bold;"> {{formatageSomme(parseFloat(afficheCoutDachat(detail_vehicule.id))) || 'Non renseigné'}}</td>
+                     <td style="font-size:14px;text-align:center;font-weight:bold;"> {{formatageSomme(parseFloat(0)) || 'Non renseigné'}}</td>
                      
                      
                      
@@ -130,12 +133,12 @@
                     :key="equipement.id"
                   >
                 
-                    <td style="font-size:14px" > {{affichePanneSignaler(afficheIdMarche(equipement.acte_id)) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" > {{formaterDate(equipement.date_signal) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" > {{afficheNomEntreprise(afficheIdEntreprise(equipement.acte_id)) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" > {{formaterDate(equipement.date_envoi) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px;font-weight:bold;" > {{affichePanneSignaler(afficheIdMarche(equipement.acte_id)) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px;font-weight:bold;" > {{formaterDate(equipement.date_signal) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px;font-weight:bold;" > {{afficheNomEntreprise(afficheIdEntreprise(equipement.acte_id)) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px;font-weight:bold;" > {{formaterDate(equipement.date_envoi) || 'Non renseigné'}}</td>
                     
-                    <td style="font-size:14px" > {{formaterDate(equipement.date_retour) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px;font-weight:bold;" > {{formaterDate(equipement.date_retour) || 'Non renseigné'}}</td>
                    
                     <!-- <td style="font-size:14px"  @dblclick="afficherModalModifierService(equipement.id)"> 
                       
@@ -171,8 +174,8 @@
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td style="text-align:center;font-size:14px;">MONTANT DE REPARATION</td>
-                      <td style="text-align:center;color:red;font-size:14px;">{{formatageSomme(parseFloat(MontantDesReparationVehicule(detail_vehicule.id)))}}</td>
+                      <td style="text-align:center;font-size:14px;font-weight:bold;">MONTANT DE REPARATION</td>
+                      <td style="text-align:center;color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(MontantDesReparationVehicule(detail_vehicule.id)))}}</td>
                       
                   </tr>
                 </tbody>
@@ -351,6 +354,18 @@ MontantContrat() {
 
       if (qtereel) {
         return qtereel.couleur;
+      }
+      return 0
+        }
+      };
+    },
+    afficheCoutDachat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getvehicules.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.prixunitaire;
       }
       return 0
         }

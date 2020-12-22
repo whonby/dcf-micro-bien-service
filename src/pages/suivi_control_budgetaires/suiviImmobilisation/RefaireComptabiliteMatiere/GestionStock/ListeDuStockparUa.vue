@@ -470,6 +470,8 @@
                     <th title="unite administrative">UA</th>
                      
                      <th>Famille</th>
+                     <th>Marque</th>
+                     <th>Model</th>
                     <th>Quantité Initiale</th> 
                     <th title="quantite en stock">Quantité en stock</th>
                     <th title="quantite sortant">Quantité sortie</th>
@@ -490,9 +492,6 @@
                     :key="stock.id"
                   >
 
-
-
-                   
                     <!-- <td
                       @dblclick="afficherModalModifierStock(index)"
                     >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
@@ -505,6 +504,12 @@
                     <td
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{libelleFamilleEquipement(stock.famill_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
                      <!-- <td
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{stock.AfficheArticle.libelle || 'Non renseigné'}}</td> -->
@@ -548,7 +553,8 @@
                    <tr
                    
                   >
-                
+                <td></td>
+                <td></td>
                 <td></td>
                       <td style="font-weight:bold;">Total</td>
                    <td  style="text-align: center;color:red;font-weight:bold;">{{quantiteInitial(formData.uAdministrative_id)}}</td>
@@ -558,12 +564,13 @@
                    
                      
                   
-                     <td ></td>
+                     
                     <td  ></td>
                    
                     
-                   <td></td>
-                     
+                  
+                     <td></td>
+                     <td></td>
                     
                   </tr>
                 </tbody>
@@ -669,7 +676,8 @@ quantite: {
       "equipements",
       "familles",
       "articles",
-     
+     "marqueVehicules",
+     "ModeleVehicules",
       
       "type_Unite_admins",
       "totalQteEntrant",
@@ -683,6 +691,34 @@ admin:admin,
       dcf:dcf,
       noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+
+
+
+  libelleMarque() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marqueVehicules.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    libelleModelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.ModeleVehicules.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
     //  filtre_Stock() {
     //   const st = this.search.toLowerCase();
     //   return this.GestionStockageArticles.filter(type => {
