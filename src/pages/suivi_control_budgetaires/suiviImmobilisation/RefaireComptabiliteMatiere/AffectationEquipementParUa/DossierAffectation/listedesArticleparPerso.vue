@@ -103,7 +103,7 @@
   <div id="exampleModalValidationdirecteur" class="modal hide valDirecteur">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Affectation{{afficherQteEnStock}}</h3>
+        <h3>Affectation</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -111,7 +111,7 @@
            <td colspan="">
              
                            <div class="control-group">
-                            <label class="control-label">{{afficherQteTotal}}Nom et Prénoms{{afficherValeurOrigine}}</label>
+                            <label class="control-label">Nom et Prénoms</label>
                             <div class="controls">
                               <input type="text" class="span4" readonly :value="afficherActeurDepenseNomPrenoms(afficherActeurDepenseId(detail_Ua.id))"/>
                                
@@ -121,7 +121,7 @@
            <td>
              
                            <div class="control-group">
-                            <label class="control-label">{{afficherQteTotal}}Article{{afficherQuantiteEnRequise(this.editService.model_id) }}</label>
+                            <label class="control-label">Article</label>
                             <div class="controls">
                               <input type="text" class="span4" readonly :value="libelleArticle(editService.famille_id)" />
                                
@@ -141,7 +141,7 @@
            </td>
           <td>
                             <div class="control-group">
-                            <label class="control-label">Marque{{nombreAffecter}}</label>
+                            <label class="control-label">Marque</label>
                             
                             <div class="controls">
                               <select v-model="editService.marque_id" class="span4">
@@ -182,7 +182,7 @@
             <td>
              
                            <div class="control-group">
-                            <label class="control-label">Quantité En stock{{afficherIdStock(editService.model_id)}}</label>
+                            <label class="control-label">Quantité En stock</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="afficherQuantiteEnStock(editService.model_id)" readonly/>
                                
