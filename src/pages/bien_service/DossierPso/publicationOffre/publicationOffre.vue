@@ -107,16 +107,17 @@
                         </div>
                         </td>
 
-                        <!-- <td >
-                        <div class="control-group">
-                            <label class="control-label">Imputation :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Imputation" v-model="formData.imputation" disabled>
-                            </div>
-                        </div>
-                        </td> -->
+                        
                         </tr>
                         <tr>
+                            <td >
+                        <div class="control-group">
+                            <label class="control-label">Numero d'autorisation :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="" v-model="formData.numero_autorisation">
+                            </div>
+                        </div>
+                        </td>
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Fichier DAO:</label>
@@ -198,15 +199,26 @@
                             </div>
                         </div>
                         </td>
-                         <!-- <td>
-                        
+
+                       
+                        </tr>
+                        <tr>
+                             <td >
                         <div class="control-group">
-                            <label>Imputation</label>
+                            <label class="control-label">Numero d'autorisation :</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="Imputation" v-model="edite_appel_offre.imputation">
+                                <input type="text" class="span" placeholder="" v-model="edite_appel_offre.numero_autorisation" >
                             </div>
                         </div>
-         </td> -->
+                        </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Fichier DAO:</label>
+                                    <div class="controls">
+                                        <input type="file"   @change="OnchangeFichier" />
+                                    </div>
+                                </div>
+                            </td>
                                
                             </tr>
                             
@@ -245,6 +257,7 @@ export default {
             selectedFile:"",
         formData:{
               ref_appel:"",
+              numero_autorisation:"",
                     type_appel:"",
                     financement:"",
                     nom_bailleurs:"",
@@ -256,6 +269,7 @@ export default {
         },
         edite_appel_offre:{
              	ref_appel:"",
+                 numero_autorisation:"",
                     type_appel:"",
                     financement:"",
                     nom_bailleurs:"",
@@ -424,6 +438,7 @@ typeProcedureLibelle() {
                     objet_appel:"",
                     imputation:"",
                     marche_id:"",
+                    numero_autorisation:""
                 }
     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
     marcheObjet.attribue=1
