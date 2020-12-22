@@ -4,11 +4,13 @@
             <div class="row-fluid">
                 <div class="span12">
                     <div class="widget-box">
-                        <div class="widget-title">
+                        <div class="widget-title" >
+                            
                             <div class="span6">
-                                <span class="icon"> <i class="icon-th"></i> </span>
+                                <span class="icon"> <i class="icon-th" ></i></span>
                                 <!-- <h5>{{detail.name}}</h5> -->
                             </div>
+                           
                         </div>
                         <div class="widget-content nopadding" ref="content">
                             <table class="table table-bordered table-striped">
@@ -93,6 +95,7 @@
 
 
                 </div>
+                <button @click.prevent="AllerAPageListe" class="icon-arrow-left" style="color:red" title="retour"></button>
             </div>
         </div>
     </div>
@@ -148,6 +151,12 @@
             formaterDate(date) {
                 return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
+            AllerAPageListe(){
+  
+    this.$router.push({
+        name: 'groupe'
+    })
+    },
             //partition:partition,
             // getDataPaginate(index){
             //     this.active_el = index;

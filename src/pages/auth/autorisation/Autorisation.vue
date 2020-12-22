@@ -2,7 +2,7 @@
     <div>
         <hr>
        <div id="tab2" class="tab-pane">
-
+        <h4 align="center"> AFFECTATION </h4>
                                     <div class="row-fluid">
                                         <div class="span6" >
 
@@ -18,11 +18,24 @@
                                                 </div>
                                                 <div class="widget-content">
                                           <tr class="odd gradeX" v-for="item  in getterGroupe" :key="item.id">
-                 
-                    	            <td style="margin-left:-200px;">
-                                     <div @click.prevent="activationUserLocal(item.id)" v-if="item.actived==0">
+                                            <!-- <td style="margin-left:-200px;">
+                                            <div @click.prevent="activationUserLocal(item.id)" v-if="item.actived==0">
+                                             <p-check class="pretty p-image p-plain "   style=" width: 100%; font-size: 20px !important;" >
+                                                <img slot="extra" class="image" src="../../../assets/001.png">
+                                                  </p-check>
+                                            </div>
+
+                                            <div @click.prevent="activationUserLocal(item.id)" v-if="item.actived==1">
+                                             <p-check class="pretty p-image p-plain " style=" width: 100%; font-size: 20px !important;" v-model="item.actived" :value="item.id">
+                                                <img slot="extra" class="image" src=" ../../../assets/004.png">
+                                                  </p-check>
+                                            </div>
+                                    </td> -->
+                    	            
+                                    <td style="margin-left:-200px;">
+                                     <div @click.prevent="activationUserLocal(item.id)" v-if="item.actived==0" >
 								
-							<input type="checkbox"  />
+							<input type="checkbox" style="margin-rigth:-50px;" />
                                  </div>
 							<div @click.prevent="activationUserLocal(item.id)" v-if="item.actived==1"  >
 							
@@ -60,15 +73,26 @@
                                                 <div class="widget-content">
                                           <tr class="odd gradeX" v-for="item  in getterUtilisateur" :key="item.id">
                                          <div v-if="verificationTacheExiste(item.id)" >
+
+                                             <p-check class="pretty p-image p-plain "  checked   disabled style=" width: 100%; font-size: 20px !important;" v-model="attribue" :value="item.id">
+                                             <img slot="extra" class="image" src="../../../assets/001.png">
+                                             <p style="color: red">{{ item.name}}</p>
+                                                </p-check>
                     
-                     <td>{{item.name || 'Non renseigné'}} </td>
-                        <input type="checkbox" id="jack"  v-model="attribue" :value="item.id" checked disabled />
-                      <label for="jack"></label>
+                     <!-- <span>{{item.name || 'Non renseigné'}} </span>
+                     <input type="checkbox" id="jack"  v-model="attribue" :value="item.id" checked disabled  ../../assets/002.png />
+                        
+                      <label for="jack"></label> -->
                         </div>
                         <div v-else>
-                        <td>{{item.name || 'Non renseigné'}} </td>
-                        <input type="checkbox" id="jack"  v-model="attribue" :value="item.id" />
-                      <label for="jack"></label>
+                            <p-check class="pretty p-image p-plain "  style=" width: 100%; font-size: 20px !important;" v-model="attribue" :value="item.id">
+                            <img slot="extra" class="image" src="../../../assets/001.png">
+                            <p style="">{{ item.name}}</p>
+                             </p-check>
+                        <!-- <span>{{item.name || 'Non renseigné'}} </span>  
+                         <input type="checkbox" id="jack"  v-model="attribue" :value="item.id" />
+                      
+                      <label for="jack"></label> -->
                         </div>
                                                       
                 </tr>                                  
@@ -134,7 +158,7 @@ verificationTacheExiste(){
 					},
     },
     methods:{
-   ...mapActions("Utilisateurs",["activationGroupe","ajouterAffectationMultiple"]),     
+   ...mapActions("Utilisateurs",["activationGroupe","ajouterAffectationMultiple","getAffectationGroupeUser"]),     
       activationUserLocal(id){this.activationGroupe(id)},
       affectationLocal(){
 
@@ -143,7 +167,7 @@ verificationTacheExiste(){
 						attribue:this.attribue
                         }
                         this.ajouterAffectationMultiple(this.formAffectation)
-                        
+                         this.getAffectationGroupeUser();
                         this.formAffectation={
                             user_id:"",
                               groupe_id:""

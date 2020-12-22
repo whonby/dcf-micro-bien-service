@@ -37,8 +37,12 @@
             </td>
                 </tr>
             </table>
-            <h4 style="margin-rigth:20px;"> Menu: </h4>
-         
+            <div class="span3">
+            <h4 style="margin-left:50px; margin-top:0px;"> Menu: </h4>
+            </div>
+            <div class="span3">
+            <h4  style="margin-left:1080px;">Case à coché </h4>
+            </div>
            
             <table class="table table-bordered table-striped">
               
@@ -47,10 +51,17 @@
                  
                     
                      <td>{{item.libelle || 'Non renseigné'}} </td>
-                    <td style="text-align: center"><p-check class="p-default p-curve" color="success" off-color="" toggle style="transform: scale(0.9) translate(-10%, -95%);  " v-model="attribue" :value="item.id" >
-                      <!--<img slot="extra"  class="image" src="../../../assets/004.png">-->
+                    <td style="text-align: center">
+                       <p-check class="pretty p-image p-plain "  style=" width: 100%; font-size: 20px !important;" v-model="attribue" :value="item.id">
+                        
+                        <img slot="extra" class="image" src="../../../assets/004.png">
+                         </p-check>
+                          <!-- </p-check>
+                      <p-check class="p-default p-curve" color="" off-color="" toggle style="transform: scale(0.9) translate(-10%, -95%);  " v-model="attribue" :value="item.id" >
+                      <img slot="extra"  class="image" src="../../../assets/004.png">
                         <label for="exercice" slot="off-label"></label>
-                        </p-check></td>
+                        </p-check> -->
+                        </td>
                 
 
                  
