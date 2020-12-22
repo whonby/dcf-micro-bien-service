@@ -211,7 +211,29 @@ export  function ajouterAffectation({commit}, objetAjoute){
     }).catch(error => console.log(error))
 }
 
- 
+ // supprimer type act
+export function GroupeUser({commit}, id){
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_AFFECTATION', id)
+            apiGuest.delete('/affectations/' + id).then(() => dialog.close() )
+
+        })
+}
+
+export function modifierAffection({commit}, formData){
+    return  asyncLoading(apiGuest.put('/affectations', formData )).then(res => {
+        commit('MODIFIER_AFFECTATION', res.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+
+}
+
 
 export  function  getAffectationGroupeUser({commit}) {
 
@@ -237,28 +259,23 @@ export  function ajouterAffectationMultiple({commit}, objetAjoute){
      }).catch(error => console.log(error))
  }
 
-// supprimer type act
-export function supprimerAffectation({commit}, id){
+ export function supprimerAffectationGroupeUser({commit,dispatch}, id){
     this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
+        .confirm("Voulez vous desactivé?")
         .then(dialog => {
-            commit('SUPPRIMER_AFFECTATION', id)
-            apiGuest.delete('/affectations/' + id).then(() => dialog.close() )
+            dispatch('getAffectationGroupeUser')
+            commit('SUPPRIMER_AFFECTATION_GROUPE_USER', id)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Desactivation effectuéé avec success!',
+                type:"success"
+              })
+            apiGuest.delete('/list_aff/' + id).then(() => dialog.close() )
 
         })
 }
 
-export function modifierAffection({commit}, formData){
-    return  asyncLoading(apiGuest.put('/affectations', formData )).then(res => {
-        commit('MODIFIER_AFFECTATION', res.data)
-        this.$app.$notify({
-            title: 'success ',
-            text: 'Modification effectué !',
-            type:"success"
-        })
-    }).catch(error => console.log(error))
-
-}
+ 
 
 
 export function getUniteAdminUser({commit}, objet){

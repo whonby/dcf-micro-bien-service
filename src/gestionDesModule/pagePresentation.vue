@@ -308,6 +308,7 @@ this.getRegimeImpositions()
     this.getMenu()
     this.getModule()
     this.getEquipeCF()
+    this.getAffectationGroupeUser()
     this.getPlanPassationMarche()
     this.getRapport()
       this.getBudgeChager()
@@ -627,7 +628,7 @@ return objJson.id
  admin:admin,
      dcf:dcf,
     ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",'getGroupe',"getMenu","getModule",
-    "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf"]),
+    "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf","getAffectationGroupeUser"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 

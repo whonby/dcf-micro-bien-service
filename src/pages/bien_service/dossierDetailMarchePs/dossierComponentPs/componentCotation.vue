@@ -57,7 +57,7 @@
                       
                          <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter la cotation </h3>
+                <h3>Ajouter les soumissionnaires</h3>
             </div>
             <table class="table table-bordered table-striped">
  <tr>
@@ -141,7 +141,7 @@
                             </div>
                         </div>
                               </td>
-                              <td>
+                              <!-- <td>
 
                     <div class="control-group">
               <label class="control-label">Fichier joint:</label>
@@ -149,7 +149,7 @@
                 <input type="file"  @change="OnchangeFichier" />
               </div>
             </div>
-                              </td>
+                              </td> -->
                           </tr>
                         </table>
                 
@@ -171,7 +171,7 @@
 
                          <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier la cotation </h3>
+                <h3>Modifier les soumissionnaires </h3>
             </div>
 
                      <table class="table table-bordered table-striped">
@@ -265,7 +265,7 @@
                             </div>
                         </div>
                           </td>
-                          <td>
+                          <!-- <td>
 
 
 
@@ -275,7 +275,7 @@
                 <input type="file"   @change="OnchangeFichier" />
               </div>
             </div>
-                          </td>
+                          </td> -->
                       </tr>
                   </table>
                 
@@ -550,6 +550,6 @@ affichierReferenceAppelOffre() {
 .tllgrde{
  width: 1000px;
  margin: 0 -530px;
- height: 400px;
+ height: 500px;
 }
 </style>

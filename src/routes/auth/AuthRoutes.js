@@ -3,6 +3,7 @@ import DetailGroupe1 from "@/pages/auth/groupe/DetailGroupe1.vue";
 import menu from "@/pages/auth/Module_Menu/menu.vue"; 
 import moduleDuProjet from "@/pages/auth/Module_Menu/moduleDuProjet.vue"; 
 import Autorisation from "@/pages/auth/autorisation/Autorisation.vue";
+import listeAutorisation from "@/pages/auth/autorisation/listeAutorisation.vue";
 import groupe1 from "@/pages/auth/groupe/groupe1.vue"
 import Login from '@/pages/auth/Login.vue'
 import Logout from '@/pages/auth/Logout.vue'
@@ -70,6 +71,12 @@ const AuthRoutes = [
         name:"groupe",
         component:groupe1,
       
+        
+    },
+    {
+        path:"/liste-affectation",
+        name:"liste_affectation",
+        component:listeAutorisation
     },
     {
         path:"/affectation-groupe",
