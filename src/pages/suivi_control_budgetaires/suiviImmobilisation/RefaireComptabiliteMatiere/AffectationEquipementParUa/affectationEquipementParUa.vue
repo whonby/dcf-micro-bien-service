@@ -11,20 +11,16 @@
       <div class="modal-body">
       <table class="table table-bordered table-striped">
 <tr>
-  <td>
-    <div class="control-group">
-            <label class="control-label">UA</label>
-            <div class="controls">
-              <input
-                type="text"
-                :value="formData.uAdministrative_id"
-                class="span4"
-                
-                
-              />
-            </div>
-          </div>
-  </td>
+ <td>
+       <select  class="span5" v-model="formData.uAdministrative_id">
+                      <option></option>                     
+                      <option
+                        v-for="typeUniteA in uniteAdministratives"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+    </td>
   <td>
     <div class="control-group">
             <label class="control-label">UA</label>
@@ -265,9 +261,9 @@
                        <li>
                         <a data-toggle="tab" href="#Véhiculeaffecter">Affectation Véhicule</a>
                       </li>
-                        <!-- <li>
+                        <li>
                         <a data-toggle="tab" href="#affecter1">Unité a une Autres Unité</a>
-                      </li> -->
+                      </li>
                     </ul>
                   </div>
                   <div class="widget-content tab-content">

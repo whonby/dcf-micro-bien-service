@@ -49,7 +49,7 @@
                   <th title="mouvement du marché">Mouvement marché</th>
                    <th>Statut</th>             
                      <th>Etat</th>
-                <th colspan="2">Action</th>
+                <th colspan="3">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -104,6 +104,12 @@
         <span class=""><i class=" icon-arrow-right"></i></span>
     </router-link>
 </td>
+<td >
+                        <router-link :to="{ name: 'CycleDeVie', params: { id: activites.id }}"
+                 class="btn btn-inverse " title="Cycle de vie du marche">
+        <span class=""><i class=" icon-calendar"></i></span>
+    </router-link>
+                   </td>
 <!-- <td>
  <button @click.prevent="modifierModalActeEffetFinancierLocal2(index)"  class="btn btn-info"  title="Basculer en Execution">
         <span class=""><i class="icon-undo" ></i></span></button>
