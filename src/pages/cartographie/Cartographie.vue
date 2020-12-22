@@ -135,7 +135,33 @@
 
                             </div>
                         </div>
+<hr>
+<!--                        <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>-->
 
+<!--                            <div class="span9" style="text-align:center"><h5>N° D'ORDRE-->
+<!--                            </h5></div>-->
+
+<!--                            <div class="span2"></div>-->
+<!--                        </div>-->
+<!--                        <table class="table table-bordered table-striped">-->
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <th>Budget Total </th>-->
+<!--                                <th>Budget Execute</th>-->
+<!--                                <th>Budget Restant</th>-->
+<!--                                <th>Taux execution</th>-->
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                            <tr class="odd gradeX">-->
+<!--                                <td>NUMERO DU MARCHE </td>-->
+<!--                                <td>DATE D'APPROBATION</td>-->
+<!--                                <td>DUREE D'EXECUTION</td>-->
+<!--                                <td>DUREE D'EXECUTION</td>-->
+
+<!--                            </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
 <!--                        <div class="quick-actions_homepage">-->
 <!--                            <ul class="quick-actions" v-if="idzone=='' && iduniteadmin==''">-->
 <!--                                <li class="bg_lb"> <a href="#">-->
@@ -954,32 +980,32 @@ created(){
                     {
                         name: 'Legende',
                         elements: [{
-                            label: '<div id="sanitaire">Pas de budget</div>',
+                            label: '<div id="pas_budget">Pas de budget</div>',
                             html: "<div style=' width: 20px;height: 20px;background:#6A0888  !important;'></div>"
                         },
                             {
-                                label: "<div id='scolaires'>Taux d'exécution de 0 %</div>",
+                                label: "<div id='taux_execution_zero'>Taux d'exécution de 0 %</div>",
                                 html: "<div style=' width: 20px;height: 20px;background: #DF0101 !important;'></div>"
                             },
                             {
-                                label: "<div id='communautaires'>Taux d'exécution entre 1 et 25 %</div>",
+                                label: "<div id='taux_execution25'>Taux d'exécution entre 1 et 25 %</div>",
                                 html: "<div style=' width: 20px;height: 20px;background: #FF8000 !important;'></div>"
                             },
                             {
-                                label: "<div id='routiere'>Taux d'exécution entre 26 et 50 %</div>",
+                                label: "<div id='taux_execution_50'>Taux d'exécution entre 26 et 50 %</div>",
                                 html: "<div style=' width: 20px;height: 20px;background: #2ECCFA !important;'></div>"
                             },
                             {
-                                label: "<div id='routiere'>Taux d'exécution entre 51 et 75 %</div>",
+                                label: "<div id='taux_execution_75'>Taux d'exécution entre 51 et 75 %</div>",
                                 html: "<div style=' width: 20px;height: 20px;background: #0000f3 !important;'></div>"
                             }
                             ,
                             {
-                                label: "<div id='routiere'>Taux d'exécution entre 76 et 99 %</div>",
+                                label: "<div id='taux_execution_99'>Taux d'exécution entre 76 et 99 %</div>",
                                 html: "<div style=' width: 20px;height: 20px;background: #01DF01 !important;'></div>"
                             },
                             {
-                                label: "<div id='routiere'>Taux d'exécution de 100%</div>",
+                                label: "<div id='taux_execution_100'>Taux d'exécution de 100%</div>",
                                 html: "<div style=' width: 20px;height: 20px;background: #0B3B0B !important;'></div>"
                             }]
                     }],

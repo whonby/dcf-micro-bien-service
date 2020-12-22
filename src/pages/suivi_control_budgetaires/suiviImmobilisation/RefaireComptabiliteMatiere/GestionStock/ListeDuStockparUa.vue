@@ -411,6 +411,31 @@
     <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
     <!-- End Page Header -->
     <!-- Default Light Table -->
+    <table class="table table-bordered table-striped">
+  <tr>
+    <td>
+      <label class="control-label">Unite Administrative</label>
+       <!-- <select  class="span5" v-model="formData.uAdministrative_id">
+                      <option></option>                     
+                      <option
+                        v-for="typeUniteA in uniteAdministratives"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select> -->
+                     <model-list-select style="background-color: rgb(233,233,233);"
+                                                       class="wide"
+                                                       :list="filtre_unite_admin"
+                                                       v-model="formData.uAdministrative_id"
+                                                       option-value="id"
+                                                       option-text="libelle"
+                                                       placeholder="Unité administrative"
+                                    >
+
+                                    </model-list-select>
+    </td>
+  </tr>
+</table>
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
@@ -447,10 +472,11 @@
                      <th>Famille</th>
                     <th>Quantité Initiale</th> 
                     <th title="quantite en stock">Quantité en stock</th>
+                    <th title="quantite sortant">Quantité sortie</th>
                      <th>Date d'entrée</th>
                     <th title="quantite entrant">Quantité entrée</th>
                     <th>Date de sortie</th>
-                    <th title="quantite sortant">Quantité sortie</th>
+                    
                      
                     <!-- <th>Duree de vie</th> -->
                    
@@ -460,7 +486,7 @@
                 <tbody>
                      <tr
                     class="odd gradeX"
-                    v-for="stock in listeDesStockParUa"
+                    v-for="stock in listeDesStockParUa(formData.uAdministrative_id)"
                     :key="stock.id"
                   >
 
@@ -488,6 +514,9 @@
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{stock.quantitestock || 'Non renseigné'}}</td>
+                     <td style="text-align: center;"
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{ stock.qtesortie ||'0' }}</td>
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{formaterDate(stock.date_entre) || 'Non renseigné'}}</td>
@@ -497,9 +526,7 @@
                        <td style="text-align: center;"
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{formaterDate(stock.date_sortie) || 'Non renseigné'}}</td>
-                    <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{ stock.qtesortie ||'0' }}</td>
+                   
                   
                      <!-- <td
                       @dblclick="afficherModalModifierStock(index)"
@@ -523,16 +550,17 @@
                   >
                 
                 <td></td>
-                      <td></td>
-                   <td style="font-weight:bold;" title="total quantite entrant">Total en stock</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock || 0 }}</td>
+                      <td style="font-weight:bold;">Total</td>
+                   <td  style="text-align: center;color:red;font-weight:bold;">{{quantiteInitial(formData.uAdministrative_id)}}</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(formData.uAdministrative_id) || 0 }}</td>
+                     <td style="text-align: center;color:red;font-weight:bold;">{{ nombreDeQuantiteSortiEnStock(formData.uAdministrative_id) || 0 }}</td>
                     <td></td>
                    
                      
                   
                      <td ></td>
-                    <td style="font-weight:bold;" title="total quantite sortant">Total quantité sortie</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{ nombreDeQuantiteSortiEnStock || 0 }}</td>
+                    <td  ></td>
+                   
                     
                    <td></td>
                      
@@ -566,7 +594,14 @@ import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSomme } from "../../../../../Repositories/Repository";
 import {admin,dcf,noDCfNoAdmin} from "../../../../../Repositories/Auth"
+import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
+  components: {
+    
+    ModelListSelect,
+     
+  },
   name: 'besionImmolisation',
   data() {
     return {
@@ -658,7 +693,25 @@ admin:admin,
     //     );
     //   });
     // },
+ filtre_unite_admin() {
+                if(this.noDCfNoAdmin){
+                    let colect=[];
+                    let vM=this
+                    this.uniteAdministratives.filter(item=>{
+                        console.log("OK bonjour GUE")
+                        if(vM.getterUniteAdministrativeByUser.length>0){
+                            let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                            if (val!=undefined){
+                                colect.push(item)
+                                return item
+                            }
+                        }
 
+                    })
+                    return colect
+                }
+                return this.uniteAdministratives
+            },
 filtre_Stock() {
        
         if (this.noDCfNoAdmin){
@@ -678,12 +731,35 @@ filtre_Stock() {
     },
 
 
-listeDesStockParUa() {
+// listeDesStockParUa() {
       
 
 
    
-        if (this.noDCfNoAdmin ){
+//         if (this.noDCfNoAdmin ){
+//             let colect=[];
+//             this.GestionStockageArticles.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+               
+//             })
+//            return colect
+//           }
+//         return this.GestionStockageArticles
+         
+
+
+
+//     },
+
+listeDesStockParUa() {
+      
+
+
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.GestionStockageArticles.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
@@ -691,20 +767,55 @@ listeDesStockParUa() {
                     colect.push(item)
                     return item
                 }
-               
             })
-           return colect
-          }
-        return this.GestionStockageArticles
-         
+           return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.uAdministrative_id == id);
+        }
+      };
+        }
 
-
+        return id => {
+        if (id != null && id != "") {
+          return this.GestionStockageArticles.filter(element => element.uAdministrative_id == id);
+        }
+      };
 
     },
 
+quantiteInitial() {
+       
 
 
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.GestionStockageArticles.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            //return colect
+          
+              return id => {
+        if (id != null && id != "") {
+          return this.colect.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.histo_qte), 0).toFixed(0);
+        }
+      };
+         
+       
+        }
+//return this.GestionStockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+       
+        
 
+     return id => {
+        if (id != null && id != "") {
+          return this.GestionStockageArticles.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.histo_qte), 0).toFixed(0);
+        }
+      };
+    },
 
 nombreDeQuantiteEnStock() {
        
@@ -721,14 +832,23 @@ nombreDeQuantiteEnStock() {
             })
             //return colect
           
-              
-          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+              return id => {
+        if (id != null && id != "") {
+          return this.colect.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+        }
+      };
+         
        
         }
 //return this.GestionStockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
        
-         return this.GestionStockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+        
 
+     return id => {
+        if (id != null && id != "") {
+          return this.GestionStockageArticles.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+        }
+      };
     },
 nombreDeQuantiteSortiEnStock() {
       
@@ -744,14 +864,22 @@ nombreDeQuantiteSortiEnStock() {
                 }
             })
           
-          
+          return id => {
+        if (id != null && id != "") {
+          return this.colect.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+        }
+      };
        
-         return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+         //return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
        }
 
-     
+      return id => {
+        if (id != null && id != "") {
+          return this.GestionStockageArticles.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+        }
+      };
 
- return this.GestionStockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+ //return this.GestionStockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
     },
 
 

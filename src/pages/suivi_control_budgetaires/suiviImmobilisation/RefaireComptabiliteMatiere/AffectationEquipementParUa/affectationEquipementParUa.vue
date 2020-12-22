@@ -32,7 +32,7 @@
                 v-model="editAffectation.numimmatriculation"
                 class="span4"
                 readonly
-                style="color:red;font-size:30px"
+                style="color:red;font-size:20px"
               />
             </div>
           </div>
@@ -100,8 +100,8 @@
             <div class="controls">
                               <select   class="span4" v-model="formData.personnel_id">
                                 <option></option>
-            <!-- <option v-for="resultat in affichePersonnel(editAffectation.uniteadministrative)" :key="resultat.id" 
-            :value="resultat.acteur_depense_id">{{NomPersonnel(resultat.acteur_depense_id)}}</option> -->
+            <option v-for="resultat in affichePersonnel(editAffectation.uniteadministrative)" :key="resultat.id" 
+            :value="resultat.acteur_depense_id">{{NomPersonnel(resultat.acteur_depense_id)}}</option>
                 </select>
             </div>
           </div>
@@ -325,7 +325,7 @@
                   <tr>
                      
                     
-                   <th>Matricule</th>
+                   <!-- <th>Matricule</th> -->
                        <th>N°identification</th>
                     <th>N°immatriculation</th>
                      <!-- <th>Immobilisation</th> -->
@@ -484,7 +484,7 @@ search:""
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
-            ...mapGetters("personnelUA", ["acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
+            ...mapGetters("personnelUA", ["personnaliseActeurDepense","acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
 
 
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
@@ -1112,7 +1112,7 @@ formatageSomme:formatageSomme,
 
 }
 .tailgrand{
-  width: 73%;
+  width: 60%;
   margin: 0 -38%;
 }
 </style>
