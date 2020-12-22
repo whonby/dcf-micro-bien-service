@@ -23,7 +23,7 @@ valeurAcquisitionMateriel
 
                                 </model-list-select>
                             </td> -->
-                            <td style="background: #f0c71d !important;">
+                            <!-- <td style="background: #f0c71d !important;">
                                 <label>Section
                                 </label>
                                 <model-list-select style="background-color: #fff;"
@@ -36,7 +36,7 @@ valeurAcquisitionMateriel
                                 >
 
                                 </model-list-select>
-                            </td>
+                            </td> -->
                             <td style="background: #f0c71d !important;">
                                 <label>Unite d'Administrative
                                 </label>
@@ -124,7 +124,7 @@ valeurAcquisitionMateriel
                      <th  style="width:15%;text-align:left;font-weight:bold;font-size:16px">BIENS INCORPORELS  (A)</th>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{0}} </td>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{formatageSomme(parseFloat(0))}} </td>
-                     <td style="width:15%"> </td>
+                     <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{formatageSomme(parseFloat(0))}} </td>
                      <td style="width:15%"> </td>
                      <td style="width:15%"> </td>
                      <td style="width:15%"> </td>
@@ -144,7 +144,7 @@ valeurAcquisitionMateriel
                      <th  style="width:15%;text-align:left;font-weight:bold;font-size:16px">BIENS CORPORELS  (B)</th>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px"> {{(parseFloat(NombreEquipementParMobilier(unite_administrative_id))+parseFloat(NombreEquipementParMateriel(unite_administrative_id))+parseFloat(NombreVehiculeParUa(unite_administrative_id))+parseFloat(NombreEquipementParImmobilier(unite_administrative_id))+parseFloat(NombreEquipementParGrosTravaux(unite_administrative_id)))}}</td>
                       <td style="width:10%;text-align:center;font-weight:bold;font-size:16px"> {{formatageSomme(parseFloat(parseFloat(PrixEquipementParMobilier(unite_administrative_id))+parseFloat(PrixEquipementParMateriel(unite_administrative_id))+parseFloat(PrixVehiculeParUa(unite_administrative_id))+parseFloat(PrixEquipementParImmobilier(unite_administrative_id))+parseFloat(PrixEquipementParGrosTravaux(unite_administrative_id))))}}</td>
-                     <td style="width:15%"> </td>
+                     <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{formatageSomme(parseFloat(0))}} </td>
                      <td style="width:15%"> </td>
                      <td style="width:15%"> </td>
                      <td style="width:15%"> </td>
@@ -187,7 +187,7 @@ valeurAcquisitionMateriel
                      <th  style="width:10%;text-align:right;">IMMOBILIER</th>
                      <td style="width:15%;text-align:center;">{{NombreEquipementParImmobilier(unite_administrative_id)}} </td>
                      <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(PrixEquipementParMateriel(unite_administrative_id)))}}</td><td style="width:15%;text-align:center;"> </td>
-                     <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td>
+                     <td style="width:15%;text-align:center;">{{formatageSomme(parseFloat(0))}}</td>
               <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td>
                      <td style="width:15%;text-align:center;"> 0%</td>
                      <td style="width:15%;text-align:center;">0%</td>
