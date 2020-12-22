@@ -261,9 +261,9 @@
                        <li>
                         <a data-toggle="tab" href="#Véhiculeaffecter">Affectation Véhicule</a>
                       </li>
-                        <li>
+                        <!-- <li>
                         <a data-toggle="tab" href="#affecter1">Unité a une Autres Unité</a>
-                      </li>
+                      </li> -->
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
