@@ -78,7 +78,7 @@
             <span>GESTION DES MARCHES</span>
           </a>
         </li>
-        <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 20 }">
+        <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 31 }">
           <a href="#">
             <i class="icon-group"></i>
             <span>PERSONNEL</span>
@@ -99,7 +99,7 @@
         </li> -->
 
 
-        <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==40}">
+        <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==20}">
           <a title="INVESTISSEMENT" href="#">
             <i class="icon-truck"></i>
             <span>INVESTISSEMENT</span>

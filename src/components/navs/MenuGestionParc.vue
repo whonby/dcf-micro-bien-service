@@ -11,12 +11,25 @@
                 </router-link>
             </li> -->
  <li title="Stock">
-                <router-link :to="{name:'gestionStockCorporels'}" tag="a">
+                <router-link :to="{name:''}" tag="a">
                     <!-- <i class="icon-list"></i> -->
-                    <span class="text">GESTION DU PATRIMOINE</span>
+                    <span class="text">BIENS INCORPORELS</span>
 
                 </router-link>
             </li>
+             <li title="Stock">
+                <router-link :to="{name:'gestionStockCorporels'}" tag="a">
+                    <!-- <i class="icon-list"></i> -->
+                    <span class="text">BIENS CORPORELS</span>
+
+                </router-link>
+            </li>
+            <!-- <li>
+                <router-link :to="{name:'simulationAmortissement'}" tag="a">
+                  
+                    <span class="text">SIMULATION AMORTISSEMENT</span>
+                </router-link>
+            </li>  -->
              <!-- <li title="Stock">
                 <router-link :to="{name:'principalExecution'}" tag="a">
                     

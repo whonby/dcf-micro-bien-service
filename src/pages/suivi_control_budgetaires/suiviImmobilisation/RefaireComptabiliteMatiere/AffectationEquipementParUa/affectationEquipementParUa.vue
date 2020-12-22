@@ -2,6 +2,91 @@
 <template>
 
 <div>
+
+<div id="exampleModal12" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Affectation Véhicule</h3>
+      </div>
+      <div class="modal-body">
+      <table class="table table-bordered table-striped">
+<tr>
+  <td>
+    <div class="control-group">
+            <label class="control-label">UA</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="formData.uAdministrative_id"
+                class="span4"
+                
+                
+              />
+            </div>
+          </div>
+  </td>
+  <td>
+    <div class="control-group">
+            <label class="control-label">UA</label>
+            <div class="controls">
+              <input
+                type="text"
+                
+                class="span4"
+                
+                
+              />
+            </div>
+          </div>
+  </td>
+  <td>
+    <div class="control-group">
+            <label class="control-label">UA</label>
+            <div class="controls">
+              <input
+                type="text"
+                
+                class="span4"
+                
+                
+              />
+            </div>
+          </div>
+  </td>
+</tr>
+      </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          
+          class="btn btn-primary"
+          href="#"
+          @click.prevent="ajouterTitreLocal(formData)"
+        >Affecter</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  <div id="exampleModal1" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -180,11 +265,137 @@
                        <li>
                         <a data-toggle="tab" href="#Véhiculeaffecter">Affectation Véhicule</a>
                       </li>
-                       
+                        <li>
+                        <a data-toggle="tab" href="#affecter1">Unité a une Autres Unité</a>
+                      </li>
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
+<div id="affecter1" class="tab-pane">
+  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                     <li class="active">
+                        <a data-toggle="tab" href="#transfertUa1">Unité d'Administrative</a>
+                      </li>
+                       <!-- <li>
+                        <a data-toggle="tab" href="#service">Service</a>
+                      </li> -->
+                       
+                    </ul>
+                  </div>
+                   <div class="" align="right">
+        <a href="#exampleModal12" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter un transfert</a>
+      </div>
+                  
+                  <div class="widget-content tab-content">
+                    <div id="transfertUa1" class="tab-pane active">
+                      <table class="table table-bordered table-striped">
+                <thead>
+                  
+                  <tr>
+                     
+                    
+                   <th style="">UA Emettrice</th>
+                        <th style="">Articles</th>
+                        
+                        <th style="">Quantité </th>
 
+                        <th style="">UA Réceptrice</th>
+                        <th style="">Articles</th>
+                        
+                        <th style="">Quantité </th>
+                        <th style="">Date de transfert </th>
+                    <!-- <th >Equipé</th> -->
+                     <th >Action</th>
+                  </tr>
+                </thead>
+                <!-- <tbody>
+                  
+                  <tr
+                    class="odd gradeX"
+                    v-for="BesoinImmo in listePersonnelNonEquipee(formData.uAdministrative_id)"
+                    :key="BesoinImmo.id"
+                  >
+                  <td style="text-align: center;"
+                   
+                    >{{afficherActeurDepenseMatricule(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td>
+                  
+                     <td style="text-align: center;"
+                   
+                    >{{afficherActeurDepenseNomPrenoms(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td>
+                    <td style="text-align: center;"
+                      
+                    >{{afficheFonction(BesoinImmo.fonction_id)}}</td>
+                   
+                     <td>
+                       <router-link
+                        :to="{name : 'listedesArticleparPerso', params: {id:BesoinImmo.id}}"
+                        class="btn btn-default"
+                        title="Detail Immobilisation"
+                      >
+                        <span>
+                          <i class="icon icon-folder-open"></i>
+                        </span>
+                      </router-link>
+                     </td>
+                     
+                    
+                    
+                  </tr>
+                 
+                 
+                 
+                </tbody> -->
+              </table>
+                    </div>
+                     <div id="service" class="tab-pane ">
+                       <table class="table table-bordered table-striped">
+                <thead>
+                   <tr>
+
+                        
+                        <th style="width:40%">Service</th>
+                        <th style="width:10%">Equipé</th>
+                        <th style="width:10%">Affectation</th>
+                         
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="odd gradeX" v-for=" affectService in listeDesServiceNonEquipeDeUa(formData.uAdministrative_id)"
+                        :key="affectService.id">
+                        
+                             
+                            <td >
+                            {{afficherLibelleService(affectService.serviceua_id) || 'Non renseigné'}}</td>
+                             <td style="text-align: center;">
+                      
+                       
+                          
+                         
+                     <span style="font-weight: 500;" v-if="affectService.normeequipement == 0"  class="btn btn-success" >Oui</span>
+                     <span  v-else  class="btn btn-danger" style="font-weight: 500;"> Non</span>
+                     
+                        
+                     
+                    </td>
+                    <td>
+                       <router-link
+                        :to="{name : 'listedesArticleParService', params: {id:affectService.id}}"
+                        class="btn btn-default"
+                        title=""
+                      >
+                        <span>
+                          <i class="icon icon-folder-open"></i>
+                        </span>
+                      </router-link>
+                     </td>
+                     
+                    </tr>
+                    </tbody>
+              </table>
+                     </div>
+</div>
+</div>
 <div id="MatérielAffecter" class="tab-pane active">
   <div class="widget-title">
                     <ul class="nav nav-tabs">
@@ -192,7 +403,7 @@
                         <a data-toggle="tab" href="#personnel">Personnel</a>
                       </li>
                        <li>
-                        <a data-toggle="tab" href="#service">Service</a>
+                        <a data-toggle="tab" href="#service1">Service</a>
                       </li>
                        
                     </ul>
@@ -204,10 +415,10 @@
                   <tr>
                      
                     
-                   <th style="width:40%">Matricule</th>
-                        <th style="width:40%">Nom && Prénoms</th>
+                   <th style="">Matricule</th>
+                        <th style="">Nom && Prénoms</th>
                         
-                        <th style="width:40%">Fonction</th>
+                        <th style="">Fonction</th>
                     <!-- <th >Equipé</th> -->
                      <th >Action</th>
                   </tr>
@@ -251,15 +462,15 @@
                 </tbody>
               </table>
                     </div>
-                     <div id="service" class="tab-pane ">
+                     <div id="service1" class="tab-pane ">
                        <table class="table table-bordered table-striped">
                 <thead>
                    <tr>
 
                         
-                        <th style="width:40%">Service</th>
-                        <th style="width:10%">Equipé</th>
-                        <th style="width:10%">Affectation</th>
+                        <th style="">Service</th>
+                        <th style="">Equipé</th>
+                        <th style="">Affectation</th>
                          
                     </tr>
                 </thead>
@@ -1056,7 +1267,12 @@ afficherLibelleService() {
       "modifierVehicule"
       ]),
 
-
+ afficherModalAjouter() {
+      this.$("#exampleModal12").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+    },
   fenetreAjouterAffectation(id) {
       this.$("#exampleModal1").modal({
         backdrop: "static",
@@ -1113,6 +1329,6 @@ formatageSomme:formatageSomme,
 }
 .tailgrand{
   width: 60%;
-  margin: 0 -38%;
+  margin: 0 -30%;
 }
 </style>

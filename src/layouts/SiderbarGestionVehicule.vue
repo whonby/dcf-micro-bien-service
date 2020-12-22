@@ -45,13 +45,19 @@
           
           <a href="#">
             <i class="icon-group"></i>
-            <span style="text-align:center"> BIENS INCORPORELS</span>
+            <span style="text-align:center"> TABLEAU DE BORD</span>
           </a>
         </li>
          <li  @click.prevent="navigateToGestionParc" :class="{active: active_el == 43}">
           <a href="#">
             <i class="icon-group"></i>
-            <span  style="text-align:center"> BIENS CORPORELS</span>
+            <span  style="text-align:center"> GESTION DU PATRIMOINE</span>
+          </a>
+        </li>
+         <li>
+          <a href="#">
+            <i class="icon-group"></i>
+            <span  style="text-align:center"> INVENTAIRE DU PATRIMOINE</span>
           </a>
         </li>
         <!-- <li  @click.prevent="navigateToGestionParc">
@@ -201,13 +207,13 @@ return objJson.id
      navigateToComptaMatiere(){
         this.activate()
         this.$router.push({
-          name: 'TableauBordImmo2'
+          name: 'TableauBordGestionVehicule'
         })
       },
 navigateToGestionParc(){
         this.activate(43)
         this.$router.push({
-          name: 'TableauBordImmo2'
+          name: 'gestionStockCorporels'
         })
       },
 navigateToReparation(){

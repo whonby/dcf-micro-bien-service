@@ -58,6 +58,7 @@
                                 
                                
                               </select>
+                              
                             </div>
                           </div>
                         </td>
@@ -102,7 +103,7 @@
   <div id="exampleModalValidationdirecteur" class="modal hide valDirecteur">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Affectation</h3>
+        <h3>Affectation{{afficherQteEnStock}}</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -110,7 +111,7 @@
            <td colspan="">
              
                            <div class="control-group">
-                            <label class="control-label">Nom et Prénoms</label>
+                            <label class="control-label">{{afficherQteTotal}}Nom et Prénoms{{afficherValeurOrigine}}</label>
                             <div class="controls">
                               <input type="text" class="span4" readonly :value="afficherActeurDepenseNomPrenoms(afficherActeurDepenseId(detail_Ua.id))"/>
                                
@@ -120,7 +121,7 @@
            <td>
              
                            <div class="control-group">
-                            <label class="control-label">Article</label>
+                            <label class="control-label">{{afficherQteTotal}}Article{{afficherQuantiteEnRequise(this.editService.model_id) }}</label>
                             <div class="controls">
                               <input type="text" class="span4" readonly :value="libelleArticle(editService.famille_id)" />
                                
@@ -140,15 +141,29 @@
            </td>
           <td>
                             <div class="control-group">
-                            <label class="control-label">Marque</label>
+                            <label class="control-label">Marque{{nombreAffecter}}</label>
+                            
                             <div class="controls">
-                              <select
-                                v-model="formData.marque_id" class="span4">
-                               
-                              <option value></option>
-                                
-                               
+                              <select v-model="editService.marque_id" class="span4">
+                              <option value=""></option>
+    <option v-for="item in listedesarticleenstock(detail_Ua.unite_administrative_id)" 
+    :key="item[0].id" :value="item[0].id">{{libelleMarque(item[0].marque_id)}}</option>
                               </select>
+                              
+                            </div>
+                          </div>
+                        </td>
+                         <td>
+                            <div class="control-group">
+                            <label class="control-label">Model</label>
+                            
+                            <div class="controls">
+                              <select v-model="editService.model_id" class="span4">
+                              <option value=""></option>
+    <option v-for="item in LibelleModel(detail_Ua.unite_administrative_id)" 
+    :key="item.id" :value="item.id">{{libelleModel(item.model_id)}}</option>
+                              </select>
+                              
                             </div>
                           </div>
                         </td>
@@ -167,9 +182,9 @@
             <td>
              
                            <div class="control-group">
-                            <label class="control-label">Quantité En stock</label>
+                            <label class="control-label">Quantité En stock{{afficherIdStock(editService.model_id)}}</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="afficherQuantiteEnStock(editService.famille_id)" readonly/>
+                              <input type="text" class="span4" :value="afficherQuantiteEnStock(editService.model_id)" readonly/>
                                
                             </div>
                           </div>
@@ -185,9 +200,7 @@
                             </div>
                           </div>
            </td>
-        </tr>
-        <tr>
-          <td>
+            <td>
              
                            <div class="control-group">
                             <label class="control-label">Date mise en service</label>
@@ -198,6 +211,7 @@
                           </div>
            </td>
         </tr>
+        
        
         </table>
       </div>
@@ -302,7 +316,7 @@
 
 
 
-
+<notifications  />
 
 
     </div>
@@ -396,7 +410,9 @@ search:""
       "montantBudgetGeneral",
       "uniteZones",
       "getPersonnaliseBudgetGeneralParTransfert",
-      "uniteAdministratives"
+      "uniteAdministratives",
+      "GestionStockageArticles",
+      "groupStockArticle"
       // "chapitres",
       // "sections"
     ]),
@@ -432,9 +448,143 @@ search:""
       "immobilisations",
       "afficheRegroupeEquipementCouvert",
       "demandeMateriel",
-      "getterUa_idImo"
+      "getterUa_idImo",
+      "marqueVehicules",
+      "ModeleVehicules",
+      "ficheArticle"
    
    ]),
+
+   
+    afficherIdStock() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+    afficherTypeDebien() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.ficheArticle.find(qtreel => qtreel.model_id == id);
+
+      if (qtereel) {
+        return qtereel.type_bien;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+   ValeurAcquisition() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.ficheArticle.find(qtreel => qtreel.model_id == id);
+
+      if (qtereel) {
+        return qtereel.prix_unitaire;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+nombreDejourCalculeModifier(){
+       let vM=this;
+      const acteAffet = vM.formData
+      console.log(acteAffet)
+      // if(vM.formData.date_mise_service !="" ) return 0
+      // if(vM.formData.date_mise_service =="" ) return null
+
+      var dateF = new Date(this.afficherDateDuJour).getTime()
+      var dateO = new Date(vM.formData.date_mise_service).getTime()
+      var resultat = dateF - dateO
+
+      var diffJour =  resultat / (1000 * 3600 * 24)
+       console.log(diffJour)
+      if(isNaN(diffJour)) return null
+
+      if(parseFloat(diffJour) < 0 ) return ""
+      vM.formData.duree=diffJour
+      return  diffJour;
+
+    },
+     
+dureDeVie() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.dureVie;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+   
+afficherDateDuJour(){
+let date = new Date();
+        let aaaa = date.getFullYear();
+        let gg = date.getDate();
+        let mm = (date.getMonth() + 1);
+        let moi;
+        let jour;
+        if (gg < 10)
+        {
+            jour = "0" + gg;
+        }else{
+            jour = gg
+        }
+
+
+        if (mm < 10)
+        {
+            moi = "0" + mm;
+        }else{
+            moi=mm;
+        }
+
+
+        let cur_day =  aaaa + "-" + moi + "-" + jour;
+
+        return cur_day
+
+
+    
+   
+   },
+
+
+
+
+
+
+
+
+
+
+LibelleModel() {
+      return id => {
+        if (id != null && id != "") {
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && qtreel.famill_id == this.editService.famille_id);
+
+        }
+      };
+    },
+listedesarticleenstock() {
+      return id => {
+        if (id != null && id != "") {
+           return this.groupStockArticle.filter(qtreel => qtreel[0].uAdministrative_id == id && qtreel[0].famill_id == this.editService.famille_id);
+
+        }
+      };
+    },
+
+
 
 lispersonnelParUa() {
       return id => {
@@ -450,10 +600,34 @@ lispersonnelParUa() {
    afficherQuantiteEnStock() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.stockageArticles.find(qtreel => qtreel.famill_id == id);
+           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.quantitestock;
+      }
+      return 0
+        }
+      };
+    },
+    libelleMarque() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marqueVehicules.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    libelleModel() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.ModeleVehicules.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
       }
       return 0
         }
@@ -1049,7 +1223,7 @@ NombreafficheEquipementNonCouvertService() {
 //     },
 
 afficherMontantRestant() {
-      const val = this.affichierTotal(this.formData.fonction_id) - this.afficherValeurOrigine;
+      const val = this.affichierTotal(this.afficherFonctionId(this.detail_Ua.id)) - this.afficherValeurOrigine;
       return parseFloat(val).toFixed(0);
     },
  
@@ -1127,7 +1301,7 @@ afficherResteStock() {
 affichierQuantiteEnStock() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.stockageArticles.find(qtreel => qtreel.famill_id == id);
+           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.famill_id == id);
 
       if (qtereel) {
         return qtereel.quantitestock;
@@ -1139,7 +1313,7 @@ affichierQuantiteEnStock() {
 affichierIdQuantiteEnStock() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.stockageArticles.find(qtreel => qtreel.famill_id == id);
+           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.famill_id == id);
 
       if (qtereel) {
         return qtereel.id;
@@ -1289,24 +1463,24 @@ return this.immobilisations.filter(element=>element.qte_actuel != 0).reduce((pre
 },
 
 afficherQteTotal() {
-      const val = parseFloat(this.afficherRecupererQteActuelle) + parseFloat(this.formData2.qte_affecte) ;
+      const val = parseFloat(this.afficherRecupererQteActuelle) + parseFloat(this.formData.qte_affecte) ;
       return parseFloat(val).toFixed(0);
     },
 
 afficherQteEnStock() {
-      const val = parseFloat(this.afficherQuantiteEnStock(this.editService.famille_id)) - parseFloat(this.formData2.qte_affecte) ;
+      const val = parseFloat(this.afficherQuantiteEnStock(this.editService.model_id)) - parseFloat(this.formData.qte_affecte) ;
       return parseFloat(val).toFixed(0);
     },
     afficherQteSortir() {
-      const val = parseFloat(this.afficherQuantiteSortir(this.editService.famille_id)) + parseFloat(this.formData2.qte_affecte) ;
+      const val = parseFloat(this.afficherQuantiteSortir(this.editService.model_id)) + parseFloat(this.formData.qte_affecte) ;
       return parseFloat(val).toFixed(0);
     },
 afficherQteResteACouvert() {
-      const val = parseFloat(this.afficherQuantiteEnRequise(this.editService.famille_id)) - parseFloat(this.formData2.qte_affecte) ;
+      const val = parseFloat(this.afficherQuantiteEnRequise(this.editService.model_id)) - parseFloat(this.formData.qte_affecte) ;
       return parseFloat(val).toFixed(0);
     },
     afficherQteResteACouvertModifier() {
-      const val = parseFloat(this.afficherQuantiteEnRequise(this.editService.famille_id)) - parseFloat(this.afficherQteTotal) ;
+      const val = parseFloat(this.afficherQuantiteEnRequise(this.editService.model_id)) - parseFloat(this.afficherQteTotal) ;
       return parseFloat(val).toFixed(0);
     },
     afficherPrixActuelResteACouvertModifier() {
@@ -1320,7 +1494,7 @@ afficherPrixActuelResteACouvert() {
 
 afficherIdImmobilisation() {
       const qtereel = this.immobilisations.find(
-        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+        qtreel => qtreel.famillearticle_id == this.editService.model_id,
        
       );
 
@@ -1330,24 +1504,25 @@ afficherIdImmobilisation() {
       return 0
     },
 
-afficherIdStock() {
-      const qtereel = this.stockageArticles.find(
-        qtreel => qtreel.famill_id == this.editService.famille_id,
+// afficherIdStock() {
+//       const qtereel = this.stockageArticles.find(
+//         qtreel => qtreel.famill_id == this.editService.model_id,
        
-      );
+//       );
 
-      if (qtereel) {
-        return qtereel.id;
-      }
-      return 0
-    },
+//       if (qtereel) {
+//         return qtereel.id;
+//       }
+//       return 0
+//     },
+    
 nombreAffecter() {
-      const val = parseFloat(this.formData2.qte_affecte) + parseFloat(this.afficherRecupererQteAffecter);
+      const val = parseFloat(this.formData.qte_affecte) + parseFloat(this.afficherRecupererQteAffecter);
       return parseFloat(val).toFixed(0);
     },
 afficherRecupererQteAffecter() {
       const qtereel = this.immobilisations.find(
-        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+        qtreel => qtreel.model_id == this.editService.model_id,
        
       );
 
@@ -1358,7 +1533,7 @@ afficherRecupererQteAffecter() {
     },
  afficherAffectationParFonction() {
       const qtereel = this.immobilisations.find(
-        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+        qtreel => qtreel.famillearticle_id == this.editService.model_id,
        
       );
 
@@ -1369,7 +1544,7 @@ afficherRecupererQteAffecter() {
     },
  afficherAffectationParActeurDepense() {
       const qtereel = this.immobilisations.find(
-        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+        qtreel => qtreel.famillearticle_id == this.editService.model_id,
        
       );
 
@@ -1381,7 +1556,7 @@ afficherRecupererQteAffecter() {
 
 afficherAffectationParQuantiteAffecter() {
       const qtereel = this.immobilisations.find(
-        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+        qtreel => qtreel.famillearticle_id == this.editService.model_id,
        
       );
 
@@ -1393,7 +1568,7 @@ afficherAffectationParQuantiteAffecter() {
 
 afficherAffectationParUniteZone() {
       const qtereel = this.immobilisations.find(
-        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+        qtreel => qtreel.famillearticle_id == this.editService.model_id,
        
       );
 
@@ -1405,7 +1580,7 @@ afficherAffectationParUniteZone() {
 
 afficherAffectationParService() {
       const qtereel = this.immobilisations.find(
-        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+        qtreel => qtreel.famillearticle_id == this.editService.model_id,
        
       );
 
@@ -1416,7 +1591,7 @@ afficherAffectationParService() {
     },
 afficherAffectationParBesoin() {
       const qtereel = this.immobilisations.find(
-        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+        qtreel => qtreel.famillearticle_id == this.editService.model_id,
        
       );
 
@@ -1427,7 +1602,7 @@ afficherAffectationParBesoin() {
     },
  idActePersonnel() {
       const qtereel = this.acte_personnels.find(
-        qtreel => qtreel.acteur_depense_id == this.formData.acteur_depense_id,
+        qtreel => qtreel.acteur_depense_id == this.afficherActeurDepenseId(this.detail_Ua.id),
        
       );
 
@@ -1467,12 +1642,12 @@ afficherValeurOrigineModifier() {
       return parseFloat(val).toFixed(0);
     },
   afficherValeurOrigine() {
-      const val = parseFloat(this.formData2.qte_affecte) * parseFloat(this.coutMonenArticle);
+      const val = parseFloat(this.formData.qte_affecte) * parseFloat(this.coutMonenArticle);
       return parseFloat(val).toFixed(0);
     },
 
     afficherNombreEquipementRestant() {
-      const val = parseFloat(this.formData.normeequipement) - parseFloat(this.formData2.qte_affecte);
+      const val = parseFloat(this.formData.normeequipement) - parseFloat(this.formData.qte_affecte);
       return parseFloat(val).toFixed(0);
     },
 
@@ -1520,7 +1695,7 @@ afficheLeBesoinDemande() {
     },
 afficheIdFonction() {
       
-      const norme = this.fonctions.find(normeEquipe => normeEquipe.libelle == this.formData.fonction_id);
+      const norme = this.fonctions.find(normeEquipe => normeEquipe.libelle == this.afficherFonctionId(this.detail_Ua.id));
 
       if (norme) {
         return norme.id;
@@ -1657,7 +1832,7 @@ afficherLibelleService() {
     afficherQuantiteSortir() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.stockageArticles.find(qtreel => qtreel.famill_id == id);
+           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.model_id == id);
 
       if (qtereel) {
         return qtereel.qtesortie;
@@ -1713,7 +1888,7 @@ afficheCauseInactivite() {
 // },
 
 // identifierDmdFonction(){
-// if(this.formData.fonction_id != 0){
+// if(this.afficherFonctionId(detail_Ua.id) != 0){
 //   return 1
 // }
 
@@ -1878,7 +2053,7 @@ afficheActeurDepense() {
 // afficheActeurDepense() {
 //       return id => {
 //         if (id != null && id != "") {
-//            const qtereel = this.all_acteur_depense.find(qtreel => qtreel.fonction.id == this.formData.fonction_id);
+//            const qtereel = this.all_acteur_depense.find(qtreel => qtreel.fonction.id == this.afficherFonctionId(detail_Ua.id));
 
 //       if (qtereel) {
 //         return qtereel.matricule.concat('  ', qtereel.nom,'  ',qtereel.prenom)
@@ -1992,6 +2167,7 @@ fonctionDynamiques() {
       "ajouterService",
       "modifierService",
       "supprimerService",
+      "modifierStockArticle"
      
       // "ajouterHistoriqueBudgetGeneral"
     ]),
@@ -2000,25 +2176,32 @@ fonctionDynamiques() {
        "modifierImmobilisation",
        "modifierStock",
        "ajouterHistotorisqueAffectionService",
-       "modifierDemandeMateriel"
+       "modifierDemandeMateriel",
+      "ajouterHistotorisqueAffection",
+      ""
       
      
     ]),
+...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux",
+            "allActeurDepense", "modifierActeurDepenses","modifierSalaire"]),
+
+
+   
   ajouterImmobilisationLocal() {
 
       
-if (this.formData.fonction_id == this.afficherAffectationParFonction &&  this.formData.acteur_depense_id == this.afficherAffectationParActeurDepense && this.afficherQuantiteEnRequise(this.editService.famille_id) == this.afficherAffectationParQuantiteAffecter){
+if (this.afficherFonctionId(this.detail_Ua.id) == this.afficherAffectationParFonction &&  this.afficherActeurDepenseId(this.detail_Ua.id) == this.afficherAffectationParActeurDepense && this.afficherQuantiteEnRequise(this.editService.famille_id) == this.afficherAffectationParQuantiteAffecter){
 
 alert("équipement déja attribué")
 }
-else if(this.afficherQuantiteEnStock(this.editService.famille_id) == 0){
+else if(this.afficherQuantiteEnStock(this.editService.model_id) == 0){
 alert("Veuillez approvisionner votre stock")
 }
-else if(this.afficherQuantiteEnRequise(this.editService.famille_id) < this.afficherQteTotal){
-  alert("Vérifiez la quantité affecté")
-}
+// else if(this.afficherQuantiteEnRequise(this.editService.model_id) < this.afficherQteTotal){
+//   alert("Vérifiez la quantité affecté")
+// }
 
-else if (this.formData.fonction_id == this.afficherAffectationParFonction &&  this.formData.acteur_depense_id == this.afficherAffectationParActeurDepense && this.formData.uniteZone_id == this.afficherAffectationParUniteZone && this.formData.service_id == this.afficherAffectationParService && this.editService.famille_id == this.afficherAffectationParBesoin){
+else if (this.afficherFonctionId(this.detail_Ua.id) == this.afficherAffectationParFonction &&  this.afficherActeurDepenseId(this.detail_Ua.id) == this.afficherAffectationParActeurDepense && this.formData.uniteZone_id == this.afficherAffectationParUniteZone && this.formData.service_id == this.afficherAffectationParService && this.editService.famille_id == this.afficherAffectationParBesoin){
 
 var nouvelobjet8 ={
   ...this.formData,
@@ -2026,58 +2209,55 @@ var nouvelobjet8 ={
  quantitestock:this.afficherQteEnStock,
  qtesortie:this.afficherQteSortir
 }
-var nouvelobjet2 ={
-  ...this.formData,
- normeequipement:this.afficherNombreEquipementRestant,
- montantequipement:this.afficherMontantRestant
-}
+// var nouvelobjet2 ={
+//   ...this.formData,
+//  normeequipement:this.afficherNombreEquipementRestant,
+//  montantequipement:this.afficherMontantRestant
+// }
       var nouvelObjet3 = {
-        ...this.formData2,
+        ...this.formData,
         id: this.afficherIdImmobilisation,
         prixUnitaire: this.coutMonenArticle,
         valeurorigine: this.afficherValeurOrigineModifier,
-       
         exercice_budgetaire:this.exerciceBudgetaireEnCours,
       duree:this.afficherDureeVieFamille(this.editService.famille_id),
-      acteurdepense_id : this.formData.acteur_depense_id,
-     	uniteadministrative_id:this.formData.unite_administrative_id,
+      acteurdepense_id : this.afficherActeurDepenseId(this.detail_Ua.id),
+     	uniteadministrative_id:this.detail_Ua.id,
       service_id:this.afficheService(this.formData.service_id),
-      fonction_id:this.formData.fonction_id,
+      fonction_id:this.afficherFonctionId(this.detail_Ua.id),
       anneamortiss:this.anneeAmortissement,
-      
       unitezon_id:this.formData.uniteZone_id,
       qte_reel:this.afficherQuantiteEnRequise(this.editService.famille_id),
-     
      qte_affecte:this.nombreAffecter,
      total_actuel:this.afficherPrixActuelResteACouvertModifier,
      qte_actuel:this.afficherQteResteACouvertModifier,
-
+     famillearticle_id:this.editService.famille_id,
+marque_id:this.editService.marque_id,
+	model_id:this.editService.model_id,
       };
-   var nouveauObjetDemande = {
+//    var nouveauObjetDemande = {
         
- acteur_id:this.formData.acteur_depense_id,
- ua_id:this.formData.unite_administrative_id,
- unitezone_id:this.formData.uniteZone_id,
- fonction_id:this.formData.fonction_id,
- article_id:this.editService.famille_id,
- qte:this.formData2.qte_affecte,
- dure_vie:this.afficherDureeVieFamille(this.editService.famille_id),
- etatimmo_id:this.formData2.etat_immobilisation,
- matricule_auteur:this.afficherActeurDepenseMatricule(this.formData.acteur_depense_id),
- annee:this.exerciceBudgetaireEnCours,
- annee_amortissement:this.anneeAmortissement,
- valeurorigine:this.afficherValeurOrigine,
- date_mise_service:this.formData2.date_mise_service
-};
+//  acteur_id:this.afficherActeurDepenseId(this.detail_Ua.id),
+//  ua_id:this.detail_Ua.id,
+//  unitezone_id:this.formData.uniteZone_id,
+//  fonction_id:this.afficherFonctionId(this.detail_Ua.id),
+//  article_id:this.editService.famille_id,
+//  qte:this.formData.qte_affecte,
+//  dure_vie:this.afficherDureeVieFamille(this.editService.famille_id),
+// //  etatimmo_id:this.formData2.etat_immobilisation,
+//  matricule_auteur:this.afficherActeurDepenseMatricule(this.afficherActeurDepenseId(this.detail_Ua.id)),
+//  annee:this.exerciceBudgetaireEnCours,
+//  annee_amortissement:this.anneeAmortissement,
+//  valeurorigine:this.afficherValeurOrigine,
+//  date_mise_service:this.formData2.date_mise_service
+// };
 
 
-this.ajouterHistotorisqueAffection(nouveauObjetDemande)
-      this.modifierStock(nouvelobjet8)
-this.modifierActeurDepenses(nouvelobjet2)
+// this.ajouterHistotorisqueAffection(nouveauObjetDemande)
+    this.modifierStockArticle(nouvelobjet8)
+// this.modifierActeurDepenses(nouvelobjet2)
 
-  this.getActeur()
-    this.allActeurDepense()
-    this.getActPersonnel()
+ 
     this.modifierImmobilisation(nouvelObjet3);
 
      this.$("#exampleModal").modal('hide');
@@ -2109,57 +2289,58 @@ var nouvelobjet9 ={
  quantitestock:this.afficherQteEnStock,
   qtesortie:this.afficherQteSortir
 }
-var nouvelobjet4 ={
-  ...this.formData,
- normeequipement:this.afficherNombreEquipementRestant,
- montantequipement:this.afficherMontantRestant
-}
+// var nouvelobjet4 ={
+//   ...this.formData,
+//  normeequipement:this.afficherNombreEquipementRestant,
+//  montantequipement:this.afficherMontantRestant
+// }
       var nouvelObjet = {
-        ...this.formData2,
+        ...this.formData,
         
         prixUnitaire: this.coutMonenArticle,
         valeurorigine: this.afficherValeurOrigine,
-       
+       typebien_id:this.afficherTypeDebien(this.editService.model_id),
         exercice_budgetaire:this.exerciceBudgetaireEnCours,
       duree:this.afficherDureeVieFamille(this.editService.famille_id),
-      acteurdepense_id : this.formData.acteur_depense_id,
-     	uniteadministrative_id:this.formData.unite_administrative_id,
-      service_id:this.formData.service_id,
-      fonction_id:this.formData.fonction_id,
+      acteurdepense_id : this.afficherActeurDepenseId(this.detail_Ua.id),
+     	uniteadministrative_id:this.detail_Ua.id,
+     // service_id:this.formData.service_id,
+      fonction_id:this.afficherFonctionId(this.detail_Ua.id),
       anneamortiss:this.anneeAmortissement,
       
-      unitezon_id:this.formData.uniteZone_id,
+     // unitezon_id:this.formData.uniteZone_id,
       qte_reel:this.afficherQuantiteEnRequise(this.editService.famille_id),
      qte_affecte:this.nombreAffecter,
      total_actuel:this.afficherPrixActuelResteACouvert,
-     qte_actuel:this.afficherQteResteACouvert
+     qte_actuel:this.afficherQteResteACouvert,
+     famillearticle_id:this.editService.famille_id,
+marque_id:this.editService.marque_id,
+	model_id:this.editService.model_id,
 
       };
-       var ObjetDemande = {
-       ...this.formData,
-       ...this.formData2,
- acteur_id:this.formData.acteur_depense_id,
- ua_id:this.formData.unite_administrative_id,
- unitezone_id:this.formData.uniteZone_id,
- fonction_id:this.formData.fonction_id,
- article_id:this.editService.famille_id,
- qte:this.formData2.qte_affecte,
- dure_vie:this.afficherDureeVieFamille(this.editService.famille_id),
- etatimmo_id:this.formData2.etat_immobilisation,
- matricule_auteur:this.afficherActeurDepenseMatricule(this.formData.acteur_depense_id),
- annee:this.exerciceBudgetaireEnCours,
-annee_amortissement:this.anneeAmortissement,
-valeurorigine:this.afficherValeurOrigine,
- date_mise_service:this.formData2.date_mise_service
-};
+//        var ObjetDemande = {
+//        ...this.formData,
+//        ...this.formData2,
+//  acteur_id:this.afficherActeurDepenseId(this.detail_Ua.id),
+//  ua_id:this.detail_Ua.id,
+//  unitezone_id:this.formData.uniteZone_id,
+//  fonction_id:this.afficherFonctionId(this.detail_Ua.id),
+//  article_id:this.editService.famille_id,
+//  qte:this.formData.qte_affecte,
+//  dure_vie:this.afficherDureeVieFamille(this.editService.famille_id),
+// //  etatimmo_id:this.formData2.etat_immobilisation,
+//  matricule_auteur:this.afficherActeurDepenseMatricule(this.afficherActeurDepenseId(this.detail_Ua.id)),
+//  annee:this.exerciceBudgetaireEnCours,
+// annee_amortissement:this.anneeAmortissement,
+// valeurorigine:this.afficherValeurOrigine,
+//  date_mise_service:this.formData2.date_mise_service
+// };
 
 
-this.ajouterHistotorisqueAffection(ObjetDemande)
-       this.modifierStock(nouvelobjet9)
-this.modifierActeurDepenses(nouvelobjet4)
-  this.getActeur()
-    this.allActeurDepense()
-    this.getActPersonnel()
+// this.ajouterHistotorisqueAffection(ObjetDemande)
+this.modifierStockArticle(nouvelobjet9)
+//this.modifierActeurDepenses(nouvelobjet4)
+  
     this.ajouterImmobilisation(nouvelObjet);
 this.$("#exampleModal").modal('hide');
      
@@ -2245,7 +2426,7 @@ formatageSomme:formatageSomme,
   margin: 0 -45%;
 }
 .valDirecteur{
-  width:70%;
-  margin:0 -35%;
+  width:80%;
+  margin:0 -40%;
 }
 </style>

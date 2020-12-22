@@ -773,7 +773,10 @@ export const GroupeUaReceptrice = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.transferts, "unitezone_id");
 };
-
+export const groupStockArticle = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.GestionStockageArticles, "marque_id");
+};
 
 
 
