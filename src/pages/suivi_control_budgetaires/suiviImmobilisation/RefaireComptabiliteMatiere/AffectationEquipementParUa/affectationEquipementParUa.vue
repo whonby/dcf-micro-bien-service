@@ -192,11 +192,11 @@
             <label class="control-label">Date de transfert</label>
             <div class="controls">
               <input
-                type="text"
+                type="date"
                 
                 class="span4"
                 v-model="formData.date_transfert"
-                readonly
+                
               />
             </div>
           </div>
