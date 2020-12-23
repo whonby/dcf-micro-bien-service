@@ -766,6 +766,10 @@ SommeDesLots(){
     this.editor = this.getMarchePersonnaliser.find(item=>item.id==index)
   },
   modification(){
+        let attribution=this.editor.attribue
+        if(this.editor.attribue<1){
+            attribution=1
+        }
       let objet={
         id:this.editor.id,
         objet:this.editor.objet,
@@ -779,7 +783,7 @@ SommeDesLots(){
         longitude:this.editor.longitude,
         sib:this.editor.sib,
         numero_lot:this.editor.numero_lot,
-        //  attribue:1,
+        attribue:attribution,
         infrastructure_id:this.afficheIdInfrasture(this.macheid)
       }
 
