@@ -19,7 +19,7 @@ Modification dossier candidat
           <th>Adresse</th>
           <th>Email</th>
           <th>Appel Offre</th>
-          <th>Procedure</th>
+          <th>Procédure</th>
           <th style="">Etat d'enregistrement</th>
           <th>Action</th>
         </tr>
@@ -87,7 +87,7 @@ Modification dossier candidat
             <td>
 
               <div class="control-group">
-                <label class="control-label">Quantite :</label>
+                <label class="control-label">Quantité :</label>
                 <div class="controls">
                   <input type="number" class="span" placeholder="quantite" v-model="formOffreFinanciere.quantite">
                 </div>
@@ -536,7 +536,7 @@ Modification dossier candidat
             <tr>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Capacite financiere :</label>
+                  <label class="control-label">Capacité financière :</label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Capacite financiere" v-model="edit_offre_technique_recupere.capacite_financiere">
                   </div>
@@ -1194,7 +1194,7 @@ Modification dossier candidat
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Capacite finanancier</label>
+                <label class="control-label">Capacité financière</label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Capacite financement" v-model="editDossierCadidature.capacite_financement">
                 </div>
