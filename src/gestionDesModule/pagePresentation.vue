@@ -233,7 +233,7 @@
 
                                   <div class="row-fluid">
 
-                                      <div class="span4"  @click="goToModule(1)">
+                                      <div class="span4"  @click="goToModule(1)" v-if="!noDCfNoAdmin">
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
                                               <div class="timeline-text">
@@ -277,7 +277,7 @@
 
 <script>
 import { mapGetters,mapActions} from "vuex";
-import {admin,dcf} from '../../src/Repositories/Auth';
+import {admin,dcf,noDCfNoAdmin} from '../../src/Repositories/Auth';
 import Pusher from 'pusher-js';
 //import listeUaDeComptabiliteMatiere from '../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/dossierListeUaDeComptabilteMatier/listeUaDeComptabiliteMatiere'
 // import {admin,dcf,cf,noDCfNoAdmin} from "../Repositories/Auth"
@@ -548,6 +548,7 @@ this.getMembreCojo()
         },
 
   computed:{
+      noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("uniteadministrative", [
                 "acteCreations",
                 "typeTextes",
@@ -626,6 +627,7 @@ return objJson.id
   methods:{
  admin:admin,
      dcf:dcf,
+
     ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",'getGroupe',"getMenu","getModule",
     "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf"]),
       ...mapActions('parametreGenerauxFonctionnelle', 

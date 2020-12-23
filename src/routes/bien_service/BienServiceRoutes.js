@@ -91,12 +91,16 @@ import imageMarche from "../../pages/bien_service/contractualisation/DossierExec
 import DetailImageMarche from "../../pages/ImageMarche/DetailImageMarche"
 import ListeImageMarche from "../../pages/ImageMarche/ListeImageMarche"
 import TableauBordGestionMarche from "../../pages/TableauBord/TableauBordGestionMarche.vue"
-
+import TableauBordFinancier from "../../pages/TableauBord/TableauBordFinancier"
 
 
 import DetailInforTableBordUniteAd from "../../pages/TableauBord/DetailInforTableBordUniteAd"
 const BienServiceRoutes = [
-
+    {
+        path:"/tableau-bord-financier",
+        name:"TableauBordFinancier",
+        component:TableauBordFinancier
+    },
     {
         path:"/table_bord_gestion_marche_hors_sib/:id",
         name:"DetailInforTableBordUniteAd",

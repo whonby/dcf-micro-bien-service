@@ -15,7 +15,7 @@
                     <table class="table table-striped"  style="background: #f0c71d !important;">
                         <tbody>
                         <tr>
-                            <td style="background: #f0c71d !important;">
+                            <td style="background: #f0c71d !important;" v-if="!noDCfNoAdmin">
 
                                 <label>CF<a href="#" @click.prevent="videTypeCF()" v-if="controlleur_fin" style="color: red"><i class="fa fa-trash-o"></i></a></label>
                                 <model-list-select style="background-color: #fff;"
@@ -306,6 +306,23 @@
                             <div class="icon2">
 
                                 {{formatageSomme(montantPasStatusExecutionAcheve(7))}} / {{pourcentageMontantExcuteAcheve(7)}}%
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff ">
+                        <div  class="card-box bg-en-avenant" style="height: 90px !important; cursor: grab !important;">
+                            <div class="inner">
+                                <p> Avenant </p>
+
+                            </div>
+                            <div class="icon3">
+
+                                {{nbreAvenant}}
+                            </div>
+                            <div class="icon2">
+                                {{formatageSomme(montantAvenant)}} / {{pourcentageMontantAvenant}}%
                             </div>
 
                         </div>
@@ -939,7 +956,7 @@
 <script>
     import VueApexCharts from 'vue-apexcharts'
     import { mapGetters,mapActions } from "vuex";
-    import {noDCfNoAdmin} from "../../Repositories/Auth"
+    import {noDCfNoAdmin,dcf} from "../../Repositories/Auth"
     import {formatageSomme} from '../../Repositories/Repository'
     import {  ModelListSelect } from 'vue-search-select'
     import 'vue-search-select/dist/VueSearchSelect.css'
@@ -1030,6 +1047,7 @@ console.log(this.listeMarchStatueExecuteAcheve)
               })
             },
             noDCfNoAdmin:noDCfNoAdmin,
+            dcf:dcf,
             regions(){
                 // console.log(this.localisations_geographiques.filter(item=>item.structure_localisation_geographique.niveau==2))
                 return this.localisations_geographiques.filter(item=>{
@@ -1411,6 +1429,49 @@ console.log(this.listeMarchStatueExecuteAcheve)
                 return 0;
             },
 
+            nbreAvenant(){
+                if(this.objetMarchePasUniteOuRegion.length>0){
+                 let vm=this;
+                    let nbr=0;
+                    this.objetMarchePasUniteOuRegion.forEach(function (val) {
+                        let objetAvenant=vm.avenants.filter(item=>item.marche_id==val.id).length
+
+                        if(objetAvenant!=undefined){
+                            nbr=nbr + objetAvenant
+                        }
+
+                    })
+                    return nbr
+                }
+                return 0;
+            },
+            montantAvenant(){
+                if(this.objetMarchePasUniteOuRegion.length>0){
+                    //acteEffetFinanciers
+                    let vm=this;
+                    //let montantTotal=0;
+                    let montant_tatal=0;
+                    this.objetMarchePasUniteOuRegion.forEach(function (val) {
+
+                        let montant_avenant=0;
+                        let objetAvenant=vm.avenants.filter(item=>item.marche_id==val.id)
+                        if(objetAvenant!=undefined){
+                            let initeVal = 0;
+                            montant_avenant=objetAvenant.reduce(function (total, currentValue) {
+                                return total + parseFloat(currentValue.montant_avenant) ;
+                            }, initeVal);
+                        }
+                        montant_tatal=parseFloat(montant_tatal)+parseFloat(montant_avenant)
+                    })
+                    return montant_tatal
+                }
+                return 0;
+            },
+            pourcentageMontantAvenant(){
+                let taux=(this.montantAvenant * 100)/this.montantApprouveMarche
+
+                return taux.toFixed(2)
+            },
             montantExecute(){
                 if(this.objetMarchePasUniteOuRegion.length>0){
                     let montant_execute=0;
@@ -2391,6 +2452,9 @@ console.log(this.listeMarchStatueExecuteAcheve)
 
     .bg-en-souffrance {
         background-color: red !important;
+    }
+    .bg-en-avenant{
+        background-color: #ff6c1d !important;
     }
     .bg-acheve-delais {
         background-color: #757171 !important;
