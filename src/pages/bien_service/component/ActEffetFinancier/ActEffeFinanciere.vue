@@ -135,7 +135,7 @@
               <div class="control-group">
                 <label class="control-label">Date signature autorité contractante </label>
                 <div class="controls">
-                  <input type="text" v-model="editActeEffetFinancier.reference_act"
+                  <input type="date" v-model="editActeEffetFinancier.reference_act"
                          class="span"
                          placeholder="refence acte"
                   />
@@ -788,7 +788,7 @@
               <div class="control-group">
                 <label class="control-label">Date signature autorité contractante </label>
                 <div class="controls">
-                  <input type="text" v-model="formEffetFinancier.reference_act"
+                  <input type="date" v-model="formEffetFinancier.reference_act"
                          class="span"
                          placeholder="refence acte"
                   />
@@ -1324,7 +1324,7 @@ editAfficherMontantRetenueGarantie
               <div class="control-group">
                 <label class="control-label">Date signature autorité contractante </label>
                 <div class="controls">
-                  <input type="text" v-model="editEffetFinancier.reference_act"
+                  <input type="date" v-model="editEffetFinancier.reference_act"
                          class="span"
                          placeholder="refence acte"
                   />

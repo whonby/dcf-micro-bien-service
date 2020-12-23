@@ -27,8 +27,9 @@
                 <th title="Sous Prefecture">S/P</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
+                <th>Livrables</th>
                 <th>Montant estimatif en FCFA TTC</th>
-
+                
 
                 <th>Action</th>
               </tr>
@@ -57,9 +58,13 @@
                 <td @dblclick="editeMarcheLot(marche.id)">
                   {{marche.longitude || 'Non renseigné'}}
                 </td>
+                 <td @dblclick="editeMarcheLot(marche.id)">
+                  {{marche.livrable || 'Non renseigné'}}
+                </td>
                 <td @dblclick="editeMarcheLot(marche.id)" style="text-align: center;color:#000000;font-weight:bold;">
                   {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}
                 </td>
+                
                 <td>
                   <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                     <span class=""><i class="icon-trash"></i></span></button>
@@ -72,6 +77,7 @@
                  <td></td>
                  <td></td>
                  <td></td>
+                  <td></td>
                  <td style="font-weight:bold;">Total</td>
                  <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesLots(macheid)))}}</td>
                  <td></td>
@@ -96,7 +102,7 @@
       <table class="table table-bordered table-striped">
         <tr>
 <td><div class="control-group">
-                        <label class="control-label">Numero du lot</label>
+                        <label class="control-label">Numéro du lot</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -123,7 +129,7 @@
         </tr>
         <tr>
            <td><div class="control-group">
-                        <label class="control-label">Montant du Lot</label>
+                        <label class="control-label">Montant estimatif du Lot</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -165,7 +171,7 @@
        </div>
                         </div></td>
                         <td><div class="control-group">
-                        <label class="control-label">Départment</label>
+                        <label class="control-label">Département</label>
                          <div class="controls">
         
                <select v-model="formData.departement_id" class="span" :readOnly="deveroiullage">
@@ -180,7 +186,7 @@
           
                         
                         <td><div class="control-group">
-                        <label class="control-label">Sous/Préfecture</label>
+                        <label class="control-label">Sous-Préfecture</label>
                          <div class="controls">
        
                <select v-model="formData.sous_prefecture_id" class="span" :readOnly="deveroiullageSousprefecture">
@@ -215,7 +221,7 @@
         </tr>
         <tr>
           <td><div class="control-group">
-                        <label class="control-label">Beneficiaire</label>
+                        <label class="control-label">Bénéficiaires</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -226,7 +232,7 @@
                         </div>
                         </div></td>
                         <td colspan="2"><div class="control-group">
-                        <label class="control-label">Livrable</label>
+                        <label class="control-label">Livrables</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -261,7 +267,7 @@
        <table class="table table-bordered table-striped">
         <tr>
 <td><div class="control-group">
-                        <label class="control-label">Numero du lot</label>
+                        <label class="control-label">Numéro du lot</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -288,7 +294,7 @@
         </tr>
         <tr>
            <td><div class="control-group">
-                        <label class="control-label">Montant du Lot</label>
+                        <label class="control-label">Montant estimatif du Lot</label>
                         <div class="controls">
                             <input
                                     type="number"
@@ -311,7 +317,7 @@
        </div>
                         </div></td>
                         <td><div class="control-group">
-                        <label class="control-label">Départment</label>
+                        <label class="control-label">Département</label>
                          <div class="controls">
         
                <select v-model="editor.departement_id" class="span" :readOnly="deveroiullage">
@@ -326,7 +332,7 @@
           
                         
                         <td><div class="control-group">
-                        <label class="control-label">Sous/Préfecture</label>
+                        <label class="control-label">Sous-Préfecture</label>
                          <div class="controls">
        
                <select v-model="editor.sous_prefecture_id" class="span" :readOnly="deveroiullageSousprefecture">
@@ -361,7 +367,7 @@
         </tr>
          <tr>
           <td><div class="control-group">
-                        <label class="control-label">Beneficiaire</label>
+                        <label class="control-label">Bénéficiaires</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -372,7 +378,7 @@
                         </div>
                         </div></td>
                         <td colspan="2"><div class="control-group">
-                        <label class="control-label">Livrable</label>
+                        <label class="control-label">Livrables</label>
                         <div class="controls">
                             <input
                                     type="text"
