@@ -687,7 +687,7 @@ montant_act_ht
             console.log(this.detailAvenant)
              //console.log(this.detailActeEffet)
            //console.log(this.getMandatPersonnaliserVise)
-            this.detailDecompte=this.getMandatPersonnaliserVise.filter(item=>item.marche_id==this.$route.params.id).reverse()
+            this.detailDecompte=this.decomptefactures.filter(item=>item.marche_id==this.$route.params.id).reverse()
             if(this.detailDecompte){
              this.dernierDecompte=this.detailDecompte[0]
              //   console.log(this.getterCojos)
@@ -713,7 +713,13 @@ montant_act_ht
                 "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser",
                 "typeActeEffetFinanciers","personnaliseGetterMarcheBailleur","getterMandate",
                 "getActeEffetFinancierPersonnaliserContrat","getterCojos","getterDemandeAno","getterAnoDMPBailleur"]),
-
+            ...mapGetters("uniteadministrative", [
+                "acteCreations",
+                "typeTextes",
+                "uniteAdministratives",
+                "getterBudgeCharge",
+                "decomptefactures"
+            ]),
             ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
 
             ...mapGetters('uniteadministrative',[

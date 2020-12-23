@@ -61,6 +61,10 @@
                   {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}
                 </td>
                 <td>
+                    <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                                 class="btn btn-inverse " title="Cycle de vie du marche">
+                        <span class=""><i class=" icon-calendar"></i></span>
+                    </router-link>
                   <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                     <span class=""><i class="icon-trash"></i></span></button>
                 </td>

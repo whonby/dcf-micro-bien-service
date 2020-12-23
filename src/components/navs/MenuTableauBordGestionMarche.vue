@@ -3,7 +3,7 @@
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
        <li>
-            <router-link :to="{name: 'ficheReparationVehicule'}" tag="a">
+            <router-link :to="{name: 'TableauBordGestionMarche'}" tag="a">
                 INFORMATIONS GENERALES
             </router-link>
           </li>
@@ -32,7 +32,11 @@
 <!--                PRESTATIONS INTELLECTUELLES-->
 <!--            </router-link>-->
 <!--        </li>-->
-
+<!--        <li>-->
+<!--            <router-link :to="{name: 'TableauBordFinancier'}" tag="a">-->
+<!--                Tableau de bord financier-->
+<!--            </router-link>-->
+<!--        </li>-->
         <li>
             <router-link :to="{name: 'ficheReparationVehicule'}" tag="a">
                 LES DELAIS
