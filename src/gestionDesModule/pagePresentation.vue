@@ -1,107 +1,274 @@
 <template>
 
     <div>
-<!--      <div class="row-fluid" style="background: #fff">-->
-<!--        <div class="span10" align="center">   <h5 >MENU GENERAL DU SID-CF</h5></div>-->
-<!--        <div class="span2" align="right">  <router-link :to="{ name: 'Login'}" tag="a" style="text-align: right;color:red;">-->
-<!--          <h5 >Se Déconnecté</h5>-->
 
-<!--        </router-link>-->
-<!--        </div>-->
-<!--      </div>-->
-<br>
-<br>
-      <table class="table " style="background-color: #000000;">
-        <tr style="background-color: #000000;">
-          <td style="border: 3px solid #ffffff;">
-            <center>
-      <router-link tag="a" :to="{ name: 'photoProfil' }">
-        <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">
-        </router-link>
-      <h6 style="color:#fff;font-size:14px;text-align:center;">{{afficheNomUtilisateur}}</h6>
-  
-		</center>
-           
-       <router-link :to="{ name: 'Login'}" tag="a" style="color:#fff;width:20%;text-align:center;">
-              <h5 >Se déconnecter</h5>
 
-            </router-link>
-          </td>
-          <td style="width:88%;text-align: center;font-size:20px;padding:50px 50px;font-weight:bold; color: #fff">
-            <P>SYSTEME D'INFORMATION DECISIONNEL DU CONTRÖLEUR FINANCIER  </P>
-            <P>(SID-CF)</P>
-          </td>
 
-         <!-- <td style="border: 2px solid;">
-            <center>
-      <router-link tag="a" :to="{ name: 'photoProfil' }">
-        <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">
-        </router-link>
-      <h6 style="color:#fff;font-size:14px;text-align:center;">{{afficheNomUtilisateur}}</h6>
-  
-		</center>
-           
-       <router-link :to="{ name: 'Login'}" tag="a" style="color:green;width:20%;text-align:center;">
-              <h5 >Se déconnecter</h5>
+<br><br>
 
-            </router-link>
-          </td> -->
-        </tr>
-      </table>
-      
-      <div id="loginbox" class="spinner-border text-primary" >
+        <table class="table " style="background-color: #006400;">
+            <tr style="background-color: #006400;">
+                <td style="border: 3px solid #ffffff;">
+                    <center>
+                        <router-link tag="a" :to="{ name: 'photoProfil' }">
+                            <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">
+                        </router-link>
+                        <h6 style="color:#fff;font-size:14px;text-align:center;">{{afficheNomUtilisateur}}</h6>
+
+                    </center>
+
+                    <router-link :to="{ name: 'Login'}" tag="a" style="color:#fff;width:20%;text-align:center;">
+                        <h5 >Se déconnecter</h5>
+
+                    </router-link>
+                </td>
+                <td style="width:88%;text-align: center;font-size:20px;padding:50px 50px;font-weight:bold; color: #fff">
+                    <P>SYSTEME D'INFORMATION DECISIONNEL DU CONTRÔLEUR FINANCIER  </P>
+                    <P>(SID-CF)</P>
+                </td>
+
+                <!-- <td style="border: 2px solid;">
+                   <center>
+             <router-link tag="a" :to="{ name: 'photoProfil' }">
+               <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">
+               </router-link>
+             <h6 style="color:#fff;font-size:14px;text-align:center;">{{afficheNomUtilisateur}}</h6>
+
+               </center>
+
+              <router-link :to="{ name: 'Login'}" tag="a" style="color:green;width:20%;text-align:center;">
+                     <h5 >Se déconnecter</h5>
+
+                   </router-link>
+                 </td> -->
+            </tr>
+        </table>
+
+
+<!--        <table class="table " style="background-color: black;">-->
+<!--            <tr style="background-color: black;">-->
+<!--                <td style="border: 3px solid #ffffff;">-->
+<!--                    <center>-->
+<!--                        <router-link tag="a" :to="{ name: 'photoProfil' }">-->
+<!--                            <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">-->
+<!--                        </router-link>-->
+<!--                        <h6 style="color:#fff;font-size:14px;text-align:center;">{{afficheNomUtilisateur}}</h6>-->
+
+<!--                    </center>-->
+
+<!--                    <router-link :to="{ name: 'Login'}" tag="a" style="color:#fff;width:20%;text-align:center;">-->
+<!--                        <h5 >Se déconnecter</h5>-->
+
+<!--                    </router-link>-->
+<!--                </td>-->
+<!--                <td style="width:88%;text-align: center;font-size:20px;padding:50px 50px;font-weight:bold; color: #fff">-->
+<!--                    <P>SYSTEME D'INFORMATION DECISIONNEL DU CONTRÔLEUR FINANCIER  </P>-->
+<!--                    <P>(SID-CF)</P>-->
+<!--                </td>-->
+
+<!--                &lt;!&ndash; <td style="border: 2px solid;">-->
+<!--                   <center>-->
+<!--             <router-link tag="a" :to="{ name: 'photoProfil' }">-->
+<!--               <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">-->
+<!--               </router-link>-->
+<!--             <h6 style="color:#fff;font-size:14px;text-align:center;">{{afficheNomUtilisateur}}</h6>-->
+
+<!--               </center>-->
+
+<!--              <router-link :to="{ name: 'Login'}" tag="a" style="color:green;width:20%;text-align:center;">-->
+<!--                     <h5 >Se déconnecter</h5>-->
+
+<!--                   </router-link>-->
+<!--                 </td> &ndash;&gt;-->
+<!--            </tr>-->
+<!--        </table>-->
+      <div id="loginbox"  >
 
 
         <!-- <h3 style="text-align:center;color:#ffffff;">TABLEAU DE BORD GENERAL</h3> -->
         <div class="row-fluid form " >
-      <div class="span16">
-        <div class="quick-actions_homepage">
+      <div class="span12">
+
+<!--        <div class="quick-actions_homepage">-->
 
 
-          
-          <div >
-            <ul class="quick-actions" >
-                <li class="bg_lg span3" >
-                     <router-link :to="{ name: 'TableauDeBordG', params: {id:1}}" tag="a"  style="color:black;">
-                <h4>PARAMETRES</h4> <i class="icon-cogs"></i><h4> GENERAUX</h4>
-                
-                </router-link> 
-                </li>
-  <li class="bg_lg span3" > 
-     <router-link :to="{ name: 'TableauDeBordG', params: {id:2}}" tag="a"  style="color:black;">
-      <h4>UNITES </h4> <i class="icon-home"></i> <h4> ADMINISTRATIVES</h4>      </router-link> </li>
-       <li class="bg_lg span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:3}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4> SIB</h4></router-link> </li>
-      <!-- <li class="bg_lg span3" > 
-     <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;">
-      <h4>GESTION DU </h4> <i class="icon-group"></i> <h4> PERSONNEL</h4>      </router-link> </li> -->
-      
-            </ul>
-            <br>
-<br>
 
-            <ul class="quick-actions" >
-              
-    <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:4}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4>HORS SIB</h4></router-link> </li>
-  <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>CARTOGRAPHIES </h4> <i class="icon-globe"></i><h4>DES BUDGETS ET DES MARCHES</h4></router-link> </li>
-           <!-- <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:8}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class="icon-book"></i><h4> DES VEHICULES</h4></router-link> </li> -->
-           <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;"><h4>GESTION DES </h4> <i class="icon-book"></i><h4> RAPPORTS</h4></router-link> </li>
-            </ul>
-            <br>
-<br>
 
-            <ul class="quick-actions" >
-              
-    <!-- <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:8}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class="icon-book"></i><h4> DES VEHICULES</h4></router-link> </li> -->
-           <!-- <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;"><h4>GESTION DES </h4> <i class="icon-book"></i><h4> RAPPORTS</h4></router-link> </li> -->
-            </ul>
-          </div>
-        </div>
+<!--          <div >-->
+<!--            <ul class="quick-actions" >-->
+<!--                <li class="bg_lg span3" v-if="admin() || dcf()">-->
+<!--                     <router-link :to="{ name: 'TableauDeBordG', params: {id:1}}" tag="a"  style="color:black;">-->
+<!--                <h4>PARAMETRES</h4> <i class="icon-cogs"></i><h4> GENERAUX</h4>-->
+
+<!--                </router-link>-->
+<!--                </li>-->
+
+<!--   <li class="bg_lg span3" >-->
+<!--     <router-link :to="{ name: 'TableauDeBordG', params: {id:2}}" tag="a"  style="color:black;">-->
+<!--      <h4>UNITES </h4> <i class="icon-home"></i> <h4> ADMINISTRATIVES</h4>      </router-link> </li>-->
+<!--       <li class="bg_lg span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:3}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4> SIB</h4></router-link> </li>-->
+
+<!--            </ul>-->
+
+
+<!--            <ul class="quick-actions" >-->
+<!--               <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:4}}" tag="a"  style="color:black;"><h4>GESTION </h4> <i class=" icon-folder-open"></i><h4>HORS SIB</h4></router-link> </li>-->
+
+<!--  <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:5}}" tag="a"  style="color:black;"><h4>CARTOGRAPHIES </h4> <i class="icon-globe"></i><h4>DES BUDGETS ET DES MARCHES</h4></router-link> </li>-->
+<!--           <li class="bg_lo span3"> <router-link :to="{ name: 'liste_ua_compta'}" tag="a"  style="color:black;"><h4>COMPTABILITE </h4> <i class="icon-book"></i><h4> DES MATIERES</h4></router-link> </li>-->
+<!--           &lt;!&ndash; <listeUaDeComptabiliteMatiere></listeUaDeComptabiliteMatiere> &ndash;&gt;-->
+
+<!--            </ul>-->
+<!--            <br>-->
+<!--<br>-->
+
+<!--            <ul class="quick-actions" >-->
+<!--               <li class="bg_lo span3">-->
+<!--                 <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;"><h4>GESTION DES </h4> <i class="icon-book"></i><h4> RAPPORTS</h4></router-link> </li>-->
+<!--           &lt;!&ndash; <li class="bg_lo span3"> <router-link :to="{ name: 'TableauDeBordG', params: {id:7}}" tag="a"  style="color:black;"><h4>GESTION DES </h4> <i class="icon-book"></i><h4> RAPPORTS</h4></router-link> </li> &ndash;&gt;-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+          <section class="timeline_area section_padding_130">
+              <div class="">
+                  <div class="row-fluid">
+                      <div class="span12">
+                          <!-- Timeline Area-->
+                          <div class="">
+                              <!-- Single Timeline Content-->
+                              <div class="single-timeline-area">
+
+                                  <div class="row-fluid">
+                                      <div class="span4" @click="goToModule(2)">
+                                          <div  class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft; ">
+
+                                              <div class="timeline-text" style="margin-top: -18px">
+                                                  <h5>UNITES ADMINISTRATIVE (UA)</h5>
+                                                  <div>
+                                                      <i style="font-size: 35px !important;" class="icon-home"></i>
+                                                  </div>
+                                                  <p>Présente la gestion des unités administratives et la gestion du budget (planification et exécution).</p>
+                                              </div>
+                                          </div>
+                                      </div>
+<!--                                      <div class="span4">-->
+<!--                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">-->
+<!--                                              <div class="timeline-icon"><i class="fa fa-archive" aria-hidden="true"></i></div>-->
+<!--                                              <div class="timeline-text">-->
+<!--                                                  <h6>Fixed bug</h6>-->
+<!--                                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
+<!--                                              </div>-->
+<!--                                          </div>-->
+<!--                                      </div>-->
+                                      <div class="span4" @click="goToModule(3)">
+                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInLeft;">
+
+                                              <div class="timeline-text" style="margin-top: -18px">
+                                                  <h5>GESTION SIB</h5>
+                                                  <div>
+                                                      <i style="font-size: 35px !important;" class="icon-book"></i>
+                                                  </div>
+                                                  <p> Gérer l’ensemble des transactions effectuées par les UA liées au SIB (Système d’Information Budgétaire).</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="span4"  @click="goToModule(4)">
+                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
+<!--                                              <div class="timeline-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>-->
+                                              <div class="timeline-text" style="margin-top: -18px">
+                                                  <h5>GESTION HORS SIB</h5>
+                                                  <div>
+                                                      <i style="font-size: 35px !important;" class="icon-folder-open"></i>
+                                                  </div>
+                                                  <p>Gérer l’ensemble des transactions effectuées par les UA non liées au SIB .</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <!-- Single Timeline Content-->
+                              <div class="single-timeline-area">
+                                  <div class="row-fluid">
+
+                                      <div class="span4"  @click="goToModule(5)">
+                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
+<!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
+                                              <div class="timeline-text" style="margin-top: -18px">
+                                                  <h5>CARTOGRAPHIES DU BUDGETS ET DES MARCHES</h5>
+                                                  <div>
+                                                      <i style="font-size: 35px !important;" class="icon-globe"></i>
+                                                  </div>
+                                                  <p> Présente la Géolocalisation et l’analyse spatiale des opérations budgétaires des UA dans le monde</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="span4"  @click="goToModule(8)">
+                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
+<!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
+                                              <div class="timeline-text" style="margin-top: -18px">
+                                                  <h5>COMPTABILITE DES MATIERES</h5>
+                                                  <div>
+                                                      <i style="font-size: 35px !important;" class="icon-home"></i>
+                                                  </div>
+                                                  <p>Présente la gestion des immobilisations (corporelles et incorporelles) des unités administratives.</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="span4"  @click="goToModule(7)">
+                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
+<!--                                              <div class="timeline-icon"><i class="fa fa-id-card" aria-hidden="true"></i></div>-->
+                                              <div class="timeline-text" style="margin-top: -18px">
+                                                  <h5>GESTION DES RAPPORTS</h5>
+                                                  <div>
+                                                      <i style="font-size: 35px !important;" class="icon-file"></i>
+                                                  </div>
+                                                  <p> Présentation des rapports</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <!-- Single Timeline Content-->
+                              <div class="single-timeline-area">
+
+                                  <div class="row-fluid">
+
+                                      <div class="span4"  @click="goToModule(1)">
+                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
+<!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
+                                              <div class="timeline-text">
+                                                  <h5>PARAMETRES GENERAUX</h5>
+                                                  <div>
+                                                      <i style="font-size: 35px !important;" class="icon-cogs"></i>
+                                                  </div>
+                                                  <p> Permet de codifier les données de base</p>
+                                              </div>
+                                          </div>
+                                      </div>
+<!--                                      <div class="span4">-->
+<!--                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInLeft;">-->
+<!--                                              <div class="timeline-icon"><i class="fa fa-picture-o" aria-hidden="true"></i></div>-->
+<!--                                              <div class="timeline-text">-->
+<!--                                                  <h6>Reach 500 Users</h6>-->
+<!--                                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
+<!--                                              </div>-->
+<!--                                          </div>-->
+<!--                                      </div>-->
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
       </div>
-      
+
     </div>
 
 
       </div>
+
+
     </div>
 
 
@@ -110,11 +277,14 @@
 
 <script>
 import { mapGetters,mapActions} from "vuex";
+import {admin,dcf} from '../../src/Repositories/Auth';
 import Pusher from 'pusher-js';
-
+//import listeUaDeComptabiliteMatiere from '../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/dossierListeUaDeComptabilteMatier/listeUaDeComptabiliteMatiere'
 // import {admin,dcf,cf,noDCfNoAdmin} from "../Repositories/Auth"
 export default {
-
+components:{
+  //listeUaDeComptabiliteMatiere
+},
   data(){
     return{
 
@@ -132,9 +302,13 @@ created(){
     this.getAffectation()
 this.getFormeJuridiques()
 this.getRegimeImpositions()
+ this.getGroupe()
     this.getRoles()
     this.getUtilisateurs()
+    this.getMenu()
+    this.getModule()
     this.getEquipeCF()
+    this.getAffectationGroupeUser()
     this.getPlanPassationMarche()
     this.getRapport()
       this.getBudgeChager()
@@ -217,6 +391,9 @@ this.getTypeAppel()
      this.getAllDecompteFacture()
        this.getStructureOrganigrammeUa()
  this.getAllBudgetEclate()
+ this.getVehicule()
+ this.getReparationVehicule()
+ this.getStockArticleUa()
     // this.getAllArchivageDocument();
 this.getAllDirection()
 this.getAllServiceua()
@@ -285,7 +462,16 @@ this.getAllHistoriqueBudgetGeneral()
     this.getAllHistoAffectation();
     this.getAllDemandeMateriel();
     this.getAllHistoAffectationService();
-    
+     this.getMarqueVehicule();
+      this.getModeleVehicule();
+      this.getTypeEntretien();
+      this.getTypeVehicule();
+      this.getTypeEnergie();
+      this.getTypeReparation();
+      this.getAffectationVehicule();
+      this.getTransmissionVeh();
+      this.getAppreciation();
+      this.getFicheArticle()
     //this.getAllAmortissement();
       /**
        * this.
@@ -371,7 +557,6 @@ this.getMembreCojo()
                 "budgetGeneral",
                 "afficheTransfertValider",
                 "transferts"
-
             ]),
             ...mapGetters('personnelUA', ['sauvegardePhoto']),
     ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel","mandats"]),
@@ -382,7 +567,8 @@ this.getMembreCojo()
             ]),
             
       
-      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation",
+      "getterUniteAdministrativeByUser"]),
 
 
 afficherModule1() {
@@ -439,8 +625,10 @@ return objJson.id
   },
 
   methods:{
-
-    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf"]),
+ admin:admin,
+     dcf:dcf,
+    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",'getGroupe',"getMenu","getModule",
+    "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf","getAffectationGroupeUser"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 
@@ -478,7 +666,10 @@ return objJson.id
      "getStructureOrganigrammeUa",
      "getAllBanqueUa",
      "getAllDecompteFacture",
-     "getAllBudgetEclate"
+     "getAllBudgetEclate",
+     "getVehicule",
+     "getReparationVehicule",
+     "getStockArticleUa"
     ]),
             ...mapActions('personnelUA', ["getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -510,7 +701,16 @@ return objJson.id
       "getAllHistoAffectation",
       "getAllDemandeMateriel",
       "getAllHistoAffectationService",
-      
+      "getMarqueVehicule",
+      "getModeleVehicule",
+      "getTypeEntretien",
+      "getTypeVehicule",
+      "getTypeEnergie",
+      "getTypeReparation",
+      "getAffectationVehicule",
+      "getTransmissionVeh",
+      "getAppreciation",
+      "getFicheArticle"
       
     ]),
  ...mapActions('horSib',['getMarcheHorSib',"getRealiteServiceHors","getOpProvisoire"]),
@@ -569,6 +769,55 @@ return objJson.id
     },
 
 
+      goToModule(id){
+     console.log(id)
+     if (id==6){
+         this.$router.push({
+             name: 'liste_ua_compta'
+         })
+     }else{
+
+         this.$router.push({
+             name: 'TableauDeBordG',
+             params:{id:id}
+         })
+     }
+      },
+      // goToGestionSib(){
+      //     this.$router.push({
+      //         name: 'TableauDeBordG',
+      //         params:{id:}
+      //     })
+      // },
+      // goToGestionHorsSib(){
+      //     this.$router.push({
+      //         name: 'TableauDeBordG',
+      //         params:{id:}
+      //     })
+      // },
+      // goToCartographie(){
+      //     this.$router.push({
+      //         name: 'TableauDeBordG',
+      //         params:{id:}
+      //     })
+      // },
+      // goToUniteComptabiliteMatiere(){
+      //     this.$router.push({
+      //         name: 'TableauDeBordG'
+      //     })
+      // },
+      // goToRapport(){
+      //     this.$router.push({
+      //         name: 'TableauDeBordG',
+      //         params:{id:}
+      //     })
+      // },
+      // goToParametreGeneraux(){
+      //     this.$router.push({
+      //         name: 'TableauDeBordG',
+      //         params:{id:}
+      //     })
+      // },
  
   },
   mounted() {
@@ -591,6 +840,9 @@ let vm=this;
 }
 </script>
 <style scoped>
+h4{
+  color:#ffffff
+}
 .flex{
   display: flex;
   flex-flow: row nowrap;
@@ -657,21 +909,162 @@ hr{ border-top-color:#dadada;}
   -webkit-box-shadow: -4px 10px 10px -6px rgba(0,0,0,0.75);
   -moz-box-shadow: -4px 10px 10px -6px rgba(0,0,0,0.75);
   box-shadow: -4px 10px 10px -6px rgba(0,0,0,0.75);
-  background:#ffffff;
+
 
 }
-#loginbox .form{ width:100%; background:#ffffff; position:relative; top:0; left:0; }
+#loginbox .form{ width:100%; background: #fff; position:relative; top:0; left:0; }
 #loginbox .form-actions { padding: 14px 20px 15px;}
 
 
-@media (max-width:1024px){
-  #logo { width: 60%; }
-  #loginbox{ width:80%}
-}
+/*@media (max-width:3000px){*/
+/*  #logo { width: 60%; }*/
+/*  #loginbox{*/
+/*      width: 80%;*/
+/*      top: 75%;*/
+/*      left: 50%;*/
+
+/*  }*/
+/*}*/
 @media (max-width: 480px){
   #logo { width: 40%; }
   #loginbox{ width:90%}
   #loginbox .control-group{ padding:8px 0; margin-bottom:0px;}
+}
+
+
+
+.timeline_area {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+
+
+}
+.single-timeline-area {
+    position: relative;
+    z-index: 1;
+
+}
+@media only screen and (max-width: 575px) {
+    .single-timeline-area {
+        padding-left: 100px;
+    }
+}
+.single-timeline-area .timeline-date {
+    position: absolute;
+    width: 180px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -ms-grid-row-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding-right: 60px;
+}
+@media only screen and (max-width: 575px) {
+    .single-timeline-area .timeline-date {
+        width: 100px;
+    }
+}
+.single-timeline-area .timeline-date::after {
+    position: absolute;
+    width: 3px;
+    height: 100%;
+    content: "";
+    background-color: #ebebeb;
+    top: 0;
+    right: 30px;
+    z-index: 1;
+}
+.single-timeline-area .timeline-date::before {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background-color: #f1c40f;
+    content: "";
+    top: 50%;
+    right: 26px;
+    z-index: 5;
+    margin-top: -5.5px;
+}
+.single-timeline-area .timeline-date p {
+    margin-bottom: 0;
+    color: #020710;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.single-timeline-area .single-timeline-content {
+    position: relative;
+    z-index: 1;
+    padding: 30px 30px 25px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    -webkit-box-shadow: 0 0.25rem 1rem 0 rgba(47, 91, 234, 0.125) !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
+    border: 5px solid orangered;
+    height: 120px !important;
+    text-align: center;
+    background: #FFF !important;
+    color: black !important;
+
+}
+
+.single-timeline-area .single-timeline-content:hover {
+    border: 5px solid green;
+    cursor: grab;
+    background: orangered !important;
+    color: white !important;
+
+}
+@media only screen and (max-width: 575px) {
+    .single-timeline-area .single-timeline-content {
+        padding: 20px;
+    }
+}
+/*.single-timeline-area .single-timeline-content .timeline-icon {*/
+/*  */
+/*    width: 45px;*/
+/*    height: 45px;*/
+/*    background-color: #f1c40f;*/
+/*    -webkit-box-flex: 0;*/
+/*    -ms-flex: 0 0 30px;*/
+
+/*    text-align: center !important;*/
+/*    max-width: 50px;*/
+/*    border-radius: 50%;*/
+
+/*}*/
+.single-timeline-area .single-timeline-content .timeline-icon i {
+    color: #ffffff;
+    line-height: 30px;
+    text-align: center !important;
+}
+.single-timeline-area .single-timeline-content .timeline-text h6 {
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+}
+.single-timeline-area .single-timeline-content .timeline-text p {
+    font-size: 13px;
+    margin-bottom: 0;
+}
+.single-timeline-area .single-timeline-content:hover .timeline-icon,
+.single-timeline-area .single-timeline-content:focus .timeline-icon {
+    background-color: #020710;
+}
+.single-timeline-area .single-timeline-content:hover .timeline-text h6,
+.single-timeline-area .single-timeline-content:focus .timeline-text h6 {
+    color: #3f43fd;
 }
 
 </style>

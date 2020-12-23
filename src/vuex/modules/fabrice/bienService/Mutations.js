@@ -2586,6 +2586,17 @@ export const GET_ALL_RESERVE_CF = (state, tableau_reserve_cf) =>{
 
 
 
+<<<<<<< HEAD
+=======
+   export const MODIFIER_ACTE = (state, elementModif) => {
+    state.acteEffetFinanciers = state.acteEffetFinanciers.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
+>>>>>>> 40dae1ef2263fec3127d1d6a5539f4674dc786aa
 
 export const GET_MARCHE_FILTRE_CARTE_INFRASTRUCTURE = (state,objet) =>{
     state.marcheFiltreCarteInfrastructure = objet

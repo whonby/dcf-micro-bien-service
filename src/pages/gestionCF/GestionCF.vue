@@ -370,7 +370,17 @@
             },
             ajouterCF(){
                 this.ajouterUtilisateur(this.formData)
+                 this.formData={
+                     email:"",
+                    name:"",
+                    role_id:"",
+                    matricule:""
+                 }
                 this.$('#exampleModal').modal('hide');
+            },
+            modifier(){
+                this.modifierUtilisateur(this.editTitre)
+                this.$('#modifierModal').modal('hide');
             },
             afficherModalModifierTitre(id){
 

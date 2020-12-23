@@ -100,6 +100,9 @@ decision_cf
                       <li>
                         <a data-toggle="tab" href="#tab040">Evolution du marché</a>
                       </li> 
+                        <li>
+                        <a data-toggle="tab" href="#tab041">Situation du marché</a>
+                      </li> 
                      
                     </ul>
                   </div>
@@ -335,6 +338,9 @@ decision_cf
                       <div id="tab040" class="tab-pane ">
                          <graphiqueExecutionMarche :macheid="detail_marche.id"></graphiqueExecutionMarche>
                       </div>
+                      <div id="tab041" class="tab-pane ">
+                         <graphiqueSituationMarche :macheid="detail_marche.id"></graphiqueSituationMarche>
+                      </div>
       </div>
        </div>
       
@@ -402,7 +408,7 @@ import decompte from "../../../../bien_service/contractualisation/DossierExecuti
   import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
   import imageMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche";
 import graphiqueExecutionMarche from "../../../../bien_service/contractualisation/DossierExecution/DossierGraphiqueExecutionMarche/graphiqueExecutionMarche";
-
+import graphiqueSituationMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierSituationMarche/graphiqueSituationMarche";
 
 
 import avenantHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsSib/dossierAvenant/avenantHs";
@@ -440,7 +446,7 @@ import decompteHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsS
             tableauBordExecution,
             EcheanceMarche,
 graphiqueExecutionMarche,
-
+graphiqueSituationMarche,
 
 
 avenantHs,

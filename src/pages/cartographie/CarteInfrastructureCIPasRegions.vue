@@ -35,7 +35,7 @@
               </h1>
                 <div class="span5">
                     <label>Régions    <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a></label>
-                    <model-list-select style="background-color: rgb(255,255,255);"
+                    <model-list-select style="background-color: rgb(233,233,233);"
                                        class="wide"
                                        :list="regions"
                                        v-model="region"
@@ -65,7 +65,7 @@
                         <option value="polar-area">Polar area</option>
                     </select>-->
                     <label>Unite administrative <a href="#" @click.prevent="videUniteAdmin()" style="color: red" v-if="unite_administrative_id"><i class="fa fa-trash-o"></i></a></label>
-                    <model-list-select style="background-color: rgb(255,255,255);"
+                    <model-list-select style="background-color: rgb(233,233,233);"
                                        class="wide"
                                        :list="filtre_unite_admin"
                                        v-model="unite_administrative_id"
@@ -2009,7 +2009,7 @@ sid.easyPrint({
   margin-top: 1px;
 }
 
-/*Marker content instances*/
+/*Marker content instances
 .map-marker.exclamation div.icon:before{
   content: '!';
 }
@@ -2017,17 +2017,17 @@ sid.easyPrint({
   content: 'A';
 }
 
-/*Marker color instances*/
+Marker color instances
 .map-marker.red div.icon{background: #ff2222;}
 
 .map-marker.green div.icon{background: #008800;color: #fff;}
 .map-marker.green {background: #000;}
 .map-marker.green div.arrow{border-top-color: #000;}
 
-/*Marker states*/
+Marker states
 .map-marker.inactive {
   opacity: 0.6;
-}
+}*/
 .red {
   color:#fff;
   background-color: red !important;

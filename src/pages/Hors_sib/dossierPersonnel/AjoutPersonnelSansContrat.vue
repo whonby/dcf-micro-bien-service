@@ -308,7 +308,7 @@
                                                     <div class="controls">
 
                                                         <select v-model="formData.plan_budgetaire_id" class="span">
-                                                            <option v-for="item in afficheBudgetPersonnel(formData.unite_administrative_id)" :key="item.id" :value="item.economique_id">
+                                                            <option v-for="item in afficheBudgetPersonnel(formData.unite_administrative_id)" :key="item.id" :value="item.ligneeconomique_id">
                                                                {{ligneEconomiqueBudgetEclate(item.ligneeconomique_id)}}
                                                             </option>
 
@@ -711,7 +711,7 @@ exoEnCours() {
     afficheBudgetPersonnel() {
       return id => {
         if (id != null && id != "") {
-          return this.budgetEclate.filter(element => element.ua_id == id && element.grandenature_id == 2);
+          return this.budgetEclate.filter(element => element.uniteadministrative_id == id && element.grandenature_id == 2);
         }
       };
     },

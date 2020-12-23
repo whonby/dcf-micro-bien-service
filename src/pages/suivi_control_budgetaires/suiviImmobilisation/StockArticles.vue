@@ -461,7 +461,7 @@
                 <tbody>
                      <tr
                     class="odd gradeX"
-                    v-for="(stock, index) in filtre_Stock"
+                    v-for="(stock, index) in listeDesStockParUa(getterUa_idImo)"
                     :key="stock.id"
                   >
 
@@ -526,14 +526,14 @@
                 
                       <td></td>
                    <td style="font-weight:bold;" title="total quantite entrant">Total en stock</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock || 0 }}</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(getterUa_idImo) || 0 }}</td>
                     <td></td>
                    
                      
                   
                      <td ></td>
                     <td style="font-weight:bold;" title="total quantite sortant">Total quantité sortie</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{ nombreDeQuantiteSortiEnStock || 0 }}</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{ nombreDeQuantiteSortiEnStock(getterUa_idImo) || 0 }}</td>
                     
                    <td></td>
                      
@@ -548,10 +548,17 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterStock" main-icon="apps" bg-color="green"></fab>
-    <notifications  />
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterStock()">Open</button>
+    <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+  @shortkey="ajouterEntreEnPatrimoine()">Open</button>
+
+ <fab :actions="fabActions"
+                main-icon="apps"
+          @cache="ajouterEntreEnPatrimoine"
+         
+        bg-color="green"
+
+  ></fab>
+<notifications  />
   </div>
 </template>
   
@@ -611,6 +618,8 @@ quantite: {
         articlestock_id: "",
         quantitestock: "",
         qteentrant1:"0",
+        
+        
       },
       search: ""
     };
@@ -630,9 +639,10 @@ quantite: {
       
       "type_Unite_admins",
       "totalQteEntrant",
-      "totalQteSortant"
-     
+      "totalQteSortant",
+     "getterUa_idImo"
     ]),
+    
     ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 admin:admin,
@@ -669,6 +679,42 @@ filtre_Stock() {
     },
 
 
+listeDesStockParUa() {
+      
+
+
+   
+        if (this.noDCfNoAdmin ){
+            let colect=[];
+            this.getPersoStock.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.uAdministrative_id == id && element.typestockage == 1);
+        }
+      };
+          }
+           return id => {
+        if (id != null && id != "") {
+          return this.getPersoStock.filter(element => element.uAdministrative_id == id && element.typestockage == 1);
+        }
+      };
+         
+
+
+
+    },
+
+
+
+
+
 nombreDeQuantiteEnStock() {
        
 
@@ -682,11 +728,21 @@ nombreDeQuantiteEnStock() {
                     return item
                 }
             })
-            return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+            //return colect
           
+              return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.uAdministrative_id == id && element.typestockage == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
         }
-return this.getPersoStock.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+      };
+        }
+//return this.getPersoStock.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
        
+           return id => {
+        if (id != null && id != "") {
+          return this.getPersoStock.filter(element => element.uAdministrative_id == id && element.typestockage == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+        }
+      };
 
     },
 nombreDeQuantiteSortiEnStock() {
@@ -703,11 +759,22 @@ nombreDeQuantiteSortiEnStock() {
                 }
             })
           
-          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+          
+       
+         return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.uAdministrative_id == id && element.typestockage == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
         }
+      };
+       }
 
-       return this.getPersoStock.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+     
 
+ return id => {
+        if (id != null && id != "") {
+          return this.getPersoStock.filter(element => element.uAdministrative_id == id && element.typestockage == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+        }
+      };
     },
 
 
@@ -913,7 +980,15 @@ veifArticlesExist() {
       "supprimerStock"
     ]),
     formatageSomme: formatageSomme,
+ajouterEntreEnPatrimoine(){
+                this.$router.push({ name: 'AjouterEntrePatrimoineVehicule' })
+            },
+            afficherModalModifierTitre(id) {
 
+      this.$router.push({
+        path: "/ModifierEntrePatrimoine/" + id
+      });
+    },
     //afiicher modal ajouter
     afficherModalAjouterStock() {
       this.$("#exampleModal").modal({

@@ -10,30 +10,33 @@
                              <div id="printMe">
 <table class="table table-bordered table-striped html2pdf__page-break" id="app1"  >
    <tr>
-                                 <td colspan="2" style="text-align:center;border: 2px double #000">
- <span>MINISTRE AUPRES DU PREMIER MINISTRE </span>
-      <span>CHARGE DU BUDGET ET DU PORTEFEUILLE DE L'ETAT</span>
+                                              <td colspan="" style="text-align:center">
+ <p>MINISTERE  DU BUDGET ET DU PORTEFEUILLE </p>
+      <p> DE L'ETAT</p>
                                  </td>
                                  <!-- <td style="text-align:center">
                                     <img  :src="AffichePhoto">
-                                   <p>DIRECTION DU CONTRÖLE FINANCIER</p>
+                                   <p>DIRECTION DU CONTRÔLE FINANCIER</p>
                                  </td> -->
+                                  <td style="text-align:center">
+                                   <img  :src="AfficheAmoirie">
+ 
+                                 </td>
                                  <td style="text-align:center">
-                                   <p>REPUBLIQUE DE CÖTE D'IVOIRE </p>
+                                   <p>REPUBLIQUE DE CÔTE D'IVOIRE </p>
       <P>Union-Discipline-Travail</P>
                                  </td>
                                </tr>
    <tr>
                                  <td style="text-align:center">
-                                   <img  :src="AfficheAmoirie">
- 
+                                   <img  :src="AfficheLogODCF">
+                                   <p>DIRECTION DU CONTRÔLE FINANCIER</p>
                                  </td>
                                  <td style="text-align:center">
                                    
                                  </td>
                                  <td style="text-align:center">
-                                   <img  :src="AfficheLogODCF">
-                                   <p>DIRECTION DU CONTRÖLE FINANCIER</p>
+                                  
                                  </td>
                                </tr>
                               
@@ -41,15 +44,14 @@
 <br/>
       <br/>
     <div style="border: 2px double #000;text-align:center;font-size:25px;width:100%;height:100px;">
-      <p>FICHE ANNEXE DE CONTRÖLE</p>
+      <p>FICHE ANNEXE DE CONTRÔLE</p>
       <p>DE LA REALITE DU SERVICE FAIT</p>
       <!-- <P>INSTITUEE PAR L'ARRETE N° 638 MEF/CAB/YKM DU 20 JUILLET 2009</P> -->
     </div>
 
       <br/>
       <br/>
-      <br/>
-      <br/>
+      
 
       <tr>
         <th style="width:25%;font-size:25px ">EXERCICE BUDGETAIRE :</th>
@@ -58,8 +60,7 @@
       </tr>
       <br/>
       <br/>
-     <br/>
-      <br/>
+     
           <tr>
                      <th style="width:25%;font-size:25px ">PROJET OU ORGANISME :</th>
                      <td style="font-size:25px"> {{infoLibelleUa(detailOp.ua_id)}} </td>
@@ -67,8 +68,7 @@
                  </tr>
                  <br/>
                  <br/>
-                 <br/>
-                <br/>
+                 
                   <tr>
                     <!-- <th rowspan="5" style="margin:0 auto">IMPUTATION BUDGETAIRE</th> -->
                      <th style="width:25%;font-size:25px ">OBJET DE LA DEPENSE :</th>
@@ -76,15 +76,24 @@
                  </tr>
                   <br/>
       <br/>
-       <br/>
-      <br/>
-       <br/>
-      <br/>
        
-      <h5 style="text-align:center;font-size:25px">OBSERVATION</h5>
+      <tr>
+                    <!-- <th rowspan="5" style="margin:0 auto">IMPUTATION BUDGETAIRE</th> -->
+                     <th style="width:25%;font-size:25px ">DATE DU CONTRÔLE :</th>
+                     <td style="text-align:center;font-size:25px"> </td>
+                 </tr>
+       <br/>
+      <br/>
+      <br/>
+      <br/>
+      <h5 style="text-align:center;font-size:25px;text-decoration: underline;">OBSERVATION</h5>
 <div style="width:100%;height:600px;border:2px solid #000">
 
 </div>
+<br/>
+      <br/>
+ <h5 style="text-align:center;font-size:25px;text-decoration: underline;">CACHET ET SIGNATURE DE L'AGENT DCF</h5>
+
    <tr>
        <td >
 
@@ -313,6 +322,7 @@ h5{
 th{
   text-align: left;
   font-size: 14px;
+  line-height:1.6;
 }
 
 </style>

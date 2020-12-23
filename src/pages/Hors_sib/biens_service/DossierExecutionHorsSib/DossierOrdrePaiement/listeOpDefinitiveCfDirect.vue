@@ -117,7 +117,7 @@
                                 <th>Montant</th>
                                 <!-- <th>Service béneficiaire</th> -->
                                 <th >Date béneficiaire</th>
-                                <th title="Date validation Cf">Date validation CF</th>
+                                <th title="Date validation Cf">Date décision CF</th>
                                 <th>Décision CF</th>
                                 <!-- <th title="Observation Controleur financier">Observation CF</th> -->
                                 <th>Action</th>

@@ -28,7 +28,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for=" (affectService) in tauxServiceEquipe"
+                    <tr class="odd gradeX" v-for=" (affectService) in tauxServiceEquipe(getterUa_idImo)"
                         :key="affectService.id">
                         
                               <td >
@@ -168,7 +168,8 @@ search:""
       "causeInactivite",
       "immobilisations",
       "afficheRegroupeEquipementCouvert",
-      "demandeMateriel"
+      "demandeMateriel",
+      "getterUa_idImo"
    
    ]),
 
@@ -187,12 +188,20 @@ search:""
                 }
                   
             })
-          return colect.filter(elment=>elment.normeequipement != 0)
-          
+          //return colect.filter(elment=>elment.normeequipement != 0)
+            return id => {
+        if (id != null && id != "") {
+           return colect.filter(items=>items.ua_id == id && items.normeequipement != 0);
+        }
+      };
         }
 
-       return this.getterplanOrganisationUa.filter(elment=>elment.normeequipement != 0)
-
+       //return this.getterplanOrganisationUa.filter(elment=>elment.normeequipement != 0)
+   return id => {
+        if (id != null && id != "") {
+           return this.getterplanOrganisationUa.filter(items=>items.ua_id == id && items.normeequipement != 0);
+        }
+      };
     },
 
 

@@ -12,6 +12,12 @@ const defaultstate = {
     Catographie: 8,
     rapport:20,
     ActeurdepenseHS:31,
+    ParametreGestionVehicule:42,
+    GestionParc:43,
+    Reparation:49,
+    RapportMarche:89,
+    RapportVehicule:90,
+    MenuTableauBordGestionMarche:45,
     active_el: 11
 };
 

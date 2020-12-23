@@ -42,139 +42,106 @@
                     </tbody>
 
                 </table>
-                <div class="span6">
-                    <div class="row-fluid">
-                        <div class="span6">
-                            <div class="card-box bg-prevision">
-                                <div class="inner">
-                                    <h3> {{formatageSomme(parseFloat(montantPrevisionnel))}} </h3>
-                                    <p>Montant previsionnel </p>
+                <div class="row-fluid">
+                    <div class="span8">
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <div class="card-box bg-prevision">
+                                    <div class="inner">
+                                        <h3> {{formatageSomme(parseFloat(montantPrevisionnel))}} </h3>
+                                        <p>Montant previsionnel </p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-money" aria-hidden="true"></i>
+                                    </div>
+
                                 </div>
-                                <div class="icon">
-                                    <i class="fa fa-money" aria-hidden="true"></i>
+                            </div>
+
+                            <div class="span6">
+                                <div class="card-box bg-base">
+                                    <div class="inner">
+                                        <h3> {{formatageSomme(parseFloat(montantApprouveMarche))}} </h3>
+                                        <p>Montant de base + avenant </p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-money" aria-hidden="true"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span5">
+                                <div class="card-box bg-green">
+                                    <div class="inner">
+                                        <h3> {{formatageSomme(parseFloat(montantExecute))}} </h3>
+                                        <p> Montant execute </p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-money" aria-hidden="true"></i>
+                                    </div>
+
                                 </div>
 
                             </div>
-                        </div>
 
-                        <div class="span6">
-                            <div class="card-box bg-base">
-                                <div class="inner">
-                                    <h3> {{formatageSomme(parseFloat(montantApprouveMarche))}} </h3>
-                                    <p>Montant de base + avenant </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                </div>
 
+                            <div class="span4">
+                                <div class="card-box bg-restant">
+                                    <div class="inner">
+                                        <h3> {{formatageSomme(parseFloat(montantRestant))}} </h3>
+                                        <p> Montant restant </p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-money" aria-hidden="true"></i>
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>
+                            <div class="span3">
+                                <div class="card-box bg-taux ">
+                                    <div class="inner">
+                                        <h3> {{tauxExecution}} % </h3>
+                                        <p> Taux Execution</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-money" aria-hidden="true"></i>
+                                    </div>
 
+                                </div>
+                            </div>
+
+
+
+                        </div>
                     </div>
-                    <div class="row-fluid">
-                        <div class="span5">
-                            <div class="card-box bg-green">
-                                <div class="inner">
-                                    <h3> {{formatageSomme(parseFloat(montantExecute))}} </h3>
-                                    <p> Montant execute </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="span5">
-                            <div class="card-box bg-restant">
-                                <div class="inner">
-                                    <h3> {{formatageSomme(parseFloat(montantRestant))}} </h3>
-                                    <p> Montant restant </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="span2">
-                            <div class="card-box bg-taux ">
-                                <div class="inner">
-                                    <h3> {{tauxExecution}} % </h3>
-                                    <p> Taux </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                </div>
-
-                            </div>
-                        </div>
-
+                    <div class="span4">
+                        <apexchart type="bar" width="325" height="250" :options="chartOptions" :series="dataDiagrame"></apexchart>
                     </div>
-                    <!--<table class="table table-bordered table-striped">-->
-                        <!--<tr>-->
-                            <!--<td>Montant previsionnel</td>-->
-                            <!--<td></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Montant de base</td>-->
-                            <!--<td></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Montant execute</td>-->
-                            <!--<td></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Montant restant</td>-->
-                            <!--<td></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Taux execution</td>-->
-                            <!--<td></td>-->
-                        <!--</tr>-->
-                    <!--</table>-->
 
                 </div>
-                <div class="span4">
-                    <apexchart type="bar" width="325" height="250" :options="chartOptions" :series="dataDiagrame"></apexchart>
-                </div>
 
-                <!---->
-                <!--<table class="table table-bordered table-striped">-->
-                    <!--<thead>-->
-                    <!--<tr>-->
-                        <!--<th><a href="#">Montant previsionnel</a>  </th>-->
-                        <!--<th><a href="#">Montant Approuve</a> </th>-->
-                        <!--<th><a  href="#">Montant execute</a> </th>-->
-                        <!--<th><a href="#">Taux execution</a> </th>-->
-                    <!--</tr>-->
-                    <!--</thead>-->
 
-                    <!--<tbody>-->
-                    <!--<tr>-->
-                        <!--<td> </td>-->
-                        <!--<td > </td>-->
-                        <!--<td>100</td>-->
-                        <!--<td>444</td>-->
-                    <!--</tr>-->
-                    <!--</tbody>-->
-                <!--</table>-->
+
+
 
                 <div class="row gutters-sm">
                     <!--<div class="span11">-->
-                        <!--<h6>Infrastructure</h6>-->
-                        <!--<table class="table table-bordered table-striped">-->
-                            <!--<thead>-->
-                            <!--<tr>-->
-                                <!--<th></th>-->
-                                <!--<th>Montant previsionnel</th>-->
-                            <!--<th>Montant previsionnel</th>-->
-                            <!--<th>Montant Approuve</th>-->
-                            <!--<th>Montant execute</th>-->
-                            <!--<th>Taux execution</th>-->
-                            <!--</tr>-->
-                            <!--</thead>-->
-                        <!--</table>-->
+                    <!--<h6>Infrastructure</h6>-->
+                    <!--<table class="table table-bordered table-striped">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                    <!--<th></th>-->
+                    <!--<th>Montant previsionnel</th>-->
+                    <!--<th>Montant previsionnel</th>-->
+                    <!--<th>Montant Approuve</th>-->
+                    <!--<th>Montant execute</th>-->
+                    <!--<th>Taux execution</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--</table>-->
 
                     <!--</div>-->
                     <div class="row-fluid">
@@ -182,33 +149,33 @@
                     </div>
                     <div class="row-fluid">
                         <div class="span3" v-for="item in getterInfrastrucure" :key="item.id" style="border: 1px dotted #e1e1e8" :class="{ red : classementMontantBaseInfrastructure(item.id) }">
-                            <h6>{{item.libelle}} (<font color="red">{{nombreMarchePasInfrastructure(item.id)}}</font>)</h6>
+                            <h6>{{item.libelle}} (<font color="black">{{nombreMarchePasInfrastructure(item.id)}}</font>)</h6>
                             <table class="table" :class="{ red : classementMontantBaseInfrastructure(item.id) == item.id }">
-                           <tbody>
-                           <tr>
-                               <td>Montant previsionnel</td>
-                               <td>
-                                   {{formatageSomme(montantPrevisionnelInfrastructure(item.id))}}
+                                <tbody>
+                                <tr>
+                                    <td>Montant previsionnel</td>
+                                    <td>
+                                        {{formatageSomme(montantPrevisionnelInfrastructure(item.id))}}
 
-                               </td>
-                           </tr>
-                           <tr>
-                               <td>Montant Base</td>
-                               <td> {{formatageSomme(montantBaseInfrastructure(item.id))}}</td>
-                           </tr>
-                           <tr>
-                               <td>Montant Execute</td>
-                               <td>{{formatageSomme(montantExecutePasInfrastructure(item.id))}}</td>
-                           </tr>
-                           <tr>
-                               <td>Montant Restant</td>
-                               <td>{{formatageSomme(montantRestantInfrastructure(item.id))}}</td>
-                           </tr>
-                           <tr>
-                               <td>Taux</td>
-                               <td>{{tauxExecutionInfrastructure(item.id)}} %</td>
-                           </tr>
-                           </tbody>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Montant Base</td>
+                                    <td> {{formatageSomme(montantBaseInfrastructure(item.id))}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Montant Executé</td>
+                                    <td>{{formatageSomme(montantExecutePasInfrastructure(item.id))}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Montant Restant</td>
+                                    <td>{{formatageSomme(montantRestantInfrastructure(item.id))}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Taux Exécuté Fin.</td>
+                                    <td>{{tauxExecutionInfrastructure(item.id)}} %</td>
+                                </tr>
+                                </tbody>
                             </table>
 
 
@@ -223,7 +190,7 @@
 
                     <div class="row-fluid">
                         <div class="span3" v-for="item in typeMarches" :key="item.id" style="border: 1px dotted #e1e1e8" :class="{ red_type_marche : classementMontantTypeMarche(item.id) }">
-                            <h6>{{item.libelle}} (<font color="red">{{nombreMarchePasTypeMarche(item.id)}}</font>)</h6>
+                            <h6>{{item.libelle}} (<font color="black">{{nombreMarchePasTypeMarche(item.id)}}</font>)</h6>
 
                             <table class="table" :class="{ red_type_marche : classementMontantTypeMarche(item.id) == item.id }">
                                 <tbody>
@@ -262,7 +229,7 @@
                         <div class="span12">
 
                             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                <h5>Liste des marchés (<b v-if="getterFiltreCarteInfrastructure"> {{getterFiltreCarteInfrastructure.length}}</b>) </h5>
+                                <h5>Liste des marchés (<b v-if="getterFiltreCarteInfrastructure"> {{getterFiltreCarteInfrastructure.length}}</b>) <a href="#"></a> </h5>
                                 <!--<div align="right">-->
                                 <!--Recherche: <input type="text" v-model="search">-->
                                 <!--</div>-->
@@ -283,12 +250,12 @@
                                     <tr>
                                         <th>Objet </th>
                                         <th>Infrastructure</th>
-                                        <th>Type Marche</th>
-                                        <th>Montant Prevue</th>
+                                        <th>Type Marché</th>
+                                        <th>Montant Prévu</th>
                                         <th>Montant Base</th>
-                                        <th>Montant Execute</th>
-                                        <th>Taux</th>
-                                        <th>Status</th>
+                                        <th>Montant Exécuté</th>
+                                        <th>Taux Exécution Fin.</th>
+                                        <th>Statut</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -324,11 +291,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
     </div>
-
+        </div>
+    </div>
 
 </template>
 
@@ -364,6 +330,7 @@
                         stacked: true,
                         stackType: '100%'
                     },
+                    colors:['#00a65a','#154282'],
                     responsive: [{
                         breakpoint: 480,
                         options: {
@@ -813,16 +780,18 @@
                 let array=[]
 
               let tauxReste=(this.montantRestant * 100)/this.montantApprouveMarche
-              let objetEx={
-                  name: 'Montant Execute',
-                  data: [this.tauxExecution]
-              }
+
                 let objetApprouve={
                     name: 'Montant Restant',
                     data: [tauxReste.toFixed(2)]
                 }
-                array.push(objetApprouve)
+                let objetEx={
+                    name: 'Montant Execute',
+                    data: [this.tauxExecution]
+                }
+
                 array.push(objetEx)
+                array.push(objetApprouve)
                 return array
             },
             /**
@@ -870,6 +839,12 @@
 
         methods:{
             // pagination
+            afficherModalAjouterTitre(){
+                this.$('#exampleModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            },
             partition:partition,
             getDataPaginate(index){
                 this.active_el = index;
@@ -1152,13 +1127,13 @@
         background-color: #154282 !important;
     }
     .red {
-        color: #fff !important;
-        background-color: #892e6a !important;
+        color: black !important;
+        background-color: #09f7ff !important;
     }
 
     .red_type_marche {
-        color: #fff !important;
-        background-color: #892e6a !important;
+        color: black !important;
+        background-color: #09f7ff !important;
     }
 
 </style>

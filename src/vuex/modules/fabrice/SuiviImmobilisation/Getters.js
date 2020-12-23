@@ -1,5 +1,15 @@
 import { groupBy } from "../../../../Repositories/Repository";
 
+
+export const marqueVehicules = state => state.marqueVehicules
+export const ModeleVehicules = state => state.ModeleVehicules
+export const TypeEntretien = state => state.TypeEntretien
+export const TypeVehicule = state => state.TypeVehicule
+export const TypeEnergie = state => state.TypeEnergie
+export const TypeReparation = state => state.TypeReparation
+export const Transmissions = state => state.Transmissions
+export const AffectationVehicules = state => state.AffectationVehicules
+export const Appreciations = state => state.Appreciations
 export const factures = state => state.factures
 export const normeImmo = state => state.normeImmo
 export const demandeMateriel = state => state.demandeMateriel
@@ -31,11 +41,11 @@ const articles = state => state.articles;
 const stockageArticles = state => state.stockageArticles;
 
 
+export const ficheArticle = state =>state.ficheArticle;
 
 
 
-
-
+export const getterUa_idImo=state=>state.ua_idImo
 
 
 export const listeImmoRealise = state =>

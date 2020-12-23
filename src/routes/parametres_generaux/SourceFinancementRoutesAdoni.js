@@ -6,6 +6,7 @@ import TableauBordGestionHorsSibSimple  from "../../../src/gestionDesModule/Tabl
 import TableauBordGestionSibSimple  from "../../../src/gestionDesModule/TableauBordSimple/TableauBordGestionSib.vue";
 import TableauBordUaSimple  from "../../../src/gestionDesModule/TableauBordSimple/TableauBordUa.vue";
 import TableauBordCatographiesSimple  from "../../../src/gestionDesModule/TableauBordCa";
+import tableauBordGestionAcces from "../../../src/gestionDesModule/tableauBordGestionAcces.vue";
 const SourceFinancementRoutesAdoni = [
    {
       path:"/TableauBordCatographies",
@@ -36,6 +37,11 @@ const SourceFinancementRoutesAdoni = [
       name:"TableauBordParametreSimple",
       component:TableauBordParametreSimple
 
+   },
+   {
+      path:"/menu-gestion-acces",
+      name:"getion_acces",
+      component:tableauBordGestionAcces
    },
      {
         path:"/source-de-financements",

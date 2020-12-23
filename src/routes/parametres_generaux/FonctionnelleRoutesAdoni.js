@@ -1,4 +1,5 @@
 
+import motifPassation from "../../pages/parametres_generaux/fonctionnelle/motifPassation.vue";
 import NaturePrix from "../../pages/parametres_generaux/fonctionnelle/NaturePrix.vue";
 import Typeconges from "../../pages/parametres_generaux/fonctionnelle/Typeconges.vue";
 import StructureFonctionnelle from "../../pages/parametres_generaux/fonctionnelle/StructureFonctionnelle.vue";
@@ -14,7 +15,11 @@ import planActe from "../../pages/parametres_generaux/fonctionnelle/planActe.vue
 const FonctionnelleRoutesAdoni = [
    
 
-   
+   {
+      path:"/motif-passation",
+      name:"motif_passation",
+      component:motifPassation
+   },
 
    {
       path: "/NaturePrix",

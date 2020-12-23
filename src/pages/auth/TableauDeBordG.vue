@@ -1,15 +1,22 @@
 <template>
   <div>
      
+
     <TableauBordParametre v-if="detail_marche.code == 1"></TableauBordParametre>
     <TableauBordUa v-else-if="detail_marche.code == 2"></TableauBordUa>
     <TableauBordGestionSib v-else-if="detail_marche.code == 3"></TableauBordGestionSib>
      <TableauBordGestionHorsSib v-else-if="detail_marche.code == 4"></TableauBordGestionHorsSib>
     <TableauBordMonEquipe v-else-if="detail_marche.code == 6"></TableauBordMonEquipe>
     <TableauBordRapport v-else-if="detail_marche.code == 7"></TableauBordRapport>
-    <TableauBordGestionVehicule v-else-if="detail_marche.code == 8"></TableauBordGestionVehicule>
-    <TableauBordCatographies v-else></TableauBordCatographies>
-   
+    
+    <TableauBordCatographies  v-else-if="detail_marche.code == 5"></TableauBordCatographies>
+    <TableauBordGestionVehicule v-else></TableauBordGestionVehicule>
+
+    <!-- </template> -->
+    <!-- <template v-else>
+     <TableauBordGestionVehicule ></TableauBordGestionVehicule>
+    </template> -->
+
   </div>
 
 </template>
@@ -21,7 +28,7 @@ import TableauBordGestionHorsSib from "../../gestionDesModule/TableauBordGestion
 import TableauBordGestionSib from "../../gestionDesModule/TableauBordGestionSib";
 import TableauBordMonEquipe from "../../gestionDesModule/TableauBordMonEquipe";
 import TableauBordParametre from "../../gestionDesModule/TableauBordParametre";
-import TableauBordRapport from "../../gestionDesModule/TableauBordRapport.vue";
+import TableauBordRapport from "../../../src/pages/Gestion_des_Rapports/suiviDesEntreprise";
  import TableauBordUa from "../../gestionDesModule/TableauBordUa";
  import TableauBordGestionVehicule from "../../gestionDesModule/TableauBordGestionVehicule";
 export default {
@@ -42,6 +49,15 @@ components: {
     TableauBordRapport,
     TableauBordGestionVehicule
   },
+
+  created() {
+      console.log(this.getterUniteAdministrativeByUser)
+            this.marcheid=this.$route.params.id
+   this.detail_marche = this.gestionModules.find(
+       idmarche => idmarche.id == this.$route.params.id
+   )
+  
+},
    
   computed:{
  ...mapGetters("uniteadministrative", [
@@ -74,14 +90,7 @@ components: {
 
 
   },
-created() {
-      console.log(this.getterUniteAdministrativeByUser)
-            this.marcheid=this.$route.params.id
-   this.detail_marche = this.gestionModules.find(
-       idmarche => idmarche.id == this.$route.params.id
-   )
-  
-},
+
   methods:{
 
 

@@ -21,7 +21,7 @@
                                     <tr>
 
                                          
-                     <th>N° lot{{macheid}}</th>
+                     <th>N° lot</th>
                     
                     <th>Entreprise</th>
                     

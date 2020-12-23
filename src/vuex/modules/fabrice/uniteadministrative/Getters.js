@@ -1,6 +1,8 @@
 import { groupBy } from "../../../../Repositories/Repository";
 export const budgetEclate = state => state.budgetEclate;
-
+export const getvehicules =state =>state.vehicules;
+export const ReparationVehicules =state =>state.ReparationVehicules;
+export const GestionStockageArticles = state => state.stockageArticles;
 // const typeTextes = state =>
 //   state.typeTextes.sort((a, b) => (a.code > b.code ? 1 : -1));
 export const StructureOrganigrammeUa = state => state.StructureOrganigrammeUa;
@@ -13,7 +15,7 @@ export const realiteServiceFait = state => state.realiteServiceFait;
 export const liquidation = state => state.liquidation;
 const uniteAdministratives = state =>
   state.uniteAdministratives.sort((a, b) => (a.code > b.code ? 1 : -1));
-
+  getPersonnaliseBudgetGeneralParPersonnel
 export const nombreUniteAdministratives = state =>
   state.uniteAdministratives.length;
 // export const nombreArchivageDocument = state => state.archivageDocuments.length;
@@ -218,19 +220,53 @@ export const getPersonnaliseBudgetGeneralParBienService = (
 // afficher le 
 
 
-export const groupgranNaturePersonnel = (state, getters) => {
-  //delete getters.trieUaImmobilisation.
-  return groupBy(getters.getPersonnaliseBudgetGeneralParPersonnel, "gdenature_id");
-};
 
 
+  
 
-export const affichePersonnel = state =>
-  state.budgetGeneral.filter(
-    affichenaturedep => affichenaturedep.gdenature_id == 2
+
+  export const affichePersonnelHorsSib = state =>
+  state.budgetEclate.filter(
+    affichenaturedep => affichenaturedep.grandenature_id == 2
   );
-
-
+  export const getPersonnaliseBudgetGeneralParPersonnelHORSSIB = (
+    state,
+    getters,
+    rootState,
+    rootGetters
+  ) =>
+    getters.affichePersonnelHorsSib.map(element => {
+      if (
+        element.grandenature_id !== null &&
+        
+        element.uniteadministrative_id !== null &&
+        
+        element.ligneeconomique_id !== null 
+       
+      ) {
+        element = {
+          ...element,
+          afficheGdeNature: rootGetters[
+            "parametreGenerauxAdministratif/grandes_natures"
+          ].find(Gdenat => Gdenat.id == element.grandenature_id),
+         
+          afficheUA: rootGetters[
+            "uniteadministrative/uniteAdministratives"
+          ].find(uniteA => uniteA.id == element.uniteadministrative_id),
+         
+          afficheEconomique: rootGetters[
+            "parametreGenerauxBudgetaire/plans_budgetaires"
+          ].find(planEconomiq => planEconomiq.id == element.economique_id),
+         
+        };
+      }
+      return element;
+    });
+  
+    export const affichePersonnel = state =>
+    state.budgetGeneral.filter(
+      affichenaturedep => affichenaturedep.gdenature_id == 2
+    );
 export const getPersonnaliseBudgetGeneralParPersonnel = (
   state,
   getters,
@@ -282,8 +318,6 @@ export const getPersonnaliseBudgetGeneralParPersonnel = (
     }
     return element;
   });
-
-
 
 
   // afficher le getter persponnaliser d'investissement
@@ -739,7 +773,10 @@ export const GroupeUaReceptrice = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.transferts, "unitezone_id");
 };
-
+export const groupStockArticle = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.GestionStockageArticles, "marque_id");
+};
 
 
 

@@ -17,7 +17,12 @@
     <MenuGestionAccess v-if="active_el ==21"></MenuGestionAccess>
     <MenuMonEquipe v-if="active_el ==30"></MenuMonEquipe>
     <MenuActeurDepenseHS v-if="active_el ==31"></MenuActeurDepenseHS>
-    <Search></Search>
+   <MenuParametreVehicule v-if="active_el == 42"></MenuParametreVehicule>
+   <MenuGestionParc v-if="active_el == 43"></MenuGestionParc>
+   <MenuRapportMarche v-if="active_el == 89"></MenuRapportMarche>
+   <MenuRapportVehicule v-if="active_el == 90"></MenuRapportVehicule>
+   <MenuTableauBordGestionMarche v-if="active_el == 45"></MenuTableauBordGestionMarche>
+    <!-- <Search></Search> -->
     
     <!--close-top-serch MenuPlanificationHorSib-->
   </div>
@@ -27,6 +32,7 @@
 // var housecall = require('housecall');
 
 // var queue = housecall({ concurrency: 2, cooldown: 1000 });
+import MenuTableauBordGestionMarche from "../components/navs/MenuTableauBordGestionMarche";
 import MenuTableau from "../components/navs/menuTableauBord";
 import MenuParamG from "../components/navs/menuParametreG";
 import MenuUA from "../components/navs/menuUA";
@@ -40,12 +46,21 @@ import MenuCatographie from "../components/navs/MenuCatographie.vue";
 import MenuDefaut from "../components/navs/MenuDefaut.vue";
 import MenuInvestissementHorSib from "../components/navs/MenuInvestissementHorSib.vue";
 import MenuMonEquipe from "../components/navs/MenuMonEquipe.vue";
-import Search from "../components/Search";
+// import Search from "../components/Search";
 import MenuGestionAccess from "../components/navs/MenuGestionAccess"
 import MenuActeurDepenseHS from "../components/navs/MenuActeurDepenseHS"
+import MenuParametreVehicule from "../components/navs/MenuParametreVehicule"
+import MenuGestionParc from "../components/navs/MenuGestionParc"
+import MenuRapportMarche from "../components/navs/MenuRapportMarche"
+import MenuRapportVehicule from "../components/navs/MenuRapportVehicule"
 import { mapState, mapActions} from "vuex";
 export default {
   components: {
+    MenuTableauBordGestionMarche,
+    MenuRapportVehicule,
+    MenuRapportMarche,
+    MenuGestionParc,
+    MenuParametreVehicule,
     MenuTableau,
     MenuParamG,
     MenuUA,
@@ -58,7 +73,7 @@ export default {
    MenuCatographie,
    MenuDefaut,
    MenuInvestissementHorSib,
-    Search,
+    // Search,
       MenuGestionAccess,
     MenuMonEquipe,
     MenuActeurDepenseHS
@@ -360,7 +375,8 @@ export default {
      "getStructureOrganigrammeUa",
      "getAllBanqueUa",
      "getAllDecompteFacture",
-     "getAllBudgetEclate"
+     "getAllBudgetEclate",
+     "getVehicule"
     ]),
             ...mapActions('personnelUA', ["getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -392,6 +408,14 @@ export default {
       "getAllHistoAffectation",
       "getAllDemandeMateriel",
       "getAllHistoAffectationService",
+      "getMarqueVehicule",
+      "getModeleVehicule",
+      "getTypeEntretien",
+      "getTypeVehicule",
+      "getTypeEnergie",
+      "getTypeReparation",
+      "getAffectationVehicule",
+      "getTransmissionVeh"
       
       
     ]),

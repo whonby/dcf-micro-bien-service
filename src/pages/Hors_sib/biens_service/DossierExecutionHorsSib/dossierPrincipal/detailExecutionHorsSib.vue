@@ -24,7 +24,7 @@ afficheNumeroMarche
                             <tr>
                                <!-- <th style="font-size:12px;font-weight:bold;">Reference marché</th> -->
                                <th style="font-size:12px;font-weight:bold;">Numéro marché</th>
-                                <th style="font-size:12px;font-weight:bold;">Objet marché</th>
+                                <!--<th style="font-size:12px;font-weight:bold;">Objet marché</th>-->
                                 
                              
                                 <th style="font-size:12px;font-weight:bold;">Type de marché</th>
@@ -42,7 +42,7 @@ afficheNumeroMarche
                                 <!-- <td class="taskStatus" style="font-size:14px;font-weight:bold;">{{detail_marche.reference_marche}}</td> -->
                                 
                                 <td class="taskStatus" style="font-size:14px;font-weight:bold;">{{afficheNumeroMarche(detail_marche.id)}}</td>
-                                 <td class="taskDesc" style="font-size:14px;font-weight:bold;">{{detail_marche.objet}}</td>
+                                 <!--<td class="taskDesc" style="font-size:14px;font-weight:bold;">{{detail_marche.objet}}</td>-->
                                
                                 <td class="taskOptions" style="font-size:14px;font-weight:bold;">
                                     {{LibelleTypeMarche(detail_marche.type_marche_id)}}
@@ -98,10 +98,13 @@ afficheNumeroMarche
                       <li>
                         <a data-toggle="tab" href="#tab03">IMAGES DES MARCHES</a>
                       </li>
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
-                      </li> --> 
-                     
+                      <li>
+                        <a data-toggle="tab" href="#tab040">EVOLUTION DES MARCHES</a>
+                      </li> 
+                      <li>
+                        <a data-toggle="tab" href="#tab041">SITUATION DES MARCHE</a>
+                      </li> 
+                    
                     </ul>
                   </div>
                          <div class="widget-content tab-content">
@@ -124,7 +127,7 @@ afficheNumeroMarche
                               <li class="active"><a data-toggle="tab" href="#tab2078">Avenant</a></li>
                                <li ><a data-toggle="tab" href="#tab100">Facture</a></li>
                                 <li ><a data-toggle="tab" href="#tab45785" >Décompte</a></li>
-                              <li ><a data-toggle="tab" href="#Financement" >Financement</a></li>
+                              <!-- <li ><a data-toggle="tab" href="#Financement" >Financement</a></li> -->
                               <!-- <template v-if="typeOrdrePaiementHs(detail_marche.id) == 1">
                                 
                                 <li ><a data-toggle="tab" href="#tab15550" >Réalité service fait</a></li>
@@ -148,7 +151,7 @@ afficheNumeroMarche
                        
                           
                              <div class="widget-content tab-content">
-                            <div id="Financement" class="tab-pane "><financement :macheid="detail_marche.id"></financement></div> 
+                            <!-- <div id="Financement" class="tab-pane "><financement :macheid="detail_marche.id"></financement></div>  -->
 <div id="tab2078" class="tab-pane active "><avenant :macheid="detail_marche.id"></avenant></div>             
 <div id="tab100" class="tab-pane  "><facture :macheid="detail_marche.id"></facture></div> 
 <div id="tab45785" class="tab-pane  "><decompte :macheid="detail_marche.id"></decompte></div>
@@ -258,6 +261,14 @@ afficheNumeroMarche
                       
                          <imageMarche :macheid="detail_marche.id"></imageMarche>
                       </div>
+
+                      <div id="tab040" class="tab-pane ">
+                         <graphiqueExecutionMarche :macheid="detail_marche.id"></graphiqueExecutionMarche>
+                      </div>
+
+                      <div id="tab041" class="tab-pane ">
+                         <graphiqueSituationMarche :macheid="detail_marche.id"></graphiqueSituationMarche>
+                      </div>
       </div>
                 </div>
               </table>
@@ -307,6 +318,8 @@ afficheNumeroMarche
    import avenant from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
    import facture from "../dossierFacture/factureHs";
    import decompte from "../dossierDecompte/decomptePro";
+   import graphiqueExecutionMarche from "../../../../bien_service/contractualisation/DossierExecution/DossierGraphiqueExecutionMarche/graphiqueExecutionMarche";
+   import graphiqueSituationMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierSituationMarche/graphiqueSituationMarche";
 // import avenant from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
 // import facture from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierFacture/facture";
 // import decompte from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte";
@@ -324,7 +337,7 @@ afficheNumeroMarche
 // import realiteServiceFaitServiceOpProvisoireBS from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireBS";
 // import realiteServiceFaitServiceOpProvisoireCf from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireCf";
        //bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche
-                  import financement from "../dossierFinancement/financementHs";
+                  // import financement from "../dossierFinancement/financementHs";
                   import imageMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche";
                 import tableauBordExecution from "../tableauBordExecution/tableauBordExecution";
   import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
@@ -340,7 +353,8 @@ afficheNumeroMarche
             avenant,
             facture,
             decompte,
-          //   listeOpAnnulation,
+            graphiqueExecutionMarche,
+             graphiqueSituationMarche,
           //   listeOpProvisoireCf,
           //   listeOpProvisoireBs,
             // mandatFactureProformaEmetteur,
@@ -353,7 +367,7 @@ afficheNumeroMarche
             
             // liquidationCf,
             // liquidationOrdonnateur,
-            financement,
+           // financement,
             // listeOpDefinitiveBsDirect,
             // listeOpDefinitiveCfDirect,
             tableauBordExecution,

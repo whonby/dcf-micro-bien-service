@@ -21,7 +21,7 @@ ua_id
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for=" (affectService,index) in listeDesServiceNonEquipeDeUa"
+                    <tr class="odd gradeX" v-for=" (affectService,index) in listeDesServiceNonEquipeDeUa(getterUa_idImo)"
                         :key="affectService.id">
                         
                               <td >
@@ -426,11 +426,20 @@ listeDesServiceNonEquipeDeUa() {
                     return item
                 }
             })
-          return colect.filter(element => element.normeequipement != 0 && element.normeequipement != null)
+          //return colect.filter(element => element.normeequipement != 0 && element.normeequipement != null)
+        return id => {
+        if (id != null && id != "") {
+           return colect.filter(items=>items.ua_id == id && items.normeequipement != 0 && items.normeequipement != null);
         }
+      };
+       }
 
-       return this.getterplanOrganisationUa.filter(element => element.normeequipement != 0 && element.normeequipement != null)
-
+      // return this.getterplanOrganisationUa.filter(element => element.normeequipement != 0 && element.normeequipement != null)
+ return id => {
+        if (id != null && id != "") {
+           return this.getterplanOrganisationUa.filter(items=>items.ua_id == id && items.normeequipement != 0 && items.normeequipement != null);
+        }
+      };
     },
         afficherQuantiteSortir() {
       return id => {

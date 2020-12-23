@@ -14,6 +14,7 @@
     <MenuCatographie v-if="active_el ==8"></MenuCatographie>
      <MenuDefaut v-if="active_el ==0"></MenuDefaut>
     <MenuGestionAccess v-if="active_el ==21"></MenuGestionAccess>
+    <MenuParametreVehicule v-if="active_el == 42"></MenuParametreVehicule>
     <Search></Search>
   </div>
 
@@ -37,9 +38,11 @@ import MenuCatographie from "../components/navs/MenuCatographie.vue";
 import MenuDefaut from "../components/navs/MenuDefaut.vue";
 import Search from "../components/Search";
 import MenuGestionAccess from "../components/navs/MenuGestionAccess"
+import MenuParametreVehicule from "../components/navs/MenuParametreVehicule"
 import { mapState, mapActions} from "vuex";
 export default {
   components: {
+   
     MenuTableau,
     MenuParamG,
     MenuUA,
@@ -53,6 +56,7 @@ export default {
    MenuDefaut,
     Search,
     MenuGestionAccess,
+     MenuParametreVehicule,
   },
 
   computed: {
@@ -64,9 +68,11 @@ export default {
 
   methods: {
    
-
+   
+...mapActions('Utilisateurs', ['getGroupe','getMenu','getModule']),
       ...mapActions('parametreGenerauxFonctionnelle', 
-    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
+    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges',
+    'getlisteNaturePrix',"getMotifPassation"]),
 
     ...mapActions('parametreGenerauxSourceDeFinancement',['getSourceFinancement',
         'getTypeFinancement'
@@ -153,6 +159,9 @@ export default {
   },
 
   created(){
+    this.getGroupe()
+    this.getMenu()
+    this.getModule()
     this.getPlanPassationMarche()
     this.getRapport()
       this.getBudgeChager()
@@ -178,6 +187,7 @@ export default {
    this.getPlanActe()
    this.getTypeconges()
    this.getlisteNaturePrix()
+   this.getMotifPassation()
    this.getSourceFinancement()
    this.getTypeFinancement()
    this.getStructureBudgetaire()

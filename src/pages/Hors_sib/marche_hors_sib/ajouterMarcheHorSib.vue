@@ -1,4 +1,4 @@
-afficherLesActivite
+
 <template>
 
    <div>
@@ -253,7 +253,7 @@ afficherLesActivite
             <div class="controls">
             
                <select v-model="formData.nature_prix_id" class="span4" >
-               <option v-for="plans in gettesrNaturePrix" :key="plans.id" 
+               <option v-for="plans in Nature_des_prix" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
@@ -267,7 +267,7 @@ afficherLesActivite
             <div class="controls">
             
                <select v-model="formData.motif_passation_id" class="span4" >
-               <option v-for="plans in gettersMotifPassations" :key="plans.id" 
+               <option v-for="plans in motif_passation" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
@@ -371,6 +371,9 @@ export default {
             objet:"",
             economique_id:"",
             procedure_passation_id:"",
+            nature_prix_id:"",
+            motif_passation_id:"",
+            infrastructure_id:"",
             beneficiaire:"",
             livrable:"",
             reference_marche:"",
@@ -399,11 +402,10 @@ export default {
       search: ""
     };
   },
-
   computed: {
      ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
-     'nombremarchesExecute',"gettesrNaturePrix","gettersMotifPassations",
+     'nombremarchesExecute',"gettersMotifPassations",
      'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
       "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
@@ -413,13 +415,14 @@ export default {
       "getPersonnaliseBudgetGeneral","groupUa","groupeUaPourMarheHorSib" ,"budgetEclate","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
       "montantBudgetGeneral","getPersonnaliseTransfert" ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
-  'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
+  'plans_activites','afficheNiveauAction','afficheNiveauActivite',""]),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires',"grandes_natures",
  'structures_geographiques','localisations_geographiques','getterInfrastrucure']),
    ...mapGetters("gestionMarche", ['entreprises']),
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
+  ...mapGetters('parametreGenerauxFonctionnelle', ['Nature_des_prix','motif_passation']),
   
 
   ...mapGetters("Utilisateurs", ["user","getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
@@ -641,12 +644,15 @@ recupererParentId(){
       //       latitude:"",
       // longitude:"",
       // localisation_geographie_id:"",
+      infrastructure_id:"",
       libelle_procedure:"",
         type_financement:"",
         source_financement:"",
             objet:"",
             economique_id:"",
             procedure_passation_id:"",
+            motif_passation_id:"",
+            nature_prix_id:"",
             beneficiaire:"",
             livrable:"",
             reference_marche:"",

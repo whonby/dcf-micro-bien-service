@@ -16,6 +16,7 @@
       <ul style=" background:#1f262d; height: 1000px">
 
        <li>
+
   <center>
       <router-link tag="a" :to="{ name: 'photoProfil' }">
         <img v-bind:src="AffichePhoto(afficheIdUtilisateur)" name="aboutme" class="avatar">
@@ -27,26 +28,84 @@
        
         
        
-        <li  @click.prevent="navigateToActeurDepense" >
+        
+           <!-- <li @click.prevent="navigateToParametreVehicule">
           <a href="#">
             <i class="icon-group"></i>
-            <span>PARAMETRE</span>
+            <span>PARAMETRES</span>
           </a>
-        </li>
+        </li> -->
         <!-- <li  @click.prevent="navigateToSuivMarche" >
           <a href="#">
             <i class="icon-group"></i>
             <span> SUIVI DES CONTRATS</span>
           </a>
         </li> -->
-        <li  @click.prevent="navigateToDecompte" >
+        <li  @click.prevent="navigateToComptaMatiere" >
+          
           <a href="#">
             <i class="icon-group"></i>
-            <span> SAISIE VEHICULE</span>
+            <span style="text-align:center"> TABLEAU DE BORD</span>
           </a>
         </li>
+         <li  @click.prevent="navigateToGestionParc" :class="{active: active_el == 43}">
+          <a href="#">
+            <i class="icon-group"></i>
+            <span  style="text-align:center"> GESTION DU PATRIMOINE</span>
+          </a>
+        </li>
+         <li>
+          <a href="#">
+            <i class="icon-group"></i>
+            <span  style="text-align:center"> INVENTAIRE DU PATRIMOINE</span>
+          </a>
+        </li>
+        <!-- <li  @click.prevent="navigateToGestionParc">
+          <a href="#">
+            <i class="icon-group"></i>
+            <span style="text-align:center"> GESTION DU PARC IMMOBILIER</span>
+          </a>
+        </li> -->
+
+<!-- 
+ <li  @click.prevent="navigateToComptaMatiere" >
+          
+          <a href="#">
+            <i class="icon-group"></i>
+            <span style="text-align:center"> MOBILIERS & MATERIELS</span>
+          </a>
+        </li>
+         <li  @click.prevent="navigateToGestionParc" :class="{active: active_el == 43}">
+          <a href="#">
+            <i class="icon-group"></i>
+            <span  style="text-align:center"> GESTION DU PARC VEHICULE</span>
+          </a>
+        </li>
+        <li  @click.prevent="navigateToGestionParc">
+          <a href="#">
+            <i class="icon-group"></i>
+            <span style="text-align:center"> GESTION DU PARC IMMOBILIER</span>
+          </a>
+        </li> -->
+
+
+
+
+
+        <!-- <li  @click.prevent="navigateToGestionParc" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span> SAISIE & AFFECTATION</span>
+          </a>
+        </li>
+        <li  @click.prevent="navigateToReparation" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span> REPARATION VEHICULE</span>
+          </a>
+        </li> -->
         
-         <li  @click.prevent="navigateToSuiviMarcheProjet" >
+         <!-- <li  @click.prevent="navigateToSuiviMarcheProjet" >
           <a href="#">
             <i class="icon-group"></i>
             <span>EXPLOITATION</span>
@@ -57,7 +116,7 @@
             <i class="icon-group"></i>
             <span>ALERTE</span>
           </a>
-        </li>
+        </li> -->
          
         <li >
            <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
@@ -143,124 +202,33 @@ return objJson.id
     admin:admin,
     dcf:dcf,
     cf:cf,
- navigateToCatographieBudgetaire(){
-        this.activate(8)
-        this.$router.push({
-          name: 'CartographieBudget'
-        })
-      },
-       navigateToRapport(){
-        this.activate(20)
-        this.$router.push({
-          name: ''
-        })
-      },
-      
- navigateToTransfert(){
-        this.activate(6)
-        this.$router.push({
-          name: 'transfert'
-        })
-      },
-navigateToGestionMarche(){
-        this.activate(7)
-        this.$router.push({
-          name: 'GestionMarche'
-        })
-      },
-
-navigateToSuivMarche(){
+ 
+       
+     navigateToComptaMatiere(){
         this.activate()
         this.$router.push({
-          name: 'ficheSuivi'
+          name: 'TableauBordGestionVehicule'
         })
       },
-    navigateToDecompte(){
-        this.activate()
+navigateToGestionParc(){
+        this.activate(43)
         this.$router.push({
-          name: 'decompteProvisoire'
+          name: 'gestionStockCorporels'
+        })
+      },
+navigateToReparation(){
+        
+        this.$router.push({
+          name: 'ReparationVehicule'
+        })
+      },
+      navigateToParametreVehicule(){
+        this.activate(42)
+        this.$router.push({
+          name: 'TableauBordGestionVehicule'
         })
       },
 
-
-navigateToSuiviMarcheProjet(){
-        this.activate()
-        this.$router.push({
-          name: 'suiviMarcheDesProjets'
-        })
-      },
-navigateToSuiviMarcheProjetpARtYPEmArche(){
-        this.activate()
-        this.$router.push({
-          name: 'suiviMarcheDesProjetParTypeMarche'
-        })
-      },
-      etatRecapitulativeS(){
-        this.activate()
-        this.$router.push({
-          name: 'etatRecapitulative'
-        })
-      },
-      navigateToActeurDepense(){
-        this.activate()
-        this.$router.push({
-          name: 'suiviDesEntreprise'
-        })
-      },
-
-       navigateToUniteAdministrative(){
-        this.activate(1)
-        this.$router.push({
-          name: 'tableaudebord'
-        })
-      },
- navigateToTableauBord(){
-        this.activate(11)
-        this.$router.push({
-          name: 'TableauDeBordG'
-        })
-      },
-       navigateToParametreGeneraux(){
-        this.activate(17)
-        this.$router.push({
-          name: 'TableauDeBordG'
-        })
-      },
-      
-       navigateToComptaMatiere(){
-        this.activate(5)
-        this.$router.push({
-          name: 'TableauBordImmo2'
-        })
-      },
-
-
-      navigateToInvestissement(){
-        this.activate(4)
-        this.$router.push({
-          name:'tableauBordInvestissement'
-        })
-      },
-
- navigateToBienEtService(){
-        this.activate(3)
-        this.$router.push({
-          name: 'tableauBord'
-        })
-      },
-      navigateGestionUser(){
-          this.activate(21)
-          this.$router.push({
-              name: 'Groupe'
-          })
-      },
-
-    navigateGestionEquipe(){
-      this.activate(30)
-      this.$router.push({
-        name: 'MonEquipe'
-      })
-    },
 
 
 

@@ -2,7 +2,8 @@
 
   <div>
     <div class="">
-      <div class="row-fluid"  style="position: absolute !important;">
+
+      <div class="row-fluid" style="height: 200em">
         <div id="sidebarinfo"  class="sidebar leaflet-sidebar collapsed">
           <div class="sidebar-tabs">
             <ul role="tablist"> <!-- top aligned tabs -->
@@ -19,7 +20,7 @@
       <h6 align="center"> {{objetUnite.ville}}</h6>
 
               <div class="row-fluid" >
-                <div class="span5" v-if="objetUnite">
+                <div class="span4" v-if="objetUnite">
                   <donut-chart
                       style="width: 120px;height: 120px"
                       id="donut1"
@@ -34,10 +35,12 @@
                 <div class="span7"><br>
 
                   <div v-if="objetUnite">
-                    Montant de base: <span style="color: #003900; "><b>{{formatageSomme(objetUnite.budget)}}</b></span> <br>
-                    Montant exécuté:<span style="color: #00d700; "><b>{{formatageSomme(objetUnite.budgetExecute)}}</b></span><br>
-                    Montant restant:<span style="color: darkred; "><b>{{formatageSomme(objetUnite.budgetReste)}}</b></span><br>
-                    Taux d'exécution:<span style="color: #e36706; "><b>{{objetUnite.tauxBudget}} %</b></span>
+                    Montant previsionnel: <span style="color: #003900; "><b>{{formatageSomme(objetUnite.budget)}}</b></span> <br>
+                    Montant de base:<span style="color: #00d700; "><b>{{formatageSomme(parseFloat(objetUnite.montant_approuve))}}</b></span><br>
+                    Montant executé:<span style="color: darkred; "><b>{{formatageSomme(objetUnite.budgetExecute)}}</b></span><br>
+                      Montant restant:<span style="color: #e36706; "><b>
+                      {{formatageSomme(objetUnite.budgetReste)}}</b></span><br>
+                     Taux d'exécution:<span style="color: #e36706; "><b>{{objetUnite.tauxBudget}} %</b></span>
                   </div>
 
                   
@@ -65,7 +68,7 @@
                   </div>
                   <div class="mt-3">
                       <h4>Nom de l'Agent : DCF</h4>
-                      {{marche_image.latitude}} /  {{marche_image.longitude}}
+                       Date:  {{conversionDateVariable(marche_image.date_enregistrement)}}
                       <p class="text-secondary mb-1">Distance :
                         {{distance(marche_image.latitude, marche_image.longitude,objetUnite.latitude,objetUnite.longitude, 'K')}}
                       </p>
@@ -131,7 +134,7 @@
 <div class="span6">
     <label>Unite administrative<a href="#" @click.prevent="videUniteAdmin()" style="color: red" v-if="unite_administrative_id">
         <i class="fa fa-trash-o"></i></a></label>
-    <model-list-select style="background-color: rgb(255,255,255);"
+    <model-list-select style="background-color: rgb(233,233,233);"
                        class="wide"
                        :list="filtre_unite_admin"
                        v-model="unite_administrative_id"
@@ -144,7 +147,7 @@
 
 
     <label>Régions  <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a></label>
-    <model-list-select style="background-color: rgb(255,255,255);"
+    <model-list-select style="background-color: rgb(233,233,233);"
                        class="wide"
                        :list="regions"
                        v-model="region"
@@ -161,19 +164,19 @@
       <input type="radio" v-model="status_marche" value="" id="logiciel70"> <span >Affichés tous <b>({{nombreMarchePasInfrastructure(infrastructure)}})</b></span>
     </label>
      <label for="logiciel7">
-      <input type="radio" v-model="status_marche" id="logiciel7" value="planifie"> <span class="mpl">Marché planifié <b>({{nombreMarcheParStatue("planifie")}})</b></span>
+      <input type="radio" v-model="status_marche" id="logiciel7"> <span>Marché planifié <b>({{nombreMarcheParStatue("planifie")}})</b></span>
     </label>
     <label for="web6" >
-      <input type="radio" v-model="status_marche"  id="web6" value="1"> <span class="mpc">Marché contractualisation <b>({{nombreMarcheParStatue(1)}})</b></span>
+      <input type="radio" v-model="status_marche"  id="web6" value="1"> <span>Marché contractualisation <b>({{nombreMarcheParStatue(1)}})</b></span>
     </label>
     <label for="mobile5">
-      <input type="radio" v-model="status_marche" id="mobile5" value="2"> <span class="mexusion">Marché en exécution <b>({{nombreMarcheParStatue(2)}})</b></span>
+      <input type="radio" v-model="status_marche" id="mobile5" value="2"> <span>Marché en exécution <b>({{nombreMarcheParStatue(2)}})</b></span>
     </label>
      <label for="mobile4">
-      <input type="radio" v-model="status_marche" id="mobile4" value="3"> <span class="mresilise">Marché résilie  <b>({{nombreMarcheParStatue(3)}})</b></span>
+      <input type="radio" v-model="status_marche" id="mobile4" value="3"> <span>Marché résilie  <b>({{nombreMarcheParStatue(3)}})</b></span>
     </label>
      <label for="mobile3">
-      <input type="radio" v-model="status_marche" id="mobile3" value="5" > <span class="mtermine">Marché terminé  <b>({{nombreMarcheParStatue(5)}})</b></span>
+      <input type="radio" v-model="status_marche" id="mobile3" value="5" > <span>Marché terminé  <b>({{nombreMarcheParStatue(5)}})</b></span>
     </label>
      <label for="mobile2">
       <input type="radio" v-model="status_marche" id="mobile2" value="7"> <span>Marché suspendu <b>({{nombreMarcheParStatue(7)}})</b></span>
@@ -433,10 +436,10 @@ montantBudegtPasUniteAdminOuRegion
 
 
       <div id="MarcheContratualisation1">
-          <div id="contratualisation">Marché en contractualisation </div>
+          <div id="contratualisation">Marché en contractualisation</div>
       </div>
       <div id="MarchePlanification1">
-          <div id="planifier">Marché planifié</div>
+          <div id="planifier">Marché planifié </div>
       </div>
       <div id="MarcheExecution1">
           <div id="execution">Marché en exécution</div>
@@ -743,9 +746,72 @@ export default {
 created() {
 //console.log(this.typeMarches)
 this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
-    console.log("INTEGER...........")
-console.log(this.getterUniteAdministrativeByUser)
-    console.log("INTEGER...........")
+
+
+    if(this.getterInfoTableauBordFiltre){
+//    console.log("...............AAAAA..............")
+//console.log(this.getterInfoTableauBordFiltre)
+//        console.log("..........454788...................")
+        if(this.getterInfoTableauBordFiltre.infrastructure!=""){
+            this.infrastructure=this.getterInfoTableauBordFiltre.infrastructure
+               // this.getterInfrastrucure.find(item=>item.id==this.getterInfoTableauBordFiltre.infrastructure)
+            this.getterInfoTableauBordFiltre.infrastructure=""
+        }
+
+        if(this.getterInfoTableauBordFiltre.type_marche!=""){
+            this.type_marche=this.getterInfoTableauBordFiltre.type_marche
+                //this.typeMarches.find(item=>item.id==this.getterInfoTableauBordFiltre.type_marche)
+            this.getterInfoTableauBordFiltre.type_marche=""
+        }
+        if(this.getterInfoTableauBordFiltre.unite_administrative!=""){
+            this.unite_administrative_id=this.getterInfoTableauBordFiltre.unite_administrative
+              //  this.uniteAdministratives.find(item=>item.id==this.getterInfoTableauBordFiltre.unite_administrative)
+            this.getterInfoTableauBordFiltre.unite_administrative=""
+        }
+        if(this.getterInfoTableauBordFiltre.region!=""){
+            this.region=this.getterInfoTableauBordFiltre.region
+                //this.localisations_geographiques.find(item=>item.id==this.getterInfoTableauBordFiltre.region)
+            this.getterInfoTableauBordFiltre.region=""
+
+        }
+        if(this.getterInfoTableauBordFiltre.status_marche!=""){
+
+//            if(this.getterInfoTableauBordFiltre.status_marche==8){
+//                console.log(this.getterInfoTableauBordFiltre.status_marche)
+//                this.status_marche="planifie"
+//            }
+            if(this.getterInfoTableauBordFiltre.status_marche=="planifier"){
+                console.log("OK C'est la contratualisation")
+                this.getterInfoTableauBordFiltre.status_marche=""
+                this.status_marche="planifie"
+            }
+
+            if(this.getterInfoTableauBordFiltre.status_marche==1){
+                this.status_marche=1
+            }
+
+            if(this.getterInfoTableauBordFiltre.status_marche==2){
+                this.status_marche=2
+            }
+
+            if(this.getterInfoTableauBordFiltre.status_marche==3){
+                this.status_marche=3
+            }
+
+            if(this.getterInfoTableauBordFiltre.status_marche==5){
+                this.status_marche=5
+            }
+
+            if(this.getterInfoTableauBordFiltre.status_marche==7){
+                this.status_marche=7
+            }
+
+            if(this.getterInfoTableauBordFiltre.status_marche==8){
+                this.status_marche=8
+            }
+           this.getterInfoTableauBordFiltre.status_marche=""
+        }
+    }
 },
   computed: {
 // methode pour maper notre guetter
@@ -757,10 +823,25 @@ console.log(this.getterUniteAdministrativeByUser)
       "typeTextes",
       "uniteAdministratives",
       "getterBudgeCharge",
+        "decomptefactures",
     ]),
-    ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise","getterImageMarche","acteEffetFinanciers","typeMarches"]),
+    ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise",
+        "getterImageMarche","acteEffetFinanciers","typeMarches","getterInfoTableauBordFiltre","getActeEffetFinancierPersonnaliser45","avenants"]),
 
       noDCfNoAdmin:noDCfNoAdmin,
+      conversionDate(){
+          let da=new Date()
+          let  options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+          return da.toLocaleDateString("fr-FR", options)
+      },
+      conversionDateVariable(){
+          return date=>{
+              let da=new Date(date)
+              let  options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+              return da.toLocaleDateString("fr-FR", options)
+          }
+
+      },
       filtre_unite_admin() {
           if(this.noDCfNoAdmin){
               let colect=[];
@@ -786,8 +867,8 @@ console.log(this.getterUniteAdministrativeByUser)
           let vM=this;
           this.filtre_unite_admin.forEach(function (value) {
               let objet=vM.marches.filter(item=>{
-                      if(item.parent_id!=null && item.unite_administrative_id==value.id){
-                        //  console.log(item.parent_id)
+                      if(item.parent_id!=null && item.unite_administrative_id==value.id && item.sib==1 ){
+                          //  console.log(item.parent_id)
                           return item
                       }
                   }
@@ -833,8 +914,8 @@ console.log(this.getterUniteAdministrativeByUser)
     imageMarcheSelectionner(){
        return id=>{
          if(id!=""){
-
-           return this.getterImageMarche.filter(item=>item.marche_id==id)
+         // let objet=this.getterImageMarche.filter(item=>item.marche_id==id).reverse()
+           return this.getterImageMarche.filter(item=>item.marche_id==id).reverse()
          }
        }
     },
@@ -949,6 +1030,54 @@ console.log(this.getterUniteAdministrativeByUser)
              }
            }
     },
+//      afficheNombreMarcheStautInLegend(){
+//
+//          const nbr_planifier = document.querySelector("#score");
+//          h3.innerHtml = nombreMarcheParStatue("");
+//
+//      },
+      montantApprouve(){
+          return id=>{
+              let objet=this.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==id)
+              if(objet!=undefined){
+                  return objet.montant_act
+              }
+              return 0
+          }
+      },
+      montantExecutParMarche(){
+          return id=>{
+              let vm=this;
+              let initeVal = 0;
+              let montant=vm.decomptefactures.filter(item=>item.marche_id==id).reduce(function (total, currentValue) {
+                  return total + parseFloat(currentValue.montantmarche) ;
+              }, initeVal);
+
+              if(montant!=undefined){
+                  return montant
+              }
+
+              return 0
+          }
+
+      },
+      montantRestantMarche(){
+          return id=>{
+              return this.montantApprouve(id) - this.montantExecutParMarche(id)
+          }
+      },
+      tauxExecutionMarche(){
+          return id=>{
+              //   let reste=this.montantApprouve(id) - this.montantExecutParMarche(id)
+
+
+              if(this.montantApprouve(id)>0){
+                  let taux=  (this.montantExecutParMarche(id) * 100)/this.montantApprouve(id)
+                  return taux.toFixed(2)
+              }
+              return 0
+          }
+      },
     localisation(){
       let localisation=[]
       let vM=this;
@@ -962,43 +1091,37 @@ console.log(this.getterUniteAdministrativeByUser)
            * Recuperation des unite administrative de la zone geographique
            * @type {*[]}
            */
-          let budget=parseFloat(value.montant_marche);
+
           let color="";
           let colorFill=""
         //  let montant_engagement_marche=0;
          // let budget=0;
 /**Calcule des marches**/
-         let montant_execute=0;
+       //  let montant_execute=0;
 
 
-         let objet_act=   vM.acteEffetFinanciers.find(item=>item.marche_id==value.id)
-          if(objet_act!=undefined){
-              montant_execute=montant_execute+parseFloat(objet_act.montant_act)
-          }else{
-              montant_execute=montant_execute+0
-          }
+//         let objet_act=   vM.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==value.id)
+//          if(objet_act!=undefined){
+//              montant_execute=montant_execute+parseFloat(objet_act.montant_act)
+//          }else{
+//              montant_execute=montant_execute+0
+//          }
 
-//          let initeVal = 0;
-//          let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==value.id).reduce(function (total, currentValue) {
-//            return total + parseFloat(currentValue.total_general) ;
-//          }, initeVal);
-//          montant_engagement_marche=montant_engagement_marche + montantEngament
 
-        //  let taux=0;
 
           if(value.attribue==0){
-            color="#ff0000"
-            colorFill="#ff0000"
+            color="#0000f3"
+            colorFill="#0000f3"
           }
 
           if(value.attribue==1){
-            color="#04874e"
-            colorFill="#04874e"
+            color="#FF00FF"
+            colorFill="#FF00FF"
           }
 
           if(value.attribue==2){
-            color="#e8d20c"
-            colorFill="#e8d20c"
+            color="#008000"
+            colorFill="#008000"
           }
 
           if(value.attribue==3){
@@ -1007,25 +1130,30 @@ console.log(this.getterUniteAdministrativeByUser)
           }
 
           if(value.attribue==5){
-            color="#ab0cd7"
-            colorFill="#ab0cd7"
+            color="#d73538"
+            colorFill="#d73538"
           }
 
           if(value.attribue==7){
-            color="#3a373b"
-            colorFill="#3a373b"
+            color="#ff0000"
+            colorFill="#ff0000"
           }
-          let montantRest=budget - montant_execute;
-          let tauxExecution=(montant_execute/budget)*100
+            let prevue_montant=parseFloat(value.montant_marche);
+            let objet_act=vM.montantApprouve(value.id)
+            console.log(prevue_montant)
+            let montantExecuteObjetAct=vM.montantExecutParMarche(value.id)
 
+            let montant_restantObjet=vM.montantRestantMarche(value.id)
+            let tauxObjetMontant=vM.tauxExecutionMarche(value.id)
+            console.log(montantExecuteObjetAct)
           let budgetExecute={
             label: 'Montant Excecute',
-            value:montant_execute
+            value:montantExecuteObjetAct
           }
 
           let budgetReste={
             label: 'Montant Restant',
-            value:montantRest
+            value:montant_restantObjet
           }
 
           vM.donutData.push(budgetExecute)
@@ -1035,12 +1163,13 @@ console.log(this.getterUniteAdministrativeByUser)
             id:value.id,
             ville:value.objet,
             latlng:coordonne,
-            budget:budget,
+            budget:prevue_montant,
             latitude:value.latitude,
             longitude:value.longitude,
-            budgetReste:montantRest,
-            budgetExecute:montant_execute,
-            tauxBudget:tauxExecution.toFixed(2),
+            budgetReste:montant_restantObjet,
+            budgetExecute:montantExecuteObjetAct,
+            montant_approuve:objet_act,
+            tauxBudget:tauxObjetMontant,
             color:color,
             colorFill:colorFill,
             region_id:value.localisation_geographie_id,
@@ -1828,6 +1957,11 @@ this.objetUnite=objet
 </script>
 
 
+
+
+
+
+
     
 -->
 <style>
@@ -1851,33 +1985,33 @@ this.objetUnite=objet
 .marche_planifier{
    width: 20px;
    height: 20px;
-   background: red;
+   background: #0000f3 !important;
 }
 
 .marche_contratualisation{
    width: 20px;
    height: 20px;
-   background: #04874e;
+   background: #FF00FF !important;
 }
 .marche_execution{
    width: 20px;
    height: 20px;
-   background: #e8d20c;
+   background: #008000 !important;
 }
 .marche_resilise{
    width: 20px;
    height: 20px;
-   background: blue;
+   background: #6d0000 !important;
 }
 .marche_termine{
    width: 20px;
    height: 20px;
-   background: #ab0cd7;
+   background: #ab0cd7 !important;
 }
 .marche_suspendue{
    width: 20px;
    height: 20px;
-   background: #3a373b;
+   background: #FF0000 !important;
 }
 .sidebar {
   position: absolute;
@@ -2123,7 +2257,7 @@ this.objetUnite=objet
   margin-top: 1px;
 }
 
-/*Marker content instances*/
+/*Marker content instances
 .map-marker.exclamation div.icon:before{
   content: '!';
 }
@@ -2131,17 +2265,17 @@ this.objetUnite=objet
   content: 'A';
 }
 
-/*Marker color instances*/
+Marker color instances
 .map-marker.red div.icon{background: #ff2222;}
 
 .map-marker.green div.icon{background: #008800;color: #fff;}
 .map-marker.green {background: #000;}
 .map-marker.green div.arrow{border-top-color: #000;}
 
-/*Marker states*/
+Marker states
 .map-marker.inactive {
   opacity: 0.6;
-}
+}*/
 .red {
   color:#fff;
   background-color: red !important;
@@ -2249,38 +2383,38 @@ label {
 }
 
 
-.marker-cluster-small {
-    background-color: #FF9633;
-    color: #0e0e0e;
-    font-size: 1em;
+/*.marker-cluster-small {*/
+/*    background-color: #FF9633;*/
+/*    color: #0e0e0e;*/
+/*    font-size: 1em;*/
 
-}
-.marker-cluster-small div {
-    background-color: #FF9633;
-    color: #0e0e0e;
-    font-size: 1em;
-}
-.marker-cluster-medium {
-    background-color:#FF9633;
-    color: #0e0e0e;
-    font-size: 1em;
-}
-.marker-cluster-medium div {
-    background-color:#FF9633;
-    color: #0e0e0e;
-    font-size: 1em;
-}
+/*}*/
+/*.marker-cluster-small div {*/
+/*    background-color: #FF9633;*/
+/*    color: #0e0e0e;*/
+/*    font-size: 1em;*/
+/*}*/
+/*.marker-cluster-medium {*/
+/*    background-color:#FF9633;*/
+/*    color: #0e0e0e;*/
+/*    font-size: 1em;*/
+/*}*/
+/*.marker-cluster-medium div {*/
+/*    background-color:#FF9633;*/
+/*    color: #0e0e0e;*/
+/*    font-size: 1em;*/
+/*}*/
 
-.marker-cluster-large {
-    background-color:#FF9633;
-    color: #0e0e0e;
-    font-size: 1em;
-}
-.marker-cluster-large div {
-    background-color:#FF9633;
-    color: #0e0e0e;
-    font-size: 1em;
-}
-@import "../../node_modules/leaflet/dist/leaflet.css";
+/*.marker-cluster-large {*/
+/*    background-color:#FF9633;*/
+/*    color: #0e0e0e;*/
+/*    font-size: 1em;*/
+/*}*/
+/*.marker-cluster-large div {*/
+/*    background-color:#FF9633;*/
+/*    color: #0e0e0e;*/
+/*    font-size: 1em;*/
+/*}*/
+/*@import "../../node_modules/leaflet/dist/leaflet.css";*/
 
 </style>

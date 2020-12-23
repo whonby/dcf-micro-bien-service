@@ -11,9 +11,12 @@ const defaultstate = {
     utilisateur:[],
     roles:[],
     affectation:[],
+    affectationGroupeUser:[],
     uniteAdministrativeByUser:[],
     groupe:[],
     equipe_cf:[],
+    menu:[],
+    module:[],
     ancien_password:false,
     menuModuleSidcf:"",
 

@@ -9,31 +9,36 @@
                             </div>
                              <div id="printMe">
 <table class="table table-bordered table-striped html2pdf__page-break" id="app1"  >
-   <tr style="border: 2px double #000">
-                                 <td colspan="2" style="text-align:center">
- <span>MINISTRE AUPRES DU PREMIER MINISTRE </span>
-      <span>CHARGE DU BUDGET ET DU PORTEFEUILLE DE L'ETAT</span>
+   <tr >
+                                 <td colspan="" style="text-align:center">
+ 
+      <p>MINISTERE  DU BUDGET ET DU PORTEFEUILLE</p>
+      <p> DE L'ETAT</p>
                                  </td>
-                                 <!-- <td style="text-align:center">
-                                    <img  :src="AffichePhoto">
-                                   <p>DIRECTION DU CONTRÖLE FINANCIER</p>
-                                 </td> -->
-                                 <td style="text-align:center">
-                                   <p>REPUBLIQUE DE CÖTE D'IVOIRE </p>
-      <P>Union-Discipline-Travail</P>
-                                 </td>
-                               </tr>
-   <tr style="border: 2px double #000">
-                                 <td style="text-align:center">
+                                  <td style="text-align:center">
                                    <img  :src="AfficheAmoirie">
  
                                  </td>
                                  <td style="text-align:center">
+                                   <p>REPUBLIQUE DE CÔTE D'IVOIRE </p>
+      <P>Union-Discipline-Travail</P>
+                                 </td>
+                               </tr>
+   <tr >
+      <td style="text-align:center">
+                                   <!-- <img  :src="AfficheLogODCF"> -->
+                                   <p>DIRECTION DU CONTRÔLE FINANCIER</p>
+                                 </td>
+                                 <!-- <td style="text-align:center">
+                                   <img  :src="AfficheAmoirie">
+ 
+                                 </td> -->
+                                 <td style="text-align:center">
                                    
                                  </td>
                                  <td style="text-align:center">
-                                   <img  :src="AfficheLogODCF">
-                                   <p>DIRECTION DU CONTRÖLE FINANCIER</p>
+                                   <!-- <img  :src="AfficheLogODCF">
+                                   <p>DIRECTION DU CONTRÔLE FINANCIER</p> -->
                                  </td>
                                </tr>
                               
@@ -41,43 +46,52 @@
 <br/>
       <br/>
     <div style="border: 2px double #000;text-align:center">
-      <p>FICHE DE CONTRÖLE DE LA REALITE DU SERVICE FAIT </p>
+      <p>FICHE DE CONTRÔLE DE LA REALITE DU SERVICE FAIT </p>
       <P>INSTITUEE PAR L'ARRETE N° 638 MEF/CAB/YKM DU 20 JUILLET 2009</P>
     </div>
 
  <br/>
       <br/>
+      <br/>
       
 
+     
       <tr>
-        <th style="width:25% ">EXERCICE BUDGETAIRE :</th>
-                     <td style="font-size:14px"> {{detailOp.exercice_budget}} </td>
+        <th style="width:25% ">EXERCICE BUDGETAIRE :</th>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <td style="font-size:14px"> {{detailOp.exercice_budget}} </td>
+                     
                     
       </tr>
       <br/>
       <br/>
-    
+    <br/>
+      
           <tr>
                      <th style="width:25% ">PROJET OU ORGANISME :</th>
-                     <td style="font-size:14px"> {{infoLibelleUa(detailOp.ua_id)}} </td>
+                     <td style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{infoLibelleUa(detailOp.ua_id)}} </td>
                     
+                 </tr>
+                <br/>
+      <br/>
+    <br/>
+      
+                  <tr>
+                    <!-- <th rowspan="5" style="margin:0 auto">IMPUTATION BUDGETAIRE</th> -->
+                     <th>OBJET DE LA DEPENSE :</th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<td style="text-align:center;font-size:25px"> {{infoObjetFacture(detailOp.facture_id)}} </td> 
+                   
                  </tr>
                  <br/>
       <br/>
-                  <tr>
-                    <!-- <th rowspan="5" style="margin:0 auto">IMPUTATION BUDGETAIRE</th> -->
-                     <th style="width:25% ">OBJET DE LA DEPENSE :</th>
-                     <td style="text-align:center;font-size:14px"> {{infoObjetFacture(detailOp.facture_id)}} </td>
-                 </tr>
-                  <br/>
-      <br/>
+    <br/>
+      
    <tr>
                    
-                     <th style="width:25% ">FOURNISSEUR : </th>
+                     <th style="width:25% ">FOURNISSEUR : </th>&nbsp;&nbsp;&nbsp;&nbsp;
                      <td style="font-size:14px"> {{afficherNomEntreprise(detailOp.entreprise_id)}} </td>
                  </tr>
-                  <br/>
+                 <br/>
       <br/>
+    <br/>
+   
                  <tr>
                    
                      <th style="width:25% ">ADRESSE DU FOURNISSEUR :</th>
@@ -85,47 +99,59 @@
                  </tr>
                   <br/>
       <br/>
+    <br/>
+      
                  <tr>
                    
                      <th style="width:25% ">N° ET DATE DE LA FACTURE :</th>
                      <td style="font-size:14px"> {{infoFacture(detailOp.facture_id)}} </td>
                  </tr>
-                  <br/>
+                 <br/>
       <br/>
+    <br/>
+      
                  <tr>
                    
                      <th style="width:25% ">IMPUTATION BUDGETAIRE :</th>
                      <td style="font-size:14px"> {{detailOp.budget_general_id}} </td>
                  </tr>
-                  <br/>
+                 <br/>
       <br/>
+    <br/>
+     
                  <tr>
                    
                      <th style="width:25% ">ORDRE DE PAIEMENT N° :</th>
                      <td style="font-size:14px"> {{detailOp.numero_op_definitif}} </td>
                  </tr>
-                  <br/>
+                 <br/>
       <br/>
+    <br/>
+      
                  <tr>
                    
                      <th style="width:25% ">MONTANT :</th>
                      <td style="font-size:14px"> {{formatageSomme(parseFloat(detailOp.total_general))}} </td>
                  </tr>
-                  <br/>
+                 <br/>
       <br/>
+    <br/>
+    
                  <tr>
                    
                      <th style="width:25% ">SERVICE BENEFICIAIRE :</th>
                      <td style="font-size:14px"> {{infoLibelleUa(detailOp.ua_id)}} </td>
                  </tr>
-                 <br/>
+                <br/>
       <br/>
+    <br/>
+     
       
                      <p style="text-align:center;text-decoration: underline;font-size:14px;">OBSERVATION </p>
                   
     <table class="table table-bordered table-striped html2pdf__page-break" id="app1"  >
-      <tr>
-                    <td style="width:50%;border: 2px double #000 ">
+      <tr style="border: 2px double #000;" >
+                    <td >
                       
                       
 <h4 style="text-align:center;text-decoration: underline;">SERVICE BENEFICIAIRE :</h4>
@@ -135,9 +161,17 @@ Date : {{formaterDate(detailOp.date_sb_service_real)}}  <br/>
 Nom et Prénoms:  <br/>
 <br/>
 Signature et Cachet
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
                    </td>
-                   <td></td>
-                   <td style="width:50% ;border: 2px double #000">
+                   
+                   <td >
                     
 <h4 style="text-align:center;text-decoration: underline;">CONTRÔLEUR FINANCIER :</h4>
 <br/>
@@ -146,6 +180,13 @@ Date : {{formaterDate(detailOp.date_cf_service_real)}}  <br/>
 Nom et Prénoms:  <br/>
 <br/>
 Signature et Cachet  
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
 
                    </td>
@@ -289,7 +330,7 @@ AfficheLogODCF() {
            const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-         return qtereel.numero_facture.concat(' DU ', this.formaterDate(qtereel.date_facture))
+         return qtereel.numero_facture.concat('  ',' DU ','  ', this.formaterDate(qtereel.date_facture))
       }
       return ""
         }

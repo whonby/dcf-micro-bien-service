@@ -20,7 +20,19 @@ const defaultState = {
   historiqueAffectation:[],
   demandeMateriel:[],
   historiqueAffectationService:[],
-  demandeService:[]
+  demandeService:[],
+  marqueVehicules:[],
+  ModeleVehicules:[],
+  TypeEntretien:[],
+  TypeVehicule:[],
+  TypeEnergie:[],
+  TypeReparation:[],
+  AffectationVehicules:[],
+  Transmissions:[],
+  Appreciations:[],
+  ficheArticle:[],
+  ua_idImo:"",
+
 };
 
 export default defaultState;

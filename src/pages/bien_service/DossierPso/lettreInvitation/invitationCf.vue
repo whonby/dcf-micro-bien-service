@@ -61,7 +61,11 @@
                           <tr>
                             <td>
                         <div class="control-group">
+<<<<<<< HEAD
                         <label class="control-label">Référence DAO</label>
+=======
+                        <label class="control-label">Ref DAO</label>
+>>>>>>> 40dae1ef2263fec3127d1d6a5539f4674dc786aa
                         <div class="controls">
                             <!-- <select v-model="formLettre.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -94,7 +98,11 @@
                             <tr>
                             <td >
                           <div class="control-group">
+<<<<<<< HEAD
                         <label class="control-label">Référence de la lettre</label>
+=======
+                        <label class="control-label">lettre de reférence</label>
+>>>>>>> 40dae1ef2263fec3127d1d6a5539f4674dc786aa
                         <div class="controls">
                             <input
                                     type="text"
@@ -147,11 +155,11 @@
                         </td>
                         <td >
                         <div class="control-group">
-                   <label class="control-label">Fichier joint:</label>
-                    <div class="controls">
-                     <input type="file"   @change="OnchangeFichier" />
-              </div>
-            </div>
+                               <label class="control-label">Fichier joint:</label>
+                                <div class="controls">
+                                 <input type="file"   @change="OnchangeFichier" />
+                      </div>
+                    </div>
                         </td>
                         </tr>
                     </table>  
@@ -184,7 +192,11 @@
                                <tr>
                             <td>
                         <div class="control-group">
+<<<<<<< HEAD
                         <label class="control-label">Référence DAO</label>
+=======
+                        <label class="control-label"> Ref DAO</label>
+>>>>>>> 40dae1ef2263fec3127d1d6a5539f4674dc786aa
                         <div class="controls">
                             <!-- <select v-model="formLettre.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -217,7 +229,11 @@
                             <tr>
                             <td >
                           <div class="control-group">
+<<<<<<< HEAD
                         <label class="control-label">Référence de la lettre</label>
+=======
+                        <label class="control-label">Lettre de reférence </label>
+>>>>>>> 40dae1ef2263fec3127d1d6a5539f4674dc786aa
                         <div class="controls">
                             <input
                                     type="text"

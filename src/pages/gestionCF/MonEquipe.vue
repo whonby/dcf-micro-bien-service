@@ -12,7 +12,6 @@
         <div class="span12">
 
 
-
           <div class="widget-box">
             <div class="widget-title">
               <div class="span6">
@@ -54,7 +53,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="odd gradeX" v-for="titre in partition(titreFiltres,size)[page] " :key="titre.id">
+                <tr class="odd gradeX" v-for="titre in titreFiltres " :key="titre.id">
                   <td @dblclick="afficherModalModifierTitre(titre.id)">{{titre.membre.matricule || 'Non renseigné'}}</td>
                   <td  @dblclick="afficherModalModifierTitre(titre.id)">{{titre.membre.name || 'Non renseigné'}}</td>
                   <td  @dblclick="afficherModalModifierTitre(titre.id)">{{titre.membre.email || 'Non renseigné'}}</td>
@@ -70,19 +69,19 @@
                     </div>
                   </td>
                 </tr>
-                <tr v-if="titreFiltres.length==0" align="right">
+                <!-- <tr v-if="titreFiltres.length==0" align="right">
                   <h6>Pas de donnée disponible</h6>
-                </tr>
+                </tr> -->
                 </tbody>
               </table>
               <div class="pagination alternate">
-                <ul>
+                <!-- <ul>
                   <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
                   <li  v-for="(titre, index) in partition(titreFiltres,size).length" :key="index" :class="{ active : active_el == index }">
                     <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
                   <li :class="{ disabled : page == partition(titreFiltres,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
 
-                </ul>
+                </ul> -->
               </div>
             </div>
           </div>
@@ -210,8 +209,8 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { formatageSomme } from "../../Repositories/Repository";
-import {partition} from "../../Repositories/Repository"
+//import { formatageSomme } from "../../Repositories/Repository";
+//import {partition} from "../../Repositories/Repository"
 //import ProgressBar from "../component/ProgressBar"
 export default {
   name: 'budget',
@@ -358,7 +357,7 @@ export default {
       this.editTitre = this.getterUtilisateur.find(item=>item.id==index);
 
     },
-    partition:partition,
+    //partition:partition,
     getDataPaginate(index){
       this.active_el = index;
       this.page=index
@@ -371,7 +370,7 @@ export default {
       this.active_el++
       this.page ++
     },
-    formatageSomme:formatageSomme,
+   // formatageSomme:formatageSomme,
     verifieDCFExiste(code){
       let controler=this.getterUtilisateur.find(item=>{
         if(item.user_role){

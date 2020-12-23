@@ -72,13 +72,18 @@ detail_marche
                 </tr>
                 
               </table>
-      
-             
+      <div align="right">
+
+      <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+
+
+                            </div>
+             <div id="printMe">
               <template v-if="formData.ua_id=='' || formData.typeua_id=='' || formData.exo==''">
  <h5 style="text-align:center;color:red;font-size:20px" >VEUILLEZ SELECTIONNER L'UNITE ADMINISTRATIVE SVP</h5>
               </template>
                         <template v-if="formData.ua_id !='' && formData.typeua_id !='' && formData.exo !=''">
- <h5 style="text-align:center;color:#000000;font-size:20px" >MARCHES/CONTRATS ATTRIBUE ISSUS DE LA PROCEDURE NORMALE</h5>
+<!-- <h5 style="text-align:center;color:#000000;font-size:20px" >MARCHES/CONTRATS ATTRIBUE ISSUS DE LA PROCEDURE NORMALE</h5>-->
               </template>
               <div v-for="item in PROCEDURENORMALE(formData.ua_id)" :key="item.id" class="widget-content">
  
@@ -287,7 +292,7 @@ detail_marche
                   </tr>
       </tbody>
     </table>
-    
+                </div>
   </div>
               
              <hr>
@@ -838,6 +843,9 @@ let date = new Date();
                 "modifierpaiementPersonnel",
                 "supprimerpaiementPersonnel"
             ]),
+               genererEnPdf(){
+  this.$htmlToPaper('printMe');
+},
             formatageSomme:formatageSomme,
             formaterDate(date) {
             return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");

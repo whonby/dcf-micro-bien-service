@@ -8,7 +8,8 @@ const defaultstate = {
   structureActe: [],
   typeconges:[],
   planActe:[],
-  Nature_des_prix:[]
+  Nature_des_prix:[],
+  motif_passation:[]
 
   };
   

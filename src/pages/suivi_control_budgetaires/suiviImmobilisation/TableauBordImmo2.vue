@@ -4,39 +4,7 @@ sommeQuantiteGlobal
      <!-- <h3 style="text-align:center">TABLEAU DE BORD : COMPTABILITES DES MATIERES</h3> -->
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
-<!--   
-          <li class="bg_lb" title="Nombre Global d'équipement">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-important">{{nombreTotalEquipement}}</span> QUANTITES GBOBALES
-          </a>
-        </li> 
 
-        
-<li class="bg_ly" title="Nombres d'equipement Restant">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{SommeEquipementPrevue}}</span>QUANTITES NON COUVERTES
-          </a>
-        </li>
-       <li class="bg_ly" title="Nombre d'equipement Réalise">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-important">{{SommeEquipementRealise}}</span> QUANTITES COUVERTES
-          </a>
-        </li> 
-         <li class="bg_lg" title="Taux équipement  réalisé">
-          <a href="#">
-            <i class="icon-fullscreen"></i>
-            <span class="label label-warning">{{tauxEquipementRealise}}%</span>TAUX QUANTITES COUVERTES
-          </a>
-        </li>
-        <li class="bg_lg">
-          <a href="#">
-            <i class="icon-fullscreen"></i>
-            <span class="label label-warning">{{tauxEquipementPrevue}}%</span>TAUX QUANTITES NON COUVERTES
-          </a>
-        </li> -->
         <div class="quick-actions_homepage">
       
                             <ul class="quick-actions" style="margin: 0px !important;"> 
@@ -248,17 +216,17 @@ quantiteTotalPersonnel() {
       
 
 
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.acte_personnels.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
-        }
+        // if (!this.admin || !this.dcf){
+        //     let colect=[];
+        //     this.acte_personnels.filter(item=>{
+        //         let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+        //         if (val!=undefined){
+        //             colect.push(item)
+        //             return item
+        //         }
+        //     })
+        //   return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+        // }
 
        return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
         },
@@ -268,18 +236,18 @@ quantiteTotalPersonnel() {
       
 
 
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.getterplanOrganisationUa.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
+        // if (!this.admin || !this.dcf){
+        //     let colect=[];
+        //     this.getterplanOrganisationUa.filter(item=>{
+        //         let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+        //         if (val!=undefined){
+        //             colect.push(item)
+        //             return item
+        //         }
+        //     })
+        //     return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
           
-        }
+        // }
 
        return this.getterplanOrganisationUa.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
           
@@ -388,38 +356,38 @@ quantiteTotalCouvertPersonnel() {
       
 
 
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.immobilisations.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
+        // if (!this.admin || !this.dcf){
+        //     let colect=[];
+        //     this.immobilisations.filter(item=>{
+        //         let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative_id)
+        //         if (val!=undefined){
+        //             colect.push(item)
+        //             return item
+        //         }
                 
-            })
-            return colect.filter(items=>items.fonction_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0);
-        }
+        //     })
+        //     return colect.filter(items=>items.fonction_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0);
+        // }
 
-       return 0;
+       return this.immobilisations.filter(items=>items.fonction_id != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0);
 
     },
     quantiteTotalCouvertService() {
       
 
 
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.immobilisations.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
+        // if (!this.admin || !this.dcf){
+        //     let colect=[];
+        //     this.immobilisations.filter(item=>{
+        //         let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative_id)
+        //         if (val!=undefined){
+        //             colect.push(item)
+        //             return item
+        //         }
                 
-            })
-          return colect.filter(items=>items.fonction_id == null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0);
-        }
+        //     })
+        //   return colect.filter(items=>items.fonction_id == null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0);
+        // }
 
        return this.immobilisations.filter(items=>items.fonction_id == null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qte_affecte), 0).toFixed(0);
 

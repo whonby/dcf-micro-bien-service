@@ -7,7 +7,7 @@
          <div id="DecisionServiceBeneficiaire" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Décision Chef de service</h3>
+        <h3>Service Bénéfiaire</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -34,7 +34,7 @@
                <tr>
                 <td >
                     <div class="control-group">
-                            <label class="control-label">Observation Chef de service</label>
+                            <label class="control-label">Observation Service Bénéfiaire</label>
                             <div class="controls">
                               <textarea  class="span" row = "2" v-model="editOpDefinitif.observation_emetteur">
                               </textarea>

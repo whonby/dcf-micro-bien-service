@@ -21,7 +21,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for=" affectService in ServiceEquipe"
+                    <tr class="odd gradeX" v-for=" affectService in ServiceEquipe(getterUa_idImo)"
                         :key="affectService.id">
                         
                               <td >
@@ -157,7 +157,8 @@ search:""
       "causeInactivite",
       "immobilisations",
       "afficheRegroupeEquipementCouvert",
-      "demandeMateriel"
+      "demandeMateriel",
+      "getterUa_idImo"
    
    ]),
   
@@ -185,12 +186,20 @@ search:""
                 }
                   
             })
-          return colect.filter(items=>items.normeequipement == 0 && items.serviceua_id != null && items.fonction_id == null);
-          
+         // return colect.filter(items=>items.unite_administrative_id == id && items.normeequipement == 0 && items.serviceua_id != null && items.fonction_id == null);
+            return id => {
+        if (id != null && id != "") {
+           return colect.filter(items=>items.ua_id == id && items.normeequipement == 0 && items.serviceua_id != null && items.fonction_id == null);
+        }
+      };
         }
 
-       return this.getterplanOrganisationUa.filter(items=>items.normeequipement == 0 && items.serviceua_id != null && items.fonction_id == null);
-
+      // return this.getterplanOrganisationUa.filter(items=>items.normeequipement == 0 && items.serviceua_id != null && items.fonction_id == null);
+   return id => {
+        if (id != null && id != "") {
+           return this.getterplanOrganisationUa.filter(items=>items.ua_id == id && items.normeequipement == 0 && items.serviceua_id != null && items.fonction_id == null);
+        }
+      };
     },
 //        ServiceEquipe (){
 // return this.servicesua.filter(element => element.normeequipement == 0)

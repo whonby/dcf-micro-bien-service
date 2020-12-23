@@ -16,12 +16,21 @@
 
                
               </div> -->
+              <div align="right">
+
+      <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+
+
+                            </div>
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
               <h5 style="width:25%;text-align:center;">FICHE DE SUIVI DES MARCHES- CONTRATS</h5>
             </div>
             <!-- <div class="widget-title"> -->
+              <div id="printMe">
+
+              
                    <table class="table table-bordered table-striped">
   <thead>
     <tr>
@@ -58,7 +67,7 @@
                                 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-        <th style="width:25%;text-align:center;font-size:16px;background-color: coral;">MARCHE - CONTRAT </th>
+        <th style="width:25%;text-align:center;font-size:16px;background-color: coral;color:#fff">MARCHE - CONTRAT </th>
     </tr>
   </thead>
   <tbody>
@@ -123,7 +132,7 @@
    <table class="table table-bordered table-striped">
   <thead>
     <tr>
-        <th style="width:25%;text-align:center;font-size:16px;background-color: #4bc302;"> AVENANT </th>
+        <th style="width:25%;text-align:center;font-size:16px;background-color: #4bc302;color:#fff"> AVENANT </th>
     </tr>
   </thead>
   <tbody>
@@ -158,7 +167,7 @@
       <table class="table table-bordered table-striped">
   <thead>
     <tr>
-        <th style="width:25%;text-align:center;font-size:16px"> DECOMPTE  </th>
+        <th style="width:25%;text-align:center;font-size:16px;background-color:#f0c81f ;color:#fff"> DECOMPTE  </th>
     </tr>
   </thead>
   <tbody>
@@ -230,9 +239,9 @@
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th>TACHES PREVUES </th>
-      <th>TACHES EXECUTEES</th>
-      <th>PREUVES DE REALISATION</th>
+      <th style="text-align:center;">TACHES PREVUES </th>
+      <th style="text-align:center;">TACHES EXECUTEES</th>
+      <th style="text-align:center;">PREUVES DE REALISATION</th>
     </tr>
     <tr height="120px">
       <td > </td>
@@ -244,6 +253,7 @@
   <tbody>
   </tbody>
 </table>
+</div>
      <hr>
  
             <!-- <div v-else> -->
@@ -349,7 +359,7 @@ affichierObjetAvenant(){
           if(objetMarche){
             return objetMarche.objet_avenant
           }
-          return 0
+          return 'Non renseigné'
         }
       }
     },
@@ -371,7 +381,7 @@ affichierObjetAvenant(){
           if(objetMarche){
             return objetMarche.montant_avenant
           }
-          return 0
+          return 'Non renseigné'
         }
       }
     },
@@ -482,6 +492,9 @@ affichierNumeroMarche(){
       "modifierpaiementPersonnel",
       "supprimerpaiementPersonnel"
     ]),
+    genererEnPdf(){
+  this.$htmlToPaper('printMe');
+},
 formatageSomme:formatageSomme,
     alert() {
       console.log("ok");

@@ -128,7 +128,25 @@ export const GET_ROLES = (state, tab_type_uas) => {
 }
 
 
+///
+export const GET_AFFECTAION_GROUPE_USER =(state, tableau_groupe_user) =>{
+    state.affectationGroupeUser=tableau_groupe_user
+}
+export const AJOUTER_AFFECTATION_GROUPE_USER =(state, nouvel_objet) =>{
+    state.affectationGroupeUser.unshift(nouvel_objet)
+}
+export const MODIFIER_AFFECTATION_GROUPE_USER=(state, elementModif) =>{
+    state.affectationGroupeUser=state.affectationGroupeUser.map(res => {
+        if(res.id==elementModif.id){
+            res = {...elementModif}
+        }
+        return res
+    })
+}
 
+export const SUPPRIMER_AFFECTATION_GROUPE_USER =(state, id) =>{
+    state.affectationGroupeUser=state.affectationGroupeUser.filter(response =>response.id!=id)
+}
 
 
 
@@ -154,7 +172,7 @@ export const AJOUTER_AFFECTATION = (state, nouvel_objet) => {
  * @param id
  * @constructor
  */
-export const SUPPRIMER_AFFECTATION= (state, id) => {
+    export const SUPPRIMER_AFFECTATION= (state, id) => {
     state.affectation = state.affectation.filter(type => type.id != id)
 }
 
@@ -230,3 +248,84 @@ export const ANCIEN_PASSWORD= (state, nouvel_objet) => {
 export const MENU_MODULE_SIDCF = (state, menuModuleSidcf) => {
     state.menuModuleSidcf = menuModuleSidcf
 }
+
+// menu
+export const GET_MENU = (state, tableau_menu) => {
+    state.menu = tableau_menu
+}
+export const AJOUTER_MENU= (state, nouvel_objet) => {
+    state.menu.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+
+}
+
+export const SUPPRIMER_MENU= (state, id) => {
+    state.menu = state.menu.filter(type => type.id != id)
+}
+
+export const MODIFIER_MENU= (state, objetModifie) => {
+    state.menu = state.menu.map(type => {
+        if(type.id == objetModifie.id){
+            type = {...objetModifie}
+        }
+        return type
+    })
+}
+
+export const GET_MODULE = (state, tableau_module) => {
+    state.module = tableau_module
+}
+export const AJOUTER_MODULE= (state, nouvel_objet) => {
+    state.module.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+
+}
+
+export const SUPPRIMER_MODULE= (state, id) => {
+    state.module = state.module.filter(type => type.id != id)
+}
+
+export const MODIFIER_MODULE= (state, objetModifie) => {
+    state.module = state.module.map(type => {
+        if(type.id == objetModifie.id){
+            type = {...objetModifie}
+        }
+        return type
+    })
+}
+/// ajouter groupe
+
+export const GET_GROUPE = (state, tableau_groupe) => {
+    state.groupe = tableau_groupe
+}
+
+
+export const AJOUTER_GROUPE= (state, nouvel_objet) => {
+    state.groupe.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+
+}
+
+export const SUPPRIMER_GROUPE= (state, id) => {
+    state.groupe = state.groupe.filter(type => type.id != id)
+}
+
+export const MODIFIER_GROUPE= (state, objetModifie) => {
+    state.groupe = state.groupe.map(type => {
+        if(type.id == objetModifie.id){
+            type = {...objetModifie}
+        }
+        return type
+    })
+}
+
+//
+
+export const ACTIVATION_GROUPE = (state, elementModif) =>{
+    state.groupe = state.groupe.map(userActif =>{
+        if(userActif.id == elementModif.id){
+            userActif = {...elementModif}
+        }
+        return userActif
+    }) 
+ }

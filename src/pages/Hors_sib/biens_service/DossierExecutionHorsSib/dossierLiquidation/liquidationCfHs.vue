@@ -468,7 +468,7 @@ afficheDateFacture() {
       return id => {
         if (id != null && id != "") {
           return this.liquidation.filter(
-            element => element.marche_id == id  && this.afficherStatusSib(element.marche_id)==1
+            element => element.marche_id == id  && this.afficherStatusSib(element.marche_id)==0
           );
         }
       };

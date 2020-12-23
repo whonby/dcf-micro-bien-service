@@ -1,0 +1,2235 @@
+afficherUniteAdministrative'(
+<template>
+
+<div>
+
+<!-- <div id="modalTransfert" class="modal hide valDirecteur">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Transfert</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+        <tr>
+           <td colspan="">
+             
+                           <div class="control-group">
+                            <label class="control-label">Ancien utilisateur</label>
+                            <div class="controls">
+                              <input type="text" class="span4" readonly :value="afficherActeurDepenseNomPrenoms(afficherActeurDepenseId(detail_Ua.id))"/>
+                               
+                            </div>
+                          </div>
+           </td>
+          <td colspan="2">
+                            <div class="control-group">
+                            <label class="control-label">Nouvel utilisateur</label>
+                            <div class="controls">
+                              <select v-model="formData.personnel_id" class="span8">
+                              <option value=""></option>
+    <option v-for="item in lispersonnelParUa(detail_Ua.unite_administrative_id)" 
+    :key="item.id" :value="item.id">{{afficherActeurDepenseNomPrenoms(item.acteur_depense_id)}}</option>
+                              </select>
+                              
+                            </div>
+                          </div>
+                        </td>
+           </tr>
+          <tr>
+           
+  <td>
+             
+                           <div class="control-group">
+                            <label class="control-label">Article</label>
+                            <div class="controls">
+                              <input type="text" class="span4" readonly :value="libelleArticle(editService.famille_id)" />
+                               
+                            </div>
+                          </div>
+           </td>
+          <td>
+                            <div class="control-group">
+                            <label class="control-label">Marque</label>
+                            <div class="controls">
+                              <select
+                                v-model="formData.marque_id" class="span4">
+                               
+                              <option value></option>
+                                
+                               
+                              </select>
+                            </div>
+                          </div>
+                        </td>
+                         <td>
+             
+                           <div class="control-group">
+                            <label class="control-label">Date de Transfert</label>
+                            <div class="controls">
+                              <input type="date" class="span4"  v-model="formData.dteTransfert" />
+                               
+                            </div>
+                          </div>
+           </td>
+          </tr>
+       
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterImmobilisationLocal()"
+          class="btn btn-primary"
+          href="#"
+         
+        >Transferer</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <div id="exampleModalValidationdirecteur" class="modal hide valDirecteur">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Affectation</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+        <tr>
+           <td colspan="">
+             
+                           <div class="control-group">
+                            <label class="control-label">Nom et Prénoms</label>
+                            <div class="controls">
+                              <input type="text" class="span4" readonly :value="afficherActeurDepenseNomPrenoms(afficherActeurDepenseId(detail_Ua.id))"/>
+                               
+                            </div>
+                          </div>
+           </td>
+           <td>
+             
+                           <div class="control-group">
+                            <label class="control-label">Article</label>
+                            <div class="controls">
+                              <input type="text" class="span4" readonly :value="libelleArticle(editService.famille_id)" />
+                               
+                            </div>
+                          </div>
+                           <input    type="hidden"   class="span3"   :value="afficherAffectationParFonction" />                
+                           <input    type="hidden"   class="span3"   :value="afficherAffectationParActeurDepense" />                
+                          
+                          <input    type="hidden"   class="span3"   :value="afficherAffectationParQuantiteAffecter" />   
+                           <input    type="hidden"   class="span3"   :value="afficherAffectationParUniteZone" />
+                            <input    type="hidden"   class="span3"   :value="afficherAffectationParService" />
+                             <input    type="hidden"   class="span3"   :value="afficherAffectationParBesoin" />
+                              <input    type="hidden"   class="span3"   :value="afficherQteResteACouvert" />             
+                              <input    type="hidden"   class="span3"   :value="afficherPrixActuelResteACouvert" />
+                               <input    type="hidden"   class="span3"   :value="afficherQteEnStock" />
+                                   
+           </td>
+          <td>
+                            <div class="control-group">
+                            <label class="control-label">Marque</label>
+                            <div class="controls">
+                              <select
+                                v-model="formData.marque_id" class="span4">
+                               
+                              <option value></option>
+                                
+                               
+                              </select>
+                            </div>
+                          </div>
+                        </td>
+           </tr>
+            <tr>
+              <td>
+             
+                           <div class="control-group">
+                            <label class="control-label">Quantité requise</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="afficheHistNormeEquipement(marcheid)" readonly/>
+                               
+                            </div>
+                          </div>
+           </td>
+            <td>
+             
+                           <div class="control-group">
+                            <label class="control-label">Quantité En stock</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="afficherQuantiteEnStock(editService.famille_id)" readonly/>
+                               
+                            </div>
+                          </div>
+           </td>
+           
+              <td>
+             
+                           <div class="control-group">
+                            <label class="control-label">Quantité a affecté</label>
+                            <div class="controls">
+                              <input type="text" class="span4" v-model="formData.qte_affecte"/>
+                               
+                            </div>
+                          </div>
+           </td>
+        </tr>
+        <tr>
+          <td>
+             
+                           <div class="control-group">
+                            <label class="control-label">Date mise en service</label>
+                            <div class="controls">
+                              <input type="date" class="span4" v-model="formData.date_mise_service" />
+                               
+                            </div>
+                          </div>
+           </td>
+        </tr>
+       
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterImmobilisationLocal()"
+          class="btn btn-primary"
+          href="#"
+         
+        >Affecter</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div> -->
+  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        
+                        <th>Service</th>
+                        
+                        
+                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                 <td style="text-align: center;"
+                   
+                    >{{libelleService(idService(detail_Ua.id)) || 'Non renseigné'}}</td>
+                  
+                    
+                    </tbody> 
+                </table>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                     <tr>
+                     
+                  
+                    <th>Article</th>
+                    
+                   <th >Quantité requise</th>
+                     <th >Quantité couverte</th>
+                     <th >Quantité non couverte</th>
+                     <th style="width:15%">Action</th>
+                  </tr>
+                    </thead>
+                    <tbody>
+                   <tr
+                    class="odd gradeX"
+                    v-for="(BesoinImmo,index) in listedesarticleparPerso(libelleService(marcheid))"
+                    :key="BesoinImmo.id"
+                  >
+                  <td style="text-align: center;"
+                   
+                    >{{BesoinImmo.norme_famille.libelle || 'Non renseigné'}}</td>
+                  
+                     <td style="text-align: center;"
+                   
+                    >{{afficheHistNormeEquipement12(marcheid) || 'Non renseigné'}}</td>
+                    <td style="text-align: center;"
+                      
+                    >{{(afficheHistNormeEquipement12(marcheid))-(affichNormeEquipement(marcheid))}}</td>
+                   <td style="text-align: center;"
+                      
+                    >{{affichNormeEquipement(marcheid)}}</td>
+                    
+                   <td>
+                     <button  
+                     @click.prevent="afficherModalModifierService(index)"
+                        class="btn  btn-success">
+                <span >Affectation</span>
+       
+                </button>
+                <button  v-show="((afficheHistNormeEquipement12(marcheid))-(affichNormeEquipement(marcheid)))==1"
+                        class="btn  btn-danger" @click.prevent="afficherModalTransfert(index)">
+                <span >Transfert</span>
+       
+                </button>
+                   </td>
+                     
+                         
+                    
+                     
+                     
+                    
+                    
+                  </tr>
+                 
+                    </tbody>
+                </table>
+
+              
+     
+
+
+
+
+  
+
+
+
+
+
+
+    </div>
+</template>
+
+<script>
+import {mapGetters, mapActions} from 'vuex';
+import { formatageSomme } from '../../../../../..//Repositories/Repository';
+import {admin,dcf,noDCfNoAdmin} from "../../../../../../Repositories/Auth"
+//import moment from 'moment';
+export default {
+    data(){
+        return{
+          formData3:{
+        acteur_id:"",
+        ua_id:"",
+          unitezone_id:"",
+          fonction_id:"",
+          article_id:"",
+          qte:"",
+          dure_vie:"",
+          etatimmo_id:""
+      },
+      formData :{
+
+      },
+      direct:"",
+       valideService:{
+motif:"",
+date_motif:""
+      },
+      valideDirecteur:{
+        article_id:"",
+motif:"",
+date_motif_directeur:"",
+cause_directeur:""
+      },
+       formData2:{
+        famillearticle_id :"",
+        qte_affecte:"",
+        date_mise_service:"",
+        identification:"",
+        type_immo:"",
+        nature_dentree:"",
+        nature_bien:"",
+        etat_immobilisation:"",
+        cause_inactivite:"",
+
+      },
+      editService:{},
+search:""
+        }
+    },
+    props:["macheid"],
+    created() {
+            this.marcheid=this.$route.params.id
+   this.detail_Ua = this.getterplanOrganisationUa.find(
+       idmarche => idmarche.id == this.$route.params.id
+   )
+  /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
+    console.log(this.appel_offre_marche)*/
+},
+
+       computed: {
+  admin:admin,
+      dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
+     ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+            ...mapGetters("bienService", [ "gettersCotations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+                "modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+            ...mapGetters('personnelUA', ['acteur_depenses','personnaFonction','acte_personnels',"fonctions"]),
+
+
+                ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
+            ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
+                'types_financements']) ,
+                
+    ...mapGetters("parametreGenerauxAdministratif", ["getterplanOrganisationUa","exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
+       ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe', 
+  'planActe']),
+ ...mapGetters("uniteadministrative", [
+      "directions",
+      "servicesua",
+      "fonctionsua",
+      "getPersonnaliseBudgetGeneral",
+      "montantBudgetGeneral",
+      "uniteZones",
+      "getPersonnaliseBudgetGeneralParTransfert",
+      "uniteAdministratives"
+      // "chapitres",
+      // "sections"
+    ]),
+   ...mapGetters("SuiviImmobilisation", ["services",
+    "trieUaImmobilisation",
+      "equipements",
+      "familles",
+      "articles",
+      "SommeQuantiteNonCouvert",
+      "getAfficheArticle",
+      "getPersoStock",
+      "stockageArticles",
+      "groupUatypeNorme",
+      "groupUaNorme",
+      "groupUaNormeFamille",
+      "normeEquipements",
+      "groupUaNormeEquipe",
+      "groupUaNormeFonction",
+      "getPersoNormeArticle",
+      "services",
+      "besoinEquipement",
+      "afficherDirection",
+      "afficherService",
+      "afficherFonction",
+      "type_Unite_admins",
+      "getPersoListeDesNorme",
+      "normeImmo",
+      "getPersonnaliseNormeEquipement",
+      "afficherDemandeParService",
+      "natureEntres",
+      "EtatImmobilisations",
+      "causeInactivite",
+      "immobilisations",
+      "afficheRegroupeEquipementCouvert",
+      "demandeMateriel",
+      "getterUa_idImo"
+   
+   ]),
+
+lispersonnelParUa() {
+      return id => {
+        if (id != null && id != "") {
+           return this.acte_personnels.filter(qtreel => qtreel.unite_administrative_id == id);
+
+        }
+      };
+    },
+
+
+
+   afficherQuantiteEnStock() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.stockageArticles.find(qtreel => qtreel.famill_id == id);
+
+      if (qtereel) {
+        return qtereel.quantitestock;
+      }
+      return 0
+        }
+      };
+    },
+libelleArticle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+listedesarticleparPerso() {
+      return id => {
+        if (id != null && id != "") {
+           return this.normeImmo.filter(qtreel => qtreel.service_id == id);
+
+        }
+      };
+    },
+ afficheHistNormeEquipement12() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterplanOrganisationUa.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.historiqueequipement;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+affichNormeEquipement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterplanOrganisationUa.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.	normeequipement;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+
+   idService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterplanOrganisationUa.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.serviceua_id;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+    libelleService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterplanOrganisationUa.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.serviceua_id;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+   
+   afficherActeurDepenseNomPrenoms() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.nom.concat('    ', qtereel.acteur_depense.prenom);
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+  affichePersonneNonEquipe(){
+return this.acte_personnels.filter(element => element.normeequipement != 0)
+},
+afficherUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    afficherCodeUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 0
+        }
+      };
+    },
+    // afficheFonction() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
+
+    //   if (qtereel) {
+    //     return qtereel.libelle
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
+  listePersonnelNonEquipee() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.affichePersonneNonEquipe.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+           return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id);
+        }
+      };
+        }
+
+        return id => {
+        if (id != null && id != "") {
+          return this.affichePersonneNonEquipe.filter(element => element.unite_administrative_id == id);
+        }
+      };
+
+    },
+
+
+
+nombreDesDemandePerso() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return colect.filter(items=>items.service_id == 0).length
+        }
+
+       return this.demandeMateriel.filter(items=>items.service_id == 0).length;
+
+    },
+
+afficheToutDemande() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect.filter(items=>items.service_id == 0);
+        }
+
+       return this.demandeMateriel.filter(items=>items.service_id == 0);
+
+    },
+
+
+
+
+
+
+ affichenbreEquipementNonCouvert() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+       return colect.filter(items=>items.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+       }
+
+       return this.servicesua.filter(items=>items.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+
+    },
+
+
+
+
+
+
+// listePersonnelAffectete() {
+      
+
+
+//         if (this.noDCfNoAdmin){
+//             let colect=[];
+//             this.acte_personnels.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+//             })
+//           return colect
+//         }
+
+//        return this.acte_personnels
+
+//     },
+
+listePersonnelAffectete() {
+      
+        if (this.noDCfNoAdmin ){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id );
+        }
+      };
+          }
+           return id => {
+        if (id != null && id != "") {
+          return this.acte_personnels.filter(element => element.unite_administrative_id == id);
+        }
+      };
+         
+
+
+
+    },
+
+listeDesEquipementNonCouvert() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.equipementNonCouvert.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id);
+        }
+      };
+        }
+
+          return id => {
+        if (id != null && id != "") {
+          return this.equipementNonCouvert.filter(element => element.unite_administrative_id == id);
+        }
+      };
+
+    },
+    listeDesEquipementParAgent() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.tauxequipementParAgent.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id);
+        }
+      };
+        }
+
+          return id => {
+        if (id != null && id != "") {
+          return this.tauxequipementParAgent.filter(element => element.unite_administrative_id == id);
+        }
+      };
+
+    },
+    listeDesPersonneEquipee() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.affichePersonneEquipe.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+              return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id);
+        }
+      };
+        }
+
+           return id => {
+        if (id != null && id != "") {
+          return this.affichePersonneEquipe.filter(element => element.unite_administrative_id == id);
+        }
+      };
+
+    },
+
+
+
+
+AfficheTotalQteNonCouvert() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          
+       
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        }
+      };
+       }
+
+  
+  return id => {
+        if (id != null && id != "") {
+          return this.acte_personnels.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        }
+      };
+    },
+AfficheTotalQteACouvrir() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          //return colect
+        return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        }
+      };
+      }
+
+       //return this.acte_personnels
+return id => {
+        if (id != null && id != "") {
+          return this.acte_personnels.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        }
+      };
+    },
+afficheMontantTotalEquipementNonCouvert() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.afficheMontantTotalEquipementNonCouv.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+         // return colect
+       return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+        }
+      };
+       }
+
+      // return this.afficheMontantTotalEquipementNonCouv.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+return id => {
+        if (id != null && id != "") {
+          return this.afficheMontantTotalEquipementNonCouv.filter(element => element.unite_administrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+        }
+      };
+    },
+
+
+
+afficheLesDemandeDuPersonnel() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect
+        }
+
+       return this.demandeMateriel
+
+    },
+afficheValidationChefService() {
+      
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+              
+               if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return colect.filter(items => items.service_id == 0 && items.motif != 3 && items.motif != 1 && items.motif != 10 )
+        }
+
+       
+ return this.demandeMateriel.filter(items => items.service_id == 0 && items.motif != 3 && items.motif != 1 && items.motif != 10 );
+
+    },
+    afficheValidationDirecteur() {
+     
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(items=>items.service_id == 0 && items.motif != 0 && items.motif != 5 && items.motif != 4 && items.motif != 10);
+        }
+
+       return this.demandeMateriel.filter(items=>items.service_id == 0 && items.motif != 0 && items.motif != 5 && items.motif != 4 && items.motif != 10);
+
+    },
+
+listeDesServiceDeUa() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect
+        }
+
+       return this.servicesua
+
+    },
+
+
+    NombreDeService() {
+     
+         return this.listeDesServiceDeUa.length;
+    },
+NombreafficheEquipementNonCouvertService() {
+     
+         return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+    },
+    NombreafficheEquipementCouvertService() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                
+              if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+          return colect.filter(items => items.normeequipement == 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+          
+        }
+
+         return this.servicesua.filter(items => items.normeequipement == 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+
+    },
+// NombreafficheEquipementCouvertService() {
+     
+//          return this.servicesua.filter(element => element.normeequipement == 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+//     },
+ afficheService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.servicesua.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.serviceua_id;
+      }
+      return 0
+        }
+      };
+    },
+ afficheServiceLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
+ afficheMontantTotalEquipementNonCouv() {
+     
+         return this.acte_personnels.filter(element => element.normeequipement != 0);
+    },
+
+// AfficheTotalQteNonCouvert() {
+     
+//          return this.acte_personnels.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+//     },
+
+afficherMontantRestant() {
+      const val = this.affichierTotal(this.formData.fonction_id) - this.afficherValeurOrigine;
+      return parseFloat(val).toFixed(0);
+    },
+ 
+
+
+affichierTotal() {
+      return id => {
+        if (id != null && id != "") {
+         return this.normeImmo.filter(element => element.fonction_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total), 0).toFixed(0);
+
+     
+        }
+      };
+    },
+    coutMoyenActicle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.normeImmo.find(qtreel => qtreel.famille_id == id);
+
+      if (qtereel) {
+        return qtereel.cout_moyen;
+      }
+      return 0
+        }
+      };
+    },
+ 
+
+MontantParEquipementModifier(){
+  
+    
+    var montant = this.articles.filter(element => element.famille_id == this.editTransfert.famille_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(0); 
+      if(isNaN(montant)) return null
+      return montant
+
+   
+  
+}, 
+
+
+
+
+
+
+
+afficheEquipementNonCouvt() {
+      return id => {
+        if (id != null && id != "") {
+           return this.normeImmo.find(qtreel => qtreel.fonction_id == id);
+
+    
+     
+        }
+      };
+    },
+
+
+
+nombreDemandeImmobilisation() {
+      
+          return this.demandeMateriel.filter(element => element.motif != 10).length;
+       
+    },
+
+
+
+
+
+
+afficherResteStock() {
+      const val = this.affichierQuantiteEnStock(this.valideDirecteur.article_id) - this.valideDirecteur.quantite;
+      return parseFloat(val).toFixed(0);
+    },
+
+affichierQuantiteEnStock() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.stockageArticles.find(qtreel => qtreel.famill_id == id);
+
+      if (qtereel) {
+        return qtereel.quantitestock;
+      }
+      return 0
+        }
+      };
+    },
+affichierIdQuantiteEnStock() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.stockageArticles.find(qtreel => qtreel.famill_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+afficheAnneeAmortis() {
+      const val = parseInt(this.valideDirecteur.annee_budgetaire) + parseInt(this.valideDirecteur.dure_vie);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+
+
+afficheValeurOrigine() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.immobilisations.find(qtreel => qtreel.famillearticle_id == id);
+
+      if (qtereel) {
+        return qtereel.valeurorigine;
+      }
+      return 0
+        }
+      };
+    },
+
+
+nombreDejourCalculeTraitementService(){
+                let vM=this;
+    const acteAffet = vM.valideService
+    if(acteAffet.date_demande == acteAffet.date_motif &&  acteAffet.date_motif !=="" && acteAffet.date_demande !=="") return 1
+     if(acteAffet.date_motif =="" && acteAffet.date_demande =="") return null
+
+       var dateF = new Date(acteAffet.date_motif).getTime()
+        var dateO = new Date(acteAffet.date_demande).getTime()
+           var resultat = dateF - dateO
+
+             var diffJour =  resultat / (1000 * 3600 * 24)
+
+               if(isNaN(diffJour)) return null
+
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    vM.valideService.duree=diffJour
+                  return  diffJour;
+   
+},
+
+
+
+nombreDejourCalculeTraitementDirecteur(){
+                let vM=this;
+    const acteAffet = vM.valideDirecteur
+    if(acteAffet.date_motif == acteAffet.date_motif_directeur &&  acteAffet.date_motif_directeur !=="" && acteAffet.date_motif !=="") return 1
+     if(acteAffet.date_motif_directeur =="" && acteAffet.date_motif =="") return null
+
+       var dateF = new Date(acteAffet.date_motif_directeur).getTime()
+        var dateO = new Date(acteAffet.date_motif).getTime()
+           var resultat = dateF - dateO
+
+             var diffJour =  resultat / (1000 * 3600 * 24)
+
+               if(isNaN(diffJour)) return null
+
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    vM.valideDirecteur.duree=diffJour
+                  return  diffJour;
+   
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+verrouilleCause(){
+
+    return this.valideDirecteur.motif == 3;
+},
+
+
+
+// afficheValidationChefService() {
+      
+//           return this.demandeMateriel.filter(element => element.service_id == 0 && element.motif != 3 && element.motif != 1 && element.motif != 10 );
+       
+//     },
+
+
+// afficheValidationDirecteur() {
+      
+//           return this.demandeMateriel.filter(element => element.service_id == 0 && element.motif != 0 && element.motif != 5 && element.motif != 4 && element.motif != 10);
+       
+//     },
+// afficheToutDemande() {
+      
+//           return this.demandeMateriel.filter(element => element.service_id == 0 );
+       
+//     },
+nombreValidationEnAttenteChefService() {
+      
+          return this.afficheValidationChefService.length;
+       
+    },
+    nombreDemande() {
+      
+          return this.afficheToutDemande.length;
+       
+    },
+nombreValidationEnAttenteDirecteur() {
+      
+          return this.afficheValidationDirecteur.length;
+       
+    },
+
+
+
+
+
+afficherRecupererQteActuelle() {
+      const qtereel = this.immobilisations.find(
+        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+       
+      );
+
+      if (qtereel) {
+        return qtereel.qte_actuel;
+      }
+      return 0
+    },
+totalNonCouvert(){
+return this.immobilisations.filter(element=>element.qte_actuel != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_actuel), 0).toFixed(0);
+},
+
+afficherQteTotal() {
+      const val = parseFloat(this.afficherRecupererQteActuelle) + parseFloat(this.formData2.qte_affecte) ;
+      return parseFloat(val).toFixed(0);
+    },
+
+afficherQteEnStock() {
+      const val = parseFloat(this.afficherQuantiteEnStock(this.editService.famille_id)) - parseFloat(this.formData2.qte_affecte) ;
+      return parseFloat(val).toFixed(0);
+    },
+    afficherQteSortir() {
+      const val = parseFloat(this.afficherQuantiteSortir(this.editService.famille_id)) + parseFloat(this.formData2.qte_affecte) ;
+      return parseFloat(val).toFixed(0);
+    },
+afficherQteResteACouvert() {
+      const val = parseFloat(this.afficherQuantiteEnRequise(this.editService.famille_id)) - parseFloat(this.formData2.qte_affecte) ;
+      return parseFloat(val).toFixed(0);
+    },
+    afficherQteResteACouvertModifier() {
+      const val = parseFloat(this.afficherQuantiteEnRequise(this.editService.famille_id)) - parseFloat(this.afficherQteTotal) ;
+      return parseFloat(val).toFixed(0);
+    },
+    afficherPrixActuelResteACouvertModifier() {
+      const val = parseFloat(this.afficherQteResteACouvertModifier) * parseFloat(this.coutMonenArticle) ;
+      return parseFloat(val).toFixed(0);
+    },
+afficherPrixActuelResteACouvert() {
+      const val = parseFloat(this.afficherQteResteACouvert) * parseFloat(this.coutMonenArticle) ;
+      return parseFloat(val).toFixed(0);
+    },
+
+afficherIdImmobilisation() {
+      const qtereel = this.immobilisations.find(
+        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+       
+      );
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+
+afficherIdStock() {
+      const qtereel = this.stockageArticles.find(
+        qtreel => qtreel.famill_id == this.editService.famille_id,
+       
+      );
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+nombreAffecter() {
+      const val = parseFloat(this.formData2.qte_affecte) + parseFloat(this.afficherRecupererQteAffecter);
+      return parseFloat(val).toFixed(0);
+    },
+afficherRecupererQteAffecter() {
+      const qtereel = this.immobilisations.find(
+        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+       
+      );
+
+      if (qtereel) {
+        return qtereel.qte_affecte;
+      }
+      return 0
+    },
+ afficherAffectationParFonction() {
+      const qtereel = this.immobilisations.find(
+        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+       
+      );
+
+      if (qtereel) {
+        return qtereel.fonction_id;
+      }
+      return 0
+    },
+ afficherAffectationParActeurDepense() {
+      const qtereel = this.immobilisations.find(
+        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+       
+      );
+
+      if (qtereel) {
+        return qtereel.acteurdepense_id;
+      }
+      return 0
+    },
+
+afficherAffectationParQuantiteAffecter() {
+      const qtereel = this.immobilisations.find(
+        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+       
+      );
+
+      if (qtereel) {
+        return qtereel.qte_affecte;
+      }
+      return 0
+    },
+
+afficherAffectationParUniteZone() {
+      const qtereel = this.immobilisations.find(
+        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+       
+      );
+
+      if (qtereel) {
+        return qtereel.unitezon_id;
+      }
+      return 0
+    },
+
+afficherAffectationParService() {
+      const qtereel = this.immobilisations.find(
+        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+       
+      );
+
+      if (qtereel) {
+        return qtereel.service_id;
+      }
+      return 0
+    },
+afficherAffectationParBesoin() {
+      const qtereel = this.immobilisations.find(
+        qtreel => qtreel.famillearticle_id == this.editService.famille_id,
+       
+      );
+
+      if (qtereel) {
+        return qtereel.famillearticle_id;
+      }
+      return 0
+    },
+ idActePersonnel() {
+      const qtereel = this.acte_personnels.find(
+        qtreel => qtreel.acteur_depense_id == this.formData.acteur_depense_id,
+       
+      );
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+
+afficherDureeVieFamille() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.dureVie;
+      }
+      return 0
+        }
+      };
+    },
+
+
+ anneeAmortissement() {
+      const val = parseInt(this.exerciceBudgetaireEnCours) + parseInt(this.afficherDureeVieFamille(this.editService.famille_id));
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+afficherValeurOrigineModifier() {
+      const val = parseFloat(this.nombreAffecter) * parseFloat(this.coutMonenArticle);
+      return parseFloat(val).toFixed(0);
+    },
+  afficherValeurOrigine() {
+      const val = parseFloat(this.formData2.qte_affecte) * parseFloat(this.coutMonenArticle);
+      return parseFloat(val).toFixed(0);
+    },
+
+    afficherNombreEquipementRestant() {
+      const val = parseFloat(this.formData.normeequipement) - parseFloat(this.formData2.qte_affecte);
+      return parseFloat(val).toFixed(0);
+    },
+
+montantParBesoin() {
+      return id => {
+        if (id != null && id != "") {
+          return this.articles.filter(element => element.famille_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(0);
+        }
+      };
+    },
+nombreParBesoin() {
+      return id => {
+        if (id != null && id != "") {
+          return this.articles.filter(element => element.famille_id == id).length;
+        }
+      };
+    },
+coutMonenArticle() {
+ 
+      
+    const val = parseFloat((this.montantParBesoin(this.editService.famille_id))/this.nombreParBesoin(this.editService.famille_id)).toFixed(2); 
+    if (isNaN(val)) return null;
+    return val;
+  
+
+    },
+
+
+
+
+
+
+
+
+
+
+
+afficheLeBesoinDemande() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.normeImmo.filter(element => element.fonction_id == id);
+        }
+      };
+    },
+afficheIdFonction() {
+      
+      const norme = this.fonctions.find(normeEquipe => normeEquipe.libelle == this.formData.fonction_id);
+
+      if (norme) {
+        return norme.id;
+      }
+      return 0
+    },
+    equipementNonCouvert(){
+return this.acte_personnels.filter(element => element.normeequipement != 0)
+},
+    NombreTauxequipementParAgent(){
+return this.acte_personnels.filter(element => element.normeequipement != null).length
+},
+tauxequipementParAgent(){
+return this.acte_personnels.filter(element => element.normeequipement != null)
+},
+afficheEquipementCouvert(){
+return this.immobilisations.filter(element => element.qte_actuel == 0)
+},
+// afficheEquipementNonCouvert(){
+// return this.immobilisations.filter(element => element.qte_actuel != 0)
+// },
+// NombreafficheEquipementNonCouvert(){
+// return this.immobilisations.filter(element => element.qte_actuel != 0).length
+// },
+NombreafficheEquipementNonCouvert(){
+return this.acte_personnels.filter(element => element.normeequipement != 0).length
+},
+
+
+NombreaffichePersonneEquipe(){
+return this.listeDesPersonneEquipee(this.getterUa_idImo).length
+},
+affichePersonneEquipe(){
+return this.acte_personnels.filter(element => element.normeequipement == 0)
+},
+afficheNombrePersonneNonEquipe(){
+return this.listePersonnelNonEquipee(this.getterUa_idImo).length
+},
+
+afficheNombrePersonneEquipe(){
+return this.acte_personnels.filter(element => element.normeequipement == 0).length
+},
+afficheNombreToutPersonne(){
+return this.listePersonnelAffectete(this.getterUa_idImo).length
+},
+exoEnCours(){
+return this.exercices_budgetaires.filter(element => element.encours == 1)
+},
+ 
+
+ exerciceBudgetaireEnCours() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
+afficherMatriculeActeurDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.matricule;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+    afficherActeurDepense1() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.nom.concat('    ',qtereel.acteur_depense.prenom);
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+afficherActeurDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
+
+      if (qtereel) {
+        return qtereel.acteur_depense.matricule.concat('    ', qtereel.acteur_depense.nom,'     ',qtereel.acteur_depense.prenom);
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+
+
+afficherLibelleService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+// afficherQuantiteEnStock() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.stockageArticles.find(qtreel => qtreel.famill_id == id);
+
+//       if (qtereel) {
+//         return qtereel.quantitestock;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+    afficherQuantiteSortir() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.stockageArticles.find(qtreel => qtreel.famill_id == id);
+
+      if (qtereel) {
+        return qtereel.qtesortie;
+      }
+      return 0
+        }
+      };
+    },
+afficherQuantiteEnRequise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.normeImmo.find(qtreel => qtreel.famille_id == id);
+
+      if (qtereel) {
+        return qtereel.norme;
+      }
+      return 0
+        }
+      };
+    },
+afficheFonction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+afficheCauseInactivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.causeInactivite.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+// identifierDmdService(){
+// if(this.formData.service_id != 0){
+//   return 2
+// }
+
+
+// return 0
+
+// },
+
+// identifierDmdFonction(){
+// if(this.formData.fonction_id != 0){
+//   return 1
+// }
+
+// return 0
+
+
+// },
+
+// identifierDmdServiceModifier(){
+// if(this.editBesoinImmo.service_id != 0){
+//   return 2
+// }
+// else {
+// return 0
+// }
+
+// },
+
+// identifierDmdFonctionModifier(){
+// if(this.editBesoinImmo.fonction_id != 0){
+//   return 1
+// }
+// else{
+// return 0
+// }
+
+// },
+
+afficheLibelleService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.servicesua.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+
+afficheUniteZone() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteZones.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+afficheFamille() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+   
+     
+ deverouServiceEtFonction() {
+
+      return this.formData.direction != 0;
+
+    },
+
+
+ deverouUniteZone() {
+
+      return this.formData.uniteadmin_id == "";
+
+    },
+
+
+destinationDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.uniteZones.filter(element => element.id_unite_administrative == this.formData.uniteadmin_id);
+        }
+      };
+    },
+    destinationDynamiquesModifier() {
+      return id => {
+        if (id != null && id != "") {
+          return this.uniteZones.filter(element => element.id_unite_administrative == this.editBesoinImmo.uniteadmin_id);
+        }
+      };
+    },
+  // afficherUniteAdministrative() {
+  //     return id => {
+  //       if (id != null && id != "") {
+  //          const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+  //     if (qtereel) {
+  //       return qtereel.libelle;
+  //     }
+  //     return 0
+  //       }
+  //     };
+  //   },
+// verifierLaNorme(){
+//     let normeInitial=parseFloat(this.afficheNormeFamille)
+//       let qteDemande=parseFloat( this.formData.quantite)
+//        if(normeInitial < qteDemande){
+//         alert("La norme doit etre superieure a la qte demande")
+//       }
+// },
+
+
+ 
+
+
+CoutMoyen() {
+ return id => {
+    if(id !=""){
+      
+    const val = parseFloat((this.getAfficheArticle.filter(element => element.famillearticle_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2))/this.getAfficheArticle.filter(element => element.famillearticle_id == id).length).toFixed(0); 
+    if (isNaN(val)) return null;
+    return val;
+  
+ }
+  }
+    },
+
+ montantTotalarticlesModifier() {
+   if(this.editBesoinImmo.famillearticle_id !=""){
+      const val = parseFloat(this.editBesoinImmo.quantite) * parseFloat(this.CoutMoyen(this.editBesoinImmo.famillearticle_id));
+        if (isNaN(val)) return null;
+     return parseFloat(val).toFixed(0);
+    }
+    return null
+
+},
+ montantTotalarticles() {
+   if(this.editService.famille_id !=""){
+      const val = parseFloat(this.formData.quantite) * parseFloat(this.CoutMoyen(this.editService.famille_id));
+        if (isNaN(val)) return null;
+     return parseFloat(val).toFixed(0);
+    }
+    return null
+
+},
+
+ deverouFonctionDirectionService() {
+      return this.formData.uniteadmin_id == "";
+    },
+afficheActeurDepense() {
+      return id => {
+        if (id != null && id != "") {
+          return this.personnaFonction.filter(element => element.fonctionActeur.id == id);
+        }
+      };
+    },
+
+// afficheActeurDepense() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.all_acteur_depense.find(qtreel => qtreel.fonction.id == this.formData.fonction_id);
+
+//       if (qtereel) {
+//         return qtereel.matricule.concat('  ', qtereel.nom,'  ',qtereel.prenom)
+//       }
+//       return 0
+//         }
+//       };
+//     },
+ fonctionDynamiquesParUa() {
+      return id => {
+        if (id != null && id != "") {
+          return this.all_acteur_depense.filter(element => element.uniteZone_id == id);
+        }
+      };
+    },
+auteurParUaDynamiques() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.personnaFonction.filter(element => element.uniteZone_id == id);
+        
+        }
+        
+      };
+    },
+ familleNormeDynamiques() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.getPersonnaliseNormeEquipement.filter(element => element.direction_id == id);
+        }
+      };
+    },
+     familleNormeServiceDynamiques() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.getPersonnaliseNormeEquipement.filter(element => element.service_id == id);
+        }
+      };
+    },
+      familleNormeFonctionDynamiques() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.getPersonnaliseNormeEquipement.filter(element => element.fonction_id == id);
+        }
+      };
+    },
+uniteAdministDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.uniteAdministratives.filter(element => element.type_ua_id == id);
+        }
+      };
+    },
+directionDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.directions.filter(element => element.d_ua_id == id);
+        }
+      };
+    },
+ uniteAdministrativeDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.getPersoListeDesNorme.filter(element => element.typeua_id == id);
+        }
+      };
+    },
+fonctionDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.getPersoListeDesNorme.filter(element => element.ua_id == id);
+        }
+      };
+    },
+    afficheNormeFamille() {
+      
+      const norme1 = this.normeImmo.find(normeEquipe => normeEquipe.famillearticle_id == this.editService.famille_id);
+      if (norme1) {
+        return norme1.norme;
+      }
+      return 0
+    },
+        afficheNormeFamilleModifier() {
+      
+      const norme1 = this.normeImmo.find(normeEquipe => normeEquipe.famillearticle_id == this.editBesoinImmo.famillearticle_id);
+      if (norme1) {
+        return norme1.norme;
+      }
+      return 0
+    },
+
+
+
+
+
+
+
+
+
+      },
+
+      methods:{ 
+
+          ...mapActions('bienService',['supprimerActeEffetFinancier',
+          'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
+ ...mapActions("uniteadministrative", [
+     "getAllServiceua",
+      "ajouterService",
+      "modifierService",
+      "supprimerService",
+     
+      // "ajouterHistoriqueBudgetGeneral"
+    ]),
+...mapActions("SuiviImmobilisation", [
+       "ajouterImmobilisation",
+       "modifierImmobilisation",
+       "modifierStock",
+       "ajouterHistotorisqueAffectionService",
+       "modifierDemandeMateriel"
+      
+     
+    ]),
+ ajouterImmobilisationLocal() {
+
+      
+if (this.formData.serviceua_id == this.afficherAffectationParFonction &&  this.afficherQuantiteEnRequise(this.formData2.famillearticle_id) == this.afficherAffectationParQuantiteAffecter){
+
+alert("équipement déja attribué")
+}
+else if(this.afficherQuantiteEnStock(this.formData2.famillearticle_id) == 0){
+alert("Veuillez approvisionner votre stock")
+}
+else if(this.afficherQuantiteEnRequise(this.formData2.famillearticle_id) < this.afficherQteTotal){
+  alert("Vérifiez la quantité affecté")
+}
+
+else if (this.formData.serviceua_id == this.afficherAffectationParFonction  && this.formData.ua_id == this.afficherAffectationParUniteZone && this.formData.serviceua_id == this.afficherAffectationParService && this.formData2.famillearticle_id == this.afficherAffectationParBesoin){
+
+var nouvelobjet8 ={
+  ...this.formData,
+  id: this.afficherIdStock,
+ quantitestock:this.afficherQteEnStock,
+ qtesortie:this.afficherQteSortir
+}
+var nouvelobjet2 ={
+  ...this.formData,
+ normeequipement:this.afficherNombreEquipementRestant,
+ montantequipement:this.afficherMontantRestant
+}
+      var nouvelObjet3 = {
+        ...this.formData2,
+        ...this.formData,
+        id: this.afficherIdImmobilisation,
+        prixUnitaire: this.coutMonenArticle,
+        valeurorigine: this.afficherValeurOrigineModifier,
+       
+        exercice_budgetaire:this.exerciceBudgetaireEnCours,
+      duree:this.afficherDureeVieFamille(this.formData2.famillearticle_id),
+      // acteurdepense_id : this.formData.acteur_depense_id,
+     	uniteadministrative_id:this.formData.ua_id,
+      	service_id:this.formData.serviceua_id,
+    //   fonction_id:this.formData.fonction_id,
+      anneamortiss:this.anneeAmortissement,
+      
+    //   unitezon_id:this.formData.uniteZone_id,
+      qte_reel:this.afficherQuantiteEnRequise(this.formData2.famillearticle_id),
+     
+     qte_affecte:this.nombreAffecter,
+     total_actuel:this.afficherPrixActuelResteACouvertModifier,
+     qte_actuel:this.afficherQteResteACouvertModifier,
+
+      };
+   var nouveauObjetDemande = {
+        ...this.formData,
+        ...this.formData2,
+//  acteur_id:this.formData.acteur_depense_id,
+ ua_id:this.formData.ua_id,
+//  unitezone_id:this.formData.uniteZone_id,
+//  fonction_id:this.formData.fonction_id,
+ article_id:this.formData2.famillearticle_id,
+ qte:this.formData2.qte_affecte,
+ dure_vie:this.afficherDureeVieFamille(this.formData2.famillearticle_id),
+ etatimmo_id:this.formData2.etat_immobilisation,
+//  matricule_auteur:this.afficherActeurDepenseMatricule(this.formData.acteur_depense_id),
+ annee:this.exerciceBudgetaireEnCours,
+ annee_amortissement:this.anneeAmortissement,
+ valeurorigine:this.afficherValeurOrigine,
+ date_mise_service:this.formData2.date_mise_service,
+ service_id:this.formData.serviceua_id,
+};
+
+
+this.ajouterHistotorisqueAffectionService(nouveauObjetDemande)
+      this.modifierStock(nouvelobjet8)
+this.modifierPlanOrganigrammeUa(nouvelobjet2)
+
+  
+    this.getAllServiceua()
+   
+    this.modifierImmobilisation(nouvelObjet3);
+
+     this.$("#nonEquiper").modal('hide');
+      this.formData={
+ua_id: "",
+       
+        libelle:"",
+        
+     }
+     this.formData2={
+ famillearticle_id :"",
+        qte_affecte:"",
+        date_mise_service:"",
+        identification:"",
+        type_immo:"",
+        nature_dentree:"",
+        nature_bien:"",
+        etat_immobilisation:"",
+        cause_inactivite:"",
+     }
+}
+else{
+  
+var nouvelobjet9 ={
+  ...this.formData,
+   id: this.afficherIdStock,
+ quantitestock:this.afficherQteEnStock,
+  qtesortie:this.afficherQteSortir
+}
+var nouvelobjet4 ={
+  ...this.formData,
+ normeequipement:this.afficherNombreEquipementRestant,
+ montantequipement:this.afficherMontantRestant
+}
+      var nouvelObjet = {
+        ...this.formData2,
+        
+        prixUnitaire: this.coutMonenArticle,
+        valeurorigine: this.afficherValeurOrigine,
+       
+        exercice_budgetaire:this.exerciceBudgetaireEnCours,
+      duree:this.afficherDureeVieFamille(this.formData2.famillearticle_id),
+      // acteurdepense_id : this.formData.acteur_depense_id,
+     	uniteadministrative_id:this.formData.ua_id,
+      service_id:this.formData.serviceua_id,
+      // fonction_id:this.formData.fonction_id,
+      anneamortiss:this.anneeAmortissement,
+      
+      // unitezon_id:this.formData.uniteZone_id,
+      qte_reel:this.afficherQuantiteEnRequise(this.formData2.famillearticle_id),
+     qte_affecte:this.nombreAffecter,
+     total_actuel:this.afficherPrixActuelResteACouvert,
+     qte_actuel:this.afficherQteResteACouvert
+
+      };
+       var ObjetDemande = {
+       ...this.formData,
+       ...this.formData2,
+//  acteur_id:this.formData.acteur_depense_id,
+ ua_id:this.formData.ua_id,
+ service_id:this.formData.serviceua_id,
+//  unitezone_id:this.formData.uniteZone_id,
+//  fonction_id:this.formData.fonction_id,
+ article_id:this.formData2.famillearticle_id,
+ qte:this.formData2.qte_affecte,
+ dure_vie:this.afficherDureeVieFamille(this.formData2.famillearticle_id),
+ etatimmo_id:this.formData2.etat_immobilisation,
+//  matricule_auteur:this.afficherActeurDepenseMatricule(this.formData.acteur_depense_id),
+ annee:this.exerciceBudgetaireEnCours,
+annee_amortissement:this.anneeAmortissement,
+valeurorigine:this.afficherValeurOrigine,
+ date_mise_service:this.formData2.date_mise_service
+};
+
+
+this.ajouterHistotorisqueAffectionService(ObjetDemande)
+       this.modifierStock(nouvelobjet9)
+this.modifierService(nouvelobjet4)
+  
+    this.getAllServiceua()
+   
+    this.ajouterImmobilisation(nouvelObjet);
+this.$("#nonEquiper").modal('hide');
+     
+     this.formData={
+ua_id: "",
+       
+        serviceua_id:"",
+      
+     }
+     this.formData2={
+ famillearticle_id :"",
+        qte_affecte:"",
+        date_mise_service:"",
+        identification:"",
+        type_immo:"",
+        nature_dentree:"",
+        nature_bien:"",
+        etat_immobilisation:"",
+        cause_inactivite:"",
+     }
+
+}
+
+    },
+              fenetreAjouterAffectation(index) {
+      this.$("#nonEquiper").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+      this.formData = this.afficheServiceNonEquipe[index];
+    },
+
+    afficherModalModifierService(index) {
+      this.$("#exampleModalValidationdirecteur").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+      this.editService = this.listedesarticleparPerso(this.libelleService(this.marcheid))[index];
+    },
+ afficherModalTransfert(index) {
+      this.$("#modalTransfert").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+      this.editService = this.listedesarticleparPerso(this.libelleService(this.marcheid))[index];
+    },
+
+formatageSomme:formatageSomme,
+
+//  formaterDate(date) {
+//               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+//             },
+      }
+}
+</script>
+<style scoped>
+.taillemodal {
+  width: 1400px;
+  margin: 0 -700px;
+}
+.taillemodal1 {
+  width: 800px;
+  margin: 0 -455px;
+}
+.sommecolor{
+  background-color: red;
+  color:red;
+  font-size: 120%;
+  text-align: center;
+  font-weight:bold;
+}
+.tailgrand{
+  width: 77%;
+  margin: 0 -38%;
+}
+.tailleImmobilisation{
+  width: 90%;
+  margin: 0 -45%;
+}
+.valDirecteur{
+  width:70%;
+  margin:0 -35%;
+}
+</style>

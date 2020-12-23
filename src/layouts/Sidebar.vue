@@ -1,15 +1,19 @@
 <template>
   <div>
-     
+    
+
     <SiderbarParametre v-if="detail_marche.code == 1"></SiderbarParametre>
+    <!-- <SideBarGestionAccess v-if="detail_marche.code == 21"></SideBarGestionAccess> -->
     <SiderbarUniteAdministrative v-else-if="detail_marche.code == 2"></SiderbarUniteAdministrative>
     <SideBarGestionSib v-else-if="detail_marche.code == 3"></SideBarGestionSib>
      <SiderbarGestionHorsSib v-else-if="detail_marche.code == 4"></SiderbarGestionHorsSib>
     <SidebarMonEquipe v-else-if="detail_marche.code == 6"></SidebarMonEquipe>
     <SiderbarRapport v-else-if="detail_marche.code == 7"></SiderbarRapport>
-    <SiderbarGestionVehicule v-else-if="detail_marche.code == 8"></SiderbarGestionVehicule>
     
-    <SiderbarCatographie v-else></SiderbarCatographie>
+    <SiderbarGestionVehicule v-else-if="detail_marche.code == 8"></SiderbarGestionVehicule>
+    <SiderbarCatographie  v-else></SiderbarCatographie>
+     
+   
    
   </div>
 </template>
@@ -17,6 +21,7 @@
 <script>
 import { mapGetters} from "vuex";
 import SiderbarParametre from "./SiderbarParametre";
+//import SideBarGestionAccess from "./SideBarGestionAccess";
 import SideBarGestionSib from "./SideBarGestionSib";
 import SidebarMonEquipe from "./SidebarMonEquipe";
 import SiderbarUniteAdministrative from "./SiderbarUniteAdministrative";
@@ -34,6 +39,7 @@ export default {
   },
 components: {
     SideBarGestionSib,
+    //SideBarGestionAccess,
      SiderbarParametre,
     SiderbarCatographie,
     SiderbarGestionHorsSib,
@@ -77,10 +83,11 @@ components: {
   },
 created() {
             this.marcheid=this.$route.params.id
-  console.log(this.gestionModules)
+  console.log("Guei est dans la place")
    this.detail_marche = this.gestionModules.find(
        idmarche => idmarche.id == this.$route.params.id
    )
+   console.log(this.detail_marche)
   
 },
   methods:{

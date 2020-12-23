@@ -40,6 +40,12 @@ import PrettyCheckbox from 'pretty-checkbox-vue'
 // import PrettyRadio from 'pretty-checkbox-vue/radio';
 import VueTelInput from 'vue-tel-input'
 import LDrawToolbar from 'vue2-leaflet-draw-toolbar';
+
+
+
+
+import VueHtml2pdf from 'vue-html2pdf'
+Vue.use(VueHtml2pdf)
 // ...
 Vue.component('l-draw-toolbar', LDrawToolbar);
 Vue.use(VueTelInput)
@@ -52,7 +58,8 @@ const options = {
     ],
     styles: [
         'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
-        'https://unpkg.com/kidlat-css/css/kidlat.css'
+        'https://unpkg.com/kidlat-css/css/kidlat.css',
+        "print.css"
     ]
 }
 Vue.use(VueHtmlToPaper, options);

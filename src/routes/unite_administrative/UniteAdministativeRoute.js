@@ -35,7 +35,31 @@ import BudgetEclatePrincipal from "../../pages/Hors_sib/grpeBudgetEclate/BudgetE
 
 import ListeBudgeteclate from "../../pages/Hors_sib/grpeBudgetEclate/ListeBudgetEclate.vue"
 import AjouterBudgetEclate from "../../pages/Hors_sib/grpeBudgetEclate/AjouterBudgetEclate.vue"
+
+import ListeVehicules from "../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeVehicule/ListeVehicules.vue"
+import ReparationVehicule from "../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/ReparationVehicule.vue"
+
+
+import ListeStockArticle from "../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/gpeGestionStock/ListeStockArticle.vue"
+
+
 const UniteAdministativeRoutes = [
+  {
+    path: "/ListeStockArticle",
+    name: "ListeStockArticle",
+    component: ListeStockArticle
+},
+  {
+    path: "/ReparationVehicule",
+    name: "ReparationVehicule",
+    component: ReparationVehicule
+},
+  {
+    path: "/ListeVehicules",
+    name: "ListeVehicules",
+    component: ListeVehicules
+}
+,
   {
     path: "/AjouterBudgetEclate/:id",
     name: "AjouterBudgetEclate",
