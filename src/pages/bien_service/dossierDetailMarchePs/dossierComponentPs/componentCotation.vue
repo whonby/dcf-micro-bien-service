@@ -14,7 +14,7 @@
                                                 <th>Nom</th>
                                                 <th>Contact</th>
                                                 <th>Entreprise</th>
-                                                <th>Fichier</th>
+                                                <!-- <th>Fichier</th> -->
                                                
                                                 <th>Action</th>
                                             </tr>
@@ -35,12 +35,12 @@
                          <td @click="afficherModalcotation(index)">
                             {{afficherLibelleEntreprise(cotation.entreprise_id) || 'Non renseigné'}}</td>
                       
-                        <td>
+                        <!-- <td>
                             <a v-if="cotation.fichier_joint" :href="cotation.fichier_joint" class="btn btn-default" target="_blank">
                                 <span class=""><i class="icon-book"></i>
                                 </span>
                             </a>
-                        </td>
+                        </td> -->
                         <div class="btn-group">
                             <button @click.prevent="supprimerCotation(cotation.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
@@ -57,7 +57,7 @@
                       
                          <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter les soumissionnaires</h3>
+                <h3>Ajouter la reception des plis</h3>
             </div>
             <table class="table table-bordered table-striped">
  <tr>
@@ -99,7 +99,7 @@
                               <td>
                           <div class="control-group">
             
-                            <label class="control-label">Ref de l'offre:</label>
+                            <label class="control-label">Ref des plis:</label>
                            <div class="control-group">
                        <input type="text" class="span" readonly :value="affichierReferenceAppelOffre(macheid.id)">
                        
@@ -110,7 +110,7 @@
                               <td>
                          <div class="control-group">
             
-                            <label class="control-label">Nom :</label>
+                            <label class="control-label">Nom du deposant :</label>
                            <div class="control-group">
                        <input type="text" class="span" placeholder="saisir le nom" v-model="formCotation.nom_person">
                             </div>
@@ -134,7 +134,7 @@
 
                     <div class="control-group">
 
-                     <label class="control-label">Date de depot de cotation :</label>
+                     <label class="control-label">Date de depot des plis :</label>
 
                             <div class="controls">
                                 <input type="date" class="span" row="" placeholder=""  v-model="formCotation.date_cotation">
@@ -171,18 +171,18 @@
 
                          <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier les soumissionnaires </h3>
+                <h3>Modifier la reception des plis </h3>
             </div>
 
                      <table class="table table-bordered table-striped">
  <tr>
                                  <td colspan="2" width="">
 
-                          <!-- <select v-model="formCotation.entreprise_id" class="span">
+                          <select v-model="editCotation.entreprise_id" class="span">
                                 <option v-for="varText in entreprises" :key="varText.id"
                                         :value="varText.id">{{varText.raison_sociale}}</option>
-                            </select> -->
-                            <div class="span" align="left" >
+                            </select>
+                            <!-- <div class="span" align="left" >
 
                                Selectionner l'entreprise:
                         <model-list-select style="background-color: rgb(255,255,255);"
@@ -198,7 +198,7 @@
 
                         </model-list-select>
                         
-                            </div>
+                            </div> -->
                    
                               </td>
                             </tr>
@@ -212,17 +212,18 @@
                           <td>
                                 <div class="control-group">
             
-                            <label class="control-label">Ref de l'offre:</label>
+                            <label class="control-label">Ref des plis:</label>
                            <div class="control-group">
-                       <input type="text" class="span" :value="affichierReferenceAppelOffre(macheid.id)" readonly>
+                       <input type="text" class="span" v-model="editCotation.ref_offre">
                             </div>
                         </div>
                           </td>
                           <td>
+                              
 
                          <div class="control-group">
             
-                            <label class="control-label">Nom  :</label>
+                            <label class="control-label">Nom du deposant :</label>
                            <div class="control-group">
                        <input type="text" class="span" placeholder="saisir le nom" v-model="editCotation.nom_person">
                             </div>
@@ -258,7 +259,7 @@
 
                            <div class="control-group">
 
-                     <label class="control-label">Date de depot de cotation :</label>
+                     <label class="control-label">Date de depot des plis :</label>
 
                             <div class="controls">
                                 <input type="date" class="span" row="" placeholder=""  v-model="editCotation.date_cotation">
@@ -485,24 +486,24 @@ affichierReferenceAppelOffre() {
           
            ajouterCotationLocal(){
             
-                const formData = new FormData();
-                formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
-                formData.append('nom_person', this.formCotation.nom_person);
-                formData.append('contact', this.formCotation.contact);
-               formData.append('entreprise_id', this.formCotation.id);
-                formData.append('date_cotation', this.formCotation.date_cotation);
-                formData.append('marche_id', this.macheid.id);
-                formData.append('ref_offre', this.affichierReferenceAppelOffre(this.macheid.id));
-                let config = {
-                    header : {
-                        'Content-Type' : 'multipart/form-data'
-                    }
-                }
+            //     const formData = new FormData();
+            //     formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
+            //     formData.append('nom_person', this.formCotation.nom_person);
+            //     formData.append('contact', this.formCotation.contact);
+            //    formData.append('entreprise_id', this.formCotation.id);
+            //     formData.append('date_cotation', this.formCotation.date_cotation);
+            //     formData.append('marche_id', this.macheid.id);
+            //     formData.append('ref_offre', this.affichierReferenceAppelOffre(this.macheid.id));
+            //     let config = {
+            //         header : {
+            //             'Content-Type' : 'multipart/form-data'
+            //         }
+            //     }
 // if (condition) {
     
 // }
               
-               this.ajouterCotation(formData, config)
+               this.ajouterCotation(this.formCotation)
                this.getCotation()
                this.formCotation ={
                    nom_person:"",
@@ -518,25 +519,25 @@ affichierReferenceAppelOffre() {
            modifierCotationLocal(){
               
 
-               const formData = new FormData();
-                formData.append('nom_person', this.editCotation.nom_person);
-                formData.append('contact', this.editCotation.contact);
-               formData.append('entreprise_id', this.editCotation.id);
-                formData.append('date_cotation', this.editCotation.date_cotation);
-                formData.append('marche_id', this.marcheid);
-                formData.append('ref_offre', this.editCotation.ref_offre);
+            //    const formData = new FormData();
+            //     formData.append('nom_person', this.editCotation.nom_person);
+            //     formData.append('contact', this.editCotation.contact);
+            //    formData.append('entreprise_id', this.editCotation.id);
+            //     formData.append('date_cotation', this.editCotation.date_cotation);
+            //     formData.append('marche_id', this.marcheid);
+            //     formData.append('ref_offre', this.editCotation.ref_offre);
                
-                console.log(formData)
-                if ( this.selectedFile!==""){
-                    formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
-                }
-                let config = {
-                    header : {
-                        'Content-Type' : 'multipart/form-data'
-                    }
-                }
+            //     console.log(formData)
+            //     if ( this.selectedFile!==""){
+            //         formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
+            //     }
+            //     let config = {
+            //         header : {
+            //             'Content-Type' : 'multipart/form-data'
+            //         }
+            //     }
               
-               this.modifierCotation(formData,config)
+               this.modifierCotation(this.editCotation)
                this.$('#modifiCotation').modal('hide');
            }
 
