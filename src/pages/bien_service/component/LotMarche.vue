@@ -40,7 +40,7 @@
                   {{marche.numero_lot || 'Non renseigné'}}
                 </td>
                 <td @dblclick="editeMarcheLot(marche.id)">
-                  {{marche.objet || 'Non renseigné'}}
+                  {{marche.objet || 'Non renseigné'}} {{marche.attribue}}
                 </td>
                 <td @dblclick="editeMarcheLot(marche.id)">
                   {{LIBELLEInfas(marche.infrastructure_id) || 'Non renseigné'}}
@@ -668,7 +668,7 @@ SommeDesLots(){
             unite_administrative_id:this.detail_marche.unite_administrative_id,
             activite_id:this.detail_marche.activite_id,
             imputation:this.detail_marche.imputation,
-            attribue:this.detail_marche.attribue,
+            attribue:1,
             procedure_passation_id:this.detail_marche.procedure_passation_id,
             exo_id:this.detail_marche.exo_id,
             typeappel_id:this.detail_marche.typeappel_id,
@@ -719,7 +719,7 @@ SommeDesLots(){
             unite_administrative_id:"",
             activite_id:"",
             imputation:"",
-            attribue:"",
+            attribue:1,
             Nature_des_prix:"",
             procedure_passation_id:"",
             exo_id:"",
@@ -779,6 +779,7 @@ SommeDesLots(){
         longitude:this.editor.longitude,
         sib:this.editor.sib,
         numero_lot:this.editor.numero_lot,
+        //  attribue:1,
         infrastructure_id:this.afficheIdInfrasture(this.macheid)
       }
 
