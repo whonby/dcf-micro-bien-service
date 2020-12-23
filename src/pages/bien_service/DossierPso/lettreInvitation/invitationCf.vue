@@ -258,7 +258,7 @@
                                 <td>
                          <div class="control-group">
                         <label class="control-label">Date COJO</label>
-                        <div class="controls">
+                        <div class="controls"> 
                             <input
                                     type="date"
                                     v-model="edite_Lettre_invitation.date_cojo"
