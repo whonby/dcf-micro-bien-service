@@ -4739,8 +4739,6 @@ export function supprimerMotifPassation({commit},id){
 }
 
 
-<<<<<<< HEAD
-=======
 
 
 export function modifierActeEffet({commit}, element_modifie){
@@ -4756,7 +4754,6 @@ export function modifierActeEffet({commit}, element_modifie){
    }).catch(error => console.log(error))
   // console.log(element_modifie)
 } 
->>>>>>> 40dae1ef2263fec3127d1d6a5539f4674dc786aa
 /**
  * Information carte
  */
@@ -4795,8 +4792,4 @@ export function ajouterTableauBordFiltre({commit},formData){
 
 export function ajouterInfoTableauBordFiltre({commit},formData){
     commit('GET_INFO_TABLEAU_BORD', formData)
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 40dae1ef2263fec3127d1d6a5539f4674dc786aa

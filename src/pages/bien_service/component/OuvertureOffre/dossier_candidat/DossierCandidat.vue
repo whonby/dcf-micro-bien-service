@@ -1,6 +1,6 @@
 <template>
   <div>
-Modification dossier candidat
+
 
     <div align="right">
       <div class="widget-content">

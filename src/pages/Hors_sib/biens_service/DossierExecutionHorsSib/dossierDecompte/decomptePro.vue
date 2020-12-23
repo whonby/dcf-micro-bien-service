@@ -1,7 +1,6 @@
 
 <template>
   <div >
-<<<<<<< HEAD
     <div id="exampleModal" class="modal hide grdirModalActeEffet">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -532,15 +531,6 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
        </div>
     </div> 
-=======
-      <div align="right">
-
-          <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
-
-
-      </div>
-      <div id="printMe">
->>>>>>> 40dae1ef2263fec3127d1d6a5539f4674dc786aa
    <table class="table table-bordered table-striped" v-if="macheid">
                                     <thead>
                                    <tr>
@@ -554,7 +544,7 @@
           <th style="text-align:center;font-size:12px">Penalités </th>
           <th style="text-align:center;font-size:12px">Net HTVA </th>
           <th style="text-align:center;font-size:12px">Net TTC</th>
-          <th style="text-align:center;font-size:12px">Etat ({{recupereTauxEtat(macheid)- 18}}% (HT) + (TVA 18%))</th>
+          <th style="text-align:center;font-size:12px">Etat ({{recupereTauxEtat(macheid)}}% + (TVA 18%))</th>
           <th style="text-align:center;font-size:12px">Bailleur({{recupereTauxBailleur(macheid)}}% HTVA) </th>
           <th style="text-align:center;font-size:12px">Actions </th>
                   </tr>
@@ -563,11 +553,7 @@
                   
                                     </thead>
                                     <tbody>
-<<<<<<< HEAD
                                     <tr class="odd gradeX" v-for="type in decomptefactures" :key="type.id">
-=======
-                                    <tr class="odd gradeX" v-for="(type, index) in decompteListe(macheid)" :key="type.id">
->>>>>>> 40dae1ef2263fec3127d1d6a5539f4674dc786aa
                     <td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_decompte || 'Non renseigné'}}</td>
@@ -647,7 +633,7 @@
                   </tr>
                 </tbody>
                                 </table>
-      </div>
+ 
   <notifications  />
   </div>
 </template>
@@ -704,7 +690,7 @@ props:["macheid"],
  "decomptefactures"
    
    
-   ]),
+   ]), 
 
    ...mapGetters('parametreGenerauxAdministratif',[
 
@@ -728,15 +714,6 @@ props:["macheid"],
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
     
-    decompteListe() {
-      return id => {
-        if (id != null && id != "") {
-          return this.decomptefactures.filter(
-            element => element.marche_id == id 
-          );
-        }
-      };
-    },
  PourcentageCumulAvanceDemarrage(){
       const val = ((parseFloat(this.CumulAvance(this.macheid)) * (parseFloat(this.TauxAvanceDemarrageHT1(this.macheid))/100))/parseFloat(this.MontantAvanceDemarrageHT(this.macheid)));
       
@@ -1304,7 +1281,6 @@ if (qtereel) {
    
    
    ]),
-<<<<<<< HEAD
      modifierDecompteLocal() {
          var nouvelObjet = {
         ...this.editDecompte,
@@ -1321,13 +1297,9 @@ if (qtereel) {
      this.$("#exampleModal").modal('hide');
        this.editDecompte = {
       
-      };
+      }
        },
-=======
-      genererEnPdf(){
-          this.$htmlToPaper('printMe');
-      },
->>>>>>> 40dae1ef2263fec3127d1d6a5539f4674dc786aa
+       
     formatageSomme:formatageSomme,
  formaterDate(date) {
             return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
