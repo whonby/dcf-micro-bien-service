@@ -40,7 +40,7 @@
                   {{marche.numero_lot || 'Non renseigné'}}
                 </td>
                 <td @dblclick="editeMarcheLot(marche.id)">
-                  {{marche.objet || 'Non renseigné'}}
+                  {{marche.objet || 'Non renseigné'}} {{marche.attribue}}
                 </td>
                 <td @dblclick="editeMarcheLot(marche.id)">
                   {{LIBELLEInfas(marche.infrastructure_id) || 'Non renseigné'}}
@@ -61,6 +61,10 @@
                   {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}
                 </td>
                 <td>
+                    <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                                 class="btn btn-inverse " title="Cycle de vie du marche">
+                        <span class=""><i class=" icon-calendar"></i></span>
+                    </router-link>
                   <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                     <span class=""><i class="icon-trash"></i></span></button>
                 </td>
@@ -664,7 +668,7 @@ SommeDesLots(){
             unite_administrative_id:this.detail_marche.unite_administrative_id,
             activite_id:this.detail_marche.activite_id,
             imputation:this.detail_marche.imputation,
-            attribue:this.detail_marche.attribue,
+            attribue:1,
             procedure_passation_id:this.detail_marche.procedure_passation_id,
             exo_id:this.detail_marche.exo_id,
             typeappel_id:this.detail_marche.typeappel_id,
@@ -715,7 +719,7 @@ SommeDesLots(){
             unite_administrative_id:"",
             activite_id:"",
             imputation:"",
-            attribue:"",
+            attribue:1,
             Nature_des_prix:"",
             procedure_passation_id:"",
             exo_id:"",
@@ -762,6 +766,10 @@ SommeDesLots(){
     this.editor = this.getMarchePersonnaliser.find(item=>item.id==index)
   },
   modification(){
+        let attribution=this.editor.attribue
+        if(this.editor.attribue<1){
+            attribution=1
+        }
       let objet={
         id:this.editor.id,
         objet:this.editor.objet,
@@ -775,6 +783,7 @@ SommeDesLots(){
         longitude:this.editor.longitude,
         sib:this.editor.sib,
         numero_lot:this.editor.numero_lot,
+        attribue:attribution,
         infrastructure_id:this.afficheIdInfrasture(this.macheid)
       }
 

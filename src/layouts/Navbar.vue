@@ -12,7 +12,7 @@
     <MenuControlAxe v-if="active_el ==6"></MenuControlAxe>
     <MenuPlanificationHorSib v-if="active_el ==7"></MenuPlanificationHorSib>
     <MenuCatographie v-if="active_el ==8"></MenuCatographie>
-    <MenuInvestissementHorSib v-if="active_el ==20"></MenuInvestissementHorSib>
+    <MenuInvestissementHorSib v-if="active_el ==40"></MenuInvestissementHorSib>
      <MenuDefaut v-if="active_el ==0"></MenuDefaut>
     <MenuGestionAccess v-if="active_el ==21"></MenuGestionAccess>
     <MenuMonEquipe v-if="active_el ==30"></MenuMonEquipe>
