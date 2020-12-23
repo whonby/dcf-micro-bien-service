@@ -321,7 +321,7 @@ navigateRetourAuMenu(){
       })
     },
       navigateToInvestissement(){
-        this.activate(20)
+        this.activate(40)
         this.$router.push({
           name:'tableau_de_bors_sib_investissement'
         })

@@ -8,7 +8,7 @@
                     <thead>
                    <tr>
                         <th>Date lettre</th>
-                        <th>Ref lettre </th>
+                        <th>Reference DAO </th>
                         <th>Destinataire</th>
                         <th>Objet de la lettre</th>
                         <th>Fichier</th>
