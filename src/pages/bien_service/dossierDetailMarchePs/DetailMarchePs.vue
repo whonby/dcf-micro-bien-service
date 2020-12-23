@@ -467,7 +467,7 @@
                                 <li class=""><a data-toggle="tab" href="#tab784">Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab17041">PV d'ouverture</a></li>
                               <!--  <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>-->
-                                <li class=""><a data-toggle="tab" href="#tab5498"> Jugement </a></li>
+                                <li class=""><a data-toggle="tab" href="#tab5498"> Analyse et Jugement </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab254010">ReserveCF</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0612">PV Jugement</a></li>
                                <li class=""><a data-toggle="tab" href="#tab06745">Attribution</a></li>
@@ -637,7 +637,7 @@
                                 
                                 <!--<li class=""><a data-toggle="tab" href="#tab5">Dossier Candidat</a></li>-->
                                 <li class=""><a data-toggle="tab" href="#tab45" title="Rapport ouverture">PV Ouverture</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab6" title="Analyse et jugement des offres">Jugement</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab6" title="Analyse">Analyse</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2540103">ReserveCF</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab7" title="Rapport d'évaluation combiné">PV Jugement</a></li>
 
