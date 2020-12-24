@@ -959,7 +959,7 @@ export function ajouterDecompteFacture({ commit }, nouveau) {
 
 export function ModifierDecompteFacture({ commit }, nouveau) {
   asyncLoading(axios
-      .put("/modifierDecompte/" + nouveau.id,nouveau))
+      .put("/modifierdecomptefacture/" + nouveau.id,nouveau))
       .then(response => {
           commit("MODIFIER_DECOMPTE_FACTURE", response.data);
           this.$app.$notify({
@@ -976,7 +976,7 @@ export function supprimerDecompteFacture({ commit }, id) {
       .then(dialog => {
           commit("SUPPRIMER_DECOMPTE_FACTURE", id);
           // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete("/supprimerdecompte/" + id).then(() => dialog.close());
+          axios.delete("/supprimerdecomptefacture/" + id).then(() => dialog.close());
       });
 }
 

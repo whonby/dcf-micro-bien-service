@@ -126,6 +126,8 @@ const BienServiceRoutes = [
         name:"image_marche",
         component:imageMarche
     },
+   
+   
     {
         path: "/AjouteFacture",
         name: "AjouteFacture",

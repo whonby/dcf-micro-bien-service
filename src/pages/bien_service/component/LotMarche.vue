@@ -27,8 +27,9 @@
                 <th title="Sous Prefecture">S/P</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
+                <th>Livrables</th>
                 <th>Montant estimatif en FCFA TTC</th>
-
+                
 
                 <th>Action</th>
               </tr>
@@ -40,7 +41,7 @@
                   {{marche.numero_lot || 'Non renseigné'}}
                 </td>
                 <td @dblclick="editeMarcheLot(marche.id)">
-                  {{marche.objet || 'Non renseigné'}}
+                  {{marche.objet || 'Non renseigné'}} {{marche.attribue}}
                 </td>
                 <td @dblclick="editeMarcheLot(marche.id)">
                   {{LIBELLEInfas(marche.infrastructure_id) || 'Non renseigné'}}
@@ -57,9 +58,13 @@
                 <td @dblclick="editeMarcheLot(marche.id)">
                   {{marche.longitude || 'Non renseigné'}}
                 </td>
+                 <td @dblclick="editeMarcheLot(marche.id)">
+                  {{marche.livrable || 'Non renseigné'}}
+                </td>
                 <td @dblclick="editeMarcheLot(marche.id)" style="text-align: center;color:#000000;font-weight:bold;">
                   {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}
                 </td>
+                
                 <td>
                     <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
                                  class="btn btn-inverse " title="Cycle de vie du marche">
@@ -76,6 +81,7 @@
                  <td></td>
                  <td></td>
                  <td></td>
+                  <td></td>
                  <td style="font-weight:bold;">Total</td>
                  <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesLots(macheid)))}}</td>
                  <td></td>
@@ -100,7 +106,7 @@
       <table class="table table-bordered table-striped">
         <tr>
 <td><div class="control-group">
-                        <label class="control-label">Numero du lot</label>
+                        <label class="control-label">Numéro du lot</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -127,7 +133,7 @@
         </tr>
         <tr>
            <td><div class="control-group">
-                        <label class="control-label">Montant du Lot</label>
+                        <label class="control-label">Montant estimatif du Lot</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -169,7 +175,7 @@
        </div>
                         </div></td>
                         <td><div class="control-group">
-                        <label class="control-label">Départment</label>
+                        <label class="control-label">Département</label>
                          <div class="controls">
         
                <select v-model="formData.departement_id" class="span" :readOnly="deveroiullage">
@@ -184,7 +190,7 @@
           
                         
                         <td><div class="control-group">
-                        <label class="control-label">Sous/Préfecture</label>
+                        <label class="control-label">Sous-Préfecture</label>
                          <div class="controls">
        
                <select v-model="formData.sous_prefecture_id" class="span" :readOnly="deveroiullageSousprefecture">
@@ -219,7 +225,7 @@
         </tr>
         <tr>
           <td><div class="control-group">
-                        <label class="control-label">Beneficiaire</label>
+                        <label class="control-label">Bénéficiaires</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -230,7 +236,7 @@
                         </div>
                         </div></td>
                         <td colspan="2"><div class="control-group">
-                        <label class="control-label">Livrable</label>
+                        <label class="control-label">Livrables</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -265,7 +271,7 @@
        <table class="table table-bordered table-striped">
         <tr>
 <td><div class="control-group">
-                        <label class="control-label">Numero du lot</label>
+                        <label class="control-label">Numéro du lot</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -292,7 +298,7 @@
         </tr>
         <tr>
            <td><div class="control-group">
-                        <label class="control-label">Montant du Lot</label>
+                        <label class="control-label">Montant estimatif du Lot</label>
                         <div class="controls">
                             <input
                                     type="number"
@@ -315,7 +321,7 @@
        </div>
                         </div></td>
                         <td><div class="control-group">
-                        <label class="control-label">Départment</label>
+                        <label class="control-label">Département</label>
                          <div class="controls">
         
                <select v-model="editor.departement_id" class="span" :readOnly="deveroiullage">
@@ -330,7 +336,7 @@
           
                         
                         <td><div class="control-group">
-                        <label class="control-label">Sous/Préfecture</label>
+                        <label class="control-label">Sous-Préfecture</label>
                          <div class="controls">
        
                <select v-model="editor.sous_prefecture_id" class="span" :readOnly="deveroiullageSousprefecture">
@@ -365,7 +371,7 @@
         </tr>
          <tr>
           <td><div class="control-group">
-                        <label class="control-label">Beneficiaire</label>
+                        <label class="control-label">Bénéficiaires</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -376,7 +382,7 @@
                         </div>
                         </div></td>
                         <td colspan="2"><div class="control-group">
-                        <label class="control-label">Livrable</label>
+                        <label class="control-label">Livrables</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -668,7 +674,7 @@ SommeDesLots(){
             unite_administrative_id:this.detail_marche.unite_administrative_id,
             activite_id:this.detail_marche.activite_id,
             imputation:this.detail_marche.imputation,
-            attribue:this.detail_marche.attribue,
+            attribue:1,
             procedure_passation_id:this.detail_marche.procedure_passation_id,
             exo_id:this.detail_marche.exo_id,
             typeappel_id:this.detail_marche.typeappel_id,
@@ -719,7 +725,7 @@ SommeDesLots(){
             unite_administrative_id:"",
             activite_id:"",
             imputation:"",
-            attribue:"",
+            attribue:1,
             Nature_des_prix:"",
             procedure_passation_id:"",
             exo_id:"",
@@ -766,6 +772,10 @@ SommeDesLots(){
     this.editor = this.getMarchePersonnaliser.find(item=>item.id==index)
   },
   modification(){
+        let attribution=this.editor.attribue
+        if(this.editor.attribue<1){
+            attribution=1
+        }
       let objet={
         id:this.editor.id,
         objet:this.editor.objet,
@@ -779,6 +789,7 @@ SommeDesLots(){
         longitude:this.editor.longitude,
         sib:this.editor.sib,
         numero_lot:this.editor.numero_lot,
+        attribue:attribution,
         infrastructure_id:this.afficheIdInfrasture(this.macheid)
       }
 

@@ -10,33 +10,26 @@
         <thead>
         <tr>
           <th>N°LOT</th>
-          <th>Programme mobilisation</th>
-          <th>Capacite financiere </th>
-          <th>CAA Moyenne</th>
-          <th>Capacite téchnique </th>
-          <th title="methodologie de realisation de travaux">Methode real.trvx </th>
-          <th>Accord groupe</th>
-          <th title="Pouvoir de signature">P.Signature</th>
-          <th>Caution</th>
-          <th>Registe de commerce</th>
-          <th>Observation</th>
+          <th>Structure Emetrice</th>
+          <th>Montant </th>
+          <th>Delai de validation de l'offre</th>
+          <th>Delai de livraison ou d'execution proposé </th>
+          <th>Rabais offert</th>
+          <th title="Pouvoir de signature">Presence Echantillons</th>
+          <th>Autre observation</th>
           <th>Action</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="offre in listeOffreTechniqueLotCandidat(dossier_candidature.id)" :key="offre.id">
           <td @click="afficheEdite(offre.id)">N°{{offre.numero_lot}}</td>
-          <td @click="afficheEdite(offre.id)">{{offre.prog_mobilisation}}</td>
-          <td @click="afficheEdite(offre.id)">{{offre.capacite_financiere}} </td>
-          <td @click="afficheEdite(offre.id)">{{offre.caa_moyen_ac_entre}} </td>
-          <td @click="afficheEdite(offre.id)">{{offre.capacite_tech_exp}} </td>
-          <td @click="afficheEdite(offre.id)">{{offre.meth_real_travau}}</td>
-          <td @click="afficheEdite(offre.id)">{{offre.accord_groupe}}</td>
-          <td @click="afficheEdite(offre.id)">{{offre.pouv_habil_signataire}}</td>
-          <td @click="afficheEdite(offre.id)">{{offre.cautionnement_prov}}</td>
-          <td @click="afficheEdite(offre.id)">{{offre.reg_com}}</td>
-          <td @click="afficheEdite(offre.id)" v-if="offre.observation" style="background: green;color: #fff">CONFORME</td>
-          <td @click="afficheEdite(offre.id)" v-if="!offre.observation" style="background: red;color: #fff">NON CONFORME</td>
+          <td @click="afficheEdite(offre.id)">{{offre.structure_emetrice}}</td>
+          <td @click="afficheEdite(offre.id)">{{offre.montant}} </td>
+          <td @click="afficheEdite(offre.id)">{{offre.delai_validite_offre}} </td>
+          <td @click="afficheEdite(offre.id)">{{offre.delai_execution}} </td>
+          <td @click="afficheEdite(offre.id)">{{offre.rabai_offert}}</td>
+          <td @click="afficheEdite(offre.id)">{{offre.presence_echantillons}}</td>
+          <td @click="afficheEdite(offre.id)">{{offre.autre_observation}}</td>
           <td>
             <button @click.prevent="supprimerchnique(offre.id)"  class="btn btn-danger ">
               <span class=""><i class="icon-trash"></i></span></button>
@@ -56,6 +49,9 @@
     </div>
     <div class="modal-body" >
       <div class="widget-box" >
+
+
+
         <table class="table table-bordered table-striped">
           <tr>
             <td>
@@ -78,334 +74,114 @@
                 </div>
               </div>
             </td>
+            <td>
+              <div class="control-group">
+                <label>Nom du soumissionnaire</label>
+                <div class="controls">
+                  <input v-if="listeAppelOffre(dossier_candidature.marche_id)" type="text" class="span" placeholder="Offre"
+                         v-model="dossier_candidature.nom_cand" disabled>
+                </div>
+              </div>
+            </td>
           </tr>
         </table>
 
         <table class="table table-bordered table-striped">
 
           <tr>
-
-
             <td>
               <div class="control-group">
-                <label class="control-label">Accord groupement :</label>
+                <label class="control-label">N° Du pli :</label>
                 <div class="controls">
-                  <select v-model="formchnique.accord_groupe" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
 
+                  <input type="text" v-model="formchnique.numero_pli" class="span" placeholder="Structure Emétrice">
                 </div>
               </div>
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Fiche de renseignement nombre de groupe :</label>
+                <label class="control-label">Structure Emétrice :</label>
                 <div class="controls">
-                  <input v-if="formchnique.accord_groupe=='OUI'" type="text" class="span" placeholder="Attest banc"
-                         v-model="formchnique.fiche_rsgnt_mbre_groupe">
-                  <input v-if="formchnique.accord_groupe=='NON'" type="text" class="span" placeholder="Attest banc"
-                         v-model="formchnique.fiche_rsgnt_mbre_groupe" disabled>
-                  <input v-if="formchnique.accord_groupe=='N/A'" type="text" class="span" placeholder="Attest banc"
-                         v-model="formchnique.fiche_rsgnt_mbre_groupe" disabled>
-                  <input v-if="!formchnique.accord_groupe" type="text" class="span" placeholder="Attest banc"
-                         v-model="formchnique.fiche_rsgnt_mbre_groupe" disabled>
-                  <!-- <select v-model="formLot.fiche_rsgnt_mbre_groupe" class="span">
-                     <option value=""></option>
-                     <option value="OUI">OUI</option>
-                     <option value="NON">NON</option>
-                     <option value="N/A">NON APPLICABLE</option>
-                   </select>-->
+
+                  <input type="text" v-model="formchnique.structure_emetrice" class="span" placeholder="Structure Emétrice">
                 </div>
               </div>
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Cautionnement provisoire :</label>
+                <label class="control-label">Montant :</label>
                 <div class="controls">
-                  <select v-model="formchnique.cautionnement_prov" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                  <!--<input type="text" class="span" placeholder="Cautionnement prov" v-model="formchnique.cautionnement_prov">-->
+                  <input type="text" v-model="formchnique.montant" class="span" placeholder="Montant">
                 </div>
               </div>
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Attestation bancaire:</label>
+                <label class="control-label">Délai de validité de l'offre :</label>
                 <div class="controls">
-                  <select v-model="formchnique.attest_banc" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
+                  <input type="text" v-model="formchnique.delai_validite_offre" class="span" placeholder="Délai de validité de l'offre ">
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">
+                  Delai de livraison Ou Execution Proposé</label>
+                <div class="controls">
+                  <input type="text" v-model="formchnique.delai_execution" class="span" placeholder="">
                  <!-- <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">-->
                 </div>
               </div>
             </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Fiche technique :</label>
-                <div class="controls">
-                  <select v-model="formchnique.formil_propo_tech" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                  <!--<input type="text" class="span" placeholder="Piece Admin" v-model="formchnique.formil_propo_tech">-->
-                </div>
-              </div>
-            </td>
 
           </tr>
           <tr>
 
             <td>
+              <div class="control-group">
+                <label class="control-label">Autres pièced spécififiées pas le dossier de consultation(EXPLE:Nationalité autres)</label>
+                <div class="controls">
+                  <input type="text" v-model="formchnique.autre_piece_specifie" class="span" placeholder="">
+                  <!-- <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">-->
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Rabais offert</label>
+                <div class="controls">
+                  <input type="text"  v-model="formchnique.rabai_offert" class="span" placeholder="Rabais offert">
+                </div>
+              </div>
+            </td>
+            <td>
 
               <div class="control-group">
-                <label class="control-label">Antécédent des marchés non Execute :</label>
+                <label class="control-label">Présence échantillons OUI/NON :</label>
                 <div class="controls">
                 <!--  <input type="text" class="span" placeholder="Org travau" v-model="formchnique.atcdent_marche_non_exe">-->
 
-                  <select v-model="formchnique.atcdent_marche_non_exe" class="span">
+                  <select v-model="formchnique.presence_echantillons" class="span">
                     <option value=""></option>
                     <option value="OUI">OUI</option>
                     <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
                   </select>
                 </div>
               </div>
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Planning d'execution des travaux :</label>
+                <label class="control-label">Autre Observations :</label>
                 <div class="controls">
-                 <!-- <input type="text" class="span" placeholder="Meth real travau" v-model="formchnique.org_travau_site">-->
-                  <select v-model="formchnique.org_travau_site" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Methode de réalisation des travaux:</label>
-                <div class="controls">
-                 <!-- <input type="text" class="span" placeholder="Prog mobilisation" v-model="formchnique.meth_real_travau">-->
-
-                  <select v-model="formchnique.meth_real_travau" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Programme mobilisation :</label>
-                <div class="controls">
-                 <!-- <input type="text" class="span" placeholder="Prog mobilisation" v-model="formchnique.prog_mobilisation">-->
-
-                  <select v-model="formchnique.prog_mobilisation" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Capacite de financement :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite financiere" v-model="formchnique.capacite_financiere">-->
-
-                  <select v-model="formchnique.capacite_financiere" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
+                  <input type="text" v-model="formchnique.autre_observation" class="span" placeholder="Autre Observations ">
                 </div>
               </div>
             </td>
           </tr>
-          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">CAA moyen TTC :</label>
-                <div class="controls">
-                 <input type="number" class="span" placeholder="Caa moyen ac"
-                        v-model="formchnique.caa_moyen_ac_entre">
 
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Expérience spécique :</label>
-                <div class="controls">
-                <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="formchnique.capacite_tech_exp" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-
-                </div>
-              </div>
-
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Expérience Général :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="formchnique.experience_generale" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Personnel :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="formchnique.personnel" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Matériel :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="formchnique.materiel" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-
-            <td>
-              <div class="control-group">
-                <label class="control-label">Lettre de Soumission et pouvoir de signature :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="formchnique.lettre_soumission_pouvoir_signature" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Registre de commerce :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="formchnique.reg_com" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Garantie de soumission :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="formchnique.garantie_soumission" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Délai d'exécution :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="formchnique.delai_execution" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Validation de l'offre :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="formchnique.validation" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Observation :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="formchnique.observation" class="span">
-                    <option value=""></option>
-                    <option value="1">CONFORME</option>
-                    <option value="0">NON CONFORME</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-          </tr>
         </table>
+
+
       </div>
     </div>
 
@@ -421,7 +197,8 @@
       <h3>Modification l'offre technique</h3>
     </div>
     <div class="modal-body" >
-      <div class="widget-box" >
+      <div class="widget-box">
+
         <table class="table table-bordered table-striped">
           <tr>
             <td>
@@ -437,10 +214,19 @@
               <div class="control-group">
                 <label>Lot</label>
                 <div class="controls">
-                  <select v-model="editer.marche_id" class="span" >
-                    <option v-for="varText in listeLotMarche(dossier_candidature.marche_id)" :key="varText.id"
+                  <select v-model="formchnique.marche_id" class="span" >
+                    <option v-for="varText in listeLot(dossier_candidature.marche_id,dossier_candidature.id)" :key="varText.id"
                             :value="varText.id">LOT N°{{varText.numero_lot}} {{varText.objet}}</option>
                   </select>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label>Nom du soumissionnaire</label>
+                <div class="controls">
+                  <input v-if="listeAppelOffre(dossier_candidature.marche_id)" type="text" class="span" placeholder="Offre"
+                         v-model="dossier_candidature.nom_cand" disabled>
                 </div>
               </div>
             </td>
@@ -450,328 +236,450 @@
         <table class="table table-bordered table-striped">
 
           <tr>
-
-
             <td>
               <div class="control-group">
-                <label class="control-label">Accord groupement :</label>
+                <label class="control-label">N° Du pli :</label>
                 <div class="controls">
-                  <select v-model="editer.accord_groupe" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
 
+                  <input type="text" v-model="editer.numero_pli" class="span" placeholder="Structure Emétrice">
                 </div>
               </div>
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Fiche de renseignement nombre de groupe :</label>
+                <label class="control-label">Structure Emétrice :</label>
                 <div class="controls">
-                  <input v-if="editer.accord_groupe=='OUI'" type="text" class="span" placeholder="Attest banc"
-                         v-model="editer.fiche_rsgnt_mbre_groupe">
-                  <input v-if="editer.accord_groupe=='NON'" type="text" class="span" placeholder="Attest banc"
-                         v-model="editer.fiche_rsgnt_mbre_groupe" disabled>
-                  <input v-if="editer.accord_groupe=='N/A'" type="text" class="span" placeholder="Attest banc"
-                         v-model="editer.fiche_rsgnt_mbre_groupe" disabled>
-                  <input v-if="!editer.accord_groupe" type="text" class="span" placeholder="Attest banc"
-                         v-model="editer.fiche_rsgnt_mbre_groupe" disabled>
-                  <!-- <select v-model="formLot.fiche_rsgnt_mbre_groupe" class="span">
-                     <option value=""></option>
-                     <option value="OUI">OUI</option>
-                     <option value="NON">NON</option>
-                     <option value="N/A">NON APPLICABLE</option>
-                   </select>-->
+
+                  <input type="text" v-model="editer.structure_emetrice" class="span" placeholder="Structure Emétrice">
                 </div>
               </div>
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Cautionnement provisoire :</label>
+                <label class="control-label">Montant :</label>
                 <div class="controls">
-                  <select v-model="editer.cautionnement_prov" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                  <!--<input type="text" class="span" placeholder="Cautionnement prov" v-model="formchnique.cautionnement_prov">-->
+                  <input type="text" v-model="editer.montant" class="span" placeholder="Montant">
                 </div>
               </div>
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Attestation bancaire:</label>
+                <label class="control-label">Délai de validité de l'offre :</label>
                 <div class="controls">
-                  <select v-model="editer.attest_banc" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
+                  <input type="text" v-model="editer.delai_validite_offre" class="span" placeholder="Délai de validité de l'offre ">
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">
+                  Delai de livraison Ou Execution Proposé</label>
+                <div class="controls">
+                  <input type="text" v-model="editer.delai_execution" class="span" placeholder="">
+                  <!-- <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">-->
+                </div>
+              </div>
+            </td>
+
+          </tr>
+          <tr>
+
+            <td>
+              <div class="control-group">
+                <label class="control-label">Autres pièced spécififiées pas le dossier de consultation(EXPLE:Nationalité autres)</label>
+                <div class="controls">
+                  <input type="text" v-model="editer.autre_piece_specifie" class="span" placeholder="">
                   <!-- <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">-->
                 </div>
               </div>
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Fiche technique :</label>
+                <label class="control-label">Rabais offert</label>
                 <div class="controls">
-                  <select v-model="editer.formil_propo_tech" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                  <!--<input type="text" class="span" placeholder="Piece Admin" v-model="formchnique.formil_propo_tech">-->
+                  <input type="text"  v-model="editer.rabai_offert" class="span" placeholder="Rabais offert">
                 </div>
               </div>
             </td>
-
-          </tr>
-          <tr>
-
             <td>
 
               <div class="control-group">
-                <label class="control-label">Antécédent des marchés non Execute :</label>
+                <label class="control-label">Présence échantillons OUI/NON :</label>
                 <div class="controls">
                   <!--  <input type="text" class="span" placeholder="Org travau" v-model="formchnique.atcdent_marche_non_exe">-->
 
-                  <select v-model="editer.atcdent_marche_non_exe" class="span">
+                  <select v-model="editer.presence_echantillons" class="span">
                     <option value=""></option>
                     <option value="OUI">OUI</option>
                     <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
                   </select>
                 </div>
               </div>
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Planning d'execution des travaux :</label>
+                <label class="control-label">Autre Observations :</label>
                 <div class="controls">
-                  <!-- <input type="text" class="span" placeholder="Meth real travau" v-model="formchnique.org_travau_site">-->
-                  <select v-model="editer.org_travau_site" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Methode de réalisation des travaux:</label>
-                <div class="controls">
-                  <!-- <input type="text" class="span" placeholder="Prog mobilisation" v-model="formchnique.meth_real_travau">-->
-
-                  <select v-model="editer.meth_real_travau" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Programme mobilisation :</label>
-                <div class="controls">
-                  <!-- <input type="text" class="span" placeholder="Prog mobilisation" v-model="formchnique.prog_mobilisation">-->
-
-                  <select v-model="editer.prog_mobilisation" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Capacite de financement :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite financiere" v-model="formchnique.capacite_financiere">-->
-
-                  <select v-model="editer.capacite_financiere" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
+                  <input type="text" v-model="editer.autre_observation" class="span" placeholder="Autre Observations ">
                 </div>
               </div>
             </td>
           </tr>
-          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">CAA moyen :</label>
-                <div class="controls">
-                  <input type="text" class="span" placeholder="Caa moyen ac"
-                         v-model="editer.caa_moyen_ac_entre">
 
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Expérience spécique :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="editer.capacite_tech_exp" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-
-                </div>
-              </div>
-
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Expérience Général :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="editer.experience_generale" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Personnel :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="editer.personnel" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Matériel :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="editer.materiel" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-
-            <td>
-              <div class="control-group">
-                <label class="control-label">Lettre de Soumission et pouvoir de signature :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="editer.lettre_soumission_pouvoir_signature" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Registre de commerce :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="editer.reg_com" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Garantie de soumission :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="editer.garantie_soumission" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Délai d'exécution :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="editer.delai_execution" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Validation de l'offre :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="editer.validation" class="span">
-                    <option value=""></option>
-                    <option value="OUI">OUI</option>
-                    <option value="NON">NON</option>
-                    <option value="N/A">NON APPLICABLE</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Observation :</label>
-                <div class="controls">
-                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
-                  <select v-model="editer.observation" class="span">
-                    <option value=""></option>
-                    <option value="1">CONFORME</option>
-                    <option value="0">NON CONFORME</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-          </tr>
         </table>
+
+
+
+<!--        <table class="table table-bordered table-striped">-->
+<!--          <tr>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label>Offre</label>-->
+<!--                <div class="controls">-->
+<!--                  <input v-if="listeAppelOffre(dossier_candidature.marche_id)" type="text" class="span" placeholder="Offre"-->
+<!--                         v-model="listeAppelOffre(dossier_candidature.marche_id).ref_appel" disabled>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label>Lot</label>-->
+<!--                <div class="controls">-->
+<!--                  <select v-model="editer.marche_id" class="span" >-->
+<!--                    <option v-for="varText in listeLotMarche(dossier_candidature.marche_id)" :key="varText.id"-->
+<!--                            :value="varText.id">LOT N°{{varText.numero_lot}} {{varText.objet}}</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--        </table>-->
+
+<!--        <table class="table table-bordered table-striped">-->
+
+<!--          <tr>-->
+
+
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Accord groupement :</label>-->
+<!--                <div class="controls">-->
+<!--                  <select v-model="editer.accord_groupe" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Fiche de renseignement nombre de groupe :</label>-->
+<!--                <div class="controls">-->
+<!--                  <input v-if="editer.accord_groupe=='OUI'" type="text" class="span" placeholder="Attest banc"-->
+<!--                         v-model="editer.fiche_rsgnt_mbre_groupe">-->
+<!--                  <input v-if="editer.accord_groupe=='NON'" type="text" class="span" placeholder="Attest banc"-->
+<!--                         v-model="editer.fiche_rsgnt_mbre_groupe" disabled>-->
+<!--                  <input v-if="editer.accord_groupe=='N/A'" type="text" class="span" placeholder="Attest banc"-->
+<!--                         v-model="editer.fiche_rsgnt_mbre_groupe" disabled>-->
+<!--                  <input v-if="!editer.accord_groupe" type="text" class="span" placeholder="Attest banc"-->
+<!--                         v-model="editer.fiche_rsgnt_mbre_groupe" disabled>-->
+<!--                  &lt;!&ndash; <select v-model="formLot.fiche_rsgnt_mbre_groupe" class="span">-->
+<!--                     <option value=""></option>-->
+<!--                     <option value="OUI">OUI</option>-->
+<!--                     <option value="NON">NON</option>-->
+<!--                     <option value="N/A">NON APPLICABLE</option>-->
+<!--                   </select>&ndash;&gt;-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Cautionnement provisoire :</label>-->
+<!--                <div class="controls">-->
+<!--                  <select v-model="editer.cautionnement_prov" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+<!--                  &lt;!&ndash;<input type="text" class="span" placeholder="Cautionnement prov" v-model="formchnique.cautionnement_prov">&ndash;&gt;-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Attestation bancaire:</label>-->
+<!--                <div class="controls">-->
+<!--                  <select v-model="editer.attest_banc" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+<!--                  &lt;!&ndash; <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">&ndash;&gt;-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Fiche technique :</label>-->
+<!--                <div class="controls">-->
+<!--                  <select v-model="editer.formil_propo_tech" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+<!--                  &lt;!&ndash;<input type="text" class="span" placeholder="Piece Admin" v-model="formchnique.formil_propo_tech">&ndash;&gt;-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+
+<!--          </tr>-->
+<!--          <tr>-->
+
+<!--            <td>-->
+
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Antécédent des marchés non Execute :</label>-->
+<!--                <div class="controls">-->
+<!--                  &lt;!&ndash;  <input type="text" class="span" placeholder="Org travau" v-model="formchnique.atcdent_marche_non_exe">&ndash;&gt;-->
+
+<!--                  <select v-model="editer.atcdent_marche_non_exe" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Planning d'execution des travaux :</label>-->
+<!--                <div class="controls">-->
+<!--                  &lt;!&ndash; <input type="text" class="span" placeholder="Meth real travau" v-model="formchnique.org_travau_site">&ndash;&gt;-->
+<!--                  <select v-model="editer.org_travau_site" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Methode de réalisation des travaux:</label>-->
+<!--                <div class="controls">-->
+<!--                  &lt;!&ndash; <input type="text" class="span" placeholder="Prog mobilisation" v-model="formchnique.meth_real_travau">&ndash;&gt;-->
+
+<!--                  <select v-model="editer.meth_real_travau" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Programme mobilisation :</label>-->
+<!--                <div class="controls">-->
+<!--                  &lt;!&ndash; <input type="text" class="span" placeholder="Prog mobilisation" v-model="formchnique.prog_mobilisation">&ndash;&gt;-->
+
+<!--                  <select v-model="editer.prog_mobilisation" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Capacite de financement :</label>-->
+<!--                <div class="controls">-->
+<!--                  &lt;!&ndash;  <input type="text" class="span" placeholder="Capacite financiere" v-model="formchnique.capacite_financiere">&ndash;&gt;-->
+
+<!--                  <select v-model="editer.capacite_financiere" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">CAA moyen :</label>-->
+<!--                <div class="controls">-->
+<!--                  <input type="text" class="span" placeholder="Caa moyen ac"-->
+<!--                         v-model="editer.caa_moyen_ac_entre">-->
+
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Expérience spécique :</label>-->
+<!--                <div class="controls">-->
+<!--                  &lt;!&ndash;  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">&ndash;&gt;-->
+<!--                  <select v-model="editer.capacite_tech_exp" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+
+<!--                </div>-->
+<!--              </div>-->
+
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Expérience Général :</label>-->
+<!--                <div class="controls">-->
+<!--                  &lt;!&ndash;  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">&ndash;&gt;-->
+<!--                  <select v-model="editer.experience_generale" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Personnel :</label>-->
+<!--                <div class="controls">-->
+<!--                  &lt;!&ndash;  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">&ndash;&gt;-->
+<!--                  <select v-model="editer.personnel" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Matériel :</label>-->
+<!--                <div class="controls">-->
+<!--                  &lt;!&ndash;  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">&ndash;&gt;-->
+<!--                  <select v-model="editer.materiel" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Lettre de Soumission et pouvoir de signature :</label>-->
+<!--                <div class="controls">-->
+<!--                  &lt;!&ndash;  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">&ndash;&gt;-->
+<!--                  <select v-model="editer.lettre_soumission_pouvoir_signature" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Registre de commerce :</label>-->
+<!--                <div class="controls">-->
+<!--                  &lt;!&ndash;  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">&ndash;&gt;-->
+<!--                  <select v-model="editer.reg_com" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Garantie de soumission :</label>-->
+<!--                <div class="controls">-->
+<!--                  &lt;!&ndash;  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">&ndash;&gt;-->
+<!--                  <select v-model="editer.garantie_soumission" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Délai d'exécution :</label>-->
+<!--                <div class="controls">-->
+<!--                  &lt;!&ndash;  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">&ndash;&gt;-->
+<!--                  <select v-model="editer.delai_execution" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Validation de l'offre :</label>-->
+<!--                <div class="controls">-->
+<!--                  &lt;!&ndash;  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">&ndash;&gt;-->
+<!--                  <select v-model="editer.validation" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="OUI">OUI</option>-->
+<!--                    <option value="NON">NON</option>-->
+<!--                    <option value="N/A">NON APPLICABLE</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Observation :</label>-->
+<!--                <div class="controls">-->
+<!--                  &lt;!&ndash;  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">&ndash;&gt;-->
+<!--                  <select v-model="editer.observation" class="span">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="1">CONFORME</option>-->
+<!--                    <option value="0">NON CONFORME</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--        </table>-->
       </div>
     </div>
 
@@ -795,6 +703,14 @@ name: "OffreTechnique",
 
       formchnique:{
         numero_lot:"",
+        structure_emetrice:"",
+        montant:"",
+        delai_validite_offre:"",
+        presence_echantillons:"",
+        autre_observation:"",
+        numero_pli:"",
+        autre_piece_specifie:"",
+        rabai_offert:"",
         accord_groupe:"",
         cautionnement_prov:"",
         pouv_habil_signataire:"",
@@ -818,8 +734,8 @@ name: "OffreTechnique",
         lettre_soumission_pouvoir_signature:"",
         garantie_soumission:"",
         delai_execution:"",
-        validation:"",
-        marche_id:"",
+         validation:"",
+         marche_id:"",
         appel_offre_id:""
       },
       editer:"",
@@ -851,7 +767,10 @@ name: "OffreTechnique",
       return  marche_id=>{
         if (marche_id!="") {
           //console.log("Marche appel offre")
-          return this.appelOffres.find( idmarche => idmarche.marche_id == marche_id)
+          let vm=this;
+          let objet =this.appelOffres.find( idmarche => idmarche.marche_id == marche_id)
+          vm.formchnique.appel_offre_id=objet.id
+          return objet
         }
       }
     },

@@ -6,48 +6,196 @@
 <div id="exampleModal12" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Affectation Véhicule</h3>
+        <h3>Affectation Des équipements par unité Administrative</h3>
       </div>
       <div class="modal-body">
       <table class="table table-bordered table-striped">
 <tr>
+  <td >
+                <div class="control-group">
+                  <label class="control-label">Unité Administrative Emettrice</label>
+                  <div class="controls">
+                        <select v-model="formData.ua_id" 
+                         class="span5">
+                      <option
+                        v-for="localgeo in uniteAdministratives"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.libelle}}</option>
+                    </select>
+                   
+                  </div>
+                </div>
+             </td>
+             <td >
+                <div class="control-group">
+                  <label class="control-label">Article en Stock UA Emettrice</label>
+                  <div class="controls">
+                        <select v-model="formData.famille_id" 
+                         class="span5">
+                      <option
+                        v-for="localgeo in listeArticleEnStock(formData.ua_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.famille_id"
+                      >{{localgeo.article_id}}</option>
+                    </select>
+                   
+                  </div>
+                </div>
+             </td>
+             <td>
+     <div class="control-group">
+                  <label class="control-label">Marque des articles en Stock UA Emettrice</label>
+                  <div class="controls">
+                        <select v-model="formData.marque_id" 
+                         class="span5">
+                      <option
+                        v-for="localgeo in listeMarqueEnStock(formData.famille_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.marque_id"
+                      >{{localgeo.marque_id}}</option>
+                    </select>
+                   
+                  </div>
+                </div>
+  </td>
+ <td>
+     <div class="control-group">
+                  <label class="control-label">Modele des articles en Stock UA Emettrice</label>
+                  <div class="controls">
+                        <select v-model="formData.model_id" 
+                         class="span5">
+                      <option
+                        v-for="localgeo in listeModelEnStock(formData.marque_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.model_id"
+                      >{{localgeo.model_id}}</option>
+                    </select>
+                   
+                  </div>
+                </div>
+  </td>
+  
+</tr>
+<tr>
   <td>
     <div class="control-group">
-            <label class="control-label">UA</label>
+            <label class="control-label">Quantité en stock</label>
             <div class="controls">
               <input
                 type="text"
-                :value="formData.uAdministrative_id"
+                
                 class="span4"
-                
-                
+                :value="listeQuantiteEnStock(formData.model_id)"
+                readonly
               />
             </div>
           </div>
   </td>
-  <td>
+<td>
     <div class="control-group">
-            <label class="control-label">UA</label>
+            <label class="control-label">Quantité a Transferé</label>
             <div class="controls">
               <input
                 type="text"
                 
                 class="span4"
-                
-                
+                v-model="formData.qtetransfert"
+               
               />
             </div>
           </div>
   </td>
+  <td >
+                <div class="control-group">
+                  <label class="control-label">Unité Administrative Réceptrice</label>
+                  <div class="controls">
+                        <select v-model="formData.ua_id" 
+                         class="span5">
+                      <!-- <option
+                        v-for="localgeo in uniteAdministratives"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.libelle}}</option> -->
+                    </select>
+                   
+                  </div>
+                </div>
+             </td>
+             <td >
+                <div class="control-group">
+                  <label class="control-label">Article en Stock UA Réceptrice</label>
+                  <div class="controls">
+                        <select v-model="formData.famille_id" 
+                         class="span5">
+                      <!-- <option
+                        v-for="localgeo in listeArticleEnStock(formData.ua_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.famille_id"
+                      >{{localgeo.article_id}}</option> -->
+                    </select>
+                   
+                  </div>
+                </div>
+             </td>
+</tr>
+<tr>
+  
+             <td>
+     <div class="control-group">
+                  <label class="control-label">Marque des articles en Stock UA Réceptrice</label>
+                  <div class="controls">
+                        <select v-model="formData.marque_id" 
+                         class="span5">
+                      <!-- <option
+                        v-for="localgeo in listeMarqueEnStock(formData.famille_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.marque_id"
+                      >{{localgeo.marque_id}}</option> -->
+                    </select>
+                   
+                  </div>
+                </div>
+  </td>
+ <td>
+     <div class="control-group">
+                  <label class="control-label">Modele des articles en Stock UA Réceptrice</label>
+                  <div class="controls">
+                        <select v-model="formData.model_id" 
+                         class="span5">
+                      <!-- <option
+                        v-for="localgeo in listeModelEnStock(formData.marque_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.model_id"
+                      >{{localgeo.model_id}}</option> -->
+                    </select>
+                   
+                  </div>
+                </div>
+  </td>
   <td>
     <div class="control-group">
-            <label class="control-label">UA</label>
+            <label class="control-label">Quantité en stock</label>
             <div class="controls">
               <input
                 type="text"
                 
                 class="span4"
+               
+                readonly
+              />
+            </div>
+          </div>
+  </td>
+<td>
+    <div class="control-group">
+            <label class="control-label">Date de transfert</label>
+            <div class="controls">
+              <input
+                type="date"
                 
+                class="span4"
+                v-model="formData.date_transfert"
                 
               />
             </div>
@@ -714,7 +862,8 @@ search:""
       "uniteZones",
       "getPersonnaliseBudgetGeneralParTransfert",
       "uniteAdministratives",
-      "getvehicules"
+      "getvehicules",
+      "GestionStockageArticles"
       // "chapitres",
       // "sections"
     ]),
@@ -1239,6 +1388,41 @@ afficherLibelleService() {
         }
       };
     },
+    listeArticleEnStock() {
+      return id => {
+        if (id != null && id != "") {
+          return this.GestionStockageArticles.filter(element => element.ua_id == id);
+        }
+      };
+    },
+    listeMarqueEnStock() {
+      return id => {
+        if (id != null && id != "") {
+          return this.GestionStockageArticles.filter(element => element.famille_id == id);
+        }
+      };
+    },
+     listeModelEnStock() {
+      return id => {
+        if (id != null && id != "") {
+          return this.GestionStockageArticles.filter(element => element.marque_id == id);
+        }
+      };
+    },
+    
+
+       listeQuantiteEnStock() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.model_id == id);
+
+      if (qtereel) {
+        return qtereel.quantitestock;
+      }
+      return 0
+        }
+      };
+    },
       },
 
       methods:{ 
@@ -1328,7 +1512,7 @@ formatageSomme:formatageSomme,
 
 }
 .tailgrand{
-  width: 60%;
-  margin: 0 -30%;
+  width: 95%;
+  margin: 0 -45%;
 }
 </style>

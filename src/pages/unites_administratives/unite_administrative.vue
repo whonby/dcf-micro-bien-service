@@ -851,6 +851,7 @@ return 0
         ...this.editUniteAdministrative,
         code: this.codeuniteadministrativeModifier,
         code_ua: this.codeuniteadministrativeModifier2
+        
       };
       this.modifierUniteAdministrative(nouvelObjet);
 this.$("#modificationModal").modal('hide');

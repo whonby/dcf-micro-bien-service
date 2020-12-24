@@ -8,6 +8,7 @@ export const avenants = state => state.avenants
 export const pays = state => state.pays
 export const choixprocedure = state => state.choixprocedure
 export const villes = state => state.villes
+export const receptionMarche = state => state.receptionMarche
 // export const decomptes = state => state.decomptes
 export const communes = state => state.communes
 export const typeCandidat = state => state.typeCandidat

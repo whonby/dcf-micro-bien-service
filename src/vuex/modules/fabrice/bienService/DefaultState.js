@@ -5,6 +5,7 @@ const defaultState = {
     banques:[],
     codesFonctions:[],
     comptes:[],
+    receptionMarche:[],
    
     lots:[],
     typePrestations:[],

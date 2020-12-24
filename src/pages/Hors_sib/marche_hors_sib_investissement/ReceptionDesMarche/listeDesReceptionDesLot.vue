@@ -1,6 +1,6 @@
-<template>
-  	<div>
 
+<template>  
+  	<div>
 <div class="row-fluid">
         <div class="span12">
           <div class="widget-box">
@@ -123,8 +123,8 @@
 
     <div class="widget-title">
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#Identif">Info Marche</a></li>
-        <li class=""><a data-toggle="tab" href="#financ">Info Reception</a></li>
+        <li class="active"><a data-toggle="tab" href="#Identif">Info Réception</a></li>
+        <!-- <li class=""><a data-toggle="tab" href="#financ">Info Marché</a></li> -->
       </ul>
     </div>
     <div class="widget-content tab-content">
@@ -141,22 +141,22 @@
                   <input
                       type="text"
                       :value="afficherNumeroLot(detail_marche.id)"
-                      class="span4"
+                      class="span2"
                       
                   />
                   
                 </div>
               </div>
             </td>
-            <td colspan="3">
+            <td colspan="1">
 
               <div class="control-group">
                 <label class="control-label">Objet</label>
                 <div class="controls">
                   <input
                       type="text"
-                      :value="detail_marche.id"
-                      class="span12"
+                      :value="afficherObjet(detail_marche.id)"
+                      class="span10"
                       
                   />
                   
@@ -164,84 +164,417 @@
 
 
               </div>
-
-
+             
             </td>
-          </tr>
-          <tr>
-              <td>
-
+               <td>
+           
               <div class="control-group">
                 <label class="control-label">Entreprise</label>
                 <div class="controls">
                   <input
                       type="text"
-                      
-                      class="span4"
-                      
-                  />
-                  
-                </div>
-              </div>
-            </td>
-            <td>
-
-              <div class="control-group">
-                <label class="control-label">Date de debut d'execution prévisionnelle</label>
-                <div class="controls">
-                  <input
-                      type="date"
-                      
-                      class="span4"
+                        :value="Entreprise(fonctionmere(detail_marche.id))"
+                      class="span3" 
                       
                   />
                   
                 </div>
               </div>
             </td>
-            <td>
-
-              <div class="control-group">
-                <label class="control-label">Date reception provisoire prévisionnelle</label>
-                <div class="controls">
-                  <input
-                      type="date"
-                      
-                      class="span4"
-                      
-                  />
-                  
-                </div>
-              </div>
-            </td>
-            <td>
-
-              <div class="control-group">
-                <label class="control-label">Date de reception définitive prévisionnelle</label>
-                <div class="controls">
-                  <input
-                      type="date"
-                      
-                      class="span4"
-                      
-                  />
-                  
-                </div>
-              </div>
-            </td>
+        
           </tr>
-        </table>
+          </table>
+          <table class="table table-bordered table-striped">
+          <tr>
+           
+           
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">Date de début d'execution prévisionnelle (OSD)(A)</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      :value="afficherDatedebutex(detail_marche.id)"
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">Date réception provisoire prévisionnelle(B) </label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      :value="afficherDatereception(detail_marche.id)"
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+             
+            </td>
+            <td>
+               <div class="control-group">
+                <label class="control-label">Date fin d'exécution prévisionnelle(C) </label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      :value="afficherDatefinex(detail_marche.id)"
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+                  <td>
+              <div class="control-group">
+                <label class="control-label" title=" ">Durée d'exécution contractuelle(jrs)(B-A)</label>
+                <div class="controls">
+                  <input type="text" 
+                     :value="afficherDureecontrac(detail_marche.id)"
+                         class="span3"
+
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">Date de reception définitive previsionnelle(D)</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      :value="afficherDatereceptiondefinitive(detail_marche.id)"
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            
+          </tr>
+          </table>
+    
+     <table class="table table-bordered table-striped">
+           <tr>
+                <td>
+
+              <div class="control-group">
+                <label class="control-label">Période de garantie</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      :value="formReception.Periode_garantie"
+                       class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">Date de debut d'execution réelle(E)</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      :value="formReception.Date_debut_execution"
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">Date de reception provisoire réelle(F)</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      :value="formReception.	Date_reception_provisoire"
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">Date de reception définitive réelle(G)</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                        
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+           </tr>
+     </table>
+        <table class="table table-bordered table-striped">
+           <tr>
+                <td>
+
+              <div class="control-group">
+                <label class="control-label">Durée d'exécution réelle(f-E)</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                         
+                       class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">Ecart de réception provisoire</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Ecart de réception définitive</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Ecart de démarrage </label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            
+            
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">Ecart d'execution</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+           </tr>
+       </table>
       </div>
 
-      <div id="financ" class="tab-pane">
-  <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#MARCHE">MARCHE</a></li>
-        
-      </ul>
-      <div class="widget-content tab-content">
+ 
 
-      <div id="MARCHE" class="tab-pane active">
-         <table class="table table-bordered table-striped">
+
+    </div>
+
+    <div class="modal-footer">
+      <a  @click.prevent="ajouterModalActeEffetFinancierLocal"
+          class="btn btn-primary"
+          href="#"
+      >Valider</a>
+      <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+    </div>
+  </div>
+
+
+    <div id="exampleModal" class="modal hide grdirModalActeEffet" >
+    <div class="modal-header">
+      <button data-dismiss="modal" class="close" type="button">×</button>
+      <h3>Modifier Reception</h3>
+    </div>
+
+    <div class="widget-title">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#Identif">Info Marche</a></li>
+        <!-- <li class=""><a data-toggle="tab" href="#financ">Info Reception</a></li> -->
+      </ul>
+    </div>
+    <div class="widget-content tab-content">
+
+  <div class="widget-content tab-content">
+
+      <div id="Identif" class="tab-pane active">
+
+        <table class="table table-bordered table-striped">
+          <tr>
+              <td>
+
+              <div class="control-group">
+                <label class="control-label">N°Lot</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      :value="afficherNumeroLot(detail_marche.id)"
+                      class="span2"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            <td colspan="1">
+
+              <div class="control-group">
+                <label class="control-label">Objet</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                      :value="afficherObjet(detail_marche.id)"
+                      class="span10"
+                      
+                  />
+                  
+                </div>
+
+
+              </div>
+             
+            </td>
+               <td>
+           
+              <div class="control-group">
+                <label class="control-label">Entreprise</label>
+                <div class="controls">
+                  <input
+                      type="text"
+                        :value="Entreprise(fonctionmere(detail_marche.id))"
+                      class="span3" 
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+        
+          </tr>
+          </table>
+          <table class="table table-bordered table-striped">
+          <tr>
+           
+           
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">Date de début d'execution prévisionnelle (OSD)</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      :value="afficherDatedebutex(detail_marche.id)"
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">Date réception provisoire prévisionnelle </label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      :value="afficherDatereception(detail_marche.id)"
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+             
+            </td>
+            <td>
+               <div class="control-group">
+                <label class="control-label">Date fin d'exécution prévisionnelle </label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      :value="afficherDatefinex(detail_marche.id)"
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+                  <td>
+              <div class="control-group">
+                <label class="control-label" title=" ">Durée d'exécution contractuelle(jrs)</label>
+                <div class="controls">
+                  <input type="text"  
+                         class="span3"
+
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">Date de reception définitive previsionnelle(D) </label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      :value="afficherDatereceptiondefinitive(detail_marche.id)"
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            
+          </tr>
+          </table>
+     <br>
+     <table class="table table-bordered table-striped">
            <tr>
                 <td>
 
@@ -251,7 +584,7 @@
                   <input
                       type="text"
                       
-                      class="span4"
+                       class="span3"
                       
                   />
                   
@@ -266,7 +599,7 @@
                   <input
                       type="date"
                       
-                      class="span4"
+                      class="span3"
                       
                   />
                   
@@ -281,7 +614,7 @@
                   <input
                       type="date"
                       
-                      class="span4"
+                      class="span3"
                       
                   />
                   
@@ -296,7 +629,7 @@
                   <input
                       type="date"
                       
-                      class="span4"
+                      class="span3"
                       
                   />
                   
@@ -314,7 +647,7 @@
                   <input
                       type="text"
                       
-                      class="span4"
+                       class="span3"
                       
                   />
                   
@@ -329,7 +662,7 @@
                   <input
                       type="text"
                       
-                      class="span4"
+                      class="span3"
                       
                   />
                   
@@ -344,7 +677,7 @@
                   <input
                       type="text"
                       
-                      class="span4"
+                      class="span3"
                       
                   />
                   
@@ -359,7 +692,7 @@
                   <input
                       type="text"
                       
-                      class="span4"
+                      class="span3"
                       
                   />
                   
@@ -367,24 +700,20 @@
               </div>
             </td>
            </tr>
-         </table>
-        
-      </div>
-      
-      
-      </div>
-      </div>
 
+ 
 
-    </div>
-
+        </table>
+         </div>
+      </div>
     <div class="modal-footer">
-      <a  @click.prevent="ajouterModalActeEffetFinancierLocal"
+      <a  @click.prevent="modifierreceptionLocal"
           class="btn btn-primary"
           href="#"
       >Valider</a>
       <a data-dismiss="modal" class="btn" href="#">Fermer</a>
     </div>
+  </div>
   </div>
         </div>
 </template>
@@ -397,12 +726,26 @@
   
   export default {
         name: 'compte',
+        props:["macheid"],
         components:{
          AjouterReceptionLot
 
         },
         data() {
             return {
+
+              editReception:{},
+              formReception:{
+                Periode_garantie:"",
+                Date_debut_execution:"",
+                Date_reception_provisoire:"",
+                  Date_reception_definitive:"",
+                    Duree_execution_reel:"",
+                    Ecart_demarrage:"",
+                    Ecart_reception_provisoire:"",
+                      Ecart_reception_definitive:"",
+                      	Ecart_execution:"",
+              },
                 fabActions: [
                     {
                         name: "cache",
@@ -480,6 +823,27 @@ created() {
     ]),
    
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+
+
+ Dureeexereel(){ 
+      let vM=this;
+      const acteAffet = vM.formReception
+      if(this.acteAffet.Date_reception_provisoire(this.detail_marche.id) == acteAffet.Date_debut_execution &&  this.acteAffet.Date_reception_provisoire(this.detail_marche.id) !=="" && acteAffet.Date_debut_execution !=="") return 1
+      if(this.acteAffet.Date_reception_provisoire(this.detail_marche.id) =="" && acteAffet.Date_debut_execution =="") return null
+
+      var dateF = new Date(this.acteAffet.Date_reception_provisoire(this.detail_marche.id)).getTime()
+      var dateO = new Date(acteAffet.Date_debut_execution).getTime()
+      var resultat = dateF - dateO
+
+      var diffJour =  resultat / (1000 * 3600 * 24)
+
+      if(isNaN(diffJour)) return null
+
+      if(parseFloat(diffJour) < 0 ) return "durée invalide"
+      vM.formReception.Duree_execution_reel=diffJour
+      return  diffJour;
+
+    },
 afficheNumeroMarche() {
       return id => {
         if (id != null && id != "") {
@@ -505,6 +869,110 @@ afficheNumeroMarche() {
         }
       };
     },
+     afficherObjet() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+       
+           return qtereel.objet;
+      }
+      return ""
+        }
+      };
+    },
+     afficherDatedebutex() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+       
+           return qtereel.date_odre_service;
+      }
+      return ""
+        }
+      };
+    },
+     afficherDatereception() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+       
+           return qtereel.date_reception;
+      }
+      return ""
+        }
+      };
+    },
+        afficherDatefinex() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+       
+           return qtereel.date_fin_exe;
+      }
+      return 0
+        }
+      };
+    },
+           afficherDureecontrac() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+       
+           return qtereel.duree;
+      }
+      return 0
+        }
+      };
+    },
+      
+          Ecartreceptpro(){
+      let vM=this;
+      const acteAffet = vM.formReception 
+      if(acteAffet.Date_debut_execution == acteAffet.Date_reception_provisoire &&  acteAffet.Date_reception_provisoire !=="" && acteAffet.Date_debut_execution !=="") return 1
+      if(acteAffet.Date_reception_provisoire =="" && acteAffet.Date_debut_execution =="") return null
+
+      var dateF = new Date(acteAffet.Date_reception_provisoire).getTime()
+      var dateO = new Date(acteAffet.Date_debut_execution).getTime()
+      var resultat = dateF - dateO
+
+      var diffJour =  resultat / (1000 * 3600 * 24)
+
+      if(isNaN(diffJour)) return null
+
+      if(parseFloat(diffJour) < 0 ) return "durée invalide"
+      vM.formReception.Ecart_reception_provisoire=diffJour
+      return  diffJour;
+
+    },
+            
+
+
+
+
+     afficherDatereceptiondefinitive() {   
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+       
+           return qtereel.date_fin_exe;
+      }
+      return ""
+        }
+      };
+    },
+
 afficherInputationBudgetaire() {
       return id => {
         if (id != null && id != "") {
@@ -594,7 +1062,31 @@ LibelleUniteAdministrative() {
       };
     },
 
+     Entreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.raison_sociale;
+      }
+      return 0
+        }
+      };
+    },  
+    fonctionmere() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.	entreprise_id;
+      }
+      return 0
+        }
+      };
+    },
+  
 
 
 afficheMontantReelMarche() {
@@ -658,38 +1150,18 @@ afficherModalProcedureFacture() {
     
     },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-     
-
-    
+      modifierreceptionLocal() {
+          var nouvelObjet = {
+        ...this.editreception,
+        marche_id:this.editreception.marche_id,
  
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
+       };
+          this.ModifierReception(nouvelObjet);
+     this.$("#exampleModal").modal('hide');
+       this.editreception = {
+      
+      };
+      },
           
       formatageSomme:formatageSomme,
 
@@ -699,9 +1171,38 @@ afficherModalProcedureFacture() {
              formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
     },
+      afficherModalAjouterpaiementPersonnel() {
+      this.$("#ModalReception").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+    },
 
+       ajouterModalActeEffetFinancierLocal(){
+                window.history.back();
+            },
+     AjouterDecompte() {
+      
+      var nouvelObjet = {
+        ...this.formReception,
+        date_fin_exe:this.afficherDatefinex(this.marcheid),
+        Ecart_reception_provisoire:this.Ecartreceptpro,
+        Ecart_reception_definitive:this.Ecartreceptdef,
 
-
+      //   marche_id:this.detail_Facture.marche_id,
+      //   facture_id:this.detail_Facture.id,
+      // nethtva:this.montantTVA,
+      // netttc:this.Montantapresretenues,
+      // parts_etat:this.MontantHTEtat,
+      // parts_bailleur:this.MontantHTBailleur,
+      // montantmarche:this.Montantapresretenues
+      };
+      this.ajouterDecompteFacture(nouvelObjet);
+    this.ajouterModalActeEffetFinancierLocal()
+      this.formData = {
+      
+      };
+    },
 
 
 

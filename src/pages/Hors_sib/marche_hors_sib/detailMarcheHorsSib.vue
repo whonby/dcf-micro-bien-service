@@ -194,7 +194,7 @@
                                 <li class=""><a data-toggle="tab" href="#tab478">Reception</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab498">Ouverture</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab41180">PV d'ouverture</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab78932">Jugement</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab78932">Analyse</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab7893204">Reserves CF</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab4110">PV Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab178">Attribution</a></li>
@@ -320,7 +320,7 @@
                                 <li class=""><a data-toggle="tab" href="#tab78477">Ouverture</a></li>
                                   <li class=""><a data-toggle="tab" href="#tab1041">PV d'ouverture</a></li>
                                 <!--<li class=""><a data-toggle="tab" href="#tab7845">D.Candidats</a></li>-->
-                                <li class=""><a data-toggle="tab" href="#tab9563"> Jugement </a></li>
+                                <li class=""><a data-toggle="tab" href="#tab9563"> Analyse </a></li>
                                  <li class=""><a data-toggle="tab" href="#tab25401010">Reserves CF</a></li>
                                 
                                 <li class=""><a data-toggle="tab" href="#tab06125">PV Jugement</a></li>
@@ -486,7 +486,7 @@
                                 <li class=""><a data-toggle="tab" href="#tab784">Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab17041">PV d'ouverture</a></li>
                               <!--  <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>-->
-                                <li class=""><a data-toggle="tab" href="#tab5498"> Jugement </a></li>
+                                <li class=""><a data-toggle="tab" href="#tab5498"> Analyse </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2540101">Reserves CF</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0612">PV Jugement</a></li>
                                <li class=""><a data-toggle="tab" href="#tab06745">Attribution</a></li>
@@ -657,7 +657,7 @@
                                 
                                 <!--<li class=""><a data-toggle="tab" href="#tab5">Dossier Candidat</a></li>-->
                                 <li class=""><a data-toggle="tab" href="#tab45" title="rapport ouverture">PV Ouverture</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Jugement</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Analyse</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab25401031" title="">Reserves CF</a></li>
                                
                                 <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">PV Jugement</a></li>

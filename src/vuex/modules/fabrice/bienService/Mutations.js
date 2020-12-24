@@ -18,6 +18,37 @@ MODIFIER_MANDAT
 //     })
 // }
 
+ // get all document
+
+
+export const GET_ALL_RECEPTION= (state, tableau_document) =>{
+    state.receptionMarche = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_RECEPTION = (state, elementAjouter) => {
+    state.receptionMarche.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_RECEPTION = (state, elementModif)=>{
+    state.receptionMarche = state.receptionMarche.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+export const SUPPRIMER_RECEPTION = (state, id)=> {
+    state.receptionMarche = state.receptionMarche.filter(prest => prest.id !=id)
+}
+
+
+
 
 
 // export const SUPPRIMER_DECOMPTE = (state ,id) => {

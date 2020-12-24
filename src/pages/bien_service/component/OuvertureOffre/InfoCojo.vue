@@ -10,8 +10,8 @@
       <tr>
         <!-- <th>Entreprise</th> -->
         <th>Date Composition </th>
-        <th>Date ouverture</th>
-        <th>Nmbr particiapnt</th>
+        <th>Date effective d'ouverture</th>
+        <th>Nombre de participants</th>
         <th>Action</th>
       </tr>
 
@@ -50,13 +50,13 @@
     <div id="ajouterCojoB" class="modal hide grdtaill">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Cojo</h3>
+        <h3>Ajouter COJO</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
 
           <div class="control-group">
-            <label class="control-label">Reference offre</label>
+            <label class="control-label">Référence DAO</label>
             <div class="controls">
               <!-- <select v-model="formDataCojo.cotation_id" class="span" disabled>
                   <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -84,7 +84,7 @@
           </div> -->
 
           <div class="control-group">
-            <label class="control-label">Date d'ouverture</label>
+            <label class="control-label">Date éffective d'ouverture</label>
             <div class="controls">
               <input
                   type="date"
@@ -132,7 +132,7 @@
 
 
           <div class="control-group">
-            <label class="control-label">Nbre de participants</label>
+            <label class="control-label">Nombre de participants</label>
             <div class="controls">
               <input
                   type="text"
@@ -157,14 +157,14 @@
     <div id="modificationCojo" class="modal hide grdtaill">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modification de cojo</h3>
+        <h3>Modification de COJO</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
 
 
           <div class="control-group">
-            <label class="control-label">Reference offre</label>
+            <label class="control-label">Référence DAO</label>
             <div class="controls">
               <!-- <select v-model="edite_cojo.cotation_id" class="span" disabled>
                   <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -192,7 +192,7 @@
 
 
           <div class="control-group">
-            <label class="control-label">Date d'ouverture</label>
+            <label class="control-label">Date éffectiive d'ouverture</label>
             <div class="controls">
               <input
                   type="date"
@@ -205,7 +205,7 @@
 
 
           <div class="control-group">
-            <label class="control-label">Date composition</label>
+            <label class="control-label">Date de composition</label>
             <div class="controls">
               <input
                   type="date"
@@ -217,7 +217,7 @@
           </div>
 
           <div class="control-group">
-            <label class="control-label">Nbre de participants</label>
+            <label class="control-label">Nombre de participants</label>
             <div class="controls">
               <input
                   type="text"
