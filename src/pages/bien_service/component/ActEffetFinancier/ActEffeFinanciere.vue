@@ -2770,16 +2770,38 @@ nombreDejourCalculeModifier(){
       }
     },
 
+typeMarche(){
+      return macheid =>{
+        if(macheid!=null && macheid!=""){
+          const objetPv = this.marches.find(item => item.id ==macheid)
+          if(objetPv){
+            return objetPv.type_marche_id
+          }
+          return null
+        }
+      }
 
+    },
 
+procedure_passation(){
+      return macheid =>{
+        if(macheid!=null && macheid!=""){
+          const objetPv = this.marches.find(item => item.id ==macheid)
+          if(objetPv){
+            return objetPv.procedure_passation_id
+          }
+          return null
+        }
+      }
 
+    },
 
   },
 
   methods:{
     ...mapActions('bienService',['supprimerActeEffetFinancier',
       'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
-
+...mapActions("horSib", ['modifierMarcheHorSib']),
 
     afficheModaleActe(index){
       this.$('#ajouterAct').modal({
@@ -2862,20 +2884,32 @@ var nouvelObjet1 = {
         banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
         compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
       }
+      var objet ={
+        id:this.affichieridMarcheGlobal(this.marche_lot),
+         type_marche: this.typeMarche(this.affichieridMarcheGlobal(this.marche_lot)),
+        procedure_passation:this.procedure_passation(this.affichieridMarcheGlobal(this.marche_lot)),
+      
+      }
+       var objet1 ={
+        id:this.this.marche_lot,
+         type_marche: this.typeMarche(this.affichieridMarcheGlobal(this.marche_lot)),
+        procedure_passation:this.procedure_passation(this.affichieridMarcheGlobal(this.marche_lot)),
+      numero_marche :this.formEffetFinancier.numero_marche
+      }
       //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
 
 
       //this.formEffetFinancier.entreprise_id=entreprisePremier.id
       this.ajouterActeEffetFinancier(nouvelObjet)
       this.$("#modificationModal").modal('hide');
-      let marcheObjet=this.marches.find(marche=>marche.id==this.marche_lot)
-      marcheObjet.attribue = 2
-     let marcheObjet1=this.marches.find(marche=>marche.id==this.affichieridMarcheGlobal(this.marche_lot))
-      marcheObjet1.attribue = 2
-      marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
+    //   let marcheObjet=this.marches.find(marche=>marche.id==this.marche_lot)
+    //   marcheObjet.attribue = 2
+    //  let marcheObjet1=this.marches.find(marche=>marche.id==this.affichieridMarcheGlobal(this.marche_lot))
+    //   marcheObjet1.attribue = 2
+      //marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
       // console.log(marcheObjet)
-      this.modifierMarche(marcheObjet)
-    this.modifierMarche(marcheObjet1)
+      this.modifierMarcheHorSib(objet)
+    this.modifierMarcheHorSib(objet1)
       this.formEffetFinancier = {
         code_act:"",
         libelle_act:"",
