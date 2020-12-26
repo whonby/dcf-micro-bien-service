@@ -29,6 +29,7 @@
           <th>Erreurs de calcul </th>
           <th>Prix de l'offre corrigé en FCFA TTC</th>
 
+
         </tr>
         </thead>
         <tbody>
