@@ -196,7 +196,8 @@ code
                   <td></td>
                   <td></td>
                   <td style="background-color: green;color:#fff;text-align:center;font-size:14px;font-weight:bold;">TOTAL BUDGET EXECUTE</td>
-                  <td style="text-align:center;font-size:16px;font-weight:bold;">{{formatageSomme(parseFloat(budgetConsommerDesModule))}}</td>
+                  <td style="text-align:center;font-size:16px;font-weight:bold;" v-if="formData.unite_administrative_id !=''">{{formatageSomme(parseFloat(budgetConsommerDesModule))}}</td>
+                   <td style="text-align:center;font-size:16px;font-weight:bold;" v-else>{{formatageSomme(parseFloat(budgetConsommerDesModule1))}}</td>
                   
                 </tr>
                  <tr>
@@ -211,8 +212,12 @@ code
                   <td></td>
                   <td></td>
                   <td style="background-color: red;color:#fff;text-align:center;font-size:14px;font-weight:bold;">TOTAL BUDGET ACTUEL</td>
-                  <td style="text-align:center;font-size:16px;font-weight:bold;">{{formatageSomme(parseFloat(TotalBudgetInitial(formData.unite_administrative_id))-(parseFloat(budgetConsommerDesModule)))}}</td>
+                  <td style="text-align:center;font-size:16px;font-weight:bold;" v-if="formData.unite_administrative_id !=''">{{formatageSomme(parseFloat(TotalBudgetInitial(formData.unite_administrative_id))-(parseFloat(budgetConsommerDesModule)))}}</td>
+
+                   <td style="text-align:center;font-size:16px;font-weight:bold;" v-else>{{formatageSomme(parseFloat(TotalBudgetInitial(formData.unite_administrative_id))-(parseFloat(budgetConsommerDesModule1)))}}</td>
                   
+
+
                 </tr>
                 </tbody>
               </table>
@@ -356,16 +361,49 @@ export default {
         return parseInt(val).toFixed(0);
       }
       
-      return 0
+      return 0;
     },
+    budgetConsommerDesModule1() {
+
+       const val = parseInt(this.budgetConsommerBienService1) + parseInt(this.budgetConsommerTransfert1) + parseInt(this.budgetConsommerInvertissement1)+parseInt(this.budgetConsommerPersonnel1);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0;
+    },
+     budgetConsommerBienService1(){
+  return this.getMandatPersonnaliserVise.filter(element =>element.marchetype == 2 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+    
+      
+ 
+},
+budgetConsommerTransfert1(){
+  return this.transferts.filter(element => element.exerciceencours == this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
+    
+},
+
+budgetConsommerInvertissement1(){
+  return this.getMandatPersonnaliserVise.filter(element => element.marchetype == 1 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+    
+},
+budgetConsommerPersonnel1(){
+  
+    return this.getMandatPersonnaliserPersonnel.filter(element =>element.marchetype == "perso" && element.exercice_budget == this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+      
+ 
+},
+
+
+
     budgetConsommerBienService(){
   return id => {
     if(id !=""){
     return this.getMandatPersonnaliserVise.filter(element => element.ua_id == id && element.marchetype == 2 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
       
     }
-    return this.getMandatPersonnaliserVise.filter(element =>element.marchetype == 2 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
-     
+    
   }
 },
 budgetConsommerTransfert(){
@@ -389,13 +427,23 @@ budgetConsommerInvertissement(){
 budgetConsommerPersonnel(){
   return id => {
     if(id !=""){
+    return this.getMandatPersonnaliserPersonnel.filter(element => element.ua_id == id && element.marchetype == "perso" && element.exercice_budget == this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+      
+    }
+    return this.getMandatPersonnaliserPersonnel.filter(element =>element.marchetype == "perso" && element.exercice_budget == this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+      
+  }
+},
+/*budgetConsommerPersonnel(){
+  return id => {
+    if(id !=""){
     var montant = this.getMandatPersonnaliserPersonnel.filter(element => element.ua_id == id && element.marchetype == "perso" && element.exercice_budget == this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
        if(isNaN(montant)) return null
       return montant
     }
     
   }
-},
+},*/
  affichebudgetActive() {
         
         if(this.noDCfNoAdmin){
@@ -453,6 +501,7 @@ budgetConsommerPersonnel(){
                 }
                 return this.uniteAdministratives
             },
+       
              CodeExempte() {
       return id => {
         if (id != null && id != "") {
