@@ -486,7 +486,7 @@ affichierReferenceAppelOffre() {
            ajouterCotationLocal(){
             
                 const formData = new FormData();
-                formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
+                // formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
                 formData.append('nom_person', this.formCotation.nom_person);
                 formData.append('contact', this.formCotation.contact);
                formData.append('entreprise_id', this.formCotation.id);

@@ -335,11 +335,13 @@ export default {
     conclusionOffreTechnique(){
       return (marche_id,candidat)=>{
         let offreT=this.gettersOffreTechniques.find(item=>{
-          if(item.marche_id==marche_id && item.dossier_candidat_id!=candidat){
+          if(item.marche_id==marche_id && item.dossier_candidat_id==candidat){
             return  item
           }
-        })
-        return offreT.observation
+        }) 
+        console.log(offreT)
+        return  offreT.observation
+        //  offreT.observation
       }
     },
    getSoumissionaireByLot(){

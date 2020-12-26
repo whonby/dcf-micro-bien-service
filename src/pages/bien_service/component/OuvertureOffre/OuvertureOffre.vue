@@ -7,7 +7,7 @@
           <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#cojo">Infomation COJO</a></li>
             <li class=""><a data-toggle="tab" href="#membre">Membre COJO</a></li>
-            <li class=""><a data-toggle="tab" href="#dossier_candata">Dossier Candidat</a></li>
+            <li class=""><a data-toggle="tab" href="#dossier_candata">Dossier du soumissionnaire</a></li>
           </ul>
         </div>
 

@@ -35,7 +35,7 @@
         <tr class="odd gradeX" >
 
           <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-            Offre financier</td>
+            Offre financière</td>
           <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)" style="text-align:center;font-size:14px">
             {{formatageSommeSansFCFA(parseFloat(effetFinancier.hist_montant_ttc)) || 'Non renseigné'}}</td>
           <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)" style="text-align:center;font-size:14px">

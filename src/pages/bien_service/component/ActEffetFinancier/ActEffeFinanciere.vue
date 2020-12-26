@@ -901,14 +901,14 @@
 
       <div id="financ" class="tab-pane">
   <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#MARCHE">MARCHE</a></li>
-        <li class=""><a data-toggle="tab" href="#DEMARRAGE">AVANCE DE DEMARRAGE</a></li>
-        <li class=""><a data-toggle="tab" href="#CAUTIONNEMENT">CAUTIONNEMENT</a></li>
-        <li class=""><a data-toggle="tab" href="#GARANTIE">RETENU DE GARANTIE</a></li>
+        <li class="active"><a data-toggle="tab" href="#MARCHE2">MARCHE</a></li>
+        <li class=""><a data-toggle="tab" href="#DEMARRAGE2">AVANCE DE DEMARRAGE</a></li>
+        <li class=""><a data-toggle="tab" href="#CAUTIONNEMENT2">CAUTIONNEMENT</a></li>
+        <li class=""><a data-toggle="tab" href="#GARANTIE2">RETENU DE GARANTIE</a></li>
       </ul>
       <div class="widget-content tab-content">
 
-      <div id="MARCHE" class="tab-pane active">
+      <div id="MARCHE2" class="tab-pane active">
          <table class="table table-bordered table-striped">
            <tr>
               <td>
@@ -988,7 +988,7 @@
          </table>
         
       </div>
-      <div id="DEMARRAGE" class="tab-pane">
+      <div id="DEMARRAGE2" class="tab-pane">
          <table class="table table-bordered table-striped">
            <tr>
               <td>
@@ -1038,7 +1038,7 @@
            </tr>
          </table>
       </div>
-       <div id="CAUTIONNEMENT" class="tab-pane">
+       <div id="CAUTIONNEMENT2" class="tab-pane">
         <table class="table table-bordered table-striped">
            <tr>
              <td >
@@ -1103,7 +1103,7 @@
            </tr>
         </table>
       </div>
-       <div id="GARANTIE" class="tab-pane">
+       <div id="GARANTIE2" class="tab-pane">
       <table class="table table-bordered table-striped">
         <tr>
           <td >
@@ -1128,7 +1128,7 @@
                   <input
                       type="text"  :value="afficherMontantHorsTaxeRetenuGarantie" style="text-align:left;color:red"
                       placeholder="saisir le montant hors taxe du dispositif retenu"
-editAfficherMontantRetenueGarantie
+
                       class="span"
                       readonly
                   />
@@ -1186,7 +1186,7 @@ editAfficherMontantRetenueGarantie
   </div>
   <!---->
 
- afficherEnorere
+ <!-- afficherEnorere -->
 
  <div id="modifierActeEF" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
@@ -2870,11 +2870,12 @@ var nouvelObjet1 = {
       this.$("#modificationModal").modal('hide');
       let marcheObjet=this.marches.find(marche=>marche.id==this.marche_lot)
       marcheObjet.attribue = 2
-     
+     let marcheObjet1=this.marches.find(marche=>marche.id==this.affichieridMarcheGlobal(this.marche_lot))
+      marcheObjet1.attribue = 2
       marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
       // console.log(marcheObjet)
       this.modifierMarche(marcheObjet)
-   
+    this.modifierMarche(marcheObjet1)
       this.formEffetFinancier = {
         code_act:"",
         libelle_act:"",
