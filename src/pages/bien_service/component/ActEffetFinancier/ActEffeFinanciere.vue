@@ -2891,7 +2891,7 @@ var nouvelObjet1 = {
       
       }
        var objet1 ={
-        id:this.this.marche_lot,
+        id:this.marche_lot,
          type_marche: this.typeMarche(this.affichieridMarcheGlobal(this.marche_lot)),
         procedure_passation:this.procedure_passation(this.affichieridMarcheGlobal(this.marche_lot)),
       numero_marche :this.formEffetFinancier.numero_marche
