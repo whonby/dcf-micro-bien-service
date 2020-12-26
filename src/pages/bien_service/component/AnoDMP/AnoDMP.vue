@@ -368,7 +368,13 @@ name: "ActEffeFinanciere",
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe','planActe',"plans_Decision"]),
      
-
+proceVerbalMarche(){
+        return this.getterProceVerballe.find(item=>{
+           if(item.marche_id==this.macheid && item.traitement==0){
+               return item
+           }
+        })
+},
 
 affichierProceVerbalJugementOffre() {
       return id => {
@@ -616,33 +622,34 @@ afficheDemandeDAO(index){
 
     ajouterDemandeAnoLocal(){
       const formData = new FormData();
-      formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
-     // formData.append('proce_verbal_jugement_offre_id', this.formDemande.proce_verbal_jugement_offre_id);
-      formData.append('date_demande', this.formDemande.date_demande);
-      formData.append('marche_id', this.infoLot.id);
-      formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
-      formData.append('num_courrier', this.formDemande.num_courrier);
-      formData.append('proce_verbal_jugement_offre_id', this.affichierProceVerbalJugementOffre(this.affichierPvMarche(this.affichierIdMarcheGlobal(this.infoLot.id))));
+          formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
+          formData.append('date_demande', this.formDemande.date_demande);
+          formData.append('marche_id', this.infoLot.id);
+          formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
+          formData.append('num_courrier', this.formDemande.num_courrier);
+          formData.append('proce_verbal_jugement_offre_id', this.proceVerbalMarche.id);
 
-      let config = {
-        header : {
-          'Content-Type' : 'multipart/form-data'
-        }
-      }
-    //  console.log(formData)
-      this.ajouterDemandeAno(formData,config)
+          let config = {
+            header : {
+              'Content-Type' : 'multipart/form-data'
+            }
+          }
+        //  console.log(formData)
+          this.ajouterDemandeAno(formData,config)
 
-      let objet={
-        id:this.pvencoure.id,
-        traitement:1,
-      }
+          let objet={
+            id:this.pvencoure.id,
+            traitement:1,
+          }
 
-      this.modificationProceVerbalOffre2(objet)
-      this.formDemande={
-        date_demande:"",
-        appel_offre_id:"",
-        num_courrier:"",
-      }
+          this.modificationProceVerbalOffre2(objet)
+          this.formDemande={
+            date_demande:"",
+            appel_offre_id:"",
+            num_courrier:"",
+          }
+
+       // console.log(this.proceVerbalMarche)
     },
 
     editDemandeDAO(){

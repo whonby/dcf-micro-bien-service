@@ -1641,6 +1641,8 @@ name: "DossierCandidat",
     this.detail_marche = this.getMarchePersonnaliser.find(
         idmarche => idmarche.id == this.$route.params.id
     )
+
+    console.log(this.afficherCandidatSelectionner(this.marcheid))
     /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
       console.log(this.appel_offre_marche)*/
   },
@@ -1662,8 +1664,24 @@ name: "DossierCandidat",
     afficherCandidatSelectionner() {
       return id => {
         if (id != null && id != "") {
-          return this.gettersCotationPersonnaliser.filter(qtreel => qtreel.marche_id == id);
+          let vm=this
+          let collection=[]
+        let  objet_personnel=  this.gettersCotationPersonnaliser.filter(qtreel => qtreel.marche_id == id);
 
+
+
+          objet_personnel.forEach(function (value) {
+            let objet_candidat=vm.getterDossierCandidats.find(item=>{
+              if(item.entreprise_id==value.entreprise_id && item.marche_id == value.marche_id){
+                return item
+              }
+            })
+
+           if(objet_candidat==undefined){
+             collection.push(value)
+           }
+          })
+           return collection
         }
       };
     },

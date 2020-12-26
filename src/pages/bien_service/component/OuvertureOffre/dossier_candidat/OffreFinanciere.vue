@@ -412,13 +412,10 @@ name: "OffreFinanciere",
       this.ajouterOffreFinancier(this.formOffreFinanciere)
       this.$('#addd10').modal('hide');
       this.formOffreFinanciere={
-        numero_lot:"",
-        designation:"",
-        unite:"",
-        quantite:"",
-        prix_unitaire:"",
-        montant_total_ht:"",
-        montant_total_ttc:"",
+                 numero_lot:"",
+                montant_total_ttc:"",
+                dossier_candidat_id:"",
+                marche_id:""
       }
     },
     afficheEdite(index){

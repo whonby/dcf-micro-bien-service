@@ -15,7 +15,7 @@
           <th>Delai de validation de l'offre</th>
           <th>Delai de livraison ou d'execution proposé </th>
           <th>Rabais offert</th>
-          <th title="Pouvoir de signature">Presence Echantillons</th>
+          <th>Presence Echantillons</th>
           <th>Autre observation</th>
           <th>Action</th>
         </tr>
@@ -31,7 +31,7 @@
           <td @click="afficheEdite(offre.id)">{{offre.presence_echantillons}}</td>
           <td @click="afficheEdite(offre.id)">{{offre.autre_observation}}</td>
           <td>
-            <button @click.prevent="supprimerchnique(offre.id)"  class="btn btn-danger ">
+            <button @click.prevent="supprimerOffreTechnique(offre.id)"  class="btn btn-danger ">
               <span class=""><i class="icon-trash"></i></span></button>
           </td>
         </tr>
@@ -825,7 +825,7 @@ listeOffreTechniqueLotCandidat(){
   methods:{
     ...mapActions("bienService", [
        "supprimerDossierCandidat","ajouterOffreTechnique","modifierOffreTechnique",
-      "supprimerchnique","ajouterOffreFinancier","modifierOffreFinancier","supprimerOffreFinancier",
+      "supprimerOffreTechnique","ajouterOffreFinancier","modifierOffreFinancier","supprimerOffreFinancier",
       "ajouterLettreInvitation",
 
     ]),
