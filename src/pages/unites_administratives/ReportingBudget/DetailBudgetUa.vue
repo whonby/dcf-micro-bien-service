@@ -1,9 +1,7 @@
-code
+
 <template>
-  <div>
-   
-    <div class="container-fluid">
-        <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
+ <div >
+     <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
                 <div class="span1">
 
                 </div>
@@ -13,20 +11,7 @@ code
                         <tr>
                         
                             
-                            <td style="background: #f0c71d !important;">
-                                <label style="font-size:20px">Recherche par Section<a href="#" @click.prevent="videSection()" v-if="section" style="color: red"><i class="fa fa-trash-o"></i></a>
-                                </label>
-                                <model-list-select style="background-color: #fff;"
-                                                   class="wide"
-                                                   :list="sections"
-                                                   v-model="section"
-                                                   option-value="id"
-                                                   option-text="nom_section"
-                                                   placeholder="Section"
-                                >
-
-                                </model-list-select>
-                            </td>
+                            
                           <td style="background: #f0c71d !important;">
                                 <label style="font-size:20px">Recherche par Grande Nature<a href="#" @click.prevent="videGrandeNature()" v-if="grandeNature_id" style="color: red"><i class="fa fa-trash-o"></i></a>
                                 </label>
@@ -64,9 +49,55 @@ code
 
 
             </div>
+       <div align="right">
+
+      <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+
+
+                            </div>
+ <div id="printMe">
+     
+     <table class="table table-bordered table-striped" >
+                <thead>
+                  <tr>
+                    <th title="type unite administrative">Type UA</th>
+                    <th>Nature Section</th>
+                    <th>Section</th>
+                   
+                    <th>Code</th>
+                    <th title="unite administrative">Unite Administrative</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    class="odd gradeX"
+                   
+                  >
+                   
+                   <!-- <template v-if="uniteadministrative.type_ua_id = type_Unite_admins.id"> -->
+                    <td style="text-align:center;font-weight: bold;">{{libelleUa(detail_Budget.type_ua_id)}}</td>
+                    <td style="text-align:center;font-weight: bold;">{{libelleNatureSection(detail_Budget.nature_section_id) }}</td>
+                    <td style="text-align:center;font-weight: bold;">{{libelleSection(detail_Budget.section_id)}}</td>
+                    <td style="text-align:center;font-weight: bold;">{{detail_Budget.code }}</td>
+                    <td style="text-align:center;font-weight: bold;">{{detail_Budget.libelle }}</td>
+                  
+                  </tr>
+                </tbody>
+              </table>
+              <div class="container-fluid">
+        <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
+                <div class="span1">
+
+                </div>
+               
+
+
+            </div>
+            <p style="text-align:center;font-size:30px">Listes du Budget du : {{detail_Budget.libelle}}</p>
       <hr />
-      <div class="row-fluid">
-        <div class="span12">
+      <div >
+        <div >
           <!-- <download-excel
             class="btn btn-default pull-right"
             style="cursor:pointer;"
@@ -78,35 +109,30 @@ code
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
-           <div align="right">
-
-      <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
-
-
-                            </div>
-                            <div id="printMe">
          
-           <div v-if="formData.section !=''">
-                <h2 style="font-size:16px;text-align:center" v-if="formData.section !=''">BUDGET DETAILLE PAR SECTION : {{CodeSection(formData.section)}}</h2>
+                            <div >
+         
+           <!-- <div v-if="formData.unite_administrative_id !=''">
+                <h2 style="font-size:16px;text-align:center" v-if="formData.unite_administrative_id !=''">BUDGET DETAILLE DU : {{libelleAdministrative(formData.unite_administrative_id)}}</h2>
 
               </div>
               <div v-else>
                  <h2 style="font-size:16px;text-align:center" else>BUDGET DETAILLE DES UNITES ADMINISTRATIVES</h2>
 
-              </div>
+              </div> -->
           
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <div v-if="formData.section !=''">
-                <h5>BUDGET DETAILLE PAR SECTION:{{CodeSection(formData.section)}}</h5>
+              <!-- <div v-if="formData.unite_administrative_id !=''">
+                <h5>Reporting du Budget :{{libelleAdministrative(formData.unite_administrative_id)}}</h5>
 
               </div>
               <div v-else>
-<h5>BUDGET DETAILLE DES UNITES ADMINISTRATIVES</h5>
-              </div>
+<h5>Reporting du Budget des Unites Administratives</h5>
+              </div> -->
                
               <!-- <div align="right">
                 Recherche:
@@ -115,8 +141,7 @@ code
             </div>
 
             <div class="widget-content nopadding">
-             
-                <table class="table table-bordered table-striped">
+              <table class="table table-bordered table-striped">
                 <thead>
                  <tr>
                        <th>Exercice</th>
@@ -197,8 +222,8 @@ code
                   <td></td>
                   <td></td>
                   <td style="background-color: green;color:#fff;text-align:center;font-size:14px;font-weight:bold;">TOTAL BUDGET EXECUTE</td>
-                  <td style="text-align:center;font-size:16px;font-weight:bold;" v-if="formData.section !=''">{{formatageSomme(parseFloat(budgetConsommerDesModule))}}</td>
-                   <td style="text-align:center;font-size:16px;font-weight:bold;" v-else>{{formatageSomme(parseFloat(budgetConsommerDesModule1))}}</td>
+                  <td style="text-align:center;font-size:16px;font-weight:bold;" >{{formatageSomme(parseFloat(budgetConsommerDesModule))}}</td>
+
                   
                 </tr>
                  <tr>
@@ -213,27 +238,23 @@ code
                   <td></td>
                   <td></td>
                   <td style="background-color: red;color:#fff;text-align:center;font-size:14px;font-weight:bold;">TOTAL BUDGET ACTUEL</td>
-                  <td style="text-align:center;font-size:16px;font-weight:bold;" v-if="formData.section !=''">{{formatageSomme(parseFloat(TotalBudgetInitial)-(parseFloat(budgetConsommerDesModule)))}}</td>
+                  <td style="text-align:center;font-size:16px;font-weight:bold;" >{{formatageSomme(parseFloat(TotalBudgetInitial)-(parseFloat(budgetConsommerDesModule)))}}</td>
 
-                   <td style="text-align:center;font-size:16px;font-weight:bold;" v-else>{{formatageSomme(parseFloat(TotalBudgetInitial)-(parseFloat(budgetConsommerDesModule1)))}}</td>
                   
 
 
                 </tr>
                 </tbody>
-
-                
               </table>
-             
               
-                
             </div>
           </div>
                             </div>
         </div>
       </div>
     </div>
- <fab v-if="affiche_boutton_filtre"
+  </div>
+  <fab v-if="affiche_boutton_filtre"
              :position="position"
              :bg-color="bgColor"
              :actions="fabActions"
@@ -241,22 +262,23 @@ code
              @cache="filter"
 
         ></fab>
-   
   </div>
 </template>
   
 <script>
 import { mapGetters, mapActions } from "vuex";
 import {formatageSomme} from '../../../../src/Repositories/Repository';
-import {admin,dcf,cf,noDCfNoAdmin} from '../../../../src/Repositories/Auth';
+// import {admin,dcf,cf,noDCfNoAdmin} from '../../../../src/Repositories/Auth';
 import {  ModelListSelect } from 'vue-search-select'
-    import 'vue-search-select/dist/VueSearchSelect.css'
+ import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
-    components: {
-    
-    ModelListSelect,
-     
+  watch: {
   },
+  components: {
+    
+     ModelListSelect,
+     
+   },
   name:'typetext',
   data() {
     return {
@@ -276,15 +298,11 @@ export default {
         LIBELLE: "libelle"
       },
       formData: {
-       unite_administrative_id:"",
-       section:"",
-       grandeNature_id:"",
-       
+       unite_administrative_id:""
       },
-      typeFinancement_id:"",
+       typeFinancement_id:"",
        section:"",
        grandeNature_id:"",
-
       editTypeTexte: {
         code: "",
         libelle: ""
@@ -296,7 +314,14 @@ export default {
       position: 'right',
     };
   },
-
+created() {
+            this.marcheid=this.$route.params.id
+   this.detail_Budget = this.uniteAdministratives.find(
+       idmarche => idmarche.id == this.$route.params.id
+   )
+  /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
+    console.log(this.appel_offre_marche)*/
+},
   computed: {
    ...mapGetters("SuiviImmobilisation", [
     
@@ -307,10 +332,10 @@ export default {
       
     ]),
      ...mapGetters('parametreGenerauxAdministratif', ['getterplanOrganisationUa','sections']) ,
-    admin:admin,
-      dcf:dcf,
-      cf:cf,
-      noDCfNoAdmin:noDCfNoAdmin,
+    // admin:admin,
+    //   dcf:dcf,
+    //   cf:cf,
+    //   noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
  ...mapGetters("bienService", ["getMandatPersonnaliserPersonnel",'getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
@@ -369,8 +394,6 @@ export default {
 
 
 
-
-
 objetMarchePasUniteOuRegion(){
 
                 let vM=this;
@@ -378,77 +401,38 @@ objetMarchePasUniteOuRegion(){
 
                 //retourne la section selectionner
               
-                if(this.section!="" && this.grandeNature_id=="" && this.typeFinancement_id==""){
+                if( this.grandeNature_id!="" && this.typeFinancement_id==""){
                   
                     objet =objet.filter(item=>{
-                        if(item.section_id==vM.section){
+                        if(item.ua_id==vM.detail_Budget.id && item.gdenature_id==vM.grandeNature_id){
                             return item
                         }
                     })
 
                 }
-             if(this.section!="" && this.grandeNature_id!="" && this.typeFinancement_id==""){
+                 if( this.grandeNature_id!="" && this.typeFinancement_id!=""){
                   
                     objet =objet.filter(item=>{
-                        if(item.section_id==vM.section && item.gdenature_id==vM.grandeNature_id){
-                            return item
-                        }
-                    })
-
-                }
- if(this.section!="" && this.grandeNature_id=="" && this.typeFinancement_id!=""){
-                  
-                    objet =objet.filter(item=>{
-                        if(item.section_id==vM.section && item.typefinancement_id==vM.typeFinancement_id){
+                        if(item.ua_id==vM.detail_Budget.id && item.gdenature_id==vM.grandeNature_id && item.typefinancement_id==vM.typeFinancement_id){
                             return item
                         }
                     })
 
                 }
 
-if(this.section!="" && this.grandeNature_id!="" && this.typeFinancement_id!=""){
+if( this.grandeNature_id=="" && this.typeFinancement_id!=""){
                   
                     objet =objet.filter(item=>{
-                        if(item.section_id==vM.section && item.gdenature_id==vM.grandeNature_id && item.typefinancement_id==vM.typeFinancement_id){
+                        if(item.ua_id==vM.detail_Budget.id && item.typefinancement_id==vM.typeFinancement_id){
                             return item
                         }
                     })
 
                 }
-
-
-if(this.section=="" && this.grandeNature_id!="" && this.typeFinancement_id==""){
+                 if( this.grandeNature_id!="" && this.typeFinancement_id!=""){
                   
                     objet =objet.filter(item=>{
-                        if(item.gdenature_id==vM.grandeNature_id){
-                            return item
-                        }
-                    })
-
-                }
-             if(this.section!="" && this.grandeNature_id!="" && this.typeFinancement_id==""){
-                  
-                    objet =objet.filter(item=>{
-                        if( item.gdenature_id==vM.grandeNature_id && item.section_id==vM.section){
-                            return item
-                        }
-                    })
-
-                }
- if(this.section =="" && this.grandeNature_id !="" && this.typeFinancement_id!=""){
-                  
-                    objet =objet.filter(item=>{
-                        if(item.gdenature_id==vM.grandeNature_id && item.typefinancement_id==vM.typeFinancement_id){
-                            return item
-                        }
-                    })
-
-                }
-
- if(this.section !="" && this.grandeNature_id !="" && this.typeFinancement_id!=""){
-                  
-                    objet =objet.filter(item=>{
-                        if(item.gdenature_id==vM.grandeNature_id && item.typefinancement_id==vM.typeFinancement_id && item.section_id==vM.section){
+                        if(item.ua_id==vM.detail_Budget.id && item.typefinancement_id==vM.typeFinancement_id && item.gdenature_id==vM.grandeNature_id ){
                             return item
                         }
                     })
@@ -456,53 +440,8 @@ if(this.section=="" && this.grandeNature_id!="" && this.typeFinancement_id==""){
                 }
 
 
-
-
-
-
-if(this.section=="" && this.grandeNature_id=="" && this.typeFinancement_id!=""){
-                  
-                    objet =objet.filter(item=>{
-                        if(item.typefinancement_id==vM.typeFinancement_id){
-                            return item
-                        }
-                    })
-
-                }
-             if(this.section!="" && this.grandeNature_id=="" && this.typeFinancement_id!=""){
-                  
-                    objet =objet.filter(item=>{
-                        if( item.typefinancement_id==vM.typeFinancement_id && item.section_id==vM.section){
-                            return item
-                        }
-                    })
-
-                }
- if(this.section =="" && this.grandeNature_id !="" && this.typeFinancement_id!=""){
-                  
-                    objet =objet.filter(item=>{
-                        if(item.gdenature_id==vM.grandeNature_id && item.typefinancement_id==vM.typeFinancement_id){
-                            return item
-                        }
-                    })
-
-                }
- if(this.section !="" && this.grandeNature_id !="" && this.typeFinancement_id!=""){
-                  
-                    objet =objet.filter(item=>{
-                        if(item.gdenature_id==vM.grandeNature_id && item.typefinancement_id==vM.typeFinancement_id && item.section_id==vM.section){
-                            return item
-                        }
-                    })
-
-                }
-
-                return objet
+                return objet.filter(item=>item.ua_id == vM.detail_Budget.id)
             },
-
-
-
-
 
 
 
@@ -514,10 +453,45 @@ TotalBudgetInitial(){
 
 
 
+ libelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.type_Unite_admins.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     libelleSection() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sections.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.nom_section;
+      }
+      return 0
+        }
+      };
+    },
+     libelleNatureSection() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.natures_sections.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    
   budgetConsommerDesModule() {
-      const val = parseInt(this.budgetConsommerBienService(this.section)) + parseInt(this.budgetConsommerTransfert(this.section)) + parseInt(this.budgetConsommerInvertissement(this.section))+parseInt(this.budgetConsommerPersonnel(this.section));
+      const val = parseInt(this.budgetConsommerBienService(this.detail_Budget.id)) + parseInt(this.budgetConsommerTransfert(this.detail_Budget.id)) + parseInt(this.budgetConsommerInvertissement(this.detail_Budget.id))+parseInt(this.budgetConsommerPersonnel(this.detail_Budget.id));
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -562,7 +536,7 @@ budgetConsommerPersonnel1(){
     budgetConsommerBienService(){
   return id => {
     if(id !=""){
-    return this.getMandatPersonnaliserVise.filter(element => this.IdSection(element.ua_id) == id && element.marchetype == 2 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+    return this.getMandatPersonnaliserVise.filter(element => element.ua_id == id && element.marchetype == 2 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
       
     }
     
@@ -571,7 +545,7 @@ budgetConsommerPersonnel1(){
 budgetConsommerTransfert(){
   return id => {
     if(id !=""){
-    return this.transferts.filter(element => this.IdSection(element.ua_id) == id && element.exerciceencours == this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
+    return this.transferts.filter(element => element.ua_id == id && element.exerciceencours == this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
       
     }
     
@@ -580,7 +554,7 @@ budgetConsommerTransfert(){
 budgetConsommerInvertissement(){
   return id => {
     if(id !=""){
-    return this.getMandatPersonnaliserVise.filter(element => this.IdSection(element.ua_id) == id && element.marchetype == 1 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+    return this.getMandatPersonnaliserVise.filter(element => element.ua_id == id && element.marchetype == 1 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
       
     }
     
@@ -589,10 +563,11 @@ budgetConsommerInvertissement(){
 budgetConsommerPersonnel(){
   return id => {
     if(id !=""){
-    return this.getMandatPersonnaliserPersonnel.filter(element => this.IdSection(element.ua_id) == id && element.marchetype == "perso" && element.exercice_budget == this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+    return this.getMandatPersonnaliserPersonnel.filter(element => element.ua_id == id && element.marchetype == "perso" && element.exercice_budget == this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
       
     }
-     
+    return this.getMandatPersonnaliserPersonnel.filter(element =>element.marchetype == "perso" && element.exercice_budget == this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+      
   }
 },
 /*budgetConsommerPersonnel(){
@@ -605,6 +580,7 @@ budgetConsommerPersonnel(){
     
   }
 },*/
+
  affichebudgetActive() {
         
         if(this.noDCfNoAdmin){
@@ -623,37 +599,17 @@ budgetConsommerPersonnel(){
 
     },
 
- 
-    filtreParUa(){
-       
-       return id => {
+ filtreParUa() {
+      return id => {
         if (id != null && id != "") {
-           return this.affichebudgetActive.filter(qtreel => qtreel.section_id == id);
+           return this.affichebudgetActive.filter(qtreel => qtreel.ua_id == id);
 
      
         }
         return this.affichebudgetActive
       };
-       
-     
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+ 
     filtre_unite_admin() {
                 if(this.noDCfNoAdmin){
                     let colect=[];
@@ -681,18 +637,6 @@ budgetConsommerPersonnel(){
 
       if (qtereel) {
         return qtereel.economique_id;
-      }
-      return 0
-        }
-      };
-    },
-    IdSection() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.section_id;
       }
       return 0
         }
@@ -874,6 +818,8 @@ videtypeFinancement(){
             },
     filter(){
                 this.affiche_filtre=!this.affiche_filtre
+               
+               
                
             },
     formatageSomme:formatageSomme,

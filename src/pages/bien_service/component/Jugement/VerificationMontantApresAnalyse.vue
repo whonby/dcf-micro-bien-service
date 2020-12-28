@@ -1,4 +1,3 @@
-
 <template>
 <div>
   <div class="row-fluid" >
@@ -523,7 +522,6 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import {formatageSommeSansFCFA} from "@/Repositories/Repository";
-
 export default {
 name: "ActEffeFinanciere",
   props:["macheid"],
@@ -544,11 +542,8 @@ name: "ActEffeFinanciere",
   },
   created(){
     this.lot=this.getMarchePersonnaliser.filter(item=>item.parent_id==this.macheid)
-
-
   },
   computed:{
-
     ...mapGetters("bienService", [ "typeMarches","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
       "modePassations", "procedurePassations","getterDossierCandidats","marches",
       "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
@@ -557,12 +552,9 @@ name: "ActEffeFinanciere",
       "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
       "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
     ...mapGetters('personnelUA', ['acteur_depenses']),
-
-
     ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
     ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
       'types_financements']) ,
-
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe',
       'planActe']),
@@ -595,11 +587,9 @@ name: "ActEffeFinanciere",
           }
       },
 Erreursdecalcul() {
-
       const val = parseFloat(this.EditOffreFinanciere.montant_total_ttc) - parseFloat(this.EditOffreFinanciere.hist_montant_ttc);
       return parseFloat(val).toFixed(0);
     },
-
     AffichierOffreFinanciere: function () {
       return (macheid) => {
         if (macheid != "") {
@@ -608,7 +598,6 @@ Erreursdecalcul() {
         }
       }
     },
-
 analyseByLot(){
       return id=>{
         return this.getterAnalyseDossiers.filter(item=>{
@@ -617,12 +606,10 @@ analyseByLot(){
         })
       }
     },
-
 afficherNumeroDossierCandidat1() {
       return id => {
         if (id != null && id != "") {
           const qtereel = this.getterDossierCandidats.find(qtreel => qtreel.id == id);
-
           if (qtereel) {
             return qtereel.entreprise_id;
           }
@@ -630,8 +617,6 @@ afficherNumeroDossierCandidat1() {
         }
       };
     },
-
-
     afficheNomEntreprise() {
       return id => {
         if (id != null && id != "") {
@@ -647,7 +632,6 @@ afficherNumeroDossierCandidat1() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
-
       if (qtereel) {
         return qtereel.id;
       }
@@ -655,25 +639,20 @@ afficherNumeroDossierCandidat1() {
         }
       };
     },
-
   },
-
   methods:{
     ...mapActions("bienService", [
       "supprimerDossierCandidat","ajouterOffreTechnique","modifierOffreTechnique",
       "supprimerchnique","ajouterOffreFinancier","modifierOffreFinancier","supprimerOffreFinancier",
       "ajouterLettreInvitation",
-
     ]),
       afficheEdite(index){
           this.$('#edit_offre_technique').modal({
               backdrop: 'static',
               keyboard: false
           });
-
           this.editer= this.gettersOffreTechniques.find(item=>item.id==index);
       },
-
 afficherModalModifierActeEffetFinancier(id){
       this.$('#ModalModification').modal({
         backdrop: 'static',
@@ -681,9 +660,7 @@ afficherModalModifierActeEffetFinancier(id){
       });
       this.EditOffreFinanciere= this.getterOffreFinanciers.find(item=>item.id==id);
     },
-
 ModifierOfficeFinancier(){
-
 var nouvelObjet = {
         
         id:this.EditOffreFinanciere.id,
@@ -708,7 +685,6 @@ var nouvelObjet = {
       this.infoLot=this.getMarchePersonnaliser.find(item=>item.id==index)
       //  this.edite_analyse_dossier = this.listeAnalyseDossier(this.macheid)[index];
     },
-
     formatageSommeSansFCFA:formatageSommeSansFCFA,
       editeOffreT(){
           let objet={
@@ -747,15 +723,11 @@ var nouvelObjet = {
     generateReport(){
       this.$htmlToPaper('analyse');
     }
-
   }
 }
 </script>
 
 <style scoped>
-
-
-
 .grdirModalActeEffet{
     width: 88% !important;
     margin: 0 -42% !important;

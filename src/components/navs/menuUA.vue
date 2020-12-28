@@ -143,7 +143,7 @@
           </li>
           <li class="divider"></li>
            <li>
-            <router-link :to="{name: 'ReportingBudget'}" tag="a">
+            <router-link :to="{name: 'listeDesUaBudget'}" tag="a">
               REPORTING DU BUDGET PAR UA
             </router-link>
           </li>
