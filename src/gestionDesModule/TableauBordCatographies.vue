@@ -206,16 +206,14 @@
               <div class="row-fluid" >
                 <div class="span5" v-if="montantBudegtPasUniteAdminOuRegion">
 
-                  <donut-chart
-                      style="width: 120px;height: 120px"
-                      id="donut01"
-                      :data="montantBudegtPasUniteAdminOuRegion.donutData"
-                      colors='[ "#FF6384", "#36A2EB"]'
-                      resize="true" v-if="montantBudegtPasUniteAdminOuRegion.budget">
-                  </donut-chart>
-                  <div style="text-align: center" v-else>
-                    <h3>Aucun montant</h3>
-                  </div>
+<!--                  <donut-chart-->
+<!--                      style="width: 120px;height: 120px"-->
+<!--                      id="donut01"-->
+<!--                      :data="montantBudegtPasUniteAdminOuRegion.donutData"-->
+<!--                      colors='[ "#FF6384", "#36A2EB"]'-->
+<!--                      resize="true" v-if="montantBudegtPasUniteAdminOuRegion.budget">-->
+<!--                  </donut-chart>-->
+
                 </div>
                 <div class="span7"><br>
 
@@ -826,7 +824,8 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
         "decomptefactures",
     ]),
     ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise",
-        "getterImageMarche","acteEffetFinanciers","typeMarches","getterInfoTableauBordFiltre","getActeEffetFinancierPersonnaliser45","avenants"]),
+        "getterImageMarche","acteEffetFinanciers",
+        "typeMarches","getterInfoTableauBordFiltre","getActeEffetFinancierPersonnaliser45","avenants"]),
 
       noDCfNoAdmin:noDCfNoAdmin,
       conversionDate(){
@@ -1049,8 +1048,8 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           return id=>{
               let vm=this;
               let initeVal = 0;
-              let montant=vm.decomptefactures.filter(item=>item.marche_id==id).reduce(function (total, currentValue) {
-                  return total + parseFloat(currentValue.montantmarche) ;
+              let montant=vm.getMandatPersonnaliserVise.filter(item=>item.marche_id==id).reduce(function (total, currentValue) {
+                  return total + parseFloat(currentValue.total_general) ;
               }, initeVal);
 
               if(montant!=undefined){

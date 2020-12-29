@@ -106,6 +106,15 @@
            
           </a>
         </li>
+
+          <li @click.prevent="navigateToImage" :class="{active: active_el ==75}">
+              <a title="GESTION DES IMAGES" href="#">
+                  <i class="icon-truck"></i>
+                  <span>IMAGERIES</span>
+
+              </a>
+          </li>
+
          <!-- <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
           <a title="COMPTABILITE DES MATIERE" href="#">
             <i class=" icon-camera"></i>
@@ -325,6 +334,12 @@ navigateRetourAuMenu(){
         this.$router.push({
           name:'tableau_de_bors_sib_investissement'
         })
+      },
+      navigateToImage(){
+          this.activate(75)
+          this.$router.push({
+              name:'Images'
+          })
       },
  navigateToBienEtService(){
         this.activate(7)

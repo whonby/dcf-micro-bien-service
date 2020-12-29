@@ -390,7 +390,8 @@
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements"
-                ,"getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers","getterFiltreCarteInfrastructure","getterInformationCarteInfrastructure"]),
+                ,"getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"
+                ,"getterFiltreCarteInfrastructure","getterInformationCarteInfrastructure"]),
 
             ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises',"comptes","banques"]),
 
@@ -517,8 +518,8 @@
 
                          this.getterFiltreCarteInfrastructure.filter(item=>item.infrastructure_id==id).forEach(function (val) {
                              let initeVal = 0;
-                             let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
-                                 return total + parseFloat(currentValue.montantmarche) ;
+                             let montant=vm.getMandatPersonnaliserVise.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                                 return total + parseFloat(currentValue.total_general) ;
                              }, initeVal);
                              montant_execute=parseFloat(montant_execute) + parseFloat(montant)
                          })
@@ -635,8 +636,8 @@
 
                         this.getterFiltreCarteInfrastructure.filter(item=>item.type_marche_id==id).forEach(function (val) {
                             let initeVal = 0;
-                            let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
-                                return total + parseFloat(currentValue.montantmarche) ;
+                            let montant=vm.getMandatPersonnaliserVise.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                                return total + parseFloat(currentValue.total_general) ;
                             }, initeVal);
                             montant_execute=parseFloat(montant_execute) + parseFloat(montant)
                         })
@@ -724,8 +725,8 @@
 
                     this.getterFiltreCarteInfrastructure.forEach(function (val) {
                         let initeVal = 0;
-                        let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
-                       return total + parseFloat(currentValue.montantmarche) ;
+                        let montant=vm.getMandatPersonnaliserVise.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                       return total + parseFloat(currentValue.total_general) ;
                        }, initeVal);
                         montant_execute=parseFloat(montant_execute) + parseFloat(montant)
                     })
@@ -802,8 +803,8 @@
                 return id=>{
                     let vm=this;
                     let initeVal = 0;
-                    let montant=vm.decomptefactures.filter(item=>item.marche_id==id).reduce(function (total, currentValue) {
-                        return total + parseFloat(currentValue.montantmarche) ;
+                    let montant=vm.getMandatPersonnaliserVise.filter(item=>item.marche_id==id).reduce(function (total, currentValue) {
+                        return total + parseFloat(currentValue.total_general) ;
                     }, initeVal);
                     if(montant!=undefined){
                         return montant

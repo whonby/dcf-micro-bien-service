@@ -120,14 +120,21 @@
                 <i class="icon-th"></i>
               </span>
                     <h5 v-if="ppm">Calendrie de planification des marches du PPM : {{ppm.libelle}}</h5>
+<<<<<<< HEAD
                 </div> -->
                 <!-- <div class="widget-content nopadding" >
                     <full-calendar :events="events" :config="config"></full-calendar>
                 </div> -->
 
+                </div>
+
+                <div class="widget-content nopadding" >
+<!--                    <full-calendar :events="events" :config="config"></full-calendar>-->
+                </div>
+
             </div>
         </div>
-    </div>
+    
 </template>
 
 <script>
@@ -140,11 +147,17 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
             return {
                 events: []
                 ,
+                config1: {
+                    eventClick: (event) => {
+                        this.selected = event;
+                    },
+                },
+                selected: {},
                 config: {
                     locale:"fr",
-                    schedulerLicenseKey: "GPL-My-Project-Is-Open-Source",
-                    defaultView: "timelineCustom",
-                    //plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+                    schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+                    defaultView: "dayGridMonth",
+                  //  plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
                     header: {
                         left: "prev,next today",
                         center: "title",
