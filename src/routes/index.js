@@ -46,7 +46,7 @@ import investissementRoutes from './investissement/investissementRoutes';
 
 // authentitification 
 import AuthRoutes from './auth/AuthRoutes' 
-
+import RouteDocumentation from "./documentation/RouteDocumentation"
 
 // les differentes rouetes de marches hors sib
 
@@ -59,7 +59,7 @@ Vue.use(VueRouter);
 const regroupementDesRoutes = [
   AuthRoutes,
   ActeurDepenseRoutes,
-
+  RouteDocumentation,
 
   UniteAdministativeRoute,
 

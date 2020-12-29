@@ -1479,8 +1479,8 @@ console.log(this.listeMarchStatueExecuteAcheve)
 
                     this.objetMarchePasUniteOuRegion.forEach(function (val) {
                         let initeVal = 0;
-                        let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.montantmarche) ;
+                        let montant=vm.getMandatPersonnaliserVise.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.total_general) ;
                         }, initeVal);
                         montant_execute=parseFloat(montant_execute) + parseFloat(montant)
                     })
@@ -1798,10 +1798,11 @@ console.log(this.listeMarchStatueExecuteAcheve)
                         let montant_execute=0;
                         let vm=this;
 
+
                         this.listeMarchStatueExecuteAcheve.filter(item=>item.attribue==status).forEach(function (val) {
                             let initeVal = 0;
-                            let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
-                                return total + parseFloat(currentValue.montantmarche) ;
+                            let montant=vm.getMandatPersonnaliserVise.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                                return total + parseFloat(currentValue.total_general) ;
                             }, initeVal);
                             montant_execute=parseFloat(montant_execute) + parseFloat(montant)
                         })
@@ -1830,8 +1831,8 @@ console.log(this.listeMarchStatueExecuteAcheve)
 
                     this.listeMarchStatueExecuteAcheve.forEach(function (val) {
                         let initeVal = 0;
-                        let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.montantmarche) ;
+                        let montant=vm.getMandatPersonnaliserVise.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.total_general) ;
                         }, initeVal);
                         montant_execute=parseFloat(montant_execute) + parseFloat(montant)
                     })
