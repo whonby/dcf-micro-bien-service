@@ -1807,8 +1807,6 @@ console.log(this.listeMarchStatueExecuteAcheve)
                             montant_execute=parseFloat(montant_execute) + parseFloat(montant)
                         })
 
-
-
                         return montant_execute
                     }
                     return 0;
