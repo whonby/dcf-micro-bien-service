@@ -53,12 +53,12 @@
                  </td>
                      <td colspan="">
                     <div class="control-group">
-                  <label class="control-label">Marche</label>
+                  <label class="control-label">Marche{{formData.uAdministrative_id}}</label>
                   <div class="controls">
                     <select  class="span" v-model="formData.marche_id">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in marcheTypeFournitureParUa(formData.ua_id)"
+                        v-for="typeUniteA in marcheTypeFournitureParUa(formData.uAdministrative_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.objet}}</option>
@@ -94,17 +94,19 @@
                         v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
-                      >{{libelleFamilleEquipement(typeUniteA.designation)}}
-                      {{libelleFamilleEquipement(typeUniteA.designation1)}}
-                      {{libelleFamilleEquipement(typeUniteA.designation2)}}
-                      {{libelleFamilleEquipement(typeUniteA.designation3)}}
-                      {{libelleFamilleEquipement(typeUniteA.designation4)}}
-                      {{libelleFamilleEquipement(typeUniteA.designation5)}}
-                       {{libelleFamilleEquipement(typeUniteA.designation6)}}
-                      {{libelleFamilleEquipement(typeUniteA.designation7)}}
-                       {{libelleFamilleEquipement(typeUniteA.designation8)}}
-                      {{libelleFamilleEquipement(typeUniteA.designation9)}}
-                      {{libelleFamilleEquipement(typeUniteA.designation10)}}
+                      >{{typeUniteA.designation}}
+                      
+                      {{typeUniteA.designation2}}
+                      
+                      </option>
+                      <option
+                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >
+                      
+                      {{typeUniteA.designation2}}
+                      
                       </option>
                 </select>
             </div>
@@ -112,13 +114,13 @@
             </td>
             <td>
                <div class="control-group">
-            <label class="control-label">Quantité Récu </label>
+            <label class="control-label">Quantité Récu</label>
             <div class="controls">
                               <input
                 type="text"
-               :value="quantiteRecuFacture(formData.famill_id)"
+              v-model="formData.quantitestock"
                 class="span"
-                readonly
+                
               />
             </div>
           </div>
@@ -1615,7 +1617,7 @@ if(this.formData.typestockage == 1){
       }
       
       this.ajouterFicheArticle(nouveauObjet);
-    
+    this.
       this.formData1 = {
         ua_id:"",
         article_id:"",

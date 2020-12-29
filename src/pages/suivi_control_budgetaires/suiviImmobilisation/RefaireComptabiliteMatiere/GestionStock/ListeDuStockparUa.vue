@@ -1,6 +1,39 @@
 <template>
   <div>
+ <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
+                <div class="span1">
 
+                </div>
+                <div class="span10 " style="background: #f0c71d !important;">
+                    <table class="table table-striped"  style="background: #f0c71d !important;">
+                        <tbody>
+                        <tr>
+                        
+                            
+                            <td style="background: #f0c71d !important;">
+                                <label style="font-size:20px">Unité Administrative<a href="#" @click.prevent="videUniteAdministrative()" v-if="uniteAdministrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
+                                </label>
+                                <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="uniteAdministratives"
+                                                   v-model="uniteAdministrative_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                            </td>
+                          
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
    
 
      <div id="exampleModalStock" class="modal hide ">
@@ -411,18 +444,11 @@
     <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
     <!-- End Page Header -->
     <!-- Default Light Table -->
-    <table class="table table-bordered table-striped">
+    <!-- <table class="table table-bordered table-striped">
   <tr>
     <td>
       <label class="control-label">Unite Administrative</label>
-       <!-- <select  class="span5" v-model="formData.uAdministrative_id">
-                      <option></option>                     
-                      <option
-                        v-for="typeUniteA in uniteAdministratives"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select> -->
+     
                      <model-list-select style="background-color: rgb(233,233,233);"
                                                        class="wide"
                                                        :list="filtre_unite_admin"
@@ -435,7 +461,7 @@
                                     </model-list-select>
     </td>
   </tr>
-</table>
+</table> -->
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
@@ -488,7 +514,7 @@
                 <tbody>
                      <tr
                     class="odd gradeX"
-                    v-for="stock in listeDesStockParUa(formData.uAdministrative_id)"
+                    v-for="stock in listeDesStockParUa(uniteAdministrative_id)"
                     :key="stock.id"
                   >
 
@@ -588,6 +614,7 @@
  <fab :actions="fabActions"
                 main-icon="apps"
           @cache="ajouterEntreEnPatrimoine"
+        @searchMe="filter"
          
         bg-color="green"
 
@@ -615,8 +642,13 @@ export default {
       fabActions: [
         {
           name: "cache",
-          icon: "add"
-        }
+          icon: "add",
+          
+        },
+        {
+                  name: 'searchMe',
+                   icon: "search"
+              }
         // {
         //   name: "alertMe",
         //   icon: "add_alert",
@@ -650,6 +682,9 @@ quantite: {
         
        
       },
+      uniteAdministrative_id:"",
+       affiche_filtre:false,
+      affiche_boutton_filtre:true,
       editStock: {
        uAdministrative_id: "",
         typeequipe_id: "",
@@ -1120,6 +1155,13 @@ veifArticlesExist() {
       "modifierStock",
       "supprimerStock"
     ]),
+    filter(){
+                this.affiche_filtre=!this.affiche_filtre
+               
+            },
+    videUniteAdministrative(){
+                this.uniteAdministrative_id =""
+            },
     ajouterEntreEnPatrimoine(){
                 this.$router.push({ name: 'AjouterEntrePatrimoine' })
             },
