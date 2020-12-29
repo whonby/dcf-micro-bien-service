@@ -1395,19 +1395,19 @@ ajouterMandatFactureDefinitive(){
       // let montant_contrat = parseFloat( this.afficheMontantReelMarche(this.detail_marche.id))
       if (this.detail_Facture.prix_propose_ttc > this.commparerMontantGleEtMontantFacture)
       {
-        alert("Le montant engagé est Inférieure au montant de la facture")
-      }
-       else if (this.dotationDisponibleAnterieure < this.detail_Facture.prix_propose_ttc)
-      {
-        alert("La dotation est Inférieure au montant de la facture")
-      }
+      //   alert("Le montant engagé est Inférieure au montant de la facture")
+      // }
+      //  else if (this.dotationDisponibleAnterieure < this.detail_Facture.prix_propose_ttc)
+      // {
+      //   alert("La dotation est Inférieure au montant de la facture")
+      // }
       
-       else if (parseFloat(this.montantMarcheAvecAvenant) == parseFloat(this.sommeEgagementLigne(this.detail_Facture.marche_id)))
-      {
-        alert("Marché apuré")
-      }
-      else if(this.NombreDecompte == 1)
-      {
+      //  else if (parseFloat(this.montantMarcheAvecAvenant) == parseFloat(this.sommeEgagementLigne(this.detail_Facture.marche_id)))
+      // {
+      //   alert("Marché apuré")
+      // }
+      // else if(this.NombreDecompte == 1)
+      // {
         var nouvelObjet919 = {
       ...this.formData,
       etat_srf:0,

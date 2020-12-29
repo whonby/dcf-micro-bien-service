@@ -11,6 +11,7 @@
 
         <li class="bg_ly span5"> <a href="#" style="color:black;"> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{nbreUniteAdministratives}}</span><h3>NOMBRE UA</h3>  </a> </li>
         <li class="bg_lo span5"> <a href="#" style="color:black;"> <i class="icon-th"></i><span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(montantBudgetGeneralUa))}}</span><h3>BUDGET TOTAL</h3> </a> </li>
+
         <!-- <li class="bg_ls span5"> <a href="#" style="color:black;"> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{affichierTauxExecution}}%</span> <h3>TAUX EXECUTION</h3></a> </li> -->
   
       </ul>
@@ -79,11 +80,28 @@ created() {
 
     },
  
+  affichebudgetActive() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.budgetGeneral.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => element.actived == 1);
+        }
+        return this.budgetGeneral.filter(element => element.actived == 1); 
+
+    },
  montantBudgetGeneralUa() {
       
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.budgetGeneral.filter(item=>{
+            this.affichebudgetActive.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
@@ -93,7 +111,7 @@ created() {
           return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0);
         }
 
- return this.budgetGeneral.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0);
+ return this.affichebudgetActive.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0);
 
       
     },

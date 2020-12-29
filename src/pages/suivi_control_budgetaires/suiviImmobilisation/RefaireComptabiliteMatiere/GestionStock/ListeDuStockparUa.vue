@@ -499,7 +499,7 @@
                      <th>Marque</th>
                      <th>Model</th>
                     <th>Quantité Initiale</th> 
-                    <th title="quantite en stock">Quantité en stock</th>
+                    <th title="quantite en stock">Quantité Actuelle</th>
                     <th title="quantite sortant">Quantité sortie</th>
                      <th>Date d'entrée</th>
                     <th title="quantite entrant">Quantité entrée</th>
@@ -583,9 +583,9 @@
                 <td></td>
                 <td></td>
                       <td style="font-weight:bold;">Total</td>
-                   <td  style="text-align: center;color:red;font-weight:bold;">{{quantiteInitial(formData.uAdministrative_id)}}</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(formData.uAdministrative_id) || 0 }}</td>
-                     <td style="text-align: center;color:red;font-weight:bold;">{{ nombreDeQuantiteSortiEnStock(formData.uAdministrative_id) || 0 }}</td>
+                   <td  style="text-align: center;color:red;font-weight:bold;">{{quantiteInitial(uniteAdministrative_id)}}</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(uniteAdministrative_id) || 0 }}</td>
+                     <td style="text-align: center;color:red;font-weight:bold;">{{ nombreDeQuantiteSortiEnStock(uniteAdministrative_id) || 0 }}</td>
                     <td></td>
                    
                      
