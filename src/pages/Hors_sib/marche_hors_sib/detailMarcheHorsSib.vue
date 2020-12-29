@@ -940,6 +940,7 @@
 
 </div>
 
+
 </template>
 
 <script>
@@ -1037,6 +1038,7 @@ created() {
    this.detail_marche = this.getPersonnaliserMarchehorSib.find(
        idmarche => idmarche.id == this.$route.params.id
    )
+   console.log(this.detail_marche);
   /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
     console.log(this.appel_offre_marche)*/
 },
@@ -1246,8 +1248,19 @@ budgetConsommerTransfert(){
 //       return 0
 //     },
 
-budgetDisponible() {
-      const val = parseInt(this.afficherLaDotationIntial(this.detail_marche.economique_id)) ;
+// budgetDisponible() {
+//       const val = parseInt(this.afficherLaDotationIntial(this.detail_marche.economique_id)) ;
+      
+//        if (val) {
+//         return parseInt(val).toFixed(0);
+//       }
+      
+//       return 0
+//     },
+
+
+budgetConsommerDesModule() {
+      const val = parseInt(this.budgetConsommerBienService(this.detail_marche.economique_id)) + parseInt(this.budgetConsommerTransfert(this.detail_marche.economique_id));
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -1256,8 +1269,40 @@ budgetDisponible() {
       return 0
     },
 
+budgetDisponible() {
+  if(this.detail_marche.sib==1){
+ const val = parseInt(this.afficherLaDotationIntial(this.detail_marche.economique_id)) ;
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+  }
+  else{
+const val = parseInt(this.afficherLaDotationIntial1(this.detail_marche.economique_id)) - parseInt(this.budgetConsommerDesModule);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+  }
+      
+    },
 
+ afficherLaDotationIntial1() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.afficheBudgetActive.find(qtreel => qtreel.economique_id == id);
 
+      if (qtereel) {
+        return qtereel.Dotation_Initiale;
+      }
+      return 0
+        }
+      };
+    },
 
 
 

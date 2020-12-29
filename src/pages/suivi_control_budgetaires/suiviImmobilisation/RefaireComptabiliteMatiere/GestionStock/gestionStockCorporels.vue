@@ -32,10 +32,10 @@
                         <a data-toggle="tab" href="#Reparation">Entretien et Réparation   </a>
                       </li>
                         <li>
-                        <a data-toggle="tab" href="#tab47583">Sortie du patrimoine  </a>
+                        <a data-toggle="tab" href="#SortiePatrimoine">Sortie du patrimoine  </a>
                       </li>
                        <li>
-                        <a data-toggle="tab" href="#tab47584">Inventaire </a>
+                        <a data-toggle="tab" href="#Inventaire">Inventaire </a>
                       </li>
                        <!-- <li class="">
                         <a data-toggle="tab" href="#tab1005">NOUVEAU SERVICE   <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
@@ -59,8 +59,8 @@
            
              </div>
  <div id="Reparation" class="tab-pane "><ReparationEquipement></ReparationEquipement> </div>
-
- 
+<div id="SortiePatrimoine" class="tab-pane "><SortiDuPatrimoine></SortiDuPatrimoine> </div>
+ <div id="Inventaire" class="tab-pane "><Inventaire></Inventaire> </div>
         </div>
       </div>
       
@@ -94,6 +94,8 @@ import moment from "moment";
 import ListeDuStockparUa from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/ListeDuStockparUa'
 import affectationEquipementParUa from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/AffectationEquipementParUa/affectationEquipementParUa'
 import ReparationEquipement from '../../../suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/ReparationEquipement'
+import SortiDuPatrimoine from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/SortiDuPatrimoine/SortiDuPatrimoine.vue'
+import Inventaire from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/Inventaire/Inventaire.vue'
 // import historisqueDemandeParService from '../docAffectationImmo/historisqueDemandeParService'
 // import { formatageSomme } from "../../../../Repositories/Repository";
 
@@ -103,7 +105,9 @@ export default {
   components: {
       ListeDuStockparUa,
     affectationEquipementParUa,
-    ReparationEquipement
+    ReparationEquipement,
+    SortiDuPatrimoine,
+    Inventaire
      
   },
   data() {

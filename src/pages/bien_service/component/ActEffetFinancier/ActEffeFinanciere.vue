@@ -884,6 +884,9 @@
                 </div>
               </div>
             </td>
+            
+          </tr>
+          <tr>
              <td>
               <div class="control-group">
                 <label class="control-label" title=" ">Date de reception definitive</label>
@@ -2776,6 +2779,7 @@ nombreDejourCalculeModifier(){
 
   },
 
+
   methods:{
     ...mapActions('bienService',['supprimerActeEffetFinancier',
       'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
@@ -2875,8 +2879,8 @@ var nouvelObjet1 = {
       marcheObjet1.attribue = 2
       marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
       // console.log(marcheObjet)
-      this.modifierMarcheHorSib(marcheObjet)
-    this.modifierMarcheHorSib(marcheObjet1)
+      this.modifierMarche(marcheObjet)
+    this.modifierMarche(marcheObjet1)
       this.formEffetFinancier = {
         code_act:"",
         libelle_act:"",
