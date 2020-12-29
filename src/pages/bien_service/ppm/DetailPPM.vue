@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="widget-content nopadding" >
-                    <full-calendar :events="events" :config="config"></full-calendar>
+<!--                    <full-calendar :events="events" :config="config"></full-calendar>-->
                 </div>
 
             </div>
@@ -28,11 +28,17 @@
             return {
                 events: []
                 ,
+                config1: {
+                    eventClick: (event) => {
+                        this.selected = event;
+                    },
+                },
+                selected: {},
                 config: {
                     locale:"fr",
-                    schedulerLicenseKey: "GPL-My-Project-Is-Open-Source",
-                    defaultView: "timelineCustom",
-                    //plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+                    schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+                    defaultView: "dayGridMonth",
+                  //  plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
                     header: {
                         left: "prev,next today",
                         center: "title",

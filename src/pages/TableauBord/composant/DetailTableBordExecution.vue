@@ -423,8 +423,8 @@
                     let vm=this;
 
                     let initeVal = 0;
-                    let montant=vm.decomptefactures.filter(item=>item.marche_id==marche_id).reduce(function (total, currentValue) {
-                        return total + parseFloat(currentValue.montantmarche) ;
+                    let montant=vm.getMandatPersonnaliserVise.filter(item=>item.marche_id==marche_id).reduce(function (total, currentValue) {
+                        return total + parseFloat(currentValue.total_general) ;
                     }, initeVal);
                      montant_execute=parseFloat(montant_execute) + parseFloat(montant)
 
@@ -605,8 +605,8 @@
                 return id=>{
                     let vm=this;
                     let initeVal = 0;
-                    let montant=vm.decomptefactures.filter(item=>item.marche_id==id).reduce(function (total, currentValue) {
-                        return total + parseFloat(currentValue.montantmarche) ;
+                    let montant=vm.getMandatPersonnaliserVise.filter(item=>item.marche_id==id).reduce(function (total, currentValue) {
+                        return total + parseFloat(currentValue.total_general) ;
                     }, initeVal);
                     if(montant!=undefined){
                         return montant
