@@ -22,6 +22,7 @@
    <MenuRapportMarche v-if="active_el == 89"></MenuRapportMarche>
    <MenuRapportVehicule v-if="active_el == 90"></MenuRapportVehicule>
    <MenuTableauBordGestionMarche v-if="active_el == 45"></MenuTableauBordGestionMarche>
+   <MenuTableauBordGestionSibMarche v-if="active_el ==46"></MenuTableauBordGestionSibMarche>
     <!-- <Search></Search> -->
     
     <!--close-top-serch MenuPlanificationHorSib-->
@@ -32,6 +33,7 @@
 // var housecall = require('housecall');
 
 // var queue = housecall({ concurrency: 2, cooldown: 1000 });
+import MenuTableauBordGestionSibMarche from "../components/navs/MenuTableauBordGestionSibMarche.vue"
 import MenuTableauBordGestionMarche from "../components/navs/MenuTableauBordGestionMarche";
 import MenuTableau from "../components/navs/menuTableauBord";
 import MenuParamG from "../components/navs/menuParametreG";
@@ -56,6 +58,7 @@ import MenuRapportVehicule from "../components/navs/MenuRapportVehicule"
 import { mapState, mapActions} from "vuex";
 export default {
   components: {
+    MenuTableauBordGestionSibMarche,
     MenuTableauBordGestionMarche,
     MenuRapportVehicule,
     MenuRapportMarche,

@@ -625,6 +625,7 @@ return objJson.id
 
   },
 
+
   methods:{
  admin:admin,
      dcf:dcf,
@@ -632,7 +633,9 @@ return objJson.id
     ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",'getGroupe',"getMenu","getModule",
     "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf","getAffectationGroupeUser"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
-    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
+    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle',
+    'getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges',
+    'getlisteNaturePrix','getMotifPassation']),
 
     ...mapActions('parametreGenerauxSourceDeFinancement',['getSourceFinancement',
         'getTypeFinancement'
