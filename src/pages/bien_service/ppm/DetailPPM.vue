@@ -3,11 +3,129 @@
         <div class="container-fluid">
 
             <div class="widget-box">
-                <div class="widget-title">
+                  <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>Liste des March&eacute;s par PPM</h5>
+              <!-- <div align="right">
+                
+                <input type="search"   placeholder=" saisir objet"/>
+              </div> -->
+            </div>
+                 <table class="table table-bordered table-striped" >
+                <thead>
+                <tr>
+                   <th>Année</th>
+                  <th>UA</th>
+                  <th>Reférence marché</th>
+                  <th>Objet marché</th>
+                  <th>Type de marché</th>
+                   <th>Procedure de passation</th>
+                  <th>Région</th>
+                   <th>Montant prevu</th>
+                    <th title="mouvement du marché">Mouvement marché</th>
+                     
+                   <!-- <th colspan="3">Action</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                  <tr class="odd gradeX" v-for="activites in ppm.marche "
+                 :key="activites.id">
+                  <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{activites.exo_id || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{afficherLibelleUa(activites.unite_administrative_id) || 'Non renseigné'}}</td>
+                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{activites.reference_marche || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{activites.objet || 'Non renseigné'}}</td>
+                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{afficherLibelleTypeMarche(activites.type_marche_id) || 'Non renseigné'}}</td>
+                      <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{afficherCodeProcedurePassation(activites.procedure_passation_id) || 'Non renseigné'}}</td>
+                    <!-- <td @dblclick="afficherModalModifierTypePrestation(marche.id)">
+                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                       
+                      {{afficherLibelleLocalisationGeographie(afficheLocalisation(activites.id)) || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
+                      {{formatageSomme(parseFloat(activites.montant_marche)) || 'Non renseigné'}}</td>
+                   
+                    <td>
+
+                         <span v-if="activites.economique_id == CodeExempte(activites.economique_id) ">Exemptée procedure</span>
+                         <span v-else>Ligne à marché</span>
+                       </td>
+                        
+                      
+          
+  
+                   <!-- <td>
+                      <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                                    class="btn btn-inverse " title="Cycle de vie du marche">
+                           <span class=""><i class=" icon-calendar"></i></span>
+                       </router-link>
+                   </td> -->
+                  
+           <!-- <td>
+          
+                     <button @click.prevent="supprimerMarche(activites.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+                   </td> -->
+                  
+                   
+
+                       </tr>
+                        <tr>
+                       <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                      <td>
+                          
+                      </td>
+                     <td> 
+                      </td>
+                      <td>
+                          
+                           
+                      </td>
+                      
+                       <td > 
+                      </td>
+                        <td style="font-weight:bold;"> Total Marché
+                      </td>
+                       <td  style="text-align: center;color:red;font-weight:bold;">
+                           {{formatageSomme(parseFloat(montantMarche))}}
+                           
+                      </td>
+                        <td>
+                          
+                      </td>
+                      
+                      <!-- <td>
+                          
+                      </td> -->
+                      
+                       
+                    </tr>
+                </tbody>
+              </table>
+                <!-- <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
                     <h5 v-if="ppm">Calendrie de planification des marches du PPM : {{ppm.libelle}}</h5>
+<<<<<<< HEAD
+                </div> -->
+                <!-- <div class="widget-content nopadding" >
+                    <full-calendar :events="events" :config="config"></full-calendar>
+                </div> -->
+
                 </div>
 
                 <div class="widget-content nopadding" >
@@ -16,11 +134,12 @@
 
             </div>
         </div>
-    </div>
+    
 </template>
 
 <script>
-    import { mapGetters } from "vuex";
+import { formatageSomme } from "../../../../src/Repositories/Repository";
+    import { mapActions, mapGetters } from "vuex";
     import 'fullcalendar/dist/locale/fr'
     export default {
         name: "DetailPPM",
@@ -463,8 +582,88 @@
 
         },
         computed: {
-            ...mapGetters("bienService", ["getterPlanPassationMarche"]),
+            ...mapGetters("bienService", ["getterPlanPassationMarche", "marches","typeMarches","procedurePassations"]),
+
+             ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires',"grandes_natures",
+ 'structures_geographiques','localisations_geographiques']),
+   ...mapGetters("uniteadministrative",['getterligneExempter','uniteAdministratives',"budgetGeneral"]),
+
+    montantMarche(){
+
+  return this.marches.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),0)
+},
+
+             afficherLibelleLocalisationGeographie(){
+   return id =>{
+     if(id!=null && id!=""){
+       let response = this.localisations_geographiques.find(item => item.id==id)
+       if(response){
+         return response.libelle
+       }
+     }
+   }
+ },
+  afficherLibelleUa(){
+   return id =>{
+     if(id!=null && id!=""){
+       let response = this.uniteAdministratives.find(item => item.id==id)
+       if(response){
+         return response.libelle
+       }
+     }
+   }
+ },
+afficherLibelleTypeMarche(){
+ return id =>{
+     if(id!=null && id!=""){
+       let response = this.typeMarches.find(item => item.id==id)
+       if(response){
+         return response.libelle
+       }
+     }
+   }
+ },
+  afficherCodeProcedurePassation(){
+   return id =>{
+     if(id!=null && id!=""){
+       let response = this.procedurePassations.find(item => item.id==id)
+       if(response){
+         return response.code
+       }
+     }
+   }
+ },
+ 
+ afficheLocalisation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.parent_id == id);
+
+      if (qtereel) {
+        return qtereel.localisation_geographie_id;
+      }
+      return 0
+        }
+      };
+    },
+     CodeExempte() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterligneExempter.find(qtreel => qtreel.economique_id == id);
+
+      if (qtereel) {
+        return qtereel.economique_id;
+      }
+      return 0
+        }
+      };
+    },
         },
+        methods:{
+            ...mapActions("",['']),
+            formatageSomme:formatageSomme
+
+        }
     }
 </script>
 

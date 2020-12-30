@@ -2,7 +2,6 @@
     <div>
 
 
-
         <div class="container-fluid" style="height: 100em; background: #f9f9f9">
 
             <div class="" >
@@ -835,7 +834,6 @@
         {{dataArrayPourcentage}}
     </div>
 </template>
-
 <script>
     import VueApexCharts from 'vue-apexcharts'
     import { mapGetters,mapActions } from "vuex";

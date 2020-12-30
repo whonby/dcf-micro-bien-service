@@ -71,7 +71,7 @@
                             </td>
                             <td>
                         <div class="control-group">
-                            <label class="control-label">Reference  offre <code>*</code> :</label>
+                            <label class="control-label">Reference  de DAO <code>*</code> :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Reference d'appel" v-model="formData.ref_appel">
                             </div>
@@ -81,7 +81,7 @@
                             <tr>
                             <td colspan="2" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet  offre :</label>
+                            <label class="control-label">Objet  DAO :</label>
                             <div class="controls">
                                  <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     
@@ -93,7 +93,7 @@
                                 <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date emission <code>*</code></label>
+                                <label>Date emission de DAO <code>*</code></label>
                                 <input type="date" class="span" placeholder="Date emision" v-model="formData.date_emission">
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                                 <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date limite <code>*</code></label>
+                                <label>Date limite de DAO <code>*</code></label>
                                 <input type="date" class="span" placeholder="Date limite" v-model="formData.date_limite" :min="formData.date_emission">
                             </div>
                         </div>
@@ -163,7 +163,7 @@
                             </td>
                                 <td >
                         <div class="control-group">
-                            <label class="control-label">Reference  offre  :</label>
+                            <label class="control-label">Reference de DAO  :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Reference d'appel" v-model="edite_appel_offre.ref_appel">
                             </div>
@@ -173,7 +173,7 @@
                                    <tr>
                             <td colspan="2" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet  offre :</label>
+                            <label class="control-label">Objet de DAO :</label>
                             <div class="controls">
                                  <textarea   v-model="edite_appel_offre.objet_appel"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     

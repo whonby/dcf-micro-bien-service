@@ -68,6 +68,7 @@
                                                    option-text="libelle"
                                                    placeholder="Infrastructure"
                                 >
+                                
 
                                 </model-list-select>
                             </td>
@@ -1806,8 +1807,6 @@ console.log(this.listeMarchStatueExecuteAcheve)
                             }, initeVal);
                             montant_execute=parseFloat(montant_execute) + parseFloat(montant)
                         })
-
-
 
                         return montant_execute
                     }

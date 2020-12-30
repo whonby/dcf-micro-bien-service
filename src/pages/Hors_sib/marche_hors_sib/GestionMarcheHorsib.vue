@@ -17,24 +17,25 @@
         <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">
                 <div class="widget-box">
+                  
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                         <li class="active">
                         <a data-toggle="tab" href="#tab00001">Tableau de bord<span class="badge badge-info"></span></a>
                       </li>
 
-                      <!-- <li class="" v-if="admin() || dcf()">
+                      <li class="" >
                         <a data-toggle="tab" href="#tab00007">Importation PPM <span class="badge badge-important"></span></a>
-                      </li> -->
+                      </li>
                      <li class="">
                         <a data-toggle="tab" href="#tab00008">Liste des marchés <span class="badge badge-info"></span></a>
                       </li>
                        <li class="">
                         <a data-toggle="tab" href="#marcheparEntrep">Marché par Entreprise <span class="badge badge-info"></span></a>
                       </li>
-                     <!-- <li class="">
+                     <li class="">
                         <a data-toggle="tab" href="#marchehppm">Liste des marchés Hors PPM   <span class="badge badge-warning"></span></a>
-                      </li> -->
+                      </li>
                        <!-- <li class="">
                         <a data-toggle="tab" href="#marcheEntreprise">Marché par entreprise  <span class="badge badge-warning"></span></a>
                       </li> -->
@@ -52,12 +53,12 @@
                   </div>
                   <div class="widget-content tab-content">
 
-                    <!-- <div id="tab00007" class="tab-pane">
+                    <div id="tab00007" class="tab-pane">
                 <table class="table table-bordered table-striped">
     
                  <PlanPassationMarche></PlanPassationMarche>
               </table>
-                  </div> -->
+                  </div>
 
 
                    <div id="tab00001" class="tab-pane active">
@@ -78,6 +79,12 @@
                 <marcheParEntreprise></marcheParEntreprise>
               
                    </div>
+                   <div id="marchehppm" class="tab-pane">
+                     <table class="table table-bordered table-striped">
+                    <marcheHorsppmHorsSib></marcheHorsppmHorsSib>
+                
+              </table>
+                   </div>
                    
                   </div>
                   <br />
@@ -88,13 +95,18 @@
     </div>
 </template>
 <script>
+import PlanPassationMarche from "../../../pages/bien_service/ppm/PlanPassationMarche.vue"
 import tableauDeBordGestion from "./tableauDeBordGestion"
+//import {admin, dcf} from "../../../../src/Repositories/Auth"
 import marche from "./marche"
+import marcheHorsppmHorsSib from '../../../pages/gestionMarche/marcheHorsppmHorsSib.vue'
 import marcheParEntreprise  from "../marcheParEntreprise/marcheParEntreprise"
 import {mapGetters} from "vuex"
 export default {
     components:{
         marche,
+        marcheHorsppmHorsSib,
+        PlanPassationMarche,
       tableauDeBordGestion,
       marcheParEntreprise
     },
@@ -131,6 +143,8 @@ export default {
  'structures_geographiques','localisations_geographiques']),
 
     ...mapGetters("horSib", ["gettersMarcheHorsib"]),
+    // admin:admin,
+    // dcf:dcf
 
     },
     methods:{

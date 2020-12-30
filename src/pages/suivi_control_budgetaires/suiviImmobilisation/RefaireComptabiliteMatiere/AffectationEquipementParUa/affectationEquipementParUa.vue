@@ -1105,7 +1105,7 @@ search:""
           //return colect.filter(element => element.normeequipement != 0 && element.normeequipement != null)
         return id => {
         if (id != null && id != "") {
-           return colect.filter(items=>items.ua_id == id && items.normeequipement != 0 && items.normeequipement != null);
+           return colect.filter(items=>items.ua_id == id && items.normeequipement != 0);
         }
       };
        }
@@ -1113,7 +1113,7 @@ search:""
       // return this.getterplanOrganisationUa.filter(element => element.normeequipement != 0 && element.normeequipement != null)
  return id => {
         if (id != null && id != "") {
-           return this.getterplanOrganisationUa.filter(items=>items.ua_id == id && items.normeequipement != 0 && items.normeequipement != null);
+           return this.getterplanOrganisationUa.filter(items=>items.ua_id == id && items.normeequipement != 0);
         }
       };
     },
