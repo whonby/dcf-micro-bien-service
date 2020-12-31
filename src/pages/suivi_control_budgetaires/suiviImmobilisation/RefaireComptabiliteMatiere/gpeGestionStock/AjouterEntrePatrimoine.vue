@@ -94,7 +94,7 @@
                         v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.designation"
-                      >{{typeUniteA.designation}}
+                      >{{libelleArticle(typeUniteA.designation)}}
                       
                       
                       
@@ -105,7 +105,7 @@
                         :value="typeUniteA.designation2"
                       >
                       
-                      {{typeUniteA.designation2}}
+                      {{libelleArticle(typeUniteA.designation2)}}
                       
                       </option>
                       <option
@@ -114,7 +114,7 @@
                         :value="typeUniteA.designation3"
                       >
                       
-                      {{typeUniteA.designation3}}
+                      {{libelleArticle(typeUniteA.designation3)}}
                       
                       </option>
                       <option
@@ -123,7 +123,7 @@
                         :value="typeUniteA.designation4"
                       >
                       
-                      {{typeUniteA.designation4}}
+                      {{libelleArticle(typeUniteA.designation4)}}
                       
                       </option>
                       <option
@@ -132,7 +132,7 @@
                         :value="typeUniteA.designation5"
                       >
                       
-                      {{typeUniteA.designation5}}
+                      {{libelleArticle(typeUniteA.designation5)}}
                       
                       </option>
                       <option
@@ -141,7 +141,7 @@
                         :value="typeUniteA.designation6"
                       >
                       
-                      {{typeUniteA.designation6}}
+                      {{libelleArticle(typeUniteA.designation6)}}
                       
                       </option>
                       <option
@@ -150,7 +150,7 @@
                         :value="typeUniteA.designation7"
                       >
                       
-                      {{typeUniteA.designation7}}
+                      {{libelleArticle(typeUniteA.designation7)}}
                       
                       </option>
                       <option
@@ -168,7 +168,7 @@
                         :value="typeUniteA.designation9"
                       >
                       
-                      {{typeUniteA.designation9}}
+                      {{libelleArticle(typeUniteA.designation9)}}
                       
                       </option>
                       <option
@@ -177,7 +177,7 @@
                         :value="typeUniteA.designation10"
                       >
                       
-                      {{typeUniteA.designation10}}
+                      {{libelleArticle(typeUniteA.designation10)}}
                       
                       </option>
                 </select>
@@ -390,7 +390,7 @@
                   <div class="controls">
                     <input
                       type="text"
-                    
+                    v-model="formData.designation"
                       class="span"
                       
                     />
@@ -403,7 +403,7 @@
                   <div class="controls">
                    <input
                       type="text"
-                   
+                   v-model="formData1.matiere"
                       class="span"
                       
                     />
@@ -416,7 +416,7 @@
                   <div class="controls">
                      <input
                       type="text"
-                    
+                    v-model="formData1.couleur"
                       class="span"
                       
                     />
@@ -432,7 +432,7 @@
                   <div class="controls">
                     <input
                       type="text"
-                   
+                   v-model="formData1.revetement"
                       class="span"
                       
                     />
@@ -445,7 +445,7 @@
                   <div class="controls">
                     <input
                       type="text"
-                   
+                   v-model="formData1.dimension"
                       class="span"
                       
                     />
@@ -458,7 +458,7 @@
                   <div class="controls">
                     <input
                       type="text"
-                  
+                  v-model="formData1.prix_unitaire"
                       class="span"
                       
                     />
@@ -1212,6 +1212,22 @@ cf:cf,
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat","personnaliseActeurDepense",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
      
+libelleArticle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 
+        }
+      };
+    },
+
+
+
+
 
      AfficheModelMaterielMobilier() {
       
@@ -1689,17 +1705,51 @@ prixUnitaire() {
      AjouterVehicule() {
       
 
-if(this.formData.typestockage == 1){
-
- var nouveauObjet ={
+if(this.formData.typestockage == 2){
+ var objetNew ={
+        ...this.formData,
+        anneebudgetaire:this.anneeAmort,
+        uniteadministrative:this.formData.uAdministrative_id
+      }
+      this.ajouterNouveauVehicule(objetNew);
+    
+      this.formData = {
+        uniteadministrative:"",
+        numidentification:"",
+        numimmatriculation:"",
+        immobilisation:"",
+        typevehicule:"",
+        marque:"",
+        modele:"",
+        energie:"",
+        numchassis:"",
+        numserie:"",
+        couleur:"",
+        transmission:"",
+        nombreportes:"",
+        nombreplace:"",
+        puissance:"",
+        etatvehicule:"",
+        votreassuranceexpirere:"",
+        
+      };
+ 
+}
+else{
+  var nouveauObjet ={
         ...this.formData1,
         ua_id:this.formData.uAdministrative_id,
-        marche_id:this.formData.marche_id
+        marche_id:this.formData.marche_id,
+        type_bien:this.formData.typestockage
       }
       var nouveauObjet1 ={
-        ...this.formData1,
-        ua_id:this.formData.uAdministrative_id,
         
+        uAdministrative_id:this.formData.uAdministrative_id,
+        quantitestock:this.formData.quantitestock,
+        famill_id:this.formData.famill_id,
+        marque_id:this.formData1.marque_id,
+        model_id:this.formData1.model_id,
+       histo_qte:this.formData.quantitestock,
       }
       this.ajouterFicheArticle(nouveauObjet);
       this.ajouterStockArticle(nouveauObjet1)
@@ -1717,36 +1767,7 @@ if(this.formData.typestockage == 1){
           autreinfo:""
        
       };
-}
-else{
-  
-      var objetNew ={
-        ...this.formData,
-        anneebudgetaire:this.anneeAmort,
-        uniteadministrative:this.formData.uAdministrative_id
-      }
-      this.ajouterNouveauVehicule(objetNew);
-    
-      this.formData = {
-        uniteadministrative:"",
-        numidentification:"",
-        numimmatriculation:"",
-        immobilisation:"",
-        typevehicule:"",
-        marque:"",
-        modele:"",
-        energie:"",
-        	numchassis:"",
-        numserie:"",
-        couleur:"",
-        transmission:"",
-        nombreportes:"",
-        nombreplace:"",
-        puissance:"",
-        etatvehicule:"",
-        votreassuranceexpirere:"",
-        
-      };
+     
 }
 
 

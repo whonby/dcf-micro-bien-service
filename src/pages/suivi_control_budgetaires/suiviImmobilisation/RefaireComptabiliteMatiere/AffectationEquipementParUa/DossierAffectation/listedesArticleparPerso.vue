@@ -111,7 +111,7 @@
            <td colspan="">
              
                            <div class="control-group">
-                            <label class="control-label">{{affichierTotal(this.afficherFonctionId(this.detail_Ua.id))}}Nom et Prénoms{{afficherFonctionId(this.detail_Ua.id)}}</label>
+                            <label class="control-label">Nom et Prénoms</label>
                             <div class="controls">
                               <input type="text" class="span4" readonly :value="afficherActeurDepenseNomPrenoms(afficherActeurDepenseId(detail_Ua.id))"/>
                                
@@ -121,7 +121,7 @@
            <td>
              
                            <div class="control-group">
-                            <label class="control-label">{{afficherValeurOrigine}}Article{{afficherMontantRestant}}</label>
+                            <label class="control-label">Article</label>
                             <div class="controls">
                               <input type="text" class="span4" readonly :value="libelleArticle(editService.famille_id)" />
                                
@@ -173,7 +173,7 @@
             <td>
              
                            <div class="control-group">
-                            <label class="control-label">{{afficherNombreEquipementRestant}}Quantité En stock</label>
+                            <label class="control-label">Quantité En stock</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="afficherQuantiteEnStock(editService.model_id)" readonly/>
                                
@@ -184,7 +184,7 @@
               <td>
              
                            <div class="control-group">
-                            <label class="control-label">Quantité a affecté{{RestantEnStock}}</label>
+                            <label class="control-label">Quantité a affecté</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="formData.qte_affecte"/>
                                
@@ -194,7 +194,7 @@
             <td>
              
                            <div class="control-group">
-                            <label class="control-label">{{afficherIdActePersonnel(detail_Ua.unite_administrative_id,afficherActeurDepenseId(detail_Ua.id))}}Date mise en service{{afficherIdStock(detail_Ua.unite_administrative_id,editService.famille_id,editService.marque_id,editService.model_id)}}</label>
+                            <label class="control-label">Date mise en service</label>
                             <div class="controls">
                               <input type="date" class="span4" v-model="formData.date_mise_service" />
                                

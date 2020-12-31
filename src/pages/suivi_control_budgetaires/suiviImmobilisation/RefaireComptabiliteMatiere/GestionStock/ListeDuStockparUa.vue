@@ -569,7 +569,7 @@
                           <i class=" icon-edit"></i>
                         </span>
                       </button>
-                      <button class="btn btn-danger" @click="supprimerStock(stock.id)">
+                      <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
@@ -1155,6 +1155,7 @@ veifArticlesExist() {
       "modifierStock",
       "supprimerStock"
     ]),
+    ...mapActions("uniteadministrative", ["uniteAdministratives","supprimerStockArticle"]),
     filter(){
                 this.affiche_filtre=!this.affiche_filtre
                

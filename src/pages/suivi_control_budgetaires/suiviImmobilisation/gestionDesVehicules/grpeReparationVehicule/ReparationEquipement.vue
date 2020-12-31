@@ -2,17 +2,45 @@ reparation
 <template>
 
 <div>
-<table class="table table-bordered table-striped">
+  <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
+                <div class="span1">
+
+                </div>
+                <div class="span10 " style="background: #f0c71d !important;">
+                    <table class="table table-striped"  style="background: #f0c71d !important;">
+                        <tbody>
+                        <tr>
+                        
+                            
+                            <td style="background: #f0c71d !important;">
+                                <label style="font-size:20px">Unité Administrative<a href="#" @click.prevent="videUniteAdministrative()" v-if="uniteAdministrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
+                                </label>
+                                <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="uniteAdministratives"
+                                                   v-model="uniteAdministrative_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                            </td>
+                          
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+   
+<!-- <table class="table table-bordered table-striped">
   <tr>
     <td>
-       <!-- <select  class="span5" v-model="formData.uAdministrative_id">
-                      <option></option>                     
-                      <option
-                        v-for="typeUniteA in uniteAdministratives"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select> -->
+      
                     <label class="control-label">Unite Administrative</label>
                      <model-list-select style="background-color: rgb(233,233,233);"
                                                        class="wide"
@@ -26,7 +54,8 @@ reparation
                                     </model-list-select>
     </td>
   </tr>
-</table>
+</table> -->
+
 
             <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">

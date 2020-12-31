@@ -48,15 +48,24 @@ Affectation Véhicule
                 <div class="control-group">
                   <label class="control-label">Unité Administrative Emettrice</label>
                   <div class="controls">
-                        <select v-model="formData2.ua_id" 
+                        <!-- <select v-model="formData2.ua_id" 
                          class="span5">
                       <option
                         v-for="localgeo in uniteAdministratives"
                         :key="localgeo.id"
                         :value="localgeo.id"
                       >{{localgeo.libelle}}</option>
-                    </select>
-                   
+                    </select> -->
+                    <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="uniteAdministratives"
+                                                   v-model="uniteAdministrative_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                   </div>
                 </div>
              </td>
@@ -67,10 +76,10 @@ Affectation Véhicule
                         <select v-model="formData2.famille_id" 
                          class="span5">
                       <option
-                        v-for="localgeo in listeArticleEnStock(formData2.ua_id)"
-                        :key="localgeo.id"
-                        :value="localgeo.famille_id"
-                      >{{localgeo.article_id}}</option>
+                        v-for="localgeo in listeArticleEnStock(uniteAdministrative_id)"
+                        :key="localgeo[0].id"
+                        :value="localgeo[0].famill_id"
+                      >{{libelleArticle(localgeo[0].famill_id)}}</option>
                     </select>
                    
                   </div>
@@ -84,9 +93,9 @@ Affectation Véhicule
                          class="span5">
                       <option
                         v-for="localgeo in listeMarqueEnStock(formData2.famille_id)"
-                        :key="localgeo.id"
-                        :value="localgeo.marque_id"
-                      >{{localgeo.marque_id}}</option>
+                        :key="localgeo[0].id"
+                        :value="localgeo[0].marque_id"
+                      >{{libellemarqueVehicules(localgeo[0].marque_id)}}</option>
                     </select>
                    
                   </div>
@@ -908,7 +917,9 @@ search:""
       "getPersonnaliseBudgetGeneralParTransfert",
       "uniteAdministratives",
       "getvehicules",
-      "GestionStockageArticles"
+      "GestionStockageArticles",
+      "groupStockParActicle",
+      "groupStockArticle"
       // "chapitres",
       // "sections"
     ]),
@@ -947,6 +958,18 @@ search:""
       "getterUa_idImo",
    "EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation","Transmissions"
    ]),
+   libelleArticle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
     filtre_unite_admin() {
                 if(this.noDCfNoAdmin){
                     let colect=[];
@@ -1436,14 +1459,14 @@ afficherLibelleService() {
     listeArticleEnStock() {
       return id => {
         if (id != null && id != "") {
-          return this.GestionStockageArticles.filter(element => element.ua_id == id);
+          return this.groupStockParActicle.filter(element => element[0].uAdministrative_id == id);
         }
       };
     },
     listeMarqueEnStock() {
       return id => {
         if (id != null && id != "") {
-          return this.GestionStockageArticles.filter(element => element.famille_id == id);
+          return this.groupStockArticle.filter(element => element[0].famill_id == id);
         }
       };
     },
@@ -1563,7 +1586,7 @@ formatageSomme:formatageSomme,
 
 }
 .tailgrand1{
-  width: 60%;
+  width: 50%;
   margin: 0 -30%;
 }
 .tailgrand{
