@@ -532,7 +532,7 @@
 
 </td>
 <td>
-    <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+    <router-link :to="{ name: 'detail_hors_sib', params: { id: marche.id }}"
                 class="btn btn-default " title="continue la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link> 
@@ -677,7 +677,7 @@
     </router-link>
                    </td>
                    <td>
-                       <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                       <router-link :to="{ name: 'detail_hors_sib', params: { id: marche.id }}"
                 class="btn btn-default " title="historique la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link>
@@ -926,7 +926,7 @@
     </router-link>
                    </td>
 <td>
-    <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+    <router-link :to="{ name: 'detail_hors_sib', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail marche">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link>

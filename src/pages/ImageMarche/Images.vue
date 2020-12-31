@@ -1,21 +1,34 @@
 <template>
     <div>
-        <div class="container-fluid" style="height: 200em">
 
-            <div class="" style="margin-top: -30px">
+        <div class="container-fluid" style="height: 100em;">
 
-                <div  class="" v-if="affiche_filtre">
-                    <div class="span1">
+            <div class="" >
 
-                    </div>
-                    <div class="span10 card-3" >
-                        <table class="table table-striped">
+                <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
+
+                    <div class="span10 " style="background: #f0c71d !important;">
+                        <table class="table table-striped"  style="background: #f0c71d !important;">
                             <tbody>
                             <tr>
-                                <td>
-                                    <label>UA <a href="#" @click.prevent="videUniteAdmin()" v-if="unite_administrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
+<!--                                <td style="background: #f0c71d !important;" v-if="!noDCfNoAdmin">-->
+
+<!--                                    <label>CF<a href="#" @click.prevent="videTypeCF()" v-if="controlleur_fin" style="color: red"><i class="fa fa-trash-o"></i></a></label>-->
+<!--                                    <model-list-select style="background-color: #fff;"-->
+<!--                                                       class="wide"-->
+<!--                                                       :list="listeCF"-->
+<!--                                                       v-model="controlleur_fin"-->
+<!--                                                       option-value="id"-->
+<!--                                                       option-text="name"-->
+<!--                                                       placeholder="Controleur financier"-->
+<!--                                    >-->
+
+<!--                                    </model-list-select>-->
+<!--                                </td>-->
+                                <td style="background: #f0c71d !important;">
+                                    <label>UA<a href="#" @click.prevent="videUniteAdmin()" v-if="unite_administrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
                                     </label>
-                                    <model-list-select style="background-color: rgb(233,233,233);"
+                                    <model-list-select style="background-color: #fff;"
                                                        class="wide"
                                                        :list="filtre_unite_admin"
                                                        v-model="unite_administrative_id"
@@ -26,10 +39,10 @@
 
                                     </model-list-select>
                                 </td>
-                                <td>
+                                <td style="background: #f0c71d !important;">
                                     <label>Regions <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a>
                                     </label>
-                                    <model-list-select style="background-color: rgb(233,233,233);"
+                                    <model-list-select style="background-color: #fff;"
                                                        class="wide"
                                                        :list="regions"
                                                        v-model="region"
@@ -40,10 +53,10 @@
 
                                     </model-list-select>
                                 </td>
-                                <td>
+                                <td style="background: #f0c71d !important;">
                                     <label>Infrastructure <a href="#" @click.prevent="videInfrastructure()" v-if="infrastructure" style="color: red"><i class="fa fa-trash-o"></i></a>
                                     </label>
-                                    <model-list-select style="background-color: rgb(233,233,233);"
+                                    <model-list-select style="background-color: #fff;"
                                                        class="wide"
                                                        :list="getterInfrastrucure"
                                                        v-model="infrastructure"
@@ -54,10 +67,10 @@
 
                                     </model-list-select>
                                 </td>
-                                <td>
+                                <td style="background: #f0c71d !important;">
                                     <label>Type Marché  <a href="#" @click.prevent="videTypeMarche()" v-if="type_marche" style="color: red"><i class="fa fa-trash-o"></i></a>
                                     </label>
-                                    <model-list-select style="background-color: rgb(233,233,233);"
+                                    <model-list-select style="background-color: #fff;"
                                                        class="wide"
                                                        :list="typeMarches"
                                                        v-model="type_marche"
@@ -68,20 +81,7 @@
 
                                     </model-list-select>
                                 </td>
-                                <!--<td>-->
-                                <!--<label>CF-->
-                                <!--</label>-->
-                                <!--<model-list-select style="background-color: rgb(255,255,255);"-->
-                                <!--class="wide"-->
-                                <!--:list="filtre_unite_admin"-->
-                                <!--v-model="unite_administrative_id"-->
-                                <!--option-value="id"-->
-                                <!--option-text="libelle"-->
-                                <!--placeholder="Unité administrative"-->
-                                <!--&gt;-->
 
-                                <!--</model-list-select>-->
-                                <!--</td>-->
                             </tr>
 
                             </tbody>
@@ -89,227 +89,48 @@
 
                     </div>
 
-                </div>
-                <!--<DraggableDiv class="col-11">-->
-                <!--&lt;!&ndash;<template slot="header">&ndash;&gt;-->
-                <!--&lt;!&ndash;<div>GUEIEI ROLAND</div>&ndash;&gt;-->
-                <!--&lt;!&ndash;</template>&ndash;&gt;-->
-                <!--<template slot="main" >-->
-                <!---->
-                <!--</template>-->
-                <!--&lt;!&ndash;<template slot="footer">&ndash;&gt;-->
-                <!--&lt;!&ndash;<div>GUEIEI 5555555</div>&ndash;&gt;-->
-                <!--&lt;!&ndash;</template>&ndash;&gt;-->
-                <!--</DraggableDiv>-->
 
-                <div  class="row-fluid">
-                    <div class="span7"><h4>Tableau de bord gestion marche, Exercice {{anneeAmort}}</h4></div>
-                    <div class="span4" align="right"><h4>Nombre de marché (<font color="blue" size="5">{{nombreTotalMarche}}</font>)</h4></div>
                 </div>
 
+                <hr v-if="affiche_filtre">
 
-                <nav aria-label="breadcrumb" class="main-breadcrumb">
-                    <ol class="breadcrumb" >
-                        <li class="breadcrumb-item" v-if="!unite_administrative_id"> Situation General des marchés &nbsp;&nbsp;&nbsp;&nbsp; /</li>
-                        <li class="breadcrumb-item" v-if="unite_administrative_id"> Situation {{nomUniteAdmin(unite_administrative_id)}} des marchés &nbsp;&nbsp;&nbsp;&nbsp; /</li>
-                        <li class="breadcrumb-item" v-if="region"> Région {{nomRegions(region)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
-                        <li class="breadcrumb-item" v-if="infrastructure"> Infrastructutre {{nomInfrastructure(infrastructure)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
 
-                        <li class="breadcrumb-item" v-if="type_marche"> Type Marche {{nomTypeMarche(type_marche)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
-                        <li class="breadcrumb-item" v-if="info_status_marche" v-html="info_status_marche">  </li>
+
+                <nav aria-label="breadcrumb" class="main-breadcrumb" style="background: #806000">
+                    <ol class="breadcrumb" style="background: #806000 !important">
+                        <li class="breadcrumb-item" style="color: #fff !important;" > INFORMATIONS GENERALES - MARCHES/CONTRATS&nbsp;&nbsp;&nbsp;&nbsp; / </li>
+                        <li class="breadcrumb-item" style="color: #fff !important;" v-if="unite_administrative_id"> Situation {{nomUniteAdmin(unite_administrative_id)}} des marchés &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+                        <li class="breadcrumb-item"  style="color: #fff !important;" v-if="region"> Région {{nomRegions(region)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+                        <li class="breadcrumb-item"  style="color: #fff !important;" v-if="infrastructure"> Infrastructutre {{nomInfrastructure(infrastructure)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+
+                        <li class="breadcrumb-item"  style="color: #fff !important;" v-if="type_marche"> Type Marche {{nomTypeMarche(type_marche)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
+                        <li class="breadcrumb-item"  style="color: #fff !important;" v-if="info_status_marche" v-html="info_status_marche">  </li>
+                        <!--<li class="breadcrumb-item"> <button class="btn btn-info" @click="print"><i class="icon-print"></i></button></li>-->
                     </ol>
                 </nav>
 
-                <!-----------------TABLEAU DE BORD MONTANT MARCHE------------------------>
-                <div class="">
-                    <div class="row-fluid" style="margin-top: -20px">
-                        <div class="span3">
-                            <div class="card-box bg-prevision">
-                                <div class="inner">
-                                    <h3> {{formatageSomme(montantPrevue)}} </h3>
-                                    <p> Montant previsionnel </p>
-                                </div>
 
-                                <div class="icon">
-
-                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="span3">
-                            <div class="card-box bg-base">
-                                <div class="inner">
-                                    <h3> {{formatageSomme(montantApprouveMarche)}}  </h3>
-                                    <p> Montant de base + avenant
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="span2">
-                            <div class="card-box bg-green">
-                                <div class="inner">
-                                    <h3> {{formatageSomme(montantExecute)}} </h3>
-                                    <p> Montant execute </p>
-
-                                </div>
-
-                                <div class="icon">
-
-                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="span2">
-                            <div class="card-box bg-restant">
-                                <div class="inner">
-                                    <h3> {{formatageSomme(montantRestant)}} </h3>
-                                    <p> Montant restant
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="span2">
-                            <div class="card-box bg-taux">
-                                <div class="inner">
-                                    <h3> {{tauxExecution}} % </h3>
-                                    <p> Taux execution </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!--------------------FIN TABLEAU DE BORD FIN MARCHE---------------------->
-
-
-
-                <!---------------------TABLEAU DE BORD ETAT MARCHE--------------------->
 
 
                 <div class="">
-                    <div class="row-fluid" style="margin-top: -20px">
-                        <div class="span3">
-                            <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 60px !important; cursor: grab !important;" @click="listeMarcheStatus('planifie')">
-                                <div class="inner">
-                                    <h3> {{nombreMarcheParStatue("planifie")}} </h3>
-                                    <p> En attente de contratualisation hors alert </p>
-                                </div>
 
-                                <div class="icon2">
-                                    {{pourcentageMarchePasStatus("planifie")}}%
-                                </div>
 
-                            </div>
-                        </div>
 
-                        <div class="span3">
-                            <div @click="listeMarcheStatus(8)" class="card-box bg-attente-contratualisation-avec-alert" style="height: 60px !important; cursor: grab !important;">
-                                <div class="inner">
-                                    <h3>  {{nombreMarcheParStatue(8)}}  </h3>
-                                    <p> En attente de contratualisation avec alert
-                                    </p>
-                                </div>
-                                <div class="icon2">
-                                    {{pourcentageMarchePasStatus(8)}}%
-                                </div>
 
-                            </div>
-                        </div>
-                        <div class="span2">
-                            <div @click="listeMarcheStatus(1)" class="card-box bg-en-contratualisation" style="height: 60px !important; cursor: grab !important;">
-                                <div class="inner">
-                                    <h3> {{nombreMarcheParStatue(1)}} </h3>
-                                    <p> En contratualisation  </p>
-                                </div>
-                                <div class="icon2">
+                    <div class="row-fluid" style="" id="printMe">
 
-                                    {{pourcentageMarchePasStatus(1)}}%
-                                </div>
 
-                            </div>
-                        </div>
-                        <div class="span2">
-                            <div @click="listeMarcheStatus(2)" class="card-box bg-en-execution" style="height: 60px !important; cursor: grab !important;">
-                                <div class="inner">
-                                    <h3> {{nombreMarcheParStatue(2)}} </h3>
-                                    <p> En execution
-                                    </p>
-                                </div>
-                                <div class="icon2">
-                                    {{pourcentageMarchePasStatus(2)}}%
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="span2">
-                            <div @click="listeMarcheStatus(7)" class="card-box bg-en-souffrance" style="height: 60px !important; cursor: grab !important;">
-                                <div class="inner">
-                                    <h3> {{parseFloat(nombreMarcheParStatue(7)) + parseFloat(nombreMarcheParStatue(3))}} </h3>
-                                    <p> En souffrance </p>
-                                </div>
-                                <div class="icon2">
-                                    {{pourcentageMarchePasStatus(7)}}%
-                                </div>
-
-                            </div>
-                        </div>
                     </div>
 
 
-                    <div class="row-fluid">
-                        <div class="span4" style="border: 1px dotted #EEEEEE;">
-                            <apexchart type="pie" width="350" :options="chartOptions" :series="dataPourcentage"></apexchart>
-                        </div>
-                        <div class="span8" >
-                            <nav aria-label="breadcrumb" class="main-breadcrumb" v-if="info_status_marche">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"  v-html="info_status_marche">  </li>
-                                </ol>
-                            </nav>
-                            <table class="table   table-bordered table-striped" v-if="info_status_marche">
-                                <thead>
-                                <tr>
-                                    <th>UA </th>
-                                    <th>Nombre Marche</th>
-                                    <th>Montant prevue</th>
-                                    <th v-if="status_marches==2">Montant base</th>
-                                    <th>Taux</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody >
-                                <tr v-for="unite in listeUniteAdministrative" :key="unite.id">
-                                    <td>{{unite.libelle}}</td>
-                                    <td>{{nbrTotalMarchePasUA(unite.id)}} </td>
-                                    <td>{{formatageSomme(montantPrevuePasUA(unite.id))}}</td>
-                                    <td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>
-                                    <td>{{tauxStatusMarchePasUniteAdministrative(unite.id)}} %</td>
-                                    <td> <a href="#" @click="selectionUnite(unite.id)" class="btn btn-default " title="Detail marches">
-                                        <span class=""><i class="icon-folder-open"></i></span>
-                                    </a></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+
+
+
                 </div>
                 <!--------------------FIN TABLEAU BORD FIN ETAT MARCHE--------------->
+
+
+
 
             </div>
         </div>
@@ -333,27 +154,30 @@
 
         ></fab>
 
+
+
+
         {{dataArrayPourcentage}}
     </div>
 </template>
 
 <script>
-    import VueApexCharts from 'vue-apexcharts'
+   // import VueApexCharts from 'vue-apexcharts'
     import { mapGetters,mapActions } from "vuex";
-    import {noDCfNoAdmin} from "../../Repositories/Auth"
+    import {noDCfNoAdmin,dcf} from "../../Repositories/Auth"
     import {formatageSomme} from '../../Repositories/Repository'
     import {  ModelListSelect } from 'vue-search-select'
     import 'vue-search-select/dist/VueSearchSelect.css'
     // import DraggableDiv from '../../components/DraggableDiv/DraggableDiv'
     export default {
-        name: "TableauBordGestionMarche",
+        name: "Images",
         components: {
-            apexchart: VueApexCharts,
+
             ModelListSelect,
-            //  DraggableDiv
         },
         data() {
             return{
+                controlleur_fin:"",
                 status_marches:"",
                 unite_administrative_id:"",
                 infrastructure:"",
@@ -379,8 +203,8 @@
                         width: 380,
                         type: 'pie',
                     },
-                    labels: ['A.C.H.A', 'A.C.A.A', 'En Cont.', 'En Execution', 'En Souffrance.'],
-                    colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"],
+                    labels: ['A.Contra.', 'A.C.H.D', 'En Cont.', 'EN Contr.H.D', 'En Execution',"En Execution HD","Acheve Delais","Acheve H.D","En souffrance"],
+                    colors:['#8ea9db', '#f4b084', '#92d04f',"#632990","#d7b755","#d36f2a","#00b04f","#757171","#ff0000"],
                     responsive: [{
                         breakpoint: 480,
                         options: {
@@ -397,6 +221,9 @@
 
 
 
+        },
+        created(){
+            console.log(this.listeMarchStatueExecuteAcheve)
         },
         computed: {
             ...mapGetters("uniteadministrative", [
@@ -416,7 +243,18 @@
 
             ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise",
                 "getterImageMarche","acteEffetFinanciers","getActeEffetFinancierPersonnaliser45","typeMarches","avenants",]),
+            ...mapGetters("Utilisateurs", ["getterUtilisateur","getterRoles"]),
+            listeCF(){
+                return this.getterUtilisateur.filter(item=>{
+                    if(item.user_role){
+                        if (item.user_role.role.code_role=="DCF" || item.user_role.role.code_role=="CF"){
+                            return item
+                        }
+                    }
+                })
+            },
             noDCfNoAdmin:noDCfNoAdmin,
+            dcf:dcf,
             regions(){
                 // console.log(this.localisations_geographiques.filter(item=>item.structure_localisation_geographique.niveau==2))
                 return this.localisations_geographiques.filter(item=>{
@@ -430,7 +268,6 @@
                     let colect=[];
                     let vM=this
                     this.uniteAdministratives.filter(item=>{
-                        console.log("OK bonjour GUE")
                         if(vM.getterUniteAdministrativeByUser.length>0){
                             let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
                             if (val!=undefined){
@@ -799,6 +636,49 @@
                 return 0;
             },
 
+            nbreAvenant(){
+                if(this.objetMarchePasUniteOuRegion.length>0){
+                    let vm=this;
+                    let nbr=0;
+                    this.objetMarchePasUniteOuRegion.forEach(function (val) {
+                        let objetAvenant=vm.avenants.filter(item=>item.marche_id==val.id).length
+
+                        if(objetAvenant!=undefined){
+                            nbr=nbr + objetAvenant
+                        }
+
+                    })
+                    return nbr
+                }
+                return 0;
+            },
+            montantAvenant(){
+                if(this.objetMarchePasUniteOuRegion.length>0){
+                    //acteEffetFinanciers
+                    let vm=this;
+                    //let montantTotal=0;
+                    let montant_tatal=0;
+                    this.objetMarchePasUniteOuRegion.forEach(function (val) {
+
+                        let montant_avenant=0;
+                        let objetAvenant=vm.avenants.filter(item=>item.marche_id==val.id)
+                        if(objetAvenant!=undefined){
+                            let initeVal = 0;
+                            montant_avenant=objetAvenant.reduce(function (total, currentValue) {
+                                return total + parseFloat(currentValue.montant_avenant) ;
+                            }, initeVal);
+                        }
+                        montant_tatal=parseFloat(montant_tatal)+parseFloat(montant_avenant)
+                    })
+                    return montant_tatal
+                }
+                return 0;
+            },
+            pourcentageMontantAvenant(){
+                let taux=(this.montantAvenant * 100)/this.montantApprouveMarche
+
+                return taux.toFixed(2)
+            },
             montantExecute(){
                 if(this.objetMarchePasUniteOuRegion.length>0){
                     let montant_execute=0;
@@ -845,7 +725,11 @@
                 vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus("planifie")))
                 vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(8)))
                 vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(1)))
+                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(9)))
                 vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(2)))
+                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(10)))
+                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(11)))
+                vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(12)))
                 vm.dataPourcentage.push(parseFloat(this.pourcentageMarchePasStatus(7)))
                 return ""
             },
@@ -886,6 +770,68 @@
                     }, initeVal);
 
                 }
+            },
+
+            /**
+             * Calcule de taux financier pas unite administrative en fonction des etats des marchés
+             * @returns {Function}
+             */
+            tauxFinnancieStatusSelectionnerPasUA(){
+                return (unite,status)=>{
+                    console.log(status)
+                    if (status==0){
+                        let taux=(this.montantPrevuePasUA(unite) *100)/ this.montantStatusSelectionnerPrevueTotal
+                        return taux.toFixed(2)
+                    }
+                    if(unite!="" && status!=""){
+                        if(status==0 || status==8 || status==1 || status==9 ){
+                            console.log(unite)
+                            let taux=(this.montantPrevuePasUA(unite) *100)/ this.montantStatusSelectionnerPrevueTotal
+                            return taux.toFixed(2)
+                        }
+
+
+                        if(status==2 || status==10 || status==11 || status==12 || status==12){
+                            let taux2=(this.montantApprouvePasUA(unite) *100)/ this.montantApprouveStatusSelectionneTotal
+                            return taux2.toFixed(2)
+                        }
+                    }
+                }
+            },
+            /**
+             * Calcule de montant prevue fonction des etats des marchés
+             * @returns {Function}
+             */
+            montantStatusSelectionnerPrevueTotal(){
+                let initeVal=0
+                let vm=this
+                return vm.listeDesMarchePasStatus.reduce(function (total, currentValue) {
+                    return total + parseFloat(currentValue.montant_marche) ;
+                }, initeVal);
+            },
+            /**
+             * Calcule de montant approuve fonction des etats des marchés
+             * @returns {Function}
+             */
+            montantApprouveStatusSelectionneTotal(){
+                let vm=this;
+                let montantTotal=0;
+                vm.listeDesMarchePasStatus.forEach(function (val) {
+                    let objetAct=vm.getActeEffetFinancierPersonnaliser45.find(item=>item.marche_id==val.id)
+                    let montant_avenant=0;
+                    let objetAvenant=vm.avenants.filter(item=>item.marche_id==val.id)
+                    if(objetAvenant!=undefined){
+                        let initeVal = 0;
+                        montant_avenant=objetAvenant.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montant_avenant) ;
+                        }, initeVal);
+                    }
+                    if(objetAct!=undefined){
+                        //  console.log(objetAct)
+                        montantTotal=parseFloat(montantTotal)+ parseFloat(objetAct.montant_act)+parseFloat(montant_avenant)
+                    }
+                })
+                return montantTotal
             },
             montantApprouvePasUA(){
                 return unite=>{
@@ -960,27 +906,172 @@
                 return status=>{
                     if(status==0){
                         //  colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"]
-                        return "<font color='#410041'>En attente de contratualisation hors alert</font>"
+                        return "<font color='#fff'>En attente de contratualisation </font>"
                     }
                     if(status==8){
-                        return "<font color='#e81776'>En attente de contratualisation avec alert</font>"
+                        return "<font color='#fff'>En attente de contratualisation hors delait</font>"
                     }
                     if(status==1){
-                        return "<font color='#FF00FF'>En contratualisation</font>"
+                        return "<font color='#fff'>En contratualisation</font>"
+                    }
+                    if(status==9){
+                        return "<font color='#fff'>En contractualisation Hors délai</font>"
                     }
 
                     if(status==2){
-                        return "<font color='#008000'>En execution</font>"
+                        return "<font color='#fff'>En execution</font>"
+                    }
+                    if(status==10){
+                        return "<font color='#fff'>En execution Hors délai</font>"
+                    }
+
+                    if(status==11){
+                        return "<font color='#fff'>Acheve dans le delais</font>"
+                    }
+                    if(status==12){
+                        return "<font color='#fff'>Acheve hors delais</font>"
                     }
 
                     if(status==7){
-                        return "<font color='#b5160e'>En suffrance</font>"
+                        return "<font color='#fff'>En suffrance</font>"
                     }
                     return null
                 }
             },
+            getColorByStatus(){
+                return status=>{
+
+                    if(status==0){
+                        //  colors:['#410041', '#e81776', '#FF00FF',"#008000","#b5160e"]
+                        return "#8ea9db !important"
+                    }
+                    if(status==8){
+                        return "#f4b084 !important"
+                    }
+                    if(status==1){
+                        return "#92d04f !important"
+                    }
+                    if(status==9){
+                        return "#632990 !important"
+                    }
+
+                    if(status==2){
+                        return "#d7b755 !important"
+                    }
+                    if(status==10){
+                        return "#d36f2a !important"
+                    }
+
+                    if(status==11){
+                        return "#00b04f !important"
+                    }
+                    if(status==12){
+                        return "#757171 !important"
+                    }
+
+                    if(status==7){
+                        return "#ff0000 !important"
+                    }
+                    return null
+                }
+            },
+            montantPasStatusContratPlanifie(){
+                return status=>{
+                    if(status=="planifie"){
+                        status=0;
+                    }
+                    let initeVal = 0;
+                    let montant_prevue=  this.listeMarchStatuePlanifieContratualisation.filter(item=>item.attribue==status).reduce(function (total, currentValue) {
+                        return total + parseFloat(currentValue.montant_marche) ;
+                    }, initeVal);
+                    return montant_prevue
+                }
+            },
+            pourcentageMontantPrevuePasSatus(){
+                return status=>{
+                    let taux=(this.montantPasStatusContratPlanifie(status) * 100) / this.montantTotaleMarchePlanifieContratuel
+                    return taux.toFixed(2)
+                }
+            },
+            pourcentageMontantExcuteAcheve(){
+                return status=>{
+                    let taux=(this.montantPasStatusExecutionAcheve(status) * 100) / this.montantTotaleMarcheExecutionAcheve
+                    return taux.toFixed(2)
+                }
+            },
+            montantPasStatusExecutionAcheve(){
+                return status=>{
+                    if(this.listeMarchStatueExecuteAcheve.length>0){
+                        let montant_execute=0;
+                        let vm=this;
+
+                        this.listeMarchStatueExecuteAcheve.filter(item=>item.attribue==status).forEach(function (val) {
+                            let initeVal = 0;
+                            let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                                return total + parseFloat(currentValue.montantmarche) ;
+                            }, initeVal);
+                            montant_execute=parseFloat(montant_execute) + parseFloat(montant)
+                        })
 
 
+
+                        return montant_execute
+                    }
+                    return 0;
+                }
+            },
+
+
+            montantTotaleMarchePlanifieContratuel(){
+                let initeVal = 0;
+                let montant_prevue=  this.listeMarchStatuePlanifieContratualisation.reduce(function (total, currentValue) {
+                    return total + parseFloat(currentValue.montant_marche) ;
+                }, initeVal);
+                return montant_prevue
+            },
+
+            montantTotaleMarcheExecutionAcheve(){
+                if(this.listeMarchStatueExecuteAcheve.length>0){
+                    let montant_execute=0;
+                    let vm=this;
+
+                    this.listeMarchStatueExecuteAcheve.forEach(function (val) {
+                        let initeVal = 0;
+                        let montant=vm.decomptefactures.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montantmarche) ;
+                        }, initeVal);
+                        montant_execute=parseFloat(montant_execute) + parseFloat(montant)
+                    })
+
+
+
+                    return montant_execute
+                }
+                return 0;
+            },
+
+            listeMarchStatuePlanifieContratualisation(){
+
+                let objet4=this.objetMarchePasUniteOuRegion.filter(item=>{
+                    if(item.attribue==9 || item.attribue==1 || item.attribue==8 || item.attribue==0){
+                        return item
+                    }
+                })
+
+                // console.log(objet4.length)
+                return objet4
+            },
+            listeMarchStatueExecuteAcheve(){
+
+                let objet4=this.objetMarchePasUniteOuRegion.filter(item=>{
+                    if(item.attribue==2 || item.attribue==11 || item.attribue==10 || item.attribue==11 || item.attribue==7 || item.attribue==3){
+                        return item
+                    }
+                })
+
+                console.log(objet4.length)
+                return objet4
+            },
 
 
         }
@@ -989,15 +1080,18 @@
             ...mapActions("bienService", ["ajouterTableauBordFiltre","ajouterInfoTableauBordFiltre"]),
             selectionUnite(id){
 
+                let stat="pl"
                 if(this.status_marches=="planifie"){
                     this.status_marches=0
+                    stat="planifier"
                 }
                 let objet={
                     status_marche:this.status_marches,
                     infrastructure:this.infrastructure,
                     unite_administrative:id,
                     type_marche:this.type_marche,
-                    region:this.region
+                    region:this.region,
+                    stat:stat
                 }
                 // console.log(this.objetMarchePasUniteOuRegion)
 
@@ -1027,6 +1121,9 @@
             },
             videTypeMarche(){
                 this.type_marche=""
+            },
+            videTypeCF(){
+                this.controlleur_fin=""
             },
             filter(){
                 this.affiche_filtre=!this.affiche_filtre
@@ -1205,28 +1302,98 @@
                 this.tableMarcheStatue=distinct
 
 
-            }
+            },
+            afficherModalAjouterTitre(){
+                this.$('#exampleModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            },
+            print () {
+                // Pass the element id here
+                this.$htmlToPaper('printMe');
+            },
+            click_cartographie(){
+
+                let stat="pl"
+
+                if(this.info_status_marche!=""){
+                    if(this.status_marches=="planifie"){
+
+                        this.status_marches=0
+                        stat="planifier"
+                    }
+
+                    if(this.status_marches==0){
+
+                        this.status_marches="planifier"
+                        stat="planifier"
+                    }
+                }else{
+                    this.status_marches=""
+                }
+
+
+
+                let objet={
+                    status_marche:this.status_marches,
+                    infrastructure:this.infrastructure,
+                    unite_administrative:this.unite_administrative_id,
+                    type_marche:this.type_marche,
+                    region:this.region,
+                    statut:stat
+                }
+
+                console.log(objet)
+                // console.log(this.objetMarchePasUniteOuRegion)
+
+//        let objetMarche=this.objetMarchePasUniteOuRegion.filter(item=>{
+//            if(item.unite_administrative_id==id && item.attribue==this.status_marches){
+//                return item
+//            }
+//
+//        })
+//        this.ajouterTableauBordFiltre(objetMarche)
+                this.ajouterInfoTableauBordFiltre(objet)
+
+                this.$router.push({
+                    name: 'TableauBordCartographie'
+                })
+            },
+            generateReport () {
+                this.$refs.html2Pdf.generatePdf()
+            },
+
 
 
         },
         watch: {
             type_marche:function (value) {
                 console.log(value);
-                this.listeMarcheStatus(this.status_marches)
+                if(this.info_status_marche!=""){
+                    this.listeMarcheStatus(this.status_marches)
+                }
+
 
             },
 
             infrastructure: function (value) {
                 console.log(value);
-                this.listeMarcheStatus(this.status_marches)
+                if(this.info_status_marche!=""){
+                    this.listeMarcheStatus(this.status_marches)
+                }
             },
             region: function (value) {
                 console.log(value);
-                this.listeMarcheStatus(this.status_marches)
+                if(this.info_status_marche!=""){
+                    this.listeMarcheStatus(this.status_marches)
+                }
             },
             unite_administrative_id: function (value) {
                 console.log(value);
-                this.listeMarcheStatus(this.status_marches)
+                if(this.info_status_marche!=""){
+                    this.listeMarcheStatus(this.status_marches)
+                }
             },
 
         },
@@ -1371,7 +1538,8 @@
         color: #fff;
         padding: 10px 10px 30px;
         margin: 10px 0px;
-        height: 45px;
+        height: 55px !important;
+        font-size: 13px !important;
     }
     .card-box:hover {
         text-decoration: none;
@@ -1380,6 +1548,7 @@
 
     .card-box .inner {
         padding: 5px 10px 0 10px;
+        font-size: 5em !important;
     }
     .card-box h3 {
         font-size: 12px;
@@ -1401,14 +1570,23 @@
         font-size: 50px;
         color: rgba(0, 0, 0, 0.15);
     }
+    .card-box .icon3 {
+        position: absolute;
+        top: auto;
+        bottom: 35px;
+        right: 3px;
+        z-index: 0;
+        font-size: 13px;
+        color: #f2f2f2;
+    }
 
     .card-box .icon2 {
         position: absolute;
         top: auto;
-        bottom: 45px;
+        bottom: 5px;
         right: 3px;
         z-index: 0;
-        font-size: 20px;
+        font-size: 10px;
         color: #f2f2f2;
     }
 
@@ -1455,22 +1633,42 @@
 
     .bg-attente-contratualisation-hors-alert {
 
-        background-color: #410041 !important;
+        background-color: #8ea9db !important;
     }
     .bg-attente-contratualisation-avec-alert {
-        background-color: #e81776 !important;
+        background-color: #f4b084 !important;
     }
     .bg-en-contratualisation {
-        background-color: #FF00FF !important;
+        background-color: #92d050 !important;
     }
 
+    .bg-en-contratualisation-hort-delais {
+        background-color: #652b92 !important;
+    }
     .bg-en-execution {
-        background-color: #008000 !important;
-    }
-    .bg-en-souffrance {
-        background-color: darkred !important;
+        background-color: #d7b755 !important;
     }
 
+    .bg-en-execution-horts-delais {
+        background-color: #d36f2b !important;
+    }
+
+    .bg-acheve-hors-delais {
+        background-color: #00b04f !important;
+    }
+
+    .bg-en-souffrance {
+        background-color: red !important;
+    }
+    .bg-en-avenant{
+        background-color: #ff6c1d !important;
+    }
+    .bg-acheve-delais {
+        background-color: #757171 !important;
+    }
+    .bg-horts-ppm{
+        background-color: #ffb62f !important;
+    }
 
     .red {
         color: #fff !important;
@@ -1596,4 +1794,80 @@
 
 
 
+
+
+    /*
+ CSS for the main interaction
+*/
+    .tabset1 > input[type="radio"] {
+        position: absolute;
+        left: -200vw;
+    }
+
+    .tabset1 .tab-panel {
+        display: none;
+    }
+
+    .tabset1 > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
+    .tabset1 > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
+    .tabset1 > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
+    .tabset1 > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
+    .tabset1 > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
+    .tabset1 > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+        display: block;
+    }
+
+
+
+    .tabset1 > label {
+        position: relative;
+        display: inline-block;
+        padding: 15px 15px 25px;
+        border: 1px solid transparent;
+        border-bottom: 0;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .tabset1 > label::after {
+        content: "";
+        position: absolute;
+        left: 15px;
+        bottom: 10px;
+        width: 22px;
+        height: 4px;
+        background: #8d8d8d;
+    }
+
+    .tabset1 > label:hover,
+    .tabset1 > input:focus + label {
+        color: #06c;
+    }
+
+    .tabset1 > label:hover::after,
+    .tabset1 > input:focus + label::after,
+    .tabset1 > input:checked + label::after {
+        background: #06c;
+    }
+
+    .tabset1 > input:checked + label {
+        border-color: #ccc;
+        border-bottom: 1px solid #fff;
+        margin-bottom: -1px;
+    }
+
+    .tab-panel {
+        padding: 30px 0;
+        border-top: 1px solid #ccc;
+    }
+
+
+
+    .tabset1 {
+        max-width: 65em;
+    }
+
+    body {
+        background: #f9f9f9 !important;
+    }
 </style>

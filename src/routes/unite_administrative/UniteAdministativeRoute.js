@@ -43,7 +43,25 @@ import ReparationVehicule from "../../pages/suivi_control_budgetaires/suiviImmob
 import ListeStockArticle from "../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/gpeGestionStock/ListeStockArticle.vue"
 
 
+import ReportingBudget from "../../pages/unites_administratives/ReportingBudget/ReportingBudget.vue"
+import listeDesUaBudget from "../../pages/unites_administratives/ReportingBudget/listeDesUaBudget.vue"
+import DetailBudgetUa from "../../pages/unites_administratives/ReportingBudget/DetailBudgetUa.vue"
 const UniteAdministativeRoutes = [
+  {
+    path: "/DetailBudgetUa/:id",
+    name: "DetailBudgetUa",
+    component: DetailBudgetUa
+},
+  {
+    path: "/listeDesUaBudget",
+    name: "listeDesUaBudget",
+    component: listeDesUaBudget
+},
+  {
+    path: "/ReportingBudget",
+    name: "ReportingBudget",
+    component: ReportingBudget
+},
   {
     path: "/ListeStockArticle",
     name: "ListeStockArticle",

@@ -141,6 +141,12 @@
               SYNTHESE DU BUDGET
             </router-link>
           </li>
+          <li class="divider"></li>
+           <li>
+            <router-link :to="{name: 'listeDesUaBudget'}" tag="a">
+              REPORTING DU BUDGET PAR UA
+            </router-link>
+          </li>
 
     </ul>
   </div>

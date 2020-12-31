@@ -577,8 +577,8 @@
     <div v-if="isFormulaireDossierCandidature">
       <h6><button class="btn btn-success"
                   @click="NotisFormulaireDossierCand"
-                  v-if="!isButtunAddDossierCandidat">Afficher la liste des dossier de candidature</button></h6>
-<h5>Formulaire d'enregistrement du dossier de candidature</h5>
+                  v-if="!isButtunAddDossierCandidat">Afficher la liste des dossiers des soumissionnaires</button></h6>
+<h5>Formulaire d'enregistrement du dossier du soumissionnaire</h5>
       <table class="table table-bordered table-striped">
         <tr class="odd gradeX" >
           <td colspan="4" width="">
@@ -613,9 +613,9 @@
 
           <td>
             <div class="control-group">
-              <label class="control-label">Numero de compte contribuable</label>
+              <label class="control-label">Numéro de compte contribuable</label>
               <div class="controls">
-                <input type="text" class="span" placeholder="Situation Geographique" :value="afficherNumeroContribuableEntreprise(formDossierCadidature.entreprise_id)">
+                <input type="text" class="span" placeholder="Compte contribuable" :value="afficherNumeroContribuableEntreprise(formDossierCadidature.entreprise_id)">
               </div>
             </div>
           </td>
@@ -640,15 +640,15 @@
         <tr class="odd gradeX">
           <td>
             <div class="control-group">
-              <label class="control-label">Telephone</label>
+              <label class="control-label">Téléphone</label>
               <div class="controls">
-                <input type="text" class="span" placeholder="Telphone" :value="afficherTelephoneEntreprise(formDossierCadidature.entreprise_id)">
+                <input type="text" class="span" placeholder="Téléphone" :value="afficherTelephoneEntreprise(formDossierCadidature.entreprise_id)">
               </div>
             </div>
           </td>
           <td>
             <div class="control-group">
-              <label class="control-label">Address </label>
+              <label class="control-label">Adresse </label>
               <div class="controls">
                 <input type="text" class="span" placeholder="Adresse" :value="afficherAdressEntreprise(formDossierCadidature.entreprise_id)">
               </div>
@@ -658,7 +658,7 @@
           <td>
 
             <div class="control-group">
-              <label class="control-label">Numero de dossier</label>
+              <label class="control-label">Numéro de dossier</label>
               <div class="controls">
                 <input type="text" readonly class="span" placeholder="Numero dossier" v-model="formDossierCadidature.numero_dossier">
               </div>
@@ -752,7 +752,7 @@
 
               <td>
                 <div class="control-group">
-                  <label class="control-label">Fiche rsgnt </label>
+                  <label class="control-label">Fiche de renseignement </label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Fiche renseignement" v-model="formDossierCadidature.fiche_rsgnt_cand">
                   </div>
@@ -760,7 +760,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Piece admin</label>
+                  <label class="control-label">Pièce administratif</label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Piece Admin" v-model="formDossierCadidature.piece_admin">
                   </div>
@@ -771,7 +771,7 @@
             <tr class="odd gradeX">
               <td>
                 <div class="control-group">
-                  <label class="control-label">Fiche rsgnt nombre groupe</label>
+                  <label class="control-label">Fiche renseignement nombre groupe</label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Fiche renseignement nombre groupe" v-model="formDossierCadidature.fiche_rsgnt_mbre_group">
                   </div>
@@ -779,7 +779,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Atcdent marche non exe</label>
+                  <label class="control-label">Antécédent marche non exe</label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Atcent marche non exe" v-model="formDossierCadidature.atcdent_marche_non_exe">
                   </div>
@@ -894,7 +894,7 @@
         </div>
 
         <a @click.prevent="ajouterDossierCandidature" class="btn btn-primary"
-           href="#">Enregistre dossier candidature</a>
+           href="#">Enregistrer dossier du soumissionnaire</a>
 
       </div>
     </div>
@@ -915,7 +915,7 @@
       <div class="widget-title">
         <ul class="nav nav-tabs">
           <li class="active"><a data-toggle="tab" href="#offre_tech">OFFRE TECHNIQUE</a></li>
-          <li class=""><a data-toggle="tab" href="#offre_fin">OFFRE FINANCIER</a></li>
+          <li class=""><a data-toggle="tab" href="#offre_fin">OFFRE FINANCIERE</a></li>
         </ul>
       </div>
 
@@ -1641,6 +1641,8 @@ name: "DossierCandidat",
     this.detail_marche = this.getMarchePersonnaliser.find(
         idmarche => idmarche.id == this.$route.params.id
     )
+
+    console.log(this.afficherCandidatSelectionner(this.marcheid))
     /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
       console.log(this.appel_offre_marche)*/
   },
@@ -1662,8 +1664,24 @@ name: "DossierCandidat",
     afficherCandidatSelectionner() {
       return id => {
         if (id != null && id != "") {
-          return this.gettersCotationPersonnaliser.filter(qtreel => qtreel.marche_id == id);
+          let vm=this
+          let collection=[]
+        let  objet_personnel=  this.gettersCotationPersonnaliser.filter(qtreel => qtreel.marche_id == id);
 
+
+
+          objet_personnel.forEach(function (value) {
+            let objet_candidat=vm.getterDossierCandidats.find(item=>{
+              if(item.entreprise_id==value.entreprise_id && item.marche_id == value.marche_id){
+                return item
+              }
+            })
+
+           if(objet_candidat==undefined){
+             collection.push(value)
+           }
+          })
+           return collection
         }
       };
     },

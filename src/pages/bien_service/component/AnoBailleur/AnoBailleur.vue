@@ -383,7 +383,13 @@ name: "ActEffeFinanciere",
 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe','planActe',"plans_Decision"]),
-     
+      proceVerbalMarche(){
+          return this.getterProceVerballe.find(item=>{
+              if(item.marche_id==this.macheid && item.traitement==0){
+                  return item
+              }
+          })
+      },
 LibelleDecision() {
       return id => {
         if (id != null && id != "") {
@@ -644,7 +650,8 @@ pvTraitement(){
       formData.append('difference_personnel_bienService', this.formBailleur.difference_personnel_bienService);
       formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
       formData.append('numero_courie', this.formBailleur.numero_courie);
-      formData.append('proce_verbal_jugement_offre_id', this.affichierProceVerbalJugementOffre(this.affichierPvMarche(this.affichierIdMarcheGlobal(this.infoLot.id))));
+        formData.append('proce_verbal_jugement_offre_id', this.proceVerbalMarche.id);
+      //formData.append('proce_verbal_jugement_offre_id', this.affichierProceVerbalJugementOffre(this.affichierPvMarche(this.affichierIdMarcheGlobal(this.infoLot.id))));
       let config = {
         header : {
           'Content-Type' : 'multipart/form-data'

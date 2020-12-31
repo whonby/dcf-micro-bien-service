@@ -41,7 +41,7 @@
                   {{marche.numero_lot || 'Non renseigné'}}
                 </td>
                 <td @dblclick="editeMarcheLot(marche.id)">
-                  {{marche.objet || 'Non renseigné'}} {{marche.attribue}}
+                  {{marche.objet || 'Non renseigné'}}
                 </td>
                 <td @dblclick="editeMarcheLot(marche.id)">
                   {{LIBELLEInfas(marche.infrastructure_id) || 'Non renseigné'}}
@@ -430,7 +430,7 @@ name: "LotMarche",
         unite_administrative_id:"",
         activite_id:"",
         imputation:"",
-        attribue:"",
+        attribue:0,
         Nature_des_prix:"",
         procedure_passation_id:"",
         exo_id:"",
@@ -674,7 +674,7 @@ SommeDesLots(){
             unite_administrative_id:this.detail_marche.unite_administrative_id,
             activite_id:this.detail_marche.activite_id,
             imputation:this.detail_marche.imputation,
-            attribue:1,
+            attribue:0,
             procedure_passation_id:this.detail_marche.procedure_passation_id,
             exo_id:this.detail_marche.exo_id,
             typeappel_id:this.detail_marche.typeappel_id,
@@ -725,7 +725,7 @@ SommeDesLots(){
             unite_administrative_id:"",
             activite_id:"",
             imputation:"",
-            attribue:1,
+            attribue:0,
             Nature_des_prix:"",
             procedure_passation_id:"",
             exo_id:"",
@@ -772,10 +772,7 @@ SommeDesLots(){
     this.editor = this.getMarchePersonnaliser.find(item=>item.id==index)
   },
   modification(){
-        let attribution=this.editor.attribue
-        if(this.editor.attribue<1){
-            attribution=1
-        }
+       console.log("OKOKOK")
       let objet={
         id:this.editor.id,
         objet:this.editor.objet,
@@ -788,8 +785,9 @@ SommeDesLots(){
         latitude:this.editor.latitude,
         longitude:this.editor.longitude,
         sib:this.editor.sib,
+        attribue:0,
         numero_lot:this.editor.numero_lot,
-        attribue:attribution,
+       
         infrastructure_id:this.afficheIdInfrasture(this.macheid)
       }
 

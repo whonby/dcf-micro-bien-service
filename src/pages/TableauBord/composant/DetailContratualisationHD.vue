@@ -77,7 +77,7 @@
                                         {{formaterDate(getNumeroDAO(item.parent_id).date_emission) || 'Non renseigné'}}
                                     </td>
                                     <td v-if="getDateOuvertue(item.parent_id)">
-                                        {{formaterDate(getDateOuvertue(item.id).date_ouverture) || 'Non renseigné'}}
+                                        {{formaterDate(getDateOuvertue(item.parent_id).date_ouverture) || 'Non renseigné'}}
                                     </td>
                                     <td v-else>
                                         Non renseigné
@@ -133,8 +133,6 @@
                                     </td>
 
 
-                                    <td></td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -242,7 +240,7 @@
                                         {{formaterDate(getNumeroDAO(item.parent_id).date_emission) || 'Non renseigné'}}
                                     </td>
                                     <td v-if="getDateOuvertue(item.parent_id)">
-                                        {{formaterDate(getDateOuvertue(item.id).date_ouverture) || 'Non renseigné'}}
+                                        {{formaterDate(getDateOuvertue(item.parent_id).date_ouverture) || 'Non renseigné'}}
                                     </td>
                                     <td v-else>
                                         Non renseigné
@@ -298,8 +296,6 @@
                                     </td>
 
 
-                                    <td></td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

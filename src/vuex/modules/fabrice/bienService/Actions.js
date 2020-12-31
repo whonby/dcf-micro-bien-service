@@ -917,7 +917,12 @@ export function ajouterCojo({commit}, elementAjout){
   asyncLoading(axios.post('/cojo',elementAjout)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_COJO', response.data.cojo)
-          commit('AJOUTER_MEMBRE_COJO', response.data.membre)
+
+          response.data.marche.forEach(function (value) {
+              commit('MODIFIER_MARCHE', value)
+          })
+
+        //  commit('AJOUTER_MEMBRE_COJO', response.data.membre)
           this.$app.$notify({
             title: 'success ',
             text: 'Enregistrement effectué !',
@@ -2279,7 +2284,7 @@ export function ajouterCotation({commit,dispatch}, elementAjout){
 
 
 export function modifierCotation({ commit }, element_modifie) {
-  asyncLoading(axios.put('/update_cotation', element_modifie)).then(response => {
+  asyncLoading(axios.put('/update_cotation/' + element_modifie.id, element_modifie)).then(response => {
     commit('MODIFIER_COTATION', response.data)
 
 

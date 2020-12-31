@@ -1,8 +1,41 @@
-
+Affectation Véhicule
 <template>
 
 <div>
+<div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
+                <div class="span1">
 
+                </div>
+                <div class="span10 " style="background: #f0c71d !important;">
+                    <table class="table table-striped"  style="background: #f0c71d !important;">
+                        <tbody>
+                        <tr>
+                        
+                            
+                            <td style="background: #f0c71d !important;">
+                                <label style="font-size:20px">Unité Administrative<a href="#" @click.prevent="videUniteAdministrative()" v-if="uniteAdministrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
+                                </label>
+                                <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="uniteAdministratives"
+                                                   v-model="uniteAdministrative_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                            </td>
+                          
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
 <div id="exampleModal12" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -15,7 +48,7 @@
                 <div class="control-group">
                   <label class="control-label">Unité Administrative Emettrice</label>
                   <div class="controls">
-                        <select v-model="formData.ua_id" 
+                        <select v-model="formData2.ua_id" 
                          class="span5">
                       <option
                         v-for="localgeo in uniteAdministratives"
@@ -31,10 +64,10 @@
                 <div class="control-group">
                   <label class="control-label">Article en Stock UA Emettrice</label>
                   <div class="controls">
-                        <select v-model="formData.famille_id" 
+                        <select v-model="formData2.famille_id" 
                          class="span5">
                       <option
-                        v-for="localgeo in listeArticleEnStock(formData.ua_id)"
+                        v-for="localgeo in listeArticleEnStock(formData2.ua_id)"
                         :key="localgeo.id"
                         :value="localgeo.famille_id"
                       >{{localgeo.article_id}}</option>
@@ -47,10 +80,10 @@
      <div class="control-group">
                   <label class="control-label">Marque des articles en Stock UA Emettrice</label>
                   <div class="controls">
-                        <select v-model="formData.marque_id" 
+                        <select v-model="formData2.marque_id" 
                          class="span5">
                       <option
-                        v-for="localgeo in listeMarqueEnStock(formData.famille_id)"
+                        v-for="localgeo in listeMarqueEnStock(formData2.famille_id)"
                         :key="localgeo.id"
                         :value="localgeo.marque_id"
                       >{{localgeo.marque_id}}</option>
@@ -63,10 +96,10 @@
      <div class="control-group">
                   <label class="control-label">Modele des articles en Stock UA Emettrice</label>
                   <div class="controls">
-                        <select v-model="formData.model_id" 
+                        <select v-model="formData2.model_id" 
                          class="span5">
                       <option
-                        v-for="localgeo in listeModelEnStock(formData.marque_id)"
+                        v-for="localgeo in listeModelEnStock(formData2.marque_id)"
                         :key="localgeo.id"
                         :value="localgeo.model_id"
                       >{{localgeo.model_id}}</option>
@@ -86,7 +119,7 @@
                 type="text"
                 
                 class="span4"
-                :value="listeQuantiteEnStock(formData.model_id)"
+                :value="listeQuantiteEnStock(formData2.model_id)"
                 readonly
               />
             </div>
@@ -100,7 +133,7 @@
                 type="text"
                 
                 class="span4"
-                v-model="formData.qtetransfert"
+                v-model="formData2.qtetransfert"
                
               />
             </div>
@@ -110,7 +143,7 @@
                 <div class="control-group">
                   <label class="control-label">Unité Administrative Réceptrice</label>
                   <div class="controls">
-                        <select v-model="formData.ua_id" 
+                        <select v-model="formData2.ua_id" 
                          class="span5">
                       <!-- <option
                         v-for="localgeo in uniteAdministratives"
@@ -126,7 +159,7 @@
                 <div class="control-group">
                   <label class="control-label">Article en Stock UA Réceptrice</label>
                   <div class="controls">
-                        <select v-model="formData.famille_id" 
+                        <select v-model="formData2.famille_id" 
                          class="span5">
                       <!-- <option
                         v-for="localgeo in listeArticleEnStock(formData.ua_id)"
@@ -145,7 +178,7 @@
      <div class="control-group">
                   <label class="control-label">Marque des articles en Stock UA Réceptrice</label>
                   <div class="controls">
-                        <select v-model="formData.marque_id" 
+                        <select v-model="formData2.marque_id" 
                          class="span5">
                       <!-- <option
                         v-for="localgeo in listeMarqueEnStock(formData.famille_id)"
@@ -161,7 +194,7 @@
      <div class="control-group">
                   <label class="control-label">Modele des articles en Stock UA Réceptrice</label>
                   <div class="controls">
-                        <select v-model="formData.model_id" 
+                        <select v-model="formData2.model_id" 
                          class="span5">
                       <!-- <option
                         v-for="localgeo in listeModelEnStock(formData.marque_id)"
@@ -195,7 +228,7 @@
                 type="date"
                 
                 class="span4"
-                v-model="formData.date_transfert"
+                v-model="formData2.date_transfert"
                 
               />
             </div>
@@ -209,7 +242,7 @@
           
           class="btn btn-primary"
           href="#"
-          @click.prevent="ajouterTitreLocal(formData)"
+          @click.prevent="ajouterTitreLocal(formData2)"
         >Affecter</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
@@ -235,7 +268,7 @@
 
 
 
- <div id="exampleModal1" class="modal hide tailgrand">
+ <div id="exampleModal1" class="modal hide tailgrand1">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Affectation Véhicule</h3>
@@ -377,22 +410,15 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
-<table class="table table-bordered table-striped">
+<!-- <table class="table table-bordered table-striped">
   <tr>
     <td>
       <label class="control-label">Unite Administrative</label>
-       <!-- <select  class="span5" v-model="formData.uAdministrative_id">
-                      <option></option>                     
-                      <option
-                        v-for="typeUniteA in uniteAdministratives"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select> -->
+       
                      <model-list-select style="background-color: rgb(233,233,233);"
                                                        class="wide"
                                                        :list="filtre_unite_admin"
-                                                       v-model="formData.uAdministrative_id"
+                                                       v-model="uniteAdministrative_id"
                                                        option-value="id"
                                                        option-text="libelle"
                                                        placeholder="Unité administrative"
@@ -401,7 +427,7 @@
                                     </model-list-select>
     </td>
   </tr>
-</table>
+</table> -->
 <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">
                 <div class="widget-box">
@@ -461,7 +487,7 @@
                   
                   <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in listePersonnelNonEquipee(formData.uAdministrative_id)"
+                    v-for="BesoinImmo in listePersonnelNonEquipee(uniteAdministrative_id)"
                     :key="BesoinImmo.id"
                   >
                   <td style="text-align: center;"
@@ -509,7 +535,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="odd gradeX" v-for=" affectService in listeDesServiceNonEquipeDeUa(formData.uAdministrative_id)"
+                    <tr class="odd gradeX" v-for=" affectService in listeDesServiceNonEquipeDeUa(uniteAdministrative_id)"
                         :key="affectService.id">
                         
                              
@@ -575,7 +601,7 @@
                   
                   <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in listePersonnelNonEquipee(formData.uAdministrative_id)"
+                    v-for="BesoinImmo in listePersonnelNonEquipee(uniteAdministrative_id)"
                     :key="BesoinImmo.id"
                   >
                   <td style="text-align: center;"
@@ -618,12 +644,12 @@
                         
                         <th style="">Service</th>
                         <th style="">Equipé</th>
-                        <th style="">Affectation</th>
+                        <th style="width:10px">Affectation</th>
                          
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="odd gradeX" v-for=" affectService in listeDesServiceNonEquipeDeUa(formData.uAdministrative_id)"
+                    <tr class="odd gradeX" v-for=" affectService in listeDesServiceNonEquipeDeUa(uniteAdministrative_id)"
                         :key="affectService.id">
                         
                              
@@ -708,7 +734,7 @@
                   
                   <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in ListeDesVehiculeParUa(formData.uAdministrative_id)"
+                    v-for="BesoinImmo in ListeDesVehiculeParUa(uniteAdministrative_id)"
                     :key="BesoinImmo.id"
                   >
                   <td style="font-size:14px"> {{BesoinImmo.numidentification || 'Non renseigné'}}</td>
@@ -785,7 +811,15 @@
               </table>
  
   </div>
+         <fab :actions="fabActions"
+                main-icon="apps"
          
+        @searchMe="filter"
+         
+        bg-color="green"
+
+  ></fab>
+  <notifications  />
     </div>
 </template>
 
@@ -805,14 +839,25 @@ export default {
   },
     data(){
         return{
+           fabActions: [
+      
+        {
+                  name: 'searchMe',
+                   icon: "search"
+              }
+       
+      ],
       formData :{
-ua_id:"",
-serviceua_id:"",
+
+
 
       },
       editAffectation:{
         uniteadministrative:""
       },
+      uniteAdministrative_id:"",
+       affiche_filtre:false,
+      affiche_boutton_filtre:true,
        formData2:{
         famillearticle_id :"",
         qte_affecte:"",
@@ -1060,7 +1105,7 @@ search:""
           //return colect.filter(element => element.normeequipement != 0 && element.normeequipement != null)
         return id => {
         if (id != null && id != "") {
-           return colect.filter(items=>items.ua_id == id && items.normeequipement != 0 && items.normeequipement != null);
+           return colect.filter(items=>items.ua_id == id && items.normeequipement != 0);
         }
       };
        }
@@ -1068,7 +1113,7 @@ search:""
       // return this.getterplanOrganisationUa.filter(element => element.normeequipement != 0 && element.normeequipement != null)
  return id => {
         if (id != null && id != "") {
-           return this.getterplanOrganisationUa.filter(items=>items.ua_id == id && items.normeequipement != 0 && items.normeequipement != null);
+           return this.getterplanOrganisationUa.filter(items=>items.ua_id == id && items.normeequipement != 0);
         }
       };
     },
@@ -1450,7 +1495,13 @@ afficherLibelleService() {
       "ajouterNouveauVehicule",
       "modifierVehicule"
       ]),
-
+filter(){
+                this.affiche_filtre=!this.affiche_filtre
+               
+            },
+    videUniteAdministrative(){
+                this.uniteAdministrative_id =""
+            },
  afficherModalAjouter() {
       this.$("#exampleModal12").modal({
         backdrop: "static",
@@ -1510,6 +1561,10 @@ formatageSomme:formatageSomme,
  margin: 0 -530px;
  height: 550px;
 
+}
+.tailgrand1{
+  width: 60%;
+  margin: 0 -30%;
 }
 .tailgrand{
   width: 95%;

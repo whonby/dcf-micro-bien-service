@@ -783,7 +783,8 @@ export default {
                 activite_id:"",
                // typeappel_id:"",
                 exo_id:"",
-                mvtmarche:1
+                mvtmarche:1,
+                sib:1
         
       },
         editActeEffetFinancier:{
@@ -835,7 +836,8 @@ export default {
                 
                // typeappel_id:"",
                
-                mvtmarche:1
+                mvtmarche:1,
+                sib:1
       },
       
 //       editActeEffetFinancier:{
@@ -1146,7 +1148,7 @@ getDateFinExécutionValue(){
     return this.editActeEffetFinancier.date_odre_service !=""
 },
 
-
+  
 
 
 
@@ -1848,7 +1850,8 @@ this.formData = {
                 activite_id:"",
                // typeappel_id:"",
                 exo_id:"",
-                mvtmarche:1
+                mvtmarche:1,
+                sib:1
 }
 
     },

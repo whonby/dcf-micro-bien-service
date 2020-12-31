@@ -24,7 +24,7 @@
 
         <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>MONTANT MARCHE</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(budgetConsommerBienService))}}</span> <h4>CONSOMME</h4></a> </li>
           <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>MONTANT MARCHE</h4> <i class="icon-info-sign"></i><span class="label label-important" style="font-size:15px">{{formatageSomme(-(montantMarcheAvecAvenant - budgetConsommerBienService))}}</span> <h4>RESTANT</h4></a> </li>
-       <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>TAUX MARCHE</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{((parseFloat(budgetConsommerBienService)/parseFloat(montantMarcheAvecAvenant))*100).toFixed(2)}}%</span><h4> EN EXECUTION</h4></a> </li>
+       <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>TAUX MARCHE</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{((parseFloat(budgetConsommerBienService)/parseFloat(montantMarcheAvecAvenant))*100).toFixed(2)}}%</span><h4> EN EXECUTION1</h4></a> </li>
 
 
 

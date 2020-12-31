@@ -1,7 +1,12 @@
-
 <template>
 <div>
-  <div v-for="item in lot" :key="item.id" class="widget-content">
+  <div class="row-fluid" >
+    <div class="span12" align="right">
+      <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button>
+    </div>
+
+  </div>
+  <div v-for="item in lot" :key="item.id" class="widget-content" id="analyse">
     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
 
       <div class="span8"><h5>LOT N°{{ item.numero_lot }} / {{item.objet}}
@@ -12,38 +17,68 @@
 <!--      <div class="span2"><button @click.prevent="supprimerAnalyseDossierMultiple(item.id)"  class="btn btn-danger " title="Supprimer">-->
 <!--        <span class=""><i class="icon-trash"></i></span></button></div>-->
     </div>
+    <div class="widget-box" v-for="effetFinancier in AffichierOffreFinanciere(item.id)"
+         :key="effetFinancier.id">
+      <h6> {{afficheNomEntreprise(afficherNumeroDossierCandidat1(effetFinancier.dossier_candidat_id)) || 'Non renseigné'}}</h6>
+      <table class="table table-bordered table-striped" v-if="macheid">
+        <thead>
+        <tr>
+          <th>Offre</th>
+          <th>Prix de l'offre lu en FCFA TTC</th>
+          <th>Erreurs de calcul </th>
+          <th>Prix de l'offre corrigé en FCFA TTC</th>
 
-    <table class="table table-bordered table-striped" v-if="macheid">
-      <thead>
-      <tr>
-                                        <th>Soumissionnaire</th>
-                                        <th>Prix de l'offre lu en FCFA TTC</th>
-                                         <th>Erreurs de calcul </th>
-                                         <th>Analyse Offre techique</th>
-                                         <th>Prix de l'offre corrigé en FCFA TTC</th>
 
-                       </tr>
-      </thead>
-      <tbody>
-      <tr class="odd gradeX" v-for="effetFinancier in AffichierOffreFinanciere(item.id)"
-          :key="effetFinancier.id">
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="odd gradeX" >
 
-        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-          {{afficheNomEntreprise(afficherNumeroDossierCandidat1(effetFinancier.dossier_candidat_id)) || 'Non renseigné'}}</td>
+          <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+            Offre financière</td>
           <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)" style="text-align:center;font-size:14px">
-          {{formatageSommeSansFCFA(parseFloat(effetFinancier.hist_montant_ttc)) || 'Non renseigné'}}</td>
-           <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)" style="text-align:center;font-size:14px">
-          {{effetFinancier.Erreurs_sur_montant_ttc || 'Non renseigné'}}</td>
-          <td>
-              <button  class="btn btn-primary" @click="afficheEdite(effetFinancier.dossier_candidat_id)" title="Analyse">
-                  <span class=""><i class="icon-bar-chart"></i></span></button>
-          </td>
-           <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)" style="text-align:center;font-size:14px;background: green;color: white">
-          {{formatageSommeSansFCFA(parseFloat(effetFinancier.montant_total_ttc)) || 'Non renseigné'}}</td>
-         
-      </tr>
-      </tbody>
-    </table>
+            {{formatageSommeSansFCFA(parseFloat(effetFinancier.hist_montant_ttc)) || 'Non renseigné'}}</td>
+          <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)" style="text-align:center;font-size:14px">
+            {{effetFinancier.Erreurs_sur_montant_ttc || 'Non renseigné'}}</td>
+
+          <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)"  style="text-align:center;font-size:14px;background: green;color: white">
+            {{formatageSommeSansFCFA(parseFloat(effetFinancier.montant_total_ttc)) || 'Non renseigné'}}</td>
+
+        </tr>
+        </tbody>
+      </table>
+      <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>Offre</th>
+          <th>Structure Emetrice</th>
+          <th>Montant </th>
+          <th>Delai de validation de l'offre</th>
+          <th>Delai de livraison ou d'execution proposé </th>
+          <th>Rabais offert</th>
+          <th>Presence Echantillons</th>
+          <th>Conclusion</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="offre in listeOffreTechniqueLotCandidat(effetFinancier.dossier_candidat_id,item.id)" :key="offre.id">
+          <td @click="afficheEdite(offre.id)">Offre Technique</td>
+          <td @click="afficheEdite(offre.id)">{{offre.structure_emetrice}}</td>
+          <td @click="afficheEdite(offre.id)">{{offre.montant}} </td>
+          <td @click="afficheEdite(offre.id)">{{offre.delai_validite_offre}} </td>
+          <td @click="afficheEdite(offre.id)">{{offre.delai_execution}} </td>
+          <td @click="afficheEdite(offre.id)">{{offre.rabai_offert}}</td>
+          <td @click="afficheEdite(offre.id)">{{offre.presence_echantillons}}</td>
+          <td @click="afficheEdite(offre.id)" v-if="offre.observation==1" style="background: green;color: white">CONFORME </td>
+          <td @click="afficheEdite(offre.id)" v-else-if="offre.observation==0" style="background: red;color: white">NON CONFORME</td>
+          <td @click="afficheEdite(offre.id)" v-else style="background: blue;color: white">ANALYE EN COURS</td>
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+
   </div>
 
   <div id="ModalModification" class="modal hide grdirModalActeEffet" >
@@ -131,8 +166,24 @@
                         <table class="table table-bordered table-striped">
 
                           <tr>
+                            <td>
+                              <div class="control-group">
+                                <label class="control-label">Numero de lot :</label>
+                                <div class="controls">
 
+                                  <input type="text" class="span" :value="'Lot N° '+editer.numero_lot" disabled>
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="control-group">
+                                <label class="control-label">Soumisionnaire :</label>
+                                <div class="controls">
 
+                                  <input type="text" class="span" :value="afficheNomEntreprise(afficherNumeroDossierCandidat1(editer.dossier_candidat_id))" disabled>
+                                </div>
+                              </div>
+                            </td>
                             <td>
                               <div class="control-group">
                                 <label class="control-label">Accord groupement :</label>
@@ -168,34 +219,8 @@
                                 </div>
                               </div>
                             </td>
-                            <td>
-                              <div class="control-group">
-                                <label class="control-label">Cautionnement provisoire :</label>
-                                <div class="controls">
-                                  <select v-model="editer.cautionnement_prov" class="span">
-                                    <option value=""></option>
-                                    <option value="OUI">OUI</option>
-                                    <option value="NON">NON</option>
-                                    <option value="N/A">NON APPLICABLE</option>
-                                  </select>
-                                  <!--<input type="text" class="span" placeholder="Cautionnement prov" v-model="formchnique.cautionnement_prov">-->
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="control-group">
-                                <label class="control-label">Attestation bancaire:</label>
-                                <div class="controls">
-                                  <select v-model="editer.attest_banc" class="span">
-                                    <option value=""></option>
-                                    <option value="OUI">OUI</option>
-                                    <option value="NON">NON</option>
-                                    <option value="N/A">NON APPLICABLE</option>
-                                  </select>
-                                  <!-- <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">-->
-                                </div>
-                              </div>
-                            </td>
+
+
                             <td>
                               <div class="control-group">
                                 <label class="control-label">Fiche technique :</label>
@@ -440,6 +465,34 @@
                           <tr>
                             <td>
                               <div class="control-group">
+                                <label class="control-label">Cautionnement provisoire :</label>
+                                <div class="controls">
+                                  <select v-model="editer.cautionnement_prov" class="span">
+                                    <option value=""></option>
+                                    <option value="OUI">OUI</option>
+                                    <option value="NON">NON</option>
+                                    <option value="N/A">NON APPLICABLE</option>
+                                  </select>
+                                  <!--<input type="text" class="span" placeholder="Cautionnement prov" v-model="formchnique.cautionnement_prov">-->
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="control-group">
+                                <label class="control-label">Attestation bancaire:</label>
+                                <div class="controls">
+                                  <select v-model="editer.attest_banc" class="span">
+                                    <option value=""></option>
+                                    <option value="OUI">OUI</option>
+                                    <option value="NON">NON</option>
+                                    <option value="N/A">NON APPLICABLE</option>
+                                  </select>
+                                  <!-- <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">-->
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="control-group">
                                 <label class="control-label">Observation :</label>
                                 <div class="controls">
                                   <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
@@ -469,7 +522,6 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import {formatageSommeSansFCFA} from "@/Repositories/Repository";
-
 export default {
 name: "ActEffeFinanciere",
   props:["macheid"],
@@ -490,11 +542,8 @@ name: "ActEffeFinanciere",
   },
   created(){
     this.lot=this.getMarchePersonnaliser.filter(item=>item.parent_id==this.macheid)
-
-
   },
   computed:{
-
     ...mapGetters("bienService", [ "typeMarches","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
       "modePassations", "procedurePassations","getterDossierCandidats","marches",
       "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
@@ -503,15 +552,31 @@ name: "ActEffeFinanciere",
       "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
       "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
     ...mapGetters('personnelUA', ['acteur_depenses']),
-
-
     ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
     ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
       'types_financements']) ,
-
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe',
       'planActe']),
+    dossierCandidature: function () {
+      return marcheid => {
+        if (marcheid != "") {
+          //  console.log("Marche dossier candidat")
+          return this.getterDossierCandidats.filter(idmarche => idmarche.appel_offre.marche_id == marcheid)
+        }
+      }
+    },
+    listeOffreTechniqueLotCandidat(){
+      return (id,macheid)=>{
+        if(id!=""){
+          return this.gettersOffreTechniques.filter(item=>{
+            if(item.dossier_candidat_id==id && item.marche_id == macheid){
+              return item
+            }
+          })
+        }
+      }
+    },
       afficherNumeroDuLot(){
           return id =>{
               if(id!=null && id!=""){
@@ -522,20 +587,17 @@ name: "ActEffeFinanciere",
           }
       },
 Erreursdecalcul() {
-
       const val = parseFloat(this.EditOffreFinanciere.montant_total_ttc) - parseFloat(this.EditOffreFinanciere.hist_montant_ttc);
       return parseFloat(val).toFixed(0);
     },
-
     AffichierOffreFinanciere: function () {
-      return macheid => {
+      return (macheid) => {
         if (macheid != "") {
           // console.log("Marche leste acte effect finnancier")
           return this.getterOffreFinanciers.filter(idmarche => idmarche.marche_id == macheid)
         }
       }
     },
-
 analyseByLot(){
       return id=>{
         return this.getterAnalyseDossiers.filter(item=>{
@@ -544,12 +606,10 @@ analyseByLot(){
         })
       }
     },
-
 afficherNumeroDossierCandidat1() {
       return id => {
         if (id != null && id != "") {
           const qtereel = this.getterDossierCandidats.find(qtreel => qtreel.id == id);
-
           if (qtereel) {
             return qtereel.entreprise_id;
           }
@@ -572,7 +632,6 @@ afficherNumeroDossierCandidat1() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
-
       if (qtereel) {
         return qtereel.id;
       }
@@ -580,25 +639,20 @@ afficherNumeroDossierCandidat1() {
         }
       };
     },
-
   },
-
   methods:{
     ...mapActions("bienService", [
       "supprimerDossierCandidat","ajouterOffreTechnique","modifierOffreTechnique",
       "supprimerchnique","ajouterOffreFinancier","modifierOffreFinancier","supprimerOffreFinancier",
       "ajouterLettreInvitation",
-
     ]),
       afficheEdite(index){
           this.$('#edit_offre_technique').modal({
               backdrop: 'static',
               keyboard: false
           });
-
-          this.editer= this.gettersOffreTechniques.find(item=>item.dossier_candidat_id==index);
+          this.editer= this.gettersOffreTechniques.find(item=>item.id==index);
       },
-
 afficherModalModifierActeEffetFinancier(id){
       this.$('#ModalModification').modal({
         backdrop: 'static',
@@ -606,9 +660,7 @@ afficherModalModifierActeEffetFinancier(id){
       });
       this.EditOffreFinanciere= this.getterOffreFinanciers.find(item=>item.id==id);
     },
-
 ModifierOfficeFinancier(){
-
 var nouvelObjet = {
         
         id:this.EditOffreFinanciere.id,
@@ -633,7 +685,6 @@ var nouvelObjet = {
       this.infoLot=this.getMarchePersonnaliser.find(item=>item.id==index)
       //  this.edite_analyse_dossier = this.listeAnalyseDossier(this.macheid)[index];
     },
-
     formatageSommeSansFCFA:formatageSommeSansFCFA,
       editeOffreT(){
           let objet={
@@ -669,15 +720,14 @@ var nouvelObjet = {
           this.modifierOffreTechnique(objet)
           this.$('#edit_offre_technique').modal('hide');
       },
-
+    generateReport(){
+      this.$htmlToPaper('analyse');
+    }
   }
 }
 </script>
 
 <style scoped>
-
-
-
 .grdirModalActeEffet{
     width: 88% !important;
     margin: 0 -42% !important;

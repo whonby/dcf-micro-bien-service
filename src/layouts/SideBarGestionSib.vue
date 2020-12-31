@@ -31,6 +31,13 @@
             <span>TABLEAU DE BORD</span>
           </a>
         </li>
+
+        <li @click.prevent="navigateTableBordBord" :class="{active: active_el ==46}">
+              <a href="#">
+                  <i class="icon-truck"></i>
+                  <span>TABLEAU DE BORD DE MARCHE</span>
+              </a>
+          </li>
         <!-- <li v-if="admin() || dcf()" :class="{active: active_el == 17 }" @click.prevent="navigateToParametreGeneraux">
           <a title="PARAMETRES GENERAUX" href="#">
             <i class="icon-cogs"></i>
@@ -236,6 +243,12 @@ navigateToGestionMarche(){
         this.$router.push({
           name: 'TableauBordGestionSibSimple'
         })
+      },
+      navigateTableBordBord(){
+          this.activate(46)
+          this.$router.push({
+              name: 'tableau_gestion_sib_marche'
+          })
       },
        navigateToParametreGeneraux(){
         this.activate(17)

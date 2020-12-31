@@ -316,12 +316,9 @@
             </div>
  </div>
      
-
-    
-
    
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
-<notifications  />
+<notifications/>
     
   </div>
 </template>

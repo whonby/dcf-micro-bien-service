@@ -37,7 +37,7 @@
 
         {{affichierReferenceAppelOffre(macheid)|| 'Non renseigné'}}
       </td>
-      <td v-if="appelOffre.rang_analyse!=1" style="background: darkred;color: white" >
+      <td v-if="appelOffre.rang_analyse!=1" >
 
         {{affichierReferenceAppelOffre(macheid)|| 'Non renseigné'}}
       </td>
@@ -47,14 +47,14 @@
       <td v-if="appelOffre.rang_analyse==1" style="background: green;color: white" >
         {{afficherNumeroDossierCandidat1(appelOffre.dossier_candidat_id) || 'Non renseigné'}}
       </td>
-      <td v-if="appelOffre.rang_analyse!=1" style="background: darkred;color: white" >
+      <td v-if="appelOffre.rang_analyse!=1">
         {{afficherNumeroDossierCandidat1(appelOffre.dossier_candidat_id) || 'Non renseigné'}}
       </td>
 
       <td v-if="appelOffre.rang_analyse==1" style="background: green;color: white" >
         {{formatageSomme(parseFloat(appelOffre.montant_total_ttc)) || 'Non renseigné'}}
       </td>
-      <td v-if="appelOffre.rang_analyse!=1" style="background: darkred;color: white" >
+      <td v-if="appelOffre.rang_analyse!=1"  >
         {{formatageSomme(parseFloat(appelOffre.montant_total_ttc)) || 'Non renseigné'}}
       </td>
 
@@ -63,7 +63,7 @@
            >
         {{appelOffre.type_analyse.libelle || 'Non renseigné'}}
       </td>
-      <td v-if="appelOffre.rang_analyse!=1" style="background: darkred;color: white"  >
+      <td v-if="appelOffre.rang_analyse!=1"   >
         {{appelOffre.type_analyse.libelle || 'Non renseigné'}}
       </td>
 
@@ -71,7 +71,7 @@
       <td v-if="appelOffre.rang_analyse==1" style="background: green;color: white">
         CONFORME
       </td>
-      <td v-if="appelOffre.rang_analyse!=1" style="background: darkred;color: white">
+      <td v-if="appelOffre.rang_analyse!=1">
         NON CONFORME
       </td>
 
@@ -149,20 +149,34 @@
         <thead>
         <th>N°LOT</th>
         <th>Soumissionnaire</th>
-        <th>Offre Financière</th>
-        <th>Conclusion</th>
+        <th>Conclusion Offre financier</th>
+        <th>Conclusion Offre Technique</th>
+        <th>Selection du candidat</th>
         </thead>
         <tbody>
         <tr v-for="item in getSoumissionaireByLot(marche_id)" :key="item.id">
           <td>{{item.numero_lot}}</td>
           <td>{{item.dossier_candidature.nom_cand}}</td>
-          <td>{{formatageSomme(parseFloat(item.montant_total_ttc)) || 'Non renseigné'}}</td>
           <td v-if="item.retenu" style="background: green;color: white">
             CONFORME
           </td>
           <td v-if="!item.retenu" style="background: darkred;color: white">
             NON CONFORME
           </td>
+          <td v-if="conclusionOffreTechnique(marche_id,item.dossier_candidature.id)" style="background: green;color: white">
+            CONFORME
+          </td>
+          <td v-if="!conclusionOffreTechnique(marche_id,item.dossier_candidature.id)" style="background: darkred;color: white">
+            NON CONFORME
+          </td>
+          <td>
+
+              <div class="inputGroup">
+                <input :id="'radion'+item.dossier_candidature.id"  type="radio" :value="item.dossier_candidature.id" v-model="candidat_selectionner"/>
+                <label :for="'radion'+item.dossier_candidature.id">Oui</label>
+              </div>
+
+           </td>
         </tr>
         </tbody>
       </table>
@@ -287,6 +301,7 @@ export default {
     return{
       marche_id:"",
       lot_id:"",
+      candidat_selectionner:"",
       formAnalyseDossier:{
         date_analyse:"",
         // appel_offre_id:"",
@@ -317,15 +332,27 @@ export default {
     ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
     ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
       'types_financements']) ,
+    conclusionOffreTechnique(){
+      return (marche_id,candidat)=>{
+        let offreT=this.gettersOffreTechniques.find(item=>{
+          if(item.marche_id==marche_id && item.dossier_candidat_id==candidat){
+            return  item
+          }
+        }) 
+        console.log(offreT)
+        return  offreT.observation
+        //  offreT.observation
+      }
+    },
    getSoumissionaireByLot(){
       return marche_id=>{
         let seft=this;
         let offreT=this.gettersOffreTechniques.filter(item=>{
-          if(item.marche_id==marche_id && item.observation==1){
+          if(item.marche_id==marche_id && item.dossier_candidat_id!=null){
             return  item
           }
         })
-
+console.log(offreT)
         let collection=[]
         if (offreT.length>0){
           offreT.forEach(function (value) {
@@ -368,7 +395,11 @@ export default {
    },
     analyseByLot(){
      return id=>{
-       return this.getterAnalyseDossiers.filter(item=>item.marche_id==id)
+       let objet=this.getterAnalyseDossiers.filter(item=>item.marche_id==id)
+        objet=objet.sort(function (a, b) {
+         return a.note_analyse - b.note_analyse;
+       });
+       return objet.reverse();
      }
     },
     listeLot(){
@@ -571,15 +602,40 @@ afficheNomEntreprise() {
     },
     formatageSomme:formatageSomme,
     ajouterJugementOffre(id){
-      console.log(this.getSoumissionaireByLot(id))
+      //console.log(this.getSoumissionaireByLot(id))
+      let vm=this
+
+      if(vm.candidat_selectionner==""){
+        return ;
+      }
+      let collection=[]
+      let nbr=this.getSoumissionaireByLot(id).length
+      //console.log(vm.candidat_selectionner)
+      this.getSoumissionaireByLot(id).forEach(function (value) {
+             if (vm.candidat_selectionner==value.dossier_candidat_id){
+               value.note_analyse=nbr
+               value.rang_analyse=1
+               value.retenu=1
+               collection.push(value)
+             }else{
+               value.note_analyse=nbr-1
+               value.rang_analyse= parseInt(value.rang_analyse)+1
+               value.retenu=0
+               collection.push(value)
+             }
+
+      })
+      //console.log(collection)
       let objet={
-          analyse:this.getSoumissionaireByLot(id),
+          analyse:collection,
           marche_parent_id:this.macheid,
           appel_offre_id :this.affichierAppelOffreid(this.macheid),
       }
-      this.ajouterAnalyseDossierMultiple(objet)
+
+     this.ajouterAnalyseDossierMultiple(objet)
       this.marche_id=""
       this.$('#ajouterMP').modal('hide');
+      vm.candidat_selectionner=""
     }
   }
 }
@@ -590,5 +646,109 @@ afficheNomEntreprise() {
   width: 1000px;
   margin: 0 -500px;
   height: 500px;
+}
+
+
+.inputGroup {
+  background-color: #fff;
+  display: block;
+  margin: 5px 0;
+  position: relative;
+
+}
+.inputGroup label {
+  padding: 1px 10px;
+  display: block;
+  text-align: left;
+  color: #3C454C;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  transition: color 200ms ease-in;
+  overflow: hidden;
+}
+.inputGroup label:before {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  content: "";
+  background-color: #5562eb;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale3d(1, 1, 1);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  z-index: -1;
+}
+.inputGroup label:after {
+  width: 23px;
+  height: 23px;
+  content: "";
+  border: 2px solid #D1D7DC;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
+  background-repeat: no-repeat;
+  background-position: 2px 3px;
+  border-radius: 50%;
+  z-index: 2;
+  position: absolute;
+  right: 50px;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: all 200ms ease-in;
+}
+.inputGroup input:checked ~ label {
+  color: #fff;
+}
+.inputGroup input:checked ~ label:before {
+  transform: translate(-50%, -50%) scale3d(70, 56, 1);
+  opacity: 1;
+}
+.inputGroup input:checked ~ label:after {
+  background-color: #54E0C7;
+  border-color: #54E0C7;
+}
+.inputGroup input {
+  width: 20px;
+  height: 20px;
+  order: 1;
+  z-index: 2;
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.form {
+  padding: 0 16px;
+  max-width: 550px;
+  margin: 50px auto;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 36px;
+}
+
+body {
+  background-color: #D1D7DC;
+  font-family: "Fira Sans", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+code {
+  background-color: #9AA3AC;
+  padding: 0 8px;
 }
 </style>

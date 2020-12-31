@@ -6,7 +6,6 @@
 
       <a href="#ajouter_membre_cojo" data-toggle="modal" class="btn btn-primary">Ajouter</a>
     </div>
-
     <table class="table table-bordered table-striped" v-if="macheid">
       <thead>
       <tr>
@@ -17,7 +16,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr class="odd gradeX" v-for="appelOffre in listeMembreCojo(macheid)"
+      <tr class="odd gradeX" v-for="appelOffre in listeMembreCojo"
           :key="appelOffre.id">
         <td @click="afficheModaleMembreCojo(appelOffre.id)">
           {{appelOffre.matricule|| 'Non renseigné'}}
@@ -236,10 +235,16 @@ name: "MembreCojo",
   },
 
   created(){
-
+console.log(this.getterMembreCojo.filter(idmem=>idmem.marche_id==this.macheid))
   },
   computed:{
-
+    listeMembreCojo: function (){
+      let vM=this;
+      if( vM.macheid!=""){
+        return this.getterMembreCojo.filter(idmem=>idmem.marche_id==vM.macheid);
+      }
+      return null;
+    },
     ...mapGetters('bienService',['getterMembreCojo','getterCojos',"role_membrecojo"]),
 
     ...mapGetters('personnelUA', ['acteur_depenses',"all_acteur_depense"]),
@@ -309,13 +314,7 @@ enregistreIdService() {
       }
     },
 
-    listeMembreCojo: function (){
-      let vM=this;
-      if( vM.idcojo!=""){
-        return this.getterMembreCojo.filter(idmem=>idmem.marche_id==vM.idcojo);
-      }
-      return null;
-    },
+
 
     rechercheMembreCojo(){
       // console.log(this.formMandater.matricule_m)

@@ -1,3 +1,4 @@
+
 <template>
 <div>
   <div class="widget-box" v-if="detail_dossier_candidature">
