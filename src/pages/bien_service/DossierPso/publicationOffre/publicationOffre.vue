@@ -11,7 +11,7 @@
                                         <th>Reference appel</th>
                                         <th> Type procedure</th>
 
-                                      
+                                      <th>Numéro et date d'autorisation</th>
                                         <th>Date emmission</th>
                                         <th>Date limite</th>
                                         <th>Objet appel</th>
@@ -95,7 +95,7 @@
                                 <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date emission <code>*</code></label>
+                                <label>Date de début de publication <code>*</code></label>
                                 <input type="date" class="span" placeholder="Date emision" v-model="formData.date_emission">
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                                 <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date limite <code>*</code></label>
+                                <label>Date de fin de publication <code>*</code></label>
                                 <input type="date" class="span" placeholder="Date limite" v-model="formData.date_limite" :min="formData.date_emission">
                             </div>
                         </div>
