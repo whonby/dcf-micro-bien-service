@@ -8,7 +8,7 @@
                     <thead>
                    <tr>
                         <th>Date lettre</th>
-                        <th>Reference DAO </th>
+                        <th>Ref lettre </th>
                         <th>Destinataire</th>
                         <th>Objet de la lettre</th>
                         <th>Fichier</th>
@@ -61,11 +61,7 @@
                           <tr>
                             <td>
                         <div class="control-group">
-<<<<<<< HEAD
                         <label class="control-label">Référence DAO</label>
-=======
-                        <label class="control-label">Ref DAO</label>
->>>>>>> 40dae1ef2263fec3127d1d6a5539f4674dc786aa
                         <div class="controls">
                             <!-- <select v-model="formLettre.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -98,11 +94,7 @@
                             <tr>
                             <td >
                           <div class="control-group">
-<<<<<<< HEAD
                         <label class="control-label">Référence de la lettre</label>
-=======
-                        <label class="control-label">lettre de reférence</label>
->>>>>>> 40dae1ef2263fec3127d1d6a5539f4674dc786aa
                         <div class="controls">
                             <input
                                     type="text"
@@ -192,11 +184,7 @@
                                <tr>
                             <td>
                         <div class="control-group">
-<<<<<<< HEAD
                         <label class="control-label">Référence DAO</label>
-=======
-                        <label class="control-label"> Ref DAO</label>
->>>>>>> 40dae1ef2263fec3127d1d6a5539f4674dc786aa
                         <div class="controls">
                             <!-- <select v-model="formLettre.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -229,11 +217,7 @@
                             <tr>
                             <td >
                           <div class="control-group">
-<<<<<<< HEAD
                         <label class="control-label">Référence de la lettre</label>
-=======
-                        <label class="control-label">Lettre de reférence </label>
->>>>>>> 40dae1ef2263fec3127d1d6a5539f4674dc786aa
                         <div class="controls">
                             <input
                                     type="text"

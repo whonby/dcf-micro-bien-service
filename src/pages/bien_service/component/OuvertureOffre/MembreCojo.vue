@@ -11,8 +11,8 @@
       <thead>
       <tr>
         <th>Matricule</th>
-        <th>Nom et prenom</th>
-        <th>Role</th>
+        <th>Nom et prénoms</th>
+        <th>Rôle</th>
         <th>Action</th>
       </tr>
       </thead>
@@ -61,7 +61,7 @@
 
                   <div class="control-group">
 
-                    <label class="control-label">Nom et prenom <code>*</code> :</label>
+                    <label class="control-label">Nom et prénoms <code>*</code> :</label>
                     <div class="control-group">
                       <input type="text" class="span" placeholder="" v-model="formDataMembreCojo.nom_prenom">
 
@@ -102,7 +102,7 @@
 
                   <div class="control-group">
 
-                    <label class="control-label span5">Conctacts <code>*</code> :</label>
+                    <label class="control-label span5">Contacts <code>*</code> :</label>
 
                     <div class="control-group">
                       <input type="text" class="span" placeholder="Numero lo" v-model="formDataMembreCojo.telephone" >
@@ -115,7 +115,7 @@
 
                   <div class="control-group">
 
-                    <label class="control-label span5">Role <code>*</code> :</label>
+                    <label class="control-label span5">Rôle <code>*</code> :</label>
 
                     <div class="controls">
                       <select v-model="formDataMembreCojo.role_membre_cojo_id" class="span">
@@ -146,7 +146,7 @@
     <div id="modification_membre_cojo" class="modal hide" aria-hidden="true" style="display: none;">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>modification  </h3>
+        <h3>Modification  </h3>
       </div>
       <div class="modal-body">
         <div class="widget-box">
@@ -167,7 +167,7 @@
 
                   <div class="control-group">
 
-                    <label class="control-label">Nom et prenom <code>*</code> :</label>
+                    <label class="control-label">Nom et prénoms<code>*</code> :</label>
                     <div class="control-group">
                       <input type="text" class="span" placeholder="Numero lo" v-model="edite_membre_cojo.nom_prenom">
 
@@ -183,7 +183,7 @@
 
                   <div class="control-group">
 
-                    <label class="control-label span5">Role <code>*</code> :</label>
+                    <label class="control-label span5">Rôle <code>*</code> :</label>
 
                     <div class="controls">
                       <select v-model="edite_membre_cojo.role_membre_cojo_id" class="span">

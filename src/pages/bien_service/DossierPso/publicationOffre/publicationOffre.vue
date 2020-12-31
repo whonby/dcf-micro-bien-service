@@ -8,8 +8,10 @@
                     <thead>
                    <tr>
 
-                                        <th>Reference appel - DAO</th>
+                                        <th>Reference appel</th>
                                         <th> Type procedure</th>
+
+                                      
                                         <th>Date emmission</th>
                                         <th>Date limite</th>
                                         <th>Objet appel</th>
@@ -55,7 +57,7 @@
 <div id="ajouterOffre" class="modal hide grdirModalActeEffet">
              <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter  DAO</h3>
+                <h3>Ajouter  offre</h3>
             </div>
             <div class="modal-body">
 
@@ -63,7 +65,7 @@
                           <tr>
                             <td>
                         <div class="control-group">
-                            <label class="control-label">Type de procedure <code>*</code> :</label>
+                            <label class="control-label">Type de procédure <code>*</code> :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Type appel" :value="typeProcedureLibelle(typeProcedure_id(procedurePassation_id(macheid)))" disabled>
                             </div>
@@ -106,26 +108,14 @@
                             </div>
                         </div>
                         </td>
-
-                        
-                        </tr>
-                        <tr>
-                            <td >
+                        <!-- <td >
                         <div class="control-group">
-                            <label class="control-label">Numero d'autorisation :</label>
+                            <label class="control-label">Imputation :</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="" v-model="formData.numero_autorisation">
+                                <input type="text" class="span" placeholder="Imputation" v-model="formData.imputation" disabled>
                             </div>
                         </div>
-                        </td>
-                            <td>
-                                <div class="control-group">
-                                    <label class="control-label">Fichier DAO:</label>
-                                    <div class="controls">
-                                        <input type="file"   @change="OnchangeFichier" />
-                                    </div>
-                                </div>
-                            </td>
+                        </td> -->
                         </tr>
                     </table>  
 
@@ -147,7 +137,7 @@
 <div id="modificationModal" class="modal hide grdirModalActeEffet">
            <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification DAO</h3>
+                <h3>Modification  offre</h3>
             </div>
             <div class="modal-body">
 
@@ -199,26 +189,15 @@
                             </div>
                         </div>
                         </td>
-
-                       
-                        </tr>
-                        <tr>
-                             <td >
+                         <!-- <td>
+                        
                         <div class="control-group">
-                            <label class="control-label">Numero d'autorisation :</label>
+                            <label>Imputation</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="" v-model="edite_appel_offre.numero_autorisation" >
+                                <input type="text" class="span" placeholder="Imputation" v-model="edite_appel_offre.imputation">
                             </div>
                         </div>
-                        </td>
-                            <td>
-                                <div class="control-group">
-                                    <label class="control-label">Fichier DAO:</label>
-                                    <div class="controls">
-                                        <input type="file"   @change="OnchangeFichier" />
-                                    </div>
-                                </div>
-                            </td>
+         </td> -->
                                
                             </tr>
                             
@@ -251,13 +230,9 @@ export default {
     
     data(){
         return{
-            imagePDF :"",
-        namePDF :"",
-        fichierPDF :"",
-            selectedFile:"",
+        
         formData:{
               ref_appel:"",
-              numero_autorisation:"",
                     type_appel:"",
                     financement:"",
                     nom_bailleurs:"",
@@ -269,7 +244,6 @@ export default {
         },
         edite_appel_offre:{
              	ref_appel:"",
-                 numero_autorisation:"",
                     type_appel:"",
                     financement:"",
                     nom_bailleurs:"",
@@ -397,24 +371,6 @@ typeProcedureLibelle() {
             },
 
 
-
-          OnchangeFichier(e) {
-              const files = e.target.files;
-              this.selectedFile = event.target.files[0];
-              console.log(this.selectedFile)
-              Array.from(files).forEach(file => this.addFichierPDF(file));
-          },
-          addFichierPDF(file) {
-              let reader = new FileReader();
-              let vm = this;
-              reader.onload = e => {
-                  vm.imagePDF = "pdf.png";
-                  vm.namePDF = file.name;
-                  vm.fichierPDF = e.target.result;
-              };
-              reader.readAsDataURL(file);
-          },
-
              ajouter(){
      var nouvelObjet = {
       ...this.formData,
@@ -438,7 +394,6 @@ typeProcedureLibelle() {
                     objet_appel:"",
                     imputation:"",
                     marche_id:"",
-                    numero_autorisation:""
                 }
     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
     marcheObjet.attribue=1

@@ -1042,7 +1042,7 @@ Montantapresretenues(){
       nethtva:this.montantTVA,
       netttc:this.Montantapresretenues,
       parts_etat:this.MontantHTEtat,
-      parts_bailleur:this.MontantHTBailleur,
+      parts_bailleur:this.MontantHTBailleur, 
       montantmarche:this.Montantapresretenues
       };
       this.ajouterDecompteFacture(nouvelObjet);

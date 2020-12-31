@@ -116,7 +116,7 @@
            </div>-->
 
 
-          <div class="control-group">
+          <!-- <div class="control-group">
             <label class="control-label">Date de composition</label>
             <div class="controls">
               <input
@@ -127,7 +127,7 @@
               />
             </div>
           </div>
-
+ -->
 
 
 
