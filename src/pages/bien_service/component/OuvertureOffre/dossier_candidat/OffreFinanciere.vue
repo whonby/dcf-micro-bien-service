@@ -75,8 +75,24 @@
       </table>
       <table class="table table-bordered table-striped">
         <tr>
+              <td>
+              <div class="control-group">
+                <label class="control-label">Rabais offert</label>
+                <div class="controls">
+                  <input type="text"  v-model="formOffreFinanciere.Rabais" class="span" placeholder="Rabais offert">
+                </div>
+              </div>
+            </td>
+           <td>
 
+            <div class="control-group">
+              <label class="control-label">Montant HT:</label>
+              <div class="controls">
+                <input type="number" class="span" placeholder="Montant TTC" v-model="formOffreFinanciere.montant_total_ttc">
+              </div>
+            </div>
 
+          </td>
           <td>
 
             <div class="control-group">
@@ -89,15 +105,11 @@
           </td>
           <td>
 
-<!--            <div class="control-group">-->
-<!--              <label class="control-label">Prix unitaire :</label>-->
-<!--              <div class="controls">-->
-<!--                <input type="number" class="span" placeholder="prix unitaire" v-model="formOffreFinanciere.prix_unitaire">-->
-<!--              </div>-->
-<!--            </div>-->
+
           </td>
         </tr>
         <tr>
+       
 
 <!--          <td>-->
 <!--            <div class="control-group">-->
@@ -187,6 +199,16 @@
       </table>
       <table class="table table-bordered table-striped">
         <tr>
+             <td>
+
+            <div class="control-group">
+              <label class="control-label">Montant HT:</label>
+              <div class="controls">
+                <input type="number" class="span" placeholder="Montant TTC" v-model="editer.montant_total_ttc">
+              </div>
+            </div>
+
+          </td>
           <td>
 
             <div class="control-group">
@@ -197,17 +219,17 @@
             </div>
 
           </td>
-          <td>
-
-            <!--            <div class="control-group">-->
-            <!--              <label class="control-label">Prix unitaire :</label>-->
-            <!--              <div class="controls">-->
-            <!--                <input type="number" class="span" placeholder="prix unitaire" v-model="formOffreFinanciere.prix_unitaire">-->
-            <!--              </div>-->
-            <!--            </div>-->
-          </td>
+              <td>
+              <div class="control-group">
+                <label class="control-label">Rabais offert</label>
+                <div class="controls">
+                  <input type="text"  v-model="editer.Rabais" class="span" placeholder="Rabais offert">
+                </div>
+              </div>
+            </td>
         </tr>
         <tr>
+          
 
           <!--          <td>-->
           <!--            <div class="control-group">-->
@@ -284,6 +306,8 @@ name: "OffreFinanciere",
       editer:"",
       formOffreFinanciere:{
         numero_lot:"",
+        Rabais:"",
+        montant_total_ht:"",
         montant_total_ttc:"",
         dossier_candidat_id:"",
         marche_id:""

@@ -146,14 +146,14 @@
                 </div>
               </div>
             </td>
-            <td>
+            <!-- <td>
               <div class="control-group">
                 <label class="control-label">Rabais offert</label>
                 <div class="controls">
                   <input type="text"  v-model="formchnique.rabai_offert" class="span" placeholder="Rabais offert">
                 </div>
               </div>
-            </td>
+            </td> -->
             <td>
 
               <div class="control-group">
@@ -293,14 +293,14 @@
                 </div>
               </div>
             </td>
-            <td>
+            <!-- <td>
               <div class="control-group">
                 <label class="control-label">Rabais offert</label>
                 <div class="controls">
                   <input type="text"  v-model="editer.rabai_offert" class="span" placeholder="Rabais offert">
                 </div>
               </div>
-            </td>
+            </td> -->
             <td>
 
               <div class="control-group">

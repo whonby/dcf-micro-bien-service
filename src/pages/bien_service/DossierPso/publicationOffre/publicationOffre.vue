@@ -11,7 +11,7 @@
                                         <th>Reference appel</th>
                                         <th> Type procedure</th>
 
-                                      <th>Numéro et date d'autorisation</th>
+                                        <th>Numéro et date d'autorisation</th>
                                         <th>Date emmission</th>
                                         <th>Date limite</th>
                                         <th>Objet appel</th>
@@ -73,7 +73,7 @@
                             </td>
                             <td>
                         <div class="control-group">
-                            <label class="control-label">Reference  de DAO <code>*</code> :</label>
+                            <label class="control-label">Reference  offre <code>*</code> :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Reference d'appel" v-model="formData.ref_appel">
                             </div>
@@ -83,7 +83,7 @@
                             <tr>
                             <td colspan="2" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet  DAO :</label>
+                            <label class="control-label">Objet  offre :</label>
                             <div class="controls">
                                  <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     
@@ -94,12 +94,10 @@
                             <tr>
                                 <td>
                         <div class="control-group">
+
                             <div class="controls">
-<<<<<<< HEAD
-                                <label>Date de début de publication <code>*</code></label>
-=======
-                                <label>Date emission de DAO <code>*</code></label>
->>>>>>> a117f92a7f40019875937a18b49128b2dd055369
+
+                                <label>Date de début de publication <code></code></label>
                                 <input type="date" class="span" placeholder="Date emision" v-model="formData.date_emission">
                             </div>
                         </div>
@@ -107,11 +105,7 @@
                                 <td>
                         <div class="control-group">
                             <div class="controls">
-<<<<<<< HEAD
-                                <label>Date de fin de publication <code>*</code></label>
-=======
-                                <label>Date limite de DAO <code>*</code></label>
->>>>>>> a117f92a7f40019875937a18b49128b2dd055369
+                                <label>Date de fin de publication <code></code></label>
                                 <input type="date" class="span" placeholder="Date limite" v-model="formData.date_limite" :min="formData.date_emission">
                             </div>
                         </div>
@@ -153,7 +147,7 @@
                  <tr>
                        <td>
                         <div class="control-group">
-                            <label class="control-label">Type de procedure  :</label>
+                            <label class="control-label">Type de procédure  :</label>
                             <div class="controls">
                                 <input type="text" class="span" disabled :value="typeProcedureLibelle(edite_appel_offre.type_appel)">
                             </div>
@@ -161,7 +155,7 @@
                             </td>
                                 <td >
                         <div class="control-group">
-                            <label class="control-label">Reference de DAO  :</label>
+                            <label class="control-label">Reference  offre  :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Reference d'appel" v-model="edite_appel_offre.ref_appel">
                             </div>
@@ -171,7 +165,7 @@
                                    <tr>
                             <td colspan="2" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet de DAO :</label>
+                            <label class="control-label">Objet  offre :</label>
                             <div class="controls">
                                  <textarea   v-model="edite_appel_offre.objet_appel"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     
@@ -183,7 +177,7 @@
                              <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date emission </label>
+                                <label>Date de début de publication </label>
                                 <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
                             </div>
                         </div>
@@ -192,7 +186,7 @@
                                  <td >
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date limite </label>
+                                <label>Date de fin de publication </label>
                                 <input type="date" class="span" placeholder="Date limite" v-model="edite_appel_offre.date_limite">
                             </div>
                         </div>

@@ -10,7 +10,7 @@
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">libellé</label>
+            <label class="control-label">libellérec</label>
             <div class="controls">
               <input
                 type="text"
