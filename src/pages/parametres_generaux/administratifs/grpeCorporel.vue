@@ -5,13 +5,13 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Transmission</h3>
+        <h3>Ajouter Type Corporel</h3>
       </div>
       <div class="modal-body">
       <table class="table table-bordered table-striped">
           
           <div class="control-group">
-            <label class="control-label">Libellé</label>
+            <label class="control-label">Libelle</label>
             <div class="controls">
               <input
                 type="text"
@@ -25,10 +25,10 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouteMarqueVehicule(formData)"
+          @click.prevent="ajouterGrpeCorporelLocal(formData)"
           class="btn btn-primary"
           href="#"
-          v-show="formData.libelle.length"
+         
         >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
@@ -40,7 +40,7 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Transmission</h3>
+        <h3>Modifier Type Corporel</h3>
       </div>
       <div class="modal-body">
      <table class="table table-bordered table-striped">
@@ -60,10 +60,10 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierServiceLocal(editService)"
+          @click.prevent="modifierGrpeCorporelLocal(editService)"
           class="btn btn-primary"
           href="#"
-          v-show="editService.libelle.length"
+          
         >Modifier</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
@@ -105,7 +105,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>type Véhicule</h5>
+              <h5>Liste Type Corporel</h5>
               <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -113,7 +113,7 @@
             </div>
 
             <div class="widget-content nopadding">
-              <table class="table table-bordered table-striped" id="printMe">
+              <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                    
@@ -124,16 +124,16 @@
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="service in partition(filtre_service, size)[page]"
+                    v-for="(service, index) in partition(filtre_service, size)[page]"
                     :key="service.id"
                   >
                    
-                    <td style="width:90%;font-size:14px"
-                      @dblclick="afficherModalModifierService(service.id)"
+                    <td style="width:90%"
+                      @dblclick="afficherModalmodifierGrpeCorporel(index)"
                     >{{service.libelle || 'Non renseigné'}}</td>
 
                     <td>
-                      <button class="btn btn-danger" @click="supprimerTransmission(service.id)">
+                      <button class="btn btn-danger" @click="supprimerGrpeCorporel(service.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
@@ -153,15 +153,18 @@
 
 
 
-              
+              <div v-if="filtre_service.length"></div>
+              <div v-else>
+                <p style="text-align:center;font-size:20px;color:red;">Aucun</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterService" main-icon="apps" bg-color="green"></fab>
-     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterService()">Open</button>
+    <fab :actions="fabActions" @cache="afficherModalajouterGrpeCorporel" main-icon="apps" bg-color="green"></fab>
+     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalajouterGrpeCorporel()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <notifications  />
  </div>
@@ -169,8 +172,10 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-  import {partition} from '../../../../Repositories/Repository'
-
+import {partition} from '../../../../src/Repositories/Repository'
+  
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   name:'service',
   data() {
@@ -207,10 +212,10 @@ json_fields: {
   },
 
   computed: {
-    ...mapGetters("SuiviImmobilisation", ["Transmissions"]),
+    ...mapGetters("SuiviImmobilisation", ["groupecorporels"]),
     filtre_service() {
       const st = this.search.toLowerCase();
-      return this.Transmissions.filter(type => {
+      return this.groupecorporels.filter(type => {
         return (
          
           type.libelle.toLowerCase().includes(st)
@@ -220,10 +225,10 @@ json_fields: {
   },
   methods: {
     ...mapActions("SuiviImmobilisation", [
-     
-      "ajouterTransmission",
-      "modifierTransmission",
-      "supprimerTransmission"
+      "getAllService",
+      "ajouterGrpeCorporel",
+      "modifierGrpeCorporel",
+      "supprimerGrpeCorporel"
     ]),
               // pagination
    partition:partition,
@@ -242,7 +247,14 @@ json_fields: {
           
           // exportation en pdf
          genererEnPdf(){
-  this.$htmlToPaper('printMe');
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.filtre_service;
+    doc.setFontSize(8)
+    doc.text(80,10,"LISTE DES SERVICES")
+  doc.autoTable(this.getColumns(),data)
+doc.save('services.pdf')
+return 0
 },
 getColumns() {
     return [
@@ -262,15 +274,15 @@ getColumns() {
 
 
     //afiicher modal ajouter
-    afficherModalAjouterService() {
+    afficherModalajouterGrpeCorporel() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
-    ajouteMarqueVehicule() {
-      this.ajouterTransmission(this.formData);
+    ajouterGrpeCorporelLocal() {
+      this.ajouterGrpeCorporel(this.formData);
 
       this.formData = {
         
@@ -278,17 +290,17 @@ getColumns() {
       };
     },
     // afficher modal de modification
-    afficherModalModifierService(id) {
+    afficherModalmodifierGrpeCorporel(index) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editService = this.Transmission.find(item=>item.id==id);
+      this.editService = this.services[index];
     },
     // fonction pour vider l'input modification
-    modifierServiceLocal() {
-      this.modifierTransmission(this.editService);
+    modifierGrpeCorporelLocal() {
+      this.modifierGrpeCorporel(this.editService);
 this.$("#modificationModal").modal('hide');
       // this.editService = {
       // 

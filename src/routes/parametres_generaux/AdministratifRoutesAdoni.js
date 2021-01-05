@@ -21,8 +21,23 @@ import PlanPays from "../../pages/parametres_generaux/administratifs/PlanPays.vu
 import Infrastructures from "../../pages/parametres_generaux/administratifs/Infrastructures.vue";
 import structureOrganigrammeUa from "../../pages/parametres_generaux/administratifs/structureOrganigrammeUa.vue";
 import PlanOrganigrammeUa from "../../pages/parametres_generaux/administratifs/PlanOrganigrammeUa.vue";
+
+
+import grpeCorporel from '../../pages/parametres_generaux/administratifs/grpeCorporel.vue'
+import TypeBienCorporel from '../../pages/parametres_generaux/administratifs/TypeBienCorporel.vue'
+
 const AdministratifRoutesAdoni = [
   // route type unite administrative
+  {
+    path: "/grpeCorporel",
+    name: "grpeCorporel",
+    component: grpeCorporel
+  },
+  {
+    path: "/TypeBienCorporel",
+    name: "TypeBienCorporel",
+    component: TypeBienCorporel
+  },
   {
     path: "/Infrastructures",
     name: "Infrastructures",

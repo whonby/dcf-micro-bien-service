@@ -78,7 +78,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                     
+                      <tr
+                    class="odd gradeX"
+                    v-for="service in ListeActiclePatrimoineSortir(uniteAdministrative_id)"
+                    :key="service.id"
+                  >
+                   
+                    <td style="width:90%;font-size:14px" >{{service.famillearticle_id || 'Non renseigné'}}</td>                      
+                   
+
+                    
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -193,11 +203,12 @@ quantite: {
       "articles",
      "marqueVehicules",
      "ModeleVehicules",
-      
+      "ficheArticle",
       "type_Unite_admins",
       "totalQteEntrant",
       "totalQteSortant",
-     "getterUa_idImo"
+     "getterUa_idImo",
+     "immobilisations"
     ]),
     
     ...mapGetters("uniteadministrative", ["uniteAdministratives","GestionStockageArticles"]),
@@ -208,6 +219,33 @@ quantite: {
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
 
+ListeActiclePatrimoineSortir() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.immobilisations.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+           return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.uniteadministrative_id == id);
+        }
+      };
+        }
+
+        return id => {
+        if (id != null && id != "") {
+          return this.immobilisations.filter(element => element.uniteadministrative_id == id);
+        }
+      };
+
+    },
 
 
   libelleMarque() {

@@ -2150,7 +2150,7 @@ formatageSomme:formatageSomme,
   margin: 0 -45%;
 }
 .valDirecteur{
-  width:70%;
+  width:90%;
   margin:0 -35%;
 }
 </style>

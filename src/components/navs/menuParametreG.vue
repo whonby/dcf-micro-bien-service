@@ -630,6 +630,20 @@
             Etat Immobilisation
             </router-link>
           </li>
+           <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'grpeCorporel'}" tag="a">
+              <i class="icon-check"></i>
+            Groupe Corporel
+            </router-link>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'TypeBienCorporel'}" tag="a">
+              <i class="icon-check"></i>
+            Type de Bien
+            </router-link>
+          </li>
             <li class="divider"></li>
           <li>
             <router-link :to="{name: 'listeEquipement'}" tag="a">

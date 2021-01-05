@@ -564,11 +564,11 @@
                     >{{stock.durevie || 'Non renseigné'}} Ans</td> -->
 
                     <td>
-                        <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
+                        <!-- <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
                         <span>
                           <i class=" icon-edit"></i>
                         </span>
-                      </button>
+                      </button> -->
                       <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
                         <span>
                           <i class="icon icon-trash"></i>
@@ -713,7 +713,6 @@ quantite: {
       "articles",
      "marqueVehicules",
      "ModeleVehicules",
-      
       "type_Unite_admins",
       "totalQteEntrant",
       "totalQteSortant",
