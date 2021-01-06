@@ -346,7 +346,7 @@
                                     <thead>
                                    <tr>
                     <th>Marché</th>
-                      <th>Type acte financier</th>
+                      <!-- <th>Type acte financier</th> -->
                         <th>Numéro avenant</th>
                     <th>Objet Avenant</th>
                     <th>Montant Avenant</th>
@@ -361,9 +361,9 @@
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{afficheNumeroMarcheAttribuer(type.marche_id) || 'Non renseigné'}}</td>
-                     <td
+                     <!-- <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.type_acte_financier || 'Non renseigné'}}</td>
+                    >{{type.type_acte_financier || 'Non renseigné'}}</td> -->
                      <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.numero_avenant || 'Non renseigné'}}</td>
@@ -387,7 +387,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td></td>
+                    <!-- <td></td> -->
                     <td></td>
                     <td></td>
                     

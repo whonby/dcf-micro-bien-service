@@ -315,7 +315,7 @@ afficheNumeroMarche
     import moment from "moment";
     import { formatageSomme } from './../../../../../Repositories/Repository';
    
-   import avenant from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
+   import avenant from "../dossierAvenant/avenantHs";
    import facture from "../dossierFacture/factureHs";
    import decompte from "../dossierDecompte/decomptePro";
    import graphiqueExecutionMarche from "../../../../bien_service/contractualisation/DossierExecution/DossierGraphiqueExecutionMarche/graphiqueExecutionMarche";
