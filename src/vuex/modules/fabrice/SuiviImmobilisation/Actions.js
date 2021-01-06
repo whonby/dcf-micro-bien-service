@@ -2210,3 +2210,54 @@ export function supprimerTypeBienCorporels({ commit,dispatch }, id) {
           axios.delete("/TypeBienGrpeCorporel/" + id).then(() => dialog.close());
       });
 }
+// export function modifierImmobilisationSortie({ commit,dispatch }, nouveau) {
+
+//   this.$app.$dialog
+//       .confirm("Voulez vouz vraiment supprimer ?.")
+//       asyncLoading(axios
+//         .put("/modifier_immobilisation/" + nouveau.id,nouveau)).then(() => dialog.close())
+//         .then(dialog => {
+//       .then((dialog,response) => {
+//         commit("MODIFIER_IMMOBILISATION", response.data);
+//         dispatch("getAllImmobilisation");
+//         this.$app.$notify({
+//           title: 'Success',
+//           text: 'Modification Effectué avec Succès!',
+//           type: "success"
+//       })
+//     })
+//       });
+  
+      
+// }
+export function modifierImmobilisationSortie({ commit,dispatch }, nouveau) {
+  this.$app.$dialog
+  
+      .confirm("Voulez vous vraiment?.")
+      .then(response => {
+      asyncLoading(axios
+        .put("/modifier_immobilisation/" + nouveau.id,nouveau).then(() => response.close()))
+        commit("MODIFIER_IMMOBILISATION", response.data);
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Modification Effectué avec Succès!',
+          type: "success"
+      })
+      })
+      
+
+
+
+
+
+      // .then(response => {
+      //   commit("MODIFIER_IMMOBILISATION", response.data);
+      //     dispatch('getAllImmobilisation')
+      //     asyncLoading(  
+      //     axios.put("/modifier_immobilisation/" + nouveau.id,nouveau));
+      // });
+}
