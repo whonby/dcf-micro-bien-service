@@ -105,7 +105,7 @@
                                                 <div class="btn-group">
                                                    
                                                     <button @click="afficheModalDecision(item.id)"  class="btn btn-danger ">
-                                                        <span class=""><i class="icon-folder-open"></i></span></button>
+                                                        <span class=""><i class="icon-folder-open"> Actualiser le regime</i></span></button>
                                                 </div>
 
                                             </td>

@@ -63,11 +63,11 @@
                                     <td>
                                         <router-link :to="{ name: 'DetailCF', params: { id: titre.id }}"
                                                      class="btn btn-default " title="Detail CF">
-                                            <span class=""><i class=" icon-folder-open"></i></span>
+                                            <span class=""><i class=" icon-folder-open"> Détail CF</i></span>
                                         </router-link>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerUtilisateur(titre.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i></span></button>
+                                                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
                                         </div>
                                     </td>
                                 </tr>

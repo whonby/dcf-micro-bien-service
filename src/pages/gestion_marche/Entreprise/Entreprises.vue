@@ -190,11 +190,11 @@ getSecteurActivite
 
                                    <router-link :to="{ name: 'DetaillEntreprise', params: { id: item.id }}" 
                                     class="btn btn-default " title="Detail entreprise ">
-                                   <span class=""><i class="icon-folder-open"></i></span>
+                                   <span class=""><i class="icon-folder-open"> Détail EN/SE</i></span>
                                          </router-link> 
-                                                        <a href="#myModal2" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-lock"></i></a>
+                                                        <a href="#myModal2" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-lock" title="Sanctionnée l'entreprise"> Sanctionnée EN/SE</i></a>
                                                         <button @click.prevent="supprimerEntreprise(item.id)"  class="btn btn-danger ">
-                                                            <span class=""><i class="icon-trash"></i></span></button>
+                                                            <span class=""><i class="icon-trash"> Supprimer</i></span></button>
 
                                                     </div>
 
@@ -291,12 +291,12 @@ getSecteurActivite
                                                  
                                             <td>
                                                 <div class="btn-group">
-                                                    <a href="#myModal2" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-lock"></i></a>
+                                                    <a href="#myModal2" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-lock"> Sanctionnées EN/SE</i></a>
                                                     <button @click.prevent="supprimerEntreprise(item.id)"  class="btn btn-danger ">
-                                                        <span class=""><i class="icon-trash"></i></span></button>
+                                                        <span class=""><i class="icon-trash"> Supprimer</i></span></button>
                                                 </div>
 
-                                            </td>
+                                            </td>*
                                         </tr>
                                         <tr v-if="titreFiltres.length==0" align="right">
                                             <h6>Pas de donnée disponible</h6>
@@ -388,14 +388,14 @@ getSecteurActivite
                                                 <!-- <td @dblclick="afficherModalModifierTitre(item.id)">{{item.banque || 'Non renseigné'}}</td> -->
                                                 <td v-if="item.active == 0" style="color:#FF0000;text-align:center;font-size:14px;font-weight: bold;">ES</td>
         <td>
-  <a href="#exampleModal" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-eye-open" title="Voir la Cause"></i></a>
+  <a href="#exampleModal" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-eye-open" title="Voir la Cause"> Voir la cause</i></a>
 </td>
-<td> <button @click.prevent="modifierModalActeEffetFinancierLocal2(item.id)"  class="btn btn-info"  title="Retirer la sanction">
+<td> <button @click.prevent="modifierModalActeEffetFinancierLocal2(item.id)"  class="btn btn-info"  title="Retirer la sanction">Rtirer la sanction
                 <span class=""><i class="icon-unlock" ></i></span></button> </td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <button @click.prevent="supprimerEntreprise(item.id)"  class="btn btn-danger ">
-                                                            <span class=""><i class="icon-trash"></i></span></button>
+                                                            <span class=""><i class="icon-trash"> Supprimer</i></span></button>
 
                                                     </div>
 
@@ -485,6 +485,7 @@ getSecteurActivite
 </template>
 
 <script>
+
 
     import {mapGetters, mapActions} from 'vuex'
     import {partition} from '../../../../src/Repositories/Repository'
