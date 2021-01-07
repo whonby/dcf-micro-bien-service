@@ -69,6 +69,7 @@ import detailMarchePsLimite from '../../pages/bien_service/dossierDetailMarchePr
 import detailMarcheAoi_Aon from '../../pages/bien_service/dossierDetailMarcheAOI_AON/detailMarcheAoi_Aon.vue';
 import indicateurBienService from '../../pages/bien_service/contractualisation/indicateurBienService.vue';
 import PlanPassationMarche from "../../pages/bien_service/ppm/PlanPassationMarche";
+import PlanPassationMarcheHorsSib from '../../pages/bien_service/ppm/PlanPassationMarcheHorsSib.vue';
 import DetailPPM from "../../pages/bien_service/ppm/DetailPPM";
 import detailMarcheFsqc from "../../pages/bien_service/dossierFSQC/detailMarcheFsqc";
 import detailMarcheR3cv from "../../pages/bien_service/dossierR3CV/detailMarcheR3cv";
@@ -628,6 +629,11 @@ detailExecution
         path:"/ppm",
         name:"ppm",
         component:PlanPassationMarche
+    },
+    {
+        path:"/ppm-hors-sib",
+        name:"ppmHorsSib",
+        component:PlanPassationMarcheHorsSib
     },
     {
         path:"/ppm/:id",

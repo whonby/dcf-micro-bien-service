@@ -664,7 +664,7 @@ reference_marche
                 </button>
                    <button v-else class="btn  btn-danger">
               
-                <span title="MARCHE EN PLANIFICATION">PL</span>
+                <span title="MARCHE EN PLANIFICATION">NP</span>
                 </button>
 
                    </td>
