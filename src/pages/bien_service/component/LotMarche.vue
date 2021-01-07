@@ -430,7 +430,7 @@ name: "LotMarche",
         unite_administrative_id:"",
         activite_id:"",
         imputation:"",
-        attribue:"",
+        attribue:0,
         Nature_des_prix:"",
         procedure_passation_id:"",
         exo_id:"",
@@ -772,10 +772,7 @@ SommeDesLots(){
     this.editor = this.getMarchePersonnaliser.find(item=>item.id==index)
   },
   modification(){
-        let attribution=this.editor.attribue
-        if(this.editor.attribue<1){
-            attribution=1
-        }
+       console.log("OKOKOK")
       let objet={
         id:this.editor.id,
         objet:this.editor.objet,
@@ -788,8 +785,9 @@ SommeDesLots(){
         latitude:this.editor.latitude,
         longitude:this.editor.longitude,
         sib:this.editor.sib,
+        attribue:0,
         numero_lot:this.editor.numero_lot,
-        attribue:attribution,
+       
         infrastructure_id:this.afficheIdInfrasture(this.macheid)
       }
 

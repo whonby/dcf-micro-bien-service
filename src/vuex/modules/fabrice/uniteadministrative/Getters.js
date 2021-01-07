@@ -779,4 +779,11 @@ export const groupStockArticle = (state, getters) => {
 };
 
 
-
+export const groupStockParActicle = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.GestionStockageArticles, "famill_id");
+};
+export const groupStockParMarque = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.GestionStockageArticles, "marque_id");
+};

@@ -54,12 +54,12 @@
             <span  style="text-align:center"> GESTION DU PATRIMOINE</span>
           </a>
         </li>
-         <li>
+         <!-- <li>
           <a href="#">
             <i class="icon-group"></i>
             <span  style="text-align:center"> INVENTAIRE DU PATRIMOINE</span>
           </a>
-        </li>
+        </li> -->
         <!-- <li  @click.prevent="navigateToGestionParc">
           <a href="#">
             <i class="icon-group"></i>

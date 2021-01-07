@@ -249,7 +249,7 @@ listeDesLotExecution() {
          return id => {
         if (id != null && id != "") {
           return this.colect.filter(
-            element => element.parent_id == id  && element.attribue == 2 && this.afficherCodetypeMarche(element.type_marche_id) == 3
+            element => element.parent_id == id  && element.attribue == 2 && this.afficherCodetypeMarche(element.type_marche_id) == 3 || element.type_marche_id == 1 && element.parent_id == id  && element.attribue == 2
           );
         }
       };
@@ -259,7 +259,7 @@ listeDesLotExecution() {
   return id => {
         if (id != null && id != "") {
           return this.getMarchePersonnaliser.filter(
-element => element.parent_id == id  && element.attribue == 2 && this.afficherCodetypeMarche(element.type_marche_id) == 3
+element => element.parent_id == id  && element.attribue == 2 && this.afficherCodetypeMarche(element.type_marche_id) == 3 || element.type_marche_id == 1 && element.parent_id == id  && element.attribue == 2
           );
         }
       };

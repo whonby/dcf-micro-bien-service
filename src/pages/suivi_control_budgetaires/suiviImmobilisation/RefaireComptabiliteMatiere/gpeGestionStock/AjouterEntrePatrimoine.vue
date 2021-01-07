@@ -53,7 +53,7 @@
                  </td>
                      <td colspan="">
                     <div class="control-group">
-                  <label class="control-label">Marche{{formData.uAdministrative_id}}</label>
+                  <label class="control-label">Marche</label>
                   <div class="controls">
                     <select  class="span" v-model="formData.marche_id">
                       <option></option>                     
@@ -93,19 +93,91 @@
             <option
                         v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
                         :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.designation}}
+                        :value="typeUniteA.designation"
+                      >{{libelleArticle(typeUniteA.designation)}}
                       
-                      {{typeUniteA.designation2}}
+                      
                       
                       </option>
                       <option
                         v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
                         :key="typeUniteA.id"
-                        :value="typeUniteA.id"
+                        :value="typeUniteA.designation2"
                       >
                       
-                      {{typeUniteA.designation2}}
+                      {{libelleArticle(typeUniteA.designation2)}}
+                      
+                      </option>
+                      <option
+                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.designation3"
+                      >
+                      
+                      {{libelleArticle(typeUniteA.designation3)}}
+                      
+                      </option>
+                      <option
+                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.designation4"
+                      >
+                      
+                      {{libelleArticle(typeUniteA.designation4)}}
+                      
+                      </option>
+                      <option
+                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.designation5"
+                      >
+                      
+                      {{libelleArticle(typeUniteA.designation5)}}
+                      
+                      </option>
+                      <option
+                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.designation6"
+                      >
+                      
+                      {{libelleArticle(typeUniteA.designation6)}}
+                      
+                      </option>
+                      <option
+                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.designation7"
+                      >
+                      
+                      {{libelleArticle(typeUniteA.designation7)}}
+                      
+                      </option>
+                      <option
+                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.designation8"
+                      >
+                      
+                      {{typeUniteA.designation8}}
+                      
+                      </option>
+                      <option
+                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.designation9"
+                      >
+                      
+                      {{libelleArticle(typeUniteA.designation9)}}
+                      
+                      </option>
+                      <option
+                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.designation10"
+                      >
+                      
+                      {{libelleArticle(typeUniteA.designation10)}}
                       
                       </option>
                 </select>
@@ -122,6 +194,7 @@
                 class="span"
                 
               />
+                  
             </div>
           </div>
             </td>
@@ -136,6 +209,7 @@
                      <option value="3">Mobilier</option>
                      <option value="4">Immobilier</option> 
                      <option value="5">Gros Travaux</option> 
+                     
                     </select>
               </div>
             </div>
@@ -171,7 +245,7 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">District</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData1.marque_id">
+                    <select  class="span" >
                       <option></option>                     
                      
                     </select>
@@ -182,7 +256,7 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Region</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData1.marque_id">
+                    <select  class="span" >
                       <option></option>                     
                      
                     </select>
@@ -193,7 +267,7 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Département</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData1.marque_id">
+                    <select  class="span" >
                       <option></option>                     
                      
                     </select>
@@ -204,7 +278,7 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Commune</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData1.marque_id">
+                    <select  class="span" >
                       <option></option>                     
                      
                     </select>
@@ -218,7 +292,7 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Quartier</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData1.marque_id">
+                    <select  class="span" >
                       <option></option>                     
                      
                     </select>
@@ -255,7 +329,7 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Type foncier</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData1.marque_id">
+                    <select  class="span" >
                       <option></option>                     
                      
                     </select>
@@ -283,7 +357,7 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Type Propriete</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData1.marque_id">
+                    <select  class="span" >
                       <option></option>                     
                      
                     </select>
@@ -317,7 +391,7 @@
                   <div class="controls">
                     <input
                       type="text"
-                    
+                    v-model="formData.designation"
                       class="span"
                       
                     />
@@ -330,7 +404,7 @@
                   <div class="controls">
                    <input
                       type="text"
-                   
+                   v-model="formData1.matiere"
                       class="span"
                       
                     />
@@ -343,7 +417,7 @@
                   <div class="controls">
                      <input
                       type="text"
-                    
+                    v-model="formData1.couleur"
                       class="span"
                       
                     />
@@ -359,7 +433,7 @@
                   <div class="controls">
                     <input
                       type="text"
-                   
+                   v-model="formData1.revetement"
                       class="span"
                       
                     />
@@ -372,7 +446,7 @@
                   <div class="controls">
                     <input
                       type="text"
-                   
+                   v-model="formData1.dimension"
                       class="span"
                       
                     />
@@ -385,7 +459,7 @@
                   <div class="controls">
                     <input
                       type="text"
-                    v-model="formData1.prix_unitaire"
+                  v-model="formData1.prix_unitaire"
                       class="span"
                       
                     />
@@ -1139,6 +1213,22 @@ cf:cf,
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat","personnaliseActeurDepense",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
      
+libelleArticle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 
+        }
+      };
+    },
+
+
+
+
 
      AfficheModelMaterielMobilier() {
       
@@ -1291,6 +1381,14 @@ libelleUa() {
         return qtereel.date_facture;
       }
       return 0
+        }
+      };
+    },
+       AfficheQuantiteArticle() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getFacturePersonnaliser.filter(qtreel => qtreel.designation == id);
+      
         }
       };
     },
@@ -1608,33 +1706,8 @@ prixUnitaire() {
      AjouterVehicule() {
       
 
-if(this.formData.typestockage == 1){
-
- var nouveauObjet ={
-        ...this.formData1,
-        ua_id:this.formData.uAdministrative_id,
-        marche_id:this.formData.marche_id
-      }
-      
-      this.ajouterFicheArticle(nouveauObjet);
-    this.
-      this.formData1 = {
-        ua_id:"",
-        article_id:"",
-        model_id:"",
-        numero_serie:"",
-        numero_matricule:"",
-        prix_unitaire:"",
-          durevie:"",
-          marque_id:"",
-          immobilisation:"",
-          autreinfo:""
-       
-      };
-}
-else{
-  
-      var objetNew ={
+if(this.formData.typestockage == 2){
+ var objetNew ={
         ...this.formData,
         anneebudgetaire:this.anneeAmort,
         uniteadministrative:this.formData.uAdministrative_id
@@ -1650,7 +1723,7 @@ else{
         marque:"",
         modele:"",
         energie:"",
-        	numchassis:"",
+        numchassis:"",
         numserie:"",
         couleur:"",
         transmission:"",
@@ -1661,6 +1734,41 @@ else{
         votreassuranceexpirere:"",
         
       };
+ 
+}
+else{
+  var nouveauObjet ={
+        ...this.formData1,
+        ua_id:this.formData.uAdministrative_id,
+        marche_id:this.formData.marche_id,
+        type_bien:this.formData.typestockage
+      }
+      var nouveauObjet1 ={
+        
+        uAdministrative_id:this.formData.uAdministrative_id,
+        quantitestock:this.formData.quantitestock,
+        famill_id:this.formData.famill_id,
+        marque_id:this.formData1.marque_id,
+        model_id:this.formData1.model_id,
+       histo_qte:this.formData.quantitestock,
+      }
+      this.ajouterFicheArticle(nouveauObjet);
+      this.ajouterStockArticle(nouveauObjet1)
+    this.
+      this.formData1 = {
+        ua_id:"",
+        article_id:"",
+        model_id:"",
+        numero_serie:"",
+        numero_matricule:"",
+        prix_unitaire:"",
+          durevie:"",
+          marque_id:"",
+          immobilisation:"",
+          autreinfo:""
+       
+      };
+     
 }
 
 

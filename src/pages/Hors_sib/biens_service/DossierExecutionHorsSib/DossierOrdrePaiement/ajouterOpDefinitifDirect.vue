@@ -46,7 +46,7 @@ commparerMontantGleEtMontantFacture
                          <div class="control-group">
                             <label class="control-label">Total général</label>
                             <div class="controls">
-                              <input type="number" class="span" :value="commparerMontantGleEtMontantFacture" readonly/>
+                              <input type="number" class="span" :value="montantGeneralMandat" readonly/>
                             </div>
                           </div>
                         </td>
@@ -1393,21 +1393,21 @@ afficheLibelleUa() {
 ajouterMandatFactureDefinitive(){
       //  let datationdispo = parseFloat(this.montantMarcheAvecAvenant)
       // let montant_contrat = parseFloat( this.afficheMontantReelMarche(this.detail_marche.id))
-      if (this.detail_Facture.prix_propose_ttc > this.commparerMontantGleEtMontantFacture)
+      if (this.detail_Facture.prix_propose_ttc > this.montantGeneralMandat)
       {
-        alert("Le montant engagé est Inférieure au montant de la facture")
-      }
-       else if (this.dotationDisponibleAnterieure < this.detail_Facture.prix_propose_ttc)
-      {
-        alert("La dotation est Inférieure au montant de la facture")
-      }
+      //   alert("Le montant engagé est Inférieure au montant de la facture")
+      // }
+      //  else if (this.dotationDisponibleAnterieure < this.detail_Facture.prix_propose_ttc)
+      // {
+      //   alert("La dotation est Inférieure au montant de la facture")
+      // }
       
-       else if (parseFloat(this.montantMarcheAvecAvenant) == parseFloat(this.sommeEgagementLigne(this.detail_Facture.marche_id)))
-      {
-        alert("Marché apuré")
-      }
-      else if(this.NombreDecompte == 1)
-      {
+      //  else if (parseFloat(this.montantMarcheAvecAvenant) == parseFloat(this.sommeEgagementLigne(this.detail_Facture.marche_id)))
+      // {
+      //   alert("Marché apuré")
+      // }
+      // else if(this.NombreDecompte == 1)
+      // {
         var nouvelObjet919 = {
       ...this.formData,
       etat_srf:0,
@@ -1429,7 +1429,7 @@ activite_id:this.enregistrerActivite,
   grd_nature_id:this.afficherIdGrandeNature(this.detail_Facture.marche_id),
 	compte_id:this.afficheIdCompte(this.afficherIdEntreprise(this.detail_Facture.id)),
 section_id:this.afficherIdSection(this.afficherIdUa(this.detail_Facture.marche_id)),
-  total_general:this.commparerMontantGleEtMontantFacture,
+  total_general:this.montantGeneralMandat,
 // montant_tresor:this.detail_Facture.montant_tresor,
 // montant_don:this.detail_Facture.montant_don,
 // montant_emprunt:this.detail_Facture.montant_emprunt,
@@ -1446,7 +1446,7 @@ section_id:this.afficherIdSection(this.afficherIdUa(this.detail_Facture.marche_i
   //      facture_id :this.detail_Facture.id,
   // marche_id :this.detail_Facture.marche_id,
   // numero_decompte :this.NombreDecompte,
-  //   montant_execute :this.commparerMontantGleEtMontantFacture,
+  //   montant_execute :this.montantGeneralMandat,
   //   montantmarche:this.montantMarcheAvecAvenant,
     
   //     dotationprevue:this.afficherMontantBudgetaireInitial(this.afficherIdLigneBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id))),
@@ -1485,7 +1485,7 @@ activite_id:this.enregistrerActivite,
   grd_nature_id:this.afficherIdGrandeNature(this.detail_Facture.marche_id),
 	compte_id:this.afficheIdCompte(this.afficherIdEntreprise(this.detail_Facture.id)),
 section_id:this.afficherIdSection(this.afficherIdUa(this.detail_Facture.marche_id)),
-  total_general:this.commparerMontantGleEtMontantFacture,
+  total_general:this.montantGeneralMandat,
 // montant_tresor:this.detail_Facture.montant_tresor,
 // montant_don:this.detail_Facture.montant_don,
 // montant_emprunt:this.detail_Facture.montant_emprunt,

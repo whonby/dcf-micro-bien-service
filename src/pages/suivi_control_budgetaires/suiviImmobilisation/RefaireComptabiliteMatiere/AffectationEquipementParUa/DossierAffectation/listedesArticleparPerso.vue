@@ -127,16 +127,7 @@
                                
                             </div>
                           </div>
-                           <input    type="hidden"   class="span3"   :value="afficherAffectationParFonction" />                
-                           <input    type="hidden"   class="span3"   :value="afficherAffectationParActeurDepense" />                
                           
-                          <input    type="hidden"   class="span3"   :value="afficherAffectationParQuantiteAffecter" />   
-                           <input    type="hidden"   class="span3"   :value="afficherAffectationParUniteZone" />
-                            <input    type="hidden"   class="span3"   :value="afficherAffectationParService" />
-                             <input    type="hidden"   class="span3"   :value="afficherAffectationParBesoin" />
-                              <input    type="hidden"   class="span3"   :value="afficherQteResteACouvert" />             
-                              <input    type="hidden"   class="span3"   :value="afficherPrixActuelResteACouvert" />
-                               <input    type="hidden"   class="span3"   :value="afficherQteEnStock" />
                                    
            </td>
           <td>
@@ -147,7 +138,7 @@
                               <select v-model="editService.marque_id" class="span4">
                               <option value=""></option>
     <option v-for="item in listedesarticleenstock(detail_Ua.unite_administrative_id)" 
-    :key="item[0].id" :value="item[0].id">{{libelleMarque(item[0].marque_id)}}</option>
+    :key="item[0].id" :value="item[0].marque_id">{{libelleMarque(item[0].marque_id)}}</option>
                               </select>
                               
                             </div>
@@ -161,7 +152,7 @@
                               <select v-model="editService.model_id" class="span4">
                               <option value=""></option>
     <option v-for="item in LibelleModel(detail_Ua.unite_administrative_id)" 
-    :key="item.id" :value="item.id">{{libelleModel(item.model_id)}}</option>
+    :key="item.id" :value="item.model_id">{{libelleModel(item.model_id)}}</option>
                               </select>
                               
                             </div>
@@ -214,13 +205,14 @@
         
        
         </table>
+       <span style="color:red;text-align:center;font-size:12px" v-show="afficherQuantiteEnStock(editService.model_id)!=0 && editService.model_id==''">Quantité en Stock Saturé</span>
       </div>
       <div class="modal-footer">
         <a
           @click.prevent="ajouterImmobilisationLocal()"
           class="btn btn-primary"
           href="#"
-         
+         v-show="afficherQuantiteEnStock(editService.model_id)!=0"
         >Affecter</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
@@ -284,11 +276,12 @@
                    <td>
                      <button  
                      @click.prevent="afficherModalModifierService(index)"
+                     v-show="affichNormeEquipement(marcheid)!=0"
                         class="btn  btn-success">
                 <span >Affectation</span>
        
                 </button>
-                <button  v-show="((afficheHistNormeEquipement(marcheid))-(affichNormeEquipement(marcheid)))==1"
+                <button  v-show="((afficheHistNormeEquipement(marcheid))-(affichNormeEquipement(marcheid)))!=0"
                         class="btn  btn-danger" @click.prevent="afficherModalTransfert(index)">
                 <span >Transfert</span>
        
@@ -455,11 +448,15 @@ search:""
    
    ]),
 
-   
-    afficherIdStock() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.id == id);
+RestantEnStock() {
+      const val = parseFloat(this.afficherQuantiteEnStock(this.editService.model_id)) - parseFloat(this.formData.qte_affecte);
+      return parseFloat(val).toFixed(0);
+    },
+
+afficherIdStock() {
+      return (id,id1,id2,id3) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.uAdministrative_id == id && qtreel.famill_id == id1 && qtreel.marque_id == id2 && qtreel.model_id == id3 );
 
       if (qtereel) {
         return qtereel.id;
@@ -468,6 +465,32 @@ search:""
         }
       };
     },
+afficherIdActePersonnel() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+           const qtereel = this.acte_personnels.find(qtreel => qtreel.unite_administrative_id == id && qtreel.acteur_depense_id == id1);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+
+   
+    // afficherIdStock() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.id == id);
+
+    //   if (qtereel) {
+    //     return qtereel.id;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
     afficherTypeDebien() {
       return id => {
         if (id != null && id != "") {
@@ -600,7 +623,7 @@ lispersonnelParUa() {
    afficherQuantiteEnStock() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.id == id);
+           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.model_id== id);
 
       if (qtereel) {
         return qtereel.quantitestock;
@@ -1647,7 +1670,7 @@ afficherValeurOrigineModifier() {
     },
 
     afficherNombreEquipementRestant() {
-      const val = parseFloat(this.formData.normeequipement) - parseFloat(this.formData.qte_affecte);
+      const val = parseFloat(this.affichNormeEquipement(this.marcheid)) - parseFloat(this.formData.qte_affecte);
       return parseFloat(val).toFixed(0);
     },
 
@@ -2183,190 +2206,33 @@ fonctionDynamiques() {
      
     ]),
 ...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux",
-            "allActeurDepense", "modifierActeurDepenses","modifierSalaire"]),
+            "allActeurDepense", "modifierActeurDepenses","modifierSalaire","modificationActeur","modifierPersonnel"]),
 
 
    
-  ajouterImmobilisationLocal() {
-
+  ajouterImmobilisationLocal(){
+var objet ={
+  id:this.afficherIdStock(this.detail_Ua.unite_administrative_id,this.editService.famille_id,this.editService.marque_id,this.editService.model_id),
+  quantitestock:this.RestantEnStock
+}
+var objet1 ={
+  id:this.afficherIdActePersonnel(this.detail_Ua.unite_administrative_id,this.afficherActeurDepenseId(this.detail_Ua.id)),
+  normeequipement:this.afficherNombreEquipementRestant,
+  montantequipement:this.afficherMontantRestant
+}
+var objet2 ={
+    actepersonnel_id:this.afficherActeurDepenseId(this.detail_Ua.id),
+      famillearticle_id:this.editService.famille_id,
+      marque_id:this.editService.marque_id,
+      model_id:this.editService.model_id,
+      uniteadministrative_id:this.detail_Ua.id,
+      qte_affecte:this.formData.qte_affecte,
       
-if (this.afficherFonctionId(this.detail_Ua.id) == this.afficherAffectationParFonction &&  this.afficherActeurDepenseId(this.detail_Ua.id) == this.afficherAffectationParActeurDepense && this.afficherQuantiteEnRequise(this.editService.famille_id) == this.afficherAffectationParQuantiteAffecter){
-
-alert("équipement déja attribué")
 }
-else if(this.afficherQuantiteEnStock(this.editService.model_id) == 0){
-alert("Veuillez approvisionner votre stock")
-}
-// else if(this.afficherQuantiteEnRequise(this.editService.model_id) < this.afficherQteTotal){
-//   alert("Vérifiez la quantité affecté")
-// }
-
-else if (this.afficherFonctionId(this.detail_Ua.id) == this.afficherAffectationParFonction &&  this.afficherActeurDepenseId(this.detail_Ua.id) == this.afficherAffectationParActeurDepense && this.formData.uniteZone_id == this.afficherAffectationParUniteZone && this.formData.service_id == this.afficherAffectationParService && this.editService.famille_id == this.afficherAffectationParBesoin){
-
-var nouvelobjet8 ={
-  ...this.formData,
-  id: this.afficherIdStock,
- quantitestock:this.afficherQteEnStock,
- qtesortie:this.afficherQteSortir
-}
-// var nouvelobjet2 ={
-//   ...this.formData,
-//  normeequipement:this.afficherNombreEquipementRestant,
-//  montantequipement:this.afficherMontantRestant
-// }
-      var nouvelObjet3 = {
-        ...this.formData,
-        id: this.afficherIdImmobilisation,
-        prixUnitaire: this.coutMonenArticle,
-        valeurorigine: this.afficherValeurOrigineModifier,
-        exercice_budgetaire:this.exerciceBudgetaireEnCours,
-      duree:this.afficherDureeVieFamille(this.editService.famille_id),
-      acteurdepense_id : this.afficherActeurDepenseId(this.detail_Ua.id),
-     	uniteadministrative_id:this.detail_Ua.id,
-      service_id:this.afficheService(this.formData.service_id),
-      fonction_id:this.afficherFonctionId(this.detail_Ua.id),
-      anneamortiss:this.anneeAmortissement,
-      unitezon_id:this.formData.uniteZone_id,
-      qte_reel:this.afficherQuantiteEnRequise(this.editService.famille_id),
-     qte_affecte:this.nombreAffecter,
-     total_actuel:this.afficherPrixActuelResteACouvertModifier,
-     qte_actuel:this.afficherQteResteACouvertModifier,
-     famillearticle_id:this.editService.famille_id,
-marque_id:this.editService.marque_id,
-	model_id:this.editService.model_id,
-      };
-//    var nouveauObjetDemande = {
-        
-//  acteur_id:this.afficherActeurDepenseId(this.detail_Ua.id),
-//  ua_id:this.detail_Ua.id,
-//  unitezone_id:this.formData.uniteZone_id,
-//  fonction_id:this.afficherFonctionId(this.detail_Ua.id),
-//  article_id:this.editService.famille_id,
-//  qte:this.formData.qte_affecte,
-//  dure_vie:this.afficherDureeVieFamille(this.editService.famille_id),
-// //  etatimmo_id:this.formData2.etat_immobilisation,
-//  matricule_auteur:this.afficherActeurDepenseMatricule(this.afficherActeurDepenseId(this.detail_Ua.id)),
-//  annee:this.exerciceBudgetaireEnCours,
-//  annee_amortissement:this.anneeAmortissement,
-//  valeurorigine:this.afficherValeurOrigine,
-//  date_mise_service:this.formData2.date_mise_service
-// };
-
-
-// this.ajouterHistotorisqueAffection(nouveauObjetDemande)
-    this.modifierStockArticle(nouvelobjet8)
-// this.modifierActeurDepenses(nouvelobjet2)
-
- 
-    this.modifierImmobilisation(nouvelObjet3);
-
-     this.$("#exampleModal").modal('hide');
-      this.formData={
-unite_administrative_id: "",
-        fonction_id:"",
-        acteur_depense_id:"",
-        uniteZone_id:"",
-        service_id:"",
-        
-     }
-     this.formData2={
- famillearticle_id :"",
-        qte_affecte:"",
-        date_mise_service:"",
-        identification:"",
-        type_immo:"",
-        nature_dentree:"",
-        nature_bien:"",
-        etat_immobilisation:"",
-        cause_inactivite:"",
-     }
-}
-else{
-  
-var nouvelobjet9 ={
-  ...this.formData,
-   id: this.afficherIdStock,
- quantitestock:this.afficherQteEnStock,
-  qtesortie:this.afficherQteSortir
-}
-// var nouvelobjet4 ={
-//   ...this.formData,
-//  normeequipement:this.afficherNombreEquipementRestant,
-//  montantequipement:this.afficherMontantRestant
-// }
-      var nouvelObjet = {
-        ...this.formData,
-        
-        prixUnitaire: this.coutMonenArticle,
-        valeurorigine: this.afficherValeurOrigine,
-       typebien_id:this.afficherTypeDebien(this.editService.model_id),
-        exercice_budgetaire:this.exerciceBudgetaireEnCours,
-      duree:this.afficherDureeVieFamille(this.editService.famille_id),
-      acteurdepense_id : this.afficherActeurDepenseId(this.detail_Ua.id),
-     	uniteadministrative_id:this.detail_Ua.id,
-     // service_id:this.formData.service_id,
-      fonction_id:this.afficherFonctionId(this.detail_Ua.id),
-      anneamortiss:this.anneeAmortissement,
-      
-     // unitezon_id:this.formData.uniteZone_id,
-      qte_reel:this.afficherQuantiteEnRequise(this.editService.famille_id),
-     qte_affecte:this.nombreAffecter,
-     total_actuel:this.afficherPrixActuelResteACouvert,
-     qte_actuel:this.afficherQteResteACouvert,
-     famillearticle_id:this.editService.famille_id,
-marque_id:this.editService.marque_id,
-	model_id:this.editService.model_id,
-
-      };
-//        var ObjetDemande = {
-//        ...this.formData,
-//        ...this.formData2,
-//  acteur_id:this.afficherActeurDepenseId(this.detail_Ua.id),
-//  ua_id:this.detail_Ua.id,
-//  unitezone_id:this.formData.uniteZone_id,
-//  fonction_id:this.afficherFonctionId(this.detail_Ua.id),
-//  article_id:this.editService.famille_id,
-//  qte:this.formData.qte_affecte,
-//  dure_vie:this.afficherDureeVieFamille(this.editService.famille_id),
-// //  etatimmo_id:this.formData2.etat_immobilisation,
-//  matricule_auteur:this.afficherActeurDepenseMatricule(this.afficherActeurDepenseId(this.detail_Ua.id)),
-//  annee:this.exerciceBudgetaireEnCours,
-// annee_amortissement:this.anneeAmortissement,
-// valeurorigine:this.afficherValeurOrigine,
-//  date_mise_service:this.formData2.date_mise_service
-// };
-
-
-// this.ajouterHistotorisqueAffection(ObjetDemande)
-this.modifierStockArticle(nouvelobjet9)
-//this.modifierActeurDepenses(nouvelobjet4)
-  
-    this.ajouterImmobilisation(nouvelObjet);
-this.$("#exampleModal").modal('hide');
-     
-     this.formData={
-unite_administrative_id: "",
-        fonction_id:"",
-        acteur_depense_id:"",
-        uniteZone_id:"",
-        service_id:"",
-      
-     }
-     this.formData2={
- famillearticle_id :"",
-        qte_affecte:"",
-        date_mise_service:"",
-        identification:"",
-        type_immo:"",
-        nature_dentree:"",
-        nature_bien:"",
-        etat_immobilisation:"",
-        cause_inactivite:"",
-     }
-
-}
-
-    },
+this.modifierStockArticle(objet);
+this.modifierPersonnel(objet1)
+this.ajouterImmobilisation(objet2)
+  },
               fenetreAjouterAffectation(index) {
       this.$("#nonEquiper").modal({
         backdrop: "static",
@@ -2426,7 +2292,7 @@ formatageSomme:formatageSomme,
   margin: 0 -45%;
 }
 .valDirecteur{
-  width:80%;
+  width:72%;
   margin:0 -40%;
 }
 </style>

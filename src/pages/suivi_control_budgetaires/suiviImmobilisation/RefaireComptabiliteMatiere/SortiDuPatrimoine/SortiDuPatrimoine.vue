@@ -1,5 +1,56 @@
 <template>
   <div>
+    <div id="exampleModalValidationdirecteur" class="modal hide valDirecteur">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>MOTIF DE SORTIE</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+       <tr>
+         <td>
+           <div class="control-group">
+                            <label class="control-label">Date de sortie du patrimoine</label>
+                            <div class="controls">
+                              <input type="date" class="span5" v-model="editService.datesorti"/>
+                               
+                            </div>
+                          </div>
+         </td>
+         <td>
+           <div class="control-group">
+                            <label class="control-label">Fichier join</label>
+                            <div class="controls">
+                              <input type="file" class="span4"/>
+                               
+                            </div>
+                          </div>
+         </td>
+       </tr>
+       <tr>
+          <td colspan="2">
+           <div class="control-group">
+                            <label class="control-label">Objet de la sortie</label>
+                            <div class="controls">
+                              <textarea name="" id="" cols="15" rows="5" class="span10" v-model="editService.objetsorti"></textarea>
+                               
+                            </div>
+                          </div>
+         </td>
+       </tr>
+        </table>
+     
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierImmobilisatSortie()"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
  <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
                 <div class="span1">
 
@@ -47,7 +98,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Sortie du Patrimoine</h5>
+              <h5>Mon Patrimoine</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -55,34 +106,148 @@
             </div>
 
             <div class="widget-content nopadding" >
+             
+            </div>
+           <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                     <li class="active">
+                        <a data-toggle="tab" href="#SortiPatrimone">Equipement Dans le patrimoine</a>
+                      </li>
+                       <li>
+                        <a data-toggle="tab" href="#Sorti">Sortie du patrimoine</a>
+                      </li>
+                    
+                     
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+
+
+          <div id="SortiPatrimone" class="tab-pane active">
+ <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                      
                     
                      
+                     
+                     <th>Code Immobilisation</th>
                      <th>Famille</th>
-                     <th>Code Immo</th>
-                     <th>Désignation</th>
+                     <th>Marque</th>
+                     <th>Modele</th>
+                     <th>N°Serie</th>
                     <th>Utilisateur</th> 
                     <th >Service Rattaché</th>
                     <th>Durée de vie</th>
                      <th>Valeur Acquisition</th>
                     <th >Valeur nette Comptable</th>
                     <th>Etat</th>
-                    
+                     <th>Action</th>
                      
                     <!-- <th>Duree de vie</th> -->
                    
-                    <th>Action</th>
+                   
                   </tr>
                 </thead>
                 <tbody>
-                     
+                      <tr
+                    class="odd gradeX"
+                    v-for="(service,index) in EquipementDansLePatrimoine(uniteAdministrative_id)"
+                    :key="service.id"
+                  >
+                    <td style="font-size:14px" >{{CodeImmobilisation(service.famillearticle_id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{libelleFamilleEquipement(service.famillearticle_id) || 'Non renseigné'}}</td>                      
+                   <td style="font-size:14px" >{{libelleMarque(service.marque_id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{libelleModelle(service.model_id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{NumeroSerie(service.famillearticle_id) || 'Non renseigné'}}</td>
+                    
+                    <td style="font-size:14px" >{{NomPersonnel(service.actepersonnel_id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{service.service_id || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{DureVie(service.famillearticle_id) || 'Non renseigné'}} Ans</td>
+                    <td style="font-size:14px" >{{formatageSomme(parseFloat(ValeurAcquise(service.famillearticle_id))) || 'Non renseigné'}}</td>
+                   <td style="font-size:14px" >{{service.famillearticle_id || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{service.famillearticle_id || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >
+                       <button 
+                        @click.prevent="afficherModalModifierService(index)"
+                       class="btn  btn-success">
+                <span >Sortie</span>
+       
+                </button>
+                    </td>
+                    
+                  </tr>
                 </tbody>
               </table>
-            </div>
-           
+          </div>
+       <div id="Sorti" class="tab-pane">
+             <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    
+                     
+                     
+                     <th>Code Immobilisation</th>
+                     <th>Famille</th>
+                     <th>Marque</th>
+                     <th>Modele</th>
+                     <th>N°Serie</th>
+                    <th>Utilisateur</th> 
+                    <th >Service Rattaché</th>
+                    <th>Durée de vie</th>
+                     <th>Valeur Acquisition</th>
+                    <th >Valeur nette Comptable</th>
+                    <th>Etat</th>
+                     <!-- <th>Action</th> -->
+                     
+                    <!-- <th>Duree de vie</th> -->
+                   
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                      <tr
+                    class="odd gradeX"
+                    v-for="service in EquipementSortiDansLePatrimoine(uniteAdministrative_id)"
+                    :key="service.id"
+                  >
+                    <td style="font-size:14px" >{{CodeImmobilisation(service.famillearticle_id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{libelleFamilleEquipement(service.famillearticle_id) || 'Non renseigné'}}</td>                      
+                   <td style="font-size:14px" >{{libelleMarque(service.marque_id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{libelleModelle(service.model_id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{NumeroSerie(service.famillearticle_id) || 'Non renseigné'}}</td>
+                    
+                    <td style="font-size:14px" >{{NomPersonnel(service.actepersonnel_id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{service.service_id || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{DureVie(service.famillearticle_id) || 'Non renseigné'}} Ans</td>
+                    <td style="font-size:14px" >{{formatageSomme(parseFloat(ValeurAcquise(service.famillearticle_id))) || 'Non renseigné'}}</td>
+                   <td style="font-size:14px" >{{service.famillearticle_id || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{service.famillearticle_id || 'Non renseigné'}}</td>
+                    <!-- <td style="font-size:14px" > -->
+                       <!-- <button 
+                        @click.prevent="afficherModalModifierService(index)"
+                       class="btn  btn-success">
+                <span >Sortie</span>
+       
+                </button> -->
+                    <!-- </td> -->
+                    
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+      
+       
+ 
+              </table>
+ 
+  </div>
           </div>
         </div>
       </div>
@@ -106,7 +271,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
-// import { formatageSomme } from "../../../../../Repositories/Repository";
+import { formatageSomme } from "../../../../../Repositories/Repository";
 // import {admin,dcf,noDCfNoAdmin} from "../../../../../Repositories/Auth"
 import {  ModelListSelect } from 'vue-search-select'
     import 'vue-search-select/dist/VueSearchSelect.css'
@@ -162,6 +327,7 @@ quantite: {
         
        
       },
+      editService:{},
       uniteAdministrative_id:"",
        affiche_filtre:false,
       affiche_boutton_filtre:true,
@@ -193,11 +359,12 @@ quantite: {
       "articles",
      "marqueVehicules",
      "ModeleVehicules",
-      
+      "ficheArticle",
       "type_Unite_admins",
       "totalQteEntrant",
       "totalQteSortant",
-     "getterUa_idImo"
+     "getterUa_idImo",
+     "immobilisations"
     ]),
     
     ...mapGetters("uniteadministrative", ["uniteAdministratives","GestionStockageArticles"]),
@@ -206,8 +373,122 @@ quantite: {
 //       dcf:dcf,
 //       noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+...mapGetters("personnelUA", ["personnaliseActeurDepense","acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
+
+ CodeImmobilisation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.ficheArticle.find(qtreel => qtreel.article_id == id);
+
+      if (qtereel) {
+        return qtereel.numero_matricule;
+      }
+      return 0
+        }
+      };
+    },
+
+ NumeroSerie() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.ficheArticle.find(qtreel => qtreel.article_id == id);
+
+      if (qtereel) {
+        return qtereel.numero_serie;
+      }
+      return 0
+        }
+      };
+    },
+ ValeurAcquise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.ficheArticle.find(qtreel => qtreel.article_id == id);
+
+      if (qtereel) {
+        return qtereel.prix_unitaire;
+      }
+      return 0
+        }
+      };
+    },
 
 
+  DureVie() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.dureVie;
+      }
+      return 0
+        }
+      };
+    },
+NomPersonnel() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaliseActeurDepense.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.nom.concat("  ", qtereel.prenom);
+      }
+      return 0
+        }
+      };
+    },
+
+ListeActiclePatrimoineSortant() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.immobilisations.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect;
+      //      return id => {
+      //   if (id != null && id != "") {
+      //     return colect.filter(element => element.uniteadministrative_id == id && element.etatsorti==0);
+      //   }
+      // };
+        }
+return this.immobilisations;
+      //   return id => {
+      //   if (id != null && id != "") {
+      //     return this.immobilisations.filter(element => element.uniteadministrative_id == id && element.etatsorti==0);
+      //   }
+      // };
+
+    },
+
+EquipementDansLePatrimoine() {
+      return id => {
+        if (id != null && id != "") {
+           return this.ListeActiclePatrimoineSortant.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.etatsorti==0);
+
+        }
+        return this.ListeActiclePatrimoineSortant.filter(qtreel => qtreel.etatsorti==0);
+      };
+     
+    },
+
+EquipementSortiDansLePatrimoine() {
+      return id => {
+        if (id != null && id != "") {
+           return this.ListeActiclePatrimoineSortant.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.etatsorti==1);
+
+        }
+        return this.ListeActiclePatrimoineSortant.filter(qtreel => qtreel.etatsorti==1);
+      };
+     
+    },
 
 
   libelleMarque() {
@@ -630,11 +911,11 @@ veifArticlesExist() {
   },
   methods: {
     ...mapActions("SuiviImmobilisation", [
-      "getAllStock",
-      "ajouterStock",
-      "modifierStock",
-      "supprimerStock"
+      "modifierImmobilisationSortie",
+      "getAllImmobilisation"
+      
     ]),
+    formatageSomme:formatageSomme,
     filter(){
                 this.affiche_filtre=!this.affiche_filtre
                
@@ -660,27 +941,30 @@ veifArticlesExist() {
         keyboard: false
       });
     },
+      afficherModalModifierService(index) {
+      this.$("#exampleModalValidationdirecteur").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+      this.editService = this.EquipementDansLePatrimoine(this.uniteAdministrative_id)[index];
+    },
     // fonction pour vider l'input ajouter
-    ajouterStockLocal() {
+    modifierImmobilisatSortie() {
 
   
     var nouvelObjet = {
-        ...this.formData,
-       
-        histo_qte: this.Historqte,
-      
+        
+        id:this.editService.id,
+      objetsorti:this.editService.objetsorti,
+      datesorti:this.editService.datesorti,
+      etatsorti:1
       };
-      this.ajouterStock(nouvelObjet);
-       this.$("#exampleModal").modal('hide');
-      this.formData = {
-      uAdministrative_id: "",
-        typeequipe_id: "",
-        famill_id: "",
-        typeua_id: "",
-        durevie: "",
-        articlestock_id: "",
-        quantitestock: "",
-        qtesortie:"0"
+      this.modifierImmobilisationSortie(nouvelObjet);
+      this.getAllImmobilisation()
+       this.$("#exampleModalValidationdirecteur").modal('hide');
+      this.editService = {
+      
       };
     },
     // afficher modal de modification
@@ -761,5 +1045,9 @@ veifArticlesExist() {
 .tailgrandStock{
   width: 88%;
   margin: 0 -42%;
+}
+.valDirecteur{
+  width:45%;
+  margin:0 -25%;
 }
 </style>

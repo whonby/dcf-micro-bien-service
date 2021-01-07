@@ -1,4 +1,5 @@
 
+
 <template>
 <div>
   <div id="modifierActeEF" class="modal hide grdirModalActeEffet" >
@@ -1790,7 +1791,7 @@ name: "ActEffeFinanciere",
         taux:"",
         ua_id:"",
         avance_demarrage_ht:0,
-        avance_demarrage_ttc:"",
+        avance_demarrage_ttc:0,
         tva_avance_demarage:"",
         libelle_act:"",
         reference_act:"",
@@ -2901,8 +2902,9 @@ var nouvelObjet1 = {
         analyse_dossier_id:"",
         entreprise_id:"",
         marche_id:"",
-        numero_marche:""
-
+        numero_marche:"",
+avance_demarrage_ttc:0,
+avance_demarrage_ht:0
       }
     },
   }

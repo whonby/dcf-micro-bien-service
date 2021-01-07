@@ -37,7 +37,15 @@ export const MODIFIER_PERMISSION_CONGE = (state, objetModifie) => {
         return op
     })
 }
-
+export const MODIFIER_PERSONNEL = (state, objetModifie) => {
+    state.acte_personnels = state.acte_personnels.map(articl => {
+      if (articl.id == objetModifie.id) {
+        articl = { ...objetModifie };
+      }
+  
+      return articl;
+    });
+  };
 /**
 
 

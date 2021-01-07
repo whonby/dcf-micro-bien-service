@@ -499,7 +499,7 @@
                      <th>Marque</th>
                      <th>Model</th>
                     <th>Quantité Initiale</th> 
-                    <th title="quantite en stock">Quantité en stock</th>
+                    <th title="quantite en stock">Quantité Actuelle</th>
                     <th title="quantite sortant">Quantité sortie</th>
                      <th>Date d'entrée</th>
                     <th title="quantite entrant">Quantité entrée</th>
@@ -564,12 +564,12 @@
                     >{{stock.durevie || 'Non renseigné'}} Ans</td> -->
 
                     <td>
-                        <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
+                        <!-- <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
                         <span>
                           <i class=" icon-edit"></i>
                         </span>
-                      </button>
-                      <button class="btn btn-danger" @click="supprimerStock(stock.id)">
+                      </button> -->
+                      <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
@@ -583,9 +583,9 @@
                 <td></td>
                 <td></td>
                       <td style="font-weight:bold;">Total</td>
-                   <td  style="text-align: center;color:red;font-weight:bold;">{{quantiteInitial(formData.uAdministrative_id)}}</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(formData.uAdministrative_id) || 0 }}</td>
-                     <td style="text-align: center;color:red;font-weight:bold;">{{ nombreDeQuantiteSortiEnStock(formData.uAdministrative_id) || 0 }}</td>
+                   <td  style="text-align: center;color:red;font-weight:bold;">{{quantiteInitial(uniteAdministrative_id)}}</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(uniteAdministrative_id) || 0 }}</td>
+                     <td style="text-align: center;color:red;font-weight:bold;">{{ nombreDeQuantiteSortiEnStock(uniteAdministrative_id) || 0 }}</td>
                     <td></td>
                    
                      
@@ -713,7 +713,6 @@ quantite: {
       "articles",
      "marqueVehicules",
      "ModeleVehicules",
-      
       "type_Unite_admins",
       "totalQteEntrant",
       "totalQteSortant",
@@ -1155,6 +1154,7 @@ veifArticlesExist() {
       "modifierStock",
       "supprimerStock"
     ]),
+    ...mapActions("uniteadministrative", ["uniteAdministratives","supprimerStockArticle"]),
     filter(){
                 this.affiche_filtre=!this.affiche_filtre
                

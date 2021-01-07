@@ -338,11 +338,12 @@ this.getRegimeImpositions()
    this.getPlanActe()
    this.getTypeconges()
    this.getlisteNaturePrix()
+   this.getMotifPassation()
    this.getSourceFinancement()
    this.getTypeFinancement()
    this.getStructureBudgetaire()
    this.getPlanBudgetaire()
-    this.getStructureActivite()
+   this.getStructureActivite()
     this.getPlanActivite()
     this.getGrandeNature()
     this.getTypeUniteAdministrative()
@@ -447,6 +448,8 @@ this.getAllHistoriqueBudgetGeneral()
       /**
        * suivi des immo
        */
+      this.getGrpeCorporel();
+      this.getTypeBienCorporels();
        this.getAllNatureEntre();
       this.getAllCauseInactivite();
       this.getAllEtatImmo();
@@ -633,9 +636,7 @@ return objJson.id
     ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",'getGroupe',"getMenu","getModule",
     "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf","getAffectationGroupeUser"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
-    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle',
-    'getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges',
-    'getlisteNaturePrix','getMotifPassation']),
+    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix','getMotifPassation']),
 
     ...mapActions('parametreGenerauxSourceDeFinancement',['getSourceFinancement',
         'getTypeFinancement'
@@ -690,6 +691,8 @@ return objJson.id
         "getBanque", "getCompte","getAgence","getSanction","getHistoriqueEntreprise"]),
 
         ...mapActions("SuiviImmobilisation", [
+          "getGrpeCorporel",
+          "getTypeBienCorporels",
       "getAllNatureEntre",
       "getAllCauseInactivite",
       "getAllEtatImmo",

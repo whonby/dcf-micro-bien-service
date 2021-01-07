@@ -61,6 +61,13 @@ import ExecutionReparationVehicule from '../../pages/suivi_control_budgetaires/s
 
 // ROUTE COMPTABILITE MATIERE A FAIRE
 
+
+
+
+
+
+
+
 import AjouterEntrePatrimoine from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/gpeGestionStock/AjouterEntrePatrimoine.vue'
 
 
@@ -114,6 +121,11 @@ import principalExecution from '../../pages/suivi_control_budgetaires/suiviImmob
 
 const suiviImmobilisationRoutes = [
   
+  
+
+
+
+
   {
     path: "/principalExecution",
     name: "principalExecution",

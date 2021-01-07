@@ -1399,7 +1399,13 @@ export function modifierActeurDepenses({ commit, dispatch}, objetModifie){
     })
 }
 
-
+export function modifierPersonnel({ commit}, nouveau) {
+    asyncLoading(axios
+        .put("/updateModification/" + nouveau.id,nouveau))
+        .then(response => {
+            commit("MODIFIER_PERSONNEL", response.data);
+        });
+  }
 export function modificationActeur({ commit, dispatch}, objetModifie){
     this.$app.$loading(true)
     axios.put('/modification_acteur', objetModifie ).then(res => {
