@@ -319,7 +319,11 @@ export default {
                     entreprise_id:"",
                     date_cotation:"",
                     ref_offre:"",
+<<<<<<< HEAD
                     marche_id:""
+=======
+                   marche_id:""
+>>>>>>> b5ede6879fde1a7987d22d9ddf5f8b8a6e3d37b7
 
                 },
             
@@ -346,9 +350,14 @@ export default {
     props:["macheid"],
 
     created(){
+<<<<<<< HEAD
         
         this.formCotation.marche_id=this.macheid.id
         console.log(this.macheid.id)
+=======
+this.formCotation.marche_id=this.macheid.id
+        console.log()
+>>>>>>> b5ede6879fde1a7987d22d9ddf5f8b8a6e3d37b7
     },
     computed: {
 
@@ -419,7 +428,6 @@ affichierReferenceAppelOffre() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
-
       if (qtereel) {
         return qtereel.ref_appel;
       }
@@ -429,12 +437,9 @@ affichierReferenceAppelOffre() {
     },
 
         },
-     methods: {
+      methods: {
             ...mapActions("bienService", ['ajouterCotation' ,"getCotation", 'modifierCotation','supprimerCotation']),
             // ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
-            // 
-
-
 
 
  recherche() {
@@ -503,6 +508,8 @@ affichierReferenceAppelOffre() {
 // if (condition) {
     
 // }
+
+               console.log(this.formCotation)
               
                this.ajouterCotation(this.formCotation)
                this.getCotation()

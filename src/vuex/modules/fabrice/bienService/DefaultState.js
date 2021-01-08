@@ -105,7 +105,9 @@ const defaultState = {
 
 
     tableauBordFilter:"",
-    infoFiltreTableauBord:""
+    infoFiltreTableauBord:"",
+    membre_comite_evaluations:[],
+    structure_daos:[],
 
 }
 

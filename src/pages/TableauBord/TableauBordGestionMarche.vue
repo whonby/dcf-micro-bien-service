@@ -152,7 +152,11 @@
 
 
                 <div class="row-fluid" style="" id="printMe">
-                    <div class="span2" style="width: 170px;margin-left: -3px !important;border-right: 10px solid #f9f9f9">
+                    <div class="span2 vld-parent" style="width: 170px;margin-left: -3px !important;border-right: 10px solid #f9f9f9">
+                        <loading :active.sync="isLoading"
+                                 :can-cancel="true"
+                                 :on-cancel="onCancel"
+                                 :is-full-page="fullPage"></loading>
                         <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 90px !important; cursor: grab !important;" @click="listeMarcheStatus('planifie')">
                             <div class="inner">
                                 <p> <b> En attente de contractualisation
@@ -171,7 +175,12 @@
                         </div>
                     </div>
 
-                    <div class="span2" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
+                    <div class="span2 vld-parent" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
+
+                        <loading :active.sync="isLoading"
+                                 :can-cancel="true"
+                                 :on-cancel="onCancel"
+                                 :is-full-page="fullPage"></loading>
                         <div @click="listeMarcheStatus(8)" class="card-box bg-attente-contratualisation-avec-alert" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
                                 <p><b>En attente de
@@ -192,7 +201,11 @@
 
                         </div>
                     </div>
-                    <div class="span2" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
+                    <div class="span2 vld-parent" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
+                        <loading :active.sync="isLoading"
+                                 :can-cancel="true"
+                                 :on-cancel="onCancel"
+                                 :is-full-page="fullPage"></loading>
                         <div @click="listeMarcheStatus(1)" class="card-box bg-en-contratualisation" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
                                 <p><b>En contractualisation</b>   </p>
@@ -207,7 +220,11 @@
 
                         </div>
                     </div>
-                    <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
+                    <div class="span2 vld-parent" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
+                        <loading :active.sync="isLoading"
+                                 :can-cancel="true"
+                                 :on-cancel="onCancel"
+                                 :is-full-page="fullPage"></loading>
                         <div @click="listeMarcheStatus(9)" class="card-box bg-en-contratualisation-hort-delais" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
                                 <p><b>En contractualisation
@@ -225,7 +242,11 @@
 
                         </div>
                     </div>
-                    <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff">
+                    <div class="span2 vld-parent" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff">
+                        <loading :active.sync="isLoading"
+                                 :can-cancel="true"
+                                 :on-cancel="onCancel"
+                                 :is-full-page="fullPage"></loading>
                         <div @click="listeMarcheStatus(2)" class="card-box bg-en-execution" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
                                 <p><b>En exécution</b> </p>
@@ -242,7 +263,11 @@
 
                         </div>
                     </div>
-                    <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff">
+                    <div class="span2 vld-parent" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff">
+                        <loading :active.sync="isLoading"
+                                 :can-cancel="true"
+                                 :on-cancel="onCancel"
+                                 :is-full-page="fullPage"></loading>
                         <div @click="listeMarcheStatus(10)" class="card-box bg-en-execution-horts-delais" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
                                 <p><b>En Exécution Hors délai</b> </p>
@@ -259,7 +284,11 @@
 
                         </div>
                     </div>
-                    <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff">
+                    <div class="span2 vld-parent" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff">
+                        <loading :active.sync="isLoading"
+                                 :can-cancel="true"
+                                 :on-cancel="onCancel"
+                                 :is-full-page="fullPage"></loading>
                         <div @click="listeMarcheStatus(11)" class="card-box bg-acheve-hors-delais" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
                                 <p><b>Achevés dans le délai</b> </p>
@@ -277,7 +306,11 @@
                         </div>
                     </div>
 
-                    <div class="span2" style="width: 170px ;margin-left: -0.9px !important;border-right: 10px solid #fff">
+                    <div class="span2 vld-parent" style="width: 170px ;margin-left: -0.9px !important;border-right: 10px solid #fff">
+                        <loading :active.sync="isLoading"
+                                 :can-cancel="true"
+                                 :on-cancel="onCancel"
+                                 :is-full-page="fullPage"></loading>
                         <div @click="listeMarcheStatus(12)" class="card-box bg-acheve-delais" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
                                 <p> Achevés Hors délai </p>
@@ -294,7 +327,11 @@
 
                         </div>
                     </div>
-                    <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff ">
+                    <div class="span2 vld-parent" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff ">
+                        <loading :active.sync="isLoading"
+                                 :can-cancel="true"
+                                 :on-cancel="onCancel"
+                                 :is-full-page="fullPage"></loading>
                         <div @click="listeMarcheStatus(7)" class="card-box bg-en-souffrance" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
                                 <p> En souffrance </p>
@@ -312,7 +349,11 @@
                         </div>
                     </div>
 
-                    <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff ">
+                    <div class="span2 vld-parent" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff ">
+                        <loading :active.sync="isLoading"
+                                 :can-cancel="true"
+                                 :on-cancel="onCancel"
+                                 :is-full-page="fullPage"></loading>
                         <div  class="card-box bg-en-avenant" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
                                 <p> Avenant </p>
@@ -955,6 +996,9 @@
 </template>
 
 <script>
+    import Loading from 'vue-loading-overlay';
+    // Import stylesheet
+    import 'vue-loading-overlay/dist/vue-loading.css';
     import VueApexCharts from 'vue-apexcharts'
     import { mapGetters,mapActions } from "vuex";
     import {noDCfNoAdmin,dcf} from "../../Repositories/Auth"
@@ -967,10 +1011,13 @@
         components: {
             apexchart: VueApexCharts,
             ModelListSelect,
+            Loading
           //  DraggableDiv
         },
         data() {
            return{
+               isLoading: false,
+               fullPage: false,
                controlleur_fin:"",
                status_marches:"",
                unite_administrative_id:"",
@@ -1088,7 +1135,10 @@ console.log(this.listeMarchStatueExecuteAcheve)
                     )
                     if(objet!=undefined){
                         objet.forEach(function (val) {
-                            colect.push(val)
+                            let objet=   colect.find(item=>item.id==val.id)
+                            if(objet==undefined){
+                                colect.push(val)
+                            }
                         })
                     }
 
@@ -1871,6 +1921,9 @@ console.log(this.listeMarchStatueExecuteAcheve)
         ,
         methods:{
             ...mapActions("bienService", ["ajouterTableauBordFiltre","ajouterInfoTableauBordFiltre"]),
+            onCancel() {
+                console.log('User cancelled the loader.')
+            },
             selectionUnite(id){
 
                 let stat="pl"
@@ -2163,6 +2216,14 @@ console.log(this.listeMarchStatueExecuteAcheve)
         watch: {
             type_marche:function (value) {
                 console.log(value);
+
+                this.isLoading = true;
+                // simulate AJAX
+                setTimeout(() => {
+                    this.isLoading = false
+                },1000)
+
+
                 if(this.info_status_marche!=""){
                     this.listeMarcheStatus(this.status_marches)
                 }
@@ -2172,18 +2233,33 @@ console.log(this.listeMarchStatueExecuteAcheve)
 
             infrastructure: function (value) {
                 console.log(value);
+                this.isLoading = true;
+                // simulate AJAX
+                setTimeout(() => {
+                    this.isLoading = false
+                },1000)
                 if(this.info_status_marche!=""){
                     this.listeMarcheStatus(this.status_marches)
                 }
             },
             region: function (value) {
                 console.log(value);
+                this.isLoading = true;
+                // simulate AJAX
+                setTimeout(() => {
+                    this.isLoading = false
+                },1000)
                 if(this.info_status_marche!=""){
                     this.listeMarcheStatus(this.status_marches)
                 }
             },
             unite_administrative_id: function (value) {
                 console.log(value);
+                this.isLoading = true;
+                // simulate AJAX
+                setTimeout(() => {
+                    this.isLoading = false
+                },1000)
                 if(this.info_status_marche!=""){
                     this.listeMarcheStatus(this.status_marches)
                 }
@@ -2472,9 +2548,6 @@ console.log(this.listeMarchStatueExecuteAcheve)
         color: #fff !important;
         background-color: #892e6a !important;
     }
-
-
-
 
 
 

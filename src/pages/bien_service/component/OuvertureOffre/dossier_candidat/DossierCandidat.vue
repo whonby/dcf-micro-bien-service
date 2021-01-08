@@ -2105,8 +2105,8 @@ name: "DossierCandidat",
     dossierCandidature: function () {
       return marcheid => {
         if (marcheid != "") {
-          //  console.log("Marche dossier candidat")
-          return this.getterDossierCandidats.filter(idmarche => idmarche.appel_offre.marche_id == marcheid)
+          console.log("Guei Roland")
+          return this.getterDossierCandidats.filter(idmarche => idmarche.marche_id == marcheid)
         }
       }
     },

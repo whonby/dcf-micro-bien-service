@@ -164,7 +164,7 @@
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInLeft;">
 
                                               <div class="timeline-text" style="margin-top: -18px">
-                                                  <h5>GESTION SIB</h5>
+                                                  <h5>EXECUTION SIB</h5>
                                                   <div>
                                                       <i style="font-size: 35px !important;" class="icon-book"></i>
                                                   </div>
@@ -176,7 +176,7 @@
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>-->
                                               <div class="timeline-text" style="margin-top: -18px">
-                                                  <h5>GESTION HORS SIB</h5>
+                                                  <h5>EXECUTION HORS SIB</h5>
                                                   <div>
                                                       <i style="font-size: 35px !important;" class="icon-folder-open"></i>
                                                   </div>
@@ -549,6 +549,8 @@ this.getImageMarche()
 this.getMembreCojo()
     this.getProceVerbal()
       this.getEcheances()
+    this.getMembreComiteEvaluation()
+    this.getStructureDAO()
         },
 
   computed:{
@@ -737,7 +739,8 @@ return objJson.id
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
-          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances","pusherImageMarche","getImageMarche"]),
+          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner",
+           "getEcheances","pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO"]),
 
     activeMenuModuleParamGeneral(){
       this.activeMenuModuleSidcf(1)

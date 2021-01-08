@@ -44,10 +44,11 @@
       </tbody>
     </table>
 
-
+<hr>
+    <StructureDAO :macheid="macheid"></StructureDAO>
 
     <!-- add formulaire cojo -->
-    <div id="ajouterCojoB" class="modal hide grdtaill">
+    <div id="ajouterCojoB" class="modal hide grdirModalActeEffet">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter COJO</h3>
@@ -144,7 +145,54 @@
           </div>
 
 
+          <div class="control-group">
+            <label class="control-label">Structure DAO</label>
+            <table class="table">
+              <!--          <thead>-->
+              <!--          <tr>-->
+
+              <!--            <th>Nom structure DAO</th>-->
+              <!--            <th>Action</th>-->
+              <!--          </tr>-->
+
+              <!--          </thead>-->
+              <tbody>
+              <tr>
+                <td>
+                  <input
+                          type="text"
+                          v-model="nom_structure"
+                          class="span"
+                          v-on:keyup.enter.prevent="addStructure"
+                  />
+                </td>
+
+                <td> <button class="btn btn-danger" @click.prevent="addStructure()">
+                  Ajouter
+                </button></td>
+              </tr>
+              <tr class="odd gradeX" v-for="appelOffre in structure"
+                  :key="appelOffre">
+
+                <td>
+                  {{appelOffre || 'Non renseigné'}}
+                </td>
+                <div class="btn-group">
+                  <button class="btn btn-link " title="Supprimer">
+                    <span class=""><i class="icon-trash"></i></span>
+                  </button>
+
+                </div>
+
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
         </form>
+
+
+
       </div>
       <div class="modal-footer">
         <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterCojoMarche()" href="#">Valider</a>
@@ -242,9 +290,11 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import moment from "moment";
+import StructureDAO from "./StructureDAO";
 
 export default {
 name: "InfoCojo",
+  components: {StructureDAO},
   props:["macheid"],
   data(){
     return{
@@ -257,7 +307,8 @@ name: "InfoCojo",
         appel_offre_id:"",
         difference_personnel_bienService:"bienservice"
       },
-
+       structure:[],
+      nom_structure:'',
       edite_cojo:"",
     }
   },
@@ -435,11 +486,20 @@ name: "InfoCojo",
     // fonction pour formater la date
     formaterDate(date){
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    },
+    addStructure(){
+      if(this.nom_structure=="")
+         return ""
+      this.structure.unshift(this.nom_structure)
+      this.nom_structure=""
     }
   }
 }
 </script>
 
 <style scoped>
-
+  .grdirModalActeEffet{
+    width: 50%;
+    margin: 0 -20%;
+  }
 </style>
