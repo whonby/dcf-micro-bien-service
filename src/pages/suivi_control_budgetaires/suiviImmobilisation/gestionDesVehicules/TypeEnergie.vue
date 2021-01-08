@@ -135,7 +135,7 @@
                     <td>
                       <button class="btn btn-danger" @click="supprimerTypeEnergie(service.id)">
                         <span>
-                          <i class="icon icon-trash"></i>
+                          <i class="icon icon-trash"> Supprimer</i>
                         </span>
                       </button>
                     </td>

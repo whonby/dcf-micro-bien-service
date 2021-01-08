@@ -30,7 +30,7 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des affectations</h5>
+            <h5>Liste des affectations </h5>
              <div align="right">
         Recherche: <input type="text" >
 

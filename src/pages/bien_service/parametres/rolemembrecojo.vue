@@ -75,7 +75,7 @@
 
               <div class="btn-group">
               <button @click.prevent="supprimerRolemembreCojo(role.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
              
             </div>
 

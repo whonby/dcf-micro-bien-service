@@ -75,7 +75,7 @@
                                          <div v-if="verificationTacheExiste(item.id)" >
 
                                              <p-check class="pretty p-image p-plain "  checked   disabled style=" width: 100%; font-size: 20px !important;" v-model="attribue" :value="item.id">
-                                             <img slot="extra" class="image" src="../../../assets/001.png">
+                                             <img slot="extra" class="image" src="../../../assets/004.png">
                                              <p style="color: red">{{ item.name}}</p>
                                                 </p-check>
                     

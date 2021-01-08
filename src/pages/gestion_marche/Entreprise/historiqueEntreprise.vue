@@ -115,7 +115,7 @@
                                             <td>
                                                
                                                         <button  @click.prevent="supprimerHistoriqueEntreprise(item.id)" title="Supprimer un" class="btn btn-danger ">
-                                                            <span class=""><i class="icon-trash"></i></span></button>
+                                                            <span class=""><i class="icon-trash"> Supprimer</i></span></button>
                                                       
                                             </td>
 

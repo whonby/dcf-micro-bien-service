@@ -74,7 +74,7 @@
 
               <div class="btn-group">
               <button @click.prevent="supprimerStructureGeographique(structure_geographique.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
              
             </div>
 

@@ -9,7 +9,7 @@
                       <!-- <td style="text-align: center;font-size:14px;font-weight:bold;">{{article.direction_id|| ''}}</td> -->
                        <td style="text-align: center;font-size:14px;font-weight:bold;">{{afficherService(article.service_id)|| ''}}</td>
                      <td style="text-align: center;font-size:14px;font-weight:bold;" >{{afficherFonction(article.fonction_id)|| ''}}</td>
-                     <td style="text-align:center;color:red;font-weight:bold" >{{article.norme|| 'Non renseigné'}}</td>
+                     <td style="text-align:center;color:red;font-weight:bold" >{{article.norme|| 'Non renseignï¿½'}}</td>
                      
                  
 
@@ -20,7 +20,7 @@
                         @click.prevent="$emit('suppression', article.id)"
                       >
                         <span>
-                          <i class="icon icon-trash"></i>
+                          <i class="icon icon-trash"> Supprimer</i>
                         </span>
                       </button>
                     </td>

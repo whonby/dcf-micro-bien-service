@@ -77,7 +77,7 @@
 
               <div class="btn-group">
               <button @click.prevent="supprimerTypeFinancement(types.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+                <span class=""><i class="icon-trash" style="padding-right:-100px;" > Supprimer</i></span></button>
              
             </div>
 
