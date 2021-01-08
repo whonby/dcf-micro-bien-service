@@ -2227,7 +2227,7 @@ export function supprimerTypeBienCorporels({ commit,dispatch }, id) {
 //       })
 //     })
 //       });
-  
+
       
 // }
 export function modifierImmobilisationSortie({ commit,dispatch }, nouveau) {
@@ -2242,11 +2242,15 @@ export function modifierImmobilisationSortie({ commit,dispatch }, nouveau) {
         dispatch('getAllImmobilisation')
         dispatch('getAllImmobilisation')
         dispatch('getAllImmobilisation')
-        this.$app.$notify({
-          title: 'Success',
-          text: 'Modification Effectué avec Succès!',
-          type: "success"
-      })
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        
       })
       
 

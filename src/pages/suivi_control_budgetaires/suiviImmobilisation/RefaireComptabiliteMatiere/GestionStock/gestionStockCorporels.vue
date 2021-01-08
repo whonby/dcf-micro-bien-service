@@ -59,7 +59,7 @@
            
              </div>
  <div id="Reparation" class="tab-pane "><ReparationEquipement></ReparationEquipement> </div>
-<div id="SortiePatrimoine" class="tab-pane "><SortiDuPatrimoine></SortiDuPatrimoine> </div>
+<div id="SortiePatrimoine" class="tab-pane "><UaEquipementSortant></UaEquipementSortant> </div>
  <div id="Inventaire" class="tab-pane "><Inventaire></Inventaire> </div>
         </div>
       </div>
@@ -94,7 +94,7 @@ import moment from "moment";
 import ListeDuStockparUa from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/ListeDuStockparUa'
 import affectationEquipementParUa from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/AffectationEquipementParUa/affectationEquipementParUa'
 import ReparationEquipement from '../../../suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/ReparationEquipement'
-import SortiDuPatrimoine from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/SortiDuPatrimoine/SortiDuPatrimoine.vue'
+import UaEquipementSortant from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/SortiDuPatrimoine/UaEquipementSortant.vue'
 import Inventaire from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/Inventaire/Inventaire.vue'
 // import historisqueDemandeParService from '../docAffectationImmo/historisqueDemandeParService'
 // import { formatageSomme } from "../../../../Repositories/Repository";
@@ -106,7 +106,7 @@ export default {
       ListeDuStockparUa,
     affectationEquipementParUa,
     ReparationEquipement,
-    SortiDuPatrimoine,
+    UaEquipementSortant,
     Inventaire
      
   },

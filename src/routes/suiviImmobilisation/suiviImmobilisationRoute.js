@@ -115,6 +115,7 @@ import AjouterReparationMateriel from '../../pages/suivi_control_budgetaires/sui
 import principalExecution from '../../pages/suivi_control_budgetaires/suiviImmobilisation/dossierExecution/principalExecution.vue'
 
 
+ import SortiDuPatrimoine from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/SortiDuPatrimoine/SortiDuPatrimoine.vue'
 
 
 
@@ -122,7 +123,11 @@ import principalExecution from '../../pages/suivi_control_budgetaires/suiviImmob
 const suiviImmobilisationRoutes = [
   
   
-
+  {
+    path: "/SortiDuPatrimoine/:id",
+    name: "SortiDuPatrimoine",
+    component: SortiDuPatrimoine
+  },
 
 
 
