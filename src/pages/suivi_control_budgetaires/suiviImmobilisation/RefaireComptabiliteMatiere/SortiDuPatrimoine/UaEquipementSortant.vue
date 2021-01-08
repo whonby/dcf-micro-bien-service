@@ -12,7 +12,7 @@
                         <tr>
                         
                             
-                            <td style="background: #f0c71d !important;">
+                            <!-- <td style="background: #f0c71d !important;">
                                 <label style="font-size:20px">Section<a href="#" @click.prevent="videSection()" v-if="uniteAdministrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
                                 </label>
                                 <model-list-select style="background-color: #fff;"
@@ -25,7 +25,7 @@
                                 >
 
                                 </model-list-select>
-                            </td>
+                            </td> -->
                           <td style="background: #f0c71d !important;">
                                 <label style="font-size:20px">Unité Administrative<a href="#" @click.prevent="videUniteAdministrative()" v-if="uniteAdministrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
                                 </label>
