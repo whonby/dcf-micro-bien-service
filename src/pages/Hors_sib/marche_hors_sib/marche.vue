@@ -113,7 +113,7 @@ CodeExempte
                 </button>
  <button v-else class="btn  btn-danger">
               
-                <span title="MARCHE EN PLANIFICATION">PL</span>
+                <span title="MARCHE NON PLANIFIE">NPL</span>
                 </button>
                    </td>
   
@@ -134,7 +134,7 @@ CodeExempte
                     
                       <router-link :to="{ name: 'detail_hors_sib', params: { id: activites.id }}"
                 class="btn btn-default " title="historique la contratualisation">
-                  <span class=""><i class=" icon-folder-open"></i></span>
+                  <span class=""><i class=" icon-folder-open"> historique</i></span>
                     </router-link>
                    </td>
                    <td>
@@ -146,7 +146,7 @@ CodeExempte
            <td>
           
                      <button @click.prevent="supprimerMarche(activites.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
                    </td>
                   
                    

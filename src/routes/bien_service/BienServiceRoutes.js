@@ -95,8 +95,11 @@ import ListeImageMarche from "../../pages/ImageMarche/ListeImageMarche"
 import TableauBordGestionMarche from "../../pages/TableauBord/TableauBordGestionMarche.vue"
 import TableauBordFinancier from "../../pages/TableauBord/TableauBordFinancier"
 import marcheHorsppmHorsSib from "../../pages/gestionMarche/marcheHorsppmHorsSib.vue"
-
+import  marcheParEntreprise from "../../pages/gestionMarche/marcheParEntreprise.vue"
 import DetailInforTableBordUniteAd from "../../pages/TableauBord/DetailInforTableBordUniteAd"
+import  marcheHorsppm from "../../pages/gestionMarche/marcheHorsppm.vue"
+import listeMarcheSib from "../../pages/gestionMarche/listeMarcheSib.vue"
+import ajouterMarcheSib from "../../pages/gestionMarche/ajouterMarcheSib.vue"
 const BienServiceRoutes = [
     {
         path:"/tableau-bord-financier",
@@ -104,9 +107,29 @@ const BienServiceRoutes = [
         component:TableauBordFinancier
     },
     {
+        path:"/marche-sib",
+        name:"listeMarche",
+        component:listeMarcheSib
+    },
+    {
+        path:"/ajouter-marche-sib",
+        name:"ajouterMarche",
+        component:ajouterMarcheSib
+    },
+    {
+        path:"/marche-hors-ppm",
+        name:"marcheHorsppm",
+        component:marcheHorsppm
+    },
+    {
         path:"/marche-hors-ppm-hors-sib",
         name:"marcheHorsib",
         component:marcheHorsppmHorsSib
+    },
+    {
+        path:"/marche-par-entreprise",
+        name:"marcheEntreprise",
+        component:marcheParEntreprise
     },
     {
         path:"/table_bord_gestion_marche_hors_sib/:id",
@@ -626,6 +649,7 @@ detailExecution
         component:typeUa
     },
     {
+        
         path:"/ppm",
         name:"ppm",
         component:PlanPassationMarche
