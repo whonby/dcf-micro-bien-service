@@ -319,11 +319,7 @@ export default {
                     entreprise_id:"",
                     date_cotation:"",
                     ref_offre:"",
-<<<<<<< HEAD
-                    marche_id:""
-=======
                    marche_id:""
->>>>>>> b5ede6879fde1a7987d22d9ddf5f8b8a6e3d37b7
 
                 },
             
@@ -350,14 +346,8 @@ export default {
     props:["macheid"],
 
     created(){
-<<<<<<< HEAD
-        
-        this.formCotation.marche_id=this.macheid.id
-        console.log(this.macheid.id)
-=======
 this.formCotation.marche_id=this.macheid.id
         console.log()
->>>>>>> b5ede6879fde1a7987d22d9ddf5f8b8a6e3d37b7
     },
     computed: {
 

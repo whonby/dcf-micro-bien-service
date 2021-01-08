@@ -100,12 +100,7 @@
                         <div class="control-group">
 
                             <div class="controls">
-<<<<<<< HEAD
-
-                                <label>Date de début de publication <code></code></label>
-=======
                                 <label>Date debut de publication<code>*</code></label>
->>>>>>> b5ede6879fde1a7987d22d9ddf5f8b8a6e3d37b7
                                 <input type="date" class="span" placeholder="Date emision" v-model="formData.date_emission">
                             </div>
                         </div>
@@ -113,14 +108,6 @@
                                 <td>
                         <div class="control-group">
                             <div class="controls">
-<<<<<<< HEAD
-                                <label>Date de fin de publication <code></code></label>
-                                <input type="date" class="span" placeholder="Date limite" v-model="formData.date_limite" >
-                            </div>
-                        </div>
-                        </td>
-                                    <td>
-=======
                                 <label>Date fin de publication <code>*</code></label>
                                 <input type="date" class="span" placeholder="Date limite" v-model="formData.date_limite" :min="formData.date_emission">
                             </div>
@@ -131,7 +118,6 @@
                         </tr>
                         <tr>
                             <td>
->>>>>>> b5ede6879fde1a7987d22d9ddf5f8b8a6e3d37b7
                         <div class="control-group">
                             <div class="controls">
                                 <label>Numéro et date <code></code></label>
@@ -139,16 +125,6 @@
                             </div>
                         </div>
                         </td>
-<<<<<<< HEAD
-                        <!-- <td >
-                        <div class="control-group">
-                            <label class="control-label">Imputation :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Imputation" v-model="formData.imputation" disabled>
-                            </div>
-                        </div>
-                        </td> -->                                             
-=======
 
                             <td>
                                 <div class="control-group">
@@ -168,7 +144,6 @@
                                     </div>
                                 </div>
                             </td>
->>>>>>> b5ede6879fde1a7987d22d9ddf5f8b8a6e3d37b7
                         </tr>
                     </table>  
 
@@ -228,11 +203,7 @@
                              <td>
                         <div class="control-group">
                             <div class="controls">
-<<<<<<< HEAD
-                                <label>Date de début de publication </label>
-=======
                                 <label>Date debut de publication</label>
->>>>>>> b5ede6879fde1a7987d22d9ddf5f8b8a6e3d37b7
                                 <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
                             </div>
                         </div>
@@ -241,34 +212,22 @@
                                  <td >
                         <div class="control-group">
                             <div class="controls">
-<<<<<<< HEAD
-                                <label>Date de fin de publication </label>
-=======
                                 <label>Date fin de publication </label>
->>>>>>> b5ede6879fde1a7987d22d9ddf5f8b8a6e3d37b7
                                 <input type="date" class="span" placeholder="Date limite" v-model="edite_appel_offre.date_limite">
                             </div>
                         </div>
                         </td>
-<<<<<<< HEAD
-                         <!-- <td>
-                        
-=======
 
                        
                         </tr>
                         <tr>
                              <td>
->>>>>>> b5ede6879fde1a7987d22d9ddf5f8b8a6e3d37b7
                         <div class="control-group">
                             <label>Imputation</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Imputation" v-model="edite_appel_offre.imputation">
                             </div>
                         </div>
-<<<<<<< HEAD
-         </td> -->
-=======
                         </td>
 
                             <td>
@@ -289,7 +248,6 @@
                                     </div>
                                 </div>
                             </td>
->>>>>>> b5ede6879fde1a7987d22d9ddf5f8b8a6e3d37b7
                                
                             </tr>
                             
