@@ -262,7 +262,7 @@
                     <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #fff">
                         <div @click="listeMarcheStatus(11)" class="card-box bg-acheve-hors-delais" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
-                                <p><b>Achevés dans le délais</b> </p>
+                                <p><b>Achevés dans le délai</b> </p>
 
                             </div>
                             <div class="icon3">

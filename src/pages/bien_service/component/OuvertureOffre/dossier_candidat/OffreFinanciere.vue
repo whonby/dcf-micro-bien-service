@@ -228,54 +228,7 @@
               </div>
             </td>
         </tr>
-        <tr>
-          
-
-          <!--          <td>-->
-          <!--            <div class="control-group">-->
-          <!--              <label class="control-label">Taux</label>-->
-          <!--              <div class="controls">-->
-          <!--                <input type="text" readonly  class="span" :value="affcherTauxEnCours">-->
-          <!--                <input-->
-          <!--                    type="hidden"-->
-          <!--                    :value="tauxArrondit"-->
-
-          <!--                    class="span3"-->
-
-          <!--                />-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--          </td>-->
-
-          <td>
-            <!--            <div class="control-group">-->
-            <!--              <label class="control-label">Tva</label>-->
-            <!--              <div class="controls">-->
-            <!--                <input type="number" readonly :value="montantTva" class="span" />-->
-            <!--              </div>-->
-            <!--            </div>-->
-          </td>
-          <td>
-            <!--            <div class="control-group">-->
-            <!--              <label class="control-label">Montant total ht :</label>-->
-            <!--              <div class="controls">-->
-            <!--                <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHT">-->
-            <!--              </div>-->
-            <!--            </div>-->
-          </td>
-        </tr>
-        <tr>
-
-          <td>
-            <!--            <div class="control-group">-->
-            <!--              <label class="control-label">Montant totat ttc :</label>-->
-            <!--              <div class="controls">-->
-            <!--                <input type="text"  readonly  class="span" placeholder="Montant total ttc" :value="montantHTt">-->
-            <!--              </div>-->
-            <!--            </div>-->
-          </td>
-
-        </tr>
+ 
 
       </table>
 

@@ -117,7 +117,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Délai de validité de l'offre :</label>
+                <label class="control-label">Délai de validité de l'offre (Jours):</label>
                 <div class="controls">
                   <input type="text" v-model="formchnique.delai_validite_offre" class="span" placeholder="Délai de validité de l'offre ">
                 </div>
@@ -126,7 +126,7 @@
             <td>
               <div class="control-group">
                 <label class="control-label">
-                  Delai de livraison Ou Execution Proposé</label>
+                  Délai de livraison Ou Exécution Proposée (Jours)</label>
                 <div class="controls">
                   <input type="text" v-model="formchnique.delai_execution" class="span" placeholder="">
                  <!-- <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">-->
@@ -264,7 +264,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Délai de validité de l'offre :</label>
+                <label class="control-label">Délai de validité de l'offre (Jours):</label>
                 <div class="controls">
                   <input type="text" v-model="editer.delai_validite_offre" class="span" placeholder="Délai de validité de l'offre ">
                 </div>
@@ -273,7 +273,7 @@
             <td>
               <div class="control-group">
                 <label class="control-label">
-                  Delai de livraison Ou Execution Proposé</label>
+                  Délai de livraison Ou Exécution Proposée (Jours)</label>
                 <div class="controls">
                   <input type="text" v-model="editer.delai_execution" class="span" placeholder="">
                   <!-- <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">-->
@@ -286,7 +286,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label">Autres pièced spécififiées pas le dossier de consultation(EXPLE:Nationalité autres)</label>
+                <label class="control-label">Autres pièces spécififiées pas le dossier de consultation(EXPLE:Nationalité autres)</label>
                 <div class="controls">
                   <input type="text" v-model="editer.autre_piece_specifie" class="span" placeholder="">
                   <!-- <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">-->

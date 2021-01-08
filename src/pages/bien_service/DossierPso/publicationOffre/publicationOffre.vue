@@ -73,13 +73,15 @@
                             </td>
                             <td>
                         <div class="control-group">
-                            <label class="control-label">Reference  offre <code>*</code> :</label>
+                            <label class="control-label">Référence  offre <code>*</code> :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Reference d'appel" v-model="formData.ref_appel">
                             </div>
                         </div>
                             </td>
                             </tr>
+                            </table>
+                             <table> 
                             <tr>
                             <td colspan="2" width="">
                         <div class="control-group">
@@ -91,6 +93,8 @@
                         </div>
                             </td>
                             </tr>
+                            </table>
+                             <table>       
                             <tr>
                                 <td>
                         <div class="control-group">
@@ -106,7 +110,15 @@
                         <div class="control-group">
                             <div class="controls">
                                 <label>Date de fin de publication <code></code></label>
-                                <input type="date" class="span" placeholder="Date limite" v-model="formData.date_limite" :min="formData.date_emission">
+                                <input type="date" class="span" placeholder="Date limite" v-model="formData.date_limite" >
+                            </div>
+                        </div>
+                        </td>
+                                    <td>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Numéro et date <code></code></label>
+                                <input type="text" class="span" >
                             </div>
                         </div>
                         </td>
@@ -117,7 +129,7 @@
                                 <input type="text" class="span" placeholder="Imputation" v-model="formData.imputation" disabled>
                             </div>
                         </div>
-                        </td> -->
+                        </td> -->                                             
                         </tr>
                     </table>  
 
@@ -155,7 +167,7 @@
                             </td>
                                 <td >
                         <div class="control-group">
-                            <label class="control-label">Reference  offre  :</label>
+                            <label class="control-label">Référence  offre  :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Reference d'appel" v-model="edite_appel_offre.ref_appel">
                             </div>

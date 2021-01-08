@@ -23,6 +23,7 @@ const defaultstate = {
     comptes:[],
     agenceBanques: [],
     sanctions: [],
+    ppm_ua: [],
     historiqueEntreprise:[]
 
 };
