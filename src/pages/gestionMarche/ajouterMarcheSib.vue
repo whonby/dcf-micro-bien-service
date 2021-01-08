@@ -138,8 +138,13 @@
                   <label class="control-label">Activité</label>
                   <div class="controls">
                     <select v-model="formData.activite_id"  class="span4">
+                         <option
+                        v-for="activite in activiteDynamiques(formData.economique_id)" :readOnly="deverouilleAct"
+                        :key="activite.activite_id"
+                        :value="activite.activite_id"
+                      >{{afficherLesActivite(activite.activite_id)}}</option>
                      <!-- <option
-                        v-for="activite in activiteDynamiques(formData.economique_id) :readOnly="deverouactivite""
+                        v-for="activite in activiteDynamiques(formData.economique_id) :readOnly="deverouilleAct"
                         :key="activite.activite_id"
                         :value="activite.activite_id"
                       >{{afficherLesActivite(activite.activite_id)}}</option> -->
@@ -155,7 +160,7 @@
        <div class="controls">
          <input
            type="text"
-           :value="ImputationBudget(formData.economique_id)"
+           :value="ImputationBudget(formData.activite_id)"
            class="span4"
            placeholder="Saisir le Imputation"
            readonly
@@ -182,6 +187,7 @@
        </div>
      </div>
          </td>
+    
     
              </tr>
              <tr>
@@ -379,7 +385,7 @@ export default {
                 type_marche_id:"",
                 unite_administrative_id:"",
                 gdenature_id:"",
-               // activite_id:"",
+                activite_id:"",
                // typeappel_id:"",
                 exo_id:"",
                 sib:0
@@ -455,7 +461,7 @@ export default {
  deverouileEco() {
       return this.formData.unite_administrative_id =="";
     },
-    deverouactivite(){
+    deverouilleAct(){
       return this.formData.economique_id=="";
     },
      afficherPlanEconomique() {
@@ -485,8 +491,8 @@ export default {
      activiteDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.budgetEclate.filter(
-            element => element.ligneeconomique_id == id && element.uniteadministrative_id == this.formData.unite_administrative_id
+          return this.budgetGeneral.filter(
+            element => element.economique_id == id && element.ua_id == this.formData.unite_administrative_id
           );
         }
       };
@@ -638,7 +644,7 @@ recupererParentId(){
               var nouvelObjet = {
                 ...this.formData,
                exo_id:this.anneeBugetaire,
-               imputation:this.ImputationBudget(this.formData.economique_id)
+               imputation:this.ImputationBudget(this.formData.activite_id)
               }
              this.ajouterMarcheHorSib(nouvelObjet) 
               this.formData ={
@@ -661,7 +667,7 @@ recupererParentId(){
                 type_marche_id:"",
                 	unite_administrative_id:"",
                // gdenature_id:"",
-               // activite_id:"",
+                activite_id:"",
                // typeappel_id:"",
                 exo_id:"",
                 sib:0
