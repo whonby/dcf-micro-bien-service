@@ -14,7 +14,7 @@
         <th>Rôle</th>
         <th>Action</th>
       </tr>
-      </thead>
+      </thead> 
       <tbody>
       <tr class="odd gradeX" v-for="appelOffre in listeMembreCojo"
           :key="appelOffre.id">

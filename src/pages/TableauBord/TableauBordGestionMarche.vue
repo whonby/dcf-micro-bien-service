@@ -105,7 +105,7 @@
                     <td style="background: #b4c6e7;border: 5px solid #fff; font-size: 15px"><b>TOTAL MARCHES PLANIFIES - EXERCICE {{anneeAmort}}</b></td>
                     <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>{{nombreTotalMarche}} Marchés</b></td>
                     <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>{{formatageSomme(montantTotaleMarchePlanifieContratuel)}} TTC</b></td>
-                    <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;"><button class="btn btn-link" style="font-size: 15px;color: #000;"><b>VOIR PPM</b></button></td>
+                    <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;"><button class="btn btn-link" style="font-size: 15px;color: #000;" ><b>VOIR PPM</b></button></td>
                     <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;"><button class="btn btn-link" style="font-size: 15px;color: #000;" @click="click_cartographie()"><b>VOIR SITUATION GEOGRAPHIQUE</b></button></td>
 <!--                    <td> <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button></td>-->
                 </tr>
@@ -125,7 +125,7 @@
                     <td style="background: #2f5396;border: 5px solid #fff;color: #fff;text-align: center !important;"><button style="font-size: 15px; color: #fff;" class="btn btn-link" @click="click_cartographie()"><b>VOIR SITUATION GEOGRAPHIQUE</b></button></td>
                 </tr>
 
-                </tbody>
+                </tbody> 
             </table>
 
 
