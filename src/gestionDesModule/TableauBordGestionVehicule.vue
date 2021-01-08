@@ -161,7 +161,7 @@ valeurAcquisitionMateriel
                      
                      <td style="width:15%;text-align:center;"> 0% </td>
                      <td style="width:15%;text-align:center;"> 0%</td>
-                     <td style="width:15%">0% </td>
+                     <td style="width:15%;text-align:center;">0% </td>
                  </tr>
                  <tr>
                      <th  style="width:10%;text-align:right;">MATERIEL</th>
@@ -186,12 +186,13 @@ valeurAcquisitionMateriel
                   <tr>
                      <th  style="width:10%;text-align:right;">IMMOBILIER</th>
                      <td style="width:15%;text-align:center;">{{NombreEquipementParImmobilier(unite_administrative_id)}} </td>
-                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(PrixEquipementParMateriel(unite_administrative_id)))}}</td><td style="width:15%;text-align:center;"> </td>
+                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(PrixEquipementParMateriel(unite_administrative_id)))}}</td>
                      <td style="width:15%;text-align:center;">{{formatageSomme(parseFloat(0))}}</td>
-              <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td>
+                                          
+  <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td>
                      <td style="width:15%;text-align:center;"> 0%</td>
                      <td style="width:15%;text-align:center;">0%</td>
-                     
+                     <td style="width:15%;text-align:center;">0%</td>
                  </tr>
                   <tr>
                      <th  style="width:10%;text-align:right;">GROS TRAVAUX</th>

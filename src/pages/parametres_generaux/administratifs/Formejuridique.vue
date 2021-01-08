@@ -72,7 +72,7 @@
                           class="btn btn-danger"
                         >
                           <span class>
-                            <i class="icon-trash"></i>
+                            <i class="icon-trash"> Supprimer</i>
                           </span>
                         </button>
                       </div>

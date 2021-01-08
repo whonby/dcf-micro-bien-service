@@ -105,7 +105,7 @@
                     
               
               <button v-if="exercice_budgetaire.encours!=1" @click.prevent="supprimerExerciceBudgetaire(exercice_budgetaire.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
              
 
                   </td>

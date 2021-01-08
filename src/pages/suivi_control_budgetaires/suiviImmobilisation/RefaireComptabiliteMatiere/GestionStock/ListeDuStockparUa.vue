@@ -500,15 +500,15 @@
                      <th>Model</th>
                     <th>Quantité Initiale</th> 
                     <th title="quantite en stock">Quantité Actuelle</th>
-                    <th title="quantite sortant">Quantité sortie</th>
+                    <!-- <th title="quantite sortant">Quantité sortie</th>
                      <th>Date d'entrée</th>
                     <th title="quantite entrant">Quantité entrée</th>
-                    <th>Date de sortie</th>
+                    <th>Date de sortie</th> -->
                     
                      
                     <!-- <th>Duree de vie</th> -->
                    
-                    <th>Action</th>
+                    <th style="width:7%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -545,10 +545,10 @@
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{stock.quantitestock || 'Non renseigné'}}</td>
-                     <td style="text-align: center;"
+                     <!-- <td style="text-align: center;"
                       @dblclick="afficherModalModifierTitre(id)"
-                    >{{ stock.qtesortie ||'0' }}</td>
-                    <td style="text-align: center;"
+                    >{{ stock.qtesortie ||'0' }}</td> -->
+                    <!-- <td style="text-align: center;"
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{formaterDate(stock.date_entre) || 'Non renseigné'}}</td>
                     <td style="text-align: center;"
@@ -556,7 +556,7 @@
                     >{{stock.qteentrant || '0'}}</td>
                        <td style="text-align: center;"
                       @dblclick="afficherModalModifierTitre(id)"
-                    >{{formaterDate(stock.date_sortie) || 'Non renseigné'}}</td>
+                    >{{formaterDate(stock.date_sortie) || 'Non renseigné'}}</td> -->
                    
                   
                      <!-- <td
@@ -564,14 +564,14 @@
                     >{{stock.durevie || 'Non renseigné'}} Ans</td> -->
 
                     <td>
-                        <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
+                        <!-- <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
                         <span>
                           <i class=" icon-edit"></i>
                         </span>
-                      </button>
+                      </button> -->
                       <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
                         <span>
-                          <i class="icon icon-trash"></i>
+                          <i class="icon icon-trash"></i> Supprimer
                         </span>
                       </button>
                     </td>
@@ -585,18 +585,18 @@
                       <td style="font-weight:bold;">Total</td>
                    <td  style="text-align: center;color:red;font-weight:bold;">{{quantiteInitial(uniteAdministrative_id)}}</td>
                     <td style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(uniteAdministrative_id) || 0 }}</td>
-                     <td style="text-align: center;color:red;font-weight:bold;">{{ nombreDeQuantiteSortiEnStock(uniteAdministrative_id) || 0 }}</td>
-                    <td></td>
+                     <td style="text-align: center;color:red;font-weight:bold;"></td>
+                     <!-- <td></td>
                    
                      
                   
                      
-                    <td  ></td>
+                    <td  ></td> -->
                    
                     
                   
-                     <td></td>
-                     <td></td>
+                    <!-- <td></td>
+                     <td></td> -->
                     
                   </tr>
                 </tbody>
@@ -713,7 +713,6 @@ quantite: {
       "articles",
      "marqueVehicules",
      "ModeleVehicules",
-      
       "type_Unite_admins",
       "totalQteEntrant",
       "totalQteSortant",
@@ -825,133 +824,110 @@ filtre_Stock() {
 
 
 //     },
+// nombreDeQuantiteSortiEnStock() {
+//       return id => {
+//         if (id != null && id != "") {
+//            return this.listeDesStockGlobalUa.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
 
-listeDesStockParUa() {
-      
-
-
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.GestionStockageArticles.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-           return id => {
-        if (id != null && id != "") {
-          return colect.filter(element => element.uAdministrative_id == id);
-        }
-      };
-        }
-
-        return id => {
-        if (id != null && id != "") {
-          return this.GestionStockageArticles.filter(element => element.uAdministrative_id == id);
-        }
-      };
-
-    },
-
-quantiteInitial() {
-       
-
-
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.GestionStockageArticles.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            //return colect
-          
-              return id => {
-        if (id != null && id != "") {
-          return this.colect.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.histo_qte), 0).toFixed(0);
-        }
-      };
-         
-       
-        }
-//return this.GestionStockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
-       
-        
-
-     return id => {
-        if (id != null && id != "") {
-          return this.GestionStockageArticles.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.histo_qte), 0).toFixed(0);
-        }
-      };
-    },
-
+//         }
+//         return this.listeDesStockGlobalUa.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+//       };
+     
+//     },
 nombreDeQuantiteEnStock() {
-       
-
-
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.GestionStockageArticles.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            //return colect
-          
-              return id => {
-        if (id != null && id != "") {
-          return this.colect.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
-        }
-      };
-         
-       
-        }
-//return this.GestionStockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
-       
-        
-
-     return id => {
-        if (id != null && id != "") {
-          return this.GestionStockageArticles.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
-        }
-      };
-    },
-nombreDeQuantiteSortiEnStock() {
-      
-
-
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.GestionStockageArticles.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-          
-          return id => {
-        if (id != null && id != "") {
-          return this.colect.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
-        }
-      };
-       
-         //return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
-       }
-
       return id => {
         if (id != null && id != "") {
-          return this.GestionStockageArticles.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
-        }
-      };
+           return this.listeDesStockGlobalUa.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
 
- //return this.GestionStockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+        }
+        return this.listeDesStockGlobalUa.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+      };
+     
     },
+    quantiteInitial() {
+      return id => {
+        if (id != null && id != "") {
+           return this.listeDesStockGlobalUa.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.histo_qte), 0).toFixed(0);
+
+        }
+        return this.listeDesStockGlobalUa.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.histo_qte), 0).toFixed(0);
+      };
+     
+    },
+listeDesStockParUa() {
+      return id => {
+        if (id != null && id != "") {
+           return this.listeDesStockGlobalUa.filter(qtreel => qtreel.uAdministrative_id == id);
+
+        }
+        return this.listeDesStockGlobalUa;
+      };
+     
+    },
+
+listeDesStockGlobalUa() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.GestionStockageArticles.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect;
+      //      return id => {
+      //   if (id != null && id != "") {
+      //     return colect.filter(element => element.uAdministrative_id == id);
+      //   }
+      // };
+        }
+return this.GestionStockageArticles;
+      //   return id => {
+      //   if (id != null && id != "") {
+      //     return this.GestionStockageArticles.filter(element => element.uAdministrative_id == id);
+      //   }
+      // };
+
+    },
+
+
+
+
+// nombreDeQuantiteSortiEnStock() {
+      
+
+
+//         if (this.noDCfNoAdmin){
+//             let colect=[];
+//             this.GestionStockageArticles.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+//             })
+          
+//           return id => {
+//         if (id != null && id != "") {
+//           return this.colect.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+//         }
+//       };
+       
+//          //return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+//        }
+
+//       return id => {
+//         if (id != null && id != "") {
+//           return this.GestionStockageArticles.filter(element => element.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+//         }
+//       };
+
+//  //return this.GestionStockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+//     },
 
 
 

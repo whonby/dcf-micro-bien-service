@@ -56,7 +56,7 @@
                     <div id="tab00007" class="tab-pane">
                 <table class="table table-bordered table-striped">
     
-                 <PlanPassationMarche></PlanPassationMarche>
+                 <PlanPassationMarcheHorsSib></PlanPassationMarcheHorsSib>
               </table>
                   </div>
 
@@ -95,7 +95,7 @@
     </div>
 </template>
 <script>
-import PlanPassationMarche from "../../../pages/bien_service/ppm/PlanPassationMarche.vue"
+import PlanPassationMarcheHorsSib from "../../../pages/bien_service/ppm/PlanPassationMarcheHorsSib.vue"
 import tableauDeBordGestion from "./tableauDeBordGestion"
 //import {admin, dcf} from "../../../../src/Repositories/Auth"
 import marche from "./marche"
@@ -106,7 +106,7 @@ export default {
     components:{
         marche,
         marcheHorsppmHorsSib,
-        PlanPassationMarche,
+        PlanPassationMarcheHorsSib,
       tableauDeBordGestion,
       marcheParEntreprise
     },

@@ -32,6 +32,8 @@ const defaultState = {
   Appreciations:[],
   ficheArticle:[],
   ua_idImo:"",
+  Typebiengrpecorporels:"",
+  groupecorporels:""
 
 };
 

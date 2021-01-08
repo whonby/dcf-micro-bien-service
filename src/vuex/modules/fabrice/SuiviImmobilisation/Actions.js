@@ -2086,3 +2086,182 @@ export function supprimerFicheArticle({ commit }, id) {
           axios.delete("/FicheArticle/" + id).then(() => dialog.close());
       });
 }
+
+
+
+
+
+
+
+
+
+
+
+export function getGrpeCorporel({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/groupecorporel")
+          .then(response => {
+              commit("GET_ALL_GROUPE_CORPOREL", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterGrpeCorporel({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/groupecorporel", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_GROUPE_CORPOREL", response.data);
+
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierGrpeCorporel({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/groupecorporel/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_GROUPE_CORPOREL", response.data);
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerGrpeCorporel({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_GROUPE_CORPOREL", id);
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/groupecorporel/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+
+
+
+export function getTypeBienCorporels({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/TypeBienGrpeCorporel")
+          .then(response => {
+              commit("GET_ALL_TYPE_BIEN_CORPOREL", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterTypeBienCorporels({ commit,dispatch }, nouveau) {
+  asyncLoading(axios
+      .post("/TypeBienGrpeCorporel", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_TYPE_BIEN_CORPOREL", response.data);
+              dispatch('getTypeBienCorporels')
+              dispatch('getTypeBienCorporels')
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierTypeBienCorporels({ commit,dispatch }, nouveau) {
+  asyncLoading(axios
+      .put("/TypeBienGrpeCorporel/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_TYPE_BIEN_CORPOREL", response.data);
+          dispatch('getTypeBienCorporels')
+              dispatch('getTypeBienCorporels')
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerTypeBienCorporels({ commit,dispatch }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_TYPE_BIEN_CORPOREL", id);
+          dispatch('getTypeBienCorporels')
+              dispatch('getTypeBienCorporels')
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/TypeBienGrpeCorporel/" + id).then(() => dialog.close());
+      });
+}
+// export function modifierImmobilisationSortie({ commit,dispatch }, nouveau) {
+
+//   this.$app.$dialog
+//       .confirm("Voulez vouz vraiment supprimer ?.")
+//       asyncLoading(axios
+//         .put("/modifier_immobilisation/" + nouveau.id,nouveau)).then(() => dialog.close())
+//         .then(dialog => {
+//       .then((dialog,response) => {
+//         commit("MODIFIER_IMMOBILISATION", response.data);
+//         dispatch("getAllImmobilisation");
+//         this.$app.$notify({
+//           title: 'Success',
+//           text: 'Modification Effectué avec Succès!',
+//           type: "success"
+//       })
+//     })
+//       });
+
+      
+// }
+export function modifierImmobilisationSortie({ commit,dispatch }, nouveau) {
+  this.$app.$dialog
+  
+      .confirm("Voulez vous vraiment?.")
+      .then(response => {
+      asyncLoading(axios
+        .put("/modifier_immobilisation/" + nouveau.id,nouveau).then(() => response.close()))
+        commit("MODIFIER_IMMOBILISATION", response.data);
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        dispatch('getAllImmobilisation')
+        
+      })
+      
+
+
+
+
+
+      // .then(response => {
+      //   commit("MODIFIER_IMMOBILISATION", response.data);
+      //     dispatch('getAllImmobilisation')
+      //     asyncLoading(  
+      //     axios.put("/modifier_immobilisation/" + nouveau.id,nouveau));
+      // });
+}

@@ -944,6 +944,69 @@ export const SUPPRIMER_FICHE_ARTICLE = (state, id) => {
 
 
 
+
+export const GET_ALL_GROUPE_CORPOREL = (state, tableauNormeArticle) => {
+  state.groupecorporels = tableauNormeArticle;
+};
+
+// ajouter NORME_EQUIPEMENTS
+export const AJOUTER_GROUPE_CORPOREL = (state, nouveau_normeArt) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.groupecorporels.unshift(nouveau_normeArt);
+};
+
+
+// modifier NORME_EQUIPEMENTS
+export const MODIFIER_GROUPE_CORPOREL = (state, objetModifie) => {
+  state.groupecorporels = state.groupecorporels.map(norme => {
+    if (norme.id == objetModifie.id) {
+      norme = { ...objetModifie };
+    }
+
+    return norme;
+  });
+};
+
+// supprimer NORME_EQUIPEMENTS
+export const SUPPRIMER_GROUPE_CORPOREL = (state, id) => {
+  state.groupecorporels = state.groupecorporels.filter(norme => norme.id != id);
+};
+
+
+
+
+
+
+
+export const GET_ALL_TYPE_BIEN_CORPOREL = (state, tableauNormeArticle) => {
+  state.Typebiengrpecorporels = tableauNormeArticle;
+};
+
+// ajouter NORME_EQUIPEMENTS
+export const AJOUTER_TYPE_BIEN_CORPOREL = (state, nouveau_normeArt) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.Typebiengrpecorporels.unshift(nouveau_normeArt);
+};
+
+
+// modifier NORME_EQUIPEMENTS
+export const MODIFIER_TYPE_BIEN_CORPOREL = (state, objetModifie) => {
+  state.Typebiengrpecorporels = state.Typebiengrpecorporels.map(norme => {
+    if (norme.id == objetModifie.id) {
+      norme = { ...objetModifie };
+    }
+
+    return norme;
+  });
+};
+
+// supprimer NORME_EQUIPEMENTS
+export const SUPPRIMER_TYPE_BIEN_CORPOREL = (state, id) => {
+  state.Typebiengrpecorporels = state.Typebiengrpecorporels.filter(norme => norme.id != id);
+};
+
+
+
 export {
   
 

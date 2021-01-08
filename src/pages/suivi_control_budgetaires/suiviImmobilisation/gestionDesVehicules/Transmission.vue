@@ -135,7 +135,7 @@
                     <td>
                       <button class="btn btn-danger" @click="supprimerTransmission(service.id)">
                         <span>
-                          <i class="icon icon-trash"></i>
+                          <i class="icon icon-trash"> Supprimer</i>
                         </span>
                       </button>
                     </td>
@@ -207,10 +207,10 @@ json_fields: {
   },
 
   computed: {
-    ...mapGetters("SuiviImmobilisation", ["Transmission"]),
+    ...mapGetters("SuiviImmobilisation", ["Transmissions"]),
     filtre_service() {
       const st = this.search.toLowerCase();
-      return this.Transmission.filter(type => {
+      return this.Transmissions.filter(type => {
         return (
          
           type.libelle.toLowerCase().includes(st)

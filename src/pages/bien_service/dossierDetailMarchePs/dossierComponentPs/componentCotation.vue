@@ -10,7 +10,7 @@
                                  <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
                                             <tr>
-                                                <th>Ref</th>
+                                                <th>Ref {{macheid.id}}</th>
                                                 <th>Nom</th>
                                                 <th>Contact</th>
                                                 <th>Entreprise</th>
@@ -57,7 +57,7 @@
                       
                          <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter la reception des plis</h3>
+                <h3>Ajouter la reception des plis 888</h3>
             </div>
             <table class="table table-bordered table-striped">
  <tr>
@@ -73,7 +73,7 @@
                         <model-list-select style="background-color: rgb(255,255,255);"
                                            class="wide"
                                            :list="listeEntreprise"
-                                           v-model="search"
+                                           v-model="formCotation.entreprise_id"
                                            option-value="id"
                                            option-text="raison_sociale"
                                             :search-change="recherche()"
@@ -319,8 +319,7 @@ export default {
                     entreprise_id:"",
                     date_cotation:"",
                     ref_offre:"",
-                    id:""
-                   // marche_id:""
+                    marche_id:""
 
                 },
             
@@ -347,7 +346,9 @@ export default {
     props:["macheid"],
 
     created(){
-
+        
+        this.formCotation.marche_id=this.macheid.id
+        console.log(this.macheid.id)
     },
     computed: {
 
@@ -510,9 +511,11 @@ affichierReferenceAppelOffre() {
                        contact:"",
                        entreprise_id:"",
                        date_cotation:"",
-                       ref_offre:""
+                       ref_offre:"",
+                       marche_id:this.macheid.id
                        
                }
+               //  this.formCotation.marche_id=this.macheid.id
            },
 
 

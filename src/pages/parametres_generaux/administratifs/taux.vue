@@ -94,7 +94,7 @@ localisationsFiltre
                     
               
               <button v-if="tau.encours!=1" @click.prevent="supprimerExerciceBudgetaire(tau.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
              
 
                   </td>

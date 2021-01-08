@@ -142,6 +142,7 @@
                 ],
                 search:"",
                 unite_administrative_id:"",
+                	ppm:1,
                 progress:0,
                 bgWidth: '0%',
                 bgHeight: '30px',
@@ -198,8 +199,9 @@
                 return 0
             },
 
+
             listePlanPassation(){
-                return this.getterPlanPassationMarche.filter(item =>item.ppm==0)
+                return this.getterPlanPassationMarche.filter(item =>item.ppm==1)
             }
 
         },
@@ -251,6 +253,7 @@
                 formData.append('exercicebudget_id', this.exercice_budget);
                 formData.append('unite_administrative_id',this.unite_administrative_id)
                 formData.append("libelle_unite_admin",unite.libelle)
+                
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'

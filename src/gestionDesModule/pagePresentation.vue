@@ -448,6 +448,8 @@ this.getAllHistoriqueBudgetGeneral()
       /**
        * suivi des immo
        */
+      this.getGrpeCorporel();
+      this.getTypeBienCorporels();
        this.getAllNatureEntre();
       this.getAllCauseInactivite();
       this.getAllEtatImmo();
@@ -689,6 +691,8 @@ return objJson.id
         "getBanque", "getCompte","getAgence","getSanction","getHistoriqueEntreprise"]),
 
         ...mapActions("SuiviImmobilisation", [
+          "getGrpeCorporel",
+          "getTypeBienCorporels",
       "getAllNatureEntre",
       "getAllCauseInactivite",
       "getAllEtatImmo",

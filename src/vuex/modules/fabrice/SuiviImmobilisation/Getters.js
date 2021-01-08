@@ -1,5 +1,7 @@
 import { groupBy } from "../../../../Repositories/Repository";
-
+articles
+export const Typebiengrpecorporels = state => state.Typebiengrpecorporels
+export const groupecorporels = state => state.groupecorporels
 
 export const marqueVehicules = state => state.marqueVehicules
 export const ModeleVehicules = state => state.ModeleVehicules
@@ -37,7 +39,7 @@ const equipements = state =>
   state.equipements.sort((a, b) => (a.code > b.code ? 1 : -1));
 
 const normeEquipements = state => state.normeEquipements;
-const articles = state => state.articles;
+const articles = state => state.articles.sort((a, b) => (a.libelle > b.libelle ? 1 : -1));
 const stockageArticles = state => state.stockageArticles;
 
 
@@ -1144,6 +1146,11 @@ export const groupeFonctionNormeEquipe = (state, getters) => {
 };
 
 
+
+export const groupeUaAffectation = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.immobilisations, "uniteadministrative_id");
+};
 
 
 

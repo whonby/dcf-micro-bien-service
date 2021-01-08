@@ -61,6 +61,13 @@ import ExecutionReparationVehicule from '../../pages/suivi_control_budgetaires/s
 
 // ROUTE COMPTABILITE MATIERE A FAIRE
 
+
+
+
+
+
+
+
 import AjouterEntrePatrimoine from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/gpeGestionStock/AjouterEntrePatrimoine.vue'
 
 
@@ -108,12 +115,22 @@ import AjouterReparationMateriel from '../../pages/suivi_control_budgetaires/sui
 import principalExecution from '../../pages/suivi_control_budgetaires/suiviImmobilisation/dossierExecution/principalExecution.vue'
 
 
+ import SortiDuPatrimoine from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/SortiDuPatrimoine/SortiDuPatrimoine.vue'
 
 
 
 
 const suiviImmobilisationRoutes = [
   
+  
+  {
+    path: "/SortiDuPatrimoine/:id",
+    name: "SortiDuPatrimoine",
+    component: SortiDuPatrimoine
+  },
+
+
+
   {
     path: "/principalExecution",
     name: "principalExecution",
