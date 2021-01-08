@@ -374,8 +374,6 @@
                     <div class="widget-content">
                         <a href="#ajouterOuverture" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
-
-
                 </div> -->
                             <ouverture-offre :macheid="detail_marche.id"></ouverture-offre>
                   <!--<component-ouverture1 :macheid="detail_marche.id"></component-ouverture1>

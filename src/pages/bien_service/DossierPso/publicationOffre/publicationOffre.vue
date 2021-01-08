@@ -93,7 +93,7 @@
                                 <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date emission de DAO <code>*</code></label>
+                                <label>Date debut de publication<code>*</code></label>
                                 <input type="date" class="span" placeholder="Date emision" v-model="formData.date_emission">
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                                 <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date limite de DAO <code>*</code></label>
+                                <label>Date fin de publication <code>*</code></label>
                                 <input type="date" class="span" placeholder="Date limite" v-model="formData.date_limite" :min="formData.date_emission">
                             </div>
                         </div>
@@ -110,7 +110,7 @@
                         
                         </tr>
                         <tr>
-                            <td >
+                            <td>
                         <div class="control-group">
                             <label class="control-label">Numero d'autorisation :</label>
                             <div class="controls">
@@ -118,6 +118,17 @@
                             </div>
                         </div>
                         </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Date d'autorisation :</label>
+                                    <div class="controls">
+                                        <input type="date" class="span" placeholder="" v-model="formData.date_numero_autorisation">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Fichier DAO:</label>
@@ -185,7 +196,7 @@
                              <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date emission </label>
+                                <label>Date debut de publication</label>
                                 <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
                             </div>
                         </div>
@@ -194,7 +205,7 @@
                                  <td >
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date limite </label>
+                                <label>Date fin de publication </label>
                                 <input type="date" class="span" placeholder="Date limite" v-model="edite_appel_offre.date_limite">
                             </div>
                         </div>
@@ -203,7 +214,7 @@
                        
                         </tr>
                         <tr>
-                             <td >
+                             <td>
                         <div class="control-group">
                             <label class="control-label">Numero d'autorisation :</label>
                             <div class="controls">
@@ -211,6 +222,17 @@
                             </div>
                         </div>
                         </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Date d'autorisation :</label>
+                                    <div class="controls">
+                                        <input type="date" class="span" placeholder="" v-model="edite_appel_offre.date_numero_autorisation">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Fichier DAO:</label>
@@ -266,6 +288,7 @@ export default {
                     objet_appel:"",
                     imputation:"",
                     marche_id:"",
+            date_numero_autorisation:""
         },
         edite_appel_offre:{
              	ref_appel:"",
@@ -278,6 +301,7 @@ export default {
                     objet_appel:"",
                     imputation:"",
                     marche_id:"",
+            date_numero_autorisation:""
         }
 
         }

@@ -913,11 +913,11 @@ export  function  getCojo({commit}) {
 
 // action pour ajouter la cojo
 
-export function ajouterCojo({commit}, elementAjout){
+export function ajouterCojo({commit,dispatch}, elementAjout){
   asyncLoading(axios.post('/cojo',elementAjout)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_COJO', response.data.cojo)
-
+          dispatch("getStructureDAO");
           response.data.marche.forEach(function (value) {
               commit('MODIFIER_MARCHE', value)
           })
@@ -4797,4 +4797,116 @@ export function ajouterTableauBordFiltre({commit},formData){
 
 export function ajouterInfoTableauBordFiltre({commit},formData){
     commit('GET_INFO_TABLEAU_BORD', formData)
+}
+
+
+/**
+ * Structure DAO
+ */
+
+
+
+
+export  function  getStructureDAO({commit}) {
+    queue.push(() => axios.get('/structure_dao').then((response) => {
+        commit('GET_STRUCTURE_DAO', response.data)
+
+    }).catch(error => console.log(error)))
+}
+
+export function ajouterStructureDAO({commit}, formData){
+    asyncLoading(axios.post('/structure_dao',formData)).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_STRUCTURE_DAO', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+
+export function modifierStructureDAO({commit}, element_modifie) {
+    asyncLoading( axios.put('/structure_dao',element_modifie)).then(response => {
+        commit('MODIFIER_STRUCTURE_DAO', response.data)
+
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+
+
+export function supprimerStructureDAO({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_STRUCTURE_DAO', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/structure_dao/' + id).then(() => dialog.close() )
+        })
+
+}
+
+
+/**
+ * Comite d'evaluation
+ */
+
+
+
+
+export  function  getMembreComiteEvaluation({commit}) {
+    queue.push(() => axios.get('/membre_comite_evaluation').then((response) => {
+        commit('GET_MEMBRE_COMITE_EVALUATION', response.data)
+
+    }).catch(error => console.log(error)))
+}
+
+export function ajouterMembreComiteEvaluation({commit}, formData){
+    asyncLoading(axios.post('/membre_comite_evaluation',formData)).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_MEMBRE_COMITE_EVALUATION', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+
+export function modifierMembreComiteEvaluation({commit}, element_modifie) {
+    asyncLoading( axios.put('/membre_comite_evaluation',element_modifie)).then(response => {
+        commit('MODIFIER_MEMBRE_COMITE_EVALUATION', response.data)
+
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+
+
+export function supprimerMembreComiteEvaluation({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_MEMBRE_COMITE_EVALUATION', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/membre_comite_evaluation/' + id).then(() => dialog.close() )
+        })
+
 }
