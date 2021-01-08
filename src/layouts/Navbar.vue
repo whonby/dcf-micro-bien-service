@@ -15,6 +15,7 @@
     <MenuInvestissementHorSib v-if="active_el ==40"></MenuInvestissementHorSib>
      <MenuDefaut v-if="active_el ==0"></MenuDefaut>
     <MenuGestionAccess v-if="active_el ==21"></MenuGestionAccess>
+    <MenuGestionDesMarches v-if="active_el ==22"></MenuGestionDesMarches>
     <MenuMonEquipe v-if="active_el ==30"></MenuMonEquipe>
     <MenuActeurDepenseHS v-if="active_el ==31"></MenuActeurDepenseHS>
    <MenuParametreVehicule v-if="active_el == 42"></MenuParametreVehicule>
@@ -50,6 +51,7 @@ import MenuInvestissementHorSib from "../components/navs/MenuInvestissementHorSi
 import MenuMonEquipe from "../components/navs/MenuMonEquipe.vue";
 // import Search from "../components/Search";
 import MenuGestionAccess from "../components/navs/MenuGestionAccess"
+import MenuGestionDesMarches from "../components/navs/MenuGestionDesMarches"
 import MenuActeurDepenseHS from "../components/navs/MenuActeurDepenseHS"
 import MenuParametreVehicule from "../components/navs/MenuParametreVehicule"
 import MenuGestionParc from "../components/navs/MenuGestionParc"
@@ -60,6 +62,7 @@ export default {
   components: {
     MenuTableauBordGestionSibMarche,
     MenuTableauBordGestionMarche,
+    MenuGestionDesMarches,
     MenuRapportVehicule,
     MenuRapportMarche,
     MenuGestionParc,

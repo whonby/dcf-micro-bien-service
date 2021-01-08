@@ -57,7 +57,7 @@
             <span class="label label-important"></span>
           </a>
         </li>
-         <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==15}">
+         <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==22}">
           <a title="GESTION MARCHE" href="#">
             <i class="icon-shopping-cart"></i>
             <span>GESTION MARCHE</span>
@@ -216,10 +216,11 @@ return objJson.id
           name: 'transfert'
         })
       },
+
 navigateToGestionMarche(){
-        this.activate(15)
+        this.activate(22)
         this.$router.push({
-          name: 'GestionMarche'
+          name: 'listeMarche'
         })
       },
 
