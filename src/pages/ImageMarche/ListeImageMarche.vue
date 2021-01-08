@@ -13,7 +13,13 @@
             </ol>
           </nav>
           <!-- /Breadcrumb -->
-    
+        <lightGallery
+                :images="modalGallerys"
+                ref="lightGallery"
+                :show-caption="true"
+                :show-thumbs="true"
+                :show-light-box="false"
+        ></lightGallery>
           <div class="row-fluid gutters-sm">
             <div class="span3 " v-for="marche_image in getterImageParMarche(detail.id)" :key="marche_image.id">
               <div class="card">
@@ -55,9 +61,15 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 
-
+import lightGallery from 'lightgallery-vue';
+import "lg-zoom.js";
+import "lg-fullscreen.js";
+import "lg-thumbnail.js";
+import "lg-autoplay.js";
 export default {
-   
+    components:{
+        lightGallery
+    },
     data(){
         return{
            fabActions: [
@@ -66,6 +78,26 @@ export default {
           icon: "add"
         }
       ],
+            imgs: [
+                {
+                    src: "https://sachinchoolur.github.io/lightgallery.js/static/img/1.jpg",
+                    thumb: "https://sachinchoolur.github.io/lightgallery.js/static/img/thumb-1.jpg",
+                    info: [600, 800],
+                    realname: "admin"
+                },
+                {
+                    src: "https://sachinchoolur.github.io/lightgallery.js/static/img/2.jpg",
+                    thumb: "https://sachinchoolur.github.io/lightgallery.js/static/img/thumb-2.jpg",
+                    info: [600, 800],
+                    realname: "admin"
+                },
+                {
+                    src: "https://sachinchoolur.github.io/lightgallery.js/static/img/13.jpg",
+                    thumb: "https://sachinchoolur.github.io/lightgallery.js/static/img/thumb-13.jpg",
+                    info: [600, 800],
+                    realname: "admin"
+                }
+            ],
    
        editLiquidation: {},
 search:"",
@@ -107,6 +139,25 @@ this.detail=this.marches.find(item=>item.id==this.$route.params.id)
     ]),
      ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
   'plans_Decision']),
+
+                  modalGallerys () {
+                      var arr = [];
+                      this.imgs.forEach((value, index) => {
+                          console.log(index)
+                          let obj = {
+                              subHtml: "TEST：" +
+                                  value.info[0] +
+                                  "*" +
+                                  value.info[1] +
+                                  "<br>GUEI:" +
+                                  value.realname,
+                              thumb: value.thumb,
+                              src: value.src
+                          };
+                          arr.push(obj);
+                      });
+                      return arr;
+                  },
                   conversionDateVariable(){
                       return date=>{
                           let da=new Date(date)
@@ -139,6 +190,7 @@ AffichePhoto() {
         }
       };
     },
+
 getterImageParMarche() {
       return id => {
         if (id != null && id != "") {
@@ -150,8 +202,10 @@ getterImageParMarche() {
     },
       },
  
-      methods:{ 
-
+      methods:{
+          openGallery (index) {
+              this.$refs.lightGallery.showImage(index);
+          },
           ...mapActions('bienService',[  "ajouterAvenant",
       "modifierAvenant",
       "supprimerAvenant",]),

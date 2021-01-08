@@ -40,7 +40,8 @@ import PrettyCheckbox from 'pretty-checkbox-vue'
 // import PrettyRadio from 'pretty-checkbox-vue/radio';
 import VueTelInput from 'vue-tel-input'
 import LDrawToolbar from 'vue2-leaflet-draw-toolbar';
-
+import VueUploadComponent from 'vue-upload-component'
+Vue.component('file-upload', VueUploadComponent)
 
 
 
