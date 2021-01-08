@@ -1,7 +1,11 @@
 
 <template>
 
-   <div>
+   <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+
+       
       <div align="center" style="margin-">
         <h3> Marchés /Contrats</h3>
       </div><br>
@@ -16,13 +20,13 @@
                      <input
                 type="text"
                 :value="anneeBugetaire"
-                class="span4"
+                class="span"
                readonly
               />
                </div>
                </div>
               </td>
-              <td colspan="2">
+              <td>
                 <!-- <div class="" align="left">
                         Selectionner UA:
                         <model-list-select style="background-color: rgb(255,255,255);"
@@ -42,7 +46,7 @@
                <div class="control-group">
             <label class="control-label" title="unite administrative">UA</label>
             <div class="controls" >
-            <select v-model="formData.unite_administrative_id" class="span8">
+            <select v-model="formData.unite_administrative_id" class="span">
                <option v-for="plans in groupUa" :key="plans[0].id" 
                :value="plans[0].ua_id">{{afficherLibelleUniteAdministrative(plans[0].ua_id)}}</option>
            </select>
@@ -57,25 +61,26 @@
               <input
                 type="text"
                 v-model="formData.reference_marche"
-                class="span3"
+              class="span"
                 placeholder="Saisir la référence du marché"
               />
             </div>
           </div>
               </td>
-            </tr>
-            <tr>
-               <td colspan="">
+              <td colspan="">
                 <div class="control-group">
             <label class="control-label">Type de marché </label>
             <div class="controls">
-            <select v-model="formData.type_marche_id" class="span4">
+            <select v-model="formData.type_marche_id" class="span">
                <option v-for="plans in typeMarches" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
           </div>
               </td>
+            </tr>
+            <tr>
+               
               <td>
                 <div class="control-group">
                   <label class="control-label">Grande Nature</label>
@@ -88,40 +93,33 @@
                       >{{gdeNature[0].afficheGdeNature.libelle}}</option>
                  é   </select> -->
 
-                     <select v-model="formData.gdenature_id"  class="span4">
+                     <select v-model="formData.gdenature_id"  class="span">
                <option v-for="plans in grandes_natures" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
                </select>
                   </div>
                 </div>
               </td>
-               <td colspan="2">
+               <td >
                <div class="control-group">
             <label class="control-label">Objet marché / contrat</label>
             <div class="controls">
               <textarea
-               
+               class="span"
                 v-model="formData.objet"
-                class="span7" rows="2"
+                 rows="3"
                 placeholder="Saisir le texte"
               ></textarea>
             </div>
           </div>
               </td>
-              
-            </tr>
-            <tr>
-                 
-            </tr>
-
-             <tr>
-               <td>
+              <td>
               
                <div class="control-group">
                   <label class="control-label">Classification Economique</label>
                   <div class="controls">
                    
-                      <select v-model="formData.economique_id" :readOnly="deverouileEco" class="span4">
+                      <select v-model="formData.economique_id" :readOnly="deverouileEco" class="span">
                     <option
                         v-for="eco in ligneBudgeteyuy(formData.unite_administrative_id)"
                         :key="eco.economique_id"
@@ -137,7 +135,7 @@
                <div class="control-group">
                   <label class="control-label">Activité</label>
                   <div class="controls">
-                    <select v-model="formData.activite_id"  class="span4">
+                    <select v-model="formData.activite_id"  class="span">
                      <!-- <option
                         v-for="activite in activiteDynamiques(formData.economique_id) :readOnly="deverouactivite""
                         :key="activite.activite_id"
@@ -149,6 +147,13 @@
                    
                 </div>
               </td>
+            </tr>
+           
+                 
+           
+
+             <tr>
+               
           <td>
             <div class="control-group">
        <label class="control-label">Imputation Budgétaire</label>
@@ -156,7 +161,7 @@
          <input
            type="text"
            :value="ImputationBudget(formData.economique_id)"
-           class="span4"
+           class="span"
            placeholder="Saisir le Imputation"
            readonly
          />
@@ -175,17 +180,14 @@
           
            readonly
          /> -->
-       <select v-model="formData.type_financement" class="span3">
+       <select v-model="formData.type_financement" class="span">
           <option v-for="plans in types_financements" :key="plans.id" 
           :value="plans.id">{{plans.libelle}}</option>
       </select>
        </div>
      </div>
          </td>
-    
-             </tr>
-             <tr>
-                <td colspan="">
+    <td colspan="">
          
           <div class="control-group">
        <label class="control-label">Source de financement</label>
@@ -197,7 +199,7 @@
            
            readonly
          /> -->
-       <select v-model="formData.source_financement" class="span4">
+       <select v-model="formData.source_financement" class="span">
           <option v-for="plans in sources_financements" :key="plans.id" 
           :value="plans.id">{{plans.libelle}}</option>
       </select>
@@ -211,49 +213,35 @@
             <label class="control-label">Procédure Passation</label>
             <div class="controls">
             
-               <select v-model="formData.procedure_passation_id" class="span4" >
+               <select v-model="formData.procedure_passation_id"  class="span">
                <option v-for="plans in procedurePassations" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
           </div>
               </td>
-              <td colspan="2">
+             </tr>
+             <tr>
+                
+              <td colspan="">
             <div class="control-group">
        <label class="control-label">Montant prévu</label>
        <div class="controls">
          <input
            type="number"
            v-model="formData.montant_marche"
-           class="span4" />
+           class="span"
+            />
        </div>
      </div>
          </td>
-
-           <!-- <td>
-     <div class="control-group">
-      <label class="control-label">Livrable</label>
-      <div class="controls">
-     <input
-       type="text"
-       v-model="formData.livrable"
-       class="span3"
-       placeholder="Saisir le livrable"
-     />
-   </div>
-   </div>
-     </td> -->
-             </tr>
-
-              <tr>
-           
-            <td colspan="">
+ <td colspan="">
               
                <div class="control-group">
             <label class="control-label">Nature des prix</label>
             <div class="controls">
             
-               <select v-model="formData.nature_prix_id" class="span4" >
+               <select v-model="formData.nature_prix_id"  class="span">
                <option v-for="plans in Nature_des_prix" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -267,19 +255,19 @@
             <label class="control-label">Motif de passation</label>
             <div class="controls">
             
-               <select v-model="formData.motif_passation_id" class="span4" >
+               <select v-model="formData.motif_passation_id"  class="span">
                <option v-for="plans in motif_passation" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
           </div>
               </td>  
-          <td colspan="2">
+          <td >
                   <div class="control-group">
        <label class="control-label">Infrastructure</label>
        <div class="controls">
        
-               <select v-model="formData.infrastructure_id" class="span6" >
+               <select v-model="formData.infrastructure_id" class="span" >
                <option v-for="plans in getterInfrastrucure" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -300,6 +288,10 @@
        </div>
      </div>
          </td> -->
+         
+             
+           
+           
               </tr>
               
             
@@ -316,7 +308,8 @@
                 <a data-dismiss="modal" class="btn" @click.prevent="allerPageMarcheHorsib" href="#">Fermer</a>
             </div>
  </div>
-     
+      </div>
+      </div>
    
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications/>

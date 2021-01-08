@@ -3,7 +3,7 @@ import SourceFinancement from "../../pages/parametres_generaux/source_financemen
 import TypeFinancement  from "../../pages/parametres_generaux/source_financement/TypeFinancement.vue";
 import TableauBordParametreSimple  from "../../../src/gestionDesModule/TableauBordSimple/TableauBordParametre.vue";
 import TableauBordGestionHorsSibSimple  from "../../../src/gestionDesModule/TableauBordSimple/TableauBordGestionHorsSib.vue";
-import TableauBordGestionSibSimple  from "../../../src/gestionDesModule/TableauBordSimple/TableauBordGestionSib.vue";
+import TableauBordGestionSibSimple  from "../../../src/gestionDesModule/TableauBordGestionSib.vue";
 import TableauBordUaSimple  from "../../../src/gestionDesModule/TableauBordSimple/TableauBordUa.vue";
 import TableauBordCatographiesSimple  from "../../../src/gestionDesModule/TableauBordCa";
 import tableauBordGestionAcces from "../../../src/gestionDesModule/tableauBordGestionAcces.vue";
