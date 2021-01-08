@@ -346,14 +346,14 @@ export default {
     props:["macheid"],
 
     created(){
-this.formCotation.marche_id=this.macheid.id
-        console.log()
+        this.formCotation.marche_id=this.macheid.id
+        console.log(this.macheid.id)
     },
+    
     computed: {
 
             ...mapGetters("bienService", ["gettersCotations","appelOffres", "gettersCotationPersonnaliser" ,"gettersCotations"]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
-
 
                ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
             // ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',

@@ -121,7 +121,7 @@ valeurAcquisitionMateriel
                 </thead>
                 
                 <tr>
-                     <th  style="width:15%;text-align:left;font-weight:bold;font-size:16px">BIENS INCORPORELS  (A)</th>
+                     <th  style="width:15%;text-align:left;font-weight:bold;font-size:16px">BIENS INCORPORELS{{EquipementNormeCouvert}}  (A)</th>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{0}} </td>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{formatageSomme(parseFloat(0))}} </td>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{formatageSomme(parseFloat(0))}} </td>
