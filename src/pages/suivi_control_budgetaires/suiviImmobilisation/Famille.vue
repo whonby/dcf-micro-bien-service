@@ -6,50 +6,63 @@
 
 
 <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-    <div id="exampleModal" class="modal hide">
+    <div id="exampleModal" class="modal hide taillemodal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter Famille d'Article</h3>
       </div>
       <div class="modal-body">
-      <form class="form-horizontal">
-              <div class="control-group">
+ <table class="table table-bordered table-striped">
+   <tr>
+     <td>
+<div class="control-group">
                             <label class="control-label">Type d'équipement:</label>
                             <div class="controls">
-                              <select v-model="formData.equipemt_id">
+                              <select v-model="formData.equipemt_id" class="span6">
                                 <option value>Selectionner</option>
                                 <option
                                   v-for="typeua in equipements"
                                   :key="typeua.id"
                                   :value="typeua.id"
-                                >{{typeua.libelle}}</option>
+                                >{{codeEquipement(typeua.id)}}</option>
                               </select>
                             </div>
                           </div>
-                         
-          <div class="control-group">
+     </td>
+   </tr>
+              <tr>
+                <td>
+<div class="control-group">
             <label class="control-label">Nom famille d'article</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
-                class="span"
+                class="span6"
                 placeholder="Saisir le libellé"
               />
             </div>
           </div>
-             <div class="control-group">
+                </td>
+              </tr>
+                         
+          <tr>
+            <td>
+              <div class="control-group">
             <label class="control-label">Durée de vie</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.dureVie"
-                class="span"
+                class="span6"
                 placeholder="Saisir la durée de vie"
               />
             </div>
           </div>
-        </form>
+            </td>
+          </tr>
+             
+ </table>
       </div>
       <div class="modal-footer">
         <a
@@ -241,6 +254,7 @@ export default {
 
   computed: {
        ...mapGetters("SuiviImmobilisation", ["equipements","familles"]),
+...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 
   // codeAjoutSection(){
   //    const natureSection = this.equipements.find(sect => sect.id == this.formData.naturesection_id)
@@ -262,6 +276,32 @@ export default {
 
   //    return null
   //  },
+
+
+  codeEquipement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.equipements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return this.afficheLibellePlanEconomique(qtereel.code).concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+    afficheLibellePlanEconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code
+      }
+      return 0
+        }
+      };
+    },
   },
 
 
@@ -344,3 +384,12 @@ this.modifierFamille(this.editFamille);
   }
 };
 </script>
+
+
+<style scoped>
+.taillemodal {
+  width: 28%;
+  margin: 0 -380px;
+}
+
+</style>

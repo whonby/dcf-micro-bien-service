@@ -86,13 +86,12 @@
 
             </div>
    
-    <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-   
-    <div class="container-fluid">
+
+    <div>
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          
+        <h2 style="text-align:center;font-size:25px">SORTIE DU PATRIMOINE DU {{libelleUniteAdministrative(detail_Affectation.uniteadministrative_id)}}</h2>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -116,11 +115,7 @@
                      <li class="active">
                         <a data-toggle="tab" href="#SortiPatrimone">Equipement Dans le patrimoine</a>
                       </li>
-                       <li>
-                        <a data-toggle="tab" href="#Sorti">Sortie du patrimoine</a>
-                      </li>
-                    
-                     
+                       
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
@@ -155,7 +150,7 @@
                 <tbody>
                       <tr
                     class="odd gradeX"
-                    v-for="(service,index) in EquipementDansLePatrimoine(uniteAdministrative_id)"
+                    v-for="(service,index) in EquipementDansLePatrimoine(detail_Affectation.uniteadministrative_id)"
                     :key="service.id"
                   >
                     <td style="font-size:14px" >{{CodeImmobilisation(service.famillearticle_id) || 'Non renseigné'}}</td>
@@ -256,14 +251,14 @@
     <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="ajouterEntreEnPatrimoine()">Open</button>
 
- <fab :actions="fabActions"
+ <!-- <fab :actions="fabActions"
                 main-icon="apps"
           
         @searchMe="filter"
          
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 <notifications  />
   </div>
 </template>
@@ -285,20 +280,12 @@ export default {
   data() {
     return {
       fabActions: [
-        // {
-        //   name: "cache",
-        //   icon: "add",
-          
-        // },
+        
         {
                   name: 'searchMe',
                    icon: "search"
               }
-        // {
-        //   name: "alertMe",
-        //   icon: "add_alert",
-        //   class: ""
-        // }
+        
       ],
 // json_fields: {
 //         TYPE_UNITE_ADMINISTRATIVE: "typeUniteAdmin.libelle",
@@ -351,6 +338,15 @@ quantite: {
 //       Stock => Stock.id == this.$route.params.id
 //     )
 // },
+created() {
+            this.marcheid=this.$route.params.id
+   this.detail_Affectation = this.immobilisations.find(
+       idmarche => idmarche.id == this.$route.params.id
+         )
+  
+  
+ 
+},
   computed: {
     ...mapGetters("SuiviImmobilisation", [
     
@@ -374,6 +370,51 @@ quantite: {
 //       noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 ...mapGetters("personnelUA", ["personnaliseActeurDepense","acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
+
+
+objetMarchePasUniteOuRegion(){
+
+                let vM=this;
+                let objet=this.affichebudgetActive
+
+                //retourne la section selectionner
+              
+                if(this.section!="" && this.grandeNature_id=="" && this.typeFinancement_id==""){
+                  
+                    objet =objet.filter(item=>{
+                        if(item.section_id==vM.section){
+                            return item
+                        }
+                    })
+
+                }
+             if(this.section!="" && this.grandeNature_id!="" && this.typeFinancement_id==""){
+                  
+                    objet =objet.filter(item=>{
+                        if(item.section_id==vM.section && item.gdenature_id==vM.grandeNature_id){
+                            return item
+                        }
+                    })
+
+                }
+
+                return objet
+            },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  CodeImmobilisation() {
       return id => {

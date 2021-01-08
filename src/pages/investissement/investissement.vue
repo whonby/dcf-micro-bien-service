@@ -2171,7 +2171,7 @@ recupererCodeTypeMarche() {
 // afficher la liste des marche
 
 afficherLaListeDesMarcheDinvestissement(){
-return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 3 && element.parent_id == null && element.sib==0)
+return this.printMarcheNonAttribue.filter(element => element.gdenature_id == 7 && element.parent_id == null && element.sib==0)
 },
 
 
@@ -2195,7 +2195,7 @@ montantMarcheInvestissement(){
 
 
    afficheMarchExecuter(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 3 && element.difference_personnel_bienService == 1)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(element.marche_id) == 7 && element.difference_personnel_bienService == 1)
 },
 
 // afficheMarchExecuter(){
@@ -2213,10 +2213,10 @@ return this.afficheMarchExecuter.length
  affichertypeMarcheEx() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.code_type_marche;
+        return qtereel.gdenature_id;
       }
       return 0
         }
@@ -2224,7 +2224,7 @@ return this.afficheMarchExecuter.length
     },
 
 afficheMarcheTerminer(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 3 && element.difference_personnel_bienService == 1 )
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(element.marche_id) == 7 && element.difference_personnel_bienService == 1 )
 },
 // afficheMarcheTerminer(){
 // return this.afficheMarcheSolde.filter(element => element.indicateur_resilie != 1)
@@ -2268,7 +2268,7 @@ return this.afficheMarcheResilier.length
 // afficher la liste de marche en contratualisation
 
 afficheMarcheEnCoursContratualisation(){
-return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 1 && element.type_marche.code_type_marche == 3 && element.parent_id == null && element.sib==1)
+return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 1 && this.affichertypeMarcheEx(element.marche_id) == 7 && element.parent_id == null && element.sib==1)
 },
 
 
@@ -2289,7 +2289,7 @@ montantEnContratualisation(){
 
 // afficher la liste des marche en planification
 afficheMarcheEnPlanification(){
-return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 3 && element.parent_id == null && element.sib==0)
+return this.afficherLaListeDesMarcheDinvestissement.filter(element =>  this.affichertypeMarcheEx(element.marche_id) == 7 && element.parent_id == null && element.sib==0)
 },
 
 

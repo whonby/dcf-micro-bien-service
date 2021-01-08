@@ -10,7 +10,7 @@
                                  <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
                                             <tr>
-                                                <th>Ref {{macheid.id}}</th>
+                                                <th>Ref</th>
                                                 <th>Nom</th>
                                                 <th>Contact</th>
                                                 <th>Entreprise</th>
@@ -319,7 +319,7 @@ export default {
                     entreprise_id:"",
                     date_cotation:"",
                     ref_offre:"",
-                    marche_id:""
+                   marche_id:""
 
                 },
             
@@ -346,15 +346,14 @@ export default {
     props:["macheid"],
 
     created(){
-        
         this.formCotation.marche_id=this.macheid.id
         console.log(this.macheid.id)
     },
+    
     computed: {
 
             ...mapGetters("bienService", ["gettersCotations","appelOffres", "gettersCotationPersonnaliser" ,"gettersCotations"]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
-
 
                ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
             // ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',

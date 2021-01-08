@@ -10,7 +10,7 @@
         <table class="table table-bordered table-striped">
           <tr>
                <td>
-              <div class="control-group">
+              <!-- <div class="control-group">
                 <label class="control-label">Equipement Type</label>
                 <div class="controls">
                   <select  v-model="formData.equipement_id">
@@ -22,14 +22,26 @@
                     >{{equipe.libelle}}</option>
                   </select>
                 </div>
-              </div>
-              
+              </div> -->
+              <div class="control-group">
+                            <label class="control-label">Type d'équipement:</label>
+                            <div class="controls">
+                              <select v-model="formData.equipement_id" class="span4">
+                                <option value>Selectionner</option>
+                                <option
+                                  v-for="typeua in equipements"
+                                  :key="typeua.id"
+                                  :value="typeua.id"
+                                >{{codeEquipement(typeua.id)}}</option>
+                              </select>
+                            </div>
+                          </div>
             </td>
             <td>
               <div class="control-group">
                 <label class="control-label">Famille:</label>
                 <div class="controls">
-                  <select  v-model="formData.famille_id" :readOnly="veifEquipementExist">
+                  <select  v-model="formData.famille_id" :readOnly="veifEquipementExist" class="span4">
                     
                     <option
                       v-for="famil in ArticleDynamiques(formData.equipement_id)"
@@ -397,7 +409,11 @@ export default {
   computed: {
     ...mapGetters("SuiviImmobilisation", ["familles","equipements","getAfficheArticle"]),
         ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections","plans_programmes"]),
-    // filtre_equipement() {
+  
+...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+   
+   
+   // filtre_equipement() {
     //   const st = this.search.toLowerCase();
     //   return this.familles.filter(type => {
     //     return (
@@ -406,6 +422,31 @@ export default {
     //     );
     //   });
     // }
+
+    codeEquipement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.equipements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return this.afficheLibellePlanEconomique(qtereel.code).concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+    afficheLibellePlanEconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code
+      }
+      return 0
+        }
+      };
+    },
     affcherTauxEnCours() {
       
       
@@ -585,8 +626,8 @@ alert("veuillez remplir le prix Unitaire")
 
 <style scoped>
 .taillemodal {
-  width: 800px;
-  margin: 0 -380px;
+  width: 50%;
+  margin: 0 -350px;
 }
 
 </style>

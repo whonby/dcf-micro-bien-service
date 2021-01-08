@@ -17,7 +17,14 @@ import Chat from "@/pages/chat/Chat"
 import MonEquipe from "@/pages/gestionCF/MonEquipe";
 import pagePresentation from "@/gestionDesModule/pagePresentation";
 import TableauBordGestionVehicule from "@/gestionDesModule/TableauBordGestionVehicule.vue";
+import TableauBordGestionVehicule1 from "@/gestionDesModule/TableauBordGestionVehicule.vue";
 const AuthRoutes = [
+    {
+        path: '/TableauBordGestionVehicule',
+       name:"TableauBordGestionVehicule1",
+       
+       component: TableauBordGestionVehicule1
+    },
     {
         path: '/TableauBordGestionVehicule/:id',
        name:"TableauBordGestionVehicule",

@@ -1271,19 +1271,19 @@ budgetConsommerDesModule() {
 
 budgetDisponible() {
   if(this.detail_marche.sib==1){
- const val = parseInt(this.afficherLaDotationIntial(this.detail_marche.economique_id)) ;
+ const val = parseFloat(this.afficherLaDotationIntial(this.detail_marche.economique_id)) - parseFloat(this.budgetConsommerDesModule) ;
       
        if (val) {
-        return parseInt(val).toFixed(0);
+        return parseFloat(val).toFixed(0);
       }
       
       return 0
   }
   else{
-const val = parseInt(this.afficherLaDotationIntial1(this.detail_marche.economique_id)) - parseInt(this.budgetConsommerDesModule);
+const val = parseFloat(this.afficherLaDotationIntial1(this.detail_marche.economique_id)) - parseFloat(this.budgetConsommerDesModule);
       
        if (val) {
-        return parseInt(val).toFixed(0);
+        return parseFloat(val).toFixed(0);
       }
       
       return 0

@@ -10,20 +10,20 @@
 
                 </router-link>
             </li> -->
- <li title="Stock">
+ <!-- <li title="Stock">
                 <router-link :to="{name:''}" tag="a">
-                    <!-- <i class="icon-list"></i> -->
+                 <i class="icon-list"></i> 
                     <span class="text">BIENS INCORPORELS</span>
 
                 </router-link>
-            </li>
-             <li title="Stock">
+            </li> -->
+             <!-- <li title="Stock">
                 <router-link :to="{name:'gestionStockCorporels'}" tag="a">
-                    <!-- <i class="icon-list"></i> -->
+                    <i class="icon-list"></i> 
                     <span class="text">BIENS CORPORELS</span>
 
                 </router-link>
-            </li>
+            </li> -->
             <!-- <li>
                 <router-link :to="{name:'simulationAmortissement'}" tag="a">
                   

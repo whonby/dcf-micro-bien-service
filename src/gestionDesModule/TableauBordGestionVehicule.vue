@@ -121,7 +121,7 @@ valeurAcquisitionMateriel
                 </thead>
                 
                 <tr>
-                     <th  style="width:15%;text-align:left;font-weight:bold;font-size:16px">BIENS INCORPORELS  (A)</th>
+                     <th  style="width:15%;text-align:left;font-weight:bold;font-size:16px">BIENS INCORPORELS (A)</th>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{0}} </td>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{formatageSomme(parseFloat(0))}} </td>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{formatageSomme(parseFloat(0))}} </td>
@@ -186,7 +186,7 @@ valeurAcquisitionMateriel
                   <tr>
                      <th  style="width:10%;text-align:right;">IMMOBILIER</th>
                      <td style="width:15%;text-align:center;">{{NombreEquipementParImmobilier(unite_administrative_id)}} </td>
-                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(PrixEquipementParMateriel(unite_administrative_id)))}}</td>
+                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(0))}}</td>
                      <td style="width:15%;text-align:center;">{{formatageSomme(parseFloat(0))}}</td>
                                           
   <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td>
@@ -197,7 +197,7 @@ valeurAcquisitionMateriel
                   <tr>
                      <th  style="width:10%;text-align:right;">GROS TRAVAUX</th>
                      <td style="width:15%;text-align:center;"> {{NombreEquipementParGrosTravaux(unite_administrative_id)}} </td>
-                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(PrixEquipementParMateriel(unite_administrative_id)))}}</td>
+                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(0))}}</td>
                      <td style="width:15%;text-align:center;">{{formatageSomme(parseFloat(0))}} </td>
                      <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td>
                      <td style="width:15%;text-align:center;">0%</td>

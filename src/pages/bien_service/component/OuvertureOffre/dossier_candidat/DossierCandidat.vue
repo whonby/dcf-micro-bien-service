@@ -1229,7 +1229,7 @@
         <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
     </div>
 
-    <!-- fin de formulaire de modification de dossier de candidat --->
+ 
   </div>
 </template>
 
