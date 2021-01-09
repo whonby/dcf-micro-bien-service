@@ -76,8 +76,20 @@
                           </div>
                            </td>
                  </tr>             
-                        
-                           
+                         <tr>
+                 <td colspan="2">
+                    <div class="control-group">
+                            <label class="control-label">Nom et prenoms de l'Agent connecté </label>
+                            <div class="controls">
+                              <!-- <select v-model="editObservationAgentCf.nom_agent_cf" class="span">
+                                <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.editObservationAgentCf.marche_id))"  :key="acteur.id"
+                        :value="acteur.id">{{afficherNomActeurDepense(acteur.acteur_depense_id)}}</option>
+                               </select> -->
+                           <input type="text" class="span"  :value="afficheNomUtilisateur" readonly/>
+                            </div>
+                          </div>
+                 </td>
+                    </tr>       
          
         </table>
       </div>
@@ -243,6 +255,12 @@ search:""
       // "sections"
        
     ]),
+     afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
     afficherIdFoctionBudgetaire() {
       return id => {
         if (id != null && id != "") {

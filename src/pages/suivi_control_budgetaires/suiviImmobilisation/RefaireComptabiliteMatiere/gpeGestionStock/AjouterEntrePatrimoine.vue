@@ -606,14 +606,20 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Imputation comptable</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData1.immobilisation">
+                     <input
+                      type="text"
+                 :value="libelleImputationBudgetaire(recupererCodeImputationBudgetaire(recupererIdEquipement(famille_id)))"
+                      class="span"
+                      readonly
+                    />
+                    <!-- <select  class="span" v-model="formData1.immobilisation">
                       <option></option>                     
                        <option
                         v-for="typeUniteA in lesClassDe3"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.code}}-{{typeUniteA.libelle}}</option>
-                    </select>
+                    </select> -->
                   </div>
                 </div>
                       </td>
@@ -636,9 +642,9 @@
                   <div class="controls">
                     <input
                       type="text"
-                    v-model="formData1.durevie"
+                    :value="dureDeVie(famille_id)"
                       class="span"
-                      
+                      readonly
                     />
                   </div>
                 </div>
@@ -1237,7 +1243,7 @@ props:["macheid"],
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
    ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-   ...mapGetters("SuiviImmobilisation", ["articles","familles","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
+   ...mapGetters("SuiviImmobilisation", ["equipements","articles","familles","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
    ...mapGetters('uniteadministrative',[
     "plans_programmes",
  "uniteAdministratives",
@@ -1281,6 +1287,55 @@ cf:cf,
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat","personnaliseActeurDepense",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
      
+libelleImputationBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 
+        }
+      };
+    },
+recupererIdEquipement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.equipemt_id;
+      }
+      return 
+        }
+      };
+    },
+    dureDeVie() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.dureVie;
+      }
+      return 
+        }
+      };
+    },
+recupererCodeImputationBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.equipements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 
+        }
+      };
+    },
+
  afficheListeArticleParFamille() {
       return id => {
         if (id != null && id != "") {
@@ -1826,7 +1881,8 @@ else{
           fournisseur_id:this.formData.fournisseur_id,
           numero_marche:this.formData.numero_marche,
           numero_facture:this.formData.numero_facture,
-          article_id:this.formData.famill_id
+          article_id:this.formData.famill_id,
+          durevie:this.dureDeVie(this.famille_id)
       }
       var nouveauObjet1 ={
         
