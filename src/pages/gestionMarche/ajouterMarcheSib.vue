@@ -160,7 +160,7 @@
        <div class="controls">
          <input
            type="text"
-           :value="ImputationBudget(formData.activite_id)"
+           :value="ImputationBudget"
            class="span4"
            placeholder="Saisir le Imputation"
            readonly
@@ -482,8 +482,14 @@ export default {
     ligneBudgeteyuy() {
      return id => {
         if (id != null && id != "") {
+            console.log(id)
+            console.log(".........")
           return this.budgetGeneral.filter(
-            element => element.ua_id == id  && element.exercicebudget_id == this.anneeBugetaire
+            element =>{
+                if( element.ua_id == id  && element.exercicebudget_id ==2021 && element.actived==1){
+                    return element
+                }
+            }
           );
         }
       };
@@ -511,17 +517,28 @@ export default {
     },
 
 ImputationBudget() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.code;
+      const norme = this.budgetGeneral.find(normeEquipe => normeEquipe.economique_id == this.formData.economique_id && normeEquipe.activite_id == this.formData.activite_id && normeEquipe.status == 'actu');
+     
+
+      if (norme) {
+        return norme.codebudget;
       }
       return 0
-        }
-      };
     },
+
+// ImputationBudget() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.budgetGeneral.find(qtreel => qtreel.eco.economique_id == id);
+
+//       if (qtereel) {
+//         return qtereel.codebudget;
+//       }
+//       return 0
+//         }
+//       };
+//     },
    
    /// recuperation de UA qui a au moins effectué un transfert
 
@@ -644,7 +661,7 @@ recupererParentId(){
               var nouvelObjet = {
                 ...this.formData,
                exo_id:this.anneeBugetaire,
-               imputation:this.ImputationBudget(this.formData.activite_id)
+               imputation:this.ImputationBudget
               }
              this.ajouterMarcheHorSib(nouvelObjet) 
               this.formData ={
