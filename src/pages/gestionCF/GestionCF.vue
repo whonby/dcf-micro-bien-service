@@ -61,10 +61,10 @@
                                     <td  @dblclick="afficherModalModifierTitre(titre.id)" v-if="titre.user_role.role.code_role=='DCF'">Directeur du contrôle financier</td>
                                     <td  @dblclick="afficherModalModifierTitre(titre.id)" v-if="titre.user_role.role.code_role=='CF'">Contrôleur financier</td>
                                     <td>
-                                        <router-link :to="{ name: 'DetailCF', params: { id: titre.id }}"
-                                                     class="btn btn-default " title="Detail CF">
-                                            <span class=""><i class=" icon-folder-open"> Détail CF</i></span>
-                                        </router-link>
+<!--                                        <router-link :to="{ name: 'DetailCF', params: { id: titre.id }}"-->
+<!--                                                     class="btn btn-default " title="Detail CF">-->
+<!--                                            <span class=""><i class=" icon-folder-open"> Détail CF</i></span>-->
+<!--                                        </router-link>-->
                                         <router-link :to="{ name: 'DetailServiceCF', params: { id: titre.id }}"
                                                      class="btn btn-default " title="Detail CF">
                                             <span class=""><i class=" icon-folder-open"> Détail CF Service</i></span>

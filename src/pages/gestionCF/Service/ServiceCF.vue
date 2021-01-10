@@ -34,7 +34,7 @@
                                     <td @dblclick="afficherModalModifierTitre(item.id)">{{item.libelle || 'Non renseigné'}}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <router-link :to="{ name: 'DetailCF', params: { id: item.id }}"
+                                            <router-link :to="{ name: 'AffectationServiceCfaUA', params: { id: item.id }}"
                                                          class="btn btn-default " title="Detail CF">
                                                 <span class=""><i class=" icon-folder-open"> Détail Service</i></span>
                                             </router-link>

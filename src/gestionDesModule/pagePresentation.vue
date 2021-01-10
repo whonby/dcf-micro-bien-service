@@ -295,6 +295,8 @@ components:{
 created(){
     let objet=localStorage.getItem('Users');
     let user=JSON.parse (objet)
+    this.getServiceCF()
+    this.getAffectationServiceCF()
     this.getUniteAdminUser(user.id)
           this.getGestionModules()
           this.getInfrastructure()
@@ -551,8 +553,7 @@ this.getMembreCojo()
       this.getEcheances()
     this.getMembreComiteEvaluation()
     this.getStructureDAO()
-    this.getServiceCF()
-    this.getAffectationServiceCF()
+
         },
 
   computed:{

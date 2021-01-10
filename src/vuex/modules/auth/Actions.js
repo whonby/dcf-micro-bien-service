@@ -163,7 +163,7 @@ export  function  getRoles({commit}) {
 
 
 
-export  function  getAffectation({commit}) {
+export  function  getAffectation({commit,getters }) {
 
     queue.push(() =>  apiGuest.get('/affectations').then(response => {
             // console.log(response.data)
@@ -172,18 +172,29 @@ export  function  getAffectation({commit}) {
         let objet=localStorage.getItem('Users');
         let user=JSON.parse(objet)
        // console.log(objetData)
+        let service=getters.getterAffectionServiceCF
+
         if (user.user_role.role.code_role!="SUPER_ADMIN"){
             let affectationUsers=objetData
-
+            let serviceEncourUser=service.find(item=>{
+                if(item.date_fin==null && item.user_id==user.id){
+                    return item
+                }
+            })
+            console.log(serviceEncourUser)
             if (objetData){
-                affectationUsers =objetData.filter(item=>{
-                    if(item.date_fin==null && item.user_id==user.id){
-                        return item
-                    }
-                })
-                console.log(affectationUsers)
-                console.log("..........getAffectation...........")
-                commit('GET_UNITEADMIN_BY_USER', affectationUsers)
+
+                if (serviceEncourUser!=undefined){
+
+                    affectationUsers =objetData.filter(item=>{
+                        if(item.date_fin==null && item.servicecf_id==serviceEncourUser.servicecf_id){
+                            return item
+                        }
+                    })
+
+                    commit('GET_UNITEADMIN_BY_USER', affectationUsers)
+                }
+
             }
 
         }else {
@@ -198,10 +209,11 @@ export  function  getAffectation({commit}) {
 }
 
 // ajouter type acte personnel 
-export  function ajouterAffectation({commit}, objetAjoute){
+export  function ajouterAffectation({commit,dispatch}, objetAjoute){
    return  asyncLoading(apiGuest.post('/affectations', objetAjoute )).then(res => {
         if(res.status == 201){
             commit('AJOUTER_AFFECTATION', res.data)
+            dispatch('getAffectation')
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué !',
