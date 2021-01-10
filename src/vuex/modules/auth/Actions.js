@@ -547,3 +547,108 @@ export function activationGroupe({commit, dispatch}, elementAjout){
   }
 
 
+/**
+ * Action service CF
+ * @param commit
+ */
+
+export  function  getServiceCF({commit}) {
+
+    queue.push(() =>  apiGuest.get('/serviceCF').then(response => {
+            // console.log(response.data)
+            commit('GET_SERVICECF', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+
+export  function ajouterServiceCF({commit}, objetAjoute){
+    asyncLoading(apiGuest.post('/serviceCF', objetAjoute )).then(res => {
+        if(res.status == 201){
+            commit('AJOUTER_SERVICECF', res.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+export function supprimerServiceCF({commit}, id){
+
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_SERVICECF', id)
+            apiGuest.delete('/serviceCF/' + id).then(() => dialog.close() )
+
+        })
+}
+
+export function modifierServiceCF({commit}, element_modifie) {
+    asyncLoading( apiGuest.put('/serviceCF',element_modifie)).then(response => {
+        commit('MODIFIER_SERVICECF', response.data)
+
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+
+/**
+ * Action Affection service pas cf
+ */
+
+export  function  getAffectationServiceCF({commit}) {
+
+    queue.push(() =>  apiGuest.get('/affectionServiceACF').then(response => {
+            // console.log(response.data)
+            commit('GET_AFFECTATION_SERVICE_CF', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+
+export  function ajouterAffectationServiceCF({commit}, objetAjoute){
+    asyncLoading(apiGuest.post('/affectionServiceACF', objetAjoute )).then(res => {
+        if(res.status == 201){
+
+            commit('AJOUTER_AFFECTATION_SERVICE_CF', res.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+export function supprimerAffectationServiceCF({commit}, id){
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_AFFECTATION_SERVICE_CF', id)
+            apiGuest.delete('/affectionServiceACF/' + id).then(() => dialog.close() )
+
+        })
+}
+
+export function modifierAffectationServiceCF({commit}, element_modifie) {
+    asyncLoading( apiGuest.put('/affectionServiceACF',element_modifie)).then(response => {
+        commit('MODIFIER_AFFECTATION_SERVICE_CF', response.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}

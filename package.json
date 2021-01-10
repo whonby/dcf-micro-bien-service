@@ -79,6 +79,7 @@
     "vue-search-select": "^2.9.3",
     "vue-shortkey": "^3.1.7",
     "vue-spinner": "^1.0.4",
+    "vue-sweetalert2": "^4.1.1",
     "vue-tel-input": "^4.4.1",
     "vue-upload-component": "^2.8.22",
     "vue2-datatable-component": "^2.3.1",

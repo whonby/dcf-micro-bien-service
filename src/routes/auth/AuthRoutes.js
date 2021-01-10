@@ -18,7 +18,25 @@ import MonEquipe from "@/pages/gestionCF/MonEquipe";
 import pagePresentation from "@/gestionDesModule/pagePresentation";
 import TableauBordGestionVehicule from "@/gestionDesModule/TableauBordGestionVehicule.vue";
 import TableauBordGestionVehicule1 from "@/gestionDesModule/TableauBordGestionVehicule.vue";
+import ServiceCF from "@/pages/gestionCF/Service/ServiceCF";
+import AffectationCFAService from "@/pages/gestionCF/Service/AffectationCFAService";
+import DetailServiceCF from "@/pages/gestionCF/DetailServiceCF";
 const AuthRoutes = [
+    {
+        path: '/detail-service-cf',
+        name:"DetailServiceCF",
+        component: DetailServiceCF
+    },
+    {
+        path: '/affectation-cf-service',
+        name:"AffectationCFAService",
+        component: AffectationCFAService
+    },
+    {
+        path: '/service-cf',
+        name:"ServiceCF",
+        component: ServiceCF
+    },
     {
         path: '/TableauBordGestionVehicule',
        name:"TableauBordGestionVehicule1",

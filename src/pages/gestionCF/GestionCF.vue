@@ -65,6 +65,10 @@
                                                      class="btn btn-default " title="Detail CF">
                                             <span class=""><i class=" icon-folder-open"> Détail CF</i></span>
                                         </router-link>
+                                        <router-link :to="{ name: 'DetailServiceCF', params: { id: titre.id }}"
+                                                     class="btn btn-default " title="Detail CF">
+                                            <span class=""><i class=" icon-folder-open"> Détail CF Service</i></span>
+                                        </router-link>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerUtilisateur(titre.id)"  class="btn btn-danger ">
                                                 <span class=""><i class="icon-trash"> Supprimer</i></span></button>

@@ -19,6 +19,8 @@ const defaultstate = {
     module:[],
     ancien_password:false,
     menuModuleSidcf:"",
+    serviceCF:[],
+    affectationServiceCF:[]
 
 };
 
