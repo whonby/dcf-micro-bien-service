@@ -462,7 +462,7 @@ export default {
       return this.formData.unite_administrative_id =="";
     },
     deverouilleAct(){
-      return this.formData.economique_id=="";
+      return this.formData.economique_id =="";
     },
      afficherPlanEconomique() {
       return id => {

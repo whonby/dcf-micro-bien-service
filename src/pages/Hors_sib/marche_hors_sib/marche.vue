@@ -4,7 +4,7 @@ CodeExempte
     <div class="container-fluid">
       
   
-    
+  
          
                 <div class="">
                     <div class="widget-box"> <br>
@@ -133,11 +133,11 @@ CodeExempte
                    <td>
                     
                       <router-link :to="{ name: 'detail_hors_sib', params: { id: activites.id }}"
-                class="btn btn-default " title="historique la contratualisation">
-                  <span class=""><i class=" icon-folder-open"> historique</i></span>
+                class="btn btn-success " title="historique la contratualisation">
+                  <span class=""><i class="">Contractualisation</i></span>
                     </router-link>
                    </td>
-                   <td>
+                   <td v-if="activites.attribu==2">
                      <router-link :to="{ name: 'detailExecution', params: { id: activites.id }}"
                 class="btn btn-default " title="historique execution Marche">
                   <span class=""><i class="  icon-random"></i></span>

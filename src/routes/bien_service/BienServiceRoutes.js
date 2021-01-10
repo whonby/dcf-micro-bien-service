@@ -100,8 +100,10 @@ import DetailInforTableBordUniteAd from "../../pages/TableauBord/DetailInforTabl
 import  marcheHorsppm from "../../pages/gestionMarche/marcheHorsppm.vue"
 import listeMarcheSib from "../../pages/gestionMarche/listeMarcheSib.vue"
 import ajouterMarcheSib from "../../pages/gestionMarche/ajouterMarcheSib.vue"
+
 const BienServiceRoutes = [
     {
+     
         path:"/tableau-bord-financier",
         name:"TableauBordFinancier",
         component:TableauBordFinancier

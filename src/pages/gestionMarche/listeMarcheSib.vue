@@ -19,7 +19,8 @@ CodeExempte
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des March&eacute;s  {{marcheHorSibFiltre.length}} </h5>
+
+              <h5>Liste des March&eacute;s  <code>({{marcheHorSibFiltre.length}})</code>  </h5>
               <div align="right">
                 Recherche:
                 <input type="search"  v-model="search"  placeholder=" saisir objet"/>

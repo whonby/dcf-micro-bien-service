@@ -965,7 +965,7 @@ ligneBudgeteyuy() {
       };
     },
    afficheMarcheHorsPPM(){
-     return this.printMarcheNonAttribue.filter(items=>items.mvtmarche == 1);
+     return this.printMarcheNonAttribue.filter(items=>items.mvtmarche == 1 && items.sib==0);
    },
 afficherlisteMarcheParDroitAccess() {
        // const st = this.search.toLowerCase();
@@ -978,11 +978,11 @@ afficherlisteMarcheParDroitAccess() {
                     return item
                 }
             })
-            return colect.filter(items=>items.mvtmarche == 1);
+            return colect.filter(items=>items.mvtmarche == 1 && items.sib==0);
         
         }
 else{
-return this.printMarcheNonAttribue.filter(items=>items.mvtmarche == 1);
+return this.printMarcheNonAttribue.filter(items=>items.mvtmarche == 1 && items.sib==0);
 }
         
            
