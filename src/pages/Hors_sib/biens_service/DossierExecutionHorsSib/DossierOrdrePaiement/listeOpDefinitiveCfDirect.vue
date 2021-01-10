@@ -29,7 +29,7 @@
             </td>
               <td>
                     <div class="control-group">
-                            <label class="control-label">Motif CF </label>
+                            <label class="control-label">Famille de Motif </label>
                             <div class="controls">
                                <select v-model="editMandat8.motifcf" class="span">
                                  <option value=""></option>
@@ -40,11 +40,9 @@
                             </div>
                           </div>
                  </td>
-          </tr>
-               <tr>
                  <td>
                     <div class="control-group">
-                            <label class="control-label">Libelle motif </label>
+                            <label class="control-label">Motif</label>
                             <div class="controls">
                                <select v-model="editMandat.motif" class="span">
                                  <option value=""></option>
@@ -55,6 +53,17 @@
                             </div>
                           </div>
                  </td>
+          </tr>
+               <tr>
+                  <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Autres Motif</label>
+                            <div class="controls">
+                              <textarea  class="span" row = "6" v-model="editMandat.autre_motif" :readonly="griserAutreMotif">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
                   <td>
                                <div class="control-group">
                             <label class="control-label">Date Decision CF :</label>
@@ -67,7 +76,7 @@
                            </td>
                  </tr>             
                    <tr>
-                     <td>
+                     <td colspan="3">
                         <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
@@ -76,18 +85,30 @@
                             </div>
                           </div>
                        </td>
-                        <td colspan="">
+                        
+                       
+                       </tr>  
+                       <tr>    
+                        <td colspan="2">
                         <div class="control-group">
-                            <label class="control-label">Nom du CF</label>
+                            <label class="control-label">Nom et prenoms de l'Agent connecté</label>
                             <div class="controls">
                               <input type="text" class="span"  :value="afficheNomUtilisateur" readonly/>
                             </div>
                           </div>
                        </td>
-                       
-                       </tr>      
-                        
-                           
+                       <td>
+                                  <div class="control-group">
+                            <label class="control-label">Joint Fiche Op </label>
+                            <div class="controls">
+                              <!-- <input type="text" class="span" readonly :value=" afficherLibelleFoctionBudgetaire(afficherIdFoctionBudgetaire(editObservationAgentCf.nom_service_beneficiaire))"/>
+                              -->
+                              <input type="file" class="span" />
+                             
+                            </div>
+                          </div>
+                           </td>
+                          </tr> 
          
         </table>
       </div>
@@ -284,6 +305,9 @@ search:""
     ]),
      ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
+  griserAutreMotif(){
+  return this.editMandat.motif != 237 
+},
   afficheNomUtilisateur(){
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);

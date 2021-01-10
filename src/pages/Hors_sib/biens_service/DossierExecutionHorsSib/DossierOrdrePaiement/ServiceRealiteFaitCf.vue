@@ -31,7 +31,7 @@ RecupererNiveau3StructureDecision
             </td>
               <td>
                     <div class="control-group">
-                            <label class="control-label">Motif CF </label>
+                            <label class="control-label">Famille de Motif  </label>
                             <div class="controls">
                                <select v-model="editObservationCfServiceFait2.motifcf" class="span">
                                  <option value=""></option>
@@ -42,11 +42,9 @@ RecupererNiveau3StructureDecision
                             </div>
                           </div>
                  </td>
-          </tr>
-               <tr>
                  <td>
                     <div class="control-group">
-                            <label class="control-label">Libelle motif </label>
+                            <label class="control-label">Motif </label>
                             <div class="controls">
                                <select v-model="editObservationCfServiceFait.motif_cf_serviceRealite" class="span">
                                  <option value=""></option>
@@ -57,6 +55,17 @@ RecupererNiveau3StructureDecision
                             </div>
                           </div>
                  </td>
+          </tr>
+               <tr>
+                  <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Autres Motif</label>
+                            <div class="controls">
+                              <textarea  class="span" row = "6" v-model="editObservationCfServiceFait.autre_motif" :readonly="griserAutreMotif">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
                   <td>
                                <div class="control-group">
                             <label class="control-label">Date Decision CF :</label>
@@ -69,7 +78,7 @@ RecupererNiveau3StructureDecision
                            </td>
                  </tr>             
                    <tr>
-                     <td>
+                     <td colspan="3">
                         <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
@@ -78,17 +87,30 @@ RecupererNiveau3StructureDecision
                             </div>
                           </div>
                        </td>
-                        <td colspan="">
+                     
+                       </tr> 
+                       <tr>     
+                        <td colspan="2">
                         <div class="control-group">
-                            <label class="control-label">Nom du CF</label>
+                            <label class="control-label">Nom et prenoms de l'Agent connecté</label>
                             <div class="controls">
                               <input type="text" class="span"  :value="afficheNomUtilisateur" readonly/>
                             </div>
                           </div>
                        </td>
-                       
-                       </tr>      
-                        
+                       <td>
+                                  <div class="control-group">
+                            <label class="control-label">Joint Fiche réalité service fait </label>
+                            <div class="controls">
+                              <!-- <input type="text" class="span" readonly :value=" afficherLibelleFoctionBudgetaire(afficherIdFoctionBudgetaire(editObservationAgentCf.nom_service_beneficiaire))"/>
+                              -->
+                              <input type="file" class="span" />
+                             
+                            </div>
+                          </div>
+                           </td>
+                          
+                       </tr>  
                            
          
         </table>
@@ -279,6 +301,9 @@ search:""
     ]),
       ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision','plans_Decision']),
 
+griserAutreMotif(){
+  return this.editObservationCfServiceFait.motif_cf_serviceRealite != 237 
+},
       afficheNomUtilisateur(){
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
