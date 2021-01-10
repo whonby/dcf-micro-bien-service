@@ -92,6 +92,13 @@
             </router-link>
           </li>
          <li class="divider"></li>
+         <li>
+           
+             <router-link :to="{name:'planSourceFin'}" tag="a">
+              <i class="icon-check"></i>Plan source de financement
+            </router-link>
+          </li>
+         <li class="divider"></li>
         </ul>
       </li>
       <!-- fonctionnelle

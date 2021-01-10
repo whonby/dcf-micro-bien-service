@@ -10,7 +10,7 @@ CodeExempte
                     <div class="widget-box"> <br>
                       
                        <div class="" align="right">
-                   <router-link :to="{name:'ajouterMarche'}" tag="a" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter
+                   <router-link :to="{name:'ajouterMarche'}" tag="a" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter Marché
 
                    </router-link> 
 
@@ -133,14 +133,14 @@ CodeExempte
                    <td>
                     
                       <router-link :to="{ name: 'detail_hors_sib', params: { id: activites.id }}"
-                class="btn btn-default " title="historique la contratualisation">
-                  <span class=""><i class=" icon-folder-open"> historique</i></span>
+                class="btn btn-success " title=" Contractualisation">
+                  <span > Contractualisation</span>
                     </router-link>
                    </td>
-                   <td>
+                   <td v-if="activites.attribue == 2">
                      <router-link :to="{ name: 'detailExecution', params: { id: activites.id }}"
-                class="btn btn-default " title="historique execution Marche">
-                  <span class=""><i class="  icon-random"></i></span>
+                class="btn btn-warning " title="Exécution du Marché">
+                  <span class="">Exécution</span>
                    </router-link> 
                    </td>
            <td>

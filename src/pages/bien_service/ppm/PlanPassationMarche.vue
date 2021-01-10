@@ -35,7 +35,7 @@
                           <td>
                               <router-link :to="{ name: 'DetailPPM', params: { id: passation.code }}"
                                             class="btn btn-default " title="Detail marches">
-                              <span class=""><i class="icon-folder-open"></i></span>
+                              <span class=""><i class="icon-folder-open"></i> Voir PPM</span>
                           </router-link>
                           </td>
                       </tr>

@@ -341,6 +341,7 @@ this.getRegimeImpositions()
    this.getMotifPassation()
    this.getSourceFinancement()
    this.getTypeFinancement()
+   this.getPlanSourceFinancement()
    this.getStructureBudgetaire()
    this.getPlanBudgetaire()
    this.getStructureActivite()
@@ -641,7 +642,7 @@ return objJson.id
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix','getMotifPassation']),
 
     ...mapActions('parametreGenerauxSourceDeFinancement',['getSourceFinancement',
-        'getTypeFinancement'
+        'getTypeFinancement','getPlanSourceFinancement'
     ]),
    ...mapActions( 'parametreGenerauxBudgetaire', ['getStructureBudgetaire',
    'getPlanBudgetaire']),
