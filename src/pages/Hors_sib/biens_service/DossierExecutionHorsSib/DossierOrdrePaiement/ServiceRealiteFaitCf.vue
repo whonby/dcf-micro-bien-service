@@ -266,7 +266,7 @@ export default {
           icon: "add"
         }
       ],
-      
+      controlleur_fin:"",
        editObservationCfServiceFait2: {
          motifcf : ""
        },

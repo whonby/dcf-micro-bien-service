@@ -2139,7 +2139,7 @@ typeOrdrePaiement
                       <td v-else>
                         <router-link :to="{ name: 'detailExecutionOpDirect', params: { id: factu.id }}"
                 class="btn btn-success " title="Ajouter Realité Service Fait">
-                  <span class="">Ajouter Réalité Service</span>
+                  <span class="">Ajouter OP</span>
                    </router-link> 
                     <router-link :to="{ name: 'AjouterDecompte', params: { id: factu.id }}"
                 class="btn btn-info " title="Ajouter décompte">
