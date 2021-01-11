@@ -2,7 +2,7 @@
     <div>
         <div class="container-fluid">
 
-
+            <notifications />
             <div class="widget-box">
                 <div class="widget-title">
               <span class="icon">
@@ -16,6 +16,8 @@
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab1">Budget importé</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2">Importation du budget</a></li>
+                                <li class="" v-if="source_financement_detecter.length>0"><a data-toggle="tab" href="#tab3"><span>Nouvelle Source de financement detecté</span> <span class="label label-important">{{source_financement_detecter.length}}</span></a></li>
+                                <li class="" v-if="unite_admin_dettecte.length>0"><a data-toggle="tab" href="#tab4" >Nouvelle Unite administrative detectée <span class="label label-important">{{unite_admin_dettecte.length}}</span></a></li>
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
@@ -66,17 +68,17 @@
 
                                             <td v-if="passation.status=='init'" style="background-color: red; color:#fff"> <router-link :to="{ name: 'DetailBudgetImporte', params: { id: passation.id }}"
                                                                                                                                         class="btn btn-default " title="Detail marches">
-                                                <span class=""><i class="icon-folder-open"></i></span>
+                                                <span class=""><i class="icon-folder-open"></i></span> Voir Budget
                                             </router-link></td>
                                             <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff">
                                                 <router-link :to="{ name: 'DetailBudgetImporte', params: { id: passation.id }}"
                                                              class="btn btn-default " title="Detail marches">
-                                                    <span class=""><i class="icon-folder-open"></i></span>
+                                                    <span class=""><i class="icon-folder-open"></i></span> Voir Budget
                                                 </router-link></td>
                                             <td v-else-if="passation.actived == 0 && passation.status=='actu'" > 
                                                 <router-link :to="{ name: 'DetailBudgetImporte', params: { id: passation.id }}"
                                                                                                                               class="btn btn-default " title="Detail marches">
-                                                <span class=""><i class="icon-folder-open"></i></span>
+                                                <span class=""><i class="icon-folder-open"></i></span> Voir Budget
                                             </router-link></td>
 
                                         </tr>
@@ -94,11 +96,12 @@
                                 <upload-excel-component :on-success="handleSuccess" :before-upload="beforeUpload" />
                                 <hr>
                                 <a align="right"
-                                        @click.prevent="ajouterFichier"
-                                        class="btn btn-primary"
-                                        href="#"
-                                      v-if="tableData.length"
+                                   @click.prevent="ajouterFichier"
+                                   class="btn btn-primary"
+                                   href="#"
+                                   v-if="tableData.length"
                                 >Importer</a>
+
                                 <table class="table table-bordered table-striped" v-if="tableData.length">
                                     <thead>
                                     <tr>
@@ -113,7 +116,8 @@
                                         <th>TYPE FINACEMENT</th>
                                         <th>SOURCE FINANCEMENT</th>
                                         <th>LIGNE</th>
-                                        <th>DOTATION</th>
+                                        <th>AE</th>
+                                        <th>CP</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -128,7 +132,8 @@
                                         <td>{{data["TYPE FINANCEMENT"]}}</td>
                                         <td>{{data["SOURCE FINANCEMENT"]}}</td>
                                         <td>{{data["LIGNE"]}}</td>
-                                        <td>{{data["DOTATION"]}}</td>
+                                        <td>{{data["AE"]}}</td>
+                                        <td>{{data["CP"]}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -136,6 +141,72 @@
                                <!-- <el-table :data="tableData" border highlight-current-row style="width: 100%;margin-top:20px;">
                                     <el-table-column v-for="item of tableHeader" :key="item" :prop="item" :label="item" />
                                 </el-table>-->
+                            </div>
+                            <div id="tab3" class="tab-pane" v-if="source_financement_detecter.length>0" >
+                                <table class="table table-bordered table-striped" id="source">
+                                    <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Libellé</th>
+                                        <th>Etat</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="odd gradeX" v-for="source_financement in source_financement_detecter" :key="source_financement.code">
+                                        <td>
+                                            {{source_financement.code || 'Non renseigné'}}</td>
+                                        <td>
+                                            {{source_financement.libelle || 'Non renseigné'}}
+                                        </td>
+                                         <td v-if="etatSFNonEnregistre(source_financement.code)" style="background: green !important ; color: white !important">
+                                            Enregistre
+                                         </td>
+                                        <td style="background: red !important; color: white !important" v-else>
+                                            Non Enregistré
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="tab4" class="tab-pane" v-if="unite_admin_dettecte.length>0">
+                                <table class="table table-bordered table-striped" >
+                                    <thead>
+                                    <tr>
+                                        <th>Section</th>
+                                        <th>Zone</th>
+                                        <th>Code service gestionnaire credit</th>
+                                        <th>Code UA</th>
+                                        <th>Libellé UA</th>
+                                        <th>Etat</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="odd gradeX" v-for="source_financement in unite_admin_dettecte" :key="source_financement.code">
+                                        <td>
+                                            {{source_financement.section || 'Non renseigné'}}
+                                        </td>
+                                        <td>
+                                            {{source_financement.zone || 'Non renseigné'}}
+                                        </td>
+                                        <td>
+                                            {{source_financement.code_g || 'Non renseigné'}}
+                                        </td>
+
+                                        <td>
+                                            {{source_financement.code || 'Non renseigné'}}
+                                        </td>
+                                        <td>
+                                            {{source_financement.libelle || 'Non renseigné'}}
+                                        </td>
+                                        <td v-if="etatNonEnregistre(source_financement.code)" style="background: green !important ; color: white !important">
+                                            Enregistre
+                                        </td>
+                                        <td style="background: red !important; color: white !important" v-else>
+                                            Non Enregistré
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -244,6 +315,8 @@
                 namePDFDemandeAno: "",
                 fichierPDFDemandeAno: "",
                 imagePDFDemandeAno:"",
+                source_financement_detecter:[],
+                unite_admin_dettecte:[],
 
 
             };
@@ -267,8 +340,8 @@
                 "afficheNiveauPlanProg",
                 "exercices_budgetaires"
             ]),
+            ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
             anneeAmort() {
-
                 const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
 
                 if (norme) {
@@ -320,7 +393,27 @@
 
                 }
             },
+           etatSFNonEnregistre(){
+             return code=>{
+                 let objet=this.sources_financements.find(item=>item.code==code)
+                 if(objet==undefined){
+                     return false
+                 }
 
+                 return true
+             }
+           },
+            etatNonEnregistre(){
+                return code=>{
+                    let objet=this.uniteAdministratives.find(item=>item.code==code)
+
+                    if(objet==undefined){
+                        return false
+                    }
+
+                    return true
+                }
+            }
         },
         methods: {
             ...mapActions("uniteadministrative", [
@@ -337,6 +430,9 @@
                 "getAllHistoriqueBudgetGeneral",
                 "modifierLigneExempter",
             ]),
+            ...mapActions('parametreGenerauxSourceDeFinancement', ['getSourceFinancement', 'ajouterSourceFinancement',
+                'modifierFinancement',
+                'supprimerSourceFinancement']),
             formatageSomme:formatageSomme,
             OnchangeFichier(e) {
                 const files = e.target.files;
@@ -361,6 +457,74 @@
                // console.log(results[0]["GRANDE NATURE DE DEPENSE"])
                 this.tableData = results
                 this.tableHeader = header
+
+                if(this.tableData.length>0){
+          let vm=this;
+
+                    this.tableData.forEach(function (value) {
+                        console.log(value)
+                        //recherche de nouvelle source de financement
+                        let section=value['SECTION'].split(" ")
+                        let localisation=value['ZONE'].split(" ")
+                        let array_source=value['SOURCE FINANCEMENT'].split(" ")
+                        let array_unite_ua=value['UA'].split(" ")
+                            console.log(array_unite_ua[0])
+                        let code_ua=section[0]+'-'+array_unite_ua[0]+'-'+localisation[0]
+                        console.log(code_ua)
+                        let sourceFinancement=vm.sources_financements.find(item=>item.code==array_source[0])
+                        let sourceUA=vm.uniteAdministratives.find(item=>item.code==code_ua)
+                         if(sourceFinancement==undefined){
+                             let libelle="";
+                             let j=0;
+                              array_source.forEach(function (val) {
+                                  if(j>0){
+                                      libelle=libelle+" "+val
+                                  }
+                                 j++
+                              })
+
+                             let objet={
+                                 code:array_source[0],
+                                 libelle:libelle,
+                                 sigle:array_source[0]
+                             }
+                             let isExiste=vm.source_financement_detecter.find(item=>item.code==array_source[0])
+                             if(isExiste==undefined){
+                                 vm.source_financement_detecter.push(objet)
+                                 vm.ajouterSourceFinancement(objet)
+                             }
+
+                         }
+
+
+                //Recherche de nouvelle UA
+                         if(sourceUA==undefined){
+                             let libelle_ua="";
+                             let i=0;
+                             array_unite_ua.forEach(function (val) {
+                                 if(i>0){
+                                     libelle_ua=libelle_ua+" "+val
+                                 }
+                                 i++
+                             })
+
+                             let objet={
+                                 section:value['ZONE'],
+                                 zone:value['ZONE'],
+                                 code_g:array_unite_ua[0],
+                                 code:code_ua,
+                                 libelle:libelle_ua,
+                             }
+
+                             let isExisteUA=vm.unite_admin_dettecte.find(item=>item.code==code_ua)
+                             if(isExisteUA==undefined){
+                                 vm.unite_admin_dettecte.push(objet)
+                             }
+                         }
+                       // console.log(value['SOURCE FINANCEMENT'])
+                       // console.log(value['UA'])
+                    })
+                }
             },
             addFichier(file) {
                 let reader = new FileReader();
