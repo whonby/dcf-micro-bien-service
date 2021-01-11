@@ -1877,7 +1877,7 @@ prixUnitaire() {
      AjouterVehicule() {
       
 
-if(this.formData.typestockage == 2){
+if(this.AfficheTypeDeBien(this.famille_id) == 9){
  var objetNew ={
         ...this.formData,
         anneebudgetaire:this.anneeAmort,
@@ -1912,12 +1912,13 @@ else{
         ...this.formData1,
         ua_id:this.formData.uAdministrative_id,
         marche_id:this.formData.marche_id,
-        type_bien:this.formData.typestockage,
+        type_bien:this.AfficheTypeDeBien(this.famille_id),
           fournisseur_id:this.formData.fournisseur_id,
           numero_marche:this.formData.numero_marche,
           numero_facture:this.formData.numero_facture,
           article_id:this.formData.famill_id,
-          durevie:this.dureDeVie(this.famille_id)
+          durevie:this.dureDeVie(this.famille_id),
+          famille_article_id:this.famille_id
       }
       var nouveauObjet1 ={
         
