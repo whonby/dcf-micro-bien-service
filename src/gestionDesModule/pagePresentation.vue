@@ -297,11 +297,12 @@ created(){
     let user=JSON.parse (objet)
     this.getServiceCF()
     this.getAffectationServiceCF()
+    this.getAffectation()
     this.getUniteAdminUser(user.id)
           this.getGestionModules()
           this.getInfrastructure()
           this.getTypeOrdrePaiement()
-    this.getAffectation()
+
 this.getFormeJuridiques()
 this.getRegimeImpositions()
  this.getGroupe()
