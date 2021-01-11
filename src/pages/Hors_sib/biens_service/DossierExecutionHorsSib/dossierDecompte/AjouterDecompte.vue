@@ -1027,9 +1027,12 @@ Montantapresretenues(){
       "ajouterpaiementPersonnel",
       "modifierpaiementPersonnel",
       "supprimerpaiementPersonnel"
+      
     ]),
      ...mapActions("uniteadministrative", [
-      "ajouterDecompteFacture"]),
+      "ajouterDecompteFacture",
+      "ajouterHistoriqueDecompteFacture"
+      ]),
       afficherModalListeExecution(){
                 window.history.back();
             },
@@ -1046,6 +1049,7 @@ Montantapresretenues(){
       montantmarche:this.Montantapresretenues
       };
       this.ajouterDecompteFacture(nouvelObjet);
+      this.ajouterHistoriqueDecompteFacture(nouvelObjet)
     this.afficherModalListeExecution()
       this.formData = {
       

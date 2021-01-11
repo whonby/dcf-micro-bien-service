@@ -393,6 +393,7 @@ this.getTypeAppel()
      
      this.getAllBanqueUa()
      this.getAllDecompteFacture()
+     this.getAllHistoriqueDecompteFacture()
        this.getStructureOrganigrammeUa()
  this.getAllBudgetEclate()
  this.getVehicule()
@@ -681,7 +682,8 @@ return objJson.id
      "getAllBudgetEclate",
      "getVehicule",
      "getReparationVehicule",
-     "getStockArticleUa"
+     "getStockArticleUa",
+     "getAllHistoriqueDecompteFacture"
     ]),
             ...mapActions('personnelUA', ["getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",

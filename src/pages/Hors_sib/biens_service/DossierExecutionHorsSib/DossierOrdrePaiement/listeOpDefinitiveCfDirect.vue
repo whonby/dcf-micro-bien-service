@@ -89,11 +89,32 @@
                        
                        </tr>  
                        <tr>    
-                        <td colspan="2">
+                        <td colspan="">
                         <div class="control-group">
                             <label class="control-label">Nom et prenoms de l'Agent connecté</label>
                             <div class="controls">
                               <input type="text" class="span"  :value="afficheNomUtilisateur" readonly/>
+                            </div>
+                          </div>
+                       </td>
+                       <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom et prenoms du CF</label>
+                            <div class="controls">
+                              
+
+                            
+                                <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="listeCF"
+                                                   v-model="controlleur_fin"
+                                                   option-value="id"
+                                                   option-text="name"
+                                                   placeholder="Controleur financier"
+                                >
+
+                                </model-list-select>
+                            
                             </div>
                           </div>
                        </td>
@@ -232,9 +253,15 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from './../../../../../Repositories/Repository';
+import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
 import moment from 'moment';
 export default {
-   
+   components: {
+            
+            ModelListSelect,
+          
+        },
     data(){
         return{
            fabActions: [
@@ -243,7 +270,7 @@ export default {
           icon: "add"
         }
       ],
-      
+      controlleur_fin:"",
        editMandat: {
         
        },
@@ -305,6 +332,19 @@ search:""
     ]),
      ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
+...mapGetters("Utilisateurs", ["getterUtilisateur","getterRoles"]),
+
+listeCF(){
+              return this.getterUtilisateur.filter(item=>{
+                  if(item.user_role){
+                      if (item.user_role.role.code_role=="DCF" || item.user_role.role.code_role=="CF"){
+                          return item
+                      }
+                  }
+              })
+            },
+
+
   griserAutreMotif(){
   return this.editMandat.motif != 237 
 },
@@ -312,6 +352,12 @@ search:""
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
 return objJson.name
+
+},
+ afficheIdUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.id
 
 },
      AffichierElementParent() {
@@ -605,7 +651,8 @@ formatageSomme:formatageSomme,
 section_id:this.afficherSectId,
 
   marchetype:this.editMandat.marchetype,
- 
+ nomcf_id:this.controlleur_fin,
+ nom_saisie_pool_id:this.afficheIdUtilisateur
        };
  this.modifierMandat(nouvelObjet);
 this.$("#validationOpDefinitif").modal('hide');

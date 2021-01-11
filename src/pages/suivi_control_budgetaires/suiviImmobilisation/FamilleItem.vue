@@ -11,8 +11,10 @@
                     > {{article.libelle || 'Non renseigné'}}</td>
                      <td
                     
-                    > {{article.dureVie || 'Non renseigné'}}</td>
-                   
+                    > {{article.dureVie || 'Non renseigné'}} Ans</td>
+                   <td
+                    
+                    > {{afficheLibelleTypeBien(article.type_bien) || 'Non renseigné'}}</td>
 
                     <td>
                       <button class="btn btn-danger" @click.prevent="$emit('suppression', article.id)">
@@ -29,7 +31,7 @@
 </template>
 
 <script>
-
+import { mapGetters } from "vuex";
 
 export default {
     name: 'ArticleItem',
@@ -49,6 +51,32 @@ export default {
         }
   
   },
+   computed: {
+    ...mapGetters("SuiviImmobilisation", [
+      "familles",
+      "services",
+      "listeBesoinValider",
+      "besoinImmobilisations",
+      "groupTriUaImmo",
+      "SuiviImmo",
+      "listeBesoinValider",
+      "getAfficheStockArticle",
+      "Typebiengrpecorporels"
+      
+    ]),
+       afficheLibelleTypeBien() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+   },
   methods: {
     toggle: function () {
       if (this.isFolder) {

@@ -26,7 +26,7 @@
               <div class="control-group">
                             <label class="control-label">Type d'équipement:</label>
                             <div class="controls">
-                              <select v-model="formData.equipement_id" class="span4">
+                              <select v-model="formData.equipement_id" class="span5">
                                 <option value>Selectionner</option>
                                 <option
                                   v-for="typeua in equipements"
@@ -41,7 +41,7 @@
               <div class="control-group">
                 <label class="control-label">Famille:</label>
                 <div class="controls">
-                  <select  v-model="formData.famille_id" :readOnly="veifEquipementExist" class="span4">
+                  <select  v-model="formData.famille_id" :readOnly="veifEquipementExist" class="span5">
                     
                     <option
                       v-for="famil in ArticleDynamiques(formData.equipement_id)"
@@ -52,7 +52,29 @@
                 </div>
               </div>
             </td>
-             <td>
+            <td>
+              
+             <div class="control-group">
+                <label class="control-label">Prix HT</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    v-model="formData.prix_ht"
+                    
+                    class="span5"
+                    placeholder="Saisir Prix HT"
+                  />
+                </div>
+              </div>
+            </td>
+             
+           
+           
+
+           
+          </tr>
+          <tr>
+            <td colspan="2">
               <div class="control-group">
                 <label class="control-label">Designation</label>
                 <div class="controls">
@@ -60,34 +82,13 @@
                     type="text"
                     v-model="formData.libelle"
                     
-                    class="span"
+                    class="span10"
                     placeholder="Saisir la Designation"
                   />
                 </div>
               </div>
             </td>
-           
-           
-
-           
-          </tr>
-          <tr>
-               <td>
-              
-             <div class="control-group">
-                <label class="control-label">Prix HT:</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    v-model="formData.prix_ht"
-                    
-                    class="span"
-                    placeholder="Saisir Prix HT"
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
+            <td>
              <div class="control-group">
                 <label class="control-label">Taux:</label>
                 <div class="controls">
@@ -96,12 +97,16 @@
                   
                     :value="affcherTauxEnCours"
                     readonly
-                    class="span"
+                    class="span5"
                     placeholder="Saisir la taux"
                   />
                 </div>
               </div>
             </td>
+          </tr>
+          <tr>
+               
+             
             <td>
               <div class="control-group">
                 <label class="control-label">Tva:</label>
@@ -110,19 +115,14 @@
                     type="number"
                    :value="montantTva"
                     readonly
-                    class="span"
+                    class="span5"
                     placeholder="Saisir Montant Tva"
                   />
                 </div>
               </div>
             </td>
            
-
-          </tr>
-          <tr>
-              
-            
-            <td>
+<td>
               <div class="control-group">
                 <label class="control-label">Montant TTC:</label>
                 <div class="controls">
@@ -130,15 +130,14 @@
                     type="number"
                     :value="montantTtc"
                     readonly
-                    class="span"
+                    class="span5"
                     placeholder="Saisir Montant TTC"
                   />
                 </div>
               </div>
             </td>
-           
-
           </tr>
+         
         </table>
       </div>
       <div class="modal-footer">
@@ -166,7 +165,7 @@
               <div class="control-group">
                 <label class="control-label">Equipement Type</label>
                 <div class="controls">
-                  <select  v-model="editReferentielPrix.equipement_id">
+                  <select  v-model="editReferentielPrix.equipement_id" class="span5">
                     
                     <option
                       v-for="equipe in equipements"
@@ -181,7 +180,7 @@
               <div class="control-group">
                 <label class="control-label">Famille:</label>
                 <div class="controls">
-                  <select  v-model="editReferentielPrix.famille_id">
+                  <select  v-model="editReferentielPrix.famille_id" class="span5">
                     
                     <option
                       v-for="famil in ArticleDynamiques(editReferentielPrix.equipement_id)"
@@ -192,27 +191,8 @@
                 </div>
               </div>
             </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Designation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    v-model="editReferentielPrix.libelle"
-                    
-                    class="span"
-                    placeholder="Saisir la Designation"
-                  />
-                </div>
-              </div>
-            </td>
-           
-           
-
-           
-          </tr>
-          <tr>
-               <td>
+             
+           <td>
               
              <div class="control-group">
                 <label class="control-label">Prix HT:</label>
@@ -221,13 +201,31 @@
                     type="number"
                     v-model="editReferentielPrix.prix_ht"
                     
-                    class="span"
+                    class="span5"
                     placeholder="Saisir Prix HT"
                   />
                 </div>
               </div>
             </td>
-             <td>
+
+           
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Designation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    v-model="editReferentielPrix.libelle"
+                    
+                    class="span10"
+                    placeholder="Saisir la Designation"
+                  />
+                </div>
+              </div>
+            </td>
+           <td>
              <div class="control-group">
                 <label class="control-label">taux:</label>
                 <div class="controls">
@@ -235,12 +233,16 @@
                     type="number"
                     v-model="editReferentielPrix.taux"
                     readonly
-                    class="span"
+                    class="span5"
                     placeholder="Saisir la taux"
                   />
                 </div>
               </div>
             </td>
+          </tr>
+          <tr>
+               
+             
            
             <td>
               <div class="control-group">
@@ -250,18 +252,13 @@
                     type="number"
                    :value="editmontantTva"
                     readonly
-                    class="span"
+                    class="span5"
                     placeholder="Saisir Montant Tva"
                   />
                 </div>
               </div>
             </td>
-
-          </tr>
-           <tr>
-              
-            
-            <td>
+ <td>
               <div class="control-group">
                 <label class="control-label">Montant TTC:</label>
                 <div class="controls">
@@ -269,15 +266,14 @@
                     type="number"
                     :value="editmontantTtc"
                     readonly
-                    class="span"
+                    class="span5"
                     placeholder="Saisir Montant TTC"
                   />
                 </div>
               </div>
             </td>
-           
-
           </tr>
+          
         </table>
       </div>
       <div class="modal-footer">
@@ -626,8 +622,8 @@ alert("veuillez remplir le prix Unitaire")
 
 <style scoped>
 .taillemodal {
-  width: 50%;
-  margin: 0 -350px;
+  width: 68%;
+  margin: 0 -850px;
 }
 
 </style>

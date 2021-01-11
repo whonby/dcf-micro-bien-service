@@ -2091,9 +2091,9 @@ typeOrdrePaiement
                                          
                      <th>type_facture</th>
                     <th>numero_facture</th>
-                    <th>objet_facture</th>
+                    <th style="width:30%">objet_facture</th>
                     
-                     <th>Ua</th>
+                     <th style="width:10%">Ua</th>
                     <!-- <th>prix_unitaire</th>
                     <th>Quantité</th> -->
                     <th>prix_propose_ht</th>
@@ -2104,7 +2104,7 @@ typeOrdrePaiement
                               
                                 
                                 
-                                <th colspan="3">Action</th>
+                                <th colspan="2">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -2131,26 +2131,26 @@ typeOrdrePaiement
                      
                      <td v-if="factu.typeordrepaiement == 2">
                        <router-link :to="{ name: 'detailExecutionOpInDirect', params: { id: factu.id }}"
-                class="btn btn-default " title="Ajouter Op Provisoire">
-                  <span class=""><i class="   icon-legal"></i></span>
+                class="btn btn-info " title="Ajouter Op Provisoire">
+                  <span class=""><i class="   icon-legal"></i> Ajouter Op Provisoire</span>
                    </router-link>
                     
                       </td>
                       <td v-else>
                         <router-link :to="{ name: 'detailExecutionOpDirect', params: { id: factu.id }}"
-                class="btn btn-default " title="Realité Service Fait">
-                  <span class=""><i class="  icon-random"></i></span>
+                class="btn btn-success " title="Ajouter Realité Service Fait">
+                  <span class="">Ajouter Réalité Service</span>
                    </router-link> 
                     <router-link :to="{ name: 'AjouterDecompte', params: { id: factu.id }}"
-                class="btn btn-default " title="Ajouter décompte">
-                  <span class=""><i class=" icon-sitemap"></i></span>
+                class="btn btn-info " title="Ajouter décompte">
+                  <span class="">Ajouter Décompte</span>
                    </router-link> 
                        
                       </td>
                       <td>
                          <button class="btn btn-danger" @click="supprimerFacture(factu.id)">
                         <span>
-                          <i class="icon icon-trash"></i>
+                          <i class="icon icon-trash"></i> Supprimer
                         </span>
                       </button>
                       </td>

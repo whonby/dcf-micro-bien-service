@@ -202,7 +202,7 @@
               <div class="modal-body">
                 <form class="form-horizontal">
                    <div class="control-group">
-              <label class="control-label">Structure décisionnelle:</label>
+              <label class="control-label">Statut dun Bien{{editTitre.grpecorporel_id}}</label>
               <div class="controls">
                 <select  v-model="editTitre.grpecorporel_id">
             <option v-for="plan in groupecorporels" :key="plan.id" 

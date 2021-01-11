@@ -195,11 +195,7 @@
 
                 </div>
 
-                <!--------------------FIN TABLEAU DE BORD FIN MARCHE---------------------->
-
-
-
-                <!---------------------TABLEAU DE BORD ETAT MARCHE--------------------->
+                
 
 
                 <div class="">
@@ -309,7 +305,7 @@
                         </div>
                     </div>
                 </div>
-                <!--------------------FIN TABLEAU BORD FIN ETAT MARCHE--------------->
+                
 
             </div>
         </div>

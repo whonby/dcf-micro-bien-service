@@ -24,13 +24,14 @@
                             <option value="0">Attente</option>
     
     </select>
+
                            
                             </div>
                           </div>
             </td>
               <td>
                     <div class="control-group">
-                            <label class="control-label">Motif CF </label>
+                            <label class="control-label">Famille de Motif </label>
                             <div class="controls">
                                <select v-model="editMandat.motifcf" class="span">
                                  <option value=""></option>
@@ -41,11 +42,9 @@
                             </div>
                           </div>
                  </td>
-          </tr>
-               <tr>
-                 <td>
+                  <td>
                     <div class="control-group">
-                            <label class="control-label">Libelle motif </label>
+                            <label class="control-label">Motif </label>
                             <div class="controls">
                                <select v-model="editMandat.motif" class="span">
                                  <option value=""></option>
@@ -56,6 +55,17 @@
                             </div>
                           </div>
                  </td>
+          </tr>
+               <tr>
+                <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Autres Motif</label>
+                            <div class="controls">
+                              <textarea  class="span" row = "6" v-model="editMandat.autre_motif" :readonly="griserAutreMotif">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
                   <td>
                                <div class="control-group">
                             <label class="control-label">Date Decision CF :</label>
@@ -68,7 +78,7 @@
                            </td>
                  </tr>             
                    <tr>
-                     <td>
+                     <td colspan="3">
                         <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
@@ -77,17 +87,51 @@
                             </div>
                           </div>
                        </td>
-                        <td colspan="">
+                        
+                       
+                       </tr>      
+                        <tr>
+                          <td colspan="">
                         <div class="control-group">
-                            <label class="control-label">Nom du CF</label>
+                            <label class="control-label">Nom et prenoms de l'Agent connecté</label>
                             <div class="controls">
                               <input type="text" class="span"  :value="afficheNomUtilisateur" readonly/>
                             </div>
                           </div>
                        </td>
-                       
-                       </tr>      
-                        
+                       <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom et prenoms du CF</label>
+                            <div class="controls">
+                              
+
+                            
+                                <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="listeCF"
+                                                   v-model="controlleur_fin"
+                                                   option-value="id"
+                                                   option-text="name"
+                                                   placeholder="Controleur financier"
+                                >
+
+                                </model-list-select>
+                            
+                            </div>
+                          </div>
+                       </td>
+                        <td>
+                                  <div class="control-group">
+                            <label class="control-label">Joint Fiche réalité service fait </label>
+                            <div class="controls">
+                              <!-- <input type="text" class="span" readonly :value=" afficherLibelleFoctionBudgetaire(afficherIdFoctionBudgetaire(editObservationAgentCf.nom_service_beneficiaire))"/>
+                              -->
+                              <input type="file" class="span" />
+                             
+                            </div>
+                          </div>
+                           </td>
+                        </tr>
                            
          
         </table>
@@ -213,9 +257,15 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from './../../../../../Repositories/Repository';
+import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
 import moment from 'moment';
 export default {
-   
+    components: {
+            
+            ModelListSelect,
+          
+        },
     data(){
         return{
            fabActions: [
@@ -224,7 +274,7 @@ export default {
           icon: "add"
         }
       ],
-      
+      controlleur_fin:"",
        editMandat: {
          decision_cf:"",
          motif:"",
@@ -723,18 +773,18 @@ afficheDecisionCf(id) {
 modifierModalMandatDecisionCF(){
     
      
-   if (this.afficherMontantFacture(this.editMandat.facture_id) > this.montantGeneralMandatModifier)
-      {
-        alert("Le montant engagé est Inférieure au montant de la facture")
-      }
-       else if (this.dotationDisponibleAnterieure < this.afficherMontantFacture(this.editMandat.facture_id))
-      {
-        alert("La dotation est Inférieure au montant de la facture")
-      }
+  //  if (this.afficherMontantFacture(this.editMandat.facture_id) > this.montantGeneralMandatModifier)
+  //     {
+  //       alert("Le montant engagé est Inférieure au montant de la facture")
+  //     }
+  //      else if (this.dotationDisponibleAnterieure < this.afficherMontantFacture(this.editMandat.facture_id))
+  //     {
+  //       alert("La dotation est Inférieure au montant de la facture")
+  //     }
       
   
-       else if (parseFloat(this.montantMarcheAvecAvenant) == parseFloat(this.sommeEgagementLigneTableau(this.macheid)))
-      {
+  //      else if (parseFloat(this.montantMarcheAvecAvenant) == parseFloat(this.sommeEgagementLigneTableau(this.macheid)))
+  //     {
         
 
       var nouvelObjet = {
@@ -760,8 +810,9 @@ section_id:this.afficherIdSection(this.afficherIdUa(this.afficherIdMarche(this.e
   total_general:this.montantGeneralMandatModifier,
    	entreprise_id:this.editMandat.fournisseur_id,
     	
- marchetype:this.afficheMarcheType
-
+ marchetype:this.afficheMarcheType,
+ nomcf_id:this.controlleur_fin,
+ nom_saisie_pool_id:this.afficheIdUtilisateur
        };
        let marcheObjet=this.marches.find(marche=>marche.id == this.macheid)
     marcheObjet.attribue = 5
@@ -826,11 +877,8 @@ val:0,
                 nom_emetteur:""
 };
 
-      }
-      else
-      {
- return 
-      }
+      
+      
     
     
   //  }
@@ -856,8 +904,8 @@ formatageSomme:formatageSomme,
 
 }
 .tailgrand{
-  width: 50%;
-  margin: 0 -25%;
+ width: 77%;
+  margin: 0 -38%;
 }
 .tailAvenant{
   width: 75%;

@@ -181,11 +181,11 @@ afficherUniteAdministrative'(
                 <span >Affectation</span>
        
                 </button>
-                <button  v-show="((afficheHistNormeEquipement12(marcheid))-(affichNormeEquipement(marcheid)))==1"
+                <!-- <button  v-show="((afficheHistNormeEquipement12(marcheid))-(affichNormeEquipement(marcheid)))==1"
                         class="btn  btn-danger" @click.prevent="afficherModalTransfert(index)">
                 <span >Transfert</span>
        
-                </button>
+                </button> -->
                    </td>
                      
                          

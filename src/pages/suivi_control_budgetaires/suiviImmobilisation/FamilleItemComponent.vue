@@ -18,9 +18,9 @@
                 <thead>
                   <tr>
                     <!-- <th>code</th> -->
-                    <th style="width:90%">famille acticles</th>
+                    <th style="width:80%">famille acticles</th>
                      <th style="width:10%">Duree de vie</th>
-                    
+                    <th style="width:10%">Type de Bien</th>
                    
                     <th>Action</th>
                   </tr>
