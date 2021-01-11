@@ -113,7 +113,7 @@ CodeExempte
                 </button>
  <button v-else class="btn  btn-danger">
               
-                <span title="MARCHE NON PLANIFIE">NPL</span>
+                <span title="MARCHE EN PLANIFICATION">PL</span>
                 </button>
                    </td>
   

@@ -36,7 +36,9 @@ CodeExempte
        <option value="100">100</option>
       </select>
            Entrer
+        
         </div>
+
                <table class="table table-bordered table-striped" >
                 <thead>
                 <tr>
