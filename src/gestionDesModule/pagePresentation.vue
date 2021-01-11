@@ -295,6 +295,8 @@ components:{
 created(){
     let objet=localStorage.getItem('Users');
     let user=JSON.parse (objet)
+    this.getServiceCF()
+    this.getAffectationServiceCF()
     this.getUniteAdminUser(user.id)
           this.getGestionModules()
           this.getInfrastructure()
@@ -552,6 +554,7 @@ this.getMembreCojo()
       this.getEcheances()
     this.getMembreComiteEvaluation()
     this.getStructureDAO()
+
         },
 
   computed:{
@@ -637,7 +640,7 @@ return objJson.id
      dcf:dcf,
 
     ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",'getGroupe',"getMenu","getModule",
-    "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf","getAffectationGroupeUser"]),
+    "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf","getAffectationGroupeUser","getServiceCF","getAffectationServiceCF"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix','getMotifPassation']),
 

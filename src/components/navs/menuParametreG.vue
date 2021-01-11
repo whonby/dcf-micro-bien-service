@@ -58,10 +58,24 @@
           </li>
             <li class="divider"></li>
             <li>
+                <router-link :to="{name: 'ServiceCF'}" tag="a">
+                    <i class="icon-user"></i> Gestion des services de CF
+                </router-link>
+            </li>
+
+            <li class="divider"></li>
+            <li>
                 <router-link :to="{name: 'GestionCF'}" tag="a">
                     <i class="icon-user"></i> Gestion des CF
                 </router-link>
             </li>
+            <li class="divider"></li>
+            <li>
+                <router-link :to="{name: 'AffectationCFAService'}" tag="a">
+                    <i class="icon-user"></i>Affection CF Service
+                </router-link>
+            </li>
+
               <li class="divider"></li>
   <li>
       <router-link :to="{name: 'Profil'}" tag="a">
