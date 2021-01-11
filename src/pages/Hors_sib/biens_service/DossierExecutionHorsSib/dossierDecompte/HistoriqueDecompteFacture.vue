@@ -17,7 +17,7 @@
           <th style="text-align:center;font-size:12px">Net TTC</th>
           <th style="text-align:center;font-size:12px">Etat ({{recupereTauxEtat(macheid)}}% + (TVA 18%))</th>
           <th style="text-align:center;font-size:12px">Bailleur({{recupereTauxBailleur(macheid)}}% HTVA) </th>
-          <th style="text-align:center;font-size:12px">Actions </th>
+          <th style="text-align:center;font-size:12px">Décision </th>
                   </tr>
 
 
