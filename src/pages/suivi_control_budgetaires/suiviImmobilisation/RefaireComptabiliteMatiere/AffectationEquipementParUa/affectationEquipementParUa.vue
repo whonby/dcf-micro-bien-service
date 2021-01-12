@@ -1618,15 +1618,15 @@ ajouterAffectationUaParUa() {
         autre_ua:this.formData2.autre_ua,
         date_transfert:this.formData2.date_transfert
       }
-       var nouveauObjet2 ={
-       id:this.idMaterielEnStock(this.formData2.model_id),
-     quantitestock:this.QteRestantUaEmettrice
+    //    var nouveauObjet2 ={
+    //    id:this.idMaterielEnStock(this.formData2.model_id),
+    //  quantitestock:this.QteRestantUaEmettrice
        
 
-      }
+    //   }
 
       this.ajouterAffectationUaBien(nouveauObjet)
-      this.modifierStockArticle(nouveauObjet2)
+      // this.modifierStockArticle(nouveauObjet2)
  this.$("#exampleModal12").modal('hide');
         this.formData = {
               
