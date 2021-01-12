@@ -57,7 +57,7 @@
 
                         <div class="widget-content nopadding" v-if="getterListeMarcheTableauBordFiltre">
                             <table class="table table-bordered table-striped" ref="table" id="loremTable" summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
-                               
+
                                 <thead>
                                 <tr>
                                     <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">N° D'ORDRE</th>
