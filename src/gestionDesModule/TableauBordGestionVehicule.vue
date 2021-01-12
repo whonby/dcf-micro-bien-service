@@ -121,7 +121,7 @@ valeurAcquisitionMateriel
                 </thead>
                 
                 <tr>
-                     <th  style="width:15%;text-align:left;font-weight:bold;font-size:16px">BIENS INCORPORELS  (A)</th>
+                     <th  style="width:15%;text-align:left;font-weight:bold;font-size:16px">BIENS INCORPORELS (A)</th>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{0}} </td>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{formatageSomme(parseFloat(0))}} </td>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{formatageSomme(parseFloat(0))}} </td>
@@ -168,7 +168,8 @@ valeurAcquisitionMateriel
                      <td style="width:15%;text-align:center;"> {{NombreEquipementParMateriel(unite_administrative_id)}}</td>
                      <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(PrixEquipementParMateriel(unite_administrative_id)))}}</td>
                      <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(0))}}</td>
-                     <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td>
+                       <td style="width:15%;text-align:center;">{{0}}%</td>
+                     <!-- <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td> -->
                      <td style="width:15%;text-align:center;"> 0%</td>
                      <td style="width:15%;text-align:center;"> 0%</td>
                      <td style="width:15%;text-align:center;">0% </td>
@@ -178,7 +179,8 @@ valeurAcquisitionMateriel
                      <td style="width:15%;text-align:center;"> {{NombreVehiculeParUa(unite_administrative_id)}}</td>
                      <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(PrixVehiculeParUa(unite_administrative_id)))}}</td>
                      <td style="width:15%;text-align:center;">{{formatageSomme(parseFloat(0))}} </td>
-                     <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td>
+                     <td style="width:15%;text-align:center;">{{0}}%</td>
+                     <!-- <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td> -->
                      <td style="width:15%;text-align:center;">0% </td>
                      <td style="width:15%;text-align:center;">0% </td>
                      <td style="width:15%;text-align:center;">0% </td>
@@ -186,10 +188,10 @@ valeurAcquisitionMateriel
                   <tr>
                      <th  style="width:10%;text-align:right;">IMMOBILIER</th>
                      <td style="width:15%;text-align:center;">{{NombreEquipementParImmobilier(unite_administrative_id)}} </td>
-                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(PrixEquipementParMateriel(unite_administrative_id)))}}</td>
+                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(0))}}</td>
                      <td style="width:15%;text-align:center;">{{formatageSomme(parseFloat(0))}}</td>
-                                          
-  <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td>
+                        <td style="width:15%;text-align:center;">{{0}}%</td>                  
+  <!-- <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td> -->
                      <td style="width:15%;text-align:center;"> 0%</td>
                      <td style="width:15%;text-align:center;">0%</td>
                      <td style="width:15%;text-align:center;">0%</td>
@@ -197,9 +199,10 @@ valeurAcquisitionMateriel
                   <tr>
                      <th  style="width:10%;text-align:right;">GROS TRAVAUX</th>
                      <td style="width:15%;text-align:center;"> {{NombreEquipementParGrosTravaux(unite_administrative_id)}} </td>
-                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(PrixEquipementParMateriel(unite_administrative_id)))}}</td>
+                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(0))}}</td>
                      <td style="width:15%;text-align:center;">{{formatageSomme(parseFloat(0))}} </td>
-                     <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td>
+                     <td style="width:15%;text-align:center;">{{0}}%</td>
+                     <!-- <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td> -->
                      <td style="width:15%;text-align:center;">0%</td>
                      <td style="width:15%;text-align:center;">0% </td>
                     <td style="width:15%;text-align:center;"> 0%</td>
@@ -336,14 +339,14 @@ nombreDeMaterielCouvert() {
     },
 EquipementNormeCouvert() {
       
-           return this.normeEquipements.filter(qtreel => this.idTypeBien(qtreel.famille_id) == 1).length;
+           return this.normeEquipements.filter(qtreel => this.idTypeBien(qtreel.famille_id) == 5).length;
 
     },
 
 idTypeBien() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.ficheArticle.find(qtreel => qtreel.article_id == id);
+           const qtereel = this.ficheArticle.find(qtreel => qtreel.famille_article_id == id);
 
       if (qtereel) {
         return qtereel.type_bien

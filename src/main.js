@@ -43,7 +43,16 @@ import LDrawToolbar from 'vue2-leaflet-draw-toolbar';
 import VueUploadComponent from 'vue-upload-component'
 Vue.component('file-upload', VueUploadComponent)
 
+import VueSweetalert2 from 'vue-sweetalert2';
 
+// If you don't need the styles, do not connect
+import 'sweetalert2/dist/sweetalert2.min.css';
+const options2 = {
+    confirmButtonColor: '#41b882',
+    cancelButtonColor: '#ff7674',
+};
+
+Vue.use(VueSweetalert2, options2);
 
 import VueHtml2pdf from 'vue-html2pdf'
 Vue.use(VueHtml2pdf)

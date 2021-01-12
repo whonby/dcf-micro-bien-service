@@ -175,6 +175,7 @@
               <div class="controls " >
             <input type="text"  class="span" :value="afficherLibelleFonction(afficherLaFonctionDActeurDepenseDynamique(formData.acte_personnel_id))" readonly >
       
+      
               </div>
             </div>
                     </td>

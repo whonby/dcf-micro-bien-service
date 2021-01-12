@@ -148,7 +148,7 @@ reference_marche
               </td>
                
                
-               
+              
              
             </tr>
             <tr>
@@ -965,6 +965,7 @@ ligneBudgeteyuy() {
         }
       };
     },
+
    afficheMarcheHorsPPM(){
      return this.printMarcheNonAttribue.filter(items=>items.mvtmarche == 1 && items.sib==1);
    },
@@ -983,7 +984,7 @@ afficherlisteMarcheParDroitAccess() {
         
         }
 else{
-return this.printMarcheNonAttribue.filter(items=>items.mvtmarche == 1);
+return this.printMarcheNonAttribue.filter(items=>items.mvtmarche == 1 && items.sib==1);
 }
         
            

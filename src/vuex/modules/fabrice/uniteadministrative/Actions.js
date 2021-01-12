@@ -1574,3 +1574,37 @@ export function supprimerStockArticle({ commit,dispatch }, id) {
           axios.delete("/StockArticle/" + id).then(() => dialog.close());
       });
 }
+
+
+
+export function getAllHistoriqueDecompteFacture({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/HistoriqueDecompteFacture")
+      .then(response => {
+        commit("GET_ALL_HISTORIQUE_DECOMPTE_FACTURE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+
+
+
+
+
+export function ajouterHistoriqueDecompteFacture({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/HistoriqueDecompteFacture", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_HISTORIQUE_DECOMPTE_FACTURE", response.data);
+
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}

@@ -127,7 +127,7 @@ typeOrdrePaiement
                       <select v-model="formData1.typfacture_id" class="span" >
                     
                      <option
-                        v-for="typeFact in typeFactures"
+                        v-for="typeFact in Defs"
                         :key="typeFact.id"
                         :value="typeFact.id"
                       >{{typeFact.libelle}}</option>
@@ -566,6 +566,7 @@ typeOrdrePaiement
       </div>
     </div>
 
+
     
      <div id="modatFactureAjouter" class="modal hide taillemodal45" >
       <div class="modal-header">
@@ -578,16 +579,23 @@ typeOrdrePaiement
             <tr>
                <td>
                 <div class="control-group">
-                  <label class="control-label">Type facture</label>
+                  <label class="control-label">Type facture{{AfficheTypeFactureId(typeOrdrePaiement(macheid))}}</label>
                   <div class="controls">
-                      <select v-model="formData1.typfacture_id" class="span" >
+                     <input
+                    type="text"
+                    
+                  :value="typeFactureDef(typeOrdrePaiement(macheid))"
+                    class="span"
+                    readonly
+                  />
+                      <!-- <select v-model="formData1.typfacture_id" class="span" >
                     
                      <option
-                        v-for="typeFact in typeFactures"
+                        v-for="typeFact in Defs"
                         :key="typeFact.id"
                         :value="typeFact.id"
                       >{{typeFact.libelle}}</option>
-                  </select>
+                  </select> -->
                      
                   </div>
                 </div>
@@ -1040,7 +1048,7 @@ typeOrdrePaiement
                       <select v-model="formData1.typfacture_id" class="span" >
                     
                      <option
-                        v-for="typeFact in typeFactures"
+                        v-for="typeFact in Defs"
                         :key="typeFact.id"
                         :value="typeFact.id"
                       >{{typeFact.libelle}}</option>
@@ -1564,7 +1572,7 @@ typeOrdrePaiement
                       <select v-model="formData1.typfacture_id" class="span" >
                     
                      <option
-                        v-for="typeFact in typeFactures"
+                        v-for="typeFact in Defs"
                         :key="typeFact.id"
                         :value="typeFact.id"
                       >{{typeFact.libelle}}</option>
@@ -2083,9 +2091,9 @@ typeOrdrePaiement
                                          
                      <th>type_facture</th>
                     <th>numero_facture</th>
-                    <th>objet_facture</th>
+                    <th style="width:30%">objet_facture</th>
                     
-                     <th>Ua</th>
+                     <th style="width:10%">Ua</th>
                     <!-- <th>prix_unitaire</th>
                     <th>Quantité</th> -->
                     <th>prix_propose_ht</th>
@@ -2096,7 +2104,7 @@ typeOrdrePaiement
                               
                                 
                                 
-                                <th colspan="3">Action</th>
+                                <th colspan="2">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -2108,10 +2116,10 @@ typeOrdrePaiement
                   >
                    
                    <!-- <td @dblclick="afficherModalModifierFacture(index)">{{factu.id || 'Non renseigné'}}</td> -->
-                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objectTypefacture.libelle || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierFacture(index)">{{AfficheTypeFactureLibelle(factu.typfacture_id) || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierFacture(index)">{{factu.numero_facture || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierFacture(index)">{{factu.objet_facture || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objetUA.libelle || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierFacture(index)">{{libelleUa(factu.ua) || 'Non renseigné'}}</td>
                        <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ht))|| 0}}</td>
                    <!-- <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_unitaire ))|| 'Non renseigné'}}</td>
                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.quantite || 'Non renseigné'}}</td> -->
@@ -2123,26 +2131,26 @@ typeOrdrePaiement
                      
                      <td v-if="factu.typeordrepaiement == 2">
                        <router-link :to="{ name: 'detailExecutionOpInDirect', params: { id: factu.id }}"
-                class="btn btn-default " title="Ajouter Op Provisoire">
-                  <span class=""><i class="   icon-legal"></i></span>
+                class="btn btn-info " title="Ajouter Op Provisoire">
+                  <span class=""><i class="   icon-legal"></i> Ajouter Op Provisoire</span>
                    </router-link>
                     
                       </td>
                       <td v-else>
                         <router-link :to="{ name: 'detailExecutionOpDirect', params: { id: factu.id }}"
-                class="btn btn-default " title="Realité Service Fait">
-                  <span class=""><i class="  icon-random"></i></span>
+                class="btn btn-success " title="Ajouter Realité Service Fait">
+                  <span class="">Ajouter OP</span>
                    </router-link> 
                     <router-link :to="{ name: 'AjouterDecompte', params: { id: factu.id }}"
-                class="btn btn-default " title="Ajouter décompte">
-                  <span class=""><i class=" icon-sitemap"></i></span>
+                class="btn btn-info " title="Ajouter décompte">
+                  <span class="">Ajouter Décompte</span>
                    </router-link> 
                        
                       </td>
                       <td>
                          <button class="btn btn-danger" @click="supprimerFacture(factu.id)">
                         <span>
-                          <i class="icon icon-trash"></i>
+                          <i class="icon icon-trash"></i> Supprimer
                         </span>
                       </button>
                       </td>
@@ -2304,9 +2312,9 @@ search:""
     created(){},
 
               computed: {
-            ...mapGetters("bienService", ["gettersTypeOrdrePaiement",'typeMarches','decomptes','modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+            ...mapGetters("bienService", ["typeFactures","gettersTypeOrdrePaiement",'typeMarches','decomptes','modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
-                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","Defs",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
@@ -2354,7 +2362,58 @@ search:""
     ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
 
+libelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
+AfficheTypeFactureLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeFactures.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
+typeFactureDef() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeFactures.find(qtreel => qtreel.code == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+AfficheTypeFactureId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeFactures.find(qtreel => qtreel.code == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
 typeOrdrePaiement() {
       return id => {
         if (id != null && id != "") {
@@ -2438,16 +2497,16 @@ numeroDecompte() {
 
 
 
-afficherTypeFactureProforma() {
+afficherDefProforma() {
                
-                        return  this.typeFactures.filter(normeEquipe => normeEquipe.code == 1);
+                        return  this.Defs.filter(normeEquipe => normeEquipe.code == 1);
                        
                  
             },
 
-afficherTypeFactureDefinitive() {
+afficherDefDefinitive() {
                
-                        return  this.typeFactures.filter(normeEquipe => normeEquipe.code == 2);
+                        return  this.Defs.filter(normeEquipe => normeEquipe.code == 2);
                        
                  
             },
@@ -3231,7 +3290,8 @@ var nouvelObjet = {
     // objet_facture:this.afficheObjetMarche(this.macheid),
       typeordrepaiement:this.typeOrdrePaiement(this.macheid),
       marchetype:this.afficheMarcheType,
-      etat_type_facture:0
+      etat_type_facture:0,
+      	typfacture_id:this.AfficheTypeFactureId(this.typeOrdrePaiement(this.macheid))
        };
       // var objetDecompte = {
       //   numero_decompte:this.numeroDecompte,

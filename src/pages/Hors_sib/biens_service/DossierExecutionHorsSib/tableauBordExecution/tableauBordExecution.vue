@@ -34,7 +34,7 @@
         </td>
         <td>
             <ul class="quick-actions" style="margin: 0px !important;"> 
-                 <li class="bg_lo span"> <a href="#" style="color:#FFFFFF;"><h4>TAUX </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{ratioAvenantMarche}}%</span><h4>RATIO AVENANT/MARCHE</h4></a> </li>
+                 <li class="bg_lo span"> <a href="#" style="color:#FFFFFF;"><h4>TAUX RATIO</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{ratioAvenantMarche}}%</span><h5>MONTANT AVENANT/MONTANT MARCHE</h5></a> </li>
             </ul>
 
         </td>
@@ -69,7 +69,7 @@
         </td>
          <td>
             <ul class="quick-actions" style="margin: 0px !important;"> 
-            <li class="bg_lr span"> <a href="#" style="color:#FFFFFF;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherMontantBudgetaireInitial(afficherIdLigneBudgetaire(afficherIdParent(macheid))) - sommeEgagementLigneTableau(macheid)))}}</span><h4>DISPONIBLE</h4></a> </li>
+            <li class="bg_lr span"> <a href="#" style="color:#FFFFFF;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherMontantBudgetaireInitial(afficherIdLigneBudgetaire(afficherIdParent(macheid))) - sommeEgagementLigneTableau(macheid)))}}</span><h4>ACTUEL</h4></a> </li>
             </ul>
 
         </td>

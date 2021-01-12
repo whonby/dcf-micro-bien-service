@@ -406,7 +406,7 @@ export default {
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.sib==1 && element.parent_id == null|| this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1 )
+            return colect.filter(element => element.gdenature_id == 5 && element.sib==1 && element.parent_id == null|| this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1 )
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -415,7 +415,7 @@ export default {
             // });
         }
 
- return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.sib==1 && element.parent_id == null || this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==1 )
+ return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.sib==1 && element.parent_id == null || element.gdenature_id == 5 && element.parent_id == null && element.sib==1 )
        
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
@@ -472,7 +472,7 @@ export default {
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==1 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+            return colect.filter(element => element.attribue == 0 && element.gdenature_id == 5 && element.parent_id == null && element.sib==1 )
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -481,7 +481,7 @@ export default {
             // }); 
         }
 
-        return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib==1 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+        return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && element.gdenature_id == 5 && element.parent_id == null && element.sib==1 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -512,11 +512,11 @@ export default {
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1  && element.parent_id == null && element.sib==1|| element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+            return colect.filter(element => element.gdenature_id == 5 && element.attribue == 1  && element.parent_id == null && element.sib==1|| element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
             
         }
 
-        return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 && element.parent_id == null && element.sib==1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
+        return this.gettersMarcheHorsib.filter(element => element.gdenature_id == 5 && element.attribue == 1 && element.parent_id == null && element.sib==1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1)
            
         
 

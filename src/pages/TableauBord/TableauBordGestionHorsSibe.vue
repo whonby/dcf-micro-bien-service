@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <div class="container-fluid" style="height: 200em">
 
             <div class="" style="margin-top: -30px">
@@ -195,11 +196,7 @@
 
                 </div>
 
-                <!--------------------FIN TABLEAU DE BORD FIN MARCHE---------------------->
-
-
-
-                <!---------------------TABLEAU DE BORD ETAT MARCHE--------------------->
+                
 
 
                 <div class="">
@@ -309,7 +306,7 @@
                         </div>
                     </div>
                 </div>
-                <!--------------------FIN TABLEAU BORD FIN ETAT MARCHE--------------->
+                
 
             </div>
         </div>

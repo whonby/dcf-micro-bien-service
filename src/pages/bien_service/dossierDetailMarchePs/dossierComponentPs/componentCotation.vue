@@ -10,7 +10,7 @@
                                  <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
                                             <tr>
-                                                <th>Ref {{macheid.id}}</th>
+                                                <th>Ref</th>
                                                 <th>Nom</th>
                                                 <th>Contact</th>
                                                 <th>Entreprise</th>
@@ -346,14 +346,19 @@ export default {
     props:["macheid"],
 
     created(){
+<<<<<<< HEAD
 this.formCotation.marche_id=this.macheid.id
         console.log()
+=======
+        this.formCotation.marche_id=this.macheid.id
+        console.log(this.macheid.id)
+>>>>>>> 1e79d662c2c081268d3d5560c3fcc98c0f38ff4a
     },
+    
     computed: {
 
             ...mapGetters("bienService", ["gettersCotations","appelOffres", "gettersCotationPersonnaliser" ,"gettersCotations"]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
-
 
                ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
             // ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',

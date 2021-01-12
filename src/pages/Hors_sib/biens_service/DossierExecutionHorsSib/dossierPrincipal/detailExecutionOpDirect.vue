@@ -1,4 +1,4 @@
-decision_cf
+controlleur_fin
 <template>
   	<div>
 

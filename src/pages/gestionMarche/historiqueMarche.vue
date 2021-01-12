@@ -7,6 +7,12 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
+            <div class="" align="right">
+                   <router-link :to="{name:'ajouterMarche'}" tag="a" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter
+
+                   </router-link> 
+
+                   </div><br>
           <!-- <download-excel
             class="btn btn-default pull-right"
             style="cursor:pointer;"

@@ -72,6 +72,7 @@
                   <span>TABLEAU DE BORD DE MARCHE</span>
               </a>
           </li>
+
          <li @click.prevent="navigateToGestionMarche" :class="{active: active_el ==19}">
           <a href="#">
             <i class="icon-truck"></i>
@@ -271,6 +272,7 @@ return objJson.id
         })
       },
       
+
  navigateToTransfert(){
         
         this.$router.push({
@@ -278,9 +280,9 @@ return objJson.id
         })
       },
 navigateToGestionMarche(){
-    this.activate(19)
+    this.activate(25)
     this.$router.push({
-        name: 'gestion_marche'
+        name: 'GestionMarcheHorSib'
     })
       },
       navigateTableBordBord(){
@@ -289,7 +291,7 @@ navigateToGestionMarche(){
               name: 'TableauBordGestionMarche'
           })
       },
-//GestionMarcheHorSib
+//GestionMarcheHorSib gestion_marche
 
       navigateToActeurDepense(){
         this.activate(31)

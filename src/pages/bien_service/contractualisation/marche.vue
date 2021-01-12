@@ -657,7 +657,7 @@ typeMarches
 
 </td>
 <td>
-    <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+    <router-link :to="{ name: 'detail_hors_sib', params: { id: marche.id }}"
                 class="btn btn-default " title="continue la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link>
@@ -838,7 +838,7 @@ typeMarches
                    
                    <td>
                     
-                      <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                      <router-link :to="{ name: 'detail_hors_sib', params: { id: marche.id }}"
                 class="btn btn-default " title="historique la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link>
@@ -1017,7 +1017,7 @@ typeMarches
 </td>
                      <div class="btn-group">
  
-                 <!-- <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                 <!-- <router-link :to="{ name: 'detail_hors_sib', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail marche proceduce simplifiée">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link>  -->
@@ -1113,7 +1113,7 @@ typeMarches
                    </td>
 
 <td>
-    <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+    <router-link :to="{ name: 'detail_hors_sib', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail marche">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link>
@@ -1815,7 +1815,7 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null)
+            return colect.filter(element => element.gdenature_id == 5 && element.parent_id == null && element.sib == 0 )
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1824,7 +1824,7 @@ getDateFinExécutionValue(){
             // });
         }
 
- return this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 1 || this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null)
+ return this.printMarcheNonAttribue.filter(element => element.gdenature_id == 5  && element.parent_id == null && element.sib == 0)
        
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1847,7 +1847,7 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null)
+            return colect.filter(element => element.attribue == 0 && element.gdenature_id == 5 && element.parent_id == null && element.sib == 0)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1856,7 +1856,7 @@ getDateFinExécutionValue(){
             // }); 
         }
 
-        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null)
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && element.gdenature_id == 5 && element.parent_id == null && element.sib == 0)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1880,11 +1880,11 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null)
+            return colect.filter(element => element.gdenature_id == 5 && element.attribue == 1  && element.parent_id == null && element.sib == 0)
             
         }
 
-        return this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null)
+        return this.printMarcheNonAttribue.filter(element => element.gdenature_id == 5 && element.attribue == 1  && element.parent_id == null && element.sib == 0)
            
         
 
@@ -1903,11 +1903,11 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 &&  element.difference_personnel_bienService == 2||this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 && element.difference_personnel_bienService == 2) 
+            return colect.filter(element => element.gdenature_id == 5  &&  element.difference_personnel_bienService == 2 && element.sib == 0) 
            
         }
 
-        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 &&  element.difference_personnel_bienService == 2||this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 && element.difference_personnel_bienService == 2)
+        return this.getActeEffetFinancierPersonnaliser45.filter(element => element.gdenature_id == 5  &&  element.difference_personnel_bienService == 2 && element.sib == 0)
             
         
 
@@ -1927,11 +1927,11 @@ afficherResilierPUA() {
                     return item
                 }
             })
-            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 && element.difference_personnel_bienService == null|| this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 && element.difference_personnel_bienService == null)
+            return colect.filter(element =>  element.gdenature_id == 5 && element.difference_personnel_bienService == null && element.sib == 0)
            
         }
 
-        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 && element.difference_personnel_bienService == null|| this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 && element.difference_personnel_bienService == null)
+        return this.getActeEffetFinancierPersonnaliser45.filter(element =>  element.gdenature_id == 5 && element.difference_personnel_bienService == null && element.sib == 0)
             
     },
 
@@ -1948,11 +1948,11 @@ afficherMarcheSupenduPAR_AU() {
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 7 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 1 || element.attribue == 7 && this.recupererCodeTypeMarche(element.type_marche_id) == 4)
+            return colect.filter(element => element.attribue == 7 &&  element.gdenature_id == 5 && element.sib == 0)
            
         }
 
-        return this.printMarcheNonAttribue.filter(element => element.attribue == 7 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 1 || element.attribue == 7 && this.recupererCodeTypeMarche(element.type_marche_id) == 4)
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 7 &&  element.gdenature_id == 5 && element.sib == 0)
             
         
 
@@ -1971,11 +1971,11 @@ afficherMarcherTerminerParUA() {
                     return item
                 }
             })
-            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 || this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 )
+            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && element.gdenature_id == 5 && element.sib == 0 )
             
         }
 
-        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 || this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 )
+        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 &&  element.gdenature_id == 5 && element.sib == 0 )
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1998,7 +1998,7 @@ afficherMarcherTerminerParUA() {
     },
 
 afficherLaListeDesMarche(){
-return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
+return this.printMarcheNonAttribue.filter(element => element.gdenature_id == 5 && element.sib == 0)
 },
 
 
@@ -2478,10 +2478,10 @@ return this.afficherResilierPUA.length
 // afficher la liste de marche en contratualisation
 
 afficheMarcheEnCoursContratualisation(){
-return this.afficherLaListeDesMarche.filter(element => element.attribue == 1 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 4  )
+return this.afficherLaListeDesMarche.filter(element => element.attribue == 1 &&  element.gdenature_id == 5 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 4  )
 },
 afficheMarcheSuspendu(){
-return this.afficherLaListeDesMarche.filter(element => element.attribue == 7 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 1 || element.attribue == 7 && this.recupererCodeTypeMarche(element.type_marche_id) == 4  )
+return this.afficherLaListeDesMarche.filter(element => element.attribue == 7 &&  element.gdenature_id == 5  )
 },
 nombreDeMarcheSuspendu(){
    return this.afficherMarcheSupenduPAR_AU.length;
@@ -2507,7 +2507,7 @@ montantEnContratualisation(){
 
 // afficher la liste des marche en planification
 afficheMarcheEnPlanification(){
-return this.afficherLaListeDesMarche.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 4 || element.attribue == 0 && element.type_marche.code_type_marche == 1)
+return this.afficherLaListeDesMarche.filter(element => element.attribue == 0 &&  element.gdenature_id == 5 && element.sib == 0)
 },
 
 

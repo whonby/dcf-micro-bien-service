@@ -266,7 +266,7 @@
                      <div class="control-group">
              <label class="control-label">Type de bien corporel</label>
               <div class="controls">
-                 <select  class="span" v-model="formData.typestockage">
+                 <!-- <select  class="span" v-model="formData.typestockage">
                       <option></option>                     
                      <option value="1">Matériel</option> 
                      <option value="2">Véhicule</option> 
@@ -274,7 +274,13 @@
                      <option value="4">Immobilier</option> 
                      <option value="5">Gros Travaux</option> 
                      
-                    </select>
+                    </select> -->
+                     <input
+                type="text"
+            :value="afficheLibelleTypeBien(AfficheTypeDeBien(famille_id))"
+                class="span"
+                readonly
+              />
               </div>
             </div>
                             </td>
@@ -295,17 +301,17 @@
                   <div class="widget-title">
                       
                     <ul class="nav nav-tabs">
-                     <li class=""><a data-toggle="tab" href="#materiel"  v-show="formData.typestockage == 1">Fiche Matériel</a></li>
-        <li class=""><a data-toggle="tab" href="#vehicule"  v-show="formData.typestockage == 2">Fiche Véhicule</a></li>
-         <li class=""><a data-toggle="tab" href="#Mobilier"  v-show="formData.typestockage == 3">Fiche Mobilier</a></li>
-        <li class=""><a data-toggle="tab" href="#Immobilier"  v-show="formData.typestockage == 4">Fiche Immobilier</a></li>
-        <li class=""><a data-toggle="tab" href="#Travaux"  v-show="formData.typestockage == 5">Fiche Gros Travaux</a></li>
+                     <li class="active"><a data-toggle="tab" href="#materiel"  v-if="AfficheTypeDeBien(famille_id) == 5">Fiche Matériel</a></li>
+        <li class="active"><a data-toggle="tab" href="#vehicule"  v-if="AfficheTypeDeBien(famille_id) == 9">Fiche Véhicule</a></li>
+         <li class="active"><a data-toggle="tab" href="#Mobilier"  v-if="AfficheTypeDeBien(famille_id) == 7">Fiche Mobilier</a></li>
+        <li class="active"><a data-toggle="tab" href="#Immobilier"  v-if="AfficheTypeDeBien(famille_id) == 11">Fiche Immobilier</a></li>
+        <li class="active"><a data-toggle="tab" href="#Travaux"  v-if="AfficheTypeDeBien(famille_id) == 12">Fiche Gros Travaux</a></li>
                       
                      
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
-                    <div id="Immobilier" class="tab-pane ">
+                    <div id="Immobilier" class="tab-pane active" v-if="AfficheTypeDeBien(famille_id) == 11">
                       <table class="table table-bordered table-striped" >
                         <tr>
                           <td>
@@ -448,7 +454,7 @@
                         </table>
                       </div>
                     <!--ongle identification-->
-                    <div id="Mobilier" class="tab-pane ">
+                    <div id="Mobilier" class="tab-pane active" v-if="AfficheTypeDeBien(famille_id) == 7">
                        <table class="table table-bordered table-striped" >
                <tr>
                      
@@ -539,7 +545,7 @@
                       
         </table>
                     </div>
-                  <div id="materiel" class="tab-pane ">
+                  <div id="materiel" class="tab-pane active" v-if="AfficheTypeDeBien(famille_id) == 5">
          <table class="table table-bordered table-striped" >
                <tr>
                      
@@ -606,14 +612,20 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Imputation comptable</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData1.immobilisation">
+                     <input
+                      type="text"
+                 :value="libelleImputationBudgetaire(recupererCodeImputationBudgetaire(recupererIdEquipement(famille_id)))"
+                      class="span"
+                      readonly
+                    />
+                    <!-- <select  class="span" v-model="formData1.immobilisation">
                       <option></option>                     
                        <option
                         v-for="typeUniteA in lesClassDe3"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.code}}-{{typeUniteA.libelle}}</option>
-                    </select>
+                    </select> -->
                   </div>
                 </div>
                       </td>
@@ -636,9 +648,9 @@
                   <div class="controls">
                     <input
                       type="text"
-                    v-model="formData1.durevie"
+                    :value="dureDeVie(famille_id)"
                       class="span"
-                      
+                      readonly
                     />
                   </div>
                 </div>
@@ -661,7 +673,7 @@
                       
         </table>
       </div>
-                      <div id="vehicule" class="tab-pane ">
+                      <div id="vehicule" class="tab-pane active" v-if="AfficheTypeDeBien(famille_id) == 9">
         
          <table class="table table-bordered table-striped">
             <tr>
@@ -1237,7 +1249,7 @@ props:["macheid"],
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
    ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-   ...mapGetters("SuiviImmobilisation", ["articles","familles","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
+   ...mapGetters("SuiviImmobilisation", ["Typebiengrpecorporels","equipements","articles","familles","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
    ...mapGetters('uniteadministrative',[
     "plans_programmes",
  "uniteAdministratives",
@@ -1281,6 +1293,84 @@ cf:cf,
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat","personnaliseActeurDepense",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
      
+
+AfficheTypeDeBien() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_bien;
+      }
+      return 
+        }
+      };
+    },
+
+  afficheLibelleTypeBien() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+libelleImputationBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 
+        }
+      };
+    },
+recupererIdEquipement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.equipemt_id;
+      }
+      return 
+        }
+      };
+    },
+    dureDeVie() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.dureVie;
+      }
+      return 
+        }
+      };
+    },
+recupererCodeImputationBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.equipements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 
+        }
+      };
+    },
+
  afficheListeArticleParFamille() {
       return id => {
         if (id != null && id != "") {
@@ -1787,7 +1877,7 @@ prixUnitaire() {
      AjouterVehicule() {
       
 
-if(this.formData.typestockage == 2){
+if(this.AfficheTypeDeBien(this.famille_id) == 9){
  var objetNew ={
         ...this.formData,
         anneebudgetaire:this.anneeAmort,
@@ -1822,11 +1912,13 @@ else{
         ...this.formData1,
         ua_id:this.formData.uAdministrative_id,
         marche_id:this.formData.marche_id,
-        type_bien:this.formData.typestockage,
+        type_bien:this.AfficheTypeDeBien(this.famille_id),
           fournisseur_id:this.formData.fournisseur_id,
           numero_marche:this.formData.numero_marche,
           numero_facture:this.formData.numero_facture,
-          article_id:this.formData.famill_id
+          article_id:this.formData.famill_id,
+          durevie:this.dureDeVie(this.famille_id),
+          famille_article_id:this.famille_id
       }
       var nouveauObjet1 ={
         

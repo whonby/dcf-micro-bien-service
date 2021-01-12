@@ -64,7 +64,7 @@ Affectation Véhicule
              </td>
              <td >
                 <div class="control-group">
-                  <label class="control-label">Article en Stock UA Emettrice{{uniteAdm_id}}</label>
+                  <label class="control-label">Article en Stock UA Emettrice</label>
                   <div class="controls">
                         <select v-model="formData2.famille_id" 
                          class="span5">
@@ -72,7 +72,7 @@ Affectation Véhicule
                         v-for="localgeo in listeArticleEnStock1(uniteAdm_id)"
                         :key="localgeo.id"
                         :value="localgeo.famill_id"
-                      >{{localgeo.famill_id}}</option>
+                      >{{libelleArticle(localgeo.famill_id)}}</option>
                     </select>
                    
                   </div>
@@ -80,7 +80,7 @@ Affectation Véhicule
              </td>
              <td>
      <div class="control-group">
-                  <label class="control-label">Marque des articles en Stock UA Emettrice{{formData2.famille_id}}</label>
+                  <label class="control-label">Marque des articles en Stock UA Emettrice</label>
                   <div class="controls">
                         <select v-model="formData2.marque_id" 
                          class="span5">
@@ -444,9 +444,9 @@ Affectation Véhicule
                        <li>
                         <a data-toggle="tab" href="#Véhiculeaffecter">Affectation Véhicule</a>
                       </li>
-                        <li>
+                        <!-- <li>
                         <a data-toggle="tab" href="#affecter1">Unité a une Autres Unité</a>
-                      </li>
+                      </li> -->
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
@@ -599,7 +599,7 @@ Affectation Véhicule
                         
                         <th style="">Fonction</th>
                     <!-- <th >Equipé</th> -->
-                     <th >Action</th>
+                     <th style="width:10%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -627,7 +627,7 @@ Affectation Véhicule
                         title="Detail Immobilisation"
                       >
                         <span>
-                          <i class="icon icon-folder-open"></i>
+                          <i class="icon icon-folder-open"></i> Voir Acticles
                         </span>
                       </router-link>
                      </td>
@@ -649,7 +649,7 @@ Affectation Véhicule
                         
                         <th style="">Service</th>
                         <th style="">Equipé</th>
-                        <th style="width:10px">Affectation</th>
+                        <th style="width:15px">Affectation</th>
                          
                     </tr>
                 </thead>
@@ -678,7 +678,7 @@ Affectation Véhicule
                         title=""
                       >
                         <span>
-                          <i class="icon icon-folder-open"></i>
+                          <i class="icon icon-folder-open"></i> Voir Acticles
                         </span>
                       </router-link>
                      </td>
@@ -779,7 +779,7 @@ Affectation Véhicule
                         title="Detail Afféctation"
                       >
                         <span>
-                          <i class="icon icon-folder-open"></i>
+                          <i class="icon icon-folder-open"> Affectation</i>
                         </span>
                       </router-link>
                       

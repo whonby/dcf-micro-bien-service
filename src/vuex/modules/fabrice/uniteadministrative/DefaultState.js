@@ -16,6 +16,7 @@ const defaultState = {
   realiteServiceFait: [],
   liquidation: [],
   decomptefactures: [],
+  historiqueDecomptefactures: [],
   // banqueUa: [],
   StructureOrganigrammeUa:[],
   budgetEclate:[],

@@ -1,5 +1,6 @@
 <template>
     <div>
+        
         <notifications />
         <div class="container-fluid">
             <hr>

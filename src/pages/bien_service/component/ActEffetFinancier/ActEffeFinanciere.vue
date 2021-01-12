@@ -654,7 +654,7 @@
       </tbody>
     </table>
   </div>
-
+<!-- <code v-if="this.getLotMarche < 0" style="color:red;font-size:14px;text-align:center"> Veuillez saisir au moins un lot </code> -->
  <div id="ajouterAct" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
@@ -1843,6 +1843,13 @@ name: "ActEffeFinanciere",
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe',
       'planActe']),
+
+
+ getLotMarche(){
+      return this.getMarchePersonnaliser.filter(item=>item.parent_id==this.macheid).length;
+    },
+
+
 afficherEntrepriseNom(){
       return id =>{
         if(id != null && id !=""){

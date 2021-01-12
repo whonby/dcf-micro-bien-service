@@ -1,3 +1,5 @@
+affiche_filtre
+uniteAdministratives
 <template>
   <div>
  <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
