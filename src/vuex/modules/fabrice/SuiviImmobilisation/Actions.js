@@ -2242,15 +2242,7 @@ export function modifierImmobilisationSortie({ commit,dispatch }, nouveau) {
         dispatch('getAllImmobilisation')
         dispatch('getAllImmobilisation')
         dispatch('getAllImmobilisation')
-        dispatch('getAllImmobilisation')
-        dispatch('getAllImmobilisation')
-        dispatch('getAllImmobilisation')
-        dispatch('getAllImmobilisation')
-        dispatch('getAllImmobilisation')
-        dispatch('getAllImmobilisation')
-        dispatch('getAllImmobilisation')
-        dispatch('getAllImmobilisation')
-        dispatch('getAllImmobilisation')
+        
         
       })
       
@@ -2265,4 +2257,60 @@ export function modifierImmobilisationSortie({ commit,dispatch }, nouveau) {
       //     asyncLoading(  
       //     axios.put("/modifier_immobilisation/" + nouveau.id,nouveau));
       // });
+}
+
+
+
+
+
+export function getAffectationUaBien({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/AffectionUa")
+          .then(response => {
+              commit("GET_ALL_AFFECTATION_UA_BIENS", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterAffectationUaBien({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/AffectionUa", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_AFFECTATION_UA_BIENS", response.data);
+
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+// modifier
+export function modifierAffectationUaBien({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/AffectionUa/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_AFFECTATION_UA_BIENS", response.data);
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerAffectationUaBien({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_AFFECTATION_UA_BIENS", id);
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/AffectionUa/" + id).then(() => dialog.close());
+      });
 }

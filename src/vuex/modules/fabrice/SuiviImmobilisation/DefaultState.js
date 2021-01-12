@@ -32,9 +32,9 @@ const defaultState = {
   Appreciations:[],
   ficheArticle:[],
   ua_idImo:"",
-  Typebiengrpecorporels:"",
-  groupecorporels:""
-
+  Typebiengrpecorporels:[],
+  groupecorporels:[],
+AffectationUaBiens:[]
 };
 
 export default defaultState;

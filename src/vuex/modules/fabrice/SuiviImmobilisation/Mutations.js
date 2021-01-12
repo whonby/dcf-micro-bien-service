@@ -1007,6 +1007,52 @@ export const SUPPRIMER_TYPE_BIEN_CORPOREL = (state, id) => {
 
 
 
+
+
+
+
+
+
+
+export const GET_ALL_AFFECTATION_UA_BIENS = (state, tableauNormeArticle) => {
+  state.AffectationUaBiens = tableauNormeArticle;
+};
+
+// ajouter NORME_EQUIPEMENTS
+export const AJOUTER_AFFECTATION_UA_BIENS = (state, nouveau_normeArt) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.AffectationUaBiens.unshift(nouveau_normeArt);
+};
+
+
+// modifier NORME_EQUIPEMENTS
+export const MODIFIER_AFFECTATION_UA_BIENS = (state, objetModifie) => {
+  state.AffectationUaBiens = state.AffectationUaBiens.map(norme => {
+    if (norme.id == objetModifie.id) {
+      norme = { ...objetModifie };
+    }
+
+    return norme;
+  });
+};
+
+// supprimer NORME_EQUIPEMENTS
+export const SUPPRIMER_AFFECTATION_UA_BIENS = (state, id) => {
+  state.AffectationUaBiens = state.AffectationUaBiens.filter(norme => norme.id != id);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 export {
   
 

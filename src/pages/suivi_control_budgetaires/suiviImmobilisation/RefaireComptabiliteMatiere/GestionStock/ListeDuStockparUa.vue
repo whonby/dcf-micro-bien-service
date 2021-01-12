@@ -1,4 +1,3 @@
-affiche_filtre
 uniteAdministratives
 <template>
   <div>

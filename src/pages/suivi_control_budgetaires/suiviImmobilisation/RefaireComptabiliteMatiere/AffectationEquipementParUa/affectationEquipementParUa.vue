@@ -52,7 +52,7 @@ Affectation Véhicule
                     <model-list-select style="background-color: #fff;"
                                                    class="wide"
                                                    :list="filtre_unite_admin"
-                                                   v-model="uniteAdm_id"
+                                                   v-model="ua_mettrice_id"
                                                    option-value="id"
                                                    option-text="libelle"
                                                    placeholder=""
@@ -66,10 +66,10 @@ Affectation Véhicule
                 <div class="control-group">
                   <label class="control-label">Article en Stock UA Emettrice</label>
                   <div class="controls">
-                        <select v-model="formData2.famille_id" 
+                        <select v-model="formData2.articles_id" 
                          class="span5">
                       <option
-                        v-for="localgeo in listeArticleEnStock1(uniteAdm_id)"
+                        v-for="localgeo in listeArticleEnStock1(ua_mettrice_id)"
                         :key="localgeo.id"
                         :value="localgeo.famill_id"
                       >{{libelleArticle(localgeo.famill_id)}}</option>
@@ -85,7 +85,7 @@ Affectation Véhicule
                         <select v-model="formData2.marque_id" 
                          class="span5">
                       <option
-                        v-for="localgeo in listeMarqueEnStock(formData2.famille_id)"
+                        v-for="localgeo in listeMarqueEnStock(formData2.articles_id)"
                         :key="localgeo[0].id"
                         :value="localgeo[0].marque_id"
                       >{{libellemarqueVehicules(localgeo[0].marque_id)}}</option>
@@ -96,15 +96,15 @@ Affectation Véhicule
   </td>
  <td>
      <div class="control-group">
-                  <label class="control-label">Modele des articles en Stock UA Emettrice{{formData2.marque_id}}</label>
+                  <label class="control-label">Modele des articles en Stock UA Emettrice</label>
                   <div class="controls">
                         <select v-model="formData2.model_id" 
                          class="span5">
                       <option
-                        v-for="localgeo in listeModelEnStock(formData2.marque_id,uniteAdm_id)"
-                        :key="localgeo[0].id"
-                        :value="localgeo[0].model_id"
-                      >{{libelleModeleVehicules(localgeo[0].model_id)}}</option>
+                        v-for="localgeo in listeModelEnStock(formData2.marque_id,ua_mettrice_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.model_id"
+                      >{{libelleModeleVehicules(localgeo.model_id)}}</option>
                     </select>
                    
                   </div>
@@ -115,7 +115,7 @@ Affectation Véhicule
 <tr>
   <td>
     <div class="control-group">
-            <label class="control-label">Quantité en stock</label>
+            <label class="control-label">Quantité en stock{{QteRestantUaEmettrice}}</label>
             <div class="controls">
               <input
                 type="text"
@@ -135,8 +135,8 @@ Affectation Véhicule
                 type="text"
                 
                 class="span5"
-                v-model="formData2.qtetransfert"
-               max="listeQuantiteEnStock(formData2.model_id)"
+                v-model="formData2.quantite"
+             
               />
             </div>
           </div>
@@ -149,7 +149,7 @@ Affectation Véhicule
                         <model-list-select style="background-color: #fff;"
                                                    class="wide"
                                                    :list="filtre_unite_admin"
-                                                   v-model="ua_id"
+                                                   v-model="ua_receptrice_id"
                                                    option-value="id"
                                                    option-text="libelle"
                                                    placeholder=""
@@ -160,7 +160,21 @@ Affectation Véhicule
                   </div>
                 </div>
              </td>
-             <td >
+             <td>
+    <div class="control-group">
+            <label class="control-label">Date de transfert</label>
+            <div class="controls">
+              <input
+                type="date"
+                
+                class="span5"
+                v-model="formData2.date_transfert"
+                
+              />
+            </div>
+          </div>
+  </td>
+             <!-- <td >
                 <div class="control-group">
                   <label class="control-label">Article en Stock UA Réceptrice</label>
                   <div class="controls">
@@ -175,11 +189,11 @@ Affectation Véhicule
                    
                   </div>
                 </div>
-             </td>
+             </td> -->
 </tr>
 <tr>
   
-             <td>
+             <!-- <td>
      <div class="control-group">
                   <label class="control-label">Marque des articles en Stock UA Réceptrice</label>
                   <div class="controls">
@@ -194,8 +208,8 @@ Affectation Véhicule
                    
                   </div>
                 </div>
-  </td>
- <td>
+  </td> -->
+ <!-- <td>
      <div class="control-group">
                   <label class="control-label">Modele des articles en Stock UA Réceptrice</label>
                   <div class="controls">
@@ -210,8 +224,8 @@ Affectation Véhicule
                    
                   </div>
                 </div>
-  </td>
-  <td>
+  </td> -->
+  <!-- <td>
     <div class="control-group">
             <label class="control-label">Quantité en stock</label>
             <div class="controls">
@@ -224,18 +238,21 @@ Affectation Véhicule
               />
             </div>
           </div>
-  </td>
-<td>
+  </td> -->
+
+</tr>
+<tr>
+  <td>
     <div class="control-group">
-            <label class="control-label">Date de transfert</label>
+            <label class="control-label">Autre Unité d'Administrative</label>
             <div class="controls">
               <input
-                type="date"
+                type="text"
                 
                 class="span5"
-                v-model="formData2.date_transfert"
+               v-model="formData2.autre_ua"
                 
-              />
+              /> 
             </div>
           </div>
   </td>
@@ -247,8 +264,8 @@ Affectation Véhicule
           
           class="btn btn-primary"
           href="#"
-          @click.prevent="ajouterTitreLocal(formData2)"
-        >Affecter</a>
+          @click.prevent="ajouterAffectationUaParUa"
+        >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
@@ -475,6 +492,7 @@ Affectation Véhicule
                      
                     
                    <th style="">UA Emettrice</th>
+                   <!-- <th style="">Famille</th>
                         <th style="">Articles</th>
                         
                         <th style="">Quantité </th>
@@ -483,32 +501,32 @@ Affectation Véhicule
                         <th style="">Articles</th>
                         
                         <th style="">Quantité </th>
-                        <th style="">Date de transfert </th>
+                        <th style="">Date de transfert </th> -->
                     <!-- <th >Equipé</th> -->
                      <th >Action</th>
                   </tr>
                 </thead>
-                <!-- <tbody>
+                <tbody>
                   
                   <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in listePersonnelNonEquipee(uniteAdministrative_id)"
-                    :key="BesoinImmo.id"
+                    v-for="BesoinImmo in groupeAffectationUaBiens"
+                    :key="BesoinImmo[0].id"
                   >
                   <td style="text-align: center;"
                    
-                    >{{afficherActeurDepenseMatricule(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td>
+                    >{{BesoinImmo[0].ua_mettrice_id || 'Non renseigné'}}</td>
                   
-                     <td style="text-align: center;"
+                     <!-- <td style="text-align: center;"
                    
-                    >{{afficherActeurDepenseNomPrenoms(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td>
+                    >{{BesoinImmo[0].acteur_depense_id || 'Non renseigné'}}</td>
                     <td style="text-align: center;"
                       
-                    >{{afficheFonction(BesoinImmo.fonction_id)}}</td>
-                   
+                    >{{BesoinImmo[0].fonction_id}}</td>
+                    -->
                      <td>
                        <router-link
-                        :to="{name : 'listedesArticleparPerso', params: {id:BesoinImmo.id}}"
+                        :to="{name : 'listedesArticleparPerso', params: {id:BesoinImmo[0].id}}"
                         class="btn btn-default"
                         title="Detail Immobilisation"
                       >
@@ -524,7 +542,7 @@ Affectation Véhicule
                  
                  
                  
-                </tbody> -->
+                </tbody>
               </table>
                     </div>
                      <div id="service" class="tab-pane ">
@@ -860,9 +878,9 @@ export default {
       editAffectation:{
         uniteadministrative:""
       },
-      uniteAdm_id:"",
+      ua_mettrice_id:"",
       uniteAdministrative_id:"",
-      ua_id:"",
+      ua_receptrice_id:"",
        affiche_filtre:false,
       affiche_boutton_filtre:true,
        formData2:{
@@ -875,7 +893,7 @@ export default {
         nature_bien:"",
         etat_immobilisation:"",
         cause_inactivite:"",
-
+marque_id:""
       },
        formData3:{
         famillearticle_id :"",
@@ -934,7 +952,7 @@ search:""
       // "chapitres",
       // "sections"
     ]),
-   ...mapGetters("SuiviImmobilisation", ["services",
+   ...mapGetters("SuiviImmobilisation", ["services","AffectationUaBiens","groupeAffectationUaBiens",
     "trieUaImmobilisation",
       "equipements",
       "familles",
@@ -971,7 +989,7 @@ search:""
    ]),
 
 QteRestantUaEmettrice() {
-      const val = parseFloat(this.listeQuantiteEnStock(this.formData2.model_id)) - parseFloat(this.formData2.qtetransfert);
+      const val = parseFloat(this.listeQuantiteEnStock(this.formData2.model_id)) - parseFloat(this.formData2.quantite);
       return parseFloat(val).toFixed(0);
     },
 
@@ -1517,6 +1535,19 @@ afficherLibelleService() {
         }
       };
     },
+
+      idMaterielEnStock() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.model_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
       },
 
       methods:{ 
@@ -1532,17 +1563,23 @@ afficherLibelleService() {
       // "ajouterHistoriqueBudgetGeneral"
     ]),
 ...mapActions("SuiviImmobilisation", [
+  "ajouterAffectationUaBien",
+  "modifierAffectationUaBien",
+  "supprimerAffectationUaBien",
        "ajouterImmobilisation",
        "modifierImmobilisation",
        "modifierStock",
        "ajouterHistotorisqueAffectionService",
        "modifierDemandeMateriel",
        'ajouterAffectationVehicule', 
-   'modifierAffectationVehicule', 'supprimerAffectationVehicule','modifierModeleVehicule']), 
+   'modifierAffectationVehicule',
+   'supprimerAffectationVehicule',
+   'modifierModeleVehicule']), 
      
     ...mapActions("uniteadministrative", [
       "ajouterNouveauVehicule",
-      "modifierVehicule"
+      "modifierVehicule",
+      "modifierStockArticle"
       ]),
 filter(){
                 this.affiche_filtre=!this.affiche_filtre
@@ -1565,6 +1602,38 @@ filter(){
 
       this.editAffectation = this.getvehicules.find(item=>item.id==id);
     },
+
+
+
+ajouterAffectationUaParUa() {
+      var nouveauObjet ={
+       
+        ua_mettrice_id:this.ua_mettrice_id,
+        anneebudgetaire:this.editAffectation.id,
+        articles_id:this.formData2.articles_id,
+        marque_id:this.formData2.marque_id,
+        model_id:this.formData2.model_id,
+        quantite:this.formData2.quantite,
+        ua_receptrice_id:this.ua_receptrice_id,
+        autre_ua:this.formData2.autre_ua,
+        date_transfert:this.formData2.date_transfert
+      }
+       var nouveauObjet2 ={
+       id:this.idMaterielEnStock(this.formData2.model_id),
+     quantitestock:this.QteRestantUaEmettrice
+       
+
+      }
+
+      this.ajouterAffectationUaBien(nouveauObjet)
+      this.modifierStockArticle(nouveauObjet2)
+ this.$("#exampleModal12").modal('hide');
+        this.formData = {
+              
+            
+        }
+    },
+
 
 
 
