@@ -8,9 +8,9 @@
                         <a @click.prevent="infrastucture" class="btn btn-default"
                            href="#">&#8606;</a>
                     </div>
-                    <div class="span11" align="left">
-                        <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button>
-                    </div>
+<!--                    <div class="span11" align="left">-->
+<!--                        <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button>-->
+<!--                    </div>-->
 
                     <div class="span11">
                         <h3 v-if="info_unite_admin">Situation {{info_unite_admin.libelle}} ,Nombre de marchés <font color="red">({{getterListeMarcheTableauBordFiltre.length}})</font>  </h3>
@@ -36,26 +36,37 @@
 
 
                 <div class="row-fluid">
-                    <div class="span12">
+                    <div class="span6">
                         Afficher
                         <select name="pets" id="pet-select" v-model="size" class="span3">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
                             <option value="100">100</option>
+                            <option value="1000">1000</option>
                         </select>
                         Entrer
+                    </div>
+                    <div class="span6" align="right">
+                        <button class="btn btn-default" @click="tableToExcel('table', 'En attente de contratualisation')">
+                            <img style="width: 20px !important; height: 20px !important;" src="https://img.icons8.com/windows/64/000000/export-excel.png"/>
+                        </button>
+                    </div>
+                    <hr>
+                    <div class="span12">
+
                         <div class="widget-content nopadding" v-if="getterListeMarcheTableauBordFiltre">
-                            <table class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped" ref="table" id="loremTable" summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
+                               
                                 <thead>
                                 <tr>
-                                    <th>N° D'ORDRE</th>
-                                    <th>OBJET DU MARCHE </th>
-                                    <th>MONTANT PREVISIONNEL</th>
-                                    <th>DATE PREVISIONNELLE DE DEBUT</th>
-                                    <th>TEMPS ECOULES A JOUR  J</th>
-                                    <th>TEMPS EVALUE HORS DELAI</th>
-                                    <th>Action</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">N° D'ORDRE</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">OBJET DU MARCHE </th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">MONTANT PREVISIONNEL</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE PREVISIONNELLE DE DEBUT</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">TEMPS ECOULES A JOUR  J</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">TEMPS EVALUE HORS DELAI</th>
+<!--                                    <th>Action</th>-->
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -66,7 +77,7 @@
                                     <td>{{formatageSomme(parseFloat(montantApprouve(item.id)))}}</td>
                                     <td></td>
                                     <td></td>
-                                    <td>Action</td>
+<!--                                    <td>Action</td>-->
                                 </tr>
                                 </tbody>
                             </table>
@@ -86,94 +97,7 @@
             </div>
         </div>
 
-        <vue-html2pdf
-                :show-layout="false"
-                :float-layout="true"
-                :enable-download="true"
-                :preview-modal="true"
-                :paginate-elements-by-height="1400"
-                filename="DCF"
-                :pdf-quality="2"
-                :manual-pagination="false"
-                pdf-format="a4"
-                pdf-orientation="landscape"
-                pdf-content-width="1000px"
-                @progress="onProgress($event)"
-                @hasStartedGeneration="hasStartedGeneration()"
-                @hasGenerated="hasGenerated($event)"
-                ref="html2Pdf"
-        >
-            <section slot="pdf-content">
 
-
-
-
-                <div class="row-fluid">
-
-
-                    <div class="span11">
-                        <h3 v-if="info_unite_admin">Situation {{info_unite_admin.libelle}} ,Nombre de marchés <font color="red">({{getterListeMarcheTableauBordFiltre.length}})</font>  </h3>
-                    </div>
-                    <div  class="span11">
-                        <nav aria-label="breadcrumb" class="main-breadcrumb" >
-                            <ol class="breadcrumb" :style="{background: getColorByStatus(info_marche_status),fontSize:'20px'}" align="center">
-
-                                <li class="breadcrumb-item" v-html="infoEtatMarche(info_marche_status)"></li>
-
-
-                            </ol>
-                            <ol class="breadcrumb">
-
-                                <li class="breadcrumb-item" v-if="info_region"><h5>Région {{info_region.libelle}}&nbsp;&nbsp;&nbsp;&nbsp; .</h5></li>
-                                <li class="breadcrumb-item" v-if="info_infrastructure"><h5> Infrastructure {{info_infrastructure.libelle}} &nbsp;&nbsp;&nbsp;&nbsp; .</h5></li>
-                                <li class="breadcrumb-item" v-if="info_type_marche"><h5> Type de Marche {{info_type_marche.libelle}} &nbsp;&nbsp;&nbsp;&nbsp; .</h5></li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-
-
-
-                <div class="row-fluid">
-                    <div class="span12">
-
-                        <div class="widget-content nopadding" v-if="getterListeMarcheTableauBordFiltre">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>N° D'ORDRE</th>
-                                    <th>OBJET DU MARCHE </th>
-                                    <th>MONTANT PREVISIONNEL</th>
-                                    <th>DATE PREVISIONNELLE DE DEBUT</th>
-                                    <th>TEMPS ECOULES A JOUR  J</th>
-                                    <th>TEMPS EVALUE HORS DELAI</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="odd gradeX" v-for="(item,index) in getterListeMarcheTableauBordFiltre" :key="item.id">
-                                    <td>{{index + 1}}</td>
-                                    <td>{{item.objet}} </td>
-                                    <td>{{formatageSomme(parseFloat(item.montant_marche))}}</td>
-                                    <td>{{formatageSomme(parseFloat(montantApprouve(item.id)))}}</td>
-                                    <td></td>
-                                    <td></td>
-
-                                </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
-
-            </section>
-        </vue-html2pdf>
     </div>
 </template>
 
@@ -196,6 +120,10 @@
                 page:0,
                 size:10,
                 active_el:false,
+                uri :'data:application/vnd.ms-excel;charset=UTF-8;base64,',
+                template:'<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+                base64: function(s){ return window.btoa(unescape(encodeURIComponent(s))) },
+                format: function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
             }
         },
         created(){
@@ -395,6 +323,11 @@ console.log(status)
                 this.page ++
             },
             formatageSomme:formatageSomme,
+            tableToExcel(table, name){
+                if (!table.nodeType) table = this.$refs.table
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+                window.location.href = this.uri + this.base64(this.format(this.template, ctx))
+            }
         }
     }
 </script>

@@ -509,7 +509,7 @@
                              })
 
                              let objet={
-                                 section:value['ZONE'],
+                                 section:value['SECTION'],
                                  zone:value['ZONE'],
                                  code_g:array_unite_ua[0],
                                  code:code_ua,
