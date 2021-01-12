@@ -111,11 +111,6 @@ const BienServiceRoutes = [
         component:TableauBordFinancier
     },
     {
-<<<<<<< HEAD
-        path:"/ppm_ua",
-        name:"PpmUa",
-        component:ppm_ua
-=======
         path:"/marche-sib",
         name:"listeMarche",
         component:listeMarcheSib
@@ -129,7 +124,6 @@ const BienServiceRoutes = [
         path:"/marche-hors-ppm",
         name:"marcheHorsppm",
         component:marcheHorsppm
->>>>>>> 1e79d662c2c081268d3d5560c3fcc98c0f38ff4a
     },
     {
         path:"/marche-hors-ppm-hors-sib",

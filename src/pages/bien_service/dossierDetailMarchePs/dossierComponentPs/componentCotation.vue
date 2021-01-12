@@ -346,13 +346,8 @@ export default {
     props:["macheid"],
 
     created(){
-<<<<<<< HEAD
-this.formCotation.marche_id=this.macheid.id
-        console.log()
-=======
         this.formCotation.marche_id=this.macheid.id
         console.log(this.macheid.id)
->>>>>>> 1e79d662c2c081268d3d5560c3fcc98c0f38ff4a
     },
     
     computed: {
