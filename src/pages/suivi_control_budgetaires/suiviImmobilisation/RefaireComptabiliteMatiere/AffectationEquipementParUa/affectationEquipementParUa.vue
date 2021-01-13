@@ -461,9 +461,9 @@ Affectation Véhicule
                        <li>
                         <a data-toggle="tab" href="#Véhiculeaffecter">Affectation Véhicule</a>
                       </li>
-                        <!-- <li>
+                        <li>
                         <a data-toggle="tab" href="#affecter1">Unité a une Autres Unité</a>
-                      </li> -->
+                      </li>
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
@@ -491,7 +491,7 @@ Affectation Véhicule
                   <tr>
                      
                     
-                   <th style="">UA Emettrice</th>
+                   <th style="width:90%">UA Emettrice</th>
                    <!-- <th style="">Famille</th>
                         <th style="">Articles</th>
                         
@@ -513,9 +513,9 @@ Affectation Véhicule
                     v-for="BesoinImmo in groupeAffectationUaBiens"
                     :key="BesoinImmo[0].id"
                   >
-                  <td style="text-align: center;"
+                  <td style="font-size:20px"
                    
-                    >{{BesoinImmo[0].ua_mettrice_id || 'Non renseigné'}}</td>
+                    >{{libelleUa(BesoinImmo[0].ua_mettrice_id) || 'Non renseigné'}}</td>
                   
                      <!-- <td style="text-align: center;"
                    
@@ -526,12 +526,12 @@ Affectation Véhicule
                     -->
                      <td>
                        <router-link
-                        :to="{name : 'listedesArticleparPerso', params: {id:BesoinImmo[0].id}}"
-                        class="btn btn-default"
-                        title="Detail Immobilisation"
+                        :to="{name : 'listeDesArticlesTransferer', params: {id:BesoinImmo[0].id}}"
+                        class="btn btn-success"
+                        title="Voir Article Transferé"
                       >
                         <span>
-                          <i class="icon icon-folder-open"></i>
+                          <i class="icon icon-folder-open"> Voir Article Transferé</i>
                         </span>
                       </router-link>
                      </td>
@@ -952,7 +952,7 @@ search:""
       // "chapitres",
       // "sections"
     ]),
-   ...mapGetters("SuiviImmobilisation", ["services","AffectationUaBiens","groupeAffectationUaBiens",
+   ...mapGetters("SuiviImmobilisation", ["services","AffectationUaBiens","groupeAffectationUaBiens","ficheArticle",
     "trieUaImmobilisation",
       "equipements",
       "familles",
@@ -1548,6 +1548,15 @@ afficherLibelleService() {
         }
       };
     },
+     anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
       },
 
       methods:{ 
@@ -1609,27 +1618,36 @@ ajouterAffectationUaParUa() {
       var nouveauObjet ={
        
         ua_mettrice_id:this.ua_mettrice_id,
-        anneebudgetaire:this.editAffectation.id,
+       
         articles_id:this.formData2.articles_id,
         marque_id:this.formData2.marque_id,
         model_id:this.formData2.model_id,
         quantite:this.formData2.quantite,
         ua_receptrice_id:this.ua_receptrice_id,
         autre_ua:this.formData2.autre_ua,
-        date_transfert:this.formData2.date_transfert
+        date_transfert:this.formData2.date_transfert,
+        anneebudgetaire:this.anneeAmort
       }
-    //    var nouveauObjet2 ={
-    //    id:this.idMaterielEnStock(this.formData2.model_id),
-    //  quantitestock:this.QteRestantUaEmettrice
+       var nouveauObjet2 ={
+       id:this.idMaterielEnStock(this.formData2.model_id),
+     quantitestock:this.QteRestantUaEmettrice
        
 
-    //   }
+      }
 
       this.ajouterAffectationUaBien(nouveauObjet)
-      // this.modifierStockArticle(nouveauObjet2)
- this.$("#exampleModal12").modal('hide');
-        this.formData = {
-              
+      this.modifierStockArticle(nouveauObjet2)
+//  this.$("#exampleModal12").modal('hide');
+        this.formData2 = {
+               ua_mettrice_id:"",
+        anneebudgetaire:"",
+        articles_id:"",
+        marque_id:"",
+        model_id:"",
+        quantite:"",
+        ua_receptrice_id:"",
+        autre_ua:"",
+        date_transfert:""
             
         }
     },

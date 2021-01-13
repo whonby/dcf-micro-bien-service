@@ -1,5 +1,5 @@
 import { groupBy } from "../../../../Repositories/Repository";
-articles
+
 export const Typebiengrpecorporels = state => state.Typebiengrpecorporels
 export const groupecorporels = state => state.groupecorporels
 export const AffectationUaBiens = state => state.AffectationUaBiens

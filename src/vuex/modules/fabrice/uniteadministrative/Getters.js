@@ -788,3 +788,8 @@ export const groupStockParMarque = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.GestionStockageArticles, "marque_id");
 };
+
+export const groupStockParUA = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.GestionStockageArticles, "uAdministrative_id");
+};

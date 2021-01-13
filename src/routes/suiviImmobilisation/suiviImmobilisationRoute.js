@@ -97,6 +97,8 @@ import demarrage from '../../pages/suivi_control_budgetaires/suiviImmobilisation
 import gestionStockCorporels from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/gestionStockCorporels.vue'
 
 
+import listeDesUaEquipementPatrimoine from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/listeDesUaEquipementPatrimoine.vue'
+
 
 
 
@@ -119,10 +121,27 @@ import principalExecution from '../../pages/suivi_control_budgetaires/suiviImmob
 
 
 
+ import listeDesArticlesTransferer from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/AffectationEquipementParUa/listeDesArticlesTransferer.vue'
+
+ import ListeEquipementEnStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierAffectation/ListeEquipementEnStock.vue'
+
 
 const suiviImmobilisationRoutes = [
-  
-  
+  {
+    path: "/ListeEquipementEnStock/:id",
+    name: "ListeEquipementEnStock",
+    component: ListeEquipementEnStock
+  },
+  {
+    path: "/listeDesUaEquipementPatrimoine/:id",
+    name: "listeDesUaEquipementPatrimoine",
+    component: listeDesUaEquipementPatrimoine
+  },
+  {
+    path: "/listeDesArticlesTransferer/:id",
+    name: "listeDesArticlesTransferer",
+    component: listeDesArticlesTransferer
+  },
   {
     path: "/SortiDuPatrimoine/:id",
     name: "SortiDuPatrimoine",
