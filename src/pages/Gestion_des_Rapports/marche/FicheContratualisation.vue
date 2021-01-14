@@ -2,6 +2,7 @@
     <div>
         <div class="container-fluid">
             <div class="span12" align="right">
+<!--                <button @click="exportHTML('Fichie de contratualisation')">Export as Word</button>-->
                 <button class="btn btn-default" @click="tableToExcel('table', 'Fichie de contratualisation')">
                     <img style="width: 20px !important; height: 20px !important;" src="https://img.icons8.com/windows/64/000000/export-excel.png"/>
                 </button>
@@ -35,17 +36,17 @@
                 </tr>
                 <tr>
                     <td><b>Objet de la consultation</b></td>
-                    <td colspan="5"><b>{{detail.objet}}</b></td>
+                    <td colspan="5" ><b>{{detail.objet}}</b></td>
                 </tr>
                 <tr>
                     <td><b>Type de procédure</b></td>
-                    <td colspan="2">{{detail.procedure_passation.libelle}}</td>
+                    <td colspan="2" align="center">{{detail.procedure_passation.libelle}}</td>
                     <td><b>Autorisation</b>:</td>
-                    <td colspan="2">Data in Column 3, Row 4</td>
+                    <td colspan="2" align="center">Data in Column 3, Row 4</td>
                 </tr>
                 <tr>
                     <td><b>Référence du Dossier de consultation</b></td>
-                    <td colspan="5"></td>
+                    <td colspan="5" align="center"></td>
                 </tr>
                 <tr>
                     <td><b>Nombre de lots du dossier de consultation</b></td>
@@ -88,43 +89,77 @@
                 </tr>
                 <tr>
                     <td><b>Identification de l'imputation budgétaire</b></td>
-                    <td colspan="2">{{detail.imputation}}</td>
+                    <td colspan="2" align="center">{{detail.imputation}}</td>
                     <td><b>Nombre d'entreprises ayant retiré le dossier de consultation</b></td>
-                    <td colspan="2">{{nbrEntrepriseDepoDossierCandidat(detail.id)}}</td>
+                    <td colspan="2" align="center">{{nbrEntrepriseDepoDossierCandidat(detail.id)}}</td>
                 </tr>
                 <tr>
                     <td><b>Montant de l'enveloppe budgétaire</b></td>
-                    <td colspan="2">{{formatageSomme(parseFloat(montantEnveloppeBudgetise(detail)))}}</td>
+                    <td colspan="2" align="center">{{formatageSomme(parseFloat(montantEnveloppeBudgetise(detail)))}}</td>
                     <td><b>Nombre d'entreprises a yant déposé une offre dans le délai requis</b></td>
-                    <td colspan="2">{{nbrEntrepriseDepoDossierDelai(detail.id)}}</td>
+                    <td colspan="2" align="center">{{nbrEntrepriseDepoDossierDelai(detail.id)}}</td>
                 </tr>
                 <tr>
                     <td><b>Montant de l'estimatif du marché</b></td>
-                    <td colspan="2">{{formatageSomme(parseFloat(detail.montant_marche))}}</td>
+                    <td colspan="2" align="center">{{formatageSomme(parseFloat(detail.montant_marche))}}</td>
                     <td><b>Nombre d'entreprises ayant déposé une offre hors délais</b></td>
-                    <td colspan="2">{{nbrEntrepriseDepoDossierHDelai(detail.id)}}</td>
+                    <td colspan="2" align="center">{{nbrEntrepriseDepoDossierHDelai(detail.id)}}</td>
                 </tr>
 
                 <tr>
                     <td><b>Nature des prix du marché</b></td>
-                    <td colspan="2"></td>
+                    <td colspan="2" align="center"></td>
                     <td><b>Date et heure de l'ouverture des plis</b></td>
-                    <td colspan="2">{{formaterDate(getDateOuverturePlis(detail.id))}}</td>
+                    <td colspan="2" align="center">{{formaterDate(getDateOuverturePlis(detail.id))}}</td>
                 </tr>
                 <tr>
                 <td><b>Délai d'exécution</b></td>
-                <td colspan="2"></td>
+                <td colspan="2" align="center"></td>
                 <td><b>Date du jugement </b></td>
-                <td colspan="2"></td>
+                <td colspan="2" align="center"></td>
               </tr>
                 <tr>
                     <td><b>Date et heure limites de réception des plis</b></td>
-                    <td colspan="2"></td>
+                    <td colspan="2" align="center"></td>
                     <td><b>Agent CF de suivi</b> </td>
-                    <td colspan="2"></td>
+                    <td colspan="2" align="center"></td>
                 </tr>
                 <tr>
                     <td colspan="6" style="background: #f2f2f2 !important;">EDITION DU MARCHE/CONTRAT</td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        <table class="table"  v-for="item in getLotMarche(detail.id)" :key="'l'+item.id">
+                            <tr>
+                                <td colspan="8" style="background: #68d7ca !important;">{{item.objet}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Numero du Marché issu de la contractualisation</b></td>
+                                <td colspan="3" align="center">{{getNumeroMarche(item)}}</td>
+                                <td><b>Cautionnement définitif</b> </td>
+                                <td colspan="3" align="center">{{formatageSomme(parseFloat(getCautionnementDefinitif(item)))}}
+                                   </td>
+                            </tr>
+                            <tr>
+                                <td><b>Date d'approbation</b></td>
+                                <td colspan="3" align="center">{{formaterDate(getDateApprobation(item))}}</td>
+                                <td><b>Avance de démarrage</b> </td>
+                                <td colspan="3" align="center">{{formatageSomme(parseFloat(getAvanceDemarageTTC(item)))}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Autorité approbatrice</b></td>
+                                <td colspan="3" align="center">{{getAutoriteApprobation(item)}}</td>
+                                <td><b>Engagement prévu année n</b> </td>
+                                <td colspan="3" align="center"></td>
+                            </tr>
+                            <tr>
+                                <td><b>Date de l'ordre de service de démarrage</b></td>
+                                <td colspan="3" align="center">{{formaterDate(getDateOrdreServiceDemarage(item))}}</td>
+                                <td><b>Engagement prévu année n+1</b> </td>
+                                <td colspan="3" align="center"></td>
+                            </tr>
+                        </table>
+                    </td>
                 </tr>
 
             </table>
@@ -166,7 +201,9 @@
             this.detail = this.marches.find(
                 idmarche => idmarche.id == this.$route.params.id
             )
-      //   console.log(this.nombreDejourCalcule("2021-01-12","2021-01-14"));
+            console.log(".........................")
+       console.log(this.detail);
+            console.log("...........000000000..............")
         },
         computed:{
 
@@ -367,8 +404,65 @@
                   return "1970-01-01"
               }
             },
-
-
+           getNumeroMarche(){
+             return marche=>{
+                 console.log(marche)
+                 if(marche.numero_marche!=""){
+                     return marche.numero_marche
+                 }
+                 return ""
+             }
+           },
+           getDateApprobation(){
+               return marche=>{
+                   console.log(marche)
+                   if(marche.acte_effet_financiare.length>0){
+                       let act=marche.acte_effet_financiare[0]
+                       return act.date_approbation
+                   }
+                   return ""
+               }
+           },
+            getAutoriteApprobation(){
+                return marche=>{
+                    console.log(marche)
+                    if(marche.acte_effet_financiare.length>0){
+                        let act=marche.acte_effet_financiare[0]
+                        return act.autorite_approbation
+                    }
+                    return ""
+                }
+            },
+            getDateOrdreServiceDemarage(){
+                return marche=>{
+                    console.log(marche)
+                    if(marche.acte_effet_financiare.length>0){
+                        let act=marche.acte_effet_financiare[0]
+                        return act.date_odre_service
+                    }
+                    return ""
+                }
+            },
+            getCautionnementDefinitif(){
+                return marche=>{
+                    console.log(marche)
+                    if(marche.acte_effet_financiare.length>0){
+                        let act=marche.acte_effet_financiare[0]
+                        return act.montant_ht_cautionnement
+                    }
+                    return 0
+                }
+            },
+            getAvanceDemarageTTC(){
+                return marche=>{
+                    console.log(marche)
+                    if(marche.acte_effet_financiare.length>0){
+                        let act=marche.acte_effet_financiare[0]
+                        return act.avance_demarrage_ttc
+                    }
+                    return 0
+                }
+            },
             bailleuEtat(){
               return bailleur=>{
                   console.log(bailleur)
@@ -437,8 +531,23 @@
                 window.location.href = this.uri + this.base64(this.format(this.template, ctx))
             },
             formaterDate(date){
+                if(date=="")
+                    return ""
                 return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
+            exportHTML(titre){
+                let table = this.$refs.table
+                // var vm = this,
+                    let word = `<html xmlns:o='urn:schemas-microsoft-com:office:office xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>${titre}</title></head><body>${table}</body></html>`;
+
+                var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(word);
+                var fileDownload = document.createElement("a");
+                document.body.appendChild(fileDownload);
+                fileDownload.href = source;
+                fileDownload.download = 'document.doc';
+                fileDownload.click();
+                document.body.removeChild(fileDownload);
+            }
         }
     }
 </script>
