@@ -33,13 +33,40 @@
                 <div class="widget-box">
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
-                     <li class="active">
-                        <a data-toggle="tab" href="#EntreeEnStock" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '01'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
+                     <!-- <li class="active">
+                        <a data-toggle="tab" href="#EntreeEnStock">Mon Patrimoine</a>
+                      </li> -->
+                       <li class="active" v-if="AfficheCode1 == 3">
+                        <a data-toggle="tab" href="#EntreeEnStock" >{{AfficheLibelle1}}</a>
                       </li>
-                       <li class="">
-                        <a data-toggle="tab" href="#Affectation" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '02'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
+                       <li class="" v-if="AfficheCode2 == 1">
+                        <a data-toggle="tab" href="#Affectation2" >{{AfficheLibelle2}}</a>
                       </li>
-                       <li class="">
+                       <li class="" v-if="AfficheCode3 == 2">
+                        <a data-toggle="tab" href="#Affectation3" >{{AfficheLibelle3}}</a>
+                      </li>
+                       <li class="" v-if="AfficheCode4 == 4">
+                        <a data-toggle="tab" href="#Affectation4" >{{AfficheLibelle4}}</a>
+                      </li>
+                       <li class="" v-if="AfficheCode5 == 5">
+                        <a data-toggle="tab" href="#Affectation5" >{{AfficheLibelle5}}</a>
+                      </li>
+                       <li class="" v-if="AfficheCode6 == 6">
+                        <a data-toggle="tab" href="#Affectation6" >{{AfficheLibelle6}}</a>
+                      </li>
+                       <li class="" v-if="AfficheCode7 == 7">
+                        <a data-toggle="tab" href="#Affectation7" >{{AfficheLibelle7}}</a>
+                      </li>
+                       <li class="" v-if="AfficheCode8 == 8">
+                        <a data-toggle="tab" href="#Affectation8" >{{AfficheLibelle8}}</a>
+                      </li>
+                       <!-- <li class="" v-if="AfficheCode9 == 9">
+                        <a data-toggle="tab" href="#Affectation" >{{AfficheLibelle9}}</a>
+                      </li>
+                       <li class="" v-if="AfficheCode10 == 10">
+                        <a data-toggle="tab" href="#Affectation" >{{AfficheLibelle10}}</a>
+                      </li> -->
+                       <!-- <li class="">
                         <a data-toggle="tab" href="#Reparation" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '03'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
                       </li>
                         <li class="">
@@ -63,647 +90,28 @@
                       <li class="">
                         <a data-toggle="tab" href="#Inventaire" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '10'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
                       </li>
-                     
+                      -->
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
 
 
-          <div class="tab-pane active"  v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '01'">
+<div class="tab-pane " id="Affectation8" >
             <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                      
                     
                     
-                     <th>Famille</th>
-                     <th>Marque</th>
-                     <th>Model</th>
+                     <th style="width:15%">Article</th>
+                     <th style="width:15%">Marque</th>
+                     <th style="width:15%">Modèle</th>
+                     <th style="width:15%">No série</th>
                     <!-- <th>Quantité Initiale</th>  -->
-                    <th title="quantite en stock">Quantité Actuelle</th>
-                    
-                   
-                    <!-- <th style="width:10%">Action</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                     <tr
-                    class="odd gradeX"
-                    v-for="stock in listeDesEquipementPar01(detail_Ua.uAdministrative_id)"
-                    :key="stock.id"
-                  >
-
-                    <!-- <td
-                      @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
-                    <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleUniteAdministrative(stock.uAdministrative_id)	 || 'Non renseigné'}}</td> -->
-                     <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleTypeEquipement(stock.typeequipe_id) || 'Non renseigné'}}</td>  -->
-                    <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleFamilleEquipement(stock.famill_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
-                    
-                    <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.quantitestock || 'Non renseigné'}}</td>
-                  
-                    <td>
-                        <!-- <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
-                        <span>
-                          <i class=" icon-edit"></i>
-                        </span>
-                      </button> -->
-                      <!-- <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
-                        <span>
-                          <i class="icon icon-trash"></i> Supprimer
-                        </span>
-                      </button> -->
-                    </td>
-                  </tr>
-                   <!-- <tr
-                   
-                  >
-                <td></td>
-                <td></td>
-                <td></td>
-                      <td style="font-weight:bold;">Total</td>
-                   <td  style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(uniteAdministrative_id) || 0 }}</td>
-                    <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                   
-                  </tr> -->
-                </tbody>
-              </table>
-            
-             </div>
-          <div id="Affectation" class="tab-pane active"  v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '02'">
-         
-            <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    
-                    
-                     <th>Famille</th>
-                     <th>Marque</th>
-                     <th>Model</th>
-                    <!-- <th>Quantité Initiale</th>  -->
-                    <th title="quantite en stock">Quantité Actuelle</th>
-                    
-                   
-                    <!-- <th style="width:10%">Action</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                     <tr
-                    class="odd gradeX"
-                    v-for="stock in listeDesEquipementPar02(detail_Ua.uAdministrative_id)"
-                    :key="stock.id"
-                  >
-
-                    <!-- <td
-                      @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
-                    <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleUniteAdministrative(stock.uAdministrative_id)	 || 'Non renseigné'}}</td> -->
-                     <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleTypeEquipement(stock.typeequipe_id) || 'Non renseigné'}}</td>  -->
-                    <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleFamilleEquipement(stock.famill_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
-                    
-                    <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.quantitestock || 'Non renseigné'}}</td>
-                  
-                    <td>
-                        <!-- <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
-                        <span>
-                          <i class=" icon-edit"></i>
-                        </span>
-                      </button> -->
-                      <!-- <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
-                        <span>
-                          <i class="icon icon-trash"></i> Supprimer
-                        </span>
-                      </button> -->
-                    </td>
-                  </tr>
-                   <!-- <tr
-                   
-                  >
-                <td></td>
-                <td></td>
-                <td></td>
-                      <td style="font-weight:bold;">Total</td>
-                   <td  style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(uniteAdministrative_id) || 0 }}</td>
-                    <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                   
-                  </tr> -->
-                </tbody>
-              </table>
-            
-           
-             </div>
- <div id="" class="tab-pane active"  v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '03'">
-    <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    
-                    
-                     <th>Famille</th>
-                     <th>Marque</th>
-                     <th>Model</th>
-                    <!-- <th>Quantité Initiale</th>  -->
-                    <th title="quantite en stock">Quantité Actuelle</th>
-                    
-                   
-                    <!-- <th style="width:10%">Action</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                     <tr
-                    class="odd gradeX"
-                    v-for="stock in listeDesEquipementPar03(detail_Ua.uAdministrative_id)"
-                    :key="stock.id"
-                  >
-
-                    <!-- <td
-                      @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
-                    <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleUniteAdministrative(stock.uAdministrative_id)	 || 'Non renseigné'}}</td> -->
-                     <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleTypeEquipement(stock.typeequipe_id) || 'Non renseigné'}}</td>  -->
-                    <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleFamilleEquipement(stock.famill_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
-                    
-                    <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.quantitestock || 'Non renseigné'}}</td>
-                  
-                    <td>
-                        <!-- <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
-                        <span>
-                          <i class=" icon-edit"></i>
-                        </span>
-                      </button> -->
-                      <!-- <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
-                        <span>
-                          <i class="icon icon-trash"></i> Supprimer
-                        </span>
-                      </button> -->
-                    </td>
-                  </tr>
-                   <!-- <tr
-                   
-                  >
-                <td></td>
-                <td></td>
-                <td></td>
-                      <td style="font-weight:bold;">Total</td>
-                   <td  style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(uniteAdministrative_id) || 0 }}</td>
-                    <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                   
-                  </tr> -->
-                </tbody>
-              </table>
-   
-    </div>
-<div id="" class="tab-pane active"  v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '04'">
-  <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    
-                    
-                     <th>Famille</th>
-                     <th>Marque</th>
-                     <th>Model</th>
-                    <!-- <th>Quantité Initiale</th>  -->
-                    <th title="quantite en stock">Quantité Actuelle</th>
-                    
-                   
-                    <!-- <th style="width:10%">Action</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                     <tr
-                    class="odd gradeX"
-                    v-for="stock in listeDesEquipementPar04(detail_Ua.uAdministrative_id)"
-                    :key="stock.id"
-                  >
-
-                    <!-- <td
-                      @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
-                    <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleUniteAdministrative(stock.uAdministrative_id)	 || 'Non renseigné'}}</td> -->
-                     <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleTypeEquipement(stock.typeequipe_id) || 'Non renseigné'}}</td>  -->
-                    <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleFamilleEquipement(stock.famill_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
-                    
-                    <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.quantitestock || 'Non renseigné'}}</td>
-                  
-                    <td>
-                        <!-- <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
-                        <span>
-                          <i class=" icon-edit"></i>
-                        </span>
-                      </button> -->
-                      <!-- <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
-                        <span>
-                          <i class="icon icon-trash"></i> Supprimer
-                        </span>
-                      </button> -->
-                    </td>
-                  </tr>
-                   <!-- <tr
-                   
-                  >
-                <td></td>
-                <td></td>
-                <td></td>
-                      <td style="font-weight:bold;">Total</td>
-                   <td  style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(uniteAdministrative_id) || 0 }}</td>
-                    <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                   
-                  </tr> -->
-                </tbody>
-              </table>
-            
-   </div>
- <div id="" class="tab-pane active"  v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '05'">
-   <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    
-                    
-                     <th>Famille</th>
-                     <th>Marque</th>
-                     <th>Model</th>
-                    <!-- <th>Quantité Initiale</th>  -->
-                    <th title="quantite en stock">Quantité Actuelle</th>
-                    
-                   
-                    <!-- <th style="width:10%">Action</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                     <tr
-                    class="odd gradeX"
-                    v-for="stock in listeDesEquipementPar05(detail_Ua.uAdministrative_id)"
-                    :key="stock.id"
-                  >
-
-                    <!-- <td
-                      @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
-                    <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleUniteAdministrative(stock.uAdministrative_id)	 || 'Non renseigné'}}</td> -->
-                     <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleTypeEquipement(stock.typeequipe_id) || 'Non renseigné'}}</td>  -->
-                    <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleFamilleEquipement(stock.famill_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
-                    
-                    <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.quantitestock || 'Non renseigné'}}</td>
-                  
-                    <td>
-                        <!-- <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
-                        <span>
-                          <i class=" icon-edit"></i>
-                        </span>
-                      </button> -->
-                      <!-- <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
-                        <span>
-                          <i class="icon icon-trash"></i> Supprimer
-                        </span>
-                      </button> -->
-                    </td>
-                  </tr>
-                   <!-- <tr
-                   
-                  >
-                <td></td>
-                <td></td>
-                <td></td>
-                      <td style="font-weight:bold;">Total</td>
-                   <td  style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(uniteAdministrative_id) || 0 }}</td>
-                    <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                   
-                  </tr> -->
-                </tbody>
-              </table>
-            
-    </div>
-
-        <div id="" class="tab-pane active"  v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '06'">
-          <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    
-                    
-                     <th>Famille</th>
-                     <th>Marque</th>
-                     <th>Model</th>
-                    <!-- <th>Quantité Initiale</th>  -->
-                    <th title="quantite en stock">Quantité Actuelle</th>
-                    
-                   
-                    <!-- <th style="width:10%">Action</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                     <tr
-                    class="odd gradeX"
-                    v-for="stock in listeDesEquipementPar06(detail_Ua.uAdministrative_id)"
-                    :key="stock.id"
-                  >
-
-                    <!-- <td
-                      @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
-                    <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleUniteAdministrative(stock.uAdministrative_id)	 || 'Non renseigné'}}</td> -->
-                     <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleTypeEquipement(stock.typeequipe_id) || 'Non renseigné'}}</td>  -->
-                    <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleFamilleEquipement(stock.famill_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
-                    
-                    <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.quantitestock || 'Non renseigné'}}</td>
-                  
-                    <td>
-                        <!-- <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
-                        <span>
-                          <i class=" icon-edit"></i>
-                        </span>
-                      </button> -->
-                      <!-- <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
-                        <span>
-                          <i class="icon icon-trash"></i> Supprimer
-                        </span>
-                      </button> -->
-                    </td>
-                  </tr>
-                   <!-- <tr
-                   
-                  >
-                <td></td>
-                <td></td>
-                <td></td>
-                      <td style="font-weight:bold;">Total</td>
-                   <td  style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(uniteAdministrative_id) || 0 }}</td>
-                    <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                   
-                  </tr> -->
-                </tbody>
-              </table>
-            
-           </div>
-        <div id="" class="tab-pane active"  v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '07'">
-
-          <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    
-                    
-                     <th>Famille</th>
-                     <th>Marque</th>
-                     <th>Model</th>
-                    <!-- <th>Quantité Initiale</th>  -->
-                    <th title="quantite en stock">Quantité Actuelle</th>
-                    
-                   
-                    <!-- <th style="width:10%">Action</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                     <tr
-                    class="odd gradeX"
-                    v-for="stock in listeDesEquipementPar07(detail_Ua.uAdministrative_id)"
-                    :key="stock.id"
-                  >
-
-                    <!-- <td
-                      @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
-                    <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleUniteAdministrative(stock.uAdministrative_id)	 || 'Non renseigné'}}</td> -->
-                     <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleTypeEquipement(stock.typeequipe_id) || 'Non renseigné'}}</td>  -->
-                    <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleFamilleEquipement(stock.famill_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
-                    
-                    <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.quantitestock || 'Non renseigné'}}</td>
-                  
-                    <td>
-                        <!-- <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
-                        <span>
-                          <i class=" icon-edit"></i>
-                        </span>
-                      </button> -->
-                      <!-- <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
-                        <span>
-                          <i class="icon icon-trash"></i> Supprimer
-                        </span>
-                      </button> -->
-                    </td>
-                  </tr>
-                   <!-- <tr
-                   
-                  >
-                <td></td>
-                <td></td>
-                <td></td>
-                      <td style="font-weight:bold;">Total</td>
-                   <td  style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(uniteAdministrative_id) || 0 }}</td>
-                    <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                   
-                  </tr> -->
-                </tbody>
-              </table>
-            
-        </div>
-        <div id="" class="tab-pane active"  v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '08'">
-          <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    
-                    
-                     <th>Famille</th>
-                     <th>Marque</th>
-                     <th>Model</th>
-                    <!-- <th>Quantité Initiale</th>  -->
-                    <th title="quantite en stock">Quantité Actuelle</th>
-                    
-                   
-                    <!-- <th style="width:10%">Action</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                     <tr
-                    class="odd gradeX"
-                    v-for="stock in listeDesEquipementPar08(detail_Ua.uAdministrative_id)"
-                    :key="stock.id"
-                  >
-
-                    <!-- <td
-                      @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
-                    <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleUniteAdministrative(stock.uAdministrative_id)	 || 'Non renseigné'}}</td> -->
-                     <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleTypeEquipement(stock.typeequipe_id) || 'Non renseigné'}}</td>  -->
-                    <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleFamilleEquipement(stock.famill_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
-                    
-                    <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.quantitestock || 'Non renseigné'}}</td>
-                  
-                    <td>
-                        <!-- <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
-                        <span>
-                          <i class=" icon-edit"></i>
-                        </span>
-                      </button> -->
-                      <!-- <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
-                        <span>
-                          <i class="icon icon-trash"></i> Supprimer
-                        </span>
-                      </button> -->
-                    </td>
-                  </tr>
-                   <!-- <tr
-                   
-                  >
-                <td></td>
-                <td></td>
-                <td></td>
-                      <td style="font-weight:bold;">Total</td>
-                   <td  style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(uniteAdministrative_id) || 0 }}</td>
-                    <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                   
-                  </tr> -->
-                </tbody>
-              </table>
-            
-        </div>
-        <div id="" class="tab-pane active"  v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '09'">
-          <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    
-                    
-                     <th>Famille</th>
-                     <th>Marque</th>
-                     <th>Model</th>
-                    <!-- <th>Quantité Initiale</th>  -->
-                    <th title="quantite en stock">Quantité Actuelle</th>
-                    
-                   
-                    <!-- <th style="width:10%">Action</th> -->
+                    <th style="width:15%">Quantité</th>
+                    <th style="width:15%">Valeur d'acquisition</th>
+                   <!-- <th style="width:15%">Valeur net comptable</th> -->
+                    <th style="width:10%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -713,136 +121,545 @@
                     :key="stock.id"
                   >
 
-                    <!-- <td
-                      @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
-                    <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleUniteAdministrative(stock.uAdministrative_id)	 || 'Non renseigné'}}</td> -->
-                     <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleTypeEquipement(stock.typeequipe_id) || 'Non renseigné'}}</td>  -->
                     <td
                       @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleFamilleEquipement(stock.famill_id) || 'Non renseigné'}}</td>
+                    >{{libelleFamilleEquipement(stock.articlestock_id) || 'Non renseigné'}}</td>
                      <td
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
                      <td
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
-                    
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.numchassis || 'Non renseigné'}}</td>
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{stock.quantitestock || 'Non renseigné'}}</td>
+                  <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{formatageSomme(parseFloat((parseFloat(stock.quantitestock)*parseFloat(stock.prix_unitaire)))) || 'Non renseigné'}}</td>
+                    <!-- <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.immatriculation || 'Non renseigné'}}</td> -->
                   
-                    <td>
-                        <!-- <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
+                       <td>
+                       <router-link
+                        :to="{name : '', params: {id:stock.id}}"
+                        class="btn btn-success"
+                        title="Faire Affectation"
+                      >
                         <span>
-                          <i class=" icon-edit"></i>
+                          <i class="icon icon-folder-open"> Voir Détail</i>
                         </span>
-                      </button> -->
-                      <!-- <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
-                        <span>
-                          <i class="icon icon-trash"></i> Supprimer
-                        </span>
-                      </button> -->
-                    </td>
+                      </router-link>
+                     </td>
+                    
                   </tr>
-                   <!-- <tr
-                   
-                  >
-                <td></td>
-                <td></td>
-                <td></td>
-                      <td style="font-weight:bold;">Total</td>
-                   <td  style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(uniteAdministrative_id) || 0 }}</td>
-                    <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                   
-                  </tr> -->
+               
                 </tbody>
               </table>
             
-        </div>
-        <div id="" class="tab-pane active"  v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '10'">
-          <table class="table table-bordered table-striped">
+             </div>
+
+
+<div class="tab-pane " id="Affectation7" >
+            <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                      
                     
                     
-                     <th>Famille</th>
-                     <th>Marque</th>
-                     <th>Model</th>
+                     <th style="width:15%">Article</th>
+                     <th style="width:15%">Marque</th>
+                     <th style="width:15%">Modèle</th>
+                     <th style="width:15%">No série</th>
                     <!-- <th>Quantité Initiale</th>  -->
-                    <th title="quantite en stock">Quantité Actuelle</th>
-                    
-                   
-                    <!-- <th style="width:10%">Action</th> -->
+                    <th style="width:15%">Quantité</th>
+                    <th style="width:15%">Valeur d'acquisition</th>
+                   <!-- <th style="width:15%">Valeur net comptable</th> -->
+                    <th style="width:10%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                      <tr
                     class="odd gradeX"
-                    v-for="stock in listeDesEquipementPar10(detail_Ua.uAdministrative_id)"
+                    v-for="stock in listeDesEquipementPar08(detail_Ua.uAdministrative_id)"
                     :key="stock.id"
                   >
 
-                    <!-- <td
-                      @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
-                    <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleUniteAdministrative(stock.uAdministrative_id)	 || 'Non renseigné'}}</td> -->
-                     <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleTypeEquipement(stock.typeequipe_id) || 'Non renseigné'}}</td>  -->
                     <td
                       @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleFamilleEquipement(stock.famill_id) || 'Non renseigné'}}</td>
+                    >{{libelleFamilleEquipement(stock.articlestock_id) || 'Non renseigné'}}</td>
                      <td
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
                      <td
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
-                    
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.numchassis || 'Non renseigné'}}</td>
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{stock.quantitestock || 'Non renseigné'}}</td>
+                  <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{formatageSomme(parseFloat((parseFloat(stock.quantitestock)*parseFloat(stock.prix_unitaire)))) || 'Non renseigné'}}</td>
+                    <!-- <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.immatriculation || 'Non renseigné'}}</td> -->
                   
-                    <td>
-                        <!-- <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
+                       <td>
+                       <router-link
+                        :to="{name : '', params: {id:stock.id}}"
+                        class="btn btn-success"
+                        title="Faire Affectation"
+                      >
                         <span>
-                          <i class=" icon-edit"></i>
+                          <i class="icon icon-folder-open"> Voir Détail</i>
                         </span>
-                      </button> -->
-                      <!-- <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
-                        <span>
-                          <i class="icon icon-trash"></i> Supprimer
-                        </span>
-                      </button> -->
-                    </td>
+                      </router-link>
+                     </td>
+                    
                   </tr>
-                   <!-- <tr
-                   
-                  >
-                <td></td>
-                <td></td>
-                <td></td>
-                      <td style="font-weight:bold;">Total</td>
-                   <td  style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(uniteAdministrative_id) || 0 }}</td>
-                    <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                   
-                  </tr> -->
+               
                 </tbody>
               </table>
             
-        </div>
+             </div>
+
+
+
+
+<div class="tab-pane " id="Affectation6" >
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    
+                    
+                     <th style="width:15%">Article</th>
+                     <th style="width:15%">Marque</th>
+                     <th style="width:15%">Modèle</th>
+                     <th style="width:15%">No série</th>
+                    <!-- <th>Quantité Initiale</th>  -->
+                    <th style="width:15%">Quantité</th>
+                    <th style="width:15%">Valeur d'acquisition</th>
+                   <!-- <th style="width:15%">Valeur net comptable</th> -->
+                    <th style="width:10%">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                     <tr
+                    class="odd gradeX"
+                    v-for="stock in listeDesEquipementPar07(detail_Ua.uAdministrative_id)"
+                    :key="stock.id"
+                  >
+
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleFamilleEquipement(stock.articlestock_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.numchassis || 'Non renseigné'}}</td>
+                    <td style="text-align: center;"
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.quantitestock || 'Non renseigné'}}</td>
+                  <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{formatageSomme(parseFloat((parseFloat(stock.quantitestock)*parseFloat(stock.prix_unitaire)))) || 'Non renseigné'}}</td>
+                    <!-- <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.immatriculation || 'Non renseigné'}}</td> -->
+                  
+                       <td>
+                       <router-link
+                        :to="{name : '', params: {id:stock.id}}"
+                        class="btn btn-success"
+                        title="Faire Affectation"
+                      >
+                        <span>
+                          <i class="icon icon-folder-open"> Voir Détail</i>
+                        </span>
+                      </router-link>
+                     </td>
+                    
+                  </tr>
+               
+                </tbody>
+              </table>
+            
+             </div>
+
+
+
+
+
+
+<div class="tab-pane " id="Affectation5" >
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    
+                    
+                     <th style="width:15%">Article</th>
+                     <th style="width:15%">Marque</th>
+                     <th style="width:15%">Modèle</th>
+                     <th style="width:15%">No série</th>
+                    <!-- <th>Quantité Initiale</th>  -->
+                    <th style="width:15%">Quantité</th>
+                    <th style="width:15%">Valeur d'acquisition</th>
+                   <!-- <th style="width:15%">Valeur net comptable</th> -->
+                    <th style="width:10%">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                     <tr
+                    class="odd gradeX"
+                    v-for="stock in listeDesEquipementPar06(detail_Ua.uAdministrative_id)"
+                    :key="stock.id"
+                  >
+
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleFamilleEquipement(stock.articlestock_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.numchassis || 'Non renseigné'}}</td>
+                    <td style="text-align: center;"
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.quantitestock || 'Non renseigné'}}</td>
+                  <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{formatageSomme(parseFloat((parseFloat(stock.quantitestock)*parseFloat(stock.prix_unitaire)))) || 'Non renseigné'}}</td>
+                    <!-- <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.immatriculation || 'Non renseigné'}}</td> -->
+                  
+                       <td>
+                       <router-link
+                        :to="{name : '', params: {id:stock.id}}"
+                        class="btn btn-success"
+                        title="Faire Affectation"
+                      >
+                        <span>
+                          <i class="icon icon-folder-open"> Voir Détail</i>
+                        </span>
+                      </router-link>
+                     </td>
+                    
+                  </tr>
+               
+                </tbody>
+              </table>
+            
+             </div>
+
+
+
+
+<div class="tab-pane " id="Affectation4" >
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    
+                    
+                     <th style="width:15%">Article</th>
+                     <th style="width:15%">Marque</th>
+                     <th style="width:15%">Modèle</th>
+                     <th style="width:15%">No série</th>
+                    <!-- <th>Quantité Initiale</th>  -->
+                    <th style="width:15%">Quantité</th>
+                    <th style="width:15%">Valeur d'acquisition</th>
+                   <!-- <th style="width:15%">Valeur net comptable</th> -->
+                    <th style="width:10%">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                     <tr
+                    class="odd gradeX"
+                    v-for="stock in listeDesEquipementPar05(detail_Ua.uAdministrative_id)"
+                    :key="stock.id"
+                  >
+
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleFamilleEquipement(stock.articlestock_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.numchassis || 'Non renseigné'}}</td>
+                    <td style="text-align: center;"
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.quantitestock || 'Non renseigné'}}</td>
+                  <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{formatageSomme(parseFloat((parseFloat(stock.quantitestock)*parseFloat(stock.prix_unitaire)))) || 'Non renseigné'}}</td>
+                    <!-- <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.immatriculation || 'Non renseigné'}}</td> -->
+                  
+                       <td>
+                       <router-link
+                        :to="{name : '', params: {id:stock.id}}"
+                        class="btn btn-success"
+                        title="Faire Affectation"
+                      >
+                        <span>
+                          <i class="icon icon-folder-open"> Voir Détail</i>
+                        </span>
+                      </router-link>
+                     </td>
+                    
+                  </tr>
+               
+                </tbody>
+              </table>
+            
+             </div>
+
+
+
+<div class="tab-pane " id="Affectation3" >
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    
+                    
+                     <th style="width:10%">Article</th>
+                     <th style="width:10%">Matiere</th>
+                      <th style="width:10%">Couleur</th>
+                       <th style="width:10%">Revêtement</th>
+                     <th style="width:10%">Marque</th>
+                     <th style="width:10%">Modèle</th>
+                     <th style="width:10%">No série</th>
+                    <!-- <th>Quantité Initiale</th>  -->
+                    <th style="width:10%">Quantité</th>
+                    <th style="width:10%">Valeur d'acquisition</th>
+                   <!-- <th style="width:15%">Valeur net comptable</th> -->
+                    <th style="width:10%">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                     <tr
+                    class="odd gradeX"
+                    v-for="stock in listeDesEquipementPar04(detail_Ua.uAdministrative_id)"
+                    :key="stock.id"
+                  >
+
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.designation || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.matiere || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.couleur || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.revetement || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.numchassis || 'Non renseigné'}}</td>
+                    <td style="text-align: center;"
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.quantitestock || 'Non renseigné'}}</td>
+                  <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{formatageSomme(parseFloat((parseFloat(stock.quantitestock)*parseFloat(stock.prix_unitaire)))) || 'Non renseigné'}}</td>
+                    <!-- <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.prix_unitaire || 'Non renseigné'}}</td> -->
+                  
+                       <td>
+                       <router-link
+                        :to="{name : '', params: {id:stock.id}}"
+                        class="btn btn-success"
+                        title="Faire Affectation"
+                      >
+                        <span>
+                          <i class="icon icon-folder-open"> Voir Détail</i>
+                        </span>
+                      </router-link>
+                     </td>
+                    
+                  </tr>
+               
+                </tbody>
+              </table>
+            
+             </div>
+
+
+
+
+
+ <div class="tab-pane" id="Affectation2" >
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    
+                    
+                     <th style="width:15%">Article</th>
+                     <th style="width:15%">Marque</th>
+                     <th style="width:15%">Modèle</th>
+                     <th style="width:15%">No série</th>
+                    <!-- <th>Quantité Initiale</th>  -->
+                    <th style="width:15%">Quantité</th>
+                    <th style="width:15%">Valeur d'acquisition</th>
+                   <!-- <th style="width:15%">Valeur net comptable</th> -->
+                    <th style="width:10%">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                     <tr
+                    class="odd gradeX"
+                    v-for="stock in listeDesEquipementPar03(detail_Ua.uAdministrative_id)"
+                    :key="stock.id"
+                  >
+
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleFamilleEquipement(stock.articlestock_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.numchassis || 'Non renseigné'}}</td>
+                    <td style="text-align: center;"
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.quantitestock || 'Non renseigné'}}</td>
+                  <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{formatageSomme(parseFloat((parseFloat(stock.quantitestock)*parseFloat(stock.prix_unitaire)))) || 'Non renseigné'}}</td>
+                    <!-- <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.immatriculation || 'Non renseigné'}}</td> -->
+                  
+                       <td>
+                       <router-link
+                        :to="{name : '', params: {id:stock.id}}"
+                        class="btn btn-success"
+                        title="Faire Affectation"
+                      >
+                        <span>
+                          <i class="icon icon-folder-open"> Voir Détail</i>
+                        </span>
+                      </router-link>
+                     </td>
+                    
+                  </tr>
+               
+                </tbody>
+              </table>
+            
+             </div>
+
+          <div class="tab-pane active" id="EntreeEnStock" >
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    
+                    
+                     <th style="width:15%">Article</th>
+                     <th style="width:15%">Marque</th>
+                     <th style="width:15%">Modèle</th>
+                     <th style="width:15%">No Chassis/No série</th>
+                    <!-- <th>Quantité Initiale</th>  -->
+                    <th style="width:5%">Quantité</th>
+                    <th style="width:15%">Valeur d'acquisition</th>
+                   <!-- <th style="width:15%">Valeur net comptable</th> -->
+                    <th style="width:20%" colspan="2">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                     <tr
+                    class="odd gradeX"
+                    v-for="stock in listeDesEquipementPar01(detail_Ua.uAdministrative_id)"
+                    :key="stock.id"
+                  >
+
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleFamilleEquipement(stock.articlestock_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.numchassis || 'Non renseigné'}}</td>
+                    <td style="text-align: center;"
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.quantitestock || 'Non renseigné'}}</td>
+                  <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{formatageSomme(parseFloat((parseFloat(stock.quantitestock)*parseFloat(stock.prix_unitaire)))) || 'Non renseigné'}}</td>
+                    <!-- <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.immatriculation || 'Non renseigné'}}</td> -->
+                  
+                       <td>
+                       <router-link
+                        :to="{name : 'DetailVehiculeGestionStock', params: {id:stock.id}}"
+                        class="btn btn-success"
+                        title="Faire Affectation"
+                      >
+                        <span>
+                          <i class="icon icon-folder-open"> Voir Détail</i>
+                        </span>
+                      </router-link>
+                     </td>
+                    <td>
+                      <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
+                        <span>
+                          <i class="icon icon-trash"> Supprimer</i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                 
+                </tbody>
+              </table>
+            
+             </div>
+         
         </div>
       </div>
       
@@ -996,6 +813,194 @@ search:""
      "Typebiengrpecorporels"
    ]),
 
+AfficheCode1() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 3);
+      if (qtereel) return qtereel.code
+      return 5
+      
+	},
+	AfficheLibelle1() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 3);
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+       
+	},
+
+
+
+AfficheCode2() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 1);
+      if (qtereel) return qtereel.code
+      return 5
+      
+	},
+	AfficheLibelle2() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 1);
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+       
+	},
+
+
+AfficheCode3() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 2);
+      if (qtereel) return qtereel.code
+      return 5
+      
+	},
+	AfficheLibelle3() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 2);
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+       
+  },
+  
+AfficheCode4() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 4);
+      if (qtereel) return qtereel.code
+      return 5
+      
+	},
+	AfficheLibelle4() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 4);
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+       
+  },
+  
+AfficheCode5() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 5);
+      if (qtereel) return qtereel.code
+      return 5
+      
+	},
+	AfficheLibelle5() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 5);
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+       
+  },
+  
+AfficheCode6() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 6);
+      if (qtereel) return qtereel.code
+      return 5
+      
+	},
+	AfficheLibelle6() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 6);
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+       
+  },
+  
+AfficheCode7() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 7);
+      if (qtereel) return qtereel.code
+      return 5
+      
+	},
+	AfficheLibelle7() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 7);
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+       
+  },
+  
+AfficheCode8() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 8);
+      if (qtereel) return qtereel.code
+      return 5
+      
+	},
+	AfficheLibelle8() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 8);
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+       
+  },
+  
+  
+AfficheCode9() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 9);
+      if (qtereel) return qtereel.code
+      return 5
+      
+	},
+	AfficheLibelle9() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 9);
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+       
+	},
+AfficheCode10() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 10);
+      if (qtereel) return qtereel.code
+      return 5
+      
+	},
+	AfficheLibelle10() {
+      
+           const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 10);
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+       
+	},
+recupereTypeBien_id() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.typebien_id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
 recupereTypeBien() {
       return id => {
         if (id != null && id != "") {
@@ -1064,7 +1069,7 @@ PrixUnitaireParModel() {
     listeDesEquipementPar01() {
       return id => {
         if (id != null && id != "") {
-           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(this.recupereTypeBien(this.detail_Ua.famill_id)) == '01');
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(qtreel.typebien_id) == 3);
 
         }
       };
@@ -1072,7 +1077,7 @@ PrixUnitaireParModel() {
 listeDesEquipementPar03() {
       return id => {
         if (id != null && id != "") {
-           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(this.recupereTypeBien(this.detail_Ua.famill_id)) == '03');
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(qtreel.typebien_id) == 1);
 
         }
       };
@@ -1080,7 +1085,7 @@ listeDesEquipementPar03() {
 listeDesEquipementPar04() {
       return id => {
         if (id != null && id != "") {
-           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(this.recupereTypeBien(this.detail_Ua.famill_id)) == '04');
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id &&  this.recupereTypeBienParCode(qtreel.typebien_id) == 2);
 
         }
       };
@@ -1088,7 +1093,7 @@ listeDesEquipementPar04() {
     listeDesEquipementPar05() {
       return id => {
         if (id != null && id != "") {
-           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(this.recupereTypeBien(this.detail_Ua.famill_id)) == '05');
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id &&  this.recupereTypeBienParCode(qtreel.typebien_id) == 4);
 
         }
       };
@@ -1096,7 +1101,7 @@ listeDesEquipementPar04() {
     listeDesEquipementPar06() {
       return id => {
         if (id != null && id != "") {
-           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(this.recupereTypeBien(this.detail_Ua.famill_id)) == '06');
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id &&  this.recupereTypeBienParCode(qtreel.typebien_id) == 5);
 
         }
       };
@@ -1104,7 +1109,7 @@ listeDesEquipementPar04() {
     listeDesEquipementPar07() {
       return id => {
         if (id != null && id != "") {
-           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(this.recupereTypeBien(this.detail_Ua.famill_id)) == '07');
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(qtreel.typebien_id) == 6);
 
         }
       };
@@ -1112,7 +1117,7 @@ listeDesEquipementPar04() {
     listeDesEquipementPar08() {
       return id => {
         if (id != null && id != "") {
-           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(this.recupereTypeBien(this.detail_Ua.famill_id)) == '08');
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(qtreel.typebien_id) == 7);
 
         }
       };
@@ -1120,7 +1125,7 @@ listeDesEquipementPar04() {
     listeDesEquipementPar09() {
       return id => {
         if (id != null && id != "") {
-           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(this.recupereTypeBien(this.detail_Ua.famill_id)) == '09');
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(qtreel.typebien_id) == 8);
 
         }
       };
@@ -1137,7 +1142,7 @@ listeDesEquipementPar10() {
  libelleFamilleEquipement() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+           const qtereel = this.articles.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.libelle;
@@ -1494,7 +1499,7 @@ afficherIdService() {
      "getAllServiceua",
       "ajouterService",
       "modifierService",
-      "supprimerService",
+      "supprimerStockArticle",
      
       // "ajouterHistoriqueBudgetGeneral"
     ]),

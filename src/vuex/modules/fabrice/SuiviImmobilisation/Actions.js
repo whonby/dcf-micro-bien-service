@@ -2185,19 +2185,36 @@ export function ajouterTypeBienCorporels({ commit,dispatch }, nouveau) {
 }
 
 // modifier
-export function modifierTypeBienCorporels({ commit,dispatch }, nouveau) {
-  asyncLoading(axios
-      .put("/TypeBienGrpeCorporel/" + nouveau.id,nouveau))
-      .then(response => {
-          commit("MODIFIER_TYPE_BIEN_CORPOREL", response.data);
-          dispatch('getTypeBienCorporels')
+// export function modifierTypeBienCorporels({ commit,dispatch }, nouveau) {
+//   asyncLoading(axios
+//       .put("/TypeBienGrpeCorporel/" + nouveau.id,nouveau))
+//       .then(response => {
+//           commit("MODIFIER_TYPE_BIEN_CORPOREL", response.data);
+//           dispatch('getTypeBienCorporels')
+//               dispatch('getTypeBienCorporels')
+//           this.$app.$notify({
+//               title: 'Success',
+//               text: 'Modification Effectué avec Succès!',
+//               type: "success"
+//           })
+//       });
+// }
+export function modifierTypeBienCorporels({ commit, dispatch }, activite) {
+  asyncLoading(axios.put('/TypeBienGrpeCorporel/' + activite.id, {
+    libelle: activite.libelle,
+      	code: activite.code,
+      grpecorporel_id: activite.grpecorporel_id,
+     
+  })).then(res => {
+      commit('MODIFIER_TYPE_BIEN_CORPOREL', res.data)
+      dispatch('getTypeBienCorporels')
               dispatch('getTypeBienCorporels')
-          this.$app.$notify({
-              title: 'Success',
-              text: 'Modification Effectué avec Succès!',
-              type: "success"
-          })
-      });
+      this.$app.$notify({
+          title: 'success ',
+          text: 'Modification effectué avec success !',
+          type: "success"
+      })
+  }).catch(error => console.log(error))
 }
 //supprimer
 export function supprimerTypeBienCorporels({ commit,dispatch }, id) {
@@ -2290,7 +2307,7 @@ export function ajouterAffectationUaBien({ commit }, nouveau) {
           }
       });
 }
-
+modifierTypeBienCorporels
 // modifier
 export function modifierAffectationUaBien({ commit }, nouveau) {
   asyncLoading(axios
