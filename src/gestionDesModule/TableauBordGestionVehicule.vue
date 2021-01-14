@@ -431,37 +431,37 @@ PrixVehiculeParUa() {
 NombreEquipementParMobilier() {
       return id => {
         if (id != null && id != "") {
-           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 3).length;
+           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 7).length;
 
         }
-        return this.ficheArticle.filter(element =>element.type_bien == 3).length
+        return this.ficheArticle.filter(element =>element.type_bien == 7).length
       };
     },
 NombreEquipementParMateriel() {
-      return id => {
-        if (id != null && id != "") {
-           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 1).length;
-
-        }
-        return this.ficheArticle.filter(element =>element.type_bien == 1).length
-      };
-    },
-    NombreEquipementParImmobilier() {
-      return id => {
-        if (id != null && id != "") {
-           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 4).length;
-
-        }
-        return this.ficheArticle.filter(element =>element.type_bien == 4).length
-      };
-    },
-NombreEquipementParGrosTravaux() {
       return id => {
         if (id != null && id != "") {
            return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 5).length;
 
         }
         return this.ficheArticle.filter(element =>element.type_bien == 5).length
+      };
+    },
+    NombreEquipementParImmobilier() {
+      return id => {
+        if (id != null && id != "") {
+           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 11).length;
+
+        }
+        return this.ficheArticle.filter(element =>element.type_bien == 11).length
+      };
+    },
+NombreEquipementParGrosTravaux() {
+      return id => {
+        if (id != null && id != "") {
+           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 12).length;
+
+        }
+        return this.ficheArticle.filter(element =>element.type_bien == 12).length
       };
     },
 
@@ -533,40 +533,41 @@ nombreDejourCalculeModifier(){
 
 
 
+
 PrixEquipementParMobilier() {
       return id => {
         if (id != null && id != "") {
-           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 3).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 7).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
 
         }
-        return this.ficheArticle.filter(element =>element.type_bien == 3).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+        return this.ficheArticle.filter(element =>element.type_bien == 7).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
       };
     },
 PrixEquipementParMateriel() {
-      return id => {
-        if (id != null && id != "") {
-           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
-
-        }
-        return this.ficheArticle.filter(element =>element.type_bien == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
-      };
-    },
-    PrixEquipementParImmobilier() {
-      return id => {
-        if (id != null && id != "") {
-           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 4).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
-
-        }
-        return this.ficheArticle.filter(element =>element.type_bien == 4).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
-      };
-    },
-PrixEquipementParGrosTravaux() {
       return id => {
         if (id != null && id != "") {
            return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 5).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
 
         }
         return this.ficheArticle.filter(element =>element.type_bien == 5).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+      };
+    },
+    PrixEquipementParImmobilier() {
+      return id => {
+        if (id != null && id != "") {
+           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 11).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+
+        }
+        return this.ficheArticle.filter(element =>element.type_bien == 11).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+      };
+    },
+PrixEquipementParGrosTravaux() {
+      return id => {
+        if (id != null && id != "") {
+           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 12).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+
+        }
+        return this.ficheArticle.filter(element =>element.type_bien == 12).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
       };
     },
 
