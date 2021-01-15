@@ -100,6 +100,8 @@ import gestionStockCorporels from '../../pages/suivi_control_budgetaires/suiviIm
 import listeDesUaEquipementPatrimoine from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/listeDesUaEquipementPatrimoine.vue'
 
 
+import listeDesUaEquipementPatrimoine1 from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/listeDesUaEquipementPatrimoine.vue'
+
 
 
 
@@ -125,12 +127,34 @@ import principalExecution from '../../pages/suivi_control_budgetaires/suiviImmob
 
  import ListeEquipementEnStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierAffectation/ListeEquipementEnStock.vue'
 
+ 
+ import AjouterAffectation from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierAffectation/AjouterAffectation.vue'
+
+
+ 
+ import DetailVehiculeGestionStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailArticle/DetailVehicule.vue'
+
 
 const suiviImmobilisationRoutes = [
+  {
+    path: "/DetailVehiculeGestionStock/:id",
+    name: "DetailVehiculeGestionStock",
+    component: DetailVehiculeGestionStock
+  },
+  {
+    path: "/AjouterAffectation/:id",
+    name: "AjouterAffectation",
+    component: AjouterAffectation
+  },
   {
     path: "/ListeEquipementEnStock/:id",
     name: "ListeEquipementEnStock",
     component: ListeEquipementEnStock
+  },
+  {
+    path: "/listeDesUaEquipementPatrimoine1",
+    name: "listeDesUaEquipementPatrimoine1",
+    component: listeDesUaEquipementPatrimoine1
   },
   {
     path: "/listeDesUaEquipementPatrimoine/:id",
