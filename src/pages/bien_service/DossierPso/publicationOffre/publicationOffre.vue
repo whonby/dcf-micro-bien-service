@@ -11,7 +11,7 @@
                                         <th>Reference appel - DAO</th>
                                         <th> Type procedure</th>
                                         <th>Date emmission</th>
-                                        <th>Date limite</th>
+                                        <th>Date et heure limite  </th>
                                         <th>Objet appel</th>
                                        
                                         <th>Action</th>
@@ -30,7 +30,7 @@
 
                                             {{formaterDate(appelOffre.date_emission) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{formaterDate(appelOffre.date_limite) || 'Non renseigné'}}</td>
+                                            {{formaterDate(appelOffre.date_limite) || 'Non renseigné'}} {{appelOffre.heure}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.objet_appel || 'Non renseigné'}}</td>
                                         
@@ -118,7 +118,6 @@
                             </div>
                         </div>
                         </td>
-
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Date d'autorisation :</label>
@@ -129,6 +128,14 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label"> Heure limites :</label>
+                                    <div class="controls">
+                                        <input type="time" class="span" placeholder="" v-model="formData.heure">
+                                    </div>
+                                </div>
+                            </td>
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Fichier DAO:</label>
@@ -235,6 +242,14 @@
                         <tr>
                             <td>
                                 <div class="control-group">
+                                    <label class="control-label"> Heure limites :</label>
+                                    <div class="controls">
+                                        <input type="time" class="span" placeholder="" v-model="edite_appel_offre.heure">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
                                     <label class="control-label">Fichier DAO:</label>
                                     <div class="controls">
                                         <input type="file"   @change="OnchangeFichier" />
@@ -288,7 +303,8 @@ export default {
                     objet_appel:"",
                     imputation:"",
                     marche_id:"",
-            date_numero_autorisation:""
+            date_numero_autorisation:"",
+            heure:""
         },
         edite_appel_offre:{
              	ref_appel:"",
@@ -301,7 +317,8 @@ export default {
                     objet_appel:"",
                     imputation:"",
                     marche_id:"",
-            date_numero_autorisation:""
+            date_numero_autorisation:"",
+            heure:""
         }
 
         }
@@ -462,7 +479,8 @@ typeProcedureLibelle() {
                     objet_appel:"",
                     imputation:"",
                     marche_id:"",
-                    numero_autorisation:""
+                    numero_autorisation:"",
+          heure:""
                 }
     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
     marcheObjet.attribue=1
@@ -480,6 +498,7 @@ typeProcedureLibelle() {
 
 
  modfications(){
+              console.log(this.edite_appel_offre)
                 this.modifierAppelOffre(this.edite_appel_offre)
                 this.$('#modifierActeEF').modal('hide');
             },
