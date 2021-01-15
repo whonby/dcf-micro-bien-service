@@ -37,7 +37,7 @@
                         <a data-toggle="tab" href="#EntreeEnStock">Mon Patrimoine</a>
                       </li> -->
                        <li class="active" v-if="AfficheCode1 == 3">
-                        <a data-toggle="tab" href="#EntreeEnStock" >{{AfficheLibelle1}}</a>
+                        <a data-toggle="tab" href="#EntreeEnStock" >{{AfficheLibelle1}}  <span class="badge badge" >{{NombreDeVehicule(detail_Ua.uAdministrative_id)}}</span></a>
                       </li>
                        <li class="" v-if="AfficheCode2 == 1">
                         <a data-toggle="tab" href="#Affectation2" >{{AfficheLibelle2}}</a>
@@ -60,37 +60,7 @@
                        <li class="" v-if="AfficheCode8 == 8">
                         <a data-toggle="tab" href="#Affectation8" >{{AfficheLibelle8}}</a>
                       </li>
-                       <!-- <li class="" v-if="AfficheCode9 == 9">
-                        <a data-toggle="tab" href="#Affectation" >{{AfficheLibelle9}}</a>
-                      </li>
-                       <li class="" v-if="AfficheCode10 == 10">
-                        <a data-toggle="tab" href="#Affectation" >{{AfficheLibelle10}}</a>
-                      </li> -->
-                       <!-- <li class="">
-                        <a data-toggle="tab" href="#Reparation" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '03'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                        <li class="">
-                        <a data-toggle="tab" href="#SortiePatrimoine" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '04'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                       <li class="">
-                        <a data-toggle="tab" href="#Inventaire" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '05'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                      <li class="">
-                        <a data-toggle="tab" href="#Inventaire" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '06'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                      <li class="">
-                        <a data-toggle="tab" href="#Inventaire" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '07'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                      <li class="">
-                        <a data-toggle="tab" href="#Inventaire" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '08'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                      <li class="">
-                        <a data-toggle="tab" href="#Inventaire" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '09'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                      <li class="">
-                        <a data-toggle="tab" href="#Inventaire" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '10'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                      -->
+                     
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
@@ -167,9 +137,7 @@
             <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                     
-                    
-                    
+                   
                      <th style="width:15%">Article</th>
                      <th style="width:15%">Marque</th>
                      <th style="width:15%">Modèle</th>
@@ -589,33 +557,44 @@
              </div>
 
           <div class="tab-pane active" id="EntreeEnStock" >
+           <div align="right">
+                Recherche:
+                <input type="search" placeholder="IMMATRICULATION" v-model="search" />
+              </div>
             <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                      
+                    <!-- <div align="right">
+                Recherche:
+                <input type="search" placeholder v-model="search" />
+              </div> -->
                     
-                    
-                     <th style="width:15%">Article</th>
-                     <th style="width:15%">Marque</th>
-                     <th style="width:15%">Modèle</th>
-                     <th style="width:15%">No Chassis/No série</th>
+                     <th style="width:5%;text-align:center">Article</th>
+                     <th style="width:5%;text-align:center">Immatriculation</th>
+                     <th style="width:5%;text-align:center">Marque</th>
+                     <th style="width:5%;text-align:center">Modèle</th>
+                     <th style="width:5%;text-align:center">No Chassis/No série</th>
                     <!-- <th>Quantité Initiale</th>  -->
-                    <th style="width:5%">Quantité</th>
-                    <th style="width:15%">Valeur d'acquisition</th>
-                   <!-- <th style="width:15%">Valeur net comptable</th> -->
-                    <th style="width:20%" colspan="2">Action</th>
+                    <th style="width:5%;text-align:center">Quantité</th>
+                    <th style="width:5%;text-align:center">Valeur d'acquisition</th>
+                   <th style="width:5%;text-align:center">Valeur nette comptable</th>
+                    <th style="width:12%" colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                      <tr
                     class="odd gradeX"
-                    v-for="stock in listeDesEquipementPar01(detail_Ua.uAdministrative_id)"
+                    v-for="stock in filtre_service"
                     :key="stock.id"
                   >
 
                     <td
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{libelleFamilleEquipement(stock.articlestock_id) || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.numimmatriculation || 'Non renseigné'}}</td>
                      <td
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
@@ -630,10 +609,11 @@
                     >{{stock.quantitestock || 'Non renseigné'}}</td>
                   <td
                       @dblclick="afficherModalModifierTitre(id)"
+                      style="text-align:center;font-weight:bold;"
                     >{{formatageSomme(parseFloat((parseFloat(stock.quantitestock)*parseFloat(stock.prix_unitaire)))) || 'Non renseigné'}}</td>
-                    <!-- <td
+                    <td
                       @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.immatriculation || 'Non renseigné'}}</td> -->
+                    >{{formatageSomme(parseFloat(0)) || 'Non renseigné'}}</td>
                   
                        <td>
                        <router-link
@@ -654,7 +634,18 @@
                       </button>
                     </td>
                   </tr>
-                 
+                 <tr>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td style="font-weight:bold;">TOTAL</td>
+                   <td style="text-align:center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(sommeDesVehicule))}}</td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                 </tr>
                 </tbody>
               </table>
             
@@ -813,6 +804,28 @@ search:""
      "Typebiengrpecorporels"
    ]),
 
+
+filtre_service() {
+      const st = this.search.toLowerCase();
+      return this.listeDesEquipementPar01(this.detail_Ua.uAdministrative_id).filter(type => {
+        return (
+         
+          type.numimmatriculation.toLowerCase().includes(st)
+        );
+      });
+    },
+sommeDesVehicule(){
+  return this.filtre_service.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+},
+
+NombreDeVehicule() {
+      return id => {
+        if (id != null && id != "") {
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(qtreel.typebien_id) == 3).length;
+
+        }
+      };
+    },
 AfficheCode1() {
       
            const qtereel = this.Typebiengrpecorporels.find(qtreel => qtreel.code== 3);

@@ -2020,6 +2020,9 @@ prixUnitaire() {
       afficherModalListeExecution(){
                 window.history.back();
             },
+            RafraichirPage(){
+                window.location.reload()
+            },
      AjouterVehicule() {
       
 
@@ -2046,6 +2049,7 @@ if(this.AfficheTypeDeBien(this.formData7.famill_id) == 9){
       
       //this.ajouterNouveauVehicule(objetNew);
     this.ajouterStockArticle(objetNew)
+    this.afficherModalListePersonnel()
       this.formData = {
         uniteadministrative:"",
         numidentification:"",
@@ -2092,7 +2096,7 @@ else{
       }
       // this.ajouterFicheArticle(nouveauObjet);
       this.ajouterStockArticle(nouveauObjet1)
-    
+     this.afficherModalListePersonnel()
       this.formData1 = {
     
         article_id:"",

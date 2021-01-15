@@ -70,7 +70,7 @@
                   <td>{{detail_Vehicule.nombreplace || 'Non renseigné'}}</td>  
                     <td>{{detail_Vehicule.puissance || 'Non renseigné'}}</td>
                     <td>{{libelleTypeEnergie(detail_Vehicule.etatvehicule) || 'Non renseigné'}}</td>
-                  <td>{{detail_Vehicule.durevie || 'Non renseigné'}}</td>
+                  <td>{{detail_Vehicule.durevie || 'Non renseigné'}} Ans</td>
                   <td>{{formatageSomme(parseFloat(detail_Vehicule.prix_unitaire)) || 'Non renseigné'}}</td>
                   <!-- <td>{{detail_Vehicule.transmission || 'Non renseigné'}}</td> -->
                   <!-- <td>{{formatageSomme(immobilisat.prixUnitaire)|| 'Non renseigné'}}</td> -->

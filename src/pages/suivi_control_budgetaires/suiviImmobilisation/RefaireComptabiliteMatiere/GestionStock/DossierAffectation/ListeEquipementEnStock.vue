@@ -37,7 +37,7 @@
                         <a data-toggle="tab" href="#EntreeEnStock">Mon Patrimoine</a>
                       </li> -->
                        <li class="active" v-if="AfficheCode1 == 3">
-                        <a data-toggle="tab" href="#EntreeEnStock" >{{AfficheLibelle1}}</a>
+                        <a data-toggle="tab" href="#EntreeEnStock" >{{AfficheLibelle1}}  <span class="badge badge" >{{NombreDeVehicule(detail_Ua.uAdministrative_id)}}</span></a>
                       </li>
                        <li class="" v-if="AfficheCode2 == 1">
                         <a data-toggle="tab" href="#Affectation2" >{{AfficheLibelle2}}</a>
@@ -60,37 +60,7 @@
                        <li class="" v-if="AfficheCode8 == 8">
                         <a data-toggle="tab" href="#Affectation8" >{{AfficheLibelle8}}</a>
                       </li>
-                       <!-- <li class="" v-if="AfficheCode9 == 9">
-                        <a data-toggle="tab" href="#Affectation" >{{AfficheLibelle9}}</a>
-                      </li>
-                       <li class="" v-if="AfficheCode10 == 10">
-                        <a data-toggle="tab" href="#Affectation" >{{AfficheLibelle10}}</a>
-                      </li> -->
-                       <!-- <li class="">
-                        <a data-toggle="tab" href="#Reparation" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '03'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                        <li class="">
-                        <a data-toggle="tab" href="#SortiePatrimoine" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '04'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                       <li class="">
-                        <a data-toggle="tab" href="#Inventaire" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '05'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                      <li class="">
-                        <a data-toggle="tab" href="#Inventaire" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '06'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                      <li class="">
-                        <a data-toggle="tab" href="#Inventaire" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '07'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                      <li class="">
-                        <a data-toggle="tab" href="#Inventaire" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '08'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                      <li class="">
-                        <a data-toggle="tab" href="#Inventaire" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '09'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                      <li class="">
-                        <a data-toggle="tab" href="#Inventaire" v-if="recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)) == '10'">{{recupereTypeBienParLibelle(recupereTypeBienParCode(recupereTypeBien(detail_Ua.famill_id)))}}</a>
-                      </li>
-                      -->
+                   
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
@@ -595,14 +565,18 @@
                      
                     
                     
-                     <th style="width:15%">Article</th>
-                     <th style="width:15%">Marque</th>
-                     <th style="width:15%">Modèle</th>
-                     <th style="width:15%">No Chassis/No série</th>
+                     <th style="width:10%">Article</th>
+                     <th style="width:10%">Immatriculation</th>
+                     <th style="width:10%">Marque</th>
+                     <th style="width:10%">Modèle</th>
+                     <th style="width:10%">No Chassis/No série</th>
                     <!-- <th>Quantité Initiale</th>  -->
-                    <th style="width:15%">Quantité</th>
-                    <th style="width:15%">Valeur d'acquisition</th>
+                    <th style="width:5%">Quantité</th>
+                    <th style="width:10%">Valeur d'acquisition</th>
                    <!-- <th style="width:15%">Valeur net comptable</th> -->
+                   <th style="width:15%">Service Rattaché</th>
+                   <th style="width:15%">Fonction Rattaché</th>
+                   <th style="width:15%">Date d'Affectation</th>
                     <th style="width:15%">Action</th>
                   </tr>
                 </thead>
@@ -616,6 +590,9 @@
                     <td
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{libelleFamilleEquipement(stock.articlestock_id) || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{stock.numimmatriculation || 'Non renseigné'}}</td>
                      <td
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
@@ -631,28 +608,42 @@
                   <td
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{formatageSomme(parseFloat((parseFloat(stock.quantitestock)*parseFloat(stock.prix_unitaire)))) || 'Non renseigné'}}</td>
-                    <!-- <td
+                    <td
                       @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.immatriculation || 'Non renseigné'}}</td> -->
-                  
-                       <td>
+                    >{{afficheServiceLibelle(IdServiceRattache(stock.id)) || 'Véhicule Non Rattaché au Service'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{afficheFonction(IdFonctionRattache(stock.id)) || 'Véhicule Non Rattaché au Fonction'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTitre(id)"
+                    >{{formaterDate(DateMiseEnService(stock.id)) || 'Non renseigné'}}</td>
+                  <td>
+                      <button class="btn  btn-success" @click.prevent="fenetreAjouterAffectation(stock.id)">
+                        <span>
+                          <i class="icon icon-folder-open"> Faire Affectation</i>
+                          
+                        </span>
+                      </button>
+                     
+                    </td>
+                       <!-- <td>
                        <router-link
                         :to="{name : 'DetailVehiculeGestionStock', params: {id:stock.id}}"
                         class="btn btn-success"
                         title="Faire Affectation"
                       >
                         <span>
-                          <i class="icon icon-folder-open"> Voir Détail</i>
+                          <i class="icon icon-folder-open"> Faire Affectation</i>
                         </span>
                       </router-link>
-                     </td>
-                    <td>
+                     </td> -->
+                    <!-- <td>
                       <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
                         <span>
                           <i class="icon icon-trash"> Supprimer</i>
                         </span>
                       </button>
-                    </td>
+                    </td> -->
                   </tr>
                  
                 </tbody>
@@ -663,12 +654,7 @@
         </div>
       </div>
       
-        <!-- <fab :actions="fabActions" @cache="afficherModalAjouterBesoinImmobilisation" main-icon="apps" bg-color="green"></fab>
-    <notifications  />
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterBesoinImmobilisation()">Open</button>
- 
-  -->
+      
  
               </table>
  
@@ -677,7 +663,180 @@
 
     </div>
 
+
+
+
+
+
+<!-- FORMULAIRE D AFFECTATION DE VEHICULE -->
+<div id="exampleModal1" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Afféctation Véhicule: {{afficherUniteAdministrative(editAffectation.uAdministrative_id)}}</h3>
+      </div>
+      <div class="modal-body">
+      <table class="table table-bordered table-striped">
+      <tr>
+        
+         <td>
+               <div class="control-group">
+            <label class="control-label">Immatriculation</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editAffectation.numimmatriculation"
+                class="span4"
+                readonly
+                style="color:red;font-size:20px"
+              />
+            </div>
+          </div>
+            </td>
+            <td>
+               <div class="control-group">
+            <label class="control-label">Marque</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="libelleMarque(editAffectation.marque_id)"
+                class="span4"
+                readonly
+              />
+            </div>
+          </div>
+            </td>
+             <td>
+               <div class="control-group">
+            <label class="control-label">Modèle</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="libelleModelle(editAffectation.model_id)"
+                class="span4"
+                readonly
+              />
+            </div>
+          </div>
+            </td>
+      </tr>
+         
+        <tr>
+          <td>
+               <div class="control-group">
+            <label class="control-label">Quantité en Stock</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editAffectation.quantitestock"
+                class="span4"
+                readonly
+              />
+            </div>
+          </div>
+            </td>
+            <td>
+               <div class="control-group">
+            <label class="control-label">Quantité Affecté</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formData.qte_affecte"
+                class="span4"
+                
+              />
+            </div>
+          </div>
+            </td>
+              <td>
+               <div class="control-group">
+            <label class="control-label">Date d'affétation</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="formData.date_mise_service"
+                class="span4"
+                
+              />
+            </div>
+          </div>
+             </td>
+          </tr>
+          
+          <tr>
+            <td>
+               <div class="control-group">
+            <label class="control-label">Service</label>
+            <div class="controls">
+               <select   class="span4" v-model="formData.service_id">
+                 <option></option>
+            <option v-for="resultat in afficherServiceUA(editAffectation.uAdministrative_id)" :key="resultat.id" 
+            :value="resultat.serviceua_id">{{afficheServiceLibelle(resultat.serviceua_id)}}</option>
+                </select>
+            </div>
+          </div>
+            </td>
+            <td>
               
+               <div class="control-group">
+            <label class="control-label">Fonction</label>
+            <div class="controls">
+               <select   class="span4" v-model="formData.fonction_id">
+                 <option></option>
+            <option v-for="resultat in afficherFonctionUA(editAffectation.uAdministrative_id)" :key="resultat.id" 
+            :value="resultat.fonction_id">{{afficheFonction(resultat.fonction_id)}}</option>
+                </select>
+            </div>
+          </div>
+            </td>
+            <td>
+               <div class="control-group">
+            <label class="control-label">Besoin</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="afficheNomA"
+                class="span4"
+                readonly
+              />
+            </div>
+          </div>
+             </td>
+           
+          </tr>
+          <tr>
+            <td>
+               <div class="control-group">
+            <label class="control-label">Nom de l'utilisateur</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formData.nom_prenoms"
+                class="span4"
+                
+              />
+            </div>
+          </div>
+             </td>
+             <td colspan="2">
+               <code v-show="(this.AfficheNomArticleService(this.formData.service_id) != this.editAffectation.famill_id) && (this.AfficheNomArticleFonction(this.formData.fonction_id) != this.editAffectation.famill_id)" style="color:red;font-size:14px">Le Service ou la Fonction séléctionner n'a pas dois a un véicule </code>
+               <!-- <code v-if="" style="color:red;font-size:14px">La Fonction n'a pas dois a un véicule </code> -->
+               <!-- <code v-else style="color:red;font-size:14px">Veuillez remplir les champs Svp </code> -->
+             </td>
+          </tr>
+      </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          
+          class="btn btn-primary"
+          href="#"
+          @click.prevent="ajouterImmobilisationLocal()"
+        >Affecter</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+<!-- FIN FORMULAIRE D AFFECTATION VEHICULE-->
+           <notifications  />    
     </div>
 </template>
 
@@ -689,42 +848,8 @@ import moment from 'moment';
 export default {
     data(){
         return{
-          formData3:{
-        acteur_id:"",
-        ua_id:"",
-          unitezone_id:"",
-          fonction_id:"",
-          article_id:"",
-          qte:"",
-          dure_vie:"",
-          etatimmo_id:""
-      },
-      formData :{
-
-      },
-      direct:"",
-       valideService:{
-motif:"",
-date_motif:""
-      },
-      valideDirecteur:{
-        article_id:"",
-motif:"",
-date_motif_directeur:"",
-cause_directeur:""
-      },
-       formData2:{
-        famillearticle_id :"",
-        qte_affecte:"",
-        date_mise_service:"",
-        identification:"",
-        type_immo:"",
-        nature_dentree:"",
-        nature_bien:"",
-        etat_immobilisation:"",
-        cause_inactivite:"",
-
-      },
+          formData:{},
+        editAffectation:{},
       editService:{},
 search:""
         }
@@ -794,7 +919,7 @@ search:""
       "services",
       "besoinEquipement",
       "afficherDirection",
-      "afficherService",
+      "UA",
       "afficherFonction",
       "type_Unite_admins",
       "getPersoListeDesNorme",
@@ -812,6 +937,106 @@ search:""
      "ModeleVehicules",
      "Typebiengrpecorporels"
    ]),
+
+IdServiceRattache() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.immobilisations.find(qtreel => qtreel.stock_id == id);
+
+      if (qtereel) {
+        return qtereel.service_id;
+      }
+      return 0
+        }
+      };
+    },
+IdFonctionRattache() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.immobilisations.find(qtreel => qtreel.stock_id == id);
+
+      if (qtereel) {
+        return qtereel.fonction_id;
+      }
+      return 0
+        }
+      };
+    },
+DateMiseEnService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.immobilisations.find(qtreel => qtreel.stock_id == id);
+
+      if (qtereel) {
+        return qtereel.date_mise_service;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+AfficheNomArticleService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.normeImmo.find(qtreel => qtreel.service_id == id && qtreel.famille_id == this.editAffectation.famill_id);
+           if (qtereel) {
+        return qtereel.famille_id;
+      }
+      return 0
+        }
+      };
+    },
+AfficheNomArticleFonction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.normeImmo.find(qtreel => qtreel.fonction_id == id && qtreel.famille_id == this.editAffectation.famill_id);
+
+      if (qtereel) {
+        return qtereel.famille_id;
+      }
+      return 0
+        }
+      };
+    },
+afficheNomA(){
+  if(this.AfficheNomArticleService(this.formData.service_id) == this.editAffectation.famill_id){
+
+return this.libelleFamille(this.editAffectation.famill_id)
+  }
+  else if(this.AfficheNomArticleFonction(this.formData.fonction_id) == this.editAffectation.famill_id){
+
+    return this.libelleFamille(this.editAffectation.famill_id)
+  }
+  
+  else{
+    return "Pas de norme définir"
+  }
+},
+
+
+
+
+afficherServiceUA() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getterplanOrganisationUa.filter(qtreel => qtreel.ua_id == id && qtreel.fonction_id == null);
+      
+        }
+      };
+    },
+
+afficherFonctionUA() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getterplanOrganisationUa.filter(qtreel => qtreel.ua_id == id && qtreel.serviceua_id != null);
+      
+        }
+      };
+    },
+
 
 AfficheCode1() {
       
@@ -998,7 +1223,18 @@ recupereTypeBien_id() {
       };
     },
 
+libelleFamille() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 
 
 recupereTypeBien() {
@@ -1070,6 +1306,14 @@ PrixUnitaireParModel() {
       return id => {
         if (id != null && id != "") {
            return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(qtreel.typebien_id) == 3);
+
+        }
+      };
+    },
+    NombreDeVehicule() {
+      return id => {
+        if (id != null && id != "") {
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(qtreel.typebien_id) == 3).length;
 
         }
       };
@@ -1214,18 +1458,18 @@ afficherQuantiteEnStock() {
         }
       };
     },
-    libelleModel() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.ModeleVehicules.find(qtreel => qtreel.id == id);
+    // libelleModel() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.ModeleVehicules.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return 0
-        }
-      };
-    },
+    //   if (qtereel) {
+    //     return qtereel.libelle;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
 libelleArticle() {
       return id => {
         if (id != null && id != "") {
@@ -1272,7 +1516,18 @@ listeArticleTransfert() {
         }
       };
     },
+afficheFonction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
 
  anneeAmortissement() {
       const val = parseInt(this.exerciceBudgetaireEnCours) + parseInt(this.afficherDureeVieFamille(this.editService.famille_id));
@@ -1483,7 +1738,15 @@ afficherIdService() {
       };
     },
 
+anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
 
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
 
 
 
@@ -1526,60 +1789,41 @@ afficherIdService() {
     //   this.editService = this.listedesarticleparPerso(libelleService(marcheid))[index];
     // },
 ajouterImmobilisationLocal(){
-var objet ={
-  id:this.afficherIdStock(this.detail_Ua.unite_administrative_id,this.editService.famille_id,this.editService.marque_id,this.editService.model_id),
-  quantitestock:this.RestantEnStock
-}
-// var objet1 ={
-//   id:this.afficherIdActePersonnel(this.detail_Ua.unite_administrative_id,this.afficherActeurDepenseId(this.detail_Ua.id)),
-//   normeequipement:this.afficherNombreEquipementRestant,
-//   montantequipement:this.afficherMontantRestant
+// var objet ={
+//   id:this.afficherIdStock(this.detail_Ua.unite_administrative_id,this.editService.famille_id,this.editService.marque_id,this.editService.model_id),
+//   quantitestock:this.RestantEnStock
 // }
-var nouvelobjet2 ={
-  id:this.afficherIdService(this.detail_Ua.unite_administrative_id,this.idService(this.detail_Ua.id)),
+
+// var nouvelobjet2 ={
+//   id:this.afficherIdService(this.detail_Ua.unite_administrative_id,this.idService(this.detail_Ua.id)),
   
- normeequipement:this.afficherNombreEquipementRestant,
- montantequipement:this.afficherMontantRestant
-}
+//  normeequipement:this.afficherNombreEquipementRestant,
+//  montantequipement:this.afficherMontantRestant
+// }
 var objet2 ={
     // actepersonnel_id:this.afficherActeurDepenseId(this.detail_Ua.id),
-      famillearticle_id:this.editService.famille_id,
-      marque_id:this.editService.marque_id,
-      model_id:this.editService.model_id,
-      uniteadministrative_id:this.detail_Ua.id,
+      fonction_id:this.formData.fonction_id,
+      date_mise_service:this.formData.date_mise_service,
       qte_affecte:this.formData.qte_affecte,
-      service_id:this.idService(this.detail_Ua.id)
+      exercice_budgetaire:this.anneeAmort,
+      service_id:this.formData.service_id,
+        stock_id:this.editAffectation.id,
+        nom_prenoms:this.formData.nom_prenoms,
+       
 }
-this.modifierStockArticle(objet);
-// this.modifierPersonnel(objet1)
-this.modifierPlanOrganigrammeUa(nouvelobjet2)
+
 this.ajouterImmobilisation(objet2)
   },
-              fenetreAjouterAffectation(index) {
-      this.$("#nonEquiper").modal({
+          
+fenetreAjouterAffectation(id) {
+      this.$("#exampleModal1").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.formData = this.afficheServiceNonEquipe[index];
+      this.editAffectation = this.listeDesEquipementPar01(this.detail_Ua.uAdministrative_id).find(item=>item.id==id);
     },
-
-    afficherModalModifierService(index) {
-      this.$("#exampleModalValidationdirecteur").modal({
-        backdrop: "static",
-        keyboard: false
-      });
-
-      this.editService = this.listedesarticleparPerso(this.libelleService(this.marcheid))[index];
-    },
- afficherModalTransfert(index) {
-      this.$("#modalTransfert").modal({
-        backdrop: "static",
-        keyboard: false
-      });
-
-      this.editService = this.listedesarticleparPerso(this.libelleService(this.marcheid))[index];
-    },
+   
 
 formatageSomme:formatageSomme,
 
@@ -1606,8 +1850,8 @@ formatageSomme:formatageSomme,
   font-weight:bold;
 }
 .tailgrand{
-  width: 77%;
-  margin: 0 -38%;
+  width: 63%;
+  margin: 0 -30%;
 }
 .tailleImmobilisation{
   width: 90%;

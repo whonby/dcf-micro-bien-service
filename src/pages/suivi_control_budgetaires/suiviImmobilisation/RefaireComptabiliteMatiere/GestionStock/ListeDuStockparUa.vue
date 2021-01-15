@@ -463,8 +463,12 @@ libelleFamilleEquipement
     </td>
   </tr>
 </table> -->
-    <div class="container-fluid">
+    <div >
       <hr />
+      <div  align="right" style="cursor:pointer;">
+    <button class="btn btn-success" @click.prevent="afficherAjouterBien">Ajouter Un Article</button>
+    
+        </div> 
       <div class="row-fluid">
         <div class="span12">
                      <!-- <download-excel
@@ -487,6 +491,7 @@ libelleFamilleEquipement
                 Recherche:
                 <input type="search" placeholder v-model="search" />
               </div> -->
+             
             </div>
 
             <div class="widget-content nopadding" >
@@ -1062,6 +1067,9 @@ veifArticlesExist() {
         path: "/ModifierEntrePatrimoine/" + id
       });
     },
+    afficherAjouterBien(){
+                this.$router.push({ name: 'AjouterEntrePatrimoine' })
+            },
     //afiicher modal ajouter
     afficherModalAjouterStock() {
       this.$("#exampleModal").modal({
