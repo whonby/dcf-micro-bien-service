@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <div class="container-fluid">
             <div class="span12" align="right">
 <!--                <button @click="exportHTML('Fichie de contratualisation')">Export as Word</button>-->
@@ -18,43 +19,43 @@
                 </captimon>
                 <tr>
                     <td><img  :src="AfficheLogODCF"></td>
-                    <td   colspan="5"  style="background: #8ea9db !important;">
+                    <td   colspan="11"  style="background: #8ea9db !important;">
                         <h3 align="center"> FICHE SYNTHESE DE LA CONTRACTUALISATION D'UN MARCHE/CONTRAT A L'ATTENTION DU CONTROLEUR FINANCIER</h3>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="6"  style="background: #fff !important;" align="center"></td>
+                    <td colspan="13"  style="background: #fff !important;" align="center"></td>
                 </tr>
                 <tr>
-                    <td colspan="6" style="background: #ffa58b !important;" align="center">
+                    <td colspan="13" style="background: #ffa58b !important;" align="center">
                         <div align="center">*** GENERALITES RELATIVES A L'APPEL D'OFFRES ***</div>
                     </td>
                 </tr>
                 <tr>
                     <td><b>Unité Administrative</b></td>
-                    <td colspan="5"><b>{{getUAMarche(detail.unite_administrative_id)}}</b></td>
+                    <td colspan="13"><b>{{getUAMarche(detail.unite_administrative_id)}}</b></td>
                 </tr>
                 <tr>
                     <td><b>Objet de la consultation</b></td>
-                    <td colspan="5" ><b>{{detail.objet}}</b></td>
+                    <td colspan="13" ><b>{{detail.objet}}</b></td>
                 </tr>
                 <tr>
                     <td><b>Type de procédure</b></td>
-                    <td colspan="2" align="center">{{detail.procedure_passation.libelle}}</td>
+                    <td colspan="7" align="center">{{detail.procedure_passation.libelle}}</td>
                     <td><b>Autorisation</b>:</td>
-                    <td colspan="2" align="center">Data in Column 3, Row 4</td>
+                    <td colspan="7" align="center">{{getNumeroAutorisation(detail.id)}}</td>
                 </tr>
                 <tr>
                     <td><b>Référence du Dossier de consultation</b></td>
-                    <td colspan="5" align="center"></td>
+                    <td colspan="13" align="center">{{getReferenceDossier(detail.id)}}</td>
                 </tr>
                 <tr>
                     <td><b>Nombre de lots du dossier de consultation</b></td>
-                    <td colspan="5" align="center">{{nbrLotMarche(detail.id)}}</td>
+                    <td colspan="13" align="center">{{nbrLotMarche(detail.id)}}</td>
                 </tr>
                 <tr>
                     <td><b>Source (s) de financement (s)</b></td>
-                    <td colspan="5">
+                    <td colspan="13">
 
                         <table class="table" v-for="item in getLotMarche(detail.id)" :key="'lot'+item.id">
                             <tr>
@@ -62,10 +63,10 @@
                             </tr>
                         <tr >
                             <td><b>ETAT</b></td>
-                            <td colspan="5">
+                            <td colspan="6">
                                 <table>
                                     <tr v-for="bailleur in listeDesBailleurEtat(item.id)" :key="'bn'+bailleur.id">
-                                        <td colspan="5"  align="center">{{bailleur.tauxbailleur}} %</td>
+                                        <td colspan="8"  align="center">{{bailleur.tauxbailleur}} %</td>
                                     </tr>
                                 </table>
                             </td>
@@ -73,7 +74,7 @@
                         </tr>
                             <tr>
                                 <td><b>BAILLEUR (S)</b></td>
-                                <td colspan="4">
+                                <td colspan="10">
                                     <table class="table">
                                         <tr v-for="b in listeDesBailleur(item.id)" :key="'bnty'+b.id">
                                             <td>{{NomBailleurPasEtat(b.bailleur_id)}}</td>
@@ -89,77 +90,144 @@
                 </tr>
                 <tr>
                     <td><b>Identification de l'imputation budgétaire</b></td>
-                    <td colspan="2" align="center">{{detail.imputation}}</td>
+                    <td colspan="7" align="center">{{detail.imputation}}</td>
                     <td><b>Nombre d'entreprises ayant retiré le dossier de consultation</b></td>
-                    <td colspan="2" align="center">{{nbrEntrepriseDepoDossierCandidat(detail.id)}}</td>
+                    <td colspan="6" align="center">{{nbrEntrepriseDepoDossierCandidat(detail.id)}}</td>
                 </tr>
                 <tr>
                     <td><b>Montant de l'enveloppe budgétaire</b></td>
-                    <td colspan="2" align="center">{{formatageSomme(parseFloat(montantEnveloppeBudgetise(detail)))}}</td>
+                    <td colspan="7" align="center">{{formatageSomme(parseFloat(montantEnveloppeBudgetise(detail)))}}</td>
                     <td><b>Nombre d'entreprises a yant déposé une offre dans le délai requis</b></td>
-                    <td colspan="2" align="center">{{nbrEntrepriseDepoDossierDelai(detail.id)}}</td>
+                    <td colspan="6" align="center">{{nbrEntrepriseDepoDossierDelai(detail.id)}}</td>
                 </tr>
                 <tr>
                     <td><b>Montant de l'estimatif du marché</b></td>
-                    <td colspan="2" align="center">{{formatageSomme(parseFloat(detail.montant_marche))}}</td>
+                    <td colspan="7" align="center">{{formatageSomme(parseFloat(detail.montant_marche))}}</td>
                     <td><b>Nombre d'entreprises ayant déposé une offre hors délais</b></td>
-                    <td colspan="2" align="center">{{nbrEntrepriseDepoDossierHDelai(detail.id)}}</td>
+                    <td colspan="6" align="center">{{nbrEntrepriseDepoDossierHDelai(detail.id)}}</td>
                 </tr>
 
                 <tr>
                     <td><b>Nature des prix du marché</b></td>
-                    <td colspan="2" align="center"></td>
+                    <td colspan="7" align="center"></td>
                     <td><b>Date et heure de l'ouverture des plis</b></td>
-                    <td colspan="2" align="center">{{formaterDate(getDateOuverturePlis(detail.id))}}</td>
+                    <td colspan="6" align="center">{{formaterDate(getDateOuverturePlis(detail.id))}}</td>
                 </tr>
                 <tr>
                 <td><b>Délai d'exécution</b></td>
-                <td colspan="2" align="center"></td>
+                <td colspan="7" align="center"></td>
                 <td><b>Date du jugement </b></td>
-                <td colspan="2" align="center"></td>
+                <td colspan="6" align="center">{{formaterDate(getDateJugement(detail.id))}}</td>
               </tr>
                 <tr>
                     <td><b>Date et heure limites de réception des plis</b></td>
-                    <td colspan="2" align="center"></td>
+                    <td colspan="7" align="center">{{formaterDate(getDateDepotLimite(detail.id))}} {{getHeureDepotLimite(detail.id)}} </td>
                     <td><b>Agent CF de suivi</b> </td>
-                    <td colspan="2" align="center"></td>
+                    <td colspan="6" align="center"></td>
                 </tr>
                 <tr>
-                    <td colspan="6" style="background: #f2f2f2 !important;">EDITION DU MARCHE/CONTRAT</td>
+                    <td colspan="13" style="background: #f2f2f2 !important;" align="center">EDITION DU MARCHE/CONTRAT</td>
                 </tr>
                 <tr>
-                    <td colspan="6">
+                    <td colspan="13">
                         <table class="table"  v-for="item in getLotMarche(detail.id)" :key="'l'+item.id">
                             <tr>
-                                <td colspan="8" style="background: #68d7ca !important;">{{item.objet}}</td>
+                                <td colspan="10" style="background: #68d7ca !important;">{{item.objet}}</td>
                             </tr>
                             <tr>
                                 <td><b>Numero du Marché issu de la contractualisation</b></td>
-                                <td colspan="3" align="center">{{getNumeroMarche(item)}}</td>
+                                <td colspan="6" align="center">{{getNumeroMarche(item)}}</td>
                                 <td><b>Cautionnement définitif</b> </td>
-                                <td colspan="3" align="center">{{formatageSomme(parseFloat(getCautionnementDefinitif(item)))}}
+                                <td colspan="6" align="center">{{formatageSomme(parseFloat(getCautionnementDefinitif(item)))}}
                                    </td>
                             </tr>
                             <tr>
                                 <td><b>Date d'approbation</b></td>
-                                <td colspan="3" align="center">{{formaterDate(getDateApprobation(item))}}</td>
+                                <td colspan="6" align="center">{{formaterDate(getDateApprobation(item))}}</td>
                                 <td><b>Avance de démarrage</b> </td>
-                                <td colspan="3" align="center">{{formatageSomme(parseFloat(getAvanceDemarageTTC(item)))}}</td>
+                                <td colspan="6" align="center">{{formatageSomme(parseFloat(getAvanceDemarageTTC(item)))}}</td>
                             </tr>
                             <tr>
                                 <td><b>Autorité approbatrice</b></td>
-                                <td colspan="3" align="center">{{getAutoriteApprobation(item)}}</td>
+                                <td colspan="6" align="center">{{getAutoriteApprobation(item)}}</td>
                                 <td><b>Engagement prévu année n</b> </td>
-                                <td colspan="3" align="center"></td>
+                                <td colspan="6" align="center"></td>
                             </tr>
                             <tr>
                                 <td><b>Date de l'ordre de service de démarrage</b></td>
-                                <td colspan="3" align="center">{{formaterDate(getDateOrdreServiceDemarage(item))}}</td>
+                                <td colspan="6" align="center">{{formaterDate(getDateOrdreServiceDemarage(item))}}</td>
                                 <td><b>Engagement prévu année n+1</b> </td>
-                                <td colspan="3" align="center"></td>
+                                <td colspan="6" align="center"></td>
                             </tr>
                         </table>
                     </td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="background: #fce4d6 !important;" align="center">RECAP DE LA CONTRACTUALISATION</td>
+                </tr>
+                <tr>
+                    <td style="background: #f2f2f2 !important; width: 10px !important;">N° du Lot</td>
+                    <td style="background: #f2f2f2 !important;width: 10px !important">Objet (libellé) du lot</td>
+                    <td style="background: #f2f2f2 !important;">Proposition d'attribution (Nom de l'entreprise ou du groupement)</td>
+                    <td style="background: #f2f2f2 !important;">
+                        <table class="table">
+                            <tr><td style="background: #f2f2f2 !important;" colspan="4">Cautionnement provisoire</td></tr>
+                            <tr>
+                                <td style="background: #f2f2f2 !important;">Structure émétrice</td>
+                                <td style="background: #f2f2f2 !important;">Montant</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="background: #f2f2f2 !important;">Délai de validité de l'offre</td>
+                    <td style="background: #f2f2f2 !important;">Délai de livraison ou d'exécution </td>
+                    <td style="background: #f2f2f2 !important;">Montant lu de la soumission en F CFA TTC</td>
+                    <td style="background: #f2f2f2 !important;">Montant corrigé de la soumission en F CFA TTC</td>
+                    <td style="background: #f2f2f2 !important;">ECART</td>
+                    <td style="background: #f2f2f2 !important;">
+                        <table class="table">
+                            <tr><td colspan="6" style="background: #f2f2f2 !important;">OBSERVATIONS CF / DMP / ANRMP/AUTRES</td></tr>
+                            <tr>
+                                <td style="background: #f2f2f2 !important;">Structure émétrice</td>
+                                <td style="background: #f2f2f2 !important;">Date et Observations</td>
+                                <td style="background: #f2f2f2 !important;">Date et Décisions</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="background: #f2f2f2 !important;">Décision finale d'attribution de la COJO</td>
+
+                </tr>
+
+
+                <tr v-for="item in getLotMarche(detail.id)" :key="'lm'+item.id">
+                    <td colspan="1">{{item.numero_lot}}</td>
+                    <td>{{item.objet}}</td>
+                    <td>{{getNomEntrepriseAttribution(item)}}</td>
+                    <td>
+                        <table class="table">
+                            <tr>
+                                <td colspan="2">{{getStructureEmetrice(item)}}</td>
+                                <td colspan="2">
+                                    {{formatageSomme(parseFloat(getMontantOffreTechnique(item)))}}
+                               </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>{{getDelaiOffreTechnique(item)}}</td>
+                    <td>{{getDelaiExecution(item)}} </td>
+                    <td> {{formatageSomme(parseFloat(getMontantTTCSoumisOffreFinancier(item)))}}</td>
+                    <td>{{formatageSomme(parseFloat(getMontantTTCCorrigeOffreFinancier(item)))}}</td>
+                    <td>{{formatageSomme(parseFloat(ecartOffreFinancier(item)))}}</td>
+                    <td>
+                        <table class="table">
+                            <tr>
+                                <td  colspan="2"></td>
+                                <td  colspan="1"></td>
+                                <td  colspan="2"></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td></td>
+
                 </tr>
 
             </table>
@@ -201,17 +269,17 @@
             this.detail = this.marches.find(
                 idmarche => idmarche.id == this.$route.params.id
             )
-            console.log(".........................")
-       console.log(this.detail);
-            console.log("...........000000000..............")
+       //      console.log(".........................")
+       // console.log(this.detail);
+       //      console.log("...........000000000..............")
         },
         computed:{
 
             ...mapGetters("bienService", ["getterCojos","mandate","getMandatPersonnaliserVise",
                 "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
                 "getterDossierCandidats","marches","gettersOuverturePersonnaliser","getterAnalyseDossiers",
-                "getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser",
-                "typeMarches","getterAnoDMPBailleur","personnaliseGetterMarcheBailleur",'gettersCotations'
+                "getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser","gettersOffreTechniques","getterOffreFinanciers",
+                "typeMarches","getterAnoDMPBailleur","personnaliseGetterMarcheBailleur",'gettersCotations',"getterProceVerballe"
             ]),
 
             ...mapGetters("uniteadministrative", [
@@ -226,8 +294,207 @@
                 // "chapitres",
                 // "sections"
             ]),
+            ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
                 'types_financements']),
+
+            getDossierCandidatAttribue(){
+                return marche=>{
+                    let objet=this.getterDossierCandidats.find(item=>{
+                        if(item.marche_id==marche.parent_id && item.entreprise_id==this.getIdEntreprise(marche)){
+                            return item
+                        }
+                    })
+
+                    if(objet==undefined)
+                        return ""
+                    return objet
+                }
+            },
+            getCandidatOffreTechniqueAttribue(){
+              return marche=>{
+                  let objet=this.getDossierCandidatAttribue(marche)
+                  console.log(objet)
+                  if(objet=="")
+                      return ""
+                  let offre=this.gettersOffreTechniques.filter(item=>item.dossier_candidat_id==objet.id)
+                  return offre
+              }
+            },
+
+            getCandidatOfferFinancierAttribue(){
+                return marche=>{
+                    let objet=this.getDossierCandidatAttribue(marche)
+                    console.log(objet)
+                    if(objet=="")
+                        return ""
+                    let offre=this.getterOffreFinanciers.filter(item=>item.dossier_candidat_id==objet.id)
+                    return offre
+                }
+            },
+
+            getStructureEmetrice(){
+                return marche=>{
+
+                  let offre=this.getCandidatOffreTechniqueAttribue(marche)
+
+                    if(offre=="")
+                        return ""
+                    let objet=offre.find(item=>{
+                        if(item.marche_id==marche.id){
+                            return item
+                        }
+                    })
+                    console.log(objet)
+                    if(objet==undefined)
+                        return ""
+                    return objet.structure_emetrice
+                }
+            },
+            getMontantOffreTechnique(){
+                return marche=>{
+                    let offre=this.getCandidatOffreTechniqueAttribue(marche)
+
+                    if(offre=="")
+                        return 0
+                    let objet=offre.find(item=>{
+                        if(item.marche_id==marche.id){
+                            return item
+                        }
+                    })
+                    //  console.log(objet)
+                    if(objet==undefined)
+                        return 0
+                    return objet.montant
+                }
+            },
+
+    getDelaiExecution(){
+        return marche=>{
+            let offre=this.getCandidatOffreTechniqueAttribue(marche)
+
+            if(offre=="")
+                return ""
+            let objet=offre.find(item=>{
+                if(item.marche_id==marche.id){
+                    return item
+                }
+            })
+            //  console.log(objet)
+            if(objet==undefined)
+                return 0
+            return objet.delai_execution
+        }
+    },
+
+            getDelaiOffreTechnique(){
+                return marche=>{
+                    let offre=this.getCandidatOffreTechniqueAttribue(marche)
+
+                    if(offre=="")
+                        return ""
+                    let objet=this.gettersOffreTechniques.find(item=>{
+                        if(item.marche_id==marche.id){
+                            return item
+                        }
+                    })
+                    //  console.log(objet)
+                    if(objet==undefined)
+                        return 0
+                    return objet.delai_validite_offre
+                }
+            },
+            getMontantTTCSoumisOffreFinancier(){
+                return marche=>{
+                    let offre=this.getCandidatOfferFinancierAttribue(marche)
+
+                    if(offre=="")
+                        return 0
+                    let objet=offre.find(item=>{
+                        if(item.marche_id==marche.id){
+                            return item
+                        }
+                    })
+
+
+                    if(objet==undefined)
+                        return 0
+                //    console.log(objet.montant_total_ht)
+                    return objet.montant_total_ht
+                }
+            },
+            getMontantTTCCorrigeOffreFinancier(){
+                return marche=>{
+                    let offre=this.getCandidatOfferFinancierAttribue(marche)
+
+                    if(offre=="")
+                        return 0
+                    let objet=offre.find(item=>{
+                        if(item.marche_id==marche.id){
+                            return item
+                        }
+                    })
+                    //  console.log(objet)
+                    if(objet==undefined)
+                        return 0
+                    return objet.hist_montant_ttc
+                }
+            },
+            ecartOffreFinancier(){
+                return marche=>{
+                  return parseFloat(this.getMontantTTCSoumisOffreFinancier(marche))- parseFloat(this.getMontantTTCCorrigeOffreFinancier(marche))
+                }
+            },
+            getDateJugement(){
+              return id=>{
+                  if(id!=""){
+                      let objet=this.getterProceVerballe.find(item=>item.marche_id==id)
+                      if(objet!=undefined)
+                          return objet.date_rapport_jugement
+                      return ""
+                  }
+              }
+            },
+            getReferenceDossier(){
+                return id=>{
+                    if(id!=''){
+                        let objet=this.appelOffres.find(item=>item.marche_id==id)
+                        if(objet!=undefined)
+                            return objet.ref_appel
+                        return ""
+                    }
+                }
+            },
+            getNumeroAutorisation(){
+                return id=>{
+                    if(id!=''){
+                        let objet=this.appelOffres.find(item=>item.marche_id==id)
+                        if(objet!=undefined)
+                            return objet.numero_autorisation
+                        return ""
+                    }
+                }
+            },
+            getDateDepotLimite(){
+                return id=>{
+                    if(id!=''){
+                        let objet=this.appelOffres.find(item=>item.marche_id==id)
+                        if(objet!=undefined)
+                            return objet.date_limite
+                        return ""
+                    }
+                }
+            },
+            getHeureDepotLimite(){
+                return id=>{
+                    if(id!=''){
+                        let objet=this.appelOffres.find(item=>item.marche_id==id)
+                        if(objet!=undefined)
+                            return objet.heure
+                        return ""
+                    }
+                }
+            },
             nbrEntrepriseDepoDossierCandidat(){
                 return id=>{
                     let objet=this.gettersCotations.filter(item=>item.marche_id==id)
@@ -267,7 +534,7 @@
                         objet.forEach(function (val) {
                             let jour=vm.nombreDejourCalcule(vm.getAppelOffre(id).date_limite,val.date_cotation)
                             if(jour>=0){
-                                console.log(jour)
+                                // console.log(jour)
                                 collection.push(val)
                             }
                         })
@@ -286,7 +553,7 @@
                         objet.forEach(function (val) {
                             let jour=vm.nombreDejourCalcule(vm.getAppelOffre(id).date_limite,val.date_cotation)
                             if(jour<0){
-                                console.log(jour)
+                                // console.log(jour)
                                 collection.push(val)
                             }
                         })
@@ -406,7 +673,7 @@
             },
            getNumeroMarche(){
              return marche=>{
-                 console.log(marche)
+                 // console.log(marche)
                  if(marche.numero_marche!=""){
                      return marche.numero_marche
                  }
@@ -415,7 +682,7 @@
            },
            getDateApprobation(){
                return marche=>{
-                   console.log(marche)
+                   // console.log(marche)
                    if(marche.acte_effet_financiare.length>0){
                        let act=marche.acte_effet_financiare[0]
                        return act.date_approbation
@@ -425,7 +692,7 @@
            },
             getAutoriteApprobation(){
                 return marche=>{
-                    console.log(marche)
+                    // console.log(marche)
                     if(marche.acte_effet_financiare.length>0){
                         let act=marche.acte_effet_financiare[0]
                         return act.autorite_approbation
@@ -435,7 +702,7 @@
             },
             getDateOrdreServiceDemarage(){
                 return marche=>{
-                    console.log(marche)
+                    // console.log(marche)
                     if(marche.acte_effet_financiare.length>0){
                         let act=marche.acte_effet_financiare[0]
                         return act.date_odre_service
@@ -445,7 +712,7 @@
             },
             getCautionnementDefinitif(){
                 return marche=>{
-                    console.log(marche)
+                    // console.log(marche)
                     if(marche.acte_effet_financiare.length>0){
                         let act=marche.acte_effet_financiare[0]
                         return act.montant_ht_cautionnement
@@ -455,7 +722,8 @@
             },
             getAvanceDemarageTTC(){
                 return marche=>{
-                    console.log(marche)
+                    // console.log("..........0............0............01")
+                    // console.log(marche)
                     if(marche.acte_effet_financiare.length>0){
                         let act=marche.acte_effet_financiare[0]
                         return act.avance_demarrage_ttc
@@ -463,9 +731,35 @@
                     return 0
                 }
             },
+
+
+            //Entreprise Gagnante entreprise_id
+            getNomEntrepriseAttribution(){
+                return marche=>{
+                    let entreprise_id=this.getIdEntreprise(marche)
+
+                    if(entreprise_id!=""){
+                        let entreprise=this.entreprises.find(item=>item.id==entreprise_id)
+                        return entreprise.raison_sociale
+                    }
+                    return ""
+                }
+            },
+
+            getIdEntreprise(){
+                return marche=>{
+                   // console.log(marche.id)
+                    if(marche.acte_effet_financiare.length>0){
+                        let act=marche.acte_effet_financiare[0]
+                        console.log(act.entreprise_id)
+                        return act.entreprise_id
+                    }
+                    return ""
+                }
+            },
             bailleuEtat(){
               return bailleur=>{
-                  console.log(bailleur)
+                  // console.log(bailleur)
                   let objet=this.sources_financements.find(item=>item.id==bailleur)
                 //  console.log(objet)
                   if(objet==undefined)
@@ -477,7 +771,7 @@
             },
             bailleurPasEtat(){
                 return bailleur=>{
-                    console.log(bailleur)
+                    // console.log(bailleur)
                     let objet=this.sources_financements.find(item=>item.id==bailleur)
                     //  console.log(objet)
                     if(objet==undefined)
@@ -489,7 +783,7 @@
             },
             NomBailleurPasEtat(){
                 return bailleur=>{
-                    console.log(bailleur)
+                    // console.log(bailleur)
                     let objet=this.sources_financements.find(item=>item.id==bailleur)
                     //  console.log(objet)
                     if(objet==undefined)
