@@ -89,7 +89,7 @@
 
             <div class="row-fluid">
                 <div class="span12">
-                     <template v-if="this.budgetDisponible < 10000000 ">
+                     <template v-if="affcicheEtapeProcedure(10000000,'PSC-SC',detail_marche.id)">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -184,7 +184,7 @@
 
 
                      
-                    <template v-else-if="this.budgetDisponible < 30000000">
+                    <template v-else-if="affcicheEtapeProcedure (30000000,'PSC-AC',detail_marche.id)">
 <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -307,7 +307,7 @@
 
                     </div>
                     </template>
-                      <template v-else-if="this.budgetDisponible < 60000000">
+                      <template v-else-if="affcicheEtapeProcedure(60000000, 'PSL', detail_marche.id) ">
  
                      <div class="widget-box">
                         <div class="widget-title">
@@ -474,7 +474,7 @@
                     
                     </template>
                     
-                    <template v-else-if="this.budgetDisponible < 100000000 ">
+                    <template v-else-if="affcicheEtapeProcedure(100000000, 'PSO', detail_marche.id) ">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -639,7 +639,7 @@
                     </div>
                     
                      </template>
-  <template v-else-if="100000000 < this.budgetDisponible">
+  <template v-else-if="affcicheEtapeProcedure(100000000 , 'AON' , detail_marche.id)">
      <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -921,9 +921,84 @@
                          
 
                     </div>
+                    
 </template>
-          <template v-else>
-                   <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p>
+          <template v-else-if="affcicheEtapeProcedure(100000000,'ED',detail_marche.id )">
+          <div class="widget-box">
+             <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                 <li class="active"><a data-toggle="tab" href="#tab4569">l'offre</a></li>
+                                 <li class=""><a data-toggle="tab" href="#lot2">Lot</a></li>
+                              <li class=""><a data-toggle="tab" href="#tab28">D.ANO Bailleur</a></li>
+
+                                <li class=""><a data-toggle="tab" href="#tab10">Attribution</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab00214">Bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab2025">ANRMP</a></li>
+                               
+                              
+                                
+                                
+                            </ul>
+                        </div>
+        
+            <div class="widget-content tab-content">
+        <div id="tab4569" class="tab-pane active ">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+
+
+                      <publication-Offre :macheid="detail_marche.id"></publication-Offre>
+                         </div>
+
+                          <div id="lot2" class="tab-pane">
+                             <lot-marche :macheid="detail_marche.id"></lot-marche>
+                           </div>
+
+                         <div id="tab28" class="tab-pane">
+
+
+                    <AnoBailleur1 :macheid="detail_marche.id"></AnoBailleur1>
+              
+<!--                 <componentAvisBailleurCf :macheid="detail_marche.id"> </componentAvisBailleurCf>-->
+
+                </div>
+
+                           <div id="tab10" class="tab-pane">
+                    <ActEffeFinancier1 :macheid="detail_marche.id"></ActEffeFinancier1>
+<!--                <component-acte :macheid="detail_marche.id"></componentActe>-->
+
+                </div>
+                
+
+
+                         <div id="tab00214" class="tab-pane">
+                <div align="right">
+             <div class="widget-content">
+                 <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+                </div>
+                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                </div>
+
+                <div id="tab2025" class="tab-pane">
+                <!-- <div align="right">
+                    <div class="widget-content">
+                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div> -->
+                <Arnmp :macheid="detail_marche.id"></Arnmp>
+
+                </div>
+            </div>
+                    </div>
+                   <!-- <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p> -->
+                     </template>
+                     <template v-else>
+                       <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p>
                      </template>
                 </div>
             </div>
@@ -946,6 +1021,7 @@
 <script>
     import { mapGetters, mapActions } from "vuex";
     //import moment from 'moment';
+    import AnoBailleur1 from "../../../pages/bien_service/component/AnoBailleur/AnoBailleur1";
     import componentCotation from '../../bien_service/dossierDetailMarchePs/dossierComponentPs/componentCotation';
      //import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
      import componentOuverture from '../../bien_service/dossierDetailMarchePs/dossierComponentOuverture/componentOuverture';  
@@ -980,10 +1056,12 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
   import AnoDMP from "@/pages/bien_service/component/AnoDMP/AnoDMP";
   import AnoBailleur from "@/pages/bien_service/component/AnoBailleur/AnoBailleur";
     import ActEffeFinanciere from "@/pages/bien_service/component/ActEffetFinancier/ActEffeFinanciere";
+    import ActEffeFinancier1 from "../../../pages/bien_service/component/ActEffetFinancier/ActeEffetFinancier1"
     export default {
        
         components:{
           ActEffeFinanciere,
+          ActEffeFinancier1,
           AnoBailleur,
           AnoDMP,
           PvJugement,
@@ -1000,6 +1078,7 @@ Arnmp,
 invitationCf,
 mandateBs,
 dossierCandidat,
+AnoBailleur1,
  //componentOuverture1,
            // componentOuvertureMembre,
           //  componentAnalyse,
@@ -1087,32 +1166,146 @@ created() {
         }
       };
     },
+
+    affcicheEtapeProcedure(){
+      return (dotation,procedure,marche_id)=>{
+                  console.log(procedure)
+
+               let offre=this.appelOffres.find(item=>item.marche_id==marche_id)
+              console.log(offre)
+              if(offre!=undefined){
+                   //test
+                   
+                   let mode_passation=this.procedurePassations.find(item=>item.id==offre.mode_passation_id)
+                   //
+                  if(mode_passation.code==procedure){
+                   
+                      return true
+                  }
+
+                   return false
+               }
+
+            if( this.budgetDisponible < 10000000 && procedure=="PSC-SC"){
+                    return true
+                }
+                else if(this.budgetDisponible < 30000000 && procedure=="PSC-AC")
+                {
+            return true
+                }
+                else if(this.budgetDisponible < 60000000 && procedure=="PSL")
+                {
+           return true
+                }
+                else if(this.budgetDisponible < 100000000 && procedure=="PSO" )
+                {
+           return true
+                }
+                else if(100000000 < this.budgetDisponible && (procedure=="AOR" || procedure=="AON" || procedure=="AOI"))
+                {
+            return true
+                }
+                else if(100000000 > this.budgetDisponible && procedure=="ED" || procedure=="CON")
+                {
+                 return true
+                }
+
+
+      }
+    },
+
 afficheLeNomDesProcedure(){
-    if( this.budgetDisponible < 10000000){
+
+    if(this.affcicheEtapeProcedure(10000000,'PSC-SC',this.detail_marche.id)){
         return "Procédure Simplifiée de demande de Cotation(PSC Sans comité)"
     }
-    else if(this.budgetDisponible < 30000000)
+    else if(this.affcicheEtapeProcedure(30000000,'PSC-AC',this.detail_marche.id))
     {
 return "Procédure Simplifiée de demande de Cotation(PSC Avec comité)"
     }
-    else if(this.budgetDisponible < 60000000 )
+    else if(this.affcicheEtapeProcedure(60000000,'PSL',this.detail_marche.id))
     {
 return "Procédure Simplifiée à compétition Limitée(PSL)"
     }
-    else if(this.budgetDisponible < 100000000 )
+    else if(this.affcicheEtapeProcedure(100000000,'PSO',this.detail_marche.id))
     {
 return "Procédure Simplifiée à compétition Ouverte(PSO)"
     }
+    
+    else if(this.affcicheEtapeProcedure(0,'ED',this.detail_marche.id))
+    {
+     return "Entente diret ou Convention (ED ou CONV)"
+    }
      else if(100000000 < this.budgetDisponible)
     {
-return "Appel d'Offre Ouvert(AON ou AOI)"
+return "Appel d'Offre Ouvert(AON ou AOI ou AOR)"
     }
-    
 
   return null  
 
 
 },
+
+// affcicheEtapeProcedure(){
+//       return (dotation,procedure,marche_id)=>{
+//                   //console.log(procedure)
+
+//                let offre=this.appelOffres.find(item=>item.marche_id==marche_id)
+//               console.log(offre)
+//               if(offre!=undefined){
+//                    //test
+                   
+//                    let mode_passation=this.procedurePassations.find(item=>item.id==offre.mode_passation_id)
+//                     let proc=""
+//                     if(mode_passation==undefined)
+//                          return this.verificationAffcicheDationMarche(procedure)
+//                 //  if(procedure.indexOf(mode_passation.code) != -1)
+//                 //         {  
+//                 //          return true
+//                 //         }
+
+//                   if(mode_passation.code==proc){
+                   
+//                       return true
+//                   }
+
+//                    return false
+//                }
+
+//             return this.verificationAffcicheDationMarche(procedure)
+
+
+//       }
+//     },
+//     verificationAffcicheDationMarche(){
+//           return procedure =>{
+//             if( this.budgetDisponible < 10000000 && procedure=="PSC-SC"){
+//                     return true
+//                 }
+//                 else if(this.budgetDisponible < 30000000 && procedure=="PSC-AC")
+//                 {
+//             return true
+//                 }
+//                 else if(this.budgetDisponible < 60000000 && procedure=="PSL")
+//                 {
+//            return true
+//                 }
+//                 else if(this.budgetDisponible < 100000000 && procedure=="PSO" )
+//                 {
+//            return true
+//                 }
+//                  else if(0 < this.budgetDisponible && procedure=="ED" || procedure=="CON")
+//                 {
+//                  return true
+//                 }
+//                 else if(100000000 < this.budgetDisponible && (procedure=="AOR" || procedure=="AON" || procedure=="AOI"))
+//                 {
+//             return true
+//                 }
+               
+//                 return null
+//           }
+//     },
 
 
 listeAvisAnoBailleur(){
