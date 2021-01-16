@@ -1,86 +1,105 @@
 <template>
-     <div id="loginbox" class="spinner-border text-primary"> 
-                    
-            <form id="loginform" :class="{'is-waiting': loader}" class="form-vertical"> 
-				 <div class="control-group normal_text"> 
-                     <h3><img src="/lien/img/typo.png" alt="Logo" /></h3></div>
-                <div class="control-group">
-                    <div class="controls">
-                        <div class="main_input_box">
+
+
+    <div id="loginbox" class="spinner-border text-primary">
+
+        <form id="loginform" :class="{'is-waiting': loader}" class="form-vertical">
+            <div class="control-group normal_text">
+                <h3><img src="/lien/img/typo.png" alt="Logo" /></h3>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <div class="main_input_box">
                             <span class="add-on bg_lg"><i class="icon-user">
                                  </i></span>
-                                 <input type="text"
-                                 v-model="user.email"
-                                  placeholder="Email ou nom d'utilisateur" />
+                        <input type="text"
+                               v-model="user.email"
+                               placeholder="Email ou nom d'utilisateur" />
 
-                        </div>
                     </div>
                 </div>
-                <div class="control-group">
-                    <div class="controls">
-                        <div class="main_input_box">
-                            <!--
-                            <span class="add-on bg_ly"><i class="icon-lock">
-                                </i></span>
-                                 -->
-                                 <input :type="passwordFieldType" v-model="user.password"
-                                  placeholder="Mot de passe" /> 
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <div class="main_input_box">
+                        <!--
+                        <span class="add-on bg_ly"><i class="icon-lock">
+                            </i></span>
+                             -->
+                        <input :type="passwordFieldType" v-model="user.password"
+                               placeholder="Mot de passe" />
 
-                                <span @click.prevent="changePasswordVisibility()"
-                                 style="cursor: pointer;" class="add-on bg_ly">
+                        <span @click.prevent="changePasswordVisibility()"
+                              style="cursor: pointer;" class="add-on bg_ly">
                                  <i v-if="isVisible" class="icon-eye-open" title="Masquer le mot de passe" ></i>
                                 <i v-else class="icon-eye-close" title="Voir le mot de passe"></i>
 
                                  
                                  </span>
-                                 <br />
-                                <span v-if="errorMessage !== undefined" style="color: red;" class="form-control is-invalid">{{errorMessage}}</span>
+                        <br />
+                        <span v-if="errorMessage !== undefined" style="color: red;" class="form-control is-invalid">{{errorMessage}}</span>
 
-                                 <span v-if="champVide" style="color: red;" class="form-control is-invalid">Tous les champs ne sont pas renseignés !</span>
-                        </div>
-
+                        <span v-if="champVide" style="color: red;" class="form-control is-invalid">Tous les champs ne sont pas renseignés !</span>
                     </div>
+
                 </div>
-                <div class="form-actions">
+            </div>
+            <div class="form-actions">
                     <span class="pull-left"><a href="#"
-                     class="flip-link btn btn-warning" id="to-recover">
+                                               class="flip-link btn btn-warning" id="to-recover">
                      Mot de passe oublié?</a></span>
-                   
-                    <span class="pull-right">
+
+                <span class="pull-right">
                         <a  v-if="loader" href="#" class="btn btn-success" > un instant...</a>
                          <a  @click.prevent="login(user)" v-else href="#" class="btn btn-success" > Connexion</a>
 
                         </span>
-                </div>
-            </form>
-           
-        </div>
+            </div>
+        </form>
+
+    </div>
 </template>
 
 
 <script>
-import { mapGetters, mapActions} from 'vuex'
-export default {
-    data(){
-        return {
-             passwordFieldType: 'password',
-             isVisible: false,
-             user: {
-                 email: '',
-                 password: ''
-             }
+    import { mapGetters, mapActions} from 'vuex'
+    export default {
+        data(){
+            return {
+                passwordFieldType: 'password',
+                isVisible: false,
+                user: {
+                    email: '',
+                    password: ''
+                }
 
-        }
-    },
+            }
+        },
 
-    created(){
-        // console.log(localStorage)
-             this.getExercicesBudgetaires()
+        created(){
+            this.getGestionModules()
+    this.getAffectation()
+this.getFormeJuridiques()
+this.getRegimeImpositions()
+    this.getRoles()
+    this.getUtilisateurs()
+    this.getEquipeCF()
+    this.getPlanPassationMarche()
+    this.getRapport()
+      this.getBudgeChager()
+      this.getLigneExempter()
+      
+      this.getExercicesBudgetaires()
+      this.getTaux()
+      this.getModePaiement()
    this.getTitres()
    this.getNatureSection()
    this.getSection()
    this.getStructureProgramme()
    this.getPlanProgramme()
+    this.getStructurePays()
+   this.getPlanPays()
+   this.getPlanOrganigrammeUa()
    this.getStructureAdministrative()
    this.getServiceGestionnaire()
    this.getStructureGeographique()
@@ -88,31 +107,81 @@ export default {
    this.getChapitre()
    this.getStructureFonctionnelle()
    this.getPlanFonctionnelle()
+   this.getStructureDecision()
+   this.getPlanDecision()
+   this.getStructureActe()
+   this.getPlanActe()
+   this.getTypeconges()
+   this.getlisteNaturePrix()
    this.getSourceFinancement()
    this.getTypeFinancement()
    this.getStructureBudgetaire()
    this.getPlanBudgetaire()
     this.getStructureActivite()
-     this. getPlanActivite()
+    this.getPlanActivite()
+    this.getGrandeNature()
+    this.getTypeUniteAdministrative()
+    // this. getPlanActivite()
+    this.getAllUniteZone()
+    
+    this.getAllHistoriqueTransfert()
     this.getUnite()
     this.getZone()
+    this.getBanque()
+    this.getAgence()
+    this.getCompte()
+    this.getPays()
+this.getVille()
+this.getCommune()
+this.getChoixProcedure()
+this.getTransmission()
+this.getCotation()
+this.getOuverture()    
+this.getSanction()
+this.getAllRealiteServiceFait()
+     this.getAllLiquidation()
+// this.getTypeProcedure()
+
+
+
+
+
+
+
+
+ 
+
+this.getTypeCandidat();
+this.getTypeAppel()
+
+
+
+
 
     
-      this.getAllTypeTextes();
-    this.getAllNombreTypeText();
+      // this.getAllTypeTextes();
     this.getAllUniteAdministrative();
-    this.getAllNombreua();
-    this.getAllNoteService();
-    this.getAllNombreNoteServ();
-    this.getAllArchivageNoteService();
-    this.getAllNombreArchivage();
-    this.getAllActeCreation();
-    this.getAllNombreActeCreation();
-    this.getAllRechercheDocua();
-
+     
+     this.getAllBanqueUa()
+     this.getAllDecompteFacture()
+       this.getStructureOrganigrammeUa()
+ this.getAllBudgetEclate()
+    // this.getAllArchivageDocument();
+this.getAllDirection()
+this.getAllServiceua()
+this.getAllFonction()
+this.getAllBanqueUa()
+this.getFonctionBudgetaire()
+this.getDossierCandidatPersonnel()
+      this.getListeSalaireActuelAll()
     this.getTypeSalarie()
         this.getTypeActPersonnel()
         this.getFonctions()
+       this.getCategorieGrade()
+this.getFamilleFonction()
+this.getSituationMatrimonial()
+this.getContratResilie()
+this.getClassificationGradeFonction()
         this.getNiveauEtude()
         this.getTypeContrat()
         this.getClasses()
@@ -123,37 +192,137 @@ export default {
         this.getActPersonnel()
         this.getConges();
         this.allActeurDepense()
-    },
+        this.getpaiementPersonnel()
+        
+         this.getActeurFinContratAndActivite()
+        this.getordrepaiement()
+        this.getSalaire()
+            /**Gestion des marche*/
+            this.getPermissionConge()
+      this.getTypeMarche()
+      // this.s()
+      this.getSauvegardePhoto()
+      this.getSecteurActivite()
+      this.getEntreprise()
+      this.getHistoriqueEntreprise()
+      this.getEtapeMarche()
+      this.getDocumentPTBAPPM()
+    this.getMarcheContrat()
+    this.getPresenceCF()
+    this.getDocumentPresence()
+    this.getNombreMarcheByProcedure()
+this.getMarcheContratExecution()
 
-    computed: {
-        ...mapGetters('Utilisateurs', ['loader', 'champVide', 'error', 'errorMessage'])
-    },
+    this.getSourceFinnancementByMarche()
+      /**Fin gestion des marche**/
+this.getAllHistoriqueBudgetGeneral()
+      /**
+       * suivi des immo
+       */
+       this.getAllNatureEntre();
+      this.getAllCauseInactivite();
+      this.getAllEtatImmo();
+    this.getAllService();
+    this.getAllEquipement();
+    this.getAllFamille();
+    this.getAllArticles();
+    this.getAllNormeImmob();
+    this.getAllNormeArticle();
+    this.getAllStock();
+    this.getAllBesoinImmo();
+    this.getAllImmobilisation();
+    this.getAllHistoAffectation();
+    this.getAllDemandeMateriel();
+    this.getAllHistoAffectationService();
+    
+    //this.getAllAmortissement();
+      /**
+       * this.
+       * fin suivi des immo
+       */
 
-    methods: {
+      /**
+       * missions
+       */
+       this.getCategorieMission()
+     this.getNormeMission()
+   
+      this.getMission()
+       this.getHistoriqueMission() 
+this.getAllBudgetGeneral()
+this.getAllTransfert()
+ // debut du module de bien && service
+
+this.getBailleur()
+this.getTypeFacture()
+this.getTypeActeDepense()
+this.getTypeActeEffetFinancier()
+this.getTypeAnalyse()
+this.getTypePrestation()
+this.getCondition()
+this.getTextJuridique()
+this.getAutreTextJuridique()
+this.getTypeTextJuridique()
+this.getMotifDecision()
+this.getDocumentProcedure()
+// this.getDecisionMarche()
+
+// this.getDecisionMarche()
+this.getActeEffetFinancier()
+ this.getFacture()
+this.getTypeProcedures()
+this.getTypeMarches()
+this.getMarche()
+this.getModePassations()
+this.getProcedurePassation()
+this.getEngagement()
+this.getExecutionMarche()
+this.getMandat()
+this.getRapportJugement()
+this.getCandidatSelectionner()
+this.getDocument()
+ this.getRolemembreCojo()
+
+    this.getAppelOffre()
+this.getMarche()
+    this.getLot()
+    this.getModePassations()
+    this.getDossierCandidat()
+    this.getOffreFinancier()
+    this.getOffreTechnique()
+this.getLettreInvitation()
+    this.getMandater()
+    this.getCojo()
+    this.getAnalyseDossier()
+    this.getDemandeAno()
+    this.getAnalyseDMP()
+    this.getAnoDMPBailleur()
+    this.getObservationBailleur()
+
+   this.getAvenant()
+
+    this.getMarcheBailleur()
+this.getMembreCojo()
+    this.getProceVerbal()
+      this.getEcheances()
+        },
+
+        computed: {
+            ...mapGetters('Utilisateurs', ['loader', 'champVide', 'error', 'errorMessage'])
+        },
+
+        methods: {
 
             ...mapActions('Utilisateurs', ['login']),
 
-        changePasswordVisibility(){
-            this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
-            this.isVisible = !this.isVisible
-        },
+            changePasswordVisibility(){
+                this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
+                this.isVisible = !this.isVisible
+            },
 
-           ...mapActions("uniteadministrative", [
-      "getAllTypeTextes",
-      "getAllUniteAdministrative",
-      "getAllNoteService",
-      "getAllNombreNoteServ",
-      "getAllArchivageNoteService",
-      "getAllActeCreation",
-      "getAllRechercheDocua",
-      "getAllNombreActeCreation",
-      "getAllNombreua",
-      "getAllNombreArchivage",
-      "getAllNombreTypeText"
-    ]),
-
+            ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser","getEquipeCF"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
-    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle']),
+    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 
     ...mapActions('parametreGenerauxSourceDeFinancement',['getSourceFinancement',
         'getTypeFinancement'
@@ -164,122 +333,173 @@ export default {
    ...mapActions('parametreGenerauxProgrammeUnite',['getUnite', 'getZone']),
 
     ...mapActions('parametreGenerauxAdministratif',
-     ['getExercicesBudgetaires', 'getTitres', 
-    'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 
+     ['getGestionModules','getExercicesBudgetaires', 'getTitres', 'getTaux',
+    'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 'getStructurePays', 'getPlanPays','getPlanOrganigrammeUa',
     'getStructureAdministrative', 'getServiceGestionnaire', 'getStructureGeographique',
-    'getLocalisationGeographique', 'getChapitre']),
+    'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions"]),
 
-        ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons","getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel","getClasses","getEchelons","getActeur","getGrades","getNbrActeurAcrediteTaux","getActPersonnel","getConges","allActeurDepense"]),
+ ...mapActions("uniteadministrative", [
+      // "getAllTypeTextes",
+      "getAllUniteAdministrative",
+      // "getAllArchivageDocument",
+      "getAllDirection",
+      "getAllServiceua",
+      "getAllBanqueUa",
+      "getAllFonction",
+      "getAllBudgetGeneral",
+      "getAllHistoriqueBudgetGeneral",
+      "getAllUniteZone",
+      "getAllTransfert",
+      "getAllHistoriqueTransfert",
+     "getLigneExempter",
+     "getBudgeChager",
+     "getAllRealiteServiceFait",
+     "getAllLiquidation",
+     "getStructureOrganigrammeUa",
+     "getAllBanqueUa",
+     "getAllDecompteFacture",
+     "getAllBudgetEclate"
+    ]),
+            ...mapActions('personnelUA', ["getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
+            "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
+            "getClasses","getEchelons","getpaiementPersonnel","getActeur","getGrades","getNbrActeurAcrediteTaux",
+            "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
+"getFamilleFonction","getFonctionBudgetaire", "getDossierCandidatPersonnel",
+"getClassificationGradeFonction","getSituationMatrimonial", "getContratResilie"]),
 
+      ...mapActions('gestionMarche',['getTypeMarche',"getSecteurActivite",
+        "getEntreprise","getEtapeMarche","getDocumentPTBAPPM","getMarcheContrat","getPresenceCF",
+        "getDocumentPresence","getNombreMarcheByProcedure","sourcePersonnalise",
+        "getSourceFinnancementByMarche","getMarcheContratExecution",
+        "getBanque", "getCompte","getAgence","getSanction","getHistoriqueEntreprise"]),
 
+        ...mapActions("SuiviImmobilisation", [
+      "getAllNatureEntre",
+      "getAllCauseInactivite",
+      "getAllEtatImmo",
+      "getAllService",
+      "getAllEquipement",
+      "getAllFamille",
+      "getAllArticles",
+      "getAllNormeImmob",
+      "getAllNormeArticle",
+      "getAllStock",
+      "getAllBesoinImmo",
+      "getAllImmobilisation",
+      "getAllAmortissement",
+      "getAllHistoAffectation",
+      "getAllDemandeMateriel",
+      "getAllHistoAffectationService",
+      
+      
+    ]),
+
+    	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
+    'getMission']),
+      //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
+       ...mapActions('bienService', ['getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
+       'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
+         'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
+       'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",
+         "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation","getMandater",
+         "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure',
+         'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
+          'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
+          "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
+          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
+          "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
+
+          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances"])
+
+        }
     }
-}
 </script>
 
-<style  lang="scss" type="text/scss">
-/*
-.bg-login-image{
-background: url("../assets/logoA.jpg");
-}
-*/
-.is-waiting{
-  position:relative;
-  transition-duration: .3s;
-  > * {
-    opacity: .25;
-  }
-  &:before{
-    content:'';
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 9;
-  }
-  &:after{
-    content: '';
-    height: 64px;
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 64px;
-  }
-
-}
-
-</style>
 
 
 <style  scoped>
-/*
- @import './../../../public/lien/css/matrix-login.css';
- */
- html, body {    width: 100%;    height: 100%;}
-/*Bootstrap-overlay*/
+    /*
+     @import './../../../public/lien/css/matrix-login.css';
+     */
+    html, body {    width: 100%;    height: 100%;}
+    /*Bootstrap-overlay*/
 
-body {
- overflow-x: hidden;
- margin-top: -10px;  font-family: 'Open Sans', sans-serif; font-size:12px; color:#666;
-}
 
-.dropdown-menu .divider{ margin:4px 0px;}
-.dropdown-menu{ min-width:180px;}
-.dropdown-menu > li > a{ padding:3px 10px; color:#666; font-size:12px;}
-.dropdown-menu > li > a i{ padding-right:3px;}
-.userphoto img{ width:19px; height:19px;}
-select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input, .label, .dropdown-menu, .btn, .well, .progress, .table-bordered, .btn-group > .btn:first-child, .btn-group > .btn:last-child, .btn-group > .btn:last-child, .btn-group > .dropdown-toggle, .alert{ border-radius:0px;}
-.btn, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{ box-shadow:none;}
-.progress, .progress-success .bar, .progress .bar-success, .progress-warning .bar, .progress .bar-warning, .progress-danger .bar, .progress .bar-danger, .progress-info .bar, .progress .bar-info, .btn, .btn-primary{background-image:none;}
-.accordion-heading h5{ width:70%; }
-.form-horizontal .form-actions{ padding-left:20px; }
-#footer{ padding:10px; text-align:center;}
-hr{ border-top-color:#dadada;}
-.carousel{ margin-bottom:0px;}
-.fl { float:left}
-.fr {float:right}
-.label-important, .badge-important{ background:#f74d4d;}
+    .dropdown-menu .divider{ margin:4px 0px;}
+    .dropdown-menu{ min-width:180px;}
+    .dropdown-menu > li > a{ padding:3px 10px; color:#666; font-size:12px;}
+    .dropdown-menu > li > a i{ padding-right:3px;}
+    .userphoto img{ width:19px; height:19px;}
+    select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input, .label, .dropdown-menu, .btn, .well, .progress, .table-bordered, .btn-group > .btn:first-child, .btn-group > .btn:last-child, .btn-group > .btn:last-child, .btn-group > .dropdown-toggle, .alert{ border-radius:0px;}
+    .btn, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{ box-shadow:none;}
+    .progress, .progress-success .bar, .progress .bar-success, .progress-warning .bar, .progress .bar-warning, .progress-danger .bar, .progress .bar-danger, .progress-info .bar, .progress .bar-info, .btn, .btn-primary{background-image:none;}
+    .accordion-heading h5{ width:70%; }
+    .form-horizontal .form-actions{ padding-left:20px; }
+    #footer{ padding:10px; text-align:center;}
+    hr{ border-top-color:#dadada;}
+    .carousel{ margin-bottom:0px;}
+    .fl { float:left}
+    .fr {float:right}
+    .label-important, .badge-important{ background:#f74d4d;}
 
-/*Metro Background color class*/
-.bg_lb{ background:#27a9e3;}
-.bg_db{ background:#2295c9;}
-.bg_lg{ background:#28b779;}
-.bg_dg{ background:#28b779;}
-.bg_ly{ background:#ffb848;}
-.bg_dy{ background:#da9628;}
-.bg_ls{ background:#2255a4;}
-.bg_lo{ background:#da542e;}
-.bg_lr{ background:#f74d4d;}
-.bg_lv{ background:#603bbc;}
-.bg_lh{ background:#b6b3b3;}
+    /*Metro Background color class*/
+    .bg_lb{ background:#27a9e3;}
+    .bg_db{ background:#2295c9;}
+    .bg_lg{ background:#28b779;}
+    .bg_dg{ background:#28b779;}
+    .bg_ly{ background:#ffb848;}
+    .bg_dy{ background:#da9628;}
+    .bg_ls{ background:#2255a4;}
+    .bg_lo{ background:#da542e;}
+    .bg_lr{ background:#f74d4d;}
+    .bg_lv{ background:#603bbc;}
+    .bg_lh{ background:#b6b3b3;}
 
-body { background-color:#2E363F;    padding: 0;    margin-top:10%;}
-#logo, #loginbox {    width: 32%;    margin-left: auto;    margin-right: auto;    position: relative;}
-#logo img {  margin: 0 auto;    display: block;}
-#loginbox { overflow: hidden !important;    text-align: left;    position: relative; }
-#loginbox form{ width:100%; background:#2E363F; position:relative; top:0; left:0; }
-#loginbox .form-actions { padding: 14px 20px 15px;}
-#loginbox .form-actions .pull-left { margin-top:0px;}
-#loginbox form#loginform { z-index: 200; display:block;}
-#loginbox form#recoverform { z-index: 100;     display:none;}
-#loginbox form#recoverform .form-actions {    margin-top: 10px;}
-#loginbox .main_input_box { margin:0 auto; text-align:center; font-size:13px;}
-#loginbox .main_input_box .add-on{  padding:9px 9px; *line-height:31px; vertical-align:top; color:#fff;  width:30px; display:inline-block;}
-#loginbox .main_input_box input{ height:30px; vertical-align:top; border:0px; display:inline-block; width:75%; line-height:22px;  margin-bottom:3px;}
-#loginbox .controls{ padding:0 20px;}
-#loginbox .control-group{ padding:20px 0; margin-bottom:0px;}
-.form-vertical, .form-actions {  margin-bottom: 0; background:none; border-top:1px solid #3f4954; }
-#loginbox .normal_text{ padding:15px 10px; text-align:center; font-size:14px; line-height:20px; background:#2E363F; color:#fff; }
-@media (max-width:800px){
-#logo { width: 60%; }
-#loginbox{ width:80%}
-}
-@media (max-width: 480px){
-#logo { width: 40%; }
-#loginbox{ width:90%}
-#loginbox .control-group{ padding:8px 0; margin-bottom:0px;}
-}
+    body {
+        margin-left: 0px;
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 0px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        /*background:url(../images/bodybg.png); */
+
+    }
+    #logo, #loginbox {    width: 32%;    margin-left: auto;    margin-right: auto;    position: relative;}
+    #logo img {  margin: 0 auto;    display: block;}
+    #loginbox { overflow: hidden !important;
+        width: 430px;
+        text-align: left;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-box-shadow: -4px 10px 10px -6px rgba(0,0,0,0.75);
+        -moz-box-shadow: -4px 10px 10px -6px rgba(0,0,0,0.75);
+        box-shadow: -4px 10px 10px -6px rgba(0,0,0,0.75);
+    }
+    #loginbox form{ width:100%; background:#2E363F; position:relative; top:0; left:0; }
+    #loginbox .form-actions { padding: 14px 20px 15px;}
+    #loginbox .form-actions .pull-left { margin-top:0px;}
+    #loginbox form#loginform { z-index: 200; display:block;}
+    #loginbox form#recoverform { z-index: 100;     display:none;}
+    #loginbox form#recoverform .form-actions {    margin-top: 10px;}
+    #loginbox .main_input_box { margin:0 auto; text-align:center; font-size:13px;}
+    #loginbox .main_input_box .add-on{  padding:9px 9px; *line-height:31px; vertical-align:top; color:#fff;  width:30px; display:inline-block;}
+    #loginbox .main_input_box input{ height:30px; vertical-align:top; border:0px; display:inline-block; width:75%; line-height:22px;  margin-bottom:3px;}
+    #loginbox .controls{ padding:0 20px;}
+    #loginbox .control-group{ padding:20px 0; margin-bottom:0px;}
+    .form-vertical, .form-actions {  margin-bottom: 0; background:none; border-top:1px solid #3f4954; }
+    #loginbox .normal_text{ padding:15px 10px; text-align:center; font-size:14px; line-height:20px; background:#2E363F; color:#fff; }
+    @media (max-width:1024px){
+        #logo { width: 60%; }
+        #loginbox{ width:80%}
+    }
+    @media (max-width: 480px){
+        #logo { width: 40%; }
+        #loginbox{ width:90%}
+        #loginbox .control-group{ padding:8px 0; margin-bottom:0px;}
+    }
 
 </style>
 

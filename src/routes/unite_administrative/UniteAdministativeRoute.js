@@ -1,24 +1,237 @@
 import uniteadministrative from "../../pages/unites_administratives/unite_administrative.vue";
+//import banqueUa from "../../pages/unites_administratives/banqueUa.vue";
 import tableaudebord from "../../pages/unites_administratives/tableau_de_bord.vue";
 import typetext from "../../pages/unites_administratives/type_texte.vue";
 import archivagedocument from "../../pages/unites_administratives/archivage_document.vue";
 import listeuniteadministrative from "../../pages/unites_administratives/liste_unite_administrative.vue";
 import listetypetexte from "../../pages/unites_administratives/liste_type_texte.vue";
-import ordonnedocua from "../../pages/unites_administratives/ordonne_doc_ua.vue";
+// import ordonnedocua from "../../pages/unites_administratives/ordonne_doc_ua.vue";
+import budgetGenerals from "../../pages/unites_administratives/budgetGeneralComponent.vue";
+import DetailbudgetGeneralsNew from "../../pages/unites_administratives/detailBudgetParUa/budgetGeneralComponent.vue";
+import budgetGeneralParUa from "../../pages/unites_administratives/budgetGeneral.vue"
+import grpeBudgetSection from "../../pages/unites_administratives/grpeBudgetSection.vue"
+import grpeBudgetProgramme from "../../pages/unites_administratives/grpeBudgetProgramme.vue"
+import historiquebudgetGeneralComponent from "../../pages/unites_administratives/historiquebudgetGeneralComponent.vue";
+import banqueUa from "../../pages/unites_administratives/banqueUa.vue";
+import uniteZone from "../../pages/unites_administratives/grpeUniteZone/uniteZonePrincipal.vue";
+import transfert from "../../pages/unites_administratives/grpeTransfert/transfertPrincipal.vue";
+import tableaubordTransfert from "../../pages/unites_administratives/tableauBordTransfert.vue";
+import suiviTransfert from "../../pages/unites_administratives/suiviTransfert.vue";
+import detailHistoTreansfert from "../../pages/unites_administratives/detailHistoTreansfert.vue";
+
+import DirectionPrincipal from "../../pages/unites_administratives/grpeDirection/DirectionPrincipal.vue";
+import ServicePrincipal from "../../pages/unites_administratives/grpeService/ServicePrincipal.vue";
+import FonctionPrincipal from "../../pages/unites_administratives/grpeFonction/FonctionPrincipal.vue";
+
+import Budget from "../../pages/budget/Budget";
+import BudgetParUa from "../../pages/budget/BudgetParUa";
+import DetailBudgetImporte from "../../pages/budget/DetailBudgetImporte.vue";
+import LigneExempte from "../../pages/unites_administratives/LigneExempte";
+import StructureOrganigramme from "../../pages/parametres_generaux/administratifs/grpeStructureOrganigramme/structureOrganigrammePrincipal.vue";
+import Synthesebudg from "../../pages/gestionMarche/synthesebudg.vue";
+import decompte from "../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte.vue";
+import listeBudgetIntialParUa from "../../pages/unites_administratives/filtreDesBudgetSurTableauBord/listeBudgetIntialParUa.vue";
+import BudgetEclatePrincipal from "../../pages/Hors_sib/grpeBudgetEclate/BudgetEclateProjet.vue"
+
+import ListeBudgeteclate from "../../pages/Hors_sib/grpeBudgetEclate/ListeBudgetEclate.vue"
+import AjouterBudgetEclate from "../../pages/Hors_sib/grpeBudgetEclate/AjouterBudgetEclate.vue"
+
+import ListeVehicules from "../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeVehicule/ListeVehicules.vue"
+import ReparationVehicule from "../../pages/suivi_control_budgetaires/suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/ReparationVehicule.vue"
 
 
+import ListeStockArticle from "../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/gpeGestionStock/ListeStockArticle.vue"
 
+
+import ReportingBudget from "../../pages/unites_administratives/ReportingBudget/ReportingBudget.vue"
+import listeDesUaBudget from "../../pages/unites_administratives/ReportingBudget/listeDesUaBudget.vue"
+import DetailBudgetUa from "../../pages/unites_administratives/ReportingBudget/DetailBudgetUa.vue"
+import ModificationBudget from "../../pages/budget/ModificationBudget"
 const UniteAdministativeRoutes = [
+  {
+    path: "/DetailBudgetUa/",
+    name: "ModificationBudget",
+    component: ModificationBudget
+  },
+  {
+    path: "/DetailBudgetUa/:id",
+    name: "DetailBudgetUa",
+    component: DetailBudgetUa
+},
+  {
+    path: "/listeDesUaBudget",
+    name: "listeDesUaBudget",
+    component: listeDesUaBudget
+},
+  {
+    path: "/ReportingBudget",
+    name: "ReportingBudget",
+    component: ReportingBudget
+},
+  {
+    path: "/ListeStockArticle",
+    name: "ListeStockArticle",
+    component: ListeStockArticle
+},
+  {
+    path: "/ReparationVehicule",
+    name: "ReparationVehicule",
+    component: ReparationVehicule
+},
+  {
+    path: "/ListeVehicules",
+    name: "ListeVehicules",
+    component: ListeVehicules
+}
+,
+  {
+    path: "/AjouterBudgetEclate/:id",
+    name: "AjouterBudgetEclate",
+    component: AjouterBudgetEclate
+}
+,
+  {
+    path: "/ListeBudgeteclate/:id",
+    name: "ListeBudgeteclate",
+    component: ListeBudgeteclate
+}
+,
+  {
+    path: "/Budget-Eclate",
+    name: "BudgetEclatePrincipal",
+    component: BudgetEclatePrincipal
+}
+,
+ 
+  {
+    path: "/listeBudgetIntialParUa/:id",
+    name: "listeBudgetIntialParUa",
+    component: listeBudgetIntialParUa
+}
+,
+ 
+ 
+  {
+    path: "/decompte",
+    name: "decompte",
+    component: decompte
+  },
+  {
+    path: "/Detail-Budget-Generals",
+    name: "DetailbudgetGeneralsNew",
+    component: DetailbudgetGeneralsNew
+  },
+  {
+    path: "/synthÃ¨se_budgÃ©taire",
+    name: "Synthesebudg",
+    component: Synthesebudg
+  },
+  {
+    path: '/Banque',
+    name: "banqueUa",
+    component: banqueUa
+  },
+  {
+
+    path: '/Structure-Organigramme-ua',
+    name: "StructureOrganigramme",
+    component: StructureOrganigramme
+  },
+
+  {
+    path: '/Banque',
+    name: "banqueUa",
+    component: banqueUa
+  },
+
+  {
+
+    path: '/Direction',
+    name: "DirectionPrincipal",
+    component: DirectionPrincipal
+  },
+
+  {
+    path: '/ServicePerso',
+    name: "ServicePrincipal",
+    component: ServicePrincipal
+  },
+
+  {
+    path: '/FonctionPerso',
+    name: "FonctionPrincipal",
+    component: FonctionPrincipal
+  },
+
+
+
+
+
+
+
+
+
+  {
+    path: '/detail-Histo-Transfert/:detail_historiq_id',
+    name: "detailHistoTreansfert",
+    component: detailHistoTreansfert
+  },
+ 
+  {
+    path: "/suivi-Transfert",
+    name: "suiviTransfert",
+    component: suiviTransfert
+  },
+  {
+    path: "/tableau-bord-Transfert",
+    name: "tableaubordTransfert",
+    component: tableaubordTransfert
+  },
+  {
+    path: "/transfert",
+    name: "transfert",
+    component: transfert
+  },
+  {
+    path: "/unite-Zone",
+    name: "uniteZone",
+    component: uniteZone
+  },
+  {
+    path: "/historique-budget-general-component",
+    name: "historiquebudgetGeneralComponent",
+    component: historiquebudgetGeneralComponent
+  },
+  {
+    path: "/budget-General-Par-Programme",
+    name: "grpeBudgetProgramme",
+    component: grpeBudgetProgramme
+  },
+  {
+    path: "/budget-General-Par-section",
+    name: "grpeBudgetSection",
+    component: grpeBudgetSection
+  },
+  {
+    path: "/budget-General-Par-Ua",
+    name: "budgetGeneralParUa",
+    component: budgetGeneralParUa
+  },
+  {
+    path: "/budget-General",
+    name: "budgetGenerals",
+    component: budgetGenerals
+  },
   {
     path: "/unite-administrative",
     name: "uniteadministrative",
     component: uniteadministrative
   },
-  {
-    path: "/ordonne_doc_ua",
-    name: "ordonnedocua",
-    component: ordonnedocua
-  },
+  // {
+  //   path: "/ordonne_doc_ua",
+  //   name: "ordonnedocua",
+  //   component: ordonnedocua
+  // },
   {
     path: "/liste-unite-administrative",
         name: "listeuniteadministrative",
@@ -44,6 +257,31 @@ const UniteAdministativeRoutes = [
     path: "/archivage_document",
     name: "archivagedocument",
     component: archivagedocument
+  }
+  ,
+  {
+    path: "/import_budget",
+    name: "ImportBudget",
+    component: Budget
+  },
+
+  {
+    path: "/budget-par-ua",
+    name: "BudgetParUa",
+    component: BudgetParUa
+  }
+  ,
+    {
+        path: "/detail-budget-importer/:id",
+        name: "DetailBudgetImporte",
+        component: DetailBudgetImporte
+    }
+    ,
+
+  {
+    path: "/ligne_exempter",
+    name: "LigneExempter",
+    component: LigneExempte
   }
 ];
 

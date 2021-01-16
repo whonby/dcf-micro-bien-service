@@ -5,7 +5,7 @@ import store from '../vuex/store'
 
 import ActeurDepenseRoutes from "./acteur_depense/ActeurDepenseRoutes"
 
-
+import CartographieRoute from "./cartographie/CartographieRoute"
 // les routes module unite administrative = gestion unite administrative
 import UniteAdministativeRoute from "./unite_administrative/UniteAdministativeRoute";
 
@@ -38,12 +38,20 @@ import MissionRoutes from './suivi_control/MissionRoutes';
 // route planification budgetaire
 import planificationBudgetaireRoutes from './planification_budgetaire/planificationBudgetaireRoute';
 
+// route pour le bien et bservice
+import BienServiceRoutes from './bien_service/BienServiceRoutes';
 
-
+// la route de l'investissement
+import investissementRoutes from './investissement/investissementRoutes';
 
 // authentitification 
 import AuthRoutes from './auth/AuthRoutes' 
+import RouteDocumentation from "./documentation/RouteDocumentation"
 
+// les differentes rouetes de marches hors sib
+
+import marcheHorSibRoutes from './routesHorSib/marcheHorSibRoutes'
+import gestionrapport from './gestionRapport/gestionrapport'
 
 Vue.use(VueRouter);
 
@@ -51,13 +59,9 @@ Vue.use(VueRouter);
 const regroupementDesRoutes = [
   AuthRoutes,
   ActeurDepenseRoutes,
-
+  RouteDocumentation,
 
   UniteAdministativeRoute,
-
-
-
-
 
   AdministratifRoutesAdoni,
   SourceFinancementRoutesAdoni,
@@ -68,7 +72,17 @@ const regroupementDesRoutes = [
   GestionMarcheRoutes,
   suiviImmobilisationRoute,
   MissionRoutes,
-planificationBudgetaireRoutes
+planificationBudgetaireRoutes,
+BienServiceRoutes,
+investissementRoutes,
+  CartographieRoute,
+  gestionrapport,
+
+
+  // rouetes des marches hors sib
+
+  marcheHorSibRoutes
+
 
 ];
 const routes = [].concat(...regroupementDesRoutes);
@@ -90,7 +104,7 @@ router.beforeEach((to, from, next) => {
 
   // if logged in redirect to dashboard
   if(to.path === '/' && store.state.Utilisateurs.isLoggedIn) {
-     next({ name: 'ExerciceBudgetaire' })
+    next({ name: 'pagePresentation' })
       return
   }
 

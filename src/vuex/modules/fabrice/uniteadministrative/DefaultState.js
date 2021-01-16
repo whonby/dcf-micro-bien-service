@@ -1,10 +1,26 @@
 const defaultState = {
-  typeTextes: [],
-
+  // typeTextes: [],
   uniteAdministratives: [],
-
-  archivageDocuments: [],
-
+  // archivageDocuments: [],
+  budgetGeneral: [],
+  historiquebudgetGeneral: [],
+  uniteZones: [],
+  transferts: [],
+  historiquetransferts: [],
+  directions: [],
+  servicesua: [],
+  fonctionsua: [],
+  budgeCharge:[],
+  banqueUa:[],
+  ligneExempter: [],
+  realiteServiceFait: [],
+  liquidation: [],
+  decomptefactures: [],
+  historiqueDecomptefactures: [],
+  // banqueUa: [],
+  StructureOrganigrammeUa:[],
+  budgetEclate:[],
+  stockageArticles: [],
   // listeDocUniteAdministratives: [],
 
   // nbreUniteAdministratives: [],
@@ -12,6 +28,8 @@ const defaultState = {
   // nbreTypeTextes: [],
 
   // nbreArchivageDocuments: []
+  vehicules:[],
+  ReparationVehicules:[]
 };
 
 export default defaultState;

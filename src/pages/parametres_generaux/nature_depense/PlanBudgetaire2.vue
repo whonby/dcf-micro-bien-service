@@ -27,9 +27,9 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des plans budgetaires</h5>
+            <h5>Liste des plans budgetaires 4</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search">
+        Recherche: <input type="text" v-model="search">
 
           </div>
              
@@ -40,20 +40,20 @@
               <thead>
                 <tr>
                  <th>Code</th>
-                  <th>Libelle</th>
-                  <th>Structure budgetaire</th>
+                  <th>Libellé</th>
+                  <th>Structure budgétaire</th>
                    <th>Action</th>
                 </tr>
               </thead>
               <tbody> 
-                <tr class="odd gradeX" v-for="(plans, index) 
+                <tr class="odd gradeX" v-for="plans 
                 in localisationsFiltre" :key="plans.id">
-                  <td @dblclick="afficherMoadlModifierLocalisation(index)">
+                  <td @dblclick="afficherMoadlModifierLocalisation(plans.id)">
                     {{plans.code || 'Non renseigné'}}</td>
-                   <td @dblclick="afficherMoadlModifierLocalisation(index)">
+                   <td @dblclick="afficherMoadlModifierLocalisation(plans.id)">
                     {{plans.libelle || 'Non renseigné'}}</td>
 
-                   <td @dblclick="afficherMoadlModifierLocalisation(index)">
+                   <td @dblclick="afficherMoadlModifierLocalisation(plans.id)">
                   {{(plans.structure_budgetaire.libelle) || 'Non renseigné'}}</td>
                   <td>
 
@@ -74,7 +74,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucun plan budgetaire enregistré ! </h6>
+                <h6 style="color:red;">Aucun plan budgétaire enregistré ! </h6>
               </div>
             </div>
           </div>
@@ -91,13 +91,13 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter plans  budgetaire</h3>
+                <h3>Ajouter plan budgétaire</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
 
                  <div class="control-group">
-              <label class="control-label">Structure budgetaire:</label>
+              <label class="control-label">Structure budgétaire:</label>
               <div class="controls">
                 <select  v-model="formData.structure_budgetaire_id">
             <option v-for="budget in structures_budgetaires" :key="budget.id" 
@@ -140,13 +140,13 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier plan budgetaire</h3>
+                <h3>Modifier plan budgétaire</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
 
                   <div class="control-group">
-              <label class="control-label">Structure budgetaire:</label>
+              <label class="control-label">Structure budgétaire:</label>
               <div class="controls">
                 <select  v-model="editTitre.structure_budgetaire_id">
             <option v-for="budget in structures_budgetaires" :key="budget.id" 
@@ -284,14 +284,14 @@ return this.plans_budgetaires.filter((item) => {
         }
     },
 // afficher modal
-afficherMoadlModifierLocalisation(index){
+afficherMoadlModifierLocalisation(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editTitre = this.plans_budgetaires[index];
+        this.editTitre = this.plans_budgetaires.find(item =>item.id==id);
 
 
         

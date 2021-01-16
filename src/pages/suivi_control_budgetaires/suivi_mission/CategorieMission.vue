@@ -13,7 +13,7 @@
            <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste des Missions "
@@ -23,33 +23,47 @@
                       <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
+                            <div align="right" style="cursor:pointer;">
+                    <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+                        </div> 
+
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste categorie missions</h5>
+            <h5>Liste des catégories de missions</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search">
+        Recherche: <input type="text" v-model="search">
 
           </div>
              
           </div>
-         
+                       <div class="span4">
+            <br>
+          Afficher
+         <select name="pets" id="pet-select" v-model="size" class="span3">
+            <option value="10">10</option>
+            <option value="25">25</option>
+           <option value="50">50</option>
+       <option value="100">100</option>
+      </select>
+           Entrer
+        </div>
            <div class="widget-content nopadding">
+         
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
                     <th>Code</th>
-                  <th>Libelle</th>
+                  <th>Libellé</th>
                    <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(activites, index) in 
-                categorieMissionFiltre"
+                <tr class="odd gradeX" v-for="activites  in partition (categorieMissionFiltre,size)[page]"
                  :key="activites.id">
-                  <td @dblclick="afficherModalModifierBudgetaire(index)">
+                  <td @dblclick="afficherModalModifierBudgetaire(activites.id)">
                       {{activites.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierBudgetaire(index)">
+                  <td @dblclick="afficherModalModifierBudgetaire(activites.id)">
                       {{activites.libelle || 'Non renseigné'}}</td>
                    
                   <td>
@@ -58,14 +72,26 @@
 
               <div class="btn-group">
               <button @click.prevent="supprimerCategorieMission(activites.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
              
             </div>
 
                   </td>
                 </tr>
               </tbody>
+              
             </table>
+             <!-- <pagination :data="laravelData" @pagination-change-page="getCategorieMission()"></pagination> -->
+          
+          <!-- <div class="pagination alternate">
+              <ul>
+               
+                <li v-for="(item, index) in 4" :key="item" @click.prevent="paginate(index + 1)"><a href="#" >{{index + 1}}</a></li>
+               
+                
+              </ul>
+            </div> -->
+           
             <div v-if="categorieMissionFiltre.length">    
             </div>
             <div v-else>
@@ -75,6 +101,20 @@
             </div>
           </div>
         </div>
+
+         <div class="pagination alternate">
+             <ul>
+           <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+           <li  v-for="(titre, index) in partition(categorieMissionFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+           <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+            <li :class="{ disabled : page == partition(categorieMissionFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+           </ul>
+        </div>
+
+
+
+
+
       </div>
               </div>
             </div>
@@ -87,7 +127,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter categorie mission</h3>
+                <h3>Ajouter la catégorie de mission</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -99,9 +139,9 @@
             </div>
 
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
              
@@ -123,7 +163,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier categorie mission</h3>
+                <h3>Modifier la catégorie de mission</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -136,7 +176,7 @@
             </div>
           
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="editBudgetaire.libelle" class="span" placeholder="" />
               </div>
@@ -166,7 +206,7 @@
 
   ></fab>
 
-<notifications  />
+<notifications />
 
 
   </div>
@@ -175,15 +215,25 @@
    
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
-import {mapGetters, mapActions} from 'vuex'
+import {mapGetters, mapActions} from 'vuex';
+import {partition} from '../../../../src/Repositories/Repository'
+  import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 
 export default {
   
   data() {
     return {
+       page:0,
+       size:10,
+       active_el:0,
+
+      laravelData:{},
+      
       json_fields:{
-             'Libelle':'libelle',
-             'Code':'code'
+             'Code':'code',
+             'Libelle':'libelle'
+             
       },
         fabActions: [
               {
@@ -240,8 +290,44 @@ return this.categories_missions.filter((item) => {
 
   methods: {
     // methode pour notre action
-   ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'ajouterCategorieMission', 
-   'modifierCategorieMission','supprimerCategorieMission']),   
+   ...mapActions('suivi_controle_budgetaire', [ 'ajouterCategorieMission', 
+   'modifierCategorieMission','supprimerCategorieMission']),
+
+                   genererEnPdf(){
+         var doc = new jsPDF()
+        // doc.autoTable({ html: this.natures_sections })
+        var data = this.categorieMissionFiltre;
+         doc.setFontSize(8)
+        doc.text(75,10,"LISTE DES CATEGORIES DE MISSIONS")
+        doc.autoTable(this.getColumns(),data)
+       // doc.save('Type des actes de depenses.pdf')
+      doc.output('save','Liste des Categories des missions.pdf');
+      doc.output('dataurlnewwindow');
+     return 0
+     },
+getColumns() {
+    return [
+       {    title: "CODE", dataKey: "code"},
+        {    title: "LIBELLE", dataKey: "libelle"},
+       
+    ];
+},
+      // pagination
+
+partition:partition,
+
+  getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },  
    
     afficherModalAjouterCategorieMission(){
        this.$('#exampleModal').modal({
@@ -249,7 +335,12 @@ return this.categories_missions.filter((item) => {
               keyboard: false
              });
     },
+//     paginate(parm){
+//       console.log("ooooooooo")
+// this.getCategorieMission(parm)
+//     },
    // fonction pour vider l'input
+
      ajouterBudgetaireLocal () {
      this.ajouterCategorieMission(this.formData)
 
@@ -260,14 +351,14 @@ return this.categories_missions.filter((item) => {
          }
      },
 // afficher modal
-afficherModalModifierBudgetaire(index){
+afficherModalModifierBudgetaire(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editBudgetaire = this.categories_missions[index];
+        this.editBudgetaire = this.categories_missions.find(item => item.id==id);
 
 
         
@@ -275,11 +366,12 @@ afficherModalModifierBudgetaire(index){
 // 
 modifierBudgetaireLocal(){
   this.modifierCategorieMission(this.editBudgetaire)
-  this.editBudgetaire = {
-    code:"",
-    libelle:"",
+  this.$('#modifierModal').modal('hide');
+  // this.editBudgetaire = {
+  //   code:"",
+  //   libelle:"",
    
-  }
+  // }
 }
 
   }

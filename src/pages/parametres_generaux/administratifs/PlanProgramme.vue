@@ -13,7 +13,7 @@
          <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste plan programme "
@@ -23,51 +23,16 @@
                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
+                                                        <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des plans programmes</h5>
-             <!-- <div align="right">
-        Rechercher: <input type="text" v-model="search">
-
-          </div> -->
-             
-          </div>
-         
-          <div class="widget-content"> 
-            <!-- <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-
-                  <th>Code</th>
-                  <th>Libelle</th>
-                  <th>Structure programme</th>
-                   <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd gradeX" v-for="(plan_programme, index) in localisationsFiltre" 
-                :key="plan_programme.id">
-                  <td @dblclick="afficherModalModifierPlanProgramme(index)">
-                    {{plan_programme.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierPlanProgramme(index)">
-                    {{plan_programme.libelle || 'Non renseigné'}}</td>
-                  <td>
-                       {{plan_programme.structure_programme.libelle || 'Non renseigné'}}</td>
-                  <td>
-
-
-
-              <div class="btn-group">
-              <button @click.prevent="supprimerPlanProgramme(plan_programme.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-             
-            </div>
-
-                  </td>
-                </tr>
-              </tbody>
-            </table> -->
+             </div>
+<div class="widget-content ">
+            
                  <ul id="demo">
             <Tree class="item" v-for="plan in lesPlansParents"
             :key="plan.id" :item="plan"   
@@ -93,39 +58,46 @@
 <!----- ajouter modal   ---->
 
 
- <div id="exampleModal" class="modal hide">
+ <div id="exampleModal" class="modal hide ">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter plan programme</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-
-               <div class="control-group">
+                <table class="table table-bordered table-striped">
+                  <tr>
+                    <td>
+                      <div class="control-group">
               <label class="control-label">Structure programme:</label>
               <div class="controls">
-              <select v-model="formData.structure_programme_id" >
+              <select v-model="formData.structure_programme_id" class="span5" >
                 <option v-for="structure in structures_programmes " :key="structure.id" 
                  :value="structure.id">{{structure.libelle}} </option>
               </select>
             </div>
             </div>
-
-
-            <div class="control-group">
+                    </td>
+                  </tr>
+                  <tr><td>
+                    <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
+                <input type="text" v-model="formData.code" class="span5" placeholder="Saisir le code" />
               </div>
             </div>
-            <div class="control-group">
-              <label class="control-label">Libelle:</label>
+                    </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="control-group">
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libellé" />
               </div>
             </div>
-           
-          </form>              
+                      </td>
+                    </tr>
+                </table>             
           </div>
            <div class="modal-footer"> 
              <button v-show="formData.code.length && formData.libelle.length && 
@@ -140,54 +112,66 @@
 <!----- ajouter modal ajouter element enfant   ---->
 
 
- <div id="modalAjouterElementEnfant" class="modal hide">
+ <div id="modalAjouterElementEnfant" class="modal hide tailgrand">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter plan programme</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-
+                      <table class="table table-bordered table-striped">
+                  <tr>
+                    <td>
+                        <div class="control-group">
+              <label class="control-label">Code Parent</label>
+              <div class="controls">
+                 <input type="text" readonly :value="parentDossier.code" class="span5"  />
+              </div>
+            </div>
+                    </td>
+                    <td>
+                      <div class="control-group">
+              <label class="control-label">Libellé Parent</label>
+              <div class="controls">
+                <input type="text" readonly :value="parentDossier.libelle" class="span5"  />
+              </div>
+            </div>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td>
                    <div class="control-group">
-              <label class="control-label">Code parent:</label>
-              <div class="controls">
-                <input type="text" readonly :value="parentDossier.code" class="span"  />
-              </div>
-            </div>
-
-             <div class="control-group">
-              <label class="control-label">Libéllé parent:</label>
-              <div class="controls">
-                <input type="text" readonly :value="parentDossier.libelle" class="span"  />
-              </div>
-            </div>
-
-               <div class="control-group">
-              <label class="control-label">Structure programme:</label>
+              <label class="control-label">Structure programme</label>
               
               <div class="controls">
-              <select v-model="nouvelElementEnfant.structure_programme_id" >
+              <select v-model="nouvelElementEnfant.structure_programme_id" class="span5">
                 <option v-for="structure in structures_programmes " :key="structure.id" 
                  :value="structure.id">{{structure.libelle}} </option>
               </select>
             </div>
             </div>
-
-
-            <div class="control-group">
+                    </td>
+                    <td>
+                   <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.code" class="span" placeholder="Saisir le code" />
+                <input type="text" v-model="nouvelElementEnfant.code" class="span5" placeholder="Saisir le code" />
               </div>
             </div>
-            <div class="control-group">
-              <label class="control-label">Libelle:</label>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td colspan="2">
+                        <div class="control-group">
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libelle" />
+                 <input type="text" v-model="nouvelElementEnfant.libelle" class="span10" placeholder="Saisir le libelle" />
               </div>
             </div>
-           
-          </form>              
+                    </td>
+                  </tr>
+                </table>     
           </div>
            <div class="modal-footer"> 
              <button v-show="nouvelElementEnfant.code.length && nouvelElementEnfant.libelle.length && 
@@ -209,32 +193,42 @@
                 <h3>Modifier plan programme</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-
-                    <div class="control-group">
+                <table class="table table-bordered table-striped">
+                  <tr>
+                    <td>
+                         <div class="control-group">
               <label class="control-label">Structure programme:</label>
               <div class="controls">
-              <select v-model="editPlanProgramme.structure_programme_id" >
+              <select v-model="editPlanProgramme.structure_programme_id" class="span5">
                 <option v-for="structure in structures_programmes " :key="structure.id" 
                  :value="structure.id">{{structure.libelle}} </option>
               </select>
             </div>
             </div>
-            <div class="control-group">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="editPlanProgramme.code" class="span" placeholder="" />
+                <input type="text" v-model="editPlanProgramme.code" class="span5" placeholder="" />
               </div>
             </div>
-            <div class="control-group">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="editPlanProgramme.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editPlanProgramme.libelle" class="span5" placeholder="" />
               </div>
             </div>
-           
-
-          </form>              
+                    </td>
+                  </tr>
+                </table>
+                           
           </div>
            <div class="modal-footer"> 
              <button  v-show="editPlanProgramme.code.length && editPlanProgramme.libelle.length && 
@@ -268,6 +262,8 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import Tree from './Tree'
 export default {
   components: {
@@ -347,7 +343,29 @@ return this.plans_programmes.filter((item) => {
   methods: {
     // methode pour notre action
    ...mapActions('parametreGenerauxAdministratif', ['getPlanProgramme', 
-   'ajouterPlanProgramme','modifierPlanProgramme','supprimerPlanProgramme']),   
+   'ajouterPlanProgramme','modifierPlanProgramme','supprimerPlanProgramme']), 
+   
+   
+
+        genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.plans_programmes;
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES PLANS PROGRAMMES")
+  doc.autoTable(this.getColumns(),data)
+doc.save('plan_programme.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "CODE", dataKey: "code"},
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
    
     afficherModalAjouterPlanProgramme(){
        this.$('#exampleModal').modal({
@@ -385,6 +403,7 @@ return this.plans_programmes.filter((item) => {
  //afficher modal pour ajouter element enfant
 	 ajouterElementEnfant(item) {
     this.parentDossier = this.plans_programmes.find(plan => plan.id == item.id)
+    this.nouvelElementEnfant.code = this.parentDossier.code
      this.nouvelElementEnfant.parent = this.parentDossier.id
 
       this.$('#modalAjouterElementEnfant').modal({
@@ -427,3 +446,10 @@ this.editPlanProgramme = {
 };
 </script>
 
+<style scoped>
+.tailgrand{
+  width: 60%;
+  margin: 0 -30%;
+  
+}
+</style>

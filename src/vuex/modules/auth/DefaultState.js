@@ -7,8 +7,20 @@ const defaultstate = {
     loader: false,
     error: false,
     errorMessage: undefined,
-    type_uas: []
-
+    type_uas: [],
+    utilisateur:[],
+    roles:[],
+    affectation:[],
+    affectationGroupeUser:[],
+    uniteAdministrativeByUser:[],
+    groupe:[],
+    equipe_cf:[],
+    menu:[],
+    module:[],
+    ancien_password:false,
+    menuModuleSidcf:"",
+    serviceCF:[],
+    affectationServiceCF:[]
 
 };
 

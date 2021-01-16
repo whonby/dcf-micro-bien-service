@@ -13,7 +13,7 @@
          <div>
           
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste structures activites "
@@ -23,35 +23,48 @@
                                  <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
-
-                                         </div> <br>
+                   <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div>
+                                         </div> 
                                 <div class="widget-box">
 
                                     
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste structures activites</h5>
+            <h5>Liste des structures programmatiques</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search">
+        Recherche: <input type="text" v-model="search">
 
           </div>
              
           </div>
+          <div class="span4">
+                    <br>
+                    Afficher
+                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    Entrer
+                </div>
          
            <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
                     <th>Niveau</th>
-                  <th>Libelle</th>
-                   <th>Action</th>
+                  <th>Libellé</th>
+                   <th style="width:5%">Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(activites, index) in localisationsFiltre"
+                <tr class="odd gradeX" v-for="activites in partition (localisationsFiltre,size)[page]"
                  :key="activites.id">
-                  <td @dblclick="afficherModalModifierBudgetaire(index)">
+                  <td @dblclick="afficherModalModifierBudgetaire(activites.id)">
                       {{activites.niveau || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierBudgetaire(index)">
+                  <td @dblclick="afficherModalModifierBudgetaire(activites.id)">
                       {{activites.libelle || 'Non renseigné'}}</td>
                    
                   <td>
@@ -60,7 +73,7 @@
 
               <div class="btn-group">
               <button @click.prevent="supprimerStructureActivite(activites.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
              
             </div>
 
@@ -77,6 +90,15 @@
             </div>
           </div>
         </div>
+        <div class="pagination alternate">
+              <ul>
+                <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                   <li  v-for="(titre, index) in partition(localisationsFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+                   <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                <li :class="{ disabled : page == partition(localisationsFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+              </ul>
+           </div>
       </div>
               </div>
             </div>
@@ -89,28 +111,36 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter structure activites</h3>
+                <h3>Ajouter structure programmatique</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
+                <table class="table table-bordered table-striped">
+            <tr>
+              <td>
+                <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="formData.niveau" class="span" placeholder="Saisir le niveau" />
+                <input type="number" :value="tailleTableauStructureTache" class="span5" placeholder="Saisir le niveau" readonly/>
               </div>
             </div>
+              </td>
+            </tr>
 
-            <div class="control-group">
-              <label class="control-label">Libelle:</label>
+            <tr>
+              <td>
+                <div class="control-group">
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libellé" />
               </div>
             </div>
+              </td>
+            </tr>
              
-          </form>              
+          </table>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="formData.niveau.length  && formData.libelle.length"
+             <button v-show="formData.libelle.length"
               @click.prevent="ajouterBudgetaireLocal" class="btn btn-primary"
               href="#">Valider</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
@@ -125,29 +155,37 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier structure activites</h3>
+                <h3>Modifier structure programmatiques</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
+               <table class="table table-bordered table-striped">
 
-            <div class="control-group">
+            <tr>
+              <td>
+                <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="editBudgetaire.niveau" class="span" placeholder="" />
+                <input type="number" v-model="editBudgetaire.niveau" class="span5" placeholder="" readonly/>
               </div>
             </div>
+              </td>
+            </tr>
           
-            <div class="control-group">
+            <tr>
+              <td>
+                <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="editBudgetaire.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editBudgetaire.libelle" class="span5" placeholder="" />
               </div>
             </div>
+              </td>
+            </tr>
         
-          </form>              
+               </table>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="editBudgetaire.niveau.length  && editBudgetaire.libelle.length" 
+             <button 
              @click.prevent="modifierBudgetaireLocal(editBudgetaire)" class="btn btn-primary"
               href="#">Modifier</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
@@ -166,7 +204,8 @@
         bg-color="green"
 
   ></fab>
-<notifications  />
+
+<notifications />
 
   </div>
   
@@ -175,10 +214,17 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import {partition} from '../../../../src/Repositories/Repository'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   
   data() {
     return {
+      page:0,
+      size:10,
+      active_el:0,
+
        json_fields: {
             'Niveau': 'niveau',
             'Libelle': 'libelle',  
@@ -233,13 +279,52 @@ return this.structures_activites.filter((item) => {
 
    }
 )
-   }
+   },
+        tailleTableauStructureTache(){
+		return this.structures_activites.length + 1
+	}
   },
 
   methods: {
     // methode pour notre action
    ...mapActions('parametreGenerauxActivite', ['getStructureActivite', 'ajouterStructureActivite', 
-   'modifierStructureActivite','supprimerStructureActivite']),   
+   'modifierStructureActivite','supprimerStructureActivite']),  
+   
+   
+    // pagination
+   partition:partition,
+
+      getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+        genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.structures_activites;
+   doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES STRUCTURES PROGRAMMATIQUES")
+  doc.autoTable(this.getColumns(),data)
+doc.save('structure_programmatique.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "NIVEAU", dataKey: "niveau"},
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
    
     afficherModalAjouterStructureActivite(){
        this.$('#exampleModal').modal({
@@ -249,7 +334,11 @@ return this.structures_activites.filter((item) => {
     },
    // fonction pour vider l'input
     ajouterBudgetaireLocal () {
-      this.ajouterStructureActivite(this.formData)
+      var nouvelObjet = {
+			...this.formData,
+			niveau:this.tailleTableauStructureTache
+		}
+      this.ajouterStructureActivite(nouvelObjet)
 
         this.formData = {
               niveau:"",
@@ -258,14 +347,14 @@ return this.structures_activites.filter((item) => {
         }
     },
 // afficher modal
-afficherModalModifierBudgetaire(index){
+afficherModalModifierBudgetaire(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editBudgetaire = this.structures_activites[index];
+        this.editBudgetaire = this.structures_activites.find(item => item.id==id);
 
 
         
@@ -273,11 +362,12 @@ afficherModalModifierBudgetaire(index){
 // 
 modifierBudgetaireLocal(){
   this.modifierStructureActivite(this.editBudgetaire)
-  this.editBudgetaire = {
-    niveau:"",
-    libelle:"",
+  this.$('#modifierModal').modal('hide');
+  // this.editBudgetaire = {
+  //   niveau:"",
+  //   libelle:"",
    
-  }
+  // }
 }
 
   }

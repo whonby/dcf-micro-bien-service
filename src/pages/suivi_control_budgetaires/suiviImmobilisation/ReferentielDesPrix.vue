@@ -10,7 +10,7 @@
         <table class="table table-bordered table-striped">
           <tr>
                <td>
-              <div class="control-group">
+              <!-- <div class="control-group">
                 <label class="control-label">Equipement Type</label>
                 <div class="controls">
                   <select  v-model="formData.equipement_id">
@@ -22,14 +22,26 @@
                     >{{equipe.libelle}}</option>
                   </select>
                 </div>
-              </div>
-              
+              </div> -->
+              <div class="control-group">
+                            <label class="control-label">Type d'équipement:</label>
+                            <div class="controls">
+                              <select v-model="formData.equipement_id" class="span5">
+                                <option value>Selectionner</option>
+                                <option
+                                  v-for="typeua in equipements"
+                                  :key="typeua.id"
+                                  :value="typeua.id"
+                                >{{codeEquipement(typeua.id)}}</option>
+                              </select>
+                            </div>
+                          </div>
             </td>
             <td>
               <div class="control-group">
                 <label class="control-label">Famille:</label>
                 <div class="controls">
-                  <select  v-model="formData.famille_id" :readOnly="veifEquipementExist">
+                  <select  v-model="formData.famille_id" :readOnly="veifEquipementExist" class="span5">
                     
                     <option
                       v-for="famil in ArticleDynamiques(formData.equipement_id)"
@@ -40,7 +52,29 @@
                 </div>
               </div>
             </td>
-             <td>
+            <td>
+              
+             <div class="control-group">
+                <label class="control-label">Prix HT</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    v-model="formData.prix_ht"
+                    
+                    class="span5"
+                    placeholder="Saisir Prix HT"
+                  />
+                </div>
+              </div>
+            </td>
+             
+           
+           
+
+           
+          </tr>
+          <tr>
+            <td colspan="2">
               <div class="control-group">
                 <label class="control-label">Designation</label>
                 <div class="controls">
@@ -48,47 +82,31 @@
                     type="text"
                     v-model="formData.libelle"
                     
-                    class="span"
+                    class="span10"
                     placeholder="Saisir la Designation"
                   />
                 </div>
               </div>
             </td>
-           
-           
-
-           
-          </tr>
-          <tr>
-               <td>
-              
-             <div class="control-group">
-                <label class="control-label">Prix HT:</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    v-model="formData.prix_ht"
-                    
-                    class="span"
-                    placeholder="Saisir Prix HT"
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
+            <td>
              <div class="control-group">
                 <label class="control-label">Taux:</label>
                 <div class="controls">
                   <input
                     type="number"
-                    v-model="formData.taux"
+                  
+                    :value="affcherTauxEnCours"
                     readonly
-                    class="span"
+                    class="span5"
                     placeholder="Saisir la taux"
                   />
                 </div>
               </div>
             </td>
+          </tr>
+          <tr>
+               
+             
             <td>
               <div class="control-group">
                 <label class="control-label">Tva:</label>
@@ -97,19 +115,14 @@
                     type="number"
                    :value="montantTva"
                     readonly
-                    class="span"
+                    class="span5"
                     placeholder="Saisir Montant Tva"
                   />
                 </div>
               </div>
             </td>
            
-
-          </tr>
-          <tr>
-              
-            
-            <td>
+<td>
               <div class="control-group">
                 <label class="control-label">Montant TTC:</label>
                 <div class="controls">
@@ -117,15 +130,14 @@
                     type="number"
                     :value="montantTtc"
                     readonly
-                    class="span"
+                    class="span5"
                     placeholder="Saisir Montant TTC"
                   />
                 </div>
               </div>
             </td>
-           
-
           </tr>
+         
         </table>
       </div>
       <div class="modal-footer">
@@ -153,7 +165,7 @@
               <div class="control-group">
                 <label class="control-label">Equipement Type</label>
                 <div class="controls">
-                  <select  v-model="editReferentielPrix.equipement_id">
+                  <select  v-model="editReferentielPrix.equipement_id" class="span5">
                     
                     <option
                       v-for="equipe in equipements"
@@ -168,7 +180,7 @@
               <div class="control-group">
                 <label class="control-label">Famille:</label>
                 <div class="controls">
-                  <select  v-model="editReferentielPrix.famille_id">
+                  <select  v-model="editReferentielPrix.famille_id" class="span5">
                     
                     <option
                       v-for="famil in ArticleDynamiques(editReferentielPrix.equipement_id)"
@@ -179,27 +191,8 @@
                 </div>
               </div>
             </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Designation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    v-model="editReferentielPrix.libelle"
-                    
-                    class="span"
-                    placeholder="Saisir la Designation"
-                  />
-                </div>
-              </div>
-            </td>
-           
-           
-
-           
-          </tr>
-          <tr>
-               <td>
+             
+           <td>
               
              <div class="control-group">
                 <label class="control-label">Prix HT:</label>
@@ -208,13 +201,31 @@
                     type="number"
                     v-model="editReferentielPrix.prix_ht"
                     
-                    class="span"
+                    class="span5"
                     placeholder="Saisir Prix HT"
                   />
                 </div>
               </div>
             </td>
-             <td>
+
+           
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Designation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    v-model="editReferentielPrix.libelle"
+                    
+                    class="span10"
+                    placeholder="Saisir la Designation"
+                  />
+                </div>
+              </div>
+            </td>
+           <td>
              <div class="control-group">
                 <label class="control-label">taux:</label>
                 <div class="controls">
@@ -222,12 +233,16 @@
                     type="number"
                     v-model="editReferentielPrix.taux"
                     readonly
-                    class="span"
+                    class="span5"
                     placeholder="Saisir la taux"
                   />
                 </div>
               </div>
             </td>
+          </tr>
+          <tr>
+               
+             
            
             <td>
               <div class="control-group">
@@ -237,18 +252,13 @@
                     type="number"
                    :value="editmontantTva"
                     readonly
-                    class="span"
+                    class="span5"
                     placeholder="Saisir Montant Tva"
                   />
                 </div>
               </div>
             </td>
-
-          </tr>
-           <tr>
-              
-            
-            <td>
+ <td>
               <div class="control-group">
                 <label class="control-label">Montant TTC:</label>
                 <div class="controls">
@@ -256,15 +266,14 @@
                     type="number"
                     :value="editmontantTtc"
                     readonly
-                    class="span"
+                    class="span5"
                     placeholder="Saisir Montant TTC"
                   />
                 </div>
               </div>
             </td>
-           
-
           </tr>
+          
         </table>
       </div>
       <div class="modal-footer">
@@ -395,7 +404,12 @@ export default {
 
   computed: {
     ...mapGetters("SuiviImmobilisation", ["familles","equipements","getAfficheArticle"]),
-    // filtre_equipement() {
+        ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections","plans_programmes"]),
+  
+...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+   
+   
+   // filtre_equipement() {
     //   const st = this.search.toLowerCase();
     //   return this.familles.filter(type => {
     //     return (
@@ -404,6 +418,60 @@ export default {
     //     );
     //   });
     // }
+
+    codeEquipement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.equipements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return this.afficheLibellePlanEconomique(qtereel.code).concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+    afficheLibellePlanEconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code
+      }
+      return 0
+        }
+      };
+    },
+    affcherTauxEnCours() {
+      
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+    tauxArrondit() {
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.arrondit;
+      }
+      return 0
+    },
+
+
+
+
+
+
+
+
+
+
     ArticleDynamiques() {
       return id => {
         if (id != null && id != "") {
@@ -414,7 +482,7 @@ export default {
     montantTva() {
       const val =
         parseFloat(this.formData.prix_ht) *
-        parseFloat(this.formData.taux);
+        parseFloat(this.tauxArrondit);
       // parseFloat(this.formData.taux_id);
       if (isNaN(val)) return null;
       return parseFloat(val).toFixed(2);
@@ -466,10 +534,27 @@ export default {
     },
     // fonction pour vider l'input ajouter
     ajouterFamilleLocal() {
-      var nouvelObjet = {
+      if (this.formData.equipement_id == ""){
+        alert("veuillez Selectionner le type d'equipement")
+     
+      }
+      else if (this.formData.famille_id =="" ) {
+alert("veuillez Selectionner la famille")
+      }
+      else if (this.formData.libelle =="" ) {
+alert("veuillez remplir la designation")
+      }
+       else if (this.formData.prix_ht =="" ) {
+alert("veuillez remplir le prix Unitaire")
+      }
+     
+      else
+      {
+        var nouvelObjet = {
         ...this.formData,
         montant_ttc: this.montantTtc,
         tva: this.montantTva,
+        taux:this.affcherTauxEnCours
       };
       this.ajouterArticles(nouvelObjet);
 
@@ -479,10 +564,12 @@ export default {
         equipement_id:"",
         prix_ht:"",
         libelle: "",
-        taux:"0.18",
+        // taux:"0.18",
         tva:"",
         montant_ttc:""
       };
+      }
+      
     },
     // afficher modal de modification
     afficherModalModifierFamille(articles) {
@@ -495,14 +582,33 @@ export default {
     },
     // fonction pour vider l'input modification
     modifierFamilleLocal() {
-      var nouvelObjet1 = {
+         if (this.editReferentielPrix.equipement_id == ""){
+        alert("veuillez Selectionner le type d'equipement")
+     
+      }
+      else if (this.editReferentielPrix.famille_id =="" ) {
+alert("veuillez Selectionner la famille")
+      }
+      else if (this.editReferentielPrix.libelle =="" ) {
+alert("veuillez remplir la designation")
+      }
+       else if (this.editReferentielPrix.prix_ht =="" ) {
+alert("veuillez remplir le prix Unitaire")
+      }
+     
+      else
+      {
+        var nouvelObjet1 = {
         ...this.editReferentielPrix,
         montant_ttc: this.editmontantTtc,
         tva: this.editmontantTva,
+         taux:this.affcherTauxEnCours
         
       };
       this.modifierArticles(nouvelObjet1);
       this.$("#modificationModal").modal('hide');
+      }
+      
     },
     alert() {
       console.log("ok");
@@ -516,8 +622,8 @@ export default {
 
 <style scoped>
 .taillemodal {
-  width: 800px;
-  margin: 0 -380px;
+  width: 68%;
+  margin: 0 -850px;
 }
 
 </style>

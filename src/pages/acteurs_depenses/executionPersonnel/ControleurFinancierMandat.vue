@@ -1,0 +1,895 @@
+
+<template>
+   <div class="container-fluid">
+<div id="modalCfMandat" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">X</button>
+        <h3>Ajouter Observation CF</h3>
+      </div>
+      <div class="modal-body">
+       <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                            <label class="control-label">DÈcision CF </label>
+                            <div class="controls">
+                              <select v-model="editMandatPerso.decision_cf">
+                                <option value="0">Attente</option>
+                              <option value="8">Vis&eacute;</option>
+                             <option value="21171">Diff&eacute;r&eacute;</option>
+                             <option value="22171">R&eacute;jet&eacute;</option>
+                            
+    
+    </select>
+                           
+                            </div>
+                          </div>
+            </td>
+            <td>
+                    <div class="control-group">
+                            <label class="control-label">Motif CF </label>
+                            <div class="controls">
+                               <select v-model="editMandatPerso.motifcf" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementParent" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+          </tr>
+                
+                  <tr>
+                 <td>
+                    <div class="control-group">
+                            <label class="control-label">Libelle motif </label>
+                            <div class="controls">
+                               <select v-model="editMandatPerso.motif_cf" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementEnfant(editMandatPerso.motifcf)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+                 <td>
+                               <div class="control-group">
+                            <label class="control-label">Date Decision CF :</label>
+                            <div class="controls">
+                              <input type="date" class="span"  v-model="editMandatPerso.date_motif"/>
+                            </div>
+                          </div>
+                           </td>
+                 </tr>             
+                   <tr>
+                     <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Observation CF</label>
+                            <div class="controls">
+                              <textarea  class="span6" row = "6" v-model="editMandatPerso.observation">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                       <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
+                            <div class="controls">
+                              <input type="text" class="span6"  :value="afficheNomUtilisateur" readonly/>
+                            </div>
+                          </div>
+                       </td>
+                       </tr>      
+                        
+                           
+         
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierMandatPersonnel(editMandatPerso)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+
+                            <table class="table table-bordered table-striped" v-if="PaiementPersoid">
+                                            <thead>
+                   <tr>
+                    <th>Exercice en cours</th>
+                    <th title="unite administrative"> ua</th>
+                    <th>programme</th>
+                    <th>action</th>
+                    <th>activit&eacute;</th>
+                    <th>Ligne budgetaire</th>
+                    <th>Numero Engagement</th>
+                    <th>Numero mandat</th>
+                    <th>Montant autoris√©</th>
+                       <!-- <th>Decision Emetteur</th> -->
+                      <th>Date Decision</th>
+                       <th>Decision Cf</th>
+                      <th>Date Cf</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                   <tr class="odd gradeX" v-for="(item,index) in listeMandatPerso(PaiementPersoid)" :key="item.id">
+                                    <td>{{item.exercice_budget || 'Non renseign&eacute;'}}</td>
+                                   <td>{{afficherLibelleUa(item.ua_id) || 'Non renseign&eacute;'}}</td>
+                                     <td>{{afficherLibelleProgramme(item.programme_id) || 'Non renseign&eacute;'}}</td>
+                                    <td>{{afficherLibelleAction(item.action_id) || 'Non renseign&eacute;'}}</td>
+                                    
+                                     <td>{{afficherLibelleActivite(item.activite_id) || 'Non renseign&eacute;'}}</td>
+                                    <td>{{afficherLibelleLigne(item.budget_general_id) || 'Non renseign&eacute;'}}</td>
+                                     <td>{{item.numero_engage || 'Non renseign&eacute;'}}</td>
+                                     <td>{{item.numero_mandat || 'Non renseign&eacute;'}}</td>
+                                     
+                                      <td>{{formatageSomme(parseFloat(afficherMontantAutorise(item.ordrepaiemnet_id))) || 'Non renseign&eacute;'}}</td>
+                                    
+                                    
+                                   
+                  
+                    
+                                       <!-- <td>
+                       <button v-if="item.decision_emetteur == 2017"  class="btn  btn-success"   >                        
+                     
+                      <span    >Vis&eacute;</span>
+                      
+                      </button>
+                       <button v-else-if="item.decision_emetteur == 2117" class="btn  btn-warning" >                        
+                     
+                      
+                       <span  >Diff&eacute;r&eacute;</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="item.decision_emetteur == 2217" class="btn  btn-danger" >                        
+                     
+                      
+                       <span  >R&eacute;jet&eacute;</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info"  >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td> -->
+                    <td>{{formaterDate(item.date_decision_emetteur) || 'Non renseign&eacute;'}}</td>
+                     <td>
+                       <button v-if="item.decision_cf == 8"  class="btn  btn-success"  @click="afficheModalCf(index)" >                        
+                     
+                      <span    >Vis&eacute;</span>
+                      
+                      </button>
+                       <button v-else-if="item.decision_cf == 11" class="btn  btn-warning" @click="afficheModalCf(index)">                        
+                     
+                      
+                       <span  >Diff&eacute;r&eacute;</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="item.decision_cf == 22171" class="btn  btn-danger" @click="afficheModalCf(index)">                        
+                     
+                      
+                       <span  >R&eacute;jet&eacute;</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficheModalCf(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                    <td>{{formaterDate(item.date_motif) || 'Non renseign&eacute;'}}</td>
+                                    <td>
+                                         
+      <div class="btn-group">
+        
+                            <button @click.prevent="supprimerLiquidation(item.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span>
+                            </button>
+                        </div>
+</td>
+
+                                </tr>
+                </tbody>
+                                        </table>
+    <!--  end -->
+
+    <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
+    <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
+<button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+<notifications  />
+    </div>
+</template>
+
+<script>
+  import { mapGetters, mapActions } from "vuex";
+  import { formatageSomme } from "../../../../src/Repositories/Repository";
+  import {admin,dcf} from "../../../Repositories/Auth"
+  import moment from "moment";
+export default {
+    props:["PaiementPersoid","exerciceBudgetaire"],
+    data(){
+        return{
+fabActions: [
+        {
+          name: "cache",
+          icon: "add"
+        }
+         ],  
+         
+            formData: {
+  // 
+  
+      banque_id:"",
+      
+   programme_id:"",
+   numero_ordre_paiement:"",
+   action_id:"",
+   activite_id:"",
+   ua_id: "",
+   
+  referencebancaire:"",
+   fichierjoint:"",
+  
+  rib:"",
+ 
+  
+  montant_tresor:0,
+  montant_don:0,
+  montant_emprunt:0,
+  ligne_id:"",
+
+
+
+ },
+editOrdrePaiement:{},
+
+editMandatPerso:{
+  engagemtPero:"perso",
+  decision_emetteur:"",
+  observation_emetteur:"",
+  date_emetteur:""
+},
+formNumeroEngagemt:{engagemtPero:"perso"}
+        }
+        
+    },
+    created(){
+
+    },
+    computed:{
+        ...mapGetters('uniteadministrative',[
+    "plans_programmes",
+ "uniteAdministratives",
+ "afficheNiveauAction",
+ "afficheNiveauActivite",
+ "derniereNivoPlanBudgetaire",
+ "getPersonnaliseBudgetGeneralParPersonnel",
+ "banqueUa",
+ "liquidation"
+   
+   
+   ]),
+
+   ...mapGetters('parametreGenerauxAdministratif',[
+
+ "sections",
+ "type_Unite_admins",
+ "plans_programmes",
+ "natures_sections",
+ "grandes_natures",
+ "afficheNiveauPlanProg",
+ "exercices_budgetaires"
+   ]),
+ ...mapGetters("bienService", ["typeMarches",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+                "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
+
+   ...mapGetters('parametreGenerauxFonctionnelle',[
+"plans_Decision",
+      "plans_fonctionnels",
+ "afficheNiveauPlanFonctionnel"
+   ]),
+...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel","ordre_paiement"]),
+...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
+
+...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+  ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
+    admin:admin,
+      dcf:dcf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
+  //  AffichierElementParent() {
+      
+  //     return id => {
+  //       if (id != null && id != "") {
+  //         return this.plans_Decision.filter(element => element.parent == id);
+  //       }
+  //     };
+  //   },
+ AffichierElementParent() {
+      
+      // return id => {
+      //   if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.code == 11 || element.code == 12 || element.code == 13 || element.code == 14 || element.code == 15 || element.code == 16 || element.code == 17 || element.code == 18 || element.code == 19 || element.code == 20);
+      //   }
+      // };
+    },
+AffichierElementEnfant() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
+affichierIdPlanDecission() {
+      const qtereel = this.plans_Decision.find(
+        qtreel => qtreel.code == "12",
+       
+      );
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+
+  sommeMontantMandat() { 
+      const val = parseFloat(this.afficherMontantEmprunt(this.PaiementPersoid)) + parseFloat(this.afficherMontantDon(this.PaiementPersoid)) + parseFloat(this.afficherMontantTresor(this.PaiementPersoid));
+      return parseFloat(val).toFixed(0);
+      
+    },
+    
+// listeMandatPerso() {
+      
+
+
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.mandats.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+               
+//             })
+//              return id => {
+//                     if (id != "") {
+                     
+//                         return this.colect.filter(idmarche => idmarche.paiementperso_id == id)
+//                     }
+//                 }
+            
+//         }
+//  return id => {
+//                     if (id != "") {
+                     
+//                         return this.mandats.filter(idmarche => idmarche.paiementperso_id == id)
+//                     }
+//                 }
+     
+
+//     },
+ listeMandatPerso: function () {
+                return id => {
+                    if (id != "") {
+                      // console.log("Marche leste acte effect finnancier")
+                        return this.mandats.filter(idmarche => idmarche.paiementperso_id == id)
+                    }
+                }
+            },
+ CumulEngagement() {
+      const val = parseFloat(this.sommeEgagementLigneTableau(this.afficherIdLigne(this.PaiementPersoid))) + parseFloat(this.sommeMontant);
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+     CumulEngagementModification() {
+      const val = parseFloat(this.sommeEgagementLigneTableau(this.afficherIdLigne(this.PaiementPersoid))) + parseFloat(this.sommeMontantEgagement);
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+  sommeMontantEgagement() { 
+      const val = parseFloat(this.editOrdrePaiement.montant_tresor) + parseFloat(this.editOrdrePaiement.montant_don) + parseFloat(this.editOrdrePaiement.montant_emprunt);
+      return parseFloat(val).toFixed(2);
+      
+    },
+
+
+ DisponibleBudget() {
+      const val = parseFloat(this.dotationInite(this.afficherIdLigne(this.PaiementPersoid))) + parseFloat(this.sommeEgagementLigneTableau(this.afficherIdLigne(this.PaiementPersoid)));
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+   sommeEgagementLigneTableau: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.getMandatPersonnaliserVise.filter(normeEquipe => normeEquipe.ligne_budgetaire_id == id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.total_general)
+                        },valInite);
+                    }
+                }
+            },
+   
+       afficherMontantAutorise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.ordre_paiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.total_general;
+      }
+      return 0
+        }
+      };
+    },
+   
+   
+   dotationInite: function () {
+                return id => {
+                    if (id != "" && id != null) {
+                        const qtereel = this.getPersonnaliseBudgetGeneralParPersonnel.find(normeEquipe => normeEquipe.economique_id == id);
+                    if (qtereel) {
+        return qtereel.Dotation_Initiale;
+      }
+      return 2
+                   }
+                }
+            },     
+   sommeMontant() { 
+      const val = parseFloat(this.formData.montant_tresor) + parseFloat(this.formData.montant_don) + parseFloat(this.formData.montant_emprunt);
+      return parseFloat(val).toFixed(2);
+      
+    },
+     afficherAnneeBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.exerciceencours;
+      }
+      return 0
+        }
+      };
+    },
+     afficherIdUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ua_id;
+      }
+      return 0
+        }
+      };
+    },
+     afficherLibelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     afficherIdLigne() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ligne_id;
+      }
+      return 0
+        }
+      };
+    },
+    afficherLibelleLigne() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+    afficherIdProgramme() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.programme_id;
+      }
+      return 0
+        }
+      };
+    },
+      afficherLibelleProgramme() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_programmes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+    afficherIdAction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.action_id;
+      }
+      return 0
+        }
+      };
+    },
+     afficherLibelleAction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.afficheNiveauAction.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+    afficherIdActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.activite_id;
+      }
+      return 0
+        }
+      };
+    },
+     afficherLibelleActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.afficheNiveauActivite.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+     afficherNumeroMatricule() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numeromatricule;
+      }
+      return 0
+        }
+      };
+    },
+     afficherReferenceBancaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.referencebancaire;
+      }
+      return 0
+        }
+      };
+    },
+    afficherModePaiement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.modepaiement_id;
+      }
+      return 0
+        }
+      };
+    },
+    afficherModePaiementLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.modepaiements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    afficherIdBanque() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.banque_id;
+      }
+      return 0
+        }
+      };
+    },
+     afficherBanqueLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.banques.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    afficherCompteUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.rib;
+      }
+      return 0
+        }
+      };
+    },
+    affichermoisdepaiement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.moisdepaiement;
+      }
+      return 0
+        }
+      };
+    },
+    afficherObjetdepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objetdepense;
+      }
+      return 0
+        }
+      };
+    },
+    afficheImputation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getPersonnaliseBudgetGeneralParPersonnel.find(qtreel => qtreel.afficheEconomique.id == id);
+
+      if (qtereel) {
+        return qtereel.codebudget;
+      }
+      return 0
+        }
+      };
+    },
+     afficherIdOrdrePaiement() {
+      return id2=> {
+        if (id2!= null && id2!= "") {
+           const qtereel = this.ordre_paiement.find(qtreel => qtreel.paiementperso_id == id2);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+    afficherNumeroEngagement() {
+      return id2=> {
+        if (id2!= null && id2!= "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.ordrepaiemnet_id == id2);
+
+      if (qtereel) {
+        return qtereel.numero_engage;
+      }
+      return 0
+        }
+      };
+    },
+     afficherMontantTresor() {
+      return id2=> {
+        if (id2!= null && id2!= "") {
+           const qtereel = this.ordre_paiement.find(qtreel => qtreel.paiementperso_id == id2);
+
+      if (qtereel) {
+        return qtereel.montant_tresor;
+      }
+      return 0
+        }
+      };
+    },
+        afficherMontantDon() {
+      return id2=> {
+        if (id2!= null && id2!= "") {
+           const qtereel = this.ordre_paiement.find(qtreel => qtreel.paiementperso_id == id2);
+
+      if (qtereel) {
+        return qtereel.montant_don;
+      }
+      return 0
+        }
+      };
+    },
+         afficherMontantEmprunt() {
+      return id2=> {
+        if (id2!= null && id2!= "") {
+           const qtereel = this.ordre_paiement.find(qtreel => qtreel.paiementperso_id == id2);
+
+      if (qtereel) {
+        return qtereel.montant_emprunt;
+      }
+      return 0
+        }
+      };
+    },
+   
+    },
+    methods:{
+       ...mapActions("personnelUA", [
+      "supprimerordrepaiement",
+      "ajouterordrepaiement",
+      "modifierordrepaiement",
+      "modifierpaiementPersonnel"
+    ]),
+    ...mapActions("uniteadministrative", [              
+                "modifierMontantBudgetaire",
+                "ajouterRealiteServiceFait",
+                "modifierRealiteServiceFait",
+                "ajouterLiquidation",
+                "modifierLiquidation",
+                "supprimerLiquidation",
+                "supprimerRealiteServiceFait"
+            ]),
+            ...mapActions("bienService", [
+               
+                "ajouterMandat",
+                "modifierMandat",
+                "supprimerMandat",
+          
+               
+            ]),
+        afficherModalAjouterTitre() {
+      this.$("#ajouterMP1").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+    },
+
+afficheModalCf(index) {
+      this.$("#modalCfMandat").modal({
+        backdrop: "static",
+        keyboard: false
+      })
+      this.editMandatPerso = this.listeMandatPerso(this.PaiementPersoid)[index];
+      
+      },
+   
+  
+     modifierMandatPersonnel(){
+
+
+ var nouvelObjet = {
+      ...this.editMandatPerso,
+      ...this.formNumeroEngagemt,
+      exercice_budget :this.afficherAnneeBudgetaire(this.PaiementPersoid),
+       
+         
+        
+       	ligne_budgetaire_id:this.afficherIdLigne(this.PaiementPersoid),
+     
+       
+        	numero_mandat:this.editMandatPerso.numero_mandat,
+programme_id:this.afficherIdProgramme(this.PaiementPersoid),
+action_id:this.afficherIdAction(this.PaiementPersoid),
+activite_id:this.afficherIdActivite(this.PaiementPersoid),
+  ua_id:this.afficherIdUa(this.PaiementPersoid),
+
+  total_general:this.sommeMontantMandat, 
+    montant_tresor:this.afficherMontantTresor(this.PaiementPersoid),
+      montant_don:this.afficherMontantDon(this.PaiementPersoid),
+ montant_emprunt:this.afficherMontantEmprunt(this.PaiementPersoid),
+ 
+  ordrepaiemnet_id:this.afficherIdOrdrePaiement(this.PaiementPersoid),
+  marchetype:this.editMandatPerso.marchetype,
+  paiementperso_id:this.PaiementPersoid,
+ numero_engage:this.afficherNumeroEngagement(this.afficherIdOrdrePaiement(this.PaiementPersoid))
+       };
+        let objetOrdrePaiement = this.paiementPersonnel.find(marche=>marche.id==this.PaiementPersoid)
+         objetOrdrePaiement.valisationvirement = this.editMandatPerso.decision_cf
+
+    this.modifierpaiementPersonnel(objetOrdrePaiement)
+this.modifierMandat(nouvelObjet)
+this.$("#ModalMandatLiqu").modal('hide');
+this.formData= {
+
+};
+
+      
+      
+
+    },
+    formaterDate(date) {
+      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    },
+     formatageSomme:formatageSomme,
+    }
+
+    
+    
+}
+</script>
+<style  scoped>
+.tailgrand{
+  width: 50%;
+  margin: 0 -25%;
+}
+</style>

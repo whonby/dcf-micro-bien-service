@@ -8,13 +8,11 @@
     </div>
   </div>
 </template>
-
 <script>
 import Navbar from "./Navbar";
 import Milieu from "./Milieu";
 import Footer from "./Footer";
 import Sidebar from './Sidebar'
-
 export default {
   components: {
     Navbar,

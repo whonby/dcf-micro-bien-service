@@ -1,6 +1,7 @@
-
+import tableauBordGeneral from "../../pages/parametres_generaux/administratifs/tableauBord.vue";
+import tableauBordGeneralOriginal from "../../pages/parametres_generaux/administratifs/tableauBordGeneralOriginal.vue";
 import ExerciceBudgetaire from "../../pages/parametres_generaux/administratifs/ExerciceBudgetaire.vue";
-import Titre from "../../pages/parametres_generaux/administratifs/Titre.vue";
+// import Titre from "../../pages/parametres_generaux/administratifs/tableauBord.vue";
 import NatureSection from "../../pages/parametres_generaux/administratifs/NatureSection.vue";
 import Section from "../../pages/parametres_generaux/administratifs/Section.vue";
 import StructureProgramme from "../../pages/parametres_generaux/administratifs/StructureProgramme.vue";
@@ -12,19 +13,105 @@ import GrandeNature from "../../pages/parametres_generaux/administratifs/GrandeN
 import StructureGeographique from "../../pages/parametres_generaux/administratifs/StructureGeographique.vue";
 import LocalisationGeographique from "../../pages/parametres_generaux/administratifs/LocalisationGeographique.vue";
 import TypeUniteAdmin from "../../pages/parametres_generaux/administratifs/TypeUniteAdmin.vue";
+import taux from "../../pages/parametres_generaux/administratifs/taux.vue";
+import Formejuridique from "../../pages/parametres_generaux/administratifs/Formejuridique.vue";
+import RegimeImposition from "../../pages/parametres_generaux/administratifs/RegimeImposition.vue";
+import StructurePays from "../../pages/parametres_generaux/administratifs/StructurePays.vue";
+import PlanPays from "../../pages/parametres_generaux/administratifs/PlanPays.vue";
+import Infrastructures from "../../pages/parametres_generaux/administratifs/Infrastructures.vue";
+import structureOrganigrammeUa from "../../pages/parametres_generaux/administratifs/structureOrganigrammeUa.vue";
+import PlanOrganigrammeUa from "../../pages/parametres_generaux/administratifs/PlanOrganigrammeUa.vue";
+
+
+import grpeCorporel from '../../pages/parametres_generaux/administratifs/grpeCorporel.vue'
+import TypeBienCorporel from '../../pages/parametres_generaux/administratifs/TypeBienCorporel.vue'
+
 const AdministratifRoutesAdoni = [
   // route type unite administrative
+  {
+    path: "/grpeCorporel",
+    name: "grpeCorporel",
+    component: grpeCorporel
+  },
+  {
+    path: "/TypeBienCorporel",
+    name: "TypeBienCorporel",
+    component: TypeBienCorporel
+  },
+  {
+    path: "/Infrastructures",
+    name: "Infrastructures",
+    component: Infrastructures
+  },
+  {
+    path: "/tableau-Bord-General",
+    name: "tableauBordGeneralOriginal",
+    component: tableauBordGeneralOriginal
+  },
+  {
+    path: "/structure-Organigramme-Ua",
+    name: "structureOrganigrammeUa",
+    component: structureOrganigrammeUa
+  },
+  // chemin du plan programme
+  {
+    path: "/Plan-Organigramme-Ua",
+    name: "PlanOrganigrammeUa",
+    component: PlanOrganigrammeUa
+  },
+  {
+    path: "/structure-pays",
+    name: "StructurePays",
+    component: StructurePays
+  },
+  // chemin du plan programme
+  {
+    path: "/plan-pays",
+    name: "PlanPays",
+    component: PlanPays
+  },
+
+
+
+
+
+
+  {
+    path: "/Forme-juridique",
+    name: "Formejuridique",
+    component: Formejuridique
+  },
+  {
+    path: "/RegimeImposition",
+    name: "RegimeImposition",
+    component: RegimeImposition
+  },
+
+
+
+
+
+  {
+    path: "/tableauBordGeneral",
+    name: "tableauBordGeneral",
+    component: tableauBordGeneral
+  },
+  {
+    path: "/taux",
+    name: "taux",
+    component: taux
+  },
   {
     path: "/type-Unite-Administrative",
     name: "typeUniteAdministrative",
     component: TypeUniteAdmin
   },
-    {
-      // route pour le titre
-        path:"/titre",
-       name:"Titre",
-       component: Titre
-     },
+    // {
+    //   // route pour le titre
+    //   path:"/tableauBordGeneralOriginal",
+    //    name:"Titre",
+    //    component: Titre
+    //  },
      // chemin de la structure programme
      {
        path:"/structure-programme",
@@ -65,7 +152,7 @@ const AdministratifRoutesAdoni = [
      },
      // route service gestionnaire
      {
-    path:"/srevice-gestionnaire",
+    path:"/service-gestionnaire",
     name:"ServiceGestionnaire",
     component:ServiceGestionnaire
      },

@@ -1,148 +1,122 @@
 <template>
   <div>
-    <!--Header-part-->
-    <div id="header">
-      <h1>
-        <a href="#">S I D C F</a>
-      </h1>
-    </div>
-    <!--close-Header-part-->
-    <!--sidebar-menu-->
-    <div id="sidebar" style="position: fixed;">
-      <!-- <a title=" Dashboard" href="#" class="visible-phone">
-        <i class="icon icon-home"></i>Dashboard
-      </a> -->
-      <ul>
-        <!-- <li :class="{active: active_el == 0 }" @click.prevent="activate(0)">
-          <a href="index.html">
-            <i class="icon icon-home"></i>
-            <span>Dashboard</span>
-          </a>
-        </li> -->
-          <!-- <li class="submenu"> <a href="#">
-            <i class="icon icon-key"></i> <span>UTILISATEURS && ACCES</span>
-             </a>
-          <ul>
-            <li><a href="index2.html">UTILISATEURS</a></li>
-            <li><a href="gallery.html">ACCES</a></li>
-          
-          </ul>
-       </li> -->
-        <li :class="{active: active_el == 11 }" @click.prevent="navigateToParametreGeneraux">
-          <a title="PARAMETRES GENERAUX" href="#">
-            <i class="icon icon-signal"></i>
-            <span>PARAMETRES GENERAUX</span>
-          </a>
-        </li>
-        <li @click.prevent="navigateToUniteAdministrative" :class="{active: active_el == 1 }">
-          <a  title="" href="#">
-            <i class="icon icon-inbox"></i>
-            <span>UNITE ADMINISTRATIVE</span>
-          </a>
-        </li>
-        <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
-          <a href="#">
-            <i class="icon icon-th"></i>
-            <span>ACTEURS DE LA DEPENSE</span>
-          </a>
-        </li>
-        <li @click.prevent="activate(3)" :class="{active: active_el ==3}">
-          <a href="#">
-            <i class="icon icon-fullscreen"></i>
-            <span>PLANIFICATION</span>
-          </a>
-        <li @click.prevent="activate(4)" :class="{active: active_el ==4}">
-          <a title="SUIVIB ET CONTROLE BUDGETAIRE 1" href="#">
-            <i class="icon icon-th-list"></i>
-            <span>SUIVI ET CONTRÔLE B.</span>
-            <span class="label label-important"></span>
-          </a>
-        </li>
-        
-        <li @click.prevent="activate(5)" :class="{active: active_el ==5}">
-          <a title="CARTOGRAPHIE DES OPERATIONS BUDGETAIRES" href="#">
-            <i class="icon icon-pencil"></i>
-            <span>CARTOGRAPHIE DES OP. B.</span>
-          </a>
-        </li>
-        <li @click.prevent="activate(6)" :class="{active: active_el ==6}">
-          <a title="CONTRÔLE AXE SUR LA PERFORMANCE" href="#">
-            <i class="icon icon-file"></i>
-            <span>CONTRÔLE AXE SUR LA P.</span>
-            <span class="label label-important"></span>
-          </a>
-        </li>
-        <li  @click.prevent="activate(7)" :class="{active: active_el ==7}">
-          <a title="OPERATIONNALISATION DU RAPPORT D’ACTIVITE ET DE LA CARTOGRAPHIE DES RISQUES" href="#">
-            <i class="icon icon-info-sign"></i>
-            <span>OP. DU RAPPORT ACTIVITE...</span>
-            <span class="label label-important"></span>
-          </a>
-        </li>
-        <li @click.prevent="activate(8)" :class="{active: active_el ==8}">
-          <a title="OPERATIONNALISATION DU DISPOSITIF DE CONTRÔLE INTERNE" href="#">
-            <i class="icon icon-heart"></i>
-            <span>OP. DU DISPOSITIF DE C. I.</span>
-            <span class="label label-important"></span>
-          </a>
-        </li>
+    
 
-           <li @click.prevent="logoutUser()" >
-          <a title="DECONNEXION" href="#">
-            <i class="icon icon-off"></i>
-            <span>DECONNEXION</span>
-            <span class="label label-important"></span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <!--sidebar-menu-->
+    <SiderbarParametre v-if="detail_marche.code == 1"></SiderbarParametre>
+    <!-- <SideBarGestionAccess v-if="detail_marche.code == 21"></SideBarGestionAccess> -->
+    <SiderbarUniteAdministrative v-else-if="detail_marche.code == 2"></SiderbarUniteAdministrative>
+    <SideBarGestionSib v-else-if="detail_marche.code == 3"></SideBarGestionSib>
+     <SiderbarGestionHorsSib v-else-if="detail_marche.code == 4"></SiderbarGestionHorsSib>
+    <SidebarMonEquipe v-else-if="detail_marche.code == 6"></SidebarMonEquipe>
+    <SiderbarRapport v-else-if="detail_marche.code == 7"></SiderbarRapport>
+    
+    <SiderbarGestionVehicule v-else-if="detail_marche.code == 8"></SiderbarGestionVehicule>
+    <SiderbarCatographie  v-else></SiderbarCatographie>
+     
+   
+   
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapGetters} from "vuex";
+import SiderbarParametre from "./SiderbarParametre";
+//import SideBarGestionAccess from "./SideBarGestionAccess";
+import SideBarGestionSib from "./SideBarGestionSib";
+import SidebarMonEquipe from "./SidebarMonEquipe";
+import SiderbarUniteAdministrative from "./SiderbarUniteAdministrative";
+import SiderbarGestionHorsSib from "./SiderbarGestionHorsSib";
+import SiderbarRapport from "./SiderbarRapport";
+ import SiderbarCatographie from "./SiderbarCatographie";
+ import SiderbarGestionVehicule from "./SiderbarGestionVehicule";
 export default {
-  mounted() {
-    // console.log(this.$store.state);
-  },
+  data(){
+    return{
 
-  computed: {
-      ...mapState('parametrageMenu', {
-     active_el: state => state.active_el
-  })
-  },
+      budgetGeneralCharge:""
 
-  methods: {
+    }
+  },
+components: {
+    SideBarGestionSib,
+    //SideBarGestionAccess,
+     SiderbarParametre,
+    SiderbarCatographie,
+    SiderbarGestionHorsSib,
+    SidebarMonEquipe,
+    SiderbarUniteAdministrative,
+    SiderbarRapport,
+    SiderbarGestionVehicule
+  },
    
-      ...mapMutations('parametrageMenu', ['activate']),
-      ...mapActions('Utilisateurs', ['logoutUser']),
+  computed:{
+ ...mapGetters("uniteadministrative", [
+                "acteCreations",
+                "typeTextes",
+                "uniteAdministratives",
+                "getterBudgeCharge",
+                "budgetGeneral",
+                "afficheTransfertValider",
+                "transferts"
 
-      navigateToActeurDepense(){
-        this.activate(2)
-        this.$router.push({
-          name: 'TableauBordActeurDepense'
-        })
-      },
+            ]),
+    ...mapGetters('Utilisateurs', ['getterMenuModuleSidcf']),
 
-       navigateToUniteAdministrative(){
-        this.activate(1)
-        this.$router.push({
-          name: 'tableaudebord'
-        })
-      },
+    ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel","mandats"]),
 
-       navigateToParametreGeneraux(){
-        this.activate(11)
-        this.$router.push({
-          name: 'ExerciceBudgetaire'
-        })
-      }
+       ...mapGetters("parametreGenerauxAdministratif", [
+                "sections",
+                "type_Unite_admins",
+                "plans_programmes",
+                "natures_sections",
+                "grandes_natures",
+                "afficheNiveauPlanProg",
+                "exercices_budgetaires",
+                "gestionModules"
+            ]),
+            
+        
+      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
 
-    
+
+  },
+created() {
+            this.marcheid=this.$route.params.id
+  console.log("Guei est dans la place")
+   this.detail_marche = this.gestionModules.find(
+       idmarche => idmarche.id == this.$route.params.id
+   )
+   console.log(this.detail_marche)
+  
+},
+  methods:{
+
+
 
 
   }
-};
+}
 </script>
+<style>
+.flex{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  position: relative;
+}
+.square{
+  width: 50px;
+  height: 50px;
+ 
+  color: #FAFAFA;
+  text-align: center;
+  margin-right: 5px;
+  cursor: pointer;
+  line-height: 50px;
+}
+.square:hover{
+  opacity: 0.8;
+}
+
+</style>

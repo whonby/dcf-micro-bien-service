@@ -4,12 +4,10 @@
 <!--breadcrumbs-->
   <div id="content-header">
     <br>
-  
   </div>
    <router-view></router-view>
 
 </div>
-
 <!--end-main-container-part-->
 </template>
 

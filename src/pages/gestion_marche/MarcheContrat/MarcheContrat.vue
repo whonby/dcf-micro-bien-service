@@ -22,16 +22,16 @@
                         </a>
                     </li>
                     <li class="bg_lb span3"> <a href="#"> <i class="icon-th"></i> <span class="label label-important" v-if="nbrMarcheByTypeMarche(typeMarche)">{{nbrMarcheByTypeMarche(typeMarche)}}/{{nbrMarche}}</span>
-                        <p>NBR de marchés prév par type de marche</p>
+                        <p>NBR de marchés prév par type de marché</p>
                         {{nomTypeMarche(typeMarche)}}
                     </a> </li>
                     <li class="bg_ls span3"> <a href="#"> <i class="icon-fullscreen"></i> <span class="label label-important">{{nbrMarcheByRejeteOrValiderOrDifere(decision)}}</span>
-                        <p>NBR de marchés prév par type de decision</p>
+                        <p>NBR de marchés prév par type de décision</p>
                         {{nomDecision(decision)}}
                     </a> </li>
                     <li class="bg_lg span3">
                         <a href="#"> <i class="icon-signal"></i> <span class="label label-important" v-if="tauxMarchePrevisionnelByRejeteOrValiderDifer(decision)">{{tauxMarchePrevisionnelByRejeteOrValiderDifer(decision)}} %</span>
-                            <p>Taux de marchés prév par type de decision</p>
+                            <p>Taux de marchés prév par type de décision</p>
                             {{nomDecision(decision)}}
                         </a>
                     </li>
@@ -54,7 +54,7 @@
                     <li class="bg_ly span3 ">
                         <a href="#">
                             <i class="icon-inbox"></i><span class="label label-important" v-if="nbrMarcheByAdmin(unite_admin)">{{nbrMarcheByAdmin(unite_admin)}}</span>
-                            <p>Nbr marche par structure</p>
+                            <p>Nbr marché par structure</p>
                             {{nomUniteAdminByMarche(unite_admin)}}
                         </a>
                     </li>
@@ -78,7 +78,7 @@
                     </download-excel>
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Liste des marches et contrat en planification
+                            <h5>Liste des marchés et contrats en planification
                                 </h5>
                             <div align="right">
                                 Search: <input type="text" v-model="search">
@@ -259,7 +259,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter fonctions</h3>
+                <h3>Ajouter fonction</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">

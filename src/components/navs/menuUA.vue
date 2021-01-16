@@ -23,90 +23,179 @@
         </ul>
       </li> -->
 
-       <li>
+       <!-- <li>
             <router-link :to="{name: 'uniteadministrative'}" tag="a">
               UNITES ADMINISTRATIVES
             </router-link>
           </li>
-      <!--Source de financement-->
-      <li class="dropdown" id="menu-messages">
+           <li>
+            <router-link :to="{name: 'uniteZone'}" tag="a">
+              UNITES DE ZONE
+            </router-link>
+          </li> -->
+        
+  <li class="dropdown" id="menuBUDGET">
         <a
-          title="Documentation"
+          title="UNITES ADMINISTRATIVES"
           href="#"
           data-toggle="dropdown"
-          data-target="#menu-messages"
+          data-target="#menuBUDGET"
           class="dropdown-toggle"
         >
-          <span class="text">DOCUMENTATION </span>
+          <span class="text">UNITE ADMINISTRATIVE</span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
           <li>
-            <router-link :to="{name: 'typetext'}" tag="a">
+            <router-link :to="{name: 'uniteadministrative'}" tag="a">
               <i class="icon-user"></i>
-              Type de texte
+            Unité administrative
             </router-link>
           </li>
 
           <li class="divider"></li>
           <li>
-            <router-link :to="{name: 'archivagedocument'}" tag="a">
-              <i class="icon-key"></i>Archivage Document
+            <router-link :to="{name: 'DirectionPrincipal'}" tag="a">
+              <i class="icon-key"></i>Direction UA
             </router-link>
           </li>
-        </ul>
-      </li>
-      <!--Paramètres programmes
-      -->
-
-      <li class="dropdown" id="listeua">
-        <a
-          title="Out put"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#listeua"
-          class="dropdown-toggle"
-        >
-          <span class="text">OUT PUT</span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
+          <li class="divider"></li>
+            <li>
+            <router-link :to="{name: 'uniteZone'}" tag="a">
+              <i class="icon-key"></i>Unité de zone
+            </router-link>
+          </li>
+           <li class="divider"></li>
+            <li>
+            <router-link :to="{name: 'StructureOrganigramme'}" tag="a">
+              <i class="icon-key"></i>Structure Organigramme 
+            </router-link>
+          </li>
+           <li class="divider"></li>
+            <li>
+            <router-link :to="{name: 'PlanOrganigrammeUa'}" tag="a">
+              <i class="icon-key"></i>Organigramme
+            </router-link>
+          </li>
+           <!-- <li class="divider"></li>
           <li>
-            <router-link :to="{name: 'listeuniteadministrative'}" tag="a">
-              <i class="icon-user"></i>
-              Listes Unites Administratives
+            <router-link :to="{name: 'ServicePrincipal'}" tag="a">
+              <i class="icon-key"></i>Service UA
             </router-link>
           </li>
+           <li class="divider"></li>
           <li>
-            <router-link :to="{name: 'listetypetexte'}" tag="a">
-              <i class="icon-user"></i>
-              Listes Types Textes
+            <router-link :to="{name: 'FonctionPrincipal'}" tag="a">
+              <i class="icon-key"></i>Fonction UA
             </router-link>
-          </li>
-
-          <li>
-            <router-link :to="{name: 'ordonnedocua'}" tag="a">
-              <i class="icon-user"></i>
-              Listes Archivages Documents
+          </li> -->
+            <!-- <li class="divider"></li> -->
+        <!-- <li>
+            <router-link :to="{name: 'banqueUa'}" tag="a">
+              <i class="icon-key"></i>Banque UA
             </router-link>
-          </li>
-        </ul>
-      </li>
-   
-
-      <!--- tableau de bord -->
+          </li> -->
+           <!-- <li class="divider"></li>
         <li>
-            <router-link :to="{name: 'tableaudebord'}" tag="a">
-              TABLEAU DE BOARD
+            <router-link :to="{name: 'Organigramme'}" tag="a">
+              <i class="icon-key"></i>Organigramme UA
+            </router-link>
+          </li> -->
+           <li class="divider"></li>
+         <li>
+           <router-link :to="{name: 'banqueUa'}" tag="a">
+             <i class="icon-key"></i>Banque UA
+            </router-link>
+         </li>
+           <li class="divider"></li>
+        
+        </ul>
+      </li>
+        <li class="dropdown" id="Budget">
+            <a title="Budget" href="#"
+               data-toggle="dropdown"
+               data-target="#Budget"
+               class="dropdown-toggle">
+                <span class="text">BUDGET</span>
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li v-if="admin() || dcf()">
+                    <router-link :to="{name: 'ImportBudget'}" tag="a">
+                        IMPORTATION DU BUDGET
+                    </router-link>
+                </li>
+                <li v-if="admin() || dcf()">
+                    <router-link :to="{name: 'ModificationBudget'}" tag="a">
+                        MODIFICATION BUDGET
+                    </router-link>
+                </li>
+
+            </ul>
+        </li>
+<!--          <li v-if="admin() || dcf()">-->
+<!--            <router-link :to="{name: 'ImportBudget'}" tag="a">-->
+<!--              IMPORTATION DU BUDGET-->
+<!--            </router-link>-->
+<!--          </li>-->
+          <li>
+            <router-link :to="{name: 'budgetGenerals'}" tag="a">
+              BUDGET PAR UA
             </router-link>
           </li>
-     
+
+
+           <li>
+            <router-link :to="{name: 'BudgetParUa'}" tag="a">
+              DETAIL DU BUDGET PAR UA
+            </router-link>
+          </li>
+          <li class="divider"></li>
+           <!-- <li>
+            <router-link :to="{name: 'DetailbudgetGeneralsNew'}" tag="a">
+              DETAIL DE BUDGET PAR UA new
+            </router-link>
+          </li> -->
+           
+          <li class="divider"></li>
+           <li v-if="admin() || dcf()">
+            <router-link :to="{name: 'Synthesebudg'}" tag="a">
+              SYNTHESE DU BUDGET
+            </router-link>
+          </li>
+          <li class="divider"></li>
+           <li>
+            <router-link :to="{name: 'listeDesUaBudget'}" tag="a">
+              REPORTING DU BUDGET PAR UA
+            </router-link>
+          </li>
+
     </ul>
   </div>
 </template>
 
 <script>
+import { mapMutations, mapActions } from "vuex";
+import {admin,dcf} from "../../Repositories/Auth"
+export default {
+  mounted() {
+    // console.log(this.$store.state);
+  },
+
+  computed: {
+     
+  },
+
+  methods: {
+   
+      ...mapMutations('parametrageMenu', ['activate']),
+      ...mapActions('Utilisateurs', ['logoutUser']),
+    admin:admin,
+    dcf:dcf,
+ 
 
 
-export default {};
+  }
+};
 </script>
+

@@ -13,7 +13,7 @@
          <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste plan programme "
@@ -23,10 +23,13 @@
                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
+                              <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des plans Budgetaires</h5>
+            <h5>Liste des plans économiques </h5>
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -79,7 +82,7 @@
             </div>
             <div v-else>
               <div align="center">
-              <h4 style="color:red;">Aucun plan budgetaire trouvé</h4>
+              <h4 style="color:red;">Aucun plan économique trouvé</h4>
               </div>
           </div>
            </div>
@@ -96,13 +99,13 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter plan budgetaire</h3>
+                <h3>Ajouter plan économique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
 
                <div class="control-group">
-              <label class="control-label">Structure budgetaire:</label>
+              <label class="control-label">Structure économique:</label>
               <div class="controls">
                 <select  v-model="formData.structure_budgetaire_id">
             <option v-for="budget in structures_budgetaires" :key="budget.id" 
@@ -121,7 +124,7 @@
             <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span3" placeholder="Saisir le libelle" />
               </div>
             </div>
            
@@ -143,7 +146,7 @@
  <div id="modalAjouterElementEnfant" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter plan Budgetaire</h3>
+                <h3>Ajouter plan économique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -156,14 +159,14 @@
             </div>
 
              <div class="control-group">
-              <label class="control-label">Libéllé parent:</label>
+              <label class="control-label">Libellé parent:</label>
               <div class="controls">
                 <input type="text" readonly :value="parentDossier.libelle" class="span"  />
               </div>
             </div>
 
                <div class="control-group">
-              <label class="control-label">Structure Budgetaire:</label>
+              <label class="control-label">Structure économique:</label>
               
 
               <div class="controls">
@@ -182,9 +185,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="nouvelElementEnfant.libelle" class="span3" placeholder="Saisir le libelle" />
               </div>
             </div>
            
@@ -207,13 +210,13 @@
 <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier plan budgetaire</h3>
+                <h3>Modifier plan économique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
 
                   <div class="control-group">
-              <label class="control-label">Structure budgetaire:</label>
+              <label class="control-label">Structure budgétaire:</label>
               <div class="controls">
                 <select  v-model="editTitre.structure_budgetaire_id">
             <option v-for="budget in structures_budgetaires" :key="budget.id" 
@@ -228,7 +231,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
               </div>
@@ -269,6 +272,8 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import Tree from './Tree'
 export default {
   components: {
@@ -350,6 +355,26 @@ return this.plans_budgetaires.filter((item) => {
     'ajouterPlanBudgetaire', 
    'supprimerPlanBudgetaire', 'modifierPlanbudgetaire']),      
    
+// exportation en pdf
+      genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.plans_budgetaires;
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES PLANS BUDGETAIRES")
+  doc.autoTable(this.getColumns(),data)
+doc.save('plan_budgetaire.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "CODE", dataKey: "code"},
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
     afficherModalAjouterPlanProgramme(){
        this.$('#exampleModal').modal({
               backdrop: 'static',
@@ -386,6 +411,7 @@ return this.plans_budgetaires.filter((item) => {
  //afficher modal pour ajouter element enfant
 	 ajouterElementEnfant(item) {
     this.parentDossier = this.plans_budgetaires.find(plan => plan.id == item.id)
+    this.nouvelElementEnfant.code = this.parentDossier.code
      this.nouvelElementEnfant.parent = this.parentDossier.id
 
       this.$('#modalAjouterElementEnfant').modal({

@@ -1,5 +1,5 @@
-import axios from '../../../../../urls/api_parametrage/api'
-
+// import axios from '../../../../../urls/api_parametrage/api'
+import axios from '../../../../request/parametreGeneraux'
 import { asyncLoading } from 'vuejs-loading-plugin'
 
  var housecall= require('housecall')
@@ -115,5 +115,58 @@ export function supprimerTypeFinancement({commit}, id){
        commit('SUPPRIMER_TYPE_FINANCEMENT', id)
       // // dialog.loading(false) // stops the proceed button's loader
         axios.delete('/delete_type_financement/' + id).then(() => dialog.close() )   
+    })
+}
+
+// action plan
+
+// get all of plan fonctionnelle
+export  function getPlanSourceFinancement({commit}){
+    queue.push(()=> axios.get('/liste_Plan_source_financement').then(tony => {
+        commit('GET_PLAN_SOURCE_FINANCEMENT', tony.data)
+    }).catch(error => console.log(error)))
+    
+}
+
+// ajouter plan fonctionnelle
+export function ajouterPlanSourceFinancement({commit, dispatch}, objetAjout){
+   asyncLoading( axios.post('/ajouterPlan_source_financement', objetAjout)).then(res => {
+        commit('AJOUTER_PLAN_SOURCE_FINANCEMENT', res.data)
+        dispatch('getPlanSourceFinancement')
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué avec success !',
+            type:"success"
+          })
+    }).catch(error => console.log(error))
+}
+// modifier plan fonctionnelle
+
+export function modifierPlanSourceFinancement({ commit, dispatch},plan_source){
+   asyncLoading( axios.put('/modifier_Plan_source_financement/' + plan_source.id, {
+    code:plan_source.code,
+    libelle:plan_source.libelle ,
+    source_finacement_id:plan_source.source_finacement_id
+  } )).then(res => {
+        commit('MODIFIER_PLAN_SOURCE_FINANCEMENt', res.data)
+      dispatch('getPlanSourceFinancement')
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type:"success"
+          })
+    }).catch(error => console.log(error))
+}
+// supprimer plan fonctionnelle
+export function supprimerPlanSourceFinancement({commit, dispatch}, id){
+    
+    this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+       commit('PLAN_SUPPRIMER_SOURCE_FINANCEMENT', id)
+       dispatch('getPlanSourceFinancement')
+
+      // // dialog.loading(false) // stops the proceed button's loader
+        axios.delete('/supprimer_Plan_source_financement/' + id).then(() => dialog.close() )   
     })
 }

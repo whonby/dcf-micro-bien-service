@@ -6,50 +6,98 @@
 
 
 <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-    <div id="exampleModal" class="modal hide">
+    <div id="exampleModal" class="modal hide taillemodal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter Famille d'Article</h3>
       </div>
       <div class="modal-body">
-      <form class="form-horizontal">
-              <div class="control-group">
-                            <label class="control-label">Type Equipement:</label>
-                            <div class="controls">
-                              <select v-model="formData.equipemt_id">
-                                <option value>Selectionner</option>
+ <table class="table table-bordered table-striped">
+        <tr>
+                <td>
+<div class="control-group">
+            <label class="control-label">Statut du Bien</label>
+            <div class="controls">
+                              <select v-model="formData1.stutusTypebien_id" class="span6">
+                                <option value></option>
                                 <option
-                                  v-for="typeua in equipements"
+                                  v-for="typeua in afficheStutusTypeBien"
                                   :key="typeua.id"
                                   :value="typeua.id"
                                 >{{typeua.libelle}}</option>
                               </select>
+            </div>
+          </div>
+                </td>
+              </tr>
+   
+          <tr>
+                <td>
+<div class="control-group">
+            <label class="control-label">Type de Bien</label>
+            <div class="controls">
+              <select v-model="formData.type_bien" class="span6">
+                                <option value></option>
+                                <option
+                                  v-for="typeua in afficheTypeBien(formData1.stutusTypebien_id)"
+                                  :key="typeua.id"
+                                  :value="typeua.id"
+                                >{{typeua.libelle}}</option>
+                              </select>
+            </div>
+          </div>
+                </td>
+              </tr>
+              <tr>
+     <td>
+<div class="control-group">
+                            <label class="control-label">Type d'équipement:</label>
+                            <div class="controls">
+                              <select v-model="formData.equipemt_id" class="span6">
+                                <option value></option>
+                                <option
+                                  v-for="typeua in equipements"
+                                  :key="typeua.id"
+                                  :value="typeua.id"
+                                >{{codeEquipement(typeua.id)}}</option>
+                              </select>
                             </div>
                           </div>
-                         
-          <div class="control-group">
-            <label class="control-label">Nom famille acticles</label>
+     </td>
+   </tr>
+              <tr>
+                <td>
+<div class="control-group">
+            <label class="control-label">Nom famille d'article</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
-                class="span"
-                placeholder="Saisir le libelle"
+                class="span6"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>
-             <!-- <div class="control-group">
-            <label class="control-label">Dure de vie</label>
+                </td>
+              </tr>
+                         
+          <tr>
+            <td>
+              <div class="control-group">
+            <label class="control-label">Durée de vie</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.dureVie"
-                class="span"
-                placeholder="Saisir la dure de vie"
+                class="span6"
+                placeholder="Saisir la durée de vie"
               />
             </div>
-          </div> -->
-        </form>
+          </div>
+            </td>
+          </tr>
+             
+ </table>
       </div>
       <div class="modal-footer">
         <a
@@ -68,12 +116,49 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Famille Famille d'Article</h3>
+        <h3>Modifier  Famille d'Article</h3>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal">
-          <div class="control-group">
-                            <label class="control-label">Type Equipement:</label>
+        <table class="table table-bordered table-striped">
+           <tr>
+                <td>
+<div class="control-group">
+            <label class="control-label">Statut du Bien</label>
+            <div class="controls">
+                              <select v-model="formData2.stutusTypebien_id" class="span6">
+                                <option value></option>
+                                <option
+                                  v-for="typeua in afficheStutusTypeBien"
+                                  :key="typeua.id"
+                                  :value="typeua.id"
+                                >{{typeua.libelle}}</option>
+                              </select>
+            </div>
+          </div>
+                </td>
+              </tr>
+   
+          <tr>
+                <td>
+<div class="control-group">
+            <label class="control-label">Type de Bien</label>
+            <div class="controls">
+              <select v-model="editFamille.type_bien" class="span6">
+                                <option value></option>
+                                <option
+                                  v-for="typeua in afficheTypeBien(formData2.stutusTypebien_id)"
+                                  :key="typeua.id"
+                                  :value="typeua.id"
+                                >{{typeua.libelle}}</option>
+                              </select>
+            </div>
+          </div>
+                </td>
+              </tr>
+          <tr>
+            <td>
+              <div class="control-group">
+                            <label class="control-label">Type d'équipement:</label>
                             <div class="controls">
                               <select v-model="editFamille.equipemt_id">
                                 <option value>Sélectionner</option>
@@ -85,18 +170,39 @@
                               </select>
                             </div>
                           </div>
-          <div class="control-group">
-            <label class="control-label">Libelle:</label>
+            </td>
+          </tr>
+         <tr>
+           <td>
+              <div class="control-group">
+            <label class="control-label">Libellé:</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editFamille.libelle"
                 class="span"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>
-        </form>
+           </td>
+         </tr>
+           <tr>
+             <td>
+               <div class="control-group">
+            <label class="control-label">Durée de vie</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editFamille.dureVie"
+                class="span"
+                placeholder="Saisir la durée de vie"
+              />
+            </div>
+          </div>
+             </td>
+           </tr>
+        </table>
       </div>
       <div class="modal-footer">
         <a
@@ -136,7 +242,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste Familles Articles</h5>
+              <h5>Liste des Familles d'Articles</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -213,22 +319,41 @@ export default {
               //     icon: 'add_alert'
               // }
           ],
-     
+      formData1: {
+        
+      },
+      formData2:{},
        formData: {
         equipemt_id: "",
-        libelle: ""
+        libelle: "",
+        dureVie:""
       },
       editFamille: {
         equipemt_id: "",
-        libelle: ""
+        libelle: "",
+        dureVie:""
       },
        search:""
     };
   },
 
   computed: {
-       ...mapGetters("SuiviImmobilisation", ["equipements","familles"]),
+       ...mapGetters("SuiviImmobilisation", ["equipements","familles","Typebiengrpecorporels"]),
+...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 
+afficheStutusTypeBien(){
+  return this.Typebiengrpecorporels.filter(item=>item.parent == null)
+},
+afficheTypeBien() {
+      return id => {
+        if (id != null && id != "") {
+           return this.Typebiengrpecorporels.filter(qtreel => qtreel.parent == id);
+
+      
+      
+        }
+      };
+    },
   // codeAjoutSection(){
   //    const natureSection = this.equipements.find(sect => sect.id == this.formData.naturesection_id)
   //   const ordreSection = this.formData.code
@@ -249,6 +374,32 @@ export default {
 
   //    return null
   //  },
+
+
+  codeEquipement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.equipements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return this.afficheLibellePlanEconomique(qtereel.code).concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+    afficheLibellePlanEconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code
+      }
+      return 0
+        }
+      };
+    },
   },
 
 
@@ -272,12 +423,18 @@ export default {
     },
     // fonction pour vider l'input ajouter
     ajouterFamilleLocal() {
-      this.ajouterFamille(this.formData);
+     
+   
+  
+      
+this.ajouterFamille(this.formData);
 
       this.formData = {
         code: "",
         libelle: ""
       };
+    
+      
     },
     // afficher modal de modification
     afficherModalModifierFamille(article) {
@@ -290,8 +447,22 @@ export default {
     },
     // fonction pour vider l'input modification
     modifierFamilleLocal() {
-      this.modifierFamille(this.editFamille);
+      if (this.editFamille.equipemt_id == ""){
+        alert("veuillez Selectionner le type d'equipement")
+     
+      }
+      else if (this.editFamille.libelle =="" ) {
+alert("veuillez remplir le libelle")
+      }
+      else if (this.editFamille.dureVie =="" ) {
+alert("veuillez remplir la duree de vie")
+      }
+      else
+      {
+this.modifierFamille(this.editFamille);
       this.$("#modificationModal").modal('hide');
+      }
+      
     },
     alert() {
       console.log("ok");
@@ -302,3 +473,12 @@ export default {
   }
 };
 </script>
+
+
+<style scoped>
+.taillemodal {
+  width: 28%;
+  margin: 0 -380px;
+}
+
+</style>

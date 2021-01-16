@@ -14,8 +14,17 @@ const defaultstate = {
   localisations_geographiques:[],
   chapitres:[],
   grandes_natures:[],
-  type_Unite_admins: []
-
+  type_Unite_admins: [],
+  taux: [],
+  regimeImpositions: [],
+  formejuridiques:[],
+  strutures_pays: [],
+  plan_pays:[],
+structureOrganigrammeUa: [],
+planOrganigrammeUa:[],
+gestionModules:[],
+  localisation_geographique_all:[],
+  infrastructure:[],
 };
 
  export default defaultstate

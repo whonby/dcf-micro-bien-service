@@ -3,48 +3,27 @@
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
       <!--Paramètres administratifs-->
-      <li class="dropdown" id="profile-messages">
-        <a
-          title="Cartographie des opérations budgétaires"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#profile-messages"
-          class="dropdown-toggle"
-        >
-          <i class="icon icon-user"></i>
-          <span class="text">Cartographie op.</span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          
-          <li class="divider"></li>
-        
-          <li class="divider"></li>
-          <li>
-            <a href="login.html">
-              <i class="icon-key"></i> Analyse des opérations
-            </a>
-          </li>
-
-          
-        </ul>
-      </li>
       
       <!--Paramètres programmes
       -->
-      <li class="" id="out">
+<!-- <li class="" id="indicateur">
         <a title="Out put" href="#" class="">
           <i class="icon icon-users"></i>
-          <span class="text">Out put</span>
+          <span class="text">CATOGRAPHIE BUDGETAIRE </span>
+        </a>
+      </li> -->
+<li>
+            <router-link :to="{name: 'CartographieBudget'}" tag="a">
+              CATOGRAPHIE BUDGETAIRE
+            </router-link>
+          </li>
+       <!-- <li class="" id="out">
+        <a title="Indicateur" href="#" class="">
+          <i class="icon icon-users"></i>
+          <span class="text">Indicateurs </span>
         </a>
       </li>
 
-<li class="" id="indicateur">
-        <a title="Indicateur" href="#" class="">
-          <i class="icon icon-users"></i>
-          <span class="text">Indicateur</span>
-        </a>
-      </li>
        <li class="dropdown" id="tableau">
         <a
           title="Tableau de bord"
@@ -66,7 +45,7 @@
             </a>
           </li>
         </ul>
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>
@@ -75,6 +54,7 @@
 
 
 export default {
-
+ 
+ 
 };
 </script>

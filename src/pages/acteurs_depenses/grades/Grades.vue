@@ -23,7 +23,8 @@
                                 <thead>
                                 <tr>
                                     <th>Code </th>
-                                    <th>Libelle</th>
+                                    <th>Libellé</th>
+                                     <!-- <th>Echelons</th> -->
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -31,6 +32,7 @@
                                 <tr class="odd gradeX" v-for="(item, index) in grades" :key="item.id">
                                     <td @dblclick="afficherModalModifierTitre(index)">{{item.code || 'Non renseigné'}}</td>
                                     <td @dblclick="afficherModalModifierTitre(index)">{{item.libelle || 'Non renseigné'}}</td>
+                                     <!-- <td @dblclick="afficherModalModifierTitre(index)">{{item.echellon_id || 'Non renseigné'}}</td> -->
                                     <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerGrades(item.id)"  class="btn btn-danger ">
@@ -60,23 +62,12 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter echelons</h3>
+                <h3>Ajouter grade</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
-                    <div class="control-group">
-                        <label class="control-label">Code:</label>
-                        <div class="controls">
-                            <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Libelle:</label>
-                        <div class="controls">
-                            <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
-                        </div>
-                    </div>
-                    <div class="control-group">
+
+                     <!-- <div class="control-group">
                         <label class="control-label">Echelons</label>
                         <div class="controls">
                             <select v-model="formData.echellon_id">
@@ -86,7 +77,21 @@
                                 </option>
                             </select>
                         </div>
+                    </div> -->
+
+                    <div class="control-group">
+                        <label class="control-label">Code:</label>
+                        <div class="controls">
+                            <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
+                        </div>
                     </div>
+                    <div class="control-group">
+                        <label class="control-label">Libellé:</label>
+                        <div class="controls">
+                            <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
+                        </div>
+                    </div>
+                   
 
                 </form>
             </div>
@@ -105,20 +110,33 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier un fonctions</h3>
+                <h3>Modifier grade</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
+
+                     <!-- <div class="control-group">
+                        <label class="control-label">Echelons</label>
+                        <div class="controls">
+                            <select v-model="editGrade.echellon_id">
+                                <option></option>
+                                <option v-for="item in echellons" :key="item.id" :value="item.id">
+                                    {{item.libelle}}
+                                </option>
+                            </select>
+                        </div>
+                    </div> -->
+
                     <div class="control-group">
                         <label class="control-label">Code:</label>
                         <div class="controls">
-                            <input type="text" v-model="editTitre.code" class="span" placeholder="" />
+                            <input type="text" v-model="editGrade.code" class="span" placeholder="" />
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Libelle:</label>
                         <div class="controls">
-                            <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
+                            <input type="text" v-model="editGrade.libelle" class="span" placeholder="" />
                         </div>
                     </div>
 
@@ -126,7 +144,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <a @click.prevent="modifierTitre(editTitre)" class="btn btn-primary"
+                <a @click.prevent="modifierGradeLocal(editGrade)" class="btn btn-primary"
                    href="#">Modifier</a>
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
         </div>
@@ -168,9 +186,10 @@
                     echellon_id:""
                 },
 
-                editTitre: {
+                editGrade: {
                     code: "",
-                    libelle: ""
+                    libelle: "",
+                    echellon_id:""
                 }
 
             };
@@ -189,7 +208,7 @@
         },
         methods: {
             // methode pour notre action
-            ...mapActions('personnelUA', ['getEchelons',"getGrades","ajouterGrades","supprimerGrades"]),
+            ...mapActions('personnelUA', ['getEchelons',"getGrades","ajouterGrades","supprimerGrades", "modifierGrade"]),
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
@@ -211,10 +230,17 @@
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editTitre = this.titres[index];
+                this.editGrade = this.grades[index];
 
             },
 
+            modifierGradeLocal(){
+            
+            this.modifierGrade(this.editGrade)
+            this.$('#modifierModal').modal('hide');
+
+            },
+  
 
         }
     };

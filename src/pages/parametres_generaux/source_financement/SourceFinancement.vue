@@ -4,6 +4,7 @@
   
        
     
+    
       <!-- End Page Header -->
             <!-- Default Light Table -->
            <div class="container-fluid">
@@ -13,7 +14,7 @@
                                         <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste structure de financement "
@@ -22,43 +23,60 @@
                                             :data="localisationsFiltre">
                   <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
-                                                 </download-excel> 
-                                     </div> <br>
+                                                 </download-excel>  
+                                   
+
+                      <div align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+          </div>
+               </div>                        
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des sources de financements</h5>
              <div align="right">
-        Rechercher: <input type="text" v-model="search" placeholder="searh...">
+        Recherche: <input type="text" v-model="search" placeholder=" ">
 
           </div>
              
           </div>
+
+          <div class="span4">
+                    <br>
+                    Afficher
+                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    Entrer
+                </div>
          
            <div class="widget-content nopadding">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" id="source">
               <thead>
                 <tr>
                   <th>Code</th>
-                  <th>Libelle</th>
+                  <th>Libellé</th>
                   <th>Sigle</th>
                    <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(source_financement, index) in 
-                localisationsFiltre" :key="source_financement.id">
-                  <td @dblclick="afficherModalModifierFinancement(index)">
+                <tr class="odd gradeX" v-for="source_financement in 
+               partition (localisationsFiltre,size)[page]" :key="source_financement.id">
+                  <td @dblclick="afficherModalModifierFinancement(source_financement.id)">
                     {{source_financement.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierFinancement(index)">
+                  <td @dblclick="afficherModalModifierFinancement(source_financement.id)">
                     {{source_financement.libelle || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierFinancement(index)">
+                  <td @dblclick="afficherModalModifierFinancement(source_financement.id)">
                     {{source_financement.sigle || 'Non renseigné'}}</td>
                   <td>
 
               <div class="btn-group">
               <button @click.prevent="supprimerSourceFinancement(source_financement.id)"  
               class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
              
             </div>
 
@@ -66,15 +84,30 @@
                 </tr>
               </tbody>
             </table>
+
+             
             <div v-if="localisationsFiltre.length">
             </div>
+            
             <div v-else>
               <div align="center">
                <h6 style="color:red;"> Aucune source de financement enregistrée ! </h6>
           </div>
             </div>
+            
            </div>
+
+          
         </div>
+         <div class="pagination alternate">
+                    <ul>
+                        <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                        <li  v-for="(titre, index) in partition(localisationsFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+                            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                        <li :class="{ disabled : page == partition(localisationsFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+                    </ul>
+                </div>
       </div>
               </div>
             </div>
@@ -98,9 +131,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>
             <div class="controls-group">
@@ -186,10 +219,17 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import {partition} from "../../../../src/Repositories/Repository"
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   
   data() {
     return {
+      page:0,
+      size:10,
+      active_el:0,
+
       json_fields:{
         'Code':'code',
         'Libelle':'libelle',
@@ -250,6 +290,41 @@ return this.sources_financements.filter((item) => {
    ...mapActions('parametreGenerauxSourceDeFinancement', ['getSourceFinancement', 'ajouterSourceFinancement', 
    'modifierFinancement',
     'supprimerSourceFinancement']),   
+
+  partition:partition,
+
+   getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+
+    genererEnPdf(){
+  var doc = new jsPDF('landscape')
+  // doc.autoTable({ html: this.natures_sections })
+   const data = this.sources_financements;
+   doc.setFontSize(8)
+  doc.text(78,10,"LISTE DES SOURCES DES FINANCEMENTS")
+  doc.autoTable(this.getColspan(), data),
+  //doc.find("Action").remove()
+doc.save('soure de financement.pdf')
+return 0
+},
+
+getColspan(){
+  return [
+    {title:"CODE", dataKey:"code"},
+    {title:"LIBELLE", dataKey:"libelle"},
+    {title:"SIGLE", dataKey:"sigle"}
+  ]
+},
    
     afficherModalAjouterSourceFinancement(){
        this.$('#exampleModal').modal({
@@ -268,14 +343,14 @@ return this.sources_financements.filter((item) => {
         }
     },
 // afficher modal
-afficherModalModifierFinancement(index){
+afficherModalModifierFinancement(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editFinancement = this.sources_financements[index];
+        this.editFinancement = this.sources_financements.find(item =>item.id==id);
 
 
         
@@ -283,11 +358,12 @@ afficherModalModifierFinancement(index){
 // 
 modifierFinancementLocal(){
   this.modifierFinancement(this.editFinancement)
-  this.editFinancement = {
-    code:"",
-    libelle:"",
-    sigle:""
-  }
+  this.$('#modifierModal').modal('hide');
+  // this.editFinancement = {
+  //   code:"",
+  //   libelle:"",
+  //   sigle:""
+  // }
 }
 
   }

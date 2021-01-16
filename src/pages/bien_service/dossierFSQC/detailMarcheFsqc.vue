@@ -1,0 +1,472 @@
+
+<template>
+    
+
+<div>
+        <div class="container-fluid">
+            <h4 v-if="marcheDetail(marcheid)" >Detail Marche en procedure  (FSQC) : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
+                <button class="btn btn-success btn-large" v-else>Marché attribué</button></h4>
+            <hr />
+
+            <div class="widget-box">
+                <div class="widget-content">
+                    <div class="widget-content nopadding">
+                        <table class="table table-striped table-bordered" v-if="detail_marche">
+                            <thead>
+                            <tr>
+                                <th>Exercice Budgetaire</th>
+                                <th>Type de procedure</th>
+                                <th>Objet marché</th>
+                                <th>Reference marché</th>
+                                <th>Montant prévu</th>
+                                <th>Type de marché</th>
+                                <th>Unite administrative</th>
+                                
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-if="detail_marche">
+                                 <td class="taskOptions">
+                                    {{detail_marche.exo_id}}
+                                </td>
+                                <td class="taskDesc">{{afficherLibelleTypeProcedure(detail_marche.procedure_passation_id)}}</td>
+                                <td class="taskDesc">{{detail_marche.objet}}</td>
+                                <td class="taskStatus">{{detail_marche.reference_marche}}</td>
+                                <td class="taskOptions">
+                                    {{detail_marche.montant_marche}}
+                                </td>
+                                <td class="taskOptions">
+                                    {{detail_marche.type_marche.libelle}}
+                                </td>
+                                <td class="taskOptions">
+                                    {{detail_marche.objetUniteAdministrative.libelle}}
+                                </td>
+                               
+                            </tr>
+                            </tbody>
+                        </table>             
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span3">
+
+                </div>
+            </div>
+            
+            <div class="row-fluid">
+                <div class="span12">
+                     <template v-if="detail_marche.procedure_passation_id == 15">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                   <li class="active"><a data-toggle="tab" href="#tab001" title="tansmission du DAO a la DMP">Transmission</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab010">ANO DMP sur DAO</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab020">ANO Bailleur sur DAO</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab0145" title="publication des offres">Publication</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre I</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tab02">Reception de l'offre</a></li> -->
+                                <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tab5">Rapport d'ouverture</a></li> -->
+                                <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Jugement</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">Rapport</a></li>
+
+                                 <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP"> D.ANO</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab028" title="ANO/DMP attribution">A.ANO</a></li>
+                                      
+                                      <li class=""><a data-toggle="tab" href="#tab28" title="demande ANO Bailleur"> D.Bailleur </a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tab0008" title="ANO bailleur attribution">A.Bailleur </a></li> -->
+
+                                <li class=""><a data-toggle="tab" href="#tab1">Attribution</a></li>
+                               
+                                
+                            </ul>
+                        </div>
+                        
+                         <div class="widget-content tab-content">
+                            
+                             <div id="tab001" class="tab-pane active">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterT" data-toggle="modal" class="btn btn-primary" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                                <componentTransmissionDao :macheid="detail_marche.id"></componentTransmissionDao>
+                         </div>
+
+
+                          <div id="tab010" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#ajouterDemandeAno" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                            <componentAvis :macheid="detail_marche.id"></componentAvis>
+
+                         </div>
+
+
+                          <div id="tab020" class="tab-pane ">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-primary" align="rigth">Ajouter</a></div> -->
+                                <!-- <h4>Publication de l'offre</h4> -->
+                                 <componentAvisBailleurSurTransmision :macheid="detail_marche.id"></componentAvisBailleurSurTransmision>
+                     
+                         </div>
+
+
+                       <div id="tab0145" class="tab-pane ">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                      <publication-Offre :macheid="detail_marche.id"></publication-Offre>
+                         </div>
+
+
+                              <div id="tab0001" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-warning" align="rigth">Ajouter</a></div>
+
+                      <invitationCf :macheid="detail_marche.id"></invitationCf>
+                         </div>
+
+
+
+                         <div id="tab0045" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
+                               
+                                        <component-etat :macheid="detail_marche.id"></component-etat>
+                                        
+                               
+                                <h4>Liste des receptions de cotation</h4>
+
+                      <component-cotation :macheid="detail_marche"></component-cotation>
+                         </div>
+
+
+                         
+                   <div id="tab4" class="tab-pane">
+                <div align="right">
+                   
+
+
+                </div>
+               
+                  <component-ouverture :macheid="detail_marche.id"></component-ouverture>
+                  <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
+                </div>
+
+
+                   <div id="tab6" class="tab-pane">
+               <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <component-analyse :macheid="detail_marche.id"></component-analyse>
+
+                </div>
+
+                  <div id="tab7" class="tab-pane">
+               <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterPv" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                    </div>
+
+
+                </div>
+               <component-pv :macheid="detail_marche.id"></component-pv>
+
+                </div>
+
+
+
+<!--                 
+                <div id="tab33" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+
+                        <a href="#ajouterDemandeAno" data-toggle="modal" class="btn btn-warning" v-if="listePVDemandePV(macheid)">Ajouter</a>
+                        <button class="btn btn-warning" title="La procedure n'est pas envore termine ou il n'y a pas de pv disponible" disabled v-else>Ajouter</button>
+                    </div>
+
+                </div>
+                 </div> -->
+
+                   <!-- <div id="tab00047" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterDemandeAno" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                    </div>
+
+
+                </div>
+               <componentDemandeAno :macheid="detail_marche.id"> </componentDemandeAno>
+
+                </div> -->
+
+
+
+                  <div id="tab27" class="tab-pane">
+               <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterD" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                    </div>
+
+
+                </div>
+                 <componentDemandeAno :macheid="detail_marche.id"> </componentDemandeAno>
+
+                </div>
+
+                  <div id="tab028" class="tab-pane">
+               <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterD" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                    </div>
+
+
+                </div>
+                 <componentAvisAnoCf :macheid="detail_marche.id"> </componentAvisAnoCf>
+
+                </div>
+
+
+
+
+                  <div id="tab28" class="tab-pane">
+               <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterAnoDMPBAILLEURModal" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                    </div>
+
+
+                </div>
+                 <componentAvisBailleurCf :macheid="detail_marche.id"> </componentAvisBailleurCf>
+
+                </div>
+
+
+
+
+
+                        <div id="tab1" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <component-acte :macheid="detail_marche.id"></component-acte>
+
+                </div>
+
+
+
+
+
+                
+
+               
+
+                
+
+                         </div>
+
+                         
+
+                    </div>
+                     </template>
+                </div>
+            </div>
+              <div class="modal-footer">
+        
+        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListeEntreprise" href="#">Voir Tableau Marché</a>
+       
+      </div>
+        </div>
+          
+
+</div>
+
+</template>
+
+<script>
+    import { mapGetters, mapActions } from "vuex";
+    //import moment from 'moment';
+    
+   
+    import componentCotation from '../dossierDetailMarchePs/dossierComponentPs/componentCotation';
+     import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
+      import componentOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
+      import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
+    
+     import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
+      import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
+     import invitationCf from '../DossierPso/lettreInvitation/invitationCf';
+     import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
+
+     import componentTransmissionDao from '../dossierDetailMarcheAOI_AON/dossierTransmission/componentTransmissionD';
+      import componentAvis from '../dossierDetailMarcheAOI_AON/dossierDemandeAno/componentAvis';
+///////////////////////////////////////////////
+
+     
+        import publicationOffre from '../DossierPso/publicationOffre/publicationOffre';
+        import componentDemandeAno from '../dossierDetailMarcheAOI_AON/dossierDemande_ano_cf/componentDemandeAno'; 
+         import componentAvisBailleurSurTransmision from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurSurTransmission/componentAvisBailleurSurTransmision';
+        import componentAvisAnoCf from '../dossierDetailMarcheAOI_AON/dossierAvisAnoCf/componentAvisAnoCf';
+         import componentAvisBailleurCf from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
+
+    //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
+    //import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
+//import { formatageSomme } from "../../../../src/Repositories/Repository";
+    export default {
+       
+        components:{
+
+
+       
+            componentCotation,
+            componentEtat,
+            componentOuverture,
+            componentOuvertureMembre,
+            componentAnalyse,
+       
+         componentPv,
+          ///////
+         componentTransmissionDao,
+              componentAvis,  
+            componentActe,
+            publicationOffre,
+            invitationCf,
+            componentDemandeAno,
+            componentAvisBailleurSurTransmision,
+            componentAvisAnoCf,
+            componentAvisBailleurCf
+            
+         
+
+            
+           // ModelListSelect,
+
+        },
+        data() {
+            return {
+                fabActions: [
+                    {
+                        name: "cache",
+                        icon: "add"
+                    }
+
+                ],
+                    
+              
+            };
+        },
+created() {
+            this.marcheid=this.$route.params.id
+   this.detail_marche = this.getMarchePersonnaliser.find(
+       idmarche => idmarche.id == this.$route.params.id
+   )
+  /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
+    console.log(this.appel_offre_marche)*/
+},
+        computed: {
+
+            ...mapGetters("bienService", [ "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
+               "getterDossierCandidats","marches","gettersOuverturePersonnaliser",
+               "getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser","getterCojos"
+               
+               
+              ]),
+            ...mapGetters('personnelUA', ['acteur_depenses']),
+
+
+                ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
+            ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
+                'types_financements']) ,
+                
+    ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
+           
+        afficherLibelleTypeProcedure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+        },
+        
+        methods: {
+            ...mapActions("bienService", ['ajouterCotation' , 'modifierCotation','supprimerCotation']),
+            ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
+            // 
+          
+
+
+
+
+
+
+                 marcheDetail(){
+                return  marche_id=>{
+                    if (marche_id!="") {
+                        const vM=this;
+                       // console.log("Marche detail")
+                        let Objet=this.marches.find(idmarche => idmarche.id == marche_id)
+                        if(Objet!=undefined){
+                           vM.formData.type_appel=Objet.procedure_passation.type_procedure.libelle;
+                            vM.formData.imputation=Objet.imputation;
+                            vM.formDossierCadidature.procedure_passation_id=Objet.procedure_passation.id;
+                            vM.formDemande.ref_marche=Objet.reference_marche
+                        }
+                        return  this.marches.find(idmarche => idmarche.id == marche_id
+                        )
+                    }
+                }
+
+            },
+
+    //            ajouterEtatLocal(){
+    //      this.ajouterEtatProcedure(this.formEtat)
+    //      this.formEtat={
+    //          date_realisation:"",
+    //          libelle_etat:"reception de la cotation"
+    //      }
+    //  },
+
+              retourListeEntreprise(){
+                 this.$router.push({ name: 'marche' })
+            },
+           
+           
+      
+        }
+    };
+</script>

@@ -1,8 +1,9 @@
-import axios from 'axios'
+// import axios from 'axios'
 
- export default axios.create({
-   // baseURL: 'http://localhost:8088/api'
-   baseURL: 'http://gestion-utilisateurs.kognishare.com/api'
+//  export default axios.create({
+//    // baseURL: 'http://localhost:8088/api'
+//   baseURL: 'http://gestion-utilisateurs.kognishare.com/api'
+//   //  baseURL: 'http://localhost:90/api'
 
-})
+// })
 

@@ -23,13 +23,13 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des unité d'administrative</h5>
+              <h5>Liste des unités administratives</h5>
               <div align="right">
                 Recherche:
                 <input
                   type="search"
                   v-model="search"
-                  placeholder="Saisie unites administratives"
+                  placeholder="Saisie unite administrative"
                 />
               </div>
             </div>
@@ -39,14 +39,17 @@
               v-if="type_Unite_admins.length && sections.length && chapitres.length "
             >
               <table class="table table-bordered table-striped">
-                <thead>
+                 <thead>
                   <tr>
-                    <th>Type unite administrative</th>
+                    <th title="type unite administrative">Type ua</th>
                     <th>Section</th>
-                    <th>Chapitre</th>
+                    <th title="service gestionnaire">Service gest</th>
+                     <th title="localisation geographique">Localisation geo</th>
                     <th>Code</th>
                     <th>Libelle</th>
                     <th>Date création</th>
+
+                   
                   </tr>
                 </thead>
                 <tbody>
@@ -55,18 +58,20 @@
                     v-for="uniteadministrative in filtre_unite_admin"
                     :key="uniteadministrative.id"
                   >
-                    <td>{{uniteadministrative.typeua.libelle || 'Non renseigné'}}</td>
-                    <td>{{uniteadministrative.secti.nom_section || 'Non renseigné'}}</td>
-                    <td>{{uniteadministrative.chpitr.libelle || 'Non renseigné'}}</td>
-                    <td>{{uniteadministrative.code || 'Non renseigné'}}</td>
-                    <td>{{uniteadministrative.libelle || 'Non renseigné'}}</td>
-                    <td>{{ formaterDate(uniteadministrative.date_creation) || 'Non renseigné'}}</td>
+                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.typeua.libelle }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.secti.nom_section }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.servivegest.libelle }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.localgeo.libelle }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.code }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.libelle }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{ formaterDate(uniteadministrative.date_creation) }}</td>
+                  
                   </tr>
                 </tbody>
               </table>
             </div>
             <div v-else>
-              <p style="text-align:center;font-size:20px;color:red;">Aucune Unite Administrative</p>
+              <p style="text-align:center;font-size:20px;color:red;">Aucune Unité Administrative</p>
             </div>
           </div>
         </div>
@@ -89,10 +94,11 @@ export default {
           icon: "add"
         }
       ],
-      json_fields: {
+     json_fields: {
         TYPE_UNIT_ADMINISTRATIVE: "typeua.libelle",
         SECTION: "secti.nom_section",
-        CHAPITRE: "chpitr.libelle",
+        SERVICE_GESTIONNAIRE: "servivegest.libelle",
+        LOCALISATION_GEO: "localgeo.libelle",
         CODE: "code",
         LIBELLE: "libelle",
         DATE_CREATION: "date_creation"

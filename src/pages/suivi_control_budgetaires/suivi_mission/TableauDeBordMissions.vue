@@ -16,13 +16,13 @@
         <li class="bg_lg " title="Duree moyenne de mission">
              <a href="#">
              <i class="icon-eject"></i> <span class="label label-important">{{dureeMoyenneDeTouteLesMissions}} jrs</span>
-                 Duree moyenne de missions 
+                 Durée moyenne des missions 
              </a> </li>
 
         <li class="bg_ly" title="Montant total des missions ">
             <a href="#">
         <i class="icon-user"></i><span class="label label-success">{{formatageSomme(parseFloat(coutTotalDemission))}}
-           </span> Cout total de missions . </a> </li>
+           </span> Coût total des missions . </a> </li>
 
         <li class="bg_lo" title="cout moyen des billets d'avion globale de mission">
              <a href="#">
@@ -47,7 +47,7 @@
 
                  <li class="bg_lg" title="cout moyen de mission "> 
                 <a href="#"> <i class="icon-info-sign"></i><span class="label label-primary">{{formatageSomme(parseFloat(coutMoyenDeMissions))}}
-             </span> cout moyen de missions </a> </li>
+             </span> coût moyen de missions </a> </li>
       
 
         

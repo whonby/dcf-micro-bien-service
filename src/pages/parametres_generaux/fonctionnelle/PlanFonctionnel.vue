@@ -13,7 +13,7 @@
                                               <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste plan fonctionnel "
@@ -23,64 +23,35 @@
                       <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
-                                     </div> <br>
+                             <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div>        
+                                     </div> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des plans fonctionnelles</h5>
-             <div align="right">
+            <h5>Liste des plans fonctionnels</h5>
+             <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
-          </div>
+          </div> -->
              
           </div>
          
            <div class="widget-content ">
-            <!-- <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                 <th>Code</th>
-                  <th>Libelle</th>
-                  <th>Structure fonctionnelles</th>
-                   <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd gradeX" v-for="(plan_fonctionnel, index) 
-                in localisationsFiltre" :key="plan_fonctionnel.id">
-                  <td @dblclick="afficherMoadlModifierLocalisation(index)">
-                    {{plan_fonctionnel.code || 'Non renseigné'}}</td>
-                   <td @dblclick="afficherMoadlModifierLocalisation(index)">
-                    {{plan_fonctionnel.libelle || 'Non renseigné'}}</td>
-                    
-                   <td @dblclick="afficherMoadlModifierLocalisation(index)">
-                      {{plan_fonctionnel.structure_fonctionnelle.libelle || 'Non renseigné'}}</td>
-                  <td>
-
-
-
-              <div class="btn-group">
-              <button @click.prevent="supprimerPlanFonctionnel(plan_fonctionnel.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-             
-            </div>
-
-                  </td>
-                </tr>
-              </tbody>
-            </table> -->
+           
 
                    <ul id="demo">
             <Tree class="item" v-for="plan in lesPlansParents"
             :key="plan.id" :item="plan"   
-              @ajouterElementEnfant="ajouterElementEnfant(plan)" 
+              @ajouterElementEnfant="ajouterElementEnfant" 
               @supprimer="supprimerPlanProgrammeLocal"
-              @modifier="afficherModalModifierPlanProgramme(plan)"></Tree>
+              @modifier="afficherMoadlModifierLocalisation"></Tree>
           </ul>
             <div v-if="lesPlansParents.length">
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucun plan fonctionnel enregistré ! </h6>
+                <h6 style="color:red;">Aucun plan fonctionnel enregistré </h6>
               </div>
             </div>
           </div>
@@ -99,32 +70,41 @@
                 <h3>Ajouter plan fonctionnel</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-                   <div class="control-group">
-              <label class="control-label">Structure foctionnelle:</label>
+                <table class="table table-bordered table-striped">
+                  <tr>
+                    <td>
+<div class="control-group">
+              <label class="control-label">Structure fonctionnelle:</label>
               <div class="controls">
-                <select  v-model="formData.structure_fonctionnelle_id">
+                <select  v-model="formData.structure_fonctionnelle_id" class="span5">
             <option v-for="plan in structures_fonctionnelles" :key="plan.id" 
             :value="plan.id">{{plan.libelle}}</option>
                 </select>
               </div>
             </div>
-            <div class="control-group">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
+                <input type="text" v-model="formData.code" class="span5" placeholder="Saisir le code" />
               </div>
             </div>
-            <div class="control-group">
-              <label class="control-label">Libelle:</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="control-group">
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libellé" />
               </div>
             </div>
-           
-            
-
-          </form>              
+                    </td>
+                  </tr>
+                </table>            
           </div>
            <div class="modal-footer"> 
              <button v-show="formData.structure_fonctionnelle_id && 
@@ -140,58 +120,71 @@
 <!----- ajouter modal ajouter element enfant   ---->
 
 
- <div id="modalAjouterElementEnfant" class="modal hide">
+ <div id="modalAjouterElementEnfant" class="modal hide tailgrand">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter plan programme</h3>
+                <h3>Ajouter plan fonctionnel</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-
-                   <div class="control-group">
+                <table class="table table-bordered table-striped">
+                  <tr>
+                    <td>
+                        <div class="control-group">
               <label class="control-label">Code parent:</label>
               <div class="controls">
-                <input type="text" readonly :value="parentDossier.code" class="span"  />
+                <input type="text" readonly :value="parentDossier.code" class="span5"  />
               </div>
             </div>
-
-             <div class="control-group">
-              <label class="control-label">Libéllé parent:</label>
+                    </td>
+                    <td>
+                      <div class="control-group">
+              <label class="control-label">Libellé parent:</label>
               <div class="controls">
-                <input type="text" readonly :value="parentDossier.libelle" class="span"  />
+                <input type="text" readonly :value="parentDossier.libelle" class="span5"  />
               </div>
             </div>
-
-               <div class="control-group">
-              <label class="control-label">Structure programme:</label>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td>
+                      <div class="control-group">
+              <label class="control-label">Structure fonctionnelle:</label>
               
               <div class="controls">
-              <select v-model="nouvelElementEnfant.structure_fonctionnelle_id" >
+              <select v-model="nouvelElementEnfant.structure_fonctionnelle_id" class="span5">
                 <option v-for="structure in structures_fonctionnelles " :key="structure.id" 
                  :value="structure.id">{{structure.libelle}} </option>
               </select>
             </div>
             </div>
-
-
-            <div class="control-group">
+                    </td>
+                    <td>
+                      <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.code" class="span" placeholder="Saisir le code" />
+                <input type="text" v-model="nouvelElementEnfant.code" class="span5" placeholder="Saisir le code" />
               </div>
             </div>
-            <div class="control-group">
-              <label class="control-label">Libelle:</label>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td colspan="2">
+                        <div class="control-group">
+              <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="nouvelElementEnfant.libelle" class="span10" placeholder="Saisir le libellé" />
               </div>
             </div>
-           
-          </form>              
+                    </td>
+                  </tr>
+                </table>
+                            
           </div>
            <div class="modal-footer"> 
              <button v-show="nouvelElementEnfant.code.length && nouvelElementEnfant.libelle.length && 
-             nouvelElementEnfant.structure_programme_id"
+             nouvelElementEnfant.structure_fonctionnelle_id"
               @click.prevent="ajouterProgrammeLocalEnfant()" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -209,31 +202,42 @@
                 <h3>Modifier plan fonctionnel</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-                   <div class="control-group">
+                 <table class="table table-bordered table-striped">
+                   <tr>
+                     <td>
+                        <div class="control-group">
               <label class="control-label">Structure fonctionnel:</label>
               <div class="controls">
-                <select  v-model="editTitre.structure_fonctionnelle_id">
+                <select  v-model="editTitre.structure_fonctionnelle_id" class="span5">
             <option v-for="plan in structures_fonctionnelles" :key="plan.id" 
             :value="plan.id">{{plan.libelle}}</option>
                 </select>
               </div>
             </div>
-            <div class="control-group">
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>
+                       <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="editTitre.code" class="span" placeholder="" />
+                <input type="text" v-model="editTitre.code" class="span5" placeholder="" />
               </div>
             </div>
-            <div class="control-group">
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>
+                       <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editTitre.libelle" class="span5" placeholder="" />
               </div>
             </div>
-            
-
-          </form>              
+                     </td>
+                   </tr>
+                 </table>
+                             
           </div>
            <div class="modal-footer"> 
              <button v-show="editTitre.structure_fonctionnelle_id && editTitre.code.length && 
@@ -268,6 +272,8 @@
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
 import Tree from '../administratifs/Tree'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
    components: {
     Tree
@@ -320,6 +326,9 @@ export default {
 // methode pour maper notre guetter
   ...mapGetters('parametreGenerauxFonctionnelle', ['structures_fonctionnelles', 
   'plans_fonctionnels']),
+
+
+  
   
    lesPlansParents(){
      return this.plans_fonctionnels.filter(plan => plan.parent == null)
@@ -342,6 +351,26 @@ return this.plans_fonctionnels.filter((item) => {
   },
   methods: {
 
+       genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.plans_fonctionnels;
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES PLANS FONCTIONNELS")
+  doc.autoTable(this.getColumns(),data)
+doc.save('plan_fonctionnel.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "CODE", dataKey: "code"},
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
+
          ajouterProgrammeLocalEnfant () {
       // console.log(this.nouvelElementEnfant)
       this.ajouterPlanFonctionnel(this.nouvelElementEnfant)
@@ -349,7 +378,7 @@ return this.plans_fonctionnels.filter((item) => {
         this.nouvelElementEnfant = {
                 code: "",
              libelle: "",
-          structure_programme_id:""
+          structure_fonctionnelle_id:""
         }
     },
 
@@ -360,7 +389,8 @@ return this.plans_fonctionnels.filter((item) => {
 
  //afficher modal pour ajouter element enfant
 	 ajouterElementEnfant(item) {
-    this.parentDossier = this.plans_programmes.find(plan => plan.id == item.id)
+    this.parentDossier = this.plans_fonctionnels.find(plan => plan.id == item.id)
+    this.nouvelElementEnfant.code = this.parentDossier.code
      this.nouvelElementEnfant.parent = this.parentDossier.id
 
       this.$('#modalAjouterElementEnfant').modal({
@@ -397,15 +427,15 @@ return this.plans_fonctionnels.filter((item) => {
         }
     },
 // afficher modal
-afficherMoadlModifierLocalisation(index){
+afficherMoadlModifierLocalisation(item){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editTitre = this.plans_fonctionnels[index];
-
+       
+this.editTitre = this.plans_fonctionnels.find(plan => plan.id == item.id);
 
         
  },
@@ -422,4 +452,10 @@ modifierLocalisationLocal(){
   }
 };
 </script>
-
+<style scoped>
+.tailgrand{
+  width: 60%;
+  margin: 0 -30%;
+  
+}
+</style>

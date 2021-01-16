@@ -13,7 +13,7 @@
          <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste service gestionnaire "
@@ -23,10 +23,13 @@
                       <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
+                                  <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste service gestionnaires</h5>
+            <h5>Liste des services gestionnaires</h5>
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -35,41 +38,10 @@
           </div>
          
           <div class="widget-content"> 
-            <!-- <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-
-                  <th>Code</th>
-                  <th>Libelle</th>
-                  <th>Structure programme</th>
-                   <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd gradeX" v-for="(plan_programme, index) in localisationsFiltre" 
-                :key="plan_programme.id">
-                  <td @dblclick="afficherModalModifierPlanProgramme(index)">
-                    {{plan_programme.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierPlanProgramme(index)">
-                    {{plan_programme.libelle || 'Non renseigné'}}</td>
-                  <td>
-                       {{plan_programme.structure_programme.libelle || 'Non renseigné'}}</td>
-                  <td>
-
-
-
-              <div class="btn-group">
-              <button @click.prevent="supprimerPlanProgramme(plan_programme.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-             
-            </div>
-
-                  </td>
-                </tr>
-              </tbody>
-            </table> -->
+            
                  <ul id="demo">
             <Tree class="item" v-for="plan in lesPlansParents"
+            
             :key="plan.id" :item="plan"   
               @ajouterElementEnfant="ajouterElementEnfant" 
               @supprimer="supprimerPlanProgrammeLocal"
@@ -93,53 +65,54 @@
 <!----- ajouter modal   ---->
 
 
- <div id="exampleModal" class="modal hide">
+ <div id="exampleModal" class="modal hide ">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter service gestionnaires</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-
-                   <div class="control-group">
+                <table class="table table-bordered table-striped">
+                  <tr>
+                    <td>
+                       <div class="control-group">
               <label class="control-label">structure administrative:</label>
               <div class="controls">
-                <select  v-model="formData.structure_administrative_id">
+                <select  v-model="formData.structure_administrative_id" class="span5">
             <option v-for="administrative in structures_administratives" :key="administrative.id" 
             :value="administrative.id">{{administrative.libelle}}</option>
                 </select>
               </div>
             </div>
-
-            <!-- <div class="control-group">
-              <label class="control-label">Ordre:</label>
+                    </td>
+                   
+                  </tr>
+                  <tr>
+                     <td>
+                      <div class="control-group">
+              <label class="control-label">Code</label>
               <div class="controls">
-                <input type="number" v-model="formData.ordre" class="span" placeholder="Saisir l'ordre" />
-              </div>
-            </div> -->
-            <div class="control-group">
-              <label class="control-label">Code:</label>
-              <div class="controls">
-                <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
+                <input type="text" v-model="formData.code" class="span5" placeholder="Saisir le code" />
               </div>
             </div>
-            <div class="control-group">
-              <label class="control-label">Libelle:</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="control-group">
+              <label class="control-label">Libelle</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libelle" />
               </div>
             </div>
-            
-            
-           
-            
-
-          </form>              
+                    </td>
+                  </tr>
+                </table>
+                            
           </div>
            <div class="modal-footer"> 
              <button  v-show="formData.code.length && formData.libelle.length && 
             formData.structure_administrative_id" 
-             @click.prevent="ajouterTitreLocal" class="btn btn-primary"
+             @click.prevent="ajouetProgrammeLocal" class="btn btn-primary"
               href="#">Valider</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
             </div>
@@ -149,54 +122,65 @@
 <!----- ajouter modal ajouter element enfant   ---->
 
 
- <div id="modalAjouterElementEnfant" class="modal hide">
+ <div id="modalAjouterElementEnfant" class="modal hide tailgrand">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter service gestionnaires</h3>
+                <h3>Ajouter service gestionnaire</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-
-                   <div class="control-group">
-              <label class="control-label">Code parent:</label>
+                <table class="table table-bordered table-striped">
+                  <tr>
+                    <td>
+                        <div class="control-group">
+              <label class="control-label">Code parent</label>
               <div class="controls">
-                <input type="text" readonly :value="parentDossier.code" class="span"  />
+                <input type="text" readonly :value="parentDossier.code" class="span5"  />
               </div>
             </div>
-
-             <div class="control-group">
-              <label class="control-label">Libéllé parent:</label>
+                    </td>
+                    <td>
+                       <div class="control-group">
+              <label class="control-label">Libéllé parent</label>
               <div class="controls">
-                <input type="text" readonly :value="parentDossier.libelle" class="span"  />
+                <input type="text" readonly :value="parentDossier.libelle" class="span5"  />
               </div>
             </div>
-
-               <div class="control-group">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="control-group">
               <label class="control-label">structure administrative:</label>
               
               <div class="controls">
-              <select v-model="nouvelElementEnfant.structure_administrative_id" >
+              <select v-model="nouvelElementEnfant.structure_administrative_id" class="span5">
                 <option v-for="structure in structures_administratives " :key="structure.id" 
                  :value="structure.id">{{structure.libelle}} </option>
               </select>
             </div>
             </div>
-
-
-            <div class="control-group">
+                    </td>
+                    <td>
+                      <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.code" class="span" placeholder="Saisir le code" />
+                <input type="text" v-model="nouvelElementEnfant.code" class="span5" placeholder="Saisir le code" />
               </div>
             </div>
-            <div class="control-group">
-              <label class="control-label">Libelle:</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <div class="control-group">
+              <label class="control-label">Libelle</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="nouvelElementEnfant.libelle" class="span10" placeholder="Saisir le libelle" />
               </div>
             </div>
-           
-          </form>              
+                    </td>
+                  </tr>
+                </table>
+                            
           </div>
            <div class="modal-footer"> 
              <button v-show="nouvelElementEnfant.code.length && nouvelElementEnfant.libelle.length && 
@@ -215,12 +199,13 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier service gestionnaires</h3>
+                <h3>Modifier service gestionnaire</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-
-                <div class="control-group">
+                <table class="table table-bordered table-striped">
+                 <tr>
+                   <td>
+                      <div class="control-group">
               <label class="control-label">structure administrative:</label>
               <div class="controls">
                 <select  v-model="editGestionnaire.structure_administrative_id">
@@ -229,30 +214,30 @@
                 </select>
               </div>
             </div>
-
-            <div class="control-group">
-              <label class="control-label">Code:</label>
+                   </td>
+                 </tr>
+                 <tr>
+                   <td>
+                     <div class="control-group">
+              <label class="control-label">Code</label>
               <div class="controls">
-                <input type="text" v-model="editGestionnaire.code" class="span" placeholder="" />
+                <input type="text" v-model="editGestionnaire.code" class="span5" placeholder="" />
               </div>
             </div>
-            <div class="control-group">
-              <label class="control-label">Libelle:</label>
+                   </td>
+                 </tr>
+                 <tr>
+                   <td>
+                     <div class="control-group">
+              <label class="control-label">Libelle</label>
               <div class="controls">
-                <input type="text" v-model="editGestionnaire.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editGestionnaire.libelle" class="span5" placeholder="" />
               </div>
             </div>
-            
-               <!-- <div class="control-group">
-              <label class="control-label">Ordre:</label>
-              <div class="controls">
-                <input type="text" v-model="editGestionnaire.ordre" class="span" placeholder="" />
-              </div>
-            </div> -->
-
-             
-
-          </form>              
+                   </td>
+                 </tr>
+                </table>
+                             
           </div>
            <div class="modal-footer"> 
              <button  v-show="editGestionnaire.code.length && editGestionnaire.libelle.length && 
@@ -286,6 +271,8 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import Tree from './Tree'
 export default {
   components: {
@@ -358,14 +345,35 @@ return this.services_gestionnaires.filter((item) => {
    },
 
    lesPlansParents(){
-     return this.services_gestionnaires.filter(plan => plan.parent == null)
+     return this.services_gestionnaires.filter(plan => plan.parent == null);
    }
 
   },
   methods: {
     // methode pour notre action
     ...mapActions('parametreGenerauxAdministratif', ['getServiceGestionnaire', 'ajouterServiceGestionnaire', 
-   'supprimerServiceGestionnaire', 'modifierServiceGestionnaire']),   
+   'supprimerServiceGestionnaire', 'modifierServiceGestionnaire']),  
+   
+
+      genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.services_gestionnaires;
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES SERVICES GESTIONNAIRES")
+  doc.autoTable(this.getColumns(),data)
+doc.save('service_gestionnaire.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "CODE", dataKey: "code"},
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
    
     afficherModalAjouterPlanProgramme(){
        this.$('#exampleModal').modal({
@@ -403,6 +411,7 @@ return this.services_gestionnaires.filter((item) => {
  //afficher modal pour ajouter element enfant
 	 ajouterElementEnfant(item) {
     this.parentDossier = this.services_gestionnaires.find(plan => plan.id == item.id)
+    this.nouvelElementEnfant.code = this.parentDossier.code
      this.nouvelElementEnfant.parent = this.parentDossier.id
 
       this.$('#modalAjouterElementEnfant').modal({
@@ -444,3 +453,11 @@ this.editGestionnaire = {
 };
 </script>
 
+
+<style scoped>
+.tailgrand{
+  width: 60%;
+  margin: 0 -30%;
+  
+}
+</style>

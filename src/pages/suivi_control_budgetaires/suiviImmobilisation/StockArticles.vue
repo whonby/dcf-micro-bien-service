@@ -3,10 +3,10 @@
 
    
 
-     <div id="exampleModalStock" class="modal hide">
+     <div id="exampleModalStock" class="modal hide ">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter quantite Entrant</h3>
+        <h3>Ajouter quantité Entrant</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
@@ -15,6 +15,8 @@
                             <div class="controls">
                               <input type="text" class="span"  v-model="editStock.qteentrant1"/>
                                <input type="hidden" class="span"  :value="quantiteEnt"/>
+                                <input type="hidden" class="span"  v-model="editStock.histo_qte"/>
+                                <input type="hidden" class="span"  :value="nouvelleQte"/>
                             </div>
                           </div>
                            <div class="control-group">
@@ -53,7 +55,7 @@
       </div>
     </div>
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-    <div id="exampleModal" class="modal hide taillemodal">
+    <div id="exampleModal" class="modal hide tailgrandStock">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter Stock </h3>
@@ -63,9 +65,9 @@
           <tr>
               <td>
               <div class="control-group">
-                <label class="control-label">Type Unite administrative:</label>
+                <label class="control-label">Type d'Unité Administrative:</label>
                 <div class="controls">
-                  <select v-model="formData.typeua_id" >
+                  <select v-model="formData.typeua_id" class="span5">
                     <option value>Sélectionner</option>
                     <option
                       v-for="ua in type_Unite_admins"
@@ -79,9 +81,9 @@
             <td>
               
               <div class="control-group">
-                <label class="control-label">Unite administrative:</label>
+                <label class="control-label">Unité administrative</label>
                 <div class="controls">
-                  <select v-model="formData.uAdministrative_id" :readOnly="veiftypeuaExist">
+                  <select v-model="formData.uAdministrative_id" :readOnly="veiftypeuaExist" class="span5">
                     <option value>Sélectionner</option>
                     <option
                       v-for="ua in uniteAdministrativeDynamiques(formData.typeua_id)"
@@ -92,16 +94,11 @@
                 </div>
               </div>
             </td>
-            
-
-           
-          </tr>
-          <tr>
             <td>
               <div class="control-group">
                 <label class="control-label">Type équipement:</label>
                 <div class="controls">
-                  <select v-model="formData.typeequipe_id">
+                  <select v-model="formData.typeequipe_id" class="span5">
                     <option value>Sélectionner</option>
                     <option
                       v-for="equipe in equipements"
@@ -112,11 +109,16 @@
                 </div>
               </div>
             </td>
+
+           
+          </tr>
+          <tr>
+            
              <td>
               <div class="control-group">
-                <label class="control-label">Famille:</label>
+                <label class="control-label">Famille</label>
                 <div class="controls">
-                  <select  v-model="formData.famill_id">
+                  <select  v-model="formData.famill_id" class="span5">
                     <option value>Sélectionner</option>
                     <option
                       v-for="famil in fammillesDynamiques(formData.typeequipe_id)"
@@ -127,11 +129,11 @@
                 </div>
               </div>
             </td>
-            <td>
+            <!-- <td>
               <div class="control-group">
                 <label class="control-label">Article:</label>
                 <div class="controls">
-                  <select :readOnly="veifArticlesExist" v-model="formData.articlestock_id">
+                  <select :readOnly="veifArticlesExist" v-model="formData.articlestock_id" class="span5">
                   
                     <option
                       v-for="famil in articlesDynamiques(formData.famill_id)"
@@ -141,21 +143,16 @@
                   </select>
                 </div>
               </div>
-            </td>
-            
-            
-
-          </tr>
-          <tr>
+            </td> -->
             <td>
               <div class="control-group">
-                <label class="control-label">Quantite en entrant</label>
+                <label class="control-label">Quantité en entrant</label>
                 <div class="controls">
                   <input
                     type="number"
                     
                    v-model="formData.quantitestock"
-                    class="span"
+                    class="span5"
                     placeholder="Saisir Quantite en stock"
                   />
                 </div>
@@ -163,6 +160,23 @@
             </td>
              <td>
               <div class="control-group">
+                <label class="control-label">Date d'entrée</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                    v-model="formData.date_entre"
+                    class="span5"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+
+          </tr>
+          <tr>
+            
+             <td>
+              <!-- <div class="control-group">
                 <label class="control-label">Durée de vie</label>
                 <div class="controls">
                   <input
@@ -173,7 +187,7 @@
                     placeholder="Durée de vie"
                   />
                 </div>
-              </div>
+              </div> -->
               <input
                     type="hidden"
                    :value="Historqte"
@@ -181,21 +195,23 @@
                     class="span"
                     
                   />
-            </td>
-            
-            <td>
-              <div class="control-group">
-                <label class="control-label">Date d'entrée :</label>
-                <div class="controls">
                   <input
-                    type="date"
-                    v-model="formData.date_entre"
+                    type="hidden"
+                   :value="HistorqteModifier"
+                    
                     class="span"
                     
                   />
-                </div>
-              </div>
+                   <input
+                    type="hidden"
+                   v-model="formData.qtesortie"
+                    
+                    class="span"
+                    
+                  />
             </td>
+            
+           
            
                  
           </tr>
@@ -216,14 +232,14 @@
 
     <!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
 
-    <div id="modificationModal" class="modal hide taillemodal">
+    <div id="modificationModal" class="modal hide tailgrandStock">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Modifier stock</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
-         <tr>
+         <!-- <tr> -->
              <!-- <td>
               <div class="control-group">
                 <label class="control-label">Type Unite administrative:</label>
@@ -272,13 +288,13 @@
             </td> -->
 
            
-          </tr>
+          <!-- </tr> -->
           <tr>
             <td>
               <div class="control-group">
                 <label class="control-label">Type équipement:</label>
                 <div class="controls">
-                  <select v-model="editStock.typeequipe_id">
+                  <select v-model="editStock.typeequipe_id" class="span5">
                     <option value>Sélectionner</option>
                     <option
                       v-for="equipe in equipements"
@@ -293,7 +309,7 @@
               <div class="control-group">
                 <label class="control-label">Famille:</label>
                 <div class="controls">
-                  <select  v-model="editStock.famill_id">
+                  <select  v-model="editStock.famill_id" class="span5">
                     <option value>Sélectionner</option>
                     <option
                       v-for="famil in fammillesDynamiques(editStock.typeequipe_id)"
@@ -304,22 +320,22 @@
                 </div>
               </div>
             </td>
-            <td>
+           
+             <td>
+              
               <div class="control-group">
-                <label class="control-label">Article:</label>
+                <label class="control-label">Quantité en Stock </label>
                 <div class="controls">
-                  <select  v-model="editStock.articlestock_id">
-                  
-                    <option
-                      v-for="famil in articlesDynamiques(editStock.famill_id)"
-                      :key="famil.id"
-                      :value="famil.id"
-                    >{{famil.libelle}}</option>
-                  </select>
+                  <input
+                    type="number"
+                    v-model="editStock.quantitestock"
+                    
+                    class="span5"
+                    placeholder="Nvelle Quantité en Stock"
+                  />
                 </div>
               </div>
             </td>
-            
             <!-- <td>
               <div class="control-group">
                 <label class="control-label">Quantite en stock</label>
@@ -338,7 +354,21 @@
 
           </tr>
           <tr>
-            
+             <!-- <td>
+              <div class="control-group">
+                <label class="control-label">Article:</label>
+                <div class="controls">
+                  <select  v-model="editStock.articlestock_id">
+                  
+                    <option
+                      v-for="famil in articlesDynamiques(editStock.famill_id)"
+                      :key="famil.id"
+                      :value="famil.id"
+                    >{{famil.libelle}}</option>
+                  </select>
+                </div>
+              </div>
+            </td> -->
              <!-- <td>
               <div class="control-group">
                 <label class="control-label">Date d'entree :</label>
@@ -365,35 +395,8 @@
                 </div>
               </div>
             </td> -->
-             <td>
-              <div class="control-group">
-                <label class="control-label">Durée de vie</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    v-model="editStock.durevie"
-                    
-                    class="span"
-                    placeholder="Durée de vie"
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              
-              <div class="control-group">
-                <label class="control-label">Quantité en Stock </label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    v-model="editStock.quantitestock"
-                    
-                    class="span"
-                    placeholder="Nvelle Quantité en Stock"
-                  />
-                </div>
-              </div>
-            </td>
+             
+           
             
            
                  
@@ -428,27 +431,27 @@
                 <i class="icon-th"></i>
               </span>
               <h5>Gestion des stocks</h5>
-              <div align="right">
+              <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
-              </div>
+              </div> -->
             </div>
 
-            <div class="widget-content nopadding" v-if="getAfficheStockArticle.length && articles.length && familles.length && uniteAdministratives.length ">
+            <div class="widget-content nopadding" >
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                     <!-- <th>Type Unite administrative</th> -->
-                    <!-- <th title="unite administrative">Ua</th>-->
-                     <th>Equipement Type</th> 
+                     <!-- <th>Type Unite administrative</th>  -->
+                    <th title="unite administrative">UA</th>
+                     <!-- <th>Equipement Type</th>  -->
                      <th>Famille</th>
-                    <th>Article</th>
-                    <th>Durée de vie</th>
-                    <th title="quantite en stock">Qté en stock</th>
+                    <!-- <th>Article</th> -->
+                    <!-- <th>Durée de vie</th> -->
+                    <th title="quantite en stock">Quantité en stock</th>
                      <th>Date d'entrée</th>
-                    <th title="quantite entrant">Qté entrée</th>
+                    <th title="quantite entrant">Quantité entrée</th>
                     <th>Date de sortie</th>
-                    <th title="quantite sortant">Qté sortie</th>
+                    <th title="quantite sortant">Quantité sortie</th>
                      
                     <!-- <th>Duree de vie</th> -->
                    
@@ -458,30 +461,31 @@
                 <tbody>
                      <tr
                     class="odd gradeX"
-                    v-for="(stock, index) in getAfficheStockArticle"
+                    v-for="(stock, index) in listeDesStockParUa(getterUa_idImo)"
                     :key="stock.id"
                   >
+
 
 
                    
                     <!-- <td
                       @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.typeUniteAdministrative.libelle || 'Non renseigné'}}</td> -->
-                    <!-- <td
-                      @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.uniteAdm.libelle || 'Non renseigné'}}</td>-->
-                     <td
-                      @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.AfficheTypeequipement.libelle || 'Non renseigné'}}</td> 
+                    >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
                     <td
                       @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.famille.libelle || 'Non renseigné'}}</td>
-                     <td
+                    >{{libelleUniteAdministrative(stock.uAdministrative_id)	 || 'Non renseigné'}}</td>
+                     <!-- <td
                       @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.AfficheArticle.libelle || 'Non renseigné'}}</td>
-                     <td style="text-align: center;"
+                    >{{libelleTypeEquipement(stock.typeequipe_id) || 'Non renseigné'}}</td>  -->
+                    <td
                       @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.durevie || 'Non renseigné'}}</td>
+                    >{{libelleFamilleEquipement(stock.famill_id) || 'Non renseigné'}}</td>
+                     <!-- <td
+                      @dblclick="afficherModalModifierStock(index)"
+                    >{{stock.AfficheArticle.libelle || 'Non renseigné'}}</td> -->
+                     <!-- <td style="text-align: center;"
+                      @dblclick="afficherModalModifierStock(index)"
+                    >{{stock.durevie || 'Non renseigné'}}</td> -->
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierStock(index)"
                     >{{stock.quantitestock || 'Non renseigné'}}</td>
@@ -496,16 +500,16 @@
                     >{{formaterDate(stock.date_sortie) || 'Non renseigné'}}</td>
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierStock(index)"
-                    >{{ stock.histo_qte - stock.quantitestock  || '0' }}</td>
+                    >{{ stock.qtesortie ||'0' }}</td>
                   
                      <!-- <td
                       @dblclick="afficherModalModifierStock(index)"
                     >{{stock.durevie || 'Non renseigné'}} Ans</td> -->
 
                     <td>
-                        <button class="btn btn-inverse" @click="afficherModalStock(index)">
+                        <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
                         <span>
-                          <i class=" icon-signal"></i>
+                          <i class=" icon-edit"></i>
                         </span>
                       </button>
                       <button class="btn btn-danger" @click="supprimerStock(stock.id)">
@@ -518,21 +522,21 @@
                    <tr
                    
                   >
-                 <td></td>
-                    <td></td>
+                
+                
                       <td></td>
                    <td style="font-weight:bold;" title="total quantite entrant">Total en stock</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{totalQteEntrant || 0 }}</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(getterUa_idImo) || 0 }}</td>
                     <td></td>
                    
                      
                   
                      <td ></td>
-                    <td style="font-weight:bold;" title="total quantite sortant">Total qte sortie</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{ totalQteSortant || 0 }}</td>
+                    <td style="font-weight:bold;" title="total quantite sortant">Total quantité sortie</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{ nombreDeQuantiteSortiEnStock(getterUa_idImo) || 0 }}</td>
                     
-                   
-                     <td ></td>
+                   <td></td>
+                     
                     
                   </tr>
                 </tbody>
@@ -544,10 +548,17 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterStock" main-icon="apps" bg-color="green"></fab>
-    <notifications  />
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterStock()">Open</button>
+    <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+  @shortkey="ajouterEntreEnPatrimoine()">Open</button>
+
+ <fab :actions="fabActions"
+                main-icon="apps"
+          @cache="ajouterEntreEnPatrimoine"
+         
+        bg-color="green"
+
+  ></fab>
+<notifications  />
   </div>
 </template>
   
@@ -555,7 +566,7 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSomme } from "../../../Repositories/Repository";
-
+import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth"
 export default {
   name: 'besionImmolisation',
   data() {
@@ -594,6 +605,7 @@ quantite: {
         durevie: "",
         articlestock_id: "",
         quantitestock: "",
+        qtesortie:"0"
         
        
       },
@@ -606,6 +618,8 @@ quantite: {
         articlestock_id: "",
         quantitestock: "",
         qteentrant1:"0",
+        
+        
       },
       search: ""
     };
@@ -617,7 +631,7 @@ quantite: {
 // },
   computed: {
     ...mapGetters("SuiviImmobilisation", [
-    "getAfficheStockArticle",
+    "getPersoStock",
       "equipements",
       "familles",
       "articles",
@@ -625,26 +639,199 @@ quantite: {
       
       "type_Unite_admins",
       "totalQteEntrant",
-      "totalQteSortant"
-     
+      "totalQteSortant",
+     "getterUa_idImo"
     ]),
+    
     ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
-
-
-     filtre_Stock() {
-      const st = this.search.toLowerCase();
-      return this.getAfficheStockArticle.filter(type => {
-        return (
-          type.typeUniteAdministrative.libelle.toLowerCase().includes(st) ||
-          type.uniteAdministrative.libelle.toLowerCase().includes(st)
+admin:admin,
+      dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+    //  filtre_Stock() {
+    //   const st = this.search.toLowerCase();
+    //   return this.getPersoStock.filter(type => {
+    //     return (
+    //       type.typeUniteAdministrative.libelle.toLowerCase().includes(st) ||
+    //       type.uniteAdministrative.libelle.toLowerCase().includes(st)
          
-        );
-      });
+    //     );
+    //   });
+    // },
+
+filtre_Stock() {
+       
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.getPersoStock.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect;
+        }
+
+        return this.getPersoStock;
+
     },
 
+
+listeDesStockParUa() {
+      
+
+
+   
+        if (this.noDCfNoAdmin ){
+            let colect=[];
+            this.getPersoStock.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.uAdministrative_id == id && element.typestockage == 1);
+        }
+      };
+          }
+           return id => {
+        if (id != null && id != "") {
+          return this.getPersoStock.filter(element => element.uAdministrative_id == id && element.typestockage == 1);
+        }
+      };
+         
+
+
+
+    },
+
+
+
+
+
+nombreDeQuantiteEnStock() {
+       
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.getPersoStock.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            //return colect
+          
+              return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.uAdministrative_id == id && element.typestockage == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+        }
+      };
+        }
+//return this.getPersoStock.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+       
+           return id => {
+        if (id != null && id != "") {
+          return this.getPersoStock.filter(element => element.uAdministrative_id == id && element.typestockage == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+        }
+      };
+
+    },
+nombreDeQuantiteSortiEnStock() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.getPersoStock.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          
+          
+       
+         return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.uAdministrative_id == id && element.typestockage == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+        }
+      };
+       }
+
+     
+
+ return id => {
+        if (id != null && id != "") {
+          return this.getPersoStock.filter(element => element.uAdministrative_id == id && element.typestockage == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+        }
+      };
+    },
+
+
+
+
+
+
+
+
+
+     libelleFamilleEquipement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     libelleTypeEquipement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.equipements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     libelleUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 quantiteActuel() {
       const val = parseInt(this.quantiteEnt) + parseInt(this.quantiteenstock);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    nouvelleQte() {
+      const val = parseInt(this.editStock.histo_qte) + parseInt(this.editStock.qteentrant1);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -691,6 +878,10 @@ quantiteEnt() {
       const val = parseInt(this.formData.quantitestock);
       return parseInt(val).toFixed(0);
     },
+     HistorqteModifier() {
+      const val = parseInt(this.editStock.quantitestock);
+      return parseInt(val).toFixed(0);
+    },
     // nvelleQuantiteEnStock(){
     //     const val =
     //     parseFloat(this.editStock.quantitestock) +
@@ -713,13 +904,53 @@ quantiteEnt() {
 //         }
 //       };
 //     },
+// uniteAdministrativeDynamiques() {
+//       return id => {
+//         if (id != null && id != "") {
+//           return this.uniteAdministratives.filter(element => element.type_ua_id == id);
+//         }
+//       };
+//     },
 uniteAdministrativeDynamiques() {
-      return id => {
+      
+
+
+   
+        if (this.noDCfNoAdmin ){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.type_ua_id == id);
+        }
+      };
+          }
+           return id => {
         if (id != null && id != "") {
           return this.uniteAdministratives.filter(element => element.type_ua_id == id);
         }
       };
+         
+
+
+
     },
+
+
+
+
+
+
+
+
+
 
  veiftypeuaExist() {
       return this.formData.typeua_id == "" ;
@@ -749,7 +980,15 @@ veifArticlesExist() {
       "supprimerStock"
     ]),
     formatageSomme: formatageSomme,
+ajouterEntreEnPatrimoine(){
+                this.$router.push({ name: 'AjouterEntrePatrimoineVehicule' })
+            },
+            afficherModalModifierTitre(id) {
 
+      this.$router.push({
+        path: "/ModifierEntrePatrimoine/" + id
+      });
+    },
     //afiicher modal ajouter
     afficherModalAjouterStock() {
       this.$("#exampleModal").modal({
@@ -768,6 +1007,7 @@ veifArticlesExist() {
       
       };
       this.ajouterStock(nouvelObjet);
+       this.$("#exampleModal").modal('hide');
       this.formData = {
       uAdministrative_id: "",
         typeequipe_id: "",
@@ -776,6 +1016,7 @@ veifArticlesExist() {
         durevie: "",
         articlestock_id: "",
         quantitestock: "",
+        qtesortie:"0"
       };
     },
     // afficher modal de modification
@@ -785,7 +1026,7 @@ veifArticlesExist() {
         keyboard: false
       });
 
-      this.editStock = this.getAfficheStockArticle[index];
+      this.editStock = this.getPersoStock[index];
     },
     afficherModalStock(index) {
       this.$("#exampleModalStock").modal({
@@ -793,7 +1034,7 @@ veifArticlesExist() {
         keyboard: false
       });
 
-      this.editStock = this.getAfficheStockArticle[index];
+      this.editStock = this.getPersoStock[index];
     },
 
      modifierStockEntrant() {
@@ -801,19 +1042,26 @@ veifArticlesExist() {
         ...this.editStock,
        quantitestock: this.quantiteActuel,
         qteentrant: this.quantiteEnt,
+        histo_qte:this.nouvelleQte
       
       };
       this.modifierStock(nouvelObjet);
+       this.$("#exampleModalStock").modal('hide');
        this.editStock = {
      
         quantitestock: "",
       };
-      this.$("#exampleModalStock").modal('hide');
+      
     },
     // fonction pour vider l'input modification
     modifierStockLocal() {
-     
-      this.modifierStock(this.editStock);
+      var nouvelObjet = {
+        ...this.editStock,
+       histo_qte: this.HistorqteModifier,
+      
+      
+      };
+      this.modifierStock(nouvelObjet);
       this.$("#modificationModal").modal('hide');
     },
     alert() {
@@ -835,11 +1083,19 @@ veifArticlesExist() {
   width: 800px;
   margin: 0 -380px;
 }
+.taillemodalMod{
+   width: 500px;
+  margin: 0 -200px;
+}
 .sommecolor{
   background-color: red;
   color:red;
   font-size: 120%;
   text-align: center;
   font-weight:bold;
+}
+.tailgrandStock{
+  width: 88%;
+  margin: 0 -42%;
 }
 </style>

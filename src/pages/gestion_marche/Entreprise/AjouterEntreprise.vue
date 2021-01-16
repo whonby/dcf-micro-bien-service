@@ -3,6 +3,7 @@
     <div>
 
 
+
         <notifications />
         <!-- End Page Header -->
         <!-- Default Light Table -->
@@ -15,29 +16,41 @@
                             <h5>Ajouter une nouvelle entreprise</h5>
                         </div>
 
-                        <div class="widget-content nopadding">
-                            <form action="#" method="get" class="form-horizontal" @submit.prevent="ajouterTitreLocal" enctype="multipart/form-data">
-                                <div class="row-fluid">
-                                    <div class="span6">
-                                        <div class="widget-box">
-                                            <div class="widget-content nopadding">
-
-                                                <div class="control-group">
-                                                    <label class="control-label">Raison social :</label>
+        <table class="table table-bordered table-striped">
+         <tr>
+             
+             <td>
+                 <div class="control-group">
+                             <label class="control-label" title="">Numéro d'identifiant unique </label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Raison social" v-model="formData.raison_sociale">
+                                                        <input type="text" class="span11" placeholder="Numéro IDU" v-model="formData.numero_idu">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+                 
+             </td>
+
+                 <td>
+                 <div class="control-group">
+                             <label class="control-label">Numéro du compte contribuable </label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Numéro du compte contribuable" v-model="formData.numero_cc">
+                                                    </div>
+                                                </div>
+                 
+             </td>
+             <td>
+                   <div class="control-group">
                                                     <label class="control-label">Sigle :</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Sigle" v-model="formData.sigle">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Secteur activite</label>
+             </td>
+             <td>
+                    <div class="control-group">
+                                                    <label class="control-label">Secteur d'activité</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.secteur_activite_id">
+                                                        <select v-model="formData.secteur_activite_id" class="span11">
                                                             <option></option>
                                                             <option v-for="item in secteur_activites" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -46,141 +59,235 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Numero compte contribuable :</label>
+             </td>
+ 
+           
+         </tr>
+                       <tr>
+                        <td colspan="3" width="250">
+                  <div class="control-group">
+     <label class="control-label">Raison sociale :</label>
+            <div class="controls">
+         <input type="text" class="span11" placeholder="Raison sociale" v-model="formData.raison_sociale">
+                     </div>
+                 </div>
+             </td>
+             <td>
+                  <div class="control-group">
+                                                    <label class="control-label">Nationalit&eacute; de l'entreprise</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Numero compte contribuable" v-model="formData.numero_cc">
+                                                        <input type="text" class="span11" placeholder="Carte d'identité de l'entreprise" v-model="formData.carteidentite">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Numero de registe de commerce:</label>
+             </td>
+         </tr>
+         <tr>
+               <td>
+                  <div class="control-group">
+                                                    <label class="control-label">Numéro du registre de commerce:</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Numero de registe de commerce" v-model="formData.numero_rc">
+                                                        <input type="text" class="span11" placeholder="Numéro de registe de commerce" v-model="formData.numero_rc">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Capitale social:</label>
+             </td>
+             <td>
+                  <div class="control-group">
+                                                    <label class="control-label">Capital social:</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Capitale social" v-model="formData.capitale_sociale">
+                                                        <input type="text" class="span11" placeholder="Capital social" v-model="formData.capitale_sociale">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+             </td>
+             <!-- <td>
+                 
+                   <div class="control-group">
                                                     <label class="control-label">Banque:</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Banque"  v-model="formData.banque">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Telephone:</label>
+             </td> -->
+             <td>
+                  <div class="control-group">
+                                                    <label class="control-label">Téléphone:</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Telephone" v-model="formData.telephone">
+                                                        <input type="text" class="span11" placeholder="Téléphone" v-model="formData.telephone">
+<!--                                                      <vue-tel-input v-model="formData.telephone"></vue-tel-input>-->
+<!--                                                      {{formData.telephone}}-->
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+             </td>
+            
+              <td>
+                 <div class="control-group">
                                                     <label class="control-label">Email:</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Email" v-model="formData.email">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+             </td>
+         </tr>
+         <tr>
+            
+              <td>
+                  <div class="control-group">
                                                     <label class="control-label">Pays:</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Pays" v-model="formData.pays">
+                                                       <select v-model="formData.pays" class="span11">
+                                                            <option></option>
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+             </td>
+             <td>
+                  <div class="control-group">
                                                     <label class="control-label">Ville:</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Ville" v-model="formData.ville">
+                                                        <select v-model="formData.ville" class="span11">
+                                                            <option></option>
+                                                            <option v-for="item in villeDynamiques(formData.pays)" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+             </td>
+             <td>
+                  <div class="control-group">
                                                     <label class="control-label">Adresse:</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11"  placeholder="Adresse" v-model="formData.adresse">
                                                     </div>
                                                 </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span6">
-                                        <div class="widget-box">
-                                            <div class="widget-content nopadding">
-                                                <div class="control-group">
-                                                    <label class="control-label">Form juridique:</label>
+             </td>
+              <td>
+                  <div class="control-group">
+                                                    <label class="control-label">Forme juridique:</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.forme_juridique">
-                                                            <option></option>
-                                                            <option value="SNC">Société en Nom Collectif</option>
-                                                            <option value="SCS">Société en Commandite Simple</option>
-                                                            <option value="SP">Société en Participation</option>
-                                                            <option value="SARL">Société à Responsabilité Limitée </option>
-                                                            <option value="SRLU">Société à Responsabilité Limitée Unipersonnelle</option>
-                                                            <option value="SA">Société Anonyme</option>
-                                                            <option value="SAU">Société Anonyme Unipersonnelle </option>
-                                                            <option value="GIE">Groupement d’intérêt Economique</option>
+                                                        <select v-model="formData.forme_juridique" class="span11">
+                                                           <option></option>
+                                                            <option v-for="item in getterformeJuridique" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Centre import :</label>
+             </td>
+         </tr>
+         <tr>
+            
+             <td>
+                  <div class="control-group">
+                                                    <label class="control-label">Centre d'imposition :</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Centre import" v-model="formData.centre_impot">
+                                                        <input type="text" class="span11" placeholder="Centre d'imposition" v-model="formData.centre_impot">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+             </td>
+             <td>
+                 <div class="control-group">
                                                     <label class="control-label">Service assiette :</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Service assiette" v-model="formData.service_assiette_impot">
                                                     </div>
                                                 </div>
+             </td>
+              <td>
 
-                                            </div>
-                                        </div>
-                                        <div class="widget-box">
-                                            <div class="widget-content nopadding">
-                                                <div class="control-group">
-                                                    <label class="control-label">Imatriculation CNPS:</label>
+                     <div class="control-group">
+                                                    <label class="control-label">Régime d'imposition</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Imatriculation CNPS" v-model="formData.immatriculation_cnps">
+                                                        <select v-model="formData.regime_impossition" class="span11">
+                                                             <option></option>
+                                                            <option v-for="item in getterregimeImpositions" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+                                                        </select>
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Date enregistrement CNPS :</label>
+             </td>
+               <td>
+                  <div class="control-group">
+                                                    <label class="control-label">Immatriculation CNPS:</label>
                                                     <div class="controls">
-                                                        <input type="date" class="span11" placeholder="Date enregistrement CNPS" v-model="formData.date_enregistrement_cnps">
+                                                        <input type="text" class="span11" placeholder="Immatriculation CNPS" v-model="formData.immatriculation_cnps">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Nombre travailleur Permanent :</label>
+             </td>
+         </tr>
+         <tr>
+            
+             <td>
+                   <div class="control-group">
+                                                    <label class="control-label">Date d'enregistrement CNPS :</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Nombre travailleur Permanant" v-model="formData.nbre_travailleur_permanent">
+                                                        <input type="date" class="span11" placeholder="Date d'enregistrement CNPS" v-model="formData.date_enregistrement_cnps">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Nombre travailleur horaire :</label>
+             </td>
+             <td>
+                   <div class="control-group">
+                                                    <label class="control-label">Nombre de travailleur permanent :</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Nombre travailleur horaire" v-model="formData.nbre_travailleur_horaire">
+                                                        <input type="text" class="span11" placeholder="Nombre de travailleur permanant" v-model="formData.nbre_travailleur_permanent">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Nombre travailleur journalier :</label>
+             </td>
+             <td>
+                  <div class="control-group">
+                                                    <label class="control-label">Nombre de travailleur horaire :</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Nombre travailleur journalier" v-model="formData.nbre_travailleur_journalier">
+                                                        <input type="text" class="span11" placeholder="Nombre de travailleur horaire" v-model="formData.nbre_travailleur_horaire">
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-actions">
-                                            <button type="submit" class="btn btn-success">Enregistrement</button>
-                                        </div>
-                                    </div>
-                                </div>
+             </td>
+              <td>
+                  <div class="control-group">
+                                                    <label class="control-label">Nombre de travailleur journalier :</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Nombre de travailleur journalier" v-model="formData.nbre_travailleur_journalier">
+                                                    </div>
+                                                </div>
+             </td>
+                 </tr>
+         <tr>
+            
+             <td>
+                   <div class="control-group">
+                                                    <label class="control-label">Date de création</label>
+                                                    <div class="controls">
+                                                        <input type="date" class="span11"  v-model="formData.datecreation">
+                                                    </div>
+                                                </div>
+             </td>
+             <td>
+                   <div class="control-group">
+                                                    <label class="control-label">Date de début d'activité</label>
+                                                    <div class="controls">
+                                                        <input type="date" class="span11"  v-model="formData.dateactivite">
+                                                    </div>
+                                                </div>
+             </td>
+             
+                 </tr>
+        </table>
+         <div class="modal-footer">
+        <a
+          @click.prevent="ajouterTitreLocal"
+          class="btn btn-primary"
+          href="#"
+        
+        >Enregistrer</a>
+        <a data-dismiss="modal" class="btn" @click.prevent="retourListeEntreprise" href="#">Fermer</a>
+      </div>
 
-                            </form>
-                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -208,10 +315,12 @@
 </template>
 
 <script>
-
+//import VueTelInput from 'vue-tel-input';
     import {mapGetters, mapActions} from 'vuex'
     export default {
-
+      // components:{
+      //   VueTelInput
+      // },
         data() {
             return {
                 fabActions: [
@@ -223,6 +332,7 @@
                 search:"",
                 liste:[],
                 formData : {
+                    numero_idu:"",
                     numero_cc: "",
                     numero_rc: "",
                     raison_sociale: "",
@@ -233,7 +343,7 @@
                     ville: "",
                     forme_juridique:"",
                     centre_impot:"",
-                    regime_imposition:"",
+                    regime_impossition:"",
                     capitale_sociale:"",
                     immatriculation_cnps:"",
                     date_enregistrement_cnps:"",
@@ -243,7 +353,8 @@
                     nbre_travailleur_journalier:"",
                     service_assiette_impot:"",
                     adresse:"",
-                    banque:""
+                    banque:"",
+                    carteidentite:""
                 },
                 editTitre: {
                     code: "",
@@ -262,6 +373,8 @@
         computed: {
 // methode pour maper notre guetter
             ...mapGetters('gestionMarche', ['entreprises',"secteur_activites"]),
+            ...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays"]),
+              ...mapGetters("bienService", ['villes','pays']),
             titreFiltres() {
 
                 const searchTerm = this.search.toLowerCase();
@@ -275,21 +388,37 @@
                     }
                 )
 
-            }
+            },
+            
+               villeDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.getterplan_pays.filter(
+            element => element.parent == id
+          );
+        }
+      };
+    },
+    affichePays(){
+        return this.getterplan_pays.filter(items=>items.parent == null );
+    }
         },
         methods: {
             // methode pour notre action
-            ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise"]),
+            ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterHistoriqueEntreprise"]),
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
             },
+            retourListeEntreprise(){
+                 this.$router.push({ name: 'Entreprise' })
+            },
             // fonction pour vider l'input
             ajouterTitreLocal () {
                 this.ajouterEntreprise(this.formData)
-
+                this.ajouterHistoriqueEntreprise(this.formData)
                 this.$router.push({ name: 'Entreprise' })
             },
 // afficher modal

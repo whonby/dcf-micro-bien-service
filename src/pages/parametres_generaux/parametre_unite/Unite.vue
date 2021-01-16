@@ -44,11 +44,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(unite, index) 
+                <tr class="odd gradeX" v-for="unite 
                 in localisationsFiltre" :key="unite.id">
-                  <td @dblclick="afficherModalModifierunite(index)">
+                  <td @dblclick="afficherModalModifierunite(unite.id)">
                     {{unite.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierunite(index)">
+                  <td @dblclick="afficherModalModifierunite(unite.id)">
                     {{unite.libelle || 'Non renseigné'}}</td>
                    
                        
@@ -145,7 +145,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="editTitre.code.length && editTitre.libelle.length"
+             <button 
              @click.prevent="modifierUniteLocal(editTitre)" class="btn btn-primary"
             >Modifier</button>
               <button data-dismiss="modal" class="btn" >Fermer</button> </div>
@@ -253,24 +253,25 @@ return this.unites.filter((item) => {
         }
     },
 // afficher modal
-afficherModalModifierunite(index){
+afficherModalModifierunite(id){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editTitre = this.unites[index];
+        this.editTitre = this.unites.find(item =>item.id==id);
 
 
         
  },
 modifierUniteLocal(){
   this.modifierUnite(this.editTitre)
-  this.editTitre = {
-        code: "",
-             libelle: ""
-  }
+  this.$('#modifierModal').modal('hide');
+  // this.editTitre = {
+  //       code: "",
+  //            libelle: ""
+  // }
 }
 
   }

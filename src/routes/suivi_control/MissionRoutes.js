@@ -1,11 +1,12 @@
 import CategorieMission from '../../pages/suivi_control_budgetaires/suivi_mission/CategorieMission.vue'
-import Imputation from '../../pages/suivi_control_budgetaires/suivi_mission/Imputation'
+import executionMission from '../../pages/suivi_control_budgetaires/suivi_mission/executionMission'
 import Mission from '../../pages/suivi_control_budgetaires/suivi_mission/Mission'
 import AjouterMission from '../../pages/suivi_control_budgetaires/suivi_mission/AjouterMission'
 import ModifierMission from '../../pages/suivi_control_budgetaires/suivi_mission/ModifierMission'
 //import DureeMoyen from '../../pages/suivi_control_budgetaires/suivi_mission/DureeMoyen.vue'
 import NormeMission from '../../pages/suivi_control_budgetaires/suivi_mission/NormeMission.vue'
 import DetailleMission from '../../pages/suivi_control_budgetaires/suivi_mission/DetailleMission.vue'
+//import executionMission from '../../pages/suivi_control_budgetaires/suivi_mission/dossierExecutionMission/executionMission.vue'
 const MissionRoutes = [
   
 // route categorie mission
@@ -22,11 +23,13 @@ const MissionRoutes = [
    //     component:DureeMoyen
    //   },
 
+  
+
      // route imputation
      {
-        path:"/imputation-budget",
-        name:"Imputation",
-        component:Imputation
+        path:"/execution-mission",
+        name:"executionMission",
+        component:executionMission
      },
   // route mission
   {
@@ -60,7 +63,11 @@ const MissionRoutes = [
       path:"/norme-mission",
       name:"NormeMission",
       component:NormeMission
-   }
+   },
+
+
+    
+ 
      
 ]
 

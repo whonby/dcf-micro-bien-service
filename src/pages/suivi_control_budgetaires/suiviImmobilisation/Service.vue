@@ -5,35 +5,30 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Service</h3>
+        <h3>Ajouter le Service</h3>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" >
+      <table class="table table-bordered table-striped">
+          
           <div class="control-group">
-            <label class="control-label">Code:</label>
-            <div class="controls">
-              <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label">Libelle:</label>
+            <label class="control-label">Libellé:</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
-                class="span"
-                placeholder="Saisir le libelle"
+                class="span5"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>
-        </form>
+      </table>
       </div>
       <div class="modal-footer">
         <a
           @click.prevent="ajouterServiceLocal(formData)"
           class="btn btn-primary"
           href="#"
-          v-show="formData.code.length && formData.libelle.length"
+          v-show="formData.libelle.length"
         >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
@@ -45,40 +40,30 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Service</h3>
+        <h3>Modifier le Service</h3>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal">
+     <table class="table table-bordered table-striped">
+         
           <div class="control-group">
-            <label class="control-label">Code:</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="editService.code"
-                class="span"
-                placeholder="Saisir le code"
-              />
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label">Libelle:</label>
+            <label class="control-label">Libellé:</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editService.libelle"
-                class="span"
+                class="span5"
                 placeholder="Saisir le libelle"
               />
             </div>
           </div>
-        </form>
+     </table>
       </div>
       <div class="modal-footer">
         <a
           @click.prevent="modifierServiceLocal(editService)"
           class="btn btn-primary"
           href="#"
-          v-show="editService.code.length && editService.libelle.length"
+          v-show="editService.libelle.length"
         >Modifier</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
@@ -90,16 +75,31 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-           <download-excel
-            class="btn btn-default pull-right"
-            style="cursor:pointer;"
-            :fields="json_fields"
-            title="Liste des services"
-            :data="filtre_service"
-            name="Liste des services"
-          >
-            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel>
+           <!-- <download-excel -->
+            <!-- class="btn btn-default pull-right" -->
+            <!-- style="cursor:pointer;" -->
+            <!-- :fields="json_fields" -->
+            <!-- title="Liste des services" -->
+            <!-- :data="filtre_service" -->
+            <!-- name="Liste des services" -->
+          <!-- > -->
+            <!-- <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i> -->
+          <!-- </download-excel> -->
+                                    <div>
+                                 <download-excel
+                                     class="btn btn-success pull-right"
+                                     style="cursor:pointer;"
+                                       :fields = "json_fields"
+                                       title="Liste des services"
+                                       name ="Liste des services"
+                                       worksheet = "entreprise non sanctionner"
+                                     :data="filtre_service">
+             <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+                                          </download-excel> 
+                <div  align="right" style="cursor:pointer;">
+    <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+        </div> 
+                              </div>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -107,7 +107,7 @@
               </span>
               <h5>Liste des Services</h5>
               <div align="right">
-                Search:
+                Recherche:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
@@ -116,34 +116,43 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Code</th>
-                    <th>Libelle</th>
+                   
+                    <th>Libellé</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="(service, index) in filtre_service"
+                    v-for="(service, index) in partition(filtre_service, size)[page]"
                     :key="service.id"
                   >
-                    <td
-                      @dblclick="afficherModalModifierService(index)"
-                    >{{service.code || 'Non renseigné'}}</td>
-                    <td
+                   
+                    <td style="width:90%"
                       @dblclick="afficherModalModifierService(index)"
                     >{{service.libelle || 'Non renseigné'}}</td>
 
                     <td>
                       <button class="btn btn-danger" @click="supprimerService(service.id)">
                         <span>
-                          <i class="icon icon-trash"></i>
+                          <i class="icon icon-trash"> Supprimer</i>
                         </span>
                       </button>
                     </td>
                   </tr>
                 </tbody>
               </table>
+                 <div class="pagination alternate">
+       <ul>
+           <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+           <li  v-for="(titre, index) in partition(filtre_service,size).length" :key="index" :class="{ active : active_el == index }">
+           <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+           <li :class="{ disabled : page == partition(filtre_service,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+       </ul>
+   </div>
+
+
+
               <div v-if="filtre_service.length"></div>
               <div v-else>
                 <p style="text-align:center;font-size:20px;color:red;">Aucun Service</p>
@@ -163,10 +172,16 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
+  import {partition} from '../../../../src/Repositories/Repository'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   name:'service',
   data() {
     return {
+       page:0,
+       size:10,
+      active_el:0,
       fabActions: [
         {
           name: "cache",
@@ -180,15 +195,15 @@ export default {
       ],
 json_fields: {
        
-        CODE: "code",
+       
         LIBELLE: "libelle"
       },
       formData: {
-        code: "",
+      
         libelle: ""
       },
       editService: {
-        code: "",
+      
         libelle: ""
       },
       search: ""
@@ -201,7 +216,7 @@ json_fields: {
       const st = this.search.toLowerCase();
       return this.services.filter(type => {
         return (
-          type.code.toLowerCase().includes(st) ||
+         
           type.libelle.toLowerCase().includes(st)
         );
       });
@@ -214,6 +229,49 @@ json_fields: {
       "modifierService",
       "supprimerService"
     ]),
+              // pagination
+   partition:partition,
+       getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+          
+          // exportation en pdf
+         genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.filtre_service;
+    doc.setFontSize(8)
+    doc.text(80,10,"LISTE DES SERVICES")
+  doc.autoTable(this.getColumns(),data)
+doc.save('services.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "LIBELLE", dataKey: "libelle"},
+
+    ]
+   
+},
+       
+
+
+
+
+
+
+
+
     //afiicher modal ajouter
     afficherModalAjouterService() {
       this.$("#exampleModal").modal({
@@ -226,7 +284,7 @@ json_fields: {
       this.ajouterService(this.formData);
 
       this.formData = {
-        code: "",
+        
         libelle: ""
       };
     },
@@ -244,7 +302,7 @@ json_fields: {
       this.modifierService(this.editService);
 this.$("#modificationModal").modal('hide');
       // this.editService = {
-      //   code: "",
+      // 
       //   libelle: ""
       // };
     },
