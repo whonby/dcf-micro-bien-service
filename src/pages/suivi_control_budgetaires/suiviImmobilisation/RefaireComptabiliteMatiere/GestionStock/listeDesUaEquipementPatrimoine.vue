@@ -590,29 +590,29 @@
                   >
 
                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
+                      @dblclick="ModificationVehicule(stock.id)"
                     >{{libelleFamilleEquipement(stock.articlestock_id) || 'Non renseigné'}}</td>
                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
+                      @dblclick="ModificationVehicule(stock.id)"
                     >{{stock.numimmatriculation || 'Non renseigné'}}</td>
                      <td
-                      @dblclick="afficherModalModifierTitre(id)"
+                      @dblclick="ModificationVehicule(stock.id)"
                     >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
                      <td
-                      @dblclick="afficherModalModifierTitre(id)"
+                      @dblclick="ModificationVehicule(stock.id)"
                     >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
+                      @dblclick="ModificationVehicule(stock.id)"
                     >{{stock.numchassis || 'Non renseigné'}}</td>
                     <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
+                      @dblclick="ModificationVehicule(stock.id)"
                     >{{stock.quantitestock || 'Non renseigné'}}</td>
                   <td
-                      @dblclick="afficherModalModifierTitre(id)"
+                      @dblclick="ModificationVehicule(stock.id)"
                       style="text-align:center;font-weight:bold;"
                     >{{formatageSomme(parseFloat((parseFloat(stock.quantitestock)*parseFloat(stock.prix_unitaire)))) || 'Non renseigné'}}</td>
                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
+                      @dblclick="ModificationVehicule(stock.id)"
                     >{{formatageSomme(parseFloat(0)) || 'Non renseigné'}}</td>
                   
                        <td>
@@ -811,6 +811,7 @@ filtre_service() {
         return (
          
           type.numimmatriculation.toLowerCase().includes(st)
+         
         );
       });
     },
@@ -1527,6 +1528,13 @@ afficherIdService() {
     ]),
      ...mapActions('parametreGenerauxAdministratif', ['getPlanPays', 
    'ajouterPlanOrganigrammeUa','modifierPlanOrganigrammeUa','supprimerPlanOrganigrammeUa']), 
+
+   ModificationVehicule(id) {
+
+      this.$router.push({
+        path: "/modificationVehicule/" + id
+      });
+    },
      afficherModalListePersonnel(){
                 this.$router.push({ name: 'gestionStockCorporels' })
             },

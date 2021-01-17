@@ -1182,102 +1182,6 @@ export function supprimerNormeImmob({ commit, dispatch }, id) {
 
 
 
-// afficher liste famille
-export function getAllHistoAffectation({ commit }) {
-  queue.push(() => {
-    axios
-      .get("/listeAffectionH")
-      .then(response => {
-        commit("GET_ALL_HISTORIQUE_AFFECTATION", response.data);
-      })
-      .catch(error => console.log(error));
-  });
-}
-
-//ajouter
-export function ajouterHistotorisqueAffection({ commit}, nouveau) {
-  asyncLoading(axios
-    .post("/ajouterAffectionHisto", {
-      
-      acteur_id: nouveau.acteur_id,
-      ua_id: nouveau.ua_id,
-      unitezone_id: nouveau.unitezone_id,
-      fonction_id: nouveau.fonction_id,
-      article_id: nouveau.article_id,
-      qte: nouveau.qte,
-      dure_vie: nouveau.dure_vie,
-      etatimmo_id: nouveau.etatimmo_id,
-      matricule_auteur: nouveau.matricule_auteur,
-      annee: nouveau.annee,
-      annee_amortissement: nouveau.annee_amortissement,
-      valeurorigine: nouveau.valeurorigine,
-      date_mise_service: nouveau.date_mise_service,
-      service_id: nouveau.service_id
-
-    }))
-    .then(response => {
-      if (response.status == 201) {
-        commit("AJOUTER_HISTORIQUE_AFFECTATION", response.data);
-        // dispatch('getAllFamille')
-        // dispatch('getAllNormeImmob')
-
-        this.$app.$notify({
-          title: 'Success',
-          text: 'Enregistrement Effectué avec Succès!',
-          type: "success"
-        })
-      }
-    });
-}
-
-
-// modifier
-export function modifierHistoAffectation({ commit}, nouveau) {
-  asyncLoading(axios
-    .put("/modifierAffectionHisto/" + nouveau.id, {
-
-      acteur_id: nouveau.acteur_id,
-      ua_id: nouveau.ua_id,
-      unitezone_id: nouveau.unitezone_id,
-      fonction_id: nouveau.fonction_id,
-      article_id: nouveau.article_id,
-      qte: nouveau.qte,
-      dure_vie: nouveau.dure_vie,
-      etatimmo_id: nouveau.etatimmo_id,
-      matricule_auteur: nouveau.matricule_auteur,
-      service_id: nouveau.service_id
-
-    }))
-    .then(response => {
-      commit("MODIFIER_HISTORIQUE_AFFECTATION", response.data);
-      // dispatch('getAllFamille')
-      // dispatch('getAllNormeImmob')
-
-      this.$app.$notify({
-        title: 'Success',
-        text: 'Modification Effectué avec Succès!',
-        type: "success"
-      })
-    });
-}
-//supprimer
-export function supprimerHistoAffectation({ commit }, id) {
-  this.$app.$dialog
-    .confirm("Voulez vous vraiment supprimer ?.")
-    .then(dialog => {
-      commit("SUPPRIMER_HISTORIQUE_AFFECTATION", id);
-      // dispatch('getAllFamille')
-      // dispatch('getAllNormeImmob')
-
-      // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete("/supprimerAffectionHisto/" + id).then(() => dialog.close());
-    });
-}
-
-
-
-
-
 
 
 
@@ -2307,7 +2211,7 @@ export function ajouterAffectationUaBien({ commit }, nouveau) {
           }
       });
 }
-modifierTypeBienCorporels
+
 // modifier
 export function modifierAffectationUaBien({ commit }, nouveau) {
   asyncLoading(axios
@@ -2330,4 +2234,79 @@ export function supprimerAffectationUaBien({ commit }, id) {
           // // dialog.loading(false) // stops the proceed button's loader
           axios.delete("/AffectionUa/" + id).then(() => dialog.close());
       });
+}
+
+
+
+
+
+// afficher liste famille
+export function getAllHistoAffectation({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeAffectionH")
+      .then(response => {
+        commit("GET_ALL_HISTORIQUE_AFFECTATION", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+
+export function ajouterHistotorisqueAffection({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/ajouterAffectionHisto", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_HISTORIQUE_AFFECTATION", response.data);
+
+          
+          }
+      });
+}
+//ajouter
+
+
+
+// modifier
+export function modifierHistoAffectation({ commit}, nouveau) {
+  asyncLoading(axios
+    .put("/modifierAffectionHisto/" + nouveau.id, {
+
+      acteur_id: nouveau.acteur_id,
+      ua_id: nouveau.ua_id,
+      unitezone_id: nouveau.unitezone_id,
+      fonction_id: nouveau.fonction_id,
+      article_id: nouveau.article_id,
+      qte: nouveau.qte,
+      dure_vie: nouveau.dure_vie,
+      etatimmo_id: nouveau.etatimmo_id,
+      matricule_auteur: nouveau.matricule_auteur,
+      service_id: nouveau.service_id
+
+    }))
+    .then(response => {
+      commit("MODIFIER_HISTORIQUE_AFFECTATION", response.data);
+      // dispatch('getAllFamille')
+      // dispatch('getAllNormeImmob')
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerHistoAffectation({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_HISTORIQUE_AFFECTATION", id);
+      // dispatch('getAllFamille')
+      // dispatch('getAllNormeImmob')
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerAffectionHisto/" + id).then(() => dialog.close());
+    });
 }

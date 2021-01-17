@@ -574,10 +574,10 @@
                     <th style="width:5%">Quantité</th>
                     <th style="width:10%">Valeur d'acquisition</th>
                    <!-- <th style="width:15%">Valeur net comptable</th> -->
-                   <th style="width:15%">Service Rattaché</th>
-                   <th style="width:15%">Fonction Rattaché</th>
-                   <th style="width:15%">Date d'Affectation</th>
-                    <th style="width:15%">Action</th>
+                   <th style="width:8%">Service Rattaché</th>
+                   <th style="width:8%">Fonction Rattaché</th>
+                   <th style="width:8%">Date d'Affectation</th>
+                    <th style="width:8%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -610,22 +610,42 @@
                     >{{formatageSomme(parseFloat((parseFloat(stock.quantitestock)*parseFloat(stock.prix_unitaire)))) || 'Non renseigné'}}</td>
                     <td
                       @dblclick="afficherModalModifierTitre(id)"
-                    >{{afficheServiceLibelle(IdServiceRattache(stock.id)) || 'Véhicule Non Rattaché au Service'}}</td>
+                    >{{afficheServiceLibelle(IdServiceRattache(stock.id)) || 'Non Rattaché'}}</td>
                      <td
                       @dblclick="afficherModalModifierTitre(id)"
-                    >{{afficheFonction(IdFonctionRattache(stock.id)) || 'Véhicule Non Rattaché au Fonction'}}</td>
+                    >{{afficheFonction(IdFonctionRattache(stock.id)) || 'Non Rattaché'}}</td>
                     <td
                       @dblclick="afficherModalModifierTitre(id)"
                     >{{formaterDate(DateMiseEnService(stock.id)) || 'Non renseigné'}}</td>
                   <td>
-                      <button class="btn  btn-success" @click.prevent="fenetreAjouterAffectation(stock.id)">
-                        <span>
-                          <i class="icon icon-folder-open"> Faire Affectation</i>
+                      <button class="btn  btn-danger" @click.prevent="fenetreAjouterReAffectation(stock.id)" v-if="statusBouton(stock.id) == 1">
+                        <span >
+                          <i class="icon icon-folder-open"> Réaffecter</i>
                           
                         </span>
+                        
+                       
+                      </button>
+                     <button class="btn  btn-success" @click.prevent="fenetreAjouterAffectation(stock.id)" v-else>
+                        
+                        <span >
+                          <i class="icon icon-folder-open"> Affécter</i>
+                          
+                        </span>
+                       
+                      </button>
+                    </td>
+                    <!-- <td>
+                      <button class="btn  btn-warning" @click.prevent="fenetreAjouterTansfert(stock.id)" v-if="statusBouton(stock.id) != 1">
+                        <span >
+                          <i class="icon icon-folder-open"> Transférer</i>
+                          
+                        </span>
+                        
+                       
                       </button>
                      
-                    </td>
+                    </td> -->
                        <!-- <td>
                        <router-link
                         :to="{name : 'DetailVehiculeGestionStock', params: {id:stock.id}}"
@@ -723,7 +743,7 @@
         <tr>
           <td>
                <div class="control-group">
-            <label class="control-label">Quantité en Stock</label>
+            <label class="control-label">Quantité Actuelle</label>
             <div class="controls">
               <input
                 type="text"
@@ -736,7 +756,7 @@
             </td>
             <td>
                <div class="control-group">
-            <label class="control-label">Quantité Affecté</label>
+            <label class="control-label">Quantité</label>
             <div class="controls">
               <input
                 type="text"
@@ -836,6 +856,377 @@
       </div>
     </div>
 <!-- FIN FORMULAIRE D AFFECTATION VEHICULE-->
+
+
+<!-- FORMULAIRE REAFFECTATION DE VEHICULE -->
+<div id="exampleModal3" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Réafféctation Véhicule: {{afficherUniteAdministrative(editAffectation.uAdministrative_id)}}</h3>
+      </div>
+      <div class="modal-body">
+      <table class="table table-bordered table-striped">
+      <tr>
+        
+         <td>
+               <div class="control-group">
+            <label class="control-label">Immatriculation</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editAffectation.numimmatriculation"
+                class="span4"
+                readonly
+                style="color:red;font-size:20px"
+              />
+            </div>
+          </div>
+            </td>
+            <td>
+               <div class="control-group">
+            <label class="control-label">Marque</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="libelleMarque(editAffectation.marque_id)"
+                class="span4"
+                readonly
+              />
+            </div>
+          </div>
+            </td>
+             <td>
+               <div class="control-group">
+            <label class="control-label">Modèle</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="libelleModelle(editAffectation.model_id)"
+                class="span4"
+                readonly
+              />
+            </div>
+          </div>
+            </td>
+      </tr>
+         
+        <tr>
+          <td>
+               <div class="control-group">
+            <label class="control-label">Quantité Actuelle</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editAffectation.quantitestock"
+                class="span4"
+                readonly
+              />
+            </div>
+          </div>
+            </td>
+            <td>
+               <div class="control-group">
+            <label class="control-label">Quantité</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formData.qte_affecte"
+                class="span4"
+                
+              />
+            </div>
+          </div>
+            </td>
+              <td>
+               <div class="control-group">
+            <label class="control-label">Date d'affétation</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="formData.date_mise_service"
+                class="span4"
+                
+              />
+            </div>
+          </div>
+             </td>
+          </tr>
+          
+          <tr>
+            <td>
+               <div class="control-group">
+            <label class="control-label">Service</label>
+            <div class="controls">
+               <select   class="span4" v-model="formData.service_id">
+                 <option></option>
+            <option v-for="resultat in afficherServiceUA(editAffectation.uAdministrative_id)" :key="resultat.id" 
+            :value="resultat.serviceua_id">{{afficheServiceLibelle(resultat.serviceua_id)}}</option>
+                </select>
+            </div>
+          </div>
+            </td>
+            <td>
+              
+               <div class="control-group">
+            <label class="control-label">Fonction</label>
+            <div class="controls">
+               <select   class="span4" v-model="formData.fonction_id">
+                 <option></option>
+            <option v-for="resultat in afficherFonctionUA(editAffectation.uAdministrative_id)" :key="resultat.id" 
+            :value="resultat.fonction_id">{{afficheFonction(resultat.fonction_id)}}</option>
+                </select>
+            </div>
+          </div>
+            </td>
+            <td>
+               <div class="control-group">
+            <label class="control-label">Besoin</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="afficheNomA"
+                class="span4"
+                readonly
+              />
+            </div>
+          </div>
+             </td>
+           
+          </tr>
+          <tr>
+            <td>
+               <div class="control-group">
+            <label class="control-label">Nom de l'utilisateur</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formData.nom_prenoms"
+                class="span4"
+                
+              />
+            </div>
+          </div>
+             </td>
+             <td colspan="2">
+               <code v-show="(this.AfficheNomArticleService(this.formData.service_id) != this.editAffectation.famill_id) && (this.AfficheNomArticleFonction(this.formData.fonction_id) != this.editAffectation.famill_id)" style="color:red;font-size:14px">Le Service ou la Fonction séléctionner n'a pas dois a un véicule </code>
+               <!-- <code v-if="" style="color:red;font-size:14px">La Fonction n'a pas dois a un véicule </code> -->
+               <!-- <code v-else style="color:red;font-size:14px">Veuillez remplir les champs Svp </code> -->
+             </td>
+          </tr>
+      </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          
+          class="btn btn-primary"
+          href="#"
+          @click.prevent="FaireReaffectation()"
+          v-show="(this.AfficheNomArticleService(this.formData.service_id) == this.editAffectation.famill_id) || (this.AfficheNomArticleFonction(this.formData.fonction_id) == this.editAffectation.famill_id)"
+        >Réaffecter</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+<!-- FIN FORMULAIRE D REAFFECTATION VEHICULE-->
+
+
+
+
+<!---DEBUT FORMULAIRE DE TRANSFERT-->
+
+<div id="exampleModal12" class="modal hide tailgrand8">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Affectation Des équipements par unité Administrative</h3>
+      </div>
+      <div class="modal-body">
+      <table class="table table-bordered table-striped">
+<tr>
+  <td >
+                <div class="control-group">
+                  <label class="control-label">Unité Administrative Emettrice</label>
+                  <div class="controls">
+                        <input
+                type="text"
+                
+                class="span5"
+               v-model="editAffectation.uAdministrative_id"
+                readonly
+              />
+                  </div>
+                </div>
+             </td>
+             <td >
+                <div class="control-group">
+                  <label class="control-label">Article en Stock UA Emettrice</label>
+                  <div class="controls">
+                       
+                    <input
+                type="text"
+                
+                class="span5"
+               
+                readonly
+              />
+                  </div>
+                </div>
+             </td>
+             <td>
+     <div class="control-group">
+                  <label class="control-label">Marque des articles en Stock UA Emettrice</label>
+                  <div class="controls">
+                       <input
+                type="text"
+                
+                class="span5"
+               
+                readonly
+              />
+                   
+                  </div>
+                </div>
+  </td>
+
+  
+</tr>
+<tr>
+   <td>
+     <div class="control-group">
+                  <label class="control-label">Modele des articles en Stock UA Emettrice</label>
+                  <div class="controls">
+                        <input
+                type="text"
+                
+                class="span5"
+               
+                readonly
+              />
+                   
+                  </div>
+                </div>
+  </td>
+  <td>
+    <div class="control-group">
+            <label class="control-label">Quantité en stock</label>
+            <div class="controls">
+              <input
+                type="text"
+                
+                class="span5"
+               
+                readonly
+              />
+            </div>
+          </div>
+  </td>
+<td>
+    <div class="control-group">
+            <label class="control-label">Quantité a Transferé</label>
+            <div class="controls">
+              <input
+                type="text"
+                
+                class="span5"
+               
+             
+              />
+            </div>
+          </div>
+  </td>
+  
+             <!-- <td >
+                <div class="control-group">
+                  <label class="control-label">Article en Stock UA Réceptrice</label>
+                  <div class="controls">
+                        <select v-model="formData3.famille_id" 
+                         class="span5">
+                     <option
+                        v-for="localgeo in listeArticleEnStock(ua_id)"
+                        :key="localgeo[0].id"
+                        :value="localgeo[0].famill_id"
+                      >{{libelleArticle(localgeo[0].famill_id)}}</option>
+                    </select>
+                   
+                  </div>
+                </div>
+             </td> -->
+</tr>
+
+<tr>
+  <td >
+                <div class="control-group">
+                  <label class="control-label">Unité Administrative Réceptrice</label>
+                  <div class="controls">
+                       
+                        <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="filtre_unite_admin"
+                                                   v-model="ua_receptrice_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                   
+                  </div>
+                </div>
+             </td>
+             <td>
+    <div class="control-group">
+            <label class="control-label">Date de transfert</label>
+            <div class="controls">
+              <input
+                type="date"
+                
+                class="span5"
+               
+                
+              />
+            </div>
+          </div>
+  </td>
+  <td>
+    <div class="control-group">
+            <label class="control-label">Autre Unité d'Administrative</label>
+            <div class="controls">
+              <input
+                type="text"
+                
+                class="span5"
+              
+                
+              /> 
+            </div>
+          </div>
+  </td>
+</tr>
+      </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          
+          class="btn btn-primary"
+          href="#"
+          @click.prevent="ajouterAffectationUaParUa"
+        >Transférer</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+<!--FIN FORMULAIRE DE TRANSFERT-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
            <notifications  />    
     </div>
 </template>
@@ -844,13 +1235,21 @@
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from '../../../../../../Repositories/Repository';
 import {admin,dcf,noDCfNoAdmin} from "../../../../../../Repositories/Auth"
+import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
 import moment from 'moment';
 export default {
+  components: {
+    
+    ModelListSelect,
+     
+  },
     data(){
         return{
           formData:{},
         editAffectation:{},
       editService:{},
+      editReAffectation:{},
 search:""
         }
     },
@@ -937,6 +1336,46 @@ search:""
      "ModeleVehicules",
      "Typebiengrpecorporels"
    ]),
+  filtre_unite_admin() {
+                if(this.noDCfNoAdmin){
+                    let colect=[];
+                    let vM=this
+                    this.uniteAdministratives.filter(item=>{
+                        console.log("OK bonjour GUE")
+                        if(vM.getterUniteAdministrativeByUser.length>0){
+                            let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                            if (val!=undefined){
+                                colect.push(item)
+                                return item
+                            }
+                        }
+
+                    })
+                    return colect
+                }
+                return this.uniteAdministratives
+            },
+
+id_Affectation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.immobilisations.find(qtreel => qtreel.stock_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
+
+
 
 IdServiceRattache() {
       return id => {
@@ -970,11 +1409,22 @@ DateMiseEnService() {
       if (qtereel) {
         return qtereel.date_mise_service;
       }
+      return 'Non renseigné'
+        }
+      };
+    },
+statusBouton() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.immobilisations.find(qtreel => qtreel.stock_id == id);
+
+      if (qtereel) {
+        return qtereel.statut_bouton;
+      }
       return 0
         }
       };
     },
-
 
 
 
@@ -1771,7 +2221,8 @@ anneeAmort() {
        "modifierImmobilisation",
        "modifierStock",
        "ajouterHistotorisqueAffectionService",
-       "modifierDemandeMateriel"
+       "modifierDemandeMateriel",
+       "ajouterHistotorisqueAffection"
       
      
     ]),
@@ -1789,19 +2240,9 @@ anneeAmort() {
     //   this.editService = this.listedesarticleparPerso(libelleService(marcheid))[index];
     // },
 ajouterImmobilisationLocal(){
-// var objet ={
-//   id:this.afficherIdStock(this.detail_Ua.unite_administrative_id,this.editService.famille_id,this.editService.marque_id,this.editService.model_id),
-//   quantitestock:this.RestantEnStock
-// }
-
-// var nouvelobjet2 ={
-//   id:this.afficherIdService(this.detail_Ua.unite_administrative_id,this.idService(this.detail_Ua.id)),
-  
-//  normeequipement:this.afficherNombreEquipementRestant,
-//  montantequipement:this.afficherMontantRestant
-// }
-var objet2 ={
-    // actepersonnel_id:this.afficherActeurDepenseId(this.detail_Ua.id),
+if(this.formData.fonction_id==""){
+  var objet24 ={
+    
       fonction_id:this.formData.fonction_id,
       date_mise_service:this.formData.date_mise_service,
       qte_affecte:this.formData.qte_affecte,
@@ -1809,12 +2250,79 @@ var objet2 ={
       service_id:this.formData.service_id,
         stock_id:this.editAffectation.id,
         nom_prenoms:this.formData.nom_prenoms,
-       
+       statut_bouton:0
 }
 
-this.ajouterImmobilisation(objet2)
+this.ajouterImmobilisation(objet24)
+this.ajouterHistotorisqueAffection(objet24)
+
+}
+else if(this.formData.service_id==""){
+var objet21 ={
+    
+      fonction_id:this.formData.fonction_id,
+      date_mise_service:this.formData.date_mise_service,
+      qte_affecte:this.formData.qte_affecte,
+      exercice_budgetaire:this.anneeAmort,
+      service_id:this.formData.service_id,
+        stock_id:this.editAffectation.id,
+        nom_prenoms:this.formData.nom_prenoms,
+       statut_bouton:0
+}
+
+this.ajouterImmobilisation(objet21)
+this.ajouterHistotorisqueAffection(objet21)
+
+}
+else if(this.formData.service_id!="" || this.formData.fonction_id!=""  ){
+var objet4={
+    
+      fonction_id:this.formData.fonction_id,
+      date_mise_service:this.formData.date_mise_service,
+      qte_affecte:this.formData.qte_affecte,
+      exercice_budgetaire:this.anneeAmort,
+      service_id:this.formData.service_id,
+        stock_id:this.editAffectation.id,
+        nom_prenoms:this.formData.nom_prenoms,
+       statut_bouton:1
+
+}
+
+this.ajouterImmobilisation(objet4)
+this.ajouterHistotorisqueAffection(objet4)
+}
+
+
   },
-          
+     
+     
+ FaireReaffectation(){
+var objet3 ={
+    id:this.id_Affectation(this.editAffectation.id),
+      fonction_id:this.formData.fonction_id,
+      date_mise_service:this.formData.date_mise_service,
+      qte_affecte:this.formData.qte_affecte,
+      exercice_budgetaire:this.anneeAmort,
+      service_id:this.formData.service_id,
+        stock_id:this.editAffectation.id,
+        nom_prenoms:this.formData.nom_prenoms,
+       statut_bouton:1
+}
+var objet2 ={
+    
+      fonction_id:this.formData.fonction_id,
+      date_mise_service:this.formData.date_mise_service,
+      qte_affecte:this.formData.qte_affecte,
+      exercice_budgetaire:this.anneeAmort,
+      service_id:this.formData.service_id,
+        stock_id:this.editAffectation.id,
+        nom_prenoms:this.formData.nom_prenoms,
+       statut_bouton:1
+}
+
+this.modifierImmobilisation(objet3)
+this.ajouterHistotorisqueAffection(objet2)
+  },    
 fenetreAjouterAffectation(id) {
       this.$("#exampleModal1").modal({
         backdrop: "static",
@@ -1824,7 +2332,22 @@ fenetreAjouterAffectation(id) {
       this.editAffectation = this.listeDesEquipementPar01(this.detail_Ua.uAdministrative_id).find(item=>item.id==id);
     },
    
+   fenetreAjouterReAffectation(id) {
+      this.$("#exampleModal3").modal({
+        backdrop: "static",
+        keyboard: false
+      });
 
+      this.editAffectation = this.listeDesEquipementPar01(this.detail_Ua.uAdministrative_id).find(item=>item.id==id);
+    },
+fenetreAjouterTansfert(id) {
+      this.$("#exampleModal12").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+      this.editAffectation = this.listeDesEquipementPar01(this.detail_Ua.uAdministrative_id).find(item=>item.id==id);
+    },
 formatageSomme:formatageSomme,
 
  formaterDate(date) {
@@ -1852,6 +2375,10 @@ formatageSomme:formatageSomme,
 .tailgrand{
   width: 63%;
   margin: 0 -30%;
+}
+.tailgrand8{
+  width: 90%;
+  margin: 0 -45%;
 }
 .tailleImmobilisation{
   width: 90%;

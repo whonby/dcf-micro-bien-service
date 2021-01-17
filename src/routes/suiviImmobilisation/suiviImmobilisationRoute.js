@@ -134,8 +134,15 @@ import principalExecution from '../../pages/suivi_control_budgetaires/suiviImmob
  
  import DetailVehiculeGestionStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailArticle/DetailVehicule.vue'
 
+ import modificationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/dossierModification/modificationVehicule.vue'
+
 
 const suiviImmobilisationRoutes = [
+  {
+    path: "/modificationVehicule/:id",
+    name: "modificationVehicule",
+    component: modificationVehicule
+  },
   {
     path: "/DetailVehiculeGestionStock/:id",
     name: "DetailVehiculeGestionStock",
