@@ -109,9 +109,13 @@ CodeExempte
               
                 <span title="MARCHE SUSPENDU">SU</span>
                 </button>
+                <button v-else-if="activites.attribue == 0" class="btn btn-danger">
+              
+                <span title="MARCHE PLANIFIE">PL</span>
+                </button>
  <button v-else class="btn  btn-danger">
               
-                <span title="MARCHE EN PLANIFICATION">PL</span>
+                <span title="MARCHE NON PLANIFICATION">NPL</span>
                 </button>
                    </td>
   
