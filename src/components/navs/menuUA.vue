@@ -120,6 +120,11 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
+                <li>
+                    <router-link :to="{name: 'BudgetPasProgramme'}" tag="a">
+                        BUGET PAS PROGRAMME
+                    </router-link>
+                </li>
                 <li v-if="admin() || dcf()">
                     <router-link :to="{name: 'ImportBudget'}" tag="a">
                         IMPORTATION DU BUDGET

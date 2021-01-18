@@ -76,6 +76,7 @@ hr{ border-top-color:#dadada;}
 /* Let's get this party started */
 ::-webkit-scrollbar {
 	width: 12px;
+	height: 10px;
 }
 
 /* Track */
