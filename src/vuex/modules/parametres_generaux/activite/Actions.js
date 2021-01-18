@@ -208,7 +208,7 @@ export  function  getStructureInfrastructure({commit}) {
   
   // get all of plan fonctionnelle
   export function getPlanInfrastructure({ commit }) {
-      queue.push(() => axios.get('/liste_activites').then(tony => {
+      queue.push(() => axios.get('/PlanInfrastructure').then(tony => {
           commit('GET_PLAN_INFRASTRUCTURE', tony.data)
       }).catch(error => console.log(error)))
   
@@ -216,9 +216,9 @@ export  function  getStructureInfrastructure({commit}) {
   
   // ajouter plan fonctionnelle
   export function ajouterPlanInfrastructure({ commit, dispatch }, objetAjout) {
-      asyncLoading(axios.post('/add_activites', objetAjout)).then(res => {
+      asyncLoading(axios.post('/PlanInfrastructure', objetAjout)).then(res => {
           commit('AJOUTER_PLAN_INFRASTRUCTURE', res.data)
-          dispatch('getPlanActivite')
+          dispatch('getPlanInfrastructure')
           this.$app.$notify({
               title: 'success ',
               text: 'Enregistrement effectué avec success !',
@@ -229,15 +229,14 @@ export  function  getStructureInfrastructure({commit}) {
   // modifier plan fonctionnelle
   
   export function modifierPlanInfrastructure({ commit, dispatch }, activite) {
-      asyncLoading(axios.put('/update_activites/' + activite.id, {
-          programme_id: activite.programme_id,
-          numero_ordre: activite.numero_ordre,
+      asyncLoading(axios.put('/PlanInfrastructure/' + activite.id, {
+          
           code: activite.code,
           libelle: activite.libelle,
-          structure_activites_id: activite.structure_activites_id
+          structure_infrastruture_id: activite.structure_infrastruture_id
       })).then(res => {
           commit('MODIFIER_PLAN_INFRASTRUCTURE', res.data)
-          dispatch('getPlanActivite')
+          dispatch('getPlanInfrastructure')
           this.$app.$notify({
               title: 'success ',
               text: 'Modification effectué avec success !',
@@ -251,10 +250,10 @@ export  function  getStructureInfrastructure({commit}) {
       this.$app.$dialog
           .confirm("Voulez vouz vraiment supprimer ?.")
           .then(dialog => {
-              commit('SUPPRIMER_PLAN_ACTIVITE', id)
-              dispatch('getPlanActivite')
+              commit('SUPPRIMER_PLAN_INFRASTRUCTURE', id)
+              dispatch('getPlanInfrastructure')
   
               // // dialog.loading(false) // stops the proceed button's loader
-              axios.delete('/delete_activites/' + id).then(() => dialog.close())
+              axios.delete('/PlanInfrastructure/' + id).then(() => dialog.close())
           })
   }

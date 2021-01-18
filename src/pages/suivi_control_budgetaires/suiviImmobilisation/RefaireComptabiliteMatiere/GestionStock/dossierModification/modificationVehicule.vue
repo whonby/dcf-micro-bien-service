@@ -706,7 +706,7 @@
                           @click.prevent="afficherModalListeExecution()"
                           class="btn"
                           href="#"
-                        >Fermer{{detail_vehicule.id}}</a>
+                        >Fermer</a>
                       </div>
                     </div>
                   </div>
@@ -1264,7 +1264,7 @@ libelleUa() {
         model_id:this.formData.model_id,
        histo_qte:this.detail_vehicule.quantitestock,
       
-      anneevehicule:this.formData.anneevehicule,
+      anneevehicule:this.detail_vehicule.anneevehicule,
         anneebudgetaire:this.anneeAmort,
         
         fournisseur_id:this.detail_vehicule.fournisseur_id,

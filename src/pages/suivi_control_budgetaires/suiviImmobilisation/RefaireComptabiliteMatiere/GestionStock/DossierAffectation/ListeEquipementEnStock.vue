@@ -577,7 +577,7 @@
                    <th style="width:8%">Service Rattaché</th>
                    <th style="width:8%">Fonction Rattaché</th>
                    <th style="width:8%">Date d'Affectation</th>
-                    <th style="width:8%">Action</th>
+                    <th style="width:8%" colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -635,7 +635,7 @@
                        
                       </button>
                     </td>
-                    <!-- <td>
+                    <td>
                       <button class="btn  btn-warning" @click.prevent="fenetreAjouterTansfert(stock.id)" v-if="statusBouton(stock.id) != 1">
                         <span >
                           <i class="icon icon-folder-open"> Transférer</i>
@@ -645,7 +645,7 @@
                        
                       </button>
                      
-                    </td> -->
+                    </td>
                        <!-- <td>
                        <router-link
                         :to="{name : 'DetailVehiculeGestionStock', params: {id:stock.id}}"
@@ -1062,7 +1062,7 @@
                        
                     <input
                 type="text"
-                
+                v-model="editAffectation.articlestock_id"
                 class="span5"
                
                 readonly

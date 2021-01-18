@@ -7,11 +7,12 @@
     <button class="btn btn-danger" @click.prevent="afficherModalListePersonnel">Page Précédente</button>
     
         </div> 
-          <div class="widget-title">
+        <br>
+          <div class="widget-title" style="background-color: hsl(50, 33%, 25%); color: white;">
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5>Information sur le Véhicule</h5>
+            <h5 style="color: white;">INFORMATION SUR LE VEHICULE</h5>
           </div>
  <div class="table-responsive text-nowrap">
             <table class="table table-bordered table-striped">
@@ -44,8 +45,8 @@
                 </tr>
               </tbody>
             </table>
-            <br>
-             <br>
+            
+            
              <div class="table-responsive text-nowrap">
             <table class="table table-bordered table-striped">
               <thead>
@@ -57,7 +58,7 @@
                   <th>DUREE DE VIE</th>
 
                   <th>VALEUR D'ACQUISITION</th>
-
+                  <th>ANNEE DU VEHICULE</th>
                   <!-- <th title="Exercice Budgetaire">Exercice Budget</th> -->
                  
                  
@@ -72,6 +73,7 @@
                     <td>{{libelleTypeEnergie(detail_Vehicule.etatvehicule) || 'Non renseigné'}}</td>
                   <td>{{detail_Vehicule.durevie || 'Non renseigné'}} Ans</td>
                   <td>{{formatageSomme(parseFloat(detail_Vehicule.prix_unitaire)) || 'Non renseigné'}}</td>
+                  <td>{{detail_Vehicule.anneevehicule|| 'Non renseigné'}}</td>
                   <!-- <td>{{detail_Vehicule.transmission || 'Non renseigné'}}</td> -->
                   <!-- <td>{{formatageSomme(immobilisat.prixUnitaire)|| 'Non renseigné'}}</td> -->
                   
@@ -80,6 +82,38 @@
             </table>
            
           </div>
+           <div class="widget-title" style="background-color: #1fef; color: white;">
+            <span class="icon">
+              <i class="icon-th"></i>
+            </span>
+            <h5 style="color: #000000;">INFO SUR L'AFFECTATION DU VEHICULE</h5>
+          </div>
+          <div class="table-responsive text-nowrap">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                       <th>SERVICE RATTACHE</th>
+                    <th>FONCTION RATTACHE</th>
+                     
+                    <th>DATE AFFECTATION</th>
+                    <th>PERSONNE RATTACHE</th>
+                   
+                 
+                  <!-- <th>Acteur Depense</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd gradeX">
+                  
+                  <td>{{afficherLibelleService(service_id(detail_Vehicule.id)) || 'Non renseigné'}}</td>
+                  <td>{{afficherLibelleFonction(fonction_id(detail_Vehicule.id)) || 'Non renseigné'}}</td>  
+                     <td>{{formaterDate(dateAffectation(detail_Vehicule.id)) || 'Non renseigné'}}</td>
+                  <td>{{nomPersonnel(detail_Vehicule.id) || 'Non renseigné'}}</td>  
+                  
+                </tr>
+              </tbody>
+            </table>
+            </div>
         </div>
       </div>
     </div>
@@ -112,7 +146,9 @@ created() {
 
   computed: {
      ...mapGetters("SuiviImmobilisation", [
+       "services",
       "trieUaImmobilisation",
+      "immobilisations",
       "equipements",
       "familles",
       "articles",
@@ -133,6 +169,83 @@ created() {
    "GestionStockageArticles"
    
    ]),
+   ...mapGetters("personnelUA", ["personnaliseActeurDepense","acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
+afficherLibelleFonction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+afficherLibelleService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+service_id() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.immobilisations.find(qtreel => qtreel.stock_id == id);
+
+      if (qtereel) {
+        return qtereel.service_id;
+      }
+      return 0
+        }
+      };
+    },
+fonction_id() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.immobilisations.find(qtreel => qtreel.stock_id == id);
+
+      if (qtereel) {
+        return qtereel.fonction_id;
+      }
+      return 0
+        }
+      };
+    },
+dateAffectation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.immobilisations.find(qtreel => qtreel.stock_id == id);
+
+      if (qtereel) {
+        return qtereel.date_mise_service;
+      }
+      return 0
+        }
+      };
+    },
+nomPersonnel() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.immobilisations.find(qtreel => qtreel.stock_id == id);
+
+      if (qtereel) {
+        return qtereel.	nom_prenoms;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
     libelleTypeEnergie() {
       return id => {
         if (id != null && id != "") {
