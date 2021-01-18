@@ -96,14 +96,14 @@
       </div>
     </div>
 
-  <fab :actions="fabActions"
+  <!-- <fab :actions="fabActions"
                 main-icon="apps"
           
         @searchMe="filter"
          
         bg-color="green"
 
-  ></fab>
+  ></fab> -->
 <notifications  />
  </div>
 </template>

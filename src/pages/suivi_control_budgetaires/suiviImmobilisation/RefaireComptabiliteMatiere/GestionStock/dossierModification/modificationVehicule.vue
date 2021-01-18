@@ -1271,7 +1271,8 @@ libelleUa() {
           numero_marche:this.detail_vehicule.numero_marche,
           numero_facture:this.detail_vehicule.numero_facture,
           durevie:this.dureDeVie(this.formData7.famill_id),
-          typebien_id:this.AfficheTypeDeBien(this.formData7.famill_id)
+          typebien_id:this.AfficheTypeDeBien(this.formData7.famill_id),
+          prix_unitaire:this.detail_vehicule.prix_unitaire
       }
       
       //this.ajouterNouveauVehicule(objetNew);
