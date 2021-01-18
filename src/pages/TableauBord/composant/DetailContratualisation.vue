@@ -8,9 +8,9 @@
                         <a @click.prevent="infrastucture" class="btn btn-default"
                            href="#">&#8606;</a>
                     </div>
-                    <div class="span11" align="left">
-                        <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button>
-                    </div>
+<!--                    <div class="span11" align="left">-->
+<!--                        <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button>-->
+<!--                    </div>-->
 
                     <div class="span11">
                         <h3 v-if="info_unite_admin">Situation {{info_unite_admin.libelle}} ,Nombre de marchés <font color="red">({{getterListeMarcheTableauBordFiltre.length}})</font>  </h3>
@@ -36,7 +36,7 @@
 
 
                 <div class="row-fluid">
-                    <div class="span12">
+                    <div class="span6">
                         Afficher
                         <select name="pets" id="pet-select" v-model="size" class="span3">
                             <option value="10">10</option>
@@ -45,25 +45,34 @@
                             <option value="100">100</option>
                         </select>
                         Entrer
+                    </div>
+                    <div class="span6" align="right">
+                        <button class="btn btn-default" @click="tableToExcel('table', 'Contratualisation')">
+                            <img style="width: 20px !important; height: 20px !important;" src="https://img.icons8.com/windows/64/000000/export-excel.png"/>
+                        </button>
+                    </div>
+                    <hr>
+                    <div class="span12">
+
                         <div class="widget-content nopadding" v-if="getterListeMarcheTableauBordFiltre">
-                            <table class="table table-bordered table-striped">
+                            <table  class="table table-bordered table-striped" ref="table" id="loremTable" summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
                                 <thead>
                                 <tr>
-                                    <th>N° D'ORDRE</th>
-                                    <th>NUMERO DU DAO</th>
-                                    <th>OBJET DU MARCHE </th>
-                                    <th>DATE DE PUBLICATION - BOMP</th>
-                                    <th>DATE D'OUVERTURE</th>
-                                    <th>PV D'OUVERTURE</th>
-                                    <th>RAPPORT D'ANALYSE</th>
-                                    <th>PV DE JUGEMENT</th>
-                                    <th>DATE AO DMP</th>
-                                    <th>DATE ANO DMP</th>
-                                    <th>DATE AO BAILLEUR</th>
-                                    <th>DATE ANO BAILLEUR</th>
-                                    <th>DATE D'APPROBATION DU MARCHE</th>
-                                    <th>ENTREPRISE ATTRIBUTAIRE</th>
-                                    <th>TEMPS EVALUE</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">N° D'ORDRE</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">NUMERO DU DAO</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">OBJET DU MARCHE </th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE DE PUBLICATION - BOMP</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE D'OUVERTURE</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">PV D'OUVERTURE</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">RAPPORT D'ANALYSE</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">PV DE JUGEMENT</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE AO DMP</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE ANO DMP</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE AO BAILLEUR</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE ANO BAILLEUR</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE D'APPROBATION DU MARCHE</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">ENTREPRISE ATTRIBUTAIRE</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">TEMPS EVALUE</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -178,6 +187,10 @@
                 page:0,
                 size:10,
                 active_el:false,
+                uri :'data:application/vnd.ms-excel;charset=UTF-8;base64,',
+                template:'<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+                base64: function(s){ return window.btoa(unescape(encodeURIComponent(s))) },
+                format: function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
             }
         },
         created(){
@@ -465,7 +478,14 @@
             },
             formatageSomme:formatageSomme,
             formaterDate(date){
+                if(date=="")
+                    return ""
                 return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+            },
+            tableToExcel(table, name){
+                if (!table.nodeType) table = this.$refs.table
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+                window.location.href = this.uri + this.base64(this.format(this.template, ctx))
             }
         }
     }

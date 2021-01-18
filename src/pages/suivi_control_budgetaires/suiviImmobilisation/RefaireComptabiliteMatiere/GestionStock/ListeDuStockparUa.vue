@@ -1,4 +1,3 @@
-affiche_filtre
 uniteAdministratives
 <template>
   <div>
@@ -459,13 +458,17 @@ uniteAdministratives
                                                        option-text="libelle"
                                                        placeholder="Unité administrative"
                                     >
-
+libelleFamilleEquipement
                                     </model-list-select>
     </td>
   </tr>
 </table> -->
-    <div class="container-fluid">
+    <div >
       <hr />
+      <div  align="right" style="cursor:pointer;">
+    <button class="btn btn-success" @click.prevent="afficherAjouterBien">Ajouter Un Article</button>
+    
+        </div> 
       <div class="row-fluid">
         <div class="span12">
                      <!-- <download-excel
@@ -483,126 +486,48 @@ uniteAdministratives
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Gestion des stocks</h5>
+              <h5>Gestion du Patrimoine</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
               </div> -->
+             
             </div>
 
             <div class="widget-content nopadding" >
               <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    <th title="unite administrative">UA</th>
-                     
-                     <th>Famille</th>
-                     <th>Marque</th>
-                     <th>Model</th>
-                    <th>Quantité Initiale</th> 
-                    <th title="quantite en stock">Quantité Actuelle</th>
-                    <!-- <th title="quantite sortant">Quantité sortie</th>
-                     <th>Date d'entrée</th>
-                    <th title="quantite entrant">Quantité entrée</th>
-                    <th>Date de sortie</th> -->
-                    
-                     
-                    <!-- <th>Duree de vie</th> -->
-                   
-                    <th style="width:7%">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                     <tr
+                    <thead>
+                      <tr>
+                         <th style="width:90%">UNITE D'ADMINISTRATIVE</th>
+                        <th>ACTION</th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr
                     class="odd gradeX"
-                    v-for="stock in listeDesStockParUa(uniteAdministrative_id)"
-                    :key="stock.id"
+                    v-for="BesoinImmo in listeDesStockParUa(uniteAdministrative_id)"
+                    :key="BesoinImmo[0].id"
                   >
-
-                    <!-- <td
-                      @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
-                    <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleUniteAdministrative(stock.uAdministrative_id)	 || 'Non renseigné'}}</td>
-                     <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleTypeEquipement(stock.typeequipe_id) || 'Non renseigné'}}</td>  -->
-                    <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleFamilleEquipement(stock.famill_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleMarque(stock.marque_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{libelleModelle(stock.model_id) || 'Non renseigné'}}</td>
-                     <!-- <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.AfficheArticle.libelle || 'Non renseigné'}}</td> -->
-                     <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.histo_qte || 'Non renseigné'}}</td>
-                    <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.quantitestock || 'Non renseigné'}}</td>
-                     <!-- <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{ stock.qtesortie ||'0' }}</td> -->
-                    <!-- <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{formaterDate(stock.date_entre) || 'Non renseigné'}}</td>
-                    <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.qteentrant || '0'}}</td>
-                       <td style="text-align: center;"
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{formaterDate(stock.date_sortie) || 'Non renseigné'}}</td> -->
+                  <td style="font-size:14px"
                    
+                    >{{libelleUniteAdministrative(BesoinImmo[0].uAdministrative_id) || 'Non renseigné'}}</td>
                   
-                     <!-- <td
-                      @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.durevie || 'Non renseigné'}} Ans</td> -->
-
-                    <td>
-                        <!-- <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
+                     <td>
+                       <router-link
+                        :to="{name : 'listeDesUaEquipementPatrimoine', params: {id:BesoinImmo[0].id}}"
+                        class="btn btn-success"
+                        title="Voir Article"
+                      >
                         <span>
-                          <i class=" icon-edit"></i>
+                          <i class="icon icon-folder-open"> Voir Article</i>
                         </span>
-                      </button> -->
-                      <button class="btn btn-danger" @click="supprimerStockArticle(stock.id)">
-                        <span>
-                          <i class="icon icon-trash"></i> Supprimer
-                        </span>
-                      </button>
-                    </td>
+                      </router-link>
+                     </td>
                   </tr>
-                   <tr
-                   
-                  >
-                <td></td>
-                <td></td>
-                <td></td>
-                      <td style="font-weight:bold;">Total</td>
-                   <td  style="text-align: center;color:red;font-weight:bold;">{{quantiteInitial(uniteAdministrative_id)}}</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock(uniteAdministrative_id) || 0 }}</td>
-                     <td style="text-align: center;color:red;font-weight:bold;"></td>
-                     <!-- <td></td>
-                   
-                     
                   
-                     
-                    <td  ></td> -->
-                   
-                    
-                  
-                    <!-- <td></td>
-                     <td></td> -->
-                    
-                  </tr>
-                </tbody>
-              </table>
+                    </tbody> 
+                </table>
             </div>
            
           </div>
@@ -718,10 +643,11 @@ quantite: {
       "type_Unite_admins",
       "totalQteEntrant",
       "totalQteSortant",
-     "getterUa_idImo"
+     "getterUa_idImo",
+     "ficheArticle"
     ]),
     
-    ...mapGetters("uniteadministrative", ["uniteAdministratives","GestionStockageArticles"]),
+    ...mapGetters("uniteadministrative", ["uniteAdministratives","GestionStockageArticles","groupStockParUA"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 admin:admin,
       dcf:dcf,
@@ -729,7 +655,18 @@ admin:admin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
 
+PrixUnitaireParModel() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.ficheArticle.find(qtreel => qtreel.model_id == id);
 
+      if (qtereel) {
+        return qtereel.prix_unitaire;
+      }
+      return 0
+        }
+      };
+    },
 
   libelleMarque() {
       return id => {
@@ -859,7 +796,7 @@ nombreDeQuantiteEnStock() {
 listeDesStockParUa() {
       return id => {
         if (id != null && id != "") {
-           return this.listeDesStockGlobalUa.filter(qtreel => qtreel.uAdministrative_id == id);
+           return this.listeDesStockGlobalUa.filter(qtreel => qtreel[0].uAdministrative_id == id);
 
         }
         return this.listeDesStockGlobalUa;
@@ -868,12 +805,10 @@ listeDesStockParUa() {
     },
 
 listeDesStockGlobalUa() {
-      
-
-
+    
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.GestionStockageArticles.filter(item=>{
+            this.groupStockParUA.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
                 if (val!=undefined){
                     colect.push(item)
@@ -881,13 +816,9 @@ listeDesStockGlobalUa() {
                 }
             })
             return colect;
-      //      return id => {
-      //   if (id != null && id != "") {
-      //     return colect.filter(element => element.uAdministrative_id == id);
-      //   }
-      // };
+    
         }
-return this.GestionStockageArticles;
+return this.groupStockParUA;
       //   return id => {
       //   if (id != null && id != "") {
       //     return this.GestionStockageArticles.filter(element => element.uAdministrative_id == id);
@@ -934,23 +865,7 @@ return this.GestionStockageArticles;
 
 
 
-
-
-
-
-
-     libelleFamilleEquipement() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.familles.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return 0
-        }
-      };
-    },
+ 
      libelleTypeEquipement() {
       return id => {
         if (id != null && id != "") {
@@ -1152,6 +1067,9 @@ veifArticlesExist() {
         path: "/ModifierEntrePatrimoine/" + id
       });
     },
+    afficherAjouterBien(){
+                this.$router.push({ name: 'AjouterEntrePatrimoine' })
+            },
     //afiicher modal ajouter
     afficherModalAjouterStock() {
       this.$("#exampleModal").modal({

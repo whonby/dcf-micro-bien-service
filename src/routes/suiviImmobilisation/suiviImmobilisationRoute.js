@@ -97,6 +97,10 @@ import demarrage from '../../pages/suivi_control_budgetaires/suiviImmobilisation
 import gestionStockCorporels from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/gestionStockCorporels.vue'
 
 
+import listeDesUaEquipementPatrimoine from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/listeDesUaEquipementPatrimoine.vue'
+
+
+import listeDesUaEquipementPatrimoine1 from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/listeDesUaEquipementPatrimoine.vue'
 
 
 
@@ -119,10 +123,56 @@ import principalExecution from '../../pages/suivi_control_budgetaires/suiviImmob
 
 
 
+ import listeDesArticlesTransferer from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/AffectationEquipementParUa/listeDesArticlesTransferer.vue'
+
+ import ListeEquipementEnStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierAffectation/ListeEquipementEnStock.vue'
+
+ 
+ import AjouterAffectation from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierAffectation/AjouterAffectation.vue'
+
+
+ 
+ import DetailVehiculeGestionStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailArticle/DetailVehicule.vue'
+
+ import modificationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/dossierModification/modificationVehicule.vue'
+
 
 const suiviImmobilisationRoutes = [
-  
-  
+  {
+    path: "/modificationVehicule/:id",
+    name: "modificationVehicule",
+    component: modificationVehicule
+  },
+  {
+    path: "/DetailVehiculeGestionStock/:id",
+    name: "DetailVehiculeGestionStock",
+    component: DetailVehiculeGestionStock
+  },
+  {
+    path: "/AjouterAffectation/:id",
+    name: "AjouterAffectation",
+    component: AjouterAffectation
+  },
+  {
+    path: "/ListeEquipementEnStock/:id",
+    name: "ListeEquipementEnStock",
+    component: ListeEquipementEnStock
+  },
+  {
+    path: "/listeDesUaEquipementPatrimoine1",
+    name: "listeDesUaEquipementPatrimoine1",
+    component: listeDesUaEquipementPatrimoine1
+  },
+  {
+    path: "/listeDesUaEquipementPatrimoine/:id",
+    name: "listeDesUaEquipementPatrimoine",
+    component: listeDesUaEquipementPatrimoine
+  },
+  {
+    path: "/listeDesArticlesTransferer/:id",
+    name: "listeDesArticlesTransferer",
+    component: listeDesArticlesTransferer
+  },
   {
     path: "/SortiDuPatrimoine/:id",
     name: "SortiDuPatrimoine",

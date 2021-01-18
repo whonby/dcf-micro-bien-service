@@ -8,7 +8,7 @@
       <h5>L'OFFRE FINANCIERE </h5>
     </div>
   </div>-->
-
+  <notifications />
   <div align="right">
     <a href="#addd10" data-toggle="modal" class="btn btn-primary">Ajouter</a>
   </div>
@@ -20,7 +20,9 @@
         <tr>
           <!-- <th>Ref</th> -->
           <th>N°Lot</th>
-          <th>Montant total ttc </th>
+          <th>Montant HT </th>
+          <th>Montant TTC </th>
+          <th>Rabais % </th>
           <th>Action </th>
         </tr>
         </thead>
@@ -28,7 +30,15 @@
         <tr v-for="offre in listeOffreFinLotCandidat(dossier_candidature.id)" :key="offre.id">
           <td @click="afficheEdite(offre.id)">N°{{offre.numero_lot}}</td>
           <td @click="afficheEdite(offre.id)">
+            {{formatageSomme(parseFloat(offre.montant_total_ht)) || 'Non renseigné'}}
+          </td>
+
+          <td @click="afficheEdite(offre.id)">
             {{formatageSomme(parseFloat(offre.hist_montant_ttc)) || 'Non renseigné'}}
+          </td>
+
+          <td @click="afficheEdite(offre.id)">
+            {{offre.Rabais || 'Non renseigné'}}
             </td>
           <td>
             <button @click.prevent="supprimerOffreFinancier(offre.id)"  class="btn btn-danger ">
@@ -75,6 +85,7 @@
       </table>
       <table class="table table-bordered table-striped">
         <tr>
+<<<<<<< HEAD
               <td>
               <div class="control-group">
                 <label class="control-label">Rabais offert</label>
@@ -84,6 +95,16 @@
               </div>
             </td>
            <td>
+=======
+          <td>
+            <div class="control-group">
+              <label class="control-label">Montant total ht :</label>
+              <div class="controls">
+                <input type="text"   class="span" placeholder="Montant total HT" v-model="formOffreFinanciere.montant_total_ht">
+              </div>
+            </div>
+          </td>
+>>>>>>> 2136c3f1fe5e648821ce826059c842a1ce99bcb5
 
             <div class="control-group">
               <label class="control-label">Montant HT:</label>
@@ -103,59 +124,28 @@
             </div>
 
           </td>
-          <td>
 
+<<<<<<< HEAD
 
           </td>
+=======
+>>>>>>> 2136c3f1fe5e648821ce826059c842a1ce99bcb5
         </tr>
         <tr>
        
 
-<!--          <td>-->
-<!--            <div class="control-group">-->
-<!--              <label class="control-label">Taux</label>-->
-<!--              <div class="controls">-->
-<!--                <input type="text" readonly  class="span" :value="affcherTauxEnCours">-->
-<!--                <input-->
-<!--                    type="hidden"-->
-<!--                    :value="tauxArrondit"-->
-
-<!--                    class="span3"-->
-
-<!--                />-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </td>-->
-
           <td>
-<!--            <div class="control-group">-->
-<!--              <label class="control-label">Tva</label>-->
-<!--              <div class="controls">-->
-<!--                <input type="number" readonly :value="montantTva" class="span" />-->
-<!--              </div>-->
-<!--            </div>-->
-          </td>
-          <td>
-<!--            <div class="control-group">-->
-<!--              <label class="control-label">Montant total ht :</label>-->
-<!--              <div class="controls">-->
-<!--                <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHT">-->
-<!--              </div>-->
-<!--            </div>-->
+
+            <div class="control-group">
+              <label class="control-label">Rabais (%) :</label>
+              <div class="controls">
+                <input type="number" class="span" placeholder="prix unitaire" v-model="formOffreFinanciere.Rabais">
+              </div>
+            </div>
+
           </td>
         </tr>
-        <tr>
 
-          <td>
-<!--            <div class="control-group">-->
-<!--              <label class="control-label">Montant totat ttc :</label>-->
-<!--              <div class="controls">-->
-<!--                <input type="text"  readonly  class="span" placeholder="Montant total ttc" :value="montantHTt">-->
-<!--              </div>-->
-<!--            </div>-->
-          </td>
-
-        </tr>
 
       </table>
 
@@ -199,7 +189,21 @@
       </table>
       <table class="table table-bordered table-striped">
         <tr>
+<<<<<<< HEAD
              <td>
+=======
+          <td>
+            <div class="control-group">
+              <label class="control-label">Montant total ht :</label>
+              <div class="controls">
+                <input type="text"   class="span" placeholder="Montant total HT" v-model="editer.montant_total_ht">
+              </div>
+            </div>
+          </td>
+
+
+          <td>
+>>>>>>> 2136c3f1fe5e648821ce826059c842a1ce99bcb5
 
             <div class="control-group">
               <label class="control-label">Montant HT:</label>
@@ -209,16 +213,28 @@
             </div>
 
           </td>
-          <td>
 
+<<<<<<< HEAD
             <div class="control-group">
               <label class="control-label">Montant TTC :</label>
               <div class="controls">
                 <input type="number" class="span" placeholder="Montant TTC" v-model="editer.montant_total_ttc">
+=======
+        </tr>
+        <tr>
+
+          <td>
+
+            <div class="control-group">
+              <label class="control-label">Rabais (%) :</label>
+              <div class="controls">
+                <input type="number" class="span" placeholder="prix unitaire" v-model="editer.Rabais">
+>>>>>>> 2136c3f1fe5e648821ce826059c842a1ce99bcb5
               </div>
             </div>
 
           </td>
+<<<<<<< HEAD
               <td>
               <div class="control-group">
                 <label class="control-label">Rabais offert</label>
@@ -229,6 +245,10 @@
             </td>
         </tr>
  
+=======
+        </tr>
+
+>>>>>>> 2136c3f1fe5e648821ce826059c842a1ce99bcb5
 
       </table>
 
@@ -263,6 +283,9 @@ name: "OffreFinanciere",
         montant_total_ht:"",
         montant_total_ttc:"",
         dossier_candidat_id:"",
+        hist_montant_ttc:"",
+        Rabais:"",
+        montant_total_ht:"",
         marche_id:""
       },
 
@@ -391,7 +414,9 @@ name: "OffreFinanciere",
       this.formOffreFinanciere={
                  numero_lot:"",
                 montant_total_ttc:"",
+                montant_total_ht:"",
                 dossier_candidat_id:"",
+                Rabais:"",
                 marche_id:""
       }
     },
@@ -407,11 +432,13 @@ name: "OffreFinanciere",
       let objet={
         id:this.editer.id,
         // numero_lot:this.editer.numero_lot,
+        Rabais:this.editer.Rabais,
          numero_lot:this.afficherNumeroDuLot(this.editer.marche_id),
         montant_total_ttc:this.editer.montant_total_ttc,
         dossier_candidat_id:this.editer.dossier_candidat_id,
         marche_id:this.editer.marche_id,
-        hist_montant_ttc:this.editer.montant_total_ttc
+        hist_montant_ttc:this.editer.montant_total_ttc,
+        montant_total_ht:this.editer.montant_total_ht
       }
       this.modifierOffreFinancier(objet)
       this.$('#edit_offre_technique').modal('hide');

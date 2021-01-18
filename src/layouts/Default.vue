@@ -7,8 +7,9 @@
         <!--breadcrumbs-->
         <div id="content-header">
             <br>
-        
+
         </div>
+           <div style="height: 70px !important;"></div>
                 <slot />
 
         </div>

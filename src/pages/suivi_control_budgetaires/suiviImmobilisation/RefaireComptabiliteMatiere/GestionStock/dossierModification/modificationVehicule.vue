@@ -10,7 +10,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Fiche d'Entrée</h5>
+              <h5>Modification Véhicule</h5>
              
             </div>
 
@@ -35,7 +35,7 @@
                                 <model-list-select style="background-color: #fff;"
                                                    class="wide"
                                                    :list="uniteAdministratives"
-                                                   v-model="formData3.uAdministrative_id"
+                                                   v-model="detail_vehicule.uAdministrative_id"
                                                    option-value="id"
                                                    option-text="libelle"
                                                    placeholder=""
@@ -43,22 +43,7 @@
 
                                 </model-list-select>
                             </td>
-                      <!-- <td colspan="">
-                    <div class="control-group">
-                  <label class="control-label">Unite Administrative</label>
-                  <div class="controls">
-                    <select  class="span" v-model="formData3.uAdministrative_id">
-                      <option></option>                     
-                      <option
-                        v-for="typeUniteA in uniteAdministratives"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
                      
-                  </div>
-                </div>
-                 </td> -->
                      <td colspan="">
                     <div class="control-group">
                   <label class="control-label">Fournisseur</label>
@@ -66,7 +51,7 @@
                     <model-list-select style="background-color: #fff;"
                                                    class="wide"
                                                    :list="entreprises"
-                                                   v-model="formData3.fournisseur_id"
+                                                   v-model="detail_vehicule.fournisseur_id"
                                                    option-value="id"
                                                    option-text="raison_sociale"
                                                    placeholder=""
@@ -84,7 +69,7 @@
                     
                      <input
                 type="text"
-              v-model="formData3.numero_marche"
+              v-model="detail_vehicule.numero_marche"
                 class="span"
                 
               />
@@ -101,122 +86,16 @@
                   <div class="controls">
                     <input
                 type="text"
-              v-model="formData3.numero_facture"
+              v-model="detail_vehicule.numero_facture"
                 class="span"
                 
               />
                   </div>
                 </div>
                  </td>
-                      <!-- <td colspan="">
-               <div class="control-group">
-            <label class="control-label">Famille</label>
-            <div class="controls"> -->
-                              <!-- <select   class="span" v-model="formData8.famill_id1">
-                                <option></option>
-                                <option v-for="typeUniteA in articles"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id">
-                                   
-                      {{typeUniteA.libelle}}
-                                </option> -->
-                                
-            <!-- <option
-                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.designation"
-                      >{{libelleArticle(typeUniteA.designation)}}
-                      
-                      
-                      
-                      </option>
-                      <option
-                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.designation2"
-                      >
-                      
-                      {{libelleArticle(typeUniteA.designation2)}}
-                      
-                      </option>
-                      <option
-                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.designation3"
-                      >
-                      
-                      {{libelleArticle(typeUniteA.designation3)}}
-                      
-                      </option>
-                      <option
-                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.designation4"
-                      >
-                      
-                      {{libelleArticle(typeUniteA.designation4)}}
-                      
-                      </option>
-                      <option
-                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.designation5"
-                      >
-                      
-                      {{libelleArticle(typeUniteA.designation5)}}
-                      
-                      </option>
-                      <option
-                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.designation6"
-                      >
-                      
-                      {{libelleArticle(typeUniteA.designation6)}}
-                      
-                      </option>
-                      <option
-                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.designation7"
-                      >
-                      
-                      {{libelleArticle(typeUniteA.designation7)}}
-                      
-                      </option>
-                      <option
-                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.designation8"
-                      >
-                      
-                      {{typeUniteA.designation8}}
-                      
-                      </option>
-                      <option
-                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.designation9"
-                      >
-                      
-                      {{libelleArticle(typeUniteA.designation9)}}
-                      
-                      </option>
-                      <option
-                        v-for="typeUniteA in AfficheArticleAcquisition(formData.facture_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.designation10"
-                      >
-                      
-                      {{libelleArticle(typeUniteA.designation10)}}
-                      
-                      </option> -->
-                <!-- </select>
-            </div>
-          </div>
-            </td> -->
+               
             <td>
-                                <label >Groupe</label>
+                                <label >Groupe{{detail_vehicule.equipement_id}}</label>
                                 <!-- <model-list-select style="background-color: #fff;"
                                                    class="wide"
                                                    :list="equipements"
@@ -227,7 +106,7 @@
                                 >
 
                                 </model-list-select> -->
-                                <select   class="span" v-model="formData7.groupe_famille_id">
+                                <select   class="span" v-model="detail_vehicule.groupe_famille_id">
                                 <option></option>
                                 <option v-for="typeUniteA in equipements"
                         :key="typeUniteA.id"
@@ -241,9 +120,9 @@
               <div class="control-group">
             <label class="control-label">Famille</label>
             <div class="controls">
-                              <select   class="span" v-model="formData7.famill_id">
+                              <select   class="span" v-model="detail_vehicule.famill_id">
                                 <option></option>
-                                <option v-for="typeUniteA in dependDuGroupe(formData7.groupe_famille_id)"
+                                <option v-for="typeUniteA in dependDuGroupe(detail_vehicule.groupe_famille_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id">
                                    
@@ -262,9 +141,9 @@
               <div class="control-group">
             <label class="control-label">Article</label>
             <div class="controls">
-                              <select   class="span" v-model="formData3.articlestock_id">
+                              <select   class="span" v-model="detail_vehicule.articlestock_id">
                                 <option></option>
-                                <option v-for="typeUniteA in afficheListeArticleParFamille(formData7.groupe_famille_id,formData7.famill_id)"
+                                <option v-for="typeUniteA in afficheListeArticleParFamille(detail_vehicule.groupe_famille_id,detail_vehicule.famill_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id">
                                    
@@ -281,7 +160,7 @@
             <div class="controls">
                               <input
                 type="text"
-              v-model="formData3.quantitestock"
+              v-model="detail_vehicule.quantitestock"
                 class="span"
                 
               />
@@ -304,7 +183,7 @@
                     </select> -->
                      <input
                 type="text"
-            :value="afficheLibelleTypeBien(AfficheTypeDeBien(formData7.famill_id))"
+            :value="afficheLibelleTypeBien(AfficheTypeDeBien(detail_vehicule.famill_id))"
                 class="span"
                 readonly
               />
@@ -312,9 +191,7 @@
             </div>
                             </td>
                   </tr>
-                   <br/>
-                 <br/>
-                  <br/>
+                  
         </table>
       </div>
                      
@@ -328,486 +205,17 @@
                   <div class="widget-title">
                       
                     <ul class="nav nav-tabs">
-                     <li class="active"><a data-toggle="tab" href="#materiel"  v-if="AfficheTypeDeBien(formData7.famill_id) == 5">Fiche Matériel</a></li>
-        <li class="active"><a data-toggle="tab" href="#vehicule"  v-if="AfficheTypeDeBien(formData7.famill_id) == 9">Fiche Véhicule</a></li>
-         <li class="active"><a data-toggle="tab" href="#Mobilier"  v-if="AfficheTypeDeBien(formData7.famill_id) == 7">Fiche Mobilier</a></li>
-        <li class="active"><a data-toggle="tab" href="#Immobilier"  v-if="AfficheTypeDeBien(formData7.famill_id) == 11">Fiche Immobilier</a></li>
-        <li class="active"><a data-toggle="tab" href="#Travaux"  v-if="AfficheTypeDeBien(formData7.famill_id) == 12">Fiche Gros Travaux</a></li>
-                      
+                    
+        <li class="active"><a data-toggle="tab" href="#vehicule">Fiche Véhicule</a></li>
+        
                      
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
-                    <div id="Immobilier" class="tab-pane active" v-if="AfficheTypeDeBien(formData7.famill_id) == 11">
-                      <table class="table table-bordered table-striped" >
-                        <tr>
-                          <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">District</label>
-                  <div class="controls">
-                    <select  class="span" >
-                      <option></option>                     
-                     
-                    </select>
-                  </div>
-                </div>
-                      </td>
-                       <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Region</label>
-                  <div class="controls">
-                    <select  class="span" >
-                      <option></option>                     
-                     
-                    </select>
-                  </div>
-                </div>
-                      </td>
-                       <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Département</label>
-                  <div class="controls">
-                    <select  class="span" >
-                      <option></option>                     
-                     
-                    </select>
-                  </div>
-                </div>
-                      </td>
-                       <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Commune</label>
-                  <div class="controls">
-                    <select  class="span" >
-                      <option></option>                     
-                     
-                    </select>
-                  </div>
-                </div>
-                      </td>
-
-                        </tr>
-                        <tr>
-                           <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Quartier</label>
-                  <div class="controls">
-                    <select  class="span" >
-                      <option></option>                     
-                     
-                    </select>
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Lot</label>
-                  <div class="controls">
-                    <input
-                      type="text"
                     
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Ilot</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                    
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                       <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Type foncier</label>
-                  <div class="controls">
-                    <select  class="span" >
-                      <option></option>                     
-                     
-                    </select>
-                  </div>
-                </div>
-                      </td>
-                       
-                        </tr>
-                        <tr>
-                          <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Surface du terrain</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                    
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                          
-                          <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Type Propriete</label>
-                  <div class="controls">
-                    <select  class="span" >
-                      <option></option>                     
-                     
-                    </select>
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Niveau</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                    
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                        </tr>
-                        </table>
-                      </div>
-                    <!--ongle identification-->
-                    <div id="Mobilier" class="tab-pane active" v-if="AfficheTypeDeBien(formData7.famill_id) == 7">
-                       <table class="table table-bordered table-striped" >
-               <tr>
-                     
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Désignation du bien</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                    v-model="formData1.designation"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Matiere</label>
-                  <div class="controls">
-                   <input
-                      type="text"
-                   v-model="formData1.matiere"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Couleur</label>
-                  <div class="controls">
-                     <input
-                      type="text"
-                    v-model="formData1.couleur"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      
-                  </tr>
-                    <tr>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Revêtement</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                   v-model="formData1.revetement"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                       <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Dimension</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                   v-model="formData1.dimension"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Prix Unitaire</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                  v-model="formData1.prix_unitaire"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td> 
-                     
-                  </tr>
-            
-                      
-        </table>
-                    </div>
-                  <div id="materiel" class="tab-pane active" v-if="AfficheTypeDeBien(formData7.famill_id) == 5">
-         <table class="table table-bordered table-striped" >
-               <tr>
-                     
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Marque Matériel</label>
-                  <div class="controls">
-                    <select  class="span" v-model="formData1.marque_id">
-                      <option></option>                     
-                      <option
-                        v-for="typeUniteA in AfficheModelMaterielMobilier"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Modele Matériel</label>
-                  <div class="controls">
-                    <select  class="span" v-model="formData1.model_id">
-                      <option></option>                     
-                      <option
-                        v-for="typeUniteA in afficheModeleParMarque(formData1.marque_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">N°Série</label>
-                  <div class="controls">
-                     <input
-                      type="text"
-                    v-model="formData1.numchassis"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                       <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">N° Matricule</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                    v-model="formData1.numero_matricule"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                  </tr>
-                    <tr>
-                     
-                       <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Imputation comptable</label>
-                  <div class="controls">
-                     <input
-                      type="text"
-                 :value="libelleImputationBudgetaire(recupererCodeImputationBudgetaire(recupererIdEquipement(formData7.famille_id)))"
-                      class="span"
-                      readonly
-                    />
-                    <!-- <select  class="span" v-model="formData1.immobilisation">
-                      <option></option>                     
-                       <option
-                        v-for="typeUniteA in lesClassDe3"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.code}}-{{typeUniteA.libelle}}</option>
-                    </select> -->
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Prix Unitaire</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                    v-model="formData1.prix_unitaire"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td> 
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Durée de vie</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                    :value="dureDeVie(formData7.famille_id)"
-                      class="span"
-                      readonly
-                    />
-                  </div>
-                </div>
-                      </td>
-                       <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Autre Information</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                    v-model="formData1.autreinfo"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                  </tr>
-            
-                      
-        </table>
-      </div>
-                      <div id="vehicule" class="tab-pane active" v-if="AfficheTypeDeBien(formData7.famill_id) == 9">
-        
-         <!-- <table class="table table-bordered table-striped">
-            <tr> -->
-                      <!-- <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Unité Administrative</label>
-                  <div class="controls">
-                    <select  class="span" v-model="formData.uniteadministrative ">
-                      <option></option>                     
-                      <option
-                        v-for="typeUniteA in afficherUAParDroitAccess"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                      
-                  </div>
-                </div>
-                      </td> -->
-                      <!-- <td>
-                          <div class="control-group">
-                  <label class="control-label" style="font-size:14px">N°Identification</label>
                 
-                  <div class="controls">
-                    <input
-                      type="text"
-                    v-model="formData.numidentification "
-                      class="span"
-                      
-                    />
-                  </div>
-                  </div>
-                      </td> -->
-                      <!-- <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">N°Immatriculation</label>
-                  <div class="controls">
-                   <div class="controls">
-                    <input
-                      type="text"
-                    v-model="formData.numimmatriculation"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                </div>
-                      </td> -->
-                      <!-- <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Imputation comptable</label>
-                  <div class="controls"> -->
-                    <!-- <select  class="span" v-model="formData.immobilisation">
-                      <option></option>                     
-                       <option
-                        v-for="typeUniteA in lesClassDe3"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.code}}-{{typeUniteA.libelle}}</option>
-                    </select> -->
-                    <!-- <input
-                      type="text"
-                 :value="libelleImputationBudgetaire(recupererCodeImputationBudgetaire(recupererIdEquipement(formData7.famill_id)))"
-                      class="span"
-                      readonly
-                    /> -->
-                  <!-- </div>
-                </div>
-                      </td> -->
-                      <!-- <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Duré de vie</label>
-                  <div class="controls">
-                   <div class="controls"> -->
-                    <!-- <input
-                      type="text"
-                    v-model="formData.durevie"
-                      class="span"
-                      
-                    /> -->
-                    <!-- <input
-                      type="text"
-                    :value="dureDeVie(formData7.famill_id)"
-                      class="span"
-                      readonly
-                    />
-                  </div>
-                </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Prix unitaire</label>
-                  <div class="controls">
-                   <div class="controls">
-                    <input
-                      type="text"
-                    v-model="formData.prixunitaire"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                </div>
-                      </td>
-                  </tr>
-        </table> -->
+                      <div id="vehicule" class="tab-pane active">
+     
         <table class="table table-bordered table-striped">
                   
                 <div class="widget-box">
@@ -833,7 +241,7 @@
                    <div class="controls">
                     <input
                       type="text"
-                    v-model="formData.numimmatriculation"
+                    v-model="detail_vehicule.numimmatriculation"
                       class="span"
                       
                     />
@@ -849,13 +257,13 @@
                    <div class="controls">
                     <!-- <input
                       type="text"
-                    v-model="formData.durevie"
+                    v-model="detail_vehicule.durevie"
                       class="span"
                       
                     /> -->
                     <input
                       type="text"
-                    :value="dureDeVie(formData7.famill_id)"
+                    :value="dureDeVie(detail_vehicule.famill_id)"
                       class="span"
                       readonly
                     />
@@ -870,7 +278,7 @@
                    <div class="controls">
                     <input
                       type="text"
-                    v-model="formData.prix_unitaire"
+                    v-model="detail_vehicule.prix_unitaire"
                       class="span"
                       
                     />
@@ -882,7 +290,7 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Marque</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData.marque_id">
+                    <select  class="span" v-model="detail_vehicule.marque_id">
                       <option></option>                     
                       <option
                         v-for="typeUniteA in AfficheModelMaterielVehicule"
@@ -900,7 +308,7 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Type véhicule</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData.typevehicule">
+                    <select  class="span" v-model="detail_vehicule.typevehicule">
                       <option></option>                     
                       <option
                         v-for="typeUniteA in TypeVehicule"
@@ -916,10 +324,10 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Modèle</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData.model_id">
+                    <select  class="span" v-model="detail_vehicule.model_id">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in fonctionModele(formData.marque_id)"
+                        v-for="typeUniteA in fonctionModele(detail_vehicule.marque_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -931,7 +339,7 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Energie</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData.energie">
+                    <select  class="span" v-model="detail_vehicule.energie">
                       <option></option>                     
                       <option
                         v-for="typeUniteA in TypeEnergie"
@@ -948,7 +356,7 @@
                   <div class="controls">
                      <input
                       type="text"
-                    v-model="formData.numchassis"
+                    v-model="detail_vehicule.numchassis"
                       class="span"
                       
                     />
@@ -961,7 +369,7 @@
                   <div class="controls">
                     <input
                       type="text"
-                    v-model="formData.numserie"
+                    v-model="detail_vehicule.numserie"
                       class="span"
                       
                     />
@@ -974,7 +382,7 @@
                   <div class="controls">
                     <input
                       type="text"
-                    v-model="formData.couleur"
+                    v-model="detail_vehicule.couleur"
                       class="span"
                       
                     />
@@ -991,7 +399,7 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Transmission</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData.transmission">
+                    <select  class="span" v-model="detail_vehicule.transmission">
                       <option></option>  
                                           
                        <option
@@ -1009,7 +417,7 @@
                   <div class="controls">
                     <input
                       type="number"
-                    v-model="formData.nombreportes"
+                    v-model="detail_vehicule.nombreportes"
                       class="span"
                       
                     />
@@ -1022,7 +430,7 @@
                   <div class="controls">
                    <input
                       type="number"
-                    v-model="formData.nombreplace"
+                    v-model="detail_vehicule.nombreplace"
                       class="span"
                       
                     />
@@ -1035,7 +443,7 @@
                   <div class="controls">
                    <input
                       type="text"
-                    v-model="formData.puissance"
+                    v-model="detail_vehicule.puissance"
                       class="span"
                       
                     />
@@ -1052,7 +460,7 @@
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Etat véhicule</label>
                   <div class="controls">
-                    <select  class="span" v-model="formData.etatvehicule">
+                    <select  class="span" v-model="detail_vehicule.etatvehicule">
                       <option></option>                     
                       <option
                         v-for="typeUniteA in EtatImmobilisations"
@@ -1069,7 +477,7 @@
                   <div class="controls">
                    <input
                       type="text"
-                    v-model="formData.anneevehicule"
+                  v-model="detail_vehicule.anneevehicule"
                       class="span"
                       
                     />
@@ -1293,9 +701,9 @@
                         <a
                           class="btn btn-primary"
                           @click.prevent="AjouterVehicule"
-                        >Valider</a>
+                        >Modifier</a>
                         <a
-                          @click.prevent="afficherModalListePersonnel()"
+                          @click.prevent="afficherModalListeExecution()"
                           class="btn"
                           href="#"
                         >Fermer</a>
@@ -1317,7 +725,7 @@
 
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
-import {admin,dcf,cf} from '../../../../../Repositories/Auth';
+import {admin,dcf,cf} from '../../../../../../Repositories/Auth';
 // import AjouterFicheVehicule from '../../gestionDesVehicules/grpeVehicule/AjouterFicheVehicule'
 // import ficheMateriel from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/FicheMateriel/ficheMateriel'
 import { ModelListSelect } from "vue-search-select";
@@ -1341,7 +749,7 @@ formData:{
 
 },
 famille_id:"",
-formData3:{
+detail_vehicule:{
 
 },
 formData1:{
@@ -1352,12 +760,10 @@ formData1:{
   },
 props:["macheid"],
  created() {
-            this.marcheid=this.$route.params.id
-   this.detail_Facture = this.getFacturePersonnaliser.find(
-       idmarche => idmarche.id == this.$route.params.id
-         )
-      
-},
+          
+            this.detail_vehicule=this.GestionStockageArticles.find(item=>item.id==this.$route.params.id)
+        
+        },
   computed: {
   ...mapGetters("bienService", ["getFacturePersonnaliser","personnaliseGetterMarcheBailleur","modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
@@ -1537,7 +943,7 @@ recupererCodeImputationBudgetaire() {
  afficheListeArticleParFamille() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.articles.filter(element => element.groupe_famille_id == id && element.famille_id == id1);
+          return this.articles.filter(element => element.equipement_id == id && element.famille_id == id1);
         }
       };
     },
@@ -1822,204 +1228,12 @@ libelleUa() {
         }
       };
     },
-prixUnitaire() {
-      
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.designation == id);
 
-      if (qtereel) {
-        return qtereel.prix_unitaire;
-      }
-      return 0
-        }
-         else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.prix_unitaire1;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.prix_unitaire2;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.prix_unitaire3;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.prix_unitaire4;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.prix_unitaire5;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.prix_unitair6;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.prix_unitaire7;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.prix_unitaire8;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.prix_unitaire9;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.prix_unitaire10;
-      }
-      return 0
-        }
-       
-      };
-      
-      
-    },
-
-    quantiteRecuFacture() {
-      
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.quantite;
-      }
-      return 0
-        }
-         else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.quantite1;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.quantite2;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.quantite3;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.quantite4;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.quantite5;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.quantite6;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.quantite7;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.quantite8;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.quantite9;
-      }
-      return 0
-        }
-        else if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.quantite10;
-      }
-      return 0
-        }
-       
-      };
-      
-      
-    },
   },
   methods: {
     
      ...mapActions("uniteadministrative", [
-      "ajouterStockArticle",
+      "modifierStockArticle",
       "ajouterNouveauVehicule"
       ]),
       ...mapActions("SuiviImmobilisation", [
@@ -2033,35 +1247,35 @@ prixUnitaire() {
       afficherModalListeExecution(){
                 window.history.back();
             },
+            
             RafraichirPage(){
                 window.location.reload()
             },
      AjouterVehicule() {
       
-
-if(this.AfficheTypeDeBien(this.formData7.famill_id) == 9){
  var objetNew ={
              ...this.formData,
-        uAdministrative_id:this.formData3.uAdministrative_id,
-        quantitestock:this.formData3.quantitestock,
+             id:this.detail_vehicule.id,
+        uAdministrative_id:this.detail_vehicule.uAdministrative_id,
+        quantitestock:this.detail_vehicule.quantitestock,
         famill_id:this.formData7.famill_id,
-        articlestock_id:this.formData3.articlestock_id,
+        articlestock_id:this.detail_vehicule.articlestock_id,
         marque_id:this.formData.marque_id,
         model_id:this.formData.model_id,
-       histo_qte:this.formData3.quantitestock,
-      groupe_famille_id:this.formData7.groupe_famille_id,
+       histo_qte:this.detail_vehicule.quantitestock,
       
+      anneevehicule:this.detail_vehicule.anneevehicule,
         anneebudgetaire:this.anneeAmort,
         
-        fournisseur_id:this.formData3.fournisseur_id,
-          numero_marche:this.formData3.numero_marche,
-          numero_facture:this.formData3.numero_facture,
+        fournisseur_id:this.detail_vehicule.fournisseur_id,
+          numero_marche:this.detail_vehicule.numero_marche,
+          numero_facture:this.detail_vehicule.numero_facture,
           durevie:this.dureDeVie(this.formData7.famill_id),
           typebien_id:this.AfficheTypeDeBien(this.formData7.famill_id)
       }
       
       //this.ajouterNouveauVehicule(objetNew);
-    this.ajouterStockArticle(objetNew)
+    this.modifierStockArticle(objetNew)
     this.afficherModalListePersonnel()
       this.formData = {
         uniteadministrative:"",
@@ -2084,57 +1298,8 @@ if(this.AfficheTypeDeBien(this.formData7.famill_id) == 9){
         
       };
  
-}
 
-else{
-  // var nouveauObjet ={
-        
-  //     }
-      var nouveauObjet1 ={
-        ...this.formData1,
-        
-        typebien_id:this.AfficheTypeDeBien(this.formData7.famill_id),
-          fournisseur_id:this.formData3.fournisseur_id,
-          numero_marche:this.formData3.numero_marche,
-          numero_facture:this.formData3.numero_facture,
-         articlestock_id:this.formData3.articlestock_id,
-          durevie:this.dureDeVie(this.formData7.famill_id),
-         famill_id:this.formData7.famill_id,
-        uAdministrative_id:this.formData3.uAdministrative_id,
-        quantitestock:this.formData3.quantitestock,
-        numchassis:this.formData1.numchassis,
-        marque_id:this.formData1.marque_id,
-        model_id:this.formData1.model_id,
-       histo_qte:this.formData3.quantitestock,
-      }
-      // this.ajouterFicheArticle(nouveauObjet);
-      this.ajouterStockArticle(nouveauObjet1)
-     this.afficherModalListePersonnel()
-      this.formData1 = {
-    
-        article_id:"",
-        model_id:"",
-        numchassis:"",
-        numero_matricule:"",
-        prix_unitaire:"",
-          durevie:"",
-          marque_id:"",
-          immobilisation:"",
-          autreinfo:""
-       
-      };
-      this.formData = {
-        
-        fournisseur_id:"",
-        numero_marche:"",
-        numero_facture:"",
-        famill_id:"",
-        quantitestock:"",
-        typestockage:""
-      }
-      this.famille_id=""
-     
-}
+
 
 
 

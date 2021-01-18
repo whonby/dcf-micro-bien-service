@@ -1,8 +1,8 @@
 import { groupBy } from "../../../../Repositories/Repository";
-articles
+
 export const Typebiengrpecorporels = state => state.Typebiengrpecorporels
 export const groupecorporels = state => state.groupecorporels
-
+export const AffectationUaBiens = state => state.AffectationUaBiens
 export const marqueVehicules = state => state.marqueVehicules
 export const ModeleVehicules = state => state.ModeleVehicules
 export const TypeEntretien = state => state.TypeEntretien
@@ -1152,7 +1152,10 @@ export const groupeUaAffectation = (state, getters) => {
   return groupBy(getters.immobilisations, "uniteadministrative_id");
 };
 
-
+export const groupeAffectationUaBiens = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.AffectationUaBiens, "ua_mettrice_id");
+};
 
 
 

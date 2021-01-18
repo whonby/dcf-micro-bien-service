@@ -1548,13 +1548,28 @@ export function ajouterStockArticle({ commit,dispatch }, nouveau) {
 }
 
 // modifier
+// export function modifierStockArticle({ commit ,dispatch}, nouveau) {
+//   asyncLoading(axios
+//       .put("/StockArticle/" + nouveau.id,nouveau))
+//       .then(response => {
+//           commit("MODIFIER_STOCK_ARTICLE", response.data);
+//           dispatch('getStockArticle')
+//               dispatch('getAllUniteAdministrative')
+//           this.$app.$notify({
+//               title: 'Success',
+//               text: 'Modification Effectué avec Succès!',
+//               type: "success"
+//           })
+//       });
+// }
+
 export function modifierStockArticle({ commit ,dispatch}, nouveau) {
   asyncLoading(axios
       .put("/StockArticle/" + nouveau.id,nouveau))
       .then(response => {
           commit("MODIFIER_STOCK_ARTICLE", response.data);
           dispatch('getStockArticle')
-              dispatch('getAllUniteAdministrative')
+          
           this.$app.$notify({
               title: 'Success',
               text: 'Modification Effectué avec Succès!',
