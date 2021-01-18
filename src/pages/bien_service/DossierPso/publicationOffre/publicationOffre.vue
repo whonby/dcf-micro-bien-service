@@ -100,7 +100,7 @@
                         <div class="control-group">
 
                             <div class="controls">
-                                <label>Date debut de publication<code>*</code></label>
+                                <label>Date début de publication<code>*</code></label>
                                 <input type="date" class="span" placeholder="Date emision" v-model="formData.date_emission">
                             </div>
                         </div>
@@ -203,7 +203,7 @@
                              <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date debut de publication</label>
+                                <label>Date début de publication</label>
                                 <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
                             </div>
                         </div>
