@@ -20,7 +20,7 @@
                                               title="Liste structure de financement "
                                               name ="Liste structure de  financement"
                                               worksheet = "structure de  financement"
-                                            :data="localisationsFiltre">
+                                            :data="sources_financements">
                   <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel>  
@@ -33,10 +33,10 @@
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des sources de financements</h5>
-             <div align="right">
+             <!-- <div align="right">
         Recherche: <input type="text" v-model="search" placeholder=" ">
 
-          </div>
+          </div> -->
              
           </div>
 
@@ -59,20 +59,26 @@
                   <th>Code</th>
                   <th>Libellé</th>
                   <th>Sigle</th>
-                   <th>Action</th>
+                   <th colspan="2">Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="source_financement in 
-               partition (localisationsFiltre,size)[page]" :key="source_financement.id">
+               partition (sources_financements,size)[page]" :key="source_financement.id">
                   <td @dblclick="afficherModalModifierFinancement(source_financement.id)">
                     {{source_financement.code || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierFinancement(source_financement.id)">
                     {{source_financement.libelle || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierFinancement(source_financement.id)">
                     {{source_financement.sigle || 'Non renseigné'}}</td>
+                 
+                     <td >
+                        <router-link :to="{ name: 'detailSourceFinancement', params: { id: source_financement.id }}"
+                 class="btn btn-success " title="Ajouter le guichet">
+                <span class=""><i class="icon-folder-open"></i></span>
+                 </router-link>
+                   </td>
                   <td>
-
               <div class="btn-group">
               <button @click.prevent="supprimerSourceFinancement(source_financement.id)"  
               class="btn btn-danger ">
@@ -86,7 +92,7 @@
             </table>
 
              
-            <div v-if="localisationsFiltre.length">
+            <div v-if="sources_financements.length">
             </div>
             
             <div v-else>
@@ -102,14 +108,20 @@
          <div class="pagination alternate">
                     <ul>
                         <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-                        <li  v-for="(titre, index) in partition(localisationsFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+                        <li  v-for="(titre, index) in partition(sources_financements,size).length" :key="index" :class="{ active : active_el == index }">
                             <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-                        <li :class="{ disabled : page == partition(localisationsFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+                        <li :class="{ disabled : page == partition(sources_financements,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
 
                     </ul>
                 </div>
+               <!-- <div class="modal-footer">
+			<a  class="btn btn-danger" @click.prevent="retour" href="#">Voir Tableau</a>
+			</div> -->
       </div>
+      
               </div>
+
+        
             </div>
 
      
@@ -364,7 +376,10 @@ modifierFinancementLocal(){
   //   libelle:"",
   //   sigle:""
   // }
-}
+},
+retour(){
+		this.$router.push({name:'SourceFinancement'})	  
+		} 
 
   }
 };

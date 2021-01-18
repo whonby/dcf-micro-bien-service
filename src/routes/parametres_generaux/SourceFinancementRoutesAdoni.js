@@ -8,6 +8,7 @@ import TableauBordUaSimple  from "../../../src/gestionDesModule/TableauBordSimpl
 import TableauBordCatographiesSimple  from "../../../src/gestionDesModule/TableauBordCa";
 import tableauBordGestionAcces from "../../../src/gestionDesModule/tableauBordGestionAcces.vue";
 import planSourceFinancement from "../../pages/parametres_generaux/source_financement/planSourceFinancement.vue"
+import DetailSourceFinancement from "../../pages/parametres_generaux/source_financement/DetailSourceFinancement.vue"
 const SourceFinancementRoutesAdoni = [
    {
       path:"/TableauBordCatographies",
@@ -43,6 +44,7 @@ const SourceFinancementRoutesAdoni = [
       name:"TableauBordParametreSimple",
       component:TableauBordParametreSimple
 
+
    },
    {
       path:"/menu-gestion-acces",
@@ -54,6 +56,11 @@ const SourceFinancementRoutesAdoni = [
         name:"SourceFinancement",
         component:SourceFinancement
 
+     },
+     {
+        path:"/detail-source-financement/:id",
+        name:"detailSourceFinancement",
+        component:DetailSourceFinancement
      },
      // route type nde financement
      {

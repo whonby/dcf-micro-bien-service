@@ -923,7 +923,7 @@
                     </div>
                     
 </template>
-          <template v-else-if="affcicheEtapeProcedure(100000000,'ED',detail_marche.id )">
+          <template v-else-if="affcicheEtapeProcedure(0,'ED',detail_marche.id )">
           <div class="widget-box">
              <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -1028,6 +1028,7 @@
  //  import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
     import publicationOffre from '../../bien_service/DossierPso/publicationOffre/publicationOffre';
    // import addLot from '../dossierLot/addLot';
+   
         import invitationCf from '../../bien_service/DossierPso/lettreInvitation/invitationCf';
  import mandateBs from '../../bien_service/DossierPso/mandaté/mandateBs';
  //import componentOuverture1 from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
@@ -1205,7 +1206,7 @@ created() {
                 {
             return true
                 }
-                else if(100000000 > this.budgetDisponible && procedure=="ED" || procedure=="CON")
+                else if(0 < this.budgetDisponible && procedure=="ED" || procedure=="CON")
                 {
                  return true
                 }
