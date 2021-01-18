@@ -297,11 +297,12 @@ created(){
     let user=JSON.parse (objet)
     this.getServiceCF()
     this.getAffectationServiceCF()
+    this.getAffectation()
     this.getUniteAdminUser(user.id)
           this.getGestionModules()
           this.getInfrastructure()
           this.getTypeOrdrePaiement()
-    this.getAffectation()
+
 this.getFormeJuridiques()
 this.getRegimeImpositions()
  this.getGroupe()
@@ -393,6 +394,7 @@ this.getTypeAppel()
      
      this.getAllBanqueUa()
      this.getAllDecompteFacture()
+     this.getAllHistoriqueDecompteFacture()
        this.getStructureOrganigrammeUa()
  this.getAllBudgetEclate()
  this.getVehicule()
@@ -452,6 +454,7 @@ this.getAllHistoriqueBudgetGeneral()
        * suivi des immo
        */
       this.getGrpeCorporel();
+      this.getAffectationUaBien()
       this.getTypeBienCorporels();
        this.getAllNatureEntre();
       this.getAllCauseInactivite();
@@ -681,7 +684,8 @@ return objJson.id
      "getAllBudgetEclate",
      "getVehicule",
      "getReparationVehicule",
-     "getStockArticleUa"
+     "getStockArticleUa",
+     "getAllHistoriqueDecompteFacture"
     ]),
             ...mapActions('personnelUA', ["getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -697,6 +701,7 @@ return objJson.id
         "getBanque", "getCompte","getAgence","getSanction","getHistoriqueEntreprise"]),
 
         ...mapActions("SuiviImmobilisation", [
+          "getAffectationUaBien",
           "getGrpeCorporel",
           "getTypeBienCorporels",
       "getAllNatureEntre",

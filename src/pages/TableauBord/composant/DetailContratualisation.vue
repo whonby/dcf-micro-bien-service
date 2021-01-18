@@ -8,9 +8,9 @@
                         <a @click.prevent="infrastucture" class="btn btn-default"
                            href="#">&#8606;</a>
                     </div>
-                    <div class="span11" align="left">
-                        <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button>
-                    </div>
+<!--                    <div class="span11" align="left">-->
+<!--                        <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button>-->
+<!--                    </div>-->
 
                     <div class="span11">
                         <h3 v-if="info_unite_admin">Situation {{info_unite_admin.libelle}} ,Nombre de marchés <font color="red">({{getterListeMarcheTableauBordFiltre.length}})</font>  </h3>
@@ -36,7 +36,7 @@
 
 
                 <div class="row-fluid">
-                    <div class="span12">
+                    <div class="span6">
                         Afficher
                         <select name="pets" id="pet-select" v-model="size" class="span3">
                             <option value="10">10</option>
@@ -45,86 +45,95 @@
                             <option value="100">100</option>
                         </select>
                         Entrer
+                    </div>
+                    <div class="span6" align="right">
+                        <button class="btn btn-default" @click="tableToExcel('table', 'Contratualisation')">
+                            <img style="width: 20px !important; height: 20px !important;" src="https://img.icons8.com/windows/64/000000/export-excel.png"/>
+                        </button>
+                    </div>
+                    <hr>
+                    <div class="span12">
+
                         <div class="widget-content nopadding" v-if="getterListeMarcheTableauBordFiltre">
-                            <table class="table table-bordered table-striped">
+                            <table  class="table table-bordered table-striped" ref="table" id="loremTable" summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
                                 <thead>
                                 <tr>
-                                    <th>N° D'ORDRE</th>
-                                    <th>NUMERO DU DAO</th>
-                                    <th>OBJET DU MARCHE </th>
-                                    <th>DATE DE PUBLICATION - BOMP</th>
-                                    <th>DATE D'OUVERTURE</th>
-                                    <th>PV D'OUVERTURE</th>
-                                    <th>RAPPORT D'ANALYSE</th>
-                                    <th>PV DE JUGEMENT</th>
-                                    <th>DATE AO DMP</th>
-                                    <th>DATE ANO DMP</th>
-                                    <th>DATE AO BAILLEUR</th>
-                                    <th>DATE ANO BAILLEUR</th>
-                                    <th>DATE D'APPROBATION DU MARCHE</th>
-                                    <th>ENTREPRISE ATTRIBUTAIRE</th>
-                                    <th>TEMPS EVALUE</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">N° D'ORDRE</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">NUMERO DU DAO</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">OBJET DU MARCHE </th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE DE PUBLICATION - BOMP</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE D'OUVERTURE</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">PV D'OUVERTURE</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">RAPPORT D'ANALYSE</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">PV DE JUGEMENT</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE AO DMP</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE ANO DMP</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE AO BAILLEUR</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE ANO BAILLEUR</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE D'APPROBATION DU MARCHE</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">ENTREPRISE ATTRIBUTAIRE</th>
+                                    <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">TEMPS EVALUE</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr class="odd gradeX" v-for="(item,index) in partition (getterListeMarcheTableauBordFiltre,size)[page]" :key="item.id">
                                     <td>{{index + 1}}</td>
-                                    <td>{{getNumeroDAO(item.parent_id).ref_appel}}</td>
+                                    <td>{{getNumeroDAORef(item.id) || 'Non renseigné' }}</td>
                                     <td>{{item.objet}} </td>
                                     <td>
-                                        {{formaterDate(getNumeroDAO(item.parent_id).date_emission) || 'Non renseigné'}}
+                                        {{formaterDate(getNumeroDAODate(item.id)) || 'Non renseigné'}}
                                       </td>
-                                    <td v-if="getDateOuvertue(item.parent_id)">
-                                        {{formaterDate(getDateOuvertue(item.parent_id).date_ouverture) || 'Non renseigné'}}
+                                    <td v-if="getDateOuvertue(item.id)">
+                                        {{formaterDate(getDateOuvertue(item.id)) || 'Non renseigné'}}
                                     </td>
                                     <td v-else>
                                         Non renseigné
                                     </td>
 
-                                    <td v-if="getDateOuvertue(item.parent_id)">
-                                        {{formaterDate(getDateOuverturePVJugement(item.parent_id)) || 'Non renseigné'}}
+                                    <td v-if="getDateOuvertue(item.id)">
+                                        {{formaterDate(getDateOuverturePVJugement(item.id)) || 'Non renseigné'}}
                                     </td>
                                     <td v-else>
                                         Non renseigné
                                     </td>
-                                    <td v-if="getDateOuvertue(item.parent_id)">
-                                        {{formaterDate(getDateOuverturePVJugement(item.parent_id)) || 'Non renseigné'}}
-                                    </td>
-                                    <td v-else>
-                                        Non renseigné
-                                    </td>
-
-                                    <td v-if="getPVJugement(item.parent_id)">
-
+                                    <td v-if="getDateOuvertue(item.id)">
+                                        {{formaterDate(getDateOuverturePVJugement(item.id)) || 'Non renseigné'}}
                                     </td>
                                     <td v-else>
                                         Non renseigné
                                     </td>
 
+                                    <td v-if="getPVJugement(item.id)">
 
-                                    <td v-if="getAODMP(item.parent_id)">
-                                        {{formaterDate(getAODMP(item.parent_id)).date_demande || 'Non renseigné'}}
                                     </td>
                                     <td v-else>
                                         Non renseigné
                                     </td>
 
-                                    <td v-if="getAODMP(item.parent_id)">
-                                        {{formaterDate(getAODMP(item.parent_id)).date_avis || 'Non renseigné'}}
+
+                                    <td v-if="getAODMP(item.id)">
+                                        {{formaterDate(getAODMP(item.id)) || 'Non renseigné'}}
                                     </td>
                                     <td v-else>
                                         Non renseigné
                                     </td>
 
-                                    <td v-if="getAOBailleur(item.parent_id)">
-                                        {{formaterDate(getAOBailleur(item.parent_id)).date_ano_dmp || 'Non renseigné'}}
+                                    <td v-if="getAODMP(item.id)">
+                                        {{formaterDate(getAODMP(item.id)) || 'Non renseigné'}}
                                     </td>
                                     <td v-else>
                                         Non renseigné
                                     </td>
 
-                                    <td v-if="getAOBailleur(item.parent_id)">
-                                        {{formaterDate(getAOBailleur(item.parent_id)).date_avis || 'Non renseigné'}}
+                                    <td v-if="getAOBailleur(item.id)">
+                                        {{formaterDate(getAOBailleur(item.id)).date_ano_dmp || 'Non renseigné'}}
+                                    </td>
+                                    <td v-else>
+                                        Non renseigné
+                                    </td>
+
+                                    <td v-if="getAOBailleur(item.id)">
+                                        {{formaterDate(getAOBailleur(item.id)).date_avis || 'Non renseigné'}}
                                     </td>
                                     <td v-else>
                                         Non renseigné
@@ -155,164 +164,6 @@
             </div>
         </div>
 
-        <vue-html2pdf
-                :show-layout="false"
-                :float-layout="true"
-                :enable-download="true"
-                :preview-modal="true"
-                :paginate-elements-by-height="1400"
-                filename="DCF"
-                :pdf-quality="2"
-                :manual-pagination="false"
-                pdf-format="a4"
-                pdf-orientation="landscape"
-                pdf-content-width="1000px"
-                @progress="onProgress($event)"
-                @hasStartedGeneration="hasStartedGeneration()"
-                @hasGenerated="hasGenerated($event)"
-                ref="html2Pdf"
-        >
-            <section slot="pdf-content">
-
-
-
-
-                <div class="row-fluid">
-
-
-                    <div class="span11">
-                        <h3 v-if="info_unite_admin">Situation {{info_unite_admin.libelle}} ,Nombre de marchés <font color="red">({{getterListeMarcheTableauBordFiltre.length}})</font>  </h3>
-                    </div>
-                    <div  class="span11">
-                        <nav aria-label="breadcrumb" class="main-breadcrumb" >
-                            <ol class="breadcrumb" :style="{background: getColorByStatus(info_marche_status),fontSize:'20px'}" align="center">
-
-                                <li class="breadcrumb-item" v-html="infoEtatMarche(info_marche_status)"></li>
-
-
-                            </ol>
-                            <ol class="breadcrumb">
-
-                                <li class="breadcrumb-item" v-if="info_region"><h5>Région {{info_region.libelle}}&nbsp;&nbsp;&nbsp;&nbsp; .</h5></li>
-                                <li class="breadcrumb-item" v-if="info_infrastructure"><h5> Infrastructure {{info_infrastructure.libelle}} &nbsp;&nbsp;&nbsp;&nbsp; .</h5></li>
-                                <li class="breadcrumb-item" v-if="info_type_marche"><h5> Type de Marche {{info_type_marche.libelle}} &nbsp;&nbsp;&nbsp;&nbsp; .</h5></li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-
-
-
-                <div class="row-fluid">
-                    <div class="span12">
-
-                        <div class="widget-content nopadding" v-if="getterListeMarcheTableauBordFiltre">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>N° D'ORDRE</th>
-                                    <th>NUMERO DU DAO</th>
-                                    <th>OBJET DU MARCHE </th>
-                                    <th>DATE DE PUBLICATION - BOMP</th>
-                                    <th>DATE D'OUVERTURE</th>
-                                    <th>PV D'OUVERTURE</th>
-                                    <th>RAPPORT D'ANALYSE</th>
-                                    <th>PV DE JUGEMENT</th>
-                                    <th>DATE AO DMP</th>
-                                    <th>DATE ANO DMP</th>
-                                    <th>DATE AO BAILLEUR</th>
-                                    <th>DATE ANO BAILLEUR</th>
-                                    <th>DATE D'APPROBATION DU MARCHE</th>
-                                    <th>ENTREPRISE ATTRIBUTAIRE</th>
-                                    <th>TEMPS EVALUE</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="odd gradeX" v-for="(item,index) in getterListeMarcheTableauBordFiltre" :key="item.id">
-                                    <td>{{index + 1}}</td>
-                                    <td>{{getNumeroDAO(item.parent_id).ref_appel}}</td>
-                                    <td>{{item.objet}} </td>
-                                    <td>
-                                        {{formaterDate(getNumeroDAO(item.parent_id).date_emission) || 'Non renseigné'}}
-                                    </td>
-                                    <td v-if="getDateOuvertue(item.parent_id)">
-                                        {{formaterDate(getDateOuvertue(item.parent_id).date_ouverture) || 'Non renseigné'}}
-                                    </td>
-                                    <td v-else>
-                                        Non renseigné
-                                    </td>
-
-                                    <td v-if="getDateOuvertue(item.parent_id)">
-                                        {{formaterDate(getDateOuverturePVJugement(item.parent_id)) || 'Non renseigné'}}
-                                    </td>
-                                    <td v-else>
-                                        Non renseigné
-                                    </td>
-                                    <td v-if="getDateOuvertue(item.parent_id)">
-                                        {{formaterDate(getDateOuverturePVJugement(item.parent_id)) || 'Non renseigné'}}
-                                    </td>
-                                    <td v-else>
-                                        Non renseigné
-                                    </td>
-
-                                    <td v-if="getPVJugement(item.parent_id)">
-
-                                    </td>
-                                    <td v-else>
-                                        Non renseigné
-                                    </td>
-
-
-                                    <td v-if="getAODMP(item.parent_id)">
-                                        {{formaterDate(getAODMP(item.parent_id)).date_demande || 'Non renseigné'}}
-                                    </td>
-                                    <td v-else>
-                                        Non renseigné
-                                    </td>
-
-                                    <td v-if="getAODMP(item.parent_id)">
-                                        {{formaterDate(getAODMP(item.parent_id)).date_avis || 'Non renseigné'}}
-                                    </td>
-                                    <td v-else>
-                                        Non renseigné
-                                    </td>
-
-                                    <td v-if="getAOBailleur(item.parent_id)">
-                                        {{formaterDate(getAOBailleur(item.parent_id)).date_ano_dmp || 'Non renseigné'}}
-                                    </td>
-                                    <td v-else>
-                                        Non renseigné
-                                    </td>
-
-                                    <td v-if="getAOBailleur(item.parent_id)">
-                                        {{formaterDate(getAOBailleur(item.parent_id)).date_avis || 'Non renseigné'}}
-                                    </td>
-                                    <td v-else>
-                                        Non renseigné
-                                    </td>
-
-
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-
-                                </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
-
-            </section>
-        </vue-html2pdf>
     </div>
 </template>
 
@@ -336,6 +187,10 @@
                 page:0,
                 size:10,
                 active_el:false,
+                uri :'data:application/vnd.ms-excel;charset=UTF-8;base64,',
+                template:'<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+                base64: function(s){ return window.btoa(unescape(encodeURIComponent(s))) },
+                format: function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
             }
         },
         created(){
@@ -389,7 +244,7 @@
                 return marche_id=>{
                     let objet=this.getterCojos.find(item=>item.marche_id==marche_id)
                     if(objet!=undefined){
-                        return objet
+                        return objet.date_ouverture
                     }
                     return null
                 }
@@ -434,18 +289,36 @@
                 return marche_id=>{
                     let objet=this.getterDemandeAno.find(item=>item.marche_id==marche_id);
                     if(objet!=undefined){
-                        return objet
+                        return objet.date_demande
                     }
                     return null
                 }
             },
-            getNumeroDAO(){
+            getAODMPAvie(){
+                return marche_id=>{
+                    let objet=this.getterDemandeAno.find(item=>item.marche_id==marche_id);
+                    if(objet!=undefined){
+                        return objet.date_avis
+                    }
+                    return null
+                }
+            },
+            getNumeroDAODate(){
                 return marche_id=>{
                  let objet=this.appelOffres.find(item=>item.marche_id==marche_id);
                  if(objet!=undefined){
-                     return objet
+                     return objet.date_emission
                  }
                  return null
+                }
+            },
+            getNumeroDAORef(){
+                return marche_id=>{
+                    let objet=this.appelOffres.find(item=>item.marche_id==marche_id);
+                    if(objet!=undefined){
+                        return objet.ref_appel
+                    }
+                    return null
                 }
             },
             infoEtatMarche(){
@@ -605,7 +478,14 @@
             },
             formatageSomme:formatageSomme,
             formaterDate(date){
+                if(date=="")
+                    return ""
                 return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+            },
+            tableToExcel(table, name){
+                if (!table.nodeType) table = this.$refs.table
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+                window.location.href = this.uri + this.base64(this.format(this.template, ctx))
             }
         }
     }

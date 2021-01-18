@@ -100,8 +100,19 @@ import DetailInforTableBordUniteAd from "../../pages/TableauBord/DetailInforTabl
 import  marcheHorsppm from "../../pages/gestionMarche/marcheHorsppm.vue"
 import listeMarcheSib from "../../pages/gestionMarche/listeMarcheSib.vue"
 import ajouterMarcheSib from "../../pages/gestionMarche/ajouterMarcheSib.vue"
+
 import AnoBailleur1 from "../../pages/bien_service/component/AnoBailleur/AnoBailleur1.vue"
+
+import FicheContratualisation from "../../pages/Gestion_des_Rapports/marche/FicheContratualisation"
+
+
 const BienServiceRoutes = [
+    {
+
+        path:"/fiche-contratualisation/:id",
+        name:"FicheContratualisation",
+        component:FicheContratualisation
+    },
     {
      
         path:"/tableau-bord-financier",

@@ -111,12 +111,39 @@
         
         </ul>
       </li>
-      <li v-if="admin() || dcf()">
-            <router-link :to="{name: 'ImportBudget'}" tag="a">
-              IMPORTATION DU BUDGET
-            </router-link>
-          </li>
-        <li>
+        <li class="dropdown" id="Budget">
+            <a title="Budget" href="#"
+               data-toggle="dropdown"
+               data-target="#Budget"
+               class="dropdown-toggle">
+                <span class="text">BUDGET</span>
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <router-link :to="{name: 'BudgetPasProgramme'}" tag="a">
+                        BUGET PAS PROGRAMME
+                    </router-link>
+                </li>
+                <li v-if="admin() || dcf()">
+                    <router-link :to="{name: 'ImportBudget'}" tag="a">
+                        IMPORTATION DU BUDGET
+                    </router-link>
+                </li>
+                <li v-if="admin() || dcf()">
+                    <router-link :to="{name: 'ModificationBudget'}" tag="a">
+                        MODIFICATION BUDGET
+                    </router-link>
+                </li>
+
+            </ul>
+        </li>
+<!--          <li v-if="admin() || dcf()">-->
+<!--            <router-link :to="{name: 'ImportBudget'}" tag="a">-->
+<!--              IMPORTATION DU BUDGET-->
+<!--            </router-link>-->
+<!--          </li>-->
+          <li>
             <router-link :to="{name: 'budgetGenerals'}" tag="a">
               BUDGET PAR UA
             </router-link>

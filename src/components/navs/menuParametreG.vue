@@ -189,7 +189,12 @@
             </router-link>
           </li>
           <li class="divider"></li>
-         
+          <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class="icon-key"></i> Structure des Infrastructures
+            </router-link>
+          </li>
+          <li class="divider"></li>
         </ul>
       </li>
      <li class="dropdown" id="lesPlans">
@@ -253,6 +258,12 @@
           <li>
             <router-link :to="{name: 'planActe'}" tag="a">
               <i class="icon-key"></i> Plan des actes
+            </router-link>
+          </li>
+          <li class="divider"></li>
+           <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class="icon-key"></i> Plan des Infrastructures
             </router-link>
           </li>
           <li class="divider"></li>

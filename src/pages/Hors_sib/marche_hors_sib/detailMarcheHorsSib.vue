@@ -11,6 +11,22 @@
               
                 <div class="widget-content">
                     <div class="widget-content nopadding">
+                        <div class="row-fluid" v-if="detail_marche">
+                            <div class="span4">
+
+                            </div>
+                            <div class="span4">
+
+                            </div>
+                            <div class="span4" align="right">
+                                <router-link :to="{ name: 'FicheContratualisation', params: { id: detail_marche.id }}"
+                                             class="btn btn-primary" >
+                                    <span class=""><i class="icon-file"></i> Fiche de contratualisation</span>
+                                </router-link>
+                            </div>
+                        </div>
+
+
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
@@ -1127,8 +1143,6 @@ created() {
             ...mapGetters("bienService", ["getterCojos","mandate","getMandatPersonnaliserVise", "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
                "getterDossierCandidats","marches","gettersOuverturePersonnaliser","getterAnalyseDossiers",
                "getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser","typeMarches","getterAnoDMPBailleur"
-               
-               
               ]),
  ...mapGetters("horSib", ["gettersMarcheHorsib","getPersonnaliserMarchehorSib"]),
                

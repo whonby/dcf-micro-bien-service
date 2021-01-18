@@ -1,8 +1,8 @@
-reparation
+affiche_filtre
 <template>
 
 <div>
-  <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
+  <!-- <div  class="row-fluid"  style="margin-top: -20px">
                 <div class="span1">
 
                 </div>
@@ -35,7 +35,7 @@ reparation
                 </div>
 
 
-            </div>
+            </div> -->
    
 <!-- <table class="table table-bordered table-striped">
   <tr>
@@ -313,14 +313,14 @@ reparation
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from '../../../../../Repositories/Repository';
 import {admin,dcf,noDCfNoAdmin} from "../../../../../Repositories/Auth"
-import {  ModelListSelect } from 'vue-search-select'
-    import 'vue-search-select/dist/VueSearchSelect.css'
+// import {  ModelListSelect } from 'vue-search-select'
+//     import 'vue-search-select/dist/VueSearchSelect.css'
 //import ListePersonnelParUa from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/AffectationEquipementParUa/DossierAffectation/ListePersonnelParUa'
 //import moment from 'moment';
 export default {
   components: {
     
-    ModelListSelect
+    // ModelListSelect
      
   },
     data(){
@@ -330,6 +330,7 @@ ua_id:"",
 serviceua_id:"",
 
       },
+        
        formData2:{
         famillearticle_id :"",
         qte_affecte:"",
@@ -420,6 +421,7 @@ search:""
       "getterUa_idImo"
    
    ]),
+    
    filtre_unite_admin() {
                 if(this.noDCfNoAdmin){
                     let colect=[];

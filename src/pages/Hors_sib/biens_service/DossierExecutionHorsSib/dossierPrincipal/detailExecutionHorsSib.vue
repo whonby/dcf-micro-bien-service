@@ -1,4 +1,4 @@
-afficheNumeroMarche
+controlleur_fin
 <template>
   	<div>
 
@@ -127,14 +127,14 @@ afficheNumeroMarche
                               <li class="active"><a data-toggle="tab" href="#tab2078">Avenant</a></li>
                                <li ><a data-toggle="tab" href="#tab100">Facture</a></li>
                                 <li ><a data-toggle="tab" href="#tab45785" >Décompte</a></li>
-                              <!-- <li ><a data-toggle="tab" href="#Financement" >Financement</a></li> -->
+                              <li ><a data-toggle="tab" href="#HistoriqueDecompte" >Historique Décompte</a></li>
                               <!-- <template v-if="typeOrdrePaiementHs(detail_marche.id) == 1">
                                 
                                 <li ><a data-toggle="tab" href="#tab15550" >Réalité service fait</a></li>
                                 <li ><a data-toggle="tab" href="#tab120120" >Liquidation</a></li>
                                 <li><a data-toggle="tab" href="#tab20" >Ordre Paiement Définitive</a></li>
                                <li ><a data-toggle="tab" href="#tab45785" >Décompte</a></li>
-                              <li ><a data-toggle="tab" href="#Financement" >Financement</a></li>
+                              <li ><a data-toggle="tab" href="#HistoriqueDécompte" >Financement</a></li>
                               </template>
                                <template v-if="typeOrdrePaiementHs(detail_marche.id) == 2">
                                 <li ><a data-toggle="tab" href="#tab10" >Ordre Paiement Provisoire</a></li>
@@ -152,10 +152,10 @@ afficheNumeroMarche
                           
                              <div class="widget-content tab-content">
                             <!-- <div id="Financement" class="tab-pane "><financement :macheid="detail_marche.id"></financement></div>  -->
-<div id="tab2078" class="tab-pane active "><avenant :macheid="detail_marche.id"></avenant></div>             
-<div id="tab100" class="tab-pane  "><facture :macheid="detail_marche.id"></facture></div> 
-<div id="tab45785" class="tab-pane  "><decompte :macheid="detail_marche.id"></decompte></div>
-                       
+<div id="tab2078" class="tab-pane active"><avenant :macheid="detail_marche.id"></avenant></div>             
+<div id="tab100" class="tab-pane"><facture :macheid="detail_marche.id"></facture></div> 
+<div id="tab45785" class="tab-pane"><decompte :macheid="detail_marche.id"></decompte></div>
+<div id="HistoriqueDecompte" class="tab-pane"><HistoriqueDecompteFacture :macheid="detail_marche.id"></HistoriqueDecompteFacture></div>        
  <!-- <div id="tab20" class="tab-pane  ">
                         
                          
@@ -318,12 +318,13 @@ afficheNumeroMarche
    import avenant from "../dossierAvenant/avenantHs";
    import facture from "../dossierFacture/factureHs";
    import decompte from "../dossierDecompte/decomptePro";
+   import HistoriqueDecompteFacture from "../dossierDecompte/HistoriqueDecompteFacture";
    import graphiqueExecutionMarche from "../../../../bien_service/contractualisation/DossierExecution/DossierGraphiqueExecutionMarche/graphiqueExecutionMarche";
    import graphiqueSituationMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierSituationMarche/graphiqueSituationMarche";
 // import avenant from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
 // import facture from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierFacture/facture";
 // import decompte from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte";
-    
+
 //     import listeOpDefinitiveBsDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveBsDirect.vue";
 //     import listeOpDefinitiveCfDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveCfDirect.vue";
 //     import listeOpProvisoireBs from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpProvisoireBs";
@@ -353,6 +354,7 @@ afficheNumeroMarche
             avenant,
             facture,
             decompte,
+            HistoriqueDecompteFacture,
             graphiqueExecutionMarche,
              graphiqueSituationMarche,
           //   listeOpProvisoireCf,

@@ -45,7 +45,7 @@
             </div>
             <div v-else>
               <div align="center">
-              <h4 style="color:red;">Aucun plan programme trouvé</h4>
+              <h4 style="color:red;">Aucun enregistrement</h4>
               </div>
           </div>
            </div>

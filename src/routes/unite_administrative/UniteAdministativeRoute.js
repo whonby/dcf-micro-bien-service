@@ -46,7 +46,19 @@ import ListeStockArticle from "../../pages/suivi_control_budgetaires/suiviImmobi
 import ReportingBudget from "../../pages/unites_administratives/ReportingBudget/ReportingBudget.vue"
 import listeDesUaBudget from "../../pages/unites_administratives/ReportingBudget/listeDesUaBudget.vue"
 import DetailBudgetUa from "../../pages/unites_administratives/ReportingBudget/DetailBudgetUa.vue"
+import ModificationBudget from "../../pages/budget/ModificationBudget"
+import BudgetPasProgramme from "../../pages/budget/BudgetPasProgramme"
 const UniteAdministativeRoutes = [
+  {
+    path: "/budget-pas-programme",
+    name: "BudgetPasProgramme",
+    component: BudgetPasProgramme
+  },
+  {
+    path: "/DetailBudgetUa/",
+    name: "ModificationBudget",
+    component: ModificationBudget
+  },
   {
     path: "/DetailBudgetUa/:id",
     name: "DetailBudgetUa",
