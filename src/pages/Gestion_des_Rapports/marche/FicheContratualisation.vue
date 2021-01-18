@@ -10,7 +10,7 @@
             </div>
 
 
-            <table v-if="detail" style="border: 1px solid black" class="table table-bordered table-striped" ref="table" id="loremTable" summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
+            <table v-if="detail" style="border: 1px solid black" class="table" ref="table" id="loremTable" summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
                 <captimon align="center" rowspan="2" colspan="2">
 <!--                    <div class="span4"> <img  :src="AfficheLogODCF"></div>-->
 <!--                    <div class="span8"  style="background: #8ea9db !important;">-->
