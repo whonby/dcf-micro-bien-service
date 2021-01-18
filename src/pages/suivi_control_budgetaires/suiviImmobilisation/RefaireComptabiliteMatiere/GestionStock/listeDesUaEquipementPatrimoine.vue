@@ -641,7 +641,7 @@
                    <td></td>
                    <td></td>
                    <td style="font-weight:bold;">TOTAL</td>
-                   <td style="text-align:center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(sommeDesVehicule))}}</td>
+                   <td style="text-align:center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(sommeDesVehicule)*parseFloat(sommeDesQuantite))}}</td>
                    <td></td>
                    <td></td>
                    <td></td>
@@ -818,7 +818,9 @@ filtre_service() {
 sommeDesVehicule(){
   return this.filtre_service.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
 },
-
+sommeDesQuantite(){
+  return this.filtre_service.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+},
 NombreDeVehicule() {
       return id => {
         if (id != null && id != "") {

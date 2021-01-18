@@ -700,7 +700,7 @@ return objJson.id
         "getSourceFinnancementByMarche","getMarcheContratExecution",
         "getBanque", "getCompte","getAgence","getSanction","getHistoriqueEntreprise"]),
 
-        ...mapActions("SuiviImmobilisation", [
+        ...mapActions("SuiviImmobilisation", ["getAffectationUaBien",
           "getAffectationUaBien",
           "getGrpeCorporel",
           "getTypeBienCorporels",

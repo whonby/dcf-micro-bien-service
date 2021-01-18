@@ -636,7 +636,7 @@
                       </button>
                     </td>
                     <td>
-                      <button class="btn  btn-warning" @click.prevent="fenetreAjouterTansfert(stock.id)" v-if="statusBouton(stock.id) != 1">
+                      <button class="btn  btn-warning" @click.prevent="fenetreAjouterTansfert(stock.id)">
                         <span >
                           <i class="icon icon-folder-open"> Transférer</i>
                           
@@ -1049,7 +1049,7 @@
                 type="text"
                 
                 class="span5"
-               v-model="editAffectation.uAdministrative_id"
+               :value="afficherUniteAdministrative(editAffectation.uAdministrative_id)"
                 readonly
               />
                   </div>
@@ -1062,7 +1062,7 @@
                        
                     <input
                 type="text"
-                v-model="editAffectation.articlestock_id"
+                :value="libelleFamilleEquipement(editAffectation.articlestock_id)"
                 class="span5"
                
                 readonly
@@ -1076,7 +1076,7 @@
                   <div class="controls">
                        <input
                 type="text"
-                
+                :value="libelleMarque(editAffectation.marque_id)"
                 class="span5"
                
                 readonly
@@ -1097,7 +1097,7 @@
                 type="text"
                 
                 class="span5"
-               
+               :value="libelleModelle(editAffectation.model_id)"
                 readonly
               />
                    
@@ -1112,7 +1112,7 @@
                 type="text"
                 
                 class="span5"
-               
+               v-model="editAffectation.quantitestock"
                 readonly
               />
             </div>
@@ -1124,7 +1124,7 @@
             <div class="controls">
               <input
                 type="text"
-                
+                v-model="formData.quantitestock"
                 class="span5"
                
              
@@ -1173,11 +1173,11 @@
              </td>
              <td>
     <div class="control-group">
-            <label class="control-label">Date de transfert</label>
+            <label class="control-label">Date de transfert{{restantEnStock}}</label>
             <div class="controls">
               <input
                 type="date"
-                
+                v-model="formData.date_transfert"
                 class="span5"
                
                 
@@ -1191,7 +1191,7 @@
             <div class="controls">
               <input
                 type="text"
-                
+                v-model="formData.autre_ua"
                 class="span5"
               
                 
@@ -1207,7 +1207,7 @@
           
           class="btn btn-primary"
           href="#"
-          @click.prevent="ajouterAffectationUaParUa"
+          @click.prevent="FaireTransferer"
         >Transférer</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
@@ -1250,6 +1250,9 @@ export default {
         editAffectation:{},
       editService:{},
       editReAffectation:{},
+      ua_receptrice_id:"",
+      date_transfert:"",
+      autre_ua:"",
 search:""
         }
     },
@@ -1336,6 +1339,22 @@ search:""
      "ModeleVehicules",
      "Typebiengrpecorporels"
    ]),
+
+
+ restantEnStock() {
+      const val = parseInt(this.editAffectation.quantitestock) - parseInt(this.formData.quantitestock);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+
+
+
   filtre_unite_admin() {
                 if(this.noDCfNoAdmin){
                     let colect=[];
@@ -2210,8 +2229,8 @@ anneeAmort() {
           'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
  ...mapActions("uniteadministrative", [
      "getAllServiceua",
-      "ajouterService",
-      "modifierService",
+      "modifierStockArticle",
+      "ajouterStockArticle",
       "supprimerStockArticle",
      
       // "ajouterHistoriqueBudgetGeneral"
@@ -2219,7 +2238,7 @@ anneeAmort() {
 ...mapActions("SuiviImmobilisation", [
        "ajouterImmobilisation",
        "modifierImmobilisation",
-       "modifierStock",
+       "ajouterAffectationUaBien",
        "ajouterHistotorisqueAffectionService",
        "modifierDemandeMateriel",
        "ajouterHistotorisqueAffection"
@@ -2250,7 +2269,8 @@ if(this.formData.fonction_id==""){
       service_id:this.formData.service_id,
         stock_id:this.editAffectation.id,
         nom_prenoms:this.formData.nom_prenoms,
-       statut_bouton:0
+       statut_bouton:0,
+       uniteadministrative_id:this.editAffectation.uAdministrative_id
 }
 
 this.ajouterImmobilisation(objet24)
@@ -2267,7 +2287,8 @@ var objet21 ={
       service_id:this.formData.service_id,
         stock_id:this.editAffectation.id,
         nom_prenoms:this.formData.nom_prenoms,
-       statut_bouton:0
+       statut_bouton:0,
+       uniteadministrative_id:this.editAffectation.uAdministrative_id
 }
 
 this.ajouterImmobilisation(objet21)
@@ -2284,7 +2305,8 @@ var objet4={
       service_id:this.formData.service_id,
         stock_id:this.editAffectation.id,
         nom_prenoms:this.formData.nom_prenoms,
-       statut_bouton:1
+       statut_bouton:1,
+       uniteadministrative_id:this.editAffectation.uAdministrative_id
 
 }
 
@@ -2323,6 +2345,72 @@ var objet2 ={
 this.modifierImmobilisation(objet3)
 this.ajouterHistotorisqueAffection(objet2)
   },    
+
+
+
+ FaireTransferer(){
+var objet31 ={
+   
+      
+      uAdministrative_id:this.ua_receptrice_id,
+      groupe_famille_id:this.editAffectation.groupe_famille_id,
+      anneebudgetaire:this.anneeAmort,
+      famill_id:this.editAffectation.famill_id,
+        
+        articlestock_id:this.editAffectation.articlestock_id,
+       quantitestock:this.formData.quantitestock,
+       durevie:this.editAffectation.durevie,
+       marque_id:this.editAffectation.marque_id,
+       model_id:this.editAffectation.model_id,
+       numchassis:this.editAffectation.numchassis,
+       numimmatriculation:this.editAffectation.numimmatriculation,
+       prix_unitaire:this.editAffectation.prix_unitaire,
+         energie:this.editAffectation.energie,
+         nombreportes:this.editAffectation.nombreportes,
+         numserie:this.editAffectation.numserie,
+           couleur:this.editAffectation.couleur,
+           nombreplace:this.editAffectation.nombreplace,
+           puissance:this.editAffectation.puissance,
+           typebien_id:this.editAffectation.typebien_id
+}
+
+var objet78 ={
+   
+      ua_receptrice_id:this.ua_receptrice_id,
+      ua_mettrice_id:this.editAffectation.uAdministrative_id,
+      famille_id:this.editAffectation.groupe_famille_id,
+      	anneebudgetaire:this.anneeAmort,
+      	articles_id:this.editAffectation.famill_id,
+        stock_id:this.editAffectation.id,
+       
+       	quantite:this.formData.quantitestock,
+      autre_ua:this.formData.autre_ua,
+      date_transfert:this.formData.date_transfert,
+      marque_id:this.editAffectation.marque_id,
+       model_id:this.editAffectation.model_id,
+      
+}
+var objet147 ={
+  id:this.editAffectation.id,
+  quantitestock:this.restantEnStock
+}
+this.ajouterStockArticle(objet31)
+this.ajouterAffectationUaBien(objet78)
+this.modifierStockArticle(objet147)
+  },    
+
+
+
+
+
+
+
+
+
+
+
+
+
 fenetreAjouterAffectation(id) {
       this.$("#exampleModal1").modal({
         backdrop: "static",
@@ -2377,7 +2465,7 @@ formatageSomme:formatageSomme,
   margin: 0 -30%;
 }
 .tailgrand8{
-  width: 90%;
+  width: 85%;
   margin: 0 -45%;
 }
 .tailleImmobilisation{

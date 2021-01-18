@@ -8,6 +8,8 @@
     
         </div> 
         <br>
+        <h5 style="text-align:center;font-size:25px">{{afficherLibelleUA(detail_Vehicule.uAdministrative_id)}}</h5>
+        
           <div class="widget-title" style="background-color: hsl(50, 33%, 25%); color: white;">
             <span class="icon">
               <i class="icon-th"></i>
@@ -103,13 +105,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX">
+                <tr 
+                  class="odd gradeX"
+                    v-for="equipement in listeDesPersonnelAttribuer(detail_Vehicule.id)"
+                    :key="equipement.id">
+                  <td>{{afficherLibelleService(service_id(equipement.id)) || 'Non renseigné'}}</td>
+                  <td>{{afficherLibelleFonction(fonction_id(equipement.id)) || 'Non renseigné'}}</td>  
+                     <td>{{formaterDate(dateAffectation(equipement.id)) || 'Non renseigné'}}</td>
+                  <td>{{nomPersonnel(equipement.id) || 'Non renseigné'}}</td>  
                   
-                  <td>{{afficherLibelleService(service_id(detail_Vehicule.id)) || 'Non renseigné'}}</td>
-                  <td>{{afficherLibelleFonction(fonction_id(detail_Vehicule.id)) || 'Non renseigné'}}</td>  
-                     <td>{{formaterDate(dateAffectation(detail_Vehicule.id)) || 'Non renseigné'}}</td>
-                  <td>{{nomPersonnel(detail_Vehicule.id) || 'Non renseigné'}}</td>  
-                  
+
                 </tr>
               </tbody>
             </table>
@@ -170,6 +175,31 @@ created() {
    
    ]),
    ...mapGetters("personnelUA", ["personnaliseActeurDepense","acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
+
+
+listeDesPersonnelAttribuer() {
+      return id => {
+        if (id != null && id != "") {
+           return this.immobilisations.filter(qtreel => qtreel.stock_id == id);
+
+        }
+      };
+    },
+
+afficherLibelleUA() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
 afficherLibelleFonction() {
       return id => {
         if (id != null && id != "") {

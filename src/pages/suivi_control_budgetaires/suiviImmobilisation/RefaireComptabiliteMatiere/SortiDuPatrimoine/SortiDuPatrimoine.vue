@@ -92,7 +92,7 @@ uniteAdministratives
       <hr />
       <div class="row-fluid">
         <div class="span12">
-        <h2 style="text-align:center;font-size:25px">SORTIE DU PATRIMOINE DU {{libelleUniteAdministrative(detail_Affectation.uniteadministrative_id)}}</h2>
+        <h2 style="text-align:center;font-size:25px">UNITE D'ADMINISTRATIVE : {{libelleUniteAdministrative(detail_Affectation.uniteadministrative_id)}}</h2>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -126,10 +126,7 @@ uniteAdministratives
  <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                     
-                    
-                     
-                     
+                      
                      <th>Code Immobilisation</th>
                      <th>Famille</th>
                      <th>Marque</th>
@@ -154,18 +151,18 @@ uniteAdministratives
                     v-for="(service,index) in EquipementDansLePatrimoine(detail_Affectation.uniteadministrative_id)"
                     :key="service.id"
                   >
-                    <td style="font-size:14px" >{{CodeImmobilisation(service.famillearticle_id) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" >{{libelleFamilleEquipement(service.famillearticle_id) || 'Non renseigné'}}</td>                      
-                   <td style="font-size:14px" >{{libelleMarque(service.marque_id) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" >{{libelleModelle(service.model_id) || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" >{{NumeroSerie(service.famillearticle_id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{service.stock_id || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{service.stock_id || 'Non renseigné'}}</td>                      
+                   <td style="font-size:14px" >{{service.stock_id || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{service.stock_id || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{service.stock_id || 'Non renseigné'}}</td>
                     
-                    <td style="font-size:14px" >{{NomPersonnel(service.actepersonnel_id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{service.stock_id || 'Non renseigné'}}</td>
                     <td style="font-size:14px" >{{service.service_id || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" >{{DureVie(service.famillearticle_id) || 'Non renseigné'}} Ans</td>
-                    <td style="font-size:14px" >{{formatageSomme(parseFloat(ValeurAcquise(service.famillearticle_id))) || 'Non renseigné'}}</td>
-                   <td style="font-size:14px" >{{service.famillearticle_id || 'Non renseigné'}}</td>
-                    <td style="font-size:14px" >{{service.famillearticle_id || 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{service.stock_id || 'Non renseigné'}} Ans</td>
+                    <td style="font-size:14px" >{{service.stock_id || 'Non renseigné'}}</td>
+                   <td style="font-size:14px" >{{service.stock_id|| 'Non renseigné'}}</td>
+                    <td style="font-size:14px" >{{service.stock_id|| 'Non renseigné'}}</td>
                     <td style="font-size:14px" >
                        <button 
                         @click.prevent="afficherModalModifierService(index)"
