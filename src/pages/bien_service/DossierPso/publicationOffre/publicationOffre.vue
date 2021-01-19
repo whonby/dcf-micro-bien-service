@@ -7,9 +7,9 @@
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                    <tr>
-
                                         <th>Reference appel - DAO</th>
                                         <th> Type procedure</th>
+                                        <th> Numéro autorisation</th>
                                         <th>Mode de passation</th>
                                         <th>Date emmission</th>
                                         <th>Date et heure limite  </th>
@@ -25,9 +25,11 @@
                                             {{appelOffre.ref_appel || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{typeProcedureLibelle(appelOffre.type_appel) || 'Non renseigné'}}</td>
+                                              <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.numero_autorisation|| 'Non renseigné'}}</td>
 
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.mode_passation_id || 'Non renseigné'}}</td>
+                                            {{afficheLibelleModePassation(appelOffre.mode_passation_id) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
 
                                             {{formaterDate(appelOffre.date_emission) || 'Non renseigné'}}</td>
@@ -131,7 +133,7 @@
                         <div class="control-group">
                             <label class="control-label">Numero d'autorisation :</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="" v-model="formData.numero_autorisation">
+                                <input type="text" class="span" placeholder="" v-model="formData.mode_passation_id" :readonly="activation">
                             </div>
                         </div>
                         </td>
@@ -399,7 +401,9 @@ listeAppelOffre() {
 
 
 
-
+activation(){
+    return this.procedurePassations.filter(item => item.type_procedure_id==8);
+},
 
 
 affichierObjetMarche() {
@@ -432,6 +436,19 @@ affichierObjetMarche() {
         }
       };
     },
+
+afficheLibelleModePassation(){
+    return id =>{
+        if(id!=null){
+            const answer = this.procedurePassations.find(item => item.id==id)
+            if(answer) {
+                 return answer.libelle
+            }
+           return null
+        }
+        
+    }
+},
 
 typeProcedure_id() {
       return id => {

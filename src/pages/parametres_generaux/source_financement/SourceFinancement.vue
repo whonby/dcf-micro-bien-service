@@ -20,7 +20,7 @@
                                               title="Liste structure de financement "
                                               name ="Liste structure de  financement"
                                               worksheet = "structure de  financement"
-                                            :data="sources_financements">
+                                            :data="listeGuichet">
                   <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel>  
@@ -64,7 +64,7 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="source_financement in 
-               partition (sources_financements,size)[page]" :key="source_financement.id">
+               partition (listeGuichet,size)[page]" :key="source_financement.id">
                   <td @dblclick="afficherModalModifierFinancement(source_financement.id)">
                     {{source_financement.code || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierFinancement(source_financement.id)">
@@ -108,9 +108,9 @@
          <div class="pagination alternate">
                     <ul>
                         <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-                        <li  v-for="(titre, index) in partition(sources_financements,size).length" :key="index" :class="{ active : active_el == index }">
+                        <li  v-for="(titre, index) in partition(listeGuichet,size).length" :key="index" :class="{ active : active_el == index }">
                             <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-                        <li :class="{ disabled : page == partition(sources_financements,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+                        <li :class="{ disabled : page == partition(listeGuichet,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
 
                     </ul>
                 </div>
@@ -294,7 +294,12 @@ return this.sources_financements.filter((item) => {
 
    }
 )
-   }
+   },
+
+   /// liste 
+   listeGuichet(){
+      return this.sources_financements.filter(item=>item.parent==null);
+    },
    
   },
   methods: {
