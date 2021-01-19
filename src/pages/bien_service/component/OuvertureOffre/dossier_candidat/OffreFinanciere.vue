@@ -85,17 +85,6 @@
       </table>
       <table class="table table-bordered table-striped">
         <tr>
-<<<<<<< HEAD
-              <td>
-              <div class="control-group">
-                <label class="control-label">Rabais offert</label>
-                <div class="controls">
-                  <input type="text"  v-model="formOffreFinanciere.Rabais" class="span" placeholder="Rabais offert">
-                </div>
-              </div>
-            </td>
-           <td>
-=======
           <td>
             <div class="control-group">
               <label class="control-label">Montant total ht :</label>
@@ -104,8 +93,7 @@
               </div>
             </div>
           </td>
->>>>>>> 2136c3f1fe5e648821ce826059c842a1ce99bcb5
-
+          <td>
             <div class="control-group">
               <label class="control-label">Montant HT:</label>
               <div class="controls">
@@ -125,11 +113,6 @@
 
           </td>
 
-<<<<<<< HEAD
-
-          </td>
-=======
->>>>>>> 2136c3f1fe5e648821ce826059c842a1ce99bcb5
         </tr>
         <tr>
        
@@ -189,9 +172,6 @@
       </table>
       <table class="table table-bordered table-striped">
         <tr>
-<<<<<<< HEAD
-             <td>
-=======
           <td>
             <div class="control-group">
               <label class="control-label">Montant total ht :</label>
@@ -203,7 +183,6 @@
 
 
           <td>
->>>>>>> 2136c3f1fe5e648821ce826059c842a1ce99bcb5
 
             <div class="control-group">
               <label class="control-label">Montant HT:</label>
@@ -214,12 +193,6 @@
 
           </td>
 
-<<<<<<< HEAD
-            <div class="control-group">
-              <label class="control-label">Montant TTC :</label>
-              <div class="controls">
-                <input type="number" class="span" placeholder="Montant TTC" v-model="editer.montant_total_ttc">
-=======
         </tr>
         <tr>
 
@@ -229,26 +202,12 @@
               <label class="control-label">Rabais (%) :</label>
               <div class="controls">
                 <input type="number" class="span" placeholder="prix unitaire" v-model="editer.Rabais">
->>>>>>> 2136c3f1fe5e648821ce826059c842a1ce99bcb5
               </div>
             </div>
 
           </td>
-<<<<<<< HEAD
-              <td>
-              <div class="control-group">
-                <label class="control-label">Rabais offert</label>
-                <div class="controls">
-                  <input type="text"  v-model="editer.Rabais" class="span" placeholder="Rabais offert">
-                </div>
-              </div>
-            </td>
-        </tr>
- 
-=======
         </tr>
 
->>>>>>> 2136c3f1fe5e648821ce826059c842a1ce99bcb5
 
       </table>
 
@@ -284,8 +243,6 @@ name: "OffreFinanciere",
         montant_total_ttc:"",
         dossier_candidat_id:"",
         hist_montant_ttc:"",
-        Rabais:"",
-        montant_total_ht:"",
         marche_id:""
       },
 

@@ -8,13 +8,16 @@
                     <thead>
                    <tr>
 
+                                        
+                                        <th> Type procédure</th>
                                         <th>Reference appel</th>
-                                        <th> Type procedure</th>
-
-                                        <th>Numéro et date d'autorisation</th>
-                                        <th>Date emmission</th>
-                                        <th>Date et heure limite  </th>
                                         <th>Objet appel</th>
+                                        <th>Date début de publication</th>
+
+                                        <th>Date fin de publication</th>
+                                        <th>Numéro et date</th>
+                                        <th>Date d'autorisation </th>
+                                        <th>Heure limites</th>
                                        
                                         <th>Action</th>
                                     </tr>
@@ -85,7 +88,7 @@
                             <tr>
                             <td colspan="2" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet  offre :</label>
+                            <label class="span2">Objet  offre :</label>
                             <div class="controls">
                                  <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     
@@ -228,11 +231,11 @@
                        
                         </tr>
                         <tr>
-                             <td>
+                           <td>
                         <div class="control-group">
-                            <label>Imputation</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="Imputation" v-model="edite_appel_offre.imputation">
+                                <label>Numéro et date <code></code></label>
+                                <input type="text" class="span" v-model="edite_appel_offre. imputation">
                             </div>
                         </div>
                         </td>
@@ -463,11 +466,8 @@ typeProcedureLibelle() {
                     objet_appel:"",
                     imputation:"",
                     marche_id:"",
-<<<<<<< HEAD
-=======
                     numero_autorisation:"",
           heure:""
->>>>>>> 2136c3f1fe5e648821ce826059c842a1ce99bcb5
                 }
     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
     marcheObjet.attribue=1

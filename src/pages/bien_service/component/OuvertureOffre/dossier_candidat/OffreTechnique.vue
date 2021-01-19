@@ -146,16 +146,6 @@
                 </div>
               </div>
             </td>
-<<<<<<< HEAD
-            <!-- <td>
-              <div class="control-group">
-                <label class="control-label">Rabais offert</label>
-                <div class="controls">
-                  <input type="text"  v-model="formchnique.rabai_offert" class="span" placeholder="Rabais offert">
-                </div>
-              </div>
-            </td> -->
-=======
 <!--            <td>-->
 <!--              <div class="control-group">-->
 <!--                <label class="control-label">Rabais offert</label>-->
@@ -164,7 +154,6 @@
 <!--                </div>-->
 <!--              </div>-->
 <!--            </td>-->
->>>>>>> 2136c3f1fe5e648821ce826059c842a1ce99bcb5
             <td>
 
               <div class="control-group">
@@ -304,18 +293,6 @@
                 </div>
               </div>
             </td>
-<<<<<<< HEAD
-            <!-- <td>
-              <div class="control-group">
-                <label class="control-label">Rabais offert</label>
-                <div class="controls">
-                  <input type="text"  v-model="editer.rabai_offert" class="span" placeholder="Rabais offert">
-                </div>
-              </div>
-            </td> -->
-=======
-
->>>>>>> 2136c3f1fe5e648821ce826059c842a1ce99bcb5
             <td>
 
               <div class="control-group">
