@@ -1171,7 +1171,7 @@ created(){
     .bg-base {
         background-color: #a62f59 !important;
     }
-    .bg-taux {
+    .bg-taux { 
         background-color: #ba7024 !important;
     }
     .bg-restant {

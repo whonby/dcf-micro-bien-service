@@ -151,14 +151,14 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <div class="control-group">
                                     <label class="control-label"> Heure limites :</label>
                                     <div class="controls">
                                         <input type="time" class="span" placeholder="" v-model="formData.heure">
                                     </div>
                                 </div>
-                            </td>
+                            </td> -->
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Fichier DAO:</label>
@@ -277,14 +277,14 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <div class="control-group">
                                     <label class="control-label"> Heure limites :</label>
                                     <div class="controls">
                                         <input type="time" class="span" placeholder="" v-model="edite_appel_offre.heure">
                                     </div>
                                 </div>
-                            </td>
+                            </td> -->
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Fichier DAO:</label>
