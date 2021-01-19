@@ -690,6 +690,7 @@ export default {
    
 
    
+   
 
    // affichage du cout de billet avion et de la classe voyage en fonction du moyen de transpoprt
 

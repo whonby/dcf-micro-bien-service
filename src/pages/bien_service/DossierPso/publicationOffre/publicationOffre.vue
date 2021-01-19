@@ -7,14 +7,18 @@
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                    <tr>
+<<<<<<< HEAD
 
 <<<<<<< HEAD
                                         
                                         <th> Type procédure</th>
                                         <th>Reference appel</th>
 =======
+=======
+>>>>>>> 194aa3f8c8258cf4e0f9de8cb5124d490a624aef
                                         <th>Reference appel - DAO</th>
                                         <th> Type procedure</th>
+                                        <th> Numéro autorisation</th>
                                         <th>Mode de passation</th>
                                         <th>Date emmission</th>
                                         <th>Date et heure limite  </th>
@@ -37,9 +41,11 @@
                                             {{appelOffre.ref_appel || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{typeProcedureLibelle(appelOffre.type_appel) || 'Non renseigné'}}</td>
+                                              <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.numero_autorisation|| 'Non renseigné'}}</td>
 
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.mode_passation_id || 'Non renseigné'}}</td>
+                                            {{afficheLibelleModePassation(appelOffre.mode_passation_id) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
 
                                             {{formaterDate(appelOffre.date_emission) || 'Non renseigné'}}</td>
@@ -168,8 +174,12 @@
                             <td>
                         <div class="control-group">
                             <div class="controls">
+<<<<<<< HEAD
                                 <label>Numéro et date <code></code></label>
                                 <input type="text" class="span" >
+=======
+                                <input type="text" class="span" placeholder="" v-model="formData.mode_passation_id" :readonly="activation">
+>>>>>>> 194aa3f8c8258cf4e0f9de8cb5124d490a624aef
                             </div>
                         </div>
                         </td>
@@ -468,7 +478,9 @@ listeAppelOffre() {
 
 
 
-
+activation(){
+    return this.procedurePassations.filter(item => item.type_procedure_id==8);
+},
 
 
 affichierObjetMarche() {
@@ -501,6 +513,19 @@ affichierObjetMarche() {
         }
       };
     },
+
+afficheLibelleModePassation(){
+    return id =>{
+        if(id!=null){
+            const answer = this.procedurePassations.find(item => item.id==id)
+            if(answer) {
+                 return answer.libelle
+            }
+           return null
+        }
+        
+    }
+},
 
 typeProcedure_id() {
       return id => {

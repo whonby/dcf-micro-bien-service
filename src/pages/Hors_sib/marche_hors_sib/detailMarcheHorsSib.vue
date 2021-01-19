@@ -1216,14 +1216,15 @@ created() {
                 {
            return true
                 }
+                 else if(0 < this.budgetDisponible && procedure=="ED" || procedure=="CON")
+                {
+                 return true
+                }
                 else if(100000000 < this.budgetDisponible && (procedure=="AOR" || procedure=="AON" || procedure=="AOI"))
                 {
             return true
                 }
-                else if(0 < this.budgetDisponible && procedure=="ED" || procedure=="CON")
-                {
-                 return true
-                }
+               
 
 
       }
@@ -1249,7 +1250,7 @@ return "Procédure Simplifiée à compétition Ouverte(PSO)"
     
     else if(this.affcicheEtapeProcedure(0,'ED',this.detail_marche.id))
     {
-     return "Entente diret ou Convention (ED ou CONV)"
+     return "Entente direct ou Convention (ED ou CONV)" 
     }
      else if(100000000 < this.budgetDisponible)
     {
