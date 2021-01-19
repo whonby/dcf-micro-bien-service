@@ -12,19 +12,19 @@
                     <div class="widget-content">
                         <a href="#ajouterActeEffetFinancierP" data-toggle="modal" class="btn btn-warning" v-if="listeRapport(macheid)" >Ajouter</a>
                    
-                        <button class="btn btn-warning" title="La procedure n'est pas terminer car l'avis du Bailleur est Objection, alors veiller recommencer l'analyse" disabled v-else>Ajouter</button>
+                        <button class="btn btn-warning" title="La procédure n'est pas terminer car l'avis du Bailleur est Objection, alors veuillez recommencer l'analyse" disabled v-else>Ajouter</button>
                     </div>
 
 
                 </div>
                 
-                <h4> Liste acte effet financier </h4>
+                <h4> Liste de l'acte à effet financier </h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
 
-                        <th>Référence acte </th>
-                        <th>Montant acte</th>
+                        <th>Référence de l'acte </th>
+                        <th>Montant de l'acte</th>
                         <th>Objet marché</th>
                         <th>Imputation</th>
                         <th>Action</th>
@@ -68,7 +68,7 @@
 <div id="ajouterActeEffetFinancierP" class="modal hide grdirModalActeEffet">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter acte effet financier</h3>
+                <h3>Ajouter acte à effet financier</h3>
             </div>
             <div class="modal-body">
 
@@ -76,7 +76,7 @@
                         <tr>
                           <td colspan="">
                         <div class="control-group">
-                        <label class="control-label">Type acte effet financier.</label>
+                        <label class="control-label">Type de l'acte à effet financier</label>
                         <div class="controls">
                           <select v-model="formEffetFinancier.type_act_effet_id" class="span">
                                 <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
@@ -92,7 +92,7 @@
                             <td colspan="2">
 
                     <div class="control-group">
-              <label class="control-label">Candidat retenu après analyse.</label>
+              <label class="control-label">Candidat retenu après analyse</label>
               <div class="controls">
                 
                 <select  v-model="formEffetFinancier.candidat_personnel_id" class="span">
@@ -136,7 +136,7 @@
 
                                            <td colspan="2">
                     <div class="control-group">
-                        <label class="control-label"> date d'approbation</label>
+                        <label class="control-label"> Date d'approbation</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -151,13 +151,13 @@
 
                                   <td colspan="2">
                     <div class="control-group">
-                        <label class="control-label">Numero du marche/contract</label>
+                        <label class="control-label">Numéro du marché/contrat</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="formEffetFinancier.numero_marche"
                                     class="span"
-                                    placeholder="Saisir le numero "
+                                    placeholder="Saisir le numéro "
                             />
                         </div>
                     </div>
@@ -170,9 +170,9 @@
                               <td colspan="4" width="550">
                       
                          <div class="control-group">
-                            <label class="control-label">Objet offre :</label>
+                            <label class="control-label">Objet de l'offre :</label>
                             <div class="controls">
-                            <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span11" rows="3" placeholder="Entre le  text ..."></textarea>
+                            <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span11" rows="3" placeholder="Entre le  texte ..."></textarea>
                     
                             </div>
                         </div>
@@ -183,11 +183,11 @@
                         <tr>
                             <td>
                     <div class="control-group">
-                        <label class="control-label">Reference acte</label>
+                        <label class="control-label">Référence de l'acte</label>
                         <div class="controls">
                             <input type="text" v-model="formEffetFinancier.reference_act"
                                     class="span"
-                                    placeholder="refence acte"
+                                    placeholder="Référence de lacte"
                             />
                         </div>
                     </div>
@@ -236,7 +236,7 @@
                     
                      <td>
                      <div class="control-group">
-                        <label class="control-label">Date ordre de service demarrage</label>
+                        <label class="control-label">Date ordre de service démarrage</label>
                         <div class="controls">
                             <input type="date" v-model="formEffetFinancier.date_odre_service"
                                     class="span"
@@ -249,7 +249,7 @@
 
                                          <td>
                      <div class="control-group">
-                        <label class="control-label" title=" ">Date fin exécution</label>
+                        <label class="control-label" title=" ">Date de fin d'exécution</label>
                         <div class="controls">
                             <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
                                     class="span"
@@ -263,7 +263,7 @@
 
                                            <td>
                      <div class="control-group">
-                        <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
+                        <label class="control-label" title=" ">Durée d'exécution (jrs)</label>
                         <div class="controls">
                             <input type="text"  readonly :value="nombreDejourCalcule"
                                     class="span"
@@ -276,7 +276,7 @@
 
                                              <td>
                      <div class="control-group">
-                        <label class="control-label" title=" ">Date de reception definitive</label>
+                        <label class="control-label" title=" ">Date de réception définitive</label>
                         <div class="controls">
                             <input type="date" v-model="formEffetFinancier.date_reception"
                                     class="span"
@@ -332,7 +332,7 @@
                         <tr>
                            <td colspan="2">
                         <div class="control-group">
-                        <label class="control-label">Type acte effet financier.</label>
+                        <label class="control-label">Type de l'acte à effet financier</label>
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.type_act_effet_id" class="span">
                                 <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
@@ -345,7 +345,7 @@
                             <td colspan="2">
 
                         <div class="control-group">
-              <label class="control-label">Candidat retenu après analyse.</label>
+              <label class="control-label">Candidat retenu après analyse</label>
               <div class="controls">
                 
                 <select v-model="editActeEffetFinancier.candidat_personnel_id" class="span">
@@ -386,7 +386,7 @@
 
                                            <td colspan="2">
                     <div class="control-group">
-                        <label class="control-label"> date d'approbation</label>
+                        <label class="control-label"> Date d'approbation</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -401,13 +401,13 @@
 
                                   <td colspan="2">
                     <div class="control-group">
-                        <label class="control-label">Numero du marche/contract</label>
+                        <label class="control-label">Numéro du marché/contrat</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="editActeEffetFinancier.numero_marche"
                                     class="span"
-                                    placeholder="Saisir le numero "
+                                    placeholder="Saisir le numéro "
                             />
                         </div>
                     </div>
@@ -433,7 +433,7 @@
                               <td colspan="4" width="550">
                       
                          <div class="control-group">
-                            <label class="control-label">Objet offre :</label>
+                            <label class="control-label">Objet de l'offre :</label>
                             <div class="controls">
                             <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span11" rows="3" placeholder="Entre le  text ..."></textarea>
                     
@@ -447,11 +447,11 @@
                         <tr>
                             <td>
                     <div class="control-group">
-                        <label class="control-label">Reference acte</label>
+                        <label class="control-label">Référence de l'acte</label>
                         <div class="controls">
                             <input type="text" v-model="editActeEffetFinancier.reference_act"
                                     class="span"
-                                    placeholder="refence acte"
+                                    placeholder="Référence acte"
                             />
                         </div>
                     </div>
@@ -500,7 +500,7 @@
                     
                      <td>
                      <div class="control-group">
-                        <label class="control-label">Date ordre de service demarrage</label>
+                        <label class="control-label">Date ordre de service démarrage</label>
                         <div class="controls">
                             <input type="date" v-model="editActeEffetFinancier.date_odre_service"
                                     class="span"
@@ -513,7 +513,7 @@
 
                                          <td>
                      <div class="control-group">
-                        <label class="control-label" title=" ">Date fin exécution</label>
+                        <label class="control-label" title=" ">Date de fin d'exécution</label>
                         <div class="controls">
                             <input type="date" :min="editActeEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValueEdit" v-model="editActeEffetFinancier.date_fin_exe"
                                     class="span"
@@ -527,7 +527,7 @@
 
                                            <td>
                      <div class="control-group">
-                        <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
+                        <label class="control-label" title=" ">Durée d'exécution (jrs)</label>
                         <div class="controls">
                             <input type="text"  readonly :value="nombreDejourCalculeEdit"
                                     class="span"
@@ -540,7 +540,7 @@
 
                                              <td>
                      <div class="control-group">
-                        <label class="control-label" title=" ">Date de reception definitive</label>
+                        <label class="control-label" title=" ">Date de réception définitive</label>
                         <div class="controls">
                             <input type="date" v-model="editActeEffetFinancier.date_reception"
                                     class="span"

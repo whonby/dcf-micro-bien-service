@@ -376,7 +376,7 @@
                                <li class="active"><a data-toggle="tab" href="#tab2078"> Marchés <span class="badge badge" > {{nombreDeMarcheI}}</span></a></li>
                                
                                <li ><a data-toggle="tab" href="#tab100" title="marché planifié en investissement">Planification <span class="badge badge-important" >    {{nombreMarcheEnplanification}}</span></a></li>
-                                <li ><a data-toggle="tab" href="#tab10" title="marché en contratualisation d'investissement">Contratualisation  <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
+                                <li ><a data-toggle="tab" href="#tab10" title="marché en contratualisation d'investissement">Contractualisation  <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
                                 <li><a data-toggle="tab" href="#tab20" title="marché en exécution d'investiisement">Exécution <span class="badge badge-warning" >{{afficheNombreMarchExecuter}}</span></a></li>
                                  <li><a data-toggle="tab" href="#tab20002" title="marché résilié d'investissement">Résilié <span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
                                   <li><a data-toggle="tab" href="#tab2000256"  title="marché terminé d'investissement">Terminé<span class="badge badge-inverse" >     {{nombreAfficheMarcheSolde}}</span></a></li>
@@ -401,7 +401,7 @@
                   <tr>
                
                 <th>Ann&eacute;e</th>
-                 <th title="unite administrative">UA</th>
+                 <th title="Unité Administrative">UA</th>
                       <th>Type de marché</th>
                    
                     <!-- <th>Activit&eacute;</th> -->
@@ -473,7 +473,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marchés en cours de Contratualisation</h5>
+              <h5>Liste des Marchés en cours de Contractualisation</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -483,7 +483,7 @@
                 <thead>
                   <tr>
                 <th>Ann&eacute;e</th>
-                 <th title="unite administrative">UA</th>
+                 <th title="Unité Administrative">UA</th>
                       <th>Type de marché</th>
                    
                     <th>Activit&eacute;</th>
@@ -523,7 +523,7 @@
                   
 <td>
                      <button 
-                      v-if="marche.attribue == 1"  class="btn  btn-success">
+                      v-if="marche.attribue == 1"  class="btn  btn-success" title="EN CONTRACTUALISATION">
                 <span >CT</span>
        
                 </button>
@@ -647,12 +647,12 @@
            <td>
                      <button 
                       v-if="marche.attribue == 2"  class="btn  btn-warning">
-                <span title="MARCHE EN EXERCUTER" style="">EX</span>
+                <span title="MARCHE EN EXECUTER" style="">EX</span>
        
                 </button>
                 <button 
                       v-else-if="marche.attribue == 1"  class="btn  btn-success">
-                <span title=" MARCHE EN COURS DE CONTRATUALISATION">CT</span>
+                <span title=" MARCHE EN COURS DE CONTRACTUALISATION">CT</span>
        
                 </button>
                  <button 
@@ -662,30 +662,30 @@
                 </button>
                  <button v-else-if="marche.attribue == 5" class="btn  btn-inverse">
               
-                <span title="MARCHE EN TERMINE">TE</span>
+                <span title="MARCHE TERMINE">TE</span>
                 </button>
                    <button v-else class="btn  btn-danger">
               
-                <span title="MARCHE EN PLANIFICATION">PL</span>
+                <span title="MARCHE NON PLANIFIE">NPL</span>
                 </button>
 
                    </td>
                    <td >
                         <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
-                 class="btn btn-inverse " title="Cycle de vie du marche">
+                 class="btn btn-inverse " title="Cycle de vie du marché">
         <span class=""><i class=" icon-calendar"></i></span>
     </router-link>
                    </td>
                    <td>
                        <router-link :to="{ name: 'detail_hors_sib', params: { id: marche.id }}"
-                class="btn btn-default " title="historique la contratualisation">
-                  <span class=""><i class=" icon-folder-open"></i></span>
+                class="btn btn-default " title="historique de la contractualisation">
+                  <span class=""><i class=" icon-folder-open">Historique CT</i></span>
                     </router-link>
                    </td>
                    <td>
                    
                      <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
                    </td>
                    
  
@@ -769,7 +769,7 @@
                 <thead>
                   <tr>
                 <th>Ann&eacute;e</th>
-                 <th title="unite administrative">UA</th>
+                 <th title="Unité Administrative">UA</th>
                       <th>Type de marché</th>
                    
                     <!-- <th>Activit&eacute;</th> -->
@@ -813,20 +813,20 @@
                   
                     <td>
                      <button 
-                      v-if="afficherAttributMarche(marche.marche_id) == 2"  class="btn  btn-warning">
+                      v-if="afficherAttributMarche(marche.marche_id) == 2"  class="btn  btn-warning" title="EN EXECUTION">
                 <span >EX</span>
        
                 </button>
                  
                  </td>
                    <td>
-           <button   class="btn btn-info " title="Ajouter marché resilié" @click="afficherModalMarcheResilier(index)">
+           <button   class="btn btn-info " title="Ajouter marché résilié" @click="afficherModalMarcheResilier(index)">
                 <span class=""><i class="icon-pencil"></i></span></button>
 
    
                     
                 <button @click.prevent="modifierModalActeEffetFinancierLocal(index)"  class="btn btn-success">
-                <span class=""><i class="icon-folder-open" title="Basculer en contratualisation"></i></span></button> 
+                <span class=""><i class="icon-folder-open" title="Basculer en contractualisation"></i></span></button> 
 
 </td>
 
@@ -913,7 +913,7 @@
                   
 <td>
                      <button 
-                      v-if="marche.attribue == 0"  class="btn  btn-danger">
+                      v-if="marche.attribue == 0"  class="btn  btn-danger" title="EN PLANIFICATION">
                 <span >PL</span>
        
                 </button>
@@ -921,13 +921,13 @@
                    </td>
 <td >
                         <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
-                 class="btn btn-inverse " title="Cycle de vie du marche">
+                 class="btn btn-inverse " title="Cycle de vie du marché">
         <span class=""><i class=" icon-calendar"></i></span>
     </router-link>
                    </td>
 <td>
     <router-link :to="{ name: 'detail_hors_sib', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail marche">
+                class="btn btn-default " title="Détail du marché">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link>
 </td>
@@ -1009,7 +1009,7 @@
                   <tr>
                 <th>Ann&eacute;e</th>
                 <th>UA</th>
-                 <th title="unite administrative">Numéro du marché</th>
+                 <th title="Unité Administrative">Numéro du marché</th>
                       <th>Objet du marché</th>
                    
                     <th>Entreprise</th>
@@ -1093,7 +1093,7 @@
          <tr>
             <td>
                   <div class="control-group">
-                                <label class="control-label">Année Budgetaire</label>
+                                <label class="control-label">Année Budgétaire</label>
                                 <div class="controls ">
                             
                              <input
@@ -1107,13 +1107,13 @@
               </td>
                <td>
                  <div class="control-group">
-            <label class="control-label">Refencence marché</label>
+            <label class="control-label">Référence marché</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.reference_marche"
                 class="span"
-                placeholder="Saisir la reference du marché"
+                placeholder="Saisir la référence du marché"
               />
             </div>
           </div>
@@ -1136,7 +1136,7 @@
             <tr>
              <td>
                <div class="control-group">
-            <label class="control-label" title="unite administrative">UA</label>
+            <label class="control-label" title="Unité Administrative">UA</label>
             <div class="controls">
             <select v-model="formData.unite_administrative_id" class="span">
                <option v-for="plans in groupUa" 

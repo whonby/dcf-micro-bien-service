@@ -36,9 +36,9 @@
                     <th>Type marché</th>
                     <th>Activité</th>
                     <th>Imputation</th>
-                    <th>Ligne Budgetaire</th>
+                    <th>Ligne Budgétaire</th>
                     
-                    <th>Reference marché</th>
+                    <th>Référence marché</th>
                    
                     <th>Montant Réel (FCFA)</th>
                     <th>Action</th>
