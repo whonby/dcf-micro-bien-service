@@ -8,9 +8,9 @@
 
                             </div>
                              <div id="printMe">
-<table class="table table-bordered table-striped html2pdf__page-break" id="app1"  >
-   <tr>
-                                              <td colspan="" style="text-align:center">
+<table class="table   html2pdf__page-break noborder" id="app1"  >
+   <tr class="noborder">
+                                              <td colspan="" style="text-align:center" class="noborder">
  <p>MINISTERE  DU BUDGET ET DU PORTEFEUILLE </p>
       <p> DE L'ETAT</p>
                                  </td>
@@ -18,24 +18,24 @@
                                     <img  :src="AffichePhoto">
                                    <p>DIRECTION DU CONTRÔLE FINANCIER</p>
                                  </td> -->
-                                  <td style="text-align:center">
+                                  <td style="text-align:center" class="noborder">
                                    <img  :src="AfficheAmoirie">
  
                                  </td>
-                                 <td style="text-align:center">
+                                 <td style="text-align:center" class="noborder">
                                    <p>REPUBLIQUE DE CÔTE D'IVOIRE </p>
       <P>Union-Discipline-Travail</P>
                                  </td>
                                </tr>
-   <tr>
-                                 <td style="text-align:center">
+   <tr  class="noborder">
+                                 <td style="text-align:center"  class="noborder">
                                    <img  :src="AfficheLogODCF">
                                    <p>DIRECTION DU CONTRÔLE FINANCIER</p>
                                  </td>
-                                 <td style="text-align:center">
+                                 <td style="text-align:center" class="noborder">
                                    
                                  </td>
-                                 <td style="text-align:center">
+                                 <td style="text-align:center" class="noborder">
                                   
                                  </td>
                                </tr>
@@ -44,8 +44,8 @@
 <br/>
       <br/>
     <div style="border: 2px double #000;text-align:center;font-size:25px;width:100%;height:100px;">
-      <p>FICHE ANNEXE DE CONTRÔLE</p>
-      <p>DE LA REALITE DU SERVICE FAIT</p>
+      <h2>FICHE ANNEXE DE CONTRÔLE DE LA REALITE DU SERVICE FAIT</h2>
+      
       <!-- <P>INSTITUEE PAR L'ARRETE N° 638 MEF/CAB/YKM DU 20 JUILLET 2009</P> -->
     </div>
 
@@ -54,7 +54,7 @@
       
 
       <tr>
-        <th style="width:25%;font-size:25px ">EXERCICE BUDGETAIRE :</th>
+        <th style="width:25%;font-size:25px ">EXERCICE BUDGETAIRE :</th> 
                      <td style="font-size:25px"> {{detailOp.exercice_budget}} </td>
                     
       </tr>
@@ -348,6 +348,9 @@ th{
   text-align: left;
   font-size: 14px;
   line-height:1.6;
+}
+td {
+border: none !important;
 }
 
 </style>
