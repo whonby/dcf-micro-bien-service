@@ -25,7 +25,7 @@
                                             {{appelOffre.ref_appel || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{typeProcedureLibelle(appelOffre.type_appel) || 'Non renseigné'}}</td>
-                                              <td @dblclick="afficherModalModifierActeDepense(index)">
+                                              <td >
                                             {{appelOffre.numero_autorisation|| 'Non renseigné'}}</td>
 
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
@@ -133,7 +133,7 @@
                         <div class="control-group">
                             <label class="control-label">Numero d'autorisation :</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="" v-model="formData.mode_passation_id" :readonly="activation">
+                                <input type="text" class="span" placeholder="" v-model="formData.numero_autorisation" >
                             </div>
                         </div>
                         </td>
@@ -401,9 +401,10 @@ listeAppelOffre() {
 
 
 
-activation(){
-    return this.procedurePassations.filter(item => item.type_procedure_id==8);
-},
+// activation(){
+//     ret 
+//     return this.procedurePassations.filter(item => item.type_procedure_id==8);
+// },
 
 
 affichierObjetMarche() {
