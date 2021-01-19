@@ -106,13 +106,13 @@
             </router-link>
           </li>
          <li class="divider"></li>
-         <li>
+         <!-- <li>
            
              <router-link :to="{name:'planSourceFin'}" tag="a">
               <i class="icon-check"></i>Plan source de financement
             </router-link>
           </li>
-         <li class="divider"></li>
+         <li class="divider"></li> -->
         </ul>
       </li>
       <!-- fonctionnelle
@@ -189,12 +189,17 @@
             </router-link>
           </li>
           <li class="divider"></li>
+<<<<<<< HEAD
           <li>
             <router-link :to="{name: 'StructureInfrastructure'}" tag="a">
+=======
+          <!-- <li>
+            <router-link :to="{name: ''}" tag="a">
+>>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
               <i class="icon-key"></i> Structure des Infrastructures
             </router-link>
           </li>
-          <li class="divider"></li>
+          <li class="divider"></li> -->
         </ul>
       </li>
      <li class="dropdown" id="lesPlans">
@@ -261,12 +266,17 @@
             </router-link>
           </li>
           <li class="divider"></li>
+<<<<<<< HEAD
            <li>
             <router-link :to="{name: 'PlanInfrastructure'}" tag="a">
+=======
+           <!-- <li>
+            <router-link :to="{name: ''}" tag="a">
+>>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
               <i class="icon-key"></i> Plan des Infrastructures
             </router-link>
           </li>
-          <li class="divider"></li>
+          <li class="divider"></li> -->
         </ul>
       </li>
       <li class="dropdown" id="Depense">

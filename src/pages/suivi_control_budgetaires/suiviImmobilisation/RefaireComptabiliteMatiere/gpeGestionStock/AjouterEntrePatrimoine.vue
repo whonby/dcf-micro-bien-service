@@ -1537,7 +1537,7 @@ recupererCodeImputationBudgetaire() {
  afficheListeArticleParFamille() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.articles.filter(element => element.groupe_famille_id == id && element.famille_id == id1);
+          return this.articles.filter(element => element.equipement_id == id && element.famille_id == id1);
         }
       };
     },

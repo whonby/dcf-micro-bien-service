@@ -8,9 +8,17 @@
                     <thead>
                    <tr>
 
+<<<<<<< HEAD
                                         
                                         <th> Type procédure</th>
                                         <th>Reference appel</th>
+=======
+                                        <th>Reference appel - DAO</th>
+                                        <th> Type procedure</th>
+                                        <th>Mode de passation</th>
+                                        <th>Date emmission</th>
+                                        <th>Date et heure limite  </th>
+>>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
                                         <th>Objet appel</th>
                                         <th>Date début de publication</th>
 
@@ -30,7 +38,8 @@
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{typeProcedureLibelle(appelOffre.type_appel) || 'Non renseigné'}}</td>
 
-                                       
+                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.mode_passation_id || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
 
                                             {{formaterDate(appelOffre.date_emission) || 'Non renseigné'}}</td>
@@ -74,18 +83,54 @@
                             </div>
                         </div>
                             </td>
-                            <td>
+                               <td>
+             <div class="control-group">
+            <label class="control-label">Mode Passation</label>
+            <div class="controls">
+            
+               <select v-model="formData.mode_passation_id" class="span" >
+               <option v-for="plans in procedurePassations" :key="plans.id" 
+               :value="plans.id"> {{plans.libelle}} =>{{ typeProcedureLibelle(plans.type_procedure_id)}}</option>
+               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+           </select>
+            </div>
+          </div>
+                   </td> 
+                           
+                            </tr>
+                            
+                            <tr>
+                                 <td>
                         <div class="control-group">
+<<<<<<< HEAD
                             <label class="control-label">Référence  offre <code>*</code> :</label>
+=======
+                            <label class="control-label">Date debut de publication<code>*</code> :</label>
+>>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
                             <div class="controls">
-                                <input type="text" class="span" placeholder="Reference d'appel" v-model="formData.ref_appel">
+                                <input type="date" class="span" placeholder="Date emision" v-model="formData.date_emission">
                             </div>
                         </div>
                             </td>
+<<<<<<< HEAD
                             </tr>
                             </table>
                              <table> 
                             <tr>
+=======
+                                <td>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label> Reference  de DAO<code>*</code></label>
+                                  <input type="text" class="span" placeholder="Reference d'appel" v-model="formData.ref_appel">
+                                
+                            </div>
+                        </div>
+                                </td>
+                            
+                        </tr>
+                        <tr>
+>>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
                             <td colspan="2" width="">
                         <div class="control-group">
                             <label class="span2">Objet  offre :</label>
@@ -96,6 +141,7 @@
                         </div>
                             </td>
                             </tr>
+<<<<<<< HEAD
                             </table>
                              <table>       
                             <tr>
@@ -108,6 +154,9 @@
                             </div>
                         </div>
                                 </td>
+=======
+                        <tr>
+>>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
                                 <td>
                         <div class="control-group">
                             <div class="controls">
@@ -116,10 +165,6 @@
                             </div>
                         </div>
                         </td>
-
-                        
-                        </tr>
-                        <tr>
                             <td>
                         <div class="control-group">
                             <div class="controls">
@@ -128,7 +173,15 @@
                             </div>
                         </div>
                         </td>
+
+
+                           
+                        </tr>
+                        <tr>
+                             <td>
+
                             <td>
+
                                 <div class="control-group">
                                     <label class="control-label">Date d'autorisation :</label>
                                     <div class="controls">
@@ -136,8 +189,6 @@
                                     </div>
                                 </div>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <div class="control-group">
                                     <label class="control-label"> Heure limites :</label>
@@ -189,7 +240,23 @@
                             </div>
                         </div>
                             </td>
-                                <td >
+                                <td>
+             <div class="control-group">
+            <label class="control-label">Mode Passation</label>
+            <div class="controls">
+            
+               <select v-model="edite_appel_offre.mode_passation_id" class="span" >
+               <option v-for="plans in procedurePassations" :key="plans.id" 
+               :value="plans.id"> {{plans.code}} => {{plans.libelle}}</option>
+           </select>
+            </div>
+          </div>
+                   </td> 
+                             
+                    </tr>
+                                 
+                            <tr>
+                                   <td >
                         <div class="control-group">
                             <label class="control-label">Référence  offre  :</label>
                             <div class="controls">
@@ -197,8 +264,17 @@
                             </div>
                         </div>
                             </td>
-                    </tr>
-                                   <tr>
+                             <td>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Date debut de publication</label>
+                                <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
+                            </div>
+                        </div>
+                                </td>
+                              
+                        </tr>
+                          <tr>
                             <td colspan="2" width="">
                         <div class="control-group">
                             <label class="control-label">Objet  offre :</label>
@@ -209,6 +285,7 @@
                         </div>
                             </td>
                             </tr>
+<<<<<<< HEAD
                             <tr>
                              <td>
                         <div class="control-group">
@@ -220,6 +297,11 @@
                                 </td>
                                 
                                  <td >
+=======
+                        <tr>
+                              
+                                 <td>
+>>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
                         <div class="control-group">
                             <div class="controls">
                                 <label>Date fin de publication </label>
@@ -227,11 +309,15 @@
                             </div>
                         </div>
                         </td>
+<<<<<<< HEAD
 
                        
                         </tr>
                         <tr>
                            <td>
+=======
+                             <td>
+>>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
                         <div class="control-group">
                             <div class="controls">
                                 <label>Numéro et date <code></code></label>
@@ -240,7 +326,10 @@
                         </div>
                         </td>
 
-                            <td>
+                           
+                        </tr>
+                        <tr>
+                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Date d'autorisation :</label>
                                     <div class="controls">
@@ -248,8 +337,6 @@
                                     </div>
                                 </div>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <div class="control-group">
                                     <label class="control-label"> Heure limites :</label>
@@ -298,9 +385,22 @@ export default {
     
     data(){
         return{
+<<<<<<< HEAD
         
         formData:{
               ref_appel:"",
+=======
+            imagePDF :"",
+        namePDF :"",
+        fichierPDF :"",
+            selectedFile:"",
+
+        formData:{
+              ref_appel:"",
+              
+              numero_autorisation:"",
+              mode_passation_id:"",
+>>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
                     type_appel:"",
                     financement:"",
                     nom_bailleurs:"",
@@ -312,8 +412,14 @@ export default {
             date_numero_autorisation:"",
             heure:""
         },
+        message_offre:"",
         edite_appel_offre:{
              	ref_appel:"",
+<<<<<<< HEAD
+=======
+                 numero_autorisation:"",
+                 mode_passation_id:"",
+>>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
                     type_appel:"",
                     financement:"",
                     nom_bailleurs:"",
@@ -422,6 +528,22 @@ typeProcedureLibelle() {
       };
     },
 
+    // recuperation de 
+    listePassation(){
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_procedure_id;
+      }
+      return 0
+        }
+      };
+    
+
+    }
+
       
       },
 
@@ -467,7 +589,11 @@ typeProcedureLibelle() {
                     imputation:"",
                     marche_id:"",
                     numero_autorisation:"",
+
+                    procedure_passation_id:"",
+
           heure:""
+
                 }
     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
     marcheObjet.attribue=1
@@ -503,9 +629,9 @@ formatageSomme:formatageSomme,
 
 <style scoped>
 .grdirModalActeEffet{
-     width: 900px;
+     width: 1000px;
  margin: 0 -530px;
- height: 550px;
+ height: 600px;
 
 }
 </style>

@@ -68,8 +68,8 @@
             <td>
               <div class="control-group">
                 <label class="control-label">Compte</label>
-                 <select v-model="formEffetFinancier.compte_id" class="span" >
-                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.banq_id)" :key="varText.id"
+                 <select v-model="editActeEffetFinancier.compte_id" class="span" >
+                    <option v-for="varText in afficherCompteDynamique(editActeEffetFinancier.banq_id)" :key="varText.id"
                             :value="varText.id">{{afficherLeCompteEnFonctionDeLaBanque(varText.banq_id)}}</option>
                   </select>
                 <!-- <div class="controls " >
@@ -238,7 +238,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label" title=" ">Durée d'exécution contractuelle(jrs)</label>
+                <label class="control-label" title="">Durée d'exécution contractuelle(jrs)</label>
                 <div class="controls">
                  <input type="text"  readonly :value="nombreDejourCalculeModifier"
                         class="span"
@@ -574,7 +574,7 @@
 <!--        <span class=""><i class="icon-trash"></i></span></button></div>-->
     </div>
 
-    <table class="table table-bordered table-striped">
+    <!-- <table class="table table-bordered table-striped">
       <thead>
       <tr>
         <th>Ref offre</th>
@@ -612,7 +612,7 @@
 
       </tr>
       </tbody>
-    </table>
+    </table> -->
     <table class="table table-bordered table-striped" v-if="macheid">
       <thead>
       <tr>
@@ -705,6 +705,28 @@
               <div class="control-group">
                 <label class="control-label">Entreprise</label>
                 <div class="controls" style="font-size:20px">
+                  <!-- <input
+                      type="text"
+                      :value="nom_candidata"
+                      class="span"
+                      readonly
+                  /> -->
+                   <select v-model="formEffetFinancier.entreprise_id" class="span">
+                    <option v-for="varText in entreprises" :key="varText.id"
+                            :value="varText.id">{{varText.raison_sociale}}</option>
+                  </select>
+                </div>
+
+
+              </div>
+
+
+            </td>
+            <!-- <td>
+
+              <div class="control-group">
+                <label class="control-label">Entreprise</label>
+                <div class="controls" style="font-size:20px">
                   <input
                       type="text"
                       :value="nom_candidata"
@@ -718,14 +740,15 @@
               </div>
 
 
-            </td>
+            </td> -->
+            
 
             <td>
               <div class="control-group">
                 <label class="control-label">Banque</label>
                 <div class="controls" >
                   <select v-model="formEffetFinancier.banq_id" class="span" >
-                    <option v-for="varText in afficherBanqueDynamiqueId(affichierIdEntrepriseSelectionner(nom_candidata))" :key="varText.id"
+                    <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
                             :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                   </select>
 
@@ -746,6 +769,7 @@
               </div>
 
             </td>
+            
 
             <!-- <td>
               <div class="control-group">
@@ -1251,7 +1275,9 @@
                 </div>
               </div>
             </td>
-            <td>
+            
+            
+            <!-- <td>
 
               <div class="control-group">
                 <label class="control-label">Entreprise</label>
@@ -1269,7 +1295,7 @@
               </div>
 
 
-            </td>
+            </td> -->
 
             <td>
               <div class="control-group">
@@ -1370,7 +1396,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label"> Date d'approbation</label>
+                <label class="control-label"> date d'approbation</label>
                 <div class="controls">
                   <input
                       type="date"

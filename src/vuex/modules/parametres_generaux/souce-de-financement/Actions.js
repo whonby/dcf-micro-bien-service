@@ -13,14 +13,10 @@ export  function getSourceFinancement({commit}){
     }).catch(error => console.log(error)))
 }
 
+
 // ajouter source de financement
 export function ajouterSourceFinancement({commit}, objetAjout){
-asyncLoading( axios.post('/add_source_financement' ,{
-    code:objetAjout.code,
-    libelle:objetAjout.libelle,
-    sigle:objetAjout.sigle
-
-})).then(varSourceFinancement => {
+asyncLoading( axios.post('/add_source_financement', objetAjout)).then(varSourceFinancement => {
      if(varSourceFinancement.status == 201){
          commit('AJOUTER_SOURCE_FINANCEMENT', varSourceFinancement.data)
          this.$app.$notify({
@@ -47,11 +43,7 @@ export function supprimerSourceFinancement({commit}, id){
 //modifier la source de financement
 export function modifierFinancement({commit}, source_financement){
 
-  asyncLoading(  axios.put('/update_source_financement/' + source_financement.id ,{
-    code:source_financement.code,
-    libelle:source_financement.libelle,
-    sigle:source_financement.sigle
-})).then(response => {
+  asyncLoading(  axios.put('/update_source_financement/' + source_financement.id)).then(response => {
         commit('MODIFIER_SOURCE_FINANCEMENT', response.data)
         this.$app.$notify({
             title: 'success ',

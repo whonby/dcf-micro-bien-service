@@ -93,7 +93,7 @@ import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import ListeDuStockparUa from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/ListeDuStockparUa'
 import listeDesUaDansPatrimoine from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierAffectation/listeDesUaDansPatrimoine.vue'
-import ReparationEquipement from '../../../suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/ReparationEquipement'
+import ReparationEquipement from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierReparationEtEntretien/listeUniteAdministrativeReparation.vue'
 import UaEquipementSortant from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/SortiDuPatrimoine/UaEquipementSortant.vue'
 import Inventaire from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/Inventaire/Inventaire.vue'
 // import historisqueDemandeParService from '../docAffectationImmo/historisqueDemandeParService'

@@ -38,6 +38,8 @@ import detailMarcheParEntrepriseHors from '../../pages/Hors_sib/marcheParEntrepr
 import cycleDeChaqueLotEnExecution from '../../pages/Hors_sib/marche_hors_sib_investissement/AfficheExecutionDesMarches/cycleDeChaqueLotEnExecution';
 import AjouterDecompte from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierDecompte/AjouterDecompte.vue';
 import AjouterDecomptePro from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierDecompte/AjouterDecomptePro.vue';
+import DetailGreAGre from '../../pages/bien_service/DossierProcedureGreAGre_Convention/DetailGreAGre.vue'
+import DetailGreHorsSib from '../../pages/Hors_sib/marche_hors_sib/DetailGreHorsSib.vue'
 const marcheHorSibRoutes =[
     {
         path: "/liste-Reception-Des-Lots",
@@ -209,6 +211,17 @@ const marcheHorSibRoutes =[
         path:"/detail-hors-sib/:id",
         name:"detail_hors_sib",
         component:detailMarcheHorsSib
+    },
+    {
+        path:"/detail-gre-a-gre/:id",
+        name:"detailGre",
+        component:DetailGreAGre
+    },
+    {
+        path:"/detail-gre-a-gre/:id",
+        name:"detailGreAGre",
+        component:DetailGreHorsSib
     }
+
 ]
 export default marcheHorSibRoutes;

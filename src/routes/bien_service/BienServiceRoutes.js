@@ -102,7 +102,11 @@ import DetailInforTableBordUniteAd from "../../pages/TableauBord/DetailInforTabl
 import  marcheHorsppm from "../../pages/gestionMarche/marcheHorsppm.vue"
 import listeMarcheSib from "../../pages/gestionMarche/listeMarcheSib.vue"
 import ajouterMarcheSib from "../../pages/gestionMarche/ajouterMarcheSib.vue"
+
+import AnoBailleur1 from "../../pages/bien_service/component/AnoBailleur/AnoBailleur1.vue"
+
 import FicheContratualisation from "../../pages/Gestion_des_Rapports/marche/FicheContratualisation"
+
 
 const BienServiceRoutes = [
     {
@@ -126,6 +130,11 @@ const BienServiceRoutes = [
         path:"/ajouter-marche-sib",
         name:"ajouterMarche",
         component:ajouterMarcheSib
+    },
+    {
+        path:"/bailleur",
+        name:"baille1",
+        component:AnoBailleur1
     },
     {
         path:"/marche-hors-ppm",
