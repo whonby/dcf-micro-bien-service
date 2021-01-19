@@ -54,7 +54,7 @@
       
 
       <tr>
-        <th style="width:25%;font-size:25px ">EXERCICE BUDGETAIRE :</th>
+        <th style="width:25%;font-size:25px ">EXERCICE BUDGETAIRE :</th> 
                      <td style="font-size:25px"> {{detailOp.exercice_budget}} </td>
                     
       </tr>
