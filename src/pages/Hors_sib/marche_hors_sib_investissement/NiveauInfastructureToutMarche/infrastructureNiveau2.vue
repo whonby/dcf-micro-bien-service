@@ -404,7 +404,7 @@ InfastructureLibelleNiveau1() {
       return this.marcheHorSibFiltre.filter(type => {
         return (
           type.objet.toLowerCase().includes(st)  ||
-          type.montant_marche.toLowerCase().includes(st) 
+          type.reference_marche.toLowerCase().includes(st) 
         );
       });
     },

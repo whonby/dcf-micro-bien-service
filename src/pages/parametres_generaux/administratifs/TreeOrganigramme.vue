@@ -74,7 +74,7 @@ export default {
           if(objet) 
           return objet.libelle
         }
-        if(id1!=null && id1!=""){
+         if(id1!=null && id1!=""){
           const objet = this.directions.find(item => item.id==id1)
           if(objet) 
           return objet.libelle
@@ -89,9 +89,7 @@ export default {
           if(objet) 
           return objet.libelle
         }
-        
-        
-        
+       
       }
       
 },

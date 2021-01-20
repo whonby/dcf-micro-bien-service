@@ -537,7 +537,7 @@ export default {
 // methode pour maper notre guetter
 ...mapGetters('personnelUA', ['all_acteur_depense','fonctions']),
    ...mapGetters('parametreGenerauxAdministratif', [ 'getterstructuresOrganisationUa',
-    'getterplanOrganisationUa']) ,
+    'getterplanOrganisationUa']),
 dcf:dcf,
 cf:cf,
 admin:admin,
