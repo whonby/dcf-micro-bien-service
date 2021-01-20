@@ -614,8 +614,18 @@
                     <td
                       @dblclick="ModificationVehicule(stock.id)"
                     >{{formatageSomme(parseFloat(0)) || 'Non renseigné'}}</td>
-                  
-                       <td>
+                  <td >
+                         <router-link
+                        :to="{name : 'AjouterReparationVehicule', params: {id:stock.id}}"
+                        class="btn btn-info"
+                        title=""
+                      >
+                        <span>
+                          <i class="icon  icon-plus"></i>
+                        </span>
+                      </router-link>
+                    </td>
+                       <!-- <td>
                        <router-link
                         :to="{name : 'DetailVehiculeGestionStock', params: {id:stock.id}}"
                         class="btn btn-success"
@@ -632,7 +642,7 @@
                           <i class="icon icon-trash"> Supprimer</i>
                         </span>
                       </button>
-                    </td>
+                    </td> -->
                   </tr>
                  <tr>
                    <td></td>
