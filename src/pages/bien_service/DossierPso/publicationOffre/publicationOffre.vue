@@ -73,7 +73,7 @@
                             </div>
                         </div>
                             </td>
-                               <td>
+                               <td colspan="2">
              <div class="control-group">
             <label class="control-label">Mode Passation</label>
             <div class="controls">
@@ -98,7 +98,7 @@
                             </div>
                         </div>
                             </td>
-                                <td>
+                                <td colspan="2">
                         <div class="control-group">
                             <div class="controls">
                                 <label> Reference  de DAO<code>*</code></label>
@@ -110,11 +110,11 @@
                             
                         </tr>
                         <tr>
-                            <td colspan="2" width="">
+                            <td colspan="3" width="">
                         <div class="control-group">
                             <label class="control-label">Objet  DAO :</label>
                             <div class="controls">
-                                 <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
+                                 <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span" rows="3" placeholder="Entre le  text ..."></textarea>
                     
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                             </div>
                         </div>
                         </td>
-                            <td>
+                            <td colspan="2">
                         <div class="control-group">
                             <label class="control-label">Numero d'autorisation :</label>
                             <div class="controls">
@@ -142,7 +142,6 @@
                            
                         </tr>
                         <tr>
-                             <td>
 
                             <td>
 
@@ -204,7 +203,7 @@
                             </div>
                         </div>
                             </td>
-                                <td>
+                                <td colspan="2">
              <div class="control-group">
             <label class="control-label">Mode Passation</label>
             <div class="controls">
@@ -219,15 +218,7 @@
                              
                     </tr>
                                  
-                            <tr>
-                                   <td >
-                        <div class="control-group">
-                            <label class="control-label">Reference de DAO  :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Reference d'appel" v-model="edite_appel_offre.ref_appel">
-                            </div>
-                        </div>
-                            </td>
+                            <tr>    
                              <td>
                         <div class="control-group">
                             <div class="controls">
@@ -236,10 +227,18 @@
                             </div>
                         </div>
                                 </td>
+                                <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Reference de DAO  :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Reference d'appel" v-model="edite_appel_offre.ref_appel">
+                            </div>
+                        </div>
+                            </td>
                               
                         </tr>
                           <tr>
-                            <td colspan="2" width="">
+                            <td colspan="3" width="">
                         <div class="control-group">
                             <label class="control-label">Objet de DAO :</label>
                             <div class="controls">
@@ -259,7 +258,7 @@
                             </div>
                         </div>
                         </td>
-                             <td>
+                             <td colspan="2">
                         <div class="control-group">
                             <label class="control-label">Numero d'autorisation :</label>
                             <div class="controls">

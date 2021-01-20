@@ -1216,7 +1216,7 @@ created() {
                 {
            return true
                 }
-                 else if(0 < this.budgetDisponible && procedure=="ED" || procedure=="CON")
+                 else if(this.budgetDisponible > 0 && procedure=="ED" || procedure=="CON")
                 {
                  return true
                 }
