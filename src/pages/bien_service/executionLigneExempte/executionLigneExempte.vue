@@ -104,7 +104,7 @@ afficherIDUA(
               <div class="control-group">
                 <label class="control-label">Type acte effet financier</label>
                 <div class="controls">
-                  <select v-model="formEffetFinancier.type_act_effet_id" class="span">
+                  <select v-model="formEffetFinancier.type_act_effet_id" class="span4">
                     <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
                             :value="varText.id">{{varText.libelle}}</option>
                   </select>
@@ -120,10 +120,10 @@ afficherIDUA(
                   <!-- <input
                       type="text"
                       :value="nom_candidata"
-                      class="span"
+                      class="span4"
                       readonly
                   /> -->
-                   <select v-model="formEffetFinancier.entreprise_id" class="span">
+                   <select v-model="formEffetFinancier.entreprise_id" class="span4">
                     <option v-for="varText in entreprises" :key="varText.id"
                             :value="varText.id">{{varText.raison_sociale}}</option>
                   </select>
@@ -139,7 +139,7 @@ afficherIDUA(
               <div class="control-group">
                 <label class="control-label">Banque</label>
                 <div class="controls" >
-                  <select v-model="formEffetFinancier.banq_id" class="span" >
+                  <select v-model="formEffetFinancier.banq_id" class="span4" >
                     <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
                             :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                   </select>
@@ -151,12 +151,12 @@ afficherIDUA(
             <td>
               <div class="control-group">
                 <label class="control-label">Compte</label>
-                 <select v-model="formEffetFinancier.compte_id" class="span" >
+                 <select v-model="formEffetFinancier.compte_id" class="span4" >
                     <option v-for="varText in afficherCompteDynamique(formEffetFinancier.banq_id)" :key="varText.id"
                             :value="varText.id">{{afficherLeCompteEnFonctionDeLaBanque(varText.banq_id)}}</option>
                   </select>
                 <!-- <div class="controls " >
-                  <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
+                  <input type="text"  class="span4" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
 
                 </div> -->
               </div>
@@ -179,7 +179,7 @@ afficherIDUA(
               <label class="control-label">Type de réparation</label>
               <div class="controls">
               
-                  <select v-model="formEffetFinancier.etatcontrat" class="span">
+                  <select v-model="formEffetFinancier.etatcontrat" class="span4">
                    <option></option>
                    <option value="1">Réparation ou Entrétien Véhicule</option>
                    <option value="2">Réparation ou Entrétien Mobilier & Matériel</option>
@@ -192,7 +192,7 @@ afficherIDUA(
               <div class="control-group">
                 <label class="control-label">Incidence financière</label>
                 <div class="controls">
-                  <select  v-model="formEffetFinancier.incidence_financiere" class="span">
+                  <select  v-model="formEffetFinancier.incidence_financiere" class="span4">
                     <option value="0">Oui</option>
                     <option value="1">Non</option>
                   </select>
@@ -210,7 +210,7 @@ afficherIDUA(
                   <input
                       type="text"
                       v-model="formEffetFinancier.numero_marche"
-                      class="span"
+                      class="span4"
                       placeholder="Saisir le numero "
                   />
                 </div>
@@ -227,7 +227,7 @@ afficherIDUA(
                 <label class="control-label" >Date de signature attributaire</label>
                 <div class="controls">
                   <input type="date" v-model="formEffetFinancier.date_attributaire"
-                         class="span"
+                         class="span4"
                          placeholder=""
                   />
                 </div>
@@ -237,8 +237,8 @@ afficherIDUA(
               <div class="control-group">
                 <label class="control-label">Date signature autorité contractante </label>
                 <div class="controls">
-                  <input type="text" v-model="formEffetFinancier.reference_act"
-                         class="span"
+                  <input type="date" v-model="formEffetFinancier.reference_act"
+                         class="span4"
                          placeholder="refence acte"
                   />
                 </div>
@@ -254,7 +254,7 @@ afficherIDUA(
                   <input
                       type="date"
                       v-model="formEffetFinancier.date_approbation"
-                      class="span"
+                      class="span4"
                       placeholder=""
                   />
                 </div>
@@ -270,7 +270,7 @@ afficherIDUA(
                   <input
                       type="text"
                       v-model="formEffetFinancier.autorite_approbation"
-                      class="span"
+                      class="span4"
                       placeholder=" "
                   />
                   <input type="hidden" v-model="formEffetFinancier.ua_id" />
@@ -287,7 +287,7 @@ afficherIDUA(
                 <label class="control-label">Date de debut d'execution prévisionnelle</label>
                 <div class="controls">
                   <input type="date" v-model="formEffetFinancier.date_odre_service"
-                         class="span"
+                         class="span4"
                          placeholder=""
                   />
                 </div>
@@ -299,7 +299,7 @@ afficherIDUA(
                 <label class="control-label" title=" ">Date de reception provisoire prévisionnelle </label>
                 <div class="controls">
                   <input type="date" v-model="formEffetFinancier.date_reception"
-                         class="span"
+                         class="span4"
                          placeholder=""
                   />
                 </div>
@@ -313,7 +313,7 @@ afficherIDUA(
                 <label class="control-label" title=" ">Date fin d'exécution prévisionnelle</label>
                 <div class="controls">
                   <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
-                         class="span"
+                         class="span4"
                          placeholder=""
                   />
                 </div>
@@ -327,7 +327,7 @@ afficherIDUA(
                 <label class="control-label" title=" ">Durée d'exécution contractuelle(jrs)</label>
                 <div class="controls">
                   <input type="text"  readonly :value="nombreDejourCalcule"
-                         class="span"
+                         class="span4"
 
                   />
                 </div>
@@ -338,10 +338,10 @@ afficherIDUA(
           <tr>
              <td>
               <div class="control-group">
-                <label class="control-label" title=" ">Date de reception definitive</label>
+                <label class="control-label" title=" ">Date de réception définitive</label>
                 <div class="controls">
                   <input type="date" v-model="formEffetFinancier.date_reception"
-                         class="span"
+                         class="span4"
                          placeholder=""
                   />
                 </div>
@@ -368,7 +368,7 @@ afficherIDUA(
               <div class="control-group">
                 <label class="control-label">exonéré</label>
                 <div class="controls">
-                  <select v-model="formEffetFinancier.exonere" class="span">
+                  <select v-model="formEffetFinancier.exonere" class="span5">
 
                     <option value="0">Oui</option>
                     <option value="1">Non</option>
@@ -385,7 +385,7 @@ afficherIDUA(
                       type="number"
 
                       :value="afficherEnorere" 
-                      class="span"
+                      class="span5"
                       readonly
                   />
                 </div>
@@ -397,7 +397,7 @@ afficherIDUA(
                 <label class="control-label">Montant acte/réel du marché (HT)</label>
                 <div class="controls">
                   <input type="text" v-model="formEffetFinancier.montant_act_ht"
-                         class="span"
+                        class="span5"
                          placeholder="Saisir le montant "
                   />
                 </div>
@@ -414,7 +414,7 @@ afficherIDUA(
                       type="number"
                       :value="montantTva" 
 
-                      class="span"
+                      class="span5"
                       readonly
                   />
 
@@ -429,7 +429,7 @@ afficherIDUA(
                       type="number"
                       :value="montantHTt" 
 
-                      class="span"
+                      class="span5"
                       readonly
                   />
 
@@ -445,13 +445,13 @@ afficherIDUA(
            <tr>
              <td >
               <div class="control-group">
-                <label class="control-label" >Taux Avance Demarrage</label>
+                <label class="control-label" >Taux Avance Démarrage</label>
                 <div class="controls">
                   <input
                       type="number"  v-model="formEffetFinancier.taux_avance_demarrage"
 
                       placeholder="saisir le taux Avance Demarrage"
-                      class="span"
+                     class="span4"
 
                   />
 
@@ -460,12 +460,12 @@ afficherIDUA(
             </td>
               <td>
               <div class="control-group">
-                <label class="control-label">Avance Demarrage Ht</label>
+                <label class="control-label">Avance Démarrage Ht</label>
                 <div class="controls">
 
 
                   <input type="text" v-model="formEffetFinancier.avance_demarrage_ht"
-                         class="span"
+                         class="span4"
                          placeholder="Saisir le montant "
                   />
 
@@ -474,13 +474,13 @@ afficherIDUA(
             </td>
              <td>
                <div class="control-group">
-                <label class="control-label" >TVA (Avance Demarrage)</label>
+                <label class="control-label" >TVA (Avance Démarrage)</label>
                 <div class="controls">
                   <input
                       type="number"
                       :value="avanceDemarrageMontantTva" 
 
-                      class="span"
+                      class="span4"
                       readonly
                   />
 
@@ -489,13 +489,13 @@ afficherIDUA(
              </td>
              <td >
               <div class="control-group">
-                <label class="control-label" >Montant Avance Demarrage TTC</label>
+                <label class="control-label" >Montant Avance Démarrage TTC</label>
                 <div class="controls">
                   <input
                       type="number"
                       :value="avanceDemarrage" 
 
-                      class="span"
+                      class="span4"
                       readonly
                   />
 
@@ -516,7 +516,7 @@ afficherIDUA(
                       type="number"  v-model="formEffetFinancier.taux_cautionnemt"
 
                       placeholder="saisir le taux du cautionnement"
-                      class="span"
+                      class="span4"
 
                   />
 
@@ -530,7 +530,7 @@ afficherIDUA(
                   <input type="text"  :value="afficheMontantHorsTaxeDuCautionnement" 
 
 
-                         class="span"
+                         class="span4"
                          readOnly
                   />
 
@@ -545,7 +545,7 @@ afficherIDUA(
                       type="number"  :value="afficherMontantTvaDuCautionnement" 
 
 
-                      class="span"
+                      class="span4"
                       readonly
                   />
 
@@ -560,7 +560,7 @@ afficherIDUA(
                       type="number"
 
                       :value="afficherMontantTTCDuCautionnement" 
-                      class="span"
+                      class="span4"
                       readonly
                   />
 
@@ -581,7 +581,7 @@ afficherIDUA(
                       type="number"  v-model="formEffetFinancier.taux_retenue_garantie"
                       placeholder="saisir le taux de retenue de garantie"
 
-                      class="span"
+                      class="span4"
 
                   />
 
@@ -596,7 +596,7 @@ afficherIDUA(
                       type="text"  :value="afficherMontantHorsTaxeRetenuGarantie" 
                       placeholder="saisir le montant hors taxe du dispositif retenu"
 
-                      class="span"
+                      class="span4"
                       readonly
                   />
 
@@ -611,7 +611,7 @@ afficherIDUA(
                       type="number"  :value="afficherMontantTvaTaxeRetenuGarantie" 
 
 
-                      class="span"
+                      class="span4"
                       readonly
                   />
 
@@ -626,7 +626,7 @@ afficherIDUA(
                       type="number"  :value="afficherMontantRetenueGarantie" 
 
 
-                      class="span"
+                      class="span4"
                       readonly
                   />
 

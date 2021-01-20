@@ -53,14 +53,17 @@
 
   <!--Ajout offre fin-->
 
-  <div id="addd10" class="modal hide modaloffreFin" style="width: 1000px !important; left: 550px; ">
+  <div id="addd10" class="modal hide modaloffreFin" style="width: 50% !important; left: 650px; ">
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Ajouter l'offre financière</h3>
     </div>
     <div class="modal-body">
+      <!-- <table class="table table-bordered table-striped">
+       
+      </table> -->
       <table class="table table-bordered table-striped">
-        <tr>
+         <tr>
           <td>
             <div class="control-group">
               <label>Offre</label>
@@ -70,7 +73,7 @@
               </div>
             </div>
           </td>
-          <td>
+          <td colspan="2">
             <div class="control-group">
               <label>Lot</label>
               <div class="controls">
@@ -82,8 +85,6 @@
             </div>
           </td>
         </tr>
-      </table>
-      <table class="table table-bordered table-striped">
         <tr>
           <td>
             <div class="control-group">
@@ -105,21 +106,18 @@
             </div>
 
           </td>
-
-        </tr>
-        <tr>
-
-          <td>
+<td>
 
             <div class="control-group">
               <label class="control-label">Rabais (%) :</label>
               <div class="controls">
-                <input type="number" class="span" placeholder="prix unitaire" v-model="formOffreFinanciere.Rabais">
+                <input type="number" class="span" placeholder="Rabais" v-model="formOffreFinanciere.Rabais">
               </div>
             </div>
 
           </td>
         </tr>
+        
 
 
       </table>
