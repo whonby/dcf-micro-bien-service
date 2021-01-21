@@ -18,7 +18,7 @@
                             <div class="span4">
 
                             </div>
-                            <div class="span4" align="right">
+                            <div class="span4" align="right" v-if="attribue==2">
                                 <router-link :to="{ name: 'FicheContratualisation', params: { id: detail_marche.id }}"
                                              class="btn btn-primary" >
                                     <span class=""><i class="icon-file"></i> Fiche de contratualisation</span>
