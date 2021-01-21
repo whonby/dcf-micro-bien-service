@@ -570,16 +570,16 @@
                 <input type="search" placeholder v-model="search" />
               </div> -->
                     
-                     <th style="width:5%;text-align:center">Article</th>
-                     <th style="width:5%;text-align:center">Immatriculation</th>
-                     <th style="width:5%;text-align:center">Marque</th>
-                     <th style="width:5%;text-align:center">Modèle</th>
-                     <th style="width:5%;text-align:center">No Chassis/No série</th>
+                     <th style="width:12%;text-align:center">Article</th>
+                     <th style="width:12%;text-align:center">Immatriculation</th>
+                     <th style="width:12%;text-align:center">Marque</th>
+                     <th style="width:12%;text-align:center">Modèle</th>
+                     <th style="width:12%;text-align:center">No Chassis/No série</th>
                     <!-- <th>Quantité Initiale</th>  -->
-                    <th style="width:5%;text-align:center">Quantité</th>
-                    <th style="width:5%;text-align:center">Valeur d'acquisition</th>
-                   <th style="width:5%;text-align:center">Valeur nette comptable</th>
-                    <th style="width:12%" colspan="2">Action</th>
+                    <th style="width:12%;text-align:center">Quantité</th>
+                    <th style="width:12%;text-align:center">Valeur d'acquisition</th>
+                   <th style="width:12%;text-align:center">Valeur nette comptable</th>
+                    <th style="width:8%" colspan="">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -614,8 +614,18 @@
                     <td
                       @dblclick="ModificationVehicule(stock.id)"
                     >{{formatageSomme(parseFloat(0)) || 'Non renseigné'}}</td>
-                  
-                       <td>
+                  <td >
+                         <router-link
+                        :to="{name : 'AjouterReparationEntretien', params: {id:stock.id}}"
+                        class="btn btn-info"
+                        title=""
+                      >
+                        <span>
+                          <i class="icon  icon-plus"></i>
+                        </span>
+                      </router-link>
+                    </td>
+                       <!-- <td>
                        <router-link
                         :to="{name : 'DetailVehiculeGestionStock', params: {id:stock.id}}"
                         class="btn btn-success"
@@ -632,7 +642,7 @@
                           <i class="icon icon-trash"> Supprimer</i>
                         </span>
                       </button>
-                    </td>
+                    </td> -->
                   </tr>
                  <tr>
                    <td></td>

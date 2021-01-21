@@ -1704,6 +1704,5 @@ afficherModalTypeRecretement() {
      width: 93%;
  margin: 0 -800px;
  
-
 }
 </style>

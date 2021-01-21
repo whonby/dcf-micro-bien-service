@@ -43,7 +43,8 @@
 </table>
 <br/>
       <br/>
-    <div style="border: 2px double #000;text-align:center;font-size:25px;width:100%;height:100px;">
+    <div style="border: 2px double #000;text-align:center;font-size:25px;width:100%;height:55px;">
+     
       <h2>FICHE ANNEXE DE CONTRÔLE DE LA REALITE DU SERVICE FAIT</h2>
       
       <!-- <P>INSTITUEE PAR L'ARRETE N° 638 MEF/CAB/YKM DU 20 JUILLET 2009</P> -->

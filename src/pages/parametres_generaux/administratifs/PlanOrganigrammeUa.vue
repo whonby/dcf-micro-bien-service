@@ -203,13 +203,23 @@
                 <div class="control-group" >
                   <label class="control-label">Service</label>
                   <div class="controls">
-                    <select v-model="nouvelElementEnfant.libelle" class="span5" >
+                    <!-- <select v-model="nouvelElementEnfant.libelle" class="span5" >
                       <option
-                        v-for="typeUniteA in groupeServiceNorme"
-                        :key="typeUniteA[0].id"
-                        :value="typeUniteA[0].service_id"
-                      >{{afficheServiceLibelle(typeUniteA[0].service_id)}}</option>
-                    </select>
+                        v-for="typeUniteA in services"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select> -->
+                     <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="services"
+                                                   v-model="nouvelElementEnfant.libelle"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                   </div>
                 </div>
             </template>
@@ -217,13 +227,23 @@
  <div class="control-group" >
                   <label class="control-label">Fonction</label>
                   <div class="controls">
-                    <select v-model="nouvelElementEnfant.libelle" class="span5">
+                    <!-- <select v-model="nouvelElementEnfant.libelle" class="span5">
                       <option
-                        v-for="typeUniteA in groupeFonctionNormeEquipe"
-                        :key="typeUniteA[0].id"
-                        :value="typeUniteA[0].fonction_id"
-                      >{{afficheFonctionLibelle(typeUniteA[0].fonction_id)}}</option>
-                    </select>
+                        v-for="typeUniteA in fonctions"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select> -->
+                    <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="fonctions"
+                                                   v-model="nouvelElementEnfant.libelle"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                   </div>
                 </div>
             </template>
@@ -329,13 +349,23 @@
                 <div class="control-group" >
                   <label class="control-label">Service</label>
                   <div class="controls">
-                    <select v-model="editPlanOrganigrammeUa.libelle" class="span5" >
+                    <!-- <select v-model="editPlanOrganigrammeUa.libelle" class="span5" >
                       <option
-                        v-for="typeUniteA in groupeServiceNorme"
-                        :key="typeUniteA[0].id"
-                        :value="typeUniteA[0].libelle"
-                      >{{afficheServiceLibelle(typeUniteA[0].service_id)}}</option>
-                    </select>
+                        v-for="typeUniteA in services"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select> -->
+                     <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="services"
+                                                   v-model="editPlanOrganigrammeUa.libelle"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                   </div>
                 </div>
             </template>
@@ -352,13 +382,23 @@
  <div class="control-group" >
                   <label class="control-label">Fonction</label>
                   <div class="controls">
-                    <select v-model="editPlanOrganigrammeUa.libelle" class="span5">
+                    <!-- <select v-model="editPlanOrganigrammeUa.libelle" class="span5">
                       <option
-                        v-for="typeUniteA in groupeFonctionNormeEquipe"
-                        :key="typeUniteA[0].id"
-                        :value="typeUniteA[0].libelle"
-                      >{{afficheFonctionLibelle(typeUniteA[0].fonction_id)}}</option>
-                    </select>
+                        v-for="typeUniteA in fonctions"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select> -->
+                    <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="fonctions"
+                                                   v-model="editPlanOrganigrammeUa.libelle"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                   </div>
                 </div>
             </template>
@@ -413,16 +453,21 @@
   
 </template>
    
+
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
 import {admin,dcf,cf,noDCfNoAdmin} from '../../../Repositories/Auth';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
+import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
 import TreeOrganigramme from './TreeOrganigramme'
 export default {
   components: {
-    TreeOrganigramme
+    TreeOrganigramme,
+    ModelListSelect,
+
   },
   data() {
     return { 
@@ -492,7 +537,7 @@ export default {
 // methode pour maper notre guetter
 ...mapGetters('personnelUA', ['all_acteur_depense','fonctions']),
    ...mapGetters('parametreGenerauxAdministratif', [ 'getterstructuresOrganisationUa',
-    'getterplanOrganisationUa']) ,
+    'getterplanOrganisationUa']),
 dcf:dcf,
 cf:cf,
 admin:admin,
