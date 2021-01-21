@@ -53,7 +53,7 @@
 
   <!--Ajout offre fin-->
 
-  <div id="addd10" class="modal hide modaloffreFin" style="width: 50% !important; left: 650px; ">
+  <div id="addd10" class="modal hide modaloffreFin" style="width: 70% !important; left: 650px; ">
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Ajouter l'offre financière</h3>
@@ -63,17 +63,8 @@
        
       </table> -->
       <table class="table table-bordered table-striped">
-         <tr>
-          <td>
-            <div class="control-group">
-              <label>Offre</label>
-              <div class="controls">
-                <input v-if="listeAppelOffre(dossier_candidature.marche_id)" type="text" class="span" placeholder="Offre"
-                       v-model="listeAppelOffre(dossier_candidature.marche_id).ref_appel" disabled>
-              </div>
-            </div>
-          </td>
-          <td colspan="2">
+        <tr>
+           <td colspan="2">
             <div class="control-group">
               <label>Lot</label>
               <div class="controls">
@@ -85,8 +76,17 @@
             </div>
           </td>
         </tr>
-        <tr>
+         <tr>
           <td>
+            <div class="control-group">
+              <label>Offre</label>
+              <div class="controls">
+                <input v-if="listeAppelOffre(dossier_candidature.marche_id)" type="text" class="span" placeholder="Offre"
+                       v-model="listeAppelOffre(dossier_candidature.marche_id).ref_appel" disabled>
+              </div>
+            </div>
+          </td>
+         <td>
             <div class="control-group">
               <label class="control-label">Montant total ht :</label>
               <div class="controls">
@@ -94,6 +94,9 @@
               </div>
             </div>
           </td>
+        </tr>
+        <tr>
+          
 
 
           <td>
@@ -124,7 +127,7 @@
 
     </div>
     <div class="modal-footer">
-      <button @click.prevent="ajouterOffreF()" class="btn btn-primary">Ajouer</button>
+      <button @click.prevent="ajouterOffreF()" class="btn btn-primary">Ajouter</button>
       <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
       <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
   </div>

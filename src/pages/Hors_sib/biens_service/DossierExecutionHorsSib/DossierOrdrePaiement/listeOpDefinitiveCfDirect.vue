@@ -31,7 +31,7 @@
                     <div class="control-group">
                             <label class="control-label">Famille de Motif </label>
                             <div class="controls">
-                               <select v-model="editMandat8.motifcf" class="span">
+                               <select v-model="editMandat.famille_motif_mandat" class="span">
                                  <option value=""></option>
                                 <option v-for="varText in AffichierElementParent" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
@@ -46,7 +46,7 @@
                             <div class="controls">
                                <select v-model="editMandat.motif" class="span">
                                  <option value=""></option>
-                                <option v-for="varText in AffichierElementEnfant(editMandat8.motifcf)" :key="varText.id"
+                                <option v-for="varText in AffichierElementEnfant(editMandat.famille_motif_mandat)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
                             
@@ -59,7 +59,7 @@
                         <div class="control-group">
                             <label class="control-label">Autres Motif</label>
                             <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editMandat.autre_motif" :readonly="griserAutreMotif">
+                              <textarea  class="span" row = "6" v-model="editMandat.autre_motif_mandat" :readonly="griserAutreMotif">
                               </textarea>
                             </div>
                           </div>
@@ -160,6 +160,9 @@
                                 <!-- <th>Service béneficiaire</th> -->
                                 <th >Date béneficiaire</th>
                                 <th title="Date validation Cf">Date décision CF</th>
+                                <th>Famille motif cf</th>
+                                <th>Motif CF</th>
+                                <th>Autres Motif</th>
                                 <th>Décision CF</th>
                                 <!-- <th title="Observation Controleur financier">Observation CF</th> -->
                                 <th>Action</th>
@@ -183,6 +186,9 @@
                      
                        <td >{{(formaterDate(Manda.date_decision_emetteur)) || 'Non renseigné'}}</td>
                    <td >{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
+                   <td >{{libelleDecision(Manda.famille_motif_mandat) || 'Non renseigné'}}</td>
+                   <td >{{libelleDecision(Manda.motif) || 'Non renseigné'}}</td>
+                   <td >{{Manda.autre_motif_mandat || 'Non renseigné'}}</td>
                     <td v-if="Manda.decision_emetteur == 1">
                         <button v-if="Manda.decision_cf == 8"  class="btn  btn-success" @click="afficheDecisionCf(Manda.id)" >                        
                      
@@ -385,6 +391,18 @@ return objJson.id
       return id => {
         if (id != null && id != "") {
           return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
+    libelleDecision() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_Decision.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 'Non renseigné'
         }
       };
     },

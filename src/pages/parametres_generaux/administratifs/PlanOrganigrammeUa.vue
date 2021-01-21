@@ -156,7 +156,7 @@
  <div id="modalAjouterElementEnfant" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter un plan organigramme UA</h3>
+                <h3>{{afficherTailleStuctureService(this.parentDossier.ua_id)}}Ajouter un plan organigramme UA{{afficherIdStructureOrganigramme(this.nouvelElementEnfant.structure_organigramme_ua_id)}}</h3>
               </div>
               <div class="modal-body">
                 <table class="table table-bordered table-striped">
@@ -225,7 +225,7 @@
             </template>
             <template v-else-if="afficherIdStructureOrganigramme(nouvelElementEnfant.structure_organigramme_ua_id) == afficherTailleStuctureFonction(parentDossier.ua_id)">
  <div class="control-group" >
-                  <label class="control-label">Fonction</label>
+                  <label class="control-label">{{afficherIdStructureOrganigramme(this.nouvelElementEnfant.structure_organigramme_ua_id)}}Fonction{{nouvelElementEnfant.libelle}}</label>
                   <div class="controls">
                     <!-- <select v-model="nouvelElementEnfant.libelle" class="span5">
                       <option
@@ -249,7 +249,7 @@
             </template>
             <template v-else-if="afficherIdStructureOrganigramme(nouvelElementEnfant.structure_organigramme_ua_id) == afficherTailleStuctureDirection(parentDossier.ua_id)">
                 <div class="control-group" >
-                  <label class="control-label">Direction</label>
+                  <label class="control-label">{{nouvelElementEnfant.libelle}}Direction{{parentDossier.libelle}}</label>
                   <div class="controls">
                     <select v-model="nouvelElementEnfant.libelle" class="span5" >
                       <option
@@ -563,6 +563,16 @@ NivauStructureParUa() {
         }
       };
     },
+    afficheid(){
+  return id =>{
+        if(id!=null && id!=""){
+          const objet = this.directions.find(item => item.id==id)
+          if(objet) 
+          return objet.d_ua_id
+        }
+        return null
+      }
+},
  afficherUAParDroitAccess() {
        // const st = this.search.toLowerCase();
         if (this.cf){
@@ -934,7 +944,8 @@ this.$("#modalAjouterElementEnfant").modal('hide');
       fonction_id:this.afficheIdFonctionLibelle(this.nouvelElementEnfant.libelle),
        serviceua_id:this.nouvelElementEnfant.libelle,
        ua_id:this.afficherIdUaparDossierParent(this.parentDossier.ua_id),
-         code:this.parentDossier.code
+         code:this.parentDossier.code,
+          libelle:this.afficheIdFonctionLibelle(this.nouvelElementEnfant.libelle)
       };
        this.ajouterPlanOrganigrammeUa(nouvelObjet2)
 this.$("#modalAjouterElementEnfant").modal('hide');

@@ -92,17 +92,20 @@
                
 <router-link :to="{ name: 'detailExecutionHorsSib', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail execution Marche Gestion Hors Sib">
-                  <span class=""><i class="  icon-random"></i></span>
+                  <span class=""><i class="  icon-random"></i> Détail exécution</span>
                    </router-link> 
 
           <router-link :to="{ name: 'ListeImageMarche', params: { id: marche.id }}"
-                class="btn btn-default " title="Liste Image">
-                  <span class=""><i class="icon-camera"></i></span>
+                class="btn btn-info " title="Liste Image">
+                  <span class=""><i class="icon-camera"></i> Caméra</span>
                    </router-link> 
 
-
+<router-link :to="{ name: 'AjouterTacheParMarche', params: { id: marche.id }}"
+                class="btn btn-success " title="Ajouter tache">
+                  <span class=""><i class="icon-align-justify"></i> Ajouter Tâche</span>
+                   </router-link> 
               <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+                <span class=""><i class="icon-trash"></i> Supprimer</span></button>
              
             </div>
 

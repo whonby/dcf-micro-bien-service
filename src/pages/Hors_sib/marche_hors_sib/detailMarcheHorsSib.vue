@@ -268,7 +268,7 @@
                         <div id="tab41180" class="tab-pane">
                       <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
@@ -426,7 +426,7 @@
                 <div id="tab1041" class="tab-pane">
                       <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
@@ -586,7 +586,7 @@
                 <div id="tab17041" class="tab-pane">
                       <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
@@ -801,7 +801,7 @@
                   <div id="tab45" class="tab-pane">
                <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 

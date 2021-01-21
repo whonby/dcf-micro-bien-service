@@ -55,16 +55,16 @@
       
 
       <tr>
-        <th style="width:25%;font-size:25px ">EXERCICE BUDGETAIRE :</th> 
-                     <td style="font-size:25px"> {{detailOp.exercice_budget}} </td>
+        <th style="width:25%;font-size:25px ">EXERCICE BUDGETAIRE :</th> <td style=""> <span>{{detailOp.exercice_budget}}</span> </td>
+                     
                     
       </tr>
       <br/>
       <br/>
      
           <tr>
-                     <th style="width:25%;font-size:25px ">PROJET OU ORGANISME :</th>
-                     <td style="font-size:25px"> {{infoLibelleUa(detailOp.ua_id)}} </td>
+                     <th style="width:25%;font-size:25px ">PROJET OU ORGANISME :</th><td style="font-size:25px"><span >{{infoLibelleUa(detailOp.ua_id)}}</span>  </td>
+                     
                     
                  </tr>
                  <br/>
@@ -72,8 +72,8 @@
                  
                   <tr>
                     <!-- <th rowspan="5" style="margin:0 auto">IMPUTATION BUDGETAIRE</th> -->
-                     <th style="width:25%;font-size:25px ">OBJET DE LA DEPENSE :</th>
-                     <td style="text-align:center;font-size:25px"> {{infoObjetFacture(detailOp.facture_id)}} </td>
+                     <th style="width:25%;font-size:25px ">OBJET DE LA DEPENSE :</th>  <td style="text-align:center;"> {{infoObjetFacture(detailOp.facture_id)}} </td>
+                     
                  </tr>
                   <br/>
       <br/>
@@ -87,8 +87,8 @@
       <br/>
                   <tr>
                     <!-- <th rowspan="5" style="margin:0 auto">IMPUTATION BUDGETAIRE</th> -->
-                     <th style="width:25%;font-size:25px ">LIVRABLE</th>
-                     <td style="text-align:center;font-size:25px">{{recupererLivrable(detailOp.marche_id)}} </td>
+                     <th style="width:25%;font-size:25px ">LIVRABLE</th> <td style="text-align:center;font-size:25px">{{recupererLivrable(detailOp.marche_id)}} </td>
+                     
                  </tr>
        <br/>
       <br/>
