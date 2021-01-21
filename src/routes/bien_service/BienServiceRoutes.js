@@ -107,8 +107,14 @@ import AnoBailleur1 from "../../pages/bien_service/component/AnoBailleur/AnoBail
 
 import FicheContratualisation from "../../pages/Gestion_des_Rapports/marche/FicheContratualisation"
 
-
+import AjouterTacheParMarche from "../../pages/investissement/AjouterTache/AjouterTacheParMarche.vue"
 const BienServiceRoutes = [
+    {
+
+        path:"/AjouterTacheParMarche/:id",
+        name:"AjouterTacheParMarche",
+        component:AjouterTacheParMarche
+    },
     {
 
         path:"/fiche-contratualisation/:id",

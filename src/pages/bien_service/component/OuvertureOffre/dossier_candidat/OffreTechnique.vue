@@ -12,26 +12,26 @@
           <th>N°LOT</th>
           <th>N° du pli</th>
           <th>Structure Emetrice</th>
-          <th>Montant </th>
-          <th>Delai de validation de l'offre</th>
-          <th>Delai de livraison ou d'execution proposé </th>
+          <th>Montant(TTC) </th>
+          <th>Délai de validation de l'offre</th>
+          <th>Délai de livraison ou d'exécution proposé </th>
           
-          <th>Presence Echantillons</th>
+          <th>Présence Echantillons</th>
           <th>Autre observation</th>
           <th>Action</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="offre in listeOffreTechniqueLotCandidat(dossier_candidature.id)" :key="offre.id">
-          <td @click="afficheEdite(offre.id)">N°{{offre.numero_lot}}</td>
-          <td @click="afficheEdite(offre.id)">{{offre.numero_pli}}</td>
-          <td @click="afficheEdite(offre.id)">{{offre.structure_emetrice}}</td>
-          <td @click="afficheEdite(offre.id)">{{offre.montant}} </td>
-          <td @click="afficheEdite(offre.id)">{{offre.delai_validite_offre}} </td>
-          <td @click="afficheEdite(offre.id)">{{offre.delai_execution}} </td>
+          <td @click="afficheEdite(offre.id)" style="text-align:center">N°{{offre.numero_lot}}</td>
+          <td @click="afficheEdite(offre.id)" style="text-align:center">{{offre.numero_pli}}</td>
+          <td @click="afficheEdite(offre.id)" style="text-align:center">{{offre.structure_emetrice}}</td>
+          <td @click="afficheEdite(offre.id)" style="text-align:center">{{formatageSomme(parseFloat(offre.montant))}} </td>
+          <td @click="afficheEdite(offre.id)" style="text-align:center">{{offre.delai_validite_offre}} </td>
+          <td @click="afficheEdite(offre.id)" style="text-align:center">{{offre.delai_execution}} </td>
           
-          <td @click="afficheEdite(offre.id)">{{offre.presence_echantillons}}</td>
-          <td @click="afficheEdite(offre.id)">{{offre.autre_observation}}</td>
+          <td @click="afficheEdite(offre.id)" style="text-align:center">{{offre.presence_echantillons}}</td>
+          <td @click="afficheEdite(offre.id)" style="text-align:center">{{offre.autre_observation}}</td>
           <td>
             <button @click.prevent="supprimerOffreTechnique(offre.id)"  class="btn btn-danger ">
               <span class=""><i class="icon-trash"></i></span></button>
@@ -692,6 +692,8 @@ import {mapActions, mapGetters} from "vuex";
 import {formatageSomme} from "@/Repositories/Repository";
 
 export default {
+  watch: {
+  },
 name: "OffreTechnique",
   props:["dossier_candidature"],
   data() {

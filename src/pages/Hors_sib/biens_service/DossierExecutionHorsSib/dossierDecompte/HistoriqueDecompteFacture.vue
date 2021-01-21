@@ -17,6 +17,9 @@
           <th style="text-align:center;font-size:12px">Net TTC</th>
           <th style="text-align:center;font-size:12px">Etat ({{recupereTauxEtat(macheid)}}% + (TVA 18%))</th>
           <th style="text-align:center;font-size:12px">Bailleur({{recupereTauxBailleur(macheid)}}% HTVA) </th>
+          <th style="text-align:center;font-size:12px">Famille Motif Cf </th>
+           <th style="text-align:center;font-size:12px">Motif Cf </th>
+            <th style="text-align:center;font-size:12px">Autres Motif </th>
           <th style="text-align:center;font-size:12px">Décision </th>
                   </tr>
 
@@ -56,7 +59,11 @@
                     
                       <td style="text-align:center;"
                     >{{formatageSomme(parseFloat(type.parts_bailleur)) || 'Non renseigné'}}</td>
-
+                   
+<td style="text-align:center;"
+                    >{{libelleMotifCf(MotifCf(type.facture_id)) || 'Non renseigné'}}</td>
+                    <td style="text-align:center;"
+                    >{{AffcheAutresMotif(type.facture_id) || 'Non renseigné'}}</td>
                     <td style="text-align:center;">
                     
                      <button 
@@ -106,6 +113,9 @@
                    <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartEtat(macheid)))}}</td>
                    <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartBailler(macheid)))}}</td>
                    <td style="text-align:center;"></td>
+                   <td style="text-align:center;"></td>
+                   <td style="text-align:center;"></td>
+                   
                   </tr>
                   <tr>
  
@@ -119,6 +129,9 @@
                    <td style="text-align:center;"></td>
                    <td style="text-align:center;"></td>
                    <td style="text-align:center;"></td>
+                   <td style="text-align:center;"></td>
+                   <td style="text-align:center;"></td>
+                  
                   </tr>
                 </tbody>
                                 </table>
@@ -181,7 +194,7 @@ props:["macheid"],
    
    
    ]), 
-
+ 
    ...mapGetters('parametreGenerauxAdministratif',[
 
  "sections",
@@ -196,7 +209,8 @@ props:["macheid"],
    ...mapGetters('parametreGenerauxFonctionnelle',[
 
       "plans_fonctionnels",
- "afficheNiveauPlanFonctionnel"
+ "afficheNiveauPlanFonctionnel",
+ "plans_Decision"
    ]),
 
 ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
@@ -205,7 +219,54 @@ props:["macheid"],
 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
     
 
+    libelleMotifCf() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_Decision.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+MotifCf() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.mandats.find(qtreel => qtreel.facture_id == id);
+
+      if (qtereel) {
+        return qtereel.motif;
+      }
+      return 0
+        }
+      };
+    },
+FamilleMotifCf() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.mandats.find(qtreel => qtreel.facture_id == id);
+
+      if (qtereel) {
+        return qtereel.famille_motif_mandat;
+      }
+      return 0
+        }
+      };
+    },
+    AffcheAutresMotif() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.mandats.find(qtreel => qtreel.facture_id == id);
+
+      if (qtereel) {
+        return qtereel.autre_motif_mandat;
+      }
+      return 0
+        }
+      };
+    },
    StatusDecompte() {
       return id => {
         if (id != null && id != "") {

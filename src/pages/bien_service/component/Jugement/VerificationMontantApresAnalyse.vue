@@ -65,7 +65,7 @@
         <tr v-for="offre in listeOffreTechniqueLotCandidat(effetFinancier.dossier_candidat_id,item.id)" :key="offre.id">
           <td @click="afficheEdite(offre.id)">Offre Technique</td>
           <td @click="afficheEdite(offre.id)">{{offre.structure_emetrice}}</td>
-          <td @click="afficheEdite(offre.id)">{{offre.montant}} </td>
+          <td @click="afficheEdite(offre.id)">{{formatageSommeSansFCFA(parseFloat(offre.montant))}} </td>
           <td @click="afficheEdite(offre.id)">{{offre.delai_validite_offre}} </td>
           <td @click="afficheEdite(offre.id)">{{offre.delai_execution}} </td>
           <td @click="afficheEdite(offre.id)">{{offre.rabai_offert}}</td>
@@ -84,12 +84,12 @@
   <div id="ModalModification" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
-      <h3>Information  sur Offre Financiere</h3>
+      <h3>Information  sur Offre Financière</h3>
     </div>
 
     <div class="widget-title">
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#tab8888">Information Sur Offre Financiere</a></li>
+        <li class="active"><a data-toggle="tab" href="#tab8888">Information Sur Offre Financière</a></li>
         <!-- <li class=""><a data-toggle="tab" href="#tab00050">Informations financières</a></li> -->
       </ul>
     </div>
@@ -102,7 +102,7 @@
          <div class="control-group">
               <label class="control-label">Soumissionnaire</label>
               <div class="controls">
-                <input type="text" class="span" readonly :value="afficherNumeroDossierCandidat1(EditOffreFinanciere.dossier_candidat_id)">
+                <input type="text" class="span" readonly :value="afficheNomEntreprise(afficherNumeroDossierCandidat1(afficherNumeroDossierCandidat1(EditOffreFinanciere.dossier_candidat_id)))">
               </div>
             </div>
       </td>
