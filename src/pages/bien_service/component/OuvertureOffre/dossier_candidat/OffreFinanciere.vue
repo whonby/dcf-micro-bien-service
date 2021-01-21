@@ -113,16 +113,7 @@
             </div>
 
           </td>
-<<<<<<< HEAD
-
-        </tr>
-        <tr>
-       
-
-          <td>
-=======
 <td>
->>>>>>> fd760bc2f87c08f2b583d664f6e1c222a351f926
 
             <div class="control-group">
               <label class="control-label">Rabais (%) :</label>

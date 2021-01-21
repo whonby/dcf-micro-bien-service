@@ -128,11 +128,7 @@
             </td>
             <td>
               <div class="control-group">
-<<<<<<< HEAD
-                <label class="control-label">Délai de validité de l'offre (Jours):</label>
-=======
                 <label class="control-label" title="Délai de validité de l'offre">Délai de validité de l'offre</label>
->>>>>>> fd760bc2f87c08f2b583d664f6e1c222a351f926
                 <div class="controls">
                   <input type="text" v-model="formchnique.delai_validite_offre"  placeholder="Délai de validité de l'offre " class="span">
                 </div>
@@ -144,11 +140,7 @@
             <td>
               <div class="control-group">
                 <label class="control-label">
-<<<<<<< HEAD
-                  Délai de livraison Ou Exécution Proposée (Jours)</label>
-=======
                   Delai d'Execution ou de livraison</label>
->>>>>>> fd760bc2f87c08f2b583d664f6e1c222a351f926
                 <div class="controls">
                   <input type="text" v-model="formchnique.delai_execution"  placeholder="Delai d'execution ou de livraison Proposé" class="span">
                  <!-- <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">-->

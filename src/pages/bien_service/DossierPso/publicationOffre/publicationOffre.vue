@@ -143,12 +143,7 @@
                                 <td>
                         <div class="control-group">
                             <div class="controls">
-<<<<<<< HEAD
-                                <label>Date fin de publication <code>*</code></label>
-                                <input type="date" class="span" placeholder="Date limite" v-model="formData.date_limite" :min="formData.date_emission">
-=======
                                 <input type="text" class="span" placeholder="" v-model="formData.numero_autorisation" >
->>>>>>> fd760bc2f87c08f2b583d664f6e1c222a351f926
                             </div>
                         </div>
                         </td>
