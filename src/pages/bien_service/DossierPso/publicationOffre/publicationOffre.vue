@@ -126,8 +126,7 @@
                         </div>
                             </td>
                             </tr>
-                            </table>
-                             <table>       
+                                 
                             <tr>
                                 <td>
                         <div class="control-group">
@@ -141,13 +140,11 @@
                             <td colspan="2">
                         <div class="control-group">
                             <div class="controls">
+                                 <label>Numéro d'autorisation </label>
                                 <input type="text" class="span" placeholder="" v-model="formData.numero_autorisation" >
                             </div>
                         </div>
-                        </td>
-
-
-                           
+                        </td>  
                         </tr>
                         <tr>
 
@@ -256,7 +253,7 @@
                         </div>
                             </td>
                             </tr>
-                            <table>
+                         
                             <tr>
                              <td>
                         <div class="control-group">
@@ -286,7 +283,7 @@
 
                            
                         </tr>
-                         </table>
+                        
                         <tr>
                              <td>
                                 <div class="control-group">
