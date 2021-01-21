@@ -98,7 +98,7 @@
         <tr>
           
 
-
+          
           <td>
 
             <div class="control-group">
@@ -108,7 +108,7 @@
               </div>
             </div>
 
-          </td>
+          
 <td>
 
             <div class="control-group">
@@ -178,7 +178,7 @@
           <td>
 
             <div class="control-group">
-              <label class="control-label">Montant TTC :</label>
+              <label class="control-label">Montant HT:</label>
               <div class="controls">
                 <input type="number" class="span" placeholder="Montant TTC" v-model="editer.montant_total_ttc">
               </div>
@@ -231,11 +231,11 @@ name: "OffreFinanciere",
       editer:"",
       formOffreFinanciere:{
         numero_lot:"",
+        Rabais:"",
+        montant_total_ht:"",
         montant_total_ttc:"",
         dossier_candidat_id:"",
         hist_montant_ttc:"",
-        Rabais:"",
-        montant_total_ht:"",
         marche_id:""
       },
 

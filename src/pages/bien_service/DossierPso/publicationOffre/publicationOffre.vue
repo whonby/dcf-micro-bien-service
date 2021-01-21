@@ -5,15 +5,21 @@
                 
                 <!-- <h4>Liste des offres</h4> -->
                 <table class="table table-bordered table-striped" v-if="macheid">
-                    <thead>
-                   <tr>
+                     <thead>
+                             <tr>
                                         <th>Reference appel - DAO</th>
                                         <th> Type procedure</th>
                                         <th> Numéro autorisation</th>
                                         <th>Mode de passation</th>
-                                        <th>Date emmission</th>
-                                        <th>Date et heure limite  </th>
+                    
+
                                         <th>Objet appel</th>
+                                        <th>Date début de publication</th>
+
+                                        <th>Date fin de publication</th>
+                                        <th>Numéro d'autorisation</th>
+                                        <th>Date d'autorisation </th>
+                                        <th>Heure limites</th>
                                        
                                         <th>Action</th>
                                     </tr>
@@ -59,7 +65,7 @@
 <div id="ajouterOffre" class="modal hide grdirModalActeEffet">
              <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter  DAO</h3>
+                <h3>Ajouter  offre</h3>
             </div>
             <div class="modal-body">
 
@@ -67,13 +73,13 @@
                           <tr>
                             <td>
                         <div class="control-group">
-                            <label class="control-label">Type de procedure <code>*</code> :</label>
+                            <label class="control-label">Type de procédure <code>*</code> :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Type appel" :value="typeProcedureLibelle(typeProcedure_id(procedurePassation_id(macheid)))" disabled>
                             </div>
                         </div>
                             </td>
-                               <td>
+                               <td colspan="2">
              <div class="control-group">
             <label class="control-label">Mode Passation</label>
             <div class="controls">
@@ -90,18 +96,18 @@
                             </tr>
                             
                             <tr>
-                                 <td>
+                             <td>
                         <div class="control-group">
-                            <label class="control-label">Date debut de publication<code>*</code> :</label>
                             <div class="controls">
-                                <input type="date" class="span" placeholder="Date emision" v-model="formData.date_emission">
+                                <label>Numéro d'autorisation <code></code></label>
+                                <input type="text" class="span" placeholder="Numéro d'autorisation" v-model="formData.numero_autorisation" >
                             </div>
                         </div>
                             </td>
-                                <td>
+                                <td colspan="2">
                         <div class="control-group">
                             <div class="controls">
-                                <label> Reference  de DAO<code>*</code></label>
+                                <label> Réference  de DAO<code>*</code></label>
                                   <input type="text" class="span" placeholder="Reference d'appel" v-model="formData.ref_appel">
                                 
                             </div>
@@ -110,28 +116,30 @@
                             
                         </tr>
                         <tr>
-                            <td colspan="2" width="">
+                            <td colspan="3" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet  DAO :</label>
+                            <label class="span2">Objet  offre :</label>
                             <div class="controls">
-                                 <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
+                                 <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span" rows="3" placeholder="Entre le  text ..."></textarea>
                     
                             </div>
                         </div>
                             </td>
                             </tr>
-                        <tr>
+                            </table>
+                             <table>       
+                            <tr>
                                 <td>
                         <div class="control-group">
+
                             <div class="controls">
-                                <label>Date fin de publication <code>*</code></label>
-                                <input type="date" class="span" placeholder="Date limite" v-model="formData.date_limite" :min="formData.date_emission">
+                                <label>Date début de publication<code>*</code></label>
+                                <input type="date" class="span" placeholder="Date emision" v-model="formData.date_emission">
                             </div>
                         </div>
                         </td>
-                            <td>
+                            <td colspan="2">
                         <div class="control-group">
-                            <label class="control-label">Numero d'autorisation :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="" v-model="formData.numero_autorisation" >
                             </div>
@@ -142,7 +150,6 @@
                            
                         </tr>
                         <tr>
-                             <td>
 
                             <td>
 
@@ -190,7 +197,7 @@
 <div id="modificationModal" class="modal hide grdirModalActeEffet">
            <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification DAO</h3>
+                <h3>Modification  offre</h3>
             </div>
             <div class="modal-body">
 
@@ -198,13 +205,13 @@
                  <tr>
                        <td>
                         <div class="control-group">
-                            <label class="control-label">Type de procedure  :</label>
+                            <label class="control-label">Type de procédure  :</label>
                             <div class="controls">
                                 <input type="text" class="span" disabled :value="typeProcedureLibelle(edite_appel_offre.type_appel)">
                             </div>
                         </div>
                             </td>
-                                <td>
+                                <td colspan="2">
              <div class="control-group">
             <label class="control-label">Mode Passation</label>
             <div class="controls">
@@ -219,8 +226,16 @@
                              
                     </tr>
                                  
-                            <tr>
-                                   <td >
+                            <tr>    
+                             <td>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Date début de publication</label>
+                                <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
+                            </div>
+                        </div>
+                                </td>
+                                <td colspan="2">
                         <div class="control-group">
                             <label class="control-label">Reference de DAO  :</label>
                             <div class="controls">
@@ -228,20 +243,12 @@
                             </div>
                         </div>
                             </td>
-                             <td>
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Date debut de publication</label>
-                                <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
-                            </div>
-                        </div>
-                                </td>
                               
                         </tr>
                           <tr>
-                            <td colspan="2" width="">
+                            <td colspan="3" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet de DAO :</label>
+                            <label class="control-label">Objet  offre :</label>
                             <div class="controls">
                                  <textarea   v-model="edite_appel_offre.objet_appel"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     
@@ -249,9 +256,18 @@
                         </div>
                             </td>
                             </tr>
-                        <tr>
-                              
-                                 <td>
+                            <table>
+                            <tr>
+                             <td>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Date début de publication</label>
+                                <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
+                            </div>
+                        </div>
+                                </td>
+                                
+                                 <td >
                         <div class="control-group">
                             <div class="controls">
                                 <label>Date fin de publication </label>
@@ -259,17 +275,18 @@
                             </div>
                         </div>
                         </td>
-                             <td>
+                             <td colspan="2">
                         <div class="control-group">
-                            <label class="control-label">Numero d'autorisation :</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="" v-model="edite_appel_offre.numero_autorisation" >
+                                <label>Numéro d'autorisation <code></code></label>
+                                <input type="text" class="span" v-model="edite_appel_offre. imputation">
                             </div>
                         </div>
                         </td>
 
                            
                         </tr>
+                         </table>
                         <tr>
                              <td>
                                 <div class="control-group">
@@ -513,24 +530,6 @@ typeProcedureLibelle() {
                 this.edite_appel_offre = this.listeAppelOffre(this.macheid)[index];
             },
 
-
-
-          OnchangeFichier(e) {
-              const files = e.target.files;
-              this.selectedFile = event.target.files[0];
-              console.log(this.selectedFile)
-              Array.from(files).forEach(file => this.addFichierPDF(file));
-          },
-          addFichierPDF(file) {
-              let reader = new FileReader();
-              let vm = this;
-              reader.onload = e => {
-                  vm.imagePDF = "pdf.png";
-                  vm.namePDF = file.name;
-                  vm.fichierPDF = e.target.result;
-              };
-              reader.readAsDataURL(file);
-          },
 
              ajouter(){
      var nouvelObjet = {

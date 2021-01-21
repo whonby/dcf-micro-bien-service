@@ -533,20 +533,24 @@
     </div> 
    <table class="table table-bordered table-striped" v-if="macheid">
                                     <thead>
-                                   <tr>
+                                  <tr>
                    
-          <th style="text-align:center;font-size:12px">N°Décompte </th>
-          <!-- <th >Objet  </th> -->
-          <th style="text-align:center;font-size:12px">Date </th>
-          <th style="text-align:center;font-size:12px">Acompte HTVA </th>
-          <th style="text-align:center;font-size:12px">Avance </th>
-          <th style="text-align:center;font-size:12px">Garantie </th>
+          <th style="text-align:center;font-size:12px">N°Décompte</th>
+          
+          <th style="text-align:center;font-size:12px">Date</th>
+          <th style="text-align:center;font-size:12px">Acompte HTVA</th>
+          <th style="text-align:center;font-size:12px">Avance</th>
+          <th style="text-align:center;font-size:12px">Garantie</th>
           <th style="text-align:center;font-size:12px">Penalités </th>
           <th style="text-align:center;font-size:12px">Net HTVA </th>
           <th style="text-align:center;font-size:12px">Net TTC</th>
           <th style="text-align:center;font-size:12px">Etat ({{recupereTauxEtat(macheid)}}% + (TVA 18%))</th>
           <th style="text-align:center;font-size:12px">Bailleur({{recupereTauxBailleur(macheid)}}% HTVA) </th>
-          <th style="text-align:center;font-size:12px">Actions </th>
+          
+           <th style="text-align:center;font-size:12px">Motif Cf </th>
+            <th style="text-align:center;font-size:12px">Autres Motif </th>
+          <th style="text-align:center;font-size:12px">Décision </th>
+          <th style="text-align:center;font-size:12px">Action </th>
                   </tr>
 
 
@@ -595,7 +599,36 @@
                       <td style="text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{formatageSomme(parseFloat(type.parts_bailleur)) || 'Non renseigné'}}</td>
-
+<td style="text-align:center;"
+                    >{{libelleMotifCf(MotifCf(type.facture_id)) || 'Non renseigné'}}</td>
+                    <td style="text-align:center;"
+                    >{{AffcheAutresMotif(type.facture_id) || 'Non renseigné'}}</td>
+                    <td style="text-align:center;">
+                    
+                     <button 
+                      v-if="StatusDecompte(type.facture_id) == 8"  class="btn  btn-success">
+                <span  style="">Visé</span>
+       
+                </button>
+                <button 
+                      v-else-if="StatusDecompte(type.facture_id) == 9"  class="btn  btn-success">
+                <span >Visé avec Observation</span>
+       
+                </button>
+                 <button 
+                      v-else-if="StatusDecompte(type.facture_id) == 2"  class="btn  btn-warning">
+                <span  >Différé</span>
+       
+                </button>
+                 <button v-else-if="StatusDecompte(type.facture_id) == 3" class="btn  btn-danger">
+              
+                <span >Réjeté</span>
+                 </button>
+              <button v-else class="btn  btn-info">
+              
+                <span >Attente</span>
+                </button>
+                   </td>
                     <td>
                       <button class="btn btn-danger" @click="supprimerDecompteFacture(type.id)">
                         <span>
@@ -617,6 +650,9 @@
                    <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartEtat(macheid)))}}</td>
                    <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartBailler(macheid)))}}</td>
                    <td style="text-align:center;"></td>
+                    <td style="text-align:center;"></td>
+                     <td style="text-align:center;"></td>
+                     <td style="text-align:center;"></td>
                   </tr>
                   <tr>
  
@@ -624,6 +660,9 @@
                    <td style="text-align:center;">{{((parseFloat(CumulAvance(macheid))/parseFloat(MontantMarche(macheid)))/100).toFixed(2)}}</td>
                    <td style="text-align:center;">{{PourcentageCumulAvanceDemarrage}}</td>
                    <td style="text-align:center;">{{PourcentageCumulGarantie}}</td>
+                   <td style="text-align:center;"></td>
+                    <td style="text-align:center;"></td>
+                     <td style="text-align:center;"></td>
                    <td style="text-align:center;"></td>
                    <td style="text-align:center;"></td>
                    <td style="text-align:center;"></td>
@@ -703,17 +742,80 @@ props:["macheid"],
  "exercices_budgetaires"
    ]),
 
+  
+
    ...mapGetters('parametreGenerauxFonctionnelle',[
 
       "plans_fonctionnels",
- "afficheNiveauPlanFonctionnel"
+ "afficheNiveauPlanFonctionnel",
+ "plans_Decision"
    ]),
-
 ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
     
+    libelleMotifCf() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_Decision.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+MotifCf() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.mandats.find(qtreel => qtreel.facture_id == id);
+
+      if (qtereel) {
+        return qtereel.motif;
+      }
+      return 0
+        }
+      };
+    },
+FamilleMotifCf() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.mandats.find(qtreel => qtreel.facture_id == id);
+
+      if (qtereel) {
+        return qtereel.famille_motif_mandat;
+      }
+      return 0
+        }
+      };
+    },
+    AffcheAutresMotif() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.mandats.find(qtreel => qtreel.facture_id == id);
+
+      if (qtereel) {
+        return qtereel.autre_motif_mandat;
+      }
+      return 0
+        }
+      };
+    },
+   StatusDecompte() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.mandats.find(qtreel => qtreel.facture_id == id);
+
+      if (qtereel) {
+        return qtereel.decision_cf;
+      }
+      return 0
+        }
+      };
+    },
+
 
      afficheMarcheDecompte() {
       return id => {

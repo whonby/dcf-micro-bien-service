@@ -127,7 +127,7 @@ controlleur_fin
                               <li class="active"><a data-toggle="tab" href="#tab2078">Avenant</a></li>
                                <li ><a data-toggle="tab" href="#tab100">Facture</a></li>
                                 <li ><a data-toggle="tab" href="#tab45785" >Décompte</a></li>
-                              <li ><a data-toggle="tab" href="#HistoriqueDecompte" >Historique Décompte</a></li>
+                              <!-- <li ><a data-toggle="tab" href="#HistoriqueDecompte" >Historique Décompte</a></li> -->
                               <!-- <template v-if="typeOrdrePaiementHs(detail_marche.id) == 1">
                                 
                                 <li ><a data-toggle="tab" href="#tab15550" >Réalité service fait</a></li>

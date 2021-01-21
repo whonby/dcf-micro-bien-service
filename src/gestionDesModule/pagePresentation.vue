@@ -348,7 +348,9 @@ this.getRegimeImpositions()
    this.getStructureBudgetaire()
    this.getPlanBudgetaire()
    this.getStructureActivite()
+    this.getStructureInfrastructure()
     this.getPlanActivite()
+    this.getPlanInfrastructure()
     this.getGrandeNature()
     this.getTypeUniteAdministrative()
     // this. getPlanActivite()
@@ -652,7 +654,7 @@ return objJson.id
     ]),
    ...mapActions( 'parametreGenerauxBudgetaire', ['getStructureBudgetaire',
    'getPlanBudgetaire']),
-   ...mapActions('parametreGenerauxActivite', [ 'getStructureActivite','getPlanActivite']),
+   ...mapActions('parametreGenerauxActivite', [ 'getStructureActivite','getPlanActivite','getStructureInfrastructure','getPlanInfrastructure']),
    ...mapActions('parametreGenerauxProgrammeUnite',['getUnite', 'getZone']),
 
     ...mapActions('parametreGenerauxAdministratif',
