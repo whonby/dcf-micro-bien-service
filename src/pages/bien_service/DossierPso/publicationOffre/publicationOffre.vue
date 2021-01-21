@@ -5,29 +5,19 @@
                 
                 <!-- <h4>Liste des offres</h4> -->
                 <table class="table table-bordered table-striped" v-if="macheid">
-                    <thead>
-                   <tr>
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-                                        
-                                        <th> Type procédure</th>
-                                        <th>Reference appel</th>
-=======
-=======
->>>>>>> 194aa3f8c8258cf4e0f9de8cb5124d490a624aef
+                     <thead>
+                             <tr>
                                         <th>Reference appel - DAO</th>
                                         <th> Type procedure</th>
                                         <th> Numéro autorisation</th>
                                         <th>Mode de passation</th>
-                                        <th>Date emmission</th>
-                                        <th>Date et heure limite  </th>
->>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
+                    
+
                                         <th>Objet appel</th>
                                         <th>Date début de publication</th>
 
                                         <th>Date fin de publication</th>
-                                        <th>Numéro et date</th>
+                                        <th>Numéro d'autorisation</th>
                                         <th>Date d'autorisation </th>
                                         <th>Heure limites</th>
                                        
@@ -106,28 +96,20 @@
                             </tr>
                             
                             <tr>
-                                 <td>
+                             <td>
                         <div class="control-group">
-<<<<<<< HEAD
-                            <label class="control-label">Référence  offre <code>*</code> :</label>
-=======
-                            <label class="control-label">Date debut de publication<code>*</code> :</label>
->>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
                             <div class="controls">
-                                <input type="date" class="span" placeholder="Date emision" v-model="formData.date_emission">
+                                <label>Numéro d'autorisation <code></code></label>
+                                <input type="text" class="span" placeholder="Numéro d'autorisation" v-model="formData.numero_autorisation" >
                             </div>
                         </div>
-                            </td>
-<<<<<<< HEAD
-                            </tr>
-                            </table>
-                             <table> 
-                            <tr>
-=======
+                        </td>
+
+
                                 <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label> Reference  de DAO<code>*</code></label>
+                                <label> Réference  de DAO<code>*</code></label>
                                   <input type="text" class="span" placeholder="Reference d'appel" v-model="formData.ref_appel">
                                 
                             </div>
@@ -136,7 +118,6 @@
                             
                         </tr>
                         <tr>
->>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
                             <td colspan="2" width="">
                         <div class="control-group">
                             <label class="span2">Objet  offre :</label>
@@ -147,7 +128,6 @@
                         </div>
                             </td>
                             </tr>
-<<<<<<< HEAD
                             </table>
                              <table>       
                             <tr>
@@ -160,9 +140,6 @@
                             </div>
                         </div>
                                 </td>
-=======
-                        <tr>
->>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
                                 <td>
                         <div class="control-group">
                             <div class="controls">
@@ -171,24 +148,8 @@
                             </div>
                         </div>
                         </td>
-                            <td>
-                        <div class="control-group">
-                            <div class="controls">
-<<<<<<< HEAD
-                                <label>Numéro et date <code></code></label>
-                                <input type="text" class="span" >
-=======
-                                <input type="text" class="span" placeholder="" v-model="formData.mode_passation_id" :readonly="activation">
->>>>>>> 194aa3f8c8258cf4e0f9de8cb5124d490a624aef
-                            </div>
-                        </div>
-                        </td>
-
-
-                           
-                        </tr>
-                        <tr>
-                             <td>
+                     
+                             
 
                             <td>
 
@@ -277,7 +238,7 @@
                              <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date debut de publication</label>
+                                <label>Date début de publication</label>
                                 <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
                             </div>
                         </div>
@@ -295,7 +256,7 @@
                         </div>
                             </td>
                             </tr>
-<<<<<<< HEAD
+                            <table>
                             <tr>
                              <td>
                         <div class="control-group">
@@ -307,11 +268,6 @@
                                 </td>
                                 
                                  <td >
-=======
-                        <tr>
-                              
-                                 <td>
->>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
                         <div class="control-group">
                             <div class="controls">
                                 <label>Date fin de publication </label>
@@ -319,18 +275,14 @@
                             </div>
                         </div>
                         </td>
-<<<<<<< HEAD
 
                        
                         </tr>
                         <tr>
                            <td>
-=======
-                             <td>
->>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
                         <div class="control-group">
                             <div class="controls">
-                                <label>Numéro et date <code></code></label>
+                                <label>Numéro d'autorisation <code></code></label>
                                 <input type="text" class="span" v-model="edite_appel_offre. imputation">
                             </div>
                         </div>
@@ -338,6 +290,7 @@
 
                            
                         </tr>
+                         </table>
                         <tr>
                              <td>
                                 <div class="control-group">
@@ -395,11 +348,6 @@ export default {
     
     data(){
         return{
-<<<<<<< HEAD
-        
-        formData:{
-              ref_appel:"",
-=======
             imagePDF :"",
         namePDF :"",
         fichierPDF :"",
@@ -410,7 +358,6 @@ export default {
               
               numero_autorisation:"",
               mode_passation_id:"",
->>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
                     type_appel:"",
                     financement:"",
                     nom_bailleurs:"",
@@ -425,11 +372,8 @@ export default {
         message_offre:"",
         edite_appel_offre:{
              	ref_appel:"",
-<<<<<<< HEAD
-=======
                  numero_autorisation:"",
                  mode_passation_id:"",
->>>>>>> 57a94c10b1ee71e4c5aed627fca80665c21c5bf1
                     type_appel:"",
                     financement:"",
                     nom_bailleurs:"",
