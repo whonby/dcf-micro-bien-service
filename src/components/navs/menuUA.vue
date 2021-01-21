@@ -122,7 +122,7 @@
             <ul class="dropdown-menu">
                 <li>
                     <router-link :to="{name: 'BudgetPasProgramme'}" tag="a">
-                        BUGET PAS PROGRAMME
+                        BUGET PAR PROGRAMME
                     </router-link>
                 </li>
                 <li v-if="admin() || dcf()">
