@@ -1196,17 +1196,15 @@ created() {
 
               if(offre!=undefined){
                    //test
+                  console.log(offre)
                    
                    let mode_passation=this.procedurePassations.find(item=>item.id==offre.mode_passation_id)
-                   //
+                  console.log(mode_passation)
                   if (mode_passation==undefined){
-
-                      console.log(this.verifictionDotationLigne(procedure,dotation))
 
                       return this.verifictionDotationLigne(procedure,dotation)
                   }
 
-                  console.log(mode_passation)
 
                   if(this.inArray(procedure, mode_passation.code)){
                    
@@ -1232,10 +1230,7 @@ created() {
              }
              else if( this.budgetDisponible < dotation && this.inArray(procedure,"PSC-AC"))
              {
-                 console.log("......Dotation disponible")
-                 console.log(this.budgetDisponible)
-                 console.log("...............Dodation ")
-                 console.log(dotation)
+
                  return true
              }
              else if( this.budgetDisponible < dotation && this.inArray(procedure,"PSL"))
@@ -1259,7 +1254,7 @@ created() {
             },
 
             inArray() {
-                return ( tableau,valeur)=>{
+                return (tableau,valeur)=>{
                     let length = tableau.length;
                     for(let i = 0; i < length; i++) {
                         if(tableau[i] == valeur) return true;
