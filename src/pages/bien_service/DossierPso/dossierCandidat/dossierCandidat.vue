@@ -16,7 +16,7 @@
                  <table class="table table-bordered table-striped" v-if="marcheid">
                      <thead>
                      <tr>
-                         <th>Numero dossier</th>
+                         <th>Numéro dossier</th>
                          <th>Type candidat</th>
                          <th>Raison social </th>
                          <th>Date naissance</th>
@@ -24,7 +24,7 @@
                          <th>Adresse</th>
                          <th>Email</th>
                          <th>Appel Offre</th>
-                         <th>Procedure</th>
+                         <th>Procédure</th> 
                          <!--<th v-if="selectionAttributionMarche(marcheid)">Decision</th>-->
                          <th>Action</th>
                      </tr>
@@ -63,7 +63,7 @@
                                  <span class=""><i class=" icon-money"></i></span></a>
 
                              <button @click.prevent="supprimerDossierCandidat(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                 <span class=""><i class="icon-trash"></i></span></button>
+                                 <span class=""><i class="icon-trash">Supprimer</i></span></button>
 
                          </div>
 
@@ -114,7 +114,7 @@
                 <td>
 
                     <div class="control-group">
-                        <label class="control-label">Quantite :</label>
+                        <label class="control-label">Quantité :</label>
                         <div class="controls">
                             <input type="number" class="span" placeholder="quantite" v-model="formOffreFinanciere.quantite">
                         </div>

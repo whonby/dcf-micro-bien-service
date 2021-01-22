@@ -39,7 +39,7 @@
         </td>
         <td>
           <button @click.prevent="supprimerProceVerbal(rapport.id)"  class="btn btn-danger " title="Supprimer">
-            <span class=""><i class="icon-trash"></i></span></button>
+            <span class=""><i class="icon-trash">Supprimer</i></span></button>
         </td>
 
       </div>
