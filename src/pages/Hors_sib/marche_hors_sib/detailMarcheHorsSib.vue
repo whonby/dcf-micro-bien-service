@@ -105,9 +105,11 @@
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure (30000000,['PSC-AC'],detail_marche.id)">Procédure Simplifiée de demande de Cotation(PSC Avec comité)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(60000000, ['PSL'], detail_marche.id)">Procédure Simplifiée à compétition Limitée(PSL)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000, ['PSO'], detail_marche.id)">Procédure Simplifiée à compétition Ouverte(PSO)</h4>
-            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AON','AOI','AOR'] , detail_marche.id)">Appel d'Offre Ouvert(AON ou AOI ou AOR</h4>
-            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['ED','CONV'],detail_marche.id)">Entente direct ou Convention (ED ou CONV)</h4>
-
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AON'] , detail_marche.id)">Appel d'Offre Ouvert National</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOI'] , detail_marche.id)">Appel d'Offre Ouvert international</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOR'] , detail_marche.id)">Appel d'Offre Ouvert Restreint</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['ED'],detail_marche.id)">Entente direct</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['CONV'],detail_marche.id)">Convention</h4>
 
             <div class="row-fluid">
                 <div class="span12">
