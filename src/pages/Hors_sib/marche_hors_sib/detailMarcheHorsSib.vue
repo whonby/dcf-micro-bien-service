@@ -105,11 +105,11 @@
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure (30000000,['PSC-AC'],detail_marche.id)">Procédure Simplifiée de demande de Cotation(PSC Avec comité)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(60000000, ['PSL'], detail_marche.id)">Procédure Simplifiée à compétition Limitée(PSL)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000, ['PSO'], detail_marche.id)">Procédure Simplifiée à compétition Ouverte(PSO)</h4>
-            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AON'] , detail_marche.id)">Appel d'Offre Ouvert National</h4>
-            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOI'] , detail_marche.id)">Appel d'Offre Ouvert international</h4>
-            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOR'] , detail_marche.id)">Appel d'Offre Ouvert Restreint</h4>
-            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['ED'],detail_marche.id)">Entente direct</h4>
-            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['CONV'],detail_marche.id)">Convention</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AON'] , detail_marche.id)">Appel d'Offre Ouvert National (AON)</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOI'] , detail_marche.id)">Appel d'Offre Ouvert international (AOI)</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOR'] , detail_marche.id)">Appel d'Offre Ouvert Restreint (AOR)</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['ED'],detail_marche.id)">Entente direct (ED)</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['CONV'],detail_marche.id)">Convention (CONV)</h4>
 
             <div class="row-fluid">
                 <div class="span12">
@@ -1022,7 +1022,23 @@
                    <!-- <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p> -->
                      </template>
                      <template v-else>
-                       <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p>
+                       <p style="font-size:14px;text-align:center;color:red">LA procedure de recrutement de 3CV n'est pas été defini donc veillez selectionner autre procedure sur l'offre
+                          <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                 <li class="active"><a data-toggle="tab" href="#tab456901">l'offre</a></li>
+                            </ul>
+                          </div>
+                              <div class="widget-content tab-content">
+        <div id="tab456901" class="tab-pane active ">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+
+
+                      <publication-Offre :macheid="detail_marche.id"></publication-Offre>
+                         </div>
+                              </div>
                      </template>
                 </div>
             </div>
