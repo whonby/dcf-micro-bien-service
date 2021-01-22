@@ -622,6 +622,7 @@
     };
 </script>
 <style scoped>
+
     .taillemodal {
         width: 800px;
         margin: 0 -380px;
