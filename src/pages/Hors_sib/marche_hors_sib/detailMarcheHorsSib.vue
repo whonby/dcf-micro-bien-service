@@ -18,7 +18,7 @@
                             <div class="span4">
 
                             </div>
-                            <div class="span4" align="right" v-if="attribue==2">
+                            <div class="span4" align="right">
                                 <router-link :to="{ name: 'FicheContratualisation', params: { id: detail_marche.id }}"
                                              class="btn btn-primary" >
                                     <span class=""><i class="icon-file"></i> Fiche de contratualisation</span>
@@ -1211,13 +1211,13 @@ created() {
                 //  console.log(procedure)
 
                let offre=this.appelOffres.find(item=>item.marche_id==marche_id)
-
+      //    console.log(offre)
               if(offre!=undefined){
                    //test
                   //console.log(offre)
                    
                    let mode_passation=this.procedurePassations.find(item=>item.id==offre.mode_passation_id)
-                  console.log(mode_passation)
+
                   if (mode_passation==undefined){
 
                       return this.verifictionDotationLigne(procedure,dotation)
@@ -1232,29 +1232,7 @@ created() {
                    return false
                }
 
-            if( this.budgetDisponible < 10000000 && procedure=="PSC-SC"){
-                    return true
-                }
-                else if(this.budgetDisponible < 30000000 && procedure=="PSC-AC")
-                {
-            return true
-                }
-                else if(this.budgetDisponible < 60000000 && procedure=="PSL")
-                {
-           return true
-                }
-                else if(this.budgetDisponible < 100000000 && procedure=="PSO" )
-                {
-           return true
-                }
-                 else if(this.budgetDisponible > 0 && procedure=="ED" || procedure=="CON")
-                {
-                 return true
-                }
-                else if(100000000 < this.budgetDisponible && (procedure=="AOR" || procedure=="AON" || procedure=="AOI"))
-                {
-            return true
-                }
+          return this.verifictionDotationLigne(procedure,dotation)
                
 
 
