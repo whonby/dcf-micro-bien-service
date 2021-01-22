@@ -74,6 +74,11 @@ export default {
           if(objet) 
           return objet.libelle
         }
+         if(id1!=null && id1!=""){
+          const objet = this.directions.find(item => item.id==id1)
+          if(objet) 
+          return objet.libelle
+        }
         if(id1!=null && id1!=""){
           const objet = this.services.find(item => item.id==id1)
           if(objet) 
@@ -84,11 +89,7 @@ export default {
           if(objet) 
           return objet.libelle
         }
-        if(id1!=null && id1!=""){
-          const objet = this.directions.find(item => item.id==id1)
-          if(objet) 
-          return objet.libelle
-        }
+       
       }
       
 },

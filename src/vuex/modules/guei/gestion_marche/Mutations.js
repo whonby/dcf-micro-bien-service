@@ -13,7 +13,7 @@ const GET_MODE_PASSATION = (state, data) => {
 
 const AJOUTER_MODE_PASSATION = (state, nouvel_objet) => {
     state.mode_passations.unshift(nouvel_objet)
-   // state.titres = [...nouvel_objet, ...state.titres]
+   // state.titres = [...nouvel_objet, ...state.titres] 
 
 }
 

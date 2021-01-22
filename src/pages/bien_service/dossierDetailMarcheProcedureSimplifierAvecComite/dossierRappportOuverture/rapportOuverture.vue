@@ -10,7 +10,7 @@
                                             <thead>
                                             <tr>
                                                 
-                                         <th>Date du rapport</th> 
+                                         <th>Date du PV</th> 
                                                 <th>Fichier</th>
                                                 <th>Action</th>
                                             </tr>

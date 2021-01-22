@@ -302,6 +302,7 @@ created(){
           this.getGestionModules()
           this.getInfrastructure()
           this.getTypeOrdrePaiement()
+          this.getTacheMarche()
 
 this.getFormeJuridiques()
 this.getRegimeImpositions()
@@ -348,7 +349,9 @@ this.getRegimeImpositions()
    this.getStructureBudgetaire()
    this.getPlanBudgetaire()
    this.getStructureActivite()
+    this.getStructureInfrastructure()
     this.getPlanActivite()
+    this.getPlanInfrastructure()
     this.getGrandeNature()
     this.getTypeUniteAdministrative()
     // this. getPlanActivite()
@@ -652,7 +655,7 @@ return objJson.id
     ]),
    ...mapActions( 'parametreGenerauxBudgetaire', ['getStructureBudgetaire',
    'getPlanBudgetaire']),
-   ...mapActions('parametreGenerauxActivite', [ 'getStructureActivite','getPlanActivite']),
+   ...mapActions('parametreGenerauxActivite', [ 'getStructureActivite','getPlanActivite','getStructureInfrastructure','getPlanInfrastructure']),
    ...mapActions('parametreGenerauxProgrammeUnite',['getUnite', 'getZone']),
 
     ...mapActions('parametreGenerauxAdministratif',
@@ -737,7 +740,7 @@ return objJson.id
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ["getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
+       ...mapActions('bienService', ["getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",

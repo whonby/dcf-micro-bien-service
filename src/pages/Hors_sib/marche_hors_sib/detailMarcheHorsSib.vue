@@ -18,7 +18,7 @@
                             <div class="span4">
 
                             </div>
-                            <div class="span4" align="right">
+                            <div class="span4" align="right" v-if="attribue==2">
                                 <router-link :to="{ name: 'FicheContratualisation', params: { id: detail_marche.id }}"
                                              class="btn btn-primary" >
                                     <span class=""><i class="icon-file"></i> Fiche de contratualisation</span>
@@ -270,7 +270,7 @@
                         <div id="tab41180" class="tab-pane">
                       <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
@@ -428,7 +428,7 @@
                 <div id="tab1041" class="tab-pane">
                       <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
@@ -588,7 +588,7 @@
                 <div id="tab17041" class="tab-pane">
                       <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
@@ -803,7 +803,7 @@
                   <div id="tab45" class="tab-pane">
                <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
@@ -1232,7 +1232,30 @@ created() {
                    return false
                }
 
-               return this.verifictionDotationLigne(procedure,dotation)
+            if( this.budgetDisponible < 10000000 && procedure=="PSC-SC"){
+                    return true
+                }
+                else if(this.budgetDisponible < 30000000 && procedure=="PSC-AC")
+                {
+            return true
+                }
+                else if(this.budgetDisponible < 60000000 && procedure=="PSL")
+                {
+           return true
+                }
+                else if(this.budgetDisponible < 100000000 && procedure=="PSO" )
+                {
+           return true
+                }
+                 else if(this.budgetDisponible > 0 && procedure=="ED" || procedure=="CON")
+                {
+                 return true
+                }
+                else if(100000000 < this.budgetDisponible && (procedure=="AOR" || procedure=="AON" || procedure=="AOI"))
+                {
+            return true
+                }
+               
 
 
       }

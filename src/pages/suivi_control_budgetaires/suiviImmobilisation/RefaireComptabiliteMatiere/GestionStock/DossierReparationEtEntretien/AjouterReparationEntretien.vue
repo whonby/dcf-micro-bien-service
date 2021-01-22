@@ -22,7 +22,7 @@
                   <div class="widget-title">
                       
                     <ul class="nav nav-tabs">
-                     <li class="active"><a data-toggle="tab" href="#Techniques">Informations</a></li>
+                     <li class="active"><a data-toggle="tab" href="#Techniques">UNITE ADMINISTRATIVE :  {{afficherLibelleUniteAdministrative(detail_vehicule.uAdministrative_id)}}</a></li>
         <!-- <li class=""><a data-toggle="tab" href="#Informations">Autres Informations</a></li> -->
         
                       
@@ -36,26 +36,63 @@
          <table class="table table-bordered table-striped">
                <tr>
                
-                 <td>
-                    
-
-                 <div class="control-group">
-            <label class="control-label" title="unite administrative">UA</label>
-            <div class="controls" >
-            <!-- <select v-model="getterUa_idImo" class="span">
-               <option v-for="plans in groupeUaPourMarheHorSib" :key="plans[0].id" 
-               :value="plans[0].uniteadministrative_id">{{afficherLibelleUniteAdministrative(plans[0].uniteadministrative_id)}}</option>
-           </select> -->
-             <input
+                <td colspan="">
+               <div class="control-group">
+            <label class="control-label">Famille Article</label>
+            <div class="controls">
+               <input
                 type="text"
-                :value="libelleUa(detail_vehicule.uAdministrative_id)"
+                :value="familleArticle(detail_vehicule.famill_id)"
                 class="span"
                 readonly
               />
+
             </div>
           </div>
-                 </td>
-                 <td>
+            </td>
+                 <td colspan="">
+               <div class="control-group">
+            <label class="control-label">Immatriculation</label>
+            <div class="controls">
+               <input
+                type="text"
+                :value="detail_vehicule.numimmatriculation"
+                class="span"
+                readonly
+              />
+
+            </div>
+          </div>
+            </td>
+            <td colspan="">
+               <div class="control-group">
+            <label class="control-label">Service Rattaché</label>
+            <div class="controls">
+               <input
+                type="text"
+                :value="LibelleServiceRattache(serviceRattache(detail_vehicule.id))"
+                class="span"
+                readonly
+              />
+
+            </div>
+          </div>
+            </td>
+            <td colspan="">
+               <div class="control-group">
+            <label class="control-label">Fonction Rattaché</label>
+            <div class="controls">
+               <input
+                type="text"
+                :value="LibellefonctionRattache(fonctionRattache(detail_vehicule.id))"
+                class="span"
+                readonly
+              />
+
+            </div>
+          </div>
+            </td>
+                 <!-- <td>
                     <div class="control-group">
                   <label class="control-label" style="font-size:14px">Type véhicule</label>
                   <div class="controls">
@@ -67,8 +104,8 @@
               />
                   </div>
                 </div>
-                 </td>
-                 <td>
+                 </td> -->
+                 <!-- <td>
                     <div class="control-group">
                   <label class="control-label" style="font-size:14px">Immatriculation</label>
                   <div class="controls">
@@ -80,30 +117,31 @@
               />
                   </div>
                 </div>
-                 </td>
-                 <td>
+                 </td> -->
+                
+               </tr>
+               <tr>
+                  <td>
                     <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Numéro Contrat</label>
+                  <label class="control-label" style="font-size:14px">Numéro Facture</label>
                   <div class="controls">
                     <select  class="span" v-model="formData.acte_id ">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in NumeroContrat(afficheIdUa(detail_vehicule.id))"
+                        v-for="typeUniteA in NumeroFacture(marcheIdContrat(detail_vehicule.uAdministrative_id))"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
-                      >{{typeUniteA.reference_act}}</option>
+                      >{{typeUniteA.numero_facture}}</option>
                     </select>
                   </div>
                 </div>
                  </td>
-               </tr>
-               <tr>
-                 <td colspan="4">
+                 <td colspan="3">
                    
         <div class="control-group">
            <label class="control-label">Panne(s) Signalée(s)</label>
             <div class="controls">
-              <textarea class="span14" :value="libelleMarche(MarcheActe_id(formData.acte_id))" rows="3" placeholder="Enter text ..."></textarea>
+              <textarea class="span14"  rows="3" placeholder="Enter text ..." :value="libelleMarche(recupereridParLaFacture(formData.acte_id))" readonly></textarea>
             </div>
           
         </div>
@@ -111,37 +149,22 @@
     
   
                  </td>
-               </tr>
-               <tr>
-                  <td colspan="3">
+                  <!-- <td colspan="">
                <div class="control-group">
             <label class="control-label">Ligne Budgétaire</label>
             <div class="controls">
                <input
                 type="text"
-                :value="Codeeconomique(LigneBudgetaireAttrivue(MarcheActe_id(formData.acte_id)))"
+                :value="Codeeconomique(LigneBudgetaireAttrivue(recupereridParLaFacture(formData.acte_id)))"
                 class="span"
                 readonly
               />
 
             </div>
           </div>
-            </td>
-                  <td>
-               <div class="control-group">
-            <label class="control-label">Utilisateur</label>
-            <div class="controls">
-                              <select   class="span" v-model="formData.personnel_id">
-                                <option></option>
-            <option v-for="resultat in affichePersonnel(formData.vehicule_id)" :key="resultat.id" 
-            :value="resultat.personnel_id">{{NomPersonnel(resultat.personnel_id)}}</option>
-                </select>
-            </div>
-          </div>
-            </td>
-            
-            
+            </td> -->
                </tr>
+              
                 <tr>
                    <td>
                <div class="control-group">
@@ -162,7 +185,7 @@
             <div class="controls">
                              <input
                 type="text"
-                :value="RaisonSocialEntreprise(idEntreprise(formData.acte_id))"
+                
                 class="span"
                 readonly
               />
@@ -190,7 +213,7 @@
             <div class="controls">
               <input
                 type="text"
-                :value="MontantReparation(formData.acte_id)"
+               
                 class="span"
                 readonly
               />
@@ -235,7 +258,7 @@
 
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
-import {admin,dcf,noDCfNoAdmin} from "../../../../../../Repositories/Auth"
+import {admin,dcf,cf} from "../../../../../../Repositories/Auth"
 
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
@@ -276,8 +299,8 @@ props:["macheid"],
       "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
-   ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-   ...mapGetters("SuiviImmobilisation", ["getterUa_idImo","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
+   ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel","fonctions"]),
+   ...mapGetters("SuiviImmobilisation", ["familles","services","immobilisations","AffectationUaBiens","getterUa_idImo","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
    ...mapGetters('uniteadministrative',[
      "groupeUaPourMarheHorSib",
     "plans_programmes",
@@ -324,6 +347,61 @@ cf:cf,
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat","personnaliseActeurDepense",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
      
+familleArticle(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objet1 = this.familles.find(item => item.id==id)
+          if(objet1){
+            return objet1.libelle
+          }
+          return null
+        }
+      }
+    },
+serviceRattache(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objet1 = this.immobilisations.find(item => item.stock_id==id)
+          if(objet1){
+            return objet1.service_id
+          }
+          return null
+        }
+      }
+    },
+fonctionRattache(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objet1 = this.immobilisations.find(item => item.stock_id==id)
+          if(objet1){
+            return objet1.fonction_id
+          }
+          return null
+        }
+      }
+    },
+LibellefonctionRattache(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objet1 = this.fonctions.find(item => item.id==id)
+          if(objet1){
+            return objet1.libelle
+          }
+          return null
+        }
+      }
+    },
+LibelleServiceRattache(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objet1 = this.services.find(item => item.id==id)
+          if(objet1){
+            return objet1.libelle
+          }
+          return null
+        }
+      }
+    },
   afficheIdUa(){
       return id =>{
         if(id!=null && id!=""){
@@ -458,6 +536,45 @@ libelleUa() {
       
         }
       }
+    },
+
+
+ marcheIdContrat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.ua_id== id && qtreel.etatcontrat == 1);
+
+      if (qtereel) {
+        return qtereel.marche_id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+NumeroFacture() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getFacturePersonnaliser.filter(qtreel => qtreel.marche_id== id );
+
+      
+      
+        }
+      };
+    },
+
+recupereridParLaFacture() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id== id );
+
+      if (qtereel) {
+        return qtereel.marche_id;
+      }
+      return 0
+        }
+      };
     },
     RaisonSocialEntreprise() {
       return id => {

@@ -421,7 +421,7 @@
                     uniteZone_id:"",
                     situation_matrimonial:"",
                     service_id:"",
-                    reference_acte:""
+                   
                 },
 
                 editTitre: {

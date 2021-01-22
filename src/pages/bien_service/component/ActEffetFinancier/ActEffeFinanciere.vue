@@ -1370,7 +1370,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label"> date d'approbation</label>
+                <label class="control-label"> Date d'approbation</label>
                 <div class="controls">
                   <input
                       type="date"

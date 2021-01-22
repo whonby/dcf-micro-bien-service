@@ -1,5 +1,7 @@
 import TableauBordGestionSibMarche from '../../pages/TableauBord/TableauBordGestionSibMarche.vue'
 import acteDepense from '../../pages/bien_service/acteDepense.vue';
+
+
 import organeDecision from "../../pages/bien_service/parametres/organeDecision.vue";
 import naturePrix from "../../pages/bien_service/parametres/naturePrix.vue";
 import motifPassation from "../../pages/bien_service/parametres/motifPassation.vue";
@@ -105,8 +107,22 @@ import AnoBailleur1 from "../../pages/bien_service/component/AnoBailleur/AnoBail
 
 import FicheContratualisation from "../../pages/Gestion_des_Rapports/marche/FicheContratualisation"
 
+import AjouterTacheParMarche from "../../pages/investissement/AjouterTache/AjouterTacheParMarche.vue"
 
+import AjouterTacheRealise from "../../pages/investissement/AjouterTache/AjouterTacheRealise.vue"
 const BienServiceRoutes = [
+    {
+
+        path:"/AjouterTacheRealise/:id",
+        name:"AjouterTacheRealise",
+        component:AjouterTacheRealise
+    },
+    {
+
+        path:"/AjouterTacheParMarche/:id",
+        name:"AjouterTacheParMarche",
+        component:AjouterTacheParMarche
+    },
     {
 
         path:"/fiche-contratualisation/:id",

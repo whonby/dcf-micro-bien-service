@@ -6,7 +6,7 @@
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
-                <h5>{{groupe.libelle}}</h5>
+                <h5>{{imputationComptable(GroupeEquipement(groupe.equipemt_id))}}-{{groupe.libelle}}</h5>
                  <span class="badge badge-inverse" >{{getNombreArticle}}</span>
 
                 </a> 
@@ -20,13 +20,16 @@
                   <tr>
                     <!-- <th>Famille</th> -->
                     <th>Designation</th>
+                    <th>Description</th>
+                    <th>Marque</th>
+                    <th>Modèle</th>
                      <th>Prix HT</th>
                       <th>Taux</th>
                       <th>TVA</th>
                        <th>Montant TTC</th>
                    
 
-                    <th>Action</th>
+                    <th >Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -50,6 +53,15 @@
                         <td>
                           
                       </td>
+                      <td>
+                          
+                      </td>
+                      <td>
+                          
+                      </td>
+                      <td>
+                          
+                      </td>
                        <td style="font-weight:bold;"> Montant Total TTC
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
@@ -68,6 +80,15 @@
                       </td>
                        <td>
                            
+                      </td>
+                       <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                       <td>
+                          
                       </td>
                        <td>
                           
@@ -97,6 +118,7 @@
 
 
 <script>
+import { mapGetters } from "vuex";
 import ReferentielPrixItem from './ReferentielPrixItem'
 import { formatageSomme } from "../../../Repositories/Repository";
 export default {
@@ -118,7 +140,80 @@ export default {
 
 
   computed: {
+  ...mapGetters("bienService", ["getFacturePersonnaliser","personnaliseGetterMarcheBailleur","modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
+     'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
+     'nombremarchesExecute',
+     'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
+      "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
+     "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
+
+   ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
+   ...mapGetters("SuiviImmobilisation", ["Typebiengrpecorporels","equipements","articles","familles","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
+   ...mapGetters('uniteadministrative',[
+    "plans_programmes",
+ "uniteAdministratives",
+ "afficheNiveauAction",
+ "afficheNiveauActivite",
+ "derniereNivoPlanBudgetaire",
+ "getPersonnaliseBudgetGeneralParPersonnel",
+   "decomptefactures",
+   "getvehicules",
+   "GestionStockageArticles"
+   
+   ]),
+
+   ...mapGetters('parametreGenerauxAdministratif',[
+
+ "sections",
+ "type_Unite_admins",
+ "plans_programmes",
+ "natures_sections",
+ "grandes_natures",
+ "afficheNiveauPlanProg",
+ "exercices_budgetaires",
+ "taux"
+   ]),
+
+   ...mapGetters('parametreGenerauxFonctionnelle',[
+
+      "plans_fonctionnels",
+ "afficheNiveauPlanFonctionnel"
+   ]),
+
+...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
+
+...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
   
+...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+      ...mapGetters('personnelUA', ["acteur_depenses","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
+                "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat","personnaliseActeurDepense",
+                "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
+     imputationComptable() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 
+        }
+      };
+    },
+
+GroupeEquipement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.equipements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 
+        }
+      };
+    },
     isFolder: function () {
       return this.groupe.famille_article &&
         this.groupe.famille_article.length
