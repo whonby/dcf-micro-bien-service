@@ -1196,7 +1196,7 @@ created() {
 
               if(offre!=undefined){
                    //test
-                  console.log(offre)
+                  //console.log(offre)
                    
                    let mode_passation=this.procedurePassations.find(item=>item.id==offre.mode_passation_id)
                   console.log(mode_passation)
