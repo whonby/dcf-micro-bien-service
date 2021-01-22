@@ -570,7 +570,7 @@
                 <input type="search" placeholder v-model="search" />
               </div> -->
                     
-                     <th style="width:5%;text-align:center">Article</th>
+                     <th style="width:5%;text-align:center">Article{{detail_Ua.id}}</th>
                      <th style="width:5%;text-align:center">Immatriculation</th>
                      <th style="width:5%;text-align:center">Marque</th>
                      <th style="width:5%;text-align:center">Modèle</th>
@@ -578,6 +578,7 @@
                     <!-- <th>Quantité Initiale</th>  -->
                     <th style="width:5%;text-align:center">Quantité</th>
                     <th style="width:5%;text-align:center">Valeur d'acquisition</th>
+                    <th style="width:5%;text-align:center">Amortissement</th>
                    <th style="width:5%;text-align:center">Valeur nette comptable</th>
                     <th style="width:12%" colspan="2">Action</th>
                   </tr>
@@ -611,10 +612,14 @@
                       @dblclick="ModificationVehicule(stock.id)"
                       style="text-align:center;font-weight:bold;"
                     >{{formatageSomme(parseFloat((parseFloat(stock.quantitestock)*parseFloat(stock.prix_unitaire)))) || 'Non renseigné'}}</td>
-                    <td
+                    <td style="text-align:center;font-weight:bold;"
                       @dblclick="ModificationVehicule(stock.id)"
-                    >{{formatageSomme(parseFloat(0)) || 'Non renseigné'}}</td>
-                  
+                    >{{formatageSomme((parseFloat(prixUnitaire(stock.id)) *(parseFloat(DureeEcoule)/365)*(1/(dureeVie(stock.id)))))}}</td>
+<td style="text-align:center;font-weight:bold;"
+                      @dblclick="ModificationVehicule(stock.id)"
+                    >{{formatageSomme((parseFloat(stock.prix_unitaire))-parseFloat((parseFloat(prixUnitaire(stock.id)) *(parseFloat(DureeEcoule)/365)*(1/(dureeVie(stock.id))))))}}</td>
+
+                        
                        <td>
                        <router-link
                         :to="{name : 'DetailVehiculeGestionStock', params: {id:stock.id}}"
@@ -640,8 +645,9 @@
                    <td></td>
                    <td></td>
                    <td></td>
+                   <td></td>
                    <td style="font-weight:bold;">TOTAL</td>
-                   <td style="text-align:center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(sommeDesVehicule)*parseFloat(sommeDesQuantite))}}</td>
+                   <td style="text-align:center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(MontantTotalVehicule(detail_Ua.uAdministrative_id)))}}</td>
                    <td></td>
                    <td></td>
                    <td></td>
@@ -803,7 +809,100 @@ search:""
      "ModeleVehicules",
      "Typebiengrpecorporels"
    ]),
+dateMiseService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.date_mise_service;
+      }
+      return 0
+        }
+      };
+    },
+    dureeVie() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.durevie;
+      }
+      return 0
+        }
+      };
+    },
+    prixUnitaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.prix_unitaire;
+      }
+      return 0
+        }
+      };
+    },
+    SommeArmortissement(){
+  
+  const val = parseInt(this.prixUnitaire(this.detail_Ua.id)) *(parseInt(this.DureeEcoule)/365)*(1/(this.dureeVie(this.detail_Ua.id)));
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+
+},
+    DureeEcoule(){
+     
+
+      var dateF = new Date(this.afficherDateDuJour).getTime()
+      var dateO = new Date(this.dateMiseService(this.detail_Ua.id)).getTime()
+      var resultat = dateF - dateO
+
+      var diffJour =  resultat / (1000 * 3600 * 24)
+
+      if(isNaN(diffJour)) return null
+
+      if(parseFloat(diffJour) < 0 ) return "durée invalide"
+      
+      return  diffJour;
+
+    },
+afficherDateDuJour(){
+let date = new Date();
+        let aaaa = date.getFullYear();
+        let gg = date.getDate();
+        let mm = (date.getMonth() + 1);
+        let moi;
+        let jour;
+        if (gg < 10)
+        {
+            jour = "0" + gg;
+        }else{
+            jour = gg
+        }
+
+
+        if (mm < 10)
+        {
+            moi = "0" + mm;
+        }else{
+            moi=mm;
+        }
+
+
+        let cur_day =  aaaa + "-" + moi + "-" + jour;
+
+        return cur_day
+
+
+    
+   
+   },
 
 filtre_service() {
       const st = this.search.toLowerCase();
@@ -814,6 +913,14 @@ filtre_service() {
          
         );
       });
+    },
+    MontantTotalVehicule() {
+      return id => {
+        if (id != null && id != "") {
+           return this.filtre_service.filter(qtreel => qtreel.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+
+        }
+      };
     },
 sommeDesVehicule(){
   return this.filtre_service.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
@@ -1085,7 +1192,7 @@ PrixUnitaireParModel() {
     listeDesEquipementPar01() {
       return id => {
         if (id != null && id != "") {
-           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(qtreel.typebien_id) == 3);
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(qtreel.typebien_id) == 3 && qtreel.quantitestock != 0);
 
         }
       };
