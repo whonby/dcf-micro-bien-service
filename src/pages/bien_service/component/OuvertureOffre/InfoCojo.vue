@@ -469,6 +469,7 @@ name: "InfoCojo",
         appel_offre_id :this.affichierAppelOffreid(this.macheid)
 
       }
+      console.log(nouvelObjet)
       this.ajouterCojo(nouvelObjet)
       this.formDataCojo={
         appel_offre_id:"",
