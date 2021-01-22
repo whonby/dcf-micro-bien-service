@@ -9,7 +9,7 @@
                     <td style="text-align:center"> {{libelleModeleVehicules(article.model_id) || 'Non renseigné'}}</td>
                      <td style="text-align:center"> {{formatageSomme(article.prix_ht) || 'Non renseigné'}}</td>
                       <td style="text-align:center"> {{ article.taux  || 'Non renseigné'}} %</td>
-                      <td style="text-align:center"> {{article.tva || 'Non renseigné'}}</td>
+                      <td style="text-align:center"> {{article.tva || 0}}</td>
                    <td style="text-align: center;font-weight:bold;"> {{formatageSomme(article.montant_ttc) || 'Non renseigné'}}</td>
                 
                     <td>

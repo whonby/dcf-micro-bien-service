@@ -341,24 +341,38 @@
                 </div>
               </div>
             </td>
+             <td>
+                <div class="control-group">
+                <label class="control-label">exonéré</label>
+                <div class="controls">
+                  <select v-model="formData1.exonere" class="span5">
+                  
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                
+                </div>
+              </div>
+              </td>
               <td>
-             <div class="control-group">
+             
+            </td>
+           
+          </tr>
+         <tr>
+           <div class="control-group">
                 <label class="control-label">Taux:</label>
                 <div class="controls">
                   <input
                     type="number"
                   
-                    :value="affcherTauxEnCours"
+                    :value="afficherEnorere"
                     readonly
                     class="span5"
                     placeholder="Saisir la taux"
                   />
                 </div>
               </div>
-            </td>
-           
-          </tr>
-         <tr>
             <td>
               <div class="control-group">
                 <label class="control-label">Tva:</label>
@@ -374,7 +388,10 @@
               </div>
             </td>
            
-<td>
+
+         </tr>
+         <tr>
+           <td>
               <div class="control-group">
                 <label class="control-label">Montant TTC:</label>
                 <div class="controls">
