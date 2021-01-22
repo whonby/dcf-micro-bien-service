@@ -542,10 +542,27 @@ if(this.formData1.exonere == 0){
   return 0
 }
 else {
-  return this.affcherTauxEnCours
+  return this.tauxArrondit
   
 }
 },
+montantTva() {
+      const val =   parseFloat(this.formData.prix_ht) * parseFloat(this.afficherEnorere);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    // montantTva() {
+    //   const val =
+    //     parseFloat(this.formData.prix_ht) *
+    //     parseFloat(this.tauxArrondit);
+    //   // parseFloat(this.formData.taux_id);
+    //   if (isNaN(val)) return null;
+    //   return parseFloat(val).toFixed(0);
+    // },
 fonctionModele() {
       return id => {
         if (id != null && id != "") {
@@ -614,14 +631,7 @@ fonctionModele() {
         }
       };
     },
-    montantTva() {
-      const val =
-        parseFloat(this.formData.prix_ht) *
-        parseFloat(this.tauxArrondit);
-      // parseFloat(this.formData.taux_id);
-      if (isNaN(val)) return null;
-      return parseFloat(val).toFixed(0);
-    },
+    
     montantTtc() {
       const val =
         parseFloat(this.formData.prix_ht) +
@@ -633,11 +643,12 @@ fonctionModele() {
     editmontantTva() {
       const val =
         parseFloat(this.editReferentielPrix.prix_ht) *
-        parseFloat(this.editReferentielPrix.taux);
+        parseFloat(this.afficherEnorere);
       // parseFloat(this.formData.taux_id);
       if (isNaN(val)) return null;
       return parseFloat(val).toFixed(0);
     },
+    
     editmontantTtc() {
       const val =
         parseFloat(this.editReferentielPrix.prix_ht) +
