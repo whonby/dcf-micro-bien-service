@@ -95,15 +95,15 @@ controlleur_fin
                         <li>
                         <a data-toggle="tab" href="#tab22">PARAMETRAGE ECHEANCIER</a>
                       </li>
-                      <li>
+                      <!-- <li>
                         <a data-toggle="tab" href="#tab03">IMAGES DES MARCHES</a>
-                      </li>
-                      <li>
+                      </li> -->
+                      <!-- <li>
                         <a data-toggle="tab" href="#tab040">EVOLUTION DES MARCHES</a>
                       </li> 
                       <li>
                         <a data-toggle="tab" href="#tab041">SITUATION DES MARCHE</a>
-                      </li> 
+                      </li>  -->
                     
                     </ul>
                   </div>

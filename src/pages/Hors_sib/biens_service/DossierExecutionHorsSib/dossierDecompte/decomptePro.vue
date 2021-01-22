@@ -1,6 +1,7 @@
 
 <template>
   <div >
+    <notifications  />
     <div id="exampleModal" class="modal hide grdirModalActeEffet">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -630,9 +631,13 @@
                 </button>
                    </td>
                     <td>
+                      <router-link :to="{ name: 'AjouterTacheRealise', params: { id: type.id }}"
+                class="btn btn-inverse " title="Voir Tâche Réalisée">
+                  <span class=""><i class="icon-eye-open"></i> Voir Tâche Réalisée</span>
+                   </router-link> 
                       <button class="btn btn-danger" @click="supprimerDecompteFacture(type.id)">
                         <span>
-                          <i class="icon icon-trash"></i>
+                          <i class="icon icon-trash"> Supprimer</i>
                         </span>
                       </button>
                     </td>
@@ -673,7 +678,7 @@
                 </tbody>
                                 </table>
  
-  <notifications  />
+  
   </div>
 </template>
   

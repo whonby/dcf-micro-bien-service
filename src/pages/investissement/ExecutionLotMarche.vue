@@ -7,12 +7,236 @@
       <div class="row-fluid">
         <div class="span12">
           <template v-if="affichertypeMarcheEx(detail_marche.type_marche_id)==3">
-             <afficheMarcheGeneral v-if="afficherStatusSib(detail_marche.id)==0"></afficheMarcheGeneral> 
-             <afficheMarcheGeneralHorsSib v-if="afficherStatusSib(detail_marche.id)==1"></afficheMarcheGeneralHorsSib> 
+             <!-- <afficheMarcheGeneral v-if="afficherStatusSib(detail_marche.id)==0"></afficheMarcheGeneral>  -->
+
+<table class="table table-bordered table-striped" v-if="afficherStatusSib(detail_marche.id)==0">
+                <thead>
+                <tr>
+                    <th>Année</th>
+                      <th>UA</th>
+                    <th>Type de marché</th>
+                    <th>Mode de passation</th>
+                    <th>Activité</th>
+                    <th>Imputation</th>
+                    <!-- <th>Ligne Budgetaire</th> -->
+                    <th>Objet du marché</th>
+                    <th>Référence du marché</th>
+                     <!-- <th>Numero marché</th> -->
+                    <th>Montant prévu</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                        <tr class="odd gradeX" 
+                 >
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.exo_id || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherUniteAdministrative(detail_marche.unite_administrative_id) || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherTypeMarcheLibelle(detail_marche.type_marche_id) || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
+                   {{detail_marche.procedure_passation.code || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficheractivite(detail_marche.activite_id) || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.imputation || 'Non renseigné'}}</td>
+                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.objet || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.reference_marche || 'Non renseigné'}}</td>
+                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.numero_marche || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
+                   {{formatageSomme(parseFloat(detail_marche.montant_marche)) || 'Non renseigné'}}</td>
+                  
+           
+                   
+
+                       </tr>
+                      
+                </tbody>
+              </table>
+
+
+
+
+<table class="table table-bordered table-striped" v-if="afficherStatusSib(detail_marche.id)==1">
+                <thead>
+                <tr>
+                    <th>Année</th>
+                      <th>UA</th>
+                    <th>Type de marché</th>
+                    <th>Mode de passation</th>
+                    <th>Activité</th>
+                    <th>Imputation</th>
+                    <!-- <th>Ligne Budgetaire</th> -->
+                    <th>Objet du marché</th>
+                    <th>Référence du marché</th>
+                     <!-- <th>Numero marché</th> -->
+                    <th>Montant prévu</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                        <tr class="odd gradeX" 
+                 >
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.exo_id || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherUniteAdministrative(detail_marche.unite_administrative_id) || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherTypeMarcheLibelle(detail_marche.type_marche_id) || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
+                   {{detail_marche.procedure_passation.code || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficheractivite(detail_marche.activite_id) || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.imputation || 'Non renseigné'}}</td>
+                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.objet || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.reference_marche || 'Non renseigné'}}</td>
+                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.numero_marche || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
+                   {{formatageSomme(parseFloat(detail_marche.montant_marche)) || 'Non renseigné'}}</td>
+                  
+           
+                   
+
+                       </tr>
+                      
+                </tbody>
+              </table>
+
+
+
+
+
+
+
+
+             <!-- <afficheMarcheGeneralHorsSib v-if="afficherStatusSib(detail_marche.id)==1"></afficheMarcheGeneralHorsSib> 
+          -->
+         
+         
+         
           </template>
           <template v-if="affichertypeMarcheEx(detail_marche.type_marche_id)==1 ||affichertypeMarcheEx(detail_marche.type_marche_id)==4">
-            <AfficheMarcheBienEtFourniture v-if="afficherStatusSib(detail_marche.id)==0" ></AfficheMarcheBienEtFourniture>
-            <AfficheMarcheBienEtFournitureHorsSib v-if="afficherStatusSib(detail_marche.id)==1"></AfficheMarcheBienEtFournitureHorsSib>
+            
+            <table class="table table-bordered table-striped" v-if="afficherStatusSib(detail_marche.id)==0">
+                <thead>
+                <tr>
+                    <th>Année</th>
+                      <th>UA</th>
+                    <th>Type de marché</th>
+                    <th>Mode de passation</th>
+                    <th>Activité</th>
+                    <th>Imputation</th>
+                    <!-- <th>Ligne Budgetaire</th> -->
+                    <th>Objet du marché</th>
+                    <th>Référence du marché</th>
+                     <!-- <th>Numero marché</th> -->
+                    <th>Montant prévu</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                        <tr class="odd gradeX" 
+                 >
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.exo_id || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherUniteAdministrative(detail_marche.unite_administrative_id) || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherTypeMarcheLibelle(detail_marche.type_marche_id) || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
+                   {{detail_marche.procedure_passation.code || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficheractivite(detail_marche.activite_id) || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.imputation || 'Non renseigné'}}</td>
+                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.objet || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.reference_marche || 'Non renseigné'}}</td>
+                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.numero_marche || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
+                   {{formatageSomme(parseFloat(detail_marche.montant_marche)) || 'Non renseigné'}}</td>
+                  
+           
+                   
+
+                       </tr>
+                      
+                </tbody>
+              </table>
+            
+
+            <table class="table table-bordered table-striped" v-if="afficherStatusSib(detail_marche.id)==1">
+                <thead>
+                <tr>
+                    <th>Année</th>
+                      <th>UA</th>
+                    <th>Type de marché</th>
+                    <th>Mode de passation</th>
+                    <th>Activité</th>
+                    <th>Imputation</th>
+                    <!-- <th>Ligne Budgetaire</th> -->
+                    <th>Objet du marché</th>
+                    <th>Référence du marché</th>
+                     <!-- <th>Numero marché</th> -->
+                    <th>Montant prévu</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                        <tr class="odd gradeX" 
+                 >
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.exo_id || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherUniteAdministrative(detail_marche.unite_administrative_id) || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherTypeMarcheLibelle(detail_marche.type_marche_id) || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
+                   {{detail_marche.procedure_passation.code || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficheractivite(detail_marche.activite_id) || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.imputation || 'Non renseigné'}}</td>
+                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.objet || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.reference_marche || 'Non renseigné'}}</td>
+                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.numero_marche || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
+                   {{formatageSomme(parseFloat(detail_marche.montant_marche)) || 'Non renseigné'}}</td>
+                  
+           
+                   
+
+                       </tr>
+                      
+                </tbody>
+              </table>
+            <!-- <AfficheMarcheBienEtFourniture v-if="afficherStatusSib(detail_marche.id)==0" ></AfficheMarcheBienEtFourniture> -->
+            <!-- <AfficheMarcheBienEtFournitureHorsSib v-if="afficherStatusSib(detail_marche.id)==1"></AfficheMarcheBienEtFournitureHorsSib> -->
           </template>
          
           
@@ -91,7 +315,7 @@
 
                
 <router-link :to="{ name: 'detailExecutionHorsSib', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail execution Marche Gestion Hors Sib">
+                class="btn btn-primary " title="Detail execution Marche Gestion Hors Sib">
                   <span class=""><i class="  icon-random"></i> Détail exécution</span>
                    </router-link> 
 
@@ -101,8 +325,8 @@
                    </router-link> 
 
 <router-link :to="{ name: 'AjouterTacheParMarche', params: { id: marche.id }}"
-                class="btn btn-success " title="Ajouter tache">
-                  <span class=""><i class="icon-align-justify"></i> Ajouter Tâche</span>
+                class="btn btn-inverse " title="Voir Tâche Prévue">
+                  <span class=""><i class="icon-eye-open"></i> Voir Tâche Prévue</span>
                    </router-link> 
               <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i> Supprimer</span></button>
@@ -144,17 +368,17 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import afficheMarcheGeneral from "./afficheMarcheGeneral"
-import afficheMarcheGeneralHorsSib from "./afficheMarcheGeneralHorsSib"
-import AfficheMarcheBienEtFourniture from "./AfficheMarcheBienEtFourniture"
-import AfficheMarcheBienEtFournitureHorsSib from "./AfficheMarcheBienEtFournitureHorsSib"
-import { formatageSommeSansFCFA } from "../../../src/Repositories/Repository";
+// import afficheMarcheGeneral from "./afficheMarcheGeneral"
+// import afficheMarcheGeneralHorsSib from "./afficheMarcheGeneralHorsSib"
+// import AfficheMarcheBienEtFourniture from "./AfficheMarcheBienEtFourniture"
+// import AfficheMarcheBienEtFournitureHorsSib from "./AfficheMarcheBienEtFournitureHorsSib"
+import { formatageSommeSansFCFA ,formatageSomme} from "../../../src/Repositories/Repository";
 export default {
   components:{
-    afficheMarcheGeneral,
-    afficheMarcheGeneralHorsSib,
-    AfficheMarcheBienEtFourniture,
-    AfficheMarcheBienEtFournitureHorsSib
+    // afficheMarcheGeneral,
+    // afficheMarcheGeneralHorsSib,
+    // AfficheMarcheBienEtFourniture,
+    // AfficheMarcheBienEtFournitureHorsSib
   },
   name:'typetext',
   data() {
@@ -192,6 +416,50 @@ export default {
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
    ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
+afficheractivite() {
+
+      return id => {
+       
+        if (id != null && id != "") {
+           const qtereel = this.afficheNiveauActivite.find(qtreel => qtreel.id == id);
+
+      if (qtereel!=undefined) {
+        
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+afficherTypeMarcheLibelle() {
+       
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+
+      if (qtereel!=undefined) {
+        
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+afficherUniteAdministrative() {
+       
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel!=undefined) {
+        
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 afficherSommeMarcheExecution() {
       return id => {
         if (id != null && id != "") {
@@ -343,6 +611,7 @@ afficherlibelleUa() {
       "supprimerTypeTexte"
     ]),
    formatageSommeSansFCFA:formatageSommeSansFCFA,
+   formatageSomme:formatageSomme,
     alert() {
       console.log("ok");
     },
