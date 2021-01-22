@@ -68,35 +68,6 @@
                           class="span"
                           readonly
                   />
-<<<<<<< HEAD
-              </div>
-          </div> -->
-          <!-- <div class="control-group">
-               <label class="control-label">Condition</label>
-               <div class="controls">
-                   <select v-model="formDataCojo.condition_id" class="span">
-                       <option v-for="plans in conditions" :key="plans.id"
-                               :value="plans.id">{{plans.libelle}}</option>
-                   </select>
-               </div>
-           </div>-->
-
-
-          <!-- <div class="control-group">
-            <label class="control-label">Date de composition</label>
-            <div class="controls">
-              <input
-                  type="date"
-                  v-model="formDataCojo.date_composition"
-                  class="span"
-
-              />
-            </div>
-          </div>
- -->
-
-=======
->>>>>>> d21cda1f968d26028d0e517ef8e3894c7bf278f2
 
                 </div>
               </div>
