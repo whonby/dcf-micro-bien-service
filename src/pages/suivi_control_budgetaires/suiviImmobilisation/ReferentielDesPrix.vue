@@ -52,7 +52,77 @@
                 </div>
               </div>
             </td>
-            <td>
+           
+           
+           
+
+           
+          </tr>
+          <tr>
+           
+            <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Designation</label>
+                <div class="controls">
+                  <textarea name="" id="" cols="3" rows="3" class="span5" v-model="formData.libelle"></textarea>
+                </div>
+              </div>
+            </td>
+           <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Description</label>
+                <div class="controls">
+                  <textarea name="" id="" cols="3" rows="3" class="span5" v-model="formData.description"></textarea>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+             <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Marque</label>
+                  <div class="controls">
+                    <!-- <select  class="span" v-model="formData.marque_id">
+                      <option></option>                     
+                      <option
+                        v-for="typeUniteA in marqueVehicules"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select> -->
+                     <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="marqueVehicules"
+                                                   v-model="formData.marque_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                  </div>
+                </div>
+                      </td>
+            
+              <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Modèle</label>
+                  <div class="controls">
+                    <select  class="span5" v-model="formData.model_id">
+                      <option></option>                     
+                      <option
+                        v-for="typeUniteA in fonctionModele(formData.marque_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+                      </td>
+          </tr>
+          
+          <tr>
+                <td>
               
              <div class="control-group">
                 <label class="control-label">Prix HT</label>
@@ -67,35 +137,31 @@
                 </div>
               </div>
             </td>
-             
-           
-           
-
-           
-          </tr>
-          <tr>
-            <td colspan="2">
-              <div class="control-group">
-                <label class="control-label">Designation</label>
+            <td>
+                <div class="control-group">
+                <label class="control-label">exonéré</label>
                 <div class="controls">
-                  <input
-                    type="text"
-                    v-model="formData.libelle"
-                    
-                    class="span10"
-                    placeholder="Saisir la Designation"
-                  />
+                  <select v-model="formData1.exonere" class="span5">
+                  
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                
                 </div>
               </div>
-            </td>
-            <td>
+              </td>
+              
+           
+          </tr>
+         <tr>
+           <td>
              <div class="control-group">
                 <label class="control-label">Taux:</label>
                 <div class="controls">
                   <input
                     type="number"
                   
-                    :value="affcherTauxEnCours"
+                    :value="afficherEnorere"
                     readonly
                     class="span5"
                     placeholder="Saisir la taux"
@@ -103,10 +169,6 @@
                 </div>
               </div>
             </td>
-          </tr>
-          <tr>
-               
-             
             <td>
               <div class="control-group">
                 <label class="control-label">Tva:</label>
@@ -122,7 +184,10 @@
               </div>
             </td>
            
-<td>
+
+         </tr>
+         <tr>
+           <td>
               <div class="control-group">
                 <label class="control-label">Montant TTC:</label>
                 <div class="controls">
@@ -136,8 +201,7 @@
                 </div>
               </div>
             </td>
-          </tr>
-         
+         </tr>
         </table>
       </div>
       <div class="modal-footer">
@@ -159,28 +223,29 @@
         <h3>Modifier Referentiel des prix</h3>
       </div>
       <div class="modal-body">
-        <table class="table table-bordered table-striped">
+          <table class="table table-bordered table-striped">
           <tr>
                <td>
+              
               <div class="control-group">
-                <label class="control-label">Equipement Type</label>
-                <div class="controls">
-                  <select  v-model="editReferentielPrix.equipement_id" class="span5">
-                    
-                    <option
-                      v-for="equipe in equipements"
-                      :key="equipe.id"
-                      :value="equipe.id"
-                    >{{equipe.libelle}}</option>
-                  </select>
-                </div>
-              </div>
+                            <label class="control-label">Type d'équipement:</label>
+                            <div class="controls">
+                              <select v-model="editReferentielPrix.equipement_id" class="span5">
+                                <option value>Selectionner</option>
+                                <option
+                                  v-for="typeua in equipements"
+                                  :key="typeua.id"
+                                  :value="typeua.id"
+                                >{{codeEquipement(typeua.id)}}</option>
+                              </select>
+                            </div>
+                          </div>
             </td>
             <td>
               <div class="control-group">
                 <label class="control-label">Famille:</label>
                 <div class="controls">
-                  <select  v-model="editReferentielPrix.famille_id" class="span5">
+                  <select  v-model="editReferentielPrix.famille_id"  class="span5">
                     
                     <option
                       v-for="famil in ArticleDynamiques(editReferentielPrix.equipement_id)"
@@ -191,11 +256,80 @@
                 </div>
               </div>
             </td>
-             
-           <td>
+           
+           
+           
+
+           
+          </tr>
+          <tr>
+           
+            <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Designation</label>
+                <div class="controls">
+                  <textarea name="" id="" cols="3" rows="3" class="span5" v-model="editReferentielPrix.libelle"></textarea>
+                </div>
+              </div>
+            </td>
+           <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Description</label>
+                <div class="controls">
+                  <textarea name="" id="" cols="3" rows="3" class="span5" v-model="editReferentielPrix.description"></textarea>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+             <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Marque</label>
+                  <div class="controls">
+                    <!-- <select  class="span" v-model="editReferentielPrix.marque_id">
+                      <option></option>                     
+                      <option
+                        v-for="typeUniteA in marqueVehicules"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select> -->
+                     <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="marqueVehicules"
+                                                   v-model="editReferentielPrix.marque_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                  </div>
+                </div>
+                      </td>
+            
+              <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Modèle</label>
+                  <div class="controls">
+                    <select  class="span5" v-model="editReferentielPrix.model_id">
+                      <option></option>                     
+                      <option
+                        v-for="typeUniteA in fonctionModele(editReferentielPrix.marque_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+                      </td>
+          </tr>
+          
+          <tr>
+                <td>
               
              <div class="control-group">
-                <label class="control-label">Prix HT:</label>
+                <label class="control-label">Prix HT</label>
                 <div class="controls">
                   <input
                     type="number"
@@ -207,31 +341,14 @@
                 </div>
               </div>
             </td>
-
-           
-          </tr>
-          <tr>
-            <td colspan="2">
-              <div class="control-group">
-                <label class="control-label">Designation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    v-model="editReferentielPrix.libelle"
-                    
-                    class="span10"
-                    placeholder="Saisir la Designation"
-                  />
-                </div>
-              </div>
-            </td>
-           <td>
+              <td>
              <div class="control-group">
-                <label class="control-label">taux:</label>
+                <label class="control-label">Taux:</label>
                 <div class="controls">
                   <input
                     type="number"
-                    v-model="editReferentielPrix.taux"
+                  
+                    :value="affcherTauxEnCours"
                     readonly
                     class="span5"
                     placeholder="Saisir la taux"
@@ -239,11 +356,9 @@
                 </div>
               </div>
             </td>
-          </tr>
-          <tr>
-               
-             
            
+          </tr>
+         <tr>
             <td>
               <div class="control-group">
                 <label class="control-label">Tva:</label>
@@ -258,7 +373,8 @@
                 </div>
               </div>
             </td>
- <td>
+           
+<td>
               <div class="control-group">
                 <label class="control-label">Montant TTC:</label>
                 <div class="controls">
@@ -272,8 +388,7 @@
                 </div>
               </div>
             </td>
-          </tr>
-          
+         </tr>
         </table>
       </div>
       <div class="modal-footer">
@@ -354,10 +469,14 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import ReferentielPrixItemComponent from './ReferentielPrixItemComponent';
+
+import { ModelListSelect } from "vue-search-select";
+import "vue-search-select/dist/VueSearchSelect.css";
 export default {
   name:'listeEquipement',
   components: {
-      ReferentielPrixItemComponent
+      ReferentielPrixItemComponent,
+      ModelListSelect
   },
   data() {
     return {
@@ -377,7 +496,7 @@ export default {
       //   CODE: "code",
       //   LIBELLE: "libelle"
       // },
-
+formData1:{},
       formData: {
        
         famille_id:"",
@@ -403,7 +522,7 @@ export default {
 
 
   computed: {
-    ...mapGetters("SuiviImmobilisation", ["familles","equipements","getAfficheArticle"]),
+     ...mapGetters("SuiviImmobilisation", ["Typebiengrpecorporels","equipements","articles","familles","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
         ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections","plans_programmes"]),
   
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
@@ -418,7 +537,23 @@ export default {
     //     );
     //   });
     // }
-
+    afficherEnorere(){
+if(this.formData1.exonere == 0){
+  return 0
+}
+else {
+  return this.affcherTauxEnCours
+  
+}
+},
+fonctionModele() {
+      return id => {
+        if (id != null && id != "") {
+           return this.ModeleVehicules.filter(qtreel => qtreel.marque_id == id);
+      
+        }
+      };
+    },
     codeEquipement() {
       return id => {
         if (id != null && id != "") {
@@ -485,7 +620,7 @@ export default {
         parseFloat(this.tauxArrondit);
       // parseFloat(this.formData.taux_id);
       if (isNaN(val)) return null;
-      return parseFloat(val).toFixed(2);
+      return parseFloat(val).toFixed(0);
     },
     montantTtc() {
       const val =
@@ -493,7 +628,7 @@ export default {
         parseFloat(this.montantTva);
       // parseFloat(this.formData.taux_id);
       if (isNaN(val)) return null;
-      return parseFloat(val).toFixed(2);
+      return parseFloat(val).toFixed(0);
     },
     editmontantTva() {
       const val =
@@ -501,7 +636,7 @@ export default {
         parseFloat(this.editReferentielPrix.taux);
       // parseFloat(this.formData.taux_id);
       if (isNaN(val)) return null;
-      return parseFloat(val).toFixed(2);
+      return parseFloat(val).toFixed(0);
     },
     editmontantTtc() {
       const val =
@@ -509,7 +644,7 @@ export default {
         parseFloat(this.editmontantTva);
       // parseFloat(this.formData.taux_id);
       if (isNaN(val)) return null;
-      return parseFloat(val).toFixed(2);
+      return parseFloat(val).toFixed(0);
     },
     veifEquipementExist() {
       return this.formData.equipement_id == "";
@@ -582,32 +717,17 @@ alert("veuillez remplir le prix Unitaire")
     },
     // fonction pour vider l'input modification
     modifierFamilleLocal() {
-         if (this.editReferentielPrix.equipement_id == ""){
-        alert("veuillez Selectionner le type d'equipement")
-     
-      }
-      else if (this.editReferentielPrix.famille_id =="" ) {
-alert("veuillez Selectionner la famille")
-      }
-      else if (this.editReferentielPrix.libelle =="" ) {
-alert("veuillez remplir la designation")
-      }
-       else if (this.editReferentielPrix.prix_ht =="" ) {
-alert("veuillez remplir le prix Unitaire")
-      }
-     
-      else
-      {
+         
         var nouvelObjet1 = {
         ...this.editReferentielPrix,
         montant_ttc: this.editmontantTtc,
         tva: this.editmontantTva,
          taux:this.affcherTauxEnCours
         
-      };
+      }
       this.modifierArticles(nouvelObjet1);
       this.$("#modificationModal").modal('hide');
-      }
+      
       
     },
     alert() {
@@ -622,8 +742,8 @@ alert("veuillez remplir le prix Unitaire")
 
 <style scoped>
 .taillemodal {
-  width: 68%;
-  margin: 0 -850px;
+  width: 45%;
+  margin: 0 -30%;
 }
 
 </style>
