@@ -263,7 +263,7 @@
           <li class="divider"></li>
            <li>
             <router-link :to="{name: 'PlanInfrastructure'}" tag="a">
-              <i class="icon-key"></i> Plan des Infrastructures
+              <i class="icon-key"></i> Plan des Infrastructures et Equipements
             </router-link>
           </li>
           <li class="divider"></li> 
