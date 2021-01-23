@@ -1022,23 +1022,7 @@
                    <!-- <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p> -->
                      </template>
                      <template v-else>
-                       <p style="font-size:14px;text-align:center;color:red">LA procedure de recrutement de 3CV n'est pas été defini donc veillez selectionner autre procedure sur l'offre
-                          <div class="widget-title">
-                            <ul class="nav nav-tabs">
-                                 <li class="active"><a data-toggle="tab" href="#tab456901">l'offre</a></li>
-                            </ul>
-                          </div>
-                              <div class="widget-content tab-content">
-        <div id="tab456901" class="tab-pane active ">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
-
-
-                      <publication-Offre :macheid="detail_marche.id"></publication-Offre>
-                         </div>
-                              </div>
+                     <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p>
                      </template>
                 </div>
             </div>
@@ -1208,7 +1192,7 @@ created() {
 
     affcicheEtapeProcedure(){
       return (dotation,procedure,marche_id)=>{
-                //  console.log(procedure)
+                  console.log(procedure)
 
                let offre=this.appelOffres.find(item=>item.marche_id==marche_id)
 
