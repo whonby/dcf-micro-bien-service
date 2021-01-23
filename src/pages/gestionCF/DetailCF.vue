@@ -23,7 +23,7 @@
                                 <tbody>
                                 <tr class="odd gradeX">
                                     <td>{{detail.matricule || 'Non renseigné'}}</td>
-                                    <td  >{{detail.email || 'Non renseigné'}}</td>
+                                    <td>{{detail.email || 'Non renseigné'}}</td>
                                     <td  v-if="detail.user_role.role.code_role=='DCF'">Directeur du contrôle financier</td>
                                     <td  v-if="detail.user_role.role.code_role=='CF'">Contrôleur financier</td>
 

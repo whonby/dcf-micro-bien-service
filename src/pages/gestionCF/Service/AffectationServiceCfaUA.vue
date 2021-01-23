@@ -37,9 +37,9 @@
                         <div class="widget-box">
                             <div class="widget-title">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="tab" href="#tab1">Liste Unité adminitrative</a></li>
-                                    <li class=""><a data-toggle="tab" href="#tab2">Affectation du CF</a></li>
-
+                                    <li class="active"><a data-toggle="tab" href="#tab1">LISTE UNITE ADMINISTRATIVE</a></li>
+                                    <li class="" v-if="!noDCfNoAdmin() || !cf()"><a data-toggle="tab" href="#tab2">AFFECTATION CF AU SERVICE</a></li>
+                                    <li class=""><a data-toggle="tab" href="#tab3">PERSONNEL SERVICE</a></li>
                                 </ul>
                             </div>
                             <div class="widget-content tab-content">
@@ -89,7 +89,7 @@
                                                     <th title="unite administrative">UA</th>
                                                     <th>Date affectation</th>
                                                     <th>Date fin</th>
-                                                    <th>Action</th>
+                                                    <th v-if="!noDCfNoAdmin() || !cf()">Action</th>
 
                                                 </tr>
                                                 </thead>
@@ -109,7 +109,7 @@
                                                         {{ formaterDate(uniteadministrative.affectation.date_fin) }}</td>
                                                     <td  style="background: #069917;color: #fff" v-else>
                                                         En-cours</td>
-                                                    <td > <div class="btn-group">
+                                                    <td v-if="!noDCfNoAdmin() || !cf()"> <div class="btn-group">
                                                         <button @click.prevent="detacher(uniteadministrative.affectation.id,uniteadministrative.libelle)"  class="btn btn-warning ">
                                                             <span class=""><i class="icon-remove"></i></span>
                                                         </button>
@@ -225,7 +225,135 @@
 
                                     </div>
                                 </div>
+                                <div id="tab3" class="tab-pane">
+                                    <div class="widget-box">
+                                        <div class="widget-title">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a data-toggle="tab" href="#tabA">LISTE PERSONNEL</a></li>
+                                                <li class=""><a data-toggle="tab" href="#tabP" v-if="!noDCfNoAdmin() || !cf()">AJOUTER</a></li>
 
+                                            </ul>
+                                        </div>
+                                        <div class="widget-content tab-content">
+                                            <div id="tabA" class="tab-pane active">
+                                                <table class="table table-bordered table-striped">
+                                                    <thead>
+                                                    <tr>
+
+
+                                                        <th>Matricule</th>
+                                                        <th>Nom et prénom</th>
+                                                        <th>Email</th>
+<!--                                                        <th>Rôle</th>-->
+                                                        <th>Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr class="odd gradeX" v-for="titre in filterMembreService(detail.id)" :key="titre.id">
+                                                        <td :class="{ red : titre.status }">{{titre.matricule || 'Non renseigné'}}</td>
+                                                        <td :class="{ red : titre.status }">{{titre.name || 'Non renseigné'}}</td>
+                                                        <td :class="{ red : titre.status }">{{titre.email || 'Non renseigné'}}</td>
+                                                        <td :class="{ red : titre.status }" v-if="titre.role">{{titre.role.libelle}}</td>
+                                                        <td :class="{ red : titre.status }">
+                                                            <!--                    <router-link :to="{ name: 'DetailCF', params: { id: titre.id }}"-->
+                                                            <!--                                 class="btn btn-default " title="Detail CF">-->
+                                                            <!--                      <span class=""><i class=" icon-folder-open"></i></span>-->
+                                                            <!--                    </router-link>-->
+                                                            <div class="btn-group">
+                                                                <button  class="btn btn-danger ">
+                                                                    <span class=""><i class="icon-trash"></i></span></button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- <tr v-if="titreFiltres.length==0" align="right">
+                                                      <h6>Pas de donnée disponible</h6>
+                                                    </tr> -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div id="tabP" class="tab-pane">
+                                               <table class="table">
+                                                   <tr>
+                                                       <td>
+
+                                                           <label>LISTE PERSONNEL
+                                                               <a href="#" @click.prevent="videTypeCF()" v-if="personnel_selectionne" style="color: red">
+                                                                   <i class="fa fa-trash-o"></i></a>
+                                                           </label>
+                                                           <model-list-select style="background-color: #fff;"
+                                                                              class="wide"
+                                                                              :list="acteurActivite"
+                                                                              v-model="personnel_selectionne"
+                                                                              option-value="id"
+                                                                              option-text="name"
+                                                                              placeholder="Personnel"
+                                                           >
+
+                                                           </model-list-select>
+                                                       </td>
+                                                   </tr>
+                                                   <tr>
+                                                       <td>
+                                                           <div class="">
+                                                               <label class="">Matricule:</label>
+                                                               <div class="">
+                                                                   <input type="text" v-model="formDataMembre.matricule" class="span" placeholder="" />
+                                                               </div>
+                                                           </div>
+                                                       </td>
+                                                       <td>
+                                                           <div class="">
+                                                               <label class="">Nom et prénom:</label>
+                                                               <div class="">
+                                                                   <input type="text" v-model="formDataMembre.name" class="span" placeholder="" />
+                                                               </div>
+                                                           </div>
+                                                       </td>
+
+                                                   </tr>
+                                                   <tr>
+                                                       <td>
+                                                           <div class="">
+                                                               <label class="">Date:</label>
+                                                               <div class="">
+                                                                   <input type="date" v-model="formDataMembre.date_debut" class="span" placeholder="" />
+                                                               </div>
+                                                           </div>
+                                                       </td>
+                                                       <td>
+                                                           <div class="">
+                                                               <label class="">Email:</label>
+                                                               <div class="">
+                                                                   <input type="text" required v-model="formDataMembre.email" class="span" placeholder="" />
+                                                               </div>
+                                                           </div>
+                                                       </td>
+                                                   </tr>
+                                                   <tr>
+                                                       <td>
+                                                           <div class="">
+                                                               <label class="">FONCTION DANS LE SID-CF</label>
+                                                               <div class="">
+                                                                   <select v-model="formDataMembre.role_id">
+                                                                       <option></option>
+                                                                       <option v-for="item in filterRole" :key="item.id" :value="item.id" >
+                                                                           {{item.libelle}}
+                                                                       </option>
+                                                                   </select>
+                                                               </div>
+                                                           </div>
+                                                       </td>
+                                                   </tr>
+
+
+                                               </table>
+                                                <a @click.prevent="ajouterPersonnelService" class="btn btn-primary"
+                                                   href="#">Valider</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -292,17 +420,21 @@
       ";*/
     import moment from "moment"
     import {partition} from "../../../Repositories/Repository"
-
+    import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
     //import ProgressBar from "../component/ProgressBar"
+    import {admin,dcf,cf,noDCfNoAdmin} from "../../../Repositories/Auth"
     export default {
         name: 'AffectationServiceCfaUA',
         props: ['marche'],
         components:{
             //ProgressBar
+            ModelListSelect
         },
         data() {
             return {
                 search:"",
+                personnel_selectionne:"",
                 fabActions: [
                     {
                         name: "cache",
@@ -324,22 +456,35 @@
                 section:"",
                 edite:"",
                 libelleUniteAdmin:"",
-                date_fin:""
+                date_fin:"",
+                formDataMembre:{
+                    email:"",
+                    name:"",
+                    role_id:"",
+                    matricule:"",
+                    servicecf_id:"",
+                    date_debut:"",
+                    role:2
+                },
 
             };
         },
         created() {
             this.detail=this.getterServiceCF.find(item=>item.id==this.$route.params.id)
             this.detailAffectation=this.getterAffectation.filter(item=>item.servicecf_id==this.$route.params.id)
-
+            this.formDataMembre.servicecf_id=this.detail.id
+            console.log(this.acteurActivite)
             //  console.log(this.detail)
         },
         computed: {
-            ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterServiceCF","getterAffectionServiceCF"]),
+            ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterServiceCF","getterAffectionServiceCF","getterRoles"]),
             ...mapGetters("uniteadministrative", [
                 "jointureUaChapitreSection",
                 "uniteAdministratives"
             ]),
+            ...mapGetters('personnelUA', ["personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
+                "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
+                "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
             ...mapGetters("parametreGenerauxAdministratif", [
                 "chapitres",
                 "sections",
@@ -350,6 +495,64 @@
                 "afficheLocalisationGeoNiveau5",
                 "natures_sections"
             ]),
+            filterRole(){
+                return this.getterRoles.filter(item=>{
+                    if(item.code_role!="DCF" && item.code_role!="CF" && item.code_role!="SUPER_ADMIN"){
+                        return item
+                    }
+                })
+            },
+
+            acteurActivite() {
+              let objet = this.uniteAdministratives.find(item=>item.code=="322-13010212-780102")
+                //console.log(objet)
+                if (objet!=undefined){
+                    let array=[]
+                    let ob=this.personnaliseActeurDepense.filter(row=>row.unite_administrative_id==objet.id)
+                    ob.forEach(function (value) {
+                        let nom_prenom=value.nom+" "+value.prenom
+                        let _objet={
+                            ...value,
+                            name:nom_prenom
+                        }
+                        array.push(_objet)
+                    })
+                    return array;
+                }
+
+                return []
+            },
+
+            filterMembreService(){
+              return service_id=>{
+                  if(service_id){
+                      let array_user=[]
+                      let vm=this
+                      let affactation = this.getterAffectionServiceCF.filter(item=>item.servicecf_id==service_id)
+                      //console.log(affactation)
+                      if(affactation.length>0){
+                          affactation.forEach(function (value) {
+                          if(value.date_fin==null){
+                             let objet_user=vm.getterUtilisateur.find(item=>item.id==value.user_id)
+                              let valeur_status=false;
+                             if(value.role==1){
+                                 valeur_status=true
+                             }
+                              let objet_per={
+                                 ...objet_user,
+                                  status:valeur_status
+                              }
+                              array_user.push(objet_per)
+                          }
+                         })
+                      }
+                  return array_user
+                  }
+                  return ""
+
+
+              }
+            },
             cfUniteAdmin(){
 
                 return id=>{
@@ -483,7 +686,10 @@
             },
         },
         methods: {
-            ...mapActions('Utilisateurs', ['ajouterAffectation',"getAffectation","supprimerAffectation","modifierAffection"]),
+            ...mapActions('Utilisateurs', ['ajouterAffectation',"getAffectation","supprimerAffectation","modifierAffection","ajouterPersonneService","ajouterPersonneService"]),
+            videTypeCF(){
+                this.personnel_selectionne=""
+            },
             formaterDate(date) {
                 return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
@@ -501,12 +707,7 @@
                 this.page ++
             },
             ajouer(){
-                /* formData:{
-                     role_id:"",
-                         user_id:"",
-                         date_debut:"",
-                         unite:""
-                 }*/
+
                 this.formData.unite=this.unite
                 this.formData.servicecf_id=this.detail.id
               //  this.formData.role_id=this.detail.user_role.role_id
@@ -519,6 +720,35 @@
                     unite:""
                 }
 
+            },
+            ajouterPersonnelService(){
+//console.log(this.formDataMembre)
+                if(this.formDataMembre.email==""){
+                    this.$notify({
+                        title: 'ERROR',
+                        text: "Veillez selectionner l'email",
+                        type:"error"
+                    })
+                    return null
+                }
+                if(this.formDataMembre.date_debut==""){
+                    this.$notify({
+                        title: 'ERROR',
+                        text: 'Veillez selectionner la date debut',
+                        type:"error"
+                    })
+                    return null
+                }
+                this.ajouterPersonneService(this.formDataMembre)
+                this.formDataMembre={
+                        email:"",
+                        name:"",
+                        role_id:"",
+                        matricule:"",
+                        servicecf_id:"",
+                        date_debut:"",
+                        role:2
+                }
             },
             detacher(id,libelle){
                 this.$('#myAlert1').modal({
@@ -562,8 +792,33 @@
             },
             removeUnite(id){
                 this.arrayUniteAdmin=this.arrayUniteAdmin.filter(item=>item!=id)
-            }
-        }
+            },
+            admin:admin,
+            dcf:dcf,
+            cf:cf,
+            noDCfNoAdmin:noDCfNoAdmin,
+        },
+        watch: {
+            personnel_selectionne:function (value) {
+                console.log(value);
+                 if (value){
+                     let objet_personnel=this.acteurActivite.find(item=>item.id==value)
+                     //console.log(objet_personnel)
+                     this.formDataMembre.email=objet_personnel.email
+                     this.formDataMembre.matricule=objet_personnel.matricule
+                     this.formDataMembre.name=objet_personnel.name
+                     console.log(this.formDataMembre)
+                 }else{
+                     this.formDataMembre.email=""
+                     this.formDataMembre.matricule=""
+                     this.formDataMembre.name=""
+                 }
+
+
+            },
+
+
+        },
     };
 </script>
 <style scoped>
@@ -630,5 +885,9 @@
     .tailleModalOffre2{
         width: 1300px;
         margin: 0 -690px;
+    }
+    .red {
+        color: black !important;
+        background-color: #00eb00 !important;
     }
 </style>

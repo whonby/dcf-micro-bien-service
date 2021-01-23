@@ -22,6 +22,7 @@ import ServiceCF from "@/pages/gestionCF/Service/ServiceCF";
 import AffectationCFAService from "@/pages/gestionCF/Service/AffectationCFAService";
 import DetailServiceCF from "@/pages/gestionCF/DetailServiceCF";
 import AffectationServiceCfaUA from "@/pages/gestionCF/Service/AffectationServiceCfaUA";
+
 const AuthRoutes = [
     {
         path: '/affecation-service-cf-ua/:id',

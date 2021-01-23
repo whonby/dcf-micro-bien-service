@@ -1,5 +1,6 @@
 <template>
   <div>
+      <notifications />
     <!--Header-part-->
     <div id="header">
       <h1>
@@ -43,6 +44,13 @@
             <span>UNITE ADMINISTRATIVE</span>
           </a>
         </li>
+          <li @click.prevent="monEquipe" v-if="noDCfNoAdmin() || cf()" :class="{active: active_el == 100 }">
+              <a  title="" href="#">
+                  <i class="icon-group"></i>
+                  <span>MOM EQUIPE && STRUCTURE CONTROLE</span>
+              </a>
+          </li>
+
         <li @click.prevent="navigateRetourAuMenu" >
           <a title="Carte des infrastructure pas regison" href="#">
             <i class=" icon-arrow-left"></i>
@@ -135,7 +143,7 @@
 
 <script>
 import {mapGetters, mapState, mapMutations, mapActions } from "vuex";
-import {admin,dcf,cf} from "../Repositories/Auth"
+import {admin,dcf,cf,noDCfNoAdmin} from "../Repositories/Auth"
 
 export default {
    
@@ -149,7 +157,7 @@ export default {
      active_el: state => state.active_el
   }),
   ...mapGetters('personnelUA', ['sauvegardePhoto']),
-
+      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterServiceCF","getterAffectionServiceCF","getterRoles"]),
 
 
   AffichePhoto() {
@@ -191,6 +199,7 @@ return objJson.id
     admin:admin,
     dcf:dcf,
     cf:cf,
+      noDCfNoAdmin:noDCfNoAdmin,
  navigateToCatographieBudgetaire(){
         this.activate(8)
         this.$router.push({
@@ -218,6 +227,36 @@ navigateToGestionMarche(){
       },
 
 
+      monEquipe(){
+
+          let objet=localStorage.getItem('Users');
+          let user=JSON.parse (objet)
+         // console.log(user)
+          let affactation = this.getterAffectionServiceCF.find(item=>{
+              if(item.user_id==user.id && item.date_fin==null) return item;
+          })
+          this.activate(100)
+          console.log(affactation)
+         if(affactation!=undefined){
+             this.$router.push({
+                 name: 'AffectationServiceCfaUA',
+                 params: { id: affactation.servicecf_id }
+             })
+         }else{
+             this.$notify({
+                 title: 'ERROR',
+                 text: "Vous n'etre pas autorise a accede a cette resource",
+                 type:"error"
+             })
+           //  this.activate(11)
+             this.$router.push({
+                 name: 'TableauDeBordG',
+                 params: { id: 2 }
+             })
+         }
+
+
+      },
 
       navigateToActeurDepense(){
         this.activate(2)
@@ -234,9 +273,11 @@ navigateToGestionMarche(){
       },
  navigateToTableauBord(){
         this.activate(11)
-        this.$router.push({
-          name: 'TableauBordUaSimple'
-        })
+
+     this.$router.push({
+         name: 'TableauDeBordG',
+         params: { id: 2 }
+     })
       },
        navigateToParametreGeneraux(){
         this.activate(17)
