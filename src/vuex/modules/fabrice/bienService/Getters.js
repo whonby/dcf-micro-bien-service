@@ -6,6 +6,7 @@ export const gestionModules = state => state.gestionModules
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
+export const TacheMarche = state => state.TacheMarche
 export const choixprocedure = state => state.choixprocedure
 export const villes = state => state.villes
 export const receptionMarche = state => state.receptionMarche

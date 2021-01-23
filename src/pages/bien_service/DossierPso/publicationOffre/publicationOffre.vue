@@ -13,11 +13,12 @@
                                         <th>Mode de passation</th>
                     
 
-                                        <th>Objet appel</th>
+                                        
                                         <th>Date début de publication</th>
-
-                                        <th>Date fin de publication</th>
-                                        <th>Numéro d'autorisation</th>
+                                          <th>Date fin de publication</th> 
+                                        
+                                        <th>Objet appel</th>
+                                        <!-- <th>Numéro d'autorisation</th> -->
                                         <th>Date d'autorisation </th>
                                         <th>Heure limites</th>
                                        
@@ -36,13 +37,18 @@
 
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{afficheLibelleModePassation(appelOffre.mode_passation_id) || 'Non renseigné'}}</td>
+                                       
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{formaterDate(appelOffre.date_limite) || 'Non renseigné'}}</td>
+                                             <td @dblclick="afficherModalModifierActeDepense(index)">
 
                                             {{formaterDate(appelOffre.date_emission) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{formaterDate(appelOffre.date_limite) || 'Non renseigné'}} {{appelOffre.heure}}</td>
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.objet_appel || 'Non renseigné'}}</td>
+                                            <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{formaterDate(appelOffre.date_numero_autorisation) || 'Non renseigné'}}</td>
+                                             <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.heure || 'Non renseigné'}}</td>
                                         
                                             <td>
                                         <div class="btn-group">
@@ -126,8 +132,7 @@
                         </div>
                             </td>
                             </tr>
-                            </table>
-                             <table>       
+                                 
                             <tr>
                                 <td>
                         <div class="control-group">
@@ -138,16 +143,22 @@
                             </div>
                         </div>
                         </td>
-                            <td colspan="2">
+                               <td colspan="2">
                         <div class="control-group">
                             <div class="controls">
-                                <input type="text" class="span" placeholder="" v-model="formData.numero_autorisation" >
+                                <label>Date fin de publication </label>
+                                <input type="date" class="span" placeholder="Date limite" v-model="formData.date_limite">
                             </div>
                         </div>
                         </td>
-
-
-                           
+                            <!-- <td colspan="2">
+                        <div class="control-group">
+                            <div class="controls">
+                                 <label>Numéro d'autorisation </label>
+                                <input type="text" class="span" placeholder="" v-model="formData.numero_autorisation" >
+                            </div>
+                        </div>
+                        </td>   -->
                         </tr>
                         <tr>
 
@@ -156,7 +167,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Date d'autorisation :</label>
                                     <div class="controls">
-                                        <input type="date" class="span" placeholder="" v-model="formData.date_numero_autorisation">
+                                        <input type="date" class="span"   placeholder="" v-model="formData.date_numero_autorisation" >
                                     </div>
                                 </div>
                             </td>
@@ -172,7 +183,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fichier DAO:</label>
                                     <div class="controls">
-                                        <input type="file"   @change="OnchangeFichier" />
+                                        <input type="file" >
                                     </div>
                                 </div>
                             </td>
@@ -256,16 +267,16 @@
                         </div>
                             </td>
                             </tr>
-                            <table>
+                         
                             <tr>
-                             <td>
+                             <!-- <td>
                         <div class="control-group">
                             <div class="controls">
                                 <label>Date début de publication</label>
                                 <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
                             </div>
                         </div>
-                                </td>
+                                </td> -->
                                 
                                  <td >
                         <div class="control-group">
@@ -279,14 +290,14 @@
                         <div class="control-group">
                             <div class="controls">
                                 <label>Numéro d'autorisation <code></code></label>
-                                <input type="text" class="span" v-model="edite_appel_offre. imputation">
+                                <input type="text" class="span" v-model="edite_appel_offre.numero_autorisation">
                             </div>
                         </div>
                         </td>
 
                            
                         </tr>
-                         </table>
+                        
                         <tr>
                              <td>
                                 <div class="control-group">
@@ -308,7 +319,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fichier DAO:</label>
                                     <div class="controls">
-                                        <input type="file"   @change="OnchangeFichier" />
+                                        <input type="file"  >
                                     </div>
                                 </div>
                             </td>
@@ -569,7 +580,21 @@ typeProcedureLibelle() {
             },     
 
            
-
+//
+afficherAutorisation(){
+    return procedure =>{
+        if(this.mode_passation_id){
+            let objet=this.procedurePassations.find(item => item.id==this.mode_passation_id)
+            console.log("oooooo")
+            if(objet){
+                if(this.inArray(procedure,objet.code)){
+                    return true
+                }
+                return false
+            }
+        }
+    }
+},
 
 
 

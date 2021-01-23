@@ -162,10 +162,7 @@
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
                       <button class="btn btn-danger" @click="supprimerMandat(factu.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
+                       <span class=""><i class="icon-trash">Supprimer</i></span></button>
                     </td>
                    
                   </tr>

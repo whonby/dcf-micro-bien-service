@@ -174,7 +174,6 @@
                 const searchTerm = this.search.toLowerCase();
 
                 return this.listeCFNonAffeceter.filter((item) => {
-
                         return item.matricule.toLowerCase().includes(searchTerm)
                             || item.name.toLowerCase().includes(searchTerm)
                     }

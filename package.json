@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build ",
     "lint": "vue-cli-service  lint"
   },
   "dependencies": {
@@ -15,7 +15,7 @@
     "@salamander.be/vue-gantt": "0.0.1",
     "@types/leaflet-label": "^0.2.35",
     "apexcharts": "^3.22.0",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.9.3",
     "core-js": "^2.6.5",
@@ -59,7 +59,7 @@
     "pretty-checkbox-vue": "^1.1.9",
     "pusher-js": "^7.0.0",
     "save": "^2.4.0",
-    "view-design": "^4.3.2",
+    "view-design": "^4.4.0",
     "vue": "^2.6.10",
     "vue-advanced-chat": "^0.4.6",
     "vue-apexcharts": "^1.6.0",

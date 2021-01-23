@@ -614,13 +614,13 @@ afficherTypeMarche() {
       };
     },
       afficherTypeMarcheLibelle() {
-       console.log("afficherTypeMarcheLibelle")
+       
       return id => {
         if (id != null && id != "") {
            const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
 
       if (qtereel!=undefined) {
-        console.log("afficherTypeMarcheLibelle 1")
+        
         return qtereel.libelle;
       }
       return 0

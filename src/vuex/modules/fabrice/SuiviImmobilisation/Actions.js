@@ -3,7 +3,7 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 var housecall = require("housecall");
 var queue = housecall({ concurrency: 2, cooldown: 1000 });
 
-
+modifierArticles
 //////////////////////////*debut action famille */////////////////////////////
 
 // afficher liste famille
@@ -597,7 +597,9 @@ export function ajouterArticles({ commit, dispatch }, nouveau) {
       prix_ht: nouveau.prix_ht,
       taux: nouveau.taux,
       tva: nouveau.tva,
-      
+      description:nouveau.description,
+      marque_id:nouveau.marque_id,
+      model_id:nouveau.model_id,
       montant_ttc: nouveau.montant_ttc,
       famille_id: nouveau.famille_id
     }))
@@ -626,7 +628,9 @@ export function modifierArticles({ commit, dispatch }, nouveau) {
       libelle: nouveau.libelle,
       prix_ht: nouveau.prix_ht,
       tva: nouveau.tva,
-      
+      description:nouveau.description,
+      marque_id:nouveau.marque_id,
+      model_id:nouveau.model_id,
       montant_ttc: nouveau.montant_ttc,
       famille_id: nouveau.famille_id,
  taux: nouveau.taux

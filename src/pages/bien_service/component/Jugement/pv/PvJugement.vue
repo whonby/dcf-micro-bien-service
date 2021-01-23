@@ -3,14 +3,14 @@
 
   <div align="right">
     <div class="widget-content">
-      <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+      <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Joindre Document</a>
     </div>
   </div>
   <table class="table table-bordered table-striped"  v-if="macheid">
     <thead>
     <tr>
-      <th>Reference Pv</th>
-      <th>Date rapport jugement</th>
+      <th>Réference PV</th>
+      <th>Date PV jugement</th>
       <th>Fichier</th>
       <th>Action</th>
     </tr>
@@ -39,7 +39,7 @@
         </td>
         <td>
           <button @click.prevent="supprimerProceVerbal(rapport.id)"  class="btn btn-danger " title="Supprimer">
-            <span class=""><i class="icon-trash">Supprimer</i></span></button>
+            <span class=""><i class="icon-trash"></i>Supprimer</span></button>
         </td>
 
       </div>

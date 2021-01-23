@@ -108,6 +108,7 @@ const defaultState = {
     infoFiltreTableauBord:"",
     membre_comite_evaluations:[],
     structure_daos:[],
+    TacheMarche:[],
 
 }
 

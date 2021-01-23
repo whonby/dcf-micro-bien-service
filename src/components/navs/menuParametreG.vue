@@ -194,7 +194,7 @@
               <i class="icon-key"></i> Structure des Infrastructures
             </router-link>
           </li>
-          <li class="divider"></li> -->
+          <li class="divider"></li>
         </ul>
       </li>
      <li class="dropdown" id="lesPlans">
