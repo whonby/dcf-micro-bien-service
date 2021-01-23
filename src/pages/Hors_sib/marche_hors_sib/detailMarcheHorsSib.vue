@@ -110,7 +110,8 @@
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOR'] , detail_marche.id)">Appel d'Offre Ouvert Restreint (AOR)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['ED'],detail_marche.id)">Entente direct (ED)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['CONV'],detail_marche.id)">Convention (CONV)</h4>
-
+             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['GAG'],detail_marche.id)">Gré à Gré (GAG)</h4>
+             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['LCVM'],detail_marche.id)">Lettre de Commande Valant Marché (LCVM)</h4>
             <div class="row-fluid">
                 <div class="span12">
                      <template v-if="affcicheEtapeProcedure(10000000,['PSC-SC'],detail_marche.id)">
@@ -947,7 +948,7 @@
                     </div>
                     
 </template>
-          <template v-else-if="affcicheEtapeProcedure(0,['ED','CONV'],detail_marche.id )">
+          <template v-else-if="affcicheEtapeProcedure(0,['ED','CONV','GAG'],detail_marche.id )">
           <div class="widget-box">
              <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -1021,6 +1022,87 @@
                     </div>
                    <!-- <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p> -->
                      </template>
+                     <template v-else-if="affcicheEtapeProcedure(0,['LCVM'],detail_marche.id )">
+          <div class="widget-box">
+             <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                 <li class="active"><a data-toggle="tab" href="#tab45690">l'offre</a></li>
+                                 <li class=""><a data-toggle="tab" href="#lot21">Lot</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab289">D.DMP</a></li>
+                              <li class=""><a data-toggle="tab" href="#tab280">D.ANO Bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab10">Attribution</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab00214">Bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab2025">ANRMP</a></li>
+                               
+                              
+                                
+                                
+                            </ul>
+                        </div>
+        
+            <div class="widget-content tab-content">
+        <div id="tab45690" class="tab-pane active ">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterOffre1" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+
+
+                      <publicationOffreLCV :macheid="detail_marche.id"></publicationOffreLCV>
+                         </div>
+
+                          <div id="lot21" class="tab-pane">
+                             <lot-marche :macheid="detail_marche.id"></lot-marche>
+                           </div>
+                            
+                         <div id="tab289" class="tab-pane">
+
+                    <AnoDMPLCV :macheid="detail_marche.id"></AnoDMPLCV>
+<!--                 <componentDemandeAno :macheid="detail_marche.id"> </componentDemandeAno>-->
+
+                </div>
+
+                         <div id="tab280" class="tab-pane">
+
+
+                    <AnoBailleurLCV :macheid="detail_marche.id"></AnoBailleurLCV>
+              
+<!--                 <componentAvisBailleurCf :macheid="detail_marche.id"> </componentAvisBailleurCf>-->
+
+                </div>
+
+                           <div id="tab10" class="tab-pane">
+                    <ActeEffetFinancierLCV :macheid="detail_marche.id"></ActeEffetFinancierLCV>
+<!--                <component-acte :macheid="detail_marche.id"></componentActe>-->
+
+                </div>
+                
+
+
+                         <div id="tab00214" class="tab-pane">
+                <div align="right">
+             <div class="widget-content">
+                 <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+                </div>
+                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                </div>
+
+                <div id="tab2025" class="tab-pane">
+                <!-- <div align="right">
+                    <div class="widget-content">
+                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div> -->
+                <Arnmp :macheid="detail_marche.id"></Arnmp>
+
+                </div>
+            </div>
+                    </div>
+                   <!-- <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p> -->
+                     </template>
                      <template v-else>
                      <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p>
                      </template>
@@ -1051,6 +1133,7 @@
      import componentOuverture from '../../bien_service/dossierDetailMarchePs/dossierComponentOuverture/componentOuverture';  
  //  import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
     import publicationOffre from '../../bien_service/DossierPso/publicationOffre/publicationOffre';
+    import publicationOffreLCV from '../../bien_service/DossierPso/publicationOffre/publicationOffreLCV';
    // import addLot from '../dossierLot/addLot';
    
         import invitationCf from '../../bien_service/DossierPso/lettreInvitation/invitationCf';
@@ -1065,7 +1148,8 @@ import rapportOuverture from '../../bien_service/dossierDetailMarcheProcedureSim
      
      import componentBailleur1 from '../../bien_service/component/bailleurMarche';
    import componentBailleur from '../../bien_service/dossierDetailMarchePs/dossierBailleur/componentBailleur';
-
+   import AnoBailleurLCV from '../../bien_service/component/AnoBailleur/AnoBailleurLCV';
+   import ActeEffetFinancierLCV from '../../bien_service/component/ActEffetFinancier/ActeEffetFinancierLCV';
       import executionLigneExempte from '../../bien_service/executionLigneExempte/executionLigneExempte';
   import reserveCf from '../../bien_service/dossierReserveCF/reserveCf';
     //    import componentDemandeAno from '../dossierDetailMarcheAOI_AON/dossierDemande_ano_cf/componentDemandeAno';
@@ -1079,6 +1163,7 @@ import PvJugement from "@/pages/bien_service/component/Jugement/pv/PvJugement";
 import { formatageSomme } from "../../../../src/Repositories/Repository";
   import Jugement from "@/pages/bien_service/component/Jugement/Jugement";
   import AnoDMP from "@/pages/bien_service/component/AnoDMP/AnoDMP";
+  import AnoDMPLCV from "@/pages/bien_service/component/AnoDMP/AnoDMPLCV";
   import AnoBailleur from "@/pages/bien_service/component/AnoBailleur/AnoBailleur";
     import ActEffeFinanciere from "@/pages/bien_service/component/ActEffetFinancier/ActEffeFinanciere";
     import ActEffeFinancier1 from "../../../pages/bien_service/component/ActEffetFinancier/ActeEffetFinancier1"
@@ -1088,7 +1173,10 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
           ActEffeFinanciere,
           ActEffeFinancier1,
           AnoBailleur,
+          AnoBailleurLCV,
+          ActeEffetFinancierLCV,
           AnoDMP,
+          AnoDMPLCV,
           PvJugement,
           Jugement,
           OuvertureOffre,
@@ -1098,6 +1186,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
             componentOuverture,
             reserveCf,
             publicationOffre,
+            publicationOffreLCV,
             rapportOuverture,
 Arnmp,
 invitationCf,
@@ -1244,7 +1333,11 @@ created() {
              {
                  return true
              }
-             else if(this.inArray(procedure,"ED") || this.inArray(procedure,"CON") )
+             else if(this.inArray(procedure,"ED") || this.inArray(procedure,"CON") || this.inArray(procedure,"GAG") )
+             {
+                 return true
+             }
+              else if(this.inArray(procedure,"LCVM")  )
              {
                  return true
              }
