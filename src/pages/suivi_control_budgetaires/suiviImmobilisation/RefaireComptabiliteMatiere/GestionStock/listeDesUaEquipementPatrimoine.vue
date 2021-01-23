@@ -614,10 +614,10 @@
                     >{{formatageSomme(parseFloat((parseFloat(stock.quantitestock)*parseFloat(stock.prix_unitaire)))) || 'Non renseigné'}}</td>
                     <td style="text-align:center;font-weight:bold;"
                       @dblclick="ModificationVehicule(stock.id)"
-                    >{{formatageSomme((parseFloat(prixUnitaire(stock.id)) *(parseFloat(DureeEcoule)/365)*(1/(dureeVie(stock.id)))))}}</td>
+                    >{{formatageSomme((parseFloat(prixUnitaire(stock.id)) *(parseFloat(DureeEcoule(stock.date_mise_service))/365)*(1/(dureeVie(stock.id)))))|| 0}}</td>
 <td style="text-align:center;font-weight:bold;"
                       @dblclick="ModificationVehicule(stock.id)"
-                    >{{formatageSomme((parseFloat(stock.prix_unitaire))-parseFloat((parseFloat(prixUnitaire(stock.id)) *(parseFloat(DureeEcoule)/365)*(1/(dureeVie(stock.id))))))}}</td>
+                    >{{formatageSomme((parseFloat(stock.prix_unitaire))-parseFloat((parseFloat(prixUnitaire(stock.id)) *(parseFloat(DureeEcoule(stock.date_mise_service))/365)*(1/(dureeVie(stock.id))))))}}</td>
 
                         
                        <td>
@@ -645,9 +645,10 @@
                    <td></td>
                    <td></td>
                    <td></td>
-                   <td></td>
+                   
                    <td style="font-weight:bold;">TOTAL</td>
                    <td style="text-align:center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(MontantTotalVehicule(detail_Ua.uAdministrative_id)))}}</td>
+                   <td></td>
                    <td></td>
                    <td></td>
                    <td></td>
@@ -856,22 +857,7 @@ dateMiseService() {
       return 0
 
 },
-    DureeEcoule(){
-     
-
-      var dateF = new Date(this.afficherDateDuJour).getTime()
-      var dateO = new Date(this.dateMiseService(this.detail_Ua.id)).getTime()
-      var resultat = dateF - dateO
-
-      var diffJour =  resultat / (1000 * 3600 * 24)
-
-      if(isNaN(diffJour)) return null
-
-      if(parseFloat(diffJour) < 0 ) return "durée invalide"
-      
-      return  diffJour;
-
-    },
+    
 afficherDateDuJour(){
 let date = new Date();
         let aaaa = date.getFullYear();
@@ -1637,6 +1623,27 @@ afficherIdService() {
     ]),
      ...mapActions('parametreGenerauxAdministratif', ['getPlanPays', 
    'ajouterPlanOrganigrammeUa','modifierPlanOrganigrammeUa','supprimerPlanOrganigrammeUa']), 
+
+
+
+DureeEcoule(id){
+     
+
+      var dateF = new Date(this.afficherDateDuJour).getTime()
+      var dateO = new Date(this.dateMiseService(id)).getTime()
+      var resultat = dateF - dateO
+
+      var diffJour =  resultat / (1000 * 3600 * 24)
+
+      if(isNaN(diffJour)) return null
+
+      if(parseFloat(diffJour) < 0 ) return "durée invalide"
+      
+      return  diffJour;
+
+    },
+
+
 
    ModificationVehicule(id) {
 
