@@ -93,19 +93,23 @@
                                                         v-for="item in partition(serviceCF(detail.id),size)[page]"
                                                         :key="item.id"
                                                 >
-                                                    <td >{{item.code }}</td>
-                                                    <td >{{item.libelle }}</td>
+                                                    <td>{{item.code }}</td>
+                                                    <td>{{item.libelle }}</td>
                                                     <td>{{ formaterDate(item.affectation.date_debut) }}</td>
                                                     <td  style="background: #99060b;color: #fff" v-if="item.affectation.date_fin">
                                                         {{ formaterDate(item.affectation.date_fin) }}</td>
                                                     <td  style="background: #069917;color: #fff" v-else>
                                                         En-cours</td>
-                                                    <td > <div class="btn-group">
+                                                    <td> <div class="btn-group">
+                                                        <router-link :to="{ name: 'AffectationServiceCfaUA', params: { id: item.id }}"
+                                                                     class="btn btn-default " title="Detail CF">
+                                                            <span class=""><i class=" icon-folder-open"> Détail Service</i></span>
+                                                        </router-link>
                                                         <button @click.prevent="detacher(item.affectation.id,item.libelle)"  class="btn btn-warning ">
-                                                            <span class=""><i class="icon-remove"></i></span>
+                                                            <span class=""><i class="icon-remove"></i></span> Detacher
                                                         </button>
                                                         <button @click.prevent="supprimerAffectationServiceCF(item.affectation.id)"   class="btn btn-danger ">
-                                                            <span class=""><i class="icon-trash"></i></span>
+                                                            <span class=""><i class="icon-trash"></i></span> Supprimer
                                                         </button>
                                                     </div>
                                                     </td>

@@ -664,3 +664,19 @@ export function modifierAffectationServiceCF({commit}, element_modifie) {
         })
     }).catch(error => console.log(error))
 }
+
+
+export  function ajouterPersonneService({commit}, objetAjoute){
+    asyncLoading(apiGuest.post('/ajouterPersonnelService', objetAjoute )).then(res => {
+        if(res.status == 201){
+            commit('AJOUTER_UTILISATEUR', res.data.user)
+
+            commit('AJOUTER_AFFECTATION_SERVICE_CF', res.data.affectation)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+    }).catch(error => console.log(error))
+}

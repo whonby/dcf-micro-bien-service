@@ -206,7 +206,6 @@
   </div>
 </template>
 
-
 <script>
 import { mapGetters, mapActions } from "vuex";
 //import { formatageSomme } from "../../Repositories/Repository";
@@ -225,7 +224,6 @@ export default {
           name: "cache",
           icon: "add"
         }
-
       ],
       search:"",
       active_el:0,
@@ -304,7 +302,6 @@ export default {
   },
   computed: {
     ...mapGetters("Utilisateurs", ["getterUtilisateur","getterRoles","getterEquipeCF"]),
-
     titreFiltres(){
       const searchTerm = this.search.toLowerCase();
       let objet=this.getterEquipeCF.filter(item=>item.cf_id==this.detail.id)
@@ -325,7 +322,6 @@ export default {
           return item
         }
       })
-
     }
 
   },
@@ -349,7 +345,6 @@ export default {
       this.$('#exampleModal').modal('hide');
     },
     afficherModalModifierTitre(index){
-
       this.$('#modifierModal').modal({
         backdrop: 'static',
         keyboard: false
