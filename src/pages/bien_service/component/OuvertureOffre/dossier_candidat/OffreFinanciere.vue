@@ -90,7 +90,8 @@
             <div class="control-group">
               <label class="control-label">Montant total ht :</label>
               <div class="controls">
-                <input type="text"   class="span" placeholder="Montant total HT" v-model="formOffreFinanciere.montant_total_ht">
+                <money v-model="formOffreFinanciere.montant_total_ht" ></money>
+<!--                <input type="text"   class="span" placeholder="Montant total HT" v-model="formOffreFinanciere.montant_total_ht">-->
               </div>
             </div>
           </td>
@@ -104,7 +105,8 @@
             <div class="control-group">
               <label class="control-label">Montant TTC :</label>
               <div class="controls">
-                <input type="number" class="span" placeholder="Montant TTC" v-model="formOffreFinanciere.montant_total_ttc">
+                <money v-model="formOffreFinanciere.montant_total_ttc" ></money>
+<!--                <input type="number" class="span" placeholder="Montant TTC" v-model="formOffreFinanciere.montant_total_ttc">-->
               </div>
             </div>
 
