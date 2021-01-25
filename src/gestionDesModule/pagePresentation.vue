@@ -572,7 +572,7 @@ this.getMembreCojo()
       this.getEcheances()
     this.getMembreComiteEvaluation()
     this.getStructureDAO()
-
+this.getEntrepriseSousTraitance()
         },
 
   computed:{
@@ -764,7 +764,7 @@ return objJson.id
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
           "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner",
-           "getEcheances","pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO"]),
+           "getEcheances","pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO",'getEntrepriseSousTraitance']),
 
     activeMenuModuleParamGeneral(){
       this.activeMenuModuleSidcf(1)

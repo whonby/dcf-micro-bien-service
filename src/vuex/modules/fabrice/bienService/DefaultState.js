@@ -109,7 +109,7 @@ const defaultState = {
     membre_comite_evaluations:[],
     structure_daos:[],
     TacheMarche:[],
-
+    entreprise_soustraitant:[],
 }
 
 export default defaultState;

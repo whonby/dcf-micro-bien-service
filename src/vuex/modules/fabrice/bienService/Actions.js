@@ -4862,7 +4862,6 @@ export function supprimerStructureDAO({commit}, id) {
 
 
 
-
 export  function  getMembreComiteEvaluation({commit}) {
     queue.push(() => axios.get('/membre_comite_evaluation').then((response) => {
         commit('GET_MEMBRE_COMITE_EVALUATION', response.data)
@@ -4970,5 +4969,71 @@ export function supprimerTacheMarche({ commit, dispatch }, id) {
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete('/TacheMarche/' + id).then(() => dialog.close())
     })
+
+}
+
+
+
+
+
+
+
+export function getEntrepriseSousTraitance({ commit }) {
+    queue.push(() => axios.get('/sous_traitance').then((response) => {
+        commit('GET_ENTREPRISE_SOUS_TRAITANCE', response.data)
+
+    }).catch(error => console.log(error)))
+}
+
+
+
+export function ajouterEntrepriseSousTraitance({ commit }, elementAjout) {
+    asyncLoading(axios.post('/sous_traitance', elementAjout)).then(response => {
+        if (response.status == 201) {
+            commit('AJOUTER_ENTREPRISE_SOUS_TRAITANCE', response.data)
+
+            //dispatch('getTacheMarche')
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type: "success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+
+
+
+
+
+
+export function modifierEntrepriseSousTraitance({commit}, element_modifie){
+    asyncLoading( axios.put('/sous_traitance/'+ element_modifie.id, element_modifie))
+        .then(response => {
+            commit('MODIFIER_ENTREPRISE_SOUS_TRAITANCE', response.data)
+           // dispatch('getTacheMarche')
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Modification effectué avec succès!',
+                type:"success"
+            })
+        }).catch(error => console.log(error))
+    // console.log(element_modifie)
+}
+
+
+
+
+export function supprimerEntrepriseSousTraitance({ commit }, id) {
+    this.$app.$dialog
+        .confirm("Voulez vous vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_ENTREPRISE_SOUS_TRAITANCE', id)
+          //  dispatch('getTacheMarche')
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/sous_traitance/' + id).then(() => dialog.close())
+        })
 
 }
