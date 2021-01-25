@@ -23,7 +23,7 @@
     <tr>
       <th>Ref offre</th>
       <th>Soumissionnaire</th>
-      <th> Montant Offre financiere</th>
+      <th> Montant de l'Offre financière</th>
       <th>Type d'analyse</th>
       <th>Conclusion Analyse</th>
 
@@ -93,7 +93,7 @@
         <tr>
           <td>
             <div class="control-group">
-              <label class="control-label">Reference offre</label>
+              <label class="control-label">Référence de l'offre</label>
               <div class="controls">
                 <input
                     type="text"
@@ -147,11 +147,11 @@
       </table>
       <table class="table table-bordered table-striped">
         <thead>
-        <th>N°LOT</th>
+        <th>N°Lot</th>
         <th>Soumissionnaire</th>
-        <th>Conclusion Offre financier</th>
+        <th>Conclusion Offre Financière</th>
         <th>Conclusion Offre Technique</th>
-        <th>Selection du candidat</th>
+        <th>Sélection du candidat</th>
         </thead>
         <tbody>
         <tr v-for="item in getSoumissionaireByLot(marche_id)" :key="item.id">
@@ -186,7 +186,7 @@
     <div class="modal-footer">
       <a data-dismiss="modal" v-if="getSoumissionaireByLot(marche_id)" class="btn btn-primary" @click.prevent="ajouterJugementOffre(marche_id)" href="#">Valider</a>
       <a data-dismiss="modal" v-if="!getSoumissionaireByLot(marche_id)" class="btn btn-primary" disabled href="#">Valider</a>
-      <a data-dismiss="modal" class="btn" href="#">Cancel</a>
+      <a data-dismiss="modal" class="btn" href="#">Annuler</a>
     </div>
   </div>
   <!-- fin formulaire ajout analyse  -->
@@ -194,14 +194,14 @@
   <div id="modifierJugement" class="modal hide grdirModalAnalyse">
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
-      <h3>MODICATION</h3>
+      <h3>MODIFICATION</h3>
     </div>
     <div class="modal-body">
       <table class="table table-bordered table-striped">
         <tr>
           <td>
             <div class="control-group">
-              <label class="control-label">Reference offre</label>
+              <label class="control-label">Référence de l'offre</label>
               <div class="controls">
                 <input
                     type="text"
@@ -284,7 +284,7 @@
     <div class="modal-footer">
       <a data-dismiss="modal" v-if="getSoumissionaireByLot(marche_id)" class="btn btn-primary" @click.prevent="ajouterJugementOffre(marche_id)" href="#">MODIFICATION</a>
       <a data-dismiss="modal" v-if="!getSoumissionaireByLot(marche_id)" class="btn btn-primary" disabled href="#">MODIFICATION</a>
-      <a data-dismiss="modal" class="btn" href="#">Cancel</a>
+      <a data-dismiss="modal" class="btn" href="#">Annuler</a>
     </div>
   </div>
 

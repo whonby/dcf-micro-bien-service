@@ -10,8 +10,8 @@
                                     <tr>
 
                                         <th>Année</th>
-                                          <th title="">N°bon manuel</th>
-                                <th title="">N°demande</th>
+                                          <th title="">N° bon manuel</th>
+                                <th title="">N° demande</th>
                            
                                 <!-- <th title="">Adresse fournisseur</th> -->
                                
@@ -19,13 +19,13 @@
                                 
                                   <th title="">Disponible</th>
                                   <!-- <th>Date paiement</th> -->
-                                  <th>Imputation budgetaire</th>
+                                  <th>Imputation budgétaire</th>
                                 
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th>Observation du Emmetteur</th>
+                                <th>Observation de l'émetteur</th>
                                 
-                                <th>Observation Controleur financier</th>
-                                <th>Observation du ordonnateur</th>
+                                <th>Observation Contrôleur Financier</th>
+                                <th>Observation de l'ordonnateur</th>
                                 <th>Action</th>
                                     </tr>
                                     </thead>

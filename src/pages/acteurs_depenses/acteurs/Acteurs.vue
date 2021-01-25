@@ -130,6 +130,7 @@ Type de Recrutement
                                                 <th>Nom</th>
                                                 <th>Prénom</th>
                                                 <th>Date de naissance</th>
+                                                    <th>Email</th>
                                                 <th >Unité administrative</th>
                                                 
                                                 <th >Service</th>
@@ -145,6 +146,7 @@ Type de Recrutement
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_naissance) }}</td>
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheEmail(item.id) || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheAdministrative(item.unite_administrative_id) || 'Non renseigné'}}</td>
                                                 
                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(item.service_id)|| 'Non renseigné'}}</td>
@@ -966,7 +968,18 @@ recrutement:""
  ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
    ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe','planActe']),
 
+afficheEmail() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
 
+      if (qtereel) {
+        return qtereel.acteur_depense.email;
+      }
+      return 0
+        }
+      };
+    },
 
 afficherUAParDroitAccess() {
        // const st = this.search.toLowerCase();

@@ -308,6 +308,7 @@ created(){
     let objet=localStorage.getItem('Users');
     let user=JSON.parse (objet)
     this.getServiceCF()
+    this.getEntrepriseSousTraitance()
     this.getAffectationServiceCF()
     this.getAffectation()
     this.getUniteAdminUser(user.id)
@@ -450,6 +451,7 @@ this.getClassificationGradeFonction()
             this.getPermissionConge()
       this.getTypeMarche()
       // this.s()
+      this.getFonctionsProfessionnel()
       this.getSauvegardePhoto()
       this.getSecteurActivite()
       this.getEntreprise()
@@ -572,7 +574,7 @@ this.getMembreCojo()
       this.getEcheances()
     this.getMembreComiteEvaluation()
     this.getStructureDAO()
-this.getEntrepriseSousTraitance()
+
         },
 
   computed:{
@@ -702,7 +704,7 @@ return objJson.id
      "getStockArticleUa",
      "getAllHistoriqueDecompteFacture"
     ]),
-            ...mapActions('personnelUA', ["getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
+            ...mapActions('personnelUA', ["getFonctionsProfessionnel","getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
             "getClasses","getEchelons","getpaiementPersonnel","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",

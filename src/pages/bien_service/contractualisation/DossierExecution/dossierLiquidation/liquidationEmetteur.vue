@@ -7,7 +7,7 @@ afficheIdActeurDepense
            <div id="exampleModalMotifLiquidationEmetteur" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Décision Emetteur</h3>
+        <h3>Décision émetteur</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -34,7 +34,7 @@ afficheIdActeurDepense
                <tr>
                 <td >
                     <div class="control-group">
-                            <label class="control-label">Observation Emetteur</label>
+                            <label class="control-label">Observation émetteur</label>
                             <div class="controls">
                               <textarea  class="span" row = "2" v-model="editLiquidation.observation_emetteur">
                               </textarea>
@@ -56,7 +56,7 @@ afficheIdActeurDepense
                        <tr>
                  <td >
                     <div class="control-group">
-                            <label class="control-label">Nom et prenoms </label>
+                            <label class="control-label">Nom et prénoms </label>
                             <div class="controls">
                               <select v-model="editLiquidation.nom_emetteur" class="span">
                                 <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.editLiquidation.marche_id))"  :key="acteur.id"
@@ -109,7 +109,7 @@ afficheIdActeurDepense
                                   <th>Imputation</th>
                                 
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th >Date validation Emmetteur</th>
+                                <th >Date validation émetteur</th>
                                 
                                
                                 <th>Action</th>

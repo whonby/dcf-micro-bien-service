@@ -89,7 +89,7 @@ sources_financements
                         
                         <td>
                            <div class="control-group">
-                            <label class="control-label">Ligne Budgetaire</label>
+                            <label class="control-label">Ligne Budgétaire</label>
                             <div class="controls">
                               
                                <div class="controls">
@@ -100,7 +100,7 @@ sources_financements
                         </td>
                         <td >
                           <div class="control-group">
-                            <label class="control-label">Imputation budgetaire</label>
+                            <label class="control-label">Imputation budgétaire</label>
                             <div class="controls">
                               <input type="text" class="span" :value="afficherInputationBudgetaire(afficherIdMarche(editEngagement.facture_id))" readonly/>
                             </div>
@@ -127,7 +127,7 @@ sources_financements
                       <tr>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation Iniatiale(crédits autorises)</label>
+                            <label class="control-label">Dotation Iniatiale(crédits autorisés)</label>
                             <div class="controls">
                               <input type="text" class="span" :value="afficherMontantBudgetaireInitial(afficherInputationBudgetaire(afficherIdMarche(editEngagement.facture_id)))" readonly/>
                             </div>
@@ -219,7 +219,7 @@ sources_financements
     <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Exercice Budgetaire</label>
+                            <label class="control-label">Exercice Budgétaire</label>
                             
                                
                              <div class="controls">
@@ -264,7 +264,7 @@ sources_financements
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Nature depense</label>
+                            <label class="control-label">Nature dépense</label>
                              <div class="controls">
                                  <input
                                 type="text"
@@ -298,7 +298,7 @@ sources_financements
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Activite</label>
+                            <label class="control-label">Activité</label>
                             <div class="controls">
                              
                                <input
@@ -314,7 +314,7 @@ sources_financements
                           </td>
                           <td>
                              <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
+                            <label class="control-label">Unité administrative</label>
                             <div class="controls">
                                <input
                                 type="text"
@@ -364,7 +364,7 @@ sources_financements
                         </td>
                        <td>
                             <div class="control-group">
-                              <label class="control-label">Réf. Engagement  juridique</label>
+                              <label class="control-label">Réf. Engagement juridique</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -376,7 +376,7 @@ sources_financements
                           </td>
                            <td>
                             <div class="control-group">
-                              <label class="control-label">Numero OP/AT</label>
+                              <label class="control-label">Numéro OP/AT</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -416,7 +416,7 @@ sources_financements
                         
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Numero Bordereau</label>
+                            <label class="control-label">Numéro Bordereau</label>
                             <div class="controls">
                               <input type="text" class="span" v-model="editEngagement.numero_bordereau"/>
                             </div>
@@ -579,7 +579,7 @@ sources_financements
                           </td>
                          <td>
                             <div class="control-group">
-                              <label class="control-label">piece justificative</label>
+                              <label class="control-label">Pièce justificative</label>
                               <div class="controls">
                                 <input
                                   type="file"
@@ -847,7 +847,7 @@ afficheLibelleTypeMarche() {
 
 commparerMontantGleEtMontantFacture(){
 if(this.montantGeneralMandat > this.afficherMontantTTCfacture(this.editEngagement.facture_id)){
-alert("Montant demande est supperieur a la facture")
+alert("Montant demandé est supérieur à la facture")
 }
 else{
   return this.montantGeneralMandat
@@ -1364,15 +1364,15 @@ afficheLibelleUa() {
  ModifierFormulaireEngagement(){
 
  if (this.afficherMontantTTCfacture(this.editEngagement.facture_id) < this.montantGeneralMandat){
-alert("Le montant engagé est superieure au montant de la facture")
+alert("Le montant engagé est supérieur au montant de la facture")
       }
       else if (this.afficherMontantTTCfacture(this.editEngagement.facture_id) > this.montantGeneralMandat)
       {
-        alert("Le montant engagé est Inférieure au montant de la facture")
+        alert("Le montant engagé est inférieur au montant de la facture")
       }
        else if (this.dotationDisponibleAnterieure < this.afficherMontantTTCfacture(this.editEngagement.facture_id))
       {
-        alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
+        alert("Impossible d'émettre l'engagement veuillez revoir la dotation svp")
       }
       
       else

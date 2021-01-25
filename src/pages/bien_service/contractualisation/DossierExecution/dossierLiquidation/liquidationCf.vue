@@ -6,7 +6,7 @@
      <div id="DECISIONcF" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Decision CF</h3>
+        <h3>Décision CF</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -46,7 +46,7 @@
                   <tr>
                  <td>
                     <div class="control-group">
-                            <label class="control-label">Libelle motif </label>
+                            <label class="control-label">Libellé motif </label>
                             <div class="controls">
                                <select v-model="editLiquidation.motif_controleur_f" class="span">
                                  <option value=""></option>
@@ -59,7 +59,7 @@
                  </td>
                  <td>
                                <div class="control-group">
-                            <label class="control-label">Date Decision CF :</label>
+                            <label class="control-label">Date décision CF :</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editLiquidation.date_controleur_financier"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
@@ -120,9 +120,9 @@
                                   <th>Imputation</th>
                                 
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th>Date validation Emmetteur</th>
+                                <th>Date validation émetteur</th>
                                 <th>Date validation CF</th>
-                                <th>Controleur financier</th>
+                                <th>Contrôleur Financier</th>
                                
                                 <th>Action</th>
                                     </tr>

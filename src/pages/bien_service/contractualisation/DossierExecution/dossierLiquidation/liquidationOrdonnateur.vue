@@ -55,7 +55,7 @@ afficheUAId
                        <tr>
                  <td >
                     <div class="control-group">
-                            <label class="control-label">Nom et prenoms </label>
+                            <label class="control-label">Nom et prénoms </label>
                             <div class="controls">
                               <select v-model="editLiquidation.nom_ordonnateur" class="span">
                                 <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.editLiquidation.marche_id))"  :key="acteur.id"
@@ -107,10 +107,10 @@ afficheUAId
                                   <th>Imputation </th>
                                 
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th>Date validation Emmetteur</th>
+                                <th>Date validation émetteur</th>
                                 <th>Date validation CF</th>
                                 <th title="Date validation Ordonnateur">Date validation Ordo</th>
-                                <th title="Decision Controleur financier">Decision CF</th>
+                                <th title="Decision Controleur financier">Décision CF</th>
                                 <!-- <th>Ordonnateur</th> -->
                                 <th>Action</th>
                                     </tr>

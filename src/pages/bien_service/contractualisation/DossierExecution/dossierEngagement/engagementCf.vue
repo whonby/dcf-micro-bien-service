@@ -20,7 +20,7 @@
                               <select v-model="editEngagement.decisionengagement_cf" class="span">
                                 <option value=""></option>
                               <option value="1">Visé</option>
-                              <option value="9">Visé avec Observation</option>
+                              <option value="9">Visé avec observation</option>
                              <option value="2">Différé</option>
                              <option value="3">Réjeté</option>
                             <option value="0">Attente</option>
@@ -61,7 +61,7 @@
                  </td>
                   <td>
                                <div class="control-group">
-                            <label class="control-label">Date Decision CF :</label>
+                            <label class="control-label">Date Décision CF :</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editEngagement.date_motif"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
@@ -114,13 +114,13 @@
                                     <tr>
 
                                         <th>Année</th>
-                                          <th title="numero de  demande engagement">N°demande engagement</th>
-                                <th title="numero de bordereau">N°bordereau engagement</th>
-                                 <th title="numero de l'engagement">N°engagement</th>
+                                          <th title="numéro de  demande engagement">N° demande d'engagement</th>
+                                <th title="numéro de bordereau">N° bordereau d'engagement</th>
+                                 <th title="numéro de l'engagement">N° d'engagement</th>
                                 <th title="programme/dotation">Prog/Dotat</th>
                                 <!-- <th>Action Programmatique</th>
                                 <th>Activite</th> -->
-                                <th title="unite administrative">Ua</th>
+                                <th title="unite administrative">UA</th>
                                  <th>Imputation</th>
                                   <th title="ligne budgetaire">Section</th>
                                   <th>Montant</th>
@@ -524,7 +524,7 @@ afficheLibelleTypeMarche() {
 
 commparerMontantGleEtMontantFacture(){
 if(this.montantGeneralMandatModification > this.afficheMontantFacture(this.editEngagement.facture_id) ){
-alert("Montant demande est supperieur a la facture")
+alert("Montant demandé est supérieur à la facture")
 }
 else{
   return this.montantGeneralMandatModification

@@ -1710,7 +1710,7 @@ export function supprimerFamilleFonction({ commit }, id) {
                .then(() => dialog.close());
            });
        }
-
+       modificationActeur
 export function modifierFamilleFonction({ commit }, nouveau) {
          asyncLoading(
            axios.put("/update_FamilleFonction/" + nouveau.id, {
@@ -2096,5 +2096,80 @@ export function modifieSauvegardePhoto({ commit, dispatch }, formData, config) {
         // this.$app.$loading(false)
     })
     //     
+
+}
+
+
+
+
+
+
+export  function  getFonctionsProfessionnel({commit}) {
+
+    queue.push(() =>  axios.get('/fonctionProfessionel').then(response => {
+            // console.log(response.data)
+            commit('GET_FONCTIONS_PROFESSIONNEL', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+// ajouter type acte personnel
+export  function ajouterFonctionProfessionnel({commit}, objetAjoute){
+    this.$app.$loading(true)
+    axios.post('/fonctionProfessionel', objetAjoute ).then(res => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Enregistrement effectuer',
+            type:"success"
+        });
+        commit('AJOUTER_FOCNTIONS_PROFESSIONNEL', res.data)
+        this.$app.$loading(false)
+    }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(false)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Ce code ou libelle existe déja",
+            type:"error"
+        });
+    })
+}
+
+// supprimer type act
+export function supprimerFonctionProfessionnel({commit}, id){
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+        this.$app.$notify({
+            title: 'Suppression',
+            text: 'Suppression effectuer',
+            type:"success"
+        });
+        commit('SUPPRIMER_FONCTIONS_PROFESSIONNEL', id)
+        axios.delete('/fonctionProfessionel/' + id).then(() => dialog.close() )
+    })
+}
+
+export function modifierFonctionProfessionnel({commit}, formData){
+    this.$app.$loading(true)
+    axios.put('/fonctionProfessionel' ,formData).then(response => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Modification effectuer',
+            type:"success"
+        });
+        commit('MODIFIER_FONCTIONS_PROFESSIONNEL', response.data)
+        this.$app.$loading(false)
+    }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type:"error"
+        });
+    })
 
 }

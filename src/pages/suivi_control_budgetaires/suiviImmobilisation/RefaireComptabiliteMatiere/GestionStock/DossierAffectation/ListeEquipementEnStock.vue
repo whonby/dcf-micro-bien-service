@@ -1774,7 +1774,7 @@ PrixUnitaireParModel() {
     listeDesEquipementPar01() {
       return id => {
         if (id != null && id != "") {
-           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(qtreel.typebien_id) == 3);
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(qtreel.typebien_id) == 3 && qtreel.quantitestock!=0);
 
         }
       };

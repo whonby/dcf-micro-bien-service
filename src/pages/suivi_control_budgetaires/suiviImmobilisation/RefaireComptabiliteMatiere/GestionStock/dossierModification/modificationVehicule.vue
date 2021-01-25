@@ -273,7 +273,7 @@
                       </td>
                       <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Prix unitaire</label>
+                  <label class="control-label" style="font-size:14px">Valeur d'acquisition HT</label>
                   <div class="controls">
                    <div class="controls">
                     <input
@@ -478,6 +478,19 @@
                    <input
                       type="text"
                   v-model="detail_vehicule.anneevehicule"
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td>
+                       <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Date d'acquisition/mise en service</label>
+                  <div class="controls">
+                   <input
+                      type="date"
+                    v-model="detail_vehicule.date_mise_service"
                       class="span"
                       
                     />

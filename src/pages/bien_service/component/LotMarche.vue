@@ -21,7 +21,7 @@
               <thead>
               <tr>
                 <th>N°</th>
-                <th>Intitule du lot</th>
+                <th>Intitulé du lot</th>
                 <th>Infrastructure</th>
                 <th>Région</th>
                 <th title="Sous Prefecture">S/P</th>

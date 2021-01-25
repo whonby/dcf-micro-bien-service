@@ -35,6 +35,7 @@ import RegistreDepense from "../../pages/cycle_de_vie/RapportDepense3.vue";
 
 import fonctionBudgetaire from "../../pages/acteurs_depenses/fonction/fonctionBudgetaire.vue";
 import SituationMatrimonial from "../../pages/acteurs_depenses/fonction/SituationMatrimonial.vue";
+import FonctionProfessionnelle from "../../pages/acteurs_depenses/FonctionProfessionnelle/FonctionProfessionnelle.vue";
 const ActeurDepenseRoutes = [
 
   // {
@@ -42,7 +43,11 @@ const ActeurDepenseRoutes = [
   //   name: "Synthesebudg",
   //   component: Synthesebudg
   // },
-
+  {
+    path: "/FonctionProfessionnelle",
+    name: "FonctionProfessionnelle",
+    component: FonctionProfessionnelle
+  },
   {
     path: "/Registre_depense",
     name: "RegistreDepense",
