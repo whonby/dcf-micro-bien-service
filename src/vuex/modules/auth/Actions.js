@@ -163,7 +163,7 @@ export  function  getRoles({commit}) {
 
 
 
-export  function  getAffectation({commit}) {
+export  function  getAffectation({commit,getters }) {
 
     queue.push(() =>  apiGuest.get('/affectations').then(response => {
             // console.log(response.data)
@@ -172,18 +172,29 @@ export  function  getAffectation({commit}) {
         let objet=localStorage.getItem('Users');
         let user=JSON.parse(objet)
        // console.log(objetData)
+        let service=getters.getterAffectionServiceCF
+
         if (user.user_role.role.code_role!="SUPER_ADMIN"){
             let affectationUsers=objetData
-
+            let serviceEncourUser=service.find(item=>{
+                if(item.date_fin==null && item.user_id==user.id){
+                    return item
+                }
+            })
+            console.log(serviceEncourUser)
             if (objetData){
-                affectationUsers =objetData.filter(item=>{
-                    if(item.date_fin==null && item.user_id==user.id){
-                        return item
-                    }
-                })
-                console.log(affectationUsers)
-                console.log("..........getAffectation...........")
-                commit('GET_UNITEADMIN_BY_USER', affectationUsers)
+
+                if (serviceEncourUser!=undefined){
+
+                    affectationUsers =objetData.filter(item=>{
+                        if(item.date_fin==null && item.servicecf_id==serviceEncourUser.servicecf_id){
+                            return item
+                        }
+                    })
+
+                    commit('GET_UNITEADMIN_BY_USER', affectationUsers)
+                }
+
             }
 
         }else {
@@ -198,10 +209,11 @@ export  function  getAffectation({commit}) {
 }
 
 // ajouter type acte personnel 
-export  function ajouterAffectation({commit}, objetAjoute){
+export  function ajouterAffectation({commit,dispatch}, objetAjoute){
    return  asyncLoading(apiGuest.post('/affectations', objetAjoute )).then(res => {
         if(res.status == 201){
             commit('AJOUTER_AFFECTATION', res.data)
+            dispatch('getAffectation')
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué !',
@@ -547,3 +559,108 @@ export function activationGroupe({commit, dispatch}, elementAjout){
   }
 
 
+/**
+ * Action service CF
+ * @param commit
+ */
+
+export  function  getServiceCF({commit}) {
+
+    queue.push(() =>  apiGuest.get('/serviceCF').then(response => {
+            // console.log(response.data)
+            commit('GET_SERVICECF', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+
+export  function ajouterServiceCF({commit}, objetAjoute){
+    asyncLoading(apiGuest.post('/serviceCF', objetAjoute )).then(res => {
+        if(res.status == 201){
+            commit('AJOUTER_SERVICECF', res.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+export function supprimerServiceCF({commit}, id){
+
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_SERVICECF', id)
+            apiGuest.delete('/serviceCF/' + id).then(() => dialog.close() )
+
+        })
+}
+
+export function modifierServiceCF({commit}, element_modifie) {
+    asyncLoading( apiGuest.put('/serviceCF',element_modifie)).then(response => {
+        commit('MODIFIER_SERVICECF', response.data)
+
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+
+/**
+ * Action Affection service pas cf
+ */
+
+export  function  getAffectationServiceCF({commit}) {
+
+    queue.push(() =>  apiGuest.get('/affectionServiceACF').then(response => {
+            // console.log(response.data)
+            commit('GET_AFFECTATION_SERVICE_CF', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+
+export  function ajouterAffectationServiceCF({commit}, objetAjoute){
+    asyncLoading(apiGuest.post('/affectionServiceACF', objetAjoute )).then(res => {
+        if(res.status == 201){
+
+            commit('AJOUTER_AFFECTATION_SERVICE_CF', res.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+export function supprimerAffectationServiceCF({commit}, id){
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_AFFECTATION_SERVICE_CF', id)
+            apiGuest.delete('/affectionServiceACF/' + id).then(() => dialog.close() )
+
+        })
+}
+
+export function modifierAffectationServiceCF({commit}, element_modifie) {
+    asyncLoading( apiGuest.put('/affectionServiceACF',element_modifie)).then(response => {
+        commit('MODIFIER_AFFECTATION_SERVICE_CF', response.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}

@@ -1229,7 +1229,7 @@
         <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
     </div>
 
-    <!-- fin de formulaire de modification de dossier de candidat --->
+ 
   </div>
 </template>
 
@@ -2105,8 +2105,8 @@ name: "DossierCandidat",
     dossierCandidature: function () {
       return marcheid => {
         if (marcheid != "") {
-          //  console.log("Marche dossier candidat")
-          return this.getterDossierCandidats.filter(idmarche => idmarche.appel_offre.marche_id == marcheid)
+          console.log("Guei Roland")
+          return this.getterDossierCandidats.filter(idmarche => idmarche.marche_id == marcheid)
         }
       }
     },

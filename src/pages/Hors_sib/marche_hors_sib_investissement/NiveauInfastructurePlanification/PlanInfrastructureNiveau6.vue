@@ -335,10 +335,10 @@ ListeMarcheInfrastructureNiveau1() {
       });
     },
   montantMarchePlanfierHorSib(){
-  return this.ListeMarcheInfrastructureNiveau1.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==6).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+  return this.ListeMarcheInfrastructureNiveau1.filter(element => element.attribue == 0 && element.gdenature_id == 7 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==6).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
 },
 //   montantMarchePlanfierHorSib(){
-//   return this.afficherListeMarcheHorsSib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==6).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+//   return this.afficherListeMarcheHorsSib.filter(element => element.attribue == 0 && element.gdenature_id == 7 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==6).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
 // },
 InfastructureLibelleNiveau6() {
 
@@ -483,7 +483,7 @@ afficherLibelleTypeMarche(){
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==6)
+            return colect.filter(element => element.attribue == 0 && element.gdenature_id == 7 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==6)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -492,7 +492,7 @@ afficherLibelleTypeMarche(){
             // }); 
         }
 
-        return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==6)
+        return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && element.gdenature_id == 7 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==6)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -523,11 +523,11 @@ afficherLibelleTypeMarche(){
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.attribue == 1  && element.parent_id == null && element.sib==1)
+            return colect.filter(element => element.gdenature_id == 7 && element.attribue == 1  && element.parent_id == null && element.sib==1)
             
         }
 
-        return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.attribue == 1 && element.parent_id == null && element.sib==1 )
+        return this.gettersMarcheHorsib.filter(element => element.gdenature_id == 7 && element.attribue == 1 && element.parent_id == null && element.sib==1 )
            
         
 

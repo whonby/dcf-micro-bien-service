@@ -22,7 +22,6 @@
           </div>
          
       
-
          
          </form>
       </div>
@@ -52,9 +51,9 @@
             <div class="controls">
               <input
                 type="text"
-                v-model="editTypeProcedure.libelle"
+                v-model="editTypeMarche.libelle"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder=""
               />
             </div>
           </div>
@@ -67,7 +66,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierModalTypeAnalyseLocal(editTypeProcedure)"
+          @click.prevent="modifierModalTypeAnalyseLocal"
           class="btn btn-primary"
           href="#"
         
@@ -210,7 +209,7 @@ export default {
 
         
       },
-      editTypeProcedure: {
+      editTypeMarche: {
         	 libelle:"",
             
       },
@@ -297,6 +296,7 @@ this.formData = {
 
     },
     
+
     // afficher modal de modification
     afficherModalModifiertextJuridique(id) {
       this.$("#modificationModal").modal({
@@ -304,11 +304,11 @@ this.formData = {
         keyboard: false
       });
 
-      this.editTypeProcedure = this.typeMarches.find(item => item==id);
+      this.editTypeMarche = this.typeMarches.find(item => item.id==id);
     },
     // fonction pour vider l'input modification
     modifierModalTypeAnalyseLocal(){
-      this.modifierTypeMarche(this.editTypeProcedure)
+      this.modifierTypeMarche(this.editTypeMarche)
       this.$('#modificationModal').modal('hide');
     },
 

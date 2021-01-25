@@ -1,6 +1,6 @@
 <template>
 <div>
-
+  <notifications />
   <div align="right">
     <a href="#ajouter_offre_fin" data-toggle="modal" class="btn btn-primary">Ajouter</a>
   </div>
@@ -58,7 +58,7 @@
               <div class="control-group">
                 <label>Offre</label>
                 <div class="controls">
-                  <input v-if="listeAppelOffre(dossier_candidature.marche_id)" type="text" class="span" placeholder="Offre"
+                  <input v-if="listeAppelOffre(dossier_candidature.marche_id)" type="text" placeholder="Offre"
                          v-model="listeAppelOffre(dossier_candidature.marche_id).ref_appel" disabled>
                 </div>
               </div>
@@ -67,7 +67,7 @@
               <div class="control-group">
                 <label>Lot</label>
                 <div class="controls">
-                  <select v-model="formchnique.marche_id" class="span" >
+                  <select v-model="formchnique.marche_id" >
                     <option v-for="varText in listeLot(dossier_candidature.marche_id,dossier_candidature.id)" :key="varText.id"
                             :value="varText.id">LOT N°{{varText.numero_lot}} {{varText.objet}}</option>
                   </select>
@@ -78,7 +78,7 @@
               <div class="control-group">
                 <label>Nom du soumissionnaire</label>
                 <div class="controls">
-                  <input v-if="listeAppelOffre(dossier_candidature.marche_id)" type="text" class="span" placeholder="Offre"
+                  <input v-if="listeAppelOffre(dossier_candidature.marche_id)" type="text"  placeholder="Offre"
                          v-model="dossier_candidature.nom_cand" disabled>
                 </div>
               </div>
@@ -94,7 +94,7 @@
                 <label class="control-label">N° Du pli :</label>
                 <div class="controls">
 
-                  <input type="text" v-model="formchnique.numero_pli" class="span" placeholder="Structure Emétrice">
+                  <input type="text" v-model="formchnique.numero_pli"  placeholder="N° Du Pli">
                 </div>
               </div>
             </td>
@@ -103,15 +103,15 @@
                 <label class="control-label">Structure Emétrice :</label>
                 <div class="controls">
 
-                  <input type="text" v-model="formchnique.structure_emetrice" class="span" placeholder="Structure Emétrice">
+                  <input type="text" v-model="formchnique.structure_emetrice"  placeholder="Structure Emétrice">
                 </div>
               </div>
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Montant :</label>
+                <label class="control-label">Cautionnement Provisoire :</label>
                 <div class="controls">
-                  <input type="text" v-model="formchnique.montant" class="span" placeholder="Montant">
+                  <input type="text" v-model="formchnique.montant"  placeholder="Cautionnement Provisoire">
                 </div>
               </div>
             </td>
@@ -119,7 +119,7 @@
               <div class="control-group">
                 <label class="control-label">Délai de validité de l'offre :</label>
                 <div class="controls">
-                  <input type="text" v-model="formchnique.delai_validite_offre" class="span" placeholder="Délai de validité de l'offre ">
+                  <input type="text" v-model="formchnique.delai_validite_offre"  placeholder="Délai de validité de l'offre ">
                 </div>
               </div>
             </td>
@@ -128,7 +128,7 @@
                 <label class="control-label">
                   Delai de livraison Ou Execution Proposé</label>
                 <div class="controls">
-                  <input type="text" v-model="formchnique.delai_execution" class="span" placeholder="">
+                  <input type="text" v-model="formchnique.delai_execution"  placeholder="">
                  <!-- <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">-->
                 </div>
               </div>
@@ -141,19 +141,19 @@
               <div class="control-group">
                 <label class="control-label">Autres pièced spécififiées pas le dossier de consultation(EXPLE:Nationalité autres)</label>
                 <div class="controls">
-                  <input type="text" v-model="formchnique.autre_piece_specifie" class="span" placeholder="">
+                  <input type="text" v-model="formchnique.autre_piece_specifie" placeholder="">
                   <!-- <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">-->
                 </div>
               </div>
             </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Rabais offert</label>
-                <div class="controls">
-                  <input type="text"  v-model="formchnique.rabai_offert" class="span" placeholder="Rabais offert">
-                </div>
-              </div>
-            </td>
+<!--            <td>-->
+<!--              <div class="control-group">-->
+<!--                <label class="control-label">Rabais offert</label>-->
+<!--                <div class="controls">-->
+<!--                  <input type="text"  v-model="formchnique.rabai_offert" class="span" placeholder="Rabais offert">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
             <td>
 
               <div class="control-group">
@@ -161,7 +161,7 @@
                 <div class="controls">
                 <!--  <input type="text" class="span" placeholder="Org travau" v-model="formchnique.atcdent_marche_non_exe">-->
 
-                  <select v-model="formchnique.presence_echantillons" class="span">
+                  <select v-model="formchnique.presence_echantillons">
                     <option value=""></option>
                     <option value="OUI">OUI</option>
                     <option value="NON">NON</option>
@@ -173,7 +173,7 @@
               <div class="control-group">
                 <label class="control-label">Autre Observations :</label>
                 <div class="controls">
-                  <input type="text" v-model="formchnique.autre_observation" class="span" placeholder="Autre Observations ">
+                  <input type="text" v-model="formchnique.autre_observation"  placeholder="Autre Observations ">
                 </div>
               </div>
             </td>
@@ -256,7 +256,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Montant :</label>
+                <label class="control-label">Cautionnement Provisoire  :</label>
                 <div class="controls">
                   <input type="text" v-model="editer.montant" class="span" placeholder="Montant">
                 </div>
@@ -293,14 +293,7 @@
                 </div>
               </div>
             </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Rabais offert</label>
-                <div class="controls">
-                  <input type="text"  v-model="editer.rabai_offert" class="span" placeholder="Rabais offert">
-                </div>
-              </div>
-            </td>
+
             <td>
 
               <div class="control-group">

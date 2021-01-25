@@ -1548,13 +1548,28 @@ export function ajouterStockArticle({ commit,dispatch }, nouveau) {
 }
 
 // modifier
+// export function modifierStockArticle({ commit ,dispatch}, nouveau) {
+//   asyncLoading(axios
+//       .put("/StockArticle/" + nouveau.id,nouveau))
+//       .then(response => {
+//           commit("MODIFIER_STOCK_ARTICLE", response.data);
+//           dispatch('getStockArticle')
+//               dispatch('getAllUniteAdministrative')
+//           this.$app.$notify({
+//               title: 'Success',
+//               text: 'Modification Effectué avec Succès!',
+//               type: "success"
+//           })
+//       });
+// }
+
 export function modifierStockArticle({ commit ,dispatch}, nouveau) {
   asyncLoading(axios
       .put("/StockArticle/" + nouveau.id,nouveau))
       .then(response => {
           commit("MODIFIER_STOCK_ARTICLE", response.data);
           dispatch('getStockArticle')
-              dispatch('getAllUniteAdministrative')
+          
           this.$app.$notify({
               title: 'Success',
               text: 'Modification Effectué avec Succès!',
@@ -1572,5 +1587,39 @@ export function supprimerStockArticle({ commit,dispatch }, id) {
               dispatch('getAllUniteAdministrative')
           // // dialog.loading(false) // stops the proceed button's loader
           axios.delete("/StockArticle/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+export function getAllHistoriqueDecompteFacture({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/HistoriqueDecompteFacture")
+      .then(response => {
+        commit("GET_ALL_HISTORIQUE_DECOMPTE_FACTURE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+
+
+
+
+
+export function ajouterHistoriqueDecompteFacture({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/HistoriqueDecompteFacture", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_HISTORIQUE_DECOMPTE_FACTURE", response.data);
+
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
       });
 }

@@ -82,6 +82,12 @@ montantEnPlanification
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link>
 </td>
+<!-- <td>
+    <router-link :to="{ name: 'detailGreAGre', params: { id: activites.id }}"
+                class="btn btn-success " title="Detail marche hors sib gré a gré">
+                  <span class=""><i class=" icon-folder-open"></i></span>
+                   </router-link>
+</td> -->
 <td>
    <router-link :to="{ name: 'CycleDeVie', params: { id: activites.id }}"
                  class="btn btn-inverse " title="Cycle de vie du marche">

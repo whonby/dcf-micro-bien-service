@@ -3,11 +3,11 @@
 
         <div class="container-fluid" style="height: 100em;">
 
-            <div class="" >
+            <div>
 
                 <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
 
-                    <div class="span10 " style="background: #f0c71d !important;">
+                    <div class="span10" style="background: #f0c71d !important;">
                         <table class="table table-striped"  style="background: #f0c71d !important;">
                             <tbody>
                             <tr>
@@ -96,7 +96,7 @@
 
 
 
-                <nav aria-label="breadcrumb" class="main-breadcrumb" style="background: #806000">
+                <nav aria-label="breadcrumb" class="main-breadcrumb" style="background: #ff6c1d">
                     <ol class="breadcrumb" style="background: #806000 !important">
                         <li class="breadcrumb-item" style="color: #fff !important;" > INFORMATIONS GENERALES - MARCHES/CONTRATS&nbsp;&nbsp;&nbsp;&nbsp; / </li>
                         <li class="breadcrumb-item" style="color: #fff !important;" v-if="unite_administrative_id"> Situation {{nomUniteAdmin(unite_administrative_id)}} des marchés &nbsp;&nbsp;&nbsp;&nbsp; /</li>
@@ -109,27 +109,69 @@
                     </ol>
                 </nav>
 
+                <div class="vld-parent">
 
+                    <loading :active.sync="isLoading"
+                             :can-cancel="true"
+                             :on-cancel="onCancel"
+                             :is-full-page="fullPage"></loading>
+                <div class="row-fluid" style="" id="printMe">
 
+                    <div class="span12">
+                        <div class="widget-box">
+                            <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+                                <h5>IMAGES MARCHES</h5>
+                                <div align="right">
+                                    Recherche: <input type="text" v-model="search">
 
-                <div class="">
+                                </div>
 
+                            </div>
+                        </div>
 
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Année</th>
+                                <th>UA</th>
+                                <th>Numero Marche</th>
+                                <th>Objet du marché</th>
+                                <th>Type de marché</th>
+                                <th>Infrastructure</th>
+                                <th>Regions</th>
+<!--                                <th>Statut</th>-->
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="item in listeMarchStatueExecuteAcheve" :key="'MARCHE012'+item.id">
+                                <td>{{item.exo_id}}</td>
+                                <td>{{selectionnerUniteAdministrative(item.unite_administrative_id)}}</td>
+                                <td>{{item.numero_marche}}</td>
+                                <td>{{item.objet}}</td>
+                                <td>{{item.type_marche.libelle}}</td>
+                                <td>{{selectionnerInfrastructure(item.infrastructure_id)}}</td>
+                                <td>{{selectionLocationGeographique(item.localisation_geographie_id)}}</td>
+<!--                                <td></td>-->
+                                <td>
+                                    <router-link :to="{ name: 'ListeImageMarche', params: { id: item.id }}"
+                                                 class="btn btn-primary" title="Liste des images">
+                                        voir image({{nombreImageParMarche(item.id)}})
+                                    </router-link>
+                                </td>
+                            </tr>
+                            </tbody>
 
-
-                    <div class="row-fluid" style="" id="printMe">
+                        </table>
 
 
                     </div>
 
 
-
-
-
                 </div>
                 <!--------------------FIN TABLEAU BORD FIN ETAT MARCHE--------------->
 
-
+                </div>
 
 
             </div>
@@ -162,6 +204,11 @@
 </template>
 
 <script>
+    import {partition} from "../../Repositories/Repository"
+    // Import component
+    import Loading from 'vue-loading-overlay';
+    // Import stylesheet
+    import 'vue-loading-overlay/dist/vue-loading.css';
    // import VueApexCharts from 'vue-apexcharts'
     import { mapGetters,mapActions } from "vuex";
     import {noDCfNoAdmin,dcf} from "../../Repositories/Auth"
@@ -172,11 +219,14 @@
     export default {
         name: "Images",
         components: {
-
+            Loading,
             ModelListSelect,
         },
         data() {
             return{
+                isLoading: false,
+                fullPage: false,
+                search:"",
                 controlleur_fin:"",
                 status_marches:"",
                 unite_administrative_id:"",
@@ -217,6 +267,9 @@
                         }
                     }]
                 },
+                page:0,
+                size:10,
+                active_el:0,
             }
 
 
@@ -242,7 +295,7 @@
                 "grandes_natures"]),
 
             ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise",
-                "getterImageMarche","acteEffetFinanciers","getActeEffetFinancierPersonnaliser45","typeMarches","avenants",]),
+                "getterImageMarche","acteEffetFinanciers","getActeEffetFinancierPersonnaliser45","typeMarches","avenants","getterImageMarche"]),
             ...mapGetters("Utilisateurs", ["getterUtilisateur","getterRoles"]),
             listeCF(){
                 return this.getterUtilisateur.filter(item=>{
@@ -262,6 +315,41 @@
                         return item
                     }
                 });
+            },
+            nombreImageParMarche(){
+              return id=>{
+                  let objet=this.getterImageMarche.filter(item=>item.marche_id==id)
+                  console.log(".................................")
+                  console.log(id)
+                  console.log("..................................")
+                  console.log(objet)
+                  return objet.length
+              }
+            },
+            selectionnerUniteAdministrative(){
+               return id=>{
+                   let objet=this.uniteAdministratives.find(item=>item.id=id)
+                   return objet.libelle
+               }
+            },
+
+            selectionnerInfrastructure(){
+              return id=>{
+                 // console.log(id)
+                  let objet=this.getterInfrastrucure.find(item=>item.id==id)
+                //  console.log(objet)
+                  if(objet==undefined)
+                      return null
+                  return objet.libelle
+              }
+            },
+            selectionLocationGeographique(){
+                return id=>{
+                    let objet=this.localisations_geographiques.find(item=>item.id==id)
+                    if(objet==undefined)
+                        return null
+                    return objet.libelle
+                }
             },
             filtre_unite_admin() {
                 if(this.noDCfNoAdmin){
@@ -294,7 +382,11 @@
                     )
                     if(objet!=undefined){
                         objet.forEach(function (val) {
-                            colect.push(val)
+                           let objet=   colect.find(item=>item.id==val.id)
+                            if(objet==undefined){
+                                colect.push(val)
+                            }
+
                         })
                     }
 
@@ -302,6 +394,7 @@
                 })
                 return colect
             },
+
             anneeAmort() {
 
                 const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
@@ -1065,11 +1158,12 @@
 
                 let objet4=this.objetMarchePasUniteOuRegion.filter(item=>{
                     if(item.attribue==2 || item.attribue==11 || item.attribue==10 || item.attribue==11 || item.attribue==7 || item.attribue==3){
+                       console.log(item)
                         return item
                     }
                 })
 
-                console.log(objet4.length)
+               console.log(objet4.length)
                 return objet4
             },
 
@@ -1370,6 +1464,12 @@
         watch: {
             type_marche:function (value) {
                 console.log(value);
+                this.isLoading = true;
+                // simulate AJAX
+                setTimeout(() => {
+                    this.isLoading = false
+                },1000)
+
                 if(this.info_status_marche!=""){
                     this.listeMarcheStatus(this.status_marches)
                 }
@@ -1378,22 +1478,54 @@
             },
 
             infrastructure: function (value) {
+                this.isLoading = true;
+                // simulate AJAX
+                setTimeout(() => {
+                    this.isLoading = false
+                },1000)
                 console.log(value);
                 if(this.info_status_marche!=""){
                     this.listeMarcheStatus(this.status_marches)
                 }
             },
             region: function (value) {
+                this.isLoading = true;
+                // simulate AJAX
+                setTimeout(() => {
+                    this.isLoading = false
+                },1000)
                 console.log(value);
                 if(this.info_status_marche!=""){
                     this.listeMarcheStatus(this.status_marches)
                 }
             },
             unite_administrative_id: function (value) {
+                this.isLoading = true;
+                // simulate AJAX
+                setTimeout(() => {
+                    this.isLoading = false
+                },1000)
                 console.log(value);
                 if(this.info_status_marche!=""){
                     this.listeMarcheStatus(this.status_marches)
                 }
+            },
+
+            partition:partition,
+            onCancel() {
+                console.log('User cancelled the loader.')
+            },
+            getDataPaginate(index){
+                this.active_el = index;
+                this.page=index
+            },
+            precedent(){
+                this.active_el--
+                this.page --
+            },
+            suivant(){
+                this.active_el++
+                this.page ++
             },
 
         },

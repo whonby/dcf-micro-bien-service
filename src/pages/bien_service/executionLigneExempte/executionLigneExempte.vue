@@ -151,10 +151,14 @@ afficherIDUA(
             <td>
               <div class="control-group">
                 <label class="control-label">Compte</label>
-                <div class="controls " >
+                 <select v-model="formEffetFinancier.compte_id" class="span" >
+                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.banq_id)" :key="varText.id"
+                            :value="varText.id">{{afficherLeCompteEnFonctionDeLaBanque(varText.banq_id)}}</option>
+                  </select>
+                <!-- <div class="controls " >
                   <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
 
-                </div>
+                </div> -->
               </div>
 
             </td>
@@ -1367,6 +1371,17 @@ afficheNomEntreprise() {
       }
     },
 
+     afficherCompte(){
+       return banq_id => {
+        if( banq_id !== undefined) {
+          var acteur = this.comptes.find(acteur => acteur.id == banq_id  )
+
+          return  (acteur) ? acteur.rib :null
+        }
+        return null
+      }
+    },
+
     afficherBanqueId(){
       return id =>{
         if(id != null && id !=""){
@@ -1407,6 +1422,16 @@ affichierIdEntrepriseSelectionner() {
       return id =>{
         if(id != null && id !=""){
           return this.comptes.filter(element => element.entrepse_id== id)
+
+
+        }
+      }
+    },
+
+     afficherCompteDynamique(){
+      return id =>{
+        if(id != null && id !=""){
+          return this.comptes.filter(element => element.banq_id== id)
 
 
         }

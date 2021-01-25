@@ -540,7 +540,7 @@ listeBailleurMarche: function () {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
-
+            console.log(this.acteEffetFinanciers)
       if (qtereel) {
         return qtereel.montant_act;
       }

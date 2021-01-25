@@ -1388,7 +1388,7 @@
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>    
                </div>
 
-              <!-- fin de formulaire de modification de dossier de candidat --->
+             
     </div>
 </template>
 
@@ -1407,6 +1407,7 @@ import { formatageSomme } from '../../../../../src/Repositories/Repository';
             
             // ModelListSelect,
         },
+
         data() {
             return {
                 fabActions: [

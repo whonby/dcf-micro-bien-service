@@ -687,6 +687,33 @@ export const SUPPRIMER_REPARATION_VEHICULE = (state, id) => {
 // export const SUPPRIMER_BANQUE_UA = (state, id) => {
 //   state.banqueUa = state.banqueUa.filter(type => type.id != id);
 // };
+
+export const GET_ALL_HISTORIQUE_DECOMPTE_FACTURE = (state, tableaudecomptes) => {
+  state.historiqueDecomptefactures = tableaudecomptes;
+};
+
+// ajouter type_textes
+export const AJOUTER_HISTORIQUE_DECOMPTE_FACTURE = (state, nouveau_decomptes) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.historiqueDecomptefactures.unshift(nouveau_decomptes);
+};
+
+
+// modifier type_textes
+export const MODIFIER_HISTORIQUE_DECOMPTE_FACTURE = (state, objetModifie) => {
+  state.historiqueDecomptefactures = state.historiqueDecomptefactures.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+export const SUPPRIMER_HISTORIQUE_DECOMPTE_FACTURE = (state, id) => {
+  state.historiqueDecomptefactures = state.historiqueDecomptefactures.filter(type => type.id != id);
+};
 export {
   GET_ALL_BANQUE_UA,
   AJOUTER_BANQUE_UA,

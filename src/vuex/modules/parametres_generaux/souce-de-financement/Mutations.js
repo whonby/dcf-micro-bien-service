@@ -65,6 +65,34 @@ const SUPPRIMER_TYPE_FINANCEMENT = (state ,id) => {
         varFinancement.id !=id)
 }
 
+// get all type de financement
+export const GET_PLAN_SOURCE_FINANCEMENT = (state, tableau_plan_source_financement) =>{
+    state.plan_source_financement = tableau_plan_source_financement
+}
+
+// ajouter type de financement 
+export const AJOUTER_PLAN_SOURCE_FINANCEMENT = (state ,nouvel_objet) =>{
+
+state.plan_source_financement.unshift(nouvel_objet)
+}
+// modififier type de financement 
+export const MODIFIER_PLAN_SOURCE_FINANCEMENt = (state,objetModifie) => {
+
+    state.plan_source_financement = state.plan_source_financement.map(plan => {
+        if(plan.id == objetModifie.id){
+            plan = {...objetModifie}
+        }
+        return plan
+    })
+}
+
+
+
+// suppression de source de financement
+export const PLAN_SUPPRIMER_SOURCE_FINANCEMENT = (state ,id) => {
+    state.plan_source_financement = state.plan_source_financement.filter(res => 
+        res.id !=id)
+}
 
 
 export {

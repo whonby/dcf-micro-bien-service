@@ -82,10 +82,17 @@
                      <th style="width:25%;font-size:25px ">DATE DU CONTRÔLE :</th>
                      <td style="text-align:center;font-size:25px"> </td>
                  </tr>
+                  <br/>
+      <br/>
+                  <tr>
+                    <!-- <th rowspan="5" style="margin:0 auto">IMPUTATION BUDGETAIRE</th> -->
+                     <th style="width:25%;font-size:25px ">LIVRABLE</th>
+                     <td style="text-align:center;font-size:25px">{{recupererLivrable(detailOp.marche_id)}} </td>
+                 </tr>
        <br/>
       <br/>
-      <br/>
-      <br/>
+      
+      
       <h5 style="text-align:center;font-size:25px;text-decoration: underline;">OBSERVATION</h5>
 <div style="width:100%;height:600px;border:2px solid #000">
 
@@ -210,6 +217,24 @@ AfficheLogODCF() {
      
        
     },
+
+ recupererLivrable() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+      
+        return qtereel.livrable
+              }
+      return "Non renseigné"
+        }
+      };
+    },
+
+
+
+
   afficherNomEntreprise() {
       return id => {
         if (id != null && id != "") {

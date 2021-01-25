@@ -329,3 +329,107 @@ export const ACTIVATION_GROUPE = (state, elementModif) =>{
         return userActif
     }) 
  }
+
+
+/**
+ * Getion des servces de cf
+ * @param state
+ * @param tab_type_uas
+ * @constructor
+ */
+
+export const GET_SERVICECF = (state, tab_type_uas) => {
+    state.serviceCF = tab_type_uas
+}
+
+/**
+ * Ajouter service
+ * @param state
+ * @param nouvel_objet
+ * @constructor
+ */
+export const AJOUTER_SERVICECF = (state, nouvel_objet) => {
+    state.serviceCF.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+
+}
+
+/**
+ * Suppresions
+ * @param state
+ * @param id
+ * @constructor
+ */
+export const SUPPRIMER_SERVICECF= (state, id) => {
+    state.serviceCF = state.serviceCF.filter(type => type.id != id)
+}
+
+/**
+ * Modification
+ * @param state
+ * @param id
+ * @param objetModifie
+ * @constructor
+ */
+export const MODIFIER_SERVICECF = (state, objetModifie) => {
+    state.serviceCF = state.serviceCF.map(type => {
+        if(type.id == objetModifie.id){
+            type = {...objetModifie}
+        }
+        return type
+    })
+}
+
+
+
+
+
+
+/**
+ * Gertion des affections Service pas CF
+ * @param state
+ * @param tab_type_uas
+ * @constructor
+ */
+
+export const GET_AFFECTATION_SERVICE_CF = (state, tab_type_uas) => {
+    state.affectationServiceCF = tab_type_uas
+}
+
+/**
+ * Ajouter des affections Service pas CF
+ * @param state
+ * @param nouvel_objet
+ * @constructor
+ */
+export const AJOUTER_AFFECTATION_SERVICE_CF = (state, nouvel_objet) => {
+    state.affectationServiceCF.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+
+}
+
+/**
+ * Suppresions
+ * @param state
+ * @param id
+ * @constructor
+ */
+export const SUPPRIMER_AFFECTATION_SERVICE_CF= (state, id) => {
+    state.affectationServiceCF = state.affectationServiceCF.filter(type => type.id != id)
+}
+
+/**
+ * Modification
+ * @param state
+ * @param id
+ * @param objetModifie
+ * @constructor
+ */
+export const MODIFIER_AFFECTATION_SERVICE_CF = (state, objetModifie) => {
+    state.affectationServiceCF = state.affectationServiceCF.map(type => {
+        if(type.id == objetModifie.id){
+            type = {...objetModifie}
+        }
+        return type
+    })
+}

@@ -461,7 +461,7 @@ import VGeosearch from 'vue2-leaflet-geosearch';
             };
         },
 created(){
-       // console.log(this.listeLocalisationGeo)
+       console.log(this.transferts)
 },
     computed: {
 // methode pour maper notre guetter
@@ -471,7 +471,8 @@ created(){
             "acteCreations",
             "typeTextes",
             "uniteAdministratives",
-            "getterBudgeCharge"
+            "getterBudgeCharge",
+            "transferts"
         ]),
         listeZone(){
         return this.localisations_geographiques.filter(item=>{
@@ -607,10 +608,12 @@ created(){
                          * Recuperation des unite administrative de la zone geographique
                          * @type {*[]}
                          */
+                        //this.transferts
                         let budgetZone=0;
                         let color="";
                         let colorFill=""
                         let montant_engagement_zone=0;
+                        let montant_engagetransfere=0;
                         let uniteByZoneGeo= vM.uniteAdministratives.filter( item => item.localisationgeo_id ==value.id)
                         if (uniteByZoneGeo!=undefined) {
 
@@ -619,6 +622,13 @@ created(){
                              */
 
                             uniteByZoneGeo.forEach(function (row) {
+                                let initialV=0;
+                                let objetTransfere=vM.transferts.filter(item=>item.ua_id==row.id)
+                                let montantTransfere=objetTransfere.reduce(function (total, currentValue) {
+                                    return total + parseFloat(currentValue.montant_transfert) ;
+                                }, initialV);
+                                 montant_engagetransfere= parseFloat(montant_engagetransfere) + parseFloat(montantTransfere)
+
                                 let montant_engagement_unite_admin=0;
                                 let budgetActive=row.ua_budget_general.filter(item=>item.actived==1)
                                 if (budgetActive!="") {
@@ -661,11 +671,13 @@ created(){
 
                         }
 
-               let taux=0;
-                        let budgetRest=budgetZone-montant_engagement_zone
-                        if (montant_engagement_zone!=0){
+                      let taux=0;
 
-                            taux=(montant_engagement_zone/budgetZone)*100
+                        let montantExecute=montant_engagement_zone + montant_engagetransfere
+                        let budgetRest=budgetZone-montantExecute
+                        console.log(montant_engagetransfere)
+                        if (montant_engagement_zone!=0){
+                            taux=(montantExecute/budgetZone)*100
 
                         }
                          if(budgetZone==0){
@@ -707,7 +719,7 @@ created(){
                             latlng:coordonne,
                             budget:budgetZone,
                             budgetReste:budgetRest,
-                            budgetExecute:montant_engagement_zone,
+                            budgetExecute:montantExecute,
                             tauxBudget:taux.toFixed(2),
                             color:color,
                             colorFill:colorFill
@@ -762,8 +774,8 @@ created(){
 
 
             vM.budgetGeneralExcecute=montantEngagelocalite
-            let tauxEx=(montant_engagement/budget_general)*100
-            //console.log(tauxEx)
+            let tauxEx=(vM.budgetGeneralExcecute/budget_general)*100
+            console.log(tauxEx)
                 vM.tauxExecutionBudgetGeneral=tauxEx.toFixed(2)
                 vM.bugdetGeneralRestant=budget_general - montant_engagement
             return budget_general;

@@ -13,7 +13,7 @@
         <table class="table table-bordered table-striped">
          
                <tr>
-                <td >
+                <td colspan="2">
                     <div class="control-group">
                             <label class="control-label">Observation Agent cf</label>
                             <div class="controls">
@@ -22,7 +22,24 @@
                             </div>
                           </div>
                  </td>
+                
+                 
+                 </tr>            
+                  
+                       <tr>
                  <td >
+                    <div class="control-group">
+                            <label class="control-label">Nom et prenoms Agent cf </label>
+                            <div class="controls">
+                              <!-- <select v-model="editObservationAgentCf.nom_agent_cf" class="span">
+                                <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.editObservationAgentCf.marche_id))"  :key="acteur.id"
+                        :value="acteur.id">{{afficherNomActeurDepense(acteur.acteur_depense_id)}}</option>
+                               </select> -->
+                           <input type="text" class="span"  v-model="editObservationAgentCf.nom_agent_cf"/>
+                            </div>
+                          </div>
+                 </td>
+                   <td >
                        <div class="control-group">
                             <label class="control-label">Date Observation Agent cf</label>
                             <div class="controls">
@@ -31,33 +48,32 @@
                             </div>
                           </div>
                        </td>
-                 
-                 </tr>            
-                  
-                       <tr>
+                 </tr>             
+                      <tr>
                  <td >
                     <div class="control-group">
-                            <label class="control-label">Nom et prenoms </label>
+                            <label class="control-label">Nom et prenoms de l'Agent connecté</label>
                             <div class="controls">
-                              <select v-model="editObservationAgentCf.nom_agent_cf" class="span">
+                              <!-- <select v-model="editObservationAgentCf.nom_agent_cf" class="span">
                                 <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.editObservationAgentCf.marche_id))"  :key="acteur.id"
                         :value="acteur.id">{{afficherNomActeurDepense(acteur.acteur_depense_id)}}</option>
-                               </select>
-                           
+                               </select> -->
+                           <input type="text" class="span"  :value="afficheNomUtilisateur" readonly/>
                             </div>
                           </div>
                  </td>
                   <td>
                                   <div class="control-group">
-                            <label class="control-label">Fonction</label>
+                            <label class="control-label">Date d'enregistrement</label>
                             <div class="controls">
-                              <input type="text" class="span" readonly :value=" afficherLibelleFoctionBudgetaire(afficherIdFoctionBudgetaire(editObservationAgentCf.nom_service_beneficiaire))"/>
+                              <!-- <input type="text" class="span" readonly :value=" afficherLibelleFoctionBudgetaire(afficherIdFoctionBudgetaire(editObservationAgentCf.nom_service_beneficiaire))"/>
+                              -->
+                              <input type="date" class="span" />
                              
                             </div>
                           </div>
                            </td>
-                 </tr>             
-                        
+                 </tr>                
                            
          
         </table>
@@ -237,6 +253,12 @@ search:""
       // "sections"
        
     ]),
+      afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
     afficherIdFoctionBudgetaire() {
       return id => {
         if (id != null && id != "") {

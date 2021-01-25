@@ -58,10 +58,24 @@
           </li>
             <li class="divider"></li>
             <li>
+                <router-link :to="{name: 'ServiceCF'}" tag="a">
+                    <i class="icon-user"></i> Gestion des services de CF
+                </router-link>
+            </li>
+
+            <li class="divider"></li>
+            <li>
                 <router-link :to="{name: 'GestionCF'}" tag="a">
                     <i class="icon-user"></i> Gestion des CF
                 </router-link>
             </li>
+            <li class="divider"></li>
+            <li>
+                <router-link :to="{name: 'AffectationCFAService'}" tag="a">
+                    <i class="icon-user"></i>Affection CF Service
+                </router-link>
+            </li>
+
               <li class="divider"></li>
   <li>
       <router-link :to="{name: 'Profil'}" tag="a">
@@ -92,6 +106,13 @@
             </router-link>
           </li>
          <li class="divider"></li>
+         <!-- <li>
+           
+             <router-link :to="{name:'planSourceFin'}" tag="a">
+              <i class="icon-check"></i>Plan source de financement
+            </router-link>
+          </li>
+         <li class="divider"></li> -->
         </ul>
       </li>
       <!-- fonctionnelle
@@ -168,7 +189,12 @@
             </router-link>
           </li>
           <li class="divider"></li>
-         
+          <!-- <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class="icon-key"></i> Structure des Infrastructures
+            </router-link>
+          </li>
+          <li class="divider"></li> -->
         </ul>
       </li>
      <li class="dropdown" id="lesPlans">
@@ -235,6 +261,12 @@
             </router-link>
           </li>
           <li class="divider"></li>
+           <!-- <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class="icon-key"></i> Plan des Infrastructures
+            </router-link>
+          </li>
+          <li class="divider"></li> -->
         </ul>
       </li>
       <li class="dropdown" id="Depense">

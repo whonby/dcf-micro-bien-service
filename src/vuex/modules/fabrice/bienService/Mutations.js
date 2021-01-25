@@ -2621,3 +2621,53 @@ export const GET_INFO_TABLEAU_BORD= (state, objet) =>{
 }
 
 
+/**
+ * Structure DAO
+ */
+
+export const GET_STRUCTURE_DAO= (state, tableau_motif_passation) =>{
+    state.structure_daos = tableau_motif_passation
+}
+
+export const AJOUTER_STRUCTURE_DAO = (state, elementAjout) =>{
+    state.structure_daos.unshift(elementAjout)
+}
+
+export const MODIFIER_STRUCTURE_DAO = (state, elementModifie) =>{
+    state.structure_daos = state.structure_daos.map(item =>{
+        if(item.id == elementModifie.id){
+            item = {...elementModifie}
+        }
+        return item
+    })
+}
+
+export const SUPPRIMER_STRUCTURE_DAO = (state, id) =>{
+    state.structure_daos = state.structure_daos.filter(response => response.id!=id)
+}
+
+
+/***
+ * Membre comite d'evaluation
+ */
+
+export const GET_MEMBRE_COMITE_EVALUATION= (state, tableau_motif_passation) =>{
+    state.membre_comite_evaluations = tableau_motif_passation
+}
+
+export const AJOUTER_MEMBRE_COMITE_EVALUATION = (state, elementAjout) =>{
+    state.membre_comite_evaluations.unshift(elementAjout)
+}
+
+export const MODIFIER_MEMBRE_COMITE_EVALUATION = (state, elementModifie) =>{
+    state.membre_comite_evaluations = state.membre_comite_evaluations.map(item =>{
+        if(item.id == elementModifie.id){
+            item = {...elementModifie}
+        }
+        return item
+    })
+}
+
+export const SUPPRIMER_MEMBRE_COMITE_EVALUATION = (state, id) =>{
+    state.membre_comite_evaluations = state.membre_comite_evaluations.filter(response => response.id!=id)
+}

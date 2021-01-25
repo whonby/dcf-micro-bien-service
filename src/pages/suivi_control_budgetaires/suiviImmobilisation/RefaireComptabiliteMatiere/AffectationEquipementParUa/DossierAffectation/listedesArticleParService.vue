@@ -181,11 +181,11 @@ afficherUniteAdministrative'(
                 <span >Affectation</span>
        
                 </button>
-                <button  v-show="((afficheHistNormeEquipement12(marcheid))-(affichNormeEquipement(marcheid)))==1"
+                <!-- <button  v-show="((afficheHistNormeEquipement12(marcheid))-(affichNormeEquipement(marcheid)))==1"
                         class="btn  btn-danger" @click.prevent="afficherModalTransfert(index)">
                 <span >Transfert</span>
        
-                </button>
+                </button> -->
                    </td>
                      
                          
@@ -269,8 +269,7 @@ search:""
    this.detail_Ua = this.getterplanOrganisationUa.find(
        idmarche => idmarche.id == this.$route.params.id
    )
-  /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
-    console.log(this.appel_offre_marche)*/
+ 
 },
 
        computed: {

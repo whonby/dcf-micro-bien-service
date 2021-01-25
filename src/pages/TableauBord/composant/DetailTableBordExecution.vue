@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container-fluid" style="height: 2500em">
+        <div class="container-fluid" style="height: 2500em;" >
             <div class="" style="margin-top: -20px">
                 <br>
                 <div class="row-fluid">
@@ -8,9 +8,9 @@
                         <a @click.prevent="infrastucture" class="btn btn-default"
                            href="#">&#8606;</a>
                     </div>
-                    <div class="span11" align="left">
-                        <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button>
-                    </div>
+<!--                    <div class="span11" align="left">-->
+<!--                        <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button>-->
+<!--                    </div>-->
 
                     <div class="span11">
                         <h3 v-if="info_unite_admin">Situation {{info_unite_admin.libelle}} ,Nombre de marchés <font color="red">({{getterListeMarcheTableauBordFiltre.length}})</font>  </h3>
@@ -36,48 +36,65 @@
 
 
                 <div class="row-fluid">
-                    <div class="span12">
+                    <div class="span7">
                         Afficher
                         <select name="pets" id="pet-select" v-model="size" class="span3">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
                             <option value="100">100</option>
+                            <option value="1000">1000</option>
                         </select>
                         Entrer
+                    </div>
+                    <div class="span5" >
+                        <button class="btn btn-default" @click="tableToExcel('table', 'Execution')">
+                            <img style="width: 20px !important; height: 20px !important;" src="https://img.icons8.com/windows/64/000000/export-excel.png"/>
+                        </button>
+                    </div>
+                    <hr>
+                    <div class="span12">
                         <div class="widget-content nopadding" v-if="getterListeMarcheTableauBordFiltre">
 
-                            <div v-for="(item,index) in partition (getterListeMarcheTableauBordFiltre,size)[page]" :key="item.id" class="widget-content">
-                                <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-
-                                    <div class="span9" style="text-align:center"><h5>N° D'ORDRE {{index + 1}} / {{item.objet}}
-                                    </h5></div>
-                                        <div class="span1"><button  class="btn btn-default " title="Detail">
-                                            <i class="icon-folder-open"></i></button></div>
-                                    <div class="span2"></div>
-                                </div>
-
-                                <table class="table table-bordered table-striped">
+                            <div class="widget-content">
+                                <table class="table table-bordered table-striped"  ref="table" id="loremTable" summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
                                     <thead>
                                     <tr>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">N° D'ORDRE </th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">OBJET </th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">NUMERO DU MARCHE </th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE D'APPROBATION</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DUREE D'EXECUTION</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE PREVISIONNELLE DE FIN</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">DATE ORDRE DE SERVICE DE DEMARRAGE</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">ENTREPRISE ATTRIBUTAIRE</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">MONTANT DE BASE TTC</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">TAUX AVENANTS</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">MONTANT TOTAL AVENANT TTC</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">AVANCE DE DEMARRAGE PERCUE</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">MONTANT TOTAL OP VISES (F CFA TTC</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">TAUX GLOBAL D'EXECUTION FINANCIERE</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">MONTANT TOTAL OP VISES PART ETAT (F CFA TTC)</th>
 
-                                        <th>NUMERO DU MARCHE </th>
-                                        <th>DATE D'APPROBATION</th>
-                                        <th>DUREE D'EXECUTION</th>
-                                        <th>DATE PREVISIONNELLE DE FIN</th>
-                                        <th>DATE ORDRE DE SERVICE DE DEMARRAGE</th>
-                                        <th>ENTREPRISE ATTRIBUTAIRE</th>
-                                        <th>MONTANT DE BASE TTC</th>
-                                        <th>TAUX AVENANTS</th>
-                                        <th>MONTANT TOTAL AVENANT TTC</th>
-                                        <th>AVANCE DE DEMARRAGE PERCUE</th>
-                                        <th>MONTANT TOTAL OP VISES (F CFA TTC</th>
-                                        <th>TAUX GLOBAL D'EXECUTION FINANCIERE</th>
-                                        <th>MONTANT TOTAL OP VISES PART ETAT (F CFA TTC)</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">TAUX D'EXECUTION FINANCIERE PART ETAT</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">MONTANT TOTAL OP VISES PART BAILLEUR (F CFA TTC)</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">TAUX D'EXECUTION FINANCIERE PART BAILLEUR</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">MONTANT TOTAL RESTANT A PAYER (F CFA TTC)</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">MONTANT RESTANT A PAYER PART ETAT (F CFA TTC)</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">TAUX FINANCIER   RESTANT A PAYER PART ETAT</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">MONTANT RESTANT A PAYER PART BAILLEUR (F CFA TTC)</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">TAUX FINANCIER   RESTANT A PAYER BAILLEUR</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">TAUX D'EXECUTION PHYSIQUE</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">RETENUE D'AVANCE</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">RETENUE DE GARANTIE</th>
+                                        <th :style="{background: getColorByStatus(info_marche_status),fontSize:'15px'}">TEMPS D'EXECUTION ECOULE</th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="odd gradeX">
+                                    <tr class="odd gradeX" v-for="(item,index) in partition (getterListeMarcheTableauBordFiltre,size)[page]" :key="item.id" >
+                                        <td>{{index + 1}}</td>
+                                        <td>{{item.objet}}</td>
                                         <td>{{item.numero_marche}} </td>
                                         <td>{{formaterDate(getActEffefinancierMarche(item.id).date_approbation)}}</td>
                                         <td>{{getActEffefinancierMarche(item.id).duree}} JOURS</td>
@@ -104,39 +121,26 @@
                                         <td>{{tauxExecutionPasMarcheFinnancier(item.id)}} %</td>
                                         <td>{{formatageSomme(montantOPVisePartEtat(item.id))}}</td>
 
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <table class="tablel2 table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-
-                                        <th>TAUX D'EXECUTION FINANCIERE PART ETAT</th>
-                                        <th>MONTANT TOTAL OP VISES PART BAILLEUR (F CFA TTC)</th>
-                                        <th>TAUX D'EXECUTION FINANCIERE PART BAILLEUR</th>
-                                        <th>MONTANT TOTAL RESTANT A PAYER (F CFA TTC)</th>
-                                        <th>MONTANT RESTANT A PAYER PART ETAT (F CFA TTC)</th>
-                                        <th>TAUX FINANCIER   RESTANT A PAYER PART ETAT</th>
-                                        <th>MONTANT RESTANT A PAYER PART BAILLEUR (F CFA TTC)</th>
-                                        <th>TAUX FINANCIER   RESTANT A PAYER BAILLEUR</th>
-                                        <th>TAUX D'EXECUTION PHYSIQUE</th>
-                                        <th>RETENUE D'AVANCE</th>
-                                        <th>RETENUE DE GARANTIE</th>
-                                        <th>TEMPS D'EXECUTION ECOULE</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="odd gradeX">
 
                                         <td>{{tauxFinancementParEtat(item.id)}} % </td>
                                         <td>{{formatageSomme(parseFloat(montantOPVisePartBailleur(item.id)))}}</td>
                                         <td>{{tauxFinancementParBailleur(item.id)}} %</td>
                                         <td>{{formatageSomme(parseFloat(montantRestePaye(item.id)))}}</td>
                                         <td>{{tauxRestePaye(item.id)}} </td>
+
+
+                                        <td> </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+
                                     </tr>
                                     </tbody>
                                 </table>
-
                             </div>
 
                             <div class="pagination alternate" v-if="getterListeMarcheTableauBordFiltre">
@@ -155,146 +159,7 @@
             </div>
         </div>
 
-        <vue-html2pdf
-                :show-layout="false"
-                :float-layout="true"
-                :enable-download="true"
-                :preview-modal="true"
-                :paginate-elements-by-height="1400"
-                filename="DCF"
-                :pdf-quality="2"
-                :manual-pagination="false"
-                pdf-format="a4"
-                pdf-orientation="landscape"
-                pdf-content-width="1000px"
-                @progress="onProgress($event)"
-                @hasStartedGeneration="hasStartedGeneration()"
-                @hasGenerated="hasGenerated($event)"
-                ref="html2Pdf"
-        >
-            <section slot="pdf-content">
 
-
-
-
-                <div class="row-fluid">
-
-
-                    <div class="span11">
-                        <h3 v-if="info_unite_admin">Situation {{info_unite_admin.libelle}} ,Nombre de marchés <font color="red">({{getterListeMarcheTableauBordFiltre.length}})</font>  </h3>
-                    </div>
-                    <div  class="span11">
-                        <nav aria-label="breadcrumb" class="main-breadcrumb" >
-                            <ol class="breadcrumb" :style="{background: getColorByStatus(info_marche_status),fontSize:'20px'}" align="center">
-
-                                <li class="breadcrumb-item" v-html="infoEtatMarche(info_marche_status)"></li>
-
-
-                            </ol>
-                            <ol class="breadcrumb">
-
-                                <li class="breadcrumb-item" v-if="info_region"><h5>Région {{info_region.libelle}}&nbsp;&nbsp;&nbsp;&nbsp; .</h5></li>
-                                <li class="breadcrumb-item" v-if="info_infrastructure"><h5> Infrastructure {{info_infrastructure.libelle}} &nbsp;&nbsp;&nbsp;&nbsp; .</h5></li>
-                                <li class="breadcrumb-item" v-if="info_type_marche"><h5> Type de Marche {{info_type_marche.libelle}} &nbsp;&nbsp;&nbsp;&nbsp; .</h5></li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-
-                <div v-for="(item,index) in getterListeMarcheTableauBordFiltre" :key="item.id" class="widget-content">
-                    <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-
-                        <div class="span9" style="text-align:center"><h5>N° D'ORDRE {{index + 1}} / {{item.objet}}
-                        </h5></div>
-<!--                        <div class="span1"><button  class="btn btn-default " title="Detail">-->
-<!--                            <i class="icon-folder-open"></i></button></div>-->
-                        <div class="span2"></div>
-                    </div>
-
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-
-                            <th>NUMERO DU MARCHE </th>
-                            <th>DATE D'APPROBATION</th>
-                            <th>DUREE D'EXECUTION</th>
-                            <th>DATE PREVISIONNELLE DE FIN</th>
-                            <th>DATE ORDRE DE SERVICE DE DEMARRAGE</th>
-                            <th>ENTREPRISE ATTRIBUTAIRE</th>
-                            <th>MONTANT DE BASE TTC</th>
-                            <th>TAUX AVENANTS</th>
-                            <th>MONTANT TOTAL AVENANT TTC</th>
-                            <th>AVANCE DE DEMARRAGE PERCUE</th>
-                            <th>MONTANT TOTAL OP VISES (F CFA TTC</th>
-                            <th>TAUX GLOBAL D'EXECUTION FINANCIERE</th>
-                            <th>MONTANT TOTAL OP VISES PART ETAT (F CFA TTC)</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="odd gradeX">
-                            <td>{{item.numero_marche}} </td>
-                            <td>{{formaterDate(getActEffefinancierMarche(item.id).date_approbation)}}</td>
-                            <td>{{getActEffefinancierMarche(item.id).duree}} JOURS</td>
-                            <td>{{formaterDate(getActEffefinancierMarche(item.id).date_fin_exe)}}</td>
-                            <td>{{formaterDate(getActEffefinancierMarche(item.id).date_odre_service)}}</td>
-                            <td v-if="getEntrepriseAttributaire(getActEffefinancierMarche(item.id).entreprise_id)">
-                                {{getEntrepriseAttributaire(getActEffefinancierMarche(item.id).entreprise_id).raison_sociale}}
-                            </td>
-                            <td v-else>
-                                Non
-                            </td>
-                            <td v-if="getActEffefinancierMarche(item.id).montant_act">
-                                {{formatageSomme(parseFloat(getActEffefinancierMarche(item.id).montant_act))}}
-                            </td>
-                            <td v-else>0 FCFA</td>
-                            <td>{{tauxAvenantPasMarche(item.id)}} %</td>
-                            <td>{{formatageSomme(parseFloat(montantTCTAvenant(item.id)))}}</td>
-                            <td v-if="getActEffefinancierMarche(item.id)">
-                                {{formatageSomme(parseFloat(getActEffefinancierMarche(item.id).avance_demarrage_ttc))}}
-                            </td>
-                            <td v-else>0 FCFA</td>
-
-                            <td>{{formatageSomme(montantOPVise(item.id))}}</td>
-                            <td>{{tauxExecutionPasMarcheFinnancier(item.id)}} %</td>
-                            <td>{{formatageSomme(montantOPVisePartEtat(item.id))}}</td>
-
-                        </tr>
-                        </tbody>
-                    </table>
-                    <table class="tablel2 table-bordered table-striped">
-                        <thead>
-                        <tr>
-
-                            <th>TAUX D'EXECUTION FINANCIERE PART ETAT</th>
-                            <th>MONTANT TOTAL OP VISES PART BAILLEUR (F CFA TTC)</th>
-                            <th>TAUX D'EXECUTION FINANCIERE PART BAILLEUR</th>
-                            <th>MONTANT TOTAL RESTANT A PAYER (F CFA TTC)</th>
-                            <th>MONTANT RESTANT A PAYER PART ETAT (F CFA TTC)</th>
-                            <th>TAUX FINANCIER   RESTANT A PAYER PART ETAT</th>
-                            <th>MONTANT RESTANT A PAYER PART BAILLEUR (F CFA TTC)</th>
-                            <th>TAUX FINANCIER   RESTANT A PAYER BAILLEUR</th>
-                            <th>TAUX D'EXECUTION PHYSIQUE</th>
-                            <th>RETENUE D'AVANCE</th>
-                            <th>RETENUE DE GARANTIE</th>
-                            <th>TEMPS D'EXECUTION ECOULE</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="odd gradeX">
-
-                            <td>{{tauxFinancementParEtat(item.id)}} % </td>
-                            <td>{{formatageSomme(parseFloat(montantOPVisePartBailleur(item.id)))}}</td>
-                            <td>{{tauxFinancementParBailleur(item.id)}} %</td>
-                            <td>{{formatageSomme(parseFloat(montantRestePaye(item.id)))}}</td>
-                            <td>{{tauxRestePaye(item.id)}} </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-
-            </section>
-        </vue-html2pdf>
     </div>
 </template>
 
@@ -316,6 +181,10 @@
                 page:0,
                 size:10,
                 active_el:false,
+                uri :'data:application/vnd.ms-excel;charset=UTF-8;base64,',
+                template:'<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+                base64: function(s){ return window.btoa(unescape(encodeURIComponent(s))) },
+                format: function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
             }
         },
         created(){
@@ -657,13 +526,29 @@
             },
             formatageSomme:formatageSomme,
             formaterDate(date){
+                if(date=="")
+                    return ""
                 return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+            },
+            tableToExcel(table, name){
+                if (!table.nodeType) table = this.$refs.table
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+                window.location.href = this.uri + this.base64(this.format(this.template, ctx))
             }
         }
     }
 </script>
 
 <style scoped>
+    ::-webkit-scrollbar{
+        height: 4px;
+        width: 4px;
+        background: gray;
+    }
+    ::-webkit-scrollbar-thumb:horizontal{
+        background: #000;
+        border-radius: 10px;
+    }
     .grdirModalActeEffet{
         width: 1200px;
         margin: 0 -530px;
@@ -872,6 +757,12 @@
     .red_type_marche {
         color: #fff !important;
         background-color: #892e6a !important;
+    }
+
+    .scroll-bar-app-x{
+        overflow-x: inherit !important;
+        overflow-x: initial !important;
+        overflow-x: unset !important;
     }
 
 </style>

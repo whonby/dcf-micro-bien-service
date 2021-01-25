@@ -10,8 +10,9 @@
 
                                         <th>Reference appel - DAO</th>
                                         <th> Type procedure</th>
+                                        <th>Mode de passation</th>
                                         <th>Date emmission</th>
-                                        <th>Date limite</th>
+                                        <th>Date et heure limite  </th>
                                         <th>Objet appel</th>
                                        
                                         <th>Action</th>
@@ -25,12 +26,13 @@
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{typeProcedureLibelle(appelOffre.type_appel) || 'Non renseigné'}}</td>
 
-                                       
+                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.mode_passation_id || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
 
                                             {{formaterDate(appelOffre.date_emission) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{formaterDate(appelOffre.date_limite) || 'Non renseigné'}}</td>
+                                            {{formaterDate(appelOffre.date_limite) || 'Non renseigné'}} {{appelOffre.heure}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.objet_appel || 'Non renseigné'}}</td>
                                         
@@ -69,16 +71,43 @@
                             </div>
                         </div>
                             </td>
-                            <td>
+                               <td>
+             <div class="control-group">
+            <label class="control-label">Mode Passation</label>
+            <div class="controls">
+            
+               <select v-model="formData.mode_passation_id" class="span" >
+               <option v-for="plans in procedurePassations" :key="plans.id" 
+               :value="plans.id"> {{plans.libelle}} =>{{ typeProcedureLibelle(plans.type_procedure_id)}}</option>
+               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+           </select>
+            </div>
+          </div>
+                   </td> 
+                           
+                            </tr>
+                            
+                            <tr>
+                                 <td>
                         <div class="control-group">
-                            <label class="control-label">Reference  de DAO <code>*</code> :</label>
+                            <label class="control-label">Date debut de publication<code>*</code> :</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="Reference d'appel" v-model="formData.ref_appel">
+                                <input type="date" class="span" placeholder="Date emision" v-model="formData.date_emission">
                             </div>
                         </div>
                             </td>
-                            </tr>
-                            <tr>
+                                <td>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label> Reference  de DAO<code>*</code></label>
+                                  <input type="text" class="span" placeholder="Reference d'appel" v-model="formData.ref_appel">
+                                
+                            </div>
+                        </div>
+                                </td>
+                            
+                        </tr>
+                        <tr>
                             <td colspan="2" width="">
                         <div class="control-group">
                             <label class="control-label">Objet  DAO :</label>
@@ -89,28 +118,16 @@
                         </div>
                             </td>
                             </tr>
-                            <tr>
+                        <tr>
                                 <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date emission de DAO <code>*</code></label>
-                                <input type="date" class="span" placeholder="Date emision" v-model="formData.date_emission">
-                            </div>
-                        </div>
-                                </td>
-                                <td>
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Date limite de DAO <code>*</code></label>
+                                <label>Date fin de publication <code>*</code></label>
                                 <input type="date" class="span" placeholder="Date limite" v-model="formData.date_limite" :min="formData.date_emission">
                             </div>
                         </div>
                         </td>
-
-                        
-                        </tr>
-                        <tr>
-                            <td >
+                            <td>
                         <div class="control-group">
                             <label class="control-label">Numero d'autorisation :</label>
                             <div class="controls">
@@ -118,6 +135,30 @@
                             </div>
                         </div>
                         </td>
+
+
+                           
+                        </tr>
+                        <tr>
+                             <td>
+
+                            <td>
+
+                                <div class="control-group">
+                                    <label class="control-label">Date d'autorisation :</label>
+                                    <div class="controls">
+                                        <input type="date" class="span" placeholder="" v-model="formData.date_numero_autorisation">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label"> Heure limites :</label>
+                                    <div class="controls">
+                                        <input type="time" class="span" placeholder="" v-model="formData.heure">
+                                    </div>
+                                </div>
+                            </td>
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Fichier DAO:</label>
@@ -161,7 +202,23 @@
                             </div>
                         </div>
                             </td>
-                                <td >
+                                <td>
+             <div class="control-group">
+            <label class="control-label">Mode Passation</label>
+            <div class="controls">
+            
+               <select v-model="edite_appel_offre.mode_passation_id" class="span" >
+               <option v-for="plans in procedurePassations" :key="plans.id" 
+               :value="plans.id"> {{plans.code}} => {{plans.libelle}}</option>
+           </select>
+            </div>
+          </div>
+                   </td> 
+                             
+                    </tr>
+                                 
+                            <tr>
+                                   <td >
                         <div class="control-group">
                             <label class="control-label">Reference de DAO  :</label>
                             <div class="controls">
@@ -169,8 +226,17 @@
                             </div>
                         </div>
                             </td>
-                    </tr>
-                                   <tr>
+                             <td>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Date debut de publication</label>
+                                <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
+                            </div>
+                        </div>
+                                </td>
+                              
+                        </tr>
+                          <tr>
                             <td colspan="2" width="">
                         <div class="control-group">
                             <label class="control-label">Objet de DAO :</label>
@@ -181,29 +247,17 @@
                         </div>
                             </td>
                             </tr>
-                            <tr>
-                             <td>
+                        <tr>
+                              
+                                 <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date emission </label>
-                                <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
-                            </div>
-                        </div>
-                                </td>
-                                
-                                 <td >
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Date limite </label>
+                                <label>Date fin de publication </label>
                                 <input type="date" class="span" placeholder="Date limite" v-model="edite_appel_offre.date_limite">
                             </div>
                         </div>
                         </td>
-
-                       
-                        </tr>
-                        <tr>
-                             <td >
+                             <td>
                         <div class="control-group">
                             <label class="control-label">Numero d'autorisation :</label>
                             <div class="controls">
@@ -211,6 +265,26 @@
                             </div>
                         </div>
                         </td>
+
+                           
+                        </tr>
+                        <tr>
+                             <td>
+                                <div class="control-group">
+                                    <label class="control-label">Date d'autorisation :</label>
+                                    <div class="controls">
+                                        <input type="date" class="span" placeholder="" v-model="edite_appel_offre.date_numero_autorisation">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label"> Heure limites :</label>
+                                    <div class="controls">
+                                        <input type="time" class="span" placeholder="" v-model="edite_appel_offre.heure">
+                                    </div>
+                                </div>
+                            </td>
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Fichier DAO:</label>
@@ -255,9 +329,12 @@ export default {
         namePDF :"",
         fichierPDF :"",
             selectedFile:"",
+
         formData:{
               ref_appel:"",
+              
               numero_autorisation:"",
+              mode_passation_id:"",
                     type_appel:"",
                     financement:"",
                     nom_bailleurs:"",
@@ -266,10 +343,14 @@ export default {
                     objet_appel:"",
                     imputation:"",
                     marche_id:"",
+            date_numero_autorisation:"",
+            heure:""
         },
+        message_offre:"",
         edite_appel_offre:{
              	ref_appel:"",
                  numero_autorisation:"",
+                 mode_passation_id:"",
                     type_appel:"",
                     financement:"",
                     nom_bailleurs:"",
@@ -278,6 +359,8 @@ export default {
                     objet_appel:"",
                     imputation:"",
                     marche_id:"",
+            date_numero_autorisation:"",
+            heure:""
         }
 
         }
@@ -376,6 +459,22 @@ typeProcedureLibelle() {
       };
     },
 
+    // recuperation de 
+    listePassation(){
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_procedure_id;
+      }
+      return 0
+        }
+      };
+    
+
+    }
+
       
       },
 
@@ -438,7 +537,12 @@ typeProcedureLibelle() {
                     objet_appel:"",
                     imputation:"",
                     marche_id:"",
-                    numero_autorisation:""
+                    numero_autorisation:"",
+
+                    procedure_passation_id:"",
+
+          heure:""
+
                 }
     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
     marcheObjet.attribue=1
@@ -456,6 +560,7 @@ typeProcedureLibelle() {
 
 
  modfications(){
+              console.log(this.edite_appel_offre)
                 this.modifierAppelOffre(this.edite_appel_offre)
                 this.$('#modifierActeEF').modal('hide');
             },
@@ -473,9 +578,9 @@ formatageSomme:formatageSomme,
 
 <style scoped>
 .grdirModalActeEffet{
-     width: 900px;
+     width: 1000px;
  margin: 0 -530px;
- height: 550px;
+ height: 600px;
 
 }
 </style>

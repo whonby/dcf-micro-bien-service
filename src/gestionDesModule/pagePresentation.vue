@@ -164,7 +164,7 @@
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInLeft;">
 
                                               <div class="timeline-text" style="margin-top: -18px">
-                                                  <h5>GESTION SIB</h5>
+                                                  <h5>EXECUTION SIB</h5>
                                                   <div>
                                                       <i style="font-size: 35px !important;" class="icon-book"></i>
                                                   </div>
@@ -176,7 +176,7 @@
                                           <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
 <!--                                              <div class="timeline-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>-->
                                               <div class="timeline-text" style="margin-top: -18px">
-                                                  <h5>GESTION HORS SIB</h5>
+                                                  <h5>EXECUTION HORS SIB</h5>
                                                   <div>
                                                       <i style="font-size: 35px !important;" class="icon-folder-open"></i>
                                                   </div>
@@ -295,11 +295,14 @@ components:{
 created(){
     let objet=localStorage.getItem('Users');
     let user=JSON.parse (objet)
+    this.getServiceCF()
+    this.getAffectationServiceCF()
+    this.getAffectation()
     this.getUniteAdminUser(user.id)
           this.getGestionModules()
           this.getInfrastructure()
           this.getTypeOrdrePaiement()
-    this.getAffectation()
+
 this.getFormeJuridiques()
 this.getRegimeImpositions()
  this.getGroupe()
@@ -341,6 +344,7 @@ this.getRegimeImpositions()
    this.getMotifPassation()
    this.getSourceFinancement()
    this.getTypeFinancement()
+   this.getPlanSourceFinancement()
    this.getStructureBudgetaire()
    this.getPlanBudgetaire()
    this.getStructureActivite()
@@ -390,6 +394,7 @@ this.getTypeAppel()
      
      this.getAllBanqueUa()
      this.getAllDecompteFacture()
+     this.getAllHistoriqueDecompteFacture()
        this.getStructureOrganigrammeUa()
  this.getAllBudgetEclate()
  this.getVehicule()
@@ -449,6 +454,7 @@ this.getAllHistoriqueBudgetGeneral()
        * suivi des immo
        */
       this.getGrpeCorporel();
+      this.getAffectationUaBien()
       this.getTypeBienCorporels();
        this.getAllNatureEntre();
       this.getAllCauseInactivite();
@@ -549,6 +555,9 @@ this.getImageMarche()
 this.getMembreCojo()
     this.getProceVerbal()
       this.getEcheances()
+    this.getMembreComiteEvaluation()
+    this.getStructureDAO()
+
         },
 
   computed:{
@@ -634,12 +643,12 @@ return objJson.id
      dcf:dcf,
 
     ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",'getGroupe',"getMenu","getModule",
-    "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf","getAffectationGroupeUser"]),
+    "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf","getAffectationGroupeUser","getServiceCF","getAffectationServiceCF"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix','getMotifPassation']),
 
     ...mapActions('parametreGenerauxSourceDeFinancement',['getSourceFinancement',
-        'getTypeFinancement'
+        'getTypeFinancement','getPlanSourceFinancement'
     ]),
    ...mapActions( 'parametreGenerauxBudgetaire', ['getStructureBudgetaire',
    'getPlanBudgetaire']),
@@ -675,7 +684,8 @@ return objJson.id
      "getAllBudgetEclate",
      "getVehicule",
      "getReparationVehicule",
-     "getStockArticleUa"
+     "getStockArticleUa",
+     "getAllHistoriqueDecompteFacture"
     ]),
             ...mapActions('personnelUA', ["getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -690,7 +700,8 @@ return objJson.id
         "getSourceFinnancementByMarche","getMarcheContratExecution",
         "getBanque", "getCompte","getAgence","getSanction","getHistoriqueEntreprise"]),
 
-        ...mapActions("SuiviImmobilisation", [
+        ...mapActions("SuiviImmobilisation", ["getAffectationUaBien",
+          "getAffectationUaBien",
           "getGrpeCorporel",
           "getTypeBienCorporels",
       "getAllNatureEntre",
@@ -737,7 +748,8 @@ return objJson.id
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
-          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances","pusherImageMarche","getImageMarche"]),
+          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner",
+           "getEcheances","pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO"]),
 
     activeMenuModuleParamGeneral(){
       this.activeMenuModuleSidcf(1)

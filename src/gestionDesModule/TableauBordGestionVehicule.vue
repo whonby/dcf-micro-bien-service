@@ -1,4 +1,4 @@
-valeurAcquisitionMateriel
+PrixVehiculeParUa
 <template>
   <div class="container-fluid">
    <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
@@ -121,7 +121,7 @@ valeurAcquisitionMateriel
                 </thead>
                 
                 <tr>
-                     <th  style="width:15%;text-align:left;font-weight:bold;font-size:16px">BIENS INCORPORELS  (A)</th>
+                     <th  style="width:15%;text-align:left;font-weight:bold;font-size:16px">BIENS INCORPORELS (A)</th>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{0}} </td>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{formatageSomme(parseFloat(0))}} </td>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{formatageSomme(parseFloat(0))}} </td>
@@ -143,7 +143,7 @@ valeurAcquisitionMateriel
                  <tr>
                      <th  style="width:15%;text-align:left;font-weight:bold;font-size:16px">BIENS CORPORELS  (B)</th>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px"> {{(parseFloat(NombreEquipementParMobilier(unite_administrative_id))+parseFloat(NombreEquipementParMateriel(unite_administrative_id))+parseFloat(NombreVehiculeParUa(unite_administrative_id))+parseFloat(NombreEquipementParImmobilier(unite_administrative_id))+parseFloat(NombreEquipementParGrosTravaux(unite_administrative_id)))}}</td>
-                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px"> {{formatageSomme(parseFloat(parseFloat(PrixEquipementParMobilier(unite_administrative_id))+parseFloat(PrixEquipementParMateriel(unite_administrative_id))+parseFloat(PrixVehiculeParUa(unite_administrative_id))+parseFloat(PrixEquipementParImmobilier(unite_administrative_id))+parseFloat(PrixEquipementParGrosTravaux(unite_administrative_id))))}}</td>
+                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px"> {{formatageSomme(parseFloat(parseFloat(PrixEquipementParMobilier(unite_administrative_id))+parseFloat(PrixEquipementParMateriel(unite_administrative_id))+parseFloat(PrixEquipementParImmobilier(unite_administrative_id))+parseFloat(PrixEquipementParGrosTravaux(unite_administrative_id))+parseFloat(PrixEquipementParVehicule(unite_administrative_id))))}}</td>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px">{{formatageSomme(parseFloat(0))}} </td>
                      <td style="width:15%"> </td>
                      <td style="width:15%"> </td>
@@ -168,7 +168,8 @@ valeurAcquisitionMateriel
                      <td style="width:15%;text-align:center;"> {{NombreEquipementParMateriel(unite_administrative_id)}}</td>
                      <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(PrixEquipementParMateriel(unite_administrative_id)))}}</td>
                      <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(0))}}</td>
-                     <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td>
+                       <td style="width:15%;text-align:center;">{{0}}%</td>
+                     <!-- <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td> -->
                      <td style="width:15%;text-align:center;"> 0%</td>
                      <td style="width:15%;text-align:center;"> 0%</td>
                      <td style="width:15%;text-align:center;">0% </td>
@@ -176,9 +177,10 @@ valeurAcquisitionMateriel
                  <tr>
                      <th  style="width:10%;text-align:right;">VEHICULES</th>
                      <td style="width:15%;text-align:center;"> {{NombreVehiculeParUa(unite_administrative_id)}}</td>
-                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(PrixVehiculeParUa(unite_administrative_id)))}}</td>
+                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(PrixEquipementParVehicule(unite_administrative_id)))}}</td>
                      <td style="width:15%;text-align:center;">{{formatageSomme(parseFloat(0))}} </td>
-                     <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td>
+                     <td style="width:15%;text-align:center;">{{0}}%</td>
+                     <!-- <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td> -->
                      <td style="width:15%;text-align:center;">0% </td>
                      <td style="width:15%;text-align:center;">0% </td>
                      <td style="width:15%;text-align:center;">0% </td>
@@ -186,10 +188,10 @@ valeurAcquisitionMateriel
                   <tr>
                      <th  style="width:10%;text-align:right;">IMMOBILIER</th>
                      <td style="width:15%;text-align:center;">{{NombreEquipementParImmobilier(unite_administrative_id)}} </td>
-                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(PrixEquipementParMateriel(unite_administrative_id)))}}</td>
+                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(0))}}</td>
                      <td style="width:15%;text-align:center;">{{formatageSomme(parseFloat(0))}}</td>
-                                          
-  <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td>
+                        <td style="width:15%;text-align:center;">{{0}}%</td>                  
+  <!-- <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td> -->
                      <td style="width:15%;text-align:center;"> 0%</td>
                      <td style="width:15%;text-align:center;">0%</td>
                      <td style="width:15%;text-align:center;">0%</td>
@@ -197,9 +199,10 @@ valeurAcquisitionMateriel
                   <tr>
                      <th  style="width:10%;text-align:right;">GROS TRAVAUX</th>
                      <td style="width:15%;text-align:center;"> {{NombreEquipementParGrosTravaux(unite_administrative_id)}} </td>
-                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(PrixEquipementParMateriel(unite_administrative_id)))}}</td>
+                     <td style="width:15%;text-align:center;"> {{formatageSomme(parseFloat(0))}}</td>
                      <td style="width:15%;text-align:center;">{{formatageSomme(parseFloat(0))}} </td>
-                     <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td>
+                     <td style="width:15%;text-align:center;">{{0}}%</td>
+                     <!-- <td style="width:15%;text-align:center;">{{(EquipementNormeCouvert/(nombreDeMaterielCouvert(unite_administrative_id))*100)}}%</td> -->
                      <td style="width:15%;text-align:center;">0%</td>
                      <td style="width:15%;text-align:center;">0% </td>
                     <td style="width:15%;text-align:center;"> 0%</td>
@@ -207,7 +210,7 @@ valeurAcquisitionMateriel
                  <tr>
                      <th  style="width:15%;text-align:center;font-weight:bold;font-size:16px">TOTAL  (A+B)</th>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px;background-color: coral;color:#000;">{{(parseFloat(NombreEquipementParMobilier(unite_administrative_id))+parseFloat(NombreEquipementParMateriel(unite_administrative_id))+parseFloat(NombreVehiculeParUa(unite_administrative_id))+parseFloat(NombreEquipementParImmobilier(unite_administrative_id))+parseFloat(NombreEquipementParGrosTravaux(unite_administrative_id)))}} </td>
-                     <td style="width:10%;text-align:center;font-weight:bold;font-size:16px;background-color: coral;color:#000;"> {{formatageSomme(parseFloat(parseFloat(PrixEquipementParMobilier(unite_administrative_id))+parseFloat(PrixEquipementParMateriel(unite_administrative_id))+parseFloat(PrixVehiculeParUa(unite_administrative_id))+parseFloat(PrixEquipementParImmobilier(unite_administrative_id))+parseFloat(PrixEquipementParGrosTravaux(unite_administrative_id))))}}</td>
+                     <td style="width:10%;text-align:center;font-weight:bold;font-size:16px;background-color: coral;color:#000;"> {{formatageSomme(parseFloat(parseFloat(PrixEquipementParMobilier(unite_administrative_id))+parseFloat(PrixEquipementParMateriel(unite_administrative_id))+parseFloat(PrixEquipementParVehicule(unite_administrative_id))+parseFloat(PrixEquipementParImmobilier(unite_administrative_id))+parseFloat(PrixEquipementParGrosTravaux(unite_administrative_id))))}}</td>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px;background-color: coral;color:#000;"> {{formatageSomme(parseFloat(0))}}</td>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px;background-color: coral;color:#000;"> </td>
                      <td style="width:10%;text-align:center;font-weight:bold;font-size:16px;background-color: coral;color:#000;"> </td>
@@ -282,7 +285,7 @@ search:""
     ...mapGetters("SuiviImmobilisation", [
     
       "immobilisations",
-      "ficheArticle",
+      "GestionStockageArticles",
       "normeEquipements"
      
       
@@ -296,7 +299,7 @@ search:""
 
     ...mapGetters("personnelUA", ["personnaliseActeurDepense","acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
 
- ...mapGetters("uniteadministrative", ["getvehicules","uniteAdministratives","directions","servicesua","uniteZones"]),
+ ...mapGetters("uniteadministrative", ["GestionStockageArticles","getvehicules","uniteAdministratives","directions","servicesua","uniteZones"]),
   
  listeDesBien() {
       
@@ -336,17 +339,17 @@ nombreDeMaterielCouvert() {
     },
 EquipementNormeCouvert() {
       
-           return this.normeEquipements.filter(qtreel => this.idTypeBien(qtreel.famille_id) == 1).length;
+           return this.normeEquipements.filter(qtreel => this.idTypeBien(qtreel.famille_id) == 5).length;
 
     },
 
 idTypeBien() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.ficheArticle.find(qtreel => qtreel.article_id == id);
+           const qtereel = this.GestionStockageArticles.find(qtreel => qtreel.famille_article_id == id);
 
       if (qtereel) {
-        return qtereel.type_bien
+        return qtereel.typebien_id
       }
       return 0
         }
@@ -384,8 +387,8 @@ nombreDarticleMobilier() {
       
         if (this.noDCfNoAdmin ){
             let colect=[];
-            this.ficheArticle.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+            this.GestionStockageArticles.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -398,67 +401,75 @@ nombreDarticleMobilier() {
       
           }
          
-         // return this.ficheArticle.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+         // return this.GestionStockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
         
-          return this.ficheArticle;
+          return this.GestionStockageArticles;
       
      
     },
 
-
 NombreVehiculeParUa() {
       return id => {
         if (id != null && id != "") {
-           return this.nombreDeVehicule.filter(element => element.uniteadministrative == id).length;
+           return this.nombreDarticleMobilier.filter(element => element.uAdministrative_id == id && element.typebien_id == 9).length;
 
         }
-        return this.getvehicules.length
+        return this.GestionStockageArticles.filter(element =>element.typebien_id == 9).length
       };
     },
-PrixVehiculeParUa() {
-      return id => {
-        if (id != null && id != "") {
-           return this.nombreDeVehicule.filter(element => element.uniteadministrative == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prixunitaire), 0).toFixed(0);
+// NombreVehiculeParUa() {
+//       return id => {
+//         if (id != null && id != "") {
+//            return this.nombreDeVehicule.filter(element => element.uniteadministrative == id).length;
 
-        }
-        return this.getvehicules.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prixunitaire), 0).toFixed(0);
-      };
-    },
+//         }
+//         return this.getvehicules.length
+//       };
+//     },
+// PrixVehiculeParUa() {
+//       return id => {
+//         if (id != null && id != "") {
+//            return this.nombreDeVehicule.filter(element => element.uniteadministrative == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prixunitaire), 0).toFixed(0);
+
+//         }
+//         return this.getvehicules.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prixunitaire), 0).toFixed(0);
+//       };
+//     },
 
 NombreEquipementParMobilier() {
       return id => {
         if (id != null && id != "") {
-           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 3).length;
+           return this.nombreDarticleMobilier.filter(element => element.uAdministrative_id == id && element.typebien_id == 7).length;
 
         }
-        return this.ficheArticle.filter(element =>element.type_bien == 3).length
+        return this.GestionStockageArticles.filter(element =>element.typebien_id == 7).length
       };
     },
 NombreEquipementParMateriel() {
       return id => {
         if (id != null && id != "") {
-           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 1).length;
+           return this.nombreDarticleMobilier.filter(element => element.uAdministrative_id == id && element.typebien_id == 5).length;
 
         }
-        return this.ficheArticle.filter(element =>element.type_bien == 1).length
+        return this.GestionStockageArticles.filter(element =>element.typebien_id == 5).length
       };
     },
     NombreEquipementParImmobilier() {
       return id => {
         if (id != null && id != "") {
-           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 4).length;
+           return this.nombreDarticleMobilier.filter(element => element.uAdministrative_id == id && element.typebien_id == 11).length;
 
         }
-        return this.ficheArticle.filter(element =>element.type_bien == 4).length
+        return this.GestionStockageArticles.filter(element =>element.typebien_id == 11).length
       };
     },
 NombreEquipementParGrosTravaux() {
       return id => {
         if (id != null && id != "") {
-           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 5).length;
+           return this.nombreDarticleMobilier.filter(element => element.uAdministrative_id == id && element.typebien_id == 12).length;
 
         }
-        return this.ficheArticle.filter(element =>element.type_bien == 5).length
+        return this.GestionStockageArticles.filter(element =>element.typebien_id == 12).length
       };
     },
 
@@ -529,41 +540,50 @@ nombreDejourCalculeModifier(){
 
 
 
+PrixEquipementParVehicule() {
+      return id => {
+        if (id != null && id != "") {
+           return this.nombreDarticleMobilier.filter(element => element.uAdministrative_id == id && element.typebien_id == 9).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+
+        }
+        return this.GestionStockageArticles.filter(element =>element.typebien_id == 9).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+      };
+    },
 
 PrixEquipementParMobilier() {
       return id => {
         if (id != null && id != "") {
-           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 3).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+           return this.nombreDarticleMobilier.filter(element => element.uAdministrative_id == id && element.typebien_id == 7).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
 
         }
-        return this.ficheArticle.filter(element =>element.type_bien == 3).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+        return this.GestionStockageArticles.filter(element =>element.typebien_id == 7).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
       };
     },
 PrixEquipementParMateriel() {
       return id => {
         if (id != null && id != "") {
-           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+           return this.nombreDarticleMobilier.filter(element => element.uAdministrative_id == id && element.typebien_id == 5).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
 
         }
-        return this.ficheArticle.filter(element =>element.type_bien == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+        return this.GestionStockageArticles.filter(element =>element.typebien_id == 5).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
       };
     },
     PrixEquipementParImmobilier() {
       return id => {
         if (id != null && id != "") {
-           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 4).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+           return this.nombreDarticleMobilier.filter(element => element.uAdministrative_id == id && element.typebien_id == 11).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
 
         }
-        return this.ficheArticle.filter(element =>element.type_bien == 4).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+        return this.GestionStockageArticles.filter(element =>element.typebien_id == 11).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
       };
     },
 PrixEquipementParGrosTravaux() {
       return id => {
         if (id != null && id != "") {
-           return this.nombreDarticleMobilier.filter(element => element.ua_id == id && element.type_bien == 5).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+           return this.nombreDarticleMobilier.filter(element => element.uAdministrative_id == id && element.typebien_id == 12).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
 
         }
-        return this.ficheArticle.filter(element =>element.type_bien == 5).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+        return this.GestionStockageArticles.filter(element =>element.typebien_id == 12).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
       };
     },
 
@@ -611,8 +631,8 @@ valeurAcquisitionMateriel() {
       
         if (this.noDCfNoAdmin ){
             let colect=[];
-            this.ficheArticle.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+            this.GestionStockageArticles.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -621,17 +641,17 @@ valeurAcquisitionMateriel() {
             })
             return id => {
         if (id != null && id != "") {
-          return colect.filter(element => element.ua_id == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+          return colect.filter(element => element.uAdministrative_id == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
         }
         return 0
       };
       
           }
          
-         // return this.ficheArticle.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+         // return this.GestionStockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
           return id => {
         if (id != null && id != "") {
-          return this.ficheArticle.filter(element => element.ua_id == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+          return this.GestionStockageArticles.filter(element => element.uAdministrative_id == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
         }
         return 0
       };
@@ -642,7 +662,7 @@ valeurAcquisitionMateriel() {
         if (this.noDCfNoAdmin ){
             let colect=[];
             this.getvehicules.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -651,14 +671,14 @@ valeurAcquisitionMateriel() {
             })
             return id => {
         if (id != null && id != "") {
-          return colect.filter(element => element.ua_id == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+          return colect.filter(element => element.uAdministrative_id == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
         }
         return 0
       };
           }
              return id => {
         if (id != null && id != "") {
-          return this.getvehicules.filter(element => element.ua_id == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+          return this.getvehicules.filter(element => element.uAdministrative_id == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
         }
         return 0
       };

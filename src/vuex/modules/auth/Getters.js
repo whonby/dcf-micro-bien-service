@@ -27,6 +27,9 @@ export const getterPasswordCrypte=state=>state.ancien_password
 
 
 export const getterMenuModuleSidcf=state=>state.menuModuleSidcf
+export const getterServiceCF=state=>state.serviceCF
+
+export const getterAffectionServiceCF=state=>state.affectationServiceCF
 
 
 

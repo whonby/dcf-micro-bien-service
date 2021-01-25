@@ -65,7 +65,22 @@
               </div>
             </td>
 
-            <td colspan="">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Compte</label>
+                 <select v-model="formEffetFinancier.compte_id" class="span" >
+                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.banq_id)" :key="varText.id"
+                            :value="varText.id">{{afficherLeCompteEnFonctionDeLaBanque(varText.banq_id)}}</option>
+                  </select>
+                <!-- <div class="controls " >
+                  <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
+
+                </div> -->
+              </div>
+
+            </td>
+
+            <!-- <td colspan="">
               <div class="control-group">
                 <label class="control-label">Compte</label>
                 <div class="controls " >
@@ -74,7 +89,7 @@
                 </div>
               </div>
 
-            </td>
+            </td> -->
 
           </tr>
           <tr>
@@ -654,7 +669,7 @@
       </tbody>
     </table>
   </div>
-
+<!-- <code v-if="this.getLotMarche < 0" style="color:red;font-size:14px;text-align:center"> Veuillez saisir au moins un lot </code> -->
  <div id="ajouterAct" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
@@ -717,8 +732,22 @@
                 </div>
               </div>
             </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Compte</label>
+                 <select v-model="formEffetFinancier.compte_id" class="span" >
+                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.banq_id)" :key="varText.id"
+                            :value="varText.id">{{afficherLeCompteEnFonctionDeLaBanque(varText.banq_id)}}</option>
+                  </select>
+                <!-- <div class="controls " >
+                  <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
 
-            <td>
+                </div> -->
+              </div>
+
+            </td>
+
+            <!-- <td>
               <div class="control-group">
                 <label class="control-label">Compte</label>
                 <div class="controls " >
@@ -727,7 +756,7 @@
                 </div>
               </div>
 
-            </td>
+            </td> -->
 
           </tr>
           <tr>
@@ -1843,6 +1872,13 @@ name: "ActEffeFinanciere",
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe',
       'planActe']),
+
+
+ getLotMarche(){
+      return this.getMarchePersonnaliser.filter(item=>item.parent_id==this.macheid).length;
+    },
+
+
 afficherEntrepriseNom(){
       return id =>{
         if(id != null && id !=""){
@@ -2619,6 +2655,15 @@ affichierIdEntrepriseSelectionner() {
       return id =>{
         if(id != null && id !=""){
           return this.comptes.filter(element => element.entrepse_id== id)
+
+
+        }
+      }
+    },
+    afficherCompteDynamique(){
+      return id =>{
+        if(id != null && id !=""){
+          return this.comptes.filter(element => element.banq_id== id)
 
 
         }

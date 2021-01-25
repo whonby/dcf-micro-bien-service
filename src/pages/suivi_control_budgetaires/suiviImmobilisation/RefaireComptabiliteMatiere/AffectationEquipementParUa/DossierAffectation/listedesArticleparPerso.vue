@@ -281,11 +281,11 @@
                 <span >Affectation</span>
        
                 </button>
-                <button  v-show="((afficheHistNormeEquipement(marcheid))-(affichNormeEquipement(marcheid)))!=0"
+                <!-- <button  v-show="((afficheHistNormeEquipement(marcheid))-(affichNormeEquipement(marcheid)))!=0"
                         class="btn  btn-danger" @click.prevent="afficherModalTransfert(index)">
                 <span >Transfert</span>
        
-                </button>
+                </button> -->
                    </td>
                      
                          

@@ -109,9 +109,13 @@ CodeExempte
               
                 <span title="MARCHE SUSPENDU">SU</span>
                 </button>
+                <button v-else-if="activites.attribue == 0" class="btn btn-danger">
+              
+                <span title="MARCHE PLANIFIE">PL</span>
+                </button>
  <button v-else class="btn  btn-danger">
               
-                <span title="MARCHE EN PLANIFICATION">PL</span>
+                <span title="MARCHE NON PLANIFIE">NPL</span>
                 </button>
                    </td>
   
@@ -132,7 +136,7 @@ CodeExempte
                     
                       <router-link :to="{ name: 'detail_hors_sib', params: { id: activites.id }}"
                 class="btn btn-default " title="historique la contratualisation">
-                  <span class=""><i class=" icon-folder-open"></i></span>
+                  <span class=""><i class=" icon-folder-open"> historique CT</i></span>
                     </router-link>
                    </td>
                    <!-- <td>
@@ -144,7 +148,7 @@ CodeExempte
            <td>
           
                      <button @click.prevent="supprimerMarche(activites.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
                    </td>
                   
                    
@@ -428,11 +432,11 @@ InfastructureLibelleNiveau1() {
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==2)
+            return colect.filter(element => element.gdenature_id == 7 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==2)
          
         }
 
-            return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==2)
+            return this.gettersMarcheHorsib.filter(element => element.gdenature_id == 7 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==2)
      
     },
 
@@ -451,7 +455,7 @@ InfastructureLibelleNiveau1() {
     
 
    montantMarche(){
-  return this.ListeInfrastructureSanitaire.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==2).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+  return this.ListeInfrastructureSanitaire.filter(element => element.gdenature_id == 7 && element.sib==1 && element.parent_id == null && this.InfastructureNiveau1(element.infrastructure_id)==2).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
 },
 
  // afficher la liste des marchés hors sib
@@ -484,7 +488,7 @@ InfastructureLibelleNiveau1() {
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 )
+            return colect.filter(element => element.attribue == 0 && element.gdenature_id == 7 && element.parent_id == null && element.sib==1 )
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -493,7 +497,7 @@ InfastructureLibelleNiveau1() {
             // }); 
         }
 
-        return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 )
+        return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && element.gdenature_id == 7 && element.parent_id == null && element.sib==1 )
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -524,11 +528,11 @@ InfastructureLibelleNiveau1() {
                     return item
                 }
             })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.attribue == 1  && element.parent_id == null && element.sib==1)
+            return colect.filter(element => element.gdenature_id == 7 && element.attribue == 1  && element.parent_id == null && element.sib==1)
             
         }
 
-        return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.attribue == 1 && element.parent_id == null && element.sib==1 )
+        return this.gettersMarcheHorsib.filter(element => element.gdenature_id == 7 && element.attribue == 1 && element.parent_id == null && element.sib==1 )
            
         
 

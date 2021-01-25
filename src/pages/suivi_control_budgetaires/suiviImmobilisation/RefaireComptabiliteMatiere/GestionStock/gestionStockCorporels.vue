@@ -55,7 +55,7 @@
           <div id="EntreeEnStock" class="tab-pane active"><ListeDuStockparUa></ListeDuStockparUa> </div>
           <div id="Affectation" class="tab-pane ">
          
-            <affectationEquipementParUa></affectationEquipementParUa>
+            <listeDesUaDansPatrimoine></listeDesUaDansPatrimoine>
            
              </div>
  <div id="Reparation" class="tab-pane "><ReparationEquipement></ReparationEquipement> </div>
@@ -92,8 +92,8 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import ListeDuStockparUa from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/ListeDuStockparUa'
-import affectationEquipementParUa from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/AffectationEquipementParUa/affectationEquipementParUa'
-import ReparationEquipement from '../../../suiviImmobilisation/gestionDesVehicules/grpeReparationVehicule/ReparationEquipement'
+import listeDesUaDansPatrimoine from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierAffectation/listeDesUaDansPatrimoine.vue'
+import ReparationEquipement from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierReparationEtEntretien/listeUniteAdministrativeReparation.vue'
 import UaEquipementSortant from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/SortiDuPatrimoine/UaEquipementSortant.vue'
 import Inventaire from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/Inventaire/Inventaire.vue'
 // import historisqueDemandeParService from '../docAffectationImmo/historisqueDemandeParService'
@@ -104,7 +104,7 @@ export default {
   name: 'besionImmolisation',
   components: {
       ListeDuStockparUa,
-    affectationEquipementParUa,
+    listeDesUaDansPatrimoine,
     ReparationEquipement,
     UaEquipementSortant,
     Inventaire

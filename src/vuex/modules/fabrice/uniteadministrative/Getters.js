@@ -11,6 +11,7 @@ export const directions = state => state.directions;
 export const fonctionsua = state => state.fonctionsua;
 export const banqueUa = state => state.banqueUa;
 export const decomptefactures = state => state.decomptefactures;
+export const HistoriqueDecompteFactures = state => state.historiqueDecomptefactures.sort((a, b) => (a.date_decompte > b.date_decompte ? 1 : -1));
 export const realiteServiceFait = state => state.realiteServiceFait;
 export const liquidation = state => state.liquidation;
 const uniteAdministratives = state =>
@@ -786,4 +787,9 @@ export const groupStockParActicle = (state, getters) => {
 export const groupStockParMarque = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.GestionStockageArticles, "marque_id");
+};
+
+export const groupStockParUA = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.GestionStockageArticles, "uAdministrative_id");
 };

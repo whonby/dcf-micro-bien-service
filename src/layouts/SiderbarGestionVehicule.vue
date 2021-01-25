@@ -207,7 +207,7 @@ return objJson.id
      navigateToComptaMatiere(){
         this.activate()
         this.$router.push({
-          name: 'TableauBordGestionVehicule'
+          name: 'TableauBordGestionVehicule1'
         })
       },
 navigateToGestionParc(){
