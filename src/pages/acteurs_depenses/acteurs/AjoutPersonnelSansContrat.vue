@@ -145,7 +145,15 @@
                         
             </tr>
             <tr>
-               <td colspan="2">
+               <td colspan="">
+                     <div class="control-group">
+                                                    <label class="control-label">Email</label>
+                                                    <div class="controls">
+                                                        <input type="text" v-model="formData.email"  placeholder="" class="span12"/>
+                                                    </div>
+                                                </div>
+                </td>
+               <td colspan="">
                      <div class="control-group">
                                                     <label class="control-label">Nom du pere:</label>
                                                     <div class="controls">
@@ -189,7 +197,7 @@
                      <div class="control-group">
                                                     <label class="control-label">L'unite administrative</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.unite_administrative_id" class="span12">
+                                                        <select v-model="formData.unite_administrative_id" class="span10">
                                                             <option></option>
                                                             <option v-for="item in uniteAdmin" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -249,7 +257,29 @@
                                                     </div>
                                                 </div>
                 </td>
-                <td>
+                 <td>
+                     
+                                                <div class="control-group">
+                                                    <label class="control-label">Fonction Professionnelle</label>
+                                                    <div class="controls">
+                                                      <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="fonctionProfessionnel"
+                                                   v-model="formData.fonction_professionnelle_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                                                    </div>
+                                                </div>
+                </td>
+                
+            </tr>
+            <tr>
+                
+              <td>
                      
                                                 <div class="control-group">
                                                     <label class="control-label">Grades</label>
@@ -262,14 +292,10 @@
 
                                                         </select> -->
                                                         
-                                                         <input type="text" :value="afficheLibelle(afficheGrade(formData.fonction_id))" readonly class="span12"/>
+                                                         <input type="text" :value="afficheLibelle(afficheGrade(formData.fonction_id))" readonly class="span10"/>
                                                     </div>
                                                 </div>
                 </td>
-            </tr>
-            <tr>
-                
-              
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Type contrat</label>
@@ -296,7 +322,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Type niveau etude</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.niveau_etude_id" class="span12">
+                                                        <select v-model="formData.niveau_etude_id" class="span5">
                                                             <option></option>
                                                             <option v-for="item in niveau_etudes" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -306,11 +332,14 @@
                                                     </div>
                                                 </div>
                 </td>
-                             <td>
+                             
+            </tr>
+            <tr>
+               <td>
                      <div class="control-group">
                                                     <label class="control-label">Type salarie</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.type_salarie_id" class="span12">
+                                                        <select v-model="formData.type_salarie_id" class="span5">
                                                             <option></option>
                                                             <option v-for="item in type_salaries" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -319,10 +348,7 @@
                                                     </div>
                                                 </div>
                 </td>
-            </tr>
-            <tr>
-               
-              <td colspan="2">
+              <td colspan="">
                 <div class="control-group">
                                                     <label class="control-label">Ligne budgetaires:</label>
                                                     <div class="controls">
@@ -342,7 +368,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Salaire:</label>
                                                     <div class="controls">
-                                                        <input type="number"  v-model="formData.salaires"  placeholder="Saisir le salaire" class="span12"/>
+                                                        <input type="number"  v-model="formData.salaires"  placeholder="Saisir le salaire" class="span5"/>
                                                     </div>
                                                 </div>
                 </td>
@@ -447,6 +473,8 @@ components: {
                     uniteZone_id:"",
                     situation_matrimonial:"",
                     service_id:"",
+                    fonction_professionnelle_id:"",
+                    email:""
                    
                 },
 
@@ -469,7 +497,7 @@ components: {
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ["dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
+            ...mapGetters('personnelUA', ["fonctionProfessionnel","dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
             ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),

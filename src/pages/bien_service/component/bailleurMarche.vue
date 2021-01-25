@@ -20,11 +20,11 @@
       <thead>
       <tr>
                                         <th>Bailleur</th>
-                                        <th>Type finanncement</th>
+                                        <th>Type financement</th>
                                          <th>Montant HT (Fcfa) </th>
                                          <th>Taux bailleur</th>
                                           <th>Taux </th>
-                                          <th>Tva (Fcfa)</th>
+                                          <th>TVA (Fcfa)</th>
                                           <th>Montant TTC (Fcfa)</th>
                                         <th>Action</th>
                                     </tr>
@@ -125,7 +125,7 @@
           <tr>
                      <td>
               <div class="control-group">
-                <label class="control-label" >Taux Tva (%)</label>
+                <label class="control-label" >Taux TVA (%)</label>
                
               </div>
             
@@ -204,7 +204,7 @@
             </td>
              <td>
                                             <div class="control-group">
-                                            <label div class="control-label">Type finnancement <code>*</code> </label>
+                                            <label div class="control-label">Type de financement <code>*</code> </label>
                                             <div class="controls">
 
                                                 <select v-model="formBailleur.type_finnancement_id" class="span">
@@ -343,7 +343,7 @@
             </td>
  <td colspan="2">
               <div class="control-group">
-                        <label class="control-label">Montant HT Marché</label>
+                        <label class="control-label">Montant HT marché</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -360,7 +360,7 @@
             
               <td>
               <div class="control-group">
-                        <label class="control-label">Montant TTC Marché</label>
+                        <label class="control-label">Montant TTC marché</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -384,7 +384,7 @@
             </td>
              <td>
                                             <div class="control-group">
-                                            <label div class="control-label">Type finnancement <code>*</code> </label>
+                                            <label div class="control-label">Type de financement <code>*</code> </label>
                                             <div class="controls">
 
                                                 <select v-model="editBailleur.type_finnancement_id" class="span">
@@ -413,7 +413,7 @@
  
                                     <td>
               <div class="control-group">
-                <label class="control-label" >Taux Tva (%)</label>
+                <label class="control-label" >Taux TVA (%)</label>
                
               </div>
             
@@ -470,7 +470,7 @@
             </td>
              <td >
               <div class="control-group">
-                <label class="control-label" >Montant TTC Bailleur</label>
+                <label class="control-label" >Montant TTC bailleur</label>
                
               </div>
               <div class="control-group">
@@ -489,7 +489,7 @@
             </td>
              <td >
               <div class="control-group">
-                <label class="control-label" >Payé Des Bailleurs</label>
+                <label class="control-label" >Payez des Bailleurs</label>
                
               </div>
             

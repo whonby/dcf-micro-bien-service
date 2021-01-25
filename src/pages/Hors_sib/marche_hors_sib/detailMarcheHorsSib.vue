@@ -1000,9 +1000,9 @@
 
                          <div id="tab00214" class="tab-pane">
                 <div align="right">
-             <div class="widget-content">
+             <!-- <div class="widget-content">
                  <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
-                    </div>
+                    </div> -->
                 </div>
                 <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
                 </div>

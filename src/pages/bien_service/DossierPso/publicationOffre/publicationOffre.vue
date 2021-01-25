@@ -195,7 +195,7 @@
                 
             </div>
             <div class="modal-footer">
-                <a  @click.prevent="ajouter"
+                <a  @click.prevent="ajouter()"
                         class="btn btn-primary"
                         href="#"
                 >Valider</a>

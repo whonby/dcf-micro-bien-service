@@ -586,6 +586,13 @@
             </router-link>
           </li>
            <li class="divider"></li>
+            <li>
+            <router-link :to="{name: 'FonctionProfessionnelle'}" tag="a">
+              <i class="icon-check"></i>
+              Fonction Professionnelle
+            </router-link>
+          </li>
+           <li class="divider"></li>
           <li>
             <router-link :to="{name: 'familleEmploie'}" tag="a">
               <i class="icon-key"></i> Familles d'emploi           

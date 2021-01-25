@@ -7,8 +7,13 @@ import suiviMarcheDesProjets from "../../pages/Gestion_des_Rapports/marcheHorsSi
 import suiviMarcheDesProjetParTypeMarche from "../../pages/Gestion_des_Rapports/marcheHorsSib/suiviMarcheDesProjetParTypeMarche";
 import etatRecapitulative from "../../pages/Gestion_des_Rapports/marcheHorsSib/etatRecapitulative.vue";
 import FicheAnnexeDeControle from "../../pages/Gestion_des_Rapports/FicheAnnexeDeControle";
-
+import ficheSuiviGlobalMarche from "../../pages/Gestion_des_Rapports/marcheHorsSib/ficheSuiviGlobalMarche";
 const gestionrapport =[
+    {
+        path:"/ficheSuiviGlobalMarche",
+        name:"ficheSuiviGlobalMarche",
+        component:ficheSuiviGlobalMarche
+    },
     {
         path:"/etat-Recapitulative",
         name:"etatRecapitulative",

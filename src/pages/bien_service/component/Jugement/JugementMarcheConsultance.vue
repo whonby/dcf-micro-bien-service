@@ -5,7 +5,7 @@
   <div>
 
     <!-- debut de liste analyse  -->
-    <h4>Liste des dossiers analyses</h4>
+    <h4>Liste des dossiers analysés</h4>
     <table class="table table-bordered table-striped" >
       <thead>
       <tr>
@@ -13,8 +13,8 @@
         <th>Date Analyse </th>
         <th>Rang d'analyse</th>
         <th>Note</th>
-        <th>Numero dossier Candidat</th>
-        <th> Montant Offre financiere TTC (Fcfa)</th>
+        <th>Numéro dossier Candidat</th>
+        <th> Montant Offre financière TTC (Fcfa)</th>
         <th>Type d'analyse</th>
 
 
@@ -75,7 +75,7 @@
         <tr>
           <td>
             <div class="control-group">
-              <label class="control-label">Reference offre</label>
+              <label class="control-label">Référence de l'offre</label>
               <div class="controls">
                 <!-- <select v-model="formAnalyseDossier.appel_offre_id" class="span" disabled>
                     <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -92,7 +92,7 @@
           </td>
           <td>
             <div class="control-group">
-              <label class="control-label">Numero du dossier</label>
+              <label class="control-label">Numéro du dossier</label>
               <div class="controls">
                 <select v-model="formAnalyseDossier.dossier_candidat_id" class="span">
                   <option v-for="plans in afficherNumeroDossierCandidatMenuDeroulant(macheid)" :key="plans.id"
@@ -114,7 +114,7 @@
           <td>
 
             <div class="control-group">
-              <label class="control-label">Offre Financiere</label>
+              <label class="control-label">Offre Financière</label>
               <div class="controls">
                 <!-- <select v-model="formAnalyseDossier.cojo_id" class="span" :readOnly="verifiBanqueExist">
                     <option v-for="plans in afficherMontant(formAnalyseDossier.dossier_candidat_id)" :key="plans.id"
@@ -193,7 +193,7 @@
 
       <div class="modal-footer">
         <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterAnalyseD()" href="#">Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
     </div>
     <!-- fin formulaire ajout analyse  -->
 
@@ -212,7 +212,7 @@
 
           <td>
             <div class="control-group">
-              <label class="control-label">Reference offre</label>
+              <label class="control-label">Référence de l'offre</label>
               <div class="controls">
                 <input
                     type="text"
@@ -247,7 +247,7 @@
           <td>
 
             <div class="control-group">
-              <label class="control-label">Offre Financiere</label>
+              <label class="control-label">Offre Financière</label>
               <div class="controls">
                 <!-- <select v-model="formAnalyseDossier.cojo_id" class="span" :readOnly="verifiBanqueExist">
                     <option v-for="plans in afficherMontant(formAnalyseDossier.dossier_candidat_id)" :key="plans.id"
@@ -333,7 +333,7 @@
 
       <div class="modal-footer">
         <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationDossierAnalyse()" href="#">Modifier</a>
-        <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
     </div>
     <notifications/>
   </div>

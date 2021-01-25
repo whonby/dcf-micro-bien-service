@@ -4,7 +4,7 @@
         <div id="myAlert" class="modal hide tlg" aria-hidden="true" style="display: none;">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter  offre</h3>
+                <h3>Ajouter l'offre</h3>
             </div>
             
             <div class="modal-body">
@@ -14,7 +14,7 @@
                             <tr>
                             <td>
                         <div class="control-group">
-                            <label class="control-label">Type de procedure <code>*</code> :</label>
+                            <label class="control-label">Type de procédure <code>*</code> :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Type appel" v-model="formData.type_appel" disabled>
                             </div>
@@ -23,7 +23,7 @@
 
                             <td colspan="2" width="250">
                         <div class="control-group">
-                            <label class="control-label">Reference  offre <code>*</code> :</label>
+                            <label class="control-label">Référence de l'offre <code>*</code> :</label>
                             <div class="controls">
                                 <input type="text" class="span5" placeholder="Reference d'appel" v-model="formData.ref_appel">
                             </div>
@@ -34,9 +34,9 @@
                             <tr>
                             <td colspan="3" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet  offre :</label>
+                            <label class="control-label">Objet de l'offre :</label>
                             <div class="controls">
-                                 <textarea  v-model="formData.objet_appel"  class="textarea_editor span8" rows="3" placeholder="Entre le  text ..."></textarea>
+                                 <textarea  v-model="formData.objet_appel"  class="textarea_editor span8" rows="3" placeholder="Entrer le texte ..."></textarea>
                     
                             </div>
                         </div>
@@ -47,8 +47,8 @@
                                 <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date emission <code>*</code></label>
-                                <input type="date" class="span" placeholder="Date emision" v-model="formData.date_emission">
+                                <label>Date d'émission <code>*</code></label>
+                                <input type="date" class="span" placeholder="Date d'émission" v-model="formData.date_emission">
                             </div>
                         </div>
                                 </td>
@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div class="modal-footer">  <a @click.prevent="ajouter" class="btn btn-primary"
-                                           href="#">Valider</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                                           href="#">Valider</a> <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
 
 
@@ -85,7 +85,7 @@
         <div id="modificationModal" class="modal hide taillemodal">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification  offre</h3>
+                <h3>Modification offre</h3>
             </div>
             <div class="modal-body">
                 <div class="widget-box">
@@ -96,7 +96,7 @@
 
                        <td>
                         <div class="control-group">
-                            <label class="control-label">Type de procedure  :</label>
+                            <label class="control-label">Type de procédure  :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="" v-model="edite_appel_offre.type_appel">
                             </div>
@@ -105,7 +105,7 @@
 
                                 <td colspan="2" width="250">
                         <div class="control-group">
-                            <label class="control-label">Reference  offre  :</label>
+                            <label class="control-label">Référence de l'offre  :</label>
                             <div class="controls">
                                 <input type="text" class="span5" placeholder="Reference d'appel" v-model="edite_appel_offre.ref_appel">
                             </div>
@@ -117,7 +117,7 @@
                                    <tr>
                             <td colspan="3" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet  offre :</label>
+                            <label class="control-label">Objet de l'offre :</label>
                             <div class="controls">
                                  <textarea   v-model="edite_appel_offre.objet_appel"  class="textarea_editor span9" rows="3" placeholder="Entre le  text ..."></textarea>
                     
@@ -130,7 +130,7 @@
                              <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date emission </label>
+                                <label>Date d'émission </label>
                                 <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
                             </div>
                         </div>
@@ -193,12 +193,12 @@
                                     <thead>
                                     <tr>
 
-                                        <th>Reference appel</th>
-                                        <th> Type procedure</th>
+                                        <th>Référence appel</th>
+                                        <th> Type de procédure</th>
 
                                         <!-- <th>Financement</th>
                                         <th>Nom bailleur</th> -->
-                                        <th>Date emmission</th>
+                                        <th>Date d'émission</th>
                                         <th>Date limite</th>
                                         <th>Objet appel</th>
                                         <th>Imputation</th>

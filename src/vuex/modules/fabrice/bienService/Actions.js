@@ -552,12 +552,12 @@ export  function  getActeEffetFinancier({commit}) {
 }
 
 // action pour ajouter bailleur
-export function ajouterActeEffetFinancier({commit}, formData){
+export function ajouterActeEffetFinancier({commit,dispatch}, formData){
   asyncLoading(axios.post('/acte_effet_finnanciers',formData)).then(response =>{
       if(response.status == 201){
         console.log(response.data)
           commit('AJOUTER_ACTE_EFFET_FINANCIER', response.data)
-          
+          dispatch("getEntrepriseSousTraitance")
           this.$app.$notify({
             title: 'success ',
             text: 'Enregistrement effectué !',
