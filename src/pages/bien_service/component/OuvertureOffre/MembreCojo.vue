@@ -11,6 +11,7 @@
       <tr>
         <th>Matricule</th>
         <th>Nom et prénoms</th>
+        <th>Commite d'evaluation</th>
         <th>Rôle</th>
         <th>Action</th>
       </tr>
@@ -22,7 +23,14 @@
           {{appelOffre.matricule|| 'Non renseigné'}}
         </td>
         <td @click="afficheModaleMembreCojo(appelOffre.id)">
-          {{appelOffre.nom_prenom || 'Non renseigné'}}</td>
+          {{appelOffre.nom_prenom || 'Non renseigné'}}
+        </td>
+        <td @click="afficheModaleMembreCojo(appelOffre.id)" v-if="appelOffre.comite_evaluation=='oui'" style="background: green !important;color: white !important;">
+          {{appelOffre.comite_evaluation || 'Non renseigné'}}
+        </td>
+        <td @click="afficheModaleMembreCojo(appelOffre.id)" v-if="appelOffre.comite_evaluation=='non'">
+          {{appelOffre.comite_evaluation || 'Non renseigné'}}
+        </td>
         <td @click="afficheModaleMembreCojo(appelOffre.id)">
           {{afficherLaListemembreCojo(appelOffre.role_membre_cojo_id )|| 'Non renseigné'}}</td>
         <div class="btn-group">
@@ -59,6 +67,13 @@
 
                   </model-list-select>
 
+                </td>
+                <td>
+                  <label>Membre comite d'evaluation</label>
+                  <select v-model="formDataMembreCojo.comite_evaluation">
+                    <option value="oui">OUI</option>
+                    <option value="non">NON</option>
+                  </select>
                 </td>
               </tr>
               <tr>
@@ -104,8 +119,6 @@
                     <label class="control-label">Fonction <code>*</code> :</label>
                     <div class="control-group">
                       <input type="text" class="span" placeholder="" v-model="formDataMembreCojo.fonction_id" readonly>
-
-
                     </div>
                   </div>
 
@@ -131,7 +144,6 @@
                   <div class="control-group">
 
                     <label class="control-label span5">Rôle <code>*</code> :</label>
-
                     <div class="controls">
                       <select v-model="formDataMembreCojo.role_membre_cojo_id" class="span">
                         <option v-for="varText in role_membrecojo" :key="varText.id"
@@ -167,6 +179,29 @@
         <div class="widget-box">
           <form action="#" method="get" v-if="macheid">
             <table class="table table-bordered table-striped">
+              <tr>
+                <td>
+                  <label>UA</label>
+                  <model-list-select style="background-color: #fff;"
+                                     class="wide"
+                                     :list="listeStructure(macheid)"
+                                     v-model="edite_membre_cojo.ua_id"
+                                     option-value="id"
+                                     option-text="libelle"
+                                     placeholder="Unité administrative"
+                  >
+
+                  </model-list-select>
+
+                </td>
+                <td>
+                  <label>Membre comite d'evaluation</label>
+                  <select v-model="edite_membre_cojo.comite_evaluation">
+                    <option value="oui">OUI</option>
+                    <option value="non">NON</option>
+                  </select>
+                </td>
+              </tr>
               <tr>
                 <td>
                   <div class="control-group">
@@ -244,7 +279,8 @@ name: "MembreCojo",
         nom_prenom:"",
         role_membre_cojo_id:"",
         cojo_id:"",
-        ua_id:""
+        ua_id:"",
+        comite_evaluation:"non",
 
       },
       edite_membre_cojo:"",
