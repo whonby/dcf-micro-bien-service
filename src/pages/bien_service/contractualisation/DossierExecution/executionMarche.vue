@@ -2142,7 +2142,7 @@
                         </td>
                          <td>
                          <div class="control-group">
-                            <label class="control-label">Numero engagement</label>
+                            <label class="control-label">Numéro engagement</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="formData.numero_engage"/>
                             </div>
@@ -2150,7 +2150,7 @@
                         </td>
                          <td>
                          <div class="control-group">
-                            <label class="control-label">Numero Bordereau</label>
+                            <label class="control-label">Numéro Bordereau</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="formData.numero_bordereau"/>
                             </div>
@@ -2175,7 +2175,7 @@
                         
                         <td>
                             <div class="control-group">
-                              <label class="control-label">Réf. Engagement  juridique</label>
+                              <label class="control-label">Réf. Engagement juridique</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -2188,7 +2188,7 @@
                           
                            <td>
                             <div class="control-group">
-                              <label class="control-label">Numero OP/AT</label>
+                              <label class="control-label">Numéro OP/AT</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -2394,7 +2394,7 @@
                           </td>
                          <td>
                             <div class="control-group">
-                              <label class="control-label">piece justificative</label>
+                              <label class="control-label">Pièce justificative</label>
                               <div class="controls">
                                 <input
                                   type="file"
@@ -2460,7 +2460,7 @@
                         
                         <td>
                            <div class="control-group">
-                            <label class="control-label">Ligne Budgetaire</label>
+                            <label class="control-label">Ligne Budgétaire</label>
                             <div class="controls">
                               <!-- <select v-model="formData.ligne_budgetaire_id" class="span4"> -->
                                 <!-- <option
@@ -2477,7 +2477,7 @@
                         </td>
                         <td >
                           <div class="control-group">
-                            <label class="control-label">Code Budgetaire</label>
+                            <label class="control-label">Code Budgétaire</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="CodeBudgetaire" readonly/>
                             </div>
@@ -2553,7 +2553,7 @@
                         </td>
                                                  <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation disponible anterieure</label>
+                            <label class="control-label">Dotation disponible antérieure</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="dotationDisponibleAnterieure" readonly/>
                             </div>
