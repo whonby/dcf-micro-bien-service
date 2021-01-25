@@ -11,7 +11,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des marches</h5>
+              <h5>Liste des marchés</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />

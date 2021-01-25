@@ -34,7 +34,7 @@
          <td @click="afficherModificationReserveCf(index)">{{item.decision_organe || 'Non renseigné'}}</td>
          <div class="btn-group">
           <button @click.prevent="supprimerArnmp(item.id)"  class="btn btn-danger " title="Supprimer">
-            <span class=""><i class="icon-trash"></i></span></button>
+            <span class=""><i class="icon-trash"></i>Supprimer</span></button>
             </div>
          
         </tr>

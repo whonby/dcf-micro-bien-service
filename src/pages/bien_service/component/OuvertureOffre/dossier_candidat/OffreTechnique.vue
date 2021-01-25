@@ -34,7 +34,7 @@
           <td @click="afficheEdite(offre.id)" style="text-align:center">{{offre.autre_observation}}</td>
           <td>
             <button @click.prevent="supprimerOffreTechnique(offre.id)"  class="btn btn-danger ">
-              <span class=""><i class="icon-trash"></i></span></button>
+              <span class=""><i class="icon-trash"></i>Supprimer</span></button>
           </td>
         </tr>
         </tbody>

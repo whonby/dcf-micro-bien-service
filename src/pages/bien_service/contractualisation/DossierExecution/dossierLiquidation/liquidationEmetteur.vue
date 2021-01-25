@@ -171,7 +171,7 @@ afficheIdActeurDepense
                       </button>
                          <button class="btn btn-danger"  @click="supprimerLiquidation(liquida.id)">
                         <span>
-                          <i class="icon icon-trash"></i>
+                          <i class="icon icon-trash">Supprimer</i>
                         </span>
                       </button>
                     </td>

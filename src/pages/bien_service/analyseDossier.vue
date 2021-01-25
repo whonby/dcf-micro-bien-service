@@ -97,7 +97,7 @@
          <tr>
                <td>
               <div class="control-group">
-                <label class="control-label">decision</label>
+                <label class="control-label">décision</label>
                 <div class="controls">
                   <input
                     type="text"

@@ -138,7 +138,7 @@
             </tr>
              
           </table>              
-          </div>
+          </div> 
            <div class="modal-footer"> 
              <button 
               @click.prevent="ajouterBudgetaireLocal" class="btn btn-primary"
@@ -174,7 +174,7 @@
             <tr>
               <td>
                 <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="editBudgetaire.libelle" class="span5" placeholder="" />
               </div>

@@ -155,7 +155,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier structure programmatiques</h3>
+                <h3>Modifier structure programmatique</h3>
               </div>
               <div class="modal-body">
                <table class="table table-bordered table-striped">

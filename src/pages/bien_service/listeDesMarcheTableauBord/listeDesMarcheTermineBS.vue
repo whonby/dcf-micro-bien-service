@@ -11,7 +11,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-               <h5>Listes des Marches Terminés</h5>
+               <h5>Listes des Marchés Terminés</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -25,7 +25,7 @@
                
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type marché</th>
                    
                     <!-- <th>Activit&eacute;</th> -->
                     <th>Imputation</th>
