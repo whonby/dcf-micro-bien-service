@@ -479,10 +479,7 @@ affichierMontantAvenant
                         </span>
                       </button> -->
                       <button class="btn btn-danger"  @click="supprimerLiquidation(liquida.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
+                      <span class=""><i class="icon-trash"> Supprimer </i></span></button>
                     </td>
                   </tr>
                
@@ -878,10 +875,7 @@ affichierMontantAvenant
                         </span>
                       </button> -->
                       <button class="btn btn-danger" @click="supprimerEngagement(Engage.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
+                      <span class=""><i class="icon-trash"> Supprimer </i></span></button>
                     </td>
                   </tr>
                
@@ -1086,10 +1080,7 @@ affichierMontantAvenant
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
                       <button class="btn btn-danger" @click="supprimerMandat(Manda.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
+                      <span class=""><i class="icon-trash"></i> Supprimer </span></button>
                     </td>
                      <!-- </template> -->
                       <!-- <template v-else>

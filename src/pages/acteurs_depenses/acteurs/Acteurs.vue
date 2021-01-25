@@ -102,7 +102,7 @@ Type de Recrutement
 <td>
       <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span>
+                                <span class=""><i class="icon-trash">Supprimer</i></span>
                             </button>
                         </div>
 </td>

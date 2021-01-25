@@ -43,7 +43,7 @@
 
                             <a href="#infoPV" @click.prevent="infoPVAffiche(pv.reference)" data-toggle="modal" class="btn"><span class=""><i class="icon-folder-open" ></i></span></a>
                             <button @click.prevent="supprimerProceVerbal(pv.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
+                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                         </div>
                         </td>

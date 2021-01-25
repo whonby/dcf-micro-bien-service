@@ -174,8 +174,8 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Libelle document</th>
-                    <th>Date debut</th>
+                    <th>Libellé document</th>
+                    <th>Date début</th>
                     <th>Date fin</th>
                     <th>Commentaire</th>
                     <th>Action</th>
@@ -199,7 +199,7 @@
 <td>
     <div class="btn-group">
               <button @click.prevent="supprimerDocumentProcedure(documentProcedure.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
              
             </div>
 </td>

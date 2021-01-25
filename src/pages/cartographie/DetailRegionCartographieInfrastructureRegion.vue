@@ -13,7 +13,7 @@
                                                         href="#">&#8606;</a> . </li>
                         <li class="breadcrumb-item"><h5>Région {{info_region.libelle}}&nbsp;&nbsp;&nbsp;&nbsp; .</h5></li>
                         <li class="breadcrumb-item" v-if="info_infrastructure"><h5> Infrastructure {{info_infrastructure.libelle}} &nbsp;&nbsp;&nbsp;&nbsp; .</h5></li>
-                        <li class="breadcrumb-item" v-if="info_type_marche"><h5> Type de Marche {{info_type_marche.libelle}} &nbsp;&nbsp;&nbsp;&nbsp; .</h5></li>
+                        <li class="breadcrumb-item" v-if="info_type_marche"><h5> Type de Marché {{info_type_marche.libelle}} &nbsp;&nbsp;&nbsp;&nbsp; .</h5></li>
 
                     </ol>
                 </nav>
@@ -77,7 +77,7 @@
                                 <div class="card-box bg-green">
                                     <div class="inner">
                                         <h3> {{formatageSomme(parseFloat(montantExecute))}} </h3>
-                                        <p> Montant execute </p>
+                                        <p> Montant executé </p>
                                     </div>
                                     <div class="icon">
                                         <i class="fa fa-money" aria-hidden="true"></i>

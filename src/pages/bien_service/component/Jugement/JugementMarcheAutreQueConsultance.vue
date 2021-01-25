@@ -15,7 +15,7 @@
 <!--    <div class="span1"><button @click.prevent="afficheAnnalyseDossier(item.id)"  class="btn btn-warning " title="Supprimer">-->
 <!--      <span class=""><i class="icon-edit"></i></span></button></div>-->
       <div class="span2"><button @click.prevent="supprimerAnalyseDossierMultiple(item.id)"  class="btn btn-danger " title="Supprimer">
-        <span class=""><i class="icon-trash"></i></span></button></div>
+        <span class=""><i class="icon-trash"></i>Supprimer</span></button></div>
   </div>
 
   <table class="table table-bordered table-striped">

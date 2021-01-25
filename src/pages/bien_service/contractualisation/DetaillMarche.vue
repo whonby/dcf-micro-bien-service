@@ -110,7 +110,7 @@ isButtunAddDossierCandidat
                                             {{appelOffre.montant || 'Non renseigné'}}</td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerMarcheBailleur(appelOffre.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i></span></button>
+                                                <span class=""><i class="icon-trash">Supprimer</i></span></button>
                                         </div>
 
                                     </tr>
@@ -397,7 +397,7 @@ isButtunAddDossierCandidat
                              <a href="#offreF" data-toggle="modal" @click.prevent="modaleOffreFinnanciere(appelOffre.id)"  class="btn  " title="Offre financière">
                                  <span class=""><i class=" icon-money"></i></span></a>
                              <button @click.prevent="supprimerDossierCandidat(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                 <span class=""><i class="icon-trash"></i></span></button>
+                                 <span class=""><i class="icon-trash">Supprimer</i></span></button>
 
                          </div>
 
@@ -827,7 +827,7 @@ isButtunAddDossierCandidat
                                     <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).montant_total_ht || "Non renseigne"}}</td>
                                     <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).montant_total_ttc || "Non renseigne"}}</td>
                                     <td><button @click.prevent="supprimerOffreFinancier(detail_offre_finnancier.id)"  class="btn btn-danger " title="Supprimer">
-                                        <span class=""><i class="icon-trash"></i></span></button></td>
+                                        <span class=""><i class="icon-trash">Supprimer</i></span></button></td>
                                 </tr>
 
 
@@ -906,7 +906,7 @@ isButtunAddDossierCandidat
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Address </label>
+                                    <label class="control-label">Adresse </label>
                                     <div class="controls">
                                         <input type="text" class="" placeholder="Adresse" v-model="editDossierCadidature.adresse_post">
                                     </div>
@@ -1364,7 +1364,7 @@ isButtunAddDossierCandidat
                         </td>-->
                         <div class="btn-group">
                             <button @click.prevent="supprimerAnalyseDossier(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
+                                <span class=""><i class="icon-trash">Supprimer</i></span></button>
 
                         </div>
 
@@ -1426,7 +1426,7 @@ isButtunAddDossierCandidat
                         </td>
                         <div class="btn-group">
                             <button @click.prevent="supprimerDemandeAno(demande.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span>
+                                <span class=""><i class="icon-trash">Supprimer</i></span>
                             </button>
                         </div>
 
@@ -1485,7 +1485,7 @@ isButtunAddDossierCandidat
                             {{document.document_procedure.libelle_doc || 'Non renseigné'}}</td> -->
                         <div class="btn-group">
                             <button @click.prevent="supprimerAnalyseDMP(document.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
+                                <span class=""><i class="icon-trash">Supprimer</i></span></button>
 
                         </div>
 
@@ -1558,7 +1558,7 @@ isButtunAddDossierCandidat
                         </td>
                         <div class="btn-group">
                             <button @click.prevent="supprimerAnoDMPBailleur(anoBailleur.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
+                                <span class=""><i class="icon-trash">Supprimer</i></span></button>
 
                         </div>
 
@@ -1626,7 +1626,7 @@ isButtunAddDossierCandidat
 
                             <a href="#infoPV" @click.prevent="infoPVAffiche(pv.reference)" data-toggle="modal" class="btn"><span class=""><i class="icon-folder-open" ></i></span></a>
                             <button @click.prevent="supprimerProceVerbal(pv.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
+                                <span class=""><i class="icon-trash">Supprimer</i></span></button>
 
                         </div>
                         </td>
@@ -1900,7 +1900,7 @@ isButtunAddDossierCandidat
 <td>
       <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span>
+                                <span class=""><i class="icon-trash">Supprimer</i></span>
                             </button>
                         </div>
 </td>
@@ -3495,7 +3495,7 @@ isButtunAddDossierCandidat
         <div id="ajouterMantater" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter mandater</h3>
+                <h3>Ajouter mandaté</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">

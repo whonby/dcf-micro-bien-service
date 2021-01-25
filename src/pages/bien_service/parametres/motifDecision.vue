@@ -11,7 +11,7 @@
        <form class="form-horizontal">
            
           <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">libellé</label>
             <div class="controls">
               <input
                 type="text"
@@ -42,14 +42,14 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">x</button>
-        <h3>Modifier motif de decision</h3>
+        <h3>Modifier motif de décision</h3>
       </div>
       <div class="modal-body">
          <form class="form-horizontal">
               
               
           <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">libellé</label>
             <div class="controls">
               <input
                 type="text"

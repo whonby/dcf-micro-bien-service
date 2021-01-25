@@ -24,7 +24,7 @@
             <td>
               
               <div class="control-group">
-                <label class="control-label">departement</label>
+                <label class="control-label">département</label>
                 <div class="controls">
                   <select v-model="formData.departement" >
                     <option value>Sélectionner</option>
@@ -35,7 +35,7 @@
             </td>
              <td>
               <div class="control-group">
-                <label class="control-label">sous_prefecture</label>
+                <label class="control-label">sous_préfecture</label>
                 <div class="controls">
                   <select v-model="formData.sous_prefecture">
                     <option></option>

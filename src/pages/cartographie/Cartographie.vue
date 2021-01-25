@@ -45,7 +45,7 @@
 </div>
                         <div class="row-fluid">
                             <div class="span6">
-                                <label>Departement <a href="#" @click.prevent="videDepartement()" style="color: red" v-if="departement"><i class="fa fa-trash-o"></i></a></label>
+                                <label>Département <a href="#" @click.prevent="videDepartement()" style="color: red" v-if="departement"><i class="fa fa-trash-o"></i></a></label>
                                 <model-list-select style="background-color: rgb(233,233,233);"
                                                    class="wide"
                                                    :list="paysDepartement(region)"
@@ -58,7 +58,7 @@
                                 </model-list-select>
                             </div>
                             <div class="span6">
-                                <label>Sous Prefectuer <a href="#" @click.prevent="videSousPrefectuer()" style="color: red" v-if="departement"><i class="fa fa-trash-o"></i></a></label>
+                                <label>Sous Prefecture <a href="#" @click.prevent="videSousPrefectuer()" style="color: red" v-if="departement"><i class="fa fa-trash-o"></i></a></label>
                                 <model-list-select style="background-color: rgb(233,233,233);"
                                                    class="wide"
                                                    :list="paysSousPrefection(departement)"
