@@ -1,3 +1,4 @@
+marche_id
 <template>
 <div>
     <notifications/>
@@ -178,10 +179,7 @@
                     <option v-for="varText in afficherCompteDynamique(formEffetFinancier.banq_id)" :key="varText.id"
                             :value="varText.id">{{afficherLeCompteEnFonctionDeLaBanque(varText.banq_id)}}</option>
                   </select>
-                <!-- <div class="controls " >
-                  <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
-
-                </div> -->
+              
               </div>
 
             </td>
@@ -363,7 +361,7 @@
             </td>
               <div>
                   <div class="control-group" v-if="garantie=='oui'">
-                      <label class="control-label" title=" ">Durree de garantie(JOUR) </label>
+                      <label class="control-label" title=" ">Durée de garantie(JOUR) </label>
                       <div class="controls">
                           <input type="number" v-model="durre_garantie"
                                  class="span"
@@ -722,17 +720,17 @@
               </div>
             </td>
 
-            <td>
+              <td>
               <div class="control-group">
                 <label class="control-label">Compte</label>
-                <div class="controls " >
-                  <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(editActeEffetFinancier.banq_id)" readonly >
-
-                </div>
+                 <select v-model="editActeEffetFinancier.compte_id" class="span" >
+                    <option v-for="varText in afficherCompteDynamique(editActeEffetFinancier.banq_id)" :key="varText.id"
+                            :value="varText.id">{{afficherLeCompteEnFonctionDeLaBanque(varText.banq_id)}}</option>
+                  </select>
+              
               </div>
 
             </td>
-
           </tr>
           <tr>
              <td colspan="2" width="550">
@@ -875,7 +873,7 @@
               <div class="control-group">
                 <label class="control-label" title=" ">Date fin d'exécution prévisionnelle</label>
                  <div class="controls">
-                  <input type="date" :min="editActeEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValueModifier" v-model="editEffetFinancier.date_fin_exe"
+                  <input type="date" :min="editActeEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValueModifier" v-model="editActeEffetFinancier.date_fin_exe"
                          class="span"
                          placeholder=""
                   />
@@ -899,6 +897,31 @@
               </div>
             </td>
 
+          </tr>
+                   <tr>
+             <td>
+              <div class="control-group">
+                <label class="control-label" title=" ">garantie</label>
+                <div class="controls">
+                    <select  v-model="editActeEffetFinancier.garantie" class="span">
+                        <option value="oui">Oui</option>
+                        <option value="non">Non</option>
+                    </select>
+                </div>
+              </div>
+
+            </td>
+              <div>
+                  <div class="control-group" v-if="garantie=='oui'">
+                      <label class="control-label" title=" ">Durée de garantie(JOUR) </label>
+                      <div class="controls">
+                          <input type="number" v-model="editActeEffetFinancier.durre_garantie"
+                                 class="span"
+                                 placeholder=""
+                          />
+                      </div>
+                  </div>
+              </div>
           </tr>
         </table>
       </div>
@@ -998,7 +1021,7 @@
            <tr>
              <td >
               <div class="control-group">
-                <label class="control-label" >Taux Avance Demarrage</label>
+                <label class="control-label" >Taux Avance Démarrage</label>
                 <div class="controls">
                   <input
                       type="number"  v-model="editActeEffetFinancier.taux_avance_demarrage"
@@ -1043,7 +1066,7 @@
              </td>
              <td >
               <div class="control-group">
-                <label class="control-label" >Montant Avance Demarrage TTC</label>
+                <label class="control-label" >Montant Avance Démarrage TTC</label>
                  <div class="controls">
                   <input
                       type="number"
@@ -1202,24 +1225,14 @@
     </div>
 
     <div class="modal-footer">
-      <a  @click.prevent="ajouterModalActeEffetFinancierLocal"
+      <a  @click.prevent="modifierModalActeEffetFinancierLocal"
           class="btn btn-primary"
           href="#"
-      >Valider</a>
+      >Modifier</a>
       <a data-dismiss="modal" class="btn" href="#">Fermer</a>
     </div>
   </div>
   <!---->
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1239,10 +1252,11 @@ name: "ActEffeFinanciere",
   data(){
     return{
       lot:"",
-      editActeEffetFinancier:"",
-      editEffetFinancier:{},
+      // editEffetFinancier:"",
+      editActeEffetFinancier:{},
         garantie:"non",
         date_debut_previsionnel:"",
+        
         durre_prevue:"",
         durre_garantie:"",
        formEffetFinancier:{
@@ -1278,6 +1292,7 @@ name: "ActEffeFinanciere",
         entreprise_id:"",
         marche_id:"",
         banq_id:"",
+        compte_id:"",
         numero_marche:""
       },
       nom_candidata:"",
@@ -1622,7 +1637,7 @@ afficheNomEntreprise() {
       return 0
     },
       afficherMontantRetenueGarantieModifier(){
-      const montantttcRetenueGarantie = (parseFloat(this.montantHTt) * (this.editEffetFinancier.taux_retenue_garantie)/100)
+      const montantttcRetenueGarantie = (parseFloat(this.montantHTt) * (this.editActeEffetFinancier.taux_retenue_garantie)/100)
       if (montantttcRetenueGarantie) {
         return parseFloat(montantttcRetenueGarantie).toFixed(0);
       }
@@ -1736,7 +1751,7 @@ afficheNomEntreprise() {
 
     },
      afficherMontantTTCDuCautionnementModifier(){
-      const result = (parseFloat(this.montantHTt) * (this.editEffetFinancier.taux_cautionnemt)/100)
+      const result = (parseFloat(this.montantHTt) * (this.editActeEffetFinancier.taux_cautionnemt)/100)
       if (result) {
         return parseFloat(result).toFixed(0);
       }
@@ -1950,7 +1965,7 @@ afficheNomEntreprise() {
     },
       montantHTtModifier() {
       
-      const val = parseFloat(this.editEffetFinancier.montant_act_ht) + parseFloat(this.montantTva);
+      const val = parseFloat(this.editActeEffetFinancier.montant_act_ht) + parseFloat(this.montantTva);
 
       if (val) {
         return parseFloat(val).toFixed(0);
@@ -1969,7 +1984,7 @@ afficheNomEntreprise() {
       return 0
     },
       avanceDemarrageModifier(){
-      const val = parseFloat(this.editEffetFinancier.avance_demarrage_ht) + parseFloat(this.avanceDemarrageMontantTva);
+      const val = parseFloat(this.editActeEffetFinancier.avance_demarrage_ht) + parseFloat(this.avanceDemarrageMontantTva);
 
       if (val) {
         return parseFloat(val).toFixed(0);
@@ -1988,7 +2003,7 @@ afficheNomEntreprise() {
       return 0
     },
     //  avanceDemarrageMontantTvaModifier() {
-    //   const val = parseFloat((this.editEffetFinancier.avance_demarrage_ht) * parseFloat(this.afficherEnorere)/100);
+    //   const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.afficherEnorere)/100);
 
     //   if (val) {
     //     return parseFloat(val).toFixed(0);
@@ -2241,7 +2256,7 @@ nombreDejourCalculeModifier(){
     },
     //  nombreDejourCalculeModifier(){
     //   let vM=this;
-    //   const acteAffet = vM.editEffetFinancier
+    //   const acteAffet = vM.editActeEffetFinancier
     //   if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
     //   if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
 
@@ -2254,7 +2269,7 @@ nombreDejourCalculeModifier(){
     //   if(isNaN(diffJour)) return null
 
     //   if(parseFloat(diffJour) < 0 ) return "durée invalide"
-    //   vM.editEffetFinancier.duree=diffJour
+    //   vM.editActeEffetFinancier.duree=diffJour
     //   return  diffJour;
 
     // },
@@ -2306,7 +2321,7 @@ nombreDejourCalculeModifier(){
 
 
 
-  },
+  }, 
 
 
   methods:{
@@ -2422,7 +2437,7 @@ var nouvelObjet1 = {
         code_act:"",
         libelle_act:"",
         reference_act:"",
-        objet_act:"",
+        objet_act:"", 
         incidence_financiere:"",
         montant_act:"",
         date_attributaire:"",
