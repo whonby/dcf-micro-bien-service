@@ -145,7 +145,15 @@
                         
             </tr>
             <tr>
-               <td colspan="2">
+                <td colspan="">
+                     <div class="control-group">
+                                                    <label class="control-label">Email</label>
+                                                    <div class="controls">
+                                                        <input type="text" v-model="formData.email"  placeholder="" class="span12"/>
+                                                    </div>
+                                                </div>
+                </td>
+               <td colspan="">
                      <div class="control-group">
                                                     <label class="control-label">Nom du pere:</label>
                                                     <div class="controls">
@@ -189,7 +197,7 @@
                      <div class="control-group">
                                                     <label class="control-label">L'unite administrative</label>
                                                     <div class="controls">
-                                                         <select v-model="formData.unite_administrative_id" class="span12">
+                                                         <select v-model="formData.unite_administrative_id" class="span11">
                                                             <option></option>
                                                               <option v-for="plans in groupeUaPourMarheHorSib" :key="plans[0].id" 
                :value="plans[0].uniteadministrative_id">{{LibelleUniteAdministrative(plans[0].uniteadministrative_id)}}</option>
@@ -200,35 +208,76 @@
                                                 </div>
                 </td>
               
+
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Service</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.service_id"  class="span12">
+                                                        <!-- <select v-model="formData.service_id"  class="span12">
                                                             <option></option>
                                                             <option v-for="item in afficheService(formData.unite_administrative_id)" :key="item.id" :value="item.serviceua_id">
                                                                 {{afficheServicelibelle(item.serviceua_id)}}
                                                             </option>
 
-                                                        </select>
+                                                        </select> -->
+                                                         <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="services"
+                                                   v-model="formData.service_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                                                     </div>
                                                 </div>
                 </td>
                 <td>
                      <div class="control-group">
-                                                    <label class="control-label">Fonctions</label>
+                                                    <label class="control-label">Emploi</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.fonction_id" :disabled="verrouilleFonction" class="span12">
+                                                        <!-- <select v-model="formData.fonction_id" :disabled="verrouilleFonction" class="span12">
                                                             <option></option>
                                                             <option v-for="item in afficheFonction(formData.unite_administrative_id)" :key="item.id" :value="item.fonction_id">
                                                                 {{afficheLibelleFonction(item.fonction_id)}}
                                                             </option>
 
-                                                        </select>
+                                                        </select> -->
+                                                         <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="fonctions"
+                                                   v-model="formData.fonction_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                                                         <input type="hidden" :value="nombreDeFonction(formData.fonction_id)" readonly class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
+                <td>
+                     
+                                                <div class="control-group">
+                                                    <label class="control-label">Fonction Professionnelle</label>
+                                                    <div class="controls">
+                                                      <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="fonctionProfessionnel"
+                                                   v-model="formData.fonction_professionnelle_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                                                    </div>
+                                                </div>
+                </td>
+            </tr>
+            <tr>
                 <td>
                      
                                                 <div class="control-group">
@@ -246,15 +295,12 @@
                                                     </div>
                                                 </div>
                 </td>
-            </tr>
-            <tr>
-                
               
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Type contrat</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.type_contrat_id" class="span12">
+                                                        <select v-model="formData.type_contrat_id" class="span11">
                                                             <option></option>
                                                             <option v-for="item in type_contrats" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -276,7 +322,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Type niveau etude</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.niveau_etude_id" class="span12">
+                                                        <select v-model="formData.niveau_etude_id" class="span11">
                                                             <option></option>
                                                             <option v-for="item in niveau_etudes" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -286,11 +332,14 @@
                                                     </div>
                                                 </div>
                 </td>
-                             <td>
+                             
+            </tr>
+            <tr>
+               <td>
                      <div class="control-group">
                                                     <label class="control-label">Type salarie</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.type_salarie_id" class="span12">
+                                                        <select v-model="formData.type_salarie_id" class="span11">
                                                             <option></option>
                                                             <option v-for="item in type_salaries" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -299,10 +348,7 @@
                                                     </div>
                                                 </div>
                 </td>
-            </tr>
-            <tr>
-               
-              <td colspan="2">
+              <td colspan="">
                 <div class="control-group">
                                                     <label class="control-label">Ligne budgetaires:</label>
                                                     <div class="controls">
@@ -383,8 +429,14 @@
 
     import {mapGetters, mapActions} from 'vuex'
     import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth"
+    import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
     export default {
+components: {
+    
+    ModelListSelect,
 
+  },
         data() {
             return {
                 fabActions: [
@@ -421,6 +473,8 @@
                     uniteZone_id:"",
                     situation_matrimonial:"",
                     service_id:"",
+                    fonction_professionnelle_id:"",
+                    email:""
                    
                 },
 
@@ -443,7 +497,7 @@
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ["dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
+            ...mapGetters('personnelUA', ["fonctionProfessionnel","dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
             ...mapGetters("uniteadministrative", ["budgetEclate","groupeUaPourMarheHorSib","getPersonnaliseTransfert","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
