@@ -20,8 +20,6 @@
         <th>Soumissionnaire</th>
         <th> Montant Offre financiere</th>
         <th>Type d'analyse</th>
-
-
       </tr>
       </thead>
       <tbody>
@@ -50,9 +48,35 @@
 
 
       </tr>
+      <tr></tr>
       </tbody>
     </table>
-    <table class="table table-bordered table-striped" v-if="macheid">
+
+      <div class="span10" v-if="ActeEffect(item.id)">
+<!--          {{ActeEffect(item.id).sous_traitance}}-->
+          <table class="table table-bordered table-striped" v-if="ActeEffect(item.id).sous_traitance=='oui'">
+              <thead>
+              <tr>
+                  <th>Entreprise sous traitance</th>
+                  <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="sous in listeEntreSoustraitance(item.id)" :key="'PMPM'+sous.id">
+                   <td>
+                       {{sous.raison_sociale}}
+                   </td>
+                  <td>
+                      <button @click.prevent="supprimerEntrepriseSousTraitance(sous.id)"  class="btn btn-danger " title="Supprimer">
+                          <span class=""><i class="icon-trash"></i></span>
+                      </button>
+                  </td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
+
+     <table class="table table-bordered table-striped" v-if="macheid">
       <thead>
       <tr>
         <th>Numero Marché</th>
@@ -63,7 +87,7 @@
         <th>Montant retenue garantie</th>
         <th>Montant cautionnement</th> -->
         <!-- <th>Type acte</th> -->
-        
+
        
         <th>Durée du marché</th>
         <th>Action</th>
@@ -107,6 +131,7 @@
       </tr>
       </tbody>
     </table>
+
   </div>
 <!-- <code v-if="this.getLotMarche < 0" style="color:red;font-size:14px;text-align:center"> Veuillez saisir au moins un lot </code> -->
  <div id="ajouterAct" class="modal hide grdirModalActeEffet" >
@@ -114,11 +139,11 @@
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Information sur l'attribution de l'acte : Lot N° {{infoLot.numero_lot}} {{infoLot.objet}}</h3>
     </div>
-
     <div class="widget-title">
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#Identif">Identification de L'acte</a></li>
         <li class=""><a data-toggle="tab" href="#financ">Informations financières</a></li>
+          <li class="" v-if="sous_traitance=='oui'"><a data-toggle="tab" href="#sous_traitance">Les entreprise sous_traitance </a></li>
       </ul>
     </div>
     <div class="widget-content tab-content">
@@ -241,7 +266,7 @@
 
           </tr>
           <tr>
-  <td>
+        <td>
 
               <div class="control-group">
                 <label class="control-label" >Date de signature attributaire</label>
@@ -351,7 +376,7 @@
           <tr>
              <td>
               <div class="control-group">
-                <label class="control-label" title=" ">garantie</label>
+                <label class="control-label" title="">garantie</label>
                 <div class="controls">
                     <select  v-model="garantie" class="span">
                         <option value="oui">Oui</option>
@@ -361,17 +386,33 @@
               </div>
 
             </td>
-              <div>
-                  <div class="control-group" v-if="garantie=='oui'">
-                      <label class="control-label" title=" ">Durree de garantie(JOUR) </label>
+              <td>
+                  <div class="control-group">
+                      <label class="control-label" title=" ">Sous traitance</label>
                       <div class="controls">
-                          <input type="number" v-model="durre_garantie"
-                                 class="span"
-                                 placeholder=""
-                          />
+                          <select  v-model="sous_traitance" class="span">
+                              <option value="oui">Oui</option>
+                              <option value="non">Non</option>
+                          </select>
                       </div>
                   </div>
-              </div>
+
+              </td>
+
+              <td>
+                  <div>
+                      <div class="control-group" v-if="garantie=='oui'">
+                          <label class="control-label" title=" ">Durree de garantie(JOUR) </label>
+                          <div class="controls">
+                              <input type="number" v-model="durre_garantie"
+                                     class="span"
+                                     placeholder=""
+                              />
+                          </div>
+                      </div>
+                  </div>
+              </td>
+
           </tr>
         </table>
       </div>
@@ -644,7 +685,52 @@
       
       </div>
       </div>
+        <div id="sous_traitance"  class="tab-pane">
+            <div class="span12">
+                <h6>ENREPRISE SOUS TRAITANCE</h6>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <label>ENTREPRSE </label>
+                            <model-list-select style="background-color: #fff;"
+                                               class="wide"
+                                               :list="entreprises"
+                                               v-model="nom_structure"
+                                               option-value="id"
+                                               option-text="raison_sociale"
+                                               placeholder="Entreprise"
+                            >
 
+                            </model-list-select>
+
+                        </td>
+
+                        <td>
+                            <hr>
+                            <button class="btn btn-danger" @click.prevent="addStructure()">
+                                Ajouter
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="odd gradeX" v-for="appelOffre in structure"
+                        :key="'APM'+appelOffre">
+                        <td>
+                            {{appelOffre.raison_sociale || 'Non renseigné'}}
+                        </td>
+                        <div class="btn-group">
+                            <button class="btn btn-link" title="Supprimer" @click.prevent="supprimeStructureSelectionner(appelOffre.id)">
+                                <span class=""><i class="icon-trash"></i></span>
+                            </button>
+                        </div>
+
+                    </tr>
+                    </tbody>
+                </table>
+<!--                <a @click.prevent="ajouterDossierCandidature" class="btn btn-primary"-->
+<!--                   href="#">Enregistrer dossier du soumissionnaire</a>-->
+            </div>
+        </div>
 
     </div>
 
@@ -1232,16 +1318,22 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import {formatageSomme} from "@/Repositories/Repository";
-
+import {  ModelListSelect } from 'vue-search-select'
+import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
 name: "ActEffeFinanciere",
   props:["macheid"],
+    components: {ModelListSelect,},
   data(){
     return{
       lot:"",
       editActeEffetFinancier:"",
       editEffetFinancier:{},
+        sous_traitance:"non",
         garantie:"non",
+        nom_structure:"",
+        structure:[],
+        structure_id:[],
         date_debut_previsionnel:"",
         durre_prevue:"",
         durre_garantie:"",
@@ -1298,7 +1390,7 @@ console.log(this.dateDefinitivePrevisionnel("2021-01-23",30))
       "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
       "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
       "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
-      "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+      "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers","personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe","getterEntrepriseSousTraitance"]),
     ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -1309,6 +1401,29 @@ console.log(this.dateDefinitivePrevisionnel("2021-01-23",30))
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe',
       'planActe']),
+      ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
+      listeEntreSoustraitance(){
+        return marche=>{
+            if(marche){
+                console.log(this.getterEntrepriseSousTraitance)
+                let objet=this.getterEntrepriseSousTraitance.filter(item=>item.marche_id==marche)
+                console.log(objet)
+                let array=[]
+                let vm=this
+                if(objet!=undefined){
+                    objet.forEach(function (val) {
+                        let ob=vm.entreprises.find(item=>item.id==val.entreprise_sous_traitance_id)
+                        let nouvel={
+                            ...ob,
+                            id:val.id
+                        }
+                        array.push(nouvel)
+                    })
+                }
+                return array
+            }
+        }
+      },
       dateDefinitivePrevisionnel() {
         return (date, days)=>{
 
@@ -2301,7 +2416,14 @@ nombreDejourCalculeModifier(){
         }
       }
     },
-
+      ActeEffect: function () {
+          return macheid => {
+              if (macheid != "") {
+                  // console.log("Marche leste acte effect finnancier")
+                  return this.getActeEffetFinancierPersonnaliser.find(idmarche => idmarche.marche_id == macheid)
+              }
+          }
+      },
 
 
 
@@ -2311,7 +2433,7 @@ nombreDejourCalculeModifier(){
 
   methods:{
     ...mapActions('bienService',['supprimerActeEffetFinancier',
-      'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
+      'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche',"supprimerEntrepriseSousTraitance"]),
 ...mapActions("horSib", ['modifierMarcheHorSib']),
 
     afficheModaleActe(index){
@@ -2391,6 +2513,8 @@ var nouvelObjet1 = {
         montant_tva_retenu_garanti:this.afficherMontantTvaTaxeRetenuGarantie,
         montant_ttc_retenue_garantie:this.afficherMontantRetenueGarantie,
         tva:this.montantTva,
+          sous_traitance:this.sous_traitance,
+          garantie:this.garantie,
         montant_act:this.montantHTt,
         avance_demarrage_ttc:this.avanceDemarrage,
         tva_avance_demarage:this.avanceDemarrageMontantTva,
@@ -2398,7 +2522,7 @@ var nouvelObjet1 = {
         difference_personnel_bienService:this.afficheMarcheType,
         marche_id:this.marche_lot,
         marchegeneral_id:this.affichieridMarcheGlobal(this.marche_lot),
-        // ua_id:this.ua_id,
+          sous_traitance_array:this.structure_id,
         banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
         compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
       }
@@ -2440,9 +2564,30 @@ var nouvelObjet1 = {
         marche_id:"",
         numero_marche:"",
 avance_demarrage_ttc:0,
-avance_demarrage_ht:0
+avance_demarrage_ht:0,
+          sous_traitance:"",
       }
+        this.structure_id=[]
     },
+      addStructure(){
+          if(this.nom_structure=="")
+              return ""
+          let isStructureExist=this.structure.find(item=>item.id==this.nom_structure)
+          if (isStructureExist!=undefined)
+              return ""
+          let objet=this.entreprises.find(item=>item.id==this.nom_structure)
+          this.structure_id.unshift(objet.id)
+          this.structure.unshift(objet)
+          console.log(this.structure)
+          this.nom_structure=""
+
+          //this.formDossierCadidature.nom_cand
+      },
+      supprimeStructureSelectionner(id){
+          this.structure= this.structure.filter(item=>item.id!=id)
+          this.structure_id=this.structure_id.filter(item=>item!=id)
+          console.log(this.structure_id)
+      }
   },
     watch: {
         date_debut_previsionnel:function (value) {

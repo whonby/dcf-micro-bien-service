@@ -57,7 +57,7 @@
                       
                          <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter la reception des plis 888</h3>
+                <h3>Ajouter la reception des plis</h3>
             </div>
             <table class="table table-bordered table-striped">
  <tr>

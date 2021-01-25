@@ -64,509 +64,9 @@
       </table>
     </div>
 
-    <div id="offreF" class="modal hide modaloffreFin">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter l'offre financière du candidat <b>{{edite_offre_financiere.nom_cand}}</b></h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-          <tr>
-            <td>
-              <div class="control-group">
-                <label>Offre</label>
-                <div class="controls">
-                  <select v-model="formLot.appel_offre_id" class="span" disabled>
-                    <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
-                            :value="varText.id">{{varText.ref_appel}}</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-
-            <td>
-
-              <div class="control-group">
-                <label class="control-label">Quantité :</label>
-                <div class="controls">
-                  <input type="number" class="span" placeholder="quantite" v-model="formOffreFinanciere.quantite">
-                </div>
-              </div>
-
-            </td>
-            <td>
-
-              <div class="control-group">
-                <label class="control-label">Prix unitaire :</label>
-                <div class="controls">
-                  <input type="number" class="span" placeholder="prix unitaire" v-model="formOffreFinanciere.prix_unitaire">
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-
-            <td>
-              <div class="control-group">
-                <label class="control-label">Taux</label>
-                <div class="controls">
-                  <input type="text" readonly  class="span" :value="affcherTauxEnCours">
-                  <input
-                      type="hidden"
-                      :value="tauxArrondit"
-
-                      class="span3"
-
-                  />
-                </div>
-              </div>
-            </td>
-
-            <td>
-              <div class="control-group">
-                <label class="control-label">Tva</label>
-                <div class="controls">
-                  <input type="number" readonly :value="montantTva" class="span" />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Montant total ht :</label>
-                <div class="controls">
-                  <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHT">
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-
-            <td>
-              <div class="control-group">
-                <label class="control-label">Montant totat ttc :</label>
-                <div class="controls">
-                  <input type="text"  readonly  class="span" placeholder="Montant total ttc" :value="montantHTt">
-                </div>
-              </div>
-            </td>
-
-          </tr>
-
-        </table>
-
-      </div>
-      <div class="modal-footer">
-        <button @click.prevent="ajouterOffreF()" class="btn btn-primary">Ajouer</button>
-        <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
-        <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
-    </div>
 
 
 
-
-
-
-    <div id="modificationOffre" class="modal hide modaloffreFin">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modification offre financier</h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-          <tr>
-            <td>
-              <div class="control-group">
-                <label>Offre</label>
-                <div class="controls">
-                  <select v-model="formLot.appel_offre_id" class="span" disabled>
-                    <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
-                            :value="varText.id">{{varText.ref_appel}}</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            <!--  <td>
-                <div class="control-group">
-                  <label>Liste lot</label>
-                                <div class="controls">
-                                    <select v-model="formOffreFinanciere.numero_lot" class="span">
-                                        <option v-for="varText in listeLots(marcheid)" :key="varText.numero_lot"
-                                                :value="varText.id">{{varText.numero_lot}}</option>
-                                    </select>
-                                </div>
-                </div>
-              </td>-->
-            <!-- <td colspan="2">
-               <div class="control-group">
-                   <label class="control-label">Designation :</label>
-                           <div class="controls">
-                               <input type="text"  readonly   class="span6" placeholder="Designation" :value="libelleLot">
-                           </div>
-               </div>
-             </td>-->
-            <td>
-
-              <div class="control-group">
-                <label class="control-label">Quantite :</label>
-                <div class="controls">
-                  <input type="number" class="span" placeholder="quantite" v-model="modification_offre_finnancier_recupere.quantite">
-                </div>
-              </div>
-
-            </td>
-            <td>
-
-              <div class="control-group">
-                <label class="control-label">Prix unitaire :</label>
-                <div class="controls">
-                  <input type="number" class="span" placeholder="prix unitaire" v-model="modification_offre_finnancier_recupere.prix_unitaire">
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-
-            <td>
-              <div class="control-group">
-                <label class="control-label">Taux</label>
-                <div class="controls">
-                  <input type="text" readonly  class="span" :value="affcherTauxEnCours">
-                  <input
-                      type="hidden"
-                      :value="tauxArrondit"
-
-                      class="span3"
-
-                  />
-                </div>
-              </div>
-            </td>
-
-            <td>
-              <div class="control-group">
-                <label class="control-label">Tva</label>
-                <div class="controls">
-                  <input type="number" readonly :value="montantTvaEdite" class="span" />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Montant total ht :</label>
-                <div class="controls">
-                  <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHTEdite">
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-
-            <td>
-              <div class="control-group">
-                <label class="control-label">Montant totat ttc :</label>
-                <div class="controls">
-                  <input type="text"  readonly  class="span" placeholder="Montant total ttc" :value="montantHTtEdite">
-                </div>
-              </div>
-            </td>
-
-          </tr>
-
-        </table>
-
-      </div>
-      <div class="modal-footer">
-        <button @click.prevent="modificationOffreFin()" class="btn btn-primary">Modification</button>
-        <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
-        <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
-    </div>
-
-
-
-
-    <div id="offreTechnique" class="modal hide tailleModalOffre2">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter l'offre technique</h3>
-      </div>
-      <div class="modal-body">
-        <div class="widget-box">
-          <table class="table table-bordered table-striped">
-            <tr>
-
-              <td>
-                <div class="control-group">
-                  <label>Offre</label>
-                  <div class="controls">
-                    <select v-model="formLot.appel_offre_id" class="span" disabled>
-                      <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
-                              :value="varText.id">{{varText.ref_appel}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Accord groupe :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Accord groupe" v-model="formchnique.accord_groupe">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Cautionnement provisoire :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Cautionnement prov" v-model="formchnique.cautionnement_prov">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Attest banc:</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Formil propo tech :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Piece Admin" v-model="formchnique.formil_propo_tech">
-                  </div>
-                </div>
-              </td>
-              <td>
-
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Fiche rsgnt nombre groupe :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Attest banc" v-model="formchnique.fiche_rsgnt_mbre_groupe">
-                  </div>
-                </div>
-              </td>
-              <td>
-
-                <div class="control-group">
-                  <label class="control-label">Atcdent marche non exe :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Org travau" v-model="formchnique.atcdent_marche_non_exe">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Org travau site :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Meth real travau" v-model="formchnique.org_travau_site">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Meth real travau:</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Prog mobilisation" v-model="formchnique.meth_real_travau">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Prog mobilisation :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Prog mobilisation" v-model="formchnique.prog_mobilisation">
-                  </div>
-                </div>
-              </td>
-
-            </tr>
-            <tr>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Capacite financiere :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Capacite financiere" v-model="formchnique.capacite_financiere">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">CAA moyen ac entre :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Caa moyen ac" v-model="formchnique.caa_moyen_ac_entre">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Capacite techn expe :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">
-                  </div>
-                </div>
-
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button @click.prevent="ajouterOffreT" class="btn btn-primary">Ajouer</button>
-        <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
-    </div>
-
-
-    <div id="modificationOffreT" class="modal hide tailleModalOffre2">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modification d'offre technique</h3>
-      </div>
-      <div class="modal-body">
-        <div class="widget-box">
-          <table class="table table-bordered table-striped">
-            <tr>
-              <!--     <td>
-<div class="control-group">
-                   <label>Liste lot</label>
-                   <div class="controls">
-                       <select v-model="formchnique.numero_lot" class="span">
-                           <option v-for="varText in listeLots(marcheid)" :key="varText.numero_lot"
-                                   :value="varText.id">{{varText.numero_lot}}-{{varText.libelle_lot}}</option>
-                       </select>
-                   </div>
-               </div>
-                   </td>-->
-              <td>
-                <div class="control-group">
-                  <label>Offre</label>
-                  <div class="controls">
-                    <select v-model="formLot.appel_offre_id" class="span" disabled>
-                      <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
-                              :value="varText.id">{{varText.ref_appel}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Accord groupe :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Accord groupe" v-model="edit_offre_technique_recupere.accord_groupe">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Cautionnement provisoire :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Cautionnement prov" v-model="edit_offre_technique_recupere.cautionnement_prov">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Attest banc:</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Pouv habil" v-model="edit_offre_technique_recupere.attest_banc">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Formil propo tech :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Piece Admin" v-model="edit_offre_technique_recupere.formil_propo_tech">
-                  </div>
-                </div>
-              </td>
-              <td>
-
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Fiche rsgnt nombre groupe :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Attest banc" v-model="edit_offre_technique_recupere.fiche_rsgnt_mbre_groupe">
-                  </div>
-                </div>
-              </td>
-              <td>
-
-                <div class="control-group">
-                  <label class="control-label">Atcdent marche non exe :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Org travau" v-model="edit_offre_technique_recupere.atcdent_marche_non_exe">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Org travau site :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Meth real travau" v-model="edit_offre_technique_recupere.org_travau_site">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Meth real travau:</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Prog mobilisation" v-model="edit_offre_technique_recupere.meth_real_travau">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Prog mobilisation :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Prog mobilisation" v-model="edit_offre_technique_recupere.prog_mobilisation">
-                  </div>
-                </div>
-              </td>
-
-            </tr>
-            <tr>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Capacité financière :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Capacite financiere" v-model="edit_offre_technique_recupere.capacite_financiere">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">CAA moyen ac entre :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Caa moyen ac" v-model="edit_offre_technique_recupere.caa_moyen_ac_entre">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Capacite techn expe :</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Capacite techn exp" v-model="edit_offre_technique_recupere.capacite_techn_exp">
-                  </div>
-                </div>
-
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button @click.prevent="editeOffreT" class="btn btn-primary">Modification</button>
-        <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
-    </div>
 
 
 
@@ -581,13 +81,12 @@
 <h5>Formulaire d'enregistrement du dossier du soumissionnaire</h5>
       <table class="table table-bordered table-striped">
         <tr class="odd gradeX" >
-          <td colspan="4" width="">
-            <div class="span8" align="left" >
-
+          <td width="">
+            <div align="left" >
               <div class="control-group">
                 <label class="control-label">Entreprise.</label>
                 <div class="controls">
-                  <select  class="span10" v-model="formDossierCadidature.entreprise_id">
+                  <select v-model="formDossierCadidature.entreprise_id">
                     <option value=""></option>
                     <option v-for="varText in afficherCandidatSelectionner(marcheid)" :key="varText.id"
                             :value="varText.entreprise_id">{{afficheNomEntreprise(varText.entreprise_id)}}</option>
@@ -599,6 +98,7 @@
               <!-- <input type="text" placeholder="Recherche ..." v-on:keyup="recherche" class="span6" v-model="search">-->
             </div>
           </td>
+
         </tr>
         <tr class="odd gradeX">
 
@@ -656,7 +156,6 @@
           </td>
 
           <td>
-
             <div class="control-group">
               <label class="control-label">Numéro de dossier</label>
               <div class="controls">
@@ -693,7 +192,10 @@
             <div class="control-group">
               <label class="control-label">Accord de groupement</label>
               <div class="controls">
-                <input type="text" class="span" placeholder="Accord Groupe" v-model="formDossierCadidature.accord_group">
+                <select v-model="formDossierCadidature.accord_group" class="span">
+                    <option value="oui">OUI</option>
+                    <option  value="non">NON</option>
+                </select>
               </div>
             </div>
           </td>
@@ -715,188 +217,250 @@
             </div>
           </td>
         </tr>
-
-
-
-
+        <tr>
+          <td colspan="3" v-if="formDossierCadidature.accord_group=='oui'">
+            <!--            <input type="text" class="span12" readonly placeholder="Numero dossier" v-model="formDossierCadidature.nom_cand">-->
+           <h3>Nom Groupement : {{formDossierCadidature.nom_cand}}</h3> {{formDossierCadidature.nom_cand}}
+          </td>
+        </tr>
       </table>
-      <div class="widget-content tab-content">
+      <div class="span12"  v-if="formDossierCadidature.accord_group=='oui'">
+        <h6>VEILLEZ RENSEIGNE LES ENTREPRISES</h6>
+        <table class="table">
+          <tbody>
+          <tr>
+            <td>
+              <label>ENTREPRSE </label>
+              <model-list-select style="background-color: #fff;"
+                                 class="wide"
+                                 :list="entreprises"
+                                 v-model="nom_structure"
+                                 option-value="id"
+                                 option-text="raison_sociale"
+                                 placeholder="Entreprise"
+              >
 
+              </model-list-select>
 
-        <div id="tab00001" class="tab-pane active">
+            </td>
 
-        </div>
+            <td>
+              <hr>
+              <button class="btn btn-danger" @click.prevent="addStructure()">
+                Ajouter
+              </button>
+            </td>
+          </tr>
+          <tr class="odd gradeX" v-for="appelOffre in structure"
+              :key="'APM'+appelOffre">
 
-        <div id="tab00007" class="tab-pane">
-          <table class="table table-bordered table-striped">
+            <td>
+              {{appelOffre.raison_sociale || 'Non renseigné'}}
+            </td>
+            <div class="btn-group">
+              <button class="btn btn-link" title="Supprimer" @click.prevent="supprimeStructureSelectionner(appelOffre.id)">
+                <span class=""><i class="icon-trash"></i></span>
+              </button>
 
-            <tr class="odd gradeX">
+            </div>
 
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Attestion banc</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Attestation banc" v-model="formDossierCadidature.attest_banc">
-                  </div>
-                </div>
-              </td>
-
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Formulaire proo techn</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Formul propo tech" v-model="formDossierCadidature.formul_propo_tech">
-                  </div>
-                </div>
-              </td>
-
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Fiche de renseignement </label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Fiche renseignement" v-model="formDossierCadidature.fiche_rsgnt_cand">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Pièce administratif</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Piece Admin" v-model="formDossierCadidature.piece_admin">
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-            <tr class="odd gradeX">
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Fiche renseignement nombre groupe</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Fiche renseignement nombre groupe" v-model="formDossierCadidature.fiche_rsgnt_mbre_group">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Antécédent marche non exe</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Atcent marche non exe" v-model="formDossierCadidature.atcdent_marche_non_exe">
-                  </div>
-                </div>
-              </td>
-
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Org travau site</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Org travau" v-model="formDossierCadidature.org_travau_site">
-                  </div>
-                </div>
-              </td>
-
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Metch real travau</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Meth real travau" v-model="formDossierCadidature.meth_real_travau">
-                  </div>
-                </div>
-              </td>
-
-            </tr>
-
-
-
-
-            <tr class="odd gradeX">
-
-              <td>
-                <label>Procedure de passation</label>
-                <div class="controls">
-                  <!-- <select v-model="formDossierCadidature.procedure_passation_id" class="span" disabled>
-                      <option v-for="varText in afficherTypeProcedureId(marcheid)" :key="varText.id"
-                              :value="varText.id">{{varText.procedure_passation_id}}</option>
-                  </select> -->
-
-                  <input
-                      type="text"
-                      :value="afficherLibelleTypeProcedure(afficherTypeProcedureId(marcheid))"
-                      class="span"
-                      readonly
-                  />
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Date de naissance</label>
-                  <div class="controls">
-                    <input type="date" class="span" placeholder="" v-model="formDossierCadidature.date_nais_cand">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Capacite financiere</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Capacite financiere" v-model="formDossierCadidature.capacite_financiere">
-                  </div>
-                </div>
-              </td>
-
-              <td>
-                <div class="control-group">
-                  <div class="controls">
-                    <label class="control-label">Prog mobilisation</label>
-                    <input type="Text" class="span" placeholder="Programme mobilisation" v-model="formDossierCadidature.prog_mobilisation">
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-            <tr class="odd gradeX">
-              <td>
-                <div class="control-group">
-                  <label class="control-label">CAA moyen acc entre</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="CAA moyen ac entre" v-model="formDossierCadidature.caa_moyen_ac_entre">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Capacite finanancier</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Capacite financement" v-model="formDossierCadidature.capacite_financement">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Capacite techn exp</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Capacite tech exp" v-model="formDossierCadidature.capacite_tech_exp">
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Montant offre financiere</label>
-                  <div class="controls">
-                    <input type="text" class="span" placeholder="Mont offre financiere" v-model="formDossierCadidature.mt_offre_financiere">
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-
-          </table>
-        </div>
-
+          </tr>
+          </tbody>
+        </table>
         <a @click.prevent="ajouterDossierCandidature" class="btn btn-primary"
            href="#">Enregistrer dossier du soumissionnaire</a>
-
       </div>
+
+<!--      <div class="widget-content tab-content">-->
+
+
+<!--        <div id="tab00001" class="tab-pane active">-->
+
+<!--        </div>-->
+
+<!--        <div id="tab00007" class="tab-pane">-->
+<!--          <table class="table table-bordered table-striped">-->
+
+<!--            <tr class="odd gradeX">-->
+
+<!--              <td>-->
+<!--                <div class="control-group">-->
+<!--                  <label class="control-label">Attestion banc</label>-->
+<!--                  <div class="controls">-->
+<!--                    <input type="text" class="span" placeholder="Attestation banc" v-model="formDossierCadidature.attest_banc">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+
+<!--              <td>-->
+<!--                <div class="control-group">-->
+<!--                  <label class="control-label">Formulaire proo techn</label>-->
+<!--                  <div class="controls">-->
+<!--                    <input type="text" class="span" placeholder="Formul propo tech" v-model="formDossierCadidature.formul_propo_tech">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+
+<!--              <td>-->
+<!--                <div class="control-group">-->
+<!--                  <label class="control-label">Fiche de renseignement </label>-->
+<!--                  <div class="controls">-->
+<!--                    <input type="text" class="span" placeholder="Fiche renseignement" v-model="formDossierCadidature.fiche_rsgnt_cand">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <div class="control-group">-->
+<!--                  <label class="control-label">Pièce administratif</label>-->
+<!--                  <div class="controls">-->
+<!--                    <input type="text" class="span" placeholder="Piece Admin" v-model="formDossierCadidature.piece_admin">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+<!--            </tr>-->
+
+<!--            <tr class="odd gradeX">-->
+<!--              <td>-->
+<!--                <div class="control-group">-->
+<!--                  <label class="control-label">Fiche renseignement nombre groupe</label>-->
+<!--                  <div class="controls">-->
+<!--                    <input type="text" class="span" placeholder="Fiche renseignement nombre groupe" v-model="formDossierCadidature.fiche_rsgnt_mbre_group">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <div class="control-group">-->
+<!--                  <label class="control-label">Antécédent marche non exe</label>-->
+<!--                  <div class="controls">-->
+<!--                    <input type="text" class="span" placeholder="Atcent marche non exe" v-model="formDossierCadidature.atcdent_marche_non_exe">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+
+<!--              <td>-->
+<!--                <div class="control-group">-->
+<!--                  <label class="control-label">Org travau site</label>-->
+<!--                  <div class="controls">-->
+<!--                    <input type="text" class="span" placeholder="Org travau" v-model="formDossierCadidature.org_travau_site">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+
+<!--              <td>-->
+<!--                <div class="control-group">-->
+<!--                  <label class="control-label">Metch real travau</label>-->
+<!--                  <div class="controls">-->
+<!--                    <input type="text" class="span" placeholder="Meth real travau" v-model="formDossierCadidature.meth_real_travau">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+
+<!--            </tr>-->
+
+
+
+
+<!--            <tr class="odd gradeX">-->
+
+<!--              <td>-->
+<!--                <label>Procedure de passation</label>-->
+<!--                <div class="controls">-->
+<!--                  <input-->
+<!--                      type="text"-->
+<!--                      :value="afficherLibelleTypeProcedure(afficherTypeProcedureId(marcheid))"-->
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+<!--                </div>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <div class="control-group">-->
+<!--                  <label class="control-label">Date de naissance</label>-->
+<!--                  <div class="controls">-->
+<!--                    <input type="date" class="span" placeholder="" v-model="formDossierCadidature.date_nais_cand">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <div class="control-group">-->
+<!--                  <label class="control-label">Capacite financiere</label>-->
+<!--                  <div class="controls">-->
+<!--                    <input type="text" class="span" placeholder="Capacite financiere" v-model="formDossierCadidature.capacite_financiere">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+
+<!--              <td>-->
+<!--                <div class="control-group">-->
+<!--                  <div class="controls">-->
+<!--                    <label class="control-label">Prog mobilisation</label>-->
+<!--                    <input type="Text" class="span" placeholder="Programme mobilisation" v-model="formDossierCadidature.prog_mobilisation">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+<!--            </tr>-->
+
+<!--            <tr class="odd gradeX">-->
+<!--              <td>-->
+<!--                <div class="control-group">-->
+<!--                  <label class="control-label">CAA moyen acc entre</label>-->
+<!--                  <div class="controls">-->
+<!--                    <input type="text" class="span" placeholder="CAA moyen ac entre" v-model="formDossierCadidature.caa_moyen_ac_entre">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <div class="control-group">-->
+<!--                  <label class="control-label">Capacite finanancier</label>-->
+<!--                  <div class="controls">-->
+<!--                    <input type="text" class="span" placeholder="Capacite financement" v-model="formDossierCadidature.capacite_financement">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <div class="control-group">-->
+<!--                  <label class="control-label">Capacite techn exp</label>-->
+<!--                  <div class="controls">-->
+<!--                    <input type="text" class="span" placeholder="Capacite tech exp" v-model="formDossierCadidature.capacite_tech_exp">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <div class="control-group">-->
+<!--                  <label class="control-label">Montant offre financiere</label>-->
+<!--                  <div class="controls">-->
+<!--                    <input type="text" class="span" placeholder="Mont offre financiere" v-model="formDossierCadidature.mt_offre_financiere">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+<!--            </tr>-->
+
+
+<!--          </table>-->
+<!--        </div>-->
+
+<!--       -->
+
+<!--      </div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
 
 <!--Liste des candidats -->
@@ -1240,13 +804,16 @@ import moment from "moment";
 import Candidat from "@/pages/bien_service/component/OuvertureOffre/dossier_candidat/Candidat";
 import OffreFinanciere from "@/pages/bien_service/component/OuvertureOffre/dossier_candidat/OffreFinanciere";
 import OffreTechnique from "@/pages/bien_service/component/OuvertureOffre/dossier_candidat/OffreTechnique";
+import {  ModelListSelect } from 'vue-search-select'
+import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
 name: "DossierCandidat",
   props:["macheid"],
   components:{
     Candidat,
     OffreFinanciere,
-    OffreTechnique
+    OffreTechnique,
+    ModelListSelect
   },
   data() {
     return {
@@ -1256,6 +823,9 @@ name: "DossierCandidat",
           icon: "add"
         }
       ],
+      nom_structure:"",
+      structure:[],
+      structure_id:[],
       demande:{},
       acteEffetActive:"",
       formFournisseur : {
@@ -1367,7 +937,7 @@ name: "DossierCandidat",
         email_cand:"",
         procedure_passation_id:"",
         appel_offre_id:"",
-        accord_group:"",
+        accord_group:"non",
         cautionnement_prov:"",
         pouv_habil_signataire:"",
         piece_admin:"",
@@ -3263,6 +2833,41 @@ name: "DossierCandidat",
         numero_courie:"",
         appel_offre_id:"",
         analyse_dmp_id:""
+      }
+    },
+    addStructure(){
+      if(this.nom_structure=="")
+        return ""
+      let isStructureExist=this.structure.find(item=>item.id==this.nom_structure)
+      if (isStructureExist!=undefined)
+        return ""
+      let objet=this.entreprises.find(item=>item.id==this.nom_structure)
+      this.structure_id.unshift(objet.id)
+      this.structure.unshift(objet)
+      console.log(this.structure)
+      this.nom_structure=""
+
+      //this.formDossierCadidature.nom_cand
+    },
+    supprimeStructureSelectionner(id){
+      this.structure= this.structure.filter(item=>item.id!=id)
+      this.structure_id=this.structure_id.filter(item=>item!=id)
+      console.log(this.structure_id)
+    }
+  },
+  watch: {
+    structure:function (value) {
+      let vm=this
+     // formDossierCadidature.entreprise_id
+     // let objet=this.entreprises.find(item=>item.id==vm.formDossierCadidature.entreprise_id)
+      //let objet=this.
+      vm.formDossierCadidature.nom_cand=""
+      if(value.length>0){
+        let objet=this.entreprises.find(item=>item.id==vm.formDossierCadidature.entreprise_id)
+        vm.formDossierCadidature.nom_cand=objet.raison_sociale
+        value.forEach(function (val) {
+          vm.formDossierCadidature.nom_cand=vm.formDossierCadidature.nom_cand+ " / "+ val.raison_sociale
+        })
       }
     }
   }

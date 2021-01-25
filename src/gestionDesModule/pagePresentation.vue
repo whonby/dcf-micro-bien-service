@@ -308,6 +308,7 @@ created(){
     let objet=localStorage.getItem('Users');
     let user=JSON.parse (objet)
     this.getServiceCF()
+    this.getEntrepriseSousTraitance()
     this.getAffectationServiceCF()
     this.getAffectation()
     this.getUniteAdminUser(user.id)
@@ -573,7 +574,7 @@ this.getMembreCojo()
       this.getEcheances()
     this.getMembreComiteEvaluation()
     this.getStructureDAO()
-this.getEntrepriseSousTraitance()
+
         },
 
   computed:{
