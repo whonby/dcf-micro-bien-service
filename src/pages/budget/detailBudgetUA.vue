@@ -53,11 +53,11 @@
     <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
    
     <td height="20px"> </td>
-      <th height="20px"  style="color: #000000;font-size:14px"></th>
-      <td height="20px" style="text-align:center"></td>
-    <td height="20px" style="text-align:center"></td>
- <td height="20px" style="text-align:center"></td>
-  <td height="20px" style="text-align:center"></td>
+      <th height="20px"   style="color: #000000;font-size:14px"></th>
+      <td height="20px"   style="text-align:center"></td>
+    <td height="20px"     style="text-align:center"></td>
+ <td height="20px"        style="text-align:center"></td>
+  <td height="20px"       style="text-align:center"></td>
      
  </tr>     
                     <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
@@ -68,8 +68,7 @@
      
  </tr>
                     <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
-   
-    <td height="20px">  </td>
+    <td height="20px"></td>
       <td height="20px"></td>
       <td height="20px" style="text-align:center"></td>
     <td height="20px" style="text-align:center"></td>
@@ -79,7 +78,7 @@
  </tr>
                     <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
     
-    <td height="20px">  </td>
+    <td height="20px"></td>
      <th height="20px"  style="color: #000000;font-size:14px">PERSONNEL</th>
       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{formatageSomme(parseFloat(budgetPersonnel(unite.id)))}}</th>
      
@@ -87,7 +86,6 @@
  </tr>
                     <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
     <th height="20px"  style="color: #000000;font-size:14px"></th>
-    
      <td height="20px"></td>
      <td height="20px" ></td>
      <td height="20px" ></td>
@@ -109,13 +107,12 @@
       <td height="20px"></td>
       <td height="20px" style="text-align:center"></td>
     <td height="20px" style="text-align:center"></td>
- <td height="20px" style="text-align:center"></td>
-  <td height="20px" style="text-align:center"></td>
+     <td height="20px"   style="text-align:center"></td>
+      <td height="20px"  style="text-align:center"></td>
      
  </tr>                         
   <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
-   
-   
+
     <td height="20px">  </td>
       <th height="20px"  style="color: #000000;font-size:14px">INVESTISSEMENT</th>
       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{formatageSomme(parseFloat(budgetInverstisement(unite.id)))}}</th>
@@ -126,10 +123,10 @@
    
     <td height="20px">  </td>
       <th height="20px"  style="color: #000000;font-size:14px"></th>
-      <td height="20px" style="text-align:center"></td>
-    <td height="20px" style="text-align:center"></td>
- <td height="20px" style="text-align:center"></td>
-  <td height="20px" style="text-align:center"></td>
+      <td height="20px"  style="text-align:center"></td>
+    <td height="20px"    style="text-align:center"></td>
+ <td height="20px"       style="text-align:center"></td>
+  <td height="20px"      style="text-align:center"></td>
      
  </tr>     
   <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
@@ -285,25 +282,17 @@ import 'jspdf-autotable'
       };
     },
 
-
-
-
-
-
             budgetBienService(){
               return unite_id=>{
                   let vM=this;
                   if(unite_id!='' && vM.budgetGeneralCharge!=""){
-
-
                       let budget=vM.budgetGeneralCharge.find(item=>{
-                          if(item.gdenature_id==5 && item.ua_id==unite_id ){
+                          if(item.gdenature_id==5 && item.ua_id==unite_id){
                               return item
                           }
                       })
 
                       if(budget!=undefined){
-
                           return parseFloat(budget.Dotation_Initiale);
                       }
                       return 0

@@ -47,6 +47,22 @@
             <table class="table table-bordered table-striped">
               <tr>
                 <td>
+                  <label>UA</label>
+                  <model-list-select style="background-color: #fff;"
+                                     class="wide"
+                                     :list="listeStructure(macheid)"
+                                     v-model="formDataMembreCojo.ua_id"
+                                     option-value="id"
+                                     option-text="libelle"
+                                     placeholder="Unité administrative"
+                  >
+
+                  </model-list-select>
+
+                </td>
+              </tr>
+              <tr>
+                <td>
                   <div class="control-group">
                     <label>Matricule</label>
                     <div class="controls">
@@ -214,10 +230,12 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-
+import {  ModelListSelect } from 'vue-search-select'
+import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
 name: "MembreCojo",
   props:["macheid"],
+  components: {ModelListSelect,},
   data(){
     return{
       formDataMembreCojo:{
@@ -226,6 +244,7 @@ name: "MembreCojo",
         nom_prenom:"",
         role_membre_cojo_id:"",
         cojo_id:"",
+        ua_id:""
 
       },
       edite_membre_cojo:"",
@@ -245,11 +264,41 @@ console.log(this.getterMembreCojo.filter(idmem=>idmem.marche_id==this.macheid))
       }
       return null;
     },
-    ...mapGetters('bienService',['getterMembreCojo','getterCojos',"role_membrecojo"]),
+    ...mapGetters('bienService',['getterMembreCojo','getterCojos',"role_membrecojo","getterStructureDao"]),
 
     ...mapGetters('personnelUA', ['acteur_depenses',"all_acteur_depense"]),
 
-
+    ...mapGetters("uniteadministrative", [
+      "acteCreations",
+      "typeTextes",
+      "uniteAdministratives",
+      "getterBudgeCharge",
+      "decomptefactures"
+    ]),
+    listeStructure() {
+      return macheid => {
+        if (macheid != "") {
+         let objet= this.getterStructureDao.filter(idmarche => idmarche.marche_id == macheid)
+          let arry=[]
+          let vm=this
+          objet.forEach(function (value) {
+            let ua=vm.uniteAdministratives.find(item=>item.id==value.ua_id)
+            arry.push(ua)
+          })
+          return arry
+        }
+        return []
+      }
+    },
+    libelleUa(){
+      return ua_id=>{
+        let objet=this.uniteAdministratives.find(item=>item.id==ua_id)
+        if(objet!=undefined){
+          return objet.libelle
+        }
+        return ""
+      }
+    },
     // afficher la liste des roles membres
     afficherLaListemembreCojo(){
       return id =>{

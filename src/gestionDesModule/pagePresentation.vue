@@ -245,6 +245,18 @@
                                               </div>
                                           </div>
                                       </div>
+<!--                                      <div class="span4"  @click="goToModule(16)" v-if="!noDCfNoAdmin">-->
+<!--                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">-->
+<!--                                              &lt;!&ndash;                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>&ndash;&gt;-->
+<!--                                              <div class="timeline-text">-->
+<!--                                                  <h5>MON EQUIPE</h5>-->
+<!--                                                  <div>-->
+<!--                                                      <i style="font-size: 35px !important;" class="icon-group"></i>-->
+<!--                                                  </div>-->
+<!--&lt;!&ndash;                                                  <p> Permet de codifier les données de base</p>&ndash;&gt;-->
+<!--                                              </div>-->
+<!--                                          </div>-->
+<!--                                      </div>-->
 <!--                                      <div class="span4">-->
 <!--                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInLeft;">-->
 <!--                                              <div class="timeline-icon"><i class="fa fa-picture-o" aria-hidden="true"></i></div>-->
@@ -560,7 +572,7 @@ this.getMembreCojo()
       this.getEcheances()
     this.getMembreComiteEvaluation()
     this.getStructureDAO()
-
+this.getEntrepriseSousTraitance()
         },
 
   computed:{
@@ -752,7 +764,7 @@ return objJson.id
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
           "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner",
-           "getEcheances","pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO"]),
+           "getEcheances","pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO",'getEntrepriseSousTraitance']),
 
     activeMenuModuleParamGeneral(){
       this.activeMenuModuleSidcf(1)

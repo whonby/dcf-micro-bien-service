@@ -1,4 +1,4 @@
-detail_marche
+
 <template>
   
      

@@ -122,7 +122,8 @@
               <div class="control-group">
                 <label class="control-label">Montant</label>
                 <div class="controls">
-                  <input type="text" v-model="formchnique.montant"  placeholder="Cautionnement Provisoire" class="span">
+                  <money v-model="formchnique.montant" ></money>
+<!--                  <input type="text" v-model="formchnique.montant"  placeholder="Cautionnement Provisoire" class="span">-->
                 </div>
               </div>
             </td>

@@ -55,8 +55,8 @@
           <th>Montant </th>
           <th>Delai de validation de l'offre</th>
           <th>Delai de livraison ou d'execution proposé </th>
-          <th>Rabais offert</th>
           <th>Presence Echantillons</th>
+          <th>Motif</th>
           <th>Conclusion</th>
 
         </tr>
@@ -68,8 +68,8 @@
           <td @click="afficheEdite(offre.id)">{{formatageSommeSansFCFA(parseFloat(offre.montant))}} </td>
           <td @click="afficheEdite(offre.id)">{{offre.delai_validite_offre}} </td>
           <td @click="afficheEdite(offre.id)">{{offre.delai_execution}} </td>
-          <td @click="afficheEdite(offre.id)">{{offre.rabai_offert}}</td>
           <td @click="afficheEdite(offre.id)">{{offre.presence_echantillons}}</td>
+          <td @click="afficheEdite(offre.id)">{{offre.motif}}</td>
           <td @click="afficheEdite(offre.id)" v-if="offre.observation==1" style="background: green;color: white">CONFORME </td>
           <td @click="afficheEdite(offre.id)" v-else-if="offre.observation==0" style="background: red;color: white">NON CONFORME</td>
           <td @click="afficheEdite(offre.id)" v-else style="background: blue;color: white">ANALYE EN COURS</td>
@@ -320,9 +320,9 @@
                               <div class="control-group">
                                 <label class="control-label">CAA moyen :</label>
                                 <div class="controls">
-                                  <input type="text" class="span" placeholder="Caa moyen ac"
-                                         v-model="editer.caa_moyen_ac_entre">
-
+<!--                                  <input type="text" class="span" placeholder="Caa moyen ac"-->
+<!--                                         v-model="editer.caa_moyen_ac_entre">-->
+                                  <money v-model="editer.caa_moyen_ac_entre" ></money>
                                 </div>
                               </div>
                             </td>
@@ -516,6 +516,15 @@
                                     <option value="1">CONFORME</option>
                                     <option value="0">NON CONFORME</option>
                                   </select>
+                                </div>
+                              </div>
+                            </td>
+                            <td v-if="editer.observation=='0'">
+                              <div class="control-group">
+                                <label class="control-label">Motif :</label>
+                                <div class="controls">
+                                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
+                                  <textarea class="span11" v-model="editer.motif"></textarea>
                                 </div>
                               </div>
                             </td>
@@ -730,6 +739,7 @@ var nouvelObjet = {
               delai_execution:this.editer.delai_execution,
               validation:this.editer.validation,
               marche_id:this.editer.marche_id,
+            motif:this.editer.motif,
               appel_offre_id:this.editer.appel_offre_id
           }
           this.modifierOffreTechnique(objet)

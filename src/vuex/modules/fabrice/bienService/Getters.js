@@ -1111,3 +1111,5 @@ export const getterInformationCarteInfrastructure=state => state.informationFilt
 
 export const getterListeMarcheTableauBordFiltre=state => state.tableauBordFilter
 export const getterInfoTableauBordFiltre=state => state.infoFiltreTableauBord
+
+export const getterEntrepriseSousTraitance=state => state.entreprise_soustraitant

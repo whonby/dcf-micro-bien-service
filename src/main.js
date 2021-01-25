@@ -73,6 +73,18 @@ const options = {
     ]
 }
 Vue.use(VueHtmlToPaper, options);
+
+import money from 'v-money'
+const money_option= {
+        decimal: ',',
+        thousands: '.',
+        prefix: ' ',
+        suffix: ' ',
+        precision: 0,
+        masked: false
+}
+
+Vue.use(money, money_option)
 // or using the defaults with no stylesheet
 //Vue.use(VueHtmlToPaper);
 // Vue.component('p-input', PrettyInput);

@@ -193,7 +193,7 @@
             }
         },
         created(){
-            console.log(this.getterStructureDao.filter(idmarche => idmarche.marche_id == this.macheid))
+            //console.log(this.getterStructureDao.filter(idmarche => idmarche.marche_id == this.macheid))
         },
 
         computed:{
