@@ -57,7 +57,7 @@
                         </td>-->
                         <div class="btn-group">
                             <button @click.prevent="supprimerAnalyseDossier(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
+                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                         </div>
 
@@ -252,7 +252,7 @@
                         <td>
                        
                     <div class="control-group">
-                        <label class="control-label">Offre Financiere</label>
+                        <label class="control-label">Offre Financière</label>
                         <div class="controls">
                             <!-- <select v-model="formAnalyseDossier.cojo_id" class="span" :readOnly="verifiBanqueExist">
                                 <option v-for="plans in afficherMontant(formAnalyseDossier.dossier_candidat_id)" :key="plans.id"
