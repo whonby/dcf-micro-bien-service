@@ -57,7 +57,7 @@ detail_marche
                        <tr>
                  <td >
                     <div class="control-group">
-                            <label class="control-label">Nom et prenoms </label>
+                            <label class="control-label">Nom et prénoms </label>
                             <div class="controls">
                               <select v-model="EditServiceRealite.nom_service_beneficiaire" class="span">
                                 <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.EditServiceRealite.marche_id))"  :key="acteur.id"

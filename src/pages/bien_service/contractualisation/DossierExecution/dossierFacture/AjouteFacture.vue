@@ -6,7 +6,7 @@
     
        <div class="modal-header" >
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Une Facture</h3>
+        <h3>Ajouter une Facture</h3>
       </div>
       
         
@@ -32,7 +32,7 @@
               
                <td>
                 <div class="control-group">
-                  <label class="control-label">Numero facture</label>
+                  <label class="control-label">Numéro facture</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -60,7 +60,7 @@
               </td>
                <td colspan="">
                 <div class="control-group">
-                   <label class="control-label">Unite administrative</label>
+                   <label class="control-label">Unité administrative</label>
                 <div class="controls">
                  <input
                     type="text"
@@ -91,7 +91,7 @@
               
                <td>
                 <div class="control-group">
-                <label class="control-label">exonéré</label>
+                <label class="control-label">Exonéré</label>
                 <div class="controls">
                   <select v-model="formData.exonere" class="span3">
                   
@@ -507,7 +507,7 @@ props:["macheid"],
     ]),
     fonctionTest(){
       if(this.RestantMontantTransferer==0){
-        alert("Montant A Eclaté est egal a 0")
+        alert("Montant à éclaté est égal a 0")
         
       }
      

@@ -145,7 +145,7 @@
         <div id="modificationStructure" class="modal hide grdtaill">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification de STRUCTURE</h3>
+                <h3>Modification de Structure</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -167,7 +167,7 @@
             </div>
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationCojo()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
         <!-- end modifier cojo -->
         <notifications/>

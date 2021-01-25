@@ -88,7 +88,7 @@
           </td>
          <td>
             <div class="control-group">
-              <label class="control-label">Montant total ht :</label>
+              <label class="control-label">Montant total HT :</label>
               <div class="controls">
                 <money v-model="formOffreFinanciere.montant_total_ht" ></money>
 <!--                <input type="text"   class="span" placeholder="Montant total HT" v-model="formOffreFinanciere.montant_total_ht">-->
@@ -131,7 +131,7 @@
     <div class="modal-footer">
       <button @click.prevent="ajouterOffreF()" class="btn btn-primary">Ajouter</button>
       <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
-      <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+      <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
   </div>
 
 
@@ -169,7 +169,7 @@
         <tr>
           <td>
             <div class="control-group">
-              <label class="control-label">Montant total ht :</label>
+              <label class="control-label">Montant total HT :</label>
               <div class="controls">
                 <input type="text"   class="span" placeholder="Montant total HT" v-model="editer.montant_total_ht">
               </div>
@@ -210,7 +210,7 @@
     <div class="modal-footer">
       <button @click.prevent="editeOffreF()" class="btn btn-primary">Modification</button>
       <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
-      <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+      <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
   </div>
 </div>
 </template>

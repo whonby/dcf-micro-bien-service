@@ -25,7 +25,7 @@
         <tr>
           <th>Offre</th>
           <th>Prix de l'offre lu en FCFA TTC</th>
-          <th>Erreurs de calcul </th>
+          <th>Erreur de calcul </th>
           <th>Prix de l'offre corrigé en FCFA TTC</th>
 
 
@@ -51,11 +51,11 @@
         <thead>
         <tr>
           <th>Offre</th>
-          <th>Structure Emetrice</th>
+          <th>Structure éméttrice</th>
           <th>Montant </th>
-          <th>Delai de validation de l'offre</th>
-          <th>Delai de livraison ou d'execution proposé </th>
-          <th>Presence Echantillons</th>
+          <th>Délai de validation de l'offre</th>
+          <th>Délai de livraison ou d'exécution proposé </th>
+          <th>Présence échantillons</th>
           <th>Motif</th>
           <th>Conclusion</th>
 
@@ -84,12 +84,12 @@
   <div id="ModalModification" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
-      <h3>Information  sur Offre Financière</h3>
+      <h3>Information sur l'Offre Financière</h3>
     </div>
 
     <div class="widget-title">
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#tab8888">Information Sur Offre Financière</a></li>
+        <li class="active"><a data-toggle="tab" href="#tab8888">Information sur l'Offre Financière</a></li>
         <!-- <li class=""><a data-toggle="tab" href="#tab00050">Informations financières</a></li> -->
       </ul>
     </div>
@@ -168,7 +168,7 @@
                           <tr>
                             <td>
                               <div class="control-group">
-                                <label class="control-label">Numero de lot :</label>
+                                <label class="control-label">Numéro de lot :</label>
                                 <div class="controls">
 
                                   <input type="text" class="span" :value="'Lot N° '+editer.numero_lot" disabled>
@@ -242,7 +242,7 @@
                             <td>
 
                               <div class="control-group">
-                                <label class="control-label">Antécédent des marchés non Execute :</label>
+                                <label class="control-label">Antécédent des marchés non exécuté :</label>
                                 <div class="controls">
                                   <!--  <input type="text" class="span" placeholder="Org travau" v-model="formchnique.atcdent_marche_non_exe">-->
 
@@ -257,7 +257,7 @@
                             </td>
                             <td>
                               <div class="control-group">
-                                <label class="control-label">Planning d'execution des travaux :</label>
+                                <label class="control-label">Planning d'exécution des travaux :</label>
                                 <div class="controls">
                                   <!-- <input type="text" class="span" placeholder="Meth real travau" v-model="formchnique.org_travau_site">-->
                                   <select v-model="editer.org_travau_site" class="span">
@@ -271,7 +271,7 @@
                             </td>
                             <td>
                               <div class="control-group">
-                                <label class="control-label">Methode de réalisation des travaux:</label>
+                                <label class="control-label">Méthode de réalisation des travaux:</label>
                                 <div class="controls">
                                   <!-- <input type="text" class="span" placeholder="Prog mobilisation" v-model="formchnique.meth_real_travau">-->
 
@@ -301,7 +301,7 @@
                             </td>
                             <td>
                               <div class="control-group">
-                                <label class="control-label">Capacite de financement :</label>
+                                <label class="control-label">Capacité de financement :</label>
                                 <div class="controls">
                                   <!--  <input type="text" class="span" placeholder="Capacite financiere" v-model="formchnique.capacite_financiere">-->
 
@@ -328,7 +328,7 @@
                             </td>
                             <td>
                               <div class="control-group">
-                                <label class="control-label">Expérience spécique :</label>
+                                <label class="control-label">Expérience spécifique :</label>
                                 <div class="controls">
                                   <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
                                   <select v-model="editer.capacite_tech_exp" class="span">
@@ -344,7 +344,7 @@
                             </td>
                             <td>
                               <div class="control-group">
-                                <label class="control-label">Expérience Général :</label>
+                                <label class="control-label">Expérience Générale :</label>
                                 <div class="controls">
                                   <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
                                   <select v-model="editer.experience_generale" class="span">
@@ -535,7 +535,7 @@
 
         <div class="modal-footer">
             <button @click.prevent="editeOffreT" class="btn btn-primary">Valider</button>
-            <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+            <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
     </div>
 
 

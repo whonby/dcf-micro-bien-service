@@ -100,7 +100,8 @@
         <td>
           <div class="btn-group">
             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
-              <span class=""><i class="icon-trash"></i></span>
+              <span class=""><i class="icon-trash">
+                SUPPRIMER</i></span>
             </button>
           </div>
         </td>
@@ -225,7 +226,7 @@
 
             <td colspan="">
               <div class="control-group">
-                <label class="control-label">Numéro du marche/contrat</label>
+                <label class="control-label">Numéro du marché/contrat</label>
                 <div class="controls">
                   <input
                       type="text"
@@ -302,7 +303,7 @@
           <tr>
               <td>
               <div class="control-group">
-                <label class="control-label">Date de debut d'execution prévisionnelle</label>
+                <label class="control-label">Date de début d'exécution prévisionnelle</label>
                 <div class="controls">
                   <input type="date" v-model="date_debut_previsionnel"
                          class="span"
@@ -363,7 +364,7 @@
             </td>
               <div>
                   <div class="control-group" v-if="garantie=='oui'">
-                      <label class="control-label" title=" ">Durree de garantie(JOUR) </label>
+                      <label class="control-label" title=" ">Durée de garantie(JOUR) </label>
                       <div class="controls">
                           <input type="number" v-model="durre_garantie"
                                  class="span"
@@ -485,7 +486,7 @@
             </td>
              <td>
                <div class="control-group">
-                <label class="control-label" >TVA (Avance Demarrage)</label>
+                <label class="control-label" >TVA (Avance Démarrage)</label>
                 <div class="controls">
 <!--                  <input-->
 <!--                      type="number"-->
@@ -501,7 +502,7 @@
              </td>
              <td >
               <div class="control-group">
-                <label class="control-label" >Montant Avance Demarrage TTC</label>
+                <label class="control-label" >Montant Avance Démarrage TTC</label>
                 <div class="controls">
 <!--                  <input-->
 <!--                      type="number"-->
@@ -669,7 +670,7 @@
     <div class="widget-title">
 
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#Identif1">Identification de L'acte</a></li>
+        <li class="active"><a data-toggle="tab" href="#Identif1">Identification de l'acte</a></li>
         <li class=""><a data-toggle="tab" href="#financ2">Informations financières</a></li>
       </ul>
     </div>
@@ -761,7 +762,7 @@
 
             <td colspan="">
               <div class="control-group">
-                <label class="control-label">Numéro du marche/contrat {{editActeEffetFinancier.marche_id}}</label>
+                <label class="control-label">Numéro du marché/contrat {{editActeEffetFinancier.marche_id}}</label>
                 <div class="controls">
                   <input
                       type="text"
@@ -998,7 +999,7 @@
            <tr>
              <td >
               <div class="control-group">
-                <label class="control-label" >Taux Avance Demarrage</label>
+                <label class="control-label" >Taux Avance Démarrage</label>
                 <div class="controls">
                   <input
                       type="number"  v-model="editActeEffetFinancier.taux_avance_demarrage"
@@ -1013,7 +1014,7 @@
             </td>
               <td>
               <div class="control-group">
-                <label class="control-label">Avance Demarrage Ht</label>
+                <label class="control-label">Avance Démarrage Ht</label>
                  <div class="controls">
 
 

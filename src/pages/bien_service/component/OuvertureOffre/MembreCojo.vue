@@ -153,7 +153,7 @@
       </div>
       <div class="modal-footer">
         <a class="btn btn-primary" @click.prevent="ajouterMembreCojoM()">Ajouter</a>
-        <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+        <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
       </div>
     </div>
 
@@ -221,7 +221,7 @@
       </div>
       <div class="modal-footer">
         <a class="btn btn-primary" @click.prevent="editeMembreCojoM()">Modifier</a>
-        <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+        <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
       </div>
     </div>
     <notifications/>

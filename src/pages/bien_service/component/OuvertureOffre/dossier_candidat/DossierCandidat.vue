@@ -12,15 +12,15 @@
       <table class="table table-bordered table-striped" v-if="marcheid">
         <thead>
         <tr>
-          <th>Numero dossier</th>
+          <th>Numéro dossier</th>
           <th>Type candidat</th>
-          <th>Raison social </th>
-          <th>Telephone</th>
+          <th>Raison sociale </th>
+          <th>Téléphone</th>
           <th>Adresse</th>
           <th>Email</th>
           <th>Appel Offre</th>
           <th>Procédure</th>
-          <th style="">Etat d'enregistrement</th>
+          <th style="">Etat d'enrégistrement</th>
           <th>Action</th>
         </tr>
         </thead>
@@ -47,7 +47,7 @@
            Dossier Complet
             </td>
           <td @click.prevent="isDetailDossierCandi(appelOffre.id)" style="background: red;color:#fff" v-if="!etatEnregistreOffreTechnique(appelOffre.id)">
-           Dossier Incomplet, Veillez enregistre l'offre technique et financière
+           Dossier Incomplet, Veuillez enregistrer l'offre technique et financière
           </td>
           <div class="btn-group">
             <button   class="btn  " title="Detail" @click.prevent="isDetailDossierCandi(appelOffre.id)">
@@ -132,7 +132,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Montant total ht :</label>
+                <label class="control-label">Montant total HT :</label>
                 <div class="controls">
                   <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHT">
                 </div>
@@ -143,7 +143,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label">Montant totat ttc :</label>
+                <label class="control-label">Montant totat TTC :</label>
                 <div class="controls">
                   <input type="text"  readonly  class="span" placeholder="Montant total ttc" :value="montantHTt">
                 </div>
@@ -158,7 +158,7 @@
       <div class="modal-footer">
         <button @click.prevent="ajouterOffreF()" class="btn btn-primary">Ajouer</button>
         <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
-        <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
     </div>
 
 
@@ -207,7 +207,7 @@
             <td>
 
               <div class="control-group">
-                <label class="control-label">Quantite :</label>
+                <label class="control-label">Quantité :</label>
                 <div class="controls">
                   <input type="number" class="span" placeholder="quantite" v-model="modification_offre_finnancier_recupere.quantite">
                 </div>
@@ -244,7 +244,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label">Tva</label>
+                <label class="control-label">TVA</label>
                 <div class="controls">
                   <input type="number" readonly :value="montantTvaEdite" class="span" />
                 </div>
@@ -252,7 +252,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Montant total ht :</label>
+                <label class="control-label">Montant total HT :</label>
                 <div class="controls">
                   <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHTEdite">
                 </div>
@@ -263,7 +263,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label">Montant totat ttc :</label>
+                <label class="control-label">Montant totat TTC :</label>
                 <div class="controls">
                   <input type="text"  readonly  class="span" placeholder="Montant total ttc" :value="montantHTtEdite">
                 </div>
@@ -278,7 +278,7 @@
       <div class="modal-footer">
         <button @click.prevent="modificationOffreFin()" class="btn btn-primary">Modification</button>
         <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
-        <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
     </div>
 
 
@@ -388,7 +388,7 @@
             <tr>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Capacite financiere :</label>
+                  <label class="control-label">Capacite financière :</label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Capacite financiere" v-model="formchnique.capacite_financiere">
                   </div>
@@ -404,7 +404,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Capacite techn expe :</label>
+                  <label class="control-label">Capacité techn expe :</label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">
                   </div>
@@ -417,8 +417,8 @@
       </div>
 
       <div class="modal-footer">
-        <button @click.prevent="ajouterOffreT" class="btn btn-primary">Ajouer</button>
-        <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        <button @click.prevent="ajouterOffreT" class="btn btn-primary">Ajouter</button>
+        <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
     </div>
 
 
@@ -479,7 +479,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Formil propo tech :</label>
+                  <label class="control-label">Formul propo tech :</label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Piece Admin" v-model="edit_offre_technique_recupere.formil_propo_tech">
                   </div>
@@ -604,7 +604,7 @@
 
           <td>
             <div class="control-group">
-              <label class="control-label">registre de commerce</label>
+              <label class="control-label">Registre de commerce</label>
               <div class="controls">
                 <input type="text" class="span" placeholder="Registre de commerce" :value="afficherRegistreCommerceEntreprise(formDossierCadidature.entreprise_id)">
               </div>
@@ -621,7 +621,7 @@
           </td>
           <td>
             <div class="control-group">
-              <label class="control-label">Raison social</label>
+              <label class="control-label">Raison sociale</label>
               <div class="controls">
                 <input type="text" class="span" placeholder="Raison social" :value="afficheNomEntreprise(formDossierCadidature.entreprise_id)">
               </div>
@@ -658,7 +658,7 @@
           <td>
 
             <div class="control-group">
-              <label class="control-label">Numéro de dossier</label>
+              <label class="control-label">Numéro du dossier</label>
               <div class="controls">
                 <input type="text" readonly class="span" placeholder="Numero dossier" v-model="formDossierCadidature.numero_dossier">
               </div>
@@ -760,7 +760,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Pièce administratif</label>
+                  <label class="control-label">Pièce administrative</label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Piece Admin" v-model="formDossierCadidature.piece_admin">
                   </div>
@@ -771,7 +771,7 @@
             <tr class="odd gradeX">
               <td>
                 <div class="control-group">
-                  <label class="control-label">Fiche renseignement nombre groupe</label>
+                  <label class="control-label">Fiche de renseignement nombre groupe</label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Fiche renseignement nombre groupe" v-model="formDossierCadidature.fiche_rsgnt_mbre_group">
                   </div>
@@ -812,7 +812,7 @@
             <tr class="odd gradeX">
 
               <td>
-                <label>Procedure de passation</label>
+                <label>Procédure de passation</label>
                 <div class="controls">
                   <!-- <select v-model="formDossierCadidature.procedure_passation_id" class="span" disabled>
                       <option v-for="varText in afficherTypeProcedureId(marcheid)" :key="varText.id"
@@ -837,7 +837,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Capacite financiere</label>
+                  <label class="control-label">Capacité financiere</label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Capacite financiere" v-model="formDossierCadidature.capacite_financiere">
                   </div>
@@ -865,7 +865,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Capacite finanancier</label>
+                  <label class="control-label">Capacité financière</label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Capacite financement" v-model="formDossierCadidature.capacite_financement">
                   </div>
@@ -873,7 +873,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Capacite techn exp</label>
+                  <label class="control-label">Capacité techn exp</label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Capacite tech exp" v-model="formDossierCadidature.capacite_tech_exp">
                   </div>
@@ -881,7 +881,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Montant offre financiere</label>
+                  <label class="control-label">Montant offre financière</label>
                   <div class="controls">
                     <input type="text" class="span" placeholder="Mont offre financiere" v-model="formDossierCadidature.mt_offre_financiere">
                   </div>
@@ -947,7 +947,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label">registre de commerce</label>
+                <label class="control-label">Registre de commerce</label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Registre de commerce" :value="afficherRegistreCommerceEntreprise(editDossierCadidature.entreprise_id)">
                 </div>
@@ -956,7 +956,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label">Numero de compte contribuable</label>
+                <label class="control-label">Numéro de compte contribuable</label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Situation Geographique" :value="afficherNumeroContribuableEntreprise(editDossierCadidature.entreprise_id)">
                 </div>
@@ -964,7 +964,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Raison social</label>
+                <label class="control-label">Raison sociale</label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Raison social" :value="afficheNomEntreprise(editDossierCadidature.entreprise_id)">
                 </div>
@@ -984,7 +984,7 @@
           <tr class="odd gradeX">
             <td>
               <div class="control-group">
-                <label class="control-label">Telephone</label>
+                <label class="control-label">Téléphone</label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Telphone" :value="afficherTelephoneEntreprise(editDossierCadidature.entreprise_id)">
                 </div>
@@ -1002,7 +1002,7 @@
             <td>
 
               <div class="control-group">
-                <label class="control-label">Numero de dossier</label>
+                <label class="control-label">Numéro de dossier</label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Numero dossier" v-model="editDossierCadidature.numero_dossier">
                 </div>
@@ -1030,7 +1030,7 @@
 
           <tr class="odd gradeX">
             <td>
-              <label>Appel Offre</label>
+              <label>Appel d'Offre</label>
               <div class="controls">
                 <select hidden v-model="editDossierCadidature.appel_offre_id" class="span" disabled>
                   <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
@@ -1090,7 +1090,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label">Fiche rsgnt </label>
+                <label class="control-label">Fiche de renseignement </label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Fiche renseignement" v-model="editDossierCadidature.fiche_rsgnt_cand">
                 </div>
@@ -1098,7 +1098,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Piece admin</label>
+                <label class="control-label">Pièce administrative</label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Piece Admin" v-model="editDossierCadidature.piece_admin">
                 </div>
@@ -1118,7 +1118,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Atcdent marche non exe</label>
+                <label class="control-label">Attécédent marché non exe</label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Atcent marche non exe" v-model="editDossierCadidature.atcdent_marche_non_exe">
                 </div>
@@ -1148,7 +1148,7 @@
           <tr class="odd gradeX">
 
             <td>
-              <label>Procedure de passation</label>
+              <label>Procédure de passation</label>
               <div class="controls">
                 <select v-model="editDossierCadidature.procedure_passation_id" class="span" disabled>
                   <option v-for="varText in procedurePassations" :key="varText.id"
@@ -1166,7 +1166,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Capacite financiere</label>
+                <label class="control-label">Capacité financière</label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Capacite financiere" v-model="editDossierCadidature.capacite_financiere">
                 </div>
@@ -1202,7 +1202,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Capacite techn exp</label>
+                <label class="control-label">Capacité techn exp</label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Capacite tech exp" v-model="editDossierCadidature.capacite_tech_exp">
                 </div>
@@ -1210,7 +1210,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Montant offre financiere</label>
+                <label class="control-label">Montant offre financière</label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Mont offre financiere" v-model="editDossierCadidature.mt_offre_financiere">
                 </div>
@@ -1226,7 +1226,7 @@
 
       <div class="modal-footer">
         <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationDossierCandidatLocal" href="#">Modifier</a>
-        <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
     </div>
 
  

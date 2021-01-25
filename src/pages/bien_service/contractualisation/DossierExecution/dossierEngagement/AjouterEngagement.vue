@@ -85,7 +85,7 @@ montantCumulerModifier
                         
                         <td>
                            <div class="control-group">
-                            <label class="control-label">Ligne Budgetaire</label>
+                            <label class="control-label">Ligne Budgétaire</label>
                             <div class="controls">
                               
                                <div class="controls">
@@ -96,7 +96,7 @@ montantCumulerModifier
                         </td>
                         <td >
                           <div class="control-group">
-                            <label class="control-label">Imputation budgetaire</label>
+                            <label class="control-label">Imputation budgétaire</label>
                             <div class="controls">
                               <input type="text" class="span" :value="afficherInputationBudgetaire(afficherIdMarche(detail_Facture.id))" readonly/>
                             </div>
@@ -123,7 +123,7 @@ montantCumulerModifier
                       <tr>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation Iniatiale(crédits autorises)</label>
+                            <label class="control-label">Dotation Iniatiale (crédits autorisés)</label>
                             <div class="controls">
                               <input type="text" class="span" :value="afficherMontantBudgetaireInitial(afficherInputationBudgetaire(afficherIdMarche(detail_Facture.id)))" readonly/>
                             </div>
@@ -148,7 +148,7 @@ montantCumulerModifier
                        
                         <td>
                                                     <div class="control-group">
-                            <label class="control-label">Cumul des demandes(y compris celle-ci) </label>
+                            <label class="control-label">Cumul des demandes (y compris celle-ci) </label>
                             <div class="controls">
                               <input type="text" class="span" :value="montantCumulerMandatEngagement" readonly/>
                               <input type="hidden" class="span"  readonly/>
@@ -215,7 +215,7 @@ montantCumulerModifier
     <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Exercice Budgetaire</label>
+                            <label class="control-label">Exercice Budgétaire</label>
                             
                                
                              <div class="controls">
@@ -260,7 +260,7 @@ montantCumulerModifier
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Nature depense</label>
+                            <label class="control-label">Nature dépense</label>
                              <div class="controls">
                                  <input
                                 type="text"
@@ -294,7 +294,7 @@ montantCumulerModifier
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Activite</label>
+                            <label class="control-label">Activité</label>
                             <div class="controls">
                              
                                <input
@@ -310,7 +310,7 @@ montantCumulerModifier
                           </td>
                           <td>
                              <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
+                            <label class="control-label">Unité administrative</label>
                             <div class="controls">
                                <input
                                 type="text"
@@ -360,7 +360,7 @@ montantCumulerModifier
                         </td>
                        <td>
                             <div class="control-group">
-                              <label class="control-label">Réf. Engagement  juridique</label>
+                              <label class="control-label">Réf. Engagement juridique</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -372,7 +372,7 @@ montantCumulerModifier
                           </td>
                            <td>
                             <div class="control-group">
-                              <label class="control-label">Numero OP/AT</label>
+                              <label class="control-label">Numéro OP/AT</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -412,7 +412,7 @@ montantCumulerModifier
                         
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Numero Bordereau</label>
+                            <label class="control-label">Numéro Bordereau</label>
                             <div class="controls">
                               <input type="text" class="span" v-model="formData.numero_bordereau"/>
                             </div>
@@ -460,7 +460,7 @@ montantCumulerModifier
                          
                        <td>
                          <div class="control-group">
-                            <label class="control-label">N° compte contribuable</label>
+                            <label class="control-label">N° Compte contribuable</label>
                             <div class="controls">
                              <div class="controls">
                               <input type="text" class="span" :value="afficherNumeroCCEntreprise(afficherIdEntreprise(detail_Facture.id))" readonly/>
@@ -476,7 +476,7 @@ montantCumulerModifier
                        
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Nom entreprise</label>
+                            <label class="control-label">Nom de l'entreprise</label>
                             <div class="controls">
                               <input type="text" class="span" :value="afficherNomEntreprise(afficherIdEntreprise(detail_Facture.id))"  readonly/>
                                
@@ -556,7 +556,7 @@ montantCumulerModifier
                           </td>
                          <td colspan="">
                             <div class="control-group">
-                              <label class="control-label">Numéro compte</label>
+                              <label class="control-label">Numéro du compte</label>
                               <div class="controls">
                                <!-- <select v-model="formData.compte_id" class="span" >
                                 <option
@@ -575,7 +575,7 @@ montantCumulerModifier
                           </td>
                          <td>
                             <div class="control-group">
-                              <label class="control-label">piece justificative</label>
+                              <label class="control-label">Pièce justificative</label>
                               <div class="controls">
                                 <input
                                   type="file"
@@ -1334,11 +1334,11 @@ afficheLibelleUa() {
 ajouterEngagementProforma(){
        if (this.detail_Facture.prix_propose_ttc > this.commparerMontantGleEtMontantFacture)
       {
-        alert("Le montant engagé est Inférieure au montant de la facture")
+        alert("Le montant engagé est inférieur au montant de la facture")
       }
        else if (this.dotationDisponibleAnterieure < this.detail_Facture.prix_propose_ttc)
       {
-        alert("La dotation est Inférieure au montant de la facture")
+        alert("La dotation est inférieure au montant de la facture")
       }
       
        else if (parseFloat(this.montantMarcheAvecAvenant) == parseFloat(this.sommeEgagementLigne(this.detail_Facture.marche_id)))

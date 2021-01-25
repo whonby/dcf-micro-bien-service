@@ -16,7 +16,7 @@
       <table class="table table-bordered table-striped">
           <tr>
               <td>
-                    <label class="control-label">Ministere</label>
+                    <label class="control-label">Ministère</label>
                       <input type="text" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
                <td>
@@ -28,7 +28,7 @@
                       <input type="text" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
                <td>
-                    <label class="control-label">Numero du facture</label>
+                    <label class="control-label">Numéro du facture</label>
                       <input type="text" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
           </tr>
@@ -38,13 +38,13 @@
                       <input type="date" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
               <td colspan="2">
-                    <label class="control-label">Objet de la depense</label>
+                    <label class="control-label">Objet de la dépense</label>
                       <input type="text" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
               
               
                <td>
-                    <label class="control-label">Date de reception</label>
+                    <label class="control-label">Date de réception</label>
                       <input type="date" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
           </tr>
@@ -58,7 +58,7 @@
                       <input type="text" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
                <td>
-                    <label class="control-label">Imputation budgetaire</label>
+                    <label class="control-label">Imputation budgétaire</label>
                       <input type="text" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
                <td>
@@ -106,7 +106,7 @@
             </div>
             </div>
             <div class="control-group">
-            <label class="control-label">Type Acte finnancier</label>
+            <label class="control-label">Type Acte financier</label>
             <div class="controls">
               <select v-model="formData.type_acte_financier">
                       <option
@@ -118,7 +118,7 @@
             </div>
             </div>
               <div class="control-group">
-            <label class="control-label">Numero avenant</label>
+            <label class="control-label">Numéro avenant</label>
             <div class="controls">
               <input
                 type="text"
@@ -199,7 +199,7 @@
             </div>
           </div>
            <div class="control-group">
-            <label class="control-label">Type Acte finnancier</label>
+            <label class="control-label">Type Acte financier</label>
             <div class="controls">
               <select v-model="editAvenant.type_acte_financier">
                       <option
@@ -211,7 +211,7 @@
             </div>
             </div>
               <div class="control-group">
-            <label class="control-label">Numero avenant</label>
+            <label class="control-label">Numéro avenant</label>
             <div class="controls">
               <input
                 type="text"
@@ -279,14 +279,14 @@
  <div id="modalTypeEngagement" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Choisir le type de procedure</h3>
+        <h3>Choisir le type de procédure</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
          
                          
                             <div class="control-group">
-                            <label class="control-label">Type de procedure</label>
+                            <label class="control-label">Type de procédure</label>
                             <div class="controls">
                              
                               <select v-model="formData.tprocedure">
@@ -363,7 +363,7 @@
                       <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Exercice Budgetaire</label>
+                            <label class="control-label">Exercice Budgétaire</label>
                             
                                
                              <div class="controls">
@@ -413,7 +413,7 @@
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Nature depense</label>
+                            <label class="control-label">Nature dépense</label>
                              <div class="controls">
                                  <input
                                 type="text"
@@ -464,7 +464,7 @@
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Activite</label>
+                            <label class="control-label">Activité</label>
                             <div class="controls">
                              
                                <input
@@ -479,7 +479,7 @@
                           </td>
                           <td>
                              <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
+                            <label class="control-label">Unité administrative</label>
                             <div class="controls">
                                <input
                                 type="text"
@@ -495,7 +495,7 @@
                         </td>
                           <td>
                            <div class="control-group">
-                            <label class="control-label">Type Procedure</label>
+                            <label class="control-label">Type Procédure</label>
                             
                                <div class="controls">
                               <input
@@ -568,7 +568,7 @@
                        
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Numero Demande engagement</label>
+                            <label class="control-label">Numéro Demande engagement</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="editEngagement.numero_demande_engage"/>
                             </div>
@@ -576,7 +576,7 @@
                         </td>
                          <td>
                          <div class="control-group">
-                            <label class="control-label">Numero engagement</label>
+                            <label class="control-label">Numéro engagement</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="editEngagement.numero_engage"/>
                             </div>
@@ -584,7 +584,7 @@
                         </td>
                          <td>
                          <div class="control-group">
-                            <label class="control-label">Numero Bordereau</label>
+                            <label class="control-label">Numéro Bordereau</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="editEngagement.numero_bordereau"/>
                             </div>
@@ -609,7 +609,7 @@
                         
                         <td>
                             <div class="control-group">
-                              <label class="control-label">Réf. Engagement  juridique</label>
+                              <label class="control-label">Réf. Engagement juridique</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -622,7 +622,7 @@
                           
                            <td>
                             <div class="control-group">
-                              <label class="control-label">Numero OP/AT</label>
+                              <label class="control-label">Numéro OP/AT</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -832,7 +832,7 @@
                           
                          <td>
                             <div class="control-group">
-                              <label class="control-label">piece justificative</label>
+                              <label class="control-label">Pièce justificative</label>
                               <div class="controls">
                                 <input
                                   type="file"
@@ -898,7 +898,7 @@
                         
                         <td>
                            <div class="control-group">
-                            <label class="control-label">Ligne Budgetaire</label>
+                            <label class="control-label">Ligne Budgétaire</label>
                             <div class="controls">
                               <!-- <select v-model="editEngagement.ligne_budgetaire_id" class="span4"> -->
                                 <!-- <option
@@ -915,7 +915,7 @@
                         </td>
                         <td >
                           <div class="control-group">
-                            <label class="control-label">Code Budgetaire</label>
+                            <label class="control-label">Code Budgétaire</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="CodeBudgetaire" readonly/>
                             </div>
@@ -942,7 +942,7 @@
                       <tr>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation Iniatiale</label>
+                            <label class="control-label">Dotation iniatiale</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="dotationInite(detail_marche.imputation).Dotation_Initiale" readonly/>
                             </div>
@@ -989,7 +989,7 @@
                         </td>
                                                  <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation disponible anterieure</label>
+                            <label class="control-label">Dotation disponible antérieure</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="dotationDisponibleAnterieure" readonly/>
                             </div>
@@ -1095,7 +1095,7 @@
                       <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Exercice Budgetaire</label>
+                            <label class="control-label">Exercice Budgétaire</label>
                             
                                
                              <div class="controls">
@@ -1145,7 +1145,7 @@
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Nature depense</label>
+                            <label class="control-label">Nature dépense</label>
                              <div class="controls">
                                  <input
                                 type="text"
@@ -1196,7 +1196,7 @@
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Activite</label>
+                            <label class="control-label">Activité</label>
                             <div class="controls">
                              
                                <input
@@ -1211,7 +1211,7 @@
                           </td>
                           <td>
                              <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
+                            <label class="control-label">Unité administrative</label>
                             <div class="controls">
                                <input
                                 type="text"
@@ -1227,7 +1227,7 @@
                         </td>
                           <td>
                            <div class="control-group">
-                            <label class="control-label">Type Procedure</label>
+                            <label class="control-label">Type Procédure</label>
                             
                                <div class="controls">
                               <input
@@ -1304,7 +1304,7 @@
                             <div class="controls">
                               <select v-model="editMandat.type_engagement_id"  class="span4" :readOnly="griseTypeEngagement">
                                   <option value="0">Marche</option>
-                                    <option value="1">Régie d'avances - reservation des crédits</option>
+                                    <option value="1">Régie d'avances - réservation des crédits</option>
                                        <option value="2">Régularisation d'ordre de paiement (OP)</option>
                                     <option value="3">Régularisation avances de trésorerie (AT)</option>
                                      <option value="4">Autres</option>
@@ -1316,7 +1316,7 @@
                         </td>
                        <td>
                             <div class="control-group">
-                              <label class="control-label">Réf. Engagement  juridique</label>
+                              <label class="control-label">Réf. Engagement juridique</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -1328,7 +1328,7 @@
                           </td>
                            <td>
                             <div class="control-group">
-                              <label class="control-label">Numero OP/AT</label>
+                              <label class="control-label">Numéro OP/AT</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -1353,7 +1353,7 @@
                   <tr>
                           <td>
                          <div class="control-group">
-                            <label class="control-label">Numero mandat</label>
+                            <label class="control-label">Numéro mandat</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="editMandat.numero_mandat"/>
                             </div>
@@ -1362,7 +1362,7 @@
                         
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Numero Bordereau</label>
+                            <label class="control-label">Numéro Bordereau</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="editMandat.numero_bordereau"/>
                             </div>
@@ -1376,7 +1376,7 @@
                         
                            <td>
                          <div class="control-group">
-                            <label class="control-label">Date de reception dossier</label>
+                            <label class="control-label">Date de réception dossier</label>
                             <div class="controls">
                               <input type="date" class="span4" v-model="editMandat.date_reception_cf"/>
                             </div>
@@ -1576,7 +1576,7 @@
                           </td>
                          <td>
                             <div class="control-group">
-                              <label class="control-label">piece justificative</label>
+                              <label class="control-label">Pièce justificative</label>
                               <div class="controls">
                                 <input
                                   type="file"
@@ -1643,7 +1643,7 @@
                         
                         <td>
                            <div class="control-group">
-                            <label class="control-label">Ligne Budgetaire</label>
+                            <label class="control-label">Ligne Budgétaire</label>
                             <div class="controls">
                              
                                <div class="controls">
@@ -1654,7 +1654,7 @@
                         </td>
                         <td >
                           <div class="control-group">
-                            <label class="control-label">Code Budgetaire</label>
+                            <label class="control-label">Code Budgétaire</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="CodeBudgetaire" readonly/>
                             </div>
@@ -1681,7 +1681,7 @@
                       <tr>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation Iniatiale</label>
+                            <label class="control-label">Dotation iniatiale</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="dotationInite(detail_marche.imputation).Dotation_Initiale" readonly/>
                             </div>
@@ -1837,7 +1837,7 @@
                             </div>
                           </div>
                            <div class="control-group">
-                            <label class="control-label">Date Decision CF :</label>
+                            <label class="control-label">Date décision CF :</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editMandat.date_motif"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
@@ -1873,7 +1873,7 @@
                                 <option value="0">Attente</option>
                               <option value="1">Viser</option>
                              <option value="2">Différer</option>
-                             <option value="3">Réjeter</option>
+                             <option value="3">Rejeter</option>
                             
     
     </select>
@@ -1904,7 +1904,7 @@
                             </div>
                           </div>
                            <div class="control-group">
-                            <label class="control-label">Date Decision CF :</label>
+                            <label class="control-label">Date décision CF :</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editEngagement.date_motif"/>
                                <input type="hidden" class="span"  :value="recuperer"/>
@@ -1971,7 +1971,7 @@
                       <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Exercice Budgetaire</label>
+                            <label class="control-label">Exercice Budgétaire</label>
                             
                                
                              <div class="controls">
@@ -2015,7 +2015,7 @@
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Nature depense</label>
+                            <label class="control-label">Nature dépense</label>
                              <div class="controls">
                                  <input
                                 type="text"
@@ -2066,7 +2066,7 @@
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Activite</label>
+                            <label class="control-label">Activité</label>
                             <div class="controls">
                              
                                <input
@@ -2081,7 +2081,7 @@
                           </td>
                           <td>
                              <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
+                            <label class="control-label">Unité administrative</label>
                             <div class="controls">
                                <input
                                 type="text"
@@ -2097,7 +2097,7 @@
                         </td>
                           <td>
                            <div class="control-group">
-                            <label class="control-label">Type Procedure</label>
+                            <label class="control-label">Type Procédure</label>
                             
                                <div class="controls">
                               <input
@@ -2134,7 +2134,7 @@
                        
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Numero Demande engagement</label>
+                            <label class="control-label">Numéro Demande engagement</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="formData.numero_demande_engage"/>
                             </div>

@@ -85,7 +85,7 @@ afficherMontantFacture
                         
                         <td>
                            <div class="control-group">
-                            <label class="control-label">Ligne Budgetaire</label>
+                            <label class="control-label">Ligne Budgétaire</label>
                             <div class="controls">
                               
                                <div class="controls">
@@ -96,7 +96,7 @@ afficherMontantFacture
                         </td>
                         <td >
                           <div class="control-group">
-                            <label class="control-label">Imputation budgetaire</label>
+                            <label class="control-label">Imputation budgétaire</label>
                             <div class="controls">
                               <input type="text" class="span" :value="afficherInputationBudgetaire(afficherIdMarche(editMandat.facture_id))" readonly/>
                             </div>
@@ -123,7 +123,7 @@ afficherMontantFacture
                       <tr>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation Iniatiale(crédits autorises)</label>
+                            <label class="control-label">Dotation Initiale(crédits autorisés)</label>
                             <div class="controls">
                               <input type="text" class="span" :value="afficherMontantBudgetaireInitial(afficherInputationBudgetaire(afficherIdMarche(editMandat.facture_id)))" readonly/>
                             </div>
@@ -215,7 +215,7 @@ afficherMontantFacture
     <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Exercice Budgetaire</label>
+                            <label class="control-label">Exercice Budgétaire</label>
                             
                                
                              <div class="controls">
@@ -260,7 +260,7 @@ afficherMontantFacture
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Nature depense</label>
+                            <label class="control-label">Nature dépense</label>
                              <div class="controls">
                                  <input
                                 type="text"
@@ -294,7 +294,7 @@ afficherMontantFacture
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Activite</label>
+                            <label class="control-label">Activité</label>
                             <div class="controls">
                              
                                <input
@@ -310,7 +310,7 @@ afficherMontantFacture
                           </td>
                           <td>
                              <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
+                            <label class="control-label">Unité administrative</label>
                             <div class="controls">
                                <input
                                 type="text"
@@ -326,7 +326,7 @@ afficherMontantFacture
                         </td>
                           <td>
                            <div class="control-group">
-                            <label class="control-label">Type Procedure</label>
+                            <label class="control-label">Type de Procédure</label>
                             
                                <div class="controls">
                               <input
@@ -349,8 +349,8 @@ afficherMontantFacture
                             <label class="control-label">Type d'engagement direct</label>
                             <div class="controls">
                               <select v-model="editMandat.type_engagement_id"  class="span">
-                                  <option value="0">Marche</option>
-                                    <option value="1">Régie d'avances - reservation des crédits</option>
+                                  <option value="0">Marché</option>
+                                    <option value="1">Régie d'avances - réservation des crédits</option>
                                        <option value="2">Régularisation d'ordre de paiement (OP)</option>
                                     <option value="3">Régularisation avances de trésorerie (AT)</option>
                                      <option value="4">Autres</option>
@@ -362,7 +362,7 @@ afficherMontantFacture
                         </td>
                        <td>
                             <div class="control-group">
-                              <label class="control-label">Réf. Engagement  juridique</label>
+                              <label class="control-label">Réf. Engagement juridique</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -374,7 +374,7 @@ afficherMontantFacture
                           </td>
                            <td>
                             <div class="control-group">
-                              <label class="control-label">Numero OP/AT</label>
+                              <label class="control-label">Numéro OP/AT</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -399,7 +399,7 @@ afficherMontantFacture
                   <tr>
                           <td>
                          <div class="control-group">
-                            <label class="control-label">Numero mandat</label>
+                            <label class="control-label">Numéro mandat</label>
                             <div class="controls">
                               <input type="text" class="span" v-model="editMandat.numero_mandat"/>
                             </div>
@@ -408,7 +408,7 @@ afficherMontantFacture
                         
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Numero Bordereau</label>
+                            <label class="control-label">Numéro Bordereau</label>
                             <div class="controls">
                               <input type="text" class="span" v-model="editMandat.numero_bordereau"/>
                             </div>
@@ -417,7 +417,7 @@ afficherMontantFacture
                  
                            <td>
                          <div class="control-group">
-                            <label class="control-label">Date de reception dossier</label>
+                            <label class="control-label">Date de réception dossier</label>
                             <div class="controls">
                               <input type="date" class="span" v-model="editMandat.date_reception_cf"/>
                             </div>
@@ -571,7 +571,7 @@ afficherMontantFacture
                           </td>
                          <td>
                             <div class="control-group">
-                              <label class="control-label">piece justificative</label>
+                              <label class="control-label">Pièce justificative</label>
                               <div class="controls">
                                 <input
                                   type="file"
@@ -822,7 +822,7 @@ afficheLibelleTypeMarche() {
 
 commparerMontantGleEtMontantFacture(){
 if(this.montantGeneralMandatModifier > this.afficherMontantFacture(this.editMandat.facture_id)){
-alert("Montant demande est supperieur a la facture")
+alert("Le montant demandé est supérieur à la facture")
 }
 else{
   return this.montantGeneralMandatModifier
@@ -1310,11 +1310,11 @@ modifierModalMandatDecisionCF(){
      
    if (this.afficherMontantFacture(this.editMandat.facture_id) > this.montantGeneralMandatModifier)
       {
-        alert("Le montant engagé est Inférieure au montant de la facture")
+        alert("Le montant engagé est inférieur au montant de la facture")
       }
        else if (this.dotationDisponibleAnterieure < this.afficherMontantFacture(this.editMandat.facture_id))
       {
-        alert("La dotation est Inférieure au montant de la facture")
+        alert("La dotation est inférieure au montant de la facture")
       }
       
   

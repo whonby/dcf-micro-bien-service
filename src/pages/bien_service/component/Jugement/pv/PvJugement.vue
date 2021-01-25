@@ -84,7 +84,7 @@
     </div>
     <div class="modal-footer">
       <a class="btn btn-primary" @click.prevent="ajouterRapportJugementLocal()">Ajouter</a>
-      <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+      <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
     </div>
   </div>
 
@@ -100,7 +100,7 @@
         tableau ci-dessus, il apparaît que le soumissionnaire <b v-if="resultaAnalysePv.length>0"></b> propose
         l’offre conforme la moins-disante.
       </div>
-      <h4 class="text-center">TABLEAU RECAPITULATIF DE LA COMPARAISON DES OFFRES PAS LOT</h4>
+      <h4 class="text-center">TABLEAU RECAPITULATIF DE LA COMPARAISON DES OFFRES PAR LOT</h4>
       <div v-for="item in lot" :key="item.id" class="widget-content">
         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
 
@@ -116,7 +116,7 @@
           <tr>
             <th>Ref offre</th>
             <th>Soumissionnaire</th>
-            <th> Montant Offre financiere</th>
+            <th>Montant de l'Offre financière</th>
             <th>Type d'analyse</th>
             <th>Conclusion Analyse</th>
 
