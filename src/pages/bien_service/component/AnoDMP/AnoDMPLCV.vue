@@ -532,6 +532,7 @@ affichieridMarcheGlobal() {
     },
 
 
+
     
 demandeAno: function () {
       return macheid => {

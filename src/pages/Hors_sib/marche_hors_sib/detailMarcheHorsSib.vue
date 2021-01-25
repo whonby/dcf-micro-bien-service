@@ -1004,7 +1004,7 @@
                  <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
                 </div>
-                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
                 </div>
 
                 <div id="tab2025" class="tab-pane">
@@ -1085,7 +1085,7 @@
                  <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
                 </div>
-                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
                 </div>
 
                 <div id="tab2025" class="tab-pane">

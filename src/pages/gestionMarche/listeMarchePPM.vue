@@ -1,3 +1,4 @@
+
 reference_marche
 <template>
   <div>
@@ -424,6 +425,7 @@ reference_marche
           
            readonly
          />
+         
                   <!-- <div class="controls">
                     <select v-model="formData.activite_id" :readOnly="deverouactivite" class="span4">
                      <option
@@ -703,22 +705,22 @@ reference_marche
 
                    </td>
                      <td>
-                      <span v-if="marche.plan_passation_marche_id == null">Hors PPM</span>
-                      <span v-else>PPM</span>
+                      <span v-if="marche.plan_passation_marche_id !=null"> PPM</span>
+                      <span v-else>Hors PPM</span>
                     </td>
-                <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1 || marche.type_marche_id == 5"> 
-                     <!-- <router-link :to="{ name: 'historiqueContualisation', params: { id: marche.id }}"
+                <!-- <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1 || marche.type_marche_id == 5"> 
+                     <router-link :to="{ name: 'historiqueContualisation', params: { id: marche.id }}"
                 class="btn btn-default " title="historique la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
-                    </router-link> -->
+                    </router-link>
                     
-             <!-- <router-link :to="{ name: 'HistoriqueDetailExecution', params: { id: marche.id }}"
+             <router-link :to="{ name: 'HistoriqueDetailExecution', params: { id: marche.id }}"
                 class="btn btn-default " title="historique execution Marche">
                   <span class=""><i class="  icon-zoom-out"></i></span>
-                   </router-link>  -->
+                   </router-link> 
                     
                      
-                    </td>
+                    </td> -->
                    
                        <!-- <td v-else>
   <router-link :to="{ name: 'detailPersonnel', params: { id: marche.id }}"
@@ -817,7 +819,7 @@ export default {
                // activite_id:"",
                // typeappel_id:"",
                 exo_id:"",
-                mvtmarche:1,
+                mvtmarche:2,
                 sib:1
         
       },
@@ -870,7 +872,7 @@ export default {
                 
                // typeappel_id:"",
                
-                mvtmarche:1,
+                mvtmarche:2,
                 sib:1
       },
       
@@ -1052,11 +1054,11 @@ marcheHorSibFiltre() {
                     return item
                 }
             })
-            return colect.filter(items=>items.sib==1 && items.plan_passation_marche_id==null);
+            return colect.filter(items=>items.sib==0 && items.plan_passation_marche_id!=null);
         
         }
 else{
-return this.marcheHorSibFiltre1.filter(items=>items.sib==1 && items.plan_passation_marche_id==null);
+return this.marcheHorSibFiltre1.filter(items=>items.sib==0 && items.plan_passation_marche_id!=null);
 }
         
            
@@ -1901,7 +1903,7 @@ recupererDateMiseService() {
       imputation:this.ImputationBudget(this.formData.economique_id),
       libelle_procedure:this.afficheLeNomDesProcedure,
       exo_id : this.anneeAmort,
-      mvtmarche:1
+      mvtmarche:2
 
        };
 this.ajouterMarche(nouvelObjet)
@@ -1922,7 +1924,7 @@ this.formData = {
                 //activite_id:"",
                // typeappel_id:"",
                 exo_id:"",
-                mvtmarche:1,
+                mvtmarche:2,
                 sib:1
 }
 
@@ -1945,7 +1947,7 @@ this.formData = {
       exo_id : this.anneeAmort,
       //activite_id:this.editMarche.activite_id,
       economique_id:this.editMarche.economique_id,
-      mvtmarche:this.editMarche.mvtmarche
+      mvtmarche:2
        };
       this.modifierMarche(nouvelObjet)
       this.$('#modificationModal').modal('hide');
