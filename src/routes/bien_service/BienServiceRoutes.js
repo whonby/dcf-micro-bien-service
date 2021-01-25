@@ -110,6 +110,7 @@ import FicheContratualisation from "../../pages/Gestion_des_Rapports/marche/Fich
 import AjouterTacheParMarche from "../../pages/investissement/AjouterTache/AjouterTacheParMarche.vue"
 
 import AjouterTacheRealise from "../../pages/investissement/AjouterTache/AjouterTacheRealise.vue"
+import SuiviDelai from "../../pages/DossierSuiviDelai/SuiviDelai.vue"
 const BienServiceRoutes = [
     {
 
@@ -117,6 +118,12 @@ const BienServiceRoutes = [
         name:"AjouterTacheRealise",
         component:AjouterTacheRealise
     },
+    {
+        path:"/suivi-delai",
+        name:"suiviDelai",
+        component:SuiviDelai
+    },
+
     {
         path:"/liste-marche-ppm",
         name:"listeMarcheppm",

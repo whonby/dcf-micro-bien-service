@@ -230,7 +230,7 @@ reference_marche
             <tr>
                 <td>
                  <div class="control-group">
-            <label class="control-label">Montant prévu</label>
+            <label class="control-label">Montant prévisionnel</label>
             <div class="controls">
               <input
                 type="text"
@@ -513,7 +513,7 @@ reference_marche
               <tr>
            <td>
             <div class="control-group">
-       <label class="control-label">Montant prévu</label>
+       <label class="control-label">Montant prévisionnel</label>
        <div class="controls">
          <input
            type="text"
@@ -543,7 +543,7 @@ reference_marche
             <div class="controls">
             
                <select v-model="formData.nature_prix_id" class="span4" >
-               <option v-for="plans in gettesrNaturePrix" :key="plans.id" 
+               <option v-for="plans in Nature_des_prix" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
@@ -589,7 +589,7 @@ reference_marche
                 <i class="icon-th"></i>
               </span>
 
-              <h5>Liste des March&eacute;s  <code>({{marcheHorSibFiltre.length}})</code>  </h5>
+              <h5>Liste des March&eacute;s  hors ppm  <code>({{marcheHorSibFiltre.length}})</code>  </h5>
               <div align="right">
                 Recherche:
                 <input type="search"  v-model="search"  placeholder=" saisir objet"/>
@@ -630,11 +630,11 @@ reference_marche
                     <th>Objet du marché</th>
                     <th>Référence marché</th>
                      <th>Statut</th>
-                    <th>Montant prévu</th>
+                    <th>Montant prévisionnel</th>
                     <th>Etat en cours</th>
                     <th title="mouvement du marché">Mouvement du marché</th>
-                    <!-- <th style="width:10%">Suivi du marché</th>
-                    <th>Action</th> -->
+                    <th style="">Suivi du marché</th>
+                    <!-- <th>Action</th> -->
                    
                   </tr>
                 </thead>
@@ -687,6 +687,7 @@ reference_marche
                       v-else-if="marche.attribue == 3"  class="btn  btn-info">
                 <span title="MARCHE RESILIE" >RE</span>
        
+
                 </button>
                  <button v-else-if="marche.attribue == 5" class="btn  btn-inverse">
               
@@ -707,20 +708,20 @@ reference_marche
                       <span v-else>PPM</span>
                     </td>
                 <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1 || marche.type_marche_id == 5"> 
-                     <!-- <router-link :to="{ name: 'historiqueContualisation', params: { id: marche.id }}"
-                class="btn btn-default " title="historique la contratualisation">
-                  <span class=""><i class=" icon-folder-open"></i></span>
-                    </router-link> -->
+                     <router-link :to="{ name: 'detail_hors_sib', params: { id: marche.id }}"
+                class="btn btn-success " title="">
+                  <span class=""><i class="">Contractualisation</i></span>
+                    </router-link>
                     
              <!-- <router-link :to="{ name: 'HistoriqueDetailExecution', params: { id: marche.id }}"
                 class="btn btn-default " title="historique execution Marche">
                   <span class=""><i class="  icon-zoom-out"></i></span>
                    </router-link>  -->
-                    
+                </td>
                      
-                    </td>
+                    <!-- </td>
                    
-                       <!-- <td v-else>
+                       <td v-else>
   <router-link :to="{ name: 'detailPersonnel', params: { id: marche.id }}"
                 class="btn btn-default " title="Continué le processuce de contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
@@ -884,6 +885,7 @@ export default {
   },
 
 
+
   computed: {
      ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
@@ -903,7 +905,7 @@ export default {
    ...mapGetters("gestionMarche", ['entreprises']),
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
-
+ ...mapGetters('parametreGenerauxFonctionnelle', ['Nature_des_prix']),
   ...mapGetters("Utilisateurs", ["user","getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
      admin:admin,
@@ -1945,7 +1947,7 @@ this.formData = {
       exo_id : this.anneeAmort,
       //activite_id:this.editMarche.activite_id,
       economique_id:this.editMarche.economique_id,
-      mvtmarche:this.editMarche.mvtmarche
+      mvtmarche:1
        };
       this.modifierMarche(nouvelObjet)
       this.$('#modificationModal').modal('hide');
