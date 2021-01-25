@@ -5,12 +5,12 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">Ã—</button>
-        <h3>Ajouter type unite administrative</h3>
+        <h3>Ajouter le type d'unité administrative</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">libellérec</label>
             <div class="controls">
               <input
                 type="text"
@@ -41,7 +41,7 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">Ã—</button>
-        <h3>Modifier type unite administrative</h3>
+        <h3>Modifier le type d'unité administrative</h3>
       </div>
       <div class="modal-body">
          <form class="form-horizontal">

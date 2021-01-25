@@ -33,7 +33,7 @@ RecupererNiveau3StructureDecision
                     <div class="control-group">
                             <label class="control-label">Famille de Motif  </label>
                             <div class="controls">
-                               <select v-model="editObservationCfServiceFait2.motifcf" class="span">
+                               <select v-model="editObservationCfServiceFait.famille_motif_service_realite" class="span">
                                  <option value=""></option>
                                 <option v-for="varText in AffichierElementParent" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
@@ -48,7 +48,7 @@ RecupererNiveau3StructureDecision
                             <div class="controls">
                                <select v-model="editObservationCfServiceFait.motif_cf_serviceRealite" class="span">
                                  <option value=""></option>
-                                <option v-for="varText in AffichierElementEnfant(editObservationCfServiceFait2.motifcf)" :key="varText.id"
+                                <option v-for="varText in AffichierElementEnfant(editObservationCfServiceFait.famille_motif_service_realite)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
                             
@@ -61,7 +61,7 @@ RecupererNiveau3StructureDecision
                         <div class="control-group">
                             <label class="control-label">Autres Motif</label>
                             <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editObservationCfServiceFait.autre_motif" :readonly="griserAutreMotif">
+                              <textarea  class="span" row = "6" v-model="editObservationCfServiceFait.autre_motif_srf" :readonly="griserAutreMotif">
                               </textarea>
                             </div>
                           </div>
@@ -164,7 +164,11 @@ RecupererNiveau3StructureDecision
                                 <!-- <th>Service béneficiaire</th> -->
                                 <th >Date validation SB</th>
                                 <th >Date décision CF</th>
-                                <!-- <th >Observation CF</th> -->
+                                
+                                
+                                <th >Famille Motif</th>
+                                <th >Motif CF</th>
+                                <th >Autres Motif</th>
                                 <th>Action</th>
                                     </tr>
                                     </thead>
@@ -186,6 +190,11 @@ RecupererNiveau3StructureDecision
                      
                        <td >{{(formaterDate(realiteService.date_sb_service_real)) || 'Non renseigné'}}</td>
                     <td >{{formaterDate(realiteService.date_cf_service_real) || 'Non renseigné'}}</td>
+
+                    <td >{{libelleDecision(realiteService.famille_motif_service_realite) || 'Non renseigné'}}</td>
+                    <td >{{libelleDecision(realiteService.motif_cf_serviceRealite) || 'Non renseigné'}}</td>
+                    <td >{{realiteService.autre_motif_srf || 'Non renseigné'}}</td>
+
                     <!-- <td >{{realiteService.motif_cf_serviceRealite || 'Non renseigné'}}</td> -->
                      <td>
                         <button v-if="realiteService.decision_cf_service_real == 8"  class="btn  btn-success" @click="afficherModalObservationCF(realiteService.id)" >                        
@@ -330,6 +339,18 @@ search:""
       ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision','plans_Decision']),
 
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterRoles"]),
+      libelleDecision() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_Decision.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
 listeCF(){
               return this.getterUtilisateur.filter(item=>{
                   if(item.user_role){

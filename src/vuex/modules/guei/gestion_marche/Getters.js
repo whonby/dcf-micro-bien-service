@@ -1,5 +1,6 @@
 import { groupBy } from "../../../../Repositories/Repository";
 
+const ppm_ua = state => state.ppm_ua;
 const mode_passations = state => state.mode_passations;
 const source_personnalise=state =>state.source_personnalise
 const type_marches = state => state.type_marches;
@@ -230,6 +231,7 @@ export const groupeAgenceBanque = (state, getters) => {
   };
 
 export {
+    ppm_ua,
     getPersonnaliseAgence,
     mode_passations,
     type_marches,

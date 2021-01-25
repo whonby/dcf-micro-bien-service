@@ -10,11 +10,11 @@
       <thead>
       <tr>
         <th>Matricule</th>
-        <th>Nom et prenom</th>
-        <th>Role</th>
+        <th>Nom et prénoms</th>
+        <th>Rôle</th>
         <th>Action</th>
       </tr>
-      </thead>
+      </thead> 
       <tbody>
       <tr class="odd gradeX" v-for="appelOffre in listeMembreCojo"
           :key="appelOffre.id">
@@ -47,6 +47,22 @@
             <table class="table table-bordered table-striped">
               <tr>
                 <td>
+                  <label>UA</label>
+                  <model-list-select style="background-color: #fff;"
+                                     class="wide"
+                                     :list="listeStructure(macheid)"
+                                     v-model="formDataMembreCojo.ua_id"
+                                     option-value="id"
+                                     option-text="libelle"
+                                     placeholder="Unité administrative"
+                  >
+
+                  </model-list-select>
+
+                </td>
+              </tr>
+              <tr>
+                <td>
                   <div class="control-group">
                     <label>Matricule</label>
                     <div class="controls">
@@ -60,7 +76,7 @@
 
                   <div class="control-group">
 
-                    <label class="control-label">Nom et prenom <code>*</code> :</label>
+                    <label class="control-label">Nom et prénoms <code>*</code> :</label>
                     <div class="control-group">
                       <input type="text" class="span" placeholder="" v-model="formDataMembreCojo.nom_prenom">
 
@@ -101,7 +117,7 @@
 
                   <div class="control-group">
 
-                    <label class="control-label span5">Conctacts <code>*</code> :</label>
+                    <label class="control-label span5">Contacts <code>*</code> :</label>
 
                     <div class="control-group">
                       <input type="text" class="span" placeholder="Numero lo" v-model="formDataMembreCojo.telephone" >
@@ -114,7 +130,7 @@
 
                   <div class="control-group">
 
-                    <label class="control-label span5">Role <code>*</code> :</label>
+                    <label class="control-label span5">Rôle <code>*</code> :</label>
 
                     <div class="controls">
                       <select v-model="formDataMembreCojo.role_membre_cojo_id" class="span">
@@ -145,7 +161,7 @@
     <div id="modification_membre_cojo" class="modal hide" aria-hidden="true" style="display: none;">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>modification  </h3>
+        <h3>Modification  </h3>
       </div>
       <div class="modal-body">
         <div class="widget-box">
@@ -166,7 +182,7 @@
 
                   <div class="control-group">
 
-                    <label class="control-label">Nom et prenom <code>*</code> :</label>
+                    <label class="control-label">Nom et prénoms<code>*</code> :</label>
                     <div class="control-group">
                       <input type="text" class="span" placeholder="Numero lo" v-model="edite_membre_cojo.nom_prenom">
 
@@ -182,7 +198,7 @@
 
                   <div class="control-group">
 
-                    <label class="control-label span5">Role <code>*</code> :</label>
+                    <label class="control-label span5">Rôle <code>*</code> :</label>
 
                     <div class="controls">
                       <select v-model="edite_membre_cojo.role_membre_cojo_id" class="span">
@@ -214,10 +230,12 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-
+import {  ModelListSelect } from 'vue-search-select'
+import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
 name: "MembreCojo",
   props:["macheid"],
+  components: {ModelListSelect,},
   data(){
     return{
       formDataMembreCojo:{
@@ -226,6 +244,7 @@ name: "MembreCojo",
         nom_prenom:"",
         role_membre_cojo_id:"",
         cojo_id:"",
+        ua_id:""
 
       },
       edite_membre_cojo:"",
@@ -245,11 +264,41 @@ console.log(this.getterMembreCojo.filter(idmem=>idmem.marche_id==this.macheid))
       }
       return null;
     },
-    ...mapGetters('bienService',['getterMembreCojo','getterCojos',"role_membrecojo"]),
+    ...mapGetters('bienService',['getterMembreCojo','getterCojos',"role_membrecojo","getterStructureDao"]),
 
     ...mapGetters('personnelUA', ['acteur_depenses',"all_acteur_depense"]),
 
-
+    ...mapGetters("uniteadministrative", [
+      "acteCreations",
+      "typeTextes",
+      "uniteAdministratives",
+      "getterBudgeCharge",
+      "decomptefactures"
+    ]),
+    listeStructure() {
+      return macheid => {
+        if (macheid != "") {
+         let objet= this.getterStructureDao.filter(idmarche => idmarche.marche_id == macheid)
+          let arry=[]
+          let vm=this
+          objet.forEach(function (value) {
+            let ua=vm.uniteAdministratives.find(item=>item.id==value.ua_id)
+            arry.push(ua)
+          })
+          return arry
+        }
+        return []
+      }
+    },
+    libelleUa(){
+      return ua_id=>{
+        let objet=this.uniteAdministratives.find(item=>item.id==ua_id)
+        if(objet!=undefined){
+          return objet.libelle
+        }
+        return ""
+      }
+    },
     // afficher la liste des roles membres
     afficherLaListemembreCojo(){
       return id =>{

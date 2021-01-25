@@ -55,130 +55,107 @@
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
-
-          <div class="control-group">
-            <label class="control-label">Référence DAO</label>
-            <div class="controls">
-              <!-- <select v-model="formDataCojo.cotation_id" class="span" disabled>
-                  <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
-                          :value="plans.id">{{plans.ref_offre}}</option>
-              </select> -->
-              <input
-                  type="text"
-                  :value="affichierReferenceAppelOffre(macheid)"
-                  class="span"
-                  readonly
-              />
-
-            </div>
-          </div>
-
-          <!-- <div class="control-group">
-              <label class="control-label">Destinataire.</label>
-              <div class="controls">
-                <select v-model="formDataCojo.lettre_invitation_id" class="span">
-                      <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
-                              :value="varText.objetEntreprise.id">{{varText.objetEntreprise.raison_sociale}}</option>
-                  </select>
-
-              </div>
-          </div> -->
-
-          <div class="control-group">
-            <label class="control-label">Date éffective d'ouverture</label>
-            <div class="controls">
-              <input
-                  type="date"
-                  v-model="formDataCojo.date_ouverture"
-                  class="span"
-
-              />
-            </div>
-          </div>
-          <!-- <div class="control-group">
-                <label class="control-label">Controleur finnancier</label>
-              <div class="controls">
-                  <input disabled
+          <table class="table">
+            <tbody>
+            <tr>
+            <td>
+              <div>
+                <label>Référence DAO</label>
+                <div>
+                  <input
                           type="text"
-                          v-model="formDataCojo.controleur_finnancier"
+                          :value="affichierReferenceAppelOffre(macheid)"
                           class="span"
-                          placeholder="Controller Finnancier"
+                          readonly
                   />
+
+                </div>
               </div>
-          </div> -->
-          <!-- <div class="control-group">
-               <label class="control-label">Condition</label>
-               <div class="controls">
-                   <select v-model="formDataCojo.condition_id" class="span">
-                       <option v-for="plans in conditions" :key="plans.id"
-                               :value="plans.id">{{plans.libelle}}</option>
-                   </select>
-               </div>
-           </div>-->
+            </td>
+              <td>
+
+                <div>
+                  <label>Date éffective d'ouverture</label>
+                  <div>
+                    <input
+                            type="date"
+                            v-model="formDataCojo.date_ouverture"
+                            class="span"
+
+                    />
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div>
+                  <label>Date de composition</label>
+                  <div>
+                    <input
+                            type="date"
+                            v-model="formDataCojo.date_composition"
+                            class="span"
+
+                    />
+                  </div>
+                </div>
+              </td>
+              <td>
+
+                <div>
+                  <label>Nombre de participants</label>
+                  <div>
+                    <input
+                            type="text"
+                            v-model="formDataCojo.nbr_participant"
+                            class="span"
+                    />
+                    <input type="hidden" v-model="formDataCojo.difference_personnel_bienService"/>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
 
 
-          <div class="control-group">
-            <label class="control-label">Date de composition</label>
-            <div class="controls">
-              <input
-                  type="date"
-                  v-model="formDataCojo.date_composition"
-                  class="span"
-
-              />
-            </div>
-          </div>
-
-
-
-
-          <div class="control-group">
-            <label class="control-label">Nombre de participants</label>
-            <div class="controls">
-              <input
-                  type="text"
-                  v-model="formDataCojo.nbr_participant"
-                  class="span"
-              />
-              <input type="hidden" v-model="formDataCojo.difference_personnel_bienService"/>
-            </div>
-          </div>
-
-
-          <div class="control-group">
-            <label class="control-label">Structure DAO</label>
+          <div>
             <table class="table">
-              <!--          <thead>-->
-              <!--          <tr>-->
 
-              <!--            <th>Nom structure DAO</th>-->
-              <!--            <th>Action</th>-->
-              <!--          </tr>-->
-
-              <!--          </thead>-->
               <tbody>
               <tr>
                 <td>
-                  <input
-                          type="text"
-                          v-model="nom_structure"
-                          class="span"
-                          v-on:keyup.enter.prevent="addStructure"
-                  />
+                  <label>UA</label>
+                  <model-list-select style="background-color: #fff;"
+                                     class="wide"
+                                     :list="filtre_unite_admin"
+                                     v-model="nom_structure"
+                                     option-value="id"
+                                     option-text="libelle"
+                                     placeholder="Unité administrative"
+                  >
+
+                  </model-list-select>
+
                 </td>
 
-                <td> <button class="btn btn-danger" @click.prevent="addStructure()">
+                <td>
+                  <hr>
+                  <button class="btn btn-danger" @click.prevent="addStructure()">
                   Ajouter
-                </button></td>
+                </button>
+                </td>
               </tr>
               <tr class="odd gradeX" v-for="appelOffre in structure"
                   :key="appelOffre">
 
                 <td>
-                  {{appelOffre || 'Non renseigné'}}
+                  {{appelOffre.libelle || 'Non renseigné'}}
                 </td>
                 <div class="btn-group">
-                  <button class="btn btn-link " title="Supprimer">
+                  <button class="btn btn-link" title="Supprimer" @click.prevent="supprimeStructureSelectionner(appelOffre.id)">
                     <span class=""><i class="icon-trash"></i></span>
                   </button>
 
@@ -252,7 +229,7 @@
           </div>
 
 
-          <div class="control-group">
+          <!-- <div class="control-group">
             <label class="control-label">Date de composition</label>
             <div class="controls">
               <input
@@ -262,7 +239,7 @@
 
               />
             </div>
-          </div>
+          </div> -->
 
           <div class="control-group">
             <label class="control-label">Nombre de participants</label>
@@ -291,11 +268,14 @@
 import {mapActions, mapGetters} from "vuex";
 import moment from "moment";
 import StructureDAO from "./StructureDAO";
-
+import {  ModelListSelect } from 'vue-search-select'
+import 'vue-search-select/dist/VueSearchSelect.css'
+import {noDCfNoAdmin} from "../../../../Repositories/Auth"
 export default {
 name: "InfoCojo",
-  components: {StructureDAO},
+  components: {StructureDAO,ModelListSelect,},
   props:["macheid"],
+
   data(){
     return{
 
@@ -310,6 +290,7 @@ name: "InfoCojo",
        structure:[],
       nom_structure:'',
       edite_cojo:"",
+      structure_id:[]
     }
   },
   created(){
@@ -319,10 +300,37 @@ name: "InfoCojo",
     ...mapGetters('bienService',['getterCojos',"gettersOuverturePersonnaliser",
       'gettersCotations','appelOffres',
       'gettersCojoPersonnaliser','gettersCotationPersonnaliser']),
-
+    ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
     ...mapGetters('personnelUA', ['acteur_depenses']),
     ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
+    ...mapGetters("uniteadministrative", [
+      "acteCreations",
+      "typeTextes",
+      "uniteAdministratives",
+      "getterBudgeCharge",
+      "decomptefactures"
+    ]),
+    noDCfNoAdmin:noDCfNoAdmin,
+    filtre_unite_admin() {
+      if(this.noDCfNoAdmin){
 
+        let colect=[];
+        let vM=this
+        this.uniteAdministratives.filter(item=>{
+          if(vM.getterUniteAdministrativeByUser.length>0){
+            let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+            if (val!=undefined){
+              colect.push(item)
+              return item
+            }
+          }
+
+        })
+        return colect
+      }
+      console.log()
+      return this.uniteAdministratives
+    },
     listeCojo() {
       return macheid => {
         if (macheid != "") {
@@ -457,9 +465,11 @@ name: "InfoCojo",
       var nouvelObjet ={
         ...this.formDataCojo,
         marche_id:this.macheid,
+        structure_dao:this.structure_id,
         appel_offre_id :this.affichierAppelOffreid(this.macheid)
 
       }
+      console.log(nouvelObjet)
       this.ajouterCojo(nouvelObjet)
       this.formDataCojo={
         appel_offre_id:"",
@@ -488,10 +498,24 @@ name: "InfoCojo",
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
     },
     addStructure(){
+
       if(this.nom_structure=="")
          return ""
-      this.structure.unshift(this.nom_structure)
+      let isStructureExist=this.structure.find(item=>item.id==this.nom_structure)
+      if (isStructureExist!=undefined)
+          return ""
+
+      let objet=this.uniteAdministratives.find(item=>item.id==this.nom_structure)
+        this.structure_id.unshift(objet.id)
+      this.structure.unshift(objet)
+console.log(this.structure)
       this.nom_structure=""
+    },
+    supprimeStructureSelectionner(id){
+
+      this.structure= this.structure.filter(item=>item.id!=id)
+      this.structure_id=this.structure_id.filter(item=>item!=id)
+      console.log(this.structure_id)
     }
   }
 }
@@ -499,7 +523,7 @@ name: "InfoCojo",
 
 <style scoped>
   .grdirModalActeEffet{
-    width: 50%;
+    width: 60%;
     margin: 0 -20%;
   }
 </style>

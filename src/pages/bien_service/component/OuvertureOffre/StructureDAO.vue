@@ -11,24 +11,22 @@
         <table class="table table-bordered table-striped" v-if="macheid">
             <thead>
             <tr>
-
                 <th>Nom structure DAO</th>
                 <th>Action</th>
             </tr>
-
             </thead>
             <tbody>
-            <tr class="odd gradeX" v-for="appelOffre in listeStructure(macheid)"
-                :key="appelOffre.id">
-
+            <tr class="odd gradeX" v-for="appelOffre in listeStructure(macheid)" :key="appelOffre.id">
                 <td @click="afficheBouttonTechCojo(appelOffre.id)">
-                    {{appelOffre.nom_structure || 'Non renseigné'}}
+                    {{libelleUa(appelOffre.ua_id) || 'Non renseigné'}}
                 </td>
-                <div class="btn-group">
-                    <button @click.prevent="supprimerStructureDAO(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                        <span class=""><i class="icon-trash"></i></span></button>
-
-                </div>
+                <td>
+                    <div class="btn-group">
+                        <button @click.prevent="supprimerStructureDAO(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
+                            <span class=""><i class="icon-trash"></i></span>
+                        </button>
+                    </div>
+                </td>
 
             </tr>
             </tbody>
@@ -195,6 +193,7 @@
             }
         },
         created(){
+            //console.log(this.getterStructureDao.filter(idmarche => idmarche.marche_id == this.macheid))
         },
 
         computed:{
@@ -204,15 +203,31 @@
 
             ...mapGetters('personnelUA', ['acteur_depenses']),
             ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
-
+            ...mapGetters("uniteadministrative", [
+                "acteCreations",
+                "typeTextes",
+                "uniteAdministratives",
+                "getterBudgeCharge",
+                "decomptefactures"
+            ]),
             listeStructure() {
                 return macheid => {
                     if (macheid != "") {
 
-                        return this.getterStructureDao.filter(idmarche => idmarche.marche_id == macheid)
+                        return  this.getterStructureDao.filter(idmarche => idmarche.marche_id == macheid)
                     }
+                    return []
                 }
             },
+            libelleUa(){
+                return ua_id=>{
+                    let objet=this.uniteAdministratives.find(item=>item.id==ua_id)
+                    if(objet!=undefined){
+                        return objet.libelle
+                    }
+                    return ""
+                }
+            }
 
 
 

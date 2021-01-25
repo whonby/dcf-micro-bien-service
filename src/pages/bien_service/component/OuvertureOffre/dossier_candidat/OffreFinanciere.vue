@@ -53,24 +53,18 @@
 
   <!--Ajout offre fin-->
 
-  <div id="addd10" class="modal hide modaloffreFin" style="width: 1000px !important; left: 550px; ">
+  <div id="addd10" class="modal hide modaloffreFin" style="width: 70% !important; left: 650px; ">
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Ajouter l'offre financière</h3>
     </div>
     <div class="modal-body">
+      <!-- <table class="table table-bordered table-striped">
+       
+      </table> -->
       <table class="table table-bordered table-striped">
         <tr>
-          <td>
-            <div class="control-group">
-              <label>Offre</label>
-              <div class="controls">
-                <input v-if="listeAppelOffre(dossier_candidature.marche_id)" type="text" class="span" placeholder="Offre"
-                       v-model="listeAppelOffre(dossier_candidature.marche_id).ref_appel" disabled>
-              </div>
-            </div>
-          </td>
-          <td>
+           <td colspan="2">
             <div class="control-group">
               <label>Lot</label>
               <div class="controls">
@@ -82,51 +76,60 @@
             </div>
           </td>
         </tr>
-      </table>
-      <table class="table table-bordered table-striped">
-        <tr>
+         <tr>
           <td>
             <div class="control-group">
-              <label class="control-label">Montant total ht :</label>
+              <label>Offre</label>
               <div class="controls">
-                <input type="text"   class="span" placeholder="Montant total HT" v-model="formOffreFinanciere.montant_total_ht">
+                <input v-if="listeAppelOffre(dossier_candidature.marche_id)" type="text" class="span" placeholder="Offre"
+                       v-model="listeAppelOffre(dossier_candidature.marche_id).ref_appel" disabled>
               </div>
             </div>
           </td>
+         <td>
+            <div class="control-group">
+              <label class="control-label">Montant total ht :</label>
+              <div class="controls">
+                <money v-model="formOffreFinanciere.montant_total_ht" ></money>
+<!--                <input type="text"   class="span" placeholder="Montant total HT" v-model="formOffreFinanciere.montant_total_ht">-->
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          
 
-
+          
           <td>
 
             <div class="control-group">
               <label class="control-label">Montant TTC :</label>
               <div class="controls">
-                <input type="number" class="span" placeholder="Montant TTC" v-model="formOffreFinanciere.montant_total_ttc">
+                <money v-model="formOffreFinanciere.montant_total_ttc" ></money>
+<!--                <input type="number" class="span" placeholder="Montant TTC" v-model="formOffreFinanciere.montant_total_ttc">-->
               </div>
             </div>
 
-          </td>
-
-        </tr>
-        <tr>
-
-          <td>
+          
+<td>
 
             <div class="control-group">
               <label class="control-label">Rabais (%) :</label>
               <div class="controls">
-                <input type="number" class="span" placeholder="prix unitaire" v-model="formOffreFinanciere.Rabais">
+                <input type="number" class="span" placeholder="Rabais" v-model="formOffreFinanciere.Rabais">
               </div>
             </div>
 
           </td>
         </tr>
+        
 
 
       </table>
 
     </div>
     <div class="modal-footer">
-      <button @click.prevent="ajouterOffreF()" class="btn btn-primary">Ajouer</button>
+      <button @click.prevent="ajouterOffreF()" class="btn btn-primary">Ajouter</button>
       <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
       <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
   </div>
@@ -177,7 +180,7 @@
           <td>
 
             <div class="control-group">
-              <label class="control-label">Montant TTC :</label>
+              <label class="control-label">Montant HT:</label>
               <div class="controls">
                 <input type="number" class="span" placeholder="Montant TTC" v-model="editer.montant_total_ttc">
               </div>
@@ -230,11 +233,11 @@ name: "OffreFinanciere",
       editer:"",
       formOffreFinanciere:{
         numero_lot:"",
+        Rabais:"",
+        montant_total_ht:"",
         montant_total_ttc:"",
         dossier_candidat_id:"",
         hist_montant_ttc:"",
-        Rabais:"",
-        montant_total_ht:"",
         marche_id:""
       },
 

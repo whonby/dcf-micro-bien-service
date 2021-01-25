@@ -21,7 +21,7 @@ export  function ajouterModePassation({commit}, objetAjoute){
             this.$app.$notify({
                 title: 'success',
                 text: 'Enregistrement effectuer',
-                type:"success"
+                type:"success"  
             });
             commit('AJOUTER_MODE_PASSATION', res.data)
             this.$app.$loading(false)

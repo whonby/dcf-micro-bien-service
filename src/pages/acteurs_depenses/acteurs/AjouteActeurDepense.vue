@@ -58,7 +58,7 @@
                 </td>
                 <td colspan="2">
                      <div class="control-group">
-                                                    <label class="control-label">L'unite administrative:</label>
+                                                    <label class="control-label">L'unité administrative:</label>
                                                     <div class="controls">
                                                         <select v-model="formData.unite_administrative_id" class="span12">
                                                             <option></option>

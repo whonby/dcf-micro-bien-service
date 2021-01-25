@@ -101,11 +101,19 @@
         </template>
 
         <template v-else>
-<h4 style="text-align:center;">{{afficheLeNomDesProcedure}}</h4>
+<h4 style="text-align:center;" v-if="affcicheEtapeProcedure(10000000,['PSC-SC'],detail_marche.id)">Procédure Simplifiée de demande de Cotation(PSC Sans comité)</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure (30000000,['PSC-AC'],detail_marche.id)">Procédure Simplifiée de demande de Cotation(PSC Avec comité)</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(60000000, ['PSL'], detail_marche.id)">Procédure Simplifiée à compétition Limitée(PSL)</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000, ['PSO'], detail_marche.id)">Procédure Simplifiée à compétition Ouverte(PSO)</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AON'] , detail_marche.id)">Appel d'Offre Ouvert National (AON)</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOI'] , detail_marche.id)">Appel d'Offre Ouvert international (AOI)</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOR'] , detail_marche.id)">Appel d'Offre Ouvert Restreint (AOR)</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['ED'],detail_marche.id)">Entente direct (ED)</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['CONV'],detail_marche.id)">Convention (CONV)</h4>
 
             <div class="row-fluid">
                 <div class="span12">
-                     <template v-if="affcicheEtapeProcedure(10000000,'PSC-SC',detail_marche.id)">
+                     <template v-if="affcicheEtapeProcedure(10000000,['PSC-SC'],detail_marche.id)">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -200,7 +208,7 @@
 
 
                      
-                    <template v-else-if="affcicheEtapeProcedure (30000000,'PSC-AC',detail_marche.id)">
+                    <template v-else-if="affcicheEtapeProcedure (30000000,['PSC-AC'],detail_marche.id)">
 <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -262,7 +270,7 @@
                         <div id="tab41180" class="tab-pane">
                       <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
@@ -323,7 +331,7 @@
 
                     </div>
                     </template>
-                      <template v-else-if="affcicheEtapeProcedure(60000000, 'PSL', detail_marche.id) ">
+                      <template v-else-if="affcicheEtapeProcedure(60000000, ['PSL'], detail_marche.id)">
  
                      <div class="widget-box">
                         <div class="widget-title">
@@ -420,7 +428,7 @@
                 <div id="tab1041" class="tab-pane">
                       <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
@@ -490,7 +498,7 @@
                     
                     </template>
                     
-                    <template v-else-if="affcicheEtapeProcedure(100000000, 'PSO', detail_marche.id) ">
+                    <template v-else-if="affcicheEtapeProcedure(100000000, ['PSO'], detail_marche.id)">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -580,7 +588,7 @@
                 <div id="tab17041" class="tab-pane">
                       <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
@@ -655,7 +663,7 @@
                     </div>
                     
                      </template>
-  <template v-else-if="affcicheEtapeProcedure(100000000 , 'AON' , detail_marche.id)">
+  <template v-else-if="affcicheEtapeProcedure(100000000 , ['AON','AOI','AOR'] , detail_marche.id)">
      <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -795,7 +803,7 @@
                   <div id="tab45" class="tab-pane">
                <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
@@ -939,7 +947,7 @@
                     </div>
                     
 </template>
-          <template v-else-if="affcicheEtapeProcedure(0,'ED',detail_marche.id )">
+          <template v-else-if="affcicheEtapeProcedure(0,['ED','CONV'],detail_marche.id )">
           <div class="widget-box">
              <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -1014,7 +1022,23 @@
                    <!-- <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p> -->
                      </template>
                      <template v-else>
-                       <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p>
+                       <p style="font-size:14px;text-align:center;color:red">LA procedure de recrutement de 3CV n'est pas été defini donc veillez selectionner autre procedure sur l'offre
+                          <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                 <li class="active"><a data-toggle="tab" href="#tab456901">l'offre</a></li>
+                            </ul>
+                          </div>
+                              <div class="widget-content tab-content">
+        <div id="tab456901" class="tab-pane active ">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+
+
+                      <publication-Offre :macheid="detail_marche.id"></publication-Offre>
+                         </div>
+                              </div>
                      </template>
                 </div>
             </div>
@@ -1184,16 +1208,23 @@ created() {
 
     affcicheEtapeProcedure(){
       return (dotation,procedure,marche_id)=>{
-                  console.log(procedure)
+                //  console.log(procedure)
 
                let offre=this.appelOffres.find(item=>item.marche_id==marche_id)
-              console.log(offre)
+      //    console.log(offre)
               if(offre!=undefined){
                    //test
+                  //console.log(offre)
                    
                    let mode_passation=this.procedurePassations.find(item=>item.id==offre.mode_passation_id)
-                   //
-                  if(mode_passation.code==procedure){
+
+                  if (mode_passation==undefined){
+
+                      return this.verifictionDotationLigne(procedure,dotation)
+                  }
+
+
+                  if(this.inArray(procedure, mode_passation.code)){
                    
                       return true
                   }
@@ -1201,57 +1232,80 @@ created() {
                    return false
                }
 
-            if( this.budgetDisponible < 10000000 && procedure=="PSC-SC"){
-                    return true
-                }
-                else if(this.budgetDisponible < 30000000 && procedure=="PSC-AC")
-                {
-            return true
-                }
-                else if(this.budgetDisponible < 60000000 && procedure=="PSL")
-                {
-           return true
-                }
-                else if(this.budgetDisponible < 100000000 && procedure=="PSO" )
-                {
-           return true
-                }
-                else if(100000000 < this.budgetDisponible && (procedure=="AOR" || procedure=="AON" || procedure=="AOI"))
-                {
-            return true
-                }
-                else if(0 < this.budgetDisponible && procedure=="ED" || procedure=="CON")
-                {
-                 return true
-                }
+          return this.verifictionDotationLigne(procedure,dotation)
+               
 
 
       }
     },
 
+            verifictionDotationLigne(){
+         return (procedure,dotation)=>{
+
+
+             if( this.budgetDisponible < dotation && this.inArray(procedure,"PSC-SC")){
+
+                 return true
+             }
+             else if( this.budgetDisponible < dotation && this.inArray(procedure,"PSC-AC"))
+             {
+
+                 return true
+             }
+             else if( this.budgetDisponible < dotation && this.inArray(procedure,"PSL"))
+             {
+                 return true
+             }
+             else if(this.budgetDisponible < dotation && this.inArray(procedure,"PSO") )
+             {
+                 return true
+             }
+             else if(this.inArray(procedure,"ED") || this.inArray(procedure,"CON") )
+             {
+                 return true
+             }
+             else if(dotation < this.budgetDisponible && (this.inArray(procedure,"AOR") || this.inArray(procedure,"AON")  || this.inArray(procedure,"AOI")))
+             {
+                 return true
+             }
+         }
+
+            },
+
+            inArray() {
+                return (tableau,valeur)=>{
+                    let length = tableau.length;
+                    for(let i = 0; i < length; i++) {
+                        if(tableau[i] == valeur) return true;
+                    }
+                    return false;
+                }
+
+            },
+
 afficheLeNomDesProcedure(){
 
-    if(this.affcicheEtapeProcedure(10000000,'PSC-SC',this.detail_marche.id)){
+    if(this.affcicheEtapeProcedure(10000000,["PSC-SC"],this.detail_marche.id)){
         return "Procédure Simplifiée de demande de Cotation(PSC Sans comité)"
     }
-    else if(this.affcicheEtapeProcedure(30000000,'PSC-AC',this.detail_marche.id))
+    else if(this.affcicheEtapeProcedure(30000000,['PSC-AC'],this.detail_marche.id))
     {
 return "Procédure Simplifiée de demande de Cotation(PSC Avec comité)"
     }
-    else if(this.affcicheEtapeProcedure(60000000,'PSL',this.detail_marche.id))
+    else if(this.affcicheEtapeProcedure(60000000,['PSL'],this.detail_marche.id))
     {
 return "Procédure Simplifiée à compétition Limitée(PSL)"
     }
-    else if(this.affcicheEtapeProcedure(100000000,'PSO',this.detail_marche.id))
+    else if(this.affcicheEtapeProcedure(100000000,['PSO'],this.detail_marche.id))
     {
 return "Procédure Simplifiée à compétition Ouverte(PSO)"
     }
     
-    else if(this.affcicheEtapeProcedure(0,'ED',this.detail_marche.id))
+    else if(this.affcicheEtapeProcedure(0,['ED',"CONV"],this.detail_marche.id))
     {
-     return "Entente diret ou Convention (ED ou CONV)"
+     return "Entente direct ou Convention (ED ou CONV)" 
     }
-     else if(100000000 < this.budgetDisponible)
+     else if(this.affcicheEtapeProcedure(100000000,['AON',"AOI","AOR"],this.detail_marche.id))
     {
 return "Appel d'Offre Ouvert(AON ou AOI ou AOR)"
     }

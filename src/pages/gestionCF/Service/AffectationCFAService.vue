@@ -91,7 +91,7 @@
 <script>
     import {mapActions, mapGetters} from "vuex";
     import {formatageSomme, partition} from "../../../Repositories/Repository";
-
+    import {admin,dcf,cf,noDCfNoAdmin} from "../../../Repositories/Auth"
     export default {
         name: "AffectationCFAService",
         data() {
@@ -112,6 +112,7 @@
                     user_id:"",
                     servicecf_id:"",
                     date_debut:"",
+                    role:1
                 },
                 formDataEcheance:{
                     marche_id:"",
@@ -174,7 +175,6 @@
                 const searchTerm = this.search.toLowerCase();
 
                 return this.listeCFNonAffeceter.filter((item) => {
-
                         return item.matricule.toLowerCase().includes(searchTerm)
                             || item.name.toLowerCase().includes(searchTerm)
                     }
@@ -316,6 +316,7 @@
                     user_id:"",
                         servicecf_id:"",
                         date_debut:"",
+                    role:1
                 },
                 this.$('#exampleModal').modal('hide');
             },
@@ -364,7 +365,11 @@
                 }else{
                     return true
                 }
-            }
+            },
+            admin:admin,
+            dcf:dcf,
+            cf:cf,
+            noDCfNoAdmin:noDCfNoAdmin,
 
         }
     }

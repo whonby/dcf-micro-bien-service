@@ -245,6 +245,18 @@
                                               </div>
                                           </div>
                                       </div>
+<!--                                      <div class="span4"  @click="goToModule(16)" v-if="!noDCfNoAdmin">-->
+<!--                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">-->
+<!--                                              &lt;!&ndash;                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>&ndash;&gt;-->
+<!--                                              <div class="timeline-text">-->
+<!--                                                  <h5>MON EQUIPE</h5>-->
+<!--                                                  <div>-->
+<!--                                                      <i style="font-size: 35px !important;" class="icon-group"></i>-->
+<!--                                                  </div>-->
+<!--&lt;!&ndash;                                                  <p> Permet de codifier les données de base</p>&ndash;&gt;-->
+<!--                                              </div>-->
+<!--                                          </div>-->
+<!--                                      </div>-->
 <!--                                      <div class="span4">-->
 <!--                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInLeft;">-->
 <!--                                              <div class="timeline-icon"><i class="fa fa-picture-o" aria-hidden="true"></i></div>-->
@@ -302,6 +314,7 @@ created(){
           this.getGestionModules()
           this.getInfrastructure()
           this.getTypeOrdrePaiement()
+          this.getTacheMarche()
 
 this.getFormeJuridiques()
 this.getRegimeImpositions()
@@ -348,7 +361,9 @@ this.getRegimeImpositions()
    this.getStructureBudgetaire()
    this.getPlanBudgetaire()
    this.getStructureActivite()
+    this.getStructureInfrastructure()
     this.getPlanActivite()
+    this.getPlanInfrastructure()
     this.getGrandeNature()
     this.getTypeUniteAdministrative()
     // this. getPlanActivite()
@@ -557,7 +572,7 @@ this.getMembreCojo()
       this.getEcheances()
     this.getMembreComiteEvaluation()
     this.getStructureDAO()
-
+this.getEntrepriseSousTraitance()
         },
 
   computed:{
@@ -652,7 +667,7 @@ return objJson.id
     ]),
    ...mapActions( 'parametreGenerauxBudgetaire', ['getStructureBudgetaire',
    'getPlanBudgetaire']),
-   ...mapActions('parametreGenerauxActivite', [ 'getStructureActivite','getPlanActivite']),
+   ...mapActions('parametreGenerauxActivite', [ 'getStructureActivite','getPlanActivite','getStructureInfrastructure','getPlanInfrastructure']),
    ...mapActions('parametreGenerauxProgrammeUnite',['getUnite', 'getZone']),
 
     ...mapActions('parametreGenerauxAdministratif',
@@ -737,7 +752,7 @@ return objJson.id
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ["getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
+       ...mapActions('bienService', ["getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",
@@ -749,7 +764,7 @@ return objJson.id
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
           "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner",
-           "getEcheances","pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO"]),
+           "getEcheances","pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO",'getEntrepriseSousTraitance']),
 
     activeMenuModuleParamGeneral(){
       this.activeMenuModuleSidcf(1)

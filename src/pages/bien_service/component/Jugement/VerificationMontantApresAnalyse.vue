@@ -55,8 +55,8 @@
           <th>Montant </th>
           <th>Delai de validation de l'offre</th>
           <th>Delai de livraison ou d'execution proposé </th>
-          <th>Rabais offert</th>
           <th>Presence Echantillons</th>
+          <th>Motif</th>
           <th>Conclusion</th>
 
         </tr>
@@ -65,11 +65,11 @@
         <tr v-for="offre in listeOffreTechniqueLotCandidat(effetFinancier.dossier_candidat_id,item.id)" :key="offre.id">
           <td @click="afficheEdite(offre.id)">Offre Technique</td>
           <td @click="afficheEdite(offre.id)">{{offre.structure_emetrice}}</td>
-          <td @click="afficheEdite(offre.id)">{{offre.montant}} </td>
+          <td @click="afficheEdite(offre.id)">{{formatageSommeSansFCFA(parseFloat(offre.montant))}} </td>
           <td @click="afficheEdite(offre.id)">{{offre.delai_validite_offre}} </td>
           <td @click="afficheEdite(offre.id)">{{offre.delai_execution}} </td>
-          <td @click="afficheEdite(offre.id)">{{offre.rabai_offert}}</td>
           <td @click="afficheEdite(offre.id)">{{offre.presence_echantillons}}</td>
+          <td @click="afficheEdite(offre.id)">{{offre.motif}}</td>
           <td @click="afficheEdite(offre.id)" v-if="offre.observation==1" style="background: green;color: white">CONFORME </td>
           <td @click="afficheEdite(offre.id)" v-else-if="offre.observation==0" style="background: red;color: white">NON CONFORME</td>
           <td @click="afficheEdite(offre.id)" v-else style="background: blue;color: white">ANALYE EN COURS</td>
@@ -84,12 +84,12 @@
   <div id="ModalModification" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
-      <h3>Information  sur Offre Financiere</h3>
+      <h3>Information  sur Offre Financière</h3>
     </div>
 
     <div class="widget-title">
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#tab8888">Information Sur Offre Financiere</a></li>
+        <li class="active"><a data-toggle="tab" href="#tab8888">Information Sur Offre Financière</a></li>
         <!-- <li class=""><a data-toggle="tab" href="#tab00050">Informations financières</a></li> -->
       </ul>
     </div>
@@ -102,7 +102,7 @@
          <div class="control-group">
               <label class="control-label">Soumissionnaire</label>
               <div class="controls">
-                <input type="text" class="span" readonly :value="afficherNumeroDossierCandidat1(EditOffreFinanciere.dossier_candidat_id)">
+                <input type="text" class="span" readonly :value="afficheNomEntreprise(afficherNumeroDossierCandidat1(afficherNumeroDossierCandidat1(EditOffreFinanciere.dossier_candidat_id)))">
               </div>
             </div>
       </td>
@@ -320,9 +320,9 @@
                               <div class="control-group">
                                 <label class="control-label">CAA moyen :</label>
                                 <div class="controls">
-                                  <input type="text" class="span" placeholder="Caa moyen ac"
-                                         v-model="editer.caa_moyen_ac_entre">
-
+<!--                                  <input type="text" class="span" placeholder="Caa moyen ac"-->
+<!--                                         v-model="editer.caa_moyen_ac_entre">-->
+                                  <money v-model="editer.caa_moyen_ac_entre" ></money>
                                 </div>
                               </div>
                             </td>
@@ -501,6 +501,15 @@
                                     <option value="1">CONFORME</option>
                                     <option value="0">NON CONFORME</option>
                                   </select>
+                                </div>
+                              </div>
+                            </td>
+                            <td v-if="editer.observation=='0'">
+                              <div class="control-group">
+                                <label class="control-label">Motif :</label>
+                                <div class="controls">
+                                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
+                                  <textarea class="span11" v-model="editer.motif"></textarea>
                                 </div>
                               </div>
                             </td>
@@ -715,6 +724,7 @@ var nouvelObjet = {
               delai_execution:this.editer.delai_execution,
               validation:this.editer.validation,
               marche_id:this.editer.marche_id,
+            motif:this.editer.motif,
               appel_offre_id:this.editer.appel_offre_id
           }
           this.modifierOffreTechnique(objet)

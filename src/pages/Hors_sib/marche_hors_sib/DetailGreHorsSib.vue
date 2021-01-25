@@ -204,8 +204,7 @@ created() {
        idmarche => idmarche.id == this.$route.params.id
    )
    console.log(this.detail_marche);
-  /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
-    console.log(this.appel_offre_marche)*/
+ 
 },
         computed: {
 

@@ -2671,3 +2671,53 @@ export const MODIFIER_MEMBRE_COMITE_EVALUATION = (state, elementModifie) =>{
 export const SUPPRIMER_MEMBRE_COMITE_EVALUATION = (state, id) =>{
     state.membre_comite_evaluations = state.membre_comite_evaluations.filter(response => response.id!=id)
 }
+
+
+
+
+
+//
+
+
+export const GET_TACHE_MARCHE= (state, tableau_motif_passation) =>{
+    state.TacheMarche = tableau_motif_passation
+}
+
+export const AJOUTER_TACHE_MARCHE = (state, elementAjout) =>{
+    state.TacheMarche.unshift(elementAjout)
+}
+
+export const MODIFIER_TACHE_MARCHE = (state, elementModifie) =>{
+    state.TacheMarche = state.TacheMarche.map(item =>{
+        if(item.id == elementModifie.id){
+            item = {...elementModifie}
+        }
+        return item
+    })
+}
+
+export const SUPPRIMER_TACHE_MARCHE = (state, id) =>{
+    state.TacheMarche = state.TacheMarche.filter(response => response.id!=id)
+}
+
+
+export const GET_ENTREPRISE_SOUS_TRAITANCE= (state, tableau_motif_passation) =>{
+    state.entreprise_soustraitant = tableau_motif_passation
+}
+
+export const AJOUTER_ENTREPRISE_SOUS_TRAITANCE = (state, elementAjout) =>{
+    state.entreprise_soustraitant.unshift(elementAjout)
+}
+
+export const MODIFIER_ENTREPRISE_SOUS_TRAITANCE = (state, elementModifie) =>{
+    state.entreprise_soustraitant = state.entreprise_soustraitant.map(item =>{
+        if(item.id == elementModifie.id){
+            item = {...elementModifie}
+        }
+        return item
+    })
+}
+
+export const SUPPRIMER_ENTREPRISE_SOUS_TRAITANCE = (state, id) =>{
+    state.entreprise_soustraitant = state.entreprise_soustraitant.filter(response => response.id!=id)
+}

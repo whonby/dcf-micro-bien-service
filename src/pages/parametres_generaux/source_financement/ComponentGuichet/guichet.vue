@@ -17,10 +17,10 @@
                    <tr class="odd gradeX" v-for="(source, index) in listeGuichet"
                                         :key="source.id">
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{source.code_guichet || 'Non renseigné'}}</td>
+                                            {{source.code || 'Non renseigné'}}</td>
 
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{source.libelle_guichet || 'Non renseigné'}}</td>
+                                            {{source.libelle || 'Non renseigné'}}</td>
                                        
                                         
                                             <td>
@@ -51,14 +51,14 @@
                         <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="formData.code_guichet" class="span" placeholder="Saisir le code" />
+                <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
               </div>
             </div>
 
             <div class="control-group">
               <label class="control-label">Libellé:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle_guichet" class="span" placeholder="Saisir le libellé" />
+                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libellé" />
               </div>
             </div>  
             </div>
@@ -124,9 +124,9 @@ export default {
         //     selectedFile:"",
 
         formData:{
-              code_guichet:"",
+              code:"",
               parent:"",
-              libelle_guichet:""
+              libelle:""
             
         },
        // message_offre:"",
@@ -206,9 +206,9 @@ export default {
      this.ajouterSourceFinancement(this.formData);
      //console.log(nouvelObjet)
       this.formData = {
-                     code_guichet:"",
+              code:"",
               parent:"",
-              libelle_guichet:""
+              libelle:""
                 }
     // let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
     // marcheObjet.attribue=1

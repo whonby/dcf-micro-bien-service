@@ -515,7 +515,7 @@ libelleFamilleEquipement
                   
                      <td>
                        <router-link
-                        :to="{name : '', params: {id:BesoinImmo[0].id}}"
+                        :to="{name : 'listeDesArticlesAReparer', params: {id:BesoinImmo[0].id}}"
                         class="btn btn-success"
                         title="Voir Article"
                       >

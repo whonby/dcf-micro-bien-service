@@ -156,7 +156,7 @@
  <div id="modalAjouterElementEnfant" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter un plan organigramme UA</h3>
+                <h3>{{afficherTailleStuctureService(this.parentDossier.ua_id)}}Ajouter un plan organigramme UA{{afficherIdStructureOrganigramme(this.nouvelElementEnfant.structure_organigramme_ua_id)}}</h3>
               </div>
               <div class="modal-body">
                 <table class="table table-bordered table-striped">
@@ -203,33 +203,53 @@
                 <div class="control-group" >
                   <label class="control-label">Service</label>
                   <div class="controls">
-                    <select v-model="nouvelElementEnfant.libelle" class="span5" >
+                    <!-- <select v-model="nouvelElementEnfant.libelle" class="span5" >
                       <option
-                        v-for="typeUniteA in groupeServiceNorme"
-                        :key="typeUniteA[0].id"
-                        :value="typeUniteA[0].service_id"
-                      >{{afficheServiceLibelle(typeUniteA[0].service_id)}}</option>
-                    </select>
+                        v-for="typeUniteA in services"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select> -->
+                     <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="services"
+                                                   v-model="nouvelElementEnfant.libelle"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                   </div>
                 </div>
             </template>
             <template v-else-if="afficherIdStructureOrganigramme(nouvelElementEnfant.structure_organigramme_ua_id) == afficherTailleStuctureFonction(parentDossier.ua_id)">
  <div class="control-group" >
-                  <label class="control-label">Fonction</label>
+                  <label class="control-label">{{afficherIdStructureOrganigramme(this.nouvelElementEnfant.structure_organigramme_ua_id)}}Fonction{{nouvelElementEnfant.libelle}}</label>
                   <div class="controls">
-                    <select v-model="nouvelElementEnfant.libelle" class="span5">
+                    <!-- <select v-model="nouvelElementEnfant.libelle" class="span5">
                       <option
-                        v-for="typeUniteA in groupeFonctionNormeEquipe"
-                        :key="typeUniteA[0].id"
-                        :value="typeUniteA[0].fonction_id"
-                      >{{afficheFonctionLibelle(typeUniteA[0].fonction_id)}}</option>
-                    </select>
+                        v-for="typeUniteA in fonctions"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select> -->
+                    <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="fonctions"
+                                                   v-model="nouvelElementEnfant.libelle"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                   </div>
                 </div>
             </template>
             <template v-else-if="afficherIdStructureOrganigramme(nouvelElementEnfant.structure_organigramme_ua_id) == afficherTailleStuctureDirection(parentDossier.ua_id)">
                 <div class="control-group" >
-                  <label class="control-label">Direction</label>
+                  <label class="control-label">{{nouvelElementEnfant.libelle}}Direction{{parentDossier.libelle}}</label>
                   <div class="controls">
                     <select v-model="nouvelElementEnfant.libelle" class="span5" >
                       <option
@@ -329,13 +349,23 @@
                 <div class="control-group" >
                   <label class="control-label">Service</label>
                   <div class="controls">
-                    <select v-model="editPlanOrganigrammeUa.libelle" class="span5" >
+                    <!-- <select v-model="editPlanOrganigrammeUa.libelle" class="span5" >
                       <option
-                        v-for="typeUniteA in groupeServiceNorme"
-                        :key="typeUniteA[0].id"
-                        :value="typeUniteA[0].libelle"
-                      >{{afficheServiceLibelle(typeUniteA[0].service_id)}}</option>
-                    </select>
+                        v-for="typeUniteA in services"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select> -->
+                     <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="services"
+                                                   v-model="editPlanOrganigrammeUa.libelle"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                   </div>
                 </div>
             </template>
@@ -352,13 +382,23 @@
  <div class="control-group" >
                   <label class="control-label">Fonction</label>
                   <div class="controls">
-                    <select v-model="editPlanOrganigrammeUa.libelle" class="span5">
+                    <!-- <select v-model="editPlanOrganigrammeUa.libelle" class="span5">
                       <option
-                        v-for="typeUniteA in groupeFonctionNormeEquipe"
-                        :key="typeUniteA[0].id"
-                        :value="typeUniteA[0].libelle"
-                      >{{afficheFonctionLibelle(typeUniteA[0].fonction_id)}}</option>
-                    </select>
+                        v-for="typeUniteA in fonctions"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select> -->
+                    <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="fonctions"
+                                                   v-model="editPlanOrganigrammeUa.libelle"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                   </div>
                 </div>
             </template>
@@ -413,16 +453,21 @@
   
 </template>
    
+
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
 import {admin,dcf,cf,noDCfNoAdmin} from '../../../Repositories/Auth';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
+import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
 import TreeOrganigramme from './TreeOrganigramme'
 export default {
   components: {
-    TreeOrganigramme
+    TreeOrganigramme,
+    ModelListSelect,
+
   },
   data() {
     return { 
@@ -492,7 +537,7 @@ export default {
 // methode pour maper notre guetter
 ...mapGetters('personnelUA', ['all_acteur_depense','fonctions']),
    ...mapGetters('parametreGenerauxAdministratif', [ 'getterstructuresOrganisationUa',
-    'getterplanOrganisationUa']) ,
+    'getterplanOrganisationUa']),
 dcf:dcf,
 cf:cf,
 admin:admin,
@@ -518,6 +563,16 @@ NivauStructureParUa() {
         }
       };
     },
+    afficheid(){
+  return id =>{
+        if(id!=null && id!=""){
+          const objet = this.directions.find(item => item.id==id)
+          if(objet) 
+          return objet.d_ua_id
+        }
+        return null
+      }
+},
  afficherUAParDroitAccess() {
        // const st = this.search.toLowerCase();
         if (this.cf){
@@ -889,7 +944,8 @@ this.$("#modalAjouterElementEnfant").modal('hide');
       fonction_id:this.afficheIdFonctionLibelle(this.nouvelElementEnfant.libelle),
        serviceua_id:this.nouvelElementEnfant.libelle,
        ua_id:this.afficherIdUaparDossierParent(this.parentDossier.ua_id),
-         code:this.parentDossier.code
+         code:this.parentDossier.code,
+          libelle:this.afficheIdFonctionLibelle(this.nouvelElementEnfant.libelle)
       };
        this.ajouterPlanOrganigrammeUa(nouvelObjet2)
 this.$("#modalAjouterElementEnfant").modal('hide');

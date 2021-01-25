@@ -5,7 +5,6 @@
 
    
 
-    
                 
                 <div class="span4"></div>
                                 <div class="span4"></div>
@@ -21,7 +20,7 @@
                                     <tr>
 
                                          
-                     <th>N° lot</th>
+                     <th>N° lot{{macheid}}</th>
                     
                     <th>Entreprise</th>
                     
