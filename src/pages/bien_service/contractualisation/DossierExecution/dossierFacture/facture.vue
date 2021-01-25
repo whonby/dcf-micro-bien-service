@@ -1,5 +1,4 @@
-detail_marche
-Ajouter Facture
+
 <template>
 
 <div>
@@ -15,7 +14,7 @@ Ajouter Facture
                     <tr>
                       <td>
 <div class="control-group">
-                            <label class="control-label">Type de procedure</label>
+                            <label class="control-label">Type de procédure</label>
                             <div class="controls">
                              
                               <select v-model="formData.tprocedure" class="span12">

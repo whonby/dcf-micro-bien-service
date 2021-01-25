@@ -1,8 +1,4 @@
-afficheNomFournisseur
-veifautreengagement
-anneeAmort
-afficheUa_id
-recupererTypeProcedure
+
 
 <template>
 
