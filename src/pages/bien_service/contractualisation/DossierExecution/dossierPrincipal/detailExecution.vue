@@ -22,14 +22,14 @@ decision_cf
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
-                               <th style="font-size:12px;font-weight:bold;">Reference marché</th>
+                               <th style="font-size:12px;font-weight:bold;">Référence marché</th>
                                <th style="font-size:12px;font-weight:bold;">Numéro marché</th>
                                 <th style="font-size:12px;font-weight:bold;">Objet marché</th>
                                 
                              
                                 <th style="font-size:12px;font-weight:bold;">Type de marché</th>
                                 <th style="font-size:12px;font-weight:bold;">Procédure de passation </th>
-                                <th style="font-size:12px;font-weight:bold;">Unite administrative</th>
+                                <th style="font-size:12px;font-weight:bold;">Unité administrative</th>
                                 <th style="font-size:12px;font-weight:bold;">Activité</th>
                     <th style="font-size:12px;font-weight:bold;">Imputation</th>
                        <th style="font-size:12px;font-weight:bold;">Montant de base</th>
@@ -127,7 +127,7 @@ decision_cf
                                 <li ><a data-toggle="tab" href="#tab15550" v-if="afficherTypeProcedure(detail_marche.id) == 2">Réalité service fait</a></li>
                                 <li ><a data-toggle="tab" href="#tab120120" v-if="afficherTypeProcedure(detail_marche.id) == 2 || afficherTypeProcedure(detail_marche.id) == 1">Liquidation</a></li>
                                 <li><a data-toggle="tab" href="#tab20" v-if="afficherTypeProcedure(detail_marche.id) == 2  || afficherTypeProcedure(detail_marche.id) == 1">Mandat</a></li>
-                               <li ><a data-toggle="tab" href="#tab45785" >Decompte</a></li>
+                               <li ><a data-toggle="tab" href="#tab45785" >Décompte</a></li>
                               <li ><a data-toggle="tab" href="#Financement" >Financement</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li> -->
@@ -163,8 +163,8 @@ decision_cf
                          <div id="tab9563" class="tab-pane active">
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab9326">Decision Emetteur</a></li>
-                                <li ><a data-toggle="tab" href="#tab03215">Decision Controleur financier</a></li>                 
+                                <li class="active"><a data-toggle="tab" href="#tab9326">Décision Emetteur</a></li>
+                                <li ><a data-toggle="tab" href="#tab03215">Decision Contrôleur Financier</a></li>                 
                             </ul>
                         </div>
                          <div class="widget-content tab-content">
@@ -185,7 +185,7 @@ decision_cf
                          <div id="tab7896532" class="tab-pane active">
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab9326">Decision Controlleur Financier</a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab9326">Décision Contrôleur Financier</a></li>
                                                   
                             </ul>
                         </div>
@@ -204,7 +204,7 @@ decision_cf
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#tab789654">Service Bénéficiaire</a></li>
-                                  <li class=""><a data-toggle="tab" href="#tab895632">Controlleur Financier</a></li>
+                                  <li class=""><a data-toggle="tab" href="#tab895632">Contrôleur Financier</a></li>
                                                   
                             </ul>
                         </div>
@@ -217,7 +217,7 @@ decision_cf
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#tab000235">Emetteur</a></li>
-                                  <li class=""><a data-toggle="tab" href="#tab89752241" >Controlleur Financier</a></li>
+                                  <li class=""><a data-toggle="tab" href="#tab89752241" >Contrôleur Financier</a></li>
                                   <li class=""><a data-toggle="tab" href="#tab452123" >Ordonnateur</a></li>
                                                   
                             </ul>
@@ -243,8 +243,8 @@ decision_cf
                          <div id="tab9563" class="tab-pane active">
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab9326">Decision Emetteur</a></li>
-                                <li ><a data-toggle="tab" href="#tab03215">Decision Controleur financier</a></li>                 
+                                <li class="active"><a data-toggle="tab" href="#tab9326">Décision Emetteur</a></li>
+                                <li ><a data-toggle="tab" href="#tab03215">Décision Contrôleur Financier</a></li>                 
                             </ul>
                         </div>
                          <div class="widget-content tab-content">
@@ -265,7 +265,7 @@ decision_cf
                          <div id="tab104" class="tab-pane active">
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab9326">Decision Controlleur Financier</a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab9326">Décision Contrôleur Financier</a></li>
                                                   
                             </ul>
                         </div>
@@ -284,7 +284,7 @@ decision_cf
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#realiteServiceFaitSB">Service Bénéficiaire</a></li>
-                                  <li class=""><a data-toggle="tab" href="#realiteServiceFaitCf">Controlleur Financier</a></li>
+                                  <li class=""><a data-toggle="tab" href="#realiteServiceFaitCf">Contrôleur Financier</a></li>
                                                   
                             </ul>
                         </div>
@@ -297,7 +297,7 @@ decision_cf
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#tab0002353">Emetteur</a></li>
-                                  <li class=""><a data-toggle="tab" href="#tab897522414" >Controlleur Financier</a></li>
+                                  <li class=""><a data-toggle="tab" href="#tab897522414" >Contrôleur Financier</a></li>
                                   <li class=""><a data-toggle="tab" href="#tab4521232" >Ordonnateur</a></li>
                                                   
                             </ul>

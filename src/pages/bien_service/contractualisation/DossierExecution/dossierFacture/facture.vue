@@ -72,7 +72,7 @@
               
                <td>
                 <div class="control-group">
-                  <label class="control-label">Numero facture</label>
+                  <label class="control-label">Numéro facture</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -100,7 +100,7 @@
               </td>
                <td colspan="">
                 <div class="control-group">
-                   <label class="control-label">Unite administrative</label>
+                   <label class="control-label">Unité administrative</label>
                 <div class="controls">
                  <input
                     type="text"
@@ -131,7 +131,7 @@
               
                <td>
                 <div class="control-group">
-                <label class="control-label">exonéré</label>
+                <label class="control-label">Exonéré</label>
                 <div class="controls">
                   <select v-model="formData1.exonere" class="span">
                   
@@ -528,7 +528,7 @@
               
                <td>
                 <div class="control-group">
-                  <label class="control-label">Numero facture</label>
+                  <label class="control-label">Numéro facture</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -556,7 +556,7 @@
               </td>
                <td colspan="">
                 <div class="control-group">
-                   <label class="control-label">Unite administrative</label>
+                   <label class="control-label">Unité administrative</label>
                 <div class="controls">
                  <input
                     type="text"
@@ -587,7 +587,7 @@
               
                <td>
                 <div class="control-group">
-                <label class="control-label">exonéré</label>
+                <label class="control-label">Exonéré</label>
                 <div class="controls">
                   <select v-model="formData1.exonere" class="span">
                   
@@ -1012,7 +1012,7 @@
               </td>
                <td colspan="">
                 <div class="control-group">
-                   <label class="control-label">Unite administrative</label>
+                   <label class="control-label">Unité administrative</label>
                 <div class="controls">
                  <input
                     type="text"
@@ -1043,7 +1043,7 @@
               
                <td>
                 <div class="control-group">
-                <label class="control-label">exonéré</label>
+                <label class="control-label">Exonéré</label>
                 <div class="controls">
                   <select v-model="formData1.exonere" class="span">
                   

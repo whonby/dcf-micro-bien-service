@@ -19,7 +19,7 @@
                                     <tr>
 
                                          
-                      <th>N° du marche </th>
+                      <th>N° du marché </th>
                                          <th>N° du mandat</th>
                                         <th>N° bordereau mandat</th>
                                         <th>N° demande engagement</th>
@@ -27,8 +27,8 @@
                                         <!-- <th>Type procedure</th> -->
                                                     
                                 <th>Montant Mandat</th>
-                                 <th >Decision de emetteur</th>
-                                <th title="Date validation Emetteur">Date Emetteur</th>
+                                 <th >Decision de l'émetteur</th>
+                                <th title="Date validation Emetteur">Date émetteur</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -270,7 +270,7 @@ afficherModalProcedureFacture() {
 
    if(this.DisponibleBudgetaireApresLiquidation < this.montantMarcheAvecAvenant)
  {
-alert("Montant du marche est supperieure au Budget")
+alert("Le montant du marché est supérieur au Budget")
 }
 else{
   this.$("#modalTypeEngagement").modal({

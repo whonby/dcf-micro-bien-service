@@ -31,7 +31,7 @@
               </td>
               <td colspan="3">
                  <div class="control-group">
-            <label class="control-label">Objet Marche</label>
+            <label class="control-label">Objet Marché</label>
             <div class="controls">
               <textarea name="" id="" cols="2" rows="2"  readonly class="span6" :value="afficherObjetMarche(editActeEffetFinancier.marche_id)"></textarea>
               
@@ -85,7 +85,7 @@
               </td>
                <td>
                  <div class="control-group">
-            <label class="control-label">Date résiliation</label>
+            <label class="control-label">Date de résiliation</label>
             <div class="controls">
               <input
                 type="date"
@@ -129,7 +129,7 @@
 <div id="modifierActeEF" class="modal hide grdirModalActeEffet">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier acte effet financier</h3>
+                <h3>Modifier acte à effet financier</h3>
             </div>
             <div class="modal-body">
 
@@ -168,7 +168,7 @@
 
                         <td>
                             <div class="control-group">
-                                <label class="control-label"> date d'approbation</label>
+                                <label class="control-label"> Date d'approbation</label>
                                 <div class="controls">
                                     <input
                                             type="date"
@@ -204,7 +204,7 @@
 
                         <td colspan="4" width="250">
                             <div class="control-group">
-                                <label class="control-label">Libellé acte:</label>
+                                <label class="control-label">Libellé de l'acte:</label>
                                 <div class="controls">
                                     <textarea   v-model="editActeEffetFinancier.libelle_act"   class="textarea_editor span11" rows="3" placeholder="Entrer le libellé ..."></textarea>
                                 </div>
@@ -218,7 +218,7 @@
                     <tr>
                         <td>
                             <div class="control-group">
-                                <label class="control-label">Reference acte</label>
+                                <label class="control-label">Référence de l'acte</label>
                                 <div class="controls">
                                     <input type="text" v-model="editActeEffetFinancier.reference_act"
                                            class="span"
@@ -268,7 +268,7 @@
 
                         <td>
                             <div class="control-group">
-                                <label class="control-label">Date ordre de service demarrage</label>
+                                <label class="control-label">Date ordre de service démarrage</label>
                                 <div class="controls">
                                     <input type="date" v-model="editActeEffetFinancier.date_odre_service"
                                            class="span"
@@ -281,7 +281,7 @@
 
                         <td>
                             <div class="control-group">
-                                <label class="control-label" title=" ">Date fin exécution</label>
+                                <label class="control-label" title=" ">Date de fin d'exécution</label>
                                 <div class="controls">
                                       <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
                                            class="span"
@@ -307,7 +307,7 @@
 
                         <td>
                             <div class="control-group">
-                                <label class="control-label" title=" ">Date de reception definitive</label>
+                                <label class="control-label" title=" ">Date de réception définitive</label>
                                 <div class="controls">
                                     <input type="date" v-model="editActeEffetFinancier.date_reception"
                                            class="span"
@@ -348,7 +348,7 @@
                                <li class="active"><a data-toggle="tab" href="#tab2078"> Tous les contrats<span class="badge badge-inverse" >{{nombreDeContrat}}</span></a></li>
                                
                                <li ><a data-toggle="tab" href="#tab100">  Contrat Planifié <span class="badge badge-important" >   {{nombreContratEnPlanification}}</span></a></li>
-                                <li ><a data-toggle="tab" href="#tab10">    Contrat en cours de Contratualisation  <span class="badge badge-success" >{{nombreContratEnContratualisation}}</span></a></li>
+                                <li ><a data-toggle="tab" href="#tab10">    Contrat en cours de Contractualisation  <span class="badge badge-success" >{{nombreContratEnContratualisation}}</span></a></li>
                                 <!-- <li><a data-toggle="tab" href="#tab20">  Contrat signé<span class="badge badge-warning" >   {{0}}   </span></a></li> -->
                                  <!-- <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{afficheNombreMarcheResilier}}</span></a></li>
                                   <li><a data-toggle="tab" href="#tab208">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li> -->
@@ -362,7 +362,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Contrats en cours de Contratualisation</h5>
+              <h5>Liste des Contrats en cours de Contractualisation</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -372,7 +372,7 @@
                 <thead>
                   <tr>
                 <th>Année</th>
-                 <th title="unite administrative">UA</th>
+                 <th title="Unité Administrative">UA</th>
                       <th>Type marché</th>
                    
                     <th>Activité</th>
@@ -412,7 +412,7 @@
                     <td>
                      <button 
                       v-if="marche.attribue== 1"  class="btn  btn-success">
-                <span title="CONTRAT EN COURS DE CONTRATUALISATION">CT</span>
+                <span title="CONTRAT EN COURS DE CONTRACTUALISATION">CT</span>
        
                 </button>
             
@@ -421,7 +421,7 @@
                        <td >
                          
                       <router-link :to="{ name: 'detailPersonnel', params: { id: marche.id }}"
-                class="btn btn-default " title="Continué le processuce de contratualisation">
+                class="btn btn-default " title="Continuez le processus de contractualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link> 
                        </td>
@@ -429,7 +429,7 @@
 
                      <div class="btn-group">
                    <button @click.prevent="RetourExecution(index)"  class="btn btn-info">
-                <span class=""><i class="icon-pencil" title="aller en execution"></i></span></button>  
+                <span class=""><i class="icon-pencil" title="Aller en exécution"></i></span></button>  
                     
               <!-- <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button> -->
@@ -501,17 +501,17 @@
                    <td>
                      <button 
                       v-if="marche.attribue == 2"  class="btn  btn-warning">
-                <span title="Contrat Executé" style="">EX</span>
+                <span title="Contrat Exécuté" style="">EX</span>
        
                 </button>
                 <button 
                       v-else-if="marche.attribue == 1"  class="btn  btn-success">
-                <span title=" Contrat en cours de Contratualisation">CT</span>
+                <span title=" Contrat en cours de Contractualisation">CT</span>
        
                 </button>
                  <button 
                       v-else-if=" marche.attribue == 3"  class="btn  btn-info">
-                <span title="Contrat Resilié" >RE</span>
+                <span title="Contrat Résilié" >RE</span>
        
                 </button>
                  <button 
@@ -593,7 +593,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des contrats en executions</h5>
+              <h5>Liste des contrats en exécutions</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -604,8 +604,8 @@
                 <thead>
                   <tr>
                 <th>Ann&eacute;e</th>
-                 <th title="unite administrative">UA</th>
-                      <th>Type du marché</th>
+                 <th title="Unité Administrative">UA</th>
+                      <th>Type de marché</th>
                    
                     <th>Activité</th>
                     <th>Imputation</th>
@@ -694,7 +694,7 @@
                 <thead>
                  <tr>
                 <th>Ann&eacute;e</th>
-                 <th title="unite administrative">UA</th>
+                 <th title="Unité Administrative">UA</th>
                       <th>Type de marché</th>
                    
                     <th>Activité</th>
@@ -746,7 +746,7 @@
 
 
                      <router-link :to="{ name: 'detailPersonnel', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail marche">
+                class="btn btn-default " title="Détail marché">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link> 
 
@@ -805,7 +805,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Contrats résiliés</h5>
+              <h5>Liste des contrats résiliés</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -815,7 +815,7 @@
                 <thead>
                   <tr>
                 <th>Ann&eacute;e</th>
-                <th>Unité administrative</th>
+                <th>Unité Administrative</th>
                  <th>Numéro du marché</th>
 
                  <th>Imputation</th>
@@ -892,7 +892,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des Marches Terminés</h5>
+              <h5>Listes des Marchés Terminés</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -903,7 +903,7 @@
                   <tr>
                
                 <th>Ann&eacute;e</th>
-                 <th title="unite administrative">UA</th>
+                 <th title="Unité Administrative">UA</th>
                       <th>Type de marché</th>
                     <th>Imputation</th>
                        <th>Objet du marché</th>
@@ -942,7 +942,7 @@
 <td>
                      <button 
                       v-if="afficherAttributMarche(marche.marche_id) == 5"  class="btn  btn-inverse">
-                <span title="CONTRAT TERMINER">TE</span>
+                <span title="CONTRAT TERMINE">TE</span>
        
                 </button>
                  <!-- <router-link :to="{ name: 'Engagement', params: { id: marche.marche_id }}"
@@ -1005,7 +1005,7 @@
     <tr>
       <td>
             <div class="control-group">
-                          <label class="control-label">Année Budgetaire</label>
+                          <label class="control-label">Année Budgétaire</label>
                           <div class="controls ">
                       
                        <input
@@ -1019,13 +1019,13 @@
         </td>
          <td>
        <div class="control-group">
-      <label class="control-label">Refencence marché</label>
+      <label class="control-label">Référence du marché</label>
       <div class="controls">
         <input
           type="text"
           v-model="formData.reference_marche"
           class="span4"
-          placeholder="Saisir le libelle_type"
+          placeholder="Saisir la référence du marché"
         />
       </div>
      </div>
@@ -1050,7 +1050,7 @@
          
           v-model="formData.objet"
           class="span4" rows="1"
-          placeholder="Saisir le text"
+          placeholder="Saisir le texte"
         ></textarea>
       </div>
      </div>
@@ -1059,7 +1059,7 @@
       <tr>
        <td>
          <div class="control-group">
-      <label class="control-label" title="unite administrative">UA</label>
+      <label class="control-label" title="Unité Administrative">UA</label>
       <div class="controls">
       <select v-model="formData.unite_administrative_id" class="span4">
          <option v-for="plans in groupUa" 
@@ -1086,7 +1086,7 @@
          <td>
         
          <div class="control-group">
-            <label class="control-label">Activite</label>
+            <label class="control-label">Activité</label>
             <div class="controls">
               <!-- <select v-model="editMarche.activite_id" :readOnly="deverouactivite" class="span4">
                <option
@@ -1110,7 +1110,7 @@
          
          <td>
         <div class="control-group">
-         <label class="control-label">Activite</label>
+         <label class="control-label">Activité</label>
           <div class="controls">
        <select v-model="formData.activite_id" :readOnly="deverouactivite">
         <option
@@ -1130,13 +1130,13 @@
       <tr>
          <td>
            <div class="control-group">
-      <label class="control-label">Imputation Budgetaire</label>
+      <label class="control-label">Imputation Budgétaire</label>
       <div class="controls">
         <input
           type="text"
           :value="ImputationBudget"
           class="span4"
-          placeholder="Saisir le Imputation"
+          placeholder="Saisir l'Imputation"
           readonly
         />
       </div>
@@ -1183,7 +1183,7 @@
            <td colspan="">
    
           <div class="control-group">
-           <label class="control-label">procedure passation</label>
+           <label class="control-label">Procédure passation</label>
           <div class="controls">
  
           <select v-model="formData.procedure_passation_id" class="span" :readOnly="deverouPassation">
@@ -1334,7 +1334,7 @@
      <tr>
        <td>
              <div class="control-group">
-                           <label class="control-label">Année Budgetaire</label>
+                           <label class="control-label">Année Budgétaire</label>
                            <div class="controls ">
                        
                         <input
@@ -1348,13 +1348,13 @@
          </td>
           <td>
             <div class="control-group">
-       <label class="control-label">Refencence marché</label>
+       <label class="control-label">Référence du marché</label>
        <div class="controls">
          <input
            type="text"
            v-model="editMarche.reference_marche"
            class="span4"
-           placeholder="Saisir le libelle_type"
+           placeholder="Saisir la référence du marché"
          />
        </div>
      </div>
@@ -1379,7 +1379,7 @@
           
            v-model="editMarche.objet"
            class="span4" rows="1"
-           placeholder="Saisir le text"
+           placeholder="Saisir le texte"
          ></textarea>
        </div>
      </div>
@@ -1389,7 +1389,7 @@
        <tr>
         <td>
           <div class="control-group">
-       <label class="control-label" title="unite administrative">UA</label>
+       <label class="control-label" title="Unité Administrative">UA</label>
        <div class="controls">
        <select v-model="editMarche.unite_administrative_id" class="span4">
           <option v-for="plans in groupUa" 
@@ -1454,7 +1454,7 @@
        <tr>
           <td>
             <div class="control-group">
-       <label class="control-label">Imputation Budgetaire</label>
+       <label class="control-label">Imputation Budgétaire</label>
        <div class="controls">
          <input
            type="text"
@@ -1507,7 +1507,7 @@
           <td colspan="">
          
           <div class="control-group">
-       <label class="control-label">procedure passation</label>
+       <label class="control-label">Procédure passation</label>
        <div class="controls">
        <!-- <input
            type="text"
@@ -1628,7 +1628,7 @@
            type="text"
            v-model="editMarche.Bénéficiaire"
            class="span4"
-           placeholder="Saisir Bénéficiaire"
+           placeholder="Saisir le Bénéficiaire"
          />
        </div>
      </div>

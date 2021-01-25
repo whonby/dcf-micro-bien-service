@@ -83,7 +83,7 @@
                         
                         <td>
                            <div class="control-group">
-                            <label class="control-label">Ligne Budgetaire</label>
+                            <label class="control-label">Ligne Budgétaire</label>
                             <div class="controls">
                               
                                <div class="controls">
@@ -94,7 +94,7 @@
                         </td>
                         <td >
                           <div class="control-group">
-                            <label class="control-label">Imputation budgetaire</label>
+                            <label class="control-label">Imputation budgétaire</label>
                             <div class="controls">
                               <input type="text" class="span" :value="afficherInputationBudgetaire(afficherIdMarche(detail_Facture.id))" readonly/>
                             </div>
@@ -121,7 +121,7 @@
                       <tr>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation Iniatiale(crédits autorises)</label>
+                            <label class="control-label">Dotation Iniatiale (crédits autorisés)</label>
                             <div class="controls">
                               <input type="text" class="span" :value="afficherMontantBudgetaireInitial(afficherInputationBudgetaire(afficherIdMarche(detail_Facture.id)))" readonly/>
                             </div>
@@ -213,7 +213,7 @@
     <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Exercice Budgetaire</label>
+                            <label class="control-label">Exercice Budgétaire</label>
                             
                                
                              <div class="controls">
@@ -258,7 +258,7 @@
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Nature depense</label>
+                            <label class="control-label">Nature dépense</label>
                              <div class="controls">
                                  <input
                                 type="text"
@@ -291,7 +291,7 @@
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Activite</label>
+                            <label class="control-label">Activité</label>
                             <div class="controls">
                              
                                <input
@@ -307,7 +307,7 @@
                           </td>
                           <td>
                              <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
+                            <label class="control-label">Unité administrative</label>
                             <div class="controls">
                                <input
                                 type="text"
@@ -323,7 +323,7 @@
                         </td>
                           <td>
                            <div class="control-group">
-                            <label class="control-label">Type Procedure</label>
+                            <label class="control-label">Type Procédure</label>
                             
                                <div class="controls">
                               <input
@@ -359,7 +359,7 @@
                         </td>
                        <td>
                             <div class="control-group">
-                              <label class="control-label">Réf. Engagement  juridique</label>
+                              <label class="control-label">Réf. Engagement juridique</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -371,7 +371,7 @@
                           </td>
                            <td>
                             <div class="control-group">
-                              <label class="control-label">Numero OP/AT</label>
+                              <label class="control-label">Numéro OP/AT</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -396,7 +396,7 @@
                   <tr>
                           <td>
                          <div class="control-group">
-                            <label class="control-label">Numero mandat</label>
+                            <label class="control-label">Numéro mandat</label>
                             <div class="controls">
                               <input type="text" class="span" v-model="formData.numero_mandat"/>
                             </div>
@@ -405,7 +405,7 @@
                         
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Numero Bordereau</label>
+                            <label class="control-label">Numéro Bordereau</label>
                             <div class="controls">
                               <input type="text" class="span" v-model="formData.numero_bordereau"/>
                             </div>
@@ -414,7 +414,7 @@
                  
                            <td>
                          <div class="control-group">
-                            <label class="control-label">Date de reception dossier</label>
+                            <label class="control-label">Date de réception dossier</label>
                             <div class="controls">
                               <input type="date" class="span" v-model="formData.date_reception_cf"/>
                             </div>
@@ -568,7 +568,7 @@
                           </td>
                          <td>
                             <div class="control-group">
-                              <label class="control-label">piece justificative</label>
+                              <label class="control-label">Pièce justificative</label>
                               <div class="controls">
                                 <input
                                   type="file"
@@ -818,7 +818,7 @@ afficheLibelleTypeMarche() {
 
 commparerMontantGleEtMontantFacture(){
 if(this.montantGeneralMandat > this.detail_Facture.prix_propose_ttc ){
-alert("Montant demande est supperieur a la facture")
+alert("Le montant demandé est supérieur à la facture")
 }
 else{
   return this.montantGeneralMandat

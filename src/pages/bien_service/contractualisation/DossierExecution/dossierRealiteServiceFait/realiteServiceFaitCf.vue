@@ -6,7 +6,7 @@
 <div id="decisionServiceRealite" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Decision CF</h3>
+        <h3>Décision CF</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -45,7 +45,7 @@
                <tr>
                  <td>
                     <div class="control-group">
-                            <label class="control-label">Libelle motif </label>
+                            <label class="control-label">Libellé motif </label>
                             <div class="controls">
                                <select v-model="editServiceRealite.motif_controleur" class="span">
                                  <option value=""></option>
@@ -58,7 +58,7 @@
                  </td>
                   <td>
                                <div class="control-group">
-                            <label class="control-label">Date Decision CF :</label>
+                            <label class="control-label">Date Décision CF :</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editServiceRealite.date_controleur_financier"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->

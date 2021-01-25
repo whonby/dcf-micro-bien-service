@@ -10,13 +10,13 @@
                                     <tr>
 
                                         <th>Année</th>
-                                          <th title="numero de  demande engagement">N°demande engagement</th>
-                                <th title="numero de bordereau">N°bordereau engagement</th>
-                                 <th title="numero de l'engagement">N°engagement</th>
+                                          <th title="numero de  demande engagement">N° demande d'engagement</th>
+                                <th title="numero de bordereau">N° bordereau d'engagement</th>
+                                 <th title="numero de l'engagement">N° d'engagement</th>
                                 <th title="programme/dotation">Prog/Dotat</th>
                                 <!-- <th>Action Programmatique</th>
                                 <th>Activite</th> -->
-                                <th title="unite administrative">Ua</th>
+                                <th title="unite administrative">UA</th>
                                  <th>Imputation</th>
                                   <th title="ligne budgetaire">Section</th>
                                   <th>Montant</th>
