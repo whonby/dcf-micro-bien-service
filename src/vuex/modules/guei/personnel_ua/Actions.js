@@ -1710,7 +1710,7 @@ export function supprimerFamilleFonction({ commit }, id) {
                .then(() => dialog.close());
            });
        }
-
+       modificationActeur
 export function modifierFamilleFonction({ commit }, nouveau) {
          asyncLoading(
            axios.put("/update_FamilleFonction/" + nouveau.id, {

@@ -177,7 +177,15 @@
                         
             </tr>
             <tr>
-               <td colspan="2">
+              <td colspan="">
+                     <div class="control-group">
+                                                    <label class="control-label">Email</label>
+                                                    <div class="controls">
+                                                        <input type="text" :value="detail.email"  placeholder="" class="span12"/>
+                                                    </div>
+                                                </div>
+                </td>
+               <td colspan="">
                      <div class="control-group">
                                                     <label class="control-label">Nom du pere:</label>
                                                      <div class="controls">
@@ -217,7 +225,7 @@
   <div class="modal-body">
         <table class="table table-bordered table-striped">
                <tr>
-                           <td>
+                           <!-- <td>
                      <div class="control-group">
                                                     <label class="control-label">Unite de Zone</label>
                                                     <div class="controls">
@@ -230,38 +238,79 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                </td>
+                </td> -->
                
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Service</label>
                                                     <div class="controls">
-                                                         <select v-model="detail.service_id" :disabled="verrouilleService" class="span12">
+                                                         <!-- <select v-model="detail.service_id" :disabled="verrouilleService" class="span12">
                                                             <option></option>
                                                             <option v-for="item in afficheService(detail.unite_administrative_id)" :key="item.id" :value="item.serviceua_id">
                                                                 {{afficheServicelibelle(item.serviceua_id)}}
                                                             </option>
 
-                                                        </select>
+                                                        </select> -->
+                                                         <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="services"
+                                                   v-model="detail.service_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                                                     </div>
                                                 </div>
                 </td>
                 <td>
                      <div class="control-group">
-                                                    <label class="control-label">Fonctions</label>
+                                                    <label class="control-label">Emploi</label>
                                                     <div class="controls">
-                                                        <select v-model="detail.fonction_id" :disabled="verrouilleFonction" class="span12">
+                                                        <!-- <select v-model="detail.fonction_id" :disabled="verrouilleFonction" class="span12">
                                                             <option></option>
                                                             <option v-for="item in afficheFonction(detail.service_id)" :key="item.id" :value="item.fonction_id">
                                                                 {{afficheLibelleFonction(item.fonction_id)}}
                                                             </option>
 
-                                                        </select>
+                                                        </select> -->
+                                                        <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="services"
+                                                   v-model="detail.fonction_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                                                         <input type="hidden" :value="nombreDeFonction(detail.fonction_id)" readonly/>
                                                     </div>
                                                 </div>
                 </td>
                 <td>
+                     
+                                                <div class="control-group">
+                                                    <label class="control-label">Fonction Professionnelle</label>
+                                                    <div class="controls">
+                                                      <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="fonctionProfessionnel"
+                                                   v-model="detail.fonction_professionnelle_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                                                    </div>
+                                                </div>
+                </td>
+               
+            </tr>
+            <tr>
+                 <td>
                      
                                                 <div class="control-group">
                                                     <label class="control-label">Grades</label>
@@ -272,9 +321,6 @@
                                                     </div>
                                                 </div>
                 </td>
-            </tr>
-            <tr>
-                
               
                 <td>
                      <div class="control-group">
@@ -312,7 +358,10 @@
                                                     </div>
                                                 </div>
                 </td>
-                             <td>
+                             
+            </tr>
+            <tr>
+               <td>
                      <div class="control-group">
                                                     <label class="control-label">Type salarie</label>
                                                     <div class="controls">
@@ -325,10 +374,7 @@
                                                     </div>
                                                 </div>
                 </td>
-            </tr>
-            <tr>
-               
-              <td colspan="2">
+              <td colspan="">
                 <div class="control-group">
                                                     <label class="control-label">Ligne budgetaires:</label>
                                                     <div class="controls">
@@ -376,7 +422,7 @@
                           @click.prevent="ajouterTitreLocal"
                         >Modifier</a>
                         <a
-                          @click.prevent="afficherModalListePersonnel()"
+                          @click.prevent="afficherModalListeExecution()"
                           class="btn"
                           href="#"
                         >Fermer</a>
@@ -430,8 +476,14 @@
 
     import {mapGetters, mapActions} from 'vuex'
     import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth"
+        import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
     export default {
+components: {
+    
+    ModelListSelect,
 
+  },
         data() {
             return {
                 fabActions: [
@@ -467,7 +519,7 @@
                     fonction_id:"",
                     plan_budgetaire_id:'',
                     uniteZone_id:"",
-                    situation_matrimonial:"",
+                    
                     service_id:""
                 },
 
@@ -497,7 +549,7 @@
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ["salairesActeur","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
+            ...mapGetters('personnelUA', ["personnaFonction","fonctionProfessionnel","salairesActeur","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction","personnaliseActeurDepense","affichePersonnelRecuActeNormination",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
             ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
@@ -517,7 +569,18 @@
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
 
+afficheEmail() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
 
+      if (qtereel) {
+        return qtereel.acteur_depense.email;
+      }
+      return 0
+        }
+      };
+    },
     uniteAdmin() {
       
 
@@ -711,8 +774,10 @@ exoEnCours() {
         methods: {
             // methode pour notre action
             ...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux",
-            "allActeurDepense", "modificationActeur","modifierSalaire"]),
-
+            "allActeurDepense", "modifierPersonnel","modifierSalaire","modificationActeur"]),
+afficherModalListeExecution(){
+                window.history.back();
+            },
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
@@ -733,6 +798,7 @@ exoEnCours() {
                     this.detail.date_naissance=objetPersonnel.date_naissance,
                    this.detail.nom_pere=objetPersonnel.nom_pere,
                    this.detail.nom_mere=objetPersonnel.nom_mere,
+                   this.detail.email=objetPersonnel.email,
                    this.detail.date_debut_contrat=objetPersonnel.date_debut_contrat,
                     // this.detail.code_acte_personnel= objetPersonnel.code_acte_personnel,
                    this.detail.type_salarie_id= objetPersonnel.type_salarie_id,
@@ -757,7 +823,9 @@ exoEnCours() {
             ajouterTitreLocal () {
               var nouveauObjet = {
                  ...this.detail,
+                 id:this.detail.id,
                  grade_id:this.afficheGrade(this.detail.fonction_id),
+                 email:this.detail.email,
                 
               }
             let modSalaire=this.salairesActeur.find(marche=>marche.acte_personnel_id == this.detail.acte_personnel_id)
@@ -767,7 +835,7 @@ exoEnCours() {
     this.modifierSalaire(modSalaire)
                  this.modificationActeur(nouveauObjet)
                 this.getActeur()
-                this.$router.push({ name: 'Acteur' })
+               this.afficherModalListeExecution()
             },
 // affichercode
             suprimer(id){

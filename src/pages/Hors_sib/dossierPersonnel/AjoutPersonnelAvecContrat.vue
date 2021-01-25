@@ -164,7 +164,15 @@
                         
             </tr>
             <tr>
-               <td colspan="2">
+               <td colspan="">
+                     <div class="control-group">
+                                                    <label class="control-label">Email</label>
+                                                    <div class="controls">
+                                                        <input type="text" v-model="formData.email"  placeholder="" class="span12"/>
+                                                    </div>
+                                                </div>
+                </td>
+               <td colspan="">
                      <div class="control-group">
                                                     <label class="control-label">Nom du pere:</label>
                                                     <div class="controls">
@@ -484,7 +492,9 @@ components: {
                     uniteZone_id:"",
                     situation_matrimonial:"",
                     service_id:"",
-                    reference_acte:""
+                    reference_acte:"",
+                    fonction_professionnelle_id:"",
+                    email:""
                 },
 
                 editTitre: {
