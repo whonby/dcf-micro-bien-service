@@ -10,7 +10,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Modification Véhicule</h5>
+              <h5>Modification Matériel</h5>
              
             </div>
 
@@ -95,7 +95,7 @@
                  </td>
                
             <td>
-                                <label >Groupe{{detail_vehicule.equipement_id}}</label>
+                                <label >Groupe</label>
                                 <!-- <model-list-select style="background-color: #fff;"
                                                    class="wide"
                                                    :list="equipements"
@@ -206,7 +206,7 @@
                       
                     <ul class="nav nav-tabs">
                     
-        <li class="active"><a data-toggle="tab" href="#vehicule">Fiche Véhicule</a></li>
+        <li class="active"><a data-toggle="tab" href="#vehicule">Fiche Matériel</a></li>
         
                      
                     </ul>
@@ -216,74 +216,19 @@
                 
                       <div id="vehicule" class="tab-pane active">
      
-        <table class="table table-bordered table-striped">
-                  
-                <div class="widget-box">
-                  <div class="widget-title">
-                      
-                    <ul class="nav nav-tabs">
-                     <li class="active"><a data-toggle="tab" href="#Techniques">Informations Techniques</a></li>
-        <!-- <li class=""><a data-toggle="tab" href="#Informations">Autres Informations</a></li> -->
-        
-                      
-                     
-                    </ul>
-                  </div>
-                  <div class="widget-content tab-content">
-                    <!--ongle identification-->
-                  <div id="Techniques" class="tab-pane active">
-         <table class="table table-bordered table-striped">
-           <tr>
-           <td>
+         <table class="table table-bordered table-striped" >
+               <tr>
+                     <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">N°Immatriculation</label>
+                  <label class="control-label" style="font-size:14px">Description</label>
                   <div class="controls">
-                   <div class="controls">
                     <input
                       type="text"
-                    v-model="detail_vehicule.numimmatriculation"
+                    v-model="detail_vehicule.autreinfo"
                       class="span"
                       
                     />
                   </div>
-                </div>
-                </div>
-                      </td>
-                     
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Duré de vie</label>
-                  <div class="controls">
-                   <div class="controls">
-                    <!-- <input
-                      type="text"
-                    v-model="detail_vehicule.durevie"
-                      class="span"
-                      
-                    /> -->
-                    <input
-                      type="text"
-                    :value="dureDeVie(detail_vehicule.famill_id)"
-                      class="span"
-                      readonly
-                    />
-                  </div>
-                </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Valeur d'acquisition HT</label>
-                  <div class="controls">
-                   <div class="controls">
-                    <input
-                      type="text"
-                    v-model="detail_vehicule.prix_unitaire"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
                 </div>
                       </td>
                       <td>
@@ -293,7 +238,7 @@
                     <select  class="span" v-model="detail_vehicule.marque_id">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in AfficheModelMaterielVehicule"
+                        v-for="typeUniteA in AfficheModelMaterielMobilier"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -301,48 +246,14 @@
                   </div>
                 </div>
                       </td>
-                  </tr>
-               <tr>
-                     
-                      <!-- <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Type véhicule</label>
-                  <div class="controls">
-                    <select  class="span" v-model="detail_vehicule.typevehicule">
-                      <option></option>                     
-                      <option
-                        v-for="typeUniteA in TypeVehicule"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-                      </td> -->
-                      
                       <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Modèle</label>
+                  <label class="control-label" style="font-size:14px">Modele</label>
                   <div class="controls">
                     <select  class="span" v-model="detail_vehicule.model_id">
                       <option></option>                     
                       <option
-                        v-for="typeUniteA in fonctionModele(detail_vehicule.marque_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-                      </td>
-                       <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Energie</label>
-                  <div class="controls">
-                    <select  class="span" v-model="detail_vehicule.energie">
-                      <option></option>                     
-                      <option
-                        v-for="typeUniteA in TypeEnergie"
+                        v-for="typeUniteA in afficheModeleParMarque(detail_vehicule.marque_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -352,7 +263,7 @@
                       </td>
                       <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">N°de chassis/N°série</label>
+                  <label class="control-label" style="font-size:14px">N°Série</label>
                   <div class="controls">
                      <input
                       type="text"
@@ -363,345 +274,76 @@
                   </div>
                 </div>
                       </td>
-                      <!-- <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">N°série</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                    v-model="detail_vehicule.numserie"
-                      class="span"
                       
-                    />
-                  </div>
-                </div>
-                      </td> -->
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Couleur</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                    v-model="detail_vehicule.couleur"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
                   </tr>
                     <tr>
-                     
-                      
-                      
-                      
                        <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Transmission</label>
+                  <label class="control-label" style="font-size:14px">Code immobilisation</label>
                   <div class="controls">
-                    <select  class="span" v-model="detail_vehicule.transmission">
-                      <option></option>  
-                                          
+                    <input
+                      type="text"
+                    v-model="detail_vehicule.numero_matricule"
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td>
+                      <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Valeur d'acquisition unitaire HT</label>
+                  <div class="controls">
+                    <!-- <input
+                      type="text"
+                    v-model="formData1.prix_unitaire"
+                      class="span"
+                      
+                    /> -->
+                    <money v-model="detail_vehicule.prix_unitaire" type="text" style="text-align:left;color:red"  class="span"></money>
+                  </div>
+                </div>
+                      </td> 
+                       <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Date d'acquisition / mise en service</label>
+                  <div class="controls">
+                     <input
+                      type="date"
+                v-model="detail_vehicule.date_mise_service"
+                      class="span"
+                      
+                    />
+                    <!-- <select  class="span" v-model="formData1.immobilisation">
+                      <option></option>                     
                        <option
-                        v-for="typeUniteA in Transmissions"
+                        v-for="typeUniteA in lesClassDe3"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-                      </td>
-                       <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Nombre de portes</label>
-                  <div class="controls">
-                    <input
-                      type="number"
-                    v-model="detail_vehicule.nombreportes"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Nombre de place</label>
-                  <div class="controls">
-                   <input
-                      type="number"
-                    v-model="detail_vehicule.nombreplace"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Puissance</label>
-                  <div class="controls">
-                   <input
-                      type="text"
-                    v-model="detail_vehicule.puissance"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                  </tr>
-            <tr>
-                     
-                     
-                      
-                       
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Etat véhicule</label>
-                  <div class="controls">
-                    <select  class="span" v-model="detail_vehicule.etatvehicule">
-                      <option></option>                     
-                      <option
-                        v-for="typeUniteA in EtatImmobilisations"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Année du Véhicule</label>
-                  <div class="controls">
-                   <input
-                      type="text"
-                  v-model="detail_vehicule.anneevehicule"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                       <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Date d'acquisition/mise en service</label>
-                  <div class="controls">
-                   <input
-                      type="date"
-                    v-model="detail_vehicule.date_mise_service"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                  </tr>
-        </table>
-      </div>
-                      <div id="Informations" class="tab-pane ">
-        
-         <table class="table table-bordered table-striped">
-             <tr>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Date d'Immatriculation</label>
-                  <div class="controls">
-                   <input
-                      type="date"
-                  
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Date de mise en circulation</label>
-                  <div class="controls">
-                   <input
-                      type="date"
-                     
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Garantie constructeur</label>
-                  <div class="controls">
-                    <input
-                      type="date"
-                    
-                      class="span"
-                      
-                    />
+                      >{{typeUniteA.code}}-{{typeUniteA.libelle}}</option>
+                    </select> -->
                   </div>
                 </div>
                       </td>
                      
-                  </tr>
-            <tr>
-               <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Garantie concessionnaire</label>
-                  <div class="controls">
-                   <input
-                      type="date"
-                     
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Responsable actuel</label>
-                  <div class="controls">
-                    <select  class="span" >
-                      <option></option>                     
-                      
-                    </select>
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Valeur vénale</label>
-                  <div class="controls">
-                   <input
-                      type="text"
-                   
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
                       <!-- <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">unité administrative</label>
+                  <label class="control-label" style="font-size:14px">Durée de vie</label>
                   <div class="controls">
-                    <select  class="span">
-                      <option></option>                     
-                      
-                    </select>
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">unité administrative</label>
-                  <div class="controls">
-                    <select  class="span">
-                      <option></option>                     
-                      
-                    </select>
+                    <input
+                      type="text"
+                    :value="dureDeVie(formData7.famille_id)"
+                      class="span"
+                      readonly
+                    />
                   </div>
                 </div>
                       </td> -->
+                       
                   </tr>
+            
+                      
         </table>
-        
-      </div>
-     
-                  </div>
-
-                  <!-- <div class="widget-title">
-                      
-                    <ul class="nav nav-tabs">
-                     <li class="active"><a data-toggle="tab" href="#Expiration">Expiration</a></li>
-       
-                      
-                     
-                    </ul>
-                  </div> -->
-                  <div class="widget-content tab-content">
-                    <!--ongle identification-->
-                  <div id="Expiration" class="tab-pane">
-         <table class="table table-bordered table-striped">
-            <tr>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Votre assurance expirere le</label>
-                  <div class="controls">
-                    <input
-                      type="date"
-                    
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                          <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Votre admimission temporaire expirera le</label>
-                
-                  <div class="controls">
-                    <input
-                      type="date"
-                   
-                      class="span"
-                      
-                    />
-                  </div>
-                  </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Date de relevé</label>
-                  <div class="controls">
-                   <div class="controls">
-                    <input
-                      type="date"
-                    
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Votre controle technique expirera le</label>
-                  <div class="controls">
-                    <input
-                      type="date"
-                  
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Dernier relevé kilométrique</label>
-                  <div class="controls">
-                    <input
-                      type="number"
-                  
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                  </tr>
-        </table>
-      </div>
-                    
-                  </div>
-                 
-                </div>
-              </table>
       </div>
      
                   </div>
@@ -1276,7 +918,7 @@ libelleUa() {
         marque_id:this.formData.marque_id,
         model_id:this.formData.model_id,
        histo_qte:this.detail_vehicule.quantitestock,
-      
+      numchassis:this.detail_vehicule.numchassis,
       anneevehicule:this.detail_vehicule.anneevehicule,
         anneebudgetaire:this.anneeAmort,
         
@@ -1286,7 +928,7 @@ libelleUa() {
           durevie:this.dureDeVie(this.formData7.famill_id),
           typebien_id:this.AfficheTypeDeBien(this.formData7.famill_id),
           prix_unitaire:this.detail_vehicule.prix_unitaire,
-          date_mise_service:this.detail_vehicule.date_mise_service
+          autreinfo:this.detail_vehicule.autreinfo
       }
       
       //this.ajouterNouveauVehicule(objetNew);
