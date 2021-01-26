@@ -163,8 +163,7 @@
 
                             </div>
                             <div class="icon3">
-
-                               {{formatageSomme((parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) - (parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)+parseFloat(budgetConsommerPersonnelGlobal)) )}}
+                               {{formatageSomme(parseFloat(budgetDisponibleUA) )}}
                             </div>
                             <div class="icon2">
 
@@ -181,7 +180,7 @@
                             </div>
                             <div class="icon3">
 
-                                {{formatageSomme((parseFloat(budgetConsommerPersonnelGlobal) +parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)))}}
+                                {{formatageSomme(parseFloat(executeBudget))}}
                             </div>
                             <div class="icon2">
 
@@ -430,252 +429,6 @@
 
 
 
-    <vue-html2pdf
-            :show-layout="false"
-            :float-layout="true"
-            :enable-download="true"
-            :preview-modal="true"
-            :paginate-elements-by-height="1400"
-            filename="DCF"
-            :pdf-quality="2"
-            :manual-pagination="false"
-            pdf-format="a4"
-            pdf-orientation="landscape"
-            pdf-content-width="1000px"
-
-            @progress="onProgress($event)"
-            @hasStartedGeneration="hasStartedGeneration()"
-            @hasGenerated="hasGenerated($event)"
-            ref="html2Pdf"
-    >
-        <section slot="pdf-content">
-
-            <table class="table  table-striped" >
-                <tbody >
-                <tr>
-                    <td style="background: #b4c6e7;border: 5px solid #fff; font-size: 15px"><b>TOTAL MARCHES PLANIFIES - EXERCICE {{anneeAmort}}</b></td>
-                    <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>{{nombreTotalMarche}} Marchés</b></td>
-                    <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>{{formatageSomme(montantTotaleMarchePlanifieContratuel)}} TTC</b></td>
-                </tr>
-                <tr>
-                    <td style="background: #b4c6e7;border: 5px solid #fff;font-size: 15px"><b>TOTAL MARCHES HORS PPM - EXERCICE {{anneeAmort}}</b></td>
-                    <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>0 Marché</b></td>
-                    <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>{{formatageSomme(0)}} TTC</b> </td>
-
-
-                </tr> <tr>
-                    <td style="background: #2f5396;border: 5px solid #fff;color: #fff;font-size: 15px"><b>TOTAL GENERAL MARCHES - EXERCICE {{anneeAmort}}</b></td>
-                    <td style="background: #2f5396;border: 5px solid #fff;color: #fff;text-align: center !important;font-size: 15px"><b>{{nombreTotalMarche}} Marchés</b></td>
-                    <td style="background: #2f5396;border: 5px solid #fff;color: #fff;text-align: center !important;font-size: 15px"><b>{{formatageSomme(montantTotaleMarchePlanifieContratuel)}} TTC</b></td>
-                    <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-
-                </tr>
-
-                </tbody>
-            </table>
-
-
-
-            <nav aria-label="breadcrumb" class="main-breadcrumb" style="background: #806000">
-                <ol class="breadcrumb" style="background: #806000 !important">
-                    <li class="breadcrumb-item" style="color: #fff !important;" > INFORMATIONS GENERALES - MARCHES/CONTRATS&nbsp;&nbsp;&nbsp;&nbsp; / </li>
-                    <li class="breadcrumb-item" style="color: #fff !important;" v-if="unite_administrative_id"> Situation {{nomUniteAdmin(unite_administrative_id)}} des marchés &nbsp;&nbsp;&nbsp;&nbsp; /</li>
-                    <li class="breadcrumb-item"  style="color: #fff !important;" v-if="region"> Région {{nomRegions(region)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
-                    <li class="breadcrumb-item"  style="color: #fff !important;" v-if="infrastructure"> Infrastructutre {{nomInfrastructure(infrastructure)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
-
-                    <li class="breadcrumb-item"  style="color: #fff !important;" v-if="type_marche"> Type Marche {{nomTypeMarche(type_marche)}} &nbsp;&nbsp;&nbsp;&nbsp; /</li>
-                    <li class="breadcrumb-item"  style="color: #fff !important;" v-if="info_status_marche" v-html="info_status_marche">  </li>
-                    <!--<li class="breadcrumb-item"> <button class="btn btn-info" @click="print"><i class="icon-print"></i></button></li>-->
-                </ol>
-            </nav>
-
-
-
-
-            <div class="">
-
-
-
-
-                
-
-
-                <div class="row-fluid" style="margin: 55px 2px 100px 4px">
-                    <div class="span12" style="border: 2px dotted #ffffff;">
-                        <apexchart type="pie" width="380" :options="chartOptions" :series="dataPourcentage"></apexchart>
-                    </div>
-                    <hr>
-                    <div class="span12" >
-                        <nav aria-label="breadcrumb"  class="main-breadcrumb" v-if="info_status_marche">
-                            <ol class="breadcrumb" :style="{background: getColorByStatus(status_marches)}">
-                                <li class="breadcrumb-item"  v-html="info_status_marche">  </li>
-                                <li class="breadcrumb-item" >
-                                    <!--<a href="#" @click.prevent="afficherModalAjouterTitre()">Carte</a> -->
-                                </li>
-
-                            </ol>
-                        </nav>
-                        <table class="table   table-bordered table-striped" v-if="info_status_marche">
-                            <thead>
-                            <tr>
-                                <th>UA </th>
-                                <th>Nombre Marchés</th>
-                                <th>Montant total</th>
-                                <th>Taux %</th>
-
-                            </tr>
-                            </thead>
-                            <tbody >
-                            <tr v-for="unite in listeUniteAdministrative" :key="unite.id">
-                                <td>{{unite.libelle}}</td>
-                                <td style="text-align: center !important;">{{nbrTotalMarchePasUA(unite.id)}} </td>
-                                <td style="text-align: center !important;">{{formatageSomme(montantPrevuePasUA(unite.id))}}</td>
-                                <td style="text-align: center !important;">{{tauxStatusMarchePasUniteAdministrative(unite.id)}}</td>
-
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-
-                            </tr> <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-
-                            </tr> <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-
-                            </tr> <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-
-                            </tr> <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-
-                            </tr> <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-
-                            </tr>
-
-
-
-
-                            </tbody>
-                        </table>
-
-
-
-                        <table class="table   table-bordered table-striped" v-if="!info_status_marche">
-                            <thead>
-                            <tr>
-                                <th>UA </th>
-                                <th>Nombre Marchés</th>
-                                <th>Montant total</th>
-                                <!--<th v-if="status_marches==2">Montant base</th>-->
-                                <th>Taux</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody >
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-                                <td></td>
-                            </tr> <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-                                <td></td>
-                            </tr> <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-                                <td></td>
-                            </tr> <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-                                <td></td>
-                            </tr> <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-                                <td></td>
-                            </tr>
-
-
-
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-
-
-
-            </div>
-            <!--------------------FIN TABLEAU BORD FIN ETAT MARCHE--------------->
-
-
-        </section>
-    </vue-html2pdf>
-
     {{dataArrayPourcentage}}
 </div>
 </template>
@@ -778,26 +531,39 @@ console.log(this.listeMarchStatueExecuteAcheve)
             ...mapGetters("Utilisateurs", ["getterUtilisateur","getterRoles"]),
 
             nbreUniteAdministratives() {
-
-          if(this.cf){
-            let colect=[];
-            
-            this.uniteAdministratives.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect.length
-        }
-        return this.uniteAdministratives.length
-
-    },
+            return this.filtre_unite_admin.length
+            },
     // afficher le budget initiale
     budgetInitaile(){
-        return this.budgetGeneral.filter(item => item.actived==1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
+                let montant_initial=0;
+                let vm=this;
+                this.filtre_unite_admin.forEach(function (value) {
+                    let budgetMontant=vm.budgetGeneral.filter(item => {
+                        if(item.actived==1 && item.ua_id==value.id){
+                            return item
+                        }
+                    }).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
+                    montant_initial=parseFloat(montant_initial) + budgetMontant
+                })
+        return montant_initial
+       // this.budgetGeneral.filter(item => item.actived==1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
     },
+            executeBudget(){
+                let montant_initial=0;
+                let vm=this;
+                this.filtre_unite_admin.forEach(function (value) {
+                    let budgetMontant=vm.mandats.filter(item => {
+                        if(item.exercice_budget==vm.anneeAmort && item.ua_id==value.id){
+                            return item
+                        }
+                    }).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),0)
+                    montant_initial=parseFloat(montant_initial) + budgetMontant
+                })
+                return montant_initial
+            },
+            budgetDisponibleUA(){
+                return parseFloat(this.budgetInitaile) - parseFloat(this.executeBudget)
+            },
 
     // afficher budget executé
     // budgetExecute(){
@@ -848,6 +614,7 @@ console.log(this.listeMarchStatueExecuteAcheve)
             )
             .toFixed(0);
     },
+
     afficherTotalBudgetModulePersonnel() {
         
         if(this.noDCfNoAdmin){

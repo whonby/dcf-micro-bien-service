@@ -8,7 +8,7 @@
      <TableauBordGestionHorsSib v-else-if="detail_marche.code == 4"></TableauBordGestionHorsSib>
     <TableauBordMonEquipe v-else-if="detail_marche.code == 6"></TableauBordMonEquipe>
     <TableauBordRapport v-else-if="detail_marche.code == 7"></TableauBordRapport>
-    
+<!--    <TableauBordEquipeCF v-else-if="detail_marche.code == 16"></TableauBordEquipeCF>-->
     <TableauBordCatographies  v-else-if="detail_marche.code == 5"></TableauBordCatographies>
     <TableauBordGestionVehicule v-else></TableauBordGestionVehicule>
 
@@ -31,10 +31,11 @@ import TableauBordParametre from "../../gestionDesModule/TableauBordParametre";
 import TableauBordRapport from "../../../src/pages/Gestion_des_Rapports/suiviDesEntreprise";
  import TableauBordUa from "../../gestionDesModule/TableauBordUa";
  import TableauBordGestionVehicule from "../../gestionDesModule/TableauBordGestionVehicule";
+ // import TableauBordEquipeCF from "../../gestionDesModule/TableauBordEquipeCF"
 export default {
   data(){
     return{
-
+      detail_marche:"",
       budgetGeneralCharge:""
 
     }
@@ -47,15 +48,22 @@ components: {
     TableauBordMonEquipe,
     TableauBordUa,
     TableauBordRapport,
-    TableauBordGestionVehicule
+    TableauBordGestionVehicule,
+ // TableauBordEquipeCF
   },
 
   created() {
       console.log(this.getterUniteAdministrativeByUser)
             this.marcheid=this.$route.params.id
-   this.detail_marche = this.gestionModules.find(
-       idmarche => idmarche.id == this.$route.params.id
-   )
+    if(this.$route.params.id==16){
+      this.detail_marche.code=16
+     // console.log(this.$route.params.id)
+    }else{
+      this.detail_marche = this.gestionModules.find(
+              idmarche => idmarche.id == this.$route.params.id
+      )
+    }
+
   
 },
    

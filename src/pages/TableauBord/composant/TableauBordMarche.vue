@@ -15,7 +15,9 @@
                             <tr>
                                 <td style="background: #f0c71d !important;" v-if="!noDCfNoAdmin">
 
-                                    <label>CF<a href="#" @click.prevent="videTypeCF()" v-if="controlleur_fin" style="color: red"><i class="fa fa-trash-o"></i></a></label>
+                                    <label>CF
+                                        <a href="#" @click.prevent="videTypeCF()" v-if="controlleur_fin" style="color: red">
+                                            <i class="fa fa-trash-o"></i></a></label>
                                     <model-list-select style="background-color: #fff;"
                                                        class="wide"
                                                        :list="listeCF"
