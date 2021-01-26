@@ -20,14 +20,14 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                    <th>ARTICLE</th>
-                    <th>MARQUE</th>
-                    <th>MODDELE</th>
-                    <th>N°SERIE</th>
-                    <th>QUANTITE</th>
-                     <th>DUREE DE VIE</th>
-                  <th>VALEUR D'ACQUISITION</th>
-                  <th>ANNEE DU VEHICULE</th>
+                    <th style="text-align:center">ARTICLE</th>
+                    <th style="text-align:center">MARQUE</th>
+                    <th style="text-align:center">MODDELE</th>
+                    <th style="text-align:center">N°SERIE</th>
+                    <th style="text-align:center">QUANTITE</th>
+                     <th style="text-align:center">DUREE DE VIE</th>
+                  <th style="text-align:center">VALEUR D'ACQUISITION</th>
+                
                  
                   <!-- <th>Acteur Depense</th> -->
                 </tr>
@@ -35,15 +35,15 @@
               <tbody>
                 <tr class="odd gradeX">
                   
-                  <td>{{detail_Vehicule.articlestock_id || 'Non renseigné'}}</td>
-                  <td>{{detail_Vehicule.marque_id || 'Non renseigné'}}</td>  
-                    <td>{{detail_Vehicule.model_id || 'Non renseigné'}}</td>
+                  <td style="text-align:center">{{libelleFamilleEquipement(detail_Vehicule.articlestock_id) || 'Non renseigné'}}</td>
+                  <td style="text-align:center">{{libelleMarque(detail_Vehicule.marque_id) || 'Non renseigné'}}</td>  
+                    <td style="text-align:center">{{libelleModel(detail_Vehicule.model_id) || 'Non renseigné'}}</td>
                    
-                  <td>{{detail_Vehicule.numchassis || 'Non renseigné'}}</td>
-                  <td>{{detail_Vehicule.quantitestock || 'Non renseigné'}}</td>
-                  <td>{{detail_Vehicule.durevie || 'Non renseigné'}}</td>
-                <td>{{detail_Vehicule.prix_unitaire || 'Non renseigné'}}</td>
-                  <td>{{detail_Vehicule.transmission || 'Non renseigné'}}</td>
+                  <td style="text-align:center">{{detail_Vehicule.numchassis || 'Non renseigné'}}</td>
+                  <td style="text-align:center">{{detail_Vehicule.quantitestock || 'Non renseigné'}}</td>
+                  <td style="text-align:center">{{detail_Vehicule.durevie || 'Non renseigné'}} Ans </td>
+                <td style="text-align:center">{{formatageSomme(parseFloat(detail_Vehicule.prix_unitaire)) || 'Non renseigné'}}</td>
+                 
                 </tr>
               </tbody>
             </table>
@@ -60,9 +60,9 @@
                 <tr>
                        <th>SERVICE RATTACHE</th>
                     <th>FONCTION RATTACHE</th>
-                     
+                     <th>PERSONNE RATTACHE</th>
                     <th>DATE AFFECTATION</th>
-                    <th>PERSONNE RATTACHE</th>
+                    
                    
                  
                   <!-- <th>Acteur Depense</th> -->
@@ -75,8 +75,9 @@
                     :key="equipement.id">
                   <td>{{afficherLibelleService(service_id(equipement.id)) || 'Non renseigné'}}</td>
                   <td>{{afficherLibelleFonction(fonction_id(equipement.id)) || 'Non renseigné'}}</td>  
-                     <td>{{formaterDate(dateAffectation(equipement.id)) || 'Non renseigné'}}</td>
                   <td>{{nomPersonnel(equipement.id) || 'Non renseigné'}}</td>  
+                     <td>{{formaterDate(dateAffectation(equipement.id)) || 'Non renseigné'}}</td>
+                  
                   
 
                 </tr>
@@ -140,7 +141,42 @@ created() {
    ]),
    ...mapGetters("personnelUA", ["personnaliseActeurDepense","acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
 
+ libelleMarque() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marqueVehicules.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    libelleModel() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.ModeleVehicules.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+libelleFamilleEquipement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.articles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 listeDesPersonnelAttribuer() {
       return id => {
         if (id != null && id != "") {

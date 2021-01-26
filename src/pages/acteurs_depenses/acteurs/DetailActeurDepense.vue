@@ -1,5 +1,5 @@
 type_acte_id
-congeActeur
+Salaires actuel
 <template>
     <div>
 
@@ -2409,7 +2409,9 @@ enregistreIdPersonnel(){
                 ...mapActions('bienService',['supprimerActeEffetFinancier',
           'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche',"getMarche","getActeEffetFinancier"]),
 
-
+afficherModalListeExecution(){
+                window.history.back();
+            },
            afficherModalCompteBancaire(index){
                 this.$('#updateCompte').modal({
                     backdrop: 'static',
@@ -2740,8 +2742,9 @@ enregistreIdPersonnel(){
             return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
         },
     afficherModalListePersonnel(){
-                this.$router.push({ name: 'Acteur' })
+                 window.history.back();
             },
+            
         }
     };
 </script>

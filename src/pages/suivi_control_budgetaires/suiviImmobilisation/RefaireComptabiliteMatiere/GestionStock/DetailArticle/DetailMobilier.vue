@@ -14,20 +14,19 @@
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5 style="color: white;">INFORMATION SUR LE VEHICULE</h5>
+            <h5 style="color: white;">INFORMATION SUR L'ARTICLE</h5>
           </div>
  <div class="table-responsive text-nowrap">
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                       <th>IMMATRICULATION</th>
-                    <th>MARQUE</th>
-                     
-                    <th>MODDELE</th>
-                    <th>ENERGIE</th>
-                    <th>NUMERO CHASSIS</th>
-                    <th>COULEUR</th>
-                    <th>TRANSMISSION</th>
+                    <th style="text-align:center">ARTICLE</th>
+                    <th style="text-align:center">DESCRIPTION</th>
+                    <th style="text-align:center">DATE ACQUISITION/MISE EN SERVICE</th>
+                    <th style="text-align:center">QUANTITE</th>
+                    <th style="text-align:center">DUREE DE VIE</th>
+                    <th style="text-align:center">VALEUR D'ACQUISITION</th>
+                
                  
                   <!-- <th>Acteur Depense</th> -->
                 </tr>
@@ -35,60 +34,24 @@
               <tbody>
                 <tr class="odd gradeX">
                   
-                  <td>{{detail_Vehicule.numimmatriculation || 'Non renseigné'}}</td>
-                  <td>{{libellemarqueVehicules(detail_Vehicule.marque_id) || 'Non renseigné'}}</td>  
-                    <td>{{libelleModeleVehicules(detail_Vehicule.model_id) || 'Non renseigné'}}</td>
-                    <td>{{libelleTypeEnergie(detail_Vehicule.energie) || 'Non renseigné'}}</td>
-                  <td>{{detail_Vehicule.numchassis || 'Non renseigné'}}</td>
-                  <td>{{detail_Vehicule.couleur || 'Non renseigné'}}</td>
-                  <td>{{libelleTransmission(detail_Vehicule.transmission) || 'Non renseigné'}}</td>
-                  <!-- <td>{{formatageSomme(immobilisat.prixUnitaire)|| 'Non renseigné'}}</td> -->
+                  <td style="text-align:center">{{libelleFamilleEquipement(detail_Vehicule.articlestock_id) || 'Non renseigné'}}</td>
+                  <td style="text-align:center">{{detail_Vehicule.description_article || 'Non renseigné'}}</td>  
+                    <td style="text-align:center">{{formaterDate(detail_Vehicule.date_mise_service) || 'Non renseigné'}}</td>
+                   
                   
+                  <td style="text-align:center">{{detail_Vehicule.quantitestock || 'Non renseigné'}}</td>
+                  <td style="text-align:center">{{detail_Vehicule.durevie || 'Non renseigné'}} Ans </td>
+                <td style="text-align:center">{{formatageSomme(parseFloat(detail_Vehicule.prix_unitaire)) || 'Non renseigné'}}</td>
+                 
                 </tr>
               </tbody>
             </table>
             
-            
-             <div class="table-responsive text-nowrap">
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                   <th>NOMBRE DE PORTE</th>
-                  <th>NOMBRE DE PLACE</th>
-                  <th>PUISSANCE</th>
-                  <th>ETAT DU VEHICULE</th>
-                  <th>DUREE DE VIE</th>
-
-                  <th>VALEUR D'ACQUISITION</th>
-                  <th>ANNEE DU VEHICULE</th>
-                  <!-- <th title="Exercice Budgetaire">Exercice Budget</th> -->
-                 
-                 
-                </tr>
-              </thead>
-              <tbody>
-              <tr class="odd gradeX">
-                  
-                  <td>{{detail_Vehicule.nombreportes || 'Non renseigné'}}</td>
-                  <td>{{detail_Vehicule.nombreplace || 'Non renseigné'}}</td>  
-                    <td>{{detail_Vehicule.puissance || 'Non renseigné'}}</td>
-                    <td>{{libelleTypeEnergie(detail_Vehicule.etatvehicule) || 'Non renseigné'}}</td>
-                  <td>{{detail_Vehicule.durevie || 'Non renseigné'}} Ans</td>
-                  <td>{{formatageSomme(parseFloat(detail_Vehicule.prix_unitaire)) || 'Non renseigné'}}</td>
-                  <td>{{detail_Vehicule.anneevehicule|| 'Non renseigné'}}</td>
-                  <!-- <td>{{detail_Vehicule.transmission || 'Non renseigné'}}</td> -->
-                  <!-- <td>{{formatageSomme(immobilisat.prixUnitaire)|| 'Non renseigné'}}</td> -->
-                  
-                </tr>
-              </tbody>
-            </table>
-           
-          </div>
            <div class="widget-title" style="background-color: #1fef; color: white;">
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5 style="color: #000000;">INFO SUR L'AFFECTATION DU VEHICULE</h5>
+            <h5 style="color: #000000;">INFO SUR L'AFFECTATION MOBILIER</h5>
           </div>
           <div class="table-responsive text-nowrap">
             <table class="table table-bordered table-striped">
@@ -110,10 +73,10 @@
                     v-for="equipement in listeDesPersonnelAttribuer(detail_Vehicule.id)"
                     :key="equipement.id">
                   <td>{{afficherLibelleService(service_id(equipement.id)) || 'Non renseigné'}}</td>
-                  <td>{{afficherLibelleFonction(fonction_id(equipement.id)) || 'Non renseigné'}}</td> 
+                  <td>{{afficherLibelleFonction(fonction_id(equipement.id)) || 'Non renseigné'}}</td>  
                   <td>{{nomPersonnel(equipement.id) || 'Non renseigné'}}</td>  
                      <td>{{formaterDate(dateAffectation(equipement.id)) || 'Non renseigné'}}</td>
-                   
+                  
                   
 
                 </tr>
@@ -177,7 +140,42 @@ created() {
    ]),
    ...mapGetters("personnelUA", ["personnaliseActeurDepense","acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
 
+ libelleMarque() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marqueVehicules.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    libelleModel() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.ModeleVehicules.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+libelleFamilleEquipement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.articles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 listeDesPersonnelAttribuer() {
       return id => {
         if (id != null && id != "") {

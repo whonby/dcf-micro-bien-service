@@ -10,7 +10,8 @@ import tableauDeBorde from "../../pages/Hors_sib/marche_hors_sib_investissement/
 import listeMarcheInvestissementHS from "../../pages/Hors_sib/marche_hors_sib_investissement/ExecutionInvestissement/listeMarcheInvestissementExecutionHS.vue";
 import listeMarcheBienEtServiceHS from "../../pages/Hors_sib/marche_hors_sib_investissement/ExecutionInvestissement/listeMarcheBienEtServiceExecutionHS.vue";
 import recrutementPersonnelHorsSib from "../../pages/Hors_sib/dossierPersonnel/recrutementPersonnel.vue";
-import ListesPersonnel from "../../pages/Hors_sib/dossierPersonnel/ListesPersonnel.vue";
+import ListesPersonnel from "../../pages/Hors_sib/dossierPersonnel/groupePersonnelParUa.vue";
+import ListesPersonnelParUa from "../../pages/Hors_sib/dossierPersonnel/ListesPersonnel.vue";
 import detailExecutionHorsSib from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierPrincipal/detailExecutionHorsSib.vue';
 import ajouterOpDefinitif from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/ajouterOpDefinitifDirect.vue';
 import ajouterOpDefinitifPro from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/DossierOpProvisoire/ajouterOpDefinitifPro.vue';
@@ -45,6 +46,11 @@ const marcheHorSibRoutes =[
         path: "/liste-Reception-Des-Lots",
         name: "listeDesReceptionDesLot",
         component: listeDesReceptionDesLot
+    },
+    {
+        path: "/ListesPersonnelParUa/:id",
+        name: "ListesPersonnelParUa",
+        component: ListesPersonnelParUa
     },
     {
         path: "/Reception-Des-Lots/:id",

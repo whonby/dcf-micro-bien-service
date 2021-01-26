@@ -181,7 +181,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Email</label>
                                                     <div class="controls">
-                                                        <input type="text" :value="detail.email"  placeholder="" class="span12"/>
+                                                        <input type="text" v-model="detail.email"  placeholder="" class="span12"/>
                                                     </div>
                                                 </div>
                 </td>

@@ -159,10 +159,10 @@
                               <select   class="span" v-model="formData3.articlestock_id">
                                 <option></option>
                                 <option v-for="typeUniteA in afficheListeArticleParFamille(formData7.groupe_famille_id,formData7.famill_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id">
+                        :key="typeUniteA[0].id"
+                        :value="typeUniteA[0].id">
                                    
-                      {{typeUniteA.libelle}}
+                      {{typeUniteA[0].libelle}}
                                 </option>
                                   </select>
                                   
@@ -1247,7 +1247,7 @@ props:["macheid"],
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
    ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-   ...mapGetters("SuiviImmobilisation", ["Typebiengrpecorporels","equipements","articles","familles","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
+   ...mapGetters("SuiviImmobilisation", ["groupeArticle","Typebiengrpecorporels","equipements","articles","familles","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
    ...mapGetters('uniteadministrative',[
     "plans_programmes",
  "uniteAdministratives",
@@ -1417,7 +1417,7 @@ recupererCodeImputationBudgetaire() {
  afficheListeArticleParFamille() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.articles.filter(element => element.equipement_id == id && element.famille_id == id1);
+          return this.groupeArticle.filter(element => element[0].equipement_id == id && element[0].famille_id == id1);
         }
       };
     },
