@@ -43,7 +43,7 @@
                         </td> -->
                         <div class="btn-group">
                             <button @click.prevent="supprimerCotation(cotation.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
+                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                         </div>
 

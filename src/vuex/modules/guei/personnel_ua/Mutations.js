@@ -1000,6 +1000,31 @@ export const MODIFIER_SAUVEGARDE_PHOTO = (state, objetModifie) => {
 
 
 
+export const GET_FONCTIONS_PROFESSIONNEL = (state, data) => {
+    state.fonctionProfessionnel = data
+}
+
+
+export const AJOUTER_FONCTIONS_PROFESSIONNEL = (state, nouvel_objet) => {
+    state.fonctionProfessionnel.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+}
+
+
+export const SUPPRIMER_FONCTIONS_PROFESSIONNEL= (state, id) => {
+    state.fonctionProfessionnel = state.fonctionProfessionnel.filter(fonction => fonction.id != id)
+}
+
+
+export const MODIFIER_FONCTIONS_PROFESSIONNEL = (state, objetModifie) => {
+    state.fonctionProfessionnel = state.fonctionProfessionnel.map(fonction => {
+        if(fonction.id == objetModifie.id){
+            fonction = {...objetModifie}
+        }
+        return fonction
+    })
+}
+
 
 
 

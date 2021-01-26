@@ -14,7 +14,7 @@
              <tr>
                  <td>
           <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">libellé</label>
             <div class="controls">
               <input
                 type="text"
@@ -106,7 +106,7 @@
                 <td>
 
            <div class="control-group">
-            <label class="control-label">Sous-prefecture</label>
+            <label class="control-label">Sous-préfecture</label>
             <div class="controls">
               <input
                 type="text"
@@ -121,7 +121,7 @@
                 <td>
 
            <div class="control-group">
-            <label class="control-label">Beneficiaire</label>
+            <label class="control-label">Bénéficiaire</label>
             <div class="controls">
               <input
                 type="text"

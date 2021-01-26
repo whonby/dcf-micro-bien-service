@@ -159,10 +159,10 @@
                               <select   class="span" v-model="formData3.articlestock_id">
                                 <option></option>
                                 <option v-for="typeUniteA in afficheListeArticleParFamille(formData7.groupe_famille_id,formData7.famill_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id">
+                        :key="typeUniteA[0].id"
+                        :value="typeUniteA[0].id">
                                    
-                      {{typeUniteA.libelle}}
+                      {{typeUniteA[0].libelle}}
                                 </option>
                                   </select>
                                   
@@ -171,7 +171,7 @@
             </td>
                     <td>
                <div class="control-group">
-            <label class="control-label">Quantité Récu</label>
+            <label class="control-label">Quantité reçue</label>
             <div class="controls">
                               <input
                 type="text"
@@ -378,101 +378,83 @@
                     <div id="Mobilier" class="tab-pane active" v-if="AfficheTypeDeBien(formData7.famill_id) == 7">
                        <table class="table table-bordered table-striped" >
                <tr>
+                 <td colspan="3">
+                   <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Description </label>
+                  <div class="controls">
+                   <textarea rows="4" v-model="formData1.description_article" class="span12">
                      
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Désignation du bien</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                    v-model="formData1.designation"
-                      class="span"
-                      
-                    />
+                     </textarea>
                   </div>
                 </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Matiere</label>
-                  <div class="controls">
-                   <input
-                      type="text"
-                   v-model="formData1.matiere"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Couleur</label>
-                  <div class="controls">
-                     <input
-                      type="text"
-                    v-model="formData1.couleur"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      
+                 </td>
+                     
+                     
                   </tr>
-                    <tr>
-                      <td>
+            <tr>
+               <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Revêtement</label>
+                  <label class="control-label" style="font-size:14px">Valeur d'acquisition unitaire HT </label>
                   <div class="controls">
-                    <input
-                      type="text"
-                   v-model="formData1.revetement"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                       <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Dimension</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                   v-model="formData1.dimension"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Prix Unitaire</label>
-                  <div class="controls">
-                    <input
+                    <!-- <input
                       type="text"
                   v-model="formData1.prix_unitaire"
+                      class="span"
+                      
+                    /> -->
+                    <money v-model="formData1.prix_unitaire" type="text" style="text-align:left;color:red"  class="span"></money>
+                  </div>
+                </div>
+                      </td> 
+                       <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Date d'acquisition / mise en service </label>
+                  <div class="controls">
+                    <input
+                      type="date"
+                  v-model="formData1.date_mise_service"
                       class="span"
                       
                     />
                   </div>
                 </div>
                       </td> 
-                     
-                  </tr>
-            
+                       <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Code immobilisation</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                  v-model="formData1.numero_matricule"
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td> 
+            </tr>
                       
         </table>
                     </div>
                   <div id="materiel" class="tab-pane active" v-if="AfficheTypeDeBien(formData7.famill_id) == 5">
          <table class="table table-bordered table-striped" >
                <tr>
-                     
+                     <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Description</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                    v-model="formData1.autreinfo"
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td>
                       <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Marque Matériel</label>
+                  <label class="control-label" style="font-size:14px">Marque</label>
                   <div class="controls">
                     <select  class="span" v-model="formData1.marque_id">
                       <option></option>                     
@@ -487,7 +469,7 @@
                       </td>
                       <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Modele Matériel</label>
+                  <label class="control-label" style="font-size:14px">Modele</label>
                   <div class="controls">
                     <select  class="span" v-model="formData1.model_id">
                       <option></option>                     
@@ -513,9 +495,12 @@
                   </div>
                 </div>
                       </td>
+                      
+                  </tr>
+                    <tr>
                        <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">N° Matricule</label>
+                  <label class="control-label" style="font-size:14px">Code immobilisation</label>
                   <div class="controls">
                     <input
                       type="text"
@@ -526,18 +511,29 @@
                   </div>
                 </div>
                       </td>
-                  </tr>
-                    <tr>
-                     
+                      <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Valeur d'acquisition unitaire HT</label>
+                  <div class="controls">
+                    <!-- <input
+                      type="text"
+                    v-model="formData1.prix_unitaire"
+                      class="span"
+                      
+                    /> -->
+                    <money v-model="formData1.prix_unitaire" type="text" style="text-align:left;color:red"  class="span"></money>
+                  </div>
+                </div>
+                      </td> 
                        <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Imputation comptable</label>
+                  <label class="control-label" style="font-size:14px">Date d'acquisition / mise en service</label>
                   <div class="controls">
                      <input
-                      type="text"
-                 :value="libelleImputationBudgetaire(recupererCodeImputationBudgetaire(recupererIdEquipement(formData7.famille_id)))"
+                      type="date"
+                v-model="formData1.date_mise_service"
                       class="span"
-                      readonly
+                      
                     />
                     <!-- <select  class="span" v-model="formData1.immobilisation">
                       <option></option>                     
@@ -550,20 +546,8 @@
                   </div>
                 </div>
                       </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Prix Unitaire</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                    v-model="formData1.prix_unitaire"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td> 
-                      <td>
+                     
+                      <!-- <td>
                            <div class="control-group">
                   <label class="control-label" style="font-size:14px">Durée de vie</label>
                   <div class="controls">
@@ -575,20 +559,8 @@
                     />
                   </div>
                 </div>
-                      </td>
-                       <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Autre Information</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                    v-model="formData1.autreinfo"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
+                      </td> -->
+                       
                   </tr>
             
                       
@@ -759,15 +731,16 @@
                       </td>
                       <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Prix unitaire</label>
+                  <label class="control-label" style="font-size:14px">Valeur d'acquisition unitaire HT</label>
                   <div class="controls">
                    <div class="controls">
-                    <input
+                    <!-- <input
                       type="text"
                     v-model="formData.prix_unitaire"
                       class="span"
                       
-                    />
+                    /> -->
+                    <money v-model="formData.prix_unitaire" type="text" style="text-align:left;color:red"  class="span"></money>
                   </div>
                 </div>
                 </div>
@@ -964,6 +937,19 @@
                    <input
                       type="text"
                     v-model="formData.anneevehicule"
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td>
+                       <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Date d'acquisition / Mise en service</label>
+                  <div class="controls">
+                   <input
+                      type="date"
+                    v-model="formData.date_mise_service"
                       class="span"
                       
                     />
@@ -1261,7 +1247,7 @@ props:["macheid"],
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
    ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-   ...mapGetters("SuiviImmobilisation", ["Typebiengrpecorporels","equipements","articles","familles","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
+   ...mapGetters("SuiviImmobilisation", ["groupeArticle","Typebiengrpecorporels","equipements","articles","familles","AffectationVehicules","Transmissions","EtatImmobilisations","TypeEnergie","marqueVehicules","ModeleVehicules","TypeEntretien","TypeVehicule","TypeReparation"]),
    ...mapGetters('uniteadministrative',[
     "plans_programmes",
  "uniteAdministratives",
@@ -1431,7 +1417,7 @@ recupererCodeImputationBudgetaire() {
  afficheListeArticleParFamille() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
-          return this.articles.filter(element => element.equipement_id == id && element.famille_id == id1);
+          return this.groupeArticle.filter(element => element[0].equipement_id == id && element[0].famille_id == id1);
         }
       };
     },

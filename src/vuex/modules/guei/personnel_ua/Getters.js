@@ -1,4 +1,5 @@
-
+import { groupBy } from "../../../../Repositories/Repository";
+export const fonctionProfessionnel  = state => state.fonctionProfessionnel;
 const type_acte_personnels = state => state.type_acte_personnels;
 const fonctions  = state => state.fonctions;
 const paiementPersonnel  = state => state.paiementPersonnel;
@@ -161,6 +162,10 @@ export const afficheNombrePersonnelRecuActeNormination = state =>
         affichenaturedep => affichenaturedep.fonction_budgetaire_id != null
     ).length;
 
+    export const groupePersonnel = (state, getters) => {
+        //delete getters.trieUaImmobilisation.
+        return groupBy(getters.acte_personnels, "unite_administrative_id");
+      };
 
 export {
     ordre_paiement,

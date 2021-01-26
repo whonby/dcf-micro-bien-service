@@ -59,7 +59,7 @@
                <tr>
                 <td colspan="2">
                         <div class="control-group">
-                            <label class="control-label">Autres Motif</label>
+                            <label class="control-label">Autre Motif</label>
                             <div class="controls">
                               <textarea  class="span" row = "6" v-model="editMandat.autre_motif" :readonly="griserAutreMotif">
                               </textarea>
@@ -68,7 +68,7 @@
                        </td>
                   <td>
                                <div class="control-group">
-                            <label class="control-label">Date Decision CF :</label>
+                            <label class="control-label">Date Décision CF :</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editMandat.date_motif"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
@@ -93,7 +93,7 @@
                         <tr>
                           <td colspan="">
                         <div class="control-group">
-                            <label class="control-label">Nom et prenoms de l'Agent connecté</label>
+                            <label class="control-label">Nom et prénoms de l'agent connecté</label>
                             <div class="controls">
                               <input type="text" class="span"  :value="afficheNomUtilisateur" readonly/>
                             </div>
@@ -101,7 +101,7 @@
                        </td>
                        <td colspan="">
                         <div class="control-group">
-                            <label class="control-label">Nom et prenoms du CF</label>
+                            <label class="control-label">Nom et prénoms du CF</label>
                             <div class="controls">
                               
 
@@ -122,7 +122,7 @@
                        </td>
                         <td>
                                   <div class="control-group">
-                            <label class="control-label">Joint Fiche réalité service fait </label>
+                            <label class="control-label">Joindre Fiche réalité service fait </label>
                             <div class="controls">
                               <!-- <input type="text" class="span" readonly :value=" afficherLibelleFoctionBudgetaire(afficherIdFoctionBudgetaire(editObservationAgentCf.nom_service_beneficiaire))"/>
                               -->
@@ -150,7 +150,7 @@
                      <table class="table table-bordered table-striped" v-if="macheid">
                                     <thead>
                                    <tr>
-                                        <th>N° du marche</th>
+                                        <th>N° du marché</th>
                                          <th>N° du mandat</th>
                                         <th>N° bordereau mandat</th>
                                         <th>N° demande engagement</th>
@@ -227,10 +227,7 @@
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
                       <button class="btn btn-danger" @click="supprimerMandat(Manda.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
+                        <span class=""><i class="icon-trash">Supprimer</i></span></button>
                     </td>
                                      </tr>
                

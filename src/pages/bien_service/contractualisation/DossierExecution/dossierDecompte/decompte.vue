@@ -11,21 +11,21 @@
                       <table class="table table-bordered table-striped" v-if="macheid">
                                     <thead>
                                    <tr>
-                   <th>Année budgetaire</th>
-                    <th>Numero marché</th>
-                    <th>Objet marché</th>
+                   <th>Année budgétaire</th>
+                    <th>Numéro du marché</th>
+                    <th>Objet du marché</th>
                    
                     
-                    <th>Numero decompte</th>
-                    <th>Date decompte</th>
-                    <th>Montant decompte</th>
+                    <th>Numéro du décompte</th>
+                    <th>Date du décompte</th>
+                    <th>Montant du décompte</th>
                     <!-- <th>Montant cumuler</th> -->
                     <th>Dotation prévu</th>
-                    <th>Montant executé dotation</th>
-                    <th>Reste executé dotation</th>
+                    <th>Montant exécuté dotation</th>
+                    <th>Reste exécuté dotation</th>
                     <th>Montant marché</th>
-                    <th>Montant executé marché</th>
-                    <th>Reste executé marché</th>
+                    <th>Montant exécuté marché</th>
+                    <th>Reste exécuté marché</th>
                      
                     <th>Paiement part Etat</th>
                     <th>Paiement part Bailleurs</th>

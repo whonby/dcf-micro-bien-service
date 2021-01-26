@@ -21,7 +21,7 @@
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label">prenoms bailleur</label>
+            <label class="control-label">prénom bailleur</label>
             <div class="controls">
               <input
                 type="text"
@@ -56,7 +56,7 @@
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label">Telephone</label>
+            <label class="control-label">Téléphone</label>
             <div class="controls">
               <input  	
                 type="text"

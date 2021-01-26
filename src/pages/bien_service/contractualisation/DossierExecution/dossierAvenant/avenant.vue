@@ -27,7 +27,7 @@
          </td>
          <td>
               <div class="control-group">
-            <label class="control-label">Type Acte finnancier</label>
+            <label class="control-label">Type Acte financier</label>
             <div class="controls">
                <input
                 type="text"
@@ -47,7 +47,7 @@
          </td>
          <td>
            <div class="control-group">
-            <label class="control-label">Numero avenant</label>
+            <label class="control-label">Numéro avenant</label>
             <div class="controls">
               <input
                 type="text"
@@ -89,7 +89,7 @@
          <tr>
           <td>
            <div class="control-group">
-            <label class="control-label">Montant ht</label>
+            <label class="control-label">Montant HT</label>
             <div class="controls">
               <input
                 type="text"
@@ -98,7 +98,7 @@
                
               />
                <code v-if="parseFloat(this.quinzePourcentDuMarche) < parseFloat(this.affichierMontantAvenantTTC)">
-           Montant Avenant est supperieure au 30% du marche</code>
+           Montant avenant est supérieur au 30% du marché</code>
             </div>
           </div>
          </td>
@@ -132,7 +132,7 @@
          <tr>
             <td>
            <div class="control-group">
-            <label class="control-label">Montant Avenant</label>
+            <label class="control-label">Montant avenant</label>
             <div class="controls">
               <input
                 type="text"
@@ -210,7 +210,7 @@
          </td>
          <td>
               <div class="control-group">
-            <label class="control-label">Type Acte finnancier</label>
+            <label class="control-label">Type Acte financier</label>
             <div class="controls">
                <!-- <div class="controls"> -->
               <input
@@ -231,7 +231,7 @@
          </td>
          <td>
            <div class="control-group">
-            <label class="control-label">Numero avenant</label>
+            <label class="control-label">Numéro avenant</label>
             <div class="controls">
               <input
                 type="text"
@@ -260,7 +260,7 @@
          <tr>
           <td>
            <div class="control-group">
-            <label class="control-label">Montant ht</label>
+            <label class="control-label">Montant HT</label>
             <div class="controls">
               <input
                 type="text"
@@ -301,7 +301,7 @@
          <tr>
             <td>
            <div class="control-group">
-            <label class="control-label">Montant Avenant</label>
+            <label class="control-label">Montant avenant</label>
             <div class="controls">
               <input
                 type="text"
@@ -347,9 +347,9 @@
                     <th>Marché</th>
                       <th>Type acte financier</th>
                         <th>Numéro avenant</th>
-                    <th>Objet Avenant</th>
-                    <th>Montant Avenant</th>
-                     <th>Date Avenant</th>
+                    <th>Objet avenant</th>
+                    <th>Montant avenant</th>
+                     <th>Date avenant</th>
                     
                     <th>Action</th>
                   </tr>
@@ -379,9 +379,7 @@
 
                     <td>
                       <button class="btn btn-danger" @click="supprimerAvenant(type.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
+                         <span class=""><i class="icon-trash">Supprimer</i></span>
                       </button>
                     </td>
                   </tr>

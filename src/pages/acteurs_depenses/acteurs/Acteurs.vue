@@ -16,7 +16,10 @@ Type de Recrutement
                 </a> </li>
             </ul>
         </div> -->
-
+ <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button>
+    
+        </div> 
         <div class="container-fluid" style="heigth:100%">
 
             <hr>
@@ -25,7 +28,7 @@ Type de Recrutement
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab10">Liste du personnel </a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab10">Liste du personnel {{formData.unite_administrative_id}}</a></li>
                                  <li class=""><a data-toggle="tab" href="#AjouterPersonnelAvecContrat">Ajouter Personnel Avec Contrat </a></li>
                                  <li class=""><a data-toggle="tab" href="#AjouterPersonnelSansContrat">Ajouter Personnel Sans Contrat </a></li>
                                  <!-- <li class=""><a data-toggle="tab" href="#tab78">Contrat de Recrutement Direct </a></li> -->
@@ -102,7 +105,7 @@ Type de Recrutement
 <td>
       <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span>
+                                <span class=""><i class="icon-trash">Supprimer</i></span>
                             </button>
                         </div>
 </td>
@@ -122,7 +125,7 @@ Type de Recrutement
                                         </div>
                                     </div>
                                     <div class="widget-content nopadding">
-                                        <table class="table table-bordered table-striped">
+                                          <table class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
                                                 <!-- <th>Situation matrimoniale </th> -->
@@ -130,6 +133,7 @@ Type de Recrutement
                                                 <th>Nom</th>
                                                 <th>Prénom</th>
                                                 <th>Date de naissance</th>
+                                                    <th>Email</th>
                                                 <th >Unité administrative</th>
                                                 
                                                 <th >Service</th>
@@ -139,12 +143,13 @@ Type de Recrutement
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="odd gradeX" v-for="item in acteurActivite" :key="item.id">
+                                            <tr class="odd gradeX" v-for="item in afficheListePersonnel(formData.unite_administrative_id)" :key="item.id">
   
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}{{item.id}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_naissance) }}</td>
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheEmail(item.id) || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheAdministrative(item.unite_administrative_id) || 'Non renseigné'}}</td>
                                                 
                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(item.service_id)|| 'Non renseigné'}}</td>
@@ -966,7 +971,18 @@ recrutement:""
  ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
    ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe','planActe']),
 
+afficheEmail() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
 
+      if (qtereel) {
+        return qtereel.acteur_depense.email;
+      }
+      return 0
+        }
+      };
+    },
 
 afficherUAParDroitAccess() {
        // const st = this.search.toLowerCase();
@@ -1313,7 +1329,15 @@ AffichierElementParent() {
             //     )
 
             // },
-           
+           afficheListePersonnel() {
+      return id => {
+        if (id != null && id != "") {
+           return this.acteurActivite.filter(qtreel => qtreel.unite_administrative_id == id);
+
+      
+        }
+      };
+    },
   acteurActivite() {
         const searchTerm = this.search.toLowerCase();
 
@@ -1527,7 +1551,9 @@ acteurNonActivite() {
           'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
 
          
-
+afficherModalListeExecution(){
+                window.history.back();
+            },
 
               ajouterModalActeEffetFinancierLocal(){
         var nouveauObjet = {

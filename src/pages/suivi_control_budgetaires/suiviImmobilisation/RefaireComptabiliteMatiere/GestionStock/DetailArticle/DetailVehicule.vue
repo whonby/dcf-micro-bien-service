@@ -96,9 +96,9 @@
                 <tr>
                        <th>SERVICE RATTACHE</th>
                     <th>FONCTION RATTACHE</th>
-                     
+                     <th>PERSONNE RATTACHE</th>
                     <th>DATE AFFECTATION</th>
-                    <th>PERSONNE RATTACHE</th>
+                    
                    
                  
                   <!-- <th>Acteur Depense</th> -->
@@ -110,9 +110,10 @@
                     v-for="equipement in listeDesPersonnelAttribuer(detail_Vehicule.id)"
                     :key="equipement.id">
                   <td>{{afficherLibelleService(service_id(equipement.id)) || 'Non renseigné'}}</td>
-                  <td>{{afficherLibelleFonction(fonction_id(equipement.id)) || 'Non renseigné'}}</td>  
-                     <td>{{formaterDate(dateAffectation(equipement.id)) || 'Non renseigné'}}</td>
+                  <td>{{afficherLibelleFonction(fonction_id(equipement.id)) || 'Non renseigné'}}</td> 
                   <td>{{nomPersonnel(equipement.id) || 'Non renseigné'}}</td>  
+                     <td>{{formaterDate(dateAffectation(equipement.id)) || 'Non renseigné'}}</td>
+                   
                   
 
                 </tr>

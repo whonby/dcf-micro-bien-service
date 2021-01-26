@@ -110,7 +110,7 @@
                                             {{appelOffre.montant || 'Non renseigné'}}</td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerMarcheBailleur(appelOffre.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i></span></button>
+                                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
                                         </div>
 
                                     </tr>

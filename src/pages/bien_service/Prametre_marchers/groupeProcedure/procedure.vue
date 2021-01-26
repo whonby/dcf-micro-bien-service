@@ -14,7 +14,7 @@
                 <form class="form-horizontal">
                   
              <div class="control-group">
-           <label class="control-label">Type procedure</label>
+           <label class="control-label">Type procédure</label>
               <div class="controls">
                 <select  v-model="formData.type_procedure_id">
             <option v-for="resultat in typeTypeProcedures" :key="resultat.id" 
@@ -35,7 +35,7 @@
           </div>
            
             <div class="control-group">
-             <label class="control-label">Procedure passation</label>
+             <label class="control-label">Procédure passation</label>
               <div class="controls">
                 <input type="text" v-model="formData.libelle" class="span"  />
               </div>

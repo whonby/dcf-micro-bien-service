@@ -79,7 +79,7 @@ typeMarches
               </td>
                <td>
                  <div class="control-group">
-            <label class="control-label">Date resiliation</label>
+            <label class="control-label">Date résiliation</label>
             <div class="controls">
               <input
                 type="date"
@@ -130,7 +130,7 @@ typeMarches
                     <tr>
                         <td>
                             <div class="control-group">
-                                <label class="control-label">Type acte effet financier.</label>
+                                <label class="control-label">Type acte effet financier</label>
                                 <div class="controls">
                                     <select v-model="editActeEffetFinancier.type_act_effet_id" class="span3">
                                         <option v-for="varText in typeActeEffetFinanciers" :key="varText.id"
@@ -144,7 +144,7 @@ typeMarches
 
                         <td>
                            <div class="control-group">
-                        <label class="control-label">Entreprise.</label>
+                        <label class="control-label">Entreprise</label>
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.entreprise_id" class="span3">
                                <option v-for="varText in entreprises" :key="varText.id"
@@ -158,7 +158,7 @@ typeMarches
 
                         <td>
                             <div class="control-group">
-                                <label class="control-label">Text juridique </label>
+                                <label class="control-label">Texte juridique </label>
                                 <div class="controls">
                                     <select v-model="editActeEffetFinancier.text_juridique_id" class="span3">
                                         <option v-for="varText in text_juridiques" :key="varText.id"
@@ -250,7 +250,7 @@ typeMarches
                        
 <td>
                             <div class="control-group">
-                                <label class="control-label">Reference acte</label>
+                                <label class="control-label">Référence acte</label>
                                 <div class="controls">
                                     <input type="text" v-model="editActeEffetFinancier.reference_act"
                                            class="span3"
@@ -343,7 +343,7 @@ typeMarches
 
                         <td>
                             <div class="control-group">
-                                <label class="control-label" title=" ">Date de reception definitive</label>
+                                <label class="control-label" title=" ">Date de réception définitive</label>
                                 <div class="controls">
                                     <input type="date" v-model="editActeEffetFinancier.date_reception"
                                            class="span3"
@@ -415,7 +415,7 @@ typeMarches
                 <thead>
                   <tr>
                 <th>Ann&eacute;e</th>
-                 <th title="unite administrative">UA</th>
+                 <th title="Unité Administrative">UA</th>
                       <th>Type de marché</th>
                    
                     <th>Activit&eacute;</th>
@@ -456,7 +456,7 @@ typeMarches
                   
 <td>
                      <button 
-                      v-if="marche.attribue == 7"  class="btn  btn">
+                      v-if="marche.attribue == 7"  class="btn  btn" title="MARCHE SUSPENDU">
                 <span >SU</span>
        
                 </button>
@@ -525,7 +525,7 @@ typeMarches
                   <tr>
                
                 <th>Ann&eacute;e</th>
-                 <th title="unite administrative">UA</th>
+                 <th title="Unité Administrative">UA</th>
                       <th>Type de marché</th>
                    
                     <!-- <th>Activit&eacute;</th> -->
@@ -572,7 +572,7 @@ typeMarches
        
                 </button>
                  <router-link :to="{ name: 'detailExecution', params: { id: marche.marche_id }}"
-                class="btn btn-default " title="Detail Payement marche">
+                class="btn btn-default " title="Détail paiement marché">
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
                    <!-- <button v-else class="btn  btn-danger">
@@ -598,7 +598,7 @@ typeMarches
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marchés en cours de Contratualisation</h5>
+              <h5>Liste des Marchés en cours de Contractualisation</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -608,7 +608,7 @@ typeMarches
                 <thead>
                   <tr>
                 <th>Ann&eacute;e</th>
-                 <th title="unite administrative">UA</th>
+                 <th title="Unité Administrative">UA</th>
                       <th>Type de marché</th>
                    
                     <th>Activit&eacute;</th>
@@ -670,12 +670,12 @@ typeMarches
 </td> -->
 <td>
   <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
-                 class="btn btn-inverse " title="Cycle de vie du marche">
+                 class="btn btn-inverse " title="Cycle de vie du marché">
         <span class=""><i class=" icon-calendar"></i></span>
     </router-link>
 </td>
 <td>
- <button @click.prevent="modifierModalActeEffetFinancierLocal2(index)"  class="btn btn-info"  title="Basculer en Execution">
+ <button @click.prevent="modifierModalActeEffetFinancierLocal2(index)"  class="btn btn-info"  title="Basculer en Exécution">
         <span class=""><i class="icon-undo" ></i></span></button>
 </td>
 <td>
@@ -785,7 +785,7 @@ typeMarches
                    {{marche.reference_marche || 'Non renseigné'}}</td>
                     <td>
 
-                         <span v-if="marche.economique_id == CodeExempte(marche.economique_id) ">Exemptée procedure</span>
+                         <span v-if="marche.economique_id == CodeExempte(marche.economique_id) ">Exemptée procdure</span>
                          <span v-else>Ligne à marché</span>
                        </td>
                         
@@ -802,7 +802,7 @@ typeMarches
            <td>
                      <button 
                       v-if="marche.attribue == 2"  class="btn  btn-warning">
-                <span title="MARCHE EN EXERCUTION" style="">EX</span>
+                <span title="MARCHE EN EXECUTION" style="" >EX</span>
        
                 </button>
                 <button 
@@ -837,7 +837,7 @@ typeMarches
                    </td> -->
                    <td >
                         <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
-                 class="btn btn-inverse " title="Cycle de vie du marche">
+                 class="btn btn-inverse " title="Cycle de vie du marché">
         <span class=""><i class=" icon-calendar"></i></span>
     </router-link>
                    </td>
@@ -851,7 +851,7 @@ typeMarches
                    </td>
                    <td>
                      <router-link :to="{ name: 'detailExecution', params: { id: marche.id }}"
-                class="btn btn-default " title="historique execution Marche">
+                class="btn btn-default " title="Historique des exécutions Marché">
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
                    </td>
@@ -953,7 +953,7 @@ typeMarches
                 <thead>
                   <tr>
                 <th>Ann&eacute;e</th>
-                 <th title="unite administrative">UA</th>
+                 <th title="Unité Administrative">UA</th>
                       <th>Type de marché</th>
                    
                     <!-- <th>Activit&eacute;</th> -->
@@ -1003,7 +1003,7 @@ typeMarches
                  
                  </td>
                    <td>
-           <button   class="btn btn-default " title="Ajouter marché resilié" @click="afficherModalMarcheResilier(index)">
+           <button   class="btn btn-default " title="Ajouter marché résilié" @click="afficherModalMarcheResilier(index)">
                 <span class=""><i class="icon-pencil"></i></span></button>
 
 
@@ -1013,13 +1013,13 @@ typeMarches
 </td>
 <td>
    <router-link :to="{ name: 'CycleDeVie', params: { id: marche.marche_id }}"
-                                    class="btn btn-inverse " title="Cycle de vie du marche">
+                                    class="btn btn-inverse " title="Cycle de vie du marché">
                            <span class=""><i class=" icon-calendar"></i></span>
                        </router-link> 
 </td>
 <td>
    <button @click.prevent="modifierModalActeEffetFinancierLocal(index)"  class="btn btn-info">
-                <span class=""><i class=" icon-undo" title="Basculer en contratualisation"></i></span></button>
+                <span class=""><i class=" icon-undo" title="Basculer en contractualisation"></i></span></button>
 </td>
                      <div class="btn-group">
  
@@ -1065,7 +1065,7 @@ typeMarches
                 <thead>
                  <tr>
                 <th>Ann&eacute;e</th>
-                 <th title="unite administrative">UA</th>
+                 <th title="Unité Administrative">UA</th>
                       <th>Type de marché</th>
                    
                     <th>Activit&eacute;</th>
@@ -1101,7 +1101,7 @@ typeMarches
                    {{marche.reference_marche || 'Non renseigné'}}</td>
                     <td>
 
-                         <span v-if="marche.economique_id == CodeExempte(marche.economique_id) ">Exemptée procedure</span>
+                         <span v-if="marche.economique_id == CodeExempte(marche.economique_id) ">Exemptée procédure</span>
                          <span v-else>Ligne à marché</span>
                        </td>
                    <!-- <td @dblclick="afficherModalModifierMarcgePlanifier(index)">
@@ -1111,7 +1111,7 @@ typeMarches
                   
 <td>
                      <button 
-                      v-if="marche.attribue == 0"  class="btn  btn-danger">
+                      v-if="marche.attribue == 0"  class="btn  btn-danger" title="MARCHE EN PLANIFICATION">
                 <span >PL</span>
        
                 </button>
@@ -1133,7 +1133,7 @@ typeMarches
 </td>
 <td>
    <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
-                 class="btn btn-inverse " title="Cycle de vie du marche">
+                 class="btn btn-inverse " title="Cycle de vie du marché">
         <span class=""><i class=" icon-calendar"></i></span>
     </router-link>
 </td>
@@ -1208,8 +1208,8 @@ typeMarches
                 <thead>
                   <tr>
                 <th>Ann&eacute;e</th>
-                <th>Unité administrative</th>
-                 <th title="unite administrative">Numéro du marché</th>
+                <th>Unité Administrative</th>
+                 <th title="Unité Administrative">Numéro du marché</th>
                       <th>Objet du marché</th>
                    
                     <th>Entreprise</th>
@@ -1260,7 +1260,7 @@ typeMarches
                 </button> -->
                    </td>
 <td> <router-link :to="{ name: 'CycleDeVie', params: { id: marche.marche_id }}"
-                                    class="btn btn-inverse " title="Cycle de vie du marche">
+                                    class="btn btn-inverse " title="Cycle de vie du marché">
                            <span class=""><i class=" icon-calendar"></i></span>
                        </router-link></td>
 
@@ -1303,7 +1303,7 @@ typeMarches
           <tr>
             <td>
                   <div class="control-group">
-                                <label class="control-label">Année Budgetaire</label>
+                                <label class="control-label">Année Budgétaire</label>
                                 <div class="controls ">
                             
                              <input
@@ -1317,7 +1317,7 @@ typeMarches
               </td>
                <td>
                  <div class="control-group">
-            <label class="control-label">Refencence marché</label>
+            <label class="control-label">Référence du marché</label>
             <div class="controls">
               <input
                 type="text"

@@ -38,7 +38,7 @@
           {{afficherLaListemembreCojo(appelOffre.role_membre_cojo_id )|| 'Non renseigné'}}</td>
         <div class="btn-group">
           <button @click.prevent="supprimerMembreCojo(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-            <span class=""><i class="icon-trash"></i></span></button>
+            <span class=""><i class="icon-trash"> Supprimer</i></span></button>
         </div>
 
       </tr>
@@ -168,7 +168,7 @@
       </div>
       <div class="modal-footer">
         <a class="btn btn-primary" @click.prevent="ajouterMembreCojoM()">Ajouter</a>
-        <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+        <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
       </div>
     </div>
 
@@ -259,7 +259,7 @@
       </div>
       <div class="modal-footer">
         <a class="btn btn-primary" @click.prevent="editeMembreCojoM()">Modifier</a>
-        <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+        <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
       </div>
     </div>
     <notifications/>

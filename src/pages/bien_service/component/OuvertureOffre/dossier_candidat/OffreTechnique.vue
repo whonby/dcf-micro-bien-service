@@ -11,12 +11,12 @@
         <tr>
           <th>N°LOT</th>
           <th>N° du pli</th>
-          <th>Structure Emetrice</th>
+          <th>Structure Emettrice</th>
           <th>Montant(TTC) </th>
           <th>Délai de validation de l'offre</th>
           <th>Délai de livraison ou d'exécution proposé </th>
           
-          <th>Présence Echantillons</th>
+          <th>Présence échantillons</th>
           <th>Autre observation</th>
           <th>Action</th>
         </tr>
@@ -34,7 +34,7 @@
           <td @click="afficheEdite(offre.id)" style="text-align:center">{{offre.autre_observation}}</td>
           <td>
             <button @click.prevent="supprimerOffreTechnique(offre.id)"  class="btn btn-danger ">
-              <span class=""><i class="icon-trash"></i></span></button>
+              <span class=""><i class="icon-trash"></i>Supprimer</span></button>
           </td>
         </tr>
         </tbody>
@@ -102,7 +102,7 @@
           <tr>
             <td>
               <div class="control-group">
-                <label class="control-label">N° Du pli :</label>
+                <label class="control-label">N° du pli :</label>
                 <div class="controls">
 
                   <input type="text" v-model="formchnique.numero_pli"  placeholder="N° Du Pli" class="span">
@@ -111,7 +111,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Structure Emétrice :</label>
+                <label class="control-label">Structure Emettrice :</label>
                 <div class="controls">
 
                   <input type="text" v-model="formchnique.structure_emetrice"  placeholder="Structure Emétrice" class="span">
@@ -141,7 +141,7 @@
             <td>
               <div class="control-group">
                 <label class="control-label">
-                  Delai d'Execution ou de livraison</label>
+                  Delai d'exécution ou de livraison</label>
                 <div class="controls">
                   <input type="text" v-model="formchnique.delai_execution"  placeholder="Delai d'execution ou de livraison Proposé" class="span">
                  <!-- <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">-->
@@ -191,8 +191,8 @@
     </div>
 
     <div class="modal-footer">
-      <button @click.prevent="ajouterOffreT" class="btn btn-primary">Ajouer</button>
-      <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+      <button @click.prevent="ajouterOffreT" class="btn btn-primary">Ajouter</button>
+      <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
   </div>
 
 
@@ -243,7 +243,7 @@
           <tr>
             <td>
               <div class="control-group">
-                <label class="control-label">N° Du pli :</label>
+                <label class="control-label">N° du pli :</label>
                 <div class="controls">
 
                   <input type="text" v-model="editer.numero_pli" class="span" placeholder="Structure Emétrice">
@@ -252,7 +252,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Structure Emétrice :</label>
+                <label class="control-label">Structure Emettrice :</label>
                 <div class="controls">
 
                   <input type="text" v-model="editer.structure_emetrice" class="span" placeholder="Structure Emétrice">
@@ -261,7 +261,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Cautionnement Provisoire  :</label>
+                <label class="control-label">Cautionnement provisoire  :</label>
                 <div class="controls">
                   <input type="text" v-model="editer.montant" class="span" placeholder="Montant">
                 </div>
@@ -278,7 +278,7 @@
             <td>
               <div class="control-group">
                 <label class="control-label">
-                  Délai de livraison Ou Exécution Proposée (Jours)</label>
+                  Délai de livraison ou Exécution Proposée (Jours)</label>
                 <div class="controls">
                   <input type="text" v-model="editer.delai_execution" class="span" placeholder="">
                   <!-- <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">-->
@@ -291,7 +291,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label">Autres pièces spécififiées pas le dossier de consultation(EXPLE:Nationalité autres)</label>
+                <label class="control-label">Autres pièces spécififiées pas le dossier de consultation (EXPLE:Nationalité autres)</label>
                 <div class="controls">
                   <input type="text" v-model="editer.autre_piece_specifie" class="span" placeholder="">
                   <!-- <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">-->
@@ -682,7 +682,7 @@
 
     <div class="modal-footer">
       <button @click.prevent="editeOffreT" class="btn btn-primary">Modification</button>
-      <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+      <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
   </div>
   <!--Fin ajout affre technique-->
 </div>

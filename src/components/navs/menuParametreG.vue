@@ -263,7 +263,7 @@
           <li class="divider"></li>
            <li>
             <router-link :to="{name: 'PlanInfrastructure'}" tag="a">
-              <i class="icon-key"></i> Plan des Infrastructures
+              <i class="icon-key"></i> Plan des Infrastructures et Equipements
             </router-link>
           </li>
           <li class="divider"></li> 
@@ -583,6 +583,13 @@
             <router-link :to="{name: 'Fonction'}" tag="a">
               <i class="icon-check"></i>
               Fonction Administrative
+            </router-link>
+          </li>
+           <li class="divider"></li>
+            <li>
+            <router-link :to="{name: 'FonctionProfessionnelle'}" tag="a">
+              <i class="icon-check"></i>
+              Fonction Professionnelle
             </router-link>
           </li>
            <li class="divider"></li>

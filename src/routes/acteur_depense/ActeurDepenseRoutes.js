@@ -7,7 +7,8 @@ import TypeContrat from "../../pages/acteurs_depenses/type_contrat/TypeContrat.v
 import TypeSalarie from "../../pages/acteurs_depenses/type_salarie/TypeSalarie.vue"
 import Echelons from "../../pages/acteurs_depenses/echelons/Echelons.vue"
 import Grades from "../../pages/acteurs_depenses/grades/GradePrincipal.vue"
-import Acteur from "../../pages/acteurs_depenses/acteurs/Acteurs.vue"
+import Acteur from "../../pages/acteurs_depenses/acteurs/groupePersonnelParUa.vue"
+import ListeActeur from "../../pages/acteurs_depenses/acteurs/Acteurs.vue"
 import ActeurDetail from "../../pages/acteurs_depenses/acteurs/DetailActeurDepense.vue"
 import TableauBordActeurDepense from "../../pages/acteurs_depenses/TableauBord.vue"
 import Conge from "../../pages/acteurs_depenses/conges/Conge.vue"
@@ -35,14 +36,28 @@ import RegistreDepense from "../../pages/cycle_de_vie/RapportDepense3.vue";
 
 import fonctionBudgetaire from "../../pages/acteurs_depenses/fonction/fonctionBudgetaire.vue";
 import SituationMatrimonial from "../../pages/acteurs_depenses/fonction/SituationMatrimonial.vue";
+import FonctionProfessionnelle from "../../pages/acteurs_depenses/FonctionProfessionnelle/FonctionProfessionnelle.vue";
 const ActeurDepenseRoutes = [
+
+
+
+  {
+    path: "/ListeActeur/:id",
+  name: "ListeActeur",
+  component: ListeActeur
+  },
+
 
   // {
   //   path: "/synthèse_budgétaire",
   //   name: "Synthesebudg",
   //   component: Synthesebudg
   // },
-
+  {
+    path: "/FonctionProfessionnelle",
+    name: "FonctionProfessionnelle",
+    component: FonctionProfessionnelle
+  },
   {
     path: "/Registre_depense",
     name: "RegistreDepense",

@@ -72,7 +72,7 @@ marche_id
 
         <div class="btn-group">
           <button @click.prevent="supprimerAnoDMPBailleur(anoBailleur.id)"  class="btn btn-danger " title="Supprimer">
-            <span class=""><i class="icon-trash"></i></span>
+            <span class=""><i class="icon-trash"></i>SUPPRIMER</span>
           </button>
         </div>
 
@@ -92,7 +92,7 @@ marche_id
 
     <div class="widget-title">
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#tab8888">Information Sur Ano Bailleur</a></li>
+        <li class="active"><a data-toggle="tab" href="#tab8888">Information sur Ano Bailleur</a></li>
         <!-- <li class=""><a data-toggle="tab" href="#tab00050">Informations financières</a></li> -->
       </ul>
     </div>
@@ -101,7 +101,7 @@ marche_id
       <div id="tab8888" class="tab-pane active">
 <form class="form-horizontal">
         <div class="control-group">
-          <label class="control-label">Reference</label>
+          <label class="control-label">Référence</label>
           <div class="controls">
             <input
                 type="text"
@@ -113,7 +113,7 @@ marche_id
         </div>
 
         <div class="control-group">
-          <label class="control-label">Reference offre</label>
+          <label class="control-label">Référence de l'offre</label>
           <div class="controls">
           
 
@@ -129,13 +129,13 @@ marche_id
         
 
        <div class="control-group">
-            <label class="control-label">Numero du courrier</label>
+            <label class="control-label">Numéro du courrier</label>
             <div class="controls">
               <input
                   type="text"
                   v-model="formBailleur.num_courrier"
                   class="span"
-                  placeholder="Saisir le numero du courrier"
+                  placeholder="Saisir le numéro du courrier"
               />
             </div>
           </div>
@@ -223,7 +223,7 @@ marche_id
            <tr>
              <td>
                 <div class="control-group">
-          <label class="control-label">Reference offre</label>
+          <label class="control-label">Référence de l'offre</label>
           <div class="controls">
 
 
@@ -239,7 +239,7 @@ marche_id
              <td>
                
         <div class="control-group">
-          <label class="control-label">Reference pv{{affichierIdMarcheGlobal(edit_bailleur.marche_id)}}</label>
+          <label class="control-label">Référence PV{{affichierIdMarcheGlobal(edit_bailleur.marche_id)}}</label>
           <div class="controls" >
             <input
                 type="text"

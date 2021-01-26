@@ -48,7 +48,7 @@ affichierAppelOffreid
       <td @click="afficherModalDecisionAnocf (demande.id)">
         <span v-if="demande.avis== 0" class=" btn label label-success"> Non objection </span>
         <span v-else-if="demande.avis== 1" class=" btn label label-important"> objection </span>
-        <span v-else class=" btn label label-info"> En attent</span>
+        <span v-else class=" btn label label-info"> En attente</span>
       </td>
 <td @click="afficheDemandeDAO(demande.id)">
         {{LibelleDecision(demande.plan_motif_decision_id) || 'Non renseigné'}}</td>
@@ -57,7 +57,7 @@ affichierAppelOffreid
 
       <div class="btn-group">
         <button @click.prevent="supprimerDemandeAno(demande.id)"  class="btn btn-danger " title="Supprimer">
-          <span class=""><i class="icon-trash"></i></span>
+          <span class=""><i class="icon-trash"></i>SUPPRIMER</span>
         </button>
       </div>
 
@@ -77,7 +77,7 @@ affichierAppelOffreid
 
     <div class="widget-title">
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#tab8888">Information Sur Ano DMP</a></li>
+        <li class="active"><a data-toggle="tab" href="#tab8888">Information sur ANO DMP</a></li>
         <!-- <li class=""><a data-toggle="tab" href="#tab00050">Informations financières</a></li> -->
       </ul>
     </div>
@@ -86,7 +86,7 @@ affichierAppelOffreid
       <div id="tab8888" class="tab-pane active">
 <form class="form-horizontal">
         <div class="control-group">
-          <label class="control-label">Reference Pv</label>
+          <label class="control-label">Référence PV</label>
           <div class="controls">
             <input
                 type="text"
@@ -98,7 +98,7 @@ affichierAppelOffreid
         </div>
 
         <div class="control-group">
-          <label class="control-label">Reference offre</label>
+          <label class="control-label">Référence de l'offre</label>
           <div class="controls">
           
 
@@ -112,13 +112,13 @@ affichierAppelOffreid
         </div>
 
         <div class="control-group">
-          <label class="control-label">Numero du courrier</label>
+          <label class="control-label">Numéro du courrier</label>
           <div class="controls">
             <input
                 type="text"
                 v-model="formDemande.num_courrier"
                 class="span"
-                placeholder="Saisir le numero du courrier"
+                placeholder="Saisir le numéro du courrier"
             />
           </div>
         </div>
@@ -205,14 +205,14 @@ affichierAppelOffreid
   <div id="ajouterDecisionAvisCf" class="modal hide">
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
-      <h3>Ajouter avis d'ANO DMP sur Le DAO</h3>
+      <h3>Ajouter avis d'ANO DMP sur le DAO</h3>
     </div>
     <div class="modal-body">
          <table class="table table-bordered table-striped">
            <tr>
              <td>
                 <div class="control-group">
-          <label class="control-label">Reference offre</label>
+          <label class="control-label">Référence de l'offre</label>
           <div class="controls">
 
 
@@ -228,7 +228,7 @@ affichierAppelOffreid
              <td>
                
         <div class="control-group">
-          <label class="control-label">Reference pv</label>
+          <label class="control-label">Référence PV</label>
           <div class="controls" >
             <input
                 type="text"

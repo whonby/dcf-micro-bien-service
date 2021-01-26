@@ -273,7 +273,7 @@
                       </td>
                       <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Prix unitaire</label>
+                  <label class="control-label" style="font-size:14px">Valeur d'acquisition HT</label>
                   <div class="controls">
                    <div class="controls">
                     <input
@@ -478,6 +478,19 @@
                    <input
                       type="text"
                   v-model="detail_vehicule.anneevehicule"
+                      class="span"
+                      
+                    />
+                  </div>
+                </div>
+                      </td>
+                       <td>
+                           <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Date d'acquisition/mise en service</label>
+                  <div class="controls">
+                   <input
+                      type="date"
+                    v-model="detail_vehicule.date_mise_service"
                       class="span"
                       
                     />
@@ -1272,7 +1285,8 @@ libelleUa() {
           numero_facture:this.detail_vehicule.numero_facture,
           durevie:this.dureDeVie(this.formData7.famill_id),
           typebien_id:this.AfficheTypeDeBien(this.formData7.famill_id),
-          prix_unitaire:this.detail_vehicule.prix_unitaire
+          prix_unitaire:this.detail_vehicule.prix_unitaire,
+          date_mise_service:this.detail_vehicule.date_mise_service
       }
       
       //this.ajouterNouveauVehicule(objetNew);

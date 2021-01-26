@@ -5,7 +5,7 @@
   <div id="exampleModalMotifMandatEmetteur" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>ObServation Emetteur</h3>
+        <h3>Observation émetteur</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -13,7 +13,7 @@
                <tr>
                  <td colspan="2">
                     <div class="control-group">
-                            <label class="control-label">Observation Emetteur</label>
+                            <label class="control-label">Observation émetteur</label>
                             <div class="controls">
                               <textarea  class="span" row = "6" v-model="editMandat.observation_emetteur">
                               </textarea>
@@ -24,7 +24,7 @@
                    <tr>
                      <td colspan="2">
                         <div class="control-group">
-                            <label class="control-label">Date Decision Emetteur :</label>
+                            <label class="control-label">Date décision émetteur :</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editMandat.date_decision_emetteur"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
@@ -35,7 +35,7 @@
                                 <tr>
                  <td>
                     <div class="control-group">
-                            <label class="control-label">Nom et prenoms </label>
+                            <label class="control-label">Nom et prénoms </label>
                             <div class="controls">
                               <select v-model="editMandat.nom_emetteur" class="span">
                                 <option v-for="acteur in afficheIdActeurDepense(afficheUAId(this.editMandat.marche_id))"  :key="acteur.id"
@@ -83,7 +83,7 @@
                                     <tr>
 
                                          
-                      <th>N° du marche</th>
+                      <th>N° du marché</th>
                                          <th>N° du mandat</th>
                                         <th>N° bordereau mandat</th>
                                         <th>N° demande engagement</th>
@@ -92,7 +92,7 @@
                                                     
                                 <th>Montant Mandat</th>
                                  <!-- <th >Emetteur</th> -->
-                                <th title="Date validation Emetteur">Date Emetteur</th>
+                                <th title="Date validation Emetteur">Date émetteur</th>
                                 <th colspan="2">Action</th>
                                     </tr>
                                     </thead>
@@ -107,8 +107,8 @@
                                      <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficheNumeroMarche(factu.marche_id) || 'Non renseigné'}}</td>
                    <td @dblclick="afficheModalModificationMandat(Manda.id)">{{factu.numero_mandat || 'Non renseigné'}}</td>
                    <td @dblclick="afficheModalModificationMandat(Manda.id)">{{factu.numero_bordereau || 'Non renseigné'}}</td>
-                    <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroDemandeEngagemnt(factu.engagement_id)|| 'pas numero demande'}}</td>
-                     <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroEngagemnt(factu.engagement_id) || 'pas numero engage'}}</td>
+                    <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroDemandeEngagemnt(factu.engagement_id)|| 'pas numéro demandé'}}</td>
+                     <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroEngagemnt(factu.engagement_id) || 'pas numéro engagé'}}</td>
                      <!-- <td>{{factu.type_procedure_id || 'Non renseigné'}}</td> -->
             <!-- <td>{{uafactut(factu.ua_id) || 'Non renseigné'}}</td>
                                     -->
@@ -162,10 +162,7 @@
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
                       <button class="btn btn-danger" @click="supprimerMandat(factu.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
+                       <span class=""><i class="icon-trash">Supprimer</i></span></button>
                     </td>
                    
                   </tr>
@@ -658,11 +655,11 @@ afficherIdSection() {
      
    if (this.afficherMontantFacture(this.editMandat.facture_id) > this.montantGeneralMandatModifier)
       {
-        alert("Le montant engagé est Inférieure au montant de la facture")
+        alert("Le montant engagé est inférieur au montant de la facture")
       }
        else if (this.dotationDisponibleAnterieure < this.afficherMontantFacture(this.editMandat.facture_id))
       {
-        alert("La dotation est Inférieure au montant de la facture")
+        alert("La dotation est inférieure au montant de la facture")
       }
       
   

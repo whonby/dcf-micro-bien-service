@@ -21,7 +21,7 @@
               <thead>
               <tr>
                 <th>N°</th>
-                <th>Intitule du lot</th>
+                <th>Intitulé du lot</th>
                 <th>Infrastructure</th>
                 <th>Région</th>
                 <th title="Sous Prefecture">S/P</th>
@@ -71,7 +71,7 @@
                         <span class=""><i class=" icon-calendar"></i></span>
                     </router-link>
                   <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                    <span class=""><i class="icon-trash"></i></span></button>
+                    <span class=""><i class="icon-trash">Supprimer</i></span></button>
                 </td>
                </tr>
                <tr>

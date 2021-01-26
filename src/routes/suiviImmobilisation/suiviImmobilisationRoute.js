@@ -88,7 +88,6 @@ import ListeStockArticleVehicule from '../../pages/suivi_control_budgetaires/sui
 import demarrage from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/DemarrageComptaMatiere/demarrage.vue'
 
 
-
 //import AjouterReparationHorsSibMobilier from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/reparationMobilier/AjouterReparationHorsSibMobilier.vue'
 //import AjouterReparationSibMobilier from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/reparationMobilier/AjouterReparationSibMobilier.vue'
 //import listeDesReparationMobilier from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/reparationMobilier/listeDesReparationMobilier.vue'
@@ -130,13 +129,21 @@ import principalExecution from '../../pages/suivi_control_budgetaires/suiviImmob
  
  import AjouterAffectation from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierAffectation/AjouterAffectation.vue'
 
+ 
+ 
 
  
+ import DetailMaterielGestionStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailArticle/DetailMateriel.vue'
+ import DetailMobilierGestionStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailArticle/DetailMobilier.vue'
  import DetailVehiculeGestionStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailArticle/DetailVehicule.vue'
 
  import modificationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/dossierModification/modificationVehicule.vue'
 
  
+ import modificationMobilier from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/dossierModification/modificationMobilier.vue'
+
+ import modificationMateriel from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/dossierModification/modificationMateriel.vue'
+
 import listeDesArticlesAReparer from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierReparationEtEntretien/listeDesArticlesAReparer.vue'
 
 
@@ -154,9 +161,29 @@ const suiviImmobilisationRoutes = [
     component: listeDesArticlesAReparer
   },
   {
+    path: "/modificationMobilier/:id",
+    name: "modificationMobilier",
+    component: modificationMobilier
+  },
+  {
+    path: "/modificationMateriel/:id",
+    name: "modificationMateriel",
+    component: modificationMateriel
+  },
+  {
     path: "/modificationVehicule/:id",
     name: "modificationVehicule",
     component: modificationVehicule
+  },
+  {
+    path: "/DetailMaterielGestionStock/:id",
+    name: "DetailMaterielGestionStock",
+    component: DetailMaterielGestionStock
+  },
+  {
+    path: "/DetailMobilierGestionStock/:id",
+    name: "DetailMobilierGestionStock",
+    component: DetailMobilierGestionStock
   },
   {
     path: "/DetailVehiculeGestionStock/:id",

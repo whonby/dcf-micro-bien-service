@@ -15,13 +15,13 @@
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
-                                <th>Exercice Budgetaire</th>
+                                <th>Exercice Budgétaire</th>
                                 <!-- <th>Type de procedure</th> -->
                                 <th>Objet marché</th>
-                                <th>Reference marché</th>
+                                <th>Référence marché</th>
                                 <!-- <th>Montant prévu</th> -->
                                 <th>Type de marché</th>
-                                <th>Unite administrative</th>
+                                <th>Unite Administrative</th>
                                 
                             </tr>
                             </thead>
@@ -65,8 +65,8 @@
                             <ul class="nav nav-tabs">
 
                                  <li class="active"><a data-toggle="tab" href="#tab0145" title="">Avis de recrutement</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre invitation</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab0002" title="">Mandate</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre d'invitation</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab0002" title="">Mandaté</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab045" title="">Dossier du candidat</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab5">Rapport d'ouverture</a></li>
@@ -161,8 +161,8 @@
                  
                      <div class="widget-title">
                            <ul class="nav nav-tabs">
-                             <li class="active"><a data-toggle="tab" href="#tab00056" title="">Voir la list des jugements</a></li>
-                             <li class=""><a data-toggle="tab" href="#tab00020" title="">Voir la liste des candidats selectionnés</a></li>     
+                             <li class="active"><a data-toggle="tab" href="#tab00056" title="">Voir la liste des jugements</a></li>
+                             <li class=""><a data-toggle="tab" href="#tab00020" title="">Voir la liste des candidats sélectionnés</a></li>     
 
                           </ul>
                      </div>
@@ -246,7 +246,7 @@
             </div>
               <div class="modal-footer">
         
-        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListePersonnel" href="#">Voir Tableau recrutement personnel</a>
+        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListePersonnel" href="#">Voir Tableau recrutement du personnel</a>
        
       </div>
         </div>

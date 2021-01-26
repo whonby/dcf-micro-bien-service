@@ -293,7 +293,7 @@ getSecteurActivite
                                                 <div class="btn-group">
                                                     <a href="#myModal2" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-lock"> Sanctionnées EN/SE</i></a>
                                                     <button @click.prevent="supprimerEntreprise(item.id)"  class="btn btn-danger ">
-                                                        <span class=""><i class="icon-trash"> Supprimer</i></span></button>
+                                                        <span class=""><i class="icon-trash"> </i>Supprimer</span></button>
                                                 </div>
 
                                             </td>*
@@ -395,7 +395,7 @@ getSecteurActivite
                                                 <td>
                                                     <div class="btn-group">
                                                         <button @click.prevent="supprimerEntreprise(item.id)"  class="btn btn-danger ">
-                                                            <span class=""><i class="icon-trash"> Supprimer</i></span></button>
+                                                            <span class=""><i class="icon-trash"></i> Supprimer</span></button>
 
                                                     </div>
 

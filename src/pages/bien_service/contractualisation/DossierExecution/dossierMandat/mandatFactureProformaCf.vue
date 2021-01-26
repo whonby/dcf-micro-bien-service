@@ -16,7 +16,7 @@
                                    
                                 <th>Montant Mandat</th>
                                  <th >Decision de emetteur</th>
-                                <th title="Date validation Emetteur">Date Emetteur</th>
+                                <th title="Date validation Emetteur">Date émetteur</th>
                                 
                                 <th>Décision CF</th>
                                 <th title="Date validation Cf">Date validation CF</th>
@@ -113,10 +113,7 @@
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
                       <button class="btn btn-danger" @click="supprimerMandat(Manda.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
+               <span class=""><i class="icon-trash">Supprimer</i></span></button>
                     </td>
                                      </tr>
                

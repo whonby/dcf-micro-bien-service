@@ -9,7 +9,7 @@
       <thead>
       <tr>
         <!-- <th>Entreprise</th> -->
-        <th>Date Composition </th>
+        <th>Date de composition </th>
         <th>Date effective d'ouverture</th>
         <th>Nombre de participants</th>
         <th>Action</th>
@@ -36,7 +36,7 @@
             {{appelOffre.cotation.ref_offre || 'Non renseigné'}}</td> -->
         <div class="btn-group">
           <button @click.prevent="supprimerCojo(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-            <span class=""><i class="icon-trash"></i></span></button>
+            <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
         </div>
 
@@ -75,7 +75,7 @@
               <td>
 
                 <div>
-                  <label>Date éffective d'ouverture</label>
+                  <label>Date effective d'ouverture</label>
                   <div>
                     <input
                             type="date"
@@ -156,7 +156,7 @@
                 </td>
                 <div class="btn-group">
                   <button class="btn btn-link" title="Supprimer" @click.prevent="supprimeStructureSelectionner(appelOffre.id)">
-                    <span class=""><i class="icon-trash"></i></span>
+                    <span class=""><i class="icon-trash"></i>Supprimer</span>
                   </button>
 
                 </div>
@@ -173,7 +173,7 @@
       </div>
       <div class="modal-footer">
         <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterCojoMarche()" href="#">Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
     </div>
 
     <!-- end formulaire cojo  -->
@@ -217,7 +217,7 @@
 
 
           <div class="control-group">
-            <label class="control-label">Date éffectiive d'ouverture</label>
+            <label class="control-label">Date effectiive d'ouverture</label>
             <div class="controls">
               <input
                   type="date"
@@ -256,7 +256,7 @@
       </div>
       <div class="modal-footer">
         <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationCojo()" href="#">Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
     </div>
     <!-- end modifier cojo -->
 <notifications/>

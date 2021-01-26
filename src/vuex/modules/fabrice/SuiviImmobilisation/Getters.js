@@ -1160,6 +1160,13 @@ export const groupeAffectationUaBiens = (state, getters) => {
 
 
 
+export const groupeArticle = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.articles, "libelle");
+};
+
+
+
 
 
 

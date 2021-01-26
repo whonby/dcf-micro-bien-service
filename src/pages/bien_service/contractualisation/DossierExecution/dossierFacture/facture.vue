@@ -1,5 +1,4 @@
-detail_marche
-Ajouter Facture
+
 <template>
 
 <div>
@@ -15,7 +14,7 @@ Ajouter Facture
                     <tr>
                       <td>
 <div class="control-group">
-                            <label class="control-label">Type de procedure</label>
+                            <label class="control-label">Type de procédure</label>
                             <div class="controls">
                              
                               <select v-model="formData.tprocedure" class="span12">
@@ -73,7 +72,7 @@ Ajouter Facture
               
                <td>
                 <div class="control-group">
-                  <label class="control-label">Numero facture</label>
+                  <label class="control-label">Numéro facture</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -101,7 +100,7 @@ Ajouter Facture
               </td>
                <td colspan="">
                 <div class="control-group">
-                   <label class="control-label">Unite administrative</label>
+                   <label class="control-label">Unité administrative</label>
                 <div class="controls">
                  <input
                     type="text"
@@ -132,7 +131,7 @@ Ajouter Facture
               
                <td>
                 <div class="control-group">
-                <label class="control-label">exonéré</label>
+                <label class="control-label">Exonéré</label>
                 <div class="controls">
                   <select v-model="formData1.exonere" class="span">
                   
@@ -529,7 +528,7 @@ Ajouter Facture
               
                <td>
                 <div class="control-group">
-                  <label class="control-label">Numero facture</label>
+                  <label class="control-label">Numéro facture</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -557,7 +556,7 @@ Ajouter Facture
               </td>
                <td colspan="">
                 <div class="control-group">
-                   <label class="control-label">Unite administrative</label>
+                   <label class="control-label">Unité administrative</label>
                 <div class="controls">
                  <input
                     type="text"
@@ -588,7 +587,7 @@ Ajouter Facture
               
                <td>
                 <div class="control-group">
-                <label class="control-label">exonéré</label>
+                <label class="control-label">Exonéré</label>
                 <div class="controls">
                   <select v-model="formData1.exonere" class="span">
                   
@@ -1013,7 +1012,7 @@ Ajouter Facture
               </td>
                <td colspan="">
                 <div class="control-group">
-                   <label class="control-label">Unite administrative</label>
+                   <label class="control-label">Unité administrative</label>
                 <div class="controls">
                  <input
                     type="text"
@@ -1044,7 +1043,7 @@ Ajouter Facture
               
                <td>
                 <div class="control-group">
-                <label class="control-label">exonéré</label>
+                <label class="control-label">Exonéré</label>
                 <div class="controls">
                   <select v-model="formData1.exonere" class="span">
                   
