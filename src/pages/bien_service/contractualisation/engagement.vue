@@ -11,7 +11,7 @@ affichierMontantAvenant
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>DETAIL  MARCHE </h5>
+              <h5>DETAIL MARCHE </h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -24,14 +24,14 @@ affichierMontantAvenant
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
-                               <th style="font-size:12px;font-weight:bold;">Reference marché</th>
-                               <th style="font-size:12px;font-weight:bold;">Numéro marché</th>
-                                <th style="font-size:12px;font-weight:bold;">Objet marché</th>
+                               <th style="font-size:12px;font-weight:bold;">Référence du marché</th>
+                               <th style="font-size:12px;font-weight:bold;">Numéro du marché</th>
+                                <th style="font-size:12px;font-weight:bold;">Objet du marché</th>
                                 
                              
                                 <th style="font-size:12px;font-weight:bold;">Type de marché</th>
                                 <th style="font-size:12px;font-weight:bold;">Procédure de passation </th>
-                                <th style="font-size:12px;font-weight:bold;">Unite administrative</th>
+                                <th style="font-size:12px;font-weight:bold;">Unité administrative</th>
                                 <th style="font-size:12px;font-weight:bold;">Activité</th>
                     <th style="font-size:12px;font-weight:bold;">Imputation</th>
                        <th style="font-size:12px;font-weight:bold;">Montant de base</th>
@@ -56,7 +56,7 @@ affichierMontantAvenant
                          <span v-else-if="DisponibleBudgetaireApresLiquidation < 30000000 ">Procédure Simplifiée de demande de Cotation(PSC Avec comité)</span>
                          <span v-else-if="DisponibleBudgetaireApresLiquidation < 60000000 ">Procédure Simplifiée à compétition Limitée(PSL)</span>
                          <span v-else-if="DisponibleBudgetaireApresLiquidation < 100000000 ">Procédure Simplifiée à compétition Ouverte(PSO)</span>
-                         <span v-else-if="DisponibleBudgetaireApresLiquidation > 100000000 ">Appel d'Offre Ouvert(AON ou AOI)</span>
+                         <span v-else-if="DisponibleBudgetaireApresLiquidation > 100000000 ">Appel d'Offre Ouvert (AON ou AOI)</span>
                          <span v-else></span>
                                 </td>
                                 <td class="taskOptions" style="font-size:14px;font-weight:bold;">
@@ -199,7 +199,7 @@ affichierMontantAvenant
                                <li class="active"><a data-toggle="tab" href="#tab2078">Avenant</a></li>
                                <li ><a data-toggle="tab" href="#tab100">Facture</a></li>
                                 <li ><a data-toggle="tab" href="#tab10">Engagement</a></li>
-                                <li ><a data-toggle="tab" href="#tab15550">Réalité service fait</a></li>
+                                <li ><a data-toggle="tab" href="#tab15550">Réalité de service fait</a></li>
                                 <li ><a data-toggle="tab" href="#tab120120">Liquidation</a></li>
                                 <li><a data-toggle="tab" href="#tab20">Mandat</a></li>
                                  <li><a data-toggle="tab" href="#tab20002">Décompte</a></li>
@@ -238,13 +238,13 @@ affichierMontantAvenant
                                 
                                   <th title="">Disponible</th>
                                   <!-- <th>Date paiement</th> -->
-                                  <th>Imputation budgetaire</th>
+                                  <th>Imputation budgétaire</th>
                                 
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th>Observation du Emmetteur</th>
+                                <th>Observation de l'émetteur</th>
                                 
-                                <th>Observation Controleur financier</th>
-                                <th>Observation du ordonnateur</th>
+                                <th>Observation du Contrôleur financier</th>
+                                <th>Observation de l'ordonnateur</th>
                                 <th>Action</th>
                                     </tr>
                                     </thead>
@@ -534,12 +534,12 @@ affichierMontantAvenant
                               
                                  <th title="">Fournisseur</th>
                                 <th title="">N°facture</th>
-                                 <th>Date facture</th>
+                                 <th>Date de la facture</th>
                                   <th>Imputation</th>
                                 <th>Montant</th>
                                 <!-- <th>Service béneficiaire</th> -->
                                 <th title="Observation service beneficiaire">Observation S-B</th>
-                                <th title="Observation Controleur financier">Observation CF</th>
+                                <th title="Observation Contrôleur financier">Observation CF</th>
                                 <th>Action</th>
                                     </tr>
                                     </thead>
@@ -754,15 +754,15 @@ affichierMontantAvenant
                                     <tr>
 
                                         <th>Année</th>
-                                          <th title="numero de  demande engagement">N°demande engagement</th>
-                                <th title="numero de bordereau">N°bordereau engagement</th>
-                                 <th title="numero de l'engagement">N°engagement</th>
+                                          <th title="numero de  demande engagement">N° demande d'engagement</th>
+                                <th title="numero de bordereau">N° bordereau d'engagement</th>
+                                 <th title="numero de l'engagement">N° d'engagement</th>
                                 <th title="programme/dotation">Prog/Dotat</th>
                                 <!-- <th>Action Programmatique</th>
                                 <th>Activite</th> -->
-                                <th title="unite administrative">Ua</th>
+                                <th title="Unité administrative">UA</th>
                                  <th>Imputation</th>
-                                  <th title="ligne budgetaire">Section</th>
+                                  <th title="Ligne budgétaire">Section</th>
                                   <th>Montant</th>
                                   <th>Décision CF</th>
                                 <th>Action</th>
@@ -898,11 +898,11 @@ affichierMontantAvenant
                                     <thead>
                                    <tr>
                     <th>Marché</th>
-                      <th>Type acte financier</th>
-                        <th>Numéro avenant</th>
-                    <th>Objet Avenant</th>
-                    <th>Montant Avenant</th>
-                     <th>Date Avenant</th>
+                      <th>Type d'acte financier</th>
+                        <th>Numéro de l'avenant</th>
+                    <th>Objet de l'avenant</th>
+                    <th>Montant de l'avenant</th>
+                     <th>Date de l'avenant</th>
                     
                     <th>Action</th>
                   </tr>
@@ -965,17 +965,17 @@ affichierMontantAvenant
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>N° du marche</th>
+                                        <th>N° du marché</th>
                                          <th>N° du mandat</th>
                                         <th>N° bordereau mandat</th>
-                                        <th>N° demande engagement</th>
-                                          <th>N° engagement</th>
-                                        <th>Type procedure</th>
+                                        <th>N° demande d'engagement</th>
+                                          <th>N° d'engagement</th>
+                                        <th>Type de procédure</th>
                                         
                                        
                              
-                                <th>Montant Mandat</th>
-                                 <th >Decision de emetteur</th>
+                                <th>Montant du mandat</th>
+                                 <th >Decision de l'émetteur</th>
                                 <th title="Date validation Emetteur">Date Emetteur</th>
                                 
                               
@@ -1176,7 +1176,7 @@ affichierMontantAvenant
                       </button>
                       <button class="btn btn-danger" @click="supprimerFacture(factu.id)">
                         <span>
-                          <i class="icon icon-trash"></i>
+                          <i class="icon icon-trash">Supprimer</i>
                         </span>
                       </button>
                     </td>
@@ -1200,18 +1200,18 @@ affichierMontantAvenant
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                    <tr>
-                                     <th>Année budgetaire</th>
-                    <th>Objet marché</th>
-                    <th>Numero marché</th>
-                    <th>Montant marché</th>
-                    <th>Date decompte</th>
-                    <th>Montant decompte</th>
+                                     <th>Année budgétaire</th>
+                    <th>Objet du marché</th>
+                    <th>Numéro du marché</th>
+                    <th>Montant du marché</th>
+                    <th>Date décompte</th>
+                    <th>Montant décompte</th>
                     <th>Montant cumuler</th>
                     <th>Dotation prévu</th>
-                    <th>Montant executé dotation</th>
-                    <th>Reste executé dotation</th>
-                    <th>Montant executé marché</th>
-                    <th>Reste executé marché</th>
+                    <th>Montant exécuté dotation</th>
+                    <th>Reste exécuté dotation</th>
+                    <th>Montant exécuté marché</th>
+                    <th>Reste exécuté marché</th>
                      
                       <!-- <th>Fournisseur</th> -->
                         <!-- <th>Marché</th>
@@ -1438,7 +1438,7 @@ affichierMontantAvenant
                     <div id="tab189" class="tab-pane active">
                       <tr>
                         <td>
-                          <label class="control-label">Exercice Budgetaire</label>
+                          <label class="control-label">Exercice Budgétaire</label>
                          
 
                               <input    type="text"   class="span3" readonly  v-model="editLiquidation.exo_id" />                
@@ -1467,7 +1467,7 @@ affichierMontantAvenant
                       </tr>
                        <tr>
                           <td>
-                          <label class="control-label">Activite</label>
+                          <label class="control-label">Activité</label>
                           
                               <input    type="text"   class="span3" readonly  :value="afficheActiviteLibelle(afficheActiviteId(editLiquidation.marche_id))" />                              
                              

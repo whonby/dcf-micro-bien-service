@@ -12,7 +12,7 @@ this.ajouterMarche
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Demande d' Engagement</h5>
+              <h5>Demande d'engagement</h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -25,14 +25,14 @@ this.ajouterMarche
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">Budget General</a>
+                        <a data-toggle="tab" href="#tab1">Budget Général</a>
                       </li>
                       <li>
-                        <a data-toggle="tab" href="#tab2">Type Procedure</a>
+                        <a data-toggle="tab" href="#tab2">Type de Procédure</a>
                       </li>
                       
                        <li>
-                        <a data-toggle="tab" href="#tab3">Imputation Budgetaire</a>
+                        <a data-toggle="tab" href="#tab3">Imputation Budgétaire</a>
                       </li>
                     </ul>
                   </div>
@@ -42,7 +42,7 @@ this.ajouterMarche
                       <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Exercice Budgetaire</label>
+                            <label class="control-label">Exercice Budgétaire</label>
                             
                                
                              <div class="controls">
@@ -57,7 +57,7 @@ this.ajouterMarche
                         </td>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Numero engagement</label>
+                            <label class="control-label">Numéro d'engagement</label>
                             
                                
                              <div class="controls">
@@ -72,7 +72,7 @@ this.ajouterMarche
                         </td>
                         <td>
                              <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
+                            <label class="control-label">Unité administrative</label>
                             <div class="controls">
                               <select v-model="formData.ua_id">
                                  <option
@@ -130,7 +130,7 @@ this.ajouterMarche
                          
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Activite</label>
+                            <label class="control-label">Activité</label>
                             <div class="controls">
                               <select v-model="formData.activite_id">
                                  <option
@@ -161,7 +161,7 @@ this.ajouterMarche
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Nature depense</label>
+                            <label class="control-label">Nature dépense</label>
                              <div class="controls">
                                   <select v-model="formData.grd_nature_id">
                               <option
@@ -197,12 +197,12 @@ this.ajouterMarche
                         
                         <td>
                            <div class="control-group">
-                            <label class="control-label">Type Procedure</label>
+                            <label class="control-label">Type Procédure</label>
                             <div class="controls">
                               <select v-model="formData.type_procedure_id">
                                    
                               
-                                    <option value="1">Engagement par Bon de Commande</option>
+                                    <option value="1">Engagement par bon de commande</option>
                                     <option value="0">Engagement direct</option>
                               </select>
                                
@@ -214,11 +214,11 @@ this.ajouterMarche
                         </td>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Type d'engagement Direct</label>
+                            <label class="control-label">Type d'engagement direct</label>
                             <div class="controls">
                               <select v-model="formData.type_engagement_id">
                                   <option value="0">Marche</option>
-                                    <option value="1">Régie d'avances - reservation des crédits</option>
+                                    <option value="1">Régie d'avances - réservation des crédits</option>
                                        <option value="2">Régularisation d'ordre de paiement (OP)</option>
                                     <option value="3">Régularisation avances de trésorerie (AT)</option>
                                      <option value="4">Autres</option>
@@ -231,7 +231,7 @@ this.ajouterMarche
                          
                         <td>
                             <div class="control-group">
-                              <label class="control-label">Réf. Engagement  juridique</label>
+                              <label class="control-label">Réf. Engagement juridique</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -263,7 +263,7 @@ this.ajouterMarche
                         </td>
                           <td>
                          <div class="control-group">
-                            <label class="control-label">Numero cc</label>
+                            <label class="control-label">Numéro CC</label>
                             <div class="controls">
                              <div class="controls">
                               <input type="text" class="span" :value="NumeroFournisseur" readonly/>
@@ -284,7 +284,7 @@ this.ajouterMarche
                        
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Nom entreprise</label>
+                            <label class="control-label">Nom de l'entreprise</label>
                             <div class="controls">
                               <input type="text" class="span" :value="nomFournisseur"/>
                                
@@ -398,7 +398,7 @@ this.ajouterMarche
                         
                         <td colspan="2">
                            <div class="control-group">
-                            <label class="control-label">Ligne Budgetaire</label>
+                            <label class="control-label">Ligne Budgétaire</label>
                             <div class="controls">
                               <select v-model="formData.ligne_budgetaire_id" class="span14">
                                 <option

@@ -7,7 +7,7 @@
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5>Detail Réalite Service Fait</h5>
+            <h5>Détail Réalite Service Fait</h5>
           </div>
 
           <!--- PREMIERE PARTIE --->
@@ -17,11 +17,11 @@
                 <tr>
                  <th>Année</th>
                   <th title="">Ministere</th>
-                                    <th title="">Objet de la depense</th>
+                                    <th title="">Objet de la dépense</th>
                                 <th title="">Fournisseur</th>
                                  <th title="">Adresse</th>
-                                <th title="">Numero facture</th>
-                                <th>Date facture</th>
+                                <th title="">Numéro de la facture</th>
+                                <th>Date de la facture</th>
                                 <th>Ordre de paiement</th>
                                
                                 
@@ -57,11 +57,11 @@
                  
                             
                                   <th title="">Service Bénéficiaire</th>
-                                  <th>Decision Service bénéficiaire</th>
+                                  <th>Décision Service bénéficiaire</th>
                                   <th>Date</th>
                                   <th>Nom et prénoms Service bénéficiaire</th>
                                   <th>Observation Service bénéficiaire</th>
-                                 <th>Decision CF</th>
+                                 <th>Décision CF</th>
                                   <th>Date</th>
                                   <th>Nom et prénoms CF</th>
                                    <th>Observation CF</th>

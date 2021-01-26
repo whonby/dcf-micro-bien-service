@@ -264,6 +264,7 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                return 0
            }
      },
+     
       dureeGarantie(){
          return marche_id=>{
                let objet=this.listeActeEffectFinnancier(marche_id)

@@ -303,7 +303,7 @@
                 <div class="controls">
                   <input
                       type="date"
-                      :value="formReception.	Date_reception_provisoire"
+                      :value="formReception.Date_reception_provisoire"
                       class="span3"
                       
                   />
@@ -379,7 +379,7 @@
                 <label class="control-label">Ecart de démarrage (E-A)</label>
                 <div class="controls">
                   <input
-                      type="text"
+                      type="text" :value="calculeDureEcart"
                       
                       class="span3"
                       
@@ -647,7 +647,7 @@
               <div class="control-group">
                 <label class="control-label">Date de debut d'execution réelle</label>
                 <div class="controls">
-                  <input
+                  <input v-model="formReception.date_debut_execution_reel"
                       type="date"
                       
                       class="span3"
@@ -934,6 +934,7 @@ afficheNumeroMarche() {
         }
       };
     },
+
      afficherDatedebutex() {
       return id => {
         if (id != null && id != "") {
@@ -947,6 +948,27 @@ afficheNumeroMarche() {
         }
       };
     },
+
+   
+
+     calculeDureEcart(){
+   
+
+   var dateR = new Date(this.formReception.Date_debut_execution).getTime()
+    var dateD = new Date( this.afficherDatedebutex(this.detail_marche.id)).getTime()
+    var diffTime = dateR - dateD
+    var diffJours = diffTime / (1000 * 3600 * 24)
+    
+          if(isNaN(diffJours)) return null
+
+    if(parseFloat(diffJours) < 0 ) return "durée invalide"
+        console.log(diffJours)
+      return diffJours;
+   },
+
+
+
+
      afficherDatereception() {
       return id => {
         if (id != null && id != "") {
@@ -1273,9 +1295,9 @@ afficherModalProcedureFacture() {
       };
       this.ajouterDecompteFacture(nouvelObjet);
     this.ajouterModalActeEffetFinancierLocal()
-      this.formData = {
+      // this.formData = {
       
-      };
+      // };
     },
 
 
