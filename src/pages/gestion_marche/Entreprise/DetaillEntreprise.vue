@@ -155,11 +155,11 @@
             </div>
         </div>
 
-<!-- Ajouter appel offres --->
+
         <div id="myAlert" class="modal hide tailModal"  >
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter compte bancaire</h3>
+                <h3>Ajouter compte bancaire1</h3>
             </div>
             <div class="modal-body">
                
@@ -291,7 +291,7 @@
                         <div class="control-group">
                             <div class="controls">
                                 <label>Nature de compte</label>
-                                <!-- <input type="text" class="span" placeholder="saisir la nature de compte" v-model="formData.nature_compte"> -->
+                               
                            <select v-model="formData.nature_compte" class="span4">
                                                             <option></option>
                                                             <option value="0">Compte courant</option>
@@ -307,10 +307,7 @@
                              <label>Numero compte/cléRib</label>
                             <div class="controls">
                               
-                            <!-- <select v-model="formData.entrepse_id" class="span">
-                                <option v-for="varText in entreprises" :key="varText.id"
-                              :value="varText.id">{{varText.raison_sociale}}</option>
-                            </select> -->
+                            
                                   <div class="controls">
                                 <input type="text" class="span3" placeholder="" v-model="formData.numero_compte"> <input type="text" class="span1" placeholder="" v-model="formData.clerib">
                             </div>
@@ -385,9 +382,7 @@
  </div>
         </div>
 
-        <!-- Fin ajouter appel offres --->
-
-        <!-- Modification appel offres --->
+        
 
 
 
@@ -604,7 +599,7 @@
             <div class="modal-footer">  <a @click.prevent="modifierCompteLocal(editCompte)"   class="btn btn-primary"
               href="#">Modifier</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
-        <!-- Modification fin appel offres --->
+        
 
       
  <!--<fab :actions="fabActions" @cache="afficherModalAjouterActeDepense" main-icon="apps" bg-color="green"></fab>-->
