@@ -37,13 +37,13 @@
                         <a data-toggle="tab" href="#EntreeEnStock">Mon Patrimoine</a>
                       </li> -->
                        <li class="active" v-if="AfficheCode1 == 3">
-                        <a data-toggle="tab" href="#EntreeEnStock" >{{AfficheLibelle1}}  <span class="badge badge" >{{NombreDeVehicule(detail_Ua.uAdministrative_id)}}</span></a>
+                        <a data-toggle="tab" href="#EntreeEnStock" >{{AfficheLibelle1}}  </a>
                       </li>
                        <li class="" v-if="AfficheCode2 == 1">
-                        <a data-toggle="tab" href="#Affectation2" >{{AfficheLibelle2}} <span class="badge badge" >{{NombreDeMateriel(detail_Ua.uAdministrative_id)}}</span></a>
+                        <a data-toggle="tab" href="#Affectation2" >{{AfficheLibelle2}} </a>
                       </li>
                        <li class="" v-if="AfficheCode3 == 2">
-                        <a data-toggle="tab" href="#Affectation3" >{{AfficheLibelle3}}</a>
+                        <a data-toggle="tab" href="#Affectation3" >{{AfficheLibelle3}}  </a>
                       </li>
                        <li class="" v-if="AfficheCode4 == 4">
                         <a data-toggle="tab" href="#Affectation4" >{{AfficheLibelle4}}</a>
@@ -433,44 +433,42 @@
                     :key="stock.id"
                   >
 
-                    <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.articlestock_id || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTitre(id)"
+                    <td style="width:10%;text-align:center"
+                      @dblclick="ModificationMobilier(stock.id)"
+                    >{{libelleFamilleEquipement(stock.articlestock_id) || 'Non renseigné'}}</td>
+                     <td style="width:10%;text-align:center"
+                      @dblclick="ModificationMobilier(stock.id)"
                     >{{stock.description_article || 'Non renseigné'}}</td>
-                   <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.date_mise_service || 'Non renseigné'}}</td>
-                  <td
-                      @dblclick="afficherModalModifierTitre(id)"
+                   <td style="width:10%;text-align:center"
+                      @dblclick="ModificationMobilier(stock.id)"
+                    >{{formaterDate(stock.date_mise_service) || 'Non renseigné'}}</td>
+                  <td style="width:10%;text-align:center"
+                      @dblclick="ModificationMobilier(stock.id)"
                     >{{stock.quantitestock || 'Non renseigné'}}</td>
-                    <td
-                      @dblclick="afficherModalModifierTitre(id)"
-                    >{{stock.quantitestock || 'Non renseigné'}}</td>
+                   
 
 
 
                     <td style="text-align:center;font-weight:bold;"
-                      @dblclick="ModificationMateriel(stock.id)"
+                      @dblclick="ModificationMobilier(stock.id)"
                     >{{formatageSomme(parseFloat(montantPasEquipment(stock))) || 'Non renseigné'}}</td>
                    <td style="text-align:center;font-weight:bold;" v-if="stock.date_mise_service != null"
-                      @dblclick="ModificationMateriel(stock.id)"
+                      @dblclick="ModificationMobilier(stock.id)"
                     >{{formatageSomme((parseFloat(prixUnitaire(stock.id)) *((DureeEcoule(stock.id))/365)*(1/(dureeVie(stock.id)))))|| 0}}</td>
 
 <td style="text-align:center;font-weight:bold;" v-else
-                      @dblclick="ModificationMateriel(stock.id)"
+                      @dblclick="ModificationMobilier(stock.id)"
                     >{{formatageSomme(0)}}</td>
 
 <td style="text-align:center;font-weight:bold;" v-if="stock.date_mise_service != null"
-                      @dblclick="ModificationMateriel(stock.id)"
+                      @dblclick="ModificationMobilier(stock.id)"
                     >{{formatageSomme((parseFloat(stock.prix_unitaire))-parseFloat((parseFloat(prixUnitaire(stock.id)) *(parseFloat(DureeEcoule(stock.id))/365)*(1/(dureeVie(stock.id))))))}}</td>
 <td style="text-align:center;font-weight:bold;" v-else
-                      @dblclick="ModificationMateriel(stock.id)"
+                      @dblclick="ModificationMobilier(stock.id)"
                     >{{formatageSomme(0)}}</td>
                        <td>
                        <router-link
-                        :to="{name : '', params: {id:stock.id}}"
+                        :to="{name : 'DetailMobilierGestionStock', params: {id:stock.id}}"
                         class="btn btn-success"
                         title="Faire Affectation"
                       >
@@ -484,10 +482,10 @@
                <tr>
                  <td></td>
                  <td></td>
+                 <td style="text-align:center;font-weight:bold;" >TOTAL</td>
+                  <td style="text-align:center;color:red;font-weight:bold;">{{NbreDesEquipementMobilier(detail_Ua.uAdministrative_id)}}</td>
+                   <td style="text-align:center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(montantTotalMobilier))}}</td>
                  <td></td>
-                 <td></td>
-                 <td></td>
-                 <td>89</td>
                  <td></td>
                  <td></td>
                </tr>
@@ -590,8 +588,9 @@
                    <td></td>
                    <td></td>
                    <td></td>
-                   <td></td>
-                    <td style="font-weight:bold;">TOTAL</td>
+                   
+                    <td style="text-align:center;font-weight:bold;" >TOTAL</td>
+                    <td style="text-align:center;color:red;font-weight:bold;">{{NbreDesEquipementMateriel(detail_Ua.uAdministrative_id)}}</td>
                    <td style="text-align:center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(montantTotalMateriel))}}</td>
                    <td></td>
                    <td></td>
@@ -716,8 +715,8 @@
                    <td></td>
                    <td></td>
                    <td></td>
-                   <td></td>
                    <td style="font-weight:bold;">TOTAL</td>
+                   <td style="text-align:center;color:red;font-weight:bold;">{{NbreDesEquipementVehicules(detail_Ua.uAdministrative_id)}}</td>
                    <td style="text-align:center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(montantTotalVehicule))}}</td>
                    <td></td>
                    <td></td>
@@ -891,7 +890,8 @@ search1:""
         return 0
      }
    },
-    montantTotalMobilier(){
+    
+   montantTotalMobilier(){
       let montantTotal =0
        let vm=this
        this.listeDesEquipementPar04(this.detail_Ua.uAdministrative_id).forEach(function(val){
@@ -1044,6 +1044,14 @@ NombreDeVehicule() {
       return id => {
         if (id != null && id != "") {
            return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(qtreel.typebien_id) == 3).length;
+
+        }
+      };
+    },
+    NombreDeMobilier() {
+      return id => {
+        if (id != null && id != "") {
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id && this.recupereTypeBienParCode(qtreel.typebien_id) == 2).length;
 
         }
       };
@@ -1329,6 +1337,30 @@ listeDesEquipementPar04() {
       return id => {
         if (id != null && id != "") {
            return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id &&  this.recupereTypeBienParCode(qtreel.typebien_id) == 2);
+
+        }
+      };
+    },
+    NbreDesEquipementMobilier() {
+      return id => {
+        if (id != null && id != "") {
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id &&  this.recupereTypeBienParCode(qtreel.typebien_id) == 2).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+
+        }
+      };
+    },
+    NbreDesEquipementMateriel() {
+      return id => {
+        if (id != null && id != "") {
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id &&  this.recupereTypeBienParCode(qtreel.typebien_id) == 1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+
+        }
+      };
+    },
+    NbreDesEquipementVehicules() {
+      return id => {
+        if (id != null && id != "") {
+           return this.GestionStockageArticles.filter(qtreel => qtreel.uAdministrative_id == id &&  this.recupereTypeBienParCode(qtreel.typebien_id) == 3).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
 
         }
       };
@@ -1777,6 +1809,12 @@ DureeEcoule(id){
 
     },
 
+ModificationMobilier(id) {
+
+      this.$router.push({
+        path: "/modificationMobilier/" + id
+      });
+    },
 ModificationMateriel(id) {
 
       this.$router.push({

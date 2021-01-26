@@ -16,7 +16,10 @@ Type de Recrutement
                 </a> </li>
             </ul>
         </div> -->
-
+ <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button>
+    
+        </div> 
         <div class="container-fluid" style="heigth:100%">
 
             <hr>
@@ -25,7 +28,7 @@ Type de Recrutement
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab10">Liste du personnel </a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab10">Liste du personnel {{formData.unite_administrative_id}}</a></li>
                                  <li class=""><a data-toggle="tab" href="#AjouterPersonnelAvecContrat">Ajouter Personnel Avec Contrat </a></li>
                                  <li class=""><a data-toggle="tab" href="#AjouterPersonnelSansContrat">Ajouter Personnel Sans Contrat </a></li>
                                  <!-- <li class=""><a data-toggle="tab" href="#tab78">Contrat de Recrutement Direct </a></li> -->
@@ -122,7 +125,7 @@ Type de Recrutement
                                         </div>
                                     </div>
                                     <div class="widget-content nopadding">
-                                        <table class="table table-bordered table-striped">
+                                          <table class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
                                                 <!-- <th>Situation matrimoniale </th> -->
@@ -140,7 +143,7 @@ Type de Recrutement
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="odd gradeX" v-for="item in acteurActivite" :key="item.id">
+                                            <tr class="odd gradeX" v-for="item in afficheListePersonnel(formData.unite_administrative_id)" :key="item.id">
   
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}{{item.id}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
@@ -1326,7 +1329,15 @@ AffichierElementParent() {
             //     )
 
             // },
-           
+           afficheListePersonnel() {
+      return id => {
+        if (id != null && id != "") {
+           return this.acteurActivite.filter(qtreel => qtreel.unite_administrative_id == id);
+
+      
+        }
+      };
+    },
   acteurActivite() {
         const searchTerm = this.search.toLowerCase();
 
@@ -1540,7 +1551,9 @@ acteurNonActivite() {
           'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
 
          
-
+afficherModalListeExecution(){
+                window.history.back();
+            },
 
               ajouterModalActeEffetFinancierLocal(){
         var nouveauObjet = {

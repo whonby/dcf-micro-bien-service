@@ -37,7 +37,7 @@
                         <a data-toggle="tab" href="#EntreeEnStock">Mon Patrimoine</a>
                       </li> -->
                        <li class="active" v-if="AfficheCode1 == 3">
-                        <a data-toggle="tab" href="#EntreeEnStock" >{{AfficheLibelle1}}  <span class="badge badge" >{{NombreDeVehicule(detail_Ua.uAdministrative_id)}}</span></a>
+                        <a data-toggle="tab" href="#EntreeEnStock" >{{AfficheLibelle1}}  </a>
                       </li>
                        <li class="" v-if="AfficheCode2 == 1">
                         <a data-toggle="tab" href="#Affectation2" >{{AfficheLibelle2}}</a>
@@ -498,11 +498,12 @@
                   <tr>
                      
                     
+
                     
                      <th style="width:15%">Article</th>
-                     <th style="width:15%">Marque</th>
+                     <th style="width:15%">Marque785</th>
                      <th style="width:15%">Modèle</th>
-                     <th style="width:15%">No série</th>
+                     <th style="width:15%">No série25</th>
                     <!-- <th>Quantité Initiale</th>  -->
                     <th style="width:15%">Quantité</th>
                     <th style="width:15%">Valeur d'acquisition</th>

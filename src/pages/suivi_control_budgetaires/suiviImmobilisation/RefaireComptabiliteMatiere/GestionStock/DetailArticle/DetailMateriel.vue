@@ -75,8 +75,9 @@
                     :key="equipement.id">
                   <td>{{afficherLibelleService(service_id(equipement.id)) || 'Non renseigné'}}</td>
                   <td>{{afficherLibelleFonction(fonction_id(equipement.id)) || 'Non renseigné'}}</td>  
-                     <td>{{formaterDate(dateAffectation(equipement.id)) || 'Non renseigné'}}</td>
                   <td>{{nomPersonnel(equipement.id) || 'Non renseigné'}}</td>  
+                     <td>{{formaterDate(dateAffectation(equipement.id)) || 'Non renseigné'}}</td>
+                  
                   
 
                 </tr>

@@ -10,7 +10,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Modification Matériel</h5>
+              <h5>Modification Mobilier</h5>
              
             </div>
 
@@ -156,7 +156,7 @@
             </td>
                     <td>
                <div class="control-group">
-            <label class="control-label">Quantité Récu</label>
+            <label class="control-label">Quantité Reçu</label>
             <div class="controls">
                               <input
                 type="text"
@@ -206,7 +206,7 @@
                       
                     <ul class="nav nav-tabs">
                     
-        <li class="active"><a data-toggle="tab" href="#vehicule">Fiche Matériel</a></li>
+        <li class="active"><a data-toggle="tab" href="#vehicule">Fiche Mobilier</a></li>
         
                      
                     </ul>
@@ -217,86 +217,28 @@
                       <div id="vehicule" class="tab-pane active">
      
          <table class="table table-bordered table-striped" >
-               <tr>
-                     <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Description</label>
+             <tr>
+                 <td colspan="3">
+                   <div class="control-group">
+                  <label class="control-label" style="font-size:14px">Description </label>
                   <div class="controls">
-                    <input
-                      type="text"
-                    v-model="detail_vehicule.autreinfo"
-                      class="span"
-                      
-                    />
+                   <textarea rows="4" v-model="detail_vehicule.description_article" class="span12">
+                     
+                     </textarea>
                   </div>
                 </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Marque</label>
-                  <div class="controls">
-                    <select  class="span" v-model="detail_vehicule.marque_id">
-                      <option></option>                     
-                      <option
-                        v-for="typeUniteA in AfficheModelMaterielMobilier"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Modele</label>
-                  <div class="controls">
-                    <select  class="span" v-model="detail_vehicule.model_id">
-                      <option></option>                     
-                      <option
-                        v-for="typeUniteA in afficheModeleParMarque(detail_vehicule.marque_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">N°Série</label>
-                  <div class="controls">
-                     <input
-                      type="text"
-                    v-model="detail_vehicule.numchassis"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      
+                 </td>
+                     
+                     
                   </tr>
-                    <tr>
-                       <td>
+            <tr>
+               <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Code immobilisation</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                    v-model="detail_vehicule.numero_matricule"
-                      class="span"
-                      
-                    />
-                  </div>
-                </div>
-                      </td>
-                      <td>
-                           <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Valeur d'acquisition unitaire HT</label>
+                  <label class="control-label" style="font-size:14px">Valeur d'acquisition unitaire HT </label>
                   <div class="controls">
                     <!-- <input
                       type="text"
-                    v-model="formData1.prix_unitaire"
+                  v-model="detail_vehicule.prix_unitaire"
                       class="span"
                       
                     /> -->
@@ -306,42 +248,31 @@
                       </td> 
                        <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Date d'acquisition / mise en service</label>
+                  <label class="control-label" style="font-size:14px">Date d'acquisition / mise en service </label>
                   <div class="controls">
-                     <input
+                    <input
                       type="date"
-                v-model="detail_vehicule.date_mise_service"
+                  v-model="detail_vehicule.date_mise_service"
                       class="span"
                       
                     />
-                    <!-- <select  class="span" v-model="formData1.immobilisation">
-                      <option></option>                     
-                       <option
-                        v-for="typeUniteA in lesClassDe3"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.code}}-{{typeUniteA.libelle}}</option>
-                    </select> -->
                   </div>
                 </div>
-                      </td>
-                     
-                      <!-- <td>
+                      </td> 
+                       <td>
                            <div class="control-group">
-                  <label class="control-label" style="font-size:14px">Durée de vie</label>
+                  <label class="control-label" style="font-size:14px">Code immobilisation</label>
                   <div class="controls">
                     <input
                       type="text"
-                    :value="dureDeVie(formData7.famille_id)"
+                  v-model="detail_vehicule.numero_matricule"
                       class="span"
-                      readonly
+                      
                     />
                   </div>
                 </div>
-                      </td> -->
-                       
-                  </tr>
-            
+                      </td> 
+            </tr>
                       
         </table>
       </div>
@@ -928,11 +859,7 @@ libelleUa() {
           durevie:this.dureDeVie(this.formData7.famill_id),
           typebien_id:this.AfficheTypeDeBien(this.formData7.famill_id),
           prix_unitaire:this.detail_vehicule.prix_unitaire,
-          autreinfo:this.detail_vehicule.autreinfo,
-          description_article:this.detail_vehicule.description_article,
-          
-          date_mise_service:this.detail_vehicule.date_mise_service,
-          numero_matricule:this.detail_vehicule.numero_matricule
+          autreinfo:this.detail_vehicule.autreinfo
       }
       
       //this.ajouterNouveauVehicule(objetNew);

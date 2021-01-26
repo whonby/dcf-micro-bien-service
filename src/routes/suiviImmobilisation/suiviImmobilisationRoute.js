@@ -134,12 +134,14 @@ import principalExecution from '../../pages/suivi_control_budgetaires/suiviImmob
 
  
  import DetailMaterielGestionStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailArticle/DetailMateriel.vue'
-
+ import DetailMobilierGestionStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailArticle/DetailMobilier.vue'
  import DetailVehiculeGestionStock from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailArticle/DetailVehicule.vue'
 
  import modificationVehicule from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/dossierModification/modificationVehicule.vue'
 
  
+ import modificationMobilier from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/dossierModification/modificationMobilier.vue'
+
  import modificationMateriel from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/dossierModification/modificationMateriel.vue'
 
 import listeDesArticlesAReparer from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierReparationEtEntretien/listeDesArticlesAReparer.vue'
@@ -159,6 +161,11 @@ const suiviImmobilisationRoutes = [
     component: listeDesArticlesAReparer
   },
   {
+    path: "/modificationMobilier/:id",
+    name: "modificationMobilier",
+    component: modificationMobilier
+  },
+  {
     path: "/modificationMateriel/:id",
     name: "modificationMateriel",
     component: modificationMateriel
@@ -172,6 +179,11 @@ const suiviImmobilisationRoutes = [
     path: "/DetailMaterielGestionStock/:id",
     name: "DetailMaterielGestionStock",
     component: DetailMaterielGestionStock
+  },
+  {
+    path: "/DetailMobilierGestionStock/:id",
+    name: "DetailMobilierGestionStock",
+    component: DetailMobilierGestionStock
   },
   {
     path: "/DetailVehiculeGestionStock/:id",

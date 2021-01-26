@@ -1169,6 +1169,7 @@ export const groupeArticle = (state, getters) => {
 
 
 
+
 export {
   familles,
   services,
