@@ -79,7 +79,7 @@
             <div class="widget-title">
             <ul class="nav nav-tabs">
              <li class="active"><a data-toggle="tab" href="#tab0074">Attribution</a></li>
-             <li class=""><a data-toggle="tab" href="#tab00214">Bailleur</a></li>
+             <li class=""><a data-toggle="tab" href="#tab0021403">Bailleur</a></li>
         </ul>
           </div>
     <div class="widget-content tab-content">
@@ -88,7 +88,7 @@
     </div>
 
 
-       <div id="tab00214" class="tab-pane">
+       <div id="tab0021403" class="tab-pane">
                 <div align="right">
              <div class="widget-content">
                  <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
@@ -120,13 +120,13 @@
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                  <li class="active"><a data-toggle="tab" href="#tab0145">l'offre</a></li>
-                              <li class=""><a data-toggle="tab" href="#lot1">Lots</a></li>
+                              <li class=""><a data-toggle="tab" href="#lot13">Lots</a></li>
 
-                                <li class=""><a data-toggle="tab" href="#tab01">Reception</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab021501">Reception</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab42521">Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab17">Attribution</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab2">Bailleur</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab2025">ANRMP</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab202154">Bailleur</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab2025014">ANRMP</a></li>
                                
                                 
                                 
@@ -143,7 +143,7 @@
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
                          </div>
-                         <div id="tab01" class="tab-pane">
+                         <div id="tab021501" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
@@ -152,7 +152,7 @@
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>
-                           <div id="lot1">
+                           <div id="lot13">
                              <lot-marche :macheid="detail_marche.id"></lot-marche>
                            </div>
 
@@ -169,7 +169,7 @@
                 </div>
 
 
-                     <div id="tab2" class="tab-pane">
+                     <div id="tab202154" class="tab-pane">
                 <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
@@ -181,7 +181,7 @@
 
                 </div>
 
-              <div id="tab2025" class="tab-pane">
+              <div id="tab2025014" class="tab-pane">
                 <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
@@ -195,7 +195,7 @@
 
 
 
-                   <div id="tab4" class="tab-pane">
+                   <div id="tab42521" class="tab-pane">
                    <component-ouverture :macheid="detail_marche.id"></component-ouverture>
                 </div>
 
@@ -214,9 +214,9 @@
 <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab01">l'offre</a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab01145">l'offre</a></li>
 
-                              <li class=""><a data-toggle="tab" href="#lot2">Lots</a></li>
+                              <li class=""><a data-toggle="tab" href="#lot0122">Lots</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab478">Reception</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab498">Ouverture</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab41180">PV d'ouverture</a></li>
@@ -224,8 +224,8 @@
                                 <li class=""><a data-toggle="tab" href="#tab7893204">Reserves CF</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab4110">PV Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab178">Attribution</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab0142">bailleur</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab01420">ANRMP</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab01402">bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab014200">ANRMP</a></li>
 
                             
                                 
@@ -234,7 +234,7 @@
                         
                          <div class="widget-content tab-content">
 
-                         <div id="tab01" class="tab-pane active">
+                         <div id="tab01145" class="tab-pane active">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
@@ -243,7 +243,7 @@
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
                          </div>
-                           <div id="lot2" class="tab-pane">
+                           <div id="lot0122" class="tab-pane">
                              <lot-marche :macheid="detail_marche.id"></lot-marche>
                            </div>
                         <div id="tab478" class="tab-pane">
@@ -309,7 +309,7 @@
 <!--                <component-acte :macheid="detail_marche.id"></component-acte>-->
                    <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
                 </div>
-                   <div id="tab0142" class="tab-pane">
+                   <div id="tab01402" class="tab-pane">
                 <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
@@ -320,7 +320,7 @@
                 <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
 
                 </div>
-                 <div id="tab01420" class="tab-pane">
+                 <div id="tab014200" class="tab-pane">
                 
                <Arnmp :macheid="detail_marche.id"></Arnmp>
 
@@ -507,7 +507,7 @@
                                 <li class="active"><a data-toggle="tab" href="#tab001">Offre</a></li>
                                 <li ><a data-toggle="tab" href="#tab0015">Lot</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab041">Lettre d'invitation CF</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab04">Mandaté</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab0864">Mandaté</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab051">Reception</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab784">Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab17041">PV d'ouverture</a></li>
@@ -551,7 +551,7 @@
 
                       <invitationCf :macheid="detail_marche.id"></invitationCf>
                          </div>
- <div id="tab04" class="tab-pane">
+ <div id="tab0864" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
@@ -672,17 +672,17 @@
                                    <!--<li class="active"><a data-toggle="tab" href="#tab001" title="tansmission du DAO a la DMP">Transmission</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab010">ANO DMP DAO</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab020">ANO Bailleur DAO</a></li>-->
-                                 <li class="active"><a data-toggle="tab" href="#tab4569" title="L'offres">L'Offre</a></li>
+                                 <li class="active"><a data-toggle="tab" href="#tab4562139" title="L'offres">L'Offre</a></li>
                               <li class=""><a data-toggle="tab" href="#lot3" title="Lot">Lots</a></li>
 
                               <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre I</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab04" title="">Mandaté</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab02">Reception de l'offre</a></li> -->
-                                <li class=""><a data-toggle="tab" href="#ouverture">Ouverture</a></li>
+                                <li class=""><a data-toggle="tab" href="#4120620">Ouverture</a></li>
                                 
                                 <!--<li class=""><a data-toggle="tab" href="#tab5">Dossier Candidat</a></li>-->
-                                <li class=""><a data-toggle="tab" href="#tab45" title="rapport ouverture">PV Ouverture</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab4502145" title="rapport ouverture">PV Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Analyse</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab25401031" title="">Reserves CF</a></li>
                                
@@ -691,10 +691,10 @@
                                  <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP">D.DMP</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab028" title="ANO/DMP attribution">A.ANO</a></li> -->
                                       
-                                      <li class=""><a data-toggle="tab" href="#tab28" title="demande ANO Bailleur"> D.Bailleur </a></li>
+                                      <li class=""><a data-toggle="tab" href="#tab0008" title="demande ANO Bailleur"> D.Bailleur </a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab0008" title="ANO bailleur attribution">A.Bailleur </a></li> -->
 
-                                <li class=""><a data-toggle="tab" href="#tab10">Attribution</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab0210">Attribution</a></li>
 
                                 <li class=""><a data-toggle="tab" href="#tab0143720">Bailleur</a></li>
 
@@ -736,7 +736,7 @@
                      
                          </div>-->
 
-                       <div id="tab4569" class="tab-pane active ">
+                       <div id="tab4562139" class="tab-pane active ">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
@@ -789,7 +789,7 @@
 
 
                          
-                   <div id="ouverture" class="tab-pane">
+                   <div id="4120620" class="tab-pane">
                      <ouverture-offre :macheid="detail_marche.id"></ouverture-offre>
                
                   <!--<component-ouverture :macheid="detail_marche.id"></component-ouverture>-->
@@ -802,14 +802,14 @@
                    <dossierCandidat :macheid="detail_marche.id"></dossierCandidat>
                 </div>
 
-                  <div id="tab45" class="tab-pane">
+                  <div id="tab4502145" class="tab-pane">
                <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
                     </div>
 
 
-                </div>
+                </div> 
                 <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
 
                 </div>
@@ -889,7 +889,7 @@
 
 
 
-                  <div id="tab28" class="tab-pane">
+                  <div id="tab0008" class="tab-pane">
 <!--                    44444-->
 <!--                       <div align="right">-->
 <!--                    <div class="widget-content">-->
@@ -907,7 +907,7 @@
 
                 </div>
 
-                        <div id="tab10" class="tab-pane">
+                        <div id="tab0210" class="tab-pane">
                     <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
 <!--                <component-acte :macheid="detail_marche.id"></componentActe>-->
 
@@ -949,7 +949,10 @@
                     </div>
                     
 </template>
+
       <template v-else-if="affcicheEtapeProcedure(0,['LCVM'],detail_marche.id )">
+
+      <div >
           <div class="widget-box">
              <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -971,7 +974,7 @@
                                     <a href="#ajouterOffre1" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
 
                         <publication-Offre :macheid="detail_marche.id"></publication-Offre>
-                        
+
                       <publicationOffreLCV :macheid="detail_marche.id"></publicationOffreLCV>
                          </div>
 
@@ -1024,6 +1027,7 @@
 
                 </div>
             </div>
+                    </div>
                     </div>
 
                     

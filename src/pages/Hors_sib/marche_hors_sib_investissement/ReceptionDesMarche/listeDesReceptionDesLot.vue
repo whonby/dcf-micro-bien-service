@@ -273,7 +273,7 @@
                 <div class="controls">
                   <input
                       type="text"
-                      :value="formReception.Periode_garantie"
+                      :value="dureeGarantie(detail_marche.id)"
                        class="span3"
                       
                   />
@@ -376,7 +376,7 @@
             </td>
              <td>
               <div class="control-group">
-                <label class="control-label">Ecart de démarrage </label>
+                <label class="control-label">Ecart de démarrage (E-A)</label>
                 <div class="controls">
                   <input
                       type="text"
@@ -390,7 +390,10 @@
             </td>
             
             
-             <td>
+           
+           </tr>
+           <tr>
+               <td>
 
               <div class="control-group">
                 <label class="control-label">Ecart d'execution</label>
@@ -405,6 +408,54 @@
                 </div>
               </div>
             </td>
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">date_debut_exectuion_definitif</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">date_reception_provisoire_definitif</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">date_reception_definitive</label>
+                <div class="controls">
+                  <input 
+                      type="date"
+                      
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             	
+               
+               
            </tr>
        </table>
       </div>
@@ -690,7 +741,7 @@
                 <label class="control-label">Ecart d'execution</label>
                 <div class="controls">
                   <input
-                      type="text"
+                      type=""
                       
                       class="span3"
                       
@@ -844,6 +895,7 @@ created() {
       return  diffJour;
 
     },
+
 afficheNumeroMarche() {
       return id => {
         if (id != null && id != "") {
@@ -907,6 +959,15 @@ afficheNumeroMarche() {
       return ""
         }
       };
+    },
+     listeActeEffectFinnancier: function () {
+      return macheid => {
+        if (macheid != "") {
+            console.log("....................")
+           console.log(macheid)
+          return this.getActeEffetFinancierPersonnaliser.find(idmarche => idmarche.marche_id == macheid)
+        }
+      }
     },
         afficherDatefinex() {
       return id => {
@@ -1061,6 +1122,19 @@ LibelleUniteAdministrative() {
         }
       };
     },
+     dureeGarantie(){
+         return marche_id=>{
+               let objet=this.listeActeEffectFinnancier(marche_id)
+              console.log(objet)
+               if(objet!=undefined){
+                   if(objet.durre_garantie==null) return 0
+
+                   return objet.durre_garantie
+               }
+                        
+               return 0
+           }
+     },
 
      Entreprise() {
       return id => {
