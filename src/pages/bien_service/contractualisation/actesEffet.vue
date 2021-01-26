@@ -26,7 +26,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste actes effets financiers</h5>
+              <h5>Liste actes à effets financiers</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -38,16 +38,16 @@
                 <thead>
                   <tr>
                      <th>Code</th>
-                        <th>Libelle acte</th>
-                        <th>Reference acte</th>
+                        <th>Libellé de l'acte</th>
+                        <th>Référence de l'acte</th>
                         <!-- <th>Objet acte</th> -->
                         <th>Incidence financière</th>
-                        <th>Montant acte</th>
+                        <th>Montant de l'acte</th>
                      <th title="type effet financier">Type E.</th>
                         <!-- <th>Type modif doc</th> -->
                         <th>Entreprise</th>
                         <!-- <th>text juridique</th> -->
-                        <th>Marche</th>
+                        <th>Marché</th>
                         <th>Action</th>
                   </tr>
                 </thead>

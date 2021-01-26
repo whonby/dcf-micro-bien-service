@@ -16,9 +16,9 @@
     <table class="table table-bordered table-striped">
       <thead>
       <tr>
-        <th>Ref offre</th>
+        <th>Ref de l'offre</th>
         <th>Soumissionnaire</th>
-        <th> Montant Offre financiere</th>
+        <th> Montant de l'offre financière</th>
         <th>Type d'analyse</th>
       </tr>
       </thead>
@@ -57,7 +57,7 @@
           <table class="table table-bordered table-striped" v-if="ActeEffect(item.id).sous_traitance=='oui'">
               <thead>
               <tr>
-                  <th>Entreprise sous traitance</th>
+                  <th>Entreprise sous-traitante</th>
                   <th>Action</th>
               </tr>
               </thead>
@@ -79,8 +79,8 @@
      <table class="table table-bordered table-striped" v-if="macheid">
       <thead>
       <tr>
-        <th>Numero Marché</th>
-        <th>Objet marché</th>
+        <th>Numéro du Marché</th>
+        <th>Objet du marché</th>
          <th>Imputation</th>
         <th>Montant de l'offre(en FCFA TTC)</th>
         <!-- <th>Montant Avance Demarrage</th>
@@ -142,7 +142,7 @@
     </div>
     <div class="widget-title">
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#Identif">Identification de L'acte</a></li>
+        <li class="active"><a data-toggle="tab" href="#Identif">Identification de l'acte</a></li>
         <li class=""><a data-toggle="tab" href="#financ">Informations financières</a></li>
           <li class="" v-if="sous_traitance=='oui'"><a data-toggle="tab" href="#sous_traitance">Les entreprise sous_traitance </a></li>
       </ul>
@@ -155,7 +155,7 @@
           <tr>
             <td>
               <div class="control-group">
-                <label class="control-label">Type acte effet financier</label>
+                <label class="control-label">Type d'acte à effet financier</label>
                 <div class="controls">
                   <select v-model="formEffetFinancier.type_act_effet_id" class="span">
                     <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
@@ -227,7 +227,7 @@
           <tr>
              <td colspan="2" width="550">
               <div class="control-group">
-                <label class="control-label">Objet offre :</label>
+                <label class="control-label">Objet de l'offre :</label>
                 <div class="controls">
                   <textarea  :value="affichierObjetMarche(marche_lot)"  class="textarea_editor span11" rows="3" placeholder="Entre le  text ..."></textarea>
 
@@ -257,7 +257,7 @@
                       type="text"
                       v-model="formEffetFinancier.numero_marche"
                       class="span"
-                      placeholder="Saisir le numero "
+                      placeholder="Saisir le numéro "
                   />
                 </div>
               </div>
@@ -281,11 +281,11 @@
             </td>
               <td>
               <div class="control-group">
-                <label class="control-label">Date signature autorité contractante </label>
+                <label class="control-label">Date de signature de l'autorité contractante </label>
                 <div class="controls">
                   <input type="date" v-model="formEffetFinancier.reference_act"
                          class="span"
-                         placeholder="refence acte"
+                         placeholder="Référence acte"
                   />
                 </div>
               </div>
@@ -293,7 +293,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label"> date d'approbation</label>
+                <label class="control-label"> Date d'approbation</label>
                 <div class="controls">
                   <input
                       type="date"
@@ -341,7 +341,7 @@
 
               <td>
                   <div class="control-group">
-                      <label class="control-label" title=" ">Durée d'exécution contractuelle(jrs)</label>
+                      <label class="control-label" title=" ">Durée d'exécution contractuelle (jrs)</label>
                       <div class="controls">
                           <input type="number"  v-model="durre_prevue"
                                  class="span"
@@ -352,7 +352,7 @@
               </td>
             <td>
               <div class="control-group">
-                <label class="control-label" title=" ">Date de reception provisoire prévisionnelle </label>
+                <label class="control-label" title=" ">Date de réception provisoire prévisionnelle </label>
                 <div class="controls">
                   <input type="date" v-model="formEffetFinancier.date_reception"
                          class="span"
@@ -364,7 +364,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label" title=" ">Date définitive reception prévisionnelle</label>
+                <label class="control-label" title=" ">Date définitive de réception prévisionnelle</label>
                 <div class="controls">
                   <input type="date" :min="formEffetFinancier.date_odre_service" disabled v-model="formEffetFinancier.date_fin_exe"
                          class="span"
@@ -377,7 +377,7 @@
           <tr>
              <td>
               <div class="control-group">
-                <label class="control-label" title="">garantie</label>
+                <label class="control-label" title="">Garantie</label>
                 <div class="controls">
                     <select  v-model="garantie" class="span">
                         <option value="oui">Oui</option>
@@ -389,7 +389,7 @@
             </td>
               <td>
                   <div class="control-group">
-                      <label class="control-label" title=" ">Sous traitance</label>
+                      <label class="control-label" title=" ">Sous-traitance</label>
                       <div class="controls">
                           <select  v-model="sous_traitance" class="span">
                               <option value="oui">Oui</option>
@@ -403,7 +403,7 @@
               <td>
                   <div>
                       <div class="control-group" v-if="garantie=='oui'">
-                          <label class="control-label" title=" ">Durree de garantie(JOUR) </label>
+                          <label class="control-label" title=" ">Durée de garantie (Jour) </label>
                           <div class="controls">
                               <input type="number" v-model="durre_garantie"
                                      class="span"
@@ -433,7 +433,7 @@
               <td>
 
               <div class="control-group">
-                <label class="control-label">exonéré</label>
+                <label class="control-label">Exonéré</label>
                 <div class="controls">
                   <select v-model="formEffetFinancier.exonere" class="span">
 
@@ -513,7 +513,7 @@
            <tr>
               <td>
               <div class="control-group">
-                <label class="control-label">Avance Demarrage Ht</label>
+                <label class="control-label">Avance de démarrage HT</label>
                 <div class="controls">
                     <money v-model="formEffetFinancier.avance_demarrage_ht" ></money>
 
@@ -543,7 +543,7 @@
              </td>
              <td >
               <div class="control-group">
-                <label class="control-label" >Montant Avance Démarrage TTC</label>
+                <label class="control-label" >Montant Avance de démarrage TTC</label>
                 <div class="controls">
 <!--                  <input-->
 <!--                      type="number"-->
@@ -563,7 +563,7 @@
            <tr>
              <td >
               <div class="control-group">
-                <label class="control-label" >Taux % du cautionnement</label>
+                <label class="control-label" >Taux % de cautionnement</label>
                 <div class="controls">
                   <input
                       type="number"  v-model="formEffetFinancier.taux_cautionnemt"
@@ -578,7 +578,7 @@
             </td>
             <td >
               <div class="control-group">
-                <label class="control-label" > Montant HT du cautionnement</label>
+                <label class="control-label" > Montant HT de cautionnement</label>
                 <div class="controls">
 <!--                  <input type="text"  :value="afficheMontantHorsTaxeDuCautionnement" style="text-align:left;color:red"-->
 <!--                         class="span"-->
@@ -590,7 +590,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label" >Montant TVA du cautionnement</label>
+                <label class="control-label" >Montant TVA de cautionnement</label>
                 <div class="controls">
 <!--                  <input-->
 <!--                      type="number"  :value="afficherMontantTvaDuCautionnement" style="text-align:left;color:red"-->
@@ -603,7 +603,7 @@
             </td>
              <td >
               <div class="control-group">
-                <label class="control-label" >Montant TTC du cautionnement </label>
+                <label class="control-label" >Montant TTC de cautionnement </label>
                 <div class="controls">
 <!--                  <input-->
 <!--                      type="number"-->
@@ -628,7 +628,7 @@
                 <div class="controls">
                   <input
                       type="number"  v-model="formEffetFinancier.taux_retenue_garantie"
-                      placeholder="saisir le taux de retenue de garantie"
+                      placeholder="Saisir le taux de retenue de garantie"
 
                       class="span"
 
@@ -688,12 +688,12 @@
       </div>
         <div id="sous_traitance"  class="tab-pane">
             <div class="span12">
-                <h6>ENREPRISE SOUS TRAITANCE</h6>
+                <h6>ENTREPRISE SOUS-TRAITANTE</h6>
                 <table class="table">
                     <tbody>
                     <tr>
                         <td>
-                            <label>ENTREPRSE </label>
+                            <label>ENTREPRISE </label>
                             <model-list-select style="background-color: #fff;"
                                                class="wide"
                                                :list="entreprises"
@@ -721,7 +721,7 @@
                         </td>
                         <div class="btn-group">
                             <button class="btn btn-link" title="Supprimer" @click.prevent="supprimeStructureSelectionner(appelOffre.id)">
-                                <span class=""><i class="icon-trash"></i></span>
+                                <span class=""><i class="icon-trash">Supprimer</i></span>
                             </button>
                         </div>
 
@@ -767,7 +767,7 @@
           <tr>
             <td>
               <div class="control-group">
-                <label class="control-label">Type acte effet financier</label>
+                <label class="control-label">Type de l'acte à effet financier</label>
                 <div class="controls">
                   <select v-model="editActeEffetFinancier.type_act_effet_id" class="span">
                     <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
@@ -824,9 +824,9 @@
           <tr>
              <td colspan="2" width="550">
               <div class="control-group">
-                <label class="control-label">Objet offre :</label>
+                <label class="control-label">Objet de l'offre :</label>
                 <div class="controls">
-                  <textarea  :value="affichierObjetMarche(marche_lot)"  class="textarea_editor span11" rows="3" placeholder="Entre le  text ..."></textarea>
+                  <textarea  :value="affichierObjetMarche(marche_lot)"  class="textarea_editor span11" rows="3" placeholder="Entrer le texte ..."></textarea>
 
                 </div>
               </div>
@@ -854,7 +854,7 @@
                       type="text"
                       v-model="editActeEffetFinancier.numero_marche"
                       class="span"
-                      placeholder="Saisir le numero "
+                      placeholder="Saisir le numéro "
                   />
                 </div>
 
@@ -868,7 +868,7 @@
   <td>
 
               <div class="control-group">
-                <label class="control-label" >Date de signature attributaire</label>
+                <label class="control-label" >Date de signature de l'attributaire</label>
                 <div class="controls">
                   <input type="date" v-model="editActeEffetFinancier.date_attributaire"
                          class="span"
@@ -880,11 +880,11 @@
             </td>
               <td>
               <div class="control-group">
-                <label class="control-label">Date signature autorité contractante </label>
+                <label class="control-label">Date signature de l'autorité contractante </label>
                 <div class="controls">
                   <input type="date" v-model="editActeEffetFinancier.reference_act"
                          class="span"
-                         placeholder="refence acte"
+                         placeholder="Référence de l'acte"
                   />
                 </div>
 
@@ -932,7 +932,7 @@
           <tr>
               <td>
               <div class="control-group">
-                <label class="control-label">Date de début d'execution prévisionnelle</label>
+                <label class="control-label">Date de début d'exécution prévisionnelle</label>
                  <div class="controls">
                   <input type="date" v-model="editActeEffetFinancier.date_odre_service"
                          class="span"
@@ -945,7 +945,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label" title=" ">Date de reception provisoire prévisionnelle </label>
+                <label class="control-label" title=" ">Date de réception provisoire prévisionnelle </label>
                  <div class="controls">
                   <input type="date" v-model="editActeEffetFinancier.date_reception"
                          class="span"
@@ -960,7 +960,7 @@
 
             <td>
               <div class="control-group">
-                <label class="control-label" title=" ">Date fin d'exécution prévisionnelle</label>
+                <label class="control-label" title=" ">Date de fin d'exécution prévisionnelle</label>
                  <div class="controls">
                   <input type="date" :min="editActeEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValueModifier" v-model="editEffetFinancier.date_fin_exe"
                          class="span"
@@ -995,7 +995,7 @@
         <li class="active"><a data-toggle="tab" href="#MARCHE1">MARCHE</a></li>
         <li class=""><a data-toggle="tab" href="#DEMARRAGE1">AVANCE DE DEMARRAGE</a></li>
         <li class=""><a data-toggle="tab" href="#CAUTIONNEMENT1">CAUTIONNEMENT</a></li>
-        <li class=""><a data-toggle="tab" href="#GARANTIE1">RETENU DE GARANTIE</a></li>
+        <li class=""><a data-toggle="tab" href="#GARANTIE1">RETENUE DE GARANTIE</a></li>
       </ul>
       <div class="widget-content tab-content">
 
@@ -1005,7 +1005,7 @@
               <td>
 
               <div class="control-group">
-                <label class="control-label">exonéré</label>
+                <label class="control-label">Exonéré</label>
                 <div class="controls">
                    <select v-model="editActeEffetFinancier.exonere" class="span">
 
@@ -1085,12 +1085,12 @@
            <tr>
              <td >
               <div class="control-group">
-                <label class="control-label" >Taux Avance Démarrage</label>
+                <label class="control-label" >Taux Avance de démarrage</label>
                 <div class="controls">
                   <input
                       type="number"  v-model="editActeEffetFinancier.taux_avance_demarrage"
 
-                      placeholder="saisir le taux Avance Demarrage"
+                      placeholder="Saisir le taux Avance démarrage"
                       class="span"
 
                   />
@@ -1100,7 +1100,7 @@
             </td>
               <td>
               <div class="control-group">
-                <label class="control-label">Avance Démarrage Ht</label>
+                <label class="control-label">Avance de démarrage HT</label>
                  <div class="controls">
 
 
@@ -1115,7 +1115,7 @@
             </td>
              <td>
                <div class="control-group">
-                <label class="control-label" >TVA (Avance Demarrage)</label>
+                <label class="control-label" >TVA (Avance Démarrage)</label>
                  <div class="controls">
                   <input
                       type="number"
@@ -1130,7 +1130,7 @@
              </td>
              <td >
               <div class="control-group">
-                <label class="control-label" >Montant Avance Demarrage TTC</label>
+                <label class="control-label" >Montant Avance de démarrage TTC</label>
                  <div class="controls">
                   <input
                       type="number"
@@ -1151,12 +1151,12 @@
            <tr>
              <td >
               <div class="control-group">
-                <label class="control-label" >Taux % du cautionnement</label>
+                <label class="control-label" >Taux % de cautionnement</label>
                  <div class="controls">
                   <input
                       type="number"  v-model="editActeEffetFinancier.taux_cautionnemt"
 
-                      placeholder="saisir le taux du cautionnement"
+                      placeholder="Saisir le taux de cautionnement"
                       class="span"
 
                   />
@@ -1167,7 +1167,7 @@
             </td>
             <td >
               <div class="control-group">
-                <label class="control-label" > Montant HT du cautionnement</label>
+                <label class="control-label" > Montant HT de cautionnement</label>
                 <div class="controls">
                   <input type="text"  :value="afficheMontantHorsTaxeDuCautionnement"
 
@@ -1182,7 +1182,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label" >Montant TVA du cautionnement</label>
+                <label class="control-label" >Montant TVA de cautionnement</label>
                  <div class="controls">
                   <input
                       type="number"  :value="afficherMontantTvaDuCautionnement"
@@ -1198,7 +1198,7 @@
             </td>
              <td >
               <div class="control-group">
-                <label class="control-label" >Montant TTC du cautionnement </label>
+                <label class="control-label" >Montant TTC de cautionnement </label>
                  <div class="controls">
                   <input
                       type="number"
@@ -1240,7 +1240,7 @@
                  <div class="controls">
                   <input
                       type="text"  :value="afficherMontantHorsTaxeRetenuGarantie"
-                      placeholder="saisir le montant hors taxe du dispositif retenu"
+                      placeholder="Saisir le montant hors taxe du dispositif retenu"
 
                       class="span"
                       readonly
