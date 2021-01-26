@@ -104,22 +104,22 @@
                     <tr>
                         <td style="background: #b4c6e7;border: 5px solid #fff; font-size: 15px"><b>TOTAL MARCHES PLANIFIES - EXERCICE {{anneeAmort}}</b></td>
                         <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>{{nombreTotalMarche}} Marchés</b></td>
-                        <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>{{formatageSomme(montantTotaleMarchePlanifieContratuel)}} TTC</b></td>
+                        <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>{{formatageSomme(montantMarchePPM)}} TTC</b></td>
                         <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;"><button class="btn btn-link" style="font-size: 15px;color: #000;"><b>VOIR PPM</b></button></td>
                         <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;"><button class="btn btn-link" style="font-size: 15px;color: #000;" @click="click_cartographie()"><b>VOIR SITUATION GEOGRAPHIQUE</b></button></td>
                         <!--                    <td> <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button></td>-->
                     </tr>
                     <tr>
                         <td style="background: #b4c6e7;border: 5px solid #fff;font-size: 15px"><b>TOTAL MARCHES HORS PPM - EXERCICE {{anneeAmort}}</b></td>
-                        <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>0 Marché</b></td>
-                        <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>{{formatageSomme(0)}} TTC</b> </td>
+                        <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>{{nombreMarcheHPPM}} Marché </b></td>
+                        <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;font-size: 15px"><b>{{formatageSomme(montantMarcheHPM)}} TTC</b> </td>
 
                         <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;"><button class="btn btn-link" style="font-size: 15px;color: #000;"><b>DETAIL</b></button></td>
                         <td style="background: #b4c6e7;border: 5px solid #fff;text-align: center !important;"><button class="btn btn-link" style="font-size: 15px;color: #000;"><b>VOIR SITUATION GEOGRAPHIQUE</b></button></td>
                     </tr> <tr>
                         <td style="background: #2f5396;border: 5px solid #fff;color: #fff;font-size: 15px"><b>TOTAL GENERAL MARCHES - EXERCICE {{anneeAmort}}</b></td>
-                        <td style="background: #2f5396;border: 5px solid #fff;color: #fff;text-align: center !important;font-size: 15px"><b>{{nombreTotalMarche}} Marchés</b></td>
-                        <td style="background: #2f5396;border: 5px solid #fff;color: #fff;text-align: center !important;font-size: 15px"><b>{{formatageSomme(montantTotaleMarchePlanifieContratuel)}} TTC</b></td>
+                        <td style="background: #2f5396;border: 5px solid #fff;color: #fff;text-align: center !important;font-size: 15px"><b>{{montantTotalMarcheGeneral}} Marchés</b></td>
+                        <td style="background: #2f5396;border: 5px solid #fff;color: #fff;text-align: center !important;font-size: 15px"><b>{{formatageSomme(montantTotalGeneral)}} TTC</b></td>
                         <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
                         <td style="background: #fff;border: 5px solid #fff;color: #fff;text-align: center !important;"></td>
                         <td style="background: #2f5396;border: 5px solid #fff;color: #fff;text-align: center !important;"><button style="font-size: 15px; color: #fff;" class="btn btn-link" @click="click_cartographie()"><b>VOIR SITUATION GEOGRAPHIQUE</b></button></td>
@@ -1336,7 +1336,7 @@
             objetMarchePlanierPasUiteOuRegion(){
 
                 let vM=this;
-                let objet=this.listeMarchePlanifier.filter(item=>item.parent_id!="")
+                let objet=this.listeMarchePlanifier.filter(item=>item.parent_id==null)
 
                 //retourne les marches d'une region selectionner
                 if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure=="" && vM.type_marche==""){
@@ -1674,12 +1674,12 @@
             },
             pourcentageMarchePasStatusPlanifier(){
                 return status=>{
-                    if(this.nombreTotalMarche==0){
+                    if(this.montantTotalMarcheGeneral==0){
                         return 0.00
                     }
                     if(status=="planifie"){
                         status="planifie";
-                        let taux= (this.nombreMarchePasStaturePlanifier(status) * 100)/this.nombreTotalMarche
+                        let taux= (this.nombreMarchePasStaturePlanifier(status) * 100)/this.montantTotalMarcheGeneral
                         return taux.toFixed(2)
                     }
                     let nombre=this.nombreMarchePasStaturePlanifier(status)
@@ -1687,7 +1687,7 @@
                         nombre = nombre + this.nombreMarchePasStaturePlanifier(3)
                     }
 
-                    let taux= (nombre * 100)/this.nombreTotalMarche
+                    let taux= (nombre * 100)/this.montantTotalMarcheGeneral
                     return taux.toFixed(2)
                 }
             },
@@ -1827,7 +1827,47 @@
             },
 
             nombreTotalMarche(){
+                return this.objetMarchePlanierPasUiteOuRegion.filter(item=>item.plan_passation_marches!=null).length
+            },
+            nombreMarcheHPPM(){
+                let objet=this.objetMarchePlanierPasUiteOuRegion.filter(item=>item.plan_passation_marches==null)
+              return objet.length
+            },
+            montantMarcheHPM(){
+                let objet=this.objetMarchePlanierPasUiteOuRegion.filter(item=>item.plan_passation_marches==null)
+                if(objet.length>0){
+                    let initeVal=0
+                    return objet.reduce(function (total, currentValue) {
+                        return total + parseFloat(currentValue.montant_marche) ;
+                    }, initeVal);
+
+                }
+                return 0
+            },
+            montantMarchePPM(){
+                let objet=this.objetMarchePlanierPasUiteOuRegion.filter(item=>item.plan_passation_marches!=null)
+                if(objet.length>0){
+                    let initeVal=0
+                    return objet.reduce(function (total, currentValue) {
+                        return total + parseFloat(currentValue.montant_marche) ;
+                    }, initeVal);
+
+                }
+                return 0
+            },
+            montantTotalMarcheGeneral(){
                 return this.objetMarchePlanierPasUiteOuRegion.length
+            },
+            montantTotalGeneral(){
+              //  let objet=this.objetMarchePlanierPasUiteOuRegion.filter(item=>item.plan_passation_marches!=null)
+                if(this.objetMarchePlanierPasUiteOuRegion.length>0){
+                    let initeVal=0
+                    return this.objetMarchePlanierPasUiteOuRegion.reduce(function (total, currentValue) {
+                        return total + parseFloat(currentValue.montant_marche) ;
+                    }, initeVal);
+
+                }
+                return 0
             },
             nombreTotalExecutionMarche(){
                 return this.listeMarchStatueExecuteAcheve.length

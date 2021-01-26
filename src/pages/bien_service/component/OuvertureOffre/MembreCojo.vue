@@ -2,10 +2,13 @@
   <div>
 
 
-    <div align="right">
+    <div align="right" v-if="nbrAtteint(macheid)">
 
       <a href="#ajouter_membre_cojo" data-toggle="modal" class="btn btn-primary">Ajouter</a>
     </div>
+      <div align="right" v-else>
+          <a  data-toggle="modal" class="btn btn-danger">Le nombre limite de participants est atteint</a>
+      </div>
     <table class="table table-bordered table-striped" v-if="macheid">
       <thead>
       <tr>
@@ -298,7 +301,7 @@ console.log(this.getterMembreCojo.filter(idmem=>idmem.marche_id==this.macheid))
       if( vM.macheid!=""){
         return this.getterMembreCojo.filter(idmem=>idmem.marche_id==vM.macheid);
       }
-      return null;
+      return [];
     },
     ...mapGetters('bienService',['getterMembreCojo','getterCojos',"role_membrecojo","getterStructureDao"]),
 
@@ -311,6 +314,18 @@ console.log(this.getterMembreCojo.filter(idmem=>idmem.marche_id==this.macheid))
       "getterBudgeCharge",
       "decomptefactures"
     ]),
+      nbrAtteint(){
+        return marche_id=>{
+            let objte=this.getterCojos.find(item=>item.marche_id==marche_id)
+            if(objte!=undefined){
+               let nbr= this.listeMembreCojo.length;
+               if(nbr==objte.nbr_participant) return false;
+
+               return true
+            }
+            return true
+        }
+      },
     listeStructure() {
       return macheid => {
         if (macheid != "") {

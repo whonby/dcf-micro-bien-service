@@ -508,7 +508,9 @@
                 //console.log(objet)
                 if (objet!=undefined){
                     let array=[]
-                    let ob=this.personnaliseActeurDepense.filter(row=>row.unite_administrative_id==objet.id)
+
+                    let ob=this.all_acteur_depense.filter(row=>row.unite_administrative_id==objet.id)
+                    console.log(ob)
                     ob.forEach(function (value) {
                         let nom_prenom=value.nom+" "+value.prenom
                         let _objet={
@@ -804,6 +806,7 @@
                  if (value){
                      let objet_personnel=this.acteurActivite.find(item=>item.id==value)
                      //console.log(objet_personnel)
+                     console.log(objet_personnel)
                      this.formDataMembre.email=objet_personnel.email
                      this.formDataMembre.matricule=objet_personnel.matricule
                      this.formDataMembre.name=objet_personnel.name
@@ -887,7 +890,7 @@
         margin: 0 -690px;
     }
     .red {
-        color: black !important;
-        background-color: #00eb00 !important;
+        color: #fff !important;
+        background-color: #00499c !important;
     }
 </style>

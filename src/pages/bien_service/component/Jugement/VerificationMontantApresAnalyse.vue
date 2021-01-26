@@ -71,8 +71,8 @@
           <td @click="afficheEdite(offre.id)">{{offre.presence_echantillons}}</td>
           <td @click="afficheEdite(offre.id)">{{offre.motif}}</td>
           <td @click="afficheEdite(offre.id)" v-if="offre.observation==1" style="background: green;color: white">CONFORME </td>
-          <td @click="afficheEdite(offre.id)" v-else-if="offre.observation==0" style="background: red;color: white">NON CONFORME</td>
-          <td @click="afficheEdite(offre.id)" v-else style="background: blue;color: white">ANALYE EN COURS</td>
+          <td @click="afficheEdite(offre.id)" v-else-if="offre.observation==''" style="background: blue;color: white"> En attente d'analyse</td>
+          <td @click="afficheEdite(offre.id)" v-else  style="background: red;color: white" >NON CONFORME {{offre.observation}}</td>
         </tr>
         </tbody>
 
