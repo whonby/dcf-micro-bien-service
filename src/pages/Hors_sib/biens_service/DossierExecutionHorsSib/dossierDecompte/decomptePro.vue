@@ -531,152 +531,313 @@
         >Modifier</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
        </div>
-    </div> 
-   <table class="table table-bordered table-striped" v-if="macheid">
-                                    <thead>
-                                  <tr>
-                   
-          <th style="text-align:center;font-size:12px">N°Décompte</th>
-          
-          <th style="text-align:center;font-size:12px">Date</th>
-          <th style="text-align:center;font-size:12px">Acompte HTVA</th>
-          <th style="text-align:center;font-size:12px">Avance</th>
-          <th style="text-align:center;font-size:12px">Garantie</th>
-          <th style="text-align:center;font-size:12px">Penalités </th>
-          <th style="text-align:center;font-size:12px">Net HTVA </th>
-          <th style="text-align:center;font-size:12px">Net TTC</th>
-          <th style="text-align:center;font-size:12px">Etat ({{recupereTauxEtat(macheid)}}% + (TVA 18%))</th>
-          <th style="text-align:center;font-size:12px">Bailleur({{recupereTauxBailleur(macheid)}}% HTVA) </th>
-          
-           <th style="text-align:center;font-size:12px">Motif Cf </th>
-            <th style="text-align:center;font-size:12px">Autres Motif </th>
-          <th style="text-align:center;font-size:12px">Décision </th>
-          <th style="text-align:center;font-size:12px">Action </th>
-                  </tr>
+    </div>
+
+      <div class="widget-box">
+          <div class="widget-title">
+              <ul class="nav nav-tabs">
+                  <li class="active"><a data-toggle="tab" href="#tout_decompte">Tous les decomptes</a></li>
+                  <li v-for="item in arrayExerciceDecompte(macheid)" :key="item"><a data-toggle="tab" :href="'#'+item">Exercice {{item}}</a></li>
+
+              </ul>
+          </div>
+          <div class="widget-content tab-content">
+              <div id="tout_decompte" class="tab-pane active">
+                  <table class="table table-bordered table-striped" v-if="macheid">
+                      <thead>
+                      <tr>
+
+                          <th style="text-align:center;font-size:12px">N°Décompte</th>
+
+                          <th style="text-align:center;font-size:12px">Date</th>
+                          <th style="text-align:center;font-size:12px">Acompte HTVA</th>
+                          <th style="text-align:center;font-size:12px">Avance</th>
+                          <th style="text-align:center;font-size:12px">Garantie</th>
+                          <th style="text-align:center;font-size:12px">Penalités </th>
+                          <th style="text-align:center;font-size:12px">Net HTVA </th>
+                          <th style="text-align:center;font-size:12px">Net TTC</th>
+                          <th style="text-align:center;font-size:12px">Etat ({{recupereTauxEtat(macheid)}}% + (TVA 18%))</th>
+                          <th style="text-align:center;font-size:12px">Bailleur({{recupereTauxBailleur(macheid)}}% HTVA) </th>
+
+                          <th style="text-align:center;font-size:12px">Motif Cf </th>
+                          <th style="text-align:center;font-size:12px">Autres Motif </th>
+                          <th style="text-align:center;font-size:12px">Décision </th>
+                          <th style="text-align:center;font-size:12px">Action </th>
+                      </tr>
+
+                      </thead>
+                      <tbody>
+                      <tr class="odd gradeX" v-for="type in afficheMarcheDecompte(macheid)" :key="type.id">
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{type.numero_decompte || 'Non renseigné'}}</td>
+                          <!-- <td style="text-align:center;"
+                            @dblclick="afficherModalModifierTypeTexte(index)"
+                          >{{afficheObjetMarche(type.marche_id) || 'Non renseigné'}}</td> -->
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formaterDate(type.date_decompte) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(MontantFactureHT(type.facture_id))) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(type.retenu_avance)) || 'Non renseigné'}}</td>
+
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(type.retenu_garantie)) || 'Non renseigné'}}</td>
+
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(type.retenu_penalite)) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(type.nethtva)) || 'Non renseigné'}}</td>
 
 
-                  
-                                    </thead>
-                                    <tbody>
-                                    <tr class="odd gradeX" v-for="type in afficheMarcheDecompte(macheid)" :key="type.id">
-                    <td style="text-align:center;"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{type.numero_decompte || 'Non renseigné'}}</td>
-                    <!-- <td style="text-align:center;"
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{afficheObjetMarche(type.marche_id) || 'Non renseigné'}}</td> -->
-                    <td style="text-align:center;"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{formaterDate(type.date_decompte) || 'Non renseigné'}}</td>
-                    <td style="text-align:center;"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{formatageSomme(parseFloat(MontantFactureHT(type.facture_id))) || 'Non renseigné'}}</td>
-<td style="text-align:center;"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{formatageSomme(parseFloat(type.retenu_avance)) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(type.netttc)) || 'Non renseigné'}}</td>
 
-<td style="text-align:center;"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{formatageSomme(parseFloat(type.retenu_garantie)) || 'Non renseigné'}}</td>
 
-<td style="text-align:center;"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{formatageSomme(parseFloat(type.retenu_penalite)) || 'Non renseigné'}}</td>
-<td style="text-align:center;"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{formatageSomme(parseFloat(type.nethtva)) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(type.parts_etat)) || 'Non renseigné'}}</td>
 
-                    
-                      <td style="text-align:center;"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{formatageSomme(parseFloat(type.netttc)) || 'Non renseigné'}}</td>
 
-                    
-                      <td style="text-align:center;"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{formatageSomme(parseFloat(type.parts_etat)) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(type.parts_bailleur)) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;"
+                          >{{libelleMotifCf(MotifCf(type.facture_id)) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;"
+                          >{{AffcheAutresMotif(type.facture_id) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;">
 
-                    
-                      <td style="text-align:center;"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{formatageSomme(parseFloat(type.parts_bailleur)) || 'Non renseigné'}}</td>
-<td style="text-align:center;"
-                    >{{libelleMotifCf(MotifCf(type.facture_id)) || 'Non renseigné'}}</td>
-                    <td style="text-align:center;"
-                    >{{AffcheAutresMotif(type.facture_id) || 'Non renseigné'}}</td>
-                    <td style="text-align:center;">
-                    
-                     <button 
-                      v-if="StatusDecompte(type.facture_id) == 8"  class="btn  btn-success">
-                <span  style="">Visé</span>
-       
-                </button>
-                <button 
-                      v-else-if="StatusDecompte(type.facture_id) == 9"  class="btn  btn-success">
-                <span >Visé avec Observation</span>
-       
-                </button>
-                 <button 
-                      v-else-if="StatusDecompte(type.facture_id) == 2"  class="btn  btn-warning">
-                <span  >Différé</span>
-       
-                </button>
-                 <button v-else-if="StatusDecompte(type.facture_id) == 3" class="btn  btn-danger">
-              
-                <span >Réjeté</span>
-                 </button>
-              <button v-else class="btn  btn-info">
-              
-                <span >Attente</span>
-                </button>
-                   </td>
-                    <td>
-                      <router-link :to="{ name: 'AjouterTacheRealise', params: { id: type.id }}"
-                class="btn btn-inverse " title="Voir Tâche Réalisée">
-                  <span class=""><i class="icon-eye-open"></i> Voir Tâche Réalisée</span>
-                   </router-link> 
-                      <button class="btn btn-danger" @click="supprimerDecompteFacture(type.id)">
+                              <button
+                                      v-if="StatusDecompte(type.facture_id) == 8"  class="btn  btn-success">
+                                  <span  style="">Visé</span>
+
+                              </button>
+                              <button
+                                      v-else-if="StatusDecompte(type.facture_id) == 9"  class="btn  btn-success">
+                                  <span >Visé avec Observation</span>
+
+                              </button>
+                              <button
+                                      v-else-if="StatusDecompte(type.facture_id) == 2"  class="btn  btn-warning">
+                                  <span  >Différé</span>
+
+                              </button>
+                              <button v-else-if="StatusDecompte(type.facture_id) == 3" class="btn  btn-danger">
+
+                                  <span >Réjeté</span>
+                              </button>
+                              <button v-else class="btn  btn-info">
+
+                                  <span >Attente</span>
+                              </button>
+                          </td>
+                          <td>
+                              <router-link :to="{ name: 'AjouterTacheRealise', params: { id: type.id }}"
+                                           class="btn btn-inverse " title="Voir Tâche Réalisée">
+                                  <span class=""><i class="icon-eye-open"></i> Voir Tâche Réalisée</span>
+                              </router-link>
+                              <button class="btn btn-danger" @click="supprimerDecompteFacture(type.id)">
                         <span>
                           <i class="icon icon-trash"> Supprimer</i>
                         </span>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                   
-                   <td colspan="2" style="text-align:center;color:red">CUMULS</td>
-                   
-                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulMontantFacture(macheid)))}}</td>
-                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulAvance(macheid)))}}</td>
-                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulGArantie(macheid)))}}</td>
-                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPenalite(macheid)))}}</td>
-                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulNetHtva(macheid)))}}</td>
-                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulNetTTC(macheid)))}}</td>
-                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartEtat(macheid)))}}</td>
-                   <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartBailler(macheid)))}}</td>
-                   <td style="text-align:center;"></td>
-                    <td style="text-align:center;"></td>
-                     <td style="text-align:center;"></td>
-                     <td style="text-align:center;"></td>
-                  </tr>
-                  <tr>
- 
-                  <td colspan="2" style="text-align:center;color:red">% CUMULS</td>
-                   <td style="text-align:center;">{{((parseFloat(CumulAvance(macheid))/parseFloat(MontantMarche(macheid)))/100).toFixed(2)}}</td>
-                   <td style="text-align:center;">{{PourcentageCumulAvanceDemarrage}}</td>
-                   <td style="text-align:center;">{{PourcentageCumulGarantie}}</td>
-                   <td style="text-align:center;"></td>
-                    <td style="text-align:center;"></td>
-                     <td style="text-align:center;"></td>
-                   <td style="text-align:center;"></td>
-                   <td style="text-align:center;"></td>
-                   <td style="text-align:center;"></td>
-                   <td style="text-align:center;"></td>
-                   <td style="text-align:center;"></td>
-                   <td style="text-align:center;"></td>
-                  </tr>
-                </tbody>
-                                </table>
+                              </button>
+                          </td>
+                      </tr>
+                      <tr>
+
+                          <td colspan="2" style="text-align:center;color:red">CUMULS</td>
+
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulMontantFacture(macheid)))}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulAvance(macheid)))}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulGArantie(macheid)))}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPenalite(macheid)))}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulNetHtva(macheid)))}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulNetTTC(macheid)))}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartEtat(macheid)))}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartBailler(macheid)))}}</td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                      </tr>
+                      <tr>
+
+                          <td colspan="2" style="text-align:center;color:red">% CUMULS</td>
+                          <td style="text-align:center;">{{((parseFloat(CumulAvance(macheid))/parseFloat(MontantMarche(macheid)))/100).toFixed(2)}}</td>
+                          <td style="text-align:center;">{{PourcentageCumulAvanceDemarrage}}</td>
+                          <td style="text-align:center;">{{PourcentageCumulGarantie}}</td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <div v-for="item in arrayExerciceDecompte(macheid)" :key="'DEC'+item" :id="item" class="tab-pane">
+
+                  <table class="table table-bordered table-striped" v-if="macheid">
+                      <thead>
+                      <tr>
+
+                          <th style="text-align:center;font-size:12px">N°Décompte</th>
+
+                          <th style="text-align:center;font-size:12px">Date</th>
+                          <th style="text-align:center;font-size:12px">Acompte HTVA</th>
+                          <th style="text-align:center;font-size:12px">Avance</th>
+                          <th style="text-align:center;font-size:12px">Garantie</th>
+                          <th style="text-align:center;font-size:12px">Penalités </th>
+                          <th style="text-align:center;font-size:12px">Net HTVA </th>
+                          <th style="text-align:center;font-size:12px">Net TTC</th>
+                          <th style="text-align:center;font-size:12px">Etat ({{recupereTauxEtat(macheid)}}% + (TVA 18%))</th>
+                          <th style="text-align:center;font-size:12px">Bailleur({{recupereTauxBailleur(macheid)}}% HTVA) </th>
+
+                          <th style="text-align:center;font-size:12px">Motif Cf </th>
+                          <th style="text-align:center;font-size:12px">Autres Motif </th>
+                          <th style="text-align:center;font-size:12px">Décision </th>
+                          <th style="text-align:center;font-size:12px">Action </th>
+                      </tr>
+
+                      </thead>
+                      <tbody>
+                      <tr class="odd gradeX" v-for="type in decompteParExercice(macheid,item)" :key="type.id">
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{type.numero_decompte || 'Non renseigné'}}</td>
+                          <!-- <td style="text-align:center;"
+                            @dblclick="afficherModalModifierTypeTexte(index)"
+                          >{{afficheObjetMarche(type.marche_id) || 'Non renseigné'}}</td> -->
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formaterDate(type.date_decompte) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(MontantFactureHT(type.facture_id))) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(type.retenu_avance)) || 'Non renseigné'}}</td>
+
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(type.retenu_garantie)) || 'Non renseigné'}}</td>
+
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(type.retenu_penalite)) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(type.nethtva)) || 'Non renseigné'}}</td>
+
+
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(type.netttc)) || 'Non renseigné'}}</td>
+
+
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(type.parts_etat)) || 'Non renseigné'}}</td>
+
+
+                          <td style="text-align:center;"
+                              @dblclick="afficherModalModifierTypeTexte(type.id)"
+                          >{{formatageSomme(parseFloat(type.parts_bailleur)) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;"
+                          >{{libelleMotifCf(MotifCf(type.facture_id)) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;"
+                          >{{AffcheAutresMotif(type.facture_id) || 'Non renseigné'}}</td>
+                          <td style="text-align:center;">
+
+                              <button
+                                      v-if="StatusDecompte(type.facture_id) == 8"  class="btn  btn-success">
+                                  <span  style="">Visé</span>
+
+                              </button>
+                              <button
+                                      v-else-if="StatusDecompte(type.facture_id) == 9"  class="btn  btn-success">
+                                  <span >Visé avec Observation</span>
+
+                              </button>
+                              <button
+                                      v-else-if="StatusDecompte(type.facture_id) == 2"  class="btn  btn-warning">
+                                  <span  >Différé</span>
+
+                              </button>
+                              <button v-else-if="StatusDecompte(type.facture_id) == 3" class="btn  btn-danger">
+
+                                  <span >Réjeté</span>
+                              </button>
+                              <button v-else class="btn  btn-info">
+
+                                  <span >Attente</span>
+                              </button>
+                          </td>
+                          <td>
+                              <router-link :to="{ name: 'AjouterTacheRealise', params: { id: type.id }}"
+                                           class="btn btn-inverse " title="Voir Tâche Réalisée">
+                                  <span class=""><i class="icon-eye-open"></i> Voir Tâche Réalisée</span>
+                              </router-link>
+                              <button class="btn btn-danger" @click="supprimerDecompteFacture(type.id)">
+                        <span>
+                          <i class="icon icon-trash"> Supprimer</i>
+                        </span>
+                              </button>
+                          </td>
+                      </tr>
+                      <tr>
+
+                          <td colspan="2" style="text-align:center;color:red">CUMULS</td>
+
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulMontantFacture(macheid)))}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulAvance(macheid)))}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulGArantie(macheid)))}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPenalite(macheid)))}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulNetHtva(macheid)))}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulNetTTC(macheid)))}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartEtat(macheid)))}}</td>
+                          <td style="text-align:center;">{{formatageSomme(parseFloat(CumulPartBailler(macheid)))}}</td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                      </tr>
+                      <tr>
+
+                          <td colspan="2" style="text-align:center;color:red">% CUMULS</td>
+                          <td style="text-align:center;">{{((parseFloat(CumulAvance(macheid))/parseFloat(MontantMarche(macheid)))/100).toFixed(2)}}</td>
+                          <td style="text-align:center;">{{PourcentageCumulAvanceDemarrage}}</td>
+                          <td style="text-align:center;">{{PourcentageCumulGarantie}}</td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                          <td style="text-align:center;"></td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+
+          </div>
+      </div>
+
+
  
   
   </div>
@@ -712,6 +873,8 @@ props:["macheid"],
    this.detail_Facture = this.getFacturePersonnaliser.find(
        idmarche => idmarche.id == this.$route.params.id
          )
+     console.log("............")
+     console.log(this.arrayExerciceDecompte(this.macheid))
       
 },
   computed: {
@@ -831,6 +994,46 @@ FamilleMotifCf() {
         }
       };
     },
+      decompteParExercice(){
+      return (marche_id,exercice)=>{
+          let objet=this.afficheMarcheDecompte(marche_id)
+          if(objet.length>0){
+              return objet.filter(item=>item.exercicebudget==exercice)
+          }
+          return []
+      }
+      },
+      totalAconcteExercice(){
+        return (marche_id,exercice)=>{
+            let objet=this.decompteParExercice(marche_id,exercice)
+            let vm=this
+            let montant=0
+            objet.forEach(function (value) {
+                montant=parseFloat(montant) + vm.MontantFactureHT(value.facture_id)
+            })
+            return montant
+        }
+      },
+      arrayExerciceDecompte(){
+           return marche_id=>{
+               let objet=this.afficheMarcheDecompte(marche_id)
+             //  let vm=this
+               let array_exercie=[]
+               if(objet.length>0){
+
+                   objet.forEach(function (val) {
+                       array_exercie.push(val.exercicebudget)
+                   })
+                   let unique = [...new Set(array_exercie)]
+                  // console.log(unique)
+                   if (unique.length==1){
+   return []
+                   }
+                   return unique
+               }
+               return []
+           }
+      },
     afficherStatusSib() {
       return id => {
         if (id != null && id != "") {

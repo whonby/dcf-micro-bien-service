@@ -2,10 +2,13 @@
   <div>
 
 
-    <div align="right">
+    <div align="right" v-if="nbrAtteint(macheid)">
 
       <a href="#ajouter_membre_cojo" data-toggle="modal" class="btn btn-primary">Ajouter</a>
     </div>
+      <div align="right" v-else>
+          <a  data-toggle="modal" class="btn btn-danger">Le nombre limite de participants est atteint</a>
+      </div>
     <table class="table table-bordered table-striped" v-if="macheid">
       <thead>
       <tr>
@@ -283,6 +286,7 @@ name: "MembreCojo",
         comite_evaluation:"non",
 
       },
+      nbr_click:0,
       edite_membre_cojo:"",
       message_mandater:""
 
@@ -298,7 +302,7 @@ console.log(this.getterMembreCojo.filter(idmem=>idmem.marche_id==this.macheid))
       if( vM.macheid!=""){
         return this.getterMembreCojo.filter(idmem=>idmem.marche_id==vM.macheid);
       }
-      return null;
+      return [];
     },
     ...mapGetters('bienService',['getterMembreCojo','getterCojos',"role_membrecojo","getterStructureDao"]),
 
@@ -311,6 +315,18 @@ console.log(this.getterMembreCojo.filter(idmem=>idmem.marche_id==this.macheid))
       "getterBudgeCharge",
       "decomptefactures"
     ]),
+      nbrAtteint(){
+        return marche_id=>{
+            let objte=this.getterCojos.find(item=>item.marche_id==marche_id)
+            if(objte!=undefined){
+               let nbr= this.listeMembreCojo.length;
+               if(nbr==objte.nbr_participant) return false;
+
+               return true
+            }
+            return true
+        }
+      },
     listeStructure() {
       return macheid => {
         if (macheid != "") {
@@ -381,6 +397,21 @@ enregistreIdService() {
     },
 
     ajouterMembreCojoM(){
+      //let soundurl = 'http://soundbible.com/mp3/analog-watch-alarm_daniel-simion.mp3'
+      if(!this.nbrAtteint(this.macheid)){
+        this.nbr_click =this.nbr_click + 1
+        if(this.nbr_click==3){
+          var data3 = { soundurl : 'https://dcf-parametrage.kognishare.com/sung_alert/exageration.mp3'}
+          var audio_us = new Audio(data3.soundurl);
+          audio_us.play();
+         // this.$('#ajouter_membre_cojo').modal('hide');
+          return null
+        }
+        var data = { soundurl : 'https://dcf-parametrage.kognishare.com/sung_alert/alert_membre_participent.mp3'}
+        var audio = new Audio(data.soundurl);
+        audio.play();
+        return null
+      }
       var nouvelObjet ={
         ...this.formDataMembreCojo,
         marche_id :this.macheid,

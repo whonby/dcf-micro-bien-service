@@ -14,9 +14,13 @@ Type de Recrutement
                 <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> <span class="label label-important" v-if="tauxActeurAccredite!='NaN'">{{totalTaux || '0' }} %</span>
                     Taux acteur accrédité
                 </a> </li>
+
             </ul>
         </div> -->
-
+<div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button>
+    
+        </div>
         <div class="container-fluid" style="heigth:100%">
 
             <hr>
@@ -140,7 +144,7 @@ Type de Recrutement
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="odd gradeX" v-for="item in acteurActivite" :key="item.id">
+                                            <tr class="odd gradeX" v-for="item in afficheListePersonnel(formData.unite_administrative_id)" :key="item.id">
   
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}{{item.id}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
@@ -969,7 +973,15 @@ recrutement:""
    ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe','planActe']),
 
 
+afficheListePersonnel() {
+      return id => {
+        if (id != null && id != "") {
+           return this.acteurActivite.filter(qtreel => qtreel.unite_administrative_id == id);
 
+      
+        }
+      };
+    },
 
 afficherUAParDroitAccess() {
        // const st = this.search.toLowerCase();
@@ -1540,7 +1552,9 @@ afficheEmail() {
           ...mapActions('bienService',['supprimerActeEffetFinancier',
           'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
 
-         
+         afficherModalListeExecution(){
+                window.history.back();
+            },
 
 
               ajouterModalActeEffetFinancierLocal(){

@@ -13,6 +13,11 @@
               EXECUTION DES MARCHES
             </router-link>
           </li>
+          <li>
+            <router-link :to="{name: 'suiviDelai'}" tag ="a">
+             SUIVI DES DELAIS
+            </router-link>
+          </li>
      <!-- <li> 
             <router-link :to="{name: 'indicateurBienService'}" tag="a">
               SUIVI DES MARCHES

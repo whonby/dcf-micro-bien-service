@@ -2,16 +2,76 @@
 <template>
     
                 <div>
+                
+
                     
                         <!-- <div class="widget-title">
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#Sanit">Sanitaires  </a></li>
                               
-                               
-                               
+                    
                             </ul>
                         </div> -->
                         <div class="widget-content tab-content">
+                            <div class="span10 " style="background: #f0c71d !important;"  v-if="affiche_filtre">
+                        <table class="table table-striped"  style="background: #f0c71d !important;">
+                            <tbody>
+                            <tr>
+                                
+                                <td style="background: #f0c71d !important;">
+                                    <label>UA<a href="#" @click.prevent="videUniteAdmin()" v-if="unite_administrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
+                                    </label>
+                                    <model-list-select style="background-color: #fff;"
+                                                       class="wide"
+                                                       :list="uniteAdministratives"
+                                                       v-model="unite_administrative_id"
+                                                       option-value="id"
+                                                       option-text="libelle"
+                                                       placeholder="Unité administrative"
+                                    >
+
+                                    </model-list-select>
+                                </td>
+                               
+                                <!-- <td style="background: #f0c71d !important;">
+                                    <label>Infrastructure <a href="#" @click.prevent="videInfrastructure()" v-if="infrastructure" style="color: red"><i class="fa fa-trash-o"></i></a>
+                                    </label>
+                                    <model-list-select style="background-color: #fff;"
+                                                       class="wide"
+                                                       :list="getterInfrastrucure"
+                                                       v-model="infrastructure"
+                                                       option-value="id"
+                                                       option-text="libelle"
+                                                       placeholder="Infrastructure"
+                                    >
+
+
+                                    </model-list-select>
+                                </td> -->
+                                <td style="background: #f0c71d !important;">
+                                    <label>Type Marché  <a href="#" @click.prevent="videTypeMarche()" v-if="type_marche" style="color: red"><i class="fa fa-trash-o"></i></a>
+                                    </label>
+                                    <model-list-select style="background-color: #fff;"
+                                                       class="wide"
+                                                       :list="typeMarches"
+                                                       v-model="type_marche"
+                                                       option-value="id"
+                                                       option-text="libelle"
+                                                       placeholder="Type Marche"
+                                    >
+
+                                    </model-list-select>
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                    
+
+                  
+                </div>
                     <div id="Sanit" class="tab-pane active">
                    
                     <div class="widget-title">
@@ -167,7 +227,22 @@
                       
                     </div>
 
-                
+                   <fab v-if="affiche_boutton_filtre"
+             :position="position"
+            :bg-color="bgColor"
+            :actions="fabActions"
+             main-icon="format_indent_decrease"
+             @cache="filter"
+
+    ></fab>
+    <fab v-if="!affiche_boutton_filtre"
+         :position="position"
+         :bg-color="bgColor"
+         :actions="fabActions"
+         main-icon="ballot"
+         @cache="filter"
+
+    ></fab>
 
             
             </div>
@@ -181,13 +256,21 @@
  import { formatageSomme } from "@/Repositories/Repository";
  import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
  import {partition} from '@/Repositories/Repository'
+ import 'vue-search-select/dist/VueSearchSelect.css'
+ import {  ModelListSelect } from 'vue-search-select'
 export default {
   components:{
-  
+  ModelListSelect
   },
   name:'type facture',
   data() {
     return {
+      type_marche:"",
+      unite_administrative_id:"",
+       position: 'bottom-right',
+      affiche_filtre:false,
+      affiche_boutton_filtre:true,
+        bgColor: '#171b39',
        page:0,
        size:10,
        active_el:0,
@@ -327,6 +410,27 @@ afficheLocalisation() {
       };
     },
 
+   
+
+             filtre_unite_admin() {
+                if(this.noDCfNoAdmin){
+                    let colect=[];
+                    let vM=this
+                    this.uniteAdministratives.filter(item=>{
+                        if(vM.getterUniteAdministrativeByUser.length>0){
+                            let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                            if (val!=undefined){
+                                colect.push(item)
+                                return item
+                            }
+                        }
+
+                    })
+                    return colect
+                }
+                return this.uniteAdministratives
+            },
+
 
 
  ListeMarcheInfrastructureNiveau1() {
@@ -337,6 +441,18 @@ afficheLocalisation() {
           type.montant_marche.toLowerCase().includes(st) 
         );
       });
+      // let objet=this.afficherListeMarcheHorsSib.filter(type => {
+      //   return (
+      //     type.objet.toLowerCase().includes(st)  ||
+      //     type.montant_marche.toLowerCase().includes(st) 
+      //   );
+      // });
+
+      // if(this.unite_administrative_id!=""){
+      //    return objet.filter(item=>item.unite_administrative_id==this.unite_administrative_id)
+      //  }
+      //  if(this.)
+      
     },
   montantMarchePlanfierHorSib(){
   return this.ListeMarcheInfrastructureNiveau1.filter(element => element.attribue == 0 && element.gdenature_id == 7 && element.parent_id == null && element.sib==1 && this.InfastructureNiveau1(element.infrastructure_id)==1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
@@ -627,6 +743,21 @@ afficherLibelleTypeMarche(){
     'supprimerMarche','modifierActeEffetFinancier',"getMarche","getActeEffetFinancier"
      
     ]),
+     videUniteAdmin(){
+       this.unite_administrative_id=""
+            },
+
+             videTypeMarche(){
+                this.type_marche=""
+            },
+            filter(){
+      this.affiche_filtre=!this.affiche_filtre
+     this.affiche_boutton_filtre=!this.affiche_boutton_filtre
+       this.videUniteAdmin()
+                //this.videRegions()
+               // this.videInfrastructure()
+    this.videTypeMarche()
+            },
    
     formatageSomme:formatageSomme,
 // afficherModifierMarcheHorSib(id){

@@ -221,10 +221,11 @@
             <div class="control-group">
        <label class="control-label">Montant prévu</label>
        <div class="controls">
-         <input
+       <money v-model="formData.montant_marche"  class="span4"></money>
+         <!-- <input
            type="number"
            v-model="formData.montant_marche"
-           class="span4" />
+           class="span4" /> -->
        </div>
      </div>
          </td>
@@ -253,7 +254,7 @@
             <div class="controls">
             
                <select v-model="formData.nature_prix_id" class="span4" >
-               <option v-for="plans in gettesrNaturePrix" :key="plans.id" 
+               <option v-for="plans in Nature_des_prix" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
@@ -267,7 +268,7 @@
             <div class="controls">
             
                <select v-model="formData.motif_passation_id" class="span4" >
-               <option v-for="plans in gettersMotifPassations" :key="plans.id" 
+               <option v-for="plans in motif_passation" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
@@ -345,6 +346,7 @@ export default {
           icon: "add"
         },
 
+
         // {
         //   name: "alertMe",
         //   icon: "add_alert",
@@ -418,7 +420,7 @@ export default {
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
   
-
+...mapGetters('parametreGenerauxFonctionnelle', ['Nature_des_prix','motif_passation']),
   ...mapGetters("Utilisateurs", ["user","getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
      admin:admin,
@@ -601,12 +603,12 @@ recupererParentId(){
 
   },
   methods: {
-    ...mapActions("horSib", ['ajouterMarcheHorSib','modifierMarcheHorSib','supprimerMarcheHorSib',
-     
+    ...mapActions("horSib", ['ajouterMarcheHorSib','modifierMarcheHorSib','supprimerMarcheHorSib','getMarcheHorSib'
+    
     ]),
     allerPageMarcheHorsib(){
        this.$router.push({
-          name:'gestion_marche'  
+          name:'marcheHorsib'  
            })
     },
      recherche() {
@@ -626,11 +628,12 @@ recupererParentId(){
 
             ajouterMarcheHorSibLocal(){
                this.$router.push({
-                 name:'gestion_marche'  
+                 name:'marcheHorsib'  
                })
               var nouvelObjet = {
                 ...this.formData,
                exo_id:this.anneeBugetaire,
+               sib:1,
                imputation:this.ImputationBudget(this.formData.economique_id)
               }
              this.ajouterMarcheHorSib(nouvelObjet) 
