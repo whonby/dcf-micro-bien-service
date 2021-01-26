@@ -580,7 +580,7 @@ reference_marche
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des marchés hors PPM</h5>
+              <h5>Liste des marchés hors PPM </h5>
              
             </div>
             <div class="widget-content nopadding">

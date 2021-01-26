@@ -20,7 +20,8 @@ CodeExempte
                 <i class="icon-th"></i>
               </span>
 
-              <h5>Liste des March&eacute;s  <code>({{marcheHorSibFiltre.length}})</code>  </h5>
+
+              <h5>Liste des March&eacute;s <code>({{marcheSibFiltre.length}})</code>  </h5>
               <div align="right">
                 Recherche:
                 <input type="search"  v-model="search"  placeholder=" saisir objet"/>
@@ -60,7 +61,7 @@ CodeExempte
                 </thead>
                 <tbody>
                  
-                  <tr class="odd gradeX" v-for="activites in partition(marcheHorSibFiltre, size)[page]
+                  <tr class="odd gradeX" v-for="activites in partition(marcheSibFiltre, size)[page]
                 "
                  :key="activites.id">
                   <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
@@ -206,9 +207,9 @@ CodeExempte
                    <div class="pagination alternate">
              <ul>
            <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-           <li  v-for="(titre, index) in partition(marcheHorSibFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+           <li  v-for="(titre, index) in partition(marcheSibFiltre,size).length" :key="index" :class="{ active : active_el == index }">
            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-            <li :class="{ disabled : page == partition(marcheHorSibFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+            <li :class="{ disabled : page == partition(marcheSibFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
            </ul>
         </div>
                        
@@ -375,11 +376,11 @@ export default {
  'structures_geographiques','localisations_geographiques']),
 
     ...mapGetters("horSib", ["gettersMarcheHorsib"]),
-    marcheHorSibFiltre(){
+    marcheSibFiltre(){
 
      const searchTerm = this.search.toLowerCase();
 
-return this.afficherListeMarcheHorsSib.filter((item) => {
+return this.afficherListeMrcheSib.filter((item) => {
   
      return item.objet.toLowerCase().includes(searchTerm) 
            //item.reference_marche.toLowerCase().includes(searchTerm) 
@@ -390,7 +391,7 @@ return this.afficherListeMarcheHorsSib.filter((item) => {
 
    montantMarche(){
 
-  return this.afficherListeMarcheHorsSib.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),0)
+  return this.afficherListeMrcheSib.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),0)
 },
 
  afficheLocalisation() {
@@ -417,11 +418,11 @@ return this.afficherListeMarcheHorsSib.filter((item) => {
   
 //  },
 
- afficherListeMarcheHorsSib() {
+ afficherListeMrcheSib() {
        // const st = this.search.toLowerCase();
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.gettersMarcheHorsib.filter(item=>{
+            this.getMarchePersonnaliser.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
@@ -446,6 +447,7 @@ return this.afficherListeMarcheHorsSib.filter((item) => {
 
     },
  
+
 
  // afficher le nommbre demareche hors sib
 

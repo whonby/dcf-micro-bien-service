@@ -13,7 +13,7 @@
 
  <div ref="document">
 
- <div class="span6" align="right">
+ <div class="span6" align="left">
                         <button class="btn btn-default" @click="tableToExcel('table', 'Contratualisation')">
                             <img style="width: 20px !important; height: 20px !important;" src="https://img.icons8.com/windows/64/000000/export-excel.png"/>
                         </button>
@@ -25,7 +25,7 @@
               </td>
             </tr>
           </table>-->
-     <h3 style="text-align:center">TABLEAU DE SUIVI DES DELAIS DES MARCHES :<span style="color: red;">{{23}}</span></h3>
+     <h3 style="margin-left:-200px;">TABLEAU DE SUIVI DES DELAIS DES MARCHES<span style="color: red;"></span></h3>
            
               <table class="table table-bordered table-striped" id="titre" ref="table"  summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
                 <thead>
@@ -42,10 +42,12 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                         <td colspan="2" style="background-color: orange;color: #FFFFFF;text-align:center">Date réception provisoire</td>
-                        <td colspan="2" style="background-color: orange;color: #FFFFFF;text-align:center">Date réception définitive</td>
+                         <td colspan="3" style="background-color: orange;color: #FFFFFF;text-align:center">Date réception provisoire</td>
+                        <td colspan="3" style="background-color: orange;color: #FFFFFF;text-align:center">Date réception définitive</td>
                         <td></td>
                         <td></td>
+                         <td colspan="3" style="background-color: orange;color: #FFFFFF;text-align:center">Situation d'exécution financière</td>
+                        <td colspan="2" style="background-color: orange;color: #FFFFFF;text-align:center">Situation d'exécution physique</td>
                     </tr>
                     <tr>
                         <td style="color: #FFFFFF;width:2%;text-align:center;background-color: green !important;font-size:10px">N° </td>
@@ -62,10 +64,20 @@
       <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Date de début effectif d'exécution</td>
                         <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">prévisionnelle</td>
                         <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Effective</td>
+                             <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Ecart</td>
                                              <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">prévisionnelle</td>
                         <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Effective</td>
+                                               <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Ecart</td>
         <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Durée d'exécution réelle</td>
           <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Ecart des délais</td>
+
+                  <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Montant déjà visé</td>
+                   <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Taux (%) OP visé </td>
+                    <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Montant restant à vise</td>
+                 
+                  <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Taux déjà réalisé </td>
+                    <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Taux restant à réaliser</td>
+                 
                     </tr>
    
  </thead>
@@ -83,11 +95,20 @@
    <td>{{durreExecutionContuelle(activites.id)}} Jours</td>
    <td>{{dureeGarantie(activites.id)}} Jours</td>
    <td>{{dateOs(activites.id)}}</td>
+    
    <td>{{dateDebutExectionEffective(activites.id)}}</td>
+   
    <td>{{dateProvisoirePrevisionnel(activites.id)}}</td>
+   <td> </td>
    <td>{{dateProvisoireEffective(activites.id)}}</td>
    <td>{{dateDefinitivePrevisionnel(activites.id)}}</td>
+   <td></td>
    <td>{{dateReceptionEffective(activites.id)}}</td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
    <td></td>
    <td></td>
   

@@ -232,13 +232,14 @@ reference_marche
                  <div class="control-group">
             <label class="control-label">Montant prévisionnel</label>
             <div class="controls">
-              <input
+            <money  v-model="editMarche.montant_marche"></money>
+              <!-- <input
                 type="text"
                 v-model="editMarche.montant_marche"
                 class="span4"
                 
                
-              />
+              /> -->
             </div>
           </div>
               </td>
@@ -515,10 +516,11 @@ reference_marche
             <div class="control-group">
        <label class="control-label">Montant prévisionnel</label>
        <div class="controls">
-         <input
+       <money v-model="formData.montant_marche"></money>
+         <!-- <input
            type="text"
            v-model="formData.montant_marche"
-           class="span4" />
+           class="span4" /> -->
        </div>
      </div>
          </td>
@@ -589,13 +591,13 @@ reference_marche
                 <i class="icon-th"></i>
               </span>
 
-              <h5>Liste des March&eacute;s  hors ppm  <code>({{marcheHorSibFiltre.length}})</code>  </h5>
+              <h5>Liste des March&eacute;s  hors ppm  <span class="badge badge-success" > {{marcheHorSibFiltre.length}}</span>   </h5>
               <div align="right">
                 Recherche:
                 <input type="search"  v-model="search"  placeholder=" saisir objet"/>
               </div>
             </div>
-            <!-- <div class="span4">
+            <div class="span4">
             <br>
           Afficher
          <select name="pets" id="pet-select" v-model="size" class="span3">
@@ -605,16 +607,13 @@ reference_marche
        <option value="100">100</option>
       </select>
            Entrer
-        
-        </div> -->
-            <!-- <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5>Liste des marchés hors PPM</h5>
-             
-            </div> -->
-            
+        </div>
+               <div class="" align="right">
+                   <router-link :to="{name:'ajouter_hors_sib'}" tag="a" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter
+
+                   </router-link> 
+
+                   </div><br>
             
             <div class="widget-content nopadding">
               <table class="table table-bordered table-striped">
@@ -634,13 +633,14 @@ reference_marche
                     <th>Etat en cours</th>
                     <th title="mouvement du marché">Mouvement du marché</th>
                     <th style="">Suivi du marché</th>
-                    <!-- <th>Action</th> -->
+                    <th>Action</th>
                    
+
                   </tr>
                 </thead>
                 <tbody>
-                   <tr class="odd gradeX" v-for="marche in 
-                marcheHorSibFiltre"
+                   <tr class="odd gradeX" v-for="marche in partition(marcheHorSibFiltre, size)[page]
+                "
                  :key="marche.id">
                   <td @dblclick="ModalModifierMarcheHorsPPM(marche.id)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -708,10 +708,16 @@ reference_marche
                       <span v-else>PPM</span>
                     </td>
                 <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1 || marche.type_marche_id == 5"> 
-                     <router-link :to="{ name: 'detail_hors_sib', params: { id: marche.id }}"
+                         
+    <router-link :to="{ name: 'detail_hors_sib', params: { id: marche.id }}"
+                class="btn btn-default " title="Detail marche hors sib">
+                  <span class=""><i class=" icon-folder-open"></i></span>
+                   </router-link>
+
+                     <!-- <router-link :to="{ name: 'suivi_marhe', params: { id: marche.id }}"
                 class="btn btn-success " title="">
                   <span class=""><i class="">Contractualisation</i></span>
-                    </router-link>
+                    </router-link> -->
                     
              <!-- <router-link :to="{ name: 'HistoriqueDetailExecution', params: { id: marche.id }}"
                 class="btn btn-default " title="historique execution Marche">
@@ -742,21 +748,29 @@ reference_marche
                 
                    
  
-<!-- <td>
+
+<td>
     <div class="btn-group">
 
                     
               <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
              
             </div>
-</td> -->
+</td>
                    
 
                        </tr>
                 </tbody>
               </table>
-              
+                 <div class="pagination alternate">
+             <ul>
+           <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+           <li  v-for="(titre, index) in partition(marcheHorSibFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+           <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+            <li :class="{ disabled : page == partition(marcheHorSibFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+           </ul>
+        </div>
             </div>
           </div>
         </div>
@@ -765,9 +779,9 @@ reference_marche
       </div>
     </div>
 
-      <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
+      <!-- <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
  <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjoutTypaPrestation()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
     
@@ -778,10 +792,17 @@ reference_marche
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../src/Repositories/Repository";
  import {admin,dcf,noDCfNoAdmin} from '../../../src/Repositories/Auth';
+ import {partition} from '../../../src/Repositories/Repository'
+ //import {partition} from '../../../src/Repositories/partition'
+ //import {partition} from '../../../src/Repositories/partition';
+ //import {partition} from '../../../../'
 export default {
   name:'type facture',
   data() {
     return {
+       page:0,
+       size:10,
+       active_el:0,
       fabActions: [
         {
           name: "cache",
@@ -911,6 +932,7 @@ export default {
      admin:admin,
      dcf:dcf,
      noDCfNoAdmin:noDCfNoAdmin,
+     
 
 marcheHorSibFiltre1(){
 
@@ -1054,9 +1076,15 @@ marcheHorSibFiltre() {
                     return item
                 }
             })
-            return colect.filter(items=>items.sib==1 && items.plan_passation_marche_id==null);
+         
+            return colect.filter(items=>{
+              if(items.sib==1 && items.plan_passation_marche_id==null && items.parent_id==null){
+                return items
+              }
+            });
         
         }
+        
 else{
 return this.marcheHorSibFiltre1.filter(items=>items.sib==1 && items.plan_passation_marche_id==null);
 }
@@ -1931,14 +1959,19 @@ this.formData = {
     },
     formatageSomme:formatageSomme,
     // afficher modal de modification
-    ModalModifierMarcheHorsPPM(index) {
-      this.$("#modificationModal").modal({
-        backdrop: "static",
-        keyboard: false
-      });
+    ModalModifierMarcheHorsPPM(id){
+		this.$router.push({
+			path:"/modifier-marche-hors-sib/" + id
+		});
+	},
+    // ModalModifierMarcheHorsPPM(index) {
+    //   this.$("#modificationModal").modal({
+    //     backdrop: "static",
+    //     keyboard: false
+    //   });
 
-      this.editMarche = this.marcheHorSibFiltre.find(item=>item.id==index);
-    },
+    //   this.editMarche = this.marcheHorSibFiltre.find(item=>item.id==index);
+    // },
     // fonction pour vider l'input modification
     modifierModalTypeprestationLocal(){
        var nouvelObjet = {
@@ -2010,6 +2043,20 @@ else{
    
    
 },
+ 
+partition:partition,
+  getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
     // alert() {
     //   console.log("ok");
     // },

@@ -6,7 +6,7 @@
               <span class="icon">
             <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marchés en contratualisation </h5>
+              <h5>Liste des Marchés en contratualisation   </h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />

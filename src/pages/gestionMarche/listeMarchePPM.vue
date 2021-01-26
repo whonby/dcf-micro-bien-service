@@ -766,9 +766,9 @@ reference_marche
       </div>
     </div>
 
-      <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
+      <!-- <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
  <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjoutTypaPrestation()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
     
@@ -1054,11 +1054,11 @@ marcheHorSibFiltre() {
                     return item
                 }
             })
-            return colect.filter(items=>items.sib==0 && items.plan_passation_marche_id!=null);
+            return colect.filter(items=>items.sib==1 && items.plan_passation_marche_id!=null);
         
         }
 else{
-return this.marcheHorSibFiltre1.filter(items=>items.sib==0 && items.plan_passation_marche_id!=null);
+return this.marcheHorSibFiltre1.filter(items=>items.sib==1 && items.plan_passation_marche_id!=null);
 }
         
            

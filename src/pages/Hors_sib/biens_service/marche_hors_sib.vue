@@ -27,7 +27,7 @@ CodeExempte
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des March&eacute;s</h5>
+              <h5>Liste des March&eacute;s </h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -236,6 +236,7 @@ CodeExempte
         </div>
 
 
+
     </div>
 </template>
 
@@ -406,7 +407,9 @@ export default {
                     return item
                 }
             })
-            return colect.filter(element => element.gdenature_id == 5 && element.sib==1 && element.parent_id == null|| this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1 )
+            return colect.filter(element => element.gdenature_id == 5 && 
+            element.sib==1 && element.parent_id == null && element.plan_passation_marche_id==null || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && 
+            element.parent_id == null && element.sib==1 && element.plan_passation_marche_id==null )
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -415,7 +418,9 @@ export default {
             // });
         }
 
- return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.sib==1 && element.parent_id == null || element.gdenature_id == 5 && element.parent_id == null && element.sib==1 )
+ return this.gettersMarcheHorsib.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 1 &&
+  element.sib==1 && element.parent_id == null && element.plan_passation_marche_id==null || element.gdenature_id == 5 && 
+  element.parent_id == null && element.sib==1 && element.plan_passation_marche_id==null)
        
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
