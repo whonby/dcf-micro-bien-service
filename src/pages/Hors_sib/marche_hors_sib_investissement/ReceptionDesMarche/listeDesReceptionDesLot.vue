@@ -273,9 +273,8 @@
                 <div class="controls">
                   <input
                       type="text"
-                      :value="formReception.Periode_garantie"
+                      :value="formReception.durre_garantie"
                        class="span3"
-                      
                   />
                   
                 </div>
@@ -432,7 +431,7 @@
 
     <div class="widget-title">
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#Identif">Info Marche</a></li>
+        <li class="active"><a data-toggle="tab" href="#ajouter">Info Marche</a></li>
         <!-- <li class=""><a data-toggle="tab" href="#financ">Info Reception</a></li> -->
       </ul>
     </div>
@@ -440,12 +439,11 @@
 
   <div class="widget-content tab-content">
 
-      <div id="Identif" class="tab-pane active">
+      <div id="ajouter" class="tab-pane active">
 
         <table class="table table-bordered table-striped">
           <tr>
               <td>
-
               <div class="control-group">
                 <label class="control-label">N°Lot</label>
                 <div class="controls">
@@ -579,11 +577,11 @@
                 <td>
 
               <div class="control-group">
-                <label class="control-label">Période de garantie</label>
+                <label class="control-label">Période d000e garantie</label>
                 <div class="controls">
                   <input
                       type="text"
-                      
+                      :value="garantieActeEffetFinacier(detail_marche.id)"
                        class="span3"
                       
                   />
@@ -723,7 +721,7 @@
     import moment from "moment";
     import {formatageSomme} from "../../../../Repositories/Repository"
    import AjouterReceptionLot from "../../marche_hors_sib_investissement/ReceptionDesMarche/AjouterReceptionLot";
-  
+
   export default {
         name: 'compte',
         props:["macheid"],
@@ -753,8 +751,6 @@
                     }
 
                 ],
-                
-              
 
 
             };
@@ -770,7 +766,7 @@ created() {
           this.detail_mandat = this.mandats.find(
       Manda => Manda.id == this.$route.params.id)
   
-  
+   console.log(".............")
   /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
     console.log(this.appel_offre_marche)*/
 },
@@ -825,6 +821,28 @@ created() {
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
 
+actEffetFinancierMarche(){
+  return marche_id=>{
+      if(marche_id){
+          return  this.getterActeEffetFinanciers.find(qtreel => qtreel.marche_id == marche_id);
+      }
+      return null
+  }
+},
+            garantieActeEffetFinacier(){
+              return marche_id=>{
+                  if(marche_id){
+                      console.log(".......")
+                      let objet=this.actEffetFinancierMarche(marche_id)
+                      console.log(objet)
+                      if (objet!=undefined){
+                          console.log(objet.durre_garantie)
+                       return objet.durre_garantie
+                      }
+                  return null
+                  }
+              }
+            },
  Dureeexereel(){ 
       let vM=this;
       const acteAffet = vM.formReception
@@ -1121,7 +1139,8 @@ afficheMontantReelMarche() {
       "supprimerAvenant",
       "modifierMarche",
       "getActeEffetFinancier",
-      "getMarche"
+      "getMarche",
+                "modifierActeEffetFinancier"
                
             ]),
  ...mapActions("uniteadministrative", [              
@@ -1204,7 +1223,15 @@ afficherModalProcedureFacture() {
       };
     },
 
-
+integrationReceptionMarche(){
+                let objet={
+                    date_debut_exectuion_definitif:"",
+                    date_reception_provisoire_definitif:"",
+                    date_reception_definitive:"",
+                    id:""
+                }
+    this.modifierActeEffetFinancier(objet)
+}
 
   
    

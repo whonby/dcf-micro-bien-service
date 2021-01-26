@@ -286,6 +286,7 @@ name: "MembreCojo",
         comite_evaluation:"non",
 
       },
+      nbr_click:0,
       edite_membre_cojo:"",
       message_mandater:""
 
@@ -396,6 +397,21 @@ enregistreIdService() {
     },
 
     ajouterMembreCojoM(){
+      //let soundurl = 'http://soundbible.com/mp3/analog-watch-alarm_daniel-simion.mp3'
+      if(!this.nbrAtteint(this.macheid)){
+        this.nbr_click =this.nbr_click + 1
+        if(this.nbr_click==3){
+          var data3 = { soundurl : 'https://dcf-parametrage.kognishare.com/sung_alert/exageration.mp3'}
+          var audio_us = new Audio(data3.soundurl);
+          audio_us.play();
+         // this.$('#ajouter_membre_cojo').modal('hide');
+          return null
+        }
+        var data = { soundurl : 'https://dcf-parametrage.kognishare.com/sung_alert/alert_membre_participent.mp3'}
+        var audio = new Audio(data.soundurl);
+        audio.play();
+        return null
+      }
       var nouvelObjet ={
         ...this.formDataMembreCojo,
         marche_id :this.macheid,

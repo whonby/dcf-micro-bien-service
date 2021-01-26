@@ -31,52 +31,54 @@
                 <thead>
                     
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                         <td colspan="3" style="background-color: orange;color: #FFFFFF;text-align:center">Date réception provisoire</td>
-                        <td colspan="3" style="background-color: orange;color: #FFFFFF;text-align:center">Date réception définitive</td>
-                        <td></td>
-                        <td></td>
-                         <td colspan="3" style="background-color: orange;color: #FFFFFF;text-align:center">Situation d'exécution financière</td>
-                        <td colspan="2" style="background-color: orange;color: #FFFFFF;text-align:center">Situation d'exécution physique</td>
+                        <td style="background-color: #fbcbcb;color: #000;text-align:center"></td>
+                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
+                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
+                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
+                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
+                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
+                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
+                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
+                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
+                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
+                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
+                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
+                         <td colspan="3" style="background-color: #ffbd3d;color: #000;text-align:center">Date réception provisoire</td>
+                        <td colspan="3" style="background-color: #ffbd3d;color: #000;text-align:center">Date réception définitive</td>
+                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
+                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
+                         <td colspan="3" style="background-color: #ffbd3d;color: #000;text-align:center">Situation d'exécution financière</td>
+                        <td colspan="2" style="background-color: #ffbd3d;color: #000;text-align:center">Situation d'exécution physique</td>
                     </tr>
                     <tr>
-                        <td style="color: #FFFFFF;width:2%;text-align:center;background-color: green !important;font-size:10px">N° </td>
-                       <td colspan="" style="color: #FFFFFF;width:20%;text-align:center;background-color: green !important;font-size:10px">Objet du marché</td>
-    <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Numéro du marché</td>
-     <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Attribution</td>
-      <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Montant de base marché</td>
-                         <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Montant total avenant</td>
-      <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">  Montant total du marché y/c avenant</td>
-      <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Durée contractuelle d'exécution</td>
-       <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Durée de garantie</td>
-      <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Date de l'OS</td>
+                        <td style="color: #000;width:2%;text-align:center;background-color: #fbcbcb !important;font-size:10px">N° </td>
+                       <td colspan="" style="color: #000;width:20%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Objet du marché</td>
+    <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Numéro du marché</td>
+     <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Attribution</td>
+      <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Montant de base marché</td>
+                         <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Montant total avenant</td>
+      <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">  Montant total du marché y/c avenant</td>
+      <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Durée contractuelle d'exécution</td>
+       <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Durée de garantie</td>
+      <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Date de l'OS</td>
 
-      <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Date de début effectif d'exécution</td>
-                        <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">prévisionnelle</td>
-                        <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Effective</td>
-                             <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Ecart</td>
-                                             <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">prévisionnelle</td>
-                        <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Effective</td>
-                                               <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Ecart</td>
-        <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Durée d'exécution réelle</td>
-          <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Ecart des délais</td>
+      <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Date de début d'exécution réelle</td>
+                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Ecart de démarrage</td>
+                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">prévisionnelle</td>
+                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Effective</td>
+                             <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Ecart</td>
+                                             <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">prévisionnelle</td>
+                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Effective</td>
+                                               <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Ecart</td>
+        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Durée d'exécution réelle</td>
+          <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Ecart des délais</td>
 
-                  <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Montant déjà visé</td>
-                   <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Taux (%) OP visé </td>
-                    <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Montant restant à vise</td>
+                  <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Montant déjà visé</td>
+                   <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Taux (%) OP visé </td>
+                    <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Montant restant à vise</td>
                  
-                  <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Taux déjà réalisé </td>
-                    <td style="color: #FFFFFF;width:5%;text-align:center;background-color: green !important;font-size:10px">Taux restant à réaliser</td>
+                  <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Taux déjà réalisé </td>
+                    <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Taux restant à réaliser</td>
                  
                     </tr>
    
@@ -94,16 +96,24 @@
    <td>{{formatageSomme(parseFloat(montantTotaMarche(activites.id)))}}</td>
    <td>{{durreExecutionContuelle(activites.id)}} Jours</td>
    <td>{{dureeGarantie(activites.id)}} Jours</td>
-   <td>{{dateOs(activites.id)}}</td>
-    
-   <td>{{dateDebutExectionEffective(activites.id)}}</td>
-   
-   <td>{{dateProvisoirePrevisionnel(activites.id)}}</td>
-   <td> </td>
-   <td>{{dateProvisoireEffective(activites.id)}}</td>
-   <td>{{dateDefinitivePrevisionnel(activites.id)}}</td>
-   <td></td>
-   <td>{{dateReceptionEffective(activites.id)}}</td>
+   <td>{{formaterDate(dateOs(activites.id))}}</td>
+   <td>
+       {{formaterDate(dateDebutExectionEffective(activites.id)) || 'Non renseigné'}}
+   </td>
+     <td>{{ecartDemarage(activites.id)}}</td>
+   <td>{{formaterDate(dateProvisoirePrevisionnel(activites.id))}}</td>
+    <td>
+        {{formaterDate(dateProvisoireEffective(activites.id)) || 'Non renseigné'}}
+
+    </td>
+   <td>
+       {{ecartDateProvisoireEffective(activites.id)}}
+   </td>
+   <td>
+       {{formaterDate(dateDefinitivePrevisionnel(activites.id)) || 'Non renseigné'}}
+   </td>
+   <td>{{formaterDate(dateReceptionEffective(activites.id))}}</td>
+   <td>{{ecartDateDefinitiveEffective(activites.id)}}</td>
    <td></td>
    <td></td>
    <td></td>
@@ -133,6 +143,7 @@
     import { mapGetters, mapActions } from "vuex";
     import { formatageSomme } from "../../Repositories/Repository";
      import {admin,dcf,noDCfNoAdmin} from "../../Repositories/Auth"
+    import moment from "moment";
     //import UploadExcelComponent from '@/components/UploadExcel/index.vue'
     //import ProgressBar from "../component/ProgressBar"
      //import {formatageSomme} from '../../Repositories/Repository'
@@ -211,7 +222,87 @@ console.log(this.getActeEffetFinancierPersonnaliser)
     ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
             ...mapGetters("horSib", ["gettersMarcheHorsib"]),
+            nombreDejourCalcule(){
 
+                return (date1,date2)=>{
+                     if(!date2){
+                         let date_day=new Date()
+                         date2= this.formatDate(date_day)
+                        console.log(date2)
+                     }
+                      if(date1==null) return null;
+
+                          let date_debut=new Date(date1)
+                          let date_fin = new Date(date2)
+                   // let diffDays = date_fin.getDate() - date_debut.getDate();
+                    var timeDiff = date_fin.getTime() - date_debut.getTime();
+                    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                    if (isNaN(diffDays)) return null;
+                         if (parseFloat(diffDays) <0 ) return diffDays
+
+                     return diffDays
+                }
+
+
+            },
+            formatDate() {
+                return date=>{
+                    var d = new Date(date),
+                        month = '' + (d.getMonth() + 1),
+                        day = '' + d.getDate(),
+                        year = d.getFullYear();
+
+                    if (month.length < 2)
+                        month = '0' + month;
+                    if (day.length < 2)
+                        day = '0' + day;
+
+                    return [year, month, day].join('-');
+                }
+            },
+            ecartDateProvisoireEffective(){
+                return marche_id=>{
+                    if(marche_id){
+                        console.log(marche_id)
+                     let objet=this.listeActeEffectFinnancier(marche_id)
+                        if(objet){
+                            console.log(objet.date_reception)
+                            let jour=this.nombreDejourCalcule(objet.date_reception,objet.date_reception_provisoire_definitif)
+                            return jour;
+                        }
+                    return ""
+                    }
+                }
+            },
+            ecartDateDefinitiveEffective(){
+                return marche_id=>{
+                    if(marche_id){
+                        console.log(marche_id)
+                        let objet=this.listeActeEffectFinnancier(marche_id)
+                        if(objet){
+                            console.log(objet.date_reception)
+                            let jour=this.nombreDejourCalcule(objet.date_fin_exe,objet.date_reception_definitive)
+                            return jour;
+                        }
+                        return ""
+                    }
+                }
+            },
+            ecartDemarage(){
+                return marche_id=>{
+                    if(marche_id){
+                        console.log(marche_id)
+                        let objet=this.listeActeEffectFinnancier(marche_id)
+                        if(objet){
+                           // console.log(objet.date_reception)
+                            let jour=this.nombreDejourCalcule(objet.date_odre_service,objet.date_debut_exectuion_definitif)
+                            return jour;
+                        }
+                        return ""
+                    }
+                }
+            },
  admin:admin,
       dcf:dcf,
       noDCfNoAdmin:noDCfNoAdmin,
@@ -219,8 +310,6 @@ console.log(this.getActeEffetFinancierPersonnaliser)
       listeActeEffectFinnancier: function () {
       return macheid => {
         if (macheid != "") {
-            console.log("....................")
-           console.log(macheid)
           return this.getActeEffetFinancierPersonnaliser.find(idmarche => idmarche.marche_id == macheid)
         }
       }
@@ -298,7 +387,7 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                    return objet.date_reception
                }
                         
-               return 0
+               return ""
            }
      },
        dateProvisoireEffective(){
@@ -307,10 +396,10 @@ console.log(this.getActeEffetFinancierPersonnaliser)
               console.log(objet)
                if(objet!=undefined){
                   
-                   return objet.date_debut_exectuion_definitif
+                   return objet.date_reception_provisoire_definitif
                }
                         
-               return 0
+               return ""
            }
      },
       
@@ -323,7 +412,7 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                    return objet.date_fin_exe
                }
                         
-               return 0
+               return ""
            }
      },
      dateDebutExectionEffective(){
@@ -335,7 +424,7 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                    return objet.date_debut_exectuion_definitif
                }
                         
-               return 0
+               return ""
            }
      },
      dateReceptionEffective(){
@@ -347,7 +436,7 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                    return objet.date_reception_definitive
                }
                         
-               return 0
+               return ""
            }
      },
      montantTotaMarche(){
@@ -537,7 +626,12 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                 if (!table.nodeType) table = this.$refs.table
                 var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
                 window.location.href = this.uri + this.base64(this.format(this.template, ctx))
-            }
+            },
+            formaterDate(date){
+                if(date==null)
+                    return ""
+                return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+            },
 
          
             // OnchangeFichier(e) {
@@ -751,6 +845,9 @@ console.log(this.getActeEffetFinancierPersonnaliser)
     .tailleModalOffre2{
         width: 1300px;
         margin: 0 -690px;
+    }
+    .tableEntete{
+        color: #000;width:2%;text-align:center;background-color: #fbcbcb !important;font-size:10px
     }
 </style>
 
