@@ -267,10 +267,10 @@
           </tr>
           </tbody>
         </table>
-        <a @click.prevent="ajouterDossierCandidature" class="btn btn-primary"
-           href="#">Enregistrer dossier du soumissionnaire</a>
-      </div>
 
+      </div>
+      <a @click.prevent="ajouterDossierCandidature" class="btn btn-primary"
+         href="#">Enregistrer dossier du soumissionnaire</a>
 <!--      <div class="widget-content tab-content">-->
 
 

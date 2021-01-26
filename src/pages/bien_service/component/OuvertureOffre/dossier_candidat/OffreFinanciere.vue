@@ -64,7 +64,7 @@
       </table> -->
       <table class="table table-bordered table-striped">
         <tr>
-           <td colspan="2">
+           <td>
             <div class="control-group">
               <label>Lot</label>
               <div class="controls">
@@ -72,6 +72,14 @@
                   <option v-for="varText in lotTechniqueOffre(dossier_candidature.id)" :key="varText.id"
                           :value="varText.id">LOT N°{{varText.numero_lot}} {{varText.objet}}</option>
                 </select>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="control-group">
+              <label>TVA</label>
+              <div class="controls">
+                <input type="text" class="span" placeholder="TVA" :value="affcherTauxEnCours" disabled>
               </div>
             </div>
           </td>
@@ -90,40 +98,47 @@
             <div class="control-group">
               <label class="control-label">Montant total HT :</label>
               <div class="controls">
-                <money v-model="formOffreFinanciere.montant_total_ht" ></money>
+                <money v-model="montant_htax" ></money>
 <!--                <input type="text"   class="span" placeholder="Montant total HT" v-model="formOffreFinanciere.montant_total_ht">-->
               </div>
             </div>
           </td>
         </tr>
         <tr>
-          
-
-          
           <td>
+            <div class="control-group">
+              <label class="control-label">Montant TVA :</label>
+              <div class="controls">
+                <money v-model="montant_tva" readOnly></money>
+                <!--                <input type="number" class="span" placeholder="Montant TTC" v-model="formOffreFinanciere.montant_total_ttc">-->
+              </div>
+            </div>
+          </td>
 
+          <td>
             <div class="control-group">
               <label class="control-label">Montant TTC :</label>
               <div class="controls">
-                <money v-model="formOffreFinanciere.montant_total_ttc" ></money>
+                <money v-model="formOffreFinanciere.montant_total_ttc" readOnly></money>
 <!--                <input type="number" class="span" placeholder="Montant TTC" v-model="formOffreFinanciere.montant_total_ttc">-->
               </div>
             </div>
-
-          
-<td>
-
-            <div class="control-group">
-              <label class="control-label">Rabais (%) :</label>
-              <div class="controls">
-                <input type="number" class="span" placeholder="Rabais" v-model="formOffreFinanciere.Rabais">
-              </div>
-            </div>
-
           </td>
+
+
         </tr>
         
+<tr>
+  <td>
+    <div class="control-group">
+      <label class="control-label">Rabais (%) :</label>
+      <div class="controls">
+        <input type="number" class="span" placeholder="Rabais" v-model="rabais">
+      </div>
+    </div>
 
+  </td>
+</tr>
 
       </table>
 
@@ -201,6 +216,14 @@
             </div>
 
           </td>
+          <td>
+            <div class="control-group">
+              <label>TVA</label>
+              <div class="controls">
+                <input type="text" class="span" placeholder="TVA" :value="affcherTauxEnCours" disabled>
+              </div>
+            </div>
+          </td>
         </tr>
 
 
@@ -231,6 +254,10 @@ name: "OffreFinanciere",
         }
       ],
       editer:"",
+      montant_htax:"",
+      montant_tva:"",
+      rabais:"",
+      montant_debut_ht:"",
       formOffreFinanciere:{
         numero_lot:"",
         Rabais:"",
@@ -257,6 +284,7 @@ name: "OffreFinanciere",
       "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
       "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
       "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+    ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
     listeAppelOffre(){
       return  marche_id=>{
         if (marche_id!="") {
@@ -264,6 +292,14 @@ name: "OffreFinanciere",
           return this.appelOffres.find( idmarche => idmarche.marche_id == marche_id)
         }
       }
+    },
+    affcherTauxEnCours() {
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
     },
     lotTechniqueOffre(){
       return dossier_candidat=>{
@@ -355,7 +391,6 @@ name: "OffreFinanciere",
     formatageSomme:formatageSomme,
     ajouterOffreF(){
 
-
       let lot_marche=this.getMarchePersonnaliser.find(item=>item.id==this.formOffreFinanciere.marche_id)
       this.formOffreFinanciere.numero_lot=lot_marche.numero_lot
       this.formOffreFinanciere.dossier_candidat_id=this.dossier_candidature.id
@@ -394,6 +429,45 @@ name: "OffreFinanciere",
       }
       this.modifierOffreFinancier(objet)
       this.$('#edit_offre_technique').modal('hide');
+    }
+  },
+  watch: {
+   montant_htax:function (value) {
+      //console.log(value)
+     if(value!="" ){
+       this.montant_debut_ht=value
+       this.formOffreFinanciere.montant_total_ht=value
+       let montant=(parseFloat(value) * this.affcherTauxEnCours)/100
+       this.montant_tva=montant
+        this.formOffreFinanciere.montant_total_ttc=(parseFloat(value)) + montant
+     }
+   },
+    rabais:function (value) {
+       console.log("...............")
+     console.log(value)
+        console.log("...........1222....")
+      if(value!="" && this.formOffreFinanciere.montant_total_ht==""){
+        this.formOffreFinanciere.Rabais=value
+      }
+
+      let montantHT=this.formOffreFinanciere.montant_total_ht
+
+      if(value!="" && this.formOffreFinanciere.montant_total_ht!=""){
+        let montantRabais=(parseFloat(montantHT) * parseFloat(value))/100
+        this.formOffreFinanciere.montant_total_ht=parseFloat(montantHT) - parseFloat(montantRabais)
+        console.log(this.formOffreFinanciere.montant_total_ht)
+        this.montant_htax=this.formOffreFinanciere.montant_total_ht
+        let montant=(parseFloat(this.formOffreFinanciere.montant_total_ht) * this.affcherTauxEnCours)/100
+        this.montant_tva=montant
+        this.formOffreFinanciere.montant_total_ttc=(parseFloat(this.formOffreFinanciere.montant_total_ht)) + montant
+      }
+      if(value==""){
+        this.montant_htax=this.montant_debut_ht
+                this.formOffreFinanciere.montant_total_ht=this.montant_debut_ht
+        let montant=(parseFloat(this.formOffreFinanciere.montant_total_ht) * this.affcherTauxEnCours)/100
+        this.montant_tva=montant
+        this.formOffreFinanciere.montant_total_ttc=(parseFloat(this.formOffreFinanciere.montant_total_ht)) + montant
+      }
     }
   }
 }
