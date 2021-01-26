@@ -501,9 +501,9 @@
 
                     
                      <th style="width:15%">Article</th>
-                     <th style="width:15%">Marque785</th>
+                     <th style="width:15%">Marque</th>
                      <th style="width:15%">Modèle</th>
-                     <th style="width:15%">No série25</th>
+                     <th style="width:15%">No série</th>
                     <!-- <th>Quantité Initiale</th>  -->
                     <th style="width:15%">Quantité</th>
                     <th style="width:15%">Valeur d'acquisition</th>
