@@ -570,7 +570,7 @@ recupererParentId(){
 
   },
   methods: {
-    ...mapActions("horSib", ['modifierMarcheHorSib']),
+    ...mapActions("horSib", ['modifierMarcheHorSib','getMarcheHorSib']),
     allerPageMarcheHorsib(){
        this.$router.push({
           name:'marcheHorsib'  

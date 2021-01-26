@@ -603,8 +603,8 @@ recupererParentId(){
 
   },
   methods: {
-    ...mapActions("horSib", ['ajouterMarcheHorSib','modifierMarcheHorSib','supprimerMarcheHorSib',
-     
+    ...mapActions("horSib", ['ajouterMarcheHorSib','modifierMarcheHorSib','supprimerMarcheHorSib','getMarcheHorSib'
+    
     ]),
     allerPageMarcheHorsib(){
        this.$router.push({

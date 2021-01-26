@@ -110,8 +110,9 @@
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOR'] , detail_marche.id)">Appel d'Offre Ouvert Restreint (AOR)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['ED'],detail_marche.id)">Entente direct (ED)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['CONV'],detail_marche.id)">Convention (CONV)</h4>
+              <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['LCVM'],detail_marche.id)">Lettre de Commande Valant Marché (LCVM)</h4>
              <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['GAG'],detail_marche.id)">Gré à Gré (GAG)</h4>
-             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['LCVM'],detail_marche.id)">Lettre de Commande Valant Marché (LCVM)</h4>
+            
             <div class="row-fluid">
                 <div class="span12">
                      <template v-if="affcicheEtapeProcedure(10000000,['PSC-SC'],detail_marche.id)">
@@ -948,6 +949,85 @@
                     </div>
                     
 </template>
+      <template v-else-if="affcicheEtapeProcedure(0,['LCVM'],detail_marche.id )">
+          <div class="widget-box">
+             <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                 <li class="active"><a data-toggle="tab" href="#tab45690">l'offre</a></li>
+                                 <li class=""><a data-toggle="tab" href="#lot21">Lot</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab289">D.DMP</a></li>
+                              <li class=""><a data-toggle="tab" href="#tab280">D.ANO Bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab1002">Attribution</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab00214023">Bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab20250124">ANRMP</a></li>
+                            </ul>
+                        </div>
+        
+            <div class="widget-content tab-content">
+        <div id="tab45690" class="tab-pane active ">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterOffre1" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+
+                        <publication-Offre :macheid="detail_marche.id"></publication-Offre>
+                        
+                      <publicationOffreLCV :macheid="detail_marche.id"></publicationOffreLCV>
+                         </div>
+
+                          <div id="lot21" class="tab-pane">
+                             <lot-marche :macheid="detail_marche.id"></lot-marche>
+                           </div>
+                            
+                         <div id="tab289" class="tab-pane">
+
+                    <AnoDMPLCV :macheid="detail_marche.id"></AnoDMPLCV>
+<!--                 <componentDemandeAno :macheid="detail_marche.id"> </componentDemandeAno>-->
+
+                </div>
+
+                         <div id="tab280" class="tab-pane">
+
+
+                    <AnoBailleurLCV :macheid="detail_marche.id"></AnoBailleurLCV>
+              
+<!--                 <componentAvisBailleurCf :macheid="detail_marche.id"> </componentAvisBailleurCf>-->
+
+                </div>
+
+                           <div id="tab1002" class="tab-pane">
+                    <ActeEffetFinancierLCV :macheid="detail_marche.id"></ActeEffetFinancierLCV>
+<!--                <component-acte :macheid="detail_marche.id"></componentActe>-->
+
+                </div>
+                
+
+
+                         <div id="tab00214023" class="tab-pane">
+                <div align="right">
+             <div class="widget-content">
+                 <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+                </div>
+                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
+                </div>
+
+                <div id="tab20250124" class="tab-pane">
+                <!-- <div align="right">
+                    <div class="widget-content">
+                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div> -->
+                <Arnmp :macheid="detail_marche.id"></Arnmp>
+
+                </div>
+            </div>
+                    </div>
+
+                    
+      </template>
           <template v-else-if="affcicheEtapeProcedure(0,['ED','CONV','GAG'],detail_marche.id )">
           <div class="widget-box">
              <div class="widget-title">
@@ -1022,87 +1102,9 @@
                     </div>
                    <!-- <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p> -->
                      </template>
-                     <template v-else-if="affcicheEtapeProcedure(0,['LCVM'],detail_marche.id )">
-          <div class="widget-box">
-             <div class="widget-title">
-                            <ul class="nav nav-tabs">
-                                 <li class="active"><a data-toggle="tab" href="#tab45690">l'offre</a></li>
-                                 <li class=""><a data-toggle="tab" href="#lot21">Lot</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab289">D.DMP</a></li>
-                              <li class=""><a data-toggle="tab" href="#tab280">D.ANO Bailleur</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab10">Attribution</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab00214">Bailleur</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab2025">ANRMP</a></li>
-                               
-                              
-                                
-                                
-                            </ul>
-                        </div>
-        
-            <div class="widget-content tab-content">
-        <div id="tab45690" class="tab-pane active ">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre1" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                     
+               
 
-
-                      <publicationOffreLCV :macheid="detail_marche.id"></publicationOffreLCV>
-                         </div>
-
-                          <div id="lot21" class="tab-pane">
-                             <lot-marche :macheid="detail_marche.id"></lot-marche>
-                           </div>
-                            
-                         <div id="tab289" class="tab-pane">
-
-                    <AnoDMPLCV :macheid="detail_marche.id"></AnoDMPLCV>
-<!--                 <componentDemandeAno :macheid="detail_marche.id"> </componentDemandeAno>-->
-
-                </div>
-
-                         <div id="tab280" class="tab-pane">
-
-
-                    <AnoBailleurLCV :macheid="detail_marche.id"></AnoBailleurLCV>
-              
-<!--                 <componentAvisBailleurCf :macheid="detail_marche.id"> </componentAvisBailleurCf>-->
-
-                </div>
-
-                           <div id="tab10" class="tab-pane">
-                    <ActeEffetFinancierLCV :macheid="detail_marche.id"></ActeEffetFinancierLCV>
-<!--                <component-acte :macheid="detail_marche.id"></componentActe>-->
-
-                </div>
-                
-
-
-                         <div id="tab00214" class="tab-pane">
-                <div align="right">
-             <div class="widget-content">
-                 <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
-                    </div>
-                </div>
-                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
-                </div>
-
-                <div id="tab2025" class="tab-pane">
-                <!-- <div align="right">
-                    <div class="widget-content">
-                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
-                    </div>
-
-
-                </div> -->
-                <Arnmp :macheid="detail_marche.id"></Arnmp>
-
-                </div>
-            </div>
-                    </div>
-                   <!-- <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p> -->
-                     </template>
                      <template v-else>
                      <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p>
                      </template>
@@ -1231,9 +1233,7 @@ created() {
    this.detail_marche = this.getPersonnaliserMarchehorSib.find(
        idmarche => idmarche.id == this.$route.params.id
    )
-   console.log(this.detail_marche);
-  /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
-    console.log(this.appel_offre_marche)*/
+
 },
         computed: {
 
@@ -1284,13 +1284,14 @@ created() {
                   console.log(procedure)
 
                let offre=this.appelOffres.find(item=>item.marche_id==marche_id)
-      //    console.log(offre)
+       console.log(offre)
+      console.log(offre)
               if(offre!=undefined){
                    //test
                   //console.log(offre)
                    
                    let mode_passation=this.procedurePassations.find(item=>item.id==offre.mode_passation_id)
-
+                    console.log(mode_passation.code)
                   if (mode_passation==undefined){
 
                       return this.verifictionDotationLigne(procedure,dotation)
@@ -1307,6 +1308,7 @@ created() {
 
           return this.verifictionDotationLigne(procedure,dotation)
                
+
 
 
       }
@@ -1333,16 +1335,19 @@ created() {
              {
                  return true
              }
-             else if(this.inArray(procedure,"ED") || this.inArray(procedure,"CON") || this.inArray(procedure,"GAG") )
+             else if(this.inArray(procedure,"ED") || this.inArray(procedure,"CON") ||  this.inArray(procedure,"GAG")  )
              {
                  return true
              }
-              else if(this.inArray(procedure,"LCVM")  )
-             {
-                 return true
-             }
+             
              else if(dotation < this.budgetDisponible && (this.inArray(procedure,"AOR") || this.inArray(procedure,"AON")  || this.inArray(procedure,"AOI")))
              {
+                 return true
+             }
+             
+             else if(this.inArray(procedure,"LCVM") )
+             {
+               console.log("VRAI")
                  return true
              }
          }

@@ -915,7 +915,7 @@ export default {
       "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
-
+ ...mapActions('horSib',['getMarcheHorSib',"getRealiteServiceHors","getOpProvisoire"]),
      ...mapGetters("uniteadministrative",['getterligneExempter','uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
       "montantBudgetGeneral","budgetEclate" ]),
@@ -1885,6 +1885,7 @@ recupererDateMiseService() {
     'supprimerMarche','modifierActeEffetFinancier',"getMarche","getActeEffetFinancier"
      
     ]),
+    ...mapActions("horSib", ['getMarcheHorSib']),
       modifierModalResiliation(){
       var nouvelObjet1 = {
       ...this.editActeEffetFinancier,
