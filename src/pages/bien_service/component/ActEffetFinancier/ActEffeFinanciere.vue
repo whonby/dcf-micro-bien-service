@@ -1058,10 +1058,11 @@ marche_id
               <div class="control-group">
                 <label class="control-label">Montant acte/réel du marché (HT)</label>
                  <div class="controls">
-                  <input type="text" v-model="editActeEffetFinancier.montant_act_ht"
+                  <!-- <input type="text" v-model="editActeEffetFinancier.montant_act_ht"
                          class="span"
                          placeholder="Saisir le montant "
-                  />
+                  /> -->
+                  <money v-model="editActeEffetFinancier.montant_act_ht" ></money>
                 </div>
 
               </div>
@@ -1073,14 +1074,14 @@ marche_id
               <div class="control-group">
                 <label class="control-label" > Montant TVA du marché</label>
                  <div class="controls">
-                  <input
+                  <!-- <input
                       type="number"
                       :value="montantTva"
 
                       class="span"
                       readonly
-                  />
-
+                  /> -->
+              <money :value="montantTvaModifier" style="text-align:left;color:red" readonly ></money>
                 </div>
               </div>
             </td>
@@ -1088,14 +1089,14 @@ marche_id
               <div class="control-group">
                 <label class="control-label" >Montant TTC du marché</label>
                  <div class="controls">
-                  <input
+                  <!-- <input
                       type="number"
                       :value="montantHTt"
 
                       class="span"
                       readonly
-                  />
-
+                  /> -->
+           <money :value="montantHTtModifier" style="text-align:left;color:red" readonly ></money>
                 </div>
               </div>
             </td>
@@ -1110,14 +1111,14 @@ marche_id
               <div class="control-group">
                 <label class="control-label" >Taux Avance Démarrage</label>
                 <div class="controls">
-                  <input
+                  <!-- <input
                       type="number"  v-model="editActeEffetFinancier.taux_avance_demarrage"
 
                       placeholder="saisir le taux Avance Demarrage"
                       class="span"
 
-                  />
-
+                  /> -->
+       <money v-model="editActeEffetFinancier.taux_avance_demarrage" ></money>
                 </div>
               </div>
             </td>
@@ -1127,11 +1128,11 @@ marche_id
                  <div class="controls">
 
 
-                  <input type="text" v-model="editActeEffetFinancier.avance_demarrage_ht"
+                  <!-- <input type="text" v-model="editActeEffetFinancier.avance_demarrage_ht"
                          class="span"
                          placeholder="Saisir le montant "
-                  />
-
+                  /> -->
+             <money v-model="editActeEffetFinancier.avance_demarrage_ht" ></money>
                 </div>
 
               </div>
@@ -1140,13 +1141,14 @@ marche_id
                <div class="control-group">
                 <label class="control-label" >TVA (Avance Demarrage)</label>
                  <div class="controls">
-                  <input
+                  <!-- <input
                       type="number"
                       :value="avanceDemarrageMontantTva"
 
                       class="span"
                       readonly
-                  />
+                  /> -->
+               <money :value="avanceDemarrageMontantTvaModifier" style="text-align:left;color:red"  readonly></money>
 
                 </div>
               </div>
@@ -1155,14 +1157,14 @@ marche_id
               <div class="control-group">
                 <label class="control-label" >Montant Avance Démarrage TTC</label>
                  <div class="controls">
-                  <input
+                  <!-- <input
                       type="number"
                       :value="avanceDemarrage"
 
                       class="span"
                       readonly
-                  />
-
+                  /> -->
+                   <money :value="avanceDemarrageModifier" style="text-align:left;color:red" readonly ></money>
                 </div>
               </div>
             </td>
@@ -1192,13 +1194,13 @@ marche_id
               <div class="control-group">
                 <label class="control-label" > Montant HT du cautionnement</label>
                 <div class="controls">
-                  <input type="text"  :value="afficheMontantHorsTaxeDuCautionnement"
+                  <!-- <input type="text"  :value="afficheMontantHorsTaxeDuCautionnement"
 
 
                          class="span"
                          readOnly
-                  />
-
+                  /> -->
+                   <money style="text-align:left;color:red" readOnly :value="afficheMontantHorsTaxeDuCautionnementModifier" ></money>
                 </div>
 
               </div>
@@ -1207,13 +1209,14 @@ marche_id
               <div class="control-group">
                 <label class="control-label" >Montant TVA du cautionnement</label>
                  <div class="controls">
-                  <input
+                  <!-- <input
                       type="number"  :value="afficherMontantTvaDuCautionnement"
 
 
                       class="span"
                       readonly
-                  />
+                  /> -->
+                 <money style="text-align:left;color:red" readOnly :value="afficherMontantTvaDuCautionnementModifier" ></money>
 
                 </div>
 
@@ -1223,14 +1226,14 @@ marche_id
               <div class="control-group">
                 <label class="control-label" >Montant TTC du cautionnement </label>
                  <div class="controls">
-                  <input
+                  <!-- <input
                       type="number"
 
                       :value="afficherMontantTTCDuCautionnement"
                       class="span"
                       readonly
-                  />
-
+                  /> -->
+                <money style="text-align:left;color:red" readOnly :value="afficherMontantTTCDuCautionnementModifier" ></money>
                 </div>
 
               </div>
@@ -1261,14 +1264,14 @@ marche_id
               <div class="control-group">
                 <label class="control-label" > Montant HT de retenue de garantie</label>
                  <div class="controls">
-                  <input
+                  <!-- <input
                       type="text"  :value="afficherMontantHorsTaxeRetenuGarantie"
                       placeholder="saisir le montant hors taxe du dispositif retenu"
 
                       class="span"
                       readonly
-                  />
-
+                  /> -->
+                 <money style="text-align:left;color:red" readOnly :value="afficherMontantHorsTaxeRetenuGarantieModifier" ></money>
                 </div>
 
               </div>
@@ -1277,12 +1280,12 @@ marche_id
               <div class="control-group">
                 <label class="control-label" >Montant TVA de retenue de garantie</label>
                 <div class="controls">
-                  <input
-                      type="number"  :value="afficherMontantTvaTaxeRetenuGarantie"
+                  <!-- <input
+                      type="number"  :value="afficherMontantTvaTaxeRetenuGarantieModifier"
                       class="span"
                       readonly
-                  />
-
+                  /> -->
+                 <money style="text-align:left;color:red" readOnly :value="afficherMontantTvaTaxeRetenuGarantieModifier" ></money>
                 </div>
 
               </div>
@@ -1291,12 +1294,12 @@ marche_id
               <div class="control-group">
                 <label class="control-label" >Montant TTC retenue de garantie </label>
                  <div class="controls">
-                  <input
-                      type="number"  :value="afficherMontantRetenueGarantie"
+                  <!-- <input
+                      type="number"  :value="afficherMontantRetenueGarantieModifier"
                       class="span"
                       readonly
-                  />
-
+                  /> -->
+               <money style="text-align:left;color:red" readOnly :value="afficherMontantRetenueGarantieModifier" ></money>
                 </div>
 
               </div>
@@ -1349,13 +1352,13 @@ name: "ActEffeFinanciere",
         structure:[],
         structure_id:[],
         date_debut_previsionnel:"",
-        
+        taux_avance_demarrage:"",
         durre_prevue:"",
         durre_garantie:"",
        formEffetFinancier:{
         tva_cautionnement:"",
         montant_ttc_cautionnement:"",
-        montant_ht_cautionnement:"",
+        montant_ht_cautionnement:"",    
         exonere:"",
         montant_act_ht:"",
         taux_cautionnemt:"",
@@ -1753,7 +1756,7 @@ afficheNomEntreprise() {
       return 0
     },
       afficherMontantRetenueGarantieModifier(){
-      const montantttcRetenueGarantie = (parseFloat(this.montantHTt) * (this.editActeEffetFinancier.taux_retenue_garantie)/100)
+      const montantttcRetenueGarantie = (parseFloat(this.montantHTtModifier) * (this.editActeEffetFinancier.taux_retenue_garantie)/100)
       if (montantttcRetenueGarantie) {
         return parseFloat(montantttcRetenueGarantie).toFixed(0);
       }
@@ -1786,7 +1789,7 @@ afficheNomEntreprise() {
     },
       afficherMontantTvaTaxeRetenuGarantieModifier(){
 
-      const val = parseFloat((this.afficherMontantHorsTaxeRetenuGarantie) * parseFloat(this.ModifierModifier)/100);
+      const val = parseFloat((this.afficherMontantHorsTaxeRetenuGarantieModifier) * parseFloat(this.Modifier)/100);
 
       if (val) {
         return parseFloat(val).toFixed(0);
@@ -1867,13 +1870,14 @@ afficheNomEntreprise() {
 
     },
      afficherMontantTTCDuCautionnementModifier(){
-      const result = (parseFloat(this.montantHTt) * (this.editActeEffetFinancier.taux_cautionnemt)/100)
-      if (result) {
-        return parseFloat(result).toFixed(0);
-      }
+      // const result = (parseFloat(this.montantHTt) * (this.editActeEffetFinancier.taux_cautionnemt)/100)
+      // if (result) {
+      //   return parseFloat(result).toFixed(0);
+      // }
 
-      return 0
-
+      // return 0
+     let montant=parseFloat(this.afficheMontantHorsTaxeDuCautionnementModifier) + parseFloat(this.afficherMontantTvaDuCautionnementModifier)
+      return parseFloat(montant).toFixed(0);
     },
 
 // calcul du montant de tva du cautionnement
@@ -1892,14 +1896,14 @@ afficheNomEntreprise() {
     },
      afficherMontantTvaDuCautionnementModifier(){
 
-      const val = parseFloat((this.afficheMontantHorsTaxeDuCautionnementModifier) * parseFloat(this.Modifier)/100);
+      let montantTV = (this.afficheMontantHorsTaxeDuCautionnementModifier * this.afficherEnorereModifier)/100
 
-      if (val) {
-        return parseFloat(val).toFixed(0);
-      }
+      // if (val) {
+      //   return parseFloat(val).toFixed(0);
+      // }
 
-      return 0
-
+      // return 0
+      return parseFloat(montantTV).toFixed(0);
     },
 
 
@@ -1923,13 +1927,21 @@ afficheNomEntreprise() {
      // return 0
     },
      afficheMontantHorsTaxeDuCautionnementModifier(){
+    
+     if(this.editActeEffetFinancier.taux_cautionnemt!="" && this.editActeEffetFinancier.montant_act_ht!=""){
+                  let taux_cautionnement=parseFloat(this.editActeEffetFinancier.taux_cautionnemt)
+                  let montant_act_ht=parseFloat(this.editActeEffetFinancier.montant_act_ht)
+                 let mont=(montant_act_ht * taux_cautionnement)/100
+                  return parseFloat(mont).toFixed(0);
 
-      const anwser = parseFloat (this.afficherMontantTTCDuCautionnementModifier)/(1+ parseFloat(this.afficherTauxEnPourcentage))
+              }
+              return 0
+      // const anwser = parseFloat (this.afficherMontantTTCDuCautionnementModifier)/(1+ parseFloat(this.afficherTauxEnPourcentage))
 
-      if(anwser){
-        return parseFloat( Math.round(anwser))
-      }
-      return 0
+      // if(anwser){
+      //   return parseFloat( Math.round(anwser))
+      // }
+      // return 0
     },
 
 // calcul le montant ttc du cautionnement
@@ -2100,7 +2112,7 @@ afficheNomEntreprise() {
       return 0
     },
       avanceDemarrageModifier(){
-      const val = parseFloat(this.editActeEffetFinancier.avance_demarrage_ht) + parseFloat(this.avanceDemarrageMontantTva);
+      const val = parseFloat(this.editActeEffetFinancier.avance_demarrage_ht) + parseFloat(this.avanceDemarrageMontantTvaModifier);
 
       if (val) {
         return parseFloat(val).toFixed(0);
@@ -2128,7 +2140,7 @@ afficheNomEntreprise() {
     //   return 0
     // },
   avanceDemarrageMontantTvaModifier() {
-      const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.afficherEnorere)/100);
+      const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.editActeEffetFinancier.taux_avance_demarrage)/100);
 
       if (val) {
         return parseFloat(val).toFixed(0);
