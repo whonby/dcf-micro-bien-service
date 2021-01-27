@@ -9,12 +9,12 @@ CodeExempte
                 <div class="">
                     <div class="widget-box"> <br>
                        
-                       <div class="" align="right">
+                       <!-- <div class="" align="right">
                    <router-link :to="{name:'ajouter_hors_sib'}" tag="a" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter
 
                    </router-link> 
 
-                   </div><br>
+                   </div><br> -->
                     <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>

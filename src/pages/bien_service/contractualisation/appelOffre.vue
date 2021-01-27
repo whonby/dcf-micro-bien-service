@@ -103,13 +103,13 @@
                        <table class="table table-bordered table-striped">
                           <thead>
                           <tr>
-                   <th>Type marché</th>
+                   <th>Type de marché</th>
                   <th> UA</th>
-                   <th>Reference appel</th>
-                  <th> Type apple</th>
+                   <th>Référence appel</th>
+                  <th> Type d'appel</th>
                   <th>Financement</th>
                   <th>Nom bailleur</th>
-                  <th>Date émmission</th>
+                  <th>Date d'émission</th>
                   <th>Date limite</th>
                    <th>Action</th>
                 </tr>                              
@@ -172,7 +172,7 @@
 
               </div>
               <div v-else>
-                Aucun appel offre
+                Aucun appel d'offre
               </div>
                </div>
 

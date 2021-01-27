@@ -1646,6 +1646,7 @@ export default {
                 activite_id:"",
                 typeappel_id:"",
                 exo_id:"",
+                sib:0
         
       },
         editActeEffetFinancier:{
@@ -1688,7 +1689,8 @@ export default {
                 unite_administrative_id:"",
                 imputation:"",
                  activite_id:"",
-                 exo_id:""
+                 exo_id:"",
+                 sib:0
                  
       },
       
@@ -1815,6 +1817,8 @@ getDateFinExécutionValue(){
     return this.editActeEffetFinancier.date_odre_service !=""
 },
 
+
+
  filtre_unite_admin() {
        // const st = this.search.toLowerCase();
 
@@ -1828,7 +1832,7 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => element.gdenature_id == 5 && element.parent_id == null && element.sib == 0 )
+            return colect.filter(element => element.gdenature_id == 5 && element.parent_id == null && element.sib ==0)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1837,7 +1841,7 @@ getDateFinExécutionValue(){
             // });
         }
 
- return this.printMarcheNonAttribue.filter(element => element.gdenature_id == 5  && element.parent_id == null && element.sib == 0)
+ return this.printMarcheNonAttribue.filter(element => element.gdenature_id == 5  && element.parent_id == null && element.sib ==0)
        
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
@@ -2743,7 +2747,8 @@ recupererDateMiseService() {
        var nouvelObjet = {
       ...this.formData,
       imputation :this.ImputationBudget,
-      exo_id : this.anneeAmort
+      exo_id : this.anneeAmort,
+      sib:0
        };
 this.ajouterMarche(nouvelObjet)
 this.formData = {
@@ -2796,7 +2801,8 @@ this.formData = {
       imputation :this.ImputationBudgetModifier,
       exo_id : this.anneeAmort,
       activite_id:this.editMarche.activite_id,
-      economique_id:this.editMarche.economique_id
+      economique_id:this.editMarche.economique_id,
+      sib:0
        };
       this.modifierMarche(nouvelObjet)
       this.$('#modificationModal').modal('hide');

@@ -22,7 +22,7 @@
                           <tr>
                   <td> 
             <div class="control-group">
-              <label class="control-label">Type marche:</label>
+              <label class="control-label">Type marché</label>
               <div class="controls">
            <select v-model="formData.type_marche_id" class="span">
                <option v-for="plans in typeMarches" :key="plans.id" 
@@ -33,7 +33,7 @@
              </td>
                   <td> 
             <div class="control-group">
-              <label class="control-label" title="unite administrative">UA:</label>
+              <label class="control-label" title="Unité administrative">UA:</label>
               <div class="controls">
            <select v-model="formData.unite_administrative_id" class="span">
                <option v-for="plans in uniteAdministratives" :key="plans.id" 
@@ -46,7 +46,7 @@
 
                           <td> 
             <div class="control-group">
-              <label class="control-label">Reference appel:</label>
+              <label class="control-label">Référence appel:</label>
               <div class="controls " >
      <input type="text" class="span" v-model="formData.ref_appel" >
       
@@ -66,7 +66,7 @@
                           </td>
                 <td> 
             <div class="control-group">
-              <label class="control-label">financement:</label>
+              <label class="control-label">Financement:</label>
               <div class="controls " >
      <input type="text" class="span" v-model="formData.financement" >
       
@@ -75,7 +75,7 @@
                           </td>
              <td> 
             <div class="control-group">
-              <label class="control-label">nom bailleur:</label>
+              <label class="control-label">Nom du bailleur:</label>
               <div class="controls " >
      <input type="text" class="span" v-model="formData.nom_bailleurs" >
       
@@ -91,7 +91,7 @@
             
                   <td> 
             <div class="control-group">
-              <label class="control-label">Date émmission:</label>
+              <label class="control-label">Date d'émission:</label>
               <div class="controls " >
      <input type="date" class="span" v-model="formData.date_emission" >
       

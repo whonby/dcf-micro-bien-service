@@ -272,7 +272,6 @@ return objJson.id
         })
       },
       
-
  navigateToTransfert(){
         
         this.$router.push({
