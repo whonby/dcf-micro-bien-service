@@ -32,7 +32,7 @@
                             {{formaterDate(appelOffre.date_id) || 'Non renseigné'}}</td>
                         <div class="btn-group">
                             <button @click.prevent="supprimerMandater(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
+                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
                         </div>
                     </tr>
                     
@@ -106,7 +106,7 @@
                                 </td>
                                 <td>
                          <div class="control-group">
-                        <label class="control-label">Prenom</label>
+                        <label class="control-label">Prénom</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -209,7 +209,7 @@
                                 </td>
                                 <td>
                          <div class="control-group">
-                        <label class="control-label">Prenom</label>
+                        <label class="control-label">Prénom</label>
                         <div class="controls">
                             <input
                                     type="text"

@@ -207,10 +207,9 @@
                     </td>
                     <td>
                          <button class="btn btn-danger"  @click="supprimerLiquidation(liquida.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
+                        
+                            <span class=""><i class="icon-trash">Supprimer</i></span></button>
+                     
                     </td>
                     
                                      </tr>

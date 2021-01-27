@@ -56,7 +56,7 @@
           <tr>
              <td>
               <div class="control-group">
-                <label class="control-label">Dotation Budgetaire</label>
+                <label class="control-label">Dotation Budgétaire</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -103,7 +103,7 @@
           <tr>
                <td>
               <div class="control-group">
-                <label class="control-label">engagement_cumule</label>
+                <label class="control-label">engagement_cumulé</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -117,7 +117,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">disponible_budgetaire</label>
+                <label class="control-label">disponible_budgétaire</label>
                 <div class="controls">
                   <input
                     type="text"

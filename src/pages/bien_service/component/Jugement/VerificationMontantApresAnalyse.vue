@@ -200,7 +200,7 @@
                             </td>
                             <td>
                               <div class="control-group">
-                                <label class="control-label">Fiche de renseignement nombre de groupe :</label>
+                                <label class="control-label">Nombre d'entreprise :</label>
                                 <div class="controls">
                                   <input v-if="editer.accord_groupe=='OUI'" type="text" class="span" placeholder="Attest banc"
                                          v-model="editer.fiche_rsgnt_mbre_groupe">
@@ -392,7 +392,22 @@
 
                             <td>
                               <div class="control-group">
-                                <label class="control-label">Lettre de Soumission et pouvoir de signature :</label>
+                                <label class="control-label">Lettre de Soumission  :</label>
+                                <div class="controls">
+                                  <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
+                                  <select v-model="editer.lettre_soumission_pouvoir_signature" class="span">
+                                    <option value=""></option>
+                                    <option value="OUI">OUI</option>
+                                    <option value="NON">NON</option>
+                                    <option value="N/A">NON APPLICABLE</option>
+                                  </select>
+
+                                </div>
+                              </div>
+                            </td>
+                               <td>
+                              <div class="control-group">
+                                <label class="control-label">Pouvoir de signature :</label>
                                 <div class="controls">
                                   <!--  <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">-->
                                   <select v-model="editer.lettre_soumission_pouvoir_signature" class="span">

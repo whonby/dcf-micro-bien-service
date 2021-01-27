@@ -16,7 +16,7 @@ ligneBudgeteyuy
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <!-- <li class="active"><a data-toggle="tab" href="#tab01">Bailleur</a></li>
+                                <!-- <li class="active"><a data-toggle="tab" href="#tab01">Bailleur</a></li>  
                                 <li class=""><a data-toggle="tab" href="#tab1">Offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab3">Information Candidat</a></li>
@@ -159,7 +159,7 @@ ligneBudgeteyuy
                                             <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerAppelOffre(appelOffre.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i></span></button>
+                                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                                         </div>
                                         </td>
@@ -213,7 +213,7 @@ ligneBudgeteyuy
 
                                                 <div class="btn-group">
                                                     <button @click.prevent="supprimerLot(lot_marche.id)"  class="btn btn-danger ">
-                                                        <span class=""><i class="icon-trash"></i></span></button>
+                                                        <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                                                 </div>
 
@@ -314,7 +314,7 @@ ligneBudgeteyuy
                              <a href="#offreF" data-toggle="modal" @click.prevent="modaleOffreFinnanciere(appelOffre.id)"  class="btn  " title="Offre financière">
                                  <span class=""><i class=" icon-money"></i></span></a>
                              <button @click.prevent="supprimerDossierCandidat(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                 <span class=""><i class="icon-trash"></i></span></button>
+                                 <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                          </div>
 
@@ -390,7 +390,7 @@ ligneBudgeteyuy
                         <tr class="odd gradeX">
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Telephone</label>
+                                    <label class="control-label">Téléphone</label>
                                     <div class="controls">
                                         <input type="text" class="" placeholder="Telphone" v-model="formDossierCadidature.telephone_cand">
                                     </div>
@@ -398,7 +398,7 @@ ligneBudgeteyuy
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Address </label>
+                                    <label class="control-label">Adresse </label>
                                     <div class="controls">
                                         <input type="text" class="" placeholder="Adresse" v-model="formDossierCadidature.adresse_post">
                                     </div>
@@ -408,7 +408,7 @@ ligneBudgeteyuy
                             <td>
 
                                 <div class="control-group">
-                                    <label class="control-label">Numero de dossier</label>
+                                    <label class="control-label">Numéro de dossier</label>
                                     <div class="controls">
                                         <input type="text" readonly class="" placeholder="Numero dossier" v-model="formDossierCadidature.numero_dossier">
                                     </div>
@@ -710,7 +710,7 @@ ligneBudgeteyuy
                                     <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).cautionnement_prov || "Non renseigne"}}</td>
                                     <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).reg_com || "Non renseigne"}}</td>
                                     <td><button @click.prevent="supprimerOffreTechnique(detail_offre_technique.id)"  class="btn btn-danger " title="Supprimer">
-                                        <span class=""><i class="icon-trash"></i></span></button>
+                                        <span class=""><i class="icon-trash"></i>Supprimer</span></button>
                                     </td>
                                 </tr>
 
@@ -744,7 +744,7 @@ ligneBudgeteyuy
                                     <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).montant_total_ht || "Non renseigne"}}</td>
                                     <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).montant_total_ttc || "Non renseigne"}}</td>
                                     <td><button @click.prevent="supprimerOffreFinancier(detail_offre_finnancier.id)"  class="btn btn-danger " title="Supprimer">
-                                        <span class=""><i class="icon-trash"></i></span></button></td>
+                                        <span class=""><i class="icon-trash"></i>Supprimer</span></button></td>
                                 </tr>
 
 
@@ -1814,7 +1814,7 @@ ligneBudgeteyuy
 <td>
       <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span>
+                                <span class=""><i class="icon-trash"></i>Supprimer</span>
                             </button>
                         </div>
 </td>
