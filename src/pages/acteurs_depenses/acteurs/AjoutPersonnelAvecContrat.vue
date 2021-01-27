@@ -204,7 +204,7 @@
   <div class="modal-body">
         <table class="table table-bordered table-striped">
             <tr>
-                           <td>
+                           <!-- <td>
                      <div class="control-group">
                                                     <label class="control-label">Unite de Zone</label>
                                                     <div class="controls">
@@ -217,34 +217,72 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                </td>
+                </td> -->
                
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Service</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.service_id" :disabled="verrouilleService" class="span12">
+                                                        <!-- <select v-model="formData.service_id" :disabled="verrouilleService" class="span12">
                                                             <option></option>
                                                             <option v-for="item in afficheService(formData.unite_administrative_id)" :key="item.id" :value="item.serviceua_id">
                                                                 {{afficheServicelibelle(item.serviceua_id)}}
                                                             </option>
 
-                                                        </select>
+                                                        </select> -->
+                                                         <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="services"
+                                                   v-model="formData.service_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                                                     </div>
                                                 </div>
                 </td>
                 <td>
                      <div class="control-group">
-                                                    <label class="control-label">Fonctions</label>
+                                                    <label class="control-label">Emploi</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.fonction_id" :disabled="verrouilleFonction" class="span12">
+                                                        <!-- <select v-model="formData.fonction_id" :disabled="verrouilleFonction" class="span12">
                                                             <option></option>
                                                             <option v-for="item in afficheFonction(formData.unite_administrative_id)" :key="item.id" :value="item.fonction_id">
                                                                 {{afficheLibelleFonction(item.fonction_id)}}
                                                             </option>
 
-                                                        </select>
+                                                        </select> -->
+                                                         <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="fonctions"
+                                                   v-model="formData.fonction_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                                                         <input type="hidden" :value="nombreDeFonction(formData.fonction_id)" readonly class="span12"/>
+                                                    </div>
+                                                </div>
+                </td>
+                 <td>
+                     
+                                                <div class="control-group">
+                                                    <label class="control-label">Fonction Professionnelle</label>
+                                                    <div class="controls">
+                                                      <model-list-select style="background-color: #fff;"
+                                                   class="wide"
+                                                   :list="fonctionProfessionnel"
+                                                   v-model="formData.fonction_professionnelle_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
                                                     </div>
                                                 </div>
                 </td>
@@ -402,8 +440,14 @@
 
     import {mapGetters, mapActions} from 'vuex'
     import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth"
+    import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
     export default {
+components: {
+    
+    ModelListSelect,
 
+  },
         data() {
             return {
                 fabActions: [
@@ -440,7 +484,8 @@
                     uniteZone_id:"",
                     situation_matrimonial:"",
                     service_id:"",
-                    reference_acte:""
+                    reference_acte:"",
+                    fonction_professionnelle_id:""
                 },
 
                 editTitre: {
@@ -464,7 +509,7 @@
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ["dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
+            ...mapGetters('personnelUA', ["fonctionProfessionnel","dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
             ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),

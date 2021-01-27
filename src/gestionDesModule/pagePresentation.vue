@@ -450,6 +450,7 @@ this.getClassificationGradeFonction()
             this.getPermissionConge()
       this.getTypeMarche()
       // this.s()
+      this.getFonctionsProfessionnel()
       this.getSauvegardePhoto()
       this.getSecteurActivite()
       this.getEntreprise()
@@ -702,7 +703,7 @@ return objJson.id
      "getStockArticleUa",
      "getAllHistoriqueDecompteFacture"
     ]),
-            ...mapActions('personnelUA', ["getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
+            ...mapActions('personnelUA', ["getFonctionsProfessionnel","getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
             "getClasses","getEchelons","getpaiementPersonnel","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",

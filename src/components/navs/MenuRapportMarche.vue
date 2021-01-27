@@ -24,7 +24,7 @@
           </li>
            <li>
             <router-link :to="{name: 'ficheSuiviGlobalMarche'}" tag="a">
-             FICHE GLOBAL
+             FICHE DE SUIVI GLOBAL MARCHE
             </router-link>
           </li>
    

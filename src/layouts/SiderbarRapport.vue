@@ -31,12 +31,12 @@
             <span>RAPPORT MARCHE</span>
           </a>
         </li>
-        <li :class="{active: active_el == 90 }" @click.prevent="navigateToRapportVehicule" >
+        <!-- <li :class="{active: active_el == 90 }" @click.prevent="navigateToRapportVehicule" >
           <a href="#">
             <i class="icon-group"></i>
             <span>RAPPORT VEHICULE</span>
           </a>
-        </li>
+        </li> -->
        
         <!-- <li  @click.prevent="navigateToActeurDepense" >
           <a href="#">

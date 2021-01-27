@@ -89,7 +89,7 @@
       <div id="printMe">
       <table class="table table-bordered table-striped">
                <tr>
-                   <td style="width:10%;text-align:center;font-size:10px;font-weight: bold;">DCF</td>
+                   <td style="width:10%;text-align:center;font-size:10px;font-weight: bold;">DCF{{formData.marche_exercute_id}}</td>
                    <td style="width:90%;text-align:center;font-size:30px;font-weight: bold;">FICHE DE SUIVI GLOBAL D'UN MARCHE/CONTRAT</td>
                </tr>
               </table>
@@ -282,25 +282,25 @@
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">MONTANT GLOBAL DU MARCHE HT</th>
-                     <td colspan="3">  </td>
+                     <td colspan="3" style="width:15%;text-align:center;font-size:25px;font-weight: bold">{{formatageSomme(parseFloat(afficheMontantBaseHt(formData.marche_exercute_id)))}}  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">MONTANT GLOBAL DU MARCHE TTC</th>
-                     <td colspan="3">  </td>
+                     <td colspan="3" style="width:15%;text-align:center;font-size:25px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))}} </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">EXECUTION GLOBAL DU FINANCIERE</th>
                      
-                     <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  HT</td>
-                      <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;">  TTC</td>
-                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  %</td>
+                     <td style="width:20%;text-align:center;font-size:25px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantMandat(formData.marche_exercute_id)))}} HT</td>
+                      <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))}} TTC</td>
+                      <td style="width:20%;text-align:center;font-size:25px;font-weight: bold;">  {{(((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))/(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))*100)}}%</td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">MONTANT (OP)RESTANT A VALIDER</th>
                      
-                     <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  HT</td>
-                      <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;">  TTC</td>
-                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  %</td>
+                     <td style="width:20%;text-align:center;font-size:25px;font-weight: bold;">{{formatageSomme((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))-(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))}} HT</td>
+                      <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))}} TTC</td>
+                      <td style="width:20%;text-align:center;font-size:25px;font-weight: bold;"> {{((((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))-(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))/(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id))))*100)}} %</td>
                  </tr>
 
                  <tr>
@@ -321,10 +321,21 @@
                       
                  </tr>
                  <tr>
-                     <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">MARCHE</th>
+                     <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">TRAVAUX</th>
                      
-                     <td style="text-align:center;font-size:16px;font-weight: bold;">  </td>
-                      <td style="text-align:center;font-size:16px;font-weight: bold;" colspan="2"> </td>
+                     <td style="text-align:center;font-size:10px;font-weight: bold;"> 
+                       <tr v-for="(type) in afficheTacheParMarchePrevu(formData.marche_exercute_id)" :key="type.id">
+                         <span>{{type.libelle || 'Non renseigné'}}</span>                    
+                    
+                       </tr>
+                       
+                        </td>
+                      <td style="text-align:center;font-size:10px;font-weight: bold;" colspan="2">
+                        <tr v-for="(type) in afficheTacheParMarcheRealiser(formData.marche_exercute_id)" :key="type.id">
+                         <span>{{type.libelle || 'Non renseigné'}}</span>                    
+                    
+                       </tr>
+                         </td>
                       
                  </tr>
                  <tr>
@@ -404,7 +415,7 @@ export default {
       
    ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
-     ...mapGetters("bienService", ["avenants",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
+     ...mapGetters("bienService", ["TacheMarche","avenants",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
      'nombremarchesExecute',
      'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
@@ -442,9 +453,23 @@ export default {
 
 
 
+afficheTacheParMarchePrevu() {
+      return id => {
+        if (id != null && id != "") {
+           return this.TacheMarche.filter(qtreel => qtreel.marche_id == id);
 
+        }
+      };
+    },
 
+afficheTacheParMarcheRealiser() {
+      return id => {
+        if (id != null && id != "") {
+           return this.TacheMarche.filter(qtreel => qtreel.marche_id == id && qtreel.situation==1);
 
+        }
+      };
+    },
 afficheMontantMandat() {
       return id => {
         if (id != null && id != "") {
