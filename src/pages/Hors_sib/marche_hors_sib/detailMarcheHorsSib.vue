@@ -973,7 +973,7 @@
                                 <div class="span4" align="right">
                                     <a href="#ajouterOffre1" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
 
-                        <publication-Offre :macheid="detail_marche.id"></publication-Offre>
+                        <!-- <publication-Offre :macheid="detail_marche.id"></publication-Offre> -->
 
                       <publicationOffreLCV :macheid="detail_marche.id"></publicationOffreLCV>
                          </div>
@@ -1075,7 +1075,7 @@
                 </div>
 
                            <div id="tab10" class="tab-pane">
-                    <ActEffeFinancier1 :macheid="detail_marche.id"></ActEffeFinancier1>
+                    <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
 <!--                <component-acte :macheid="detail_marche.id"></componentActe>-->
 
                 </div>
@@ -1172,12 +1172,12 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
   import AnoDMPLCV from "@/pages/bien_service/component/AnoDMP/AnoDMPLCV";
   import AnoBailleur from "@/pages/bien_service/component/AnoBailleur/AnoBailleur";
     import ActEffeFinanciere from "@/pages/bien_service/component/ActEffetFinancier/ActEffeFinanciere";
-    import ActEffeFinancier1 from "../../../pages/bien_service/component/ActEffetFinancier/ActeEffetFinancier1"
+    //import ActEffeFinancier1 from "../../../pages/bien_service/component/ActEffetFinancier/ActeEffetFinancier1"
     export default {
        
         components:{
           ActEffeFinanciere,
-          ActEffeFinancier1,
+         // ActEffeFinancier1,
           AnoBailleur,
           AnoBailleurLCV,
           ActeEffetFinancierLCV,

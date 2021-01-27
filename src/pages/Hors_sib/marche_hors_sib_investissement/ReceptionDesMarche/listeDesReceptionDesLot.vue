@@ -958,7 +958,7 @@ afficheNumeroMarche() {
     var dateD = new Date( this.afficherDatedebutex(this.detail_marche.id)).getTime()
     var diffTime = dateR - dateD
     var diffJours = diffTime / (1000 * 3600 * 24)
-    
+      console.log(diffJours)
           if(isNaN(diffJours)) return null
 
     if(parseFloat(diffJours) < 0 ) return "durée invalide"

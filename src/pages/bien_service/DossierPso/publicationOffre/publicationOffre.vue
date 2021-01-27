@@ -1,8 +1,8 @@
 
 <template>
-    <div  v-if="macheid">
+    <div  >
 
-                  <table class="table table-bordered table-striped"  v-if="LCVM">
+                  <!-- <table class="table table-bordered table-striped"  v-if="LCVM">
                      <thead>
                              <tr>
                                         <th>Reference SIGVA</th>
@@ -44,9 +44,9 @@
 
                                     </tr>
                     </tbody>
-                </table>
+                </table> -->
                 <!-- <h4>Liste des offres</h4> -->
-                <table class="table table-bordered table-striped"   v-else>
+                <table class="table table-bordered table-striped" v-if="macheid" >
                      <thead>
                              <tr>
                                         <th>Reference appel - DAO</th>
@@ -254,17 +254,8 @@
                 <h3>Modification offre</h3>
             </div>
             <div class="modal-body">
-         <div class="control-group">
-            <label class="control-label">Mode Passation</label>
-            <div class="controls">
-            
-               <select v-model="mode_passation_id" class="span" >
-               <option v-for="plans in procedurePassations" :key="plans.id" 
-               :value="plans.id"> {{plans.code}} => {{plans.libelle}}</option>
-           </select>
-            </div>
-          </div>       
-  <table class="table table-bordered table-striped" v-if="LCVM">
+              
+  <!-- <table class="table table-bordered table-striped" v-if="LCVM">
                           <tr>
                            <td>
                         <div class="control-group">
@@ -321,7 +312,7 @@
                <select v-model="edite_appel_offre.entreprise_id" class="span" >
                <option v-for="plans in entreprises" :key="plans.id" 
                :value="plans.id"> {{plans.raison_sociale}}</option>
-               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+       
            </select>
             </div>
           </div>
@@ -344,9 +335,9 @@
                             </td>
                         </tr>
                       
-                    </table> 
+                    </table>  -->
                
-                <table class="table table-bordered table-striped" v-else>
+                <table class="table table-bordered table-striped" >
                  <tr>
                        <td>
                         <div class="control-group">
@@ -357,7 +348,16 @@
                         </div>
                             </td>
              <td colspan="2">
-             
+                   <div class="control-group">
+            <label class="control-label">Mode Passation</label>
+            <div class="controls">
+            
+               <select v-model="edite_appel_offre.mode_passation_id" class="span" >
+               <option v-for="plans in procedurePassations" :key="plans.id" 
+               :value="plans.id"> {{plans.code}} => {{plans.libelle}}</option>
+           </select>
+            </div>
+          </div> 
                    </td> 
                              
                     </tr>
@@ -732,6 +732,7 @@ typeProcedureLibelle() {
     //this.formEffetFinancier.entreprise_id=entreprisePremier.id
     // this.ajouterActeEffetFinancier(this.formEffetFinancier)
      this.ajouterAppelOffre(nouvelObjet);
+     
      console.log(nouvelObjet)
       this.formData = {
                     ref_appel:"",
@@ -776,36 +777,41 @@ afficherAutorisation(){
 
 
 
-
-
-
  modfications(){
-    // let LCVM;
-    if(this.LCVM){
-        console.log('ok o, ok ok ok ') 
-    this.edite_appel_offre.mode_passation_id=this.mode_passation_id  
-     var nouvelObjet = {
-      ...this.edite_appel_offre,
-       type_appel: this.typeProcedure_id(this.procedurePassation_id(this.macheid)),
-          objet_appel:this.affichierObjetMarche(this.macheid),
-          date_facture_proformat:this.edite_appel_offre.date_facture_proformat,
-          entreprise_id:this.edite_appel_offre.entreprise_id,
-          ref_facture_proformat:this.edite_appel_offre.ref_facture_proformat,
-          ref_sigva:this.edite_appel_offre.ref_sigva
-         };
-    let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
-    marcheObjet.attribue=1
-      //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
-     this.modifierMarche(marcheObjet)    
-    }
-    else{
-   //console.log(this.edite_appel_offre)
-                this.modifierAppelOffre(nouvelObjet)
-               // this.$('#modifierActeEF').modal('hide');
-    }
+              console.log(this.edite_appel_offre)
+                this.modifierAppelOffre(this.edite_appel_offre)
+                this.$('#modifierActeEF').modal('hide');
+            },
+
+
+//  modfications(){
+//     // let LCVM;
+//     if(this.LCVM){
+//         console.log('ok o, ok ok ok ') 
+//     this.edite_appel_offre.mode_passation_id=this.mode_passation_id  
+//      var nouvelObjet = {
+//       ...this.edite_appel_offre,
+//       marche_id: this.macheid,
+//        type_appel: this.typeProcedure_id(this.procedurePassation_id(this.macheid)),
+//           objet_appel:this.affichierObjetMarche(this.macheid),
+//           date_facture_proformat:this.edite_appel_offre.date_facture_proformat,
+//           entreprise_id:this.edite_appel_offre.entreprise_id,
+//           ref_facture_proformat:this.edite_appel_offre.ref_facture_proformat,
+//           ref_sigva:this.edite_appel_offre.ref_sigva
+//          };
+//     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
+//     marcheObjet.attribue=1
+//       //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
+//      this.modifierMarche(marcheObjet)    
+//     }
+//     else{
+//    //console.log(this.edite_appel_offre)
+//                 this.modifierAppelOffre(nouvelObjet)
+//                // this.$('#modifierActeEF').modal('hide');
+//     }
      
               
-            },
+//             },
     
 
 
