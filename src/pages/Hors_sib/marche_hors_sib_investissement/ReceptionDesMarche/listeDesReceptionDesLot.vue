@@ -896,6 +896,21 @@ created() {
 
     },
 
+     calculeDureEcart(){
+      var dateD = new Date( this.afficherDatedebutex(this.detail_marche.id)).getTime()
+   var dateR = new Date(this.formReception.Date_debut_execution).getTime()
+    
+    var diffTime = dateD - dateR 
+    var diffJours = diffTime / (1000 * 3600 * 24)
+      console.log(diffTime)
+          if(isNaN(diffJours)) return null
+
+    if(parseFloat(diffJours) < 0 ) return "durée invalide"
+        console.log(diffJours)
+      return diffJours;
+      
+   },
+
 afficheNumeroMarche() {
       return id => {
         if (id != null && id != "") {
@@ -951,20 +966,7 @@ afficheNumeroMarche() {
 
    
 
-     calculeDureEcart(){
-   
-
-   var dateR = new Date(this.formReception.Date_debut_execution).getTime()
-    var dateD = new Date( this.afficherDatedebutex(this.detail_marche.id)).getTime()
-    var diffTime = dateR - dateD
-    var diffJours = diffTime / (1000 * 3600 * 24)
-      console.log(diffJours)
-          if(isNaN(diffJours)) return null
-
-    if(parseFloat(diffJours) < 0 ) return "durée invalide"
-        console.log(diffJours)
-      return diffJours;
-   },
+    
 
 
 
