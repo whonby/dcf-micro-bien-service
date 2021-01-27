@@ -181,7 +181,7 @@ marche_id
 
 
 
-  <div id="ModalModification" class="modal hide grdirModalActeEffet" >
+  <div id="modificationANBaill" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Information du Bailleur sur le : Lot N° {{infoLot.numero_lot}} {{infoLot.objet}}</h3>
@@ -197,7 +197,69 @@ marche_id
 
       <div id="tab8888" class="tab-pane active">
 
+        <form class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label">Référence</label>
+          <div class="controls">
+            <input
+                type="text"
+                :value="affichierPvMarche(affichierIdMarcheGlobal(infoLot.id))"
+                class="span"
+                readonly
+            />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Référence de l'offre</label>
+          <div class="controls">
+          
+
+            <input
+                type="text"
+                :value="affichierReferenceAppelOffre(macheid)"
+                class="span"
+                readonly
+            />
+          </div>
+        </div>
+
         
+
+       <div class="control-group">
+            <label class="control-label">Numéro du courrier</label>
+            <div class="controls">
+              <input
+                  type="text"
+                  v-model="edit_bailleur.num_courrier"
+                  class="span"
+                  placeholder="Saisir le numéro du courrier"
+              />
+            </div>
+          </div>
+
+ <div class="control-group">
+
+            <label class="control-label">Date ANO bailleur</label>
+            <div class="controls">
+              <input
+                  type="date"
+                  v-model="edit_bailleur.date_ano_dmp"
+                  class="span"
+                  placeholder="Saisir le libelle_type"
+              />
+              <input type="hidden" v-model="edit_bailleur.difference_personnel_bienService"/>
+            </div>
+          </div>
+
+        <div class="control-group">
+          <label class="control-label">Fichier joint:</label>
+          <div class="controls">
+            <input type="file" @change="OnchangeFichierDemandeAno" />
+          </div>
+        </div>
+
+      </form>
       </div>
 
 
@@ -205,10 +267,10 @@ marche_id
     </div>
 
     <div class="modal-footer">
-      <a  @click.prevent="ajouterBailleur"
+      <a  @click.prevent="updateAnoBaileurLocal"
           class="btn btn-primary"
           href="#"
-      >Valider</a>
+      >Modifier</a>
       <a data-dismiss="modal" class="btn" href="#">Fermer</a>
     </div>
   </div>
@@ -621,7 +683,15 @@ pvTraitement(){
       'modifierAnoDMPBailleur','getAnoDMPBailleur','getAnalyseDMP',"modificationProceVerbalOffre2"]),
 
 
-
+ afficheAnoDPMBailleurModale(index){
+                this.$('#modificationANBaill').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edit_bailleur = this.listeAnoDMPBailleur(this.macheid)[index];
+                //this.mode_passation_id=this.edite_appel_offre.mode_passation_id
+                console.log(this.mode_passation_id)
+            },
 
     OnchangeFichierDemandeAno(e) {
       const files = e.target.files;

@@ -31,7 +31,7 @@
         <table class="table table-bordered table-striped">
             <tr>
               <td>
-                                <label >Unite Administrative</label>
+                                <label >Unite Administrative</label><code style="color:red;font-weight:bold;">*</code>
                                 <model-list-select style="background-color: #fff;"
                                                    class="wide"
                                                    :list="uniteAdministratives"
@@ -1172,7 +1172,7 @@
                       <div data-toggle="buttons-checkbox" class="btn-group">
                         <a
                           class="btn btn-primary"
-                          @click.prevent="AjouterVehicule"
+                          @click.prevent="AjouterVehicule" v-show="formData3.uAdministrative_id != ''"
                         >Valider</a>
                         <a
                           @click.prevent="afficherModalListePersonnel()"
@@ -1222,7 +1222,7 @@ formData:{
 },
 famille_id:"",
 formData3:{
-
+uAdministrative_id:""
 },
 formData1:{
 
