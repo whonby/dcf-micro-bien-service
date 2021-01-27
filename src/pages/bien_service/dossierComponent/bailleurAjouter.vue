@@ -16,7 +16,7 @@
                                                             :value="varText.id">{{varText.libelle}}</option>
                                                 </select>
                                             </div>
-                                            <label>Type finnancement <code>*</code> </label>
+                                            <label>Type de financement <code>*</code> </label>
                                             <div class="controls">
 
                                                 <select v-model="formBailleur.type_finnancement_id" class="span">
@@ -27,12 +27,12 @@
                                             <div class="control-group">
                                                 <label class="control-label">Montant <code>*</code> :</label>
                                                 <div class="controls">
-                                                    <input type="text" class="span5" placeholder="Libelle lot" v-model="formBailleur.montant">
+                                                    <input type="text" class="span5" placeholder="Libellé du lot" v-model="formBailleur.montant">
                                                 </div>
                                                 <div class="controls" v-if="macheid">
                                                     <code>Reste bailleur : {{parseFloat(macheid.montant_marche)-montantBailleurMarcheCompare(macheid.id)}}</code>
                                                     <code v-if="montantBailleurMarcheCompare(macheid.id)>=parseFloat(macheid.montant_marche)">
-                                                        Le montant total des bailleurs ne toi etre supperier au montant du marche
+                                                        Le montant total des bailleurs ne doit pas être supérieur au montant du marché
                                                     </code>
                                                 </div>
                                             </div>
@@ -63,7 +63,7 @@
                                                             :value="varText.id">{{varText.libelle}}</option>
                                                 </select>
                                             </div>
-                                            <label>Type finnancement <code>*</code> </label>
+                                            <label>Type de financement <code>*</code> </label>
                                             <div class="controls">
 
                                                 <select v-model="edit_bailleur_marche.type_finnancement_id" class="span">
@@ -74,7 +74,7 @@
                                             <div class="control-group">
                                                 <label class="control-label">Montant <code>*</code> :</label>
                                                 <div class="controls">
-                                                    <input type="text" class="span5" placeholder="Libelle lot" v-model="edit_bailleur_marche.montant">
+                                                    <input type="text" class="span5" placeholder="Libellé du lot" v-model="edit_bailleur_marche.montant">
                                                 </div>
                                             </div>
                                         </form>
@@ -94,7 +94,7 @@
                                     <thead>
                                     <tr>
                                         <th>Bailleur</th>
-                                        <th>Type finanncement</th>
+                                        <th>Type de financement</th>
                                         <th>Montant</th>
                                         <th>Action</th>
                                     </tr>

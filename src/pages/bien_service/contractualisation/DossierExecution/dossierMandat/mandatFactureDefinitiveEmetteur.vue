@@ -13,7 +13,7 @@
                <tr>
                  <td colspan="2">
                     <div class="control-group">
-                            <label class="control-label">Observation émetteur</label>
+                            <label class="control-label">Observation de l'émetteur</label>
                             <div class="controls">
                               <textarea  class="span" row = "6" v-model="editMandat.observation_emetteur">
                               </textarea>
@@ -24,7 +24,7 @@
                    <tr>
                      <td colspan="2">
                         <div class="control-group">
-                            <label class="control-label">Date décision émetteur :</label>
+                            <label class="control-label">Date de décision de l'émetteur :</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editMandat.date_decision_emetteur"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
@@ -86,8 +86,8 @@
                       <th>N° du marché</th>
                                          <th>N° du mandat</th>
                                         <th>N° bordereau mandat</th>
-                                        <th>N° demande engagement</th>
-                                          <th>N° engagement</th>
+                                        <th>N° demande d'engagement</th>
+                                          <th>N° d'engagement</th>
                                         <!-- <th>Type procedure</th> -->
                                                     
                                 <th>Montant Mandat</th>

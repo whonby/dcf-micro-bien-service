@@ -9,12 +9,12 @@
                     <thead>
                     <tr>
 
-                        <th>Date lettre 4</th>
-                        <th>Ref lettre </th>
+                        <th>Date de la lettre 4</th>
+                        <th>Référence de la lettre </th>
                         <th>Destinataire</th>
                         <th>Objet de la lettre</th>
                         <th>Fichier</th>
-                        <th>Date cojo</th>
+                        <th>Date de la COJO</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -54,7 +54,7 @@
               <div id="ajouterLettreInvitation" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter lettre d'invitation</h3>
+                <h3>Ajouter la lettre d'invitation</h3>
             </div>
             <div class="modal-body">
            
@@ -71,7 +71,7 @@
 
 
                     <div class="control-group">
-                        <label class="control-label">Date lettre</label>
+                        <label class="control-label">Date de la lettre</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -82,13 +82,13 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Refernece lettre</label>
+                        <label class="control-label">Référence de la lettre</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="formLettre.ref_lettre"
                                     class="span"
-                                    placeholder="Saisir l"
+                                    placeholder="Saisir "
                             />
                         </div>
                     </div>
@@ -107,9 +107,9 @@
 
 
                       <div class="control-group">
-          <label class="control-label">Objet de lettre:</label>
+          <label class="control-label">Objet de la lettre:</label>
             <div class="controls">
-              <textarea  v-model="formLettre.objet_lettre"  class=" span" rows="" placeholder="Enter text ..."></textarea>
+              <textarea  v-model="formLettre.objet_lettre"  class=" span" rows="" placeholder="Enter le texte ..."></textarea>
             </div>
           
         </div>
@@ -117,7 +117,7 @@
 
 
                     <div class="control-group">
-                        <label class="control-label">Date cojo</label>
+                        <label class="control-label">Date de la COJO</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -138,7 +138,7 @@
             </div>
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterLettreInv()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
         <!--fin du modal d'ajout de lettre d'invitation  -->
 
@@ -147,7 +147,7 @@
          <div id="modificationLettreInvitation" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification lettre invitation</h3>
+                <h3>Modification de la lettre d'invitation</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -165,7 +165,7 @@
 
 
                     <div class="control-group">
-                        <label class="control-label">Date lettre</label>
+                        <label class="control-label">Date de la lettre</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -176,13 +176,13 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Refernece lettre</label>
+                        <label class="control-label">Référence de la lettre</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="edite_lettre_invitation.ref_lettre"
                                     class="span"
-                                    placeholder="Saisir l"
+                                    placeholder="Saisir "
                             />
                         </div>
                     </div>
@@ -207,7 +207,7 @@
 
 
                     <div class="control-group">
-                        <label class="control-label">Date cojo</label>
+                        <label class="control-label">Date de la COJO</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -228,7 +228,7 @@
             </div>
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationLettreInvitation()" href="#">Modifier</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
         <!-- fin de modification de lettre d' invitation   -->
     </div>
