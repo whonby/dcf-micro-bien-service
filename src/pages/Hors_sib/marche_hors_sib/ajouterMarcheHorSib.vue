@@ -211,7 +211,7 @@
             <div class="controls">
             
                <select v-model="formData.procedure_passation_id" class="span4" >
-               <option v-for="plans in procedurePassations" :key="plans.id" 
+               <option v-for="plans in afficherListeModePassation" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
@@ -545,6 +545,9 @@ ImputationBudget() {
 // recuperer la tailler du getter structure localisation
 recupererLataille(){
   return this.structures_geographiques.length-2
+},
+   afficherListeModePassation(){
+    return this.procedurePassations.filter(item => item.code!="GAG" && item.code!="AOR" && item.code!="LCVM" && item.code!="ED")
 },
 
 // 

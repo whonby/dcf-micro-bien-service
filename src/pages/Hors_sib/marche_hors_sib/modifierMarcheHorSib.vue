@@ -212,7 +212,7 @@
             <div class="controls">
             
                <select v-model="editMarcheHorSib.procedure_passation_id" class="span4" >
-               <option v-for="plans in procedurePassations" :key="plans.id" 
+               <option v-for="plans in afficherListeModePassation" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
@@ -497,6 +497,9 @@ ImputationBudget() {
         }
       };
     },
+     afficherListeModePassation(){
+    return this.procedurePassations.filter(item => item.code!="GAG" && item.code!="AOR" && item.code!="LCVM" && item.code!="ED")
+},
     // ImputationBudget() {
 
     //   const norme = this.budgetEclate.find(normeEquipe => normeEquipe.ligneeconomique_id == this.editMarcheHorSib.ligneeconomique_id );

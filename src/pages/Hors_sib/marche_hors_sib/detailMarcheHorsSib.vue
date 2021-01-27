@@ -107,7 +107,7 @@
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000, ['PSO'], detail_marche.id)">Procédure Simplifiée à compétition Ouverte(PSO)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AON'] , detail_marche.id)">Appel d'Offre Ouvert National (AON)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOI'] , detail_marche.id)">Appel d'Offre Ouvert international (AOI)</h4>
-            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOR'] , detail_marche.id)">Appel d'Offre Ouvert Restreint (AOR)</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOR'] , detail_marche.id)">Appel d'Offre Restreint (AOR)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['ED'],detail_marche.id)">Entente direct (ED)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['CONV'],detail_marche.id)">Convention (CONV)</h4>
               <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['LCVM'],detail_marche.id)">Lettre de Commande Valant Marché (LCVM)</h4>

@@ -370,6 +370,8 @@ return this.printMarcheNonAttribue.filter((item) => {
    }
 )
    },
+
+
 // ImputationBudget() {
 
 //       const norme = this.budgetEclate.find(normeEquipe => normeEquipe.ligneeconomique_id == this.formData.economique_id && normeEquipe.activite_id == this.formData.activite_id );
@@ -1439,9 +1441,7 @@ modifierModalActeEffetFinancierLocal(index){
 } else {
     // Code à éxécuter si l'utilisateur clique sur "Annuler" 
 }
-    
-     
-   
+ 
 },
 
   modifierModalActeEffetFinancierLocal2(index){
