@@ -312,23 +312,23 @@ name: "InfoCojo",
     ]),
     noDCfNoAdmin:noDCfNoAdmin,
     filtre_unite_admin() {
-      if(this.noDCfNoAdmin){
+      // if(this.noDCfNoAdmin){
 
-        let colect=[];
-        let vM=this
-        this.uniteAdministratives.filter(item=>{
-          if(vM.getterUniteAdministrativeByUser.length>0){
-            let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
-            if (val!=undefined){
-              colect.push(item)
-              return item
-            }
-          }
+      //   let colect=[];
+      //   let vM=this
+      //   this.uniteAdministratives.filter(item=>{
+      //     if(vM.getterUniteAdministrativeByUser.length>0){
+      //       let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+      //       if (val!=undefined){
+      //         colect.push(item)
+      //         return item
+      //       }
+      //     }
 
-        })
-        return colect
-      }
-      console.log()
+      //   })
+      //   return colect
+      // }
+      // console.log()
       return this.uniteAdministratives
     },
     listeCojo() {

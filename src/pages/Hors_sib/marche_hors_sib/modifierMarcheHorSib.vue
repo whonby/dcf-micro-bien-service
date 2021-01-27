@@ -247,13 +247,13 @@
               </tr>
 
               <tr>
-           <td colspan="">
+           <td colspan="2">
               
                <div class="control-group">
             <label class="control-label">Nature des prix</label>
             <div class="controls">
             
-               <select v-model="editMarcheHorSib.nature_prix_id" class="span4" >
+               <select v-model="editMarcheHorSib.nature_prix_id" class="span6" >
                <option v-for="plans in Nature_des_prix" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -261,7 +261,7 @@
           </div>
               </td>  
        
-         <td colspan="">
+         <!-- <td colspan="">
               
                <div class="control-group">
             <label class="control-label">Motif de passation</label>
@@ -273,7 +273,7 @@
            </select>
             </div>
           </div>
-              </td>  
+              </td>   -->
            <td colspan="2">
                 <div class="control-group">
        <label class="control-label">Infrastructure</label>
