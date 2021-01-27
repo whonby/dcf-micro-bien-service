@@ -31,12 +31,13 @@
                        <li>
                         <a data-toggle="tab" href="#Reparation">Entretien et Réparation   </a>
                       </li>
+                      <li>
+                        <a data-toggle="tab" href="#Inventaire">Inventaire </a>
+                      </li>
                         <li>
                         <a data-toggle="tab" href="#SortiePatrimoine">Sortie du patrimoine  </a>
                       </li>
-                       <li>
-                        <a data-toggle="tab" href="#Inventaire">Inventaire </a>
-                      </li>
+                       
                        <!-- <li class="">
                         <a data-toggle="tab" href="#tab1005">NOUVEAU SERVICE   <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
                       </li> -->
@@ -60,7 +61,7 @@
              </div>
  <div id="Reparation" class="tab-pane "><ReparationEquipement></ReparationEquipement> </div>
 <div id="SortiePatrimoine" class="tab-pane "><UaEquipementSortant></UaEquipementSortant> </div>
- <div id="Inventaire" class="tab-pane "><Inventaire></Inventaire> </div>
+ <div id="Inventaire" class="tab-pane "><ListeDesUa></ListeDesUa> </div>
         </div>
       </div>
       
@@ -95,7 +96,7 @@ import ListeDuStockparUa from '../../../suiviImmobilisation/RefaireComptabiliteM
 import listeDesUaDansPatrimoine from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierAffectation/listeDesUaDansPatrimoine.vue'
 import ReparationEquipement from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierReparationEtEntretien/listeUniteAdministrativeReparation.vue'
 import UaEquipementSortant from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/SortiDuPatrimoine/UaEquipementSortant.vue'
-import Inventaire from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/Inventaire/Inventaire.vue'
+import ListeDesUa from '../../../suiviImmobilisation/RefaireComptabiliteMatiere/Inventaire/ListeDesUa.vue'
 // import historisqueDemandeParService from '../docAffectationImmo/historisqueDemandeParService'
 // import { formatageSomme } from "../../../../Repositories/Repository";
 
@@ -107,7 +108,7 @@ export default {
     listeDesUaDansPatrimoine,
     ReparationEquipement,
     UaEquipementSortant,
-    Inventaire
+    ListeDesUa
      
   },
   data() {
