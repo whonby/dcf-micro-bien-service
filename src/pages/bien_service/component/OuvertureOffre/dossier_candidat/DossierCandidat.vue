@@ -203,7 +203,12 @@
             <div class="control-group">
               <label class="control-label">Cautionnement provisoire</label>
               <div class="controls">
-                <input type="text" class="span" placeholder="Cautionnement" v-model="formDossierCadidature.cautionnement_prov">
+                <select v-model="formDossierCadidature.cautionnement_prov" class="span">
+                  <option value=""></option>
+                  <option value="oui">OUI</option>
+                  <option  value="non">NON</option>
+                </select>
+<!--                <input type="text" class="span" placeholder="Cautionnement" v-model="formDossierCadidature.cautionnement_prov">-->
               </div>
             </div>
           </td>
@@ -212,7 +217,13 @@
             <div class="control-group">
               <label class="control-label">Pouvoir de signature</label>
               <div class="controls">
-                <input type="text" class="span" placeholder="Pouv Hile Signature" v-model="formDossierCadidature.pouv_habil_signataire">
+<!--                <input type="text" class="span" placeholder="Pouv Hile Signature" v-model="formDossierCadidature.pouv_habil_signataire">-->
+
+                <select v-model="formDossierCadidature.pouv_habil_signataire" class="span">
+                  <option value=""></option>
+                  <option value="oui">OUI</option>
+                  <option  value="non">NON</option>
+                </select>
               </div>
             </div>
           </td>
