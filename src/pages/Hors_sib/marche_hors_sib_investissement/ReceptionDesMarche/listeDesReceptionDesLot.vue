@@ -273,8 +273,9 @@
                 <div class="controls">
                   <input
                       type="text"
-                      :value="formReception.durre_garantie"
+                      :value="dureeGarantie(detail_marche.id)"
                        class="span3"
+                      
                   />
                   
                 </div>
@@ -302,7 +303,7 @@
                 <div class="controls">
                   <input
                       type="date"
-                      :value="formReception.	Date_reception_provisoire"
+                      :value="formReception.Date_reception_provisoire"
                       class="span3"
                       
                   />
@@ -375,10 +376,10 @@
             </td>
              <td>
               <div class="control-group">
-                <label class="control-label">Ecart de démarrage </label>
+                <label class="control-label">Ecart de démarrage (E-A)</label>
                 <div class="controls">
                   <input
-                      type="text"
+                      type="text" :value="calculeDureEcart"
                       
                       class="span3"
                       
@@ -389,7 +390,10 @@
             </td>
             
             
-             <td>
+           
+           </tr>
+           <tr>
+               <td>
 
               <div class="control-group">
                 <label class="control-label">Ecart d'execution</label>
@@ -404,6 +408,54 @@
                 </div>
               </div>
             </td>
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">date_debut_exectuion_definitif</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">date_reception_provisoire_definitif</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">date_reception_definitive</label>
+                <div class="controls">
+                  <input 
+                      type="date"
+                      
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             	
+               
+               
            </tr>
        </table>
       </div>
@@ -431,7 +483,7 @@
 
     <div class="widget-title">
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#ajouter">Info Marche</a></li>
+        <li class="active"><a data-toggle="tab" href="#Identif">Info Marche</a></li>
         <!-- <li class=""><a data-toggle="tab" href="#financ">Info Reception</a></li> -->
       </ul>
     </div>
@@ -439,11 +491,12 @@
 
   <div class="widget-content tab-content">
 
-      <div id="ajouter" class="tab-pane active">
+      <div id="Identif" class="tab-pane active">
 
         <table class="table table-bordered table-striped">
           <tr>
               <td>
+
               <div class="control-group">
                 <label class="control-label">N°Lot</label>
                 <div class="controls">
@@ -577,11 +630,11 @@
                 <td>
 
               <div class="control-group">
-                <label class="control-label">Période d000e garantie</label>
+                <label class="control-label">Période de garantie</label>
                 <div class="controls">
                   <input
                       type="text"
-                      :value="garantieActeEffetFinacier(detail_marche.id)"
+                      
                        class="span3"
                       
                   />
@@ -594,7 +647,7 @@
               <div class="control-group">
                 <label class="control-label">Date de debut d'execution réelle</label>
                 <div class="controls">
-                  <input
+                  <input v-model="formReception.date_debut_execution_reel"
                       type="date"
                       
                       class="span3"
@@ -688,7 +741,7 @@
                 <label class="control-label">Ecart d'execution</label>
                 <div class="controls">
                   <input
-                      type="text"
+                      type=""
                       
                       class="span3"
                       
@@ -721,7 +774,7 @@
     import moment from "moment";
     import {formatageSomme} from "../../../../Repositories/Repository"
    import AjouterReceptionLot from "../../marche_hors_sib_investissement/ReceptionDesMarche/AjouterReceptionLot";
-
+  
   export default {
         name: 'compte',
         props:["macheid"],
@@ -751,6 +804,8 @@
                     }
 
                 ],
+                
+              
 
 
             };
@@ -766,7 +821,7 @@ created() {
           this.detail_mandat = this.mandats.find(
       Manda => Manda.id == this.$route.params.id)
   
-   console.log(".............")
+  
   /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
     console.log(this.appel_offre_marche)*/
 },
@@ -821,28 +876,6 @@ created() {
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
 
-actEffetFinancierMarche(){
-  return marche_id=>{
-      if(marche_id){
-          return  this.getterActeEffetFinanciers.find(qtreel => qtreel.marche_id == marche_id);
-      }
-      return null
-  }
-},
-            garantieActeEffetFinacier(){
-              return marche_id=>{
-                  if(marche_id){
-                      console.log(".......")
-                      let objet=this.actEffetFinancierMarche(marche_id)
-                      console.log(objet)
-                      if (objet!=undefined){
-                          console.log(objet.durre_garantie)
-                       return objet.durre_garantie
-                      }
-                  return null
-                  }
-              }
-            },
  Dureeexereel(){ 
       let vM=this;
       const acteAffet = vM.formReception
@@ -862,6 +895,22 @@ actEffetFinancierMarche(){
       return  diffJour;
 
     },
+
+     calculeDureEcart(){
+      var dateD = new Date( this.afficherDatedebutex(this.detail_marche.id)).getTime()
+   var dateR = new Date(this.formReception.Date_debut_execution).getTime()
+    
+    var diffTime = dateD - dateR 
+    var diffJours = diffTime / (1000 * 3600 * 24)
+      console.log(diffTime)
+          if(isNaN(diffJours)) return null
+
+    if(parseFloat(diffJours) < 0 ) return "durée invalide"
+        console.log(diffJours)
+      return diffJours;
+      
+   },
+
 afficheNumeroMarche() {
       return id => {
         if (id != null && id != "") {
@@ -900,6 +949,7 @@ afficheNumeroMarche() {
         }
       };
     },
+
      afficherDatedebutex() {
       return id => {
         if (id != null && id != "") {
@@ -913,6 +963,14 @@ afficheNumeroMarche() {
         }
       };
     },
+
+   
+
+    
+
+
+
+
      afficherDatereception() {
       return id => {
         if (id != null && id != "") {
@@ -925,6 +983,15 @@ afficheNumeroMarche() {
       return ""
         }
       };
+    },
+     listeActeEffectFinnancier: function () {
+      return macheid => {
+        if (macheid != "") {
+            console.log("....................")
+           console.log(macheid)
+          return this.getActeEffetFinancierPersonnaliser.find(idmarche => idmarche.marche_id == macheid)
+        }
+      }
     },
         afficherDatefinex() {
       return id => {
@@ -1079,6 +1146,19 @@ LibelleUniteAdministrative() {
         }
       };
     },
+     dureeGarantie(){
+         return marche_id=>{
+               let objet=this.listeActeEffectFinnancier(marche_id)
+              console.log(objet)
+               if(objet!=undefined){
+                   if(objet.durre_garantie==null) return 0
+
+                   return objet.durre_garantie
+               }
+                        
+               return 0
+           }
+     },
 
      Entreprise() {
       return id => {
@@ -1139,8 +1219,7 @@ afficheMontantReelMarche() {
       "supprimerAvenant",
       "modifierMarche",
       "getActeEffetFinancier",
-      "getMarche",
-                "modifierActeEffetFinancier"
+      "getMarche"
                
             ]),
  ...mapActions("uniteadministrative", [              
@@ -1218,20 +1297,12 @@ afficherModalProcedureFacture() {
       };
       this.ajouterDecompteFacture(nouvelObjet);
     this.ajouterModalActeEffetFinancierLocal()
-      this.formData = {
+      // this.formData = {
       
-      };
+      // };
     },
 
-integrationReceptionMarche(){
-                let objet={
-                    date_debut_exectuion_definitif:"",
-                    date_reception_provisoire_definitif:"",
-                    date_reception_definitive:"",
-                    id:""
-                }
-    this.modifierActeEffetFinancier(objet)
-}
+
 
   
    

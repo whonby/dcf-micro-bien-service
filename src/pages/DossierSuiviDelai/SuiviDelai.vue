@@ -12,9 +12,89 @@
            
 
  <div ref="document">
+     <table class="table table-striped"  style="background: #f0c71d !important;">
+         <tbody>
+         <tr>
+             <td style="background: #f0c71d !important;">
 
+                 <label>Ministère
+                     <a href="#" @click.prevent="videTypeCF()" v-if="section_id" style="color: red">
+                         <i class="fa fa-trash-o"></i></a></label>
+                 <model-list-select style="background-color: #fff;"
+                                    class="wide"
+                                    :list="sections"
+                                    v-model="section_id"
+                                    option-value="id"
+                                    option-text="nom_section"
+                                    placeholder="Ministère"
+                 >
+
+                 </model-list-select>
+             </td>
+             <td style="background: #f0c71d !important;">
+                 <label>UA<a href="#" @click.prevent="videUniteAdmin()" v-if="unite_administrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
+                 </label>
+                 <model-list-select style="background-color: #fff;"
+                                    class="wide"
+                                    :list="filtre_unite_admin"
+                                    v-model="unite_administrative_id"
+                                    option-value="id"
+                                    option-text="libelle"
+                                    placeholder="Unité administrative"
+                 >
+
+                 </model-list-select>
+             </td>
+             <td style="background: #f0c71d !important;">
+                 <label>Regions <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a>
+                 </label>
+                 <model-list-select style="background-color: #fff;"
+                                    class="wide"
+                                    :list="regions"
+                                    v-model="region"
+                                    option-value="id"
+                                    option-text="libelle"
+                                    placeholder="Regions"
+                 >
+
+                 </model-list-select>
+             </td>
+             <td style="background: #f0c71d !important;">
+                 <label>Infrastructure <a href="#" @click.prevent="videInfrastructure()" v-if="infrastructure" style="color: red"><i class="fa fa-trash-o"></i></a>
+                 </label>
+                 <model-list-select style="background-color: #fff;"
+                                    class="wide"
+                                    :list="getterInfrastrucure"
+                                    v-model="infrastructure"
+                                    option-value="id"
+                                    option-text="libelle"
+                                    placeholder="Infrastructure"
+                 >
+
+
+                 </model-list-select>
+             </td>
+             <td style="background: #f0c71d !important;">
+                 <label>Type Marché  <a href="#" @click.prevent="videTypeMarche()" v-if="type_marche" style="color: red"><i class="fa fa-trash-o"></i></a>
+                 </label>
+                 <model-list-select style="background-color: #fff;"
+                                    class="wide"
+                                    :list="typeMarches"
+                                    v-model="type_marche"
+                                    option-value="id"
+                                    option-text="libelle"
+                                    placeholder="Type Marche"
+                 >
+
+                 </model-list-select>
+             </td>
+
+         </tr>
+
+         </tbody>
+     </table>
  <div class="span6" align="left">
-                        <button class="btn btn-default" @click="tableToExcel('table', 'Contratualisation')">
+                        <button class="btn btn-default" @click="tableToExcel('table', 'SITUATION EXECCUTION')">
                             <img style="width: 20px !important; height: 20px !important;" src="https://img.icons8.com/windows/64/000000/export-excel.png"/>
                         </button>
                     </div>
@@ -25,9 +105,10 @@
               </td>
             </tr>
           </table>-->
-     <h3 style="margin-left:-200px;">TABLEAU DE SUIVI DES DELAIS DES MARCHES<span style="color: red;"></span></h3>
+     <h3 style="margin-left:-200px;">TABLE DU SUIVI DES REALISATIONS ET DES  DELAIS D'EXECUTION <span style="color: red;"></span></h3>
            
               <table class="table table-bordered table-striped" id="titre" ref="table"  summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
+
                 <thead>
                     
                     <tr>
@@ -87,11 +168,16 @@
                   <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Taux de réalisation</td>
                     <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Tâches restantes à réaliser</td>
                         <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Taux restant à réaliser</td>
+                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px"></td>
+
                     </tr>
-   
+
  </thead>
  <tbody>
-                   
+<!-- <loading :active.sync="isLoading"-->
+<!--          :can-cancel="true"-->
+<!--          :on-cancel="onCancel"-->
+<!--          :is-full-page="fullPage"></loading>-->
  <tr  class="odd gradeX" v-for="(activites,index) in afficherListeMarcheHorsSib" :key="activites.id" >
      <td>{{index+1}}</td>
 
@@ -135,34 +221,37 @@
 
    </td>
    <td>
-       <span v-for="(item,index) in tacheRealisePasMarche(activites.id)" :key="'TACHE'+item.id" class="by label"><font color="green">{{index}} ) {{item.libelle}}</font></span>
+<!--       <span v-for="(item,index) in tacheRealisePasMarche(activites.id)" :key="'TACHE'+item.id" class="by label">-->
+<!--           <font color="green">{{index}} ) {{item.libelle}}</font></span>-->
 
 
    </td>
    <td>
-       {{tauxTacheRealise(activites.id)}}
+
    </td>
      <td>
-         <span v-for="(item,index) in tacheRestantRealisePasMarche(activites.id)" :key="'TACHE'+item.id" class="by label"><font color="green">{{index}} ) {{item.libelle}}</font></span>
+
+<!--         <span v-for="(item,index) in tacheRestantRealisePasMarche(activites.id)" :key="'TACHE'+item.id" class="by label">-->
+<!--             <font color="green">{{index}} ) {{item.libelle}}</font></span>-->
 
      </td>
      <td></td>
  </tr>
-               
 
-    </tbody>  
+
+    </tbody>
   </table>
-                 
+
 
 
 
 
  </div>
 
-       
+
   </div>
-</template>     
-    
+</template>
+
 
 <script>
     import { mapGetters, mapActions } from "vuex";
@@ -172,10 +261,16 @@
     //import UploadExcelComponent from '@/components/UploadExcel/index.vue'
     //import ProgressBar from "../component/ProgressBar"
      //import {formatageSomme} from '../../Repositories/Repository'
+
+    import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
+   // import Loading from 'vue-loading-overlay';
     export default {
         name: 'BudgetPasProgramme',
         components:{
           //  UploadExcelComponent
+            ModelListSelect,
+           // Loading
         },
         data() {
             return {
@@ -186,6 +281,8 @@
                     }
 
                 ],
+                isLoading: true,
+                fullPage: false,
                 tableData: [],
                 tableHeader: [],
                 progress:0,
@@ -193,7 +290,16 @@
                 bgHeight: '30px',
                 exercice_budget:"",
                 message_mandater:'',
+                section_id:'',
                 i:0,
+                controlleur_fin:"",
+                status_marches:"",
+                unite_administrative_id:"",
+                infrastructure:"",
+                type_marche:"",
+                region:"",
+                info_status_marche:"",
+                tableMarcheStatue:"",
                 isOffreTechniqueFinancier:false,
                 namePDF: "",
                 uploadPercentage:0,
@@ -233,7 +339,7 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                 "uniteAdministratives",
                 "getterBudgeCharge"
             ]),
-            ...mapGetters("bienService",["getActeEffetFinancierPersonnaliser","avenants","getMandatPersonnaliserVise","TacheMarche"]),
+            ...mapGetters("bienService",["getActeEffetFinancierPersonnaliser","avenants","getMandatPersonnaliserVise","TacheMarche","typeMarches"]),
             ...mapGetters("parametreGenerauxAdministratif", [
                 "sections",
                 "type_Unite_admins",
@@ -241,22 +347,88 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                 "natures_sections",
                 "grandes_natures",
                 "afficheNiveauPlanProg",
-                "exercices_budgetaires"
+                "exercices_budgetaires",
+                "localisations_geographiques",
+                "getterInfrastrucure"
             ]),
-            
+
     ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
             ...mapGetters("horSib", ["gettersMarcheHorsib"]),
-            /**
-             *
-             *
-             *
-             * let initeVal = 0;
-             let montant=vm.getMandatPersonnaliserVise.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.total_general) ;
-                        }, initeVal);
-             montant_execute=parseFloat(montant_execute) + parseFloat(montant)
-             * */
+            ...mapGetters("Utilisateurs", ["getterUtilisateur","getterRoles"]),
+            // ...mapGetters('parametreGenerauxAdministratif', ['structures_geographiques',
+            //     'localisations_geographiques',"getterLocalisationGeoAll","getterInfrastrucure","exercices_budgetaires","sections",
+            //     "type_Unite_admins",
+            //     "plans_programmes",
+            //     "natures_sections",
+            //     "grandes_natures"]),
+            listeCF(){
+                return this.getterUtilisateur.filter(item=>{
+                    if(item.user_role){
+                        if (item.user_role.role.code_role=="DCF" || item.user_role.role.code_role=="CF"){
+                            return item
+                        }
+                    }
+                })
+            },
+            filtre_unite_admin() {
+                if(this.noDCfNoAdmin){
+                    let colect=[];
+                    let vM=this
+                    this.uniteAdministratives.filter(item=>{
+                        if(vM.getterUniteAdministrativeByUser.length>0){
+                            let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                            if (val!=undefined){
+                                colect.push(item)
+                                return item
+                            }
+                        }
+
+                    })
+                    if(this.section_id!=""){
+                        return colect.filter(item=>item.section_id==this.section_id)
+                    }
+                    return colect
+                }
+                if(this.section_id!=""){
+                    return this.uniteAdministratives.filter(item=>item.section_id==this.section_id)
+                }
+                return this.uniteAdministratives
+               // return this.uniteAdministratives
+            },
+            listeMarcheUniteAdmin(){
+                let colect=[]
+                let vM=this;
+                this.filtre_unite_admin.forEach(function (value) {
+                    let objet=vM.gettersMarcheHorsib.filter(item=>{
+                            if(item.parent_id!=null && item.unite_administrative_id==value.id && item.sib==1 ){
+                                //  console.log(item.parent_id)
+                                return item
+                            }
+                        }
+                    )
+                    if(objet!=undefined){
+                        objet.forEach(function (val) {
+                            let objet=   colect.find(item=>item.id==val.id)
+                            if(objet==undefined){
+                                colect.push(val)
+                            }
+                        })
+                    }
+
+
+                })
+                return colect
+            },
+            regions(){
+                // console.log(this.localisations_geographiques.filter(item=>item.structure_localisation_geographique.niveau==2))
+                return this.localisations_geographiques.filter(item=>{
+                    if(item.longitude!=null && item.structure_localisation_geographique.niveau==2 ){
+                        return item
+                    }
+                });
+            },
+
             tachePasMarche(){
               return marche_id=>{
                   let objet=this.TacheMarche.filter(item=>item.marche_id==marche_id)
@@ -658,7 +830,7 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                    }
                    return null
                }
-                        
+
                return null
            }
     },
@@ -667,10 +839,10 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                let objet=this.listeActeEffectFinnancier(marche_id)
               console.log(objet)
                if(objet!=undefined){
-                  
+
                    return objet.montant_act
                }
-                        
+
                return 0
            }
      },
@@ -679,10 +851,10 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                let objet=this.listeActeEffectFinnancier(marche_id)
               console.log(objet)
                if(objet!=undefined){
-                  
+
                    return objet.duree
                }
-                        
+
                return 0
            }
      },
@@ -695,7 +867,7 @@ console.log(this.getActeEffetFinancierPersonnaliser)
 
                    return objet.durre_garantie
                }
-                        
+
                return 0
            }
      },
@@ -704,10 +876,10 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                let objet=this.listeActeEffectFinnancier(marche_id)
               console.log(objet)
                if(objet!=undefined){
-                  
+
                    return objet.date_odre_service
                }
-                        
+
                return 0
            }
      },
@@ -716,10 +888,10 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                let objet=this.listeActeEffectFinnancier(marche_id)
               console.log(objet)
                if(objet!=undefined){
-                  
+
                    return objet.date_reception
                }
-                        
+
                return ""
            }
      },
@@ -728,23 +900,23 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                let objet=this.listeActeEffectFinnancier(marche_id)
               console.log(objet)
                if(objet!=undefined){
-                  
+
                    return objet.date_reception_provisoire_definitif
                }
-                        
+
                return ""
            }
      },
-      
+
      dateDefinitivePrevisionnel(){
          return marche_id=>{
                let objet=this.listeActeEffectFinnancier(marche_id)
               console.log(objet)
                if(objet!=undefined){
-                  
+
                    return objet.date_fin_exe
                }
-                        
+
                return ""
            }
      },
@@ -753,10 +925,10 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                let objet=this.listeActeEffectFinnancier(marche_id)
               console.log(objet)
                if(objet!=undefined){
-                  
+
                    return objet.date_debut_exectuion_definitif
                }
-                        
+
                return ""
            }
      },
@@ -765,10 +937,10 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                let objet=this.listeActeEffectFinnancier(marche_id)
               console.log(objet)
                if(objet!=undefined){
-                  
+
                    return objet.date_reception_definitive
                }
-                        
+
                return ""
            }
      },
@@ -814,10 +986,10 @@ console.log(this.getActeEffetFinancierPersonnaliser)
 
 
                 afficherListeMarcheHorsSib() {
-       // const st = this.search.toLowerCase();
+
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.gettersMarcheHorsib.filter(item=>{
+            this.objetMarchePlanierPasUiteOuRegion.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
@@ -825,22 +997,165 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                 }
             })
             return colect.filter(element =>   element.parent_id != null && element.sib==1 && element.attribue==2)
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // }); 
+
         }
 
-        return this.gettersMarcheHorsib.filter(element =>   element.parent_id != null && element.sib==1 && element.attribue==2)
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
-        
+        return this.objetMarchePlanierPasUiteOuRegion.filter(element =>   element.parent_id != null && element.sib==1 && element.attribue==2)
 
-    },
+      },
+            objetMarchePlanierPasUiteOuRegion(){
+
+                let vM=this;
+                let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!=null)
+
+                //retourne les marches d'une region selectionner
+                if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure=="" && vM.type_marche==""){
+                    objet =objet.filter(item=>{
+                        if(item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                            return item
+                        }
+                    })
+
+                }
+
+                //retourne les marches d'une unite administrative selectionner
+                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure=="" && vM.type_marche==""){
+                    objet =objet.filter(item=>{
+                        if(item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
+                            return item
+                        }
+                    })
+                }
+
+                //retourne les marches d'une une infrastucture selectionner
+                if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche==""){
+                    objet =objet.filter(item=>{
+                        if(item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                            return item
+                        }
+                    })
+                }
+
+
+                //retourne les marches d'un type de marché selectionner
+                if (vM.infrastructure=="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche!=""){
+                    objet =objet.filter(item=>{
+                        if(item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                            return item
+                        }
+                    })
+                }
+
+
+                //retourne les marches de region et unite adminstrative selectionner
+                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche==""){
+                    objet =objet.filter(item=>{
+                        if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                            return item
+                        }
+                    })
+                }
+
+
+                //retourne les marches d'une infrastructure et unite adminstrative selectionner
+
+                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche==""){
+                    objet =objet.filter(item=>{
+                        if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                            return item
+                        }
+                    })
+                }
+
+
+                //retourne les marches d'un type marche et unite adminstrative selectionner
+
+                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
+                    objet =objet.filter(item=>{
+                        if(item.unite_administrative_id==vM.unite_administrative_id && item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                            return item
+                        }
+                    })
+                }
+
+
+                //retourne les marches d'une region et infrastructure selectionner
+                if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" &&  vM.type_marche==""){
+                    objet =objet.filter(item=>{
+                        if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                            return item
+                        }
+                    })
+                }
+
+                //retourne les marches d'une infrasture et type marche selectionner
+                if(vM.unite_administrative_id=="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
+                    objet =objet.filter(item=>{
+                        if(item.infrastructure_id==vM.infrastructure && item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                            return item
+                        }
+                    })
+                }
+
+
+                //retourne les marches d'un type marche et regions selectionner
+                if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!=""){
+                    objet =objet.filter(item=>{
+                        if(item.localisation_geographie_id==vM.region && item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                            return item
+                        }
+                    })
+                }
+
+                //retourn les marches d'une UA, REGION et INFRASTRUCTURE
+
+                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche=="" ){
+                    objet =objet.filter(item=>{
+                        if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                            return item
+                        }
+                    })
+                }
+
+
+                //retourn les marches d'une UA, REGION et TYPE MARCHE
+                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!="" ){
+                    objet =objet.filter(item=>{
+                        if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                            return item
+                        }
+                    })
+                }
+
+                //retourn les marches d'une UA, INFRA et TYPE MARCHE
+                if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!="" ){
+                    objet =objet.filter(item=>{
+                        if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                            return item
+                        }
+                    })
+                }
+
+                //retourn les marche INFRA, REGIONS,TYPE MARCHE
+                if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
+                    objet =objet.filter(item=>{
+                        if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                            return item
+                        }
+                    })
+                }
+
+                //retourn les marche INFRA, REGIONS,TYPE MARCHE,UA
+                if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
+                    objet =objet.filter(item=>{
+                        if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
+                            return item
+                        }
+                    })
+                }
+
+                return objet
+            },
 
     //          affichierIdActeFinancierDansActePlan() {
     //   const qtereel = this.plans_programmes.find(
@@ -936,7 +1251,7 @@ console.log(this.getActeEffetFinancierPersonnaliser)
     //         }
         },
         methods: {
-          
+
             ...mapActions("uniteadministrative", [
                 "getAllActeCreation",
                 "ajouterActeCreation",
@@ -955,6 +1270,22 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                 'modifierFinancement',
                 'supprimerSourceFinancement']),
             formatageSomme:formatageSomme,
+            videUniteAdmin(){
+                this.unite_administrative_id=""
+            },
+            videRegions(){
+                this.region=""
+
+            },
+            videInfrastructure(){
+                this.infrastructure=""
+            },
+            videTypeMarche(){
+                this.type_marche=""
+            },
+            videTypeCF(){
+                this.section_id=""
+            },
  tableToExcel(table, name){
                 if (!table.nodeType) table = this.$refs.table
                 var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
@@ -966,7 +1297,9 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                 return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
 
-         
+            onCancel() {
+                console.log('User cancelled the loader.')
+            },
             // OnchangeFichier(e) {
             //     const files = e.target.files;
             //     this.selectedFile = event.target.files[0];
@@ -1110,7 +1443,50 @@ console.log(this.getActeEffetFinancierPersonnaliser)
 
             // },
 
-        }
+        },
+        watch: {
+            type_marche:function (value) {
+                console.log(value);
+
+                this.isLoading = true;
+                // simulate AJAX
+                setTimeout(() => {
+                    this.isLoading = false
+                },1000)
+
+
+
+            },
+
+            infrastructure: function (value) {
+                console.log(value);
+                this.isLoading = true;
+                // simulate AJAX
+                setTimeout(() => {
+                    this.isLoading = false
+                },1000)
+
+            },
+            region: function (value) {
+                console.log(value);
+                this.isLoading = true;
+                // simulate AJAX
+                setTimeout(() => {
+                    this.isLoading = false
+                },1000)
+
+            },
+            unite_administrative_id: function (value) {
+                console.log(value);
+                this.isLoading = true;
+                // simulate AJAX
+                setTimeout(() => {
+                    this.isLoading = false
+                },1000)
+
+            },
+
+        },
     };
 </script>
 <style scoped>

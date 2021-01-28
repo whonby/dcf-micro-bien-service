@@ -44,7 +44,7 @@
             </div>
           </div>
             <div class="control-group">
-            <label class="control-label">Date avenant</label>
+            <label class="control-label">Date d'avenant</label>
             <div class="controls">
               <input
                 type="date"

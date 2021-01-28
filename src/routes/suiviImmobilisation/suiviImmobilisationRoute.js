@@ -149,7 +149,25 @@ import listeDesArticlesAReparer from '../../pages/suivi_control_budgetaires/suiv
 
 import AjouterReparationEntretien from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DossierReparationEtEntretien/AjouterReparationEntretien.vue'
 
+
+
+
+import Inventaire from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/Inventaire/Inventaire.vue'
+
+
+
+import DetailInventaire from '../../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/GestionStock/DetailInventaire/DetailInventaireVehicule.vue'
 const suiviImmobilisationRoutes = [
+  {
+    path: "/DetailInventaire/:id",
+    name: "DetailInventaire",
+    component: DetailInventaire
+  },
+  {
+    path: "/Inventaire/:id",
+    name: "Inventaire",
+    component: Inventaire
+  },
   {
     path: "/AjouterReparationEntretien/:id",
     name: "AjouterReparationEntretien",

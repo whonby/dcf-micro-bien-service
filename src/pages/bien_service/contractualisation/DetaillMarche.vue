@@ -6,7 +6,7 @@ isButtunAddDossierCandidat
     
 <div>
         <div class="container-fluid">
-            <h4 v-if="marcheDetail(marcheid)" >Detail Marche : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
+            <h4 v-if="marcheDetail(marcheid)" >Détail du marché: {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
                 <button class="btn btn-success btn-large" v-else>Marché attribué</button></h4>
             <hr />
 
@@ -16,11 +16,11 @@ isButtunAddDossierCandidat
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
-                                <th>Objet marché</th>
-                                <th>Reference marché</th>
-                                <th>Montant marché</th>
+                                <th>Objet du marché</th>
+                                <th>Référence du marché</th>
+                                <th>Montant du marché</th>
                                 <th>Type de marché</th>
-                                <th>Unite administrative</th>
+                                <th>Unité administrative</th>
                                 <th>Exercice Budgétaire</th>
                             </tr>
                             </thead>
@@ -77,7 +77,7 @@ isButtunAddDossierCandidat
                                 <li class="active"><a data-toggle="tab" href="#tab01">Bailleur</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab1">Offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab3">Contractualisation</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab4">Facture</a></li> -->
                             </ul>
                         </div>
@@ -94,7 +94,7 @@ isButtunAddDossierCandidat
                                     <thead>
                                     <tr>
                                         <th>Bailleur</th>
-                                        <th>Type finanncement</th>
+                                        <th>Type de financement</th>
                                         <th>Montant</th>
                                         <th>Action</th>
                                     </tr>
@@ -133,7 +133,7 @@ isButtunAddDossierCandidat
                                                             :value="varText.id">{{varText.libelle}}</option>
                                                 </select>
                                             </div>
-                                            <label>Type finnancement <code>*</code> </label>
+                                            <label>Type de financement <code>*</code> </label>
                                             <div class="controls">
 
                                                 <select v-model="formBailleur.type_finnancement_id" class="span">
@@ -149,7 +149,7 @@ isButtunAddDossierCandidat
                                                 <div class="controls" v-if="detail_marche">
                                                     <code>Reste bailleur : {{parseFloat(detail_marche.montant_marche)-montantBailleurMarcheCompare(marcheid)}}</code>
                                                     <code v-if="montantBailleurMarcheCompare(marcheid)>=parseFloat(detail_marche.montant_marche)">
-                                                        Le montant total des bailleurs ne toi etre supperier au montant du marche
+                                                        Le montant total des bailleurs ne doit pas être supérieur au montant du marché
                                                     </code>
                                                 </div>
                                             </div>
@@ -176,7 +176,7 @@ isButtunAddDossierCandidat
                                                             :value="varText.id">{{varText.libelle}}</option>
                                                 </select>
                                             </div>
-                                            <label>Type finnancement <code>*</code> </label>
+                                            <label>Type de financement <code>*</code> </label>
                                             <div class="controls">
 
                                                 <select v-model="edit_bailleur_marche.type_finnancement_id" class="span">
@@ -209,14 +209,14 @@ isButtunAddDossierCandidat
                                     <thead>
                                     <tr>
 
-                                        <th>Reference appel</th>
-                                        <th> Type procedure</th>
+                                        <th>Référence de l'appel</th>
+                                        <th> Type de procédure</th>
 
                                         <!-- <th>Financement</th>
                                         <th>Nom bailleur</th> -->
-                                        <th>Date emmission</th>
+                                        <th>Date d'émission</th>
                                         <th>Date limite</th>
-                                        <th>Objet appel</th>
+                                        <th>Objet de l'appel</th>
                                         <th>Imputation</th>
                                         <th>Action</th>
                                     </tr>
@@ -242,7 +242,7 @@ isButtunAddDossierCandidat
                                             <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerAppelOffre(appelOffre.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i></span></button>
+                                                <span class=""><i class="icon-trash">Supprimer</i></span></button>
 
                                         </div>
                                         </td>
@@ -260,8 +260,8 @@ isButtunAddDossierCandidat
               </span>
                                         <h5>Liste des Lots</h5>
                                         <div align="right">
-                                            Search:
-                                            <input type="search" placeholder v-model="search" />
+                                            Recherche:
+                                            <input type="Recherche" placeholder v-model="search" />
                                         </div>
                                     </div>
                                     <div class="widget-content nopadding">
@@ -273,7 +273,7 @@ isButtunAddDossierCandidat
                                         <table class="table table-bordered table-striped" v-if="marcheid">
                                             <thead>
                                             <tr>
-                                                <th>Numero lot </th>
+                                                <th>Numéro du lot </th>
                                                 <th>Libellé</th>
                                                 <th>Montant</th>
                                                 <th>Offre</th>
@@ -296,7 +296,7 @@ isButtunAddDossierCandidat
 
                                                 <div class="btn-group">
                                                     <button @click.prevent="supprimerLot(lot_marche.id)"  class="btn btn-danger ">
-                                                        <span class=""><i class="icon-trash"></i></span></button>
+                                                        <span class=""><i class="icon-trash">Supprimer</i></span></button>
 
                                                 </div>
 
@@ -317,9 +317,9 @@ isButtunAddDossierCandidat
                 <div class="widget-box">
           <div class="widget-title">
             <ul class="nav nav-tabs">
-              <li class="active"><a data-toggle="tab" href="#tab12">Dossier candidat</a></li>
-              <li class=""><a data-toggle="tab" href="#tab21">Lettre invitation</a></li>
-              <li class=""><a data-toggle="tab" href="#tab31">Mandate</a></li>
+              <li class="active"><a data-toggle="tab" href="#tab12">Dossier du candidat</a></li>
+              <li class=""><a data-toggle="tab" href="#tab21">Lettre d'invitation</a></li>
+              <li class=""><a data-toggle="tab" href="#tab31">Mandaté</a></li>
               <li class=""><a data-toggle="tab" href="#tab22">Ouverture</a></li>
               <li class=""><a data-toggle="tab" href="#tab32">Analyse</a></li>
               <li class=""><a data-toggle="tab" href="#tab36">PV</a></li>
@@ -353,15 +353,15 @@ isButtunAddDossierCandidat
                  <table class="table table-bordered table-striped" v-if="marcheid">
                      <thead>
                      <tr>
-                         <th>Numero dossier</th>
-                         <th>Type candidat</th>
-                         <th>Raison social </th>
+                         <th>Numéro du dossier</th>
+                         <th>Type de candidat</th>
+                         <th>Raison sociale </th>
                          <th>Date naissance</th>
-                         <th>Telephone</th>
+                         <th>Téléphone</th>
                          <th>Adresse</th>
                          <th>Email</th>
-                         <th>Appel Offre</th>
-                         <th>Procedure</th>
+                         <th>Appel d'Offre</th>
+                         <th>Procédure</th>
                          <!--<th v-if="selectionAttributionMarche(marcheid)">Decision</th>-->
                          <th>Action</th>
                      </tr>
@@ -412,9 +412,9 @@ isButtunAddDossierCandidat
 
                 <!--ajouter de dossier candidature-->
                 <div v-if="isFormulaireDossierCandidature">
-                    <h6><button class="btn btn-success" @click="NotisFormulaireDossierCand" v-if="!isButtunAddDossierCandidat">Afficher la liste des candidat</button></h6>
+                    <h6><button class="btn btn-success" @click="NotisFormulaireDossierCand" v-if="!isButtunAddDossierCandidat">Afficher la liste des candidats</button></h6>
                     <div class="span6" align="left">
-                        Selectionner l'entreprise:
+                        Sélectionner l'entreprise:
                         <model-list-select style="background-color: rgb(255,255,255);"
                                            class="wide"
                                            :list="entreprises"
@@ -422,7 +422,7 @@ isButtunAddDossierCandidat
                                            option-value="id"
                                            option-text="raison_sociale"
                                             :search-change="recherche()"
-                                           placeholder="Selectionner l'entreprise"
+                                           placeholder="Sélectionner l'entreprise"
                         >
 
                         </model-list-select>
@@ -436,7 +436,7 @@ isButtunAddDossierCandidat
 
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">registre de commerce</label>
+                                    <label class="control-label">Registre de commerce</label>
                                     <div class="controls">
                                         <input type="text" class="" placeholder="Registre de commerce" v-model="formDossierCadidature.reg_com">
                                     </div>
@@ -447,15 +447,15 @@ isButtunAddDossierCandidat
                                 <div class="control-group">
                                     <label class="control-label">Numero de compte contribuable</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Situation Geographique" v-model="formDossierCadidature.numero_cc">
+                                        <input type="text" class="" placeholder="Situation Géographique" v-model="formDossierCadidature.numero_cc">
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Raison social</label>
+                                    <label class="control-label">Raison sociale</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Raison social" v-model="formDossierCadidature.nom_cand">
+                                        <input type="text" class="" placeholder="Raison sociale" v-model="formDossierCadidature.nom_cand">
                                     </div>
                                 </div>
                             </td>
@@ -473,15 +473,15 @@ isButtunAddDossierCandidat
                         <tr class="odd gradeX">
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Telephone</label>
+                                    <label class="control-label">Téléphone</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Telphone" v-model="formDossierCadidature.telephone_cand">
+                                        <input type="text" class="" placeholder="Téléphone" v-model="formDossierCadidature.telephone_cand">
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Address </label>
+                                    <label class="control-label">Adresse </label>
                                     <div class="controls">
                                         <input type="text" class="" placeholder="Adresse" v-model="formDossierCadidature.adresse_post">
                                     </div>
@@ -491,15 +491,15 @@ isButtunAddDossierCandidat
                             <td>
 
                                 <div class="control-group">
-                                    <label class="control-label">Numero de dossier</label>
+                                    <label class="control-label">Numéro du dossier</label>
                                     <div class="controls">
-                                        <input type="text" readonly class="" placeholder="Numero dossier" v-model="formDossierCadidature.numero_dossier">
+                                        <input type="text" readonly class="" placeholder="Numéro du dossier" v-model="formDossierCadidature.numero_dossier">
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Type candidat</label>
+                                    <label class="control-label">Type de candidat</label>
                                     <div class="controls">
 
                                          <select v-model="formDossierCadidature.type_candidat_id" class="span" >
@@ -518,7 +518,7 @@ isButtunAddDossierCandidat
 
                         <tr class="odd gradeX">
                             <td>
-                                <label>Appel Offre</label>
+                                <label>Appel d'offre</label>
                                 <div class="controls">
                                     <select hidden v-model="formDossierCadidature.appel_offre_id" class="span" disabled>
                                         <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
@@ -569,7 +569,7 @@ isButtunAddDossierCandidat
 
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Formulaire proo techn</label>
+                                    <label class="control-label">Formulaire pro techn</label>
                                     <div class="controls">
                                         <input type="text" class="" placeholder="Formul propo tech" v-model="formDossierCadidature.formul_propo_tech">
                                     </div>
@@ -586,7 +586,7 @@ isButtunAddDossierCandidat
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Piece admin</label>
+                                    <label class="control-label">Pièce administrative</label>
                                     <div class="controls">
                                         <input type="text" class="" placeholder="Piece Admin" v-model="formDossierCadidature.piece_admin">
                                     </div>
@@ -636,7 +636,7 @@ isButtunAddDossierCandidat
                         <tr class="odd gradeX">
 
                             <td>
-                                <label>Procedure de passation</label>
+                                <label>Procédure de passation</label>
                                 <div class="controls">
                                     <select v-model="formDossierCadidature.procedure_passation_id" class="span" disabled>
                                         <option v-for="varText in procedurePassations" :key="varText.id"
@@ -654,9 +654,9 @@ isButtunAddDossierCandidat
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Capacite financiere</label>
+                                    <label class="control-label">Capacité financière</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Capacite financiere" v-model="formDossierCadidature.capacite_financiere">
+                                        <input type="text" class="" placeholder="Capacité financière" v-model="formDossierCadidature.capacite_financiere">
                                     </div>
                                 </div>
                             </td>
@@ -681,15 +681,15 @@ isButtunAddDossierCandidat
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Capacite finanancier</label>
+                                    <label class="control-label">Capacité financière</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Capacite financement" v-model="formDossierCadidature.capacite_financement">
+                                        <input type="text" class="" placeholder="Capacité financière" v-model="formDossierCadidature.capacite_financement">
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Capacite techn exp</label>
+                                    <label class="control-label">Capacité techn exp</label>
                                     <div class="controls">
                                         <input type="text" class="" placeholder="Capacite tech exp" v-model="formDossierCadidature.capacite_tech_exp">
                                     </div>
@@ -708,7 +708,7 @@ isButtunAddDossierCandidat
 
 
                         <a @click.prevent="ajouterDossierCandidature" class="btn btn-primary"
-                           href="#">Enregistre dossier candidature</a>
+                           href="#">Enregistrer dossier de candidature</a>
                         </tbody>
                     </table>
                 </div>
@@ -727,32 +727,32 @@ isButtunAddDossierCandidat
                             <table class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Numero dossier</th>
-                                    <th>Type candidat</th>
-                                    <th>Telephone </th>
-                                    <th>adresse </th>
-                                    <th>Situation geographique</th>
+                                    <th>Numéro du dossier</th>
+                                    <th>Type de candidat</th>
+                                    <th>Téléphone </th>
+                                    <th>Adresse </th>
+                                    <th>Situation géographique</th>
                                     <th>Email</th>
-                                    <th>Meth reat traveau</th>
+                                    <th>Meth reat travau</th>
                                     <th>Accord groupe</th>
                                     <th>Pauv habil signataire</th>
                                     <th>Caution</th>
-                                    <th>Registe de commerce</th>
+                                    <th>Registre de commerce</th>
                                 </tr>
                                 </thead>
 
                                 <tr>
-                                    <td>{{detail_dossier_candidature.numero_dossier || "Non renseigne"}}</td>
-                                    <td>{{afficheCandidat(detail_dossier_candidature.type_candidat_id) || "Non renseigne"}}</td>
-                                    <td>{{detail_dossier_candidature.telephone_cand || "Non renseigne"}}</td>
-                                    <td>{{detail_dossier_candidature.adresse_post || "Non renseigne"}}</td>
-                                    <td>{{detail_dossier_candidature.situation_geo || "Non renseigne"}}</td>
-                                    <td>{{detail_dossier_candidature.email_cand || "Non renseigne"}}</td>
-                                    <td>{{detail_dossier_candidature.meth_real_travau || "Non renseigne"}}</td>
-                                    <td>{{detail_dossier_candidature.accord_group || "Non renseigne"}}</td>
-                                    <td>{{detail_dossier_candidature.pouv_habil_signataire || "Non renseigne"}}</td>
-                                    <td>{{detail_dossier_candidature.cautionnement_prov || "Non renseigne"}}</td>
-                                    <td>{{detail_dossier_candidature.reg_com || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.numero_dossier || "Non renseigné"}}</td>
+                                    <td>{{afficheCandidat(detail_dossier_candidature.type_candidat_id) || "Non renseigné"}}</td>
+                                    <td>{{detail_dossier_candidature.telephone_cand || "Non renseigné"}}</td>
+                                    <td>{{detail_dossier_candidature.adresse_post || "Non renseigné"}}</td>
+                                    <td>{{detail_dossier_candidature.situation_geo || "Non renseigné"}}</td>
+                                    <td>{{detail_dossier_candidature.email_cand || "Non renseigné"}}</td>
+                                    <td>{{detail_dossier_candidature.meth_real_travau || "Non renseigné"}}</td>
+                                    <td>{{detail_dossier_candidature.accord_group || "Non renseigné"}}</td>
+                                    <td>{{detail_dossier_candidature.pouv_habil_signataire || "Non renseigné"}}</td>
+                                    <td>{{detail_dossier_candidature.cautionnement_prov || "Non renseigné"}}</td>
+                                    <td>{{detail_dossier_candidature.reg_com || "Non renseigné"}}</td>
 
                                 </tr>
 
@@ -769,15 +769,15 @@ isButtunAddDossierCandidat
                                 <thead>
                                 <tr>
                                     <th>Programme mobilisation</th>
-                                    <th>Capacite financiere </th>
+                                    <th>Capacite financière </th>
                                     <th>CAA Moyenn</th>
                                     <!-- <th>Capacite financement</th> -->
-                                    <th>Capacite technique exper </th>
+                                    <th>Capacité technique exper </th>
                                     <th>Meth reat traveau</th>
                                     <th>Accord groupe</th>
                                     <th>Pauv habil signataire</th>
                                     <th>Caution</th>
-                                    <th>Registe de commerce</th>
+                                    <th>Registre de commerce</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -810,11 +810,11 @@ isButtunAddDossierCandidat
                             <table class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Designation</th>
-                                    <th>Quantite</th>
+                                    <th>Désignation</th>
+                                    <th>Quantité</th>
                                     <th>Prix unitaire</th>
-                                    <th>Montant total ht </th>
-                                    <th>Montant total ttc </th>
+                                    <th>Montant total HT </th>
+                                    <th>Montant total TTC </th>
                                     <th>Action </th>
                                 </tr>
                                 </thead>
@@ -852,7 +852,7 @@ isButtunAddDossierCandidat
                <div id="modificationDossierCandidatModal" class="modal hide tlDossierCandidat">
                    <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification dossier candidat</h3>
+                <h3>Modification du dossier du candidat</h3>
                  </div>
                   <div class="modal-body">
                     <table class="table table-bordered table-striped">
@@ -861,7 +861,7 @@ isButtunAddDossierCandidat
 
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">registre de commerce</label>
+                                    <label class="control-label">Registre de commerce</label>
                                     <div class="controls">
                                         <input type="text" class="" placeholder="Registre de commerce" v-model="editDossierCadidature.reg_com">
                                     </div>
@@ -870,17 +870,17 @@ isButtunAddDossierCandidat
 
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Numero de compte contribuable</label>
+                                    <label class="control-label">Numéro de compte contribuable</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Situation Geographique" v-model="editDossierCadidature.numero_cc">
+                                        <input type="text" class="" placeholder="Situation Géographique" v-model="editDossierCadidature.numero_cc">
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Raison social</label>
+                                    <label class="control-label">Raison sociale</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Raison social" v-model="editDossierCadidature.nom_cand">
+                                        <input type="text" class="" placeholder="Raison sociale" v-model="editDossierCadidature.nom_cand">
                                     </div>
                                 </div>
                             </td>
@@ -898,9 +898,9 @@ isButtunAddDossierCandidat
                         <tr class="odd gradeX">
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Telephone</label>
+                                    <label class="control-label">Téléphone</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Telphone" v-model="editDossierCadidature.telephone_cand">
+                                        <input type="text" class="" placeholder="Téléphone" v-model="editDossierCadidature.telephone_cand">
                                     </div>
                                 </div>
                             </td>
@@ -916,15 +916,15 @@ isButtunAddDossierCandidat
                             <td>
 
                                 <div class="control-group">
-                                    <label class="control-label">Numero de dossier</label>
+                                    <label class="control-label">Numéro du dossier</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Numero dossier" v-model="editDossierCadidature.numero_dossier">
+                                        <input type="text" class="" placeholder="Numéro dossier" v-model="editDossierCadidature.numero_dossier">
                                     </div>
                                 </div>
                             </td>
                              <td>
                                 <div class="control-group">
-                                    <label class="control-label">Type candidat</label>
+                                    <label class="control-label">Type de candidat</label>
                                     <div class="controls">
 
                                          <select  v-model="editDossierCadidature.type_candidat_id" class="span" >
@@ -944,7 +944,7 @@ isButtunAddDossierCandidat
 
                         <tr class="odd gradeX">
                             <td>
-                                <label>Appel Offre</label>
+                                <label>Appel d'offre</label>
                                 <div class="controls">
                                     <select hidden v-model="editDossierCadidature.appel_offre_id" class="span" disabled>
                                         <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
@@ -1004,15 +1004,15 @@ isButtunAddDossierCandidat
 
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Fiche rsgnt </label>
+                                    <label class="control-label">Fiche de renseignement </label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Fiche renseignement" v-model="editDossierCadidature.fiche_rsgnt_cand">
+                                        <input type="text" class="" placeholder="Fiche de renseignement" v-model="editDossierCadidature.fiche_rsgnt_cand">
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Piece admin</label>
+                                    <label class="control-label">Pièce administrative</label>
                                     <div class="controls">
                                         <input type="text" class="" placeholder="Piece Admin" v-model="editDossierCadidature.piece_admin">
                                     </div>
@@ -1032,7 +1032,7 @@ isButtunAddDossierCandidat
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Atcdent marche non exe</label>
+                                    <label class="control-label">Atcdent marché non exécuté</label>
                                     <div class="controls">
                                         <input type="text" class="" placeholder="Atcent marche non exe" v-model="editDossierCadidature.atcdent_marche_non_exe">
                                     </div>
@@ -1062,7 +1062,7 @@ isButtunAddDossierCandidat
                         <tr class="odd gradeX">
 
                             <td>
-                                <label>Procedure de passation</label>
+                                <label>Procédure de passation</label>
                                 <div class="controls">
                                     <select v-model="editDossierCadidature.procedure_passation_id" class="span" disabled>
                                         <option v-for="varText in procedurePassations" :key="varText.id"
@@ -1080,9 +1080,9 @@ isButtunAddDossierCandidat
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Capacite financiere</label>
+                                    <label class="control-label">Capacité financière</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Capacite financiere" v-model="editDossierCadidature.capacite_financiere">
+                                        <input type="text" class="" placeholder="Capacité financière" v-model="editDossierCadidature.capacite_financiere">
                                     </div>
                                 </div>
                             </td>
@@ -1090,7 +1090,7 @@ isButtunAddDossierCandidat
                             <td>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <label class="control-label">Prog mobilisation</label>
+                                        <label class="control-label">Programme mobilisation</label>
                                         <input type="Text" class="" placeholder="Programme mobilisation" v-model="editDossierCadidature.prog_mobilisation">
                                     </div>
                                 </div>
@@ -1108,15 +1108,15 @@ isButtunAddDossierCandidat
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Capacite finanancier</label>
+                                    <label class="control-label">Capacité financière</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Capacite financement" v-model="editDossierCadidature.capacite_financement">
+                                        <input type="text" class="" placeholder="Capacité financement" v-model="editDossierCadidature.capacite_financement">
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Capacite techn exp</label>
+                                    <label class="control-label">Capacité techn exp</label>
                                     <div class="controls">
                                         <input type="text" class="" placeholder="Capacite tech exp" v-model="editDossierCadidature.capacite_tech_exp">
                                     </div>
@@ -1124,7 +1124,7 @@ isButtunAddDossierCandidat
                             </td>
                             <td>
                                 <div class="control-group">
-                                    <label class="control-label">Montant offre financiere</label>
+                                    <label class="control-label">Montant de l'offre financière</label>
                                     <div class="controls">
                                         <input type="text" class="" placeholder="Mont offre financiere" v-model="editDossierCadidature.mt_offre_financiere">
                                     </div>
@@ -1140,7 +1140,7 @@ isButtunAddDossierCandidat
                         
                      <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationDossierCandidatLocal" href="#">Modifier</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>    
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>    
                </div>
 
               <!-- fin de formulaire de modification de dossier de candidat --->
@@ -1152,16 +1152,16 @@ isButtunAddDossierCandidat
                     <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-warning">Ajouter</a>
                 </div>
 </div>
-       <h4> Liste des lettres invitations</h4>
+       <h4> Liste des lettres d'invitations</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-                        <th>Date lettre</th>
-                        <th>Ref lettre </th>
+                        <th>Date de la lettre</th>
+                        <th>Ref de la lettre </th>
                         <th>Destinataire</th>
                         <th>Objet de la lettre</th>
                         <th>Fichier</th>
-                        <th>Date cojo</th>
+                        <th>Date de la COJO</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -1187,7 +1187,7 @@ isButtunAddDossierCandidat
                         </td>
                         <div class="btn-group">
                             <button @click.prevent="supprimerLettreInvitation(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
+                                <span class=""><i class="icon-trash">Supprimer</i></span></button>
                         </div>
                     </tr>
                     </tbody>
@@ -1199,14 +1199,14 @@ isButtunAddDossierCandidat
                         <a href="#ajouterMantater" data-toggle="modal" class="btn btn-warning">Ajouter</a>
                     </div>
                 </div>
-                <h4> liste des mandates</h4>
+                <h4> Liste des mandatés</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
                         <th>Date </th>
                         <th>Matricule </th>
                         <th>Nom</th>
-                        <th>Prenom</th>
+                        <th>Prénom</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -1235,14 +1235,14 @@ isButtunAddDossierCandidat
                           <a href="#ajouterCojo" data-toggle="modal" class="btn btn-warning" >Ajouter </a>
                       </div>
                   </div>
-                  <h4> Infomation sur la cojo</h4>
+                  <h4> Information sur la COJO</h4>
                   <table class="table table-bordered table-striped" v-if="marcheid">
                       <thead>
                       <tr>
-                          <th>Date Composition</th>
-                          <th>Date invitation</th>
-                          <th>Numero dossier Appel Offre</th>
-                          <th>Nmbr particiapnt</th>
+                          <th>Date de la composition</th>
+                          <th>Date d'invitation</th>
+                          <th>Numéro du dossier d'appel d'offre</th>
+                          <th>Nombre de participant</th>
                           <th>Action</th>
                       </tr>
                       </thead>
@@ -1269,7 +1269,7 @@ isButtunAddDossierCandidat
                               {{appelOffre.lettre_invitation.ref_lettre || 'Non renseigné'}}</td>
                           <div class="btn-group">
                               <button @click.prevent="supprimerCojo(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                  <span class=""><i class="icon-trash"></i></span></button>
+                                  <span class=""><i class="icon-trash">Supprimer</i></span></button>
 
                           </div>
 
@@ -1278,7 +1278,7 @@ isButtunAddDossierCandidat
                   </table>
                   <div class="">
                       <div class="span9" >
-                         <h4>Liste des membres de la cojo</h4>
+                         <h4>Liste des membres de la COJO</h4>
                       </div>
                       <div class="span3" align="right">
                           <a href="#ajouter_membre_cojo" data-toggle="modal" class="btn btn-warning" >Ajouter un autre membre </a>
@@ -1287,8 +1287,8 @@ isButtunAddDossierCandidat
                           <thead>
                           <tr>
                               <th>Matricule</th>
-                              <th>Nom et prenom</th>
-                              <th>Role</th>
+                              <th>Nom et prénom</th>
+                              <th>Rôle</th>
                               <th>Action</th>
                           </tr>
                           </thead>
@@ -1304,7 +1304,7 @@ isButtunAddDossierCandidat
                                   {{appelOffre.role || 'Non renseigné'}}</td>
                               <div class="btn-group">
                                   <button @click.prevent="supprimerMembreCojo(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                      <span class=""><i class="icon-trash"></i></span></button>
+                                      <span class=""><i class="icon-trash">Supprimer</i></span></button>
                               </div>
 
                           </tr>
@@ -1324,17 +1324,17 @@ isButtunAddDossierCandidat
                     </div>
 
                 </div>
-                <h4>Liste des dossiers analyses</h4>
+                <h4>Liste des dossiers d'analyses</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-                        <th>Numero dossier</th>
-                        <th>Dossier candidat </th>
-                        <th>Date Analyse </th>
+                        <th>Numéro du dossier</th>
+                        <th>Dossier du candidat </th>
+                        <th>Date d'analyse </th>
                         <th>Rang d'analyse</th>
                         <th>Note</th>
                         <th>Type d'analyse</th>
-                        <th>Controller finnancier</th>
+                        <th>Contrôleur financier</th>
                         <!--<th>Avis</th>-->
 
                         <th>Action</th>
@@ -1394,11 +1394,11 @@ isButtunAddDossierCandidat
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-                        <th>Numéro courrier</th>
-                        <th>Reference marché</th>
-                        <th>Reférence d'offre </th>
-                        <th>Reference PV</th>
-                        <th>Date demande</th>
+                        <th>Numéro du courrier</th>
+                        <th>Référence du marché</th>
+                        <th>Référence d'offre </th>
+                        <th>Référence PV</th>
+                        <th>Date de demande</th>
                         <th>Fichier</th>
                         <th>Action</th>
                     </tr>
@@ -1447,14 +1447,14 @@ isButtunAddDossierCandidat
                     </div>
 
                 </div>
-                <h4>Liste Analyse DMP</h4>
+                <h4>Liste d'Analyse DMP</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-                        <th>Numero du courrier</th>
+                        <th>Numéro du courrier</th>
                         <th>Référence PV</th>
-                        <th>Date avis</th>
-                        <th>Decision </th>
+                        <th>Date d'avis</th>
+                        <th>Décision </th>
                         <th>Observation</th>
                         <th>Action</th>
                     </tr>
@@ -1523,9 +1523,9 @@ isButtunAddDossierCandidat
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-                      <th>Reference offre</th>
-                        <th>Reference courrier</th>
-                        <th>Date avis</th>
+                      <th>Référence de l'offre</th>
+                        <th>Référence du courrier</th>
+                        <th>Date d'avis</th>
                         <th>Avis</th>
                         <th>Observation</th>
                         <th>Fichier</th>
@@ -1590,8 +1590,8 @@ isButtunAddDossierCandidat
                     <tr>
 
                         <!-- <th>ANO DMP bailleur</th>  -->
-                        <th>Reference Offre</th>
-                        <th>Reference PV</th>
+                        <th>Référence de l'offre</th>
+                        <th>Référence du PV</th>
                         <th>Fichier</th>
                         <th>Avis</th>
                         <th>Action</th>
@@ -1615,7 +1615,7 @@ isButtunAddDossierCandidat
 
 
                         <td>
-                            <button class="btn btn-info btn-mini" v-if="pv.avie==null">En attende</button>
+                            <button class="btn btn-info btn-mini" v-if="pv.avie==null">En attente</button>
                             <button class="btn btn-success btn-mini" v-else-if="pv.avie== 1">Non Objection</button>
                             <button class="btn btn-danger btn-mini" v-else>Objection</button>
                         </td>
@@ -1684,13 +1684,13 @@ isButtunAddDossierCandidat
               <div id="modificationPV" class="modal hide">
                   <div class="modal-header">
                       <button data-dismiss="modal" class="close" type="button">×</button>
-                      <h3>Modification de PV</h3>
+                      <h3>Modification du PV</h3>
                   </div>
                   <div class="modal-body">
                       <form class="form-horizontal">
 
                             <div class="control-group">
-                              <label class="control-label">Reference PV</label>
+                              <label class="control-label">Référence du PV</label>
                               <div class="controls">
                                   <input type="text" v-model="edite_pv.reference" class="span">
                               </div>
@@ -1781,7 +1781,7 @@ isButtunAddDossierCandidat
             <div class="modal-body">
                 <form class="form-horizontal">
                         <div class="control-group">
-                        <label class="control-label">Document Procedure</label>
+                        <label class="control-label">Document de procédure</label>
                         <div class="controls">
                           <select v-model="editObservation1.document_procedure_id" class="span">
                                 <option v-for="varText in documentProcedures" :key="varText.id"
@@ -1806,7 +1806,7 @@ isButtunAddDossierCandidat
                                     type="date"
                                     v-model="editObservation1.date_avis_baill"
                                     class="span"
-                                    placeholder="Saisir le libelle_type"
+                                    placeholder="Saisir le libellé"
                             />
                         </div>
                     </div>
@@ -1860,17 +1860,17 @@ isButtunAddDossierCandidat
 
 
                 </div>
-                <h4> Liste acte effet financier </h4>
+                <h4> Liste d'acte à effet financier </h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
 
-                        <th>Reference acte</th>
-                        <th>Libelle acte</th>
-                        <th>Montant acte</th>
-                        <th>Type acte</th>
-                        <th>Objet marche.</th>
-                        <th>text juridique</th>
+                        <th>Référence de l'acte</th>
+                        <th>Libellé de l'acte</th>
+                        <th>Montant de l'acte</th>
+                        <th>Type de l'acte</th>
+                        <th>Objet du marché</th>
+                        <th>Texte juridique</th>
                         <th>Imputation</th>
                         <th>Entreprise</th>
                        
@@ -1916,14 +1916,14 @@ isButtunAddDossierCandidat
 <div id="ajouterActeEffetFinancier" class="modal hide grdirModalActeEffet">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter acte effet financier</h3>
+                <h3>Ajouter l'acte à effet financier</h3>
             </div>
             <div class="modal-body">
                     <table class="table table-bordered table-striped">
                         <tr>
                             <td>
                         <div class="control-group">
-                        <label class="control-label">Type acte effet financier.</label>
+                        <label class="control-label">Type de l'acte à effet financier</label>
                         <div class="controls">
                           <select v-model="formEffetFinancier.type_act_effet_id" class="span">
                                 <option v-for="varText in typeActeEffetFinanciers" :key="varText.id"
@@ -1935,7 +1935,7 @@ isButtunAddDossierCandidat
                             </td>
                                     <td>
                      <div class="control-group" v-if="selectionAttributionMarche(marcheid)">
-                        <label class="control-label">Entreprise vainqueur </label>
+                        <label class="control-label">Entreprise vainqueure </label>
                         <div class="controls" >
                             <input :value="selectionAttributionMarche(marcheid).dossier_candidature.nom_cand" readonly/>
                         </div>
@@ -1946,7 +1946,7 @@ isButtunAddDossierCandidat
                             </td>
                             <td>
                         <div class="control-group">
-                        <label class="control-label">Text juridique </label>
+                        <label class="control-label">Texte juridique </label>
                         <div class="controls">
                            <select v-model="formEffetFinancier.text_juridique_id" class="span">
                                 <option v-for="varText in text_juridiques" :key="varText.id"
@@ -1957,7 +1957,7 @@ isButtunAddDossierCandidat
                             </td>
                               <td>
                         <div class="control-group">
-                        <label class="control-label">Ano bailleur dmp.</label>
+                        <label class="control-label">Ano bailleur DMP</label>
                         <div class="controls">
                        <input :value="info_avis_bailleur" readonly>
                         
@@ -1983,7 +1983,7 @@ isButtunAddDossierCandidat
                             </td>
                                            <td>
                     <div class="control-group">
-                        <label class="control-label"> date d'approbation</label>
+                        <label class="control-label"> Date d'approbation</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -1996,26 +1996,26 @@ isButtunAddDossierCandidat
                             </td>
                                   <td>
                     <div class="control-group">
-                        <label class="control-label">Numero du marche/contract</label>
+                        <label class="control-label">Numéro du marché / contract</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="formEffetFinancier.numero_marche"
                                     class="span"
-                                    placeholder="Saisir le numero "
+                                    placeholder="Saisir le numéro "
                             />
                         </div>
                     </div>
                             </td>
                              <td>
                     <div class="control-group">
-                        <label class="control-label">Code acte </label>
+                        <label class="control-label">Code de l'acte </label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="formEffetFinancier.code_act"
                                     class="span"
-                                    placeholder="Saisir le code acte"
+                                    placeholder="Saisir le code de l'acte"
                             />
                         </div>
                     </div>
@@ -2026,7 +2026,7 @@ isButtunAddDossierCandidat
                       
                           <td colspan="4" width="550">
                      <div class="control-group">
-          <label class="control-label">Libellé acte:</label>
+          <label class="control-label">Libellé de l'acte:</label>
             <div class="controls">
               <textarea   v-model="formEffetFinancier.libelle_act"   class="textarea_editor span12" rows="3" placeholder="Entrer le libellé ..."></textarea>
             </div>
@@ -2040,11 +2040,11 @@ isButtunAddDossierCandidat
                         <tr>
                             <td>
                     <div class="control-group">
-                        <label class="control-label">Reference acte</label>
+                        <label class="control-label">Référence de l'acte</label>
                         <div class="controls">
                             <input type="text" v-model="formEffetFinancier.reference_act"
                                     class="span"
-                                    placeholder="refence acte"
+                                    placeholder="Référence de l'acte"
                             />
                         </div>
                     </div>
@@ -2090,7 +2090,7 @@ isButtunAddDossierCandidat
                     
                      <td>
                      <div class="control-group">
-                        <label class="control-label">Date ordre de service demarrage</label>
+                        <label class="control-label">Date ordre de service démarrage</label>
                         <div class="controls">
                             <input type="date" v-model="formEffetFinancier.date_odre_service"
                                     class="span"
@@ -2101,7 +2101,7 @@ isButtunAddDossierCandidat
                             </td>
                                          <td>
                      <div class="control-group">
-                        <label class="control-label" title=" ">Date fin exécution</label>
+                        <label class="control-label" title=" ">Date de fin d'exécution</label>
                         <div class="controls">
                             <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
                                     class="span"
@@ -2125,7 +2125,7 @@ isButtunAddDossierCandidat
                             </td>
                                              <td>
                      <div class="control-group">
-                        <label class="control-label" title=" ">Date de reception definitive</label>
+                        <label class="control-label" title=" ">Date de réception définitive</label>
                         <div class="controls">
                             <input type="date" v-model="formEffetFinancier.date_reception"
                                     class="span"
@@ -2160,14 +2160,14 @@ isButtunAddDossierCandidat
 <div id="modifierActeEF" class="modal hide grdirModalActeEffet">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier acte effet financier</h3>
+                <h3>Modifier l'acte à effet financier</h3>
             </div>
             <div class="modal-body">
                 <table class="table table-bordered table-striped">
                     <tr>
                         <td>
                             <div class="control-group">
-                                <label class="control-label">Type acte effet financier.</label>
+                                <label class="control-label">Type d'acte à effet financier</label>
                                 <div class="controls">
                                     <select v-model="editActeEffetFinancier.type_act_effet_id" class="span">
                                         <option v-for="varText in typeActeEffetFinanciers" :key="varText.id"
@@ -2178,7 +2178,7 @@ isButtunAddDossierCandidat
                         </td>
                         <td>
                             <div class="control-group" v-if="selectionAttributionMarche(marcheid)">
-                                <label class="control-label">Entreprise vainqueur </label>
+                                <label class="control-label">Entreprise vainqueure </label>
                                 <div class="controls" >
                                     <input :value="selectionAttributionMarche(marcheid).dossier_candidature.nom_cand" readonly/>
                                 </div>
@@ -2189,7 +2189,7 @@ isButtunAddDossierCandidat
                         </td>
                         <td>
                             <div class="control-group">
-                                <label class="control-label">Text juridique </label>
+                                <label class="control-label">Texte juridique </label>
                                 <div class="controls">
                                     <select v-model="editActeEffetFinancier.text_juridique_id" class="span">
                                         <option v-for="varText in text_juridiques" :key="varText.id"
@@ -2223,7 +2223,7 @@ isButtunAddDossierCandidat
                         </td>
                         <td>
                             <div class="control-group">
-                                <label class="control-label"> date d'approbation</label>
+                                <label class="control-label"> Date d'approbation</label>
                                 <div class="controls">
                                     <input
                                             type="date"
@@ -2236,13 +2236,13 @@ isButtunAddDossierCandidat
                         </td>
                         <td>
                             <div class="control-group">
-                                <label class="control-label">Code acte </label>
+                                <label class="control-label">Code de l'acte </label>
                                 <div class="controls">
                                     <input
                                             type="text"
                                             v-model="editActeEffetFinancier.code_act"
                                             class="span"
-                                            placeholder="Saisir le code acte"
+                                            placeholder="Saisir le code de l'acte"
                                     />
                                 </div>
                             </div>
@@ -2251,7 +2251,7 @@ isButtunAddDossierCandidat
                     <tr>
                         <td colspan="3" width="250">
                             <div class="control-group">
-                                <label class="control-label">Libellé acte:</label>
+                                <label class="control-label">Libellé de l'acte</label>
                                 <div class="controls">
                                     <textarea   v-model="editActeEffetFinancier.libelle_act"   class="textarea_editor span12" rows="3" placeholder="Entrer le libellé ..."></textarea>
                                 </div>
@@ -2261,11 +2261,11 @@ isButtunAddDossierCandidat
                     <tr>
                         <td>
                             <div class="control-group">
-                                <label class="control-label">Reference acte</label>
+                                <label class="control-label">Référence de l'acte</label>
                                 <div class="controls">
                                     <input type="text" v-model="editActeEffetFinancier.reference_act"
                                            class="span"
-                                           placeholder="refence acte"
+                                           placeholder="Référence de l'acte"
                                     />
                                 </div>
                             </div>
@@ -2307,7 +2307,7 @@ isButtunAddDossierCandidat
                     <tr>
                         <td>
                             <div class="control-group">
-                                <label class="control-label">Date ordre de service demarrage</label>
+                                <label class="control-label">Date ordre de service démarrage</label>
                                 <div class="controls">
                                     <input type="date" v-model="editActeEffetFinancier.date_odre_service"
                                            class="span"
@@ -2318,7 +2318,7 @@ isButtunAddDossierCandidat
                         </td>
                         <td>
                             <div class="control-group">
-                                <label class="control-label" title=" ">Date fin exécution</label>
+                                <label class="control-label" title=" ">Date de fin d'exécution</label>
                                 <div class="controls">
                                     <input type="date" :min="editActeEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValueMod" v-model="editActeEffetFinancier.date_fin_exe"
                                            class="span"
@@ -2339,7 +2339,7 @@ isButtunAddDossierCandidat
                         </td>
                         <td>
                             <div class="control-group">
-                                <label class="control-label" title=" ">Date de reception definitive</label>
+                                <label class="control-label" title=" ">Date de réception définitive</label>
                                 <div class="controls">
                                     <input type="date" v-model="editActeEffetFinancier.date_reception"
                                            class="span"
@@ -2376,12 +2376,12 @@ isButtunAddDossierCandidat
  <div id="ajouterAnoDMP" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier ano dmp</h3>
+        <h3>Modifier ANO DMP</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">Date ano</label>
+            <label class="control-label">Date ANO</label>
             <div class="controls">
               <input
                 type="date"
@@ -2392,25 +2392,25 @@ isButtunAddDossierCandidat
             </div>
           </div>
             <div class="control-group">
-            <label class="control-label">reference ano dmp</label>
+            <label class="control-label">Référence ANO DMP</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editAno.ref_ano_dmp"
                 class="span"
-                placeholder="Saisir le ref ano dmp"
+                placeholder="Saisir la référence ano dmp"
               />
             </div>
           </div>
          
            <div class="control-group">
-            <label class="control-label">Numero courrier</label>
+            <label class="control-label">Numéro du courrier</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editAno.numero_courie"
                 class="span"
-                placeholder="Saisir le numero du courrier"
+                placeholder="Saisir le numéro du courrier"
               />
             </div>
           </div>
@@ -2452,7 +2452,7 @@ isButtunAddDossierCandidat
         <div id="myAlert" class="modal hide tlg" aria-hidden="true" style="display: none;">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter  offre</h3>
+                <h3>Ajouter l'offre</h3>
             </div>
             
             <div class="modal-body">
@@ -2462,7 +2462,7 @@ isButtunAddDossierCandidat
                             <tr>
                             <td>
                         <div class="control-group">
-                            <label class="control-label">Type de procedure <code>*</code> :</label>
+                            <label class="control-label">Type de procédure <code>*</code> :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Type appel" v-model="formData.type_appel" disabled>
                             </div>
@@ -2470,9 +2470,9 @@ isButtunAddDossierCandidat
                             </td>
                             <td colspan="2" width="250">
                         <div class="control-group">
-                            <label class="control-label">Reference  offre <code>*</code> :</label>
+                            <label class="control-label">Référence de l'offre <code>*</code> :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Reference d'appel" v-model="formData.ref_appel">
+                                <input type="text" class="span5" placeholder="Référence d'appel" v-model="formData.ref_appel">
                             </div>
                         </div>
                             </td>
@@ -2480,9 +2480,9 @@ isButtunAddDossierCandidat
                             <tr>
                             <td colspan="3" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet  offre :</label>
+                            <label class="control-label">Objet de l'offre</label>
                             <div class="controls">
-                                 <textarea  v-model="formData.objet_appel"  class="textarea_editor span8" rows="3" placeholder="Entre le  text ..."></textarea>
+                                 <textarea  v-model="formData.objet_appel"  class="textarea_editor span8" rows="3" placeholder="Entrer le  texte ..."></textarea>
                     
                             </div>
                         </div>
@@ -2492,8 +2492,8 @@ isButtunAddDossierCandidat
                                 <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date emission <code>*</code></label>
-                                <input type="date" class="span" placeholder="Date emision" v-model="formData.date_emission">
+                                <label>Date d émission <code>*</code></label>
+                                <input type="date" class="span" placeholder="Date d'émision" v-model="formData.date_emission">
                             </div>
                         </div>
                                 </td>
@@ -2519,7 +2519,7 @@ isButtunAddDossierCandidat
                 </div>
             </div>
             <div class="modal-footer">  <a @click.prevent="ajouter" class="btn btn-primary"
-                                           href="#">Valider</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                                           href="#">Valider</a> <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
         <!-- Fin ajouter appel offres --->
         <!--<fab :actions="fabActions" @cache="afficherModalAjouterActeDepense" main-icon="apps" bg-color="green"></fab>-->
@@ -2531,7 +2531,7 @@ isButtunAddDossierCandidat
         <div id="modificationModal" class="modal hide taillemodal">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification  offre</h3>
+                <h3>Modification de l'offre</h3>
             </div>
             <div class="modal-body">
                 <div class="widget-box">
@@ -2540,7 +2540,7 @@ isButtunAddDossierCandidat
                     <tr>
                        <td>
                         <div class="control-group">
-                            <label class="control-label">Type de procedure  :</label>
+                            <label class="control-label">Type de procédure  :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="" v-model="edite_appel_offre.type_appel">
                             </div>
@@ -2548,9 +2548,9 @@ isButtunAddDossierCandidat
                             </td>
                                 <td colspan="2" width="250">
                         <div class="control-group">
-                            <label class="control-label">Reference  offre  :</label>
+                            <label class="control-label">Référence de l'offre:</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Reference d'appel" v-model="edite_appel_offre.ref_appel">
+                                <input type="text" class="span5" placeholder="Référence d'appel" v-model="edite_appel_offre.ref_appel">
                             </div>
                         </div>
                             </td>
@@ -2558,9 +2558,9 @@ isButtunAddDossierCandidat
                                    <tr>
                             <td colspan="3" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet  offre :</label>
+                            <label class="control-label">Objet de l'offre :</label>
                             <div class="controls">
-                                 <textarea   v-model="edite_appel_offre.objet_appel"  class="textarea_editor span7" rows="3" placeholder="Entre le  text ..."></textarea>
+                                 <textarea   v-model="edite_appel_offre.objet_appel"  class="textarea_editor span7" rows="3" placeholder="Entrer le texte ..."></textarea>
                     
                             </div>
                         </div>
@@ -2570,8 +2570,8 @@ isButtunAddDossierCandidat
                              <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Date emission </label>
-                                <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
+                                <label>Date d'émission </label>
+                                <input type="date" class="span" placeholder="Date d'émission" v-model="edite_appel_offre.date_emission">
                             </div>
                         </div>
                                 </td>
@@ -2665,9 +2665,9 @@ isButtunAddDossierCandidat
 
                          <div class="control-group">
             
-                            <label class="control-label">Numero lot <code>*</code> :</label>
+                            <label class="control-label">Numéro lot <code>*</code> :</label>
                            <div class="control-group">
-                       <input type="text" class="span" placeholder="Numero lo" v-model="formLot.numero_lot">
+                       <input type="text" class="span" placeholder="Numéro lot" v-model="formLot.numero_lot">
                             </div>
                         </div>
 
@@ -2711,7 +2711,7 @@ isButtunAddDossierCandidat
             </div>
             <div class="modal-footer">
                 <a class="btn btn-primary" @click.prevent="ajouterL()">Ajouter</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+                <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
             </div>
         </div>
         <!--Fin gestion de lot-->
@@ -2746,9 +2746,9 @@ isButtunAddDossierCandidat
 
                             <td>
                         <div class="control-group">
-                            <label class="control-label">Numero lot :</label>
+                            <label class="control-label">Numéro du lot :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Numero lo" v-model="edite_lot.numero_lot">
+                                <input type="text" class="span5" placeholder="Numéro du lot" v-model="edite_lot.numero_lot">
                             </div>
                         </div>
                             </td>
@@ -2766,7 +2766,7 @@ isButtunAddDossierCandidat
                          <tr>
                              <td colspan="3">
                         <div class="control-group">
-                            <label class="control-label">Montant lot :</label>
+                            <label class="control-label">Montant du lot :</label>
                             <div class="controls">
                                 <input type="text" class="span5" placeholder="Montant lot" v-model="edite_lot.montant_lot">
                             </div>
@@ -2854,7 +2854,7 @@ isButtunAddDossierCandidat
                                   <div class="control-group">
                             <label class="control-label">Formil propo tech :</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="Piece Admin" v-model="formOffreTechnique.formil_propo_tech">
+                                <input type="text" class="span" placeholder="Pièce Administrative" v-model="formOffreTechnique.formil_propo_tech">
                             </div>
                         </div>
                             </td>
@@ -2909,7 +2909,7 @@ isButtunAddDossierCandidat
                         <tr>
                              <td>
                                 <div class="control-group">
-                            <label class="control-label">Capacite financiere :</label>
+                            <label class="control-label">Capacité financière :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Capacite financiere" v-model="formOffreTechnique.capacite_financiere">
                             </div>
@@ -2925,9 +2925,9 @@ isButtunAddDossierCandidat
                             </td>
                             <td>
                                 <div class="control-group">
-                            <label class="control-label">Capacite techn expe :</label>
+                            <label class="control-label">Capacité techn expe :</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="Capacite techn exp" v-model="formOffreTechnique.capacite_techn_exp">
+                                <input type="text" class="span" placeholder="Capacité techn exp" v-model="formOffreTechnique.capacite_techn_exp">
                             </div>
                         </div>
 
@@ -2937,8 +2937,8 @@ isButtunAddDossierCandidat
                 </div>
             </div>
             <div class="modal-footer">
-                <button @click.prevent="ajouterOffreT" class="btn btn-primary">Ajouer</button>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <button @click.prevent="ajouterOffreT" class="btn btn-primary">Ajouter</button>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
         <div id="offreF" class="modal hide modaloffreFin">
             <div class="modal-header">
@@ -2982,9 +2982,9 @@ isButtunAddDossierCandidat
                 <td>
 
                     <div class="control-group">
-                        <label class="control-label">Quantite :</label>
+                        <label class="control-label">Quantité :</label>
                         <div class="controls">
-                            <input type="number" class="span" placeholder="quantite" v-model="formOffreFinanciere.quantite">
+                            <input type="number" class="span" placeholder="Quantité" v-model="formOffreFinanciere.quantite">
                         </div>
                     </div>
 
@@ -3019,7 +3019,7 @@ isButtunAddDossierCandidat
 
                 <td>
                     <div class="control-group">
-                        <label class="control-label">Tva</label>
+                        <label class="control-label">TVA</label>
                         <div class="controls">
                             <input type="number" readonly :value="montantTva" class="span" />
                         </div>
@@ -3027,7 +3027,7 @@ isButtunAddDossierCandidat
                 </td>
                 <td>
                     <div class="control-group">
-                        <label class="control-label">Montant total ht :</label>
+                        <label class="control-label">Montant total HT :</label>
                         <div class="controls">
                             <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHT">
                         </div>
@@ -3038,9 +3038,9 @@ isButtunAddDossierCandidat
 
               <td>
                 <div class="control-group">
-                            <label class="control-label">Montant totat ttc :</label>
+                            <label class="control-label">Montant totat TTC :</label>
                             <div class="controls">
-                                <input type="text"  readonly  class="span" placeholder="Montant total ttc" :value="montantHTt">
+                                <input type="text"  readonly  class="span" placeholder="Montant total TTC" :value="montantHTt">
                             </div>
                         </div>
               </td>
@@ -3051,16 +3051,16 @@ isButtunAddDossierCandidat
                 
             </div>
             <div class="modal-footer">
-                <button @click.prevent="ajouterOffreF()" class="btn btn-primary">Ajouer</button>
+                <button @click.prevent="ajouterOffreF()" class="btn btn-primary">Ajouter</button>
                 <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
 
 
        <div id="modificationOffre" class="modal hide modaloffreFin">
         <div class="modal-header">
             <button data-dismiss="modal" class="close" type="button">×</button>
-            <h3>Modification offre financier</h3>
+            <h3>Modification de l'offre financier</h3>
         </div>
         <div class="modal-body">
             <table class="table table-bordered table-striped">
@@ -3098,9 +3098,9 @@ isButtunAddDossierCandidat
                     <td>
 
                         <div class="control-group">
-                            <label class="control-label">Quantite :</label>
+                            <label class="control-label">Quantité :</label>
                             <div class="controls">
-                                <input type="number" class="span" placeholder="quantite" v-model="modification_offre_finnancier_recupere.quantite">
+                                <input type="number" class="span" placeholder="quantité" v-model="modification_offre_finnancier_recupere.quantite">
                             </div>
                         </div>
 
@@ -3135,7 +3135,7 @@ isButtunAddDossierCandidat
 
                     <td>
                         <div class="control-group">
-                            <label class="control-label">Tva</label>
+                            <label class="control-label">TVA</label>
                             <div class="controls">
                                 <input type="number" readonly :value="montantTvaEdite" class="span" />
                             </div>
@@ -3143,7 +3143,7 @@ isButtunAddDossierCandidat
                     </td>
                     <td>
                         <div class="control-group">
-                            <label class="control-label">Montant total ht :</label>
+                            <label class="control-label">Montant total HT :</label>
                             <div class="controls">
                                 <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHTEdite">
                             </div>
@@ -3154,9 +3154,9 @@ isButtunAddDossierCandidat
 
                     <td>
                         <div class="control-group">
-                            <label class="control-label">Montant totat ttc :</label>
+                            <label class="control-label">Montant totat TTC :</label>
                             <div class="controls">
-                                <input type="text"  readonly  class="span" placeholder="Montant total ttc" :value="montantHTtEdite">
+                                <input type="text"  readonly  class="span" placeholder="Montant total TTC" :value="montantHTtEdite">
                             </div>
                         </div>
                     </td>
@@ -3175,7 +3175,7 @@ isButtunAddDossierCandidat
     <div id="modificationOffreT" class="modal hide tailleModalOffre2">
         <div class="modal-header">
             <button data-dismiss="modal" class="close" type="button">×</button>
-            <h3>Modification d'offre technique</h3>
+            <h3>Modification de l'offre technique</h3>
         </div>
         <div class="modal-body">
             <div class="widget-box">
@@ -3286,9 +3286,9 @@ isButtunAddDossierCandidat
                     <tr>
                         <td>
                             <div class="control-group">
-                                <label class="control-label">Capacite financiere :</label>
+                                <label class="control-label">Capacité financière :</label>
                                 <div class="controls">
-                                    <input type="text" class="span" placeholder="Capacite financiere" v-model="edit_offre_technique_recupere.capacite_financiere">
+                                    <input type="text" class="span" placeholder="Capacité financière" v-model="edit_offre_technique_recupere.capacite_financiere">
                                 </div>
                             </div>
                         </td>
@@ -3315,7 +3315,7 @@ isButtunAddDossierCandidat
         </div>
         <div class="modal-footer">
             <button @click.prevent="editeOffreT" class="btn btn-primary">Modification</button>
-            <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+            <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
     </div>
 
 
@@ -3325,7 +3325,7 @@ isButtunAddDossierCandidat
         <div id="ajouterLettreInvitation" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter lettre d'invitation</h3>
+                <h3>Ajouter la lettre d'invitation</h3>
             </div>
             <div class="modal-body">
            
@@ -3342,24 +3342,24 @@ isButtunAddDossierCandidat
 
 
                     <div class="control-group">
-                        <label class="control-label">Date lettre</label>
+                        <label class="control-label">Date de la lettre</label>
                         <div class="controls">
                             <input
                                     type="date"
                                     v-model="formLettre.date_lettre"
                                     class="span"
-                                    placeholder="Saisir le nom_bailleur"
+                                    placeholder="Saisir le nom du bailleur"
                             />
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Refernece lettre</label>
+                        <label class="control-label">Référence de la lettre</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="formLettre.ref_lettre"
                                     class="span"
-                                    placeholder="Saisir l"
+                                    placeholder="Saisir la référence"
                             />
                         </div>
                     </div>
@@ -3370,16 +3370,16 @@ isButtunAddDossierCandidat
                                     type="text"
                                     v-model="formLettre.destination"
                                     class="span"
-                                    placeholder="Saisir "
+                                    placeholder="Saisir le destinataire"
                             />
                         </div>
                     </div>
 
 
                       <div class="control-group">
-          <label class="control-label">Objet de lettre:</label>
+          <label class="control-label">Objet de la lettre:</label>
             <div class="controls">
-              <textarea  v-model="formLettre.objet_lettre"  class=" span" rows="" placeholder="Enter text ..."></textarea>
+              <textarea  v-model="formLettre.objet_lettre"  class=" span" rows="" placeholder="Entrer texte ..."></textarea>
             </div>
           
         </div>
@@ -3387,7 +3387,7 @@ isButtunAddDossierCandidat
 
 
                     <div class="control-group">
-                        <label class="control-label">Date cojo</label>
+                        <label class="control-label">Date de la COJO</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -3408,12 +3408,12 @@ isButtunAddDossierCandidat
             </div>
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterLettreInv()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
         <div id="modificationLettreInvitation" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification lettre invitation</h3>
+                <h3>Modification de la lettre d'invitation</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -3431,24 +3431,24 @@ isButtunAddDossierCandidat
 
 
                     <div class="control-group">
-                        <label class="control-label">Date lettre</label>
+                        <label class="control-label">Date de la lettre</label>
                         <div class="controls">
                             <input
                                     type="date"
                                     v-model="edite_lettre_invitation.date_lettre"
                                     class="span"
-                                    placeholder="Saisir le nom_bailleur"
+                                    placeholder="Saisir le nom bailleur"
                             />
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Refernece lettre</label>
+                        <label class="control-label">Référence de la lettre</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="edite_lettre_invitation.ref_lettre"
                                     class="span"
-                                    placeholder="Saisir l"
+                                    placeholder="Saisir la référence"
                             />
                         </div>
                     </div>
@@ -3466,7 +3466,7 @@ isButtunAddDossierCandidat
 
 
                     <div class="control-group">
-                        <label class="control-label">Date cojo</label>
+                        <label class="control-label">Date de la COJO</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -3495,14 +3495,14 @@ isButtunAddDossierCandidat
         <div id="ajouterMantater" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter mandaté</h3>
+                <h3>Ajouter le mandaté</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
 
 
                     <div class="control-group">
-                        <label class="control-label">Lettre Invitation</label>
+                        <label class="control-label">Lettre d'invitation</label>
                         <div class="controls">
                             <select v-model="formMandater.lettre_invitation_id" class="span">
                                 <option v-for="plans in lettreInvitationAMarche(marcheid)" :key="plans.id"
@@ -3535,18 +3535,18 @@ isButtunAddDossierCandidat
                             <input type="text"
                                     v-model="formMandater.nom_mandat"
                                     class="span"
-                                    placeholder="Nom mandater"
+                                    placeholder="Nom du mandaté"
                             />
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Prenom</label>
+                        <label class="control-label">Prénom</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="formMandater.prenom_nom"
                                     class="span"
-                                    placeholder="Prenom "
+                                    placeholder="Prénom "
                             />
                         </div>
                     </div>
@@ -3570,19 +3570,19 @@ isButtunAddDossierCandidat
             </div>
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterMandaterA()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
         <div id="modificationMantater" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification de mandater</h3>
+                <h3>Modification du mandaté</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
 
 
                     <div class="control-group">
-                        <label class="control-label">Lettre Invitation</label>
+                        <label class="control-label">Lettre d'invitation</label>
                         <div class="controls">
                             <select v-model="editer_mandater.lettre_invitation_id" class="span">
                                 <option v-for="plans in lettreInvitationAMarche(marcheid)" :key="plans.id"
@@ -3604,23 +3604,23 @@ isButtunAddDossierCandidat
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Nom mandater :</label>
+                        <label class="control-label">Nom du mandaté :</label>
                         <div class="controls">
                             <input type="text"
                                    v-model="editer_mandater.nom_mandat"
                                    class="span"
-                                   placeholder="Nom mandater"
+                                   placeholder="Nom du mandaté"
                             />
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Prenom :</label>
+                        <label class="control-label">Prénom :</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="editer_mandater.prenom_nom"
                                     class="span"
-                                    placeholder="Prenom "
+                                    placeholder="Prénom "
                             />
                         </div>
                     </div>
@@ -3655,7 +3655,7 @@ isButtunAddDossierCandidat
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="control-group">
-                        <label class="control-label">Numero dossier APPEL OFFRE</label>
+                        <label class="control-label">Numéro dossier d'Appel d'offre</label>
                         <div class="controls">
                             <input disabled
                                    type="text"
@@ -3666,7 +3666,7 @@ isButtunAddDossierCandidat
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Lettre Invitation</label>
+                        <label class="control-label">Lettre d'invitation</label>
                         <div class="controls">
                             <select v-model="formDataCojo.lettre_invitation_id" class="span" disabled>
                                 <option v-for="plans in lettreInvitationAMarche(marcheid)" :key="plans.id"
@@ -3676,7 +3676,7 @@ isButtunAddDossierCandidat
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Date invitation</label>
+                        <label class="control-label">Date d'invitation</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -3687,13 +3687,13 @@ isButtunAddDossierCandidat
                         </div>
                     </div>
                     <div class="control-group">
-                          <label class="control-label">Controleur finnancier</label>
+                          <label class="control-label">Contrôleur financier</label>
                         <div class="controls">
                             <input disabled
                                     type="text"
                                     v-model="formDataCojo.controleur_finnancier"
                                     class="span"
-                                    placeholder="Controller Finnancier"
+                                    placeholder="Contrôleur Financier"
                             />
                         </div>
                     </div>
@@ -3709,7 +3709,7 @@ isButtunAddDossierCandidat
 
 
                     <div class="control-group">
-                        <label class="control-label">Date composition</label>
+                        <label class="control-label">Date de composition</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -3724,7 +3724,7 @@ isButtunAddDossierCandidat
 
 
                     <div class="control-group">
-                        <label class="control-label">NBR participant</label>
+                        <label class="control-label">Nombre de participant</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -3739,20 +3739,20 @@ isButtunAddDossierCandidat
             </div>
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterCojoMarche()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
 
         <div id="modificationCojo" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification de cojo</h3>
+                <h3>Modification de la COJO</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
 
 
                     <div class="control-group">
-                        <label class="control-label">Numero dossier APPEL OFFRE</label>
+                        <label class="control-label">Numéro dossier Appel d'Offre</label>
                         <div class="controls">
                             <input disabled
                                     type="text"
@@ -3762,7 +3762,7 @@ isButtunAddDossierCandidat
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Lettre Invitation</label>
+                        <label class="control-label">Lettre d'invitation</label>
                         <div class="controls">
                             <select v-model="edite_cojo.lettre_invitation_id" class="span" disabled>
                                 <option v-for="plans in lettreInvitationAMarche(marcheid)" :key="plans.id"
@@ -3773,7 +3773,7 @@ isButtunAddDossierCandidat
 
 
                     <div class="control-group">
-                        <label class="control-label">Date invitation</label>
+                        <label class="control-label">Date d'invitation</label>
                         <div class="controls">
                             <input disabled
                                    type="date"
@@ -3786,7 +3786,7 @@ isButtunAddDossierCandidat
 
 
                     <div class="control-group">
-                        <label class="control-label">Date composition</label>
+                        <label class="control-label">Date de composition</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -3798,7 +3798,7 @@ isButtunAddDossierCandidat
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">NBR participant</label>
+                        <label class="control-label">Nombre de participant</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -3811,7 +3811,7 @@ isButtunAddDossierCandidat
             </div>
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationCojo()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
         <!--Fin mandater-->
 
@@ -3819,14 +3819,14 @@ isButtunAddDossierCandidat
         <div id="ajouterMP" class="modal hide grdirModalAnalyse">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter dossier analyse</h3>
+                <h3>Ajouter dossier d'analyse</h3>
             </div>
 
                 <table class="table table-bordered table-striped">
                         <tr>
                             <td>
                         <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                             <select v-model="formAnalyseDossier.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(marcheid)" :key="plans.id"
@@ -3837,7 +3837,7 @@ isButtunAddDossierCandidat
                             </td>
                             <td>
                      <div class="control-group">
-                        <label class="control-label">Dossier candidat</label>
+                        <label class="control-label">Dossier du candidat</label>
                         <div class="controls">
                             <select v-model="formAnalyseDossier.dossier_candidat_id" class="span">
                                 <option v-for="plans in dossierCandidature(marcheid)" :key="plans.id"
@@ -3851,7 +3851,7 @@ isButtunAddDossierCandidat
                      <td>
                        
                     <div class="control-group">
-                        <label class="control-label">Controleur financier</label>
+                        <label class="control-label">Contrôleur financier</label>
                         <div class="controls">
                             <select v-model="formAnalyseDossier.cojo_id" class="span">
                                 <option v-for="plans in listeCojo(marcheid)" :key="plans.id"
@@ -3863,7 +3863,7 @@ isButtunAddDossierCandidat
 
                               <td>
                         <div class="control-group">
-                        <label class="control-label">Type analyse</label>
+                        <label class="control-label">Type d'analyse</label>
                         <div class="controls">
                             <select v-model="formAnalyseDossier.type_analyse_id" class="span">
                                 <option v-for="plans in typeAnalyses" :key="plans.id"
@@ -3951,21 +3951,21 @@ isButtunAddDossierCandidat
             
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterAnalyseD()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
 
 
         <div id="modificationAajouterAnalys01" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification du dossier Analyse</h3>
+                <h3>Modification du dossier d'analyse</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
 
 
                     <div class="control-group">
-                        <label class="control-label">Dossier candidat</label>
+                        <label class="control-label">Dossier du candidat</label>
                         <div class="controls">
                             <select v-model="edite_analyse_dossier.dossier_candidat_id" class="span">
                                 <option v-for="plans in dossierCandidature(marcheid)" :key="plans.id"
@@ -3975,7 +3975,7 @@ isButtunAddDossierCandidat
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Controleur financier</label>
+                        <label class="control-label">Contrôleur financier</label>
                         <div class="controls">
                             <select v-model="edite_analyse_dossier.cojo_id" class="span">
                                 <option v-for="plans in listeCojo(marcheid)" :key="plans.id"
@@ -3984,7 +3984,7 @@ isButtunAddDossierCandidat
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Type analyse</label>
+                        <label class="control-label">Type d'analyse</label>
                         <div class="controls">
                             <select v-model="edite_analyse_dossier.type_analyse_id" class="span">
                                 <option v-for="plans in typeAnalyses" :key="plans.id"
@@ -3994,7 +3994,7 @@ isButtunAddDossierCandidat
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Rang analyse :</label>
+                        <label class="control-label">Rang d'analyse:</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -4040,7 +4040,7 @@ isButtunAddDossierCandidat
             </div>
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationDossierAnalyse()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
         <!--Fin cojo-->
 
@@ -4050,20 +4050,20 @@ isButtunAddDossierCandidat
         <div id="ajouterDemandeAno" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter demande ANO</h3>
+                <h3>Ajouter demande d'ANO</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
 
 
                  <div class="control-group">
-                        <label class="control-label">reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                             <input disabled
                                     type="text"
                                     v-model="formDemande.ref_marche	"
    Ajouter avis bailleur                                 class="span"
-                                    placeholder="Saisir le ref marche"
+                                    placeholder="Saisir la référence marché"
                             />
                         </div>
                     </div>
@@ -4080,26 +4080,26 @@ isButtunAddDossierCandidat
 
 
                      <div class="control-group">
-                        <label class="control-label">Numero du courrier</label>
+                        <label class="control-label">Numéro du courrier</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="formDemande.num_courrier"
                                     class="span"
-                                    placeholder="Saisir le numero du courrier"
+                                    placeholder="Saisir le numéro du courrier"
                             />
                         </div>
                     </div>
 
                     <div class="control-group">
 
-                        <label class="control-label">Date de demande</label>
+                        <label class="control-label">Date de la demande</label>
                         <div class="controls">
                             <input
                                     type="date"
                                     v-model="formDemande.date_demande"
                                     class="span"
-                                    placeholder="Saisir le libelle_type"
+                                    placeholder="Saisir le libellé"
                             />
                         </div>
                     </div>
@@ -4152,13 +4152,13 @@ isButtunAddDossierCandidat
                 <form class="form-horizontal">
 
                      <div class="control-group">
-                        <label class="control-label">reference marché</label>
+                        <label class="control-label">Référence du marché</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="edite_demande_dao.ref_marche	"
                                     class="span"
-                                    placeholder="Saisir le ref marche"
+                                    placeholder="Saisir la réf marché"
                             />
                         </div>
                     </div>
@@ -4171,26 +4171,26 @@ isButtunAddDossierCandidat
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Numero du courrier</label>
+                        <label class="control-label">Numéro du courrier</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="edite_demande_dao.num_courrier"
                                     class="span"
-                                    placeholder="Saisir le numero du courrier"
+                                    placeholder="Saisir le numéro du courrier"
                             />
                         </div>
                     </div>
 
                     <div class="control-group">
 
-                        <label class="control-label">Date de demande</label>
+                        <label class="control-label">Date de la demande</label>
                         <div class="controls">
                             <input
                                     type="date"
                                     v-model="edite_demande_dao.date_demande"
                                     class="span"
-                                    placeholder="Saisir le libelle_type"
+                                    placeholder="Saisir le libellé"
                             />
                         </div>
                     </div>
@@ -4228,7 +4228,7 @@ isButtunAddDossierCandidat
             <tr>
               <td>
                  <div class="control-group">
-                        <label class="control-label">Reference d'offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                         <input type="text" :value="afficherIdMarche(detail_marche.id)" class="span4" readonly>
                         </div>
@@ -4236,7 +4236,7 @@ isButtunAddDossierCandidat
               </td>
                <td>
                 <div class="control-group">
-                        <label class="control-label">Reference courrier ano</label>
+                        <label class="control-label">Référence du courrier d'ANO</label>
                         <div class="controls" v-if="demandeAnoAnalyseDMP(marcheid)">
                         <input type="text" :value="demandeAnoAnalyseDMP(marcheid).num_courrier" class="span4" readonly>
                         </div>
@@ -4302,7 +4302,7 @@ isButtunAddDossierCandidat
         <div id="editeDMP" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifie Analyse DMP</h3>
+                <h3>Modifier Analyse DMP</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -4315,7 +4315,7 @@ isButtunAddDossierCandidat
                     </div>-->
 
                      <div class="control-group" v-if="edite_analyse_dpm">
-                        <label class="control-label">Courier ano</label>
+                        <label class="control-label">Courrier d'ANO</label>
                         <div class="controls" >
                             <select v-model="edite_analyse_dpm.demande_ano_id" class="span" disabled>
                                 <option v-for="varText in demandeAno(marcheid)" :key="varText.id"
@@ -4325,7 +4325,7 @@ isButtunAddDossierCandidat
                     </div>
 
                       <div class="control-group">
-                        <label class="control-label">Decision</label>
+                        <label class="control-label">Décision</label>
                         <div class="controls">
                           <select v-model="edite_analyse_dpm.avis_bail" class="span">
                                 <option value="0">Objection</option>
@@ -4335,13 +4335,13 @@ isButtunAddDossierCandidat
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Date avis</label>
+                        <label class="control-label">Date d'avis</label>
                         <div class="controls">
                             <input
                                     type="date"
                                     v-model="edite_analyse_dpm.date_avis_bail"
                                     class="span"
-                                    placeholder="Saisir le libelle_type"
+                                    placeholder="Saisir le libellé"
                             />  
                         </div>
                     </div>
@@ -4354,7 +4354,7 @@ isButtunAddDossierCandidat
                                     type="text"
                                     v-model="edite_analyse_dpm.observation"
                                     class="span"
-                                    placeholder="Saisir le libelle_type"
+                                    placeholder="Saisir le libellé"
                             />
                         </div>
                     </div>
@@ -4393,7 +4393,7 @@ isButtunAddDossierCandidat
                         <tr>
                             <td>
                         <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                             <select v-model="formAno.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(marcheid)" :key="plans.id"
@@ -4414,13 +4414,13 @@ isButtunAddDossierCandidat
 
                             <td>
                      <div class="control-group">
-                        <label class="control-label">Reference du  courrier </label>
+                        <label class="control-label">Référence du courrier </label>
                         <div class="controls">
                             <input
                                     type="text"
                                   v-model="formAno.numero_courie"  
                                     class="span"
-                                    placeholder="saisir la reference du courrier"
+                                    placeholder="Saisir la référence du courrier"
                             />
                         </div>
                     </div>
@@ -4432,7 +4432,7 @@ isButtunAddDossierCandidat
                         <tr>
                             <td>
                                 <div class="control-group" v-if="analyseDMPValider(marcheid)">
-                                    <label class="control-label">Reference PV</label>
+                                    <label class="control-label">Référence du PV</label>
                                     <div class="controls">
                                         <input type="text" :value="analyseDMPValider(marcheid).demande_ano.proce_verbal_offre.reference" readonly class="span">
                                     </div>
@@ -4455,7 +4455,7 @@ isButtunAddDossierCandidat
                             <td>
 
                       <div class="control-group">
-                        <label class="control-label">Date avis</label>
+                        <label class="control-label">Date d'avis</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -4485,7 +4485,7 @@ isButtunAddDossierCandidat
                      <div class="control-group">
           <label class="control-label">Observation:</label>
             <div class="controls">
-              <textarea  v-model="formAno.observations_bailleur" :readonly="afficherMotifBailleur"  class="textarea_editor span7" rows="3" placeholder="Entrer le text ..."></textarea>
+              <textarea  v-model="formAno.observations_bailleur" :readonly="afficherMotifBailleur"  class="textarea_editor span7" rows="3" placeholder="Entrer le texte ..."></textarea>
             </div>
           
         </div>
@@ -4522,7 +4522,7 @@ isButtunAddDossierCandidat
 
                                <td>
                         <div class="control-group" v-if="edite_ano_bailleur_dmp">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                             <select v-model="edite_ano_bailleur_dmp.annalyse_d_m_p.demande_ano.proce_verbal_offre.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(marcheid)" :key="plans.id"
@@ -4535,13 +4535,13 @@ isButtunAddDossierCandidat
                             <td>
 
                      <div class="control-group">
-                        <label class="control-label">Avi dmp</label>
+                        <label class="control-label">Avis DMP</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="edite_ano_bailleur_dmp.ref_ano_dmp	"
                                     class="span"
-                                    placeholder="Saisir le ref marche"
+                                    placeholder="Saisir la réf marché"
                             />
                         </div>
                     </div>
@@ -4552,13 +4552,13 @@ isButtunAddDossierCandidat
 
 
                      <div class="control-group">
-                        <label class="control-label">Reference du courrier</label>
+                        <label class="control-label">Référence du courrier</label>
                         <div class="controls">
                             <input
                                     type="text" v-model="edite_ano_bailleur_dmp.numero_courie"
                                     
                                     class="span5"
-                                    placeholder="Saisir le numero du courrier"
+                                    placeholder="Saisir le numéro du courrier"
                             />
                         </div>
                     </div>
@@ -4586,7 +4586,7 @@ isButtunAddDossierCandidat
                                     type="date"
                                     v-model="edite_ano_bailleur_dmp.date_ano_dmp"
                                     class="span"
-                                    placeholder="Saisir le libelle_type"
+                                    placeholder="Saisir le libellé"
                             />
                         </div>
                     </div>
@@ -4607,7 +4607,7 @@ isButtunAddDossierCandidat
                      <div class="control-group">
             <label class="control-label">Motif:</label>
             <div class="controls">
-              <textarea  v-model="edite_ano_bailleur_dmp.observations_bailleur"   class="textarea_editor span10" rows="4" placeholder="Enter text ..."></textarea>
+              <textarea  v-model="edite_ano_bailleur_dmp.observations_bailleur"   class="textarea_editor span10" rows="4" placeholder="Enter texte ..."></textarea>
               </div>
           
         </div>
@@ -4632,7 +4632,7 @@ isButtunAddDossierCandidat
     <div id="ajouter_membre_cojo" class="modal hide" aria-hidden="true" style="display: none;">
         <div class="modal-header">
             <button data-dismiss="modal" class="close" type="button">×</button>
-            <h3>Ajouter un autre membre de la cojo </h3>
+            <h3>Ajouter un autre membre de la COJO </h3>
         </div>
         <div class="modal-body">
             <div class="widget-box">
@@ -4653,9 +4653,9 @@ isButtunAddDossierCandidat
 
                                 <div class="control-group">
 
-                                    <label class="control-label">Nom et prenom <code>*</code> :</label>
+                                    <label class="control-label">Nom et prénom <code>*</code> :</label>
                                     <div class="control-group">
-                                        <input type="text" class="span" placeholder="Numero lo" v-model="formDataMembreCojo.nom_prenom">
+                                        <input type="text" class="span" placeholder="Numéro lot" v-model="formDataMembreCojo.nom_prenom">
 
 
                                     </div>
@@ -4669,14 +4669,14 @@ isButtunAddDossierCandidat
 
                                 <div class="control-group">
 
-                                    <label class="control-label span5">Role <code>*</code> :</label>
+                                    <label class="control-label span5">Rôle <code>*</code> :</label>
 
                                     <div class="controls">
                                         <select class="span4" v-model="formDataMembreCojo.role">
                                             <option></option>
                                             <option value="Autorité contractante">Autorité contractante</option>
-                                            <option value="DMP">Direction des marchés publique</option>
-                                            <option value="Béneficiare">Béneficiaire</option>
+                                            <option value="DMP">Direction des Marchés Publics</option>
+                                            <option value="Béneficiare">Bénéficiaire</option>
                                             <option value="Rapporteur">Rapporteur</option>
                                             <option value="Service technique">Service technique</option>
                                             <option value="Autre">Autre</option>
@@ -4697,14 +4697,14 @@ isButtunAddDossierCandidat
         </div>
         <div class="modal-footer">
             <a class="btn btn-primary" @click.prevent="ajouterMembreCojoM()">Ajouter</a>
-            <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+            <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
         </div>
     </div>
 
     <div id="modification_membre_cojo" class="modal hide" aria-hidden="true" style="display: none;">
         <div class="modal-header">
             <button data-dismiss="modal" class="close" type="button">×</button>
-            <h3>modification  </h3>
+            <h3>Modification  </h3>
         </div>
         <div class="modal-body">
             <div class="widget-box">
@@ -4725,9 +4725,9 @@ isButtunAddDossierCandidat
 
                                 <div class="control-group">
 
-                                    <label class="control-label">Nom et prenom <code>*</code> :</label>
+                                    <label class="control-label">Nom et prénom <code>*</code> :</label>
                                     <div class="control-group">
-                                        <input type="text" class="span" placeholder="Numero lo" v-model="edite_membre_cojo.nom_prenom">
+                                        <input type="text" class="span" placeholder="Numéro lo" v-model="edite_membre_cojo.nom_prenom">
 
 
                                     </div>
@@ -4741,15 +4741,15 @@ isButtunAddDossierCandidat
 
                                 <div class="control-group">
 
-                                    <label class="control-label span5">Role <code>*</code> :</label>
+                                    <label class="control-label span5">Rôle <code>*</code> :</label>
 
                                     <div class="controls">
                                         <select class="span4" v-model="edite_membre_cojo.role">
                                             <option></option>
-                                            <option value="Controller finnancier">Controller finnancier</option>
+                                            <option value="Contrôleur financier">Contrôleur financier</option>
                                             <option value="Autorité contractante">Autorité contractante</option>
-                                            <option value="DMP">Direction des marchés publique</option>
-                                            <option value="Béneficiare">Béneficiaire</option>
+                                            <option value="DMP">Direction des Marchés Publics</option>
+                                            <option value="Béneficiare">Bénéficiaire</option>
                                             <option value="Rapporteur">Rapporteur</option>
                                             <option value="Service technique">Service technique</option>
                                             <option value="Autre">Autre</option>
@@ -4770,7 +4770,7 @@ isButtunAddDossierCandidat
         </div>
         <div class="modal-footer">
             <a class="btn btn-primary" @click.prevent="editeMembreCojoM()">Ajouter</a>
-            <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+            <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
         </div>
     </div>
 

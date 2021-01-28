@@ -84,7 +84,7 @@ marche_id
 
   <!--Integration ACt-->
 
-  <div id="ajouterAvisBailleur" class="modal hide grdirModalActeEffet" >
+  <div id="ajouterBailleurModeGreAgre" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Information du Bailleur sur le : Lot N° {{infoLot.numero_lot}} {{infoLot.objet}}</h3>
@@ -621,7 +621,15 @@ pvTraitement(){
       'modifierAnoDMPBailleur','getAnoDMPBailleur','getAnalyseDMP',"modificationProceVerbalOffre2"]),
 
 
-
+ afficheAnoDPMBailleurModale(index){
+                this.$('#ModalModification').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edit_bailleur = this.listeAnoDMPBailleur(this.macheid)[index];
+                //this.mode_passation_id=this.edite_appel_offre.mode_passation_id
+                //console.log(this.mode_passation_id)
+            },
 
     OnchangeFichierDemandeAno(e) {
       const files = e.target.files;
@@ -727,7 +735,7 @@ afficherModalDecisionAnocf(index){
     },
 
     afficheModaleAnoBailleur(index){
-      this.$('#ajouterAvisBailleur').modal({
+      this.$('#ajouterBailleurModeGreAgre').modal({
         backdrop: 'static',
         keyboard: false
       });

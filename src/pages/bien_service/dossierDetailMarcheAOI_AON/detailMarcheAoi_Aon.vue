@@ -14,13 +14,13 @@
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
-                                <th>Exercice Budgetaire</th>
-                                <th>Type de procedure</th>
-                                <th>Objet marché</th>
-                                <th>Reference marché</th>
+                                <th>Exercice Budgétaire</th>
+                                <th>Type de procédure</th>
+                                <th>Objet du marché</th>
+                                <th>Référence du marché</th>
                                 <th>Montant prévu</th>
                                 <th>Type de marché</th>
-                                <th>Unite administrative</th>
+                                <th>Unité Administrative</th>
                                 
                             </tr>
                             </thead>
@@ -62,14 +62,14 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                   <li class="active"><a data-toggle="tab" href="#tab001" title="tansmission du DAO a la DMP">Transmission</a></li>
-                                    <li class=""><a data-toggle="tab" href="#tab02">test de transmi</a></li>
+                                   <li class="active"><a data-toggle="tab" href="#tab001" title="tansmission du DAO à la DMP">Transmission</a></li>
+                                    <li class=""><a data-toggle="tab" href="#tab02">Test de transmission</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab010">ANO DMP sur DAO</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab020">ANO Bailleur sur DAO</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab0145" title="publication des offres">Publication</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre I</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre d'invitation</a></li>
                                   <li class=""><a data-toggle="tab" href="#tab0046" title="">Mandaté</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Réception</a></li>
                                
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab5">Rapport d'ouverture</a></li>
@@ -179,7 +179,7 @@
                                         <component-etat :macheid="detail_marche.id"></component-etat>
                                         
                                
-                                <h4>Liste des receptions de cotation</h4>
+                                <h4>Liste de réceptions de cotation</h4>
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>

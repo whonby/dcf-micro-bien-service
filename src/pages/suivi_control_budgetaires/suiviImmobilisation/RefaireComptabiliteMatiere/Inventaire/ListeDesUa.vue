@@ -69,9 +69,9 @@
                    style="width:90%;font-size:14px"
                     >{{afficherUniteAdministrative(BesoinImmo[0].uAdministrative_id) || 'Non renseigné'}}</td>
                    <td style="font-size:14px" >
-                       <router-link :to="{ name: 'SortiDuPatrimoine', params: { id: BesoinImmo[0].id }}"
+                       <router-link :to="{ name: 'Inventaire', params: { id: BesoinImmo[0].id }}"
                  class="btn btn-inverse " title="">
-        <span class="">Voir Equipement</span>
+        <span class="">Voir Article</span>
     </router-link>
                       
                     </td> 

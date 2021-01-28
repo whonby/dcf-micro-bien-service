@@ -1020,6 +1020,15 @@ Montantapresretenues(){
         }
       };
     },
+    anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
   },
   methods: {
     ...mapActions("personnelUA", [
@@ -1038,6 +1047,7 @@ Montantapresretenues(){
             },
      AjouterDecompte() {
       
+
       var nouvelObjet = {
         ...this.formData,
         marche_id:this.detail_Facture.marche_id,
@@ -1046,7 +1056,8 @@ Montantapresretenues(){
       netttc:this.Montantapresretenues,
       parts_etat:this.MontantHTEtat,
       parts_bailleur:this.MontantHTBailleur, 
-      montantmarche:this.Montantapresretenues
+      montantmarche:this.Montantapresretenues,
+      exercicebudget:this.anneeAmort
       };
       this.ajouterDecompteFacture(nouvelObjet);
       this.ajouterHistoriqueDecompteFacture(nouvelObjet)

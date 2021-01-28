@@ -1014,6 +1014,7 @@
         },
         data() {
             return{
+
                 isLoading: false,
                 fullPage: false,
                 controlleur_fin:"",

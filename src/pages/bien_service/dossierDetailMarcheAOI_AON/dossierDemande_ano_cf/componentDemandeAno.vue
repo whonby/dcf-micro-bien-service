@@ -6,8 +6,8 @@
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
-                        <th>Numéro courrier</th>
-                        <th>Date demande</th>
+                        <th>Numéro du courrier</th>
+                        <th>Date de la demande</th>
                         <th>Fichier</th>
                          <th>Avis</th>
                         <th>Date de l'avis</th>
@@ -40,8 +40,8 @@
                         
                         <td @click="afficherModalDecisionAnocf (demande.id)"> 
                            <span v-if="demande.avis== 0" class=" btn label label-success"> Non objection </span>
-                           <span v-else-if="demande.avis== 1" class=" btn label label-important"> objection </span>
-                           <span v-else class=" btn label label-info"> En attent</span>
+                           <span v-else-if="demande.avis== 1" class=" btn label label-important"> Objection </span>
+                           <span v-else class=" btn label label-info"> En attente</span>
                          </td>
 
                          <td @click="afficheDemandeDAO(demande.id)">
@@ -67,14 +67,14 @@
         <div id="ajouterD" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter demande ANO</h3>
+                <h3>Ajouter la demande d'ANO</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
 
 
                          <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                             <!-- <select v-model="formDemande.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -102,20 +102,20 @@
 
 
                      <div class="control-group">
-                        <label class="control-label">Numero du courrier</label>
+                        <label class="control-label">Numéro du courrier</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="formDemande.num_courrier"
                                     class="span"
-                                    placeholder="Saisir le numero du courrier"
+                                    placeholder="Saisir le numéro du courrier"
                             />
                         </div>
                     </div>
 
                     <div class="control-group">
 
-                        <label class="control-label">Date de demande</label>
+                        <label class="control-label">Date de la demande</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -153,13 +153,13 @@
          <div id="modifDemandeAno" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification ANO</h3>
+                <h3>Modification de l'ANO</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
 
                        <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                             <!-- <select v-model="edite_demande_dao.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -183,20 +183,20 @@
                     </div> -->
 
                     <div class="control-group">
-                        <label class="control-label">Numero du courrier</label>
+                        <label class="control-label">Numéro du courrier</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="edite_demande_dao.num_courrier"
                                     class="span"
-                                    placeholder="Saisir le numero du courrier"
+                                    placeholder="Saisir le numéro du courrier"
                             />
                         </div>
                     </div>
 
                     <div class="control-group">
 
-                        <label class="control-label">Date de demande</label>
+                        <label class="control-label">Date de la demande</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -239,7 +239,7 @@
                 <form class="form-horizontal">
 
                  <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                             
 
@@ -254,7 +254,7 @@
 
                         
                           <div class="control-group">
-                        <label class="control-label">Reference pv</label>
+                        <label class="control-label">Référence du PV</label>
                         <div class="controls">
                               <input
                                     type="text"
@@ -291,7 +291,7 @@
                   <div class="control-group">
           <label class="control-label">Observation:</label>
             <div class="controls">
-              <textarea  v-model="edite_demande_dao.observations "  class="textarea_editor span"  :readonly="verouillageObservation" rows="" placeholder="Entrer  le text ..."></textarea>
+              <textarea  v-model="edite_demande_dao.observations "  class="textarea_editor span"  :readonly="verouillageObservation" rows="" placeholder="Entrer le texte ..."></textarea>
             </div>
           
         </div>

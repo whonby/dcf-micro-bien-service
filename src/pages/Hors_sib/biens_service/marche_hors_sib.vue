@@ -27,7 +27,7 @@ CodeExempte
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des March&eacute;s </h5>
+              <h5>Liste des March&eacute;s  </h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />

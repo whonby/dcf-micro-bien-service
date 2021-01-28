@@ -2363,6 +2363,7 @@ nombreDejourCalculeModifier(){
       return  diffJour;
 
     },
+    
     nombreDejourCalcule(){
       let vM=this;
       const acteAffet = vM.formEffetFinancier

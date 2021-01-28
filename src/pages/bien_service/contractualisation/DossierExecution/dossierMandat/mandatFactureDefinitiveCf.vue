@@ -6,7 +6,7 @@
 <div id="validaDecisionCF" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Decision CF</h3>
+        <h3>Décision CF</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -18,7 +18,7 @@
                               <select v-model="editMandat.decision_cf" class="span">
                                 <option value=""></option>
                               <option value="8">Visé</option>
-                              <option value="9">Visé avec Observation</option>
+                              <option value="9">Visé avec observation</option>
                              <option value="2">Différé</option>
                              <option value="3">Réjeté</option>
                             <option value="0">Attente</option>
@@ -68,7 +68,7 @@
                        </td>
                   <td>
                                <div class="control-group">
-                            <label class="control-label">Date Décision CF :</label>
+                            <label class="control-label">Date de décision CF :</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editMandat.date_motif"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
@@ -80,7 +80,7 @@
                    <tr>
                      <td colspan="3">
                         <div class="control-group">
-                            <label class="control-label">Observation CF</label>
+                            <label class="control-label">Observation du CF</label>
                             <div class="controls">
                               <textarea  class="span" row = "6" v-model="editMandat.observation">
                               </textarea>
@@ -112,7 +112,7 @@
                                                    v-model="controlleur_fin"
                                                    option-value="id"
                                                    option-text="name"
-                                                   placeholder="Controleur financier"
+                                                   placeholder="Contrôleur financier"
                                 >
 
                                 </model-list-select>
@@ -122,7 +122,7 @@
                        </td>
                         <td>
                                   <div class="control-group">
-                            <label class="control-label">Joindre Fiche réalité service fait </label>
+                            <label class="control-label">Joindre Fiche de réalité de service fait </label>
                             <div class="controls">
                               <!-- <input type="text" class="span" readonly :value=" afficherLibelleFoctionBudgetaire(afficherIdFoctionBudgetaire(editObservationAgentCf.nom_service_beneficiaire))"/>
                               -->
@@ -153,15 +153,15 @@
                                         <th>N° du marché</th>
                                          <th>N° du mandat</th>
                                         <th>N° bordereau mandat</th>
-                                        <th>N° demande engagement</th>
-                                          <th>N° engagement</th>
+                                        <th>N° demande d'engagement</th>
+                                          <th>N° d'engagement</th>
                                        
                                    
                                 <th>Montant Mandat</th>
                                  <!-- <th >Emetteur</th> -->
                                 <th title="Date validation Emetteur">Date Emetteur</th>
-                                <th title="Date validation Cf">Date validation CF</th>
-                                <th>Décision CF</th>
+                                <th title="Date validation Cf">Date de validation CF</th>
+                                <th>Décision du CF</th>
                                 
 
                                 <th>Action</th>
@@ -176,8 +176,8 @@
         <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficheNumeroMarche(Manda.marche_id) || 'Non renseigné'}}</td>
                    <td @dblclick="afficheModalModificationMandat(Manda.id)">{{Manda.numero_mandat || 'Non renseigné'}}</td>
                   <td @dblclick="afficheModalModificationMandat(Manda.id)">{{Manda.numero_bordereau || 'Non renseigné'}}</td>
-                    <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroDemandeEngagemnt(Manda.engagement_id) || 'pas numero demande'}}</td>
-                     <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroEngagemnt(Manda.engagement_id) || 'pas numero engage'}}</td>
+                    <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroDemandeEngagemnt(Manda.engagement_id) || 'pas numéro demande'}}</td>
+                     <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroEngagemnt(Manda.engagement_id) || 'pas numéro engagé'}}</td>
                      
             <!-- <td >{{uaMandat(Manda.ua_id) || 'Non renseigné'}}</td>
                                     -->

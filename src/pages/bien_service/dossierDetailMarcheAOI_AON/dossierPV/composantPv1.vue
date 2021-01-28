@@ -7,8 +7,8 @@
                     <tr>
 
                         <!-- <th>ANO DMP bailleur</th>  -->
-                        <th>Reference Offre</th>
-                        <th>Reference PV</th>
+                        <th>Référence de l'Offre</th>
+                        <th>Référence du PV</th>
                         <th>Fichier</th>
                         <th>Avis</th>
                         <th>Action</th>
@@ -95,13 +95,13 @@
               <div id="modificationPV" class="modal hide">
                   <div class="modal-header">
                       <button data-dismiss="modal" class="close" type="button">×</button>
-                      <h3>Modification de PV</h3>
+                      <h3>Modification du PV</h3>
                   </div>
                   <div class="modal-body">
                       <form class="form-horizontal">
 
                             <div class="control-group">
-                              <label class="control-label">Reference PV</label>
+                              <label class="control-label">Référence PV</label>
                               <div class="controls">
                                   <input type="text" v-model="edite_pv.reference" class="span">
                               </div>

@@ -6,7 +6,7 @@
                  <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterAnoDMPBAILLEURModal" data-toggle="modal" class="btn btn-warning" v-if="listeAvisDemandeAno(macheid)" >Ajouter</a>
-                        <button class="btn btn-warning"  title="veillez recommencer le jugement , car l'Avis ANO DMP est Objection" disabled v-else  >Ajouter</button>
+                        <button class="btn btn-warning"  title="Veuillez recommencer le jugement, car l'Avis ANO DMP est Objection" disabled v-else  >Ajouter</button>
                     </div>
                 </div>
 
@@ -18,7 +18,7 @@
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
-                        <th>Numéro courrier</th>
+                        <th>Numéro du courrier</th>
                         <!-- <th>Reférence d'offre </th> -->
                         <!-- <th>Reference PV</th> -->
                         <th>Date ANO bailleur</th>
@@ -47,8 +47,8 @@
                         
                         <td @click="afficherModalDecisionAnocf (anoBailleur.id)"> 
                            <span v-if="anoBailleur.avis_bail== 0" class=" btn label label-success"> Non objection </span>
-                           <span v-else-if="anoBailleur.avis_bail== 1" class=" btn label label-important"> objection </span>
-                           <span v-else class=" btn label label-info"> En attent</span>
+                           <span v-else-if="anoBailleur.avis_bail== 1" class=" btn label label-important"> Objection </span>
+                           <span v-else class=" btn label label-info"> En attente</span>
                          </td>
 
                          <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
@@ -81,7 +81,7 @@
 
 
                          <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                             <!-- <select v-model="formBailleur.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -109,13 +109,13 @@
 
 
                      <div class="control-group">
-                        <label class="control-label">Numero du courrier</label>
+                        <label class="control-label">Numéro du courrier</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="formBailleur.num_courrier"
                                     class="span"
-                                    placeholder="Saisir le numero du courrier"
+                                    placeholder="Saisir le numéro du courrier"
                             />
                         </div>
                     </div>
@@ -128,7 +128,7 @@
                                     type="date"
                                     v-model="formBailleur.date_ano_dmp"
                                     class="span"
-                                    placeholder="Saisir le libelle_type"
+                                    placeholder="Saisir le libellé"
                             />
                            <input type="hidden" v-model="formBailleur.difference_personnel_bienService"/> 
                         </div>
@@ -167,7 +167,7 @@
                 <form class="form-horizontal">
 
                        <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                             <!-- <select v-model="edit_bailleur.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -191,13 +191,13 @@
                     </div> -->
 
                     <div class="control-group">
-                        <label class="control-label">Numero du courrier</label>
+                        <label class="control-label">Numéro du courrier</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="edit_bailleur.num_courrier"
                                     class="span"
-                                    placeholder="Saisir le numero du courrier"
+                                    placeholder="Saisir le numéro du courrier"
                             />
                         </div>
                     </div>
@@ -210,7 +210,7 @@
                                     type="date"
                                     v-model="edit_bailleur.date_ano_dmp"
                                     class="span"
-                                    placeholder="Saisir le libelle_type"
+                                    placeholder="Saisir le libellé"
                             />
                             <input type="hidden" v-model="edit_bailleur.difference_personnel_bienService"/> 
                         </div>
@@ -248,7 +248,7 @@
                 <form class="form-horizontal">
 
                  <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                               <input
                                     type="text"
@@ -260,7 +260,7 @@
                         </div>
 
                           <div class="control-group">
-                        <label class="control-label">Reference pv</label>
+                        <label class="control-label">Référence du PV</label>
                         <div class="controls">
                               <input
                                     type="text"
@@ -279,7 +279,7 @@
                                     type="date"
                                     v-model="edit_bailleur.date_avis"
                                     class="span"
-                                    placeholder="Saisir le libelle_type"
+                                    placeholder="Saisir le libellé"
                             />
                         </div>
                     </div>
@@ -295,9 +295,9 @@
                     </div>
 
                   <div class="control-group">
-          <label class="control-label">Observation:</label>
+          <label class="control-label">Observation</label>
             <div class="controls">
-              <textarea  v-model="edit_bailleur.observations_bailleur "  class="textarea_editor span"  :readonly="verouillageObservation" rows="" placeholder="Entrer  le text ..."></textarea>
+              <textarea  v-model="edit_bailleur.observations_bailleur "  class="textarea_editor span"  :readonly="verouillageObservation" rows="" placeholder="Entrer  le texte ..."></textarea>
             </div>
           
         </div>

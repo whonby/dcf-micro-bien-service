@@ -7,7 +7,7 @@
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5>Detail Engagement</h5>
+            <h5>Détail d'engagement</h5>
           </div>
 
           <!--- PREMIERE PARTIE --->
@@ -16,15 +16,15 @@
               <thead>
                 <tr>
                  <th>Année</th>
-                                    <th title="numero de  demande engagement">N°demande engagement</th>
-                                <th title="numero de bordereau">N°bordereau engagement</th>
-                                 <th title="numero de l'engagement">N°engagement</th>
-                                <th title="programme/dotation">Prog/Dotat</th>
+                                    <th title="numéro de demande engagement">N°demande d'engagement</th>
+                                <th title="Numéro de bordereau">N°bordereau d'engagement</th>
+                                 <th title="Numéro de l'engagement">N°engagement</th>
+                                <th title="Programme/dotation">Prog/Dotat</th>
                                 <th>Action Programmatique</th>
                                 <th>Activité</th>
-                                <th title="unite administrative">Ua</th>
+                                <th title="Unité administrative">UA</th>
                                  <th>Imputation</th>
-                                  <th title="ligne budgetaire">Section</th>
+                                  <th title="Ligne budgétaire">Section</th>
                                   <th>Montant</th>
                                   <th>Décision CF</th>
                 </tr>
@@ -85,20 +85,20 @@
               <thead>
                 <tr>
                  
-                   <th>type procédure</th>
-                  <th>mode paiement</th>
-                  <th>montant don</th>
-                   <th>montant trésor</th>
-                   <th >montant emprunt</th>
-                  <th>référence juridique</th>
-                  <th>Numero CC</th>
+                   <th>Type de procédure</th>
+                  <th>Mode de paiement</th>
+                  <th>Montant don</th>
+                   <th>Montant trésor</th>
+                   <th >Montant emprunt</th>
+                  <th>Référence juridique</th>
+                  <th>Numéro CC</th>
 
-                  <th>nom_entreprise</th>
+                  <th>Nom de l'entreprise</th>
                <th>Bailleur</th>
                   
-               <th>Object depense</th>   
-                  <th>piece_justificative</th>
-                  <th>motif</th>
+               <th>Object de la dépense</th>   
+                  <th>Pièce justificative</th>
+                  <th>Motif</th>
                 </tr>
               </thead>
               <tbody>
@@ -132,15 +132,15 @@
               <thead>
                 <tr>
                  
-                   <th>	date motif</th>
-                  <th>observation</th>
+                   <th>	Date motif</th>
+                  <th>Observation</th>
                   <!-- <th>ligne budgetaire</th> -->
                  
-                   <th >Date demande</th>
-                  <th>numero op</th>
-                  <th>Numero facture</th>
+                   <th >Date de la demande</th>
+                  <th>Numéro de l'OP</th>
+                  <th>Numéro de la facture</th>
 
-                  <th>Numero bordereau</th>
+                  <th>Numéro du bordereau</th>
 
                 </tr>
               </thead>
