@@ -141,7 +141,7 @@ afficherIDUA(
                 <div class="controls" >
                   <select v-model="formEffetFinancier.banq_id" class="span4" >
                     <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
-                            :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                            :value="varText.banq_id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                   </select>
 
                 </div>
@@ -152,8 +152,8 @@ afficherIDUA(
               <div class="control-group">
                 <label class="control-label">Compte</label>
                  <select v-model="formEffetFinancier.compte_id" class="span4" >
-                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.banq_id)" :key="varText.id"
-                            :value="varText.id">{{afficherLeCompteEnFonctionDeLaBanque(varText.banq_id)}}</option>
+                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.banq_id,formEffetFinancier.entreprise_id)" :key="varText.id"
+                            :value="varText.id">{{varText.rib}}</option>
                   </select>
                 <!-- <div class="controls " >
                   <input type="text"  class="span4" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
@@ -1429,9 +1429,9 @@ affichierIdEntrepriseSelectionner() {
     },
 
      afficherCompteDynamique(){
-      return id =>{
-        if(id != null && id !=""){
-          return this.comptes.filter(element => element.banq_id== id)
+      return (id,id1) =>{
+        if(id != null && id !="" && id1 != null && id1 !=""){
+          return this.comptes.filter(element => element.banq_id== id && element.entrepse_id == id1)
 
 
         }
@@ -1651,7 +1651,7 @@ var nouvelObjet1 = {
         marche_id:this.macheid,
         marchegeneral_id:this.affichieridMarcheGlobal(this.macheid),
         // ua_id:this.ua_id,
-        banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
+        banq_id:this.formEffetFinancier.banq_id,
         compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
       }
       //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
@@ -1666,7 +1666,7 @@ var nouvelObjet1 = {
       marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
       marcheObjet.parent_id=this.macheid
       // console.log(marcheObjet)
-      this.modifierMarcheHorSib(marcheObjet)
+      this.modifierMarche(marcheObjet)
    
       this.formEffetFinancier = {
         code_act:"",
@@ -1699,7 +1699,7 @@ var nouvelObjet1 = {
 <style scoped>
 
 .grdirModalActeEffet{
-  width: 88%;
+  width: 80%;
   margin: 0 -42%;
 }
 
