@@ -1,15 +1,15 @@
 <template>
 <div>
         
-                <h4> Liste Avis bailleur </h4>
+                <h4> Liste d'Avis bailleur </h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
-                        <th>Numéro courrier</th>
+                        <th>Numéro du courrier</th>
                         <!-- <th>Reference marché</th> -->
                         <!-- <th>Reférence d'offre </th> -->
-                        <th>Reference PV</th>
-                        <th>Date demande</th>
+                        <th>Référence du PV</th>
+                        <th>Date de la demande</th>
                         <th>Fichier</th>
                         <th>Action</th>
                     </tr>
@@ -63,7 +63,7 @@
 
 
                          <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                             <select v-model="formDemande.cotation_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -84,26 +84,26 @@
 
 
                      <div class="control-group">
-                        <label class="control-label">Numero du courrier</label>
+                        <label class="control-label">Numéro du courrier</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="formDemande.num_courrier"
                                     class="span"
-                                    placeholder="Saisir le numero du courrier"
+                                    placeholder="Saisir le numéro du courrier"
                             />
                         </div>
                     </div>
 
                     <div class="control-group">
 
-                        <label class="control-label">Date de demande</label>
+                        <label class="control-label">Date de la demande</label>
                         <div class="controls">
                             <input
                                     type="date"
                                     v-model="formDemande.date_demande"
                                     class="span"
-                                    placeholder="Saisir le libelle_type"
+                                    placeholder="Saisir le libellé"
                             />
                         </div>
                     </div>
@@ -141,7 +141,7 @@
                 <form class="form-horizontal">
 
                        <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                             <select v-model="edite_demande_dao.cotation_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -158,26 +158,26 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Numero du courrier</label>
+                        <label class="control-label">Numéro du courrier</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="edite_demande_dao.num_courrier"
                                     class="span"
-                                    placeholder="Saisir le numero du courrier"
+                                    placeholder="Saisir le numéro du courrier"
                             />
                         </div>
                     </div>
 
                     <div class="control-group">
 
-                        <label class="control-label">Date de demande</label>
+                        <label class="control-label">Date de la demande</label>
                         <div class="controls">
                             <input
                                     type="date"
                                     v-model="edite_demande_dao.date_demande"
                                     class="span"
-                                    placeholder="Saisir le libelle_type"
+                                    placeholder="Saisir le libellé"
                             />
                         </div>
                     </div>

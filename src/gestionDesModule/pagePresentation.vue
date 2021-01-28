@@ -572,6 +572,7 @@ this.getImageMarche()
 this.getMembreCojo()
     this.getProceVerbal()
       this.getEcheances()
+      this.getOrganeDecision()
     this.getMembreComiteEvaluation()
     this.getStructureDAO()
 
@@ -765,10 +766,10 @@ return objJson.id
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
           'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
-          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
+          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances","getOrganeDecision",
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
           "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner",
-           "getEcheances","pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO",'getEntrepriseSousTraitance']),
+          "pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO",'getEntrepriseSousTraitance']),
 
     activeMenuModuleParamGeneral(){
       this.activeMenuModuleSidcf(1)

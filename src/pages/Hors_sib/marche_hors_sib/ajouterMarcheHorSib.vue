@@ -211,7 +211,7 @@
             <div class="controls">
             
                <select v-model="formData.procedure_passation_id" class="span4" >
-               <option v-for="plans in procedurePassations" :key="plans.id" 
+               <option v-for="plans in afficherListeModePassation" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
@@ -247,13 +247,13 @@
 
               <tr>
            
-            <td colspan="">
+            <td colspan="2">
               
                <div class="control-group">
             <label class="control-label">Nature des prix</label>
             <div class="controls">
             
-               <select v-model="formData.nature_prix_id" class="span4" >
+               <select v-model="formData.nature_prix_id" class="span6" >
                <option v-for="plans in Nature_des_prix" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -261,7 +261,7 @@
           </div>
               </td>  
        
-         <td colspan="">
+         <!-- <td colspan="">
               
                <div class="control-group">
             <label class="control-label">Motif de passation</label>
@@ -273,7 +273,8 @@
            </select>
             </div>
           </div>
-              </td>  
+              </td>   -->
+
           <td colspan="2">
                   <div class="control-group">
        <label class="control-label">Infrastructure</label>
@@ -544,6 +545,9 @@ ImputationBudget() {
 // recuperer la tailler du getter structure localisation
 recupererLataille(){
   return this.structures_geographiques.length-2
+},
+   afficherListeModePassation(){
+    return this.procedurePassations.filter(item => item.code!="GAG" && item.code!="AOR" && item.code!="LCVM" && item.code!="ED")
 },
 
 // 
