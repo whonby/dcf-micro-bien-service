@@ -3,6 +3,7 @@
 
 <div class="container-fluid">
       <hr />
+      
       <div class="row-fluid">
         <div class="span12">
           <div class="widget-box">

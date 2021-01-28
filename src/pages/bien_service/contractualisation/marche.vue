@@ -1832,7 +1832,8 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => element.gdenature_id == 5 && element.parent_id == null && element.sib ==0)
+
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 ||this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1841,7 +1842,7 @@ getDateFinExécutionValue(){
             // });
         }
 
- return this.printMarcheNonAttribue.filter(element => element.gdenature_id == 5  && element.parent_id == null && element.sib ==0)
+ return this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0)
        
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1864,7 +1865,7 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && element.gdenature_id == 5 && element.parent_id == null && element.sib == 0)
+            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1873,7 +1874,7 @@ getDateFinExécutionValue(){
             // }); 
         }
 
-        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && element.gdenature_id == 5 && element.parent_id == null && element.sib == 0)
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0|| element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1897,11 +1898,11 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => element.gdenature_id == 5 && element.attribue == 1  && element.parent_id == null && element.sib == 0)
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 && element.attribue == 1  && element.parent_id == null && element.sib == 0 || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0 && element.attribue == 1  && element.parent_id == null && element.sib == 0)
             
         }
 
-        return this.printMarcheNonAttribue.filter(element => element.gdenature_id == 5 && element.attribue == 1  && element.parent_id == null && element.sib == 0)
+        return this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 && element.attribue == 1  && element.parent_id == null && element.sib == 0 || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0 && element.attribue == 1  && element.parent_id == null && element.sib == 0)
            
         
 
@@ -1920,11 +1921,11 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => element.gdenature_id == 5  &&  element.difference_personnel_bienService == 2 && element.sib == 0) 
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 && element.attribue == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == 2 && element.sib == 0 || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0 && element.attribue == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == 2 && element.sib == 0) 
            
         }
 
-        return this.getActeEffetFinancierPersonnaliser45.filter(element => element.gdenature_id == 5  &&  element.difference_personnel_bienService == 2 && element.sib == 0)
+        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 && element.attribue == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == 2 && element.sib == 0 || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0 && element.attribue == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == 2 && element.sib == 0)
             
         
 
@@ -1944,11 +1945,11 @@ afficherResilierPUA() {
                     return item
                 }
             })
-            return colect.filter(element =>  element.gdenature_id == 5 && element.difference_personnel_bienService == null && element.sib == 0)
+            return colect.filter(element =>  this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 && element.attribue == 2  && element.parent_id == null  &&  element.difference_personnel_bienService == 2 && element.sib == 0 || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null &&  element.attribue == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == null )
            
         }
 
-        return this.getActeEffetFinancierPersonnaliser45.filter(element =>  element.gdenature_id == 5 && element.difference_personnel_bienService == null && element.sib == 0)
+        return this.getActeEffetFinancierPersonnaliser45.filter(element =>   this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null &&  element.attribue == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == null  || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null &&  element.attribue == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == null )
             
     },
 
@@ -1965,11 +1966,11 @@ afficherMarcheSupenduPAR_AU() {
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 7 &&  element.gdenature_id == 5 && element.sib == 0)
+            return colect.filter(element => element.attribue == 7 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.sib == 0 || element.attribue == 7 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.sib == 0)
            
-        }
+        } 
 
-        return this.printMarcheNonAttribue.filter(element => element.attribue == 7 &&  element.gdenature_id == 5 && element.sib == 0)
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 7 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.sib == 0 ||  element.attribue == 7 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.sib == 0)
             
         
 
@@ -1988,11 +1989,11 @@ afficherMarcherTerminerParUA() {
                     return item
                 }
             })
-            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && element.gdenature_id == 5 && element.sib == 0 )
+            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.sib == 0 || this.afficherAttributMarche(element.marche_id) == 5 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.sib == 0)
             
         }
 
-        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 &&  element.gdenature_id == 5 && element.sib == 0 )
+        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.sib == 0 || this.afficherAttributMarche(element.marche_id) == 5 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.sib == 0)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)

@@ -666,7 +666,7 @@
                 </button>
                    <button v-else class="btn  btn-danger">
               
-                <span title="MARCHE NON PLANIFIE">NPL</span>
+                <span title="MARCHE PLANIFIE">PL</span>
                 </button>
 
                    </td>

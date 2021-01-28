@@ -9,7 +9,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>March&eacute;s d'investissement en Exécution</h5>
+              <h5>March&eacute;s d'investissement en Exécution23</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -235,6 +235,7 @@ loading(){
    afficherMarcheInvestissementParDroitAccess() {
        // const st = this.search.toLowerCase();
         if (this.noDCfNoAdmin){
+          console.log("USER NO DCF AND NO ADMIN")
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -246,6 +247,7 @@ loading(){
             return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==0 && element.attribue==2)
            
         }
+          console.log("USER IS DCF AND ADMIN")
            return  this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==0 && element.attribue==2)
        
     },

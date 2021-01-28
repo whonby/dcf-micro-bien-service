@@ -192,7 +192,7 @@ marche_id
                 <div class="controls" >
                   <select v-model="formEffetFinancier.banq_id" class="span" >
                     <option v-for="varText in afficherBanqueDynamiqueId(affichierIdEntrepriseSelectionner(nom_candidata))" :key="varText.id"
-                            :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                            :value="varText.banq_id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                   </select>
 
                 </div>
@@ -202,8 +202,8 @@ marche_id
               <div class="control-group">
                 <label class="control-label">Compte</label>
                  <select v-model="formEffetFinancier.compte_id" class="span" >
-                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.banq_id)" :key="varText.id"
-                            :value="varText.id">{{afficherLeCompteEnFonctionDeLaBanque(varText.banq_id)}}</option>
+                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.banq_id,affichierIdEntrepriseSelectionner(nom_candidata))" :key="varText.id"
+                            :value="varText.id">{{varText.rib}}</option>
                   </select>
               
               </div>
@@ -800,7 +800,7 @@ marche_id
                 <div class="controls" >
                   <select v-model="editActeEffetFinancier.banq_id" class="span" >
                     <option v-for="varText in afficherBanqueDynamiqueId(affichierIdEntrepriseSelectionner(nom_candidata))" :key="varText.id"
-                            :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                            :value="varText.banq_id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                   </select>
 
                 </div>
@@ -810,11 +810,14 @@ marche_id
               <td>
               <div class="control-group">
                 <label class="control-label">Compte</label>
-                 <select v-model="editActeEffetFinancier.compte_id" class="span" >
+                 <!-- <select v-model="editActeEffetFinancier.compte_id" class="span" >
                     <option v-for="varText in afficherCompteDynamique(editActeEffetFinancier.banq_id)" :key="varText.id"
                             :value="varText.id">{{afficherLeCompteEnFonctionDeLaBanque(varText.banq_id)}}</option>
+                  </select> -->
+               <select v-model="editActeEffetFinancier.compte_id" class="span" >
+                    <option v-for="varText in afficherCompteDynamique(editActeEffetFinancier.banq_id,affichierIdEntrepriseSelectionner(nom_candidata))" :key="varText.id"
+                            :value="varText.id">{{varText.rib}}</option>
                   </select>
-              
               </div>
 
             </td>
@@ -1421,6 +1424,24 @@ console.log(this.dateDefinitivePrevisionnel("2021-01-23",30))
     ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe',
       'planActe']),
       ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
+
+
+libelleCompte() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.comptes.find(qtreel => qtreel.banq_id == id);
+
+          if (qtereel) {
+            return qtereel.rib;
+          }
+          return 0
+        }
+      };
+    },
+
+
+
+
       listeEntreSoustraitance(){
         return marche=>{
             if(marche){
@@ -2287,9 +2308,9 @@ affichierIdEntrepriseSelectionner() {
       }
     },
     afficherCompteDynamique(){
-      return id =>{
-        if(id != null && id !=""){
-          return this.comptes.filter(element => element.banq_id== id)
+      return (id,id1) =>{
+        if(id != null && id !="" && id1 != null && id1 !=""){
+          return this.comptes.filter(element => element.banq_id== id && element.entrepse_id== id1)
 
 
         }
@@ -2323,9 +2344,9 @@ affichierIdEntrepriseSelectionner() {
     // },
 
     afficherLeCompteEnFonctionDeLaBanque(){
-      return banq_id => {
-        if( banq_id !== undefined) {
-          var acteur = this.comptes.find(acteur => acteur.id == banq_id  )
+      return id => {
+        if( id !== undefined) {
+          var acteur = this.comptes.find(acteur => acteur.banq_id == id  )
 
           return  (acteur) ? acteur.rib :null
         }

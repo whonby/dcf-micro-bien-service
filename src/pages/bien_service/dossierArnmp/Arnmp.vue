@@ -288,7 +288,7 @@
             </div>
           </td>
                              
-                           <td>
+                           <!-- <td>
                          <div class="control-group">
                         <label class="control-label"> Organe de résolution</label>
                         <div class="controls">
@@ -300,7 +300,7 @@
                             />
                         </div>
                     </div>
-                        </td>
+                        </td> -->
                         <td colspan="">
                         <div class="control-group">
                    <label class="control-label">Fichier joint:</label>
@@ -352,7 +352,7 @@ objet_recours:"",
   date_recour:"",
   entreprise_id:"",
   date_resolution:"",
-  organe_resolution:"",
+  //organe_resolution:"",
   decision_organe:""
   },
   editReserve:{
@@ -531,7 +531,7 @@ objet_recours:"",
   date_recour:"",
   entreprise_id:"",
   date_resolution:"",
-  organe_resolution:"",
+  //organe_resolution:"",
   decision_organe:""
      }
 

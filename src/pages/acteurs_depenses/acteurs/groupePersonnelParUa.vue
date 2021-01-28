@@ -7,6 +7,16 @@ uniteAdministratives
         <br>
         <br>
         <br>
+        <div class="" align="right">
+                   <router-link :to="{name:'AjoutPersonnelSansContratSib'}" tag="a" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter Sans Contrat Personnel
+
+                   </router-link> 
+<router-link :to="{name:'AjoutPersonnelAvecContratSib'}" tag="a" data-toggle="modal" class="btn btn-info" align="rigth">Ajouter avec Contrat Personnel
+
+                   </router-link> 
+                   </div>
+                   <br>
+                   <br>
     <table class="table table-bordered table-striped">
                     <thead>
                       <tr>

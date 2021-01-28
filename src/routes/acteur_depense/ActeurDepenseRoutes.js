@@ -37,9 +37,21 @@ import RegistreDepense from "../../pages/cycle_de_vie/RapportDepense3.vue";
 import fonctionBudgetaire from "../../pages/acteurs_depenses/fonction/fonctionBudgetaire.vue";
 import SituationMatrimonial from "../../pages/acteurs_depenses/fonction/SituationMatrimonial.vue";
 import FonctionProfessionnelle from "../../pages/acteurs_depenses/FonctionProfessionnelle/FonctionProfessionnelle.vue";
+
+import AjoutPersonnelAvecContratSib from "../../pages/acteurs_depenses/acteurs/AjoutPersonnelAvecContrat.vue";
+import AjoutPersonnelSansContratSib from "../../pages/acteurs_depenses/acteurs/AjoutPersonnelSansContrat.vue";
 const ActeurDepenseRoutes = [
 
-
+  {
+    path: "/AjoutPersonnelAvecContratSib",
+  name: "AjoutPersonnelAvecContratSib",
+  component: AjoutPersonnelAvecContratSib
+  },
+  {
+    path: "/AjoutPersonnelSansContratSib",
+  name: "AjoutPersonnelSansContratSib",
+  component: AjoutPersonnelSansContratSib
+  },
 
   {
     path: "/ListeActeur/:id",

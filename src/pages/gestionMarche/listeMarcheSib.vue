@@ -419,26 +419,10 @@ return this.afficherListeMrcheSib.filter((item) => {
 //  },
 
  afficherListeMrcheSib() {
-       // const st = this.search.toLowerCase();
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.getMarchePersonnaliser.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect.filter(element =>   element.parent_id == null && element.sib==0 )
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // }); 
-        }
-
-        return this.gettersMarcheHorsib.filter(element => element.parent_id == null && element.sib==0 )
+       console.log("...................")
+console.log(this.listeMarcheUniteAdmin)
+console.log("....................")
+        return this.listeMarcheUniteAdmin
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -447,7 +431,48 @@ return this.afficherListeMrcheSib.filter((item) => {
 
     },
  
+filtre_unite_admin() {
+                if(this.noDCfNoAdmin){
+                    let colect=[];
+                    let vM=this
+                    this.uniteAdministratives.filter(item=>{
+                        if(vM.getterUniteAdministrativeByUser.length>0){
+                            let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                            if (val!=undefined){
+                                colect.push(item)
+                                return item
+                            }
+                        }
 
+                    })
+                    return colect
+                }
+                return this.uniteAdministratives
+            },
+            listeMarcheUniteAdmin(){
+                let colect=[]
+                let vM=this;
+                this.filtre_unite_admin.forEach(function (value) {
+                    let objet=vM.marches.filter(item=>{
+                            if(item.parent_id==null && item.unite_administrative_id==value.id && item.sib==0  ){
+                                //  console.log(item.parent_id)
+                                return item
+                            }
+                        }
+                    )
+                    if(objet!=undefined){
+                        objet.forEach(function (val) {
+                            let objet=   colect.find(item=>item.id==val.id)
+                            if(objet==undefined){
+                                colect.push(val)
+                            }
+                        })
+                    }
+
+
+                })
+                return colect
+            },
 
  // afficher le nommbre demareche hors sib
 
