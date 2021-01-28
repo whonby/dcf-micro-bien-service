@@ -9,7 +9,7 @@
                                  <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
                                             <tr>
-                                                <th>Ref du courier</th>
+                                                <th>Référence du courrier</th>
                                                 <th>Destinataire</th>
                                                 <th>Date de transmission du DAO</th>
                                                 <th>Fichier</th>
@@ -64,13 +64,13 @@
 
                       
                      <div class="control-group">
-              <label class="control-label">Reférence du dossier:</label>
+              <label class="control-label">Référence du dossier</label>
               <div class="controls">
                 <input type="text"  class="span11"  v-model="formTransmission.ref_courier" />
               </div>
             </div>
                            <div class="control-group">
-              <label class="control-label">Date de transmission du dossier:</label>
+              <label class="control-label">Date de transmission du dossier</label>
               <div class="controls">
                 <input type="date"  class="span11"  v-model="formTransmission.date_dao" />
               </div>
@@ -99,7 +99,7 @@
             </div>
             <div class="modal-footer">
                 <a class="btn btn-primary" @click.prevent="ajouterCotationLocal()">Ajouter</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+                <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
             </div>
         </div>
 
@@ -116,14 +116,14 @@
                     <form action="#" method="get" >
 
                     <div class="control-group">
-              <label class="control-label">Reférence du dossier:</label>
+              <label class="control-label">Référence du dossier</label>
               <div class="controls">
                 <input type="text"   v-model="edit_transmission.ref_courier" />
               </div>
             </div>
                         
                                   <div class="control-group">
-              <label class="control-label">Date de transmission du dossuier:</label>
+              <label class="control-label">Date de transmission du dossier:</label>
               <div class="controls">
                 <input type="date"   v-model="edit_transmission.date_dao" />
               </div>
@@ -149,8 +149,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-primary" @click.prevent="modificationTransmissionLocal()">modifier</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+                <a class="btn btn-primary" @click.prevent="modificationTransmissionLocal()">Modifier</a>
+                <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
             </div>
         </div>
 

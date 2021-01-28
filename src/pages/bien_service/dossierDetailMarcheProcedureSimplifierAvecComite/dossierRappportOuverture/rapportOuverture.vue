@@ -42,7 +42,7 @@
                  <div id="ajouterRapportOuvertureB" class="modal hide grdtaill">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter rapport d'ouverture</h3>
+                <h3>Ajouter le rapport d'ouverture</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -71,7 +71,7 @@
             </div>
            <div class="modal-footer">
                 <a class="btn btn-primary" @click.prevent="ajouterRapportOuverture()">Ajouter</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+                <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
             </div>
         </div>
 
@@ -114,7 +114,7 @@
             </div>
             <div class="modal-footer">
                 <a class="btn btn-primary" @click.prevent="modifierRapportOuverture()">Modifier</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+                <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
             </div>
         </div>
 
@@ -231,7 +231,7 @@ export default {
          
           
            ajouterRapportOuverture(){
-               if(confirm("veiller charger le fichier svp !")){
+               if(confirm("Veuillez charger le fichier svp !")){
                  const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                  formData.append('date_rapport_ouverture', this.formRapport.date_rapport_ouverture);
@@ -256,7 +256,7 @@ export default {
 
 
            modifierRapportOuverture(){
-               if(confirm("veiller charger le fichier svp !")){
+               if(confirm("Veuillez charger le fichier svp !")){
                     const formData = new FormData();
                  formData.append('date_rapport_ouverture', this.editRapport.date_rapport_ouverture);
                  formData.append('marche_id', this.macheid);
@@ -278,7 +278,7 @@ export default {
               // this.getRapportJugement()
                this.$('#modifierModalRapportOuverture').modal('hide');
                }else{
-                   return " chargemennt de fichier neccessaire "
+                   return " Chargement de fichier nécessaire "
                }
          
            },

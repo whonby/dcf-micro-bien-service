@@ -21,11 +21,11 @@
   <table class="table table-bordered table-striped">
     <thead>
     <tr>
-      <th>Ref offre</th>
+      <th>Référence de l'offre</th>
       <th>Soumissionnaire</th>
       <th> Montant de l'Offre financière</th>
       <th>Type d'analyse</th>
-      <th>Conclusion Analyse</th>
+      <th>Conclusion de l'analyse</th>
 
     </tr>
     </thead>
@@ -119,7 +119,7 @@
         <tr>
           <td colspan="">
             <div class="control-group">
-              <label class="control-label">Type analyse</label>
+              <label class="control-label">Type d'analyse</label>
               <div class="controls">
                 <select v-model="formAnalyseDossier.type_analyse_id" class="span" disabled>
                   <option v-for="plans in typeAnalyses" :key="plans.id"
@@ -231,7 +231,7 @@
         <tr>
           <td colspan="">
             <div class="control-group">
-              <label class="control-label">Type analyse</label>
+              <label class="control-label">Type d'analyse</label>
               <div class="controls">
                 <select v-model="formAnalyseDossier.type_analyse_id" class="span" disabled>
                   <option v-for="plans in typeAnalyses" :key="plans.id"
@@ -259,7 +259,7 @@
       </table>
       <table class="table table-bordered table-striped">
         <thead>
-        <th>N°LOT</th>
+        <th>N° du LOT</th>
         <th>Soumissionnaire</th>
         <th>Offre Financière</th>
         <th>Conclusion</th>

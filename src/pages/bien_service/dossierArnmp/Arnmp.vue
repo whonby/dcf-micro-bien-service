@@ -9,14 +9,14 @@
   <table class="table table-bordered table-striped">
      <thead>
     <tr>
-      <th>Ref offre </th>
-      <th>Numero du lot</th>
-      <th>Objet de recour</th>
-      <th>Date de recour</th>
+      <th>Référence de l'offre </th>
+      <th>Numéro du lot</th>
+      <th>Objet de recours</th>
+      <th>Date de recours</th>
       <th>Entreprise</th>
-      <th>Date resolution</th>
-      <th>Organe de resolution</th>
-      <th>Decision organe</th>
+      <th>Date de résolution</th>
+      <th>Organe de résolution</th>
+      <th>Décision de l'organe</th>
       <th>Action</th>
      
 
@@ -44,14 +44,14 @@
   <div id="ajouterArnmp" class="modal hide grdirModalAnalyse">
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
-      <h3>Ajouter autorité nationale de regularisation des marchés public (ANRMP)</h3>
+      <h3>Ajouter Autorité Nationale de Régularisation des Marchés Publics (ANRMP)</h3>
     </div>
     <div class="modal-body">
         <table class="table table-bordered table-striped">
                           <tr>
                             <td >
                         <div class="control-group">
-                        <label class="control-label">Reférence</label>
+                        <label class="control-label">Référence</label>
                         <div class="controls">
                             <!-- <select v-model="formeReserve.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -84,9 +84,9 @@
                             <tr>
                             <td colspan="3" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet de recours:</label>
+                            <label class="control-label">Objet de recours</label>
                             <div class="controls">
-                                 <textarea  v-model="formeReserve.objet_recours"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
+                                 <textarea  v-model="formeReserve.objet_recours"  class="textarea_editor span12" rows="3" placeholder="Entrer le texte ..."></textarea>
                     
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                         </td> 
                                    <td colspan="">
             <div class="control-group">
-              <label> Organe de résolutions </label>
+              <label> Organe de résolution </label>
               <div class="controls">
                 <select v-model="formeReserve.organe_id" class="span" >
                   <option v-for="varText in gettersOrganeDecision" :key="varText.id"
@@ -171,7 +171,7 @@
                         <tr>
                              <td colspan="3">
                          <div class="control-group">
-                        <label class="control-label"> Decision organe</label>
+                        <label class="control-label"> Décision de l'organe</label>
                         <div class="controls">
                           <textarea v-model="formeReserve.decision_organe"   class="textarea_editor span"   rows="3" placeholder="Entrer  le text ..."></textarea>
                             <!-- <input
@@ -199,14 +199,14 @@
    <div id="modifierArnmpms" class="modal hide grdirModalAnalyse">
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
-      <h3> Modification autorité nationale de regularisation des marchés public (ANRMP)</h3>
+      <h3> Modification Autorité Nationale de Régularisation des Marchés Publics (ANRMP)</h3>
     </div>
     <div class="modal-body">
       <table class="table table-bordered table-striped">
                           <tr>
                             <td >
                         <div class="control-group">
-                        <label class="control-label">Reférence</label>
+                        <label class="control-label">Référence</label>
                         <div class="controls">
                             <!-- <select v-model="formeReserve.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -239,9 +239,9 @@
                             <tr>
                             <td colspan="3" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet de recours:</label>
+                            <label class="control-label">Objet de recours</label>
                             <div class="controls">
-                                 <textarea  v-model="editReserve.objet_recours"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
+                                 <textarea  v-model="editReserve.objet_recours"  class="textarea_editor span12" rows="3" placeholder="Entrer le  texte ..."></textarea>
                     
                             </div>
                         </div>
@@ -278,7 +278,7 @@
                             <tr>
                                                 <td colspan="">
             <div class="control-group">
-              <label> Organe de résolutions </label>
+              <label> Organe de résolution </label>
               <div class="controls">
                 <select v-model="editReserve.organe_id" class="span" >
                   <option v-for="varText in gettersOrganeDecision" :key="varText.id"
@@ -290,7 +290,7 @@
                              
                            <!-- <td>
                          <div class="control-group">
-                        <label class="control-label"> Organe de résolutions</label>
+                        <label class="control-label"> Organe de résolution</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -313,9 +313,9 @@
                         <tr>
                              <td colspan="3">
                          <div class="control-group">
-                        <label class="control-label"> Decision organe</label>
+                        <label class="control-label"> Décision de l'organe</label>
                         <div class="controls">
-                          <textarea v-model="editReserve.decision_organe"   class="textarea_editor span"   rows="3" placeholder="Entrer  le text ..."></textarea>
+                          <textarea v-model="editReserve.decision_organe"   class="textarea_editor span"   rows="3" placeholder="Entrer  le texte ..."></textarea>
                             <!-- <input
                                     type="text"
                                     v-model="formeReserve.decision_organe"
@@ -333,7 +333,7 @@
 
     <div class="modal-footer">
       <a data-dismiss="modal"  class="btn btn-primary" @click.prevent="modifierArnmpLocal"  href="#">Modifier</a>
-      <a data-dismiss="modal" class="btn" href="#">Cancel</a>
+      <a data-dismiss="modal" class="btn" href="#">Annuler</a>
     </div>
   </div>
   <notifications/>

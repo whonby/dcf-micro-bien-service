@@ -14,13 +14,13 @@
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
-                                <th>Exercice Budgetaire</th>
-                                <th>Type de procedure</th>
-                                <th>Objet marché</th>
-                                <th>Reference marché</th>
+                                <th>Exercice Budgétaire</th>
+                                <th>Type de procédure</th>
+                                <th>Objet du marché</th>
+                                <th>Référence du marché</th>
                                 <th>Montant prévu</th>
                                 <th>Type de marché</th>
-                                <th>Unite administrative</th>
+                                <th>Unité Administrative</th>
                                 
                             </tr>
                             </thead>
@@ -63,7 +63,7 @@
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                  <li class="active"><a data-toggle="tab" href="#tab01">Lettre d'invitation</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab02">Reception de l'offre</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab02">Réception de l'offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab5">Rapport d'ouverture</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab6">Jugement des offres</a></li>

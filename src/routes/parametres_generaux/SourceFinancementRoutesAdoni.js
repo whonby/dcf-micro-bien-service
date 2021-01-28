@@ -1,16 +1,17 @@
 
 import SourceFinancement from "../../pages/parametres_generaux/source_financement/SourceFinancement.vue";
 import TypeFinancement  from "../../pages/parametres_generaux/source_financement/TypeFinancement.vue";
-import TableauBordParametreSimple  from "../../../src/gestionDesModule/TableauBordSimple/TableauBordParametre.vue";
-import TableauBordGestionHorsSibSimple  from "../../../src/gestionDesModule/TableauBordSimple/TableauBordGestionHorsSib.vue";
+import TableauBordParametreSimple  from "../../../src/gestionDesModule/TableauBordParametre.vue";
+import TableauBordGestionHorsSibSimple  from "../../../src/gestionDesModule/TableauBordGestionHorsSib.vue";
 import TableauBordGestionSibSimple  from "../../../src/gestionDesModule/TableauBordGestionSib.vue";
-import TableauBordUaSimple  from "../../../src/gestionDesModule/TableauBordSimple/TableauBordUa.vue";
+import TableauBordUaSimple  from "../../../src/gestionDesModule/TableauBordUa.vue";
 import TableauBordCatographiesSimple  from "../../../src/gestionDesModule/TableauBordCa";
 import tableauBordGestionAcces from "../../../src/gestionDesModule/tableauBordGestionAcces.vue";
 import planSourceFinancement from "../../pages/parametres_generaux/source_financement/planSourceFinancement.vue"
 import DetailSourceFinancement from "../../pages/parametres_generaux/source_financement/DetailSourceFinancement.vue"
 const SourceFinancementRoutesAdoni = [
    {
+
       path:"/TableauBordCatographies",
       name:"TableauBordCatographiesSimple",
       component:TableauBordCatographiesSimple

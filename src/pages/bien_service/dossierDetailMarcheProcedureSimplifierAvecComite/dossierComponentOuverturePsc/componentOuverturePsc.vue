@@ -10,16 +10,16 @@
                       </div>
                            
                   </div>
-                  <h4> Infomation sur la cojo</h4>
+                  <h4> Infomation sur la COJO</h4>
             
                   <table class="table table-bordered table-striped" v-if="macheid">
                       <thead>
                       <tr>
           
-                          <th>Date Composition</th>
-                          <th>Date invitation</th>
-                          <th>Numero dossier Appel Offre</th>
-                          <th>Nmbr particiapnt</th>
+                          <th>Date de Composition</th>
+                          <th>Date d'invitation</th>
+                          <th>Numéro dossier d'appel d'offre</th>
+                          <th>Nombre de participant</th>
            
                           <th>Action</th>
                       </tr>
@@ -65,12 +65,12 @@
               <div id="ajouterCojo" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Cojo</h3>
+                <h3>Ajouter COJO</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="control-group">
-                        <label class="control-label">Numero dossier APPEL OFFRE</label>
+                        <label class="control-label">Numéro du dossier d'appel d'offre</label>
                         <div class="controls">
                             <input disabled
                                    type="text"
@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Lettre Invitation</label>
+                        <label class="control-label">Lettre d'invitation</label>
                         <div class="controls">
                             <select v-model="formDataCojo.lettre_invitation_id" class="span" disabled>
                                 <option v-for="plans in lettreInvitationAMarche(macheid)" :key="plans.id"
@@ -91,7 +91,7 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Date invitation</label>
+                        <label class="control-label">Date d'invitation</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -102,13 +102,13 @@
                         </div>
                     </div>
                     <div class="control-group">
-                          <label class="control-label">Controleur finnancier</label>
+                          <label class="control-label">Contrôleur Financier</label>
                         <div class="controls">
                             <input disabled
                                     type="text"
                                     v-model="formDataCojo.controleur_finnancier"
                                     class="span"
-                                    placeholder="Controller Finnancier"
+                                    placeholder="Contrôleur Financier"
                             />
                         </div>
                     </div>
@@ -124,7 +124,7 @@
 
 
                     <div class="control-group">
-                        <label class="control-label">Date composition</label>
+                        <label class="control-label">Date de composition</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -139,7 +139,7 @@
 
 
                     <div class="control-group">
-                        <label class="control-label">NBR participant</label>
+                        <label class="control-label">Nombre de participant</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -154,7 +154,7 @@
             </div>
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterCojoMarche()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
 
             <!-- end formulaire cojo  -->
@@ -163,14 +163,14 @@
              <div id="modificationCojo" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification de cojo</h3>
+                <h3>Modification de la COJO</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
 
 
                     <div class="control-group">
-                        <label class="control-label">Numero dossier APPEL OFFRE</label>
+                        <label class="control-label">Numéro du dossier d'appel d'offre</label>
                         <div class="controls">
                             <input disabled
                                     type="text"
@@ -180,7 +180,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Lettre Invitation</label>
+                        <label class="control-label">Lettre d'invitation</label>
                         <div class="controls">
                             <select v-model="edite_cojo.lettre_invitation_id" class="span" disabled>
                                 <option v-for="plans in lettreInvitationAMarche(macheid)" :key="plans.id"
@@ -191,7 +191,7 @@
 
 
                     <div class="control-group">
-                        <label class="control-label">Date invitation</label>
+                        <label class="control-label">Date d'invitation</label>
                         <div class="controls">
                             <input disabled
                                    type="date"
@@ -204,7 +204,7 @@
 
 
                     <div class="control-group">
-                        <label class="control-label">Date composition</label>
+                        <label class="control-label">Date de composition</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -216,7 +216,7 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">NBR participant</label>
+                        <label class="control-label">Nombre de participant</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -229,7 +229,7 @@
             </div>
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationCojo()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
             <!-- end modifier cojo -->
 
