@@ -15,7 +15,7 @@
      <table class="table table-striped"  style="background: #f0c71d !important;">
          <tbody>
          <tr>
-             <td style="background: #f0c71d !important;">
+             <td style="background: #00499c !important;color: #fff;height: 10px !important;">
 
                  <label>Ministère
                      <a href="#" @click.prevent="videTypeCF()" v-if="section_id" style="color: red">
@@ -31,7 +31,7 @@
 
                  </model-list-select>
              </td>
-             <td style="background: #f0c71d !important;">
+             <td style="background: #00499c !important;color: #fff">
                  <label>UA<a href="#" @click.prevent="videUniteAdmin()" v-if="unite_administrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
                  </label>
                  <model-list-select style="background-color: #fff;"
@@ -45,7 +45,7 @@
 
                  </model-list-select>
              </td>
-             <td style="background: #f0c71d !important;">
+             <td style="background: #00499c !important;color: #fff">
                  <label>Regions <a href="#" @click.prevent="videRegions()" v-if="region" style="color: red"><i class="fa fa-trash-o"></i></a>
                  </label>
                  <model-list-select style="background-color: #fff;"
@@ -59,7 +59,7 @@
 
                  </model-list-select>
              </td>
-             <td style="background: #f0c71d !important;">
+             <td style="background: #00499c !important;color: #fff">
                  <label>Infrastructure <a href="#" @click.prevent="videInfrastructure()" v-if="infrastructure" style="color: red"><i class="fa fa-trash-o"></i></a>
                  </label>
                  <model-list-select style="background-color: #fff;"
@@ -74,7 +74,7 @@
 
                  </model-list-select>
              </td>
-             <td style="background: #f0c71d !important;">
+             <td style="background: #00499c !important;color: #fff">
                  <label>Type Marché  <a href="#" @click.prevent="videTypeMarche()" v-if="type_marche" style="color: red"><i class="fa fa-trash-o"></i></a>
                  </label>
                  <model-list-select style="background-color: #fff;"
