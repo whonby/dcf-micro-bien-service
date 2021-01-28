@@ -673,7 +673,7 @@ reference_marche
                       <span v-else>PPM</span>
                     </td>
                 <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1 || marche.type_marche_id == 5"> 
-                     <router-link :to="{ name: 'historiqueContualisation', params: { id: marche.id }}"
+                     <router-link :to="{ name: 'detail_hors_sib', params: { id: marche.id }}"
                 class="btn btn-default " title="historique la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link>
@@ -876,7 +876,7 @@ export default {
 
 ImputationBudget() {
 
-      const norme = this.budgetGeneral.find(normeEquipe => normeEquipe.economique_id == this.formData.economique_id && normeEquipe.activite_id == this.formData.activite_id && normeEquipe.status == 'actu');
+      const norme = this.budgetGeneral.find(normeEquipe => normeEquipe.economique_id == this.formData.economique_id && normeEquipe.activite_id == this.formData.activite_id && normeEquipe.actived== 1);
      
 
       if (norme) {
@@ -886,7 +886,7 @@ ImputationBudget() {
     },
      ImputationBudgetModifier() {
       
-      const norme = this.budgetGeneral.find(normeEquipe => normeEquipe.economique_id == this.editMarche.economique_id && normeEquipe.activite_id == this.editMarche.activite_id && normeEquipe.status == 'actu');
+      const norme = this.budgetGeneral.find(normeEquipe => normeEquipe.economique_id == this.editMarche.economique_id && normeEquipe.activite_id == this.editMarche.activite_id && normeEquipe.actived== 1);
 
       if (norme) {
         return norme.codebudget;
@@ -903,7 +903,7 @@ ligneBudgeteyuy() {
      return id => {
         if (id != null && id != "") {
           return this.budgetGeneral.filter(
-            element => element.ua_id == id && element.status== 'actu' && element.gdenature_id== this.formData.gdenature_id 
+            element => element.ua_id == id && element.actived== 1 && element.gdenature_id== this.formData.gdenature_id 
           );
         }
       };
@@ -914,7 +914,7 @@ ligneBudgeteyuy() {
      return id => {
         if (id != null && id != "") {
           return this.budgetGeneral.filter(
-            element => element.economique_id == id && element.status== 'actu' && element.ua_id == this.formData.unite_administrative_id
+            element => element.economique_id == id && element.actived== 1 && element.ua_id == this.formData.unite_administrative_id
           );
         }
       };
@@ -923,7 +923,7 @@ ligneBudgeteyuy() {
      return id => {
         if (id != null && id != "") {
           return this.budgetGeneral.filter(
-            element => element.economique_id == id && element.status== 'actu' && element.ua_id == this.editMarche.unite_administrative_id
+            element => element.economique_id == id && element.actived== 1 && element.ua_id == this.editMarche.unite_administrative_id
           );
         }
       };
@@ -1471,7 +1471,7 @@ anneeAmort() {
      return id => {
         if (id != null && id != "") {
           return this.budgetGeneral.filter(
-            element => element.ua_id == id && element.status== 'actu' && element.gdenature_id== this.editMarche.gdenature_id 
+            element => element.ua_id == id && element.actived== 1 && element.gdenature_id== this.editMarche.gdenature_id 
           );
         }
       };

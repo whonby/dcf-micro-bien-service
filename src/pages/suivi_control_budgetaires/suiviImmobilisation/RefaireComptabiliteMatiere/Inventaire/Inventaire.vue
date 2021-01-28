@@ -1,4 +1,4 @@
-DureeEcoule
+
 <template>
 
 <div>
@@ -419,11 +419,14 @@ DureeEcoule
                      <th style="width:10%">Description</th>
                      
                     <th style="width:10%">Date acquisition / mise en service</th>
-                    <th style="width:5%">Quantité</th>
-                    <th style="width:10%">Valeur d'acquisition</th>
-                    <th style="width:10%;text-align:center">Amortissement</th>
-                   <th style="width:10%;text-align:center">Valeur nette comptable</th>
-                    <th style="width:10%">Action</th>
+                    
+                    <th style="width:2%;text-align:center">Quantité Théorique (A)</th>
+                     <th style="width:5%;text-align:center">Valeur d'acquisition</th>
+                    <th style="width:2%;text-align:center">Quantité Physique (B)</th>
+                    <th style="width:2%;text-align:center">Ecart (B-A)</th>
+                   
+                   <th style="width:5%;text-align:center">Date d'Inventaire</th>
+                    <th style="width:10%" colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -442,38 +445,48 @@ DureeEcoule
                    <td style="width:10%;text-align:center"
                       @dblclick="ModificationMobilier(stock.id)"
                     >{{formaterDate(stock.date_mise_service) || 'Non renseigné'}}</td>
-                  <td style="width:10%;text-align:center"
-                      @dblclick="ModificationMobilier(stock.id)"
-                    >{{stock.quantitestock || 'Non renseigné'}}</td>
+                 
                    
+<td style="text-align: center;"
+                      @dblclick="ModificationMateriel(stock.id)"
+                    >{{stock.quantitestock || 'Non renseigné'}}</td>
+                    <td style="text-align: center;"
+                      @dblclick="ModificationVehicule(stock.id)"
+                    >{{stock.prix_unitaire || 'Non renseigné'}}</td>
+                 <td style="text-align: center;"
+                      @dblclick="ModificationVehicule(stock.id)"
+                    >{{stock.quantite_vue || 'Non renseigné'}}</td>
+                   
+                    <td style="text-align: center;" v-if="(stock.quantite_vue!='')"
+                      @dblclick="ModificationVehicule(stock.id)"
+                    >{{(parseFloat(stock.quantite_vue)-parseFloat(stock.quantitestock)) || 0}}</td>
+<td style="text-align: center;" v-else
+                      @dblclick="ModificationVehicule(stock.id)"
+                    >{{'Non renseigné'}}</td>
 
 
-
-                    <td style="text-align:center;font-weight:bold;"
-                      @dblclick="ModificationMobilier(stock.id)"
-                    >{{formatageSomme(parseFloat(montantPasEquipment(stock))) || 'Non renseigné'}}</td>
-                   <td style="text-align:center;font-weight:bold;" v-if="stock.date_mise_service != null"
-                      @dblclick="ModificationMobilier(stock.id)"
-                    >{{formatageSomme((parseFloat(prixUnitaire(stock.id)) *((DureeEcoule(stock.id))/365)*(1/(dureeVie(stock.id)))))|| 0}}</td>
-
-<td style="text-align:center;font-weight:bold;" v-else
-                      @dblclick="ModificationMobilier(stock.id)"
-                    >{{formatageSomme(0)}}</td>
-
-<td style="text-align:center;font-weight:bold;" v-if="stock.date_mise_service != null"
-                      @dblclick="ModificationMobilier(stock.id)"
-                    >{{formatageSomme((parseFloat(stock.prix_unitaire))-parseFloat((parseFloat(prixUnitaire(stock.id)) *(parseFloat(DureeEcoule(stock.id))/365)*(1/(dureeVie(stock.id))))))}}</td>
-<td style="text-align:center;font-weight:bold;" v-else
-                      @dblclick="ModificationMobilier(stock.id)"
-                    >{{formatageSomme(0)}}</td>
+                   
+                      <td 
+                      @dblclick="ModificationVehicule(stock.id)"
+                      style="text-align:center;font-weight:bold;"
+                    >{{formaterDate(stock.date_inventaire) || 'Non renseigné'}}</td>
                        <td>
+                          <button 
+                        @click.prevent="afficherModalModifierService(index)"
+                       class="btn  btn-success">
+                <span >  <i class="icon icon-folder-open">Inventaire</i></span>
+       
+                </button>
+                      
+                     </td>
+                    <td>
                        <router-link
-                        :to="{name : 'DetailMobilierGestionStock', params: {id:stock.id}}"
-                        class="btn btn-success"
-                        title="Faire Affectation"
+                        :to="{name : 'DetailInventaire', params: {id:stock.id}}"
+                        class="btn btn-info"
+                        title="Voir Inventaire"
                       >
                         <span>
-                          <i class="icon icon-folder-open"> Voir Détail</i>
+                          <i class="icon icon-eye-open"> Détails Inventaire</i>
                         </span>
                       </router-link>
                      </td>
@@ -485,6 +498,8 @@ DureeEcoule
                  <td style="text-align:center;font-weight:bold;" >TOTAL</td>
                   <td style="text-align:center;color:red;font-weight:bold;">{{NbreDesEquipementMobilier(detail_Ua.uAdministrative_id)}}</td>
                    <td style="text-align:center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(montantTotalMobilier))}}</td>
+                 <td></td>
+                 <td></td>
                  <td></td>
                  <td></td>
                  <td></td>
@@ -516,11 +531,14 @@ DureeEcoule
                      <th style="width:10%">No série</th>
                     <!-- <th>Quantité Initiale</th>  -->
                     <th style="width:10%">Date acquisition / mise en service</th>
-                    <th style="width:5%">Quantité</th>
-                    <th style="width:10%">Valeur d'acquisition</th>
-                    <th style="width:10%;text-align:center">Amortissement</th>
-                   <th style="width:10%;text-align:center">Valeur nette comptable</th>
-                    <th style="width:10%">Action</th>
+                    
+                     <th style="width:2%;text-align:center">Quantité Théorique (A)</th>
+                     <th style="width:5%;text-align:center">Valeur d'acquisition</th>
+                    <th style="width:2%;text-align:center">Quantité Physique (B)</th>
+                    <th style="width:2%;text-align:center">Ecart (B-A)</th>
+                   
+                   <th style="width:5%;text-align:center">Date d'Inventaire</th>
+                    <th style="width:5%" colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -551,32 +569,43 @@ DureeEcoule
                     <td style="text-align: center;"
                       @dblclick="ModificationMateriel(stock.id)"
                     >{{stock.quantitestock || 'Non renseigné'}}</td>
-                  <td style="text-align:center;font-weight:bold;"
-                      @dblclick="ModificationMateriel(stock.id)"
-                    >{{formatageSomme(parseFloat(montantPasEquipment(stock))) || 'Non renseigné'}}</td>
-                   <td style="text-align:center;font-weight:bold;" v-if="stock.date_mise_service != null"
-                      @dblclick="ModificationMateriel(stock.id)"
-                    >{{formatageSomme((parseFloat(prixUnitaire(stock.id)) *((DureeEcoule(stock.id))/365)*(1/(dureeVie(stock.id)))))|| 0}}</td>
+                    <td style="text-align: center;"
+                      @dblclick="ModificationVehicule(stock.id)"
+                    >{{stock.prix_unitaire || 'Non renseigné'}}</td>
+                 <td style="text-align: center;"
+                      @dblclick="ModificationVehicule(stock.id)"
+                    >{{stock.quantite_vue || 'Non renseigné'}}</td>
+                   
+                    <td style="text-align: center;" v-if="(stock.quantite_vue!='')"
+                      @dblclick="ModificationVehicule(stock.id)"
+                    >{{(parseFloat(stock.quantite_vue)-parseFloat(stock.quantitestock)) || 0}}</td>
+<td style="text-align: center;" v-else
+                      @dblclick="ModificationVehicule(stock.id)"
+                    >{{'Non renseigné'}}</td>
 
-<td style="text-align:center;font-weight:bold;" v-else
-                      @dblclick="ModificationMateriel(stock.id)"
-                    >{{formatageSomme(0)}}</td>
-
-<td style="text-align:center;font-weight:bold;" v-if="stock.date_mise_service != null"
-                      @dblclick="ModificationMateriel(stock.id)"
-                    >{{formatageSomme((parseFloat(stock.prix_unitaire))-parseFloat((parseFloat(prixUnitaire(stock.id)) *(parseFloat(DureeEcoule(stock.id))/365)*(1/(dureeVie(stock.id))))))}}</td>
-<td style="text-align:center;font-weight:bold;" v-else
-                      @dblclick="ModificationMateriel(stock.id)"
-                    >{{formatageSomme(0)}}</td>
-                        
+                  
+                   
+<td 
+                      @dblclick="ModificationVehicule(stock.id)"
+                      style="text-align:center;font-weight:bold;"
+                    >{{formaterDate(stock.date_inventaire) || 'Non renseigné'}}</td>
                        <td>
+                          <button 
+                        @click.prevent="afficherModalModifierService(index)"
+                       class="btn  btn-success">
+                <span >  <i class="icon icon-folder-open">Inventaire</i></span>
+       
+                </button>
+                      
+                     </td>
+                    <td>
                        <router-link
-                        :to="{name : 'DetailMaterielGestionStock', params: {id:stock.id}}"
-                        class="btn btn-success"
-                        title="Faire Affectation"
+                        :to="{name : 'DetailInventaire', params: {id:stock.id}}"
+                        class="btn btn-info"
+                        title="Voir Inventaire"
                       >
                         <span>
-                          <i class="icon icon-folder-open"> Voir Détail</i>
+                          <i class="icon icon-eye-open"> Détails Inventaire</i>
                         </span>
                       </router-link>
                      </td>
@@ -674,7 +703,7 @@ DureeEcoule
                       @dblclick="ModificationVehicule(stock.id)"
                     >{{stock.quantite_vue || 'Non renseigné'}}</td>
                    
-                    <td style="text-align: center;" v-if="(stock.date_inventaire!='')"
+                    <td style="text-align: center;" v-if="(stock.quantite_vue!='')"
                       @dblclick="ModificationVehicule(stock.id)"
                     >{{(parseFloat(stock.quantite_vue)-parseFloat(stock.quantitestock)) || 0}}</td>
 <td style="text-align: center;" v-else
@@ -800,7 +829,7 @@ DureeEcoule
          </td>
        </tr>
       <tr>
-         <td colspan="2">
+         <td colspan="">
            <div class="control-group">
                             <label class="control-label">Nom Agent</label>
                             <div class="controls">
@@ -809,6 +838,22 @@ DureeEcoule
                             </div>
                           </div>
          </td>
+        <td>
+                          <div class="control-group">
+                            <label class="control-label">Personnel Ua</label>
+                            <div class="controls">
+                              <select v-model="formData.typeuniteadminis_id">
+                                <option value>Sélectionner</option>
+                                <option
+                                  v-for="typeua in groupTriUaImmo"
+                                  :key="typeua.id"
+                                  :value="typeua.id"
+                                >{{typeua.libelle}}</option>
+                              </select>
+                            </div>
+                          </div>
+                        </td>
+        
       </tr>
         </table>
      

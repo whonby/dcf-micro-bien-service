@@ -7,11 +7,21 @@ uniteAdministratives
         <br>
         <br>
         <br>
+        <div class="" align="right">
+                   <router-link :to="{name:'AjoutPersonnelSansContrat'}" tag="a" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter Sans Contrat Personnel
+
+                   </router-link> 
+<router-link :to="{name:'AjoutPersonnelAvecContrat'}" tag="a" data-toggle="modal" class="btn btn-info" align="rigth">Ajouter avec Contrat Personnel
+
+                   </router-link> 
+                   </div>
+                   <br>
+                   <br>
     <table class="table table-bordered table-striped">
                     <thead>
                       <tr>
                          <th style="width:90%">UNITE D'ADMINISTRATIVE</th>
-                        <th>ACTION</th>
+                        <th colspan="2">ACTION</th>
                         
                     </tr>
                     </thead>
@@ -21,10 +31,10 @@ uniteAdministratives
                     v-for="BesoinImmo in listeDesStockGlobalUa"
                     :key="BesoinImmo[0].id"
                   >
-                  <td style="font-size:14px"
+                  <td style="font-size:20px"
                    
                     >{{libelleUniteAdministrative(BesoinImmo[0].unite_administrative_id) || 'Non renseigné'}}</td>
-                  
+                 
                      <td>
                        <router-link
                         :to="{name : 'ListesPersonnelParUa', params: {id:BesoinImmo[0].id}}"
@@ -32,7 +42,7 @@ uniteAdministratives
                         title="Voir Personnel"
                       >
                         <span>
-                          <i class="icon icon-folder-open"> Voir Personnel</i>
+                          <i class="icon icon-folder-open" style="font-size:14px"> Voir Personnel</i>
                         </span>
                       </router-link>
                      </td>

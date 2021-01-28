@@ -497,7 +497,7 @@ marcheHorSibFiltre() {
         if (this.noDCfNoAdmin){
             let colect=[];
             this.marcheHorSibFiltre1.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
