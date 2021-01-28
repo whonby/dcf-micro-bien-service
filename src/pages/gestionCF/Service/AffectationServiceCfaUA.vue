@@ -297,7 +297,7 @@
                                                            <div class="">
                                                                <label class="">Matricule:</label>
                                                                <div class="">
-                                                                   <input type="text" v-model="formDataMembre.matricule" class="span" placeholder="" />
+                                                                   <input type="text" v-model="formDataMembre.matricule" readonly class="span" placeholder="" />
                                                                </div>
                                                            </div>
                                                        </td>
@@ -305,7 +305,7 @@
                                                            <div class="">
                                                                <label class="">Nom et prénom:</label>
                                                                <div class="">
-                                                                   <input type="text" v-model="formDataMembre.name" class="span" placeholder="" />
+                                                                   <input type="text" v-model="formDataMembre.name" readonly class="span" placeholder="" />
                                                                </div>
                                                            </div>
                                                        </td>
@@ -332,7 +332,16 @@
                                                    <tr>
                                                        <td>
                                                            <div class="">
-                                                               <label class="">FONCTION DANS LE SID-CF</label>
+                                                               <label class="">Fonction:</label>
+                                                               <div class="">
+                                                                   <input type="text" readonly required v-model="formDataMembre.fonction" class="span" placeholder="" />
+                                                               </div>
+                                                           </div>
+                                                       </td>
+
+                                                       <td>
+                                                           <div class="">
+                                                               <label class="">ROLE</label>
                                                                <div class="">
                                                                    <select v-model="formDataMembre.role_id">
                                                                        <option></option>
@@ -464,6 +473,7 @@
                     matricule:"",
                     servicecf_id:"",
                     date_debut:"",
+                    fonction:"",
                     role:2
                 },
 
@@ -742,15 +752,21 @@
                     return null
                 }
                 this.ajouterPersonneService(this.formDataMembre)
-                this.formDataMembre={
-                        email:"",
-                        name:"",
-                        role_id:"",
-                        matricule:"",
-                        servicecf_id:"",
-                        date_debut:"",
-                        role:2
-                }
+                // this.formDataMembre={
+                //         email:"",
+                //         name:"",
+                //         role_id:"",
+                //         matricule:"",
+                //         servicecf_id:"",
+                //         date_debut:"",
+                //         role:2
+                // }
+                this.formDataMembre.email=""
+                this.formDataMembre.name=""
+                this.formDataMembre.role_id=""
+                this.formDataMembre.matricule=""
+                this.formDataMembre.date_debut=""
+                this.formDataMembre.role=2
             },
             detacher(id,libelle){
                 this.$('#myAlert1').modal({
@@ -805,16 +821,18 @@
                 console.log(value);
                  if (value){
                      let objet_personnel=this.acteurActivite.find(item=>item.id==value)
-                     //console.log(objet_personnel)
-                     console.log(objet_personnel)
+                     let objet_fonction=this.fonctions.find(item=>item.id==objet_personnel.fonction_id)
+
                      this.formDataMembre.email=objet_personnel.email
                      this.formDataMembre.matricule=objet_personnel.matricule
                      this.formDataMembre.name=objet_personnel.name
-                     console.log(this.formDataMembre)
+                     this.formDataMembre.fonction=objet_fonction.libelle
+                  //   console.log(this.formDataMembre)
                  }else{
                      this.formDataMembre.email=""
                      this.formDataMembre.matricule=""
                      this.formDataMembre.name=""
+                     this.formDataMembre.fonction=""
                  }
 
 
