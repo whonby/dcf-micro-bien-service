@@ -47,8 +47,9 @@
                         <td colspan="3" style="background-color: #ffbd3d;color: #000;text-align:center">Date réception définitive</td>
                         <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
                         <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
+                        <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
                          <td colspan="3" style="background-color: #ffbd3d;color: #000;text-align:center">Situation d'exécution financière</td>
-                        <td colspan="2" style="background-color: #ffbd3d;color: #000;text-align:center">Situation d'exécution physique</td>
+                        <td colspan="6" style="background-color: #ffbd3d;color: #000;text-align:center">Situation d'exécution physique</td>
                     </tr>
                     <tr>
                         <td style="color: #000;width:2%;text-align:center;background-color: #fbcbcb !important;font-size:10px">N° </td>
@@ -71,15 +72,21 @@
                         <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Effective</td>
                                                <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Ecart</td>
         <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Durée d'exécution réelle</td>
-          <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Ecart des délais</td>
 
-                  <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Montant déjà visé</td>
-                   <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Taux (%) OP visé </td>
-                    <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Montant restant à vise</td>
-                 
-                  <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Taux déjà réalisé </td>
-                    <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Taux restant à réaliser</td>
-                 
+                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Ecart de la durée d'exécution
+                            ( + ou - )</td>
+                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">STATUT DU MARCHE (Dans le Délai / Hors Délai)</td>
+
+          <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Montant déjà visé</td>
+
+                  <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Taux (%) OP visé</td>
+                   <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Montant restant à viser </td>
+
+                    <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Tâches prévues au marché</td>
+                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Tâches  réalisées</td>
+                  <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Taux de réalisation</td>
+                    <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Tâches restantes à réaliser</td>
+                        <td style="color: #000;width:5%;text-align:center;background-color: #ffbd3d !important;font-size:10px">Taux restant à réaliser</td>
                     </tr>
    
  </thead>
@@ -104,7 +111,6 @@
    <td>{{formaterDate(dateProvisoirePrevisionnel(activites.id))}}</td>
     <td>
         {{formaterDate(dateProvisoireEffective(activites.id)) || 'Non renseigné'}}
-
     </td>
    <td>
        {{ecartDateProvisoireEffective(activites.id)}}
@@ -114,14 +120,33 @@
    </td>
    <td>{{formaterDate(dateReceptionEffective(activites.id))}}</td>
    <td>{{ecartDateDefinitiveEffective(activites.id)}}</td>
-   <td></td>
-   <td></td>
-   <td></td>
-   <td></td>
-   <td></td>
-   <td></td>
-   <td></td>
-  
+   <td>{{durreReelExe(activites.id)}}</td>
+   <td>{{EcartDurreExecution(activites.id)}}</td>
+   <td>{{durreStatusMarche(activites.id)}}</td>
+     <td>{{formatageSomme(parseFloat(montantMandatMarcheVise(activites.id)))}}</td>
+     <td>{{tauxMandatVise(activites.id)}} % </td>
+   <td>{{formatageSomme(parseFloat(montantMandatMacherRestantVise(activites.id)))}}</td>
+   <td>
+     <ul>
+<!--         <li v-for="item in tachePrevuePasMarche(activites.id)" :key="'TACHE'+item.id">{{item.libelle}}</li>-->
+         <span v-for="(item,index) in tachePrevuePasMarche(activites.id)" :key="'TACHE'+item.id" class="by label"><font color="green">{{index}} ) {{item.libelle}}</font></span>
+
+     </ul>
+
+   </td>
+   <td>
+       <span v-for="(item,index) in tacheRealisePasMarche(activites.id)" :key="'TACHE'+item.id" class="by label"><font color="green">{{index}} ) {{item.libelle}}</font></span>
+
+
+   </td>
+   <td>
+       {{tauxTacheRealise(activites.id)}}
+   </td>
+     <td>
+         <span v-for="(item,index) in tacheRestantRealisePasMarche(activites.id)" :key="'TACHE'+item.id" class="by label"><font color="green">{{index}} ) {{item.libelle}}</font></span>
+
+     </td>
+     <td></td>
  </tr>
                
 
@@ -208,7 +233,7 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                 "uniteAdministratives",
                 "getterBudgeCharge"
             ]),
-            ...mapGetters("bienService",["getActeEffetFinancierPersonnaliser","avenants"]),
+            ...mapGetters("bienService",["getActeEffetFinancierPersonnaliser","avenants","getMandatPersonnaliserVise","TacheMarche"]),
             ...mapGetters("parametreGenerauxAdministratif", [
                 "sections",
                 "type_Unite_admins",
@@ -222,6 +247,199 @@ console.log(this.getActeEffetFinancierPersonnaliser)
     ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
             ...mapGetters("horSib", ["gettersMarcheHorsib"]),
+            /**
+             *
+             *
+             *
+             * let initeVal = 0;
+             let montant=vm.getMandatPersonnaliserVise.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.total_general) ;
+                        }, initeVal);
+             montant_execute=parseFloat(montant_execute) + parseFloat(montant)
+             * */
+            tachePasMarche(){
+              return marche_id=>{
+                  let objet=this.TacheMarche.filter(item=>item.marche_id==marche_id)
+
+                  if(objet.length>0){
+                       return objet
+                  }
+                  return []
+              }
+            },
+            liseSousTacheMarche(){
+                return marche_id=>{
+                    let _objet=this.tachePasMarche(marche_id).filter(item=>item.parent_id!=null)
+                    if(_objet.length>0){
+                        return _objet
+                    }
+                    return _objet
+
+                }
+            },
+            tachePrevuePasMarche(){
+                return marche_id=>{
+                    let _objet=this.tachePasMarche(marche_id).filter(item=>item.parent_id==null)
+                    if(_objet.length>0){
+                        return _objet
+                    }
+                    return _objet
+
+                }
+            },
+            tacheRealisePasMarche(){
+              return marche_id=>{
+                  let _objet=this.tachePasMarche(marche_id)
+                  if(_objet.length>0){
+                      let arraymarche=[]
+                      let vm=this
+                      _objet.forEach(function (val) {
+                           let taux=(parseFloat(vm.totaleSommeRealiseTache(val.id,marche_id)) * 100)/parseFloat(vm.totaleBaseARealiseTache(val.id,marche_id))
+                        //  console.log(taux)
+                          if(taux==100){
+                              arraymarche.push(val)
+                          }
+                      })
+                      return arraymarche
+                  }
+                  return []
+              }
+            },
+            tacheRestantRealisePasMarche(){
+                return marche_id=>{
+                    let _objet=this.tachePasMarche(marche_id)
+                    if(_objet.length>0){
+                        let arraymarche=[]
+                        let vm=this
+                        _objet.forEach(function (val) {
+                            let taux=(vm.totaleSommeRealiseTache(val.id,marche_id) * 100)/vm.totaleBaseARealiseTache(val.id,marche_id)
+                            console.log(val)
+                            if(taux<100){
+                              //  console.log(taux)
+                                arraymarche.push(val)
+                            }
+                        })
+                        return arraymarche
+                    }
+                    return []
+                }
+            },
+            tauxTacheRealise(){
+              return marche_id=>{
+                  let totalTache=this.tachePrevuePasMarche(marche_id)
+                  if(totalTache.length>0){
+                      let totalTacheRealise=this.tacheRealisePasMarche(marche_id).length
+                      let taux=(totalTacheRealise * 100)/totalTache
+                       return taux.toFixed(2)
+                  }
+                 return 0
+              }
+            },
+            totaleBaseARealiseTache(){
+              return (id_tache,marche_id)=>{
+                  let soustache=this.liseSousTacheMarche(marche_id).filter(item=>item.parent_id==id_tache)
+                  console.log("....MARCHE..58865765575..")
+                  console.log(marche_id)
+                  if(soustache.length>0){
+
+                      let base=soustache.length * 100
+                      // console.log(base)
+                      // console.log("....MARCHE....5555555................")
+                      return base
+                  }
+                  return 0
+
+              }
+            },
+            totaleSommeRealiseTache(){
+                return (id_tache,marche_id)=>{
+                    let soustache=this.liseSousTacheMarche(marche_id).filter(item=>item.parent_id==id_tache)
+                    if(soustache.length>0){
+                       let initeVal=0
+                      let obj= soustache.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.taux_realiser) ;
+                        }, initeVal);
+                       console.log(obj)
+                        return  obj
+                    }
+                    return 0
+
+                }
+            },
+            MandatMarche(){
+              return marche_id=>{
+                  let objet =this.getMandatPersonnaliserVise.filter(item=>item.marche_id==marche_id)
+                  if(objet.length>0){
+                      return objet
+                  }
+                  return []
+              }
+            },
+            montantMandatMarcheVise(){
+              return marche_id=>{
+                  let objet=this.MandatMarche(marche_id)
+                  if(objet.length>0){
+                      let initeVal = 0;
+                      let montant=this.getMandatPersonnaliserVise.filter(item=>{
+                          if(item.marche_id==marche_id && (item.decision_cf==8 || item.decision_cf==8)){
+                              return item
+                          }
+                      }).reduce(function (total, currentValue) {
+                          return total + parseFloat(currentValue.total_general) ;
+                      }, initeVal);
+                      return montant
+                  }
+                  return 0
+              }
+            },
+            montantMandatMacherRestantVise(){
+                return marche_id=>{
+                    let objet=this.MandatMarche(marche_id)
+                    if(objet.length>0){
+                        let initeVal = 0;
+                        let montant=this.getMandatPersonnaliserVise.filter(item=>{
+                            if(item.marche_id==marche_id && item.decision_cf==0){
+                                return item
+                            }
+                        }).reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.total_general) ;
+                        }, initeVal);
+                        return montant
+                    }
+                    return 0
+                }
+            },
+             totalMandatMarche(){
+                 return marche_id=>{
+                     let objet=this.MandatMarche(marche_id)
+                     if(objet.length>0){
+                         return objet.length
+                     }
+                     return 0
+                 }
+             },
+            totalMandatViseMarche(){
+                return marche_id=>{
+                    let objet=this.MandatMarche(marche_id)
+                    if(objet.length>0){
+
+                        return this.getMandatPersonnaliserVise.filter(item=>{
+                            if(item.marche_id==marche_id && (item.decision_cf==8 || item.decision_cf==8)){
+                                return item
+                            }
+                        }).length
+
+                    }
+                    return 0
+                }
+            },
+            tauxMandatVise(){
+              return marche_id=>{
+                  let taux=(this.totalMandatViseMarche(marche_id) * 100)/this.totalMandatMarche(marche_id)
+                  if(isNaN(taux)) return 0
+                  return taux.toFixed(2)
+              }
+            },
             nombreDejourCalcule(){
 
                 return (date1,date2)=>{
@@ -246,6 +464,27 @@ console.log(this.getActeEffetFinancierPersonnaliser)
 
 
             },
+
+            nombreDejourCalculeSansDateDuJOUR(){
+
+                return (date1,date2)=>{
+                    if(date1==null) return null;
+
+                    let date_debut=new Date(date1)
+                    let date_fin = new Date(date2)
+                    // let diffDays = date_fin.getDate() - date_debut.getDate();
+                    var timeDiff = date_fin.getTime() - date_debut.getTime();
+                    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                    if (isNaN(diffDays)) return null;
+                    if (parseFloat(diffDays) <0 ) return diffDays
+
+                    return diffDays
+                }
+
+
+            },
+
             formatDate() {
                 return date=>{
                     var d = new Date(date),
@@ -298,6 +537,100 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                            // console.log(objet.date_reception)
                             let jour=this.nombreDejourCalcule(objet.date_odre_service,objet.date_debut_exectuion_definitif)
                             return jour;
+                        }
+                        return ""
+                    }
+                }
+            },
+            durreReelExe(){
+              return marche_id=>{
+                  if(marche_id){
+                      console.log(marche_id)
+                      let objet=this.listeActeEffectFinnancier(marche_id)
+                      if(objet){
+                          // console.log(objet.date_reception)
+                          if(this.dateDebutExectionEffective(marche_id)==null){
+                              return "Non démarré"
+                          }
+
+                          if(objet.date_debut_exectuion_definitif!=null && objet.date_fin_exe==null){
+                              let jour1=this.nombreDejourCalcule(objet.date_debut_exectuion_definitif,"")
+                              return " En cours d'execution ("+jour1+")";
+                          }
+
+                          if(objet.garantie=="oui" && objet.date_fin_exe==null){
+                              let jour=this.nombreDejourCalculeSansDateDuJOUR(this.dateDebutExectionEffective(marche_id),objet.date_reception_definitive)
+                              return jour;
+                          }
+                          let jour=this.nombreDejourCalculeSansDateDuJOUR(this.dateDebutExectionEffective(marche_id),objet.date_fin_exe)
+                          return jour;
+                      }
+                      return ""
+                  }
+              }
+            },
+            durreStatusMarche(){
+                return marche_id=>{
+                    if(marche_id){
+                        console.log(marche_id)
+                        let objet=this.listeActeEffectFinnancier(marche_id)
+                        if(objet){
+                            // console.log(objet.date_reception)
+                            if(objet.date_debut_exectuion_definitif==null){
+                                return "Non démarré"
+                            }
+
+                            if(objet.date_debut_exectuion_definitif!=null && objet.date_fin_exe==null){
+                                let jour1=this.nombreDejourCalcule(objet.date_debut_exectuion_definitif,"")
+                                console.log(jour1)
+                                return " En cours d'execution";
+                            }
+
+                            if(objet.garantie=="oui" && objet.date_fin_exe==null){
+                                let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_reception_definitive)
+                                if(jour<1){
+                                    return "Acheve dans le delais"
+                                }
+                                return "Acheve Hors Délai"
+                            }
+                            let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_fin_exe)
+
+                            if(jour<1){
+                                return "Acheve Dans le Délai"
+                            }
+                            return "Acheve Hors Délai"
+
+                        }
+                        return ""
+                    }
+                }
+            },
+            EcartDurreExecution(){
+                return marche_id=>{
+                    if(marche_id){
+                        console.log(marche_id)
+                        let objet=this.listeActeEffectFinnancier(marche_id)
+                        if(objet){
+                            // console.log(objet.date_reception)
+                            if(objet.date_debut_exectuion_definitif==null){
+                                return ""
+                            }
+
+                            if(objet.date_debut_exectuion_definitif!=null && objet.date_fin_exe==null){
+                                let jour1=this.nombreDejourCalcule(objet.date_debut_exectuion_definitif,"")
+                                console.log(jour1)
+                                return "";
+                            }
+
+                            if(objet.garantie=="oui" && objet.date_fin_exe==null){
+                                let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_reception_provisoire_definitif)
+                                return jour;
+                            }
+                            let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_fin_exe)
+
+                            let durre=parseInt(jour) - parseInt(objet.duree)
+                            return durre
+
                         }
                         return ""
                     }
