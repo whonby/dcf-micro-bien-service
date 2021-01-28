@@ -78,7 +78,7 @@
            
                    <td >
                         <router-link :to="{ name: 'ExecutionLotInvestissement', params: { id: marche.id }}"
-                 class="btn btn-inverse " title="Execution du marche">
+                 class="btn btn-inverse " title="Exécution du marche">
         <span class=""><i class=" icon-fast-forward"></i></span>
     </router-link>
                    </td>

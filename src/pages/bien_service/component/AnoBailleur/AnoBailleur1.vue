@@ -84,7 +84,7 @@ marche_id
 
   <!--Integration ACt-->
 
-  <div id="ajouterAvisBailleur" class="modal hide grdirModalActeEffet" >
+  <div id="ajouterBailleurModeGreAgre" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Information du Bailleur sur le : Lot N° {{infoLot.numero_lot}} {{infoLot.objet}}</h3>
@@ -735,7 +735,7 @@ afficherModalDecisionAnocf(index){
     },
 
     afficheModaleAnoBailleur(index){
-      this.$('#ajouterAvisBailleur').modal({
+      this.$('#ajouterBailleurModeGreAgre').modal({
         backdrop: 'static',
         keyboard: false
       });

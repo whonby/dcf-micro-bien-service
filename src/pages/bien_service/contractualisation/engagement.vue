@@ -31,7 +31,7 @@ affichierMontantAvenant
                              
                                 <th style="font-size:12px;font-weight:bold;">Type de marché</th>
                                 <th style="font-size:12px;font-weight:bold;">Procédure de passation </th>
-                                <th style="font-size:12px;font-weight:bold;">Unité administrative</th>
+                                <th style="font-size:12px;font-weight:bold;">Unité Administrative</th>
                                 <th style="font-size:12px;font-weight:bold;">Activité</th>
                     <th style="font-size:12px;font-weight:bold;">Imputation</th>
                        <th style="font-size:12px;font-weight:bold;">Montant de base</th>
@@ -533,12 +533,12 @@ affichierMontantAvenant
                                          <th title="">Section</th>
                               
                                  <th title="">Fournisseur</th>
-                                <th title="">N°facture</th>
+                                <th title="">N° de la facture</th>
                                  <th>Date de la facture</th>
                                   <th>Imputation</th>
                                 <th>Montant</th>
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th title="Observation service beneficiaire">Observation S-B</th>
+                                <th title="Observation service beneficiaire">Observation Service Bénéficiaire</th>
                                 <th title="Observation Contrôleur financier">Observation CF</th>
                                 <th>Action</th>
                                     </tr>
@@ -710,7 +710,7 @@ affichierMontantAvenant
                       </button> -->
                       <button  class="btn btn-danger" @click="supprimerRealiteServiceFait(realiteService.id)">
                         <span>
-                          <i class="icon icon-trash"></i>
+                          <i class="icon icon-trash">Supprimer</i>
                         </span>
                       </button>
                     </td>
@@ -933,7 +933,7 @@ affichierMontantAvenant
                     <td>
                       <button class="btn btn-danger" @click="supprimerAvenant(type.id)">
                         <span>
-                          <i class="icon icon-trash"></i>
+                          <i class="icon icon-trash">Supprimer</i>
                         </span>
                       </button>
                     </td>
@@ -975,13 +975,13 @@ affichierMontantAvenant
                                        
                              
                                 <th>Montant du mandat</th>
-                                 <th >Decision de l'émetteur</th>
+                                 <th >Décision de l'émetteur</th>
                                 <th title="Date validation Emetteur">Date Emetteur</th>
                                 
                               
                                
                                 <th>Décision CF</th>
-                                <th title="Date validation Cf">Date validation CF</th>
+                                <th title="Date validation Cf">Date de validation du CF</th>
 
                                 
                                 
@@ -1110,17 +1110,17 @@ affichierMontantAvenant
                                     <tr>
 
                                          
-                     <th>type_facture</th>
-                    <th>numero_facture</th>
-                    <th>objet_facture</th>
+                     <th>Type de facture</th>
+                    <th>Numéro de la facture</th>
+                    <th>Objet de la facture</th>
                     
-                     <th>Ua</th>
+                     <th>UA</th>
                     <!-- <th>prix_unitaire</th>
                     <th>Quantité</th> -->
-                    <th>prix_propose_ht</th>
-                    <th>Tva</th>
+                    <th>Prix proposé HT</th>
+                    <th>TVA</th>
                     
-                    <th>prix_propose_ttc</th>
+                    <th>Prix proposé TTC</th>
         
                               
                                 
@@ -1220,7 +1220,7 @@ affichierMontantAvenant
                      <!-- <th>Facture (TTC)</th>
                       <th>Date</th> -->
                     <th>Paiement part Etat</th>
-                    <th>Paiement part Bailleurs</th>
+                    <th>Paiement part Bailleur</th>
                     <!-- <th>Taux execution</th> -->
                     <!-- <th>Reste a payer marché</th> -->
                     <!-- <th>Taux facturétauxFacturation</th> -->
@@ -1420,7 +1420,7 @@ affichierMontantAvenant
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab189">INDENTIFICATION</a>
+                        <a data-toggle="tab" href="#tab189">IDENTIFICATION</a>
                       </li>
                       <li>
                         <a data-toggle="tab" href="#tab289">DESCRIPTION DE LA DEMANDE D'ENGAGEMENT</a>
@@ -1473,13 +1473,13 @@ affichierMontantAvenant
                              
                         </td>
                          <td>
-                          <label class="control-label">Unite d'administrative</label>
+                          <label class="control-label">Unité Administrative</label>
                           
                               <input    type="text"   class="span4" readonly  :value="afficheUALibelle(afficheUAId(editLiquidation.marche_id))" />                              
                              
                         </td>
                           <td>
-                          <label class="control-label">Nature de depense</label>
+                          <label class="control-label">Nature de dépense</label>
                           
                               <input    type="text"   class="span3" readonly :value="afficheGrandNatureLibelle(afficheGrandNatureId(detail_marche.imputation))"  />                
                             
@@ -1508,7 +1508,7 @@ affichierMontantAvenant
                              
                         </td>
                         <td colspan="2">
-                          <label class="control-label">Imputation Budgetaire</label>
+                          <label class="control-label">Imputation Budgétaire</label>
                           
                               <input    type="text"   class="span6" readonly  :value="detail_marche.imputation" />                
                              
@@ -1525,7 +1525,7 @@ affichierMontantAvenant
                       <tr>
                           <td colspan="2">
                          
-                         <label class="control-label">Objet du marche</label>
+                         <label class="control-label">Objet du marché</label>
                           
                               <input    type="text"   class="span8" readonly  :value="detail_marche.objet"  />                
                              
@@ -1538,7 +1538,7 @@ affichierMontantAvenant
                              
                         </td>
                          <td>
-                          <label class="control-label">Numero compte bancaire</label>
+                          <label class="control-label">Numéro du compte bancaire</label>
                           
                               <input    type="text"   class="span4"  readonly :value="afficheLibelleCompteBancaire(afficheIdCompteBancaire(editLiquidation.marche_id))" />                
                              
@@ -1562,25 +1562,25 @@ affichierMontantAvenant
                     
                   />
                           <td colspan="">
-                          <label class="control-label">Mode de reglement</label>
+                          <label class="control-label">Mode de règlement</label>
                           
                               <input    type="text"   class="span4" readonly   :value="afficheLibelleModePaiemnt(afficheIdModePaiement(editLiquidation.marche_id))" />                
                              
                         </td>
                          <td colspan="">
-                          <label class="control-label">Numero demande engagement</label>
+                          <label class="control-label">Numéro de demande d'engagement</label>
                           
                               <input    type="text"   class="span4" readonly  :value="afficheDemandeEngagement(editLiquidation.marche_id)" />                
                              
                         </td>
                         <td colspan="">
-                          <label class="control-label">Numero engagement</label>
+                          <label class="control-label">Numéro d'engagement</label>
                           
                               <input    type="text"   class="span3" readonly  :value="afficheNumeroEngagement(editLiquidation.marche_id)"  />                
                              
                         </td>
                         <td colspan="">
-                          <label class="control-label">Numero bordereau engagement</label>
+                          <label class="control-label">Numéro du bordereau d'engagement</label>
                           
                               <input    type="text"   class="span4" readonly  :value="afficheNumeroBordeauEngagement(editLiquidation.marche_id)"  />                
                              
@@ -1589,22 +1589,22 @@ affichierMontantAvenant
                       </tr>
                           <tr>
                             <td>
-                               <label class="control-label">Numero OP/AT</label>
+                               <label class="control-label">Numéro OP/AT</label>
                           
                               <input    type="text"   class="span4" readonly  :value="afficheNumeroOPATEngagement(editLiquidation.marche_id)"  />  
                             </td>
                              <td>
-                               <label class="control-label">Réf. Engagement  juridique</label>
+                               <label class="control-label">Réf. Engagement juridique</label>
                           
                               <input    type="text"   class="span4" readonly  :value="afficheReferenceEngagement(editLiquidation.marche_id)"  />  
                             </td>
                              <td>
-                               <label class="control-label">Numero mandat</label>
+                               <label class="control-label">Numéro mandat</label>
                           
                               <input    type="text"   class="span3"   v-model="formDataMadat.numero_mandat" required />  
                             </td>
                              <td>
-                               <label class="control-label">Numero Bordereau mandat</label>
+                               <label class="control-label">Numéro du Bordereau mandat</label>
                           
                               <input    type="text"   class="span4"   v-model="formDataMadat.numero_bordereau"  required/>  
                             </td>
@@ -1629,7 +1629,7 @@ affichierMontantAvenant
                              
                         </td>
                           <td>
-                          <label class="control-label">Telephone</label>
+                          <label class="control-label">Téléphone</label>
                           
                               <input    type="text"   class="span4" readonly  :value="afficheTelephoneFournisseur(afficheIdFournisseur(editLiquidation.marche_id))" />                
                              
@@ -1678,7 +1678,7 @@ affichierMontantAvenant
                         </td>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Crédit Autorisés</label>
+                            <label class="control-label">Crédit Autorisé</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="dotationInite(detail_marche.imputation).Dotation_Initiale" readonly/>
                             </div>
@@ -1686,7 +1686,7 @@ affichierMontantAvenant
                         </td>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Cumul des demandes(y compris celle-ci) </label>
+                            <label class="control-label">Cumul des demandes (y compris celle-ci) </label>
                             <div class="controls">
                               <input type="text" class="span4" :value="montantCumulerLiquidationMandat" readonly/>
                             </div>
@@ -1890,7 +1890,7 @@ affichierMontantAvenant
          </td>
          <td>
               <div class="control-group">
-            <label class="control-label">Type Acte finnancier</label>
+            <label class="control-label">Type d'acte financier</label>
             <div class="controls">
                <input
                 type="text"
@@ -1910,7 +1910,7 @@ affichierMontantAvenant
          </td>
          <td>
            <div class="control-group">
-            <label class="control-label">Numero avenant</label>
+            <label class="control-label">Numéro de l'avenant</label>
             <div class="controls">
               <input
                 type="text"
@@ -1939,7 +1939,7 @@ affichierMontantAvenant
          <tr>
           <td>
            <div class="control-group">
-            <label class="control-label">Montant ht</label>
+            <label class="control-label">Montant HT</label>
             <div class="controls">
               <input
                 type="text"
@@ -1980,7 +1980,7 @@ affichierMontantAvenant
          <tr>
             <td>
            <div class="control-group">
-            <label class="control-label">Montant Avenant</label>
+            <label class="control-label">Montant de l'avenant</label>
             <div class="controls">
               <input
                 type="text"
@@ -1993,7 +1993,7 @@ affichierMontantAvenant
          </td>
          <td>
             <div class="control-group">
-            <label class="control-label">Date avenant</label>
+            <label class="control-label">Date de l'avenant</label>
             <div class="controls">
               <input
                 type="date"
@@ -2025,7 +2025,7 @@ affichierMontantAvenant
     <div id="modificationModalAvenant" class="modal hide tailAvenant">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Avenant</h3>
+        <h3>Modifier l'avenant</h3>
       </div>
       <div class="modal-body">
          <table class="table table-bordered table-striped">
@@ -2046,7 +2046,7 @@ affichierMontantAvenant
          </td>
          <td>
               <div class="control-group">
-            <label class="control-label">Type Acte finnancier</label>
+            <label class="control-label">Type d'acte financier</label>
             <div class="controls">
                <!-- <div class="controls"> -->
               <input
@@ -2067,7 +2067,7 @@ affichierMontantAvenant
          </td>
          <td>
            <div class="control-group">
-            <label class="control-label">Numero avenant</label>
+            <label class="control-label">Numéro de l'avenant</label>
             <div class="controls">
               <input
                 type="text"
@@ -2096,7 +2096,7 @@ affichierMontantAvenant
          <tr>
           <td>
            <div class="control-group">
-            <label class="control-label">Montant ht</label>
+            <label class="control-label">Montant HT</label>
             <div class="controls">
               <input
                 type="text"
@@ -2137,7 +2137,7 @@ affichierMontantAvenant
          <tr>
             <td>
            <div class="control-group">
-            <label class="control-label">Montant Avenant</label>
+            <label class="control-label">Montant de l'Avenant</label>
             <div class="controls">
               <input
                 type="text"
@@ -2150,7 +2150,7 @@ affichierMontantAvenant
          </td>
          <td>
             <div class="control-group">
-            <label class="control-label">Date avenant</label>
+            <label class="control-label">Date de l'avenant</label>
             <div class="controls">
               <input
                 type="date"
@@ -2188,14 +2188,14 @@ affichierMontantAvenant
  <div id="modalTypeEngagement" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Choisir le type de procedure</h3>
+        <h3>Choisir le type de procédure</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
          
                          
                             <div class="control-group">
-                            <label class="control-label">Type de procedure</label>
+                            <label class="control-label">Type de procédure</label>
                             <div class="controls">
                              
                               <select v-model="formData.tprocedure">
@@ -2238,7 +2238,7 @@ affichierMontantAvenant
 <div id="ModifierEngage" class="modal hide  taillemodal6">
 <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h5>Modifier Engagement</h5>
+        <h5>Modifier l'Engagement</h5>
       </div>
         
       
@@ -2322,7 +2322,7 @@ affichierMontantAvenant
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Nature depense</label>
+                            <label class="control-label">Nature dépense</label>
                              <div class="controls">
                                  <input
                                 type="text"
@@ -2373,7 +2373,7 @@ affichierMontantAvenant
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Activite</label>
+                            <label class="control-label">Activité</label>
                             <div class="controls">
                              
                                <input
@@ -2388,7 +2388,7 @@ affichierMontantAvenant
                           </td>
                           <td>
                              <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
+                            <label class="control-label">Unité Administrative</label>
                             <div class="controls">
                                <input
                                 type="text"
@@ -2404,7 +2404,7 @@ affichierMontantAvenant
                         </td>
                           <td>
                            <div class="control-group">
-                            <label class="control-label">Type Procedure</label>
+                            <label class="control-label">Type de procédure</label>
                             
                                <div class="controls">
                               <input
@@ -2477,7 +2477,7 @@ affichierMontantAvenant
                        
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Numero Demande engagement</label>
+                            <label class="control-label">Numéro de demande d'engagement</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="editEngagement.numero_demande_engage"/>
                             </div>
@@ -2485,7 +2485,7 @@ affichierMontantAvenant
                         </td>
                          <td>
                          <div class="control-group">
-                            <label class="control-label">Numero engagement</label>
+                            <label class="control-label">Numéro d'engagement</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="editEngagement.numero_engage"/>
                             </div>
@@ -2493,7 +2493,7 @@ affichierMontantAvenant
                         </td>
                          <td>
                          <div class="control-group">
-                            <label class="control-label">Numero Bordereau</label>
+                            <label class="control-label">Numéro du bordereau</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="editEngagement.numero_bordereau"/>
                             </div>
@@ -2501,7 +2501,7 @@ affichierMontantAvenant
                         </td>
                          <td>
                          <div class="control-group">
-                            <label class="control-label">Date demande engagement</label>
+                            <label class="control-label">Date de demande d'engagement</label>
                             <div class="controls">
                               <input type="date" class="span4" v-model="editEngagement.date_demande"/>
                             </div>
@@ -2518,7 +2518,7 @@ affichierMontantAvenant
                         
                         <td>
                             <div class="control-group">
-                              <label class="control-label">Réf. Engagement  juridique</label>
+                              <label class="control-label">Réf. Engagement juridique</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -2531,7 +2531,7 @@ affichierMontantAvenant
                           
                            <td>
                             <div class="control-group">
-                              <label class="control-label">Numero OP/AT</label>
+                              <label class="control-label">Numéro OP/AT</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -2650,7 +2650,7 @@ affichierMontantAvenant
                        
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Nom entreprise</label>
+                            <label class="control-label">Nom de l'entreprise</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="nomFournisseur" readonly/>
                                
@@ -2727,7 +2727,7 @@ affichierMontantAvenant
                         </td>
                          <td>
                             <div class="control-group">
-                              <label class="control-label">Numéro compte</label>
+                              <label class="control-label">Numéro du compte</label>
                               <div class="controls">
                                <select v-model="editEngagement.compte_id" class="span4">
                                 <option
@@ -2741,7 +2741,7 @@ affichierMontantAvenant
                           
                          <td>
                             <div class="control-group">
-                              <label class="control-label">piece justificative</label>
+                              <label class="control-label">Pièce justificative</label>
                               <div class="controls">
                                 <input
                                   type="file"
@@ -2807,7 +2807,7 @@ affichierMontantAvenant
                         
                         <td>
                            <div class="control-group">
-                            <label class="control-label">Ligne Budgetaire</label>
+                            <label class="control-label">Ligne Budgétaire</label>
                             <div class="controls">
                               <!-- <select v-model="editEngagement.ligne_budgetaire_id" class="span4"> -->
                                 <!-- <option
@@ -2824,7 +2824,7 @@ affichierMontantAvenant
                         </td>
                         <td >
                           <div class="control-group">
-                            <label class="control-label">Code Budgetaire</label>
+                            <label class="control-label">Code Budgétaire</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="CodeBudgetaire" readonly/>
                             </div>
@@ -2832,7 +2832,7 @@ affichierMontantAvenant
                         </td>
                        <td>
                           <div class="control-group">
-                            <label class="control-label">Numéro Facture</label>
+                            <label class="control-label">Numéro de la facture</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="affichiernumEngagement1" readonly/>
                             </div>
@@ -2840,7 +2840,7 @@ affichierMontantAvenant
                         </td>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Montant Facture</label>
+                            <label class="control-label">Montant de la facture</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="afficherMontantEngagement1" readonly/>
                             </div>
@@ -2851,7 +2851,7 @@ affichierMontantAvenant
                       <tr>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation Iniatiale</label>
+                            <label class="control-label">Dotation initiale</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="dotationInite(detail_marche.imputation).Dotation_Initiale" readonly/>
                             </div>
@@ -2867,7 +2867,7 @@ affichierMontantAvenant
                         </td>
                            <td>
                           <div class="control-group">
-                            <label class="control-label">Crédits Autorisés(Engagement actuel)</label>
+                            <label class="control-label">Crédits Autorisés (Engagement actuel)</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="sommeMontantEngagement" readonly/>
                             </div>
@@ -2898,7 +2898,7 @@ affichierMontantAvenant
                         </td>
                                                  <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation disponible anterieure</label>
+                            <label class="control-label">Dotation disponible antérieure</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="dotationDisponibleAnterieure" readonly/>
                             </div>
@@ -2906,7 +2906,7 @@ affichierMontantAvenant
                         </td>
                            <td>
                           <div class="control-group">
-                            <label class="control-label">Montant marché</label>
+                            <label class="control-label">Montant du marché</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="montantMarcheAvecAvenant" readonly/>
                             </div>
@@ -2981,7 +2981,7 @@ affichierMontantAvenant
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1894">INDENTIFICATION</a>
+                        <a data-toggle="tab" href="#tab1894">IDENTIFICATION</a>
                       </li>
                       <li>
                         <a data-toggle="tab" href="#tab2894">DESCRIPTION DE LA DEMANDE D'ENGAGEMENT</a>
@@ -2999,7 +2999,7 @@ affichierMontantAvenant
                     <div id="tab1894" class="tab-pane active">
                       <tr>
                         <td>
-                          <label class="control-label">Exercice Budgetaire</label>
+                          <label class="control-label">Exercice Budgétaire</label>
                          
                               <input    type="text"   class="span3" readonly   :value="anneeAmort" />                
                              
@@ -3045,19 +3045,19 @@ affichierMontantAvenant
                       </tr>
                        <tr>
                           <td>
-                          <label class="control-label">Activite</label>
+                          <label class="control-label">Activité</label>
                           
                               <input    type="text"   class="span3" readonly  :value="afficheActiviteLibelle(detail_marche.activite_id)" />                              
                              
                         </td>
                          <td>
-                          <label class="control-label">Unite d'administrative</label>
+                          <label class="control-label">Unité Administrative</label>
                           
                               <input    type="text"   class="span5" readonly   :value="afficherUniteAdmin(detail_marche.unite_administrative_id)" />                              
                              
                         </td>
                           <td>
-                          <label class="control-label">Nature de depense</label>
+                          <label class="control-label">Nature de dépense</label>
                           
                               <input    type="text"   class="span3" readonly  :value="CodeGdeNatureDep(detail_marche.gdenature_id)"  />                
                             
@@ -3090,7 +3090,7 @@ affichierMontantAvenant
                              
                         </td>
                         <td colspan="2">
-                          <label class="control-label">Imputation Budgetaire</label>
+                          <label class="control-label">Imputation Budgétaire</label>
                           
                               <input    type="text"   class="span6" readonly  :value="detail_marche.imputation" />                
                              
@@ -3107,7 +3107,7 @@ affichierMontantAvenant
                       <tr>
                           <td colspan="2">
                          
-                         <label class="control-label">Objet du marche</label>
+                         <label class="control-label">Objet du marché</label>
                           
                               <input    type="text"   class="span7" readonly  :value="detail_marche.objet"  />                
                              
@@ -3133,7 +3133,7 @@ affichierMontantAvenant
                   />
                         </td>
                          <td>
-                          <label class="control-label">Numero compte bancaire</label>
+                          <label class="control-label">Numéro du compte bancaire</label>
                           
                               <input    type="text"   class="span4"  readonly :value="afficheLibelleCompteBancaire(afficheIdCompteBancaire(editMandat.marche_id))" />                
                              
@@ -3157,25 +3157,25 @@ affichierMontantAvenant
                     
                   />
                           <td colspan="">
-                          <label class="control-label">Mode de reglement</label>
+                          <label class="control-label">Mode de règlement</label>
                           
                               <input    type="text"   class="span3" readonly   :value="afficheLibelleModePaiemnt(editMandat.mod_paiement_engage)" />                
                              
                         </td>
                          <td colspan="">
-                          <label class="control-label">Numero demande engagement</label>
+                          <label class="control-label">Numéro demande d'engagement</label>
                           
                               <input    type="text"   class="span4" readonly  :value="afficheDemandeEngagement(editMandat.engagement_id)" />                
                              
                         </td>
                         <td colspan="">
-                          <label class="control-label">Numero engagement</label>
+                          <label class="control-label">Numéro d'engagement</label>
                           
                               <input    type="text"   class="span4" readonly  :value="afficheNumeroEngagement(editMandat.engagement_id)"  />                
                              
                         </td>
                         <td colspan="">
-                          <label class="control-label">Numero bordereau engagement</label>
+                          <label class="control-label">Numéro bordereau d'engagement</label>
                           
                               <input    type="text"   class="span4" readonly  :value="afficheNumeroBordeauEngagement(editMandat.engagement_id)"  />                
                              
@@ -3184,22 +3184,22 @@ affichierMontantAvenant
                       </tr>
                           <tr>
                             <td>
-                               <label class="control-label">Numero OP/AT</label>
+                               <label class="control-label">Numéro OP/AT</label>
                           
                               <input    type="text"   class="span3" readonly  :value="afficheNumeroOPATEngagement(editMandat.engagement_id)"  />  
                             </td>
                              <td>
-                               <label class="control-label">Réf. Engagement  juridique</label>
+                               <label class="control-label">Référence Engagement juridique</label>
                           
                               <input    type="text"   class="span4" readonly  :value="afficheReferenceEngagement(editMandat.engagement_id)"  />  
                             </td>
                              <td>
-                               <label class="control-label">Numero mandat</label>
+                               <label class="control-label">Numéro du mandat</label>
                           
                               <input    type="text"   class="span4"   v-model="editMandat.numero_mandat" required />  
                             </td>
                              <td>
-                               <label class="control-label">Numero Bordereau mandat</label>
+                               <label class="control-label">Numéro Bordereau mandat</label>
                           
                               <input    type="text"   class="span4"   v-model="editMandat.numero_bordereau"  required/>  
                              <input
@@ -3238,7 +3238,7 @@ affichierMontantAvenant
                              
                         </td>
                           <td>
-                          <label class="control-label">Telephone</label>
+                          <label class="control-label">Téléphone</label>
                           
                               <input    type="text"   class="span3" readonly  :value="afficheTelephoneFournisseur(editMandat.entreprise_id)" />                
                              
@@ -3284,7 +3284,7 @@ affichierMontantAvenant
                         </td>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Montant Facture</label>
+                            <label class="control-label">Montant de la facture</label>
                             <div class="controls">
                               <input type="text" class="span4"  :value="afficherMontantMandat"   readonly/>
                             </div>
@@ -3294,7 +3294,7 @@ affichierMontantAvenant
                            <tr>
                              <td>
                           <div class="control-group">
-                            <label class="control-label">Numéro Facture</label>
+                            <label class="control-label">Numéro de la facture</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="affichiernumMandat"  readonly/>
                             </div>
@@ -3302,7 +3302,7 @@ affichierMontantAvenant
                         </td>
                        <td>
                           <div class="control-group">
-                            <label class="control-label">Crédits Autorisés(Engagement actuel)</label>
+                            <label class="control-label">Crédits Autorisés (Engagement actuel)</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="sommeMontantMandat" readonly/>
                             </div>
@@ -3326,7 +3326,7 @@ affichierMontantAvenant
                       
                           <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation Iniatiale</label>
+                            <label class="control-label">Dotation iniatiale</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="dotationInite(detail_marche.imputation).Dotation_Initiale" readonly/>
                             </div>
@@ -3336,14 +3336,14 @@ affichierMontantAvenant
                       </tr>
                      <tr>
                               <td>
-                          <label class="control-label">Dotation disponible anterieure</label>
+                          <label class="control-label">Dotation disponible antérieure</label>
                           
                               <input    type="text"   class="span4" readonly :value="dotationDisponibleAnterieure"  />                
                              
                         </td>
                         <td colspan="">
                          
-                         <label class="control-label">Montant marché</label>
+                         <label class="control-label">Montant du marché</label>
                           
                               <input    type="text"   class="span4" :value="montantMarcheAvecAvenant" readonly   />                
                              
@@ -3398,7 +3398,7 @@ affichierMontantAvenant
 <div id="validaDecisionCF" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Decision CF</h3>
+        <h3>Décision du CF</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
@@ -3417,7 +3417,7 @@ affichierMontantAvenant
                             </div>
                           </div>
                             <div class="control-group">
-                            <label class="control-label">Motif CF </label>
+                            <label class="control-label">Motif du CF </label>
                             <div class="controls">
                               <select v-model="editMandat.motif">
                              
@@ -3433,14 +3433,14 @@ affichierMontantAvenant
                             </div>
                           </div>
                           <div class="control-group">
-                            <label class="control-label">Observation CF</label>
+                            <label class="control-label">Observation du CF</label>
                             <div class="controls">
                               <textarea  class="span" row = "6" v-model="editMandat.observation">
                               </textarea>
                             </div>
                           </div>
                            <div class="control-group">
-                            <label class="control-label">Date Decision CF :</label>
+                            <label class="control-label">Date deéision du CF :</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editMandat.date_motif"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
@@ -3467,12 +3467,12 @@ affichierMontantAvenant
 <div id="exampleModalMotifMandatEmetteur" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Decision Emetteur</h3>
+        <h3>Décision de l'émetteur</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
           <div class="control-group">
-                            <label class="control-label">Décision Emetteur </label>
+                            <label class="control-label">Décision de l'émetteur </label>
                             <div class="controls">
                               <select v-model="editMandat.decision_emetteur">
                                 <option value=""></option>
@@ -3487,21 +3487,21 @@ affichierMontantAvenant
                           </div>
                          
                           <div class="control-group">
-                            <label class="control-label">Observation Emetteur</label>
+                            <label class="control-label">Observation de l'émetteur</label>
                             <div class="controls">
                               <textarea  class="span" row = "6" v-model="editMandat.observation_emetteur">
                               </textarea>
                             </div>
                           </div>
                            <div class="control-group">
-                            <label class="control-label">Date Decision Emetteur :</label>
+                            <label class="control-label">Date décision de l'émetteur :</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editMandat.date_decision_emetteur"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
                             </div>
                           </div>
                                <div class="control-group">
-                            <label class="control-label">Nom Emetteur :</label>
+                            <label class="control-label">Nom de l'émetteur :</label>
                             <div class="controls">
                               <input type="text" class="span"  v-model="editMandat.nom_emetteur"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
@@ -3526,12 +3526,12 @@ affichierMontantAvenant
             <div id="exampleModalMotif" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Validation CF</h3>
+        <h3>Validation du CF</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
           <div class="control-group">
-                            <label class="control-label">Décision CF </label>
+                            <label class="control-label">Décision du CF </label>
                             <div class="controls">
                               <select v-model="editEngagement.decision_cf">
                                 <option value="0">Attente</option>
@@ -3545,7 +3545,7 @@ affichierMontantAvenant
                             </div>
                           </div>
                             <div class="control-group">
-                            <label class="control-label">Motif CF </label>
+                            <label class="control-label">Motif du CF </label>
                             <div class="controls">
                               <select v-model="editEngagement.motif">
                              
@@ -3561,14 +3561,14 @@ affichierMontantAvenant
                             </div>
                           </div>
                           <div class="control-group">
-                            <label class="control-label">Observation CF</label>
+                            <label class="control-label">Observation du CF</label>
                             <div class="controls">
                               <textarea  class="span" row = "6" v-model="editEngagement.observation">
                               </textarea>
                             </div>
                           </div>
                            <div class="control-group">
-                            <label class="control-label">Date Decision CF :</label>
+                            <label class="control-label">Date décision du CF :</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editEngagement.date_motif"/>
                                <input type="hidden" class="span"  :value="recuperer"/>
@@ -3601,7 +3601,7 @@ affichierMontantAvenant
       <div class="modal-body">
         <form class="form-horizontal" >
           <div class="control-group">
-                            <label class="control-label">Décision Service Bénéficiaire </label>
+                            <label class="control-label">Décision du Service Bénéficiaire </label>
                             <div class="controls">
                               <select v-model="editRealiteServiceFait.decision_service_beneficiaire">
                                 <option value="0">Attente</option>
@@ -3616,21 +3616,21 @@ affichierMontantAvenant
                           </div>
                         
                           <div class="control-group">
-                            <label class="control-label">Observation Service Bénéficiaire</label>
+                            <label class="control-label">Observation du Service Bénéficiaire</label>
                             <div class="controls">
                               <textarea  class="span" row = "6" v-model="editRealiteServiceFait.observation_service_beneficiaire">
                               </textarea>
                             </div>
                           </div>
                            <div class="control-group">
-                            <label class="control-label">Date Observation:</label>
+                            <label class="control-label">Date d'observation:</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editRealiteServiceFait.date_service_beneficiaire"/>
                              
                             </div>
                           </div>
                               <div class="control-group">
-                            <label class="control-label">Nom et prenoms</label>
+                            <label class="control-label">Nom et prénoms</label>
                             <div class="controls">
                               <input type="text" class="span"  v-model="editRealiteServiceFait.nom_service_beneficiaire"/>
                              
@@ -3656,12 +3656,12 @@ affichierMontantAvenant
 <div id="exampleDecisionControlleurFinancier" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Observation du Controleur Financier</h3>
+        <h3>Ajouter Observation du Contrôleur Financier</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
           <div class="control-group">
-                            <label class="control-label">Décision Controleur Financier </label>
+                            <label class="control-label">Décision du Contrôleur Financier </label>
                             <div class="controls">
                               <select v-model="editRealiteServiceFait.decision_controleur_financier">
                                 <option value="0">Attente</option>
@@ -3676,21 +3676,21 @@ affichierMontantAvenant
                           </div>
                         
                           <div class="control-group">
-                            <label class="control-label">Observation Controleur Financier</label>
+                            <label class="control-label">Observation du Contrôleur Financier</label>
                             <div class="controls">
                               <textarea  class="span" row = "6" v-model="editRealiteServiceFait.observation_controleur_financier">
                               </textarea>
                             </div>
                           </div>
                            <div class="control-group">
-                            <label class="control-label">Date Observation:</label>
+                            <label class="control-label">Date d'Observation:</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editRealiteServiceFait.date_controleur_financier"/>
                              
                             </div>
                           </div>
                               <div class="control-group">
-                            <label class="control-label">Nom et prenoms</label>
+                            <label class="control-label">Nom et prénoms</label>
                             <div class="controls">
                               <input type="text" class="span"  v-model="editRealiteServiceFait.nom_controleur_financier"/>
                              
@@ -3715,12 +3715,12 @@ affichierMontantAvenant
 <div id="exampleDecisionControlleurFinancierLiquidation" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Observation du Controleur Financier</h3>
+        <h3>Ajouter Observation du Contrôleur Financier</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
           <div class="control-group">
-                            <label class="control-label">Décision Controleur Financier </label>
+                            <label class="control-label">Décision Contrôleur Financier </label>
                             <div class="controls">
                               <select v-model="editLiquidation.decision_controleur_financier">
                                 <option value="0">Attente</option>
@@ -3735,21 +3735,21 @@ affichierMontantAvenant
                           </div>
                         
                           <div class="control-group">
-                            <label class="control-label">Observation Controleur Financier</label>
+                            <label class="control-label">Observation du Contrôleur Financier</label>
                             <div class="controls">
                               <textarea  class="span" row = "6" v-model="editLiquidation.observation_controleur_financier">
                               </textarea>
                             </div>
                           </div>
                            <div class="control-group">
-                            <label class="control-label">Date Observation:</label>
+                            <label class="control-label">Date d'Observation:</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editLiquidation.date_controleur_financier"/>
                              
                             </div>
                           </div>
                               <div class="control-group">
-                            <label class="control-label">Nom et prenoms</label>
+                            <label class="control-label">Nom et prénoms</label>
                             <div class="controls">
                               <input type="text" class="span"  v-model="editLiquidation.nom_controleur_financier"/>
                              
@@ -3773,12 +3773,12 @@ affichierMontantAvenant
 <div id="exampleDecisionEmetteurLiquidation" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Observation de l' emetteur</h3>
+        <h3>Ajouter Observation de l'Emetteur</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
           <div class="control-group">
-                            <label class="control-label">Décision Emetteur </label>
+                            <label class="control-label">Décision de l'Emetteur </label>
                             <div class="controls">
                               <select v-model="editLiquidation.decision_emetteur">
                                 <option value="0">Attente</option>
@@ -3793,21 +3793,21 @@ affichierMontantAvenant
                           </div>
                         
                           <div class="control-group">
-                            <label class="control-label">Observation Emetteur</label>
+                            <label class="control-label">Observation de l'Emetteur</label>
                             <div class="controls">
                               <textarea  class="span" row = "6" v-model="editLiquidation.observation_emetteur">
                               </textarea>
                             </div>
                           </div>
                            <div class="control-group">
-                            <label class="control-label">Date Observation:</label>
+                            <label class="control-label">Date d'Observation:</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editLiquidation.date_emetteur"/>
                              
                             </div>
                           </div>
                               <div class="control-group">
-                            <label class="control-label">Nom et prenoms</label>
+                            <label class="control-label">Nom et prénoms</label>
                             <div class="controls">
                               <input type="text" class="span"  v-model="editLiquidation.nom_emetteur"/>
                              
@@ -3832,12 +3832,12 @@ affichierMontantAvenant
 <div id="exampleDecisionOrdonnateurLiquidation" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Observation de l' Ordonnateur</h3>
+        <h3>Ajouter Observation de l'Ordonnateur</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
           <div class="control-group">
-                            <label class="control-label">Décision Ordonnateur </label>
+                            <label class="control-label">Décision de l'Ordonnateur </label>
                             <div class="controls">
                               <select v-model="editLiquidation.decision_ordonnateur">
                                 <option value="0">Attente</option>
@@ -3852,7 +3852,7 @@ affichierMontantAvenant
                           </div>
                         
                           <div class="control-group">
-                            <label class="control-label">Observation Ordonnateur</label>
+                            <label class="control-label">Observation de l'Ordonnateur</label>
                             <div class="controls">
                               <textarea  class="span" row = "6" v-model="editLiquidation.observation_ordonnateur">
                               </textarea>
@@ -3866,7 +3866,7 @@ affichierMontantAvenant
                             </div>
                           </div>
                               <div class="control-group">
-                            <label class="control-label">Nom et prenoms</label>
+                            <label class="control-label">Nom et prénoms</label>
                             <div class="controls">
                               <input type="text" class="span"  v-model="editLiquidation.nom_ordonnateur"/>
                              
@@ -3932,7 +3932,7 @@ affichierMontantAvenant
                       <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Exercice Budgetaire</label>
+                            <label class="control-label">Exercice Budgétaire</label>
                             
                                
                              <div class="controls">
@@ -3976,7 +3976,7 @@ affichierMontantAvenant
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Nature depense</label>
+                            <label class="control-label">Nature dépense</label>
                              <div class="controls">
                                  <input
                                 type="text"
@@ -4027,7 +4027,7 @@ affichierMontantAvenant
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Activite</label>
+                            <label class="control-label">Activité</label>
                             <div class="controls">
                              
                                <input
@@ -4042,7 +4042,7 @@ affichierMontantAvenant
                           </td>
                           <td>
                              <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
+                            <label class="control-label">Unité Administrative</label>
                             <div class="controls">
                                <input
                                 type="text"
@@ -4058,7 +4058,7 @@ affichierMontantAvenant
                         </td>
                           <td>
                            <div class="control-group">
-                            <label class="control-label">Type Procedure</label>
+                            <label class="control-label">Type de procédure</label>
                             
                                <div class="controls">
                               <input
@@ -4103,7 +4103,7 @@ affichierMontantAvenant
                         </td>
                          <td>
                          <div class="control-group">
-                            <label class="control-label">Numéro demande engagement</label>
+                            <label class="control-label">Numéro demande d'engagement</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="formData.numero_engage"/>
                             </div>
@@ -4111,7 +4111,7 @@ affichierMontantAvenant
                         </td>
                          <td>
                          <div class="control-group">
-                            <label class="control-label">Numero Bordereau</label>
+                            <label class="control-label">Numéro Bordereau</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="formData.numero_bordereau"/>
                             </div>
@@ -4119,7 +4119,7 @@ affichierMontantAvenant
                         </td>
                          <td>
                          <div class="control-group">
-                            <label class="control-label">Date demande engagement</label>
+                            <label class="control-label">Date demande d'engagement</label>
                             <div class="controls">
                               <input type="date" class="span4" v-model="formData.date_demande"/>
                             </div>
@@ -4136,7 +4136,7 @@ affichierMontantAvenant
                         
                         <td>
                             <div class="control-group">
-                              <label class="control-label">Réf. Engagement  juridique</label>
+                              <label class="control-label">Réf. Engagement juridique</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -4149,7 +4149,7 @@ affichierMontantAvenant
                           
                            <td>
                             <div class="control-group">
-                              <label class="control-label">Numero OP/AT</label>
+                              <label class="control-label">Numéro OP/AT</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -4265,7 +4265,7 @@ affichierMontantAvenant
                        
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Nom entreprise</label>
+                            <label class="control-label">Nom de l'entreprise</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="afficheNomFournisseur(NumeroFournisseur_id)" readonly/>
                                
@@ -4279,7 +4279,7 @@ affichierMontantAvenant
                               <input
                                 type="text"
                                 class="span4"
-                                placeholder="Saisir adresse_entreprise"
+                                placeholder="Saisir l'adresse de l'entreprise"
                                 :value="afficheAdresseFournisseur(NumeroFournisseur_id)"
                                 readonly
                               />
@@ -4342,7 +4342,7 @@ affichierMontantAvenant
                         </td>
                           <td>
                             <div class="control-group">
-                              <label class="control-label">Numéro compte</label>
+                              <label class="control-label">Numéro du compte</label>
                               <div class="controls">
                                <!-- <select v-model="formData.compte_id" class="span4">
                                 <option
@@ -4356,7 +4356,7 @@ affichierMontantAvenant
                           </td>
                          <td>
                             <div class="control-group">
-                              <label class="control-label">piece justificative</label>
+                              <label class="control-label">Pièce justificative</label>
                               <div class="controls">
                                 <input
                                   type="file"
@@ -4422,7 +4422,7 @@ affichierMontantAvenant
                         
                         <td>
                            <div class="control-group">
-                            <label class="control-label">Ligne Budgetaire</label>
+                            <label class="control-label">Ligne Budgétaire</label>
                             <div class="controls">
                               <!-- <select v-model="formData.ligne_budgetaire_id" class="span4"> -->
                                 <!-- <option
@@ -4439,7 +4439,7 @@ affichierMontantAvenant
                         </td>
                         <td >
                           <div class="control-group">
-                            <label class="control-label">Imputation Budgetaire</label>
+                            <label class="control-label">Imputation Budgétaire</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="afficherligneEconomiqueBudgetaire" readonly/>
                             </div>
@@ -4447,7 +4447,7 @@ affichierMontantAvenant
                         </td>
                        <td>
                           <div class="control-group">
-                            <label class="control-label">Numéro Facture</label>
+                            <label class="control-label">Numéro de la Facture</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="afficherNumeroFcture" readonly/>
                               
@@ -4457,7 +4457,7 @@ affichierMontantAvenant
                         </td>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Montant Facture</label>
+                            <label class="control-label">Montant de la Facture</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="afficherMontantFacture" readonly/>
                             </div>
@@ -4468,7 +4468,7 @@ affichierMontantAvenant
                       <tr>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Crédit Autorisés</label>
+                            <label class="control-label">Crédit Autorisé</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="dotationInite(detail_marche.imputation).Dotation_Initiale" readonly/>
                             </div>
@@ -4476,7 +4476,7 @@ affichierMontantAvenant
                         </td>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Cumul des demandes(y compris celle-ci) </label>
+                            <label class="control-label">Cumul des demandes (y compris celle-ci) </label>
                             <div class="controls">
                               <input type="text" class="span4" :value="sommeEgagementLigne(detail_marche.id)" readonly/>
                             </div>
@@ -4707,7 +4707,7 @@ affichierMontantAvenant
                       <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Exercice Budgetaire</label>
+                            <label class="control-label">Exercice Budgétaire</label>
                             
                                
                              <div class="controls">
@@ -4752,7 +4752,7 @@ affichierMontantAvenant
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Nature depense</label>
+                            <label class="control-label">Nature de dépense</label>
                              <div class="controls">
                                  <input
                                 type="text"
@@ -4803,7 +4803,7 @@ affichierMontantAvenant
                         </td>
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Activite</label>
+                            <label class="control-label">Activité</label>
                             <div class="controls">
                              
                                <input
@@ -4818,7 +4818,7 @@ affichierMontantAvenant
                           </td>
                           <td>
                              <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
+                            <label class="control-label">Unité Administrative</label>
                             <div class="controls">
                                <input
                                 type="text"
@@ -4834,7 +4834,7 @@ affichierMontantAvenant
                         </td>
                           <td>
                            <div class="control-group">
-                            <label class="control-label">Type Procedure</label>
+                            <label class="control-label">Type de Procédure</label>
                             
                                <div class="controls">
                               <input
@@ -4910,7 +4910,7 @@ affichierMontantAvenant
                             <label class="control-label">Type d'engagement direct</label>
                             <div class="controls">
                               <select v-model="formData.type_engagement_id"  class="span4">
-                                  <option value="0">Marche</option>
+                                  <option value="0">Marché</option>
                                     <option value="1">Régie d'avances - reservation des crédits</option>
                                        <option value="2">Régularisation d'ordre de paiement (OP)</option>
                                     <option value="3">Régularisation avances de trésorerie (AT)</option>
@@ -4923,7 +4923,7 @@ affichierMontantAvenant
                         </td>
                        <td>
                             <div class="control-group">
-                              <label class="control-label">Réf. Engagement  juridique</label>
+                              <label class="control-label">Réf. Engagement juridique</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -4935,7 +4935,7 @@ affichierMontantAvenant
                           </td>
                            <td>
                             <div class="control-group">
-                              <label class="control-label">Numero OP/AT</label>
+                              <label class="control-label">Numéro OP/AT</label>
                               <div class="controls">
                                 <input
                                   type="text"
@@ -4947,7 +4947,7 @@ affichierMontantAvenant
                           </td>
                   <td >
                          <div class="control-group">
-                            <label class="control-label">Autre type engagement</label>
+                            <label class="control-label">Autre type d'engagement</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="formData.autre_engagement" :readonly="veifautreengagement"/>
                             </div>
@@ -4960,7 +4960,7 @@ affichierMontantAvenant
                   <tr>
                           <td>
                          <div class="control-group">
-                            <label class="control-label">Numero mandat</label>
+                            <label class="control-label">Numéro mandat</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="formData.numero_mandat"/>
                             </div>
@@ -4969,7 +4969,7 @@ affichierMontantAvenant
                         
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Numero Bordereau</label>
+                            <label class="control-label">Numéro de Bordereau</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="formData.numero_bordereau"/>
                             </div>
@@ -4983,7 +4983,7 @@ affichierMontantAvenant
                         
                            <td>
                          <div class="control-group">
-                            <label class="control-label">Date de reception dossier</label>
+                            <label class="control-label">Date de réception de dossier</label>
                             <div class="controls">
                               <input type="date" class="span4" v-model="formData.date_reception_cf"/>
                             </div>
@@ -5093,7 +5093,7 @@ affichierMontantAvenant
                        
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Nom entreprise</label>
+                            <label class="control-label">Nom de l'entreprise</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="nomFournisseur" readonly/>
                                
@@ -5171,7 +5171,7 @@ affichierMontantAvenant
                        
                          <td>
                             <div class="control-group">
-                              <label class="control-label">Numéro compte</label>
+                              <label class="control-label">Numéro du compte</label>
                               <div class="controls">
                                <select v-model="formData.compte_id" class="span4">
                                 <option
@@ -5184,7 +5184,7 @@ affichierMontantAvenant
                           </td>
                          <td>
                             <div class="control-group">
-                              <label class="control-label">piece justificative</label>
+                              <label class="control-label">Pièce justificative</label>
                               <div class="controls">
                                 <input
                                   type="file"
@@ -5250,7 +5250,7 @@ affichierMontantAvenant
                         
                         <td>
                            <div class="control-group">
-                            <label class="control-label">Ligne Budgetaire</label>
+                            <label class="control-label">Ligne Budgétaire</label>
                             <div class="controls">
                               <!-- <select v-model="formData.ligne_budgetaire_id" class="span4"> -->
                                 <!-- <option
@@ -5267,7 +5267,7 @@ affichierMontantAvenant
                         </td>
                         <td >
                           <div class="control-group">
-                            <label class="control-label">Code Budgetaire</label>
+                            <label class="control-label">Code Budgétaire</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="CodeBudgetaire" readonly/>
                             </div>
@@ -5275,7 +5275,7 @@ affichierMontantAvenant
                         </td>
                        <td>
                           <div class="control-group">
-                            <label class="control-label">Numéro Facture</label>
+                            <label class="control-label">Numéro de la Facture</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="afficherNumeroFcture" readonly/>
                             </div>
@@ -5283,7 +5283,7 @@ affichierMontantAvenant
                         </td>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Montant Facture</label>
+                            <label class="control-label">Montant de la Facture</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="afficherMontantFacture" readonly/>
                             </div>
@@ -5294,7 +5294,7 @@ affichierMontantAvenant
                       <tr>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation Iniatiale</label>
+                            <label class="control-label">Dotation initiale</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="dotationInite(detail_marche.imputation).Dotation_Initiale" readonly/>
                             </div>
@@ -5310,7 +5310,7 @@ affichierMontantAvenant
                         </td>
                            <td>
                           <div class="control-group">
-                            <label class="control-label">Crédits Autorisés(Engagement actuel)</label>
+                            <label class="control-label">Crédits Autorisés (Engagement actuel)</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="sommeMontant" readonly/>
                             </div>
@@ -5343,7 +5343,7 @@ affichierMontantAvenant
                         </td>
                                                  <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation disponible anterieure</label>
+                            <label class="control-label">Dotation disponible antérieure</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="dotationDisponibleAnterieure" readonly/>
                             </div>
@@ -5351,7 +5351,7 @@ affichierMontantAvenant
                         </td>
                            <td>
                           <div class="control-group">
-                            <label class="control-label">Montant marché</label>
+                            <label class="control-label">Montant du marché</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="montantMarcheAvecAvenant" readonly/>
                             </div>
@@ -5409,7 +5409,7 @@ Total général
     <div id="modatFactureModifier" class="modal hide taillemodal45">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier  Facture</h3>
+        <h3>Modifier la facture</h3>
       </div>
       <div class="modal-body">
        <table class="table table-bordered table-striped tailfacture">
@@ -5418,7 +5418,7 @@ Total général
               <td>
               
               <div class="control-group">
-                <label class="control-label">Type facture</label>
+                <label class="control-label">Type de facture</label>
                 <div class="controls">
                   <select v-model="formData1.typfacture_id" class="span3" >
                     
@@ -5433,7 +5433,7 @@ Total général
             </td>
               <td>
               <div class="control-group">
-                <label class="control-label">Numero facture</label>
+                <label class="control-label">Numéro de facture</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -5463,7 +5463,7 @@ Total général
              <td>
               
               <div class="control-group">
-                <label class="control-label">Unite administrative</label>
+                <label class="control-label">Unité Administrative</label>
                 <div class="controls">
                  <input
                     type="text"
@@ -5484,7 +5484,7 @@ Total général
            <tr>
                <td colspan="2"> 
               <div class="control-group">
-                <label class="control-label">Objet facture</label>
+                <label class="control-label">Objet de la facture</label>
                 <div class="controls">
                  
                   <textarea rows="1" v-model="formData1.objet_facture" class="span5">
@@ -5511,7 +5511,7 @@ Total général
                <td>
               
               <div class="control-group">
-                <label class="control-label">exonéré</label>
+                <label class="control-label">Exonéré</label>
                 <div class="controls">
                   <select v-model="formData1.exonere" class="span">
                   
@@ -6324,7 +6324,7 @@ Total général
               <td>
               
               <div class="control-group">
-                <label class="control-label">Type facture</label>
+                <label class="control-label">Type de facture</label>
                 <div class="controls">
                   <select v-model="formData1.typfacture_id" class="span3" >
                     
@@ -6339,7 +6339,7 @@ Total général
             </td>
               <td>
               <div class="control-group">
-                <label class="control-label">Numero facture</label>
+                <label class="control-label">Numéro de la facture</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -6369,7 +6369,7 @@ Total général
              <td>
               
               <div class="control-group">
-                <label class="control-label">Unite administrative</label>
+                <label class="control-label">Unité Administrative</label>
                 <div class="controls">
                  <input
                     type="text"
@@ -6390,7 +6390,7 @@ Total général
            <tr>
                <td colspan="2"> 
               <div class="control-group">
-                <label class="control-label">Objet facture</label>
+                <label class="control-label">Objet de la facture</label>
                 <div class="controls">
                  
                   <textarea rows="3" :value="detail_marche.objet" class="span5">
@@ -6416,7 +6416,7 @@ Total général
                <td>
               
               <div class="control-group">
-                <label class="control-label">exonéré</label>
+                <label class="control-label">Exonéré</label>
                 <div class="controls">
                   <select v-model="formData1.exonere" class="span">
                   
@@ -7223,7 +7223,7 @@ Total général
      <div id="modalFactureAjouterEngagementDirect" class="modal hide taillemodal45">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Facture Definitive</h3>
+        <h3>Ajouter Facture Définitive</h3>
       </div>
       <div class="modal-body " >
         <table class="table table-bordered table-striped tailfacture">
@@ -7237,7 +7237,7 @@ Total général
                 <div class="controls">
                   <select v-model="formData1.typfacture_id" class="span">
                   
-                    <option value="1">Facture definitive</option>
+                    <option value="1">Facture définitive</option>
                     
                   </select>
                  
@@ -7246,7 +7246,7 @@ Total général
             </td> 
               <td>
               <div class="control-group">
-                <label class="control-label">Numero facture</label>
+                <label class="control-label">Numéro de la facture</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -7276,7 +7276,7 @@ Total général
              <td>
               
               <div class="control-group">
-                <label class="control-label">Unite administrative</label>
+                <label class="control-label">Unité Administrative</label>
                 <div class="controls">
                  <input
                     type="text"
@@ -7297,7 +7297,7 @@ Total général
            <tr>
                <td colspan="2"> 
               <div class="control-group">
-                <label class="control-label">Objet facture</label>
+                <label class="control-label">Objet de la facture</label>
                 <div class="controls">
                  
                   <textarea rows="3" :value="detail_marche.objet" class="span6">
@@ -7323,7 +7323,7 @@ Total général
                <td>
               
               <div class="control-group">
-                <label class="control-label">exonéré</label>
+                <label class="control-label">Exonéré</label>
                 <div class="controls">
                   <select v-model="formData1.exonere" class="span">
                   

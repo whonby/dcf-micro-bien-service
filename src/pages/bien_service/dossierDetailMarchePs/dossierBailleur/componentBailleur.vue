@@ -8,7 +8,7 @@
                                     <thead>
                                     <tr>
                                         <th>Bailleur</th>
-                                        <th>Type finanncement</th>
+                                        <th>Type de financement</th>
                                          <th>Montant du bailleur TTC </th>
                                         <th>Montant TTC du contrat </th>
                                          <th>Taux % </th>
@@ -92,7 +92,7 @@
 
                                        <td>
                           <div class="control-group">
-                        <label class="control-label">Refference Marché</label>
+                        <label class="control-label">Référence du marché</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -106,7 +106,7 @@
 
                                           <td>
                           <div class="control-group">
-                        <label class="control-label">Montant marché (TTC )</label>
+                        <label class="control-label">Montant du marché (TTC )</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -132,7 +132,7 @@
 
                                            <td>
                                             <div class="control-group">
-                                            <label div class="control-label">Type finnancement <code>*</code> </label>
+                                            <label div class="control-label">Type de financement <code>*</code> </label>
                                             <div class="controls">
 
                                                 <select v-model="formBailleur.type_finnancement_id" class="span">
@@ -153,14 +153,14 @@
                                                     <input type="text" class="span"  v-model="formBailleur.montant_ht"
                                                      placeholder="saisir le montant hors taxe">
                                                 </div>
-                                                   <code v-if="essaiMontant>afficherMontantTtcDeActe(macheid)">la somme des bailleurs > au montant du contrat</code>   
+                                                   <code v-if="essaiMontant>afficherMontantTtcDeActe(macheid)">La somme des montants des bailleurs > au montant du contrat</code>   
                                             </div>
                                            </td>
                                       
                                         <td>
               
                                  <div class="control-group">
-                                        <label class="control-label">exonéré</label>
+                                        <label class="control-label">Exonéré</label>
                                         <div class="controls">
                                         <select v-model="formBailleur.exonere" class="span">
                                         
@@ -278,7 +278,7 @@
 
                                        <td>
                           <div class="control-group">
-                        <label class="control-label">Refference Marché</label>
+                        <label class="control-label">Référence du Marché</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -292,7 +292,7 @@
 
                                           <td>
                           <div class="control-group">
-                        <label class="control-label">Montant marché (TTC )</label>
+                        <label class="control-label">Montant du marché (TTC)</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -317,7 +317,7 @@
 
                                            <td>
                                             <div class="control-group">
-                                            <label div class="control-label">Type finnancement <code>*</code> </label>
+                                            <label div class="control-label">Type de financement <code>*</code> </label>
                                             <div class="controls">
 
                                                 <select v-model="edit_bailleur_marche.type_finnancement_id" class="span">
@@ -336,13 +336,13 @@
                                                 <div class="controls">
                                                     <input type="text" class="span" placeholder="Montant" v-model="edit_bailleur_marche.montant_ht">
                                                 </div>
-                                                 <code v-if="somme>=EssaiMontant">la somme des bailleurs > au montant du contrat</code>
+                                                 <code v-if="somme>=EssaiMontant">La somme des montants des bailleurs > au montant du contrat</code>
                                             </div>
                                            </td>
                                         <td>
               
                                  <div class="control-group">
-                                        <label class="control-label">exonéré</label>
+                                        <label class="control-label">Exonéré</label>
                                         <div class="controls">
                                         <select v-model="edit_bailleur_marche.exonere" class="span">
                                         

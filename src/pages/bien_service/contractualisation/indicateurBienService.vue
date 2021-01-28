@@ -29,7 +29,7 @@
                     <tr>
             <td>
                   <div class="control-group">
-                                <label class="control-label">Année Budgetaire</label>
+                                <label class="control-label">Année Budgétaire</label>
                                 <div class="controls ">
                             
                           <select v-model="budgetaire" class="span">
@@ -41,7 +41,7 @@
               </td>
                <td>
                   <div class="control-group">
-                                <label class="control-label" >Type marche</label>
+                                <label class="control-label" >Type de marché</label>
                                 <div class="controls ">
                             
                             <select v-model="typemarche" class="span3" >
@@ -53,7 +53,7 @@
               </td>
                <td>
                   <div class="control-group">
-                                <label class="control-label" >Procedure passation</label>
+                                <label class="control-label" >Procédure de passation</label>
                                 <div class="controls ">
                             
                            <select v-model="Procedure" class="span3"  >
@@ -161,14 +161,14 @@
                   <tr>
                     <th>Année</th>
                       <th>N°marché</th>
-                        <th>Objet marché</th>
-                      <th>Type marché</th>
-                      <th>Procedure passation</th>
+                        <th>Objet du marché</th>
+                      <th>Type de marché</th>
+                      <th>Procédure de passation</th>
                        <th>Section</th>
                     <th>Fournisseur</th>
                       <th>Montant Réel</th>
                   
-                    <th title="montant facturé">Mont.facturé</th>
+                    <th title="montant facturé">Montant facturé</th>
                     <th>Solde</th>
                       <th>%payé</th>
                     

@@ -16,13 +16,13 @@
                   <table class="table table-bordered table-striped" v-if="macheid">
                       <thead>
                       <tr>
-                           <th>Ref offre</th>
+                           <th>Référence de l'offre</th>
                            <th>Montant Confidentiel </th>
-                           <th>Nmbre particiapnt</th>
-                          <th>Date Composition </th>
-                          <th>Date ouverture</th>
-                          <th>Date offre technique</th>
-                          <th>Date offre financiere</th>
+                           <th>Nombre de particiapnt</th>
+                          <th>Date de composition </th>
+                          <th>Date d'ouverture</th>
+                          <th>Date de l'offre technique</th>
+                          <th>Date de l'offre financière</th>
                           
                           <th>Action</th>
                       </tr>
@@ -76,14 +76,14 @@
                 <div id="ajouterCojo" class="modal hide grdirModalAnalyse">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                 <h3>Ajouter Cojo</h3>
+                 <h3>Ajouter la COJO</h3>
             </div>
 
                 <table class="table table-bordered table-striped">
                         <tr>
                             <td>
                         <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -96,7 +96,7 @@
                             </td>
                             <td>
                      <div class="control-group">
-                        <label class="control-label">Nbre de participants</label>
+                        <label class="control-label">Nombre de participants</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -111,7 +111,7 @@
                      <td>
                        
                      <div class="control-group">
-                        <label class="control-label">Montant Confidentiel</label>
+                        <label class="control-label">Montant confidentiel</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -161,7 +161,7 @@
                             <td>
 
                      <div class="control-group">
-                        <label class="control-label">Date ouverture d'offre Technique</label>
+                        <label class="control-label">Date d'ouverture offre Technique</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -174,7 +174,7 @@
                             </td>
                             <td >
                     <div class="control-group">
-                        <label class="control-label">Date ouverture d'offre financiere</label>
+                        <label class="control-label">Date d'ouverture offre Financière</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -187,7 +187,7 @@
                               <td>
               
                                  <div class="control-group">
-                                        <label class="control-label">exonéré</label>
+                                        <label class="control-label">Exonéré</label>
                                         <div class="controls">
                                         <select v-model="formDataCojo.exonere" class="span">
                                         
@@ -283,7 +283,7 @@
              <div id="modificationCojo" class="modal hide grdirModalAnalyse">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification de cojo</h3>
+                <h3>Modification de la COJO</h3>
             </div>
             
                   <table class="table table-bordered table-striped">
@@ -292,7 +292,7 @@
 
                           <td>
                             <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                              <input
                                     type="text"
@@ -305,7 +305,7 @@
                           </td>
                           <td>
                      <div class="control-group">
-                        <label class="control-label">Nbre de participants</label>
+                        <label class="control-label">Nombre de participants</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -350,7 +350,7 @@
 
                         <td>
                          <div class="control-group">
-                        <label class="control-label">Date composition</label>
+                        <label class="control-label">Date de composition</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -364,7 +364,7 @@
                           <td>
 
                      <div class="control-group">
-                        <label class="control-label">Date ouverture d'offre Technique</label>
+                        <label class="control-label">Date d'ouverture offre Technique</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -377,7 +377,7 @@
                             </td>
                             <td >
                     <div class="control-group">
-                        <label class="control-label">Date ouverture d'offre financiere</label>
+                        <label class="control-label">Date d'ouverture offre Financière</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -391,7 +391,7 @@
                               <td>
               
                                  <div class="control-group">
-                                        <label class="control-label">exonéré</label>
+                                        <label class="control-label">Exonéré</label>
                                         <div class="controls">
                                         <select v-model="edite_cojo.exonere" class="span">
                                         
@@ -474,7 +474,7 @@
             
           <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationCojo()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
             <!-- end modifier cojo -->
 

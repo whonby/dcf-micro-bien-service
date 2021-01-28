@@ -107,7 +107,7 @@
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000, ['PSO'], detail_marche.id)">Procédure Simplifiée à compétition Ouverte(PSO)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AON'] , detail_marche.id)">Appel d'Offre Ouvert National (AON)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOI'] , detail_marche.id)">Appel d'Offre Ouvert international (AOI)</h4>
-            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOR'] , detail_marche.id)">Appel d'Offre Ouvert Restreint (AOR)</h4>
+            <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(100000000 , ['AOR'] , detail_marche.id)">Appel d'Offre Restreint (AOR)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['ED'],detail_marche.id)">Entente direct (ED)</h4>
             <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['CONV'],detail_marche.id)">Convention (CONV)</h4>
               <h4 style="text-align:center;" v-else-if="affcicheEtapeProcedure(0,['LCVM'],detail_marche.id)">Lettre de Commande Valant Marché (LCVM)</h4>
@@ -689,7 +689,7 @@
                                 <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">PV Jugement</a></li>
 
                                  <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP">D.DMP</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tab028" title="ANO/DMP attribution">A.ANO</a></li> -->
+                                <!-- <li class=""><a data-toggle="tab" href="#1" title="ANO/DMP attribution">A.ANO</a></li> -->
                                       
                                       <li class=""><a data-toggle="tab" href="#tab0008" title="demande ANO Bailleur"> D.Bailleur </a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab0008" title="ANO bailleur attribution">A.Bailleur </a></li> -->
@@ -873,7 +873,7 @@
 
                 </div>
 
-                  <div id="tab028" class="tab-pane">
+                  <div id="1" class="tab-pane">
 
 <!--               <div align="right">-->
 <!--                    <div class="widget-content">-->
@@ -1038,10 +1038,10 @@
                             <ul class="nav nav-tabs">
                                  <li class="active"><a data-toggle="tab" href="#tab4569">l'offre</a></li>
                                  <li class=""><a data-toggle="tab" href="#lot2">Lot</a></li>
-                              <li class=""><a data-toggle="tab" href="#tab28">D.ANO Bailleur</a></li>
+                              <li class=""><a data-toggle="tab" href="#tab0128">D.ANO Bailleur</a></li>
 
                                 <li class=""><a data-toggle="tab" href="#tab10">Attribution</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab00214">Bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab0000214">Bailleur</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2025">ANRMP</a></li>
                                
                               
@@ -1065,7 +1065,7 @@
                              <lot-marche :macheid="detail_marche.id"></lot-marche>
                            </div>
 
-                         <div id="tab28" class="tab-pane">
+                         <div id="tab0128" class="tab-pane">
 
 
                     <AnoBailleur1 :macheid="detail_marche.id"></AnoBailleur1>
@@ -1075,14 +1075,14 @@
                 </div>
 
                            <div id="tab10" class="tab-pane">
-                    <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
+                    <ActeEffetFinancier1 :macheid="detail_marche.id"></ActeEffetFinancier1>
 <!--                <component-acte :macheid="detail_marche.id"></componentActe>-->
 
                 </div>
                 
 
 
-                         <div id="tab00214" class="tab-pane">
+                         <div id="tab0000214" class="tab-pane">
                 <div align="right">
              <!-- <div class="widget-content">
                  <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
@@ -1172,12 +1172,12 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
   import AnoDMPLCV from "@/pages/bien_service/component/AnoDMP/AnoDMPLCV";
   import AnoBailleur from "@/pages/bien_service/component/AnoBailleur/AnoBailleur";
     import ActEffeFinanciere from "@/pages/bien_service/component/ActEffetFinancier/ActEffeFinanciere";
-    //import ActEffeFinancier1 from "../../../pages/bien_service/component/ActEffetFinancier/ActeEffetFinancier1"
+    import ActeEffetFinancier1 from "../../../pages/bien_service/component/ActEffetFinancier/ActeEffetFinancier1"
     export default {
        
         components:{
           ActEffeFinanciere,
-         // ActEffeFinancier1,
+          ActeEffetFinancier1,
           AnoBailleur,
           AnoBailleurLCV,
           ActeEffetFinancierLCV,
