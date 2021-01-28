@@ -1,9 +1,24 @@
 
 <template>
 
-<div>
+<div class="container-fluid">
+      <hr />
+      
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="widget-box">
+            <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>Ajouter personnel</h5>
+              <!-- <div align="right">
+                Search:
+                <input type="search" placeholder />
+              </div>-->
+            </div>
 
-            <div class="table-responsive text-nowrap">
+         <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">
                 <div class="widget-box">
                     <div class="widget-title">
@@ -427,21 +442,55 @@
                           class="btn btn-primary"
                           @click.prevent="ajouterTitreLocal"
                         >Valider</a>
-                        <!-- <a
-                          @click.prevent="afficherModalListePersonnel()"
+                        <a
+                          @click.prevent="afficherModalListeExecution()"
                           class="btn"
                           href="#"
-                        >Fermer</a> -->
+                        >Fermer</a>
                       </div>
                     </div>
                   </div>
                 </div>
               </table>
             </div>
-         
-        
-      
+          </div>
+        </div>
+      </div>
+      <notifications/>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </template>
 <script>
@@ -810,6 +859,13 @@ exoEnCours() {
             ...mapActions('bienService',['supprimerActeEffetFinancier',
           'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
            
+
+
+afficherModalListeExecution(){
+                window.history.back();
+            },
+
+
            afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',

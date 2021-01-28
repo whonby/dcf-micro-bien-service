@@ -287,23 +287,52 @@ loading(){
   }
   return true
 },
+ filtre_unite_admin() {
+                if(this.noDCfNoAdmin){
+                    let colect=[];
+                    let vM=this
+                    this.uniteAdministratives.filter(item=>{
+                        if(vM.getterUniteAdministrativeByUser.length>0){
+                            let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                            if (val!=undefined){
+                                colect.push(item)
+                                return item
+                            }
+                        }
+
+                    })
+                    return colect
+                }
+                return this.uniteAdministratives
+            },
+            listeMarcheUniteAdmin(){
+                let colect=[]
+                let vM=this;
+                this.filtre_unite_admin.forEach(function (value) {
+                    let objet=vM.marches.filter(item=>{
+                            if(item.parent_id==null && item.unite_administrative_id==value.id && item.sib==1 ){
+                                //  console.log(item.parent_id)
+                                return item
+                            }
+                        }
+                    )
+                    if(objet!=undefined){
+                        objet.forEach(function (val) {
+                            let objet=   colect.find(item=>item.id==val.id)
+                            if(objet==undefined){
+                                colect.push(val)
+                            }
+                        })
+                    }
+
+
+                })
+                return colect
+            },
 // pour tous les marches en investissement
    afficherMarcheInvestissementParDroitAccess() {
        // const st = this.search.toLowerCase();
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && element.attribue==2)
-           
-        }
-           return  this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1 && element.attribue==2)
-       
+       return this.listeMarcheUniteAdmin
     },
 
 

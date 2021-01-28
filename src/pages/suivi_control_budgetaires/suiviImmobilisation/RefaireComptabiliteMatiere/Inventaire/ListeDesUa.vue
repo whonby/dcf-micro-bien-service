@@ -70,7 +70,7 @@
                     >{{afficherUniteAdministrative(BesoinImmo[0].uAdministrative_id) || 'Non renseigné'}}</td>
                    <td style="font-size:14px" >
                        <router-link :to="{ name: 'Inventaire', params: { id: BesoinImmo[0].id }}"
-                 class="btn btn-inverse " title="">
+                 class="btn btn-success " title="">
         <span class="">Voir Article</span>
     </router-link>
                       
