@@ -764,7 +764,8 @@ else
       ...this.formData,
       marche_id :this.macheid,
    type_acte_financier:4,
-   montant_avenant:this.affichierMontantAvenantTTC
+   montant_avenant:this.affichierMontantAvenantTTC,
+   
        };
       this.ajouterAvenant(nouvelObjet);
 this.$("#exampleModalAvenant").modal('hide');

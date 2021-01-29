@@ -133,6 +133,12 @@
                   
                 </tbody>
               </table> -->
+              <div align="right">
+
+      <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+
+
+                            </div>
               <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">
                 <div class="widget-box">
@@ -152,7 +158,7 @@
                      
                     </ul>
                   </div>
-                         <div class="widget-content tab-content">
+                         <div class="widget-content tab-content"  id="printMe">
                           <div id="RealiteService" class="tab-pane active">
                             <h5 style="text-align:center;color:green;font-size:20px">TYPE DE MARCHE : {{afficherLibelleTypeMarche(formData.type_marche_id)}} - EN COURS D'EXECUTION ({{listeDesMarcheEnCoursExecution.length}})</h5>
                                <table class="table table-bordered table-striped" id="Nature_section">
@@ -584,6 +590,9 @@ afficherLibelleTypeMarche(){
                 "modifierpaiementPersonnel",
                 "supprimerpaiementPersonnel"
             ]),
+             genererEnPdf(){
+  this.$htmlToPaper('printMe');
+},
             formatageSomme:formatageSomme,
             formaterDate(date) {
             return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");

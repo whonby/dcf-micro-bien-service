@@ -1,5 +1,5 @@
 import { groupBy } from "../../../../Repositories/Repository";
-
+acteEffetFinanciers
 export const gettersTypeOrdrePaiement = state => state.typeOrdrePaiement
 export const role_membrecojo = state => state.role_membrecojo
 export const gestionModules = state => state.gestionModules

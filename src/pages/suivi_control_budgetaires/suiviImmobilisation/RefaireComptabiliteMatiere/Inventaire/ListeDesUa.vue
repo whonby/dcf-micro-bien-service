@@ -49,7 +49,13 @@
 
 
             </div>
-
+<div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>GESTION DU PATRIMOINE OPTION : INVENTAIRE </h5>
+             
+            </div>
                 <table class="table table-bordered table-striped">
                     <thead>
                      <tr>

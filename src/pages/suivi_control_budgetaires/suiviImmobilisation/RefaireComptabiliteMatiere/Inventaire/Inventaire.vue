@@ -790,7 +790,7 @@
            <div class="control-group">
                             <label class="control-label">Date d'Inventaire</label>
                             <div class="controls">
-                              <input type="date" class="span5" v-model="editService.date_inventaire"/>
+                              <input type="date" class="span4" v-model="editService.date_inventaire"/>
                                
                             </div>
                           </div>
@@ -813,8 +813,11 @@
                             <label class="control-label">Etat Bien</label>
                             <div class="controls">
                               
-                                    <input type="text" class="span4" v-model="editService.etat_bien"/>
-                             
+                                    <!-- <input type="text" class="span4" v-model="editService.etat_bien"/> -->
+                              <select   class="span4" v-model="editService.etat_bien">
+                                <option></option>
+                               <option v-for="varText in EtatImmobilisations" :key="varText.id" :value="varText.id">{{varText.libelle}}</option>
+                                  </select>
                             </div>
                           </div>
          </td>
@@ -833,7 +836,7 @@
            <div class="control-group">
                             <label class="control-label">Nom Agent</label>
                             <div class="controls">
-                              <input type="text" class="span9" v-model="editService.nom_agent"/>
+                              <input type="text" class="span4" v-model="editService.nom_agent"/>
                                
                             </div>
                           </div>
@@ -842,7 +845,7 @@
                           <div class="control-group">
                             <label class="control-label">Personnel Ua</label>
                             <div class="controls">
-                              <select v-model="formData.typeuniteadminis_id">
+                              <select v-model="formData.typeuniteadminis_id" class="span4">
                                 <option value>Sélectionner</option>
                                 <option
                                   v-for="typeua in groupTriUaImmo"
@@ -2096,7 +2099,7 @@ formatageSomme:formatageSomme,
   margin: 0 -45%;
 }
 .valDirecteur{
-  width:40%;
+  width:48%;
   margin:0 -25%;
 }
 </style>

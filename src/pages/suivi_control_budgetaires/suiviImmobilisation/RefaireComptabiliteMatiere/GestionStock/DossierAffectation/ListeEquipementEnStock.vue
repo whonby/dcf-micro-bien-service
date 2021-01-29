@@ -11,7 +11,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>GESTION DU PATRIMOINE </h5>
+              <h5>GESTION DU PATRIMOINE OPTION : AFFECTATION </h5>
              
             </div>
 <table class="table table-bordered table-striped">

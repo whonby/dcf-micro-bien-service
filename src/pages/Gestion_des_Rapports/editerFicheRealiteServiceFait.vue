@@ -12,8 +12,8 @@
    <tr >
                                  <td colspan="" style="text-align:center">
  
-      <p>MINISTERE  DU BUDGET ET DU PORTEFEUILLE</p>
-      <p> DE L'ETAT</p>
+      <p>MINISTERE  DU BUDGET</p>
+      
                                  </td>
                                   <td style="text-align:center">
                                    <img  :src="AfficheAmoirie">
@@ -57,7 +57,7 @@
 
      
       <tr>
-        <th style="width:25% ">EXERCICE BUDGETAIRE :</th>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <td style="font-size:14px"> {{detailOp.exercice_budget}} </td>
+        <th style="width:25%;font-weight: bold; ">EXERCICE BUDGETAIRE :</th>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <td style="font-size:14px"> {{detailOp.exercice_budget}} </td>
                      
                     
       </tr>
@@ -66,7 +66,7 @@
     <br/>
       
           <tr>
-                     <th style="width:25% ">PROJET OU ORGANISME :</th>
+                     <th style="width:25% ;font-weight: bold;">PROJET OU ORGANISME :</th>
                      <td style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{infoLibelleUa(detailOp.ua_id)}} </td>
                     
                  </tr>
@@ -76,7 +76,7 @@
       
                   <tr>
                     <!-- <th rowspan="5" style="margin:0 auto">IMPUTATION BUDGETAIRE</th> -->
-                     <th>OBJET DE LA DEPENSE :</th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<td style="text-align:center;font-size:25px"> {{infoObjetFacture(detailOp.facture_id)}} </td> 
+                     <th style="width:25% ;font-weight: bold;">OBJET DE LA DEPENSE :</th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<td style="text-align:center;font-size:25px"> {{infoObjetFacture(detailOp.facture_id)}} </td> 
                    
                  </tr>
                  <br/>
@@ -85,7 +85,7 @@
       
    <tr>
                    
-                     <th style="width:25% ">FOURNISSEUR : </th>&nbsp;&nbsp;&nbsp;&nbsp;
+                     <th style="width:25% ;font-weight: bold;">FOURNISSEUR : </th>&nbsp;&nbsp;&nbsp;&nbsp;
                      <td style="font-size:14px"> {{afficherNomEntreprise(detailOp.entreprise_id)}} </td>
                  </tr>
                  <br/>
@@ -94,7 +94,7 @@
    
                  <tr>
                    
-                     <th style="width:25% ">ADRESSE DU FOURNISSEUR :</th>
+                     <th style="width:25% ;font-weight: bold;">ADRESSE DU FOURNISSEUR :</th>
                      <td style="font-size:14px"> {{afficherAdresseEntreprise(detailOp.entreprise_id)}} </td>
                  </tr>
                   <br/>
@@ -103,7 +103,7 @@
       
                  <tr>
                    
-                     <th style="width:25% ">N° ET DATE DE LA FACTURE :</th>
+                     <th style="width:25% ;font-weight: bold;">N° ET DATE DE LA FACTURE :</th>
                      <td style="font-size:14px"> {{infoFacture(detailOp.facture_id)}} </td>
                  </tr>
                  <br/>
@@ -112,7 +112,7 @@
       
                  <tr>
                    
-                     <th style="width:25% ">IMPUTATION BUDGETAIRE :</th>
+                     <th style="width:25% ;font-weight: bold;">IMPUTATION BUDGETAIRE :</th>
                      <td style="font-size:14px"> {{detailOp.budget_general_id}} </td>
                  </tr>
                  <br/>
@@ -121,7 +121,7 @@
      
                  <tr>
                    
-                     <th style="width:25% ">ORDRE DE PAIEMENT N° :</th>
+                     <th style="width:25% ;font-weight: bold;">ORDRE DE PAIEMENT N° :</th>
                      <td style="font-size:14px"> {{detailOp.numero_op_definitif}} </td>
                  </tr>
                  <br/>
@@ -130,7 +130,7 @@
       
                  <tr>
                    
-                     <th style="width:25% ">MONTANT :</th>
+                     <th style="width:25% ;font-weight: bold;">MONTANT :</th>
                      <td style="font-size:14px"> {{formatageSomme(parseFloat(detailOp.total_general))}} </td>
                  </tr>
                  <br/>
@@ -139,7 +139,7 @@
     
                  <tr>
                    
-                     <th style="width:25% ">SERVICE BENEFICIAIRE :</th>
+                     <th style="width:25% ;font-weight: bold;">SERVICE BENEFICIAIRE :</th>
                      <td style="font-size:14px"> {{infoLibelleUa(detailOp.ua_id)}} </td>
                  </tr>
                 <br/>

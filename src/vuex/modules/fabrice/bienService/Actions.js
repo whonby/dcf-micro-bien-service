@@ -557,7 +557,7 @@ export function ajouterActeEffetFinancier({commit,dispatch}, formData){
       if(response.status == 201){
         console.log(response.data)
           commit('AJOUTER_ACTE_EFFET_FINANCIER', response.data)
-          dispatch("getEntrepriseSousTraitance")
+          dispatch("getActeEffetFinancier")
           this.$app.$notify({
             title: 'success ',
             text: 'Enregistrement effectué !',
@@ -5036,4 +5036,43 @@ export function supprimerEntrepriseSousTraitance({ commit }, id) {
             axios.delete('/sous_traitance/' + id).then(() => dialog.close())
         })
 
+}
+
+
+export function ajouterActeFinanciere({ commit,dispatch}, elementAjout) {
+  asyncLoading(axios.post('/ajouteracte_finnanciers', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('GET_ALL_ACTE_EFFET_FINANCIER', response.data)
+      dispatch("getActeEffetFinancier")
+     
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}
+
+// export function modificationMarche({commit}, element_modifie){
+//   asyncLoading( axios.put('/ModifierMarche/'+ element_modifie.id, element_modifie))
+//    .then(response => {
+//     commit('MODIFICATION_MARCHE', response.data)
+       
+//    }).catch(error => console.log(error))
+//   // console.log(element_modifie)
+// } 
+
+
+
+export function modificationMarche({ commit }, element_modifie) {
+  asyncLoading(axios.put('/ModifierMarche', element_modifie)).then(response => {
+    commit('MODIFICATION_MARCHE', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }

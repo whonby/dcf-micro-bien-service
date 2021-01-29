@@ -78,11 +78,15 @@
         <template v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id) ">
             <div class="widget-title">
             <ul class="nav nav-tabs">
+               <!-- <li class="active"><a data-toggle="tab" href="#lotExempte">Lot</a></li> -->
              <li class="active"><a data-toggle="tab" href="#tab0074">Attribution</a></li>
              <li class=""><a data-toggle="tab" href="#tab0021403">Bailleur</a></li>
         </ul>
           </div>
     <div class="widget-content tab-content">
+      <div id="lotExempte" class="tab-pane active">
+<!-- <LotMarche :macheid="detail_marche.id"></LotMarche> -->
+    </div>
 <div id="tab0074" class="tab-pane active">
 <executionLigneExempte :macheid="detail_marche.id"></executionLigneExempte>
     </div>

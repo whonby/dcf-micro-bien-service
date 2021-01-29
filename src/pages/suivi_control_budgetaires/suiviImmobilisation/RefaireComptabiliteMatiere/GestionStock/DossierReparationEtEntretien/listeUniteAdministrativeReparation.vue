@@ -486,7 +486,7 @@ libelleFamilleEquipement
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Gestion du Patrimoine</h5>
+              <h5>GESTION DU PATRIMOINE OPTION : REPARATION </h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />

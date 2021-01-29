@@ -18,7 +18,7 @@ afficherIDUA(
 
 
                 </div>
-                <h4> Liste acte effet financier </h4>
+                <h4> Liste acte effet financier{{macheid}} </h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
@@ -1573,7 +1573,7 @@ nombreDejourCalculeModifier(){
 
   methods:{
     ...mapActions('bienService',['supprimerActeEffetFinancier',
-      'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
+      'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modificationMarche']),
 ...mapActions("horSib", ['modifierMarcheHorSib']),
 
     afficheModaleActe(index){
@@ -1662,11 +1662,11 @@ var nouvelObjet1 = {
       this.$("#modificationModal").modal('hide');
       let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
       marcheObjet.attribue = 2
-     
+      marcheObjet.parent_id=10
       marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
-      marcheObjet.parent_id=this.macheid
+     
       // console.log(marcheObjet)
-      this.modifierMarche(marcheObjet)
+      this.modificationMarche(marcheObjet)
    
       this.formEffetFinancier = {
         code_act:"",

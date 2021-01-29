@@ -11,7 +11,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>GESTION DU PATRIMOINE </h5>
+              <h5>GESTION DU PATRIMOINE OPTION : SORTI DU PATRIMOINE </h5>
              
             </div>
 <table class="table table-bordered table-striped">
@@ -657,8 +657,7 @@
                     <th style="width:2%;text-align:center">Quantité Physique (B)</th>
                     <th style="width:2%;text-align:center">Ecart (B-A)</th>
                    
-                   <th style="width:5%;text-align:center">Date d'Inventaire</th>
-                   <th style="width:2%;text-align:center">Ecart (B-A)</th>
+                   
                    
                    <th style="width:5%;text-align:center">Date d'Inventaire</th>
                     <th style="width:2%" colspan="2">Action</th>
@@ -778,99 +777,7 @@
 
 
     </div>
-<div id="exampleModalValidationdirecteur" class="modal hide valDirecteur">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>JUSTIFICATION DE L'INVENTAIRE
 
-          
-        </h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-       <tr>
-         <td>
-           <div class="control-group">
-                            <label class="control-label">Date d'Inventaire</label>
-                            <div class="controls">
-                              <input type="date" class="span5" v-model="editService.date_inventaire"/>
-                               
-                            </div>
-                          </div>
-         </td>
-         <td>
-           <div class="control-group">
-                            <label class="control-label">Bien vu Physiquement</label>
-                            <div class="controls">
-                             <select   class="span4" v-model="editService.bien_physique">
-                                <option value="Oui">Oui</option>
-                               <option value="Non">Non</option>
-                                  </select>
-                            </div>
-                          </div>
-         </td>
-       </tr>
-       <tr>
-         <td>
-           <div class="control-group">
-                            <label class="control-label">Etat Bien</label>
-                            <div class="controls">
-                              
-                                    <input type="text" class="span4" v-model="editService.etat_bien"/>
-                             
-                            </div>
-                          </div>
-         </td>
-         <td>
-           <div class="control-group">
-                            <label class="control-label">Quantite Vue</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="editService.quantite_vue"/>
-                               
-                            </div>
-                          </div>
-         </td>
-       </tr>
-      <tr>
-         <td colspan="">
-           <div class="control-group">
-                            <label class="control-label">Nom Agent</label>
-                            <div class="controls">
-                              <input type="text" class="span9" v-model="editService.nom_agent"/>
-                               
-                            </div>
-                          </div>
-         </td>
-        <td>
-                          <div class="control-group">
-                            <label class="control-label">Personnel Ua</label>
-                            <div class="controls">
-                              <select v-model="formData.typeuniteadminis_id">
-                                <option value>Sélectionner</option>
-                                <option
-                                  v-for="typeua in groupTriUaImmo"
-                                  :key="typeua.id"
-                                  :value="typeua.id"
-                                >{{typeua.libelle}}</option>
-                              </select>
-                            </div>
-                          </div>
-                        </td>
-        
-      </tr>
-        </table>
-     
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="AjouterVehicule()"
-          class="btn btn-primary"
-          href="#"
-         
-        >Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
             <notifications  />  
     </div>
 </template>
@@ -975,6 +882,7 @@ search1:""
       "equipements",
       "familles",
       "articles",
+      
       "SommeQuantiteNonCouvert",
       "getAfficheArticle",
       "getPersoStock",
@@ -2099,7 +2007,7 @@ formatageSomme:formatageSomme,
   margin: 0 -45%;
 }
 .valDirecteur{
-  width:40%;
+  width:48%;
   margin:0 -25%;
 }
 </style>

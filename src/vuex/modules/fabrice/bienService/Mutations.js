@@ -2721,3 +2721,15 @@ export const MODIFIER_ENTREPRISE_SOUS_TRAITANCE = (state, elementModifie) =>{
 export const SUPPRIMER_ENTREPRISE_SOUS_TRAITANCE = (state, id) =>{
     state.entreprise_soustraitant = state.entreprise_soustraitant.filter(response => response.id!=id)
 }
+
+
+
+
+export const MODIFICATION_MARCHE = (state, elementModif)=>{
+    state.marches = state.marches.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}

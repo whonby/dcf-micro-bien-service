@@ -14,7 +14,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-            <h5>Liste des Lots</h5>
+            <h5>Liste des Lots{{detail_marche.plan_passation_marche_id}}</h5>
           </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
@@ -97,7 +97,7 @@
 
   <!--Formulaire d'ajout de lot-->
 
-  <div id="exampleModal" class="modal hide grdirModalActeEffet">
+  <div id="exampleModal" class="modal hide grdirModalActeEffet78">
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Ajouter Lot</h3>
@@ -111,7 +111,7 @@
                             <input
                                     type="text"
                                     :value="recupererNumeroDeLot"
-                                    class="span"
+                                    class="span3"
                                    readonly
                             />
                         </div>
@@ -123,7 +123,7 @@
                             <input
                                     type="text"
                                     v-model="formData.objet"
-                                    class="span"
+                                    class="span8"
                                    
                             />
                         </div>
@@ -135,12 +135,14 @@
            <td><div class="control-group">
                         <label class="control-label">Montant estimatif du Lot</label>
                         <div class="controls">
-                            <input
+                            <!-- <input
                                     type="text"
                                     v-model="formData.montant_marche"
-                                    class="span"
+                                    
+                                    class="span3"
                                    
-                            />
+                            /> -->
+                            <money v-model="formData.montant_marche" class="span3"></money>
                         </div>
                          <code v-if="sommeMontant(formData.montant_marche)>detail_marche.montant_marche">
            Impossible d'effectuer l'engistrement</code>
@@ -167,7 +169,7 @@
                         <label class="control-label">Région</label>
                          <div class="controls">
          
-               <select v-model="formData.localisation_geographie_id" class="span" >
+               <select v-model="formData.localisation_geographie_id" class="span4" >
                <option v-for="plans in afficherCodeStructureLibelle(recupererLataille)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -178,7 +180,7 @@
                         <label class="control-label">Département</label>
                          <div class="controls">
         
-               <select v-model="formData.departement_id" class="span" :readOnly="deveroiullage">
+               <select v-model="formData.departement_id" class="span4" :readOnly="deveroiullage">
                <option v-for="plans in recupererParentId(formData.localisation_geographie_id)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -193,7 +195,7 @@
                         <label class="control-label">Sous-Préfecture</label>
                          <div class="controls">
        
-               <select v-model="formData.sous_prefecture_id" class="span" :readOnly="deveroiullageSousprefecture">
+               <select v-model="formData.sous_prefecture_id" class="span4" :readOnly="deveroiullageSousprefecture">
                <option v-for="plans in recupererParentId(formData.departement_id)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -206,7 +208,7 @@
                             <input
                                     type="text"
                                     v-model="formData.latitude"
-                                    class="span"
+                                    class="span4"
                                    
                             />
                         </div>
@@ -217,7 +219,7 @@
                             <input
                                     type="text"
                                        v-model="formData.longitude"
-                                    class="span"
+                                    class="span4"
                                    
                             />
                         </div>
@@ -230,7 +232,7 @@
                             <input
                                     type="text"
                                        v-model="formData.beneficiaire"
-                                    class="span"
+                                    class="span4"
                                    
                             />
                         </div>
@@ -241,7 +243,7 @@
                             <input
                                     type="text"
                                        v-model="formData.livrable"
-                                    class="span8"
+                                    class="span4"
                                    
                             />
                         </div>
@@ -262,7 +264,7 @@
 
   <!--Edition de lot-->
 
-  <div id="editBailleuMarche" class="modal hide grdirModalActeEffet" aria-hidden="true" style="display: none;">
+  <div id="editBailleuMarche" class="modal hide grdirModalActeEffet78" aria-hidden="true" style="display: none;">
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Modification </h3>
@@ -712,8 +714,9 @@ SommeDesLots(){
             numero_lot:this.recupererNumeroDeLot,
             sib:this.AjouteMarcheSiBetHorsSib,
             infrastructure_id:this.afficheIdInfrasture(this.macheid)
+            
       }
-    //  console.log(this.formData)
+    console.log(this.formData)
       this.ajouterSousMarcheLot(this.formData)
 
 
@@ -799,9 +802,9 @@ SommeDesLots(){
 </script>
 
 <style scoped>
-.grdirModalActeEffet{
-  width: 88%;
-  margin: 0 -42%;
+.grdirModalActeEffet78{
+  width: 55%;
+  margin: 0 -30%;
 }
 
 </style>

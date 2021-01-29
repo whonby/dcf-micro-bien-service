@@ -8,10 +8,10 @@ uniteAdministratives
         <br>
         <br>
         <div class="" align="right">
-                   <router-link :to="{name:'AjoutPersonnelSansContrat'}" tag="a" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter Sans Contrat Personnel
+                   <router-link :to="{name:'AjoutPersonnelSansContrat'}" tag="a" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter  Personnel Ua Sans Contrat
 
                    </router-link> 
-<router-link :to="{name:'AjoutPersonnelAvecContrat'}" tag="a" data-toggle="modal" class="btn btn-info" align="rigth">Ajouter avec Contrat Personnel
+<router-link :to="{name:'AjoutPersonnelAvecContrat'}" tag="a" data-toggle="modal" class="btn btn-info" align="rigth">Ajouter  Personnel Ua avec Contrat
 
                    </router-link> 
                    </div>
@@ -31,7 +31,7 @@ uniteAdministratives
                     v-for="BesoinImmo in listeDesStockGlobalUa"
                     :key="BesoinImmo[0].id"
                   >
-                  <td style="font-size:20px"
+                  <td style="font-size:25px"
                    
                     >{{libelleUniteAdministrative(BesoinImmo[0].unite_administrative_id) || 'Non renseigné'}}</td>
                  
@@ -45,6 +45,9 @@ uniteAdministratives
                           <i class="icon icon-folder-open" style="font-size:14px"> Voir Personnel</i>
                         </span>
                       </router-link>
+                     </td>
+                     <td>
+                       <button  class="btn btn-info">{{NombrePersonnel(BesoinImmo[0].unite_administrative_id)}} PERSONNELS</button>
                      </td>
                   </tr>
                   
@@ -170,7 +173,15 @@ admin:admin,
       dcf:dcf,
       noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+NombrePersonnel() {
+      return id => {
+        if (id != null && id != "") {
+           return this.all_acteur_depense.filter(qtreel => qtreel.unite_administrative_id == id).length;
 
+      
+        }
+      };
+    },
 
 PrixUnitaireParModel() {
       return id => {
