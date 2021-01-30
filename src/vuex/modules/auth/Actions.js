@@ -131,7 +131,6 @@ export  function ajouterUtilisateur({commit}, objetAjoute){
 // supprimer type act
 export function supprimerUtilisateur({commit}, id){
 
-
     this.$app.$dialog
         .confirm("Voulez vouz vraiment supprimer ?.")
         .then(dialog => {
@@ -679,4 +678,29 @@ export  function ajouterPersonneService({commit}, objetAjoute){
             })
         }
     }).catch(error => console.log(error))
+}
+
+
+
+// compte activation
+export  function activationCompte({commit}, objetAjoute){
+    this.$app.$dialog
+        .confirm("Voulez vous effectuer cette action ?")
+        .then(dialog => {
+            apiGuest.post('/activedDesactiveUser' ,objetAjoute).then(response => {
+                commit('MODIFIER_UTILISATEUR', response.data)
+                this.$app.$notify({
+                    title:'success',
+                    text:'Mise à jour effectué !',
+                    type:"success"
+                })
+                dialog.close()
+            }).catch(error => {
+                dialog.close()
+                console.log(error)
+            })
+
+        })
+
+
 }

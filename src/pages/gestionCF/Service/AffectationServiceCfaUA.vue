@@ -244,6 +244,8 @@
                                                         <th>Matricule</th>
                                                         <th>Nom et prénom</th>
                                                         <th>Email</th>
+                                                        <th>Fonction</th>
+                                                        <th>Statut</th>
 <!--                                                        <th>Rôle</th>-->
                                                         <th>Action</th>
                                                     </tr>
@@ -253,14 +255,26 @@
                                                         <td :class="{ red : titre.status }">{{titre.matricule || 'Non renseigné'}}</td>
                                                         <td :class="{ red : titre.status }">{{titre.name || 'Non renseigné'}}</td>
                                                         <td :class="{ red : titre.status }">{{titre.email || 'Non renseigné'}}</td>
-                                                        <td :class="{ red : titre.status }" v-if="titre.role">{{titre.role.libelle}}</td>
+                                                        <td :class="{ red : titre.status }">{{titre.fonction || 'Non renseigné'}}</td>
+                                                        <td :class="{ red : titre.status }" v-if="titre.actived==1">
+                                                            <ul class="unstyled centered">
+                                                                <li>
+                                                                    <input  :id="'DESC'+titre.id" class="styled-checkbox"  @click="desactivation(titre)" type="checkbox"  checked="checked">
+                                                                    <label :for="'DESC'+titre.id">Compte Activé</label>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                        <td :class="{ red : titre.status }" v-else>
+                                                            <ul class="unstyled centered">
+                                                                <li>
+                                                                    <input class="styled-checkbox" :id="'DESC'+titre.id" @click="activation(titre)" type="checkbox" >
+                                                                    <label :for="'DESC'+titre.id">Compte désactivé</label>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
                                                         <td :class="{ red : titre.status }">
-                                                            <!--                    <router-link :to="{ name: 'DetailCF', params: { id: titre.id }}"-->
-                                                            <!--                                 class="btn btn-default " title="Detail CF">-->
-                                                            <!--                      <span class=""><i class=" icon-folder-open"></i></span>-->
-                                                            <!--                    </router-link>-->
                                                             <div class="btn-group">
-                                                                <button  class="btn btn-danger ">
+                                                                <button  class="btn btn-danger" @click="supprimerUtilisateur(titre.id)">
                                                                     <span class=""><i class="icon-trash"></i></span></button>
                                                             </div>
                                                         </td>
@@ -698,7 +712,8 @@
             },
         },
         methods: {
-            ...mapActions('Utilisateurs', ['ajouterAffectation',"getAffectation","supprimerAffectation","modifierAffection","ajouterPersonneService","ajouterPersonneService"]),
+            ...mapActions('Utilisateurs', ['ajouterAffectation',"getAffectation","supprimerAffectation","modifierAffection",
+                "ajouterPersonneService","ajouterPersonneService","supprimerUtilisateur","activationCompte"]),
             videTypeCF(){
                 this.personnel_selectionne=""
             },
@@ -732,6 +747,20 @@
                     unite:""
                 }
 
+            },
+            activation(item){
+                let objet={
+                    ...item,
+                    actived:1,
+                }
+                this.activationCompte(objet)
+            },
+            desactivation(item){
+                let objet={
+                    ...item,
+                    actived:0,
+                }
+                this.activationCompte(objet)
             },
             ajouterPersonnelService(){
 //console.log(this.formDataMembre)
@@ -910,5 +939,79 @@
     .red {
         color: #fff !important;
         background-color: #00499c !important;
+    }
+
+
+    .styled-checkbox {
+        position: absolute;
+        opacity: 0;
+    }
+    .styled-checkbox + label {
+        position: relative;
+        cursor: pointer;
+        padding: 0;
+    }
+    .styled-checkbox + label:before {
+        content: "";
+        margin-right: 10px;
+        display: inline-block;
+        vertical-align: text-top;
+        width: 20px;
+        height: 20px;
+        background: white;
+    }
+    .styled-checkbox:hover + label:before {
+        background: #00af00;
+    }
+    .styled-checkbox:focus + label:before {
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+    }
+    .styled-checkbox:checked + label:before {
+        background: #00af00;
+    }
+    .styled-checkbox:disabled + label {
+        color: #b8b8b8;
+        cursor: auto;
+    }
+    .styled-checkbox:disabled + label:before {
+        box-shadow: none;
+        background: #ddd;
+    }
+    .styled-checkbox:checked + label:after {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 9px;
+        background: white;
+        width: 2px;
+        height: 2px;
+        box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
+        transform: rotate(45deg);
+    }
+
+    html {
+        background: lightgray;
+    }
+
+    body {
+        font-family: "Source Sans Pro", sans-serif;
+    }
+
+    .unstyled {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+
+
+    .centered {
+        width: 300px;
+        margin: auto;
+    }
+
+    .title {
+        text-align: center;
+        color: #4571ec;
     }
 </style>
