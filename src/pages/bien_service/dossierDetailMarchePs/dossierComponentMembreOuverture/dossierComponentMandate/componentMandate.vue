@@ -11,7 +11,7 @@
                         <th>Date </th>
                         <th>Matricule </th>
                         <th>Nom</th>
-                        <th>Prenom</th>
+                        <th>Prénom</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -41,14 +41,14 @@
    <div id="ajouterMantater" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter mandater</h3>
+                <h3>Ajouter le mandaté</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
 
 
                     <div class="control-group">
-                        <label class="control-label">Lettre Invitation</label>
+                        <label class="control-label">Lettre d'invitation</label>
                         <div class="controls">
                             <select v-model="formMandater.lettre_invitation_id" class="span">
                                 <option v-for="plans in lettreInvitationAMarche(macheid)" :key="plans.id"
@@ -76,18 +76,18 @@
                             <input type="text"
                                     v-model="formMandater.nom_mandat"
                                     class="span"
-                                    placeholder="Nom mandater"
+                                    placeholder="Nom du mandaté"
                             />
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Prenom</label>
+                        <label class="control-label">Prénom</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="formMandater.prenom_nom"
                                     class="span"
-                                    placeholder="Prenom "
+                                    placeholder="Prénom du mandaté "
                             />
                         </div>
                     </div>
@@ -111,7 +111,7 @@
             </div>
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterMandaterA()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div> 
 <!--fin formulaire mandate   -->
 
@@ -119,14 +119,14 @@
   <div id="modificationMantater" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification de mandater</h3>
+                <h3>Modification du mandaté</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
 
 
                     <div class="control-group">
-                        <label class="control-label">Lettre Invitation</label>
+                        <label class="control-label">Lettre d'invitation</label>
                         <div class="controls">
                             <select v-model="editer_mandater.lettre_invitation_id" class="span">
                                 <option v-for="plans in lettreInvitationAMarche(macheid)" :key="plans.id"
@@ -137,7 +137,7 @@
 
 
                     <div class="control-group">
-                        <label class="control-label">Matricule :</label>
+                        <label class="control-label">Matricule</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -148,23 +148,23 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Nom mandater :</label>
+                        <label class="control-label">Nom du mandaté</label>
                         <div class="controls">
                             <input type="text"
                                    v-model="editer_mandater.nom_mandat"
                                    class="span"
-                                   placeholder="Nom mandater"
+                                   placeholder="Nom du mandaté"
                             />
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Prenom :</label>
+                        <label class="control-label">Prénom :</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="editer_mandater.prenom_nom"
                                     class="span"
-                                    placeholder="Prenom "
+                                    placeholder="Prénom du mandaté "
                             />
                         </div>
                     </div>
@@ -186,7 +186,7 @@
             </div>
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationMandater()" href="#">Modifier</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div> 
 
 
@@ -306,7 +306,7 @@ methods:{
                        this.message_mandater=""
                    }
                    else{
-                       this.message_mandater="Cette n'existe pas dans notre base de donnée "
+                       this.message_mandater="Ce matricule n'existe pas dans notre base de données "
                    }
                }
              if(this.formMandater.matricule_m==""){

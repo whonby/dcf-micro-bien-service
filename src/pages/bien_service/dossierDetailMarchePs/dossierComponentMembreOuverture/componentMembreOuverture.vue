@@ -2,7 +2,7 @@
     <div>
                   <div class="">
                       <div class="span9" >
-                         <h4>Liste des membres de la cojo</h4>
+                         <h4>Liste des membres de la COJO</h4>
                       </div>
                       <div class="span3" align="right">
                           <a href="#ajouter_membre_cojo" data-toggle="modal" class="btn btn-warning" >Ajouter un autre membre </a>
@@ -14,8 +14,8 @@
                           <thead>
                           <tr>
                               <th>Matricule</th>
-                              <th>Nom et prenom</th>
-                              <th>Role</th>
+                              <th>Nom et prénoms</th>
+                              <th>Rôle</th>
                               <th>Action</th>
                           </tr>
                           </thead>
@@ -43,7 +43,7 @@
              <div id="ajouter_membre_cojo" class="modal hide" aria-hidden="true" style="display: none;">
         <div class="modal-header">
             <button data-dismiss="modal" class="close" type="button">×</button>
-            <h3>Ajouter un autre membre de la cojo </h3>
+            <h3>Ajouter un autre membre de la COJO </h3>
         </div>
         <div class="modal-body">
             <div class="widget-box">
@@ -64,7 +64,7 @@
 
                                 <div class="control-group">
 
-                                    <label class="control-label">Nom et prenom <code>*</code> :</label>
+                                    <label class="control-label">Nom et prénom <code>*</code> :</label>
                                     <div class="control-group">
                                         <input type="text" class="span" placeholder="Numero lo" v-model="formDataMembreCojo.nom_prenom">
 
@@ -80,7 +80,7 @@
 
                                 <div class="control-group">
 
-                                    <label class="control-label span5">Role <code>*</code> :</label>
+                                    <label class="control-label span5">Rôle <code>*</code> :</label>
 
                                     <div class="controls">
                                  <select v-model="formDataMembreCojo.role_membre_cojo_id" class="span">
@@ -104,7 +104,7 @@
         </div>
         <div class="modal-footer">
             <a class="btn btn-primary" @click.prevent="ajouterMembreCojoM()">Ajouter</a>
-            <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+            <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
         </div>
     </div>
 
@@ -112,7 +112,7 @@
       <div id="modification_membre_cojo" class="modal hide" aria-hidden="true" style="display: none;">
         <div class="modal-header">
             <button data-dismiss="modal" class="close" type="button">×</button>
-            <h3>modification  </h3>
+            <h3>Modification  </h3>
         </div>
         <div class="modal-body">
             <div class="widget-box">
@@ -134,7 +134,7 @@
                                 <div class="control-group">
 
                                    
-                                    <label class="control-label">Nom et prenom 4 <code>*</code> :</label>
+                                    <label class="control-label">Nom et prénom <code>*</code> :</label>
                                     <div class="control-group">
                                         <input type="text" class="span" placeholder="Numero lo" v-model="edite_membre_cojo.nom_prenom">
 
@@ -150,7 +150,7 @@
 
                                 <div class="control-group">
 
-                                    <label class="control-label span5">Role <code>*</code> :</label>
+                                    <label class="control-label span5">Rôle <code>*</code> :</label>
 
                                     <div class="controls">
                                  <select v-model="edite_membre_cojo.role_membre_cojo_id" class="span">
@@ -174,7 +174,7 @@
         </div>
         <div class="modal-footer">
             <a class="btn btn-primary" @click.prevent="editeMembreCojoM()">Modifier</a>
-            <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+            <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
         </div>
     </div>
     </div>
@@ -245,7 +245,7 @@ export default {
                         this.message_mandater=" "
                     }
                     else{
-                        this.message_mandater="Ce matricule n'existe pas dans notre base de donnée "
+                        this.message_mandater="Ce matricule n'existe pas dans notre base de données "
                         this.formDataMembreCojo.nom_prenom=""
                     }
                 }

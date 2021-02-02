@@ -77,7 +77,7 @@ Vue.use(VueHtmlToPaper, options);
 import money from 'v-money'
 const money_option= {
         decimal: ',',
-        thousands: '.',
+        thousands: ' ',
         prefix: ' ',
         suffix: ' ',
         precision: 0,
