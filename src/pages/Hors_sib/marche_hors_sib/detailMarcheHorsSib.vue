@@ -130,11 +130,7 @@
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                  <li class="active"><a data-toggle="tab" href="#tab0145">l'offre</a></li>
-<<<<<<< HEAD
-                              <li class=""><a data-toggle="tab" href="#lotMarche">Lots</a></li>
-=======
                               <li class=""><a data-toggle="tab" href="#lot01220254">Lots</a></li>
->>>>>>> be3302c68d69bada48d7f8ace805ce246f094275
 
                                 <li class=""><a data-toggle="tab" href="#tab021501">Reception</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab42521">Ouverture</a></li>
@@ -157,17 +153,11 @@
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
                          </div>
-<<<<<<< HEAD
-                          <div id="lotMarche" class="tab-pane">
-                             <lot-marche :macheid="detail_marche.id"></lot-marche>
-                           </div>
-=======
 
                          <div id="lot01220254" class="tab-pane">
                              <lot-marche :macheid="detail_marche.id"></lot-marche>
                            </div>
 
->>>>>>> be3302c68d69bada48d7f8ace805ce246f094275
                          <div id="tab021501" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
@@ -177,10 +167,6 @@
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>
-<<<<<<< HEAD
-                          
-=======
->>>>>>> be3302c68d69bada48d7f8ace805ce246f094275
 
                          <div id="tab42521" class="tab-pane">
                    <component-ouverture :macheid="detail_marche.id"></component-ouverture>
