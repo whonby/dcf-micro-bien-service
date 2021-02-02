@@ -1,5 +1,5 @@
 import { groupBy } from "../../../../Repositories/Repository";
-acteEffetFinanciers
+
 export const gettersTypeOrdrePaiement = state => state.typeOrdrePaiement
 export const role_membrecojo = state => state.role_membrecojo
 export const gestionModules = state => state.gestionModules
@@ -1113,3 +1113,11 @@ export const getterListeMarcheTableauBordFiltre=state => state.tableauBordFilter
 export const getterInfoTableauBordFiltre=state => state.infoFiltreTableauBord
 
 export const getterEntrepriseSousTraitance=state => state.entreprise_soustraitant
+
+
+
+
+export const GroupeEntreprise = (state, getters) => {
+    //delete getters.trieUaImmobilisation.
+      return groupBy(getters.acteEffetFinanciers,"entreprise_id");
+  };

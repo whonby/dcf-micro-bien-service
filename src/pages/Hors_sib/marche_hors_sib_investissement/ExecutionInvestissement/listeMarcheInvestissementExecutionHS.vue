@@ -34,7 +34,7 @@
                     <th>Année</th>
                       <th>UA</th>
                     <th>Type de marché</th>
-                    <th>Mode de passation</th>
+                    <!-- <th>Mode de passation</th> -->
                     <th>Activité</th>
                     <th>Imputation</th>
                     <!-- <th>Ligne Budgetaire</th> -->
@@ -47,10 +47,10 @@
                    <th>Action</th>
                   </tr>
                 </thead>
-                <tbody v-if="afficherMarcheInvestissementParDroitAccess.length>0">
+                <tbody v-if="afficherListeMarcheHorsSib.length>0">
                  
                         <tr class="odd gradeX" v-for="(marche, index) in 
-                afficherMarcheInvestissementParDroitAccess"
+                afficherListeMarcheHorsSib"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -58,8 +58,8 @@
                    {{afficherUniteAdministrative(marche.unite_administrative_id) || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficherTypeMarcheLibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
-                   {{marche.procedure_passation.code || 'Non renseigné'}}</td>
+                 <!-- <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
+                   {{marche.procedure_passation.code || 'Non renseigné'}}</td> -->
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficheractivite(marche.activite_id) || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -102,9 +102,7 @@
                       <td>
                           
                       </td>
-                       <td>
-                          
-                      </td>
+                       
                        <td>
                           
                       </td>
@@ -280,6 +278,35 @@ export default {
   'types_financements']) ,
 
   ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+...mapGetters("horSib", ["gettersMarcheHorsib"]),
+
+
+
+
+afficherListeMarcheHorsSib() {
+       // const st = this.search.toLowerCase();
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.gettersMarcheHorsib.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element =>  element.attribue == 2 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1)
+           
+        }
+
+        return this.gettersMarcheHorsib.filter(element => element.attribue == 2 && this.recupererCodeTypeMarche(element.type_marche_id) == 3 && element.parent_id == null && element.sib==1)
+           
+        
+
+    },
+
+
+
+
 
 loading(){
   if(this.afficherMarcheInvestissementParDroitAccess.length>0){
@@ -362,6 +389,25 @@ afficherMarcheInvestissementParPlanificationDroitAccess() {
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
             // );
+    },
+
+
+      afficherMarcheInvestissementExecutionDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.printMarcheNonAttribue.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1 && element.attribue==2)
+           
+        }
+           return  this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib==1 && element.attribue==2)
+       
     },
 
 

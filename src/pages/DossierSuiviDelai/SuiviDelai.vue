@@ -215,7 +215,7 @@
    <td>
      <ul>
 <!--         <li v-for="item in tachePrevuePasMarche(activites.id)" :key="'TACHE'+item.id">{{item.libelle}}</li>-->
-         <span v-for="(item,index) in tachePrevuePasMarche(activites.id)" :key="'TACHE'+item.id" class="by label"><font color="green">{{index}} ) {{item.libelle}}</font></span>
+         <span v-for="(item,index) in tachePrevuePasMarche(activites.id)" :key="'TACHE'+item.id" class="by label">{{index}} ) {{item.libelle}}</span>
 
      </ul>
 
@@ -329,7 +329,9 @@
             };
         },
         created() {
-console.log(this.getActeEffetFinancierPersonnaliser)
+            console.log("........MLMLMLM")
+console.log(this.mandats)
+            console.log(".....LMLMLM")
         },
         computed: {
             ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
@@ -339,7 +341,8 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                 "uniteAdministratives",
                 "getterBudgeCharge"
             ]),
-            ...mapGetters("bienService",["getActeEffetFinancierPersonnaliser","avenants","getMandatPersonnaliserVise","TacheMarche","typeMarches"]),
+            ...mapGetters("bienService",["getActeEffetFinancierPersonnaliser",
+                "avenants","getMandatPersonnaliserVise","TacheMarche","typeMarches","mandats"]),
             ...mapGetters("parametreGenerauxAdministratif", [
                 "sections",
                 "type_Unite_admins",
@@ -540,7 +543,7 @@ console.log(this.getActeEffetFinancierPersonnaliser)
             },
             MandatMarche(){
               return marche_id=>{
-                  let objet =this.getMandatPersonnaliserVise.filter(item=>item.marche_id==marche_id)
+                  let objet =this.mandats.filter(item=>item.marche_id==marche_id)
                   if(objet.length>0){
                       return objet
                   }
@@ -550,9 +553,11 @@ console.log(this.getActeEffetFinancierPersonnaliser)
             montantMandatMarcheVise(){
               return marche_id=>{
                   let objet=this.MandatMarche(marche_id)
+                  console.log(this.mandats)
+
                   if(objet.length>0){
                       let initeVal = 0;
-                      let montant=this.getMandatPersonnaliserVise.filter(item=>{
+                      let montant=this.mandats.filter(item=>{
                           if(item.marche_id==marche_id && (item.decision_cf==8 || item.decision_cf==8)){
                               return item
                           }
@@ -569,7 +574,7 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                     let objet=this.MandatMarche(marche_id)
                     if(objet.length>0){
                         let initeVal = 0;
-                        let montant=this.getMandatPersonnaliserVise.filter(item=>{
+                        let montant=this.mandats.filter(item=>{
                             if(item.marche_id==marche_id && item.decision_cf==0){
                                 return item
                             }
@@ -595,7 +600,7 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                     let objet=this.MandatMarche(marche_id)
                     if(objet.length>0){
 
-                        return this.getMandatPersonnaliserVise.filter(item=>{
+                        return this.mandats.filter(item=>{
                             if(item.marche_id==marche_id && (item.decision_cf==8 || item.decision_cf==8)){
                                 return item
                             }
@@ -613,7 +618,6 @@ console.log(this.getActeEffetFinancierPersonnaliser)
               }
             },
             nombreDejourCalcule(){
-
                 return (date1,date2)=>{
                      if(!date2){
                          let date_day=new Date()
@@ -633,7 +637,6 @@ console.log(this.getActeEffetFinancierPersonnaliser)
 
                      return diffDays
                 }
-
 
             },
 
@@ -730,11 +733,11 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                               return " En cours d'execution ("+jour1+")";
                           }
 
-                          if(objet.garantie=="oui" && objet.date_fin_exe==null){
+                          if(objet.garantie=="oui" && objet.date_reception_provisoire_definitif==null){
                               let jour=this.nombreDejourCalculeSansDateDuJOUR(this.dateDebutExectionEffective(marche_id),objet.date_reception_definitive)
                               return jour;
                           }
-                          let jour=this.nombreDejourCalculeSansDateDuJOUR(this.dateDebutExectionEffective(marche_id),objet.date_fin_exe)
+                          let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_reception_provisoire_definitif)
                           return jour;
                       }
                       return ""
@@ -758,15 +761,16 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                                 return " En cours d'execution";
                             }
 
-                            if(objet.garantie=="oui" && objet.date_fin_exe==null){
+                            if(objet.garantie=="oui" && objet.date_reception_provisoire_definitif==null){
                                 let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_reception_definitive)
                                 if(jour<1){
                                     return "Acheve dans le delais"
                                 }
                                 return "Acheve Hors Délai"
                             }
-                            let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_fin_exe)
-
+                            //let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_fin_exe)
+                            let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_reception_provisoire_definitif)
+                            //return jour;
                             if(jour<1){
                                 return "Acheve Dans le Délai"
                             }
@@ -794,11 +798,11 @@ console.log(this.getActeEffetFinancierPersonnaliser)
                                 return "";
                             }
 
-                            if(objet.garantie=="oui" && objet.date_fin_exe==null){
-                                let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_reception_provisoire_definitif)
+                            if(objet.garantie=="oui" && objet.date_reception_provisoire_definitif==null){
+                                let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_reception_definitive)
                                 return jour;
                             }
-                            let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_fin_exe)
+                            let jour=this.nombreDejourCalculeSansDateDuJOUR(objet.date_debut_exectuion_definitif,objet.date_reception_provisoire_definitif)
 
                             let durre=parseInt(jour) - parseInt(objet.duree)
                             return durre

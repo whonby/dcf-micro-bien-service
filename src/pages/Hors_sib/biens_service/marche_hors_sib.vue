@@ -144,12 +144,12 @@ CodeExempte
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link>
                    </td>
-                   <td>
-                     <router-link :to="{ name: 'detailExecution', params: { id: activites.id }}"
+                   <!-- <td>
+                     <router-link :to="{ name: 'detailExecutionHorsSib', params: { id: activites.id }}"
                 class="btn btn-default " title="historique execution Marche">
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
-                   </td>
+                   </td> -->
            <td>
           
                      <button @click.prevent="supprimerMarche(activites.id)"  class="btn btn-danger ">

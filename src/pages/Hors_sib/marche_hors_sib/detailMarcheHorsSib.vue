@@ -124,7 +124,7 @@
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                  <li class="active"><a data-toggle="tab" href="#tab0145">l'offre</a></li>
-                              <li class=""><a data-toggle="tab" href="#lot13">Lots</a></li>
+                              <li class=""><a data-toggle="tab" href="#lotMarche">Lots</a></li>
 
                                 <li class=""><a data-toggle="tab" href="#tab021501">Reception</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab42521">Ouverture</a></li>
@@ -147,6 +147,9 @@
 
                       <publication-Offre :macheid="detail_marche.id"></publication-Offre>
                          </div>
+                          <div id="lotMarche" class="tab-pane">
+                             <lot-marche :macheid="detail_marche.id"></lot-marche>
+                           </div>
                          <div id="tab021501" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
@@ -156,9 +159,7 @@
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>
-                           <div id="lot13">
-                             <lot-marche :macheid="detail_marche.id"></lot-marche>
-                           </div>
+                          
 
                         <div id="tab17" class="tab-pane">
 <!--                <div align="right">-->

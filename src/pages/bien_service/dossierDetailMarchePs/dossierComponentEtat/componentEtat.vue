@@ -4,7 +4,7 @@
           <tr  class="odd gradeX">
               <td colspan="" width="250">
         <div class="control-group" align="left">
-            <label class="label-control">Reception de la cotation</label>
+            <label class="label-control">Réception de la cotation</label>
             <div class="controls">
                 <input type="text" class="span" v-model="formEtat.libelle_etat" readonly>
             </div>
@@ -12,7 +12,7 @@
               </td>
               <td colspan="1" width="250">
         <div class="control-group" >
-            <label class="label-control"> Date de demarrage</label>
+            <label class="label-control"> Date de démarrage</label>
             <div class="controls">
                 <input type="date" class="span" v-model="formEtat.date_realisation"
                 />
@@ -38,7 +38,7 @@ export default {
         return{
             formEtat:{
                 date_realisation:"",
-                libelle_etat:"reception de la cotation"
+                libelle_etat:"Réception de la cotation"
             }
 
         }
@@ -64,7 +64,7 @@ export default {
          this.ajouterEtatProcedure(this.formEtat)
          this.formEtat={
              date_realisation:"",
-             libelle_etat:"reception de la cotation"
+             libelle_etat:"Réception de la cotation"
          }
      }
     

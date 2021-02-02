@@ -1,86 +1,18 @@
 
 <template>
-  <div>
-   
-    <div class="container-fluid">
-      <hr />
-      <div class="row-fluid">
-        <div class="span12">
-         <table class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th>Année</th>
-                      <th>UA</th>
-                    <th>Type de marché</th>
-                    <th>Mode de passation</th>
-                    <th>Activité</th>
-                    <th>Imputation</th>
-                    <!-- <th>Ligne Budgetaire</th> -->
-                    <th>Objet du marché</th>
-                    <th>Référence du marché</th>
-                     <!-- <th>Numero marché</th> -->
-                    <th>Montant prévu</th>
-                    
-                  </tr>
-                </thead>
-                <tbody>
-                 
-                        <tr class="odd gradeX" >
-                  <td >
-                   {{detail_marche.exo_id || 'Non renseigné'}}</td>
-                 <td >
-                   {{afficherlibelleUa(detail_marche.unite_administrative_id) || 'Non renseigné'}}</td>
-                 <td >
-                   {{affichertypeMarche(detail_marche.type_marche_id) || 'Non renseigné'}}</td>
-                 <td  style="text-align: center">
-                   {{detail_marche.procedure_passation.code || 'Non renseigné'}}</td>
-                  <td >
-                   {{afficherlibelleActivite(detail_marche.activite_id) || 'Non renseigné'}}</td>
-                    <td >
-                   {{detail_marche.imputation || 'Non renseigné'}}</td>
-                    <!-- <td >
-                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
-                     <td >
-                   {{detail_marche.objet || 'Non renseigné'}}</td>
-                     <td >
-                   {{detail_marche.reference_marche || 'Non renseigné'}}</td>
-                   <!-- <td >
-                   {{marche.numero_marche || 'Non renseigné'}}</td> -->
-                     <td  style="text-align: center;">
-                   {{formatageSomme(parseFloat(detail_marche.montant_marche)) || 'Non renseigné'}}</td>
-                  
-           
-                   
-
-                       </tr>
-                      
-                </tbody>
-              </table>
-         
-          
-          <div class="widget-box">
-            
-            <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5>EXECUTION DES LOTS (MARCHES)22</h5>
-             
-            </div>
-
-            <div class="widget-content nopadding">
+  <div class="widget-content nopadding">
               <table class="table table-bordered table-striped">
                 <thead>
                  <tr>
-                     <th>N°Lot</th>
+                     <th>N°Lot33</th>
                      <th>Objet marché</th>
                      <th>UA</th>
                     <th>Type marché</th>
                     <th>Activité</th>
                     <th>Imputation</th>
-                    <th>Ligne Budgetaire</th>
+                    <th>Ligne Budgétaire</th>
                     
-                    <th>Reference marché</th>
+                    <th>Référence marché</th>
                    
                     <th>Montant Réel (FCFA)</th>
                     <th>Action</th>
@@ -116,16 +48,39 @@
 
 
 <div class="btn-group" v-if="afficherStatusSib(marche.id)==0">
-<router-link :to="{ name: 'listeDesReceptionDesLot', params: { id: marche.id }}"
+
+               
+<router-link :to="{ name: 'detailExecution', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail execution Marche">
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
+
+          
+
+              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
             </div>
 <div class="btn-group" v-if="afficherStatusSib(marche.id)==1">
-<router-link :to="{ name: 'listeDesReceptionDesLot', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail execution Marche Gestion Hors Sib">
-                  <span class=""><i class="  icon-random"></i></span>
+
+               
+<router-link :to="{ name: 'detailExecutionHorsSib', params: { id: marche.id }}"
+                class="btn btn-primary " title="Detail execution Marche Gestion Hors Sib">
+                  <span class=""><i class="  icon-random"></i> Détail exécution</span>
                    </router-link> 
+
+          <router-link :to="{ name: 'ListeImageMarche', params: { id: marche.id }}"
+                class="btn btn-info " title="Liste Image">
+                  <span class=""><i class="icon-camera"></i> Caméra</span>
+                   </router-link> 
+
+<router-link :to="{ name: 'AjouterTacheParMarche', params: { id: marche.id }}"
+                class="btn btn-inverse " title="Voir Tâche Prévue">
+                  <span class=""><i class="icon-eye-open"></i> Voir Tâche Prévue</span>
+                   </router-link> 
+              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i> Supprimer</span></button>
+             
             </div>
 
                      
@@ -148,28 +103,16 @@
               </table>
               
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
-    <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
-<button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-<notifications  />  -->
-    <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
-  </div>
 </template>
   
+
 <script>
 import { mapGetters, mapActions } from "vuex";
-// import afficheMarcheGeneral from "../../../investissement/afficheMarcheGeneral"
-// import afficheMarcheGeneralHorsSib from "../../../investissement/afficheMarcheGeneralHorsSib"
-// import AfficheMarcheBienEtFourniture from "../../../investissement/AfficheMarcheBienEtFourniture"
-// import AfficheMarcheBienEtFournitureHorsSib from "../../../investissement/AfficheMarcheBienEtFournitureHorsSib"
-import { formatageSommeSansFCFA,formatageSomme } from "../../../../Repositories/Repository";
- 
-
+// import afficheMarcheGeneral from "./afficheMarcheGeneral"
+// import afficheMarcheGeneralHorsSib from "./afficheMarcheGeneralHorsSib"
+// import AfficheMarcheBienEtFourniture from "./AfficheMarcheBienEtFourniture"
+// import AfficheMarcheBienEtFournitureHorsSib from "./AfficheMarcheBienEtFournitureHorsSib"
+import { formatageSommeSansFCFA ,formatageSomme} from "../../../src/Repositories/Repository";
 export default {
   components:{
     // afficheMarcheGeneral,
@@ -213,6 +156,50 @@ export default {
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
    ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
+afficheractivite() {
+
+      return id => {
+       
+        if (id != null && id != "") {
+           const qtereel = this.afficheNiveauActivite.find(qtreel => qtreel.id == id);
+
+      if (qtereel!=undefined) {
+        
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+afficherTypeMarcheLibelle() {
+       
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+
+      if (qtereel!=undefined) {
+        
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+afficherUniteAdministrative() {
+       
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel!=undefined) {
+        
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 afficherSommeMarcheExecution() {
       return id => {
         if (id != null && id != "") {
@@ -273,7 +260,7 @@ listeDesLotExecution() {
          return id => {
         if (id != null && id != "") {
           return this.colect.filter(
-            element => element.parent_id == id  && element.attribue == 2 && this.afficherCodetypeMarche(element.type_marche_id) == 3
+            element => element.parent_id == id  && element.attribue == 2 && this.afficherCodetypeMarche(element.type_marche_id) == 3 || element.type_marche_id == 1 && element.parent_id == id  && element.attribue == 2
           );
         }
       };
@@ -283,7 +270,7 @@ listeDesLotExecution() {
   return id => {
         if (id != null && id != "") {
           return this.getMarchePersonnaliser.filter(
-element => element.parent_id == id  && element.attribue == 2 && this.afficherCodetypeMarche(element.type_marche_id) == 3
+element => element.parent_id == id  && element.attribue == 2 && this.afficherCodetypeMarche(element.type_marche_id) == 3 || element.type_marche_id == 1 && element.parent_id == id  && element.attribue == 2
           );
         }
       };

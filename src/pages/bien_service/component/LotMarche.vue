@@ -14,7 +14,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-            <h5>Liste des Lots{{detail_marche.plan_passation_marche_id}}</h5>
+            <h5>Liste des Lots</h5>
           </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">

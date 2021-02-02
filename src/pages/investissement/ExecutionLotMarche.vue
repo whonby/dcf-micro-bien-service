@@ -6,6 +6,10 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
+           <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button>
+    
+        </div> <br>
           <template v-if="affichertypeMarcheEx(detail_marche.type_marche_id)==3">
              <!-- <afficheMarcheGeneral v-if="afficherStatusSib(detail_marche.id)==0"></afficheMarcheGeneral>  -->
 
@@ -251,7 +255,8 @@
             </div>
 
             <div class="widget-content nopadding">
-              <table class="table table-bordered table-striped">
+              <!-- TABLEAU DES LOT SUR LES LIGNE A MARCHE -->
+               <table class="table table-bordered table-striped" v-if="this.detail_marche.economique_id != this.CodeExempte(this.detail_marche.economique_id)">
                 <thead>
                  <tr>
                      <th>N°Lot</th>
@@ -351,7 +356,115 @@
                        </tr>
                 </tbody>
               </table>
-              
+             <!-- TABLEAU DES LOT SUR LES LIGNE EXEMPTE -->
+           <table class="table table-bordered table-striped" v-else>
+                <thead>
+                 <tr>
+                     <!-- <th>N°Lot222</th> -->
+                     <th>Objet marché</th>
+                     <th>UA</th>
+                    <th>Type marché</th>
+                    <th>Activité</th>
+                    <th>Imputation</th>
+                    <th>Ligne Budgétaire</th>
+                    
+                    <th>Référence marché</th>
+                   
+                    <th>Montant Réel (FCFA)</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="odd gradeX" v-for="marche in 
+                  listeDesLotExecutionLigneExempte(detail_marche.id)"
+                 :key="marche.id">
+                  <!-- <td>
+                   {{marche.numero_lot || 'Non renseigné'}}</td> -->
+                 <td>
+                   {{marche.objet || 'Non renseigné'}}</td>
+                 <td>
+                   {{afficherlibelleUa(marche.unite_administrative_id) || 'Non renseigné'}}</td>
+
+                 <td>
+                   {{affichertypeMarche(marche.type_marche_id) || 'Non renseigné'}}</td>
+                     <td>
+                   {{afficherlibelleActivite(marche.activite_id) || 'Non renseigné'}}</td>
+                    <td>
+                   {{marche.imputation || 'Non renseigné'}}</td>
+                    <td>
+                  {{afficherCodeEtLibellePlanEconomique(marche.economique_id) || 'Non renseigné'}}</td>
+                     
+                     <td>
+                   {{marche.reference_marche || 'Non renseigné'}}</td>
+                  
+                     <td style="text-align: center;color:#000000;font-weight:bold;">
+                   {{formatageSommeSansFCFA(parseFloat(afficheMontantReelMarche(marche.id))) || 'Non renseigné'}}</td>
+                 
+
+
+
+<div class="btn-group" v-if="afficherStatusSib(marche.id)==0">
+
+               
+<router-link :to="{ name: 'detailExecution', params: { id: marche.id }}"
+                class="btn btn-default " title="Detail execution Marche">
+                  <span class=""><i class="  icon-random"></i> Détail exécution</span>
+                   </router-link> 
+
+            <router-link :to="{ name: 'ListeImageMarche', params: { id: marche.id }}"
+                class="btn btn-info " title="Liste Image">
+                  <span class=""><i class="icon-camera"></i> Caméra</span>
+                   </router-link> 
+
+<router-link :to="{ name: 'AjouterTacheParMarche', params: { id: marche.id }}"
+                class="btn btn-inverse " title="Voir Tâche Prévue">
+                  <span class=""><i class="icon-eye-open"></i> Voir Tâche Prévue</span>
+                   </router-link> 
+
+              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i> Supprimer</span></button>
+             
+            </div>
+<div class="btn-group" v-if="afficherStatusSib(marche.id)==1">
+
+               
+<router-link :to="{ name: 'detailExecutionHorsSib', params: { id: marche.id }}"
+                class="btn btn-primary " title="Detail execution Marche Gestion Hors Sib">
+                  <span class=""><i class="  icon-random"></i> Détail exécution</span>
+                   </router-link> 
+
+          <router-link :to="{ name: 'ListeImageMarche', params: { id: marche.id }}"
+                class="btn btn-info " title="Liste Image">
+                  <span class=""><i class="icon-camera"></i> Caméra</span>
+                   </router-link> 
+
+<router-link :to="{ name: 'AjouterTacheParMarche', params: { id: marche.id }}"
+                class="btn btn-inverse " title="Voir Tâche Prévue">
+                  <span class=""><i class="icon-eye-open"></i> Voir Tâche Prévue</span>
+                   </router-link> 
+              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i> Supprimer</span></button>
+             
+            </div>
+
+                     
+
+                       </tr>
+                       <tr>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td style="font-weight:bold;">Total</td>
+                         <td style="text-align: center;color:red;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(afficherSommeMarcheExecution(detail_marche.id)))}}</td>
+                         <!-- <td></td> -->
+
+                       </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -368,14 +481,17 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-// import afficheMarcheGeneral from "./afficheMarcheGeneral"
+// import ExecutionLotLigneMarche from "./ExecutionLotLigneMarche"
+// import ExecutionLotParLigneExempte from "./ExecutionLotParLigneExempte"
+
 // import afficheMarcheGeneralHorsSib from "./afficheMarcheGeneralHorsSib"
 // import AfficheMarcheBienEtFourniture from "./AfficheMarcheBienEtFourniture"
 // import AfficheMarcheBienEtFournitureHorsSib from "./AfficheMarcheBienEtFournitureHorsSib"
 import { formatageSommeSansFCFA ,formatageSomme} from "../../../src/Repositories/Repository";
 export default {
   components:{
-    // afficheMarcheGeneral,
+    // ExecutionLotLigneMarche,
+    // ExecutionLotParLigneExempte
     // afficheMarcheGeneralHorsSib,
     // AfficheMarcheBienEtFourniture,
     // AfficheMarcheBienEtFournitureHorsSib
@@ -407,7 +523,7 @@ export default {
       ...mapGetters("bienService", ["getActeEffetFinancierPersonnaliser45",'acteEffetFinanciers','marches','typeMarches', 'getMarchePersonnaliser',
      "montantMarche", "printMarcheNonAttribue","procedurePassations","typeTypeProcedures","montantMarcheReel"]),
 
-     ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
+     ...mapGetters("uniteadministrative",["getterligneExempter",'uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
       "montantBudgetGeneral", ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
@@ -416,6 +532,19 @@ export default {
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
    ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
+
+CodeExempte() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterligneExempter.find(qtreel => qtreel.economique_id == id);
+
+      if (qtereel) {
+        return qtereel.economique_id;
+      }
+      return 0
+        }
+      };
+    },
 afficheractivite() {
 
       return id => {
@@ -505,6 +634,36 @@ affichertypeMarcheEx() {
       return 0
         }
       };
+    },
+    listeDesLotExecutionLigneExempte() {
+       // const st = this.search.toLowerCase();
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.getMarchePersonnaliser.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+         return id => {
+        if (id != null && id != "") {
+          return this.colect.filter(
+            element => element.id == id  && element.attribue == 2 && element.type_marche_id == 5 || element.type_marche_id == 1 && element.id == id  && element.attribue == 2 || element.type_marche_id == 6 && element.id == id  && element.attribue == 2
+          );
+        }
+      };
+            
+          
+        }
+  return id => {
+        if (id != null && id != "") {
+          return this.getMarchePersonnaliser.filter(
+element => element.id == id  && element.attribue == 2 && element.type_marche_id == 5 || element.type_marche_id == 1 && element.id == id  && element.attribue == 2 || element.type_marche_id == 6 && element.id == id  && element.attribue == 2
+          );
+        }
+      };
+       
     },
 listeDesLotExecution() {
        // const st = this.search.toLowerCase();
@@ -610,6 +769,9 @@ afficherlibelleUa() {
       "modifierTypeTexte",
       "supprimerTypeTexte"
     ]),
+      afficherModalListeExecution(){
+                window.history.back();
+            },
    formatageSommeSansFCFA:formatageSommeSansFCFA,
    formatageSomme:formatageSomme,
     alert() {

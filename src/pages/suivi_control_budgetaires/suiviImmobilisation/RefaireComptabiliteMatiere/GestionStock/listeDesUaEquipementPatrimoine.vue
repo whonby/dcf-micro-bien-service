@@ -633,7 +633,7 @@ DureeEcoule
                 <tbody>
                      <tr
                     class="odd gradeX"
-                    v-for="stock in filtre_service"
+                    v-for="stock in partition(filtre_service,size)[page]"
                     :key="stock.id"
                   >
 
@@ -690,6 +690,7 @@ DureeEcoule
                         
 
 
+
                        <td>
                        <router-link
                         :to="{name : 'DetailVehiculeGestionStock', params: {id:stock.id}}"
@@ -725,7 +726,15 @@ DureeEcoule
                  </tr>
                 </tbody>
               </table>
-            
+             <div class="pagination alternate">
+                    <ul>
+                        <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                        <li  v-for="(titre, index) in partition(filtre_service,size).length" :key="index" :class="{ active : active_el == index }">
+                            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                        <li :class="{ disabled : page == partition(filtre_service,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+                    </ul>
+           </div>
              </div>
          
         </div>
@@ -751,8 +760,9 @@ DureeEcoule
 
 <script>
 import {mapGetters, mapActions} from 'vuex';
-import { formatageSomme } from '../../../../../Repositories/Repository';
+import { formatageSomme,partition } from '../../../../../Repositories/Repository';
 import {admin,dcf,noDCfNoAdmin} from "../../../../../Repositories/Auth"
+
 import moment from 'moment';
 export default {
     data(){
@@ -770,6 +780,9 @@ export default {
       formData :{
 
       },
+       page:0,
+        size:10,
+        active_el:0,
       direct:"",
        valideService:{
 motif:"",
@@ -1791,6 +1804,19 @@ afficherIdService() {
    'ajouterPlanOrganigrammeUa','modifierPlanOrganigrammeUa','supprimerPlanOrganigrammeUa']), 
 
 
+      partition:partition,
+      getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
 
 DureeEcoule(id){
      

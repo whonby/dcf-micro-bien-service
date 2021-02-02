@@ -1,4 +1,4 @@
-decision_cf
+DisponibleBudgetaireApresLiquidation
 <template>
   	<div>
 
@@ -28,7 +28,7 @@ decision_cf
                                 
                              
                                 <th style="font-size:12px;font-weight:bold;">Type de marché</th>
-                                <th style="font-size:12px;font-weight:bold;">Procédure de passation </th>
+                                <!-- <th style="font-size:12px;font-weight:bold;">Procédure de passation </th> -->
                                 <th style="font-size:12px;font-weight:bold;">Unité administrative</th>
                                 <th style="font-size:12px;font-weight:bold;">Activité</th>
                     <th style="font-size:12px;font-weight:bold;">Imputation</th>
@@ -47,8 +47,8 @@ decision_cf
                                 <td class="taskOptions" style="font-size:14px;font-weight:bold;">
                                     {{detail_marche.type_marche.libelle}}
                                 </td>
-                                <td class="taskOptions" style="font-size:14px;font-weight:bold;">
-                                    <!-- {{afficheModePassation(detail_marche.procedure_passation_id)}} -->
+                                <!-- <td class="taskOptions" style="font-size:14px;font-weight:bold;">
+                                    
                                    
                                <span v-if="DisponibleBudgetaireApresLiquidation < 10000000 ">Procédure Simplifiée de demande de Cotation(PSC Sans comité)</span>
                          <span v-else-if="DisponibleBudgetaireApresLiquidation < 30000000 ">Procédure Simplifiée de demande de Cotation(PSC Avec comité)</span>
@@ -56,7 +56,7 @@ decision_cf
                          <span v-else-if="DisponibleBudgetaireApresLiquidation < 100000000 ">Procédure Simplifiée à compétition Ouverte(PSO)</span>
                          <span v-else-if="DisponibleBudgetaireApresLiquidation > 100000000 ">Appel d'Offre Ouvert(AON ou AOI)</span>
                          <span v-else></span>
-                                </td>
+                                </td> -->
                                 <td class="taskOptions" style="font-size:14px;font-weight:bold;">
                                     {{detail_marche.objetUniteAdministrative.libelle}}
                                 </td>

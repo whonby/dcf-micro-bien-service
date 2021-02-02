@@ -134,18 +134,19 @@ CodeExempte
     </router-link>
                    </td>
                    
-                   <td>
+                  
+                   <td v-if="activites.attribue == 2">
+                     <router-link :to="{ name: 'detailExecution', params: { id: activites.id }}"
+                class="btn btn-warning " title="Exécution du Marché">
+                  <span class="">Exécution Marché</span>
+                   </router-link> 
+                   </td>
+                    <td v-else>
                     
                       <router-link :to="{ name: 'detail_hors_sib', params: { id: activites.id }}"
                 class="btn btn-success " title=" Contractualisation">
                   <span > Contractualisation</span>
                     </router-link>
-                   </td>
-                   <td v-if="activites.attribue == 2">
-                     <router-link :to="{ name: 'detailExecution', params: { id: activites.id }}"
-                class="btn btn-warning " title="Exécution du Marché">
-                  <span class="">Exécution</span>
-                   </router-link> 
                    </td>
            <td>
           
