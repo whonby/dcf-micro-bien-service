@@ -92,7 +92,7 @@
    <table class="table table-bordered table-striped">
 <thead>
                   <tr >
-                    <th style="background: coral;font-weight:bolder;color:#000;text-align:center;font-size:12px">N°ORDRE</th>
+                    <!-- <th style="background: coral;font-weight:bolder;color:#000;text-align:center;font-size:12px">N°ORDRE</th> -->
                    <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px">NOM DE L'ENTREPRISE</th>
                     <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px" colspan="2">NOMBRE DE MARCHES OBTENUS</th>
                     <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px" colspan="3">MARCHES NON DEMARRES</th>
@@ -101,11 +101,11 @@
                     <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px" colspan="3" title="NOMBRE DE MARCHES ACHEVES  DANS LE DELAI">NOMBRE DE MARCHES ACHEVES  DANS LE DELAI</th>
                     <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px" colspan="3" title=" MARCHES  ACHEVES  HORS DELAI"> MARCHES  ACHEVES  HORS DELAI</th>
                  <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px" colspan="3" title="MARCHES  EN SOUFFRANCE">MARCHES  EN SOUFFRANCE</th>
-                 <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px" colspan="3" title="AVENANT">AVENANT</th>
+                 <!-- <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px" colspan="3" title="AVENANT">AVENANT</th> -->
                  <!-- <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px" colspan="" title="AVENANT">Détail</th> -->
                   </tr>
                   <tr>
-                   <th colspan="2"></th>
+                   <th colspan="1"></th>
                     <th style="background: limegreen;font-weight:bolder;color:#000;text-align:center;font-size:12px">Nombre</th>
                     <th style="background: limegreen;font-weight:bolder;color:#000;text-align:center;font-size:12px">Montant</th>
                    
@@ -128,9 +128,9 @@
                      <th style="background: limegreen;font-weight:bolder;color:#000;text-align:center;font-size:12px">Nombre</th>
                      <th style="background: limegreen;font-weight:bolder;color:#000;text-align:center;font-size:12px">Montant</th>
                     <th style="background: limegreen;font-weight:bolder;color:#000;text-align:center;font-size:12px">Taux</th>
-                     <th style="background: limegreen;font-weight:bolder;color:#000;text-align:center;font-size:12px">Nombre</th>
+                     <!-- <th style="background: limegreen;font-weight:bolder;color:#000;text-align:center;font-size:12px">Nombre</th>
                      <th style="background: limegreen;font-weight:bolder;color:#000;text-align:center;font-size:12px">Montant</th>
-                    <th style="background: limegreen;font-weight:bolder;color:#000;text-align:center;font-size:12px">Taux</th>
+                    <th style="background: limegreen;font-weight:bolder;color:#000;text-align:center;font-size:12px">Taux</th> -->
                    <!-- <th style="background: limegreen;font-weight:bolder;color:#000;text-align:center;font-size:12px"></th> -->
                   </tr>
                 </thead>
@@ -141,7 +141,7 @@
                     v-for="service in ListeDEsEntreprise"
                     :key="service.id"
                   >
-                  <td style="width:10%">{{service[0].entreprise_id || 'Non renseigné'}}</td>
+                  <!-- <td style="width:10%">{{service[0].entreprise_id || 'Non renseigné'}}</td> -->
                   <td style="width:10%">{{RaisonSocialEntreprise(service[0].entreprise_id) || 'Non renseigné'}}</td>
                   <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheRecu(service[0].entreprise_id) || 'Non renseigné'}}</td>
                     <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantMarcheObtenu(service[0].entreprise_id)))}}</td>
@@ -153,24 +153,25 @@
                       
                       <td style="width:10%;text-align:center;font-size:14px" >{{((MarcheNonDemarre(service[0].entreprise_id)/NombreDeMarcheRecu(service[0].entreprise_id))*100).toFixed(0) || 0}}%</td>
                       
-                      <td style="width:10%;text-align:center;font-size:14px">{{ecartDateDefinitiveEffective(service[0].entreprise_id)}}</td>
-                                            <td style="width:10%;text-align:center;font-size:14px">{{dateMiseService(service[0].entreprise_id)}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{((parseFloat(NombreMarcheEnCoursEecution(service[0].entreprise_id)/parseFloat(MarcheNonDemarre(service[0].entreprise_id))))*100) || 0}}%</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheExecutionDansLeDelai(service[0].entreprise_id)}}</td>
+                                            <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantDeMarcheExecutionDansLeDelai(service[0].entreprise_id)))}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{((NombreDeMarcheExecutionDansLeDelai(service[0].entreprise_id)/NombreDeMarcheRecu(service[0].entreprise_id))*100).toFixed(0) || 0}}%</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheExecutionHorsDelai(service[0].entreprise_id)}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantDeMarcheExecutionHorsDelai(service[0].entreprise_id)))}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{((NombreDeMarcheExecutionHorsDelai(service[0].entreprise_id)/NombreDeMarcheRecu(service[0].entreprise_id))*100).toFixed(0) || 0}}%</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheAcheveDansLeDelai(service[0].entreprise_id)}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantDeMarcheAcheveDansLeDelai(service[0].entreprise_id))) || 'Non renseigné'}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{((NombreDeMarcheAcheveDansLeDelai(service[0].entreprise_id)/NombreDeMarcheRecu(service[0].entreprise_id))*100).toFixed(0) || 0}}%</td>
+<td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheAcheveHorsLeDelai(service[0].entreprise_id)}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantDeMarcheAcheveHorsLeDelai(service[0].entreprise_id))) || 'Non renseigné'}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{((NombreDeMarcheAcheveHorsLeDelai(service[0].entreprise_id)/NombreDeMarcheRecu(service[0].entreprise_id))*100).toFixed(0) || 0}}%</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheSuppendu(service[0].entreprise_id) || 0}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantDeMarcheSuppendu(service[0].entreprise_id))) || 'Non renseigné'}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{((NombreDeMarcheSuppendu(service[0].entreprise_id)/NombreDeMarcheRecu(service[0].entreprise_id))*100).toFixed(0) || 0}}%</td>
+                  
+                    <!-- <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id || 'Non renseigné'}}</td>
                       <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id || 'Non renseigné'}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id || 'Non renseigné'}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id || 'Non renseigné'}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id || 'Non renseigné'}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id || 'Non renseigné'}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id || 'Non renseigné'}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id || 'Non renseigné'}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id || 'Non renseigné'}}</td>
-                    <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id || 'Non renseigné'}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id || 'Non renseigné'}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id || 'Non renseigné'}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id || 'Non renseigné'}}</td> -->
 
                     <!-- <td>
                       <button class="btn btn-success" >
@@ -282,15 +283,83 @@ search:""
     },
 
  
-             MarcheExecutionDansLeDelai() {
+             NombreDeMarcheExecutionDansLeDelai() {
       return id => {
         if (id != null && id != "") {
-           return this.getterActeEffetFinanciers.filter(qtreel => qtreel.entreprise_id == id && qtreel.date_debut_exectuion_definitif != null && qtreel.date_reception_provisoire_definitif != null).length;
+           return this.getterActeEffetFinanciers.filter(qtreel => qtreel.entreprise_id == id && qtreel.date_debut_exectuion_definitif != null && qtreel.date_reception_provisoire_definitif != null && this.nombreDejourCalcule(this.afficherDateDuJour,qtreel.date_fin_exe) <= qtreel.duree).length;
         }
         return 0
       };
     },
-    
+     MontantDeMarcheExecutionDansLeDelai() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getterActeEffetFinanciers.filter(qtreel => qtreel.entreprise_id == id && qtreel.date_debut_exectuion_definitif != null && qtreel.date_reception_provisoire_definitif != null && this.nombreDejourCalcule(this.afficherDateDuJour,qtreel.date_fin_exe) <= qtreel.duree).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0).toFixed(0);
+        }
+        return 0
+      };
+    },
+MontantDeMarcheExecutionHorsDelai() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getterActeEffetFinanciers.filter(qtreel => qtreel.entreprise_id == id && qtreel.date_debut_exectuion_definitif != null && qtreel.date_reception_provisoire_definitif != null && qtreel.duree < this.nombreDejourCalcule(this.afficherDateDuJour,qtreel.date_fin_exe)).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0).toFixed(0);
+        }
+        return 0
+      };
+    },
+
+   NombreDeMarcheExecutionHorsDelai() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getterActeEffetFinanciers.filter(qtreel => qtreel.entreprise_id == id && qtreel.date_debut_exectuion_definitif != null && qtreel.date_reception_provisoire_definitif != null && qtreel.duree < this.nombreDejourCalcule(this.afficherDateDuJour,qtreel.date_fin_exe)).length;
+        }
+        return 0
+      };
+    },
+
+
+    NombreDeMarcheAcheveDansLeDelai() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getterActeEffetFinanciers.filter(qtreel => qtreel.entreprise_id == id && qtreel.date_debut_exectuion_definitif != null && qtreel.date_reception_provisoire_definitif != null && this.nombreDejourCalcule(qtreel.date_debut_exectuion_definitif,qtreel.date_reception_definitive) == qtreel.duree && this.MarcheAcheve(qtreel.marche_id)==5).length;
+        }
+        return 0
+      };
+    },
+
+
+MontantDeMarcheAcheveDansLeDelai() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getterActeEffetFinanciers.filter(qtreel => qtreel.entreprise_id == id && qtreel.date_debut_exectuion_definitif != null && qtreel.date_reception_provisoire_definitif != null && this.nombreDejourCalcule(qtreel.date_debut_exectuion_definitif,qtreel.date_reception_definitive) == qtreel.duree && this.MarcheAcheve(qtreel.marche_id) == 5).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0).toFixed(0);
+        }
+        return 0
+      };
+    },
+
+
+ NombreDeMarcheAcheveHorsLeDelai() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getterActeEffetFinanciers.filter(qtreel => qtreel.entreprise_id == id && qtreel.date_debut_exectuion_definitif != null && qtreel.date_reception_provisoire_definitif != null && qtreel.duree < this.nombreDejourCalcule(qtreel.date_debut_exectuion_definitif,qtreel.date_reception_definitive) && this.MarcheAcheve(qtreel.marche_id)==5).length;
+        }
+        return 0
+      };
+    },
+
+
+MontantDeMarcheAcheveHorsLeDelai() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getterActeEffetFinanciers.filter(qtreel => qtreel.entreprise_id == id && qtreel.date_debut_exectuion_definitif != null && qtreel.date_reception_provisoire_definitif != null && qtreel.duree < this.nombreDejourCalcule(qtreel.date_debut_exectuion_definitif,qtreel.date_reception_definitive)  && this.MarcheAcheve(qtreel.marche_id) == 5).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0).toFixed(0);
+        }
+        return 0
+      };
+    },
+
+
+
+
 dateMiseService() {
       return id => {
         if (id != null && id != "") {
@@ -339,10 +408,43 @@ let date = new Date();
 
 
 
+MarcheAcheve() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.attribue;
+      }
+      return 0
+        }
+      };
+    },
 
+TypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.type_marche_id;
+      }
+      return 0
+        }
+      };
+    },
+ua() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.ua_id;
+      }
+      return 0
+        }
+      };
+    },
 
 
 
@@ -443,9 +545,44 @@ MontantMarcheObtenu() {
                             return item
                         }
                     })
- return objet
+                  return objet
                 }
-              
+              if(this.entre_id=="" && this.typemarche_id!="" && this.ua_id==""){
+                  
+                    objet =objet.filter(item=>{
+                        if(this.TypeMarche(item[0].marche_id)==vM.typemarche_id){
+                            return item
+                        }
+                    })
+                  return objet
+                }
+                if(this.entre_id=="" && this.typemarche_id=="" && this.ua_id!=""){
+                  
+                    objet =objet.filter(item=>{
+                        if(this.ua(item[0].marche_id)==vM.ua_id){
+                            return item
+                        }
+                    })
+                  return objet
+                }
+               if(this.entre_id!="" && this.typemarche_id!="" && this.ua_id!=""){
+                  
+                    objet =objet.filter(item=>{
+                        if(this.ua(item[0].marche_id)==vM.ua_id && this.TypeMarche(item[0].marche_id)==vM.typemarche_id && item[0].entreprise_id==vM.entre_id){
+                            return item
+                        }
+                    })
+                  return objet
+                }
+                 if(this.entre_id!="" && this.typemarche_id!="" && this.ua_id==""){
+                  
+                    objet =objet.filter(item=>{
+                        if(this.TypeMarche(item[0].marche_id)==vM.typemarche_id && item[0].entreprise_id==vM.entre_id){
+                            return item
+                        }
+                    })
+                  return objet
+                }
                 return objet
             },
 
@@ -500,6 +637,25 @@ MontantMarcheObtenu() {
                     }
                 }
             },
+
+             NombreDeMarcheSuppendu() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getterActeEffetFinanciers.filter(qtreel => qtreel.entreprise_id == id  && this.MarcheAcheve(qtreel.marche_id)==7).length;
+        }
+        return 0
+      };
+    },
+
+
+MontantDeMarcheSuppendu() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getterActeEffetFinanciers.filter(qtreel => qtreel.entreprise_id == id   && this.MarcheAcheve(qtreel.marche_id) == 7).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0).toFixed(0);
+        }
+        return 0
+      };
+    },
   },
   methods: {
       ...mapActions("uniteadministrative", [
