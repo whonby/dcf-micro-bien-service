@@ -291,6 +291,8 @@
 import { mapGetters,mapActions} from "vuex";
 import {admin,dcf,noDCfNoAdmin} from '../../src/Repositories/Auth';
 import Pusher from 'pusher-js';
+
+import Ws from '@adonisjs/websocket-client'
 //import listeUaDeComptabiliteMatiere from '../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/dossierListeUaDeComptabilteMatier/listeUaDeComptabiliteMatiere'
 // import {admin,dcf,cf,noDCfNoAdmin} from "../Repositories/Auth"
 export default {
@@ -299,7 +301,7 @@ components:{
 },
   data(){
     return{
-
+        isConnected:false,
       budgetGeneralCharge:""
 
     }
@@ -867,13 +869,41 @@ return objJson.id
 let vm=this;
     let channel = pusher.subscribe('channel-image-marche');
     channel.bind('event-image-marche', function(data) {
-    //  app.messages.push(JSON.stringify(data));
-   // console.log(data)
-     // let donne=JSON.stringify(data)
-      //console.log(donne)
+
       let infomarche=data
     vm.pusherImageMarche(infomarche.data)
     });
+
+      const ws = Ws('ws://localhost:3333')
+
+
+      ws.on('open', () => {
+          console.log("*********GUEI ROLAND********")
+          vm.isConnected = true
+          console.log(vm.isConnected)
+          console.log(".............................")
+      })
+
+      ws.on('close', () => {
+          vm.isConnected = false
+          console.log(vm.isConnected)
+      })
+
+
+
+
+      const chat = ws.subscribe('chat')
+
+      chat.on('ready', () => {
+          chat.emit('message', 'hello')
+      })
+
+      chat.on('error', (error) => {
+          console.log(error)
+      })
+
+      chat.on('close', () => {
+      })
 
   }
 }
