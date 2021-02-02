@@ -530,7 +530,7 @@ this.getAutreTextJuridique()
 this.getTypeTextJuridique()
 this.getMotifDecision()
 this.getDocumentProcedure()
-// this.getDecisionMarche()
+ this.getReserveCf()
 
 // this.getDecisionMarche()
 this.getActeEffetFinancier()
@@ -752,6 +752,7 @@ return objJson.id
       "getFicheArticle"
       
       
+      
     ]),
  ...mapActions('horSib',['getMarcheHorSib',"getRealiteServiceHors","getOpProvisoire"]),
 
@@ -763,7 +764,7 @@ return objJson.id
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",
          "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation","getMandater",
-         "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure',
+         "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure','getReserveCf',
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
           'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"

@@ -114,6 +114,7 @@ import SuiviDelai from "../../pages/DossierSuiviDelai/SuiviDelai.vue"
 const BienServiceRoutes = [
     {
 
+        
         path:"/AjouterTacheRealise/:id",
         name:"AjouterTacheRealise",
         component:AjouterTacheRealise

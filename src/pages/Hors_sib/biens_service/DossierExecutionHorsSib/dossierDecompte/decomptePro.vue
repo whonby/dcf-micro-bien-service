@@ -33,7 +33,7 @@
                           <th style="text-align:center;font-size:12px">Motif Cf </th>
                           <th style="text-align:center;font-size:12px">Autres Motif </th>
                           <th style="text-align:center;font-size:12px">Décision </th>
-                          <th style="text-align:center;font-size:12px">Action </th>
+                          <th style="text-align:center;font-size:12px" colspan="2">Action </th>
                       </tr>
 
                       </thead>
@@ -107,6 +107,13 @@
 
                                   <span >Attente</span>
                               </button>
+                          </td>
+                          <td>
+                              <router-link :to="{ name: 'ListeImageMarche', params: { id: type.id }}"
+                                           class="btn btn-inverse " title="">
+                                  <span class=""><i class="icon-eye-open"></i> Voir Image</span>
+                              </router-link>
+                             
                           </td>
                           <td>
                               <router-link :to="{ name: 'AjouterTacheRealise', params: { id: type.id }}"

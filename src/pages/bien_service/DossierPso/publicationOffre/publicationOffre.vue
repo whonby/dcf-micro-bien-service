@@ -128,13 +128,14 @@
                             </div>
                         </div>
                             </td>
+
                                <td colspan="2">
              <div class="control-group">
             <label class="control-label">Mode Passation</label>
             <div class="controls">
             
                <select v-model="formData.mode_passation_id" class="span" >
-               <option v-for="plans in procedurePassations" :key="plans.id" 
+               <option v-for="plans in afficherListeModePassation" :key="plans.id" 
                :value="plans.id"> {{plans.libelle}} =>{{ typeProcedureLibelle(plans.type_procedure_id)}}</option>
                <!-- <code v-if="message_offre">{{message_offre}}</code> -->
            </select>
@@ -175,7 +176,7 @@
                         </div>
                             </td>
                             </tr>
-                                 
+           
                             <tr>
                                 <td>
                         <div class="control-group">
@@ -353,7 +354,7 @@
             <div class="controls">
             
                <select v-model="edite_appel_offre.mode_passation_id" class="span" >
-               <option v-for="plans in procedurePassations" :key="plans.id" 
+               <option v-for="plans in afficherListeModePassation" :key="plans.id" 
                :value="plans.id"> {{plans.code}} => {{plans.libelle}}</option>
            </select>
             </div>
@@ -680,6 +681,10 @@ typeProcedureLibelle() {
         }
       };
     },
+
+     afficherListeModePassation(){
+    return this.procedurePassations.filter(item => item.code!="R3CV")
+},
 
     // recuperation de 
     listePassation(){

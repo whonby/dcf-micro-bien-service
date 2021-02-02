@@ -1125,12 +1125,12 @@ typeMarches
                    </router-link>
 </td>
 
-<td>
+<!-- <td>
     <router-link :to="{ name: 'detailGre', params: { id: marche.id }}"
                 class="btn btn-success " title="Detail marche">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link>
-</td>
+</td> -->
 <td>
    <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
                  class="btn btn-inverse " title="Cycle de vie du marché">

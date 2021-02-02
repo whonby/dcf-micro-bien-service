@@ -339,7 +339,7 @@ export default {
       "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
- ...mapActions('horSib',['getMarcheHorSib',"getRealiteServiceHors","getOpProvisoire"]),
+ ...mapGetters('horSib',['getMarcheHorSib',"getRealiteServiceHors","getOpProvisoire"]),
      ...mapGetters("uniteadministrative",['getterligneExempter','uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
       "montantBudgetGeneral","budgetEclate" ]),
@@ -1298,22 +1298,13 @@ recupererDateMiseService() {
 
 
 
-
-
-
-
-
-
-
-
-
   },
   methods: {
     ...mapActions("bienService", ['ajouterMarche','modifierMarche','modifierMarcheBascule',
     'supprimerMarche','modifierActeEffetFinancier',"getMarche","getActeEffetFinancier"
      
     ]),
-    ...mapActions("horSib", ['getMarcheHorSib']),
+    //...mapActions("horSib", ['getMarcheHorSib']),
       modifierModalResiliation(){
       var nouvelObjet1 = {
       ...this.editActeEffetFinancier,
@@ -1364,7 +1355,7 @@ recupererDateMiseService() {
 
        };
 this.ajouterMarche(nouvelObjet)
-this.getMarcheHorSib()
+//this.getMarcheHorSib()
 this.formData = {
              libelle_procedure:"",
         type_financement:"",
