@@ -22,11 +22,11 @@
              ETAT RECAPITULATIF
             </router-link>
           </li>
-           <li>
+           <!-- <li>
             <router-link :to="{name: 'ficheSuiviGlobalMarche'}" tag="a">
              FICHE DE SUIVI GLOBAL MARCHE
             </router-link>
-          </li>
+          </li> -->
    <li>
             <router-link :to="{name: 'suiviEvaluationEntreprise'}" tag="a">
              FICHE D'EVALUATION ENTREPRISE
