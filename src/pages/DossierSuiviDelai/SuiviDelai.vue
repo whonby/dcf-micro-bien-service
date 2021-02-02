@@ -608,7 +608,7 @@ console.log(this.mandats)
 
                     }
                     return 0
-                }
+                };
             },
             tauxMandatVise(){
               return marche_id=>{

@@ -153,7 +153,7 @@
                       
                       <td style="width:10%;text-align:center;font-size:14px" >{{((MarcheNonDemarre(service[0].entreprise_id)/NombreDeMarcheRecu(service[0].entreprise_id))*100).toFixed(0) || 0}}%</td>
                       
-                      <td style="width:10%;text-align:center;font-size:14px">{{DureeEcoule(service[0].entreprise_id)}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{ecartDateDefinitiveEffective(service[0].entreprise_id)}}</td>
                                             <td style="width:10%;text-align:center;font-size:14px">{{dateMiseService(service[0].entreprise_id)}}</td>
                       <td style="width:10%;text-align:center;font-size:14px">{{((parseFloat(NombreMarcheEnCoursEecution(service[0].entreprise_id)/parseFloat(MarcheNonDemarre(service[0].entreprise_id))))*100) || 0}}%</td>
                       <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id}}</td>
@@ -273,6 +273,24 @@ search:""
                 "getActeEffetFinancierPersonnaliserContrat","getterCojos","getterDemandeAno","getterAnoDMPBailleur"]),
                 ...mapGetters("gestionMarche", ["entreprises"]),
  
+ listeActeEffectFinnancier() {
+      return macheid => {
+        if (macheid != "") {
+          return this.getActeEffetFinancierPersonnaliser.filter(idmarche => idmarche.entreprise_id == macheid)
+        }
+      }
+    },
+
+ 
+             MarcheExecutionDansLeDelai() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getterActeEffetFinanciers.filter(qtreel => qtreel.entreprise_id == id && qtreel.date_debut_exectuion_definitif != null && qtreel.date_reception_provisoire_definitif != null).length;
+        }
+        return 0
+      };
+    },
+    
 dateMiseService() {
       return id => {
         if (id != null && id != "") {
@@ -367,14 +385,7 @@ MarcheNonDemarre() {
         return 0
       };
     },
-    MarcheExecutionDansLeDelai() {
-      return id => {
-        if (id != null && id != "") {
-           return this.getterActeEffetFinanciers.filter(qtreel => qtreel.entreprise_id == id && qtreel.date_debut_exectuion_definitif != null && qtreel.date_reception_provisoire_definitif != null).length;
-        }
-        return 0
-      };
-    },
+   
     NombreMarcheEnCoursEecution() {
       return id => {
         if (id != null && id != "") {
@@ -475,11 +486,27 @@ MontantMarcheObtenu() {
                     return [year, month, day].join('-');
                 }
             },
+            ecartDateDefinitiveEffective(){
+                return id=>{
+                    if(id){
+                        
+                        let objet=this.listeActeEffectFinnancier(id)
+                        if(objet){
+                            console.log(objet.date_reception)
+                            let jour=this.nombreDejourCalcule(this.afficherDateDuJour,objet.date_fin_exe)
+                            return jour;
+                        }
+                        return ""
+                    }
+                }
+            },
   },
   methods: {
       ...mapActions("uniteadministrative", [
      
     ]),
+
+    
     DureeEcoule(id){
      
 
