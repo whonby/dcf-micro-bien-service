@@ -72,7 +72,7 @@
 
 <hr v-if="affiche_filtre">
             <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button>
-            <h4 style="text-align:center">Module Unité d'Administrative</h4>
+            <h4 style="text-align:center">Module Unité Administrative</h4>
            <!-- <div class="row-fluid">
        
       <div class="span6">
@@ -118,11 +118,10 @@
 
 
 
-
             <div class="">
                    <div class="row-fluid" style="" id="printMe">
                     <div class="span2" style="width: 170px;margin-left: -3px !important;border-right: 10px solid #f9f9f9">
-                        <div class="card-box bg-attente-contratualisation-hors-alert" style="height: 90px !important; cursor: grab !important;" >
+                        <div class="card-box bg-acheve-delais" style="height: 90px !important; cursor: grab !important;" >
                             <div class="inner">
                                 <p> <b> Nombre d'unité administrative enregistrée
                                 </b></p>
@@ -157,7 +156,7 @@
                         </div>
                     </div>
                     <div class="span2" style="width: 170px; margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
-                        <div @click="listeMarcheStatus(9)" class="card-box bg-en-contratualisation-hort-delais" style="height: 90px !important; cursor: grab !important;">
+                        <div @click="listeMarcheStatus(9)" class="card-box bg-attente-contratualisation-hors-alert" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
                                 <p><b>Budget actuel/disponible</b> </p>
 
@@ -236,11 +235,11 @@
                             <thead>
                             <tr>
                                 <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">UA </th>
-                                <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">Nombre Marchés</th>
-                                <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">Taux Marche %</th>
-                                <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">Montant total</th>
+                                <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">NOMBRE DE MARCHES</th>
+                                <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">TAUX DE MARCHES %</th>
+                                <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">MNTANT TOTAL</th>
                                 <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">TAUX FINANCIER</th>
-                                <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">Action</th>
+                                <!-- <th :style="{background: getColorByStatus(status_marches),color:'#fff'}">Action</th> -->
                             </tr>
                             </thead>
                             <tbody >
@@ -250,14 +249,14 @@
                                 <td style="text-align: center !important;">{{tauxStatusMarchePasUniteAdministrative(unite.id)}}</td>
                                 <td style="text-align: center !important;">{{formatageSomme(montantPrevuePasUA(unite.id))}}</td>
                                 <td style="text-align: center !important;">{{tauxFinnancieStatusSelectionnerPasUA(unite.id,status_marches)}}</td>
-                                <td>
+                                <!-- <td>
                                     <a href="#" @click="selectionUnite(unite.id)" class="btn btn-default " title="Detail marches">
                                     <span class=""><i class="icon-folder-open"></i></span>
                                   </a>
-                                </td>
+                                </td> -->
                             </tr>
                             <tr>
-                                <td></td>
+                                <!-- <td></td> -->
                                 <td></td>
                                 <td></td>
                                 <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
@@ -266,15 +265,7 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr> <tr>
-                                <td></td>
+                                <!-- <td></td> -->
                                 <td></td>
                                 <td></td>
                                 <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
@@ -282,15 +273,7 @@
                                 <td></td>
                                 <td></td>
                             </tr> <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr> <tr>
-                                <td></td>
+                                <!-- <td></td> -->
                                 <td></td>
                                 <td></td>
                                 <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
@@ -298,7 +281,7 @@
                                 <td></td>
                                 <td></td>
                             </tr> <tr>
-                                <td></td>
+                                <!-- <td></td> -->
                                 <td></td>
                                 <td></td>
                                 <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
@@ -306,7 +289,23 @@
                                 <td></td>
                                 <td></td>
                             </tr> <tr>
+                                <!-- <td></td> -->
                                 <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr> <tr>
+                                <!-- <td></td> -->
+                                <td></td>
+                                <td></td>
+                                <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr> <tr>
+                                <!-- <td></td> -->
                                 <td></td>
                                 <td></td>
                                 <!--<td v-if="status_marches==2">{{formatageSomme(montantApprouvePasUA(unite.id))}}</td>-->
@@ -476,8 +475,8 @@
                        width: 380,
                        type: 'pie',
                    },
-                   labels: ['A.Contra.', 'A.C.H.D', 'En Cont.', 'EN Contr.H.D', 'En Execution',"En Execution HD","Acheve Delais","Acheve H.D","En souffrance"],
-                   colors:['#8ea9db', '#f4b084', '#92d04f',"#632990","#d7b755","#d36f2a","#00b04f","#757171","#ff0000"],
+                   labels: ['A.C.H.D', 'Nombre UA', 'Budget initial', 'Budget actuel',"Budget executé","Taux executé"],
+                   colors:['#8ea9db', '#ccc', '#92d04f',"#632990","#d7b755","#d36f2a"],
                    responsive: [{
                        breakpoint: 480,
                        options: {
@@ -807,7 +806,7 @@ console.log(this.listeMarchStatueExecuteAcheve)
                 let vM=this;
                 this.filtre_unite_admin.forEach(function (value) {
                     let objet=vM.marches.filter(item=>{
-                            if(item.parent_id!=null && item.unite_administrative_id==value.id && item.sib==1 ){
+                            if(item.parent_id!=null && item.unite_administrative_id==value.id){
                                 //  console.log(item.parent_id)
                                 return item
                             }
@@ -1132,6 +1131,7 @@ console.log(this.listeMarchStatueExecuteAcheve)
                 return montant_prevue
             },
 
+
             montantApprouveMarche(){
                 if(this.objetMarchePasUniteOuRegion.length>0){
                     //acteEffetFinanciers
@@ -1261,6 +1261,7 @@ console.log(this.listeMarchStatueExecuteAcheve)
             objetListeMarcheInfoUnite(){
                 return this.listeMarcheUniteAdmin.filter(item=>item.parent_id!="")
             },
+
             listeUniteAdministrative(){
                 let vm=this
                 let collect=[]
@@ -1275,6 +1276,7 @@ console.log(this.listeMarchStatueExecuteAcheve)
 
                 return collect
             },
+
             nbrTotalMarchePasUA(){
                 return unite=>{
                     let vm=this
@@ -1433,17 +1435,17 @@ console.log(this.listeMarchStatueExecuteAcheve)
                         return "<font color='#fff'>En attente de contratualisation hors delait</font>"
                     }
                     if(status==1){
-                        return "<font color='#fff'>En contratualisation</font>"
+                        return "<font color='#fff'>Budget initial</font>"
                     }
                     if(status==9){
-                        return "<font color='#fff'>En contractualisation Hors délai</font>"
+                        return "<font color='#fff'>Budget actuel/disponible</font>"
                     }
 
                     if(status==2){
-                        return "<font color='#fff'>En execution</font>"
+                        return "<font color='#fff'>Budget executé</font>"
                     }
                     if(status==10){
-                        return "<font color='#fff'>En execution Hors délai</font>"
+                        return "<font color='#fff'>Taux d'execution</font>"
                     }
 
                     if(status==11){
@@ -1598,6 +1600,7 @@ console.log(this.listeMarchStatueExecuteAcheve)
         ,
         methods:{
             ...mapActions("bienService", ["ajouterTableauBordFiltre","ajouterInfoTableauBordFiltre"]),
+
             selectionUnite(id){
 
                 let stat="pl"
@@ -1621,6 +1624,7 @@ console.log(this.listeMarchStatueExecuteAcheve)
                     }
 
                 })
+
                 this.ajouterTableauBordFiltre(objetMarche)
                 this.ajouterInfoTableauBordFiltre(objet)
 
@@ -1654,6 +1658,7 @@ console.log(this.listeMarchStatueExecuteAcheve)
                 this.videTypeMarche()
             },
             formatageSomme:formatageSomme,
+            
             listeMarcheStatus(status){
 
 
@@ -1672,17 +1677,17 @@ console.log(this.listeMarchStatueExecuteAcheve)
                     })
 
                     //retourne les marches d'une region selectionner
-                    if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure=="" && vM.type_marche==""){
-                        objet =objet.filter(item=>{
-                            if(item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                                return item
-                            }
-                        })
+                    // if(vM.region!="" && vM.unite_administrative_id=="" && vM.infrastructure=="" && vM.type_marche==""){
+                    //     objet =objet.filter(item=>{
+                    //         if(item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                    //             return item
+                    //         }
+                    //     })
 
-                    }
+                    // }
 
                     //retourne les marches d'une unite administrative selectionner
-                    if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure=="" && vM.type_marche==""){
+                    if(vM.unite_administrative_id!=""  && vM.type_marche==""){
                         objet =objet.filter(item=>{
                             if(item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
                                 return item
@@ -1691,17 +1696,17 @@ console.log(this.listeMarchStatueExecuteAcheve)
                     }
 
                     //retourne les marches d'une une infrastucture selectionner
-                    if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche==""){
-                        objet =objet.filter(item=>{
-                            if(item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-                                return item
-                            }
-                        })
-                    }
+                    // if (vM.infrastructure!="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche==""){
+                    //     objet =objet.filter(item=>{
+                    //         if(item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                    //             return item
+                    //         }
+                    //     })
+                    // }
 
 
                     //retourne les marches d'un type de marché selectionner
-                    if (vM.infrastructure=="" && vM.unite_administrative_id=="" && vM.region=="" && vM.type_marche!=""){
+                    if ( vM.unite_administrative_id=="" && vM.type_marche!=""){
                         objet =objet.filter(item=>{
                             if(item.type_marche_id==vM.type_marche && item.parent_id!=""){
                                 return item
@@ -1711,24 +1716,24 @@ console.log(this.listeMarchStatueExecuteAcheve)
 
 
                     //retourne les marches de region et unite adminstrative selectionner
-                    if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche==""){
-                        objet =objet.filter(item=>{
-                            if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                                return item
-                            }
-                        })
-                    }
+                    // if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche==""){
+                    //     objet =objet.filter(item=>{
+                    //         if(item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                    //             return item
+                    //         }
+                    //     })
+                    // }
 
 
                     //retourne les marches d'une infrastructure et unite adminstrative selectionner
 
-                    if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche==""){
-                        objet =objet.filter(item=>{
-                            if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-                                return item
-                            }
-                        })
-                    }
+                    // if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche==""){
+                    //     objet =objet.filter(item=>{
+                    //         if(item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                    //             return item
+                    //         }
+                    //     })
+                    // }
 
 
                     //retourne les marches d'un type marche et unite adminstrative selectionner
@@ -1743,61 +1748,61 @@ console.log(this.listeMarchStatueExecuteAcheve)
 
 
                     //retourne les marches d'une region et infrastructure selectionner
-                    if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" &&  vM.type_marche==""){
-                        objet =objet.filter(item=>{
-                            if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                                return item
-                            }
-                        })
-                    }
+                    // if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" &&  vM.type_marche==""){
+                    //     objet =objet.filter(item=>{
+                    //         if(item.infrastructure_id==vM.infrastructure && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                    //             return item
+                    //         }
+                    //     })
+                    // }
 
                     //retourne les marches d'une infrasture et type marche selectionner
-                    if(vM.unite_administrative_id=="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
-                        objet =objet.filter(item=>{
-                            if(item.infrastructure_id==vM.infrastructure && item.type_marche_id==vM.type_marche && item.parent_id!=""){
-                                return item
-                            }
-                        })
-                    }
+                    // if(vM.unite_administrative_id=="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!=""){
+                    //     objet =objet.filter(item=>{
+                    //         if(item.infrastructure_id==vM.infrastructure && item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                    //             return item
+                    //         }
+                    //     })
+                    // }
 
 
                     //retourne les marches d'un type marche et regions selectionner
-                    if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!=""){
-                        objet =objet.filter(item=>{
-                            if(item.localisation_geographie_id==vM.region && item.type_marche_id==vM.type_marche && item.parent_id!=""){
-                                return item
-                            }
-                        })
-                    }
+                    // if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!=""){
+                    //     objet =objet.filter(item=>{
+                    //         if(item.localisation_geographie_id==vM.region && item.type_marche_id==vM.type_marche && item.parent_id!=""){
+                    //             return item
+                    //         }
+                    //     })
+                    // }
 
                     //retourn les marches d'une UA, REGION et INFRASTRUCTURE
 
-                    if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche=="" ){
-                        objet =objet.filter(item=>{
-                            if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                                return item
-                            }
-                        })
-                    }
+                    // if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche=="" ){
+                    //     objet =objet.filter(item=>{
+                    //         if(item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                    //             return item
+                    //         }
+                    //     })
+                    // }
 
 
                     //retourn les marches d'une UA, REGION et TYPE MARCHE
-                    if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!="" ){
-                        objet =objet.filter(item=>{
-                            if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
-                                return item
-                            }
-                        })
-                    }
+                    // if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure=="" && vM.type_marche!="" ){
+                    //     objet =objet.filter(item=>{
+                    //         if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.localisation_geographie_id==vM.region && item.parent_id!=""){
+                    //             return item
+                    //         }
+                    //     })
+                    // }
 
                     //retourn les marches d'une UA, INFRA et TYPE MARCHE
-                    if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!="" ){
-                        objet =objet.filter(item=>{
-                            if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
-                                return item
-                            }
-                        })
-                    }
+                    // if(vM.unite_administrative_id!="" && vM.region=="" && vM.infrastructure!="" && vM.type_marche!="" ){
+                    //     objet =objet.filter(item=>{
+                    //         if(item.type_marche_id==vM.type_marche && item.unite_administrative_id==vM.unite_administrative_id && item.infrastructure_id==vM.infrastructure && item.parent_id!=""){
+                    //             return item
+                    //         }
+                    //     })
+                    // }
 
                     //retourn les marche INFRA, REGIONS,TYPE MARCHE
                     if(vM.unite_administrative_id=="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
@@ -1809,13 +1814,13 @@ console.log(this.listeMarchStatueExecuteAcheve)
                     }
 
                     //retourn les marche INFRA, REGIONS,TYPE MARCHE,UA
-                    if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
-                        objet =objet.filter(item=>{
-                            if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
-                                return item
-                            }
-                        })
-                    }
+                    // if(vM.unite_administrative_id!="" && vM.region!="" && vM.infrastructure!="" && vM.type_marche!="" ){
+                    //     objet =objet.filter(item=>{
+                    //         if(item.type_marche_id==vM.type_marche && item.localisation_geographie_id==vM.region && item.infrastructure_id==vM.infrastructure && item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!=""){
+                    //             return item
+                    //         }
+                    //     })
+                    // }
                     this.status_marches=status;
                     this.listeDesMarchePasStatus=objet
                     let distinct=[...new Set(objet.map(item=>item.unite_administrative_id))]
@@ -2158,8 +2163,11 @@ console.log(this.listeMarchStatueExecuteAcheve)
     .bg-attente-contratualisation-avec-alert {
         background-color: #f4b084 !important;
     }
-    .bg-en-contratualisation {
+    /* .bg-en-contratualisation {
         background-color: #8ea9db   !important;
+    } */
+     .bg-en-contratualisation {
+        background-color: #92d050 !important;
     }
 
     .bg-en-contratualisation-hort-delais {

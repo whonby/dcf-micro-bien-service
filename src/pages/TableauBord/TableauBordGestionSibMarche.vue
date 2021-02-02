@@ -1,6 +1,10 @@
 <template>
 <div>
-
+  <header>
+         <div  class="" style="margin-rigth:10px;">
+                   <h3 style="text-align:center">TABLEAU DE BORD GESTIONS DES MARCHES  SIB</h3> 
+                </div>
+    </header>
     <tableau-bord-marche :sib="0"></tableau-bord-marche>
 </div>
 </template>
