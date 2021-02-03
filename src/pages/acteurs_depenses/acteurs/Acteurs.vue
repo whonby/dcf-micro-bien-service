@@ -28,7 +28,7 @@ Type de Recrutement
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab10">Liste du personnel {{formData.unite_administrative_id}}</a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab10">Liste du personnel </a></li>
                                  <li class=""><a data-toggle="tab" href="#AjouterPersonnelAvecContrat">Ajouter Personnel Avec Contrat </a></li>
                                  <li class=""><a data-toggle="tab" href="#AjouterPersonnelSansContrat">Ajouter Personnel Sans Contrat </a></li>
                                  <!-- <li class=""><a data-toggle="tab" href="#tab78">Contrat de Recrutement Direct </a></li> -->
