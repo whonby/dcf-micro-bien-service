@@ -81,15 +81,11 @@
         <template v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id) ">
             <div class="widget-title">
             <ul class="nav nav-tabs">
-               <!-- <li class="active"><a data-toggle="tab" href="#lotExempte">Lot</a></li> -->
              <li class="active"><a data-toggle="tab" href="#tab0074">Attribution</a></li>
              <li class=""><a data-toggle="tab" href="#tab0021403">Bailleur</a></li>
         </ul>
           </div>
     <div class="widget-content tab-content">
-      <div id="lotExempte" class="tab-pane active">
-<!-- <LotMarche :macheid="detail_marche.id"></LotMarche> -->
-    </div>
 <div id="tab0074" class="tab-pane active">
 <executionLigneExempte :macheid="detail_marche.id"></executionLigneExempte>
     </div>
@@ -898,15 +894,15 @@
 <!--                 <componentAvisBailleurCf :macheid="detail_marche.id"> </componentAvisBailleurCf>-->
 
                 </div>
-                   <div id="tb012PQ" class="tab-pane" v-if="PQ">
+                   <!-- <div id="tb012PQ" class="tab-pane" >
                     <ActeEffetFinancier1 :macheid="detail_marche.id"></ActeEffetFinancier1>
-<!--                <component-acte :macheid="detail_marche.id"></componentActe>-->
 
-                </div>
 
-                        <div id="tab0210" class="tab-pane" v-else>
+                </div> -->
+
+                        <div id="tab0210" class="tab-pane" >
                     <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
-<!--                <component-acte :macheid="detail_marche.id"></componentActe>-->
+
 
                 </div>
 
@@ -947,7 +943,7 @@
                     
 </template>
 
-                    <template v-else-if="affcicheEtapeProcedure(100000000, ['AMI','PQ','DP'], detail_marche.id)">
+                    <template v-else-if="affcicheEtapeProcedure(100000000, ['AMI','PQ'], detail_marche.id)">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -969,7 +965,8 @@
                                 
                             </ul>
                         </div>
-                        
+
+
                          <div class="widget-content tab-content">
 
                          <div id="tabAMI" class="tab-pane active">
@@ -1107,6 +1104,167 @@
                     </div>
                     
                      </template>
+                       <template v-else-if="affcicheEtapeProcedure(100000000, ['DP'], detail_marche.id)">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#tabDP">Offre</a></li>
+                                <li ><a data-toggle="tab" href="#tabLotDP">Lot</a></li>
+                                <li class=""><a data-toggle="tab" href="#tabLettrDP">Lettre d'invitation CF</a></li>
+                                <li class=""><a data-toggle="tab" href="#tabMandateDP">Mandaté</a></li>
+                                <li class=""><a data-toggle="tab" href="#tabReceptionDP">Reception</a></li>
+                                <li class=""><a data-toggle="tab" href="#tabOuvertureDP">Ouverture</a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tabPVAMI">PV d'ouverture</a></li> -->
+                              <!--  <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>-->
+                                <li class=""><a data-toggle="tab" href="#tabAnalyseDP"> Analyse </a></li>
+                                <li class=""><a data-toggle="tab" href="#tabReserveDP">Reserves CF</a></li>
+                                <li class=""><a data-toggle="tab" href="#tabPVJugementDP">PV Jugement</a></li>
+                               <li class=""><a data-toggle="tab" href="#tabAttribuDP">Attribution</a></li>
+                                <li class=""><a data-toggle="tab" href="#tabBailleurDP">bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tabARNPDP">ANRMP</a></li>
+                                
+                                
+                            </ul>
+                        </div>
+
+
+                         <div class="widget-content tab-content">
+
+                         <div id="tabDP" class="tab-pane active">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                      <publicationOffreDP :macheid="detail_marche.id"></publicationOffreDP>
+                         </div>
+
+                    <div id="tabLotDP" class="tab-pane">
+
+                      <lot-marche :macheid="detail_marche.id"></lot-marche>
+                     <!-- <add-Lot :macheid="detail_marche.id"></add-Lot>-->
+                         </div>
+
+
+                <div id="tabLettreDP" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                      <invitationCf :macheid="detail_marche.id"></invitationCf>
+                         </div>
+ <div id="tabMandateDP" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                      <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
+                         </div>
+                          <div id="tabReceptionDP" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                      <component-cotation :macheid="detail_marche"></component-cotation>
+                         </div>
+                             <!-- <div id="tab444" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <h4>Publication de l'offre</h4>
+
+                      <component-cotation :macheid="detail_marche"></component-cotation>
+                         </div> -->
+                          <div id="tabOuvertureDP" class="tab-pane">
+                            <!-- <ouverture-offre :macheid="detail_marche.id"></ouverture-offre> -->
+
+                  <OuvertureOffreSansFin :macheid="detail_marche.id"></OuvertureOffreSansFin>
+                  <!-- <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre> -->
+                </div>
+                
+
+
+                <!-- <div id="tabPVAMI" class="tab-pane">
+                      <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Joindre PV</a>
+                    </div>
+
+
+                </div>
+                <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
+
+                </div> -->
+
+                 <!-- <div id="tab7884" class="tab-pane">
+               
+               
+                   <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
+                </div> -->
+                  <div id="tabAnalyseDP" class="tab-pane">
+
+                    <JugementSansFin :macheid="detail_marche.id"></JugementSansFin>
+               
+<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
+                </div>
+                   <div id="tabReserveDP" class="tab-pane">
+
+                    <reserveCf :macheid="detail_marche.id"></reserveCf>
+               
+<!--                   <component-analyse :macheid="detail_marche.id"></component-analyse>-->
+                </div>
+                 <div id="tabPVJugementDP" class="tab-pane">
+<!--                 <div align="right">-->
+<!--                    <div class="widget-content">-->
+<!--                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>-->
+<!--                    </div>-->
+
+
+<!--                </div>-->
+<!--               <component-pv :macheid="detail_marche.id"></component-pv>-->
+                   <PvJugement  :macheid="detail_marche.id"></PvJugement>
+                </div>
+                 <!-- <div id="tabAttribuAMI" class="tab-pane">
+
+                   <ActEffeFinanciere :macheid="detail_marche.id"></ActEffeFinanciere>
+                </div> -->
+                    <div id="tabAttribuDP" class="tab-pane">
+                    <ActeEffetFinancier1 :macheid="detail_marche.id"></ActeEffetFinancier1>
+<!--                <component-acte :macheid="detail_marche.id"></componentActe>-->
+
+                </div>
+
+                   <div id="tabBailleurDP" class="tab-pane">
+                <!-- <div align="right">
+                    <div class="widget-content">
+                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div> -->
+                <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
+
+                </div>
+                 <div id="tabARNPDP" class="tab-pane">
+                
+               <Arnmp :macheid="detail_marche.id"></Arnmp>
+
+                </div>
+                         </div>
+
+                        
+
+                    </div>
+                    
+                     </template>
 
       <template v-else-if="affcicheEtapeProcedure(0,['LCVM'],detail_marche.id )">
 
@@ -1167,9 +1325,9 @@
 
                          <div id="tab00214023" class="tab-pane">
                 <div align="right">
-             <div class="widget-content">
+             <!-- <div class="widget-content">
                  <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
-                    </div>
+                    </div> -->
                 </div>
                 <componentBailleur1 :macheid="detail_marche.id"></componentBailleur1>
                 </div>
@@ -1300,6 +1458,7 @@
  //  import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
     import publicationOffre from '../../bien_service/DossierPso/publicationOffre/publicationOffre';
     import publicationOffreLCV from '../../bien_service/DossierPso/publicationOffre/publicationOffreLCV';
+    import publicationOffreDP from "../../bien_service/DossierPso/publicationOffre/publicationOffreDP"
    // import addLot from '../dossierLot/addLot';
    
         import invitationCf from '../../bien_service/DossierPso/lettreInvitation/invitationCf';
@@ -1350,7 +1509,8 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
           Jugement,
           JugementSansFin,
           OuvertureOffre,
-            componentCotation,
+          componentCotation,
+          publicationOffreDP,
           LotMarche,
           componentBailleur1,
             componentOuverture,
@@ -1503,11 +1663,15 @@ created() {
              {
                  return true
              }
-              else if(this.budgetDisponible < dotation && this.inArray(procedure,"AMI") || this.inArray(procedure,"PQ") || this.inArray(procedure,"DP"))
+              else if(this.budgetDisponible < dotation && this.inArray(procedure,"AMI") || this.inArray(procedure,"PQ"))
              {
                  return true
              }
              else if(this.inArray(procedure,"ED") || this.inArray(procedure,"CON") ||  this.inArray(procedure,"GAG")  )
+             {
+                 return true
+             }
+              else if(this.budgetDisponible < dotation && this.inArray(procedure,"DP") )
              {
                  return true
              }

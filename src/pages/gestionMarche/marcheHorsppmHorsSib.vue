@@ -514,7 +514,7 @@ marcheHorSibFiltre() {
         }
         
 else{
-return this.marcheHorSibFiltre1.filter(items=>items.sib==1 && items.plan_passation_marche_id==null);
+return this.marcheHorSibFiltre1.filter(items=>items.sib==1 && items.plan_passation_marche_id==null && items.parent_id==null);
 }
         
            
