@@ -262,7 +262,7 @@
                           <td>
                               <router-link :to="{ name: 'AjouterTacheRealise', params: { id: type.id }}"
                                            class="btn btn-inverse " title="Voir Tâche Réalisée">
-                                  <span class=""><i class="icon-eye-open"></i> Voir Tâche Réalisée</span>
+                                  <span class=""><i class="icon-eye-open"></i> Voir Tâche</span>
                               </router-link>
                               <button class="btn btn-danger" @click="supprimerDecompteFacture(type.id)">
                         <span>

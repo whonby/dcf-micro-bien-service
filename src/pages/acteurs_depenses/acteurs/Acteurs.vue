@@ -1,6 +1,7 @@
-Type de Recrutement
+formData
 <template>
     <div id="">
+       
         <notifications />
         <!-- <div class="quick-actions_homepage span12"  >
             <ul class="quick-actions" style="margin: 0px !important;">
@@ -145,7 +146,7 @@ Type de Recrutement
                                             <tbody>
                                             <tr class="odd gradeX" v-for="item in afficheListePersonnel(formData.unite_administrative_id)" :key="item.id">
   
-                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}{{item.id}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_naissance) }}</td>

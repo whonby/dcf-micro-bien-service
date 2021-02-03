@@ -111,7 +111,7 @@
                             <input
                                     type="text"
                                     :value="recupererNumeroDeLot"
-                                    class="span3"
+                                    class="span"
                                    readonly
                             />
                         </div>
@@ -123,7 +123,7 @@
                             <input
                                     type="text"
                                     v-model="formData.objet"
-                                    class="span8"
+                                    class="span12"
                                    
                             />
                         </div>
@@ -142,7 +142,7 @@
                                     class="span3"
                                    
                             /> -->
-                            <money v-model="formData.montant_marche" class="span3"></money>
+                            <money v-model="formData.montant_marche" class="span"></money>
                         </div>
                          <code v-if="sommeMontant(formData.montant_marche)>detail_marche.montant_marche">
            Impossible d'effectuer l'engistrement</code>
@@ -169,7 +169,7 @@
                         <label class="control-label">Région</label>
                          <div class="controls">
          
-               <select v-model="formData.localisation_geographie_id" class="span4" >
+               <select v-model="formData.localisation_geographie_id" class="span" >
                <option v-for="plans in afficherCodeStructureLibelle(recupererLataille)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -180,7 +180,7 @@
                         <label class="control-label">Département</label>
                          <div class="controls">
         
-               <select v-model="formData.departement_id" class="span4" :readOnly="deveroiullage">
+               <select v-model="formData.departement_id" class="span" :readOnly="deveroiullage">
                <option v-for="plans in recupererParentId(formData.localisation_geographie_id)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -195,7 +195,7 @@
                         <label class="control-label">Sous-Préfecture</label>
                          <div class="controls">
        
-               <select v-model="formData.sous_prefecture_id" class="span4" :readOnly="deveroiullageSousprefecture">
+               <select v-model="formData.sous_prefecture_id" class="span" :readOnly="deveroiullageSousprefecture">
                <option v-for="plans in recupererParentId(formData.departement_id)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -208,7 +208,7 @@
                             <input
                                     type="text"
                                     v-model="formData.latitude"
-                                    class="span4"
+                                    class="span"
                                    
                             />
                         </div>
@@ -219,7 +219,7 @@
                             <input
                                     type="text"
                                        v-model="formData.longitude"
-                                    class="span4"
+                                    class="span"
                                    
                             />
                         </div>
@@ -232,7 +232,7 @@
                             <input
                                     type="text"
                                        v-model="formData.beneficiaire"
-                                    class="span4"
+                                    class="span"
                                    
                             />
                         </div>
@@ -243,7 +243,7 @@
                             <input
                                     type="text"
                                        v-model="formData.livrable"
-                                    class="span4"
+                                    class="span"
                                    
                             />
                         </div>
@@ -803,8 +803,8 @@ SommeDesLots(){
 
 <style scoped>
 .grdirModalActeEffet78{
-  width: 55%;
-  margin: 0 -30%;
+  width: 70%;
+  margin: 0 -35%;
 }
 
 </style>
