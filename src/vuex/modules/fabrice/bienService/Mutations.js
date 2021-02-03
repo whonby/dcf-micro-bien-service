@@ -2721,3 +2721,31 @@ export const MODIFIER_ENTREPRISE_SOUS_TRAITANCE = (state, elementModifie) =>{
 export const SUPPRIMER_ENTREPRISE_SOUS_TRAITANCE = (state, id) =>{
     state.entreprise_soustraitant = state.entreprise_soustraitant.filter(response => response.id!=id)
 }
+
+
+/**
+ * Programmation marche plurie annuel
+ * @param state
+ * @param tableau_motif_passation
+ * @constructor
+ */
+export const GET_MARCHE_PLURIE_ANNUEL= (state, tableau_motif_passation) =>{
+    state.programmationMarchePlurieAnnuel = tableau_motif_passation
+}
+
+export const AJOUTER_MARCHE_PLURIE_ANNUEL = (state, elementAjout) =>{
+    state.programmationMarchePlurieAnnuel.unshift(elementAjout)
+}
+
+export const MODIFIER_MARCHE_PLURIE_ANNUEL = (state, elementModifie) =>{
+    state.programmationMarchePlurieAnnuel = state.programmationMarchePlurieAnnuel.map(item =>{
+        if(item.id == elementModifie.id){
+            item = {...elementModifie}
+        }
+        return item
+    })
+}
+
+export const SUPPRIMER_MARCHE_PLURIE_ANNUEL = (state, id) =>{
+    state.programmationMarchePlurieAnnuel = state.programmationMarchePlurieAnnuel.filter(response => response.id!=id)
+}

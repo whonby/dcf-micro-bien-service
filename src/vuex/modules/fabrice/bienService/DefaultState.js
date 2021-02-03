@@ -110,6 +110,7 @@ const defaultState = {
     structure_daos:[],
     TacheMarche:[],
     entreprise_soustraitant:[],
+    programmationMarchePlurieAnnuel:[]
 }
 
 export default defaultState;

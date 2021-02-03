@@ -517,7 +517,7 @@ this.getAllHistoriqueBudgetGeneral()
 this.getAllBudgetGeneral()
 this.getAllTransfert()
  // debut du module de bien && service
-
+this.getTousPlanBudgetaire()
 this.getBailleur()
 this.getTypeFacture()
 this.getTypeActeDepense()
@@ -671,7 +671,7 @@ return objJson.id
         'getTypeFinancement','getPlanSourceFinancement'
     ]),
    ...mapActions( 'parametreGenerauxBudgetaire', ['getStructureBudgetaire',
-   'getPlanBudgetaire']),
+   'getPlanBudgetaire',"getTousPlanBudgetaire"]),
    ...mapActions('parametreGenerauxActivite', [ 'getStructureActivite','getPlanActivite','getStructureInfrastructure','getPlanInfrastructure']),
    ...mapActions('parametreGenerauxProgrammeUnite',['getUnite', 'getZone']),
 
@@ -891,19 +891,19 @@ let vm=this;
 
 
 
-
-      const chat = ws.subscribe('chat')
-
-      chat.on('ready', () => {
-          chat.emit('message', 'hello')
-      })
-
-      chat.on('error', (error) => {
-          console.log(error)
-      })
-
-      chat.on('close', () => {
-      })
+      //
+      // const chat = ws.subscribe('chat')
+      //
+      // chat.on('ready', () => {
+      //     chat.emit('message', 'hello')
+      // })
+      //
+      // chat.on('error', (error) => {
+      //     console.log(error)
+      // })
+      //
+      // chat.on('close', () => {
+      // })
 
   }
 }
