@@ -128,3 +128,12 @@ export function supprimerPlanBudgetaire({ commit, dispatch}, id){
     })
 }
 
+
+
+
+export  function  getTousPlanBudgetaire({commit}) {
+    queue.push(() =>  axios.get('/plan_budgetaire').then((response) => {
+        commit('GET_TOUS_PLAN_BUDGETAIRE', response.data)
+
+    }).catch(error => console.log(error)))
+}

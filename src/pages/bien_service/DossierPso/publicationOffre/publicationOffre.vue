@@ -79,14 +79,16 @@
 
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{afficheLibelleModePassation(appelOffre.mode_passation_id) || 'Non renseigné'}}</td>
-                                       
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{formaterDate(appelOffre.date_limite) || 'Non renseigné'}}</td>
-                                             <td @dblclick="afficherModalModifierActeDepense(index)">
+                                        
+                                         <td @dblclick="afficherModalModifierActeDepense(index)">
 
                                             {{formaterDate(appelOffre.date_emission) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{formaterDate(appelOffre.date_limite) || 'Non renseigné'}}</td>
+                                            
+                                        <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.objet_appel || 'Non renseigné'}}</td>
+
                                             <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{formaterDate(appelOffre.date_numero_autorisation) || 'Non renseigné'}}</td>
                                              <td @dblclick="afficherModalModifierActeDepense(index)">
