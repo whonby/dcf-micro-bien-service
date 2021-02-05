@@ -293,8 +293,6 @@
   </div>
 
 
-
-
   <div id="modificationBailleurMarche" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
@@ -510,6 +508,7 @@
          
         </table>
       </div>
+      
 
 
 
