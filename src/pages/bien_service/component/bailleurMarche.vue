@@ -33,19 +33,19 @@
       <tr class="odd gradeX" v-for="effetFinancier in listeDesBailleur(item.id)"
           :key="effetFinancier.id">
 
-        <td @click="afficherModalModifierBailleur(effetFinancier.id)">
+        <td @click="afficherModalModifierBailleurMarche(effetFinancier.id)">
           {{afficheLibelleSourceFinancement(effetFinancier.bailleur_id) || 'Non renseigné'}}</td>
-          <td @click="afficherModalModifierBailleur(effetFinancier.id)">
+          <td @click="afficherModalModifierBailleurMarche(effetFinancier.id)">
           {{afficheLibelleTypeFinancement(effetFinancier.type_finnancement_id) || 'Non renseigné'}}</td>
-          <td @click="afficherModalModifierBailleur(effetFinancier.id)">
+          <td @click="afficherModalModifierBailleurMarche(effetFinancier.id)">
           {{formatageSommeSansFCFA(parseFloat(effetFinancier.montant_ht)) || 'Non renseigné'}}</td>
-           <td @click="afficherModalModifierBailleur(effetFinancier.id)">
+           <td @click="afficherModalModifierBailleurMarche(effetFinancier.id)">
           {{effetFinancier.tauxbailleur || 'Non renseigné'}}%</td>
-           <td @click="afficherModalModifierBailleur(effetFinancier.id)">
+           <td @click="afficherModalModifierBailleurMarche(effetFinancier.id)">
           {{effetFinancier.tva || 'Non renseigné'}}%</td>
-        <td @click="afficherModalModifierBailleur(effetFinancier.id)">
+        <td @click="afficherModalModifierBailleurMarche(effetFinancier.id)">
           {{formatageSommeSansFCFA(parseFloat(effetFinancier.montant_tva ))|| 'Non renseigné'}}</td>
-       <td @click="afficherModalModifierBailleur(effetFinancier.id)">
+       <td @click="afficherModalModifierBailleurMarche(effetFinancier.id)">
           {{formatageSommeSansFCFA(parseFloat(effetFinancier.montant ))|| 'Non renseigné'}}</td>
         <td>
           <div class="btn-group">
@@ -295,7 +295,7 @@
 
 
 
-  <div id="ModalModificationBailleur" class="modal hide grdirModalActeEffet" >
+  <div id="modificationBailleurMarche" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Information du Bailleur sur le : Lot N° {{infoLot.numero_lot}} {{infoLot.objet}}</h3>
@@ -516,7 +516,7 @@
     </div>
 
     <div class="modal-footer">
-      <a  @click.prevent="ajouterBailleur" 
+      <a  @click.prevent="ModifierBailleurLocal"
           class="btn btn-primary"
           href="#"
       >Modifier</a>
@@ -829,8 +829,8 @@ if(this.PayeDesBailleur < this.afficherMontantTTCMarche(this.infoLot.id)){
   alert("Montant TTC du Marché < Somme des Montants des Bailleurs")
 }
 },
-afficherModalModifierBailleur(id){
-      this.$('#ModalModificationBailleur').modal({
+afficherModalModifierBailleurMarche(id){
+      this.$('#modificationBailleurMarche').modal({
         backdrop: 'static',
         keyboard: false
       });
@@ -865,7 +865,7 @@ var nouvelObjet = {
            
                 
             },
-ModifierBailleur(){
+ModifierBailleurLocal(){
 
 var nouvelObjet = {
         ...this.editBailleur,

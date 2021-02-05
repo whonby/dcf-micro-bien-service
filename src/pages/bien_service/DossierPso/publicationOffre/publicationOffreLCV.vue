@@ -361,7 +361,7 @@ listeAppelOffre() {
       return id => {
         if (id != null && id != "") {
           return this.appelOffres.filter(
-            element => element.marche_id == this.macheid && element.ref_sigva!=null
+            element => element.marche_id == this.macheid && element.ref_sigva!=null && element.note_techn==null
           );
         }
       };

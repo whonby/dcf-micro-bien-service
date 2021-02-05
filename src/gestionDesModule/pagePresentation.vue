@@ -311,6 +311,7 @@ created(){
     let user=JSON.parse (objet)
     this.getServiceCF()
     this.getEntrepriseSousTraitance()
+    this.getProgrammationMarchePlurieAnnuel()
     this.getAffectationServiceCF()
     this.getAffectation()
     this.getUniteAdminUser(user.id)
@@ -517,7 +518,7 @@ this.getAllHistoriqueBudgetGeneral()
 this.getAllBudgetGeneral()
 this.getAllTransfert()
  // debut du module de bien && service
-
+this.getTousPlanBudgetaire()
 this.getBailleur()
 this.getTypeFacture()
 this.getTypeActeDepense()
@@ -671,7 +672,7 @@ return objJson.id
         'getTypeFinancement','getPlanSourceFinancement'
     ]),
    ...mapActions( 'parametreGenerauxBudgetaire', ['getStructureBudgetaire',
-   'getPlanBudgetaire']),
+   'getPlanBudgetaire',"getTousPlanBudgetaire"]),
    ...mapActions('parametreGenerauxActivite', [ 'getStructureActivite','getPlanActivite','getStructureInfrastructure','getPlanInfrastructure']),
    ...mapActions('parametreGenerauxProgrammeUnite',['getUnite', 'getZone']),
 
@@ -771,7 +772,8 @@ return objJson.id
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances","getOrganeDecision",
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
           "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner",
-          "pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO",'getEntrepriseSousTraitance']),
+          "pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO",
+          'getEntrepriseSousTraitance','getProgrammationMarchePlurieAnnuel']),
 
     activeMenuModuleParamGeneral(){
       this.activeMenuModuleSidcf(1)
@@ -892,19 +894,19 @@ let vm=this;
 
 
 
-
-      const chat = ws.subscribe('chat')
-
-      chat.on('ready', () => {
-          chat.emit('message', 'hello')
-      })
-
-      chat.on('error', (error) => {
-          console.log(error)
-      })
-
-      chat.on('close', () => {
-      })
+      //
+      // const chat = ws.subscribe('chat')
+      //
+      // chat.on('ready', () => {
+      //     chat.emit('message', 'hello')
+      // })
+      //
+      // chat.on('error', (error) => {
+      //     console.log(error)
+      // })
+      //
+      // chat.on('close', () => {
+      // })
 
   }
 }

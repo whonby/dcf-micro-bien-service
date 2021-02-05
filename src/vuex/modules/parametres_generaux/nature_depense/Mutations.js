@@ -53,6 +53,11 @@ const SUPPRIMER_PLAN_BUDGETAIRE = (state , id) =>{
 state.plans_budgetaires = state.plans_budgetaires.filter( budgetaire => budgetaire.id != id)
 }
 
+export const GET_TOUS_PLAN_BUDGETAIRE = (state , tableua_plan_budgetaire) => {
+
+    state.tousPlanBudgetaire = tableua_plan_budgetaire
+}
+
 
 export{
 

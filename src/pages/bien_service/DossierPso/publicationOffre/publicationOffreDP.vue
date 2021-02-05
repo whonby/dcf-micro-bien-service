@@ -79,16 +79,14 @@
 
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{afficheLibelleModePassation(appelOffre.mode_passation_id) || 'Non renseigné'}}</td>
-                                        
-                                         <td @dblclick="afficherModalModifierActeDepense(index)">
+                                       
+                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{formaterDate(appelOffre.date_limite) || 'Non renseigné'}}</td>
+                                             <td @dblclick="afficherModalModifierActeDepense(index)">
 
                                             {{formaterDate(appelOffre.date_emission) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{formaterDate(appelOffre.date_limite) || 'Non renseigné'}}</td>
-                                            
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.objet_appel || 'Non renseigné'}}</td>
-
                                             <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{formaterDate(appelOffre.date_numero_autorisation) || 'Non renseigné'}}</td>
                                              <td @dblclick="afficherModalModifierActeDepense(index)">
@@ -131,7 +129,7 @@
                         </div>
                             </td>
 
-                               <td colspan="2">
+                               <td colspan="4">
              <div class="control-group">
             <label class="control-label">Mode Passation</label>
             <div class="controls">
@@ -146,7 +144,17 @@
                    </td> 
                            
                             </tr>
-                            
+                              <tr>
+                            <td colspan="4" width="">
+                        <div class="control-group">
+                            <label class="span2">Objet  offre :</label>
+                            <div class="controls">
+                                 <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span" rows="3" placeholder="Entre le  text ..."></textarea>
+                    
+                            </div>
+                        </div>
+                            </td>
+                            </tr>
                             <tr>
                              <td>
                         <div class="control-group">
@@ -165,22 +173,8 @@
                             </div>
                         </div>
                                 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td colspan="3" width="">
-                        <div class="control-group">
-                            <label class="span2">Objet  offre :</label>
-                            <div class="controls">
-                                 <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span" rows="3" placeholder="Entre le  text ..."></textarea>
-                    
-                            </div>
-                        </div>
-                            </td>
-                            </tr>
-           
-                            <tr>
-                                <td>
+                                
+                           <td>
                         <div class="control-group">
 
                             <div class="controls">
@@ -189,6 +183,11 @@
                             </div>
                         </div>
                         </td>
+                            
+                        </tr>
+                      
+                            <tr>
+                             
                                <td colspan="2">
                         <div class="control-group">
                             <div class="controls">
@@ -197,17 +196,6 @@
                             </div>
                         </div>
                         </td>
-                            <!-- <td colspan="2">
-                        <div class="control-group">
-                            <div class="controls">
-                                 <label>Numéro d'autorisation </label>
-                                <input type="text" class="span" placeholder="" v-model="formData.numero_autorisation" >
-                            </div>
-                        </div>
-                        </td>   -->
-                        </tr>
-                        <tr>
-
                             <td>
 
                                 <div class="control-group">
@@ -217,7 +205,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                             <td>
                                 <div class="control-group">
                                     <label class="control-label"> Heure limites :</label>
                                     <div class="controls">
@@ -225,6 +213,34 @@
                                     </div>
                                 </div>
                             </td>
+                        </tr>
+                        <tr>
+                             <td>
+                                <div class="control-group">
+                                    <label class="control-label">Note technique requis:</label>
+                                    <div class="controls">
+                                        <input type="text" class="span"   placeholder="" v-model="formData.note_techn" >
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label" title="Taux de l'offre financière">Taux de l'offre fin(%):</label>
+                                    <div class="controls">
+                                        <input type="text" class="span" placeholder="" v-model="formData.taux_fin">
+                                    </div>
+                                </div>
+                            </td>
+                             <td>
+                                <div class="control-group">
+                                    <label class="control-label" title="Taux de l'offre technique">Taux de l'offre techn(%):</label>
+                                    <div class="controls">
+                                        <input type="text" class="span" placeholder="" v-model="formData.taux_tech">
+                                    </div>
+                                </div>
+                            </td>
+                           
+                           
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Fichier DAO:</label>
@@ -350,7 +366,7 @@
                             </div>
                         </div>
                             </td>
-             <td colspan="2">
+             <td colspan="3">
                    <div class="control-group">
             <label class="control-label">Mode Passation</label>
             <div class="controls">
@@ -364,28 +380,8 @@
                    </td> 
                              
                     </tr>
-                                 
-                            <tr>    
-                             <td>
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Date début de publication</label>
-                                <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
-                            </div>
-                        </div>
-                                </td>
-                                <td colspan="2">
-                        <div class="control-group">
-                            <label class="control-label">Reference de DAO  :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Reference d'appel" v-model="edite_appel_offre.ref_appel">
-                            </div>
-                        </div>
-                            </td>
-                              
-                        </tr>
-                          <tr>
-                            <td colspan="3" width="">
+                     <tr>
+                            <td colspan="4" width="">
                         <div class="control-group">
                             <label class="control-label">Objet  offre :</label>
                             <div class="controls">
@@ -395,39 +391,50 @@
                         </div>
                             </td>
                             </tr>
-                         
-                            <tr>
-                             <!-- <td>
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Date début de publication</label>
-                                <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
-                            </div>
-                        </div>
-                                </td> -->
+                                 
+                            <tr> 
                                 
-                                 <td >
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Date fin de publication </label>
-                                <input type="date" class="span" placeholder="Date limite" v-model="edite_appel_offre.date_limite">
-                            </div>
-                        </div>
-                        </td>
-                             <td colspan="2">
+                             <td colspan="">
                         <div class="control-group">
                             <div class="controls">
                                 <label>Numéro d'autorisation <code></code></label>
                                 <input type="text" class="span" v-model="edite_appel_offre.numero_autorisation">
                             </div>
                         </div>
+                        </td>   
+                           
+                                <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Reference de DAO  :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Reference d'appel" v-model="edite_appel_offre.ref_appel">
+                            </div>
+                        </div>
+                            </td>
+                              <td>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Date début de publication</label>
+                                <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
+                            </div>
+                        </div>
+                                </td>
+                               
+                              
+                        </tr>
+                         
+                         
+                            <tr>
+                              <td colspan="2">
+                        <div class="control-group" >
+                            <div class="controls">
+                                <label>Date fin de publication </label>
+                                <input type="date" class="span" placeholder="Date limite" v-model="edite_appel_offre.date_limite">
+                            </div>
+                        </div>
                         </td>
 
-                           
-                        </tr>
-                        
-                        <tr>
-                             <td>
+                            <td>
                                 <div class="control-group">
                                     <label class="control-label">Date d'autorisation :</label>
                                     <div class="controls">
@@ -443,6 +450,34 @@
                                     </div>
                                 </div>
                             </td>
+                        </tr>
+                        
+                        <tr>
+                             <td>
+                                <div class="control-group">
+                                    <label class="control-label">Note technique requis:</label>
+                                    <div class="controls">
+                                        <input type="text" class="span"   placeholder="" v-model="edite_appel_offre.note_techn" >
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label" title="Taux de l'offre financière">Taux de l'offre fin(%):</label>
+                                    <div class="controls">
+                                        <input type="text" class="span" placeholder="" v-model="edite_appel_offre.taux_fin">
+                                    </div>
+                                </div>
+                            </td>
+                             <td>
+                                <div class="control-group">
+                                    <label class="control-label" title="Taux de l'offre technique">Taux de l'offre techn(%):</label>
+                                    <div class="controls">
+                                        <input type="text" class="span" placeholder="" v-model="edite_appel_offre.taux_tech">
+                                    </div>
+                                </div>
+                            </td>
+                            
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Fichier DAO:</label>
@@ -529,7 +564,10 @@ date_facture_proformat:"",
                     imputation:"",
                     marche_id:"",
             date_numero_autorisation:"",
-            heure:""
+            heure:"",
+            note_techn:"",
+                taux_fin:"",
+                taux_tech:""
         },
         message_offre:"",
         edite_appel_offre:{
@@ -545,7 +583,10 @@ date_facture_proformat:"",
                     imputation:"",
                     marche_id:"",
             date_numero_autorisation:"",
-            heure:""
+            heure:"",
+             note_techn:"",
+                taux_fin:"",
+                taux_tech:""
         }
 
         }
@@ -573,23 +614,16 @@ date_facture_proformat:"",
       
 
 listeAppelOffre() {
+ //if(this.LCVM){
      return id => {
         if (id != null && id != "") {
           return this.appelOffres.filter(
-            element => element.marche_id == this.macheid && element.ref_sigva==null && element.note_techn==null
+            element => element.marche_id == this.macheid && element.note_techn!=null && element.ref_sigva==null
           );
         }
       };
-//  if(this.LCVM){
-//      return id => {
-//         if (id != null && id != "") {
-//           return this.appelOffres.filter(
-//             element => element.marche_id == this.macheid && element.ref_sigva!=null || element.note_techn!=null
-//           );
-//         }
-//       };
 
-//  }
+ //}
 //    else{
 //         return id => {
 //         if (id != null && id != "") {
@@ -762,7 +796,10 @@ typeProcedureLibelle() {
 
                     procedure_passation_id:"",
 
-          heure:""
+          heure:"",
+           note_techn:"",
+                taux_fin:"",
+                taux_tech:""
 
                 }
     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)

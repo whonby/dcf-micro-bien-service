@@ -816,7 +816,24 @@ marche_id
                 </div>
               </div>
             </td>
-            <td>
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">Entreprise</label>
+                <div class="controls" style="font-size:20px">
+                
+                   <select v-model="editActeEffetFinancier.entreprise_id" class="span">
+                    <option v-for="varText in entreprises" :key="varText.id"
+                            :value="varText.id">{{varText.raison_sociale}}</option>
+                  </select>
+                </div>
+
+
+              </div>
+
+
+            </td>
+            <!-- <td>
 
               <div class="control-group">
                 <label class="control-label">Entreprise</label>
@@ -834,9 +851,35 @@ marche_id
               </div>
 
 
+            </td> -->
+             <td>
+              <div class="control-group">
+                <label class="control-label">Banque</label>
+                <div class="controls" >
+                  <select v-model="editActeEffetFinancier.banq_id" class="span" >
+                    <option v-for="varText in afficherBanqueDynamiqueId(editActeEffetFinancier.entreprise_id)" :key="varText.id"
+                            :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                  </select>
+
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Compte</label>
+                 <select v-model="editActeEffetFinancier.compte_id" class="span" >
+                    <option v-for="varText in afficherCompteDynamique(editActeEffetFinancier.banq_id)" :key="varText.id"
+                            :value="varText.id">{{afficherLeCompteEnFonctionDeLaBanque(varText.banq_id)}}</option>
+                  </select>
+                <!-- <div class="controls " >
+                  <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
+
+                </div> -->
+              </div>
+
             </td>
 
-            <td>
+            <!-- <td>
               <div class="control-group">
                 <label class="control-label">Banque</label>
                 <div class="controls" >
@@ -859,7 +902,7 @@ marche_id
               
               </div>
 
-            </td>
+            </td> -->
           </tr>
           <tr>
              <td colspan="2" width="550">
@@ -2326,6 +2369,7 @@ affichierIdEntrepriseSelectionner() {
 
 
         }
+        return null
       }
     },
     afficherCompteDynamique(){

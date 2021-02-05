@@ -95,6 +95,9 @@ controlleur_fin
                         <li>
                         <a data-toggle="tab" href="#tab22">PARAMETRAGE ECHEANCIER</a>
                       </li>
+                        <li>
+                        <a data-toggle="tab" href="#tab21" title="programmation du marché pluriannuel">P. DU MARCHE PLURIANNUEL</a>
+                      </li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab03">IMAGES DES MARCHES</a>
                       </li> -->
@@ -257,6 +260,20 @@ controlleur_fin
                           <echeance-marche :marche="detail_marche"></echeance-marche>
                       </div>
 
+                      <div id="tab21" class="tab-pane ">
+                        
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                
+                                <div class="span4" align="right">
+                                    <a href="#ajouterMarcheP" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+
+                        <!-- <publication-Offre :macheid="detail_marche.id"></publication-Offre> -->
+
+                      <marchePluriannuel :macheid="detail_marche.id"></marchePluriannuel>
+                         
+                      </div>
+
                        <div id="tab03" class="tab-pane ">
                       
                          <imageMarche :macheid="detail_marche.id"></imageMarche>
@@ -314,31 +331,14 @@ controlleur_fin
     import { mapGetters, mapActions } from "vuex";
     import moment from "moment";
     import { formatageSomme } from './../../../../../Repositories/Repository';
-   
+    import marchePluriannuel from '../DossierMarchePluriannuel/marchePluriannuel'
    import avenant from "../dossierAvenant/avenantHs";
    import facture from "../dossierFacture/factureHs";
    import decompte from "../dossierDecompte/decomptePro";
    import HistoriqueDecompteFacture from "../dossierDecompte/HistoriqueDecompteFacture";
    import graphiqueExecutionMarche from "../../../../bien_service/contractualisation/DossierExecution/DossierGraphiqueExecutionMarche/graphiqueExecutionMarche";
    import graphiqueSituationMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierSituationMarche/graphiqueSituationMarche";
-// import avenant from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
-// import facture from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierFacture/facture";
-// import decompte from "../../../../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte";
 
-//     import listeOpDefinitiveBsDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveBsDirect.vue";
-//     import listeOpDefinitiveCfDirect from "../../DossierExecutionHorsSib/DossierOrdrePaiement/listeOpDefinitiveCfDirect.vue";
-//     import listeOpProvisoireBs from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpProvisoireBs";
-//      import listeOpProvisoireCf from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpProvisoireCf";
-//       import listeOpAnnulation from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpAnnulation";
-//     import listeOpDefinitiveBsprov from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpDefinitiveBsprov";    
-//         import listeOpDefinitivecfprov from "../DossierOrdrePaiement/DossierOpProvisoire/listeOpDefinitivecfprov";
-     
-//       import realiteServiceFaitServiceBHs from "../dossierRealiteServiceFait/realiteServiceFaitServiceBHs";
-//       import realiteServiceFaitCf from "../dossierRealiteServiceFait/realiteServiceFaitCfHs";
-// import realiteServiceFaitServiceOpProvisoireBS from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireBS";
-// import realiteServiceFaitServiceOpProvisoireCf from "../dossierRealiteServiceFait/realiteServiceFaitServiceOpProvisoireCf";
-       //bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche
-                  // import financement from "../dossierFinancement/financementHs";
                   import imageMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche";
                 import tableauBordExecution from "../tableauBordExecution/tableauBordExecution";
   import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
@@ -347,10 +347,7 @@ controlleur_fin
   },
         name: 'compte',
         components:{
-          // listeOpDefinitiveBsprov,
-          // listeOpDefinitivecfprov,
-          // realiteServiceFaitServiceOpProvisoireBS,
-          // realiteServiceFaitServiceOpProvisoireCf,
+         marchePluriannuel,
             avenant,
             facture,
             decompte,
