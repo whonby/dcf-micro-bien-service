@@ -101,9 +101,9 @@ marche_id
         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
           {{effetFinancier.numero_marche || 'Non renseigné'}}</td>
           <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-          {{effetFinancier.marche.objet || 'Non renseigné'}}</td>
+          {{affichierObjetMarche(effetFinancier.marche_id) || 'Non renseigné'}}</td>
           <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-          {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
+          {{affichierImputationMarche(effetFinancier.marche_id) || 'Non renseigné'}}</td>
         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
           {{formatageSomme(parseFloat(effetFinancier.montant_act ))|| 'Non renseigné'}}</td>
         <!-- <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
@@ -1795,7 +1795,17 @@ afficheNomEntreprise() {
         }
       }
     },
-
+affichierImputationMarche(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objetMarche = this.marches.find(idMarche => idMarche.id ==id);
+          if(objetMarche){
+            return objetMarche.imputation
+          }
+          return 0
+        }
+      }
+    },
 
     enregistrerIdEntreprise(){
       return id =>{

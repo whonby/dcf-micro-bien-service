@@ -345,6 +345,7 @@ ModifierTacheMarch() {
         ...this.editTacheMarche,
         marche_id: this.detail_marche.id,
          numero_tache:this.numeroTache(this.detail_marche.id),
+historiquetauxprevu:this.editTacheMarche.taux_prevu,
          situation:0
        
       };
@@ -365,6 +366,7 @@ AjouterTacheMarch() {
         ...this.formData,
         marche_id: this.detail_marche.id,
          numero_tache:this.numeroTache(this.detail_marche.id),
+         historiquetauxprevu:this.formData.taux_prevu,
        situation:0
       };
       this.ajouterTacheMarche(nouvelObjet);

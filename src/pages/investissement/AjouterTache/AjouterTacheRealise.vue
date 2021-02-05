@@ -462,7 +462,8 @@ ModifierTacheMarch() {
       var nouvelObjet = {
         ...this.editTacheMarche,
         marche_id: this.detail_marche.id,
-         tache_realise:this.libelleTache(this.formData.libelle)
+         tache_realise:this.libelleTache(this.formData.libelle),
+         taux_prevu:this.AffichierTotalActuel
        
       };
       this.modifierTacheMarche(nouvelObjet);

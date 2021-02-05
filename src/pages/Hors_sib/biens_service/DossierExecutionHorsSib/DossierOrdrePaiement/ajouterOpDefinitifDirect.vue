@@ -911,7 +911,7 @@ sommeEgagementLigne: function () {
                 return id => {
                     if (id != "") {
                       let valInite=0;
-                        return  this.mandats.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
+                        return  this.mandats.filter(normeEquipe => normeEquipe.marche_id == id ).reduce(function(total,currentVal){
                            return total + parseFloat(currentVal.total_general)
                         },valInite);
                     }
@@ -1372,6 +1372,7 @@ afficheLibelleUa() {
                 "modifierEngagement",
                 "ajouterEngagement",
                 "ajouterMandat",
+                "modifierMarche2",
                 "modifierMandat",
                 "supprimerMandat",
                 "ajouterFacture",
@@ -1458,6 +1459,56 @@ section_id:this.afficherIdSection(this.afficherIdUa(this.detail_Facture.marche_i
   //      };
       
 this.ajouterMandat(nouvelObjet919)
+
+// this.ajouterDecompteFacture(objetDecompte1)
+this.formDataMadat= {
+ 
+  montant_tresor: 0,
+                    montant_emprunt: 0,
+                    montant_don: 0,
+};
+      }
+      else if (parseFloat(this.montantMarcheAvecAvenant) == parseFloat(this.sommeEgagementLigne(this.detail_Facture.marche_id))){
+   var nouvelObjet9191 = {
+      ...this.formData,
+      etat_srf:0,
+      etat_op_def:0,
+       exercice_budget :this.anneeAmort,
+   budget_general_id :this.afficherInputationBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id)),
+         marche_id : this.detail_Facture.marche_id,
+         montant_a_paye: this.restePayeMarche,
+        //  montant_cumul:this.montantCumuler,
+       ligne_id:this.afficherIdLigneBudgetaire(this.afficherIdParent(this.detail_Facture.marche_id)),
+     banque_id:this.afficheIdBanque(this.afficherIdEntreprise(this.detail_Facture.id)),
+        facture_id:this.detail_Facture.id,
+        type_procedure_id	:this.recupererTypeProcedure,
+// engagement_id:this.editLiquidation.egagement_id,
+programme_id:this.enregistrerProgramme,
+action_id:this.enregistrerAction,
+activite_id:this.enregistrerActivite,
+  ua_id:this.afficherIdUa(this.detail_Facture.marche_id),
+  grd_nature_id:this.afficherIdGrandeNature(this.detail_Facture.marche_id),
+	compte_id:this.afficheIdCompte(this.afficherIdEntreprise(this.detail_Facture.id)),
+section_id:this.afficherIdSection(this.afficherIdUa(this.detail_Facture.marche_id)),
+  total_general:this.montantGeneralMandat,
+// montant_tresor:this.detail_Facture.montant_tresor,
+// montant_don:this.detail_Facture.montant_don,
+// montant_emprunt:this.detail_Facture.montant_emprunt,
+	entreprise_id:this.detail_Facture.entreprise_id,
+  //  bailler_id:this.detail_Facture.bailler_id,
+ marchetype:this.afficheMarcheType,
+ type_engagement_id:this.detail_Facture.type_engagement_id,
+ mod_paiement_engage:this.detail_Facture.mod_paiement_engage,
+  service_realite_id:this.detail_Facture.id,
+  differentop:0
+       };
+
+      let marcheObjet5=this.marches.find(marche=>marche.id==this.detail_Facture.marche_id)
+      marcheObjet5.attribue = 7
+     
+      
+    this.modifierMarche2(marcheObjet5)
+this.ajouterMandat(nouvelObjet9191)
 
 // this.ajouterDecompteFacture(objetDecompte1)
 this.formDataMadat= {
