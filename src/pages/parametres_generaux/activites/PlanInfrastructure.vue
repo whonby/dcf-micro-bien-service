@@ -1,4 +1,4 @@
-
+structures_activites
 <template>
   <div>
   
@@ -78,7 +78,7 @@
               <label class="control-label">Structure Infrastructure:</label> 
               <div class="controls">
                 <select  v-model="formData.structure_infrastruture_id" class="span5">
-            <option v-for="plan in structures_activites" :key="plan.id" 
+            <option v-for="plan in structures_Infrastructures" :key="plan.id" 
             :value="plan.id">{{plan.libelle}}</option>
                 </select>
               </div>

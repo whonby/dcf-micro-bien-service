@@ -581,7 +581,7 @@ veifArticlesExist() {
       "modifierStock",
       "supprimerStock"
     ]),
-    ...mapActions("uniteadministrative", ["uniteAdministratives","supprimerStockArticle"]),
+    ...mapActions("uniteadministrative", ["supprimerStockArticle"]),
     filter(){
                 this.affiche_filtre=!this.affiche_filtre
                

@@ -317,7 +317,7 @@
                         <div class="controls">
                             <input
                                     type="text"
-                                    :value="afficherNumeroMarche(macheid)"
+                                    :value="afficherNumeroMarche(marche_lot)"
                                     class="span"
                                    readonly
                             />
@@ -421,7 +421,7 @@
                   <input
                     type="number"
                     
-              :value="afficherEnorere"
+              :value="afficherEnorereModifier"
                     class="span"
                    readonly
                   />
@@ -458,7 +458,7 @@
                 <div class="controls">
                   <input
                     type="number"
-                    :value="montantTvaActuel"
+                    :value="montantTvaActuelModifier"
                     class="span"
                    readonly
                   />
@@ -674,6 +674,23 @@ sommeTotalDesBailleur() {
       }
       
     },
+    montantTvaActuelModifier() {
+      if(this.editBailleur.exonere == 0){
+
+        return 0
+      
+      }
+      else {
+        const val = parseFloat(this.afficherMontantHtMarche(this.infoLot.id)) * parseFloat(this.affcherTauxArrondi);
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+      }
+      
+    },
     montantHTtBailleur() {
       if(this.formBailleur.exonere == 0){
 
@@ -703,7 +720,14 @@ else {
   return this.affcherTauxEnCours
 }
 },
-
+   afficherEnorereModifier(){
+if(this.editBailleur.exonere == 0 || this.editBailleur.exonere == ""){
+  return 0
+}
+else {
+  return this.affcherTauxEnCours
+}
+},
 affcherTauxEnCours() {
       const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
 
@@ -804,12 +828,14 @@ if(this.PayeDesBailleur < this.afficherMontantTTCMarche(this.infoLot.id)){
   alert("Montant TTC du Marché < Somme des Montants des Bailleurs")
 }
 },
-afficherModalModifierBailleurMarche(index){
+afficherModalModifierBailleurMarche(id){
       this.$('#modificationBailleurMarche').modal({
         backdrop: 'static',
         keyboard: false
       });
-      this.editBailleur = this.personnaliseGetterMarcheBailleur.find(item=>item.id==index)
+      this.editBailleur = this.personnaliseGetterMarcheBailleur.find(item=>item.id==id)
+       this.infoLot=this.getMarchePersonnaliser.find(item=>item.id==this.editBailleur.marche_id)
+        this.marche_lot=this.editBailleur.marche_id
     },
 ajouterBailleur(){
 
@@ -845,8 +871,8 @@ var nouvelObjet = {
         acte_effet_id:this.enregistreIdActe(this.infoLot.id),
         tauxbailleur:this.editBailleur.tauxBailler,
          montant:this.afficherMontantTTCMarche(this.infoLot.id),
-               tva:this.afficherEnorere,
-               montant_tva:this.montantTvaActuel,
+               tva:this.afficherEnorereModifier,
+               montant_tva:this.montantTvaActuelModifier,
                montant_ht:this.afficherMontantHtMarche(this.infoLot.id),
                marche_id:this.infoLot.id 
         //  montant:

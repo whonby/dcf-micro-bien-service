@@ -174,21 +174,21 @@
                     v-for="Manda in afficheOpDefinitivecf(macheid)"
                     :key="Manda.id"
                   >
-        <td >{{Manda.exercice_budget || 'Non renseigné'}}</td>
-         <td >{{Manda.numero_op_definitif || 'Non renseigné'}}</td>
-                    <td >{{afficherSection(Manda.section_id) || 'Non renseigné'}}</td>
-                    <td >{{afficheNomFournisseur(afficheidFournisseurFacture(Manda.facture_id)) || 'Non renseigné'}}</td>
-                    <td >{{afficheNumeroFacture(Manda.facture_id) || 'Non renseigné'}}</td>
-                     <td >{{afficheDateFacture(Manda.facture_id) || 'Non renseigné'}}</td> 
+        <td @dblclick="afficherModalModifierTitre(Manda.id)">{{Manda.exercice_budget || 'Non renseigné'}}</td>
+         <td @dblclick="afficherModalModifierTitre(Manda.id)">{{Manda.numero_op_definitif || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTitre(Manda.id)">{{afficherSection(Manda.section_id) || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTitre(Manda.id)">{{afficheNomFournisseur(afficheidFournisseurFacture(Manda.facture_id)) || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTitre(Manda.id)">{{afficheNumeroFacture(Manda.facture_id) || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierTitre(Manda.id)">{{afficheDateFacture(Manda.facture_id) || 'Non renseigné'}}</td> 
                      
-                    <!-- <td >{{detail_marche.imputation  || 'Non renseigné'}}</td> -->
-                     <td >{{formatageSomme(parseFloat(Manda.total_general)) || 'Non renseigné'}}</td>
+                    <!-- <td @dblclick="afficherModalModifierTitre(Manda.id)">{{detail_marche.imputation  || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModalModifierTitre(Manda.id)">{{formatageSomme(parseFloat(Manda.total_general)) || 'Non renseigné'}}</td>
                      
-                       <td >{{(formaterDate(Manda.date_decision_emetteur)) || 'Non renseigné'}}</td>
-                   <td >{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
-                   <td >{{libelleDecision(Manda.famille_motif_mandat) || 'Non renseigné'}}</td>
-                   <td >{{libelleDecision(Manda.motif) || 'Non renseigné'}}</td>
-                   <td >{{Manda.autre_motif_mandat || 'Non renseigné'}}</td>
+                       <td @dblclick="afficherModalModifierTitre(Manda.id)">{{(formaterDate(Manda.date_decision_emetteur)) || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierTitre(Manda.id)">{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierTitre(Manda.id)">{{libelleDecision(Manda.famille_motif_mandat) || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierTitre(Manda.id)">{{libelleDecision(Manda.motif) || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierTitre(Manda.id)">{{Manda.autre_motif_mandat || 'Non renseigné'}}</td>
                     <td v-if="Manda.decision_emetteur == 1">
                         <button v-if="Manda.decision_cf == 8"  class="btn  btn-success" @click="afficheDecisionCf(Manda.id)" >                        
                      
@@ -603,6 +603,19 @@ else{
 
        this.editMandat = this.afficheOpDefinitivecf(this.macheid).find(item=>item.id==id);
     },
+
+
+
+afficherModalModifierTitre(id) {
+
+      this.$router.push({
+        path: "/ModificationOp/" + id
+      });
+    },
+
+
+
+
 // afficherModalObservationServiceBeneficiaire(id) {
 //       this.$("#DecisionServiceBeneficiaire").modal({
 //         backdrop: "static",

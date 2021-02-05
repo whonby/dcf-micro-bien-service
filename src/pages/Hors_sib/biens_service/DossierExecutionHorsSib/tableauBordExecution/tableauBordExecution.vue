@@ -1,131 +1,47 @@
 
 <template>
-  <div class="container-fluid">
-      <!-- <h3 style="text-align:center">TABLEAU DE BORD : BIEN ET SERVICE</h3> -->
-    <div class="quick-actions_homepage">
+  <div class="widget-content nopadding">
+    <div align="right">
 
-                      
-<table class="table table-bordered table-striped  " v-if="macheid">
-    <tr>
-         <td>
-            <ul class="quick-actions" style="margin: 0px !important;"> 
-   <li class="bg_lb span"> <a href="#" style="color:#FFFFFF;"><h4>BUDGET</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherMontantBudgetaireInitial(afficherIdLigneBudgetaire(afficherIdParent(macheid)))))}}</span><h4>INITIAL</h4></a> </li>
-            </ul>
+      <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
 
-        </td>
-        <td>
-            <ul class="quick-actions" style="margin: 0px !important;"> 
-                 <li class="bg_ls span"> <a href="#" style="color:#ffffff;"><h4>MONTANT BASE</h4> <i class="icon-list-ol"></i> <span class="label label-important" style="font-size:14px">{{formatageSomme(parseFloat(afficheMontantReelMarche(macheid)))}}</span><h4> DU MARCHE</h4></a> </li>
-            </ul>
 
-        </td>
-         <td>
-            <ul class="quick-actions" style="margin: 0px !important;"> 
-               <li class="bg_lg span"> <a href="#" style="color:#FFFFFF;"><h4>MONTANT </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(affichierMontantAvenant(macheid)))}}</span><h4>AVENANT</h4></a> </li>
-
-            </ul>
-
-        </td>
-        <td>
-            <ul class="quick-actions" style="margin: 0px !important;"> 
-                 <li class="bg_ls span"> <a href="#" style="color:#FFFFFF;"><h4>NOMBRE </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{affichierNombreAvenant(this.macheid)}}</span><h4>AVENANT</h4></a> </li>
-            </ul>
-
-        </td>
-        <td>
-            <ul class="quick-actions" style="margin: 0px !important;"> 
-                 <li class="bg_lo span"> <a href="#" style="color:#FFFFFF;"><h4>TAUX RATIO</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{ratioAvenantMarche}}%</span><h5>MONTANT AVENANT/MONTANT MARCHE</h5></a> </li>
-            </ul>
-
-        </td>
-    </tr>
-     <tr>
-       
-         <td>
-            <ul class="quick-actions" style="margin: 0px !important;"> 
-              <li class="bg_lr span"> <a href="#" style="color:#FFFFFF;"><h4>MONTANT GLOBAL</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(montantMarcheAvecAvenant))}}</span><h4> DU MARCHE (Base+Av) </h4></a> </li>
-                
-            </ul>
-
-        </td>
-        <td>
-            <ul class="quick-actions" style="margin: 0px !important;"> 
-                 <li class="bg_lg span"> <a href="#" style="color:#FFFFFF;"><h4>CUMUL </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(sommeEgagementLigneTableau(macheid)))}}</span><h4>ENGAGEMENT</h4></a> </li>
-            </ul>
-
-        </td>
-         <td>
-            <ul class="quick-actions" style="margin: 0px !important;"> 
-               <li class="bg_lo span"> <a href="#" style="color:#FFFFFF;"><h4>MONTANT PAYE </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(sommeEngagementTableau(macheid)))}}</span><h4> DU MARCHE</h4></a> </li>
+                            </div>
+                            <br>
+                            <div id="printMe">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px">BUDGET INITIAL</th>
+                    <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px"> MONTANT BASE DU MARCHE</th>
+                     <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px">MONTANT AVENANT</th>
+                    <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px"> NOMBRE AVENANT</th>
+                     <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px">TAUX RATIO MONTANT AVENANT/MONTANT MARCHE</th>
+                    <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px"> MONTANT GLOBAL DU MARCHE (Base+Av)</th>
+                     <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px">CUMUL ENGAGEMENT</th>
+                    <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px"> MONTANT PAYE DU MARCHE</th>
+                     <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px">TAUX D'EXECUTION MARCHE</th>
+                    <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px"> BUDGET ACTUEL</th>
+                     <th style="background: coral;font-weight: bolder;color:#000;text-align:center;font-size:12px">RESTE A PAYE DU MARCHE</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                 <td style="font-weight: bolder;color:#000;text-align:center;font-size:12px">{{formatageSomme(parseFloat(afficherMontantBudgetaireInitial(afficherIdLigneBudgetaire(afficherIdParent(macheid)))))}}</td>
+                 <td style="font-weight: bolder;color:#000;text-align:center;font-size:12px">{{formatageSomme(parseFloat(afficheMontantReelMarche(macheid)))}}</td>
+                 <td style="font-weight: bolder;color:#000;text-align:center;font-size:12px">{{formatageSomme(parseFloat(affichierMontantAvenant(macheid)))}}</td>
+                  <td style="font-weight: bolder;color:#000;text-align:center;font-size:12px">{{affichierNombreAvenant(this.macheid)}}</td>
+                 <td style="font-weight: bolder;color:#000;text-align:center;font-size:12px">{{ratioAvenantMarche}}%</td>
+                 <td style="font-weight: bolder;color:#000;text-align:center;font-size:12px">{{formatageSomme(parseFloat(montantMarcheAvecAvenant))}}</td>
+                 <td style="font-weight: bolder;color:#000;text-align:center;font-size:12px">{{formatageSomme(parseFloat(sommeEgagementLigneTableau(macheid)))}}</td>
+                 <td style="font-weight: bolder;color:#000;text-align:center;font-size:12px">{{formatageSomme(parseFloat(sommeEngagementTableau(macheid)))}}</td>
+                 <td style="font-weight: bolder;color:#000;text-align:center;font-size:12px">{{tauxFacturation}}%</td>
+                 <td style="font-weight: bolder;color:#000;text-align:center;font-size:12px">{{formatageSomme(parseFloat(afficherMontantBudgetaireInitial(afficherIdLigneBudgetaire(afficherIdParent(macheid))) - sommeEgagementLigneTableau(macheid)))}}</td>
+                 <td style="font-weight: bolder;color:#000;text-align:center;font-size:12px">{{formatageSomme(parseFloat(restePayeMarche))}}</td>
                  
-            </ul>
-
-        </td>
-         <td>
-            <ul class="quick-actions" style="margin: 0px !important;"> 
-                 <li class="bg_ly span"> <a href="#" style="color:#FFFFFF;"><h4>TAUX</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{tauxFacturation}}%</span><h4>D'EXECUTION MARCHE</h4></a> </li>
-            </ul>
-
-        </td>
-         <td>
-            <ul class="quick-actions" style="margin: 0px !important;"> 
-            <li class="bg_lr span"> <a href="#" style="color:#FFFFFF;"><h4>BUDGET </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherMontantBudgetaireInitial(afficherIdLigneBudgetaire(afficherIdParent(macheid))) - sommeEgagementLigneTableau(macheid)))}}</span><h4>ACTUEL</h4></a> </li>
-            </ul>
-
-        </td>
-        
-    </tr>
-     <tr>
-     <td>
-            <ul class="quick-actions" style="margin: 0px !important;"> 
-               <li class="bg_ly span"> <a href="#" style="color:#FFFFFF;"><h4>RESTE A PAYE </h4> <i class="icon-list-ol"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(restePayeMarche))}}</span><h4>DU MARCHE</h4></a> </li>
-              
-                
-            </ul>
-
-        </td>
-        
-         
-        
-         <!-- <td>
-            <ul class="quick-actions" style="margin: 0px !important;"> 
-                 <li class="bg_lb span"> <a href="#" style="color:#FFFFFF;"><h4>TOTAL </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{0}}</span><h4>MARCHE</h4></a> </li>
-            </ul>
-
-        </td> -->
-    </tr>
-</table>
-         
-
-       
-
-
-             
-                        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-    </div>
-    
+                </tbody>
+              </table>
+                            </div>
   </div>
 </template>
   
@@ -330,7 +246,10 @@ sommeEngagementTableau(){
 },
   },
   methods: {
-    formatageSomme:formatageSomme
+    formatageSomme:formatageSomme,
+          genererEnPdf(){
+  this.$htmlToPaper('printMe');
+},
   }
 };
 </script>
