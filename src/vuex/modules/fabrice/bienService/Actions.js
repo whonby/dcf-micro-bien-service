@@ -171,9 +171,9 @@ export  function getReception({commit}){
 
 
 export function ajouterReception({commit}, formData){
-  asyncLoading(axios.post('/ajouter_ReceptionMarche',formData)).then(response =>{
+  asyncLoading(axios.post('/ReceptionMarche',formData)).then(response =>{
       if(response.status == 201){
-        console.log(response.data)
+       
           commit('AJOUTER_RECEPTION', response.data)
           
           this.$app.$notify({
@@ -5076,3 +5076,13 @@ export function modificationMarche({ commit }, element_modifie) {
     })
   }).catch(error => console.log(error))
 }
+
+export function modifierMarche2({ commit, dispatch}, element_modifie) {
+  asyncLoading( axios.put('/marches',element_modifie)).then(response => {
+       commit('MODIFIER_MARCHE', response.data)
+    dispatch('getMarche')
+    dispatch('getActeEffetFinancier')
+    
+   }).catch(error => console.log(error))
+}
+

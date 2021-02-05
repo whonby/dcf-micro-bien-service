@@ -111,7 +111,17 @@ import AjouterTacheParMarche from "../../pages/investissement/AjouterTache/Ajout
 
 import AjouterTacheRealise from "../../pages/investissement/AjouterTache/AjouterTacheRealise.vue"
 import SuiviDelai from "../../pages/DossierSuiviDelai/SuiviDelai.vue"
+import ModificationOp from "../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/ModificationOp.vue"
+
+
+
 const BienServiceRoutes = [
+   
+    {
+        path: "/ModificationOp/:id",
+        name: "ModificationOp",
+        component: ModificationOp
+    },
     {
 
         
@@ -272,6 +282,7 @@ detailExecution
         name: "modifierMandat",
         component: modifierMandat
     },
+    
     {
         path:"/graphique-excution-marche",
         name:"graphique_excution_marche",

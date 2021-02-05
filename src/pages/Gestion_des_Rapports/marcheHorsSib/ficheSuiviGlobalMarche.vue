@@ -1,20 +1,21 @@
 
 <template>
   <div>
-      <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
+    <br/>
+      <div  class="row-fluid"  style="margin-top: -20px">
                 <div class="span1">
 
                 </div>
-                <div class="span10 " style="background: #f0c71d !important;">
-                    <table class="table table-striped"  style="background: #f0c71d !important;">
+                <div class="span10 " >
+                    <table class="table table-striped">
                         <tbody>
                         <tr>
                         
                             
-                            <td style="background: #f0c71d !important;">
-                                <label style="font-size:20px">Exercice Budgétaire
+                            <td>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">Exercice Budgétaire
                                 </label>
-                                <model-list-select style="background-color: #fff;"
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
                                                    class="wide"
                                                    :list="exercices_budgetaires"
                                                    v-model="exercices_budgetaires_id"
@@ -25,10 +26,10 @@
 
                                 </model-list-select>
                             </td>
-                          <td style="background: #f0c71d !important;">
-                                <label style="font-size:20px">Unité Administrative
+                          <td>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">Unité Administrative
                                 </label>
-                                <model-list-select style="background-color: #fff;"
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
                                                    class="wide"
                                                    :list="uniteAdministratives"
                                                    v-model="uniteAdministrative_id"
@@ -39,10 +40,10 @@
 
                                 </model-list-select>
                             </td>
-                            <td style="background: #f0c71d !important;">
-                                <label style="font-size:20px">Type de Marche
+                            <td>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">Type de Marche
                                 </label>
-                                <model-list-select style="background-color: #fff;"
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
                                                    class="wide"
                                                    :list="typeMarches"
                                                    v-model="typemarche_id"
@@ -56,10 +57,10 @@
                             
                         </tr>
 <tr>
-     <td style="background: #f0c71d !important;" colspan="3">
-                                <label style="font-size:20px">Marche en Execution
+     <td  colspan="3">
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">Marche en Execution
                                 </label>
-                                <select v-model="formData.marche_exercute_id" class="span" >
+                                <select v-model="formData.marche_exercute_id" class="span" style="background-color: #fff;border:2px solid #000">
                                                             <option v-for="item in ListeDesMarcheEnExecution(typemarche_id)" 
                                                             :key="item.id" 
                                                             :value="item.marche_id">

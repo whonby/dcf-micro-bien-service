@@ -33,19 +33,19 @@
       <tr class="odd gradeX" v-for="effetFinancier in listeDesBailleur(item.id)"
           :key="effetFinancier.id">
 
-        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+        <td @click="afficherModalModifierBailleur(effetFinancier.id)">
           {{afficheLibelleSourceFinancement(effetFinancier.bailleur_id) || 'Non renseigné'}}</td>
-          <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+          <td @click="afficherModalModifierBailleur(effetFinancier.id)">
           {{afficheLibelleTypeFinancement(effetFinancier.type_finnancement_id) || 'Non renseigné'}}</td>
-          <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+          <td @click="afficherModalModifierBailleur(effetFinancier.id)">
           {{formatageSommeSansFCFA(parseFloat(effetFinancier.montant_ht)) || 'Non renseigné'}}</td>
-           <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+           <td @click="afficherModalModifierBailleur(effetFinancier.id)">
           {{effetFinancier.tauxbailleur || 'Non renseigné'}}%</td>
-           <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+           <td @click="afficherModalModifierBailleur(effetFinancier.id)">
           {{effetFinancier.tva || 'Non renseigné'}}%</td>
-        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+        <td @click="afficherModalModifierBailleur(effetFinancier.id)">
           {{formatageSommeSansFCFA(parseFloat(effetFinancier.montant_tva ))|| 'Non renseigné'}}</td>
-       <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+       <td @click="afficherModalModifierBailleur(effetFinancier.id)">
           {{formatageSommeSansFCFA(parseFloat(effetFinancier.montant ))|| 'Non renseigné'}}</td>
         <td>
           <div class="btn-group">
@@ -295,7 +295,7 @@
 
 
 
-  <div id="ModalModification" class="modal hide grdirModalActeEffet" >
+  <div id="ModalModificationBailleur" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Information du Bailleur sur le : Lot N° {{infoLot.numero_lot}} {{infoLot.objet}}</h3>
@@ -319,7 +319,7 @@
                         <div class="controls">
                             <input
                                     type="text"
-                                    :value="afficherNumeroMarche(macheid)"
+                                    :value="afficherNumeroMarche(marche_lot)"
                                     class="span"
                                    readonly
                             />
@@ -423,7 +423,7 @@
                   <input
                     type="number"
                     
-              :value="afficherEnorere"
+              :value="afficherEnorereModifier"
                     class="span"
                    readonly
                   />
@@ -460,7 +460,7 @@
                 <div class="controls">
                   <input
                     type="number"
-                    :value="montantTvaActuel"
+                    :value="montantTvaActuelModifier"
                     class="span"
                    readonly
                   />
@@ -516,10 +516,10 @@
     </div>
 
     <div class="modal-footer">
-      <a  @click.prevent="ajouterBailleur" v-if="this.PayeDesBailleur < this.afficherMontantTTCMarche(this.infoLot.id)"
+      <a  @click.prevent="ajouterBailleur" 
           class="btn btn-primary"
           href="#"
-      >Valider</a>
+      >Modifier</a>
       <a data-dismiss="modal" class="btn" href="#">Fermer</a>
     </div>
   </div>
@@ -675,6 +675,23 @@ sommeTotalDesBailleur() {
       }
       
     },
+    montantTvaActuelModifier() {
+      if(this.editBailleur.exonere == 0){
+
+        return 0
+      
+      }
+      else {
+        const val = parseFloat(this.afficherMontantHtMarche(this.infoLot.id)) * parseFloat(this.affcherTauxArrondi);
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+      }
+      
+    },
     montantHTtBailleur() {
       if(this.formBailleur.exonere == 0){
 
@@ -704,7 +721,14 @@ else {
   return this.affcherTauxEnCours
 }
 },
-
+   afficherEnorereModifier(){
+if(this.editBailleur.exonere == 0 || this.editBailleur.exonere == ""){
+  return 0
+}
+else {
+  return this.affcherTauxEnCours
+}
+},
 affcherTauxEnCours() {
       const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
 
@@ -805,12 +829,14 @@ if(this.PayeDesBailleur < this.afficherMontantTTCMarche(this.infoLot.id)){
   alert("Montant TTC du Marché < Somme des Montants des Bailleurs")
 }
 },
-afficherModalModifierActeEffetFinancier(index){
-      this.$('#ModalModification').modal({
+afficherModalModifierBailleur(id){
+      this.$('#ModalModificationBailleur').modal({
         backdrop: 'static',
         keyboard: false
       });
-      this.editBailleur = this.personnaliseGetterMarcheBailleur.find(item=>item.id==index)
+      this.editBailleur = this.personnaliseGetterMarcheBailleur.find(item=>item.id==id)
+       this.infoLot=this.getMarchePersonnaliser.find(item=>item.id==this.editBailleur.marche_id)
+        this.marche_lot=this.editBailleur.marche_id
     },
 ajouterBailleur(){
 
@@ -846,8 +872,8 @@ var nouvelObjet = {
         acte_effet_id:this.enregistreIdActe(this.infoLot.id),
         tauxbailleur:this.editBailleur.tauxBailler,
          montant:this.afficherMontantTTCMarche(this.infoLot.id),
-               tva:this.afficherEnorere,
-               montant_tva:this.montantTvaActuel,
+               tva:this.afficherEnorereModifier,
+               montant_tva:this.montantTvaActuelModifier,
                montant_ht:this.afficherMontantHtMarche(this.infoLot.id),
                marche_id:this.infoLot.id 
         //  montant:

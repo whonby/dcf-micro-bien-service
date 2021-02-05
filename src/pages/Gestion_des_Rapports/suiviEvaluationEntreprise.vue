@@ -1,7 +1,7 @@
 
 <template>
   <div class="container-fluid">
-   <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
+   <div  class="row-fluid"  style="margin-top: -20px">
                 <div class="span1">
 
                 </div>
@@ -482,7 +482,7 @@ NombreDeMarcheRecu() {
 MarcheNonDemarre() {
       return id => {
         if (id != null && id != "") {
-           return this.getterActeEffetFinanciers.filter(qtreel => qtreel.entreprise_id == id && qtreel.date_debut_exectuion_definitif != null).length;
+           return this.getterActeEffetFinanciers.filter(qtreel => qtreel.entreprise_id == id && qtreel.date_debut_exectuion_definitif == null).length;
         }
         return 0
       };

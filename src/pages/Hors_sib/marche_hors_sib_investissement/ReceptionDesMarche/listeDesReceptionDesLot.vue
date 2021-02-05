@@ -163,6 +163,7 @@
                 </div>
 
 
+
               </div>
              
             </td>
@@ -318,7 +319,7 @@
                 <div class="controls">
                   <input
                       type="date"
-                        
+                        :value="formReception.Date_reception_definitive"
                       class="span3"
                       
                   />
@@ -337,7 +338,7 @@
                 <div class="controls">
                   <input
                       type="text"
-                         
+                         :value="formReception.Duree_execution_reel "
                        class="span3"
                       
                   />
@@ -352,7 +353,7 @@
                 <div class="controls">
                   <input
                       type="text"
-                      
+                       :value="formReception.Duree_execution_reel "
                       class="span3"
                       
                   />
@@ -366,7 +367,7 @@
                 <div class="controls">
                   <input
                       type="text"
-                      
+                      :value="formReception.Ecart_reception_definitive"
                       class="span3"
                       
                   />
@@ -1203,23 +1204,7 @@ afficheMontantReelMarche() {
         },
         methods: {
             ...mapActions("bienService", [
-                "getEngagement",
-                "supprimerEngagement",
-                "modifierEngagement",
-                "ajouterEngagement",
-                "ajouterMandat",
-                "modifierMandat",
-                "supprimerMandat",
-                "ajouterFacture",
-                "modifierFacture",
-                "supprimerFacture",
-                "ajouterChoixProcedure",
-                 "ajouterAvenant",
-      "modifierAvenant",
-      "supprimerAvenant",
-      "modifierMarche",
-      "getActeEffetFinancier",
-      "getMarche"
+              "ajouterReception"
                
             ]),
  ...mapActions("uniteadministrative", [              
@@ -1287,6 +1272,7 @@ afficherModalProcedureFacture() {
         Ecart_reception_provisoire:this.Ecartreceptpro,
         Ecart_reception_definitive:this.Ecartreceptdef,
 
+
       //   marche_id:this.detail_Facture.marche_id,
       //   facture_id:this.detail_Facture.id,
       // nethtva:this.montantTVA,
@@ -1295,6 +1281,21 @@ afficherModalProcedureFacture() {
       // parts_bailleur:this.MontantHTBailleur,
       // montantmarche:this.Montantapresretenues
       };
+      // var ObjetActeFinancier = {
+      //   ...this.formReception,
+      //   date_fin_exe:this.afficherDatefinex(this.marcheid),
+      //   Ecart_reception_provisoire:this.Ecartreceptpro,
+      //   Ecart_reception_definitive:this.Ecartreceptdef,
+        
+
+      //   marche_id:this.detail_Facture.marche_id,
+      //   facture_id:this.detail_Facture.id,
+      // nethtva:this.montantTVA,
+      // netttc:this.Montantapresretenues,
+      // parts_etat:this.MontantHTEtat,
+      // parts_bailleur:this.MontantHTBailleur,
+      // montantmarche:this.Montantapresretenues
+      // };
       this.ajouterDecompteFacture(nouvelObjet);
     this.ajouterModalActeEffetFinancierLocal()
       // this.formData = {

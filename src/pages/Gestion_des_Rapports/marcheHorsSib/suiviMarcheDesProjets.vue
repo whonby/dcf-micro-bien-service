@@ -1,10 +1,11 @@
-detail_marche
 <template>
   
      
          <div >
            <table class="table table-bordered table-striped">
-                
+                <td colspan="4">
+                        <div align="center"> <h4> FICHE DE SUIVI DES MARCHES/CONTRATS - UNITE ADMINISTRATIVE</h4> </div>
+                      </td>
                 <tr>
                     <td>
                          <div class="control-group">
@@ -77,9 +78,6 @@ detail_marche
 
                             </div>
              <div id="printMe">
-                <template v-if="formData.ua_id!='' || formData.typeua_id!='' || formData.exo!=''">
-                        <div align="center"> <h4> FICHE DE SUIVI DES MARCHES/CONTRATS - UNITE ADMINISTRATIVE</h4> </div>
-                    </template>  
               <template v-if="formData.ua_id=='' || formData.typeua_id=='' || formData.exo==''">
  <h5 style="text-align:center;color:red;font-size:20px" >VEUILLEZ SELECTIONNER L'UNITE ADMINISTRATIVE SVP</h5>
               </template>
@@ -99,7 +97,7 @@ detail_marche
       <thead>
        <tr>
                     
-                    <th>N° DU MARCHE</th>
+                    <th>N° DU MARCHE{{afficherDateDuJour}}</th>
                     <th>MODE PASSATION</th>
                     <th>DATE D'APPROBATION</th>
                   <th>DATE ORDRE DE SERVICE</th>
@@ -190,9 +188,9 @@ detail_marche
     </table>
     
   </div>
-    
- <h5 style="text-align:center;color:#000000;font-size:20px" v-if="PROCEDURESIMPLIFIEEMarche(item.marche_id) > 0">MARCHES/CONTRATS ATTRIBUE ISSUS DE LA PROCEDURE SIMPLIFIEE</h5>
-              
+    <template v-if="formData.ua_id !='' && formData.typeua_id !='' && formData.exo !=''">
+ <h5 style="text-align:center;color:#000000;font-size:20px" >MARCHES/CONTRATS ATTRIBUE ISSUS DE LA PROCEDURE SIMPLIFIEE</h5>
+              </template>
                 <div v-for="item in PROCEDURESIMPLIFIEE(formData.ua_id)" :key="item.id" class="widget-content">
  
     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
@@ -328,7 +326,6 @@ detail_marche
     // import { ModelListSelect } from "vue-search-select";
     // import "vue-search-select/dist/VueSearchSelect.css";
      import { formatageSomme } from "@/Repositories/Repository";
-
     export default {
         components: {
           
@@ -358,9 +355,7 @@ detail_marche
                 "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser",
                 "typeActeEffetFinanciers","personnaliseGetterMarcheBailleur","getterMandate",
                 "getActeEffetFinancierPersonnaliserContrat","getterCojos","getterDemandeAno","getterAnoDMPBailleur"]),
-
             ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-
             ...mapGetters('uniteadministrative',[
                 "plans_programmes",
                 "uniteAdministratives",
@@ -370,9 +365,7 @@ detail_marche
                 "getPersonnaliseBudgetGeneralParPersonnel",
                 "budgetEclate",
 "decomptefactures"
-
             ]),
-
             ...mapGetters("parametreGenerauxAdministratif", [
       "chapitres",
       "sections",
@@ -387,18 +380,15 @@ detail_marche
     ]),
 ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
             ...mapGetters('parametreGenerauxFonctionnelle',[
-
                 "plans_fonctionnels",
                 "afficheNiveauPlanFonctionnel"
             ]),
             ...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays","exercices_budgetaires"]),
             ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
-
             ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 ...mapGetters('gestionMarche', ['entreprises',"secteur_activites",'banques','comptes','getCompte',]),
   ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
-
 EtatMarche(){
       return id =>{
         if(id!=null && id!=""){
@@ -415,29 +405,21 @@ EtatMarche(){
       const acteAffet = vM.editActeEffetFinancier
       if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
       if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
-
       var dateF = new Date(acteAffet.date_fin_exe).getTime()
       var dateO = new Date(acteAffet.date_odre_service).getTime()
       var resultat = dateF - dateO
-
       var diffJour =  resultat / (1000 * 3600 * 24)
-
       if(isNaN(diffJour)) return null
-
       if(parseFloat(diffJour) < 0 ) return "durée invalide"
       vM.editActeEffetFinancier.duree=diffJour
       return  diffJour;
-
     },
   nombreJourTraitementCalucle(){
    let date = new Date();
         let aaaa = date.getFullYear();
        
         let cur_day = aaaa ;
-
         return cur_day
-
-
     
     
    },
@@ -645,9 +627,7 @@ afficheLibellePassationMarche(){
       }
     },
 // PROCEDURENORMALE(){
-
 //   return this.marches.filter(itme=>this.afficherEtatDuMarche(itme.marche_id) ==2  && itme.exercice_budget==this.formData.exo && itme.entreprise_id==this.formData.entrep_id && this.afficherIdTypeMarche(itme.marche_id)==this.formData.type_marche_id)
-
 // },
 FiltreUaParTypeUa(){
       return id =>{
@@ -754,7 +734,6 @@ afficherObjetMarche(){
       return id => {
         if (id != null && id != "") {
            const qtereel = this.sections.find(qtreel => qtreel.id == id);
-
       if (qtereel) {
          return qtereel.code_section.concat('  ', qtereel.nom_section);
        
@@ -810,21 +789,14 @@ let date = new Date();
         }else{
             jour = gg
         }
-
-
         if (mm < 10)
         {
             moi = "0" + mm;
         }else{
             moi=mm;
         }
-
-
         let cur_day =  aaaa + "-" + moi + "-" + jour;
-
         return cur_day
-
-
     
    
    },
@@ -862,12 +834,9 @@ let date = new Date();
     };
 </script>
 <style scoped>
-
     .tailgrand{
         width: 95%;
         margin: 0 -48%;
-
-
     }
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -884,7 +853,6 @@ font-size: 12px;
 text-align: center;
     }
     td{
-
 color:#000;
 font-size: 20px;
 text-align: center;
