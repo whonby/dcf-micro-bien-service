@@ -603,10 +603,10 @@ type.numimmatriculation
              </div>
 
           <div class="tab-pane active" id="EntreeEnStock" >
-           <!-- <div align="right">
+           <div align="right">
                 Recherche:
                 <input type="search" placeholder="IMMATRICULATION" v-model="search" />
-              </div> -->
+              </div>
             <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -633,7 +633,7 @@ type.numimmatriculation
                 <tbody>
                      <tr
                     class="odd gradeX"
-                    v-for="stock in partition(listeDesEquipementPar01(this.detail_Ua.uAdministrative_id),size)[page]"
+                    v-for="stock in partition(filteParImmatriculationVehicule,size)[page]"
                     :key="stock.id"
                   >
 
@@ -729,9 +729,9 @@ type.numimmatriculation
              <div class="pagination alternate">
                     <ul>
                         <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-                        <li  v-for="(titre, index) in partition(listeDesEquipementPar01(this.detail_Ua.uAdministrative_id),size).length" :key="index" :class="{ active : active_el == index }">
+                        <li  v-for="(titre, index) in partition(filteParImmatriculationVehicule,size).length" :key="index" :class="{ active : active_el == index }">
                             <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-                        <li :class="{ disabled : page == partition(listeDesEquipementPar01(this.detail_Ua.uAdministrative_id),size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+                        <li :class="{ disabled : page == partition(filteParImmatriculationVehicule,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
 
                     </ul>
            </div>
@@ -1008,16 +1008,16 @@ let date = new Date();
    
    },
 
-// listeDesEquipementPar01(this.detail_Ua.uAdministrative_id)() {
-//       const st = this.search.toLowerCase();
-//       return this.listeDesEquipementPar01(this.detail_Ua.uAdministrative_id).filter(type => {
-//         return (
+filteParImmatriculationVehicule() {
+      const st = this.search.toLowerCase();
+      return this.listeDesEquipementPar01(this.detail_Ua.uAdministrative_id).filter(type => {
+        return (
          
-//           type.numimmatriculation.toLowerCase().includes(st)
+          type.numimmatriculation.toLowerCase().includes(st)
          
-//         );
-//       });
-//     },
+        );
+      });
+    },
     filterMaterielListe() {
       const st = this.search1.toLowerCase();
       return this.listeDesEquipementPar03(this.detail_Ua.uAdministrative_id).filter(type => {

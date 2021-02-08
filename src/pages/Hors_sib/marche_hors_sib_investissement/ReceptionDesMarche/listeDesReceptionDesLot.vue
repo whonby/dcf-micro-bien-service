@@ -46,16 +46,7 @@
                                 <td class="taskOptions" style="font-size:14px;font-weight:bold;">
                                     {{LibelleTypeMarche(detail_marche.type_marche_id)}}
                                 </td>
-                                <!--<td class="taskOptions" style="font-size:14px;font-weight:bold;">
-                                     {{afficheModePassation(detail_marche.procedure_passation_id)}} -->
-                                   
-                               <!-- <span v-if="DisponibleBudgetaireApresLiquidation < 10000000 ">Procédure Simplifiée de demande de Cotation(PSC Sans comité)</span>
-                         <span v-else-if="DisponibleBudgetaireApresLiquidation < 30000000 ">Procédure Simplifiée de demande de Cotation(PSC Avec comité)</span>
-                         <span v-else-if="DisponibleBudgetaireApresLiquidation < 60000000 ">Procédure Simplifiée à compétition Limitée(PSL)</span>
-                         <span v-else-if="DisponibleBudgetaireApresLiquidation < 100000000 ">Procédure Simplifiée à compétition Ouverte(PSO)</span>
-                         <span v-else-if="DisponibleBudgetaireApresLiquidation > 100000000 ">Appel d'Offre Ouvert(AON ou AOI)</span>
-                         <span v-else></span> 
-                                </td>-->
+                             
                                 <td class="taskOptions" style="font-size:14px;font-weight:bold;">
                                     {{LibelleUniteAdministrative(detail_marche.unite_administrative_id)}}
                                 </td>
@@ -101,7 +92,77 @@
                          <div class="widget-content tab-content">
                           
                     <div id="tab1" class="tab-pane active">
-  <AjouterReceptionLot :marche="detail_marche"></AjouterReceptionLot>
+     <table class="table">
+              
+                                    <thead>
+                                    <tr>
+
+                                         
+                     <!-- <th>N° lot</th>
+                    
+                    <th>Entreprise</th> -->
+                    
+                     <th>Date Debut Execution{{detail_marche.id}}</th>
+                    
+                    <th>Date reception provisoire</th>
+                    <th>Date de reception définitive</th>
+                    
+                    <th>Durée d'execution</th>
+        
+                              
+                    <th>Ecart de démarrage</th>
+                    
+                    <th>Ecart de réception provisoire</th>
+                    <th>Ecart de réception définitive</th>
+                    <th>Ecart d'execution</th>
+                                
+                                <th colspan="3">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                         <tr class="odd gradeX" v-for="(type, index) in listeDesMarcheEnreception(detail_marche.id)" :key="type.id">
+                    <!-- <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{detail_marche.id || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{detail_marche.id || 'Non renseigné'}}</td> -->
+ <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.Date_debut_execution || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.Date_reception_provisoire || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.Date_reception_definitive || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.Duree_execution_reel || 'Non renseigné'}} Jours</td>
+                     <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.Ecart_demarrage || 'Non renseigné'}} jours</td>
+                     <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.Ecart_reception_provisoire || 'Non renseigné'}} jours</td>
+                     <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.Ecart_reception_definitive || 'Non renseigné'}} jours </td>
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.Ecart_execution || 'Non renseigné'}} jours</td>
+                    <td>
+                      <button class="btn btn-danger" @click="supprimerReception(type.id)">
+                        <span>
+                          <i class="icon icon-trash"></i> Supprimer
+                        </span>
+                      </button>
+                    </td>
+                  </tr>   
+                 
+                                    </tbody>
+                                
+                                </table>
           </div>
       
       </div>
@@ -289,7 +350,7 @@
                 <div class="controls">
                   <input
                       type="date"
-                      :value="formReception.Date_debut_execution"
+                     v-model="formReception.Date_debut_execution"
                       class="span3"
                       
                   />
@@ -304,7 +365,7 @@
                 <div class="controls">
                   <input
                       type="date"
-                      :value="formReception.Date_reception_provisoire"
+                    v-model="formReception.Date_reception_provisoire"
                       class="span3"
                       
                   />
@@ -319,7 +380,7 @@
                 <div class="controls">
                   <input
                       type="date"
-                        :value="formReception.Date_reception_definitive"
+                        v-model="formReception.Date_reception_definitive"
                       class="span3"
                       
                   />
@@ -334,13 +395,13 @@
                 <td>
 
               <div class="control-group">
-                <label class="control-label">Durée d'exécution réelle(f-E)</label>
+                <label class="control-label">Durée d'exécution réelle(F-E)</label>
                 <div class="controls">
                   <input
                       type="text"
-                         :value="formReception.Duree_execution_reel "
+                         :value="DureReelExecution"
                        class="span3"
-                      
+                      readonly
                   />
                   
                 </div>
@@ -349,13 +410,13 @@
              <td>
 
               <div class="control-group">
-                <label class="control-label">Ecart de réception provisoire</label>
+                <label class="control-label">Ecart de réception provisoire(F-B)</label>
                 <div class="controls">
                   <input
                       type="text"
-                       :value="formReception.Duree_execution_reel "
+                       :value="Ecartréceptionprovisoire"
                       class="span3"
-                      
+                      readonly
                   />
                   
                 </div>
@@ -363,13 +424,13 @@
             </td>
              <td>
               <div class="control-group">
-                <label class="control-label">Ecart de réception définitive</label>
+                <label class="control-label">Ecart de réception définitive(G-D)</label>
                 <div class="controls">
                   <input
                       type="text"
-                      :value="formReception.Ecart_reception_definitive"
+                      :value="Ecartdereceptiondefinitive"
                       class="span3"
-                      
+                      readonly
                   />
                   
                 </div>
@@ -383,77 +444,77 @@
                       type="text" :value="calculeDureEcart"
                       
                       class="span3"
-                      
+                      readonly
                   />
                   
                 </div>
               </div>
             </td>
-            
-            
-           
-           </tr>
-           <tr>
-               <td>
+            <td>
 
               <div class="control-group">
                 <label class="control-label">Ecart d'execution</label>
                 <div class="controls">
                   <input
                       type="text"
-                      
+                      :value="dureeExecution"
                       class="span3"
-                      
+                      readonly
                   />
                   
                 </div>
               </div>
             </td>
-             <td>
+            
+           
+           </tr>
+           <tr>
+               
+             <!-- <td>
 
               <div class="control-group">
-                <label class="control-label">date_debut_exectuion_definitif</label>
+                <label class="control-label">Date debut excution definitif</label>
                 <div class="controls">
                   <input
                       type="date"
-                      
+                      v-model="formReception.Date_reception_definitive"
                       class="span3"
                       
                   />
                   
                 </div>
               </div>
-            </td>
-            <td>
+            </td> -->
+            <!-- <td>
 
               <div class="control-group">
-                <label class="control-label">date_reception_provisoire_definitif</label>
+                <label class="control-label">Date reception provisoire definitif</label>
                 <div class="controls">
                   <input
                       type="date"
-                      
+                       v-model="formReception.Date_reception_provisoire"
                       class="span3"
                       
                   />
                   
                 </div>
               </div>
-            </td>
-            <td>
+            </td> -->
+            <!-- <td>
 
               <div class="control-group">
-                <label class="control-label">date_reception_definitive</label>
+                <label class="control-label">Date reception definitive</label>
                 <div class="controls">
                   <input 
                       type="date"
-                      
+                       v-model="formReception.Date_debut_execution"
                       class="span3"
                       
                   />
                   
                 </div>
               </div>
-            </td>
+            </td> -->
              	
                
                
@@ -467,7 +528,7 @@
     </div>
 
     <div class="modal-footer">
-      <a  @click.prevent="ajouterModalActeEffetFinancierLocal"
+      <a  @click.prevent="AjouteReceptionMarche"
           class="btn btn-primary"
           href="#"
       >Valider</a>
@@ -767,20 +828,22 @@
     </div>
   </div>
   </div>
+  <notifications  />
         </div>
+        
 </template>
 
 <script>
     import { mapGetters, mapActions } from "vuex";
     import moment from "moment";
     import {formatageSomme} from "../../../../Repositories/Repository"
-   import AjouterReceptionLot from "../../marche_hors_sib_investissement/ReceptionDesMarche/AjouterReceptionLot";
+  //  import AjouterReceptionLot from "../../marche_hors_sib_investissement/ReceptionDesMarche/AjouterReceptionLot";
   
   export default {
         name: 'compte',
         props:["macheid"],
         components:{
-         AjouterReceptionLot
+        //  AjouterReceptionLot
 
         },
         data() {
@@ -827,7 +890,7 @@ created() {
     console.log(this.appel_offre_marche)*/
 },
         computed: {
-            ...mapGetters("bienService", ["typeMarches",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+            ...mapGetters("bienService", ["receptionMarche","typeMarches",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -876,7 +939,25 @@ created() {
    
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+listeDesMarcheEnreception: function () {
+          return id => {
+              if (id != "") {
+                  // console.log("Marche leste acte effect finnancier")
+                  return this.receptionMarche.filter(idmarche => idmarche.id_marche == id)
+              }
+          }
+      },
 
+
+dureeExecution(){
+  const val = parseInt(this.DureReelExecution)-parseInt(this.afficherDureecontrac(this.detail_marche.id));
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+},
  Dureeexereel(){ 
       let vM=this;
       const acteAffet = vM.formReception
@@ -898,20 +979,53 @@ created() {
     },
 
      calculeDureEcart(){
-      var dateD = new Date( this.afficherDatedebutex(this.detail_marche.id)).getTime()
-   var dateR = new Date(this.formReception.Date_debut_execution).getTime()
+       let vM=this;
+      const acteAffet = vM.formReception
+      var dateD = new Date(this.afficherDatedebutex(this.detail_marche.id)).getTime()
+   var dateR = new Date(acteAffet.Date_debut_execution).getTime()
     
-    var diffTime = dateD - dateR 
+    var diffTime = dateR-dateD
     var diffJours = diffTime / (1000 * 3600 * 24)
       console.log(diffTime)
           if(isNaN(diffJours)) return null
 
     if(parseFloat(diffJours) < 0 ) return "durée invalide"
-        console.log(diffJours)
+        vM.formReception.Ecart_demarrage=this.diffJours
       return diffJours;
       
    },
+Ecartréceptionprovisoire(){
+       let vM=this;
+      const acteAffet = vM.formReception
+      var dateD = new Date(this.afficherDatereception(this.detail_marche.id)).getTime()
+   var dateR = new Date(acteAffet.Date_reception_provisoire).getTime()
+    
+    var diffTime = dateR-dateD
+    var diffJours = diffTime / (1000 * 3600 * 24)
+      console.log(diffTime)
+          if(isNaN(diffJours)) return null
 
+    if(parseFloat(diffJours) < 0 ) return "durée invalide"
+        vM.formReception.Ecart_reception_provisoire=this.diffJours
+      return diffJours;
+      
+   },
+   Ecartdereceptiondefinitive(){
+       let vM=this;
+      const acteAffet = vM.formReception
+      var dateD = new Date(this.afficherDatereceptiondefinitive(this.detail_marche.id)).getTime()
+   var dateR = new Date(acteAffet.Date_reception_definitive).getTime()
+    
+    var diffTime = dateR-dateD
+    var diffJours = diffTime / (1000 * 3600 * 24)
+      console.log(diffTime)
+          if(isNaN(diffJours)) return null
+
+    if(parseFloat(diffJours) < 0 ) return "durée invalide"
+        vM.formReception.Duree_execution_reel=this.diffJours
+      return diffJours;
+      
+   },
 afficheNumeroMarche() {
       return id => {
         if (id != null && id != "") {
@@ -1040,7 +1154,25 @@ afficheNumeroMarche() {
       return  diffJour;
 
     },
-            
+          DureReelExecution(){
+      let vM=this;
+      const acteAffet = vM.formReception
+      if(acteAffet.Date_debut_execution == acteAffet.Date_reception_provisoire &&  acteAffet.Date_reception_provisoire !=="" && acteAffet.Date_debut_execution !=="") return 1
+      if(acteAffet.Date_reception_provisoire =="" && acteAffet.Date_debut_execution =="") return null
+
+      var dateF = new Date(acteAffet.Date_reception_provisoire).getTime()
+      var dateO = new Date(acteAffet.Date_debut_execution).getTime()
+      var resultat = dateF - dateO
+
+      var diffJour =  resultat / (1000 * 3600 * 24)
+
+      if(isNaN(diffJour)) return null
+
+      if(parseFloat(diffJour) < 0 ) return "durée invalide"
+      vM.formReception.Duree_execution_reel=diffJour
+      return  diffJour;
+
+    },  
 
 
 
@@ -1200,13 +1332,23 @@ afficheMontantReelMarche() {
         }
       };
     },
+idActeEffect() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
 
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
         },
         methods: {
-            ...mapActions("bienService", [
-              "ajouterReception"
-               
-            ]),
+ 
+             ...mapActions('bienService',['supprimerActeEffetFinancier',"ajouterReception","supprimerReception","modifierActeEffet",
+      'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche2',"supprimerEntrepriseSousTraitance","modifierActeEffet"]),
  ...mapActions("uniteadministrative", [              
                 "modifierMontantBudgetaire",
                 "ajouterRealiteServiceFait",
@@ -1264,43 +1406,32 @@ afficherModalProcedureFacture() {
        ajouterModalActeEffetFinancierLocal(){
                 window.history.back();
             },
-     AjouterDecompte() {
+     AjouteReceptionMarche() {
       
       var nouvelObjet = {
         ...this.formReception,
-        date_fin_exe:this.afficherDatefinex(this.marcheid),
-        Ecart_reception_provisoire:this.Ecartreceptpro,
-        Ecart_reception_definitive:this.Ecartreceptdef,
-
-
-      //   marche_id:this.detail_Facture.marche_id,
-      //   facture_id:this.detail_Facture.id,
-      // nethtva:this.montantTVA,
-      // netttc:this.Montantapresretenues,
-      // parts_etat:this.MontantHTEtat,
-      // parts_bailleur:this.MontantHTBailleur,
-      // montantmarche:this.Montantapresretenues
+       id_marche:this.detail_marche.id,
+       Date_debut_execution:this.formReception.Date_debut_execution,
+       Date_reception_provisoire:this.formReception.Date_reception_provisoire,
+       Date_reception_definitive:this.formReception.Date_reception_definitive,
+       Duree_execution_reel:this.DureReelExecution,
+       Ecart_demarrage:this.calculeDureEcart,
+       Ecart_reception_provisoire:this.Ecartréceptionprovisoire,
+       Ecart_reception_definitive:this.Ecartdereceptiondefinitive,
+       Ecart_execution:this.dureeExecution
       };
-      // var ObjetActeFinancier = {
-      //   ...this.formReception,
-      //   date_fin_exe:this.afficherDatefinex(this.marcheid),
-      //   Ecart_reception_provisoire:this.Ecartreceptpro,
-      //   Ecart_reception_definitive:this.Ecartreceptdef,
+    var nouvelObjet1 = {
         
-
-      //   marche_id:this.detail_Facture.marche_id,
-      //   facture_id:this.detail_Facture.id,
-      // nethtva:this.montantTVA,
-      // netttc:this.Montantapresretenues,
-      // parts_etat:this.MontantHTEtat,
-      // parts_bailleur:this.MontantHTBailleur,
-      // montantmarche:this.Montantapresretenues
-      // };
-      this.ajouterDecompteFacture(nouvelObjet);
-    this.ajouterModalActeEffetFinancierLocal()
-      // this.formData = {
+       id:this.idActeEffect(this.detail_marche.id),
+       date_debut_exectuion_definitif:this.formReception.Date_debut_execution,
+       date_reception_provisoire_definitif:this.formReception.Date_reception_provisoire,
+       date_reception_definitive:this.formReception.Date_reception_definitive,
+     
+      };
+      this.ajouterReception(nouvelObjet)
+      this.modifierActeEffet(nouvelObjet1);
+   this.$('#ajouterAct').modal('hide');
       
-      // };
     },
 
 

@@ -140,10 +140,10 @@ nombreDeMarcheEnContratualisation(){
  },
  
   afficheMarcheResilier(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 3)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(this.afficheidTypeMarche(element.marche_id)) == 3)
 },
     nbreMarcheExecuter(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.afficheCodeTypeMarche(recuper.marche.type_marche_id) == 3).length
+  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.afficheCodeTypeMarche(this.afficheidTypeMarche(recuper.marche_id)) == 3).length
 },
 afficheNombreMarcheResilier(){
 return this.afficheMarcheResilier.length
@@ -189,7 +189,18 @@ montantMarchePrevu(){
         }
       };
     },
+afficheidTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.type_marche_id;
+      }
+      return 0
+        }
+      };
+    },
 
 
 afficheMarcheTerminer(){
