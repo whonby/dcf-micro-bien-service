@@ -3,6 +3,7 @@ const plans_budgetaires = state => state.plans_budgetaires.sort((a,b)=>(a.code>b
 
 export const getterTousPlanBudgetaire=state=>state.tousPlanBudgetaire
 
+export const getterTousActivite=state=>state.tousActivite
 
 
 export const derniereNivoPlanBudgetaire = state =>
