@@ -333,7 +333,7 @@ this.getRegimeImpositions()
     this.getRapport()
       this.getBudgeChager()
       this.getLigneExempter()
-      
+
       this.getExercicesBudgetaires()
       this.getTaux()
       this.getModePaiement()
@@ -372,7 +372,7 @@ this.getRegimeImpositions()
     this.getTypeUniteAdministrative()
     // this. getPlanActivite()
     this.getAllUniteZone()
-    
+
     this.getAllHistoriqueTransfert()
     this.getUnite()
     this.getZone()
@@ -385,7 +385,7 @@ this.getCommune()
 this.getChoixProcedure()
 this.getTransmission()
 this.getCotation()
-this.getOuverture()    
+this.getOuverture()
 this.getSanction()
 this.getAllRealiteServiceFait()
      this.getAllLiquidation()
@@ -398,7 +398,7 @@ this.getAllRealiteServiceFait()
 
 
 
-    
+
 
 this.getTypeCandidat();
 this.getTypeAppel()
@@ -407,10 +407,10 @@ this.getTypeAppel()
 
 
 
-    
+
       // this.getAllTypeTextes();
     this.getAllUniteAdministrative();
-     
+
      this.getAllBanqueUa()
      this.getAllDecompteFacture()
      this.getAllHistoriqueDecompteFacture()
@@ -446,7 +446,7 @@ this.getClassificationGradeFonction()
         this.getConges();
         this.allActeurDepense()
         this.getpaiementPersonnel()
-        
+
          this.getActeurFinContratAndActivite()
         this.getordrepaiement()
         this.getSalaire()
@@ -512,9 +512,9 @@ this.getAllHistoriqueBudgetGeneral()
        */
        this.getCategorieMission()
      this.getNormeMission()
-   
+
       this.getMission()
-       this.getHistoriqueMission() 
+       this.getHistoriqueMission()
 this.getAllBudgetGeneral()
 this.getAllTransfert()
  // debut du module de bien && service
@@ -578,7 +578,7 @@ this.getMembreCojo()
       this.getOrganeDecision()
     this.getMembreComiteEvaluation()
     this.getStructureDAO()
-
+this.getTousActivite()
         },
 
   computed:{
@@ -596,11 +596,11 @@ this.getMembreCojo()
     ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel","mandats"]),
 
        ...mapGetters("parametreGenerauxAdministratif", [
-             
+
                 "gestionModules"
             ]),
-            
-      
+
+
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation",
       "getterUniteAdministrativeByUser"]),
 
@@ -665,14 +665,14 @@ return objJson.id
 
     ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",'getGroupe',"getMenu","getModule",
     "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf","getAffectationGroupeUser","getServiceCF","getAffectationServiceCF"]),
-      ...mapActions('parametreGenerauxFonctionnelle', 
+      ...mapActions('parametreGenerauxFonctionnelle',
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix','getMotifPassation']),
 
     ...mapActions('parametreGenerauxSourceDeFinancement',['getSourceFinancement',
         'getTypeFinancement','getPlanSourceFinancement'
     ]),
    ...mapActions( 'parametreGenerauxBudgetaire', ['getStructureBudgetaire',
-   'getPlanBudgetaire',"getTousPlanBudgetaire"]),
+   'getPlanBudgetaire',"getTousPlanBudgetaire","getTousActivite"]),
    ...mapActions('parametreGenerauxActivite', [ 'getStructureActivite','getPlanActivite','getStructureInfrastructure','getPlanInfrastructure']),
    ...mapActions('parametreGenerauxProgrammeUnite',['getUnite', 'getZone']),
 
@@ -751,9 +751,9 @@ return objJson.id
       "getTransmissionVeh",
       "getAppreciation",
       "getFicheArticle"
-      
-      
-      
+
+
+
     ]),
  ...mapActions('horSib',['getMarcheHorSib',"getRealiteServiceHors","getOpProvisoire"]),
 
@@ -862,7 +862,7 @@ return objJson.id
       //         params:{id:}
       //     })
       // },
- 
+
   },
   mounted() {
     let pusher = new Pusher('44daa856e0753c75275a', {
@@ -924,7 +924,7 @@ h4{
 .square{
   width: 20px;
   height: 20px;
- 
+
   color: #FAFAFA;
   text-align: center;
   margin-right: 5px;

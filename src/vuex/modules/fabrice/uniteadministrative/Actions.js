@@ -324,7 +324,7 @@ export function ajouterUniteZone({ commit, dispatch }, nouveau) {
       telephone_fixe: nouveau.telephone_fixe,
       description_localisation: nouveau.description_localisation,
       quartier: nouveau.quartier,
-      
+
     }))
 
     .then(response => {
@@ -332,7 +332,7 @@ export function ajouterUniteZone({ commit, dispatch }, nouveau) {
         commit("AJOUTER_UNITE_ZONE", response.data);
         dispatch('getAllUniteZone')
         dispatch('getAllUniteAdministrative')
-       
+
         this.$app.$notify({
           title: 'Success',
           text: 'Enregistrement Effectué avec Succès!',
@@ -449,7 +449,7 @@ export function modifierTransfert({ commit, dispatch }, elementModifie) {
       motif:elementModifie.motif,
       observation:elementModifie.observation,
       date_motif:elementModifie.date_motif,
-      date_jours:elementModifie.date_jours, 
+      date_jours:elementModifie.date_jours,
       delaitraitement:elementModifie.delaitraitement,
       typefinancement_id:elementModifie.typefinancement_id,
       exerciceencours:elementModifie.exerciceencours
@@ -515,14 +515,14 @@ export function ajouterHistoriqueTransfert({ commit}, nouveau) {
       delaitraitement: nouveau.delaitraitement,
       aj_transfert: nouveau.aj_transfert,
       //  maj_transfert: nouveau.maj_transfert
-      
+
 
     }))
 
     .then(response => {
       if (response.status == 201) {
         commit("AJOUTER_HISTOTRANSFERT", response.data);
-       
+
 
         // this.$app.$notify({
         //   title: 'Success',
@@ -558,7 +558,7 @@ export function modifierHistoriqueTransfert({ commit}, nouveau) {
     }))
     .then(response => {
       commit("MODIFIER_HISTOTRANSFERT", response.data);
-    
+
       this.$app.$notify({
         title: 'Success',
         text: 'Modification Effectué avec Succès!',
@@ -572,7 +572,7 @@ export function supprimerHistoriqueTransfert({ commit}, id) {
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
       commit("SUPPRIMER_HISTOTRANSFERT", id);
-      
+
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete("/supprimerHistoTransfert/" + id).then(() => dialog.close());
     });
@@ -605,10 +605,10 @@ export function ajouterDirection({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .post("/ajouterDirectionUa", {
       	d_ua_id: nouveau.d_ua_id,
-    
+
       libelle: nouveau.libelle,
-     
-      
+
+
 
     }))
 
@@ -775,7 +775,7 @@ export function ajouterFonction({ commit, dispatch }, nouveau) {
         commit("AJOUTER_FONCTION", response.data);
         dispatch('getAllServiceua')
         dispatch('getAllFonction')
-        
+
 
         this.$app.$notify({
           title: 'Success',
@@ -860,6 +860,22 @@ export function ajouterBudgetCharge({ commit, dispatch }, nouveau) {
         });
 }
 
+export function modificationBudgetCharge({ commit, dispatch }, nouveau) {
+    return asyncLoading(axios
+        .post("/budgetChargerModification",nouveau))
+
+        .then(response => {
+            commit("AJOUTER_BUDGET_CHARGE", response.data);
+            dispatch('getAllBudgetGeneral')
+            dispatch('getAllUniteAdministrative')
+            dispatch('getBudgeChager')
+            this.$app.$notify({
+                title: 'Success',
+                text: 'Enregistrement Effectué avec Succès!',
+                type: "success"
+            })
+        });
+}
 
 
 
@@ -1000,7 +1016,7 @@ export function ajouterRealiteServiceFait({ commit }, nouveau) {
     .post("/ajouterRealiteFait", nouveau)).then(response => {
       if (response.status == 201) {
         commit("AJOUTER_REALITE_SERVICE_FAIT", response.data);
-       
+
       }
     }).catch(error => console.log(error))
 }
@@ -1008,8 +1024,8 @@ export function ajouterRealiteServiceFait({ commit }, nouveau) {
 // modifier
 export function modifierRealiteServiceFait({ commit }, nouveau) {
   asyncLoading(axios.put("/modifierRealiteFait/" + nouveau.id , {
-  
-  
+
+
       	section_id: nouveau.section_id,
       marche_id: nouveau.marche_id,
       fournisseur_id: nouveau.fournisseur_id,
@@ -1029,10 +1045,10 @@ export function modifierRealiteServiceFait({ commit }, nouveau) {
     marchetype: nouveau.marchetype,
     motif_controleur: nouveau.motif_controleur
     }
-  
+
   )).then(response => {
       commit("MODIFIER_REALITE_SERVICE_FAIT", response.data);
-    
+
       this.$app.$notify({
         title: 'Success',
         text: 'Modification Effectué avec Succès!',
@@ -1047,7 +1063,7 @@ export function supprimerRealiteServiceFait({ commit}, id) {
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
       commit("SUPPRIMER_REALITE_SERVICE_FAIT", id);
-    
+
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete("/supprimerRealiteFait/" + id).then(() => dialog.close());
     });
@@ -1072,7 +1088,7 @@ export function ajouterLiquidation({ commit }, nouveau) {
     .post("/ajouterLiquidation", nouveau)).then(response => {
       if (response.status == 201) {
         commit("AJOUTER_LIQUIDATION", response.data);
-        
+
       }
     }).catch(error => console.log(error))
 }
@@ -1081,7 +1097,7 @@ export function ajouterLiquidation({ commit }, nouveau) {
 export function modifierLiquidation({ commit, dispatch}, nouveau) {
   asyncLoading(axios
     .put("/modifierLiquidation/" + nouveau.id, {
-      
+
       numero_bon_manuel: nouveau.numero_bon_manuel,
       numero_demande: nouveau.numero_demande,
       exo_id: nouveau.exo_id,
@@ -1100,7 +1116,7 @@ export function modifierLiquidation({ commit, dispatch}, nouveau) {
       decision_emetteur: nouveau.decision_emetteur,
       nom_emetteur: nouveau.nom_emetteur,
       	date_emetteur: nouveau.date_emetteur,
-      
+
       observation_emetteur: nouveau.observation_emetteur,
        decision_ordonnateur: nouveau.decision_ordonnateur,
       observation_ordonnateur: nouveau.observation_ordonnateur,
@@ -1171,8 +1187,8 @@ export function ajouterStructureOrganigrammeUa({ commit, dispatch }, nouveau) {
       ua_id: nouveau.ua_id,
       niveau: nouveau.niveau,
       libelle: nouveau.libelle,
-      
-      
+
+
     }))
 
     .then(response => {
@@ -1180,7 +1196,7 @@ export function ajouterStructureOrganigrammeUa({ commit, dispatch }, nouveau) {
         commit("AJOUTER_STRUCTURE_ORGANIGRAMME_UA", response.data);
         dispatch('getStructureOrganigrammeUa')
         dispatch('getAllUniteAdministrative')
-       
+
         this.$app.$notify({
           title: 'Success',
           text: 'Enregistrement Effectué avec Succès!',
@@ -1340,7 +1356,7 @@ export function ajouterBudgetEclate({ commit, dispatch }, nouveau) {
       ligneeconomique_id: nouveau.ligneeconomique_id,
       grandenature_id: nouveau.grandenature_id,
       dotation: nouveau.dotation,
-      
+
     }))
 
     .then(response => {
@@ -1569,7 +1585,7 @@ export function modifierStockArticle({ commit ,dispatch}, nouveau) {
       .then(response => {
           commit("MODIFIER_STOCK_ARTICLE", response.data);
           dispatch('getStockArticle')
-          
+
           this.$app.$notify({
               title: 'Success',
               text: 'Modification Effectué avec Succès!',
