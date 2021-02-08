@@ -591,7 +591,7 @@ reference_marche
                 <i class="icon-th"></i>
               </span>
 
-              <h5>Liste des March&eacute;s  <code>({{marcheHorSibFiltre.length}})</code>  </h5>
+              <h5>Liste des March&eacute;s PPM <code>({{marcheHorSibFiltre.length}})</code>  </h5>
               <div align="right">
                 Recherche:
                 <input type="search"  v-model="search"  placeholder=" saisir objet"/>
@@ -1039,6 +1039,7 @@ ligneBudgeteyuy() {
         }
       };
     },
+
 
   //  afficheMarcheHorsPPM(){
   //    return this.printMarcheNonAttribue.filter(items=>items.sib==1);
