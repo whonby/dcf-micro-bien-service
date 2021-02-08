@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container-fluid" >
+        <div class="container-fluid" style="margin-top: -20px">
             <div class="row-fluid">
                 <div class="span12">
                     <div class="widget-box">
@@ -18,9 +18,50 @@
                                 </div>
                                 <div class="widget-content tab-content">
                                     <div id="tab1" class="tab-pane active">
-                                        <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end. </p>
+                                        <div align="right">
+                                            <button class="btn btn-default" @click="tableToExcel('table', 'Modfication')">
+                                                Exporte Excel
+                                            </button>
+                                        </div>
+                                        <table class="table table-bordered table-striped" ref="table" id="loremTable" summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
+                                            <thead>
+                                            <tr>
+                                                <th>UA</th>
+                                                <th>Activite</th>
+                                                <th>Ligne</th>
+                                                <th>Dotation AE Initial </th>
+                                                <th>Dotation CP Initial</th>
+                                                <th>Variation AE</th>
+                                                <th>Variation CP</th>
+                                                <th>Dotation Actuel AE</th>
+                                                <th>Dotation Actuel CP</th>
+                                                <th>Cumule AE</th>
+                                                <th>Cumule CP</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr v-for="item in ListeBudgetUaModifier" :key="'LIS'+item.id">
+                                                <td>{{uaBudget(item.ua_id)}}</td>
+                                                <td>{{activiteBudget(item.activite_id)}}</td>
+                                                <td>{{ligneBudget(item.economique_id)}}</td>
+                                                <td>
+                                                    {{formatageSomme(parseFloat(budgetInite(item.Dotation_Initiale,item.cumul_ae)))}}
+                                                </td>
+                                                <td>{{formatageSomme(parseFloat(budgetInite(item.cp,item.cumul_cp)))}}</td>
+                                                <td>{{formatMoney(parseFloat(item.variation_ae))}}</td>
+                                                <td>
+                                                    {{formatMoney(parseFloat(item.varisation_cp))}}
+                                                </td>
+                                                <td>{{formatMoney(parseFloat(item.Dotation_Initiale))}}</td>
+                                                <td>{{formatMoney(parseFloat(item.cp))}}</td>
+                                                <td>{{formatMoney(parseFloat(item.cumul_ae))}}</td>
+                                                <td>{{formatMoney(parseFloat(item.cumul_cp))}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <div id="tab2" class="tab-pane" style="height: 800px !important;">
+                                    <div id="tab2" class="tab-pane" style="height: 1025px !important;">
                                        <table class="table">
                                            <tr>
                                                <td>
@@ -47,6 +88,10 @@
 
                                                            />
                                                        </div>
+                                                   </div>
+                                                   <div class="control-group">
+                                                       <label class="control-label">Fichier act</label>
+                                                       <input type="file"   @change="OnchangeFichier" />
                                                    </div>
                                                </td>
 
@@ -92,54 +137,204 @@
 
                                                    </model-list-select>
                                                </td>
+                                               <td>
+                                                   <label>Activite</label>
+                                                   <model-list-select style="background-color: #fff;"
+                                                                      class="wide"
+                                                                      :list="listeActiviteUA(ua_id)"
+                                                                      v-model="formData.activite_id"
+                                                                      option-value="id"
+                                                                      option-text="lib"
+                                                                      placeholder="Activite"
+                                                   >
 
+                                                   </model-list-select>
+                                               </td>
                                                <td>
                                                    <div class="control-group">
-                                                       <label class="control-label">Dotation initiale</label>
+                                                       <label class="control-label">Dotation initiale AE</label>
                                                        <div class="controls">
-<!--                                                           <input-->
-<!--                                                                   type="text"-->
-<!--                                                                   v-model="formData.total_dotation_initial"-->
-<!--                                                                   class="span"-->
 
-<!--                                                           />-->
-                                                           <money  v-model="formData.total_dotation_initial" readOnly></money>
+                                                           <money  :value="activiteDotationInitialAE(ua_id,formData.activite_id)" readOnly></money>
                                                        </div>
                                                    </div>
 
                                                </td>
                                                <td>
                                                    <div class="control-group">
-                                                       <label class="control-label">Total variation</label>
+                                                       <label class="control-label">Dotation initiale CP</label>
+                                                       <div class="controls">
+                                                           <!--                                                           <input-->
+                                                           <!--                                                                   type="text"-->
+                                                           <!--                                                                   v-model="formData.total_dotation_initial"-->
+                                                           <!--                                                                   class="span"-->
+
+                                                           <!--                                                           />-->
+                                                           <money  :value="activiteDotationInitialCP(ua_id,formData.activite_id)" readOnly></money>
+                                                       </div>
+                                                   </div>
+
+                                               </td>
+                                           </tr>
+                                           <tr>
+                                               <td>
+                                                   <div class="control-group">
+                                                       <label class="control-label">Total variation AE</label>
                                                        <div class="controls">
 <!--                                                           <input-->
 <!--                                                                   type="text"-->
 <!--                                                                   v-model="formData.total_variation"-->
 <!--                                                                   class="span"-->
 <!--                                                           />-->
-                                                           <money  v-model="formData.total_variation" readOnly></money>
+                                                           <money  :value="totalVariationAE" readOnly></money>
                                                        </div>
                                                    </div>
                                                </td>
                                                <td>
                                                    <div class="control-group">
-                                                       <label class="control-label">Total Dotation variable </label>
+                                                       <label class="control-label">Total variation CP</label>
+                                                       <div class="controls">
+                                                           <money  :value="totalVariationCP" readOnly></money>
+                                                       </div>
+                                                   </div>
+                                               </td>
+                                               <td>
+                                                   <div class="control-group">
+                                                       <label class="control-label">Total Dotation AE </label>
                                                        <div class="controls">
 <!--                                                           <input-->
 <!--                                                                   type="text"-->
 <!--                                                                   v-model="formData.total_dotation_finale"-->
 <!--                                                                   class="span"-->
 <!--                                                           />-->
-                                                           <money   v-model="formData.total_dotation_finale" readOnly></money>
+                                                           <money   :value="totalActiveDotationAE" readOnly></money>
                                                        </div>
                                                    </div>
                                                </td>
-                                               <td></td>
+                                               <td>
+                                                   <div class="control-group">
+                                                       <label class="control-label">Total Dotation CP </label>
+                                                       <div class="controls">
+                                                           <!--                                                           <input-->
+                                                           <!--                                                                   type="text"-->
+                                                           <!--                                                                   v-model="formData.total_dotation_finale"-->
+                                                           <!--                                                                   class="span"-->
+                                                           <!--                                                           />-->
+                                                           <money  :value="totalActiveDotationCP" readOnly></money>
+                                                       </div>
+                                                   </div>
+                                               </td>
+
                                            </tr>
 
-
                                        </table>
+                                        <table class="table" v-if="ligne_selectionne.length>0">
+                                            <thead>
+                                            <tr>
+                                                <th>Ligne</th>
+                                                <th>Dotation AE</th>
+                                                <th>Dotation CP</th>
+                                                <th>Variation AE</th>
+                                                <th>Variation CP</th>
+                                                <th>Dotation Final AE</th>
+                                                <th>Dotation Final CP</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr v-for="item in ligne_selectionne" :key="'LO'+item.id">
+                                                <td>{{item.libele_ligne}}</td>
+                                                <td>{{formatMoney(parseFloat(item.dotationAE))}}</td>
+                                                <td>
+                                                    {{formatMoney(parseFloat(item.dotationCP))}}
+                                                </td>
+                                                <td>{{formatMoney(parseFloat(item.variationAE))}}
 
+                                                </td>
+                                                <td>{{formatMoney(parseFloat(item.variationCP))}}
+                                                 </td>
+                                                <td>{{formatMoney(parseFloat(item.dotationFinalae))}}
+                                                    </td>
+                                                <td>
+                                                    {{formatMoney(parseFloat(item.dotationFinalcp))}}
+                                                </td>
+                                                <td> <button @click.prevent="supprimerLigne(item.ligne)"  class="btn btn-danger ">
+                                                    <span class=""><i class="icon-trash">Supprimer</i></span></button></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table"> <tr>
+                                            <td>
+                                                <label>Ligne </label>
+                                                <model-list-select style="background-color: #fff;"
+                                                                   class="wide"
+                                                                   :list="ligneActivite(ua_id,formData.activite_id)"
+                                                                   v-model="formData.economique_id"
+                                                                   option-value="id"
+                                                                   option-text="lib"
+                                                                   placeholder="Ligne"
+                                                >
+
+                                                </model-list-select>
+
+                                                <div class="control-group">
+                                                    <label class="control-label"></label>
+                                                    <button class="btn btn-primary" @click="ajouterLigne(formData.economique_id)">Ajouter La ligne</button>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div class="control-group">
+                                                    <label class="control-label">Dotation AE</label>
+                                                    <div class="controls">
+                                                        <money  :value="ligneDotationInitialAE(ua_id,formData.activite_id,formData.economique_id)" readOnly></money>
+                                                    </div>
+                                                </div>
+
+                                                <div class="control-group">
+                                                    <label class="control-label">Dotation CP</label>
+                                                    <div class="controls">
+                                                        <money  :value="ligneDotationInitialCP(ua_id,formData.activite_id,formData.economique_id)" readOnly></money>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="control-group">
+                                                    <label class="control-label">Varition AE </label>
+                                                    <div class="controls">
+
+                                                        <money   v-model="variation_ae" ></money>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Variation CP </label>
+                                                    <div class="controls">
+
+                                                        <money   v-model="variation_cp" ></money>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="control-group">
+                                                    <label class="control-label">Dotation Finale AE </label>
+                                                    <div class="controls">
+
+                                                        <money   :value="dotationFinalAE" readOnly></money>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Dotation Finale CP </label>
+                                                    <div class="controls">
+
+                                                        <money   :value="dotationFinalCP" readOnly></money>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                        </tr></table>
+<div align="center">
+    <button class="btn btn-danger" @click="modificationBudget">Valider la modification</button>
+</div>
 
                                     </div>
 
@@ -189,6 +384,9 @@
                 section:"",
                 ua_id:"",
                 grand_nature:"",
+                ligne_selectionne:[],
+                variation_ae:'',
+                variation_cp:'',
                 formData:{
                     section:"",
                     date_act:"",
@@ -199,8 +397,22 @@
                     total_dotation_initial:"",
                     total_variation:"",
                     total_dotation_finale:"",
-
+                    activite_id:"",
+                    economique_id:"",
+                    date_modif:"",
                 },
+                uri :'data:application/vnd.ms-excel;charset=UTF-8;base64,',
+                template:'<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+                base64: function(s){ return window.btoa(unescape(encodeURIComponent(s))) },
+                format: function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) },
+                namePDF: "",
+                uploadPercentage:0,
+                fichierPDF: "",
+                imagePDF:"",
+                selectedFile:"",
+                namePDFDemandeAno: "",
+                fichierPDFDemandeAno: "",
+                imagePDFDemandeAno:"",
                 info_status_marche:"",
                 tableMarcheStatue:"",
                 listeDesMarchePasStatus:'',
@@ -239,7 +451,7 @@
 
         },
         created(){
-            console.log(this.listePlanBudgetGetataire)
+           this.formData.date_modif=this.dateJour
         },
         computed: {
             ...mapGetters("uniteadministrative", [
@@ -257,7 +469,7 @@
                 "plans_programmes",
                 "natures_sections",
                 "grandes_natures"]),
-            ...mapGetters( 'parametreGenerauxBudgetaire', ["getterTousPlanBudgetaire"]),
+            ...mapGetters( 'parametreGenerauxBudgetaire', ["getterTousPlanBudgetaire","getterTousActivite"]),
             ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise",
                 "getterImageMarche","acteEffetFinanciers","getActeEffetFinancierPersonnaliser45","typeMarches","avenants",]),
             ...mapGetters("Utilisateurs", ["getterUtilisateur","getterRoles"]),
@@ -272,6 +484,20 @@
             },
             noDCfNoAdmin:noDCfNoAdmin,
             dcf:dcf,
+
+            dateJour() {
+                let d = new Date(),
+                    month = '' + (d.getMonth() + 1),
+                    day = '' + d.getDate(),
+                    year = d.getFullYear();
+
+                if (month.length < 2)
+                    month = '0' + month;
+                if (day.length < 2)
+                    day = '0' + day;
+
+                return [year, month, day].join('-');
+            },
             regions(){
                 // console.log(this.localisations_geographiques.filter(item=>item.structure_localisation_geographique.niveau==2))
                 return this.localisations_geographiques.filter(item=>{
@@ -279,6 +505,60 @@
                         return item
                     }
                 });
+            },
+            budgetUnitePasAdmin(){
+               let vm=this;
+               let connection=[]
+                this.budgetGeneral.filter(item=>item.actived==1).forEach(function (val) {
+                       let _objet=vm.filtre_unite_admin.find(item=>item.id==val.ua_id)
+                    if(_objet!=undefined){
+                        connection.push(val)
+                    }
+                    }
+                )
+                return connection
+            },
+
+            ListeBudgetUaModifier(){
+               return this.budgetUnitePasAdmin.filter(item=>item.modifier==1)
+            },
+            uaBudget(){
+              return ua_id=>{
+                  if(ua_id){
+                      let uniteAd=this.uniteAdministratives.find(item=>item.id==ua_id)
+                      return uniteAd.libelle
+                  }
+                  return null
+              }
+            },
+            activiteBudget(){
+              return activite_id=>{
+                  if(activite_id){
+                     let objet =this.getterTousActivite.find(item=>item.id==activite_id)
+                      if(objet!=undefined){
+                       return objet.code+' '+objet.libelle
+                      }
+                  return null
+                  }
+                  return null
+              }
+            },
+            budgetInite(){
+                 return (montanTotal,cumul)=>{
+                     return parseFloat(montanTotal) - parseFloat(cumul)
+                 }
+            },
+            ligneBudget(){
+                return economique_id=>{
+                    if(economique_id){
+                        let objet =this.getterTousPlanBudgetaire.find(item=>item.id==economique_id)
+                        if(objet!=undefined){
+                            return objet.code+' '+objet.libelle
+                        }
+                        return null
+                    }
+                    return null
+                }
             },
             filtre_unite_admin() {
                 if(this.noDCfNoAdmin){
@@ -336,27 +616,369 @@
             },
             listePlanBudgetGetataire(){
                 return this.getterTousPlanBudgetaire.filter(item=>item.parent!=null)
+            },
+            budgetUniteAdmin(){
+                return ua_id=>{
+                    if(ua_id){
+                        console.log(ua_id)
+                       return this.budgetGeneral.filter(item=>{
+                           if(item.	ua_id==ua_id && item.actived==1){
+                               return item
+                           }
+                       })
+                    }
+                    return []
+                }
+            },
+
+            listeActiviteUA(){
+                return ua_id=>{
+                    if(ua_id!=""){
+                        let collection=[]
+                        let vm=this
+                        let objeBudget=this.budgetUniteAdmin(ua_id)
+                        objeBudget.forEach(function (val) {
+                            let activite=vm.getterTousActivite.find(item=>item.id==val.activite_id)
+                            let ob=collection.find(item=>item.id==val.activite_id)
+                            if(ob==undefined){
+                                let act={
+                                    ...activite,
+                                    lib:activite.code+" "+activite.libelle
+                                }
+                                collection.push(act)
+                            }
+                        })
+                        return collection
+                    }
+                    return []
+                }
+            },
+            ligneActivite(){
+                return (ua_id,activite_id)=>{
+                    if(ua_id!="" && activite_id!=""){
+                        let collection=[]
+                        let vm=this
+                        let objeBudget=this.budgetUniteAdmin(ua_id)
+
+                        let objet_activite=objeBudget.filter(item=>item.activite_id==activite_id)
+                        objet_activite.forEach(function (val) {
+                            let ligne=vm.getterTousPlanBudgetaire.find(item=>item.id==val.economique_id)
+                            let ob=collection.find(item=>item.id==val.economique_id)
+                            if(ob==undefined){
+                                let act={
+                                    ...ligne,
+                                    lib:ligne.code+" "+ligne.libelle
+                                }
+                                collection.push(act)
+                            }
+                        })
+                        return collection
+                    }
+                    return []
+                }
+            },
+
+            activiteDotationInitialAE(){
+                return (ua_id,activite_id)=>{
+                    if(ua_id!="" && activite_id!=""){
+
+                        let objeBudget=this.budgetUniteAdmin(ua_id)
+
+                        let objet_activite=objeBudget.filter(item=>item.activite_id==activite_id)
+                        let initeVal = 0;
+                        let montant=objet_activite.reduce(function (total, currentValue) {
+
+                            return total + parseFloat(currentValue.Dotation_Initiale) ;
+                        }, initeVal);
+                        return montant
+                    }
+                    return 0
+                }
+            },
+            activiteDotationInitialCP(){
+                return (ua_id,activite_id)=>{
+                    if(ua_id!="" && activite_id!=""){
+
+                        let objeBudget=this.budgetUniteAdmin(ua_id)
+
+                        let objet_activite=objeBudget.filter(item=>item.activite_id==activite_id)
+                        let initeVal = 0;
+                        let montant=objet_activite.reduce(function (total, currentValue) {
+
+                            return total + parseFloat(currentValue.cp) ;
+                        }, initeVal);
+                        return montant
+                    }
+                    return 0
+                }
+            },
+            ligneDotationInitialAE(){
+                return (ua_id,activite_id,economique_id)=>{
+                    if(ua_id!="" && activite_id!=""){
+
+                        let objeBudget=this.budgetUniteAdmin(ua_id)
+
+                        let objet_activite=objeBudget.filter(item=>{
+                            if(item.activite_id==activite_id && item.economique_id==economique_id){
+                                return item
+                            }
+                        })
+                        let initeVal = 0;
+                        let montant=objet_activite.reduce(function (total, currentValue) {
+
+                            return total + parseFloat(currentValue.Dotation_Initiale) ;
+                        }, initeVal);
+                        return montant
+                    }
+                    return 0
+                }
+            },
+            ligneDotationInitialCP(){
+                return (ua_id,activite_id,economique_id)=>{
+                    if(ua_id!="" && activite_id!=""){
+
+                        let objeBudget=this.budgetUniteAdmin(ua_id)
+
+                        let objet_activite=objeBudget.filter(item=>{
+                            if(item.activite_id==activite_id && item.economique_id==economique_id){
+                                return item
+                            }
+                        })
+                        let initeVal = 0;
+                        let montant=objet_activite.reduce(function (total, currentValue) {
+
+                            return total + parseFloat(currentValue.cp) ;
+                        }, initeVal);
+                        return montant
+                    }
+                    return 0
+                }
+            },
+            dotationFinalAE(){
+                let montant_ae=this.ligneDotationInitialAE(this.ua_id,this.formData.activite_id,this.formData.economique_id)
+                let montant=parseFloat(montant_ae) + parseFloat(this.variation_ae)
+                return montant
+            },
+            dotationFinalCP(){
+                let montant_cp=this.ligneDotationInitialCP(this.ua_id,this.formData.activite_id,this.formData.economique_id)
+                let montant=parseFloat(montant_cp) + parseFloat(this.variation_cp)
+                return montant
+            },
+
+            totalVariationAE(){
+                let initeVal=0
+                let montantVariationAELigne=this.ligne_selectionne.reduce(function (total, currentValue) {
+                    return total + parseFloat(currentValue.variationAE) ;
+                }, initeVal);
+
+                let montant=parseFloat(montantVariationAELigne) + parseFloat(this.variation_ae)
+                return montant
+            },
+            totalVariationCP(){
+                let initeVal=0
+                let montantVariationAELigne=this.ligne_selectionne.reduce(function (total, currentValue) {
+                    return total + parseFloat(currentValue.variationCP) ;
+                }, initeVal);
+                let montant=parseFloat(montantVariationAELigne) + parseFloat(this.variation_cp)
+                return montant
+            },
+            totalActiveDotationAE(){
+               let montant=parseFloat(this.activiteDotationInitialAE(this.ua_id,this.formData.activite_id)) + parseFloat(this.totalVariationAE)
+           return montant
+            },
+            totalActiveDotationCP(){
+                let montant=parseFloat(this.activiteDotationInitialCP(this.ua_id,this.formData.activite_id)) + parseFloat(this.totalVariationCP)
+                return montant
             }
 
         }
         ,
         methods:{
             ...mapActions("bienService", ["ajouterTableauBordFiltre","ajouterInfoTableauBordFiltre"]),
-
+            ...mapActions("uniteadministrative", [
+                "modificationBudgetCharge"
+            ]),
             formatageSomme:formatageSomme,
 
+            ajouterLigne(id){
+         //  console.log(id)
 
+                if (id==""){
+
+                    this.$notify({
+                        title: 'ERROR',
+                        text: "Veuillez renseigne la ligne ",
+                        type:"error"
+                    })
+
+                    return null
+                }
+                let ligne=this.getterTousPlanBudgetaire.find(item=>item.id==id)
+
+                let obj_sele=this.ligne_selectionne.find(item=>item.ligne==id)
+                if (obj_sele==undefined) {
+                    let obje={
+                        ligne:id,
+                        libele_ligne:ligne.code+" "+ligne.libelle,
+                        dotationAE:this.ligneDotationInitialAE(this.ua_id,this.formData.activite_id,this.formData.economique_id),
+                        dotationCP:this.ligneDotationInitialCP(this.ua_id,this.formData.activite_id,this.formData.economique_id),
+                        variationAE:parseFloat(this.variation_ae),
+                        variationCP:parseFloat(this.variation_cp),
+                        dotationFinalcp:this.dotationFinalCP,
+                        dotationFinalae:this.dotationFinalAE,
+
+                    }
+                    this.ligne_selectionne.unshift(obje)
+                    this.formData.economique_id=''
+                    this.variation_ae=0
+                    this.variation_cp=0
+
+                    this.$notify({
+                        title: 'Success',
+                        text: "Ligne ajouter",
+                        type:"success"
+                    })
+                    return null
+                }
+
+                if(obj_sele!=undefined){
+                    this.$notify({
+                        title: 'ERROR',
+                        text: obj_sele.libele_ligne+", à ete deja ajouter",
+                        type:"error"
+                    })
+
+                    return null
+                }
+                this.$notify({
+                    title: 'ERROR',
+                    text: "une erreur c'est produit lors de l'ajouter ",
+                    type:"error"
+                })
+
+                return null
+
+            },
+            supprimerLigne(id){
+                this.ligne_selectionne=this.ligne_selectionne.filter(item=>item.ligne!=id)
+
+            },
+
+            modificationBudget(){
+                console.log(this.ligne_selectionne.length)
+                  if(this.ligne_selectionne.length<0){
+                      this.$notify({
+                          title: 'ERROR',
+                          text: "Veuillez renseigne la ligne ",
+                          type:"error"
+                      })
+
+                      return null
+                  }
+
+                if(this.formData.numero_act==""){
+                    this.$notify({
+                        title: 'ERROR',
+                        text: "Veuillez renseigne le numero de l'act ",
+                        type:"error"
+                    })
+
+                    return null
+                }
+
+                if(this.formData.date_act==""){
+                    this.$notify({
+                        title: 'ERROR',
+                        text: "Veuillez renseigne la date de l'act ",
+                        type:"error"
+                    })
+
+                    return null
+                }
+
+                // const formData = new FormData();
+                // formData.append('fichier', this.selectedFile, this.selectedFile.name);
+                // formData.append('date_modif',this.formData.date_act);
+                // formData.append('date_act',this.formData.date_act);
+                // formData.append('numero_act',this.formData.numero_act)
+                // for (var i = 0; i < this.ligne_selectionne.length; i++) {
+                //     formData.append("budget_modification[]",this.ligne_selectionne[i])
+                // }
+let objet={
+     ...this.formData,
+    budget_modification:this.ligne_selectionne,
+}
+                console.log(objet)
+                this.modificationBudgetCharge(objet);
+                this.ligne_selectionne=[]
+                this.formData.economique_id=''
+                this.variation_ae=0
+                this.variation_cp=0
+
+                this.formData={
+                    section:"",
+                        date_act:"",
+                        numero_act:"",
+                        titre:"",
+                        ua_id:"",
+                        grande_nature_id:"",
+                        total_dotation_initial:"",
+                        total_variation:"",
+                        total_dotation_finale:"",
+                        activite_id:"",
+                        economique_id:"",
+                        date_modif:this.dateJour,
+                }
+            },
+            OnchangeFichier(e) {
+                const files = e.target.files;
+                this.selectedFile = event.target.files[0];
+                console.log(this.selectedFile)
+                Array.from(files).forEach(file => this.addFichier(file));
+            },
+            addFichier(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = e => {
+                    vm.imagePDFDemandeAno = "pdf.png";
+                    vm.namePDFDemandeAno = file.name;
+                    vm.fichierPDFDemandeAno = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+            ,
+            tableToExcel(table, name){
+                if (!table.nodeType) table = this.$refs.table
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+                window.location.href = this.uri + this.base64(this.format(this.template, ctx))
+            },
+            formatMoney(amount, decimalCount = 0, decimal = ".", thousands = ".") {
+                try {
+                    decimalCount = Math.abs(decimalCount);
+                    decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+                    const negativeSign = amount < 0 ? "-" : "";
+
+                    let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+                    let j = (i.length > 3) ? i.length % 3 : 0;
+
+                    return negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "")+" F CFA";
+                } catch (e) {
+                    console.log(e)
+                    return null
+                }
+            },
 
 
         },
         watch: {
             ua_id:function (val) {
                this.formData.ua_id=val
-                this.formData.total_dotation_initial=this.budgetInitialPasUa(val,this.formData.grande_nature_id)
+               // this.formData.total_dotation_initial=this.budgetInitialPasUa(val,this.formData.grande_nature_id)
             },
             grand_nature:function (val) {
               this.formData.grande_nature_id=val
-                this.formData.total_dotation_initial=this.budgetInitialPasUa(this.formData.ua_id,val)
+               // this.formData.total_dotation_initial=this.budgetInitialPasUa(this.formData.ua_id,val)
             }
         },
     }

@@ -7,7 +7,7 @@ const GET_STRUCTURE_BUDGETAIRE = (state , tableau_structure_budgetaire) => {
 const AJOUTER_STRUCTURE_BUDGETAIRE = (state , nouveuaObjet) => {
     state.structures_budgetaires.unshift(nouveuaObjet)
 }
-// modifier structure budgetaire 
+// modifier structure budgetaire
 const MODIFIER_STRUCTURE_BUDGETAIRE = (state , objetModifie) => {
 
     state.structures_budgetaires = state.structures_budgetaires.map( budgetaire => {
@@ -36,7 +36,7 @@ const GET_PLAN_BUDGETAIRE = (state , tableua_plan_budgetaire) => {
 const AJOUTER_PLAN_BUDGETAIRE = (state , nouveuaObjet) => {
     state.plans_budgetaires.unshift(nouveuaObjet)
 }
-// modifier plan budgetaire 
+// modifier plan budgetaire
 const MODIFIER_PLAN_BUDGETAIRE = (state , objetModifie) => {
 
     state.plans_budgetaires = state.plans_budgetaires.map( budgetaire => {
@@ -58,6 +58,11 @@ export const GET_TOUS_PLAN_BUDGETAIRE = (state , tableua_plan_budgetaire) => {
     state.tousPlanBudgetaire = tableua_plan_budgetaire
 }
 
+
+export const GET_TOUS_ACTIVITE = (state , tableua_plan_budgetaire) => {
+
+    state.tousActivite = tableua_plan_budgetaire
+}
 
 export{
 
