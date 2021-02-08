@@ -11,7 +11,7 @@
           <tr>
             <td>
               <div class="control-group">
-                            <label class="control-label">Décision CF </label>
+                            <label class="control-label">Dï¿½cision CF </label>
                             <div class="controls">
                               <select v-model="editMandatPerso.decision_cf">
                                 <option value="0">Attente</option>
@@ -199,7 +199,7 @@
       <div class="btn-group">
         
                             <button @click.prevent="supprimerLiquidation(item.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span>
+                                <span class=""><i class="icon-trash"></i>Supprimer</span>
                             </button>
                         </div>
 </td>

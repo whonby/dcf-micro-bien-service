@@ -1,5 +1,4 @@
 
-
 <template>
 <div>
   <div id="modifierActeEF" class="modal hide grdirModalActeEffet" >
@@ -119,7 +118,7 @@
 
             <td colspan="2">
               <div class="control-group">
-                <label class="control-label">Numéro du marche/contrat</label>
+                <label class="control-label">Numéro du marché/contrat</label>
                 <div class="controls">
                   <input
                       type="text"
@@ -198,7 +197,7 @@
           <tr>
               <td>
               <div class="control-group">
-                <label class="control-label">Date de debut d'execution prévisionnelle</label>
+                <label class="control-label">Date de début d'execution prévisionnelle</label>
                 <div class="controls">
                   <input type="date" v-model="editActeEffetFinancier.date_odre_service"
                          class="span"
@@ -1780,17 +1779,6 @@
     </div>
   </div>
   <!---->
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -12,7 +12,7 @@
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                             <h5>Liste des grades</h5>
                             <div align="right">
-                                Search: <input type="text">
+                                Recherche: <input type="text">
 
                             </div>
 
@@ -36,7 +36,7 @@
                                     <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerGrades(item.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i></span></button>
+                                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                                         </div>
 

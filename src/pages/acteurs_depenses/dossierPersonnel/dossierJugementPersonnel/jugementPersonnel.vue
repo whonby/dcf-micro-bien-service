@@ -78,7 +78,7 @@
               title="Supprimer"
             >
               <span class>
-                <i class="icon-trash"></i>
+                <i class="icon-trash"></i>Supprimer
               </span>
             </button>
           </div>
@@ -108,7 +108,7 @@
         <tr>
           <td>
             <div class="control-group">
-              <label class="control-label">Reference offre</label>
+              <label class="control-label">Réference offre</label>
               <div class="controls">
                
                 <input

@@ -68,7 +68,7 @@ fonctions
                                     <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerFonctionProfessionnel(fonctAdm.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
+                                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                                         </div>
 

@@ -72,7 +72,7 @@
 
               <div class="btn-group">
               <button @click.prevent="supprimerStructureProgramme(structure_programme.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
+                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
              
             </div>
 
@@ -353,7 +353,7 @@ afficherModalModifierStructure(id){
         
  },
  modifierModalStructureprogrammeLocal(){
-   this.modifierStructureProgramme(this.editProgramme)
+   this.modifierStructureProgramme(this.editProgramme) 
    this.$('#modifierModal').modal('hide');
   //  this.editProgramme = {
   //               niveau: "",

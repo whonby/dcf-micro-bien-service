@@ -736,7 +736,7 @@
                         @click="supprimerpaiementPersonnel(payepersonnel.id)"
                       >
                         <span>
-                          <i class="icon icon-trash"></i>
+                          <i class="icon icon-trash"></i>Supprimer 
                         </span>
                       </button>
                     </td>

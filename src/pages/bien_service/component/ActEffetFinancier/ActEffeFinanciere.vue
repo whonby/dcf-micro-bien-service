@@ -1,4 +1,4 @@
-marche_id
+
 <template>
 <div>
     <notifications/>
@@ -80,7 +80,7 @@ marche_id
      <table class="table table-bordered table-striped" v-if="macheid">
       <thead>
       <tr>
-        <th>Numero Marché</th>
+        <th>Numéro Marché</th>
         <th>Objet marché</th>
          <th>Imputation</th>
         <th>Montant de l'offre(en FCFA TTC)</th>
