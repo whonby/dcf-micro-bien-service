@@ -41,9 +41,6 @@
 
         {{affichierReferenceAppelOffre(macheid)|| 'Non renseigné'}}
       </td>
-
-
-
       <td v-if="appelOffre.rang_analyse==1" style="background: green;color: white" >
         {{afficherNumeroDossierCandidat1(appelOffre.dossier_candidat_id) || 'Non renseigné'}}
       </td>
@@ -328,7 +325,7 @@ export default {
       "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
       "getterMandate","getterCojos","getterAnalyseDossiers","typeAnalyses", "analyseDossiers","text_juridiques"
     ]),
-    
+
     ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
     ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
       'types_financements']) ,
@@ -338,7 +335,7 @@ export default {
           if(item.marche_id==marche_id && item.dossier_candidat_id==candidat){
             return  item
           }
-        }) 
+        })
         console.log(offreT)
         return  offreT.observation
         //  offreT.observation
