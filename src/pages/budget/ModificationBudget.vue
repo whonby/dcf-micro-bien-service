@@ -35,8 +35,8 @@
                                                 <th>Variation CP</th>
                                                 <th>Dotation Actuel AE</th>
                                                 <th>Dotation Actuel CP</th>
-                                                <th>Cumule AE</th>
-                                                <th>Cumule CP</th>
+                                                <th>Cumul AE</th>
+                                                <th>Cumul CP</th>
 
                                             </tr>
                                             </thead>
@@ -816,7 +816,7 @@
                 if(this.type_modification==""){
                     this.$notify({
                         title: 'ERROR',
-                        text: "Veuillez renseigne le type de modif",
+                        text: "Veuillez renseigne le type de modification",
                         type:"error"
                     })
 
@@ -884,7 +884,15 @@
             },
 
             modificationBudget(){
-                console.log(this.ligne_selectionne.length)
+                if(this.type_modification==""){
+                    this.$notify({
+                        title: 'ERROR',
+                        text: "Veuillez renseigne le type de modification",
+                        type:"error"
+                    })
+
+                    return null
+                }
                   if(this.ligne_selectionne.length<0){
                       this.$notify({
                           title: 'ERROR',
