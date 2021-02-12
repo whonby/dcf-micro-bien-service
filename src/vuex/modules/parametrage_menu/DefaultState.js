@@ -17,6 +17,7 @@ const defaultstate = {
     Reparation:49,
     RapportMarche:89,
     RapportVehicule:90,
+    menuExecutionBudgetaire:100,
     MenuTableauBordGestionMarche:45,
     active_el: 11
 };

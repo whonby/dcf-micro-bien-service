@@ -102,7 +102,7 @@
                     
                     <th>Entreprise</th> -->
                     
-                     <th>Date Debut Execution{{detail_marche.id}}</th>
+                     <th>Date Debut Execution</th>
                     
                     <th>Date reception provisoire</th>
                     <th>Date de reception définitive</th>

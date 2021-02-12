@@ -36,7 +36,8 @@ const defaultstate = {
     salairesActeur:[],
     permissionConge:[],
     sauvegardePhoto:[],
-    fonctionProfessionnel:[]
+    fonctionProfessionnel:[],
+    FichierJoinDmdEngagement:[]
 
 };
 

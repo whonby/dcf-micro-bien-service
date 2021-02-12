@@ -2173,3 +2173,83 @@ export function modifierFonctionProfessionnel({commit}, formData){
     })
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export function getFichierJointDmd({ commit }) {
+
+    queue.push(() => axios.get('/FichierJointDemandeEngagement').then(response => {
+        // console.log(response.data)
+        commit('GET_FICHIER_JOINT_DEMANDE_ENGAGEMNT', response.data)
+    }).catch(error => console.log(error))
+    );
+
+}
+
+
+// ajouter type acte personnel
+export function ajouterFichierJointDmd({ commit, dispatch }, objetAjoute,config) {
+    // this.$app.$loading(true)
+    axios.post('/FichierJointDemandeEngagement', objetAjoute, config).then(res => {
+        if (res.status == 201) {
+            // this.$app.$notify({
+            //     title: 'success',
+            //     text: 'Enregistrement effectuer',
+            //     type: "success"
+            // });
+            commit('AJOUTER_FICHIER_JOINT_DEMANDE_ENGAGEMNT', res.data)
+            dispatch("getFichierJointDmd");
+            dispatch("getFichierJointDmd");
+            dispatch("getFichierJointDmd");
+            dispatch("getFichierJointDmd");
+            // this.$app.$loading(false)
+        }
+    }).catch(error => {
+        console.log(error)
+        // this.$app.$loading(false)
+        // this.$app.$notify({
+        //     title: 'Erreur',
+        //     text: "Erreur c'est produit lors de l'enregistrement",
+        //     type: "error"
+        // });
+    })
+}
+
+// supprimer type act
+export function supprimerFichierJointDmd({ commit }, id) {
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+            this.$app.$notify({
+                title: 'Suppression',
+                text: 'Suppression effectuer',
+                type: "error"
+            });
+            commit('SUPPRIMER_FICHIER_JOINT_DEMANDE_ENGAGEMNT', id)
+            axios.delete('/FichierJointDemandeEngagement/' + id).then(() => dialog.close())
+        })
+}
+
+
+export function modifieFichierJointDmd({ commit, dispatch }, formData, config) {
+    // this.$app.$loading(true)
+    axios.put('/FichierJointDemandeEngagement', formData, config).then(response => {
+        commit('MODIFIER_FICHIER_JOINT_DEMANDE_ENGAGEMNT', response.data)
+        dispatch("getFichierJointDmd");
+        dispatch("getFichierJointDmd");
+        // this.$app.$loading(false)
+    })
+    //     
+
+}

@@ -51,6 +51,54 @@ export const SUPPRIMER_RECEPTION = (state, id)=> {
 
 
 
+export const GET_ALL_DEMANDE_ENGAGEMENT= (state, tableau_document) =>{
+    state.DemandeEngagement = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_DEMANDE_ENGAGEMENT = (state, elementAjouter) => {
+    state.DemandeEngagement.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_DEMANDE_ENGAGEMENT = (state, elementModif)=>{
+    state.DemandeEngagement = state.DemandeEngagement.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_DEMANDE_ENGAGEMENT = (state, id)=> {
+    state.DemandeEngagement = state.DemandeEngagement.filter(prest => prest.id !=id)
+}
+
+
+export const GET_ALL_NOM_PIECE_JUSTIFICATIVE= (state, tableau_document) =>{
+    state.nomPieceJustificative = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_NOM_PIECE_JUSTIFICATIVE = (state, elementAjouter) => {
+    state.nomPieceJustificative.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_NOM_PIECE_JUSTIFICATIVE = (state, elementModif)=>{
+    state.nomPieceJustificative = state.nomPieceJustificative.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_NOM_PIECE_JUSTIFICATIVE = (state, id)=> {
+    state.nomPieceJustificative = state.nomPieceJustificative.filter(prest => prest.id !=id)
+}
 // export const SUPPRIMER_DECOMPTE = (state ,id) => {
 //     state.decomptes = state.decomptes.filter(select => 
 //         select.id !=id)

@@ -91,6 +91,13 @@
            
           </a>
         </li>
+        <li @click.prevent="ExecutionBudgetaire" :class="{active: active_el ==100}">
+          <a title="INVESTISSEMENT" href="#">
+            <i class="icon-truck"></i>
+            <span>EXECUTION BUDGETAIRE</span>
+           
+          </a>
+        </li>
         <li @click.prevent="navigateRetourAuMenu" >
           <a title="Carte des infrastructure pas regison" href="#">
             <i class=" icon-globe"></i>
@@ -265,7 +272,12 @@ navigateToGestionMarche(){
         })
       },
 
-
+ ExecutionBudgetaire(){
+        this.activate(100)
+        this.$router.push({
+          name:'ListeUaExecutionBudgetaire'
+        })
+      },
       navigateToInvestissement(){
         this.activate(4)
         this.$router.push({

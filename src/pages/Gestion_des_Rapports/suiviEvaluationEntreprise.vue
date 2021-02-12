@@ -13,15 +13,15 @@
                            
                           <td >
                               <br>
-                                <label style="color:#000;font-size:14px;font-weight: bolder;">UNITE ADMINISTRATIVE<a href="#" @click.prevent="videUniteadministrative()" v-if="ua_id" style="color: red"><i class="fa fa-trash-o"></i></a>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">UNITE ADMINISTRATIVE<a href="#" @click.prevent="videUniteadministrative()" v-if="uniteAdministrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
                                 </label>
                                 <model-list-select style="background-color: #fff;border:2px solid #000"
                                                    class="wide"
                                                    :list="uniteAdministratives"
-                                                   v-model="ua_id"
+                                                   v-model="uniteAdministrative_id"
                                                    option-value="id"
                                                    option-text="libelle"
-                                                   placeholder="UNITE ADMINISTRATIVE"
+                                                   placeholder="TOUTES LES UNITES ADMINISTRATIVES"
                                 >
 
                                 </model-list-select>
@@ -36,7 +36,7 @@
                                                    v-model="typemarche_id"
                                                    option-value="id"
                                                    option-text="libelle"
-                                                   placeholder="TYPE DE MARCHE"
+                                                   placeholder="TOUS LES TYPES DE MARCHE"
                                 >
 
                                 </model-list-select>
@@ -51,7 +51,7 @@
                                                    v-model="entre_id"
                                                    option-value="id"
                                                    option-text="raison_sociale"
-                                                   placeholder="ENTREPRISE"
+                                                   placeholder="TOUTES LES ENTREPRISES"
                                 >
 
                                 </model-list-select>
@@ -142,32 +142,32 @@
                     :key="service.id"
                   >
                   <!-- <td style="width:10%">{{service[0].entreprise_id || 'Non renseigné'}}</td> -->
-                  <td style="width:10%">{{RaisonSocialEntreprise(service[0].entreprise_id) || 'Non renseigné'}}</td>
-                  <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheRecu(service[0].entreprise_id) || 'Non renseigné'}}</td>
-                    <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantMarcheObtenu(service[0].entreprise_id)))}}</td>
+                  <td style="width:10%">{{RaisonSocialEntreprise(service.entreprise_id) || 'Non renseigné'}}</td>
+                  <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheRecu(service.entreprise_id) || 'Non renseigné'}}</td>
+                    <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantMarcheObtenu(service.entreprise_id)))}}</td>
                     
                       
                      
-                      <td style="width:10%;text-align:center;font-size:14px">{{MarcheNonDemarre(service[0].entreprise_id) || 0}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantMarcheNonDemarre(service[0].entreprise_id)))}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{MarcheNonDemarre(service.entreprise_id) || 0}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantMarcheNonDemarre(service.entreprise_id)))}}</td>
                       
-                      <td style="width:10%;text-align:center;font-size:14px" >{{((MarcheNonDemarre(service[0].entreprise_id)/NombreDeMarcheRecu(service[0].entreprise_id))*100).toFixed(0) || 0}}%</td>
+                      <td style="width:10%;text-align:center;font-size:14px" >{{((MarcheNonDemarre(service.entreprise_id)/NombreDeMarcheRecu(service.entreprise_id))*100).toFixed(0) || 0}}%</td>
                       
-                      <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheExecutionDansLeDelai(service[0].entreprise_id)}}</td>
-                                            <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantDeMarcheExecutionDansLeDelai(service[0].entreprise_id)))}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{((NombreDeMarcheExecutionDansLeDelai(service[0].entreprise_id)/NombreDeMarcheRecu(service[0].entreprise_id))*100).toFixed(0) || 0}}%</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheExecutionHorsDelai(service[0].entreprise_id)}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantDeMarcheExecutionHorsDelai(service[0].entreprise_id)))}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{((NombreDeMarcheExecutionHorsDelai(service[0].entreprise_id)/NombreDeMarcheRecu(service[0].entreprise_id))*100).toFixed(0) || 0}}%</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheAcheveDansLeDelai(service[0].entreprise_id)}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantDeMarcheAcheveDansLeDelai(service[0].entreprise_id))) || 'Non renseigné'}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{((NombreDeMarcheAcheveDansLeDelai(service[0].entreprise_id)/NombreDeMarcheRecu(service[0].entreprise_id))*100).toFixed(0) || 0}}%</td>
-<td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheAcheveHorsLeDelai(service[0].entreprise_id)}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantDeMarcheAcheveHorsLeDelai(service[0].entreprise_id))) || 'Non renseigné'}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{((NombreDeMarcheAcheveHorsLeDelai(service[0].entreprise_id)/NombreDeMarcheRecu(service[0].entreprise_id))*100).toFixed(0) || 0}}%</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheSuppendu(service[0].entreprise_id) || 0}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantDeMarcheSuppendu(service[0].entreprise_id))) || 'Non renseigné'}}</td>
-                      <td style="width:10%;text-align:center;font-size:14px">{{((NombreDeMarcheSuppendu(service[0].entreprise_id)/NombreDeMarcheRecu(service[0].entreprise_id))*100).toFixed(0) || 0}}%</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheExecutionDansLeDelai(service.entreprise_id)}}</td>
+                                            <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantDeMarcheExecutionDansLeDelai(service.entreprise_id)))}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{((NombreDeMarcheExecutionDansLeDelai(service.entreprise_id)/NombreDeMarcheRecu(service.entreprise_id))*100).toFixed(0) || 0}}%</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheExecutionHorsDelai(service.entreprise_id)}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantDeMarcheExecutionHorsDelai(service.entreprise_id)))}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{((NombreDeMarcheExecutionHorsDelai(service.entreprise_id)/NombreDeMarcheRecu(service.entreprise_id))*100).toFixed(0) || 0}}%</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheAcheveDansLeDelai(service.entreprise_id)}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantDeMarcheAcheveDansLeDelai(service.entreprise_id))) || 'Non renseigné'}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{((NombreDeMarcheAcheveDansLeDelai(service.entreprise_id)/NombreDeMarcheRecu(service.entreprise_id))*100).toFixed(0) || 0}}%</td>
+<td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheAcheveHorsLeDelai(service.entreprise_id)}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantDeMarcheAcheveHorsLeDelai(service.entreprise_id))) || 'Non renseigné'}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{((NombreDeMarcheAcheveHorsLeDelai(service.entreprise_id)/NombreDeMarcheRecu(service.entreprise_id))*100).toFixed(0) || 0}}%</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{NombreDeMarcheSuppendu(service.entreprise_id) || 0}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{formatageSomme(parseFloat(MontantDeMarcheSuppendu(service.entreprise_id))) || 'Non renseigné'}}</td>
+                      <td style="width:10%;text-align:center;font-size:14px">{{((NombreDeMarcheSuppendu(service.entreprise_id)/NombreDeMarcheRecu(service.entreprise_id))*100).toFixed(0) || 0}}%</td>
                   
                     <!-- <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id || 'Non renseigné'}}</td>
                       <td style="width:10%;text-align:center;font-size:14px">{{service[0].entreprise_id || 'Non renseigné'}}</td>
@@ -224,7 +224,7 @@ export default {
       },
       entre_id:"",
        typemarche_id:"",
-                ua_id:"",
+                uniteAdministrative_id:"",
        status_marches:"",
       
                 
@@ -244,7 +244,9 @@ search:""
         }
     
   },
-
+created(){
+console.log(this.listeArrayDesc)
+},
   computed: {
     ...mapGetters("SuiviImmobilisation", [
     
@@ -433,13 +435,13 @@ TypeMarche() {
         }
       };
     },
-ua() {
+listeUa() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.ua_id;
+        return qtereel.unite_administrative_id;
       }
       return 0
         }
@@ -479,6 +481,23 @@ NombreDeMarcheRecu() {
       };
     },
 
+ listeArrayDesc(){
+    let collection=[];
+  //  let vm=this;
+    this.GroupeEntreprise.forEach(function(val){
+      let objet={
+         entreprise_id:val[0].entreprise_id,
+         nbr_marche:val.length,
+         marche_id:val[0].marche_id,
+      }
+      collection.push(objet)
+    })
+    collection.sort(function(x, y) {
+    return y.nbr_marche - x.nbr_marche;
+    
+  });
+  return collection
+ },
 MarcheNonDemarre() {
       return id => {
         if (id != null && id != "") {
@@ -531,57 +550,76 @@ MontantMarcheObtenu() {
         }
       };
     },
+  
  ListeDEsEntreprise(){
 
                 let vM=this;
-                let objet=this.GroupeEntreprise
+                let objet=this.listeArrayDesc
 
                 //retourne la section selectionner
               
-                if(this.entre_id!="" && this.typemarche_id=="" && this.ua_id==""){
+                if(this.entre_id!="" && this.typemarche_id=="" && this.uniteAdministrative_id==""){
                   
                     objet =objet.filter(item=>{
-                        if(item[0].entreprise_id==vM.entre_id){
+                        if(item.entreprise_id==vM.entre_id){
                             return item
                         }
                     })
-                  return objet
+                 
                 }
-              if(this.entre_id=="" && this.typemarche_id!="" && this.ua_id==""){
+              if(this.entre_id=="" && this.typemarche_id!="" && this.uniteAdministrative_id==""){
                   
                     objet =objet.filter(item=>{
-                        if(this.TypeMarche(item[0].marche_id)==vM.typemarche_id){
+                        if(this.TypeMarche(item.marche_id)==vM.typemarche_id){
                             return item
                         }
                     })
-                  return objet
+                
                 }
-                if(this.entre_id=="" && this.typemarche_id=="" && this.ua_id!=""){
+                if(this.entre_id=="" && this.typemarche_id=="" && this.uniteAdministrative_id!=""){
                   
                     objet =objet.filter(item=>{
-                        if(this.ua(item[0].marche_id)==vM.ua_id){
+                        if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id){
                             return item
                         }
                     })
-                  return objet
+                  
                 }
-               if(this.entre_id!="" && this.typemarche_id!="" && this.ua_id!=""){
+               if(this.entre_id!="" && this.typemarche_id!="" && this.uniteAdministrative_id!=""){
                   
                     objet =objet.filter(item=>{
-                        if(this.ua(item[0].marche_id)==vM.ua_id && this.TypeMarche(item[0].marche_id)==vM.typemarche_id && item[0].entreprise_id==vM.entre_id){
+                        if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id && this.TypeMarche(item.marche_id)==vM.typemarche_id && item.entreprise_id==vM.entre_id){
                             return item
                         }
                     })
-                  return objet
+                 
                 }
-                 if(this.entre_id!="" && this.typemarche_id!="" && this.ua_id==""){
+                 if(this.entre_id!="" && this.typemarche_id!="" && this.uniteAdministrative_id==""){
                   
                     objet =objet.filter(item=>{
-                        if(this.TypeMarche(item[0].marche_id)==vM.typemarche_id && item[0].entreprise_id==vM.entre_id){
+                        if(this.TypeMarche(item.marche_id)==vM.typemarche_id && item.entreprise_id==vM.entre_id){
                             return item
                         }
                     })
-                  return objet
+                  
+                }
+                 if(this.entre_id!="" && this.typemarche_id=="" && this.uniteAdministrative_id!=""){
+                  
+                    objet =objet.filter(item=>{
+                        if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id==vM.uniteAdministrative_id && item.entreprise_id==vM.entre_id){
+                            return item
+                        }
+                    })
+                  
+                }
+                if(this.entre_id=="" && this.typemarche_id!="" && this.uniteAdministrative_id!=""){
+                  
+                    objet =objet.filter(item=>{
+                        if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id==vM.uniteAdministrative_id && this.TypeMarche(item.marche_id)==vM.typemarche_id){
+                            return item
+                        }
+                    })
+                  
                 }
                 return objet
             },
@@ -695,7 +733,7 @@ VidetypeMarche(){
                 this.typemarche_id=""
             },
         videUniteadministrative(){
-                this.ua_id=""
+                this.uniteAdministrative_id=""
             },
             VideEntreprise(){
                 this.entre_id=""

@@ -320,6 +320,8 @@ created(){
           this.getTypeOrdrePaiement()
           this.getTacheMarche()
 this.getReception()
+this.getDemandeEngagement()
+this.getPieceJustificative()
 this.getFormeJuridiques()
 this.getRegimeImpositions()
  this.getGroupe()
@@ -456,6 +458,7 @@ this.getClassificationGradeFonction()
       // this.s()
       this.getFonctionsProfessionnel()
       this.getSauvegardePhoto()
+      this.getFichierJointDmd()
       this.getSecteurActivite()
       this.getEntreprise()
       this.getHistoriqueEntreprise()
@@ -592,7 +595,7 @@ this.getTousActivite()
                 "afficheTransfertValider",
                 "transferts"
             ]),
-            ...mapGetters('personnelUA', ['sauvegardePhoto']),
+            ...mapGetters('personnelUA', ['sauvegardePhoto',]),
     ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel","mandats"]),
 
        ...mapGetters("parametreGenerauxAdministratif", [
@@ -708,7 +711,7 @@ return objJson.id
      "getStockArticleUa",
      "getAllHistoriqueDecompteFacture"
     ]),
-            ...mapActions('personnelUA', ["getFonctionsProfessionnel","getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
+            ...mapActions('personnelUA', ["getFonctionsProfessionnel","getFichierJointDmd","getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
             "getClasses","getEchelons","getpaiementPersonnel","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
@@ -760,7 +763,7 @@ return objJson.id
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ["getReception","getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
+       ...mapActions('bienService', ["getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",

@@ -113,10 +113,62 @@ import AjouterTacheRealise from "../../pages/investissement/AjouterTache/Ajouter
 import SuiviDelai from "../../pages/DossierSuiviDelai/SuiviDelai.vue"
 import ModificationOp from "../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/ModificationOp.vue"
 
+import ListeUaExecutionBudgetaire from "../../pages/ExecutionBudgetaire/ListeUaExecutionBudgetaire.vue"
+import AjouterDemandeEngagement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterDemandeEngagement.vue"
+import AjouterLiquidation from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLiquidation.vue"
+import AjouterMantdatement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterMantdatement.vue"
+import ModifierDemandeEngagement from "../../pages/ExecutionBudgetaire/ModifierDemandeEngagement.vue"
+import executionBudgetaire from "../../pages/ExecutionBudgetaire/executionBudgetaire.vue"
 
-
+import procedureParBonCommande from "../../pages/ExecutionBudgetaire/procedureParBonCommande/procedureParBonCommande.vue"
+import procedureEngaementDirect from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/procedureEngaementDirect.vue"
+import voitDetailBonCmmande from "../../pages/ExecutionBudgetaire/Voirdetail/voitDetailBonCmmande.vue"
 const BienServiceRoutes = [
-   
+    {
+        path: "/AjouterMantdatement",
+        name: "AjouterMantdatement",
+        component: AjouterMantdatement
+    },
+    {
+        path: "/AjouterLiquidation",
+        name: "AjouterLiquidation",
+        component: AjouterLiquidation
+    },
+    {
+        path: "/voitDetailBonCmmande/:id",
+        name: "voitDetailBonCmmande",
+        component: voitDetailBonCmmande
+    },
+    {
+        path: "/procedureEngaementDirect/:id",
+        name: "procedureEngaementDirect",
+        component: procedureEngaementDirect
+    },
+    {
+        path: "/procedureParBonCommande/:id",
+        name: "procedureParBonCommande",
+        component: procedureParBonCommande
+    },
+    {
+        path: "/ModifierDemandeEngagement/:id",
+        name: "ModifierDemandeEngagement",
+        component: ModifierDemandeEngagement
+    },
+    {
+        path: "/executionBudgetaire/:id",
+        name: "executionBudgetaire",
+        component: executionBudgetaire
+    },
+    {
+        path: "/AjouterDemandeEngagement",
+        name: "AjouterDemandeEngagement",
+        component: AjouterDemandeEngagement
+    },
+    {
+        path: "/ListeUaExecutionBudgetaire",
+        name: "ListeUaExecutionBudgetaire",
+        component: ListeUaExecutionBudgetaire
+    },
     {
         path: "/ModificationOp/:id",
         name: "ModificationOp",
