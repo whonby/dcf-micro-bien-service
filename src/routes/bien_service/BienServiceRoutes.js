@@ -102,7 +102,7 @@ import DetailInforTableBordUniteAd from "../../pages/TableauBord/DetailInforTabl
 import  marcheHorsppm from "../../pages/gestionMarche/marcheHorsppm.vue"
 import listeMarcheSib from "../../pages/gestionMarche/listeMarcheSib.vue"
 import ajouterMarcheSib from "../../pages/gestionMarche/ajouterMarcheSib.vue"
-
+import listeMarchePPM from "../../pages/gestionMarche/listeMarchePPM.vue"
 import AnoBailleur1 from "../../pages/bien_service/component/AnoBailleur/AnoBailleur1.vue"
 
 import FicheContratualisation from "../../pages/Gestion_des_Rapports/marche/FicheContratualisation"
@@ -110,12 +110,35 @@ import FicheContratualisation from "../../pages/Gestion_des_Rapports/marche/Fich
 import AjouterTacheParMarche from "../../pages/investissement/AjouterTache/AjouterTacheParMarche.vue"
 
 import AjouterTacheRealise from "../../pages/investissement/AjouterTache/AjouterTacheRealise.vue"
+import SuiviDelai from "../../pages/DossierSuiviDelai/SuiviDelai.vue"
+import ModificationOp from "../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/DossierOrdrePaiement/ModificationOp.vue"
+
+
+
 const BienServiceRoutes = [
+   
+    {
+        path: "/ModificationOp/:id",
+        name: "ModificationOp",
+        component: ModificationOp
+    },
     {
 
+        
         path:"/AjouterTacheRealise/:id",
         name:"AjouterTacheRealise",
         component:AjouterTacheRealise
+    },
+    {
+        path:"/suivi-delai",
+        name:"suiviDelai",
+        component:SuiviDelai
+    },
+
+    {
+        path:"/liste-marche-ppm",
+        name:"listeMarcheppm",
+        component:listeMarchePPM
     },
     {
 
@@ -259,6 +282,7 @@ detailExecution
         name: "modifierMandat",
         component: modifierMandat
     },
+    
     {
         path:"/graphique-excution-marche",
         name:"graphique_excution_marche",

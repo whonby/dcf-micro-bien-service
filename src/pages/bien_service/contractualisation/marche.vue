@@ -1055,7 +1055,7 @@ typeMarches
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marchés en Planification</h5>
+              <h5>Liste des marchés en planification</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -1125,12 +1125,12 @@ typeMarches
                    </router-link>
 </td>
 
-<td>
+<!-- <td>
     <router-link :to="{ name: 'detailGre', params: { id: marche.id }}"
                 class="btn btn-success " title="Detail marche">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link>
-</td>
+</td> -->
 <td>
    <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
                  class="btn btn-inverse " title="Cycle de vie du marché">
@@ -1198,7 +1198,7 @@ typeMarches
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marchés Résiliés</h5>
+              <h5>Liste des marchés résiliés</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -1296,7 +1296,7 @@ typeMarches
     <div id="modificationModal" class="modal hide taillMarche">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier marché</h3>
+        <h3>Modifier le marché</h3>
       </div>
       <div class="modal-body">
        <table class="table table-bordered table-striped">
@@ -1323,7 +1323,7 @@ typeMarches
                 type="text"
                 v-model="editMarche.reference_marche"
                 class="span4"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>
@@ -1331,7 +1331,7 @@ typeMarches
                <td>
               
                <div class="control-group">
-            <label class="control-label">Type marché</label>
+            <label class="control-label">Type de marché</label>
             <div class="controls">
             <select v-model="editMarche.type_marche_id" class="span4">
                <option v-for="plans in typeMarches" :key="plans.id" 
@@ -1342,13 +1342,13 @@ typeMarches
               </td>
              <td colspan="">
                <div class="control-group">
-            <label class="control-label">Objet marché</label>
+            <label class="control-label">Objet du marché</label>
             <div class="controls">
               <textarea
                
                 v-model="editMarche.objet"
                 class="span4" rows="1"
-                placeholder="Saisir le text"
+                placeholder="Saisir le texte"
               ></textarea>
             </div>
           </div>
@@ -1358,7 +1358,7 @@ typeMarches
             <tr>
              <td>
                <div class="control-group">
-            <label class="control-label" title="unite administrative">UA</label>
+            <label class="control-label" title="Unité Administrative">UA</label>
             <div class="controls">
             <select v-model="editMarche.unite_administrative_id" class="span4">
                <option v-for="plans in groupUa" 
@@ -1370,7 +1370,7 @@ typeMarches
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Grand Nature</label>
+                  <label class="control-label">Grande Nature</label>
                   <div class="controls">
                     <select v-model="editMarche.gdenature_id" :readOnly="deverouGrandNature" class="span4">
                       <option
@@ -1385,7 +1385,7 @@ typeMarches
                <td>
               
                <div class="control-group">
-                  <label class="control-label">Activite</label>
+                  <label class="control-label">Activité</label>
                   <div class="controls">
                     <!-- <select v-model="editMarche.activite_id" :readOnly="deverouactivite" class="span4">
                      <option
@@ -1436,13 +1436,13 @@ typeMarches
             <tr>
                <td>
                  <div class="control-group">
-            <label class="control-label">Imputation Budgetaire</label>
+            <label class="control-label">Imputation budgétaire</label>
             <div class="controls">
               <input
                 type="text"
                 :value="ImputationBudgetModifier"
                 class="span4"
-                placeholder="Saisir le Imputation"
+                placeholder="Saisir l'imputation"
                 readonly
               />
             </div>
@@ -1489,7 +1489,7 @@ typeMarches
                <td colspan="">
               
                <div class="control-group">
-            <label class="control-label">procedure passation</label>
+            <label class="control-label">Procédure de passation</label>
             <div class="controls">
             <input
                 type="text"
@@ -1561,7 +1561,7 @@ typeMarches
                 type="text"
                 v-model="editMarche.Bénéficiaire"
                 class="span4"
-                placeholder="Saisir Bénéficiaire"
+                placeholder=" Saisir le livrable"
               />
             </div>
           </div>
@@ -1574,7 +1574,7 @@ typeMarches
                 type="text"
                 v-model="editMarche.beneficiaire"
                 class="span4"
-                placeholder="Saisir le livrable"
+                placeholder="Saisir bénéficiaire"
               />
             </div>
           </div>
@@ -1646,6 +1646,7 @@ export default {
                 activite_id:"",
                 typeappel_id:"",
                 exo_id:"",
+                sib:0
         
       },
         editActeEffetFinancier:{
@@ -1688,7 +1689,8 @@ export default {
                 unite_administrative_id:"",
                 imputation:"",
                  activite_id:"",
-                 exo_id:""
+                 exo_id:"",
+                 sib:0
                  
       },
       
@@ -1815,6 +1817,8 @@ getDateFinExécutionValue(){
     return this.editActeEffetFinancier.date_odre_service !=""
 },
 
+
+
  filtre_unite_admin() {
        // const st = this.search.toLowerCase();
 
@@ -1828,7 +1832,8 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => element.gdenature_id == 5 && element.parent_id == null && element.sib == 0 )
+
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 ||this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1837,7 +1842,7 @@ getDateFinExécutionValue(){
             // });
         }
 
- return this.printMarcheNonAttribue.filter(element => element.gdenature_id == 5  && element.parent_id == null && element.sib == 0)
+ return this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0)
        
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1860,7 +1865,7 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && element.gdenature_id == 5 && element.parent_id == null && element.sib == 0)
+            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1869,7 +1874,7 @@ getDateFinExécutionValue(){
             // }); 
         }
 
-        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && element.gdenature_id == 5 && element.parent_id == null && element.sib == 0)
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0|| element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1893,11 +1898,11 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => element.gdenature_id == 5 && element.attribue == 1  && element.parent_id == null && element.sib == 0)
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 && element.attribue == 1  && element.parent_id == null && element.sib == 0 || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0 && element.attribue == 1  && element.parent_id == null && element.sib == 0)
             
         }
 
-        return this.printMarcheNonAttribue.filter(element => element.gdenature_id == 5 && element.attribue == 1  && element.parent_id == null && element.sib == 0)
+        return this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 && element.attribue == 1  && element.parent_id == null && element.sib == 0 || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0 && element.attribue == 1  && element.parent_id == null && element.sib == 0)
            
         
 
@@ -1916,11 +1921,11 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
-            return colect.filter(element => element.gdenature_id == 5  &&  element.difference_personnel_bienService == 2 && element.sib == 0) 
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 && element.attribue == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == 2 && element.sib == 0 || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0 && element.attribue == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == 2 && element.sib == 0) 
            
         }
 
-        return this.getActeEffetFinancierPersonnaliser45.filter(element => element.gdenature_id == 5  &&  element.difference_personnel_bienService == 2 && element.sib == 0)
+        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 && element.attribue == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == 2 && element.sib == 0 || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null && element.sib ==0 && element.attribue == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == 2 && element.sib == 0)
             
         
 
@@ -1940,11 +1945,11 @@ afficherResilierPUA() {
                     return item
                 }
             })
-            return colect.filter(element =>  element.gdenature_id == 5 && element.difference_personnel_bienService == null && element.sib == 0)
+            return colect.filter(element =>  this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null && element.sib ==0 && element.attribue == 2  && element.parent_id == null  &&  element.difference_personnel_bienService == 2 && element.sib == 0 || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null &&  element.attribue == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == null )
            
         }
 
-        return this.getActeEffetFinancierPersonnaliser45.filter(element =>  element.gdenature_id == 5 && element.difference_personnel_bienService == null && element.sib == 0)
+        return this.getActeEffetFinancierPersonnaliser45.filter(element =>   this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.parent_id == null &&  element.attribue == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == null  || this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.parent_id == null &&  element.attribue == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == null )
             
     },
 
@@ -1961,11 +1966,11 @@ afficherMarcheSupenduPAR_AU() {
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 7 &&  element.gdenature_id == 5 && element.sib == 0)
+            return colect.filter(element => element.attribue == 7 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.sib == 0 || element.attribue == 7 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.sib == 0)
            
-        }
+        } 
 
-        return this.printMarcheNonAttribue.filter(element => element.attribue == 7 &&  element.gdenature_id == 5 && element.sib == 0)
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 7 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.sib == 0 ||  element.attribue == 7 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.sib == 0)
             
         
 
@@ -1984,11 +1989,11 @@ afficherMarcherTerminerParUA() {
                     return item
                 }
             })
-            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && element.gdenature_id == 5 && element.sib == 0 )
+            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.sib == 0 || this.afficherAttributMarche(element.marche_id) == 5 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.sib == 0)
             
         }
 
-        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 &&  element.gdenature_id == 5 && element.sib == 0 )
+        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.sib == 0 || this.afficherAttributMarche(element.marche_id) == 5 && this.recupererCodeTypeMarche(element.type_marche_id) == 1 && element.sib == 0)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -2743,7 +2748,8 @@ recupererDateMiseService() {
        var nouvelObjet = {
       ...this.formData,
       imputation :this.ImputationBudget,
-      exo_id : this.anneeAmort
+      exo_id : this.anneeAmort,
+      sib:0
        };
 this.ajouterMarche(nouvelObjet)
 this.formData = {
@@ -2796,7 +2802,8 @@ this.formData = {
       imputation :this.ImputationBudgetModifier,
       exo_id : this.anneeAmort,
       activite_id:this.editMarche.activite_id,
-      economique_id:this.editMarche.economique_id
+      economique_id:this.editMarche.economique_id,
+      sib:0
        };
       this.modifierMarche(nouvelObjet)
       this.$('#modificationModal').modal('hide');

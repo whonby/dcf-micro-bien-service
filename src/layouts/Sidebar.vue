@@ -2,6 +2,7 @@
   <div>
     
 
+
     <SiderbarParametre v-if="detail_marche.code == 1"></SiderbarParametre>
     <!-- <SideBarGestionAccess v-if="detail_marche.code == 21"></SideBarGestionAccess> -->
     <SiderbarUniteAdministrative v-else-if="detail_marche.code == 2"></SiderbarUniteAdministrative>
@@ -94,7 +95,20 @@ created() {
   methods:{
 
 
+goToModule(id){
+     console.log(id)
+     if (id==6){
+         this.$router.push({
+             name: 'liste_ua_compta'
+         })
+     }else{
 
+         this.$router.push({
+             name: 'TableauDeBordG',
+             params:{id:id}
+         })
+     }
+      },
 
   }
 }

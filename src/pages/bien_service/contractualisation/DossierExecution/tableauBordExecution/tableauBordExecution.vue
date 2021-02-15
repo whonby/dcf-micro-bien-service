@@ -9,7 +9,7 @@
     <tr>
          <td>
             <ul class="quick-actions" style="margin: 0px !important;"> 
-   <li class="bg_lb span"> <a href="#" style="color:#FFFFFF;"><h4>BUDGET</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherMontantBudgetaireInitial(afficherInputationBudgetaire(macheid))))}}</span><h4>INITIAL</h4></a> </li>
+   <li class="bg_lb span"> <a href="#" style="color:#FFFFFF;"><h4>BUDGET1</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(afficherMontantBudgetaireInitial(afficherInputationBudgetaire(macheid))))}}</span><h4>INITIAL</h4></a> </li>
             </ul>
 
         </td>

@@ -9,12 +9,12 @@
                                  <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
                                             <tr>
-                                                <th>Ref du courier</th>
+                                                <th>Référence du courier</th>
                                                 <th>Destinataire</th>
                                                 <th>Date de transmission</th>
                                                 <th>Fichier</th>
                                                 <th>Avis</th>
-                                                <th>Date d'avis Ano DMP</th>
+                                                <th>Date d'avis ANO DMP</th>
                                                 <th>Observation</th>
                                                 <th>Action</th>
                                             </tr>
@@ -46,8 +46,8 @@
 
                          <td @click="afficherModalDecisionAnoDMP (index)"> 
                            <span v-if="transmission.avis== 0" class=" btn label label-success"> Non objection </span>
-                           <span v-else-if="transmission.avis== 1" class=" btn label label-important">objection </span>
-                           <span v-else class=" btn label label-info"> En attent</span>
+                           <span v-else-if="transmission.avis== 1" class=" btn label label-important">Objection </span>
+                           <span v-else class=" btn label label-info"> En attente</span>
                          </td>
 
                           <td @click="afficherModalModifierTransmission(index)">
@@ -83,7 +83,7 @@
                 <form class="form-horizontal">
 
                 <div class="control-group">
-              <label class="control-label">Reférence du dossier:</label>
+              <label class="control-label">Référence du dossier</label>
               <div class="controls">
                 <input type="text"   v-model="edit_transmission.ref_courier" readonly/>
               </div>
@@ -115,7 +115,7 @@
                   <div class="control-group">
           <label class="control-label">Observation:</label>
             <div class="controls">
-              <textarea  v-model="edit_transmission.observations "  class="textarea_editor span"  :readonly="verouillageObservation" rows="" placeholder="Entrer  le text ..."></textarea>
+              <textarea  v-model="edit_transmission.observations "  class="textarea_editor span"  :readonly="verouillageObservation" rows="" placeholder="Entrer le texte ..."></textarea>
             </div>
           
         </div>

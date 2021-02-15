@@ -41,7 +41,21 @@ import AjouterDecompte from '../../pages/Hors_sib/biens_service/DossierExecution
 import AjouterDecomptePro from '../../pages/Hors_sib/biens_service/DossierExecutionHorsSib/dossierDecompte/AjouterDecomptePro.vue';
 import DetailGreAGre from '../../pages/bien_service/DossierProcedureGreAGre_Convention/DetailGreAGre.vue'
 import DetailGreHorsSib from '../../pages/Hors_sib/marche_hors_sib/DetailGreHorsSib.vue'
+
+listeMarcheInvestissementHS
+import AjoutPersonnelSansContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelSansContrat.vue";
+import AjoutPersonnelAvecContrat from "../../pages/Hors_sib/dossierPersonnel/AjoutPersonnelAvecContrat.vue";
 const marcheHorSibRoutes =[
+    {
+        path: "/AjoutPersonnelAvecContrat",
+        name: "AjoutPersonnelAvecContrat",
+        component: AjoutPersonnelAvecContrat
+    },
+    {
+        path: "/AjoutPersonnelSansContrat",
+        name: "AjoutPersonnelSansContrat",
+        component: AjoutPersonnelSansContrat
+    },
     {
         path: "/liste-Reception-Des-Lots",
         name: "listeDesReceptionDesLot",

@@ -27,7 +27,11 @@
              FICHE DE SUIVI GLOBAL MARCHE
             </router-link>
           </li>
-   
+   <li>
+            <router-link :to="{name: 'suiviEvaluationEntreprise'}" tag="a">
+             FICHE D'EVALUATION ENTREPRISE
+            </router-link>
+          </li>
     </ul>
   </div>
 </template>

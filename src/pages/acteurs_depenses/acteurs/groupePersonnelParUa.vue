@@ -7,11 +7,21 @@ uniteAdministratives
         <br>
         <br>
         <br>
+        <div class="" align="right">
+                   <router-link :to="{name:'AjoutPersonnelSansContratSib'}" tag="a" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter  Personnel Ua Sans Contrat
+
+                   </router-link> 
+<router-link :to="{name:'AjoutPersonnelAvecContratSib'}" tag="a" data-toggle="modal" class="btn btn-info" align="rigth">Ajouter Personnel Ua avec Contrat
+
+                   </router-link> 
+                   </div>
+                   <br>
+                   <br>
     <table class="table table-bordered table-striped">
                     <thead>
                       <tr>
                          <th style="width:90%">UNITE D'ADMINISTRATIVE</th>
-                        <th>ACTION</th>
+                        <th colspan="2">ACTION</th>
                         
                     </tr>
                     </thead>
@@ -21,7 +31,7 @@ uniteAdministratives
                     v-for="BesoinImmo in listeDesStockGlobalUa"
                     :key="BesoinImmo[0].id"
                   >
-                  <td style="font-size:14px"
+                  <td style="font-size:25px"
                    
                     >{{libelleUniteAdministrative(BesoinImmo[0].unite_administrative_id) || 'Non renseigné'}}</td>
                   
@@ -32,9 +42,12 @@ uniteAdministratives
                         title="Voir Personnel"
                       >
                         <span>
-                          <i class="icon icon-folder-open"> Voir Personnel</i>
+                          <i class="icon icon-folder-open"> VOIR PERSONNELS</i>
                         </span>
                       </router-link>
+                     </td>
+                     <td>
+                       <button  class="btn btn-info">{{NombrePersonnel(BesoinImmo[0].unite_administrative_id)}} PERSONNELS</button>
                      </td>
                   </tr>
                   
@@ -160,6 +173,19 @@ admin:admin,
       dcf:dcf,
       noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+
+NombrePersonnel() {
+      return id => {
+        if (id != null && id != "") {
+           return this.all_acteur_depense.filter(qtreel => qtreel.unite_administrative_id == id).length;
+
+      
+        }
+      };
+    },
+
+
 
 
 PrixUnitaireParModel() {
@@ -555,7 +581,7 @@ veifArticlesExist() {
       "modifierStock",
       "supprimerStock"
     ]),
-    ...mapActions("uniteadministrative", ["uniteAdministratives","supprimerStockArticle"]),
+    ...mapActions("uniteadministrative", ["supprimerStockArticle"]),
     filter(){
                 this.affiche_filtre=!this.affiche_filtre
                

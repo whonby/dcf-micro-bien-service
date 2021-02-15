@@ -7,12 +7,12 @@
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                    <tr>
-                        <th>Date lettre</th>
-                        <th>Ref lettre </th>
+                        <th>Date de la lettre</th>
+                        <th>Référence de la lettre </th>
                         <th>Destinataire</th>
                         <th>Objet de la lettre</th>
                         <th>Fichier</th>
-                        <th>Date cojo</th>
+                        <th>Date de la COJO</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -53,7 +53,7 @@
 <div id="ajouterLettreInvitation" class="modal hide grdirModalActeEffet">
              <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Lettre d'invitation</h3>
+                <h3>Ajouter la lettre d'invitation</h3>
             </div>
             <div class="modal-body">
 
@@ -94,7 +94,7 @@
                             <tr>
                             <td >
                           <div class="control-group">
-                        <label class="control-label">Refernece lettre</label>
+                        <label class="control-label">Réféernece de la lettre</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -122,7 +122,7 @@
                             <tr>
                                 <td colspan="2" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet  offre :</label>
+                            <label class="control-label">Objet de l'offre </label>
                             <div class="controls">
                                  <textarea   v-model="formLettre.objet_lettre"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     
@@ -134,13 +134,13 @@
                                 
                                 <td>
                          <div class="control-group">
-                        <label class="control-label">Date cojo</label>
+                        <label class="control-label">Date de la COJO</label>
                         <div class="controls">
                             <input
                                     type="date"
                                     v-model="formLettre.date_cojo"
                                     class="span"
-                                    placeholder="Saisir email bailleur"
+                                    placeholder="Saisir email du bailleur"
                             />
                         </div>
                     </div>
@@ -174,7 +174,7 @@
 <div id="modificationL" class="modal hide grdirModalActeEffet">
            <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification  offre</h3>
+                <h3>Modification de l'offre</h3>
             </div>
             <div class="modal-body">
 
@@ -217,7 +217,7 @@
                             <tr>
                             <td >
                           <div class="control-group">
-                        <label class="control-label">Refernece lettre</label>
+                        <label class="control-label">Référnece de la lettre</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -245,9 +245,9 @@
                             <tr>
                                 <td colspan="2" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet  offre :</label>
+                            <label class="control-label">Objet l'offre</label>
                             <div class="controls">
-                                 <textarea   v-model="edite_Lettre_invitation.objet_lettre"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
+                                 <textarea   v-model="edite_Lettre_invitation.objet_lettre"  class="textarea_editor span12" rows="3" placeholder="Entrez le  texte ..."></textarea>
                     
                             </div>
                         </div>
@@ -257,7 +257,7 @@
                                 
                                 <td>
                          <div class="control-group">
-                        <label class="control-label">Date cojo</label>
+                        <label class="control-label">Date de la COJO</label>
                         <div class="controls">
                             <input
                                     type="date"

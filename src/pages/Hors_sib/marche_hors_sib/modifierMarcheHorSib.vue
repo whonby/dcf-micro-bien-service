@@ -212,7 +212,7 @@
             <div class="controls">
             
                <select v-model="editMarcheHorSib.procedure_passation_id" class="span4" >
-               <option v-for="plans in procedurePassations" :key="plans.id" 
+               <option v-for="plans in afficherListeModePassation" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
@@ -222,10 +222,11 @@
             <div class="control-group">
        <label class="control-label">Montant prévu</label>
        <div class="controls">
-         <input
+       <money v-model="editMarcheHorSib.montant_marche"></money>
+         <!-- <input
            type="text"
            v-model="editMarcheHorSib.montant_marche"
-           class="span4" />
+           class="span4" /> -->
        </div>
      </div>
          </td>
@@ -246,33 +247,33 @@
               </tr>
 
               <tr>
-           <td colspan="">
+           <td colspan="2">
               
                <div class="control-group">
             <label class="control-label">Nature des prix</label>
             <div class="controls">
             
-               <select v-model="editMarcheHorSib.nature_prix_id" class="span4" >
-               <option v-for="plans in gettesrNaturePrix" :key="plans.id" 
+               <select v-model="editMarcheHorSib.nature_prix_id" class="span6" >
+               <option v-for="plans in Nature_des_prix" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
           </div>
               </td>  
        
-         <td colspan="">
+         <!-- <td colspan="">
               
                <div class="control-group">
             <label class="control-label">Motif de passation</label>
             <div class="controls">
             
                <select v-model="editMarcheHorSib.motif_passation_id" class="span4" >
-               <option v-for="plans in gettersMotifPassations" :key="plans.id" 
+               <option v-for="plans in motif_passation" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
           </div>
-              </td>  
+              </td>   -->
            <td colspan="2">
                 <div class="control-group">
        <label class="control-label">Infrastructure</label>
@@ -398,7 +399,7 @@ export default {
       "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
-
+...mapGetters('parametreGenerauxFonctionnelle', ['Nature_des_prix','motif_passation']),
      ...mapGetters("uniteadministrative",['getterligneExempter','uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa", "budgetEclate","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
       "montantBudgetGeneral", ]),
@@ -496,6 +497,9 @@ ImputationBudget() {
         }
       };
     },
+     afficherListeModePassation(){
+    return this.procedurePassations.filter(item => item.code!="GAG" && item.code!="AOR" && item.code!="LCVM" && item.code!="ED")
+},
     // ImputationBudget() {
 
     //   const norme = this.budgetEclate.find(normeEquipe => normeEquipe.ligneeconomique_id == this.editMarcheHorSib.ligneeconomique_id );
@@ -569,10 +573,10 @@ recupererParentId(){
 
   },
   methods: {
-    ...mapActions("horSib", ['modifierMarcheHorSib']),
+    ...mapActions("horSib", ['modifierMarcheHorSib','getMarcheHorSib']),
     allerPageMarcheHorsib(){
        this.$router.push({
-          name:'gestion_marche'  
+          name:'marcheHorsib'  
            })
     },
 
@@ -593,7 +597,7 @@ recupererParentId(){
 
             modifierMarcheHorSibLocal(){
                this.$router.push({
-                 name:'gestion_marche'  
+                 name:'marcheHorsib'  
                })
               var nouvelObjet = {
                 ...this.editMarcheHorSib,

@@ -10,7 +10,7 @@ var queue = housecall({concurrency: 2, cooldown: 1000})
 export  function  getStructureBudgetaire({commit}) {
   queue.push(() =>  axios.get('/liste_document_structure_budgetaires').then((response) => {
     commit('GET_STRUCTURE_BUDGETAIRE', response.data)
-    
+
 }).catch(error => console.log(error)))
 }
 
@@ -20,7 +20,7 @@ export  function ajouterStructureBudgetaire({commit}, objetAjoute){
     niveau: objetAjoute.niveau,
     code:objetAjoute.code,
     libelle: objetAjoute.libelle
-       
+
 } )).then(res => {
         if(res.status == 201){
             commit('AJOUTER_STRUCTURE_BUDGETAIRE', res.data)
@@ -30,7 +30,7 @@ export  function ajouterStructureBudgetaire({commit}, objetAjoute){
                 text: 'Enregistrement effectué avec success !',
                 type:"success"
               })
-        
+
         }
     }).catch(error => console.log(error))
 }
@@ -56,19 +56,19 @@ export function modifierStructureBudgetaire({commit}, budgetaire){
 
 // supprimer structure budgetaire
 export function supprimerStructureBudgetaire({commit}, id){
-  
+
     this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
        commit('SUPPRIMER_STRUCTURE_BUDGETAIRE', id)
       // // dialog.loading(false) // stops the proceed button's loader
-        axios.delete('/delete_document_structure_budgetaires/' + id).then(() => dialog.close() )   
+        axios.delete('/delete_document_structure_budgetaires/' + id).then(() => dialog.close() )
     })
 }
 
 
 
-// get all plan budgetaire 
+// get all plan budgetaire
 export  function getPlanBudgetaire({commit}) {
 
     queue.push(() =>  axios.get('/liste_plan_budgetaires').then((response) => {
@@ -81,7 +81,7 @@ export  function getPlanBudgetaire({commit}) {
 // ajouter plan budgetaire
 export function ajouterPlanBudgetaire({ commit, dispatch}, objetAjout){
     asyncLoading(axios.post('/add_plan_budgetaires', objetAjout)).then(varBudget=>{
-       
+
       commit('AJOUTER_PLAN_BUDGETAIRE', varBudget.data)
         dispatch('getPlanBudgetaire')
       this.$app.$notify({
@@ -89,7 +89,7 @@ export function ajouterPlanBudgetaire({ commit, dispatch}, objetAjout){
         text: 'Enregistrement effectué avec success !',
         type:"success"
       })
-       
+
     }).catch(error => console.log(error))
 }
 
@@ -101,7 +101,7 @@ export function modifierPlanbudgetaire({ commit, dispatch}, budgetaire) {
     libelle:budgetaire.libelle,
        structure_budgetaire_id:budgetaire.structure_budgetaire_id,
        parent: budgetaire.parent
-       
+
 })).then(response => {
         commit('MODIFIER_PLAN_BUDGETAIRE', response.data)
     dispatch('getPlanBudgetaire')
@@ -111,20 +111,37 @@ export function modifierPlanbudgetaire({ commit, dispatch}, budgetaire) {
             type:"success"
           })
     }).catch(error => console.log(error))
-   
+
 }
 
 // supprimer plan budgetaire
 
 export function supprimerPlanBudgetaire({ commit, dispatch}, id){
-  
+
     this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
        commit('SUPPRIMER_PLAN_BUDGETAIRE', id)
         dispatch('getPlanBudgetaire')
       // // dialog.loading(false) // stops the proceed button's loader
-        axios.delete('/delete_plan_budgetaires/' + id).then(() => dialog.close() )   
+        axios.delete('/delete_plan_budgetaires/' + id).then(() => dialog.close() )
     })
 }
 
+
+
+
+export  function  getTousPlanBudgetaire({commit}) {
+    queue.push(() =>  axios.get('/plan_budgetaire').then((response) => {
+        commit('GET_TOUS_PLAN_BUDGETAIRE', response.data)
+
+    }).catch(error => console.log(error)))
+}
+
+
+export  function  getTousActivite({commit}) {
+    queue.push(() =>  axios.get('/all_activite').then((response) => {
+        commit('GET_TOUS_ACTIVITE', response.data)
+
+    }).catch(error => console.log(error)))
+}

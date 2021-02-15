@@ -10,7 +10,7 @@
                                  <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
                                             <tr>
-                                                <th>Ref</th>
+                                                <th>Référence</th>
                                                 <th>Nom</th>
                                                 <th>Contact</th>
                                                 <th>Entreprise</th>
@@ -57,7 +57,7 @@
                       
                          <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter la reception des plis</h3>
+                <h3>Ajouter la réception des plis</h3>
             </div>
             <table class="table table-bordered table-striped">
  <tr>
@@ -69,7 +69,7 @@
                             </select> -->
                             <div class="span" align="left" >
 
-                               Selectionner l'entreprise:
+                               Sélectionner l'entreprise:
                         <model-list-select style="background-color: rgb(255,255,255);"
                                            class="wide"
                                            :list="listeEntreprise"
@@ -99,7 +99,7 @@
                               <td>
                           <div class="control-group">
             
-                            <label class="control-label">Ref des plis:</label>
+                            <label class="control-label">Référence des plis:</label>
                            <div class="control-group">
                        <input type="text" class="span" readonly :value="affichierReferenceAppelOffre(macheid.id)">
                        
@@ -110,7 +110,7 @@
                               <td>
                          <div class="control-group">
             
-                            <label class="control-label">Nom du deposant :</label>
+                            <label class="control-label">Nom du déposant :</label>
                            <div class="control-group">
                        <input type="text" class="span" placeholder="saisir le nom" v-model="formCotation.nom_person">
                             </div>
@@ -134,7 +134,7 @@
 
                     <div class="control-group">
 
-                     <label class="control-label">Date de depot des plis :</label>
+                     <label class="control-label">Date de dépôt des plis :</label>
 
                             <div class="controls">
                                 <input type="date" class="span" row="" placeholder=""  v-model="formCotation.date_cotation">
@@ -161,7 +161,7 @@
             </div>
             <div class="modal-footer">
                 <a class="btn btn-primary" @click.prevent="ajouterCotationLocal()">Ajouter</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+                <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
             </div>
         </div>
 
@@ -171,7 +171,7 @@
 
                          <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier la reception des plis </h3>
+                <h3>Modifier la réception des plis </h3>
             </div>
 
                      <table class="table table-bordered table-striped">
@@ -212,7 +212,7 @@
                           <td>
                                 <div class="control-group">
             
-                            <label class="control-label">Ref des plis:</label>
+                            <label class="control-label">Référence des plis</label>
                            <div class="control-group">
                        <input type="text" class="span" v-model="editCotation.ref_offre">
                             </div>
@@ -223,7 +223,7 @@
 
                          <div class="control-group">
             
-                            <label class="control-label">Nom du deposant :</label>
+                            <label class="control-label">Nom du déposant</label>
                            <div class="control-group">
                        <input type="text" class="span" placeholder="saisir le nom" v-model="editCotation.nom_person">
                             </div>
@@ -233,7 +233,7 @@
 
                         <div class="control-group">
 
-                            <label class="control-label">Contact :</label>
+                            <label class="control-label">Contact</label>
 
                             <div class="controls">
                                 <input type="text" class="span" row="" placeholder=""  v-model="editCotation.contact">
@@ -259,7 +259,7 @@
 
                            <div class="control-group">
 
-                     <label class="control-label">Date de depot des plis :</label>
+                     <label class="control-label">Date de dépôt des plis </label>
 
                             <div class="controls">
                                 <input type="date" class="span" row="" placeholder=""  v-model="editCotation.date_cotation">
@@ -288,7 +288,7 @@
             </div>
             <div class="modal-footer">
                 <a class="btn btn-primary" @click.prevent="modifierCotationLocal()">Modifier</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+                <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
             </div>
         </div>
 

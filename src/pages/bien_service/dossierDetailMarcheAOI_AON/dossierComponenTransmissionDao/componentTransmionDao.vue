@@ -31,7 +31,7 @@
                         </td>
                         <div class="btn-group">
                             <button @click.prevent="supprimerTransmission(transmission.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
+                                <span class=""><i class="icon-trash">Supprimer</i></span></button>
 
                         </div>
 
@@ -53,7 +53,7 @@
                       
                       
                            <div class="control-group">
-              <label class="control-label">Date de transmission:</label>
+              <label class="control-label">Date de transmission</label>
               <div class="controls">
                 <input type="date" class="span" v-model="formTransmission.date_dao" />
               </div>
@@ -75,7 +75,7 @@
             </div>
             <div class="modal-footer">
                 <a class="btn btn-primary" @click.prevent="ajouterCotationLocal()">Ajouter</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+                <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
             </div>
         </div>
 
@@ -92,7 +92,7 @@
                     <form action="#" method="get" >
                         
                                   <div class="control-group">
-              <label class="control-label">Date de transmission:</label>
+              <label class="control-label">Date de transmission</label>
               <div class="controls">
                 <input type="date"  class="span"  v-model="edit_transmission.date_dao" />
               </div>
@@ -113,7 +113,7 @@
             </div>
             <div class="modal-footer">
                 <a class="btn btn-primary" @click.prevent="modifierCotationLocal()">Modifier</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+                <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
             </div>
         </div>
 

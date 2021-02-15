@@ -62,16 +62,16 @@
                     <tbody>
                    <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in EquipementDansLePatrimoine(uniteAdministrative_id)"
+                    v-for="BesoinImmo in listeDesStockParUa(uniteAdministrative_id)"
                     :key="BesoinImmo[0].id"
                   >
                   <td
                    style="width:90%;font-size:14px"
-                    >{{afficherUniteAdministrative(BesoinImmo[0].uniteadministrative_id) || 'Non renseigné'}}</td>
+                    >{{afficherUniteAdministrative(BesoinImmo[0].uAdministrative_id) || 'Non renseigné'}}</td>
                    <td style="font-size:14px" >
                        <router-link :to="{ name: 'SortiDuPatrimoine', params: { id: BesoinImmo[0].id }}"
-                 class="btn btn-inverse " title="">
-        <span class="">Voir Equipement</span>
+                 class="btn btn-success " title="">
+        <i class="icon icon-folder-open"> Voir Article</i>
     </router-link>
                       
                     </td> 
@@ -174,7 +174,8 @@ search:"",
       "getPersonnaliseBudgetGeneralParTransfert",
       "uniteAdministratives",
       "GestionStockageArticles",
-      "groupStockArticle"
+      "groupStockArticle",
+      "groupStockParUA"
       // "chapitres",
       // "sections"
     ]),
@@ -275,7 +276,7 @@ ListeActiclePatrimoineSortant() {
 
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.groupeUaAffectation.filter(item=>{
+            this.groupStockParUA.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item[0].uniteadministrative_id)
                 if (val!=undefined){
                     colect.push(item[0])
@@ -285,24 +286,39 @@ ListeActiclePatrimoineSortant() {
             return colect;
      
         }
-return this.groupeUaAffectation;
+return this.groupStockParUA;
       
 
     },
 
-EquipementDansLePatrimoine() {
+listeDesStockParUa() {
       return id => {
         if (id != null && id != "") {
-           return this.ListeActiclePatrimoineSortant.filter(qtreel => qtreel[0].uniteadministrative_id == id );
+           return this.listeDesStockGlobalUa.filter(qtreel => qtreel[0].uAdministrative_id == id);
 
         }
-        return this.ListeActiclePatrimoineSortant;
+        return this.listeDesStockGlobalUa;
       };
      
     },
 
+listeDesStockGlobalUa() {
+    
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.groupStockParUA.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect;
+    
+        }
+return this.groupStockParUA;
 
-
+}
       },
 
       methods:{ 

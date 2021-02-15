@@ -52,7 +52,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucun plan programmatique enregistré ! </h6>
+                <h6 style="color:red;">Aucun plan programmatique enregistré  </h6>
               </div>
             </div>
           </div>
@@ -229,7 +229,7 @@
                     <tr>
                       <td>
                          <div class="control-group">
-              <label class="control-label">Structure Activite</label>
+              <label class="control-label">Structure de l'activité</label>
               <div class="controls">
                 <select  v-model="editTitre.structure_activites_id" class="span5">
             <option v-for="plan in structures_activites" :key="plan.id" 
@@ -252,7 +252,7 @@
                     <tr>
                       <td>
                         <div class="control-group">
-              <label class="control-label">Libelle</label>
+              <label class="control-label">Libellé</label>
               <div class="controls">
                 <input type="text" v-model="editTitre.libelle" class="span5" placeholder="" />
               </div>

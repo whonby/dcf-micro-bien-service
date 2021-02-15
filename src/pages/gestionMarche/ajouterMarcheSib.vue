@@ -482,8 +482,7 @@ export default {
     ligneBudgeteyuy() {
      return id => {
         if (id != null && id != "") {
-            console.log(id)
-            console.log(".........")
+            
           return this.budgetGeneral.filter(
             element =>{
                 if( element.ua_id == id  && element.exercicebudget_id ==2021 && element.actived==1){

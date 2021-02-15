@@ -5,16 +5,16 @@
     <div>
       
         <!-- debut de liste analyse  -->
-          <h4>Liste des dossiers analyses</h4>
+          <h4>Liste des dossiers analysés</h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
-                        <th>Ref offre</th>
-                        <th>Date Analyse </th>
+                        <th>Référence de l'offre</th>
+                        <th>Date de l'analyse </th>
                         <th>Rang d'analyse</th>
                         <th>Note</th>
-                         <th>Numero dossier Candidat</th>
-                         <th> Montant Offre financiere</th>
+                         <th>Numéro du dossier du candidat</th>
+                         <th> Montant de l'offre financière</th>
                         <th>Type d'analyse</th>
                        
 
@@ -80,7 +80,7 @@
                         <tr>
                             <td>
                         <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                             <!-- <select v-model="formAnalyseDossier.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -97,7 +97,7 @@
                             </td>
                             <td>
                      <div class="control-group">
-                        <label class="control-label">Numero du dossier</label>
+                        <label class="control-label">Numéro du dossier</label>
                         <div class="controls">
                              <select v-model="formAnalyseDossier.dossier_candidat_id" class="span">
                                 <option v-for="plans in afficherNumeroDossierCandidatMenuDeroulant(macheid)" :key="plans.id"
@@ -119,7 +119,7 @@
                      <td>
                        
                     <div class="control-group">
-                        <label class="control-label">Offre Financiere</label>
+                        <label class="control-label">Offre Financière</label>
                         <div class="controls">
                             <!-- <select v-model="formAnalyseDossier.cojo_id" class="span" :readOnly="verifiBanqueExist">
                                 <option v-for="plans in afficherMontant(formAnalyseDossier.dossier_candidat_id)" :key="plans.id"
@@ -133,7 +133,7 @@
 
                               <td colspan="">
                         <div class="control-group">
-                        <label class="control-label">Type analyse</label>
+                        <label class="control-label">Type d'analyse</label>
                         <div class="controls">
                             <select v-model="formAnalyseDossier.type_analyse_id" class="span">
                                 <option v-for="plans in typeAnalyses" :key="plans.id"
@@ -198,7 +198,7 @@
             
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterAnalyseD()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
         <!-- fin formulaire ajout analyse  -->
 
@@ -208,7 +208,7 @@
         <div id="modifierJugement" class="modal hide grdirModalAnalyse">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification du dossier Analyse</h3>
+                <h3>Modification du dossier d'analyse</h3>
             </div>
             
                   <table class="table table-bordered table-striped">
@@ -217,7 +217,7 @@
 
                           <td>
                                <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                           <input
                                     type="text"
@@ -230,7 +230,7 @@
                           </td>
                           <td>
                     <div class="control-group">
-                        <label class="control-label">Dossier candidat</label>
+                        <label class="control-label">Dossier du candidat</label>
                         <div class="controls">
 
                              <select v-model="edite_analyse_dossier.dossier_candidat_id" class="span">
@@ -265,7 +265,7 @@
 
                           <td colspan="2">
                     <div class="control-group">
-                        <label class="control-label">Type analyse</label>
+                        <label class="control-label">Type d'analyse</label>
                         <div class="controls">
                             <select v-model="edite_analyse_dossier.type_analyse_id" class="span">
                                 <option v-for="plans in typeAnalyses" :key="plans.id"
@@ -293,7 +293,7 @@
                           <td>
 
                     <div class="control-group">
-                        <label class="control-label">Rang analyse :</label>
+                        <label class="control-label">Rang d'analyse</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -338,7 +338,7 @@
             
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationDossierAnalyse()" href="#">Modifier</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
         <notifications/>
     </div>

@@ -9,18 +9,19 @@ CodeExempte
                 <div class="">
                     <div class="widget-box"> <br>
                       
-                       <div class="" align="right">
+                       <!-- <div class="" align="right">
                    <router-link :to="{name:'ajouterMarche'}" tag="a" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter Marché
 
                    </router-link> 
 
-                   </div><br>
+                   </div><br> -->
                     <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
 
-              <h5>Liste des March&eacute;s  <code>({{marcheHorSibFiltre.length}})</code>  </h5>
+
+              <h5>Liste des March&eacute;s <code>({{marcheSibFiltre.length}})</code>  </h5>
               <div align="right">
                 Recherche:
                 <input type="search"  v-model="search"  placeholder=" saisir objet"/>
@@ -60,7 +61,7 @@ CodeExempte
                 </thead>
                 <tbody>
                  
-                  <tr class="odd gradeX" v-for="activites in partition(marcheHorSibFiltre, size)[page]
+                  <tr class="odd gradeX" v-for="activites in partition(marcheSibFiltre, size)[page]
                 "
                  :key="activites.id">
                   <td @dblclick="afficherModifierMarcheHorSib(activites.id)">
@@ -133,18 +134,19 @@ CodeExempte
     </router-link>
                    </td>
                    
-                   <td>
+                  
+                   <td v-if="activites.attribue == 2">
+                     <router-link :to="{ name: 'detailExecution', params: { id: activites.id }}"
+                class="btn btn-warning " title="Exécution du Marché">
+                  <span class="">Exécution Marché</span>
+                   </router-link> 
+                   </td>
+                    <td v-else>
                     
                       <router-link :to="{ name: 'detail_hors_sib', params: { id: activites.id }}"
                 class="btn btn-success " title=" Contractualisation">
                   <span > Contractualisation</span>
                     </router-link>
-                   </td>
-                   <td v-if="activites.attribue == 2">
-                     <router-link :to="{ name: 'detailExecution', params: { id: activites.id }}"
-                class="btn btn-warning " title="Exécution du Marché">
-                  <span class="">Exécution</span>
-                   </router-link> 
                    </td>
            <td>
           
@@ -206,9 +208,9 @@ CodeExempte
                    <div class="pagination alternate">
              <ul>
            <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-           <li  v-for="(titre, index) in partition(marcheHorSibFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+           <li  v-for="(titre, index) in partition(marcheSibFiltre,size).length" :key="index" :class="{ active : active_el == index }">
            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-            <li :class="{ disabled : page == partition(marcheHorSibFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+            <li :class="{ disabled : page == partition(marcheSibFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
            </ul>
         </div>
                        
@@ -375,11 +377,11 @@ export default {
  'structures_geographiques','localisations_geographiques']),
 
     ...mapGetters("horSib", ["gettersMarcheHorsib"]),
-    marcheHorSibFiltre(){
+    marcheSibFiltre(){
 
      const searchTerm = this.search.toLowerCase();
 
-return this.afficherListeMarcheHorsSib.filter((item) => {
+return this.afficherListeMrcheSib.filter((item) => {
   
      return item.objet.toLowerCase().includes(searchTerm) 
            //item.reference_marche.toLowerCase().includes(searchTerm) 
@@ -390,7 +392,7 @@ return this.afficherListeMarcheHorsSib.filter((item) => {
 
    montantMarche(){
 
-  return this.afficherListeMarcheHorsSib.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),0)
+  return this.afficherListeMrcheSib.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),0)
 },
 
  afficheLocalisation() {
@@ -417,27 +419,11 @@ return this.afficherListeMarcheHorsSib.filter((item) => {
   
 //  },
 
- afficherListeMarcheHorsSib() {
-       // const st = this.search.toLowerCase();
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.gettersMarcheHorsib.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect.filter(element =>   element.parent_id == null && element.sib==0 )
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // }); 
-        }
-
-        return this.gettersMarcheHorsib.filter(element => element.parent_id == null && element.sib==0 )
+ afficherListeMrcheSib() {
+       console.log("...................")
+console.log(this.listeMarcheUniteAdmin)
+console.log("....................")
+        return this.listeMarcheUniteAdmin
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -446,6 +432,48 @@ return this.afficherListeMarcheHorsSib.filter((item) => {
 
     },
  
+filtre_unite_admin() {
+                if(this.noDCfNoAdmin){
+                    let colect=[];
+                    let vM=this
+                    this.uniteAdministratives.filter(item=>{
+                        if(vM.getterUniteAdministrativeByUser.length>0){
+                            let val= vM.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                            if (val!=undefined){
+                                colect.push(item)
+                                return item
+                            }
+                        }
+
+                    })
+                    return colect
+                }
+                return this.uniteAdministratives
+            },
+            listeMarcheUniteAdmin(){
+                let colect=[]
+                let vM=this;
+                this.filtre_unite_admin.forEach(function (value) {
+                    let objet=vM.marches.filter(item=>{
+                            if(item.parent_id==null && item.unite_administrative_id==value.id && item.sib==0  ){
+                                //  console.log(item.parent_id)
+                                return item
+                            }
+                        }
+                    )
+                    if(objet!=undefined){
+                        objet.forEach(function (val) {
+                            let objet=   colect.find(item=>item.id==val.id)
+                            if(objet==undefined){
+                                colect.push(val)
+                            }
+                        })
+                    }
+
+
+                })
+                return colect
+            },
 
  // afficher le nommbre demareche hors sib
 

@@ -1,7 +1,7 @@
 <template>
  
      <div>
-       <h4 style="text-align:center">Module Paramétre Généraux</h4>
+       <h4 style="text-align:center">Module Paramètres Généraux</h4>
        <br>
        <br>
        <br>
@@ -29,8 +29,8 @@
               <thead>
                 <tr>
                   <th>Année</th>
-                  <th>Date début</th>
-                  <th>Date fin</th>
+                  <th>Date de début</th>
+                  <th>Date de fin</th>
                   
                   <th>En cours</th>
                  
@@ -95,7 +95,7 @@
       <div class="span4">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-            <h5>ENTREPRISE NON SANCTIONNEE</h5>
+            <h5>ENTREPRISES NON SANCTIONNEES</h5>
           </div>
           <div class="widget-content"> 
                <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{EntrepriseNonSantionner}}</h1>
@@ -106,7 +106,7 @@
       <div class="span4">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-            <h5>ENTREPRISE SANCTIONNEE</h5>
+            <h5>ENTREPRISES SANCTIONNEES</h5>
           </div>
           <div class="widget-content"> 
                <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{EntrepriseSantionner}}</h1>

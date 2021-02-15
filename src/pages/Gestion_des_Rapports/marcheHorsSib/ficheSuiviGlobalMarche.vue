@@ -1,20 +1,21 @@
 
 <template>
   <div>
-      <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
+    <br/>
+      <div  class="row-fluid"  style="margin-top: -20px">
                 <div class="span1">
 
                 </div>
-                <div class="span10 " style="background: #f0c71d !important;">
-                    <table class="table table-striped"  style="background: #f0c71d !important;">
+                <div class="span10 " >
+                    <table class="table table-striped">
                         <tbody>
                         <tr>
                         
                             
-                            <td style="background: #f0c71d !important;">
-                                <label style="font-size:20px">Exercice Budgétaire
+                            <td>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">Exercice Budgétaire
                                 </label>
-                                <model-list-select style="background-color: #fff;"
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
                                                    class="wide"
                                                    :list="exercices_budgetaires"
                                                    v-model="exercices_budgetaires_id"
@@ -25,10 +26,10 @@
 
                                 </model-list-select>
                             </td>
-                          <td style="background: #f0c71d !important;">
-                                <label style="font-size:20px">Unité Administrative
+                          <td>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">Unité Administrative
                                 </label>
-                                <model-list-select style="background-color: #fff;"
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
                                                    class="wide"
                                                    :list="uniteAdministratives"
                                                    v-model="uniteAdministrative_id"
@@ -39,10 +40,10 @@
 
                                 </model-list-select>
                             </td>
-                            <td style="background: #f0c71d !important;">
-                                <label style="font-size:20px">Type de Marche
+                            <td>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">Type de Marche
                                 </label>
-                                <model-list-select style="background-color: #fff;"
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
                                                    class="wide"
                                                    :list="typeMarches"
                                                    v-model="typemarche_id"
@@ -56,10 +57,10 @@
                             
                         </tr>
 <tr>
-     <td style="background: #f0c71d !important;" colspan="3">
-                                <label style="font-size:20px">Marche en Execution
+     <td  colspan="3">
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">Marche en Execution
                                 </label>
-                                <select v-model="formData.marche_exercute_id" class="span" >
+                                <select v-model="formData.marche_exercute_id" class="span" style="background-color: #fff;border:2px solid #000">
                                                             <option v-for="item in ListeDesMarcheEnExecution(typemarche_id)" 
                                                             :key="item.id" 
                                                             :value="item.marche_id">
@@ -97,7 +98,7 @@
                 <thead>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">EXERCICE BUDGETAIRE</th>
-                     <td colspan="3" style="width:15%;text-align:center;font-size:25px;font-weight: bold;"> {{exerciceBudgetaire(formData.marche_exercute_id)}} </td>
+                     <td colspan="3" style="width:15%;text-align:center;font-size:16px;font-weight: bold;"> {{exerciceBudgetaire(formData.marche_exercute_id)}} </td>
                  </tr>
                   <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">BAILLEUR(S)</th>
@@ -105,7 +106,7 @@
                  </tr>
                   <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">MINISTERE DE TUTELLE</th>
-                 <td colspan="3" style="width:15%;text-align:center;font-size:25px;font-weight: bold;"> {{sectionLibelle(section_id(uniteAdministrative_id))}} </td>
+                 <td colspan="3" style="width:15%;text-align:center;font-size:16px;font-weight: bold;"> {{sectionLibelle(section_id(uniteAdministrative_id))}} </td>
                  </tr>
                 <tr style="">
                      <th style="background-color: orange;"></th>
@@ -115,72 +116,72 @@
                  </tr>
                   <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">INTUTILE DE L'UA</th>
-                     <td colspan="3" style="text-align:center;font-size:25px;font-weight: bold;"> {{LibelleUniteAdministrative(IdUniteAdministrative(formData.marche_exercute_id))}} </td>
+                     <td colspan="3" style="text-align:center;font-size:16px;font-weight: bold;"> {{LibelleUniteAdministrative(IdUniteAdministrative(formData.marche_exercute_id))}} </td>
                      
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">LIGNE BUDGETAIRE</th>
-                     <td colspan="3" style="text-align:center;font-size:25px;font-weight: bold;"> {{ligneBudgetaireId(formData.marche_exercute_id)}} </td>
+                     <td colspan="3" style="text-align:center;font-size:16px;font-weight: bold;"> {{ligneBudgetaireId(formData.marche_exercute_id)}} </td>
                      
                  </tr>
                   <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">NUMERO DU MARCHE</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{NumeroMarche(formData.marche_exercute_id)}} </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{NumeroMarche(formData.marche_exercute_id)}} </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">LIBELLE DE MARCHE/CONTRAT</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{LibelleMarche(formData.marche_exercute_id)}} </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{LibelleMarche(formData.marche_exercute_id)}} </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">ENTREPRISE ATTRIBUTAIRE</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{afficheLibelleEntreprise(afficheidEntreprise(formData.marche_exercute_id))}} </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{afficheLibelleEntreprise(afficheidEntreprise(formData.marche_exercute_id))}} </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">DATE D'APPROBATION</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{afficheDateApprobatrice(formData.marche_exercute_id)}} </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{afficheDateApprobatrice(formData.marche_exercute_id)}} </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">DELAI D'EXECUTION</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{afficheDateExecution(formData.marche_exercute_id)}} </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{afficheDateExecution(formData.marche_exercute_id)}} </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">DATE DE L'OS</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{afficheOrdreService(formData.marche_exercute_id)}} </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{afficheOrdreService(formData.marche_exercute_id)}} </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">DATE DE FIN PREVISIONNELLE</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{afficheDateApprobatrice(formData.marche_exercute_id)}} </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{afficheDateApprobatrice(formData.marche_exercute_id)}} </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">MONTANT PREVISIONNEL</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantPrevu(formData.marche_exercute_id)))}} </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantPrevu(formData.marche_exercute_id)))}} </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">MONTANT DE BASE HT</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantBaseHt(formData.marche_exercute_id)))}} </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantBaseHt(formData.marche_exercute_id)))}} </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">MONTANT DE BASE TTC</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id)))}} </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id)))}} </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
@@ -199,19 +200,19 @@
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">MONTANT GLOBAL DU MARCHE TTC</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                     
-                      <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;">{{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))}}  </td>
+                      <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;">{{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))}}  </td>
                  <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">MONTANT EXECUTE</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;">{{formatageSomme(parseFloat(afficheMontantMandat(formData.marche_exercute_id)))}}  </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;">{{formatageSomme(parseFloat(afficheMontantMandat(formData.marche_exercute_id)))}}  </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">TAUX D'EXECUTION</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{(((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))/(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))*100)}}% </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{(((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))/(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))*100)}}% </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
@@ -223,51 +224,51 @@
                   <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">OP VISES MONTANT {{exercices_budgetaires_id}}</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantMandat(formData.marche_exercute_id)))}}  </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantMandat(formData.marche_exercute_id)))}}  </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">OP VISES MONTANT TOTAL</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;">{{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))}}</td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;">{{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))}}</td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                   <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">OP VISES TAUX</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;">{{(((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))/(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))*100)}}% </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;">{{(((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))/(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))*100)}}% </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                 
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">OP RESTANT A VISER MONTANT {{exercices_budgetaires_id}}</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;">{{formatageSomme((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))-(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))}}</td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;">{{formatageSomme((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))-(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))}}</td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">OP RESTANT A VISER MONTANT TOTAL</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;">{{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))}}</td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;">{{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))}}</td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                   <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">OP RESTANT A VISER TAUX</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;">{{((((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))-(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))/(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id))))*100)}}% </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;">{{((((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))-(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))/(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id))))*100)}}% </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                 
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">DATE REELLE DE FIN</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{afficheDateExecution(formData.marche_exercute_id)}} </td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{afficheDateExecution(formData.marche_exercute_id)}} </td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">DUREE REELLE D'EXECUTION</th>
                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
-                     <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{durreExecution(formData.marche_exercute_id)}} Jours</td>
+                     <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{durreExecution(formData.marche_exercute_id)}} Jours</td>
                       <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  </td>
                  </tr>
                  <tr>
@@ -282,25 +283,25 @@
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">MONTANT GLOBAL DU MARCHE HT</th>
-                     <td colspan="3" style="width:15%;text-align:center;font-size:25px;font-weight: bold">{{formatageSomme(parseFloat(afficheMontantBaseHt(formData.marche_exercute_id)))}}  </td>
+                     <td colspan="3" style="width:15%;text-align:center;font-size:16px;font-weight: bold">{{formatageSomme(parseFloat(afficheMontantBaseHt(formData.marche_exercute_id)))}}  </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">MONTANT GLOBAL DU MARCHE TTC</th>
-                     <td colspan="3" style="width:15%;text-align:center;font-size:25px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))}} </td>
+                     <td colspan="3" style="width:15%;text-align:center;font-size:16px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))}} </td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">EXECUTION GLOBAL DU FINANCIERE</th>
                      
-                     <td style="width:20%;text-align:center;font-size:25px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantMandat(formData.marche_exercute_id)))}} HT</td>
-                      <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))}} TTC</td>
-                      <td style="width:20%;text-align:center;font-size:25px;font-weight: bold;">  {{(((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))/(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))*100)}}%</td>
+                     <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantMandat(formData.marche_exercute_id)))}} HT</td>
+                      <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))}} TTC</td>
+                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">  {{(((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))/(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))*100)}}%</td>
                  </tr>
                  <tr>
                      <th style="width:15%;text-align:center;font-size:16px;font-weight: bold;">MONTANT (OP)RESTANT A VALIDER</th>
                      
-                     <td style="width:20%;text-align:center;font-size:25px;font-weight: bold;">{{formatageSomme((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))-(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))}} HT</td>
-                      <td style="width:60%;text-align:center;font-size:25px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))}} TTC</td>
-                      <td style="width:20%;text-align:center;font-size:25px;font-weight: bold;"> {{((((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))-(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))/(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id))))*100)}} %</td>
+                     <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;">{{formatageSomme((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))-(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))}} HT</td>
+                      <td style="width:60%;text-align:center;font-size:16px;font-weight: bold;"> {{formatageSomme(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))}} TTC</td>
+                      <td style="width:20%;text-align:center;font-size:16px;font-weight: bold;"> {{((((parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id)))-(parseFloat(afficheMontantMandat(formData.marche_exercute_id))))/(parseFloat(afficheMontantBasettc(formData.marche_exercute_id))+parseFloat(afficheMontantAvenantTtc(formData.marche_exercute_id))))*100)}} %</td>
                  </tr>
 
                  <tr>

@@ -666,7 +666,7 @@
                 </button>
                    <button v-else class="btn  btn-danger">
               
-                <span title="MARCHE NON PLANIFIE">NPL</span>
+                <span title="MARCHE PLANIFIE">PL</span>
                 </button>
 
                    </td>
@@ -1987,28 +1987,30 @@ afficherMarcheInvestissementParEnContratualistationDroitAccess() {
     },
 
 
-    afficherMarcheInvestissementParExecutionDroitAccess() {
+   
+
+afficherMarcheInvestissementParExecutionDroitAccess() {
        // const st = this.search.toLowerCase();
+ 
+
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.afficheMarchExecuter.filter(item=>{
+            this.getActeEffetFinancierPersonnaliser45.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect
+            return colect.filter(element => this.affichertypeMarcheEx(element.marche_id) == 7 && element.parent_id == null && element.sib ==0 && this.afficherAttributMarche(element.marche_id) == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == 1) 
+           
         }
 
-        return this.afficheMarchExecuter
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.affichertypeMarcheEx(element.marche_id) == 7 && element.parent_id == null && element.sib ==0 && this.afficherAttributMarche(element.marche_id) == 2  && element.parent_id == null && element.sib == 0  &&  element.difference_personnel_bienService == 1 && element.sib == 0)
+            
+        
+
     },
-
-
     
     afficherMarcheInvestissementParResilierDroitAccess() {
        // const st = this.search.toLowerCase();
@@ -2205,7 +2207,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficher
 afficheNombreMarchExecuter(){
 
   
-return this.afficheMarchExecuter.length
+return this.afficherMarcheInvestissementParExecutionDroitAccess.length
 },
 
 

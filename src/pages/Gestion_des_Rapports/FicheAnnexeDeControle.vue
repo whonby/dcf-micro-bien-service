@@ -11,8 +11,8 @@
 <table class="table   html2pdf__page-break noborder" id="app1"  >
    <tr class="noborder">
                                               <td colspan="" style="text-align:center" class="noborder">
- <p>MINISTERE  DU BUDGET ET DU PORTEFEUILLE </p>
-      <p> DE L'ETAT</p>
+ <p>MINISTERE  DU BUDGET </p>
+      
                                  </td>
                                  <!-- <td style="text-align:center">
                                     <img  :src="AffichePhoto">
@@ -55,7 +55,12 @@
       
 
       <tr>
-        <th style="width:25%;font-size:20px ">EXERCICE BUDGETAIRE :</th> <td style="font-size:25px"> {{detailOp.exercice_budget}} </td>
+        
+          <th style="width:25%;font-size:20px;font-weight: bold; ">EXERCICE BUDGETAIRE :</th> 
+          <td style="font-size:25px"> {{detailOp.exercice_budget}} </td>
+        
+       
+        
                      
                     
       </tr>
@@ -63,7 +68,7 @@
      <br/>
      
           <tr>
-                     <th style="width:25%;font-size:20px ">PROJET OU ORGANISME :</th><td style="font-size:25px">{{infoLibelleUa(detailOp.ua_id)}}  </td>
+                     <th style="width:25%;font-size:20px ;font-weight: bold;">PROJET OU ORGANISME :</th><td style="font-size:25px">{{infoLibelleUa(detailOp.ua_id)}}  </td>
                      
                     
                  </tr>
@@ -72,7 +77,7 @@
                  
                   <tr>
                     <!-- <th rowspan="5" style="margin:0 auto">IMPUTATION BUDGETAIRE</th> -->
-                     <th style="width:25%;font-size:20px ">OBJET DE LA DEPENSE :</th>  <td style="font-size:25px"> {{infoObjetFacture(detailOp.facture_id)}} </td>
+                     <th style="width:25%;font-size:20px;font-weight: bold; ">OBJET DE LA DEPENSE :</th>  <td style="font-size:25px"> {{infoObjetFacture(detailOp.facture_id)}} </td>
                      
                  </tr>
                   <br/>
@@ -80,21 +85,21 @@
        
       <tr>
                     <!-- <th rowspan="5" style="margin:0 auto">IMPUTATION BUDGETAIRE</th> -->
-                     <th style="width:25%;font-size:20px ">DATE DU CONTRÔLE :</th>
+                     <th style="width:25%;font-size:20px;font-weight: bold; ">DATE DU CONTRÔLE :</th>
                      <td style="text-align:center;font-size:20px"> </td>
                  </tr>
                   <br/>
       <br/>
                   <tr>
                     <!-- <th rowspan="5" style="margin:0 auto">IMPUTATION BUDGETAIRE</th> -->
-                     <th style="width:25%;font-size:20px ">LIVRABLE</th> <td style="text-align:center;font-size:20px">{{recupererLivrable(detailOp.marche_id)}} </td>
+                     <th style="width:25%;font-size:20px;font-weight: bold; ">LIVRABLE</th> <td style="text-align:center;font-size:20px">{{recupererLivrable(detailOp.marche_id)}} </td>
                      
                  </tr>
                  <br/>
                  <br/>
                  <tr>
                     <!-- <th rowspan="5" style="margin:0 auto">IMPUTATION BUDGETAIRE</th> -->
-                     <th style="width:25%;font-size:20px ">TAUX DE REALISATION :</th> <td style="text-align:center;font-size:20px"> </td>
+                     <th style="width:25%;font-size:20px;font-weight: bold; ">TAUX DE REALISATION :</th> <td style="text-align:center;font-size:20px"> </td>
                      
                  </tr>
        <br/>

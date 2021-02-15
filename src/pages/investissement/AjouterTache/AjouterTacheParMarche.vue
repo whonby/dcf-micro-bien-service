@@ -6,7 +6,7 @@
     
         </div> 
 
- <div id="ModiiferexampleModal" class="modal hide tailgrand">
+ <div id="ModiiferexampleModal" class="modal hide tailgrand8965">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Modifier Tâche du marche</h3>
@@ -65,7 +65,7 @@
 
 
 
-       <div id="exampleModal" class="modal hide tailgrand">
+       <div id="exampleModal" class="modal hide tailgrand8965">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter Tâche du marche</h3>
@@ -345,6 +345,7 @@ ModifierTacheMarch() {
         ...this.editTacheMarche,
         marche_id: this.detail_marche.id,
          numero_tache:this.numeroTache(this.detail_marche.id),
+historiquetauxprevu:this.editTacheMarche.taux_prevu,
          situation:0
        
       };
@@ -365,6 +366,7 @@ AjouterTacheMarch() {
         ...this.formData,
         marche_id: this.detail_marche.id,
          numero_tache:this.numeroTache(this.detail_marche.id),
+         historiquetauxprevu:this.formData.taux_prevu,
        situation:0
       };
       this.ajouterTacheMarche(nouvelObjet);
@@ -381,11 +383,10 @@ AjouterTacheMarch() {
       }
 }
 </script>
-<style>
 
-.tailgrand{
-  width: 28%;
-  margin: 0 -18%;
+<style scoped>
+.tailgrand8965{
+  width: 23%;
+  margin: 0 -10%;
 }
-
 </style>

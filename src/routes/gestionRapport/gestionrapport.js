@@ -8,7 +8,13 @@ import suiviMarcheDesProjetParTypeMarche from "../../pages/Gestion_des_Rapports/
 import etatRecapitulative from "../../pages/Gestion_des_Rapports/marcheHorsSib/etatRecapitulative.vue";
 import FicheAnnexeDeControle from "../../pages/Gestion_des_Rapports/FicheAnnexeDeControle";
 import ficheSuiviGlobalMarche from "../../pages/Gestion_des_Rapports/marcheHorsSib/ficheSuiviGlobalMarche";
+import suiviEvaluationEntreprise from "../../pages/Gestion_des_Rapports/suiviEvaluationEntreprise.vue";
 const gestionrapport =[
+    {
+        path:"/suiviEvaluationEntreprise",
+        name:"suiviEvaluationEntreprise",
+        component:suiviEvaluationEntreprise
+    },
     {
         path:"/ficheSuiviGlobalMarche",
         name:"ficheSuiviGlobalMarche",

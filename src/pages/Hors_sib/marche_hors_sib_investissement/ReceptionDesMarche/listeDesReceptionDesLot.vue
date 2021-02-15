@@ -163,6 +163,7 @@
                 </div>
 
 
+
               </div>
              
             </td>
@@ -273,7 +274,7 @@
                 <div class="controls">
                   <input
                       type="text"
-                      :value="formReception.Periode_garantie"
+                      :value="dureeGarantie(detail_marche.id)"
                        class="span3"
                       
                   />
@@ -303,7 +304,7 @@
                 <div class="controls">
                   <input
                       type="date"
-                      :value="formReception.	Date_reception_provisoire"
+                      :value="formReception.Date_reception_provisoire"
                       class="span3"
                       
                   />
@@ -318,7 +319,7 @@
                 <div class="controls">
                   <input
                       type="date"
-                        
+                        :value="formReception.Date_reception_definitive"
                       class="span3"
                       
                   />
@@ -337,7 +338,7 @@
                 <div class="controls">
                   <input
                       type="text"
-                         
+                         :value="formReception.Duree_execution_reel "
                        class="span3"
                       
                   />
@@ -352,7 +353,7 @@
                 <div class="controls">
                   <input
                       type="text"
-                      
+                       :value="formReception.Duree_execution_reel "
                       class="span3"
                       
                   />
@@ -366,7 +367,7 @@
                 <div class="controls">
                   <input
                       type="text"
-                      
+                      :value="formReception.Ecart_reception_definitive"
                       class="span3"
                       
                   />
@@ -376,10 +377,10 @@
             </td>
              <td>
               <div class="control-group">
-                <label class="control-label">Ecart de démarrage </label>
+                <label class="control-label">Ecart de démarrage (E-A)</label>
                 <div class="controls">
                   <input
-                      type="text"
+                      type="text" :value="calculeDureEcart"
                       
                       class="span3"
                       
@@ -390,7 +391,10 @@
             </td>
             
             
-             <td>
+           
+           </tr>
+           <tr>
+               <td>
 
               <div class="control-group">
                 <label class="control-label">Ecart d'execution</label>
@@ -405,6 +409,54 @@
                 </div>
               </div>
             </td>
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">date_debut_exectuion_definitif</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">date_reception_provisoire_definitif</label>
+                <div class="controls">
+                  <input
+                      type="date"
+                      
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            <td>
+
+              <div class="control-group">
+                <label class="control-label">date_reception_definitive</label>
+                <div class="controls">
+                  <input 
+                      type="date"
+                      
+                      class="span3"
+                      
+                  />
+                  
+                </div>
+              </div>
+            </td>
+             	
+               
+               
            </tr>
        </table>
       </div>
@@ -596,7 +648,7 @@
               <div class="control-group">
                 <label class="control-label">Date de debut d'execution réelle</label>
                 <div class="controls">
-                  <input
+                  <input v-model="formReception.date_debut_execution_reel"
                       type="date"
                       
                       class="span3"
@@ -690,7 +742,7 @@
                 <label class="control-label">Ecart d'execution</label>
                 <div class="controls">
                   <input
-                      type="text"
+                      type=""
                       
                       class="span3"
                       
@@ -844,6 +896,22 @@ created() {
       return  diffJour;
 
     },
+
+     calculeDureEcart(){
+      var dateD = new Date( this.afficherDatedebutex(this.detail_marche.id)).getTime()
+   var dateR = new Date(this.formReception.Date_debut_execution).getTime()
+    
+    var diffTime = dateD - dateR 
+    var diffJours = diffTime / (1000 * 3600 * 24)
+      console.log(diffTime)
+          if(isNaN(diffJours)) return null
+
+    if(parseFloat(diffJours) < 0 ) return "durée invalide"
+        console.log(diffJours)
+      return diffJours;
+      
+   },
+
 afficheNumeroMarche() {
       return id => {
         if (id != null && id != "") {
@@ -882,6 +950,7 @@ afficheNumeroMarche() {
         }
       };
     },
+
      afficherDatedebutex() {
       return id => {
         if (id != null && id != "") {
@@ -895,6 +964,14 @@ afficheNumeroMarche() {
         }
       };
     },
+
+   
+
+    
+
+
+
+
      afficherDatereception() {
       return id => {
         if (id != null && id != "") {
@@ -907,6 +984,15 @@ afficheNumeroMarche() {
       return ""
         }
       };
+    },
+     listeActeEffectFinnancier: function () {
+      return macheid => {
+        if (macheid != "") {
+            console.log("....................")
+           console.log(macheid)
+          return this.getActeEffetFinancierPersonnaliser.find(idmarche => idmarche.marche_id == macheid)
+        }
+      }
     },
         afficherDatefinex() {
       return id => {
@@ -1061,6 +1147,19 @@ LibelleUniteAdministrative() {
         }
       };
     },
+     dureeGarantie(){
+         return marche_id=>{
+               let objet=this.listeActeEffectFinnancier(marche_id)
+              console.log(objet)
+               if(objet!=undefined){
+                   if(objet.durre_garantie==null) return 0
+
+                   return objet.durre_garantie
+               }
+                        
+               return 0
+           }
+     },
 
      Entreprise() {
       return id => {
@@ -1105,23 +1204,7 @@ afficheMontantReelMarche() {
         },
         methods: {
             ...mapActions("bienService", [
-                "getEngagement",
-                "supprimerEngagement",
-                "modifierEngagement",
-                "ajouterEngagement",
-                "ajouterMandat",
-                "modifierMandat",
-                "supprimerMandat",
-                "ajouterFacture",
-                "modifierFacture",
-                "supprimerFacture",
-                "ajouterChoixProcedure",
-                 "ajouterAvenant",
-      "modifierAvenant",
-      "supprimerAvenant",
-      "modifierMarche",
-      "getActeEffetFinancier",
-      "getMarche"
+              "ajouterReception"
                
             ]),
  ...mapActions("uniteadministrative", [              
@@ -1189,6 +1272,7 @@ afficherModalProcedureFacture() {
         Ecart_reception_provisoire:this.Ecartreceptpro,
         Ecart_reception_definitive:this.Ecartreceptdef,
 
+
       //   marche_id:this.detail_Facture.marche_id,
       //   facture_id:this.detail_Facture.id,
       // nethtva:this.montantTVA,
@@ -1197,11 +1281,26 @@ afficherModalProcedureFacture() {
       // parts_bailleur:this.MontantHTBailleur,
       // montantmarche:this.Montantapresretenues
       };
+      // var ObjetActeFinancier = {
+      //   ...this.formReception,
+      //   date_fin_exe:this.afficherDatefinex(this.marcheid),
+      //   Ecart_reception_provisoire:this.Ecartreceptpro,
+      //   Ecart_reception_definitive:this.Ecartreceptdef,
+        
+
+      //   marche_id:this.detail_Facture.marche_id,
+      //   facture_id:this.detail_Facture.id,
+      // nethtva:this.montantTVA,
+      // netttc:this.Montantapresretenues,
+      // parts_etat:this.MontantHTEtat,
+      // parts_bailleur:this.MontantHTBailleur,
+      // montantmarche:this.Montantapresretenues
+      // };
       this.ajouterDecompteFacture(nouvelObjet);
     this.ajouterModalActeEffetFinancierLocal()
-      this.formData = {
+      // this.formData = {
       
-      };
+      // };
     },
 
 

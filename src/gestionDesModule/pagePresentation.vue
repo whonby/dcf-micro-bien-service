@@ -291,6 +291,8 @@
 import { mapGetters,mapActions} from "vuex";
 import {admin,dcf,noDCfNoAdmin} from '../../src/Repositories/Auth';
 import Pusher from 'pusher-js';
+
+import Ws from '@adonisjs/websocket-client'
 //import listeUaDeComptabiliteMatiere from '../pages/suivi_control_budgetaires/suiviImmobilisation/RefaireComptabiliteMatiere/dossierListeUaDeComptabilteMatier/listeUaDeComptabiliteMatiere'
 // import {admin,dcf,cf,noDCfNoAdmin} from "../Repositories/Auth"
 export default {
@@ -299,7 +301,7 @@ components:{
 },
   data(){
     return{
-
+        isConnected:false,
       budgetGeneralCharge:""
 
     }
@@ -309,6 +311,7 @@ created(){
     let user=JSON.parse (objet)
     this.getServiceCF()
     this.getEntrepriseSousTraitance()
+    this.getProgrammationMarchePlurieAnnuel()
     this.getAffectationServiceCF()
     this.getAffectation()
     this.getUniteAdminUser(user.id)
@@ -330,7 +333,7 @@ this.getRegimeImpositions()
     this.getRapport()
       this.getBudgeChager()
       this.getLigneExempter()
-      
+
       this.getExercicesBudgetaires()
       this.getTaux()
       this.getModePaiement()
@@ -369,7 +372,7 @@ this.getRegimeImpositions()
     this.getTypeUniteAdministrative()
     // this. getPlanActivite()
     this.getAllUniteZone()
-    
+
     this.getAllHistoriqueTransfert()
     this.getUnite()
     this.getZone()
@@ -382,7 +385,7 @@ this.getCommune()
 this.getChoixProcedure()
 this.getTransmission()
 this.getCotation()
-this.getOuverture()    
+this.getOuverture()
 this.getSanction()
 this.getAllRealiteServiceFait()
      this.getAllLiquidation()
@@ -395,7 +398,7 @@ this.getAllRealiteServiceFait()
 
 
 
-    
+
 
 this.getTypeCandidat();
 this.getTypeAppel()
@@ -404,10 +407,10 @@ this.getTypeAppel()
 
 
 
-    
+
       // this.getAllTypeTextes();
     this.getAllUniteAdministrative();
-     
+
      this.getAllBanqueUa()
      this.getAllDecompteFacture()
      this.getAllHistoriqueDecompteFacture()
@@ -443,7 +446,7 @@ this.getClassificationGradeFonction()
         this.getConges();
         this.allActeurDepense()
         this.getpaiementPersonnel()
-        
+
          this.getActeurFinContratAndActivite()
         this.getordrepaiement()
         this.getSalaire()
@@ -509,13 +512,13 @@ this.getAllHistoriqueBudgetGeneral()
        */
        this.getCategorieMission()
      this.getNormeMission()
-   
+
       this.getMission()
-       this.getHistoriqueMission() 
+       this.getHistoriqueMission()
 this.getAllBudgetGeneral()
 this.getAllTransfert()
  // debut du module de bien && service
-
+this.getTousPlanBudgetaire()
 this.getBailleur()
 this.getTypeFacture()
 this.getTypeActeDepense()
@@ -528,7 +531,7 @@ this.getAutreTextJuridique()
 this.getTypeTextJuridique()
 this.getMotifDecision()
 this.getDocumentProcedure()
-// this.getDecisionMarche()
+ this.getReserveCf()
 
 // this.getDecisionMarche()
 this.getActeEffetFinancier()
@@ -572,9 +575,10 @@ this.getImageMarche()
 this.getMembreCojo()
     this.getProceVerbal()
       this.getEcheances()
+      this.getOrganeDecision()
     this.getMembreComiteEvaluation()
     this.getStructureDAO()
-
+this.getTousActivite()
         },
 
   computed:{
@@ -592,11 +596,11 @@ this.getMembreCojo()
     ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel","mandats"]),
 
        ...mapGetters("parametreGenerauxAdministratif", [
-             
+
                 "gestionModules"
             ]),
-            
-      
+
+
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation",
       "getterUniteAdministrativeByUser"]),
 
@@ -661,14 +665,14 @@ return objJson.id
 
     ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles",'getGroupe',"getMenu","getModule",
     "getAffectation","getUniteAdminUser","getEquipeCF","activeMenuModuleSidcf","getAffectationGroupeUser","getServiceCF","getAffectationServiceCF"]),
-      ...mapActions('parametreGenerauxFonctionnelle', 
+      ...mapActions('parametreGenerauxFonctionnelle',
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix','getMotifPassation']),
 
     ...mapActions('parametreGenerauxSourceDeFinancement',['getSourceFinancement',
         'getTypeFinancement','getPlanSourceFinancement'
     ]),
    ...mapActions( 'parametreGenerauxBudgetaire', ['getStructureBudgetaire',
-   'getPlanBudgetaire']),
+   'getPlanBudgetaire',"getTousPlanBudgetaire","getTousActivite"]),
    ...mapActions('parametreGenerauxActivite', [ 'getStructureActivite','getPlanActivite','getStructureInfrastructure','getPlanInfrastructure']),
    ...mapActions('parametreGenerauxProgrammeUnite',['getUnite', 'getZone']),
 
@@ -747,7 +751,9 @@ return objJson.id
       "getTransmissionVeh",
       "getAppreciation",
       "getFicheArticle"
-      
+
+
+
     ]),
  ...mapActions('horSib',['getMarcheHorSib',"getRealiteServiceHors","getOpProvisoire"]),
 
@@ -759,14 +765,15 @@ return objJson.id
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",
          "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation","getMandater",
-         "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure',
+         "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure','getReserveCf',
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
           'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
-          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
+          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances","getOrganeDecision",
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
           "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner",
-           "getEcheances","pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO",'getEntrepriseSousTraitance']),
+          "pusherImageMarche","getImageMarche","getMembreComiteEvaluation","getStructureDAO",
+          'getEntrepriseSousTraitance','getProgrammationMarchePlurieAnnuel']),
 
     activeMenuModuleParamGeneral(){
       this.activeMenuModuleSidcf(1)
@@ -855,7 +862,7 @@ return objJson.id
       //         params:{id:}
       //     })
       // },
- 
+
   },
   mounted() {
     let pusher = new Pusher('44daa856e0753c75275a', {
@@ -865,13 +872,41 @@ return objJson.id
 let vm=this;
     let channel = pusher.subscribe('channel-image-marche');
     channel.bind('event-image-marche', function(data) {
-    //  app.messages.push(JSON.stringify(data));
-   // console.log(data)
-     // let donne=JSON.stringify(data)
-      //console.log(donne)
+
       let infomarche=data
     vm.pusherImageMarche(infomarche.data)
     });
+
+      const ws = Ws('ws://localhost:3333')
+
+
+      ws.on('open', () => {
+          console.log("*********GUEI ROLAND********")
+          vm.isConnected = true
+          console.log(vm.isConnected)
+          console.log(".............................")
+      })
+
+      ws.on('close', () => {
+          vm.isConnected = false
+          console.log(vm.isConnected)
+      })
+
+
+
+      //
+      // const chat = ws.subscribe('chat')
+      //
+      // chat.on('ready', () => {
+      //     chat.emit('message', 'hello')
+      // })
+      //
+      // chat.on('error', (error) => {
+      //     console.log(error)
+      // })
+      //
+      // chat.on('close', () => {
+      // })
 
   }
 }
@@ -889,7 +924,7 @@ h4{
 .square{
   width: 20px;
   height: 20px;
- 
+
   color: #FAFAFA;
   text-align: center;
   margin-right: 5px;

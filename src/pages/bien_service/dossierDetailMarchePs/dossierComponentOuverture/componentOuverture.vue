@@ -23,9 +23,9 @@
                       <thead>
                       <tr>
                            <!-- <th>Entreprise</th> -->
-                          <th>Date Composition </th>
-                          <th>Date ouverture</th>
-                          <th>Nmbr particiapnt</th>
+                          <th>Date de composition </th>
+                          <th>Date d'ouverture</th>
+                          <th>Nombre de particiapnts</th>
                           <th>Action</th>
                       </tr>
                       
@@ -68,13 +68,13 @@
               <div id="ajouterCojoB" class="modal hide grdtaill">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Cojo</h3>
+                <h3>Ajouter COJO</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
 
                      <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence des offres</label>
                         <div class="controls">
                             <!-- <select v-model="formDataCojo.cotation_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -150,7 +150,7 @@
 
 
                     <div class="control-group">
-                        <label class="control-label">Nbre de participants</label>
+                        <label class="control-label">Nombre de participants</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -166,7 +166,7 @@
             </div>
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterCojoMarche()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+                <a data-dismiss="modal" class="btn" href="#">Annuler</a> </div>
         </div>
 
             <!-- end formulaire cojo  -->
@@ -175,14 +175,14 @@
              <div id="modificationCojo" class="modal hide grdtaill">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification de cojo</h3>
+                <h3>Modification de la COJO</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
 
 
                      <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                             <!-- <select v-model="edite_cojo.cotation_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -223,7 +223,7 @@
 
 
                     <div class="control-group">
-                        <label class="control-label">Date composition</label>
+                        <label class="control-label">Date de composition</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -235,7 +235,7 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Nbre de participants</label>
+                        <label class="control-label">Nombre de participants</label>
                         <div class="controls">
                             <input
                                     type="text"

@@ -211,7 +211,7 @@
             <div class="controls">
             
                <select v-model="formData.procedure_passation_id" class="span4" >
-               <option v-for="plans in procedurePassations" :key="plans.id" 
+               <option v-for="plans in afficherListeModePassation" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
@@ -221,10 +221,11 @@
             <div class="control-group">
        <label class="control-label">Montant prévu</label>
        <div class="controls">
-         <input
+       <money v-model="formData.montant_marche"  class="span4"></money>
+         <!-- <input
            type="number"
            v-model="formData.montant_marche"
-           class="span4" />
+           class="span4" /> -->
        </div>
      </div>
          </td>
@@ -246,33 +247,34 @@
 
               <tr>
            
-            <td colspan="">
+            <td colspan="2">
               
                <div class="control-group">
             <label class="control-label">Nature des prix</label>
             <div class="controls">
             
-               <select v-model="formData.nature_prix_id" class="span4" >
-               <option v-for="plans in gettesrNaturePrix" :key="plans.id" 
+               <select v-model="formData.nature_prix_id" class="span6" >
+               <option v-for="plans in Nature_des_prix" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
           </div>
               </td>  
        
-         <td colspan="">
+         <!-- <td colspan="">
               
                <div class="control-group">
             <label class="control-label">Motif de passation</label>
             <div class="controls">
             
                <select v-model="formData.motif_passation_id" class="span4" >
-               <option v-for="plans in gettersMotifPassations" :key="plans.id" 
+               <option v-for="plans in motif_passation" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
           </div>
-              </td>  
+              </td>   -->
+
           <td colspan="2">
                   <div class="control-group">
        <label class="control-label">Infrastructure</label>
@@ -344,6 +346,7 @@ export default {
           name: "cache",
           icon: "add"
         },
+
 
         // {
         //   name: "alertMe",
@@ -418,7 +421,7 @@ export default {
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
   
-
+...mapGetters('parametreGenerauxFonctionnelle', ['Nature_des_prix','motif_passation']),
   ...mapGetters("Utilisateurs", ["user","getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
      admin:admin,
@@ -543,6 +546,9 @@ ImputationBudget() {
 recupererLataille(){
   return this.structures_geographiques.length-2
 },
+   afficherListeModePassation(){
+    return this.procedurePassations.filter(item => item.code!="GAG" && item.code!="AOR" && item.code!="LCVM" && item.code!="ED")
+},
 
 // 
 afficherCodeStructure(){
@@ -601,12 +607,12 @@ recupererParentId(){
 
   },
   methods: {
-    ...mapActions("horSib", ['ajouterMarcheHorSib','modifierMarcheHorSib','supprimerMarcheHorSib',
-     
+    ...mapActions("horSib", ['ajouterMarcheHorSib','modifierMarcheHorSib','supprimerMarcheHorSib','getMarcheHorSib'
+    
     ]),
     allerPageMarcheHorsib(){
        this.$router.push({
-          name:'gestion_marche'  
+          name:'marcheHorsib'  
            })
     },
      recherche() {
@@ -626,11 +632,12 @@ recupererParentId(){
 
             ajouterMarcheHorSibLocal(){
                this.$router.push({
-                 name:'gestion_marche'  
+                 name:'marcheHorsib'  
                })
               var nouvelObjet = {
                 ...this.formData,
                exo_id:this.anneeBugetaire,
+               sib:1,
                imputation:this.ImputationBudget(this.formData.economique_id)
               }
              this.ajouterMarcheHorSib(nouvelObjet) 

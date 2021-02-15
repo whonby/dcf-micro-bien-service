@@ -5,9 +5,9 @@
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
-                        <th>Numéro courrier</th>
-                        <th>Reference PV</th>
-                        <th>Date demande</th>
+                        <th>Numéro du courrier</th>
+                        <th>Référence du PV</th>
+                        <th>Date de la demande</th>
                         <th>Fichier</th>
                         <th>Avis</th>
                         <th>Date de l'avis</th>
@@ -74,7 +74,7 @@
                 <form class="form-horizontal">
 
                  <div class="control-group">
-                        <label class="control-label">Reference offre</label>
+                        <label class="control-label">Référence de l'offre</label>
                         <div class="controls">
                             <select v-model="formDemande.cotation_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -93,7 +93,7 @@
                                     type="date"
                                     v-model="edite_demande_dao.date_avis"
                                     class="span"
-                                    placeholder="Saisir le libelle_type"
+                                    placeholder="Saisir le libellé"
                             />
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                   <div class="control-group">
           <label class="control-label">Observation:</label>
             <div class="controls">
-              <textarea  v-model="edite_demande_dao.observations "  class="textarea_editor span"  :readonly="verouillageObservation" rows="" placeholder="Entrer  le text ..."></textarea>
+              <textarea  v-model="edite_demande_dao.observations "  class="textarea_editor span"  :readonly="verouillageObservation" rows="" placeholder="Entrer le texte ..."></textarea>
             </div>
           
         </div>

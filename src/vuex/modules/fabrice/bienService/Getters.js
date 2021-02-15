@@ -95,6 +95,8 @@ export const getterProceVerballe=state=>state.proce_verballe;
 export const getterStructureDao=state=>state.structure_daos
 export const getterMembreComiteEvaluation=state=>state.membre_comite_evaluations
 
+export const getterProgrammationMarchePlurieAnnuel=state=>state.programmationMarchePlurieAnnuel
+
 export const personnaliseGetterMarcheBailleur=(state, getters, rootState, rootGetters) =>
     state.bailleurMarche.map(element => {
         if (element.bailleur_id !== null && element.type_finnancement_id!==null ) {
@@ -1113,3 +1115,11 @@ export const getterListeMarcheTableauBordFiltre=state => state.tableauBordFilter
 export const getterInfoTableauBordFiltre=state => state.infoFiltreTableauBord
 
 export const getterEntrepriseSousTraitance=state => state.entreprise_soustraitant
+
+
+
+
+export const GroupeEntreprise = (state, getters) => {
+    //delete getters.trieUaImmobilisation.
+      return groupBy(getters.acteEffetFinanciers,"entreprise_id");
+  };

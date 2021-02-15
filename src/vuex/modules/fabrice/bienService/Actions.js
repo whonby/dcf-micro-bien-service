@@ -171,9 +171,9 @@ export  function getReception({commit}){
 
 
 export function ajouterReception({commit}, formData){
-  asyncLoading(axios.post('/ajouter_ReceptionMarche',formData)).then(response =>{
+  asyncLoading(axios.post('/ReceptionMarche',formData)).then(response =>{
       if(response.status == 201){
-        console.log(response.data)
+       
           commit('AJOUTER_RECEPTION', response.data)
           
           this.$app.$notify({
@@ -557,7 +557,7 @@ export function ajouterActeEffetFinancier({commit,dispatch}, formData){
       if(response.status == 201){
         console.log(response.data)
           commit('AJOUTER_ACTE_EFFET_FINANCIER', response.data)
-          dispatch("getEntrepriseSousTraitance")
+          dispatch("getActeEffetFinancier")
           this.$app.$notify({
             title: 'success ',
             text: 'Enregistrement effectué !',
@@ -5034,6 +5034,84 @@ export function supprimerEntrepriseSousTraitance({ commit }, id) {
           //  dispatch('getTacheMarche')
             // // dialog.loading(false) // stops the proceed button's loader
             axios.delete('/sous_traitance/' + id).then(() => dialog.close())
+        })
+
+}
+
+
+/***
+ * Programmation Marche Plurie annuel
+ */
+
+
+
+
+
+export  function  getProgrammationMarchePlurieAnnuel({commit}) {
+    queue.push(() => axios.get('/programmation_marche_plurie_annuel').then((response) => {
+        commit('GET_MARCHE_PLURIE_ANNUEL', response.data)
+
+    }).catch(error => console.log(error)))
+}
+
+// action
+export function ajouterProgrammationMarchePlurieAnnuel({commit}, formData){
+    asyncLoading(axios.post('/programmation_marche_plurie_annuel',formData)).then(response =>{
+        if(response.status == 201){
+            console.log(response.data)
+            commit('AJOUTER_MARCHE_PLURIE_ANNUEL', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+// action
+
+export function modificationMarche({ commit }, element_modifie) {
+  asyncLoading(axios.put('/ModifierMarche', element_modifie)).then(response => {
+    commit('MODIFICATION_MARCHE', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+
+export function modifierMarche2({ commit, dispatch}, element_modifie) {
+  asyncLoading( axios.put('/marches',element_modifie)).then(response => {
+       commit('MODIFIER_MARCHE', response.data)
+    dispatch('getMarche')
+    dispatch('getActeEffetFinancier')
+    
+   }).catch(error => console.log(error))
+}
+
+
+export function modifierProgrammationMarchePlurieAnnuel({commit}, element_modifie) {
+    asyncLoading( axios.put('/programmation_marche_plurie_annuel/'+ element_modifie.id, element_modifie)).then(response => {
+        commit('MODIFIER_MARCHE_PLURIE_ANNUEL', response.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+// supprimer categorie mision
+export function supprimerProgrammationMarchePlurieAnnuel({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_MARCHE_PLURIE_ANNUEL', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/programmation_marche_plurie_annuel/' + id).then(() => dialog.close() )
         })
 
 }

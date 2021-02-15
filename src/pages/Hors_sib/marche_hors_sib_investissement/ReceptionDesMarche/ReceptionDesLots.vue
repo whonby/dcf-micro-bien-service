@@ -6,14 +6,56 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <template v-if="affichertypeMarcheEx(detail_marche.type_marche_id)==3">
-             <afficheMarcheGeneral v-if="afficherStatusSib(detail_marche.id)==0"></afficheMarcheGeneral> 
-             <afficheMarcheGeneralHorsSib v-if="afficherStatusSib(detail_marche.id)==1"></afficheMarcheGeneralHorsSib> 
-          </template>
-          <template v-if="affichertypeMarcheEx(detail_marche.type_marche_id)==1 ||affichertypeMarcheEx(detail_marche.type_marche_id)==4">
-            <AfficheMarcheBienEtFourniture v-if="afficherStatusSib(detail_marche.id)==0" ></AfficheMarcheBienEtFourniture>
-            <AfficheMarcheBienEtFournitureHorsSib v-if="afficherStatusSib(detail_marche.id)==1"></AfficheMarcheBienEtFournitureHorsSib>
-          </template>
+         <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Année</th>
+                      <th>UA</th>
+                    <th>Type de marché</th>
+                    <th>Mode de passation</th>
+                    <th>Activité</th>
+                    <th>Imputation</th>
+                    <!-- <th>Ligne Budgetaire</th> -->
+                    <th>Objet du marché</th>
+                    <th>Référence du marché</th>
+                     <!-- <th>Numero marché</th> -->
+                    <th>Montant prévu</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                        <tr class="odd gradeX" >
+                  <td >
+                   {{detail_marche.exo_id || 'Non renseigné'}}</td>
+                 <td >
+                   {{afficherlibelleUa(detail_marche.unite_administrative_id) || 'Non renseigné'}}</td>
+                 <td >
+                   {{affichertypeMarche(detail_marche.type_marche_id) || 'Non renseigné'}}</td>
+                 <td  style="text-align: center">
+                   {{detail_marche.procedure_passation.code || 'Non renseigné'}}</td>
+                  <td >
+                   {{afficherlibelleActivite(detail_marche.activite_id) || 'Non renseigné'}}</td>
+                    <td >
+                   {{detail_marche.imputation || 'Non renseigné'}}</td>
+                    <!-- <td >
+                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
+                     <td >
+                   {{detail_marche.objet || 'Non renseigné'}}</td>
+                     <td >
+                   {{detail_marche.reference_marche || 'Non renseigné'}}</td>
+                   <!-- <td >
+                   {{marche.numero_marche || 'Non renseigné'}}</td> -->
+                     <td  style="text-align: center;">
+                   {{formatageSomme(parseFloat(detail_marche.montant_marche)) || 'Non renseigné'}}</td>
+                  
+           
+                   
+
+                       </tr>
+                      
+                </tbody>
+              </table>
          
           
           <div class="widget-box">
@@ -22,7 +64,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>EXECUTION DES LOTS (MARCHES)</h5>
+              <h5>EXECUTION DES LOTS (MARCHES)22</h5>
              
             </div>
 
@@ -121,19 +163,19 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import afficheMarcheGeneral from "../../../investissement/afficheMarcheGeneral"
-import afficheMarcheGeneralHorsSib from "../../../investissement/afficheMarcheGeneralHorsSib"
-import AfficheMarcheBienEtFourniture from "../../../investissement/AfficheMarcheBienEtFourniture"
-import AfficheMarcheBienEtFournitureHorsSib from "../../../investissement/AfficheMarcheBienEtFournitureHorsSib"
-import { formatageSommeSansFCFA } from "../../../../Repositories/Repository";
+// import afficheMarcheGeneral from "../../../investissement/afficheMarcheGeneral"
+// import afficheMarcheGeneralHorsSib from "../../../investissement/afficheMarcheGeneralHorsSib"
+// import AfficheMarcheBienEtFourniture from "../../../investissement/AfficheMarcheBienEtFourniture"
+// import AfficheMarcheBienEtFournitureHorsSib from "../../../investissement/AfficheMarcheBienEtFournitureHorsSib"
+import { formatageSommeSansFCFA,formatageSomme } from "../../../../Repositories/Repository";
  
 
 export default {
   components:{
-    afficheMarcheGeneral,
-    afficheMarcheGeneralHorsSib,
-    AfficheMarcheBienEtFourniture,
-    AfficheMarcheBienEtFournitureHorsSib
+    // afficheMarcheGeneral,
+    // afficheMarcheGeneralHorsSib,
+    // AfficheMarcheBienEtFourniture,
+    // AfficheMarcheBienEtFournitureHorsSib
   },
   name:'typetext',
   data() {
@@ -322,6 +364,7 @@ afficherlibelleUa() {
       "supprimerTypeTexte"
     ]),
    formatageSommeSansFCFA:formatageSommeSansFCFA,
+   formatageSomme:formatageSomme,
     alert() {
       console.log("ok");
     },

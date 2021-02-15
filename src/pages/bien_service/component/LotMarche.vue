@@ -97,7 +97,7 @@
 
   <!--Formulaire d'ajout de lot-->
 
-  <div id="exampleModal" class="modal hide grdirModalActeEffet">
+  <div id="exampleModal" class="modal hide grdirModalActeEffet78">
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Ajouter Lot</h3>
@@ -123,7 +123,7 @@
                             <input
                                     type="text"
                                     v-model="formData.objet"
-                                    class="span"
+                                    class="span12"
                                    
                             />
                         </div>
@@ -135,12 +135,14 @@
            <td><div class="control-group">
                         <label class="control-label">Montant estimatif du Lot</label>
                         <div class="controls">
-                            <input
+                            <!-- <input
                                     type="text"
                                     v-model="formData.montant_marche"
-                                    class="span"
+                                    
+                                    class="span3"
                                    
-                            />
+                            /> -->
+                            <money v-model="formData.montant_marche" class="span"></money>
                         </div>
                          <code v-if="sommeMontant(formData.montant_marche)>detail_marche.montant_marche">
            Impossible d'effectuer l'engistrement</code>
@@ -200,7 +202,8 @@
       
        </div>
                         </div></td>
-                        <td><div class="control-group">
+                        <td>
+                            <div class="control-group">
                         <label class="control-label">Latitude</label>
                         <div class="controls">
                             <input
@@ -210,7 +213,8 @@
                                    
                             />
                         </div>
-                        </div></td>
+                        </div>
+                        </td>
                         <td><div class="control-group">
                         <label class="control-label">Longitude</label>
                         <div class="controls">
@@ -241,7 +245,7 @@
                             <input
                                     type="text"
                                        v-model="formData.livrable"
-                                    class="span8"
+                                    class="span"
                                    
                             />
                         </div>
@@ -262,7 +266,7 @@
 
   <!--Edition de lot-->
 
-  <div id="editBailleuMarche" class="modal hide grdirModalActeEffet" aria-hidden="true" style="display: none;">
+  <div id="editBailleuMarche" class="modal hide grdirModalActeEffet78" aria-hidden="true" style="display: none;">
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Modification </h3>
@@ -712,8 +716,9 @@ SommeDesLots(){
             numero_lot:this.recupererNumeroDeLot,
             sib:this.AjouteMarcheSiBetHorsSib,
             infrastructure_id:this.afficheIdInfrasture(this.macheid)
+            
       }
-    //  console.log(this.formData)
+    console.log(this.formData)
       this.ajouterSousMarcheLot(this.formData)
 
 
@@ -799,9 +804,9 @@ SommeDesLots(){
 </script>
 
 <style scoped>
-.grdirModalActeEffet{
-  width: 88%;
-  margin: 0 -42%;
+.grdirModalActeEffet78{
+  width: 70%;
+  margin: 0 -35%;
 }
 
 </style>

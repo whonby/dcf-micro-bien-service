@@ -1,4 +1,4 @@
-PrixVehiculeParUa
+
 <template>
   <div class="container-fluid">
    <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">

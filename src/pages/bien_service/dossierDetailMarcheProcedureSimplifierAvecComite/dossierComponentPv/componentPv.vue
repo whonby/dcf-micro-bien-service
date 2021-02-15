@@ -5,13 +5,13 @@
                                        Rechercher: <input type="search" v-model="search" />
 
                                    </div> -->
-                                   <h4> Liste rapport de jugement</h4> 
+                                   <h4> Liste du rapport de jugement</h4> 
 
                                  <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
                                             <tr>
-                                              <th>Reference Pv</th>
-                                         <th>Date rapport jugement</th>
+                                              <th>Référence du Pv</th>
+                                         <th>Date du rapport de jugement</th>
                                                 <th>Fichier</th>
                                                 <th>Action</th>
                                             </tr>
@@ -36,7 +36,7 @@
                         <div class="btn-group">
                               <td>
                                <button href="#infoPV" @click.prevent="infoPVAffiche(rapport.reference)" data-toggle="modal" class="btn btn-info">
-                            <span title="voir la liste des classements des candidats"><i class="icon-pencil" ></i></span></button>
+                            <span title="Voir la liste du classement des candidats"><i class="icon-pencil" ></i></span></button>
                              </td>
                               <td>
                             <button @click.prevent="supprimerProceVerbal(rapport.id)"  class="btn btn-danger " title="Supprimer">
@@ -55,7 +55,7 @@
                  <div id="ajouterPvBienservice" class="modal hide grdtaill">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter rapport d'ouverture</h3>
+                <h3>Ajouter le rapport d'ouverture</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -84,7 +84,7 @@
             </div>
            <div class="modal-footer">
                 <a class="btn btn-primary" @click.prevent="ajouterRapportJugementLocal()">Ajouter</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+                <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
             </div>
         </div>
 
@@ -107,8 +107,8 @@
                           <thead>
                           <tr>
                          <th>Nom des Soumissionnaires </th>
-                            <th>Numero du dossier</th>
-                            <th>Montant Offre financiere</th>
+                            <th>Numéro du dossier</th>
+                            <th>Montant de l'offre financière</th>
                               <th>Note</th>
                               <th>Classement</th>
                           </tr>
@@ -186,7 +186,7 @@
             </div>
             <div class="modal-footer">
                 <a class="btn btn-primary" @click.prevent="modifierRapportOuverture()">Modifier</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+                <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
             </div>
         </div>
 

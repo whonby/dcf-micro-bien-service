@@ -18,7 +18,7 @@ afficherIDUA(
 
 
                 </div>
-                <h4> Liste acte effet financier </h4>
+                <h4> Liste acte effet financier</h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
@@ -92,10 +92,55 @@ afficherIDUA(
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#Identif">Identification de L'acte</a></li>
         <li class=""><a data-toggle="tab" href="#financ">Informations financières</a></li>
+        <li class="" v-if="sous_traitance=='oui'"><a data-toggle="tab" href="#sous_traitance">Les entreprise sous_traitance </a></li>
       </ul>
     </div>
     <div class="widget-content tab-content">
+ <div id="sous_traitance"  class="tab-pane">
+            <div class="span12">
+                <h6>ENREPRISE SOUS TRAITANCE</h6>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <label>ENTREPRSE </label>
+                            <model-list-select style="background-color: #fff;"
+                                               class="wide"
+                                               :list="entreprises"
+                                               v-model="nom_structure"
+                                               option-value="id"
+                                               option-text="raison_sociale"
+                                               placeholder="Entreprise"
+                            >
 
+                            </model-list-select>
+
+                        </td>
+
+                        <td>
+                            <hr>
+                            <button class="btn btn-danger" @click.prevent="addStructure()">
+                                Ajouter
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="odd gradeX" v-for="appelOffre in structure"
+                        :key="'APM'+appelOffre">
+                        <td>
+                            {{appelOffre.raison_sociale || 'Non renseigné'}}
+                        </td>
+                        <div class="btn-group">
+                            <button class="btn btn-link" title="Supprimer" @click.prevent="supprimeStructureSelectionner(appelOffre.id)">
+                                <span class=""><i class="icon-trash"></i></span>
+                            </button>
+                        </div>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
       <div id="Identif" class="tab-pane active">
 
         <table class="table table-bordered table-striped">
@@ -104,7 +149,7 @@ afficherIDUA(
               <div class="control-group">
                 <label class="control-label">Type acte effet financier</label>
                 <div class="controls">
-                  <select v-model="formEffetFinancier.type_act_effet_id" class="span4">
+                  <select v-model="formEffetFinancier.type_act_effet_id" class="span">
                     <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
                             :value="varText.id">{{varText.libelle}}</option>
                   </select>
@@ -117,16 +162,11 @@ afficherIDUA(
               <div class="control-group">
                 <label class="control-label">Entreprise</label>
                 <div class="controls" style="font-size:20px">
-                  <!-- <input
-                      type="text"
-                      :value="nom_candidata"
-                      class="span4"
-                      readonly
-                  /> -->
-                   <select v-model="formEffetFinancier.entreprise_id" class="span4">
+                  <select v-model="formEffetFinancier.entreprise_id" class="span4">
                     <option v-for="varText in entreprises" :key="varText.id"
                             :value="varText.id">{{varText.raison_sociale}}</option>
                   </select>
+                  
                 </div>
 
 
@@ -139,60 +179,53 @@ afficherIDUA(
               <div class="control-group">
                 <label class="control-label">Banque</label>
                 <div class="controls" >
-                  <select v-model="formEffetFinancier.banq_id" class="span4" >
+                  <select v-model="formEffetFinancier.banq_id" class="span" >
                     <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
-                            :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                            :value="varText.banq_id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                   </select>
-
-                </div>
-              </div>
-            </td>
-
-            <td>
-              <div class="control-group">
-                <label class="control-label">Compte</label>
-                 <select v-model="formEffetFinancier.compte_id" class="span4" >
-                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.banq_id)" :key="varText.id"
-                            :value="varText.id">{{afficherLeCompteEnFonctionDeLaBanque(varText.banq_id)}}</option>
-                  </select>
-                <!-- <div class="controls " >
-                  <input type="text"  class="span4" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
-
-                </div> -->
-              </div>
-
-            </td>
-
-          </tr>
-          <tr>
-             <td colspan="" width="550">
-              <div class="control-group">
-                <label class="control-label">Objet offre :</label>
-                <div class="controls">
-                  <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span5" rows="3" placeholder="Entre le  text ..."></textarea>
 
                 </div>
               </div>
             </td>
              <td>
-                     <div class="control-group">
-              <label class="control-label">Type de réparation</label>
-              <div class="controls">
-              
-                  <select v-model="formEffetFinancier.etatcontrat" class="span4">
-                   <option></option>
-                   <option value="1">Réparation ou Entrétien Véhicule</option>
-                   <option value="2">Réparation ou Entrétien Mobilier & Matériel</option>
+              <div class="control-group">
+                <label class="control-label">Compte</label>
+                 <select v-model="formEffetFinancier.compte_id" class="span" >
+                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.banq_id,formEffetFinancier.entreprise_id)" :key="varText.id"
+                            :value="varText.id">{{varText.rib}}</option>
                   </select>
-                 
+              
               </div>
-            </div>
-                            </td>
+
+            </td>
+
+            <!-- <td>
+              <div class="control-group">
+                <label class="control-label">Compte</label>
+                <div class="controls " >
+                  <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
+
+                </div>
+              </div>
+
+            </td> -->
+
+          </tr>
+          <tr>
+             <td colspan="2" width="550">
+              <div class="control-group">
+                <label class="control-label">Objet offre :</label>
+                <div class="controls">
+                  <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span11" rows="3" placeholder="Entre le  text ..."></textarea>
+
+                </div>
+              </div>
+            </td>
             <td>
               <div class="control-group">
                 <label class="control-label">Incidence financière</label>
                 <div class="controls">
-                  <select  v-model="formEffetFinancier.incidence_financiere" class="span4">
+                  <select  v-model="formEffetFinancier.incidence_financiere" class="span">
                     <option value="0">Oui</option>
                     <option value="1">Non</option>
                   </select>
@@ -205,12 +238,12 @@ afficherIDUA(
 
             <td colspan="">
               <div class="control-group">
-                <label class="control-label">Numéro du marche/contrat</label>
+                <label class="control-label">Numéro du marché/contrat</label>
                 <div class="controls">
                   <input
                       type="text"
                       v-model="formEffetFinancier.numero_marche"
-                      class="span4"
+                      class="span"
                       placeholder="Saisir le numero "
                   />
                 </div>
@@ -221,13 +254,13 @@ afficherIDUA(
 
           </tr>
           <tr>
-  <td>
+        <td>
 
               <div class="control-group">
                 <label class="control-label" >Date de signature attributaire</label>
                 <div class="controls">
                   <input type="date" v-model="formEffetFinancier.date_attributaire"
-                         class="span4"
+                         class="span"
                          placeholder=""
                   />
                 </div>
@@ -238,14 +271,12 @@ afficherIDUA(
                 <label class="control-label">Date signature autorité contractante </label>
                 <div class="controls">
                   <input type="date" v-model="formEffetFinancier.reference_act"
-                         class="span4"
+                         class="span"
                          placeholder="refence acte"
                   />
                 </div>
               </div>
             </td>
-
-
 
             <td>
               <div class="control-group">
@@ -254,7 +285,7 @@ afficherIDUA(
                   <input
                       type="date"
                       v-model="formEffetFinancier.date_approbation"
-                      class="span4"
+                      class="span"
                       placeholder=""
                   />
                 </div>
@@ -270,7 +301,7 @@ afficherIDUA(
                   <input
                       type="text"
                       v-model="formEffetFinancier.autorite_approbation"
-                      class="span4"
+                      class="span"
                       placeholder=" "
                   />
                   <input type="hidden" v-model="formEffetFinancier.ua_id" />
@@ -284,69 +315,105 @@ afficherIDUA(
           <tr>
               <td>
               <div class="control-group">
-                <label class="control-label">Date de debut d'execution prévisionnelle</label>
+                <label class="control-label">Date de début d'exécution prévisionnelle</label>
                 <div class="controls">
-                  <input type="date" v-model="formEffetFinancier.date_odre_service"
-                         class="span4"
+                  <input type="date" v-model="date_debut_previsionnel"
+                         class="span"
                          placeholder=""
                   />
                 </div>
               </div>
             </td>
 
+
+              <td>
+                  <div class="control-group">
+                      <label class="control-label" title=" ">Durée d'exécution contractuelle(jrs)</label>
+                      <div class="controls">
+                          <input type="number"  v-model="durre_prevue"
+                                 class="span"
+
+                          />
+                      </div>
+                  </div>
+              </td>
             <td>
               <div class="control-group">
                 <label class="control-label" title=" ">Date de reception provisoire prévisionnelle </label>
                 <div class="controls">
                   <input type="date" v-model="formEffetFinancier.date_reception"
-                         class="span4"
+                         class="span"
+                         placeholder="" disabled
+                  />
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div class="control-group">
+                <label class="control-label" title=" ">Date définitive reception prévisionnelle</label>
+                <div class="controls">
+                  <input type="date" :min="formEffetFinancier.date_odre_service" disabled v-model="formEffetFinancier.date_fin_exe"
+                         class="span"
                          placeholder=""
                   />
                 </div>
               </div>
             </td>
-
-
-          
-            <td>
-              <div class="control-group">
-                <label class="control-label" title=" ">Date fin d'exécution prévisionnelle</label>
-                <div class="controls">
-                  <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
-                         class="span4"
-                         placeholder=""
-                  />
-                </div>
-              </div>
-            </td>
-
-
-
-            <td>
-              <div class="control-group">
-                <label class="control-label" title=" ">Durée d'exécution contractuelle(jrs)</label>
-                <div class="controls">
-                  <input type="text"  readonly :value="nombreDejourCalcule"
-                         class="span4"
-
-                  />
-                </div>
-              </div>
-            </td>
-            
           </tr>
           <tr>
              <td>
               <div class="control-group">
-                <label class="control-label" title=" ">Date de réception définitive</label>
+                <label class="control-label" title="">garantie</label>
                 <div class="controls">
-                  <input type="date" v-model="formEffetFinancier.date_reception"
-                         class="span4"
-                         placeholder=""
-                  />
+                    <select  v-model="garantie" class="span">
+                        <option value="oui">Oui</option>
+                        <option value="non">Non</option>
+                    </select>
                 </div>
               </div>
+
             </td>
+              <td>
+                  <div class="control-group">
+                      <label class="control-label" title=" ">Sous traitance</label>
+                      <div class="controls">
+                          <select  v-model="sous_traitance" class="span">
+                              <option value="oui">Oui</option>
+                              <option value="non">Non</option>
+                          </select>
+                      </div>
+                  </div>
+
+              </td>
+
+              <td>
+                  <div>
+                      <div class="control-group" v-if="garantie=='oui'">
+                          <label class="control-label" title=" ">Durree de garantie(JOUR) </label>
+                          <div class="controls">
+                              <input type="number" v-model="durre_garantie"
+                                     class="span"
+                                     placeholder=""
+                              />
+                          </div>
+                      </div>
+                  </div>
+              </td>
+<td>
+                     <div class="control-group">
+              <label class="control-label">Type de réparation</label>
+              <div class="controls">
+              
+                  <select v-model="formEffetFinancier.etatcontrat" class="span4">
+                   <option></option>
+                   <option value="1">Réparation ou Entrétien Véhicule</option>
+                   <option value="2">Réparation ou Entrétien Mobilier & Matériel</option>
+                  </select>
+                 
+              </div>
+            </div>
+                            </td>
           </tr>
         </table>
       </div>
@@ -410,14 +477,8 @@ afficherIDUA(
               <div class="control-group">
                 <label class="control-label" > Montant TVA du marché</label>
                 <div class="controls">
-                  <input
-                      type="number"
-                      :value="montantTva" 
-
-                      class="span5"
-                      readonly
-                  />
-
+                  
+<money  :value="montantTva"  style="text-align:left;color:red"  readonly class="span5"></money>
                 </div>
               </div>
             </td>
@@ -425,14 +486,14 @@ afficherIDUA(
               <div class="control-group">
                 <label class="control-label" >Montant TTC du marché</label>
                 <div class="controls">
-                  <input
+                  <!-- <input
                       type="number"
                       :value="montantHTt" 
 
                       class="span5"
                       readonly
-                  />
-
+                  /> -->
+<money  :value="montantHTt"  style="text-align:left;color:red"  readonly class="span5"></money>
                 </div>
               </div>
             </td>
@@ -636,8 +697,9 @@ afficherIDUA(
         </tr>
       </table>
       </div>
-      
+     
       </div>
+
       </div>
 
 
@@ -666,18 +728,30 @@ afficherIDUA(
 <script>
 import {mapActions, mapGetters} from "vuex";
 import {formatageSomme} from "@/Repositories/Repository";
-
+import {  ModelListSelect } from 'vue-search-select'
+import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
 name: "ActEffeFinanciere",
   props:["macheid"],
+    components: {ModelListSelect,},
   data(){
     return{
       lot:"",
-      editActeEffetFinancier:"",
-      formEffetFinancier:{
+      editActeEffetFinancier:{},
+      // editEffetFinancier:{},
+        sous_traitance:"non",
+        garantie:"non",
+        nom_structure:"",
+        structure:[],
+        structure_id:[],
+        date_debut_previsionnel:"",
+        taux_avance_demarrage:"",
+        durre_prevue:"",
+        durre_garantie:"",
+       formEffetFinancier:{
         tva_cautionnement:"",
         montant_ttc_cautionnement:"",
-        montant_ht_cautionnement:"",
+        montant_ht_cautionnement:"",    
         exonere:"",
         montant_act_ht:"",
         taux_cautionnemt:"",
@@ -686,7 +760,7 @@ name: "ActEffeFinanciere",
         taux:"",
         ua_id:"",
         avance_demarrage_ht:0,
-        avance_demarrage_ttc:"",
+        avance_demarrage_ttc:0,
         tva_avance_demarage:"",
         libelle_act:"",
         reference_act:"",
@@ -707,17 +781,18 @@ name: "ActEffeFinanciere",
         entreprise_id:"",
         marche_id:"",
         banq_id:"",
+        compte_id:"",
         numero_marche:""
       },
       nom_candidata:"",
       dossier_candidat_id:"",
-     
+    
       infoLot:""
     }
   },
   created(){
     this.lot=this.getMarchePersonnaliser.filter(item=>item.parent_id==this.macheid)
-
+console.log(this.dateDefinitivePrevisionnel("2021-01-23",30))
 
   },
   computed:{
@@ -727,7 +802,7 @@ name: "ActEffeFinanciere",
       "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
       "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
       "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
-      "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+      "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers","personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe","getterEntrepriseSousTraitance"]),
     ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -738,6 +813,91 @@ name: "ActEffeFinanciere",
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe',
       'planActe']),
+      ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
+
+
+libelleCompte() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.comptes.find(qtreel => qtreel.banq_id == id);
+
+          if (qtereel) {
+            return qtereel.rib;
+          }
+          return 0
+        }
+      };
+    },
+
+
+
+
+      listeEntreSoustraitance(){
+        return marche=>{
+            if(marche){
+                console.log(this.getterEntrepriseSousTraitance)
+                let objet=this.getterEntrepriseSousTraitance.filter(item=>item.marche_id==marche)
+                console.log(objet)
+                let array=[]
+                let vm=this
+                if(objet!=undefined){
+                    objet.forEach(function (val) {
+                        let ob=vm.entreprises.find(item=>item.id==val.entreprise_sous_traitance_id)
+                        let nouvel={
+                            ...ob,
+                            id:val.id
+                        }
+                        array.push(nouvel)
+                    })
+                }
+                return array
+            }
+        }
+      },
+      dateDefinitivePrevisionnel() {
+        return (date, days)=>{
+
+            var result = new Date(date);
+            result.setDate(result.getDate() + parseInt(days));
+            console.log(result)
+            return this.formatDate(result);
+        }
+     },
+      formatDate() {
+        return date=>{
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2)
+                month = '0' + month;
+            if (day.length < 2)
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+      },
+      formatDateFr(){
+          return date=>{
+              var d = new Date(date),
+                  month = '' + (d.getMonth() + 1),
+                  day = '' + d.getDate(),
+                  year = d.getFullYear();
+
+              if (month.length < 2)
+                  month = '0' + month;
+              if (day.length < 2)
+                  day = '0' + day;
+
+              return [day,month,year].join('/');
+          }
+      },
+ getLotMarche(){
+      return this.getMarchePersonnaliser.filter(item=>item.parent_id==this.macheid).length;
+    },
+
+
 afficherEntrepriseNom(){
       return id =>{
         if(id != null && id !=""){
@@ -927,7 +1087,7 @@ afficheNomEntreprise() {
           }
           return 0
         }
-      };
+      }; 
     },
 
     affichierIdActeFinancierDansActePlan() {
@@ -1006,6 +1166,13 @@ afficheNomEntreprise() {
       }
       return 0
     },
+      afficherMontantRetenueGarantieModifier(){
+      const montantttcRetenueGarantie = (parseFloat(this.montantHTtModifier) * (this.editActeEffetFinancier.taux_retenue_garantie)/100)
+      if (montantttcRetenueGarantie) {
+        return parseFloat(montantttcRetenueGarantie).toFixed(0);
+      }
+      return 0
+    },
 
 // calcul du montant tva de retenue de garantie
 
@@ -1022,7 +1189,18 @@ afficheNomEntreprise() {
 
     afficherMontantTvaTaxeRetenuGarantie(){
 
-      const val = parseFloat((this.afficherMontantHorsTaxeRetenuGarantie) * parseFloat(this.afficherEnorere)/100);
+      const val = parseFloat((this.afficherMontantHorsTaxeRetenuGarantie) * parseFloat(this.Modifier)/100);
+
+      if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+
+      return 0
+
+    },
+      afficherMontantTvaTaxeRetenuGarantieModifier(){
+
+      const val = parseFloat((this.afficherMontantHorsTaxeRetenuGarantieModifier) * parseFloat(this.Modifier)/100);
 
       if (val) {
         return parseFloat(val).toFixed(0);
@@ -1039,6 +1217,15 @@ afficheNomEntreprise() {
     afficherMontantHorsTaxeRetenuGarantie(){
 
       const anwser = parseFloat (this.afficherMontantRetenueGarantie)/(1+ parseFloat(this.afficherTauxEnPourcentage))
+
+      if(anwser){
+        return parseFloat( Math.round(anwser))
+      }
+      return 0
+    },
+      afficherMontantHorsTaxeRetenuGarantieModifier(){
+
+      const anwser = parseFloat (this.afficherMontantRetenueGarantieModifier)/(1+ parseFloat(this.afficherTauxEnPourcentage))
 
       if(anwser){
         return parseFloat( Math.round(anwser))
@@ -1071,7 +1258,7 @@ afficheNomEntreprise() {
 // calcul le montant de tva du retenu de garantie
     editAfficherMontantTvaTaxeRetenuGarantie(){
 
-      const data = parseFloat((this.editAfficherMontantHorsTaxeRetenuGarantie) * parseFloat(this.editAfficherEnorere)/100);
+      const data = parseFloat((this.editAfficherMontantHorsTaxeRetenuGarantie) * parseFloat(this.editModifier)/100);
 
       if (data) {
         return parseFloat(data).toFixed(0);
@@ -1085,40 +1272,87 @@ afficheNomEntreprise() {
 // calcule du montant ttc du cautionnement
 
     afficherMontantTTCDuCautionnement(){
-      const result = (parseFloat(this.montantHTt) * (this.formEffetFinancier.taux_cautionnemt)/100)
-      if (result) {
-        return parseFloat(result).toFixed(0);
-      }
+      // const result = (parseFloat(this.montantHTt) * (this.formEffetFinancier.taux_cautionnemt)/100)
+      // if (result) {
+      //   return parseFloat(result).toFixed(0);
+      // }
+   let montant=parseFloat(this.afficheMontantHorsTaxeDuCautionnement) + parseFloat(this.afficherMontantTvaDuCautionnement)
+      return parseFloat(montant).toFixed(0);
 
-      return 0
+    },
+     afficherMontantTTCDuCautionnementModifier(){
+      // const result = (parseFloat(this.montantHTt) * (this.editActeEffetFinancier.taux_cautionnemt)/100)
+      // if (result) {
+      //   return parseFloat(result).toFixed(0);
+      // }
 
+      // return 0
+     let montant=parseFloat(this.afficheMontantHorsTaxeDuCautionnementModifier) + parseFloat(this.afficherMontantTvaDuCautionnementModifier)
+      return parseFloat(montant).toFixed(0);
     },
 
 // calcul du montant de tva du cautionnement
 
     afficherMontantTvaDuCautionnement(){
 
-      const val = parseFloat((this.afficheMontantHorsTaxeDuCautionnement) * parseFloat(this.afficherEnorere)/100);
+      // const val = parseFloat((this.afficheMontantHorsTaxeDuCautionnement) * parseFloat(this.Modifier)/100);
+      //
+      // if (val) {
+      //   return parseFloat(val).toFixed(0);
+      // }
+        let montantTV=(this.afficheMontantHorsTaxeDuCautionnement * this.afficherEnorere)/100
 
-      if (val) {
-        return parseFloat(val).toFixed(0);
-      }
+      return parseFloat(montantTV).toFixed(0);
 
-      return 0
+    },
+     afficherMontantTvaDuCautionnementModifier(){
 
+      let montantTV = (this.afficheMontantHorsTaxeDuCautionnementModifier * this.afficherEnorereModifier)/100
+
+      // if (val) {
+      //   return parseFloat(val).toFixed(0);
+      // }
+
+      // return 0
+      return parseFloat(montantTV).toFixed(0);
     },
 
 
 // calcul du montant hors taxe du cautionnement
 
     afficheMontantHorsTaxeDuCautionnement(){
+         //let montantH=this.formEffetFinancier.montant_act_ht afficherEnorere
+              if(this.formEffetFinancier.taux_cautionnemt!="" && this.formEffetFinancier.montant_act_ht!=""){
+                  let taux_cautionnement=parseFloat(this.formEffetFinancier.taux_cautionnemt)
+                  let montant_act_ht=parseFloat(this.formEffetFinancier.montant_act_ht)
+                 let mont=(montant_act_ht * taux_cautionnement)/100
+                  return parseFloat(mont).toFixed(0);
 
-      const anwser = parseFloat (this.afficherMontantTTCDuCautionnement)/(1+ parseFloat(this.afficherTauxEnPourcentage))
+              }
+              return 0
+      // const anwser = parseFloat(this.afficherMontantTTCDuCautionnement)/(1+ parseFloat(this.afficherTauxEnPourcentage))
+      //
+      // if(anwser){
+      //   return parseFloat( Math.round(anwser))
+      //}
+     // return 0
+    },
+     afficheMontantHorsTaxeDuCautionnementModifier(){
+    
+     if(this.editActeEffetFinancier.taux_cautionnemt!="" && this.editActeEffetFinancier.montant_act_ht!=""){
+                  let taux_cautionnement=parseFloat(this.editActeEffetFinancier.taux_cautionnemt)
+                  let montant_act_ht=parseFloat(this.editActeEffetFinancier.montant_act_ht)
+                 let mont=(montant_act_ht * taux_cautionnement)/100
+                  return parseFloat(mont).toFixed(0);
 
-      if(anwser){
-        return parseFloat( Math.round(anwser))
-      }
-      return 0
+              }
+              return 0
+      // const anwser = parseFloat (this.afficherMontantTTCDuCautionnementModifier)/(1+ parseFloat(this.afficherTauxEnPourcentage))
+
+      // if(anwser){
+      //   return parseFloat( Math.round(anwser))
+      // }
+      // return 0
     },
 
 // calcul le montant ttc du cautionnement
@@ -1137,7 +1371,7 @@ afficheNomEntreprise() {
 
 
     editAfficheMontantHorsTaxeDuCautionnement(){
-
+       // afficherEnorere
       const resulVal = parseFloat (this.editAfficherMontantTTCDuCautionnement)/(1+ parseFloat(this.afficherTauxEnPourcentage))
 
       if(resulVal){
@@ -1148,7 +1382,7 @@ afficheNomEntreprise() {
 
 // calcul du montant de tva du cautionnement
     editAfficherMontantTvaDuCautionnement(){
-      const val = parseFloat((this.editAfficheMontantHorsTaxeDuCautionnement) * parseFloat(this.editAfficherEnorere)/100);
+      const val = parseFloat((this.editAfficheMontantHorsTaxeDuCautionnement) * parseFloat(this.editModifier)/100);
 
       if (val) {
         return parseFloat(val).toFixed(0);
@@ -1169,6 +1403,16 @@ afficheNomEntreprise() {
 
       }
     },
+     afficherEnorereModifier(){
+      if(this.editActeEffetFinancier.exonere == 0){
+        return 0
+      }
+      else {
+        return this.affcherTauxEnCours
+
+      }
+    },
+
 
 
 
@@ -1218,6 +1462,15 @@ afficheNomEntreprise() {
 
       return 0
     },
+     montantTvaModifier() {
+      const val = parseFloat((this.editActeEffetFinancier.montant_act_ht) * parseFloat(this.afficherEnorere)/100);
+
+      if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+
+      return 0
+    },
 
     editMontantTva(){
       const resulta = parseFloat ((this.editActeEffetFinancier.montant_act_ht) * parseFloat(this.editAfficherEnorere)/100)
@@ -1249,9 +1502,28 @@ afficheNomEntreprise() {
 
       return 0
     },
+      montantHTtModifier() {
+      
+      const val = parseFloat(this.editActeEffetFinancier.montant_act_ht) + parseFloat(this.montantTva);
+
+      if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+
+      return 0
+    },
 
     avanceDemarrage(){
       const val = parseFloat(this.formEffetFinancier.avance_demarrage_ht) + parseFloat(this.avanceDemarrageMontantTva);
+
+      if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+
+      return 0
+    },
+      avanceDemarrageModifier(){
+      const val = parseFloat(this.editActeEffetFinancier.avance_demarrage_ht) + parseFloat(this.avanceDemarrageMontantTvaModifier);
 
       if (val) {
         return parseFloat(val).toFixed(0);
@@ -1269,8 +1541,17 @@ afficheNomEntreprise() {
 
       return 0
     },
+    //  avanceDemarrageMontantTvaModifier() {
+    //   const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.afficherEnorere)/100);
+
+    //   if (val) {
+    //     return parseFloat(val).toFixed(0);
+    //   }
+
+    //   return 0
+    // },
   avanceDemarrageMontantTvaModifier() {
-      const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.afficherEnorere)/100);
+      const val = parseFloat((this.editActeEffetFinancier.avance_demarrage_ht) * parseFloat(this.editActeEffetFinancier.taux_avance_demarrage)/100);
 
       if (val) {
         return parseFloat(val).toFixed(0);
@@ -1371,17 +1652,6 @@ afficheNomEntreprise() {
       }
     },
 
-     afficherCompte(){
-       return banq_id => {
-        if( banq_id !== undefined) {
-          var acteur = this.comptes.find(acteur => acteur.id == banq_id  )
-
-          return  (acteur) ? acteur.rib :null
-        }
-        return null
-      }
-    },
-
     afficherBanqueId(){
       return id =>{
         if(id != null && id !=""){
@@ -1427,11 +1697,10 @@ affichierIdEntrepriseSelectionner() {
         }
       }
     },
-
-     afficherCompteDynamique(){
-      return id =>{
-        if(id != null && id !=""){
-          return this.comptes.filter(element => element.banq_id== id)
+    afficherCompteDynamique(){
+      return (id,id1) =>{
+        if(id != null && id !="" && id1 != null && id1 !=""){
+          return this.comptes.filter(element => element.banq_id== id && element.entrepse_id== id1)
 
 
         }
@@ -1465,9 +1734,9 @@ affichierIdEntrepriseSelectionner() {
     // },
 
     afficherLeCompteEnFonctionDeLaBanque(){
-      return banq_id => {
-        if( banq_id !== undefined) {
-          var acteur = this.comptes.find(acteur => acteur.id == banq_id  )
+      return id => {
+        if( id !== undefined) {
+          var acteur = this.comptes.find(acteur => acteur.banq_id == id  )
 
           return  (acteur) ? acteur.rib :null
         }
@@ -1505,6 +1774,7 @@ nombreDejourCalculeModifier(){
       return  diffJour;
 
     },
+    
     nombreDejourCalcule(){
       let vM=this;
       const acteAffet = vM.formEffetFinancier
@@ -1524,9 +1794,31 @@ nombreDejourCalculeModifier(){
       return  diffJour;
 
     },
+    //  nombreDejourCalculeModifier(){
+    //   let vM=this;
+    //   const acteAffet = vM.editActeEffetFinancier
+    //   if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
+    //   if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
+
+    //   var dateF = new Date(acteAffet.date_fin_exe).getTime()
+    //   var dateO = new Date(acteAffet.date_odre_service).getTime()
+    //   var resultat = dateF - dateO
+
+    //   var diffJour =  resultat / (1000 * 3600 * 24)
+
+    //   if(isNaN(diffJour)) return null
+
+    //   if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    //   vM.editActeEffetFinancier.duree=diffJour
+    //   return  diffJour;
+
+    // },
 
     getDateFinExécutionValue(){
       return !this.formEffetFinancier.date_odre_service !=""
+    },
+     getDateFinExécutionValueModifier(){
+      return !this.editActeEffetFinancier.date_odre_service !=""
     },
 
 
@@ -1564,16 +1856,24 @@ nombreDejourCalculeModifier(){
         }
       }
     },
+      ActeEffect: function () {
+          return macheid => {
+              if (macheid != "") {
+                  // console.log("Marche leste acte effect finnancier")
+                  return this.getActeEffetFinancierPersonnaliser.find(idmarche => idmarche.marche_id == macheid)
+              }
+          }
+      },
 
 
 
 
+  }, 
 
-  },
 
   methods:{
     ...mapActions('bienService',['supprimerActeEffetFinancier',
-      'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
+      'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche',"supprimerEntrepriseSousTraitance","modificationMarche"]),
 ...mapActions("horSib", ['modifierMarcheHorSib']),
 
     afficheModaleActe(index){
@@ -1595,7 +1895,15 @@ nombreDejourCalculeModifier(){
         backdrop: 'static',
         keyboard: false
       });
+
       this.editActeEffetFinancier = this.acteEffetFinanciers.find(item=>item.id==id)
+       // console.log(this.editActeEffetFinancier)
+        this.infoLot=this.getMarchePersonnaliser.find(item=>item.id==this.editActeEffetFinancier.marche_id)
+        this.macheid=this.editActeEffetFinancier.marche_id
+        if ( this.analyseByLot(this.editActeEffetFinancier.marche_id).length>0){
+            this.nom_candidata=this.afficheNomEntreprise(this.afficherNumeroDossierCandidat1(this.analyseByLot(this.editActeEffetFinancier.marche_id)[0].dossier_candidat_id)),
+                this.dossier_candidat_id=this.analyseByLot(this.editActeEffetFinancier.marche_id)[0].dossier_candidat_id
+        }
     },
 
     modifierModalActeEffetFinancierLocal(){
@@ -1624,16 +1932,18 @@ var nouvelObjet1 = {
     
       }
 
-      this.modifierActeEffet(nouvelObjet1)
+      this.modifierActeEffetFinancier(nouvelObjet1)
       this.$('#modifierActeEF').modal('hide');
+      this.editActeEffetFinancier = {
+
+      };
     },
 
     formatageSomme:formatageSomme,
-
+      
     ajouterModalActeEffetFinancierLocal(){
       var nouvelObjet = {
         ...this.formEffetFinancier,
-        duree: this.nombreDejourCalcule,
         ua_id:this.afficherIDUA(this.macheid),
         taux:this.afficherEnorere,
         tva_cautionnement:this.afficherMontantTvaDuCautionnement,
@@ -1643,36 +1953,39 @@ var nouvelObjet1 = {
         montant_tva_retenu_garanti:this.afficherMontantTvaTaxeRetenuGarantie,
         montant_ttc_retenue_garantie:this.afficherMontantRetenueGarantie,
         tva:this.montantTva,
+          sous_traitance:this.sous_traitance,
+          garantie:this.garantie,
         montant_act:this.montantHTt,
         avance_demarrage_ttc:this.avanceDemarrage,
         tva_avance_demarage:this.avanceDemarrageMontantTva,
-        // entreprise_id:this.affichierIdEntrepriseSelectionner(this.nom_candidata),
+        entreprise_id:this.formEffetFinancier.entreprise_id,
         difference_personnel_bienService:this.afficheMarcheType,
         marche_id:this.macheid,
-        marchegeneral_id:this.affichieridMarcheGlobal(this.macheid),
-        // ua_id:this.ua_id,
+        marchegeneral_id:this.macheid,
+          sous_traitance_array:this.structure_id,
         banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
-        compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
+        compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
+        
       }
+
+      console.log(nouvelObjet)
       //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
 
 
       //this.formEffetFinancier.entreprise_id=entreprisePremier.id
       this.ajouterActeEffetFinancier(nouvelObjet)
-      this.$("#modificationModal").modal('hide');
-      let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
+    this.$("#modificationModal").modal('hide');
+     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
       marcheObjet.attribue = 2
-     
-      marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
       marcheObjet.parent_id=this.macheid
-      // console.log(marcheObjet)
-      this.modifierMarcheHorSib(marcheObjet)
-   
+      marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
+     
+      this.modifierMarche(marcheObjet)
       this.formEffetFinancier = {
         code_act:"",
         libelle_act:"",
         reference_act:"",
-        objet_act:"",
+        objet_act:"", 
         incidence_financiere:"",
         montant_act:"",
         date_attributaire:"",
@@ -1688,11 +2001,89 @@ var nouvelObjet1 = {
         analyse_dossier_id:"",
         entreprise_id:"",
         marche_id:"",
-        numero_marche:""
-
+        numero_marche:"",
+avance_demarrage_ttc:0,
+avance_demarrage_ht:0,
+          sous_traitance:"",
       }
+        this.structure_id=[]
     },
-  }
+      addStructure(){
+          if(this.nom_structure=="")
+              return ""
+          let isStructureExist=this.structure.find(item=>item.id==this.nom_structure)
+          if (isStructureExist!=undefined)
+              return ""
+          let objet=this.entreprises.find(item=>item.id==this.nom_structure)
+          this.structure_id.unshift(objet.id)
+          this.structure.unshift(objet)
+          console.log(this.structure)
+          this.nom_structure=""
+
+          //this.formDossierCadidature.nom_cand
+      },
+      supprimeStructureSelectionner(id){
+          this.structure= this.structure.filter(item=>item.id!=id)
+          this.structure_id=this.structure_id.filter(item=>item!=id)
+          console.log(this.structure_id)
+      }
+  },
+    watch: {
+        date_debut_previsionnel:function (value) {
+          // this.formEffetFinancier.date_odre_service=value
+           // console.log(this.formEffetFinancier.date_odre_service)
+            if(this.durre_prevue){
+                console.log(this.durre_prevue)
+                this.formEffetFinancier.date_odre_service=this.date_debut_previsionnel
+                this.formEffetFinancier.date_reception=this.dateDefinitivePrevisionnel(value,this.durre_prevue)
+                this.formEffetFinancier.date_fin_exe=this.dateDefinitivePrevisionnel(value,this.durre_prevue)
+                console.log(this.formEffetFinancier)
+                this.formEffetFinancier.duree=this.durre_prevue
+            }
+        },
+        durre_prevue: function (value) {
+           // this.formEffetFinancier.duree=value
+             //console.log(value)
+            if(this.date_debut_previsionnel){
+                this.formEffetFinancier.duree=value
+            //    console.log(this.dateDefinitivePrevisionnel(this.date_debut_previsionnel,value))
+                this.formEffetFinancier.date_reception=this.dateDefinitivePrevisionnel(this.date_debut_previsionnel,value)
+                this.formEffetFinancier.date_fin_exe=this.dateDefinitivePrevisionnel(this.date_debut_previsionnel,value)
+                this.formEffetFinancier.date_odre_service=this.date_debut_previsionnel
+                console.log(this.formEffetFinancier)
+            }
+            if(value==""){
+                this.formEffetFinancier.date_reception=""
+                this.formEffetFinancier.date_fin_exe=""
+            }
+        },
+        durre_garantie: function (value) {
+            if(value){
+                this.formEffetFinancier.durre_garantie=value
+                if(this.date_debut_previsionnel!="" && this.durre_prevue!=""){
+                    let date=this.dateDefinitivePrevisionnel(this.date_debut_previsionnel,this.durre_prevue)
+                    // console.log(date)
+                    this.formEffetFinancier.date_fin_exe=this.dateDefinitivePrevisionnel(date,value)
+                }
+            }
+        },
+        garantie:function(value){
+          if(value=="non"){
+              if(this.date_debut_previsionnel!="" && this.durre_prevue!=""){
+                  let date=this.dateDefinitivePrevisionnel(this.formEffetFinancier.date_debut_previsionnel,this.durre_prevue)
+                  this.formEffetFinancier.date_fin_exe=date
+                  this.durre_garantie=""
+              }
+          }
+        },
+        unite_administrative_id: function (value) {
+            console.log(value);
+            if(this.info_status_marche!=""){
+                this.listeMarcheStatus(this.status_marches)
+            }
+        },
+
+    },
 }
 </script>
 

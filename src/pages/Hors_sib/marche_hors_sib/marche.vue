@@ -9,12 +9,12 @@ CodeExempte
                 <div class="">
                     <div class="widget-box"> <br>
                        
-                       <div class="" align="right">
+                       <!-- <div class="" align="right">
                    <router-link :to="{name:'ajouter_hors_sib'}" tag="a" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter
 
                    </router-link> 
 
-                   </div><br>
+                   </div><br> -->
                     <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
@@ -424,7 +424,7 @@ return this.afficherListeMarcheHorsSib.filter((item) => {
                     return item
                 }
             })
-            return colect.filter(element =>   element.parent_id == null && element.sib==1 )
+            return colect.filter(element =>element.parent_id == null && element.sib==1 && element.plan_passation_marche_id!=null )
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -433,7 +433,7 @@ return this.afficherListeMarcheHorsSib.filter((item) => {
             // }); 
         }
 
-        return this.gettersMarcheHorsib.filter(element =>   element.parent_id == null && element.sib==1 )
+        return this.gettersMarcheHorsib.filter(element =>element.parent_id == null && element.sib==1 && element.plan_passation_marche_id!=null )
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)

@@ -1,4 +1,4 @@
-
+type.numimmatriculation
 <template>
 
 <div>
@@ -603,10 +603,10 @@
              </div>
 
           <div class="tab-pane active" id="EntreeEnStock" >
-           <div align="right">
+           <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="IMMATRICULATION" v-model="search" />
-              </div>
+              </div> -->
             <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -633,7 +633,7 @@
                 <tbody>
                      <tr
                     class="odd gradeX"
-                    v-for="stock in filtre_service"
+                    v-for="stock in partition(listeDesEquipementPar01(this.detail_Ua.uAdministrative_id),size)[page]"
                     :key="stock.id"
                   >
 
@@ -690,6 +690,7 @@
                         
 
 
+
                        <td>
                        <router-link
                         :to="{name : 'DetailVehiculeGestionStock', params: {id:stock.id}}"
@@ -725,7 +726,15 @@
                  </tr>
                 </tbody>
               </table>
-            
+             <div class="pagination alternate">
+                    <ul>
+                        <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                        <li  v-for="(titre, index) in partition(listeDesEquipementPar01(this.detail_Ua.uAdministrative_id),size).length" :key="index" :class="{ active : active_el == index }">
+                            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                        <li :class="{ disabled : page == partition(listeDesEquipementPar01(this.detail_Ua.uAdministrative_id),size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+                    </ul>
+           </div>
              </div>
          
         </div>
@@ -751,8 +760,9 @@
 
 <script>
 import {mapGetters, mapActions} from 'vuex';
-import { formatageSomme } from '../../../../../Repositories/Repository';
+import { formatageSomme,partition } from '../../../../../Repositories/Repository';
 import {admin,dcf,noDCfNoAdmin} from "../../../../../Repositories/Auth"
+
 import moment from 'moment';
 export default {
     data(){
@@ -770,6 +780,9 @@ export default {
       formData :{
 
       },
+       page:0,
+        size:10,
+        active_el:0,
       direct:"",
        valideService:{
 motif:"",
@@ -910,7 +923,7 @@ search1:""
    montantTotalVehicule(){
       let montantTotal =0
        let vm=this
-       this.filtre_service.forEach(function(val){
+       this.listeDesEquipementPar01(this.detail_Ua.uAdministrative_id).forEach(function(val){
            montantTotal = montantTotal + vm.montantPasEquipment(val)
        })
        return montantTotal
@@ -995,16 +1008,16 @@ let date = new Date();
    
    },
 
-filtre_service() {
-      const st = this.search.toLowerCase();
-      return this.listeDesEquipementPar01(this.detail_Ua.uAdministrative_id).filter(type => {
-        return (
+// listeDesEquipementPar01(this.detail_Ua.uAdministrative_id)() {
+//       const st = this.search.toLowerCase();
+//       return this.listeDesEquipementPar01(this.detail_Ua.uAdministrative_id).filter(type => {
+//         return (
          
-          type.numimmatriculation.toLowerCase().includes(st)
+//           type.numimmatriculation.toLowerCase().includes(st)
          
-        );
-      });
-    },
+//         );
+//       });
+//     },
     filterMaterielListe() {
       const st = this.search1.toLowerCase();
       return this.listeDesEquipementPar03(this.detail_Ua.uAdministrative_id).filter(type => {
@@ -1026,7 +1039,7 @@ filtre_service() {
     MontantTotalVehicule() {
       return id => {
         if (id != null && id != "") {
-           return this.filtre_service.filter(qtreel => qtreel.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+           return this.listeDesEquipementPar01(this.detail_Ua.uAdministrative_id).filter(qtreel => qtreel.uAdministrative_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
 
         }
       };
@@ -1035,10 +1048,10 @@ filtre_service() {
   return this.listeDesEquipementPar03(this.detail_Ua.uAdministrative_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
 },
 sommeDesVehicule(){
-  return this.filtre_service.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
+  return this.listeDesEquipementPar01(this.detail_Ua.uAdministrative_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.prix_unitaire), 0).toFixed(0);
 },
 sommeDesQuantite(){
-  return this.filtre_service.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+  return this.listeDesEquipementPar01(this.detail_Ua.uAdministrative_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
 },
 NombreDeVehicule() {
       return id => {
@@ -1791,6 +1804,19 @@ afficherIdService() {
    'ajouterPlanOrganigrammeUa','modifierPlanOrganigrammeUa','supprimerPlanOrganigrammeUa']), 
 
 
+      partition:partition,
+      getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
 
 DureeEcoule(id){
      

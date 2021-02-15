@@ -320,7 +320,6 @@
     import { ModelListSelect } from "vue-search-select";
     import "vue-search-select/dist/VueSearchSelect.css";
     import { formatageSomme } from "@/Repositories/Repository";
-
     export default {
         components: {
 ModelListSelect
@@ -348,9 +347,7 @@ ModelListSelect
                 "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser",
                 "typeActeEffetFinanciers","personnaliseGetterMarcheBailleur","getterMandate",
                 "getActeEffetFinancierPersonnaliserContrat","getterCojos","getterDemandeAno","getterAnoDMPBailleur"]),
-
             ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-
             ...mapGetters('uniteadministrative',[
                 "plans_programmes",
                 "uniteAdministratives",
@@ -359,12 +356,8 @@ ModelListSelect
                 "derniereNivoPlanBudgetaire",
                 "getPersonnaliseBudgetGeneralParPersonnel",
                 "budgetEclate"
-
-
             ]),
-
             ...mapGetters('parametreGenerauxAdministratif',[
-
                 "sections",
                 "type_Unite_admins",
                 "plans_programmes",
@@ -376,35 +369,23 @@ ModelListSelect
             ]),
 ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
             ...mapGetters('parametreGenerauxFonctionnelle',[
-
                 "plans_fonctionnels",
                 "afficheNiveauPlanFonctionnel"
             ]),
             ...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays"]),
             ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
-
             ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 ...mapGetters('gestionMarche', ['entreprises',"secteur_activites",'banques','comptes','getCompte',]),
   ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
-
-
 listeDesMarcheSuppendu(){
-
   return this.mandats.filter(itme=>this.afficherEtatDuMarche(itme.marche_id) ==7  && itme.exercice_budget==this.formData.exo && itme.entreprise_id==this.formData.entrep_id && this.afficherIdTypeMarche(itme.marche_id)==this.formData.type_marche_id)
-
 },
-
-
 listeDesMarcheTerminer(){
-
   return this.mandats.filter(itme=>this.afficherEtatDuMarche(itme.marche_id) ==5  && itme.exercice_budget==this.formData.exo && itme.entreprise_id==this.formData.entrep_id && this.afficherIdTypeMarche(itme.marche_id)==this.formData.type_marche_id)
-
 },
 listeDesMarcheEnCoursExecution(){
-
   return this.mandats.filter(itme=>this.afficherEtatDuMarche(itme.marche_id) ==2  && itme.exercice_budget==this.formData.exo && itme.entreprise_id==this.formData.entrep_id && this.afficherIdTypeMarche(itme.marche_id)==this.formData.type_marche_id)
-
 },
 regimeImpositions(){
       return id =>{
@@ -492,7 +473,6 @@ afficherObjetMarche(){
       return id => {
         if (id != null && id != "") {
            const qtereel = this.sections.find(qtreel => qtreel.id == id);
-
       if (qtereel) {
          return qtereel.code_section.concat('  ', qtereel.nom_section);
        
@@ -535,7 +515,6 @@ afficherLibelleTypeMarche(){
         }
       }
     },
-
     COMPTECONTRIBUABLE(){
       return id =>{
         if(id!=null && id!=""){
@@ -599,12 +578,9 @@ afficherLibelleTypeMarche(){
     };
 </script>
 <style scoped>
-
     .tailgrand{
         width: 95%;
         margin: 0 -48%;
-
-
     }
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -621,7 +597,6 @@ font-size: 12px;
 text-align: center;
     }
     td{
-
 color:#000;
 font-size: 20px;
 text-align: center;
