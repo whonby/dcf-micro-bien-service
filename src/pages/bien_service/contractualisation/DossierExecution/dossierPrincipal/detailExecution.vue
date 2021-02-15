@@ -94,7 +94,7 @@ DisponibleBudgetaireApresLiquidation
                         <li>
                         <a data-toggle="tab" href="#tab22">PARAMETRAGE ECHEANCIER</a>
                       </li>
-                      <li>
+                      <!-- <li>
                         <a data-toggle="tab" href="#tab03">IMAGES DES MARCHES</a>
                       </li> 
                       <li>
@@ -102,7 +102,7 @@ DisponibleBudgetaireApresLiquidation
                       </li> 
                         <li>
                         <a data-toggle="tab" href="#tab041">Situation du marché</a>
-                      </li> 
+                      </li>  -->
                      
                     </ul>
                   </div>
@@ -122,7 +122,7 @@ DisponibleBudgetaireApresLiquidation
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#tab2078">Avenant</a></li>
                                <li ><a data-toggle="tab" href="#tab100">Facture</a></li>
-                               
+                               <!-- <li ><a data-toggle="tab" href="#demandeengagement">Demande d'engagement</a></li> -->
                                 <li ><a data-toggle="tab" href="#tab10" v-if="afficherTypeProcedure(detail_marche.id) == 2">Engagement</a></li>
                                 <li ><a data-toggle="tab" href="#tab15550" v-if="afficherTypeProcedure(detail_marche.id) == 2">Réalité service fait</a></li>
                                 <li ><a data-toggle="tab" href="#tab120120" v-if="afficherTypeProcedure(detail_marche.id) == 2 || afficherTypeProcedure(detail_marche.id) == 1">Liquidation</a></li>
@@ -155,6 +155,7 @@ DisponibleBudgetaireApresLiquidation
                             <div id="Financement" class="tab-pane "><financement :macheid="detail_marche.id"></financement></div> 
 <div id="tab2078" class="tab-pane active "><avenant :macheid="detail_marche.id"></avenant></div>             
 <div id="tab100" class="tab-pane  "><facture :macheid="detail_marche.id"></facture></div> 
+<div id="demandeengagement" class="tab-pane  "><DemandeEngagement :macheid="detail_marche.id"></DemandeEngagement></div> 
 <div id="tab45785" class="tab-pane  "><decompte :macheid="detail_marche.id"></decompte></div>
                        
  <div id="tab20" class="tab-pane  ">
@@ -392,6 +393,7 @@ DisponibleBudgetaireApresLiquidation
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
 import avenant from "../../../../bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
 import facture from "../../../../bien_service/contractualisation/DossierExecution/dossierFacture/facture";
+import DemandeEngagement from "../../../../bien_service/contractualisation/DossierExecution/DemandeEngagement/DemandeEngagement";
 import decompte from "../../../../bien_service/contractualisation/DossierExecution/dossierDecompte/decompte";
     // import mandatFactureProformaEmetteur from "../../../../bien_service/contractualisation/DossierExecution/dossierMandat/mandatFactureProformaEmetteur";
     //  import mandatFactureProformaCf from "../../../../bien_service/contractualisation/DossierExecution/dossierMandat/mandatFactureProformaCf";
@@ -431,6 +433,7 @@ import decompteHs from "../../../../Hors_sib/biens_service/DossierExecutionHorsS
         components:{
             avenant,
             facture,
+            DemandeEngagement,
             decompte,
              imageMarche,
             // mandatFactureProformaCf,

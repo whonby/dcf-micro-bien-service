@@ -6,7 +6,6 @@ const defaultState = {
     codesFonctions:[],
     comptes:[],
     receptionMarche:[],
-   
     lots:[],
     typePrestations:[],
     typeFactures:[],
@@ -110,7 +109,10 @@ const defaultState = {
     structure_daos:[],
     TacheMarche:[],
     entreprise_soustraitant:[],
-    programmationMarchePlurieAnnuel:[]
+    programmationMarchePlurieAnnuel:[],
+    DemandeEngagement:[],
+    nomPieceJustificative:[]
+
 }
 
 export default defaultState;

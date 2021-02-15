@@ -178,7 +178,7 @@ marche_id
         
         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
           {{effetFinancier.duree || 'Non renseigné'}} jrs</td>
-        <td>
+        <!-- <td>
           <div class="btn-group">
            
              <button 
@@ -189,7 +189,7 @@ marche_id
                 </button>
           </div>
           
-        </td>
+        </td> -->
          <td>
           <div class="btn-group">
             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
@@ -529,7 +529,7 @@ marche_id
             <td>
 
               <div class="control-group">
-                <label class="control-label">Quelle mode de saisir voulez-vous?</label>
+                <label class="control-label">Comment saisir le montant du marché?</label>
                 <div class="controls">
                   <select v-model="formEffetFinancier.httcc_id" class="span">
 

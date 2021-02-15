@@ -606,6 +606,10 @@
              </div>
 
           <div class="tab-pane active" id="EntreeEnStock" >
+             <div align="right">
+                Recherche:
+                <input type="search" placeholder="IMMATRICULATION" v-model="search" />
+              </div>
             <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -630,7 +634,7 @@
                 <tbody>
                      <tr
                     class="odd gradeX"
-                    v-for="stock in listeDesEquipementPar01(detail_Ua.uAdministrative_id)"
+                    v-for="stock in filteParImmatriculationVehicule"
                     :key="stock.id"
                   >
 
@@ -2986,6 +2990,16 @@ PrixUnitaireParModel() {
         }
       };
     },
+    filteParImmatriculationVehicule() {
+      const st = this.search.toLowerCase();
+      return this.listeDesEquipementPar01(this.detail_Ua.uAdministrative_id).filter(type => {
+        return (
+         
+          type.numimmatriculation.toLowerCase().includes(st)
+         
+        );
+      });
+    },
     listeDesEquipementPar01() {
       return id => {
         if (id != null && id != "") {
@@ -3738,7 +3752,7 @@ formatageSomme:formatageSomme,
   font-weight:bold;
 }
 .tailgrand98{
-  width: 65%;
+  width: 50%;
   margin: 0 -35%;
 }
 .tailgrand2{

@@ -35,8 +35,8 @@
                                                 <th>Variation CP</th>
                                                 <th>Dotation Actuel AE</th>
                                                 <th>Dotation Actuel CP</th>
-                                                <th>Cumule AE</th>
-                                                <th>Cumule CP</th>
+                                                <th>Cumul AE</th>
+                                                <th>Cumul CP</th>
 
                                             </tr>
                                             </thead>
@@ -62,11 +62,22 @@
                                         </table>
                                     </div>
                                     <div id="tab2" class="tab-pane" style="height: 1025px !important;">
+                                       <div class="span">
+                                           <div class="control-group">
+                                               <label class="control-label">Type de modification</label>
+                                               <select v-model="type_modification">
+                                                   <option></option>
+                                                   <option value="OUI">SOMME NULL</option>
+                                                   <option value="NON">SOMME NON NULL</option>
+                                               </select>
+                                           </div>
+
+                                       </div>
                                        <table class="table">
                                            <tr>
                                                <td>
                                                    <div class="control-group">
-                                                       <label class="control-label">Date act</label>
+                                                       <label class="control-label">Date acte</label>
                                                        <div class="controls">
                                                            <input
                                                                    type="date"
@@ -79,7 +90,7 @@
                                                </td>
                                                <td>
                                                    <div class="control-group">
-                                                       <label class="control-label">Numero Act</label>
+                                                       <label class="control-label">Numero Acte</label>
                                                        <div class="controls">
                                                            <input
                                                                    type="text"
@@ -90,7 +101,7 @@
                                                        </div>
                                                    </div>
                                                    <div class="control-group">
-                                                       <label class="control-label">Fichier act</label>
+                                                       <label class="control-label">Fichier acte</label>
                                                        <input type="file"   @change="OnchangeFichier" />
                                                    </div>
                                                </td>
@@ -372,7 +383,7 @@
         },
         data() {
             return{
-
+                type_modification:"",
                 isLoading: false,
                 fullPage: false,
                 controlleur_fin:"",
@@ -636,7 +647,7 @@
                     if(ua_id!=""){
                         let collection=[]
                         let vm=this
-                        let objeBudget=this.budgetUniteAdmin(ua_id)
+                        let objeBudget=this.budgetUniteAdmin(ua_id).filter(item=>item.gdenature_id==this.grand_nature)
                         objeBudget.forEach(function (val) {
                             let activite=vm.getterTousActivite.find(item=>item.id==val.activite_id)
                             let ob=collection.find(item=>item.id==val.activite_id)
@@ -802,7 +813,15 @@
 
             ajouterLigne(id){
          //  console.log(id)
+                if(this.type_modification==""){
+                    this.$notify({
+                        title: 'ERROR',
+                        text: "Veuillez renseigne le type de modification",
+                        type:"error"
+                    })
 
+                    return null
+                }
                 if (id==""){
 
                     this.$notify({
@@ -832,7 +851,7 @@
                     this.formData.economique_id=''
                     this.variation_ae=0
                     this.variation_cp=0
-
+                    this.ua_id=""
                     this.$notify({
                         title: 'Success',
                         text: "Ligne ajouter",
@@ -865,7 +884,15 @@
             },
 
             modificationBudget(){
-                console.log(this.ligne_selectionne.length)
+                if(this.type_modification==""){
+                    this.$notify({
+                        title: 'ERROR',
+                        text: "Veuillez renseigne le type de modification",
+                        type:"error"
+                    })
+
+                    return null
+                }
                   if(this.ligne_selectionne.length<0){
                       this.$notify({
                           title: 'ERROR',
@@ -875,6 +902,31 @@
 
                       return null
                   }
+                //totalVariationAE
+
+                if(this.type_modification=="OUI"){
+                     if(this.totalVariationAE!=0 && this.totalVariationCP!=0){
+                         this.$notify({
+                             title: 'ERROR',
+                             text: "Vous n'avez pas le droit d'effectuer la variation a somme non null ",
+                             type:"error"
+                         })
+
+                         return null
+                     }
+                }
+
+                if(this.type_modification=="NON"){
+                    if(this.totalVariationAE==0 && this.totalVariationCP==0){
+                        this.$notify({
+                            title: 'ERROR',
+                            text: "Vous n'avez pas le droit d'effectuer la variation a somme null ",
+                            type:"error"
+                        })
+
+                        return null
+                    }
+                }
 
                 if(this.formData.numero_act==""){
                     this.$notify({
@@ -896,6 +948,15 @@
                     return null
                 }
 
+                if(this.type_modification==""){
+                    this.$notify({
+                        title: 'ERROR',
+                        text: "Veuillez renseigne la date de l'act ",
+                        type:"error"
+                    })
+
+                    return null
+                }
                 // const formData = new FormData();
                 // formData.append('fichier', this.selectedFile, this.selectedFile.name);
                 // formData.append('date_modif',this.formData.date_act);
@@ -985,6 +1046,89 @@ let objet={
 </script>
 
 <style scoped>
+
+    .inputGroup {
+        background-color: #fff;
+        display: block;
+        margin: 5px 0;
+        position: relative;
+
+    }
+    .inputGroup label {
+        padding: 1px 10px;
+        display: block;
+        text-align: left;
+        color: #3C454C;
+        cursor: pointer;
+        position: relative;
+        z-index: 2;
+        transition: color 200ms ease-in;
+        overflow: hidden;
+    }
+    .inputGroup label:before {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        content: "";
+        background-color: #5562eb;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale3d(1, 1, 1);
+        transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        z-index: -1;
+    }
+    .inputGroup label:after {
+        width: 23px;
+        height: 23px;
+        content: "";
+        border: 2px solid #D1D7DC;
+        background-color: #fff;
+        background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
+        background-repeat: no-repeat;
+        background-position: 2px 3px;
+        border-radius: 50%;
+        z-index: 2;
+        position: absolute;
+        right: 50px;
+        top: 55%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        transition: all 200ms ease-in;
+    }
+    .inputGroup input:checked ~ label {
+        color: #fff;
+    }
+    .inputGroup input:checked ~ label:before {
+        transform: translate(-50%, -50%) scale3d(70, 56, 1);
+        opacity: 1;
+    }
+    .inputGroup input:checked ~ label:after {
+        background-color: #54E0C7;
+        border-color: #54E0C7;
+    }
+    .inputGroup input {
+        width: 20px;
+        height: 20px;
+        order: 1;
+        z-index: 2;
+        position: absolute;
+        right: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        visibility: hidden;
+    }
+
+    .form {
+        padding: 0 16px;
+        max-width: 550px;
+        margin: 50px auto;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 36px;
+    }
     .grdirModalActeEffet{
         width: 1200px;
         margin: 0 -530px;
