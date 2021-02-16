@@ -1,4 +1,4 @@
-structures_activites
+
 <template>
   <div>
   
@@ -65,7 +65,7 @@ structures_activites
 <!----- ajouter modal   ---->
 
 
- <div id="exampleModal" class="modal hide tailgrand">
+ <div id="exampleModal" class="modal hide ">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter plan infrastructure</h3>
@@ -153,14 +153,19 @@ structures_activites
                   <tr>
                     <td>
                       <div class="control-group">
-              <label class="control-label">Structure Programmatique</label>
-              
-              <div class="controls">
+              <label class="control-label">Structure Infrastructure</label>
+                 <div class="controls">
+                <select  v-model="nouvelElementEnfant.structure_infrastruture_id" class="span5">
+            <option v-for="plan in structures_Infrastructures" :key="plan.id" 
+            :value="plan.id">{{plan.libelle}}</option>
+                </select>
+              </div>
+              <!-- <div class="controls">
               <select v-model="nouvelElementEnfant.structure_infrastruture_id" class="span5">
                 <option v-for="structure in structures_activites " :key="structure.id" 
                  :value="structure.id">{{structure.libelle}} </option>
               </select>
-            </div>
+            </div> -->
             </div>
                     </td>
                     <td>
@@ -171,7 +176,7 @@ structures_activites
               </div>
             </div>
                     </td>
-                  </tr>
+                  </tr>  
                   <tr>
                     <td colspan="2">
                       <div class="control-group">
