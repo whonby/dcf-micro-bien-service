@@ -360,7 +360,7 @@ afficheIdSecteurActivite() {
     
 
   retourListeEntreprise(){
-                 this.$router.push({ name: 'GestionMarche' })
+                 this.$router.push({ name: 'marcheEntreprise' })
             },
 
 

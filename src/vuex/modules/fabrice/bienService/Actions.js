@@ -163,7 +163,7 @@ export function ajouterCandidatSelectionner({commit}, formData){
 
 export  function getReception({commit}){
   queue.push(() => axios.get('/ReceptionMarche').then(tony => {
-      commit('GET_RECEPTION', tony.data)
+      commit('GET_ALL_RECEPTION', tony.data)
   }).catch(error => console.log(error)))
 }
 
@@ -212,7 +212,7 @@ export function supprimerReception({commit}, id){
   .then(dialog => {
      commit('SUPPRIMER_RECEPTION', id)
     // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete('/supprimer_ReceptionMarche/' + id).then(() => dialog.close() )   
+      axios.delete('/ReceptionMarche/' + id).then(() => dialog.close() )   
   })
 }
 //modifier role membrecojo
@@ -5053,7 +5053,7 @@ export  function  getProgrammationMarchePlurieAnnuel({commit}) {
 
     }).catch(error => console.log(error)))
 }
-
+ajouterReception
 // action
 export function ajouterProgrammationMarchePlurieAnnuel({commit}, formData){
     asyncLoading(axios.post('/programmation_marche_plurie_annuel',formData)).then(response =>{
@@ -5114,4 +5114,135 @@ export function supprimerProgrammationMarchePlurieAnnuel({commit}, id) {
             axios.delete('/programmation_marche_plurie_annuel/' + id).then(() => dialog.close() )
         })
 
+}
+
+
+
+
+
+
+
+
+
+export function getDemandeEngagement({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/DemandeEngagement")
+          .then(response => {
+              commit("GET_ALL_DEMANDE_ENGAGEMENT", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterDemandeEngagement({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/DemandeEngagement", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_DEMANDE_ENGAGEMENT", response.data);
+             
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "ce Numero existe déja",
+            type:"error"
+        });
+    })
+}
+
+
+export function modifierDemandeEngagement({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/DemandeEngagement/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_DEMANDE_ENGAGEMENT", response.data);
+          
+
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerDemandeEngagement({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_DEMANDE_ENGAGEMENT", id);
+        
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/DemandeEngagement/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+
+
+
+
+export function getPieceJustificative({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/NomPieceJustificative")
+          .then(response => {
+              commit("GET_ALL_NOM_PIECE_JUSTIFICATIVE", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterPieceJustificative({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/NomPieceJustificative", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_NOM_PIECE_JUSTIFICATIVE", response.data);
+             
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+export function modifierPieceJustificative({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/NomPieceJustificative/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_NOM_PIECE_JUSTIFICATIVE", response.data);
+          
+
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerPieceJustificative({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_NOM_PIECE_JUSTIFICATIVE", id);
+        
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/NomPieceJustificative/" + id).then(() => dialog.close());
+      });
 }

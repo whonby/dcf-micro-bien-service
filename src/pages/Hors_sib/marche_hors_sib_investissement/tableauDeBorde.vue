@@ -143,10 +143,10 @@ nombreDeMarcheEnContratualisation(){
  },
  
   afficheMarcheResilier(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 3 && this.afficherMarcheBienEtFournitureHorsSib(element.marche_id) == 1)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(this.afficheidTypeMarche(element.marche_id)) == 3 && this.afficherMarcheBienEtFournitureHorsSib(element.marche_id) == 1)
 },
     nbreMarcheExecuter(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 3 && this.afficherMarcheBienEtFournitureHorsSib(element.marche_id) == 1).length
+  return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && this.afficheCodeTypeMarche(this.afficheidTypeMarche(element.marche_id)) == 3 && this.afficherMarcheBienEtFournitureHorsSib(element.marche_id) == 1).length
 },
 afficheNombreMarcheResilier(){
 return this.afficheMarcheResilier.length
@@ -155,7 +155,18 @@ nombreAfficheMarcheSolde(){
 return this.afficheMarcheTerminer.length
 },
 
+afficheidTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.type_marche_id;
+      }
+      return 0
+        }
+      };
+    },
 
 montantMarchePrevu(){
   return this.gettersMarcheHorsib.filter(element => element.type_marche_id == 5 && element.parent_id == null && element.sib==1).reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche), 0)

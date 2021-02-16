@@ -14,46 +14,7 @@
 
                               </div> -->
                  <div class="table-responsive">
-                      <table class="table">
-              
-                                    <thead>
-                                    <tr>
-
-                                         
-                     <th>N° lot{{macheid}}</th>
-                    
-                    <th>Entreprise</th>
-                    
-                     <th>Date de debut d'execution prévisionnelle</th>
-                    
-                    <th>Date reception provisoire prévisionnelle</th>
-                    <th>Date de reception définitive prévisionnelle</th>
-                    
-                    <th>Durée d'execution contractuelle</th>
-        
-                              
-                                <th>Période de garantie</th>
-                    <th>Date de debut d'execution réelle</th>
-                    <th>Date de reception provisoire réelle</th>
-                    
-                     <th>Date de reception définitive réelle</th>
-                    
-                    <th>Durée d'execution réel</th>
-                    <th>Ecart de démarrage</th>
-                    
-                    <th>Ecart de réception provisoire</th>
-                    <th>Ecart de réception définitive</th>
-                    <th>Ecart d'execution</th>
-                                
-                                <th colspan="3">Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                            
-                 
-                                    </tbody>
-                                
-                                </table>
+                  
 
                  </div>
      
@@ -95,7 +56,7 @@ export default {
     created(){},
 
               computed: {
-            ...mapGetters("bienService", ["gettersTypeOrdrePaiement",'typeMarches','decomptes','modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+            ...mapGetters("bienService", ["receptionMarche","gettersTypeOrdrePaiement",'typeMarches','decomptes','modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -142,6 +103,9 @@ export default {
        
     ]),
     ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+
+
+ 
 
 
       },

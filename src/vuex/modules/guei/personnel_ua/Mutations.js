@@ -1028,6 +1028,30 @@ export const MODIFIER_FONCTIONS_PROFESSIONNEL = (state, objetModifie) => {
 
 
 
+export const GET_FICHIER_JOINT_DEMANDE_ENGAGEMNT = (state, data) => {
+    state.FichierJoinDmdEngagement = data
+}
+
+
+export const AJOUTER_FICHIER_JOINT_DEMANDE_ENGAGEMNT = (state, nouvel_objet) => {
+    state.FichierJoinDmdEngagement.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+}
+
+
+export const SUPPRIMER_FICHIER_JOINT_DEMANDE_ENGAGEMNT = (state, id) => {
+    state.FichierJoinDmdEngagement = state.FichierJoinDmdEngagement.filter(fonction => fonction.id != id)
+}
+
+
+export const MODIFIER_FICHIER_JOINT_DEMANDE_ENGAGEMNT = (state, objetModifie) => {
+    state.FichierJoinDmdEngagement = state.FichierJoinDmdEngagement.map(fonction => {
+        if (fonction.id == objetModifie.id) {
+            fonction = { ...objetModifie }
+        }
+        return fonction
+    })
+}
 
 export {
 

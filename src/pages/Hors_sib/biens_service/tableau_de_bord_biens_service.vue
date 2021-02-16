@@ -248,7 +248,18 @@ return this.gettersMarcheHorsib.filter(element => element.attribue == 0 && eleme
            
     },
 
+afficheidTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.type_marche_id;
+      }
+      return 0
+        }
+      };
+    },
 
  afficherExecutionPAU() {
        // const st = this.search.toLowerCase();
@@ -284,11 +295,11 @@ return this.getActeEffetFinancierPersonnaliser45
                     return item
                 }
             })
-            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 4 && this.afficherMarcheBienEtFournitureHorsSib(element.marche_id) == 1 || this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 1 && this.afficherMarcheBienEtFournitureHorsSib(element.marche_id) == 1) 
+            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(this.afficheidTypeMarche(element.marche_id)) == 4 && this.afficherMarcheBienEtFournitureHorsSib(element.marche_id) == 1 || this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(this.afficheidTypeMarche(element.marche_id)) == 1 && this.afficherMarcheBienEtFournitureHorsSib(element.marche_id) == 1) 
             
         }
 
-return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 4 && this.afficherMarcheBienEtFournitureHorsSib(element.marche_id) == 1 || this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 1 && this.afficherMarcheBienEtFournitureHorsSib(element.marche_id) == 1)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(this.afficheidTypeMarche(element.marche_id)) == 4 && this.afficherMarcheBienEtFournitureHorsSib(element.marche_id) == 1 || this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(this.afficheidTypeMarche(element.marche_id)) == 1 && this.afficherMarcheBienEtFournitureHorsSib(element.marche_id) == 1)
           
 
                  
@@ -469,10 +480,10 @@ nombreDeMarcheEnContratualisation(){
  },
  
   afficheMarcheResilier(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 4 )
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(this.afficheidTypeMarche(element.marche_id)) == 4 )
 },
     nbreMarcheExecuter(){
-  return this.afficherExecutionPAU.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.afficheCodeTypeMarche(recuper.marche.type_marche_id) == 4 && this.afficherMarcheBienEtFournitureHorsSib(recuper.marche_id) == 1||  this.afficherAttributMarche(recuper.marche_id) == 2 && this.afficheCodeTypeMarche(recuper.marche.type_marche_id) == 1 && this.afficherMarcheBienEtFournitureHorsSib(recuper.marche_id) == 1).length
+  return this.afficherExecutionPAU.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.afficheCodeTypeMarche(this.afficheidTypeMarche(recuper.marche_id)) == 4 && this.afficherMarcheBienEtFournitureHorsSib(recuper.marche_id) == 1||  this.afficherAttributMarche(recuper.marche_id) == 2 && this.afficheCodeTypeMarche(this.afficheidTypeMarche(recuper.marche_id)) == 1 && this.afficherMarcheBienEtFournitureHorsSib(recuper.marche_id) == 1).length
 },
 
 //   afficheMarchExecuter(){

@@ -2562,6 +2562,7 @@ afficherModalListeExecution(){
             }.bind(this), 3000)
 
         },
+        
             // fonction pour vider l'input  salaire_actuel_acteur
             addActNomination () {
                 const formData = new FormData();

@@ -1,4 +1,6 @@
 import { groupBy } from "../../../../Repositories/Repository";
+export const gettersDemandeEngagement = state => state.DemandeEngagement
+export const gettersnomPieceJustificative = state => state.nomPieceJustificative.sort((a, b) => (a.numero_ordre > b.numero_ordre) ? 1 : -1)
 
 export const gettersTypeOrdrePaiement = state => state.typeOrdrePaiement
 export const role_membrecojo = state => state.role_membrecojo
@@ -1122,4 +1124,12 @@ export const getterEntrepriseSousTraitance=state => state.entreprise_soustraitan
 export const GroupeEntreprise = (state, getters) => {
     //delete getters.trieUaImmobilisation.
       return groupBy(getters.acteEffetFinanciers,"entreprise_id");
+  };
+
+
+
+  
+export const GroupeUaDemandeEngagement = (state, getters) => {
+    //delete getters.trieUaImmobilisation.
+      return groupBy(getters.gettersDemandeEngagement,"ua_id");
   };

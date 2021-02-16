@@ -90,7 +90,7 @@ affichierAppelOffreid
           <div class="controls">
             <input
                 type="text"
-                :value="affichierPvMarche(affichierIdMarcheGlobal(infoLot.id))"
+                :value="affichierPvMarche(affichierIdMarcheGlobal(macheid))"
                 class="span"
                 readonly
             />
