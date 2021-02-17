@@ -605,7 +605,7 @@
                      </tr>
                      <tr>
                         <td colspan="">
-              <div class="control-group">
+              <!-- <div class="control-group">
                 <label class="control-label">Pièces justificatives </label>
                 <div class="controls">
                   <input
@@ -617,10 +617,10 @@
                   />
                   <code v-if="info_pdf">Le fichier doit etre un pdf</code>
                 </div>
-              </div>
+              </div> -->
               
             </td>
-            <td colspan="3">
+            <td colspan="4">
                <div class="" align="right">
                    <button 
                         @click.prevent="afficherModalAjouterService"
@@ -1107,7 +1107,7 @@
               <div class="control-group">
                                                     <label class="control-label">Nature de la pièce</label>
                                                     <div class="controls">
-                                                        <select v-model="formData1.libelle" class="span" style="border:1px solid #000">
+                                                        <select v-model="formData1.libelle" class="span5" style="border:1px solid #000">
                                                             <option></option>
                                                             <option
                         v-for="typeFact in typeFactures"
@@ -1168,42 +1168,80 @@
            
          
       </table>
-       <!-- <div class="table-responsive text-nowrap">
-              <table class="table table-bordered table-striped">
+       
+      </div>    
+ 
+  <div>
+   <table class="table table-bordered table-striped" >
                 <div class="widget-box">
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#BONCOMMANDE">ENGAGEMENT PAR BON DE COMMANDE</a>
+                        <a data-toggle="tab" href="#BONCOMMANDE" v-if="formData1.libelle == 8">  Facture</a>
                       </li>
-                       <li>
-                        <a data-toggle="tab" href="#DIRECT">ENGAGEMENT DIRECT</a>
-                      </li>
-                       
+                      
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
-                    
+                    <!--ongle identification-->
                     <div id="BONCOMMANDE" class="tab-pane active">
-                     <facture></facture>
-                    </div>
-                <div id="DIRECT" class="tab-pane">
-                  444444444
-  
-          </div>
-                    
+                  <div class="widget-content nopadding">
+                      <div class="" align="right" v-if="formData1.libelle == 8">
+                   <button 
+                        @click.prevent="afficherModalAjouterFacture"
+                       class="btn  btn-success">
+                <span >  <i class="icon icon-plus-sign">Ajouter Facture</i></span>
+       
+                </button>
+                <br>
 
-                       
+                   </div>
+              <table class="table table-bordered table-striped" v-if="formData1.libelle == 8">
+                <thead>
+                  <tr>
+                    <th>Designation</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire</th>
+                     <th>TOTAL</th>
+                   
+                  </tr>
+                </thead>
+                <!-- <tbody>
+                  <tr class="odd gradeX" v-for="(type, index) in filtre_type_teste" :key="type.id">
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.code || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.libelle || 'Non renseigné'}}</td>
 
-                      
-                      
-      </div>
-       </div>
-      
+                    <td>
+                      <button class="btn btn-danger" @click="supprimerTypeTexte(type.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody> -->
               </table>
- 
-  </div> -->
+              </div>
+                    </div>
+               
+                    
+                 
+
+                      
+                      
       </div>
+         
+
+
+       </div>
+     
+              </table>
+  </div>
+   
       <div class="modal-footer">
         <a
          
@@ -1304,6 +1342,88 @@
       </div>
     </div>
    
+
+
+
+
+
+
+   <div id="exampleModal1" class="modal hide tailles">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Facture</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+           <tr>
+            <td>
+              <div class="control-group">
+            <label class="control-label">Désignation</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editpiece.date_piece"
+                class="span5"
+                
+              />
+            </div>
+          </div>
+            </td>
+            <td>
+              <div class="control-group">
+            <label class="control-label">Désignation</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editpiece.date_piece"
+                class="span5"
+                
+              />
+            </div>
+          </div>
+            </td>
+            
+          </tr>
+          <tr>
+            <td>
+              <div class="control-group">
+            <label class="control-label">Désignation</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editpiece.date_piece"
+                class="span5"
+                
+              />
+            </div>
+          </div>
+            </td>
+            <td>
+              <div class="control-group">
+            <label class="control-label">Désignation</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editpiece.date_piece"
+                class="span5"
+                
+              />
+            </div>
+          </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterTypeTexteLocal(formData)"
+          class="btn btn-primary"
+          href="#"
+          
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
     </div>
 
 
@@ -1353,7 +1473,7 @@
 components: {
     
      ModelListSelect,
-     
+    //  facture
      
   },
         data() {
@@ -1909,7 +2029,7 @@ var nouvelObjet3 = {
     },
     
 ajouterFonctionGroupe(){
-   this.ajouterFichierJoin()
+  //  this.ajouterFichierJoin()
   this.AjouterDemandeEngagement()
   this.formData={
 mode:"",
@@ -1937,7 +2057,12 @@ montant_tresor:""
 },
 
 
-
+  afficherModalAjouterFacture() {
+      this.$("#exampleModal1").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+    },
       afficherModalAjouterService() {
       this.$("#exampleModal").modal({
         backdrop: "static",
@@ -1957,6 +2082,11 @@ montant_tresor:""
 .taille{
   width: 93%;
   margin: 0 -45%;
-  height: 100%;
+  height: 60%;
+}
+.tailles{
+   width: 93%;
+  margin: 0 -45%;
+  
 }
 </style>

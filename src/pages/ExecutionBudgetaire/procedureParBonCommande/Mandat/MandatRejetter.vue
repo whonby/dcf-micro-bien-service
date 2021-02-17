@@ -388,7 +388,7 @@ ListePieceJustificative() {
    listeDossierMandat() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierMandat.filter(qtreel => this.ua(qtreel.demande_engagement_id) == id && this.typeProcedure(qtreel.demande_engagement_id) == "Engagement par Bien de Commande" && qtreel.decision_cf==3);
+           return this.gettersDossierMandat.filter(qtreel =>qtreel.demande_engagement_id == id && this.typeProcedure(qtreel.demande_engagement_id) == "Engagement par Bien de Commande" && qtreel.decision_cf==3);
 
         }
       };

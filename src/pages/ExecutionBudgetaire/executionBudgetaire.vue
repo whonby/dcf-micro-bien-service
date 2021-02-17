@@ -14,21 +14,42 @@
                       <li class="active">
                         <a data-toggle="tab" href="#BONCOMMANDE">ENGAGEMENT PAR BON DE COMMANDE</a>
                       </li>
-                       <li>
+                       <!-- <li>
                         <a data-toggle="tab" href="#DIRECT">ENGAGEMENT DIRECT</a>
-                      </li>
+                      </li> -->
                        
                     </ul>
                   </div>
+                  <table class="table table-bordered table-striped">
+                    <tr>
+                      <td style=" width:5%">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-success" @click.prevent="liquidation"><i class="icon icon-folder-open"> Nouveau Liquidation</i></button>
+    
+        </div> 
+                      </td>
+                      <td style=" width:0%">
+
+                      </td>
+                      <td style=" width:5%">
+                        <div  align="right" style="cursor:pointer;">
+    <button class="btn btn-success" @click.prevent="MANDATEMENT" :readonly="griseButton1"><i class="icon icon-folder-open"> Nouveau Mandat</i></button>
+    
+        </div> 
+                      </td>
+                    </tr>
+                  </table>
+                             
+        
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
                     <div id="BONCOMMANDE" class="tab-pane active">
                       <div class="widget-title">
                     <ul class="nav nav-tabs">
-                      <li class="active">
+                      <!-- <li >
                         <a data-toggle="tab" href="#DEMANDE">DEMANDE D'ENGAGEMENT</a>
-                      </li>
-                       <li>
+                      </li> -->
+                       <li class="active">
                         <a data-toggle="tab" href="#LIQUIDATION">LIQUIDATION</a>
                       </li>
                         <li>
@@ -37,7 +58,7 @@
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
-                     <div id="DEMANDE" class="tab-pane active">
+                     <!-- <div id="DEMANDE" class="tab-pane active">
                        <div  align="right" style="cursor:pointer;">
     <button class="btn btn-success" @click.prevent="ajouterDemandeEngage"><i class="icon icon-folder-open"> Nouveau demande d'engagement</i></button>
     
@@ -80,12 +101,9 @@
                        </div>
                       </div>
                       
-                     </div>
-                    <div id="LIQUIDATION" class="tab-pane">
-                        <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="liquidation"><i class="icon icon-folder-open"> Nouveau Liquidation</i></button>
-    
-        </div> 
+                     </div> -->
+                    <div id="LIQUIDATION" class="tab-pane active">
+             
         <br>
                         <div class="widget-title">
                     <ul class="nav nav-tabs">
@@ -108,28 +126,25 @@
                   </div>
                   <div class="widget-content tab-content">
 <div id="attentLiquidation" class="tab-pane active">
-                        <LiquidationEnAttente :macheid="detail_marche.ua_id"></LiquidationEnAttente>
+                        <LiquidationEnAttente :macheid="detail_marche.id"></LiquidationEnAttente>
                        </div>
                        <div id="ViséLiquidation" class="tab-pane">
-                        <LiquidationVise :macheid="detail_marche.ua_id"></LiquidationVise>
+                        <LiquidationVise :macheid="detail_marche.id"></LiquidationVise>
                        </div>
                        <div id="DiffereLiquidation" class="tab-pane">
-                        <LiquidationDifferer :macheid="detail_marche.ua_id"></LiquidationDifferer>
+                        <LiquidationDifferer :macheid="detail_marche.id"></LiquidationDifferer>
                        </div>
                        <div id="RejettéLiquidation" class="tab-pane">
-                        <LiquidationRejetter :macheid="detail_marche.ua_id"></LiquidationRejetter>
+                        <LiquidationRejetter :macheid="detail_marche.id"></LiquidationRejetter>
                        </div>
                        <div id="ObservationLiquidation" class="tab-pane">
-                        <LiquidationViseAvecObservation :macheid="detail_marche.ua_id"></LiquidationViseAvecObservation>
+                        <LiquidationViseAvecObservation :macheid="detail_marche.id"></LiquidationViseAvecObservation>
                        </div>
                       </div>
                      </div>
                     
                      <div id="MANDAT" class="tab-pane">
-                        <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="MANDATEMENT" :readonly="griseButton1"><i class="icon icon-folder-open"> Nouveau Mandat</i></button>
-    
-        </div> 
+                        
         <br>
                         <div class="widget-title">
                     <ul class="nav nav-tabs">
@@ -152,19 +167,19 @@
                   </div>
                   <div class="widget-content tab-content">
 <div id="attentMandat" class="tab-pane active">
-                        <MandatEnAttente :macheid="detail_marche.ua_id"></MandatEnAttente>
+                        <MandatEnAttente :macheid="detail_marche.id"></MandatEnAttente>
                        </div>
                        <div id="ViséMandat" class="tab-pane">
-                        <MandatVise :macheid="detail_marche.ua_id"></MandatVise>
+                        <MandatVise :macheid="detail_marche.id"></MandatVise>
                        </div>
                        <div id="DiffereMandat" class="tab-pane">
-                        <MandatDifferer :macheid="detail_marche.ua_id"></MandatDifferer>
+                        <MandatDifferer :macheid="detail_marche.id"></MandatDifferer>
                        </div>
                        <div id="RejettéMandat" class="tab-pane">
-                        <MandatRejetter :macheid="detail_marche.ua_id"></MandatRejetter>
+                        <MandatRejetter :macheid="detail_marche.id"></MandatRejetter>
                        </div>
                        <div id="ObservationMandat" class="tab-pane">
-                        <MandatViseAvecObservation :macheid="detail_marche.ua_id"></MandatViseAvecObservation>
+                        <MandatViseAvecObservation :macheid="detail_marche.id"></MandatViseAvecObservation>
                        </div>
                       </div>
                      </div>
@@ -194,11 +209,11 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import demandeEnAttente from "@/pages/ExecutionBudgetaire/procedureParBonCommande/demandeEngagement/demandeEnAttente.vue"
-import demandeVise from "@/pages/ExecutionBudgetaire/procedureParBonCommande/demandeEngagement/demandeVise.vue"
-import demandeDifferer from "@/pages/ExecutionBudgetaire/procedureParBonCommande/demandeEngagement/demandeDifferer.vue"
-import demandeRejetter from "@/pages/ExecutionBudgetaire/procedureParBonCommande/demandeEngagement/demandeRejetter.vue"
-import demandeViseAvecObservation from "@/pages/ExecutionBudgetaire/procedureParBonCommande/demandeEngagement/demandeViseAvecObservation.vue"
+// import demandeEnAttente from "@/pages/ExecutionBudgetaire/procedureParBonCommande/demandeEngagement/demandeEnAttente.vue"
+// import demandeVise from "@/pages/ExecutionBudgetaire/procedureParBonCommande/demandeEngagement/demandeVise.vue"
+// import demandeDifferer from "@/pages/ExecutionBudgetaire/procedureParBonCommande/demandeEngagement/demandeDifferer.vue"
+// import demandeRejetter from "@/pages/ExecutionBudgetaire/procedureParBonCommande/demandeEngagement/demandeRejetter.vue"
+// import demandeViseAvecObservation from "@/pages/ExecutionBudgetaire/procedureParBonCommande/demandeEngagement/demandeViseAvecObservation.vue"
 
 import LiquidationEnAttente from "@/pages/ExecutionBudgetaire/procedureParBonCommande/Liquidation/LiquidationEnAttente.vue"
 
@@ -230,11 +245,11 @@ export default {
     LiquidationViseAvecObservation,
     LiquidationRejetter,
     LiquidationDifferer,
-demandeEnAttente,
-demandeVise,
-demandeDifferer,
-demandeViseAvecObservation,
-demandeRejetter,
+// demandeEnAttente,
+// demandeVise,
+// demandeDifferer,
+// demandeViseAvecObservation,
+// demandeRejetter,
 LiquidationEnAttente,
 LiquidationVise
 

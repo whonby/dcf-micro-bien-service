@@ -388,7 +388,7 @@ ListePieceJustificative() {
    listeDossierLiquidationDifferer() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierLiquidation.filter(qtreel => this.ua(qtreel.dmd_engagement_id) == id && this.typeProcedure(qtreel.dmd_engagement_id) == "Engagement par Bien de Commande" && qtreel.decision_cf==2);
+           return this.gettersDossierLiquidation.filter(qtreel => qtreel.dmd_engagement_id == id && this.typeProcedure(qtreel.dmd_engagement_id) == "Engagement par Bien de Commande" && qtreel.decision_cf==2);
 
         }
       };
