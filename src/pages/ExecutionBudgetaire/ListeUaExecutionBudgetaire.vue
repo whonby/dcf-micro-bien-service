@@ -48,7 +48,7 @@ uniteAdministratives
     
         </div>
           </td>
-          <td>
+          <!-- <td>
 <div  align="right" style="cursor:pointer;">
     <button class="btn btn-success" @click.prevent="liquidation"><i class="icon icon-folder-open"> Nouveau Liquidation</i></button>
     
@@ -60,6 +60,12 @@ uniteAdministratives
     
         </div> 
           </td>
+          <td>
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-success" @click.prevent="ordrePaiment"><i class="icon icon-folder-open"> Nouveau Ordre de Paiement</i></button>
+    
+        </div>  -->
+          <!-- </td> -->
         </tr>
       </table>
       
@@ -397,6 +403,9 @@ uniteAdministrativeDynamiques() {
     ...mapActions("uniteadministrative", ["uniteAdministratives","supprimerStockArticle"]),
    
     formatageSomme: formatageSomme,
+    ordrePaiment(){
+                this.$router.push({ name: 'AjouterOrdrePaiement' })
+            },
 MANDATEMENT(){
                 this.$router.push({ name: 'AjouterMantdatement' })
             },

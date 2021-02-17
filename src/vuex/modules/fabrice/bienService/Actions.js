@@ -5246,3 +5246,143 @@ export function supprimerPieceJustificative({ commit }, id) {
           axios.delete("/NomPieceJustificative/" + id).then(() => dialog.close());
       });
 }
+
+
+
+
+
+
+export function getDossierLiquidation({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/liquidation")
+          .then(response => {
+              commit("GET_ALL_LIQUIDATION", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterDossierLiquidation({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/liquidation", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_LIQUIDATION", response.data);
+             
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "ce Numero existe déja",
+            type:"error"
+        });
+    })
+}
+
+
+export function modifierDossierLiquidation({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/liquidation/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_LIQUIDATION", response.data);
+          
+
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerDossierLiquidation({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_LIQUIDATION", id);
+        
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/liquidation/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+
+
+
+
+export function getDossierMandat({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/MandatOp")
+          .then(response => {
+              commit("GET_ALL_MANDAT_OP", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterDossierMandat({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/MandatOp", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_MANDAT_OP", response.data);
+             
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "ce Numero existe déja",
+            type:"error"
+        });
+    })
+}
+
+
+export function modifierDossierMandat({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/MandatOp/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_MANDAT_OP", response.data);
+          
+
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerDossierMandat({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_MANDAT_OP", id);
+        
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/MandatOp/" + id).then(() => dialog.close());
+      });
+}
+
+
+

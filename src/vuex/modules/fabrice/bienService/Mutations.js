@@ -1,7 +1,7 @@
 // export const GET_ALL_DECOMPTE = (state, tableau_decompte) =>{
 //     state.decomptes = tableau_decompte
 // }
-MODIFIER_MANDAT
+
 // // add candidat selectionner
 
 // export const AJOUTER_DECOMPTE = (state, elementAjouter) => {
@@ -2796,4 +2796,61 @@ export const MODIFIER_MARCHE_PLURIE_ANNUEL = (state, elementModifie) =>{
 
 export const SUPPRIMER_MARCHE_PLURIE_ANNUEL = (state, id) =>{
     state.programmationMarchePlurieAnnuel = state.programmationMarchePlurieAnnuel.filter(response => response.id!=id)
+}
+
+
+
+
+
+
+export const GET_ALL_LIQUIDATION= (state, tableau_document) =>{
+    state.Liquidation = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_LIQUIDATION = (state, elementAjouter) => {
+    state.Liquidation.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_LIQUIDATION = (state, elementModif)=>{
+    state.Liquidation = state.Liquidation.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_LIQUIDATION = (state, id)=> {
+    state.Liquidation = state.Liquidation.filter(prest => prest.id !=id)
+}
+
+
+
+
+
+export const GET_ALL_MANDAT_OP= (state, tableau_document) =>{
+    state.MandatOp = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_MANDAT_OP = (state, elementAjouter) => {
+    state.MandatOp.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_MANDAT_OP = (state, elementModif)=>{
+    state.MandatOp = state.MandatOp.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_MANDAT_OP = (state, id)=> {
+    state.MandatOp = state.MandatOp.filter(prest => prest.id !=id)
 }

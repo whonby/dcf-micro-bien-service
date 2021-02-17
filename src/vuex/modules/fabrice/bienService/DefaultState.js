@@ -111,7 +111,9 @@ const defaultState = {
     entreprise_soustraitant:[],
     programmationMarchePlurieAnnuel:[],
     DemandeEngagement:[],
-    nomPieceJustificative:[]
+    nomPieceJustificative:[],
+    Liquidation:[],
+    MandatOp:[],
 
 }
 

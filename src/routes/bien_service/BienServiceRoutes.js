@@ -117,13 +117,31 @@ import ListeUaExecutionBudgetaire from "../../pages/ExecutionBudgetaire/ListeUaE
 import AjouterDemandeEngagement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterDemandeEngagement.vue"
 import AjouterLiquidation from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLiquidation.vue"
 import AjouterMantdatement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterMantdatement.vue"
+import AjouterOrdrePaiement from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterOrdrePaiement.vue"
 import ModifierDemandeEngagement from "../../pages/ExecutionBudgetaire/ModifierDemandeEngagement.vue"
 import executionBudgetaire from "../../pages/ExecutionBudgetaire/executionBudgetaire.vue"
 
 import procedureParBonCommande from "../../pages/ExecutionBudgetaire/procedureParBonCommande/procedureParBonCommande.vue"
 import procedureEngaementDirect from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/procedureEngaementDirect.vue"
 import voitDetailBonCmmande from "../../pages/ExecutionBudgetaire/Voirdetail/voitDetailBonCmmande.vue"
+import FicheRealiteServiceFait from "../../pages/ExecutionBudgetaire/procedureParBonCommande/Liquidation/FicheRealiteServiceFait.vue"
+import FicheDeControle from "../../pages/ExecutionBudgetaire/procedureParBonCommande/Liquidation/FicheDeControle.vue"
 const BienServiceRoutes = [
+    {
+        path: "/FicheDeControle/:id",
+        name: "FicheDeControle",
+        component: FicheDeControle
+    },
+    {
+        path: "/FicheRealiteServiceFait/:id",
+        name: "FicheRealiteServiceFait",
+        component: FicheRealiteServiceFait
+    },
+    {
+        path: "/AjouterOrdrePaiement",
+        name: "AjouterOrdrePaiement",
+        component: AjouterOrdrePaiement
+    },
     {
         path: "/AjouterMantdatement",
         name: "AjouterMantdatement",

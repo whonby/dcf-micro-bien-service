@@ -214,7 +214,7 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#ENGAGEMENT">TYPE D'ENGAGEMENT DIRECT</a>
+                        <a data-toggle="tab" href="#ENGAGEMENT">TYPE D'ENGAGEMENT</a>
                       </li>
                        
                      
@@ -244,6 +244,7 @@
                   <label class="control-label">Type d'engagement</label>
                   <div class="controls">
                     <select v-model="formData.type_engagement_id" class="span" style="border:1px solid #000">
+                      <option value=""></option>
                       <option value="Marche">Marche</option>
                       <option value="Régie d'avances-reservation des crédit">Régie d'avances-reservation des crédit</option>
                       <option value="Régularisation d'ordre de paiement">Régularisation d'ordre de paiement(Op)</option>
@@ -360,6 +361,7 @@
                      
                       <option value="2">Fournisseur</option>
                       <option value="3">Unite administrative</option>
+                      <option value="5">Personnel</option>
                       <option value="4">Autre</option>
                       
                     </select>
@@ -1078,7 +1080,7 @@
       </div>
       <notifications/>
 
-      <div id="exampleModal" class="modal hide">
+      <div id="exampleModal" class="modal hide taille">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter pièces justificatives</h3>
@@ -1101,23 +1103,22 @@
             </div>
           </div>
             </td>
-          </tr>
-           <tr>
             <td>
               <div class="control-group">
-            <label class="control-label">Nature de la pièce</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="formData1.libelle"
-                class="span5"
-                placeholder="Saisir le libellé"
-              />
-            </div>
-          </div>
+                                                    <label class="control-label">Nature de la pièce</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData1.libelle" class="span" style="border:1px solid #000">
+                                                            <option></option>
+                                                            <option
+                        v-for="typeFact in typeFactures"
+                        :key="typeFact.id"
+                        :value="typeFact.id"
+                      >{{typeFact.libelle}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+              
             </td>
-          </tr>
-           <tr>
             <td>
               <div class="control-group">
             <label class="control-label">Reference de la pièce</label>
@@ -1131,9 +1132,10 @@
             </div>
           </div>
             </td>
+           
           </tr>
           <tr>
-            <td>
+             <td>
               <div class="control-group">
             <label class="control-label">Date de la pièce</label>
             <div class="controls">
@@ -1146,10 +1148,7 @@
             </div>
           </div>
             </td>
-          
-          </tr>
-          <tr>
-              <td colspan="">
+            <td colspan="">
               <div class="control-group">
                 <label class="control-label">Pièces justificatives </label>
                 <div class="controls">
@@ -1166,7 +1165,44 @@
               
             </td>
           </tr>
+           
+         
       </table>
+       <!-- <div class="table-responsive text-nowrap">
+              <table class="table table-bordered table-striped">
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#BONCOMMANDE">ENGAGEMENT PAR BON DE COMMANDE</a>
+                      </li>
+                       <li>
+                        <a data-toggle="tab" href="#DIRECT">ENGAGEMENT DIRECT</a>
+                      </li>
+                       
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+                    
+                    <div id="BONCOMMANDE" class="tab-pane active">
+                     <facture></facture>
+                    </div>
+                <div id="DIRECT" class="tab-pane">
+                  444444444
+  
+          </div>
+                    
+
+                       
+
+                      
+                      
+      </div>
+       </div>
+      
+              </table>
+ 
+  </div> -->
       </div>
       <div class="modal-footer">
         <a
@@ -1311,11 +1347,13 @@
     
     import {  ModelListSelect } from 'vue-search-select'
     import moment from 'moment';
+    // import facture from '../Facture/facture.vue'
     import 'vue-search-select/dist/VueSearchSelect.css'
     export default {
 components: {
     
      ModelListSelect,
+     
      
   },
         data() {
@@ -1369,7 +1407,7 @@ components: {
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
 
-...mapGetters("bienService", ["gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+...mapGetters("bienService", ["typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -1424,7 +1462,7 @@ CumulDemande: function () {
                 return id => {
                     if (id != "") {
                       let valInite=0;
-                        return  this.gettersDemandeEngagement.filter(normeEquipe => normeEquipe.ligne_economique_id == id).reduce(function(total,currentVal){
+                        return  this.gettersDemandeEngagement.filter(normeEquipe => normeEquipe.ligne_economique_id == id && normeEquipe.decision_cf == 8 || normeEquipe.ligne_economique_id == id && normeEquipe.decision_cf == 9).reduce(function(total,currentVal){
                            return total + parseFloat(currentVal.total_general)
                         },valInite);
                     }
@@ -1915,3 +1953,10 @@ montant_tresor:""
     };
 </script>
 
+<style scoped>
+.taille{
+  width: 93%;
+  margin: 0 -45%;
+  height: 100%;
+}
+</style>
