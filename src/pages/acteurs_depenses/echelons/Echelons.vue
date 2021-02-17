@@ -36,7 +36,7 @@
                                     <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerEchelons(item.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i></span></button>
+                                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                                         </div>
 
@@ -63,7 +63,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter échelons</h3>
+                <h3>Ajouter échelon</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">

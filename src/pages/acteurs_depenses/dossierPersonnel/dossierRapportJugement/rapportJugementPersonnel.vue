@@ -39,7 +39,7 @@
                              </td>
                               <td>
                             <button @click.prevent="supprimerRapportJugement(rapport.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
+                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
                              </td>
                            
                         </div>

@@ -28,7 +28,7 @@
                                      </div> <br>
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Liste des Familles d' emplois </h5>
+                            <h5>Liste des Familles d'emplois </h5>
                              <div align="right">
                                 Recherche: <input type="text" v-model="search">
                             </div>
@@ -63,7 +63,7 @@
                                     <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerFamilleFonction(item.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
+                                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                                         </div>
 

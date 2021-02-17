@@ -1,5 +1,4 @@
-detail_Execution
-afficherIdOrdrePaiement
+
 <template>
     <div>
 <div id="modalDecisionEmetteur" class="modal hide">
@@ -63,7 +62,7 @@ afficherIdOrdrePaiement
                     <th>action</th>
                     <th>activit&eacute;</th>
                     <th>Ligne budgetaire</th>
-                    <th>Montant autorisé</th>
+                    <th>Montant autorisï¿½</th>
                        <!-- <th>Decision Emetteur</th> -->
                       <th>Date Decision</th>
                     <th>Action</th>
@@ -122,7 +121,7 @@ afficherIdOrdrePaiement
       <div class="btn-group">
         
                             <button @click.prevent="supprimerLiquidation(item.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span>
+                                <span class=""><i class="icon-trash"></i>Supprimer</span>
                             </button>
                         </div>
 </td>

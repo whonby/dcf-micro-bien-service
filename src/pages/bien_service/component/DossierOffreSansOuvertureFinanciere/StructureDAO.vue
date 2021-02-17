@@ -23,7 +23,7 @@
                 <td>
                     <div class="btn-group">
                         <button @click.prevent="supprimerStructureDAO(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                            <span class=""><i class="icon-trash">Supprimer</i></span>
+                            <span class=""><i class="icon-trash"></i> Supprimer</span>
                         </button>
                     </div>
                 </td>

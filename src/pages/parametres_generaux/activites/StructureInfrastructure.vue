@@ -1,4 +1,4 @@
- 
+this.modifierStructureInfrastructure
 <template>
   <div>
   
@@ -73,7 +73,7 @@
 
               <div class="btn-group">
               <button @click.prevent="supprimerStructureActivite(structure_infrastructure.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
+                <span class=""><i class="icon-trash"></i>  Supprimer</span></button>
              
             </div>
 
@@ -288,7 +288,7 @@ return this.structures_Infrastructures.filter((item) => {
   methods: {
     // methode pour notre action
    ...mapActions('parametreGenerauxActivite', ['getStructureInfrastructure', 'ajouterStructureInfrastructure', 
-   ' modifierStructureInfrastructure','supprimerStructureInfrastructure']),  
+   'modifierStructureInfrastructure','supprimerStructureInfrastructure']),  
    
    
     // pagination
@@ -364,8 +364,7 @@ modifierBudgetaireLocal(){
   this.modifierStructureInfrastructure(this.editBudgetaire)
   this.$('#modifierModal').modal('hide');
   // this.editBudgetaire = {
-  //   niveau:"",
-  //   libelle:"",
+    
    
   // }
 }
