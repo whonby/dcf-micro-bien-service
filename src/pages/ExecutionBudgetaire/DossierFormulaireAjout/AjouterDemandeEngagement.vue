@@ -651,7 +651,7 @@
                     >{{type.numero_ordre || 'Non renseigné'}}</td>
                     <td style="width:30%"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{type.libelle || 'Non renseigné'}}</td>
+                    >{{listePieceJustifica(type.libelle) || 'Non renseigné'}}</td>
                     <td style="width:20%"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.reference || 'Non renseigné'}}</td>
@@ -1188,12 +1188,29 @@
       </div>    
  
   <div>
+    <div class="modal-footer">
+        <a
+         
+          class="btn btn-primary"
+          href="#"
+          
+          @click.prevent="AjoutePieceJustific"
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+        <div align="left">
+
+      <button class="btn btn-info"  @click.prevent="apercuFacture">Aperçu de la facture</button>
+
+
+                            </div>
+
    <table class="table table-bordered table-striped" >
                 <div class="widget-box">
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#BONCOMMANDE" v-if="formData1.libelle == 8">  Facture</a>
+                        <a data-toggle="tab" href="#BONCOMMANDE" v-if="formData1.libelle == 8">  Facture Proforma</a>
                       </li>
                       
                     </ul>
@@ -1209,17 +1226,18 @@
                 <span >  <i class="icon icon-plus-sign">Ajouter Facture</i></span>
        
                 </button>
-                <br>
+                
 
                    </div>
+                   <div id="printMe">
               <table class="table table-bordered table-striped" v-if="formData1.libelle == 8">
                 <thead>
                   <tr>
                     <th>Designation</th>
                     <th>Quantité</th>
                     <th>Prix unitaire</th>
-                     <th>TOTAL</th>
-                   
+                     <th>Total</th>
+                   <th style="width:10px">Supprimer</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1236,40 +1254,45 @@
 <td style="text-align:center;font-weight:bold;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formatageSomme(parseFloat(type.total_facture_ht)) || 'Non renseigné'}}</td>
-                    <!-- <td>
-                      <button class="btn btn-danger" @click="supprimerTypeTexte(type.id)">
+                    <td>
+                      <button class="btn btn-danger" @click="supprimerDossierFacture(type.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
                       </button>
-                    </td> -->
+                    </td>
                   </tr>
                   <tr>
                     <td></td>
                     <td></td>
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ht</td>
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDesDmdParBonCommande(formData.numero_demande)))}}</td>
+                 <td></td>
                   </tr>
                   <tr>
                     <td></td>
                     <td></td>
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Taux</td>
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{afficherEnorere}}</td>
+                  <td></td>
                   </tr>
                   <tr>
                     <td></td>
                     <td></td>
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Tva</td>
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)))*afficherEnorere))}} </td>
+                  <td></td>
                   </tr>
                   <tr>
                     <td></td>
                     <td></td>
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ttc</td>
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)))+parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)*afficherEnorere))))}} </td>
+                  <td></td>
                   </tr>
                 </tbody>
               </table>
+                   </div>
               </div>
                     </div>
                
@@ -1287,16 +1310,7 @@
               </table>
   </div>
    
-      <div class="modal-footer">
-        <a
-         
-          class="btn btn-primary"
-          href="#"
-          
-          @click.prevent="AjoutePieceJustific"
-        >Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
+      
     </div>
 
 
@@ -1471,6 +1485,99 @@
         >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- apercu facture -->
+
+
+
+    
+
+
+
+
+              <div id="ApercuFacture" class="modal hide ApercuFacture1">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Aperçu Facture</h3>
+      </div>
+      <div>
+       <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Designation</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire</th>
+                     <th>Total</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="odd gradeX" v-for="(type, index) in listeFacturePiece(formData.numero_demande)" :key="type.id">
+                    <td 
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.designation || 'Non renseigné'}}</td>
+                    <td style="text-align:center;font-weight:bold;"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.quantite || 'Non renseigné'}}</td>
+                    <td style="text-align:center;font-weight:bold;"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.prix_unitaire)) || 'Non renseigné'}}</td>
+<td style="text-align:center;font-weight:bold;"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.total_facture_ht)) || 'Non renseigné'}}</td>
+                    
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ht</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDesDmdParBonCommande(formData.numero_demande)))}}</td>
+                
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Taux</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{afficherEnorere}}</td>
+                  
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Tva</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)))*afficherEnorere))}} </td>
+                  
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ttc</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)))+parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)*afficherEnorere))))}} </td>
+                  
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+      </div>
+      
     </div>
     </div>
 
@@ -1677,6 +1784,18 @@ MontantFactureHt() {
       }
       
       return 0
+    },
+     listePieceJustifica() {
+      return (id,id2) => {
+        if (id != null && id != "" && id2 != null && id2 != "") {
+           const qtereel = this.typeFactures.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return ""
+        }
+      };
     },
       afficheFichierJoint() {
       return (id,id2) => {
@@ -1993,7 +2112,9 @@ methods: {
     ]),
       ...mapActions('personnelUA', ["ajouterFichierJointDmd"]),
 
-
+ genererEnPdf(){
+  this.$htmlToPaper('printMe');
+},
 
 afficherModalListePersonnel(){
                 this.$router.push({ name: 'ListeUaExecutionBudgetaire' })
@@ -2231,6 +2352,15 @@ montant_tresor:""
         keyboard: false
       });
     },
+
+apercuFacture() {
+      this.$("#ApercuFacture").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+    },
+
+
     formaterDate(date) {
               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
@@ -2257,5 +2387,12 @@ formatageSomme:formatageSomme
    width: 64%;
   margin: 0 -30%;
   
+}
+.ApercuFacture1{
+ width: 64%;
+  margin: 0 -30%;
+  
+  border: 2px solid #000;
+
 }
 </style>
