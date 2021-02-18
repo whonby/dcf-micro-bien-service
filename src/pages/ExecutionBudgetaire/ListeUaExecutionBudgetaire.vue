@@ -1,6 +1,163 @@
 uniteAdministratives
 <template>
   <div>
+    <br>
+    <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
+                <div class="span1">
+
+                </div>
+                <div class="span10 " style="background-color: transparent; !important;">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                        
+                            
+                            <td style="width:20%">
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">Unité Administrative<a href="#" @click.prevent="videUniteAdministrative()" v-if="uniteAdministrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
+                                </label>
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="uniteAdministratives"
+                                                   v-model="uniteAdministrative_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                            </td>
+                           <td style="width:20%">
+                              <div class="control-group">
+                                                    <label style="color:#000;font-size:14px;font-weight: bolder;">Type de procédure <a href="#" @click.prevent="videTypeProcedure()" v-if="type_procedure_id" style="color: red"><i class="fa fa-trash-o"></i></a></label>
+                                                    <div class="controls">
+                                                        <select v-model="type_procedure_id" class="span" style="border:2px solid #000">
+                                                            <option></option>
+                                                            <option value="Engagement par Bien de Commande">Engagement par Bien de Commande </option>
+                                                            <option value="Engagement direct">Engagement direct</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                           </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+    <div id="demandeVise" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Decision CF</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                            <label class="control-label">Décision CF </label>
+                            <div class="controls">
+                              <select v-model="editDemandeEngagement.decision_cf" class="span4">
+                                <option value=""></option>
+                              <option value="8">Visé</option>
+                              <option value="9">Visé avec Observation</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
+                            <option value="0">Attente</option>
+    
+    </select>
+                           
+                            </div>
+                          </div>
+            </td>
+              <td>
+                    <div class="control-group">
+                            <label class="control-label">Famille de Motif </label>
+                            <div class="controls">
+                               <select v-model="editDemandeEngagement.famille_motif_cf" class="span4" :readonly="griserFamilleEtMotif">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementParent" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+                 <td>
+                    <div class="control-group">
+                            <label class="control-label">Motif</label>
+                            <div class="controls">
+                               <select v-model="editDemandeEngagement.motif_cf" class="span4" :readonly="griserFamilleEtMotif">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementEnfant(editDemandeEngagement.famille_motif_cf)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+          </tr>
+               <tr>
+                  <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Autres Motif</label>
+                            <div class="controls">
+                              <textarea  class="span8" row = "6" v-model="editDemandeEngagement.autre_motif_cf" :readonly="griserAutreMotif" >
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                  <td>
+                               <div class="control-group">
+                            <label class="control-label">Date Decision CF :</label>
+                            <div class="controls">
+                              <input type="date" class="span4"  />
+                               <input type="hidden" class="span4"  v-model="editDemandeEngagement.date_motif" />
+                              
+                            </div>
+                          </div>
+                           </td>
+                 </tr>             
+                   <tr>
+                     <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Observation CF</label>
+                            <div class="controls">
+                              <textarea  class="span8" row = "6" v-model="editDemandeEngagement.observation" :readonly="griserObservation">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                        <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom et prenoms cf</label>
+                            <div class="controls">
+                              <input type="text" class="span4"   readonly/>
+                            </div>
+                          </div>
+                       </td>
+                       
+                       </tr>  
+                       <tr>    
+                        
+                       
+                          </tr> 
+         
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierTypeTexteLocal()"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div> 
  <!-- <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
                 <div class="span1">
 
@@ -44,11 +201,11 @@ uniteAdministratives
         <tr>
           <td>
  <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="ajouterDemandeEngage"><i class="icon icon-folder-open"> Nouveau demande d'engagement</i></button>
+    <button class="btn btn-success" @click.prevent="ajouterDemandeEngage"><i class="icon icon-folder-open"> Ajouter demande d'engagement</i></button>
     
         </div>
           </td>
-          <td>
+          <!-- <td>
 <div  align="right" style="cursor:pointer;">
     <button class="btn btn-success" @click.prevent="liquidation"><i class="icon icon-folder-open"> Nouveau Liquidation</i></button>
     
@@ -60,6 +217,12 @@ uniteAdministratives
     
         </div> 
           </td>
+          <td>
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-success" @click.prevent="ordrePaiment"><i class="icon icon-folder-open"> Nouveau Ordre de Paiement</i></button>
+    
+        </div>  -->
+          <!-- </td> -->
         </tr>
       </table>
       
@@ -79,7 +242,7 @@ uniteAdministratives
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
-                <i class="icon-th"></i>
+                <i class="icon-th">DEMANDE D'ENGAGEMENT</i>
               </span>
               <!-- <h5>Gestion du Patrimoine</h5> -->
               <!-- <div align="right">
@@ -91,38 +254,149 @@ uniteAdministratives
 
             <div class="widget-content nopadding" >
               <table class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                         <th style="width:90%">UNITE D'ADMINISTRATIVE</th>
-                        <th>ACTION</th>
-                        
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                    class="odd gradeX"
-                    v-for="BesoinImmo in ListeDesUa"
-                    :key="BesoinImmo[0].id"
-                  >
-                  <td style="font-size:25px"
-                   
-                    >{{libelleUniteAdministrative(BesoinImmo[0].ua_id) || 'Non renseigné'}}</td>
-                  
-                     <td>
-                       <router-link
-                        :to="{name : 'executionBudgetaire', params: {id:BesoinImmo[0].id}}"
-                        class="btn btn-info"
-                        title="Voir Demande Engagement"
-                      >
-                        <span style="color:#FFF">
-                          <i class="icon icon-folder-open"> Voir Demande Engagement</i>
-                        </span>
-                      </router-link>
-                     </td>
+                     <thead>
+                  <tr>
+                    <th>N°demande</th>
+                    <!-- <th>Type de procedure</th> -->
+                    <!-- <th>Mode de paiement</th> -->
+                    
+                    <!-- <th>Nom fournisseur</th> -->
+                    <th>Object de la depense</th>
+                    <th>Montant Tresor</th>
+                     <th>Montant Don</th>
+                      <th>Montant Emprunt</th>
+                      <th>Total</th>
+                      <th>Fichier Joint</th>
+                       <th>Nature de la Pièce</th>
+                       <th>Type de procedure</th>
+                       <th>Decision</th>
+                        <th>Voir Détail</th>
+                        <th colspan="2">Action</th>
                   </tr>
-                  
-                    </tbody> 
-                </table>
+                </thead>
+                <tbody>
+                  <tr class="odd gradeX" v-for="(type, index) in ListeDEsEntreprise" :key="type.id">
+                    <td style="color:red;font-weight: bold;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{type.numero_dmd_combine || 'Non renseigné'}}</td>
+                   
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{type.objet_depense || 'Non renseigné'}}</td>
+                     <td style="text-align:center"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{formatageSomme(parseFloat(type.montant_tresor)) || 0}}</td>
+                    <td style="text-align:center"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{formatageSomme(parseFloat(type.montant_don)) || 0}}</td>
+                     <td style="text-align:center"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{formatageSomme(parseFloat(type.montant_emprunt)) || 0}}</td>
+                     <td style="text-align:center;font-weight: bold;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{formatageSomme(parseFloat(type.total_general)) || 0}}</td>
+                    
+                    
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >
+                    <a v-if="afficheFichierJoint(type.numero_demande)" :href="afficheFichierJoint(type.numero_demande)" class="btn btn-default" target="_blank">
+                                <span class=""><i class="icon-book"></i>
+                                </span>
+                            </a>
+                    
+                    </td>
+                    
+                     <td style="text-align:center"  >
+                       
+
+ <ul>
+<!--         <li v-for="item in tachePrevuePasMarche(activites.id)" :key="'TACHE'+item.id">{{item.libelle}}</li>-->
+         <span v-for="(type2) in ListePieceJustificative(type.numero_demande)" :key="type2.id" class="by label">{{type2.libelle}} ( {{type2.reference}}) </span>
+
+     </ul>
+
+
+                       </td>       
+                        <td style="text-align:center;font-weight: bold;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{type.type_procedure_id || 0}}</td> 
+                               
+                    <td >
+                        <button v-if="type.decision_cf == 8"  class="btn  btn-success" @click="afficheDecisionCf(type.id)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="type.decision_cf == 2" class="btn  btn-warning" @click="afficheDecisionCf(type.id)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="type.decision_cf == 3" class="btn  btn-danger" @click="afficheDecisionCf(type.id)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                       <button v-else-if="type.decision_cf == 9"  class="btn  btn-success" @click="afficheDecisionCf(type.id)" >                        
+                     
+                      <span>Visé avec observation</span>
+                      
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficheDecisionCf(type.id)" >                        
+                     
+                      
+                       <span>Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                   <td>
+                      <router-link :to="{ name: 'voitDetailBonCmmande', params: { id: type.id }}"
+                class="btn btn-Success " title="">
+                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;"> Voir Détail</i></span>
+                   </router-link> 
+                    </td>
+                      <td>
+                      <router-link :to="{ name: 'executionBudgetaire', params: { id: type.id }}" v-if="afficheIconeBonCommande(type.id)=='Engagement par Bien de Commande'" style="font-weight: bold;background: green;color:#fff"
+                class="btn btn-Success " title="">
+                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;color:#fff"> Etape par Bon Commande</i></span>
+                   </router-link> 
+                   <router-link :to="{ name: 'procedureEngaementDirect', params: { id: type.id }}" v-else style="font-weight: bold;background: red;color:#fff"
+                class="btn btn-Success " title="">
+                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;color:#fff"> Etape Engagement Direct</i></span>
+                   </router-link> 
+                    </td>
+                    <td>
+                      <button class="btn btn-danger" @click="supprimerDemandeEngagement(type.id)">
+                        <span>
+                          <i class="icon icon-trash"></i> Supprimer
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Total</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDesDmdParBonCommande))}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    
+                  </tr>
+                </tbody>
+              </table>
             </div>
            
           </div>
@@ -133,41 +407,33 @@ uniteAdministratives
     <!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
   @shortkey="ajouterEntreEnPatrimoine()">Open</button> -->
 
- <!-- <fab :actions="fabActions"
+ <fab :actions="fabActions"
                 main-icon="apps"
-          @cache="ajouterEntreEnPatrimoine"
+          
         @searchMe="filter"
          
         bg-color="green"
 
-  ></fab> -->
+  ></fab>
 <notifications  />
   </div>
 </template>
-  
-<script>
+  <script>
 import { mapGetters, mapActions } from "vuex";
-import moment from "moment";
 import { formatageSomme } from "@/Repositories/Repository";
-import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
-// import {  ModelListSelect } from 'vue-search-select'
-//     import 'vue-search-select/dist/VueSearchSelect.css'
+import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
   components: {
     
-    // ModelListSelect,
+    ModelListSelect,
      
   },
-  name: 'besionImmolisation',
+  name:'typetext',
   data() {
     return {
       fabActions: [
-        {
-          name: "cache",
-          icon: "add",
-          
-        },
-        {
+       {
                   name: 'searchMe',
                    icon: "search"
               }
@@ -177,138 +443,132 @@ export default {
         //   class: ""
         // }
       ],
-// json_fields: {
-//         TYPE_UNITE_ADMINISTRATIVE: "typeUniteAdmin.libelle",
-//         UNITE_ADMINISTRATIVE: "uniteAdminist.libelle",
-//         DESIGNATION: "famille.libelle",
-//         QUANTITE: "quantite",
-//         PRIX_UNITAIRE: "prix_unitaire",
-//         MONTANT_TOTAL: "montant_total",
-//          DATE_DE_DEMANDE: "date_jour",
-//       },
-quantite: {
-       
-        qteentrant1:"0",
-        date_entre:""
-       
+      editDemandeEngagement1: {
+      motifcf:""
       },
       formData: {
-        uAdministrative_id: "",
-        typeequipe_id: "",
-        famill_id: "",
-        typeua_id: "",
-        durevie: "",
-        articlestock_id: "",
-        quantitestock: "",
-        qtesortie:"0"
+        type_procedure_id: "",
+        
         
        
       },
+      type_procedure_id:"",
       uniteAdministrative_id:"",
        affiche_filtre:false,
       affiche_boutton_filtre:true,
-      editStock: {
-       uAdministrative_id: "",
-        typeequipe_id: "",
-        famill_id: "",
-        typeua_id: "",
-        durevie: "",
-        articlestock_id: "",
-        quantitestock: "",
-        qteentrant1:"0",
-        
-        
+      editDemandeEngagement: {
+      
       },
       search: ""
     };
   },
-// created() {
-//     this.formData = this.filtre_Stock.find(
-//       Stock => Stock.id == this.$route.params.id
-//     )
-// },
+ props:["macheid"],
   computed: {
-    ...mapGetters("SuiviImmobilisation", [
+    ...mapGetters("bienService", ["gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
+                "getActeEffetFinancierPersonnaliserContrat", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+   
+ ...mapGetters("personnelUA", ["FichierJoinDmdEngagement","all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
     
-      "equipements",
-      "familles",
-      "articles",
-     "marqueVehicules",
-     "ModeleVehicules",
-      "type_Unite_admins",
-      "totalQteEntrant",
-      "totalQteSortant",
-     "getterUa_idImo",
-     "ficheArticle"
-    ]),
-     ...mapGetters("bienService", ["GroupeUaDemandeEngagement","typeMarches",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
-                "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
-                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
-                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
-                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
-                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
-                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
-    ...mapGetters("uniteadministrative", ["uniteAdministratives","GestionStockageArticles","groupStockParUA"]),
-    ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
-admin:admin,
-      dcf:dcf,
-      noDCfNoAdmin:noDCfNoAdmin,
- ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
-
-
-    //  filtre_Stock() {
-    //   const st = this.search.toLowerCase();
-    //   return this.GestionStockageArticles.filter(type => {
-    //     return (
-    //       type.typeUniteAdministrative.libelle.toLowerCase().includes(st) ||
-    //       type.uniteAdministrative.libelle.toLowerCase().includes(st)
-         
-    //     );
-    //   });
-    // },
  
-listeDesStockParUa() {
-      return id => {
-        if (id != null && id != "") {
-           return this.GroupeUaDemandeEngagement.filter(qtreel => qtreel[0].uAdministrative_id == id);
+                ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises',"comptes","banques"]),
 
-        }
-        return this.GroupeUaDemandeEngagement;
-      };
-     
-    },
+           ...mapGetters("SuiviImmobilisation", [
+      "familles",
+      "services",
+      "listeBesoinValider",
+      "besoinImmobilisations",
+      "groupTriUaImmo",
+      "SuiviImmo",
+      "listeBesoinValider",
+      "getAfficheStockArticle",
+      "getPersoNormeArticle",
+      "getPersoStock",
+      "stockageArticle",
+      "getFacture"
+      
+    ]),
+ ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
+  'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
+  ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+    ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections","plans_programmes"]),
+    ...mapGetters("parametreGenerauxProgrammeUnite", ["unites"]),
+   
+     ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
+  'plans_Decision']),
+   
+  ...mapGetters("uniteadministrative", [
+      "jointureUaChapitreSection",
+      "uniteAdministratives",
+      "budgetGeneral",
+      "getPersonnaliseBudgetGeneral",
+      "groupUa",
+      "getPersonnaliseBudgetGeneralParBienService",
+      "groupgranNature", "montantBudgetGeneral","realiteServiceFait","liquidation"
+      // "montantBudgetGeneral"
+      // "chapitres",
+      // "sections"
+       
+    ]),
 
-ListeDesUa() {
-    
-        if (this.noDCfNoAdmin){
-            let colect=[];
-            this.GroupeUaDemandeEngagement.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
+ListeDEsEntreprise(){
+
+                let vM=this;
+                let objet=this.gettersDemandeEngagement
+
+                //retourne la section selectionner
+              
+                if(this.uniteAdministrative_id!="" && this.type_procedure_id=="" ){
+                  
+                    objet =objet.filter(item=>{
+                        if(item.ua_id==vM.uniteAdministrative_id){
+                            return item
+                        }
+                    })
+                 
                 }
-            })
-            return colect;
-    
-        }
-return this.GroupeUaDemandeEngagement;
-      //   return id => {
-      //   if (id != null && id != "") {
-      //     return this.GestionStockageArticles.filter(element => element.uAdministrative_id == id);
-      //   }
-      // };
-
-    },
-
-     libelleUniteAdministrative() {
+              if(this.uniteAdministrative_id=="" && this.type_procedure_id!="" ){
+                  
+                    objet =objet.filter(item=>{
+                        if(item.type_procedure_id==vM.type_procedure_id){
+                            return item
+                        }
+                    })
+                
+                }
+                
+               if( this.uniteAdministrative_id!="" && this.type_procedure_id!="" ){
+                  
+                    objet =objet.filter(item=>{
+                        if(item.ua_id==vM.uniteAdministrative_id && item.type_procedure_id==vM.type_procedure_id){
+                            return item
+                        }
+                    })
+                 
+                }
+                 if(this.type_procedure_id!="" && this.uniteAdministrative_id!=""){
+                  
+                    objet =objet.filter(item=>{
+                        if(item.type_procedure_id==vM.type_procedure_id && item.ua_id==vM.uniteAdministrative_id){
+                            return item
+                        }
+                    })
+                  
+                }
+               
+                
+                return objet
+            },
+afficheIconeBonCommande() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.libelle;
+        return qtereel.type_procedure_id;
       }
       return 0
         }
@@ -316,130 +576,134 @@ return this.GroupeUaDemandeEngagement;
     },
 
 
-    // nvelleQuantiteEnStock(){
-    //     const val =
-    //     parseFloat(this.editStock.quantitestock) +
-    //     parseFloat(this.editStock.qteObtenu);
-    //   // parseFloat(this.formData.TVA_id);
-    //   if (isNaN(val)) return null;
-    //   return parseFloat(val).toFixed(2);
-    // },
-//    fammillesModifierDynamiques() {
-//       return id => {
-//         if (id != null && id != "") {
-//           return this.familles.filter(element => element.equipemt_id == id);
-//         }
-//       };
-//     },
-//  articlesModifierDynamiques() {
-//       return id => {
-//         if (id != null && id != "") {
-//           return this.articles.filter(element => element.famill_id == id);
-//         }
-//       };
-//     },
-// uniteAdministrativeDynamiques() {
-//       return id => {
-//         if (id != null && id != "") {
-//           return this.uniteAdministratives.filter(element => element.type_ua_id == id);
-//         }
-//       };
-//     },
-uniteAdministrativeDynamiques() {
+
+
+        griserObservation(){
+  return this.editDemandeEngagement.decision_cf != 9
+},
+    griserFamilleEtMotif(){
+  return this.editDemandeEngagement.decision_cf != 3 && this.editDemandeEngagement.decision_cf != 2
+},
+griserAutreMotif(){
+  return this.editDemandeEngagement1.motif != 237 
+},
+ AffichierElementEnfant() {
       
-
-
-   
-        if (this.noDCfNoAdmin ){
-            let colect=[];
-            this.uniteAdministratives.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-               
-            })
-            return id => {
+      return id => {
         if (id != null && id != "") {
-          return colect.filter(element => element.type_ua_id == id);
+          return this.plans_Decision.filter(element => element.parent == id);
         }
       };
-          }
-           return id => {
-        if (id != null && id != "") {
-          return this.uniteAdministratives.filter(element => element.type_ua_id == id);
-        }
-      };
-         
-
-
-
     },
 
+RecupererNiveau3StructureDecision() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structuresDecision.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.niveau;
+      }
+      return 0
+        }
+      };
+    },
+     AffichierElementParent() {
+      
+     
+          return this.plans_Decision.filter(element => this.RecupererNiveau3StructureDecision(element.structure_motif_decission_id) == 3);
+      
+    },
+  afficheFichierJoint() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.FichierJoinDmdEngagement.find(qtreel => qtreel.numero_demande_engagement == id);
 
+      if (qtereel) {
+        return qtereel.fichier;
+      }
+      return ""
+        }
+      };
+    },
 
+ListePieceJustificative() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_demande_engagement == id);
 
+        }
+      };
+    },
+  
+
+   listeDesDmdParBonCommande() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersDemandeEngagement.filter(qtreel => qtreel.ua_id == id && qtreel.type_procedure_id == "Engagement par Bien de Commande" && qtreel.decision_cf==8);
+
+        }
+      };
+    },
+    SommeDesDmdParBonCommande() {
    
-    
-
-
-   
+    return this.ListeDEsEntreprise.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0);
+    },
   },
   methods: {
-    ...mapActions("SuiviImmobilisation", [
-      "getAllStock",
-      "ajouterStock",
-      "modifierStock",
-      "supprimerStock"
+     ...mapActions("bienService", [
+      "ajouterPieceJustificative",
+      "modifierPieceJustificative",
+      "supprimerPieceJustificative",
+      "ajouterDemandeEngagement",
+      "supprimerDemandeEngagement",
+      "modifierDemandeEngagement"
+     
     ]),
-    ...mapActions("uniteadministrative", ["uniteAdministratives","supprimerStockArticle"]),
+    filter(){
+                this.affiche_filtre=!this.affiche_filtre
+               
+            },
+     modifierTypeTexteLocal() {
+      this.modifierDemandeEngagement(this.editDemandeEngagement);
+this.$("#demandeVise").modal('hide');
+     
+       
+    },
+    formatageSomme:formatageSomme,
    
-    formatageSomme: formatageSomme,
-MANDATEMENT(){
-                this.$router.push({ name: 'AjouterMantdatement' })
-            },
-      liquidation(){
-                this.$router.push({ name: 'AjouterLiquidation' })
-            },
+    afficherModalModifierTypeTexte(id) {
+
+      this.$router.push({
+        path: "/ModifierDemandeEngagement/" + id
+      });
+    },
+    afficheDecisionCf(id) {
+      this.$("#demandeVise").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+       this.editDemandeEngagement = this.gettersDemandeEngagement.find(item=>item.id==id);
+    },
     ajouterDemandeEngage(){
                 this.$router.push({ name: 'AjouterDemandeEngagement' })
             },
-    //afiicher modal ajouter
-    
-    alert() {
-      console.log("ok");
-    },
+                    videUniteAdministrative(){
+                this.uniteAdministrative_id=""
+            },
+            videTypeProcedure(){
+                this.type_procedure_id=""
+            },
 
-    formaterDate(date) {
-      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
-    },
-    
-    ExporterEnExel(){
-      this.$refs.excel.click()
-    }
   }
 };
 </script>
 <style scoped>
-.taillemodal {
-  width: 800px;
-  margin: 0 -380px;
+
+.tailgrand{
+  width: 65%;
+  margin: 0 -38%;
 }
-.taillemodalMod{
-   width: 500px;
-  margin: 0 -200px;
-}
-.sommecolor{
-  background-color: red;
-  color:red;
-  font-size: 120%;
-  text-align: center;
-  font-weight:bold;
-}
-.tailgrandStock{
-  width: 88%;
-  margin: 0 -42%;
-}
+
 </style>

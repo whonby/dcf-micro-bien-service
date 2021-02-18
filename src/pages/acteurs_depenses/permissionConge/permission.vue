@@ -8,7 +8,7 @@
                                                 <table class="table table-bordered">
                                                     <thead>
                                                     <tr>
-                                                        <th>Type conges</th>
+                                                        <th>Type congés</th>
                                                        
                                                         <th>Date debut</th>
                                                         <th>Date fin</th>
@@ -25,7 +25,7 @@
                                                     <td>
                       <button class="btn btn-danger" @click="supprimerPermissionConge(item.id)">
                         <span>
-                          <i class="icon icon-trash"></i>
+                          <i class="icon icon-trash"></i>Supprimer
                         </span>
                       </button>
                     </td>

@@ -54,7 +54,7 @@
                                 <span class=""><i class="icon-ok"></i></span></button> 
                              
                             <button @click.prevent="supprimerCandidatSelectionner(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
+                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                         </div>
 

@@ -322,6 +322,9 @@ created(){
 this.getReception()
 this.getDemandeEngagement()
 this.getPieceJustificative()
+this.getDossierLiquidation()
+this.getDossierMandat()
+this.getDossierFacture()
 this.getFormeJuridiques()
 this.getRegimeImpositions()
  this.getGroupe()
@@ -763,7 +766,7 @@ return objJson.id
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ["getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
+       ...mapActions('bienService', ["getDossierFacture","getDossierMandat","getDossierLiquidation","getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",

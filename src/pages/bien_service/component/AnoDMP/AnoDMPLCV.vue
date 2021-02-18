@@ -57,7 +57,7 @@ affichierAppelOffreid
 
       <div class="btn-group">
         <button @click.prevent="supprimerDemandeAno(demande.id)"  class="btn btn-danger " title="Supprimer">
-          <span class=""><i class="icon-trash"></i></span>
+          <span class=""><i class="icon-trash"></i>Supprimer</span>
         </button>
       </div>
 
