@@ -2854,3 +2854,35 @@ export const MODIFIER_MANDAT_OP = (state, elementModif)=>{
 export const SUPPRIMER_MANDAT_OP = (state, id)=> {
     state.MandatOp = state.MandatOp.filter(prest => prest.id !=id)
 }
+
+
+
+
+
+
+
+
+
+export const GET_ALL_FACTURE_PIECE= (state, tableau_document) =>{
+    state.facturePiece = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_FACTURE_PIECE = (state, elementAjouter) => {
+    state.facturePiece.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_FACTURE_PIECE = (state, elementModif)=>{
+    state.facturePiece = state.facturePiece.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_FACTURE_PIECE = (state, id)=> {
+    state.facturePiece = state.facturePiece.filter(prest => prest.id !=id)
+}

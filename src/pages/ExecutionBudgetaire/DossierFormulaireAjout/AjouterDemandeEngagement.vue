@@ -144,35 +144,21 @@
                      </tr>
                      <tr>
                        <td>
-                                <label>Code Unité Administrative <code style="color:red;font-size:16px">*</code>
+                                <label>Unité Administrative <code style="color:red;font-size:16px">*</code>
                                 </label>
                                 <model-list-select style="border:1px solid #000"
                                                    class="wide"
                                                    :list="listeDesUa"
                                                    v-model="formData.ua_id"
                                                    option-value="id"
-                                                   option-text="code"
+                                                   option-text="libelle"
                                                    placeholder=""
                                 >
 
                                 </model-list-select>
                                  <code style="color:red;font-size:12px" v-if="formData.ua_id==''">Veuillez renseigner ce champ</code>
                             </td>
-                            <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Nom unite Administrative</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    style="border:1px solid #000"
-                   :value="libelleUa(formData.ua_id)"
-                    class="span"
-                    readonly
-                  />
-                </div>
-              </div>
-              
-            </td>
+                           
                              <td>
                 <div class="control-group">
                   <label class="control-label">Grande nature de dépense <code style="color:red;font-size:16px">*</code></label>
@@ -203,7 +189,19 @@
                   </div>
                 </div>
               </td>
-             
+               <td>
+                            <div class="control-group">
+                                                    <label class="control-label">Type de procédure <code style="color:red;font-size:16px">*</code></label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.type_procedure_id" class="span" style="border:1px solid #000">
+                                                            <option></option>
+                                                            <option value="Engagement par Bien de Commande">Engagement par Bien de Commande </option>
+                                                            <option value="Engagement direct">Engagement direct</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                        </td>
                
                      </tr>
                     
@@ -226,19 +224,6 @@
                     <div id="ENGAGEMENT" class="tab-pane active">
                   <table class="table table-bordered table-striped">
           <tr>
-            <td>
-                            <div class="control-group">
-                                                    <label class="control-label">Type de procédure <code style="color:red;font-size:16px">*</code></label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.type_procedure_id" class="span" style="border:1px solid #000">
-                                                            <option></option>
-                                                            <option value="Engagement par Bien de Commande">Engagement par Bien de Commande </option>
-                                                            <option value="Engagement direct">Engagement direct</option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                        </td>
              <td colspan="">
                 <div class="control-group">
                   <label class="control-label">Type d'engagement</label>
@@ -254,7 +239,28 @@
                   </div>
                 </div>
               </td>
-               <td>
+          <td colspan="2">
+                <div class="control-group">
+                  <label class="control-label">Marche Attribué</label>
+                  <div class="controls">
+                    <select v-model="formData.acte_financier_id" class="span" style="border:1px solid #000">
+                      <option
+                        v-for="ligneeco in ListeDesMarcheAttribuer(formData.ua_id)"
+                        :key="ligneeco.id"
+                        :value="ligneeco.id"
+                      >{{libelleMarche(ligneeco.marche_id)}}</option>
+                    </select>
+                    
+                  </div>
+                </div>
+              </td>
+            
+               
+             
+         
+          </tr>
+          <tr>
+            <td>
               <div class="control-group">
                 <label class="control-label">Réf.Engagement juridique</label>
                 <div class="controls">
@@ -269,10 +275,6 @@
               </div>
               
             </td>
-             
-         
-          </tr>
-          <tr>
             <td>
               <div class="control-group">
                 <label class="control-label">N°OP/AT</label>
@@ -288,7 +290,7 @@
               </div>
               
             </td>
-            <td colspan="2">
+            <td colspan="">
               <div class="control-group">
                 <label class="control-label">Autre</label>
                 <div class="controls">
@@ -303,6 +305,7 @@
               </div>
               
             </td>
+            
           </tr>
            </table>
                     </div>
@@ -1164,6 +1167,19 @@
               </div>
               
             </td>
+            <td>
+                <div class="control-group">
+                <label class="control-label">Exonéré</label>
+                <div class="controls">
+                  <select v-model="formData9.exonere" class="span5">
+                  
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                
+                </div>
+              </div>
+              </td>
           </tr>
            
          
@@ -1206,24 +1222,53 @@
                    
                   </tr>
                 </thead>
-                <!-- <tbody>
-                  <tr class="odd gradeX" v-for="(type, index) in filtre_type_teste" :key="type.id">
-                    <td
+                <tbody>
+                  <tr class="odd gradeX" v-for="(type, index) in listeFacturePiece(formData.numero_demande)" :key="type.id">
+                    <td 
                       @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.code || 'Non renseigné'}}</td>
-                    <td
+                    >{{type.designation || 'Non renseigné'}}</td>
+                    <td style="text-align:center;font-weight:bold;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.libelle || 'Non renseigné'}}</td>
-
-                    <td>
+                    >{{type.quantite || 'Non renseigné'}}</td>
+                    <td style="text-align:center;font-weight:bold;"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.prix_unitaire)) || 'Non renseigné'}}</td>
+<td style="text-align:center;font-weight:bold;"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.total_facture_ht)) || 'Non renseigné'}}</td>
+                    <!-- <td>
                       <button class="btn btn-danger" @click="supprimerTypeTexte(type.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
                       </button>
-                    </td>
+                    </td> -->
                   </tr>
-                </tbody> -->
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ht</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDesDmdParBonCommande(formData.numero_demande)))}}</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Taux</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{afficherEnorere}}</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Tva</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)))*afficherEnorere))}} </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ttc</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)))+parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)*afficherEnorere))))}} </td>
+                  </tr>
+                </tbody>
               </table>
               </div>
                     </div>
@@ -1355,68 +1400,71 @@
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
-           <tr>
-            <td>
-              <div class="control-group">
-            <label class="control-label">Désignation</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="editpiece.date_piece"
-                class="span5"
-                
-              />
-            </div>
-          </div>
-            </td>
-            <td>
-              <div class="control-group">
-            <label class="control-label">Désignation</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="editpiece.date_piece"
-                class="span5"
-                
-              />
-            </div>
-          </div>
-            </td>
-            
-          </tr>
           <tr>
-            <td>
+             <td colspan="3">
               <div class="control-group">
             <label class="control-label">Désignation</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="editpiece.date_piece"
-                class="span5"
-                
-              />
-            </div>
-          </div>
-            </td>
-            <td>
-              <div class="control-group">
-            <label class="control-label">Désignation</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="editpiece.date_piece"
-                class="span5"
+                v-model="FormDataFacture.designation"
+                class="span12"
                 
               />
             </div>
           </div>
             </td>
           </tr>
+           <tr>
+           
+            <td>
+              <div class="control-group">
+            <label class="control-label">Quantite</label>
+            <div class="controls">
+              <input
+                type="number"
+                v-model="FormDataFacture.quantite"
+                class="span4"
+                
+              />
+            </div>
+          </div>
+            </td>
+            <td>
+              <div class="control-group">
+            <label class="control-label">Prix Unitaire</label>
+            <div class="controls">
+              <!-- <input
+                type="number"
+                v-model="FormDataFacture.prix_unitaire"
+                class="span4"
+                
+              /> -->
+              <money v-model="FormDataFacture.prix_unitaire"  style="text-align:left;color:red"  class="span4"></money>
+            </div>
+          </div>
+            </td>
+            <td>
+              <div class="control-group">
+            <label class="control-label">Total</label>
+            <div class="controls">
+              <!-- <input
+                type="text"
+                :value="MontantFactureHt"
+                class="span4"
+                readonly
+              /> -->
+               <money :value="MontantFactureHt"  style="text-align:left;color:red"  class="span4"></money>
+            </div>
+          </div>
+            </td>
+          </tr>
+          
         </table>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterTypeTexteLocal(formData)"
+          @click.prevent="ajouterFacture()"
           class="btn btn-primary"
           href="#"
           
@@ -1468,6 +1516,7 @@
     import {  ModelListSelect } from 'vue-search-select'
     import moment from 'moment';
     // import facture from '../Facture/facture.vue'
+    import { formatageSomme } from "@/Repositories/Repository";
     import 'vue-search-select/dist/VueSearchSelect.css'
     export default {
 components: {
@@ -1501,12 +1550,16 @@ components: {
                 formData5:{
                   Auteur_id:"2"
                 },
+                formData9:{
+                exonere : 1
+                },
  formData1:{
                  
                 },
                 formData2:{
                  
                 },
+                FormDataFacture:{},
                 message_mandater:""
             };
         },
@@ -1527,7 +1580,7 @@ components: {
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
 
-...mapGetters("bienService", ["typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+...mapGetters("bienService", ["gettersDossierFacturePiece","typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -1537,7 +1590,7 @@ components: {
 ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
    ...mapGetters("parametreGenerauxAdministratif", [
-      
+      "taux",
       "sections",
       "type_Unite_admins",
       "plans_programmes",
@@ -1549,6 +1602,82 @@ components: {
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+
+ListeDesMarcheAttribuer() {
+      return (id) => {
+        if (id != null && id != "") {
+           return this.acteEffetFinanciers.filter(qtreel => qtreel.ua_id == id);
+
+      
+        }
+      };
+    },
+
+
+      affcherTauxEnCours() {
+      
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+tauxArrondit() {
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.arrondit;
+      }
+      return 0
+    },
+
+montantTva() {
+      const val =   parseFloat(this.totalMontantHT) * parseFloat(this.afficherEnorere2);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+afficherEnorere(){
+if(this.formData9.exonere == 0){
+  return 0
+}
+else {
+  return this.tauxArrondit
+  
+}
+},
+       SommeDesDmdParBonCommande() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersDossierFacturePiece.filter(qtreel => qtreel.numero_dmd == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_facture_ht), 0).toFixed(0);
+
+        }
+      };
+    },
+      listeFacturePiece() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersDossierFacturePiece.filter(qtreel => qtreel.numero_dmd == id);
+
+      
+        }
+      };
+    },
+MontantFactureHt() {
+      const val =  parseFloat(this.FormDataFacture.prix_unitaire) * parseFloat(this.FormDataFacture.quantite);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
       afficheFichierJoint() {
       return (id,id2) => {
         if (id != null && id != "" && id2 != null && id2 != "") {
@@ -1697,6 +1826,18 @@ CumulDemande: function () {
         }
       };
     },
+    libelleMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_marche.concat('  ',qtereel.objet)
+      }
+      return 0
+        }
+      };
+    },
 libelleLigneEconomique() {
       return id => {
         if (id != null && id != "") {
@@ -1808,6 +1949,7 @@ return this.uniteAdministratives
       return parseFloat(val).toFixed(0);
       
     },
+    
     ligneEconomique() {
       return (id,id2) => {
         if (id != null && id != "" && id2 != null && id2 != "") {
@@ -1843,7 +1985,10 @@ methods: {
       "ajouterPieceJustificative",
       "modifierPieceJustificative",
       "supprimerPieceJustificative",
-      "ajouterDemandeEngagement"
+      "ajouterDemandeEngagement",
+      "ajouterDossierFacture",
+      "modifierDossierFacture",
+      "supprimerDossierFacture"
      
     ]),
       ...mapActions('personnelUA', ["ajouterFichierJointDmd"]),
@@ -1964,7 +2109,24 @@ rechercheMembreCojo(){
 
             },
 
-
+ajouterFacture(){
+              this.intitule=this.anneeAmort + "" + this.formData.numero_demande
+              var NouveauObjet = {
+        ...this.FormDataFacture,
+          total_facture_ht:this.MontantFactureHt,
+        	numero_dmd_engagement:this.intitule,
+          numero_dmd:this.formData.numero_demande,
+          etat_acticle:"proforma"
+      };
+    
+      this.ajouterDossierFacture(NouveauObjet)
+       this.FormDataFacture={
+    designation:"",
+    quantite:"0",
+    prix_unitaire:"0",
+    total_facture_ht:"0"
+  }
+            },
 AjouterDemandeEngagement() {
   this.intitule=this.anneeAmort + "" + this.formData.numero_demande
       if(this.formData5.Auteur_id == 2){
@@ -2072,6 +2234,13 @@ montant_tresor:""
     formaterDate(date) {
               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
+formatageSomme:formatageSomme
+
+
+
+
+
+            
 }
 
 
@@ -2080,13 +2249,13 @@ montant_tresor:""
 
 <style scoped>
 .taille{
-  width: 93%;
-  margin: 0 -45%;
-  height: 60%;
+  width: 80%;
+  margin: 0 -40%;
+  height: 50%;
 }
 .tailles{
-   width: 93%;
-  margin: 0 -45%;
+   width: 64%;
+  margin: 0 -30%;
   
 }
 </style>

@@ -5386,3 +5386,73 @@ export function supprimerDossierMandat({ commit }, id) {
 
 
 
+
+
+
+
+
+
+
+
+export function getDossierFacture({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/FacturePiece")
+          .then(response => {
+              commit("GET_ALL_FACTURE_PIECE", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterDossierFacture({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/FacturePiece", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_FACTURE_PIECE", response.data);
+             
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "ce Numero existe déja",
+            type:"error"
+        });
+    })
+}
+
+
+export function modifierDossierFacture({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/FacturePiece/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_FACTURE_PIECE", response.data);
+          
+
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerDossierFacture({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_FACTURE_PIECE", id);
+        
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/FacturePiece/" + id).then(() => dialog.close());
+      });
+}
