@@ -1,8 +1,12 @@
-
+numeroOrdre
 <template>
 
 <div class="container-fluid">
       <hr />
+      <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
+    
+        </div>
       <div class="row-fluid">
         <div class="span12">
           <div class="widget-box">
@@ -394,9 +398,10 @@
                   <input
                     type="text"
                     style="border:1px solid #000"
-                  v-model="formData5.Reference_bancaires"
+                  
+                  :value="libellebanqueEntreprise(banqueEntreprise(IdEntreprise(formData5.numeroDemande)))"
                     class="span"
-                   
+                   readonly
                   />
                 </div>
               </div>
@@ -409,9 +414,9 @@
                   <input
                     type="text"
                     style="border:1px solid #000"
-                  
+                  :value="CompteEntreprise(IdEntreprise(formData5.numeroDemande))"
                     class="span"
-                    
+                    readonly
                   />
                 </div>
               </div>
@@ -427,27 +432,27 @@
                   </div>
                    <tr>
                        <td colspan="4">
-                           <label class="control-label">Pièce Justificative (Proforma)</label>
+                           <label class="control-label" style="font-size:14px;font-weight:bold;text-align:center">Pièce Justificative (Proforma)</label>
 
 <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                     <th>Numero Ordre</th>
-                    <th>Nature de la pièce</th>
-                   <th>Reference</th>
-                   <th>Date de la pièce</th>
+                     <th style="font-size:14px;font-weight:bold">Numero Ordre</th>
+                    <th style="font-size:14px;font-weight:bold">Nature de la pièce</th>
+                   <th style="font-size:14px;font-weight:bold">Reference</th>
+                   <th style="font-size:14px;font-weight:bold">Date de la pièce</th>
                   
                     
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(type) in listePieceJustificative(formData5.numeroDemande)" :key="type.id">
-                    <td style="width:20%"
+                  <tr class="odd gradeX" v-for="(type) in listePieceJustificativeProforma(formData5.numeroDemande)" :key="type.id">
+                    <td style="width:20%,text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_ordre || 'Non renseigné'}}</td>
                     <td style="width:30%"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{type.libelle || 'Non renseigné'}}</td>
+                    >{{listePieceJustifica(type.libelle) || 'Non renseigné'}}</td>
                     <td style="width:20%"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.reference || 'Non renseigné'}}</td>
@@ -460,13 +465,13 @@
                 </tbody>
               </table>
 
-<label class="control-label">Pièce Justificative (Definitive)</label>
+<label class="control-label" style="font-size:14px;font-weight:bold;text-align:center">Pièce Justificative (Definitive)</label>
 
                            <div class="" align="right">
                    <button 
                         @click.prevent="afficherModalAjouterService"
                        class="btn  btn-success">
-                <span >  <i class="icon icon-plus-sign">Ajouter Nature de la pièces</i></span>
+                <span >  <i class="icon icon-plus-sign">Ajouter pièces Definitive</i></span>
        
                 </button>
 
@@ -475,22 +480,22 @@
  <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                     <th>Numero Ordre</th>
-                    <th>Nature de la pièce</th>
-                   <th>Reference</th>
-                   <th>Date de la pièce</th>
-                   <th>Montant</th>
+                    <tr>
+                     <th style="font-size:14px;font-weight:bold">Numero Ordre</th>
+                    <th style="font-size:14px;font-weight:bold">Nature de la pièce</th>
+                   <th style="font-size:14px;font-weight:bold">Reference</th>
+                   <th style="font-size:14px;font-weight:bold">Date de la pièce</th>
                     
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- <tr class="odd gradeX" v-for="(type) in listePieceJustificative(formData.numero_demande)" :key="type.id">
-                    <td style="width:20%"
+                  <tr class="odd gradeX" v-for="(type) in listePieceJustificativeDefinitive(formData5.numeroDemande)" :key="type.id">
+                    <td style="width:20%,text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_ordre || 'Non renseigné'}}</td>
                     <td style="width:30%"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{type.libelle || 'Non renseigné'}}</td>
+                    >{{listePieceJustifica(type.libelle) || 'Non renseigné'}}</td>
                     <td style="width:20%"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.reference || 'Non renseigné'}}</td>
@@ -498,14 +503,8 @@
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{formaterDate(type.date_piece) || 'Non renseigné'}}</td>
 
-                    <td  style="width:15%">
-                      <button class="btn btn-danger" @click="supprimerPieceJustificative(type.id)">
-                        <span>
-                          <i class="icon icon-trash"> Supprimer</i>
-                        </span>
-                      </button>
-                    </td>
-                  </tr> -->
+                    
+                  </tr>
                 </tbody>
               </table>
                        </td>
@@ -697,7 +696,7 @@
         </div>
       </div>
       <notifications/>
-      <div id="exampleModal" class="modal hide">
+      <div id="exampleModal" class="modal hide taille">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter pièces justificatives</h3>
@@ -712,7 +711,7 @@
             <div class="controls">
               <input
                 type="text"
-               
+               :value="numeroOrdre(formData.numero_demande)"
                 class="span5"
                 placeholder="Saisir le libellé"
                 readonly
@@ -720,83 +719,371 @@
             </div>
           </div>
             </td>
-          </tr>
-           <tr>
             <td>
               <div class="control-group">
-            <label class="control-label">Nature de la pièce</label>
-            <div class="controls">
-              <input
-                type="text"
-                
-                class="span5"
-                placeholder="Saisir le libellé"
-              />
-            </div>
-          </div>
+                                                    <label class="control-label">Nature de la pièce <code style="color:red;font-size:16px">*</code></label>
+                                                    <div class="controls">
+                                                        <select v-model="formData1.libelle" class="span5" style="border:1px solid #000">
+                                                            <option></option>
+                                                            <option
+                        v-for="typeFact in typeFactures"
+                        :key="typeFact.id"
+                        :value="typeFact.id"
+                      >{{typeFact.libelle}}</option>
+                                                        </select>
+                                                        <code style="color:red;font-size:12px" v-if="formData1.libelle.length>0">Veuillez renseigner ce champ</code>
+                                                    </div>
+                                                </div>
+              
             </td>
-          </tr>
-           <tr>
             <td>
               <div class="control-group">
-            <label class="control-label">Reference de la pièce</label>
+            <label class="control-label">Reference de la pièce <code style="color:red;font-size:16px">*</code></label>
             <div class="controls">
               <input
                 type="text"
-               
+                v-model="formData1.reference"
                 class="span5"
                 placeholder="Saisir la reference"
               />
+              <code style="color:red;font-size:12px" v-if="formData1.reference==''">Veuillez renseigner ce champ</code>
             </div>
           </div>
             </td>
+           
           </tr>
           <tr>
-            <td>
+             <td>
               <div class="control-group">
-            <label class="control-label">Date de la pièce</label>
+            <label class="control-label">Date de la pièce <code style="color:red;font-size:16px">*</code></label>
             <div class="controls">
               <input
                 type="date"
-                
+                v-model="formData1.date_piece"
                 class="span5"
                 
               />
+               <code style="color:red;font-size:12px" v-if="formData1.date_piece==''">Veuillez renseigner ce champ</code>
             </div>
           </div>
             </td>
-          
-          </tr>
-          <tr>
-              <td colspan="">
+            <td colspan="">
               <div class="control-group">
                 <label class="control-label">Pièces justificatives </label>
                 <div class="controls">
                   <input
                     type="file"
                     style="border:1px solid #000"
-                  
+                   @change="OnchangeFichier"
                     class="span"
                     
                   />
-                  <!-- <code v-if="info_pdf">Le fichier doit etre un pdf</code> -->
+                  <code v-if="info_pdf">Le fichier doit etre un pdf</code>
                 </div>
               </div>
               
             </td>
+            <td>
+                <div class="control-group">
+                <label class="control-label">Exonéré</label>
+                <div class="controls">
+                  <select v-model="formData9.exonere" class="span5">
+                  
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                
+                </div>
+              </div>
+              </td>
           </tr>
+           
+         
       </table>
+       
+      </div>    
+ 
+  <div>
+    <div class="modal-footer">
+      <a
+                          class="btn btn-primary"
+                          @click.prevent="AjoutePieceJustific" v-if="formData1.reference !='' && formData1.date_piece !=''"
+                        >Valider</a>
+        
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+        <div align="left">
+
+      <button class="btn btn-info"  @click.prevent="apercuFactureliquidation">Aperçu de la facture</button>
+
+
+                            </div>
+
+   <table class="table table-bordered table-striped" >
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#BONCOMMANDE1" v-if="formData1.libelle == 1">  Facture Définitive</a>
+                      </li>
+                      
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+                    <!--ongle identification-->
+                    <div id="BONCOMMANDE1" class="tab-pane active">
+                  <div class="widget-content nopadding">
+                      <div class="" align="right" v-if="formData1.libelle == 1">
+                   <button 
+                        @click.prevent="afficherModalAjouterFacture"
+                       class="btn  btn-success">
+                <span >  <i class="icon icon-plus-sign">Ajouter Facture</i></span>
+       
+                </button>
+                
+
+                   </div>
+                   <div id="printMe">
+              <table class="table table-bordered table-striped" v-if="formData1.libelle == 1">
+                <thead>
+                  <tr>
+                    <th>Designation</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire</th>
+                     <th>Total</th>
+                   <th style="width:10px">Supprimer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="odd gradeX" v-for="(type, index) in listeFacturePiece(formData.numero_demande)" :key="type.id">
+                    <td 
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.designation || 'Non renseigné'}}</td>
+                    <td style="text-align:center;font-weight:bold;"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.quantite || 'Non renseigné'}}</td>
+                    <td style="text-align:center;font-weight:bold;"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.prix_unitaire)) || 'Non renseigné'}}</td>
+<td style="text-align:center;font-weight:bold;"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.total_facture_ht)) || 'Non renseigné'}}</td>
+                    <td>
+                      <button class="btn btn-danger" @click="supprimerDossierFacture(type.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ht</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDesDmdParBonCommande(formData.numero_demande)))}}</td>
+                 <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Taux</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{afficherEnorere}}</td>
+                  <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Tva</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)))*afficherEnorere))}} </td>
+                  <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ttc</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)))+parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)*afficherEnorere))))}} </td>
+                  <td></td>
+                  </tr>
+                </tbody>
+              </table>
+                   </div>
+              </div>
+                    </div>
+               
+                    
+                 
+
+                      
+                      
+      </div>
+         
+
+
+       </div>
+     
+              </table>
+  </div>
+   
+      
+    </div>
+
+
+    <div id="factureDefinitive" class="modal hide tailles">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Facture</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <tr>
+             <td colspan="3">
+              <div class="control-group">
+            <label class="control-label">Désignation</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="FormDataFacture.designation"
+                class="span12"
+                
+              />
+            </div>
+          </div>
+            </td>
+          </tr>
+           <tr>
+           
+            <td>
+              <div class="control-group">
+            <label class="control-label">Quantite</label>
+            <div class="controls">
+              <input
+                type="number"
+                v-model="FormDataFacture.quantite"
+                class="span4"
+                
+              />
+            </div>
+          </div>
+            </td>
+            <td>
+              <div class="control-group">
+            <label class="control-label">Prix Unitaire</label>
+            <div class="controls">
+              <!-- <input
+                type="number"
+                v-model="FormDataFacture.prix_unitaire"
+                class="span4"
+                
+              /> -->
+              <money v-model="FormDataFacture.prix_unitaire"  style="text-align:left;color:red"  class="span4"></money>
+            </div>
+          </div>
+            </td>
+            <td>
+              <div class="control-group">
+            <label class="control-label">Total</label>
+            <div class="controls">
+              <!-- <input
+                type="text"
+                :value="MontantFactureHt"
+                class="span4"
+                readonly
+              /> -->
+               <money :value="MontantFactureHt"  style="text-align:left;color:red"  class="span4"></money>
+            </div>
+          </div>
+            </td>
+          </tr>
+          
+        </table>
       </div>
       <div class="modal-footer">
         <a
-         
+          @click.prevent="ajouterFacture()"
           class="btn btn-primary"
           href="#"
           
-          @click.prevent="AjoutePieceJustific"
         >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
+    </div>
+<div id="ApercuFactureliquidation" class="modal hide ApercuFactureliquidation1">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Aperçu Facture</h3>
+      </div>
+      <div>
+       <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Designation</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire</th>
+                     <th>Total</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="odd gradeX" v-for="(type, index) in listeFacturePiece(formData.numero_demande)" :key="type.id">
+                    <td 
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.designation || 'Non renseigné'}}</td>
+                    <td style="text-align:center;font-weight:bold;"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.quantite || 'Non renseigné'}}</td>
+                    <td style="text-align:center;font-weight:bold;"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.prix_unitaire)) || 'Non renseigné'}}</td>
+<td style="text-align:center;font-weight:bold;"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.total_facture_ht)) || 'Non renseigné'}}</td>
+                    
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ht</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDesDmdParBonCommande(formData.numero_demande)))}}</td>
+                
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Taux</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{afficherEnorere}}</td>
+                  
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Tva</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)))*afficherEnorere))}} </td>
+                  
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ttc</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)))+parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)*afficherEnorere))))}} </td>
+                  
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+      
+      
+    </div>
     </div>
 </div>
 </template>
@@ -804,6 +1091,7 @@
 
     import {mapGetters,mapActions} from 'vuex'
     import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
+    import { formatageSomme } from "@/Repositories/Repository";
     // import {  ModelListSelect } from 'vue-search-select'
     import moment from 'moment';
    // import 'vue-search-select/dist/VueSearchSelect.css'
@@ -830,14 +1118,23 @@ components: {
                 },
                 
                 editpiece:{},
+                FormDataFacture:{},
                 formData5:{
                   numeroDemande:""
+                },
+                 formData9:{
+                exonere : 1
                 },
  formaLiquidation:{
                  
                 },
                 formData2:{
                  
+                },
+                formData1:{
+              date_piece:"" ,
+              reference:""  ,
+              libelle:""
                 },
                 message_mandater:""
             };
@@ -859,7 +1156,7 @@ components: {
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
 
-...mapGetters("bienService", ["gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+...mapGetters("bienService", ["typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -881,6 +1178,131 @@ components: {
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+      IdEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.numero_dmd_combine == id );
+
+      if (qtereel) {
+       
+           return qtereel.entreprise_id;
+      }
+      return ""
+        }
+      };
+    },
+    libellebanqueEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.banques.find(qtreel => qtreel.id == id );
+
+      if (qtereel) {
+       
+           return qtereel.libelle;
+      }
+      return ""
+        }
+      };
+    },
+    banqueEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.comptes.find(qtreel => qtreel.entrepse_id == id );
+
+      if (qtereel) {
+       
+           return qtereel.banq_id;
+      }
+      return ""
+        }
+      };
+    },
+    CompteEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.comptes.find(qtreel => qtreel.entrepse_id == id );
+
+      if (qtereel) {
+       
+           return qtereel.rib;
+      }
+      return ""
+        }
+      };
+    },
+       anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
+affcherTauxEnCours() {
+      
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+tauxArrondit() {
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.arrondit;
+      }
+      return 0
+    },
+
+montantTva() {
+      const val =   parseFloat(this.totalMontantHT) * parseFloat(this.afficherEnorere2);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+afficherEnorere(){
+if(this.formData9.exonere == 0){
+  return 0
+}
+else {
+  return this.tauxArrondit
+  
+}
+},
+       SommeDesDmdParBonCommande() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersDossierFacturePiece.filter(qtreel => qtreel.numero_dmd == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_facture_ht), 0).toFixed(0);
+
+        }
+      };
+    },
+      listeFacturePiece() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersDossierFacturePiece.filter(qtreel => qtreel.numero_dmd == id);
+
+      
+        }
+      };
+    },
+MontantFactureHt() {
+      const val =  parseFloat(this.FormDataFacture.prix_unitaire) * parseFloat(this.FormDataFacture.quantite);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
  calculCumul() { 
       const val =  parseFloat(this.CumulDemande(this.formData5.ligne_id)) ;
       return parseFloat(val).toFixed(0);
@@ -911,10 +1333,19 @@ CumulDemande: function () {
         }
       };
     },
-      listePieceJustificative() {
+      listePieceJustificativeProforma() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_dmd_combine == id && 	qtreel.etat_piece==null);
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_dmd_combine == id && qtreel.etat_piece=="proforma");
+
+      
+        }
+      };
+    },
+    listePieceJustificativeDefinitive() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_dmd_combine == id && qtreel.etat_piece=="definitive");
 
       
         }
@@ -933,7 +1364,18 @@ CumulDemande: function () {
       };
     },
      
-     
+     listePieceJustifica() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           const qtereel = this.typeFactures.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return ""
+        }
+      };
+    },
      
      codeUa() {
       return id => {
@@ -1046,9 +1488,39 @@ methods: {
      
     ]),
       ...mapActions('personnelUA', ["ajouterFichierJointDmd"]),
+OnchangeFichier(e) {
+                const files = e.target.files;
+                this.selectedFile = event.target.files[0];
+                Array.from(files).forEach(file => this.addFichierPDF(file));
+            },
+            addFichierPDF(file) {
+                if (!file.type.match("application/pdf")) {
+                    this.info_pdf=true;
+                    console.log(`${file.name} le fichier doit etre un PDF`);
+                    return;
+                }
+                this.info_pdf=false;
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = e => {
+                    vm.imagePDF = "pdf.png";
+                    vm.namePDF = file.name;
+                    vm.fichierPDF = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+numeroOrdre() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_dmd_combine == id && qtreel).length + 1 ;
 
-
-
+      
+        }
+      };
+    },
+pagePrecedent(){
+                window.history.back()
+            },
 rechercheMembreCojo(){
       console.log(this.formData5.numeroDemande)
 
@@ -1100,8 +1572,13 @@ this.$("#modificationModal").modal('hide');
         
       };
     },
-
-
+afficherModalAjouterFacture() {
+      this.$("#factureDefinitive").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+    },
+formatageSomme:formatageSomme,
     formaterDate(date) {
               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
@@ -1120,3 +1597,23 @@ this.$("#modificationModal").modal('hide');
     };
 </script>
 
+
+<style scoped>
+.taille{
+  width: 80%;
+  margin: 0 -40%;
+  height: 50%;
+}
+.tailles{
+   width: 64%;
+  margin: 0 -30%;
+  
+}
+.ApercuFactureliquidation1{
+ width: 64%;
+  margin: 0 -30%;
+  
+  border: 2px solid #000;
+
+}
+</style>

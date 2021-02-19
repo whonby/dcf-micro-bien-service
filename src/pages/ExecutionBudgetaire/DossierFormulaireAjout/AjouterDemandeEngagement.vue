@@ -1,8 +1,12 @@
-
+numeroOrdre
 <template>
 
 <div class="container-fluid">
       <hr />
+      <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
+    
+        </div> 
       <div class="row-fluid">
         <div class="span12">
           <div class="widget-box">
@@ -195,7 +199,7 @@
                                                     <div class="controls">
                                                         <select v-model="formData.type_procedure_id" class="span" style="border:1px solid #000">
                                                             <option></option>
-                                                            <option value="Engagement par Bien de Commande">Engagement par Bien de Commande </option>
+                                                            <option value="Engagement par Bon de Commande">Engagement par Bon de Commande </option>
                                                             <option value="Engagement direct">Engagement direct</option>
 
                                                         </select>
@@ -239,25 +243,60 @@
                   </div>
                 </div>
               </td>
-          <td colspan="2">
+              
+          <td colspan="">
                 <div class="control-group">
-                  <label class="control-label">Marche Attribué</label>
+                  <label class="control-label">Numéro du Marché</label>
                   <div class="controls">
-                    <select v-model="formData.acte_financier_id" class="span" style="border:1px solid #000">
-                      <option
-                        v-for="ligneeco in ListeDesMarcheAttribuer(formData.ua_id)"
-                        :key="ligneeco.id"
-                        :value="ligneeco.id"
-                      >{{libelleMarche(ligneeco.marche_id)}}</option>
-                    </select>
-                    
+                   
+                     <input
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData2.acte_financier_id"
+                    class="span"
+                   
+                    v-on:keyup="rechercheListeMarche()"
+                    placeholder=""
+                  />
                   </div>
                 </div>
               </td>
-            
+          <td>
+              <div class="control-group">
+                <label class="control-label">Unité administrative</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="libelleUa(formData2.ua)"
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+              
+            </td>   
                
              
          
+          </tr>
+          <tr>
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label">Objet de marché</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="libelleMarche(formData2.objet_marche)"
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+              
+            </td>
+           
           </tr>
           <tr>
             <td>
@@ -398,13 +437,13 @@
                    <input
                     type="text"
                     style="border:1px solid #000"
-                   v-model="formData2.Numéro_cc_fournisseur"
+                   :value=" Numero_CC(formData2.Numéro_cc_fournisseur)"
                     class="span"
                     v-if="formData5.Auteur_id==2"
-                    v-on:keyup="rechercheMembreCojo()"
+                 readonly
                     placeholder="Saisir le numero cc"
                   />
-                   <code v-if="message_mandater && formData5.Auteur_id==2" >{{message_mandater}}</code>
+                   
                    <input
                     type="text"
                     style="border:1px solid #000"
@@ -430,7 +469,7 @@
                   <input
                     type="text"
                     style="border:1px solid #000"
-                   v-model="formData2.numero_cc_fournisseur_nom"
+                   :value="Numero_Nom_Entreprise(formData2.numero_cc_fournisseur_nom)"
                     class="span"
                     v-if="formData5.Auteur_id==2"
                     readonly
@@ -471,7 +510,7 @@
                    <input
                     type="text"
                     style="border:1px solid #000"
-                   v-model="formData2.numero_cc_fournisseur_adresse"
+                   :value="Numero_adresse_Entreprise(formData2.numero_cc_fournisseur_adresse)"
                     class="span"
                     v-if="formData5.Auteur_id==2"
                     readonly
@@ -607,8 +646,8 @@
                             </td>
                      </tr>
                      <tr>
-                        <td colspan="">
-              <!-- <div class="control-group">
+                        <!-- <td colspan="">
+              <div class="control-group">
                 <label class="control-label">Pièces justificatives </label>
                 <div class="controls">
                   <input
@@ -620,15 +659,15 @@
                   />
                   <code v-if="info_pdf">Le fichier doit etre un pdf</code>
                 </div>
-              </div> -->
+              </div>
               
-            </td>
+            </td> -->
             <td colspan="4">
                <div class="" align="right">
-                   <button 
+                   <button  
                         @click.prevent="afficherModalAjouterService"
                        class="btn  btn-success">
-                <span >  <i class="icon icon-plus-sign">Ajouter Nature de la pièces</i></span>
+                <span style="font-size:14px;font-weight:bold">  <i class="icon icon-plus-sign" >Ajouter Nature de la pièces</i></span>
        
                 </button>
 
@@ -636,12 +675,12 @@
            <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                     <th>Numero Ordre</th>
-                    <th>Nature de la pièce</th>
-                   <th>Reference</th>
-                   <th>Date de la pièce</th>
-                   <th>Fichier joint</th>
-                    <th>Action</th>
+                     <th style="font-size:14px;font-weight:bold">Numero Ordre</th>
+                    <th style="font-size:14px;font-weight:bold">Nature de la pièce</th>
+                   <th style="font-size:14px;font-weight:bold">Reference</th>
+                   <th style="font-size:14px;font-weight:bold">Date de la pièce</th>
+                   <th style="font-size:14px;font-weight:bold">Fichier joint</th>
+                    <th style="font-size:14px;font-weight:bold">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1108,7 +1147,7 @@
             </td>
             <td>
               <div class="control-group">
-                                                    <label class="control-label">Nature de la pièce</label>
+                                                    <label class="control-label">Nature de la pièce <code style="color:red;font-size:16px">*</code></label>
                                                     <div class="controls">
                                                         <select v-model="formData1.libelle" class="span5" style="border:1px solid #000">
                                                             <option></option>
@@ -1118,13 +1157,14 @@
                         :value="typeFact.id"
                       >{{typeFact.libelle}}</option>
                                                         </select>
+                                                        <code style="color:red;font-size:12px" v-if="formData1.libelle.length>0">Veuillez renseigner ce champ</code>
                                                     </div>
                                                 </div>
               
             </td>
             <td>
               <div class="control-group">
-            <label class="control-label">Reference de la pièce</label>
+            <label class="control-label">Reference de la pièce <code style="color:red;font-size:16px">*</code></label>
             <div class="controls">
               <input
                 type="text"
@@ -1132,6 +1172,7 @@
                 class="span5"
                 placeholder="Saisir la reference"
               />
+              <code style="color:red;font-size:12px" v-if="formData1.reference==''">Veuillez renseigner ce champ</code>
             </div>
           </div>
             </td>
@@ -1140,7 +1181,7 @@
           <tr>
              <td>
               <div class="control-group">
-            <label class="control-label">Date de la pièce</label>
+            <label class="control-label">Date de la pièce <code style="color:red;font-size:16px">*</code></label>
             <div class="controls">
               <input
                 type="date"
@@ -1148,6 +1189,7 @@
                 class="span5"
                 
               />
+               <code style="color:red;font-size:12px" v-if="formData1.date_piece==''">Veuillez renseigner ce champ</code>
             </div>
           </div>
             </td>
@@ -1189,13 +1231,11 @@
  
   <div>
     <div class="modal-footer">
-        <a
-         
-          class="btn btn-primary"
-          href="#"
-          
-          @click.prevent="AjoutePieceJustific"
-        >Valider</a>
+      <a
+                          class="btn btn-primary"
+                          @click.prevent="AjoutePieceJustific" v-if="formData1.reference !='' && formData1.date_piece !=''"
+                        >Valider</a>
+        
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
         <div align="left">
@@ -1661,10 +1701,13 @@ components: {
                 exonere : 1
                 },
  formData1:{
-                 
+              date_piece:"" ,
+              reference:""  ,
+              libelle:""
                 },
+                formData8:{},
                 formData2:{
-                 
+                 acte_financier_id:""
                 },
                 FormDataFacture:{},
                 message_mandater:""
@@ -1708,6 +1751,38 @@ components: {
       "afficheLocalisationGeoNiveau5"
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+ListeDesMarcheAtribuer() {
+      return (id) => {
+        if (id != null && id != "") {
+           return this.listedesMarcheUa.filter(qtreel => qtreel.ua_id == id);
+
+        }
+      };
+    },
+listedesMarcheUa() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.acteEffetFinanciers.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect
+        }
+
+return this.acteEffetFinanciers
+
+    },
+
+
+
+
 
 
 ListeDesMarcheAttribuer() {
@@ -1715,7 +1790,6 @@ ListeDesMarcheAttribuer() {
         if (id != null && id != "") {
            return this.acteEffetFinanciers.filter(qtreel => qtreel.ua_id == id);
 
-      
         }
       };
     },
@@ -1786,8 +1860,8 @@ MontantFactureHt() {
       return 0
     },
      listePieceJustifica() {
-      return (id,id2) => {
-        if (id != null && id != "" && id2 != null && id2 != "") {
+      return (id) => {
+        if (id != null && id != "" ) {
            const qtereel = this.typeFactures.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
@@ -2005,6 +2079,55 @@ libelleLigneEconomique() {
         }
       };
     },
+    objetMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+    Numero_CC() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_cc
+      }
+      return 0
+        }
+      };
+    },
+    Numero_Nom_Entreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.raison_sociale
+      }
+      return 0
+        }
+      };
+    },
+    Numero_adresse_Entreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.	adresse
+      }
+      return 0
+        }
+      };
+    },
+
     libelleUa() {
       return id => {
         if (id != null && id != "") {
@@ -2060,8 +2183,6 @@ listeDesUa() {
 
 return this.uniteAdministratives
 
-       
-
     },
      TotalGeneralDemandeEngagement() { 
       const val = parseFloat(this.formData.montant_tresor) + parseFloat(this.formData.montant_don) + parseFloat(this.formData.montant_emprunt);
@@ -2091,7 +2212,7 @@ return this.uniteAdministratives
     listePieceJustificative() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_demande_engagement == id);
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_demande_engagement == id && qtreel.etat_piece=="proforma" );
 
       
         }
@@ -2112,6 +2233,9 @@ methods: {
     ]),
       ...mapActions('personnelUA', ["ajouterFichierJointDmd"]),
 
+pagePrecedent(){
+                window.history.back()
+            },
  genererEnPdf(){
   this.$htmlToPaper('printMe');
 },
@@ -2171,7 +2295,8 @@ this.$("#ModifierexampleModal").modal('hide');
       numero_dmd_combine:this.intitule,
       libelle:this.formData1.libelle,
       reference:this.formData1.reference,
-      date_piece:this.formData1.date_piece
+      date_piece:this.formData1.date_piece,
+      etat_piece:"proforma"
       };
     
       this.ajouterPieceJustificative(nouvelObjet)
@@ -2182,6 +2307,50 @@ this.$("#ModifierexampleModal").modal('hide');
         libelle: ""
       };
     },
+
+
+
+
+
+
+rechercheListeMarche(){
+      // console.log(this.formMandater.matricule_m)
+
+      let objetMandater=this.acteEffetFinanciers.filter(item=>item.numero_marche==this.formData2.acte_financier_id)
+      // console.log(objetMandater)
+      if(objetMandater!=undefined){
+        if (objetMandater.length==1){
+          let acteur= this.acteEffetFinanciers.find(item=>item.numero_marche==this.formData2.acte_financier_id)
+          this.formData2.numero_cc_fournisseur_nom=acteur.entreprise_id,
+          this.formData2.numero_cc_fournisseur_adresse=acteur.entreprise_id,
+         this.formData2.Numéro_cc_fournisseur=acteur.entreprise_id,
+         this.formData2.objet_marche=acteur.marche_id,
+         this.formData2.ua=acteur.ua_id
+         this.formData2.acte_financier_id=acteur.id
+          this.message_mandater=" "
+
+        }
+        else{
+          this.message_mandater="Ce Numero cc  n'existe pas dans notre base de donnée "
+          this.formData2.numero_cc_fournisseur_nom=""
+        }
+      }
+      if(this.formData2.acte_financier_id==""){
+        this.formData2.numero_cc_fournisseur_nom==""
+          this.formData2.numero_cc_fournisseur_adresse==""
+         this.formData2.Numéro_cc_fournisseur==""
+         this.formData2.objet_marche=="",
+         this.formData2.ua==""
+        this.message_mandater=" "
+      }
+    },
+
+
+
+
+
+
+
 rechercheMembreCojo(){
       // console.log(this.formMandater.matricule_m)
 

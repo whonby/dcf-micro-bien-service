@@ -256,27 +256,27 @@ uniteAdministratives
               <table class="table table-bordered table-striped">
                      <thead>
                   <tr>
-                    <th>N°demande</th>
-                    <!-- <th>Type de procedure</th> -->
+                    <th style="font-size:14px;font-weight:bold">N°demande</th>
+                    <!-- <th style="font-size:14px;font-weight:bold">Type de procedure</th> -->
                     <!-- <th>Mode de paiement</th> -->
                     
                     <!-- <th>Nom fournisseur</th> -->
-                    <th>Object de la depense</th>
-                    <th>Montant Tresor</th>
-                     <th>Montant Don</th>
-                      <th>Montant Emprunt</th>
-                      <th>Total</th>
-                      <th>Fichier Joint</th>
-                       <th>Nature de la Pièce</th>
-                       <th>Type de procedure</th>
-                       <th>Decision</th>
-                        <th>Voir Détail</th>
-                        <th colspan="2">Action</th>
+                    <th style="font-size:14px;font-weight:bold">Object de la depense</th>
+                    <th style="font-size:14px;font-weight:bold">Montant Tresor</th>
+                     <th style="font-size:14px;font-weight:bold">Montant Don</th>
+                      <th style="font-size:14px;font-weight:bold">Montant Emprunt</th>
+                      <th style="font-size:14px;font-weight:bold">Total</th>
+                      <!-- <th style="font-size:14px;font-weight:bold">Fichier Joint</th>
+                       <th style="font-size:14px;font-weight:bold">Nature de la Pièce</th> -->
+                       <th style="font-size:14px;font-weight:bold">Type de procedure</th>
+                       <th style="font-size:14px;font-weight:bold">Decision</th>
+                        <th style="font-size:14px;font-weight:bold">Voir Détail</th>
+                        <th  style="font-size:14px;font-weight:bold" colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(type, index) in ListeDEsEntreprise" :key="type.id">
-                    <td style="color:red;font-weight: bold;"
+                  <tr class="odd gradeX" v-for="(type) in ListeDEsEntreprise" :key="type.id">
+                    <td style="color:red;font-weight: bold;font-size:14px"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_dmd_combine || 'Non renseigné'}}</td>
                    
@@ -297,7 +297,7 @@ uniteAdministratives
                     >{{formatageSomme(parseFloat(type.total_general)) || 0}}</td>
                     
                     
-                    <td
+                    <!-- <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >
                     <a v-if="afficheFichierJoint(type.numero_demande)" :href="afficheFichierJoint(type.numero_demande)" class="btn btn-default" target="_blank">
@@ -305,19 +305,19 @@ uniteAdministratives
                                 </span>
                             </a>
                     
-                    </td>
+                    </td> -->
                     
-                     <td style="text-align:center"  >
+                     <!-- <td style="text-align:center"  >
                        
 
  <ul>
-<!--         <li v-for="item in tachePrevuePasMarche(activites.id)" :key="'TACHE'+item.id">{{item.libelle}}</li>-->
+
          <span v-for="(type2) in ListePieceJustificative(type.numero_demande)" :key="type2.id" class="by label">{{type2.libelle}} ( {{type2.reference}}) </span>
 
      </ul>
 
 
-                       </td>       
+                       </td>        -->
                         <td style="text-align:center;font-weight: bold;"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.type_procedure_id || 0}}</td> 
@@ -387,7 +387,6 @@ uniteAdministratives
                     
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Total</td>
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDesDmdParBonCommande))}}</td>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
