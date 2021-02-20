@@ -4,11 +4,11 @@ uniteAdministratives
  
     
       <hr />
-      <div  align="right" style="cursor:pointer;">
+      <!-- <div  align="right" style="cursor:pointer;">
     <button class="btn btn-success" @click.prevent="ajouterDemandeEngage"><i class="icon icon-folder-open"> Nouveau demande d'engagement</i></button>
     
-        </div> 
-      
+        </div>  -->
+      <h3>Detail Demande</h3>
     <table class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -29,14 +29,301 @@ uniteAdministratives
                     class="odd gradeX"
                    
                   >
+                  <td>{{detail_marche.mode}}</td>
+                  <td>{{detail_marche.numero_dmd_combine}}</td>
+                  <td>{{detail_marche.exercice}}</td>
+                  <td>{{detail_marche.section_id}}</td>
+                  <td>{{detail_marche.programme_id}}</td>
+                  <td>{{detail_marche.action_id}}</td>
+                  <td>{{detail_marche.activite_id}}</td>
+                  <td>{{detail_marche.ua_id}}</td>
+                  <td>{{detail_marche.grd_nature_id}}</td>
+                  <td>{{detail_marche.type_procedure_id}}</td>
                   
                   </tr>
                   
                     </tbody> 
                 </table>
-
+<table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                           <th>TYPE ENGAGEMENT</th>
+                         <th>MODE PAIEMENT</th>
+                        <th>REF JURIDIQUE</th>
+                        <th>ENTREPRISE</th>
+                         <th>LIGNE ECONOMIQUE</th>
+                        <th>MONTANT TOTAL</th>
+                        <th>MONTANT TRESOR</th>
+                         <th>MONTANT DON</th>
+                        <th>MONTANT EMPRUNT</th>
+                        <th>BAILLER</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                    class="odd gradeX"
+                   
+                  >
+                  <td>{{detail_marche.type_engagement_id}}</td>
+                   <td>{{detail_marche.mode_paiement_id}}</td>
+                    <td>{{detail_marche.ref_juridique}}</td>
+                     <td>{{detail_marche.entreprise_id}}</td>
+                      <td>{{detail_marche.ligne_economique_id}}</td>
+                       <td>{{detail_marche.total_general}}</td>
+                        <td>{{detail_marche.montant_tresor}}</td>
+                         <td>{{detail_marche.montant_don}}</td>
+                          <td>{{detail_marche.montant_emprunt}}</td>
+                           <td>{{detail_marche.bailler_id}}</td>
+                  </tr>
+                  
+                    </tbody> 
+                </table>
+                  
+<table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                           <th>OBJET DEPENSE</th>
+                         <th>N° OP</th>
+                        <th>AUTRE TYPE ENGAGEMENT</th>
+                        <th>BANQUE</th>
+                         <th>FAMILLE MOTIF</th>
+                        <th>AUTRES MOTIF</th>
+                        <th>MOTIF</th>
+                         <th>DECISION</th>
+                        <th>DATE MOTIF</th>
+                        <th>OBSERVATION</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                    class="odd gradeX"
+                   
+                  >
+                  <td>{{detail_marche.objet_depense}}</td>
+                   <td>{{detail_marche.numero_op_at}}</td>
+                    <td>{{detail_marche.autre_type_engagement}}</td>
+                     <td>{{detail_marche.entreprise_id}}</td>
+                      <td>{{detail_marche.famille_motif_cf}}</td>
+                       <td>{{detail_marche.autre_motif_cf}}</td>
+                        <td>{{detail_marche.motif_cf}}</td>
+                         <td>{{detail_marche.decision_cf}}</td>
+                          <td>{{detail_marche.date_motif}}</td>
+                           <td>{{detail_marche.observation}}</td>
+                  </tr>
+                  
+                    </tbody> 
+                </table>
    
-<notifications  />
+ <h3>Detail Liquidation</h3>
+    <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                           <th>MODE</th>
+                         <th>N°DEMANDE</th>
+                        <th>EXERCICE</th>
+                        <th>MINISTERE/INSTITUTION</th>
+                         <th>PROGRAMME/DOTATION</th>
+                        <th>ACTION</th>
+                        <th>ACTIVITE</th>
+                         <th>UNITE ADMINISTRATIVE</th>
+                        <th>NATURE DE DEPENSE</th>
+                        <th>TYPE DE PROCEDURE</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                    class="odd gradeX"
+                   
+                  >
+                  <td>{{detail_marche.mode}}</td>
+                  <td>{{detail_marche.numero_dmd_combine}}</td>
+                  <td>{{detail_marche.exercice}}</td>
+                  <td>{{detail_marche.section_id}}</td>
+                  <td>{{detail_marche.programme_id}}</td>
+                  <td>{{detail_marche.action_id}}</td>
+                  <td>{{detail_marche.activite_id}}</td>
+                  <td>{{detail_marche.ua_id}}</td>
+                  <td>{{detail_marche.grd_nature_id}}</td>
+                  <td>{{detail_marche.type_procedure_id}}</td>
+                  
+                  </tr>
+                  
+                    </tbody> 
+                </table>
+<table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                           <th>TYPE ENGAGEMENT</th>
+                         <th>MODE PAIEMENT</th>
+                        <th>REF JURIDIQUE</th>
+                        <th>ENTREPRISE</th>
+                         <th>LIGNE ECONOMIQUE</th>
+                        <th>MONTANT TOTAL</th>
+                        <th>MONTANT TRESOR</th>
+                         <th>MONTANT DON</th>
+                        <th>MONTANT EMPRUNT</th>
+                        <th>BAILLER</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                    class="odd gradeX"
+                   
+                  >
+                  <td>{{detail_marche.type_engagement_id}}</td>
+                   <td>{{detail_marche.mode_paiement_id}}</td>
+                    <td>{{detail_marche.ref_juridique}}</td>
+                     <td>{{detail_marche.entreprise_id}}</td>
+                      <td>{{detail_marche.ligne_economique_id}}</td>
+                       <td>{{detail_marche.total_general}}</td>
+                        <td>{{detail_marche.montant_tresor}}</td>
+                         <td>{{detail_marche.montant_don}}</td>
+                          <td>{{detail_marche.montant_emprunt}}</td>
+                           <td>{{detail_marche.bailler_id}}</td>
+                  </tr>
+                  
+                    </tbody> 
+                </table>
+                  
+<table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                           <th>OBJET DEPENSE</th>
+                         <th>N° OP</th>
+                        <th>AUTRE TYPE ENGAGEMENT</th>
+                        <th>BANQUE</th>
+                         <th>FAMILLE MOTIF</th>
+                        <th>AUTRES MOTIF</th>
+                        <th>MOTIF</th>
+                         <th>DECISION</th>
+                        <th>DATE MOTIF</th>
+                        <th>OBSERVATION</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                    class="odd gradeX"
+                   
+                  >
+                  <td>{{detail_marche.objet_depense}}</td>
+                   <td>{{detail_marche.numero_op_at}}</td>
+                    <td>{{detail_marche.autre_type_engagement}}</td>
+                     <td>{{detail_marche.entreprise_id}}</td>
+                      <td>{{detail_marche.famille_motif_cf}}</td>
+                       <td>{{detail_marche.autre_motif_cf}}</td>
+                        <td>{{detail_marche.motif_cf}}</td>
+                         <td>{{detail_marche.decision_cf}}</td>
+                          <td>{{detail_marche.date_motif}}</td>
+                           <td>{{detail_marche.observation}}</td>
+                  </tr>
+                  
+                    </tbody> 
+                </table>
+                 <h3>Detail Mandat</h3>
+    <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                           <th>MODE</th>
+                         <th>N°DEMANDE</th>
+                        <th>EXERCICE</th>
+                        <th>MINISTERE/INSTITUTION</th>
+                         <th>PROGRAMME/DOTATION</th>
+                        <th>ACTION</th>
+                        <th>ACTIVITE</th>
+                         <th>UNITE ADMINISTRATIVE</th>
+                        <th>NATURE DE DEPENSE</th>
+                        <th>TYPE DE PROCEDURE</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                    class="odd gradeX"
+                   
+                  >
+                  <td>{{detail_marche.mode}}</td>
+                  <td>{{detail_marche.numero_dmd_combine}}</td>
+                  <td>{{detail_marche.exercice}}</td>
+                  <td>{{detail_marche.section_id}}</td>
+                  <td>{{detail_marche.programme_id}}</td>
+                  <td>{{detail_marche.action_id}}</td>
+                  <td>{{detail_marche.activite_id}}</td>
+                  <td>{{detail_marche.ua_id}}</td>
+                  <td>{{detail_marche.grd_nature_id}}</td>
+                  <td>{{detail_marche.type_procedure_id}}</td>
+                  
+                  </tr>
+                  
+                    </tbody> 
+                </table>
+<table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                           <th>TYPE ENGAGEMENT</th>
+                         <th>MODE PAIEMENT</th>
+                        <th>REF JURIDIQUE</th>
+                        <th>ENTREPRISE</th>
+                         <th>LIGNE ECONOMIQUE</th>
+                        <th>MONTANT TOTAL</th>
+                        <th>MONTANT TRESOR</th>
+                         <th>MONTANT DON</th>
+                        <th>MONTANT EMPRUNT</th>
+                        <th>BAILLER</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                    class="odd gradeX"
+                   
+                  >
+                  <td>{{detail_marche.type_engagement_id}}</td>
+                   <td>{{detail_marche.mode_paiement_id}}</td>
+                    <td>{{detail_marche.ref_juridique}}</td>
+                     <td>{{detail_marche.entreprise_id}}</td>
+                      <td>{{detail_marche.ligne_economique_id}}</td>
+                       <td>{{detail_marche.total_general}}</td>
+                        <td>{{detail_marche.montant_tresor}}</td>
+                         <td>{{detail_marche.montant_don}}</td>
+                          <td>{{detail_marche.montant_emprunt}}</td>
+                           <td>{{detail_marche.bailler_id}}</td>
+                  </tr>
+                  
+                    </tbody> 
+                </table>
+                  
+<table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                           <th>OBJET DEPENSE</th>
+                         <th>N° OP</th>
+                        <th>AUTRE TYPE ENGAGEMENT</th>
+                        <th>BANQUE</th>
+                         <th>FAMILLE MOTIF</th>
+                        <th>AUTRES MOTIF</th>
+                        <th>MOTIF</th>
+                         <th>DECISION</th>
+                        <th>DATE MOTIF</th>
+                        <th>OBSERVATION</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                    class="odd gradeX"
+                   
+                  >
+                  <td>{{detail_marche.objet_depense}}</td>
+                   <td>{{detail_marche.numero_op_at}}</td>
+                    <td>{{detail_marche.autre_type_engagement}}</td>
+                     <td>{{detail_marche.entreprise_id}}</td>
+                      <td>{{detail_marche.famille_motif_cf}}</td>
+                       <td>{{detail_marche.autre_motif_cf}}</td>
+                        <td>{{detail_marche.motif_cf}}</td>
+                         <td>{{detail_marche.decision_cf}}</td>
+                          <td>{{detail_marche.date_motif}}</td>
+                           <td>{{detail_marche.observation}}</td>
+                  </tr>
+                  
+                    </tbody> 
+                </table>
   </div>
 </template>
   
@@ -117,11 +404,13 @@ quantite: {
       search: ""
     };
   },
-// created() {
-//     this.formData = this.filtre_Stock.find(
-//       Stock => Stock.id == this.$route.params.id
-//     )
-// },
+created() {
+            this.marcheid=this.$route.params.id
+   this.detail_marche = this.gettersDemandeEngagement.find(
+       idmarche => idmarche.id == this.$route.params.id
+         )
+         
+},
   computed: {
     ...mapGetters("SuiviImmobilisation", [
     
@@ -136,7 +425,7 @@ quantite: {
      "getterUa_idImo",
      "ficheArticle"
     ]),
-     ...mapGetters("bienService", ["GroupeUaDemandeEngagement","typeMarches",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+     ...mapGetters("bienService", ["gettersDemandeEngagement","GroupeUaDemandeEngagement","typeMarches",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",

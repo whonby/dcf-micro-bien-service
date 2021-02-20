@@ -67,8 +67,8 @@
                                <div class="control-group">
                             <label class="control-label">Date Decision CF :</label>
                             <div class="controls">
-                              <input type="date" class="span4"  />
-                               <input type="hidden" class="span4"  v-model="editDossierLiquidation.date_motif" />
+                             
+                               <input type="date" class="span4"  v-model="editDossierLiquidation.date_motif" />
                               
                             </div>
                           </div>

@@ -1,7 +1,7 @@
 
 <template>
    <div>
-<div id="DossierLiquidationViseObservation" class="modal hide tailgrand">
+<div id="DossierMandatvisO" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Decision CF</h3>
@@ -13,7 +13,7 @@
               <div class="control-group">
                             <label class="control-label">Décision CF </label>
                             <div class="controls">
-                              <select v-model="editDossierLiquidation.decision_cf" class="span4">
+                              <select v-model="editDossierMandat.decision_cf" class="span4">
                                 <option value=""></option>
                               <option value="8">Visé</option>
                               <option value="9">Visé avec Observation</option>
@@ -30,7 +30,7 @@
                     <div class="control-group">
                             <label class="control-label">Famille de Motif </label>
                             <div class="controls">
-                               <select v-model="editDossierLiquidation.famille_motif_cf" class="span4" :readonly="griserFamilleEtMotif">
+                               <select v-model="editDossierMandat.famille_motif_cf" class="span4" :readonly="griserFamilleEtMotif">
                                  <option value=""></option>
                                 <option v-for="varText in AffichierElementParent" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
@@ -43,9 +43,9 @@
                     <div class="control-group">
                             <label class="control-label">Motif</label>
                             <div class="controls">
-                               <select v-model="editDossierLiquidation.motif_cf" class="span4" :readonly="griserFamilleEtMotif">
+                               <select v-model="editDossierMandat.motif_cf" class="span4" :readonly="griserFamilleEtMotif">
                                  <option value=""></option>
-                                <option v-for="varText in AffichierElementEnfant(editDossierLiquidation.famille_motif_cf)" :key="varText.id"
+                                <option v-for="varText in AffichierElementEnfant(editDossierMandat.famille_motif_cf)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
                             
@@ -58,7 +58,7 @@
                         <div class="control-group">
                             <label class="control-label">Autres Motif</label>
                             <div class="controls">
-                              <textarea  class="span8" row = "6" v-model="editDossierLiquidation.autre_motif_cf" :readonly="griserAutreMotif" >
+                              <textarea  class="span8" row = "6" v-model="editDossierMandat.autre_motif_cf" :readonly="griserAutreMotif" >
                               </textarea>
                             </div>
                           </div>
@@ -67,8 +67,8 @@
                                <div class="control-group">
                             <label class="control-label">Date Decision CF :</label>
                             <div class="controls">
-                             
-                               <input type="date" class="span4"  v-model="editDossierLiquidation.date_motif" />
+                              
+                               <input type="date" class="span4"  v-model="editDossierMandat.date_motif" />
                               
                             </div>
                           </div>
@@ -79,7 +79,7 @@
                         <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
-                              <textarea  class="span8" row = "6" v-model="editDossierLiquidation.observation" :readonly="griserObservation">
+                              <textarea  class="span8" row = "6" v-model="editDossierMandat.observation" :readonly="griserObservation">
                               </textarea>
                             </div>
                           </div>
@@ -134,7 +134,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ModifierDosssierLiquidation()"
+          @click.prevent="ModifierDosssierMandat()"
           class="btn btn-primary"
           href="#"
          
@@ -145,38 +145,38 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>N°demande Engagement</th>
-                    <th>N° de Liquidation</th>
+                    <th>{{macheid}}N°demande Engagement{{recupereIdLiquidation(macheid)}}</th>
+                    <th>N° de Mandat</th>
                     <th>Object de la depense</th>
                     <th>Montant autorisé</th>
                     <!-- <th>Cumul des Engagements</th> -->
                       <th>Montant Liquide</th>
                       
-                       <th>Décision</th>
+                       <th>Decision</th>
                         <th>Voir Détail</th>
-                        <th colspan="3">Action</th>
+                        <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(type) in listeDossierLiquidationViseObservation(macheid)" :key="type.id">
+                  <tr class="odd gradeX" v-for="(type) in listeDossierMandat(macheid)" :key="type.id">
                     <td style="color:red;font-weight: bold;text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{recuppererNumeroDemande(type.dmd_engagement_id) || 'Non renseigné'}}</td>
+                    >{{recuppererNumeroDemande(type.demande_engagement_id) || 'Non renseigné'}}</td>
                     <td style="color:red;font-weight: bold;text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{type.numero_liquidation || 'Non renseigné'}}</td>
+                    >{{type.numero_mandat || 'Non renseigné'}}</td>
                     <td 
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{recuppererOrdreDepense(type.dmd_engagement_id) || 'Non renseigné'}}</td>
+                    >{{recuppererOrdreDepense(type.demande_engagement_id) || 'Non renseigné'}}</td>
                     <td style="color:red;font-weight: bold;text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{formatageSomme(parseFloat(CreditAutorise(recuppererLigneEconomique(type.dmd_engagement_id)))) || 'Non renseigné'}}</td>
+                    >{{formatageSomme(parseFloat(CreditAutorise(recuppererLigneEconomique(type.demande_engagement_id)))) || 'Non renseigné'}}</td>
                     <td style="color:red;font-weight: bold;text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{formatageSomme(parseFloat(CumulDemande(type.dmd_engagement_id))) || 'Non renseigné'}}</td>
+                    >{{formatageSomme(parseFloat(CumulDemande(type.demande_engagement_id))) || 'Non renseigné'}}</td>
                     <!-- <td
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{type.dmd_engagement_id || 'Non renseigné'}}</td> -->
+                    >{{type.demande_engagement_id || 'Non renseigné'}}</td> -->
                     
                     
                    
@@ -220,18 +220,6 @@
                   <span class=""><i class="  icon-eye-open" style="font-weight: bold;"> Voir Détail</i></span>
                    </router-link> 
                     </td>
-                     <td>
-                      <router-link :to="{ name: 'FicheRealiteServiceFait', params: { id: type.id }}"
-                class="btn btn-Success " title="">
-                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;"> Fiche réalite service fait</i></span>
-                   </router-link> 
-                    </td>
-                     <td>
-                      <router-link :to="{ name: 'FicheDeControle', params: { id: type.id }}"
-                class="btn btn-Success " title="">
-                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;"> Fiche de contrôle</i></span>
-                   </router-link> 
-                    </td>
                     <td>
                       <button class="btn btn-danger" @click="supprimerDemandeEngagement(type.id)">
                         <span>
@@ -247,7 +235,7 @@
                     
                     
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Total</td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDossierLiquidation(macheid)))}}</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDossierMandat(macheid)))}}</td>
                     <td></td>
                     <td></td>
                    <td></td>
@@ -277,11 +265,11 @@ export default {
         //   class: ""
         // }
       ],
-      editDossierLiquidation1: {
+      editDossierMandat1: {
       motifcf:""
       },
       
-      editDossierLiquidation: {
+      editDossierMandat: {
       
       },
       search: ""
@@ -289,7 +277,7 @@ export default {
   },
  props:["macheid"],
   computed: {
-    ...mapGetters("bienService", ["gettersDossierLiquidation","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+    ...mapGetters("bienService", ["gettersDossierLiquidation","gettersDossierMandat","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -339,13 +327,13 @@ export default {
        
     ]),
         griserObservation(){
-  return this.editDossierLiquidation.decision_cf != 9
+  return this.editDossierMandat.decision_cf != 9
 },
     griserFamilleEtMotif(){
-  return this.editDossierLiquidation.decision_cf != 3 && this.editDossierLiquidation.decision_cf != 2
+  return this.editDossierMandat.decision_cf != 3 && this.editDossierMandat.decision_cf != 2
 },
 griserAutreMotif(){
-  return this.editDossierLiquidation1.motif != 237 
+  return this.editDossierMandat1.motif != 237 
 },
  AffichierElementEnfant() {
       
@@ -397,18 +385,18 @@ ListePieceJustificative() {
     },
   
 
-   listeDossierLiquidationViseObservation() {
+   listeDossierMandat() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierLiquidation.filter(qtreel => qtreel.dmd_engagement_id == id && this.typeProcedure(qtreel.dmd_engagement_id) == "Engagement par Bien de Commande" && qtreel.decision_cf==9);
+           return this.gettersDossierMandat.filter(qtreel => qtreel.demande_engagement_id == id && this.typeProcedure(qtreel.demande_engagement_id) == "Engagement direct" && qtreel.decision_cf==9);
 
         }
       };
     },
-    SommeDossierLiquidation() {
+    SommeDossierMandat() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierLiquidation.filter(qtreel => this.ua(qtreel.ua_id) == id && this.typeProcedure(qtreel.dmd_engagement_id) == "Engagement par Bien de Commande" && qtreel.decision_cf==8).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0);
+           return this.gettersDossierMandat.filter(qtreel => this.ua(qtreel.ua_id) == id && this.typeProcedure(qtreel.demande_engagement_id) == "Engagement direct" && qtreel.decision_cf==9).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0);
 
         }
       };
@@ -453,7 +441,7 @@ ListePieceJustificative() {
                 return id => {
                     if (id != "") {
                       let valInite=0;
-                        return  this.gettersDemandeEngagement.filter(normeEquipe => normeEquipe.id == id && normeEquipe.decision_cf == 8 || normeEquipe.id == id && normeEquipe.decision_cf == 9).reduce(function(total,currentVal){
+                        return  this.gettersDemandeEngagement.filter(normeEquipe => normeEquipe.id == id).reduce(function(total,currentVal){
                            return total + parseFloat(currentVal.total_general)
                         },valInite);
                     }
@@ -463,7 +451,7 @@ ListePieceJustificative() {
 decision_Cf_liquidation() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.gettersDossierLiquidation.find(qtreel => qtreel.dmd_engagement_id == id);
+           const qtereel = this.gettersDossierMandat.find(qtreel => qtreel.demande_engagement_id == id);
 
       if (qtereel) {
         return qtereel.deci;
@@ -512,6 +500,31 @@ decision_Cf_liquidation() {
         }
       };
     },
+
+    recupereIdDemande() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return ""
+        }
+      };
+    },
+    recupereIdLiquidation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDossierLiquidation.find(qtreel => qtreel.dmd_engagement_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return ""
+        }
+      };
+    },
   },
   methods: {
      ...mapActions("bienService", [
@@ -519,13 +532,37 @@ decision_Cf_liquidation() {
       "modifierPieceJustificative",
       "supprimerPieceJustificative",
       "ajouterDemandeEngagement",
-      "modifierDossierLiquidation",
-      "modifierDemandeEngagement"
+      "modifierDossierMandat",
+      "modifierDemandeEngagement",
+      "modifierDossierLiquidation"
      
     ]),
-     ModifierDosssierLiquidation() {
-      this.modifierDossierLiquidation(this.editDossierLiquidation);
-this.$("#DossierLiquidation").modal('hide');
+     ModifierDosssierMandat() {
+       
+       var modifierLiquidation={
+          
+         id:this.recupereIdLiquidation(this.macheid),
+         	decision_cf:this.editDossierMandat.decision_cf,
+           famille_motif_cf:this.editDossierMandat.famille_motif_cf,
+           autre_motif_cf:this.editDossierMandat.autre_motif_cf,
+           	motif_cf:this.editDossierMandat.motif_cf,
+             date_motif:this.editDossierMandat.date_motif,
+             observation:this.editDossierMandat.observation
+       }
+        var modifierDemande={
+          
+         id:this.recupereIdDemande(this.macheid),
+         	decision_cf:this.editDossierMandat.decision_cf,
+           famille_motif_cf:this.editDossierMandat.famille_motif_cf,
+           autre_motif_cf:this.editDossierMandat.autre_motif_cf,
+           	motif_cf:this.editDossierMandat.motif_cf,
+             date_motif:this.editDossierMandat.date_motif,
+             observation:this.editDossierMandat.observation
+       }
+       this.modifierDossierLiquidation(modifierLiquidation)
+       this.modifierDemandeEngagement(modifierDemande)
+      this.modifierDossierMandat(this.editDossierMandat);
+this.$("#DossierMandatvisO").modal('hide');
      
        
     },
@@ -537,12 +574,12 @@ this.$("#DossierLiquidation").modal('hide');
       });
     },
     afficheDecisionCf(id) {
-      this.$("#DossierLiquidationViseObservation").modal({
+      this.$("#DossierMandatvisO").modal({
         backdrop: "static",
         keyboard: false
       });
 
-       this.editDossierLiquidation = this.listeDossierLiquidationViseObservation(this.macheid).find(item=>item.id==id);
+       this.editDossierMandat = this.listeDossierMandat(this.macheid).find(item=>item.id==id);
     },
   }
 };

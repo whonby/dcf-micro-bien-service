@@ -683,8 +683,37 @@ numeroOrdre
                     <th style="font-size:14px;font-weight:bold">Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="this.formData.type_procedure_id=='Engagement par Bon de Commande'">
                   <tr class="odd gradeX" v-for="(type) in listePieceJustificative(formData.numero_demande)" :key="type.id">
+                    <td style="width:20%"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{type.numero_ordre || 'Non renseigné'}}</td>
+                    <td style="width:30%"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{listePieceJustifica(type.libelle) || 'Non renseigné'}}</td>
+                    <td style="width:20%"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{type.reference || 'Non renseigné'}}</td>
+                    <td style="width:15%"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{formaterDate(type.date_piece) || 'Non renseigné'}}</td>
+<td>
+  <a v-if="afficheFichierJoint(type.numero_demande_engagement,type.numero_ordre)" :href="afficheFichierJoint(type.numero_demande_engagement,type.numero_ordre)" class="btn btn-default" target="_blank">
+                                <span class=""><i class="icon-book"></i>
+                                </span>
+                            </a>
+</td>
+                    <td  style="width:15%">
+                      <button class="btn btn-danger" @click="supprimerPieceJustificative(type.id)">
+                        <span>
+                          <i class="icon icon-trash"> Supprimer</i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody v-if="this.formData.type_procedure_id=='Engagement direct'">
+                  <tr class="odd gradeX" v-for="(type) in listePieceJustificativeDefinitive(formData.numero_demande)" :key="type.id">
                     <td style="width:20%"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_ordre || 'Non renseigné'}}</td>
@@ -715,51 +744,7 @@ numeroOrdre
               </table>
         
             </td>
-             <!-- <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Pièces justificatives (2)</label>
-                <div class="controls">
-                  <input
-                    type="file"
-                    style="border:1px solid #000"
-                   
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-              
-            </td> -->
-             <!-- <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Pièces justificatives (3)</label>
-                <div class="controls">
-                  <input
-                    type="file"
-                    style="border:1px solid #000"
-                   
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-              
-            </td> -->
-             <!-- <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Pièces justificatives (4)</label>
-                <div class="controls">
-                  <input
-                    type="file"
-                    style="border:1px solid #000"
-                   
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-              
-            </td> -->
+            
                      </tr>
                    </table>
                    
@@ -1135,9 +1120,16 @@ numeroOrdre
               <div class="control-group">
             <label class="control-label">Numéro ordre</label>
             <div class="controls">
-              <input
+              <input v-if="(formData.type_procedure_id=='Engagement par Bon de Commande')"
                 type="text"
                :value="numeroOrdre(formData.numero_demande)"
+                class="span5"
+                placeholder="Saisir le libellé"
+                readonly
+              />
+              <input v-if="(formData.type_procedure_id=='Engagement direct')"
+                type="text"
+               :value="numeroOrdreDefinitive(formData.numero_demande)"
                 class="span5"
                 placeholder="Saisir le libellé"
                 readonly
@@ -1250,16 +1242,98 @@ numeroOrdre
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#BONCOMMANDE" v-if="formData1.libelle == 8">  Facture Proforma</a>
+                        <a data-toggle="tab" href="#BONCOMMANDE" v-if="formData1.libelle == 8 && formData.type_procedure_id=='Engagement par Bon de Commande'">  Facture Proforma</a>
+                      </li>
+                      <li class="active">
+                        <a data-toggle="tab" href="#FACTUREDEFINITIVE" v-if="formData1.libelle == 1 && formData.type_procedure_id=='Engagement direct'">  Facture Definitive</a>
                       </li>
                       
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
+                    <div id="FACTUREDEFINITIVE" class="tab-pane active">
+
+<div class="widget-content nopadding">
+                      <div class="" align="right" v-if="formData1.libelle == 1 && formData.type_procedure_id=='Engagement direct'">
+                   <button 
+                        @click.prevent="afficherModalAjouterFacture"
+                       class="btn  btn-success">
+                <span >  <i class="icon icon-plus-sign">Ajouter Facture</i></span>
+       
+                </button>
+                
+
+                   </div>
+                      <div id="printMe">
+              <table class="table table-bordered table-striped" v-if="formData1.libelle == 1 && formData.type_procedure_id=='Engagement direct'">
+                <thead>
+                  <tr>
+                    <th>Designation</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire</th>
+                     <th>Total</th>
+                   <th style="width:10px">Supprimer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="odd gradeX" v-for="(type, index) in listeFacturePiece(formData.numero_demande)" :key="type.id">
+                    <td 
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.designation || 'Non renseigné'}}</td>
+                    <td style="text-align:center;font-weight:bold;"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.quantite || 'Non renseigné'}}</td>
+                    <td style="text-align:center;font-weight:bold;"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.prix_unitaire)) || 'Non renseigné'}}</td>
+<td style="text-align:center;font-weight:bold;"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.total_facture_ht)) || 'Non renseigné'}}</td>
+                    <td>
+                      <button class="btn btn-danger" @click="supprimerDossierFacture(type.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ht</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDesDmdParBonCommande(formData.numero_demande)))}}</td>
+                 <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Taux</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{afficherEnorere}}</td>
+                  <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Tva</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)))*afficherEnorere))}} </td>
+                  <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ttc</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)))+parseFloat((SommeDesDmdParBonCommande(formData.numero_demande)*afficherEnorere))))}} </td>
+                  <td></td>
+                  </tr>
+                </tbody>
+              </table>
+                   </div>
+                    </div>
+                    </div>
                     <div id="BONCOMMANDE" class="tab-pane active">
                   <div class="widget-content nopadding">
-                      <div class="" align="right" v-if="formData1.libelle == 8">
+                      <div class="" align="right" v-if="formData1.libelle == 8 && formData.type_procedure_id=='Engagement par Bon de Commande'">
                    <button 
                         @click.prevent="afficherModalAjouterFacture"
                        class="btn  btn-success">
@@ -1270,7 +1344,7 @@ numeroOrdre
 
                    </div>
                    <div id="printMe">
-              <table class="table table-bordered table-striped" v-if="formData1.libelle == 8">
+              <table class="table table-bordered table-striped" v-if="formData1.libelle == 8 && formData.type_procedure_id=='Engagement par Bon de Commande'">
                 <thead>
                   <tr>
                     <th>Designation</th>
@@ -2164,6 +2238,7 @@ libelleLigneEconomique() {
         }
       };
     },
+    
 listeDesUa() {
       
 
@@ -2200,9 +2275,20 @@ return this.uniteAdministratives
       };
     },
     numeroOrdre() {
+      
       return id => {
         if (id != null && id != "") {
-           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_demande_engagement == id).length + 1 ;
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_demande_engagement == id && qtreel.etat_piece=="proforma").length + 1 ;
+
+      
+        }
+      };
+    },
+    numeroOrdreDefinitive() {
+      
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_demande_engagement == id && qtreel.etat_piece=="definitive").length + 1 ;
 
       
         }
@@ -2215,6 +2301,39 @@ return this.uniteAdministratives
            return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_demande_engagement == id && qtreel.etat_piece=="proforma" );
 
       
+        }
+      };
+    },
+    listePieceJustificativeDefinitive() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_demande_engagement == id && qtreel.etat_piece=="definitive" );
+
+      
+        }
+      };
+    },
+    idEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.numero_marche == id);
+
+      if (qtereel) {
+        return qtereel.entreprise_id
+      }
+      return 0
+        }
+      };
+    },
+    idActeeffect() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.numero_marche == id);
+
+      if (qtereel) {
+        return qtereel.id
+      }
+      return 0
         }
       };
     },
@@ -2287,8 +2406,9 @@ this.$("#ModifierexampleModal").modal('hide');
        
     },
     AjoutePieceJustific() {
-      this.intitule=this.anneeAmort + "" + this.formData.numero_demande
-      var nouvelObjet = {
+      if(this.formData.type_procedure_id=='Engagement par Bon de Commande'){
+ this.intitule=this.anneeAmort + "" + this.formData.numero_demande
+      var nouvelObjetProforma = {
         
         	numero_ordre:this.numeroOrdre(this.formData.numero_demande),
       numero_demande_engagement:this.formData.numero_demande,
@@ -2299,13 +2419,42 @@ this.$("#ModifierexampleModal").modal('hide');
       etat_piece:"proforma"
       };
     
-      this.ajouterPieceJustificative(nouvelObjet)
+      this.ajouterPieceJustificative(nouvelObjetProforma)
       this.ajouterFichierJoin()
    this.$('#exampleModal').modal('hide');
        this.formData1 = {
         
-        libelle: ""
+        numero_demande_engagement:"",
+      numero_dmd_combine:"",
+      libelle:"",
+      reference:"",
+      date_piece:"",
       };
+      }
+     else{
+        this.intitule=this.anneeAmort + "" + this.formData.numero_demande
+      var nouvelObjetdefinitive = {
+        
+        	numero_ordre:this.numeroOrdreDefinitive(this.formData.numero_demande),
+      numero_demande_engagement:this.formData.numero_demande,
+      numero_dmd_combine:this.intitule,
+      libelle:this.formData1.libelle,
+      reference:this.formData1.reference,
+      date_piece:this.formData1.date_piece,
+      etat_piece:"definitive"
+      };
+    
+      this.ajouterPieceJustificative(nouvelObjetdefinitive)
+      this.ajouterFichierJoin()
+   this.$('#exampleModal').modal('hide');
+       this.formData1 = {
+        numero_demande_engagement:"",
+      numero_dmd_combine:"",
+      libelle:"",
+      reference:"",
+      date_piece:"",
+      };
+     }
     },
 
 
@@ -2326,7 +2475,7 @@ rechercheListeMarche(){
          this.formData2.Numéro_cc_fournisseur=acteur.entreprise_id,
          this.formData2.objet_marche=acteur.marche_id,
          this.formData2.ua=acteur.ua_id
-         this.formData2.acte_financier_id=acteur.id
+         
           this.message_mandater=" "
 
         }
@@ -2381,13 +2530,15 @@ rechercheMembreCojo(){
 
 
     ajouterFichierJoin () {
-                const formData = new FormData();
+      if(this.formData.type_procedure_id=='Engagement par Bon de Commande'){
+const formData = new FormData();
                 this.intitule = this.anneeAmort + "" + this.formData.numero_demande
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
     
                 formData.append('numero_dmd_combine', this.intitule);
                 formData.append('numero_demande_engagement', this.formData.numero_demande);
                  formData.append('numero_fichier', this.numeroOrdre(this.formData.numero_demande));
+                 formData.append('etat_piece','proforma')
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
@@ -2395,13 +2546,32 @@ rechercheMembreCojo(){
                 }
                 this.ajouterFichierJointDmd(formData,config)
                 
+      }
+                else{
+                  const formData = new FormData();
+                this.intitule = this.anneeAmort + "" + this.formData.numero_demande
+                formData.append('fichier', this.selectedFile, this.selectedFile.name);
+    
+                formData.append('numero_dmd_combine', this.intitule);
+                formData.append('numero_demande_engagement', this.formData.numero_demande);
+                 formData.append('numero_fichier', this.numeroOrdre(this.formData.numero_demande));
+                 formData.append('etat_piece','definitive')
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+                this.ajouterFichierJointDmd(formData,config)
+                
+                }
                
 
             },
 
 ajouterFacture(){
-              this.intitule=this.anneeAmort + "" + this.formData.numero_demande
-              var NouveauObjet = {
+  if(this.formData.type_procedure_id=='Engagement par Bon de Commande'){
+this.intitule=this.anneeAmort + "" + this.formData.numero_demande
+              var nouvelObjetproforma = {
         ...this.FormDataFacture,
           total_facture_ht:this.MontantFactureHt,
         	numero_dmd_engagement:this.intitule,
@@ -2409,13 +2579,33 @@ ajouterFacture(){
           etat_acticle:"proforma"
       };
     
-      this.ajouterDossierFacture(NouveauObjet)
+      this.ajouterDossierFacture(nouvelObjetproforma)
        this.FormDataFacture={
     designation:"",
     quantite:"0",
     prix_unitaire:"0",
     total_facture_ht:"0"
   }
+  }
+  else{
+    this.intitule=this.anneeAmort + "" + this.formData.numero_demande
+              var nouvelObjetdefinitive = {
+        ...this.FormDataFacture,
+          total_facture_ht:this.MontantFactureHt,
+        	numero_dmd_engagement:this.intitule,
+          numero_dmd:this.formData.numero_demande,
+          etat_acticle:"definitive"
+      };
+    
+      this.ajouterDossierFacture(nouvelObjetdefinitive)
+       this.FormDataFacture={
+    designation:"",
+    quantite:"0",
+    prix_unitaire:"0",
+    total_facture_ht:"0"
+  }
+  }
+              
             },
 AjouterDemandeEngagement() {
   this.intitule=this.anneeAmort + "" + this.formData.numero_demande
@@ -2432,7 +2622,9 @@ var nouvelObjet1 = {
     exercice:this.anneeAmort,
     section_id:this.idSection(this.formData.ligne_economique_id),
     uaBeneficiaire_id:this.formData.uaBeneficiaire_id,
-    	entreprise_id:this.formData2.entrprise_id
+    	entreprise_id:this.idEntreprise(this.formData2.acte_financier_id),
+           acte_financier_id:this.idActeeffect(this.formData2.acte_financier_id)
+            ()
       };
     
       this.ajouterDemandeEngagement(nouvelObjet1)

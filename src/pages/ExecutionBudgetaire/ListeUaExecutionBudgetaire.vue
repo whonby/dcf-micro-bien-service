@@ -197,6 +197,7 @@ uniteAdministratives
    
     <div >
       <hr />
+      <h2 style="text-align:center">MES DOSSIERS DE DEMANDES D'ENGAGEMENTS</h2>
       <table class="table table-bordered table-striped">
         <tr>
           <td>
@@ -242,7 +243,7 @@ uniteAdministratives
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
-                <i class="icon-th">DEMANDE D'ENGAGEMENT</i>
+                <i class="icon-th"></i>DEMANDE D'ENGAGEMENT
               </span>
               <!-- <h5>Gestion du Patrimoine</h5> -->
               <!-- <div align="right">
@@ -269,7 +270,9 @@ uniteAdministratives
                       <!-- <th style="font-size:14px;font-weight:bold">Fichier Joint</th>
                        <th style="font-size:14px;font-weight:bold">Nature de la Pièce</th> -->
                        <th style="font-size:14px;font-weight:bold">Type de procedure</th>
-                       <th style="font-size:14px;font-weight:bold">Decision</th>
+                       <th style="font-size:14px;font-weight:bold">Demande</th>
+                       <th style="font-size:14px;font-weight:bold" title="">Liquidation</th>
+                       <th style="font-size:14px;font-weight:bold">Mandat</th>
                         <th style="font-size:14px;font-weight:bold">Voir Détail</th>
                         <th  style="font-size:14px;font-weight:bold" colspan="2">Action</th>
                   </tr>
@@ -355,6 +358,98 @@ uniteAdministratives
                     
                       </button>
                     </td>
+                   <td  v-if="type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Marche'">
+                        <button v-if="type.decision_cf == 8"  class="btn  btn-success"  >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="type.decision_cf == 2" class="btn  btn-warning"  >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="type.decision_cf == 3" class="btn  btn-danger"  >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                       <button v-else-if="type.decision_cf == 9"  class="btn  btn-success"  >                        
+                     
+                      <span>Visé avec observation</span>
+                      
+                      </button>
+                      <template>
+                        <button v-if="type.id == afficheDecisionLiquidation(type.id) && type.decision_cf == 0" class="btn  btn-info" @click="afficheDecisionCf(type.id)" >                        
+                     
+                      
+                       <span>Attente</span>
+                      
+                    
+                      </button>
+                     <button  v-else-if="type.id != afficheDecisionLiquidation(type.id) && type.decision_cf != 0" class="btn  btn-danger" @click="ajouterLiquidation" >                        
+                     
+                      
+                       <span>Ajouter</span>
+                      
+                    
+                      </button>
+                      <span  v-else >                        
+                     
+                      </span>
+                      </template>
+                    </td>
+                    <td v-else></td>
+                    <td  v-if="type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Marche'">
+                        <button v-if="type.decision_cf == 8"  class="btn  btn-success"  >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="type.decision_cf == 2" class="btn  btn-warning"  >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="type.decision_cf == 3" class="btn  btn-danger"  >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                       <button v-else-if="type.decision_cf == 9"  class="btn  btn-success"  >                        
+                     
+                      <span>Visé avec observation</span>
+                      
+                      </button>
+                    <template>
+                        <button v-if="type.id == afficheDecisionMandat(type.id) && type.decision_cf == 0" class="btn  btn-info"  >                        
+                     
+                      
+                       <span>Attente</span>
+                      
+                    
+                      </button>
+                      <button  v-else-if="type.id != afficheDecisionLiquidation(type.id) && type.decision_cf != 0" class="btn  btn-danger" @click="ajouterLiquidation" >                        
+                     
+                      
+                       <span>Ajouter</span>
+                      
+                    
+                      </button>
+                      <span  v-else >                        
+                     
+                      </span>
+                      </template>
+                    </td>
+                    <td v-else></td>
                    <td>
                       <router-link :to="{ name: 'voitDetailBonCmmande', params: { id: type.id }}"
                 class="btn btn-Success " title="">
@@ -463,7 +558,7 @@ export default {
   },
  props:["macheid"],
   computed: {
-    ...mapGetters("bienService", ["gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+    ...mapGetters("bienService", ["gettersDossierMandat","gettersDossierLiquidation","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -512,7 +607,30 @@ export default {
       // "sections"
        
     ]),
+    afficheDecisionMandat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDossierMandat.find(qtreel => qtreel.demande_engagement_id == id);
 
+      if (qtereel) {
+        return qtereel.demande_engagement_id;
+      }
+      return 0
+        }
+      };
+    },
+afficheDecisionLiquidation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDossierLiquidation.find(qtreel => qtreel.dmd_engagement_id == id);
+
+      if (qtereel) {
+        return qtereel.dmd_engagement_id;
+      }
+      return 0
+        }
+      };
+    },
 ListeDEsEntreprise(){
 
                 let vM=this;
@@ -685,6 +803,12 @@ this.$("#demandeVise").modal('hide');
 
        this.editDemandeEngagement = this.gettersDemandeEngagement.find(item=>item.id==id);
     },
+      ajouterMandat(){
+                this.$router.push({ name: 'AjouterMantdatement' })
+            },
+     ajouterLiquidation(){
+                this.$router.push({ name: 'AjouterLiquidation' })
+            },
     ajouterDemandeEngage(){
                 this.$router.push({ name: 'AjouterDemandeEngagement' })
             },
