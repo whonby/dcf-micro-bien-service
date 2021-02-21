@@ -270,9 +270,11 @@ uniteAdministratives
                       <!-- <th style="font-size:14px;font-weight:bold">Fichier Joint</th>
                        <th style="font-size:14px;font-weight:bold">Nature de la Pièce</th> -->
                        <th style="font-size:14px;font-weight:bold">Type de procedure</th>
+                       <th style="font-size:14px;font-weight:bold">Type d'engagement</th>
                        <th style="font-size:14px;font-weight:bold">Demande</th>
                        <th style="font-size:14px;font-weight:bold" title="">Liquidation</th>
                        <th style="font-size:14px;font-weight:bold">Mandat</th>
+                       <th style="font-size:14px;font-weight:bold">Op Systeme</th>
                         <th style="font-size:14px;font-weight:bold">Voir Détail</th>
                         <th  style="font-size:14px;font-weight:bold" colspan="2">Action</th>
                   </tr>
@@ -324,7 +326,9 @@ uniteAdministratives
                         <td style="text-align:center;font-weight: bold;"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.type_procedure_id || 0}}</td> 
-                               
+                                <td style="text-align:center;font-weight: bold;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{type.type_engagement_id || 0}}</td>
                     <td >
                         <button v-if="type.decision_cf == 8"  class="btn  btn-success" @click="afficheDecisionCf(type.id)" >                        
                      
@@ -358,7 +362,7 @@ uniteAdministratives
                     
                       </button>
                     </td>
-                   <td  v-if="type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Marche'">
+                   <td  v-if="type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Marche' || type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Régie davances-reservation des crédit'">
                         <button v-if="type.decision_cf == 8"  class="btn  btn-success"  >                        
                      
                       <span    >Visé</span>
@@ -391,7 +395,7 @@ uniteAdministratives
                       
                     
                       </button>
-                     <button  v-else-if="type.id != afficheDecisionLiquidation(type.id) && type.decision_cf != 0" class="btn  btn-danger" @click="ajouterLiquidation" >                        
+                     <button  v-else-if="type.id != afficheDecisionLiquidation(type.id) " class="btn  btn-danger" @click="ajouterLiquidation" >                        
                      
                       
                        <span>Ajouter</span>
@@ -437,7 +441,7 @@ uniteAdministratives
                       
                     
                       </button>
-                      <button  v-else-if="type.id != afficheDecisionLiquidation(type.id) && type.decision_cf != 0" class="btn  btn-danger" @click="ajouterLiquidation" >                        
+                      <button  v-else-if="type.id != afficheDecisionLiquidation(type.id) " class="btn  btn-danger" @click="ajouterLiquidation" >                        
                      
                       
                        <span>Ajouter</span>
@@ -450,6 +454,58 @@ uniteAdministratives
                       </template>
                     </td>
                     <td v-else></td>
+                     <td  v-if="type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Régie davances-reservation des crédit'">
+                        <button v-if="type.decision_cf == 8"  class="btn  btn-success"  >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="type.decision_cf == 2" class="btn  btn-warning"  >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="type.decision_cf == 3" class="btn  btn-danger"  >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                       <button v-else-if="type.decision_cf == 9"  class="btn  btn-success"  >                        
+                     
+                      <span>Visé avec observation</span>
+                      
+                      </button>
+                    <template>
+                        <button v-if="type.id == afficheDecisionMandat(type.id) && type.decision_cf == 0" class="btn  btn-info"  >                        
+                     
+                      
+                       <span>Attente</span>
+                      
+                    
+                      </button>
+                      <button  v-else-if="type.id != afficheDecisionMandat(type.id) && type.decision_cf != 0" class="btn  btn-danger" @click="ajouterOpSysteme" >                        
+                     
+                      
+                       <span>Ajouter</span>
+                      
+                    
+                      </button>
+                      <span  v-else >                        
+                      <button   class="btn  btn-danger" @click="ajouterOpSysteme" >                        
+                     
+                      
+                       <span>Ajouter</span>
+                      
+                    
+                      </button>
+                      </span>
+                      </template>
+                    </td>
+                    <td v-else></td>
                    <td>
                       <router-link :to="{ name: 'voitDetailBonCmmande', params: { id: type.id }}"
                 class="btn btn-Success " title="">
@@ -457,13 +513,13 @@ uniteAdministratives
                    </router-link> 
                     </td>
                       <td>
-                      <router-link :to="{ name: 'executionBudgetaire', params: { id: type.id }}" v-if="afficheIconeBonCommande(type.id)=='Engagement par Bien de Commande'" style="font-weight: bold;background: green;color:#fff"
+                      <router-link :to="{ name: 'executionBudgetaire', params: { id: type.id }}" v-if="afficheIconeBonCommande(type.id)=='Engagement par Bon de Commande'" style="font-weight: bold;background: green;color:#fff"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;color:#fff"> Etape par Bon Commande</i></span>
+                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;color:#fff"> Etape</i></span>
                    </router-link> 
                    <router-link :to="{ name: 'procedureEngaementDirect', params: { id: type.id }}" v-else style="font-weight: bold;background: red;color:#fff"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;color:#fff"> Etape Engagement Direct</i></span>
+                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;color:#fff"> Etape</i></span>
                    </router-link> 
                     </td>
                     <td>
@@ -487,6 +543,10 @@ uniteAdministratives
                     <td></td>
                     <td></td>
                     <td></td>
+                      <td></td>
+                    <td></td>
+                    <td></td>
+                      <td></td>
                     
                   </tr>
                 </tbody>
@@ -803,6 +863,9 @@ this.$("#demandeVise").modal('hide');
 
        this.editDemandeEngagement = this.gettersDemandeEngagement.find(item=>item.id==id);
     },
+    ajouterOpSysteme(){
+                this.$router.push({ name: 'AjouterOrdrePaiement' })
+            },
       ajouterMandat(){
                 this.$router.push({ name: 'AjouterMantdatement' })
             },

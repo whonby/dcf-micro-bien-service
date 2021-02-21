@@ -235,7 +235,7 @@ numeroOrdre
                     <select v-model="formData.type_engagement_id" class="span" style="border:1px solid #000">
                       <option value=""></option>
                       <option value="Marche">Marche</option>
-                      <option value="Régie d'avances-reservation des crédit">Régie d'avances-reservation des crédit</option>
+                      <option value="Régie davances-reservation des crédit">Régie d'avances-reservation des crédit</option>
                       <option value="Régularisation d'ordre de paiement">Régularisation d'ordre de paiement(Op)</option>
                       <option value="Régularisation avances de trésorerie">Régularisation avances de trésorerie(AT)</option>
                       <option value="Autre">Autre</option>
@@ -246,13 +246,13 @@ numeroOrdre
               
           <td colspan="">
                 <div class="control-group">
-                  <label class="control-label">Numéro du Marché</label>
+                  <label class="control-label">Numéro du Marché{{cumulMarche(formData2.numero_marche)}}</label>
                   <div class="controls">
                    
                      <input
                     type="text"
                     style="border:1px solid #000"
-                   v-model="formData2.acte_financier_id"
+                   v-model="formData2.numero_marche"
                     class="span"
                    
                     v-on:keyup="rechercheListeMarche()"
@@ -281,7 +281,7 @@ numeroOrdre
          
           </tr>
           <tr>
-            <td colspan="3">
+            <td colspan="2">
               <div class="control-group">
                 <label class="control-label">Objet de marché</label>
                 <div class="controls">
@@ -296,7 +296,22 @@ numeroOrdre
               </div>
               
             </td>
-           
+           <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Montant du marché</label>
+                <div class="controls">
+                  <!-- <input
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="formData2.montant_marché"
+                    class="span"
+                    readonly
+                  /> -->
+                  <money v-model="formData2.montant_marché" readOnly  style="text-align:left;color:red"  class="span"></money>
+                </div>
+              </div>
+              
+            </td>
           </tr>
           <tr>
             <td>
@@ -1781,7 +1796,7 @@ components: {
                 },
                 formData8:{},
                 formData2:{
-                 acte_financier_id:""
+                 numero_marche:""
                 },
                 FormDataFacture:{},
                 message_mandater:""
@@ -1804,7 +1819,7 @@ components: {
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
 
-...mapGetters("bienService", ["gettersDossierFacturePiece","typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+...mapGetters("bienService", ["gettersDossierMandat","gettersDossierFacturePiece","typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -1825,6 +1840,28 @@ components: {
       "afficheLocalisationGeoNiveau5"
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+
+cumulMarche() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersDossierMandat.filter(qtreel => this.numeroMarche(qtreel.demande_engagement_id) == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_engage), 0).toFixed(0);
+
+        }
+      };
+    },
+
+numeroMarche() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_marche;
+      }
+      return ""
+        }
+      };
+    },
 ListeDesMarcheAtribuer() {
       return (id) => {
         if (id != null && id != "") {
@@ -2465,17 +2502,17 @@ this.$("#ModifierexampleModal").modal('hide');
 rechercheListeMarche(){
       // console.log(this.formMandater.matricule_m)
 
-      let objetMandater=this.acteEffetFinanciers.filter(item=>item.numero_marche==this.formData2.acte_financier_id)
+      let objetMandater=this.acteEffetFinanciers.filter(item=>item.numero_marche==this.formData2.numero_marche)
       // console.log(objetMandater)
       if(objetMandater!=undefined){
         if (objetMandater.length==1){
-          let acteur= this.acteEffetFinanciers.find(item=>item.numero_marche==this.formData2.acte_financier_id)
+          let acteur= this.acteEffetFinanciers.find(item=>item.numero_marche==this.formData2.numero_marche)
           this.formData2.numero_cc_fournisseur_nom=acteur.entreprise_id,
           this.formData2.numero_cc_fournisseur_adresse=acteur.entreprise_id,
          this.formData2.Numéro_cc_fournisseur=acteur.entreprise_id,
          this.formData2.objet_marche=acteur.marche_id,
-         this.formData2.ua=acteur.ua_id
-         
+         this.formData2.ua=acteur.ua_id,
+         this.formData2.montant_marché=acteur.montant_act
           this.message_mandater=" "
 
         }
@@ -2484,7 +2521,7 @@ rechercheListeMarche(){
           this.formData2.numero_cc_fournisseur_nom=""
         }
       }
-      if(this.formData2.acte_financier_id==""){
+      if(this.formData2.numero_marche==""){
         this.formData2.numero_cc_fournisseur_nom==""
           this.formData2.numero_cc_fournisseur_adresse==""
          this.formData2.Numéro_cc_fournisseur==""
@@ -2622,9 +2659,9 @@ var nouvelObjet1 = {
     exercice:this.anneeAmort,
     section_id:this.idSection(this.formData.ligne_economique_id),
     uaBeneficiaire_id:this.formData.uaBeneficiaire_id,
-    	entreprise_id:this.idEntreprise(this.formData2.acte_financier_id),
-           acte_financier_id:this.idActeeffect(this.formData2.acte_financier_id)
-            ()
+    	entreprise_id:this.idEntreprise(this.formData2.numero_marche),
+           numero_marche:this.formData2.numero_marche
+            
       };
     
       this.ajouterDemandeEngagement(nouvelObjet1)

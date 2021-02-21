@@ -11,7 +11,8 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#MANDATEMENT">MANDATEMENT</a>
+                        <a data-toggle="tab" href="#MANDATEMENT" v-if="detail_marche.type_engagement_id=='Marche'">MANDATEMENT</a>
+                        <a data-toggle="tab" href="#MANDATEMENT" v-if="detail_marche.type_engagement_id=='Régie davances-reservation des crédit'">OP SYSTEME</a>
                       </li>
                       
                      

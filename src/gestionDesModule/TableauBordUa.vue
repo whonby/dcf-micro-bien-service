@@ -399,8 +399,7 @@
 
 
             </div>
-            <!--------------------FIN TABLEAU BORD FIN ETAT MARCHE--------------->
-
+          
 
 
 
@@ -525,7 +524,7 @@ console.log(this.listeMarchStatueExecuteAcheve)
 
             ]),
 
-            ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise","mandats",
+            ...mapGetters("bienService", ["gettersDemandeEngagement","gettersDossierMandat",'marches',"engagements","getMandatPersonnaliserVise","mandats",
                 "getterImageMarche","acteEffetFinanciers","getActeEffetFinancierPersonnaliser45","typeMarches","avenants",]),
             ...mapGetters("Utilisateurs", ["getterUtilisateur","getterRoles"]),
 
@@ -551,15 +550,39 @@ console.log(this.listeMarchStatueExecuteAcheve)
                 let montant_initial=0;
                 let vm=this;
                 this.filtre_unite_admin.forEach(function (value) {
-                    let budgetMontant=vm.mandats.filter(item => {
-                        if(item.exercice_budget==vm.anneeAmort && item.ua_id==value.id){
+                    let budgetMontant=vm.gettersDossierMandat.filter(item => {
+                        if(this.exo(item.demande_engagement_id)==vm.anneeAmort && this.DemandeEngagement(item.demande_engagement_id)==value.id){
                             return item
                         }
-                    }).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),0)
+                    }).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_engage),0)
                     montant_initial=parseFloat(montant_initial) + budgetMontant
                 })
                 return montant_initial
             },
+               exo() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.exercice;
+      }
+      return 0
+        }
+      };
+    },
+            DemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ua_id;
+      }
+      return 0
+        }
+      };
+    },
             budgetDisponibleUA(){
                 return parseFloat(this.budgetInitaile) - parseFloat(this.executeBudget)
             },

@@ -153,7 +153,7 @@
                       <th>Montant Liquide</th>
                       
                        <th>Décision</th>
-                        <th>Voir Détail</th>
+                        <!-- <th>Voir Détail</th> -->
                         <th colspan="3">Action</th>
                   </tr>
                 </thead>
@@ -233,7 +233,7 @@
                    </router-link> 
                     </td>
                     <td>
-                      <button class="btn btn-danger" @click="supprimerDemandeEngagement(type.id)">
+                      <button class="btn btn-danger" @click="supprimerDossierLiquidation(type.id)">
                         <span>
                           <i class="icon icon-trash"></i> Supprimer
                         </span>
@@ -400,7 +400,7 @@ ListePieceJustificative() {
    listeDossierLiquidationViseObservation() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierLiquidation.filter(qtreel => qtreel.dmd_engagement_id == id && this.typeProcedure(qtreel.dmd_engagement_id) == "Engagement par Bien de Commande" && qtreel.decision_cf==9);
+           return this.gettersDossierLiquidation.filter(qtreel => qtreel.dmd_engagement_id == id && this.typeProcedure(qtreel.dmd_engagement_id) == "Engagement par Bon de Commande" && qtreel.decision_cf==9);
 
         }
       };
@@ -408,7 +408,7 @@ ListePieceJustificative() {
     SommeDossierLiquidation() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierLiquidation.filter(qtreel => this.ua(qtreel.ua_id) == id && this.typeProcedure(qtreel.dmd_engagement_id) == "Engagement par Bien de Commande" && qtreel.decision_cf==8).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0);
+           return this.gettersDossierLiquidation.filter(qtreel => this.ua(qtreel.ua_id) == id && this.typeProcedure(qtreel.dmd_engagement_id) == "Engagement par Bon de Commande" && qtreel.decision_cf==8).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0);
 
         }
       };
@@ -520,7 +520,8 @@ decision_Cf_liquidation() {
       "supprimerPieceJustificative",
       "ajouterDemandeEngagement",
       "modifierDossierLiquidation",
-      "modifierDemandeEngagement"
+      "modifierDemandeEngagement",
+      "supprimerDossierLiquidation"
      
     ]),
      ModifierDosssierLiquidation() {

@@ -1087,6 +1087,18 @@ recupereIdDemandeEngagement() {
         }
       };
     },
+    montantEngage() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.numero_dmd_combine == id);
+
+      if (qtereel) {
+        return qtereel.total_general;
+      }
+      return 0
+        }
+      };
+    },
     recupereNumeroDemande() {
       return id => {
         if (id != null && id != "") {
@@ -1176,7 +1188,7 @@ AjouterLiquidation() {
          var nouvelObjet = {
         ...this.formMandat,
         demande_engagement_id: this.recupereIdDemandeEngagement(this.formData5.numeroDemande),
-        
+        montant_engage:this.montantEngage(this.formData5.numeroDemande)
         
       };
       this.ajouterDossierMandat(nouvelObjet);

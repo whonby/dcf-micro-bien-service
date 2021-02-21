@@ -145,16 +145,17 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>{{macheid}}N°demande Engagement{{recupereIdLiquidation(macheid)}}</th>
-                    <th>N° de Mandat</th>
+                    <th>N°demande Engagement</th>
+                   <th v-if="detail_marche1.type_engagement_id=='Marche'">N° de Mandat</th>
+                    <th v-if="detail_marche1.type_engagement_id=='Régie davances-reservation des crédit'">N°OP Systeme</th>
                     <th>Object de la depense</th>
                     <th>Montant autorisé</th>
                     <!-- <th>Cumul des Engagements</th> -->
                       <th>Montant Liquide</th>
                       
                        <th>Decision</th>
-                        <th>Voir Détail</th>
-                        <th>Action</th>
+                        <!-- <th>Voir Détail</th>
+                        <th>Action</th> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -162,9 +163,12 @@
                     <td style="color:red;font-weight: bold;text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{recuppererNumeroDemande(type.demande_engagement_id) || 'Non renseigné'}}</td>
-                    <td style="color:red;font-weight: bold;text-align:center"
+                     <td style="color:red;font-weight: bold;text-align:center" v-if="detail_marche1.type_engagement_id=='Marche'"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_mandat || 'Non renseigné'}}</td>
+                    <td style="color:red;font-weight: bold;text-align:center" v-else
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{type.numero_op || 'Non renseigné'}}</td>
                     <td 
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{recuppererOrdreDepense(type.demande_engagement_id) || 'Non renseigné'}}</td>
@@ -214,19 +218,19 @@
                     
                       </button>
                     </td>
-                   <td>
+                   <!-- <td>
                       <router-link :to="{ name: 'voitDetailBonCmmande', params: { id: type.id }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="  icon-eye-open" style="font-weight: bold;"> Voir Détail</i></span>
                    </router-link> 
-                    </td>
-                    <td>
+                    </td> -->
+                    <!-- <td>
                       <button class="btn btn-danger" @click="supprimerDemandeEngagement(type.id)">
                         <span>
                           <i class="icon icon-trash"></i> Supprimer
                         </span>
                       </button>
-                    </td>
+                    </td> -->
                   </tr>
                   <!-- <tr>
                     <td></td>
@@ -276,6 +280,13 @@ export default {
     };
   },
  props:["macheid"],
+ created() {
+            this.marcheid=this.$route.params.id
+   this.detail_marche1 = this.gettersDemandeEngagement.find(
+       idmarche => idmarche.id == this.$route.params.id
+         )
+         
+},
   computed: {
     ...mapGetters("bienService", ["gettersDossierLiquidation","gettersDossierMandat","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",

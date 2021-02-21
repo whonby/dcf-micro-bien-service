@@ -153,8 +153,8 @@
                       <th>Montant Liquide</th>
                       
                        <th>Decision</th>
-                        <th>Voir Détail</th>
-                        <th>Action</th>
+                      <!-- <th>Voir Détail</th> -->
+                         <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -214,14 +214,14 @@
                     
                       </button>
                     </td>
-                   <td>
+                   <!-- <td>
                       <router-link :to="{ name: 'voitDetailBonCmmande', params: { id: type.id }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="  icon-eye-open" style="font-weight: bold;"> Voir Détail</i></span>
                    </router-link> 
-                    </td>
+                    </td> -->
                     <td>
-                      <button class="btn btn-danger" @click="supprimerDemandeEngagement(type.id)">
+                      <button class="btn btn-danger" @click="supprimerDossierLiquidation(type.id)">
                         <span>
                           <i class="icon icon-trash"></i> Supprimer
                         </span>
@@ -388,7 +388,7 @@ ListePieceJustificative() {
    listeDossierLiquidation() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierLiquidation.filter(qtreel => qtreel.dmd_engagement_id == id && this.typeProcedure(qtreel.dmd_engagement_id) == "Engagement par Bien de Commande" && qtreel.decision_cf==0);
+           return this.gettersDossierLiquidation.filter(qtreel => qtreel.dmd_engagement_id == id && this.typeProcedure(qtreel.dmd_engagement_id) == "Engagement par Bon de Commande" && qtreel.decision_cf==0);
 
         }
       };
@@ -396,7 +396,7 @@ ListePieceJustificative() {
     SommeDossierLiquidation() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierLiquidation.filter(qtreel => this.ua(qtreel.ua_id) == id && this.typeProcedure(qtreel.dmd_engagement_id) == "Engagement par Bien de Commande" && qtreel.decision_cf==0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0);
+           return this.gettersDossierLiquidation.filter(qtreel => this.ua(qtreel.ua_id) == id && this.typeProcedure(qtreel.dmd_engagement_id) == "Engagement par Bon de Commande" && qtreel.decision_cf==0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0);
 
         }
       };
@@ -508,7 +508,8 @@ decision_Cf_liquidation() {
       "supprimerPieceJustificative",
       "ajouterDemandeEngagement",
       "modifierDossierLiquidation",
-      "modifierDemandeEngagement"
+      "modifierDemandeEngagement",
+      "supprimerDossierLiquidation"
      
     ]),
      ModifierDosssierLiquidation() {

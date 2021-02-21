@@ -154,12 +154,24 @@ export default {
  budgetConsommerBienService45(){
   return id => {
     if(id !=""){
-    return this.gettersDemandeEngagement.filter(element => element.ua_id == id  && element.exercice == this.anneeAmort &&  element.decision_cf == this.MandatValideParCf(element.id)).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+    return this.gettersDossierMandat.filter(element => this.DemandeEngagement(element.demande_engagement_id) == id   &&  element.decision_cf == 8 || this.DemandeEngagement(element.demande_engagement_id) == id   &&  element.decision_cf == 9).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_engage), 0).toFixed(0); 
       
     }
     
   }
 },
+DemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ua_id;
+      }
+      return 0
+        }
+      };
+    },
 MandatValideParCf() {
       return id => {
         if (id != null && id != "") {
@@ -379,7 +391,7 @@ budgetConsommerTransfert(){
 
 
 budgetConsommerDesModule() {
-      const val = parseInt(this.budgetConsommerBienService(this.groupe.id)) + parseInt(this.budgetConsommerTransfert(this.groupe.id)) + parseInt(this.budgetConsommerInvertissement(this.groupe.id))+parseInt(this.budgetConsommerPersonnel(this.groupe.id));
+      const val = parseInt(this.budgetConsommerBienService45(this.groupe.id)) + parseInt(this.budgetConsommerTransfert(this.groupe.id)) + parseInt(this.budgetConsommerInvertissement(this.groupe.id))+parseInt(this.budgetConsommerPersonnel(this.groupe.id));
       
        if (val) {
         return parseInt(val).toFixed(0);
