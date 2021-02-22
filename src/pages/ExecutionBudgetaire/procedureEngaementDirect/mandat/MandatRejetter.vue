@@ -163,7 +163,7 @@
                     <td style="color:red;font-weight: bold;text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{recuppererNumeroDemande(type.demande_engagement_id) || 'Non renseigné'}}</td>
-                     <td style="color:red;font-weight: bold;text-align:center" v-if="detail_marche1.type_engagement_id=='Marche'"
+                     <td style="color:red;font-weight: bold;text-align:center" v-if="detail_marche1.type_engagement_id!='Régie davances-reservation des crédit'"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_mandat || 'Non renseigné'}}</td>
                     <td style="color:red;font-weight: bold;text-align:center" v-else

@@ -126,7 +126,13 @@ import procedureEngaementDirect from "../../pages/ExecutionBudgetaire/procedureE
 import voitDetailBonCmmande from "../../pages/ExecutionBudgetaire/Voirdetail/voitDetailBonCmmande.vue"
 import FicheRealiteServiceFait from "../../pages/ExecutionBudgetaire/procedureParBonCommande/Liquidation/FicheRealiteServiceFait.vue"
 import FicheDeControle from "../../pages/ExecutionBudgetaire/procedureParBonCommande/Liquidation/FicheDeControle.vue"
+import AutresDepense from "../../pages/bien_service/AutreDepense/AutresDepense.vue";
 const BienServiceRoutes = [
+    {
+        path: "/AutresDepense",
+        name: "AutresDepense",
+        component: AutresDepense
+    },
     {
         path: "/FicheDeControle/:id",
         name: "FicheDeControle",

@@ -596,7 +596,7 @@ numeroOrdrePiece
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -629,7 +629,7 @@ numeroOrdrePiece
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -662,7 +662,7 @@ numeroOrdrePiece
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>

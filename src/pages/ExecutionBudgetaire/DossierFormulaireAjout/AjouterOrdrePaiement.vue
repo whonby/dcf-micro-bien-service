@@ -74,7 +74,7 @@
                   <input
                     type="text"
                     style="border:1px solid #000"
-                   v-model="formMandat.numero_op"
+                   v-model="formMandat.numero_op_systeme"
                     class="span" 
                     
                   />
@@ -1099,6 +1099,18 @@ recupereIdDemandeEngagement() {
         }
       };
     },
+    montantEngage() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.numero_dmd_combine == id);
+
+      if (qtereel) {
+        return qtereel.total_general;
+      }
+      return 0
+        }
+      };
+    },
         },
 
 methods: {
@@ -1176,7 +1188,7 @@ AjouterLiquidation() {
          var nouvelObjet = {
         ...this.formMandat,
         demande_engagement_id: this.recupereIdDemandeEngagement(this.formData5.numeroDemande),
-        
+        montant_engage:this.montantEngage(this.formData5.numeroDemande)
         
       };
       this.ajouterDossierMandat(nouvelObjet);

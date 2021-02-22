@@ -5264,13 +5264,16 @@ export function getDossierLiquidation({ commit }) {
 }
 
 // ajouter type texte
-export function ajouterDossierLiquidation({ commit }, nouveau) {
+export function ajouterDossierLiquidation({ commit,dispatch }, nouveau) {
   asyncLoading(axios
       .post("/liquidation", nouveau))
       .then(response => {
           if (response.status == 201) {
               commit("AJOUTER_LIQUIDATION", response.data);
-             
+              dispatch('getDemandeEngagement')
+              dispatch('getDossierLiquidation')
+              dispatch('getDossierLiquidation')
+              
               this.$app.$notify({
                   title: 'Success',
                   text: 'Enregistrement Effectué avec Succès!',
@@ -5333,13 +5336,15 @@ export function getDossierMandat({ commit }) {
 }
 
 // ajouter type texte
-export function ajouterDossierMandat({ commit }, nouveau) {
+export function ajouterDossierMandat({ commit,dispatch }, nouveau) {
   asyncLoading(axios
       .post("/MandatOp", nouveau))
       .then(response => {
           if (response.status == 201) {
               commit("AJOUTER_MANDAT_OP", response.data);
-             
+              dispatch('getDemandeEngagement')
+              dispatch('getDossierMandat')
+              dispatch('getDossierMandat')
               this.$app.$notify({
                   title: 'Success',
                   text: 'Enregistrement Effectué avec Succès!',
@@ -5454,5 +5459,74 @@ export function supprimerDossierFacture({ commit }, id) {
         
           // // dialog.loading(false) // stops the proceed button's loader
           axios.delete("/FacturePiece/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+
+
+
+
+export function getDossierAutreDepense({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/AutreDepense")
+          .then(response => {
+              commit("GET_ALL_AUTRE_DEPENSE", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterDossierAutreDepense({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/AutreDepense", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_AUTRE_DEPENSE", response.data);
+             
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "ce Numero existe déja",
+            type:"error"
+        });
+    })
+}
+
+
+export function modifierDossierAutreDepense({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/AutreDepense/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_AUTRE_DEPENSE", response.data);
+          
+
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerDossierAutreDepense({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_AUTRE_DEPENSE", id);
+        
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/AutreDepense/" + id).then(() => dialog.close());
       });
 }

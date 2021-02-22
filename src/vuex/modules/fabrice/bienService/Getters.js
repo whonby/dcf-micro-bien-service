@@ -2,6 +2,7 @@ import { groupBy } from "../../../../Repositories/Repository";
 export const gettersDemandeEngagement = state => state.DemandeEngagement
 export const gettersDossierLiquidation = state => state.Liquidation
 export const gettersDossierMandat = state => state.MandatOp
+export const gettersDossierAutreDepense = state => state.AutreDepense
 export const gettersDossierFacturePiece = state => state.facturePiece
 
 

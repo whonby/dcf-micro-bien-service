@@ -573,7 +573,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -585,7 +585,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                  
                   />
                 </div>
               </div>
@@ -619,7 +619,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -631,7 +631,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -664,7 +664,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -676,7 +676,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -929,7 +929,7 @@ numeroLiquidation() {
       if (qtereel) {
         return qtereel.numero_liquidation;
       }
-      return 0
+      return "pas de liquidation"
         }
       };
     },
@@ -1133,7 +1133,7 @@ pagePrecedent(){
 rechercheMembreCojo(){
       // console.log(this.formData5.numeroDemande)
 
-      let objetMandater=this.gettersDossierLiquidation.filter(item=>this.recupereNumeroDemande(item.dmd_engagement_id)==this.formData5.numeroDemande)
+      let objetMandater=this.gettersDemandeEngagement.filter(item=>item.numero_dmd_combine==this.formData5.numeroDemande)
       // console.log(objetMandater)
       if(objetMandater!=undefined){
         if (objetMandater.length==1){

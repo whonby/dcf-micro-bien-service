@@ -243,8 +243,9 @@ uniteAdministratives
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
-                <i class="icon-th"></i>DEMANDE D'ENGAGEMENT
+                <i class="icon-th"></i>
               </span>
+              <h5>DEMANDE D'ENGAGEMENT</h5>
               <!-- <h5>Gestion du Patrimoine</h5> -->
               <!-- <div align="right">
                 Recherche:
@@ -362,7 +363,7 @@ uniteAdministratives
                     
                       </button>
                     </td>
-                   <td  v-if="type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Marche' || type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Régie davances-reservation des crédit'">
+                   <td  v-if="type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Marche' || type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Autre'" >
                         <button v-if="type.decision_cf == 8"  class="btn  btn-success"  >                        
                      
                       <span    >Visé</span>
@@ -407,8 +408,8 @@ uniteAdministratives
                       </span>
                       </template>
                     </td>
-                    <td v-else></td>
-                    <td  v-if="type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Marche'">
+                    <td v-else style="background-color:lightblue"></td>
+                    <td  v-if="type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Marche' || type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Autre' || type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Régularisation dordre de paiement'">
                         <button v-if="type.decision_cf == 8"  class="btn  btn-success"  >                        
                      
                       <span    >Visé</span>
@@ -441,7 +442,7 @@ uniteAdministratives
                       
                     
                       </button>
-                      <button  v-else-if="type.id != afficheDecisionLiquidation(type.id) " class="btn  btn-danger" @click="ajouterLiquidation" >                        
+                      <button  v-else-if="type.id != afficheDecisionMandat(type.id) " class="btn  btn-danger" @click="ajouterMandat" >                        
                      
                       
                        <span>Ajouter</span>
@@ -453,7 +454,7 @@ uniteAdministratives
                       </span>
                       </template>
                     </td>
-                    <td v-else></td>
+                    <td v-else style="background-color:lightblue"></td>
                      <td  v-if="type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Régie davances-reservation des crédit'">
                         <button v-if="type.decision_cf == 8"  class="btn  btn-success"  >                        
                      
@@ -487,25 +488,25 @@ uniteAdministratives
                       
                     
                       </button>
-                      <button  v-else-if="type.id != afficheDecisionMandat(type.id) && type.decision_cf != 0" class="btn  btn-danger" @click="ajouterOpSysteme" >                        
+                      <button  v-else-if="type.id != afficheDecisionMandat(type.id) && type.decision_cf != 0 || type.id != afficheDecisionMandat(type.id)" class="btn  btn-danger" @click="ajouterOpSysteme" >                        
                      
                       
                        <span>Ajouter</span>
                       
                     
                       </button>
-                      <span  v-else >                        
-                      <button   class="btn  btn-danger" @click="ajouterOpSysteme" >                        
+                      <!-- <span  v-else style="background-color:red">                         -->
+                      <!-- <button   class="btn  btn-danger" @click="ajouterOpSysteme && type.decision_cf != 0" >                        
                      
                       
                        <span>Ajouter</span>
                       
                     
-                      </button>
-                      </span>
+                      </button> -->
+                      <!-- </span> -->
                       </template>
                     </td>
-                    <td v-else></td>
+                    <td v-else style="background-color:lightblue"></td>
                    <td>
                       <router-link :to="{ name: 'voitDetailBonCmmande', params: { id: type.id }}"
                 class="btn btn-Success " title="">
@@ -515,11 +516,11 @@ uniteAdministratives
                       <td>
                       <router-link :to="{ name: 'executionBudgetaire', params: { id: type.id }}" v-if="afficheIconeBonCommande(type.id)=='Engagement par Bon de Commande'" style="font-weight: bold;background: green;color:#fff"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;color:#fff"> Etape</i></span>
+                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;color:#fff"> Prendre une decision</i></span>
                    </router-link> 
                    <router-link :to="{ name: 'procedureEngaementDirect', params: { id: type.id }}" v-else style="font-weight: bold;background: red;color:#fff"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;color:#fff"> Etape</i></span>
+                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;color:#fff"> Prendre une decision</i></span>
                    </router-link> 
                     </td>
                     <td>

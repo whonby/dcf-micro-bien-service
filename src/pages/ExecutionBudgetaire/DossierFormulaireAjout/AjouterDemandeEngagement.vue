@@ -236,7 +236,7 @@ numeroOrdre
                       <option value=""></option>
                       <option value="Marche">Marche</option>
                       <option value="Régie davances-reservation des crédit">Régie d'avances-reservation des crédit</option>
-                      <option value="Régularisation d'ordre de paiement">Régularisation d'ordre de paiement(Op)</option>
+                      <option value="Régularisation dordre de paiement">Régularisation d'ordre de paiement(Op)</option>
                       <option value="Régularisation avances de trésorerie">Régularisation avances de trésorerie(AT)</option>
                       <option value="Autre">Autre</option>
                     </select>
@@ -246,17 +246,40 @@ numeroOrdre
               
           <td colspan="">
                 <div class="control-group">
-                  <label class="control-label">Numéro du Marché{{cumulMarche(formData2.numero_marche)}}</label>
+                  <label class="control-label" v-if="formData.type_engagement_id=='Marche'">Numéro du Marché</label>
+                  <label class="control-label" v-if="formData.type_engagement_id=='Autre'">Référence Autre Depense</label>
+                   <label class="control-label" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">Numéro op systéme</label>
                   <div class="controls">
                    
                      <input
+                     v-if="formData.type_engagement_id=='Marche'"
                     type="text"
                     style="border:1px solid #000"
                    v-model="formData2.numero_marche"
                     class="span"
                    
                     v-on:keyup="rechercheListeMarche()"
-                    placeholder=""
+                    placeholder="Saisir le numero du marché"
+                  />
+                  <input
+                  v-if="formData.type_engagement_id=='Autre'"
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData2.reference_autre_depense"
+                    class="span"
+                   
+                    v-on:keyup="rechercheAUtreDepense()"
+                    placeholder="Saisir la Référence Autre Depense"
+                  />
+                   <input
+                  v-if="formData.type_engagement_id=='Régularisation dordre de paiement'"
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData2.numero_systeme"
+                    class="span"
+                   
+                    v-on:keyup="rechercheOpSysteme()"
+                    placeholder="Saisir Numéro Op Systeme"
                   />
                   </div>
                 </div>
@@ -272,6 +295,7 @@ numeroOrdre
                     class="span"
                     readonly
                   />
+                  <code style="color:red;font-size:12px" v-if="formData.ua_id != formData2.ua">Veuillez vérifier unite administrative</code>
                 </div>
               </div>
               
@@ -283,12 +307,31 @@ numeroOrdre
           <tr>
             <td colspan="2">
               <div class="control-group">
-                <label class="control-label">Objet de marché</label>
+                <label class="control-label" v-if="formData.type_engagement_id=='Marche'">Objet de marché</label>
+                <label class="control-label" v-if="formData.type_engagement_id=='Autre'">Objet Autres depense</label>
+                 <label class="control-label" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">Objet</label>
                 <div class="controls">
-                  <input
+                   <input
+                   v-if="formData.type_engagement_id=='Marche'"
                     type="text"
                     style="border:1px solid #000"
                    :value="libelleMarche(formData2.objet_marche)"
+                    class="span"
+                    readonly
+                  />
+                  <input
+                  v-if="formData.type_engagement_id=='Autre'"
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData2.objet_autre_depense"
+                    class="span"
+                    readonly
+                  />
+                   <input
+                  v-if="formData.type_engagement_id=='Régularisation dordre de paiement'"
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData2.objet_Reservation"
                     class="span"
                     readonly
                   />
@@ -298,7 +341,9 @@ numeroOrdre
             </td>
            <td colspan="">
               <div class="control-group">
-                <label class="control-label">Montant du marché</label>
+                <label class="control-label" v-if="formData.type_engagement_id=='Marche'">Montant du marché</label>
+                <label class="control-label" v-if="formData.type_engagement_id=='Autre'">Montant Autre Depense</label>
+                 <label class="control-label" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">Montant Reservé</label>
                 <div class="controls">
                   <!-- <input
                     type="text"
@@ -307,7 +352,9 @@ numeroOrdre
                     class="span"
                     readonly
                   /> -->
-                  <money v-model="formData2.montant_marché" readOnly  style="text-align:left;color:red"  class="span"></money>
+                  <money v-model="formData2.montant_marché" v-if="formData.type_engagement_id=='Marche'" readOnly  style="text-align:left;color:red"  class="span"></money>
+                   <money v-model="formData2.montant_autre_depense" v-if="formData.type_engagement_id=='Autre'" readOnly  style="text-align:left;color:red"  class="span"></money>
+                    <money v-model="formData2.montant_Reserve" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'" readOnly  style="text-align:left;color:red"  class="span"></money>
                 </div>
               </div>
               
@@ -400,11 +447,20 @@ numeroOrdre
                 <label class="control-label">Référence bancaires du fournissuer ou poste comptable assignataire</label>
                 <div class="controls">
                   <input
+                  v-if="formData.type_engagement_id!='Autre'"
                     type="text"
                     style="border:1px solid #000"
-                   v-model="formData.Référence_bancaires"
+                   :value="formData2.numero_cc_fournisseur_nom"
                     class="span"
-                    
+                    readonly
+                  />
+                   <input
+                  v-if="formData.type_engagement_id=='Autre'"
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData2.compte_bancaire"
+                    class="span"
+                    readonly
                   />
                 </div>
               </div>
@@ -563,6 +619,11 @@ numeroOrdre
                     
                   /> -->
                   <money :value="TotalGeneralDemandeEngagement"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                <code style="color:red;font-size:12px" v-if="formData.type_engagement_id=='Marche'">MONTANT A PAYE: {{(parseFloat(formData2.montant_marché)-parseFloat(cumulMarche(formData2.numero_marche)))}}</code><br><br>
+                 <code style="color:red;font-size:12px" v-if="(parseFloat(formData2.montant_marché)-parseFloat(cumulMarche(formData2.numero_marche)))<TotalGeneralDemandeEngagement && formData.type_engagement_id=='Marche'">Vérifier le montant général </code>
+
+                  <code style="color:red;font-size:12px" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">MONTANT A CONSOMME : {{(parseFloat(formData2.montant_Reserve)-parseFloat(cumulReservation(formData2.numero_systeme)))}}</code><br><br>
+                 <code style="color:red;font-size:12px" v-if="(parseFloat(formData2.montant_Reserve)-parseFloat(cumulReservation(formData2.numero_systeme)))<TotalGeneralDemandeEngagement && formData.type_engagement_id=='Régularisation dordre de paiement'">Vérifier le montant général </code>
                 </div>
               </div>
               
@@ -660,6 +721,7 @@ numeroOrdre
                                 </model-list-select>
                             </td>
                      </tr>
+                     <h6>PIECE PROFORMA</h6>
                      <tr>
                         <!-- <td colspan="">
               <div class="control-group">
@@ -761,6 +823,63 @@ numeroOrdre
             </td>
             
                      </tr>
+                     <!-- <h6>TACHES PREVUES</h6>
+                     <tr>
+                       <td colspan="4">
+               <div class="" align="right">
+                   <button  
+                        @click.prevent="afficherModalAjouterService"
+                       class="btn  btn-success">
+                <span style="font-size:14px;font-weight:bold">  <i class="icon icon-plus-sign" >Ajouter Nature de la pièces</i></span>
+       
+                </button>
+
+                   </div><br>
+           <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     <th style="font-size:14px;font-weight:bold">Numero Ordre</th>
+                    <th style="font-size:14px;font-weight:bold">Nature de la pièce</th>
+                   <th style="font-size:14px;font-weight:bold">Reference</th>
+                   <th style="font-size:14px;font-weight:bold">Date de la pièce</th>
+                   <th style="font-size:14px;font-weight:bold">Fichier joint</th>
+                    <th style="font-size:14px;font-weight:bold">Action</th>
+                  </tr>
+                </thead> -->
+                <!-- <tbody > -->
+                  <!-- <tr class="odd gradeX" v-for="(type) in listePieceJustificative(formData.numero_demande)" :key="type.id">
+                    <td style="width:20%"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{type.numero_ordre || 'Non renseigné'}}</td>
+                    <td style="width:30%"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{listePieceJustifica(type.libelle) || 'Non renseigné'}}</td>
+                    <td style="width:20%"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{type.reference || 'Non renseigné'}}</td>
+                    <td style="width:15%"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{formaterDate(type.date_piece) || 'Non renseigné'}}</td>
+<td>
+  <a v-if="afficheFichierJoint(type.numero_demande_engagement,type.numero_ordre)" :href="afficheFichierJoint(type.numero_demande_engagement,type.numero_ordre)" class="btn btn-default" target="_blank">
+                                <span class=""><i class="icon-book"></i>
+                                </span>
+                            </a>
+</td>
+                    <td  style="width:15%">
+                      <button class="btn btn-danger" @click="supprimerPieceJustificative(type.id)">
+                        <span>
+                          <i class="icon icon-trash"> Supprimer</i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody> -->
+                
+              <!-- </table>
+        
+            </td>
+                     </tr> -->
                    </table>
                    
                     </div>
@@ -1101,7 +1220,7 @@ numeroOrdre
                       <div data-toggle="buttons-checkbox" class="btn-group">
                         <a
                           class="btn btn-primary"
-                          @click.prevent="ajouterFonctionGroupe" v-if="formData.numero_demande!='' && formData.ua_id!='' && formData.grd_nature_id!='' && formData.ligne_economique_id!=''"
+                          @click.prevent="ajouterFonctionGroupe" v-if="formData.numero_demande!='' && formData.ua_id!='' && formData.grd_nature_id!='' && formData.ligne_economique_id!='' && (parseFloat(formData2.montant_marché)-parseFloat(cumulMarche(formData2.numero_marche)))!=0 || formData.numero_demande!='' && formData.ua_id!='' && formData.grd_nature_id!='' && formData.ligne_economique_id!='' && (parseFloat(formData2.montant_marché)-parseFloat(cumulReservation(formData2.numero_marche)))!=0"
                         >Valider</a>
                         <a
                           @click.prevent="afficherModalListePersonnel()"
@@ -1779,7 +1898,7 @@ components: {
                  ligne_economique_id:"",
                  ua_id:"",
                  grd_nature_id:"",
-
+type_engagement_id:"Marche"
                 },
                 
                 editpiece:{},
@@ -1819,7 +1938,7 @@ components: {
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
 
-...mapGetters("bienService", ["gettersDossierMandat","gettersDossierFacturePiece","typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+...mapGetters("bienService", ["gettersDossierAutreDepense","gettersDossierMandat","gettersDossierFacturePiece","typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -1840,6 +1959,39 @@ components: {
       "afficheLocalisationGeoNiveau5"
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+
+
+cumulMontantMarche() {
+      const val =   parseFloat(this.TotalGeneralDemandeEngagement) + parseFloat(this.cumulMarche(this.formData2.numero_marche));
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+cumulReservation() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersDossierMandat.filter(qtreel => this.numeroReservation(qtreel.demande_engagement_id) == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_engage), 0).toFixed(0);
+
+        }
+      };
+    },
+
+numeroReservation() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_op_systeme;
+      }
+      return ""
+        }
+      };
+    },
 
 cumulMarche() {
       return id => {
@@ -2362,6 +2514,20 @@ return this.uniteAdministratives
         }
       };
     },
+    
+
+     idAutreDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDossierAutreDepense.find(qtreel => qtreel.reference == id);
+
+      if (qtereel) {
+        return qtereel.id
+      }
+      return 0
+        }
+      };
+    },
     idActeeffect() {
       return id => {
         if (id != null && id != "") {
@@ -2369,6 +2535,30 @@ return this.uniteAdministratives
 
       if (qtereel) {
         return qtereel.id
+      }
+      return 0
+        }
+      };
+    },
+    ua_DemandeEngaement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ua_id
+      }
+      return 0
+        }
+      };
+    },
+    Objet_DemandeEngaement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objet_depense
       }
       return 0
         }
@@ -2495,8 +2685,71 @@ this.$("#ModifierexampleModal").modal('hide');
     },
 
 
+rechercheOpSysteme(){
+      // console.log(this.formMandater.matricule_m)
+
+      let objetMandater=this.gettersDossierMandat.filter(item=>item.numero_op_systeme==this.formData2.numero_systeme && item.decision_cf==8)
+      // console.log(objetMandater)
+      if(objetMandater!=undefined){
+        if (objetMandater.length==1){
+          let acteur= this.gettersDossierMandat.find(item=>item.numero_op_systeme==this.formData2.numero_systeme)
+          this.formData2.ua=this.ua_DemandeEngaement(acteur.demande_engagement_id),
+          this.formData2.objet_Reservation=this.Objet_DemandeEngaement(acteur.demande_engagement_id),
+         this.formData2.montant_Reserve=acteur.montant_engage,
+        //  this.formData2.compte_bancaire=acteur.compte_bancaire,
+        
+          this.message_mandater=" "
+
+        }
+        else{
+          this.message_mandater="Ce Numero cc  n'existe pas dans notre base de donnée "
+          this.formData2.objet_autre_depense=""
+        }
+      }
+      if(this.formData2.reference_autre_depense==""){
+        this.formData2.ua==""
+          this.formData2.objet_Reservation==""
+         this.formData2.montant_Reserve==""
+         
+        this.message_mandater=" "
+      }
+    },
 
 
+
+
+
+
+rechercheAUtreDepense(){
+      // console.log(this.formMandater.matricule_m)
+
+      let objetMandater=this.gettersDossierAutreDepense.filter(item=>item.reference==this.formData2.reference_autre_depense)
+      // console.log(objetMandater)
+      if(objetMandater!=undefined){
+        if (objetMandater.length==1){
+          let acteur= this.gettersDossierAutreDepense.find(item=>item.reference==this.formData2.reference_autre_depense)
+          this.formData2.objet_autre_depense=acteur.objet,
+          this.formData2.beneficiaire=acteur.beneficiaire,
+         this.formData2.montant_autre_depense=acteur.montant,
+         this.formData2.compte_bancaire=acteur.compte_bancaire,
+        
+          this.message_mandater=" "
+
+        }
+        else{
+          this.message_mandater="Ce Numero cc  n'existe pas dans notre base de donnée "
+          this.formData2.objet_autre_depense=""
+        }
+      }
+      if(this.formData2.reference_autre_depense==""){
+        this.formData2.objet_autre_depense==""
+          this.formData2.beneficiaire==""
+         this.formData2.montant_autre_depense==""
+         this.formData2.objet_marche=="",
+         this.formData2.compte_bancaire==""
+        this.message_mandater=" "
+      }
+    },
 
 
 rechercheListeMarche(){
@@ -2660,7 +2913,9 @@ var nouvelObjet1 = {
     section_id:this.idSection(this.formData.ligne_economique_id),
     uaBeneficiaire_id:this.formData.uaBeneficiaire_id,
     	entreprise_id:this.idEntreprise(this.formData2.numero_marche),
-           numero_marche:this.formData2.numero_marche
+           numero_marche:this.formData2.numero_marche,
+           	autre_depense_id:this.idAutreDepense(this.formData2.reference_autre_depense),
+             numero_op_systeme:this.formData2.numero_systeme
             
       };
     
@@ -2680,7 +2935,9 @@ var nouvelObjet2 = {
     exercice:this.anneeAmort,
     section_id:this.idSection(this.formData.ligne_economique_id),
     uaBeneficiaire_id:this.formData.uaBeneficiaire_id,
-    	entreprise_id:this.formData2.entrprise_id
+    	entreprise_id:this.formData2.entrprise_id,
+      autre_depense_id:this.idAutreDepense(this.formData2.reference_autre_depense),
+      numero_op_systeme:this.formData2.numero_systeme
       };
     
       this.ajouterDemandeEngagement(nouvelObjet2)
@@ -2701,7 +2958,9 @@ var nouvelObjet3 = {
     exercice:this.anneeAmort,
     section_id:this.idSection(this.formData.ligne_economique_id),
     uaBeneficiaire_id:this.formData.uaBeneficiaire_id,
-    	entreprise_id:this.formData2.entrprise_id
+    	entreprise_id:this.formData2.entrprise_id,
+      autre_depense_id:this.idAutreDepense(this.formData2.reference_autre_depense),
+      numero_op_systeme:this.formData2.numero_systeme
       };
     
       this.ajouterDemandeEngagement(nouvelObjet3)

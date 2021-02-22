@@ -229,7 +229,7 @@
                      <td>
                       <router-link :to="{ name: 'FicheDeControle', params: { id: type.id }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;"> Fiche de contrôle</i></span>
+                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;"> Fiche Annexe</i></span>
                    </router-link> 
                     </td>
                     <td>
