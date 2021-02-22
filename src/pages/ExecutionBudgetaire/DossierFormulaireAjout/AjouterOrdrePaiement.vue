@@ -1,9 +1,9 @@
-numeroOrdrePiece
+
 <template>
 
 <div class="container-fluid">
       <hr />
-      <div  align="left" style="cursor:pointer;">
+       <div  align="left" style="cursor:pointer;">
     <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
     
         </div>
@@ -14,7 +14,7 @@ numeroOrdrePiece
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Ajouter Liquidation</h5>
+              <h5>Ajouter OP Systéme</h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -52,15 +52,30 @@ numeroOrdrePiece
               </div>
               
             </td>
-                          <td>
+              <td>
               <div class="control-group">
-                <label class="control-label">Numéro de Liquidation</label>
+                <label class="control-label">Numéro Liquidation</label>
                 <div class="controls">
                   <input
                     type="text"
                     style="border:1px solid #000"
-                   v-model="formaLiquidation.numero_liquidation"
+                   :value="numeroLiquidation(formData5.numero_liquidation)"
                     class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+              
+            </td>
+                          <td>
+              <div class="control-group">
+                <label class="control-label">Numéro d'ordre de paiement</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formMandat.numero_op"
+                    class="span" 
                     
                   />
                 </div>
@@ -69,12 +84,12 @@ numeroOrdrePiece
             </td>
              <td>
               <div class="control-group">
-                <label class="control-label">Date de Liquidation</label>
+                <label class="control-label">Date Ordre de Paiement</label>
                 <div class="controls">
                   <input
                     type="date"
                     style="border:1px solid #000"
-                    v-model="formaLiquidation.date_liquidation"
+                    v-model="formMandat.date_op"
                     class="span"
                     
                   />
@@ -82,7 +97,13 @@ numeroOrdrePiece
               </div>
               
             </td>
-            <td>
+          
+                      </tr>
+                  </table>
+          <table class="table table-bordered table-striped" style="border:1px solid #000">
+             
+                    <tr>
+                       <td>
               <div class="control-group">
                 <label class="control-label">Imputation</label>
                 <div class="controls">
@@ -97,11 +118,6 @@ numeroOrdrePiece
               </div>
               
             </td>
-                      </tr>
-                  </table>
-          <table class="table table-bordered table-striped" style="border:1px solid #000">
-             
-                    <tr>
                          <td>
               <div class="control-group">
                 <label class="control-label">Ministère/Institution</label>
@@ -118,7 +134,7 @@ numeroOrdrePiece
               
             </td>
            
-                 <td colspan="2">
+                 <td colspan="">
               <div class="control-group">
                 <label class="control-label">Programme/Dotation</label>
                 <div class="controls">
@@ -398,10 +414,9 @@ numeroOrdrePiece
                   <input
                     type="text"
                     style="border:1px solid #000"
-                  
-                  :value="libellebanqueEntreprise(banqueEntreprise(IdEntreprise(formData5.numeroDemande)))"
+                  v-model="formData5.Reference_bancaires"
                     class="span"
-                   readonly
+                   
                   />
                 </div>
               </div>
@@ -414,9 +429,9 @@ numeroOrdrePiece
                   <input
                     type="text"
                     style="border:1px solid #000"
-                  :value="CompteEntreprise(IdEntreprise(formData5.numeroDemande))"
+                  
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -432,55 +447,17 @@ numeroOrdrePiece
                   </div>
                    <tr>
                        <td colspan="4">
-                           <label class="control-label" style="font-size:14px;font-weight:bold;text-align:center">Pièce Justificative (Proforma)</label>
+                           
 
-<table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     <th style="font-size:14px;font-weight:bold">Numero Ordre</th>
-                    <th style="font-size:14px;font-weight:bold">Nature de la pièce</th>
-                   <th style="font-size:14px;font-weight:bold">Reference</th>
-                   <th style="font-size:14px;font-weight:bold">Date de la pièce</th>
-                  
-                    
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="odd gradeX" v-for="(type) in listePieceJustificativeProforma(formData5.numeroDemande)" :key="type.id">
-                    <td style="width:20%,text-align:center"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{type.numero_ordre || 'Non renseigné'}}</td>
-                    <td style="width:30%"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{listePieceJustifica(type.libelle) || 'Non renseigné'}}</td>
-                    <td style="width:20%"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{type.reference || 'Non renseigné'}}</td>
-                    <td style="width:15%"
-                      @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{formaterDate(type.date_piece) || 'Non renseigné'}}</td>
 
-                    
-                  </tr>
-                </tbody>
-              </table>
 
-<label class="control-label" style="font-size:14px;font-weight:bold;text-align:center">Pièce Justificative (definitive)</label>
+<label class="control-label">Pièce Justificative (Definitive)</label>
 
-                           <div class="" align="right">
-                   <button 
-                        @click.prevent="afficherModalAjouterService"
-                       class="btn  btn-success">
-                <span >  <i class="icon icon-plus-sign">Ajouter pièces definitive</i></span>
-       
-                </button>
-
-                   </div>
+                          
                     
  <table class="table table-bordered table-striped">
                 <thead>
-                  <tr>
-                    <tr>
+                 <tr>
                      <th style="font-size:14px;font-weight:bold">Numero Ordre</th>
                     <th style="font-size:14px;font-weight:bold">Nature de la pièce</th>
                    <th style="font-size:14px;font-weight:bold">Reference</th>
@@ -488,7 +465,7 @@ numeroOrdrePiece
                     
                   </tr>
                 </thead>
-                <tbody>
+               <tbody>
                   <tr class="odd gradeX" v-for="(type) in listePieceJustificativedefinitive(formData5.numeroDemande)" :key="type.id">
                     <td style="width:20%,text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
@@ -567,7 +544,7 @@ numeroOrdrePiece
               
             </td>
                    </tr>
-                   <tr>
+                  <tr>
                      <td>
                        <div class="widget-title">
                     <ul class="nav nav-tabs">
@@ -600,6 +577,19 @@ numeroOrdrePiece
                   />
                 </div>
               </div>
+              <div class="control-group">
+                <label class="control-label">Fonction</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                  
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+              
                      </td>
                      <td colspan="2">
                        <div class="widget-title">
@@ -623,6 +613,18 @@ numeroOrdrePiece
               </div>
                <div class="control-group">
                 <label class="control-label">Nom</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                  
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Visa</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -666,6 +668,18 @@ numeroOrdrePiece
                   />
                 </div>
               </div>
+              <div class="control-group">
+                <label class="control-label">Signature</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                  
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
                      </td>
                    </tr>
           </table>
@@ -679,7 +693,7 @@ numeroOrdrePiece
                           @click.prevent="AjouterLiquidation"
                         >Valider</a>
                         <a
-                          @click.prevent="pagePrecedent()"
+                          @click.prevent="afficherModalListePersonnel()"
                           class="btn"
                           href="#"
                         >Fermer</a>
@@ -696,7 +710,7 @@ numeroOrdrePiece
         </div>
       </div>
       <notifications/>
-      <div id="exampleModal" class="modal hide taille">
+      <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter pièces justificatives</h3>
@@ -711,7 +725,7 @@ numeroOrdrePiece
             <div class="controls">
               <input
                 type="text"
-               :value="numeroOrdrePiece(formData5.numeroDemande)"
+               
                 class="span5"
                 placeholder="Saisir le libellé"
                 readonly
@@ -719,371 +733,87 @@ numeroOrdrePiece
             </div>
           </div>
             </td>
+          </tr>
+           <tr>
             <td>
               <div class="control-group">
-                                                    <label class="control-label">Nature de la pièce <code style="color:red;font-size:16px">*</code></label>
-                                                    <div class="controls">
-                                                        <select v-model="formData1.libelle" class="span5" style="border:1px solid #000">
-                                                            <option></option>
-                                                            <option
-                        v-for="typeFact in typeFactures"
-                        :key="typeFact.id"
-                        :value="typeFact.id"
-                      >{{typeFact.libelle}}</option>
-                                                        </select>
-                                                        <code style="color:red;font-size:12px" v-if="formData1.libelle.length>0">Veuillez renseigner ce champ</code>
-                                                    </div>
-                                                </div>
-              
-            </td>
-            <td>
-              <div class="control-group">
-            <label class="control-label">Reference de la pièce <code style="color:red;font-size:16px">*</code></label>
+            <label class="control-label">Nature de la pièce</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="formData1.reference"
+                
                 class="span5"
-                placeholder="Saisir la reference"
-              />
-              <code style="color:red;font-size:12px" v-if="formData1.reference==''">Veuillez renseigner ce champ</code>
-            </div>
-          </div>
-            </td>
-           
-          </tr>
-          <tr>
-             <td>
-              <div class="control-group">
-            <label class="control-label">Date de la pièce <code style="color:red;font-size:16px">*</code></label>
-            <div class="controls">
-              <input
-                type="date"
-                v-model="formData1.date_piece"
-                class="span5"
-                
-              />
-               <code style="color:red;font-size:12px" v-if="formData1.date_piece==''">Veuillez renseigner ce champ</code>
-            </div>
-          </div>
-            </td>
-            <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Pièces justificatives </label>
-                <div class="controls">
-                  <input
-                    type="file"
-                    style="border:1px solid #000"
-                   @change="OnchangeFichier"
-                    class="span"
-                    
-                  />
-                  <code v-if="info_pdf">Le fichier doit etre un pdf</code>
-                </div>
-              </div>
-              
-            </td>
-            <td>
-                <div class="control-group">
-                <label class="control-label">Exonéré</label>
-                <div class="controls">
-                  <select v-model="formData9.exonere" class="span5">
-                  
-                    <option value="0">Oui</option>
-                     <option value="1">Non</option>
-                  </select>
-                
-                </div>
-              </div>
-              </td>
-          </tr>
-           
-         
-      </table>
-       
-      </div>    
- 
-  <div>
-    <div class="modal-footer">
-      <a
-                          class="btn btn-primary"
-                          @click.prevent="AjoutePieceJustific" v-if="formData1.reference !='' && formData1.date_piece !=''"
-                        >Valider</a>
-        
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-        <div align="left">
-
-      <button class="btn btn-info"  @click.prevent="apercuFactureliquidation">Aperçu de la facture</button>
-
-
-                            </div>
-
-   <table class="table table-bordered table-striped" >
-                <div class="widget-box">
-                  <div class="widget-title">
-                    <ul class="nav nav-tabs">
-                      <li class="active">
-                        <a data-toggle="tab" href="#BONCOMMANDE1" v-if="formData1.libelle == 1">  Facture Définitive</a>
-                      </li>
-                      
-                    </ul>
-                  </div>
-                  <div class="widget-content tab-content">
-                    <!--ongle identification-->
-                    <div id="BONCOMMANDE1" class="tab-pane active">
-                  <div class="widget-content nopadding">
-                      <div class="" align="right" v-if="formData1.libelle == 1">
-                   <button 
-                        @click.prevent="afficherModalAjouterFacture"
-                       class="btn  btn-success">
-                <span >  <i class="icon icon-plus-sign">Ajouter Facture</i></span>
-       
-                </button>
-                
-
-                   </div>
-                   <div id="printMe">
-              <table class="table table-bordered table-striped" v-if="formData1.libelle == 1">
-                <thead>
-                  <tr>
-                    <th>Designation</th>
-                    <th>Quantité</th>
-                    <th>Prix unitaire</th>
-                     <th>Total</th>
-                   <th style="width:10px">Supprimer</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="odd gradeX" v-for="(type, index) in listeFacturePiece(formData5.numeroDemande)" :key="type.id">
-                    <td 
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.designation || 'Non renseigné'}}</td>
-                    <td style="text-align:center;font-weight:bold;"
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.quantite || 'Non renseigné'}}</td>
-                    <td style="text-align:center;font-weight:bold;"
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{formatageSomme(parseFloat(type.prix_unitaire)) || 'Non renseigné'}}</td>
-<td style="text-align:center;font-weight:bold;"
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{formatageSomme(parseFloat(type.total_facture_ht)) || 'Non renseigné'}}</td>
-                    <td>
-                      <button class="btn btn-danger" @click="supprimerDossierFacture(type.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ht</td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDesDmdParBonCommande(formData5.numeroDemande)))}}</td>
-                 <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Taux</td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{afficherEnorere}}</td>
-                  <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Tva</td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData5.numeroDemande)))*afficherEnorere))}} </td>
-                  <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ttc</td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData5.numeroDemande)))+parseFloat((SommeDesDmdParBonCommande(formData5.numeroDemande)*afficherEnorere))))}} </td>
-                  <td></td>
-                  </tr>
-                </tbody>
-              </table>
-                   </div>
-              </div>
-                    </div>
-               
-                    
-                 
-
-                      
-                      
-      </div>
-         
-
-
-       </div>
-     
-              </table>
-  </div>
-   
-      
-    </div>
-
-
-    <div id="facturedefinitive" class="modal hide tailles">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Facture</h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-          <tr>
-             <td colspan="3">
-              <div class="control-group">
-            <label class="control-label">Désignation</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="FormDataFacture.designation"
-                class="span12"
-                
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>
             </td>
           </tr>
            <tr>
-           
             <td>
               <div class="control-group">
-            <label class="control-label">Quantite</label>
+            <label class="control-label">Reference de la pièce</label>
             <div class="controls">
               <input
-                type="number"
-                v-model="FormDataFacture.quantite"
-                class="span4"
+                type="text"
+               
+                class="span5"
+                placeholder="Saisir la reference"
+              />
+            </div>
+          </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="control-group">
+            <label class="control-label">Date de la pièce</label>
+            <div class="controls">
+              <input
+                type="date"
+                
+                class="span5"
                 
               />
             </div>
           </div>
             </td>
-            <td>
+          
+          </tr>
+          <tr>
+              <td colspan="">
               <div class="control-group">
-            <label class="control-label">Prix Unitaire</label>
-            <div class="controls">
-              <!-- <input
-                type="number"
-                v-model="FormDataFacture.prix_unitaire"
-                class="span4"
-                
-              /> -->
-              <money v-model="FormDataFacture.prix_unitaire"  style="text-align:left;color:red"  class="span4"></money>
-            </div>
-          </div>
-            </td>
-            <td>
-              <div class="control-group">
-            <label class="control-label">Total</label>
-            <div class="controls">
-              <!-- <input
-                type="text"
-                :value="MontantFactureHt"
-                class="span4"
-                readonly
-              /> -->
-               <money :value="MontantFactureHt"  style="text-align:left;color:red"  class="span4"></money>
-            </div>
-          </div>
+                <label class="control-label">Pièces justificatives </label>
+                <div class="controls">
+                  <input
+                    type="file"
+                    style="border:1px solid #000"
+                  
+                    class="span"
+                    
+                  />
+                  <!-- <code v-if="info_pdf">Le fichier doit etre un pdf</code> -->
+                </div>
+              </div>
+              
             </td>
           </tr>
-          
-        </table>
+      </table>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterFacture()"
+         
           class="btn btn-primary"
           href="#"
           
+          @click.prevent="AjoutePieceJustific"
         >Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+        <a
+                          @click.prevent="pagePrecedent()"
+                          class="btn"
+                          href="#"
+                        >Fermer</a>
       </div>
-    </div>
-<div id="ApercuFactureliquidation" class="modal hide ApercuFactureliquidation1">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Aperçu Facture</h3>
-      </div>
-      <div>
-       <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Designation</th>
-                    <th>Quantité</th>
-                    <th>Prix unitaire</th>
-                     <th>Total</th>
-                   
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="odd gradeX" v-for="(type, index) in listeFacturePiece(formData5.numeroDemande)" :key="type.id">
-                    <td 
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.designation || 'Non renseigné'}}</td>
-                    <td style="text-align:center;font-weight:bold;"
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.quantite || 'Non renseigné'}}</td>
-                    <td style="text-align:center;font-weight:bold;"
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{formatageSomme(parseFloat(type.prix_unitaire)) || 'Non renseigné'}}</td>
-<td style="text-align:center;font-weight:bold;"
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{formatageSomme(parseFloat(type.total_facture_ht)) || 'Non renseigné'}}</td>
-                    
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ht</td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDesDmdParBonCommande(formData5.numeroDemande)))}}</td>
-                
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Taux</td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{afficherEnorere}}</td>
-                  
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Tva</td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData5.numeroDemande)))*afficherEnorere))}} </td>
-                  
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ttc</td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData5.numeroDemande)))+parseFloat((SommeDesDmdParBonCommande(formData5.numeroDemande)*afficherEnorere))))}} </td>
-                  
-                  </tr>
-                </tbody>
-              </table>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-      
-      
-    </div>
     </div>
 </div>
 </template>
@@ -1091,7 +821,6 @@ numeroOrdrePiece
 
     import {mapGetters,mapActions} from 'vuex'
     import {admin,dcf,noDCfNoAdmin} from "@/Repositories/Auth"
-    import { formatageSomme } from "@/Repositories/Repository";
     // import {  ModelListSelect } from 'vue-search-select'
     import moment from 'moment';
    // import 'vue-search-select/dist/VueSearchSelect.css'
@@ -1118,23 +847,14 @@ components: {
                 },
                 
                 editpiece:{},
-                FormDataFacture:{},
                 formData5:{
                   numeroDemande:""
                 },
-                 formData9:{
-                exonere : 1
-                },
- formaLiquidation:{
+ formMandat:{
                  
                 },
                 formData2:{
                  
-                },
-                formData1:{
-              date_piece:"" ,
-              reference:""  ,
-              libelle:""
                 },
                 message_mandater:""
             };
@@ -1156,7 +876,7 @@ components: {
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
 
-...mapGetters("bienService", ["gettersDossierFacturePiece","typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+...mapGetters("bienService", ["typeFactures","gettersDossierLiquidation","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -1168,7 +888,6 @@ components: {
    ...mapGetters("parametreGenerauxAdministratif", [
       "services_gestionnaires",
       "sections",
-      "taux",
       "type_Unite_admins",
       "plans_programmes",
       "natures_sections",
@@ -1179,131 +898,44 @@ components: {
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
-      IdEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.numero_dmd_combine == id );
+
+      listePieceJustifica() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           const qtereel = this.typeFactures.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-       
-           return qtereel.entreprise_id;
+        return qtereel.libelle;
       }
       return ""
         }
       };
     },
-    libellebanqueEntreprise() {
+ listePieceJustificativedefinitive() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.banques.find(qtreel => qtreel.id == id );
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_dmd_combine == id && qtreel.etat_piece=="definitive");
+
+      
+        }
+      };
+    },
+
+numeroLiquidation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDossierLiquidation.find(qtreel => qtreel.dmd_engagement_id == id);
 
       if (qtereel) {
-       
-           return qtereel.libelle;
+        return qtereel.numero_liquidation;
       }
-      return ""
+      return 0
         }
       };
     },
-    banqueEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.comptes.find(qtreel => qtreel.entrepse_id == id );
 
-      if (qtereel) {
-       
-           return qtereel.banq_id;
-      }
-      return ""
-        }
-      };
-    },
-    CompteEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.comptes.find(qtreel => qtreel.entrepse_id == id );
 
-      if (qtereel) {
-       
-           return qtereel.rib;
-      }
-      return ""
-        }
-      };
-    },
-       anneeAmort() {
-      
-      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
 
-      if (norme) {
-        return norme.annee;
-      }
-      return 0
-    },
-affcherTauxEnCours() {
-      
-      
-      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
-
-      if (norme) {
-        return norme.libelle;
-      }
-      return 0
-    },
-tauxArrondit() {
-      
-      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
-
-      if (norme) {
-        return norme.arrondit;
-      }
-      return 0
-    },
-
-montantTva() {
-      const val =   parseFloat(this.totalMontantHT) * parseFloat(this.afficherEnorere2);
-      
-       if (val) {
-        return parseInt(val).toFixed(0);
-      }
-      
-      return 0
-    },
-afficherEnorere(){
-if(this.formData9.exonere == 0){
-  return 0
-}
-else {
-  return this.tauxArrondit
-  
-}
-},
-       SommeDesDmdParBonCommande() {
-      return id => {
-        if (id != null && id != "") {
-           return this.gettersDossierFacturePiece.filter(qtreel => qtreel.numero_dmd_engagement == id && qtreel.etat_acticle=="definitive").reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_facture_ht), 0).toFixed(0);
-
-        }
-      };
-    },
-      listeFacturePiece() {
-      return id => {
-        if (id != null && id != "") {
-           return this.gettersDossierFacturePiece.filter(qtreel => qtreel.numero_dmd_engagement == id && qtreel.etat_acticle == "definitive");
-
-      
-        }
-      };
-    },
-MontantFactureHt() {
-      const val =  parseFloat(this.FormDataFacture.prix_unitaire) * parseFloat(this.FormDataFacture.quantite);
-      
-       if (val) {
-        return parseInt(val).toFixed(0);
-      }
-      
-      return 0
-    },
  calculCumul() { 
       const val =  parseFloat(this.CumulDemande(this.formData5.ligne_id)) ;
       return parseFloat(val).toFixed(0);
@@ -1334,16 +966,7 @@ CumulDemande: function () {
         }
       };
     },
-      listePieceJustificativeProforma() {
-      return id => {
-        if (id != null && id != "") {
-           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_dmd_combine == id && qtreel.etat_piece=="proforma");
-
-      
-        }
-      };
-    },
-    listePieceJustificativedefinitive() {
+      listePieceJustificative() {
       return id => {
         if (id != null && id != "") {
            return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_dmd_combine == id && qtreel.etat_piece=="definitive");
@@ -1365,18 +988,7 @@ CumulDemande: function () {
       };
     },
      
-     listePieceJustifica() {
-      return (id) => {
-        if (id != null && id != "" ) {
-           const qtereel = this.typeFactures.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return ""
-        }
-      };
-    },
+     
      
      codeUa() {
       return id => {
@@ -1450,15 +1062,6 @@ libelleUniteAdministrative() {
         }
       };
     },
-     numeroOrdrePiece() {
-      return id => {
-        if (id != null && id != "") {
-           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_demande_engagement == id && qtreel.etat_piece=="definitive").length + 1 ;
-
-      
-        }
-      };
-    },
     libelle_Action() {
       return id => {
         if (id != null && id != "") {
@@ -1484,6 +1087,18 @@ recupereIdDemandeEngagement() {
         }
       };
     },
+    recupereNumeroDemande() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_dmd_combine;
+      }
+      return 0
+        }
+      };
+    },
         },
 
 methods: {
@@ -1492,47 +1107,22 @@ methods: {
       "modifierPieceJustificative",
       "supprimerPieceJustificative",
       "ajouterDemandeEngagement",
-      "ajouterDossierLiquidation",
+      "ajouterDossierMandat",
       "modifierDossierLiquidation",
-      "supprimerDossierLiquidation",
-      "ajouterDossierFacture",
-      "modifierDossierFacture",
-      "supprimerDossierFacture"
+      "supprimerDossierLiquidation"
      
     ]),
-   
       ...mapActions('personnelUA', ["ajouterFichierJointDmd"]),
-OnchangeFichier(e) {
-                const files = e.target.files;
-                this.selectedFile = event.target.files[0];
-                Array.from(files).forEach(file => this.addFichierPDF(file));
-            },
-            addFichierPDF(file) {
-                if (!file.type.match("application/pdf")) {
-                    this.info_pdf=true;
-                    console.log(`${file.name} le fichier doit etre un PDF`);
-                    return;
-                }
-                this.info_pdf=false;
-                let reader = new FileReader();
-                let vm = this;
-                reader.onload = e => {
-                    vm.imagePDF = "pdf.png";
-                    vm.namePDF = file.name;
-                    vm.fichierPDF = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            },
 
-   
+
 pagePrecedent(){
                 window.history.back()
             },
 rechercheMembreCojo(){
-      console.log(this.formData5.numeroDemande)
+      // console.log(this.formData5.numeroDemande)
 
-      let objetMandater=this.gettersDemandeEngagement.filter(item=>item.numero_dmd_combine==this.formData5.numeroDemande)
-      console.log(objetMandater)
+      let objetMandater=this.gettersDossierLiquidation.filter(item=>this.recupereNumeroDemande(item.dmd_engagement_id)==this.formData5.numeroDemande)
+      // console.log(objetMandater)
       if(objetMandater!=undefined){
         if (objetMandater.length==1){
           let acteur= this.gettersDemandeEngagement.find(item=>item.numero_dmd_combine==this.formData5.numeroDemande)
@@ -1545,13 +1135,14 @@ rechercheMembreCojo(){
         this.formData5.nature_id=acteur.grd_nature_id,
         this.formData5.odjetDepense=acteur.objet_depense,
         this.formData5.montant_engage=acteur.total_general,
-        this.formData5.typeProcedure_id=acteur.type_procedure_id
+        this.formData5.typeProcedure_id=acteur.type_procedure_id,
 
          this.formData5.Numero_cc=acteur.numero_cc_autre,
          this.formData5.nomEntreprise=acteur.nom_autre,
         this.formData5.adresse=acteur.adresse,
-        this.formData5.mode_paiement_id=acteur.mode_paiement_id
-        this.formData5.adresse=acteur.Reference_bancaires
+        this.formData5.mode_paiement_id=acteur.mode_paiement_id,
+        this.formData5.adresse=acteur.Reference_bancaires,
+        this.formData5.numero_liquidation=acteur.id
         //   this.message_mandater=" "
 
         }
@@ -1560,74 +1151,43 @@ rechercheMembreCojo(){
           this.formData5.ligne_id=""
         }
       }
-      if(this.formData2.Numéro_cc_fournisseur==""){
-        this.formData2.numero_cc_fournisseur_nom=""
+      if(this.formData5.numeroDemande==""){
+       this.formData5.ligne_id="",
+          this.formData5.section_id="",
+        this.formData5.prog_id="",
+        this.formData5.action_id="",
+        this.formData5.activite_id="",
+        this.formData5.ua_id="",
+        this.formData5.nature_id="",
+        this.formData5.odjetDepense="",
+        this.formData5.montant_engage="",
+        this.formData5.typeProcedure_id="",
+
+         this.formData5.Numero_cc="",
+         this.formData5.nomEntreprise="",
+        this.formData5.adresse="",
+        this.formData5.mode_paiement_id="",
+        this.formData5.adresse="",
+        this.formData5.numero_liquidation=""
         this.message_mandater=" "
       }
     },
-    ajouterFacture(){
-              // this.intitule=this.anneeAmort + "" + this.formData5.numeroDemande
-              var NouveauObjet = {
-        ...this.FormDataFacture,
-          total_facture_ht:this.MontantFactureHt,
-        	numero_dmd_engagement:this.formData5.numeroDemande,
-          // numero_dmd:this.formData5.numeroDemande,
-          etat_acticle:"definitive"
-      };
-    
-      this.ajouterDossierFacture(NouveauObjet)
-       this.FormDataFacture={
-    designation:"",
-    quantite:"0",
-    prix_unitaire:"0",
-    total_facture_ht:"0"
-  }
-            },
-            AjoutePieceJustific() {
-     
-      var nouvelObjet = {
-        
-        	numero_ordre:this.numeroOrdrePiece(this.formData5.numeroDemande),
-      // numero_demande_engagement:this.formData5.numeroDemande,
-      numero_dmd_combine:this.formData5.numeroDemande,
-      libelle:this.formData1.libelle,
-      reference:this.formData1.reference,
-      date_piece:this.formData1.date_piece,
-      etat_piece:"definitive"
-      };
-    
-      this.ajouterPieceJustificative(nouvelObjet)
-      this.ajouterFichierJoin()
-   this.$('#exampleModal').modal('hide');
-       this.formData1 = {
-        
-       libelle:"",
-      reference:"",
-      date_piece:"",
-      
-      };
-    },
 AjouterLiquidation() {
          var nouvelObjet = {
-        ...this.formaLiquidation,
-        dmd_engagement_id: this.recupereIdDemandeEngagement(this.formData5.numeroDemande),
+        ...this.formMandat,
+        demande_engagement_id: this.recupereIdDemandeEngagement(this.formData5.numeroDemande),
         
         
       };
-      this.ajouterDossierLiquidation(nouvelObjet);
+      this.ajouterDossierMandat(nouvelObjet);
 this.$("#modificationModal").modal('hide');
       this.formData5 = {
         numeroDemande: "",
         
       };
     },
-afficherModalAjouterFacture() {
-      this.$("#facturedefinitive").modal({
-        backdrop: "static",
-        keyboard: false
-      });
-    },
-formatageSomme:formatageSomme,
+
+
     formaterDate(date) {
               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
@@ -1646,23 +1206,3 @@ formatageSomme:formatageSomme,
     };
 </script>
 
-
-<style scoped>
-.taille{
-  width: 80%;
-  margin: 0 -40%;
-  height: 50%;
-}
-.tailles{
-   width: 64%;
-  margin: 0 -30%;
-  
-}
-.ApercuFactureliquidation1{
- width: 64%;
-  margin: 0 -30%;
-  
-  border: 2px solid #000;
-
-}
-</style>

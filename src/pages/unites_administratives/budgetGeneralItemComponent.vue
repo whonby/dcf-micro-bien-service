@@ -143,7 +143,7 @@ export default {
       // "chapitres",
       // "sections"
     ]),
-     ...mapGetters("bienService", ["getMandatPersonnaliserPersonnel",'getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+     ...mapGetters("bienService", ["gettersDossierMandat","gettersDemandeEngagement","getMandatPersonnaliserPersonnel",'getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -151,7 +151,39 @@ export default {
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
    
+ budgetConsommerBienService45(){
+  return id => {
+    if(id !=""){
+    return this.gettersDossierMandat.filter(element => this.DemandeEngagement(element.demande_engagement_id) == id   &&  element.decision_cf == 8 || this.DemandeEngagement(element.demande_engagement_id) == id   &&  element.decision_cf == 9).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_engage), 0).toFixed(0); 
+      
+    }
+    
+  }
+},
+DemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.ua_id;
+      }
+      return 0
+        }
+      };
+    },
+MandatValideParCf() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDossierMandat.find(qtreel => qtreel.demande_engagement_id == id);
+
+      if (qtereel) {
+        return qtereel.decision_cf;
+      }
+      return 0
+        }
+      };
+    },
 // affichebudgetActive() {
       
 
@@ -359,7 +391,7 @@ budgetConsommerTransfert(){
 
 
 budgetConsommerDesModule() {
-      const val = parseInt(this.budgetConsommerBienService(this.groupe.id)) + parseInt(this.budgetConsommerTransfert(this.groupe.id)) + parseInt(this.budgetConsommerInvertissement(this.groupe.id))+parseInt(this.budgetConsommerPersonnel(this.groupe.id));
+      const val = parseInt(this.budgetConsommerBienService45(this.groupe.id)) + parseInt(this.budgetConsommerTransfert(this.groupe.id)) + parseInt(this.budgetConsommerInvertissement(this.groupe.id))+parseInt(this.budgetConsommerPersonnel(this.groupe.id));
       
        if (val) {
         return parseInt(val).toFixed(0);

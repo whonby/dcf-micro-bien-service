@@ -1,5 +1,11 @@
 import { groupBy } from "../../../../Repositories/Repository";
 export const gettersDemandeEngagement = state => state.DemandeEngagement
+export const gettersDossierLiquidation = state => state.Liquidation
+export const gettersDossierMandat = state => state.MandatOp
+export const gettersDossierFacturePiece = state => state.facturePiece
+
+
+
 export const gettersnomPieceJustificative = state => state.nomPieceJustificative.sort((a, b) => (a.numero_ordre > b.numero_ordre) ? 1 : -1)
 
 export const gettersTypeOrdrePaiement = state => state.typeOrdrePaiement

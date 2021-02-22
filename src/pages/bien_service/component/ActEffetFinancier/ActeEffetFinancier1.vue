@@ -498,12 +498,30 @@ marche_id
                 </div>
               </div>
             </td>
+
+
             <td>
+
+              <div class="control-group">
+                <label class="control-label">Comment saisir le montant du marché?</label>
+                <div class="controls">
+                  <select v-model="formEffetFinancier.httcc_id" class="span">
+
+                    <option value="0">HT</option>
+                    <option value="1">TTC</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+            
+           </tr>
+            <tr v-if="formEffetFinancier.httcc_id==0">
+             <td>
 
               <div class="control-group">
                 <label class="control-label">Montant acte/réel du marché (HT)</label>
                 <div class="controls">
-                    <money v-model="formEffetFinancier.montant_act_ht" ></money>
+                    <money v-model="formEffetFinancier.montant_act_ht" class="span"></money>
 <!--                  <input type="text" v-model="formEffetFinancier.montant_act_ht"-->
 <!--                         class="span"-->
 <!--                         placeholder="Saisir le montant "-->
@@ -511,9 +529,6 @@ marche_id
                 </div>
               </div>
             </td>
-           </tr>
-            <tr>
-             
              <td >
               <div class="control-group">
                 <label class="control-label" > Montant TVA du marché</label>
@@ -525,7 +540,7 @@ marche_id
 <!--                      class="span"-->
 <!--                      readonly-->
 <!--                  />-->
-                    <money :value="montantTva" style="text-align:left;color:red" readonly ></money>
+                    <money :value="montantTva" style="text-align:left;color:red" readonly class="span"></money>
                 </div>
               </div>
             </td>
@@ -540,7 +555,52 @@ marche_id
 <!--                      class="span"-->
 <!--                      readonly-->
 <!--                  />-->
-                    <money :value="montantHTt" style="text-align:left;color:red" readonly ></money>
+                    <money :value="montantHTt" style="text-align:left;color:red" readonly class="span" ></money>
+                </div>
+              </div>
+            </td>
+           </tr>
+             <tr v-if="formEffetFinancier.httcc_id==1">
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">Montant acte/réel du marché (HT)</label>
+                <div class="controls">
+                    <money :value="CaculerMontantHtParTTC" class="span" readonly></money>
+<!--                  <input type="text" v-model="formEffetFinancier.montant_act_ht"-->
+<!--                         class="span"-->
+<!--                         placeholder="Saisir le montant "-->
+<!--                  />-->
+                </div>
+              </div>
+            </td>
+             <td >
+              <div class="control-group">
+                <label class="control-label" > Montant TVA du marché</label>
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"-->
+<!--                      :value="montantTva" style="text-align:left;color:red"-->
+
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money :value="CaculermontantTva" style="text-align:left;color:red" readonly class="span"></money>
+                </div>
+              </div>
+            </td>
+             <td colspan="2">
+              <div class="control-group">
+                <label class="control-label" >Montant TTC du marché</label>
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"-->
+<!--                      :value="montantHTt" style="text-align:left;color:red"-->
+
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money v-model="formEffetFinancier.montant_act" style="text-align:left;color:red"  class="span" ></money>
                 </div>
               </div>
             </td>
@@ -2591,43 +2651,92 @@ nombreDejourCalculeModifier(){
         }
     },
 
-    modifierModalActeEffetFinancierLocal(){
+
+
+
+      modifierModalActeEffetFinancierLocal(){
 
       // this.editActeEffetFinancier.entreprise_id=entreprise_id
 
 var nouvelObjet1 = {
         ...this.editActeEffetFinancier,
-        duree: this.nombreDejourCalculeModifier,
+        id:this.editActeEffetFinancier.id,
         ua_id:this.afficherIDUA(this.macheid),
-        taux:this.editafficherEnorere,
-        tva_cautionnement:this.editafficherMontantTvaDuCautionnement,
-        montant_ttc_cautionnement:this.editafficherMontantTTCDuCautionnement,
-        montant_ht_cautionnement:this.editafficheMontantHorsTaxeDuCautionnement,
-        montant_ht_retenu_garantie:this.editafficherMontantHorsTaxeRetenuGarantie,
-        montant_tva_retenu_garanti:this.editafficherMontantTvaTaxeRetenuGarantie,
-        montant_ttc_retenue_garantie:this.editafficherMontantRetenueGarantie,
-        tva:this.editmontantTva,
-        montant_act:this.editmontantHTt,
-        avance_demarrage_ttc:this.editavanceDemarrage,
-        tva_avance_demarage:this.editavanceDemarrageMontantTva,
-        entreprise_id:this.affichierIdEntrepriseSelectionner(this.afficherEntrepriseNom(this.editActeEffetFinancier.entreprise_id)),
+        taux:this.afficherEnorereModifier,
+        tva_cautionnement:this.afficherMontantTvaDuCautionnementModifier,
+        montant_ttc_cautionnement:this.afficherMontantTTCDuCautionnementModifier,
+        montant_ht_cautionnement:this.afficheMontantHorsTaxeDuCautionnementModifier,
+        montant_ht_retenu_garantie:this.afficherMontantHorsTaxeRetenuGarantieModifier,
+        montant_tva_retenu_garanti:this.afficherMontantHorsTaxeRetenuGarantieModifier,
+        montant_ttc_retenue_garantie:this.afficherMontantRetenueGarantieModifier,
+        tva:this.montantTvaModifier,
+          sous_traitance:this.sous_traitance,
+          garantie:this.garantieModifier,
+        montant_act:this.montantHTtModifier,
+        avance_demarrage_ttc:this.avanceDemarrageModifier,
+        tva_avance_demarage:this.avanceDemarrageMontantTvaModifier,
+        entreprise_id:this.editActeEffetFinancier.entreprise_id,
         difference_personnel_bienService:this.afficheMarcheType,
         marche_id:this.marche_lot,
         marchegeneral_id:this.affichieridMarcheGlobal(this.marche_lot),
-    
+          sous_traitance_array:this.structure_id,
+        banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.editActeEffetFinancier.banq_id)),
+        compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.editActeEffetFinancier.banq_id)),
+        	text_juridique_id:0,
       }
-
+ let marcheObjet=this.marches.find(marche=>marche.id==this.editActeEffetFinancier.marche_id)
+      marcheObjet.attribue = 2
+     let marcheObjet5=this.marches.find(marche=>marche.id==this.affichieridMarcheGlobal(this.editActeEffetFinancier.marche_id))
+      marcheObjet5.attribue = 2
+      marcheObjet.numero_marche=this.editActeEffetFinancier.numero_marche
       this.modifierActeEffetFinancier(nouvelObjet1)
+       this.modifierMarche(marcheObjet)
+    this.modifierMarche(marcheObjet5)
       this.$('#modifierActeEF').modal('hide');
       this.editActeEffetFinancier = {
 
       };
     },
 
+//     modifierModalActeEffetFinancierLocal(){
+
+//       // this.editActeEffetFinancier.entreprise_id=entreprise_id
+
+// var nouvelObjet1 = {
+//         ...this.editActeEffetFinancier,
+//         duree: this.nombreDejourCalculeModifier,
+//         ua_id:this.afficherIDUA(this.macheid),
+//         taux:this.editafficherEnorere,
+//         tva_cautionnement:this.editafficherMontantTvaDuCautionnement,
+//         montant_ttc_cautionnement:this.editafficherMontantTTCDuCautionnement,
+//         montant_ht_cautionnement:this.editafficheMontantHorsTaxeDuCautionnement,
+//         montant_ht_retenu_garantie:this.editafficherMontantHorsTaxeRetenuGarantie,
+//         montant_tva_retenu_garanti:this.editafficherMontantTvaTaxeRetenuGarantie,
+//         montant_ttc_retenue_garantie:this.editafficherMontantRetenueGarantie,
+//         tva:this.editmontantTva,
+//         montant_act:this.editmontantHTt,
+//         avance_demarrage_ttc:this.editavanceDemarrage,
+//         tva_avance_demarage:this.editavanceDemarrageMontantTva,
+//         entreprise_id:this.affichierIdEntrepriseSelectionner(this.afficherEntrepriseNom(this.editActeEffetFinancier.entreprise_id)),
+//         difference_personnel_bienService:this.afficheMarcheType,
+//         marche_id:this.marche_lot,
+//         marchegeneral_id:this.affichieridMarcheGlobal(this.marche_lot),
+    
+//       }
+
+//       this.modifierActeEffetFinancier(nouvelObjet1)
+//       this.$('#modifierActeEF').modal('hide');
+//       this.editActeEffetFinancier = {
+
+//       };
+//     },
+
     formatageSomme:formatageSomme,
       
+   
     ajouterModalActeEffetFinancierLocal(){
-      var nouvelObjet = {
+      if(this.formEffetFinancier.httcc_id==0){
+var nouvelObjet = {
         ...this.formEffetFinancier,
         ua_id:this.afficherIDUA(this.macheid),
         taux:this.afficherEnorere,
@@ -2693,7 +2802,78 @@ avance_demarrage_ht:0,
           sous_traitance:"",
       }
         this.structure_id=[]
+      }
+      else{
+        var nouvelObjet12 = {
+        ...this.formEffetFinancier,
+        ua_id:this.afficherIDUA(this.macheid),
+        taux:this.afficherEnorere,
+        tva_cautionnement:this.afficherMontantTvaDuCautionnement,
+        montant_ttc_cautionnement:this.afficherMontantTTCDuCautionnement,
+        montant_ht_cautionnement:this.afficheMontantHorsTaxeDuCautionnement,
+        montant_ht_retenu_garantie:this.afficherMontantHorsTaxeRetenuGarantie,
+        montant_tva_retenu_garanti:this.afficherMontantTvaTaxeRetenuGarantie,
+        montant_ttc_retenue_garantie:this.afficherMontantRetenueGarantie,
+        tva:this.CaculermontantTva,
+          sous_traitance:this.sous_traitance,
+          garantie:this.garantie,
+        montant_act:this.formEffetFinancier.montant_act,
+        montant_act_ht:this.CaculerMontantHtParTTC,
+        avance_demarrage_ttc:this.avanceDemarrage,
+        tva_avance_demarage:this.avanceDemarrageMontantTva,
+        entreprise_id:this.affichierIdEntrepriseSelectionner(this.nom_candidata),
+        difference_personnel_bienService:this.afficheMarcheType,
+        marche_id:this.marche_lot,
+        marchegeneral_id:this.affichieridMarcheGlobal(this.marche_lot),
+          sous_traitance_array:this.structure_id,
+        banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
+        compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
+      }
+
+      console.log(nouvelObjet)
+      //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
+
+
+      //this.formEffetFinancier.entreprise_id=entreprisePremier.id
+      this.ajouterActeEffetFinancier(nouvelObjet12)
+      this.$("#modificationModal").modal('hide');
+      let marcheObjet2=this.marches.find(marche=>marche.id==this.marche_lot)
+      marcheObjet2.attribue = 2
+     let marcheObjet78=this.marches.find(marche=>marche.id==this.affichieridMarcheGlobal(this.marche_lot))
+      marcheObjet78.attribue = 2
+      marcheObjet2.numero_marche=this.formEffetFinancier.numero_marche
+      // console.log(marcheObjet)
+      this.modifierMarche(marcheObjet2)
+    this.modifierMarche(marcheObjet78)
+      this.formEffetFinancier = {
+        code_act:"",
+        libelle_act:"",
+        reference_act:"",
+        objet_act:"", 
+        incidence_financiere:"",
+        montant_act:"",
+        date_attributaire:"",
+        date_reception:"",
+        duree:"",
+        date_fin_exe:"",
+        date_odre_service:"",
+        livrable_id:"",
+        autorite_approbation:"",
+        date_approbation:"",
+        ua_id:"",
+        type_act_effet_id:"",
+        analyse_dossier_id:"",
+        entreprise_id:"",
+        marche_id:"",
+        numero_marche:"",
+avance_demarrage_ttc:0,
+avance_demarrage_ht:0,
+          sous_traitance:"",
+      }
+        this.structure_id=[]
+      }
     },
+    
       addStructure(){
           if(this.nom_structure=="")
               return ""

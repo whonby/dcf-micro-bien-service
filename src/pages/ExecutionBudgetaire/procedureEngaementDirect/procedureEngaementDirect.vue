@@ -11,34 +11,54 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#MANDATEMENT">MANDATEMENT</a>
+                        <a data-toggle="tab" href="#MANDATEMENT" v-if="detail_marche.type_engagement_id=='Marche'">MANDATEMENT</a>
+                        <a data-toggle="tab" href="#MANDATEMENT" v-if="detail_marche.type_engagement_id=='Régie davances-reservation des crédit'">OP SYSTEME</a>
                       </li>
-                       <!-- <li>
-                        <a data-toggle="tab" href="#LIQUIDATION">LIQUIDATION</a>
-                      </li>
-                        <li>
-                        <a data-toggle="tab" href="#REALITE">REALITE DE SERVICE FAIT</a>
-                      </li>
-                     <li>
-                        <a data-toggle="tab" href="#MANDATEMENT">MANDATEMENT</a>
-                      </li> -->
+                      
                      
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
                     <div id="MANDATEMENT" class="tab-pane active">
-  MANDATEMENT
+     <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#attentLiquidation">Dossiers En Attentes</a>
+                      </li>
+                       <li>
+                        <a data-toggle="tab" href="#ViséLiquidation">Dossiers Visés</a>
+                      </li>
+                        <li>
+                        <a data-toggle="tab" href="#ObservationLiquidation">Dossiers Visés avec Observation</a>
+                      </li>
+                      <li>
+                        <a data-toggle="tab" href="#DiffereLiquidation">Dossiers différés</a>
+                      </li>
+                      <li>
+                        <a data-toggle="tab" href="#RejettéLiquidation">Dossiers Rejettés</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+<div id="attentLiquidation" class="tab-pane active">
+                        <MandatEnAttente :macheid="detail_marche.id"></MandatEnAttente>
+                       </div>
+                       <div id="ViséLiquidation" class="tab-pane">
+                        <MandatVise :macheid="detail_marche.id"></MandatVise>
+                       </div>
+                       <div id="DiffereLiquidation" class="tab-pane">
+                        <MandatDifferer :macheid="detail_marche.id"></MandatDifferer>
+                       </div>
+                       <div id="RejettéLiquidation" class="tab-pane">
+                        <MandatRejetter :macheid="detail_marche.id"></MandatRejetter>
+                       </div>
+                       <div id="ObservationLiquidation" class="tab-pane">
+                        <MandatViseAvecObservation :macheid="detail_marche.id"></MandatViseAvecObservation>
+                       </div>
+                      </div>
           </div>
-                <!-- <div id="LIQUIDATION" class="tab-pane">
-  LIQUIDATION
-          </div>
-                  <div id="REALITE" class="tab-pane">
-  REALITE DE SERVICE FAIT
-          </div>
-          <div id="MANDATEMENT" class="tab-pane">
-  MANDATEMENT
-          </div>   -->
+               
 
                        
 
@@ -55,12 +75,21 @@
 </template>
   
 <script>
+import MandatEnAttente from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatEnAttente.vue"
+import MandatDifferer from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatDifferer.vue"
+import MandatRejetter from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatRejetter.vue"
+import MandatVise from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatVise.vue"
+import MandatViseAvecObservation from "@/pages/ExecutionBudgetaire/procedureEngaementDirect/mandat/MandatViseAvecObservation.vue"
 import { mapGetters, mapActions } from "vuex";
 
 
 export default {
   components:{
-
+    MandatViseAvecObservation,
+    MandatVise,
+    MandatRejetter,
+    MandatDifferer,
+MandatEnAttente
   },
   data() {
     return {

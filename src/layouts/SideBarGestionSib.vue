@@ -91,13 +91,13 @@
            
           </a>
         </li>
-        <!-- <li @click.prevent="ExecutionBudgetaire" :class="{active: active_el ==100}">
+        <li @click.prevent="ExecutionBudgetaire" :class="{active: active_el ==100}">
           <a title="INVESTISSEMENT" href="#">
             <i class="icon-truck"></i>
             <span>EXECUTION BUDGETAIRE</span>
            
           </a>
-        </li> -->
+        </li>
         <li @click.prevent="navigateRetourAuMenu" >
           <a title="Carte des infrastructure pas regison" href="#">
             <i class=" icon-globe"></i>
