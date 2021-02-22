@@ -192,9 +192,9 @@
                         </span>
                       </button> -->
                       <button class="btn btn-danger" @click="supprimerEngagement(Engage.id)">
-                        <span>
-                          <i class="icon icon-trash">Supprimer</i>
-                        </span>
+                       
+                           <span class=""><i class="icon-trash"></i>Supprimer</span>Supprimer
+                       
                       </button>
                     </td>
                                      </tr>

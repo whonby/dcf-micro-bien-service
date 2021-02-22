@@ -1,10 +1,4 @@
-idBudgetaire
-montantCumuler
-montantCumulerModifier
-montant_tresor
-prix_propose_ttc
-sources_financements
-sources_financements
+
 <template>
 
 <div class="container-fluid">

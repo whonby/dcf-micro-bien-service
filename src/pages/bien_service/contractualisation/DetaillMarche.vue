@@ -110,7 +110,7 @@ isButtunAddDossierCandidat
                                             {{appelOffre.montant || 'Non renseigné'}}</td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerMarcheBailleur(appelOffre.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash">Supprimer</i></span></button>
+                                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
                                         </div>
 
                                     </tr>
@@ -242,7 +242,7 @@ isButtunAddDossierCandidat
                                             <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerAppelOffre(appelOffre.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash">Supprimer</i></span></button>
+                                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                                         </div>
                                         </td>
@@ -296,7 +296,7 @@ isButtunAddDossierCandidat
 
                                                 <div class="btn-group">
                                                     <button @click.prevent="supprimerLot(lot_marche.id)"  class="btn btn-danger ">
-                                                        <span class=""><i class="icon-trash">Supprimer</i></span></button>
+                                                        <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                                                 </div>
 
@@ -397,7 +397,7 @@ isButtunAddDossierCandidat
                              <a href="#offreF" data-toggle="modal" @click.prevent="modaleOffreFinnanciere(appelOffre.id)"  class="btn  " title="Offre financière">
                                  <span class=""><i class=" icon-money"></i></span></a>
                              <button @click.prevent="supprimerDossierCandidat(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                 <span class=""><i class="icon-trash">Supprimer</i></span></button>
+                                 <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                          </div>
 
@@ -1426,7 +1426,7 @@ isButtunAddDossierCandidat
                         </td>
                         <div class="btn-group">
                             <button @click.prevent="supprimerDemandeAno(demande.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash">Supprimer</i></span>
+                                <span class=""><i class="icon-trash"></i>Supprimer</span>
                             </button>
                         </div>
 
@@ -1485,7 +1485,7 @@ isButtunAddDossierCandidat
                             {{document.document_procedure.libelle_doc || 'Non renseigné'}}</td> -->
                         <div class="btn-group">
                             <button @click.prevent="supprimerAnalyseDMP(document.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash">Supprimer</i></span></button>
+                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                         </div>
 
@@ -1558,7 +1558,7 @@ isButtunAddDossierCandidat
                         </td>
                         <div class="btn-group">
                             <button @click.prevent="supprimerAnoDMPBailleur(anoBailleur.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash">Supprimer</i></span></button>
+                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                         </div>
 
@@ -1900,7 +1900,7 @@ isButtunAddDossierCandidat
 <td>
       <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash">Supprimer</i></span>
+                                <span class=""><i class="icon-trash"></i>Supprimer</span>
                             </button>
                         </div>
 </td>

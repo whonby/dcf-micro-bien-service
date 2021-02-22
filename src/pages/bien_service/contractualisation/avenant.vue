@@ -193,7 +193,7 @@
                     >{{type.date_avenant || 'Non renseigné'}}</td>
                     <td>
                       <button class="btn btn-danger" @click="supprimerTypeTexte(type.id)">
-                       <span class=""><i class="icon-trash"> Supprimer </i></span></button>
+                       <span class=""><i class="icon-trash"></i>Supprimer</span></button>
                     </td>
                   </tr>
                 </tbody>

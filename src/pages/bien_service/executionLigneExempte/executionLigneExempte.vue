@@ -23,14 +23,14 @@ afficherIDUA(
                     <thead>
                     <tr>
 
-                        <th>Reference acte</th>
+                        <th>Référence acte</th>
                         <th>Entreprise</th>
                         <th>Montant acte</th>
                         <th>Montant Avance Demarrage</th>
                          <th>Montant retenue garantie</th>
                          <th>Montant cautionnement</th>
                         <th>Type acte</th>
-                        <th>Objet marche.</th>
+                        <th>Objet marché</th>
                         
                         <th>Imputation</th>
                         <th>Durée du marché</th>
@@ -131,7 +131,7 @@ afficherIDUA(
                         </td>
                         <div class="btn-group">
                             <button class="btn btn-link" title="Supprimer" @click.prevent="supprimeStructureSelectionner(appelOffre.id)">
-                                <span class=""><i class="icon-trash"></i></span>
+                                <span class=""><i class="icon-trash"></i>Supprimer</span>
                             </button>
                         </div>
 
@@ -407,8 +407,8 @@ afficherIDUA(
               
                   <select v-model="formEffetFinancier.etatcontrat" class="span4">
                    <option></option>
-                   <option value="1">Réparation ou Entrétien Véhicule</option>
-                   <option value="2">Réparation ou Entrétien Mobilier & Matériel</option>
+                   <option value="1">Réparation ou Entretien Véhicule</option>
+                   <option value="2">Réparation ou Entretien Mobilier & Matériel</option>
                   </select>
                  
               </div>

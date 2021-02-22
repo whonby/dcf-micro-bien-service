@@ -18,7 +18,7 @@
           </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
-              <thead>
+              <thead>  
               <tr>
                 <th>N°</th>
                 <th>Intitulé du lot</th>
@@ -274,7 +274,8 @@
     <div class="modal-body">
        <table class="table table-bordered table-striped">
         <tr>
-<td><div class="control-group">
+<td>
+  <div class="control-group">
                         <label class="control-label">Numéro du lot</label>
                         <div class="controls">
                             <input

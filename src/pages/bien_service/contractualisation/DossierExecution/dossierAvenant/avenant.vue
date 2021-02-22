@@ -379,7 +379,7 @@
 
                     <td>
                       <button class="btn btn-danger" @click="supprimerAvenant(type.id)">
-                         <span class=""><i class="icon-trash">Supprimer</i></span>
+                         <span class=""><i class="icon-trash"></i>Supprimer</span>
                       </button>
                     </td>
                   </tr>

@@ -122,9 +122,7 @@
                    </router-link> 
                    
                       <button class="btn btn-danger" @click="supprimerEngagement(Engage.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
+                        <span class=""><i class="icon-trash"></i>Supprimer</span>
                       </button>
                     </td>
                   </tr>
