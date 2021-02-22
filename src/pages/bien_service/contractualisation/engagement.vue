@@ -875,7 +875,7 @@ affichierMontantAvenant
                         </span>
                       </button> -->
                       <button class="btn btn-danger" @click="supprimerEngagement(Engage.id)">
-                      <span class=""><i class="icon-trash"> Supprimer </i></span></button>
+                      <span class=""><i class="icon-trash"></i>Supprimer</span></button>
                     </td>
                   </tr>
                
@@ -1176,7 +1176,7 @@ affichierMontantAvenant
                       </button>
                       <button class="btn btn-danger" @click="supprimerFacture(factu.id)">
                         <span>
-                          <i class="icon icon-trash">Supprimer</i>
+                          <i class="icon icon-trash"></i>Supprimer
                         </span>
                       </button>
                     </td>

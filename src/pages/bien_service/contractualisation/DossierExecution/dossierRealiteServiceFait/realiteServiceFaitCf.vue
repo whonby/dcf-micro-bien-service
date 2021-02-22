@@ -201,9 +201,10 @@
                    </router-link> 
                    
                       <button  class="btn btn-danger" @click="supprimerRealiteServiceFait(realiteService.id)">
-                        <span>
+                        <!-- <span>
                           <i class="icon icon-trash"></i>
-                        </span>
+                        </span> -->
+                         <span class=""><i class="icon-trash"></i>Supprimer</span>
                       </button>
                     </td>
                                      </tr>

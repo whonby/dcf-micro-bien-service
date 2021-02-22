@@ -114,7 +114,7 @@ affichierAppelOffreid
         </div>
 
         <div class="control-group">
-          <label class="control-label">Numero du courrier</label>
+          <label class="control-label">Numéro du courrier</label>
           <div class="controls">
             <input
                 type="text"

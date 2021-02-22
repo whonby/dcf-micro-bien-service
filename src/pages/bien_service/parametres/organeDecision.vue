@@ -127,7 +127,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter organe de résolutions</h3>
+                <h3>Ajouter organe de résolution</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">

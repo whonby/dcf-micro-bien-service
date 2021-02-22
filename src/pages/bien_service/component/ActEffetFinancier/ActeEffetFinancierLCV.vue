@@ -127,7 +127,7 @@ marche_id
           <div class="btn-group">
             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
               <span class=""><i class="icon-trash">
-                Supprimer</i></span>
+                </i>Supprimer</span>
             </button>
           </div>
         </td>
@@ -146,7 +146,7 @@ marche_id
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#Identif">Identification de L'acte</a></li>
         <li class=""><a data-toggle="tab" href="#financ">Informations financières</a></li>
-          <li class="" v-if="sous_traitance=='oui'"><a data-toggle="tab" href="#sous_traitance">Les entreprise sous_traitance </a></li>
+          <li class="" v-if="sous_traitance=='oui'"><a data-toggle="tab" href="#sous_traitance">Les entreprises sous_traitances </a></li>
       </ul>
     </div>
     <div class="widget-content tab-content">

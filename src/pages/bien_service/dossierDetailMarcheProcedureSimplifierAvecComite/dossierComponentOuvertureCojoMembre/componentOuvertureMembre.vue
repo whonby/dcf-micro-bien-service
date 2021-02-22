@@ -64,7 +64,7 @@
 
                                 <div class="control-group">
 
-                                    <label class="control-label">Nom et prenom <code>*</code> :</label>
+                                    <label class="control-label">Nom et prénom <code>*</code> :</label>
                                     <div class="control-group">
                                         <input type="text" class="span" placeholder="Numéro lot" v-model="formDataMembreCojo.nom_prenom">
 
