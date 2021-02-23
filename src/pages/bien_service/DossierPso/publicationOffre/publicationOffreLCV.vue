@@ -7,8 +7,8 @@
                 <table class="table table-bordered table-striped" v-if="macheid">
                      <thead>
                              <tr>
-                                        <th>Reference SIGVA</th>
-                                        <th>Reference facture proformat</th>
+                                        <th>Référence SIGVA</th>
+                                        <th>Référence facture proformat</th>
                                         <th> Type procedure</th>
                                         <th>Mode de passation</th>
                                         <th>Entreprise</th>
@@ -39,7 +39,7 @@
                                             <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerAppelOffre(appelOffre.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i></span></button>
+                                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
 
                                         </div>
                                         </td>

@@ -67,7 +67,7 @@
 
  <ul>
 <!--         <li v-for="item in tachePrevuePasMarche(activites.id)" :key="'TACHE'+item.id">{{item.libelle}}</li>-->
-         <span v-for="(type2) in ListePieceJustificative(type.numero_demande)" :key="type2.id" class="by label">{{type2.libelle}} ( {{type2.reference}}) </span>
+         <span v-for="(type2) in ListePieceJustificative(type.numero_demande)" :key="type2.id" class="by label">{{listePieceJustifica(type2.libelle)}} ( {{type2.reference}}) </span>
 
      </ul>
 
@@ -147,14 +147,25 @@ export default {
   },
  props:["macheid"],
   computed: {
-    ...mapGetters("bienService", ["gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+    ...mapGetters("bienService", ["typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
                 "getActeEffetFinancierPersonnaliserContrat", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
    
  ...mapGetters("personnelUA", ["FichierJoinDmdEngagement","all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
-    
+    listePieceJustifica() {
+      return (id,id2) => {
+        if (id != null && id != "" && id2 != null && id2 != "") {
+           const qtereel = this.typeFactures.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return ""
+        }
+      };
+    },
   afficheFichierJoint() {
       return id => {
         if (id != null && id != "") {

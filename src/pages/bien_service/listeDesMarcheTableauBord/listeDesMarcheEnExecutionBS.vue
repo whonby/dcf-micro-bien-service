@@ -11,7 +11,7 @@ affichertypeMarcheID
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des marchés en executions</h5>
+              <h5>Liste des marchés en exécutions</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -24,7 +24,7 @@ affichertypeMarcheID
                  <tr>
                 <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
+                      <th>Type du marché</th>
                    
                     <!-- <th>Activit&eacute;</th> -->
                     <th>Imputation</th>

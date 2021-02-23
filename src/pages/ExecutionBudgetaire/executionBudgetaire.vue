@@ -24,7 +24,7 @@
                     <tr>
                       <td style=" width:5%">
 <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="liquidation"><i class="icon icon-folder-open"> Nouveau Liquidation</i></button>
+    <button class="btn btn-success" @click.prevent="liquidation"><i class="icon icon-folder-open"> Nouvelle Liquidation</i></button>
     
         </div> 
                       </td>

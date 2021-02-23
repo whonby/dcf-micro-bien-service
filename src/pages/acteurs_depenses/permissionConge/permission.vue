@@ -64,7 +64,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
-                                                            <label class="control-label">Date debut</label>
+                                                            <label class="control-label">Date début</label>
                                                             <div class="controls">
                                                                 <input type="date" class="span11" placeholder="Enter date" v-model="permissionObjet.datedebut">
                                                             </div>

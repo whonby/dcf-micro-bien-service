@@ -126,12 +126,12 @@
                         </td>
 
 
-
+ 
                     </tr>
                     <tr>
                         <td>
                             <div class="control-group">
-                                <label class="control-label">Reference acte</label>
+                                <label class="control-label">Référence acte</label>
                                 <div class="controls">
                                     <input type="text" v-model="editActeEffetFinancier.reference_act"
                                            class="span"
@@ -220,7 +220,7 @@
 
                         <td>
                             <div class="control-group">
-                                <label class="control-label" title=" ">Date de reception definitive</label>
+                                <label class="control-label" title=" ">Date de réception définitive</label>
                                 <div class="controls">
                                     <input type="date" v-model="editActeEffetFinancier.date_reception"
                                            class="span"

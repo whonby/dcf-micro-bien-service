@@ -76,7 +76,7 @@
             <tr>
                  <td>
           <div class="control-group">
-            <label class="control-label">Departement</label>
+            <label class="control-label">Département</label>
             <div class="controls">
               <input
                 type="text"
@@ -196,7 +196,7 @@
              <tr>
                  <td>
           <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">libellé</label>
             <div class="controls">
               <input
                 type="text"

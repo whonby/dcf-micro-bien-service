@@ -25,7 +25,7 @@
                            <!-- <th>Entreprise</th> -->
                           <th>Date de composition </th>
                           <th>Date d'ouverture</th>
-                          <th>Nombre de particiapnts</th>
+                          <th>Nombre de participants</th>
                           <th>Action</th>
                       </tr>
                       

@@ -3,6 +3,10 @@
 
 <div class="container-fluid">
       <hr />
+       <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
+    
+        </div>
       <div class="row-fluid">
         <div class="span12">
           <div class="widget-box">
@@ -48,6 +52,21 @@
               </div>
               
             </td>
+              <td>
+              <div class="control-group">
+                <label class="control-label">Numéro Liquidation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="numeroLiquidation(formData5.numero_liquidation)"
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+              
+            </td>
                           <td>
               <div class="control-group">
                 <label class="control-label">Numéro de Mandat</label>
@@ -78,7 +97,13 @@
               </div>
               
             </td>
-            <td>
+          
+                      </tr>
+                  </table>
+          <table class="table table-bordered table-striped" style="border:1px solid #000">
+             
+                    <tr>
+                       <td>
               <div class="control-group">
                 <label class="control-label">Imputation</label>
                 <div class="controls">
@@ -93,11 +118,6 @@
               </div>
               
             </td>
-                      </tr>
-                  </table>
-          <table class="table table-bordered table-striped" style="border:1px solid #000">
-             
-                    <tr>
                          <td>
               <div class="control-group">
                 <label class="control-label">Ministère/Institution</label>
@@ -114,7 +134,7 @@
               
             </td>
            
-                 <td colspan="2">
+                 <td colspan="">
               <div class="control-group">
                 <label class="control-label">Programme/Dotation</label>
                 <div class="controls">
@@ -437,23 +457,22 @@
                     
  <table class="table table-bordered table-striped">
                 <thead>
-                  <tr>
-                     <th>Numero Ordre</th>
-                    <th>Nature de la pièce</th>
-                   <th>Reference</th>
-                   <th>Date de la pièce</th>
-                   <th>Montant</th>
+                 <tr>
+                     <th style="font-size:14px;font-weight:bold">Numero Ordre</th>
+                    <th style="font-size:14px;font-weight:bold">Nature de la pièce</th>
+                   <th style="font-size:14px;font-weight:bold">Reference</th>
+                   <th style="font-size:14px;font-weight:bold">Date de la pièce</th>
                     
                   </tr>
                 </thead>
-                <tbody>
-                  <!-- <tr class="odd gradeX" v-for="(type) in listePieceJustificative(formData.numero_demande)" :key="type.id">
-                    <td style="width:20%"
+               <tbody>
+                  <tr class="odd gradeX" v-for="(type) in listePieceJustificativedefinitive(formData5.numeroDemande)" :key="type.id">
+                    <td style="width:20%,text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_ordre || 'Non renseigné'}}</td>
                     <td style="width:30%"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{type.libelle || 'Non renseigné'}}</td>
+                    >{{listePieceJustifica(type.libelle) || 'Non renseigné'}}</td>
                     <td style="width:20%"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.reference || 'Non renseigné'}}</td>
@@ -461,14 +480,8 @@
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{formaterDate(type.date_piece) || 'Non renseigné'}}</td>
 
-                    <td  style="width:15%">
-                      <button class="btn btn-danger" @click="supprimerPieceJustificative(type.id)">
-                        <span>
-                          <i class="icon icon-trash"> Supprimer</i>
-                        </span>
-                      </button>
-                    </td>
-                  </tr> -->
+                    
+                  </tr>
                 </tbody>
               </table>
                        </td>
@@ -560,7 +573,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -572,7 +585,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                  
                   />
                 </div>
               </div>
@@ -606,7 +619,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -618,7 +631,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -651,7 +664,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -663,7 +676,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -795,7 +808,11 @@
           
           @click.prevent="AjoutePieceJustific"
         >Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+        <a
+                          @click.prevent="pagePrecedent()"
+                          class="btn"
+                          href="#"
+                        >Fermer</a>
       </div>
     </div>
 </div>
@@ -859,7 +876,7 @@ components: {
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
 
-...mapGetters("bienService", ["gettersDossierLiquidation","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+...mapGetters("bienService", ["typeFactures","gettersDossierLiquidation","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -880,6 +897,44 @@ components: {
       "afficheLocalisationGeoNiveau5"
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+
+
+      listePieceJustifica() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           const qtereel = this.typeFactures.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return ""
+        }
+      };
+    },
+ listePieceJustificativedefinitive() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_dmd_combine == id && qtreel.etat_piece=="definitive");
+
+      
+        }
+      };
+    },
+
+numeroLiquidation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDossierLiquidation.find(qtreel => qtreel.dmd_engagement_id == id);
+
+      if (qtereel) {
+        return qtereel.numero_liquidation;
+      }
+      return "pas de liquidation"
+        }
+      };
+    },
+
+
 
  calculCumul() { 
       const val =  parseFloat(this.CumulDemande(this.formData5.ligne_id)) ;
@@ -914,7 +969,7 @@ CumulDemande: function () {
       listePieceJustificative() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_dmd_combine == id && 	qtreel.etat_piece==null);
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_dmd_combine == id && qtreel.etat_piece=="definitive");
 
       
         }
@@ -1032,6 +1087,18 @@ recupereIdDemandeEngagement() {
         }
       };
     },
+    montantEngage() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.numero_dmd_combine == id);
+
+      if (qtereel) {
+        return qtereel.total_general;
+      }
+      return 0
+        }
+      };
+    },
     recupereNumeroDemande() {
       return id => {
         if (id != null && id != "") {
@@ -1060,11 +1127,13 @@ methods: {
       ...mapActions('personnelUA', ["ajouterFichierJointDmd"]),
 
 
-
+pagePrecedent(){
+                window.history.back()
+            },
 rechercheMembreCojo(){
       // console.log(this.formData5.numeroDemande)
 
-      let objetMandater=this.gettersDossierLiquidation.filter(item=>this.recupereNumeroDemande(item.dmd_engagement_id)==this.formData5.numeroDemande && item.decision_cf == 8 ||this.recupereNumeroDemande(item.dmd_engagement_id)==this.formData5.numeroDemande && item.decision_cf == 9)
+      let objetMandater=this.gettersDemandeEngagement.filter(item=>item.numero_dmd_combine==this.formData5.numeroDemande)
       // console.log(objetMandater)
       if(objetMandater!=undefined){
         if (objetMandater.length==1){
@@ -1078,13 +1147,14 @@ rechercheMembreCojo(){
         this.formData5.nature_id=acteur.grd_nature_id,
         this.formData5.odjetDepense=acteur.objet_depense,
         this.formData5.montant_engage=acteur.total_general,
-        this.formData5.typeProcedure_id=acteur.type_procedure_id
+        this.formData5.typeProcedure_id=acteur.type_procedure_id,
 
          this.formData5.Numero_cc=acteur.numero_cc_autre,
          this.formData5.nomEntreprise=acteur.nom_autre,
         this.formData5.adresse=acteur.adresse,
-        this.formData5.mode_paiement_id=acteur.mode_paiement_id
-        this.formData5.adresse=acteur.Reference_bancaires
+        this.formData5.mode_paiement_id=acteur.mode_paiement_id,
+        this.formData5.adresse=acteur.Reference_bancaires,
+        this.formData5.numero_liquidation=acteur.id
         //   this.message_mandater=" "
 
         }
@@ -1093,8 +1163,24 @@ rechercheMembreCojo(){
           this.formData5.ligne_id=""
         }
       }
-      if(this.formData2.Numéro_cc_fournisseur==""){
-        this.formData2.numero_cc_fournisseur_nom=""
+      if(this.formData5.numeroDemande==""){
+       this.formData5.ligne_id="",
+          this.formData5.section_id="",
+        this.formData5.prog_id="",
+        this.formData5.action_id="",
+        this.formData5.activite_id="",
+        this.formData5.ua_id="",
+        this.formData5.nature_id="",
+        this.formData5.odjetDepense="",
+        this.formData5.montant_engage="",
+        this.formData5.typeProcedure_id="",
+
+         this.formData5.Numero_cc="",
+         this.formData5.nomEntreprise="",
+        this.formData5.adresse="",
+        this.formData5.mode_paiement_id="",
+        this.formData5.adresse="",
+        this.formData5.numero_liquidation=""
         this.message_mandater=" "
       }
     },
@@ -1102,7 +1188,7 @@ AjouterLiquidation() {
          var nouvelObjet = {
         ...this.formMandat,
         demande_engagement_id: this.recupereIdDemandeEngagement(this.formData5.numeroDemande),
-        
+        montant_engage:this.montantEngage(this.formData5.numeroDemande)
         
       };
       this.ajouterDossierMandat(nouvelObjet);

@@ -75,6 +75,11 @@
             </router-link>
           </li>
            <li>
+            <router-link :to="{name: 'AutresDepense'}" tag ="a">
+                AUTRES DEPENSE
+            </router-link>
+          </li>
+           <li>
             <router-link :to="{name: 'marcheEntreprise'}" tag ="a">
                 LISTE DES MARCHES PAR ENTREPRISES
             </router-link>

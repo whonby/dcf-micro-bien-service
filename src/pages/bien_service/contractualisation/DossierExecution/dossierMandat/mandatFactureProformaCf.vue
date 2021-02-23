@@ -113,7 +113,8 @@
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
                       <button class="btn btn-danger" @click="supprimerMandat(Manda.id)">
-               <span class=""><i class="icon-trash">Supprimer</i></span></button>
+               <span class=""><i class="icon-trash"></i>Supprimer</span>
+               </button>
                     </td>
                                      </tr>
                

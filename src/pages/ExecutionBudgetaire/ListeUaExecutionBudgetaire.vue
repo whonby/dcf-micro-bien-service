@@ -197,6 +197,7 @@ uniteAdministratives
    
     <div >
       <hr />
+      <h2 style="text-align:center">LISTES DES DEMANDES D'ENGAGEMENTS</h2>
       <table class="table table-bordered table-striped">
         <tr>
           <td>
@@ -242,8 +243,9 @@ uniteAdministratives
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
-                <i class="icon-th">DEMANDE D'ENGAGEMENT</i>
+                <i class="icon-th"></i>
               </span>
+              <h5>DEMANDE D'ENGAGEMENT</h5>
               <!-- <h5>Gestion du Patrimoine</h5> -->
               <!-- <div align="right">
                 Recherche:
@@ -256,27 +258,31 @@ uniteAdministratives
               <table class="table table-bordered table-striped">
                      <thead>
                   <tr>
-                    <th>N°demande</th>
-                    <!-- <th>Type de procedure</th> -->
+                    <th style="font-size:14px;font-weight:bold">N°demande</th>
+                    <!-- <th style="font-size:14px;font-weight:bold">Type de procedure</th> -->
                     <!-- <th>Mode de paiement</th> -->
                     
                     <!-- <th>Nom fournisseur</th> -->
-                    <th>Object de la depense</th>
-                    <th>Montant Tresor</th>
-                     <th>Montant Don</th>
-                      <th>Montant Emprunt</th>
-                      <th>Total</th>
-                      <th>Fichier Joint</th>
-                       <th>Nature de la Pièce</th>
-                       <th>Type de procedure</th>
-                       <th>Decision</th>
-                        <th>Voir Détail</th>
-                        <th colspan="2">Action</th>
+                    <th style="font-size:14px;font-weight:bold">Object de la depense</th>
+                    <th style="font-size:14px;font-weight:bold">Montant Tresor</th>
+                     <th style="font-size:14px;font-weight:bold">Montant Don</th>
+                      <th style="font-size:14px;font-weight:bold">Montant Emprunt</th>
+                      <th style="font-size:14px;font-weight:bold">Total</th>
+                      <!-- <th style="font-size:14px;font-weight:bold">Fichier Joint</th>
+                       <th style="font-size:14px;font-weight:bold">Nature de la Pièce</th> -->
+                       <th style="font-size:14px;font-weight:bold">Type de procedure</th>
+                       <th style="font-size:14px;font-weight:bold">Type d'engagement</th>
+                       <th style="font-size:14px;font-weight:bold">Demande</th>
+                       <th style="font-size:14px;font-weight:bold" title="">Liquidation</th>
+                       <th style="font-size:14px;font-weight:bold">Mandat</th>
+                       <th style="font-size:14px;font-weight:bold">Op Systeme</th>
+                        <th style="font-size:14px;font-weight:bold">Voir Détail</th>
+                        <th  style="font-size:14px;font-weight:bold" colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(type, index) in ListeDEsEntreprise" :key="type.id">
-                    <td style="color:red;font-weight: bold;"
+                  <tr class="odd gradeX" v-for="(type) in ListeDEsEntreprise" :key="type.id">
+                    <td style="color:red;font-weight: bold;font-size:14px"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_dmd_combine || 'Non renseigné'}}</td>
                    
@@ -297,7 +303,7 @@ uniteAdministratives
                     >{{formatageSomme(parseFloat(type.total_general)) || 0}}</td>
                     
                     
-                    <td
+                    <!-- <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >
                     <a v-if="afficheFichierJoint(type.numero_demande)" :href="afficheFichierJoint(type.numero_demande)" class="btn btn-default" target="_blank">
@@ -305,23 +311,25 @@ uniteAdministratives
                                 </span>
                             </a>
                     
-                    </td>
+                    </td> -->
                     
-                     <td style="text-align:center"  >
+                     <!-- <td style="text-align:center"  >
                        
 
  <ul>
-<!--         <li v-for="item in tachePrevuePasMarche(activites.id)" :key="'TACHE'+item.id">{{item.libelle}}</li>-->
+
          <span v-for="(type2) in ListePieceJustificative(type.numero_demande)" :key="type2.id" class="by label">{{type2.libelle}} ( {{type2.reference}}) </span>
 
      </ul>
 
 
-                       </td>       
+                       </td>        -->
                         <td style="text-align:center;font-weight: bold;"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.type_procedure_id || 0}}</td> 
-                               
+                                <td style="text-align:center;font-weight: bold;"
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{type.type_engagement_id || 0}}</td>
                     <td >
                         <button v-if="type.decision_cf == 8"  class="btn  btn-success" @click="afficheDecisionCf(type.id)" >                        
                      
@@ -355,6 +363,150 @@ uniteAdministratives
                     
                       </button>
                     </td>
+                   <td  v-if="type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Marche' || type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Autre'" >
+                        <button v-if="type.decision_cf == 8"  class="btn  btn-success"  >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="type.decision_cf == 2" class="btn  btn-warning"  >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="type.decision_cf == 3" class="btn  btn-danger"  >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                       <button v-else-if="type.decision_cf == 9"  class="btn  btn-success"  >                        
+                     
+                      <span>Visé avec observation</span>
+                      
+                      </button>
+                      <template>
+                        <button v-if="type.id == afficheDecisionLiquidation(type.id) && type.decision_cf == 0" class="btn  btn-info" @click="afficheDecisionCf(type.id)" >                        
+                     
+                      
+                       <span>Attente</span>
+                      
+                    
+                      </button>
+                     <button  v-else-if="type.id != afficheDecisionLiquidation(type.id) " class="btn  btn-danger" @click="ajouterLiquidation" >                        
+                     
+                      
+                       <span>Ajouter</span>
+                      
+                    
+                      </button>
+                      <span  v-else >                        
+                     
+                      </span>
+                      </template>
+                    </td>
+                    <td v-else style="background-color:lightblue"></td>
+                    <td  v-if="type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Marche' || type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Autre' || type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Régularisation dordre de paiement'">
+                        <button v-if="type.decision_cf == 8"  class="btn  btn-success"  >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="type.decision_cf == 2" class="btn  btn-warning"  >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="type.decision_cf == 3" class="btn  btn-danger"  >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                       <button v-else-if="type.decision_cf == 9"  class="btn  btn-success"  >                        
+                     
+                      <span>Visé avec observation</span>
+                      
+                      </button>
+                    <template>
+                        <button v-if="type.id == afficheDecisionMandat(type.id) && type.decision_cf == 0" class="btn  btn-info"  >                        
+                     
+                      
+                       <span>Attente</span>
+                      
+                    
+                      </button>
+                      <button  v-else-if="type.id != afficheDecisionMandat(type.id) " class="btn  btn-danger" @click="ajouterMandat" >                        
+                     
+                      
+                       <span>Ajouter</span>
+                      
+                    
+                      </button>
+                      <span  v-else >                        
+                     
+                      </span>
+                      </template>
+                    </td>
+                    <td v-else style="background-color:lightblue"></td>
+                     <td  v-if="type.type_procedure_id=='Engagement direct' && type.type_engagement_id=='Régie davances-reservation des crédit'">
+                        <button v-if="type.decision_cf == 8"  class="btn  btn-success"  >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="type.decision_cf == 2" class="btn  btn-warning"  >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="type.decision_cf == 3" class="btn  btn-danger"  >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                       <button v-else-if="type.decision_cf == 9"  class="btn  btn-success"  >                        
+                     
+                      <span>Visé avec observation</span>
+                      
+                      </button>
+                    <template>
+                        <button v-if="type.id == afficheDecisionMandat(type.id) && type.decision_cf == 0" class="btn  btn-info"  >                        
+                     
+                      
+                       <span>Attente</span>
+                      
+                    
+                      </button>
+                      <button  v-else-if="type.id != afficheDecisionMandat(type.id) && type.decision_cf != 0 || type.id != afficheDecisionMandat(type.id)" class="btn  btn-danger" @click="ajouterOpSysteme" >                        
+                     
+                      
+                       <span>Ajouter</span>
+                      
+                    
+                      </button>
+                      <!-- <span  v-else style="background-color:red">                         -->
+                      <!-- <button   class="btn  btn-danger" @click="ajouterOpSysteme && type.decision_cf != 0" >                        
+                     
+                      
+                       <span>Ajouter</span>
+                      
+                    
+                      </button> -->
+                      <!-- </span> -->
+                      </template>
+                    </td>
+                    <td v-else style="background-color:lightblue"></td>
                    <td>
                       <router-link :to="{ name: 'voitDetailBonCmmande', params: { id: type.id }}"
                 class="btn btn-Success " title="">
@@ -362,13 +514,13 @@ uniteAdministratives
                    </router-link> 
                     </td>
                       <td>
-                      <router-link :to="{ name: 'executionBudgetaire', params: { id: type.id }}" v-if="afficheIconeBonCommande(type.id)=='Engagement par Bien de Commande'" style="font-weight: bold;background: green;color:#fff"
+                      <router-link :to="{ name: 'executionBudgetaire', params: { id: type.id }}" v-if="afficheIconeBonCommande(type.id)=='Engagement par Bon de Commande'" style="font-weight: bold;background: green;color:#fff"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;color:#fff"> Etape par Bon Commande</i></span>
+                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;color:#fff"> Prendre une decision</i></span>
                    </router-link> 
                    <router-link :to="{ name: 'procedureEngaementDirect', params: { id: type.id }}" v-else style="font-weight: bold;background: red;color:#fff"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;color:#fff"> Etape Engagement Direct</i></span>
+                  <span class=""><i class="  icon-eye-open" style="font-weight: bold;color:#fff"> Prendre une decision</i></span>
                    </router-link> 
                     </td>
                     <td>
@@ -392,7 +544,10 @@ uniteAdministratives
                     <td></td>
                     <td></td>
                     <td></td>
+                      <td></td>
                     <td></td>
+                    <td></td>
+                      <td></td>
                     
                   </tr>
                 </tbody>
@@ -464,7 +619,7 @@ export default {
   },
  props:["macheid"],
   computed: {
-    ...mapGetters("bienService", ["gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+    ...mapGetters("bienService", ["gettersDossierMandat","gettersDossierLiquidation","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -513,7 +668,30 @@ export default {
       // "sections"
        
     ]),
+    afficheDecisionMandat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDossierMandat.find(qtreel => qtreel.demande_engagement_id == id);
 
+      if (qtereel) {
+        return qtereel.demande_engagement_id;
+      }
+      return 0
+        }
+      };
+    },
+afficheDecisionLiquidation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDossierLiquidation.find(qtreel => qtreel.dmd_engagement_id == id);
+
+      if (qtereel) {
+        return qtereel.dmd_engagement_id;
+      }
+      return 0
+        }
+      };
+    },
 ListeDEsEntreprise(){
 
                 let vM=this;
@@ -686,6 +864,15 @@ this.$("#demandeVise").modal('hide');
 
        this.editDemandeEngagement = this.gettersDemandeEngagement.find(item=>item.id==id);
     },
+    ajouterOpSysteme(){
+                this.$router.push({ name: 'AjouterOrdrePaiement' })
+            },
+      ajouterMandat(){
+                this.$router.push({ name: 'AjouterMantdatement' })
+            },
+     ajouterLiquidation(){
+                this.$router.push({ name: 'AjouterLiquidation' })
+            },
     ajouterDemandeEngage(){
                 this.$router.push({ name: 'AjouterDemandeEngagement' })
             },

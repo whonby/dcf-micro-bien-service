@@ -1,7 +1,7 @@
 
 <template>
    <div>
-<div id="DossierMandatRejetter" class="modal hide tailgrand">
+<div id="DossierMandatVisa" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Decision CF</h3>
@@ -146,15 +146,16 @@
                 <thead>
                   <tr>
                     <th>N°demande Engagement</th>
-                    <th>N° de Mandat</th>
+                     <th v-if="detail_marche1.type_engagement_id!='Régie davances-reservation des crédit'">N° de Mandat</th>
+                    <th v-if="detail_marche1.type_engagement_id=='Régie davances-reservation des crédit'">N°OP Systeme</th>
                     <th>Object de la depense</th>
                     <th>Montant autorisé</th>
                     <!-- <th>Cumul des Engagements</th> -->
                       <th>Montant Liquide</th>
                       
                        <th>Decision</th>
-                        <!-- <th>Voir Détail</th> -->
-                        <th>Action</th>
+                        <!-- <th>Voir Détail</th>
+                        <th>Action</th> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -162,9 +163,12 @@
                     <td style="color:red;font-weight: bold;text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{recuppererNumeroDemande(type.demande_engagement_id) || 'Non renseigné'}}</td>
-                    <td style="color:red;font-weight: bold;text-align:center"
+                   <td style="color:red;font-weight: bold;text-align:center" v-if="detail_marche1.type_engagement_id!='Régie davances-reservation des crédit'"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_mandat || 'Non renseigné'}}</td>
+                    <td style="color:red;font-weight: bold;text-align:center" v-else
+                      @dblclick="afficherModalModifierTypeTexte(type.id)"
+                    >{{type.numero_op || 'Non renseigné'}}</td>
                     <td 
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{recuppererOrdreDepense(type.demande_engagement_id) || 'Non renseigné'}}</td>
@@ -219,14 +223,14 @@
                 class="btn btn-Success " title="">
                   <span class=""><i class="  icon-eye-open" style="font-weight: bold;"> Voir Détail</i></span>
                    </router-link> 
-                    </td> -->
+                    </td>
                     <td>
-                      <button class="btn btn-danger" @click="supprimerDossierMandat(type.id)">
+                      <button class="btn btn-danger" @click="supprimerDemandeEngagement(type.id)">
                         <span>
                           <i class="icon icon-trash"></i> Supprimer
                         </span>
                       </button>
-                    </td>
+                    </td> -->
                   </tr>
                   <!-- <tr>
                     <td></td>
@@ -276,8 +280,15 @@ export default {
     };
   },
  props:["macheid"],
+ created() {
+            this.marcheid=this.$route.params.id
+   this.detail_marche1 = this.gettersDemandeEngagement.find(
+       idmarche => idmarche.id == this.$route.params.id
+         )
+         
+},
   computed: {
-    ...mapGetters("bienService", ["gettersDossierMandat","gettersDossierMandat","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+    ...mapGetters("bienService", ["gettersDossierLiquidation","gettersDossierMandat","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -388,7 +399,7 @@ ListePieceJustificative() {
    listeDossierMandat() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierMandat.filter(qtreel =>qtreel.demande_engagement_id == id && this.typeProcedure(qtreel.demande_engagement_id) == "Engagement par Bon de Commande" && qtreel.decision_cf==3);
+           return this.gettersDossierMandat.filter(qtreel => qtreel.demande_engagement_id == id && this.typeProcedure(qtreel.demande_engagement_id) == "Engagement direct" && qtreel.decision_cf==8);
 
         }
       };
@@ -396,7 +407,7 @@ ListePieceJustificative() {
     SommeDossierMandat() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierMandat.filter(qtreel => this.ua(qtreel.ua_id) == id && this.typeProcedure(qtreel.demande_engagement_id) == "Engagement par Bon de Commande" && qtreel.decision_cf==0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0);
+           return this.gettersDossierMandat.filter(qtreel => this.ua(qtreel.ua_id) == id && this.typeProcedure(qtreel.demande_engagement_id) == "Engagement direct" && qtreel.decision_cf==8).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0);
 
         }
       };
@@ -441,7 +452,7 @@ ListePieceJustificative() {
                 return id => {
                     if (id != "") {
                       let valInite=0;
-                        return  this.gettersDemandeEngagement.filter(normeEquipe => normeEquipe.id == id && normeEquipe.decision_cf == 8 || normeEquipe.id == id && normeEquipe.decision_cf == 9).reduce(function(total,currentVal){
+                        return  this.gettersDemandeEngagement.filter(normeEquipe => normeEquipe.id == id).reduce(function(total,currentVal){
                            return total + parseFloat(currentVal.total_general)
                         },valInite);
                     }
@@ -500,6 +511,31 @@ decision_Cf_liquidation() {
         }
       };
     },
+
+    recupereIdDemande() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return ""
+        }
+      };
+    },
+    recupereIdLiquidation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDossierLiquidation.find(qtreel => qtreel.dmd_engagement_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return ""
+        }
+      };
+    },
   },
   methods: {
      ...mapActions("bienService", [
@@ -509,12 +545,35 @@ decision_Cf_liquidation() {
       "ajouterDemandeEngagement",
       "modifierDossierMandat",
       "modifierDemandeEngagement",
-      "supprimerDossierMandat"
+      "modifierDossierLiquidation"
      
     ]),
      ModifierDosssierMandat() {
+       
+       var modifierLiquidation={
+          
+         id:this.recupereIdLiquidation(this.macheid),
+         	decision_cf:this.editDossierMandat.decision_cf,
+           famille_motif_cf:this.editDossierMandat.famille_motif_cf,
+           autre_motif_cf:this.editDossierMandat.autre_motif_cf,
+           	motif_cf:this.editDossierMandat.motif_cf,
+             date_motif:this.editDossierMandat.date_motif,
+             observation:this.editDossierMandat.observation
+       }
+        var modifierDemande={
+          
+         id:this.recupereIdDemande(this.macheid),
+         	decision_cf:this.editDossierMandat.decision_cf,
+           famille_motif_cf:this.editDossierMandat.famille_motif_cf,
+           autre_motif_cf:this.editDossierMandat.autre_motif_cf,
+           	motif_cf:this.editDossierMandat.motif_cf,
+             date_motif:this.editDossierMandat.date_motif,
+             observation:this.editDossierMandat.observation
+       }
+       this.modifierDossierLiquidation(modifierLiquidation)
+       this.modifierDemandeEngagement(modifierDemande)
       this.modifierDossierMandat(this.editDossierMandat);
-this.$("#DossierMandatRejetter").modal('hide');
+this.$("#DossierMandatVisa").modal('hide');
      
        
     },
@@ -526,7 +585,7 @@ this.$("#DossierMandatRejetter").modal('hide');
       });
     },
     afficheDecisionCf(id) {
-      this.$("#DossierMandatRejetter").modal({
+      this.$("#DossierMandatVisa").modal({
         backdrop: "static",
         keyboard: false
       });

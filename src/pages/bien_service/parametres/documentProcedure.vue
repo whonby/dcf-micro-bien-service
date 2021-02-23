@@ -5,12 +5,12 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter document procedure</h3>
+        <h3>Ajouter document procédure</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">Libelle document</label>
+            <label class="control-label">Libellé document</label>
             <div class="controls">
               <input
                 type="text"
@@ -22,7 +22,7 @@
           </div>
          
           <div class="control-group">
-            <label class="control-label">Date debut</label>
+            <label class="control-label">Date début</label>
             <div class="controls">
               <input
                 type="date"

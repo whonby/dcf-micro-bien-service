@@ -115,6 +115,7 @@ const defaultState = {
     Liquidation:[],
     MandatOp:[],
     facturePiece:[],
+    AutreDepense:[],
 
 }
 

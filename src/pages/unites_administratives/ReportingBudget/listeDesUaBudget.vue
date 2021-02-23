@@ -230,7 +230,7 @@ created() {
       "plans_fonctionnels"
      
     ]),
-    ...mapGetters("bienService", ["getMandatPersonnaliserPersonnel",'getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+    ...mapGetters("bienService", ["gettersDemandeEngagement","gettersDossierMandat","getMandatPersonnaliserPersonnel",'getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -276,16 +276,57 @@ TotalBudgetInitial() {
       
       return 0;
     },
-
     budgetConsommerBienService(){
-  return id => {
+  return id => { 
     if(id !=""){
-    return this.getMandatPersonnaliserVise.filter(element => element.ua_id == id && element.marchetype == 2 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+    return this.gettersDossierMandat.filter(element => this.DemandeEngagement(element.demande_engagement_id) == id   &&  element.decision_cf == 8 || this.DemandeEngagement(element.demande_engagement_id) == id   &&  element.decision_cf == 9).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_engage), 0).toFixed(0); 
       
     }
     
   }
 },
+DemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ua_id;
+      }
+      return 0
+        }
+      };
+    },
+// budgetConsommerBienService(){
+//   return id => {
+//     if(id !=""){
+//     return this.getMandatPersonnaliserVise.filter(element => element.ua_id == id && element.marchetype == 2 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+      
+//     }
+    
+//   }
+// },
+//     budgetConsommerBienService(){
+//   return id => {
+//     if(id !=""){
+//     return this.gettersDemandeEngagement.filter(element => element.ua_id == id && element.exercice == this.anneeAmort &&  element.decision_cf == this.MandatValideParCf(element.id)).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+      
+//     }
+    
+//   }
+// },
+MandatValideParCf() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDossierMandat.find(qtreel => qtreel.demande_engagement_id == id);
+
+      if (qtereel) {
+        return qtereel.decision_cf;
+      }
+      return 0
+        }
+      };
+    },
 budgetConsommerTransfert(){
   return id => {
     if(id !=""){
