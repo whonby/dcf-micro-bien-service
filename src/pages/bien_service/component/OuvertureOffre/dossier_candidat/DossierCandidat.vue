@@ -494,6 +494,7 @@
         </ul>
       </div>
 
+
       <div class="widget-content tab-content">
         <div id="offre_tech" class="tab-pane active">
           <!--Offre technique-->

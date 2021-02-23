@@ -1,7 +1,6 @@
 <template>
   <div>
 
-
     <div align="right">
       <div class="widget-content">
         <a href="" @click="isFormulaireDossierCand" v-if="isButtunAddDossierCandidat" data-toggle="modal" class="btn btn-success" >Ajouter</a>
@@ -12,6 +11,7 @@
       <table class="table table-bordered table-striped" v-if="marcheid">
         <thead>
         <tr>
+
           <th>Numéro dossier</th>
           <th>Type candidat</th>
           <th>Raison sociale </th>
@@ -490,7 +490,7 @@
       <div class="widget-title">
         <ul class="nav nav-tabs">
           <li class="active"><a data-toggle="tab" href="#offre_tech">OFFRE TECHNIQUE</a></li>
-          <!-- <li class=""><a data-toggle="tab" href="#offre_fin">OFFRE FINANCIERE</a></li> -->
+          <li class=""><a data-toggle="tab" href="#offre_fin">OFFRE FINANCIERE</a></li>
         </ul>
       </div>
 

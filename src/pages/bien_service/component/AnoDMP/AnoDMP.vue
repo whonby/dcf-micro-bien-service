@@ -1,4 +1,4 @@
-affichierAppelOffreid
+
 <template>
 <div>
   <div v-for="item in lot" :key="item.id" class="widget-content">
@@ -8,7 +8,7 @@ affichierAppelOffreid
       </h5></div>
       <div align="right">
         <div class="span3"><button @click.prevent="afficheModaleActe(item.id)"
-                                     class="btn btn-primary" title="Ajouter Bailleur">
+         class="btn btn-primary" title="Ajouter Bailleur">
            <span class=""><i class="icon-edit"></i></span> Ajouter</button></div>
       </div>
           
@@ -86,11 +86,11 @@ affichierAppelOffreid
       <div id="tab8888" class="tab-pane active">
 <form class="form-horizontal">
         <div class="control-group">
-          <label class="control-label">Référence PV</label>
+          <label class="control-label">Référence PV </label>
           <div class="controls">
             <input
                 type="text"
-                :value="affichierPvMarche(affichierIdMarcheGlobal(macheid))"
+                :value="affichierPvMarche(macheid)"
                 class="span"
                 readonly
             />
@@ -232,7 +232,7 @@ affichierAppelOffreid
           <div class="controls" >
             <input
                 type="text"
-                :value="affichierPvMarche(affichierIdMarcheGlobal(edite_demande_dao.marche_id))"
+                :value="affichierPvMarche(edite_demande_dao.marche_id)"
                 class="span"
                 readonly
             />
@@ -426,6 +426,7 @@ affichierNiveauDecission() {
         }
       })
     },
+
     LibelleDecision() {
       return id => {
         if (id != null && id != "") {
@@ -439,7 +440,7 @@ affichierNiveauDecission() {
       };
     },
 affichierPvMarche() {
-      return id => {
+      return id => { 
         if (id != null && id != "") {
            const qtereel = this.getterProceVerballe.find(qtreel => qtreel.marche_id == id && qtreel.traitement==1);
 
@@ -462,6 +463,7 @@ affichierPvMarche() {
         }
       };
     },
+
     affichierReferenceAppelOffre() {
       return id => {
         if (id != null && id != "") {
@@ -714,6 +716,7 @@ afficherModalDecisionAnocf(index){
 formaterDate(date){
       return moment(date,"YYYY-MM-DD").format("DD/MM/YYYY");
     },
+    
     formatageSommeSansFCFA:formatageSommeSansFCFA,
 
   }

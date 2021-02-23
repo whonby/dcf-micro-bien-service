@@ -94,23 +94,139 @@
               </div>
             </div>
           </td>
-         <td>
+
+          <td>
+
+              <div class="control-group">
+                <label class="control-label">Comment saisir le montant?</label>
+                <div class="controls">
+                  <select v-model="formOffreFinanciere.httcc_id" class="span">
+
+                    <option value="0">HT</option>
+                    <option value="1">TTC</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+
+            <td>
+    <div class="control-group">
+      <label class="control-label">Rabais (%) :</label>
+      <div class="controls">
+        <input type="number" class="span" placeholder="Rabais" v-model="rabais">
+      </div>
+    </div>
+
+  </td>
+         <!-- <td>
             <div class="control-group">
               <label class="control-label">Montant total HT :</label>
               <div class="controls">
                 <money v-model="montant_htax" ></money>
-<!--                <input type="text"   class="span" placeholder="Montant total HT" v-model="formOffreFinanciere.montant_total_ht">-->
+
               </div>
             </div>
-          </td>
+          </td> -->
         </tr>
-        <tr>
+
+        
+  <tr v-if="formOffreFinanciere.httcc_id==0">
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">Montant total HT</label>
+                <div class="controls">
+                    <money v-model="montant_htax" class="span"></money>
+<!--                  <input type="text" v-model="formEffetFinancier.montant_act_ht"-->
+<!--                         class="span"-->
+<!--                         placeholder="Saisir le montant "-->
+<!--                  />-->
+                </div>
+              </div>
+            </td>
+             <td >
+              <div class="control-group">
+                <label class="control-label" > Montant TVA</label>
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"-->
+<!--                      :value="montantTva" style="text-align:left;color:red"-->
+
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money v-model="montant_tva" style="text-align:left;color:red" readonly class="span"></money>
+                </div>
+              </div>
+            </td>
+             <td colspan="2">
+              <div class="control-group">
+                <label class="control-label" >Montant TTC</label>
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"-->
+<!--                      :value="montantHTt" style="text-align:left;color:red"-->
+
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money v-model="formOffreFinanciere.montant_total_ttc" style="text-align:left;color:red" readonly class="span" ></money>
+                </div>
+              </div>
+            </td>
+           </tr>
+            <tr v-if="formOffreFinanciere.httcc_id==1">
+             <td>
+
+              <div class="control-group">
+                <label class="control-label">Montant(HT)</label>
+                <div class="controls">
+                    <money v-model="montant_htax" class="span" readonly></money>
+<!--                  <input type="text" v-model="formEffetFinancier.montant_act_ht"-->
+<!--                         class="span"-->
+<!--                         placeholder="Saisir le montant "-->
+<!--                  />-->
+                </div>
+              </div>
+            </td>
+             <td >
+              <div class="control-group">
+                <label class="control-label" > Montant TVA </label>
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"-->
+<!--                      :value="montantTva" style="text-align:left;color:red"-->
+
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money v-model="montant_tva" style="text-align:left;color:red" readonly class="span"></money>
+                </div>
+              </div>
+            </td>
+             <td colspan="">
+              <div class="control-group">
+                <label class="control-label" >Montant TTC</label>
+                <div class="controls">
+<!--                  <input-->
+<!--                      type="number"-->
+<!--                      :value="montantHTt" style="text-align:left;color:red"-->
+
+<!--                      class="span"-->
+<!--                      readonly-->
+<!--                  />-->
+                    <money v-model="formOffreFinanciere.montant_total_ttc" style="text-align:left;color:red"  class="span" ></money>
+                </div>
+              </div>
+            </td>
+           </tr>
+        <!-- <tr>
           <td>
             <div class="control-group">
               <label class="control-label">Montant TVA :</label>
               <div class="controls">
                 <money v-model="montant_tva" readOnly></money>
-                <!--                <input type="number" class="span" placeholder="Montant TTC" v-model="formOffreFinanciere.montant_total_ttc">-->
+                
               </div>
             </div>
           </td>
@@ -120,25 +236,14 @@
               <label class="control-label">Montant TTC :</label>
               <div class="controls">
                 <money v-model="formOffreFinanciere.montant_total_ttc" readOnly></money>
-<!--                <input type="number" class="span" placeholder="Montant TTC" v-model="formOffreFinanciere.montant_total_ttc">-->
+
               </div>
             </div>
           </td>
 
 
-        </tr>
+        </tr> -->
         
-<tr>
-  <td>
-    <div class="control-group">
-      <label class="control-label">Rabais (%) :</label>
-      <div class="controls">
-        <input type="number" class="span" placeholder="Rabais" v-model="rabais">
-      </div>
-    </div>
-
-  </td>
-</tr>
 
       </table>
 
@@ -390,8 +495,8 @@ name: "OffreFinanciere",
     ]),
     formatageSomme:formatageSomme,
     ajouterOffreF(){
-
-      let lot_marche=this.getMarchePersonnaliser.find(item=>item.id==this.formOffreFinanciere.marche_id)
+      if(this.formOffreFinanciere.httcc_id===0){
+         let lot_marche=this.getMarchePersonnaliser.find(item=>item.id==this.formOffreFinanciere.marche_id)
       this.formOffreFinanciere.numero_lot=lot_marche.numero_lot
       this.formOffreFinanciere.dossier_candidat_id=this.dossier_candidature.id
         this.formOffreFinanciere.hist_montant_ttc=this.formOffreFinanciere.montant_total_ttc
@@ -406,6 +511,26 @@ name: "OffreFinanciere",
                 Rabais:"",
                 marche_id:""
       }
+      } else{
+        let lot_marche=this.getMarchePersonnaliser.find(item=>item.id==this.formOffreFinanciere.marche_id)
+      this.formOffreFinanciere.numero_lot=lot_marche.numero_lot
+      this.formOffreFinanciere.dossier_candidat_id=this.dossier_candidature.id
+        this.formOffreFinanciere.hist_montant_ttc=this.formOffreFinanciere.montant_total_ttc
+
+      this.ajouterOffreFinancier(this.formOffreFinanciere)
+      this.$('#addd10').modal('hide');
+      this.formOffreFinanciere={
+                 numero_lot:"",
+                montant_total_ttc:"",
+                montant_total_ht:"",
+                dossier_candidat_id:"",
+                Rabais:"",
+                marche_id:""
+      }
+
+      }
+
+     
     },
     afficheEdite(index){
       this.$('#edite100').modal({
