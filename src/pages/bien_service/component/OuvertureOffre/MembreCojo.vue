@@ -15,6 +15,7 @@
         <th>Matricule</th>
         <th>Nom et prénoms</th>
         <th>Commite d'evaluation</th>
+        <th>UA</th>
         <th>Rôle</th>
         <th>Action</th>
       </tr>
@@ -33,6 +34,9 @@
         </td>
         <td @click="afficheModaleMembreCojo(appelOffre.id)" v-if="appelOffre.comite_evaluation=='non'">
           {{appelOffre.comite_evaluation || 'Non renseigné'}}
+        </td>
+        <td @click="afficheModaleMembreCojo(appelOffre.id)">
+          {{afficherLibelleUA(appelOffre.ua_id) || 'Non renseigné'}}
         </td>
         <td @click="afficheModaleMembreCojo(appelOffre.id)">
           {{afficherLaListemembreCojo(appelOffre.role_membre_cojo_id )|| 'Non renseigné'}}</td>
@@ -387,6 +391,19 @@ enregistreIdService() {
     },
 
     
+    afficherLibelleUA(){
+     return id => {
+       if( id !=null && id!="") {
+    var acteur = this.uniteAdministratives.find(acteur => acteur.id == id  )
+    
+     if(acteur){
+       return acteur.libelle
+     }
+       }
+    return null
+     }
+  
+   },
 
     // affichageLibelleFonction
      afficherLibelleFonction(){
