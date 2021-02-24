@@ -86,7 +86,7 @@
       <div id="tab8888" class="tab-pane active">
 <form class="form-horizontal">
         <div class="control-group">
-          <label class="control-label">Référence PV </label>
+          <label class="control-label">Référence PV</label>
           <div class="controls">
             <input
                 type="text"
