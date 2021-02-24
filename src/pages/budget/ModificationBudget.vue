@@ -880,7 +880,6 @@
             },
             supprimerLigne(id){
                 this.ligne_selectionne=this.ligne_selectionne.filter(item=>item.ligne!=id)
-
             },
 
             modificationBudget(){
