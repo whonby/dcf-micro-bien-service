@@ -245,6 +245,19 @@
                                               </div>
                                           </div>
                                       </div>
+                                      <div class="span4"  @click="goToModule(9)">
+                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
+<!--                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>-->
+                                              <div class="timeline-text">
+                                                  <h5>TABLEAU DE BORD GENERAL</h5>
+                                                  <div>
+                                                      <i style="font-size: 35px !important;" class="icon-dashboard"></i>
+                                                  </div>
+                                                  <p> Permet de codifier les données de base</p>
+                                              </div>
+                                          </div>
+                                      </div>
+
 <!--                                      <div class="span4"  @click="goToModule(16)" v-if="!noDCfNoAdmin">-->
 <!--                                          <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">-->
 <!--                                              &lt;!&ndash;                                              <div class="timeline-icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>&ndash;&gt;-->
@@ -818,7 +831,12 @@ return objJson.id
         name: 'TableauDeBordG'
       })
     },
-
+activeMenuModuleTableauBord(){
+      this.activeMenuModuleSidcf(9)
+      this.$router.push({
+        name: 'TableauDeBordG'
+      })
+    },
 
       goToModule(id){
      console.log(id)

@@ -168,7 +168,7 @@
                     >{{type.numero_mandat || 'Non renseigné'}}</td>
                     <td style="color:red;font-weight: bold;text-align:center" v-else
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{type.numero_op || 'Non renseigné'}}</td>
+                    >{{type.numero_op_systeme || 'Non renseigné'}}</td>
                     <td 
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{recuppererOrdreDepense(type.demande_engagement_id) || 'Non renseigné'}}</td>
