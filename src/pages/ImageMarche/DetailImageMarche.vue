@@ -1,19 +1,23 @@
 <template>
     <div>
-     
+
        <div class="container-fluid">
-  
+
+
+
+
+
     <div class="main-body">
-    
+
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb" v-if="detailMarche">
               <li class="breadcrumb-item" v-if="getMarche(detailMarche.marche_id)">{{getMarche(detailMarche.marche_id).objet}}</li>
-            
+
             </ol>
           </nav>
           <!-- /Breadcrumb -->
-    
+
           <div class="row gutters-sm" v-if="detailMarche">
             <div class="span4 mb-3">
               <div class="card">
@@ -34,11 +38,11 @@
                         {{distance(detailMarche.latitude, detailMarche.longitude, getMarche(detailMarche.marche_id).latitude, getMarche(detailMarche.marche_id).longitude, 'K')}}
                       </p>
                       <p class="text-muted font-size-sm">{{detailMarche.observation}}</p>
-                     
+
                     </div>
                 </div>
               </div>
-              
+
             </div>
             <div class="span7">
               <div class="card mb-3">
@@ -61,11 +65,11 @@
                     :url="tileProvider.url"
                     layer-type="base"/>
                 <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
-              
-            
-                  <l-circle-marker 
+
+
+                  <l-circle-marker
                                    :lat-lng="[detailMarche.latitude,detailMarche.longitude]"
-                                 
+
                                    :radius="15"
                                    :color="'#3A01DF'"
                                    :fillColor="'#3A01DF'"
@@ -79,9 +83,9 @@
 
                   </l-circle-marker>
 
-                  <l-circle-marker 
+                  <l-circle-marker
                                    :lat-lng="[getMarche(detailMarche.marche_id).latitude,getMarche(detailMarche.marche_id).longitude]"
-                                 
+
                                    :radius="15"
                                    :color="'#DF0101'"
                                    :fillColor="'#DF0101'"
@@ -94,8 +98,8 @@
                     </l-popup>
 
                   </l-circle-marker>
-                 
-  
+
+
                 <v-geosearch  ></v-geosearch>
               </l-map>
 
@@ -104,7 +108,7 @@
                 </div>
                 </div>
               </div>
-             
+
             </div>
           </div>
         </div>
@@ -116,7 +120,7 @@
     </a>
         </div>
 
-  
+
 </template>
 
 <script>
@@ -131,17 +135,17 @@ import LControlFullscreen from 'vue2-leaflet-fullscreen';
 export default {
    components: {
     LControlFullscreen,
-  
+
     LMap,
     LTileLayer,
 
     LPopup,
-  
+
     LIconDefault,
     LControlLayers,
     LCircleMarker,
       VGeosearch,
-   
+
 
   },
     data(){
@@ -157,7 +161,7 @@ export default {
           icon: "add"
         }
       ],
-   
+
        editLiquidation: {},
 search:"",
 detailMarche:"",
@@ -191,7 +195,7 @@ detailMarche:"",
                         visible: false,
                         url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png',
                         attribution: '',
-                        
+
                     },
                     {
                         name: 'Satelite',
@@ -232,9 +236,9 @@ this.detailMarche=this.getterImageMarche.find(item=>item.id==this.$route.params.
 
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises',"comptes","banques"]),
 
-           
- 
-   
+
+
+
   ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
       "uniteAdministratives",
@@ -246,9 +250,9 @@ this.detailMarche=this.getterImageMarche.find(item=>item.id==this.$route.params.
       // "montantBudgetGeneral"
       // "chapitres",
       // "sections"
-       
+
     ]),
-     ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
+     ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
                   conversionDateVariable(){
                       return date=>{
@@ -262,11 +266,11 @@ this.detailMarche=this.getterImageMarche.find(item=>item.id==this.$route.params.
 AffichePhoto() {
       return fichier => {
         if (fichier != null && fichier != "") {
-           
-        
+
+
    let url=process.env.VUE_APP_BIEN_SERVICE_URL
         return url+'/imagemarches/'+fichier;
-   
+
      // return "Pas d'image "
         }
       };
@@ -289,14 +293,14 @@ getterImageParMarche() {
       return id => {
         if (id != null && id != "") {
           return this.getterImageMarche.filter(
-            element => element.marche_id == id 
+            element => element.marche_id == id
           );
         }
       };
     },
       },
- 
-      methods:{ 
+
+      methods:{
 
           ...mapActions('bienService',[  "ajouterAvenant",
       "modifierAvenant",
@@ -316,8 +320,8 @@ getterImageParMarche() {
        "modifierStock",
        "ajouterHistotorisqueAffectionService",
        "modifierDemandeMateriel"
-      
-     
+
+
     ]),
 
 
@@ -370,10 +374,10 @@ getterImageParMarche() {
    margin: 0 -40%;
 }
 .avatar1 {
-  
+
   width: 50%;
   height: 50%;
-  
+
 }
 
 
@@ -392,7 +396,7 @@ body{
     margin-top:20px;
     color: #1a202c;
     text-align: left;
-    background-color: #e2e8f0;    
+    background-color: #e2e8f0;
 }
 .main-body {
     padding: 15px;

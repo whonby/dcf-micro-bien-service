@@ -241,7 +241,7 @@
                                     layer-type="base"/>
                            <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
 <!--                            <v-marker-cluster >-->
-                                <l-circle-marker v-for="l in localisation"
+                                <l-circle-marker v-for="l in filterCarteByTaux"
                                                  :key="l.id"
                                                  :lat-lng="l.latlng"
                                                  @click="uniteAdmin(l.id,l.ville)"
@@ -388,6 +388,7 @@ import VGeosearch from 'vue2-leaflet-geosearch';
               geosearchOptions: { // Important part Here
                 provider: new OpenStreetMapProvider(),
               },
+                infoLegende:"",
                 active_el:0,
                 search:"",
                 budgetGeneralExcecute:0,
@@ -680,6 +681,7 @@ created(){
                             taux=(montantExecute/budgetZone)*100
 
                         }
+
                          if(budgetZone==0){
                              color="#6A0888"
                              colorFill="#6A0888"
@@ -690,6 +692,7 @@ created(){
                              }
 
                              if(0<taux && taux<=25){
+                                 console.log(taux)
                                  color="#FF8000"
                                  colorFill="#FF8000"
                              }
@@ -730,6 +733,59 @@ created(){
                 }
             })
         return localisation;
+        },
+        filterCarteByTaux(){
+        let objet=this.localisation
+            if(this.infoLegende==8){
+                objet=this.localisation.filter(item=>{
+                    if(item.tauxBudget==0 && item.budget==0) return item
+                })
+            }
+              if(this.infoLegende==1){
+                objet=this.localisation.filter(item=>{
+                    if(item.tauxBudget==0 && item.budget!=0) return item
+                })
+              }
+
+            if(this.infoLegende==2){
+                objet=this.localisation.filter(item=>{
+                    if(0<item.tauxBudget && item.tauxBudget<=25){
+                        return item
+                    }
+                })
+            }
+
+            if(this.infoLegende==2){
+                objet=this.localisation.filter(item=>{
+                    if(26<item.tauxBudget && item.tauxBudget<=51){
+                        return item
+                    }
+                })
+            }
+            if(this.infoLegende==3){
+                objet=this.localisation.filter(item=>{
+                    if(51<item.tauxBudget && item.tauxBudget<=76){
+                        return item
+                    }
+                })
+            }
+
+            if(this.infoLegende==5){
+                objet=this.localisation.filter(item=>{
+                    if(76<item.tauxBudget && item.tauxBudget<=100){
+                        return item
+                    }
+                })
+            }
+            if(this.infoLegende==6){
+                objet=this.localisation.filter(item=>{
+                    if(item.tauxBudget==100){
+                        return item
+                    }
+                })
+            }
+
+            return objet
         },
         budgetGeneral(){
             let budget_general=0;
@@ -900,6 +956,10 @@ created(){
 
     },
         methods: {
+            getInfoLegende(id){
+                this.infoLegende=id
+
+            },
             videZone(){
               this.zone=""
                 this.region=""
@@ -1019,6 +1079,10 @@ created(){
                             {
                                 label: "<div id='taux_execution_100'>Taux d'exécution de 100%</div>",
                                 html: "<div style=' width: 20px;height: 20px;background: #0B3B0B !important;'></div>"
+                            },
+                            {
+                                label: "<div id='tous'>Affiche tous</div>",
+                                html: "<div style=' width: 20px;height: 20px;background: #efefef !important;'></div>"
                             }]
                     }],
                 collapseSimple: false,
@@ -1027,6 +1091,68 @@ created(){
                 hiddenIcon: 'icon icon-eye-slash'
             })
             map.addControl(htmlLegend3)
+
+
+
+
+            let vMm=this;
+            //click legende sanitaire
+            const pas_budget = document.querySelector('#pas_budget');
+            pas_budget.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende(8)
+            })
+
+            const tous = document.querySelector('#tous');
+            tous.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende("")
+            })
+
+
+            //click legende routiere
+            const taux_execution_zero = document.querySelector('#taux_execution_zero');
+            taux_execution_zero.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende(1)
+                // console.log("Guei est dans la place....... ")
+            })
+
+            //click legende scolaires
+            const taux_execution25 = document.querySelector('#taux_execution25');
+            taux_execution25.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende(2)
+                // console.log("Guei est dans la place....... ")
+            })
+            //click legende communautaire
+            const taux_execution_50 = document.querySelector('#taux_execution_50');
+            taux_execution_50.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende(3)
+                // console.log("Guei est dans la place....... ")
+            })
+
+            const taux_execution_75 = document.querySelector('#taux_execution_75');
+            taux_execution_75.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende(5)
+                // console.log("Guei est dans la place....... ")
+            })
+
+            const taux_execution_99 = document.querySelector('#taux_execution_99');
+            taux_execution_99.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende(6)
+                // console.log("Guei est dans la place....... ")
+            })
+
+            const taux_execution_100 = document.querySelector('#taux_execution_100');
+            taux_execution_100.addEventListener('click', function (event) {
+                console.log(event)
+                vMm.getInfoLegende(7)
+                // console.log("Guei est dans la place....... ")
+            })
 
         }
     };
@@ -1171,7 +1297,7 @@ created(){
     .bg-base {
         background-color: #a62f59 !important;
     }
-    .bg-taux { 
+    .bg-taux {
         background-color: #ba7024 !important;
     }
     .bg-restant {
