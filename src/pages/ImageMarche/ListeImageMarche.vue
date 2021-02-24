@@ -1,66 +1,125 @@
 <template>
     <div>
-     
+
        <div class="container-fluid">
-   
+
     <div class="main-body">
-    
+
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb" v-if="detail">
               <li class="breadcrumb-item" v-if="detail">{{detail.objet}}</li>
-            
+
             </ol>
           </nav>
           <!-- /Breadcrumb -->
-        <lightGallery
-                :images="modalGallerys"
-                ref="lightGallery"
-                :show-caption="true"
-                :show-thumbs="true"
-                :show-light-box="false"
-        ></lightGallery>
-          <div class="row-fluid gutters-sm">
-            <div class="span3 " v-for="marche_image in getterImageParMarche(detail.id)" :key="marche_image.id">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-column align-items-center text-center">
-                    <img class="center_image" :src="AffichePhoto(marche_image.fichier)">
-                    <div class="mt-3">
-                      <h4>{{marche_image.libelle}}</h4>
-              <router-link class="btn btn-outline-primary" :to="{ name: 'DetailImageMarche', params: { id:marche_image.id }}" title="Detail Marche CF">
-                                         Consulter
-                                        </router-link>
-                      
-                    </div>
-                    
-                  </div>
-                  <div class="mt-3">
-                      <h4>Nom de l'Agent : DCF</h4>
-                      Date:  {{conversionDateVariable(marche_image.date_enregistrement)}}
-                      <p class="text-secondary mb-1">Distance :
-                        {{distance(marche_image.latitude, marche_image.longitude,detail.latitude,detail.longitude, 'K')}}
-                      </p>
-                    
-                     
+        <div class="widget-box">
+            <div class="widget-title">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tab1">Liste des images</a></li>
+                    <li><a data-toggle="tab" href="#tab2">Ajouter une image</a></li>
+
+                </ul>
+            </div>
+            <div class="widget-content tab-content">
+                <div id="tab1" class="tab-pane active">
+                    <lightGallery
+                            :images="modalGallerys"
+                            ref="lightGallery"
+                            :show-caption="true"
+                            :show-thumbs="true"
+                            :show-light-box="false"
+                    ></lightGallery>
+                    <div class="row-fluid gutters-sm">
+                        <div class="span3 " v-for="marche_image in getterImageParMarche(detail.id)" :key="marche_image.id">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        <img class="center_image" :src="AffichePhoto(marche_image.fichier)">
+                                        <div class="mt-3">
+                                            <h4>{{marche_image.libelle}}</h4>
+                                            <router-link class="btn btn-outline-primary" :to="{ name: 'DetailImageMarche', params: { id:marche_image.id }}" title="Detail Marche CF">
+                                                Consulter
+                                            </router-link>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="mt-3">
+                                        <h4>Nom de l'Agent : DCF</h4>
+                                        Date:  {{conversionDateVariable(marche_image.date_enregistrement)}}
+                                        <p class="text-secondary mb-1">Distance :
+                                            {{distance(marche_image.latitude, marche_image.longitude,detail.latitude,detail.longitude, 'K')}}
+                                        </p>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
                     </div>
                 </div>
-              </div>
-              
+                <div id="tab2" class="tab-pane">
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Libelle</label>
+                                    <div class="controls">
+                                        <input
+                                                type="text"
+                                               v-model="formD.libelle"
+                                        />
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Observation</label>
+                                    <div class="controls">
+                                        <input
+                                                type="text"
+                                                v-model="formD.observation"
+                                        />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <vue-dropzone
+                            ref="myVueDropzone"
+                            id="dropzone"
+                            :options="dropzoneOptions"
+                            :useCustomSlot="true"
+                            v-on:vdropzone-sending="sendingEvent"
+                            v-on:vdropzone-success="uploadSuccess"
+                            v-on:vdropzone-error="uploadError"
+                            v-on:vdropzone-removed-file="fileRemoved"
+                    >
+                        <div class="dropzone-custom-content">
+                            <h3 class="dropzone-custom-title">
+                                Faites glisser et déposez pour chargé l'image</h3>
+                            <div class="subtitle">...ou cliquez pour sélectionner un fichier sur votre ordinateur</div>
+                        </div>
+                    </vue-dropzone>
+                </div>
             </div>
-            
-           
-          </div>
+        </div>
+
         </div>
     </div>
         </div>
 
-  
+
 </template>
 
 <script>
 import {mapGetters, mapActions} from 'vuex';
-
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 import lightGallery from 'lightgallery-vue';
 import "lg-zoom.js";
 import "lg-fullscreen.js";
@@ -68,7 +127,8 @@ import "lg-thumbnail.js";
 import "lg-autoplay.js";
 export default {
     components:{
-        lightGallery
+        lightGallery,
+        vueDropzone: vue2Dropzone
     },
     data(){
         return{
@@ -77,7 +137,13 @@ export default {
           name: "cache",
           icon: "add"
         }
-      ],
+      ],dropzoneOptions: {
+                url: process.env.VUE_APP_BIEN_SERVICE_URL+"/image_marche2",
+                addRemoveLinks: true,
+                maxFiles: 1
+            },
+            fileName: '',
+
             imgs: [
                 {
                     src: "https://sachinchoolur.github.io/lightgallery.js/static/img/1.jpg",
@@ -98,16 +164,26 @@ export default {
                     realname: "admin"
                 }
             ],
-   
+
        editLiquidation: {},
 search:"",
-detail:""
+detail:"",
+            formD:{
+                libelle:"",
+                observation:"",
+                marche_id:"",
+                user_id:"",
+            }
 
         }
     },
     props:["macheid"],
     created(){
+        let objet=localStorage.getItem('Users');
+        let user=JSON.parse (objet)
 this.detail=this.marches.find(item=>item.id==this.$route.params.id)
+        this.formD.marche_id=this.$route.params.id
+        this.formD.user_id=user.id
     },
 
               computed: {
@@ -121,9 +197,9 @@ this.detail=this.marches.find(item=>item.id==this.$route.params.id)
 
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises',"comptes","banques"]),
 
-           
- 
-   
+
+
+
   ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
       "uniteAdministratives",
@@ -135,9 +211,9 @@ this.detail=this.marches.find(item=>item.id==this.$route.params.id)
       // "montantBudgetGeneral"
       // "chapitres",
       // "sections"
-       
+
     ]),
-     ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
+     ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
 
                   modalGallerys () {
@@ -181,11 +257,11 @@ return marche_id=>{
 AffichePhoto() {
       return fichier => {
         if (fichier != null && fichier != "") {
-           
-        
+
+
    let url=process.env.VUE_APP_BIEN_SERVICE_URL
         return url+'/imagemarches/'+fichier;
-   
+
      // return "Pas d'image "
         }
       };
@@ -195,13 +271,13 @@ getterImageParMarche() {
       return id => {
         if (id != null && id != "") {
           return this.getterImageMarche.filter(
-            element => element.marche_id == id 
+            element => element.marche_id == id
           ).reverse();
         }
       };
     },
       },
- 
+
       methods:{
           openGallery (index) {
               this.$refs.lightGallery.showImage(index);
@@ -224,9 +300,31 @@ getterImageParMarche() {
        "modifierStock",
        "ajouterHistotorisqueAffectionService",
        "modifierDemandeMateriel"
-      
-     
+
+
     ]),
+          uploadSuccess(file, response) {
+              console.log('File Successfully Uploaded with file name: ' + response.file);
+              this.fileName = response.file;
+              this.formD.observation=""
+              this.formD.libelle=""
+          },
+          uploadError(file, message) {
+              console.log(file)
+              console.log(message)
+              console.log('An Error Occurred');
+          },
+          sendingEvent (file, xhr, formData) {
+              console.log(file)
+              console.log(xhr)
+
+              formData.append('libelle',this.formD.libelle);
+              formData.append('observation',this.formD.observation);
+              formData.append('marche_id',this.formD.marche_id);
+              formData.append('user_id',this.formD.user_id);
+          },
+
+          fileRemoved() {},
   distance(lat1, lon1, lat2, lon2, unit) {
         if ((lat1 == lat2) && (lon1 == lon2)) {
             return 0;
@@ -275,10 +373,10 @@ getterImageParMarche() {
    margin: 0 -40%;
 }
 .avatar1 {
-  
+
   width: 50%;
   height: 50%;
-  
+
 }
 
 
@@ -297,7 +395,7 @@ body{
     margin-top:20px;
     color: #1a202c;
     text-align: left;
-    background-color: #e2e8f0;    
+    background-color: #e2e8f0;
 }
 .main-body {
     padding: 15px;

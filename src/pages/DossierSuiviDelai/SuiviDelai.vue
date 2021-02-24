@@ -1,15 +1,15 @@
 
 
-             
-             
+
+
         <template>
   <div >
-    
+
 
             <!-- <div align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
           </div> -->
-           
+
 
  <div ref="document">
      <table class="table table-striped"  style="background: #f0c71d !important;">
@@ -106,11 +106,11 @@
             </tr>
           </table>-->
      <h3 style="margin-left:-200px;">TABLE DU SUIVI DES REALISATIONS ET DES  DELAIS D'EXECUTION <span style="color: red;"></span></h3>
-           
+
               <table class="table table-bordered table-striped" id="titre" ref="table"  summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
 
                 <thead>
-                    
+
                     <tr>
                         <td style="background-color: #fbcbcb;color: #000;text-align:center"></td>
                         <td style="background-color: #ffbd3d;color: #000;text-align:center"></td>
