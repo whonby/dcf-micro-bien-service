@@ -34,6 +34,41 @@ numeroOrdrePiece
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
                     <div id="INFORMATIONUA" class="tab-pane active">
+                       <table class="table table-bordered table-striped" style="border:1px solid #000">
+                         <tr>
+                           <td>
+              <div class="control-group">
+                <label class="control-label">Mode</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                    v-model="formData5.mode"
+                    class="span"
+                     readonly
+                  />
+                </div>
+              </div>
+              
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Exercice</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData5.exo"
+                 
+                    class="span"
+                     readonly
+                  />
+                </div>
+              </div>
+              
+            </td>
+                         </tr>
+                       </table>
                   <table class="table table-bordered table-striped" style="border:1px solid #000">
                       <tr>
                          <td>
@@ -596,7 +631,7 @@ numeroOrdrePiece
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -629,7 +664,7 @@ numeroOrdrePiece
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -662,7 +697,7 @@ numeroOrdrePiece
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -1551,7 +1586,9 @@ rechercheMembreCojo(){
          this.formData5.nomEntreprise=acteur.nom_autre,
         this.formData5.adresse=acteur.adresse,
         this.formData5.mode_paiement_id=acteur.mode_paiement_id
-        this.formData5.adresse=acteur.Reference_bancaires
+        
+        this.formData5.exo=acteur.exercice,
+        this.formData5.mode=acteur.mode
         //   this.message_mandater=" "
 
         }

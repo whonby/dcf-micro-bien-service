@@ -126,7 +126,33 @@ import procedureEngaementDirect from "../../pages/ExecutionBudgetaire/procedureE
 import voitDetailBonCmmande from "../../pages/ExecutionBudgetaire/Voirdetail/voitDetailBonCmmande.vue"
 import FicheRealiteServiceFait from "../../pages/ExecutionBudgetaire/procedureParBonCommande/Liquidation/FicheRealiteServiceFait.vue"
 import FicheDeControle from "../../pages/ExecutionBudgetaire/procedureParBonCommande/Liquidation/FicheDeControle.vue"
+import AutresDepense from "../../pages/bien_service/AutreDepense/AutresDepense.vue";
+
+import FicheRealiteServiceFait1 from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/RealiteServiceFait/FicheRealiteServiceFait.vue"
+import FicheDeControle1 from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/RealiteServiceFait/FicheDeControle.vue"
+import AjouterLettreAvance from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLettreAvance.vue"
+
 const BienServiceRoutes = [
+    {
+        path: "/AjouterLettreAvance",
+        name: "AjouterLettreAvance",
+        component: AjouterLettreAvance
+    },
+    {
+        path: "/FicheRealiteServiceFait1/:id",
+        name: "FicheRealiteServiceFait1",
+        component: FicheRealiteServiceFait1
+    },
+    {
+        path: "/FicheDeControle1/:id",
+        name: "FicheDeControle1",
+        component: FicheDeControle1
+    },
+    {
+        path: "/AutresDepense",
+        name: "AutresDepense",
+        component: AutresDepense
+    },
     {
         path: "/FicheDeControle/:id",
         name: "FicheDeControle",

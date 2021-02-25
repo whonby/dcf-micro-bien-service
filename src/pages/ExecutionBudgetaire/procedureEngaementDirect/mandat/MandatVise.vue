@@ -146,7 +146,7 @@
                 <thead>
                   <tr>
                     <th>N°demande Engagement</th>
-                     <th v-if="detail_marche1.type_engagement_id=='Marche'">N° de Mandat</th>
+                     <th v-if="detail_marche1.type_engagement_id!='Régie davances-reservation des crédit'">N° de Mandat</th>
                     <th v-if="detail_marche1.type_engagement_id=='Régie davances-reservation des crédit'">N°OP Systeme</th>
                     <th>Object de la depense</th>
                     <th>Montant autorisé</th>
@@ -163,12 +163,12 @@
                     <td style="color:red;font-weight: bold;text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{recuppererNumeroDemande(type.demande_engagement_id) || 'Non renseigné'}}</td>
-                   <td style="color:red;font-weight: bold;text-align:center" v-if="detail_marche1.type_engagement_id=='Marche'"
+                   <td style="color:red;font-weight: bold;text-align:center" v-if="detail_marche1.type_engagement_id!='Régie davances-reservation des crédit'"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_mandat || 'Non renseigné'}}</td>
                     <td style="color:red;font-weight: bold;text-align:center" v-else
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
-                    >{{type.numero_op || 'Non renseigné'}}</td>
+                    >{{type.numero_op_systeme || 'Non renseigné'}}</td>
                     <td 
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{recuppererOrdreDepense(type.demande_engagement_id) || 'Non renseigné'}}</td>

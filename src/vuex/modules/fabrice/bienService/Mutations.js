@@ -2886,3 +2886,32 @@ export const MODIFIER_FACTURE_PIECE = (state, elementModif)=>{
 export const SUPPRIMER_FACTURE_PIECE = (state, id)=> {
     state.facturePiece = state.facturePiece.filter(prest => prest.id !=id)
 }
+
+
+
+
+
+
+export const GET_ALL_AUTRE_DEPENSE= (state, tableau_document) =>{
+    state.AutreDepense = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_AUTRE_DEPENSE = (state, elementAjouter) => {
+    state.AutreDepense.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_AUTRE_DEPENSE = (state, elementModif)=>{
+    state.AutreDepense = state.AutreDepense.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_AUTRE_DEPENSE = (state, id)=> {
+    state.AutreDepense = state.AutreDepense.filter(prest => prest.id !=id)
+}

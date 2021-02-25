@@ -74,7 +74,7 @@
                   <input
                     type="text"
                     style="border:1px solid #000"
-                   v-model="formMandat.numero_op"
+                   v-model="formMandat.numero_op_systeme"
                     class="span" 
                     
                   />
@@ -1099,6 +1099,30 @@ recupereIdDemandeEngagement() {
         }
       };
     },
+    montantEngage() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.numero_dmd_combine == id);
+
+      if (qtereel) {
+        return qtereel.total_general;
+      }
+      return 0
+        }
+      };
+    },
+    idDmandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.numero_dmd_combine == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
         },
 
 methods: {
@@ -1109,7 +1133,8 @@ methods: {
       "ajouterDemandeEngagement",
       "ajouterDossierMandat",
       "modifierDossierLiquidation",
-      "supprimerDossierLiquidation"
+      "supprimerDossierLiquidation",
+      "modifierDemandeEngagement"
      
     ]),
       ...mapActions('personnelUA', ["ajouterFichierJointDmd"]),
@@ -1121,10 +1146,12 @@ pagePrecedent(){
 rechercheMembreCojo(){
       // console.log(this.formData5.numeroDemande)
 
-      let objetMandater=this.gettersDossierLiquidation.filter(item=>this.recupereNumeroDemande(item.dmd_engagement_id)==this.formData5.numeroDemande)
-      // console.log(objetMandater)
+      //let objetMandater=this.gettersDossierLiquidation.filter(item=>this.recupereNumeroDemande(item.dmd_engagement_id)==this.formData5.numeroDemande)
+     let objetMandater=this.gettersDemandeEngagement.filter(item=>item.numero_dmd_combine==this.formData5.numeroDemande)
+     // console.log(objetMandater)
       if(objetMandater!=undefined){
         if (objetMandater.length==1){
+          
           let acteur= this.gettersDemandeEngagement.find(item=>item.numero_dmd_combine==this.formData5.numeroDemande)
           this.formData5.ligne_id=acteur.ligne_economique_id,
           this.formData5.section_id=acteur.section_id,
@@ -1176,10 +1203,17 @@ AjouterLiquidation() {
          var nouvelObjet = {
         ...this.formMandat,
         demande_engagement_id: this.recupereIdDemandeEngagement(this.formData5.numeroDemande),
+        montant_engage:this.montantEngage(this.formData5.numeroDemande),
+    
         
+      };
+      var nouvelObjet1 = {
+       id:this.idDmandeEngagement(this.formData5.numeroDemande),
+        numero_op_systeme:this.formMandat.numero_op_systeme,
         
       };
       this.ajouterDossierMandat(nouvelObjet);
+      this.modifierDemandeEngagement(nouvelObjet1);
 this.$("#modificationModal").modal('hide');
       this.formData5 = {
         numeroDemande: "",

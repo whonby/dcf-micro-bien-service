@@ -10,6 +10,7 @@
     <TableauBordRapport v-else-if="detail_marche.code == 7"></TableauBordRapport>
 <!--    <TableauBordEquipeCF v-else-if="detail_marche.code == 16"></TableauBordEquipeCF>-->
     <TableauBordCatographies  v-else-if="detail_marche.code == 5"></TableauBordCatographies>
+       <TableauBordGeneral  v-else-if="detail_marche.code == 9"></TableauBordGeneral>
     <TableauBordGestionVehicule v-else></TableauBordGestionVehicule>
 
     <!-- </template> -->
@@ -31,6 +32,7 @@ import TableauBordParametre from "../../gestionDesModule/TableauBordParametre";
 import TableauBordRapport from "../../../src/pages/Gestion_des_Rapports/suiviDesEntreprise";
  import TableauBordUa from "../../gestionDesModule/TableauBordUa";
  import TableauBordGestionVehicule from "../../gestionDesModule/TableauBordGestionVehicule";
+ import TableauBordGeneral from "../../gestionDesModule/TableauBordGeneral";
  // import TableauBordEquipeCF from "../../gestionDesModule/TableauBordEquipeCF"
 export default {
   data(){
@@ -49,6 +51,7 @@ components: {
     TableauBordUa,
     TableauBordRapport,
     TableauBordGestionVehicule,
+    TableauBordGeneral
  // TableauBordEquipeCF
   },
 

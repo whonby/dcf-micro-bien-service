@@ -43,8 +43,8 @@
 
                                 </model-list-select>
                             </td>
-                            
-                           
+
+
                             <td style="background: #f0c71d !important;">
                                 <label>Type Marché  <a href="#" @click.prevent="videTypeMarche()" v-if="type_marche" style="color: red"><i class="fa fa-trash-o"></i></a>
                                 </label>
@@ -74,15 +74,15 @@
             <button class="btn btn-default" @click="generateReport()"><i class="icon-print"></i></button>
             <h4 style="text-align:center">Module Unité Administrative</h4>
            <!-- <div class="row-fluid">
-       
+
       <div class="span6">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
             <h5>NOMBRES UNITE D'ADMINISTRATIVE ENREGISTREES</h5>
           </div>
-          <div class="widget-content"> 
+          <div class="widget-content">
             <h1 style="text-align:center;color:red;font-size:50px;padding:6% 6%">{{nbreUniteAdministratives}}</h1>
-            
+
             </div>
         </div>
       </div>
@@ -90,15 +90,15 @@
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
             <h5>BUDGET TOTAL</h5>
-           
+
           </div>
-           <div class="widget-content"> 
+           <div class="widget-content">
             <h1 style="text-align:center;color:red;font-size:20px;padding:6% 6%">{{formatageSomme(parseFloat(montantBudgetGeneralUa))}}</h1>
-            
+
             </div>
         </div>
       </div>
-      
+
     </div> -->
 
 
@@ -129,17 +129,17 @@
 
                             </div>
                             <div class="icon3">
-                               {{nbreUniteAdministratives}} 
+                               {{nbreUniteAdministratives}}
                             </div>
                             <div class="icon2">
 
-                                
+
                             </div>
 
                         </div>
                     </div>
 
-                   
+
                     <div class="span2" style="width: 170px;margin-left: -0.9px !important;border-right: 10px solid #f9f9f9">
                         <div @click="listeMarcheStatus(1)" class="card-box bg-en-contratualisation" style="height: 90px !important; cursor: grab !important;">
                             <div class="inner">
@@ -150,7 +150,7 @@
                                {{formatageSomme(parseFloat(budgetInitaile))}}
                             </div>
                             <div class="icon2">
-                                                              
+
                             </div>
 
                         </div>
@@ -166,7 +166,7 @@
                             </div>
                             <div class="icon2">
 
-                               
+
                             </div>
 
                         </div>
@@ -183,7 +183,7 @@
                             </div>
                             <div class="icon2">
 
-                                
+
                             </div>
 
                         </div>
@@ -196,25 +196,25 @@
                             </div>
                             <div class="icon3">
 
-                               {{(((parseFloat(budgetConsommerPersonnelGlobal)+parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) / (parseFloat(afficherTotalBudgetModulePersonnel) + parseFloat(afficherTotalBudgetModuleBienService) + parseFloat(afficherTotalBudgetModuleInvestissement) + parseFloat(afficherTotalBudgetModuleTransfert))) * 100 ).toFixed(2) || 0}}%
+                               {{tauxExuction}}%
                             </div>
                             <div class="icon2">
 
-                               
+
                             </div>
 
                         </div>
                     </div>
-                   
 
-                   
-                   
 
-                  
+
+
+
+
 
                 </div>
 
-      
+
 
 
                 <div class="row-fluid" style="margin: 55px 2px 100px 4px">
@@ -399,7 +399,7 @@
 
 
             </div>
-          
+
 
 
 
@@ -531,6 +531,10 @@ console.log(this.listeMarchStatueExecuteAcheve)
             nbreUniteAdministratives() {
             return this.filtre_unite_admin.length
             },
+            tauxExuction(){
+                let taux=(parseFloat(this.executeBudget) * 100)/parseFloat(this.budgetInitaile)
+                return taux.toFixed(2)
+            },
     // afficher le budget initiale
     budgetInitaile(){
                 let montant_initial=0;
@@ -592,10 +596,10 @@ console.log(this.listeMarchStatueExecuteAcheve)
     // return this.getMandatPersonnaliserVise.filter(res => res)
     // },
     afficherTotalBudgetModuleBienService() {
-        
+
         if(this.noDCfNoAdmin){
             let colect=[];
-            
+
             this.budgetGeneral.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
@@ -609,10 +613,10 @@ console.log(this.listeMarchStatueExecuteAcheve)
 
     },
      budgetConsommerTransfertGlobal() {
-        
+
         if(this.noDCfNoAdmin){
             let colect=[];
-            
+
             this.transferts.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
@@ -626,9 +630,9 @@ console.log(this.listeMarchStatueExecuteAcheve)
               0
             )
             .toFixed(0);
-            
+
         }
-       
+
       return this.transferts
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat),
@@ -638,10 +642,10 @@ console.log(this.listeMarchStatueExecuteAcheve)
     },
 
     afficherTotalBudgetModulePersonnel() {
-        
+
         if(this.noDCfNoAdmin){
             let colect=[];
-            
+
             this.budgetGeneral.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
@@ -655,10 +659,10 @@ console.log(this.listeMarchStatueExecuteAcheve)
 
     },
      budgetConsommerInvestissementGlobal() {
-        
+
         if(this.noDCfNoAdmin){
             let colect=[];
-            
+
             this.mandats.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
@@ -672,9 +676,9 @@ console.log(this.listeMarchStatueExecuteAcheve)
               0
             )
             .toFixed(0);
-            
+
         }
-       
+
       return this.mandats.filter(element => element.typemarche == 1 && element.decision_cf == 8)
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -683,10 +687,10 @@ console.log(this.listeMarchStatueExecuteAcheve)
             .toFixed(0);
     },
     afficherTotalBudgetModuleTransfert() {
-        
+
         if(this.noDCfNoAdmin){
             let colect=[];
-            
+
             this.budgetGeneral.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
@@ -700,10 +704,10 @@ console.log(this.listeMarchStatueExecuteAcheve)
 
     },
     afficherTotalBudgetModuleInvestissement() {
-        
+
         if(this.noDCfNoAdmin){
             let colect=[];
-            
+
             this.budgetGeneral.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
@@ -717,10 +721,10 @@ console.log(this.listeMarchStatueExecuteAcheve)
 
     },
       budgetConsommerBienServiceGlobal() {
-        
+
         if(this.noDCfNoAdmin){
             let colect=[];
-            
+
             this.mandats.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
@@ -734,9 +738,9 @@ console.log(this.listeMarchStatueExecuteAcheve)
               0
             )
             .toFixed(0);
-            
+
         }
-       
+
       return this.mandats.filter(element => element.typemarche == 2 && element.decision_cf == 8)
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
@@ -746,10 +750,10 @@ console.log(this.listeMarchStatueExecuteAcheve)
     },
 
      budgetConsommerPersonnelGlobal() {
-        
+
         if(this.noDCfNoAdmin){
             let colect=[];
-            
+
             this.mandats.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
@@ -762,14 +766,14 @@ console.log(this.listeMarchStatueExecuteAcheve)
               0
             )
             .toFixed(0);
-            
+
         }
-       
+
         return this.mandats.filter(element => element.marchetype == "perso").reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.total_general), 0)
 
     },
      montantBudgetGeneralUa() {
-      
+
         if (this.noDCfNoAdmin){
             let colect=[];
             this.budgetGeneral.filter(item=>{
@@ -784,9 +788,9 @@ console.log(this.listeMarchStatueExecuteAcheve)
 
  return this.budgetGeneral.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0);
 
-      
+
     },
- 
+
             listeCF(){
               return this.getterUtilisateur.filter(item=>{
                   if(item.user_role){
@@ -1681,7 +1685,7 @@ console.log(this.listeMarchStatueExecuteAcheve)
                 this.videTypeMarche()
             },
             formatageSomme:formatageSomme,
-            
+
             listeMarcheStatus(status){
 
 

@@ -34,6 +34,41 @@
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
                     <div id="INFORMATIONUA" class="tab-pane active">
+                      <table class="table table-bordered table-striped" style="border:1px solid #000">
+                         <tr>
+                           <td>
+              <div class="control-group">
+                <label class="control-label">Mode</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                    v-model="formData5.mode"
+                    class="span"
+                     readonly
+                  />
+                </div>
+              </div>
+              
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Exercice</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData5.exo"
+                 
+                    class="span"
+                     readonly
+                  />
+                </div>
+              </div>
+              
+            </td>
+                         </tr>
+                       </table>
                   <table class="table table-bordered table-striped" style="border:1px solid #000">
                       <tr>
                          <td>
@@ -414,9 +449,9 @@
                   <input
                     type="text"
                     style="border:1px solid #000"
-                  v-model="formData5.Reference_bancaires"
+                  :value="libellebanqueEntreprise(banqueEntreprise(IdEntreprise(formData5.numeroDemande)))"
                     class="span"
-                   
+                   readonly
                   />
                 </div>
               </div>
@@ -429,9 +464,9 @@
                   <input
                     type="text"
                     style="border:1px solid #000"
-                  
+                  :value="CompteEntreprise(IdEntreprise(formData5.numeroDemande))"
                     class="span"
-                    
+                     readonly
                   />
                 </div>
               </div>
@@ -573,7 +608,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -585,7 +620,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                  
                   />
                 </div>
               </div>
@@ -619,7 +654,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -631,7 +666,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -664,7 +699,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -676,7 +711,7 @@
                     style="border:1px solid #000"
                   
                     class="span"
-                    readonly
+                    
                   />
                 </div>
               </div>
@@ -693,7 +728,7 @@
                           @click.prevent="AjouterLiquidation"
                         >Valider</a>
                         <a
-                          @click.prevent="afficherModalListePersonnel()"
+                          @click.prevent="pagePrecedent()"
                           class="btn"
                           href="#"
                         >Fermer</a>
@@ -929,7 +964,7 @@ numeroLiquidation() {
       if (qtereel) {
         return qtereel.numero_liquidation;
       }
-      return 0
+      return "pas de liquidation"
         }
       };
     },
@@ -1111,6 +1146,58 @@ recupereIdDemandeEngagement() {
         }
       };
     },
+      IdEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.numero_dmd_combine == id );
+
+      if (qtereel) {
+       
+           return qtereel.entreprise_id;
+      }
+      return ""
+        }
+      };
+    },
+    libellebanqueEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.banques.find(qtreel => qtreel.id == id );
+
+      if (qtereel) {
+       
+           return qtereel.libelle;
+      }
+      return ""
+        }
+      };
+    },
+    banqueEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.comptes.find(qtreel => qtreel.entrepse_id == id );
+
+      if (qtereel) {
+       
+           return qtereel.banq_id;
+      }
+      return ""
+        }
+      };
+    },
+    CompteEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.comptes.find(qtreel => qtreel.entrepse_id == id );
+
+      if (qtereel) {
+       
+           return qtereel.rib;
+      }
+      return ""
+        }
+      };
+    },
         },
 
 methods: {
@@ -1133,7 +1220,7 @@ pagePrecedent(){
 rechercheMembreCojo(){
       // console.log(this.formData5.numeroDemande)
 
-      let objetMandater=this.gettersDossierLiquidation.filter(item=>this.recupereNumeroDemande(item.dmd_engagement_id)==this.formData5.numeroDemande)
+      let objetMandater=this.gettersDemandeEngagement.filter(item=>item.numero_dmd_combine==this.formData5.numeroDemande)
       // console.log(objetMandater)
       if(objetMandater!=undefined){
         if (objetMandater.length==1){
@@ -1153,8 +1240,10 @@ rechercheMembreCojo(){
          this.formData5.nomEntreprise=acteur.nom_autre,
         this.formData5.adresse=acteur.adresse,
         this.formData5.mode_paiement_id=acteur.mode_paiement_id,
-        this.formData5.adresse=acteur.Reference_bancaires,
-        this.formData5.numero_liquidation=acteur.id
+        
+        this.formData5.numero_liquidation=acteur.id,
+        this.formData5.exo=acteur.exercice,
+        this.formData5.mode=acteur.mode
         //   this.message_mandater=" "
 
         }

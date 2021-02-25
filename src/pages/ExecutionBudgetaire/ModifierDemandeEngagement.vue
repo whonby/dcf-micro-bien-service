@@ -1316,7 +1316,7 @@ components: {
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
 
-...mapGetters("bienService", ["gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+...mapGetters("bienService", ["gettersDossierMandat","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -1600,6 +1600,18 @@ return this.uniteAdministratives
         }
       };
     },
+    idMandat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersDossierMandat.find(qtreel => qtreel.demande_engagement_id == id);
+
+      if (qtereel) {
+        return qtereel.id
+      }
+      return 0
+        }
+      };
+    },
         },
 
 methods: {
@@ -1607,7 +1619,8 @@ methods: {
       "ajouterPieceJustificative",
       "modifierPieceJustificative",
       "supprimerPieceJustificative",
-      "ajouterDemandeEngagement"
+      "modifierDemandeEngagement",
+      "modifierDossierMandat"
      
     ]),
       ...mapActions('personnelUA', ["ajouterFichierJointDmd","modifieFichierJointDmd"]),
@@ -1744,9 +1757,13 @@ var nouvelObjet1 = {
     uaBeneficiaire_id:this.detail.uaBeneficiaire_id,
     	entreprise_id:this.detail2.entrprise_id
       };
-    
+    var nouvelObjet7 = {
+        
+        id:this.idMandat(this.detail.id),
+    	montant_engage:this.TotalGeneralDemandeEngagement
+      };
       this.modifierDemandeEngagement(nouvelObjet1)
-      
+      this.modifierDossierMandat(nouvelObjet7)
       }
       else if(this.detail5.Auteur_id == 3){
         
@@ -1764,8 +1781,13 @@ var nouvelObjet2 = {
     	entreprise_id:this.detail2.entrprise_id
       };
     
+       var nouvelObjet8 = {
+        
+        id:this.idMandat(this.detail.id),
+    	montant_engage:this.TotalGeneralDemandeEngagement
+      };
       this.modifierDemandeEngagement(nouvelObjet2)
-      
+      this.modifierDossierMandat(nouvelObjet8)
       }
       else if(this.detail5.Auteur_id == 4){
         
@@ -1785,8 +1807,13 @@ var nouvelObjet3 = {
     	entreprise_id:this.detail2.entrprise_id
       };
     
+     var nouvelObjet9 = {
+        
+        id:this.idMandat(this.detail.id),
+    	montant_engage:this.TotalGeneralDemandeEngagement
+      };
       this.modifierDemandeEngagement(nouvelObjet3)
-      
+      this.modifierDossierMandat(nouvelObjet9)
       }
     },
     
