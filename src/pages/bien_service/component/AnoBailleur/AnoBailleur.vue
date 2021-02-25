@@ -692,7 +692,8 @@ pvTraitement(){
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.edit_bailleur = this.listeAnoDMPBailleur(this.macheid)[index];
+               // this.edit_bailleur = this.listeAnoDMPBailleur(this.macheid)[index];
+                 this.edit_bailleur=this.getterAnoDMPBailleur.find(items => items.id == index)
                 //this.mode_passation_id=this.edite_appel_offre.mode_passation_id
                 console.log(this.mode_passation_id)
             },
@@ -789,20 +790,28 @@ pvTraitement(){
 
     },
 
-    updateAnoBaileurLocal(){
-     var nouvelModifi={
-        ...this.edit_bailleur,
-      //  appel_offre_id:this.affichierReferenceAppelOffre(this.macheid),
-      //  proce_verbal_jugement_offre_id:this.affichierPvMarche(this.infoLot.id),
-      //  numero_courie:this.edit_bailleur.numero_courie,
-      //  date_ano_dmp:this.edit_bailleur.date_ano_dmp
-     }
-      this.modifierAnoDMPBailleur(nouvelModifi)
-      this.$('#modificationANBaill').modal('hide');
+updateAnoBaileurLocal(){
+  this.modifierAnoDMPBailleur(this.edit_bailleur)
+  this.edit_bailleur={
+    num_courrier:"",
+    date_ano_dmp:""
+  }
+ this.$('#modificationANBaill').modal('hide');
+},
+    // updateAnoBaileurLocal(){
+    //  var nouvelModifi={
+    //     ...this.edit_bailleur,
+    //   //  appel_offre_id:this.affichierReferenceAppelOffre(this.macheid),
+    //   //  proce_verbal_jugement_offre_id:this.affichierPvMarche(this.infoLot.id),
+    //   //  numero_courie:this.edit_bailleur.numero_courie,
+    //   //  date_ano_dmp:this.edit_bailleur.date_ano_dmp
+    //  }
+    //   this.modifierAnoDMPBailleur(nouvelModifi)
+    //   this.$('#modificationANBaill').modal('hide');
 
-       this.getAnoDMPBailleur()
+    //    this.getAnoDMPBailleur()
 
-    },
+    // },
 afficherModalDecisionAnocf(index){
       this.$('#ajouterAnoBailleur').modal({
         backdrop: 'static',

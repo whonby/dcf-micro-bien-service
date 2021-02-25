@@ -14,6 +14,8 @@
       <tr>
         <th>Matricule</th>
         <th>Nom et prénoms</th>
+        <th>Structure d'origine</th>
+        <th>Fonction</th>
         <th>Commite d'evaluation</th>
         <th>UA</th>
         <th>Rôle</th>
@@ -29,6 +31,14 @@
         <td @click="afficheModaleMembreCojo(appelOffre.id)">
           {{appelOffre.nom_prenom || 'Non renseigné'}}
         </td>
+
+        <td @click="afficheModaleMembreCojo(appelOffre.id)">
+          {{afficherLibelleStrutureOrigine(appelOffre.service_id) || 'Non renseigné'}}
+        </td>
+         <td @click="afficheModaleMembreCojo(appelOffre.id)">
+          {{afficherLibelleFonction(appelOffre.fonction_id )|| 'Non renseigné'}}
+        </td>
+
         <td @click="afficheModaleMembreCojo(appelOffre.id)" v-if="appelOffre.comite_evaluation=='oui'" style="background: green !important;color: white !important;">
           {{appelOffre.comite_evaluation || 'Non renseigné'}}
         </td>
