@@ -246,13 +246,13 @@ numeroOrdre
               
           <td colspan="">
                 <div class="control-group">
-                  <label class="control-label" v-if="formData.type_engagement_id=='Marche'">Numéro du Marché</label>
-                  <label class="control-label" v-if="formData.type_engagement_id=='Autre'">Référence Autre Depense</label>
-                   <label class="control-label" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">Numéro op systéme</label>
+                  <label class="control-label" >Numéro du Marché</label>
+                  <!-- <label class="control-label" v-if="formData.type_engagement_id=='Autre'">Référence Autre Depense</label>
+                   <label class="control-label" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">Numéro op systéme</label> -->
                   <div class="controls">
                    
                      <input
-                     v-if="formData.type_engagement_id=='Marche'"
+                     
                     type="text"
                     style="border:1px solid #000"
                    v-model="formData2.numero_marche"
@@ -261,7 +261,7 @@ numeroOrdre
                     v-on:keyup="rechercheListeMarche()"
                     placeholder="Saisir le numero du marché"
                   />
-                  <input
+                  <!-- <input
                   v-if="formData.type_engagement_id=='Autre'"
                     type="text"
                     style="border:1px solid #000"
@@ -270,8 +270,8 @@ numeroOrdre
                    
                     v-on:keyup="rechercheAUtreDepense()"
                     placeholder="Saisir la Référence Autre Depense"
-                  />
-                   <input
+                  /> -->
+                   <!-- <input
                   v-if="formData.type_engagement_id=='Régularisation dordre de paiement'"
                     type="text"
                     style="border:1px solid #000"
@@ -280,7 +280,7 @@ numeroOrdre
                    
                     v-on:keyup="rechercheOpSysteme()"
                     placeholder="Saisir Numéro Op Systeme"
-                  />
+                  /> -->
                   </div>
                 </div>
               </td>
@@ -307,43 +307,43 @@ numeroOrdre
           <tr>
             <td colspan="2">
               <div class="control-group">
-                <label class="control-label" v-if="formData.type_engagement_id=='Marche'">Objet de marché</label>
-                <label class="control-label" v-if="formData.type_engagement_id=='Autre'">Objet Autres depense</label>
-                 <label class="control-label" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">Objet</label>
+                <label class="control-label" >Objet de marché</label>
+                <!-- <label class="control-label" v-if="formData.type_engagement_id=='Autre'">Objet Autres depense</label> -->
+                 <!-- <label class="control-label" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">Objet</label> -->
                 <div class="controls">
                    <input
-                   v-if="formData.type_engagement_id=='Marche'"
+                   
                     type="text"
                     style="border:1px solid #000"
                    :value="libelleMarche(formData2.objet_marche)"
                     class="span"
                     readonly
                   />
-                  <input
+                  <!-- <input
                   v-if="formData.type_engagement_id=='Autre'"
                     type="text"
                     style="border:1px solid #000"
                    v-model="formData2.objet_autre_depense"
                     class="span"
                     readonly
-                  />
-                   <input
+                  /> -->
+                   <!-- <input
                   v-if="formData.type_engagement_id=='Régularisation dordre de paiement'"
                     type="text"
                     style="border:1px solid #000"
                    v-model="formData2.objet_Reservation"
                     class="span"
                     readonly
-                  />
+                  /> -->
                 </div>
               </div>
               
             </td>
            <td colspan="">
               <div class="control-group">
-                <label class="control-label" v-if="formData.type_engagement_id=='Marche'">Montant du marché</label>
-                <label class="control-label" v-if="formData.type_engagement_id=='Autre'">Montant Autre Depense</label>
-                 <label class="control-label" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">Montant Reservé</label>
+                <label class="control-label" >Montant du marché</label>
+                <!-- <label class="control-label" v-if="formData.type_engagement_id=='Autre'">Montant Autre Depense</label>
+                 <label class="control-label" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">Montant Reservé</label> -->
                 <div class="controls">
                   <!-- <input
                     type="text"
@@ -352,9 +352,9 @@ numeroOrdre
                     class="span"
                     readonly
                   /> -->
-                  <money v-model="formData2.montant_marché" v-if="formData.type_engagement_id=='Marche'" readOnly  style="text-align:left;color:red"  class="span"></money>
-                   <money v-model="formData2.montant_autre_depense" v-if="formData.type_engagement_id=='Autre'" readOnly  style="text-align:left;color:red"  class="span"></money>
-                    <money v-model="formData2.montant_Reserve" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'" readOnly  style="text-align:left;color:red"  class="span"></money>
+                  <money v-model="formData2.montant_marché"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                   <!-- <money v-model="formData2.montant_autre_depense" v-if="formData.type_engagement_id=='Autre'" readOnly  style="text-align:left;color:red"  class="span"></money>
+                    <money v-model="formData2.montant_Reserve" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'" readOnly  style="text-align:left;color:red"  class="span"></money> -->
                 </div>
               </div>
               
@@ -450,7 +450,7 @@ numeroOrdre
                   v-if="formData.type_engagement_id!='Autre'"
                     type="text"
                     style="border:1px solid #000"
-                   :value="formData2.numero_cc_fournisseur_nom"
+                   :value="recupereLeNumeroCompte(recupereLeNumeroCompteid(formData2.numero_cc_fournisseur_nom))"
                     class="span"
                     readonly
                   />
@@ -508,7 +508,7 @@ numeroOrdre
                    <input
                     type="text"
                     style="border:1px solid #000"
-                   :value=" Numero_CC(formData2.Numéro_cc_fournisseur)"
+                   :value="Numero_CC(formData2.Numéro_cc_fournisseur)"
                     class="span"
                     v-if="formData5.Auteur_id==2"
                  readonly
@@ -619,11 +619,10 @@ numeroOrdre
                     
                   /> -->
                   <money :value="TotalGeneralDemandeEngagement"  readOnly  style="text-align:left;color:red"  class="span"></money>
-                <code style="color:red;font-size:12px" v-if="formData.type_engagement_id=='Marche'">MONTANT A PAYE: {{(parseFloat(formData2.montant_marché)-parseFloat(cumulMarche(formData2.numero_marche)))}}</code><br><br>
-                 <code style="color:red;font-size:12px" v-if="(parseFloat(formData2.montant_marché)-parseFloat(cumulMarche(formData2.numero_marche)))<TotalGeneralDemandeEngagement && formData.type_engagement_id=='Marche'">Vérifier le montant général </code>
+                <code style="color:red;font-size:12px" >MONTANT A PAYE: {{(parseFloat(formData2.montant_marché)-parseFloat(cumulMarche(formData2.numero_marche)))}}</code><br><br>
+                 <code style="color:red;font-size:12px" v-if="(parseFloat(formData2.montant_marché)-parseFloat(cumulMarche(formData2.numero_marche)))<TotalGeneralDemandeEngagement">Vérifier le montant général </code>
 
-                  <code style="color:red;font-size:12px" v-if="formData.type_engagement_id=='Régularisation dordre de paiement'">MONTANT A CONSOMME : {{(parseFloat(formData2.montant_Reserve)-parseFloat(cumulReservation(formData2.numero_systeme)))}}</code><br><br>
-                 <code style="color:red;font-size:12px" v-if="(parseFloat(formData2.montant_Reserve)-parseFloat(cumulReservation(formData2.numero_systeme)))<TotalGeneralDemandeEngagement && formData.type_engagement_id=='Régularisation dordre de paiement'">Vérifier le montant général </code>
+                  
                 </div>
               </div>
               
@@ -721,7 +720,7 @@ numeroOrdre
                                 </model-list-select>
                             </td>
                      </tr>
-                     <h6>PIECE PROFORMA</h6>
+                     <h6>PIECES JUSTIFICATIVES</h6>
                      <tr>
                         <!-- <td colspan="">
               <div class="control-group">
@@ -1960,6 +1959,30 @@ type_engagement_id:"Marche"
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+recupereLeNumeroCompte() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           const qtereel = this.comptes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.rib;
+      }
+      return ""
+        }
+      };
+    },
+recupereLeNumeroCompteid() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.entreprise_id == id);
+
+      if (qtereel) {
+        return qtereel.compte_id;
+      }
+      return ""
+        }
+      };
+    },
 
 cumulMontantMarche() {
       const val =   parseFloat(this.TotalGeneralDemandeEngagement) + parseFloat(this.cumulMarche(this.formData2.numero_marche));
@@ -2384,7 +2407,7 @@ libelleLigneEconomique() {
            const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.	adresse
+        return qtereel.adresse
       }
       return 0
         }
@@ -2907,7 +2930,9 @@ var nouvelObjet1 = {
         	programme_id:this.idProgramme(this.formData.ligne_economique_id),
      action_id:this.idAction(this.formData.ligne_economique_id),
      	activite_id:this.idActivite(this.formData.ligne_economique_id),
-     	nom_autre:this.formData2.numero_cc_fournisseur_nom,
+     	nom_autre:this.Numero_Nom_Entreprise(this.formData2.numero_cc_fournisseur_nom),
+        adresse:this.Numero_adresse_Entreprise(this.formData2.numero_cc_fournisseur_nom),
+       numero_cc_autre:this.Numero_CC(this.formData2.numero_cc_fournisseur_nom),
      total_general:this.TotalGeneralDemandeEngagement,
     exercice:this.anneeAmort,
     section_id:this.idSection(this.formData.ligne_economique_id),

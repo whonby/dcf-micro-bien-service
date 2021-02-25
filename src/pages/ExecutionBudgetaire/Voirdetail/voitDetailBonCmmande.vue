@@ -150,7 +150,7 @@ uniteAdministratives
                     </tbody> 
                 </table>
    
- <!-- <h3>Detail Liquidation</h3>
+  <h3>Detail Liquidation</h3>
     <table class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -187,9 +187,9 @@ uniteAdministratives
                   
                     </tbody> 
                 
-    </table>
+    </table> 
 
-                 <h3>Detail Mandat</h3>
+     <!--             <h3>Detail Mandat</h3>
     <table class="table table-bordered table-striped">
                     <thead>
                       <tr>

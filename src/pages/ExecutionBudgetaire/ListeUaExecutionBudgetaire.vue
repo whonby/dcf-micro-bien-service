@@ -32,7 +32,7 @@ uniteAdministratives
                                                     <div class="controls">
                                                         <select v-model="type_procedure_id" class="span" style="border:2px solid #000">
                                                             <option></option>
-                                                            <option value="Engagement par Bien de Commande">Engagement par Bien de Commande </option>
+                                                            <option value="Engagement par Bon de Commande">Engagement par Bon de Commande </option>
                                                             <option value="Engagement direct">Engagement direct</option>
 
                                                         </select>
@@ -201,29 +201,48 @@ uniteAdministratives
       <table class="table table-bordered table-striped">
         <tr>
           <td>
+             <div align="left">
+               
+                <span style="font-size:25px">Rechercher une demande</span><br>
+                <input type="search" class="span8" placeholder="Saisissez le numero de l'engagement" v-model="search" />
+              </div>
+          </td>
+             <td>
+<div  align="lef" style="cursor:pointer;">
+    <button class="btn btn-success" @click.prevent="AjouterLettreAvance"><i class="icon icon-folder-open"> Lettre avance</i></button>
+    
+        </div> 
+          </td>
+          <td>
  <div  align="right" style="cursor:pointer;">
     <button class="btn btn-success" @click.prevent="ajouterDemandeEngage"><i class="icon icon-folder-open"> Ajouter demande d'engagement</i></button>
     
         </div>
           </td>
           <!-- <td>
+ <div  align="right" style="cursor:pointer;">
+    <button class="btn btn-success" @click.prevent="ajouterDemandeEngage"><i class="icon icon-folder-open"> Ajouter demande d'engagement</i></button>
+    
+        </div>
+          </td>
+          <td>
 <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="liquidation"><i class="icon icon-folder-open"> Nouveau Liquidation</i></button>
+    <button class="btn btn-success" @click.prevent="ajouterLiquidation"><i class="icon icon-folder-open"> Nouveau Liquidation</i></button>
     
         </div> 
           </td>
           <td>
 <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="MANDATEMENT"><i class="icon icon-folder-open"> Nouveau Mandat</i></button>
+    <button class="btn btn-success" @click.prevent="ajouterMandat"><i class="icon icon-folder-open"> Nouveau Mandat</i></button>
     
         </div> 
           </td>
           <td>
 <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="ordrePaiment"><i class="icon icon-folder-open"> Nouveau Ordre de Paiement</i></button>
+    <button class="btn btn-success" @click.prevent="ajouterOpSysteme"><i class="icon icon-folder-open"> Nouveau Ordre de Paiement</i></button>
     
-        </div>  -->
-          <!-- </td> -->
+        </div> 
+          </td> -->
         </tr>
       </table>
       
@@ -247,10 +266,7 @@ uniteAdministratives
               </span>
               <h5>DEMANDE D'ENGAGEMENT</h5>
               <!-- <h5>Gestion du Patrimoine</h5> -->
-              <!-- <div align="right">
-                Recherche:
-                <input type="search" placeholder v-model="search" />
-              </div> -->
+             
              
             </div>
 
@@ -276,12 +292,14 @@ uniteAdministratives
                        <th style="font-size:14px;font-weight:bold" title="">Liquidation</th>
                        <th style="font-size:14px;font-weight:bold">Mandat</th>
                        <th style="font-size:14px;font-weight:bold">Op Systeme</th>
+                       <th style="font-size:14px;font-weight:bold">Fiche Réalité</th>
+                       <th style="font-size:14px;font-weight:bold">Fiche Annexe</th>
                         <th style="font-size:14px;font-weight:bold">Voir Détail</th>
                         <th  style="font-size:14px;font-weight:bold" colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(type) in ListeDEsEntreprise" :key="type.id">
+                  <tr class="odd gradeX" v-for="(type) in listeDemandeEngagement" :key="type.id">
                     <td style="color:red;font-weight: bold;font-size:14px"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_dmd_combine || 'Non renseigné'}}</td>
@@ -488,7 +506,7 @@ uniteAdministratives
                       
                     
                       </button>
-                      <button  v-else-if="type.id != afficheDecisionMandat(type.id) && type.decision_cf != 0 || type.id != afficheDecisionMandat(type.id)" class="btn  btn-danger" @click="ajouterOpSysteme" >                        
+                      <button  v-else-if="type.id != afficheDecisionMandat(type.id)" class="btn  btn-danger" @click="ajouterOpSysteme" >                        
                      
                       
                        <span>Ajouter</span>
@@ -505,6 +523,20 @@ uniteAdministratives
                       </button> -->
                       <!-- </span> -->
                       </template>
+                    </td>
+                    <td v-else style="background-color:lightblue"></td>
+                     <td v-if="type.type_procedure_id=='Engagement direct'">
+                      <router-link :to="{ name: 'FicheRealiteServiceFait1', params: { id: type.id }}"
+                class="btn btn-Success " title="">
+                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Fiche realité fait</i></span>
+                   </router-link> 
+                    </td>
+                    <td v-else style="background-color:lightblue"></td>
+                     <td v-if="type.type_procedure_id=='Engagement direct'">
+                      <router-link :to="{ name: 'FicheDeControle1', params: { id: type.id }}"
+                class="btn btn-Success " title="">
+                  <span class=""><i class="   icon-print" style="font-weight: bold;">Fiche Annexe</i></span>
+                   </router-link> 
                     </td>
                     <td v-else style="background-color:lightblue"></td>
                    <td>
@@ -548,6 +580,9 @@ uniteAdministratives
                     <td></td>
                     <td></td>
                       <td></td>
+                      <td></td>
+                    <td></td>
+                      
                     
                   </tr>
                 </tbody>
@@ -607,6 +642,7 @@ export default {
         
        
       },
+
       type_procedure_id:"",
       uniteAdministrative_id:"",
        affiche_filtre:false,
@@ -668,6 +704,22 @@ export default {
       // "sections"
        
     ]),
+
+ listeDemandeEngagement() {
+      const st = this.search.toLowerCase();
+      return this.ListeDEsEntreprise.filter(type => {
+        return (
+          type.numero_dmd_combine.toLowerCase().includes(st)
+          
+        );
+      });
+    },
+
+
+
+
+
+
     afficheDecisionMandat() {
       return id => {
         if (id != null && id != "") {
@@ -825,7 +877,7 @@ ListePieceJustificative() {
     },
     SommeDesDmdParBonCommande() {
    
-    return this.ListeDEsEntreprise.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0);
+    return this.listeDemandeEngagement.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0);
     },
   },
   methods: {
@@ -864,6 +916,10 @@ this.$("#demandeVise").modal('hide');
 
        this.editDemandeEngagement = this.gettersDemandeEngagement.find(item=>item.id==id);
     },
+    
+    AjouterLettreAvance(){
+                this.$router.push({ name: 'AjouterLettreAvance' })
+            },
     ajouterOpSysteme(){
                 this.$router.push({ name: 'AjouterOrdrePaiement' })
             },
