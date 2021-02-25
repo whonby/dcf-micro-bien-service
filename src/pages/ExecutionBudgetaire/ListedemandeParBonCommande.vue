@@ -17,7 +17,7 @@
                       <th>Total</th>
                       <th>Fichier Joint</th>
                        <th>Nature de la Pièce</th>
-                       <th>Voir Procedure</th>
+                       <th>Voir Procédure</th>
                         <th>Voir Détail</th>
                         <th>Action</th>
                   </tr>

@@ -56,7 +56,7 @@
           <tr>
              <td>
               <div class="control-group">
-                <label class="control-label">prenoms</label>
+                <label class="control-label">prénoms</label>
                 <div class="controls">
                   <input
                     type="text"

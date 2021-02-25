@@ -26,7 +26,7 @@
               </span>
               <h5>Liste dossier candidat</h5>
               <div align="right">
-                Search:
+                Recherche:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>

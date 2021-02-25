@@ -136,7 +136,7 @@
                                            </tr>
                                            <tr>
                                                <td>
-                                                   <label>Unite Administrative</label>
+                                                   <label>Unité Administrative</label>
                                                    <model-list-select style="background-color: #fff;"
                                                                       class="wide"
                                                                       :list="listeUniteAdminPasSection"
@@ -149,7 +149,7 @@
                                                    </model-list-select>
                                                </td>
                                                <td>
-                                                   <label>Activite</label>
+                                                   <label>Activité</label>
                                                    <model-list-select style="background-color: #fff;"
                                                                       class="wide"
                                                                       :list="listeActiviteUA(ua_id)"

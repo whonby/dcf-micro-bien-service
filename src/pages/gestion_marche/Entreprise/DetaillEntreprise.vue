@@ -15,7 +15,7 @@
                             <tr>
                                 <th>Raison sociale</th>
                                 <th>Compte contribuable</th>
-                                <th>Registre commerce</th>
+                                <th>Registre de commerce</th>
                                 <th>Secteur activité</th>
                                 <th>Pays</th>
                                 <th>Ville</th>

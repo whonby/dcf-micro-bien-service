@@ -5,7 +5,7 @@
     <div id="exampleModal" class="modal hide taillemodal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Unite Zone</h3>
+        <h3>Ajouter Unité Zone</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">

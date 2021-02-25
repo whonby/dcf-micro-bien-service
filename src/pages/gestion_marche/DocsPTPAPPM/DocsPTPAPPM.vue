@@ -27,7 +27,7 @@
                                     <th>Code </th>
                                     <th>Fichier PTBA</th>
                                     <th>Fichier PPM</th>
-                                    <th>Unite Administrative</th>
+                                    <th>Unité Administrative</th>
                                     <th>Exercice</th>
                                     <th>Action</th>
                                 </tr>
@@ -51,7 +51,7 @@
                                     <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerDocumentPTBAPPM(item.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
+                                                <span class=""><i class="icon-trash"></i> Supprimer</span></button>
 
                                         </div>
 
