@@ -99,7 +99,7 @@ reference_marche
            <td>
                      <button 
                       v-if="marche.attribue == 2"  class="btn  btn-warning">
-                <span title="MARCHE EN EXERCUTER" style="">EX</span>
+                <span title="MARCHE EN EXERCUTION" style="">EX</span>
        
                 </button>
                 <button 

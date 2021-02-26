@@ -7,6 +7,7 @@
 
                                    </div> -->
 
+
                                  <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
                                             <tr>
@@ -14,6 +15,8 @@
                                                 <th>Nom</th>
                                                 <th>Contact</th>
                                                 <th>Entreprise</th>
+                                                 <th>Heur limite</th>
+                                                  <th>Email</th>
                                                 <!-- <th>Fichier</th> -->
                                                
                                                 <th>Action</th>
@@ -34,6 +37,10 @@
 
                          <td @click="afficherModalcotation(index)">
                             {{afficherLibelleEntreprise(cotation.entreprise_id) || 'Non renseigné'}}</td>
+                            <td @click="afficherModalcotation(index)">
+                            {{cotation.heure_limite || 'Non renseigné'}}</td>
+                            <td @click="afficherModalcotation(index)">
+                            {{cotation.email || 'Non renseigné'}}</td>
                       
                         <!-- <td>
                             <a v-if="cotation.fichier_joint" :href="cotation.fichier_joint" class="btn btn-default" target="_blank">
@@ -138,6 +145,28 @@
 
                             <div class="controls">
                                 <input type="date" class="span" row="" placeholder=""  v-model="formCotation.date_cotation">
+                            </div>
+                        </div>
+                              </td>
+                               <td>
+
+                        <div class="control-group">
+
+                            <label class="control-label">Heure limite:</label>
+
+                            <div class="controls">
+                                <input type="time" class="span" row="" placeholder=""  v-model="formCotation.heure_limite">
+                            </div>
+                        </div>
+                              </td>
+                               <td>
+
+                        <div class="control-group">
+
+                            <label class="control-label">E-mail du deposant:</label>
+
+                            <div class="controls">
+                                <input type="email" class="span" row="" placeholder=""  v-model="formCotation.email">
                             </div>
                         </div>
                               </td>
@@ -266,6 +295,28 @@
                             </div>
                         </div>
                           </td>
+                           <td>
+
+                        <div class="control-group">
+
+                            <label class="control-label">Heure limite:</label>
+
+                            <div class="controls">
+                                <input type="time" class="span" row="" placeholder=""  v-model="editCotation.heure_limite">
+                            </div>
+                        </div>
+                              </td>
+                               <td>
+
+                        <div class="control-group">
+
+                            <label class="control-label">E-mail:</label>
+
+                            <div class="controls">
+                                <input type="email" class="span" row="" placeholder=""  v-model="editCotation.email">
+                            </div>
+                        </div>
+                              </td>
                           <!-- <td>
 
 
@@ -426,6 +477,7 @@ affichierReferenceAppelOffre() {
       };
     },
 
+
         },
       methods: {
             ...mapActions("bienService", ['ajouterCotation' ,"getCotation", 'modifierCotation','supprimerCotation']),
@@ -481,7 +533,10 @@ affichierReferenceAppelOffre() {
          
           
            ajouterCotationLocal(){
-            
+             var nouvelObjet={
+                 ...this.formCotation,
+                 ref_offre:this.affichierReferenceAppelOffre(this.macheid.id)
+             }
             //     const formData = new FormData();
             //     formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
             //     formData.append('nom_person', this.formCotation.nom_person);
@@ -501,7 +556,7 @@ affichierReferenceAppelOffre() {
 
                console.log(this.formCotation)
               
-               this.ajouterCotation(this.formCotation)
+               this.ajouterCotation(nouvelObjet)
                this.getCotation()
                this.formCotation ={
                    nom_person:"",
@@ -517,7 +572,11 @@ affichierReferenceAppelOffre() {
 
 
            modifierCotationLocal(){
-              
+              var nouveModif={
+                  ...this.editCotation,
+                  ref_offre:this.affichierReferenceAppelOffre(this.macheid.id)
+
+              }
 
             //    const formData = new FormData();
             //     formData.append('nom_person', this.editCotation.nom_person);
@@ -537,7 +596,7 @@ affichierReferenceAppelOffre() {
             //         }
             //     }
               
-               this.modifierCotation(this.editCotation)
+               this.modifierCotation(nouveModif)
                this.$('#modifiCotation').modal('hide');
            }
 
