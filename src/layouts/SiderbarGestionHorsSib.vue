@@ -59,7 +59,7 @@
           </a>
         </li> -->
         <li >
-           <router-link :to="{ name: 'BudgetEclatePrincipal'}" tag="a"  >
+           <router-link :to="{ name: 'BudgetEclate'}" tag="a"  >
          
             <i class="icon-arrow-left"></i>
             <span>BUDGET ECLATE</span>

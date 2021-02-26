@@ -793,3 +793,26 @@ export const groupStockParUA = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.GestionStockageArticles, "uAdministrative_id");
 };
+
+export const groupeActiviteBudget = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetGeneral, "activite_id");
+};
+
+export const groupeLigneEconomiqueBudget = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetGeneral, "economique_id");
+};
+
+
+export const groupeUniteAdministrativeBudgetEclate = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetEclate, "uniteadministrative_id");
+};
+
+
+
+export const groupeParBAILLER = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetEclate, "ligneeconomique_id");
+};

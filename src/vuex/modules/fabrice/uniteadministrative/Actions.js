@@ -1347,54 +1347,83 @@ export function getAllBudgetEclate({ commit }) {
   });
 }
 
-// ajouter type texte
-export function ajouterBudgetEclate({ commit, dispatch }, nouveau) {
+export function ajouterBudgetEclate({ commit }, nouveau) {
   asyncLoading(axios
-    .post("/budgetEclate", {
-      annebudgetaire: nouveau.annebudgetaire,
-      uniteadministrative_id: nouveau.	uniteadministrative_id,
-      ligneeconomique_id: nouveau.ligneeconomique_id,
-      grandenature_id: nouveau.grandenature_id,
-      dotation: nouveau.dotation,
-
-    }))
-
-    .then(response => {
-      if (response.status == 201) {
-        commit("AJOUTER_BUDGET_ECLATE", response.data);
-        dispatch('getAllBudgetEclate')
-        dispatch('getAllUniteAdministrative')
-        dispatch('getAllHistoriqueBudgetEclate')
-        this.$app.$notify({
-          title: 'Success',
-          text: 'Enregistrement Effectué avec Succès!',
-          type: "success"
-        })
-      }
-    });
+      .post("/budgetEclate", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_BUDGET_ECLATE", response.data);
+             
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
 }
+export function modifierBudgetEclate({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/budgetEclate/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_BUDGET_ECLATE", response.data);
+          
+
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+// ajouter type texte
+// export function ajouterBudgetEclate({ commit, dispatch }, nouveau) {
+//   asyncLoading(axios
+//     .post("/budgetEclate", {
+//       annebudgetaire: nouveau.annebudgetaire,
+//       uniteadministrative_id: nouveau.	uniteadministrative_id,
+//       ligneeconomique_id: nouveau.ligneeconomique_id,
+//       grandenature_id: nouveau.grandenature_id,
+//       dotation: nouveau.dotation,
+
+//     }))
+
+//     .then(response => {
+//       if (response.status == 201) {
+//         commit("AJOUTER_BUDGET_ECLATE", response.data);
+//         dispatch('getAllBudgetEclate')
+//         dispatch('getAllUniteAdministrative')
+//         dispatch('getAllHistoriqueBudgetEclate')
+//         this.$app.$notify({
+//           title: 'Success',
+//           text: 'Enregistrement Effectué avec Succès!',
+//           type: "success"
+//         })
+//       }
+//     });
+// }
 
 // modifier
-export function modifierBudgetEclate({ commit, dispatch}, nouveau) {
-  asyncLoading(axios
-    .put("/budgetEclate/" + nouveau.id, {
-      annebudgetaire: nouveau.annebudgetaire,
-      uniteadministrative_id: nouveau.	uniteadministrative_id,
-      ligneeconomique_id: nouveau.ligneeconomique_id,
-      grandenature_id: nouveau.grandenature_id,
-      dotation: nouveau.dotation,
-    }))
-    .then(response => {
-      commit("MODIFIER_BUDGET_ECLATE", response.data);
-      dispatch('getAllBudgetEclate')
-      dispatch('getAllUniteAdministrative')
-      this.$app.$notify({
-        title: 'Success',
-        text: 'Modification Effectué avec Succès!',
-        type: "success"
-      })
-    });
-}
+// export function modifierBudgetEclate({ commit, dispatch}, nouveau) {
+//   asyncLoading(axios
+//     .put("/budgetEclate/" + nouveau.id, {
+//       annebudgetaire: nouveau.annebudgetaire,
+//       uniteadministrative_id: nouveau.	uniteadministrative_id,
+//       ligneeconomique_id: nouveau.ligneeconomique_id,
+//       grandenature_id: nouveau.grandenature_id,
+//       dotation: nouveau.dotation,
+//     }))
+//     .then(response => {
+//       commit("MODIFIER_BUDGET_ECLATE", response.data);
+//       dispatch('getAllBudgetEclate')
+//       dispatch('getAllUniteAdministrative')
+//       this.$app.$notify({
+//         title: 'Success',
+//         text: 'Modification Effectué avec Succès!',
+//         type: "success"
+//       })
+//     });
+// }
 //supprimer
 export function supprimerBudgetEclate({ commit, dispatch}, id) {
   this.$app.$dialog
