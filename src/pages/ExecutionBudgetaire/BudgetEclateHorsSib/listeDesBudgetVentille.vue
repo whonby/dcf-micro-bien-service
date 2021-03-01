@@ -138,7 +138,10 @@
                       <td style="font-size:14px;color:#000;text-align:center">{{formatageSomme(parseFloat(type.tresor)) || 'Non renseigné'}}</td>
                       <td style="font-size:14px;color:#000;text-align:center">{{formatageSomme(parseFloat(type.don)) || 'Non renseigné'}}</td>
                    <td style="font-size:14px;color:#000;text-align:center">{{formatageSomme(parseFloat(type.emprunt)) || 'Non renseigné'}}</td>
-                   <td style="font-size:14px;color:#000;text-align:center">{{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}</td>
+                  
+                   <td style="font-size:14px;color:#000;text-align:center">
+                     {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
+                     </td>
                     
                   </tr>
                   <tr>
@@ -171,7 +174,7 @@
 <div id="validationOpDefinitif" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Decision CF{{idDecisionBudgetaire(detail_marche.uniteadministrative_id)}}</h3>
+        <h3>Decision CF</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -234,7 +237,7 @@
                                <div class="control-group">
                             <label class="control-label">Date Decision CF :</label>
                             <div class="controls">
-                              <input type="date" class="span5"  v-model="editMandat.date_motif"/>
+                              <input type="date" class="span5"  v-model="editMandat.date_decision"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
                               
                             </div>
@@ -275,6 +278,7 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
+     <notifications/>
   </div>
 </template>
   
@@ -618,10 +622,9 @@ idDecisionBudgetaire() {
       "modifierDecisionBudgetEclate"
     ]),
             validationOpVise() {
-     
-
  var nouvelObjet = {
       ...this.editMandat,
+      id:this.idDecisionBudgetaire(this.detail_marche.uniteadministrative_id),
      	motif :this.editMandat.motif,
        
          	famille_motif : this.editMandat.famille_motif,

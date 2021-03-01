@@ -25,6 +25,7 @@
    <MenuRapportVehicule v-if="active_el == 90"></MenuRapportVehicule>
    <MenuTableauBordGestionMarche v-if="active_el == 45"></MenuTableauBordGestionMarche>
    <MenuTableauBordGestionSibMarche v-if="active_el ==46"></MenuTableauBordGestionSibMarche>
+   <MenuTableauBordGeneral v-if="active_el ==123"></MenuTableauBordGeneral>
     <!-- <Search></Search> -->
     
     <!--close-top-serch MenuPlanificationHorSib-->
@@ -59,9 +60,11 @@ import MenuParametreVehicule from "../components/navs/MenuParametreVehicule"
 import MenuGestionParc from "../components/navs/MenuGestionParc"
 import MenuRapportMarche from "../components/navs/MenuRapportMarche"
 import MenuRapportVehicule from "../components/navs/MenuRapportVehicule"
+import MenuTableauBordGeneral from "../components/navs/MenuTableauBordGeneral"
 import { mapState, mapActions} from "vuex";
 export default {
   components: {
+    MenuTableauBordGeneral,
     MenuTableauBordGestionSibMarche,
     MenuTableauBordGestionMarche,
     MenuGestionDesMarchesHorsSib,

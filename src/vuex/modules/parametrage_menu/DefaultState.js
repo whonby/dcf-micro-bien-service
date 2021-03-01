@@ -19,6 +19,7 @@ const defaultstate = {
     RapportVehicule:90,
     menuExecutionBudgetaire:100,
     MenuTableauBordGestionMarche:45,
+    MenuTableauBordGeneral:123,
     active_el: 11
 };
 
