@@ -25,6 +25,29 @@
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
+          <table class="table table-bordered table-striped">
+            <tr>
+              <td>
+                <div align="right">
+
+      <button class="btn btn-success"  @click.prevent="ajouterBudgetEclarter">VENTILLER LE BUDGET </button>
+
+
+                            </div>
+              </td>
+              <td style="width:12%;">
+                <div align="right">
+
+      <button class="btn btn-danger"  @click.prevent="ModificationBudgetaire">MODIFICATION BUDGETAIRE </button>
+
+
+                            </div>
+              </td>
+            </tr>
+          </table>
+          
+                            
+                            
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -38,30 +61,38 @@
             </div>
 
             <div class="widget-content nopadding">
+              
               <table class="table table-bordered table-striped">
                 <thead>
                  <tr>
-                   <th style="width:10%;font-size:12px" >Exercice</th>
+                   <!-- <th style="width:10%;font-size:12px" >Exercice</th> -->
                      <th style="width:20%;font-size:12px" >Code UA</th>
                     <th style="width:50%;font-size:12px" >Unité Administrative</th>
-                    <th style="width:20%;font-size:12px" >Montant Reçu</th> 
-                    <th style="width:10%;" colspan="2" >Action</th>
+                    <!-- <th style="width:20%;font-size:12px" >Montant Reçu</th>  -->
+                    <th style="width:10%;" colspan="" >Action</th>
                    
                   </tr>
                 </thead>
                 <tbody>
                             <tr class="odd gradeX" v-for="(type) in groupeUniteAdministrativeBudgetEclate" :key="type.id">
-                    <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td>
-                      <td style="font-size:12px;color:#000;text-align:center">{{idUniteAdministrative(type[0].uniteadministrative_id) || 'Non renseigné'}}</td>
-                   <td style="font-size:12px;color:#000;text-align:center">{{idUniteAdministrative(type[0].uniteadministrative_id) || 'Non renseigné'}}</td>
-                    <td style="font-size:12px;color:#000;text-align:center">{{0 || 'Non renseigné'}}</td>
-                    <td>
+                    <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
+                      <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type[0].uniteadministrative_id)) || 'Non renseigné'}}</td>
+                   <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type[0].uniteadministrative_id) || 'Non renseigné'}}</td>
+                   
+                   <td>
+                      <router-link :to="{ name: 'listeDesBudgetVentille', params: { id: type[0].id }}"
+                class="btn btn-Success " title="">
+                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Listes Budgets</i></span>
+                   </router-link> 
+                    </td>
+                    <!-- <td style="font-size:12px;color:#000;text-align:center">{{0 || 'Non renseigné'}}</td> -->
+                    <!-- <td>
                       <button class="btn btn-danger" @click="supprimerBudgetEclate(type[0].id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
                       </button>
-                    </td>
+                    </td> -->
                   </tr>
                   
                 </tbody>
@@ -146,7 +177,7 @@ export default {
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
 
     ...mapGetters("parametreGenerauxAdministratif", [
-      
+      "services_gestionnaires",
       "sections",
       "type_Unite_admins",
       "plans_programmes",
@@ -183,6 +214,30 @@ export default {
         }
       };
     },
+    idServiceGestionnaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.servicegest_id
+      }
+      return 0
+        }
+      };
+    },
+    libelleServiceGestionnaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services_gestionnaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code
+      }
+      return 0
+        }
+      };
+    },
 },
   methods: {
      ...mapActions("uniteadministrative", [
@@ -193,6 +248,9 @@ export default {
      
       // "ajouterHistoriqueBudgetGeneral"
     ]),
+    ModificationBudgetaire(){
+                this.$router.push({ name: 'ModificationBudgetaire' })
+            },
   ajouterBudgetEclarter(){
                 this.$router.push({ name: 'AjouterBudgetEclater' })
             },

@@ -435,6 +435,8 @@ this.getTypeAppel()
      this.getAllHistoriqueDecompteFacture()
        this.getStructureOrganigrammeUa()
  this.getAllBudgetEclate()
+ this.getAllHistorisqueBudgetEclate()
+ this.getAllDecisionBudgetEclate()
  this.getVehicule()
  this.getReparationVehicule()
  this.getStockArticleUa()
@@ -723,6 +725,8 @@ return objJson.id
      "getAllBanqueUa",
      "getAllDecompteFacture",
      "getAllBudgetEclate",
+     "getAllHistorisqueBudgetEclate",
+     "getAllDecisionBudgetEclate",
      "getVehicule",
      "getReparationVehicule",
      "getStockArticleUa",
