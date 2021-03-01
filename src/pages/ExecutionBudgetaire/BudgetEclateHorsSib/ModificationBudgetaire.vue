@@ -14,7 +14,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Ajouter la Ventilation du budget</h5>
+              <h5>Modification Budgetaire</h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -190,7 +190,7 @@
                  <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION SUR BAILLEUR</a>
+                        <a data-toggle="tab" href="#INFORMATIONUA">{{formData1.ligneeconomique_id}}INFORMATION SUR BAILLEUR{{doublonLigneBudgetaire(formData1.ligneeconomique_id)}}</a>
                       </li>
                     </ul>
                   </div>
@@ -352,7 +352,7 @@
               <code style="color:red;font-size:12px" v-if="formData1.ligneeconomique_id==''">Veuillez renseigner ce champ</code>
                   </td>   
                   
-                  <td colspan="2">
+                  <td colspan="3">
                        <div class="control-group">
                 <label class="control-label">Libelle ligne budgetaire</label>
                 <div class="controls">
@@ -375,7 +375,7 @@
                        <div class="control-group">
                 <label class="control-label">Report</label>
                 <div class="controls">
-                  <money   v-model="formData1.report"  style="text-align:left;color:red"  class="span" :readOnly="grise"></money>
+                  <money   :value="recuppererMontantReport(formData.uniteadministrative_id,formData1.ligneeconomique_id)" readonly style="text-align:left;color:red"  class="span" ></money>
                 </div>
               </div>
                   </td>
@@ -384,10 +384,18 @@
                        <div class="control-group">
                 <label class="control-label">Dotation</label>
                 <div class="controls">
-                  <money  v-model="formData1.dotation_nouvelle"   style="text-align:left;color:red"  class="span"></money>
+                  <money  :value="recuppererMontantDotationNouvel(formData.uniteadministrative_id,formData1.ligneeconomique_id)" readonly  style="text-align:left;color:red"  class="span"></money>
                 </div>
               </div>
                   </td>
+                  <td>
+                             <div class="control-group">
+                <label class="control-label">Variation</label>
+                <div class="controls">
+                  <money  v-model="formData1.variation_budget"   style="text-align:left;color:red"  class="span"></money>
+                </div>
+              </div>
+                        </td>
                   <td colspan="">
                        <div class="control-group">
                 <label class="control-label">Dotation Total</label>
@@ -442,10 +450,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td style="font-weight:bold;font-size:14px;text-align:center;">TOTAL</td>
+                    <td style="font-weight:bold;font-size:14px">TOTAL</td>
                     <td style="text-align:center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(parseFloat(recupereMontantEtatTotal(formData.uniteadministrative_id))+parseFloat(recupereMontantDonTotal(formData.uniteadministrative_id))+parseFloat(recupereMontantEmpruntTotal(formData.uniteadministrative_id))))}}</td>
                     <td></td>
-                    
                   </tr>
                 </tbody>
               </table>
@@ -458,7 +465,7 @@
                         <a
                           class="btn btn-primary"
                           @click.prevent="AjouterLiquidation"
-                        >Valider</a>
+                        >Modifier</a>
                         <a
                           @click.prevent="pagePrecedent()"
                           class="btn"
@@ -478,8 +485,9 @@
       </div>
       <notifications/>
      
+      
+    </div>
 
-</div>
 </template>
 <script>
 
@@ -544,7 +552,7 @@ components: {
             ...mapGetters('personnelUA', ["salairesActeur","personnaliseActeurDepense","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","affichePersonnelRecuActeNormination"]),
-             ...mapGetters("uniteadministrative", ["getdecisionBudgetEclate","groupeParBAILLER","budgetEclate","groupeLigneEconomiqueBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
+             ...mapGetters("uniteadministrative", ["groupeParBAILLER","budgetEclate","groupeLigneEconomiqueBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             // ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires","structures_budgetaires","getterTousActivite","getterTousPlanBudgetaire"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
@@ -678,10 +686,10 @@ cumulDotationParUa() {
 MontantAEclate(){
 
 if(this.formData.activite_id !=""){
-  return  ((parseFloat(this.RecuppererLaDotation(this.formData.activite_id))+parseFloat(this.MontantDisponibleParUa)) - (parseFloat(this.cumulDotationParUa(this.formData.uniteadministrative_id))+parseFloat(this.dotationTotal)))
+  return  ((parseFloat(this.RecuppererLaDotation(this.formData.activite_id))) - (parseFloat(this.cumulDotationParUa(this.formData.uniteadministrative_id))+parseFloat(this.dotationTotal)))
 }
 else{
-  return  ((parseFloat(this.MontantDisponibleParUa)) - (parseFloat(this.cumulDotationParUa(this.formData.uniteadministrative_id))+parseFloat(this.dotationTotal)))
+  return  ((parseFloat(this.MontantDisponibleParUa)) - (parseFloat(this.cumulDotationParUa(this.formData.uniteadministrative_id))+parseFloat(this.formData1.variation_budget)))
 }
 },
 
@@ -693,12 +701,19 @@ else{
         }
       };
     },
+ dotationDon(){
+return parseFloat(this.recuppererMontantDon(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id))+parseFloat(this.formData1.variation_budget)
+},
 
-
-
+  dotationEmprunt(){
+return parseFloat(this.recuppererMontantEmprunt(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id))+parseFloat(this.formData1.variation_budget)
+},
     
+    dotationTresor(){
+return parseFloat(this.recuppererMontantTresor(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id))+parseFloat(this.formData1.variation_budget)
+},
 dotationTotal(){
-return parseFloat(this.formData1.report)+parseFloat(this.formData1.dotation_nouvelle)
+return parseFloat(this.recuppererMontantDotationFinal(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id))+parseFloat(this.formData1.variation_budget)
 },
 recupererAnneePrecedant(){
 
@@ -985,18 +1000,6 @@ return this.uniteAdministratives
         }
       };
     },
-    doublonDecisionBudgetEclate() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getdecisionBudgetEclate.find(qtreel => qtreel.unite_administrative_id == id);
-
-      if (qtereel) {
-        return qtereel.exercice
-      }
-      return 0
-        }
-      };
-    },
     idBudgetEclater() {
       return id => {
         if (id != null && id != "") {
@@ -1045,12 +1048,74 @@ return this.uniteAdministratives
         }
       };
     },
+    recuppererMontantReport() {
+      return (id1,id) => {
+        if (id1 != null && id1 != "" && id != null && id != "") {
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+
+      if (qtereel) {
+        return qtereel.report
+      }
+      return 0
+        }
+      };
+    },
+    recuppererMontantDotationNouvel() {
+      return (id1,id) => {
+        if ( id1 != null && id1 != "" && id != null && id != "" ) {
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+
+      if (qtereel) {
+        return qtereel.dotation_nouvelle
+      }
+      return 0
+        }
+      };
+    },
+    recuppererMontantDotationFinal() {
+      return (id1,id) => {
+        if (id1 != null && id1 != "" && id != null && id != "") {
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+
+      if (qtereel) {
+        return qtereel.dotation
+      }
+      return 0
+        }
+      };
+    },
+    
     SommeCumul(){
 return parseFloat(this.montantEmprunt(this.formData1.ligneeconomique_id))+parseFloat(this.montantTresor(this.formData1.ligneeconomique_id))+parseFloat(this.montantDon(this.formData1.ligneeconomique_id))
 },
    SommeCumulAjouter(){
 return (parseFloat(this.SommeCumul)+parseFloat(this.dotationTotal))
 },
+
+recuppererMontantEmprunt() {
+      return (id1,id) => {
+        if (id1 != null && id1 != "" && id != null && id != "") {
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+
+      if (qtereel) {
+        return qtereel.emprunt
+      }
+      return 0
+        }
+      };
+    },
+    recuppererMontantDon() {
+      return (id1,id) => {
+        if (id1 != null && id1 != "" && id != null && id != "") {
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+
+      if (qtereel) {
+        return qtereel.don
+      }
+      return 0
+        }
+      };
+    },
         },
 
 methods: {
@@ -1058,7 +1123,6 @@ methods: {
       "ajouterBudgetEclate",
       "supprimerBudgetEclate",
       "modifierBudgetEclate",
-      "ajouterDecisionBudgetEclate"
       
     ]),
     apercuFacture() {
@@ -1089,7 +1153,6 @@ methods: {
    },
       formatageSomme:formatageSomme,
  AjouterLiquidation() {
-   if(this.doublonDecisionBudgetEclate(this.formData.uniteadministrative_id)!=this.anneeAmort){
    if(this.formData1.type_financement_id==14 && this.doublonLigneBudgetaire(this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id ){
  var nouvelObjet = {
         ...this.formData,
@@ -1099,16 +1162,8 @@ methods: {
           ligneeconomique_id:this.formData1.ligneeconomique_id,
           type_financement_id:this.formData1.type_financement_id,
           activite_id:this.formData.activite_id,
-          report:this.formData1.report,
-          dotation_nouvelle:this.formData1.dotation_nouvelle
+           variation_budget:this.formData1.variation_budget
       };
-      var decisionBudget1 = {
-       
-        	exercice: this.anneeAmort,
-        	unite_administrative_id:this.formData.uniteadministrative_id,
-         
-      };
-      this.ajouterDecisionBudgetEclate(decisionBudget1);
       this.ajouterBudgetEclate(nouvelObjet);
       this.formData1 = {
 ligneeconomique_id:"",
@@ -1127,16 +1182,8 @@ var nouvelObjet1 = {
           ligneeconomique_id:this.formData1.ligneeconomique_id,
           type_financement_id:this.formData1.type_financement_id,
           activite_id:this.formData.activite_id,
-           report:this.formData1.report,
-          dotation_nouvelle:this.formData1.dotation_nouvelle
+           variation_budget:this.formData1.variation_budget
       };
-      var decisionBudget12 = {
-       
-        	exercice: this.anneeAmort,
-        	unite_administrative_id:this.formData.uniteadministrative_id,
-         
-      };
-      this.ajouterDecisionBudgetEclate(decisionBudget12);
       this.ajouterBudgetEclate(nouvelObjet1);
        
 this.formData1 = {
@@ -1155,16 +1202,8 @@ type_financement_id:""
             ligneeconomique_id:this.formData1.ligneeconomique_id,
             type_financement_id:this.formData1.type_financement_id,
             activite_id:this.formData.activite_id,
-             report:this.formData1.report,
-          dotation_nouvelle:this.formData1.dotation_nouvelle
+             variation_budget:this.formData1.variation_budget
       };
-      var decisionBudget13 = {
-       
-        	exercice: this.anneeAmort,
-        	unite_administrative_id:this.formData.uniteadministrative_id,
-         
-      };
-      this.ajouterDecisionBudgetEclate(decisionBudget13);
       this.ajouterBudgetEclate(nouvelObjet2);
        this.formData1 = {
 ligneeconomique_id:"",
@@ -1178,20 +1217,20 @@ type_financement_id:""
         ...this.formData,
         id:this.idBudgetEclater(this.formData1.ligneeconomique_id),
         	annebudgetaire: this.anneeAmort,
-            dotation:this.SommeCumulAjouter,
-          	tresor:this.dotationTotal,
+            dotation:this.dotationTotal,
+          	tresor:this.dotationTresor,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
             type_financement_id:this.formData1.type_financement_id,
             activite_id:this.formData.activite_id,
-             report:this.formData1.report,
-          dotation_nouvelle:this.formData1.dotation_nouvelle
+            variation_budget:this.formData1.variation_budget
       };
       this.modifierBudgetEclate(nouvelObjet28);
        this.formData1 = {
 ligneeconomique_id:"",
 dotation_nouvelle:"",
 report:"",
-type_financement_id:""
+type_financement_id:"",
+variation_budget:""
       }
      }
      else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id){
@@ -1199,20 +1238,22 @@ type_financement_id:""
         ...this.formData,
          id:this.idBudgetEclater(this.formData1.ligneeconomique_id),
         	annebudgetaire: this.anneeAmort,
-        dotation:this.SommeCumulAjouter,
-          	emprunt:this.dotationTotal,
+        // dotation:this.SommeCumulAjouter,
+        //   	emprunt:this.dotationTotal,
+               dotation:this.dotationTotal,
+          	emprunt:this.dotationEmprunt,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
             type_financement_id:this.formData1.type_financement_id,
             activite_id:this.formData.activite_id,
-             report:this.formData1.report,
-          dotation_nouvelle:this.formData1.dotation_nouvelle
+            variation_budget:this.formData1.variation_budget
       };
       this.modifierBudgetEclate(nouvelObjet27);
        this.formData1 = {
 ligneeconomique_id:"",
 dotation_nouvelle:"",
 report:"",
-type_financement_id:""
+type_financement_id:"",
+variation_budget:""
       }
      }
      else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id){
@@ -1220,152 +1261,23 @@ type_financement_id:""
         ...this.formData,
          id:this.idBudgetEclater(this.formData1.ligneeconomique_id),
         	annebudgetaire: this.anneeAmort,
-        dotation:this.SommeCumulAjouter,
-          	don:this.dotationTotal,
+        dotation:this.dotationTotal,
+          	don:this.dotationDon,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
             type_financement_id:this.formData1.type_financement_id,
             activite_id:this.formData.activite_id,
-             report:this.formData1.report,
-          dotation_nouvelle:this.formData1.dotation_nouvelle
+            variation_budget:this.formData1.variation_budget
       };
       this.modifierBudgetEclate(nouvelObjet25);
        this.formData1 = {
 ligneeconomique_id:"",
 dotation_nouvelle:"",
 report:"",
-type_financement_id:""
+type_financement_id:"",
+variation_budget:""
       }
      }
    
-   }
-else{
-     if(this.formData1.type_financement_id==14 && this.doublonLigneBudgetaire(this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id ){
- var nouvelObjet96 = {
-        ...this.formData,
-        	annebudgetaire: this.anneeAmort,
-        dotation:this.dotationTotal,
-          tresor:this.dotationTotal,
-          ligneeconomique_id:this.formData1.ligneeconomique_id,
-          type_financement_id:this.formData1.type_financement_id,
-          activite_id:this.formData.activite_id,
-          report:this.formData1.report,
-          dotation_nouvelle:this.formData1.dotation_nouvelle
-      };
-      this.ajouterBudgetEclate(nouvelObjet96);
-      this.formData1 = {
-ligneeconomique_id:"",
-dotation_nouvelle:"",
-report:"",
-type_financement_id:""
-      }
-   
-   }
-     else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id){
-var nouvelObjet163 = {
-        ...this.formData,
-        	annebudgetaire: this.anneeAmort,
-        dotation:this.dotationTotal,
-          don:this.dotationTotal,
-          ligneeconomique_id:this.formData1.ligneeconomique_id,
-          type_financement_id:this.formData1.type_financement_id,
-          activite_id:this.formData.activite_id,
-           report:this.formData1.report,
-          dotation_nouvelle:this.formData1.dotation_nouvelle
-      };
-      this.ajouterBudgetEclate(nouvelObjet163);
-       
-this.formData1 = {
-ligneeconomique_id:"",
-dotation_nouvelle:"",
-report:"",
-type_financement_id:""
-      }
-     }   
-     else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData1.ligneeconomique_id)!=this.formData1.ligneeconomique_id){
-       var nouvelObjet221 = {
-        ...this.formData,
-        	annebudgetaire: this.anneeAmort,
-        dotation:this.dotationTotal,
-          	emprunt:this.dotationTotal,
-            ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
-            activite_id:this.formData.activite_id,
-             report:this.formData1.report,
-          dotation_nouvelle:this.formData1.dotation_nouvelle
-      };
-      this.ajouterBudgetEclate(nouvelObjet221);
-       this.formData1 = {
-ligneeconomique_id:"",
-dotation_nouvelle:"",
-report:"",
-type_financement_id:""
-      }
-     }
-     else if(this.formData1.type_financement_id==14 && this.doublonLigneBudgetaire(this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id){
-       var nouvelObjet281 = {
-        ...this.formData,
-        id:this.idBudgetEclater(this.formData1.ligneeconomique_id),
-        	annebudgetaire: this.anneeAmort,
-            dotation:this.SommeCumulAjouter,
-          	tresor:this.dotationTotal,
-            ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
-            activite_id:this.formData.activite_id,
-             report:this.formData1.report,
-          dotation_nouvelle:this.formData1.dotation_nouvelle
-      };
-      this.modifierBudgetEclate(nouvelObjet281);
-       this.formData1 = {
-ligneeconomique_id:"",
-dotation_nouvelle:"",
-report:"",
-type_financement_id:""
-      }
-     }
-     else if(this.formData1.type_financement_id==15 && this.doublonLigneBudgetaire(this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id){
-       var nouvelObjet271 = {
-        ...this.formData,
-         id:this.idBudgetEclater(this.formData1.ligneeconomique_id),
-        	annebudgetaire: this.anneeAmort,
-        dotation:this.SommeCumulAjouter,
-          	emprunt:this.dotationTotal,
-            ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
-            activite_id:this.formData.activite_id,
-             report:this.formData1.report,
-          dotation_nouvelle:this.formData1.dotation_nouvelle
-      };
-      this.modifierBudgetEclate(nouvelObjet271);
-       this.formData1 = {
-ligneeconomique_id:"",
-dotation_nouvelle:"",
-report:"",
-type_financement_id:""
-      }
-     }
-     else if(this.formData1.type_financement_id==13 && this.doublonLigneBudgetaire(this.formData1.ligneeconomique_id)==this.formData1.ligneeconomique_id){
-       var nouvelObjet251 = {
-        ...this.formData,
-         id:this.idBudgetEclater(this.formData1.ligneeconomique_id),
-        	annebudgetaire: this.anneeAmort,
-        dotation:this.SommeCumulAjouter,
-          	don:this.dotationTotal,
-            ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
-            activite_id:this.formData.activite_id,
-             report:this.formData1.report,
-          dotation_nouvelle:this.formData1.dotation_nouvelle
-      };
-      this.modifierBudgetEclate(nouvelObjet251);
-       this.formData1 = {
-ligneeconomique_id:"",
-dotation_nouvelle:"",
-report:"",
-type_financement_id:""
-      }
-     }
-   
-}
     },
 
 pagePrecedent(){

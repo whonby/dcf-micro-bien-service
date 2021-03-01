@@ -12,7 +12,7 @@
     <SiderbarRapport v-else-if="detail_marche.code == 7"></SiderbarRapport>
     
     <SiderbarGestionVehicule v-else-if="detail_marche.code == 8"></SiderbarGestionVehicule>
-    <videSiderbar v-else-if="detail_marche.code == 9"></videSiderbar>
+    <SiderbarTableauBord v-else-if="detail_marche.code == 9"></SiderbarTableauBord>
     <SiderbarCatographie  v-else></SiderbarCatographie>
      
    
@@ -31,7 +31,7 @@ import SiderbarGestionHorsSib from "./SiderbarGestionHorsSib";
 import SiderbarRapport from "./SiderbarRapport";
  import SiderbarCatographie from "./SiderbarCatographie";
  import SiderbarGestionVehicule from "./SiderbarGestionVehicule";
- import videSiderbar from "./videSiderbar";
+ import SiderbarTableauBord from "./SiderbarTableauBord";
 
 export default {
   data(){
@@ -51,7 +51,7 @@ components: {
     SiderbarUniteAdministrative,
     SiderbarRapport,
     SiderbarGestionVehicule,
-    videSiderbar
+    SiderbarTableauBord
   },
    
   computed:{

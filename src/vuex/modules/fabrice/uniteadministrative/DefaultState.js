@@ -29,7 +29,9 @@ const defaultState = {
 
   // nbreArchivageDocuments: []
   vehicules:[],
-  ReparationVehicules:[]
+  ReparationVehicules:[],
+  historiqueBudgetEclate:[],
+  decisionBudgetEclate:[]
 };
 
 export default defaultState;
