@@ -14,7 +14,10 @@
       <tr>
         <th>Matricule</th>
         <th>Nom et prénoms</th>
+        <th>Structure d'origine</th>
+        <th>Fonction</th>
         <th>Commite d'evaluation</th>
+        <th>UA</th>
         <th>Rôle</th>
         <th>Action</th>
       </tr>
@@ -28,11 +31,22 @@
         <td @click="afficheModaleMembreCojo(appelOffre.id)">
           {{appelOffre.nom_prenom || 'Non renseigné'}}
         </td>
+
+        <td @click="afficheModaleMembreCojo(appelOffre.id)">
+          {{afficherLibelleStrutureOrigine(appelOffre.service_id) || 'Non renseigné'}}
+        </td>
+         <td @click="afficheModaleMembreCojo(appelOffre.id)">
+          {{afficherLibelleFonction(appelOffre.fonction_id )|| 'Non renseigné'}}
+        </td>
+
         <td @click="afficheModaleMembreCojo(appelOffre.id)" v-if="appelOffre.comite_evaluation=='oui'" style="background: green !important;color: white !important;">
           {{appelOffre.comite_evaluation || 'Non renseigné'}}
         </td>
         <td @click="afficheModaleMembreCojo(appelOffre.id)" v-if="appelOffre.comite_evaluation=='non'">
           {{appelOffre.comite_evaluation || 'Non renseigné'}}
+        </td>
+        <td @click="afficheModaleMembreCojo(appelOffre.id)">
+          {{afficherLibelleUA(appelOffre.ua_id) || 'Non renseigné'}}
         </td>
         <td @click="afficheModaleMembreCojo(appelOffre.id)">
           {{afficherLaListemembreCojo(appelOffre.role_membre_cojo_id )|| 'Non renseigné'}}</td>
@@ -109,7 +123,7 @@
                   <div class="control-group">
                     <label>Structure d'origine</label>
                     <div class="controls">
-                      <input type="text" class="span" placeholder=" " v-model="formDataMembreCojo.service_id" readonly >
+                      <input type="text" class="span" placeholder=" " :value="afficherLibelleStrutureOrigine(formDataMembreCojo.service_id)" readonly >
                       
                     </div>
                   </div>
@@ -121,7 +135,7 @@
 
                     <label class="control-label">Fonction <code>*</code> :</label>
                     <div class="control-group">
-                      <input type="text" class="span" placeholder="" v-model="formDataMembreCojo.fonction_id" readonly>
+                      <input type="text" class="span" placeholder="" :value="afficherLibelleFonction(formDataMembreCojo.fonction_id)" readonly>
                     </div>
                   </div>
 
@@ -305,8 +319,8 @@ console.log(this.getterMembreCojo.filter(idmem=>idmem.marche_id==this.macheid))
       return [];
     },
     ...mapGetters('bienService',['getterMembreCojo','getterCojos',"role_membrecojo","getterStructureDao"]),
-
-    ...mapGetters('personnelUA', ['acteur_depenses',"all_acteur_depense"]),
+  //...mapGetters('personnelUA', ['personnaliseActeurDepense',  'fonctions']),
+    ...mapGetters('personnelUA', ['acteur_depenses',"all_acteur_depense",'fonctions']),
 
     ...mapGetters("uniteadministrative", [
       "acteCreations",
@@ -385,6 +399,52 @@ enregistreIdService() {
         }
       };
     },
+
+    
+    afficherLibelleUA(){
+     return id => {
+       if( id !=null && id!="") {
+    var acteur = this.uniteAdministratives.find(acteur => acteur.id == id  )
+    
+     if(acteur){
+       return acteur.libelle
+     }
+       }
+    return null
+     }
+  
+   },
+
+    // affichageLibelleFonction
+     afficherLibelleFonction(){
+     return id => {
+       if( id !=null && id!="") {
+    var acteur = this.fonctions.find(acteur => acteur.id == id  )
+    
+     if(acteur){
+       return acteur.libelle
+     }
+       }
+    return null
+     }
+  
+   },
+
+   afficherLibelleStrutureOrigine(){
+     return id => {
+       if( id !=null && id!="") {
+    var objet = this.uniteAdministratives.find(objet => objet.id == id  )
+    
+     if(objet){
+       return objet.libelle
+     }
+       }
+    return null
+     }
+  
+   },
+
+  
   },
   methods:{
 
@@ -392,7 +452,12 @@ enregistreIdService() {
       'ajouterMembreCojo','modificationMembreCojo']),
 
     editeMembreCojoM(){
-      this.modificationMembreCojo(this.edite_membre_cojo)
+      var nouvelObjet={
+        ...this.edite_membre_cojo,
+        	fonction:this.afficherLibelleFonction(this.formDataMembreCojo.fonction_id),
+          ua_personnel:this.afficherLibelleStrutureOrigine(this.formDataMembreCojo.service_id),
+      }
+      this.modificationMembreCojo(nouvelObjet)
       this.$('#modification_membre_cojo').modal('hide');
     },
 
@@ -415,6 +480,8 @@ enregistreIdService() {
       var nouvelObjet ={
         ...this.formDataMembreCojo,
         marche_id :this.macheid,
+        	fonction:this.afficherLibelleFonction(this.formDataMembreCojo.fonction_id),
+          ua_personnel:this.afficherLibelleStrutureOrigine(this.formDataMembreCojo.service_id),
         cojo_id:this.cojo_id,
         nom_prenom:this.formDataMembreCojo.nom_prenom,
         matricule:this.formDataMembreCojo.matricule

@@ -48,7 +48,19 @@ import listeDesUaBudget from "../../pages/unites_administratives/ReportingBudget
 import DetailBudgetUa from "../../pages/unites_administratives/ReportingBudget/DetailBudgetUa.vue"
 import ModificationBudget from "../../pages/budget/ModificationBudget"
 import BudgetPasProgramme from "../../pages/budget/BudgetPasProgramme"
+import BudgetEclate from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/BudgetEclate.vue"
+import AjouterBudgetEclater from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/AjouterBudgetEclater.vue"
 const UniteAdministativeRoutes = [
+  {
+    path: "/AjouterBudgetEclater",
+    name: "AjouterBudgetEclater",
+    component: AjouterBudgetEclater
+  },
+  {
+    path: "/BudgetEclate",
+    name: "BudgetEclate",
+    component: BudgetEclate
+  },
   {
     path: "/budget-pas-programme",
     name: "BudgetPasProgramme",

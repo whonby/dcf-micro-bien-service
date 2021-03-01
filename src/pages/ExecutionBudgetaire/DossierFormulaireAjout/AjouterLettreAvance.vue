@@ -292,13 +292,14 @@
               <div class="control-group">
                 <label class="control-label">Montant</label>
                 <div class="controls">
-                  <input
+                  <!-- <input
                     type="text"
                     style="border:1px solid #000"
                   
                     class="span"
                      
-                  />
+                  /> -->
+                   <money   readOnly  style="text-align:left;color:red"  class="span"></money>
                 </div>
               </div>
               

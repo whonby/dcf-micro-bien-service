@@ -1,4 +1,4 @@
-marche_id
+updateAnoBaileurLocal
 <template>
 <div>
   <div v-for="item in lot" :key="item.id" class="widget-content">
@@ -105,7 +105,7 @@ marche_id
           <div class="controls">
             <input
                 type="text"
-                :value="affichierPvMarche(affichierIdMarcheGlobal(infoLot.id))"
+                :value="affichierPvMarche(infoLot.id)"
                 class="span"
                 readonly
             />
@@ -133,7 +133,7 @@ marche_id
             <div class="controls">
               <input
                   type="text"
-                  v-model="formBailleur.num_courrier"
+                  v-model="formBailleur.numero_courie"
                   class="span"
                   placeholder="Saisir le numéro du courrier"
               />
@@ -203,7 +203,7 @@ marche_id
           <div class="controls">
             <input
                 type="text"
-                :value="affichierPvMarche(affichierIdMarcheGlobal(infoLot.id))"
+                :value="affichierPvMarche(infoLot.id)"
                 class="span"
                 readonly
             />
@@ -231,7 +231,7 @@ marche_id
             <div class="controls">
               <input
                   type="text"
-                  v-model="edit_bailleur.num_courrier"
+                  v-model="edit_bailleur.numero_courie"
                   class="span"
                   placeholder="Saisir le numéro du courrier"
               />
@@ -255,7 +255,7 @@ marche_id
         <div class="control-group">
           <label class="control-label">Fichier joint:</label>
           <div class="controls">
-            <input type="file" @change="OnchangeFichierDemandeAno" />
+            <input type="file"  />
           </div>
         </div>
 
@@ -274,6 +274,10 @@ marche_id
       <a data-dismiss="modal" class="btn" href="#">Fermer</a>
     </div>
   </div>
+
+
+
+
 
   <div id="ajouterAnoBailleur" class="modal hide">
     <div class="modal-header">
@@ -301,11 +305,11 @@ marche_id
              <td>
                
         <div class="control-group">
-          <label class="control-label">Référence PV{{affichierIdMarcheGlobal(edit_bailleur.marche_id)}}</label>
+          <label class="control-label">Référence PV</label>
           <div class="controls" >
             <input
                 type="text"
-                :value="affichierPvMarche(affichierIdMarcheGlobal(edit_bailleur.marche_id))"
+                :value="affichierPvMarche(edit_bailleur.marche_id)"
                 class="span"
                 readonly
             />
@@ -688,7 +692,8 @@ pvTraitement(){
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.edit_bailleur = this.listeAnoDMPBailleur(this.macheid)[index];
+               // this.edit_bailleur = this.listeAnoDMPBailleur(this.macheid)[index];
+                 this.edit_bailleur=this.getterAnoDMPBailleur.find(items => items.id == index)
                 //this.mode_passation_id=this.edite_appel_offre.mode_passation_id
                 console.log(this.mode_passation_id)
             },
@@ -743,8 +748,7 @@ pvTraitement(){
 
     },
 
-
-    editAnoBailleur(){
+ editAnoBailleur(){
 
       //console.log(this.edit_bailleur)
       const formData = new FormData();
@@ -756,7 +760,7 @@ pvTraitement(){
       formData.append('id', this.edit_bailleur.id);
       formData.append('difference_personnel_bienService', this.edit_bailleur.difference_personnel_bienService);
       formData.append('plan_motif_decision_id',this.edit_bailleur.plan_motif_decision_id);
-      formData.append('observations_bailleur',this.edit_bailleur.	observations_bailleur)
+      formData.append('observations_bailleur',this.edit_bailleur.observations_bailleur)
       formData.append('date_avis',this.edit_bailleur.date_avis);
       formData.append('avis_bail',this.edit_bailleur.avis_bail);
       console.log(formData)
@@ -785,6 +789,29 @@ pvTraitement(){
 
 
     },
+
+updateAnoBaileurLocal(){
+  this.modifierAnoDMPBailleur(this.edit_bailleur)
+  this.edit_bailleur={
+    num_courrier:"",
+    date_ano_dmp:""
+  }
+ this.$('#modificationANBaill').modal('hide');
+},
+    // updateAnoBaileurLocal(){
+    //  var nouvelModifi={
+    //     ...this.edit_bailleur,
+    //   //  appel_offre_id:this.affichierReferenceAppelOffre(this.macheid),
+    //   //  proce_verbal_jugement_offre_id:this.affichierPvMarche(this.infoLot.id),
+    //   //  numero_courie:this.edit_bailleur.numero_courie,
+    //   //  date_ano_dmp:this.edit_bailleur.date_ano_dmp
+    //  }
+    //   this.modifierAnoDMPBailleur(nouvelModifi)
+    //   this.$('#modificationANBaill').modal('hide');
+
+    //    this.getAnoDMPBailleur()
+
+    // },
 afficherModalDecisionAnocf(index){
       this.$('#ajouterAnoBailleur').modal({
         backdrop: 'static',

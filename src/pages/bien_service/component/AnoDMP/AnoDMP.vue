@@ -1,4 +1,4 @@
-affichierAppelOffreid
+
 <template>
 <div>
   <div v-for="item in lot" :key="item.id" class="widget-content">
@@ -8,7 +8,7 @@ affichierAppelOffreid
       </h5></div>
       <div align="right">
         <div class="span3"><button @click.prevent="afficheModaleActe(item.id)"
-                                     class="btn btn-primary" title="Ajouter Bailleur">
+         class="btn btn-primary" title="Ajouter Bailleur">
            <span class=""><i class="icon-edit"></i></span> Ajouter</button></div>
       </div>
           
@@ -90,7 +90,7 @@ affichierAppelOffreid
           <div class="controls">
             <input
                 type="text"
-                :value="affichierPvMarche(affichierIdMarcheGlobal(macheid))"
+                :value="affichierPvMarche(macheid)"
                 class="span"
                 readonly
             />
@@ -170,7 +170,7 @@ affichierAppelOffreid
 
 
 
-  <div id="ModalModification" class="modal hide grdirModalActeEffet" >
+  <div id="modificationAnoDPM" class="modal hide grdirModalActeEffet" >
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <h3>Information du Bailleur sur le : Lot N° {{infoLot.numero_lot}} {{infoLot.objet}}</h3>
@@ -185,7 +185,68 @@ affichierAppelOffreid
     <div class="widget-content tab-content">
 
       <div id="tab8888" class="tab-pane active">
+        <form class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label">Référence PV</label>
+          <div class="controls">
+            <input
+                type="text"
+                :value="affichierPvMarche(macheid)"
+                class="span"
+                readonly
+            />
+          </div>
+        </div>
 
+        <div class="control-group">
+          <label class="control-label">Référence de l'offre</label>
+          <div class="controls">
+          
+
+            <input
+                type="text"
+                :value="affichierReferenceAppelOffre(macheid)"
+                class="span"
+                readonly
+            />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Numéro du courrier</label>
+          <div class="controls">
+            <input
+                type="text"
+                v-model="edite_demande_dao.num_courrier"
+                class="span"
+                placeholder="Saisir le numéro du courrier"
+            />
+          </div>
+        </div>
+
+        <div class="control-group">
+
+          <label class="control-label">Date de demande</label>
+          <div class="controls">
+            <input
+                type="date"
+                v-model="edite_demande_dao.date_demande"
+                class="span"
+                placeholder="Saisir le libelle_type"
+            />
+          </div>
+        </div>
+
+
+
+        <div class="control-group">
+          <label class="control-label">Fichier joint:</label>
+          <div class="controls">
+            <input type="file"  />
+          </div>
+        </div>
+
+      </form>
         
       </div>
 
@@ -194,10 +255,10 @@ affichierAppelOffreid
     </div>
 
     <div class="modal-footer">
-      <a  @click.prevent="ajouterBailleur"
+      <a  @click.prevent="ModifierAnoDPMLocal"
           class="btn btn-primary"
           href="#"
-      >Valider</a>
+      >Modifier</a>
       <a data-dismiss="modal" class="btn" href="#">Fermer</a>
     </div>
   </div>
@@ -232,7 +293,7 @@ affichierAppelOffreid
           <div class="controls" >
             <input
                 type="text"
-                :value="affichierPvMarche(affichierIdMarcheGlobal(edite_demande_dao.marche_id))"
+                :value="affichierPvMarche(edite_demande_dao.marche_id)"
                 class="span"
                 readonly
             />
@@ -338,7 +399,7 @@ name: "ActEffeFinanciere",
       reference_pv:"",
       lot:"",
      
-      
+      editAnoBailleur:{},
       nom_candidata:"",
       dossier_candidat_id:"",
      marche_lot:"",
@@ -426,6 +487,7 @@ affichierNiveauDecission() {
         }
       })
     },
+
     LibelleDecision() {
       return id => {
         if (id != null && id != "") {
@@ -439,7 +501,7 @@ affichierNiveauDecission() {
       };
     },
 affichierPvMarche() {
-      return id => {
+      return id => { 
         if (id != null && id != "") {
            const qtereel = this.getterProceVerballe.find(qtreel => qtreel.marche_id == id && qtreel.traitement==1);
 
@@ -462,6 +524,7 @@ affichierPvMarche() {
         }
       };
     },
+
     affichierReferenceAppelOffre() {
       return id => {
         if (id != null && id != "") {
@@ -580,7 +643,7 @@ afficherMotif(){
       'modifierDemandeAno','getAnoDMPBailleur','getAnalyseDMP',"modificationProceVerbalOffre2"]),
 
 afficheDemandeDAO(index){
-      this.$('#modifDemandeAno').modal({
+      this.$('#modificationAnoDPM').modal({
         backdrop: 'static',
         keyboard: false
       });
@@ -589,6 +652,8 @@ afficheDemandeDAO(index){
       )
       //console.log(this.edite_demande_dao)
     },
+
+    
 
 
 
@@ -652,6 +717,16 @@ afficheDemandeDAO(index){
        // console.log(this.proceVerbalMarche)
     },
 
+
+
+ModifierAnoDPMLocal(){
+  this.modifierDemandeAno(this.edite_demande_dao)
+  this.edite_demande_dao={
+    num_courrier:"",
+    date_demande:""
+  }
+ this.$('#modificationAnoDPM').modal('hide');
+},
     editDemandeDAO(){
       //console.log(this.edite_demande_dao)
       const formData = new FormData();
@@ -714,6 +789,7 @@ afficherModalDecisionAnocf(index){
 formaterDate(date){
       return moment(date,"YYYY-MM-DD").format("DD/MM/YYYY");
     },
+    
     formatageSommeSansFCFA:formatageSommeSansFCFA,
 
   }

@@ -159,7 +159,7 @@
         <div id="myAlert" class="modal hide tailModal"  >
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter compte bancaire1</h3>
+                <h3>Ajouter compte bancaire</h3>
             </div>
             <div class="modal-body">
                
@@ -781,7 +781,7 @@ getLibelleBanque() {
       if (qtereel) {
         return qtereel.libelle;
       }
-      return ""
+      return null
         }
       };
     },
