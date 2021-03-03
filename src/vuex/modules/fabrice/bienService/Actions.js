@@ -12,8 +12,6 @@ var queue = housecall({concurrency: 2, cooldown: 1000})
 // }
 
 
-
-
 // // action pour modifier candidat selectionner
 // export function modifierDecompte({commit}, formData){
 //   asyncLoading(axios.post('/modifierDecompte',formData)).then(response =>{
@@ -4831,7 +4829,7 @@ export function ajouterStructureDAO({commit}, formData){
 
 
 export function modifierStructureDAO({commit}, element_modifie) {
-    asyncLoading( axios.put('/structure_dao',element_modifie)).then(response => {
+    asyncLoading( axios.put('/structure_dao/'+ element_modifie.id, element_modifie)).then(response => {
         commit('MODIFIER_STRUCTURE_DAO', response.data)
 
 

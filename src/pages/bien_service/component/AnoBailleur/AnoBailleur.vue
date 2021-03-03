@@ -105,7 +105,7 @@ updateAnoBaileurLocal
           <div class="controls">
             <input
                 type="text"
-                :value="affichierPvMarche(infoLot.id)"
+                :value="affichierPvMarche(macheid)"
                 class="span"
                 readonly
             />
@@ -203,7 +203,7 @@ updateAnoBaileurLocal
           <div class="controls">
             <input
                 type="text"
-                :value="affichierPvMarche(infoLot.id)"
+                :value="affichierPvMarche(macheid)"
                 class="span"
                 readonly
             />
@@ -309,7 +309,7 @@ updateAnoBaileurLocal
           <div class="controls" >
             <input
                 type="text"
-                :value="affichierPvMarche(edit_bailleur.marche_id)"
+                :value="affichierPvMarche(macheid)"
                 class="span"
                 readonly
             />
@@ -546,6 +546,7 @@ affichierNiveauDecission() {
 
 
 
+
     pvEntraitement(){
       return this.getterProceVerballe.find(item=>{
         if(item.marche_id==this.item.id && item.traitement==1){
@@ -556,7 +557,7 @@ affichierNiveauDecission() {
 affichierPvMarche() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getterProceVerballe.find(qtreel => qtreel.marche_id == id && qtreel.traitement==1);
+           const qtereel = this.getterProceVerballe.find(qtreel => qtreel.marche_id == id);
 
       if (qtereel) {
         return qtereel.reference;

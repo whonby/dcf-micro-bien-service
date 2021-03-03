@@ -293,7 +293,7 @@
           <div class="controls" >
             <input
                 type="text"
-                :value="affichierPvMarche(edite_demande_dao.marche_id)"
+                :value="affichierPvMarche(macheid)"
                 class="span"
                 readonly
             />
@@ -503,7 +503,7 @@ affichierNiveauDecission() {
 affichierPvMarche() {
       return id => { 
         if (id != null && id != "") {
-           const qtereel = this.getterProceVerballe.find(qtreel => qtreel.marche_id == id && qtreel.traitement==1);
+           const qtereel = this.getterProceVerballe.find(qtreel => qtreel.marche_id == id);
 
       if (qtereel) {
         return qtereel.reference;

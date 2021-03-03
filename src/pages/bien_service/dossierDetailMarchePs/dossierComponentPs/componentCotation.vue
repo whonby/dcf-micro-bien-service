@@ -1,4 +1,5 @@
 
+	heure_limite
 <template>
     <div>
        
@@ -370,7 +371,9 @@ export default {
                     entreprise_id:"",
                     date_cotation:"",
                     ref_offre:"",
-                   marche_id:""
+                   marche_id:"",
+                   	heure_limite:"",
+                       email:""
 
                 },
             
@@ -380,7 +383,9 @@ export default {
                     entreprise_id:"",
                     fichier_joint:"",
                     date_cotation:"",
-                    ref_offre:""
+                    ref_offre:"",
+                    	heure_limite:"",
+                        email:""
 
             },
 
@@ -562,6 +567,8 @@ affichierReferenceAppelOffre() {
                    nom_person:"",
                        contact:"",
                        entreprise_id:"",
+                       email:"",
+                       heure_limite:"",
                        date_cotation:"",
                        ref_offre:"",
                        marche_id:this.macheid.id

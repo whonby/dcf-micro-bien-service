@@ -443,7 +443,7 @@ modificationMandater(){
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editer_mandater = this.getterMandate[index];
+                this.editer_mandater =this.listeMantater(this.macheid)[index];
             },
       
 
@@ -478,7 +478,7 @@ modificationMandater(){
                        this.message_mandater=""
                    }
                    else{
-                       this.message_mandater="Cette n'existe pas dans notre base de donnée "
+                       this.message_mandater="Ce matricule n'existe pas dans notre base de donnée "
                    }
                }
              if(this.formMandater.matricule_m==""){

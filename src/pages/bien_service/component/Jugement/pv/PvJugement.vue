@@ -3,13 +3,13 @@
 
   <div align="right">
     <div class="widget-content">
-      <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Joindre Document</a>
+      <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Joindre Document 555</a>
     </div>
   </div>
   <table class="table table-bordered table-striped"  v-if="macheid">
     <thead>
     <tr>
-      <th>Réference PV</th>
+      <th>Réference PV </th>
       <th>Date PV jugement</th>
       <th>Fichier</th>
       <th>Action</th>
@@ -87,6 +87,57 @@
       <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
     </div>
   </div>
+
+
+ <!--Modifier PV Jugement-->
+  <div id="modifierRapportJugements" style="width: 1000px !important; left: 550px; " class="modal hide grdtaill">
+    <div class="modal-header">
+      <button data-dismiss="modal" class="close" type="button">×</button>
+      <h3>modifier rapport d'ouverture</h3>
+    </div>
+    <div class="modal-body">
+      <form class="form-horizontal">
+        <!-- <div class="control-group">
+          <label class="control-label">Reference</label>
+          <div class="controls">
+            <input
+                type="text"
+                v-model="editJugement.reference"
+                class="span"
+
+            />
+            
+          </div>
+        </div> -->
+        <div class="control-group">
+          <label class="control-label">Date du rapport de jugement</label>
+          <div class="controls">
+            <input
+                type="date"
+                v-model="editJugement.date_rapport_jugement"
+                class="span"
+
+            />
+            <input type="hidden" v-model="editJugement.difference_personnel_bienService"/>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Fichier joint:</label>
+          <div class="controls">
+            <input type="file"  class="span"  />
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a class="btn btn-primary" @click.prevent="modifierProceverbaLocal()">Modifier</a>
+      <a data-dismiss="modal" class="btn btn-inverse" href="#">Annuler</a>
+    </div>
+  </div>
+
 
   <div id="infoPV" class="modal hide grdirModalActeEffet" style="width: 1000px !important; left: 550px; ">
     <div class="modal-header">
@@ -207,6 +258,7 @@ name: "PvJugement",
         candidat_selection_id:""
 
       },
+      editJugement:"",
       reference:"",
       editRapport:{
         date_rapport_jugement:"",
@@ -445,7 +497,7 @@ name: "PvJugement",
         backdrop: 'static',
         keyboard: false
       });
-      this.editRapport = this.listePV(this.macheid)[index];
+      this.editJugement = this.listePV(this.macheid)[index];
     },
 
     ajouterRapportJugementLocal(){
@@ -474,6 +526,14 @@ name: "PvJugement",
 
     },
 
+modifierProceverbaLocal(){
+  this.modificationProceVerbalOffre(this.editJugement)
+  this.editJugement={
+     date_rapport_jugement:""
+
+  }
+
+},
 
     modifierRapportOuverture(){
 

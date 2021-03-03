@@ -232,7 +232,7 @@
               </tr>
               <tr>
 
-                <td colspan="2">
+                <td colspan="">
 
                   <div class="control-group">
 
@@ -243,6 +243,19 @@
                         <option v-for="varText in role_membrecojo" :key="varText.id"
                                 :value="varText.id">{{varText.libelle}}</option>
                       </select>
+
+                    </div>
+                  </div>
+                </td>
+                <td colspan="">
+
+                  <div class="control-group">
+
+                    <label class="control-label span5">Contacts <code>*</code> :</label>
+
+                    <div class="control-group">
+                      <input type="text" class="span" placeholder="Numero lo" v-model="edite_membre_cojo.telephone" >
+
 
                     </div>
                   </div>
@@ -283,8 +296,8 @@ name: "MembreCojo",
         role_membre_cojo_id:"",
         cojo_id:"",
         ua_id:"",
+        telephone:"",
         comite_evaluation:"non",
-
       },
       nbr_click:0,
       edite_membre_cojo:"",
