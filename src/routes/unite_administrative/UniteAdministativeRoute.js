@@ -48,7 +48,37 @@ import listeDesUaBudget from "../../pages/unites_administratives/ReportingBudget
 import DetailBudgetUa from "../../pages/unites_administratives/ReportingBudget/DetailBudgetUa.vue"
 import ModificationBudget from "../../pages/budget/ModificationBudget"
 import BudgetPasProgramme from "../../pages/budget/BudgetPasProgramme"
+import BudgetEclate from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/BudgetEclate.vue"
+import AjouterBudgetEclater from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/AjouterBudgetEclater.vue"
+import listeDesBudgetVentille from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/listeDesBudgetVentille.vue"
+import ModificationBudgetaire from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/ModificationBudgetaire.vue"
+import sousBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/sousBudget.vue"
 const UniteAdministativeRoutes = [
+  {
+    path: "/sousBudget",
+    name: "sousBudget",
+    component: sousBudget
+},
+  {
+    path: "/ModificationBudgetaire",
+    name: "ModificationBudgetaire",
+    component: ModificationBudgetaire
+},
+  {
+    path: "/listeDesBudgetVentille/:id",
+    name: "listeDesBudgetVentille",
+    component: listeDesBudgetVentille
+},
+  {
+    path: "/AjouterBudgetEclater",
+    name: "AjouterBudgetEclater",
+    component: AjouterBudgetEclater
+  },
+  {
+    path: "/BudgetEclate",
+    name: "BudgetEclate",
+    component: BudgetEclate
+  },
   {
     path: "/budget-pas-programme",
     name: "BudgetPasProgramme",

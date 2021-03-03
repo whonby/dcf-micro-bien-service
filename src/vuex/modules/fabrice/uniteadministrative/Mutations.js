@@ -714,6 +714,107 @@ export const MODIFIER_HISTORIQUE_DECOMPTE_FACTURE = (state, objetModifie) => {
 export const SUPPRIMER_HISTORIQUE_DECOMPTE_FACTURE = (state, id) => {
   state.historiqueDecomptefactures = state.historiqueDecomptefactures.filter(type => type.id != id);
 };
+
+
+
+
+export const GET_ALL_HISTORIQUE_BUDGET_ECLATE = (state, tableauBudgetGeneral) => {
+  state.historiqueBudgetEclate = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+export const AJOUTER_HISTORIQUE_BUDGET_ECLATE = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.historiqueBudgetEclate.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+export const MODIFIER_HISTORIQUE_BUDGET_ECLATE = (state, objetModifie) => {
+  state.historiqueBudgetEclate = state.historiqueBudgetEclate.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+export const SUPPRIMER_DECISION_BUDGET_ECLATE = (state, id) => {
+  state.decisionBudgetEclate = state.decisionBudgetEclate.filter(type => type.id != id);
+};
+
+
+export const GET_ALL_DECISION_BUDGET_ECLATE = (state, tableauBudgetGeneral) => {
+  state.decisionBudgetEclate = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+export const AJOUTER_DECISION_BUDGET_ECLATE = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.decisionBudgetEclate.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+export const MODIFIER_DECISION_BUDGET_ECLATE = (state, objetModifie) => {
+  state.decisionBudgetEclate = state.decisionBudgetEclate.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+export const SUPPRIMER_HISTORIQUE_BUDGET_ECLATE = (state, id) => {
+  state.historiqueBudgetEclate = state.historiqueBudgetEclate.filter(type => type.id != id);
+};
+
+
+
+export const GET_ALL_HISTORIQUE_DECISION_BUDGET_ECLATE = (state, tableauBudgetGeneral) => {
+  state.HistoriquedecisionBudgetEclate = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+export const AJOUTER_HISTORIQUE_DECISION_BUDGET_ECLATE = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.HistoriquedecisionBudgetEclate.unshift(nouveau_budgetGeneral);
+};
+
+
+
+
+
+
+// supprimer type_texte
+export const SUPPRIMER_SOUS_BUDGET = (state, id) => {
+  state.SousBudget = state.SousBudget.filter(type => type.id != id);
+};
+
+
+export const GET_ALL_SOUS_BUDGET = (state, tableauBudgetGeneral) => {
+  state.SousBudget = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+export const AJOUTER_SOUS_BUDGET = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.SousBudget.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+export const MODIFIER_SOUS_BUDGET = (state, objetModifie) => {
+  state.SousBudget = state.SousBudget.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
 export {
   GET_ALL_BANQUE_UA,
   AJOUTER_BANQUE_UA,

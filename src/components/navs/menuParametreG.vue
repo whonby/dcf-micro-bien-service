@@ -640,6 +640,11 @@
               <i class="icon-key"></i> Type de contrat
             </router-link>
           </li>
+          <li>
+            <router-link :to="{name: 'comptableAssignataire'}" tag="a">
+              <i class="icon-key"></i> Comptable Assignataire
+            </router-link>
+          </li>
         </ul>
       </li>
         <li class="dropdown" id="comptaMatiere">

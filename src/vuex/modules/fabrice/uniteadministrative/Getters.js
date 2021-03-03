@@ -1,6 +1,11 @@
 import { groupBy } from "../../../../Repositories/Repository";
-export const budgetEclate = state => state.budgetEclate;
+export const budgetEclate = state => state.budgetEclate.sort((a, b) => (a.id > b.id ? 1 : -1));
 export const getvehicules =state =>state.vehicules;
+
+export const getSousBudget =state =>state.SousBudget;
+export const getdecisionBudgetEclate =state =>state.decisionBudgetEclate;
+export const getHistoriquedecisionBudgetEclate =state =>state.HistoriquedecisionBudgetEclate;
+export const gethistoriqueBudgetEclate =state =>state.historiqueBudgetEclate;
 export const ReparationVehicules =state =>state.ReparationVehicules;
 export const GestionStockageArticles = state => state.stockageArticles;
 // const typeTextes = state =>
@@ -792,4 +797,27 @@ export const groupStockParMarque = (state, getters) => {
 export const groupStockParUA = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.GestionStockageArticles, "uAdministrative_id");
+};
+
+export const groupeActiviteBudget = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetGeneral, "activite_id");
+};
+
+export const groupeLigneEconomiqueBudget = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetGeneral, "economique_id");
+};
+
+
+export const groupeUniteAdministrativeBudgetEclate = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetEclate, "uniteadministrative_id");
+};
+
+
+
+export const groupeParBAILLER = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetEclate, "ligneeconomique_id");
 };
