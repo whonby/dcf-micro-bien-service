@@ -3,6 +3,7 @@ import TypeActePersonnel from "../../pages/acteurs_depenses/type_acte_personnel/
 import Fonction from "../../pages/acteurs_depenses/fonction/Fonction.vue"
 import Classe from "../../pages/acteurs_depenses/classes/Classes.vue"
 import NiveauEtude from "../../pages/acteurs_depenses/niveau_etude/NiveauEtude.vue"
+import comptableAssignataire from "../../pages/acteurs_depenses/comptableAssignataire/comptableAssignataire.vue"
 import TypeContrat from "../../pages/acteurs_depenses/type_contrat/TypeContrat.vue"
 import TypeSalarie from "../../pages/acteurs_depenses/type_salarie/TypeSalarie.vue"
 import Echelons from "../../pages/acteurs_depenses/echelons/Echelons.vue"
@@ -41,7 +42,11 @@ import FonctionProfessionnelle from "../../pages/acteurs_depenses/FonctionProfes
 import AjoutPersonnelAvecContratSib from "../../pages/acteurs_depenses/acteurs/AjoutPersonnelAvecContrat.vue";
 import AjoutPersonnelSansContratSib from "../../pages/acteurs_depenses/acteurs/AjoutPersonnelSansContrat.vue";
 const ActeurDepenseRoutes = [
-
+  {
+    path: "/comptableAssignataire",
+  name: "comptableAssignataire",
+  component: comptableAssignataire
+  },
   {
     path: "/AjoutPersonnelAvecContratSib",
   name: "AjoutPersonnelAvecContratSib",

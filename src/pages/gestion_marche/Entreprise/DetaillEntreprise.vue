@@ -85,7 +85,7 @@
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
-                                    <a href="#myAlert" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter un compte</a></div>
+                                    <a  data-toggle="modal" class="btn btn-success" @click.prevent="afficheCompteModal"  align="rigth">Ajouter un compte</a></div>
                                    <h4>Liste des comptes </h4>
                                    <div align="right">
                                   Recherche:
@@ -156,7 +156,7 @@
         </div>
 
 
-        <div id="myAlert" class="modal hide tailModal"  >
+        <div id="myAlert41" class="modal hide tailModal"  >
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter compte bancaire</h3>
@@ -234,8 +234,8 @@
                             <div class="controls">
                               
                             <select v-model="formData.banq_id" class="span4" :readOnly="verroBanque">
-                                <option v-for="varText in banqueDynamiques(formData.commune_id)" :key="varText[0].banque_id"
-                              :value="varText[0].banque_id">{{getLibelleBanque(varText[0].banque_id)}}</option>
+                                <option v-for="varText in banqueDynamiques(formData.commune_id)" :key="varText.id"
+                              :value="varText.banque_id">{{getLibelleBanque(varText.banque_id)}}</option>
                             </select>
                                 
                             </div>
@@ -461,8 +461,8 @@
                             <div class="controls">
                               
                             <select v-model="editCompte.banq_id" class="span4" >
-                                <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText[0].banque_id"
-                              :value="varText[0].banque_id">{{varText[0].getLibelleBanque(varText[0].banque_id)}}</option>
+                                <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText.id"
+                              :value="varText.banque_id">{{varText.getLibelleBanque(varText.banque_id)}}</option>
                             </select>
                                 
                             </div>
@@ -607,7 +607,7 @@
         <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
         <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterActeDepense()">Open</button> -->
 
-
+<notifications  />
     </div>
 </template>
 
@@ -767,8 +767,8 @@ afficherCodeRibEditCompte(){
                  banqueDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.groupeAgenceBanque.filter(
-            element => element[0].commune_id == id
+          return this.agenceBanques.filter(
+            element => element.commune_id == id
           );
         }
       };
@@ -952,7 +952,7 @@ AffichierSituationGeoAgenceModifier() {
      getVille() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.villes.find(qtreel => qtreel.id == id);
+           const qtereel = this.getterplan_pays.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.libelle;
@@ -1075,7 +1075,12 @@ villesdyna() {
             ...mapActions('gestionMarche', ["ajouterSanction", "ajouterCompte", "modifierCompte", "supprimerCompte"]),
             // formatageSomme: formatageSomme,
             
-
+afficheCompteModal() {
+      this.$("#myAlert41").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+    },
 
             //afiicher modal ajouter
             afficherModalAjouterActeDepense() {
@@ -1099,7 +1104,7 @@ villesdyna() {
       
        };
                 this.ajouterCompte(nouvelObjet)
-                this.$('#myAlert').modal('hide');
+                this.$('#myAlert41').modal('hide');
                 this.formData = {
                     date_ouverture_compte:"",
                     signataire_compte:"",

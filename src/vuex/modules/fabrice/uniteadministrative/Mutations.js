@@ -773,7 +773,47 @@ export const SUPPRIMER_HISTORIQUE_BUDGET_ECLATE = (state, id) => {
 
 
 
+export const GET_ALL_HISTORIQUE_DECISION_BUDGET_ECLATE = (state, tableauBudgetGeneral) => {
+  state.HistoriquedecisionBudgetEclate = tableauBudgetGeneral;
+};
 
+// ajouter type_textes
+export const AJOUTER_HISTORIQUE_DECISION_BUDGET_ECLATE = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.HistoriquedecisionBudgetEclate.unshift(nouveau_budgetGeneral);
+};
+
+
+
+
+
+
+// supprimer type_texte
+export const SUPPRIMER_SOUS_BUDGET = (state, id) => {
+  state.SousBudget = state.SousBudget.filter(type => type.id != id);
+};
+
+
+export const GET_ALL_SOUS_BUDGET = (state, tableauBudgetGeneral) => {
+  state.SousBudget = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+export const AJOUTER_SOUS_BUDGET = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.SousBudget.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+export const MODIFIER_SOUS_BUDGET = (state, objetModifie) => {
+  state.SousBudget = state.SousBudget.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
 
 export {
   GET_ALL_BANQUE_UA,

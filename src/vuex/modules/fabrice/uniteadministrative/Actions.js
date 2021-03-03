@@ -1409,11 +1409,11 @@ export function ajouterHistorisqueBudgetEclate({ commit }, nouveau) {
           if (response.status == 201) {
               commit("AJOUTER_HISTORIQUE_BUDGET_ECLATE", response.data);
              
-              this.$app.$notify({
-                  title: 'Success',
-                  text: 'Enregistrement Effectué avec Succès!',
-                  type: "success"
-              })
+              // this.$app.$notify({
+              //     title: 'Success',
+              //     text: 'Enregistrement Effectué avec Succès!',
+              //     type: "success"
+              // })
           }
       });
 }
@@ -1659,21 +1659,7 @@ export function ajouterStockArticle({ commit,dispatch }, nouveau) {
       });
 }
 
-// modifier
-// export function modifierStockArticle({ commit ,dispatch}, nouveau) {
-//   asyncLoading(axios
-//       .put("/StockArticle/" + nouveau.id,nouveau))
-//       .then(response => {
-//           commit("MODIFIER_STOCK_ARTICLE", response.data);
-//           dispatch('getStockArticle')
-//               dispatch('getAllUniteAdministrative')
-//           this.$app.$notify({
-//               title: 'Success',
-//               text: 'Modification Effectué avec Succès!',
-//               type: "success"
-//           })
-//       });
-// }
+
 
 export function modifierStockArticle({ commit ,dispatch}, nouveau) {
   asyncLoading(axios
@@ -1733,5 +1719,94 @@ export function ajouterHistoriqueDecompteFacture({ commit }, nouveau) {
                   type: "success"
               })
           }
+      });
+}
+
+
+
+export function getAllHistoriqueDecisionBudgetEclate({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/HistoriqueDecisionBudgetEclate")
+      .then(response => {
+        commit("GET_ALL_HISTORIQUE_DECISION_BUDGET_ECLATE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+export function ajouterHistoriqueDecisionBudgetEclate({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/HistoriqueDecisionBudgetEclate", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_HISTORIQUE_DECISION_BUDGET_ECLATE", response.data);
+             
+              // this.$app.$notify({
+              //     title: 'Success',
+              //     text: 'Enregistrement Effectué avec Succès!',
+              //     type: "success"
+              // })
+          }
+      });
+}
+
+
+
+
+
+export function getSousBudget({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/SousBudget")
+          .then(response => {
+              commit("GET_ALL_SOUS_BUDGET", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterSousBudget({ commit}, nouveau) {
+  asyncLoading(axios
+      .post("/SousBudget", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_SOUS_BUDGET", response.data);
+            
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+
+
+export function modifierSousBudget({ commit}, nouveau) {
+  asyncLoading(axios
+      .put("/SousBudget/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_SOUS_BUDGET", response.data);
+         
+
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerSousBudget({ commit}, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_SOUS_BUDGET", id);
+          
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/SousBudget/" + id).then(() => dialog.close());
       });
 }

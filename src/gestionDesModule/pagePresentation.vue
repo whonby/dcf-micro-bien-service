@@ -434,9 +434,11 @@ this.getTypeAppel()
      this.getAllDecompteFacture()
      this.getAllHistoriqueDecompteFacture()
        this.getStructureOrganigrammeUa()
+       this.getSousBudget()
  this.getAllBudgetEclate()
  this.getAllHistorisqueBudgetEclate()
  this.getAllDecisionBudgetEclate()
+ this.getAllHistoriqueDecisionBudgetEclate()
  this.getVehicule()
  this.getReparationVehicule()
  this.getStockArticleUa()
@@ -476,6 +478,7 @@ this.getClassificationGradeFonction()
       this.getTypeMarche()
       // this.s()
       this.getFonctionsProfessionnel()
+      this.getComptableAssignataire()
       this.getSauvegardePhoto()
       this.getFichierJointDmd()
       this.getSecteurActivite()
@@ -723,16 +726,18 @@ return objJson.id
      "getAllLiquidation",
      "getStructureOrganigrammeUa",
      "getAllBanqueUa",
+     "getSousBudget",
      "getAllDecompteFacture",
      "getAllBudgetEclate",
      "getAllHistorisqueBudgetEclate",
      "getAllDecisionBudgetEclate",
+     "getAllHistoriqueDecisionBudgetEclate",
      "getVehicule",
      "getReparationVehicule",
      "getStockArticleUa",
      "getAllHistoriqueDecompteFacture"
     ]),
-            ...mapActions('personnelUA', ["getFonctionsProfessionnel","getFichierJointDmd","getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
+            ...mapActions('personnelUA', ["getComptableAssignataire","getFonctionsProfessionnel","getFichierJointDmd","getSauvegardePhoto","getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
             "getClasses","getEchelons","getpaiementPersonnel","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",

@@ -30,7 +30,16 @@
               <td>
                 <div align="right">
 
-      <button class="btn btn-success"  @click.prevent="ajouterBudgetEclarter">VENTILLER LE BUDGET </button>
+      <button class="btn btn-info"  @click.prevent="SOUSbUDGET">SOUS BUDGET </button>
+
+
+                            </div>
+              </td>
+              <td style="width:12%;" >
+                
+                <div align="right">
+
+      <button class="btn btn-success"  @click.prevent="ajouterBudgetEclarter">ECLATER LE BUDGET </button>
 
 
                             </div>
@@ -250,6 +259,9 @@ export default {
     ]),
     ModificationBudgetaire(){
                 this.$router.push({ name: 'ModificationBudgetaire' })
+            },
+            SOUSbUDGET(){
+                this.$router.push({ name: 'sousBudget' })
             },
   ajouterBudgetEclarter(){
                 this.$router.push({ name: 'AjouterBudgetEclater' })

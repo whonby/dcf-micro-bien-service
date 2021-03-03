@@ -315,6 +315,7 @@
                 <label class="control-label">Montant a Eclaté (n+(n-1))</label>
                 <div class="controls">
                    <money :value="MontantAEclate"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                                 <code style="color:red;font-size:12px" v-if="MontantAEclate == 0">Montant Budget est Saturé</code>
                 </div>
               </div>
                   </td>
@@ -400,7 +401,7 @@
                        <div class="control-group">
                 <label class="control-label">Dotation Total</label>
                 <div class="controls">
-                  <money   :value="dotationTotal"  style="text-align:left;color:red"  class="span"></money>
+                  <money   :value="dotationTotal" readonly style="text-align:left;color:red"  class="span"></money>
                 </div>
               </div>
                   </td>
@@ -463,6 +464,7 @@
                     <div class="controls">
                       <div data-toggle="buttons-checkbox" class="btn-group">
                         <a
+                        v-if="MontantAEclate > 0"
                           class="btn btn-primary"
                           @click.prevent="AjouterLiquidation"
                         >Modifier</a>
@@ -679,14 +681,21 @@ cumulDotationParUa() {
         }
       };
     },
+cumulDotationParUaEtActivite() {
+      return (id,id1) => {
+        if (id != null && id != "",id1 != null && id1 != "") {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.activite_id == id1 && qtreel.annebudgetaire==this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
 
+        }
+      };
+    },
 
 
 
 MontantAEclate(){
 
 if(this.formData.activite_id !=""){
-  return  ((parseFloat(this.RecuppererLaDotation(this.formData.activite_id))) - (parseFloat(this.cumulDotationParUa(this.formData.uniteadministrative_id))+parseFloat(this.dotationTotal)))
+  return  ((parseFloat(this.RecuppererLaDotation(this.formData.activite_id))) - (parseFloat(this.cumulDotationParUaEtActivite(this.formData.uniteadministrative_id,this.formData.activite_id))+parseFloat(this.formData1.variation_budget)))
 }
 else{
   return  ((parseFloat(this.MontantDisponibleParUa)) - (parseFloat(this.cumulDotationParUa(this.formData.uniteadministrative_id))+parseFloat(this.formData1.variation_budget)))
@@ -1116,6 +1125,19 @@ recuppererMontantEmprunt() {
         }
       };
     },
+    recuppererMontantTresor() {
+      return (id1,id) => {
+        if (id1 != null && id1 != "" && id != null && id != "") {
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
+
+      if (qtereel) {
+        return qtereel.tresor
+      }
+      return 0
+        }
+      };
+    },
+    
         },
 
 methods: {

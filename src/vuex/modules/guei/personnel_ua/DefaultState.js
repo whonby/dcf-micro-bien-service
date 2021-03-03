@@ -37,7 +37,8 @@ const defaultstate = {
     permissionConge:[],
     sauvegardePhoto:[],
     fonctionProfessionnel:[],
-    FichierJoinDmdEngagement:[]
+    FichierJoinDmdEngagement:[],
+    ComptableAssignataire:[]
 
 };
 

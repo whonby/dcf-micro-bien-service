@@ -1052,7 +1052,30 @@ export const MODIFIER_FICHIER_JOINT_DEMANDE_ENGAGEMNT = (state, objetModifie) =>
         return fonction
     })
 }
+export const GET_COMPTABLE_ASSIGNATAIRE = (state, data) => {
+    state.ComptableAssignataire = data
+}
 
+
+export const AJOUTER_COMPTABLE_ASSIGNATAIRE = (state, nouvel_objet) => {
+    state.ComptableAssignataire.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+}
+
+
+export const SUPPRIMER_COMPTABLE_ASSIGNATAIRE= (state, id) => {
+    state.ComptableAssignataire = state.ComptableAssignataire.filter(fonction => fonction.id != id)
+}
+
+
+export const MODIFIER_COMPTABLE_ASSIGNATAIRE = (state, objetModifie) => {
+    state.ComptableAssignataire = state.ComptableAssignataire.map(fonction => {
+        if(fonction.id == objetModifie.id){
+            fonction = {...objetModifie}
+        }
+        return fonction
+    })
+}
 export {
 
     GET_ORDRE_DE_PAIEMENT,
