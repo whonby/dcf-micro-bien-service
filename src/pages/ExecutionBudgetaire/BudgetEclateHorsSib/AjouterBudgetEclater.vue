@@ -109,6 +109,54 @@
  
                     <td>
                        <div class="control-group">
+                <label class="control-label">Type Financement</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                 :value="LibelleTypeFinancement(idTypeFinancement(formData.ligne_budgetaire_parent_id))"
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+                  </td>   
+                  
+                  <td colspan="2">
+                       <div class="control-group">
+                <label class="control-label">Bailleur</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="LibelleSourceFinancement(idSourceFinancement(formData.ligne_budgetaire_parent_id))"
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+                  </td>
+              <td>
+              <div class="control-group">
+                <label class="control-label">Grande Nature</label>
+                <div class="controls">
+                   <input
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="LibelleGrandeNature(idGrandeNature(formData.ligne_budgetaire_parent_id))"
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+              
+                     </td>
+                     
+                     </tr>
+                     <tr>
+ 
+                    <td>
+                       <div class="control-group">
                 <label class="control-label">Unite administrative <code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
                   <model-list-select style="border:1px solid #000"
@@ -127,25 +175,7 @@
               <code style="color:red;font-size:12px" v-if="formData.uniteadministrative_id==''">Veuillez renseigner ce champ</code>
                   </td>
                   
-                  <!-- <td>
-                       <div class="control-group">
-                <label class="control-label">Activité</label>
-                <div class="controls">
-                  <model-list-select style="border:1px solid #000"
-                                                   class="wide"
-                                                   :list="listeActiviteUA(formData.uniteadministrative_id)"
-                                                   v-model="formData.activite_id"
-                                                   option-value="id"
-                                                   option-text="lib"
-                                                   
-                                                   placeholder=""
-                                >
-
-                                </model-list-select>
-                </div>
-              </div>
-                  </td> -->
-                   <td colspan="">
+                   <td colspan="2">
               <div class="control-group">
                 <label class="control-label">Activité</label>
                 <div class="controls">
@@ -161,11 +191,94 @@
               </div>
               
                      </td>
-              <td colspan="">
+                     <td colspan="">
               <div class="control-group">
-                <label class="control-label">Ligne budgetaire</label>
+                <label class="control-label">Sous Budget</label>
                 <div class="controls">
-                  <select v-model="formData.ligne_budgetaire_parent_id" class="span" style="border:1px solid #000">
+                  <select v-model="formData.sous_activite_id" class="span" style="border:1px solid #000">
+                    <option></option>
+                     <option
+                        v-for="typeFact in afficheLesSousBudget(formData.uniteadministrative_id,formData.activite_id)"
+                        :key="typeFact.id"
+                        :value="typeFact.id"
+                      >{{typeFact.activite_enfant}}</option>
+                  </select>
+                  
+                </div>
+              </div>
+              
+                     </td>
+                      
+                      
+                  
+                  
+              
+                     
+                     </tr>
+              
+                     
+                     <template v-if="comparaison(this.formData.activite_id)==this.formData.activite_id">
+                        <tr>
+
+                       <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Ligne budgetaire5</label>
+                <div class="controls">
+                 
+ <select v-model="formData.ligne_budgetaire_parent_id" class="span" style="border:1px solid #000" >
+                    
+                     <option
+                        v-for="typeFact in afficheLesSousBudgetLigneBudgetaire(formData.sous_activite_id)"
+                        :key="typeFact.id"
+                        :value="typeFact.ligneeconomique_id"
+                      >{{libelleLigneEconomique(typeFact.ligneeconomique_id)}}</option>
+                  </select>
+                 <!-- <select v-model="formData.ligne_budgetaire_parent_id" class="span" style="border:1px solid #000" v-else>
+                    
+                     <option
+                        v-for="typeFact in RecupererlibelleLigneEconomique(formData.activite_id)"
+                        :key="typeFact[0].id"
+                        :value="typeFact[0].economique_id"
+                      >{{libelleLigneEconomique(typeFact[0].economique_id)}}</option>
+                  </select> -->
+<!--                  
+ <select v-model="formData.ligne_budgetaire_parent_id" class="span" style="border:1px solid #000">
+                    
+                     <option
+                        v-for="typeFact in RecupererlibelleLigneEconomique(formData.activite_id)"
+                        :key="typeFact[0].id"
+                        :value="typeFact[0].economique_id"
+                      >{{libelleLigneEconomique(typeFact[0].economique_id)}}</option>
+                  </select> -->
+                
+
+                 
+                </div>
+              </div>
+              
+                     </td>
+                     <td colspan="2">
+                       <div class="control-group">
+                <label class="control-label">Dotation(n)</label>
+                <div class="controls">
+                   <money :value="videLeChamps"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                 
+                </div>
+              </div>
+                  </td>   
+                     </tr>
+
+                     </template>
+                    <template v-else>
+                        <tr>
+
+                       <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Ligne budgetaire89</label>
+                <div class="controls">
+                 
+ 
+                 <select v-model="formData.ligne_budgetaire_parent_id" class="span" style="border:1px solid #000" >
                     
                      <option
                         v-for="typeFact in RecupererlibelleLigneEconomique(formData.activite_id)"
@@ -173,21 +286,37 @@
                         :value="typeFact[0].economique_id"
                       >{{libelleLigneEconomique(typeFact[0].economique_id)}}</option>
                   </select>
+<!--                  
+ <select v-model="formData.ligne_budgetaire_parent_id" class="span" style="border:1px solid #000">
+                    
+                     <option
+                        v-for="typeFact in RecupererlibelleLigneEconomique(formData.activite_id)"
+                        :key="typeFact[0].id"
+                        :value="typeFact[0].economique_id"
+                      >{{libelleLigneEconomique(typeFact[0].economique_id)}}</option>
+                  </select> -->
+                
+
+                 
                 </div>
               </div>
               
                      </td>
-                     <td>
+                     <td colspan="2">
                        <div class="control-group">
                 <label class="control-label">Dotation(n)</label>
                 <div class="controls">
-                   <money :value="videLeChamps"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                   
+                 <money :value="RecuppererLaDotationInitial(formData.ligne_budgetaire_parent_id)"  readOnly  style="text-align:left;color:red"  class="span"></money>
                 </div>
               </div>
                   </td>   
                      </tr>
+
+                     </template>
+                    
                  </table>
-                 <div class="widget-title">
+                 <!-- <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
                         <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION SUR BAILLEUR</a>
@@ -196,6 +325,83 @@
                   </div>
                  <table class="table table-bordered table-striped" style="border:1px solid #000">
                      
+                    
+                  
+                     
+                 </table> -->
+                 <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION BUDGET PRECEDENT{{idBudgetEclater(formData1.ligneeconomique_id)}}</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <table class="table table-bordered table-striped" style="border:1px solid #000">
+                     
+                     <tr>
+ 
+             
+                     <td >
+                            <div class="control-group">
+                <label class="control-label">Exercice(n-1)</label>
+                <div class="controls">
+                 
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="recupererAnneePrecedant"
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+                        </td>
+                        <td>
+                       <div class="control-group">
+                <label class="control-label">Dotation</label>
+                <div class="controls">
+                   <money :value="DotationRestantAnneePrecedant(formData.uniteadministrative_id)"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                </div>
+              </div>
+                  </td>
+                   <td>
+                       <div class="control-group">
+                <label class="control-label">Dotation Executé</label>
+                <div class="controls">
+                   <money :value="CumulMontantConsommeParUaPrecedent(formData.uniteadministrative_id)"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                </div>
+              </div>
+                  </td>
+                   <td>
+                       <div class="control-group">
+                <label class="control-label">Dotation Disponible(n-1)</label>
+                <div class="controls">
+                   <money :value="MontantDisponibleParUa"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                </div>
+              </div>
+                  </td>
+                  <td>
+                       <div class="control-group">
+                <label class="control-label">Montant a Eclaté (n+(n-1))</label>
+                <div class="controls">
+                   <money :value="MontantAEclate"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                 <code style="color:red;font-size:12px" v-if="MontantAEclate == 0">Montant Budget est Saturé</code>
+                </div>
+              </div>
+                  </td>
+                     </tr>
+                  
+                     
+                 </table>
+                  
+                 <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION SUR L'ECLATEMENT DU BUDGET</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <table class="table table-bordered table-striped" style="border:1px solid #000">
                      <tr>
  
                     <td>
@@ -256,81 +462,6 @@
                   </td>
                   
                      </tr>
-                  
-                     
-                 </table>
-                 <div class="widget-title">
-                    <ul class="nav nav-tabs">
-                      <li class="active">
-                        <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION BUDGET PRECEDENT{{idBudgetEclater(formData1.ligneeconomique_id)}}</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <table class="table table-bordered table-striped" style="border:1px solid #000">
-                     
-                     <tr>
- 
-             
-                     <td >
-                            <div class="control-group">
-                <label class="control-label">Exercice(n-1)</label>
-                <div class="controls">
-                 
-                  <input
-                    type="text"
-                    style="border:1px solid #000"
-                   :value="recupererAnneePrecedant"
-                    class="span"
-                    readonly
-                  />
-                </div>
-              </div>
-                        </td>
-                        <td>
-                       <div class="control-group">
-                <label class="control-label">Dotation</label>
-                <div class="controls">
-                   <money :value="DotationRestantAnneePrecedant(formData.uniteadministrative_id)"  readOnly  style="text-align:left;color:red"  class="span"></money>
-                </div>
-              </div>
-                  </td>
-                   <td>
-                       <div class="control-group">
-                <label class="control-label">Dotation Executé</label>
-                <div class="controls">
-                   <money :value="CumulMontantConsommeParUaPrecedent(formData.uniteadministrative_id)"  readOnly  style="text-align:left;color:red"  class="span"></money>
-                </div>
-              </div>
-                  </td>
-                   <td>
-                       <div class="control-group">
-                <label class="control-label">Dotation Disponible(n-1)</label>
-                <div class="controls">
-                   <money :value="MontantDisponibleParUa"  readOnly  style="text-align:left;color:red"  class="span"></money>
-                </div>
-              </div>
-                  </td>
-                  <td>
-                       <div class="control-group">
-                <label class="control-label">Montant a Eclaté (n+(n-1))</label>
-                <div class="controls">
-                   <money :value="MontantAEclate"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
-                </div>
-              </div>
-                  </td>
-                     </tr>
-                  
-                     
-                 </table>
-                  
-                 <div class="widget-title">
-                    <ul class="nav nav-tabs">
-                      <li class="active">
-                        <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION SUR L'ECLATEMENT DU BUDGET</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <table class="table table-bordered table-striped" style="border:1px solid #000">
                      <tr>
                         <td>
                        <div class="control-group">
@@ -456,6 +587,7 @@
                     <div class="controls">
                       <div data-toggle="buttons-checkbox" class="btn-group">
                         <a
+                        
                           class="btn btn-primary"
                           @click.prevent="AjouterLiquidation"
                         >Valider</a>
@@ -509,7 +641,8 @@ components: {
           info_pdf:false,
                 formData:{
                  activite_id:0,
-                 uniteadministrative_id:""
+                 uniteadministrative_id:"",
+                 sous_activite_id:""
                 },
                 
                 editpiece:{},
@@ -544,7 +677,7 @@ components: {
             ...mapGetters('personnelUA', ["salairesActeur","personnaliseActeurDepense","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","affichePersonnelRecuActeNormination"]),
-             ...mapGetters("uniteadministrative", ["getdecisionBudgetEclate","groupeParBAILLER","budgetEclate","groupeLigneEconomiqueBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
+             ...mapGetters("uniteadministrative", ["getSousBudget","getdecisionBudgetEclate","groupeParBAILLER","budgetEclate","groupeLigneEconomiqueBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             // ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires","structures_budgetaires","getterTousActivite","getterTousPlanBudgetaire"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
@@ -572,9 +705,119 @@ components: {
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
      
 //formatageSomme(parseFloat(recupereMontantDon(type[0].ligneeconomique_id))+parseFloat(recupereMontantEmprunt(type[0].ligneeconomique_id)))
+LibelleTypeFinancement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.types_financements.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+    LibelleSourceFinancement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sources_financements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+    LibelleGrandeNature() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.grandes_natures.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+idTypeFinancement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id);
+
+      if (qtereel) {
+        return qtereel.typefinancement_id
+      }
+      return 0
+        }
+      };
+    },
+    idSourceFinancement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id);
+
+      if (qtereel) {
+        return qtereel.sourcefinancement_id
+      }
+      return 0
+        }
+      };
+    },
+    idGrandeNature() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id);
+
+      if (qtereel) {
+        return qtereel.gdenature_id
+      }
+      return 0
+        }
+      };
+    },
+comparaison() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getSousBudget.find(qtreel => qtreel.activite_parent_id == id);
+
+      if (qtereel) {
+        return qtereel.activite_parent_id
+      }
+      return 0
+        }
+      };
+    },
+videLeChamp(){
+if(this.formData.sous_activite_id==''){
+  return this.formData.ligne_budgetaire_parent_id==""
+}
+else{
+  return this.formData.ligne_budgetaire_parent_id
+}
+},
     
-   
+   afficheLesSousBudget() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+           return this.getSousBudget.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.activite_parent_id==id1 && qtreel.execice==this.anneeAmort);
+
+     
+      
+        }
+      };
+    },
+    afficheLesSousBudgetLigneBudgetaire() {
+      return (id1) => {
+        if (id1 != null && id1 != "") {
+           return this.getSousBudget.filter(qtreel => qtreel.id==id1);
+
+     
+      
+        }
+      };
+    },
 
 
 
@@ -777,6 +1020,7 @@ recupererStructure() {
         }
       };
     },
+    
     idSection() {
       return id => {
         if (id != null && id != "") {
@@ -875,15 +1119,27 @@ LibelleActivite() {
       return 0
     },
     videLeChamps(){
-      if(this.formData.activite_id!=""){
-return this.RecuppererLaDotation(this.formData.activite_id)
+      if(this.formData.sous_activite_id!=""){
+return this.RecuppererLaDotation(this.formData.sous_activite_id)
       }
       return 0
     },
     RecuppererLaDotation() {
       return (id) => {
         if (id != null && id != "") {
-           const qtereel = this.budgetGeneral.find(qtreel => qtreel.activite_id == id &&  qtreel.actived==1 && qtreel.exercicebudget_id==this.anneeAmort);
+           const qtereel = this.getSousBudget.find(qtreel => qtreel.id == id  && qtreel.execice==this.anneeAmort);
+
+      if (qtereel) {
+        return qtereel.montant_budgetaire
+      }
+      return 0
+        }
+      };
+    },
+    RecuppererLaDotationInitial() {
+      return (id) => {
+        if (id != null && id != "") {
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id  && qtreel.exercicebudget_id==this.anneeAmort && qtreel.actived==1);
 
       if (qtereel) {
         return qtereel.cp
@@ -1058,7 +1314,9 @@ methods: {
       "ajouterBudgetEclate",
       "supprimerBudgetEclate",
       "modifierBudgetEclate",
-      "ajouterDecisionBudgetEclate"
+      "ajouterDecisionBudgetEclate",
+      "ajouterHistorisqueBudgetEclate"
+      
       
     ]),
     apercuFacture() {
@@ -1110,6 +1368,7 @@ methods: {
       };
       this.ajouterDecisionBudgetEclate(decisionBudget1);
       this.ajouterBudgetEclate(nouvelObjet);
+      this.ajouterHistorisqueBudgetEclate(nouvelObjet)
       this.formData1 = {
 ligneeconomique_id:"",
 dotation_nouvelle:"",
@@ -1138,7 +1397,7 @@ var nouvelObjet1 = {
       };
       this.ajouterDecisionBudgetEclate(decisionBudget12);
       this.ajouterBudgetEclate(nouvelObjet1);
-       
+       this.ajouterHistorisqueBudgetEclate(nouvelObjet1)
 this.formData1 = {
 ligneeconomique_id:"",
 dotation_nouvelle:"",
@@ -1166,6 +1425,7 @@ type_financement_id:""
       };
       this.ajouterDecisionBudgetEclate(decisionBudget13);
       this.ajouterBudgetEclate(nouvelObjet2);
+      this.ajouterHistorisqueBudgetEclate(nouvelObjet2)
        this.formData1 = {
 ligneeconomique_id:"",
 dotation_nouvelle:"",
@@ -1252,6 +1512,7 @@ else{
           dotation_nouvelle:this.formData1.dotation_nouvelle
       };
       this.ajouterBudgetEclate(nouvelObjet96);
+      this.ajouterHistorisqueBudgetEclate(nouvelObjet96)
       this.formData1 = {
 ligneeconomique_id:"",
 dotation_nouvelle:"",
@@ -1273,7 +1534,7 @@ var nouvelObjet163 = {
           dotation_nouvelle:this.formData1.dotation_nouvelle
       };
       this.ajouterBudgetEclate(nouvelObjet163);
-       
+       this.ajouterHistorisqueBudgetEclate(nouvelObjet163)
 this.formData1 = {
 ligneeconomique_id:"",
 dotation_nouvelle:"",
@@ -1294,6 +1555,7 @@ type_financement_id:""
           dotation_nouvelle:this.formData1.dotation_nouvelle
       };
       this.ajouterBudgetEclate(nouvelObjet221);
+      this.ajouterHistorisqueBudgetEclate(nouvelObjet221)
        this.formData1 = {
 ligneeconomique_id:"",
 dotation_nouvelle:"",

@@ -2253,3 +2253,76 @@ export function modifieFichierJointDmd({ commit, dispatch }, formData, config) {
     //     
 
 }
+
+
+
+
+export  function  getComptableAssignataire({commit}) {
+
+    queue.push(() =>  axios.get('/ComptableAssignataire').then(response => {
+            // console.log(response.data)
+            commit('GET_COMPTABLE_ASSIGNATAIRE', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+// ajouter type acte personnel
+export  function ajouterComptableAssignataire({commit}, objetAjoute){
+    this.$app.$loading(true)
+    axios.post('/ComptableAssignataire', objetAjoute ).then(res => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Enregistrement effectuer',
+            type:"success"
+        });
+        commit('AJOUTER_COMPTABLE_ASSIGNATAIRE', res.data)
+        this.$app.$loading(false)
+    }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(false)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Ce code ou libelle existe déja",
+            type:"error"
+        });
+    })
+}
+
+// supprimer type act
+export function supprimerComptableAssignataire({commit}, id){
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+        this.$app.$notify({
+            title: 'Suppression',
+            text: 'Suppression effectuer',
+            type:"success"
+        });
+        commit('SUPPRIMER_COMPTABLE_ASSIGNATAIRE', id)
+        axios.delete('/ComptableAssignataire/' + id).then(() => dialog.close() )
+    })
+}
+
+export function modifierComptableAssignataire({commit}, formData){
+    this.$app.$loading(true)
+    axios.put('/ComptableAssignataire' ,formData).then(response => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Modification effectuer',
+            type:"success"
+        });
+        commit('MODIFIER_COMPTABLE_ASSIGNATAIRE', response.data)
+        this.$app.$loading(false)
+    }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type:"error"
+        });
+    })
+
+}

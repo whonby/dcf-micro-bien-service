@@ -232,6 +232,44 @@
                     </tr>
                    
           </table>
+          <table class="table table-bordered table-striped" style="border:1px solid #000">
+                      <tr>
+                          <td colspam="2">
+              <div class="control-group">
+                <label class="control-label">Regisseur</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formMandat.comptable_assignataire_id"
+                    class="span"
+                     
+                  />
+                </div>
+              </div>
+              
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Comptable Assignataire</label>
+                <div class="controls">
+                  <select v-model="formMandat.comptable_assignataire_id" class="span" style="border:1px solid #000">
+                      <option
+                        v-for="gdenature in ComptableAssignataire"
+                        :key="gdenature.id"
+                        :value="gdenature.id"
+                      >{{gdenature.libelle}}</option>
+                    </select>
+                  
+                </div>
+              </div>
+              
+            </td>
+                   
+            
+                      </tr>
+                      
+                  </table>  
                  <table class="table table-bordered table-striped" style="border:1px solid #000">
                       <tr>
                           <td>
@@ -868,7 +906,7 @@ components: {
       dcf:dcf,
       noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-            ...mapGetters('personnelUA', ["salairesActeur","personnaliseActeurDepense","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
+            ...mapGetters('personnelUA', ["ComptableAssignataire","salairesActeur","personnaliseActeurDepense","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","affichePersonnelRecuActeNormination"]),
              ...mapGetters("uniteadministrative", ["budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),

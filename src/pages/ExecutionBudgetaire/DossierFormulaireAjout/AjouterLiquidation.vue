@@ -657,15 +657,9 @@ numeroOrdrePiece
                 </div>
               </div>
                <div class="control-group">
-                <label class="control-label">Nom</label>
+                <label class="control-label">Nom et prénoms cf</label>
                 <div class="controls">
-                  <input
-                    type="text"
-                    style="border:1px solid #000"
-                  
-                    class="span"
-                    
-                  />
+                 <input type="text" class="span" :value="recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(formData5.ua_id)))"  readonly/>
                 </div>
               </div>
                      </td>
@@ -1182,7 +1176,7 @@ components: {
            admin:admin,
       dcf:dcf,
       noDCfNoAdmin:noDCfNoAdmin,
- ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+ ...mapGetters("Utilisateurs", ["getterAffectionServiceCF","getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
             ...mapGetters('personnelUA', ["salairesActeur","personnaliseActeurDepense","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","affichePersonnelRecuActeNormination"]),
@@ -1214,6 +1208,42 @@ components: {
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+recupererNomDuControleurF() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterUtilisateur.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.name;
+      }
+      return 0
+        }
+      };
+    },
+recupererIdUser() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterAffectionServiceCF.find(qtreel => qtreel.servicecf_id == id && qtreel.date_fin==null);
+
+      if (qtereel) {
+        return qtereel.user_id;
+      }
+      return 0
+        }
+      };
+    },
+ recupererIdServiceCF() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterAffectation.find(qtreel => qtreel.unite_administrative_id == id   && qtreel.date_fin==null);
+
+      if (qtereel) {
+        return qtereel.servicecf_id;
+      }
+      return 0
+        }
+      };
+    },
       IdEntreprise() {
       return id => {
         if (id != null && id != "") {

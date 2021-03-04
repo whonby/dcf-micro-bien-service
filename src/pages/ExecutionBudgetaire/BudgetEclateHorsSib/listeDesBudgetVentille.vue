@@ -64,9 +64,9 @@
                     
                       </button>
                     </td>
-                    <td style="font-size:14px;color:#000;text-align:center">{{FamilleMotifBudgetEclate(detail_marche.uniteadministrative_id)}}</td>
-                    <td style="font-size:14px;color:#000;text-align:center">{{MotifBudgetEclate(detail_marche.uniteadministrative_id)}}</td>
-                    <td style="font-size:14px;color:#000;text-align:center">{{DateMotifBudgetEclate(detail_marche.uniteadministrative_id)}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center">{{libelleDecision(FamilleMotifBudgetEclate(detail_marche.uniteadministrative_id))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center">{{libelleDecision(MotifBudgetEclate(detail_marche.uniteadministrative_id))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center">{{formaterDate(DateMotifBudgetEclate(detail_marche.uniteadministrative_id))}}</td>
                     
                    </tr>
                 </tbody>
@@ -84,12 +84,15 @@
                      
                     </ul>
                   </div>
+                  
                   <div align="right">
-
-      <button class="btn btn-info"  @click.prevent="genererEnPdf">Imprimer </button>
+                    <!-- <button @click="exportHTML">Export as Word</button> -->
+<button class="btn btn-success" @click="tableToExcel('table', 'Lorem Table')">Export en Excel </button>
+      <button class="btn btn-info"  @click.prevent="genererEnPdf">Export en Pdf </button>
 
 
                             </div>
+                            
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
                     <div id="MANDATEMENT" class="tab-pane active">
@@ -101,14 +104,14 @@
                        
                     </ul>
                   </div>
-                  <div id="printMe">
+                  <div id="printMe" ref="table"  summary="lorem ipsum sit amet" rules="groups" frame="hsides" border="2">
                   <div class="widget-content tab-content">
                     <div style="border:3px solid #000;width:50%;text-align:center;margin: 0 auto;">
 <p style="font-size:25px;color:#000;text-align:center">{{idUniteAdministrative(detail_marche.uniteadministrative_id)}}</p>
 <p style="font-size:25px;color:#000;text-align:center">VENTILLATION DU BUDGET {{anneeAmort}}</p>
                     </div>
 <br>
-                  <table class="table table-bordered table-striped">
+                  <table class="table table-bordered table-striped" >
                 <thead>
                    <tr>
                     <th></th>
@@ -134,22 +137,42 @@
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="(type) in listeDesBudgetaireEclate(detail_marche.uniteadministrative_id)" :key="type.id">
-                    <td style="font-size:14px;color:#000;">{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px;color:#000;" v-if="type.variation_budget==0">{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}</td>
+                    <td style="font-size:14px;color:#000;" v-else>{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}<span style="color:red;font-size:35px">*</span></td>
                       <td style="font-size:14px;color:#000;text-align:center">{{formatageSomme(parseFloat(type.tresor)) || 'Non renseigné'}}</td>
                       <td style="font-size:14px;color:#000;text-align:center">{{formatageSomme(parseFloat(type.don)) || 'Non renseigné'}}</td>
                    <td style="font-size:14px;color:#000;text-align:center">{{formatageSomme(parseFloat(type.emprunt)) || 'Non renseigné'}}</td>
-                  
-                   <td style="font-size:14px;color:#000;text-align:center">
+
+                   <td style="font-size:14px;color:#fff;text-align:center;background:green;font-weight:bold;" v-if="decisionCfBudgetEclate(detail_marche.uniteadministrative_id) == 8">
                      {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
                      </td>
+                              <td style="font-size:14px;color:#fff;text-align:center;background:green;font-weight:bold;" v-else-if="decisionCfBudgetEclate(detail_marche.uniteadministrative_id) == 9">
+                     {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
+                     </td>
+                     <td style="font-size:14px;color:#fff;text-align:center;background:#FFCC00;font-weight:bold;" v-else-if="decisionCfBudgetEclate(detail_marche.uniteadministrative_id) == 2">
+                     {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
+                     </td>
+                     <td style="font-size:14px;color:#fff;text-align:center;background:red;font-weight:bold;" v-else-if="decisionCfBudgetEclate(detail_marche.uniteadministrative_id) == 3">
+                     {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
+                     </td>
+                     <td style="font-size:14px;color:#fff;text-align:center;background:#0033ff;font-weight:bold;" v-else>
+                     {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
+                     </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td ></td>
+                    <td ></td>
                     
                   </tr>
                   <tr>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td style="font-weight:bold;font-size:14px">TOTAL</td>
-                    <td style="text-align:center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(parseFloat(recupereMontantEtatTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantDonTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantEmpruntTotal(detail_marche.uniteadministrative_id))))}}</td>
+                    <td style="font-weight:bold;font-size:16px;border:2px solid red">TOTAL</td>
+                    <td style="text-align:center;color:#000;font-weight:bold ;font-size:16px;border:2px solid red">{{formatageSomme(parseFloat(parseFloat(recupereMontantEtatTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantDonTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantEmpruntTotal(detail_marche.uniteadministrative_id))))}}</td>
                     
                   </tr>
                 </tbody>
@@ -256,9 +279,9 @@
                        </td>
                         <td colspan="">
                         <div class="control-group">
-                            <label class="control-label">Cf</label>
+                            <label class="control-label">Nom du CF</label>
                             <div class="controls">
-                              <input type="text" class="span5"   readonly/>
+                              <input type="text" class="span5" :value="recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(detail_marche.uniteadministrative_id)))"  readonly/>
                             </div>
                           </div>
                        </td>
@@ -286,7 +309,7 @@
 
 import { mapGetters, mapActions } from "vuex";
 import {formatageSomme} from "@/Repositories/Repository"
-
+import moment from 'moment';
 export default {
   components:{
    
@@ -303,7 +326,12 @@ export default {
                 
                 },
                 editMandat:{},
-      search: ""
+      search: "",
+       uri :'data:application/vnd.ms-excel;charset=UTF-8;base64,',
+                template:'<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+                base64: function(s){ return window.btoa(unescape(encodeURIComponent(s))) },
+                format: function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) },
+                table:""
     };
   },
 created() {
@@ -314,7 +342,7 @@ created() {
         console.log(this.arrayExerciceDecompte(this.detail_marche.uniteadministrative_id)) 
 },
   computed: {
-    ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+    ...mapGetters("Utilisateurs", ["getterAffectionServiceCF","getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
             ...mapGetters('personnelUA', ["salairesActeur","personnaliseActeurDepense","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","affichePersonnelRecuActeNormination"]),
@@ -346,6 +374,49 @@ created() {
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
       ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
+
+recupererNomDuControleurF() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterUtilisateur.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.name;
+      }
+      return 0
+        }
+      };
+    },
+recupererIdUser() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterAffectionServiceCF.find(qtreel => qtreel.servicecf_id == id && qtreel.date_fin==null);
+
+      if (qtereel) {
+        return qtereel.user_id;
+      }
+      return 0
+        }
+      };
+    },
+ recupererIdServiceCF() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterAffectation.find(qtreel => qtreel.unite_administrative_id == id   && qtreel.date_fin==null);
+
+      if (qtereel) {
+        return qtereel.servicecf_id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
    griserAutreMotif(){
   return this.editMandat.motif != 237 
 },
@@ -601,6 +672,7 @@ recupereMontantDonTotal() {
    
    
 },
+
 idDecisionBudgetaire() {
        return id => {
         if (id != null && id != "") {
@@ -619,12 +691,127 @@ idDecisionBudgetaire() {
       "getAllNoteService",
       "ajouterNoteService",
       "modifierNoteService",
-      "modifierDecisionBudgetEclate"
+      "modifierDecisionBudgetEclate",
+      "ajouterHistoriqueDecisionBudgetEclate"
     ]),
+     tableToExcel(table, name){
+                if (!table.nodeType) table = this.$refs.table
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+                window.location.href = this.uri + this.base64(this.format(this.template, ctx))
+            },
+    //         exportHTML(){
+    //   var vm = this, table = `<html xmlns:o='urn:schemas-microsoft-com:office:office xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>${vm.word}</body></html>`;
+
+    //   var source = 'listeDesBudgetaireEclate(detail_marche.uniteadministrative_id),' + encodeURIComponent(table);
+    //   var fileDownload = document.createElement("a");
+    //   document.body.appendChild(fileDownload);
+    //   fileDownload.href = source;
+    //   fileDownload.download = 'document.doc';
+    //   fileDownload.click();
+    //   document.body.removeChild(fileDownload);
+    // },
+    formaterDate(date) {
+              return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+            },
             validationOpVise() {
- var nouvelObjet = {
+              if(this.editMandat.decision_cf==8){
+var nouvelObjet = {
       ...this.editMandat,
       id:this.idDecisionBudgetaire(this.detail_marche.uniteadministrative_id),
+     	motif :0,
+       
+         	famille_motif : 0,
+       
+        date_decision:this.editMandat.date_decision,
+        	decision_cf : this.editMandat.decision_cf,
+       autre_motif:0,
+        	observation : 0,
+       
+ 
+       };
+       var nouvelObjet23 = {
+     unite_administrative_id:this.detail_marche.uniteadministrative_id,
+     exercice:this.detail_marche.	annebudgetaire,
+      
+     	motif :0,
+       
+         	famille_motif : 0,
+       
+        date_decision:this.editMandat.date_decision,
+        	decision_cf : this.editMandat.decision_cf,
+       autre_motif:0,
+        	observation : 0,
+       
+ 
+       };
+ this.modifierDecisionBudgetEclate(nouvelObjet);
+ this.ajouterHistoriqueDecisionBudgetEclate(nouvelObjet23)
+this.$("#validationOpDefinitif").modal('hide');
+
+          this.editMandat={
+                  
+                };
+              }
+ else if(this.editMandat.decision_cf==9){
+var nouvelObjet1 = {
+      ...this.editMandat,
+      id:this.idDecisionBudgetaire(this.detail_marche.uniteadministrative_id),
+     	motif :0,
+       
+         	famille_motif : 0,
+       
+        date_decision:this.editMandat.date_decision,
+        	decision_cf : this.editMandat.decision_cf,
+       autre_motif:0,
+        	observation : 0,
+       
+ 
+       };
+        var nouvelObjet232 = {
+     unite_administrative_id:this.detail_marche.uniteadministrative_id,
+     exercice:this.detail_marche.	annebudgetaire,
+      
+     	motif :0,
+       
+         	famille_motif : 0,
+       
+        date_decision:this.editMandat.date_decision,
+        	decision_cf : this.editMandat.decision_cf,
+       autre_motif:0,
+        	observation : 0,
+       
+ 
+       };
+ this.modifierDecisionBudgetEclate(nouvelObjet1);
+ this.ajouterHistoriqueDecisionBudgetEclate(nouvelObjet232)
+this.$("#validationOpDefinitif").modal('hide');
+
+          this.editMandat={
+                  
+                };
+ }
+
+      
+     else{
+       var nouvelObjet2 = {
+      ...this.editMandat,
+      id:this.idDecisionBudgetaire(this.detail_marche.uniteadministrative_id),
+     	motif :this.editMandat.motif,
+       
+         	famille_motif : this.editMandat.famille_motif,
+       
+        date_decision:this.editMandat.date_decision,
+        	decision_cf : this.editMandat.decision_cf,
+       autre_motif:this.editMandat.date_decision,
+        	observation : this.editMandat.date_decision,
+       
+ 
+       };
+        var nouvelObjet2321 = {
+     unite_administrative_id:this.detail_marche.uniteadministrative_id,
+
+     exercice:this.detail_marche.annebudgetaire,
+      
      	motif :this.editMandat.motif,
        
          	famille_motif : this.editMandat.famille_motif,
@@ -636,15 +823,14 @@ idDecisionBudgetaire() {
        
  
        };
- this.modifierDecisionBudgetEclate(nouvelObjet);
+ this.modifierDecisionBudgetEclate(nouvelObjet2);
+ this.ajouterHistoriqueDecisionBudgetEclate(nouvelObjet2321)
 this.$("#validationOpDefinitif").modal('hide');
 
           this.editMandat={
                   
                 };
-
-      
-       
+     }  
     },
     apercuFacture() {
       this.$("#validationOpDefinitif").modal({

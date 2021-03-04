@@ -140,6 +140,7 @@
 
         <!-- end formulaire cojo  -->
 
+
         <!-- bigin modifie cojo  -->
         <div id="modificationStructure" class="modal hide grdtaill">
             <div class="modal-header">
@@ -150,12 +151,13 @@
                 <form class="form-horizontal">
 
 
+
                     <div class="control-group">
-                        <label class="control-label">Nom structure</label>
+                        <label class="control-label">Nom structure {{edite_cojo.ua_id}} </label>
                         <div class="controls">
                             <input
-                                    type="date"
-                                    v-model="edite_cojo.nom_structure"
+                                    type="text"
+                                    :value="libelleUa(edite_cojo.ua_id)"
                                     class="span"
 
                             />
@@ -189,6 +191,7 @@
                 },
 
                 edite_cojo:"",
+                ua_id:""
             }
         },
         created(){
@@ -231,15 +234,18 @@
 
 
 
-
         },
         methods:{
             ...mapActions('bienService',['supprimerCojo',
-                'ajouterCojo', 'modifierCojo',"supprimerStructureDAO"]),
+                'ajouterCojo', 'modifierCojo',"supprimerStructureDAO","modifierStructureDAO"]),
 
             modificationCojo(){
-
-                this.modifierCojo(this.edite_cojo)
+                var nouvelOb={
+                    ...this.edite_cojo,
+                    ua_id:this.edite_cojo.ua_id   
+                }
+              
+                this.modifierStructureDAO(nouvelOb)
                 this.$('#modificationStructure').modal('hide');
             },
             afficheBouttonTechCojo(index){
@@ -247,10 +253,11 @@
                     backdrop: 'static',
                     keyboard: false
                 });
+                //this.edite_cojo= this.listeStructure(this.macheid)[index]
                 this.edite_cojo = this.getterStructureDao.find(item=>item.id==index);
-
                 //this.edite_lot.appel_offre_id=this.edite_lot. modifierDemandeAno
             },
+
             formaterDate(date){
                 return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             }

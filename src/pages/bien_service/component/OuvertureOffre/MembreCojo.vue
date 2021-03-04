@@ -33,10 +33,10 @@
         </td>
 
         <td @click="afficheModaleMembreCojo(appelOffre.id)">
-          {{afficherLibelleStrutureOrigine(appelOffre.service_id) || 'Non renseigné'}}
+          {{appelOffre.ua_personnel || 'Non renseigné'}}
         </td>
          <td @click="afficheModaleMembreCojo(appelOffre.id)">
-          {{afficherLibelleFonction(appelOffre.fonction_id )|| 'Non renseigné'}}
+          {{appelOffre.fonction || 'Non renseigné'}}
         </td>
 
         <td @click="afficheModaleMembreCojo(appelOffre.id)" v-if="appelOffre.comite_evaluation=='oui'" style="background: green !important;color: white !important;">
@@ -103,6 +103,7 @@
                     </div>
                   </div>
                 </td>
+
 
                 <td>
 
@@ -246,7 +247,7 @@
               </tr>
               <tr>
 
-                <td colspan="2">
+                <td colspan="">
 
                   <div class="control-group">
 
@@ -257,6 +258,19 @@
                         <option v-for="varText in role_membrecojo" :key="varText.id"
                                 :value="varText.id">{{varText.libelle}}</option>
                       </select>
+
+                    </div>
+                  </div>
+                </td>
+                 <td colspan="">
+
+                  <div class="control-group">
+
+                    <label class="control-label span5">Contacts <code>*</code> :</label>
+
+                    <div class="control-group">
+                      <input type="text" class="span" placeholder="Numero lo" v-model="edite_membre_cojo.telephone" >
+
 
                     </div>
                   </div>
@@ -298,6 +312,7 @@ name: "MembreCojo",
         cojo_id:"",
         ua_id:"",
         comite_evaluation:"non",
+        telephone:""
 
       },
       nbr_click:0,
@@ -494,6 +509,7 @@ enregistreIdService() {
         nom_prenom:"",
         role_membre_cojo_id:"",
         cojo_id:"",
+        telephone:""
       }
     },
 

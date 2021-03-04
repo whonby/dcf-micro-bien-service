@@ -31,7 +31,9 @@ const defaultState = {
   vehicules:[],
   ReparationVehicules:[],
   historiqueBudgetEclate:[],
-  decisionBudgetEclate:[]
+  decisionBudgetEclate:[],
+  HistoriquedecisionBudgetEclate:[],
+  SousBudget:[]
 };
 
 export default defaultState;

@@ -215,7 +215,7 @@
 <!--                      class="span"-->
 <!--                      readonly-->
 <!--                  />-->
-                    <money v-model="formOffreFinanciere.montant_total_ttc" style="text-align:left;color:red"  class="span" ></money>
+                    <money v-model="montant_ttc" style="text-align:left;color:red"  class="span" ></money>
                 </div>
               </div>
             </td>
@@ -300,7 +300,7 @@
           <td>
 
             <div class="control-group">
-              <label class="control-label">Montant HT:</label>
+              <label class="control-label">Montant TTC:</label>
               <div class="controls">
                 <input type="number" class="span" placeholder="Montant TTC" v-model="editer.montant_total_ttc">
               </div>
@@ -361,11 +361,13 @@ name: "OffreFinanciere",
       editer:"",
       montant_htax:"",
       montant_tva:"",
+      montant_ttc:"",
       rabais:"",
       montant_debut_ht:"",
       formOffreFinanciere:{
         numero_lot:"",
         Rabais:"",
+        tva:"",
         montant_total_ht:"",
         montant_total_ttc:"",
         dossier_candidat_id:"",
@@ -505,7 +507,7 @@ name: "OffreFinanciere",
       this.$('#addd10').modal('hide');
       this.formOffreFinanciere={
                  numero_lot:"",
-                montant_total_ttc:"",
+                //montant_total_ttc:"",
                 montant_total_ht:"",
                 dossier_candidat_id:"",
                 Rabais:"",
@@ -557,6 +559,7 @@ name: "OffreFinanciere",
     }
   },
   watch: {
+
    montant_htax:function (value) {
       //console.log(value)
      if(value!="" ){
@@ -565,6 +568,20 @@ name: "OffreFinanciere",
        let montant=(parseFloat(value) * this.affcherTauxEnCours)/100
        this.montant_tva=montant
         this.formOffreFinanciere.montant_total_ttc=(parseFloat(value)) + montant
+     }
+   },
+
+    montant_ttc:function (value) {
+      //console.log(value)
+     if(value!="" ){
+       this.montant_debut_ht=value
+       this.formOffreFinanciere.montant_total_ht=value
+        let resultat= ((this.affcherTauxEnCours)/100) + parseFloat(1)
+         console.log(resultat)
+       let montant=(parseFloat(value) / resultat)
+
+       this.montant_htax=montant
+        this.montant_tva=(parseFloat(value)) - montant
      }
    },
     rabais:function (value) {
@@ -582,6 +599,7 @@ name: "OffreFinanciere",
         this.formOffreFinanciere.montant_total_ht=parseFloat(montantHT) - parseFloat(montantRabais)
         console.log(this.formOffreFinanciere.montant_total_ht)
         this.montant_htax=this.formOffreFinanciere.montant_total_ht
+       // this.montant_tva=this.formOffreFinanciere.tva
         let montant=(parseFloat(this.formOffreFinanciere.montant_total_ht) * this.affcherTauxEnCours)/100
         this.montant_tva=montant
         this.formOffreFinanciere.montant_total_ttc=(parseFloat(this.formOffreFinanciere.montant_total_ht)) + montant

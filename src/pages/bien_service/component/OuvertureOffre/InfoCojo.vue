@@ -229,7 +229,7 @@
           </div>
 
 
-          <!-- <div class="control-group">
+          <div class="control-group">
             <label class="control-label">Date de composition</label>
             <div class="controls">
               <input
@@ -239,7 +239,7 @@
 
               />
             </div>
-          </div> -->
+          </div>
 
           <div class="control-group">
             <label class="control-label">Nombre de participants</label>
@@ -249,7 +249,7 @@
                   v-model="edite_cojo.nbr_participant"
                   class="span"
               />
-              <input type="hidden" v-model="formDataCojo.difference_personnel_bienService"/>
+              <input type="hidden" v-model="edite_cojo.difference_personnel_bienService"/>
             </div>
           </div>
         </form>
@@ -454,7 +454,7 @@ name: "InfoCojo",
         backdrop: 'static',
         keyboard: false
       });
-      this.edite_cojo = this.listeCojo(this.macheid.id)[index];
+      this.edite_cojo = this.listeCojo(this.macheid)[index];
 
       //this.edite_lot.appel_offre_id=this.edite_lot. modifierDemandeAno
     },
@@ -486,7 +486,7 @@ name: "InfoCojo",
     modificationCojo(){
       var nouvelObjet1 ={
         ...this.edite_cojo,
-        marche_id:this.macheid.id,
+        marche_id:this.macheid,
         appel_offre_id :this.affichierAppelOffreid(this.macheid)
 
       }

@@ -236,13 +236,13 @@ uniteAdministratives
     <button class="btn btn-success" @click.prevent="ajouterMandat"><i class="icon icon-folder-open"> Nouveau Mandat</i></button>
     
         </div> 
-          </td>
+          </td>-->
           <td>
 <div  align="right" style="cursor:pointer;">
     <button class="btn btn-success" @click.prevent="ajouterOpSysteme"><i class="icon icon-folder-open"> Nouveau Ordre de Paiement</i></button>
     
         </div> 
-          </td> -->
+          </td> 
         </tr>
       </table>
       
