@@ -25,26 +25,26 @@
        </li>
        
        
-        <li :class="{active: active_el == 11 }" @click.prevent="navigateToTableauBord">
-          <a title="TABLEAU DE BORD" href="#">
+        <li :class="{active: active_el == 11 }" @click.prevent="navigateToUniteAdministrative">
+          <a title="TABLEAU DE BORD DU BUDGET" href="#">
             <i class="icon-dashboard"></i>
             <span>TABLEAU DE BORD DU BUDGET </span>
           </a>
         </li>
-        <li  :class="{active: active_el == 17 }" @click.prevent="navigateToParametreGeneraux">
+        <!-- <li  :class="{active: active_el == 17 }" @click.prevent="navigateToParametreGeneraux">
           <a title="PARAMETRES GENERAUX" href="#">
             <i class="icon-cogs"></i>
             <span></span>
           </a>
-        </li>
+        </li> -->
          <li :class="{active: active_el == 21 }" @click.prevent="navigateToGestionAcces">
-          <a title="GESTION DES ACCES" href="#">
+          <a title="TABLEAU DE BORD DU MARCHE" href="#">
             <i class="icon icon-signal"></i>
-            <span>G</span>
+            <span>TABLEAU DE BORD DU MARCHE</span>
           </a>
         </li>
          <li @click.prevent="navigateRetourAuMenu" >
-          <a title="Carte des infrastructure pas regison" href="#">
+          <a title="Carte des infrastructure pas regions" href="#">
             <i class=" icon-arrow-left"></i>
             <span>RETOUR AU MENU</span>
             <span class="label label-important"></span>
@@ -235,32 +235,32 @@ navigateToGestionMarche(){
        navigateToUniteAdministrative(){
         this.activate(1)
         this.$router.push({
-          name: 'tableaudebord'
-        })
-      },
- navigateToTableauBord(){
-        this.activate(11)
-        this.$router.push({
           name: 'TableauBordParametreSimple'
         })
       },
-      navigateRetourAuMenu(){
-      this.activate(11)
-      this.$router.push({
-        name: 'pagePresentation'
-      })
-    },
-       navigateToParametreGeneraux(){
-        this.activate(17)
-        this.$router.push({
-          name: 'TableauBordParametreSimple'
-        })
-      },
+//  navigateToTableauBord(){
+//         this.activate(11)
+//         this.$router.push({
+//           name: 'TableauBordParametreSimple'
+//         })
+//       },
+    //   navigateRetourAuMenu(){
+    //   this.activate(11)
+    //   this.$router.push({
+    //     name: 'pagePresentation'
+    //   })
+    // },
+    //    navigateToParametreGeneraux(){
+    //     this.activate(17)
+    //     this.$router.push({
+    //       name: 'TableauBordParametreSimple'
+    //     })
+    //   },
 
       navigateToGestionAcces(){
         this.activate(21)
         this.$router.push({
-          name: 'getion_acces'
+          name: 'marcheHorsib'
         })
       },
       
@@ -272,32 +272,32 @@ navigateToGestionMarche(){
       },
 
 
-      navigateToInvestissement(){
-        this.activate(4)
-        this.$router.push({
-          name:'tableauBordInvestissement'
-        })
-      },
+//       navigateToInvestissement(){
+//         this.activate(4)
+//         this.$router.push({
+//           name:'tableauBordInvestissement'
+//         })
+//       },
 
- navigateToBienEtService(){
-        this.activate(3)
-        this.$router.push({
-          name: 'tableauBord'
-        })
-      },
-      navigateGestionUser(){
-          this.activate(21)
-          this.$router.push({
-              name: 'Groupe'
-          })
-      },
+//  navigateToBienEtService(){
+//         this.activate(3)
+//         this.$router.push({
+//           name: 'tableauBord'
+//         })
+//       },
+//       navigateGestionUser(){
+//           this.activate(21)
+//           this.$router.push({ 
+//               name: 'Groupe'
+//           })
+//       },
 
-    navigateGestionEquipe(){
-      this.activate(30)
-      this.$router.push({
-        name: 'MonEquipe'
-      })
-    },
+//     navigateGestionEquipe(){
+//       this.activate(30)
+//       this.$router.push({
+//         name: 'MonEquipe'
+//       })
+//     },
 
 
 
