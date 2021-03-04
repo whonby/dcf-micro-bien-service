@@ -7,7 +7,7 @@ const plans_budgetaires = state => state.plans_budgetaires.sort((a,b)=>(a.code>b
 
 export const derniereNivoPlanBudgetaire = state =>
     state.plans_budgetaires.filter(
-        trieUaBesoin => trieUaBesoin.structure_budgetaire.niveau == 6
+        trieUaBesoin => trieUaBesoin.code.length == 8
     );
 
 

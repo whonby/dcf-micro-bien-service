@@ -12,7 +12,9 @@ const defaultState = {
   normeEquipements:[],
   
   articles: [],
-  stockageArticles:[]
+  stockageArticles: [],
+  
+   
 };
 
 export default defaultState;

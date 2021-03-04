@@ -143,7 +143,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="editStructure.niveau.length && editStructure.libelle.length" 
+             <button  
              @click.prevent="modifierStructureLocal(editStructure)" class="btn btn-primary"
               >Modifier</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
@@ -270,10 +270,11 @@ afficherModalModifierService(index){
  },
 modifierStructureLocal(){
     this.modifierStructureGeographique(this.editStructure)
-    this.editStructure = {
-        niveau:"",
-        libelle:""
-    }
+    this.$('#modifierModal').modal('hide');
+    // this.editStructure = {
+    //     niveau:"",
+    //     libelle:""
+    // }
 }
 
   }

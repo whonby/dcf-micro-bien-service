@@ -7,6 +7,7 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:8000/api';
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+//import VueCurrencyInput from 'vue-currency-input'
 
 import Default from '../src/layouts/Default.vue'
 import NoSidebar from '../src/layouts/NoSidebar.vue'
@@ -39,6 +40,14 @@ import VueLoading from 'vuejs-loading-plugin'
 
 // using default options
 //Vue.use(VueLoading)
+
+
+
+// let pluginOptions = {
+ 
+//   globalOptions: { currency: 'XOF' }
+// }
+// Vue.use(VueCurrencyInput, pluginOptions)
 
 Vue.use(VueLoading, {
   dark: true, // default false

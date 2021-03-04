@@ -13,31 +13,31 @@
                  <li class="bg_lb" title="Nombre Global d'équipement">
           <a href="#">
             <i class="icon-th-large"></i>
-            <span class="label label-important">{{nombreTotalEquipement}}</span> Nbre Global d'équipement prévue
+            <span class="label label-important">{{nombreTotalEquipement}}</span> QUANTITE GLOBAL
           </a>
         </li> 
-         <li class="bg_ly" title="Nombres d'equipement Restant">
-          <a href="#">
+         <li class="bg_ly" title="QUANTITE NON COUVERTE">
+          <a href="#" >
             <i class=" icon-list-alt"></i>
-            <span class="label label-success">{{SommeEquipementPrevue}}</span>Nbre Equipement Restant
+            <span class="label label-success">{{SommeEquipementPrevue}}</span>QTE NON COUVERTE
           </a>
         </li>
-         <li class="bg_ly" title="Nombre d'equipement Réalise">
+         <li class="bg_ly" title="QUANTITE COUVERTE">
           <a href="#">
             <i class=" icon-list-alt"></i>
-            <span class="label label-success">{{SommeEquipementRealise}}</span> Nbre Equipement Réalise
+            <span class="label label-success">{{SommeEquipementRealise}}</span> QTE COUVERTE
           </a>
         </li> 
-        <li class="bg_lg" title="Taux équipement  réalisé">
+        <li class="bg_lg" title="Taux QUANTITE COUVERTE">
           <a href="#">
             <i class="icon-th"></i>
-            <span class="label label-warning">{{tauxEquipementRealise}}%</span>Taux équipement  réalisé
+            <span class="label label-warning">{{tauxEquipementRealise}}%</span>TAUX QTE COUVERTE
           </a>
         </li>
-         <li class="bg_lg">
+         <li class="bg_lg" title="Taux QUANTITE NON COUVERTE">
           <a href="#">
             <i class="icon-th"></i>
-            <span class="label label-warning">{{tauxEquipementPrevue}}%</span>Taux équipement Restant
+            <span class="label label-warning">{{tauxEquipementPrevue}}%</span>TAUX QTE NON COUVERTE
           </a>
         </li>
         <!-- <li class="bg_lr" title="Taux équipement Réalisé par type UA" v-show="typeUniteAdmin_id.length !== 0">
@@ -121,8 +121,8 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <!-- <th>Classe</th> 
-                    <th>type equipement</th>  -->
+                    <!-- <th>Classe</th>  -->
+                    <th>Annee</th> 
                     <th>Famille</th>
                     <th>Quantité requise</th>
                     <th>Quantité afféctée</th>
@@ -140,9 +140,9 @@
                     <!-- <td
                       @dblclick="afficherModalModifierImmobilisation(immobilisat.id)"
                     >{{immobilisat.BesoinImmobilisation.famille.code || 'Non renseigné'}}</td>   -->
-                    <!-- <td
+                    <td
                       @dblclick="afficherModalModifierImmobilisation(immobilisat.id)"
-                    >{{immobilisat.BesoinImmobilisation.famille.reletion__equipement.libelle || 'Non renseigné'}}</td> -->
+                    >{{immobilisat.exercice_budgetaire || 'Non renseigné'}}</td>
                     <td
                       @dblclick="afficherModalModifierImmobilisation(immobilisat.id)"
                     >{{immobilisat.familleImmo.libelle || 'Non renseigné'}}</td> 
@@ -294,7 +294,7 @@ export default {
       "services",
       // "besoinImmobilisations",
       "personBesoinImmo",
-
+"groupTriUaImmo",
       // "tauxbesoinimmoUa",
       "SommeEquipementPrevue",
       "SommeEquipementActuel",

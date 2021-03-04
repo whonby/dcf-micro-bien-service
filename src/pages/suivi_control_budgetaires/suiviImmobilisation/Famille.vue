@@ -38,7 +38,7 @@
               />
             </div>
           </div>
-             <!-- <div class="control-group">
+             <div class="control-group">
             <label class="control-label">Dure de vie</label>
             <div class="controls">
               <input
@@ -48,7 +48,7 @@
                 placeholder="Saisir la dure de vie"
               />
             </div>
-          </div> -->
+          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -68,7 +68,7 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Famille Famille d'Article</h3>
+        <h3>Modifier  Famille d'Article</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
@@ -86,13 +86,24 @@
                             </div>
                           </div>
           <div class="control-group">
-            <label class="control-label">Libelle:</label>
+            <label class="control-label">Libellé:</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editFamille.libelle"
                 class="span"
                 placeholder="Saisir le libelle"
+              />
+            </div>
+          </div>
+           <div class="control-group">
+            <label class="control-label">Duree de vie</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editFamille.dureVie"
+                class="span"
+                placeholder="Saisir la dure de vie"
               />
             </div>
           </div>
@@ -216,11 +227,13 @@ export default {
      
        formData: {
         equipemt_id: "",
-        libelle: ""
+        libelle: "",
+        dureVie:""
       },
       editFamille: {
         equipemt_id: "",
-        libelle: ""
+        libelle: "",
+        dureVie:""
       },
        search:""
     };
@@ -272,12 +285,27 @@ export default {
     },
     // fonction pour vider l'input ajouter
     ajouterFamilleLocal() {
-      this.ajouterFamille(this.formData);
+      if (this.formData.equipemt_id == ""){
+        alert("veuillez Selectionner le type d'equipement")
+     
+      }
+      else if (this.formData.libelle =="" ) {
+alert("veuillez remplir le libelle")
+      
+       }
+      else if (this.formData.dureVie =="" ) {
+alert("veuillez remplir la duree de vie")
+      }
+      else
+      {
+this.ajouterFamille(this.formData);
 
       this.formData = {
         code: "",
         libelle: ""
       };
+      }
+      
     },
     // afficher modal de modification
     afficherModalModifierFamille(article) {
@@ -290,8 +318,22 @@ export default {
     },
     // fonction pour vider l'input modification
     modifierFamilleLocal() {
-      this.modifierFamille(this.editFamille);
+      if (this.editFamille.equipemt_id == ""){
+        alert("veuillez Selectionner le type d'equipement")
+     
+      }
+      else if (this.editFamille.libelle =="" ) {
+alert("veuillez remplir le libelle")
+      }
+      else if (this.editFamille.dureVie =="" ) {
+alert("veuillez remplir la duree de vie")
+      }
+      else
+      {
+this.modifierFamille(this.editFamille);
       this.$("#modificationModal").modal('hide');
+      }
+      
     },
     alert() {
       console.log("ok");

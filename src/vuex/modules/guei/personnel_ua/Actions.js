@@ -540,6 +540,29 @@ export  function ajouterEchelons({commit}, objetAjoute){
     })
 }
 
+
+// modifier echelon
+
+
+
+
+export function modifierEchelons({commit}, formData){
+    this.$app.$loading(true)
+    axios.put('/update_echellon' ,formData).then(response => {
+        commit('MODIFIER_ECHELONS', response.data)
+        this.$app.$loading(false)
+    }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'success',
+            text: "Modification effectuée !",
+            type:"success"
+        });
+    })
+
+}
+
 // supprimer type act
 export function supprimerEchelons({commit}, id){
 
@@ -608,6 +631,26 @@ export  function ajouterGrades({commit}, objetAjoute){
             type:"error"
         });
     })
+}
+
+// modifier le grade
+
+
+export function modifierGrade({commit}, formData){
+    this.$app.$loading(true)
+    axios.put('/update_grade' ,formData).then(response => {
+        commit('MODIFIER_GRADE', response.data)
+        this.$app.$loading(false)
+    }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'success',
+            text: "Modification effectuée !",
+            type:"success"
+        });
+    })
+
 }
 
 // supprimer type act

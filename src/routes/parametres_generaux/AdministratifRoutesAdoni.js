@@ -12,8 +12,14 @@ import GrandeNature from "../../pages/parametres_generaux/administratifs/GrandeN
 import StructureGeographique from "../../pages/parametres_generaux/administratifs/StructureGeographique.vue";
 import LocalisationGeographique from "../../pages/parametres_generaux/administratifs/LocalisationGeographique.vue";
 import TypeUniteAdmin from "../../pages/parametres_generaux/administratifs/TypeUniteAdmin.vue";
+import taux from "../../pages/parametres_generaux/administratifs/taux.vue";
 const AdministratifRoutesAdoni = [
   // route type unite administrative
+  {
+    path: "/taux",
+    name: "taux",
+    component: taux
+  },
   {
     path: "/type-Unite-Administrative",
     name: "typeUniteAdministrative",

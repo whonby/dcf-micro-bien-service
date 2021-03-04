@@ -192,6 +192,7 @@
                   >
                     <td
                      
+                     
                     > <div class="controls ">
                                     <select v-model="formData.gdeNaturedepense_id1" size=1 style="width:100%">
                                      

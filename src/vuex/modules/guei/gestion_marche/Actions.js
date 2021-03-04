@@ -1,6 +1,7 @@
 import axios from "./url/api"
 var housecall = require('housecall');
 var queue = housecall({ concurrency: 2, cooldown: 1000 });
+import { asyncLoading } from 'vuejs-loading-plugin'
 /**
  *Action mode de passation
  */
@@ -214,6 +215,139 @@ export function modifierSecteurActivite({commit}, formData){
 /**Fin secteur**/
 
 
+// action banque 
+
+
+
+
+
+// action pour banque && compte
+
+export  function  getBanque({commit}) {
+    queue.push(() => axios.get('/banques').then((response) => {
+      commit('GET_ALL_BANQUE', response.data)
+      
+  }).catch(error => console.log(error)))
+  }
+  
+  // action pour ajouter banque
+export function ajouterBanque({ commit, dispatch}, elementAjout){
+    asyncLoading(axios.post('/banques',{
+        code_banque:elementAjout.code_banque,
+      numero_banque:elementAjout.numero_banque,
+      libelle:elementAjout.libelle,
+      telephone:elementAjout.telephone,
+      situation_geographique:elementAjout.situation_geographique
+      
+  })).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_BANQUE', response.data)
+            dispatch('getBanque')
+            dispatch('getAgence')
+            
+            this.$app.$notify({
+              title: 'success ',
+              text: 'Enregistrement effectué !',
+              type:"success"
+            })
+        }
+  
+    }).catch(error => console.log(error))
+  }
+  
+  // action pour modifier banque
+  
+  
+export function modifierBanque({ commit, dispatch}, element_modifie) {
+    asyncLoading( axios.put('/banques',element_modifie)).then(response => {
+         commit('MODIFIER_BANQUE', response.data)
+        dispatch('getBanque')
+        dispatch('getAgence')
+  
+         this.$app.$notify({
+           title: 'success ',
+           text: 'Modification effectué !',
+           type:"success"
+         })
+     }).catch(error => console.log(error))
+  }
+  // supprimer banque
+  
+export function supprimerBanque({ commit, dispatch}, id) {
+   this.$app.$dialog
+   .confirm("Voulez vouz vraiment supprimer ?.")
+   .then(dialog => {
+       commit('SUPPRIMER_BANQUE', id)
+       dispatch('getBanque')
+       dispatch('getAgence')
+     // // dialog.loading(false) // stops the proceed button's loader
+       axios.delete('/banques/' + id).then(() => dialog.close() )   
+   })
+  
+  }
+  
+
+
+// action pour compte
+
+
+export  function  getCompte({commit}) {
+    queue.push(() => axios.get('/comptes').then((response) => {
+      commit('GET_ALL_COMPTE', response.data)
+      
+  }).catch(error => console.log(error)))
+  }
+  
+  // action pour ajouter compte
+  export function ajouterCompte({commit}, elementAjout){
+    asyncLoading(axios.post('/comptes',elementAjout)).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_COMPTE', response.data)
+  
+            this.$app.$notify({
+              title: 'success ',
+              text: 'Enregistrement effectué !',
+              type:"success"
+            })
+        }
+  
+    }).catch(error => console.log(error))
+  }
+  
+  // action pour modifier banque
+  
+  
+  export function modifierCompte({commit}, element_modifie) {
+    asyncLoading( axios.put('/comptes',element_modifie)).then(response => {
+         commit('MODIFIER_COMPTE', response.data)
+         
+  
+         this.$app.$notify({
+           title: 'success ',
+           text: 'Modification effectué !',
+           type:"success"
+         })
+     }).catch(error => console.log(error))
+  }
+  // supprimer banque
+  
+  export function supprimerCompte({commit}, id) {
+   this.$app.$dialog
+   .confirm("Voulez vouz vraiment supprimer ?.")
+   .then(dialog => {
+      commit('SUPPRIMER_COMPTE', id)
+     // // dialog.loading(false) // stops the proceed button's loader
+       axios.delete('/comptes/' + id).then(() => dialog.close() )   
+   })
+  
+  }
+  
+
+
+
+
+
+
 /**Entreprise**/
 export async function  getEntreprise({commit}) {
 
@@ -239,9 +373,9 @@ export  function ajouterEntreprise({commit}, objetAjoute){
         console.log(error)
         this.$app.$loading(false)
         this.$app.$notify({
-            title: 'Erreur',
-            text: "Erreur c'est produit lors de l'enregistrement",
-            type:"error"
+            title: 'Success',
+            text: "Enregistrement effectué avec success",
+            type:"success"
         });
     })
 }
@@ -260,25 +394,62 @@ export function supprimerEntreprise({commit}, id){
 
 }
 
-export function modifierEntreprise({commit}, formData){
-    this.$app.$loading(true)
-    axios.put('/update_entreprise' ,formData).then(response => {
-        this.$app.$notify({
-            title: 'success',
-            text: 'Modification effectuer',
-            type:"success"
+// export function modifierEntreprise({commit}, formData){
+//     this.$app.$loading(true)
+//     axios.put('/update_entreprise' ,formData.id).then(response => {
+//         this.$app.$notify({
+//             title: 'success',
+//             text: 'Modification effectuer',
+//             type:"success"
+//         });
+//         commit('MODIFIER_ENTREPRISE', response.data)
+//         this.$app.$loading(false)
+//     })
+//     //     .catch(error => {
+//     //     console.log(error)
+//     //     this.$app.$loading(false)
+//     //     this.$app.$notify({
+//     //         title: 'Erreur',
+//     //         text: "Erreur c'est produit lors de l'enregistrement",
+//     //         type:"error"
+//     //     });
+//     // })
+// }
+export function modifierEntreprise({ commit }, formData) {
+    asyncLoading(axios
+        .put("/update_entreprise/" + formData.id, {
+            numero_idu:formData.numero_idu,
+            numero_cc: formData.numero_cc,
+            numero_rc: formData.numero_rc,
+            raison_sociale: formData.raison_sociale,
+            sigle: formData.sigle,
+            secteur_activite_id: formData.secteur_activite_id,
+            activite_principale: formData.activite_principale,
+            pays: formData.pays,
+            ville: formData.ville,
+            forme_juridique: formData.forme_juridique,
+            centre_impot: formData.centre_impot,
+            regime_impossition: formData.regime_impossition,
+            capitale_sociale: formData.capitale_sociale,
+            immatriculation_cnps: formData.immatriculation_cnps,
+            date_enregistrement_cnps: formData.date_enregistrement_cnps,
+            telephone: formData.telephone,
+            email: formData.email,
+            nbre_travailleur_permanent: formData.nbre_travailleur_permanent,
+            nbre_travailleur_journalier: formData.nbre_travailleur_journalier,
+            service_assiette_impot: formData.service_assiette_impot,
+            adresse: formData.adresse,
+
+        }))
+        .then(response => {
+            commit("MODIFIER_ENTREPRISE", response.data);
+           
+            this.$app.$notify({
+                title: 'Success',
+                text: 'Modification Effectu� avec Succ�s!',
+                type: "success"
+            })
         });
-        commit('MODIFIER_ENTREPRISE', response.data)
-        this.$app.$loading(false)
-    }).catch(error =>{
-        console.log(error)
-        this.$app.$loading(false)
-        this.$app.$notify({
-            title: 'Erreur',
-            text: "Erreur c'est produit lors de l'enregistrement",
-            type:"error"
-        });
-    })
 }
 
 export function ajouterSanction({commit}, formData,config){
@@ -802,3 +973,58 @@ export async function getMarcheContratExecution({commit}) {
 }*/
 
 
+
+
+export function getAgence({ commit }) {
+    queue.push(() => axios.get('/agence').then((response) => {
+        commit('GET_ALL_AGENCE', response.data)
+
+    }).catch(error => console.log(error)))
+}
+
+// action pour ajouter type facture
+export function ajouterAgence({ commit, dispatch}, formData) {
+    asyncLoading(axios.post('/agence', formData)).then(response => {
+        if (response.status == 201) {
+            console.log(response.data)
+            commit('AJOUTER_AGENCE', response.data)
+            dispatch('getAgence')
+            dispatch('getBanque')
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectu� !',
+                type: "success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+// action pour modifier type facture
+
+
+export function modifierAgence({ commit, dispatch }, element_modifie) {
+    asyncLoading(axios.put('/agence', element_modifie)).then(response => {
+        commit('MODIFIER_AGENCE', response.data)
+        dispatch('getAgence')
+        dispatch('getBanque')
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectu� !',
+            type: "success"
+        })
+    }).catch(error => console.log(error))
+}
+// supprimer type facture
+export function supprimerAgence({ commit, dispatch }, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_AGENCE', id)
+            dispatch('getAgence')
+            dispatch('getBanque')
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/agence/' + id).then(() => dialog.close())
+        })
+
+}

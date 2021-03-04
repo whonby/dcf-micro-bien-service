@@ -3,82 +3,38 @@
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
       <!-- administratifs-->
-      <li class="dropdown" id="excution">
-        <a
-          title="Execution marchés-contrat"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#excution"
-          class="dropdown-toggle"
-        >
-          <span class="text">EXECUTION DES MARCHES ET CONTRATS
-               </span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <router-link :to="{name: 'SecteurActivite'}" tag="a">
-              <i class="icon-user"></i>
-            Secteur d'activité
-            </router-link>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'Entreprise'}" tag="a">
-              <i class="icon-check"></i>
-             Entrprise
-            </router-link>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a href="#">
-              <i class="icon-key"></i>Suivi des obligations sociales
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a href="#">
-              <i class="icon-key"></i> Marchés & Contrats
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a href="#">
-              <i class="icon-key"></i> Avenants
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a href="#">
-              <i class="icon-key"></i> suivi du respects des delais contratuels
-            </a>
-          </li>
-          
-          
-        </ul>
-      </li>
+       <li>
+         <router-link :to="{name:'investissement'}" tag="a">
+           PLANIFICATION DES MARCHES
+         </router-link>
+
+       </li>
+   <!-- <li> <router-link :to="{name:'tableauBordInvestissement'}" tag="a">
+    </li> -->
+
       <!--Excution budgetaire-->
       <li class="dropdown" id="plant">
         <a title="Excution budgetaire" href="#" data-toggle="dropdown" data-target="#plant" 
         class="dropdown-toggle">
-          <span class="text">EXECUTION BUDGETAIRE </span>
+          <span class="text">EXECUTION DU MARCHE </span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
           <li class="divider"></li>
           <li>
-            <a href="#">
-              <i class="icon-check"></i>
-            Suivi des engagements
-            </a>
+            <router-link :to="{name:'executionActeEffetInvestissement'}" tag="a">
+              <i class=" icon-cogs"></i>
+            acte effet financier 
+            </router-link>
           </li>
           <li class="divider"></li>
           <li>
-            <a href="#">
-              <i class="icon-key"></i>Suivi des mandats
-            </a>
+            <router-link :to="{name:'marcheEnExecutionPourInvestissement'}" tag="a">
+              <i class=" icon-ok"></i>
+              marché && contrat atribué
+            </router-link>
           </li>
-          <li class="divider"></li>
+          <!-- <li class="divider"></li>
           <li>
             <a href="#">
               <i class="icon-check"></i>
@@ -204,13 +160,13 @@
             <a href="login.html">
               <i class="icon-key"></i>Gestion des mandats-provision
             </a>
-          </li>
+          </li> -->
 
         </ul>
       </li>
       <!-- document
       -->
-       <li class="dropdown" id="mission">
+       <!-- <li class="dropdown" id="mission">
         <a
           title="Suivi des missions"
           href="#"
@@ -221,43 +177,43 @@
           <span class="text">SUIVI DES MISSIONS </span>
           <b class="caret"></b>
         </a>
-        <ul class="dropdown-menu">
-          <li class="divider"></li>
+        <ul class="dropdown-menu"> -->
+          <!-- <li class="divider"></li>
           <li>
             <router-link :to ="{name: 'CategorieMission'}" tag="a">
               <i class="icon-key"></i> Catégories de missions
             </router-link>
           
-          </li>
+          </li> -->
 
-            <li class="divider"></li>
+            <!-- <li class="divider"></li>
           <li>
             <router-link :to ="{name: 'NormeMission'}" tag="a">
               <i class="icon-key"></i> Norme de missions
             </router-link>
           
-          </li>
-          <li class="divider"></li>
+          </li> -->
+          <!-- <li class="divider"></li>
             <li> 
               <router-link :to ="{name: 'Imputation'}" tag="a">
                 <i class="icon-user"></i> Imputation budget en mission
               </router-link>
-            </li>
-          <li class="divider"></li>
+            </li> -->
+          <!-- <li class="divider"></li>
           <li>
             <router-link :to ="{name: 'Mission'}" tag="a">
               <i class="icon-check"></i>
              Missions
             </router-link>
-          </li>
-        </ul>
+          </li> -->
+        <!-- </ul>
       </li>
-     
+      -->
      
       
       <!-- Activite
       -->
-     <li class="dropdown" id="tableau">
+     <!-- <li class="dropdown" id="tableau">
         <a
           title="Suivi des immobilisations"
           href="#"
@@ -266,7 +222,7 @@
           class="dropdown-toggle"
         >
           <span class="text">SUIVI DES IMMOBILISATIONS </span>
-          <!-- <span  class="badge badge-important">{{nombreDemandeEquipement}}</span>  -->
+          <span  class="badge badge-important">{{nombreDemandeEquipement}}</span> 
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
@@ -353,15 +309,15 @@
               <span class="text">Acteur équipé</span>
             </router-link>
           </li>
-     <!-- <li>
+     <li>
             <router-link :to="{name:'listeImmobilisationParUa'}" tag="a" title>
               <i class="icon-search"></i>
               <span class="text">Recherche Immobilisation</span>
             </router-link>
-          </li> -->
+          </li>
         </ul>
-      </li>
-      <li>
+      </li> -->
+      <!-- <li>
         <router-link
               :to="{name:'TableauBordImmo'}"
               tag="a"
@@ -371,7 +327,7 @@
           
         </router-link>
       
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>

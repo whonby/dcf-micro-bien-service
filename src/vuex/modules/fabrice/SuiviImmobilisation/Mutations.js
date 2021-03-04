@@ -10,6 +10,7 @@ const AJOUTER_NORME_EQUIPEMENTS = (state, nouveau_normeArt) => {
   state.normeEquipements.unshift(nouveau_normeArt);
 };
 
+
 // modifier NORME_EQUIPEMENTS
 const MODIFIER_NORME_EQUIPEMENTS = (state, objetModifie) => {
   state.normeEquipements = state.normeEquipements.map(norme => {
@@ -51,6 +52,7 @@ const MODIFIER_FAMILLE = (state, objetModifie) => {
     return famille;
   });
 };
+
 
 // supprimer FAMILLE
 const SUPPRIMER_FAMILLE = (state, id) => {
@@ -179,6 +181,23 @@ const MODIFIER_BESOIN_IMMO = (state, objetModifie) => {
   });
 };
 
+
+
+// supprimer FAMILLE
+const SUPPRIMER_BESOIN_IMMO = (state, id) => {
+  state.besoinImmobilisations = state.besoinImmobilisations.filter(
+    besoin_immo => besoin_immo.id != id
+  );
+};
+
+
+
+
+
+
+
+
+
 //modifier QUANTITE REEL
 const MODIFIER_QUANTITE_REEL = (state, objet) => {
   state.besoinImmobilisations = state.besoinImmobilisations.map(besoin_immo => {
@@ -191,6 +210,18 @@ const MODIFIER_QUANTITE_REEL = (state, objet) => {
     return besoin_immo;
   });
 };
+
+
+
+
+
+
+
+
+
+
+
+
 
 const MODIFIER_QUANTITE_EN_STOCK = (state, objet) => {
   state.besoinImmobilisations = state.besoinImmobilisations.map(STOCK => {
@@ -248,13 +279,16 @@ const MODIFIER_MONTANT_ACTUEL = (state, objet) => {
 const MODIFIER_QTE_REALISE_BESOIN = (state, objet) => {
   state.besoinImmobilisations = state.besoinImmobilisations.map(besoinRealise => {
     if (besoinRealise.id == objet.id) {
-      // besoin_immo.montant_total = objet.qte_actu;
+      besoinRealise.quantite = objet.qte_actu;
       besoinRealise.qterealise = objet.qte_real;
+      besoinRealise.totalrealise = objet.total_qte_real;
+      besoinRealise.montant_total = objet.montant_actu
     }
 
     return besoinRealise;
   });
 };
+
 // const MODIFIER_ACT_PERSONNEL = (state, objet) => {
 //   state.acte_personnels = state.acte_personnels.map(acte_personnel => {
 //     if (acte_personnel.id == objet.id) {
@@ -266,12 +300,6 @@ const MODIFIER_QTE_REALISE_BESOIN = (state, objet) => {
 
 
 
-// supprimer FAMILLE
-const SUPPRIMER_BESOIN_IMMO = (state, id) => {
-  state.besoinImmobilisations = state.besoinImmobilisations.filter(
-    besoin_immo => besoin_immo.id != id
-  );
-};
 
 /*fin mutation BESOIN_IMMO */
 
@@ -366,15 +394,24 @@ const SUPPRIMER_STOCKAGE = (state, id) => {
 
 
 
+//modifier QUANTITE REEL
+const MODIFIER_NORME_REALISE = (state, objet) => {
+  state.normeEquipements = state.normeEquipements.map(norme_real => {
+    if (norme_real.id == objet.id) {
+      norme_real.normedmd = objet.qtedmd;
 
+      // besoin_immo.montant_total = objet.montant_actu;
+    }
 
-
-
+    return norme_real;
+  });
+};
 
 
 
 
 export {
+  MODIFIER_NORME_REALISE,
   MODIFIER_QUANTITE_EN_STOCK_NORME,
   MODIFIER_QUANTITE_EN_STOCK2,
   MODIFIER_QUANTITE_EN_STOCK,

@@ -1,7 +1,7 @@
 const titres = state => state.titres.sort((a,b)=>(a.code>b.code)? 1:-1)
 
 const exercices_budgetaires = state => state.exercices_budgetaires.sort((a,b)=>(a.annee>b.annee)? 1:-1)
-
+const taux = state => state.taux.sort((a, b) => (a.libelle > b.libelle) ? 1 : -1)
 const natures_sections = state => state.natures_sections.sort((a,b)=>(a.code>b.code)? 1:-1)
 const sections = state => state.sections.sort((a,b)=>(a.code>b.code)? 1:-1)
 const structures_programmes = state=>state.structures_programmes.sort((a,b)=>(a.niveau>b.niveau)? 1:-1)
@@ -27,13 +27,29 @@ const type_Unite_admins = state => state.type_Unite_admins
 // )
 
 // }
-
+export const afficheNiveauPlanProg = state =>
+    state.plans_programmes.filter(
+        affichenaturedep => affichenaturedep.code.length ==  5
+           
+        
+        
+    );
 export const afficheNatureTransfert = state =>
     state.grandes_natures.filter(
         affichenaturedep => affichenaturedep.code != 3
     );
+    export const afficheServiceGestionnaireNiveau4 = state =>
+    state.services_gestionnaires.filter(
+        afficheSeviceG => afficheSeviceG.code.length == 7
+    );
+    export const afficheLocalisationGeoNiveau5 = state =>
+             state.localisations_geographiques.filter(
+               afficheSeviceG =>
+                     afficheSeviceG.code.length == 6
+             );
 
 export {
+    taux,
     titres,
     exercices_budgetaires,
     natures_sections,

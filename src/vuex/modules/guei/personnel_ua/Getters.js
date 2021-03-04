@@ -83,7 +83,24 @@ export const personnaFonction = (state, getters, rootState, rootGetters) =>
     });
 
 
+    export const personnaMission = (state, getters, rootState, rootGetters) =>
+    state.acteur_depenses.map(element => {
+        if (element.mission_id !== null ) {
+            element = {
+                ...element,
+               
+                varMission: rootGetters['suivi_controle_budgetaire/missions'].find(
+                    act => act.id === element.mission_id
+                ),
+              
+            };
+        }
 
+        return element;
+    });
+
+
+    
 
 
 

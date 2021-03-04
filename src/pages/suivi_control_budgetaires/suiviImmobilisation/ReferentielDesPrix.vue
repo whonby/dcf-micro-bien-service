@@ -466,7 +466,23 @@ export default {
     },
     // fonction pour vider l'input ajouter
     ajouterFamilleLocal() {
-      var nouvelObjet = {
+      if (this.formData.equipement_id == ""){
+        alert("veuillez Selectionner le type d'equipement")
+     
+      }
+      else if (this.formData.famille_id =="" ) {
+alert("veuillez Selectionner la famille")
+      }
+      else if (this.formData.libelle =="" ) {
+alert("veuillez remplir la designation")
+      }
+       else if (this.formData.prix_ht =="" ) {
+alert("veuillez remplir le prix Unitaire")
+      }
+     
+      else
+      {
+        var nouvelObjet = {
         ...this.formData,
         montant_ttc: this.montantTtc,
         tva: this.montantTva,
@@ -483,6 +499,8 @@ export default {
         tva:"",
         montant_ttc:""
       };
+      }
+      
     },
     // afficher modal de modification
     afficherModalModifierFamille(articles) {
@@ -495,7 +513,23 @@ export default {
     },
     // fonction pour vider l'input modification
     modifierFamilleLocal() {
-      var nouvelObjet1 = {
+         if (this.editReferentielPrix.equipement_id == ""){
+        alert("veuillez Selectionner le type d'equipement")
+     
+      }
+      else if (this.editReferentielPrix.famille_id =="" ) {
+alert("veuillez Selectionner la famille")
+      }
+      else if (this.editReferentielPrix.libelle =="" ) {
+alert("veuillez remplir la designation")
+      }
+       else if (this.editReferentielPrix.prix_ht =="" ) {
+alert("veuillez remplir le prix Unitaire")
+      }
+     
+      else
+      {
+        var nouvelObjet1 = {
         ...this.editReferentielPrix,
         montant_ttc: this.editmontantTtc,
         tva: this.editmontantTva,
@@ -503,6 +537,8 @@ export default {
       };
       this.modifierArticles(nouvelObjet1);
       this.$("#modificationModal").modal('hide');
+      }
+      
     },
     alert() {
       console.log("ok");

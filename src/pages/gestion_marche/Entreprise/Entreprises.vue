@@ -9,8 +9,8 @@
                 <div class="widget-title">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#tab1">LISTE DE TOUTE LES ENTREPRISES</a></li>
-                        <li><a data-toggle="tab" href="#tab2">ENTREPRISE NON SANCTIONNER</a></li>
-                        <li><a data-toggle="tab" href="#tab3">ENTREPRISE SANCTIONNER</a></li>
+                        <li><a data-toggle="tab" href="#tab2">ENTREPRISE NON SANCTIONNEE</a></li>
+                        <li><a data-toggle="tab" href="#tab3">ENTREPRISE SANCTIONNEE</a></li>
                     </ul>
                 </div>
                 <div class="widget-content tab-content">
@@ -30,6 +30,7 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
+                                                <th>IDU</th>
                                                 <th>Raison social </th>
                                                 <th>Compte contribuable</th>
                                                 <th>Registe commerce </th>
@@ -38,23 +39,29 @@
                                                 <th>Ville</th>
                                                 <th>Email </th>
                                                 <th>Telephone</th>
-                                                <th>Banque</th>
+                                                <!-- <th>Banque</th> -->
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr class="odd gradeX" v-for="item in titreFiltres" :key="item.id">
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_idu || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.raison_sociale || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_cc || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_rc || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.secteur_activite.libelle || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.pays || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.ville || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{getSecteurActivite(item.secteur_activite_id) || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{getPays(item.pays )|| 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{getVille(item.ville) || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.email || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.telephone || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.banque || 'Non renseigné'}}</td>
+                                                <!-- <td @dblclick="afficherModalModifierTitre(item.id)">{{item.banque || 'Non renseigné'}}</td> -->
                                                 <td>
                                                     <div class="btn-group">
+
+                                   <router-link :to="{ name: 'DetaillEntreprise', params: { id: item.id }}" 
+                                    class="btn btn-default " title="Detail entreprise ">
+                                   <span class=""><i class="icon-folder-open"></i></span>
+                                         </router-link> 
                                                         <a href="#myModal2" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-lock"></i></a>
                                                         <button @click.prevent="supprimerEntreprise(item.id)"  class="btn btn-danger ">
                                                             <span class=""><i class="icon-trash"></i></span></button>
@@ -88,6 +95,7 @@
                                     <div class="widget-content nopadding"><table class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
+                                            <th>IDU</th>
                                             <th>Raison social </th>
                                             <th>Compte contribuable</th>
                                             <th>Registe commerce </th>
@@ -96,21 +104,22 @@
                                             <th>Ville</th>
                                             <th>Email </th>
                                             <th>Telephone</th>
-                                            <th>Banque</th>
+                                            <!-- <th>Banque</th> -->
                                             <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr class="odd gradeX" v-for="item in nonSanctionner" :key="item.id">
+                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_idu || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.raison_sociale || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_cc || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_rc || 'Non renseigné'}}</td>
-                                            <td @dblclick="afficherModalModifierTitre(item.id)">{{item.secteur_activite.libelle || 'Non renseigné'}}</td>
-                                            <td @dblclick="afficherModalModifierTitre(item.id)">{{item.pays || 'Non renseigné'}}</td>
-                                            <td @dblclick="afficherModalModifierTitre(item.id)">{{item.ville || 'Non renseigné'}}</td>
+                                            <td @dblclick="afficherModalModifierTitre(item.id)">{{getSecteurActivite(item.secteur_activite_id) || 'Non renseigné'}}</td>
+                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{getPays(item.pays )|| 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{getVille(item.ville) || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.email || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.telephone || 'Non renseigné'}}</td>
-                                            <td @dblclick="afficherModalModifierTitre(item.id)">{{item.banque || 'Non renseigné'}}</td>
+                                            <!-- <td @dblclick="afficherModalModifierTitre(item.id)">{{item.banque || 'Non renseigné'}}</td> -->
                                             <td>
                                                 <div class="btn-group">showEntreprise
                                                     <a href="#myModal2" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-lock"></i></a>
@@ -146,7 +155,8 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
-                                                <th>Raison social </th>
+                                                <th>IDU</th>
+                                                <th>Raison sociale </th>
                                                 <th>Compte contribuable</th>
                                                 <th>Registe commerce </th>
                                                 <th>Secteur activite</th>
@@ -154,21 +164,22 @@
                                                 <th>Ville</th>
                                                 <th>Email </th>
                                                 <th>Telephone</th>
-                                                <th>Banque</th>
+                                                <!-- <th>Banque</th> -->
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr class="odd gradeX" v-for="item in sanctionner" :key="item.id">
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_idu || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.raison_sociale || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_cc || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_rc || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.secteur_activite.libelle || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.pays || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.ville || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{getSecteurActivite(item.secteur_activite_id) || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{getPays(item.pays )|| 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{getVille(item.ville) || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.email || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.telephone || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.banque || 'Non renseigné'}}</td>
+                                                <!-- <td @dblclick="afficherModalModifierTitre(item.id)">{{item.banque || 'Non renseigné'}}</td> -->
                                                 <td>
                                                     <div class="btn-group">
                                                         <button @click.prevent="supprimerEntreprise(item.id)"  class="btn btn-danger ">
@@ -221,6 +232,15 @@
                             <input type="date"  placeholder="Date fin sanction" v-model="sanction.fin_sanction">
                         </div>
                     </div>
+                     
+                      <div class="control-group">
+                        <label class="control-label">Motif de sanction:</label>
+                        <div class="controls">
+                        <textarea   placeholder="Saisir le motif" v-model="sanction.motif" class="span2.5"></textarea>
+                        </div>
+                    </div>
+
+
                     <div class="control-group">
                         <label class="control-label">Degré sanction</label>
                         <div class="controls">
@@ -270,6 +290,7 @@
                     entreprise_id: "",
                     debut_sanction: "",
                     fin_sanction:"",
+                    motif:""
                 },
                 entrepriseSetect:''
 
@@ -285,6 +306,7 @@ this.getEntreprise()
         computed: {
 // methode pour maper notre guetter
             ...mapGetters('gestionMarche', ['entreprises',"secteur_activites"]),
+            ...mapGetters("bienService", ['villes','pays']),
             titreFiltres() {
 
                 const searchTerm = this.search.toLowerCase();
@@ -293,8 +315,7 @@ this.getEntreprise()
                       return item.raison_sociale.toLowerCase().includes(searchTerm)
                             || item.numero_rc.toLowerCase().includes(searchTerm)
                             || item.numero_cc.toLowerCase().includes(searchTerm)
-                            || item.ville.toLowerCase().includes(searchTerm)
-                            || item.pays.toLowerCase().includes(searchTerm)
+                            
                             || item.telephone.toLowerCase().includes(searchTerm)
                             || item.email.toLowerCase().includes(searchTerm)
                             || item.banque.toLowerCase().includes(searchTerm)
@@ -311,8 +332,7 @@ this.getEntreprise()
                         return item.raison_sociale.toLowerCase().includes(searchTerm)
                             || item.numero_rc.toLowerCase().includes(searchTerm)
                             || item.numero_cc.toLowerCase().includes(searchTerm)
-                            || item.ville.toLowerCase().includes(searchTerm)
-                            || item.pays.toLowerCase().includes(searchTerm)
+                           
                             || item.telephone.toLowerCase().includes(searchTerm)
                             || item.email.toLowerCase().includes(searchTerm)
                             || item.banque.toLowerCase().includes(searchTerm)
@@ -329,8 +349,7 @@ this.getEntreprise()
                         return item.raison_sociale.toLowerCase().includes(searchTerm)
                             || item.numero_rc.toLowerCase().includes(searchTerm)
                             || item.numero_cc.toLowerCase().includes(searchTerm)
-                            || item.ville.toLowerCase().includes(searchTerm)
-                            || item.pays.toLowerCase().includes(searchTerm)
+                           
                             || item.telephone.toLowerCase().includes(searchTerm)
                             || item.email.toLowerCase().includes(searchTerm)
                             || item.banque.toLowerCase().includes(searchTerm)
@@ -339,7 +358,43 @@ this.getEntreprise()
                     }
                 )
 
-            }
+            },
+             getSecteurActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.secteur_activites.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     getPays() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.pays.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     getVille() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.villes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
         },
         methods: {
             // methode pour notre action
@@ -357,6 +412,8 @@ this.getEntreprise()
 
                 this.$router.push({ name: 'EditeEntreprise', params: { id: index } })
             },
+
+            
             modifier(){
                 this.modifierEntreprise(this.editTitre)
                 //this.getFonctions()
@@ -392,6 +449,7 @@ this.getEntreprise()
                 formData.append('entreprise_id', this.entrepriseSetect.id);
                 formData.append('debut_sanction', this.sanction.debut_sanction);
                 formData.append('fin_sanction', this.sanction.fin_sanction);
+                formData.append('motif', this.sanction.motif);
 
                 let config = {
                     header : {
@@ -403,6 +461,7 @@ this.getEntreprise()
                     entreprise_id: "",
                         debut_sanction: "",
                         fin_sanction:"",
+                        motif:""
                 }
                 this.getEntreprise()
 
