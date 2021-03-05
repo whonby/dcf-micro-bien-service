@@ -170,7 +170,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">beneficiaire</label>
+                <label class="control-label">bénéficiaire</label>
                 <div class="controls">
                   <input
                     type="number"
@@ -186,7 +186,7 @@
            <tr>
          <td>
               <div class="control-group">
-                <label class="control-label">quantite</label>
+                <label class="control-label">quantité</label>
                 <div class="controls">
                   <input
                     type="number"

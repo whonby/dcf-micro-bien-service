@@ -247,7 +247,7 @@
           <tr>
              <td>
               <div class="control-group">
-                <label class="control-label">Dotation Budgetaire</label>
+                <label class="control-label">Dotation Budgétaire</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -439,7 +439,7 @@
                    {{acteDepense.matricule || 'Non renseigné'}}</td>
                      <div class="btn-group">
               <button @click.prevent="supprimerActeDepense(acteDepense.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
              
             </div>
 

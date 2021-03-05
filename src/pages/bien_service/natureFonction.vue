@@ -118,7 +118,7 @@
               </span>
               <h5>Liste fonction nature</h5>
               <div align="right">
-                Search:
+                Recherche:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>

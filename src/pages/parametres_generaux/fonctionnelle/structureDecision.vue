@@ -73,7 +73,7 @@
 
               <div class="btn-group">
               <button @click.prevent="supprimerStructureDecision(structure_fonctionnelle.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
+                <span class=""><i class="icon-trash"></i> Supprimer </span></button>
              
             </div>
 
@@ -167,7 +167,7 @@
             <tr>
               <td>
                 <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="editFonctionnelle.libelle" class="span5" placeholder="" />
               </div>

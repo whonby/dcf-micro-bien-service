@@ -29,7 +29,7 @@
                 <tr>
                   <td>
                      <div class="control-group">
-                                                    <label class="control-label">Exercice budgetaire:</label>
+                                                    <label class="control-label">Exercice budgétaire:</label>
                                                     <div class="controls">
                                                        
                                                       <select v-model="exo_id" class="span" >
@@ -107,7 +107,7 @@
                   </td>
                   <td>
                       <div class="control-group">
-                        <label class="control-label">Activite</label>
+                        <label class="control-label">Activité</label>
                                                     
                                                     <div class="controls">
                                                         <select v-model="Activite_id" class="span" >

@@ -14,7 +14,7 @@
                     <td>
                       <button class="btn btn-danger" @click.prevent="$emit('suppression', article.id)">
                         <span>
-                          <i class="icon icon-trash"> Supprimer</i>
+                          <i class="icon icon-trash"> </i>Supprimer
                         </span>
                       </button>
                     </td>

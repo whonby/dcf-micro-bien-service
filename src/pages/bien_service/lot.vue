@@ -127,7 +127,7 @@
               </span>
               <h5>Liste des Lots</h5>
               <div align="right">
-                Search:
+                Recherche:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>

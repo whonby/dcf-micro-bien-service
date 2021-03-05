@@ -86,7 +86,7 @@
                        </td>
                         <td colspan="">
                         <div class="control-group">
-                            <label class="control-label">Nom et prenoms cf</label>
+                            <label class="control-label">Nom et prénoms cf</label>
                             <div class="controls">
                               <input type="text" class="span4"   readonly/>
                             </div>
@@ -147,12 +147,12 @@
                   <tr>
                     <th>N°demande Engagement</th>
                     <th>N° de Liquidation</th>
-                    <th>Object de la depense</th>
+                    <th>Objet de la depense</th>
                     <th>Montant autorisé</th>
                     <!-- <th>Cumul des Engagements</th> -->
                       <th>Montant Liquide</th>
                       
-                       <th>Decision</th>
+                       <th>Décision</th>
                       <!-- <th>Voir Détail</th> -->
                          <th>Action</th>
                   </tr>
