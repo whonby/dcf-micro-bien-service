@@ -131,8 +131,25 @@ import AutresDepense from "../../pages/bien_service/AutreDepense/AutresDepense.v
 import FicheRealiteServiceFait1 from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/RealiteServiceFait/FicheRealiteServiceFait.vue"
 import FicheDeControle1 from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/RealiteServiceFait/FicheDeControle.vue"
 import AjouterLettreAvance from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLettreAvance.vue"
-
+import ListeDesOrdresPaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ListeDesOrdresPaiement.vue"
+import AjoutOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiement.vue"
+import AjouterOrdrePaiementAnnulation from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementAnnulation.vue"
 const BienServiceRoutes = [
+    {
+        path: "/AjouterOrdrePaiementAnnulation/:id",
+        name: "AjouterOrdrePaiementAnnulation",
+        component: AjouterOrdrePaiementAnnulation
+    },
+    {
+        path: "/AjoutOrdrePaiement",
+        name: "AjoutOrdrePaiement",
+        component: AjoutOrdrePaiement
+    },
+    {
+        path: "/ListeDesOrdresPaiement",
+        name: "ListeDesOrdresPaiement",
+        component: ListeDesOrdresPaiement
+    },
     {
         path: "/AjouterLettreAvance",
         name: "AjouterLettreAvance",

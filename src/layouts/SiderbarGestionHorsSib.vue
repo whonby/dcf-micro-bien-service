@@ -107,7 +107,14 @@
            
           </a>
         </li>
-
+<li>
+              <router-link :to="{ name: 'ListeDesOrdresPaiement'}" tag="a"  >
+         
+            <i class="icon-arrow-left"></i>
+            <span>ORDRE DE PAIEMENT</span>
+           
+          </router-link>
+          </li>
           <li @click.prevent="navigateToImage" :class="{active: active_el ==75}">
               <a title="GESTION DES IMAGES" href="#">
                   <i class="icon-truck"></i>

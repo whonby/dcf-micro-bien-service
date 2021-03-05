@@ -116,6 +116,8 @@ const defaultState = {
     MandatOp:[],
     facturePiece:[],
     AutreDepense:[],
+    gestionOrdrePaiement:[],
+    gestionOrdrePaiementAnnulation:[]
 
 }
 

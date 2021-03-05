@@ -5528,3 +5528,148 @@ export function supprimerDossierAutreDepense({ commit }, id) {
           axios.delete("/AutreDepense/" + id).then(() => dialog.close());
       });
 }
+
+
+
+
+
+
+
+
+
+
+
+export function getGestionOrdrePaiement({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/GestionOrdrePaiement")
+          .then(response => {
+              commit("GET_ALL_GESTION_ORDRE_PAIEMENT", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterGestionOrdrePaiement({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/GestionOrdrePaiement", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_GESTION_ORDRE_PAIEMENT", response.data);
+             
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "ce Numero existe déja",
+            type:"error"
+        });
+    })
+}
+
+
+export function modifierGestionOrdrePaiement({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/GestionOrdrePaiement/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_GESTION_ORDRE_PAIEMENT", response.data);
+          
+
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerGestionOrdrePaiement({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_GESTION_ORDRE_PAIEMENT", id);
+        
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/GestionOrdrePaiement/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+
+
+
+
+
+
+
+export function getGestionOrdrePaiementAnnulat({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/GestionOrdrePaiementAnnulation")
+          .then(response => {
+              commit("GET_ALL_GESTION_ORDRE_PAIEMENT_ANNULATION", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterGestionOrdrePaiementAnnulat({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/GestionOrdrePaiementAnnulation", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_GESTION_ORDRE_PAIEMENT_ANNULATION", response.data);
+             
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "ce Numero existe déja",
+            type:"error"
+        });
+    })
+}
+
+
+export function modifierGestionOrdrePaiementAnnulat({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/GestionOrdrePaiementAnnulation/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_GESTION_ORDRE_PAIEMENT_ANNULATION", response.data);
+          
+
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerGestionOrdrePaiementAnnulat({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_GESTION_ORDRE_PAIEMENT_ANNULATION", id);
+        
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/GestionOrdrePaiementAnnulation/" + id).then(() => dialog.close());
+      });
+}

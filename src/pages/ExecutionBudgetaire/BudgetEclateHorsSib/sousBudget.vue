@@ -131,7 +131,7 @@
                   <input
                     type="text"
                     style="border:1px solid #000"
-                  v-model="formData.code"
+                  v-model="formData1.code"
                     class="span"
                      
                   />
@@ -146,7 +146,7 @@
                   <input
                     type="text"
                     style="border:1px solid #000"
-                  v-model="formData.activite_enfant"
+                  v-model="formData1.activite_enfant"
                     class="span"
                      
                   />
@@ -158,7 +158,7 @@
                        <div class="control-group">
                 <label class="control-label">Montant Attribué</label>
                 <div class="controls">
-                   <money v-model="formData.montant_budgetaire" :readOnly="griserMontant"   style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                   <money v-model="formData1.montant_budgetaire" :readOnly="griserMontant"   style="text-align:left;color:red;font-size:16px"  class="span"></money>
                  <code style="color:red;font-size:12px" v-if="dotationTotal==0">Montant de la Ligne Budgetaire est Saturé</code>
                 </div>
               </div>
@@ -173,7 +173,7 @@
                     <div class="controls">
                       <div data-toggle="buttons-checkbox" class="btn-group">
                         <a
-                        v-show="dotationTotal!=0"
+                       
                           class="btn btn-primary"
                           @click.prevent="ajouterTypeTexteLocal"
                         >Valider</a>
@@ -295,6 +295,9 @@ components: {
                 formData2:{
                  
                 },
+                formData1:{
+                 
+                },
                 message_mandater:""
             };
         },
@@ -381,7 +384,7 @@ LibelleUniteAdministrative() {
   return this.dotationTotal==0
 },
       dotationTotal(){
-return (parseFloat(this.RecuppererLaDotation(this.formData.ligneeconomique_id))-parseFloat(this.DotationRestantCumul(this.formData.unite_administrative_id,this.formData.ligneeconomique_id))-parseFloat(this.formData.montant_budgetaire))
+return (parseFloat(this.RecuppererLaDotation(this.formData.ligneeconomique_id))-parseFloat(this.DotationRestantCumul(this.formData.unite_administrative_id,this.formData.ligneeconomique_id))-parseFloat(this.formData1.montant_budgetaire))
 },
        DotationRestantCumul() {
       return (id,id1) => {
@@ -522,19 +525,19 @@ methods: {
       ...mapActions('personnelUA', ["ajouterFichierJointDmd"]),
 formatageSomme:formatageSomme,
 ajouterTypeTexteLocal() {
-    this.intitule=this.CodeActivite(this.formData.activite_parent_id) + "" + this.formData.code
+    this.intitule=this.CodeActivite(this.formData.activite_parent_id) + "" + this.formData1.code
     var nouvell={
         execice:this.anneeAmort,
         activite_parent_id:this.formData.activite_parent_id,
         ligneeconomique_id:this.formData.ligneeconomique_id,
         code:this.intitule,
-        activite_enfant:this.formData.activite_enfant,
-        montant_budgetaire:this.formData.montant_budgetaire,
+        activite_enfant:this.formData1.activite_enfant,
+        montant_budgetaire:this.formData1.montant_budgetaire,
         unite_administrative_id:this.formData.unite_administrative_id
     }
       this.ajouterSousBudget(nouvell);
 
-      this.formData = {
+      this.formData1 = {
        
         activite_enfant:"",
         montant_budgetaire:0,
