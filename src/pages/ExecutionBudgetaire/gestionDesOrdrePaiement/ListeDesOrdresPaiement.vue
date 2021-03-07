@@ -17,12 +17,30 @@
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
-            <td>
+            
+          <table class="table table-bordered table-striped">
+            <td style="width:78%">
 <div  align="right" style="cursor:pointer;">
     <button class="btn btn-success" @click.prevent="ajouterOpSysteme"><i class="icon icon-folder-open"> Nouveau Ordre de Paiement</i></button>
     
         </div> 
+       
+          </td>
+           <td style="width:0px">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="ajouterOpAnnulation"><i class="icon icon-folder-open"> Annulation Op Provisoire</i></button>
+    
+        </div> 
+       
           </td> 
+           <td style="width:0px">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="ajouterOpSysteme"><i class="icon icon-folder-open"> Op Definitive</i></button>
+    
+        </div> 
+       
+          </td> 
+            </table>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -49,8 +67,9 @@
                      <!-- <th   style="font-size:14px;font-weight:bold">Montant Autorisé</th> -->
                     <th   style="font-size:14px;font-weight:bold">Engagement actuel</th>
                               
-                    <th   style="font-size:14px;font-weight:bold">Décision Cf </th> 
+                    <th   style="font-size:14px;font-weight:bold">Décision OP</th> 
                      <th   style="font-size:14px;font-weight:bold">OP Annulation</th>
+                     <th   style="font-size:14px;font-weight:bold">OP Definitive</th>
                   <!-- <th>Montant Disponible</th> -->
                   </tr>
                 </thead>
@@ -118,7 +137,90 @@
                     
                       </button>
                     </td>
-                     <td  v-if="type.type_ordre_paiement==2" >
+                     <!-- <td  v-if="type.type_ordre_paiement==2 && type.decision_cf == 8 || type.type_ordre_paiement==2 && type.decision_cf == 9" > -->
+                        <!-- <button v-if="afficheDecisionOpAnuulation(type.id) == 8"  class="btn  btn-success"  @click="ModalOpAnnulation(type.id)">                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 2" class="btn  btn-warning" @click="ModalOpAnnulation(type.id)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="afficheDecisionOpAnuulation(type.id) == 3" class="btn  btn-danger" @click="ModalOpAnnulation(type.id)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 9"  class="btn  btn-success" @click="ModalOpAnnulation(type.id)" >                        
+                     
+                      <span>Visé avec observation</span>
+                      
+                      </button>
+                      <template>
+                        <button v-if="type.id == afficheDecisionLiquidation(type.id) && afficheDecisionOpAnuulation(type.id) == 0" class="btn  btn-info" @click="ModalOpAnnulation(type.id)" >                        
+                     
+                      
+                       <span>Attente</span>
+                      
+                    
+                      </button> -->
+                  <td v-if="type.type_ordre_paiement==2 && type.decision_cf == 8 && afficheDecisionOpAnuulation1(type.id) == '' || type.type_ordre_paiement==2 && type.decision_cf == 9 && afficheDecisionOpAnuulation1(type.id) == ''" >
+                      
+                       <router-link :to="{ name: 'AjouterOrdrePaiementAnnulation', params: { id: type.id }}"
+                class ="btn  btn-danger" title="" >
+                  <button    class ="btn  btn-danger"  >                        
+                     
+                      
+                       <span>Ajouter Op Annulation</span>
+                      
+                    
+                      </button>
+                   </router-link> 
+                     
+                     
+                      
+                    </td>
+                    <td v-else-if="type.type_ordre_paiement==2 && afficheDecisionOpAnuulation1(type.id) != '' ">
+<button v-if="afficheDecisionOpAnuulation(type.id) == 8"  class="btn  btn-success"  @click="ModalOpAnnulation(type.id)">                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 2" class="btn  btn-warning" @click="ModalOpAnnulation(type.id)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="afficheDecisionOpAnuulation(type.id) == 3" class="btn  btn-danger" @click="ModalOpAnnulation(type.id)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 9"  class="btn  btn-success" @click="ModalOpAnnulation(type.id)" >                        
+                     
+                      <span>Visé avec observation</span>
+                      
+                      </button>
+                      <button v-if=" afficheDecisionOpAnuulation(type.id) == 0" class="btn  btn-info" @click="ModalOpAnnulation(type.id)" >                        
+                     
+                      
+                       <span>Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                    <td v-else style="background-color:lightblue"></td>
+                      <!-- <td  v-if="type.type_ordre_paiement==2 && afficheDecisionOpAnuulation(type.id) == 8 || type.type_ordre_paiement==2 && afficheDecisionOpAnuulation(type.id) == 9" >
                         <button v-if="afficheDecisionOpProvisoir(type.id) == 8"  class="btn  btn-success"  >                        
                      
                       <span    >Visé</span>
@@ -144,28 +246,26 @@
                       
                       </button>
                       <template>
-                        <button v-if="type.id == afficheDecisionLiquidation(type.id) && afficheDecisionOpProvisoir(type.id) == 0" class="btn  btn-info" @click="afficheDecisionCf(type.id)" >                        
+                        <button v-if=" afficheDecisionOpAnuulation(type.id) != 0" class="btn  btn-info" @click="afficheDecisionCf(type.id)" >                        
                      
                       
                        <span>Attente</span>
                       
                     
-                      </button>
-                       <router-link :to="{ name: 'AjouterOrdrePaiementAnnulation', params: { id: type.id }}"
-                class ="btn  btn-danger" title="" v-else-if="type.id != afficheDecisionLiquidation(type.id)">
-                  <button      >                        
+                      </button> -->
+                      <td v-if="type.type_ordre_paiement==2 && type.decision_cf == 8 || type.type_ordre_paiement==2 && type.decision_cf == 9">
+                       <router-link :to="{ name: 'AjouterOrdrePaiementDefinitive', params: { id: type.id }}"
+                class ="btn  btn-danger" title="" >
+                  <button    class ="btn  btn-danger"  >                        
                      
                       
-                       <span>Ajouter</span>
+                       <span>Ajouter op definitif</span>
                       
                     
                       </button>
                    </router-link> 
                      
-                      <span  v-else >                        
                      
-                      </span>
-                      </template>
                     </td>
                     <td v-else style="background-color:lightblue"></td>
                   </tr>
@@ -209,7 +309,7 @@
             </td>
               <td>
                     <div class="control-group">
-                            <label class="control-label">Famille de Motif </label>
+                            <label class="control-label">Famille de Motif {{editMandat.id}}</label>
                             <div class="controls">
                                <select v-model="editMandat.famille_motif" class="span5">
                                  <option value=""></option>
@@ -290,6 +390,120 @@
       </div>
     </div>
     
+
+
+
+
+
+
+
+    <div id="decisionAnnulation" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Decision CF</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                            <label class="control-label">Décision CF </label>
+                            <div class="controls">
+                              <select v-model="EditAnulation.decision_cf_op_annul" class="span5">
+                                <option value=""></option>
+                              <option value="8">Visé</option>
+                              <option value="9">Visé avec Observation</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
+                            <option value="0">Attente</option>
+    
+    </select>
+                           
+                            </div>
+                          </div>
+            </td>
+              <td>
+                    <div class="control-group">
+                            <label class="control-label">Famille de Motif </label>
+                            <div class="controls">
+                               <select v-model="EditAnulation.famille_motif_id_op_annul" class="span5">
+                                 <option value="0"></option>
+                                <option v-for="varText in AffichierElementParent" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+                 <td>
+                    <div class="control-group">
+                            <label class="control-label">Motif</label>
+                            <div class="controls">
+                               <select v-model="EditAnulation.motif_op_annul" class="span5">
+                                 <option value="0"></option>
+                                <option v-for="varText in AffichierElementEnfant(EditAnulation.famille_motif_id_op_annul)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+          </tr>
+               <tr>
+                  <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Autres Motif</label>
+                            <div class="controls">
+                              <textarea  class="span10" row = "6" v-model="EditAnulation.autre_motif_op_annul" :readonly="griserAutreMotif">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                  <td>
+                               <div class="control-group">
+                            <label class="control-label">Date Decision CF :</label>
+                            <div class="controls">
+                              <input type="date" class="span5"  v-model="EditAnulation.date_decision_op_annul"/>
+                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                              
+                            </div>
+                          </div>
+                           </td>
+                 </tr>             
+                   <tr>
+                     <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Observation CF</label>
+                            <div class="controls">
+                              <textarea  class="span10" row = "6" v-model="EditAnulation.observation_op_annul">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                        <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
+                            <div class="controls">
+                              <input type="text" class="span5" :value="recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(recupererIdUa(EditAnulation.id))))"  readonly/>
+                            </div>
+                          </div>
+                       </td>
+                       
+                       </tr>  
+                      
+         
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ModifierOpAnnulation()"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
   </div>
 </template>
   
@@ -322,6 +536,7 @@ export default {
       editMandat: {
         
       },
+      EditAnulation:{},
       search: ""
     };
   },
@@ -351,6 +566,30 @@ export default {
         );
       });
     },
+    afficheDecisionOpAnuulation1() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id_op_provisoire == id);
+
+      if (qtereel) {
+        return qtereel.id_op_provisoire;
+      }
+      return 0
+        }
+      };
+    },
+        afficheDecisionOpAnuulation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id_op_provisoire == id);
+
+      if (qtereel) {
+        return qtereel.decision_cf_op_annul;
+      }
+      return 0
+        }
+      };
+    },
     afficheDecisionOpProvisoir() {
       return id => {
         if (id != null && id != "") {
@@ -370,6 +609,18 @@ export default {
 
       if (qtereel) {
         return qtereel.id_op_provisoire;
+      }
+      return 0
+        }
+      };
+    },
+    afficheDecisionDefinitif() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id_op_provisoire == id);
+
+      if (qtereel) {
+        return qtereel.decision_cf_op_annul;
       }
       return 0
         }
@@ -491,11 +742,47 @@ recupererIdUser() {
         }
       };
     },
+    recupererIdOpAnnulation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id_op_provisoire == id);
+
+      if (qtereel) {
+        return qtereel.id
+      }
+      return 0
+        }
+      };
+    },
+    recupererIdOpProvisoire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id_op_provisoire == id);
+
+      if (qtereel) {
+        return qtereel.id_op_provisoire
+      }
+      return 0
+        }
+      };
+    },
+    recupererIdUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.unite_administrative_id
+      }
+      return 0
+        }
+      };
+    },
   },
   methods: {
     ...mapActions("bienService", [
       "modifierGestionOrdrePaiement",
-     
+     "modifierGestionOrdrePaiementAnnulat"
     ]),
     
     ajouterLiquidation(){
@@ -507,15 +794,43 @@ this.$("#validationOpDefinitif").modal('hide');
       
        
     },
+    ModifierOpAnnulation() {
+      var nouvelObjet={
+        id:this.recupererIdOpAnnulation(this.EditAnulation.id),
+        decision_cf_op_annul:this.EditAnulation.decision_cf_op_annul,
+        famille_motif_id_op_annul:this.EditAnulation.famille_motif_id_op_annul,
+        motif_op_annul:this.EditAnulation.motif_op_annul,
+        date_decision_op_annul:this.EditAnulation.date_decision_op_annul,
+        observation_op_annul:this.EditAnulation.observation_op_annul
+        
+      }
+      this.modifierGestionOrdrePaiementAnnulat(nouvelObjet);
+this.$("#decisionAnnulation").modal('hide');
+      
+       
+    },
+    ModalOpAnnulation(id) {
+      this.$("#decisionAnnulation").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+       this.EditAnulation = this.gettersgestionOrdrePaiement.find(item=>item.id==id);
+    },
     apercuFacture(id) {
       this.$("#validationOpDefinitif").modal({
         backdrop: "static",
         keyboard: false
       });
-       this.editMandat = this.gettersgestionOrdrePaiement.find(item=>item.id=id);
+       this.editMandat = this.gettersgestionOrdrePaiement.find(item=>item.id==id);
     },
     formatageSomme:formatageSomme,
     ajouterOpSysteme(){
+                this.$router.push({ name: 'AjoutOrdrePaiement' })
+            },
+            ajouterOpAnnulation(){
+                this.$router.push({ name: 'AjouterOrdrePaiementAnnulation' })
+            },
+            ajouterOpDeffinitif(){
                 this.$router.push({ name: 'AjoutOrdrePaiement' })
             },
     //afiicher modal ajouter

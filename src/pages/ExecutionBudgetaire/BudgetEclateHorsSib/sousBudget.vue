@@ -52,14 +52,8 @@
               </div>
               
             </td>
-            <td colspan="">
-              
-              
-            </td>
-                     </tr>
-                      <tr>
-                        
-                        <td>
+          
+             <td colspan="2">
                                 <label>Unité Administrative <code style="color:red;font-size:16px">*</code>
                                 </label>
                                 <model-list-select style="border:1px solid #000"
@@ -74,6 +68,10 @@
                                 </model-list-select>
                                  
                             </td>
+                     </tr>
+                      <tr>
+                        
+                       
               <td colspan="">
               <div class="control-group">
                 <label class="control-label">Activité</label>
@@ -90,11 +88,7 @@
               </div>
               
                      </td>
-                        
-          
-                      </tr>
-                      <tr>
-                           <td colspan="">
+                         <td colspan="">
               <div class="control-group">
                 <label class="control-label">Ligne budgetaire</label>
                 <div class="controls">
@@ -119,9 +113,56 @@
                 </div>
               </div>
                   </td>
+          
                       </tr>
+                     
                       
                   </table>
+                  <table class="table table-bordered table-striped">
+                     <tr>
+                       <td>
+                       <div class="control-group">
+                <label class="control-label">Type de Financement  <code style="color:red;font-size:16px">*</code></label>
+                <div class="controls">
+                  <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="types_financements"
+                                                   v-model="formData.type_financement_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                </div>
+              </div>
+              
+                  </td>
+              
+            
+            <td>
+                                <label>Bailleur
+                                </label>
+                                <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="sources_financements"
+                                                   v-model="formData.source_financement_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                            </td>
+           
+                     </tr>
+                   
+                         <br>
+                  
+                   
+                    
+                   </table>
         <table class="table table-bordered table-striped">
             <tr>
         <td colspan="">
@@ -131,9 +172,9 @@
                   <input
                     type="text"
                     style="border:1px solid #000"
-                  v-model="formData1.code"
+                  :value="recupererNumeroOrdre"
                     class="span"
-                     
+                    readonly 
                   />
                 </div>
               </div>
@@ -197,6 +238,8 @@
                     <th>Code</th>
                      <th>Sous Budget</th>
                       <th>Ligne budgetaire</th>
+                      <th>Type financement</th>
+                      <th>Source financement</th>
                        <th>Montant</th>
                         <th>Action</th>
                   </tr>
@@ -218,6 +261,12 @@
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{libelletypes_financements(type.type_financement_id) || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{libellesources_financements(type.source_financement_id) || 'Non renseigné'}}</td>
                     <td style="font-weight:bold;font-size:14px;text-align:center;"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formatageSomme(parseFloat(type.montant_budgetaire)) || 'Non renseigné'}}</td>
@@ -233,11 +282,15 @@
                   <tr>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
                     <td style="font-weight:bold;font-size:14px;text-align:center;">TOTAL SOUS BUDGET PAR LIGNE</td>
                     <td style="text-align:center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(MontantSousBudget(formData.unite_administrative_id,formData.activite_parent_id,formData.ligneeconomique_id)))}}</td>
                     <td></td>
                   </tr>
                   <tr>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td style="font-weight:bold;font-size:14px;text-align:center;">TOTAL INITIAL</td>
@@ -338,7 +391,45 @@ components: {
       "exercices_budgetaires",
       "afficheLocalisationGeoNiveau5"
     ]),
-      ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+      ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
+libelletypes_financements() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.types_financements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+    libellesources_financements() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sources_financements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+      numeroOrdre(){
+        return this.getSousBudget.length
+      },
+
+nombreSousBudgetParUa() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getSousBudget.filter(qtreel => qtreel.unite_administrative_id == id  && qtreel.execice==this.anneeAmort).length + 1;
+
+        }
+      };
+    },
+
+
 MontantSousBudget() {
       return (id,id1,id2) => {
         if (id != null && id != "" && id1 != null && id1 != "" && id2 != null && id2 != "") {
@@ -510,7 +601,9 @@ return this.uniteAdministratives
         }
       };
     },
-    
+    recupererNumeroOrdre(){
+      return this.CodeActivite(this.formData.activite_parent_id) + "" + this.numeroOrdre
+    }
 
         },
 
@@ -525,7 +618,7 @@ methods: {
       ...mapActions('personnelUA', ["ajouterFichierJointDmd"]),
 formatageSomme:formatageSomme,
 ajouterTypeTexteLocal() {
-    this.intitule=this.CodeActivite(this.formData.activite_parent_id) + "" + this.formData1.code
+    this.intitule=this.CodeActivite(this.formData.activite_parent_id) + "" + this.numeroOrdre
     var nouvell={
         execice:this.anneeAmort,
         activite_parent_id:this.formData.activite_parent_id,
@@ -533,7 +626,10 @@ ajouterTypeTexteLocal() {
         code:this.intitule,
         activite_enfant:this.formData1.activite_enfant,
         montant_budgetaire:this.formData1.montant_budgetaire,
-        unite_administrative_id:this.formData.unite_administrative_id
+        unite_administrative_id:this.formData.unite_administrative_id,
+        	type_financement_id:this.formData.type_financement_id,
+        source_financement_id:this.formData.source_financement_id,
+        nombre_sous_budget:this.nombreSousBudgetParUa(this.formData.unite_administrative_id)
     }
       this.ajouterSousBudget(nouvell);
 

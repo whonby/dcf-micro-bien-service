@@ -249,10 +249,40 @@ listePieceJustificativedefinitive
           </table>
                     </div>
                   </div>
+                  <table class="table table-bordered table-striped">
+                    <tr>
+                      <td>
+                        <div class="control-group">
+                <label class="control-label">Type de depense</label>
+                <div class="controls">
+                 
+ 
+                 <select v-model="formData.typedepense" class="span" style="border:1px solid #000" >
+                    <option value="1">Marché</option>
+                     <option value="2">Autre</option>
+
+                  </select>
+
+                </div>
+              </div>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#ENGAGEMENT">REFERENCES DU CREANCIER</a>
+                        <a data-toggle="tab" href="#ENGAGEMENT" v-if="formData.typedepense==1">REFERENCES DU CREANCIER (MARCHE)</a>
+                        <a data-toggle="tab" href="#ENGAGEMENT" v-if="formData.typedepense==2">REFERENCES DU CREANCIER (AUTRES)</a>
                       </li>
                        
                      
@@ -1548,7 +1578,8 @@ components: {
                 formData:{
                  unite_administrative_id:"",
                  activite_id:"",
-                 ligne_economique_id:""
+                 ligne_economique_id:"",
+                 typedepense:1
                 },
                 
                 editpiece:{},

@@ -134,9 +134,15 @@ import AjouterLettreAvance from "../../pages/ExecutionBudgetaire/DossierFormulai
 import ListeDesOrdresPaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ListeDesOrdresPaiement.vue"
 import AjoutOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiement.vue"
 import AjouterOrdrePaiementAnnulation from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementAnnulation.vue"
+import AjouterOrdrePaiementDefinitive from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementDefinitive.vue"
 const BienServiceRoutes = [
     {
-        path: "/AjouterOrdrePaiementAnnulation/:id",
+        path: "/AjouterOrdrePaiementDefinitive/:id",
+        name: "AjouterOrdrePaiementDefinitive",
+        component: AjouterOrdrePaiementDefinitive
+    },
+    {
+        path: "/AjouterOrdrePaiementAnnulation",
         name: "AjouterOrdrePaiementAnnulation",
         component: AjouterOrdrePaiementAnnulation
     },
