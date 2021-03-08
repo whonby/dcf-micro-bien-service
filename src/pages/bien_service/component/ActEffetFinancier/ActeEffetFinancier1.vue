@@ -126,10 +126,10 @@ marche_id
           <div class="btn-group">
             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
               <span class=""><i class="icon-trash">
-                Supprimer</i></span>
+                </i>Supprimer</span>
             </button>
           </div>
-        </td>
+        </td> 
       </tr>
       </tbody>
     </table>
