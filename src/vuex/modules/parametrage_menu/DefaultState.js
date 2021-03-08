@@ -20,6 +20,7 @@ const defaultstate = {
     menuExecutionBudgetaire:100,
     MenuTableauBordGestionMarche:45,
     MenuTableauBordGeneral:123,
+    MenuBudgetEclater:780,
     active_el: 11
 };
 

@@ -1,10 +1,10 @@
-listePieceJustificativedefinitive
+listePieceJustificativeOpdefinitive
 <template>
 
 <div class="container-fluid">
       <hr />
       <div  align="left" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
+    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente{{detailOpProvisoire.recuperer_id_op}}</button>
     
         </div> 
       <div class="row-fluid">
@@ -14,7 +14,7 @@ listePieceJustificativedefinitive
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Ajouter Ordre Paiement Annulation{{detailOpProvisoire.id}}</h5>
+              <h5>Ajouter Ordre Paiement Annulation</h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -168,7 +168,7 @@ listePieceJustificativedefinitive
             </td>
                              <td>
                 <div class="control-group">
-                  <label class="control-label">Activité <code style="color:red;font-size:16px">*</code></label>
+                  <label class="control-label">{{detailOpProvisoire.activite_id}}Activité {{comparaison(this.detailOpProvisoire.activite_id)}}<code style="color:red;font-size:16px">*</code></label>
                   <div class="controls">
                          <input
                     type="text"
@@ -231,10 +231,11 @@ listePieceJustificativedefinitive
           </table>
                     </div>
                   </div>
-                  <div class="widget-title">
+                 <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
                         <a data-toggle="tab" href="#ENGAGEMENT">REFERENCES DU CREANCIER</a>
+                        
                       </li>
                        
                      
@@ -244,8 +245,227 @@ listePieceJustificativedefinitive
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
                     <div id="ENGAGEMENT" class="tab-pane active">
-                  <table class="table table-bordered table-striped">
+                      <table class="table table-bordered table-striped" v-if="formData.typedepense==2">
           <tr>
+             
+              <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >NOM</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+                v-model="formData45.nom_autre_depense"
+                    type="text"
+                    style="border:1px solid #000"
+                  
+                    class="span"
+                   
+            
+                   
+                  />
+                
+                  </div>
+                </div>
+              </td>
+              <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >COMPTE CONTRIBUABLE</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+                     v-model="formData45.compte_autre_depense"
+                    type="text"
+                    style="border:1px solid #000"
+                  
+                    class="span"
+                   
+                    
+                    
+                  />
+                
+                  </div>
+                </div>
+              </td>
+               <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >ADRESSE</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+                     v-model="formData45.adresse"
+                    type="text"
+                    style="border:1px solid #000"
+                   
+                    class="span"
+                   
+                   
+                   
+                  />
+                
+                  </div>
+                </div>
+              </td>
+         
+          <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >REFERENCES BANCAIRES</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+                     
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData45.reference_autre_depense"
+                    class="span"
+                  
+                    
+                  />
+                
+                  </div>
+                </div>
+              </td>
+         
+               
+             
+         
+          </tr>
+          
+          
+           </table>
+           <table class="table table-bordered table-striped">
+                    <tr>
+                      <td>
+                        <div class="control-group">
+                <label class="control-label">Type de depense</label>
+                <div class="controls">
+                 
+ <input
+                  :value="recupererNomTypeDepense"
+                    type="text"
+                    style="border:1px solid #000"
+                   
+                    class="span"
+                    
+                  />
+                 <!-- <select v-model="detailOpProvisoire.typedepense" class="span" style="border:1px solid #000" >
+                    <option value="1">Marché</option>
+                     <option value="2">Autres</option>
+
+                  </select> -->
+
+                </div>
+              </div>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                  <table class="table table-bordered table-striped" v-if="detailOpProvisoire.typedepense=='Autres'">
+          <tr>
+             
+              <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >NOM</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+                     readonly
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="detailOpProvisoire.nom_autre_depense"
+                    class="span"
+                   
+            
+                   
+                  />
+                
+                  </div>
+                </div>
+              </td>
+              <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >COMPTE CONTRIBUABLE</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+                     v-model="detailOpProvisoire.compte_autre_depense"
+                     readonly
+                    type="text"
+                    style="border:1px solid #000"
+                 
+                    class="span"
+                   
+                    
+                    
+                  />
+                
+                  </div>
+                </div>
+              </td>
+               <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >ADRESSE</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+                     readonly
+                    type="text"
+                    style="border:1px solid #000"
+                    v-model="detailOpProvisoire.adresse"
+                    class="span"
+                   
+                   
+                   
+                  />
+                
+                  </div>
+                </div>
+              </td>
+         
+          <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >REFERENCES BANCAIRES</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+                     
+                    type="text"
+                    style="border:1px solid #000"
+                    v-model="detailOpProvisoire.reference_autre_depense"
+                    class="span"
+                   readonly
+                    
+                  />
+                
+                  </div>
+                </div>
+              </td>
+         
+               
+             
+         
+          </tr>
+          
+          
+           </table>
+           <table class="table table-bordered table-striped" v-else-if="detailOpProvisoire.typedepense=='Marche'">
+              <tr>
              
               <td colspan="">
                 <div class="control-group">
@@ -333,6 +553,97 @@ listePieceJustificativedefinitive
          
           </tr>
           
+           </table>
+           <table class="table table-bordered table-striped" v-else>
+          <tr>
+             
+              <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >NOM</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+                     readonly
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="detailOpProvisoire.nom_autre_depense"
+                    class="span"
+                   
+            
+                   
+                  />
+                
+                  </div>
+                </div>
+              </td>
+              <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >COMPTE CONTRIBUABLE</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+                     v-model="detailOpProvisoire.compte_autre_depense"
+                     readonly
+                    type="text"
+                    style="border:1px solid #000"
+                 
+                    class="span"
+                   
+                    
+                    
+                  />
+                
+                  </div>
+                </div>
+              </td>
+               <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >ADRESSE</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+                     readonly
+                    type="text"
+                    style="border:1px solid #000"
+                    v-model="detailOpProvisoire.adresse"
+                    class="span"
+                   
+                   
+                   
+                  />
+                
+                  </div>
+                </div>
+              </td>
+         
+          <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >REFERENCES BANCAIRES</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+                     
+                    type="text"
+                    style="border:1px solid #000"
+                    v-model="detailOpProvisoire.reference_autre_depense"
+                    class="span"
+                   readonly
+                    
+                  />
+                
+                  </div>
+                </div>
+              </td>
+         
+               
+             
+         
+          </tr>
+          
           
            </table>
                     </div>
@@ -350,8 +661,134 @@ listePieceJustificativedefinitive
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
                     <div id="tab1" class="tab-pane active">
+                      <table class="table table-bordered table-striped" v-if="detailOpProvisoire.typedepense=='Autres'">
+                         
+                        <tr>
+                         
+                          <td colspan="3">
+                         <div class="control-group">
+                            <label class="control-label">OBJET DE LA DEPENSE</label>
+                            <div class="controls">
+                              
+                      <input
+               
+                    type="text"
+                    style="border:1px solid #000"
+                  v-model="detailOpProvisoire.odjet_autre_depense"
+                    class="span"
+                 
+                  />
+                            </div>
+                          </div>
+                        </td>
+                        </tr>
+                        <tr>
+                          <td>
+                         <div class="control-group">
+                            <label class="control-label">LIVRABLES</label>
+                            <div class="controls">
+                              
+                      <input
+                  v-model="detailOpProvisoire.livrable_autre_depense"
+                    type="text"
+                    style="border:1px solid #000"
+                   
+                    class="span"
+                    
+                  />
+                            </div>
+                          </div>
+                        </td>
+                          <td colspan="">
+              <div class="control-group">
+                <label class="control-label">BENEFICIAIRES</label>
+                <div class="controls">
+                  <input
+                  v-model="detailOpProvisoire.beneficiaire_autre_depense"
+                    type="text"
+                    style="border:1px solid #000"
+                   
+                    class="span"
+                    
+                  />
+                  
+                </div>
+              </div>
+              
+            </td>
+                 <td colspan="">
+              <div class="control-group">
+                <label class="control-label">GEOLOCALISATION</label>
+                <div class="controls">
+                  <input
+                  v-model="detailOpProvisoire.geo_autre_depense"
+                    type="text"
+                    style="border:1px solid #000"
+                   
+                    class="span"
+                    
+                  />
+                  
+                </div>
+              </div>
+              
+            </td>
+                        </tr>
+                        <tr>
+                          <td>
+                         <div class="control-group">
+                            <label class="control-label">DUREE DE REALISATION</label>
+                            <div class="controls">
+                              
+                      <input
+                  v-model="detailOpProvisoire.dure_autre_depense"
+                    type="text"
+                    style="border:1px solid #000"
+                   
+                    class="span"
+                  
+                  />
+                            </div>
+                          </div>
+                        </td>
+                          <td colspan="">
+              <div class="control-group">
+                <label class="control-label">MONTANT EN CHIFFRES</label>
+                <div class="controls">
+                  <!-- <input
+                  
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData2.montant_engage"
+                    class="span"
+                    readonly
+                  /> -->
+                   <money v-model="formData2.montant_engage"    style="text-align:left;color:red"  class="span"></money>
+                </div>
+              </div>
+              
+            </td>
+                 <td colspan="">
+              <div class="control-group">
+                <label class="control-label">MODE DE REGLEMENT</label>
+                <div class="controls">
+                  <select v-model="formData.mode_paiement_id" class="span" style="border:1px solid #000">
+                    
+                     <option
+                        v-for="typeFact in modepaiements"
+                        :key="typeFact.id"
+                        :value="typeFact.id"
+                      >{{typeFact.libelle}}</option>
+                  </select>
+                  
+                </div>
+              </div>
+              
+            </td>
+                        </tr>
                       
-                      <table class="table table-bordered table-striped">
+                      </table>
+                      <table class="table table-bordered table-striped" v-else-if="detailOpProvisoire.typedepense=='Marche'">
                         <tr>
                           <td>
                          <div class="control-group">
@@ -370,7 +807,7 @@ listePieceJustificativedefinitive
                             </div>
                           </div>
                         </td>
-                          <td colspan="2">
+                          <td colspan="3">
                          <div class="control-group">
                             <label class="control-label">OBJET DE LA DEPENSE</label>
                             <div class="controls">
@@ -404,7 +841,7 @@ listePieceJustificativedefinitive
                             </div>
                           </div>
                         </td>
-                          <td colspan="">
+                          <td colspan="2">
               <div class="control-group">
                 <label class="control-label">BENEFICIAIRES</label>
                 <div class="controls">
@@ -440,16 +877,18 @@ listePieceJustificativedefinitive
             </td>
                         </tr>
                         <tr>
+
+            
                           <td>
                          <div class="control-group">
-                            <label class="control-label">DUREE DE REALISATION</label>
+                            <label class="control-label">DUREE DE REALISATION (en jours)</label>
                             <div class="controls">
                               
                       <input
                   
                     type="text"
                     style="border:1px solid #000"
-                  :value="detailOpProvisoire.marche_id"
+                  :value="recupererDureMarche(detailOpProvisoire.marche_id)"
                     class="span"
                     readonly
                   />
@@ -458,7 +897,7 @@ listePieceJustificativedefinitive
                         </td>
                           <td colspan="">
               <div class="control-group">
-                <label class="control-label">MONTANT EN CHIFFRES</label>
+                <label class="control-label">MONTANT DU MARCHE</label>
                 <div class="controls">
                   <!-- <input
                   
@@ -468,6 +907,16 @@ listePieceJustificativedefinitive
                     class="span"
                     readonly
                   /> -->
+                  <money :value="montantMarche(detailOpProvisoire.marche_id)"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                </div>
+              </div>
+              
+            </td>
+            <td colspan="">
+              <div class="control-group">
+                <label class="control-label">MONTANT ENGAGE</label>
+                <div class="controls">
+                  
                    <money :value="detailOpProvisoire.montant_ordre_paiement"  readOnly  style="text-align:left;color:red"  class="span"></money>
                 </div>
               </div>
@@ -477,19 +926,12 @@ listePieceJustificativedefinitive
               <div class="control-group">
                 <label class="control-label">MODE DE REGLEMENT</label>
                 <div class="controls">
-                  <!-- <select v-model="formData.mode_paiement_id" class="span" style="border:1px solid #000">
-                    
-                     <option
-                        v-for="typeFact in modepaiements"
-                        :key="typeFact.id"
-                        :value="typeFact.id"
-                      >{{typeFact.libelle}}</option>
-                  </select> -->
+                
                    <input
                   
                     type="text"
                     style="border:1px solid #000"
-                  :value="detailOpProvisoire.mode_paiement_id"
+                  :value="recupererLibelleModePaiement(detailOpProvisoire.mode_paiement_id)"
                     class="span"
                     readonly
                   />
@@ -518,8 +960,8 @@ listePieceJustificativedefinitive
                           </tr> -->
                            <tr>
                        <td colspan="4">
-                           <label class="control-label" style="font-size:14px;font-weight:bold;text-align:center" v-if="formData.type_ordre_paiement==2">Pièce Justificative</label>
- <div class="" align="right" v-if="formData.type_ordre_paiement==2">
+                           <label class="control-label" style="font-size:14px;font-weight:bold;text-align:center" v-if="detailOpProvisoire.type_ordre_paiement==2">Pièce Justificative</label>
+ <!-- <div class="" align="right" v-if="formData.type_ordre_paiement==2">
                    <button 
                         @click.prevent="afficherModalAjouterService"
                        class="btn  btn-success">
@@ -527,8 +969,8 @@ listePieceJustificativedefinitive
        
                 </button>
 
-                   </div>
-<table class="table table-bordered table-striped" v-if="formData.type_ordre_paiement==2">
+                   </div> -->
+<table class="table table-bordered table-striped" v-if="detailOpProvisoire.type_ordre_paiement==2">
                 <thead>
                   <tr>
                      <th style="font-size:14px;font-weight:bold">Numero Ordre</th>
@@ -539,8 +981,8 @@ listePieceJustificativedefinitive
                     
                   </tr>
                 </thead>
-                <!-- <tbody>
-                  <tr class="odd gradeX" v-for="(type) in listePieceJustificative(formData.numero_ordre_paiement)" :key="type.id">
+                <tbody>
+                  <tr class="odd gradeX" v-for="(type) in listePieceJustificative(detailOpProvisoire.numero_ordre_paiement)" :key="type.id">
                     <td style="width:20%,text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_ordre || 'Non renseigné'}}</td>
@@ -556,12 +998,12 @@ listePieceJustificativedefinitive
 
                     
                   </tr>
-                </tbody> -->
+                </tbody>
               </table>
 
-<label class="control-label" style="font-size:14px;font-weight:bold;text-align:center" v-if="formData.type_ordre_paiement==1">Pièce Justificative</label>
+<label class="control-label" style="font-size:14px;font-weight:bold;text-align:center" v-if="detailOpProvisoire.type_ordre_paiement==1">Pièce Justificative</label>
 
-                           <div class="" align="right" v-if="formData.type_ordre_paiement==1">
+                           <!-- <div class="" align="right" v-if="formData.type_ordre_paiement==1">
                    <button 
                         @click.prevent="afficherModalAjouterService"
                        class="btn  btn-success">
@@ -569,9 +1011,9 @@ listePieceJustificativedefinitive
        
                 </button>
 
-                   </div>
+                   </div> -->
                     
- <table class="table table-bordered table-striped" v-if="formData.type_ordre_paiement==1">
+ <table class="table table-bordered table-striped" v-if="detailOpProvisoire.type_ordre_paiement==1">
                 <thead>
                   <tr>
                     <tr>
@@ -582,8 +1024,8 @@ listePieceJustificativedefinitive
                     
                   </tr>
                 </thead>
-                <!-- <tbody>
-                  <tr class="odd gradeX" v-for="(type) in listePieceJustificativedefinitive(formData.numero_ordre_paiement)" :key="type.id">
+                <tbody>
+                  <tr class="odd gradeX" v-for="(type) in listePieceJustificativeOpDefinitive(detailOpProvisoire.numero_ordre_paiement)" :key="type.id">
                     <td style="width:20%,text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_ordre || 'Non renseigné'}}</td>
@@ -599,14 +1041,140 @@ listePieceJustificativedefinitive
 
                     
                   </tr>
-                </tbody> -->
+                </tbody>
               </table>
                        </td>
                       
                    </tr>
                       </table>
                   
-          
+          <table class="table table-bordered table-striped" v-else>
+                         
+                        <tr>
+                         
+                          <td colspan="3">
+                         <div class="control-group">
+                            <label class="control-label">OBJET DE LA DEPENSE</label>
+                            <div class="controls">
+                              
+                      <input
+               
+                    type="text"
+                    style="border:1px solid #000"
+                  v-model="detailOpProvisoire.odjet_autre_depense"
+                    class="span"
+                 
+                  />
+                            </div>
+                          </div>
+                        </td>
+                        </tr>
+                        <tr>
+                          <td>
+                         <div class="control-group">
+                            <label class="control-label">LIVRABLES</label>
+                            <div class="controls">
+                              
+                      <input
+                  v-model="detailOpProvisoire.livrable_autre_depense"
+                    type="text"
+                    style="border:1px solid #000"
+                   
+                    class="span"
+                    
+                  />
+                            </div>
+                          </div>
+                        </td>
+                          <td colspan="">
+              <div class="control-group">
+                <label class="control-label">BENEFICIAIRES</label>
+                <div class="controls">
+                  <input
+                  v-model="detailOpProvisoire.beneficiaire_autre_depense"
+                    type="text"
+                    style="border:1px solid #000"
+                   
+                    class="span"
+                    
+                  />
+                  
+                </div>
+              </div>
+              
+            </td>
+                 <td colspan="">
+              <div class="control-group">
+                <label class="control-label">GEOLOCALISATION</label>
+                <div class="controls">
+                  <input
+                  v-model="detailOpProvisoire.geo_autre_depense"
+                    type="text"
+                    style="border:1px solid #000"
+                   
+                    class="span"
+                    
+                  />
+                  
+                </div>
+              </div>
+              
+            </td>
+                        </tr>
+                        <tr>
+                          <td>
+                         <div class="control-group">
+                            <label class="control-label">DUREE DE REALISATION</label>
+                            <div class="controls">
+                              
+                      <input
+                  v-model="detailOpProvisoire.dure_autre_depense"
+                    type="text"
+                    style="border:1px solid #000"
+                   
+                    class="span"
+                  
+                  />
+                            </div>
+                          </div>
+                        </td>
+                          <td colspan="">
+              <div class="control-group">
+                <label class="control-label">MONTANT EN CHIFFRES</label>
+                <div class="controls">
+                  <!-- <input
+                  
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData2.montant_engage"
+                    class="span"
+                    readonly
+                  /> -->
+                   <money v-model="formData2.montant_engage"    style="text-align:left;color:red"  class="span"></money>
+                </div>
+              </div>
+              
+            </td>
+                 <td colspan="">
+              <div class="control-group">
+                <label class="control-label">MODE DE REGLEMENT</label>
+                <div class="controls">
+                  <select v-model="formData.mode_paiement_id" class="span" style="border:1px solid #000">
+                    
+                     <option
+                        v-for="typeFact in modepaiements"
+                        :key="typeFact.id"
+                        :value="typeFact.id"
+                      >{{typeFact.libelle}}</option>
+                  </select>
+                  
+                </div>
+              </div>
+              
+            </td>
+                        </tr>
+                      
+                      </table>
                     </div>
                   </div>
                   <div class="widget-title">
@@ -718,7 +1286,7 @@ listePieceJustificativedefinitive
                 <label class="control-label">Engagements antérieurs (B)</label>
                 <div class="controls">
                  
-                  <money :value="CreditAutoriseTresor(detailOpProvisoire.ligne_economique_id)" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="Engagementsantérieurs" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
@@ -740,18 +1308,18 @@ listePieceJustificativedefinitive
                 <label class="control-label">Cumul engagements(D) (B + C)</label>
                 <div class="controls">
                  
-                  <money :value="detailOpProvisoire.montant_ordre_paiement" readOnly  style="text-align:left;color:red"  class="span"></money>
+                  <money :value="Cumulengagements" readOnly  style="text-align:left;color:red"  class="span"></money>
                  
                 </div>
               </div>
-              
+            
             </td>
               <td colspan="">
               <div class="control-group">
                 <label class="control-label">Disponible budgétaire (A - D)</label>
                 <div class="controls">
                  
-                  <money :value="CreditAutoriseEmprunt(detailOpProvisoire.ligne_economique_id)" readOnly  style="text-align:left;color:red"  class="span"></money>
+                  <money :value="Disponiblebudgétaire" readOnly  style="text-align:left;color:red"  class="span"></money>
                  
                 </div>
               </div>
@@ -1562,7 +2130,10 @@ components: {
               reference:""  ,
               libelle:""
                 },
-                detailOpProvisoire:{},
+                detailOpProvisoire:{
+                  activite_id:"",
+                  typedepense:""
+                },
                 formData8:{},
                 formData2:{
                  numeromarche:""
@@ -1612,6 +2183,83 @@ components: {
       "afficheLocalisationGeoNiveau5"
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
+              recupererDureMarche	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.duree	;
+      }
+      return 0
+        }
+      };
+    },
+recupererLibelleModePaiement	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.modepaiements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle	;
+      }
+      return 0
+        }
+      };
+    },
+recupererNomTypeDepense(){
+  if(this.detailOpProvisoire.typedepense == 2){
+    return "Autres"
+  }
+  else if(this.detailOpProvisoire.typedepense == 1){
+    return "Marche"
+  }
+  else{
+return ""
+  }
+},
+
+
+
+
+
+      Engagementsantérieurs(){
+if(this.comparaison(this.detailOpProvisoire.activite_id)==this.detailOpProvisoire.activite_id){
+  return  parseFloat(this.EngagementsantérieursSousBudget(this.detailOpProvisoire.sous_budget_id,this.detailOpProvisoire.ligne_economique_id))-parseFloat(this.detailOpProvisoire.montant_ordre_paiement)   
+  
+}
+else{
+return   parseFloat(this.EngagementsantérieursUa(this.detailOpProvisoire.unite_administrative_id,this.detailOpProvisoire.ligne_economique_id))-parseFloat(this.detailOpProvisoire.montant_ordre_paiement)     
+}
+    },
+      EngagementsantérieursUa() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.ligne_economique_id == id1 && qtreel.decision_cf==8).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+
+        }
+      };
+    },
+    EngagementsantérieursSousBudget() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.sous_budget_id == id && qtreel.ligne_economique_id == id1 && qtreel.decision_cf==8).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+
+        }
+      };
+    },
+  Disponiblebudgétaire() { 
+      const val = parseFloat(this.fonctionPourVideLeChamp) - parseFloat(this.Cumulengagements) ;
+      return parseFloat(val).toFixed(0);
+      
+    },
+
+Cumulengagements() { 
+      const val = parseFloat(this.Engagementsantérieurs) + parseFloat(this.detailOpProvisoire.montant_ordre_paiement) ;
+      return parseFloat(val).toFixed(0);
+      
+    },
+
 
 CumulEngagement() {
       const val =   parseFloat(this.totalMontantHT) * parseFloat(this.afficherEnorere2);
@@ -1624,7 +2272,18 @@ CumulEngagement() {
     },
 
 
+montantMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
 
+      if (qtereel) {
+        return qtereel.montant_act;
+      }
+      return 0
+        }
+      };
+    },
 
       AfficheNumeroMarche() {
       return id => {
@@ -1695,7 +2354,7 @@ recupererIdUser() {
         return qtereel.servicecf_id;
       }
       return 0
-        }
+        } 
       };
     },
 
@@ -2370,20 +3029,19 @@ return this.uniteAdministratives
         }
       };
     },
-
-    listePieceJustificative() {
+ listePieceJustificative() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_ordrepaiement == id && qtreel.etat_piece=="proforma" );
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_op_hors_sib == id && qtreel.etat_piece=="proforma" );
 
       
         }
       };
     },
-    listePieceJustificativeDefinitive() {
+    listePieceJustificativeOpDefinitive() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_ordrepaiement == id && qtreel.etat_piece=="definitive" );
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_op_hors_sib == id && qtreel.etat_piece=="definitive" );
 
       
         }
@@ -2621,18 +3279,28 @@ rechercheMembreCojo(){
          this.detailOpProvisoire.unite_administrative_id=acteur.unite_administrative_id,
          this.detailOpProvisoire.activite_id=acteur.activite_id,
          this.detailOpProvisoire.livrable_id=acteur.livrable_id,
-
+this.detailOpProvisoire.type_ordre_paiement=acteur.type_ordre_paiement,
           this.detailOpProvisoire.sous_budget_id=acteur.sous_budget_id,
          this.detailOpProvisoire.ligne_economique_id=acteur.ligne_economique_id,
          this.detailOpProvisoire.entreprise_id=acteur.entreprise_id,
-         this.detailOpProvisoire.marche_id=acteur.marche_id
-
-          this.detailOpProvisoire.livrable_id=acteur.livrable_id,
+         this.detailOpProvisoire.marche_id=acteur.marche_id,
+this.detailOpProvisoire.recuperer_id_op=acteur.id,
+          
          this.detailOpProvisoire.montant_ordre_paiement=acteur.montant_ordre_paiement,
          this.detailOpProvisoire.mode_paiement_id=acteur.mode_paiement_id,
          this.detailOpProvisoire.type_financement_id=acteur.type_financement_id,
          this.detailOpProvisoire.source_financement_id=acteur.source_financement_id,
          this.detailOpProvisoire.gestionnaire_credit_date=acteur.gestionnaire_credit_date,
+         this.detailOpProvisoire.typedepense=acteur.typedepense,
+         this.detailOpProvisoire.nom_autre_depense=acteur.nom_autre_depense,
+         this.detailOpProvisoire.compte_autre_depense=acteur.compte_autre_depense,
+         this.detailOpProvisoire.adresse=acteur.adresse,
+         this.detailOpProvisoire.reference_autre_depense=acteur.reference_autre_depense,
+         this.detailOpProvisoire.odjet_autre_depense=acteur.odjet_autre_depense,
+         this.detailOpProvisoire.livrable_autre_depense=acteur.livrable_autre_depense,
+         this.detailOpProvisoire.beneficiaire_autre_depense=acteur.beneficiaire_autre_depense,
+         this.detailOpProvisoire.geo_autre_depense=acteur.geo_autre_depense,
+         this.detailOpProvisoire.dure_autre_depense=acteur.dure_autre_depense
           this.message_mandater=" "
 
         }
@@ -2676,7 +3344,16 @@ rechercheMembreCojo(){
          this.detailOpProvisoire.mode_paiement_id="",
          this.detailOpProvisoire.type_financement_id="",
          this.detailOpProvisoire.source_financement_id="",
-         this.detailOpProvisoire.gestionnaire_credit_date=""
+         this.detailOpProvisoire.gestionnaire_credit_date="",
+         this.detailOpProvisoire.nom_autre_depense=""
+         this.detailOpProvisoire.compte_autre_depense=""
+         this.detailOpProvisoire.adresse=""
+         this.detailOpProvisoire.reference_autre_depense=""
+         this.detailOpProvisoire.odjet_autre_depense=""
+         this.detailOpProvisoire.livrable_autre_depense=""
+         this.detailOpProvisoire.beneficiaire_autre_depense=""
+         this.detailOpProvisoire.geo_autre_depense=""
+         this.detailOpProvisoire.dure_autre_depense=""
       }
     },
 
@@ -2729,7 +3406,7 @@ AjouterOrdrePaiementAnulation(){
   
         	numero_op_annulation:this.formData.numero_op_annulation,
           	date_op_annulation:this.formData.date_op_annulation,
-          id_op_provisoire:this.detailOpProvisoire.id,
+          id_op_provisoire:this.detailOpProvisoire.recuperer_id_op,
           
       };
     

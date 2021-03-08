@@ -12,7 +12,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des types textes</h5>
+              <h5>VENTILLATION BUDGET {{anneeAmort}}</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -60,11 +60,11 @@
                      </td>
                   </tr>
                     <tr>
-                    <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;">PERSONNEL</td>
+                    <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;">PERSONNEL{{recupereIdSousBuget}}</td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclatePersonnel(detail_marche.uniteadministrative_id)))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclatePersonnel(recupereIdSousBuget)))}}</td>
                     
                   </tr>
                    
@@ -79,7 +79,7 @@
                    <td style="font-size:14px;text-align:center;background:green;font-weight:bold;" v-if="decisionCfBudgetEclate(detail_marche.uniteadministrative_id) == 8">
                      {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
                      </td>
-                              <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;" >
+                              <td style="font-size:14px;color:#000;text-align:center;" >
                      {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
                      </td>
                   </tr>
@@ -229,7 +229,15 @@ created() {
       ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
 
+recupereIdSousBuget() {
+      
+      const norme = this.getSousBudget.find(normeEquipe => normeEquipe.nombre_sous_budget == 1);
 
+      if (norme) {
+        return norme.id;
+      }
+      return 0
+    },
 NiveauSousBudget1() {
       return (id) => {
         if (id != null && id != "") {
@@ -426,9 +434,9 @@ decisionCfBudgetEclate() {
       };
     },
     SommeDesBudgetaireEclatePersonnel() {
-      return (id) => {
-        if (id != null && id != "" ) {
-           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && this.NiveauSousBudget1(qtreel.sous_budget_id)==1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+      return (id1) => {
+        if (id1 != null && id1 != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.sous_budget_id == id1 && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
 
         }
       };

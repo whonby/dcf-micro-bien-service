@@ -137,7 +137,7 @@ import AjouterOrdrePaiementAnnulation from "../../pages/ExecutionBudgetaire/gest
 import AjouterOrdrePaiementDefinitive from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementDefinitive.vue"
 const BienServiceRoutes = [
     {
-        path: "/AjouterOrdrePaiementDefinitive/:id",
+        path: "/AjouterOrdrePaiementDefinitive",
         name: "AjouterOrdrePaiementDefinitive",
         component: AjouterOrdrePaiementDefinitive
     },

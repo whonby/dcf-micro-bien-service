@@ -12,7 +12,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des types textes</h5>
+             <h5>VENTILLATION BUDGET {{anneeAmort}}</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -79,7 +79,7 @@
                    <td style="font-size:14px;text-align:center;background:green;font-weight:bold;" v-if="decisionCfBudgetEclate(detail_marche.uniteadministrative_id) == 8">
                      {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
                      </td>
-                              <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;" >
+                              <td style="font-size:14px;color:#000;text-align:center;" >
                      {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
                      </td>
                   </tr>

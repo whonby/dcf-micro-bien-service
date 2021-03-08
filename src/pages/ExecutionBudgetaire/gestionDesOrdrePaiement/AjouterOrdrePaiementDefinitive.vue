@@ -1,4 +1,5 @@
-listePieceJustificativedefinitive
+listePieceJustificativeOpDefinitive
+numero_Op_Definitive
 <template>
 
 <div class="container-fluid">
@@ -14,7 +15,7 @@ listePieceJustificativedefinitive
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Ajouter Ordre Paiement Définitif</h5>
+              <h5>Ajouter Ordre Paiement Definitive</h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -39,12 +40,18 @@ listePieceJustificativedefinitive
             </td>
             <td>
                             <div class="control-group">
-                                                    <label class="control-label">Réf OP PROVISOIRE </label>
+                                                    <label class="control-label">Type Ordre paiement <code style="color:red;font-size:16px">*</code></label>
                                                     <div class="controls">
-                                                       <input
+                                                        <!-- <select v-model="formData.type_ordre_paiement" class="span" style="border:1px solid #000">
+                                                            <option></option>
+                                                            <option value="1">ORDRE DE PAIEMENT DIRECT</option>
+                                                            <option value="2">ORDRE DE PAIEMENT PROVISOIRE</option>
+                                                             
+                                                        </select> -->
+                                                          <input
                     type="text"
                     style="border:1px solid #000;font-size:15px"
-                   :value="detailOpProvisoire.numero_ordre_paiement"
+                   v-model="formData.typeop"
                     class="span"
                     readonly
                   />
@@ -53,13 +60,14 @@ listePieceJustificativedefinitive
                         </td>
           <td>
               <div class="control-group">
-                <label class="control-label">Numéro Ordre paiement Définitif<code style="color:red;font-size:16px">*</code></label>
-               
+                <label class="control-label">{{recupererIdOpProvisoire(recupererNumeroOPProvisoire(formData2.numero_oP_provisoire))}}Numéro Ordre paiement Annulation{{recupererIdAnnulation(this.formData.numero_ordre_anulation)}}<code style="color:red;font-size:16px">*</code></label>
+                
                 <div class="controls">
                   <input
                     type="text"
                     style="border:1px solid #000;font-size:15px"
-                   v-model="formData.numero_ordre_paiement"
+                   v-model="formData.numero_ordre_anulation"
+                   v-on:keyup="rechercheListeMarche()"
                     class="span"
                     
                   />
@@ -69,13 +77,45 @@ listePieceJustificativedefinitive
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Date Ordre paiement Définitif<code style="color:red;font-size:16px">*</code></label>
-               
+                <label class="control-label">Numéro OP Provisoire<code style="color:red;font-size:16px">*</code></label>
+                
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000;font-size:15px"
+                   :value="recupererNumeroOPProvisoire(formData2.numero_oP_provisoire)"
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+              
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Numéro OP Définitive<code style="color:red;font-size:16px">*</code></label>
+                
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000;font-size:15px"
+                   v-model="formDataOpDefinitive.numero_Op_Definitive"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+              
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Date OP définitive<code style="color:red;font-size:16px">*</code></label>
+                
                 <div class="controls">
                   <input
                     type="date"
                     style="border:1px solid #000;font-size:15px"
-                   v-model="formData.date_op_definitif"
+                   v-model="formDataOpDefinitive.date_op_definitif"
                     class="span"
                     
                   />
@@ -84,6 +124,7 @@ listePieceJustificativedefinitive
               
             </td>
    </tr>
+  
    </table>
             <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">
@@ -99,7 +140,7 @@ listePieceJustificativedefinitive
                     <!--ongle identification-->
                     <div id="INFORMATIONUA" class="tab-pane active">
                   
-         <table class="table table-bordered table-striped">
+          <table class="table table-bordered table-striped">
                  
                       <tr>
                         <td>
@@ -109,7 +150,7 @@ listePieceJustificativedefinitive
                   <input
                     type="text"
                     style="border:1px solid #000"
-                   :value="libelleSection(detailOpProvisoire.section_id)"
+                   :value="libelleSection(idSection(libelleLigneEconomiqueParent(recupererIdLigneEconomique(formData2.numero_oP_provisoire))))"
                     class="span"
                     readonly
                   />
@@ -124,7 +165,7 @@ listePieceJustificativedefinitive
                   <input
                     type="text"
                     style="border:1px solid #000"
-                   :value="libelleProgramme(detailOpProvisoire.programme_id)"
+                   :value="libelleProgramme(idProgramme(libelleLigneEconomiqueParent(recupererIdLigneEconomique(formData2.numero_oP_provisoire))))"
                     class="span"
                     readonly
                   />
@@ -139,7 +180,7 @@ listePieceJustificativedefinitive
                   <input
                     type="text"
                     style="border:1px solid #000"
-                   :value="libelleAction(detailOpProvisoire.action_id)"
+                   :value="libelleAction(idAction(libelleLigneEconomiqueParent(recupererIdLigneEconomique(formData2.numero_oP_provisoire))))"
                     class="span"
                     readonly
                   />
@@ -150,33 +191,48 @@ listePieceJustificativedefinitive
             
                      </tr>
                      <tr>
-                        <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Unite administrative</label>
-                <div class="controls">
-                  <input
+                       <td>
+                                <label>Unité Administrative <code style="color:red;font-size:16px">*</code>
+                                </label>
+                                 <input
                     type="text"
                     style="border:1px solid #000"
-                   :value="libelleUniteAdministrative(detailOpProvisoire.unite_administrative_id)"
+                   :value="libelleUniteAdministrative(idUa(libelleLigneEconomiqueParent(recupererIdLigneEconomique(formData2.numero_oP_provisoire))))"
                     class="span"
                     readonly
                   />
-                </div>
-              </div>
-              
-            </td>
+                                <!-- <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="listeDesUa"
+                                                   v-model="idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                                 <code style="color:red;font-size:12px" v-if="idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))==''">Veuillez renseigner ce champ</code> -->
+                            </td>
+                           
                              <td>
                 <div class="control-group">
                   <label class="control-label">Activité <code style="color:red;font-size:16px">*</code></label>
                   <div class="controls">
-                         <input
+                     <input
                     type="text"
                     style="border:1px solid #000"
-                   :value="NomActivite(detailOpProvisoire.activite_id)"
+                   :value="libelleAction(idActivite(libelleLigneEconomiqueParent(recupererIdLigneEconomique(formData2.numero_oP_provisoire))))"
                     class="span"
                     readonly
                   />
-                   
+                    <!-- <select v-model="idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))" class="span" style="border:1px solid #000">
+                     <option
+                        v-for="typeFact in filtrerActivite(idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))"
+                        :key="typeFact[0].id"
+                        :value="typeFact[0].activite_id"
+                      >{{NomActivite(typeFact[0].activite_id)}}</option>
+                    </select>
+                     <code style="color:red;font-size:12px" v-if="idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))==''">Veuillez renseigner ce champ</code> -->
                   </div>
                 </div>
               </td>
@@ -184,34 +240,49 @@ listePieceJustificativedefinitive
                 <div class="control-group">
                   <label class="control-label">Sous Bugdet</label>
                   <div class="controls">
-                             <input
+                    <input
                     type="text"
                     style="border:1px solid #000"
-                   :value="NomActivite(detailOpProvisoire.sous_budget_id)"
-                    class="span"
+                   :value="recupererLibelleSousBudget(recupererIdSousBudget(formData2.numero_oP_provisoire))"
+                                      class="span"
                     readonly
                   />
-                  
+                    <!-- <select v-model="recupererIdSousBudget(this.formData2.numero_oP_provisoire)" class="span" style="border:1px solid #000">
+                     <option></option>
+                      <option
+                        v-for="gdenature in RecupererSousBudget(idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))"
+                        :key="gdenature.id"
+                        :value="gdenature.id"
+                      >{{gdenature.activite_enfant}}</option>
+                    </select> -->
                      
                   </div>
                 </div>
               </td>
               <td>
-                 
+                 <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))">
                         
 
                       
               <div class="control-group">
                 <label class="control-label">Classification Economique</label>
                 <div class="controls">
-                   <input
+                 
+ <!-- <select v-model="recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)" class="span" style="border:1px solid #000" >
+                     <option></option>
+                     <option
+                        v-for="typeFact in afficheLesSousBudgetLigneBudgetaire(idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),recupererIdSousBudget(this.formData2.numero_oP_provisoire))"
+                        :key="typeFact.id"
+                        :value="typeFact.ligneeconomique_id"
+                      >{{libelleLigneEconomique(typeFact.ligneeconomique_id)}}</option>
+                  </select> -->
+               <input
                     type="text"
                     style="border:1px solid #000"
-                   :value="libelleLigneEconomique(detailOpProvisoire.ligne_economique_id)"
-                    class="span"
+                   :value="libelleLigneEconomique(recupererIdLigneEconomique(formData2.numero_oP_provisoire))"
+                                      class="span"
                     readonly
                   />
- 
                  
                 </div>
               </div>
@@ -220,20 +291,87 @@ listePieceJustificativedefinitive
                     
                      
 
-                   
+                     </template>
+                    <template v-else>
+                        
+
+                      
+              <div class="control-group">
+                <label class="control-label">Classification Economique</label>
+                <div class="controls">
+                 
+ 
+                 <!-- <select v-model="recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)" class="span" style="border:1px solid #000" >
+                    <option></option>
+                     <option
+                        v-for="typeFact in RecupererlibelleLigneEconomique(idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))"
+                        :key="typeFact.id"
+                        :value="typeFact.ligneeconomique_id"
+                      >{{libelleLigneEconomique(typeFact.ligneeconomique_id)}}</option>
+                  </select> -->
+<input
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="libelleLigneEconomique(recupererIdLigneEconomique(formData2.numero_oP_provisoire))"
+                                      class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+                       
+            
+                     
+
+                     </template>
               </td>
                
                
                      </tr>
-                    
-                
+                  
           </table>
                     </div>
                   </div>
+                  <table class="table table-bordered table-striped">
+                    <tr>
+                      <td>
+                        <div class="control-group">
+                <label class="control-label">Type de depense</label>
+                <div class="controls">
+                <input
+                  :value="recupererTypeDepense(this.formData2.numero_oP_provisoire)"
+                    type="text"
+                    style="border:1px solid #000"
+                   
+                    class="span"
+                    
+                  />
+ 
+                 <!-- <select v-model="formData.typedepense" class="span" style="border:1px solid #000" >
+                    <option value="1">Marché</option>
+                     <option value="2">Autres</option>
+
+                  </select> -->
+
+                </div>
+              </div>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
                         <a data-toggle="tab" href="#ENGAGEMENT">REFERENCES DU CREANCIER</a>
+                        
                       </li>
                        
                      
@@ -243,7 +381,98 @@ listePieceJustificativedefinitive
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
                     <div id="ENGAGEMENT" class="tab-pane active">
-                  <table class="table table-bordered table-striped">
+                      <table class="table table-bordered table-striped" v-if="recupererTypeDepense(formData2.numero_oP_provisoire)=='Autres'">
+          <tr>
+             
+              <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >NOM</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+               :value="recuperernom_autre_depense(formData2.numero_oP_provisoire)"
+                    type="text"
+                    style="border:1px solid #000"
+                  
+                    class="span"
+                   
+            readonly
+                   
+                  />
+                
+                  </div>
+                </div>
+              </td>
+              <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >COMPTE CONTRIBUABLE</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+                     :value="recuperercompte_autre_depense(formData2.numero_oP_provisoire)"
+                    type="text"
+                    style="border:1px solid #000"
+                  
+                    class="span"
+                   
+                    readonly
+                    
+                  />
+                
+                  </div>
+                </div>
+              </td>
+               <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >ADRESSE</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+                     :value="recupereradresse(formData2.numero_oP_provisoire)"
+                    type="text"
+                    style="border:1px solid #000"
+                   
+                    class="span"
+                   readonly
+                   
+                   
+                  />
+                
+                  </div>
+                </div>
+              </td>
+         
+          <td colspan="">
+                <div class="control-group">
+                  <label class="control-label" >REFERENCES BANCAIRES</label>
+                 
+                  <div class="controls">
+                   
+                     <input
+                     
+                    type="text"
+                    style="border:1px solid #000"
+                    :value="recupererreference_autre_depense(formData2.numero_oP_provisoire)"
+                    class="span"
+                  
+                    
+                  />
+                
+                  </div>
+                </div>
+              </td>
+         
+               
+             
+         
+          </tr>
+          
+          
+           </table>
+                  <table class="table table-bordered table-striped" v-if="recupererTypeDepense(formData2.numero_oP_provisoire)=='Marche'">
           <tr>
              
               <td colspan="">
@@ -256,7 +485,7 @@ listePieceJustificativedefinitive
                      readonly
                     type="text"
                     style="border:1px solid #000"
-                   :value="Numero_Nom_Entreprise(detailOpProvisoire.entreprise_id)"
+                   :value="Numero_Nom_Entreprise(recupererIdEntreprise(formData2.numero_oP_provisoire))"
                     class="span"
                    
             
@@ -276,7 +505,7 @@ listePieceJustificativedefinitive
                      readonly
                     type="text"
                     style="border:1px solid #000"
-                  :value="Numero_CC(detailOpProvisoire.entreprise_id)"
+                  :value="Numero_CC(recupererIdEntreprise(formData2.numero_oP_provisoire))"
                     class="span"
                    
                     
@@ -296,7 +525,7 @@ listePieceJustificativedefinitive
                      readonly
                     type="text"
                     style="border:1px solid #000"
-                   :value="Numero_adresse_Entreprise(detailOpProvisoire.entreprise_id)"
+                   :value="Numero_adresse_Entreprise(recupererIdEntreprise(formData2.numero_oP_provisoire))"
                     class="span"
                    
                    
@@ -317,7 +546,7 @@ listePieceJustificativedefinitive
                      
                     type="text"
                     style="border:1px solid #000"
-                   :value="libelleBanque(detailOpProvisoire.entreprise_id)"
+                   :value="libelleBanque(recupererIdEntreprise(formData2.numero_oP_provisoire))"
                     class="span"
                    readonly
                     
@@ -349,27 +578,10 @@ listePieceJustificativedefinitive
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
                     <div id="tab1" class="tab-pane active">
-                      
-                      <table class="table table-bordered table-striped">
+                      <table class="table table-bordered table-striped" v-if="recupererTypeDepense(formData2.numero_oP_provisoire)=='Autres'">
                         <tr>
-                         <td>
-                         <div class="control-group">
-                            <label class="control-label">Numero Marche</label>
-                            <div class="controls">
-                              
-                       <input
-                     
-                    type="text"
-                    style="border:1px solid #000"
-                   :value="AfficheNumeroMarche(detailOpProvisoire.marche_id)"
-                    class="span"
-                   readonly
-                    
-                  />
-                            </div>
-                          </div>
-                        </td>
-                         <td colspan="2">
+                         
+                          <td colspan="3">
                          <div class="control-group">
                             <label class="control-label">OBJET DE LA DEPENSE</label>
                             <div class="controls">
@@ -378,9 +590,9 @@ listePieceJustificativedefinitive
                
                     type="text"
                     style="border:1px solid #000"
-                  :value="objetMarche(detailOpProvisoire.marche_id)"
+                  :value="recupererodjet_autre_depense(formData2.numero_oP_provisoire)"
                     class="span"
-                    readonly
+                 
                   />
                             </div>
                           </div>
@@ -393,12 +605,12 @@ listePieceJustificativedefinitive
                             <div class="controls">
                               
                       <input
-                  
+                 :value="recupererlivrable_autre_depense(formData2.numero_oP_provisoire)"
                     type="text"
                     style="border:1px solid #000"
-                   :value="livrable(detailOpProvisoire.livrable_id)"
+                   
                     class="span"
-                    readonly
+                    
                   />
                             </div>
                           </div>
@@ -408,14 +620,14 @@ listePieceJustificativedefinitive
                 <label class="control-label">BENEFICIAIRES</label>
                 <div class="controls">
                   <input
-                  
+                  :value="recupererbeneficiaire_autre_depense(formData2.numero_oP_provisoire)"
                     type="text"
                     style="border:1px solid #000"
-                   :value="libelleUniteAdministrative(detailOpProvisoire.unite_administrative_id)"
+                   
                     class="span"
-                    readonly
+                    
                   />
-                  
+                  .
                 </div>
               </div>
               
@@ -425,12 +637,12 @@ listePieceJustificativedefinitive
                 <label class="control-label">GEOLOCALISATION</label>
                 <div class="controls">
                   <input
-                  
+                  :value="recuperergeo_autre_depense(formData2.numero_oP_provisoire)"
                     type="text"
                     style="border:1px solid #000"
-                   :value="geolocalisation(detailOpProvisoire.marche_id)"
+                   
                     class="span"
-                    readonly
+                    
                   />
                   
                 </div>
@@ -439,18 +651,18 @@ listePieceJustificativedefinitive
             </td>
                         </tr>
                         <tr>
-                         <td>
+                          <td>
                          <div class="control-group">
                             <label class="control-label">DUREE DE REALISATION</label>
                             <div class="controls">
                               
                       <input
-                  
+                  :value="recupererdure_autre_depense(formData2.numero_oP_provisoire)"
                     type="text"
                     style="border:1px solid #000"
-                  :value="detailOpProvisoire.marche_id"
+                   
                     class="span"
-                    readonly
+                  
                   />
                             </div>
                           </div>
@@ -467,7 +679,7 @@ listePieceJustificativedefinitive
                     class="span"
                     readonly
                   /> -->
-                   <money :value="detailOpProvisoire.montant_ordre_paiement"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                   <money :value="recupererMonant_autre_depense(formData2.numero_oP_provisoire)"    style="text-align:left;color:red"  class="span"></money>
                 </div>
               </div>
               
@@ -485,18 +697,186 @@ listePieceJustificativedefinitive
                       >{{typeFact.libelle}}</option>
                   </select> -->
                    <input
-                  
+                  :value="recupererLibelleModePaiement(recupererModePaiement(formData2.numero_oP_provisoire))"
                     type="text"
                     style="border:1px solid #000"
-                  :value="detailOpProvisoire.mode_paiement_id"
+                   
                     class="span"
-                    readonly
+                  readonly
                   />
                 </div>
               </div>
               
             </td>
                         </tr>
+                      </table>
+                      <table class="table table-bordered table-striped" v-if="recupererTypeDepense(formData2.numero_oP_provisoire)=='Marche'">
+                        <tr>
+                          <td>
+                         <div class="control-group">
+                            <label class="control-label">Numero Marche</label>
+                            <div class="controls">
+                              
+                      <input
+               
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="NumeroMarche1(recupererIdMarche(formData2.numero_oP_provisoire))"
+                    class="span"
+                    
+                   readonly
+                  />
+                  <!-- <code v-if="message_mandater" style="font-size:25px">{{message_mandater}}</code> -->
+                            </div>
+                          </div>
+                        </td>
+                          <td colspan="3">
+                         <div class="control-group">
+                            <label class="control-label">OBJET DE LA DEPENSE</label>
+                            <div class="controls">
+                              
+                      <input
+               
+                    type="text"
+                    style="border:1px solid #000"
+                  :value="objetMarche(recupererIdMarche(formData2.numero_oP_provisoire))"
+                    class="span"
+                    readonly
+                  />
+                            </div>
+                          </div>
+                        </td>
+                        </tr>
+                        <tr>
+                          <td>
+                         <div class="control-group">
+                            <label class="control-label">LIVRABLES</label>
+                            <div class="controls">
+                              
+                      <input
+                  
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="livrable(recupererIdMarche(formData2.numero_oP_provisoire))"
+                    class="span"
+                    readonly
+                  />
+                            </div>
+                          </div>
+                        </td>
+                          <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">BENEFICIAIRES</label>
+                <div class="controls">
+                  <input
+                  
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="libelleUniteAdministrative(recupererIdMarcheUa(recupererIdMarche(formData2.numero_oP_provisoire)))"
+                    class="span"
+                    readonly
+                  />
+                  
+                </div>
+              </div>
+              
+            </td>
+                 <td colspan="">
+              <div class="control-group">
+                <label class="control-label">GEOLOCALISATION</label>
+                <div class="controls">
+                  <input
+                  
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="geolocalisation(recupererIdMarche(formData2.numero_oP_provisoire))"
+                    class="span"
+                    readonly
+                  />
+                  
+                </div>
+              </div>
+              
+            </td>
+                        </tr>
+                        <tr>
+                          <td>
+                         <div class="control-group">
+                            <label class="control-label">DUREE DE REALISATION (En Jours)</label>
+                            <div class="controls">
+                              
+                      <input
+                  
+                    type="text"
+                    style="border:1px solid #000"
+                   :value="recupererDureMarche(recupererIdMarche(formData2.numero_oP_provisoire))"
+                    class="span"
+                    readonly
+                  />
+                            </div>
+                          </div>
+                        </td>
+                          <td colspan="">
+              <div class="control-group">
+                <label class="control-label">MONTANT DU MARCHE</label>
+                <div class="controls">
+                  <!-- <input
+                  
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData2.montant_engage"
+                    class="span"
+                    readonly
+                  /> -->
+                   <money :value="recupererMontantMarche(recupererIdMarche(formData2.numero_oP_provisoire))"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                </div>
+              </div>
+              
+            </td>
+            <td colspan="">
+              <div class="control-group">
+                <label class="control-label">MONTANT ENGAGE</label>
+                <div class="controls">
+                  <!-- <input
+                  
+                    type="text"
+                    style="border:1px solid #000"
+                   v-model="formData2.montant_engage"
+                    class="span"
+                    readonly
+                  /> -->
+                   <money :value="recupererEngageMarche(formData2.numero_oP_provisoire)"    style="text-align:left;color:red"  class="span"></money>
+                </div>
+              </div>
+              
+            </td>
+                 <td colspan="">
+              <div class="control-group">
+                <label class="control-label">MODE DE REGLEMENT</label>
+                <div class="controls">
+                  <!-- <select v-model="formData.mode_paiement_id" class="span" style="border:1px solid #000">
+                    
+                     <option
+                        v-for="typeFact in modepaiements"
+                        :key="typeFact.id"
+                        :value="typeFact.id"
+                      >{{typeFact.libelle}}</option>
+                  </select> -->
+                  <input
+                  :value="recupererLibelleModePaiement(recupererModePaiement(formData2.numero_oP_provisoire))"
+                    type="text"
+                    style="border:1px solid #000"
+                   
+                    class="span"
+                  readonly
+                  />
+                </div>
+              </div>
+              
+            </td>
+                        </tr>
+                      </table>
+                      
                         <!-- <tr>
                           <td colspan="3"> 
 <div class="control-group">
@@ -515,19 +895,20 @@ listePieceJustificativedefinitive
               </div>
                           </td>
                           </tr> -->
+                          <table class="table table-bordered table-striped">
                            <tr>
-                       <td colspan="4">
-                           <label class="control-label" style="font-size:14px;font-weight:bold;text-align:center" v-if="formData.type_ordre_paiement==2">Pièce Justificative</label>
- <div class="" align="right" v-if="formData.type_ordre_paiement==2">
+                       <td colspan="">
+                           <label class="control-label" style="font-size:14px;font-weight:bold;text-align:center">Pièce Justificative Provisoire</label>
+ <!-- <div class="" align="right" >
                    <button 
                         @click.prevent="afficherModalAjouterService"
                        class="btn  btn-success">
-                <span >  <i class="icon icon-plus-sign">Ajouter pièces Proforma</i></span>
+                <span >  <i class="icon icon-plus-sign">Ajouter pièces Justificative</i></span>
        
                 </button>
 
-                   </div>
-<table class="table table-bordered table-striped" v-if="formData.type_ordre_paiement==2">
+                   </div> -->
+<table class="table table-bordered table-striped" >
                 <thead>
                   <tr>
                      <th style="font-size:14px;font-weight:bold">Numero Ordre</th>
@@ -538,8 +919,8 @@ listePieceJustificativedefinitive
                     
                   </tr>
                 </thead>
-                <!-- <tbody>
-                  <tr class="odd gradeX" v-for="(type) in listePieceJustificative(formData.numero_ordre_paiement)" :key="type.id">
+                <tbody>
+                  <tr class="odd gradeX" v-for="(type) in listePieceJustificative(recupererNumeroOPProvisoire(formData2.numero_oP_provisoire))" :key="type.id">
                     <td style="width:20%,text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_ordre || 'Non renseigné'}}</td>
@@ -555,22 +936,22 @@ listePieceJustificativedefinitive
 
                     
                   </tr>
-                </tbody> -->
+                </tbody>
               </table>
 
-<label class="control-label" style="font-size:14px;font-weight:bold;text-align:center" v-if="formData.type_ordre_paiement==1">Pièce Justificative</label>
+<label class="control-label" style="font-size:14px;font-weight:bold;text-align:center">Pièce Justificative Définitive</label>
 
-                           <div class="" align="right" v-if="formData.type_ordre_paiement==1">
+                           <div class="" align="right">
                    <button 
                         @click.prevent="afficherModalAjouterService"
                        class="btn  btn-success">
-                <span >  <i class="icon icon-plus-sign">Ajouter pièces definitive</i></span>
+                <span >  <i class="icon icon-plus-sign">Ajouter pièces</i></span>
        
                 </button>
 
                    </div>
                     
- <table class="table table-bordered table-striped" v-if="formData.type_ordre_paiement==1">
+ <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <tr>
@@ -581,8 +962,8 @@ listePieceJustificativedefinitive
                     
                   </tr>
                 </thead>
-                <!-- <tbody>
-                  <tr class="odd gradeX" v-for="(type) in listePieceJustificativedefinitive(formData.numero_ordre_paiement)" :key="type.id">
+                <tbody>
+                   <tr class="odd gradeX" v-for="(type) in listePieceJustificativeOpDefinitive(formDataOpDefinitive.numero_Op_Definitive)" :key="type.id">
                     <td style="width:20%,text-align:center"
                       @dblclick="afficherModalModifierTypeTexte(type.id)"
                     >{{type.numero_ordre || 'Non renseigné'}}</td>
@@ -598,7 +979,7 @@ listePieceJustificativedefinitive
 
                     
                   </tr>
-                </tbody> -->
+                </tbody>
               </table>
                        </td>
                       
@@ -619,46 +1000,63 @@ listePieceJustificativedefinitive
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
                     <div id="tab1" class="tab-pane active">
-                  <table class="table table-bordered table-striped">
+                   <table class="table table-bordered table-striped">
                      <tr>
                        <td>
                        <div class="control-group">
                 <label class="control-label">Type de Financement  <code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
-                   <input
-                  
+                  <!-- <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="types_financements"
+                                                   v-model="formData.type_financement_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   
+                                                   placeholder=""
+                                >
+
+                                </model-list-select> -->
+                                  <input
+                  :value="RecupererLibelleTypeFinancement(RecupereridTypeFinancement(formData2.numero_oP_provisoire))"
                     type="text"
                     style="border:1px solid #000"
-                  :value="AfficheTypeFinancement(detailOpProvisoire.type_financement_id)"
+                   
                     class="span"
-                    readonly
-                  />
                   
-                                
+                  />
                 </div>
               </div>
-               
+               <!-- <code style="color:red;font-size:12px" v-if="formData.type_financement_id==''">Veuillez renseigner ce champ</code> -->
                   </td>
               
             
             <td>
                                 <label>Bailleur
                                 </label>
-                              
-                                <input
-                  
+                                <!-- <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="sources_financements"
+                                                   v-model="formData.bailler_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select> -->
+                                 <input
+                  :value="RecupererLibellSourceFinancement(RecupereridSourceFinancement(formData2.numero_oP_provisoire))"
                     type="text"
                     style="border:1px solid #000"
-                  :value="AfficheSourceFinancement(detailOpProvisoire.source_financement_id)"
+                   
                     class="span"
-                    readonly
+                  
                   />
                             </td>
            
                      </tr>
                    
-                        
-                    
+                  
                    </table>
                    
                     </div>
@@ -682,76 +1080,112 @@ listePieceJustificativedefinitive
                      <tr>
                     
             <td colspan="">
+              <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))">
               <div class="control-group">
                 <label class="control-label">Crédits autorisés (A)</label>
                 <div class="controls">
                  
-                  <money :value="fonctionPourVideLeChamp"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                  <money :value="CreditAutoriseSousBudget(this.recupererIdSousBudget(this.formData2.numero_oP_provisoire),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                 
+                
+  
+                </div>
+              </div>
+              </template>
+               <template v-else>
+                  <div class="control-group">
+                <label class="control-label">Crédits autorisés (A)</label>
+                <div class="controls">
+                 
+                  <money :value="CreditAutorise(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))"  readOnly  style="text-align:left;color:red"  class="span"></money>
                  
                  
+                </div>
+              </div>
+              </template>
+             
+              
+            </td>
+            <td colspan="">
+              <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))">
+                <div class="control-group">
+                <label class="control-label">Engagements antérieurs (B)</label>
+                <div class="controls">
+                 
+                  <money :value="CalculCumulAnterieureSousBudget" readOnly style="text-align:left;color:red"  class="span"></money>
+                
+                </div>
+              </div>
+                </template>
+              <template v-else>
+                <div class="control-group">
+                <label class="control-label">Engagements antérieurs (B)</label>
+                <div class="controls">
+                 
+                  <money :value="CalculCumulAnterieureUniteAdministrative" readOnly style="text-align:left;color:red"  class="span"></money>
+                
+                </div>
+              </div>
+                </template>
+             
+              
+            </td>
+             <td colspan="">
+              <div class="control-group">
+                <label class="control-label">Engagement actuel (C)</label>
+                <div class="controls">
+                
+                  <money :value="recupererEngageMarche(formData2.numero_oP_provisoire)" readOnly  style="text-align:left;color:red"  class="span"></money>
+                  
                 </div>
               </div>
               
             </td>
             <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Engagements antérieurs (B)</label>
+              <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))">
+                <div class="control-group">
+                <label class="control-label">Cumul engagements(D)(B+C)</label>
                 <div class="controls">
                  
-                  <money :value="CreditAutoriseTresor(detailOpProvisoire.ligne_economique_id)" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="CalculCumulEngagementSousBudget" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
-              
-            </td>
-             <td colspan="">
-              <div class="control-group">
-                <label class="control-label">-OP Provisoire(C)</label>
+                </template>
+              <template v-else>
+                <div class="control-group">
+                <label class="control-label">Cumul engagements(D)(B+C)</label>
                 <div class="controls">
+                 
+                  <money :value="CalculCumulEngagementUniteAdministrative" readOnly style="text-align:left;color:red"  class="span"></money>
                 
-                  <money  readOnly  style="text-align:left;color:red"  class="span"></money>
-                  
                 </div>
               </div>
-              
-            </td>
+                </template>
              
-                     </tr>
-                     <tr>
-                        
-             <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Engagement actuel (D)</label>
+              
+            </td>
+             <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))">
+                <div class="control-group">
+               <label class="control-label">Disponible budgétaire (A - D)</label>
                 <div class="controls">
+                 
+                  <money :value="CalculBisponibleBudgetSousBudget" readOnly style="text-align:left;color:red"  class="span"></money>
                 
-                  <money :value="detailOpProvisoire.montant_ordre_paiement" readOnly  style="text-align:left;color:red"  class="span"></money>
-                  
                 </div>
               </div>
-              
-            </td>
-                       <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Cumul engagements(E) (B + C + D)</label>
+                </template>
+              <template v-else>
+                <div class="control-group">
+               <label class="control-label">Disponible budgétaire (A - D)</label>
                 <div class="controls">
                  
-                  <money :value="detailOpProvisoire.montant_ordre_paiement" readOnly  style="text-align:left;color:red"  class="span"></money>
-                 
+                  <money :value="CalculBisponibleBudgetUniteAdministrative" readOnly style="text-align:left;color:red"  class="span"></money>
+                
                 </div>
               </div>
-              
-            </td>
-              <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Disponible budgétaire (A - E)</label>
-                <div class="controls">
-                 
-                  <money :value="CreditAutoriseEmprunt(detailOpProvisoire.ligne_economique_id)" readOnly  style="text-align:left;color:red"  class="span"></money>
-                 
-                </div>
-              </div>
-              
-            </td>
+                </template>
+             
                      </tr>
           </table>
                     </div>
@@ -786,7 +1220,7 @@ listePieceJustificativedefinitive
                   <input
                     type="date"
                     style="border:1px solid #000"
-                  v-model="detailOpProvisoire.gestionnaire_credit_date"
+                  v-model="formData.gestionnaire_credit_date"
                     class="span"
                     
                   />
@@ -798,7 +1232,7 @@ listePieceJustificativedefinitive
                   <input
                     type="text"
                     style="border:1px solid #000"
-                  v-model="detailOpProvisoire.gestionnaire_credit_non"
+                  v-model="formData.gestionnaire_credit_non"
                     class="span"
                     
                   />
@@ -810,7 +1244,7 @@ listePieceJustificativedefinitive
                   <input
                     type="text"
                     style="border:1px solid #000"
-                  v-model="detailOpProvisoire.gestionnaire_credit_fonction"
+                  v-model="formData.gestionnaire_credit_fonction"
                     class="span"
                   
                   />
@@ -842,7 +1276,7 @@ listePieceJustificativedefinitive
                 <label class="control-label">Nom</label>
                 <div class="controls">
                    <input type="text" class="span"  
-                   :value="recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(formData.unite_administrative_id)))"
+                   :value="recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))))"
                     readonly/>
                 </div>
               </div>
@@ -992,16 +1426,10 @@ listePieceJustificativedefinitive
               <div class="control-group">
             <label class="control-label">Numéro ordre</label>
             <div class="controls">
-              <input v-if="formData.type_ordre_paiement=='2'"
+             
+              <input
                 type="text"
-               :value="numeroOrdre(formData.numero_ordre_paiement)"
-                class="span5"
-                placeholder="Saisir le libellé"
-                readonly
-              />
-              <input v-if="formData.type_ordre_paiement=='1'"
-                type="text"
-               :value="numeroOrdreDefinitive(formData.numero_ordre_paiement)"
+               :value="numeroOrdreDefinitive(formDataOpDefinitive.numero_Op_Definitive)"
                 class="span5"
                 placeholder="Saisir le libellé"
                 readonly
@@ -1117,7 +1545,7 @@ listePieceJustificativedefinitive
                         <a data-toggle="tab" href="#BONCOMMANDE" v-if="formData.type_ordre_paiement==2">  Facture Proforma</a>
                       </li>
                       <li class="active">
-                        <a data-toggle="tab" href="#FACTUREDEFINITIVE" v-if="formData.type_ordre_paiement==1">  Facture Definitive</a>
+                        <a data-toggle="tab" href="#FACTUREDEFINITIVE">  Facture Definitive</a>
                       </li>
                       
                     </ul>
@@ -1127,7 +1555,7 @@ listePieceJustificativedefinitive
                     <div id="FACTUREDEFINITIVE" class="tab-pane active">
 
 <div class="widget-content nopadding">
-                      <div class="" align="right" v-if="formData.type_ordre_paiement==1">
+                      <div class="" align="right">
                    <button 
                         @click.prevent="afficherModalAjouterFacture"
                        class="btn  btn-success">
@@ -1138,7 +1566,7 @@ listePieceJustificativedefinitive
 
                    </div>
                       <div id="printMe">
-              <table class="table table-bordered table-striped" v-if="formData.type_ordre_paiement==1">
+              <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th>Designation</th>
@@ -1149,7 +1577,7 @@ listePieceJustificativedefinitive
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(type, index) in listeFacturePiece(formData.numero_ordre_paiement)" :key="type.id">
+                  <tr class="odd gradeX" v-for="(type, index) in listeFacturePiece(formDataOpDefinitive.numero_Op_Definitive)" :key="type.id">
                     <td 
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.designation || 'Non renseigné'}}</td>
@@ -1174,7 +1602,7 @@ listePieceJustificativedefinitive
                     <td></td>
                     <td></td>
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ht</td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDesDmdParBonCommande(formData.numero_ordre_paiement)))}}</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDesDmdParBonCommande(recupererNumeroOPProvisoire(formData2.numero_oP_provisoire))))}}</td>
                  <td></td>
                   </tr>
                   <tr>
@@ -1188,14 +1616,14 @@ listePieceJustificativedefinitive
                     <td></td>
                     <td></td>
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Tva</td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_ordre_paiement)))*afficherEnorere))}} </td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(recupererNumeroOPProvisoire(formData2.numero_oP_provisoire))))*afficherEnorere))}} </td>
                   <td></td>
                   </tr>
                   <tr>
                     <td></td>
                     <td></td>
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ttc</td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_ordre_paiement)))+parseFloat((SommeDesDmdParBonCommande(formData.numero_ordre_paiement)*afficherEnorere))))}} </td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(recupererNumeroOPProvisoire(formData2.numero_oP_provisoire))))+parseFloat((SommeDesDmdParBonCommande(recupererNumeroOPProvisoire(formData2.numero_oP_provisoire))*afficherEnorere))))}} </td>
                   <td></td>
                   </tr>
                 </tbody>
@@ -1227,7 +1655,7 @@ listePieceJustificativedefinitive
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(type, index) in listeFacturePiece(formData.numero_ordre_paiement)" :key="type.id">
+                  <tr class="odd gradeX" v-for="(type, index) in listeFacturePiece(formDataOpDefinitive.numero_Op_Definitive)" :key="type.id">
                     <td 
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.designation || 'Non renseigné'}}</td>
@@ -1252,7 +1680,7 @@ listePieceJustificativedefinitive
                     <td></td>
                     <td></td>
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ht</td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDesDmdParBonCommande(formData.numero_ordre_paiement)))}}</td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(SommeDesDmdParBonCommande(formDataOpDefinitive.numero_Op_Definitive)))}}</td>
                  <td></td>
                   </tr>
                   <tr>
@@ -1266,14 +1694,14 @@ listePieceJustificativedefinitive
                     <td></td>
                     <td></td>
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Tva</td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_ordre_paiement)))*afficherEnorere))}} </td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formDataOpDefinitive.numero_Op_Definitive)))*afficherEnorere))}} </td>
                   <td></td>
                   </tr>
                   <tr>
                     <td></td>
                     <td></td>
                     <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">Montant Ttc</td>
-                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formData.numero_ordre_paiement)))+parseFloat((SommeDesDmdParBonCommande(formData.numero_ordre_paiement)*afficherEnorere))))}} </td>
+                    <td style="color:red;font-size:14px;text-align:center;font-weight: bold;">{{formatageSomme(parseFloat(parseFloat((SommeDesDmdParBonCommande(formDataOpDefinitive.numero_Op_Definitive)))+parseFloat((SommeDesDmdParBonCommande(formDataOpDefinitive.numero_Op_Definitive)*afficherEnorere))))}} </td>
                   <td></td>
                   </tr>
                 </tbody>
@@ -1522,7 +1950,7 @@ listePieceJustificativedefinitive
     export default {
 components: {
     
-    // ModelListSelect,
+    
     //  facture
      
   },
@@ -1542,9 +1970,14 @@ components: {
                 formData:{
                  unite_administrative_id:"",
                  activite_id:"",
-                 ligne_economique_id:""
-                },
+                 ligne_economique_id:"",
+                 typedepense:1,
                 
+                },
+                formData3:{},
+                formDataOpDefinitive:{
+                  numero_Op_Definitive:"",
+                },
                 editpiece:{},
                 formData5:{
                   Auteur_id:"2"
@@ -1552,6 +1985,8 @@ components: {
                 formData9:{
                 exonere : 1
                 },
+                formData45:{},
+                formData7:{},
  formData1:{
               date_piece:"" ,
               reference:""  ,
@@ -1566,11 +2001,8 @@ components: {
             };
         },
 
-     created() {
-        
-            this.detailOpProvisoire=this.gettersgestionOrdrePaiement.find(item=>item.id==this.$route.params.id  )
-           
-            
+        created() {
+          
         },
         computed: {
            admin:admin,
@@ -1585,7 +2017,7 @@ components: {
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
 
-...mapGetters("bienService", ["gettersgestionOrdrePaiementAnnulation","gettersgestionOrdrePaiement","gettersDossierAutreDepense","gettersDossierMandat","gettersDossierFacturePiece","typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+...mapGetters("bienService", ["gettersgestionOrdrePaiement","gettersgestionOrdrePaiementAnnulation","gettersDossierAutreDepense","gettersDossierMandat","gettersDossierFacturePiece","typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -1606,54 +2038,471 @@ components: {
       "afficheLocalisationGeoNiveau5"
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
-        idOpannulation() {
+//  Engagementsantérieurs(){
+
+// if(this.comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))) !=  this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))){
+ 
+  
+// }
+// else{
+// return this.
+// }
+//     },
+
+
+CalculCumulAnterieureSousBudget(){
+  return parseFloat(this.EngagementsantérieursSousBudget(this.recupererIdSousBudget(this.formData2.numero_oP_provisoire),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))-parseFloat(this.recupererEngageMarche(this.formData2.numero_oP_provisoire))
+},
+CalculCumulAnterieureUniteAdministrative(){
+  return parseFloat(this.EngagementsantérieursUa(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))-parseFloat(this.recupererEngageMarche(this.formData2.numero_oP_provisoire))
+},
+
+
+CalculCumulEngagementSousBudget(){
+  return parseFloat(this.EngagementsantérieursSousBudget(this.recupererIdSousBudget(this.formData2.numero_oP_provisoire),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))
+},
+CalculCumulEngagementUniteAdministrative(){
+  return parseFloat(this.EngagementsantérieursUa(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))},
+
+
+CalculBisponibleBudgetSousBudget(){
+  return parseFloat(this.CreditAutoriseSousBudget(this.recupererIdSousBudget(this.formData2.numero_oP_provisoire),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))-parseFloat(this.CalculCumulEngagementSousBudget)
+},
+CalculBisponibleBudgetUniteAdministrative(){
+  return parseFloat(this.CreditAutorise(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))-parseFloat(this.CalculCumulEngagementUniteAdministrative)},
+
+
+
+
+
+
+
+
+
+
+
+
+      EngagementsantérieursUa() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.ligne_economique_id == id1 && qtreel.decision_cf==8).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+
+        }
+      };
+    },
+    EngagementsantérieursSousBudget() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.sous_budget_id == id && qtreel.ligne_economique_id == id1 && qtreel.decision_cf==8).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+
+        }
+      };
+    },
+
+recupererIdOpProvisoire() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id_op_provisoire == id);
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.numero_ordre_paiement == id);
 
       if (qtereel) {
-        return qtereel.id
+        return qtereel.id;
       }
       return 0
         }
       };
     },
-      AfficheNumeroMarche() {
+recupererIdAnnulation() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.numero_op_annulation == id);
 
       if (qtereel) {
-        return qtereel.numero_marche;
+        return qtereel.id;
       }
       return 0
         }
       };
     },
-    AfficheTypeFinancement() {
+
+listePieceJustificativeOpDefinitive() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.types_financements.find(qtreel => qtreel.id == id);
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_op_definitive == id && qtreel.etat_piece=="definitive" );
+
+      
+        }
+      };
+    },
+recupererIdEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.libelle;
+        return qtereel.entreprise_id;
       }
       return 0
         }
       };
     },
-     AfficheSourceFinancement() {
+
+recuperernom_autre_depense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.nom_autre_depense;
+      }
+      return 0
+        }
+      };
+    },
+
+
+recuperercompte_autre_depense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.compte_autre_depense;
+      }
+      return 0
+        }
+      };
+    },
+    
+recupereradresse() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.adresse;
+      }
+      return 0
+        }
+      };
+    },
+    
+recupererreference_autre_depense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.reference_autre_depense;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+recupererodjet_autre_depense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.odjet_autre_depense;
+      }
+      return 0
+        }
+      };
+    },
+recupererMonant_autre_depense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_ordre_paiement;
+      }
+      return 0
+        }
+      };
+    },
+recupererlivrable_autre_depense	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.livrable_autre_depense	;
+      }
+      return 0
+        }
+      };
+    },
+    
+recupererbeneficiaire_autre_depense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.beneficiaire_autre_depense	;
+      }
+      return 0
+        }
+      };
+    },
+    
+recuperergeo_autre_depense	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.geo_autre_depense	;
+      }
+      return 0
+        }
+      };
+    },
+    RecupereridSourceFinancement	() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.sources_financements.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.libelle;
+        return qtereel.id	;
       }
       return 0
         }
       };
     },
+    RecupererLibellSourceFinancement	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sources_financements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle	;
+      }
+      return 0
+        }
+      };
+    },
+    RecupererLibelleTypeFinancement	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.types_financements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle	;
+      }
+      return 0
+        }
+      };
+    },
+    RecupereridTypeFinancement	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_financement_id	;
+      }
+      return 0
+        }
+      };
+    },
+recupererdure_autre_depense	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.dure_autre_depense	;
+      }
+      return 0
+        }
+      };
+    },
+
+recupererModePaiement	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.mode_paiement_id	;
+      }
+      return 0
+        }
+      };
+    },
+    
+recupererEngageMarche	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_ordre_paiement	;
+      }
+      return 0
+        }
+      };
+    },
+recupererLibelleModePaiement	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.modepaiements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle	;
+      }
+      return 0
+        }
+      };
+    },
+    recupererIdMarcheUa	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.unite_administrative_id	;
+      }
+      return 0
+        }
+      };
+    },
+    
+    recupererDureMarche	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.duree	;
+      }
+      return 0
+        }
+      };
+    },
+    recupererMontantMarche	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.montant_act;
+      }
+      return 0
+        }
+      };
+    },
+recupererIdMarche	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.marche_id	;
+      }
+      return 0
+        }
+      };
+    },
+      recupererNomTypeDepense(){
+  if(this.recupererTypeDepense(this.formData2.numero_oP_provisoire) == 2){
+    return "Autres"
+  }
+  else if(this.recupererTypeDepense(this.formData2.numero_oP_provisoire) == 1){
+    return "Marche"
+  }
+  else{
+return ""
+  }
+},
+recupererTypeDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.typedepense;
+      }
+      return 0
+        }
+      };
+    },
+    
+recupererIdSousBudget() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.sous_budget_id;
+      }
+      return 0
+        }
+      };
+    },
+    recupererLibelleSousBudget() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getSousBudget.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.activite_enfant;
+      }
+      return 0
+        }
+      };
+    },
+recupererNumeroOPProvisoire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_ordre_paiement;
+      }
+      return 0
+        }
+      };
+    },
+
+recupererIdLigneEconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ligne_economique_id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+Disponiblebudgétaire() { 
+      const val = parseFloat(this.CreditAutoriseTresor(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))) + parseFloat(this.Cumulengagements) ;
+      return parseFloat(val).toFixed(0);
+      
+    },
+Cumulengagements() { 
+      const val = parseFloat(this.Engagementsantérieurs) + parseFloat(this.recupererEngageMarche(this.formData2.numero_oP_provisoire));
+      return parseFloat(val).toFixed(0);
+      
+    },
+
+
+
+
+
 recupererNomDuControleurF() {
       return id => {
         if (id != null && id != "") {
@@ -1691,19 +2540,21 @@ recupererIdUser() {
       };
     },
 
- fonctionPourVideLeChamp(){
-if(this.comparaison(this.detailOpProvisoire.activite_id)==this.detailOpProvisoire.activite_id){
-  return this.CreditAutoriseSousBudget(this.detailOpProvisoire.sous_budget_id,this.detailOpProvisoire.ligne_economique_id)
+//  fonctionPourVideLeChamp(){
+   
+// if(this.comparaison(this.idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))==this.idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))){
+ 
+//  return this.CreditAutoriseSousBudget(this.recupererIdSousBudget(this.formData2.numero_oP_provisoire),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))
   
-}
-else{
-return this.CreditAutorise(this.detailOpProvisoire.unite_administrative_id,this.detailOpProvisoire.ligne_economique_id)
-}
-    },
+// }
+// else{
+
+// }
+    // },
 CreditAutoriseSousBudget() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.sous_activite_id == id && qtreel.ligneeconomique_id==id1);
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.sous_budget_id == id && qtreel.ligneeconomique_id==id1);
 
       if (qtereel) {
         return qtereel.dotation
@@ -1728,7 +2579,7 @@ CreditAutorise() {
       RecupererlibelleLigneEconomique() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.activite_id==id1 && qtreel.sous_activite_id==0);
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.activite_id==id1 && qtreel.sous_budget_id==0);
 
       
         }
@@ -1761,7 +2612,7 @@ CreditAutorise() {
       afficheLesSousBudgetLigneBudgetaire() {
       return (id1,id) => {
         if (id1 != null && id1 != "" && id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.activite_id==id1 && qtreel.sous_activite_id==id);
+           return this.budgetEclate.filter(qtreel => qtreel.activite_id==id1 && qtreel.sous_budget_id==id);
 
      
       
@@ -1850,7 +2701,7 @@ numeroReservation() {
            const qtereel = this.gettersDemandeEngagement.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.numero_ordre_paiement_systeme;
+        return qtereel.numero_Op_Definitive_systeme;
       }
       return ""
         }
@@ -1963,7 +2814,7 @@ else {
        SommeDesDmdParBonCommande() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierFacturePiece.filter(qtreel => qtreel.numero_ordre_paiement == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_facture_ht), 0).toFixed(0);
+           return this.gettersDossierFacturePiece.filter(qtreel => qtreel.numero_op_hors_sib == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_facture_ht), 0).toFixed(0);
 
         }
       };
@@ -1971,7 +2822,7 @@ else {
       listeFacturePiece() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersDossierFacturePiece.filter(qtreel => qtreel.numero_ordre_paiement == id);
+           return this.gettersDossierFacturePiece.filter(qtreel => qtreel.numero_op_hors_sib == id && qtreel.etat_acticle=="definitive");
 
       
         }
@@ -2011,19 +2862,19 @@ MontantFactureHt() {
       };
     },
 calculCumultresor() { 
-      const val = parseFloat(this.CreditAutoriseTresor(this.formData.ligne_economique_id)) - parseFloat(this.formData.montant_tresor) ;
+      const val = parseFloat(this.CreditAutoriseTresor(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))) - parseFloat(this.formData.montant_tresor) ;
       return parseFloat(val).toFixed(0);
       
     },
 
  calculCumul() { 
-      const val = parseFloat(this.TotalGeneralDemandeEngagement) + parseFloat(this.CumulDemande(this.formData.ligne_economique_id)) ;
+      const val = parseFloat(this.TotalGeneralDemandeEngagement) + parseFloat(this.CumulDemande(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))) ;
       return parseFloat(val).toFixed(0);
       
     },
 
       MontantDisponible() { 
-      const val = parseFloat(this.CreditAutorise(this.formData.ligne_economique_id)) - parseFloat(this.calculCumul) ;
+      const val = parseFloat(this.CreditAutorise(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))) - parseFloat(this.calculCumul) ;
       return parseFloat(val).toFixed(0);
       
     },
@@ -2184,15 +3035,27 @@ CumulDemande: function () {
         }
       };
     },
-    idActivite() {
+    idUa() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id);
 
       if (qtereel) {
-        return qtereel.activite_id
+        return qtereel.ua_id
       }
       return 0
+        }
+      };
+    },
+    NumeroMarche1() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_marche
+      }
+      return 'Non renseigné'
         }
       };
     },
@@ -2280,7 +3143,18 @@ libelleBanque() {
         }
       };
     },
-    
+    idActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id);
+
+      if (qtereel) {
+        return qtereel.activite_id
+      }
+      return 0
+        }
+      };
+    },
     idAction() {
       return id => {
         if (id != null && id != "") {
@@ -2345,7 +3219,7 @@ return this.uniteAdministratives
       
       return id => {
         if (id != null && id != "") {
-           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_ordrepaiement == id && qtreel.etat_piece=="proforma").length + 1 ;
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_op_hors_sib == id && qtreel.etat_piece=="proforma").length + 1 ;
 
       
         }
@@ -2355,7 +3229,7 @@ return this.uniteAdministratives
       
       return id => {
         if (id != null && id != "") {
-           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_ordrepaiement == id && qtreel.etat_piece=="definitive").length + 1 ;
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_op_hors_sib == id && qtreel.etat_piece=="definitive").length + 1 ;
 
       
         }
@@ -2365,21 +3239,13 @@ return this.uniteAdministratives
     listePieceJustificative() {
       return id => {
         if (id != null && id != "") {
-           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_ordrepaiement == id && qtreel.etat_piece=="proforma" );
+           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_op_hors_sib == id && qtreel.etat_piece=="proforma" );
 
       
         }
       };
     },
-    listePieceJustificativeDefinitive() {
-      return id => {
-        if (id != null && id != "") {
-           return this.gettersnomPieceJustificative.filter(qtreel => qtreel.numero_ordrepaiement == id && qtreel.etat_piece=="definitive" );
-
-      
-        }
-      };
-    },
+   
     idEntreprise() {
       return id => {
         if (id != null && id != "") {
@@ -2444,7 +3310,7 @@ methods: {
       "ajouterDossierFacture",
       "modifierDossierFacture",
       "supprimerDossierFacture",
-      "ajouterGestionOrdrePaiement"
+      "modifierGestionOrdrePaiement"
      
     ]),
       ...mapActions('personnelUA', ["ajouterFichierJointDmd"]),
@@ -2503,55 +3369,30 @@ this.$("#ModifierexampleModal").modal('hide');
        
     },
     AjoutePieceJustific() {
-      if(this.formData.type_procedure_id=='Engagement par Bon de Commande'){
- this.intitule=this.anneeAmort + "" + this.formData.numero_ordre_paiement
-      var nouvelObjetProforma = {
-        
-        	numero_ordre:this.numeroOrdre(this.formData.numero_ordre_paiement),
-      numero_ordrepaiement:this.formData.numero_ordre_paiement,
-      numero_ordre_paiement_combine:this.intitule,
-      libelle:this.formData1.libelle,
-      reference:this.formData1.reference,
-      date_piece:this.formData1.date_piece,
-      etat_piece:"proforma"
-      };
-    
-      this.ajouterPieceJustificative(nouvelObjetProforma)
-      this.ajouterFichierJoin()
-   this.$('#exampleModal').modal('hide');
-       this.formData1 = {
-        
-        numero_ordrepaiement:"",
-      numero_ordre_paiement_combine:"",
-      libelle:"",
-      reference:"",
-      date_piece:"",
-      };
-      }
-     else{
-        this.intitule=this.anneeAmort + "" + this.formData.numero_ordre_paiement
+      
       var nouvelObjetdefinitive = {
         
-        	numero_ordre:this.numeroOrdreDefinitive(this.formData.numero_ordre_paiement),
-      numero_ordrepaiement:this.formData.numero_ordre_paiement,
-      numero_ordre_paiement_combine:this.intitule,
-      libelle:this.formData1.libelle,
+        	numero_ordre:this.numeroOrdreDefinitive(this.formDataOpDefinitive.numero_Op_Definitive),
+      numero_op_definitive:this.formDataOpDefinitive.numero_Op_Definitive,
+      // numero_Op_Definitive_combine:this.intitule,
+      // libelle:this.formData1.libelle,
       reference:this.formData1.reference,
       date_piece:this.formData1.date_piece,
-      etat_piece:"definitive"
+      etat_piece:"definitive",
+      // numero_op_hors_sib:this.formDataOpDefinitive.numero_Op_Definitive
       };
     
       this.ajouterPieceJustificative(nouvelObjetdefinitive)
       this.ajouterFichierJoin()
    this.$('#exampleModal').modal('hide');
        this.formData1 = {
-        numero_ordrepaiement:"",
-      numero_ordre_paiement_combine:"",
+        numero_op_definitive:"",
+      numero_Op_Definitive_combine:"",
       libelle:"",
       reference:"",
       date_piece:"",
       };
-     }
+     
     },
 
 
@@ -2559,54 +3400,56 @@ this.$("#ModifierexampleModal").modal('hide');
 rechercheListeMarche(){
       // console.log(this.formMandater.matricule_m)
 
-      let objetMandater=this.acteEffetFinanciers.filter(item=>item.numero_marche==this.formData2.numeromarche && item.ua_id==this.formData.unite_administrative_id && this.afficherAttributMarche(item.marche_id)==2)
+      let objetMandater=this.gettersgestionOrdrePaiementAnnulation.filter(item=>item.numero_op_annulation==this.formData.numero_ordre_anulation  && item.decision_cf_op_annul==8)
       // console.log(objetMandater)
       if(objetMandater!=undefined){
         if (objetMandater.length==1){
-          let acteur= this.acteEffetFinanciers.find(item=>item.numero_marche==this.formData2.numeromarche)
-          this.formData2.nom_entreprise_id=acteur.entreprise_id,
-          this.formData2.compte_entreprise_id=acteur.entreprise_id,
-         this.formData2.adresse_entreprise_id=acteur.entreprise_id,
-         this.formData2.banque_entreprise_id=acteur.banq_id,
-         this.formData2.marche_id=acteur.marche_id,
-         this.formData2.livrable_id=acteur.marche_id,
+          let acteur= this.gettersgestionOrdrePaiementAnnulation.find(item=>item.numero_op_annulation==this.formData.numero_ordre_anulation)
+          
+          this.formData2.numero_oP_provisoire=acteur.id_op_provisoire,
+          this.formData3.idopannulation=acteur.id
+        //   this.formData2.compte_entreprise_id=acteur.id_op_provisoire,
+        //  this.formData2.adresse_entreprise_id=acteur.id_op_provisoire,
+        //  this.formData2.banque_entreprise_id=acteur.id_op_provisoire,
+        //  this.formData2.marche_id=acteur.id_op_provisoire,
+        //  this.formData2.livrable_id=acteur.id_op_provisoire,
 
-          this.formData2.beneficiaire_id=acteur.unite_administrative_id,
-         this.formData2.geo_id=acteur.marche_id,
-         this.formData2.dure_realisation=acteur.duree,
-         this.formData2.montant_engage=acteur.montant_act
+        //   this.formData2.beneficiaire_id=acteur.id_op_provisoire,
+        //  this.formData2.geo_id=acteur.id_op_provisoire,
+        //  this.formData2.dure_realisation=acteur.id_op_provisoire,
+        //  this.formData7.Montant_Marche=acteur.id_op_provisoire
           this.message_mandater=" "
 
         }
         else{
           this.message_mandater="Numero du marche n'existe pas"
-          this.formData2.numero_cc_fournisseur_nom=""
-               this.formData2.nom_entreprise_id="",
-          this.formData2.compte_entreprise_id="",
-         this.formData2.adresse_entreprise_id="",
-         this.formData2.banque_entreprise_id="",
-         this.formData2.marche_id="",
-         this.formData2.livrable_id="",
+          // this.formData2.numero_oP_provisoire=""
+        //        this.formData2.nom_entreprise_id="",
+        //   this.formData2.compte_entreprise_id="",
+        //  this.formData2.adresse_entreprise_id="",
+        //  this.formData2.banque_entreprise_id="",
+        //  this.formData2.marche_id="",
+        //  this.formData2.livrable_id="",
 
-          this.formData2.beneficiaire_id="",
-         this.formData2.geo_id="",
-         this.formData2.dure_realisation="",
-         this.formData2.montant_engage=""
+        //   this.formData2.beneficiaire_id="",
+        //  this.formData2.geo_id="",
+        //  this.formData2.dure_realisation="",
+        //  this.formData7.Montant_Marche=""
         }
       }
-      if(this.formData2.numero_marche==""){
+      if(this.formData.numero_ordre_anulation==""){
         
-               this.formData2.nom_entreprise_id="",
-          this.formData2.compte_entreprise_id="",
-         this.formData2.adresse_entreprise_id="",
-         this.formData2.banque_entreprise_id="",
-         this.formData2.marche_id="",
-         this.formData2.livrable_id="",
+               //this.formData2.numero_oP_provisoire=""
+        //   this.formData2.compte_entreprise_id="",
+        //  this.formData2.adresse_entreprise_id="",
+        //  this.formData2.banque_entreprise_id="",
+        //  this.formData2.marche_id="",
+        //  this.formData2.livrable_id="",
 
-          this.formData2.beneficiaire_id="",
-         this.formData2.geo_id="",
-         this.formData2.dure_realisation="",
-         this.formData2.montant_engage=""
+        //   this.formData2.beneficiaire_id="",
+        //  this.formData2.geo_id="",
+        //  this.formData2.dure_realisation="",
+        //  this.formData7.Montant_Marche=""
       }
     },
 
@@ -2622,31 +3465,15 @@ rechercheListeMarche(){
 
 
     ajouterFichierJoin () {
-      if(this.formData.type_procedure_id=='Engagement par Bon de Commande'){
-const formData = new FormData();
-                this.intitule = this.anneeAmort + "" + this.formData.numero_ordre_paiement
-                formData.append('fichier', this.selectedFile, this.selectedFile.name);
     
-                formData.append('numero_ordre_paiement_combine', this.intitule);
-                formData.append('numero_ordrepaiement', this.formData.numero_ordre_paiement);
-                 formData.append('numero_fichier', this.numeroOrdre(this.formData.numero_ordre_paiement));
-                 formData.append('etat_piece','proforma')
-                let config = {
-                    header : {
-                        'Content-Type' : 'multipart/form-data'
-                    }
-                }
-                this.ajouterFichierJointDmd(formData,config)
-                
-      }
-                else{
                   const formData = new FormData();
-                this.intitule = this.anneeAmort + "" + this.formData.numero_ordre_paiement
+                //this.intitule = this.anneeAmort + "" + this.formDataOpDefinitive.numero_Op_Definitive
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
     
-                formData.append('numero_ordre_paiement_combine', this.intitule);
-                formData.append('numero_ordrepaiement', this.formData.numero_ordre_paiement);
-                 formData.append('numero_fichier', this.numeroOrdre(this.formData.numero_ordre_paiement));
+                // formData.append('numero_Op_Definitive_combine', this.intitule);
+                // formData.append('numero_ordrepaiement', this.formDataOpDefinitive.numero_Op_Definitive);
+                 formData.append('numero_op_hors_sib',this.formDataOpDefinitive.numero_Op_Definitive),
+                 formData.append('numero_fichier', this.numeroOrdre(this.formDataOpDefinitive.numero_Op_Definitive));
                  formData.append('etat_piece','definitive')
                 let config = {
                     header : {
@@ -2655,37 +3482,18 @@ const formData = new FormData();
                 }
                 this.ajouterFichierJointDmd(formData,config)
                 
-                }
+                
                
 
             },
 
 ajouterFacture(){
-  if(this.formData.type_procedure_id=='Engagement par Bon de Commande'){
-this.intitule=this.anneeAmort + "" + this.formData.numero_ordre_paiement
-              var nouvelObjetproforma = {
-        ...this.FormDataFacture,
-          total_facture_ht:this.MontantFactureHt,
-        	numero_ordre_paiement_engagement:this.intitule,
-          numero_ordre_paiement:this.formData.numero_ordre_paiement,
-          etat_acticle:"proforma"
-      };
-    
-      this.ajouterDossierFacture(nouvelObjetproforma)
-       this.FormDataFacture={
-    designation:"",
-    quantite:"0",
-    prix_unitaire:"0",
-    total_facture_ht:"0"
-  }
-  }
-  else{
-    this.intitule=this.anneeAmort + "" + this.formData.numero_ordre_paiement
+            
               var nouvelObjetdefinitive = {
         ...this.FormDataFacture,
           total_facture_ht:this.MontantFactureHt,
-        	numero_ordre_paiement_engagement:this.intitule,
-          numero_ordre_paiement:this.formData.numero_ordre_paiement,
+        //	numero_Op_Definitive_engagement:this.intitule,
+          numero_op_hors_sib:this.formDataOpDefinitive.numero_Op_Definitive,
           etat_acticle:"definitive"
       };
     
@@ -2696,7 +3504,7 @@ this.intitule=this.anneeAmort + "" + this.formData.numero_ordre_paiement
     prix_unitaire:"0",
     total_facture_ht:"0"
   }
-  }
+  
               
             },
 
@@ -2704,36 +3512,62 @@ this.intitule=this.anneeAmort + "" + this.formData.numero_ordre_paiement
 AjouterOrdrePaiement(){
  
 
-              var nouvelObjetOrdrePaiement = {
+  var nouvelObjetOrdrePaiement = {
         exercice:this.anneeAmort,
-        	type_ordre_paiement:this.detailOpProvisoire.type_ordre_paiement,
-          numero_ordre_paiement:this.formData.numero_ordre_paiement,
-          section_id:this.detailOpProvisoire.section_id,
-           programme_id:this.detailOpProvisoire.programme_id,
-        	unite_administrative_id:this.detailOpProvisoire.unite_administrative_id,
-          action_id:this.detailOpProvisoire.action_id,
-          sous_budget_id:this.detailOpProvisoire.sous_budget_id,
-          activite_id:this.detailOpProvisoire.activite_id,
-           ligne_economique_id:this.detailOpProvisoire.ligne_economique_id,
-        	entreprise_id:this.detailOpProvisoire.nom_entreprise_id,
-          marche_id:this.detailOpProvisoire.marche_id,
-          type_financement_id:this.detailOpProvisoire.type_financement_id,
-numero_op_prov_definitive:this.detailOpProvisoire.numero_ordre_paiement,
-           source_financement_id:this.detailOpProvisoire.bailler_id,
-        	montant_ordre_paiement:this.detailOpProvisoire.montant_engage,
-          mode_paiement_id:this.detailOpProvisoire.mode_paiement_id,
-          gestionnaire_credit_non:this.detailOpProvisoire.gestionnaire_credit_non,
-           gestionnaire_credit_date:this.detailOpProvisoire.gestionnaire_credit_date,
-        	gestionnaire_credit_fonction:this.detailOpProvisoire.gestionnaire_credit_fonction,
-          date_op_definitif:this.formData.date_op_definitif,
-          id_op_Annulation:this.idOpannulation(this.detailOpProvisoire.id),
-          controleur_financier_id:this.recupererIdUser(this.recupererIdServiceCF(this.detailOpProvisoire.unite_administrative_id)),
+        id:this.recupererIdOpProvisoire(this.recupererNumeroOPProvisoire(this.formData2.numero_oP_provisoire)),
+        	id_op_Annulation:this.formData3.idopannulation,
+        	type_ordre_paiement:this.formData.type_ordre_paiement,
+          	numero_op_prov_definitive:this.formDataOpDefinitive.numero_Op_Definitive,
+          date_op_definitif:this.formDataOpDefinitive.date_op_definitif,
+          section_id:this.idSection(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),
+           programme_id:this.idProgramme(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),
+        	unite_administrative_id:this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),
+          action_id:this.idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),
+          sous_budget_id:this.recupererIdSousBudget(this.formData2.numero_oP_provisoire),
+          activite_id:this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),
+           ligne_economique_id:this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire),
+           	typedepense:this.recupererTypeDepense(this.formData2.numero_oP_provisoire),
+
+mode_paiement_id:this.recupererModePaiement(this.formData2.numero_oP_provisoire),
+           entreprise_id:this.recupererIdEntreprise(this.formData2.numero_oP_provisoire),
+          marche_id:this.recupererIdMarche(this.formData2.numero_oP_provisoire),
+          type_financement_id:this.RecupereridTypeFinancement(this.formData2.numero_oP_provisoire),
+                  source_financement_id:this.RecupereridSourceFinancement(this.formData2.numero_oP_provisoire),
+          montant_ordre_paiement:this.recupererMonant_autre_depense(this.formData2.numero_oP_provisoire),
+           decision_cf_definitif:0,
+        	
+         
+          gestionnaire_credit_non:this.formData.gestionnaire_credit_non,
+           gestionnaire_credit_date:this.formData.gestionnaire_credit_date,
+        	gestionnaire_credit_fonction:this.formData.gestionnaire_credit_fonction,
+
+          controleur_financier_id:this.recupererIdUser(this.recupererIdServiceCF(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))),
+     nom_autre_depense:this.recuperernom_autre_depense(this.formData2.numero_oP_provisoire),
+     	compte_autre_depense:this.recuperercompte_autre_depense(this.formData2.numero_oP_provisoire),
+       adresse:this.recupereradresse(this.formData2.numero_oP_provisoire),
+       reference_autre_depense:this.recupererreference_autre_depense(this.formData2.numero_oP_provisoire),
+       odjet_autre_depense:this.recupererodjet_autre_depense(this.formData2.numero_oP_provisoire),
+       livrable_autre_depense:this.recupererlivrable_autre_depense(this.formData2.numero_oP_provisoire),
+       beneficiaire_autre_depense:this.recupererbeneficiaire_autre_depense(this.formData2.numero_oP_provisoire),
+       geo_autre_depense:this.recuperergeo_autre_depense(this.formData2.numero_oP_provisoire),
+       dure_autre_depense:this.recupererdure_autre_depense(this.formData2.numero_oP_provisoire)
       };
     
-      this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement)
-       
+      this.modifierGestionOrdrePaiement(nouvelObjetOrdrePaiement)
+       this.formData2={
+     exercice:this.anneeAmort,
+        	numero_oP_provisoire:"",
+          
+
+         
+          controleur_financier_id:this.recupererIdUser(this.recupererIdServiceCF(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))),
+  }
   
-  },
+
+  
+     },
+  
+            
               
             
 
@@ -2762,7 +3596,10 @@ apercuFacture() {
     formaterDate(date) {
               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
-formatageSomme:formatageSomme
+formatageSomme:formatageSomme,
+
+
+
 
 
 

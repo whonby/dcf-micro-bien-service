@@ -1528,7 +1528,7 @@ doublonLigneBudgetaireSousBudget() {
 return parseFloat(this.montantEmprunt(this.formData1.ligneeconomique_id))+parseFloat(this.montantTresor(this.formData1.ligneeconomique_id))+parseFloat(this.montantDon(this.formData1.ligneeconomique_id))
 },
    SommeCumulAjouter(){
-return (parseFloat(this.SommeCumul)+parseFloat(this.dotationTotal))
+return (parseFloat(this.dotationTotal))
 },
         },
 

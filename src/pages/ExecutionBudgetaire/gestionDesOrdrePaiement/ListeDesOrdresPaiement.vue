@@ -1,7 +1,7 @@
 
 <template>
   <div>
- <h5>Listes des Ordres de Paiements</h5>
+ 
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
@@ -19,23 +19,27 @@
           </download-excel> -->
             
           <table class="table table-bordered table-striped">
-            <td style="width:78%">
+             <td style="width:60%">
+
+       
+          </td>
+            <td style="width:0%;font-weight:bolder;color:#000">
 <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="ajouterOpSysteme"><i class="icon icon-folder-open"> Nouveau Ordre de Paiement</i></button>
+    <button class="btn btn-success" @click.prevent="ajouterOpSysteme" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT</i></button>
     
         </div> 
        
           </td>
            <td style="width:0px">
 <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="ajouterOpAnnulation"><i class="icon icon-folder-open"> Annulation Op Provisoire</i></button>
+    <button class="btn btn-danger" @click.prevent="ajouterOpAnnulation" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER OP D'ANNULATION</i></button>
     
         </div> 
        
           </td> 
            <td style="width:0px">
 <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="ajouterOpSysteme"><i class="icon icon-folder-open"> Op Definitive</i></button>
+    <button class="btn btn-primary" @click.prevent="ajouterOpDeffinitif" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER OP DEFINITIVE</i></button>
     
         </div> 
        
@@ -59,7 +63,9 @@
                   <tr>
                      <th   style="font-size:14px;font-weight:bold">Exercice</th>
                      
-                     <th   style="font-size:14px;font-weight:bold">N°Ordre Paiement</th>
+                     <th   style="font-size:14px;font-weight:bold;color:green">N°OP(Def ou Prov)</th>
+                     <th   style="font-size:14px;font-weight:bold;color:red">N°OP Annulation</th>
+                     <th   style="font-size:14px;font-weight:bold;color:blue">N°OP Definitive</th>
                     <th   style="font-size:14px;font-weight:bold">Type d'ordre de paiement</th>
                     <th   style="font-size:14px;font-weight:bold">Objet Op</th>
                     <th   style="font-size:14px;font-weight:bold">UA</th>
@@ -67,9 +73,11 @@
                      <!-- <th   style="font-size:14px;font-weight:bold">Montant Autorisé</th> -->
                     <th   style="font-size:14px;font-weight:bold">Engagement actuel</th>
                               
-                    <th   style="font-size:14px;font-weight:bold">Décision OP</th> 
-                     <th   style="font-size:14px;font-weight:bold">OP Annulation</th>
-                     <th   style="font-size:14px;font-weight:bold">OP Definitive</th>
+                    <th   style="font-size:14px;font-weight:bold">Décision Op Provisoire</th>
+                    
+                     <th   style="font-size:14px;font-weight:bold">Décision OP Annulation</th>
+                     <th   style="font-size:14px;font-weight:bold">Décision OP Definitive</th>
+                
                   <!-- <th>Montant Disponible</th> -->
                   </tr>
                 </thead>
@@ -79,196 +87,140 @@
                       style="font-size:14px;font-weight:bold;text-align:center"
                     >{{type.exercice || 'Non renseigné'}}</td>
                      <td 
-                      style="font-size:14px;font-weight:bold;text-align:center"
+                      style="font-size:14px;font-weight:bold;text-align:center;color:green"
                     >{{type.numero_ordre_paiement || 'Non renseigné'}}</td>
-                   
+                   <td v-if="afficheNumeroOpAnuulation(type.id) != 0"
+                      style="font-size:14px;font-weight:bold;text-align:center;color:red"
+                    >{{afficheNumeroOpAnuulation(type.id) }}</td>
+ <td v-else style="background-color:lightblue"></td>
+                    <td 
+                      style="font-size:14px;font-weight:bold;text-align:center;color:blue"
+                    >{{type.numero_op_prov_definitive }}</td>
 
+                   
  <td v-if="type.type_ordre_paiement==1"
-                      style="font-size:14px;font-weight:bold"                
-                    > <span>ORDRE DE PAIEMENT DIRECT</span></td>
+                      style="font-size:14px;font-weight:bold;text-align:center"                
+                    > <span>OP Direct</span></td>
                     <td v-else
-                      style="font-size:14px;font-weight:bold"                
-                    > <span>ORDRE DE PAIEMENT PROVISOIRE</span></td>
-                     <td
+                      style="font-size:14px;font-weight:bold;text-align:center"                
+                    > <span>OP Provisoire</span></td>
+                     <td v-if="type.marche_id != null"
                       style="font-size:14px;font-weight:bold"
                     >{{libelleMarche(type.marche_id) || 'Non renseigné'}}</td>
+                    <td v-else
+                      style="font-size:14px;font-weight:bold"
+                    >{{type.odjet_autre_depense || 'Non renseigné'}}</td>
                      <td
                       style="font-size:14px;font-weight:bold"
                     >{{libelleUa(type.unite_administrative_id) || 'Non renseigné'}}</td>
-                     <!-- <td
-                      style="font-size:14px;font-weight:bold"
-                    >{{type.sous_budget_id || 'Non renseigné'}}</td> -->
-                    <!-- <td
-                      
-                    >{{type.ligne_economique_id || 'Non renseigné'}}</td> -->
+                    
                     <td
                        style="font-size:14px;font-weight:bold;text-align:center"
-                    >{{formatageSomme(parseFloat(MontantMarche(type.marche_id))) || 'Non renseigné'}}</td>
-                     <td>
-                        <button v-if="type.decision_cf==8"  class="btn  btn-success"  @click="apercuFacture(type.id)">                        
+                    >{{formatageSomme(parseFloat(type.montant_ordre_paiement)) || 'Non renseigné'}}</td>
+                     <td v-if="type.decision_cf != null">
+                        <button v-if="type.decision_cf==8"  class="btn  btn-success tailBtn"  @click="apercuFacture(type.id)">                        
                      
-                      <span    >Visé</span>
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px"  >Visé</span>
                       
                       </button>
-                       <button v-else-if="type.decision_cf == 2" class="btn  btn-warning" @click="apercuFacture(type.id)">                        
+                       <button v-else-if="type.decision_cf == 2" class="btn  btn-warning tailBtn" @click="apercuFacture(type.id)">                        
                      
                       
-                       <span  >Différé</span>
+                       <span  style="font-weight:bolder;color:#fff;font-size:18px">Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="type.decision_cf == 3" class="btn  btn-danger" @click="apercuFacture(type.id)">                        
+                        <button v-else-if="type.decision_cf == 3" class="btn  btn-danger tailBtn" @click="apercuFacture(type.id)">                        
                      
                       
-                       <span  >Réjeté</span>
+                       <span style="font-weight:bolder;color:#fff;font-size:18px" >Réjeté</span>
                       
                     
                       </button>
-                       <button v-else-if="type.decision_cf == 9"  class="btn  btn-success" @click="apercuFacture(type.id)">                        
+                       <button v-else-if="type.decision_cf == 9"  class="btn  btn-success tailBtn" @click="apercuFacture(type.id)">                        
                      
-                      <span title="Visé avec observation" >Visé O</span>
+                      <span title="Visé avec observation" style="font-weight:bolder;color:#fff;font-size:18px" >Visé O</span>
                       
                       </button>
-                     <button v-else class="btn  btn-info" @click="apercuFacture(type.id)" >                        
+                     <button v-else class="btn  btn-info tailBtn" @click="apercuFacture(type.id)" >                        
                      
                       
-                       <span>Attente</span>
-                      
-                    
-                      </button>
-                    </td>
-                     <!-- <td  v-if="type.type_ordre_paiement==2 && type.decision_cf == 8 || type.type_ordre_paiement==2 && type.decision_cf == 9" > -->
-                        <!-- <button v-if="afficheDecisionOpAnuulation(type.id) == 8"  class="btn  btn-success"  @click="ModalOpAnnulation(type.id)">                        
-                     
-                      <span    >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 2" class="btn  btn-warning" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="afficheDecisionOpAnuulation(type.id) == 3" class="btn  btn-danger" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 9"  class="btn  btn-success" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      <span>Visé avec observation</span>
-                      
-                      </button>
-                      <template>
-                        <button v-if="type.id == afficheDecisionLiquidation(type.id) && afficheDecisionOpAnuulation(type.id) == 0" class="btn  btn-info" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      
-                       <span>Attente</span>
-                      
-                    
-                      </button> -->
-                  <td v-if="type.type_ordre_paiement==2 && type.decision_cf == 8 && afficheDecisionOpAnuulation1(type.id) == '' || type.type_ordre_paiement==2 && type.decision_cf == 9 && afficheDecisionOpAnuulation1(type.id) == ''" >
-                      
-                       <router-link :to="{ name: 'AjouterOrdrePaiementAnnulation', params: { id: type.id }}"
-                class ="btn  btn-danger" title="" >
-                  <button    class ="btn  btn-danger"  >                        
-                     
-                      
-                       <span>Ajouter Op Annulation</span>
-                      
-                    
-                      </button>
-                   </router-link> 
-                     
-                     
-                      
-                    </td>
-                    <td v-else-if="type.type_ordre_paiement==2 && afficheDecisionOpAnuulation1(type.id) != '' ">
-<button v-if="afficheDecisionOpAnuulation(type.id) == 8"  class="btn  btn-success"  @click="ModalOpAnnulation(type.id)">                        
-                     
-                      <span    >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 2" class="btn  btn-warning" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="afficheDecisionOpAnuulation(type.id) == 3" class="btn  btn-danger" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 9"  class="btn  btn-success" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      <span>Visé avec observation</span>
-                      
-                      </button>
-                      <button v-if=" afficheDecisionOpAnuulation(type.id) == 0" class="btn  btn-info" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      
-                       <span>Attente</span>
+                       <span style="font-weight:bolder;color:#fff;font-size:18px">Attente</span>
                       
                     
                       </button>
                     </td>
                     <td v-else style="background-color:lightblue"></td>
-                      <!-- <td  v-if="type.type_ordre_paiement==2 && afficheDecisionOpAnuulation(type.id) == 8 || type.type_ordre_paiement==2 && afficheDecisionOpAnuulation(type.id) == 9" >
-                        <button v-if="afficheDecisionOpProvisoir(type.id) == 8"  class="btn  btn-success"  >                        
+                   
+                    <td v-if="type.type_ordre_paiement==2 && type.id==afficheDecisionOpAnuulation1(type.id)">
+<button v-if="afficheDecisionOpAnuulation(type.id) == 8"  class="btn  btn-success tailBtn"  @click="ModalOpAnnulation(type.id)">                        
                      
-                      <span    >Visé</span>
+                      <span   style="font-weight:bolder;color:#fff;font-size:18px" >Visé</span>
                       
                       </button>
-                       <button v-else-if="afficheDecisionOpProvisoir(type.id) == 2" class="btn  btn-warning"  >                        
+                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 2" class="btn  btn-warning tailBtn" @click="ModalOpAnnulation(type.id)" >                        
                      
                       
-                       <span  >Différé</span>
+                       <span style="font-weight:bolder;color:#fff;font-size:18px" >Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="afficheDecisionOpProvisoir(type.id) == 3" class="btn  btn-danger"  >                        
+                        <button v-else-if="afficheDecisionOpAnuulation(type.id) == 3" class="btn  btn-danger tailBtn" @click="ModalOpAnnulation(type.id)" >                        
                      
                       
-                       <span  >Réjeté</span>
+                       <span  style="font-weight:bolder;color:#fff;font-size:18px">Réjeté</span>
                       
                     
                       </button>
-                       <button v-else-if="afficheDecisionOpProvisoir(type.id) == 9"  class="btn  btn-success"  >                        
+                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 9"  class="btn  btn-success tailBtn" @click="ModalOpAnnulation(type.id)" >                        
                      
-                      <span>Visé avec observation</span>
+                      <span style="font-weight:bolder;color:#fff;font-size:18px">Visé avec observation</span>
                       
                       </button>
-                      <template>
-                        <button v-if=" afficheDecisionOpAnuulation(type.id) != 0" class="btn  btn-info" @click="afficheDecisionCf(type.id)" >                        
+                      <button v-if=" afficheDecisionOpAnuulation(type.id) == 0" class="btn  btn-info tailBtn" @click="ModalOpAnnulation(type.id)" >                        
                      
                       
-                       <span>Attente</span>
-                      
-                    
-                      </button> -->
-                      <td v-if="type.type_ordre_paiement==2 && type.decision_cf == 8 || type.type_ordre_paiement==2 && type.decision_cf == 9">
-                       <router-link :to="{ name: 'AjouterOrdrePaiementDefinitive', params: { id: type.id }}"
-                class ="btn  btn-danger" title="" >
-                  <button    class ="btn  btn-danger"  >                        
-                     
-                      
-                       <span>Ajouter op definitif</span>
+                       <span style="font-weight:bolder;color:#fff;font-size:18px">Attente</span>
                       
                     
                       </button>
-                   </router-link> 
-                     
-                     
                     </td>
                     <td v-else style="background-color:lightblue"></td>
-                  </tr>
+                    <td v-if="type.decision_cf_definitif != null">
+                         <button v-if="type.decision_cf_definitif==8"  class="btn  btn-success tailBtn"  @click="DecisionDefinitifCf(type.id)">                        
+                     
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px"  >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="type.decision_cf_definitif == 2" class="btn  btn-warning tailBtn" @click="DecisionDefinitifCf(type.id)">                        
+                     
+                      
+                       <span  style="font-weight:bolder;color:#fff;font-size:18px">Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="type.decision_cf_definitif == 3" class="btn  btn-danger tailBtn" @click="DecisionDefinitifCf(type.id)">                        
+                     
+                      
+                       <span style="font-weight:bolder;color:#fff;font-size:18px" >Réjeté</span>  
+                      
+                    
+                      </button>
+                       <button v-else-if="type.decision_cf_definitif == 9"  class="btn  btn-success tailBtn" @click="DecisionDefinitifCf(type.id)">                        
+                     
+                      <span title="Visé avec observation" style="font-weight:bolder;color:#fff;font-size:18px" >Visé O</span>
+                      
+                      </button>
+                     <button v-else class="btn  btn-info" @click="DecisionDefinitifCf(type.id)" >                        
+                     
+                      
+                       <span style="font-weight:bolder;color:#fff;font-size:18px">Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                    <td v-else style="background-color:lightblue"></td>
+                    </tr>
                 </tbody>
               </table>
               
@@ -281,7 +233,113 @@
    
 <notifications  />
     
-
+  <div id="decisionDefinitif" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Decision CF</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                            <label class="control-label">Décision CF </label>
+                            <div class="controls">
+                              <select v-model="editDecisionFinal.decision_cf_definitif" class="span5">
+                                <option value=""></option>
+                              <option value="8">Visé</option>
+                              <option value="9">Visé avec Observation</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
+                            <option value="0">Attente</option>
+    
+    </select>
+                           
+                            </div>
+                          </div>
+            </td>
+              <td>
+                    <div class="control-group">
+                            <label class="control-label">Famille de Motif</label>
+                            <div class="controls">
+                               <select v-model="editDecisionFinal.famille_motif" class="span5">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementParent" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+                 <td>
+                    <div class="control-group">
+                            <label class="control-label">Motif</label>
+                            <div class="controls">
+                               <select v-model="editDecisionFinal.motif" class="span5">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementEnfant(editDecisionFinal.famille_motif)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+          </tr>
+               <tr>
+                  <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Autres Motif</label>
+                            <div class="controls">
+                              <textarea  class="span10" row = "6" v-model="editDecisionFinal.autre_motif" :readonly="griserAutreMotif">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                  <td>
+                               <div class="control-group">
+                            <label class="control-label">Date Decision CF :</label>
+                            <div class="controls">
+                              <input type="date" class="span5"  v-model="editDecisionFinal.date_decision_cf"/>
+                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                              
+                            </div>
+                          </div>
+                           </td>
+                 </tr>             
+                   <tr>
+                     <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Observation CF</label>
+                            <div class="controls">
+                              <textarea  class="span10" row = "6" v-model="editDecisionFinal.observation">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                        <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
+                            <div class="controls">
+                              <input type="text" class="span5" :value="recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(editDecisionFinal.unite_administrative_id)))"  readonly/>
+                            </div>
+                          </div>
+                       </td>
+                       
+                       </tr>  
+                      
+         
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierDecisionFinal()"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
     <div id="validationOpDefinitif" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -537,6 +595,7 @@ export default {
         
       },
       EditAnulation:{},
+      editDecisionFinal:{},
       search: ""
     };
   },
@@ -558,6 +617,42 @@ export default {
   ...mapGetters("uniteadministrative", ["budgetEclate","groupeLigneEconomiqueBudget","getSousBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
+   afficheNumeroOpDefinitive() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_ordre_paiement;
+      }
+      return 0
+        }
+      };
+    },
+  afficheIdOpProvisoire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.id_op_provisoire;
+      }
+      return 0
+        }
+      };
+    },
+  afficheNumeroOpAnuulation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id_op_provisoire == id);
+
+      if (qtereel) {
+        return qtereel.numero_op_annulation;
+      }
+      return 0
+        }
+      };
+    },
     filtre_type_teste() {
       const st = this.search.toLowerCase();
       return this.gettersgestionOrdrePaiement.filter(type => {
@@ -602,6 +697,7 @@ export default {
         }
       };
     },
+    
     afficheDecisionLiquidation() {
       return id => {
         if (id != null && id != "") {
@@ -794,6 +890,12 @@ this.$("#validationOpDefinitif").modal('hide');
       
        
     },
+     modifierDecisionFinal() {
+      this.modifierGestionOrdrePaiement(this.editDecisionFinal);
+this.$("#validationOpDefinitif").modal('hide');
+      
+       
+    },
     ModifierOpAnnulation() {
       var nouvelObjet={
         id:this.recupererIdOpAnnulation(this.EditAnulation.id),
@@ -823,6 +925,14 @@ this.$("#decisionAnnulation").modal('hide');
       });
        this.editMandat = this.gettersgestionOrdrePaiement.find(item=>item.id==id);
     },
+
+    DecisionDefinitifCf(id) {
+      this.$("#decisionDefinitif").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+       this.editDecisionFinal = this.gettersgestionOrdrePaiement.find(item=>item.id==id);
+    },
     formatageSomme:formatageSomme,
     ajouterOpSysteme(){
                 this.$router.push({ name: 'AjoutOrdrePaiement' })
@@ -831,7 +941,7 @@ this.$("#decisionAnnulation").modal('hide');
                 this.$router.push({ name: 'AjouterOrdrePaiementAnnulation' })
             },
             ajouterOpDeffinitif(){
-                this.$router.push({ name: 'AjoutOrdrePaiement' })
+                this.$router.push({ name: 'AjouterOrdrePaiementDefinitive' })
             },
     //afiicher modal ajouter
     afficherModalAjouterTitre() {
@@ -878,5 +988,7 @@ ExporterEnExel(){
   width: 65%;
   margin: 0 -30%;
 }
-
+.tailBtn{
+  width: 100%;
+}
 </style>
