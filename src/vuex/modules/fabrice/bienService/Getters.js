@@ -11,6 +11,7 @@ export const gettersDossierFacturePiece = state => state.facturePiece
 
 export const gettersnomPieceJustificative = state => state.nomPieceJustificative.sort((a, b) => (a.numero_ordre > b.numero_ordre) ? 1 : -1)
 
+export const tableauDebordbudget = state => state.tableauDebordbudget
 export const gettersTypeOrdrePaiement = state => state.typeOrdrePaiement
 export const role_membrecojo = state => state.role_membrecojo
 export const gestionModules = state => state.gestionModules

@@ -2,6 +2,9 @@ import suiviDesEntreprise from "../../pages/Gestion_des_Rapports/suiviDesEntrepr
 
 import ficheSuivi from "../../pages/Gestion_des_Rapports/ficheSuivi";
 
+import tableaudebordbudg from "../../pages/bien_service/Tableau_de_bord/tableaudebordbudg.vue";
+import tableaubordmarch from "../../pages/bien_service/Tableau_de_bord/tableaubordmarch.vue";
+
 import editerFicheRealiteServiceFait from "../../pages/Gestion_des_Rapports/editerFicheRealiteServiceFait";
 import suiviMarcheDesProjets from "../../pages/Gestion_des_Rapports/marcheHorsSib/suiviMarcheDesProjets.vue";
 import suiviMarcheDesProjetParTypeMarche from "../../pages/Gestion_des_Rapports/marcheHorsSib/suiviMarcheDesProjetParTypeMarche";
@@ -10,6 +13,16 @@ import FicheAnnexeDeControle from "../../pages/Gestion_des_Rapports/FicheAnnexeD
 import ficheSuiviGlobalMarche from "../../pages/Gestion_des_Rapports/marcheHorsSib/ficheSuiviGlobalMarche";
 import suiviEvaluationEntreprise from "../../pages/Gestion_des_Rapports/suiviEvaluationEntreprise.vue";
 const gestionrapport =[
+    {
+        path:"/tableaudebordbudg",
+        name:"tableaudebordbudg",
+        component:tableaudebordbudg
+    },
+    {
+        path:"/tableaubordmarch",
+        name:"tableaubordmarch",
+        component:tableaubordmarch
+    },
     {
         path:"/suiviEvaluationEntreprise",
         name:"suiviEvaluationEntreprise",

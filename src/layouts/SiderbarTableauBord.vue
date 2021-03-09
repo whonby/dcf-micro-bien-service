@@ -25,7 +25,7 @@
        </li>
        
        
-        <li :class="{active: active_el == 11 }" @click.prevent="navigateToUniteAdministrative">
+        <li :class="{active: active_el == 35 }" @click.prevent="navigateTobudget">
           <a title="TABLEAU DE BORD DU BUDGET" href="#">
             <i class="icon-dashboard"></i>
             <span>TABLEAU DE BORD DU BUDGET </span>
@@ -37,14 +37,14 @@
             <span></span>
           </a>
         </li> -->
-         <li :class="{active: active_el == 21 }" @click.prevent="navigateToGestionAcces">
+         <li :class="{active: active_el == 21 }" @click.prevent="navigateTomarche">
           <a title="TABLEAU DE BORD DU MARCHE" href="#">
             <i class="icon icon-signal"></i>
             <span>TABLEAU DE BORD DU MARCHE</span>
           </a>
         </li>
          <li @click.prevent="navigateRetourAuMenu" >
-          <a title="Carte des infrastructure pas regions" href="#">
+          <a title="Carte des infrastructure pas regions" href="#"> 
             <i class=" icon-arrow-left"></i>
             <span>RETOUR AU MENU</span>
             <span class="label label-important"></span>
@@ -210,10 +210,16 @@ return objJson.id
         })
       },
       
- navigateToTransfert(){
-        this.activate(6)
+ navigateTobudget(){
+        this.activate(35)
         this.$router.push({
-          name: 'tableaubordTransfert'
+          name: 'tableaudebordbudg'
+        })
+      },
+      navigateTomarche(){
+        this.activate(36)
+        this.$router.push({
+          name: 'tableaubordmarch'
         })
       },
 navigateToGestionMarche(){
@@ -244,12 +250,12 @@ navigateToGestionMarche(){
 //           name: 'TableauBordParametreSimple'
 //         })
 //       },
-    //   navigateRetourAuMenu(){
-    //   this.activate(11)
-    //   this.$router.push({
-    //     name: 'pagePresentation'
-    //   })
-    // },
+      navigateRetourAuMenu(){
+      this.activate(11)
+      this.$router.push({
+        name: 'pagePresentation'
+      })
+    },
     //    navigateToParametreGeneraux(){
     //     this.activate(17)
     //     this.$router.push({

@@ -1,4 +1,6 @@
 const defaultState = {
+   
+    
     prestations:[],
     acteDepenses:[],
     bailleurs:[],

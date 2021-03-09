@@ -19,6 +19,7 @@
 // }
 
  // get all document
+ 
 
 
 export const GET_ALL_RECEPTION= (state, tableau_document) =>{
