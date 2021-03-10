@@ -106,9 +106,9 @@
                      </td>
              <td>
                        <div class="control-group">
-                <label class="control-label">Montant Restant</label>
+                <label class="control-label">Dotation</label>
                 <div class="controls">
-                   <money :value="dotationTotal"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                   <money :value="RecuppererLaDotation(this.formData.ligneeconomique_id)"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
                  
                 </div>
               </div>
@@ -155,7 +155,15 @@
 
                                 </model-list-select>
                             </td>
-           
+           <td>
+                       <div class="control-group">
+                <label class="control-label">Montant du Bailleur</label>
+                <div class="controls">
+                   <money :value="dotationTotal"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                 <!-- <code style="color:red;font-size:12px" v-if="MontantParBailleur == 0">Montant Budget est Saturé</code> -->
+                </div>
+              </div>
+                  </td>
                      </tr>
                    
                          <br>
@@ -272,7 +280,7 @@
                     >{{formatageSomme(parseFloat(type.montant_budgetaire)) || 'Non renseigné'}}</td>
 
                     <td>
-                      <button class="btn btn-danger" @click="supprimerTypeTexte(type.id)">
+                      <button class="btn btn-danger" @click="supprimerSousBudget(type.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
@@ -392,6 +400,17 @@ components: {
       "afficheLocalisationGeoNiveau5"
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
+
+
+      MontantParBailleur() {
+      return (id,id3,id1,id2)=> {
+        if (id != null && id != "" && id3 != null && id3 != "" && id1 != null && id1 != "" && id2 != null && id2 != "") {
+           return this.budgetGeneral.filter(qtreel => qtreel.ua_id == id && qtreel.economique_id == id3 && qtreel.typefinancement_id == id1 && qtreel.sourcefinancement_id == id2 &&  qtreel.exercicebudget_id==this.anneeAmort && qtreel.actived==1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.cp), 0).toFixed(0);
+
+   
+        }
+      };
+    },
 libelletypes_financements() {
       return id => {
         if (id != null && id != "") {
@@ -475,7 +494,7 @@ LibelleUniteAdministrative() {
   return this.dotationTotal==0
 },
       dotationTotal(){
-return (parseFloat(this.RecuppererLaDotation(this.formData.ligneeconomique_id))-parseFloat(this.DotationRestantCumul(this.formData.unite_administrative_id,this.formData.ligneeconomique_id))-parseFloat(this.formData1.montant_budgetaire))
+return (parseFloat(this.MontantParBailleur(this.formData.unite_administrative_id,this.formData.ligneeconomique_id,this.formData.type_financement_id,this.formData.source_financement_id))-parseFloat(this.DotationRestantCumul(this.formData.unite_administrative_id,this.formData.ligneeconomique_id))-parseFloat(this.formData1.montant_budgetaire))
 },
        DotationRestantCumul() {
       return (id,id1) => {
@@ -610,6 +629,7 @@ return this.uniteAdministratives
 methods: {
       ...mapActions("uniteadministrative", [
       "ajouterSousBudget",
+      "supprimerSousBudget"
       
      
       

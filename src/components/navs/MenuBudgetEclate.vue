@@ -8,7 +8,7 @@
         </router-link>
       </li>
 <li>
-        <router-link :to="{name: 'MonEquipe'}" tag="a">
+        <router-link :to="{name: 'UniteAdministrativeRegie'}" tag="a">
           BUDGET DES REGIES
         </router-link>
       </li>

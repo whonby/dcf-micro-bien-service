@@ -62,48 +62,56 @@
                 <thead>
                   <tr>
                      <th   style="font-size:14px;font-weight:bold">Exercice</th>
-                     
-                     <th   style="font-size:14px;font-weight:bold;color:green">N°OP(Def ou Prov)</th>
-                     <th   style="font-size:14px;font-weight:bold;color:red">N°OP Annulation</th>
+                      <th   style="font-size:14px;font-weight:bold">Type d'ordre de paiement</th>
+                     <th   style="font-size:14px;font-weight:bold;color:green">N°Ordre paiement</th>
+                     <th   style="font-size:14px;font-weight:bold;color:red">N°OP Provisoire</th>
                      <th   style="font-size:14px;font-weight:bold;color:blue">N°OP Definitive</th>
-                    <th   style="font-size:14px;font-weight:bold">Type d'ordre de paiement</th>
+                   
                     <th   style="font-size:14px;font-weight:bold">Objet Op</th>
                     <th   style="font-size:14px;font-weight:bold">UA</th>
                     <!-- <th   style="font-size:14px;font-weight:bold">Sous Budget</th> -->
                      <!-- <th   style="font-size:14px;font-weight:bold">Montant Autorisé</th> -->
                     <th   style="font-size:14px;font-weight:bold">Engagement actuel</th>
                               
-                    <th   style="font-size:14px;font-weight:bold">Décision Op Provisoire</th>
+                    <th   style="font-size:14px;font-weight:bold">Décision CF</th>
                     
-                     <th   style="font-size:14px;font-weight:bold">Décision OP Annulation</th>
-                     <th   style="font-size:14px;font-weight:bold">Décision OP Definitive</th>
+                     <!-- <th   style="font-size:14px;font-weight:bold">Décision OP Annulation</th>
+                     <th   style="font-size:14px;font-weight:bold">Décision OP Definitive</th> -->
                 
                   <!-- <th>Montant Disponible</th> -->
                   </tr>
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="(type) in filtre_type_teste" :key="type.id">
-                    <td
+                              <td
                       style="font-size:14px;font-weight:bold;text-align:center"
                     >{{type.exercice || 'Non renseigné'}}</td>
-                     <td 
-                      style="font-size:14px;font-weight:bold;text-align:center;color:green"
-                    >{{type.numero_ordre_paiement || 'Non renseigné'}}</td>
-                   <td v-if="afficheNumeroOpAnuulation(type.id) != 0"
-                      style="font-size:14px;font-weight:bold;text-align:center;color:red"
-                    >{{afficheNumeroOpAnuulation(type.id) }}</td>
- <td v-else style="background-color:lightblue"></td>
-                    <td 
-                      style="font-size:14px;font-weight:bold;text-align:center;color:blue"
-                    >{{type.numero_op_prov_definitive }}</td>
-
-                   
  <td v-if="type.type_ordre_paiement==1"
                       style="font-size:14px;font-weight:bold;text-align:center"                
                     > <span>OP Direct</span></td>
-                    <td v-else
+                    <td v-else-if="type.type_ordre_paiement==2"
                       style="font-size:14px;font-weight:bold;text-align:center"                
                     > <span>OP Provisoire</span></td>
+                    <td v-else-if="type.type_ordre_paiement==3"
+                      style="font-size:14px;font-weight:bold;text-align:center"                
+                    > <span>OP Annulation</span></td>
+                    <td v-else
+                      style="font-size:14px;font-weight:bold;text-align:center"                
+                    > <span>OP Définitif</span></td>
+                    
+                     <td 
+                      style="font-size:14px;font-weight:bold;text-align:center;color:green"
+                    >{{type.numero_ordre_paiement || 'Non renseigné'}}</td>
+                   <td v-if="type.id_op_provisoire != null"
+                      style="font-size:14px;font-weight:bold;text-align:center;color:red"
+                    >{{afficheNumeroOpDefinitive(type.id_op_provisoire) }}</td>
+ <td v-else style="background-color:lightblue"></td>
+                     <td v-if="type.id_op_definitif != null"
+                      style="font-size:14px;font-weight:bold;text-align:center;color:blue"
+                    >{{afficheNumeroOpDefinitive(type.id_op_definitif) }}</td>
+ <td v-else style="background-color:lightblue"></td>
+
+         
                      <td v-if="type.marche_id != null"
                       style="font-size:14px;font-weight:bold"
                     >{{libelleMarche(type.marche_id) || 'Non renseigné'}}</td>
@@ -117,7 +125,7 @@
                     <td
                        style="font-size:14px;font-weight:bold;text-align:center"
                     >{{formatageSomme(parseFloat(type.montant_ordre_paiement)) || 'Non renseigné'}}</td>
-                     <td v-if="type.decision_cf != null">
+                     <td>
                         <button v-if="type.decision_cf==8"  class="btn  btn-success tailBtn"  @click="apercuFacture(type.id)">                        
                      
                       <span  style="font-weight:bolder;color:#fff;font-size:18px"  >Visé</span>
@@ -150,9 +158,9 @@
                     
                       </button>
                     </td>
-                    <td v-else style="background-color:lightblue"></td>
+                    
                    
-                    <td v-if="type.type_ordre_paiement==2 && type.id==afficheDecisionOpAnuulation1(type.id)">
+                    <!-- <td v-if="type.id==afficheDecisionOpAnuulation1(type.id)">
 <button v-if="afficheDecisionOpAnuulation(type.id) == 8"  class="btn  btn-success tailBtn"  @click="ModalOpAnnulation(type.id)">                        
                      
                       <span   style="font-weight:bolder;color:#fff;font-size:18px" >Visé</span>
@@ -177,7 +185,7 @@
                       <span style="font-weight:bolder;color:#fff;font-size:18px">Visé avec observation</span>
                       
                       </button>
-                      <button v-if=" afficheDecisionOpAnuulation(type.id) == 0" class="btn  btn-info tailBtn" @click="ModalOpAnnulation(type.id)" >                        
+                      <button v-else class="btn  btn-info tailBtn" @click="ModalOpAnnulation(type.id)" >                        
                      
                       
                        <span style="font-weight:bolder;color:#fff;font-size:18px">Attente</span>
@@ -185,8 +193,8 @@
                     
                       </button>
                     </td>
-                    <td v-else style="background-color:lightblue"></td>
-                    <td v-if="type.decision_cf_definitif != null">
+                    <td v-else style="background-color:lightblue"></td> -->
+                    <!-- <td v-if="type.decision_cf_definitif != null">
                          <button v-if="type.decision_cf_definitif==8"  class="btn  btn-success tailBtn"  @click="DecisionDefinitifCf(type.id)">                        
                      
                       <span  style="font-weight:bolder;color:#fff;font-size:18px"  >Visé</span>
@@ -211,7 +219,7 @@
                       <span title="Visé avec observation" style="font-weight:bolder;color:#fff;font-size:18px" >Visé O</span>
                       
                       </button>
-                     <button v-else class="btn  btn-info" @click="DecisionDefinitifCf(type.id)" >                        
+                     <button v-else class="btn  btn-info tailBtn" @click="DecisionDefinitifCf(type.id)" >                        
                      
                       
                        <span style="font-weight:bolder;color:#fff;font-size:18px">Attente</span>
@@ -219,7 +227,7 @@
                     
                       </button>
                     </td>
-                    <td v-else style="background-color:lightblue"></td>
+                    <td v-else style="background-color:lightblue"></td> -->
                     </tr>
                 </tbody>
               </table>
@@ -299,7 +307,7 @@
                                <div class="control-group">
                             <label class="control-label">Date Decision CF :</label>
                             <div class="controls">
-                              <input type="date" class="span5"  v-model="editDecisionFinal.date_decision_cf"/>
+                              <input type="date" class="span5"  v-model="editDecisionFinal.date_decision_definitive_cf"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
                               
                             </div>

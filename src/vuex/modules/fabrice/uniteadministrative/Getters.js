@@ -1,7 +1,7 @@
 import { groupBy } from "../../../../Repositories/Repository";
 export const budgetEclate = state => state.budgetEclate.sort((a, b) => (a.id > b.id ? 1 : -1));
 export const getvehicules =state =>state.vehicules;
-
+export const BudgetEclateRegie = state => state.BudgetEclateRegie.sort((a, b) => (a.id > b.id ? 1 : -1));
 export const getSousBudget =state =>state.SousBudget;
 export const getdecisionBudgetEclate =state =>state.decisionBudgetEclate;
 export const getHistoriquedecisionBudgetEclate =state =>state.HistoriquedecisionBudgetEclate;
@@ -820,4 +820,9 @@ export const groupeUniteAdministrativeBudgetEclate = (state, getters) => {
 export const groupeParBAILLER = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.budgetEclate, "ligneeconomique_id");
+};
+
+export const groupeUaBudgetEclateRegie = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.BudgetEclateRegie, "uniteadministrative_id");
 };

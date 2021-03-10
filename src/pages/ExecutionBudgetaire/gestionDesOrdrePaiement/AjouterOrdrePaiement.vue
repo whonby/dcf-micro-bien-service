@@ -1,4 +1,4 @@
-listePieceJustificativeOpdefinitive
+numero_ordrepaiement
 <template>
 
 <div class="container-fluid">
@@ -617,6 +617,21 @@ listePieceJustificativeOpdefinitive
                       <table class="table table-bordered table-striped" v-if="formData.typedepense=='Marche'">
                         <tr>
                           <td>
+                                <label>Numero Marche <code style="color:red;font-size:16px">*</code>
+                                </label>
+                                <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="RecuppererMarcheAttribuer"
+                                                   v-model="formData2.marche_id"
+                                                   option-value="id"
+                                                   option-text="numero_marche"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                                 <code style="color:red;font-size:12px" v-if="formData2.marche_id==''">Veuillez renseigner ce champ</code>
+                            </td>
+                          <!-- <td>
                          <div class="control-group">
                             <label class="control-label">Numero Marche</label>
                             <div class="controls">
@@ -633,7 +648,7 @@ listePieceJustificativeOpdefinitive
                   <code v-if="message_mandater" style="font-size:25px">{{message_mandater}}</code>
                             </div>
                           </div>
-                        </td>
+                        </td> -->
                           <td colspan="3">
                          <div class="control-group">
                             <label class="control-label">OBJET DE LA DEPENSE</label>
@@ -661,7 +676,7 @@ listePieceJustificativeOpdefinitive
                   
                     type="text"
                     style="border:1px solid #000"
-                   :value="livrable(formData2.livrable_id)"
+                   :value="livrable(formData2.marche_id)"
                     class="span"
                     readonly
                   />
@@ -676,7 +691,7 @@ listePieceJustificativeOpdefinitive
                   
                     type="text"
                     style="border:1px solid #000"
-                   :value="libelleUniteAdministrative(formData2.beneficiaire_id)"
+                   :value="libelleUniteAdministrative(formData2.marche_id)"
                     class="span"
                     readonly
                   />
@@ -693,7 +708,7 @@ listePieceJustificativeOpdefinitive
                   
                     type="text"
                     style="border:1px solid #000"
-                   :value="geolocalisation(formData2.geo_id)"
+                   :value="geolocalisation(formData2.marche_id)"
                     class="span"
                     readonly
                   />
@@ -706,14 +721,14 @@ listePieceJustificativeOpdefinitive
                         <tr>
                           <td>
                          <div class="control-group">
-                            <label class="control-label">DUREE DE REALISATION</label>
+                            <label class="control-label">DUREE DE REALISATION(en jours)</label>
                             <div class="controls">
                               
                       <input
                   
                     type="text"
                     style="border:1px solid #000"
-                   v-model="formData2.dure_realisation"
+                   :value="dureeMarche(formData2.marche_id)"
                     class="span"
                     readonly
                   />
@@ -732,7 +747,7 @@ listePieceJustificativeOpdefinitive
                     class="span"
                     readonly
                   /> -->
-                   <money v-model="formData7.Montant_Marche"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                   <money :value="MontantReelMarche(formData2.marche_id)"  readOnly  style="text-align:left;color:red"  class="span"></money>
                 </div>
               </div>
               
@@ -1814,7 +1829,7 @@ components: {
                  unite_administrative_id:"",
                  activite_id:"",
                  ligne_economique_id:"",
-                 typedepense:1,
+                 typedepense:"Marche",
                  numero_ordre_paiement:"",
                  type_ordre_paiement:""
                 },
@@ -1881,6 +1896,9 @@ components: {
       "afficheLocalisationGeoNiveau5"
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
+      tailleOpEnregistrer(){
+  return this.gettersgestionOrdrePaiement.length
+},
 listePieceJustificativeOpDefinitive() {
       return id => {
         if (id != null && id != "") {
@@ -2129,6 +2147,30 @@ numeroMarche() {
         }
       };
     },
+    dureeMarche() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.duree;
+      }
+      return ""
+        }
+      };
+    },
+    MontantReelMarche() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.montant_act;
+      }
+      return ""
+        }
+      };
+    },
 ListeDesMarcheAtribuer() {
       return (id) => {
         if (id != null && id != "") {
@@ -2163,14 +2205,7 @@ return this.acteEffetFinanciers
 
 
 
-ListeDesMarcheAttribuer() {
-      return (id) => {
-        if (id != null && id != "") {
-           return this.acteEffetFinanciers.filter(qtreel => qtreel.unite_administrative_id == id);
 
-        }
-      };
-    },
 
 
       affcherTauxEnCours() {
@@ -2556,7 +2591,31 @@ libelleBanque() {
         }
       };
     },
-    
+    RecuppererMarcheAttribuer() {
+      
+
+
+
+
+      if (this.noDCfNoAdmin){
+            let colect=[];
+            this.marches.filter(item=>{
+                let val= this.uniteAdministratives.find(row=>row.id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            
+         
+           return this.colect.filter(qtreel => qtreel.numero_marche !=null && qtreel.attribue==2);
+        
+      
+        }
+
+ return this.marches.filter(qtreel => qtreel.numero_marche !=null && qtreel.attribue==2);
+    },
 listeDesUa() {
       
 
@@ -2767,8 +2826,8 @@ this.$("#ModifierexampleModal").modal('hide');
       var nouvelObjetProforma = {
         
         	numero_ordre:this.numeroOrdre(this.formData.numero_ordre_paiement),
-      // numero_ordrepaiement:this.formData.numero_ordre_paiement,
-      // numero_ordre_paiement_combine:this.intitule,
+      numero_ordrepaiement:this.formData.numero_ordre_paiement,
+      numero_ordre_paiement_combine:this.intitule,
       libelle:this.formData1.libelle,
       reference:this.formData1.reference,
       date_piece:this.formData1.date_piece,
@@ -2794,8 +2853,8 @@ this.$("#ModifierexampleModal").modal('hide');
         
         	numero_ordre:this.numeroOrdreDefinitive(this.formData.numero_ordre_paiement),
       numero_ordrepaiement:this.formData.numero_ordre_paiement,
-      // numero_ordre_paiement_combine:this.intitule,
-      // libelle:this.formData1.libelle,
+      numero_ordre_paiement_combine:this.intitule,
+      libelle:this.formData1.libelle,
       reference:this.formData1.reference,
       date_piece:this.formData1.date_piece,
       etat_piece:"definitive",
@@ -2968,10 +3027,11 @@ ajouterFacture(){
 AjouterOrdrePaiement(){
  if(this.formData.type_ordre_paiement==1){
 if(this.formData.typedepense=='Marche'){
+  this.intitule=this.anneeAmort +"-"+ this.tailleOpEnregistrer + "-" + this.formData.numero_ordre_paiement
   var nouvelObjetOrdrePaiement = {
         exercice:this.anneeAmort,
         	type_ordre_paiement:this.formData.type_ordre_paiement,
-          numero_ordre_paiement:this.formData.numero_ordre_paiement,
+          numero_ordre_paiement:this.intitule,
           section_id:this.idSection(this.libelleLigneEconomiqueParent(this.formData.ligne_economique_id)),
            programme_id:this.idProgramme(this.libelleLigneEconomiqueParent(this.formData.ligne_economique_id)),
         	unite_administrative_id:this.formData.unite_administrative_id,
@@ -2986,7 +3046,7 @@ if(this.formData.typedepense=='Marche'){
            source_financement_id:this.formData.bailler_id,
         	montant_ordre_paiement:this.formData2.montant_engage,
           mode_paiement_id:this.formData.mode_paiement_id,
-          decision_cf_definitif:0,
+        
           
           gestionnaire_credit_non:this.formData.gestionnaire_credit_non,
            gestionnaire_credit_date:this.formData.gestionnaire_credit_date,
@@ -3021,10 +3081,11 @@ if(this.formData.typedepense=='Marche'){
   
 }
      else{
+       this.intitule=this.anneeAmort +"-"+ this.tailleOpEnregistrer + "-" + this.formData.numero_ordre_paiement
          var nouvelObjetOrdrePaiement1 = {
         exercice:this.anneeAmort,
         	type_ordre_paiement:this.formData.type_ordre_paiement,
-          numero_ordre_paiement:this.formData.numero_ordre_paiement,
+          numero_ordre_paiement:this.intitule,
           section_id:this.idSection(this.libelleLigneEconomiqueParent(this.formData.ligne_economique_id)),
            programme_id:this.idProgramme(this.libelleLigneEconomiqueParent(this.formData.ligne_economique_id)),
         	unite_administrative_id:this.formData.unite_administrative_id,
@@ -3034,7 +3095,7 @@ if(this.formData.typedepense=='Marche'){
            ligne_economique_id:this.formData.ligne_economique_id,
         	entreprise_id:this.formData2.nom_entreprise_id,
           marche_id:this.formData2.marche_id,
-          decision_cf_definitif:0,
+          
          
           type_financement_id:this.formData.type_financement_id,
           typedepense:this.formData.typedepense,
@@ -3095,10 +3156,11 @@ if(this.formData.typedepense=='Marche'){
  }
  else{
 if(this.formData.typedepense=='Marche'){
+  this.intitule=this.anneeAmort +"-"+ this.tailleOpEnregistrer + "-" + this.formData.numero_ordre_paiement
   var nouvelObjetOrdrePaiement12 = {
         exercice:this.anneeAmort,
         	type_ordre_paiement:this.formData.type_ordre_paiement,
-          numero_ordre_paiement:this.formData.numero_ordre_paiement,
+          numero_ordre_paiement:this.intitule,
           section_id:this.idSection(this.libelleLigneEconomiqueParent(this.formData.ligne_economique_id)),
            programme_id:this.idProgramme(this.libelleLigneEconomiqueParent(this.formData.ligne_economique_id)),
         	unite_administrative_id:this.formData.unite_administrative_id,
@@ -3114,7 +3176,7 @@ if(this.formData.typedepense=='Marche'){
         	montant_ordre_paiement:this.formData2.montant_engage,
           mode_paiement_id:this.formData.mode_paiement_id,
           
-          decision_cf:0,
+          
           gestionnaire_credit_non:this.formData.gestionnaire_credit_non,
            gestionnaire_credit_date:this.formData.gestionnaire_credit_date,
         	gestionnaire_credit_fonction:this.formData.gestionnaire_credit_fonction,
@@ -3148,10 +3210,11 @@ if(this.formData.typedepense=='Marche'){
   
 }
      else{
+       this.intitule=this.anneeAmort +"-"+ this.tailleOpEnregistrer + "-" + this.formData.numero_ordre_paiement
          var nouvelObjetOrdrePaiement136 = {
         exercice:this.anneeAmort,
         	type_ordre_paiement:this.formData.type_ordre_paiement,
-          numero_ordre_paiement:this.formData.numero_ordre_paiement,
+          numero_ordre_paiement:this.intitule,
           section_id:this.idSection(this.libelleLigneEconomiqueParent(this.formData.ligne_economique_id)),
            programme_id:this.idProgramme(this.libelleLigneEconomiqueParent(this.formData.ligne_economique_id)),
         	unite_administrative_id:this.formData.unite_administrative_id,
@@ -3162,7 +3225,7 @@ if(this.formData.typedepense=='Marche'){
         	entreprise_id:this.formData2.nom_entreprise_id,
           marche_id:this.formData2.marche_id,
           
-          decision_cf:0,
+          
           type_financement_id:this.formData.type_financement_id,
           typedepense:this.formData.typedepense,
            source_financement_id:this.formData.bailler_id,

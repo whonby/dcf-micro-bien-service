@@ -1159,3 +1159,19 @@ export function supprimerToutHistoriqueEntreprise({ commit }, objetAjoute) {
         });
     })
 }
+
+
+export function modifierCompteBancaire({commit}, nouveau) {
+    asyncLoading(axios
+        .put("/comptesCompte/" + nouveau.id,nouveau))
+        .then(response => {
+            commit("MODIFIER_COMPTE_BANCAIRE", response.data);
+           
+  
+            this.$app.$notify({
+                title: 'Success',
+                text: 'Modification Effectué avec Succès!',
+                type: "success"
+            })
+        });
+  }

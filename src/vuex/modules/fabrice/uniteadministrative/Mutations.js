@@ -815,6 +815,41 @@ export const MODIFIER_SOUS_BUDGET = (state, objetModifie) => {
   });
 };
 
+
+
+
+
+
+// supprimer type_texte
+export const SUPPRIMER_BUDGET_ECLATE_REGIE = (state, id) => {
+  state.BudgetEclateRegie = state.BudgetEclateRegie.filter(type => type.id != id);
+};
+
+
+export const GET_ALL_BUDGET_ECLATE_REGIE = (state, tableauBudgetGeneral) => {
+  state.BudgetEclateRegie = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+export const AJOUTER_BUDGET_ECLATE_REGIE = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.BudgetEclateRegie.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+export const MODIFIER_BUDGET_ECLATE_REGIE = (state, objetModifie) => {
+  state.BudgetEclateRegie = state.BudgetEclateRegie.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+
+
+
 export {
   GET_ALL_BANQUE_UA,
   AJOUTER_BANQUE_UA,

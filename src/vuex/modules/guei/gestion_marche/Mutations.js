@@ -524,7 +524,15 @@ export const MODIFIER_HISTORIQUE_ENTREPRISE = (state, objetModifie) => {
 }
 
 
-
+export const MODIFIER_COMPTE_BANCAIRE = (state, objetModifie) => {
+    state.comptes = state.comptes.map(type => {
+      if (type.id == objetModifie.id) {
+        type = { ...objetModifie };
+      }
+  
+      return type;
+    });
+  };
 
 export {
     GET_SANCTION,

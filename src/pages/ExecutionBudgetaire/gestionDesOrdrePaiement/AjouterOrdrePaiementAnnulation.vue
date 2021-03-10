@@ -4,7 +4,7 @@ listePieceJustificativeOpdefinitive
 <div class="container-fluid">
       <hr />
       <div  align="left" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente{{detailOpProvisoire.recuperer_id_op}}</button>
+    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
     
         </div> 
       <div class="row-fluid">
@@ -39,7 +39,7 @@ listePieceJustificativeOpdefinitive
             </td>
             <td>
                             <div class="control-group">
-                                                    <label class="control-label">N° Ordre paiement Provisoire </label>
+                                                    <label class="control-label">N° Ordre paiement Provisoire ou definitif</label>
                                                     <div class="controls">
                                                        <input
                     type="text"
@@ -52,6 +52,22 @@ listePieceJustificativeOpdefinitive
                                                     </div>
                                                 </div>
                         </td>
+                        <td>
+              <div class="control-group">
+                <label class="control-label">Type Ordre de paiement</label>
+               
+                <div class="controls">
+                  <input
+                    type="text"
+                    style="border:1px solid #000;font-size:15px"
+                   v-model="formData78.typeOp"
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+              
+            </td>
           <td>
               <div class="control-group">
                 <label class="control-label">Numéro Ordre paiement D'Annulation<code style="color:red;font-size:16px">*</code></label>
@@ -60,7 +76,7 @@ listePieceJustificativeOpdefinitive
                   <input
                     type="text"
                     style="border:1px solid #000;font-size:15px"
-                   v-model="formData.numero_op_annulation"
+                   v-model="formData.numero_ordre_paiement"
                     class="span"
                     
                   />
@@ -168,7 +184,7 @@ listePieceJustificativeOpdefinitive
             </td>
                              <td>
                 <div class="control-group">
-                  <label class="control-label">{{detailOpProvisoire.activite_id}}Activité {{comparaison(this.detailOpProvisoire.activite_id)}}<code style="color:red;font-size:16px">*</code></label>
+                  <label class="control-label">Activité <code style="color:red;font-size:16px">*</code></label>
                   <div class="controls">
                          <input
                     type="text"
@@ -188,7 +204,7 @@ listePieceJustificativeOpdefinitive
                              <input
                     type="text"
                     style="border:1px solid #000"
-                   :value="NomActivite(detailOpProvisoire.sous_budget_id)"
+                   :value="libelleSousBudget(detailOpProvisoire.sous_budget_id)"
                     class="span"
                     readonly
                   />
@@ -2117,7 +2133,9 @@ components: {
                  activite_id:"",
                  ligne_economique_id:""
                 },
-                
+                formData78:{
+                  typeOp:"OP Annulation"
+                },
                 editpiece:{},
                 formData5:{
                   Auteur_id:"2"
@@ -2183,6 +2201,21 @@ components: {
       "afficheLocalisationGeoNiveau5"
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
+      tailleOpEnregistrer(){
+  return this.gettersgestionOrdrePaiement.length
+},
+       libelleSousBudget	() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getSousBudget.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.libelle	;
+      }
+      return 0
+        }
+      };
+    },
               recupererDureMarche	() {
       return id => {
         if (id != null && id != "") {
@@ -3111,7 +3144,7 @@ methods: {
       "ajouterDossierFacture",
       "modifierDossierFacture",
       "supprimerDossierFacture",
-      "ajouterGestionOrdrePaiementAnnulat"
+      "ajouterGestionOrdrePaiement"
      
     ]),
       ...mapActions('personnelUA', ["ajouterFichierJointDmd"]),
@@ -3269,11 +3302,13 @@ const formData = new FormData();
 
 rechercheMembreCojo(){
       
-      let objetMandater=this.gettersgestionOrdrePaiement.filter(item=>item.numero_ordre_paiement==this.detailOpProvisoire.numero_ordre_paiement && item.decision_cf==8 && item.type_ordre_paiement==2)
+      let objetMandater=this.gettersgestionOrdrePaiement.filter(item=>item.numero_ordre_paiement==this.detailOpProvisoire.numero_ordre_paiement && item.decision_cf==8 || item.numero_ordre_paiement==this.detailOpProvisoire.numero_ordre_paiement && item.decision_cf==8)
       if(objetMandater!=undefined){
         if (objetMandater.length==1){
            let acteur= this.gettersgestionOrdrePaiement.find(item=>item.numero_ordre_paiement==this.detailOpProvisoire.numero_ordre_paiement)
-          this.detailOpProvisoire.section_id=acteur.section_id,
+         this.detailOpProvisoire.recupererId=acteur.id,
+         this.detailOpProvisoire.recuperer_typeop=acteur.type_ordre_paiement,
+         this.detailOpProvisoire.section_id=acteur.section_id,
           this.detailOpProvisoire.programme_id=acteur.programme_id,
          this.detailOpProvisoire.action_id=acteur.action_id,
          this.detailOpProvisoire.unite_administrative_id=acteur.unite_administrative_id,
@@ -3284,7 +3319,7 @@ this.detailOpProvisoire.type_ordre_paiement=acteur.type_ordre_paiement,
          this.detailOpProvisoire.ligne_economique_id=acteur.ligne_economique_id,
          this.detailOpProvisoire.entreprise_id=acteur.entreprise_id,
          this.detailOpProvisoire.marche_id=acteur.marche_id,
-this.detailOpProvisoire.recuperer_id_op=acteur.id,
+
           
          this.detailOpProvisoire.montant_ordre_paiement=acteur.montant_ordre_paiement,
          this.detailOpProvisoire.mode_paiement_id=acteur.mode_paiement_id,
@@ -3400,21 +3435,107 @@ this.intitule=this.anneeAmort + "" + this.formData.numero_ordre_paiement
 
 
 AjouterOrdrePaiementAnulation(){
- 
+ if(this.detailOpProvisoire.recuperer_typeop==1){
+this.intitule=this.anneeAmort +"-"+ this.tailleOpEnregistrer + "-" + this.formData.numero_ordre_paiement
+var nouvelObjetOrdrePaiement1 = {
+        exercice:this.anneeAmort,
+       // id:this.recupererIdOpProvisoire(this.recupererNumeroOPProvisoire(this.formData2.numero_oP_provisoire)),
+        numero_ordre_paiement:this.intitule,
+        	type_ordre_paiement:3,
+            date_op_annulation:this.formData.date_op_annulation,
+id_op_definitif:this.detailOpProvisoire.recupererId,
+          section_id:this.detailOpProvisoire.section_id,
+           programme_id:this.detailOpProvisoire.programme_id,
+        	unite_administrative_id:this.detailOpProvisoire.unite_administrative_id,
+          action_id:this.detailOpProvisoire.action_id,
+          sous_budget_id:this.detailOpProvisoire.sous_budget_id,
+          activite_id:this.detailOpProvisoire.activite_id,
+           ligne_economique_id:this.detailOpProvisoire.ligne_economique_id,
+           	typedepense:this.detailOpProvisoire.typedepense,
 
-              var nouvelObjetOrdrePaiement = {
-  
-        	numero_op_annulation:this.formData.numero_op_annulation,
-          	date_op_annulation:this.formData.date_op_annulation,
-          id_op_provisoire:this.detailOpProvisoire.recuperer_id_op,
-          
+mode_paiement_id:this.detailOpProvisoire.mode_paiement_id,
+           entreprise_id:this.detailOpProvisoire.entreprise_id,
+          marche_id:this.detailOpProvisoire.marche_id,
+          type_financement_id:this.detailOpProvisoire.type_financement_id,
+                  source_financement_id:this.detailOpProvisoire.source_financement_id,
+          montant_ordre_paiement:this.detailOpProvisoire.montant_ordre_paiement,
+           
+        	
+         
+          gestionnaire_credit_non:this.detailOpProvisoire.gestionnaire_credit_non,
+           gestionnaire_credit_date:this.detailOpProvisoire.gestionnaire_credit_date,
+        	gestionnaire_credit_fonction:this.detailOpProvisoire.gestionnaire_credit_fonction,
+
+          controleur_financier_id:this.recupererIdUser(this.recupererIdServiceCF(this.detailOpProvisoire.unite_administrative_id)),
+     nom_autre_depense:this.detailOpProvisoire.nom_autre_depense,
+     	compte_autre_depense:this.detailOpProvisoire.compte_autre_depense,
+       adresse:this.detailOpProvisoire.adresse,
+       reference_autre_depense:this.detailOpProvisoire.reference_autre_depense,
+       odjet_autre_depense:this.detailOpProvisoire.odjet_autre_depense,
+       livrable_autre_depense:this.detailOpProvisoire.livrable_autre_depense,
+       beneficiaire_autre_depense:this.detailOpProvisoire.beneficiaire_autre_depense,
+       geo_autre_depense:this.detailOpProvisoire.geo_autre_depense,
+       dure_autre_depense:this.detailOpProvisoire.dure_autre_depense
       };
+            
     
-      this.ajouterGestionOrdrePaiementAnnulat(nouvelObjetOrdrePaiement)
+      this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement1)
       this.afficherModalListePersonnel()
        this.formData={
      
   }
+
+ }
+ else{
+ this.intitule=this.anneeAmort +"-"+ this.tailleOpEnregistrer + "-" + this.formData.numero_ordre_paiement
+var nouvelObjetOrdrePaiement2 = {
+        exercice:this.anneeAmort,
+       // id:this.recupererIdOpProvisoire(this.recupererNumeroOPProvisoire(this.formData2.numero_oP_provisoire)),
+        numero_ordre_paiement:this.intitule,
+        	type_ordre_paiement:3,
+            date_op_annulation:this.formData.date_op_annulation,
+	id_op_provisoire:this.detailOpProvisoire.recupererId,
+          section_id:this.detailOpProvisoire.section_id,
+           programme_id:this.detailOpProvisoire.programme_id,
+        	unite_administrative_id:this.detailOpProvisoire.unite_administrative_id,
+          action_id:this.detailOpProvisoire.action_id,
+          sous_budget_id:this.detailOpProvisoire.sous_budget_id,
+          activite_id:this.detailOpProvisoire.activite_id,
+           ligne_economique_id:this.detailOpProvisoire.ligne_economique_id,
+           	typedepense:this.detailOpProvisoire.typedepense,
+
+mode_paiement_id:this.detailOpProvisoire.mode_paiement_id,
+           entreprise_id:this.detailOpProvisoire.entreprise_id,
+          marche_id:this.detailOpProvisoire.marche_id,
+          type_financement_id:this.detailOpProvisoire.type_financement_id,
+                  source_financement_id:this.detailOpProvisoire.source_financement_id,
+          montant_ordre_paiement:this.detailOpProvisoire.montant_ordre_paiement,
+           
+        	
+         
+          gestionnaire_credit_non:this.detailOpProvisoire.gestionnaire_credit_non,
+           gestionnaire_credit_date:this.detailOpProvisoire.gestionnaire_credit_date,
+        	gestionnaire_credit_fonction:this.detailOpProvisoire.gestionnaire_credit_fonction,
+
+          controleur_financier_id:this.recupererIdUser(this.recupererIdServiceCF(this.detailOpProvisoire.unite_administrative_id)),
+     nom_autre_depense:this.detailOpProvisoire.nom_autre_depense,
+     	compte_autre_depense:this.detailOpProvisoire.compte_autre_depense,
+       adresse:this.detailOpProvisoire.adresse,
+       reference_autre_depense:this.detailOpProvisoire.reference_autre_depense,
+       odjet_autre_depense:this.detailOpProvisoire.odjet_autre_depense,
+       livrable_autre_depense:this.detailOpProvisoire.livrable_autre_depense,
+       beneficiaire_autre_depense:this.detailOpProvisoire.beneficiaire_autre_depense,
+       geo_autre_depense:this.detailOpProvisoire.geo_autre_depense,
+       dure_autre_depense:this.detailOpProvisoire.dure_autre_depense
+      };
+            
+    
+      this.ajouterGestionOrdrePaiement(nouvelObjetOrdrePaiement2)
+      this.afficherModalListePersonnel()
+       this.formData={
+     
+  }
+ }
   
   },
               

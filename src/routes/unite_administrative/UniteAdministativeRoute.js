@@ -53,7 +53,25 @@ import AjouterBudgetEclater from "../../pages/ExecutionBudgetaire/BudgetEclateHo
 import listeDesBudgetVentille from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/ListeDesBudgetaire.vue"
 import ModificationBudgetaire from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/ModificationBudgetaire.vue"
 import sousBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/sousBudget.vue"
+import voirDetailBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/voirDetailBudget.vue"
+import UniteAdministrativeRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/UniteAdministrativeRegie.vue"
+import BudgetEclateRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/BudgetEclateRegie.vue"
 const UniteAdministativeRoutes = [
+  {
+    path: "/voirDetailBudget",
+    name: "voirDetailBudget",
+    component: voirDetailBudget
+},
+  {
+    path: "/BudgetEclateRegie",
+    name: "BudgetEclateRegie",
+    component: BudgetEclateRegie
+},
+  {
+    path: "/UniteAdministrativeRegie",
+    name: "UniteAdministrativeRegie",
+    component: UniteAdministrativeRegie
+},
   {
     path: "/sousBudget",
     name: "sousBudget",

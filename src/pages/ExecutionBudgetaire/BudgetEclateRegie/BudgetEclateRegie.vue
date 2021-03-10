@@ -7,16 +7,11 @@ recupereMontantEmpruntTotal
         <tr>
           <td>
  <div  align="left" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
+    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente{{doublonLigneBudgetaire(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)}}</button>
     
         </div>
           </td>
-          <!-- <td>
- <div  align="rigth" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="afficherModalListePersonnel">Voir la Ventilation </button>
-    
-        </div>
-          </td> -->
+         
         </tr>
       </table>
       
@@ -40,7 +35,7 @@ recupereMontantEmpruntTotal
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION</a>
+                        <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION{{idBudgetEclaterSousBudget(this.formData10.sous_budget_id,this.formData1.ligneeconomique_id)}}</a>
                       </li>
                     </ul>
                   </div>
@@ -151,7 +146,7 @@ recupereMontantEmpruntTotal
                   </td> -->
               <td>
               <div class="control-group">
-                <label class="control-label">Grande Nature</label>
+                <label class="control-label">Grande Nature{{MontantParBailleur(this.formData.uniteadministrative_id,this.formData.ligne_budgetaire_parent_id,this.formData1.type_financement_id,this.formData.source_financement_id)}}</label>
                 <div class="controls">
                    <input
                     type="text"
@@ -259,7 +254,7 @@ recupereMontantEmpruntTotal
                         <tr>
  <td colspan="">
               <div class="control-group">
-                <label class="control-label">Sous Budget</label>
+                <label class="control-label">Sous Budget{{cumulDotationParUaSousBudget(formData10.sous_budget_id,formData.ligne_budgetaire_parent_id,formData1.type_financement_id,formData.source_financement_id)}}</label>
                 <div class="controls">
                   <select v-model="formData10.sous_budget_id" class="span" style="border:1px solid #000">
                     <option></option>
@@ -276,7 +271,7 @@ recupereMontantEmpruntTotal
                      </td>
                        <td colspan="2">
               <div class="control-group">
-                <label class="control-label">Ligne budgetaire</label>
+                <label class="control-label">Ligne budgetaire{{formData.ligne_budgetaire_parent_id}}</label>
                 <div class="controls">
                  
  
@@ -374,14 +369,6 @@ recupereMontantEmpruntTotal
                 </div>
               </div>
                   </td> -->
-                  <td>
-                       <div class="control-group">
-                <label class="control-label">Dotation Disponible</label>
-                <div class="controls">
-                   <money v-model="formData.montant_saisir"    style="text-align:left;color:red"  class="span"></money>
-                </div>
-              </div>
-                  </td>
                    <td>
                        <div class="control-group">
                 <label class="control-label">Dotation Disponible(n-1)</label>
@@ -428,7 +415,7 @@ recupereMontantEmpruntTotal
                   
                   <td colspan="">
                        <div class="control-group">
-                <label class="control-label">Bailleur</label>
+                <label class="control-label">Bailleur{{doublonLigneBudgetaireUniteAdministrative(this.formData.uniteadministrative_id)}}</label>
                 <div class="controls">
                   <model-list-select style="border:1px solid #000"
                                                    class="wide"
@@ -444,8 +431,28 @@ recupereMontantEmpruntTotal
                 </div>
               </div>
                   </td>
+                   <td>
+                       <div class="control-group">
+                <label class="control-label">Montant du Bailleur</label>
+                <div class="controls">
+                   <money :value="RecupererMontantParBailleur"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                 <!-- <code style="color:red;font-size:12px" v-if="MontantParBailleur == 0">Montant Budget est Saturé</code> -->
+                </div>
+              </div>
+                  </td>
+             <td>
+                       <div class="control-group">
+                <label class="control-label">Montant a Eclaté (n+(n-1))</label>
+                <div class="controls">
+                   <money :value="MontantAEclate"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
+                 <code style="color:red;font-size:12px" v-if="MontantAEclate == 0">Montant Budget est Saturé</code>
+                </div>
+              </div>
+                  </td>
                   
-                   <td colspan="">
+                     </tr>
+                     <tr>
+                        <td colspan="">
                        <div class="control-group">
                 <label class="control-label">Grande nature</label>
                 <div class="controls">
@@ -465,7 +472,7 @@ recupereMontantEmpruntTotal
                   </td>
                         <td>
                        <div class="control-group">
-                <label class="control-label">code Ligne Economique <code style="color:red;font-size:16px">*</code></label>
+                <label class="control-label">code Ligne Economique{{doublonLigneBudgetaireSousBudgetaire(this.formData10.sous_budget_id,this.formData1.ligneeconomique_id)}}    <code style="color:red;font-size:16px">*</code></label>
                 <div class="controls">
                   <model-list-select style="border:1px solid #000"
                                                    class="wide"
@@ -482,11 +489,8 @@ recupereMontantEmpruntTotal
               </div>
               <code style="color:red;font-size:12px" v-if="formData1.ligneeconomique_id==''">Veuillez renseigner ce champ</code>
                   </td>   
-                     </tr>
-                     <tr>
-                       
                   
-                  <td colspan="4">
+                  <td colspan="2">
                        <div class="control-group">
                 <label class="control-label">Libelle ligne budgetaire</label>
                 <div class="controls">
@@ -497,35 +501,6 @@ recupereMontantEmpruntTotal
                     class="span"
                     readonly
                   />
-                </div>
-              </div>
-                  </td>
-                     </tr>
-                     <tr>
-                        <td>
-                       <div class="control-group">
-                <label class="control-label">Montant du Bailleur Budget general(n)</label>
-                <div class="controls">
-                   <money :value="RecupererMontantParBailleur"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
-                 <!-- <code style="color:red;font-size:12px" v-if="MontantParBailleur == 0">Montant Budget est Saturé</code> -->
-                </div>
-              </div>
-                  </td>
-                  <td>
-                       <div class="control-group">
-                <label class="control-label">Montant du Bailleur Budget Eclate (n-1)</label>
-                <div class="controls">
-                   <money :value="DotationBailleurParLigneEconomique"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
-                 <!-- <code style="color:red;font-size:12px" v-if="MontantParBailleur == 0">Montant Budget est Saturé</code> -->
-                </div>
-              </div>
-                  </td>
-             <td colspan="2">
-                       <div class="control-group">
-                <label class="control-label">Montant a Eclaté (n+(n-1))</label>
-                <div class="controls">
-                   <money :value="resteAEclate"  readOnly  style="text-align:left;color:red;font-size:16px"  class="span"></money>
-                 <code style="color:red;font-size:12px" v-if="MontantAEclate == 0">Montant Budget est Saturé</code>
                 </div>
               </div>
                   </td>
@@ -722,7 +697,7 @@ components: {
                 formData:{
                  activite_id:0,
                  uniteadministrative_id:"",
-                 montant_saisir:""
+                 
                 },
                 
                 editpiece:{},
@@ -765,7 +740,7 @@ sous_budget_id:0
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires","structures_budgetaires","getterTousActivite","getterTousPlanBudgetaire"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
 
-...mapGetters("bienService", ["gettersgestionOrdrePaiement","getMandatPersonnaliserVise","typeFactures","gettersDossierLiquidation","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+...mapGetters("bienService", ["getMandatPersonnaliserVise","typeFactures","gettersDossierLiquidation","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -786,65 +761,6 @@ sous_budget_id:0
       "afficheLocalisationGeoNiveau5"
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
-MontantParBailleurBudgetEclate() {
-      return (id,id3,id1,id2)=> {
-        if (id != null && id != "" && id3 != null && id3 != "" && id1 != null && id1 != "" && id2 != null && id2 != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.ligneeconomique_id == id3 && qtreel.type_financement_id == id1 && qtreel.source_financement_id == id2 &&  qtreel.annebudgetaire==this.recupererAnneePrecedant).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
-
-   
-        }
-      };
-    },
-MontantParBailleurConsommer() {
-      return (id,id3,id1,id2)=> {
-        if (id != null && id != "" && id3 != null && id3 != "" && id1 != null && id1 != "" && id2 != null && id2 != "") {
-           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.ligne_economique_id == id3 && qtreel.type_financement_id == id1 && qtreel.source_financement_id == id2 &&  qtreel.exercice==this.recupererAnneePrecedant).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
-
-   
-        }
-      };
-    },
-
-
-
-DotationBailleurParLigneEconomique(){
-  return parseFloat(this.MontantParBailleurBudgetEclate(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id,this.formData1.type_financement_id,this.formData.source_financement_id))-parseFloat(this.MontantParBailleurConsommer(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id,this.formData1.type_financement_id,this.formData.source_financement_id))
-},
-
-
-
-resteAEclate(){
-  return parseFloat(this.RecuppererMontantSansActivite)-parseFloat(this.dotationTotal)-parseFloat(this.cumulDotationParUaBudgetEclate(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id,this.formData1.type_financement_id,this.formData.source_financement_id))
-},
-
-
-RecuppererMontantSansActivite(){
-  if(this.formData.activite_id==0){
-    return parseFloat(this.formData.montant_saisir)+parseFloat(this.MontantDisponibleParUa)
-
-  }
-  else if(this.formData.uniteadministrative_id!=''){
-    return parseFloat(this.DotationBailleurParLigneEconomique)+parseFloat(this.RecupererMontantParBailleur)+parseFloat(this.formData.montant_saisir)+parseFloat(this.MontantDisponibleParUa) 
-  }
-  else {
-    return 0
-  }
-},
-
-MontantAEclate(){
-
-return parseFloat(this.DotationRestantAnneePrecedant(this.formData.uniteadministrative_id))+parseFloat(this.RecupererMontantParBailleur)-parseFloat(this.RecupererMontantParBailleurCumull)-parseFloat(this.dotationTotal)
-
-},
-cumulDotationParUaBudgetEclate() {
-      return (id,id1,id2,id3) => {
-        if (id != null && id != "" && id1 != null && id1 != "" && id2 != null && id2 != "" && id3 != null && id3 != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.ligneeconomique_id == id1 && qtreel.type_financement_id == id2 && qtreel.source_financement_id == id3 && qtreel.annebudgetaire==this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
-
-        }
-      };
-    },
-
 
  TotalBudget(){
       if(this.comparaison(this.formData.activite_id)==this.formData.activite_id){
@@ -1162,6 +1078,19 @@ return parseFloat(this.DotationRestantAnneePrecedant(this.formData.uniteadminist
 
 
 
+MontantAEclate(){
+return parseFloat(this.DotationRestantAnneePrecedant(this.formData.uniteadministrative_id))+parseFloat(this.RecupererMontantParBailleur)-parseFloat(this.RecupererMontantParBailleurCumull)-parseFloat(this.dotationTotal)
+// if(this.formData10.sous_budget_id !=""){
+//   return  ((parseFloat(this.RecuppererLaDotation(this.formData10.sous_budget_id,this.formData.ligne_budgetaire_parent_id))+parseFloat(this.MontantDisponibleParUa)) - (parseFloat(this.cumulDotationParUa(this.formData.uniteadministrative_id,this.formData.ligne_budgetaire_parent_id))+parseFloat(this.dotationTotal)))
+// }
+// else if(this.formData10.sous_budget_id ==""){
+  
+//   return  ((parseFloat(this.RecuppererLaDotationInitial(this.formData.ligne_budgetaire_parent_id))+parseFloat(this.MontantDisponibleParUa)) - (parseFloat(this.cumulDotationParUa(this.formData.uniteadministrative_id,this.formData.ligne_budgetaire_parent_id))+parseFloat(this.dotationTotal)))
+// }
+// else{
+//    return  ((parseFloat(this.MontantDisponibleParUa)) - (parseFloat(this.cumulDotationParUa(this.formData.uniteadministrative_id,this.formData.ligne_budgetaire_parent_id))+parseFloat(this.dotationTotal)))
+// }
+},
 
   DotationRestantAnneePrecedant() {
       return id => {
@@ -2248,9 +2177,7 @@ else{
 pagePrecedent(){
                 window.history.back()
             },
- afficherModalListePersonnel(){
-                this.$router.push({ name: 'voirDetailBudget' })
-            },
+
 
     formaterDate(date) {
               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");

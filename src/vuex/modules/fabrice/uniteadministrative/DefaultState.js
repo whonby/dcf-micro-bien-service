@@ -33,7 +33,8 @@ const defaultState = {
   historiqueBudgetEclate:[],
   decisionBudgetEclate:[],
   HistoriquedecisionBudgetEclate:[],
-  SousBudget:[]
+  SousBudget:[],
+  BudgetEclateRegie:[]
 };
 
 export default defaultState;

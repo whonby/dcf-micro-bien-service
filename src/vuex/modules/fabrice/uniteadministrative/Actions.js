@@ -1810,3 +1810,64 @@ export function supprimerSousBudget({ commit}, id) {
           axios.delete("/SousBudget/" + id).then(() => dialog.close());
       });
 }
+
+
+
+
+
+
+export function getBudgetEclateRegie({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/BudgetEclateRegie")
+          .then(response => {
+              commit("GET_ALL_BUDGET_ECLATE_REGIE", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterBudgetEclateRegie({ commit}, nouveau) {
+  asyncLoading(axios
+      .post("/BudgetEclateRegie", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_BUDGET_ECLATE_REGIE", response.data);
+            
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      });
+}
+
+
+
+export function modifierBudgetEclateRegie({ commit}, nouveau) {
+  asyncLoading(axios
+      .put("/BudgetEclateRegie/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_BUDGET_ECLATE_REGIE", response.data);
+         
+
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerBudgetEclateRegie({ commit}, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_BUDGET_ECLATE_REGIE", id);
+          
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/BudgetEclateRegie/" + id).then(() => dialog.close());
+      });
+}

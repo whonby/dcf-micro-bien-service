@@ -437,6 +437,7 @@ this.getTypeAppel()
      this.getAllHistoriqueDecompteFacture()
        this.getStructureOrganigrammeUa()
        this.getSousBudget()
+       this.getBudgetEclateRegie()
  this.getAllBudgetEclate()
  this.getAllHistorisqueBudgetEclate()
  this.getAllDecisionBudgetEclate()
@@ -729,6 +730,7 @@ return objJson.id
      "getStructureOrganigrammeUa",
      "getAllBanqueUa",
      "getSousBudget",
+     "getBudgetEclateRegie",
      "getAllDecompteFacture",
      "getAllBudgetEclate",
      "getAllHistorisqueBudgetEclate",
