@@ -2202,7 +2202,7 @@ components: {
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
       tailleOpEnregistrer(){
-  return this.gettersgestionOrdrePaiement.length
+  return this.gettersgestionOrdrePaiement.length + 1
 },
        libelleSousBudget	() {
       return id => {

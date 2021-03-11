@@ -598,8 +598,8 @@ varObjetBanque
                     </table>
                 
             </div>
-            <div class="modal-footer">  <a @click.prevent="modifierCompteLocal(editCompte)"   class="btn btn-primary"
-              href="#">Modifier</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+            <div class="modal-footer">  <a @click.prevent="modifierCompteLocal()"   class="btn btn-primary"
+              href="#">Modifier</a> <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
         </div>
         
 
@@ -1169,7 +1169,7 @@ BanqueModal() {
          rib:this.afficherCodeRibEditCompte
       
        };
-              this.modifierCompteBancaire(nouvelObjet)
+              this.modifierCompte(nouvelObjet)
               this.$('#modifierCompte').modal('hide');
             },
             

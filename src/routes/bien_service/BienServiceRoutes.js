@@ -135,7 +135,13 @@ import ListeDesOrdresPaiement from "../../pages/ExecutionBudgetaire/gestionDesOr
 import AjoutOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiement.vue"
 import AjouterOrdrePaiementAnnulation from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementAnnulation.vue"
 import AjouterOrdrePaiementDefinitive from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementDefinitive.vue"
+import listeDesBudgetVentilleRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/listeDesBudgetVentilleRegie.vue"
 const BienServiceRoutes = [
+    {
+        path: "/listeDesBudgetVentilleRegie/:id",
+        name: "listeDesBudgetVentilleRegie",
+        component: listeDesBudgetVentilleRegie
+    },
     {
         path: "/AjouterOrdrePaiementDefinitive",
         name: "AjouterOrdrePaiementDefinitive",

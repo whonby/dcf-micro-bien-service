@@ -2049,7 +2049,7 @@ components: {
 //     },
 
 tailleOpEnregistrer(){
-  return this.gettersgestionOrdrePaiement.length
+  return this.gettersgestionOrdrePaiement.length + 1
 },
 
 
@@ -3559,7 +3559,7 @@ this.intitule=this.anneeAmort +"-"+ this.tailleOpEnregistrer + "-" + this.formDa
        
         	type_ordre_paiement:4,
             date_op_annulation:this.formData.date_op_annulation,
-id_op_provisoire:this.detailOpProvisoire.recupererId,
+id_op_Annulation:this.detailOpProvisoire.recupererId,
           section_id:this.detailOpProvisoire.section_id,
            programme_id:this.detailOpProvisoire.programme_id,
         	unite_administrative_id:this.detailOpProvisoire.unite_administrative_id,

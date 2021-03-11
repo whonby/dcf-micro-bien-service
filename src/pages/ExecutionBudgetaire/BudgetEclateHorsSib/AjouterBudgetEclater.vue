@@ -376,7 +376,7 @@ recupereMontantEmpruntTotal
                   </td> -->
                   <td>
                        <div class="control-group">
-                <label class="control-label">Dotation Disponible</label>
+                <label class="control-label">Dotation Disponible (n-1)(a nouveau manuel)</label>
                 <div class="controls">
                    <money v-model="formData.montant_saisir"    style="text-align:left;color:red"  class="span"></money>
                 </div>
@@ -384,7 +384,7 @@ recupereMontantEmpruntTotal
                   </td>
                    <td>
                        <div class="control-group">
-                <label class="control-label">Dotation Disponible(n-1)</label>
+                <label class="control-label">Dotation Disponible(n-1)(a nouveau Automatique)</label>
                 <div class="controls">
                    <money :value="MontantDisponibleParUa"  readOnly  style="text-align:left;color:red"  class="span"></money>
                 </div>

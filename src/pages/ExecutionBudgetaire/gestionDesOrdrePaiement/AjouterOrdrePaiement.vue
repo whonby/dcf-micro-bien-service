@@ -104,7 +104,7 @@ numero_ordrepaiement
             </td>
              <td>
               <div class="control-group">
-                <label class="control-label">Programme/Dotation</label>
+                <label class="control-label">Programme/Dotation{{tailleOpEnregistrer}}</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -416,7 +416,7 @@ numero_ordrepaiement
                      readonly
                     type="text"
                     style="border:1px solid #000"
-                  :value="Numero_CC(formData2.compte_entreprise_id)"
+                  :value="Numero_CC(idEntreprise(formData2.marche_id))"
                     class="span"
                    
                     
@@ -436,7 +436,7 @@ numero_ordrepaiement
                      readonly
                     type="text"
                     style="border:1px solid #000"
-                   :value="Numero_adresse_Entreprise(formData2.adresse_entreprise_id)"
+                   :value="Numero_adresse_Entreprise(idEntreprise(formData2.marche_id))"
                     class="span"
                    
                    
@@ -457,7 +457,7 @@ numero_ordrepaiement
                      
                     type="text"
                     style="border:1px solid #000"
-                   :value="libelleBanque(formData2.banque_entreprise_id)"
+                   :value="libelleBanque(idbanque(idEntreprise(formData2.marche_id)))"
                     class="span"
                    readonly
                     
@@ -1875,7 +1875,7 @@ components: {
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
 
-...mapGetters("bienService", ["gettersDossierAutreDepense","gettersDossierMandat","gettersDossierFacturePiece","typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+...mapGetters("bienService", ["gettersgestionOrdrePaiement","gettersDossierAutreDepense","gettersDossierMandat","gettersDossierFacturePiece","typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -1896,8 +1896,36 @@ components: {
       "afficheLocalisationGeoNiveau5"
     ]),
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
+
+
+
+
+      idbanque() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.banq_id;
+      }
+      return 0
+        }
+      };
+    },
+      idEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.entreprise_id;
+      }
+      return 0
+        }
+      };
+    },
       tailleOpEnregistrer(){
-  return this.gettersgestionOrdrePaiement.length
+  return this.gettersgestionOrdrePaiement.length + 1
 },
 listePieceJustificativeOpDefinitive() {
       return id => {
@@ -2698,18 +2726,18 @@ listePieceJustificative1() {
     //     }
     //   };
     // },
-    idEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.numero_marche == id);
+    // idEntreprise() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.numero_marche == id);
 
-      if (qtereel) {
-        return qtereel.entreprise_id
-      }
-      return 0
-        }
-      };
-    },
+    //   if (qtereel) {
+    //     return qtereel.entreprise_id
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
     
 
      idAutreDepense() {

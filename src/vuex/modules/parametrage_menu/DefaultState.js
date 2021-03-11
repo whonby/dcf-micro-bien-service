@@ -22,6 +22,7 @@ const defaultstate = {
     MenuTableauBordGestionMarche:45,
     MenuTableauBordGeneral:123,
     MenuBudgetEclater:780,
+    MenuOrdrePaiement:1200,
     active_el: 11
 };
 

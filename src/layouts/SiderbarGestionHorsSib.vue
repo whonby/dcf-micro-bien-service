@@ -106,13 +106,13 @@
            
           </a>
         </li>
-<li>
-              <router-link :to="{ name: 'ListeDesOrdresPaiement'}" tag="a"  >
-         
-            <i class="icon-arrow-left"></i>
-            <span>ORDRE DE PAIEMENT</span>
-           
-          </router-link>
+
+           <li @click.prevent="navigateurOrdrePaiement" :class="{active: active_el ==1200}">
+              <a title="GESTION DES IMAGES" href="#">
+                  <i class="icon-truck"></i>
+                  <span>ORDRE DE PAIEMENT</span>
+
+              </a>
           </li>
           <li @click.prevent="navigateToImage" :class="{active: active_el ==75}">
               <a title="GESTION DES IMAGES" href="#">
@@ -269,6 +269,12 @@ return objJson.id
         this.activate(8)
         this.$router.push({
           name: 'CartographieBudget'
+        })
+      },
+       navigateurOrdrePaiement(){
+        this.activate(1200)
+        this.$router.push({
+          name:'tableau_de_bors_sib_investissement'
         })
       },
        navigateToRapport(){

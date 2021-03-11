@@ -19,7 +19,7 @@
           </download-excel> -->
             
           <table class="table table-bordered table-striped">
-             <td style="width:60%">
+             <td style="width:55%">
 
        
           </td>
@@ -32,14 +32,14 @@
           </td>
            <td style="width:0px">
 <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="ajouterOpAnnulation" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER OP D'ANNULATION</i></button>
+    <button class="btn btn-danger" @click.prevent="ajouterOpAnnulation" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT D'ANNULATION</i></button>
     
         </div> 
        
           </td> 
            <td style="width:0px">
 <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-primary" @click.prevent="ajouterOpDeffinitif" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER OP DEFINITIVE</i></button>
+    <button class="btn btn-primary" @click.prevent="ajouterOpDeffinitif" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT DEFINITIF</i></button>
     
         </div> 
        
@@ -63,9 +63,10 @@
                   <tr>
                      <th   style="font-size:14px;font-weight:bold">Exercice</th>
                       <th   style="font-size:14px;font-weight:bold">Type d'ordre de paiement</th>
-                     <th   style="font-size:14px;font-weight:bold;color:green">N°Ordre paiement</th>
-                     <th   style="font-size:14px;font-weight:bold;color:red">N°OP Provisoire</th>
-                     <th   style="font-size:14px;font-weight:bold;color:blue">N°OP Definitive</th>
+                     <th   style="font-size:14px;font-weight:bold;color:#000">N°Ordre paiement</th>
+                     <th   style="font-size:14px;font-weight:bold;color:#000">N°OP Provisoire</th>
+                     <th   style="font-size:14px;font-weight:bold;color:#000">N°OP Annulation</th>
+                     <th   style="font-size:14px;font-weight:bold;color:#000">N°OP Definitif</th>
                    
                     <th   style="font-size:14px;font-weight:bold">Objet Op</th>
                     <th   style="font-size:14px;font-weight:bold">UA</th>
@@ -105,6 +106,10 @@
                    <td v-if="type.id_op_provisoire != null"
                       style="font-size:14px;font-weight:bold;text-align:center;color:red"
                     >{{afficheNumeroOpDefinitive(type.id_op_provisoire) }}</td>
+ <td v-else style="background-color:lightblue"></td>
+ <td v-if="type.id_op_Annulation != null"
+                      style="font-size:14px;font-weight:bold;text-align:center;color:blue"
+                    >{{afficheNumeroOpDefinitive(type.id_op_Annulation) }}</td>
  <td v-else style="background-color:lightblue"></td>
                      <td v-if="type.id_op_definitif != null"
                       style="font-size:14px;font-weight:bold;text-align:center;color:blue"
