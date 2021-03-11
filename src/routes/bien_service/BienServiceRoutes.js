@@ -141,13 +141,22 @@ import OrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegi
 import AjoutOrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegie.vue"
 import AjoutOrdrePaiementRegieAnnulation from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieAnnulation.vue"
 import AjoutOrdrePaiementRegieDefinitive from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieDefinitive.vue"
+
+import TestTableaux from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/TestTableau.vue"
 const BienServiceRoutes = [
     {
         path: "/listeDesBudgetVentilleRegie/:id",
         name: "listeDesBudgetVentilleRegie",
         component: listeDesBudgetVentilleRegie
     },
-  //ordre de paiement des regies
+  //test tableaux
+    {
+        path: "/TestTableaux",
+        name: "TestTableaux",
+        component: TestTableaux
+    },
+
+    //ordre de paiement des regies
     {
         path: "/OrdrePaiementRegie",
         name: "OrdrePaiementRegie",
