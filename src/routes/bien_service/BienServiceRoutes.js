@@ -136,11 +136,41 @@ import AjoutOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdreP
 import AjouterOrdrePaiementAnnulation from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementAnnulation.vue"
 import AjouterOrdrePaiementDefinitive from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementDefinitive.vue"
 import listeDesBudgetVentilleRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/listeDesBudgetVentilleRegie.vue"
+
+import OrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/OrdrePaiementRegie.vue"
+import AjoutOrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegie.vue"
+import AjoutOrdrePaiementRegieAnnulation from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieAnnulation.vue"
+import AjoutOrdrePaiementRegieDefinitive from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieDefinitive.vue"
 const BienServiceRoutes = [
     {
         path: "/listeDesBudgetVentilleRegie/:id",
         name: "listeDesBudgetVentilleRegie",
         component: listeDesBudgetVentilleRegie
+    },
+  //ordre de paiement des regies
+    {
+        path: "/OrdrePaiementRegie",
+        name: "OrdrePaiementRegie",
+        component: OrdrePaiementRegie
+    },
+ //ajout ordre de paiement 
+    {
+        path: "/AjoutOrdrePaiementRegie",
+        name: "AjoutOrdrePaiementRegie",
+        component: AjoutOrdrePaiementRegie
+    },
+//ajout ordre de paiement annulation
+    {
+        path: "/AjoutOrdrePaiementRegieAnnulation",
+        name: "AjoutOrdrePaiementRegieAnnulation",
+        component: AjoutOrdrePaiementRegieAnnulation
+    },
+//ajout ordre de paiement definitive
+
+    {
+        path: "/AjoutOrdrePaiementRegieDefinitive",
+        name: "AjoutOrdrePaiementRegieDefinitive",
+        component: AjoutOrdrePaiementRegieDefinitive
     },
     {
         path: "/AjouterOrdrePaiementDefinitive",

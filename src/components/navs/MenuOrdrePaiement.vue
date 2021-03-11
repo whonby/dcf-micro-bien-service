@@ -8,7 +8,7 @@
         </router-link>
       </li>
 <li>
-        <router-link :to="{name: 'UniteAdministrativeRegie'}" tag="a">
+        <router-link :to="{name: 'OrdrePaiementRegie'}" tag="a">
           ORDRE PAIEMENT DES REGIES
         </router-link>
       </li>

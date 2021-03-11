@@ -2972,3 +2972,8 @@ export const MODIFIER_GESTION_ORDRE_PAIEMENT_ANNULATION = (state, elementModif)=
 export const SUPPRIMER_GESTION_ORDRE_PAIEMENT_ANNULATION = (state, id)=> {
     state.gestionOrdrePaiementAnnulation = state.gestionOrdrePaiementAnnulation.filter(prest => prest.id !=id)
 }
+
+
+//****************************  gestion des OrdrePaiementRegie*********************** */
+
+

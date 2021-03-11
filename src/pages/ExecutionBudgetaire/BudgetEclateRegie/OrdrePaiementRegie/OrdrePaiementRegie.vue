@@ -25,21 +25,21 @@
           </td>
             <td style="width:0%;font-weight:bolder;color:#000">
 <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="ajouterOpSysteme" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT</i></button>
+    <button class="btn btn-success" @click.prevent="ajouterOpRegieSysteme" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT</i></button>
     
         </div> 
        
           </td>
            <td style="width:0px">
 <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="ajouterOpAnnulation" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT D'ANNULATION</i></button>
+    <button class="btn btn-danger" @click.prevent="ajouterOpRegieAnnulation" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT D'ANNULATION</i></button>
     
         </div> 
        
           </td> 
            <td style="width:0px">
 <div  align="right" style="cursor:pointer;">
-    <button class="btn btn-primary" @click.prevent="ajouterOpDeffinitif" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT DEFINITIF</i></button>
+    <button class="btn btn-primary" @click.prevent="ajouterOpRegieDeffinitif" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT DEFINITIF</i></button>
     
         </div> 
        
@@ -630,7 +630,6 @@ export default {
   ...mapGetters("uniteadministrative", ["budgetEclate","groupeLigneEconomiqueBudget","getSousBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
-
    afficheNumeroOpDefinitive() {
       return id => {
         if (id != null && id != "") {
@@ -644,10 +643,15 @@ export default {
       };
     },
 
-    listeordrepaiementregie() {
+     listeordrepaiementregie() {
      
-          return  this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.diff_op == null);
-    }, 
+          return  this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.diff_op != null);
+
+        
+      
+    },
+
+
   afficheIdOpProvisoire() {
       return id => {
         if (id != null && id != "") {
@@ -953,14 +957,14 @@ this.$("#decisionAnnulation").modal('hide');
        this.editDecisionFinal = this.gettersgestionOrdrePaiement.find(item=>item.id==id);
     },
     formatageSomme:formatageSomme,
-    ajouterOpSysteme(){
-                this.$router.push({ name: 'AjoutOrdrePaiement' })
+    ajouterOpRegieSysteme(){
+                this.$router.push({ name: 'AjoutOrdrePaiementRegie' })
             },
-            ajouterOpAnnulation(){
-                this.$router.push({ name: 'AjouterOrdrePaiementAnnulation' })
+            ajouterOpRegieAnnulation(){
+                this.$router.push({ name: 'AjoutOrdrePaiementRegieAnnulation' })
             },
-            ajouterOpDeffinitif(){
-                this.$router.push({ name: 'AjouterOrdrePaiementDefinitive' })
+            ajouterOpRegieDeffinitif(){
+                this.$router.push({ name: 'AjoutOrdrePaiementRegieDefinitive' })
             },
     //afiicher modal ajouter
     afficherModalAjouterTitre() {

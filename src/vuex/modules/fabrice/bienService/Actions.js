@@ -5673,3 +5673,7 @@ export function supprimerGestionOrdrePaiementAnnulat({ commit }, id) {
           axios.delete("/GestionOrdrePaiementAnnulation/" + id).then(() => dialog.close());
       });
 }
+
+
+//************************** gestion des Ordre de Paiement Regie**************** */
+
