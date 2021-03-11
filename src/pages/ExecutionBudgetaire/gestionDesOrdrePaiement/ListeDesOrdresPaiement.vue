@@ -17,7 +17,11 @@
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
+        <div style="font-size:20px;text-align:center;text-decoration:underline;width:100%;height:50%">
+          <p >ORDRES DE PAIEMENTS PROJETS</p>
+        </div>
             
+            <br>
           <table class="table table-bordered table-striped">
              <td style="width:55%">
 
@@ -45,6 +49,7 @@
        
           </td> 
             </table>
+           
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">

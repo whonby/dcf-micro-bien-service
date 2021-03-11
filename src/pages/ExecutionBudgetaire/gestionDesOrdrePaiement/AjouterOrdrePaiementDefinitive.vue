@@ -1104,20 +1104,20 @@ numero_Op_Definitive
             <td colspan="">
               <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))">
                 <div class="control-group">
-                <label class="control-label">Engagements antérieurs (B)12{{CalculCumulAnterieureSousBudget}}</label>
+                <label class="control-label">Engagements antérieurs (B)1{{CalculCumulAnterieureSousBudget}}</label>
                 <div class="controls">
                  
-                  <money :value="CalculCumulAnterieureSousBudget" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="parseFloat(this.EngagementsantérieursSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))-parseFloat(this.recupererEngageMarche(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
                 </template>
               <template v-else>
                 <div class="control-group">
-                <label class="control-label">Engagements antérieurs (B)14</label>
+                <label class="control-label">Engagements antérieurs (B)</label>
                 <div class="controls">
                  
-                  <money :value="CalculCumulAnterieureUniteAdministrative" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="this.EngagementsantérieursUa(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
@@ -1139,10 +1139,10 @@ numero_Op_Definitive
             <td colspan="">
               <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))">
                 <div class="control-group">
-                <label class="control-label">Cumul engagements(D)(B+C)</label>
+                <label class="control-label">Cumul engagements(D)1(B+C)</label>
                 <div class="controls">
                  
-                  <money :value="CalculCumulEngagementSousBudget" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="(parseFloat(this.EngagementsantérieursSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))-parseFloat(this.recupererEngageMarche(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))+(detailOpProvisoire.montant_ordre_paiement)" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
@@ -1152,7 +1152,7 @@ numero_Op_Definitive
                 <label class="control-label">Cumul engagements(D)(B+C)</label>
                 <div class="controls">
                  
-                  <money :value="CalculCumulEngagementUniteAdministrative" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="(EngagementsantérieursUa(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))+parseFloat(detailOpProvisoire.montant_ordre_paiement)" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
@@ -1165,7 +1165,7 @@ numero_Op_Definitive
                <label class="control-label">Disponible budgétaire (A - D)</label>
                 <div class="controls">
                  
-                  <money :value="CalculBisponibleBudgetSousBudget" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="(CreditAutorise(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))-(parseFloat(this.EngagementsantérieursSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))-parseFloat(this.recupererEngageMarche(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))+(detailOpProvisoire.montant_ordre_paiement)" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
@@ -1175,7 +1175,7 @@ numero_Op_Definitive
                <label class="control-label">Disponible budgétaire (A - D)</label>
                 <div class="controls">
                  
-                  <money :value="CalculBisponibleBudgetUniteAdministrative" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="(CreditAutorise(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))-(EngagementsantérieursUa(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))+parseFloat(detailOpProvisoire.montant_ordre_paiement)" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
@@ -1188,7 +1188,7 @@ numero_Op_Definitive
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">{{recupererEngageMarche(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))}}LE GESTIONNAIRE DE CREDIT{{EngagementsantérieursSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))}}</a>
+                        <a data-toggle="tab" href="#tab1">LE GESTIONNAIRE DE CREDIT</a>
                       </li>
                        
                      

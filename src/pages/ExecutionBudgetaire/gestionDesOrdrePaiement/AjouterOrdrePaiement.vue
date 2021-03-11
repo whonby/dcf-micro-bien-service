@@ -153,7 +153,7 @@ numero_ordrepaiement
                            
                              <td>
                 <div class="control-group">
-                  <label class="control-label">Activité{{formData.activite_id}} <code style="color:red;font-size:16px">*</code></label>
+                  <label class="control-label">Activité <code style="color:red;font-size:16px">*</code></label>
                   <div class="controls">
                     <select v-model="formData.activite_id" class="span" style="border:1px solid #000">
                      <option
@@ -996,10 +996,10 @@ numero_ordrepaiement
             </td>
             <td colspan="">
               <div class="control-group">
-                <label class="control-label">Engagements antérieurs (B)</label>
+                <label class="control-label">Engagements antérieurs(B)</label>
                 <div class="controls">
                  
-                  <money :value="CreditAutoriseTresor(formData.ligne_economique_id)" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="cumulBudgetEnterieure" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
@@ -1942,7 +1942,7 @@ Disponiblebudgétaire() {
       
     },
 Cumulengagements() { 
-      const val = parseFloat(this.CreditAutoriseTresor(this.formData.ligne_economique_id)) + parseFloat(this.formData2.montant_engage) ;
+      const val = parseFloat(this.cumulBudgetEnterieure) + parseFloat(this.formData2.montant_engage) ;
       return parseFloat(val).toFixed(0);
       
     },
@@ -2325,7 +2325,7 @@ MontantFactureHt() {
       };
     },
 calculCumultresor() { 
-      const val = parseFloat(this.CreditAutoriseTresor(this.formData.ligne_economique_id)) - parseFloat(this.formData.montant_tresor) ;
+      const val = parseFloat(this.cumulAnterieur(this.formData.ligne_economique_id)) - parseFloat(this.formData.montant_tresor) ;
       return parseFloat(val).toFixed(0);
       
     },
@@ -2364,18 +2364,32 @@ CumulDemande: function () {
     //     }
     //   };
     // },
-    CreditAutoriseTresor() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id && qtreel.actived==1 && qtreel.typefinancement_id==14);
+    cumulAnterieurUa() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.ligne_economique_id==id1 && qtreel.diff_op!=null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
 
-      if (qtereel) {
-       
-           return qtereel.Dotation_Initiale;
-      }
-      return 0
+    
         }
       };
+    },
+    cumulAnterieurSousBudget() {
+      return (id,id2,id1) => {
+        if (id != null && id != "" && id2 != null && id2 != "" && id1 != null && id1 != "") {
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.sous_budget_id==id2 && qtreel.ligne_economique_id==id1 && qtreel.diff_op!=null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+
+    
+        }
+      };
+    },
+    cumulBudgetEnterieure(){
+if(this.comparaison(this.formData.activite_id)!=this.formData.activite_id){
+  return this.cumulAnterieurUa(this.formData.unite_administrative_id,this.formData.ligne_economique_id)
+
+}
+else{
+  return this.cumulAnterieurSousBudget(this.formData.unite_administrative_id,this.formData.sous_budget_id,this.formData.ligne_economique_id)
+}
     },
     CreditAutoriseDon() {
       return id => {
