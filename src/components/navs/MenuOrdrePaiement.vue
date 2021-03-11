@@ -12,6 +12,12 @@
           ORDRE PAIEMENT DES REGIES
         </router-link>
       </li>
+
+      <li>
+        <router-link :to="{name: 'TestTableaux'}" tag="a">
+          TABLEAUX
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>
