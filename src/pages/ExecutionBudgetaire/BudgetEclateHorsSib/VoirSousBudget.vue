@@ -1,6 +1,11 @@
 
 <template>
   <div>
+      
+  <div  align="left" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="pagePrecedent">Page Précédente</button>
+    
+        </div>
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
@@ -56,28 +61,41 @@
                     >{{type.activite_enfant || 'Non renseigné'}}</td>
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.activite_parent_id || 'Non renseigné'}}</td>
+                    >{{libelleActivite(type.activite_parent_id) || 'Non renseigné'}}</td>
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.ligneeconomique_id || 'Non renseigné'}}</td>
+                    >{{libelleLigneBudgetaire(type.ligneeconomique_id) || 'Non renseigné'}}</td>
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.type_financement_id || 'Non renseigné'}}</td>
-<td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.libelle || 'Non renseigné'}}</td>
+                    >{{libelleTypeFinancement(type.type_financement_id) || 'Non renseigné'}}</td>
+
 
 <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.source_financement_id || 'Non renseigné'}}</td>
-
+                    >{{libelleSousFinancement(type.source_financement_id) || 'Non renseigné'}}</td>
+<td
+                      @dblclick="afficherModalModifierTypeTexte(index)" style="text-align:center;font-weight:bold;"
+                    >{{formatageSomme(parseFloat(type.montant_budgetaire)) || 'Non renseigné'}}</td>
                     <td>
-                      <button class="btn btn-danger" @click="supprimerTypeTexte(type.id)">
+                      <button class="btn btn-danger" @click="supprimerSousBudget(type.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
                       </button>
                     </td>
+                  </tr>
+                  <tr>
+                     <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            
+                                    <td style="font-weight:bold;font-size:14px;text-align:center;">TOTAL</td>
+                            <td style="text-align:center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(MonantDesSousBudget(detail_marche.unite_administrative_id)))}}</td>
+                            <td></td>
+                            
                   </tr>
                 </tbody>
               </table>
@@ -96,6 +114,7 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
+  import {formatageSomme} from "@/Repositories/Repository"
 export default {
   name:'typetext',
   data() {
@@ -134,11 +153,84 @@ created() {
 
 },
   computed: {
-    ...mapGetters("uniteadministrative", ["getSousBudget"]),
+    ...mapGetters("uniteadministrative", ["getSousBudget","uniteAdministratives"]),
+    ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
+  'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
+   ...mapGetters("parametreGenerauxAdministratif", [
+      "services_gestionnaires",
+      "sections",
+      "type_Unite_admins",
+      "plans_programmes",
+      "natures_sections",
+      "grandes_natures",
+      "afficheNiveauPlanProg",
+      "exercices_budgetaires",
+      "afficheLocalisationGeoNiveau5"
+    ]),
+    ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires","structures_budgetaires","getterTousActivite","getterTousPlanBudgetaire"]),
+      ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
+     libelleLigneBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ',qtereel.libelle)
+      }
+      return 0
+        }
+      };
+    },
+    
+    
+    
+    libelleActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_activites.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ',qtereel.libelle)
+      }
+      return 0
+        }
+      };
+    },
     listeDesSousBudget() {
       return (id) => {
         if (id != null && id != "") {
            return this.getSousBudget.filter(qtreel => qtreel.unite_administrative_id == id );
+        }
+      };
+    },
+    MonantDesSousBudget() {
+      return (id) => {
+        if (id != null && id != "") {
+           return this.getSousBudget.filter(qtreel => qtreel.unite_administrative_id == id ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_budgetaire), 0).toFixed(0);
+        }
+      };
+    },
+    libelleSousFinancement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sources_financements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+    libelleTypeFinancement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.types_financements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
         }
       };
     },
@@ -158,10 +250,12 @@ created() {
       "getAllNombreTypeText",
       "ajouterTypeTexte",
       "modifierTypeTexte",
-      "supprimerTypeTexte"
+      "supprimerSousBudget"
     ]),
-  
-    
+  formatageSomme:formatageSomme,
+    pagePrecedent(){
+                window.history.back()
+            },
 ExporterEnExel(){
       this.$refs.excel.click()
     }

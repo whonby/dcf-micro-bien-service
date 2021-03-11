@@ -17,7 +17,7 @@
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
-        <div style="font-size:20px;text-align:center;text-decoration:underline;width:100%;height:50%">
+        <div style="font-size:30px;text-align:center;text-decoration:underline;font-weight:bold;">
           <p >ORDRES DE PAIEMENTS PROJETS</p>
         </div>
             

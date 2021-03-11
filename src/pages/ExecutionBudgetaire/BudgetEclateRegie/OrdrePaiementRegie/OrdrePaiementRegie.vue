@@ -17,7 +17,11 @@
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
+            <div style="font-size:30px;text-align:center;text-decoration:underline;font-weight:bold;">
+          <p >ORDRES DE PAIEMENTS REGIE</p>
+        </div>
             
+            <br>
           <table class="table table-bordered table-striped">
              <td style="width:55%">
 
