@@ -2,14 +2,20 @@
 <template>
   <div>
  
-    <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
+    <table class="table table-bordered table-striped">
+            <tr>
+              <td>
+                <div align="right">
 
-    <!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
+      <button class="btn btn-info"  @click.prevent="SOUSbUDGET">AJOUTER SOUS BUDGET </button>
 
-   
-    <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
-    <!-- End Page Header -->
-    <!-- Default Light Table -->
+
+                            </div>
+              </td>
+              
+            </tr>
+          </table>
+          
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
@@ -22,39 +28,10 @@
             :data="BudgetEchateParUa"
             name="Liste type texte"
             worksheet="Liste type texte"
-          >sousBudget
+          >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
-          <table class="table table-bordered table-striped">
-            <tr>
-              <td>
-                <div align="right">
-
-      <button class="btn btn-info"  @click.prevent="SOUSbUDGET">SOUS BUDGET </button>
-
-
-                            </div>
-              </td>
-              <td style="width:12%;" >
-                
-                <div align="right">
-
-      <button class="btn btn-success"  @click.prevent="ajouterBudgetEclarter">ECLATER LE BUDGET </button>
-
-
-                            </div>
-              </td>
-              <td style="width:12%;">
-                <div align="right">
-
-      <button class="btn btn-danger"  @click.prevent="ModificationBudgetaire">MODIFICATION BUDGETAIRE </button>
-
-
-                            </div>
-              </td>
-            </tr>
-          </table>
-          
+               
                             
                             
           <div class="widget-box">
@@ -83,15 +60,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                            <tr class="odd gradeX" v-for="(type) in groupeUniteAdministrativeBudgetEclate" :key="type.id">
+                            <tr class="odd gradeX" v-for="(type) in groupeUaSousBudget" :key="type.id">
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{type[0].annebudgetaire || 'Non renseigné'}}</td> -->
-                      <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type[0].uniteadministrative_id)) || 'Non renseigné'}}</td>
-                   <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type[0].uniteadministrative_id) || 'Non renseigné'}}</td>
+                      <td style="font-size:16px;color:#000;text-align:center">{{libelleServiceGestionnaire(idServiceGestionnaire(type[0].unite_administrative_id)) || 'Non renseigné'}}</td>
+                   <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type[0].unite_administrative_id) || 'Non renseigné'}}</td>
                    
                    <td>
-                      <router-link :to="{ name: 'listeDesBudgetVentille', params: { id: type[0].id }}"
+                      <router-link :to="{ name: 'VoirSousBudget', params: { id: type[0].id }}"
                 class="btn btn-Success " title="">
-                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Listes Budgets</i></span>
+                  <span class=""><i class="   icon-print" style="font-weight: bold;"> Listes Sous Budgets</i></span>
                    </router-link> 
                     </td>
                     <!-- <td style="font-size:12px;color:#000;text-align:center">{{0 || 'Non renseigné'}}</td> -->
@@ -173,7 +150,8 @@ export default {
       "budgetEclate",
       "GroupeUaReceptrice",
       "transferts",
-      "groupeUniteAdministrativeBudgetEclate"
+      "groupeUniteAdministrativeBudgetEclate",
+      "groupeUaSousBudget"
       // "chapitres",
       // "sections"
     ]),
@@ -261,7 +239,7 @@ export default {
                 this.$router.push({ name: 'ModificationBudgetaire' })
             },
             SOUSbUDGET(){
-                this.$router.push({ name: 'listeSousBudgetParUa' })
+                this.$router.push({ name: 'sousBudget' })
             },
   ajouterBudgetEclarter(){
                 this.$router.push({ name: 'AjouterBudgetEclater' })

@@ -834,3 +834,11 @@ export const groupeActiviteBudgetRegie = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.BudgetEclateRegie, "activite_id");
 };
+
+
+
+
+export const groupeUaSousBudget = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.getSousBudget, "unite_administrative_id");
+};
