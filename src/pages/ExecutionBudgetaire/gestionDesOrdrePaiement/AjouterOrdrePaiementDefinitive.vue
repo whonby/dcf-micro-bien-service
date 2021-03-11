@@ -199,19 +199,19 @@ numero_Op_Definitive
                                 <!-- <model-list-select style="border:1px solid #000"
                                                    class="wide"
                                                    :list="listeDesUa"
-                                                   v-model="idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))"
+                                                   v-model="idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))"
                                                    option-value="id"
                                                    option-text="libelle"
                                                    placeholder=""
                                 >
 
                                 </model-list-select>
-                                 <code style="color:red;font-size:12px" v-if="idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))==''">Veuillez renseigner ce champ</code> -->
+                                 <code style="color:red;font-size:12px" v-if="idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))==''">Veuillez renseigner ce champ</code> -->
                             </td>
                            
                              <td>
                 <div class="control-group">
-                  <label class="control-label">Activité <code style="color:red;font-size:16px">*</code></label>
+                  <label class="control-label">Activité {{detailOpProvisoire.activite_id}}<code style="color:red;font-size:16px">*</code></label>
                   <div class="controls">
                      <input
                     type="text"
@@ -220,14 +220,14 @@ numero_Op_Definitive
                     class="span"
                     readonly
                   />
-                    <!-- <select v-model="idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))" class="span" style="border:1px solid #000">
+                    <!-- <select v-model="idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))" class="span" style="border:1px solid #000">
                      <option
-                        v-for="typeFact in filtrerActivite(idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))"
+                        v-for="typeFact in filtrerActivite(idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))"
                         :key="typeFact[0].id"
                         :value="typeFact[0].activite_id"
                       >{{NomActivite(typeFact[0].activite_id)}}</option>
                     </select>
-                     <code style="color:red;font-size:12px" v-if="idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))==''">Veuillez renseigner ce champ</code> -->
+                     <code style="color:red;font-size:12px" v-if="idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))==''">Veuillez renseigner ce champ</code> -->
                   </div>
                 </div>
               </td>
@@ -242,10 +242,10 @@ numero_Op_Definitive
                                       class="span"
                     readonly
                   />
-                    <!-- <select v-model="recupererIdSousBudget(this.formData2.numero_oP_provisoire)" class="span" style="border:1px solid #000">
+                    <!-- <select v-model="recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))" class="span" style="border:1px solid #000">
                      <option></option>
                       <option
-                        v-for="gdenature in RecupererSousBudget(idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))"
+                        v-for="gdenature in RecupererSousBudget(idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))"
                         :key="gdenature.id"
                         :value="gdenature.id"
                       >{{gdenature.activite_enfant}}</option>
@@ -263,10 +263,10 @@ numero_Op_Definitive
                 <label class="control-label">Classification Economique</label>
                 <div class="controls">
                  
- <!-- <select v-model="recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)" class="span" style="border:1px solid #000" >
+ <!-- <select v-model="recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))" class="span" style="border:1px solid #000" >
                      <option></option>
                      <option
-                        v-for="typeFact in afficheLesSousBudgetLigneBudgetaire(idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),recupererIdSousBudget(this.formData2.numero_oP_provisoire))"
+                        v-for="typeFact in afficheLesSousBudgetLigneBudgetaire(idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))"
                         :key="typeFact.id"
                         :value="typeFact.ligneeconomique_id"
                       >{{libelleLigneEconomique(typeFact.ligneeconomique_id)}}</option>
@@ -296,10 +296,10 @@ numero_Op_Definitive
                 <div class="controls">
                  
  
-                 <!-- <select v-model="recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)" class="span" style="border:1px solid #000" >
+                 <!-- <select v-model="recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))" class="span" style="border:1px solid #000" >
                     <option></option>
                      <option
-                        v-for="typeFact in RecupererlibelleLigneEconomique(idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))"
+                        v-for="typeFact in RecupererlibelleLigneEconomique(idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))"
                         :key="typeFact.id"
                         :value="typeFact.ligneeconomique_id"
                       >{{libelleLigneEconomique(typeFact.ligneeconomique_id)}}</option>
@@ -381,7 +381,7 @@ numero_Op_Definitive
              
               <td colspan="">
                 <div class="control-group">
-                  <label class="control-label" >NOM</label>
+                  <label class="control-label" >NOM2</label>
                  
                   <div class="controls">
                    
@@ -472,7 +472,7 @@ numero_Op_Definitive
              
               <td colspan="">
                 <div class="control-group">
-                  <label class="control-label" >NOM</label>
+                  <label class="control-label" >NOM1{{detailOpProvisoire.entreprise_id}}</label>
                  
                   <div class="controls">
                    
@@ -1013,7 +1013,7 @@ numero_Op_Definitive
 
                                 </model-list-select> -->
                                   <input
-                  :value="RecupererLibelleTypeFinancement(RecupereridTypeFinancement(formData2.numero_oP_provisoire))"
+                  :value="RecupererLibelleTypeFinancement(RecupereridTypeFinancement(recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))"
                     type="text"
                     style="border:1px solid #000"
                    
@@ -1040,7 +1040,7 @@ numero_Op_Definitive
 
                                 </model-list-select> -->
                                  <input
-                  :value="RecupererLibellSourceFinancement(RecupereridSourceFinancement(formData2.numero_oP_provisoire))"
+                  :value="RecupererLibellSourceFinancement(RecupereridSourceFinancement(recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))"
                     type="text"
                     style="border:1px solid #000"
                    
@@ -1075,12 +1075,12 @@ numero_Op_Definitive
                      <tr>
                     
             <td colspan="">
-              <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))">
+              <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))">
               <div class="control-group">
                 <label class="control-label">Crédits autorisés (A)</label>
                 <div class="controls">
                  
-                  <money :value="CreditAutoriseSousBudget(this.recupererIdSousBudget(this.formData2.numero_oP_provisoire),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                  <money :value="CreditAutoriseSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))"  readOnly  style="text-align:left;color:red"  class="span"></money>
                  
                 
   
@@ -1092,7 +1092,7 @@ numero_Op_Definitive
                 <label class="control-label">Crédits autorisés (A)</label>
                 <div class="controls">
                  
-                  <money :value="CreditAutorise(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                  <money :value="CreditAutorise(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))"  readOnly  style="text-align:left;color:red"  class="span"></money>
                  
                  
                 </div>
@@ -1102,9 +1102,9 @@ numero_Op_Definitive
               
             </td>
             <td colspan="">
-              <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))">
+              <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))">
                 <div class="control-group">
-                <label class="control-label">Engagements antérieurs (B)</label>
+                <label class="control-label">Engagements antérieurs (B)12{{CalculCumulAnterieureSousBudget}}</label>
                 <div class="controls">
                  
                   <money :value="CalculCumulAnterieureSousBudget" readOnly style="text-align:left;color:red"  class="span"></money>
@@ -1114,7 +1114,7 @@ numero_Op_Definitive
                 </template>
               <template v-else>
                 <div class="control-group">
-                <label class="control-label">Engagements antérieurs (B)</label>
+                <label class="control-label">Engagements antérieurs (B)14</label>
                 <div class="controls">
                  
                   <money :value="CalculCumulAnterieureUniteAdministrative" readOnly style="text-align:left;color:red"  class="span"></money>
@@ -1137,7 +1137,7 @@ numero_Op_Definitive
               
             </td>
             <td colspan="">
-              <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))">
+              <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))">
                 <div class="control-group">
                 <label class="control-label">Cumul engagements(D)(B+C)</label>
                 <div class="controls">
@@ -1160,7 +1160,7 @@ numero_Op_Definitive
              
               
             </td>
-             <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))">
+             <template v-if="comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))==this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))">
                 <div class="control-group">
                <label class="control-label">Disponible budgétaire (A - D)</label>
                 <div class="controls">
@@ -1188,7 +1188,7 @@ numero_Op_Definitive
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">LE GESTIONNAIRE DE CREDIT</a>
+                        <a data-toggle="tab" href="#tab1">{{recupererEngageMarche(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))}}LE GESTIONNAIRE DE CREDIT{{EngagementsantérieursSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))}}</a>
                       </li>
                        
                      
@@ -1271,7 +1271,7 @@ numero_Op_Definitive
                 <label class="control-label">Nom</label>
                 <div class="controls">
                    <input type="text" class="span"  
-                   :value="recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))))"
+                   :value="recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))))"
                     readonly/>
                 </div>
               </div>
@@ -2039,7 +2039,7 @@ components: {
       ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',"types_financements"]),
 //  Engagementsantérieurs(){
 
-// if(this.comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))) !=  this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))){
+// if(this.comparaison(this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))) !=  this.idActivite(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))){
  
   
 // }
@@ -2054,25 +2054,25 @@ tailleOpEnregistrer(){
 
 
 CalculCumulAnterieureSousBudget(){
-  return parseFloat(this.EngagementsantérieursSousBudget(this.recupererIdSousBudget(this.formData2.numero_oP_provisoire),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))-parseFloat(this.recupererEngageMarche(this.formData2.numero_oP_provisoire))
+  return parseFloat(this.EngagementsantérieursSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))-parseFloat(this.recupererEngageMarche(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))
 },
 CalculCumulAnterieureUniteAdministrative(){
-  return parseFloat(this.EngagementsantérieursUa(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))-parseFloat(this.recupererEngageMarche(this.formData2.numero_oP_provisoire))
+  return parseFloat(this.EngagementsantérieursUa(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))-parseFloat(this.recupererEngageMarche(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))
 },
 
 
 CalculCumulEngagementSousBudget(){
-  return parseFloat(this.EngagementsantérieursSousBudget(this.recupererIdSousBudget(this.formData2.numero_oP_provisoire),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))
+  return parseFloat(this.EngagementsantérieursSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))
 },
 CalculCumulEngagementUniteAdministrative(){
-  return parseFloat(this.EngagementsantérieursUa(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))},
+  return parseFloat(this.EngagementsantérieursUa(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))},
 
 
 CalculBisponibleBudgetSousBudget(){
-  return parseFloat(this.CreditAutoriseSousBudget(this.recupererIdSousBudget(this.formData2.numero_oP_provisoire),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))-parseFloat(this.CalculCumulEngagementSousBudget)
+  return parseFloat(this.CreditAutoriseSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))-parseFloat(this.CalculCumulEngagementSousBudget)
 },
 CalculBisponibleBudgetUniteAdministrative(){
-  return parseFloat(this.CreditAutorise(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))-parseFloat(this.CalculCumulEngagementUniteAdministrative)},
+  return parseFloat(this.CreditAutorise(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))-parseFloat(this.CalculCumulEngagementUniteAdministrative)},
 
 
 
@@ -2343,7 +2343,7 @@ recupererModePaiement	() {
 recupererEngageMarche	() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.numero_ordre_paiement == id);
 
       if (qtereel) {
         return qtereel.montant_ordre_paiement	;
@@ -2414,10 +2414,10 @@ recupererIdMarche	() {
       };
     },
       recupererNomTypeDepense(){
-  if(this.recupererTypeDepense(this.formData2.numero_oP_provisoire) == 2){
+  if(this.recupererTypeDepense(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)) == 2){
     return "Autres"
   }
-  else if(this.recupererTypeDepense(this.formData2.numero_oP_provisoire) == 1){
+  else if(this.recupererTypeDepense(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)) == 1){
     return "Marche"
   }
   else{
@@ -2440,7 +2440,7 @@ recupererTypeDepense() {
 recupererIdSousBudget() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.numero_ordre_paiement == id);
 
       if (qtereel) {
         return qtereel.sous_budget_id;
@@ -2477,7 +2477,7 @@ recupererNumeroOPProvisoire() {
 recupererIdLigneEconomique() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.numero_ordre_paiement == id);
 
       if (qtereel) {
         return qtereel.ligne_economique_id;
@@ -2492,12 +2492,12 @@ recupererIdLigneEconomique() {
 
 
 Disponiblebudgétaire() { 
-      const val = parseFloat(this.CreditAutoriseTresor(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))) + parseFloat(this.Cumulengagements) ;
+      const val = parseFloat(this.CreditAutoriseTresor(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))) + parseFloat(this.Cumulengagements) ;
       return parseFloat(val).toFixed(0);
       
     },
 Cumulengagements() { 
-      const val = parseFloat(this.Engagementsantérieurs) + parseFloat(this.recupererEngageMarche(this.formData2.numero_oP_provisoire));
+      const val = parseFloat(this.Engagementsantérieurs) + parseFloat(this.recupererEngageMarche(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)));
       return parseFloat(val).toFixed(0);
       
     },
@@ -2545,9 +2545,9 @@ recupererIdUser() {
 
 //  fonctionPourVideLeChamp(){
    
-// if(this.comparaison(this.idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))==this.idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire)))){
+// if(this.comparaison(this.idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))==this.idAction(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))))){
  
-//  return this.CreditAutoriseSousBudget(this.recupererIdSousBudget(this.formData2.numero_oP_provisoire),this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))
+//  return this.CreditAutoriseSousBudget(this.recupererIdSousBudget(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)),this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))
   
 // }
 // else{
@@ -2865,19 +2865,19 @@ MontantFactureHt() {
       };
     },
 calculCumultresor() { 
-      const val = parseFloat(this.CreditAutoriseTresor(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))) - parseFloat(this.formData.montant_tresor) ;
+      const val = parseFloat(this.CreditAutoriseTresor(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))) - parseFloat(this.formData.montant_tresor) ;
       return parseFloat(val).toFixed(0);
       
     },
 
  calculCumul() { 
-      const val = parseFloat(this.TotalGeneralDemandeEngagement) + parseFloat(this.CumulDemande(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))) ;
+      const val = parseFloat(this.TotalGeneralDemandeEngagement) + parseFloat(this.CumulDemande(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))) ;
       return parseFloat(val).toFixed(0);
       
     },
 
       MontantDisponible() { 
-      const val = parseFloat(this.CreditAutorise(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))) - parseFloat(this.calculCumul) ;
+      const val = parseFloat(this.CreditAutorise(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))) - parseFloat(this.calculCumul) ;
       return parseFloat(val).toFixed(0);
       
     },
@@ -3553,7 +3553,7 @@ AjouterOrdrePaiement(){
 this.intitule=this.anneeAmort +"-"+ this.tailleOpEnregistrer + "-" + this.formData.numero_Op_Definitive
   var nouvelObjetOrdrePaiement = {
            exercice:this.anneeAmort,
-       // id:this.recupererIdOpProvisoire(this.recupererNumeroOPProvisoire(this.formData2.numero_oP_provisoire)),
+       // id:this.recupererIdOpProvisoire(this.recupererNumeroOPProvisoire(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId))),
         numero_ordre_paiement:this.intitule,
         date_op_definitif:this.formData.date_op_definitif,
        
@@ -3601,7 +3601,7 @@ mode_paiement_id:this.detailOpProvisoire.mode_paiement_id,
           
 
          
-          controleur_financier_id:this.recupererIdUser(this.recupererIdServiceCF(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.formData2.numero_oP_provisoire))))),
+          controleur_financier_id:this.recupererIdUser(this.recupererIdServiceCF(this.idUa(this.libelleLigneEconomiqueParent(this.recupererIdLigneEconomique(this.recupererNumeroOPProvisoire(this.detailOpProvisoire.recupererId)))))),
   }
   
 

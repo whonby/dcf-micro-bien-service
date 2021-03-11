@@ -184,7 +184,7 @@ listePieceJustificativeOpdefinitive
             </td>
                              <td>
                 <div class="control-group">
-                  <label class="control-label">Activité <code style="color:red;font-size:16px">*</code></label>
+                  <label class="control-label">Activité {{detailOpProvisoire.activite_id}}<code style="color:red;font-size:16px">*</code></label>
                   <div class="controls">
                          <input
                     type="text"

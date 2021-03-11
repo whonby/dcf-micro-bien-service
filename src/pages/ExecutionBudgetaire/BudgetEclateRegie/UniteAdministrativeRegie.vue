@@ -89,7 +89,7 @@
                    <td style="font-size:16px;color:#000;text-align:center">{{idUniteAdministrative(type[0].uniteadministrative_id) || 'Non renseigné'}}</td>
                    
                    <td>
-                      <router-link :to="{ name: 'listeDesBudgetVentille', params: { id: type[0].id }}"
+                      <router-link :to="{ name: 'listeDesBudgetVentilleRegie', params: { id: type[0].id }}"
                 class="btn btn-Success " title="">
                   <span class=""><i class="   icon-print" style="font-weight: bold;"> Listes Budgets</i></span>
                    </router-link> 

@@ -153,7 +153,7 @@ numero_ordrepaiement
                            
                              <td>
                 <div class="control-group">
-                  <label class="control-label">Activité <code style="color:red;font-size:16px">*</code></label>
+                  <label class="control-label">Activité{{formData.activite_id}} <code style="color:red;font-size:16px">*</code></label>
                   <div class="controls">
                     <select v-model="formData.activite_id" class="span" style="border:1px solid #000">
                      <option
@@ -1937,7 +1937,7 @@ listePieceJustificativeOpDefinitive() {
       };
     },
 Disponiblebudgétaire() { 
-      const val = parseFloat(this.CreditAutoriseTresor(this.formData.ligne_economique_id)) + parseFloat(this.Cumulengagements) ;
+      const val = parseFloat(this.fonctionPourVideLeChamp) - parseFloat(this.Cumulengagements) ;
       return parseFloat(val).toFixed(0);
       
     },
