@@ -21,9 +21,9 @@
                   <th>Reférence marché</th>
                   <th>Objet marché</th>
                   <th>Type de marché</th>
-                   <th>Procedure de passation</th>
+                   <th>Procédure de passation</th>
                   <th>Région</th>
-                   <th>Montant prevu</th>
+                   <th>Montant prévu</th>
                     <th title="mouvement du marché">Mouvement marché</th>
                      
                    <!-- <th colspan="3">Action</th> -->

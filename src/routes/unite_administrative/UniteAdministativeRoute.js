@@ -50,10 +50,40 @@ import ModificationBudget from "../../pages/budget/ModificationBudget"
 import BudgetPasProgramme from "../../pages/budget/BudgetPasProgramme"
 import BudgetEclate from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/BudgetEclate.vue"
 import AjouterBudgetEclater from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/AjouterBudgetEclater.vue"
-import listeDesBudgetVentille from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/listeDesBudgetVentille.vue"
+import listeDesBudgetVentille from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/ListeDesBudgetaire.vue"
 import ModificationBudgetaire from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/ModificationBudgetaire.vue"
 import sousBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/sousBudget.vue"
+import VoirSousBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/VoirSousBudget.vue"
+import listeSousBudgetParUa from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/listeSousBudgetParUa.vue"
+import voirDetailBudget from "../../pages/ExecutionBudgetaire/BudgetEclateHorsSib/voirDetailBudget.vue"
+import UniteAdministrativeRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/UniteAdministrativeRegie.vue"
+import BudgetEclateRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/BudgetEclateRegie.vue"
 const UniteAdministativeRoutes = [
+  {
+    path: "/VoirSousBudget/:id",
+    name: "VoirSousBudget",
+    component: VoirSousBudget
+},
+  {
+    path: "/listeSousBudgetParUa",
+    name: "listeSousBudgetParUa",
+    component: listeSousBudgetParUa
+},
+  {
+    path: "/voirDetailBudget",
+    name: "voirDetailBudget",
+    component: voirDetailBudget
+},
+  {
+    path: "/BudgetEclateRegie",
+    name: "BudgetEclateRegie",
+    component: BudgetEclateRegie
+},
+  {
+    path: "/UniteAdministrativeRegie",
+    name: "UniteAdministrativeRegie",
+    component: UniteAdministrativeRegie
+},
   {
     path: "/sousBudget",
     name: "sousBudget",

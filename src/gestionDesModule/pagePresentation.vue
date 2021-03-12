@@ -338,7 +338,9 @@ this.getPieceJustificative()
 this.getDossierLiquidation()
 this.getDossierMandat()
 this.getDossierFacture()
+this.getGestionOrdrePaiementAnnulat()
 this.getDossierAutreDepense()
+this.getGestionOrdrePaiement()
 this.getFormeJuridiques()
 this.getRegimeImpositions()
  this.getGroupe()
@@ -435,6 +437,7 @@ this.getTypeAppel()
      this.getAllHistoriqueDecompteFacture()
        this.getStructureOrganigrammeUa()
        this.getSousBudget()
+       this.getBudgetEclateRegie()
  this.getAllBudgetEclate()
  this.getAllHistorisqueBudgetEclate()
  this.getAllDecisionBudgetEclate()
@@ -727,6 +730,7 @@ return objJson.id
      "getStructureOrganigrammeUa",
      "getAllBanqueUa",
      "getSousBudget",
+     "getBudgetEclateRegie",
      "getAllDecompteFacture",
      "getAllBudgetEclate",
      "getAllHistorisqueBudgetEclate",
@@ -789,7 +793,7 @@ return objJson.id
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ["getDossierAutreDepense","getDossierFacture","getDossierMandat","getDossierLiquidation","getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
+       ...mapActions('bienService', ["getGestionOrdrePaiementAnnulat","getGestionOrdrePaiement","getDossierAutreDepense","getDossierFacture","getDossierMandat","getDossierLiquidation","getPieceJustificative","getDemandeEngagement","getReception","getTacheMarche","getTypeOrdrePaiement","getImageMarche",'getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",

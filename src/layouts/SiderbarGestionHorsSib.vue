@@ -58,13 +58,12 @@
             <span class="label label-important"></span>
           </a>
         </li> -->
-        <li >
-           <router-link :to="{ name: 'BudgetEclate'}" tag="a"  >
-         
-            <i class="icon-arrow-left"></i>
-            <span>BUDGET ECLATE</span>
-           
-          </router-link>
+
+        <li @click.prevent="navigateTableBordBordBudgetEclate" :class="{active: active_el ==780}">
+           <a href="#">
+                  <i class="icon-truck"></i>
+                  <span>BUDGET ECLATE</span>
+              </a>
         </li>
           <li @click.prevent="navigateTableBordBord" :class="{active: active_el ==45}">
               <a href="#">
@@ -108,6 +107,13 @@
           </a>
         </li>
 
+           <li @click.prevent="navigateurOrdrePaiement" :class="{active: active_el ==1200}">
+              <a title="GESTION DES IMAGES" href="#">
+                  <i class="icon-truck"></i>
+                  <span>ORDRE DE PAIEMENT</span>
+
+              </a>
+          </li>
           <li @click.prevent="navigateToImage" :class="{active: active_el ==75}">
               <a title="GESTION DES IMAGES" href="#">
                   <i class="icon-truck"></i>
@@ -265,6 +271,12 @@ return objJson.id
           name: 'CartographieBudget'
         })
       },
+       navigateurOrdrePaiement(){
+        this.activate(1200)
+        this.$router.push({
+          name:'tableau_de_bors_sib_investissement'
+        })
+      },
        navigateToRapport(){
         this.activate(20)
         this.$router.push({
@@ -283,6 +295,12 @@ navigateToGestionMarche(){
     this.$router.push({
         name: 'GestionMarcheHorSib'
     })
+      },
+       navigateTableBordBordBudgetEclate(){
+          this.activate(780)
+          this.$router.push({
+              name: 'TableauBordGestionMarche'
+          })
       },
       navigateTableBordBord(){
           this.activate(45)

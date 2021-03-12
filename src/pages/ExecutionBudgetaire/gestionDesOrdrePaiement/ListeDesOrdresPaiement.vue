@@ -1,0 +1,1018 @@
+
+<template>
+  <div>
+ 
+    <div class="container-fluid">
+      <hr />
+      <div class="row-fluid">
+        <div class="span12">
+          <!-- <download-excel
+            class="btn btn-default pull-right"
+            style="cursor:pointer;"
+            :fields="json_fields"
+            title="Liste type texte"
+            :data="filtre_type_teste"
+            name="Liste type texte"
+            worksheet="Liste type texte"
+          >
+            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
+          </download-excel> -->
+        <div style="font-size:30px;text-align:center;text-decoration:underline;font-weight:bold;">
+          <p >ORDRES DE PAIEMENTS PROJETS</p>
+        </div>
+            
+            <br>
+          <table class="table table-bordered table-striped">
+             <td style="width:55%">
+
+       
+          </td>
+            <td style="width:0%;font-weight:bolder;color:#000">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-success" @click.prevent="ajouterOpSysteme" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT</i></button>
+    
+        </div> 
+       
+          </td>
+           <td style="width:0px">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="ajouterOpAnnulation" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT D'ANNULATION</i></button>
+    
+        </div> 
+       
+          </td> 
+           <td style="width:0px">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-primary" @click.prevent="ajouterOpDeffinitif" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT DEFINITIF</i></button>
+    
+        </div> 
+       
+          </td> 
+            </table>
+           
+          <div class="widget-box">
+            <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>Listes des Ordres de Paiements</h5>
+              <!-- <div align="right">
+                Recherche:
+                <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
+              </div> -->
+            </div>
+
+            <div class="widget-content nopadding">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     <th   style="font-size:14px;font-weight:bold">Exercice</th>
+                      <th   style="font-size:14px;font-weight:bold">Type d'ordre de paiement</th>
+                     <th   style="font-size:14px;font-weight:bold;color:#000">N°Ordre paiement</th>
+                     <th   style="font-size:14px;font-weight:bold;color:#000">N°OP Provisoire</th>
+                     <th   style="font-size:14px;font-weight:bold;color:#000">N°OP Annulation</th>
+                     <th   style="font-size:14px;font-weight:bold;color:#000">N°OP Definitif</th>
+                   
+                    <th   style="font-size:14px;font-weight:bold">Objet Op</th>
+                    <th   style="font-size:14px;font-weight:bold">UA</th>
+                    <!-- <th   style="font-size:14px;font-weight:bold">Sous Budget</th> -->
+                     <!-- <th   style="font-size:14px;font-weight:bold">Montant Autorisé</th> -->
+                    <th   style="font-size:14px;font-weight:bold">Engagement actuel</th>
+                              
+                    <th   style="font-size:14px;font-weight:bold">Décision CF</th>
+                    
+                     <!-- <th   style="font-size:14px;font-weight:bold">Décision OP Annulation</th>
+                     <th   style="font-size:14px;font-weight:bold">Décision OP Definitive</th> -->
+                
+                  <!-- <th>Montant Disponible</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="odd gradeX" v-for="(type) in filtre_type_teste" :key="type.id">
+                              <td
+                      style="font-size:14px;font-weight:bold;text-align:center"
+                    >{{type.exercice || 'Non renseigné'}}</td>
+ <td v-if="type.type_ordre_paiement==1"
+                      style="font-size:14px;font-weight:bold;text-align:center"                
+                    > <span>OP Direct</span></td>
+                    <td v-else-if="type.type_ordre_paiement==2"
+                      style="font-size:14px;font-weight:bold;text-align:center"                
+                    > <span>OP Provisoire</span></td>
+                    <td v-else-if="type.type_ordre_paiement==3"
+                      style="font-size:14px;font-weight:bold;text-align:center"                
+                    > <span>OP Annulation</span></td>
+                    <td v-else
+                      style="font-size:14px;font-weight:bold;text-align:center"                
+                    > <span>OP Définitif</span></td>
+                    
+                     <td 
+                      style="font-size:14px;font-weight:bold;text-align:center;color:green"
+                    >{{type.numero_ordre_paiement || 'Non renseigné'}}</td>
+                   <td v-if="type.id_op_provisoire != null"
+                      style="font-size:14px;font-weight:bold;text-align:center;color:red"
+                    >{{afficheNumeroOpDefinitive(type.id_op_provisoire) }}</td>
+ <td v-else style="background-color:lightblue"></td>
+ <td v-if="type.id_op_Annulation != null"
+                      style="font-size:14px;font-weight:bold;text-align:center;color:blue"
+                    >{{afficheNumeroOpDefinitive(type.id_op_Annulation) }}</td>
+ <td v-else style="background-color:lightblue"></td>
+                     <td v-if="type.id_op_definitif != null"
+                      style="font-size:14px;font-weight:bold;text-align:center;color:blue"
+                    >{{afficheNumeroOpDefinitive(type.id_op_definitif) }}</td>
+ <td v-else style="background-color:lightblue"></td>
+
+         
+                     <td v-if="type.marche_id != null"
+                      style="font-size:14px;font-weight:bold"
+                    >{{libelleMarche(type.marche_id) || 'Non renseigné'}}</td>
+                    <td v-else
+                      style="font-size:14px;font-weight:bold"
+                    >{{type.odjet_autre_depense || 'Non renseigné'}}</td>
+                     <td
+                      style="font-size:14px;font-weight:bold"
+                    >{{libelleUa(type.unite_administrative_id) || 'Non renseigné'}}</td>
+                    
+                    <td
+                       style="font-size:14px;font-weight:bold;text-align:center"
+                    >{{formatageSomme(parseFloat(type.montant_ordre_paiement)) || 'Non renseigné'}}</td>
+                     <td>
+                        <button v-if="type.decision_cf==8"  class="btn  btn-success tailBtn"  @click="apercuFacture(type.id)">                        
+                     
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px"  >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="type.decision_cf == 2" class="btn  btn-warning tailBtn" @click="apercuFacture(type.id)">                        
+                     
+                      
+                       <span  style="font-weight:bolder;color:#fff;font-size:18px">Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="type.decision_cf == 3" class="btn  btn-danger tailBtn" @click="apercuFacture(type.id)">                        
+                     
+                      
+                       <span style="font-weight:bolder;color:#fff;font-size:18px" >Réjeté</span>
+                      
+                    
+                      </button>
+                       <button v-else-if="type.decision_cf == 9"  class="btn  btn-success tailBtn" @click="apercuFacture(type.id)">                        
+                     
+                      <span title="Visé avec observation" style="font-weight:bolder;color:#fff;font-size:18px" >Visé O</span>
+                      
+                      </button>
+                     <button v-else class="btn  btn-info tailBtn" @click="apercuFacture(type.id)" >                        
+                     
+                      
+                       <span style="font-weight:bolder;color:#fff;font-size:18px">Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                    
+                   
+                    <!-- <td v-if="type.id==afficheDecisionOpAnuulation1(type.id)">
+<button v-if="afficheDecisionOpAnuulation(type.id) == 8"  class="btn  btn-success tailBtn"  @click="ModalOpAnnulation(type.id)">                        
+                     
+                      <span   style="font-weight:bolder;color:#fff;font-size:18px" >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 2" class="btn  btn-warning tailBtn" @click="ModalOpAnnulation(type.id)" >                        
+                     
+                      
+                       <span style="font-weight:bolder;color:#fff;font-size:18px" >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="afficheDecisionOpAnuulation(type.id) == 3" class="btn  btn-danger tailBtn" @click="ModalOpAnnulation(type.id)" >                        
+                     
+                      
+                       <span  style="font-weight:bolder;color:#fff;font-size:18px">Réjeté</span>
+                      
+                    
+                      </button>
+                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 9"  class="btn  btn-success tailBtn" @click="ModalOpAnnulation(type.id)" >                        
+                     
+                      <span style="font-weight:bolder;color:#fff;font-size:18px">Visé avec observation</span>
+                      
+                      </button>
+                      <button v-else class="btn  btn-info tailBtn" @click="ModalOpAnnulation(type.id)" >                        
+                     
+                      
+                       <span style="font-weight:bolder;color:#fff;font-size:18px">Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                    <td v-else style="background-color:lightblue"></td> -->
+                    <!-- <td v-if="type.decision_cf_definitif != null">
+                         <button v-if="type.decision_cf_definitif==8"  class="btn  btn-success tailBtn"  @click="DecisionDefinitifCf(type.id)">                        
+                     
+                      <span  style="font-weight:bolder;color:#fff;font-size:18px"  >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="type.decision_cf_definitif == 2" class="btn  btn-warning tailBtn" @click="DecisionDefinitifCf(type.id)">                        
+                     
+                      
+                       <span  style="font-weight:bolder;color:#fff;font-size:18px">Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="type.decision_cf_definitif == 3" class="btn  btn-danger tailBtn" @click="DecisionDefinitifCf(type.id)">                        
+                     
+                      
+                       <span style="font-weight:bolder;color:#fff;font-size:18px" >Réjeté</span>  
+                      
+                    
+                      </button>
+                       <button v-else-if="type.decision_cf_definitif == 9"  class="btn  btn-success tailBtn" @click="DecisionDefinitifCf(type.id)">                        
+                     
+                      <span title="Visé avec observation" style="font-weight:bolder;color:#fff;font-size:18px" >Visé O</span>
+                      
+                      </button>
+                     <button v-else class="btn  btn-info tailBtn" @click="DecisionDefinitifCf(type.id)" >                        
+                     
+                      
+                       <span style="font-weight:bolder;color:#fff;font-size:18px">Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                    <td v-else style="background-color:lightblue"></td> -->
+                    </tr>
+                </tbody>
+              </table>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   
+<notifications  />
+    
+  <div id="decisionDefinitif" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Decision CF</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                            <label class="control-label">Décision CF </label>
+                            <div class="controls">
+                              <select v-model="editDecisionFinal.decision_cf_definitif" class="span5">
+                                <option value=""></option>
+                              <option value="8">Visé</option>
+                              <option value="9">Visé avec Observation</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
+                            <option value="0">Attente</option>
+    
+    </select>
+                           
+                            </div>
+                          </div>
+            </td>
+              <td>
+                    <div class="control-group">
+                            <label class="control-label">Famille de Motif</label>
+                            <div class="controls">
+                               <select v-model="editDecisionFinal.famille_motif" class="span5">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementParent" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+                 <td>
+                    <div class="control-group">
+                            <label class="control-label">Motif</label>
+                            <div class="controls">
+                               <select v-model="editDecisionFinal.motif" class="span5">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementEnfant(editDecisionFinal.famille_motif)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+          </tr>
+               <tr>
+                  <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Autres Motif</label>
+                            <div class="controls">
+                              <textarea  class="span10" row = "6" v-model="editDecisionFinal.autre_motif" :readonly="griserAutreMotif">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                  <td>
+                               <div class="control-group">
+                            <label class="control-label">Date Decision CF :</label>
+                            <div class="controls">
+                              <input type="date" class="span5"  v-model="editDecisionFinal.date_decision_definitive_cf"/>
+                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                              
+                            </div>
+                          </div>
+                           </td>
+                 </tr>             
+                   <tr>
+                     <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Observation CF</label>
+                            <div class="controls">
+                              <textarea  class="span10" row = "6" v-model="editDecisionFinal.observation">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                        <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
+                            <div class="controls">
+                              <input type="text" class="span5" :value="recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(editDecisionFinal.unite_administrative_id)))"  readonly/>
+                            </div>
+                          </div>
+                       </td>
+                       
+                       </tr>  
+                      
+         
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierDecisionFinal()"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+    <div id="validationOpDefinitif" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Decision CF</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                            <label class="control-label">Décision CF </label>
+                            <div class="controls">
+                              <select v-model="editMandat.decision_cf" class="span5">
+                                <option value=""></option>
+                              <option value="8">Visé</option>
+                              <option value="9">Visé avec Observation</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
+                            <option value="0">Attente</option>
+    
+    </select>
+                           
+                            </div>
+                          </div>
+            </td>
+              <td>
+                    <div class="control-group">
+                            <label class="control-label">Famille de Motif {{editMandat.id}}</label>
+                            <div class="controls">
+                               <select v-model="editMandat.famille_motif" class="span5">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementParent" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+                 <td>
+                    <div class="control-group">
+                            <label class="control-label">Motif</label>
+                            <div class="controls">
+                               <select v-model="editMandat.motif" class="span5">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementEnfant(editMandat.famille_motif)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+          </tr>
+               <tr>
+                  <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Autres Motif</label>
+                            <div class="controls">
+                              <textarea  class="span10" row = "6" v-model="editMandat.autre_motif" :readonly="griserAutreMotif">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                  <td>
+                               <div class="control-group">
+                            <label class="control-label">Date Decision CF :</label>
+                            <div class="controls">
+                              <input type="date" class="span5"  v-model="editMandat.date_decision_cf"/>
+                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                              
+                            </div>
+                          </div>
+                           </td>
+                 </tr>             
+                   <tr>
+                     <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Observation CF</label>
+                            <div class="controls">
+                              <textarea  class="span10" row = "6" v-model="editMandat.observation">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                        <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
+                            <div class="controls">
+                              <input type="text" class="span5" :value="recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(editMandat.unite_administrative_id)))"  readonly/>
+                            </div>
+                          </div>
+                       </td>
+                       
+                       </tr>  
+                      
+         
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierTypeTexteLocal()"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+    
+
+
+
+
+
+
+
+    <div id="decisionAnnulation" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Decision CF</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                            <label class="control-label">Décision CF </label>
+                            <div class="controls">
+                              <select v-model="EditAnulation.decision_cf_op_annul" class="span5">
+                                <option value=""></option>
+                              <option value="8">Visé</option>
+                              <option value="9">Visé avec Observation</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
+                            <option value="0">Attente</option>
+    
+    </select>
+                           
+                            </div>
+                          </div>
+            </td>
+              <td>
+                    <div class="control-group">
+                            <label class="control-label">Famille de Motif </label>
+                            <div class="controls">
+                               <select v-model="EditAnulation.famille_motif_id_op_annul" class="span5">
+                                 <option value="0"></option>
+                                <option v-for="varText in AffichierElementParent" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+                 <td>
+                    <div class="control-group">
+                            <label class="control-label">Motif</label>
+                            <div class="controls">
+                               <select v-model="EditAnulation.motif_op_annul" class="span5">
+                                 <option value="0"></option>
+                                <option v-for="varText in AffichierElementEnfant(EditAnulation.famille_motif_id_op_annul)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+          </tr>
+               <tr>
+                  <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Autres Motif</label>
+                            <div class="controls">
+                              <textarea  class="span10" row = "6" v-model="EditAnulation.autre_motif_op_annul" :readonly="griserAutreMotif">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                  <td>
+                               <div class="control-group">
+                            <label class="control-label">Date Decision CF :</label>
+                            <div class="controls">
+                              <input type="date" class="span5"  v-model="EditAnulation.date_decision_op_annul"/>
+                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                              
+                            </div>
+                          </div>
+                           </td>
+                 </tr>             
+                   <tr>
+                     <td colspan="2">
+                        <div class="control-group">
+                            <label class="control-label">Observation CF</label>
+                            <div class="controls">
+                              <textarea  class="span10" row = "6" v-model="EditAnulation.observation_op_annul">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                        <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
+                            <div class="controls">
+                              <input type="text" class="span5" :value="recupererNomDuControleurF(recupererIdUser(recupererIdServiceCF(recupererIdUa(EditAnulation.id))))"  readonly/>
+                            </div>
+                          </div>
+                       </td>
+                       
+                       </tr>  
+                      
+         
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ModifierOpAnnulation()"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+  </div>
+</template>
+  
+<script>
+import { mapGetters, mapActions } from "vuex";
+import { formatageSomme } from "@/Repositories/Repository";
+export default {
+  name:'typetext',
+  data() {
+    return {
+      fabActions: [
+        {
+          name: "cache",
+          icon: "add"
+        }
+        // {
+        //   name: "alertMe",
+        //   icon: "add_alert",
+        //   class: ""
+        // }
+      ],
+      json_fields: {
+        CODE: "code",
+        LIBELLE: "libelle"
+      },
+      formData: {
+        code: "",
+        libelle: ""
+      },
+      editMandat: {
+        
+      },
+      EditAnulation:{},
+      editDecisionFinal:{},
+      search: ""
+    };
+  },
+
+  computed: {
+     ...mapGetters("Utilisateurs", ["getterAffectionServiceCF","getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+            ...mapGetters('personnelUA', ["salairesActeur","personnaliseActeurDepense","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
+                "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
+                "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","affichePersonnelRecuActeNormination"]),
+    ...mapGetters("bienService", ["gettersgestionOrdrePaiementAnnulation","gettersgestionOrdrePaiement","gettersDossierAutreDepense","gettersDossierMandat","gettersDossierFacturePiece","typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
+                "getActeEffetFinancierPersonnaliserContrat", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+ ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
+   ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe','planActe']),
+...mapGetters('parametreGenerauxActivite', ['structures_activites', 
+  'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
+  ...mapGetters("uniteadministrative", ["budgetEclate","groupeLigneEconomiqueBudget","getSousBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
+    ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
+  'plans_Decision']),
+
+   afficheNumeroOpDefinitive() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_ordre_paiement;
+      }
+      return 0
+        }
+      };
+    },
+
+    listeordrepaiementregie() {
+     
+          return  this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.diff_op == null);
+    }, 
+  afficheIdOpProvisoire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.id_op_provisoire;
+      }
+      return 0
+        }
+      };
+    },
+  afficheNumeroOpAnuulation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id_op_provisoire == id);
+
+      if (qtereel) {
+        return qtereel.numero_op_annulation;
+      }
+      return 0
+        }
+      };
+    },
+    filtre_type_teste() {
+      const st = this.search.toLowerCase();
+      return this.listeordrepaiementregie.filter(type => {
+        return (
+          type.numero_ordre_paiement.toLowerCase().includes(st)
+        );
+      });
+    },
+    afficheDecisionOpAnuulation1() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id_op_provisoire == id);
+
+      if (qtereel) {
+        return qtereel.id_op_provisoire;
+      }
+      return 0
+        }
+      };
+    },
+        afficheDecisionOpAnuulation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id_op_provisoire == id);
+
+      if (qtereel) {
+        return qtereel.decision_cf_op_annul;
+      }
+      return 0
+        }
+      };
+    },
+    afficheDecisionOpProvisoir() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id_op_provisoire == id);
+
+      if (qtereel) {
+        return qtereel.decision_cf;
+      }
+      return 0
+        }
+      };
+    },
+    
+    afficheDecisionLiquidation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id_op_provisoire == id);
+
+      if (qtereel) {
+        return qtereel.id_op_provisoire;
+      }
+      return 0
+        }
+      };
+    },
+    afficheDecisionDefinitif() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id_op_provisoire == id);
+
+      if (qtereel) {
+        return qtereel.decision_cf_op_annul;
+      }
+      return 0
+        }
+      };
+    },
+    recupererNomDuControleurF() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterUtilisateur.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.name;
+      }
+      return 0
+        }
+      };
+    },
+recupererIdUser() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterAffectionServiceCF.find(qtreel => qtreel.servicecf_id == id && qtreel.date_fin==null);
+
+      if (qtereel) {
+        return qtereel.user_id;
+      }
+      return 0
+        }
+      };
+    },
+ recupererIdServiceCF() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterAffectation.find(qtreel => qtreel.unite_administrative_id == id   && qtreel.date_fin==null);
+
+      if (qtereel) {
+        return qtereel.servicecf_id;
+      }
+      return 0
+        }
+      };
+    },
+
+   griserAutreMotif(){
+  return this.editMandat.motif != 237 
+},
+      AffichierElementParent() {
+      
+      // return id => {
+      //   if (id != null && id != "") {
+          return this.plans_Decision.filter(element => this.RecupererNiveau3StructureDecision(element.structure_motif_decission_id) == 3);
+      //   }
+      // };
+    },
+      RecupererNiveau3StructureDecision() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.structuresDecision.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.niveau;
+      }
+      return 0
+        }
+      };
+    },
+    AffichierElementEnfant() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
+    libelleDecision() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_Decision.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 'Non renseigné'
+        }
+      };
+    },
+     MontantMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.montant_act
+      }
+      return 0
+        }
+      };
+    },
+    libelleMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_marche.concat('    ',qtereel.objet)
+      }
+      return 0
+        }
+      };
+    },
+     libelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+    recupererIdOpAnnulation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id_op_provisoire == id);
+
+      if (qtereel) {
+        return qtereel.id
+      }
+      return 0
+        }
+      };
+    },
+    recupererIdOpProvisoire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiementAnnulation.find(qtreel => qtreel.id_op_provisoire == id);
+
+      if (qtereel) {
+        return qtereel.id_op_provisoire
+      }
+      return 0
+        }
+      };
+    },
+    recupererIdUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.unite_administrative_id
+      }
+      return 0
+        }
+      };
+    },
+  },
+  methods: {
+    ...mapActions("bienService", [
+      "modifierGestionOrdrePaiement",
+     "modifierGestionOrdrePaiementAnnulat"
+    ]),
+    
+    ajouterLiquidation(){
+                this.$router.push({ name: 'AjouterOrdrePaiementAnnulation' })
+            },
+    modifierTypeTexteLocal() {
+      this.modifierGestionOrdrePaiement(this.editMandat);
+this.$("#validationOpDefinitif").modal('hide');
+      
+       
+    },
+     modifierDecisionFinal() {
+      this.modifierGestionOrdrePaiement(this.editDecisionFinal);
+this.$("#validationOpDefinitif").modal('hide');
+      
+       
+    },
+    ModifierOpAnnulation() {
+      var nouvelObjet={
+        id:this.recupererIdOpAnnulation(this.EditAnulation.id),
+        decision_cf_op_annul:this.EditAnulation.decision_cf_op_annul,
+        famille_motif_id_op_annul:this.EditAnulation.famille_motif_id_op_annul,
+        motif_op_annul:this.EditAnulation.motif_op_annul,
+        date_decision_op_annul:this.EditAnulation.date_decision_op_annul,
+        observation_op_annul:this.EditAnulation.observation_op_annul
+        
+      }
+      this.modifierGestionOrdrePaiementAnnulat(nouvelObjet);
+this.$("#decisionAnnulation").modal('hide');
+      
+       
+    },
+    ModalOpAnnulation(id) {
+      this.$("#decisionAnnulation").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+       this.EditAnulation = this.gettersgestionOrdrePaiement.find(item=>item.id==id);
+    },
+    apercuFacture(id) {
+      this.$("#validationOpDefinitif").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+       this.editMandat = this.gettersgestionOrdrePaiement.find(item=>item.id==id);
+    },
+
+    DecisionDefinitifCf(id) {
+      this.$("#decisionDefinitif").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+       this.editDecisionFinal = this.gettersgestionOrdrePaiement.find(item=>item.id==id);
+    },
+    formatageSomme:formatageSomme,
+    ajouterOpSysteme(){
+                this.$router.push({ name: 'AjoutOrdrePaiement' })
+            },
+            ajouterOpAnnulation(){
+                this.$router.push({ name: 'AjouterOrdrePaiementAnnulation' })
+            },
+            ajouterOpDeffinitif(){
+                this.$router.push({ name: 'AjouterOrdrePaiementDefinitive' })
+            },
+    //afiicher modal ajouter
+    afficherModalAjouterTitre() {
+      this.$("#exampleModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+    },
+    // fonction pour vider l'input ajouter
+    ajouterTypeTexteLocal() {
+      this.ajouterTypeTexte(this.formData);
+
+      this.formData = {
+        code: "",
+        libelle: ""
+      };
+    },
+    // afficher modal de modification
+    afficherModalModifierTypeTexte(index) {
+      this.$("#modificationModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+     
+      this.editTypeTexte = this.typeTextes[index];
+    },
+    // fonction pour vider l'input modification
+   
+    alert() {
+      console.log("ok");
+    },
+    
+ExporterEnExel(){
+      this.$refs.excel.click()
+    }
+  }
+};
+</script>
+
+<style scoped>
+
+.tailgrand{
+  width: 65%;
+  margin: 0 -30%;
+}
+.tailBtn{
+  width: 100%;
+}
+</style>

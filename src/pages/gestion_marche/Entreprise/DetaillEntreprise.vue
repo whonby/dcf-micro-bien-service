@@ -1,4 +1,4 @@
-
+varObjetBanque
 <template>
     <div>
 
@@ -15,7 +15,7 @@
                             <tr>
                                 <th>Raison sociale</th>
                                 <th>Compte contribuable</th>
-                                <th>Registre commerce</th>
+                                <th>Registre de commerce</th>
                                 <th>Secteur activité</th>
                                 <th>Pays</th>
                                 <th>Ville</th>
@@ -85,7 +85,7 @@
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
-                                    <a  data-toggle="modal" class="btn btn-success" @click.prevent="afficheCompteModal"  align="rigth">Ajouter un compte</a></div>
+                                    <a  data-toggle="modal" class="btn btn-success" @click.prevent="BanqueModal"  align="rigth">Ajouter un compte</a></div>
                                    <h4>Liste des comptes </h4>
                                    <div align="right">
                                   Recherche:
@@ -108,25 +108,25 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="odd gradeX" v-for="(appelOffre, index) in afficheCompteEntreprise(detail_marche.id)"
+                                    <tr class="odd gradeX" v-for="(appelOffre) in BanqueEntreprise(detail_marche.id)"
                                         :key="appelOffre.id">
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.varObjetBanque.libelle || 'Non renseigné'}}</td>
+                                        <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
+                                  {{getLibelleBanque(appelOffre.banq_id) || 'Non renseigné'}}</td>
                                         <!-- <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.entreprise.raison_sociale || 'Non renseigné'}}</td> -->
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                        <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
                                             {{formaterDate(appelOffre.date_ouverture_compte) || 'Non renseigné'}}</td>
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                        <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
                                             {{appelOffre.signataire_compte || 'Non renseigné'}}</td>
-                                         <td @dblclick="afficherModalModifierActeDepense(index)" v-if="appelOffre.nature_compte == 0" >Compte courant</td>
-                                         <td @dblclick="afficherModalModifierActeDepense(index)" v-else >Non renseigné</td>
+                                         <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)" v-if="appelOffre.nature_compte == 0" >Compte courant</td>
+                                         <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)" v-else >Non renseigné</td>
                                             
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                        <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
                                             {{appelOffre.swift|| 'Non renseigné'}}</td>
                                        
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                        <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
                                             {{appelOffre.iban || 'Non renseigné'}}</td>
-                                             <td @dblclick="afficherModalModifierActeDepense(index)">
+                                             <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
                                             {{appelOffre.rib || 'Non renseigné'}}</td>
                                             
                                         <div class="btn-group">
@@ -408,7 +408,7 @@
                                                     <label class="control-label">Pays</label>
                                                     <div class="controls">
                                                         <select v-model="editCompte.pays_id" class="span4" >
-                                                            <option></option>
+                                                         
                                                             <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
@@ -419,14 +419,14 @@
                           </td>
                            <td>
                               <div class="control-group">
-                                                    <label class="control-label">Ville:</label>
+                                                    <label class="control-label">Ville</label>
                                                     <div class="controls">
                                                         <select v-model="editCompte.ville_id" class="span4" >
-                                                            <option></option>
-                                                            <option v-for="item in villesdynaModifier(editCompte.pays_id)" 
+                                                         
+                                                            <option v-for="item in villesdyna(editCompte.pays_id)" 
                                                             :key="item.id" 
                                                             :value="item.id">
-                                                                {{LibelledeLaVille(item.ville_id)}}
+                                                                {{item.libelle}}
                                                             </option>
 
                                                         </select>
@@ -436,7 +436,7 @@
                         
  <td>
                               <div class="control-group">
-                                                    <label class="control-label">Communes{{editCompte.ville_id}}</label>
+                                                    <label class="control-label">Communes</label>
                                                     <div class="controls">
                                                         <select v-model="editCompte.commune_id" class="span4" >
                                                            <option v-for="item in communeDynamiques(editCompte.ville_id)" 
@@ -462,7 +462,7 @@
                               
                             <select v-model="editCompte.banq_id" class="span4" >
                                 <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText.id"
-                              :value="varText.banque_id">{{varText.getLibelleBanque(varText.banque_id)}}</option>
+                              :value="varText.banque_id">{{getLibelleBanque(varText.banque_id)}}</option>
                             </select>
                                 
                             </div>
@@ -472,12 +472,14 @@
                         <div class="control-group">
                             <label>Code de la  agence</label>
                             <div class="controls">
-                                <select v-model="editCompte.numero_agence" class="span4" :readOnly="verroCodeAgence">
+                              
+                               <input type="text" class="span4" placeholder="Saisir l'agence" :value="afficheCompteBanque(editCompte.commune_id,editCompte.banq_id)" readonly>
+                                <!-- <select v-model="editCompte.numero_agence" class="span4" :readOnly="verroCodeAgence">
                                                             <option></option>
                                                             <option v-for="item in codeAgenceDynamiquesModifier" :key="item.id" :value="item.code_agence">
                                                                 {{item.code_agence}}
                                                             </option>
-                                </select>
+                                </select> -->
                             </div>
                         </div>
                           </td>
@@ -596,8 +598,8 @@
                     </table>
                 
             </div>
-            <div class="modal-footer">  <a @click.prevent="modifierCompteLocal(editCompte)"   class="btn btn-primary"
-              href="#">Modifier</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+            <div class="modal-footer">  <a @click.prevent="modifierCompteLocal()"   class="btn btn-primary"
+              href="#">Modifier</a> <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
         </div>
         
 
@@ -696,6 +698,24 @@ created() {
 
                 ...mapGetters("gestionMarche", ["groupeAgenceBanque",'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
 ...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays"]),
+
+
+afficheCompteBanque() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+           const qtereel = this.agenceBanques.find(qtreel => qtreel.commune_id== id && qtreel.banque_id== id1);
+
+      if (qtereel) {
+        return qtereel.code_agence;
+      }
+      return ""
+        }
+      };
+    },
+
+
+
+
 afficherCodeRib(){
       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
     
@@ -740,8 +760,8 @@ afficherCodeRibEditCompte(){
               compteFiltre(){
                   const st = this.search.toLowerCase();
                   return this.getCompte.filter((item)=>{
-                      return item.entreprise.raison_sociale.toLowerCase().includes(st) ||
-                              item.varObjetBanque.libelle.toLowerCase().includes(st) ||
+                      return item.entreprise.raison_sociale.toLowerCase().includes(st)||
+                             
                               item.agence.toLowerCase().includes(st)
                   })
               },
@@ -838,7 +858,6 @@ return element;
 
 
 
-
      AffichierNomAgence() {
       if(this.formData.numero_agence==""){
         return "Pas de donnee"
@@ -899,7 +918,7 @@ AffichierIdAgenceModifier() {
 
 AffichierNomAgenceModifier() {
       
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.editCompte.numero_agence);
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.afficheCompteBanque(this.editCompte.commune_id,this.editCompte.banq_id));
 
       if (dureVie1) {
         return dureVie1.nom_agence;
@@ -909,7 +928,7 @@ AffichierNomAgenceModifier() {
     },
     AffichierNumeroAgenceModifier() {
       
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.editCompte.numero_agence);
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.afficheCompteBanque(this.editCompte.commune_id,this.editCompte.banq_id));
 
       if (dureVie1) {
         return dureVie1.tel_agence;
@@ -919,7 +938,7 @@ AffichierNomAgenceModifier() {
     },
 AffichierSituationGeoAgenceModifier() {
       
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.editCompte.numero_agence);
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.afficheCompteBanque(this.editCompte.commune_id,this.editCompte.banq_id));
 
       if (dureVie1) {
         return dureVie1.situation_geo;
@@ -961,7 +980,7 @@ AffichierSituationGeoAgenceModifier() {
         }
       };
     },
-    afficheCompteEntreprise() {
+    BanqueEntreprise() {
       return id => {
         if (id != null && id != "") {
           return this.getCompte.filter(
@@ -1072,10 +1091,10 @@ villesdyna() {
         
         methods: {
           
-            ...mapActions('gestionMarche', ["ajouterSanction", "ajouterCompte", "modifierCompte", "supprimerCompte"]),
+            ...mapActions('gestionMarche', ["modifierCompteBancaire","ajouterSanction", "ajouterCompte", "modifierCompte", "supprimerCompte"]),
             // formatageSomme: formatageSomme,
             
-afficheCompteModal() {
+BanqueModal() {
       this.$("#myAlert41").modal({
         backdrop: "static",
         keyboard: false
@@ -1128,13 +1147,13 @@ afficheCompteModal() {
       
             // afficher modal de modification
 
-            afficherModalModifierActeDepense(index){
+            afficherModalModifierActeDepense(id){
                 this.$('#modifierCompte').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
 
-                this.editCompte = this.afficheCompteEntreprise(this.detail_marche.id)[index];
+                this.editCompte = this.getCompte.find(item=>item.id==id);
             },
 
             // vider l'input modifier 

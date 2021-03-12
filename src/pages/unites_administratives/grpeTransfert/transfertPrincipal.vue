@@ -752,7 +752,7 @@
                                            <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerTransfert(appelOffre.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i></span></button>
+                                                <span class=""><i class="icon-trash"></i>  Supprimer</span></button>
                                         </div>
                                            </td>
                                     </tr>

@@ -26,7 +26,7 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des categories de missions</h5>
+            <h5>Liste des catégories de missions</h5>
              <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -40,7 +40,7 @@
                 <tr>
                      <th>Type prestation</th>
                     <th>Libellé</th>
-                  <th>Date debut</th>
+                  <th>Date début</th>
                   <th>Date fin</th>
                  
                   <th>Objet de prestation</th>
@@ -86,7 +86,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucune categorie mission enregistrée </h6>
+                <h6 style="color:red;">Aucune catégorie mission enregistrée </h6>
               </div>
             </div>
           </div>

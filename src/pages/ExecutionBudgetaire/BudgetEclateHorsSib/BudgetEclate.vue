@@ -22,7 +22,7 @@
             :data="BudgetEchateParUa"
             name="Liste type texte"
             worksheet="Liste type texte"
-          >
+          >sousBudget
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
           <table class="table table-bordered table-striped">
@@ -261,7 +261,7 @@ export default {
                 this.$router.push({ name: 'ModificationBudgetaire' })
             },
             SOUSbUDGET(){
-                this.$router.push({ name: 'sousBudget' })
+                this.$router.push({ name: 'listeSousBudgetParUa' })
             },
   ajouterBudgetEclarter(){
                 this.$router.push({ name: 'AjouterBudgetEclater' })

@@ -86,7 +86,7 @@
                        </td>
                         <td colspan="">
                         <div class="control-group">
-                            <label class="control-label">Nom et prenoms cf</label>
+                            <label class="control-label">Nom et prénoms cf</label>
                             <div class="controls">
                               <input type="text" class="span4"   readonly/>
                             </div>

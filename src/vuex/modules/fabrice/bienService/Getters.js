@@ -1,4 +1,6 @@
 import { groupBy } from "../../../../Repositories/Repository";
+export const gettersgestionOrdrePaiementAnnulation = state => state.gestionOrdrePaiementAnnulation.sort((a, b) => (a.id > b.id) ? 1 : -1)
+export const gettersgestionOrdrePaiement = state => state.gestionOrdrePaiement.sort((a, b) => (a.id > b.id) ? 1 : -1)
 export const gettersDemandeEngagement = state => state.DemandeEngagement.sort((a, b) => (a.numero_dmd_combine > b.numero_dmd_combine) ? 1 : -1)
 export const gettersDossierLiquidation = state => state.Liquidation
 export const gettersDossierMandat = state => state.MandatOp
@@ -9,6 +11,7 @@ export const gettersDossierFacturePiece = state => state.facturePiece
 
 export const gettersnomPieceJustificative = state => state.nomPieceJustificative.sort((a, b) => (a.numero_ordre > b.numero_ordre) ? 1 : -1)
 
+export const tableauDebordbudget = state => state.tableauDebordbudget
 export const gettersTypeOrdrePaiement = state => state.typeOrdrePaiement
 export const role_membrecojo = state => state.role_membrecojo
 export const gestionModules = state => state.gestionModules

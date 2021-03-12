@@ -1,4 +1,6 @@
 const defaultState = {
+   
+    
     prestations:[],
     acteDepenses:[],
     bailleurs:[],
@@ -116,6 +118,8 @@ const defaultState = {
     MandatOp:[],
     facturePiece:[],
     AutreDepense:[],
+    gestionOrdrePaiement:[],
+    gestionOrdrePaiementAnnulation:[]
 
 }
 

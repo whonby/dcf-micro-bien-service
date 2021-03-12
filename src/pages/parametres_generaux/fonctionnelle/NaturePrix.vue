@@ -59,7 +59,7 @@
 
               <div class="btn-group">
               <button @click.prevent="supprimerNaturePrix(type.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
+                <span class=""><i class="icon-trash"> </i> Supprimer</span></button>
              
             </div>
 
@@ -99,7 +99,7 @@
                 </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
               </div>

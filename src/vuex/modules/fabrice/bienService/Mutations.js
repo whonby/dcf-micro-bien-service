@@ -19,6 +19,7 @@
 // }
 
  // get all document
+ 
 
 
 export const GET_ALL_RECEPTION= (state, tableau_document) =>{
@@ -2915,3 +2916,64 @@ export const MODIFIER_AUTRE_DEPENSE = (state, elementModif)=>{
 export const SUPPRIMER_AUTRE_DEPENSE = (state, id)=> {
     state.AutreDepense = state.AutreDepense.filter(prest => prest.id !=id)
 }
+
+
+
+
+export const GET_ALL_GESTION_ORDRE_PAIEMENT= (state, tableau_document) =>{
+    state.gestionOrdrePaiement = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_GESTION_ORDRE_PAIEMENT = (state, elementAjouter) => {
+    state.gestionOrdrePaiement.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_GESTION_ORDRE_PAIEMENT = (state, elementModif)=>{
+    state.gestionOrdrePaiement = state.gestionOrdrePaiement.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_GESTION_ORDRE_PAIEMENT = (state, id)=> {
+    state.gestionOrdrePaiement = state.gestionOrdrePaiement.filter(prest => prest.id !=id)
+}
+
+
+
+
+
+
+export const GET_ALL_GESTION_ORDRE_PAIEMENT_ANNULATION= (state, tableau_document) =>{
+    state.gestionOrdrePaiementAnnulation = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_GESTION_ORDRE_PAIEMENT_ANNULATION = (state, elementAjouter) => {
+    state.gestionOrdrePaiementAnnulation.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_GESTION_ORDRE_PAIEMENT_ANNULATION = (state, elementModif)=>{
+    state.gestionOrdrePaiementAnnulation = state.gestionOrdrePaiementAnnulation.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_GESTION_ORDRE_PAIEMENT_ANNULATION = (state, id)=> {
+    state.gestionOrdrePaiementAnnulation = state.gestionOrdrePaiementAnnulation.filter(prest => prest.id !=id)
+}
+
+
+//****************************  gestion des OrdrePaiementRegie*********************** */
+
+

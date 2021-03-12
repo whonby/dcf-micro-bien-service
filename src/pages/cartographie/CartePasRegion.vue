@@ -8,7 +8,7 @@
          <table class="table table-striped">
            <tr>
              <td>
-                <label>Unite administrative</label>
+                <label>Unité administrative</label>
   <model-list-select style="background-color: rgb(255,255,255);"
                      class="wide"
                      :list="uniteAdministratives"

@@ -131,8 +131,76 @@ import AutresDepense from "../../pages/bien_service/AutreDepense/AutresDepense.v
 import FicheRealiteServiceFait1 from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/RealiteServiceFait/FicheRealiteServiceFait.vue"
 import FicheDeControle1 from "../../pages/ExecutionBudgetaire/procedureEngaementDirect/RealiteServiceFait/FicheDeControle.vue"
 import AjouterLettreAvance from "../../pages/ExecutionBudgetaire/DossierFormulaireAjout/AjouterLettreAvance.vue"
+import ListeDesOrdresPaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ListeDesOrdresPaiement.vue"
+import AjoutOrdrePaiement from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiement.vue"
+import AjouterOrdrePaiementAnnulation from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementAnnulation.vue"
+import AjouterOrdrePaiementDefinitive from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/AjouterOrdrePaiementDefinitive.vue"
+import listeDesBudgetVentilleRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/listeDesBudgetVentilleRegie.vue"
 
+import OrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/OrdrePaiementRegie.vue"
+import AjoutOrdrePaiementRegie from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegie.vue"
+import AjoutOrdrePaiementRegieAnnulation from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieAnnulation.vue"
+import AjoutOrdrePaiementRegieDefinitive from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieDefinitive.vue"
+
+import TestTableaux from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/TestTableau.vue"
 const BienServiceRoutes = [
+    {
+        path: "/listeDesBudgetVentilleRegie/:id",
+        name: "listeDesBudgetVentilleRegie",
+        component: listeDesBudgetVentilleRegie
+    },
+  //test tableaux
+    {
+        path: "/TestTableaux",
+        name: "TestTableaux",
+        component: TestTableaux
+    },
+
+    //ordre de paiement des regies
+    {
+        path: "/OrdrePaiementRegie",
+        name: "OrdrePaiementRegie",
+        component: OrdrePaiementRegie
+    },
+ //ajout ordre de paiement 
+    {
+        path: "/AjoutOrdrePaiementRegie",
+        name: "AjoutOrdrePaiementRegie",
+        component: AjoutOrdrePaiementRegie
+    },
+//ajout ordre de paiement annulation
+    {
+        path: "/AjoutOrdrePaiementRegieAnnulation",
+        name: "AjoutOrdrePaiementRegieAnnulation",
+        component: AjoutOrdrePaiementRegieAnnulation
+    },
+//ajout ordre de paiement definitive
+
+    {
+        path: "/AjoutOrdrePaiementRegieDefinitive",
+        name: "AjoutOrdrePaiementRegieDefinitive",
+        component: AjoutOrdrePaiementRegieDefinitive
+    },
+    {
+        path: "/AjouterOrdrePaiementDefinitive",
+        name: "AjouterOrdrePaiementDefinitive",
+        component: AjouterOrdrePaiementDefinitive
+    },
+    {
+        path: "/AjouterOrdrePaiementAnnulation",
+        name: "AjouterOrdrePaiementAnnulation",
+        component: AjouterOrdrePaiementAnnulation
+    },
+    {
+        path: "/AjoutOrdrePaiement",
+        name: "AjoutOrdrePaiement",
+        component: AjoutOrdrePaiement
+    },
+    {
+        path: "/ListeDesOrdresPaiement",
+        name: "ListeDesOrdresPaiement",
+        component: ListeDesOrdresPaiement
+    },
     {
         path: "/AjouterLettreAvance",
         name: "AjouterLettreAvance",

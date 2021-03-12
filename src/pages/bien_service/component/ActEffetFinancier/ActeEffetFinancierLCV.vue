@@ -273,8 +273,8 @@ avance_demarrage_ht
               <div class="control-group">
                 <label class="control-label">Compte</label>
                  <select v-model="formEffetFinancier.compte_id" class="span" >
-                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.banq_id)" :key="varText.id"
-                            :value="varText.id">{{afficherLibelleCompteRib(varText.banq_id)}}</option>
+                   <option v-for="varText in afficherCompteDynamique(recuperIdModePassation(macheid),recupererIdBanque(formEffetFinancier.banq_id))" :key="varText.id"
+                            :value="varText.id">{{varText.rib}}</option>
                   </select>
                 <!-- <div class="controls " >
                   <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
@@ -2953,7 +2953,18 @@ affichierIdEntrepriseSelectionner() {
         }
       }
     },
+recupererIdBanque() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.comptes.find(qtreel => qtreel.id == id);
 
+          if (qtereel) {
+            return qtereel.banq_id;
+          }
+          return 0
+        }
+      };
+    },
 
 
 

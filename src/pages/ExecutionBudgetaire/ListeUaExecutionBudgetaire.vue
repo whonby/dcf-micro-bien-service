@@ -237,12 +237,12 @@ uniteAdministratives
     
         </div> 
           </td>-->
-          <td>
+          <!-- <td>
 <div  align="right" style="cursor:pointer;">
     <button class="btn btn-success" @click.prevent="ajouterOpSysteme"><i class="icon icon-folder-open"> Nouveau Ordre de Paiement</i></button>
     
         </div> 
-          </td> 
+          </td>  -->
         </tr>
       </table>
       
@@ -279,7 +279,7 @@ uniteAdministratives
                     <!-- <th>Mode de paiement</th> -->
                     
                     <!-- <th>Nom fournisseur</th> -->
-                    <th style="font-size:14px;font-weight:bold">Object de la depense</th>
+                    <th style="font-size:14px;font-weight:bold">Objet de la depense</th>
                     <th style="font-size:14px;font-weight:bold">Montant Tresor</th>
                      <th style="font-size:14px;font-weight:bold">Montant Don</th>
                       <th style="font-size:14px;font-weight:bold">Montant Emprunt</th>

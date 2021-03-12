@@ -150,9 +150,9 @@
                 <thead>
                   <tr>
                     
-                    <th>Type de procedure</th>
+                    <th>Type de procédure</th>
                     <th>Code</th>
-                    <th>libelle</th>
+                    <th>libellé</th>
                     <th>Action</th>
                   </tr>
                 </thead>

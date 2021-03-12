@@ -25,7 +25,7 @@
                         <th><a @click.prevent="getStatusMarche(1)" href="#">En contractualisation</a> </th>
                         <th ><a @click.prevent="getStatusMarche(2)" href="#">En exécution</a> </th>
                         <th ><a @click.prevent="getStatusMarche(5)" href="#">Terminé</a> </th>
-                        <th><a @click.prevent="getStatusMarche(3)" href="#">Résilie</a> </th>
+                        <th><a @click.prevent="getStatusMarche(3)" href="#">Résilié</a> </th>
 
                         <th><a @click.prevent="getStatusMarche(7)" href="#">Suspendu</a> </th>
                     </tr>

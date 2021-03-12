@@ -70,7 +70,7 @@
 
               <div class="btn-group">
               <button @click.prevent="supprimerStructureBudgetaire(budgetaire.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"> Supprimer</i></span></button>
+                <span class=""><i class="icon-trash"></i>Supprimer</span></button>
              
             </div>
 
@@ -82,7 +82,7 @@
             </div>
             <div v-else>
               <div align ="center">
-                <h6 style="color:red;">Aucune structure budgetaire enregistrée </h6>
+                <h6 style="color:red;">Aucune structure budgétaire enregistrée </h6>
               </div>
             </div>
                   

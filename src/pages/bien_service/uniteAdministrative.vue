@@ -178,7 +178,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>liste unite administrative</h5>
+              <h5>liste unité administrative</h5>
               <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />

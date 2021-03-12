@@ -194,12 +194,11 @@ avance_demarrage_ht
           <div class="btn-group">
             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
               <span class=""><i class="icon-trash">
-                SUPPRIMER</i></span>
+                </i>Supprimer</span>
             </button>
             
           </div>
-          
-        </td>
+        </td> 
       </tr>
       </tbody>
     </table>
@@ -266,14 +265,7 @@ avance_demarrage_ht
             </td>
              <td>
 
-                <!-- <div class="control-group">
-                <label class="control-label">Compte</label>
-                 <select v-model="formEffetFinancier.compte_id" class="span" >
-                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.banq_id)" :key="varText.id"
-                            :value="varText.id">{{varText.rib}}</option>
-                  </select>
-              
-              </div> -->
+               
               <div class="control-group">
                 <label class="control-label">Compte</label>
                  <select v-model="formEffetFinancier.compte_id" class="span" :readOnly="veifEquipementExist">
@@ -2939,7 +2931,18 @@ affichierIdEntrepriseSelectionner() {
         }
       };
     },
+recupererIdBanque() {
+      return id => {
+        if (id != null && id != "") {
+          const qtereel = this.comptes.find(qtreel => qtreel.id == id);
 
+          if (qtereel) {
+            return qtereel.banq_id;
+          }
+          return 0
+        }
+      };
+    },
     afficherBanqueDynamiqueId(){
       return id =>{
         if(id != null && id !=""){
@@ -2953,9 +2956,9 @@ affichierIdEntrepriseSelectionner() {
 
     
     afficherCompteDynamique(){
-      return (id) =>{
-        if(id != null && id !="" ){
-          return this.comptes.filter(element => element.banq_id== id)
+      return (id,id1) =>{
+        if(id != null && id !="" && id1 != null && id1 !=""){
+          return this.comptes.filter(element =>element.entrepse_id== id && element.banq_id== id1)
 
 
         }

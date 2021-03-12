@@ -8,7 +8,7 @@
                     {{ formatageSomme(parseFloat(detailMarcheExecute.montant_reel_ttc)) || 'Non renseigné'}}
                 </h4>  Montant de démarrage</a> </li>
                 <li class="bg_lg span3"> <a href="#"> <i class="icon-ok"></i> Montant avec avenant</a> </li>
-                <li class="bg_ly span3"> <a href="#"> <i class="icon-pencil"></i> Le marché a ete difére </a> </li>
+                <li class="bg_ly span3"> <a href="#"> <i class="icon-pencil"></i> Le marché a été différé </a> </li>
 
             </ul>
         </div>
@@ -21,7 +21,7 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab1">Information sur le marche</a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab1">Information sur le marché</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2">Liste des decomptes</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab3">Liste des avenants</a></li>
                             </ul>
@@ -32,7 +32,7 @@
                                     <div class="span4">
                                         <div class="widget-box">
                                             <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-                                                <h5>Information du marche</h5>
+                                                <h5>Information du marché</h5>
                                             </div>
                                             <div class="widget-content">
                                                 <table class="table  table-invoice" v-if="detailMarcheExecute">
@@ -55,7 +55,7 @@
                                                         <td class="width80"><strong>{{detailMarcheExecute.objet}}</strong></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Type de marche:</td>
+                                                        <td>Type de marché:</td>
                                                         <td><strong>{{detailMarcheExecute.type_marche.libelle}}</strong></td>
                                                     </tr>
                                                     <tr>
@@ -123,19 +123,19 @@
                                     <div class="span4">
                                         <div class="widget-box">
                                             <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-                                                <h5>Information de l'unite administrative</h5>
+                                                <h5>Information de l'unité administrative</h5>
                                             </div>
                                             <div class="widget-content">
                                                 <table class="table  table-invoice" v-if="detailMarcheExecute">
                                                     <tbody>
                                                     <tr>
-                                                        <td class="width20">Code unite administrative :</td>
+                                                        <td class="width20">Code unité administrative :</td>
                                                         <td class="width80">
                                                             {{detailMarcheExecute.entreprise.code}}
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="width20">Nom unite administrative :</td>
+                                                        <td class="width20">Nom unité administrative :</td>
                                                         <td class="width80"><strong>{{detailMarcheExecute.uniteAdmin.libelle}}</strong></td>
                                                     </tr>
 

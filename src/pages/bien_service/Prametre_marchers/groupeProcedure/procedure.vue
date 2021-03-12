@@ -60,13 +60,13 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier Procedure</h3>
+                <h3>Modifier Procédure</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
 
                <div class="control-group">
-              <label class="control-label">Type procedure</label>
+              <label class="control-label">Type procédure</label>
               <div class="controls">
                 <select  v-model="editprocedure.type_procedure_id">
             <option v-for="resultat in  typeTypeProcedures" :key="resultat.id" 
