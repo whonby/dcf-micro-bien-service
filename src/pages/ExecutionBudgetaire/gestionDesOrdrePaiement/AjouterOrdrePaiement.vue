@@ -253,7 +253,7 @@ numero_ordrepaiement
                     <tr>
                       <td>
                         <div class="control-group">
-                <label class="control-label">Type de depense{{formData.typedepense}}</label>
+                <label class="control-label">Type de depense</label>
                 <div class="controls">
                  
  
@@ -396,7 +396,7 @@ numero_ordrepaiement
                      readonly
                     type="text"
                     style="border:1px solid #000"
-                   :value="Numero_Nom_Entreprise(formData2.nom_entreprise_id)"
+                   :value="Numero_Nom_Entreprise(idEntreprise(formData2.marche_id))"
                     class="span"
                    
             
@@ -667,6 +667,24 @@ numero_ordrepaiement
                         </td>
                         </tr>
                         <tr>
+                          <td colspan="4">
+                         <div class="control-group">
+                            <label class="control-label">OBJET DECOMPTE</label>
+                            <div class="controls">
+                              
+                      <input
+               
+                    type="text"
+                    style="border:1px solid #000"
+                  v-model="formData12.objet_decompte"
+                    class="span"
+                  
+                  />
+                            </div>
+                          </div>
+                        </td>
+                        </tr>
+                        <tr>
                           <td>
                          <div class="control-group">
                             <label class="control-label">LIVRABLES</label>
@@ -676,9 +694,9 @@ numero_ordrepaiement
                   
                     type="text"
                     style="border:1px solid #000"
-                   :value="livrable(formData2.marche_id)"
+                   
                     class="span"
-                    readonly
+                  
                   />
                             </div>
                           </div>
@@ -1842,6 +1860,9 @@ components: {
                 exonere : 1
                 },
                 formData45:{},
+                formData12:{
+                  objet_decompte:""
+                },
                 formData7:{},
  formData1:{
               date_piece:"" ,
@@ -3070,6 +3091,7 @@ AjouterOrdrePaiement(){
  if(this.formData.type_ordre_paiement==1){
 if(this.formData.typedepense=='Marche'){
   this.intitule=this.anneeAmort +"-"+ this.tailleOpEnregistrer + "-" + this.formData.numero_ordre_paiement
+   this.intitule2=this.objetMarche(this.formData2.marche_id) +"/" + this.formData12.objet_decompte
   var nouvelObjetOrdrePaiement = {
         exercice:this.anneeAmort,
         	type_ordre_paiement:this.formData.type_ordre_paiement,
@@ -3081,7 +3103,7 @@ if(this.formData.typedepense=='Marche'){
           sous_budget_id:this.formData.sous_budget_id,
           activite_id:this.formData.activite_id,
            ligne_economique_id:this.formData.ligne_economique_id,
-        	entreprise_id:this.formData2.nom_entreprise_id,
+        	entreprise_id:this.idEntreprise(this.formData2.marche_id),
           marche_id:this.formData2.marche_id,
           type_financement_id:this.formData.type_financement_id,
           typedepense:this.formData.typedepense,
@@ -3089,7 +3111,7 @@ if(this.formData.typedepense=='Marche'){
         	montant_ordre_paiement:this.formData2.montant_engage,
           mode_paiement_id:this.formData.mode_paiement_id,
         
-          
+          	odjet_autre_depense:this.intitule2,
           gestionnaire_credit_non:this.formData.gestionnaire_credit_non,
            gestionnaire_credit_date:this.formData.gestionnaire_credit_date,
         	gestionnaire_credit_fonction:this.formData.gestionnaire_credit_fonction,
@@ -3135,8 +3157,8 @@ if(this.formData.typedepense=='Marche'){
           sous_budget_id:this.formData.sous_budget_id,
           activite_id:this.formData.activite_id,
            ligne_economique_id:this.formData.ligne_economique_id,
-        	entreprise_id:this.formData2.nom_entreprise_id,
-          marche_id:this.formData2.marche_id,
+        	// entreprise_id:this.idEntreprise(this.formData2.marche_id),
+          // marche_id:this.formData2.marche_id,
           
          
           type_financement_id:this.formData.type_financement_id,
@@ -3199,6 +3221,7 @@ if(this.formData.typedepense=='Marche'){
  else{
 if(this.formData.typedepense=='Marche'){
   this.intitule=this.anneeAmort +"-"+ this.tailleOpEnregistrer + "-" + this.formData.numero_ordre_paiement
+  this.intitule2=this.objetMarche(this.formData2.marche_id) +"/" + this.formData12.objet_decompte
   var nouvelObjetOrdrePaiement12 = {
         exercice:this.anneeAmort,
         	type_ordre_paiement:this.formData.type_ordre_paiement,
@@ -3210,7 +3233,7 @@ if(this.formData.typedepense=='Marche'){
           sous_budget_id:this.formData.sous_budget_id,
           activite_id:this.formData.activite_id,
            ligne_economique_id:this.formData.ligne_economique_id,
-        	entreprise_id:this.formData2.nom_entreprise_id,
+        	entreprise_id:this.idEntreprise(this.formData2.marche_id),
           marche_id:this.formData2.marche_id,
           type_financement_id:this.formData.type_financement_id,
           typedepense:this.formData.typedepense,
@@ -3218,7 +3241,7 @@ if(this.formData.typedepense=='Marche'){
         	montant_ordre_paiement:this.formData2.montant_engage,
           mode_paiement_id:this.formData.mode_paiement_id,
           
-          
+          	odjet_autre_depense:this.intitule2,
           gestionnaire_credit_non:this.formData.gestionnaire_credit_non,
            gestionnaire_credit_date:this.formData.gestionnaire_credit_date,
         	gestionnaire_credit_fonction:this.formData.gestionnaire_credit_fonction,
@@ -3253,6 +3276,8 @@ if(this.formData.typedepense=='Marche'){
 }
      else{
        this.intitule=this.anneeAmort +"-"+ this.tailleOpEnregistrer + "-" + this.formData.numero_ordre_paiement
+             
+       
          var nouvelObjetOrdrePaiement136 = {
         exercice:this.anneeAmort,
         	type_ordre_paiement:this.formData.type_ordre_paiement,
@@ -3264,8 +3289,8 @@ if(this.formData.typedepense=='Marche'){
           sous_budget_id:this.formData.sous_budget_id,
           activite_id:this.formData.activite_id,
            ligne_economique_id:this.formData.ligne_economique_id,
-        	entreprise_id:this.formData2.nom_entreprise_id,
-          marche_id:this.formData2.marche_id,
+        	// entreprise_id:this.this.idEntreprise(this.formData2.marche_id),
+         // marche_id:this.formData2.marche_id,
           
           
           type_financement_id:this.formData.type_financement_id,
