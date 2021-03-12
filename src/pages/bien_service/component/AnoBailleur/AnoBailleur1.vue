@@ -133,7 +133,7 @@ marche_id
             <div class="controls">
               <input
                   type="text"
-                  v-model="formBailleur.num_courrier"
+                  v-model="formBailleur.numero_courie"
                   class="span"
                   placeholder="Saisir le numéro du courrier"
               />
@@ -231,7 +231,7 @@ marche_id
             <div class="controls">
               <input
                   type="text"
-                  v-model="edit_bailleur.num_courrier"
+                  v-model="edit_bailleur.numero_courie"
                   class="span"
                   placeholder="Saisir le numéro du courrier"
               />
@@ -276,13 +276,13 @@ marche_id
 
     </div>
 
-    <div class="modal-footer">
+    <!-- <div class="modal-footer">
       <a  @click.prevent="ajouterBailleur"
           class="btn btn-primary"
           href="#"
       >Valider</a>
       <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-    </div>
+    </div> -->
   </div>
 
   <div id="ajouterAnoBailleur" class="modal hide">
@@ -409,7 +409,6 @@ name: "ActEffeFinanciere",
       formBailleur:{
         date_ano_dmp:"",
         numero_courie:"",
-        
         appel_offre_id:"",
         plan_motif_decision_id:"",
         difference_personnel_bienService:"bienservice"
@@ -763,9 +762,7 @@ pvTraitement(){
  this.$('#modifierAno').modal('hide');
 },
 
-
     editAnoBailleur(){
-
       //console.log(this.edit_bailleur)
       const formData = new FormData();
       // formData.append('proce_verbal_jugement_offre_id', this.edit_bailleur.proce_verbal_jugement_offre_id);
@@ -776,7 +773,7 @@ pvTraitement(){
       formData.append('id', this.edit_bailleur.id);
       formData.append('difference_personnel_bienService', this.edit_bailleur.difference_personnel_bienService);
       formData.append('plan_motif_decision_id',this.edit_bailleur.plan_motif_decision_id);
-      formData.append('observations_bailleur',this.edit_bailleur.	observations_bailleur)
+      formData.append('observations_bailleur',this.edit_bailleur.observations_bailleur)
       formData.append('date_avis',this.edit_bailleur.date_avis);
       formData.append('avis_bail',this.edit_bailleur.avis_bail);
       console.log(formData)

@@ -96,11 +96,11 @@ controlleur_fin
                         <a data-toggle="tab" href="#tab22">PARAMETRAGE ECHEANCIER</a>
                       </li>
                         <li>
-                        <a data-toggle="tab" href="#tab21" title="programmation du marché pluriannuel">P. DU MARCHE PLURIANNUEL</a>
+                        <a data-toggle="tab" href="#tab21" title="programmation du marché pluriannuel">PROGRAMMATION DU MARCHE PLURIANNUEL</a>
                       </li>
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab03">IMAGES DES MARCHES</a>
-                      </li> -->
+                      <li>
+                        <a data-toggle="tab" href="#tab03">TABLEAU DE CALCUL DES MARCHES PLARIANNUELS </a>
+                      </li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab040">EVOLUTION DES MARCHES</a>
                       </li> 
@@ -111,9 +111,9 @@ controlleur_fin
                     </ul>
                   </div>
                          <div class="widget-content tab-content">
-                           <!-- <div id="tab03" class="tab-pane ">
-                         <imageMarche :macheid="detail_marche.id"></imageMarche>
-                      </div> -->
+                           <div id="tab03" class="tab-pane ">
+                         <TableauMarchePluriannuel :macheid="detail_marche.id"></TableauMarchePluriannuel>
+                      </div>
                     <!--ongle identification-->
                     <div id="tab1" class="tab-pane active">
   <tableauBordExecution :macheid="detail_marche.id"></tableauBordExecution>
@@ -341,6 +341,7 @@ controlleur_fin
 
                   import imageMarche from "../../../../bien_service/contractualisation/DossierExecution/dossierImageMarche/imageMarche";
                 import tableauBordExecution from "../tableauBordExecution/tableauBordExecution";
+                import TableauMarchePluriannuel from "../DossierMarchePluriannuel/TableauMarchePluriannuel"
   import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
   export default {
   watch: {
@@ -348,6 +349,7 @@ controlleur_fin
         name: 'compte',
         components:{
          marchePluriannuel,
+         TableauMarchePluriannuel,
             avenant,
             facture,
             decompte,

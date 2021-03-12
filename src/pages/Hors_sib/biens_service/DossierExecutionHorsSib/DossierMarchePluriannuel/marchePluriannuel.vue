@@ -11,6 +11,7 @@
                                         <th>Source de financement</th>
                                         <th>Type de financement</th>
                                         <th>Report à nouveau</th>
+                                        <th>Durée contractuelle</th>
                                         <th>Action</th>
                                     </tr>
                     </thead>
@@ -19,19 +20,22 @@
                                         :key="appelOffre.id">
                                        
                                             <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
-                                            {{appelOffre.anneeBudgetaire || 'Non renseigné'}}</td>
+                                            {{afficherLibelleAnneBudgetaire(appelOffre.anneeBudgetaire) || 'Non renseigné'}}</td>
                                              <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
                                             {{formatageSomme(parseFloat(appelOffre.montantBase)) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
                                             {{formatageSomme(parseFloat(appelOffre.montantCP)) || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
-                                            {{formatageSomme(parseFloat(appelOffre.montantEngagement)) || 'Non renseigné'}}</td>
+                                            {{formatageSomme(parseFloat(appelOffre.montantCP_notifie)) || 'Non renseigné'}}</td>
                                               <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
                                             {{affiherLibelle(appelOffre.source_financement_id) || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
                                             {{affiherLibelleTypefinancement(appelOffre.type_financement) || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
                                             {{formatageSomme(parseFloat(appelOffre.report_nouveau ))|| 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModificationMarchePluriannuel(index)">
+                                            {{appelOffre.duree_contratuel || 'Non renseigné'}}</td>
+                                            
                                             <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerProgrammationMarchePlurieAnnuel(appelOffre.id)"  class="btn btn-danger ">
@@ -56,13 +60,20 @@
                   <div class="control-group">
                      <label class="control-label">Année Budgétaire </label>
                     <div class="controls ">
+
+             <select v-model="formData.anneeBudgetaire" class="span" >
+                 <!-- <option>veuillez selectionner l'année</option> -->
+               <option v-for="plans in exercices_budgetaires" :key="plans.id" 
+               :value="plans.id"> {{plans.annee}}</option>
+               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+           </select>
                             
-                     <input
+                     <!-- <input
                 type="text"
                 :value="anneeBugetaire"
                 class="span5"
                readonly
-              />
+              /> -->
                </div>
                </div>
               </td>
@@ -97,16 +108,26 @@
                              <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Montant Crédit de paiement <code>*</code></label>
+                                <label>Montant Crédit de Paiement annuel prevu <code>*</code></label>
                                 <money class="span" placeholder="" v-model="formData.montantCP" > </money>
                             </div>
                         </div>
                             </td>
-                                <td colspan="2">
+                                <td colspan="">
                         <div class="control-group">
                             <div class="controls">
-                                <label>Montant engagement reçu <code>*</code></label>
-                                  <money  class="span" placeholder="" v-model="formData.montantEngagement"></money>
+                                <label>Montant Crédit de Paiement annuel notifié <code>*</code></label>
+                                  <money  class="span" placeholder="" v-model="formData.montantCP_notifie"></money>
+                                
+                            </div>
+                        </div>
+                                </td>
+
+                                    <td colspan="">
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Durée contractuelle <code>*</code></label>
+                                  <input type="text"  class="span" placeholder="" :value="afficherDureeContratuel(macheid)" readonly>
                                 
                             </div>
                         </div>
@@ -173,7 +194,12 @@
                         <div class="control-group">
                             <label class="control-label">Année Budgetaire <code>*</code> :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Type appel" :value="anneeBudgetairemodifier" readonly>
+                                 <select v-model="editMarchePl.anneeBudgetaire" class="span" >
+               <option v-for="plans in exercices_budgetaires" :key="plans.id" 
+               :value="plans.id"> {{plans.annee}}</option>
+               <!-- <code v-if="message_offre">{{message_offre}}</code> -->
+           </select>
+                                <!-- <input type="text" class="span5" placeholder="Type appel" :value="anneeBudgetairemodifier" readonly> -->
                             </div>
                         </div>
                             </td>
@@ -207,16 +233,25 @@
                              <td>
                         <div class="control-group">
                             <div class="controls">
-                                <label>Montant de crédit de paiement <code>*</code></label>
+                                <label>Montant de crédit de paiement annuel prevu <code>*</code></label>
                                 <money class="span" placeholder="Numéro d'autorisation" v-model="editMarchePl.montantCP" > </money>
                             </div>
                         </div>
                             </td>
-                                <td colspan="2">
+                                <td colspan="">
                         <div class="control-group">
                             <div class="controls">
-                                <label>Montant engagement reçu <code>*</code></label>
-                                  <money class="span" placeholder="Reference d'appel" v-model="editMarchePl.montantEngagement"></money>
+                                <label>Montant Crédit de Paiement annuel notifié <code>*</code></label>
+                                  <money class="span" placeholder="Reference d'appel" v-model="editMarchePl.montantCP_notifie"></money>
+                                
+                            </div>
+                        </div>
+                                </td>
+                                     <td colspan="">
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Durée contractuelle <code>*</code></label>
+                                  <input type="text"  class="span" placeholder="" :value="afficherDureeContratuel(macheid)" readonly>
                                 
                             </div>
                         </div>
@@ -279,8 +314,10 @@ export default {
         return{
             formData:{
                 	type_financement:"",
+                    anneeBudgetaire:"",
                 montantCP:"",
-                montantEngagement:"",
+                montantCP_notifie:"",
+                duree_contratuel:"",
                 source_financement_id:"",
                 report_nouveau:"",
                 montantBase:""
@@ -331,20 +368,30 @@ export default {
                 }
             },
 
-      anneeBugetaire(){
-     const anneBudget = this.exercices_budgetaires.find(anneBudg =>anneBudg.encours == 1 );
-     if(anneBudget){
-       return anneBudget.annee;
-     }
-     return 0
-   },
-    anneeBudgetairemodifier(){
-     const anneBudget = this.exercices_budgetaires.find(anneBudg =>anneBudg.encours == 1 );
-     if(anneBudget){
-       return anneBudget.annee;
-     }
-     return 0
-   },
+            afficherLibelleAnneBudgetaire(){
+                return id =>{
+                    if(id!=null){
+                        let objet = this.exercices_budgetaires.find(item =>item.id==id)
+                        if(objet) return objet.annee
+                    }
+                    return null
+                }
+            },
+
+//       anneeBugetaire(){
+//      const anneBudget = this.exercices_budgetaires.find(anneBudg =>anneBudg.encours == 1 );
+//      if(anneBudget){
+//        return anneBudget.annee;
+//      }
+//      return 0
+//    },
+//     anneeBudgetairemodifier(){
+//      const anneBudget = this.exercices_budgetaires.find(anneBudg =>anneBudg.encours == 1 );
+//      if(anneBudget){
+//        return anneBudget.annee;
+//      }
+//      return 0
+//    },
      afficherMontantTtcDeActe() {
       return id => {
         if (id != null && id != "") {
@@ -357,6 +404,21 @@ export default {
         }
       };
     },
+
+    // afficher la duree contractuel
+    afficherDureeContratuel(){
+         return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+            console.log(this.acteEffetFinanciers)
+      if (qtereel) {
+        return qtereel.duree;
+      }
+      return 0
+        }
+      };
+
+    }
     },
     methods:{
 ...mapActions("bienService",['ajouterProgrammationMarchePlurieAnnuel','modifierProgrammationMarchePlurieAnnuel','supprimerProgrammationMarchePlurieAnnuel']),
@@ -380,17 +442,19 @@ formatageSomme:formatageSomme,
             //    })
               var nouvelObjet = {
                 ...this.formData,
-               anneeBudgetaire:this.anneeBugetaire,
+              // anneeBudgetaire:this.anneeBugetaire,
                marche_id:this.macheid,
-               montantBase:this.afficherMontantTtcDeActe(this.macheid)
+               montantBase:this.afficherMontantTtcDeActe(this.macheid),
+               duree_contratuel:this.afficherDureeContratuel(this.macheid)
               }
              this.ajouterProgrammationMarchePlurieAnnuel(nouvelObjet) 
               this.formData ={
      	type_financement:"",
                 montantCP:"",
-                montantEngagement:"",
+                montantCP_notifie:"",
                 source_financement_id:"",
-                report_nouveau:""
+                report_nouveau:"",
+                anneeBudgetaire:""
 
    
               }

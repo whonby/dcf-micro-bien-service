@@ -1175,7 +1175,7 @@ avance_demarrage_ht
                   <div class="control-group">
                       <label class="control-label" title=" ">Durée d'exécution contractuelle(jrs)</label>
                       <div class="controls">
-                          <input type="number"  v-model="durre_prevueModifier"
+                          <input type="number"  v-model="editActeEffetFinancier.duree"
                                  class="span"
 
                           />
@@ -1678,6 +1678,7 @@ name: "ActEffeFinanciere",
       lot:"",
       editActeEffetFinancier:{
         tva_cautionnement:"",
+        taux_avance_demarrage:"",
         taux_bon_execution:"",
         montant_ttc_cautionnement:"",
         montant_ht_cautionnement:"", 
@@ -1723,13 +1724,14 @@ name: "ActEffeFinanciere",
         date_debut_previsionnel:"",
         date_debut_previsionnelModifier:"",
         durre_prevueModifier:"",
-        taux_avance_demarrage:"",
          durre_garantieModifier:"",
         durre_prevue:"",
         durre_garantie:"",
+
        formEffetFinancier:{
         tva_cautionnement:"",
         taux_bon_execution:"",
+        taux_avance_demarrage:"",
         montant_ttc_cautionnement:"",
         montant_ht_cautionnement:"", 
         avance_demarrage_ht:"",   
@@ -2667,6 +2669,7 @@ editAvanceDemarrageMontantTTC(){
 
       return 0
     },
+
      montantTvaModifier() {
       const val = parseFloat((this.editActeEffetFinancier.montant_act_ht) * parseFloat(this.afficherEnorereModifier));
 
@@ -3157,6 +3160,7 @@ var nouvelObjet1 = {
         tva:this.montantTvaModifier,
           sous_traitance:this.sous_traitance,
           garantie:this.garantieModifier,
+          duree:this.durre_prevueModifier,
         montant_act:this.montantHTtModifier,
           avance_demarrage_ht:this.avanceDemarageHorsTaxeModifier,
           montant_ht_bon_execution:this.afficheMontantHorsTaxeGarantieBonneExecutionModifier,

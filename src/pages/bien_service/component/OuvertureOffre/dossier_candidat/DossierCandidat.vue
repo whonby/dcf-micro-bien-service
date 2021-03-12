@@ -519,6 +519,27 @@
       <div class="modal-body">
         <table class="table table-bordered table-striped">
           <tbody>
+          <!-- <tr class="odd gradeX" >
+          <td width="">
+            <div align="left" >
+              <div class="control-group">
+                <label class="control-label">Entreprise.</label>
+                <div class="controls">
+                  <select v-model="editDossierCadidature.entreprise_id">
+                    <option value=""></option>
+                    <option v-for="varText in afficherCandidatSelectionner(marcheid)" :key="varText.id"
+                            :value="varText.entreprise_id">{{afficheNomEntreprise(varText.entreprise_id)}}</option>
+                  </select>
+
+                </div>
+              </div>
+              <hr>
+             
+            </div>
+          </td>
+
+        </tr> -->
+
           <tr class="odd gradeX">
 
             <td>
@@ -616,7 +637,7 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">Accord groupe</label>
+                <label class="control-label">Accord de groupement</label>
                 <div class="controls">
                   <input type="text" class="" placeholder="Accord Groupe" v-model="editDossierCadidature.accord_group">
                 </div>
@@ -644,7 +665,7 @@
           </tr>
 
 
-          <tr class="odd gradeX">
+          <!-- <tr class="odd gradeX">
 
             <td>
               <div class="control-group">
@@ -680,10 +701,10 @@
                 </div>
               </div>
             </td>
-          </tr>
+          </tr> -->
 
 
-          <tr class="odd gradeX">
+          <!-- <tr class="odd gradeX">
             <td>
               <div class="control-group">
                 <label class="control-label">Fiche rsgnt nombre groupe</label>
@@ -719,9 +740,9 @@
               </div>
             </td>
 
-          </tr>
+          </tr> -->
 
-          <tr class="odd gradeX">
+          <!-- <tr class="odd gradeX">
 
             <td>
               <label>Procédure de passation</label>
@@ -792,7 +813,7 @@
                 </div>
               </div>
             </td>
-          </tr>
+          </tr> -->
 
 
 
