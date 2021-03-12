@@ -237,7 +237,34 @@ avance_demarrage_ht
             </td>
             <td>
 
-              <div class="control-group">
+             
+                                 <!-- <td colspan="2" width=""> -->
+
+                          <!-- <select v-model="formCotation.entreprise_id" class="span">
+                                <option v-for="varText in entreprises" :key="varText.id"
+                                        :value="varText.id">{{varText.raison_sociale}}</option>
+                            </select> -->
+                            <div class="span" align="left" >
+
+                               Sélectionner l'entreprise:
+                        <model-list-select style="background-color: rgb(255,255,255);"
+                                           class="wide"
+                                           :list="entreprises"
+                                           v-model="formEffetFinancier.entreprise_id"
+                                           option-value="id"
+                                           option-text="raison_sociale"
+                                            :search-change="recherche()"
+                                           placeholder="Selectionner l'entreprise"
+                                          
+                        >
+
+                        </model-list-select>
+                        
+                            </div>
+                   
+                              <!-- </td> -->
+
+              <!-- <div class="control-group">
                 <label class="control-label">Entreprise</label>
                 <div class="controls" style="font-size:20px">
                 
@@ -248,7 +275,7 @@ avance_demarrage_ht
                 </div>
 
 
-              </div>
+              </div> -->
 
 
            <td>
@@ -269,8 +296,8 @@ avance_demarrage_ht
               <div class="control-group">
                 <label class="control-label">Compte</label>
                  <select v-model="formEffetFinancier.compte_id" class="span" :readOnly="veifEquipementExist">
-                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.banq_id)" :key="varText.id"
-                            :value="varText.id">{{afficherLibelleCompteRib(varText.banq_id)}}</option>
+                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.entreprise_id,afficherBanqueDynamiqueId(formEffetFinancier.banq_id))" :key="varText.id"
+                            :value="varText.id">{{varText.rib}}</option>
                   </select>
                 
               </div>
@@ -3136,6 +3163,21 @@ nombreDejourCalculeModifier(){
 ...mapActions("horSib", ['modifierMarcheHorSib']),
 
 
+ recherche() {
+              // console.log(this.search)
+                let entre=this.entreprises.find(item=>item.id==this.search);
+                if (entre!=undefined){
+                    if(this.search!=""){
+                        this.formEffetFinancier.id=entre.id
+                        // this.formDossierCadidature.adresse_post=entre.adresse
+                        // this.formDossierCadidature.nom_cand=entre.raison_sociale
+                        // this.formDossierCadidature.reg_com=entre.numero_rc
+                        // this.formDossierCadidature.email_cand=entre.email
+                        // this.formDossierCadidature.numero_cc=entre.numero_cc
+                        // this.formDossierCadidature.secteur_activite_id=entre.secteur_activite_id
+                    }
+                }
+            },
 
 afficherModalModifierService(id) {
       this.$("#exampleModalValidationdirecteur").modal({
