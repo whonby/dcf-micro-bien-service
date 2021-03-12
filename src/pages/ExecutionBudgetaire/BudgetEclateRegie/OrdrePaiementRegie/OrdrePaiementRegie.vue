@@ -77,9 +77,10 @@
                     <!-- <th   style="font-size:14px;font-weight:bold">Sous Budget</th> -->
                      <!-- <th   style="font-size:14px;font-weight:bold">Montant Autorisé</th> -->
                     <th   style="font-size:14px;font-weight:bold">Engagement actuel</th>
-                              
+                              <th   style="font-size:14px;font-weight:bold">Service Réalite</th> 
+                             <th   style="font-size:14px;font-weight:bold">Fiche Annexe</th> 
                     <th   style="font-size:14px;font-weight:bold">Décision CF</th>
-                    
+                    <th   style="font-size:14px;font-weight:bold">Supprimer</th>
                      <!-- <th   style="font-size:14px;font-weight:bold">Décision OP Annulation</th>
                      <th   style="font-size:14px;font-weight:bold">Décision OP Definitive</th> -->
                 
@@ -121,10 +122,10 @@
  <td v-else style="background-color:lightblue"></td>
 
          
-                     <td v-if="type.marche_id != null"
+                     <!-- <td v-if="type.marche_id != null"
                       style="font-size:14px;font-weight:bold"
-                    >{{libelleMarche(type.marche_id) || 'Non renseigné'}}</td>
-                    <td v-else
+                    >{{libelleMarche(type.marche_id) || 'Non renseigné'}}</td> -->
+                    <td
                       style="font-size:14px;font-weight:bold"
                     >{{type.odjet_autre_depense || 'Non renseigné'}}</td>
                      <td
@@ -134,6 +135,21 @@
                     <td
                        style="font-size:14px;font-weight:bold;text-align:center"
                     >{{formatageSomme(parseFloat(type.montant_ordre_paiement)) || 'Non renseigné'}}</td>
+                    
+                     <td v-if="type.type_ordre_paiement==2">
+                                              <router-link :to="{ name: 'ficheServiceRealiteFait', params: { id: type.id }}"
+                class="btn btn-success " title="Editer Fiche">
+                  <span class="" style="font-size:14px;font-weight:bold"><i class=" icon-print"></i>  S/Réalite fait</span>
+                   </router-link>
+                    </td>
+                    <td v-else style="background-color:lightblue"></td>
+                    <td v-if="type.type_ordre_paiement==2">
+                                              <router-link :to="{ name: 'FicheAnnexe', params: { id: type.id }}"
+                class="btn btn-danger" title="Editer Fiche de controle">
+                  <span class="" style="font-size:14px;font-weight:bold"><i class=" icon-print"></i>  Fiche Annexe</span>
+                   </router-link>
+                    </td>
+                    <td v-else style="background-color:lightblue"></td>
                      <td>
                         <button v-if="type.decision_cf==8"  class="btn  btn-success tailBtn"  @click="apercuFacture(type.id)">                        
                      
@@ -167,76 +183,13 @@
                     
                       </button>
                     </td>
-                    
-                   
-                    <!-- <td v-if="type.id==afficheDecisionOpAnuulation1(type.id)">
-<button v-if="afficheDecisionOpAnuulation(type.id) == 8"  class="btn  btn-success tailBtn"  @click="ModalOpAnnulation(type.id)">                        
-                     
-                      <span   style="font-weight:bolder;color:#fff;font-size:18px" >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 2" class="btn  btn-warning tailBtn" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      
-                       <span style="font-weight:bolder;color:#fff;font-size:18px" >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="afficheDecisionOpAnuulation(type.id) == 3" class="btn  btn-danger tailBtn" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      
-                       <span  style="font-weight:bolder;color:#fff;font-size:18px">Réjeté</span>
-                      
-                    
-                      </button>
-                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 9"  class="btn  btn-success tailBtn" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      <span style="font-weight:bolder;color:#fff;font-size:18px">Visé avec observation</span>
-                      
-                      </button>
-                      <button v-else class="btn  btn-info tailBtn" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      
-                       <span style="font-weight:bolder;color:#fff;font-size:18px">Attente</span>
-                      
-                    
+                     <td>
+                      <button class="btn btn-danger" @click="supprimerGestionOrdrePaiement(type.id)">
+                        <span>
+                          <i class="icon icon-trash"> Supprimer</i>
+                        </span>
                       </button>
                     </td>
-                    <td v-else style="background-color:lightblue"></td> -->
-                    <!-- <td v-if="type.decision_cf_definitif != null">
-                         <button v-if="type.decision_cf_definitif==8"  class="btn  btn-success tailBtn"  @click="DecisionDefinitifCf(type.id)">                        
-                     
-                      <span  style="font-weight:bolder;color:#fff;font-size:18px"  >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="type.decision_cf_definitif == 2" class="btn  btn-warning tailBtn" @click="DecisionDefinitifCf(type.id)">                        
-                     
-                      
-                       <span  style="font-weight:bolder;color:#fff;font-size:18px">Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="type.decision_cf_definitif == 3" class="btn  btn-danger tailBtn" @click="DecisionDefinitifCf(type.id)">                        
-                     
-                      
-                       <span style="font-weight:bolder;color:#fff;font-size:18px" >Réjeté</span>  
-                      
-                    
-                      </button>
-                       <button v-else-if="type.decision_cf_definitif == 9"  class="btn  btn-success tailBtn" @click="DecisionDefinitifCf(type.id)">                        
-                     
-                      <span title="Visé avec observation" style="font-weight:bolder;color:#fff;font-size:18px" >Visé O</span>
-                      
-                      </button>
-                     <button v-else class="btn  btn-info tailBtn" @click="DecisionDefinitifCf(type.id)" >                        
-                     
-                      
-                       <span style="font-weight:bolder;color:#fff;font-size:18px">Attente</span>
-                      
-                    
-                      </button>
-                    </td>
-                    <td v-else style="background-color:lightblue"></td> -->
                     </tr>
                 </tbody>
               </table>
@@ -905,7 +858,8 @@ recupererIdUser() {
   methods: {
     ...mapActions("bienService", [
       "modifierGestionOrdrePaiement",
-     "modifierGestionOrdrePaiementAnnulat"
+     "modifierGestionOrdrePaiementAnnulat",
+     "supprimerGestionOrdrePaiement"
     ]),
     
     ajouterLiquidation(){

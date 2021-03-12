@@ -1,7 +1,120 @@
 
 <template>
   <div>
- 
+ <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
+                <div class="span1">
+
+                </div>
+                <div class="span10 " style="background-color: transparent; !important;">
+                    <table class="table table-striped"  >
+                        <tbody>
+                        <tr>
+                         
+                           
+                          <td >
+                              <br>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">UNITE ADMINISTRATIVE<a href="#" @click.prevent="videUniteadministrative()" v-if="uniteAdministrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
+                                </label>
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="uniteAdministratives"
+                                                   v-model="uniteAdministrative_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder="TOUTES LES UNITES ADMINISTRATIVES"
+                                >
+
+                                </model-list-select>
+                            </td>
+                            <td >
+                                <br>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">TYPE DE MARCHE <a href="#" @click.prevent="VidetypeMarche()" v-if="typemarche_id" style="color: red"><i class="fa fa-trash-o"></i></a>
+                                </label>
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="typeMarches"
+                                                   v-model="typemarche_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder="TOUS LES TYPES DE MARCHE"
+                                >
+
+                                </model-list-select>
+                            </td>
+                            <td >
+                                <br>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">ENTREPRISE<a href="#" @click.prevent="VideEntreprise()" v-if="entre_id" style="color: red"><i class="fa fa-trash-o"></i></a>
+                                </label>
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="entreprises"
+                                                   v-model="entre_id"
+                                                   option-value="id"
+                                                   option-text="raison_sociale"
+                                                   placeholder="TOUTES LES ENTREPRISES"
+                                >
+
+                                </model-list-select>
+                            </td>
+                            
+                        </tr>
+ <tr>
+                         
+                           
+                          <td >
+                              <br>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">UNITE ADMINISTRATIVE<a href="#" @click.prevent="videUniteadministrative()" v-if="uniteAdministrative_id" style="color: red"><i class="fa fa-trash-o"></i></a>
+                                </label>
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="uniteAdministratives"
+                                                   v-model="uniteAdministrative_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder="TOUTES LES UNITES ADMINISTRATIVES"
+                                >
+
+                                </model-list-select>
+                            </td>
+                            <td >
+                                <br>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">TYPE DE MARCHE <a href="#" @click.prevent="VidetypeMarche()" v-if="typemarche_id" style="color: red"><i class="fa fa-trash-o"></i></a>
+                                </label>
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="typeMarches"
+                                                   v-model="typemarche_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder="TOUS LES TYPES DE MARCHE"
+                                >
+
+                                </model-list-select>
+                            </td>
+                            <td >
+                                <br>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">ENTREPRISE<a href="#" @click.prevent="VideEntreprise()" v-if="entre_id" style="color: red"><i class="fa fa-trash-o"></i></a>
+                                </label>
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="entreprises"
+                                                   v-model="entre_id"
+                                                   option-value="id"
+                                                   option-text="raison_sociale"
+                                                   placeholder="TOUTES LES ENTREPRISES"
+                                >
+
+                                </model-list-select>
+                            </td>
+                            
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
@@ -23,7 +136,35 @@
             
             <br>
           <table class="table table-bordered table-striped">
-             <td style="width:55%">
+             <td style="width:0%;font-weight:bolder;color:#000">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-success" @click.prevent="ajouterOpSysteme" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> NBRES OP PROVISOIRE</i></button>
+    <br>
+    <br>
+   <span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOP}}</span>
+    
+        </div> 
+       
+          </td>
+           <td style="width:0px">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="ajouterOpAnnulation" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> NBRES OP ANNULATION</i></button>
+     <br>
+     <br>
+     <span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOP}}</span>
+        </div> 
+       
+          </td> 
+           <td style="width:0px">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-primary" @click.prevent="ajouterOpDeffinitif" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> NBRES OP DEFINITIF</i></button>
+      <br>
+      <br>
+     <span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOP}}</span>
+        </div> 
+       
+          </td> 
+             <td style="width:25%">
 
        
           </td>
@@ -73,13 +214,15 @@
                      <th   style="font-size:14px;font-weight:bold;color:#000">N°OP Annulation</th>
                      <th   style="font-size:14px;font-weight:bold;color:#000">N°OP Definitif</th>
                    
-                    <th   style="font-size:14px;font-weight:bold">Objet Op</th>
+                    <th   style="font-size:14px;font-weight:bold">Objet OP</th>
                     <th   style="font-size:14px;font-weight:bold">UA</th>
                     <!-- <th   style="font-size:14px;font-weight:bold">Sous Budget</th> -->
                      <!-- <th   style="font-size:14px;font-weight:bold">Montant Autorisé</th> -->
                     <th   style="font-size:14px;font-weight:bold">Engagement actuel</th>
-                              
+                             <th   style="font-size:14px;font-weight:bold">Service Réalite</th> 
+                             <th   style="font-size:14px;font-weight:bold">Fiche Annexe</th> 
                     <th   style="font-size:14px;font-weight:bold">Décision CF</th>
+                     <th   style="font-size:14px;font-weight:bold">Supprimer</th>
                     
                      <!-- <th   style="font-size:14px;font-weight:bold">Décision OP Annulation</th>
                      <th   style="font-size:14px;font-weight:bold">Décision OP Definitive</th> -->
@@ -122,19 +265,32 @@
  <td v-else style="background-color:lightblue"></td>
 
          
-                     <td v-if="type.marche_id != null"
+                     <!-- <td v-if="type.marche_id != null"
                       style="font-size:14px;font-weight:bold"
-                    >{{libelleMarche(type.marche_id) || 'Non renseigné'}}</td>
-                    <td v-else
+                    >{{libelleMarche(type.marche_id) || 'Non renseigné'}}</td> -->
+                    <td 
                       style="font-size:14px;font-weight:bold"
                     >{{type.odjet_autre_depense || 'Non renseigné'}}</td>
                      <td
                       style="font-size:14px;font-weight:bold"
                     >{{libelleUa(type.unite_administrative_id) || 'Non renseigné'}}</td>
-                    
-                    <td
+                     <td
                        style="font-size:14px;font-weight:bold;text-align:center"
                     >{{formatageSomme(parseFloat(type.montant_ordre_paiement)) || 'Non renseigné'}}</td>
+                     <td v-if="type.type_ordre_paiement==1 || type.type_ordre_paiement==4">
+                                              <router-link :to="{ name: 'ficheServiceRealiteFait', params: { id: type.id }}"
+                class="btn btn-success " title="Editer Fiche">
+                  <span class="" style="font-size:14px;font-weight:bold"><i class=" icon-print"></i>  S/Réalite fait</span>
+                   </router-link>
+                    </td>
+                    <td v-else style="background-color:lightblue"></td>
+                    <td v-if="type.type_ordre_paiement==1 || type.type_ordre_paiement==4">
+                                              <router-link :to="{ name: 'FicheAnnexe', params: { id: type.id }}"
+                class="btn btn-danger" title="Editer Fiche de controle">
+                  <span class="" style="font-size:14px;font-weight:bold"><i class=" icon-print"></i>  Fiche Annexe</span>
+                   </router-link>
+                    </td>
+                   <td v-else style="background-color:lightblue"></td>
                      <td>
                         <button v-if="type.decision_cf==8"  class="btn  btn-success tailBtn"  @click="apercuFacture(type.id)">                        
                      
@@ -168,76 +324,14 @@
                     
                       </button>
                     </td>
-                    
+                    <td>
+                      <button class="btn btn-danger" @click="supprimerGestionOrdrePaiement(type.id)">
+                        <span>
+                          <i class="icon icon-trash"> Supprimer</i>
+                        </span>
+                      </button>
+                    </td>
                    
-                    <!-- <td v-if="type.id==afficheDecisionOpAnuulation1(type.id)">
-<button v-if="afficheDecisionOpAnuulation(type.id) == 8"  class="btn  btn-success tailBtn"  @click="ModalOpAnnulation(type.id)">                        
-                     
-                      <span   style="font-weight:bolder;color:#fff;font-size:18px" >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 2" class="btn  btn-warning tailBtn" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      
-                       <span style="font-weight:bolder;color:#fff;font-size:18px" >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="afficheDecisionOpAnuulation(type.id) == 3" class="btn  btn-danger tailBtn" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      
-                       <span  style="font-weight:bolder;color:#fff;font-size:18px">Réjeté</span>
-                      
-                    
-                      </button>
-                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 9"  class="btn  btn-success tailBtn" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      <span style="font-weight:bolder;color:#fff;font-size:18px">Visé avec observation</span>
-                      
-                      </button>
-                      <button v-else class="btn  btn-info tailBtn" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      
-                       <span style="font-weight:bolder;color:#fff;font-size:18px">Attente</span>
-                      
-                    
-                      </button>
-                    </td>
-                    <td v-else style="background-color:lightblue"></td> -->
-                    <!-- <td v-if="type.decision_cf_definitif != null">
-                         <button v-if="type.decision_cf_definitif==8"  class="btn  btn-success tailBtn"  @click="DecisionDefinitifCf(type.id)">                        
-                     
-                      <span  style="font-weight:bolder;color:#fff;font-size:18px"  >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="type.decision_cf_definitif == 2" class="btn  btn-warning tailBtn" @click="DecisionDefinitifCf(type.id)">                        
-                     
-                      
-                       <span  style="font-weight:bolder;color:#fff;font-size:18px">Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="type.decision_cf_definitif == 3" class="btn  btn-danger tailBtn" @click="DecisionDefinitifCf(type.id)">                        
-                     
-                      
-                       <span style="font-weight:bolder;color:#fff;font-size:18px" >Réjeté</span>  
-                      
-                    
-                      </button>
-                       <button v-else-if="type.decision_cf_definitif == 9"  class="btn  btn-success tailBtn" @click="DecisionDefinitifCf(type.id)">                        
-                     
-                      <span title="Visé avec observation" style="font-weight:bolder;color:#fff;font-size:18px" >Visé O</span>
-                      
-                      </button>
-                     <button v-else class="btn  btn-info tailBtn" @click="DecisionDefinitifCf(type.id)" >                        
-                     
-                      
-                       <span style="font-weight:bolder;color:#fff;font-size:18px">Attente</span>
-                      
-                    
-                      </button>
-                    </td>
-                    <td v-else style="background-color:lightblue"></td> -->
                     </tr>
                 </tbody>
               </table>
@@ -580,35 +674,52 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
+       <fab :actions="fabActions"
+                main-icon="apps"
+          
+        @searchMe="filter"
+         
+        bg-color="green"
+
+  ></fab>
+    <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
+<button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
   </div>
 </template>
   
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { formatageSomme } from "@/Repositories/Repository";
+import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
+   components: {
+    
+    ModelListSelect,
+     
+  },
   name:'typetext',
   data() {
     return {
       fabActions: [
-        {
-          name: "cache",
-          icon: "add"
-        }
-        // {
-        //   name: "alertMe",
-        //   icon: "add_alert",
-        //   class: ""
-        // }
+       {
+                  name: 'searchMe',
+                   icon: "search"
+              }
       ],
       json_fields: {
         CODE: "code",
         LIBELLE: "libelle"
       },
+        affiche_filtre:false,
+      affiche_boutton_filtre:true,
       formData: {
         code: "",
         libelle: ""
       },
+      entre_id:"",
+      typemarche_id:"",
+      uniteAdministrative_id:"",
       editMandat: {
         
       },
@@ -623,7 +734,7 @@ export default {
             ...mapGetters('personnelUA', ["salairesActeur","personnaliseActeurDepense","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","affichePersonnelRecuActeNormination"]),
-    ...mapGetters("bienService", ["gettersgestionOrdrePaiementAnnulation","gettersgestionOrdrePaiement","gettersDossierAutreDepense","gettersDossierMandat","gettersDossierFacturePiece","typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+    ...mapGetters("bienService", ["typeMarches","gettersgestionOrdrePaiementAnnulation","gettersgestionOrdrePaiement","gettersDossierAutreDepense","gettersDossierMandat","gettersDossierFacturePiece","typeFactures","gettersDemandeEngagement","gettersnomPieceJustificative","modepaiements","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
@@ -632,9 +743,27 @@ export default {
    ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe','planActe']),
 ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
+   ...mapGetters("gestionMarche", ["entreprises"]),
   ...mapGetters("uniteadministrative", ["budgetEclate","groupeLigneEconomiqueBudget","getSousBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
+
+
+NombreTotalOP() {
+      
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.diff_op== null).length
+
+    },
+// afficheNumeroOpDefinitive() {
+//       return id => {
+//         if (id != null && id != "") {
+//            return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.id == id && type_ordre_paiement).length;
+
+//       };
+//     },
+
+
+
 
    afficheNumeroOpDefinitive() {
       return id => {
@@ -902,9 +1031,13 @@ recupererIdUser() {
   methods: {
     ...mapActions("bienService", [
       "modifierGestionOrdrePaiement",
-     "modifierGestionOrdrePaiementAnnulat"
+     "modifierGestionOrdrePaiementAnnulat",
+     "supprimerGestionOrdrePaiement"
     ]),
-    
+    filter(){
+                this.affiche_filtre=!this.affiche_filtre
+               
+            },
     ajouterLiquidation(){
                 this.$router.push({ name: 'AjouterOrdrePaiementAnnulation' })
             },

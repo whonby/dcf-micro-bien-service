@@ -186,7 +186,7 @@ recupereMontantEmpruntTotal
                   
                    <td colspan="3">
               <div class="control-group">
-                <label class="control-label">Activité{{idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)}}</label>
+                <label class="control-label">Activité</label>
                 <div class="controls">
                   <select v-model="formData.activite_id" class="span" style="border:1px solid #000">
                     <option></option>
@@ -227,7 +227,7 @@ recupereMontantEmpruntTotal
                      </td>
                        <td colspan="2">
               <div class="control-group">
-                <label class="control-label">Ligne budgetaire{{formData.ligne_budgetaire_parent_id}}</label>
+                <label class="control-label">Ligne budgetaire</label>
                 <div class="controls">
                  
  <select v-model="formData.ligne_budgetaire_parent_id" class="span" style="border:1px solid #000" >
