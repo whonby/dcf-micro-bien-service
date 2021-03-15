@@ -31,6 +31,12 @@
             <span>RAPPORT MARCHE</span>
           </a>
         </li>
+        <li :class="{active: active_el == 92 }" @click.prevent="navigateToTableaupluriannuel" >
+          <a href="#">
+            <i class="icon-group"></i>
+            <span>TABLEAU PLURI-ANNUEL</span>
+          </a>
+        </li>
         <!-- <li :class="{active: active_el == 90 }" @click.prevent="navigateToRapportVehicule" >
           <a href="#">
             <i class="icon-group"></i>
@@ -223,10 +229,10 @@ navigateToSuiviMarcheProjetpARtYPEmArche(){
           name: ''
         })
       },
-navigateToRapportVehicule(){
-        this.activate(90)
+navigateToTableaupluriannuel(){
+        this.activate(92)
         this.$router.push({
-          name: ''
+          name: 'tableauPluriannuel'
         })
       },
        navigateToUniteAdministrative(){
