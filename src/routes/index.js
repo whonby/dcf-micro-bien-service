@@ -9,7 +9,7 @@ import CartographieRoute from "./cartographie/CartographieRoute"
 // les routes module unite administrative = gestion unite administrative
 import UniteAdministativeRoute from "./unite_administrative/UniteAdministativeRoute";
 
-
+import TableauBordGeneral from "./tableau_bord/TableauBordGeneral"
 
 // les routes de parametres generaux admoinistratifs
 import AdministratifRoutesAdoni from './parametres_generaux/AdministratifRoutesAdoni'
@@ -44,8 +44,8 @@ import BienServiceRoutes from './bien_service/BienServiceRoutes';
 // la route de l'investissement
 import investissementRoutes from './investissement/investissementRoutes';
 
-// authentitification 
-import AuthRoutes from './auth/AuthRoutes' 
+// authentitification
+import AuthRoutes from './auth/AuthRoutes'
 import RouteDocumentation from "./documentation/RouteDocumentation"
 
 // les differentes rouetes de marches hors sib
@@ -57,6 +57,7 @@ Vue.use(VueRouter);
 
 
 const regroupementDesRoutes = [
+  TableauBordGeneral,
   AuthRoutes,
   ActeurDepenseRoutes,
   RouteDocumentation,

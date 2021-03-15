@@ -23,8 +23,8 @@
       <span class="user-level" style="color:#ffffff;font-size:14px">({{afficheRoleUtilisateur}})</span>
 		</center>
        </li>
-       
-       
+
+
         <li :class="{active: active_el == 35 }" @click.prevent="navigateTobudget">
           <a title="TABLEAU DE BORD DU BUDGET" href="#">
             <i class="icon-dashboard"></i>
@@ -44,7 +44,7 @@
           </a>
         </li>
          <li @click.prevent="navigateRetourAuMenu" >
-          <a title="Carte des infrastructure pas regions" href="#"> 
+          <a title="Carte des infrastructure pas regions" href="#">
             <i class=" icon-arrow-left"></i>
             <span>RETOUR AU MENU</span>
             <span class="label label-important"></span>
@@ -52,10 +52,10 @@
         </li>
         <!-- <li >
            <router-link :to="{ name: 'pagePresentation'}" tag="a"  >
-         
+
             <i class="icon-arrow-left"></i>
             <span>RETOUR AU MENU</span>
-           
+
           </router-link>
         </li> -->
         <!-- <li @click.prevent="navigateToUniteAdministrative" :class="{active: active_el == 1 }">
@@ -102,13 +102,13 @@
           <a title="INVESTISSEMENT" href="#">
             <i class="icon-truck"></i>
             <span>INVESTISSEMENT</span>
-           
+
           </a>
         </li>
-        
-        
-       
-     
+
+
+
+
           <li @click.prevent="navigateToCatographieBudgetaire" :class="{active: active_el ==8}">
           <a title="CARTOGRAPHIE" href="#">
             <i class=" icon-globe"></i>
@@ -144,7 +144,7 @@ import {mapGetters, mapState, mapMutations, mapActions } from "vuex";
 import {admin,dcf,cf} from "../Repositories/Auth"
 
 export default {
-   
+
   mounted() {
     // console.log(this.$store.state);
   },
@@ -191,7 +191,7 @@ return objJson.id
   },
 
   methods: {
-   
+
       ...mapMutations('parametrageMenu', ['activate']),
       ...mapActions('Utilisateurs', ['logoutUser']),
     admin:admin,
@@ -209,17 +209,17 @@ return objJson.id
           name: ''
         })
       },
-      
+
  navigateTobudget(){
         this.activate(35)
         this.$router.push({
-          name: 'tableaudebordbudg'
+          name: 'TableauBordGeneralBugdet'
         })
       },
       navigateTomarche(){
         this.activate(36)
         this.$router.push({
-          name: 'tableaubordmarch'
+          name: 'TableauBordGeneralMarche'
         })
       },
 navigateToGestionMarche(){
@@ -269,7 +269,7 @@ navigateToGestionMarche(){
           name: 'marcheHorsib'
         })
       },
-      
+
        navigateToComptaMatiere(){
         this.activate(5)
         this.$router.push({
@@ -293,7 +293,7 @@ navigateToGestionMarche(){
 //       },
 //       navigateGestionUser(){
 //           this.activate(21)
-//           this.$router.push({ 
+//           this.$router.push({
 //               name: 'Groupe'
 //           })
 //       },

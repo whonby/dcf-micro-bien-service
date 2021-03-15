@@ -1,6 +1,8 @@
 import suiviDesEntreprise from "../../pages/Gestion_des_Rapports/suiviDesEntreprise";
 
 import ficheSuivi from "../../pages/Gestion_des_Rapports/ficheSuivi";
+import tableauPluriannuel from "../../pages/Gestion_des_Rapports/tableauPluriannuel";
+
 
 import tableaudebordbudg from "../../pages/bien_service/Tableau_de_bord/tableaudebordbudg.vue";
 import tableaubordmarch from "../../pages/bien_service/Tableau_de_bord/tableaubordmarch.vue";
@@ -13,6 +15,11 @@ import FicheAnnexeDeControle from "../../pages/Gestion_des_Rapports/FicheAnnexeD
 import ficheSuiviGlobalMarche from "../../pages/Gestion_des_Rapports/marcheHorsSib/ficheSuiviGlobalMarche";
 import suiviEvaluationEntreprise from "../../pages/Gestion_des_Rapports/suiviEvaluationEntreprise.vue";
 const gestionrapport =[
+    {
+        path:"/tableauPluriannuel",
+        name:"tableauPluriannuel",
+        component:tableauPluriannuel
+    },
     {
         path:"/tableaudebordbudg",
         name:"tableaudebordbudg",
