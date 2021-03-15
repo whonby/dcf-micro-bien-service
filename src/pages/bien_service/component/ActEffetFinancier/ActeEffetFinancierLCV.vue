@@ -1052,9 +1052,13 @@ avance_demarrage_ht
               <div class="control-group">
                 <label class="control-label">Compte</label>
                  <select v-model="editActeEffetFinancier.compte_id" class="span" >
+                   <option v-for="varText in afficherCompteDynamique(recuperIdModePassation(macheid),recupererIdBanque(editActeEffetFinancier.banq_id))" :key="varText.id"
+                            :value="varText.id">{{varText.rib}}</option>
+                  </select>
+                 <!-- <select v-model="editActeEffetFinancier.compte_id" class="span" >
                     <option v-for="varText in afficherCompteDynamique(editActeEffetFinancier.banq_id)" :key="varText.id"
                             :value="varText.id">{{afficherLibelleCompteRib(varText.banq_id)}}</option>
-                  </select>
+                  </select> -->
                 <!-- <div class="controls " >
                   <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
 

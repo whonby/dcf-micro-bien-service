@@ -439,7 +439,7 @@
                 <div class="controls">
                   <input
                     type="number"
-                    v-model="editBailleur.tauxBailler"
+                    v-model="editBailleur.tauxbailleur"
               
                     class="span"
                  

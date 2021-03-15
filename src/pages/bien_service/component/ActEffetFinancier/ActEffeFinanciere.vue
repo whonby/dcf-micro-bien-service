@@ -1,13 +1,9 @@
-avance_demarrage_ht
 <template>
 <div>
   <div id="exampleModalValidationdirecteur" class="modal hide valDirecteur">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Date de Réception du marché
-
-          
-        </h3>
+        <h3>Ajouter Date de Réception du marché</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -1162,7 +1158,7 @@ avance_demarrage_ht
               <div class="control-group">
                 <label class="control-label">Date de début d'exécution prévisionnelle</label>
                 <div class="controls">
-                  <input type="date" v-model="date_debut_previsionnelModifier"
+                  <input type="date" v-model="editActeEffetFinancier.date_odre_service"
                          class="span"
                          placeholder=""
                   />
@@ -3132,7 +3128,9 @@ afficherModalModifierService(id) {
         keyboard: false
       });
 
+
       this.editActeEffetFinancier = this.acteEffetFinanciers.find(item=>item.id==id)
+      console.log(this.editActeEffetFinancier)
        // console.log(this.editActeEffetFinancier)
         this.infoLot=this.getMarchePersonnaliser.find(item=>item.id==this.editActeEffetFinancier.marche_id)
         this.marche_lot=this.editActeEffetFinancier.marche_id

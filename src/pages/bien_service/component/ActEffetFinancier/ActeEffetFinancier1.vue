@@ -296,7 +296,7 @@ avance_demarrage_ht
               <div class="control-group">
                 <label class="control-label">Compte</label>
                  <select v-model="formEffetFinancier.compte_id" class="span" :readOnly="veifEquipementExist">
-                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.entreprise_id,afficherBanqueDynamiqueId(formEffetFinancier.banq_id))" :key="varText.id"
+                    <option v-for="varText in afficherCompteDynamique(formEffetFinancier.entreprise_id,afficherBanqueId(formEffetFinancier.banq_id))" :key="varText.id"
                             :value="varText.id">{{varText.rib}}</option>
                   </select>
                 
@@ -1069,17 +1069,22 @@ avance_demarrage_ht
               </div>
             </td>
              <td>
-              <div class="control-group">
+               <div class="control-group">
+                <label class="control-label">Compte</label>
+                 <select v-model="editActeEffetFinancier.compte_id" class="span" >
+                    <option v-for="varText in afficherCompteDynamique(editActeEffetFinancier.entreprise_id,afficherBanqueId(editActeEffetFinancier.banq_id))" :key="varText.id"
+                            :value="varText.id">{{varText.rib}}</option>
+                  </select>
+                
+              </div>
+              <!-- <div class="control-group">
                 <label class="control-label">Compte</label>
                  <select v-model="editActeEffetFinancier.compte_id" class="span" >
                     <option v-for="varText in afficherCompteDynamique(editActeEffetFinancier.banq_id)" :key="varText.id"
                             :value="varText.id">{{afficherLibelleCompteRib(varText.banq_id)}}</option>
                   </select>
-                <!-- <div class="controls " >
-                  <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
-
-                </div> -->
-              </div>
+               
+              </div> -->
 
             </td>
 
@@ -2926,11 +2931,11 @@ editAvanceDemarrageMontantTTC(){
     afficherBanqueId(){
       return id =>{
         if(id != null && id !=""){
-          var  resultat = this.comptes.find(element => element.id== id);
+          var  resultat = this.comptes.find(element => element.id==id);
           if(resultat){
-            return resultat.banque_id
+            return resultat.banq_id
           }
-          return 0
+          return null
         }
       }
     },
@@ -2995,6 +3000,18 @@ recupererIdBanque() {
 
 
 
+
+    // afficherBanqueId(){
+    //   return id =>{
+    //     if(id != null && id !=""){
+    //       let ObjetId =this.comptes.find(element => element.id== id)
+    //       if(ObjetId){
+    //         return ObjetId.banq_id
+    //       }
+
+    //     }
+    //   }
+    // },
 
     afficherEntrepriseId(){
       return id =>{
@@ -3308,8 +3325,8 @@ var nouvelObjet = {
         marche_id:this.marche_lot,
         marchegeneral_id:this.affichieridMarcheGlobal(this.marche_lot),
           sous_traitance_array:this.structure_id,
-        banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
-        compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
+       // banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
+       // compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
       }
 
       console.log(nouvelObjet)
@@ -3378,8 +3395,8 @@ avance_demarrage_ttc:0,
         marche_id:this.marche_lot,
         marchegeneral_id:this.affichieridMarcheGlobal(this.marche_lot),
           sous_traitance_array:this.structure_id,
-        banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
-        compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
+      //  banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
+       // compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
       }
 
       console.log(nouvelObjet)
