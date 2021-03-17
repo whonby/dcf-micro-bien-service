@@ -143,7 +143,25 @@ import AjoutOrdrePaiementRegieAnnulation from "../../pages/ExecutionBudgetaire/B
 import AjoutOrdrePaiementRegieDefinitive from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/AjoutOrdrePaiementRegieDefinitive.vue"
 
 import TestTableaux from "../../pages/ExecutionBudgetaire/BudgetEclateRegie/OrdrePaiementRegie/TestTableau.vue"
+import FicheAnnexe from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/FicheAnnexe.vue"
+import ficheServiceRealiteFait from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/ficheServiceRealiteFait.vue"
+import VoirDetailAutreFiche from "../../pages/ExecutionBudgetaire/gestionDesOrdrePaiement/VoirDetailAutreFiche.vue"
 const BienServiceRoutes = [
+    {
+        path: "/VoirDetailAutreFiche/:id",
+        name: "VoirDetailAutreFiche",
+        component: VoirDetailAutreFiche
+    },
+    {
+        path: "/FicheAnnexe/:id",
+        name: "FicheAnnexe",
+        component: FicheAnnexe
+    },
+    {
+        path: "/ficheServiceRealiteFait/:id",
+        name: "ficheServiceRealiteFait",
+        component: ficheServiceRealiteFait
+    },
     {
         path: "/listeDesBudgetVentilleRegie/:id",
         name: "listeDesBudgetVentilleRegie",

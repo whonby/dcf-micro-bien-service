@@ -1,4 +1,4 @@
-numero_ordrepaiement
+CreditAutorise
 <template>
 
 <div class="container-fluid">
@@ -14,7 +14,7 @@ numero_ordrepaiement
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Ajouter Ordre Paiement{{formData.type_ordre_paiement}}</h5>
+              <h5>Ajouter Ordre Paiement</h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -104,7 +104,7 @@ numero_ordrepaiement
             </td>
              <td>
               <div class="control-group">
-                <label class="control-label">Programme/Dotation{{tailleOpEnregistrer}}</label>
+                <label class="control-label">Programme/Dotation</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -166,53 +166,9 @@ numero_ordrepaiement
                   </div>
                 </div>
               </td>
-               <td>
-                <div class="control-group">
-                  <label class="control-label">Sous Bugdet</label>
-                  <div class="controls">
-                    <select v-model="formData.sous_budget_id" class="span" style="border:1px solid #000">
-                     <option></option>
-                      <option
-                        v-for="gdenature in RecupererSousBudget(formData.unite_administrative_id,formData.activite_id)"
-                        :key="gdenature.id"
-                        :value="gdenature.id"
-                      >{{gdenature.activite_enfant}}</option>
-                    </select>
-                     
-                  </div>
-                </div>
-              </td>
+              
               <td>
-                 <template v-if="comparaison(this.formData.activite_id)==this.formData.activite_id">
-                        
-
-                      
-              <div class="control-group">
-                <label class="control-label">Classification Economique</label>
-                <div class="controls">
-                 
- <select v-model="formData.ligne_economique_id" class="span" style="border:1px solid #000" >
-                     <option></option>
-                     <option
-                        v-for="typeFact in afficheLesSousBudgetLigneBudgetaire(formData.activite_id,formData.sous_budget_id)"
-                        :key="typeFact.id"
-                        :value="typeFact.ligneeconomique_id"
-                      >{{libelleLigneEconomique(typeFact.ligneeconomique_id)}}</option>
-                  </select>
-              
-                 
-                </div>
-              </div>
-              
-                     
-                    
-                     
-
-                     </template>
-                    <template v-else>
-                        
-
-                      
+                  
               <div class="control-group">
                 <label class="control-label">Classification Economique</label>
                 <div class="controls">
@@ -233,7 +189,7 @@ numero_ordrepaiement
             
                      
 
-                     </template>
+                     
               </td>
                
                
@@ -396,7 +352,7 @@ numero_ordrepaiement
                      readonly
                     type="text"
                     style="border:1px solid #000"
-                   :value="Numero_Nom_Entreprise(formData2.nom_entreprise_id)"
+                   :value="Numero_Nom_Entreprise(idEntreprise(formData2.marche_id))"
                     class="span"
                    
             
@@ -666,6 +622,24 @@ numero_ordrepaiement
                           </div>
                         </td>
                         </tr>
+                         <tr>
+                          <td colspan="4">
+                         <div class="control-group">
+                            <label class="control-label">OBJET DECOMPTE</label>
+                            <div class="controls">
+                              
+                      <input
+               
+                    type="text"
+                    style="border:1px solid #000"
+                  v-model="formData12.objet_decompte"
+                    class="span"
+                  
+                  />
+                            </div>
+                          </div>
+                        </td>
+                        </tr>
                         <tr>
                           <td>
                          <div class="control-group">
@@ -676,7 +650,7 @@ numero_ordrepaiement
                   
                     type="text"
                     style="border:1px solid #000"
-                   :value="livrable(formData2.marche_id)"
+                   
                     class="span"
                     readonly
                   />
@@ -987,7 +961,7 @@ numero_ordrepaiement
                 <label class="control-label">Crédits autorisés (A)</label>
                 <div class="controls">
                  
-                  <money :value="fonctionPourVideLeChamp"  readOnly  style="text-align:left;color:red"  class="span"></money>
+                  <money :value="cumulAnterieurUa(formData.unite_administrative_id,formData.ligne_economique_id)"  readOnly  style="text-align:left;color:red"  class="span"></money>
                  
                  
                 </div>
@@ -999,7 +973,7 @@ numero_ordrepaiement
                 <label class="control-label">Engagements antérieurs (B)</label>
                 <div class="controls">
                  
-                  <money :value="CreditAutoriseTresor(formData.ligne_economique_id)" readOnly style="text-align:left;color:red"  class="span"></money>
+                  <money :value="cumulAnterieurUa(this.formData.unite_administrative_id,this.formData.ligne_economique_id)" readOnly style="text-align:left;color:red"  class="span"></money>
                 
                 </div>
               </div>
@@ -1844,6 +1818,9 @@ components: {
                 },
                 formData45:{},
                 formData7:{},
+                formData12:{
+                  objet_decompte:""
+                },
  formData1:{
               date_piece:"" ,
               reference:""  ,
@@ -1871,7 +1848,7 @@ components: {
             ...mapGetters('personnelUA', ["FichierJoinDmdEngagement","salairesActeur","personnaliseActeurDepense","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","affichePersonnelRecuActeNormination"]),
-             ...mapGetters("uniteadministrative", ["budgetEclate","groupeLigneEconomiqueBudget","getSousBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
+             ...mapGetters("uniteadministrative", ["BudgetEclateRegie","budgetEclate","groupeLigneEconomiqueBudget","getSousBudget","groupeActiviteBudgetRegie","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             // ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
@@ -1989,15 +1966,15 @@ recupererIdUser() {
       };
     },
 
- fonctionPourVideLeChamp(){
-if(this.comparaison(this.formData.activite_id)==this.formData.activite_id){
-  return this.CreditAutoriseSousBudget(this.formData.sous_budget_id,this.formData.ligne_economique_id)
+//  fonctionPourVideLeChamp(){
+// if(this.comparaison(this.formData.activite_id)==this.formData.activite_id){
+//   return this.CreditAutoriseSousBudget(this.formData.sous_budget_id,this.formData.ligne_economique_id)
   
-}
-else{
-return this.CreditAutorise(this.formData.unite_administrative_id,this.formData.ligne_economique_id)
-}
-    },
+// }
+// else{
+// return this.CreditAutorise(this.formData.unite_administrative_id,this.formData.ligne_economique_id)
+// }
+//     },
 CreditAutoriseSousBudget() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
@@ -2013,7 +1990,7 @@ CreditAutoriseSousBudget() {
 CreditAutorise() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id && qtreel.ligneeconomique_id==id1);
+           const qtereel = this.BudgetEclateRegie.find(qtreel => qtreel.uniteadministrative_id == id && qtreel.ligneeconomique_id==id1);
 
       if (qtereel) {
         return qtereel.dotation
@@ -2026,7 +2003,7 @@ CreditAutorise() {
       RecupererlibelleLigneEconomique() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.activite_id==id1 && qtreel.sous_budget_id==0);
+           return this.BudgetEclateRegie.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.activite_id==id1);
 
       
         }
@@ -2092,7 +2069,7 @@ CreditAutorise() {
 filtrerActivite() {
       return (id) => {
         if (id != null && id != "") {
-           return this.groupeActiviteBudget.filter(qtreel => qtreel[0].ua_id == id && qtreel[0].actived==1 && qtreel[0].exercicebudget_id==this.anneeAmort);
+           return this.groupeActiviteBudgetRegie.filter(qtreel => qtreel[0].uniteadministrative_id == id && qtreel[0].annebudgetaire==this.anneeAmort);
 
       
         }
@@ -2365,6 +2342,15 @@ CumulDemande: function () {
     //     }
     //   };
     // },
+     cumulAnterieurUa() {
+      return (id,id1) => {
+        if (id != null && id != "" && id1 != null && id1 != "") {
+           return this.gettersgestionOrdrePaiement.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.ligne_economique_id==id1 && qtreel.diff_op==1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ordre_paiement), 0).toFixed(0);
+
+    
+        }
+      };
+    },
     CreditAutoriseTresor() {
       return id => {
         if (id != null && id != "") {
@@ -3063,6 +3049,7 @@ AjouterOrdrePaiement(){
  if(this.formData.type_ordre_paiement==1){
 if(this.formData.typedepense=='Marche'){
   this.intitule=this.anneeAmort +"-"+ this.tailleOpEnregistrer + "-" + this.formData.numero_ordre_paiement
+  this.intitule2=this.objetMarche(this.formData2.marche_id) +"/" + this.formData12.objet_decompte
   var nouvelObjetOrdrePaiement = {
         exercice:this.anneeAmort,
         	type_ordre_paiement:this.formData.type_ordre_paiement,
@@ -3078,6 +3065,7 @@ if(this.formData.typedepense=='Marche'){
           marche_id:this.formData2.marche_id,
           type_financement_id:this.formData.type_financement_id,
           typedepense:this.formData.typedepense,
+          odjet_autre_depense:this.intitule2,
            source_financement_id:this.formData.bailler_id,
         	montant_ordre_paiement:this.formData2.montant_engage,
           mode_paiement_id:this.formData.mode_paiement_id,
@@ -3129,8 +3117,8 @@ if(this.formData.typedepense=='Marche'){
           sous_budget_id:this.formData.sous_budget_id,
           activite_id:this.formData.activite_id,
            ligne_economique_id:this.formData.ligne_economique_id,
-        	entreprise_id:this.formData2.nom_entreprise_id,
-          marche_id:this.formData2.marche_id,
+        	// entreprise_id:this.formData2.nom_entreprise_id,
+          // marche_id:this.formData2.marche_id,
           diff_op:1,
           
          
@@ -3194,6 +3182,7 @@ if(this.formData.typedepense=='Marche'){
  else{
 if(this.formData.typedepense=='Marche'){
   this.intitule=this.anneeAmort +"-"+ this.tailleOpEnregistrer + "-" + this.formData.numero_ordre_paiement
+   this.intitule2=this.objetMarche(this.formData2.marche_id) +"/" + this.formData12.objet_decompte
   var nouvelObjetOrdrePaiement12 = {
         exercice:this.anneeAmort,
         	type_ordre_paiement:this.formData.type_ordre_paiement,
@@ -3212,7 +3201,7 @@ if(this.formData.typedepense=='Marche'){
            source_financement_id:this.formData.bailler_id,
         	montant_ordre_paiement:this.formData2.montant_engage,
           mode_paiement_id:this.formData.mode_paiement_id,
-
+odjet_autre_depense:this.intitule2,
           diff_op:1,
           
           

@@ -101,10 +101,10 @@
                   </tr>
                   <tr>
                     <th style="font-size:14px;color:#000;">LIGNE BUDGETAIRE</th>
-                    <th style="font-size:14px;color:#000;">ETAT</th>
-                    <th style="font-size:14px;color:#000;">DON</th>
-                    <th style="font-size:14px;color:#000;">EMPRUNT</th>
-                    <th style="font-size:14px;color:#000;">BUDGET TOTAL</th>
+                    <th style="font-size:14px;color:#000;">ETAT (F CFA)</th>
+                    <th style="font-size:14px;color:#000;">DON (F CFA)</th>
+                    <th style="font-size:14px;color:#000;">EMPRUNT (F CFA)</th>
+                    <th style="font-size:14px;color:#000;">BUDGET TOTAL (F CFA)</th>
                     
                   </tr>
                 </thead>
@@ -115,20 +115,20 @@
                    
                     <td style="font-size:14px;color:#000;" v-if="type.variation_budget==0">{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}</td>
                     <td style="font-size:14px;color:#000;" v-else>{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}<span style="color:red;font-size:35px">*</span></td>
-                      <td style="font-size:14px;text-align:center;color:#000;">{{formatageSomme(parseFloat(type.tresor)) || 'Non renseigné'}}</td>
-                      <td style="font-size:14px;text-align:center;color:#000;">{{formatageSomme(parseFloat(type.don)) || 'Non renseigné'}}</td>
-                   <td style="font-size:14px;text-align:center">{{formatageSomme(parseFloat(type.emprunt)) || 'Non renseigné'}}</td>
+                      <td style="font-size:14px;text-align:center;color:#000;">{{formatageSommeSansFCFA(parseFloat(type.tresor)) || 'Non renseigné'}}</td>
+                      <td style="font-size:14px;text-align:center;color:#000;">{{formatageSommeSansFCFA(parseFloat(type.don)) || 'Non renseigné'}}</td>
+                   <td style="font-size:14px;text-align:center">{{formatageSommeSansFCFA(parseFloat(type.emprunt)) || 'Non renseigné'}}</td>
 
                     <td style="font-size:14px;text-align:center;" >
-                     {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
+                     {{formatageSommeSansFCFA(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
                      </td>
                   </tr>
                     <tr>
                     <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;">PERSONNEL</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclatePersonnel(detail_marche.uniteadministrative_id)))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelTresor(detail_marche.uniteadministrative_id)))}}</td>
+    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelDon(detail_marche.uniteadministrative_id)))}}</td>
+                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclatePersonnelTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclatePersonnelEmprunt(detail_marche.uniteadministrative_id)))}}</td>
                     
                   </tr>
                    
@@ -136,22 +136,24 @@
                    
                     <td style="font-size:14px;color:#000;" v-if="type.variation_budget==0">{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}</td>
                     <td style="font-size:14px;color:#000;" v-else>{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}<span style="color:red;font-size:35px">*</span></td>
-                      <td style="font-size:14px;text-align:center">{{formatageSomme(parseFloat(type.tresor)) || 'Non renseigné'}}</td>
-                      <td style="font-size:14px;text-align:center">{{formatageSomme(parseFloat(type.don)) || 'Non renseigné'}}</td>
-                   <td style="font-size:14px;text-align:center">{{formatageSomme(parseFloat(type.emprunt)) || 'Non renseigné'}}</td>
+                      <td style="font-size:14px;text-align:center">{{formatageSommeSansFCFA(parseFloat(type.tresor)) || 'Non renseigné'}}</td>
+                      <td style="font-size:14px;text-align:center">{{formatageSommeSansFCFA(parseFloat(type.don)) || 'Non renseigné'}}</td>
+                   <td style="font-size:14px;text-align:center">{{formatageSommeSansFCFA(parseFloat(type.emprunt)) || 'Non renseigné'}}</td>
 
                    <td style="font-size:14px;text-align:center;">
-                     {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
+                     {{formatageSommeSansFCFA(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
                      </td>
                               
                   </tr>
                     <tr>
                     <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;">BIENS ET SERVICES</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclateBienService(detail_marche.uniteadministrative_id)))}}</td>
+                    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceTresor(detail_marche.uniteadministrative_id)))}}</td>
+    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id)))}}</td>
+                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclateBienServiceTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateBienServiceEmprunt(detail_marche.uniteadministrative_id)))}}</td>
                     
+                     <!-- <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclateBienService(detail_marche.uniteadministrative_id)))}}</td>
+                     -->
                   </tr>
                  
                   
@@ -159,21 +161,23 @@
                    
                     <td style="font-size:14px;color:#000;" v-if="type.variation_budget==0">{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}</td>
                     <td style="font-size:14px;color:#000;" v-else>{{libelleLigneEconomique(type.ligneeconomique_id) || 'Non renseigné'}}<span style="color:red;font-size:35px">*</span></td>
-                      <td style="font-size:14px;text-align:center">{{formatageSomme(parseFloat(type.tresor)) || 'Non renseigné'}}</td>
-                      <td style="font-size:14px;text-align:center">{{formatageSomme(parseFloat(type.don)) || 'Non renseigné'}}</td>
-                   <td style="font-size:14px;text-align:center">{{formatageSomme(parseFloat(type.emprunt)) || 'Non renseigné'}}</td>
+                      <td style="font-size:14px;text-align:center">{{formatageSommeSansFCFA(parseFloat(type.tresor)) || 'Non renseigné'}}</td>
+                      <td style="font-size:14px;text-align:center">{{formatageSommeSansFCFA(parseFloat(type.don)) || 'Non renseigné'}}</td>
+                   <td style="font-size:14px;text-align:center">{{formatageSommeSansFCFA(parseFloat(type.emprunt)) || 'Non renseigné'}}</td>
 
                    <td style="font-size:14px;text-align:center;" >
-                     {{formatageSomme(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
+                     {{formatageSommeSansFCFA(parseFloat(type.don)+parseFloat(type.emprunt)+parseFloat(type.tresor)) || 'Non renseigné'}}
                      </td>
                               
                   </tr>
                    <tr>
                     <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;">INVESTISSEMENT</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclateInvestissement(detail_marche.uniteadministrative_id)))}}</td>
+                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementTresor(detail_marche.uniteadministrative_id)))}}</td>
+    <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id)))}}</td>
+                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSommeSansFCFA(parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+                    <td style="font-size:14px;color:#fff;text-align:center;font-weight:bold;background:orange;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclateInvestissementTresor(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementDon(detail_marche.uniteadministrative_id))+parseFloat(SommeDesBudgetaireEclateInvestissementEmprunt(detail_marche.uniteadministrative_id)))}}</td>
+<!--                     
+                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclateInvestissement(detail_marche.uniteadministrative_id)))}}</td> -->
                     
                   </tr>
                   <tr>
@@ -201,7 +205,7 @@
                      <td style="font-size:14px;color:#000;text-align:center;background:red;font-weight:bold;" v-else-if="decisionCfBudgetEclate(detail_marche.uniteadministrative_id) == 3">
                      {{formatageSomme(parseFloat(parseFloat(recupereMontantEtatTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantDonTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantEmpruntTotal(detail_marche.uniteadministrative_id))))}}
                      </td>
-                     <td style="font-size:14px;color:#000;text-align:center;background:#0033ff;font-weight:bold;" v-else>
+                     <td style="font-size:14px;color:#fff;text-align:center;background:#0033ff;font-weight:bold;" v-else>
                      {{formatageSomme(parseFloat(parseFloat(recupereMontantEtatTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantDonTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantEmpruntTotal(detail_marche.uniteadministrative_id))))}}
                      </td>
                    
@@ -330,7 +334,7 @@
 <script>
 
 import { mapGetters, mapActions } from "vuex";
-import {formatageSomme} from "@/Repositories/Repository"
+import {formatageSomme,formatageSommeSansFCFA} from "@/Repositories/Repository"
 import moment from 'moment';
 export default {
   components:{
@@ -601,10 +605,58 @@ decisionCfBudgetEclate() {
         }
       };
     },
+    SommeDesBudgetaireEclatePersonnelTresor() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_id==14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
+
+        }
+      };
+    },
+     SommeDesBudgetaireEclatePersonnelDon() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
+
+        }
+      };
+    },
+     SommeDesBudgetaireEclatePersonnelEmprunt() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 2 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
+
+        }
+      };
+    },
     SommeDesBudgetaireEclateBienService() {
       return (id) => {
         if (id != null && id != "" ) {
            return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+
+        }
+      };
+    },
+     SommeDesBudgetaireEclateBienServiceEmprunt() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclateBienServiceTresor() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_id==14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclateBienServiceDon() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 5 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
 
         }
       };
@@ -621,6 +673,30 @@ decisionCfBudgetEclate() {
       return (id) => {
         if (id != null && id != "" ) {
            return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.dotation), 0).toFixed(0);
+
+        }
+      };
+    },
+      SommeDesBudgetaireEclateInvestissementDon() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_don_id==13).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.don), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclateInvestissementEmprunt() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_emprunt_id==15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.emprunt), 0).toFixed(0);
+
+        }
+      };
+    },
+    SommeDesBudgetaireEclateInvestissementTresor() {
+      return (id) => {
+        if (id != null && id != "" ) {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.grandenature_id == 7 && qtreel.annebudgetaire==this.anneeAmort && qtreel.type_financement_id==14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.tresor), 0).toFixed(0);
 
         }
       };
@@ -950,6 +1026,7 @@ return parseFloat(this.DotationRestantAnneePrecedant(id))-parseFloat(this.CumulM
   this.$htmlToPaper('printMe');
 },
             formatageSomme:formatageSomme,
+            formatageSommeSansFCFA:formatageSommeSansFCFA,
              montantPasEquipment(id){
      
           let montant=parseFloat(this.recupereMontantDon(id))+parseFloat(this.recupereMontantEmprunt(id))

@@ -1,7 +1,139 @@
 
 <template>
+
   <div>
+ <br>
+<br>
+<div  class="row-fluid" v-if="affiche_filtre1" style="margin-top: -20px">
+                <div class="span1">
  
+    
+                </div>
+                <div class="span10 " style="background-color: transparent; !important;">
+                    <table class="table table-bordered table-striped">
+        
+             <td style="width:25%">
+
+       
+          </td>
+            <td style="width:0%;font-weight:bolder;color:#000">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-success" @click.prevent="ajouterOpRegieSysteme" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT</i></button>
+    
+        </div> 
+       
+          </td>
+           <td style="width:0px">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="ajouterOpRegieAnnulation" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT D'ANNULATION</i></button>
+    
+        </div> 
+       
+          </td> 
+           <td style="width:0px">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-primary" @click.prevent="ajouterOpRegieDeffinitif" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER ORDRE DE PAIEMENT DEFINITIF</i></button>
+    
+        </div> 
+       
+          </td> 
+            <td style="width:25%">
+
+       
+          </td>
+            </table>
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <div  class="row-fluid" v-if="affiche_filtre" style="margin-top: -20px">
+                <div class="span1">
+ 
+    
+                </div>
+                <div class="span10 " style="background-color: transparent; !important;">
+                    <table class="table table-striped"  >
+                        <tbody>
+                        <tr>
+                         
+                           
+                          <td colspan="">
+                            <br>
+                           <!-- <div  align="right" style="cursor:pointer;">
+    <button class="btn btn-danger" @click.prevent="filter()" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus">Fermer</i></button>
+    
+        </div>  -->
+                            
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">UNITE ADMINISTRATIVE<a href="#"  style="color: red"></a>
+                                </label>
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="uniteAdministratives"
+                                                   v-model="uniteAdministrative_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder="TOUTES LES UNITES ADMINISTRATIVES"
+                                >
+
+                                </model-list-select>
+                            </td>
+                          <td >
+                                <br>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">TYPE ORDRE PAIEMENT<a href="#"   style="color: red"></a>
+                                </label>
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="options2"
+                                                    v-model="typeop_id"
+                                                    option-value="id"
+                                                   option-text="libelle"
+                                >
+
+                                </model-list-select>
+                              
+                            </td>
+                             <td >
+                              <br>
+                                <label style="color:#000;font-size:14px;font-weight: bolder;">NUMERO ORDRE PAIEMENT<a href="#"  style="color: red"></a>
+                                </label>
+                                <model-list-select style="background-color: #fff;border:2px solid #000"
+                                                   class="wide"
+                                                   :list="listeUniteAdminPasSection"
+                                                   v-model="NumeroOp"
+                                                   option-value="numero_ordre_paiement"
+                                                   option-text="numero_ordre_paiement"
+                                                   placeholder="TOUTES LES UNITES ADMINISTRATIVES"
+                                                   
+                                >
+
+                                </model-list-select>
+                            </td>
+                            
+                        </tr>
+ 
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
@@ -17,8 +149,128 @@
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
+            <div style="font-size:30px;text-align:center;text-decoration:underline;font-weight:bold;">
+          <p >ORDRES DE PAIEMENTS REGIE</p>
+        </div>
             
-          <table class="table table-bordered table-striped">
+            <br>
+              <table class="table table-striped"  >
+        <tr>
+           <td style="width:86%">
+
+       
+          </td>
+          <td>
+             <div  align="right" style="cursor:pointer;">
+    <button class="btn btn-success" @click.prevent="AfficheBoutonAjouter()" style="font-weight:bolder;color:#fff;font-size:25px"><i class="icon icon-plus">AJOUTER ORDRE PAIEMENT</i></button>
+    
+        </div>
+          </td>
+          </tr> 
+        </table>
+           <table class="table table-bordered table-striped">
+             <td style="width:10%">
+
+       
+          </td>
+            <td style="width:0%;font-weight:bolder;color:#000">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-success"  style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon-hand-up"> TOTAL ORDRE PAIEMENT</i></button>
+    <br>
+    <br>
+  <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> En Attente</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPTotalEnttente}}</span>
+   <br>
+     <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Vise</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPTotalVise}}</span>
+    <br>
+     <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Differé</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPTotalDiffere}}</span>
+    <br>
+     <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Rejeté</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPTotalRejete}}</span>
+     <br>
+      <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Total Ordre paiement</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{OPTotal}}</span>
+    
+        </div> 
+       
+          </td>
+          <td style="width:0%;font-weight:bolder;color:#000">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-info"  style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon-hand-up"> ORDRE PAIEMENT DIRECT</i></button>
+    <br>
+      <br>
+  <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> En Attente</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPDIRECTEnttente}}</span>
+   <br>
+     <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Vise</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPDIRECTVise}}</span>
+    <br>
+     <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Differé</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPDIRECTDiffere}}</span>
+    <br>
+     <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Rejeté</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPDIRECTRejete}}</span>
+     <br>
+      <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Total OP Direct</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPDIRECT}}</span>
+    
+        </div> 
+       
+          </td>
+             <td style="width:0%;font-weight:bolder;color:#000">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-success"  style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon-hand-up"> ORDRE PAIEMENT PROVISOIRE</i></button>
+      <br>
+    <br>
+  <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> En Attente</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPProvisoireEnttente}}</span>
+   <br>
+     <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Vise</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPProvisoireVise}}</span>
+    <br>
+     <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Differé</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPProvisoireDiffere}}</span>
+    <br>
+     <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Rejeté</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPProvisoireRejete}}</span>
+     <br>
+      <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Total OP Provisoire</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPProvisoire}}</span>
+    
+        </div> 
+       
+          </td>
+           <td style="width:0px">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-danger"  style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon-hand-up"> ORDRE PAIEMENT ANNULATION</i></button>
+     <br>
+     <br>
+    <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> En Attente</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPANNULATIONEnttente}}</span>
+   <br>
+     <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Vise</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPANNULATIONVise}}</span>
+    <br>
+     <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Differé</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPANNULATIONDiffere}}</span>
+    <br>
+     <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Rejeté</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPANNULATIONRejete}}</span>
+     <br>
+      <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Total OP Annulation</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPAnnulation}}</span>
+    
+        </div> 
+       
+          </td> 
+           <td style="width:0px">
+<div  align="right" style="cursor:pointer;">
+    <button class="btn btn-primary"  style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon-hand-up"> ORDRE PAIEMENT DEFINITIF</i></button>
+      <br>
+      <br>
+    <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> En Attente</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPDefinitifEnttente}}</span>
+   <br>
+     <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Vise</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPDefinitifVise}}</span>
+    <br>
+     <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Differé</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPDefinitifDiffere}}</span>
+    <br>
+     <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Rejeté</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPDefinitifRejete}}</span>
+     <br>
+      <span align="left" style="text-align:center;font-size:15px;font-weight:bolder;color:#000"> Total OP Définitif</span><span style="text-align:center;font-size:30px;font-weight:bolder;color:#000"> {{NombreTotalOPDefinitive}}</span>
+    
+        </div> 
+       
+          </td> 
+             <td style="width:10%">
+
+       
+          </td>
+           
+         
+            </table>
+          <!-- <table class="table table-bordered table-striped">
              <td style="width:55%">
 
        
@@ -44,7 +296,7 @@
         </div> 
        
           </td> 
-            </table>
+            </table> -->
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -73,9 +325,9 @@
                     <!-- <th   style="font-size:14px;font-weight:bold">Sous Budget</th> -->
                      <!-- <th   style="font-size:14px;font-weight:bold">Montant Autorisé</th> -->
                     <th   style="font-size:14px;font-weight:bold">Engagement actuel</th>
-                              
+                             <th   style="font-size:14px;font-weight:bold">Voir Réalite Service Fait</th> 
                     <th   style="font-size:14px;font-weight:bold">Décision CF</th>
-                    
+                    <th   style="font-size:14px;font-weight:bold">Supprimer</th>
                      <!-- <th   style="font-size:14px;font-weight:bold">Décision OP Annulation</th>
                      <th   style="font-size:14px;font-weight:bold">Décision OP Definitive</th> -->
                 
@@ -83,7 +335,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(type) in filtre_type_teste" :key="type.id">
+                  <tr class="odd gradeX" v-for="(type) in ListeDEsEntreprise" :key="type.id">
                               <td
                       style="font-size:14px;font-weight:bold;text-align:center"
                     >{{type.exercice || 'Non renseigné'}}</td>
@@ -117,10 +369,10 @@
  <td v-else style="background-color:lightblue"></td>
 
          
-                     <td v-if="type.marche_id != null"
+                     <!-- <td v-if="type.marche_id != null"
                       style="font-size:14px;font-weight:bold"
-                    >{{libelleMarche(type.marche_id) || 'Non renseigné'}}</td>
-                    <td v-else
+                    >{{libelleMarche(type.marche_id) || 'Non renseigné'}}</td> -->
+                    <td
                       style="font-size:14px;font-weight:bold"
                     >{{type.odjet_autre_depense || 'Non renseigné'}}</td>
                      <td
@@ -130,6 +382,15 @@
                     <td
                        style="font-size:14px;font-weight:bold;text-align:center"
                     >{{formatageSomme(parseFloat(type.montant_ordre_paiement)) || 'Non renseigné'}}</td>
+                    
+                     <td v-if="type.type_ordre_paiement==1 || type.type_ordre_paiement==4">
+                                              <router-link :to="{ name: 'VoirDetailAutreFiche', params: { id: type.id }}"
+                class="btn btn " title="Editer Fiche" style="width:80%">
+                  <span class="" style="font-size:25px;font-weight:bold;color:#000" ><i class="icon-eye-open"></i>  Voir</span>
+                   </router-link>
+                    </td>
+                    <td v-else style="background-color:lightblue"></td>
+                   
                      <td>
                         <button v-if="type.decision_cf==8"  class="btn  btn-success tailBtn"  @click="apercuFacture(type.id)">                        
                      
@@ -163,76 +424,13 @@
                     
                       </button>
                     </td>
-                    
-                   
-                    <!-- <td v-if="type.id==afficheDecisionOpAnuulation1(type.id)">
-<button v-if="afficheDecisionOpAnuulation(type.id) == 8"  class="btn  btn-success tailBtn"  @click="ModalOpAnnulation(type.id)">                        
-                     
-                      <span   style="font-weight:bolder;color:#fff;font-size:18px" >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 2" class="btn  btn-warning tailBtn" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      
-                       <span style="font-weight:bolder;color:#fff;font-size:18px" >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="afficheDecisionOpAnuulation(type.id) == 3" class="btn  btn-danger tailBtn" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      
-                       <span  style="font-weight:bolder;color:#fff;font-size:18px">Réjeté</span>
-                      
-                    
-                      </button>
-                       <button v-else-if="afficheDecisionOpAnuulation(type.id) == 9"  class="btn  btn-success tailBtn" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      <span style="font-weight:bolder;color:#fff;font-size:18px">Visé avec observation</span>
-                      
-                      </button>
-                      <button v-else class="btn  btn-info tailBtn" @click="ModalOpAnnulation(type.id)" >                        
-                     
-                      
-                       <span style="font-weight:bolder;color:#fff;font-size:18px">Attente</span>
-                      
-                    
+                     <td>
+                      <button class="btn btn-danger" @click="supprimerGestionOrdrePaiement(type.id)">
+                        <span>
+                          <i class="icon icon-trash"> Supprimer</i>
+                        </span>
                       </button>
                     </td>
-                    <td v-else style="background-color:lightblue"></td> -->
-                    <!-- <td v-if="type.decision_cf_definitif != null">
-                         <button v-if="type.decision_cf_definitif==8"  class="btn  btn-success tailBtn"  @click="DecisionDefinitifCf(type.id)">                        
-                     
-                      <span  style="font-weight:bolder;color:#fff;font-size:18px"  >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="type.decision_cf_definitif == 2" class="btn  btn-warning tailBtn" @click="DecisionDefinitifCf(type.id)">                        
-                     
-                      
-                       <span  style="font-weight:bolder;color:#fff;font-size:18px">Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="type.decision_cf_definitif == 3" class="btn  btn-danger tailBtn" @click="DecisionDefinitifCf(type.id)">                        
-                     
-                      
-                       <span style="font-weight:bolder;color:#fff;font-size:18px" >Réjeté</span>  
-                      
-                    
-                      </button>
-                       <button v-else-if="type.decision_cf_definitif == 9"  class="btn  btn-success tailBtn" @click="DecisionDefinitifCf(type.id)">                        
-                     
-                      <span title="Visé avec observation" style="font-weight:bolder;color:#fff;font-size:18px" >Visé O</span>
-                      
-                      </button>
-                     <button v-else class="btn  btn-info tailBtn" @click="DecisionDefinitifCf(type.id)" >                        
-                     
-                      
-                       <span style="font-weight:bolder;color:#fff;font-size:18px">Attente</span>
-                      
-                    
-                      </button>
-                    </td>
-                    <td v-else style="background-color:lightblue"></td> -->
                     </tr>
                 </tbody>
               </table>
@@ -575,31 +773,57 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
+     <fab :actions="fabActions"
+                main-icon="apps"
+          
+        @searchMe="filter"
+         
+        bg-color="green"
+
+  ></fab>
+    <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
+<button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
   </div>
 </template>
   
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { formatageSomme } from "@/Repositories/Repository";
+import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
   name:'typetext',
+  components: {
+    
+    ModelListSelect,
+     
+  },
   data() {
     return {
       fabActions: [
-        {
-          name: "cache",
-          icon: "add"
-        }
-        // {
-        //   name: "alertMe",
-        //   icon: "add_alert",
-        //   class: ""
-        // }
+       {
+                  name: 'searchMe',
+                   icon: "search"
+              }
       ],
+     
+        options2: [
+          { id: '1', libelle: 'OP Direct'},
+          { id: '2', libelle: 'OP Provisoire'},
+          { id: '3', libelle: 'OP Annulation'},
+          { id: '4', libelle: 'OP Définitif'},
+          
+        ],
       json_fields: {
         CODE: "code",
         LIBELLE: "libelle"
       },
+       affiche_filtre1:false,
+        affiche_filtre:false,
+      affiche_boutton_filtre:true,
+      typeop_id:0,
+      NumeroOp:0,
+      uniteAdministrative_id:0,
       formData: {
         code: "",
         libelle: ""
@@ -630,7 +854,267 @@ export default {
   ...mapGetters("uniteadministrative", ["budgetEclate","groupeLigneEconomiqueBudget","getSousBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
     ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
   'plans_Decision']),
-  
+
+listeUniteAdminPasSection(){
+                if (this.uniteAdministrative_id!="" && this.typeop_id!=""){
+                    return this.listeordrepaiementregie.filter(item=>item.unite_administrative_id==this.uniteAdministrative_id && item.type_ordre_paiement==this.typeop_id)
+                }
+                return this.listeordrepaiementregie
+            },
+
+  NombreTotalOPDIRECTEnttente() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==1 && item.decision_cf==0).length
+
+    },
+    NombreTotalOPDIRECTVise() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==1 && item.decision_cf==8 || item.type_ordre_paiement==1 && item.decision_cf==9).length
+
+    },
+    NombreTotalOPDIRECTDiffere() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==1 && item.decision_cf==2).length
+
+    },
+    NombreTotalOPDIRECTRejete() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==1 && item.decision_cf==3).length
+
+    },
+     NombreTotalOPDIRECT() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==1).length
+
+    },
+
+
+
+
+NombreTotalOPProvisoireEnttente() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==2 && item.decision_cf==0).length
+
+    },
+    NombreTotalOPProvisoireVise() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==2 && item.decision_cf==8 || item.type_ordre_paiement==2 && item.decision_cf==9).length
+
+    },
+    NombreTotalOPProvisoireDiffere() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==2 && item.decision_cf==2).length
+
+    },
+    NombreTotalOPProvisoireRejete() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==2 && item.decision_cf==3).length
+
+    },
+
+
+
+
+NombreTotalOPProvisoire() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==2).length
+
+    },
+
+
+
+
+
+
+
+    
+NombreTotalOPANNULATIONEnttente() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==3 && item.decision_cf==0).length
+
+    },
+    NombreTotalOPANNULATIONVise() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==3 && item.decision_cf==8 || item.type_ordre_paiement==3 && item.decision_cf==9).length
+
+    },
+    NombreTotalOPANNULATIONDiffere() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==3 && item.decision_cf==2).length
+
+    },
+    NombreTotalOPANNULATIONRejete() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==3 && item.decision_cf==3).length
+
+    },
+    NombreTotalOPAnnulation() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==3).length
+
+    },
+
+
+
+
+
+
+    
+NombreTotalOPDefinitifEnttente() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==4 && item.decision_cf==0).length
+
+    },
+    NombreTotalOPDefinitifVise() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==4 && item.decision_cf==8 || item.type_ordre_paiement==4 && item.decision_cf==9).length
+
+    },
+    NombreTotalOPDefinitifDiffere() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==4 && item.decision_cf==2).length
+
+    },
+    NombreTotalOPDefinitifRejete() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==4 && item.decision_cf==3).length
+
+    },
+    NombreTotalOPDefinitive() {
+      
+           return this.ListeDEsEntreprise.filter(item=>item.type_ordre_paiement==4).length
+
+    },
+
+
+
+
+NombreTotalOPTotalEnttente() {
+      
+           return this.ListeDEsEntreprise.filter(item=> item.decision_cf==0).length
+
+    },
+    NombreTotalOPTotalVise() {
+      
+           return this.ListeDEsEntreprise.filter(item=> item.decision_cf==8 ||  item.decision_cf==9).length
+
+    },
+    NombreTotalOPTotalDiffere() {
+      
+           return this.ListeDEsEntreprise.filter(item=> item.decision_cf==2).length
+
+    },
+    NombreTotalOPTotalRejete() {
+      
+           return this.ListeDEsEntreprise.filter(item=> item.decision_cf==3).length
+
+    },
+    OPTotal() {
+      
+           return this.ListeDEsEntreprise.length
+
+    },
+
+  ListeDEsEntreprise(){
+
+                let vM=this;
+                let objet=this.listeordrepaiementregie
+
+                //retourne la section selectionner
+              
+                if(this.uniteAdministrative_id != 0 && this.typeop_id == 0 ){
+                  
+                    objet = this.listeordrepaiementregie.filter(item=>{
+                        if(item.unite_administrative_id==vM.uniteAdministrative_id){
+                            return item
+                        }
+                    })
+                 return objet
+                }
+                 if(this.typeop_id != 0 && this.uniteAdministrative_id == 0){
+                  
+                    objet = this.listeordrepaiementregie.filter(item=>{
+                        if(item.type_ordre_paiement==vM.typeop_id){
+                            return item
+                        }
+                    })
+                 
+                }
+                if(this.NumeroOp != 0){
+                  
+                    objet = this.listeordrepaiementregie.filter(item=>{
+                        if(item.numero_ordre_paiement==vM.NumeroOp){
+                            return item
+                        }
+                    })
+                 return objet
+                }
+                  if(this.uniteAdministrative_id !=0  && this.typeop_id != 0){
+                  
+                    objet = this.listeordrepaiementregie.filter(item=>{
+                        if(item.unite_administrative_id==vM.uniteAdministrative_id && item.type_ordre_paiement==vM.typeop_id){
+                            return item
+                        }
+                    })
+                 return objet
+                }
+              // if(this.entre_id=="" && this.typemarche_id!="" && this.uniteAdministrative_id==""){
+                  
+              //       objet =objet.filter(item=>{
+              //           if(this.TypeMarche(item.marche_id)==vM.typemarche_id){
+              //               return item
+              //           }
+              //       })
+                
+              //   }
+              //   if(this.entre_id=="" && this.typemarche_id=="" && this.uniteAdministrative_id!=""){
+                  
+              //       objet =objet.filter(item=>{
+              //           if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id){
+              //               return item
+              //           }
+              //       })
+                  
+              //   }
+              //  if(this.entre_id!="" && this.typemarche_id!="" && this.uniteAdministrative_id!=""){
+                  
+              //       objet =objet.filter(item=>{
+              //           if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id && this.TypeMarche(item.marche_id)==vM.typemarche_id && item.entreprise_id==vM.entre_id){
+              //               return item
+              //           }
+              //       })
+                 
+              //   }
+              //    if(this.entre_id!="" && this.typemarche_id!="" && this.uniteAdministrative_id==""){
+                  
+              //       objet =objet.filter(item=>{
+              //           if(this.TypeMarche(item.marche_id)==vM.typemarche_id && item.entreprise_id==vM.entre_id){
+              //               return item
+              //           }
+              //       })
+                  
+              //   }
+              //    if(this.entre_id!="" && this.typemarche_id=="" && this.uniteAdministrative_id!=""){
+                  
+              //       objet =objet.filter(item=>{
+              //           if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id==vM.uniteAdministrative_id && item.entreprise_id==vM.entre_id){
+              //               return item
+              //           }
+              //       })
+                  
+              //   }
+              //   if(this.entre_id=="" && this.typemarche_id!="" && this.uniteAdministrative_id!=""){
+                  
+              //       objet =objet.filter(item=>{
+              //           if(this.listeUa(item.marche_id)==vM.uniteAdministrative_id==vM.uniteAdministrative_id && this.TypeMarche(item.marche_id)==vM.typemarche_id){
+              //               return item
+              //           }
+              //       })
+                  
+              //   }
+                return objet
+            },
+ 
    afficheNumeroOpDefinitive() {
       return id => {
         if (id != null && id != "") {
@@ -902,9 +1386,17 @@ recupererIdUser() {
   methods: {
     ...mapActions("bienService", [
       "modifierGestionOrdrePaiement",
-     "modifierGestionOrdrePaiementAnnulat"
+     "modifierGestionOrdrePaiementAnnulat",
+     "supprimerGestionOrdrePaiement"
     ]),
-    
+      AfficheBoutonAjouter(){
+                this.affiche_filtre1=!this.affiche_filtre1
+               
+            },
+    filter(){
+                this.affiche_filtre=!this.affiche_filtre
+               
+            },
     ajouterLiquidation(){
                 this.$router.push({ name: 'AjouterOrdrePaiementAnnulation' })
             },

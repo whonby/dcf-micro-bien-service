@@ -190,7 +190,7 @@
                  <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#INFORMATIONUA">{{formData1.ligneeconomique_id}}INFORMATION SUR BAILLEUR{{doublonLigneBudgetaire(formData1.ligneeconomique_id)}}</a>
+                        <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION SUR BAILLEUR{{doublonLigneBudgetaire(formData1.ligneeconomique_id)}}</a>
                       </li>
                     </ul>
                   </div>
@@ -270,46 +270,17 @@
                      
                      <tr>
  
-             
-                     <td >
-                            <div class="control-group">
-                <label class="control-label">Exercice(n-1)</label>
+                  
+                  <td>
+                       <div class="control-group">
+                <label class="control-label">Cumul Reservation{{ReduitCumulReservation}}</label>
                 <div class="controls">
+                   <money :value="-cumulReservation(formData.uniteadministrative_id)" readOnly   style="text-align:left;color:red"  class="span"></money>
+                </div>
+              </div>
+                  </td>
                  
-                  <input
-                    type="text"
-                    style="border:1px solid #000"
-                   :value="recupererAnneePrecedant"
-                    class="span"
-                    readonly
-                  />
-                </div>
-              </div>
-                        </td>
-                        <td>
-                       <div class="control-group">
-                <label class="control-label">Dotation</label>
-                <div class="controls">
-                   <money :value="DotationRestantAnneePrecedant(formData.uniteadministrative_id)"  readOnly  style="text-align:left;color:red"  class="span"></money>
-                </div>
-              </div>
-                  </td>
-                   <td>
-                       <div class="control-group">
-                <label class="control-label">Dotation Executé</label>
-                <div class="controls">
-                   <money :value="CumulMontantConsommeParUaPrecedent(formData.uniteadministrative_id)"  readOnly  style="text-align:left;color:red"  class="span"></money>
-                </div>
-              </div>
-                  </td>
-                   <td>
-                       <div class="control-group">
-                <label class="control-label">Dotation Disponible(n-1)</label>
-                <div class="controls">
-                   <money :value="MontantDisponibleParUa"  readOnly  style="text-align:left;color:red"  class="span"></money>
-                </div>
-              </div>
-                  </td>
+                 
                   <td>
                        <div class="control-group">
                 <label class="control-label">Montant a Eclaté (n+(n-1))</label>
@@ -318,7 +289,7 @@
                                  <code style="color:red;font-size:12px" v-if="MontantAEclate == 0">Montant Budget est Saturé</code>
                 </div>
               </div>
-                  </td>
+               </td>
                      </tr>
                   
                      
@@ -408,6 +379,22 @@
                      </tr>
                     
                  </table>
+                 <div align="right">
+                    <div class="controls">
+                      <div data-toggle="buttons-checkbox" class="btn-group">
+                        <a
+                        v-if="MontantAEclate > 0"
+                          class="btn btn-primary"
+                          @click.prevent="AjouterLiquidation"
+                        >Modifier</a>
+                        <a
+                          @click.prevent="pagePrecedent()"
+                          class="btn"
+                          href="#"
+                        >Fermer</a>
+                      </div>
+                    </div>
+                  </div>
                   <!-- <div align="left">
 
       <button class="btn btn-info"  @click.prevent="apercuFacture">Aperçu Ventilation budget  {{anneeAmort}} </button>
@@ -460,22 +447,7 @@
                             </div>
                     </div>
                   </div>
-<div align="right">
-                    <div class="controls">
-                      <div data-toggle="buttons-checkbox" class="btn-group">
-                        <a
-                        v-if="MontantAEclate > 0"
-                          class="btn btn-primary"
-                          @click.prevent="AjouterLiquidation"
-                        >Modifier</a>
-                        <a
-                          @click.prevent="pagePrecedent()"
-                          class="btn"
-                          href="#"
-                        >Fermer</a>
-                      </div>
-                    </div>
-                  </div>
+
                   
                   <br />
                   
@@ -583,9 +555,28 @@ components: {
      
 //formatageSomme(parseFloat(recupereMontantDon(type[0].ligneeconomique_id))+parseFloat(recupereMontantEmprunt(type[0].ligneeconomique_id)))
 
-    
-   
+recupererCumulReservation(){
+  return parseFloat(this.cumulReservation(this.formData.uniteadministrative_id))+parseFloat(this.formData1.variation_budget) 
+},
+ReduitCumulReservation(){
+  if(-(this.cumulReservation(this.formData.uniteadministrative_id))>0){
+    return parseFloat(this.cumulReservation(this.formData.uniteadministrative_id))+parseFloat(this.formData1.variation_budget)
+  }
+  else{
+    return 0
+  }
+},
 
+
+    cumulReservation() {
+      return (id) => {
+        if (id != null && id != "") {
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.annebudgetaire==this.anneeAmort && qtreel.cumul_reservation < 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.cumul_reservation), 0).toFixed(0);
+
+        }
+      };
+    },
+  
 
 
 
@@ -695,10 +686,24 @@ cumulDotationParUaEtActivite() {
 MontantAEclate(){
 
 if(this.formData.activite_id !=""){
-  return  ((parseFloat(this.RecuppererLaDotation(this.formData.activite_id))) - (parseFloat(this.cumulDotationParUaEtActivite(this.formData.uniteadministrative_id,this.formData.activite_id))+parseFloat(this.formData1.variation_budget)))
+  if(this.formData1.variation_budget>0){
+ return  ((parseFloat(this.RecuppererLaDotation(this.formData.activite_id))) - (parseFloat(this.cumulDotationParUaEtActivite(this.formData.uniteadministrative_id,this.formData.activite_id))+parseFloat(this.formData1.variation_budget)))
+  }
+ else{
+    return ((parseFloat(this.RecuppererLaDotation(this.formData.activite_id))) - (parseFloat(this.cumulDotationParUaEtActivite(this.formData.uniteadministrative_id,this.formData.activite_id))))
+ }
 }
 else{
-  return  ((parseFloat(this.MontantDisponibleParUa)) - (parseFloat(this.cumulDotationParUa(this.formData.uniteadministrative_id))+parseFloat(this.formData1.variation_budget)))
+
+if(this.formData1.variation_budget>0){
+ return ((parseFloat(this.MontantDisponibleParUa)) + (parseFloat(this.cumulDotationParUa(this.formData.uniteadministrative_id))+parseFloat(this.formData1.variation_budget)))
+  }
+ else{
+     return  ((parseFloat(this.MontantDisponibleParUa)) + (parseFloat(this.cumulDotationParUa(this.formData.uniteadministrative_id))))
+ }
+
+
+ 
 }
 },
 
@@ -1075,7 +1080,7 @@ return this.uniteAdministratives
            const qtereel = this.budgetEclate.find(qtreel => qtreel.uniteadministrative_id == id1 && qtreel.ligneeconomique_id == id && qtreel.annebudgetaire==this.anneeAmort);
 
       if (qtereel) {
-        return qtereel.dotation_nouvelle
+        return qtereel.dotation
       }
       return 0
         }
@@ -1183,8 +1188,11 @@ methods: {
           tresor:this.dotationTotal,
           ligneeconomique_id:this.formData1.ligneeconomique_id,
           type_financement_id:this.formData1.type_financement_id,
+          
+            	source_financement_id:this.formData.source_financement_id,
           activite_id:this.formData.activite_id,
-           variation_budget:this.formData1.variation_budget
+           variation_budget:this.formData1.variation_budget,
+           cumul_reservation:this.recupererCumulReservation
       };
       this.ajouterBudgetEclate(nouvelObjet);
       this.formData1 = {
@@ -1202,9 +1210,12 @@ var nouvelObjet1 = {
         dotation:this.dotationTotal,
           don:this.dotationTotal,
           ligneeconomique_id:this.formData1.ligneeconomique_id,
-          type_financement_id:this.formData1.type_financement_id,
+          //type_financement_id:this.formData1.type_financement_id,
+          type_financement_don_id:this.formData1.type_financement_id,
+            	source_financement_don_id:this.formData.source_financement_id,
           activite_id:this.formData.activite_id,
-           variation_budget:this.formData1.variation_budget
+           variation_budget:this.formData1.variation_budget,
+           cumul_reservation:this.recupererCumulReservation
       };
       this.ajouterBudgetEclate(nouvelObjet1);
        
@@ -1222,9 +1233,12 @@ type_financement_id:""
         dotation:this.dotationTotal,
           	emprunt:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+            //type_financement_id:this.formData1.type_financement_id,
+            type_financement_emprunt_id:this.formData1.type_financement_id,
+            	source_financement_emprunt_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
-             variation_budget:this.formData1.variation_budget
+             variation_budget:this.formData1.variation_budget,
+             cumul_reservation:this.recupererCumulReservation
       };
       this.ajouterBudgetEclate(nouvelObjet2);
        this.formData1 = {
@@ -1243,8 +1257,11 @@ type_financement_id:""
           	tresor:this.dotationTresor,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
             type_financement_id:this.formData1.type_financement_id,
+            
+            	source_financement_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
-            variation_budget:this.formData1.variation_budget
+            variation_budget:this.formData1.variation_budget,
+            cumul_reservation:this.recupererCumulReservation
       };
       this.modifierBudgetEclate(nouvelObjet28);
        this.formData1 = {
@@ -1265,9 +1282,12 @@ variation_budget:""
                dotation:this.dotationTotal,
           	emprunt:this.dotationEmprunt,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+            //type_financement_id:this.formData1.type_financement_id,
+            type_financement_emprunt_id:this.formData1.type_financement_id,
+            	source_financement_emprunt_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
-            variation_budget:this.formData1.variation_budget
+            variation_budget:this.formData1.variation_budget,
+            cumul_reservation:this.recupererCumulReservation
       };
       this.modifierBudgetEclate(nouvelObjet27);
        this.formData1 = {
@@ -1286,9 +1306,12 @@ variation_budget:""
         dotation:this.dotationTotal,
           	don:this.dotationDon,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+           // type_financement_id:this.formData1.type_financement_id,
+           type_financement_don_id:this.formData1.type_financement_id,
+            	source_financement_don_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
-            variation_budget:this.formData1.variation_budget
+            variation_budget:this.formData1.variation_budget,
+            cumul_reservation:this.recupererCumulReservation
       };
       this.modifierBudgetEclate(nouvelObjet25);
        this.formData1 = {

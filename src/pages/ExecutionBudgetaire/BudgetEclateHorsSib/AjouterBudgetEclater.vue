@@ -186,7 +186,7 @@ recupereMontantEmpruntTotal
                   
                    <td colspan="3">
               <div class="control-group">
-                <label class="control-label">Activité{{idBudgetEclaterUa(this.formData.uniteadministrative_id,this.formData1.ligneeconomique_id)}}</label>
+                <label class="control-label">Activité</label>
                 <div class="controls">
                   <select v-model="formData.activite_id" class="span" style="border:1px solid #000">
                     <option></option>
@@ -227,7 +227,7 @@ recupereMontantEmpruntTotal
                      </td>
                        <td colspan="2">
               <div class="control-group">
-                <label class="control-label">Ligne budgetaire{{formData.ligne_budgetaire_parent_id}}</label>
+                <label class="control-label">Ligne budgetaire</label>
                 <div class="controls">
                  
  <select v-model="formData.ligne_budgetaire_parent_id" class="span" style="border:1px solid #000" >
@@ -288,16 +288,7 @@ recupereMontantEmpruntTotal
                         :value="typeFact[0].economique_id"
                       >{{libelleLigneEconomique(typeFact[0].economique_id)}}</option>
                   </select>
-<!--                  
- <select v-model="formData.ligne_budgetaire_parent_id" class="span" style="border:1px solid #000">
-                    
-                     <option
-                        v-for="typeFact in RecupererlibelleLigneEconomique(formData.activite_id)"
-                        :key="typeFact[0].id"
-                        :value="typeFact[0].economique_id"
-                      >{{libelleLigneEconomique(typeFact[0].economique_id)}}</option>
-                  </select> -->
-                
+
 
                  
                 </div>
@@ -318,19 +309,7 @@ recupereMontantEmpruntTotal
                      </template>
                     
                  </table>
-                 <!-- <div class="widget-title">
-                    <ul class="nav nav-tabs">
-                      <li class="active">
-                        <a data-toggle="tab" href="#INFORMATIONUA">INFORMATION SUR BAILLEUR</a>
-                      </li>
-                    </ul>
-                  </div>
-                 <table class="table table-bordered table-striped" style="border:1px solid #000">
-                     
-                    
-                  
-                     
-                 </table> -->
+                
                  <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
@@ -562,13 +541,29 @@ recupereMontantEmpruntTotal
                      </tr>
                     
                  </table>
+                 <div align="right">
+                    <div class="controls">
+                      <div data-toggle="buttons-checkbox" class="btn-group">
+                        <a
+                        
+                          class="btn btn-primary"
+                          @click.prevent="EnregistrerTout()"
+                        >Valider</a>
+                        <a
+                          @click.prevent="pagePrecedent()"
+                          class="btn"
+                          href="#"
+                        >Fermer</a>
+                      </div>
+                    </div>
+                  </div>
                   <!-- <div align="left">
 
       <button class="btn btn-info"  @click.prevent="apercuFacture">Aperçu Ventilation budget  {{anneeAmort}} </button>
 
 
                             </div> -->
-                            <div id="printMe">
+                            <!-- <div id="printMe">
                                <template v-if="this.comparaison(this.formData.activite_id)==this.formData.activite_id">
                                <table class="table table-bordered table-striped">
                 <thead>
@@ -660,25 +655,10 @@ recupereMontantEmpruntTotal
               </table>
                                </template>
                 
-                            </div>
+                            </div> -->
                     </div>
                   </div>
-<div align="right">
-                    <div class="controls">
-                      <div data-toggle="buttons-checkbox" class="btn-group">
-                        <a
-                        
-                          class="btn btn-primary"
-                          @click.prevent="EnregistrerTout()"
-                        >Valider</a>
-                        <a
-                          @click.prevent="pagePrecedent()"
-                          class="btn"
-                          href="#"
-                        >Fermer</a>
-                      </div>
-                    </div>
-                  </div>
+
                   
                   <br />
                   
@@ -1651,6 +1631,7 @@ methods: {
           tresor:this.dotationTotal,
           ligneeconomique_id:this.formData1.ligneeconomique_id,
           type_financement_id:this.formData1.type_financement_id,
+          source_financement_id:this.formData.source_financement_id,
           activite_id:this.formData.activite_id,
           report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -1680,7 +1661,8 @@ var nouvelObjet1 = {
         dotation:this.dotationTotal,
           don:this.dotationTotal,
           ligneeconomique_id:this.formData1.ligneeconomique_id,
-          type_financement_id:this.formData1.type_financement_id,
+          	type_financement_don_id:this.formData1.type_financement_id,
+            source_financement_don_id:this.formData.source_financement_id,
           activite_id:this.formData.activite_id,
            report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -1709,7 +1691,8 @@ report:"",
         dotation:this.dotationTotal,
           	emprunt:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+            type_financement_emprunt_id:this.formData1.type_financement_id,
+              source_financement_emprunt_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -1739,7 +1722,9 @@ report:"",
             dotation:this.SommeCumulAjouter,
           	tresor:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+            
+             type_financement_id:this.formData1.type_financement_id,
+          source_financement_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -1761,7 +1746,8 @@ report:"",
         dotation:this.SommeCumulAjouter,
           	emprunt:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+            type_financement_emprunt_id:this.formData1.type_financement_id,
+            source_financement_emprunt_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -1783,7 +1769,9 @@ report:"",
         dotation:this.SommeCumulAjouter,
           	don:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+           
+            type_financement_don_id:this.formData1.type_financement_id,
+            source_financement_don_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -1808,6 +1796,7 @@ else{
           tresor:this.dotationTotal,
           ligneeconomique_id:this.formData1.ligneeconomique_id,
           type_financement_id:this.formData1.type_financement_id,
+          source_financement_id:this.formData.source_financement_id,
           activite_id:this.formData.activite_id,
           report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -1830,7 +1819,8 @@ var nouvelObjet163 = {
         dotation:this.dotationTotal,
           don:this.dotationTotal,
           ligneeconomique_id:this.formData1.ligneeconomique_id,
-          type_financement_id:this.formData1.type_financement_id,
+          	type_financement_don_id:this.formData1.type_financement_id,
+          	source_financement_don_id:this.formData.source_financement_id,
           activite_id:this.formData.activite_id,
            report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -1851,7 +1841,8 @@ report:"",
         dotation:this.dotationTotal,
           	emprunt:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+            type_financement_emprunt_id:this.formData1.type_financement_id,
+            	source_financement_emprunt_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -1874,7 +1865,9 @@ report:"",
             dotation:this.SommeCumulAjouter,
           	tresor:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
+            
             type_financement_id:this.formData1.type_financement_id,
+            	source_financement_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -1896,7 +1889,9 @@ report:"",
         dotation:this.SommeCumulAjouter,
           	emprunt:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+           
+            	type_financement_emprunt_id:this.formData1.type_financement_id,
+            	source_financement_emprunt_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -1918,7 +1913,9 @@ report:"",
         dotation:this.SommeCumulAjouter,
           	don:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+           // type_financement_id:this.formData1.type_financement_id,
+            		type_financement_don_id:this.formData1.type_financement_id,
+            		source_financement_don_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -1950,7 +1947,9 @@ AjouterBudgetEclateUniteAdministrative() {
         dotation:this.dotationTotal,
           tresor:this.dotationTotal,
           ligneeconomique_id:this.formData1.ligneeconomique_id,
-          type_financement_id:this.formData1.type_financement_id,
+         // type_financement_id:this.formData1.type_financement_id,
+         type_financement_id:this.formData1.type_financement_id,
+            		source_financement_id:this.formData.source_financement_id,
           activite_id:this.formData.activite_id,
           report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -1980,7 +1979,9 @@ var nouvelObjet1520 = {
         dotation:this.dotationTotal,
           don:this.dotationTotal,
           ligneeconomique_id:this.formData1.ligneeconomique_id,
-          type_financement_id:this.formData1.type_financement_id,
+         // type_financement_id:this.formData1.type_financement_id,
+         type_financement_don_id:this.formData1.type_financement_id,
+            		source_financement_don_id:this.formData.source_financement_id,
           activite_id:this.formData.activite_id,
            report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -2009,7 +2010,9 @@ report:"",
         dotation:this.dotationTotal,
           	emprunt:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+           // type_financement_id:this.formData1.type_financement_id,
+           type_financement_emprunt_id:this.formData1.type_financement_id,
+            		source_financement_emprunt_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -2039,7 +2042,9 @@ report:"",
             dotation:this.SommeCumulAjouter,
           	tresor:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
+            //type_financement_id:this.formData1.type_financement_id,
             type_financement_id:this.formData1.type_financement_id,
+            	source_financement_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -2061,7 +2066,9 @@ report:"",
         dotation:this.SommeCumulAjouter,
           	emprunt:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+            //type_financement_id:this.formData1.type_financement_id,
+            type_financement_emprunt_id:this.formData1.type_financement_id,
+            		source_financement_emprunt_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -2083,7 +2090,9 @@ report:"",
         dotation:this.SommeCumulAjouter,
           	don:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+            //type_financement_id:this.formData1.type_financement_id,
+            type_financement_don_id:this.formData1.type_financement_id,
+            		source_financement_don_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -2108,6 +2117,8 @@ else{
           tresor:this.dotationTotal,
           ligneeconomique_id:this.formData1.ligneeconomique_id,
           type_financement_id:this.formData1.type_financement_id,
+         // type_financement_don_id:this.formData1.type_financement_id,
+            		source_financement_id:this.formData.source_financement_id,
           activite_id:this.formData.activite_id,
           report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -2130,7 +2141,9 @@ var nouvelObjet163 = {
         dotation:this.dotationTotal,
           don:this.dotationTotal,
           ligneeconomique_id:this.formData1.ligneeconomique_id,
-          type_financement_id:this.formData1.type_financement_id,
+          //type_financement_id:this.formData1.type_financement_id,
+          type_financement_don_id:this.formData1.type_financement_id,
+            		source_financement_don_id:this.formData.source_financement_id,
           activite_id:this.formData.activite_id,
            report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -2151,7 +2164,9 @@ report:"",
         dotation:this.dotationTotal,
           	emprunt:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+           // type_financement_id:this.formData1.type_financement_id,
+           type_financement_emprunt_id:this.formData1.type_financement_id,
+            		source_financement_emprunt_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -2174,7 +2189,9 @@ report:"",
             dotation:this.SommeCumulAjouter,
           	tresor:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
+            //type_financement_id:this.formData1.type_financement_id,
             type_financement_id:this.formData1.type_financement_id,
+            		source_financement_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -2196,7 +2213,9 @@ report:"",
         dotation:this.SommeCumulAjouter,
           	emprunt:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+            //type_financement_id:this.formData1.type_financement_id,
+            type_financement_emprunt_id:this.formData1.type_financement_id,
+            		source_financement_emprunt_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,
@@ -2218,7 +2237,9 @@ report:"",
         dotation:this.SommeCumulAjouter,
           	don:this.dotationTotal,
             ligneeconomique_id:this.formData1.ligneeconomique_id,
-            type_financement_id:this.formData1.type_financement_id,
+            //type_financement_id:this.formData1.type_financement_id,
+            type_financement_don_id:this.formData1.type_financement_id,
+            		source_financement_don_id:this.formData.source_financement_id,
             activite_id:this.formData.activite_id,
              report:this.formData1.report,
           dotation_nouvelle:this.formData1.dotation_nouvelle,

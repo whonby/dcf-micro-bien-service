@@ -2207,10 +2207,10 @@ components: {
        libelleSousBudget	() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getSousBudget.find(qtreel => qtreel.marche_id == id);
+           const qtereel = this.getSousBudget.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.libelle	;
+        return qtereel.activite_enfant	;
       }
       return 0
         }
@@ -2241,10 +2241,10 @@ recupererLibelleModePaiement	() {
       };
     },
 recupererNomTypeDepense(){
-  if(this.detailOpProvisoire.typedepense == 2){
+  if(this.detailOpProvisoire.typedepense == "Autres"){
     return "Autres"
   }
-  else if(this.detailOpProvisoire.typedepense == 1){
+  else if(this.detailOpProvisoire.typedepense == "Marche"){
     return "Marche"
   }
   else{
@@ -2403,7 +2403,7 @@ return this.CreditAutorise(this.detailOpProvisoire.unite_administrative_id,this.
 CreditAutoriseSousBudget() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
-           const qtereel = this.budgetEclate.find(qtreel => qtreel.sous_activite_id == id && qtreel.ligneeconomique_id==id1);
+           const qtereel = this.budgetEclate.find(qtreel => qtreel.sous_budget_id == id && qtreel.ligneeconomique_id==id1);
 
       if (qtereel) {
         return qtereel.dotation
@@ -2428,7 +2428,7 @@ CreditAutorise() {
       RecupererlibelleLigneEconomique() {
       return (id,id1) => {
         if (id != null && id != "" && id1 != null && id1 != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.activite_id==id1 && qtreel.sous_activite_id==0);
+           return this.budgetEclate.filter(qtreel => qtreel.uniteadministrative_id == id && qtreel.activite_id==id1 && qtreel.sous_budget_id==0);
 
       
         }
@@ -2461,7 +2461,7 @@ CreditAutorise() {
       afficheLesSousBudgetLigneBudgetaire() {
       return (id1,id) => {
         if (id1 != null && id1 != "" && id != null && id != "") {
-           return this.budgetEclate.filter(qtreel => qtreel.activite_id==id1 && qtreel.sous_activite_id==id);
+           return this.budgetEclate.filter(qtreel => qtreel.activite_id==id1 && qtreel.sous_budget_id==id);
 
      
       

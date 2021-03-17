@@ -119,7 +119,9 @@ const defaultState = {
     facturePiece:[],
     AutreDepense:[],
     gestionOrdrePaiement:[],
-    gestionOrdrePaiementAnnulation:[]
+    gestionOrdrePaiementAnnulation:[],
+    ServiceRealiteFaitOp:[],
+    historiqueDecisionCfOP:[]
 
 }
 
