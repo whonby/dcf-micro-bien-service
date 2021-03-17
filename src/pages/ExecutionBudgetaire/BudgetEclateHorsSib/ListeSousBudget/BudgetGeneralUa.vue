@@ -205,7 +205,7 @@
                      <td style="font-size:14px;color:#000;text-align:center;background:red;font-weight:bold;" v-else-if="decisionCfBudgetEclate(detail_marche.uniteadministrative_id) == 3">
                      {{formatageSomme(parseFloat(parseFloat(recupereMontantEtatTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantDonTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantEmpruntTotal(detail_marche.uniteadministrative_id))))}}
                      </td>
-                     <td style="font-size:14px;color:#000;text-align:center;background:#0033ff;font-weight:bold;" v-else>
+                     <td style="font-size:14px;color:#fff;text-align:center;background:#0033ff;font-weight:bold;" v-else>
                      {{formatageSomme(parseFloat(parseFloat(recupereMontantEtatTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantDonTotal(detail_marche.uniteadministrative_id))+parseFloat(recupereMontantEmpruntTotal(detail_marche.uniteadministrative_id))))}}
                      </td>
                    

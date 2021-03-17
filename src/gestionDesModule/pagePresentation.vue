@@ -676,6 +676,7 @@ return objJson.user_role.role.libelle
   afficheIdUtilisateur(){
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
+if(objJson==undefined) return null;
 return objJson.id
 
 },

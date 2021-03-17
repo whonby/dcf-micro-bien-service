@@ -43,13 +43,13 @@
                      Taux d'exécution:<span style="color: #e36706; "><b>{{objetUnite.tauxBudget}} %</b></span>
                   </div>
 
-                  
-              
+
+
                 </div>
                 <div class="span12" v-if="objetUnite">
 
                      <div class="row-fluid">
-             
+
 
     <div class="row-fluid gutters-sm">
             <div class="span11" v-for="marche_image in imageMarcheSelectionner(objetUnite.id)" :key="marche_image.id">
@@ -62,9 +62,9 @@
               <router-link class="btn btn-outline-primary" :to="{ name: 'DetailImageMarche', params: { id:marche_image.id }}" title="Detail Marche CF">
                                          Consulter
                                         </router-link>
-                      
+
                     </div>
-                    
+
                   </div>
                   <div class="mt-3">
                       <h4>Nom de l'Agent : DCF</h4>
@@ -72,15 +72,15 @@
                       <p class="text-secondary mb-1">Distance :
                         {{distance(marche_image.latitude, marche_image.longitude,objetUnite.latitude,objetUnite.longitude, 'K')}}
                       </p>
-                    
-                     
+
+
                     </div>
                 </div>
               </div>
-              
+
             </div>
-            
-           
+
+
           </div>
                     </div>
                 </div>
@@ -184,8 +184,8 @@
 
 
 </div>
- 
-  
+
+
 
               <div v-if="caseAffichageMessageUniteAdminSituationMarche">
                 <div class="span12" style="font-size: 15px">Situation des marchés de UA
@@ -295,7 +295,7 @@ montantBudegtPasUniteAdminOuRegion
             </div>
           </div>
           <div class="span12">
-           
+
           </div>
         </div>
         <div class="span3">
@@ -1340,7 +1340,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
           }
         })
       }
-      return objet 
+      return objet
     },
     objetMarchePasUniteOuRegion(){
       let vM=this;
@@ -1527,6 +1527,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       let vM=this;
       if(vM.unite_administrative_id!=""){
         let objet=this.uniteAdministratives.find(item=>item.id==vM.unite_administrative_id)
+          if(objet==undefined) return "";
         return objet.libelle
       }
     return null
@@ -1536,6 +1537,7 @@ this.url_bien_service=process.env.VUE_APP_BIEN_SERVICE_URL
       let vM=this;
       if(vM.region!=""){
         let objet=this.regions.find(item=>item.id==vM.region)
+          if(objet==undefined) return "";
         return objet.libelle
       }
       return null
@@ -1961,7 +1963,7 @@ this.objetUnite=objet
 
 
 
-    
+
 -->
 <style>
 /* sidebar css */
@@ -2085,7 +2087,7 @@ this.objetUnite=objet
 .sidebar-tabs > li > a, .sidebar-tabs > ul > li > a {
   display: block;
   width: 100%;
-  
+
   line-height: 40px;
   color: inherit;
   text-decoration: none;
@@ -2358,8 +2360,8 @@ label {
   font-size: 0.9em;
 }
 [type="radio"] {
-  clip: rect(0 0 0 0); 
-  position: absolute; 
+  clip: rect(0 0 0 0);
+  position: absolute;
 }
 [type="radio"] + span {
   display: block;
