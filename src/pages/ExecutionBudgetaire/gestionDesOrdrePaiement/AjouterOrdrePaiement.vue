@@ -1,4 +1,4 @@
-numero_ordrepaiement
+numero_ordre_paiement_combine
 <template>
 
 <div class="container-fluid">
@@ -2885,12 +2885,12 @@ this.$("#ModifierexampleModal").modal('hide');
     },
     AjoutePieceJustific() {
       if(this.formData.type_ordre_paiement==2){
- this.intitule=this.anneeAmort + "" + this.formData.numero_ordre_paiement
+ //this.intitule=this.anneeAmort + "" + this.formData.numero_ordre_paiement
       var nouvelObjetProforma = {
         
         	numero_ordre:this.numeroOrdre(this.formData.numero_ordre_paiement),
-      numero_ordrepaiement:this.formData.numero_ordre_paiement,
-      numero_ordre_paiement_combine:this.intitule,
+     // numero_ordrepaiement:this.formData.numero_ordre_paiement,
+      //numero_ordre_paiement_combine:this.intitule,
       libelle:this.formData1.libelle,
       reference:this.formData1.reference,
       date_piece:this.formData1.date_piece,
@@ -2915,8 +2915,8 @@ this.$("#ModifierexampleModal").modal('hide');
       var nouvelObjetdefinitive = {
         
         	numero_ordre:this.numeroOrdreDefinitive(this.formData.numero_ordre_paiement),
-      numero_ordrepaiement:this.formData.numero_ordre_paiement,
-      numero_ordre_paiement_combine:this.intitule,
+      //numero_ordrepaiement:this.formData.numero_ordre_paiement,
+      //numero_ordre_paiement_combine:this.intitule,
       libelle:this.formData1.libelle,
       reference:this.formData1.reference,
       date_piece:this.formData1.date_piece,

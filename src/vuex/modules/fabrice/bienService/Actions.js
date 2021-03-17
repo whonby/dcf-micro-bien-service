@@ -5677,3 +5677,140 @@ export function supprimerGestionOrdrePaiementAnnulat({ commit }, id) {
 
 //************************** gestion des Ordre de Paiement Regie**************** */
 
+
+
+
+
+
+export function getServiceRealiteFaitOp({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/ServiceRealiteFaitOp")
+          .then(response => {
+              commit("GET_ALL_SERVICE_REALITE_FAIT_OP", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterServiceRealiteFaitOp({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/ServiceRealiteFaitOp", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_SERVICE_REALITE_FAIT_OP", response.data);
+             
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "ce Numero existe déja",
+            type:"error"
+        });
+    })
+}
+
+
+export function modifierServiceRealiteFaitOp({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/ServiceRealiteFaitOp/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_SERVICE_REALITE_FAIT_OP", response.data);
+          
+
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerServiceRealiteFaitOp({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_SERVICE_REALITE_FAIT_OP", id);
+        
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/ServiceRealiteFaitOp/" + id).then(() => dialog.close());
+      });
+}
+
+
+
+
+
+
+
+
+export function getHistoriqueDecisionOp({ commit }) {
+  queue.push(() => {
+      axios
+          .get("/HistoriqueDecisionOp")
+          .then(response => {
+              commit("GET_ALL_HISTORIQUE_DECISION_CF_OP", response.data);
+          })
+          .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterHistoriqueDecisionOp({ commit }, nouveau) {
+  asyncLoading(axios
+      .post("/HistoriqueDecisionOp", nouveau))
+      .then(response => {
+          if (response.status == 201) {
+              commit("AJOUTER_HISTORIQUE_DECISION_CF_OP", response.data);
+             
+              this.$app.$notify({
+                  title: 'Success',
+                  text: 'Enregistrement Effectué avec Succès!',
+                  type: "success"
+              })
+          }
+      }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "ce Numero existe déja",
+            type:"error"
+        });
+    })
+}
+
+
+export function modifierHistoriqueDecisionOp({ commit }, nouveau) {
+  asyncLoading(axios
+      .put("/HistoriqueDecisionOp/" + nouveau.id,nouveau))
+      .then(response => {
+          commit("MODIFIER_HISTORIQUE_DECISION_CF_OP", response.data);
+          
+
+          this.$app.$notify({
+              title: 'Success',
+              text: 'Modification Effectué avec Succès!',
+              type: "success"
+          })
+      });
+}
+//supprimer
+export function supprimerHistoriqueDecisionOp({ commit }, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit("SUPPRIMER_HISTORIQUE_DECISION_CF_OP", id);
+        
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete("/HistoriqueDecisionOp/" + id).then(() => dialog.close());
+      });
+}

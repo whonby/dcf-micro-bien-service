@@ -3402,8 +3402,9 @@ this.$("#ModifierexampleModal").modal('hide');
 
 
 rechercheListeMarche(){
-       let objetMandater=this.gettersgestionOrdrePaiement.filter(item=>item.numero_ordre_paiement==this.formData.numero_ordre_anulation && item.decision_cf==8 && item.type_ordre_paiement==3 || item.numero_ordre_paiement==this.formData.numero_ordre_anulation && item.decision_cf==9 && item.type_ordre_paiement==3)
+       let objetMandater=this.gettersgestionOrdrePaiement.filter(item=>item.numero_ordre_paiement==this.formData.numero_ordre_anulation && item.decision_cf==8 && item.type_ordre_paiement==2 || item.numero_ordre_paiement==this.formData.numero_ordre_anulation && item.decision_cf==9 && item.type_ordre_paiement==2)
       if(objetMandater!=undefined){
+
         if (objetMandater.length==1){
            let acteur= this.gettersgestionOrdrePaiement.find(item=>item.numero_ordre_paiement==this.formData.numero_ordre_anulation)
          this.detailOpProvisoire.recupererId=acteur.id,

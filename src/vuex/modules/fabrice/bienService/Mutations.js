@@ -2977,3 +2977,56 @@ export const SUPPRIMER_GESTION_ORDRE_PAIEMENT_ANNULATION = (state, id)=> {
 //****************************  gestion des OrdrePaiementRegie*********************** */
 
 
+
+
+export const GET_ALL_SERVICE_REALITE_FAIT_OP= (state, tableau_document) =>{
+    state.ServiceRealiteFaitOp = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_SERVICE_REALITE_FAIT_OP = (state, elementAjouter) => {
+    state.ServiceRealiteFaitOp.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_SERVICE_REALITE_FAIT_OP = (state, elementModif)=>{
+    state.ServiceRealiteFaitOp = state.ServiceRealiteFaitOp.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_SERVICE_REALITE_FAIT_OP = (state, id)=> {
+    state.ServiceRealiteFaitOp = state.ServiceRealiteFaitOp.filter(prest => prest.id !=id)
+}
+
+
+
+
+
+export const GET_ALL_HISTORIQUE_DECISION_CF_OP= (state, tableau_document) =>{
+    state.historiqueDecisionCfOP = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_HISTORIQUE_DECISION_CF_OP = (state, elementAjouter) => {
+    state.historiqueDecisionCfOP.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_HISTORIQUE_DECISION_CF_OP = (state, elementModif)=>{
+    state.historiqueDecisionCfOP = state.historiqueDecisionCfOP.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_HISTORIQUE_DECISION_CF_OP = (state, id)=> {
+    state.historiqueDecisionCfOP = state.historiqueDecisionCfOP.filter(prest => prest.id !=id)
+}

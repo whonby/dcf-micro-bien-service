@@ -127,7 +127,7 @@
                     
                   </tr>
                   <tr>
-                    <th style="font-size:14px;color:#000;">LIGNE BUDGETAIRE</th>
+                    <th style="font-size:14px;color:#000;">LIGNE BUDGETAIRE785421</th>
                     <th style="font-size:14px;color:#000;">ETAT</th>
                     <th style="font-size:14px;color:#000;">DON</th>
                     <th style="font-size:14px;color:#000;">EMPRUNT</th>
@@ -151,10 +151,10 @@
                      </td>
                   </tr>
                     <tr>
-                    <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;">PERSONNEL</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td style="font-size:14px;color:#000;text-align:left;font-weight:bold;">PERSONNEL78</td>
+                    <td>89</td>
+                    <td>45</td>
+                    <td>12</td>
                     <td style="font-size:14px;color:#000;text-align:center;font-weight:bold;">{{formatageSomme(parseFloat(SommeDesBudgetaireEclatePersonnel(detail_marche.uniteadministrative_id)))}}</td>
                     
                   </tr>

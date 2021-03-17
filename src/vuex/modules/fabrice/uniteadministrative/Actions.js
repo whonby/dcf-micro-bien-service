@@ -1371,7 +1371,7 @@ export function modifierBudgetEclate({ commit }, nouveau) {
 
           this.$app.$notify({
               title: 'Success',
-              text: 'Modification Effectué avec Succès!',
+              text: 'Enregistrement Effectué avec Succès!',
               type: "success"
           })
       });
@@ -1855,7 +1855,7 @@ export function modifierBudgetEclateRegie({ commit}, nouveau) {
 
           this.$app.$notify({
               title: 'Success',
-              text: 'Modification Effectué avec Succès!',
+              text: 'Enregistrement Effectué avec Succès!',
               type: "success"
           })
       });
