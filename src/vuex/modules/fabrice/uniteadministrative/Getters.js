@@ -666,6 +666,10 @@ export const montantTransfererGlobalRejeter = (state, getters) =>
     0
   );
 
+  export const GrandeNaturePersonelCp = state =>state.budgetGeneral.filter(item =>
+    item.gdenature_id ==2 && item.actived == 1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0).toFixed(0);
+
+
 
 export const getPersonnaliseHistoriqueTransfert = (
   state,
@@ -722,6 +726,7 @@ export const afficheBudgetActive = state =>
   state.budgetGeneral.filter(
     affichenaturedep => affichenaturedep.actived == 1
   );
+  
 
 
 

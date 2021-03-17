@@ -1,9 +1,11 @@
 <template>
   <div>
-    <h1>TABLEAU DE BORD GENERAL{{ Grande_nature1 }}</h1>
-    <h2>la vue se trouve dans gestion des modules tableau de bord general</h2>
+    <h1 style="text-align: center; text-decoration: underline">
+      TABLEAU DE BORD GENERAL BUDGET GENERAL SIB
+    </h1>
+    <br />
     <div class="container-fluid" style="height: 100em">
-      <div class="col-md-8 control-group">
+      <!-- <div class="col-md-8 control-group">
         <select name="" id="" v-model="grande_nature_id" class="span6">
           <option
             v-for="grandnature in grandes_natures"
@@ -13,26 +15,134 @@
             {{ grandnature.libelle }}
           </option>
         </select>
-      </div>
-      <br />
+      </div> -->
       <br />
 
-      <div class="span4" style="border: 2px dotted #ffffff">
-        <apexchart
-          type="donut"
-          :options="chartOptions"
-          :series="[this.Grande_nature1, this.Grande_nature1]"
-        ></apexchart>
-      </div>
+      <table class="table table-bordered table-striped">
+        <tr style="border: 2px solid #000">
+          <td>
+            <!-- debut pour les Personnels -->
+            <h4 style="text-align: center">Personnels</h4>
+            <div class="span4" style="border: 2px dotted #ffffff">
+              <div class="card">
+                <apexchart
+                  type="donut"
+                  :options="chartOptions"
+                  :series="dataPourcentage"
+                ></apexchart>
+              </div>
+            </div>
+            <div class="span4" style="border: 2px dotted #ffffff">
+              <div class="card">
+                <apexchart
+                  type="donut"
+                  :options="chartOptions21"
+                  :series="dataPourcentage21"
+                ></apexchart>
+              </div>
+            </div>
+          </td>
+          <!-- fin pour les Personnels -->
+          <td>
+            <!-- debut pour les Biens et Services -->
+            <h4 style="text-align: center">Biens et Services</h4>
+            <div class="span4" style="border: 2px dotted #ffffff">
+              <div class="card">
+                <apexchart
+                  type="donut"
+                  :options="chartOptionsBienService1"
+                  :series="dataPourcentageBienService1"
+                ></apexchart>
+              </div>
+            </div>
+            <div class="span4" style="border: 2px dotted #ffffff">
+              <div class="card">
+                <apexchart
+                  type="donut"
+                  :options="chartOptionsBienService2"
+                  :series="dataPourcentageBienService2"
+                ></apexchart>
+              </div>
+            </div>
+          </td>
+          <!-- debut pour les Biens et Services -->
+        </tr>
+      </table>
+
+      <!-- debut pour les Transferts -->
+      <table class="table table-bordered table-striped">
+        <tr style="border: 2px solid #000">
+          <td>
+            <h4 style="text-align: center">Transferts</h4>
+            <div class="span4" style="border: 2px dotted #ffffff">
+              <div class="card">
+                <apexchart
+                  type="donut"
+                  :options="chartOptionsTransferts1"
+                  :series="dataPourcentageTransferts1"
+                ></apexchart>
+              </div>
+            </div>
+            <div class="span4" style="border: 2px dotted #ffffff">
+              <div class="card">
+                <apexchart
+                  type="donut"
+                  :options="chartOptionsTransferts2"
+                  :series="dataPourcentageTransferts2"
+                ></apexchart>
+              </div>
+            </div>
+          </td>
+          <!-- fin pour les Transferts -->
+          <td>
+            <!-- debut pour les Investissements -->
+            <h4 style="text-align: center">Investissements</h4>
+
+            <div class="span4" style="border: 2px dotted #ffffff">
+              <div class="card">
+                <apexchart
+                  type="donut"
+                  :options="chartOptionsInvestissements1"
+                  :series="dataPourcentageInvestissements1"
+                ></apexchart>
+              </div>
+            </div>
+
+            <div class="span4" style="border: 2px dotted #ffffff">
+              <div class="card">
+                <apexchart
+                  type="donut"
+                  :options="chartOptionsInvestissements2"
+                  :series="dataPourcentageInvestissements2"
+                ></apexchart>
+              </div>
+            </div>
+          </td>
+          <!-- fin pour les Investissements -->
+        </tr>
+      </table>
     </div>
+    <!-- pour les personnels -->
+    {{ dataArrayPourcentage }}
+    {{ dataArrayPourcentage21 }}
+    <!-- pour bien et services -->
+    {{ dataArrayPourcentageBienService1 }}
+    {{ dataArrayPourcentageBienService2 }}
+    <!-- pour les transferts -->
+    {{ dataArrayPourcentageTransferts1 }}
+    {{ dataArrayPourcentageTransferts2 }}
+
+    <!-- pour les Investissements -->
+    {{ dataArrayPourcentageInvestissements1 }}
+    {{ dataArrayPourcentageInvestissements2 }}
   </div>
 </template>
 
 <script>
 import VueApexCharts from "vue-apexcharts";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 //import { noDCfNoAdmin, dcf } from "../../../Repositories/Auth";
-//import { formatageSomme } from "../../../Repositories/Repository";
+import { formatageSomme } from "@/Repositories/Repository";
 //import { ModelListSelect } from "vue-search-select";
 
 export default {
@@ -45,36 +155,208 @@ export default {
   data() {
     return {
       grande_nature_id: "",
-      series: [],
+      dataPourcentage: [],
+      dataPourcentage21: [],
+      dataPourcentageBienService1: [],
+      dataPourcentageBienService2: [],
+      dataPourcentageTransferts1: [],
+      dataPourcentageTransferts2: [],
+      dataPourcentageInvestissements1: [],
+      dataPourcentageInvestissements2: [],
       chartOptions: {
         chart: {
-          width: 380,
+          width: 450,
           type: "donut",
         },
-        labels: ["Budget execute en AE", "Budget preveisionel en CP"],
+        labels: ["Budget preveisionel en AE", "Budget execute en AE"],
         colors: ["#8ea9db", "#f4b084"],
         responsive: [
           {
             breakpoint: 480,
             options: {
               chart: {
-                width: 200,
+                width: 480,
               },
               legend: {
                 position: "bottom",
-              },
-              title: {
-                text: "Favourite Movie Type",
               },
             },
           },
         ],
       },
+      //deuxiement partie de la nature personnel
+
+      chartOptions21: {
+        chart: {
+          width: 450,
+          type: "donut",
+        },
+        labels: ["Budget preveisionel CP", "Budget execute CP"],
+        colors: ["#f4b084", "#8ea9db"],
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 480,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      },
+
+      // debut de la nature bien et services
+      chartOptionsBienService1: {
+        chart: {
+          width: 450,
+          type: "donut",
+        },
+        labels: ["Budget preveisionel AE", "Budget execute AE"],
+        colors: ["#8ea9db", "#f4b084"],
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 480,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      },
+
+      chartOptionsBienService2: {
+        chart: {
+          width: 450,
+          type: "donut",
+        },
+        labels: ["Budget preveisionel CP", "Budget execute CP"],
+         colors: ["#f4b084", "#8ea9db"],
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 480,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      },
+
+      // fin bien et service
+
+      // debut de la nature Transferts
+      chartOptionsTransferts1: {
+        chart: {
+          width: 450,
+          type: "donut",
+        },
+        labels: ["Budget preveisionel AE", "Budget execute AE"],
+        colors: ["#8ea9db", "#f4b084"],
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 480,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      },
+
+      chartOptionsTransferts2: {
+        chart: {
+          width: 450,
+          type: "donut",
+        },
+        labels: ["Budget preveisionel CP", "Budget execute CP"],
+         colors: ["#f4b084", "#8ea9db"],
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 480,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      },
+
+      // fin Transferts
+
+      // debut de la nature Investissements
+      chartOptionsInvestissements1: {
+        chart: {
+          width: 450,
+          type: "donut",
+        },
+        labels: ["Budget preveisionel AE", "Budget execute AE"],
+        colors: ["#8ea9db", "#f4b084"],
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 480,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      },
+
+      chartOptionsInvestissements2: {
+        chart: {
+          width: 450,
+          type: "donut",
+        },
+        labels: ["Budget preveisionel CP", "Budget execute CP"],
+         colors: ["#f4b084", "#8ea9db"],
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 480,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      },
+
+      // fin Investissements
     };
   },
 
   created() {
     console.log(this.budgetGeneral);
+    console.log(this.grandes_natures);
+    //console.log(this.GrandeNaturePersonelCp);
+    //this.series = [this.grande_nature_id, this.grande_nature_id];
+    // this.series = [this.GrandeNaturePersonelCp, this.GrandeNaturePersonelCp];
   },
   computed: {
     ...mapGetters("uniteadministrative", [
@@ -83,6 +365,7 @@ export default {
       "uniteAdministratives",
       "getterBudgeCharge",
       "budgetGeneral",
+      "GrandeNaturePersonelCp",
     ]),
 
     ...mapGetters("parametreGenerauxAdministratif", [
@@ -90,6 +373,11 @@ export default {
       "natures_sections",
       "grandes_natures",
       "exercices_budgetaires",
+    ]),
+    ...mapGetters("bienService", [
+      "gettersDossierMandat",
+      "gettersDemandeEngagement",
+      "gettersDossierLiquidation",
     ]),
 
     anneeAmort() {
@@ -102,34 +390,351 @@ export default {
       }
       return 0;
     },
+    // ************** debut grande nature Personnels qui a pour id 2 ***********//
+    GrandeNaturePersonelAePrevisionel() {
+      return this.budgetGeneral
+        .filter((item) => item.gdenature_id == 2 && item.actived == 1)
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+          0
+        )
+        .toFixed(0);
+    },
 
-    Grande_nature1() {
-      if (this.grande_nature_id == "") {
-        return 0
-      } else {
-         return this.budgetGeneral
-          .filter(
-            (item) =>
-              item.gdenature_id == this.grande_nature_id && item.actived == 1
-          )
-          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
-          .toFixed(0);
-      }
-    
+    GrandeNaturePersonelCpPrevisionel() {
+      return this.budgetGeneral
+        .filter((item) => item.gdenature_id == 2 && item.actived == 1)
+        .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+        .toFixed(0);
     },
-     Grande_nature2() {
-      if (this.grande_nature_id != "") {
-        return this.budgetGeneral
-          .filter(
-            (item) =>
-              item.gdenature_id == this.grande_nature_id && item.actived == 1
-          )
-          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.ae), 0)
-          .toFixed(0);
-      } else {
-        return 10;
-      }
+
+    GrandeNaturePersonelAeExecute() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) => this.liquidationid(item.id) == 8 && item.grd_nature_id == 2
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
     },
+
+    GrandeNaturePersonelCpExecute() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 2
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    liquidationidmandat() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersDossierMandat.find(
+            (qtreel) => qtreel.dmd_engagement_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.decision_cf;
+          }
+          return 0;
+        }
+      };
+    },
+
+    liquidationid() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.gettersDossierLiquidation.find(
+            (qtreel) => qtreel.dmd_engagement_id == id
+          );
+
+          if (qtereel) {
+            return qtereel.decision_cf;
+          }
+          return 0;
+        }
+      };
+    },
+    // ************** fin grande nature Personnels qui a pour id 2 ***********//
+
+    //debut des fonction de bien et services
+    GrandeNatureBienServiceAePrevisionel() {
+      return this.budgetGeneral
+        .filter((item) => item.gdenature_id == 5 && item.actived == 1)
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+          0
+        )
+        .toFixed(0);
+    },
+
+    GrandeNatureBienServiceCpPrevisionel() {
+      return this.budgetGeneral
+        .filter((item) => item.gdenature_id == 5 && item.actived == 1)
+        .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+        .toFixed(0);
+    },
+
+    GrandeNatureBienServiceAeExecute() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) => this.liquidationid(item.id) == 8 && item.grd_nature_id == 5
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    GrandeNatureBienServiceCpExecute() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 5
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+    // fin des fonction bien et services
+
+    //debut des fonction transferts
+    GrandeNatureTransfertsAePrevisionel() {
+      return this.budgetGeneral
+        .filter((item) => item.gdenature_id == 6 && item.actived == 1)
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+          0
+        )
+        .toFixed(0);
+    },
+
+    GrandeNatureTransfertsCpPrevisionel() {
+      return this.budgetGeneral
+        .filter((item) => item.gdenature_id == 6 && item.actived == 1)
+        .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+        .toFixed(0);
+    },
+
+    GrandeNatureTransfertsAeExecute() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) => this.liquidationid(item.id) == 8 && item.grd_nature_id == 6
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    GrandeNatureTransfertsCpExecute() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 6
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    // fin des fonction transferts
+
+    //debut des fonction Investissements
+    GrandeNatureInvestissementsAePrevisionel() {
+      return this.budgetGeneral
+        .filter((item) => item.gdenature_id == 7 && item.actived == 1)
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+          0
+        )
+        .toFixed(0);
+    },
+
+    GrandeNatureInvestissementsCpPrevisionel() {
+      return this.budgetGeneral
+        .filter((item) => item.gdenature_id == 7 && item.actived == 1)
+        .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+        .toFixed(0);
+    },
+
+    GrandeNatureInvestissementsAeExecute() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) => this.liquidationid(item.id) == 8 && item.grd_nature_id == 7
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+    GrandeNatureInvestissementsCpExecute() {
+      return this.gettersDemandeEngagement
+        .filter(
+          (item) =>
+            this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 7
+        )
+        .reduce(
+          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+          0
+        )
+        .toFixed(0);
+    },
+
+    // fin des fonction Investissements
+
+    dataArrayPourcentage() {
+      let vm = this;
+      //console.log(parseFloat(this.pourcentageMarchePasStatus("planifie")))
+
+      if (vm.dataPourcentage.length > 0) {
+        vm.dataPourcentage = [];
+      }
+      vm.dataPourcentage.push(
+        parseFloat(this.GrandeNaturePersonelAePrevisionel)
+      );
+      vm.dataPourcentage.push(parseFloat(this.GrandeNaturePersonelAeExecute));
+
+      return "";
+    },
+
+    //deuxiement partie de la nature personnel
+    dataArrayPourcentage21() {
+      let vm = this;
+
+      if (vm.dataPourcentage21.length > 0) {
+        vm.dataPourcentage21 = [];
+      }
+      vm.dataPourcentage21.push(
+        parseFloat(this.GrandeNaturePersonelCpPrevisionel)
+      );
+      vm.dataPourcentage21.push(parseFloat(this.GrandeNaturePersonelCpExecute));
+
+      return "";
+    },
+
+    //debut bien et service
+    dataArrayPourcentageBienService1() {
+      let vm = this;
+
+      if (vm.dataPourcentageBienService1.length > 0) {
+        vm.dataPourcentageBienService1 = [];
+      }
+      vm.dataPourcentageBienService1.push(
+        parseFloat(this.GrandeNatureBienServiceAePrevisionel)
+      );
+      vm.dataPourcentageBienService1.push(
+        parseFloat(this.GrandeNatureBienServiceAeExecute)
+      );
+
+      return "";
+    },
+
+    dataArrayPourcentageBienService2() {
+      let vm = this;
+
+      if (vm.dataPourcentageBienService2.length > 0) {
+        vm.dataPourcentageBienService2 = [];
+      }
+      vm.dataPourcentageBienService2.push(
+        parseFloat(this.GrandeNatureBienServiceCpPrevisionel)
+      );
+      vm.dataPourcentageBienService2.push(
+        parseFloat(this.GrandeNatureBienServiceCpExecute)
+      );
+
+      return "";
+    },
+
+    //fin bien et services
+
+    //debut Tansferts
+    dataArrayPourcentageTransferts1() {
+      let vm = this;
+
+      if (vm.dataPourcentageTransferts1.length > 0) {
+        vm.dataPourcentageTransferts1 = [];
+      }
+      vm.dataPourcentageTransferts1.push(
+        parseFloat(this.GrandeNatureTransfertsAePrevisionel)
+      );
+      vm.dataPourcentageTransferts1.push(
+        parseFloat(this.GrandeNatureTransfertsAeExecute)
+      );
+
+      return "";
+    },
+
+    dataArrayPourcentageTransferts2() {
+      let vm = this;
+
+      if (vm.dataPourcentageTransferts2.length > 0) {
+        vm.dataPourcentageTransferts2 = [];
+      }
+      vm.dataPourcentageTransferts2.push(
+        parseFloat(this.GrandeNatureTransfertsCpPrevisionel)
+      );
+      vm.dataPourcentageTransferts2.push(
+        parseFloat(this.GrandeNatureTransfertsCpExecute)
+      );
+
+      return "";
+    },
+
+    //fin Tansferts
+
+    //debut Investissements
+    dataArrayPourcentageInvestissements1() {
+      let vm = this;
+
+      if (vm.dataPourcentageInvestissements1.length > 0) {
+        vm.dataPourcentageInvestissements1 = [];
+      }
+      vm.dataPourcentageInvestissements1.push(
+        parseFloat(this.GrandeNatureInvestissementsAePrevisionel)
+      );
+      vm.dataPourcentageInvestissements1.push(
+        parseFloat(this.GrandeNatureInvestissementsAeExecute)
+      );
+
+      return "";
+    },
+
+    dataArrayPourcentageInvestissements2() {
+      let vm = this;
+
+      if (vm.dataPourcentageInvestissements2.length > 0) {
+        vm.dataPourcentageInvestissements2 = [];
+      }
+      vm.dataPourcentageInvestissements2.push(
+        parseFloat(this.GrandeNatureInvestissementsCpPrevisionel)
+      );
+      vm.dataPourcentageInvestissements2.push(
+        parseFloat(this.GrandeNatureInvestissementsCpExecute)
+      );
+
+      return "";
+    },
+
+    //fin Investissements
+  },
+  methods: {
+    ...mapActions("uniteadministrative", []),
+    formatageSomme: formatageSomme,
   },
 };
 </script>
