@@ -14,7 +14,7 @@ numero_ordre_paiement_combine
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Ajouter Ordre Paiement{{formData.type_ordre_paiement}}</h5>
+              <h5>Ajouter Ordre Paiement</h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -104,7 +104,7 @@ numero_ordre_paiement_combine
             </td>
              <td>
               <div class="control-group">
-                <label class="control-label">Programme/Dotation{{tailleOpEnregistrer}}</label>
+                <label class="control-label">Programme/Dotation</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -1891,7 +1891,7 @@ components: {
             ...mapGetters('personnelUA', ["FichierJoinDmdEngagement","salairesActeur","personnaliseActeurDepense","personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","affichePersonnelRecuActeNormination"]),
-             ...mapGetters("uniteadministrative", ["budgetEclate","groupeLigneEconomiqueBudget","getSousBudget","groupeActiviteBudget","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
+             ...mapGetters("uniteadministrative", ["budgetEclate","groupeLigneEconomiqueBudget","getSousBudget","groupeActiviteBudgetEclate","budgetGeneral","fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             // ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
@@ -2112,7 +2112,7 @@ CreditAutorise() {
 filtrerActivite() {
       return (id) => {
         if (id != null && id != "") {
-           return this.groupeActiviteBudget.filter(qtreel => qtreel[0].ua_id == id && qtreel[0].actived==1 && qtreel[0].exercicebudget_id==this.anneeAmort);
+           return this.groupeActiviteBudgetEclate.filter(qtreel => qtreel[0].uniteadministrative_id == id && qtreel[0].annebudgetaire==this.anneeAmort);
 
       
         }

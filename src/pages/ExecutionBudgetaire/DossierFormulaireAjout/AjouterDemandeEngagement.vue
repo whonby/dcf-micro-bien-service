@@ -42,7 +42,7 @@ numeroOrdre
                                                     <label class="control-label">Mode</label>
                                                     <div class="controls">
                                                         <select v-model="formData.mode" class="span" style="border:1px solid #000">
-                                                            <option></option>
+                                                            
                                                             <option value="Budget Général">Budget Général</option>
                                                             <option value="Compte Spécial du Trésor">Compte Spécial du Trésor</option>
 
@@ -146,6 +146,68 @@ numeroOrdre
               
             </td>
                      </tr>
+                      <!-- <tr>
+                       <td>
+                                <label>Activite <code style="color:red;font-size:16px">*</code>
+                                </label>
+                                <model-list-select style="border:1px solid #000"
+                                                   class="wide"
+                                                   :list="listeDesUa"
+                                                   v-model="formData.ua_id"
+                                                   option-value="id"
+                                                   option-text="libelle"
+                                                   placeholder=""
+                                >
+
+                                </model-list-select>
+                                 <code style="color:red;font-size:12px" v-if="formData.ua_id==''">Veuillez renseigner ce champ</code>
+                            </td>
+                           
+                             <td>
+                <div class="control-group">
+                  <label class="control-label">Grande nature de dépense <code style="color:red;font-size:16px">*</code></label>
+                  <div class="controls">
+                    <select v-model="formData.grd_nature_id" class="span" style="border:1px solid #000">
+                      <option
+                        v-for="gdenature in grandes_natures"
+                        :key="gdenature.id"
+                        :value="gdenature.id"
+                      >{{gdenature.libelle}}</option>
+                    </select>
+                     <code style="color:red;font-size:12px" v-if="formData.grd_nature_id==''">Veuillez renseigner ce champ</code>
+                  </div>
+                </div>
+              </td>
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Ligne économique <code style="color:red;font-size:16px">*</code></label>
+                  <div class="controls">
+                    <select v-model="formData.ligne_economique_id" class="span" style="border:1px solid #000">
+                      <option
+                        v-for="ligneeco in ligneEconomique(formData.ua_id,formData.grd_nature_id)"
+                        :key="ligneeco.id"
+                        :value="ligneeco.economique_id"
+                      >{{libelleLigneEconomique(ligneeco.economique_id)}}</option>
+                    </select>
+                    <code style="color:red;font-size:12px" v-if="formData.ligne_economique_id==''">Veuillez renseigner ce champ</code>
+                  </div>
+                </div>
+              </td>
+               <td>
+                            <div class="control-group">
+                                                    <label class="control-label">Type de procédure <code style="color:red;font-size:16px">*</code></label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.type_procedure_id" class="span" style="border:1px solid #000">
+                                                            <option></option>
+                                                            <option value="Engagement par Bon de Commande">Engagement par Bon de Commande </option>
+                                                            <option value="Engagement direct">Engagement direct</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                        </td>
+               
+                     </tr> -->
                      <tr>
                        <td>
                                 <label>Unité Administrative <code style="color:red;font-size:16px">*</code>
@@ -230,7 +292,7 @@ numeroOrdre
           <tr>
              <td colspan="">
                 <div class="control-group">
-                  <label class="control-label">Type d'engagement</label>
+                  <label class="control-label">Type d'engagement(Direct)</label>
                   <div class="controls">
                     <select v-model="formData.type_engagement_id" class="span" style="border:1px solid #000">
                       <option value=""></option>
@@ -1892,7 +1954,9 @@ components: {
                 liste:[],
                 
           info_pdf:false,
+          
                 formData:{
+                  mode:"Budget Général",
                  numero_demande:"",
                  ligne_economique_id:"",
                  ua_id:"",
@@ -2940,7 +3004,8 @@ var nouvelObjet1 = {
     	entreprise_id:this.idEntreprise(this.formData2.numero_marche),
            numero_marche:this.formData2.numero_marche,
            	autre_depense_id:this.idAutreDepense(this.formData2.reference_autre_depense),
-             numero_op_systeme:this.formData2.numero_systeme
+             numero_op_systeme:this.formData2.numero_systeme,
+             marche_id:this.formData2.objet_marche
             
       };
     

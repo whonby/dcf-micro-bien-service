@@ -121,7 +121,342 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
-      <div style="font-size:30px;text-align:center;text-decoration:underline;font-weight:bold;">
+    <br>
+<div style="font-size:13px;text-align:center;text-decoration:underline;font-weight:bold;">
+          <p >DETAIL ORDRE DE PAIEMENT DIRECT </p>
+        </div>
+       <table class="table table-bordered table-striped" id="Nature_section">
+                <thead>
+                  <tr>
+                    <th >Exercice</th>
+                    
+                    <th >Type op</th>
+                   
+                   <th >Numéro op</th>
+                    <th >Section</th>
+
+                     <th >Programme</th>
+                    
+                    <th >Ua</th>
+                   <th >Activite</th>
+                   <th >ligne Economique</th>
+                    <th >Entreprise</th>
+
+                     <th >Numero du Marche</th>
+                  
+                  
+                  </tr>
+                </thead>
+           
+                <tbody>
+                  <tr class="odd gradeX">
+                    <td
+                     
+                    >{{detailOp.exercice || 'Non renseigné'}}</td>
+                    
+                     <td
+                     
+                    >{{detailOp.type_ordre_paiement || 'Non renseigné'}}</td>
+                     <td
+                     
+                    >{{detailOp.numero_ordre_paiement || 'Non renseigné'}}</td>
+                    <td
+                     
+                    >{{detailOp.section_id || 'Non renseigné'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+               <table class="table table-bordered table-striped" id="Nature_section">
+                <thead>
+                  <tr>
+                   <th >Numero du Marche</th>
+                   <th >type financement</th>
+                   <th >Source Financement</th>
+                    <th >Montant Op</th>
+                     <th >Mode Paiement</th>
+                   <th >Nom et prenoms cf</th>
+                   <th >famille motif</th>
+                    <th >Motif</th>
+
+
+                    <th >Decision cf</th>
+                   <th >Date decision</th>
+                  
+                  </tr>
+                </thead>
+           
+                <tbody>
+                
+                </tbody>
+              </table>
+                <table class="table table-bordered table-striped" id="Nature_section">
+                <thead>
+                  <tr>
+                 
+                   <th >Action</th>
+                    <th>Sous Budget</th>
+                     <th >Autres Motif</th>
+                   <th >Observation</th>
+                   <th >Autres Depense</th>
+                    <th>Compte fournisseur</th>
+
+
+                     <th >Adresse</th>
+                   <!-- <th style="width:60%">Date decision</th>
+                   <th style="width:10%">Action</th>
+                    <th style="width:5%">Sous Budget</th>
+                     <th style="width:10%">Autres Motif</th>
+                   <th style="width:60%">Observation</th>
+                   <th style="width:10%">Autres Depense</th>
+                    <th style="width:5%">Compte fournisseur</th> -->
+                  </tr>
+                </thead>
+           
+                <tbody>
+                
+                </tbody>
+              </table>
+              <div style="font-size:13px;text-align:center;text-decoration:underline;font-weight:bold;">
+          <p >DETAIL ORDRE DE PAIEMENT PROVISOIRE </p>
+        </div>
+       <table class="table table-bordered table-striped" id="Nature_section">
+                <thead>
+                  <tr>
+                    <th >Exercice</th>
+                    
+                    <th >Type op</th>
+                   
+                   <th >Numéro op</th>
+                    <th >Section</th>
+
+                     <th >Programme</th>
+                    
+                    <th >Ua</th>
+                   <th >Activite</th>
+                   <th >ligne Economique</th>
+                    <th >Entreprise</th>
+
+                     <th >Numero du Marche</th>
+                  
+                  
+                  </tr>
+                </thead>
+           
+                <tbody>
+                 
+                </tbody>
+              </table>
+               <table class="table table-bordered table-striped" id="Nature_section">
+                <thead>
+                  <tr>
+                   <th >Numero du Marche</th>
+                   <th >type financement</th>
+                   <th >Source Financement</th>
+                    <th >Montant Op</th>
+                     <th >Mode Paiement</th>
+                   <th >Nom et prenoms cf</th>
+                   <th >famille motif</th>
+                    <th >Motif</th>
+
+
+                    <th >Decision cf</th>
+                   <th >Date decision</th>
+                  
+                  </tr>
+                </thead>
+           
+                <tbody>
+                
+                </tbody>
+              </table>
+                <table class="table table-bordered table-striped" id="Nature_section">
+                <thead>
+                  <tr>
+                 
+                   <th >Action</th>
+                    <th>Sous Budget</th>
+                     <th >Autres Motif</th>
+                   <th >Observation</th>
+                   <th >Autres Depense</th>
+                    <th>Compte fournisseur</th>
+
+
+                     <th >Adresse</th>
+                   <!-- <th style="width:60%">Date decision</th>
+                   <th style="width:10%">Action</th>
+                    <th style="width:5%">Sous Budget</th>
+                     <th style="width:10%">Autres Motif</th>
+                   <th style="width:60%">Observation</th>
+                   <th style="width:10%">Autres Depense</th>
+                    <th style="width:5%">Compte fournisseur</th> -->
+                  </tr>
+                </thead>
+           
+                <tbody>
+                
+                </tbody>
+              </table>
+              <div style="font-size:13px;text-align:center;text-decoration:underline;font-weight:bold;">
+          <p >DETAIL ORDRE DE PAIEMENT ANNULATION </p>
+        </div>
+       <table class="table table-bordered table-striped" id="Nature_section">
+                <thead>
+                  <tr>
+                    <th >Exercice</th>
+                    
+                    <th >Type op</th>
+                   
+                   <th >Numéro op</th>
+                    <th >Section</th>
+
+                     <th >Programme</th>
+                    
+                    <th >Ua</th>
+                   <th >Activite</th>
+                   <th >ligne Economique</th>
+                    <th >Entreprise</th>
+
+                     <th >Numero du Marche</th>
+                  
+                  
+                  </tr>
+                </thead>
+           
+                <tbody>
+                 
+                </tbody>
+              </table>
+               <table class="table table-bordered table-striped" id="Nature_section">
+                <thead>
+                  <tr>
+                   <th >Numero du Marche</th>
+                   <th >type financement</th>
+                   <th >Source Financement</th>
+                    <th >Montant Op</th>
+                     <th >Mode Paiement</th>
+                   <th >Nom et prenoms cf</th>
+                   <th >famille motif</th>
+                    <th >Motif</th>
+
+
+                    <th >Decision cf</th>
+                   <th >Date decision</th>
+                  
+                  </tr>
+                </thead>
+           
+                <tbody>
+                
+                </tbody>
+              </table>
+                <table class="table table-bordered table-striped" id="Nature_section">
+                <thead>
+                  <tr>
+                 
+                   <th >Action</th>
+                    <th>Sous Budget</th>
+                     <th >Autres Motif</th>
+                   <th >Observation</th>
+                   <th >Autres Depense</th>
+                    <th>Compte fournisseur</th>
+
+
+                     <th >Adresse</th>
+                   <!-- <th style="width:60%">Date decision</th>
+                   <th style="width:10%">Action</th>
+                    <th style="width:5%">Sous Budget</th>
+                     <th style="width:10%">Autres Motif</th>
+                   <th style="width:60%">Observation</th>
+                   <th style="width:10%">Autres Depense</th>
+                    <th style="width:5%">Compte fournisseur</th> -->
+                  </tr>
+                </thead>
+           
+                <tbody>
+                
+                </tbody>
+              </table>
+              <div style="font-size:13px;text-align:center;text-decoration:underline;font-weight:bold;">
+          <p >DETAIL ORDRE DE PAIEMENT DEFINITIF </p>
+        </div>
+       <table class="table table-bordered table-striped" id="Nature_section">
+                <thead>
+                  <tr>
+                    <th >Exercice</th>
+                    
+                    <th >Type op</th>
+                   
+                   <th >Numéro op</th>
+                    <th >Section</th>
+
+                     <th >Programme</th>
+                    
+                    <th >Ua</th>
+                   <th >Activite</th>
+                   <th >ligne Economique</th>
+                    <th >Entreprise</th>
+
+                     <th >Numero du Marche</th>
+                  
+                  
+                  </tr>
+                </thead>
+           
+                <tbody>
+                 
+                </tbody>
+              </table>
+               <table class="table table-bordered table-striped" id="Nature_section">
+                <thead>
+                  <tr>
+                   <th >Numero du Marche</th>
+                   <th >type financement</th>
+                   <th >Source Financement</th>
+                    <th >Montant Op</th>
+                     <th >Mode Paiement</th>
+                   <th >Nom et prenoms cf</th>
+                   <th >famille motif</th>
+                    <th >Motif</th>
+
+
+                    <th >Decision cf</th>
+                   <th >Date decision</th>
+                  
+                  </tr>
+                </thead>
+           
+                <tbody>
+                
+                </tbody>
+              </table>
+                <table class="table table-bordered table-striped" id="Nature_section">
+                <thead>
+                  <tr>
+                 
+                   <th >Action</th>
+                    <th>Sous Budget</th>
+                     <th >Autres Motif</th>
+                   <th >Observation</th>
+                   <th >Autres Depense</th>
+                    <th>Compte fournisseur</th>
+
+
+                     <th >Adresse</th>
+                   <!-- <th style="width:60%">Date decision</th>
+                   <th style="width:10%">Action</th>
+                    <th style="width:5%">Sous Budget</th>
+                     <th style="width:10%">Autres Motif</th>
+                   <th style="width:60%">Observation</th>
+                   <th style="width:10%">Autres Depense</th>
+                    <th style="width:5%">Compte fournisseur</th> -->
+                  </tr>
+                </thead>
+           
+                <tbody>
+                
+                </tbody>
+              </table>
+      <div style="font-size:13px;text-align:center;text-decoration:underline;font-weight:bold;">
           <p >SERVICE REALITE FAIT</p>
         </div>
             
@@ -149,7 +484,7 @@
           <td >
                                               <router-link :to="{ name: 'ficheServiceRealiteFait', params: { id: detailOp.id }}"
                 class="btn btn-danger" title="Editer Fiche de controle">
-                  <span class="" style="font-weight:bolder;color:#fff;font-size:20px"><i class=" icon-print"></i>  VOIR FICHE SERVICE REALITE FAIT</span>
+                  <span class="" style="font-weight:bolder;color:#fff;font-size:12px"><i class=" icon-print"></i>  VOIR FICHE SERVICE REALITE FAIT</span>
                    </router-link>
                     </td>
           <td >
@@ -162,7 +497,7 @@
    <table class="table table-bordered table-striped" id="Nature_section">
                 <thead>
                   <tr>
-                    <th style="width:15%">NUMERO ORDRE PAIEMENT</th>
+                    <th >NUMERO ORDRE PAIEMENT</th>
                     
                     <th style="width:10%">DATE OBSERVATION</th>
                    <th style="width:60%">OBSERVATION</th>
