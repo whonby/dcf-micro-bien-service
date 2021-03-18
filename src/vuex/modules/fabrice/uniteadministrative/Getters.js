@@ -821,6 +821,11 @@ export const groupeUniteAdministrativeBudgetEclate = (state, getters) => {
 };
 
 
+export const groupeActiviteBudgetEclate = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetEclate, "activite_id");
+};
+
 
 export const groupeParBAILLER = (state, getters) => {
   //delete getters.trieUaImmobilisation.
