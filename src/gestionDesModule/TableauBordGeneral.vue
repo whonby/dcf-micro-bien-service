@@ -4,18 +4,39 @@
       TABLEAU DE BORD GENERAL BUDGET GENERAL SIB
     </h1>
     <br />
-    <div class="container-fluid" style="height: 100em">
-      <!-- <div class="col-md-8 control-group">
-        <select name="" id="" v-model="grande_nature_id" class="span6">
-          <option
-            v-for="grandnature in grandes_natures"
-            :key="grandnature.id"
-            :value="grandnature.id"
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span4">
+          <label for=""><b>SECTION</b></label>
+          <model-list-select
+            style="border: 1px solid #000"
+            class="wide"
+            :list="sections"
+            v-model="sections_id"
+            option-value="id"
+            option-text="nom_section"
+            placeholder=""
           >
-            {{ grandnature.libelle }}
-          </option>
-        </select>
-      </div> -->
+          </model-list-select>
+        </div>
+
+        <div class="span4">
+          <label for=""><b>Unité Administrative</b></label>
+          <model-list-select
+            style="border: 1px solid #000"
+            class="wide"
+            :list="ListUa"
+            v-model="ua_id"
+            option-value="id"
+            option-text="libelle"
+            placeholder=""
+          >
+          </model-list-select>
+        </div>
+      </div>
+
+      <br />
+      <br />
       <br />
 
       <table class="table table-bordered table-striped">
@@ -23,17 +44,19 @@
           <td>
             <!-- debut pour les Personnels -->
             <h4 style="text-align: center">Personnels</h4>
+
             <div class="span4" style="border: 2px dotted #ffffff">
-              <div class="card">
+              <div class="card" style="height: 180px">
                 <apexchart
                   type="donut"
-                  :options="chartOptions"
+                  :options="chartOptions1"
                   :series="dataPourcentage"
                 ></apexchart>
               </div>
             </div>
+
             <div class="span4" style="border: 2px dotted #ffffff">
-              <div class="card">
+              <div class="card" style="heigth: 50px">
                 <apexchart
                   type="donut"
                   :options="chartOptions21"
@@ -143,18 +166,21 @@ import VueApexCharts from "vue-apexcharts";
 import { mapGetters, mapActions } from "vuex";
 //import { noDCfNoAdmin, dcf } from "../../../Repositories/Auth";
 import { formatageSomme } from "@/Repositories/Repository";
-//import { ModelListSelect } from "vue-search-select";
+import { ModelListSelect } from "vue-search-select";
+import "vue-search-select/dist/VueSearchSelect.css";
 
 export default {
   name: "TableauBordEquipeCF",
   components: {
     apexchart: VueApexCharts,
-    // ModelListSelect,
+    ModelListSelect,
   },
 
   data() {
     return {
       grande_nature_id: "",
+      sections_id: 0,
+      ua_id: 0,
       dataPourcentage: [],
       dataPourcentage21: [],
       dataPourcentageBienService1: [],
@@ -163,12 +189,13 @@ export default {
       dataPourcentageTransferts2: [],
       dataPourcentageInvestissements1: [],
       dataPourcentageInvestissements2: [],
-      chartOptions: {
+
+      chartOptions1: {
         chart: {
           width: 450,
           type: "donut",
         },
-        labels: ["Budget preveisionel en AE", "Budget execute en AE"],
+        labels: ["Budget prévisionnel en AE", "Budget exécuté en AE"],
         colors: ["#8ea9db", "#f4b084"],
         responsive: [
           {
@@ -191,7 +218,7 @@ export default {
           width: 450,
           type: "donut",
         },
-        labels: ["Budget preveisionel CP", "Budget execute CP"],
+        labels: ["Budget prévisionnel CP", "Budget exécuté CP"],
         colors: ["#f4b084", "#8ea9db"],
         responsive: [
           {
@@ -214,7 +241,7 @@ export default {
           width: 450,
           type: "donut",
         },
-        labels: ["Budget preveisionel AE", "Budget execute AE"],
+        labels: ["Budget prévisionnel AE", "Budget exécuté AE"],
         colors: ["#8ea9db", "#f4b084"],
         responsive: [
           {
@@ -236,8 +263,8 @@ export default {
           width: 450,
           type: "donut",
         },
-        labels: ["Budget preveisionel CP", "Budget execute CP"],
-         colors: ["#f4b084", "#8ea9db"],
+        labels: ["Budget prévisionnel CP", "Budget exécuté CP"],
+        colors: ["#f4b084", "#8ea9db"],
         responsive: [
           {
             breakpoint: 480,
@@ -261,7 +288,7 @@ export default {
           width: 450,
           type: "donut",
         },
-        labels: ["Budget preveisionel AE", "Budget execute AE"],
+        labels: ["Budget prévisionnel AE", "Budget exécuté AE"],
         colors: ["#8ea9db", "#f4b084"],
         responsive: [
           {
@@ -283,8 +310,8 @@ export default {
           width: 450,
           type: "donut",
         },
-        labels: ["Budget preveisionel CP", "Budget execute CP"],
-         colors: ["#f4b084", "#8ea9db"],
+        labels: ["Budget prévisionnel CP", "Budget exécuté CP"],
+        colors: ["#f4b084", "#8ea9db"],
         responsive: [
           {
             breakpoint: 480,
@@ -308,7 +335,7 @@ export default {
           width: 450,
           type: "donut",
         },
-        labels: ["Budget preveisionel AE", "Budget execute AE"],
+        labels: ["Budget prévisionnel AE", "Budget exécuté AE"],
         colors: ["#8ea9db", "#f4b084"],
         responsive: [
           {
@@ -330,8 +357,8 @@ export default {
           width: 450,
           type: "donut",
         },
-        labels: ["Budget preveisionel CP", "Budget execute CP"],
-         colors: ["#f4b084", "#8ea9db"],
+        labels: ["Budget prévisionnel CP", "Budget exécuté CP"],
+        colors: ["#f4b084", "#8ea9db"],
         responsive: [
           {
             breakpoint: 480,
@@ -354,6 +381,7 @@ export default {
   created() {
     console.log(this.budgetGeneral);
     console.log(this.grandes_natures);
+    console.log(this.sections);
     //console.log(this.GrandeNaturePersonelCp);
     //this.series = [this.grande_nature_id, this.grande_nature_id];
     // this.series = [this.GrandeNaturePersonelCp, this.GrandeNaturePersonelCp];
@@ -373,6 +401,7 @@ export default {
       "natures_sections",
       "grandes_natures",
       "exercices_budgetaires",
+      "sections",
     ]),
     ...mapGetters("bienService", [
       "gettersDossierMandat",
@@ -390,47 +419,169 @@ export default {
       }
       return 0;
     },
+    //************* liste des unités Administratives ****************** par section */
+    ListUa() {
+      if (this.sections_id != "") {
+        return this.uniteAdministratives.filter(
+          (item) => item.section_id == this.sections_id
+        );
+      }
+      return this.uniteAdministratives;
+    },
     // ************** debut grande nature Personnels qui a pour id 2 ***********//
     GrandeNaturePersonelAePrevisionel() {
-      return this.budgetGeneral
-        .filter((item) => item.gdenature_id == 2 && item.actived == 1)
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-          0
-        )
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        console.log(this.sections_id + "*******");
+        // console.log(this.ua_id + "*******");
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 2 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+            0
+          )
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 2 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return this.budgetGeneral
+          .filter((item) => item.gdenature_id == 2 && item.actived == 1)
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+            0
+          )
+          .toFixed(0);
+      }
     },
 
     GrandeNaturePersonelCpPrevisionel() {
-      return this.budgetGeneral
-        .filter((item) => item.gdenature_id == 2 && item.actived == 1)
-        .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 2 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id
+          )
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 2 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+          .toFixed(0);
+      } else {
+        return this.budgetGeneral
+          .filter((item) => item.gdenature_id == 2 && item.actived == 1)
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+          .toFixed(0);
+      }
     },
 
     GrandeNaturePersonelAeExecute() {
-      return this.gettersDemandeEngagement
-        .filter(
-          (item) => this.liquidationid(item.id) == 8 && item.grd_nature_id == 2
-        )
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
-          0
-        )
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationid(item.id) == 8 &&
+              item.grd_nature_id == 2 &&
+              item.section_id == this.sections_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationid(item.id) == 8 &&
+              item.grd_nature_id == 2 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationid(item.id) == 8 && item.grd_nature_id == 2
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      }
     },
 
     GrandeNaturePersonelCpExecute() {
-      return this.gettersDemandeEngagement
-        .filter(
-          (item) =>
-            this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 2
-        )
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
-          0
-        )
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              item.grd_nature_id == 2 &&
+              item.section_id == this.sections_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              item.grd_nature_id == 2 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 2
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      }
     },
 
     liquidationidmandat() {
@@ -466,133 +617,466 @@ export default {
 
     //debut des fonction de bien et services
     GrandeNatureBienServiceAePrevisionel() {
-      return this.budgetGeneral
-        .filter((item) => item.gdenature_id == 5 && item.actived == 1)
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-          0
-        )
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 5 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+            0
+          )
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 5 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return this.budgetGeneral
+          .filter((item) => item.gdenature_id == 5 && item.actived == 1)
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+            0
+          )
+          .toFixed(0);
+      }
     },
 
     GrandeNatureBienServiceCpPrevisionel() {
-      return this.budgetGeneral
-        .filter((item) => item.gdenature_id == 5 && item.actived == 1)
-        .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 5 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id
+          )
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 5 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+          .toFixed(0);
+      } else {
+        return this.budgetGeneral
+          .filter((item) => item.gdenature_id == 5 && item.actived == 1)
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+          .toFixed(0);
+      }
     },
 
     GrandeNatureBienServiceAeExecute() {
-      return this.gettersDemandeEngagement
-        .filter(
-          (item) => this.liquidationid(item.id) == 8 && item.grd_nature_id == 5
-        )
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
-          0
-        )
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationid(item.id) == 8 &&
+              item.grd_nature_id == 5 &&
+              item.section_id == this.sections_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationid(item.id) == 8 &&
+              item.grd_nature_id == 5 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationid(item.id) == 8 && item.grd_nature_id == 5
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      }
     },
 
     GrandeNatureBienServiceCpExecute() {
-      return this.gettersDemandeEngagement
-        .filter(
-          (item) =>
-            this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 5
-        )
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
-          0
-        )
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              item.grd_nature_id == 5 &&
+              item.section_id == this.sections_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              item.grd_nature_id == 5 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 5
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      }
     },
     // fin des fonction bien et services
 
     //debut des fonction transferts
     GrandeNatureTransfertsAePrevisionel() {
-      return this.budgetGeneral
-        .filter((item) => item.gdenature_id == 6 && item.actived == 1)
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-          0
-        )
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 6 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+            0
+          )
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 6 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return this.budgetGeneral
+          .filter((item) => item.gdenature_id == 6 && item.actived == 1)
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+            0
+          )
+          .toFixed(0);
+      }
     },
 
     GrandeNatureTransfertsCpPrevisionel() {
-      return this.budgetGeneral
-        .filter((item) => item.gdenature_id == 6 && item.actived == 1)
-        .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 6 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id
+          )
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 6 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+          .toFixed(0);
+      } else {
+        return this.budgetGeneral
+          .filter((item) => item.gdenature_id == 6 && item.actived == 1)
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+          .toFixed(0);
+      }
     },
 
     GrandeNatureTransfertsAeExecute() {
-      return this.gettersDemandeEngagement
-        .filter(
-          (item) => this.liquidationid(item.id) == 8 && item.grd_nature_id == 6
-        )
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
-          0
-        )
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationid(item.id) == 8 &&
+              item.grd_nature_id == 6 &&
+              item.section_id == this.sections_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationid(item.id) == 8 &&
+              item.grd_nature_id == 6 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationid(item.id) == 8 && item.grd_nature_id == 6
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      }
     },
 
     GrandeNatureTransfertsCpExecute() {
-      return this.gettersDemandeEngagement
-        .filter(
-          (item) =>
-            this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 6
-        )
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
-          0
-        )
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              item.grd_nature_id == 6 &&
+              item.section_id == this.sections_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              item.grd_nature_id == 6 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 6
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      }
     },
 
     // fin des fonction transferts
 
     //debut des fonction Investissements
     GrandeNatureInvestissementsAePrevisionel() {
-      return this.budgetGeneral
-        .filter((item) => item.gdenature_id == 7 && item.actived == 1)
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-          0
-        )
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 7 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+            0
+          )
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 7 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return this.budgetGeneral
+          .filter((item) => item.gdenature_id == 7 && item.actived == 1)
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+            0
+          )
+          .toFixed(0);
+      }
     },
 
     GrandeNatureInvestissementsCpPrevisionel() {
-      return this.budgetGeneral
-        .filter((item) => item.gdenature_id == 7 && item.actived == 1)
-        .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 7 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id
+          )
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.budgetGeneral
+          .filter(
+            (item) =>
+              item.gdenature_id == 7 &&
+              item.actived == 1 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+          .toFixed(0);
+      } else {
+        return this.budgetGeneral
+          .filter((item) => item.gdenature_id == 7 && item.actived == 1)
+          .reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.cp), 0)
+          .toFixed(0);
+      }
     },
 
     GrandeNatureInvestissementsAeExecute() {
-      return this.gettersDemandeEngagement
-        .filter(
-          (item) => this.liquidationid(item.id) == 8 && item.grd_nature_id == 7
-        )
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
-          0
-        )
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationid(item.id) == 8 &&
+              item.grd_nature_id == 7 &&
+              item.section_id == this.sections_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationid(item.id) == 8 &&
+              item.grd_nature_id == 7 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationid(item.id) == 8 && item.grd_nature_id == 7
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      }
     },
     GrandeNatureInvestissementsCpExecute() {
-      return this.gettersDemandeEngagement
-        .filter(
-          (item) =>
-            this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 7
-        )
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
-          0
-        )
-        .toFixed(0);
+      if (this.sections_id != 0 && this.ua_id == 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              item.grd_nature_id == 7 &&
+              item.section_id == this.sections_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else if (this.sections_id != 0 && this.ua_id != 0) {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 &&
+              item.grd_nature_id == 7 &&
+              item.section_id == this.sections_id &&
+              item.ua_id == this.ua_id
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      } else {
+        return this.gettersDemandeEngagement
+          .filter(
+            (item) =>
+              this.liquidationidmandat(item.id) == 8 && item.grd_nature_id == 7
+          )
+          .reduce(
+            (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+            0
+          )
+          .toFixed(0);
+      }
     },
 
     // fin des fonction Investissements
