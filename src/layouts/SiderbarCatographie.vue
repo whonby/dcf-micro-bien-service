@@ -25,7 +25,7 @@
           </center>
         </li>
 
-        
+
 <li @click.prevent="navigatelocalisationDesMarche" >
           <a title="Carte des infrastructure pas regison" href="#">
             <i class=" icon-globe"></i>
@@ -41,11 +41,17 @@
             <span class="label label-important"></span>
           </a>
         </li>
-
+          <li @click.prevent="navigateToCatographieExecutionBudgetaire" >
+              <a title="CARTE EXECUTION BUDGETAIRE" href="#">
+                  <i class=" icon-globe"></i>
+                  <span>CARTE EXECUTION BUDGETAIRE</span>
+                  <span class="label label-important"></span>
+              </a>
+          </li>
         <li @click.prevent="navigateToCatographieBudgetaire" >
           <a title="CARTOGRAPHIE" href="#">
             <i class=" icon-globe"></i>
-            <span>BUDGET EXECUTE</span>
+            <span>CARTE REPARTITION BUDGETAIRE</span>
             <span class="label label-important"></span>
           </a>
         </li>
@@ -151,6 +157,12 @@ export default {
         name: 'CartographieBudget'
       })
     },
+      navigateToCatographieExecutionBudgetaire(){
+          this.activate(55)
+          this.$router.push({
+              name: 'CarteExecutionBugetaire'
+          })
+      },
     navigateToRapport(){
       this.activate(20)
       this.$router.push({

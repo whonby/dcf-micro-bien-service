@@ -690,7 +690,7 @@ export default {
           visible: true,
           attribution:
               '',
-          url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+          url: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
         },
         {
           name: 'Carte',
