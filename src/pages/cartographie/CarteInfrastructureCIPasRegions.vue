@@ -1,24 +1,11 @@
 <template>
 
     <div>
-   
-<!--<div class="radio-group-control">
-  <label class="radio-group-label">
-    <input type="radio"  value="0" v-model="slection_carte">
-    <span class="radio-group-label__text">
-      <span class="radio-group-tick"></span> CARTE DES PREVISIONNELS INFRASTRUCTURES </span>
-  </label>
-  <label class="radio-group-label">
-    <input type="radio" value="1" v-model="slection_carte">
-    <span class="radio-group-label__text"><span class="radio-group-tick"></span>
-    CARTE DES EXECUTIONS INFRASTRUCTURES 
-    </span>
-  </label>
-</div>-->
+
 
 
         <div class="">
-            
+
         <div class="row-fluid">
        <div id="map10" class="sidebar leaflet-sidebar collapsed">
           <div class="sidebar-tabs">
@@ -30,7 +17,7 @@
           <div class="sidebar-content">
             <div class="sidebar-pane" id="home">
               <h1 class="sidebar-header">
-                Recherche
+                Carte budget previsionnel pas regions et pas infrastructure
                 <div class="sidebar-close"><i class="fa fa-caret-left"></i></div>
               </h1>
                 <div class="span5">
@@ -103,8 +90,8 @@
 
 
 
-              
-              
+
+
               <div v-if="caseAffichageMessageGeneralSituationMarche">
                 <div class="span12" style="font-size: 15px ; font-size: 15px">
                   Situation Général des marchés</div></div>
@@ -209,7 +196,7 @@
                                                  :fillColor="l.colorFill"
                                                  :fillOpacity="2"
                                                  :name="l.ville"
-                                          
+
 
                                 >
                                 <l-tooltip  >{{l.ville}}</l-tooltip>
@@ -236,16 +223,16 @@
                         </l-map>
                     </div>
                 </div>
-                
+
             </div>
-           
+
         </div>
 
         </div>
 
 
 <!--Appel de la propriete-->
- 
+
 
     </div>
 
@@ -341,7 +328,7 @@ import {noDCfNoAdmin} from "../../Repositories/Auth"
               return "F " + val + " Infrastructure"
             }
           }
-        } 
+        }
       },
               geosearchOptions: { // Important part Here
                 provider: new OpenStreetMapProvider(),
@@ -387,14 +374,14 @@ import {noDCfNoAdmin} from "../../Repositories/Auth"
                         visible: true,
                         attribution:
                             '',
-                        url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+                        url: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
                     },
                     {
                         name: 'Plan 2',
                         visible: false,
                         url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png',
                         attribution: '',
-                        
+
                     },
                     {
                         name: 'Satelite',
@@ -603,7 +590,7 @@ getTotaleMontantMarcheParUnite(){
                 }else{
 montant_reel_marche =montant_reel_marche+ 0
                 }
-                
+
             })
 
                /*let initeVal = 0;
@@ -633,7 +620,7 @@ montant_reel_marche =montant_reel_marche+ 0
         objet =this.listeMarcheUniteAdmin.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!='')
       }
 
-      
+
 
       return objet
     },
@@ -641,7 +628,7 @@ montant_reel_marche =montant_reel_marche+ 0
     totalMontantPrevisionnelPasMarche(){
        let vM=this;
       let objet=this.listeMarcheUniteAdmin.filter(item=>item.parent_id!='')
-      
+
            if(vM.unite_administrative_id!=""){
         objet =this.listeMarcheUniteAdmin.filter(item=>item.unite_administrative_id==vM.unite_administrative_id && item.parent_id!="")
         }
@@ -675,7 +662,7 @@ montant_reel_marche =montant_reel_marche+ 0
             return total + parseFloat(currentValue.montant_marche) ;
           }, initeVal);
           return montant
-              
+
            }
 
       }
@@ -699,12 +686,12 @@ montant_reel_marche =montant_reel_marche+ 0
             return total + parseFloat(currentValue.montant_marche) ;
           }, initeVal);
           return montant
-              
+
            }
 
            if(vM.infrastructure!=""){
                  objet =this.listeMarcheUniteAdmin.filter(item=>item.infrastructure_id==vM.infrastructure && item.parent_id!="")
-          
+
                 let initeVal = 0;
                   let montant=  objet.reduce(function (total, currentValue) {
                   return total + parseFloat(currentValue.montant_marche) ;
@@ -733,7 +720,7 @@ montant_reel_marche =montant_reel_marche+ 0
             return total + parseFloat(currentValue.montant_marche) ;
           }, initeVal);
           return montant
-              
+
            }
 
       }
@@ -1047,7 +1034,7 @@ montant_reel_marche =montant_reel_marche+ 0
         getInfrastructure(){
              return id=>{
                if(id!=""){
-                
+
                  return this.getterInfrastrucure.filter(item=>item.id==id)
                }
                return this.getterInfrastrucure
@@ -1071,7 +1058,7 @@ montant_reel_marche =montant_reel_marche+ 0
       return false
     },
 
-    
+
     caseAffichageMessageUniteAdminSituationMarche(){
       let vM=this;
       if(vM.region=="" && vM.unite_administrative_id!=""){
@@ -1093,10 +1080,10 @@ montant_reel_marche =montant_reel_marche+ 0
       }
       return false
     },
-    
 
-    
-    
+
+
+
         budgetGeneral(){
             let budget_general=0;
             let montant_engagement=0;
@@ -1370,14 +1357,14 @@ montant_reel_marche =montant_reel_marche+ 0
        if(vm.objet_map!="" && vm.objet_leaflet!=""){
                 //  let tail=this.localisation.length
             if(this.localisation.length>0){
-                      
+
                   this.localisation.forEach(function (value){
                     let taux=0;
                     let width=60;
                     let height=60;
                   let montantInfraParRegion=0
 
-                  
+
                   //console.log(taux)
 
                if(vm.infrastructure!=""){
@@ -1385,8 +1372,8 @@ montant_reel_marche =montant_reel_marche+ 0
                             }else{
               taux=(vm.totalMontantPrevisionnelPasRegion(value.id)/vm.totalMontantPrevisionnelPasMarche)*100
                             }
-                
-                  
+
+
                      vm.getInfrastructure(vm.infrastructure).forEach(function(val){
                            montantInfraParRegion=  vm.getMontantMarcheRegionInfrastructure(value.id,val.id)
                         // console.log(".......getTotaleMontantMarcheParUnite....")
@@ -1397,9 +1384,9 @@ montant_reel_marche =montant_reel_marche+ 0
                              if(val.code==2){ arrayColor.push("#F0C300") }
 
                              if(val.code==3){ arrayColor.push("#E73E01") }
-                                 
+
                              if(val.code==4){ arrayColor.push("#22780F")}
-                              
+
                               arrayBar.push(montantInfraParRegion)
                               arrayLabele
 
@@ -1408,7 +1395,7 @@ montant_reel_marche =montant_reel_marche+ 0
                             }else{
               taux_region=(montantInfraParRegion/vm.totalMontantPrevisionnelPasMarche)*100
                             }
-                            
+
                             arrayLabele.push(taux_region.toFixed(2)+ "%")
                              /* if(vm.regions!=""){
 
@@ -1446,10 +1433,10 @@ montant_reel_marche =montant_reel_marche+ 0
                                     }
                               }
                            })
-                                  
+
                               if(vm.infrastructure==""){
                                 if(vm.type_minichart=="bar"){
-                                      
+
                                   height=taux+30;
                                     }else{
                                     if(taux<5){
@@ -1476,9 +1463,9 @@ montant_reel_marche =montant_reel_marche+ 0
 
                                     }
                               }
-                           
 
-                          
+
+
                               var myBarChart = vm.objet_leaflet.minichart(value.latlng,{
                                 data: arrayBar,type:vm.type_minichart,
                                 colors:arrayColor,
@@ -1489,9 +1476,9 @@ montant_reel_marche =montant_reel_marche+ 0
                                   console.log(event)
                                   vm.selctionRegion(value.id)
                               });
-                            
+
                           vm.objet_map.addLayer(myBarChart)
-                 
+
                //  vm.objet_leaflet.marker(value.latlng).bindTooltip(value.ville, { permanent: true, offset: [0, 12] }).addTo(vm.objet_map);
 //vm.objet_leaflet.marker(value.latlng).bindLabel(value.ville).addTo(vm.objet_map);
 
@@ -1502,7 +1489,7 @@ vm.objet_leaflet.circleMarker(value.latlng, {
     weight: 1,
     opacity: 1,
     fillOpacity: 0.8,
-  
+
 }).bindTooltip("<div style='background:white; padding:1px 3px 1px 3px'><b>" + value.ville + "</b></div>", {permanent: true,
 direction: 'bottom',
  sticky: true,
@@ -1516,10 +1503,10 @@ direction: 'bottom',
                                 })
 
                         }
-                  
-                
+
+
                 }
-            
+
                 }
 ,
             getInfoLegende(id){
@@ -1568,7 +1555,7 @@ direction: 'bottom',
 //                this.infortion_sidbar_filter.open("home")
             },
             region: function (value) {
-                console.log(value);  
+                console.log(value);
              this.deleteLeafleMiniCharts(this.objet_map)
                 this.integrationChartPasRegisonSurCarte()
 //                this.infortion_sidbar_filter.close();
@@ -1576,8 +1563,8 @@ direction: 'bottom',
 //                this.infortion_sidbar_filter.open("home")
             },
             unite_administrative_id: function (value) {
-                console.log(value);  
-              //  this.objet_map.layers; 
+                console.log(value);
+              //  this.objet_map.layers;
               this.deleteLeafleMiniCharts(this.objet_map)
              //  this.objet_map.on('overlayremove', this.hide_charts())
                 this.integrationChartPasRegisonSurCarte()
@@ -1654,8 +1641,8 @@ sid.easyPrint({
 	position: 'topleft',
 	sizeModes: ['A4Portrait', 'A4Landscape']
 }).addTo(map);
-  
-  
+
+
 
 
 /*Legend specific*/
@@ -2059,7 +2046,7 @@ Marker states
   background:#2980b9;
   }
 
-/* tooltip-class*/ 
+/* tooltip-class*/
 
 .class-tooltip{
   background: green;
@@ -2102,7 +2089,7 @@ Marker states
     user-select: none !important;
     pointer-events: none !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
-   
+
     font-size: 9px !important;
 }
 

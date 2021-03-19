@@ -1,545 +1,790 @@
 
 <template>
   <div>
-     <div  align="left" style="cursor:pointer;">
-    <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Page Précédente</button>
-    
-        </div> 
+    <div align="left" style="cursor: pointer">
+      <button
+        class="btn btn-danger"
+        @click.prevent="afficherModalListeExecution"
+      >
+        Page Précédente
+      </button>
+    </div>
     <div id="modificationObservation" class="modal hide tailleModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modification Observation de Agent Cf{{editObservation.id}}</h3>
+        <h3>Modification Observation de Agent Cf{{ editObservation.id }}</h3>
       </div>
       <div class="modal-body">
-       <table class="table table-bordered table-striped">
-        <tr>
-          <td>
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
               <div class="control-group">
-            <label class="control-label">Numero Ordre Paiement</label>
-            <div class="controls">
-              <input type="text" v-model="detailOp.numero_ordre_paiement"   class="span6"  />
-            </div>
-          </div>
-          </td>
-          <td>
+                <label class="control-label">Numero Ordre Paiement</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    v-model="detailOp.numero_ordre_paiement"
+                    class="span6"
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
               <div class="control-group">
-            <label class="control-label">Date Observation</label>
-            <div class="controls">
-              <input type="date" v-model="editObservation.date_observation_agent_cf" class="span6"  />
-            </div>
-          </div>
-          </td>
-        </tr>
-         <tr>
-           <td colspan="2">
-            
-             <div class="control-group">
-            <label class="control-label">Observation</label>
-            <div class="controls">
-               <textarea name="" id="" cols="30" rows="10" v-model="editObservation.observation_agent_cf" class="span12"></textarea>
-            </div>
-          </div>
-           </td>
-         </tr>
-         <tr>
-          <td colspan="2">
+                <label class="control-label">Date Observation</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                    v-model="editObservation.date_observation_agent_cf"
+                    class="span6"
+                  />
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
               <div class="control-group">
-            <label class="control-label">Nom et Prénoms Agent cf</label>
-            <div class="controls">
-              <input type="text" v-model="editObservation.nom_agent_id" class="span12"  />
-            </div>
-          </div>
-          </td>
-         </tr>
-       </table>
+                <label class="control-label">Observation</label>
+                <div class="controls">
+                  <textarea
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="10"
+                    v-model="editObservation.observation_agent_cf"
+                    class="span12"
+                  ></textarea>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Nom et Prénoms Agent cf</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    v-model="editObservation.nom_agent_id"
+                    class="span12"
+                  />
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
       <div class="modal-footer">
         <a
           @click.prevent="modificationObservationAgentCf()"
           class="btn btn-primary"
           href="#"
-          
-        >Modifier</a>
+          >Modifier</a
+        >
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
-     <div id="exampleModal12" class="modal hide tailleModal">
+    <div id="exampleModal12" class="modal hide tailleModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter Observation de Agent Cf</h3>
       </div>
       <div class="modal-body">
-       <table class="table table-bordered table-striped">
-        <tr>
-          <td>
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
               <div class="control-group">
-            <label class="control-label">Numero Ordre Paiement</label>
-            <div class="controls">
-              <input type="text" v-model="detailOp.numero_ordre_paiement"   class="span6"  />
-            </div>
-          </div>
-          </td>
-          <td>
+                <label class="control-label">Numero Ordre Paiement</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    v-model="detailOp.numero_ordre_paiement"
+                    class="span6"
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
               <div class="control-group">
-            <label class="control-label">Date Observation</label>
-            <div class="controls">
-              <input type="date" v-model="formData.date_observation_agent_cf" class="span6"  />
-            </div>
-          </div>
-          </td>
-        </tr>
-         <tr>
-           <td colspan="2">
-            
-             <div class="control-group">
-            <label class="control-label">Observation</label>
-            <div class="controls">
-               <textarea name="" id="" cols="30" rows="10" v-model="formData.observation_agent_cf" class="span12"></textarea>
-            </div>
-          </div>
-           </td>
-         </tr>
-         <tr>
-          <td colspan="2">
+                <label class="control-label">Date Observation</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                    v-model="formData.date_observation_agent_cf"
+                    class="span6"
+                  />
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
               <div class="control-group">
-            <label class="control-label">Nom et Prénoms Agent cf</label>
-            <div class="controls">
-              <input type="text" v-model="formData.nom_agent_id" class="span12"  />
-            </div>
-          </div>
-          </td>
-         </tr>
-       </table>
+                <label class="control-label">Observation</label>
+                <div class="controls">
+                  <textarea
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="10"
+                    v-model="formData.observation_agent_cf"
+                    class="span12"
+                  ></textarea>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="control-group">
+                <label class="control-label">Nom et Prénoms Agent cf</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    v-model="formData.nom_agent_id"
+                    class="span12"
+                  />
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
       <div class="modal-footer">
         <a
           @click.prevent="ajouterUniteAdministrativeLocal()"
           class="btn btn-primary"
           href="#"
-          
-        >Valider</a>
+          >Valider</a
+        >
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
-    <br>
-<div style="font-size:13px;text-align:center;text-decoration:underline;font-weight:bold;">
-          <p >DETAIL ORDRE DE PAIEMENT DIRECT </p>
-        </div>
-       <table class="table table-bordered table-striped" id="Nature_section">
-                <thead>
-                  <tr>
-                    <th >Exercice</th>
-                    
-                    <th >Type op</th>
-                   
-                   <th >Numéro op</th>
-                    <th >Section</th>
+    <br />
 
-                     <th >Programme</th>
-                    
-                    <th >Ua</th>
-                   <th >Activite</th>
-                   <th >ligne Economique</th>
-                    <th >Entreprise</th>
+    <!-- debut des op direct -->
+    <div v-if="detailOp.type_ordre_paiement == 1">
+      <p
+        style="
+          font-size: 13px;
+          text-align: center;
+          text-decoration: underline;
+          font-weight: bold;
+        "
+      >
+        DETAIL ORDRE DE PAIEMENT DIRECT
+      </p>
 
-                     <th >Numero du Marche</th>
-                  
-                  
-                  </tr>
-                </thead>
-           
-                <tbody>
-                  <tr class="odd gradeX">
-                    <td
-                     
-                    >{{detailOp.exercice || 'Non renseigné'}}</td>
-                    
-                     <td
-                     
-                    >{{detailOp.type_ordre_paiement || 'Non renseigné'}}</td>
-                     <td
-                     
-                    >{{detailOp.numero_ordre_paiement || 'Non renseigné'}}</td>
-                    <td
-                     
-                    >{{detailOp.section_id || 'Non renseigné'}}</td>
-                  </tr>
-                </tbody>
-              </table>
-               <table class="table table-bordered table-striped" id="Nature_section">
-                <thead>
-                  <tr>
-                   <th >Numero du Marche</th>
-                   <th >type financement</th>
-                   <th >Source Financement</th>
-                    <th >Montant Op</th>
-                     <th >Mode Paiement</th>
-                   <th >Nom et prenoms cf</th>
-                   <th >famille motif</th>
-                    <th >Motif</th>
+      <table class="table table-bordered table-striped" id="Nature_section">
+        <thead>
+          <tr>
+            <th>Exercice</th>
 
+            <th>Type op</th>
 
-                    <th >Decision cf</th>
-                   <th >Date decision</th>
-                  
-                  </tr>
-                </thead>
-           
-                <tbody>
-                
-                </tbody>
-              </table>
-                <table class="table table-bordered table-striped" id="Nature_section">
-                <thead>
-                  <tr>
-                 
-                   <th >Action</th>
-                    <th>Sous Budget</th>
-                     <th >Autres Motif</th>
-                   <th >Observation</th>
-                   <th >Autres Depense</th>
-                    <th>Compte fournisseur</th>
+            <th>Numéro op</th>
+            <th>Section</th>
 
+            <th>Programme</th>
 
-                     <th >Adresse</th>
-                   <!-- <th style="width:60%">Date decision</th>
-                   <th style="width:10%">Action</th>
-                    <th style="width:5%">Sous Budget</th>
-                     <th style="width:10%">Autres Motif</th>
-                   <th style="width:60%">Observation</th>
-                   <th style="width:10%">Autres Depense</th>
-                    <th style="width:5%">Compte fournisseur</th> -->
-                  </tr>
-                </thead>
-           
-                <tbody>
-                
-                </tbody>
-              </table>
-              <div style="font-size:13px;text-align:center;text-decoration:underline;font-weight:bold;">
-          <p >DETAIL ORDRE DE PAIEMENT PROVISOIRE </p>
-        </div>
-       <table class="table table-bordered table-striped" id="Nature_section">
-                <thead>
-                  <tr>
-                    <th >Exercice</th>
-                    
-                    <th >Type op</th>
-                   
-                   <th >Numéro op</th>
-                    <th >Section</th>
+            <th>Ua</th>
+            <th>Activite</th>
+            <th>ligne Economique</th>
+            <th>Entreprise</th>
+            <th>Compte Fournisseur</th>
+            <th>Banque</th>
 
-                     <th >Programme</th>
-                    
-                    <th >Ua</th>
-                   <th >Activite</th>
-                   <th >ligne Economique</th>
-                    <th >Entreprise</th>
+            <th>Numero du Marche</th>
+          </tr>
+        </thead>
 
-                     <th >Numero du Marche</th>
-                  
-                  
-                  </tr>
-                </thead>
-           
-                <tbody>
-                 
-                </tbody>
-              </table>
-               <table class="table table-bordered table-striped" id="Nature_section">
-                <thead>
-                  <tr>
-                   <th >Numero du Marche</th>
-                   <th >type financement</th>
-                   <th >Source Financement</th>
-                    <th >Montant Op</th>
-                     <th >Mode Paiement</th>
-                   <th >Nom et prenoms cf</th>
-                   <th >famille motif</th>
-                    <th >Motif</th>
+        <tbody>
+          <tr class="odd gradeX">
+            <td>{{ detailOp.exercice || "Non renseigné" }}</td>
 
+            <td v-if="detailOp.type_ordre_paiement == 1">OP Direct</td>
 
-                    <th >Decision cf</th>
-                   <th >Date decision</th>
-                  
-                  </tr>
-                </thead>
-           
-                <tbody>
-                
-                </tbody>
-              </table>
-                <table class="table table-bordered table-striped" id="Nature_section">
-                <thead>
-                  <tr>
-                 
-                   <th >Action</th>
-                    <th>Sous Budget</th>
-                     <th >Autres Motif</th>
-                   <th >Observation</th>
-                   <th >Autres Depense</th>
-                    <th>Compte fournisseur</th>
+            <td>{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
 
+            <td>{{ AfficheSectionLibelle(detailOp.section_id) }}</td>
 
-                     <th >Adresse</th>
-                   <!-- <th style="width:60%">Date decision</th>
-                   <th style="width:10%">Action</th>
-                    <th style="width:5%">Sous Budget</th>
-                     <th style="width:10%">Autres Motif</th>
-                   <th style="width:60%">Observation</th>
-                   <th style="width:10%">Autres Depense</th>
-                    <th style="width:5%">Compte fournisseur</th> -->
-                  </tr>
-                </thead>
-           
-                <tbody>
-                
-                </tbody>
-              </table>
-              <div style="font-size:13px;text-align:center;text-decoration:underline;font-weight:bold;">
-          <p >DETAIL ORDRE DE PAIEMENT ANNULATION </p>
-        </div>
-       <table class="table table-bordered table-striped" id="Nature_section">
-                <thead>
-                  <tr>
-                    <th >Exercice</th>
-                    
-                    <th >Type op</th>
-                   
-                   <th >Numéro op</th>
-                    <th >Section</th>
+            <td>{{ AfficheProgrammeLibelle(detailOp.programme_id) }}</td>
 
-                     <th >Programme</th>
-                    
-                    <th >Ua</th>
-                   <th >Activite</th>
-                   <th >ligne Economique</th>
-                    <th >Entreprise</th>
+            <td>{{ AfficheUaLibelle(detailOp.unite_administrative_id) }}</td>
 
-                     <th >Numero du Marche</th>
-                  
-                  
-                  </tr>
-                </thead>
-           
-                <tbody>
-                 
-                </tbody>
-              </table>
-               <table class="table table-bordered table-striped" id="Nature_section">
-                <thead>
-                  <tr>
-                   <th >Numero du Marche</th>
-                   <th >type financement</th>
-                   <th >Source Financement</th>
-                    <th >Montant Op</th>
-                     <th >Mode Paiement</th>
-                   <th >Nom et prenoms cf</th>
-                   <th >famille motif</th>
-                    <th >Motif</th>
+            <td>{{ AfficheActiviteLibelle(detailOp.activite_id) }}</td>
 
+            <td>
+              {{ AfficheLigneEconoLibelle(detailOp.ligne_economique_id) }}
+            </td>
 
-                    <th >Decision cf</th>
-                   <th >Date decision</th>
-                  
-                  </tr>
-                </thead>
-           
-                <tbody>
-                
-                </tbody>
-              </table>
-                <table class="table table-bordered table-striped" id="Nature_section">
-                <thead>
-                  <tr>
-                 
-                   <th >Action</th>
-                    <th>Sous Budget</th>
-                     <th >Autres Motif</th>
-                   <th >Observation</th>
-                   <th >Autres Depense</th>
-                    <th>Compte fournisseur</th>
+            <td>{{ AfficheEntrepriseLibelle(detailOp.entreprise_id) }}</td>
 
+            <td>{{ recupCompte2(recupCompte1)}}</td>
 
-                     <th >Adresse</th>
-                   <!-- <th style="width:60%">Date decision</th>
-                   <th style="width:10%">Action</th>
-                    <th style="width:5%">Sous Budget</th>
-                     <th style="width:10%">Autres Motif</th>
-                   <th style="width:60%">Observation</th>
-                   <th style="width:10%">Autres Depense</th>
-                    <th style="width:5%">Compte fournisseur</th> -->
-                  </tr>
-                </thead>
-           
-                <tbody>
-                
-                </tbody>
-              </table>
-              <div style="font-size:13px;text-align:center;text-decoration:underline;font-weight:bold;">
-          <p >DETAIL ORDRE DE PAIEMENT DEFINITIF </p>
-        </div>
-       <table class="table table-bordered table-striped" id="Nature_section">
-                <thead>
-                  <tr>
-                    <th >Exercice</th>
-                    
-                    <th >Type op</th>
-                   
-                   <th >Numéro op</th>
-                    <th >Section</th>
+            <td>{{ recupBanquee2(recupBanque1)}}</td>
 
-                     <th >Programme</th>
-                    
-                    <th >Ua</th>
-                   <th >Activite</th>
-                   <th >ligne Economique</th>
-                    <th >Entreprise</th>
-
-                     <th >Numero du Marche</th>
-                  
-                  
-                  </tr>
-                </thead>
-           
-                <tbody>
-                 
-                </tbody>
-              </table>
-               <table class="table table-bordered table-striped" id="Nature_section">
-                <thead>
-                  <tr>
-                   <th >Numero du Marche</th>
-                   <th >type financement</th>
-                   <th >Source Financement</th>
-                    <th >Montant Op</th>
-                     <th >Mode Paiement</th>
-                   <th >Nom et prenoms cf</th>
-                   <th >famille motif</th>
-                    <th >Motif</th>
-
-
-                    <th >Decision cf</th>
-                   <th >Date decision</th>
-                  
-                  </tr>
-                </thead>
-           
-                <tbody>
-                
-                </tbody>
-              </table>
-                <table class="table table-bordered table-striped" id="Nature_section">
-                <thead>
-                  <tr>
-                 
-                   <th >Action</th>
-                    <th>Sous Budget</th>
-                     <th >Autres Motif</th>
-                   <th >Observation</th>
-                   <th >Autres Depense</th>
-                    <th>Compte fournisseur</th>
-
-
-                     <th >Adresse</th>
-                   <!-- <th style="width:60%">Date decision</th>
-                   <th style="width:10%">Action</th>
-                    <th style="width:5%">Sous Budget</th>
-                     <th style="width:10%">Autres Motif</th>
-                   <th style="width:60%">Observation</th>
-                   <th style="width:10%">Autres Depense</th>
-                    <th style="width:5%">Compte fournisseur</th> -->
-                  </tr>
-                </thead>
-           
-                <tbody>
-                
-                </tbody>
-              </table>
-      <div style="font-size:13px;text-align:center;text-decoration:underline;font-weight:bold;">
-          <p >SERVICE REALITE FAIT</p>
-        </div>
+            <td>{{ AfficheNumeroMarcheLibelle(detailOp.marche_id) }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-bordered table-striped" id="Nature_section">
+        <thead>
+          <tr>
             
-            <br>
-             <table class="table table-bordered table-striped">
-        
-             <td style="width:60%">
+            <th>type financement</th>
+            <th>Source Financement</th>
+            <th>Montant Op</th>
+            <th>Mode Paiement</th>
+            <th>Nom et prenoms cf</th>
+            <th>famille motif</th>
+            <th>Motif</th>
 
-       
-          </td>
-            <td style="width:0%;font-weight:bolder;color:#000">
-<div  align="right" style="cursor:pointer;">
-    <button class="btn btn-success" @click.prevent="afficherModalAjouterTitre" style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> AJOUTER SERVICE REALITE FAIT</i></button>
+            <th>Decision cf</th>
+            <th>Date decision</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          
+          <td> {{ AfficheTypeFinancementLibelle(detailOp.type_financement_id) }} </td>
+          <td> {{ AfficheSourceFinancementLibelle(detailOp.source_financement_id) }} </td>
+          <td> {{ detailOp.montant_ordre_paiement }} </td>
+          <td> {{ AfficheModePaiementLibelle(detailOp.mode_paiement_id) }} </td>
+          <td></td>
+           <td> {{ AfficheFamilleMotifLibelle(detailOp.famille_motif) }} </td>
+           <td> {{ AfficheMotifLibelle(detailOp.motif) }} </td>
+
+           <td v-if="detailOp.decision_cf==8"> Visé </td>
+           <td v-if="detailOp.decision_cf==9"> Visé avec Observation </td>
+           <td v-if="detailOp.decision_cf==2"> Différé</td>
+           <td v-if="detailOp.decision_cf==3"> Rejété </td>
+           <td v-if="detailOp.decision_cf==0"> Attente </td>
+
+           <td> {{ detailOp.date_decision_cf }} </td>
+        </tbody>
+      </table>
+      <table class="table table-bordered table-striped" id="Nature_section">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Sous Budget</th>
+            <th>Autres Motif</th>
+            <th>Observation</th>
+            <th>Autres Depense</th>
+            <th>Compte fournisseur</th>
+
+            <th>Adresse</th>
+            
+          </tr>
+        </thead>
+
+
+        <tbody>
+          <td>{{ AfficheActionLibelle(detailOp.action_id) }}</td>
+          <td>{{ AfficheSousBudgetLibelle(detailOp.sous_budget_id) }}</td>
+          <td>{{ detailOp.autre_motif}}</td>
+          <td>{{ detailOp.observation}}</td>
+          <td>{{ detailOp.odjet_autre_depense}}</td>
+          <td>{{ detailOp.compte_autre_depense}}</td>
+          <td>{{ detailOp.adresse}}</td>
+        </tbody>
+      </table>
+    </div>
+    <!-- fin des op direct -->
+
+
+<div v-if="detailOp.type_ordre_paiement==2 ||detailOp.type_ordre_paiement==3 || detailOp.type_ordre_paiement == 4">
+    <p
+      style="
+        font-size: 13px;
+        text-align: center;
+        text-decoration: underline;
+        font-weight: bold;
+      "
+    >
+      DETAIL ORDRE DE PAIEMENT PROVISOIRE
+    </p>
+
+    <table class="table table-bordered table-striped" id="Nature_section">
+      <thead>
+        <tr>
+          <th>Exercice</th>
+
+          <th>Type op</th>
+
+          <th>Numéro op</th>
+          <th>Section</th>
+
+          <th>Programme</th>
+
+          <th>Ua</th>
+          <th>Activite</th>
+          <th>ligne Economique</th>
+          <th>Entreprise</th>
+            <th>Compte Fournisseur</th>
+            <th>Banque</th>
+
+          <th>Numero du Marche</th>
+        </tr>
+      </thead>
+
+      <tbody>
+         <tr class="odd gradeX">
+
+            <td>{{ detailOp.exercice || "Non renseigné" }}</td>
+             <td v-if="detailOp.type_ordre_paiement == 2 || detailOp.type_ordre_paiement == 3 ||
+              detailOp.type_ordre_paiement == 4">OP Provisoire</td>
+              <td>{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
+
+            <td>{{ AfficheSectionLibelle(detailOp.section_id) }}</td>
+
+            <td>{{ AfficheProgrammeLibelle(detailOp.programme_id) }}</td>
+
+            <td>{{ AfficheUaLibelle(detailOp.unite_administrative_id) }}</td>
+
+            <td>{{ AfficheActiviteLibelle(detailOp.activite_id) }}</td>
+
+            <td>
+              {{ AfficheLigneEconoLibelle(detailOp.ligne_economique_id) }}
+            </td>
+
+            <td>{{ AfficheEntrepriseLibelle(detailOp.entreprise_id) }}</td>
+
+            <td>{{ recupCompte2(recupCompte1)}}</td>
+
+            <td>{{ recupBanquee2(recupBanque1)}}</td>
+
+            <td>{{ AfficheNumeroMarcheLibelle(detailOp.marche_id) }}</td>
+         </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered table-striped" id="Nature_section">
+      <thead>
+        <tr>
+         
+          <th>type financement</th>
+          <th>Source Financement</th>
+          <th>Montant Op</th>
+          <th>Mode Paiement</th>
+          <th>Nom et prenoms cf</th>
+          <th>famille motif</th>
+          <th>Motif</th>
+
+          <th>Decision cf</th>
+          <th>Date decision</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        
+          <td> {{ AfficheTypeFinancementLibelle(detailOp.type_financement_id) }} </td>
+          <td> {{ AfficheSourceFinancementLibelle(detailOp.source_financement_id) }} </td>
+          <td> {{ detailOp.montant_ordre_paiement }} </td>
+          <td> {{ AfficheModePaiementLibelle(detailOp.mode_paiement_id) }} </td>
+          <td></td>
+           <td> {{ AfficheFamilleMotifLibelle(detailOp.famille_motif) }} </td>
+           <td> {{ AfficheMotifLibelle(detailOp.motif) }} </td>
+           <td v-if="detailOp.decision_cf==8"> Visé </td>
+           <td v-if="detailOp.decision_cf==9"> Visé avec Observation </td>
+           <td v-if="detailOp.decision_cf==2"> Différé</td>
+           <td v-if="detailOp.decision_cf==3"> Rejété </td>
+           <td v-if="detailOp.decision_cf==0"> Attente </td>
+           <td> {{ detailOp.date_decision_cf }} </td>
+      </tbody>
+    </table>
+    <table class="table table-bordered table-striped" id="Nature_section">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Sous Budget</th>
+          <th>Autres Motif</th>
+          <th>Observation</th>
+          <th>Autres Depense</th>
+          <th>Compte fournisseur</th>
+
+          <th>Adresse</th>
+          <!-- <th style="width:60%">Date decision</th>
+                   <th style="width:10%">Action</th>
+                    <th style="width:5%">Sous Budget</th>
+                     <th style="width:10%">Autres Motif</th>
+                   <th style="width:60%">Observation</th>
+                   <th style="width:10%">Autres Depense</th>
+                    <th style="width:5%">Compte fournisseur</th> -->
+        </tr>
+      </thead>
+
+      <tbody>
+         <td>{{ AfficheActionLibelle(detailOp.action_id) }}</td>
+          <td>{{ AfficheSousBudgetLibelle(detailOp.sous_budget_id) }}</td>
+          <td>{{ detailOp.autre_motif}}</td>
+          <td>{{ detailOp.observation}}</td>
+          <td>{{ detailOp.odjet_autre_depense}}</td>
+          <td>{{ detailOp.compte_autre_depense}}</td>
+          <td>{{ detailOp.adresse}}</td>
+      </tbody>
+    </table>
+
+    </div>
+
+    <div v-if="detailOp.type_ordre_paiement==3 || detailOp.type_ordre_paiement == 4">
+      <p  style="
+        font-size: 13px;
+        text-align: center;
+        text-decoration: underline;
+        font-weight: bold;
+      ">DETAIL ORDRE DE PAIEMENT ANNULATION</p>
+  
+    <table class="table table-bordered table-striped" id="Nature_section">
+      <thead>
+        <tr>
+          <th>Exercice</th>
+          <th>Type op</th>
+          <th>Numéro op</th>
+          <th>Section</th>
+          <th>Programme</th>
+          <th>Ua</th>
+          <th>Activite</th>
+          <th>ligne Economique</th>
+          <th>Entreprise</th>
+           <th>Compte Fournisseur</th>
+            <th>Banque</th>
+          <th>Numero du Marche</th>
+        </tr>
+      </thead>
+
+      <tbody>
+         <tr class="odd gradeX">
+
+            <td>{{ detailOp.exercice || "Non renseigné" }}</td>
+             <td v-if="detailOp.type_ordre_paiement == 3 || detailOp.type_ordre_paiement == 4">OP Annulation</td>
+              <td>{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
+
+            <td>{{ AfficheSectionLibelle(detailOp.section_id) }}</td>
+
+            <td>{{ AfficheProgrammeLibelle(detailOp.programme_id) }}</td>
+
+            <td>{{ AfficheUaLibelle(detailOp.unite_administrative_id) }}</td>
+
+            <td>{{ AfficheActiviteLibelle(detailOp.activite_id) }}</td>
+
+            <td>
+              {{ AfficheLigneEconoLibelle(detailOp.ligne_economique_id) }}
+            </td>
+
+            <td>{{ AfficheEntrepriseLibelle(detailOp.entreprise_id) }}</td>
+
+            <td>{{ recupCompte2(recupCompte1)}}</td>
+
+            <td>{{ recupBanquee2(recupBanque1)}}</td>
+
+            <td>{{ AfficheNumeroMarcheLibelle(detailOp.marche_id) }}</td>
+         </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered table-striped" id="Nature_section">
+      <thead>
+        <tr>
+          
+          <th>type financement</th>
+          <th>Source Financement</th>
+          <th>Montant Op</th>
+          <th>Mode Paiement</th>
+          <th>Nom et prenoms cf</th>
+          <th>famille motif</th>
+          <th>Motif</th>
+
+          <th>Decision cf</th>
+          <th>Date decision</th>
+        </tr>
+      </thead>
+
+      <tbody>
+         <td> {{ AfficheTypeFinancementLibelle(detailOp.type_financement_id) }} </td>
+          <td> {{ AfficheSourceFinancementLibelle(detailOp.source_financement_id) }} </td>
+          <td> {{ detailOp.montant_ordre_paiement }} </td>
+          <td> {{ AfficheModePaiementLibelle(detailOp.mode_paiement_id) }} </td>
+          <td></td>
+           <td> {{ AfficheFamilleMotifLibelle(detailOp.famille_motif) }} </td>
+           <td> {{ AfficheMotifLibelle(detailOp.motif) }} </td>
+           <td v-if="detailOp.decision_cf==8"> Visé </td>
+           <td v-if="detailOp.decision_cf==9"> Visé avec Observation </td>
+           <td v-if="detailOp.decision_cf==2"> Différé</td>
+           <td v-if="detailOp.decision_cf==3"> Rejété </td>
+           <td v-if="detailOp.decision_cf==0"> Attente </td>
+           <td> {{ detailOp.date_decision_cf }} </td>
+      </tbody>
+    </table>
+    <table class="table table-bordered table-striped" id="Nature_section">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Sous Budget</th>
+          <th>Autres Motif</th>
+          <th>Observation</th>
+          <th>Autres Depense</th>
+          <th>Compte fournisseur</th>
+
+          <th>Adresse</th>
+          <!-- <th style="width:60%">Date decision</th>
+                   <th style="width:10%">Action</th>
+                    <th style="width:5%">Sous Budget</th>
+                     <th style="width:10%">Autres Motif</th>
+                   <th style="width:60%">Observation</th>
+                   <th style="width:10%">Autres Depense</th>
+                    <th style="width:5%">Compte fournisseur</th> -->
+        </tr>
+      </thead>
+
+      <tbody>
+         <td>{{ AfficheActionLibelle(detailOp.action_id) }}</td>
+          <td>{{ AfficheSousBudgetLibelle(detailOp.sous_budget_id) }}</td>
+          <td>{{ detailOp.autre_motif}}</td>
+          <td>{{ detailOp.observation}}</td>
+          <td>{{ detailOp.odjet_autre_depense}}</td>
+          <td>{{ detailOp.compte_autre_depense}}</td>
+          <td>{{ detailOp.adresse}}</td>
+      </tbody>
+    </table>
+    </div>
+   
+
+<div v-if="detailOp.type_ordre_paiement==4">
+      <p  style="
+        font-size: 13px;
+        text-align: center;
+        text-decoration: underline;
+        font-weight: bold;
+      ">DETAIL ORDRE DE PAIEMENT DEFINITIF</p>
     
-        </div> 
-       
-          </td>
-           <!-- <td style="width:0px">
+    <table class="table table-bordered table-striped" id="Nature_section">
+      <thead>
+        <tr>
+          <th>Exercice</th>
+
+          <th>Type op</th>
+
+          <th>Numéro op</th>
+          <th>Section</th>
+
+          <th>Programme</th>
+
+          <th>Ua</th>
+          <th>Activite</th>
+          <th>ligne Economique</th>
+          <th>Entreprise</th>
+
+          <th>Numero du Marche</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+         <tr class="odd gradeX">
+
+            <td>{{ detailOp.exercice || "Non renseigné" }}</td>
+             <td v-if="detailOp.type_ordre_paiement == 4">OP Definitf</td>
+              <td>{{ detailOp.numero_ordre_paiement || "Non renseigné" }}</td>
+
+            <td>{{ AfficheSectionLibelle(detailOp.section_id) }}</td>
+
+            <td>{{ AfficheProgrammeLibelle(detailOp.programme_id) }}</td>
+
+            <td>{{ AfficheUaLibelle(detailOp.unite_administrative_id) }}</td>
+
+            <td>{{ AfficheActiviteLibelle(detailOp.activite_id) }}</td>
+
+            <td>
+              {{ AfficheLigneEconoLibelle(detailOp.ligne_economique_id) }}
+            </td>
+
+            <td>{{ AfficheEntrepriseLibelle(detailOp.entreprise_id) }}</td>
+
+            <td>{{ recupCompte2(recupCompte1)}}</td>
+
+            <td>{{ recupBanquee2(recupBanque1)}}</td>
+
+            <td>{{ AfficheNumeroMarcheLibelle(detailOp.marche_id) }}</td>
+         </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered table-striped" id="Nature_section">
+      <thead>
+        <tr>
+         
+          <th>type financement</th>
+          <th>Source Financement</th>
+          <th>Montant Op</th>
+          <th>Mode Paiement</th>
+          <th>Nom et prenoms cf</th>
+          <th>famille motif</th>
+          <th>Motif</th>
+          <th>Decision cf</th>
+          <th>Date decision</th>
+        </tr>
+      </thead>
+
+      <tbody>
+         <td> {{ AfficheTypeFinancementLibelle(detailOp.type_financement_id) }} </td>
+          <td> {{ AfficheSourceFinancementLibelle(detailOp.source_financement_id) }} </td>
+          <td> {{ detailOp.montant_ordre_paiement }} </td>
+          <td> {{ AfficheModePaiementLibelle(detailOp.mode_paiement_id) }} </td>
+          <td></td>
+           <td> {{ AfficheFamilleMotifLibelle(detailOp.famille_motif) }} </td>
+           <td> {{ AfficheMotifLibelle(detailOp.motif) }} </td>
+           <td v-if="detailOp.decision_cf==8"> Visé </td>
+           <td v-if="detailOp.decision_cf==9"> Visé avec Observation </td>
+           <td v-if="detailOp.decision_cf==2"> Différé</td>
+           <td v-if="detailOp.decision_cf==3"> Rejété </td>
+           <td v-if="detailOp.decision_cf==0"> Attente </td>
+           <td> {{ detailOp.date_decision_cf }} </td>
+      </tbody>
+    </table>
+    <table class="table table-bordered table-striped" id="Nature_section">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Sous Budget</th>
+          <th>Autres Motif</th>
+          <th>Observation</th>
+          <th>Autres Depense</th>
+          <th>Compte fournisseur</th>
+
+          <th>Adresse</th>
+          <!-- <th style="width:60%">Date decision</th>
+                   <th style="width:10%">Action</th>
+                    <th style="width:5%">Sous Budget</th>
+                     <th style="width:10%">Autres Motif</th>
+                   <th style="width:60%">Observation</th>
+                   <th style="width:10%">Autres Depense</th>
+                    <th style="width:5%">Compte fournisseur</th> -->
+        </tr>
+      </thead>
+
+      <tbody>
+         <td>{{ AfficheActionLibelle(detailOp.action_id) }}</td>
+          <td>{{ AfficheSousBudgetLibelle(detailOp.sous_budget_id) }}</td>
+          <td>{{ detailOp.autre_motif}}</td>
+          <td>{{ detailOp.observation}}</td>
+          <td>{{ detailOp.odjet_autre_depense}}</td>
+          <td>{{ detailOp.compte_autre_depense}}</td>
+          <td>{{ detailOp.adresse}}</td>
+      </tbody>
+    </table>
+</div>
+
+
+<div v-if="detailOp.type_ordre_paiement == 1 || detailOp.type_ordre_paiement == 4">
+      <p style="
+        font-size: 13px;
+        text-align: center;
+        text-decoration: underline;
+        font-weight: bold;
+      ">SERVICE REALITE FAIT</p>
+    <br />
+    <table class="table table-bordered table-striped">
+      <td style="width: 60%"></td>
+      <td style="width: 0%; font-weight: bolder; color: #000">
+        <div align="right" style="cursor: pointer">
+          <button
+            class="btn btn-success"
+            @click.prevent="afficherModalAjouterTitre"
+            style="font-weight: bolder; color: #fff; font-size: 20px"
+          >
+            <i class="icon icon-plus"> AJOUTER SERVICE REALITE FAIT</i>
+          </button>
+        </div>
+      </td>
+      <!-- <td style="width:0px">
 <div  align="right" style="cursor:pointer;">
     <button class="btn btn-danger"  style="font-weight:bolder;color:#fff;font-size:20px"><i class="icon icon-plus"> VOIR FICHE SERVICE REALITE FAIT</i></button>
     
         </div> 
        
           </td>  -->
-          <td >
-                                              <router-link :to="{ name: 'ficheServiceRealiteFait', params: { id: detailOp.id }}"
-                class="btn btn-danger" title="Editer Fiche de controle">
-                  <span class="" style="font-weight:bolder;color:#fff;font-size:12px"><i class=" icon-print"></i>  VOIR FICHE SERVICE REALITE FAIT</span>
-                   </router-link>
-                    </td>
-          <td >
-                                              <router-link :to="{ name: 'FicheAnnexe', params: { id: detailOp.id }}"
-                class="btn btn-info" title="Editer Fiche de controle">
-                  <span class="" style="font-weight:bolder;color:#fff;font-size:20px"><i class=" icon-print"></i>  VOIR FICHE ANNEXE</span>
-                   </router-link>
-                    </td>
-            </table>
-   <table class="table table-bordered table-striped" id="Nature_section">
-                <thead>
-                  <tr>
-                    <th >NUMERO ORDRE PAIEMENT</th>
-                    
-                    <th style="width:10%">DATE OBSERVATION</th>
-                   <th style="width:60%">OBSERVATION</th>
-                   <th style="width:10%">NOM ET PRENOMS AGENT CF</th>
-                    <th style="width:5%">Action</th>
-                  </tr>
-                </thead>
-           
-                <tbody>
-                  <tr class="odd gradeX" v-for="(type) in listeServiceRealiteFait(detailOp.id)" :key="type.id">
-                    <td
-                      @dblclick="afficherModalModifierUniteAdministrative(type.id)"
-                    >{{afficheNumeroOP(type.op_definitif_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierUniteAdministrative(type.id)"
-                    >{{type.date_observation_agent_cf || 'Non renseigné'}}</td>
-                    <td
-                      @dblclick="afficherModalModifierUniteAdministrative(type.id)"
-                    >{{type.observation_agent_cf || 'Non renseigné'}}</td>
- <td
-                      @dblclick="afficherModalModifierUniteAdministrative(type.id)"
-                    >{{type.nom_agent_id || 'Non renseigné'}}</td>
-                    <td>
-                      <button class="btn btn-danger" @click="supprimerServiceRealiteFaitOp(type.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-     
-              <notifications  />
+      <td>
+        <router-link
+          :to="{ name: 'ficheServiceRealiteFait', params: { id: detailOp.id } }"
+          class="btn btn-danger"
+          title="Editer Fiche de controle"
+        >
+          <span
+            class=""
+            style="font-weight: bolder; color: #fff; font-size: 12px"
+            ><i class="icon-print"></i> VOIR FICHE SERVICE REALITE FAIT</span
+          >
+        </router-link>
+      </td>
+      <td>
+        <router-link
+          :to="{ name: 'FicheAnnexe', params: { id: detailOp.id } }"
+          class="btn btn-info"
+          title="Editer Fiche de controle"
+        >
+          <span
+            class=""
+            style="font-weight: bolder; color: #fff; font-size: 20px"
+            ><i class="icon-print"></i> VOIR FICHE ANNEXE</span
+          >
+        </router-link>
+      </td>
+    </table>
+    <table class="table table-bordered table-striped" id="Nature_section">
+      <thead>
+        <tr>
+          <th>NUMERO ORDRE PAIEMENT</th>
+
+          <th style="width: 10%">DATE OBSERVATION</th>
+          <th style="width: 60%">OBSERVATION</th>
+          <th style="width: 10%">NOM ET PRENOMS AGENT CF</th>
+          <th style="width: 5%">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          class="odd gradeX"
+          v-for="type in listeServiceRealiteFait(detailOp.id)"
+          :key="type.id"
+        >
+          <td @dblclick="afficherModalModifierUniteAdministrative(type.id)">
+            {{ afficheNumeroOP(type.op_definitif_id) || "Non renseigné" }}
+          </td>
+          <td @dblclick="afficherModalModifierUniteAdministrative(type.id)">
+            {{ type.date_observation_agent_cf || "Non renseigné" }}
+          </td>
+          <td @dblclick="afficherModalModifierUniteAdministrative(type.id)">
+            {{ type.observation_agent_cf || "Non renseigné" }}
+          </td>
+          <td @dblclick="afficherModalModifierUniteAdministrative(type.id)">
+            {{ type.nom_agent_id || "Non renseigné" }}
+          </td>
+          <td>
+            <button
+              class="btn btn-danger"
+              @click="supprimerServiceRealiteFaitOp(type.id)"
+            >
+              <span>
+                <i class="icon icon-trash"></i>
+              </span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+    <notifications />
   </div>
 </template>
   
 <script>
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
-import jsPDF from 'jspdf'
-import 'jspdf-autotable'
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 // import {partition} from "../../Repositories/Repository"
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
@@ -553,12 +798,12 @@ export default {
       fabActions: [
         {
           name: "cache",
-          icon: "add"
-        }
+          icon: "add",
+        },
       ],
-        page:0,
-        size:10,
-        active_el:0,
+      page: 0,
+      size: 10,
+      active_el: 0,
       formData: {
         code: "",
         libelle: "",
@@ -566,11 +811,11 @@ export default {
         localisationgeo_id: "",
         type_ua_id: "",
         date_creation: "",
-       
-        servicegest_id:"",
-        nature_section_id:""
+
+        servicegest_id: "",
+        nature_section_id: "",
       },
-      editObservation:{},
+      editObservation: {},
       editUniteAdministrative: {
         code: "",
         libelle: "",
@@ -578,8 +823,8 @@ export default {
         localisationgeo_id: "",
         type_ua_id: "",
         date_creation: "",
-        servicegest_id:"",
-        nature_section_id:""
+        servicegest_id: "",
+        nature_section_id: "",
       },
       json_fields: {
         TYPE_UNIT_ADMINISTRATIVE: "typeua.libelle",
@@ -588,25 +833,24 @@ export default {
         LOCALISATION_GEO: "localgeo.libelle",
         CODE: "code",
         LIBELLE: "libelle",
-        DATE_CREATION: "date_creation"
+        DATE_CREATION: "date_creation",
       },
-      search: ""
+      search: "",
     };
   },
-  
-created() {
-            this.marcheid=this.$route.params.id
-   this.detailOp = this.gettersgestionOrdrePaiement.find(
-       idmarche => idmarche.id == this.$route.params.id
-         )
-  
-},
-    computed: {
+
+  created() {
+    this.marcheid = this.$route.params.id;
+    this.detailOp = this.gettersgestionOrdrePaiement.find(
+      (idmarche) => idmarche.id == this.$route.params.id
+    );
+  },
+  computed: {
     ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
       "uniteAdministratives",
       "budgetEclate",
-      
+
       // "chapitres",
       // "sections"
     ]),
@@ -620,78 +864,383 @@ created() {
       "afficheServiceGestionnaireNiveau4",
       "afficheLocalisationGeoNiveau5",
       "natures_sections",
-      "structures_geographiques"
+      "structures_geographiques",
+    ]),
+    ...mapGetters("parametreGenerauxFonctionnelle", ["plans_fonctionnels"]),
+
+    ...mapGetters("Utilisateurs", [
+      "getterAffectionServiceCF",
+      "getterUtilisateur",
+      "getterAffectation",
+      "getterUniteAdministrativeByUser",
+    ]),
+    ...mapGetters("bienService", [
+      "gettersServiceRealiteFaitOp",
+      "gettersgestionOrdrePaiement",
+      "getFacturePersonnaliser",
+      "getterActeEffetFinanciers",
+      "modepaiements",
+      "mandats",
+      "getActeEffetFinancierPersonnaliser45",
+      "getActeEffetFinancierPersonnaliser",
+      "acteEffetFinanciers",
+      "montantPlanification",
+      "montantContratualisation",
+      "afficheContratualisation",
+      "affichePlanifier",
+      "nombremarchesExecute",
+      "avenants",
+      "getMandatPersonnaliserVise",
+      "AfficheMarcheNonAttribue",
+      "nombreTotalMarche",
+      "marches",
+      "typeMarches",
+      "getMarchePersonnaliser",
+      "printMarcheNonAttribue",
+      "procedurePassations",
+      "typeTypeProcedures",
+      "montantComtratualisation",
+      "text_juridiques",
+      "gettersOuverturePersonnaliser",
+      "typeActeEffetFinanciers",
+      "personnaliseGetterMarcheBailleur",
+      "getterMandate",
+      "getActeEffetFinancierPersonnaliserContrat",
+      "getterCojos",
+      "getterDemandeAno",
+      "getterAnoDMPBailleur",
+      "motifDecisions"
+    ]),
+
+    ...mapGetters("personnelUA", ["acteur_depenses", "paiementPersonnel"]),
+
+    ...mapGetters("uniteadministrative", [
+      "plans_programmes",
+      "uniteAdministratives",
+      "afficheNiveauAction",
+      "afficheNiveauActivite",
+      "derniereNivoPlanBudgetaire",
+      "getPersonnaliseBudgetGeneralParPersonnel",
+      "budgetEclate",
+      "getSousBudget"
+    ]),
+
+    ...mapGetters("parametreGenerauxAdministratif", [
+      "sections",
+      "type_Unite_admins",
+      "plans_programmes",
+      "natures_sections",
+      "grandes_natures",
+      "afficheNiveauPlanProg",
+      "exercices_budgetaires",
+      "localisations_geographiques",
+    ]),
+    ...mapGetters("parametreGenerauxSourceDeFinancement", [
+      "sources_financements",
+      "types_financements",
     ]),
     ...mapGetters("parametreGenerauxFonctionnelle", [
-      "plans_fonctionnels"
-     
+      "plans_fonctionnels",
+      "afficheNiveauPlanFonctionnel",
     ]),
-     
-      ...mapGetters("Utilisateurs", ["getterAffectionServiceCF","getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-    ...mapGetters("bienService", ["gettersServiceRealiteFaitOp","gettersgestionOrdrePaiement","getFacturePersonnaliser","getterActeEffetFinanciers","modepaiements",'mandats','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
-                'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
-                'nombremarchesExecute',"avenants","getMandatPersonnaliserVise",
-                'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
-                "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
-                "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser",
-                "typeActeEffetFinanciers","personnaliseGetterMarcheBailleur","getterMandate",
-                "getActeEffetFinancierPersonnaliserContrat","getterCojos","getterDemandeAno","getterAnoDMPBailleur"]),
 
-            ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
+    ...mapGetters("parametreGenerauxActivite", [
+      "plans_activites",
+      "afficheNiveauAction",
+      "afficheNiveauActivite",
+    ]),
 
-            ...mapGetters('uniteadministrative',[
-                "plans_programmes",
-                "uniteAdministratives",
-                "afficheNiveauAction",
-                "afficheNiveauActivite",
-                "derniereNivoPlanBudgetaire",
-                "getPersonnaliseBudgetGeneralParPersonnel",
-                "budgetEclate"
+    ...mapGetters("parametreGenerauxBudgetaire", [
+      "plans_budgetaires",
+      "derniereNivoPlanBudgetaire",
+    ]),
+    ...mapGetters("gestionMarche", [
+      "entreprises",
+      "secteur_activites",
+      "banques",
+      "comptes",
+      "getCompte",
+    ]),
+    ...mapGetters("parametreGenerauxFonctionnelle", [
+      "structuresDecision",
+      "plans_Decision",
+    ]),
+    //fonction Lega le 18/03/2021
 
-
-            ]),
-
-            ...mapGetters('parametreGenerauxAdministratif',[
-
-                "sections",
-                "type_Unite_admins",
-                "plans_programmes",
-                "natures_sections",
-                "grandes_natures",
-                "afficheNiveauPlanProg",
-                "exercices_budgetaires",
-                "localisations_geographiques"
-            ]),
-...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
-            ...mapGetters('parametreGenerauxFonctionnelle',[
-
-                "plans_fonctionnels",
-                "afficheNiveauPlanFonctionnel"
-            ]),
-
-            ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
-
-            ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
-...mapGetters('gestionMarche', ['entreprises',"secteur_activites",'banques','comptes','getCompte',]),
-  ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision',
-  'plans_Decision']),
-  
-  listeServiceRealiteFait() {
-      return id => {
+    AfficheSectionLibelle() {
+      return (id) => {
         if (id != null && id != "") {
-           return this.gettersServiceRealiteFaitOp.filter(qtreel => qtreel.op_definitif_id == id);
+          const qtereel = this.sections.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.nom_section;
+          }
+          return 0;
+        }
+      };
+    },
+
+    AfficheProgrammeLibelle() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.plans_programmes.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+
+    AfficheUaLibelle() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.uniteAdministratives.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+
+    AfficheActiviteLibelle() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.plans_activites.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+
+    AfficheLigneEconoLibelle() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.plans_budgetaires.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+
+    AfficheEntrepriseLibelle() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.entreprises.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.raison_sociale;
+          }
+          return 0;
+        }
+      };
+    },
+
+
+    recupCompte1(){
+    
+          const qtereel = this.getterActeEffetFinanciers.find((qtreel) => qtreel.entreprise_id == this.detailOp.entreprise_id);
+
+          if (qtereel) {
+            return qtereel.compte_id;
+          }
+          return 0;
+        
+     
+    },  
+
+    recupCompte2(){
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.comptes.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.rib;
+          }
+          return 0;
+        }
+      };
+    },
+
+     recupBanquee1(){
+          const qtereel = this.getterActeEffetFinanciers.find((qtreel) => qtreel.entreprise_id == this.detailOp.entreprise_id);
+          if (qtereel) {
+            return qtereel.banq_id;
+          }
+          return 0;
+    },
+
+     recupBanquee2(){
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.banques.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+
+    AfficheNumeroMarcheLibelle() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.marches.find((qtreel) => qtreel.id == id);
+
+          if (qtereel) {
+            return qtereel.numero_marche;
+          }
+          return 0;
+        }
+      };
+    },
+
+    AfficheTypeFinancementLibelle() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.types_financements.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+
+       AfficheSourceFinancementLibelle() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.sources_financements.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+
+    AfficheModePaiementLibelle() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.modepaiements.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+
+       AfficheFamilleMotifLibelle() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.motifDecisions.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+
+     AfficheMotifLibelle() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.motifDecisions.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+
+AfficheActionLibelle() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.plans_activites.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.libelle;
+          }
+          return 0;
+        }
+      };
+    },
+
+    
+AfficheSousBudgetLibelle() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.getSousBudget.find(
+            (qtreel) => qtreel.id == id
+          );
+
+          if (qtereel) {
+            return qtereel.activite_enfant;
+          }
+          return 0;
+        }
+      };
+    },
+
+    //fin des fonctions Lega  
+
+    listeServiceRealiteFait() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.gettersServiceRealiteFaitOp.filter(
+            (qtreel) => qtreel.op_definitif_id == id
+          );
         }
       };
     },
     afficheNumeroOP() {
-      return id => {
+      return (id) => {
         if (id != null && id != "") {
-           const qtereel = this.gettersgestionOrdrePaiement.find(qtreel => qtreel.id == id);
+          const qtereel = this.gettersgestionOrdrePaiement.find(
+            (qtreel) => qtreel.id == id
+          );
 
-      if (qtereel) {
-        return qtereel.numero_ordre_paiement
-      }
-      return 0
+          if (qtereel) {
+            return qtereel.numero_ordre_paiement;
+          }
+          return 0;
         }
       };
     },
@@ -701,88 +1250,82 @@ created() {
       "ajouterServiceRealiteFaitOp",
       "modifierServiceRealiteFaitOp",
       "supprimerServiceRealiteFaitOp",
-      
     ]),
-       afficherModalListeExecution(){
-                window.history.back();
-            },
- afficherModalAjouterTitre() {
+    afficherModalListeExecution() {
+      window.history.back();
+    },
+    afficherModalAjouterTitre() {
       this.$("#exampleModal12").modal({
         backdrop: "static",
-        keyboard: false
+        keyboard: false,
       });
     },
-genererEnPdf(){
-  var doc = new jsPDF('landscape')
-  // doc.autoTable({ html: this.natures_sections })
-   doc.setFontSize(8)
-  doc.text(115,10,"LISTE DES UNITES ADMINISTRATIVES")
-  doc.autoTable({ html: '#Nature_section'}),
-  
-doc.save('UniteAdministrative.pdf')
-return 0
-},
+    genererEnPdf() {
+      var doc = new jsPDF("landscape");
+      // doc.autoTable({ html: this.natures_sections })
+      doc.setFontSize(8);
+      doc.text(115, 10, "LISTE DES UNITES ADMINISTRATIVES");
+      doc.autoTable({ html: "#Nature_section" }),
+        doc.save("UniteAdministrative.pdf");
+      return 0;
+    },
 
-     
-      getDataPaginate(index){
-          this.active_el = index;
-          this.page=index
-      },
-      precedent(){
-          this.active_el--
-          this.page --
-      },
-      suivant(){
-          this.active_el++
-          this.page ++
-      },
+    getDataPaginate(index) {
+      this.active_el = index;
+      this.page = index;
+    },
+    precedent() {
+      this.active_el--;
+      this.page--;
+    },
+    suivant() {
+      this.active_el++;
+      this.page++;
+    },
     afficherModalAjouterUniteAdministrative() {
       this.$("#exampleModal").modal({
         backdrop: "static",
-        keyboard: false
+        keyboard: false,
       });
     },
     // fonction pour vider l'input ajouter
     ajouterUniteAdministrativeLocal() {
-      
       var nouvelObjet = {
-        
         op_definitif_id: this.detailOp.id,
-         observation_agent_cf: this.formData.observation_agent_cf,
-         date_observation_agent_cf: this.formData.date_observation_agent_cf,
-         nom_agent_id: this.formData.nom_agent_id
-       
+        observation_agent_cf: this.formData.observation_agent_cf,
+        date_observation_agent_cf: this.formData.date_observation_agent_cf,
+        nom_agent_id: this.formData.nom_agent_id,
       };
       this.ajouterServiceRealiteFaitOp(nouvelObjet);
-this.$("#exampleModal12").modal('hide');
-     this.formData={
-observation_agent_cf:"",
-date_observation_agent_cf:""
-     }
+      this.$("#exampleModal12").modal("hide");
+      this.formData = {
+        observation_agent_cf: "",
+        date_observation_agent_cf: "",
+      };
     },
     // fonction pour vider l'input modifier
     modificationObservationAgentCf() {
-      
       var nouvelObjet = {
-        id:this.editObservation.id,
+        id: this.editObservation.id,
         op_definitif_id: this.detailOp.id,
-         observation_agent_cf: this.editObservation.observation_agent_cf,
-         date_observation_agent_cf: this.editObservation.date_observation_agent_cf,
-         nom_agent_id: this.editObservation.nom_agent_id
-       
+        observation_agent_cf: this.editObservation.observation_agent_cf,
+        date_observation_agent_cf: this.editObservation
+          .date_observation_agent_cf,
+        nom_agent_id: this.editObservation.nom_agent_id,
       };
       this.modifierServiceRealiteFaitOp(nouvelObjet);
-this.$("#modificationObservation").modal('hide');
-     
+      this.$("#modificationObservation").modal("hide");
     },
     // afficher modal de modification
     afficherModalModifierUniteAdministrative(id) {
       this.$("#modificationObservation").modal({
         backdrop: "static",
-        keyboard: false
+        keyboard: false,
       });
 
-      this.editObservation = this.gettersServiceRealiteFaitOp.find(items=>items.id==id);
+      this.editObservation = this.gettersServiceRealiteFaitOp.find(
+        (items) => items.id == id
+      );
     },
     alert() {
       console.log("ok");
@@ -791,17 +1334,15 @@ this.$("#modificationObservation").modal('hide');
     formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
     },
-    ExporterEnExel(){
-      this.$refs.excel.click()
-    }
-  }
+    ExporterEnExel() {
+      this.$refs.excel.click();
+    },
+  },
 };
 </script>
 <style>
-
-.tailleModal{
+.tailleModal {
   width: 53%;
   margin: 0 -28%;
 }
-
 </style>
